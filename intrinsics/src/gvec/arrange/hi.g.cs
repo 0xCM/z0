@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Core;
-    using static vgeneric;
+    using static VCore;
 
     partial class gvec
     {        
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => generic<T>(vgeneric.vscalar(n128, vcell(v64u(src),1)));
+                => generic<T>(VCore.vscalar(n128, vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts hi 128-bit lane of the source vector

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;    
-    using static vgeneric;
+    using static VCore;
 
     partial class BitMatrix
     {
@@ -120,7 +120,7 @@ namespace Z0
 
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
-            var vec = vgeneric.vload(n128,A.Bytes);
+            var vec = VCore.vload(n128,A.Bytes);
             vstore(dvec.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Data);
         }
@@ -136,7 +136,7 @@ namespace Z0
         static Vector128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
-            get => vgeneric.vload(n128,in head(Tr8x16MaskBytes));
+            get => VCore.vload(n128,in head(Tr8x16MaskBytes));
         }
 
         /// <summary>

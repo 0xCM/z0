@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Gone;
-    using static vgeneric;
+    using static VCore;
 
     public class t_vhi : t_vinx<t_vhi>
     {   

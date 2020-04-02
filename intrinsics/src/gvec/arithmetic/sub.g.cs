@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     
-    using static vgeneric;
+    using static VCore;
     using static Core;
         
     partial class gvec
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vsub<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vsub(x, vgeneric.vbroadcast(n128,a));
+                => vsub(x, VCore.vbroadcast(n128,a));
 
         /// <summary>
         /// Subtracts each vector component from a constant value
@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vsub<T>(T a, Vector128<T> x)
             where T : unmanaged
-                => vsub(vgeneric.vbroadcast(n128,a), x);
+                => vsub(VCore.vbroadcast(n128,a), x);
 
         /// <summary>
         /// Subtracts a constant value from each vector component
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> vsub<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vsub(x, vgeneric.vbroadcast(n256,a));
+                => vsub(x, VCore.vbroadcast(n256,a));
     
         /// <summary>
         /// Subtracts each vector component from a constant value
@@ -77,7 +77,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> vsub<T>(T a, Vector256<T> x)
             where T : unmanaged
-                => vsub(vgeneric.vbroadcast(n256,a), x);
+                => vsub(VCore.vbroadcast(n256,a), x);
 
         [MethodImpl(Inline)]
         static Vector128<T> vsub_u<T>(Vector128<T> x, Vector128<T> y)

@@ -9,15 +9,15 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Core;
-    using static vgeneric;
+    using static VCore;
 
     public class t_vbitblend : t_vinx<t_vbitblend>
     {                
         public void vbitblend_basecases()
         {
             var n = n256;
-            var mask = vgeneric.vbroadcast(n, BitMask.msb(n2,n1,z8));
-            var zero = vgeneric.vzero<byte>(n);
+            var mask = VCore.vbroadcast(n, BitMask.msb(n2,n1,z8));
+            var zero = VCore.vzero<byte>(n);
             var ones = gvec.vones<byte>(n);
             var blend = vBits.vbitblend(zero,ones,mask);
             Claim.veq(blend,mask);

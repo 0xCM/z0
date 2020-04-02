@@ -11,7 +11,7 @@ namespace Z0
     
     using static Core;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Allocates a span into which vector content is stored

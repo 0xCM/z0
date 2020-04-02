@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Core;
-    using static vgeneric;
+    using static VCore;
 
     sealed class SVShiftValidator128D<T> : OperatorComparer<W128,T>, ISVShiftMatch128D<T>
         where T : unmanaged

@@ -19,11 +19,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Perm16 from(NatPerm<N16,byte> spec)
-            => new Perm16(vgeneric.vload(w, spec.Terms));
+            => new Perm16(VCore.vload(w, spec.Terms));
 
         [MethodImpl(Inline)]
         public static Perm16 from(Vector128<byte> data)
-            => new Perm16(dvec.vand(data, vgeneric.vbroadcast(w, BitMasks.Msb8x8x3)));
+            => new Perm16(dvec.vand(data, VCore.vbroadcast(w, BitMasks.Msb8x8x3)));
 
         /// <summary>
         /// Creates the identity permutation

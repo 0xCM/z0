@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static X86Missing;
 
-    using static vgeneric;
+    using static VCore;
     using static Core;
     using static BitMasks;
 
@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vlt(Vector128<byte> x, Vector128<byte> y)
         {
-            var mask = vgeneric.vbroadcast(n128, SignMask8);
+            var mask = VCore.vbroadcast(n128, SignMask8);
             var mx = vxor(x,mask).AsSByte();
             var my = vxor(y,mask).AsSByte();
             return CompareLessThan(mx,my).AsByte();
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vlt(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = vgeneric.vbroadcast(n128, SignMask16);
+            var mask = VCore.vbroadcast(n128, SignMask16);
             var mx = vxor(x,mask).AsInt16();
             var my = vxor(y,mask).AsInt16();
             return CompareLessThan(mx,my).AsUInt16();
@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vlt(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = vgeneric.vbroadcast(n128, SignMask32);
+            var mask = VCore.vbroadcast(n128, SignMask32);
             return v32u(CompareLessThan(v32i(vxor(x,mask)), v32i(vxor(y,mask))));
         }
 
@@ -130,7 +130,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vlt(Vector256<byte> x, Vector256<byte> y)
         {
-            var mask = vgeneric.vbroadcast(n256,SignMask8);
+            var mask = VCore.vbroadcast(n256,SignMask8);
             return v8u(CompareLessThan(v8i(vxor(x,mask)),v8i(vxor(y,mask))));
         }
 
@@ -151,7 +151,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vlt(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = vgeneric.vbroadcast(n256, SignMask16);
+            var mask = VCore.vbroadcast(n256, SignMask16);
             return CompareLessThan(v16i(vxor(x,mask)),v16i(vxor(y,mask))).AsUInt16();
         }
 
@@ -172,7 +172,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vlt(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = vgeneric.vbroadcast(n256, SignMask32);
+            var mask = VCore.vbroadcast(n256, SignMask32);
             return v32u(CompareLessThan(v32i(vxor(x,mask)),v32i(vxor(y,mask))));
         }
 
@@ -193,7 +193,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vlt(Vector256<ulong> x, Vector256<ulong> y)
         {
-            var mask = vgeneric.vbroadcast(n256,SignMask64);
+            var mask = VCore.vbroadcast(n256,SignMask64);
             return v64u(CompareLessThan(v64i(vxor(x,mask)),v64i(vxor(y,mask))));
         }    
     }

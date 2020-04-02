@@ -11,7 +11,7 @@ namespace Z0
     
     using static Core;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Reinterprets a vector over S-cells as a vector over T-cells

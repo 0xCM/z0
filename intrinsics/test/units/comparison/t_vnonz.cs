@@ -7,7 +7,7 @@ namespace Z0
     using System;
     
     using static Core;
-    using static vgeneric;
+    using static VCore;
 
     public class t_vnonz : t_vinx<t_vnonz>
     {

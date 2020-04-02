@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
 
     using static Core;    
-    using static vgeneric;
+    using static VCore;
 
     partial class dvec
     {         
@@ -65,7 +65,7 @@ namespace Z0
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
             var x = v16u(ShiftRightLogical(vinflate(src, n256, z16i),count));
-            var y = vand(x,v16u(vgeneric.vbroadcast(n256, byte.MaxValue)));
+            var y = vand(x,v16u(VCore.vbroadcast(n256, byte.MaxValue)));
             return v8i(vcompact(y,n128,z8));
         } 
 
@@ -139,7 +139,7 @@ namespace Z0
         {
             var x = v16u(ShiftRightLogical(vinflate(vlo(src), n256, z16i),count));
             var y = v16u(ShiftRightLogical(vinflate(vhi(src), n256, z16i),count));
-            var m = v16u(vgeneric.vbroadcast(n256, byte.MaxValue));
+            var m = v16u(VCore.vbroadcast(n256, byte.MaxValue));
             return v8i(vcompact(vand(x,m),vand(y,m),n256,z8));
         } 
 

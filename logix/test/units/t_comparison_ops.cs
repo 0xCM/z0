@@ -9,7 +9,7 @@ namespace Z0.Logix
     
     using static root;
     using static Gone;
-    using static vgeneric;
+    using static VCore;
 
     using static VectorizedOps;
     
@@ -146,7 +146,7 @@ namespace Z0.Logix
                 actual = lt(x,y);
                 Claim.require(same(expect,actual));
 
-                var a =vgeneric.vbroadcast(n,Random.Next<T>());
+                var a =VCore.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);                
             }
@@ -165,7 +165,7 @@ namespace Z0.Logix
                 actual = lt(x,y);
                 Claim.require(same(expect,actual));
 
-                var a =vgeneric.vbroadcast(n,Random.Next<T>());
+                var a =VCore.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);                
             }
@@ -185,7 +185,7 @@ namespace Z0.Logix
                 actual = gt(x,y);
                 Claim.require(same(expect,actual));
 
-                var a =vgeneric.vbroadcast(n,Random.Next<T>());
+                var a =VCore.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);                
             }
@@ -205,7 +205,7 @@ namespace Z0.Logix
                 actual = gt(x,y);
                 Claim.require(same(expect,actual));
 
-                var a =vgeneric.vbroadcast(n,Random.Next<T>());
+                var a =VCore.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);                
             }

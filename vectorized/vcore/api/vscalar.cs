@@ -13,7 +13,7 @@ namespace Z0
     using static As;
     using D = vdirect;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector

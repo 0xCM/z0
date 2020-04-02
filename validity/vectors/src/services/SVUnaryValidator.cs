@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static vgeneric;
+    using static VCore;
 
     sealed class SVUnaryValidator128D<T> : OperatorComparer<W128,T>, IVUnaryOpMatch128D<T>
         where T : unmanaged

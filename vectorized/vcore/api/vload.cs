@@ -16,7 +16,7 @@ namespace Z0
 
     using static Core;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Loads a 128-bit vector from a readonly memory reference

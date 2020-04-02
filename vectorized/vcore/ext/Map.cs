@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static vgeneric;
+    using static VCore;
 
     partial class VectorExtensions
     {
@@ -72,7 +72,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);            
-            return vgeneric.vload(n256, in head(dst));        
+            return VCore.vload(n256, in head(dst));        
         } 
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return vgeneric.vload(n, in head(dst));        
+            return VCore.vload(n, in head(dst));        
         } 
     }
 }

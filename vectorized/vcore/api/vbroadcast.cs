@@ -13,7 +13,7 @@ namespace Z0
     using static As;
     using D = vdirect;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Core;    
     using static As;
-    using static vgeneric;
+    using static VCore;
     
     partial class gvec
     {        

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static vgeneric;
+    using static VCore;
 
     partial class VectorExtensions
     {
@@ -39,7 +39,7 @@ namespace Z0
                 dst[j++] = f(rhsData[i]);
             }
             
-            return vgeneric.vload(n256, in head(dst));        
+            return VCore.vload(n256, in head(dst));        
         }  
     }
 }

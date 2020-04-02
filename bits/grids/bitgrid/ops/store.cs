@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                =>  vgeneric.vstore(src.data, dst);
+                =>  VCore.vstore(src.data, dst);
 
         /// <summary>
         /// Allocates and stores a 128-bit bitgrid to a blocked span
@@ -42,7 +42,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = Blocks.single<T>(n128);
-            vgeneric.vstore(src.data, dst);
+            VCore.vstore(src.data, dst);
             return dst;
         }
 
@@ -59,7 +59,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                =>  vgeneric.vstore(src.data, dst);
+                =>  VCore.vstore(src.data, dst);
 
         /// <summary>
         /// Allocates and stores a 256-bit bitgrid to a blocked span
@@ -76,7 +76,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = Blocks.single<T>(n256);
-            vgeneric.vstore(src.data, dst);
+            VCore.vstore(src.data, dst);
             return dst;
         }
 
@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void store<T>(Vector256<T> src, in BitGrid<T> dst, int block)
             where T : unmanaged
-                => vgeneric.vstore(src, ref dst.data.BlockRef(block));
+                => VCore.vstore(src, ref dst.data.BlockRef(block));
 
         /// <summary>
         /// Stores a 256-bit cpu vector to an index-identified block
@@ -104,6 +104,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => vgeneric.vstore(src, ref dst.data.BlockRef(block));
+                => VCore.vstore(src, ref dst.data.BlockRef(block));
     }
 }

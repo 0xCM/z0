@@ -17,7 +17,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Ssse3;
 
     using static Core;    
-    using static vgeneric;
+    using static VCore;
 
     partial class dvec
     {
@@ -194,7 +194,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
-            var loMask = vgeneric.vbroadcast(n256, 0x00000000fffffffful);                
+            var loMask = VCore.vbroadcast(n256, 0x00000000fffffffful);                
             var xh = v32u(vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
             return vadd(

@@ -635,7 +635,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid128<M, N, T>(vgeneric.vbroadcast(n128, d));
+                => new BitGrid128<M, N, T>(VCore.vbroadcast(n128, d));
 
         /// <summary>
         /// Initializes a 256-bit grid of natural dimensions
@@ -651,6 +651,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid256<M, N, T>(vgeneric.vbroadcast(n256, d)); 
+                => new BitGrid256<M, N, T>(VCore.vbroadcast(n256, d)); 
     }
 }

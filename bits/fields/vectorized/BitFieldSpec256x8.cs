@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static root;
-    using static vgeneric;
+    using static VCore;
 
     /// <summary>
     /// Defines a segmented bitfield indexed by enum values

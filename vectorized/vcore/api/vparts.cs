@@ -11,7 +11,7 @@ namespace Z0
 
     using static Core;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Defines a 128-bit vector by explicit component specification, from least -> most significant

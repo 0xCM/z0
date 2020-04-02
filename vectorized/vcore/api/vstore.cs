@@ -13,7 +13,7 @@ namespace Z0
     using static As;
     using D = vdirect;
 
-    partial class vgeneric
+    partial class VCore
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector128<T> src, ref Fixed128 dst)

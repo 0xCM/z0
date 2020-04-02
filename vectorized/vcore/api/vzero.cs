@@ -11,7 +11,7 @@ namespace Z0
 
     using static Core;
 
-    partial class vgeneric
+    partial class VCore
     {
        /// <summary>
         /// Returns a 128-bit vector with all bits disabled

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Core;
     
-    using static vgeneric;
+    using static VCore;
 
     using P = parity;
 
@@ -40,7 +40,7 @@ namespace Z0
         {
             var sum = dvec.vadd(v64u(x.data), v64u(y.data));            
             bit carry = x.Lo > vcell(sum,0);
-            return  As.vgeneric<T>(dvec.vadd(sum, vgeneric.vbroadcast(n128, (ulong)carry)));
+            return  As.vgeneric<T>(dvec.vadd(sum, VCore.vbroadcast(n128, (ulong)carry)));
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace Z0
         public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => vgeneric.vbroadcast(w,a);
+                => VCore.vbroadcast(w,a);
 
         /// <summary>
         /// Disables a bit if it is enabled

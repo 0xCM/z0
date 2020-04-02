@@ -24,7 +24,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vgeneric.vstore(gvec.vxors(x.LoadVector(block), count), ref dst.BlockRef(block));
+                VCore.vstore(gvec.vxors(x.LoadVector(block), count), ref dst.BlockRef(block));
         } 
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vgeneric.vstore(gvec.vxors(x.LoadVector(block), count), ref dst.BlockRef(block));
+                VCore.vstore(gvec.vxors(x.LoadVector(block), count), ref dst.BlockRef(block));
         } 
     }
 }

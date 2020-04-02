@@ -18,15 +18,15 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bit testz(ulong a, ulong b)
-            => dvec.vtestz(vgeneric.vbroadcast(n128,a), vgeneric.vbroadcast(n128,b));
+            => dvec.vtestz(VCore.vbroadcast(n128,a), VCore.vbroadcast(n128,b));
 
         [MethodImpl(Inline), Op]
         public static bit testc(ulong a, ulong b)
-            => dvec.vtestc(vgeneric.vbroadcast(n128,a), vgeneric.vbroadcast(n128,b));
+            => dvec.vtestc(VCore.vbroadcast(n128,a), VCore.vbroadcast(n128,b));
 
         [MethodImpl(Inline), Op]
         public static bit testc(ulong a)
-            => dvec.vtestc(vgeneric.vbroadcast(n128,a));
+            => dvec.vtestc(VCore.vbroadcast(n128,a));
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128

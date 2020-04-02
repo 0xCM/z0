@@ -47,19 +47,19 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> rotr(N128 n, N24 offset)
-            => vgeneric.vload(n,RotR24_128x8u);
+            => VCore.vload(n,RotR24_128x8u);
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> rotr(N128 n, N32 offset)
-            => vgeneric.vload(n, RotR32_128x8u);
+            => VCore.vload(n, RotR32_128x8u);
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> rotr(N128 n, N40 offset)
-            => vgeneric.vload(n,RotR40_128x8u);
+            => VCore.vload(n,RotR40_128x8u);
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> rotr(N128 n, N48 offset)
-            => vgeneric.vload(n,RotR48_128x8u);
+            => VCore.vload(n,RotR48_128x8u);
 
         public static ReadOnlySpan<byte> RotL_128x8u
             => new byte[16*7]

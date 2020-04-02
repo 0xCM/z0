@@ -10,7 +10,7 @@ namespace Z0
 
     using static Literals;
     using static Gone;
-    using static vgeneric;
+    using static VCore;
 
     public class t_vpop : t_vinx<t_vpop>
     {

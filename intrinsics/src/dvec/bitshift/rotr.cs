@@ -87,25 +87,25 @@ namespace Z0
         static Vector256<ulong> Vector256u64 
         {
             [MethodImpl(Inline), Op]
-            get => vgeneric.vbroadcast(n256,64ul);
+            get => VCore.vbroadcast(n256,64ul);
         }
 
         static Vector256<uint> Vector256u32 
         {
             [MethodImpl(Inline), Op]
-            get => vgeneric.vbroadcast(n256,32u);
+            get => VCore.vbroadcast(n256,32u);
         }
 
         static Vector128<ulong> Vector128u64 
         {
             [MethodImpl(Inline), Op]
-            get => vgeneric.vbroadcast(n128, 64ul);
+            get => VCore.vbroadcast(n128, 64ul);
         }
 
         static Vector128<uint> Vector128u32 
         {
             [MethodImpl(Inline), Op]
-            get => vgeneric.vbroadcast(n128,32u);
+            get => VCore.vbroadcast(n128,32u);
         }
 
 

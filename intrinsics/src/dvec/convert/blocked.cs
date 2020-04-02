@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;    
     using static System.Runtime.Intrinsics.X86.Avx2;    
      
-    using static vgeneric;
+    using static VCore;
     using static Core;
 
     partial class dvec

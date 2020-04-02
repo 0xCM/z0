@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
  
     using static Core;    
-    using static vgeneric;
+    using static VCore;
 
     partial class dvec
     {
@@ -78,8 +78,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ConstPair<ulong> clmul(ulong lhs, ulong rhs)
         {
-            var a = vgeneric.vscalar(n128, lhs);
-            var b = vgeneric.vscalar(n128, rhs);
+            var a = VCore.vscalar(n128, lhs);
+            var b = VCore.vscalar(n128, rhs);
             var result = CarrylessMultiply(a,b,0x00);
             return (vcell(result,0), vcell(result,1));
         }
@@ -87,8 +87,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong clmul64(ulong x, ulong y)
         {
-            var u = vgeneric.vscalar(n128, x);
-            var v = vgeneric.vscalar(n128, y);
+            var u = VCore.vscalar(n128, x);
+            var v = VCore.vscalar(n128, y);
             var z = CarrylessMultiply(u, v, 0);
             return vcell(z,0);
         }

@@ -1,5 +1,8 @@
-export ProjectRoot="$(dirname "$0")"
-Cmd=$ZDev/$ProjectRoot/remove-project.sh
+#export ProjectRoot="$(dirname "$0")"
+#Cmd=$ZDev/$ProjectRoot/remove-rooted.sh
+
+export ProjectRoot=a
+Cmd=$ZDev/.scripts/remove-rooted.sh
 
 export ProjectId=apps
 bash $Cmd

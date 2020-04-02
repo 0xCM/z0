@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static vgeneric;
+    using static VCore;
     
     partial class vblock
     {     
@@ -18,9 +18,9 @@ namespace Z0
         public static Vector128<T> vselect<T>(N128 n, in T a, in T b, in T c)
             where T : unmanaged
         {                    
-            vgeneric.vload(a, out Vector128<T> vA);
-            vgeneric.vload(b, out Vector128<T> vB);
-            vgeneric.vload(c, out Vector128<T> vC);
+            VCore.vload(a, out Vector128<T> vA);
+            VCore.vload(b, out Vector128<T> vB);
+            VCore.vload(c, out Vector128<T> vC);
             return gvec.vselect(vA,vB,vC);
         }
 
@@ -28,9 +28,9 @@ namespace Z0
         public static Vector256<T> vselect<T>(N256 n, in T a, in T b, in T c)
             where T : unmanaged
         {                    
-            vgeneric.vload(a, out Vector256<T> vA);
-            vgeneric.vload(b, out Vector256<T> vB);
-            vgeneric.vload(c, out Vector256<T> vC);
+            VCore.vload(a, out Vector256<T> vA);
+            VCore.vload(b, out Vector256<T> vB);
+            VCore.vload(c, out Vector256<T> vC);
             return gvec.vselect(vA,vB,vC);
         }
 

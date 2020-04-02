@@ -116,10 +116,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void distribute(in byte src, int step, ref uint dst)
-            => vgeneric.vstore(dvec.vconvert(w64, in skip(in src, step*8), w256, w32), ref seek(ref dst, step*8));
+            => VCore.vstore(dvec.vconvert(w64, in skip(in src, step*8), w256, w32), ref seek(ref dst, step*8));
 
         [MethodImpl(Inline)]
         static void distribute(in byte src, int srcstep, ref uint dst, int dststep)
-            => vgeneric.vstore(dvec.vconvert(w64, in skip(in src, srcstep*8), w256, w32), ref seek(ref dst, dststep*8));
+            => VCore.vstore(dvec.vconvert(w64, in skip(in src, srcstep*8), w256, w32), ref seek(ref dst, dststep*8));
     }
 }

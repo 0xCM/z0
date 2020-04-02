@@ -11,7 +11,7 @@ namespace Z0
     
     using static Core;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Computes the vector component count for a given bit-width and component type

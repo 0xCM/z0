@@ -241,23 +241,23 @@ namespace Z0
         [MethodImpl(Inline)]
         Vector128<T> to<T>()
             where T : unmanaged
-                => vgeneric.generic<T>(data);
+                => VCore.generic<T>(data);
 
         [MethodImpl(Inline)]
         T cell<T>(int index)
             where T : unmanaged
-                => vgeneric.vcell(to<T>(), index);
+                => VCore.vcell(to<T>(), index);
 
         ulong Low64
         {
             [MethodImpl(Inline)]
-            get => vgeneric.vcell(data,0);
+            get => VCore.vcell(data,0);
         }
 
         ulong Hi64
         {
             [MethodImpl(Inline)]
-            get => vgeneric.vcell(data,1);
+            get => VCore.vcell(data,1);
         }
 
         [MethodImpl(Inline)]
@@ -274,6 +274,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<ulong> SetWidth(Vector128<ulong> src, uint width)
-            => vgeneric.v64u(vgeneric.vcell(vgeneric.v32u(src), 3, width));
+            => VCore.v64u(VCore.vcell(VCore.v32u(src), 3, width));
     }
 }

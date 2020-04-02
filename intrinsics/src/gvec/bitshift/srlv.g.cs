@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;    
-    using static vgeneric;
+    using static VCore;
     using static As;
     
     partial class gvec

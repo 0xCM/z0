@@ -48,10 +48,10 @@ namespace Z0
             
             
             var dst = new uint[cells];
-            vgeneric.vstore(a, ref head(dst), step*0);
-            vgeneric.vstore(b, ref head(dst), step*1);
-            vgeneric.vstore(c, ref head(dst), step*2);
-            vgeneric.vstore(d, ref head(dst), step*3);
+            VCore.vstore(a, ref head(dst), step*0);
+            VCore.vstore(b, ref head(dst), step*1);
+            VCore.vstore(c, ref head(dst), step*2);
+            VCore.vstore(d, ref head(dst), step*3);
 
             var A = Matrix.load(order, src.Data.ToArray());
             var B = Matrix.load(order, dst);
@@ -72,7 +72,7 @@ namespace Z0
                 else
                     spec[k] = k;
             }
-            return dvec.vperm8x32(src, vgeneric.vload(n256, head(spec)));
+            return dvec.vperm8x32(src, VCore.vload(n256, head(spec)));
         }
 
         public void swap_256_i32()

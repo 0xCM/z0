@@ -30,7 +30,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
                 seek(ref mem, i) = parity.even(i) ? a : b;
-            return vgeneric.vload(n, in data.Head);
+            return VCore.vload(n, in data.Head);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
                 current = gmath.dec(current);
             }
                         
-            return vgeneric.vload(n, in mem);
+            return VCore.vload(n, in mem);
         }    
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
                 current = gmath.dec(current);
             }
                         
-            return vgeneric.vload(n, in mem);
+            return VCore.vload(n, in mem);
         }    
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
                 seek(ref mem, i) = current;
                 current = gmath.sub(current, step);
             }
-            return vgeneric.vload(n, in mem);
+            return VCore.vload(n, in mem);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
                 seek(ref mem, i) = current;
                 current = gmath.sub(current, step);
             }
-            return vgeneric.vload(n, in mem);
+            return VCore.vload(n, in mem);
         }
 
         public static Vector256<T> vdecrements<T>(N256 n, T first, params Swap[] swaps)
@@ -136,7 +136,7 @@ namespace Z0
                 current = gmath.dec(current);
             }
 
-            return vgeneric.vload(n, in data.Swap(swaps).Head);
+            return VCore.vload(n, in data.Swap(swaps).Head);
         }            
 
         public static Vector128<T> vdecrements<T>(N128 n, T first, params Swap[] swaps)
@@ -152,7 +152,7 @@ namespace Z0
                 current = gmath.dec(current);
             }
 
-            return vgeneric.vload(n, in data.Swap(swaps).Head);
+            return VCore.vload(n, in data.Swap(swaps).Head);
         }    
      
         /// <summary>
@@ -173,7 +173,7 @@ namespace Z0
                 seek(ref mem, i) = current;
                 current = gmath.add(current, step);
             }
-            return vgeneric.vload(n, in mem);
+            return VCore.vload(n, in mem);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Z0
                 current = gmath.add(current, step);
             }
             
-            return vgeneric.vload(n, in mem);
+            return VCore.vload(n, in mem);
         }
     
         public static Vector128<T> vincrements<T>(N128 n, T first, params Swap[] swaps)
@@ -211,7 +211,7 @@ namespace Z0
                 current = gmath.inc(current);
             }
 
-            return vgeneric.vload(n, in data.Swap(swaps).Head);
+            return VCore.vload(n, in data.Swap(swaps).Head);
         }
 
         public static Vector256<T> vincrements<T>(N256 n, T first, params Swap[] swaps)
@@ -227,7 +227,7 @@ namespace Z0
                 current = gmath.inc(current);
             }
 
-            return vgeneric.vload(n, in data.Swap(swaps).Head);
+            return VCore.vload(n, in data.Swap(swaps).Head);
         }            
 
 

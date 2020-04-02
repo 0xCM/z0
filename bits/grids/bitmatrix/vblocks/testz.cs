@@ -17,8 +17,8 @@ namespace Z0
         public static bit vtestz<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vgeneric.vload(a, out Vector128<T> vA);
-            vgeneric.vload(b, out Vector128<T> vB);
+            VCore.vload(a, out Vector128<T> vA);
+            VCore.vload(b, out Vector128<T> vB);
             return gvec.vtestz(vA,vB);
         }
 
@@ -26,8 +26,8 @@ namespace Z0
         public static bit vtestz<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vgeneric.vload(a, out Vector256<T> vA);
-            vgeneric.vload(b, out Vector256<T> vB);
+            VCore.vload(a, out Vector256<T> vA);
+            VCore.vload(b, out Vector256<T> vB);
             return gvec.vtestz(vA,vB);
         }
 

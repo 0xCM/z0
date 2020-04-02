@@ -6,11 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Z)" />
-    <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Vectorized)" />
-    <ProjectReference Include="$(TopDir)vectorized/dvec/z0.vectorized.dvec.csproj" />
     <ProjectReference Include="$(VData)" />    
+    <ProjectReference Include="$(DVec)" />
+    <ProjectReference Include="$(FVec)" />
   </ItemGroup>
 
 </Project>

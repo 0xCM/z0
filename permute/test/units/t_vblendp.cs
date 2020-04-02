@@ -11,7 +11,7 @@ namespace Z0
 
     using static root;
     using static Gone;
-    using static vgeneric;
+    using static VCore;
 
     public class t_vblendp : UnitTest<t_vblendp>
     {
@@ -67,7 +67,7 @@ namespace Z0
             var source = gvec.vincrements(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = vgeneric.vparts(w,0,5,2,7,4,1,6,3);
+            var expect = VCore.vparts(w,0,5,2,7,4,1,6,3);
             Claim.require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
@@ -90,7 +90,7 @@ namespace Z0
             var source = gvec.vincrements(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = vgeneric.vparts(w,0,1,2,7,4,5,6,3);
+            var expect = VCore.vparts(w,0,1,2,7,4,5,6,3);
             Claim.require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
@@ -113,7 +113,7 @@ namespace Z0
             var source = gvec.vincrements(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = vgeneric.vparts(w,4,1,6,3,0,5,2,7);
+            var expect = VCore.vparts(w,4,1,6,3,0,5,2,7);
             Claim.require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
@@ -135,7 +135,7 @@ namespace Z0
             var source = gvec.vincrements(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = vgeneric.vparts(w,4,5,2,3,0,1,6,7);
+            var expect = VCore.vparts(w,4,5,2,3,0,1,6,7);
             Claim.require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
@@ -157,7 +157,7 @@ namespace Z0
             var source = gvec.vincrements(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = vgeneric.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
+            var expect = VCore.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
             
             Claim.require(gvec.vsame(expect,target));
 
@@ -180,7 +180,7 @@ namespace Z0
             var source = gvec.vincrements(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = vgeneric.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
+            var expect = VCore.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z32)), source,target);
@@ -409,7 +409,7 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat             
         {
-            var spec = vto(vgeneric.vbroadcast(w, pattern),t);
+            var spec = vto(VCore.vbroadcast(w, pattern),t);
             var x = gvec.vinc(w, t);
             var y = gvec.vadd(x, gmath.add(x.LastCell(), one(t)));            
             var z = gvec.vblendp(x,y,spec);         
@@ -437,7 +437,7 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat             
         {
-            var spec = vto(vgeneric.vbroadcast(w, pattern),t);
+            var spec = vto(VCore.vbroadcast(w, pattern),t);
             var x = gvec.vinc(w, t);
             var y = gvec.vadd(x, gmath.add(x.LastCell(), one(t)));            
             var z = gvec.vblendp(x,y,spec);         

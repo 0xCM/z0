@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector128<T> src, ref T dst, int offset = 0)
             where T : unmanaged            
-                => vgeneric.vstore(src, ref dst, offset);
+                => VCore.vstore(src, ref dst, offset);
 
         /// <summary>
         /// Stores vector content to a memory reference
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector256<T> src, ref T dst, int offset = 0)
             where T : unmanaged            
-                => vgeneric.vstore(src, ref dst, offset);
+                => VCore.vstore(src, ref dst, offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied span
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector128<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged            
-                => vgeneric.vstore(src,dst,offset);
+                => VCore.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied span
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector256<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged            
-                => vgeneric.vstore(src,dst,offset);
+                => VCore.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied span
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector512<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged            
-                => vgeneric.vstore(src,dst,offset);
+                => VCore.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied block
@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector128<T> src, in Block128<T> dst)
             where T : unmanaged
-                => vgeneric.vstore(src, dst);
+                => VCore.vstore(src, dst);
 
         /// <summary>
         /// Stores vector content to a specified block in a blocked container
@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector128<T> src, in Block128<T> dst, int block)
             where T : unmanaged
-                => vgeneric.vstore(src, dst, block);
+                => VCore.vstore(src, dst, block);
 
         /// <summary>
         /// Stores vector content to a caller-supplied block
@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector256<T> src, in Block256<T> dst)
             where T : unmanaged
-                => vgeneric.vstore(src, dst);
+                => VCore.vstore(src, dst);
 
         /// <summary>
         /// Stores vector content to a caller-supplied block
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector512<T> src, in Block512<T> dst)
             where T : unmanaged
-                => vgeneric.vstore(src, dst);
+                => VCore.vstore(src, dst);
 
         /// <summary>
         /// Stores vector content to a specified block in a blocked container
@@ -115,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector256<T> src, in Block256<T> dst, int block)
             where T : unmanaged
-                => vgeneric.vstore(src, dst, block);
+                => VCore.vstore(src, dst, block);
 
         /// <summary>
         /// Stores vector content to a specified block in a blocked container
@@ -126,6 +126,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector512<T> src, in Block512<T> dst, int block)
             where T : unmanaged
-                => vgeneric.vstore(src, dst, block);
+                => VCore.vstore(src, dst, block);
     }
 }

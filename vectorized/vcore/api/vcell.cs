@@ -11,7 +11,7 @@ namespace Z0
    
     using static Core;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Extracts an index-identified component from the source vector

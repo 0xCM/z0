@@ -9,7 +9,7 @@ namespace Z0
     
     using static Core;
     using static dvec;
-    using static vgeneric;
+    using static VCore;
 
     partial class BitPack
     {

@@ -13,28 +13,28 @@ namespace Z0
     {
         public void vcover_basecase()
         {            
-            var x1 = vgeneric.vparts(n128,4,8);
-            var y1 = vgeneric.vparts(n128,4,4,4,4, 4,4,4,4, 8,8,8,8, 8,8,8,8);
+            var x1 = VCore.vparts(n128,4,8);
+            var y1 = VCore.vparts(n128,4,4,4,4, 4,4,4,4, 8,8,8,8, 8,8,8,8);
             var z1 = dvec.vcover(x1, out Vector128<byte> _);
             Claim.veq(y1,z1);
 
-            var x2 = vgeneric.vparts(n128,4,5,6,7);
-            var y2 = vgeneric.vparts(n128,4,4,4,4, 5,5,5,5, 6,6,6,6, 7,7,7,7);
+            var x2 = VCore.vparts(n128,4,5,6,7);
+            var y2 = VCore.vparts(n128,4,4,4,4, 5,5,5,5, 6,6,6,6, 7,7,7,7);
             var z2 = dvec.vcover(x2, out Vector128<byte> _);
             Claim.veq(y2,z2);
 
-            var x3 = vgeneric.vparts(n128,4,5,6,7);
-            var y3 = vgeneric.vparts(n128,4,4, 5,5, 6,6, 7,7);
+            var x3 = VCore.vparts(n128,4,5,6,7);
+            var y3 = VCore.vparts(n128,4,4, 5,5, 6,6, 7,7);
             var z3 = dvec.vcover(x3, out Vector128<ushort> _);
             Claim.veq(y3,z3);
 
-            var x4 = vgeneric.vparts(n128,4,5);
-            var y4 = vgeneric.vparts(n128,4,4, 5,5);
+            var x4 = VCore.vparts(n128,4,5);
+            var y4 = VCore.vparts(n128,4,4, 5,5);
             var z4 = dvec.vcover(x4, out Vector128<uint> _);
             Claim.veq(y4,z4);
 
-            var x5 =vgeneric.vparts(n256,0,1,2,3);
-            var y5 = vgeneric.vparts(n256,
+            var x5 =VCore.vparts(n256,0,1,2,3);
+            var y5 = VCore.vparts(n256,
                  0, 0, 0, 0, 0, 0, 0, 0,
                  1, 1, 1, 1, 1, 1, 1, 1, 
                  2, 2, 2, 2, 2, 2, 2, 2, 
@@ -42,8 +42,8 @@ namespace Z0
             dvec.vcover(x5, out Vector256<byte> z5);
             Claim.veq(y5,z5);
 
-            var x6 =vgeneric.vparts(n256,1,2,3,4,5,6,7,8);
-            var y6 = vgeneric.vparts(n256,
+            var x6 =VCore.vparts(n256,1,2,3,4,5,6,7,8);
+            var y6 = VCore.vparts(n256,
                  1, 1, 1, 1, 2, 2, 2, 2, 
                  3, 3, 3, 3, 4, 4, 4, 4, 
                  5, 5, 5, 5, 6, 6, 6, 6, 

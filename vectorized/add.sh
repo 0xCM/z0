@@ -1,22 +1,31 @@
-export ProjectId="$(dirname "$0")"
-bash $ZDev/.scripts/add-project.sh
+# export ProjectId=vectorized
+# AddCmd=$ZDev/.scripts/sln-add.sh
 
-AddCmd=$ZDev/.scripts/sln-add.sh
+export ProjectRoot=vectorized
+Cmd=$ZDev/.scripts/add-rooted.sh
 
-export Kind=vdata
-bash $AddCmd
+export ProjectId=circuits
+bash $Cmd
 
-export Kind=dvec
-bash $AddCmd
+export ProjectId=dvec
+bash $Cmd
 
-export Kind=gvec
-bash $AddCmd
+export ProjectId=fvec
+bash $Cmd
 
-export Kind=fvec
-bash $AddCmd
+export ProjectId=gvec
+bash $Cmd
 
-export Kind=circuits
-bash $AddCmd
+export ProjectId=vcore
+bash $Cmd
 
-export Kind=vsvc
-bash $AddCmd
+export ProjectId=vdata
+bash $Cmd
+
+export ProjectId=vsvc
+bash $Cmd
+
+Cmd=$ZDev/.scripts/sln-add.sh
+export ProjectId=vectorized
+export Kind=test
+bash $Cmd

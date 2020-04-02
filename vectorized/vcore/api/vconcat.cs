@@ -12,7 +12,7 @@ namespace Z0
     using static Core;
     using D = vdirect;
 
-    partial class vgeneric
+    partial class VCore
     {
         /// <summary>
         /// Creates a 256-bit vector from two 128-bit vectors    
