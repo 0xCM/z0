@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static Core;
+    using static Seed;
     using static AppSetting;
 
     public readonly struct AppSetting : IFormattable<AppSetting, FormatConfig>, IAppSetting

@@ -96,6 +96,6 @@ namespace Z0
         /// <param name="c">The third operand</param>
         D Invoke(A a, B b, C c);
 
-        Func<A,B,C,D> Operation => Invoke;
+        Func<A,B,C,D> Operation => Invoke; 
     }
 }

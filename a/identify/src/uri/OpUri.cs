@@ -138,7 +138,6 @@ namespace Z0
             => equals(this, obj);
 
         public override string ToString()
-            => Format();
-        
+            => Format();        
     }
 }

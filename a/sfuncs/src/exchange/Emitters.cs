@@ -25,7 +25,6 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IEmitter<W,T> : ISEmitter<T>
         where W : unmanaged, ITypeWidth<W>
-
     {
         
     }

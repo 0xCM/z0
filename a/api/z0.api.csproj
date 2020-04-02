@@ -5,8 +5,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+  <ItemGroup>    
+    <ProjectReference Include="$(Seed)" />    
+    <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 

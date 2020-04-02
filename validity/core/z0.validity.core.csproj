@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 

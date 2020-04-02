@@ -72,7 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool ishex(char c)
-            => HexSpecs.ishex(c);
+            => HexSpecs.IsHex(c);
 
         [MethodImpl(Inline), Op]
         public static void digits(byte value, out char d0, out char d1)

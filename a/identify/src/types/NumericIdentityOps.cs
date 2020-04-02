@@ -67,6 +67,5 @@ namespace Z0
         /// <param name="src">The methods to filter</param>
         public static IEnumerable<MethodInfo> NumericOperators(this IEnumerable<MethodInfo> src, int arity)
             => src.Where(x => x.IsNumericOperator(arity));
-
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
     using S = Surrogates;
 
     public static partial class OperationConverters

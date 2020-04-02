@@ -92,7 +92,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ApiCode.Define(Id, Data.Bytes);
         }
-
                 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)
@@ -106,11 +105,12 @@ namespace Z0
             this.Data = encoded;
         }
 
+
         public string Format(int idpad)
-            => OpExtractSegment.Define(Id, Data).Format(idpad);
+            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Data.Bytes.FormatHex());
 
         public string Format()
-            => OpExtractSegment.Define(Id, Data).Format();
+            => Format(0);
 
         public override string ToString()
             => Format();         

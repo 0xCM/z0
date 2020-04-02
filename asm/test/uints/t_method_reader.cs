@@ -25,13 +25,14 @@ namespace Z0.Asm
 
         public void parse_address_segment()
         {
+            var parser = MemoryRangeParser.Default;
             for(var i=0; i<RepCount; i++)
             {
                 var start = Random.Next(0ul, uint.MaxValue);
                 var end = Random.Next((ulong)uint.MaxValue, ulong.MaxValue);
                 var expect = MemoryRange.Define(start,end);
                 var format = expect.Format();
-                var actual = HexParser.memrange(format).OnNone(() => Notify(format)).Require();
+                var actual = parser.Parse(format).Value;
                 Claim.eq(expect,actual);
             }
         }

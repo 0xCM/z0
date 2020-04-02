@@ -11,8 +11,12 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Reports)" />
     <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Typed)" />
+    <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Reports)" />
+    <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(SFuncs)" />
+
   </ItemGroup>
 </Project>

@@ -82,7 +82,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
-        public static bool islo(char c)
+        public static bool IsLo(char c)
             => (byte)c >= MinCode && (byte)c <= MaxLoCode;
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
-        public static bool ishi(char c)
+        public static bool IsHi(char c)
             => (byte)c >= MinHiCode && (byte)c <= MaxCode;        
         
         /// <summary>
@@ -98,8 +98,8 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
-        public static bool ishex(char c)
-            => islo(c) || ishi(Char.ToUpper(c));
+        public static bool IsHex(char c)
+            => IsLo(c) || IsHi(Char.ToUpper(c));
 
         /// <summary>
         /// Selects the uppercase or lowercase hex format code
@@ -108,5 +108,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string HexFmtSpec(bool upper)
             => upper ? "X" : "x";
+
+        /// <summary>
+        /// Removes leading or trailing hex specifiers
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline)]
+        public static string ClearSpecs(string src)
+            => src.Remove("0x").RemoveAny('h');
     }
 }

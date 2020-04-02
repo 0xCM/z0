@@ -45,9 +45,10 @@ namespace Z0.Asm
         {
             try
             {
+                var parser = HexParser.ByteParser;
                 var uritext = formatted.TakeBefore(IdSep).Trim();
                 var uri = OpUri.Parse(uritext);
-                var bytes = formatted.TakeAfter(IdSep).SplitClean(ByteSep).Select(HexParser.parsebyte).ToArray();
+                var bytes = formatted.TakeAfter(IdSep).SplitClean(ByteSep).Select(parser.ParseByte).ToArray();
                 return AsmOpBits.Define(uri, bytes);                
             }
             catch(Exception e)

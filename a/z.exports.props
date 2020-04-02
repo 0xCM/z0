@@ -3,12 +3,9 @@
   <ItemGroup>    
     <ProjectReference Include="$(Core)" />
     
-    <ProjectReference Include="$(Enums)" />  
-    <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Api)" />        
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Custom)" />
-    <ProjectReference Include="$(Reports)" />
     <ProjectReference Include="$(SFuncs)" />    
   </ItemGroup>
 

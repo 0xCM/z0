@@ -6,8 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Messages)" />
+    <ProjectReference Include="$(Textual)" />
   </ItemGroup>
 
 </Project>

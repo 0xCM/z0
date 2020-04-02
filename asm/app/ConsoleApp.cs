@@ -6,6 +6,11 @@ namespace Z0
 {
     using System;
     
+    public interface IConsoleApp<A> : IShell, IApiComposition<A>, IAppContext
+        where A : IConsoleApp<A>, new()
+    {
+        
+    }    
     public abstract class ConsoleApp<A,C> : Shell<A,C>, IConsoleApp<A>, IAppMsgSink 
         where A : ConsoleApp<A,C>, new()
         where C : IApiContext

@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
         public static AsmCode ParseAsm(OpIdentity id, string data)
-            => AsmCode.Define(id, MemoryExtract.Define(HexParser.parsebytes(data).ToArray()));
+            => AsmCode.Define(id, MemoryExtract.Define(HexParser.ByteParser.ParseBytes(data).ToArray()));
 
         [MethodImpl(Inline)]
         public static FixedAsm<T> Parse<T>(OpIdentity id, string data)

@@ -54,20 +54,14 @@ namespace Z0.Asm
             var members = hosted.ToOpIndex();
 
             return CreateApiIndex(members, code);
-            // var apicode = from pair in hostedidx.Intersect(codeidx).Enumerated
-            //               let l = pair.Item1
-            //               let r = pair.Item2
-            //               select ApiMemberCode.Define(r.left, r.right.Bits);                                      
-            // return  ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
         }
 
         public ApiCodeIndex CreateApiIndex(OpIndex<ApiStatelessMember> members, OpIndex<AsmOpBits> code)
         {
-
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
-                          select ApiMemberCode.Define(r.Left, r.Right.Bits);                                      
+                          select ApiMemberCode.Define(r.left, r.right.Bits);                                      
             return  ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
 
         }

@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline)]
         public static string ifempty(string test, string replace)
-            => empty(test) ? replace ?? string.Empty : test;
+            => Control.ifempty(test,replace);
 
         /// <summary>
         /// If the test string is null, returns the empty string; otherwise, returns the test string

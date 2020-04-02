@@ -9,7 +9,7 @@ namespace Z0
     using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     /// <summary>
     /// Defines a root interface for types that reify operations that accept an

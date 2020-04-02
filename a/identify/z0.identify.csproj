@@ -7,12 +7,10 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Typed)" />
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Reflective)" />
-    <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Typed)" />
   </ItemGroup>
-
 </Project>

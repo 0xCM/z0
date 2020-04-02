@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Security;
     
-    using static Core;
+    using static Seed;
     using S = Surrogates;
 
     public static partial class OperationConverters

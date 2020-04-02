@@ -32,7 +32,6 @@ namespace Z0
 
     }
 
-
     /// <summary>
     /// Characterizes a natural binary predicate over non-primal operands that support scalar application
     /// </summary>

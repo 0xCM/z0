@@ -15,7 +15,6 @@ namespace Z0
     public interface ISVFuncApi : ISFuncApi
     {
 
-
     }
 
     [SuppressUnmanagedCodeSecurity]

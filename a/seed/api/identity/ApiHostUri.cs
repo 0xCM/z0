@@ -29,7 +29,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Owner == 0  && text.empty(Name);
+            get => Owner == 0  && string.IsNullOrWhiteSpace(Name);
         }
 
         ApiHostUri INullary<ApiHostUri>.Zero => Empty;
@@ -48,7 +48,7 @@ namespace Z0
         public static ApiHostUri FromHost(Type host)
         {
             var tag = host.Tag<ApiHostAttribute>();
-            var name = text.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
+            var name = Control.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
             var owner = host.Assembly.Id();
             return new ApiHostUri(owner, name);
         }

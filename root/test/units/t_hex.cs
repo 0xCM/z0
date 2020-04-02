@@ -56,28 +56,28 @@ namespace Z0
             Claim.eq(Hex.digit(x3,13), x3c[13]);
             Claim.eq(Hex.digit(x3,14), x3c[14]);
             Claim.eq(Hex.digit(x3,15), x3c[15]);
-
         }
 
 
         public void hexdigits_parse()
         {
-            Claim.eq((byte)0, HexParser.parse('0'));
-            Claim.eq((byte)1, HexParser.parse('1'));
-            Claim.eq((byte)2, HexParser.parse('2'));
-            Claim.eq((byte)3, HexParser.parse('3'));
-            Claim.eq((byte)4, HexParser.parse('4'));
-            Claim.eq((byte)5, HexParser.parse('5'));
-            Claim.eq((byte)6, HexParser.parse('6'));
-            Claim.eq((byte)7, HexParser.parse('7'));
-            Claim.eq((byte)8, HexParser.parse('8'));
-            Claim.eq((byte)9, HexParser.parse('9'));
-            Claim.eq((byte)10, HexParser.parse('A'));
-            Claim.eq((byte)11, HexParser.parse('B'));
-            Claim.eq((byte)12, HexParser.parse('C'));
-            Claim.eq((byte)13, HexParser.parse('D'));
-            Claim.eq((byte)14, HexParser.parse('E'));
-            Claim.eq((byte)15, HexParser.parse('F'));
+            var parser = HexParser.ByteParser;
+            Claim.eq((byte)0, parser.Parse('0').Value);
+            Claim.eq((byte)1, parser.Parse('1').Value);
+            Claim.eq((byte)2, parser.Parse('2').Value);
+            Claim.eq((byte)3, parser.Parse('3').Value);
+            Claim.eq((byte)4, parser.Parse('4').Value);
+            Claim.eq((byte)5, parser.Parse('5').Value);
+            Claim.eq((byte)6, parser.Parse('6').Value);
+            Claim.eq((byte)7, parser.Parse('7').Value);
+            Claim.eq((byte)8, parser.Parse('8').Value);
+            Claim.eq((byte)9, parser.Parse('9').Value);
+            Claim.eq((byte)10, parser.Parse('A').Value);
+            Claim.eq((byte)11, parser.Parse('B').Value);
+            Claim.eq((byte)12, parser.Parse('C').Value);
+            Claim.eq((byte)13, parser.Parse('D').Value);
+            Claim.eq((byte)14, parser.Parse('E').Value);
+            Claim.eq((byte)15, parser.Parse('F').Value);
 
         }
     }

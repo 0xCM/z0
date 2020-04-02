@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IParser
+    public interface IParser : IService
     {
         ParseResult Parse(string text);
     }    

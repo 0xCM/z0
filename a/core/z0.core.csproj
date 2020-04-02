@@ -8,24 +8,30 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
 
+    <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Messages)" />
-    <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(Reflective)" />
-    <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(Typed)" />
-    <ProjectReference Include="$(Tuples)" />
-    <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Time)" />
+
+    <ProjectReference Include="$(Enums)" />
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(Flow)" />
-    <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Graphs)" />
-    <ProjectReference Include="$(Enums)" />
+    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Messages)" />
+    <ProjectReference Include="$(Numeric)" />
+    
+    <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Reports)" />
+    <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Symbolic)" />
+    <ProjectReference Include="$(Textual)" />
+    <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Typed)" />
 
   </ItemGroup>
 </Project>
