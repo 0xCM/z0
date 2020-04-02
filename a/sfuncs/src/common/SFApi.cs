@@ -8,18 +8,6 @@ namespace Z0
     using System.Security;
 
     /// <summary>
-    /// Characterizes an identified structural function
-    /// </summary>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFuncApi : ISFunc
-    {
-        /// <summary>
-        /// The operation identity
-        /// </summary>
-        OpIdentity Id {get;} 
-    }
-
-    /// <summary>
     /// Characterizes a structural emitter; that is, the contract charactrizes a type that implements an emitter
     /// </summary>
     /// <typeparam name="A">The emission type</typeparam>    

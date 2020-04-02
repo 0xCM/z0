@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />  
+    <ProjectReference Include="$(TestLib)" />
     <ProjectReference Include="$(Blocks)" />        
   </ItemGroup>
 

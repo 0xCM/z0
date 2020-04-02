@@ -8,24 +8,6 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IStructuralOperation
-    {
-        
-    }
-
-    /// <summary>
-    /// Characterizes a function reified as a (structural) type. 
-    /// </summary>
-    /// <remarks>
-    /// This provides motivation for calling these things structural fuunctions, I suppose
-    /// </remarks>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFunc : IStructuralOperation
-    {
-
-    }
-
-    [SuppressUnmanagedCodeSecurity]
     public interface ISAction<A> : IStructuralOperation
     {
         void Invoke(A a);

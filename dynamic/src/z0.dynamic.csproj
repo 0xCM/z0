@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Fixed)" />        
-    <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(Identity)" />
 
   </ItemGroup>

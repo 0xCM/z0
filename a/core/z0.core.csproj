@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(Collective)" />
+    <ProjectReference Include="$(Custom)" />
 
     <ProjectReference Include="$(Enums)" />
     <ProjectReference Include="$(Fixed)" />

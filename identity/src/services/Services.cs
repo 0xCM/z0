@@ -12,19 +12,15 @@ namespace Z0
     public static class Services
     {
         [MethodImpl(Inline)]
-        public static IMemberLocator MemberLocator(this IContext context)
-            => Z0.MemberLocator.New(context);
+        public static IMemberLocator MemberLocator(this IContext context, IMultiDiviner diviner = null)
+            => Z0.MemberLocator.New(context, diviner ?? context.MultiDiviner());
 
         [MethodImpl(Inline)]
-        public static IApiCollector OpCollector(this IContext context)
-            => default(ApiCollector);
+        public static IApiCollector OpCollector(this IContext context, IMultiDiviner diviner = null)
+            => ApiCollector.Create(context, diviner ?? context.MultiDiviner());
 
         [MethodImpl(Inline)]
-        public static ITypeIdentityDiviner TypeIdDiviner(this IContext context)
-            => default(TypeIdentityDiviner);
-
-        [MethodImpl(Inline)]
-        public static IMethodIdentityDiviner MethodIdDiviner(this IContext context)
-            => default(MethodIdentityDiviner);
+        public static IMultiDiviner MultiDiviner(this IContext context)
+            => default(MultiDiviner);
     }
 }

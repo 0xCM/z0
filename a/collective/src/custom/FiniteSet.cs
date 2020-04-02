@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     public static class FiniteSet
     {
@@ -207,7 +207,7 @@ namespace Z0
             => setcomparer.Equals(data, other.data);
 
         public override bool Equals(object obj)
-            => obj is FiniteSeq<T> x && Equals(x);
+            => obj is FiniteSet<T> x && Equals(x);
 
         public override int GetHashCode()
             => data.GetHashCode();

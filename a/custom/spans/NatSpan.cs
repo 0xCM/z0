@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;
 
-    using static Core;
+    using static Seed;
+    using static TypeNats;
 
     /// <summary>
     /// Defines a span of natural length N

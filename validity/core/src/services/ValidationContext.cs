@@ -20,8 +20,6 @@ namespace Z0
         
         ConcurrentQueue<SFCaseResult> Outcomes {get;}
 
-        public ITestConfig Config  => TestConfigDefaults.Default();
-
         public static IValidationContext From(ITestContext context)
             => new ValidationContext(context.HostType, context as IAppMsgSink, context.Random, context.ReportOutcome);
 

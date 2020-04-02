@@ -10,10 +10,25 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Core;
-    
-    readonly struct ApiCollector : IApiCollector
+    using static Seed;
+
+    class ApiCollector : IApiCollector
     {
+        public IContext Context {get;}
+        
+        readonly IMultiDiviner Diviner;
+
+        [MethodImpl(Inline)]
+        public static IApiCollector Create(IContext context, IMultiDiviner diviner)
+            => new ApiCollector(context,diviner);
+        
+        [MethodImpl(Inline)]
+        ApiCollector(IContext context, IMultiDiviner diviner)
+        {
+            this.Context = context;
+            this.Diviner = diviner;
+        }
+
         public IEnumerable<DirectApiGroup> CollectDirect(Assembly src)
             => src.ApiHosts().SelectMany(CollectDirect);
 
@@ -26,27 +41,15 @@ namespace Z0
                         
         public IEnumerable<GenericApiOp> CollectGeneric(ApiHost src)
              => from m in Tagged(src).OpenGeneric()
-                let closures = NumericClosures(m)
+                let closures = MemberLocator.NumericClosures(m)
                 where closures.Length != 0
-                select GenericApiOp.Define(src, Identity.generic(m), m.GenericDefintion(), closures);
+                select GenericApiOp.Define(src, Diviner.GenericIdentity(m), m.GenericDefintion(), closures);
 
-        static IEnumerable<DirectApiOp> DirectOpSpecs(ApiHost src)
+        IEnumerable<DirectApiOp> DirectOpSpecs(ApiHost src)
             => from m in Tagged(src).NonGeneric()
-                select DirectApiOp.Define(src, Identity.identify(m), m);
+                select DirectApiOp.Define(src, Diviner.Identify(m), m);
 
-        static IEnumerable<MethodInfo> Tagged(ApiHost src)
+        IEnumerable<MethodInfo> Tagged(ApiHost src)
             => src.DeclaredMethods.Tagged<OpAttribute>();
-
-        // static NumericKind[] NumericClosures(MethodInfo m)
-        //     => m.Tag<NumericClosuresAttribute>()
-        //       .MapValueOrElse(a => a.NumericPrimitive.DistinctKinds(), () => seq<NumericKind>()).ToArray();
-
-        public static NumericKind[] NumericClosures(MethodInfo m)
-            => (from tag in m.Tag<ClosuresAttribute>()
-                where tag.Kind == TypeClosureKind.Numeric
-                let spec = (NumericKind)tag.Spec
-                select spec.DistinctKinds().ToArray()).ValueOrElse(() => Arrays.empty<NumericKind>());
-              
-
     }
 }

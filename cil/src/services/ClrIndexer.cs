@@ -13,7 +13,8 @@ namespace Z0
 
     using Z0.ClrSpecs;
 
-    using static Core;
+    using static Seed;
+    using static Control;
 
     using DnLib = dnlib.DotNet.Emit;
     using Dn = dnlib.DotNet;

@@ -7,16 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface ISampleDefaults
-    {
-        /// <summary>
-        /// The default sample size
-        /// </summary>
-        int SampleSize {get;}
+    // public interface ISampleDefaults
+    // {
 
-    }
 
-    public interface ISampleDefaults<T> : ISampleDefaults
+    // }
+
+    public interface ISampleDefaults<T> //: ISampleDefaults
         where T : unmanaged
     {
         /// <summary>

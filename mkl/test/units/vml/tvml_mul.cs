@@ -32,7 +32,7 @@ namespace Z0.Mkl.Test
             Claim.require(dst1 == dst2);
         }
 
-        BenchMarkedPair vMulPerf(int samples, long cycles)
+        PairedBench vMulPerf(int samples, long cycles)
         {
             var lhs1 = RVec<double>(samples);
             var rhs1 = RVec<double>(samples);

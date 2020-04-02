@@ -6,15 +6,16 @@
 
 namespace Z0
 {
-    using System;
-
-    class App : Shell<App>
+    class App : TestApp<App>
     { 
-        public override void RunShell(params string[] args)
-        {
-            Console.WriteLine("I do nothing");
-        }
+        public static void Main(params string[] args) => Run(args); 
+    } 
+}
 
-        public static void Main(params string[] args) => Launch(args); 
+namespace Z0.Parts
+{
+    public sealed class BlocksTest : Part<BlocksTest> 
+    {
+        
     } 
 }

@@ -5,17 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
+    public class t_unit : UnitTest<t_unit>
+    {    
 
-    public interface IUnitTest : IDisposable, ITestContext, IService<ITestContext>
-    {
-        bool Enabled {get;}
+        public void test_1()
+        {
+            
+        }
+    }
 
-    }    
-
-    public interface IExplicitTest : IUnitTest, IExecutable
-    {
-        
-    }    
 }

@@ -8,7 +8,7 @@ namespace Z0
         
     using static Interval;
     
-    readonly struct SampleDefaults : 
+    public readonly struct SampleDefaults : 
         ISampleDefaults<sbyte>,
         ISampleDefaults<byte>,
         ISampleDefaults<short>,
@@ -25,11 +25,6 @@ namespace Z0
         public static ISampleDefaults<T> get<T>()
             where T : unmanaged
                 => (ISampleDefaults<T>)(object)(TheOnly);
-
-        const int SampleSize = (int)Pow2.T14;
-
-        int ISampleDefaults.SampleSize 
-            => SampleSize;
 
         const sbyte Int8Min = sbyte.MinValue;
 

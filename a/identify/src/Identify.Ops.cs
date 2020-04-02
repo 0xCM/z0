@@ -86,6 +86,20 @@ namespace Z0
                 => Op(opname, w.TypeWidth, NumericTypes.kind<T>(), generic);
 
         /// <summary>
+        /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="w">The covering bit width representative</param>
+        /// <param name="t">A primal cell type representative</param>
+        /// <typeparam name="W">The bit width type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+                => Identify.Op(opname, (TypeWidth)TypeNats.value<W>(), NumericTypes.kind<T>(), generic);
+
+        /// <summary>
         /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
         /// </summary>
         /// <param name="opname">The base operator name</param>

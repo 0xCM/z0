@@ -25,8 +25,7 @@ namespace Z0
         /// Reifies an identity divination algorithm
         /// </summary>
         /// <param name="arg">The divinity source</param>
-        T DivineIdentity(S arg);
-        
+        T DivineIdentity(S arg);        
     }
 
     /// <summary>
@@ -43,4 +42,21 @@ namespace Z0
     {
     }
 
+    public interface IDelegateIdentityDiviner : IIdentityDiviner<Delegate,OpIdentity>
+    {
+    }
+
+    public interface IMultiDiviner : ITypeIdentityDiviner, IMethodIdentityDiviner, IDelegateIdentityDiviner
+    {
+        OpIdentity Identify(MethodInfo src)
+            => DivineIdentity(src);
+
+        TypeIdentity Identify(Type src)
+            => DivineIdentity(src);
+
+        OpIdentity Identify(Delegate src)
+            => DivineIdentity(src);
+
+        GenericOpIdentity GenericIdentity(MethodInfo src);
+    }
 }

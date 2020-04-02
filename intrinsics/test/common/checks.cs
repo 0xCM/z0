@@ -37,16 +37,9 @@ namespace Z0
             
         }
 
-        public CheckExec(ITestConfig config)
-            : base(config)
-        {
-
-        }
-
         [MethodImpl(NotInline)]
         static void CheckFailed()
             => throw new Exception();
-
                 
         public void CheckFactory<F,C,S,T>(N128 w, F f, C check, S s = default, T t = default)
             where S : unmanaged

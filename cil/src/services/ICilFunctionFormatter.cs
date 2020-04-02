@@ -5,7 +5,6 @@
 namespace Z0
 {        
     using System;
-
     
     public interface ICilFunctionFormatter : ICilService
     {

@@ -9,27 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
     using System.Collections.Concurrent;
-    
-    using static TestLib;    
-    
-    public static class MessageEmission
-    {
-        public static IEnumerable<AppMsg> SaveMessages(this IAppEnv context, IEnumerable<AppMsg> src)
-        {                    
-            var errors = src.Where(m => m.Kind == AppMsgKind.Error).FormatLines().ToArray();
-            if(errors.Length != 0)
-                context.Paths.StandardErrorPath.Append(errors);
-                                
-            var standard = src.Where(m => m.Kind != AppMsgKind.Error).FormatLines().ToArray();
-            if(standard.Length != 0)
-                context.Paths.StandardOutPath.Append(standard);
-            return src;
-        }
-
-        internal static IEnumerable<AppMsg> Save(this IEnumerable<AppMsg> src, IAppEnv dst)
-            => SaveMessages(dst, src);                            
-    }
-
+        
     /// <summary>
     /// Base type for test applications
     /// </summary>
@@ -113,8 +93,6 @@ namespace Z0
                 var control = unit as ITestControl;
                 if(!unit.Enabled)
                     return;
-
-                control.Configure(Config); 
                                 
                 clock.Start();
                 
@@ -215,10 +193,7 @@ namespace Z0
             var control = unit as ITestControl;
             
             try
-            {                
-                control.Configure(Config);    
- 
-                
+            {                                
                 var tsStart = time.now();
                 messages.Add(PreCaseMsg(casename, tsStart));                
                 
@@ -369,13 +344,6 @@ namespace Z0
             }
             return exectime;
         }            
-
-        protected TestApp()
-        {
-
-            Configure(Config.WithTrace());   
-
-        }
 
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();

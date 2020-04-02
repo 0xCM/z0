@@ -12,12 +12,6 @@ namespace Z0
 
     using static Core;
     
-    readonly struct MethodIdentityDiviner : IMethodIdentityDiviner
-    {        
-        public OpIdentity DivineIdentity(MethodInfo src)
-            => Identity.identify(src);        
-    }
-
     public static partial class Identity
     {
         /// <summary>

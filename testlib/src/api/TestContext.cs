@@ -21,8 +21,6 @@ namespace Z0
 
         public event Action<AppMsg> Next;
 
-        public ITestConfig Config {get; private set;}
-
         protected IAppMsgContext Queue {get; private set;}
 
         Queue<TestCaseRecord> Outcomes {get;}
@@ -31,11 +29,10 @@ namespace Z0
         Queue<BenchmarkRecord> Benchmarks {get;}
             = new Queue<BenchmarkRecord>();
 
-        protected TestContext(ITestConfig config = null, IPolyrand random = null)
+        protected TestContext(IPolyrand random = null)
         {
             this.Context = this;            
             this.Random = random ?? Polyrand.WyHash64(PolySeed64.Seed00);
-            this.Config = config ?? TestConfigDefaults.Default();
             this.Next += BlackHole;
             this.Queue = AppMsgContext.Create();            
             this.Queue.Next += Relay;
@@ -49,9 +46,6 @@ namespace Z0
         protected virtual void OnDispose() { }
 
         void BlackHole(AppMsg msg) {}
-
-        public void Configure(ITestConfig config)
-            => Config = config;
                 
         void Relay(AppMsg msg)
             => Next(msg);
@@ -285,6 +279,111 @@ namespace Z0
         [MethodImpl(Inline)]   
         protected static SystemCounter counter(bool start = false) 
             => SystemCounter.Create(start);
+
+
+        protected void RunBench<T>(UnaryOp<T> f, UnaryOp<T> cf, string opname,  SystemCounter clock = default)
+            where T :unmanaged
+        {
+            const int SampleSize = 256;
+            var last = default(T);
+            
+            void run_f()
+            {
+                var src = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref refs.skip(src,j);
+                    last = f(x);
+                }
+                clock.Stop();
+
+                ReportBenchmark(SubjectId<T>(opname),oc,clock);
+
+            }
+
+            void run_cf()
+            {
+                var src = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref refs.skip(src,j);
+                    last = cf(x);
+                }            
+                clock.Stop();
+
+                ReportBenchmark(BaselineId<T>(opname),oc,clock);            
+            }
+
+            run_cf();            
+            
+            clock.Reset();
+            
+            run_f();
+        }
+
+        protected void RunBench<T>(BinaryOp<T> cf, BinaryOp<T> f, string opname, SystemCounter clock = default)
+            where T :unmanaged
+        {
+            const int SampleSize = 256;
+            var last = default(T);
+            
+            void run_f()
+            {
+                var lhs = Random.Span<T>(SampleSize);
+                var rhs = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref refs.skip(lhs,j);
+                    ref readonly var y = ref refs.skip(rhs,j);                
+                    last = f(x,y);
+                }
+                clock.Stop();
+
+                ReportBenchmark(SubjectId<T>(opname),oc,clock);
+            }
+
+            void run_cf()
+            {
+                var lhs = Random.Span<T>(SampleSize);
+                var rhs = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref refs.skip(lhs,j);
+                    ref readonly var y = ref refs.skip(rhs,j);                
+                    last = cf(x,y);
+                }            
+                clock.Stop();
+
+                ReportBenchmark(BaselineId<T>(opname),oc,clock);            
+            }
+
+            run_cf();            
+            
+            clock.Reset();
+            
+            run_f();
+        }
+ 
     }
 
     public abstract class TestContext<H,C> : TestContext<H>

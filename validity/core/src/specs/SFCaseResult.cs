@@ -9,7 +9,7 @@ namespace Z0
     public class SFCaseResult
     {
         public static implicit operator TestCaseOutcome(SFCaseResult src)
-            => new TestCaseOutcome(src.CaseName, src.Succeeded, src.Duration);
+            => TestCaseOutcome.Define(src.CaseName, src.Succeeded, src.Duration);
         
         public SFCaseResult(string name, bool succeeded, TimeSpan duration, AppMsg msg = null)
         {

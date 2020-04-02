@@ -80,7 +80,7 @@ namespace Z0
                 $"{Timing.Ms}");
 
         public IReadOnlyList<string> GetHeaders()
-            => new string[]{    nameof(OpId).PadRight(OpNamePad), 
+            => new string[]{nameof(OpId).PadRight(OpNamePad), 
                 Chars.Space + nameof(OpCount).PadRight(OpCountPad), 
                 Chars.Space + nameof(Timing),
                 };

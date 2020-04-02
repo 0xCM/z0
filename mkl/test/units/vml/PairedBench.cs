@@ -6,17 +6,17 @@ namespace Z0
 {
     using System;
 
-    public readonly struct BenchMarkedPair
+    public readonly struct PairedBench
     {
-        public static readonly BenchMarkedPair Zero = Define(BenchmarkRecord.Empty, BenchmarkRecord.Empty);
+        public static readonly PairedBench Zero = Define(BenchmarkRecord.Empty, BenchmarkRecord.Empty);
         
-        public static implicit operator BenchMarkedPair((BenchmarkRecord left, BenchmarkRecord right) src)
+        public static implicit operator PairedBench((BenchmarkRecord left, BenchmarkRecord right) src)
             => Define(src.left, src.right);
 
-        public static BenchMarkedPair Define(BenchmarkRecord Left, BenchmarkRecord Right)
-            => new BenchMarkedPair(Left,Right);
+        public static PairedBench Define(BenchmarkRecord Left, BenchmarkRecord Right)
+            => new PairedBench(Left,Right);
 
-        public BenchMarkedPair(BenchmarkRecord Left, BenchmarkRecord Right)
+        public PairedBench(BenchmarkRecord Left, BenchmarkRecord Right)
         {
             if(Left.OpCount != Right.OpCount)
                 throw new ArgumentException($"Operation counts not equal");

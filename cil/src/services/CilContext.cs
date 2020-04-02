@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;    
 
-    using static Core;
+    using static Seed;
 
     readonly struct CilContext : ICilContext
     {

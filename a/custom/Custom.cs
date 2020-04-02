@@ -20,7 +20,7 @@ namespace Z0
 
     public static class Custom
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        
     }
 
     public static partial class XTend

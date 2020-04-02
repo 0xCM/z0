@@ -13,18 +13,6 @@ namespace Z0
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest, ITestControl
         where U : UnitTest<U>
     {        
-        protected UnitTest(ITestConfig config)
-            : base(config, null)
-            {
-
-            }        
-
-        protected UnitTest()
-            : this(null)
-        {
-
-        }
-
         protected virtual bool TraceDetailEnabled
             => false;
 

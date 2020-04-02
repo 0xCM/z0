@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Z)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Intrinsics)" />

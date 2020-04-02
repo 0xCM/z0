@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Core;
+    using static TypeNats;
+    
     /// <summary>
     /// Characterizes a dimension of arbitrary order
     /// </summary>
@@ -24,7 +25,6 @@ namespace Z0
         /// Gets the dimension axis determined by its 0-based index, an integer in the interval [0,Order-1]
         /// </summary>
         ulong this[int axis] {get;}
-
     }
 
     public interface IDim1 : IDim

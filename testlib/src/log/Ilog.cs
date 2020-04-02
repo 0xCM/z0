@@ -20,6 +20,7 @@ namespace Z0
         Append
     }
 
+
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
@@ -36,8 +37,7 @@ namespace Z0
     }
 
     static class Log
-    {
-        
+    {        
         static LogPaths Paths 
             => LogPaths.The;
             
@@ -53,7 +53,6 @@ namespace Z0
             public static ILogger TheOnly = new A();
             
             public LogArea Area {get;}
-
 
             protected object locker = new object();
             

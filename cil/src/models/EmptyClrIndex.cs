@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Threading;
     using System.Reflection;
     
-    using static Core;
+    using static Option;
 
     public readonly struct EmptyClrIndex : IClrIndexer
     {
@@ -22,5 +20,4 @@ namespace Z0
         public Option<Type> FindType(int id)
             => none<Type>();
     }
-
 }

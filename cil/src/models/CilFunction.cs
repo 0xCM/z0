@@ -6,7 +6,7 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
-
+    
     using Z0.ClrSpecs;
 
     /// <summary>

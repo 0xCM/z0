@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Core;
+    using static Seed;
     using static Cast;
 
     readonly struct BoxedNumberConverter : IConversionProvider<BoxedNumberConverter,BoxedNumber>, IBiconverter<BoxedNumber>
@@ -44,7 +44,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                term.error(e);
                 return default;
             }
         }
@@ -52,7 +52,7 @@ namespace Z0
         public Option<object> ConvertToTarget(object incoming)
         {
             var kind = (incoming?.GetType() ?? typeof(void)).NumericKind();
-            return kind.IsSome() ? BoxedNumber.Define(incoming, kind) : none<BoxedNumber>();
+            return kind.IsSome() ? BoxedNumber.Define(incoming, kind) : Option.none<BoxedNumber>();
         }
     }
 }

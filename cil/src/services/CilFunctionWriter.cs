@@ -8,7 +8,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
 
     readonly struct CilFunctionWriter : ICilFunctionWriter
     {
@@ -20,7 +20,6 @@ namespace Z0
         public static CilFunctionWriter Create(ICilContext context, FilePath dst)
             => new CilFunctionWriter(context,dst);
         
-
         [MethodImpl(Inline)]
         CilFunctionWriter(ICilContext context, FilePath dst)            
         {

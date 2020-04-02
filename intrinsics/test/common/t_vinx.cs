@@ -18,7 +18,7 @@ namespace Z0
     {
         protected t_vinx()
         {
-            Check = new CheckExec(Config);
+            Check = new CheckExec();
             Comparisons = Context.Decompostions();
         }
         

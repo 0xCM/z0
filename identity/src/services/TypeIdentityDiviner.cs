@@ -36,7 +36,6 @@ namespace Z0
                 return none<TypeIdentity>();
         }
 
-
         /// <summary>
         /// Creates a type identity provider from a host type that realizes the required interface, if possible;
         /// otherwise, returns none

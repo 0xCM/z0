@@ -6,12 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <ProjectReference Include="$(Z)" /> -->
     <ProjectReference Include="$(Core)" />        
-    <ProjectReference Include="$(Api)" />        
-    <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />        
-    <ProjectReference Include="$(Graphs)" />
     <ProjectReference Include="$(Vectorized)" />        
 
   </ItemGroup>

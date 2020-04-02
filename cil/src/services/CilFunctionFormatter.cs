@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     readonly struct CilFunctionFormatter : ICilFunctionFormatter
     {
@@ -25,7 +25,6 @@ namespace Z0
         
         static string Comment(string text, string delimiter = "//", int pad = 0)
             => pad == 0 ? $"{delimiter} {text}" : delimiter.PadRight(pad) + text;
-
 
         public string Format(CilFunction f)
         {
