@@ -10,8 +10,16 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    partial class Api
+    public static partial class XTend
     {
+        
+    }
+    
+    public static partial class Api
+    {
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+
+
         /// <summary>
         /// Selects the host-attributed types from an assembly
         /// </summary>

@@ -2,29 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Apps)]
+[assembly: PartId(PartId.Checks)]
 
 namespace Z0.Parts
 {        
-    public sealed class Apps : Part<Apps>
+    public sealed class Checks : Part<Checks>
     {
 
     }
 }
 
-namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public static class Apps
-    {
-        
-    }
-
-    public static partial class XTend
-    {
-        
-    }
-
-}

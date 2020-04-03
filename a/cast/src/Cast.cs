@@ -10,8 +10,13 @@ namespace Z0
     using static Seed;
     using static As;
 
-    partial class Cast
+    public static partial class XTend  { }
+    
+    [ApiHost]
+    public static partial class Cast
     {
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
         /// <summary>
         /// Unconditionally converts, with much haste and no waste, a value of parametric numeric kind 
         /// to a value of another parametric numeric kind.

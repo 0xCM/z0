@@ -2,16 +2,6 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Checks)]
-
-namespace Z0.Parts
-{        
-    public sealed class Checks : Part<Checks>
-    {
-
-    }
-}
-
 namespace Z0
 {
     using System;
@@ -46,3 +36,5 @@ namespace Z0
         
     }
 }
+
+

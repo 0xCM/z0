@@ -10,6 +10,7 @@ namespace Z0
     using static Seed;
     using static TypeNats;
 
+
     partial class XTend
     {
         /// <summary>
