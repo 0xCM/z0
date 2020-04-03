@@ -12,6 +12,8 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Checks)" />
+    <ProjectReference Include="$(Contained)" />
+
     <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Custom)" />
 

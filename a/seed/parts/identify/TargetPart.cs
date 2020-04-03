@@ -10,12 +10,12 @@ namespace Z0
     using static Seed;
 
     public readonly struct TargetPart<S,T> : ITargetPart<S,T>
-        where S : struct, IPartId 
-        where T : struct, IPartId
+        where S : struct, IPart
+        where T : struct, IPart
     {
-        public S Source  => default;
+        public S Source {get;}
 
-        public T Target  => default;
+        public T Target  {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator TargetPart<S,T>((S src, T dst) x)
@@ -24,6 +24,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator (S src, T dst)(TargetPart<S,T> part)
             => (part.Source, part.Target);
+
+        internal TargetPart(S src, T dst)
+        {
+            this.Source = src;
+            this.Target = dst;
+        }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out S src, out T dst)

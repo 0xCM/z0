@@ -26,7 +26,7 @@ namespace Z0.Asm
         AssemblyArchiverService(IAsmContext context)
         {
             Context = context;
-            Resources = Context.Compostion.FindCatalog(PartId.Data).MapValueOrElse(c => c.Resources, () => BinaryResources.Empty);
+            Resources = Context.Compostion.FindCatalog(PartId.VData).MapValueOrElse(c => c.Resources, () => BinaryResources.Empty);
         }
 
         IApiComposition Resolved 
@@ -121,7 +121,7 @@ namespace Z0.Asm
             foreach(var src in providers)
                 Archive(exchange, src);
 
-            DataResourceReport.Create(PartId.Data, Resources).Save().Require();
+            DataResourceReport.Create(PartId.VData, Resources).Save().Require();
         }
     }
 }

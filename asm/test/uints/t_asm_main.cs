@@ -26,7 +26,7 @@ namespace Z0.Asm
         {
             var archive = Context.Archiver();
             var selection = from c in Context.Compostion.Catalogs
-                            where c.PartId != PartId.Data
+                            where c.PartId != PartId.VData
                             orderby c.PartId
                             select c.PartId;
             foreach(var id in selection)

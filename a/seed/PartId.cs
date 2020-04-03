@@ -17,172 +17,89 @@ public enum PartId : ulong
 {
     None = 0,
             
-    Root = 12,
+    Root = 12, RootTest = Root | Test,
 
-    RootTest = Root | Test,
+    Nats = 225, NatsTest = Nats | Test,
 
-    Nats = 225 | Lib,
+    CoreFunc = 41, CoreFuncTest = CoreFunc | Test,
 
-    NatsTest = Nats | Test,
+    Math = 45, GMath = 50, MathSvc = 51, 
 
-    CoreFunc = 41,
+    MathTest = Math | Test, GMathTest = GMath | Test, 
+        
+    BitSuite = 500, BitCore = 80, BitFields = 90, BitVectors = 100, VBits = 110, BitSpan = 170, BitString = 230, BitGrids = 700, BitPack = 710,
 
-    CoreFuncTest = CoreFunc | Test,
-
-    Math = 45 | Lib,
-
-    MathTest = Math | Test,
-    
-    GMath = 50 | Lib,
-
-    GMathTest = GMath | Test,
-
-    MathSvc = 51,
-
-    Intrinsics = 70,
-
-    IntrinsicsTest = Intrinsics | Test,
-
-    VSvc = 75,
-
-    BitCore = 80,
-
-    BitSuite = 500,
-    
     BitTest = BitSuite | Test,
-
-    BitCoreSvc = 505,
-
-    BitFields = 90,
-
-    BitVectors = 100,
-
-    VBits = 110,
-
-    Logix = 120,
-
-    LogixTest = Logix | Test,
-
-    Asm = 300,
-
-    AsmTypes = 302,
-
-    AsmModels = 304,
-
-    AsmCore = 310,
-
-    AsmEncoder = 312,
     
-    AsmDecoder = 314,
-
-    AsmTest = Asm | Test,
-
-    AsmApp = Asm | App,
-
-    Vectorized = 330,
-
-    Data = 140,
-
-    LibM = 150,
-
-    LibMTest = LibM | Test,
-
-    Matrix = 160,
-
-    MatrixTest = Matrix | Test,
-
-    BitSpan = 170,
-
-    BitSpanTest = BitSpan | Test,
-
-    Machines = 180,
-
-    MachinesTest = Machines | Test,
-
+    Logix = 120, LogixTest = Logix | Test, 
     
-    MklApi = 220,
+    Asm = 300, AsmTypes = 302, AsmModels = 304, AsmCore = 310, AsmDecoder = 314,
 
-    MklApiTest = MklApi | Test,
+    AsmTest = Asm | Test, AsmApp = Asm | App,
 
-    BitString = 230,
+    Intrinsics = 70, Vectorized = 330, VData = 331, DVec = 332, GVec = 333, FVec = 334, VSvc = 75, Circuits = 720,
 
-    BitStringTest = BitString | Test,
-
-    Stats = 240,
-
-    StatsTest = Stats | Test,
-
-    Fixed = 250,
-
-    FixedTest = Fixed | Test,
-
-    Blocks = 260,
-
-    BlocksTest = Blocks | Test,
-
-    WorkflowRuntime = 270,
-
-    WorkflowTest = WorkflowRuntime | Test,
-
-    Analogs = 280,
-
-    AnalogsTest = Analogs | Test,
-
-    Dynamic = 290,
-
-    DynamicTest = Dynamic | Test,
+    IntrinsicsTest = Intrinsics | Test, VectorizedTest = Vectorized | Test,
     
-    VData = 331,
+    LibM = 150, LibMTest = LibM | Test,
 
-    DVec = 332,
+    Matrix = 160, MatrixTest = Matrix | Test,
 
-    GVec = 333,
-
-    FVec = 334,
-
-    DVecTest = DVec | Test,
-
-    GVecTest = GVec | Test,
-
-    VectorizedTest = Vectorized | Test,
-
-    WorkflowCore = 340,
-
-    Time = 350,
-
-    TimeTest = Time | Test,
-
-    Identity = 360,
-
-    IdentityTest = Identity | Test,
-
-    Graphs = 370,
-
-    GraphTest = Graphs | Test,
-
-    Containers = 380,
-
-    ContainerTest = Containers | Test,
-
-    Cil = 390,
-
-    CilTest = Cil | Test,
-
-    Permute = 400,
-
-    PermuteTest = Permute | Test,
+    Machines = 180, MachinesTest = Machines | Test,
     
-    Symbolic = 410,
+    MklApi = 220, MklApiTest = MklApi | Test,
+
+    Stats = 240, StatsTest = Stats | Test,
+
+    Blocks = 260, BlocksTest = Blocks | Test,
+
+    WorkflowRuntime = 270, WorkflowTest = WorkflowRuntime | Test,
+
+    Analogs = 280, AnalogsTest = Analogs | Test,
+
+    Dynamic = 290, DynamicTest = Dynamic | Test,
+    
+    Identity = 360, IdentityTest = Identity | Test,
+
+    Cil = 390, CilTest = Cil | Test,
+
+    Permute = 400, PermuteTest = Permute | Test,
 
     Polyrand = 420,
 
-    PolyrandTest = Polyrand | Test,
+    Seed = 802, Typed = 846, Fixed = 250, Time = 350, Graphs = 370,
+    
+    Symbolic = 410, 
 
-    Testing = 430,
+    
 
-    TestLib = Testing | Lib,
+    Textual = 810, Collective = 804, Reflective = 808, Monadic = 806,
 
-    TestApp = Testing | App,
+    Canonical = 812, 
+    
+    SFuncs = 816,
+
+    Cast = 842, Memories = 814, 
+    
+    Custom = 818,
+
+    Identify = 820, Kinds = 822, Api = 824,
+    
+    Messages = 840, Apps = 828,
+
+    Numeric = 830, Tuples = 826,
+                        
+    Flow = 850, Enums = 852, Reports = 832,
+    
+    Core = 836,
+
+    Checks = 848,
+            
+    Contained = 854,
+
+    Z = 1024,
+
+    TestLib = 430,
 
     Validity = 432,
 
@@ -191,68 +108,6 @@ public enum PartId : ulong
     ValidityVectors = 436,
 
     ValidityTest = Validity | Test,
-        
-    BitGrids = 700,
-
-    BitPack = 710,
-
-    Circuits = 720,
-
-    Feeders = 800,
-
-    Seed = 802,
-
-    Collective = 804,
-
-    Monadic = 806,
-
-    Reflective = 808,
-
-    Textual = 810,
-
-    Canonical = 812,
-
-    Memories = 814,
-
-    SFuncs = 816,
-
-    Custom = 818,
-
-    Identify = 820,
-
-    Kinds = 822,
-
-    Api = 824,
-    
-    Tuples = 826,
-        
-    Apps = 828,
-    
-    Numeric = 830,
-
-    Reports = 832,
-
-    Errors = 834,    
-
-    Core = 836,
-
-    Rng = 838,
-
-    Messages = 840,
-
-    Cast = 842,
-
-    Interval = 844,
-
-    Typed = 846,
-
-    Checks = 848,
-    
-    Flow = 850,
-
-    Enums = 852,
-
-    Z = 1024,
 
     Svc = ushort.MaxValue + 1,
 
@@ -296,6 +151,8 @@ public enum ExternId : ulong
     Vsl = 6,
 }
 
+#if KindedPart
+
 public static class PartIdentity
 {
     public sealed class Api : PartId<Api> { public override PartId Id => PartId.Api;}
@@ -334,3 +191,5 @@ public static class PartIdentity
 
     public sealed class Root : PartId<Root> { public override PartId Id => PartId.Root;}
 }
+
+#endif
