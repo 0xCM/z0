@@ -6,7 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
-    using System.Security;
 
     public interface IMessageLog<M> : IMessageSink<M>
         where M : IAppMsg
@@ -18,5 +17,4 @@ namespace Z0
         void ISink<M>.Accept(in M src)
             => Write(src);
     }        
-
 }

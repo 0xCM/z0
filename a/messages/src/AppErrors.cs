@@ -17,7 +17,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     
-    public static class AppErrors
+    public static partial class AppErrors
     {        
         const string Unknown = "???";
         
@@ -33,39 +33,9 @@ namespace Z0
         public static void Throw(AppMsg msg)
             => throw AppException.Define(msg);
 
-        public static AppException InvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.InvariantFailure(description, caller, file, line));
-
-        public static void ThrowInvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw InvariantFailure(description, caller, file, line);
-
-        public static void ThrowIfFalse(bool test, object msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            if(!test)
-                ThrowInvariantFailure(msg, caller, file, line);
-        }
-
-        public static AppException FeatureUnsupported(object feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.FeatureUnsupported(feature, caller, file, line));
-
         public static AppException DuplicateKeys(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppMsg.Error($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
         
-        public static void ThrowFeatureUnsupported(string feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw FeatureUnsupported(feature, caller, file, line);
-
-        public static AppException NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.NotEqual(lhs,rhs,caller,file,line));
-
-        public static void ThrowNotEqual<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw NotEqual(lhs,rhs,caller,file,line);
-
-        public static T ThrowNotEqualNoCaller<T>(T lhs, T rhs)
-            => throw NotEqual(lhs,rhs,null,null,null);        
-
-        public static void ThrowNotEqual<T>(T lhs, T rhs, AppMsg msg)
-            => throw AppException.Define(msg.WithPrependedContent($"Equality failure, {lhs} != {rhs}:"));
-
         public static AppException Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.Equal(lhs,rhs,caller,file,line));
 
@@ -83,12 +53,6 @@ namespace Z0
 
         public static AppException NotFalse(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.NotFalse(msg,caller,file,line));
-
-        public static AppException CountMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.CountMismatch(lhs,rhs,caller,file,line));
-
-        public static void ThrowCountMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw CountMismatch(lhs,rhs, caller,file,line);
 
         public static AppException LengthMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.LengthMismatch(lhs,rhs,caller,file,line));
@@ -119,24 +83,6 @@ namespace Z0
             where S : Enum
             where T : Enum
                 => AppException.Define(AppErrorMsg.KindOpUnsupported(src,dst, caller, file, line));
-
-        public static IndexOutOfRangeException TooManyBytes(int requested, int available, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new IndexOutOfRangeException(AppErrorMsg.TooManyBytes(requested, available, caller, file, line).ToString());
-
-        public static IndexOutOfRangeException IndexOutOfRange(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new IndexOutOfRangeException(AppErrorMsg.IndexOutOfRange(index, min, max, caller, file, line).ToString());
-
-        public static IndexOutOfRangeException IndexOutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
-
-        public static void ThrowTooShort(int dstLen, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort:{FormatCallsite(caller,file,line)}");
-
-        public static void ThrowOutOfRange<T>(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw IndexOutOfRange(index, min, max, caller, file, line);
-        
-        public static void ThrowOutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw IndexOutOfRange(value,min,max,caller,file,line);
 
         public static AppException NoValue<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define($"A value of type {typeof(T).Name} was expected but does not exist", caller,file,line);

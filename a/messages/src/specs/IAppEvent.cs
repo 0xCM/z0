@@ -6,41 +6,47 @@ namespace Z0
 {
     using System;
 
+    /// <summary>
+    /// Characterizes a correlated message, accompanied by arbitrary content, that describes something that occurred
+    /// within the system
+    /// </summary>
     public interface IAppEvent : ICorrelated, ICustomFormattable
     {
-        object EventData {get;}
+        /// <summary>
+        /// The data associated with the event
+        /// </summary>
+        object Payload {get;}
 
         string Description {get;}
 
         string ICustomFormattable.Format()        
-            => text.concat(Description, text.colon(), text.space(), EventData?.ToString() ?? string.Empty);  
+            => text.concat(Description, text.colon(), text.space(), Payload?.ToString() ?? string.Empty);  
 
         IAppEvent<K> As<K>()
-            => AppEvent.Create<K>(Description, (K)EventData);
+            => AppEvent.Create<K>(Description, (K)Payload);
     }
 
     /// <summary>
-    /// Characterizes an system event with a parametric payload
+    /// Characterizes an application event with a parametric payload
     /// </summary>
     /// <typeparam name="T">The payload type</typeparam>
     public interface IAppEvent<T> : IAppEvent
     {
-        new T EventData {get;}
+        new T Payload {get;}
 
-        object IAppEvent.EventData
-            => EventData;                
+        object IAppEvent.Payload
+            => Payload;                
     }
 
-    public interface IAppEvent<E,T> : IAppEvent<T>
-        where E : IAppEvent<E,T>
+    /// <summary>
+    /// Characterizes an F-bound polymorphic payload-parametric application event reification
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    /// <typeparam name="T">The payload type</typeparam>
+    public interface IAppEvent<F,T> : IAppEvent<T>
+        where F : struct, IAppEvent<F,T>
     {
         string IAppEvent.Description
-            => typeof(E).DisplayName();
-    }
-
-    public interface IAppEventChannel<E> : IAppEventSource<E>, IAppEventSink<E>
-        where E : IAppEvent
-    {
-
+            => typeof(F).DisplayName();
     }
 }

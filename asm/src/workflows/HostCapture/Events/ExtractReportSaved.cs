@@ -37,7 +37,7 @@ namespace Z0.Asm
         public string Description 
             => $"{RecordCount} {ReportType.DisplayName()} records saved to {TargetPath}";
 
-        public FilePath EventData 
+        public FilePath Payload 
             => TargetPath;
 
         public string Format() 

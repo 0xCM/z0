@@ -58,7 +58,7 @@ namespace Z0.Asm.Check
         IAppMsgWriter OpenLog(string name, FileExtension ext = null, FileWriteMode mode = FileWriteMode.Overwrite,  bool display = false)
         {
             var target = RootPaths.LogDir + FileName.Define(name, ext ?? FileExtensions.Log);
-            return Context.OpenAppMsgLog(target, name, mode, display);
+            return AppMessages.writer(target, name, mode, display);
         }
 
         /// <summary>

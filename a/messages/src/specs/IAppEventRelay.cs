@@ -6,18 +6,16 @@ namespace Z0
 {
     using System;
 
-    public interface IAppEventBroker
-    {
-        BrokeredMessage<E> AcceptSink<S,E>(S sink, E model = default)
-            where E : IAppEvent
-            where S : IAppEventSink<E>;
-
-        BrokeredMessage<E> AcceptReceiver<E>(Action<E> receiver, E model = default)
-            where E : IAppEvent;        
-    }
-
+    /// <summary>
+    /// Characterizes a broker that forwards events
+    /// </summary>
     public interface IAppEventRelay : IAppEventBroker
     {
+        /// <summary>
+        /// Relays an event to sinks and receivers registerd with the broker
+        /// </summary>
+        /// <param name="e">The event to relay</param>
+        /// <typeparam name="E">The event type</typeparam>
         ref readonly E RaiseEvent<E>(in E e)
             where E : IAppEvent;
     }

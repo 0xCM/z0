@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IAppMsgWriter : IServiceAllocation<IContext>
+    public interface IAppMsgWriter : IServiceAllocation
     {
         void Write<F>(F formattable)
             where F : ICustomFormattable;  

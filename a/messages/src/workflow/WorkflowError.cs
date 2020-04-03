@@ -13,7 +13,7 @@ namespace Z0
     {        
         public static WorkflowError Empty => new WorkflowError(new Exception("empty"));
         
-        public Exception EventData {get;}
+        public Exception Payload {get;}
         
         [MethodImpl(Inline)]
         public static implicit operator WorkflowError(Exception e)
@@ -26,14 +26,14 @@ namespace Z0
         [MethodImpl(Inline)]
         internal WorkflowError(Exception error)
         {
-            this.EventData = error;
+            this.Payload = error;
         }
                    
         public bool IsEmpty 
-            => EventData == null || EventData.Message == Empty.EventData.Message;
+            => Payload == null || Payload.Message == Empty.Payload.Message;
 
         public string Description
-            => IsEmpty ? string.Empty : EventData.Message;
+            => IsEmpty ? string.Empty : Payload.Message;
         
         public string Format()
             => Description;         

@@ -17,7 +17,7 @@ namespace Z0
         protected ApiShell(C context)
             : base(context)
         {
-            this.MsgQueue = AppMsgQueue.Create();
+            this.MsgQueue = AppMessages.queue();
             this.Resolved = context.Compostion.Resolved;
         }
 

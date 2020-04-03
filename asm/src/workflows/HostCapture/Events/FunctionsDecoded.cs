@@ -19,15 +19,15 @@ namespace Z0.Asm
             public FunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
             {
                 this.Host = host;
-                this.EventData = functions;
+                this.Payload = functions;
             }
             
             public ApiHostUri Host {get;}
             
-            public AsmFunction[] EventData {get;}
+            public AsmFunction[] Payload {get;}
 
             public string Description
-                => $"{EventData.Length} {Host} functions decoded";
+                => $"{Payload.Length} {Host} functions decoded";
             
             public string Format()
                 => Description;         

@@ -13,9 +13,13 @@ namespace Z0
     {
         public string Description {get;}
         
-        public object EventData {get;}
+        public object Payload {get;}
 
         public CorrelationToken Correlation {get;}
+
+        [MethodImpl(Inline)]
+        public AppEvent Create(string name, object data = null, CorrelationToken? ct = null)
+            => new AppEvent(name,data,ct);
 
         [MethodImpl(Inline)]
         public static AppEvent<T> Create<T>(string name, T data, CorrelationToken? ct = null)
@@ -25,43 +29,58 @@ namespace Z0
         internal AppEvent(string name, object data, CorrelationToken? ct = null)
         {
             this.Description = name;
-            this.EventData = data;
+            this.Payload = data ?? default(EmptyPayload);
             this.Correlation = ct ?? CorrelationToken.Empty;
         }
 
+        public bool HasPayload
+        {
+            [MethodImpl(Inline)]
+            get => Payload != null && !(Payload is IEmptyPayload);
+        }
+
         public string Format()
-            => string.Concat(EventData, CharText.Colon, CharText.Space, EventData);
+            => string.Concat(Payload, CharText.Colon, CharText.Space, Payload);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public AppEvent<T> As<T>()
-            => Create<T>(Description, (T)EventData, Correlation);
+            => Create<T>(Description, (T)Payload, Correlation);
+
+        readonly struct EmptyPayload : IFormattable<EmptyPayload>, IEmptyPayload
+        {            
+            public string Format() => string.Empty;
+
+            public override string ToString() => Format();
+        }
+
+        interface IEmptyPayload {}
     }
 
     public readonly struct AppEvent<T> : IFormattable<AppEvent<T>>, IAppEvent<AppEvent<T>,T>
     {
         public string Description {get;}
         
-        public T EventData {get;}
+        public T Payload {get;}
 
         public CorrelationToken Correlation {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator AppEvent(AppEvent<T> src)
-            => new AppEvent(src.Description, src.EventData, src.Correlation);
+            => new AppEvent(src.Description, src.Payload, src.Correlation);
 
         [MethodImpl(Inline)]
         internal AppEvent(string name, T data, CorrelationToken? ct = null)
         {
             this.Description = name;
-            this.EventData = data;
+            this.Payload = data;
             this.Correlation = ct ?? CorrelationToken.Empty;
         }
 
         public string Format()
-            => string.Concat(EventData, CharText.Colon, CharText.Space, EventData);
+            => string.Concat(Payload, CharText.Colon, CharText.Space, Payload);
 
         public override string ToString()
             => Format();

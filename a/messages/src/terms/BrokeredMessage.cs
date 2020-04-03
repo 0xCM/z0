@@ -7,16 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
-    public static class AppEventBrokerOps
-    {
-        [MethodImpl(Inline)]
-        public static BrokeredMessage<E> Receive<E>(this E e, IAppEventBroker broker, Action<E> receiver)
-            where E : IAppEvent
-                => broker.AcceptReceiver(receiver);        
-    }
-
+    
     public readonly struct BrokeredMessage<E>
         where E : IAppEvent        
     {

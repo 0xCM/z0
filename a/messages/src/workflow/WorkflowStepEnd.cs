@@ -9,28 +9,27 @@ namespace Z0
 
     using static Seed;
             
-    public readonly struct StepStart<T> : ITimeStamped, IAppEvent<StepStart<T>, T>
+    public readonly struct StepEnd<T> : ITimeStamped, IAppEvent<StepEnd<T>, T>
     {        
-        public static StepStart<T> Empty => new StepStart<T>(string.Empty, default, CorrelationToken.Empty, null);
-
         public string StepName {get;}
         
-        public T EventData {get;}
+        public T Payload {get;}
 
         public CorrelationToken Correlation {get;}
 
         public DateTime Timestamp {get;}
 
+        public static StepEnd<T> Empty => new StepEnd<T>(string.Empty, default, CorrelationToken.Empty, null);
         
         [MethodImpl(Inline)]
-        internal StepStart(string name, T data, CorrelationToken ct, DateTime? timestamp)
+        internal StepEnd(string caller, T data, CorrelationToken ct, DateTime? timestamp)
         {
-            this.StepName = text.concat(name, "Start");
-            this.EventData = data;
-            this.Correlation = ct;
+            this.StepName = text.concat(caller, "End");
+            this.Payload = data;
             this.Timestamp = timestamp ?? DateTime.MinValue;
-        }
-                   
+            this.Correlation = ct;
+        }        
+         
         public bool IsEmpty 
             => text.empty(StepName) && Timestamp == DateTime.MinValue && Correlation.IsEmpty;        
 

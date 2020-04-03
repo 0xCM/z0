@@ -10,8 +10,8 @@ namespace Z0
 
     public static class ServiceFactory
     {
-        public static IAppMsgWriter OpenAppMsgLog(this IContext context, FilePath target, string devname = null, 
+        public static IAppMsgWriter AppMsgWriter(this IContext context, FilePath target, string devname = null, 
             FileWriteMode mode = FileWriteMode.Overwrite, bool display = false)
-                => AppMsgWriter.Open(context, target, devname, mode, display);
+                => AppMessages.writer(target, devname, mode, display);
     }
 }

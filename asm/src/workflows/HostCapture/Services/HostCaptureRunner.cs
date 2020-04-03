@@ -26,9 +26,9 @@ namespace Z0.Asm
 
             readonly AsmFormatConfig Format;
 
-            IHostCaptureEventBroker Broker {get;}
+            IHostCaptureEventRelay Broker {get;}
 
-            public HostCaptureRunner(IAsmContext context, IHostCaptureEventBroker broker)
+            public HostCaptureRunner(IAsmContext context, IHostCaptureEventRelay broker)
             {
                 this.Context = context;
                 Extractor = Context.HostExtractor(Context.DefaultBufferLength);
@@ -63,7 +63,6 @@ namespace Z0.Asm
 
             public void Run(RootEmissionPaths root)
             {                
-
                 root.Clear();
                 var catalogs = Context.Compostion.Catalogs;
 
@@ -78,19 +77,19 @@ namespace Z0.Asm
             {
                 if(src.HasApiHostContent)
                 {
-                    var step = Raise(WorkflowStep.Started(src, Correlate()));
+                    var step = Raise(WorkflowSteps.Started(src, Correlate()));
 
                     foreach(var host in src.ApiHosts)
                     {
                         CaptureHost(host, dst);
                     }
-                    Raise(WorkflowStep.Ended(src, step.Correlation));
+                    Raise(WorkflowSteps.Ended(src, step.Correlation));
                 }
             }
 
             public void CaptureHost(in ApiHost host, in RootEmissionPaths dst)
             {
-                var step = Raise(WorkflowStep.Started(host, Correlate()));
+                var step = Raise(WorkflowSteps.Started(host, Correlate()));
 
                 try
                 {
@@ -121,7 +120,7 @@ namespace Z0.Asm
                 }
                 finally
                 {
-                    Raise(WorkflowStep.Ended(host, step.Correlation));
+                    Raise(WorkflowSteps.Ended(host, step.Correlation));
 
                 }
 

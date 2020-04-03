@@ -23,18 +23,18 @@ namespace Z0.Asm
             AsmCodeSaved(ApiHostUri host, AsmCode[] code, FilePath dst)
             {
                 this.Host = host;
-                this.EventData = code;
+                this.Payload = code;
                 this.Target = dst;
             }
             
             public ApiHostUri Host {get;}
             
-            public AsmCode[] EventData {get;}
+            public AsmCode[] Payload {get;}
 
             public FilePath Target {get;}
 
             public string Description
-                => $"{EventData.Length} {Host} functions saved to {Target}";
+                => $"{Payload.Length} {Host} functions saved to {Target}";
             
             public string Format()
                 => Description;         

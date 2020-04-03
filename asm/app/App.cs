@@ -49,7 +49,7 @@ namespace Z0.Asm.Check
             var resolved = ApiComposition.Assemble(Dependencies.Where(r => r.Id != 0));
             term.print($"Assembled {resolved.Resolved.Length} parts");
 
-            return AsmContext.Create(resolved, settings, AppMsgExchange.New(), random, AsmFormatConfig.New);
+            return AsmContext.Create(resolved, settings, AppMessages.exchange(), random, AsmFormatConfig.New);
         }
         
         public App()

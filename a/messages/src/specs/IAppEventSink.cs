@@ -6,22 +6,13 @@ namespace Z0
 {
     using System;
 
-    public interface IAppEventSink : ISink
-    {
-
-    }
-
-    public interface IAppEventSink<E> : IAppEventSink, ISink<E>
+    /// <summary>
+    /// Characterizes an event-parametric application event sink
+    /// </summary>
+    /// <typeparam name="E">The event type</typeparam>
+    public interface IAppEventSink<E> : ISink<E>
         where E : IAppEvent
     {
 
-    }
-
-    public interface IAppEventSink<S,E> : IAppEventSink<E>
-        where S : IAppEventSink<S,E>
-        where E : IAppEvent
-    {
-
-        
     }
 }

@@ -23,15 +23,15 @@ namespace Z0.Asm
             MembersLocated(ApiHostUri host, ApiLocatedMember[] functions)
             {
                 this.Host = host;
-                this.EventData = functions;
+                this.Payload = functions;
             }
             
             public ApiHostUri Host {get;}
             
-            public ApiLocatedMember[] EventData {get;}
+            public ApiLocatedMember[] Payload {get;}
 
             public string Description
-                => $"{EventData.Length} {Host} members located";
+                => $"{Payload.Length} {Host} members located";
             
             public string Format()
                 => Description;         

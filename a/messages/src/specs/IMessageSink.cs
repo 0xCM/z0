@@ -7,6 +7,10 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Characterizes an application message receptacle
+    /// </summary>
+    /// <typeparam name="M">The message type</typeparam>
     public interface IMessageSink<M> : ISink<M>
         where  M : IAppMsg
     {

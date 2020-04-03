@@ -69,20 +69,20 @@ namespace Z0.Asm.Check
         void OnEvent(MembersLocated e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
-            Analyze(e.Host, e.EventData);
+            Analyze(e.Host, e.Payload);
         }
 
         void OnEvent(FunctionsDecoded e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
-            Analyze(e.Host, e.EventData);
+            Analyze(e.Host, e.Payload);
         }
 
         void OnEvent(AsmHexSaved e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
             NotifyConsole(msg);
-            Analyze(e.Host, e.EventData, e.Target);
+            Analyze(e.Host, e.Payload, e.Target);
         }
 
         void OnEvent(ExtractReportCreated e)
@@ -105,46 +105,46 @@ namespace Z0.Asm.Check
 
         void OnEvent(WorkflowError e)
         {
-            NotifyConsole(AppMsg.Error(e.EventData));    
+            NotifyConsole(AppMsg.Error(e.Payload));    
         }
 
         void OnEvent(StepStart<IApiCatalog> e)
         {
-            var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.Green);
+            var msg = AppMsg.Colorize($"{e}: {e.Payload.CatalogName}", AppMsgColor.Green);
             NotifyConsole(msg);
         }
 
         void OnEvent(StepEnd<IApiCatalog> e)
         {
-            var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.Magenta);
+            var msg = AppMsg.Colorize($"{e}: {e.Payload.CatalogName}", AppMsgColor.Magenta);
             NotifyConsole(msg);            
         }
 
-        void ConnectReceivers(IHostCaptureEventBroker broker)
+        void ConnectReceivers(IHostCaptureEventRelay broker)
         {
 
-            broker.Error.Receive(broker, OnEvent);
+            broker.Error.Subscribe(broker, OnEvent);
 
             if(Settings.HandleExtractReportCreated)
-                broker.ExtractReportCreated.Receive(broker, OnEvent);
+                broker.ExtractReportCreated.Subscribe(broker, OnEvent);
 
             if(Settings.HandleParseReportCreated)
-                broker.ParseReportCreated.Receive(broker, OnEvent);
+                broker.ParseReportCreated.Subscribe(broker, OnEvent);
 
             if(Settings.HandleFunctionsDecoded)
-                broker.FunctionsDecoded.Receive(broker, OnEvent);
+                broker.FunctionsDecoded.Subscribe(broker, OnEvent);
 
             if(Settings.HandleParsedExtractSaved)            
-                broker.HexSaved.Receive(broker, OnEvent);
+                broker.HexSaved.Subscribe(broker, OnEvent);
 
             if(Settings.HandleHostReportSaved)
-                broker.HostReportSaved.Receive(broker, OnEvent);
+                broker.HostReportSaved.Subscribe(broker, OnEvent);
             
             if(Settings.HandleMembersLocated)
-                broker.MembersLocated.Receive(broker, OnEvent);
+                broker.MembersLocated.Subscribe(broker, OnEvent);
             
-            broker.CaptureCatalogStart.Receive(broker, OnEvent);            
-            broker.CaptureCatalogEnd.Receive(broker, OnEvent);
+            broker.CaptureCatalogStart.Subscribe(broker, OnEvent);            
+            broker.CaptureCatalogEnd.Subscribe(broker, OnEvent);
 
         }
         

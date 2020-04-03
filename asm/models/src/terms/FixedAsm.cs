@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     public static class FixedAsm
     {

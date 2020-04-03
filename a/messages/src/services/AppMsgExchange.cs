@@ -11,7 +11,7 @@ namespace Z0
     
     using static Seed;
 
-    public sealed class AppMsgExchange : IAppMsgExchange
+    sealed class AppMsgExchange : IAppMsgExchange
     {
         readonly IAppMsgQueue Queue;
 
@@ -32,7 +32,7 @@ namespace Z0
 
         AppMsgExchange()
         {
-            Queue = AppMsgQueue.Create();
+            Queue = AppMessages.queue();
             Queue.Next += Relay;
             Next += BlackHole;
         }

@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
 
     /// <summary>
     /// Captures an asm opcode together with an instruction string

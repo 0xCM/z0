@@ -10,17 +10,16 @@ namespace Z0
     
     readonly struct AppMsgWriter : IAppMsgWriter
     {
-        public static AppMsgWriter Open(IContext context, FilePath target, string name = null, 
+        public static AppMsgWriter Open(FilePath target, string name = null, 
             FileWriteMode mode = FileWriteMode.Overwrite, bool display = false, AppMsgColor? color = null)
         {
             var writer = target.CreateParentIfMissing().Writer(mode);
             var devname = name ?? ("log" + Interlocked.Increment(ref devid).ToString());
-            return new AppMsgWriter(context, writer, devname, display, color ?? AppMsgColor.Green);            
+            return new AppMsgWriter(writer, devname, display, color ?? AppMsgColor.Green);            
         }
 
-        AppMsgWriter(IContext context, StreamWriter writer, string name, bool display, AppMsgColor color)
+        AppMsgWriter(StreamWriter writer, string name, bool display, AppMsgColor color)
         {
-            this.Context = context;
             this.Writer = writer;
             this.Name = name;
             this.Display = display;
@@ -28,8 +27,6 @@ namespace Z0
         }
 
         static int devid;        
-
-        public IContext Context {get;}
 
         readonly AppMsgColor Color;    
         

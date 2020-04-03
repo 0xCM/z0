@@ -6,7 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
-    using System.Security;
 
     public interface IMessageQueue<M> : IMessageSink<M>, ICallbackSouce<M>
         where M : IAppMsg

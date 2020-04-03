@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static AsmWorkflowReports;    
     using static HostCaptureWorkflow;
 
-    public interface IHostCaptureEventBroker : IWorkflowEventBroker
+    public interface IHostCaptureEventRelay : IWorkflowRelay
     {
         MembersLocated MembersLocated => MembersLocated.Empty;
 

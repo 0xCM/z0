@@ -21,7 +21,7 @@ namespace Z0
 
         public event Action<AppMsg> Next;
 
-        protected IAppMsgContext Queue {get; private set;}
+        protected IAppMsgExchange Queue {get; private set;}
 
         Queue<TestCaseRecord> Outcomes {get;}
             = new Queue<TestCaseRecord>();
@@ -34,7 +34,7 @@ namespace Z0
             this.Context = this;            
             this.Random = random ?? Polyrand.WyHash64(PolySeed64.Seed00);
             this.Next += BlackHole;
-            this.Queue = AppMsgContext.Create();            
+            this.Queue = AppMessages.exchange();
             this.Queue.Next += Relay;
         }
 

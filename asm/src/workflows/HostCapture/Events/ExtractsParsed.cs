@@ -19,15 +19,15 @@ namespace Z0.Asm
             public ExtractsParsed(ApiHostUri host, ParsedExtract[] functions)
             {
                 this.Host = host;
-                this.EventData = functions;
+                this.Payload = functions;
             }
             
             public ApiHostUri Host {get;}
             
-            public ParsedExtract[] EventData {get;}
+            public ParsedExtract[] Payload {get;}
 
             public string Description
-                => $"{EventData.Length} {Host} members parsed";
+                => $"{Payload.Length} {Host} members parsed";
             
             public string Format()
                 => Description;         

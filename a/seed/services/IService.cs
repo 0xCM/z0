@@ -56,10 +56,21 @@ namespace Z0
     }
 
     /// <summary>
+    /// Characterizes a stateless service that requires explicit resource management
+    /// </summary>
+    /// </remarks>
+    /// Read the summary again
+    /// </remarks>
+    public interface IServiceAllocation : IService, IDisposable
+    {
+
+    }
+
+    /// <summary>
     /// Characterizes a stateful service that requires explcit resource managment
     /// </summary>
     /// <typeparam name="C">The context type</typeparam>
-    public interface IServiceAllocation<C> : IContextual<C>, IService, IDisposable
+    public interface IServiceAllocation<C> : IContextual<C>, IServiceAllocation
     {
         
     }

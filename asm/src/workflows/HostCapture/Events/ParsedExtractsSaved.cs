@@ -23,18 +23,18 @@ namespace Z0.Asm
             AsmHexSaved(ApiHostUri host, AsmOpBits[] code, FilePath dst)
             {
                 this.Host = host;
-                this.EventData = code;
+                this.Payload = code;
                 this.Target = dst;
             }
             
             public ApiHostUri Host {get;}
             
-            public AsmOpBits[] EventData {get;}
+            public AsmOpBits[] Payload {get;}
 
             public FilePath Target {get;}
 
             public string Description
-                => $"{EventData.Length} {Host} functions saved to {Target}";
+                => $"{Payload.Length} {Host} functions saved to {Target}";
             
             public string Format()
                 => Description;         

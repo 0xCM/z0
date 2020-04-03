@@ -124,13 +124,13 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public ExtractReportCreated(Report report)
             {
-                this.EventData = report;
+                this.Payload = report;
             }
 
-            public Report EventData {get;}
+            public Report Payload {get;}
 
             public string Description
-                => $"{EventData.RecordCount} records created for {EventData.ReportName}";
+                => $"{Payload.RecordCount} records created for {Payload.ReportName}";
             
             public string Format()
                 => Description;         

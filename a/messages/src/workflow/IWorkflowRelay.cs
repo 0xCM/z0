@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
-
-    /// <summary>
-    /// A context that supports application message capture/disbursement
-    /// </summary>
-    public interface IAppMsgContext : IAppMsgExchange, IAppContext
-    {
     
-    }    
+    public interface IWorkflowRelay : IAppEventRelay
+    {
+        StepStart<T> StepStarted<T>() => StepStart<T>.Empty;
+
+        StepEnd<T> StepEnded<T>() => StepEnd<T>.Empty;
+
+        WorkflowError Error => WorkflowError.Empty;
+    }
 }
