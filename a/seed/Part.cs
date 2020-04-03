@@ -5,7 +5,7 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyDescription("Let us grow")]
+[assembly: AssemblyDescription(PartDescriptions.Seed)]
 [assembly: PartId(PartId.Seed)]
 
 namespace Z0.Parts

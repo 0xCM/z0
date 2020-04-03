@@ -32,6 +32,5 @@ namespace Z0
         /// Indicates a bit-width of 512
         /// </summary>
         W512 = TW.W512,
-
     }
 }

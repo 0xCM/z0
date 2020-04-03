@@ -4,6 +4,9 @@ Cmd=$ZDev/.scripts/add-rooted.sh
 export ProjectId=seed
 bash $Cmd
 
+export ProjectId=agency
+bash $Cmd
+
 export ProjectId=apps
 bash $Cmd
 

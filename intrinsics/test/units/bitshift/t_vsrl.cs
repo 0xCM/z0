@@ -41,11 +41,11 @@ namespace Z0
 
         void vsrl_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckShiftScalarMatch(VSvc.vsrl(w,t),w,t);
+                => Comparisons.CheckShiftOp(VSvc.vsrl(w,t),w,t);
 
         void vsrl_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckShiftScalarMatch(VSvc.vsrl(w,t),w,t);
+                => Comparisons.CheckShiftOp(VSvc.vsrl(w,t),w,t);
 
     }
 }

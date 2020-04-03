@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies a class that classifies operations
     /// </summary>
-    public interface IOpClass : IClass
+    public interface IOpClass : IClassifier
     {
 
     }

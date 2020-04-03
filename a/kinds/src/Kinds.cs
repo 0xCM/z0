@@ -17,6 +17,11 @@ namespace Z0
                 => Unsafe.SizeOf<T>()*8;
     }
 
+    public static partial class XTend
+    {
+
+
+    }
     public static partial class XKind
     {
 

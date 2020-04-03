@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Kinds;
-    using static NumericReps;
+    using static Scalars;
 
     public static class VectorKindOps
     {

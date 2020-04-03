@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="T">The interval primal type</typeparam>
         public static Span<T> measuredPoints<T>(Interval<T> src, T width)
             where T : unmanaged
-                => NumericTypes.floating<T>() 
+                => NumericKinds.floating<T>() 
                  ? points_f<T>(src, width) 
                  : points_i<T>(src,width);
 

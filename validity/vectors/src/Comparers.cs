@@ -8,13 +8,12 @@ namespace Z0
 
     public static class SFMatchServices
     {
-        public static ISVValidatorD<T> Decomposer<T>(this ITestContext context)
+        public static ISVFDecomposer<T> Decomposer<T>(this ITestContext context)
             where T : unmanaged
              => new SVValidatorD<T>(context);
 
-        public static ISVValidatorD Decompostions(this ITestContext context)
-            => new SVValidatorD(ValidationContext.From(context));
-            
+        public static ISVFDecomposer Decomposer(this ITestContext context)
+            => new SVFDecomposer(ValidationContext.From(context));            
 
     }
 }

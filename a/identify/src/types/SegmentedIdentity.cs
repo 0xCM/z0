@@ -68,7 +68,7 @@ namespace Z0
             this.TypeWidth = typewidth;
             this.SegKind = segkind;
             this.Identifier 
-                = (TypeWidth.IsNone() && segkind == 0) 
+                = (TypeWidth == 0 && segkind == 0) 
                 ? string.Empty 
                 : $"{indicator}{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
         }

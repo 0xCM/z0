@@ -11,6 +11,14 @@ namespace Z0
 
     public static partial class Widths
     {        
+        /// <summary>
+        /// Computes the width of a parametrically-identified measurable type
+        /// </summary>
+        /// <typeparam name="T">The measurable type</typeparam>
+        [MethodImpl(Inline)]
+        public static TypeWidth measure<T>()
+            where T : struct
+                =>  (TypeWidth)(Unsafe.SizeOf<T>()*8);
         public static W1 w1 => default(W1);
 
         public static W8 w8 => default(W8);
@@ -29,29 +37,32 @@ namespace Z0
 
         public static W1024 w1024 => default(W1024);
 
-
+        /// <summary>
+        /// Computes the literal width from a parametric width
+        /// </summary>
+        /// <typeparam name="W">The parametric width</typeparam>
         [MethodImpl(Inline)]
-        public static ushort value<W>()
+        public static TypeWidth literal<W>()
             where W : unmanaged, ITypeWidth
         {
             if(typeof(W) == typeof(W8))
-                return 8;
+                return TypeWidth.W8;
             else if(typeof(W) == typeof(W16))
-                return 16;
+                return TypeWidth.W16;
             else if(typeof(W) == typeof(W32))
-                return 32;
+                return TypeWidth.W32;
             else if(typeof(W) == typeof(W64))
-                return 64;
+                return TypeWidth.W64;
             else if(typeof(W) == typeof(W128))
-                return 128;
+                return TypeWidth.W128;
             else if(typeof(W) == typeof(W256))
-                return 256;
+                return TypeWidth.W256;
             else if(typeof(W) == typeof(W512))
-                return 512;
+                return TypeWidth.W512;
             else if(typeof(W) == typeof(W1024))
-                return 1024;
+                return TypeWidth.W1024;
             else
-                throw new Exception("");
+                return 0;
         }
     }
 }

@@ -11,9 +11,8 @@ namespace Z0.Asm.Check
     using System.Reflection;
     using System.Linq;
 
-    class App : ConsoleApp<App,IAsmContext>
+    class App : ApiShell<App,IAsmContext>
     {
-
         static IPart[] Dependencies
             => new IPart[]{
                 P.AsmCore.Resolved, 
@@ -50,8 +49,7 @@ namespace Z0.Asm.Check
             var resolved = ApiComposition.Assemble(Dependencies.Where(r => r.Id != 0));
             term.print($"Assembled {resolved.Resolved.Length} parts");
 
-            var exchange = AppMsgExchange.Create(AppMsgQueue.Create());
-            return AsmContext.Create(resolved, settings, exchange, random, AsmFormatConfig.New);
+            return AsmContext.Create(resolved, settings, AppMsgExchange.New(), random, AsmFormatConfig.New);
         }
         
         public App()
@@ -75,6 +73,5 @@ namespace Z0.Asm.Check
         {
             Launch(args);
         }
-
     } 
 }

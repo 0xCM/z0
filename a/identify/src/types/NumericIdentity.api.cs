@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static PrimalIdentity Primal(Type t)
             => t.IsSystemDefined() ? 
-               (NumericTypes.test(t)
+               (NumericKinds.test(t)
                ? PrimalIdentity.Define(t.NumericKind(), t.SystemKeyword())
                : PrimalIdentity.Define(t.SystemKeyword())
                )
@@ -89,39 +89,39 @@ namespace Z0
             => GetKindset(k);
 
         static HashSet<Type> CreateTypeset(NumericKind k)
-            => GetKindset(k).Select(NumericTypes.type).ToHashSet();         
+            => GetKindset(k).Select(NumericKinds.type).ToHashSet();         
 
         static HashSet<NumericKind> CreateKindset(NumericKind k)       
         {
             var dst = new HashSet<NumericKind>();
-            if(NumericTypes.contains(k, ID.U8))
+            if(NumericKinds.contains(k, ID.U8))
                 dst.Add(NK.U8);
 
-            if(NumericTypes.contains(k, ID.I8))
+            if(NumericKinds.contains(k, ID.I8))
                 dst.Add(NK.I8);
 
-            if(NumericTypes.contains(k, ID.U16))
+            if(NumericKinds.contains(k, ID.U16))
                 dst.Add(NK.U16);
 
-            if(NumericTypes.contains(k, ID.I16))
+            if(NumericKinds.contains(k, ID.I16))
                 dst.Add(NK.I16);
 
-            if(NumericTypes.contains(k, ID.U32))
+            if(NumericKinds.contains(k, ID.U32))
                 dst.Add(NK.U32);
 
-            if(NumericTypes.contains(k, ID.I32))
+            if(NumericKinds.contains(k, ID.I32))
                 dst.Add(NK.I32);
 
-            if(NumericTypes.contains(k, ID.U64))
+            if(NumericKinds.contains(k, ID.U64))
                 dst.Add(NK.U64);
 
-            if(NumericTypes.contains(k, ID.I64))
+            if(NumericKinds.contains(k, ID.I64))
                 dst.Add(NK.I64);
 
-            if(NumericTypes.contains(k, ID.F32))
+            if(NumericKinds.contains(k, ID.F32))
                 dst.Add(NK.F32);
 
-            if(NumericTypes.contains(k, ID.F64))
+            if(NumericKinds.contains(k, ID.F64))
                 dst.Add(NK.F64);
             
             return dst;

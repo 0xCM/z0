@@ -14,6 +14,6 @@ namespace Z0
     {
         TypeWidth Width => (TypeWidth)bitsize<T>();            
 
-        NumericKind NumericKind { [MethodImpl(Inline)] get=> NumericTypes.kind<T>();}
+        NumericKind NumericKind { [MethodImpl(Inline)] get=> NumericKinds.kind<T>();}
     }
 }

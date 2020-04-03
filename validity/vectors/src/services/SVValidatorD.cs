@@ -9,65 +9,65 @@ namespace Z0
 
     using R = OpClasses;
     
-    public readonly struct SVValidatorD : ISVValidatorD
+    public readonly struct SVFDecomposer : ISVFDecomposer
     {
         ICheckNumeric Claim => ICheckNumeric.Checker;
 
         public IValidationContext Context {get;}
 
-        public SVValidatorD(IValidationContext context)
+        public SVFDecomposer(IValidationContext context)
         {
             this.Context = context;
             this.RepCount = 250;
         }
 
-        ISVValidatorD<T> Decomposer<T>()
+        ISVFDecomposer<T> Typed<T>()
             where T : unmanaged
                 => Context.Decomposer<T>();
 
         public int RepCount {get;}
 
-        public void CheckUnaryScalarMatch<F,T>(F f, W128 w, T t = default)
+        public void CheckUnaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ISVUnaryOp128DApi<T>
-                => Decomposer<T>().Validate(f, R.UnaryOp, w);
+                => Typed<T>().Validate(f, R.UnaryOp, w);
 
-        public void CheckUnaryScalarMatch<F,T>(F f, W256 w, T t = default)
+        public void CheckUnaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ISVUnaryOp256DApi<T>
-                => Decomposer<T>().Validate(f, R.UnaryOp, w);
+                => Typed<T>().Validate(f, R.UnaryOp, w);
 
-        public void CheckShiftScalarMatch<F,T>(F f, W128 w, T t = default)
+        public void CheckShiftOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ISVShiftOp128DApi<T>
                 => Context.ShiftOpMatchD(w,t).CheckMatch(f);
 
-        public void CheckShiftScalarMatch<F,T>(F f, W256 w, T t = default)
+        public void CheckShiftOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ISVShiftOp256DApi<T>
                 => Context.ShiftOpMatchD(w,t).CheckMatch(f);
 
-        public void CheckBinaryScalarMatch<F,T>(F f, W128 w, T t = default)
+        public void CheckBinaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ISVBinaryOp128DApi<T>
-                => Decomposer<T>().Validate(f, R.BinaryOp, w);
+                => Typed<T>().Validate(f, R.BinaryOp, w);
 
-        public void CheckBinaryScalarMatch<F,T>(F f, W256 w, T t = default)
+        public void CheckBinaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ISVBinaryOp256DApi<T>
-                => Decomposer<T>().Validate(f, R.BinaryOp, w);
+                => Typed<T>().Validate(f, R.BinaryOp, w);
 
-        public void CheckTernaryScalarMatch<F,T>(F f, W128 w, T t = default)
+        public void CheckTernaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ISVTernaryOp128DApi<T>
                 => Context.TernaryOpMatchD(w,t).CheckMatch(f);
 
-        public void CheckTernaryScalarMatch<F,T>(F f, W256 w, T t = default)
+        public void CheckTernaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ISVTernaryOp256DApi<T>
                 => Context.TernaryOpMatchD(w,t).CheckMatch(f);
 
-        public void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src)
+        public void CheckMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src)
             where T : unmanaged
             where F : ISVBinaryOp128DApi<T>
         {
@@ -98,7 +98,7 @@ namespace Z0
             }
         }
 
-        public void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src)
+        public void CheckMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src)
             where T : unmanaged
             where F : ISVBinaryOp256DApi<T>
         {

@@ -17,18 +17,9 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static implicit operator TypeWidth(TypeWidth<T> src)
-            => src.Class;
+            => Widths.measure<T>();
 
-        TypeWidth ITypeWidth.TypeWidth 
-        {
-            [MethodImpl(Inline)]
-            get => (TypeWidth)(Unsafe.SizeOf<T>() *8);            
-        }
+        public TypeWidth Class => Widths.measure<T>();
 
-        public TypeWidth Class 
-        {
-            [MethodImpl(Inline)]
-            get => (TypeWidth)(Unsafe.SizeOf<T>()*8);            
-        }
     }
 }

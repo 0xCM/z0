@@ -49,7 +49,7 @@ namespace Z0
         public static string TestCase<W,C>(Type host, string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{Identify.Owner(host)}{host.Name}/{Identify.Op(root, w.TypeWidth, NumericTypes.kind<C>(), generic)}";
+                => $"{Identify.Owner(host)}{host.Name}/{Identify.Op(root, w.TypeWidth, NumericKinds.kind<C>(), generic)}";
 
         const char Sep = UriDelimiters.FS;
     }

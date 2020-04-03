@@ -9,29 +9,48 @@ namespace Z0
     
     using static Seed;
 
-    public interface IVectorKind : IKind
+    /// <summary>
+    /// Characterises a vector type stratifier
+    /// </summary>
+    public interface IVectorKind : ITypeKind
     {
 
     }
 
-    public interface IVectorType : IVectorKind
+    public interface IVectorType : ITypeKind
     {
         VectorWidth Width {get;}
     }    
 
-    public interface IVectorType<V,T> : ITypeKind<T>, IVectorType
+    public interface IVectorType<W> : IVectorType
+        where W : unmanaged, ITypeWidth
+    {
+        VectorWidth IVectorType.Width => default;
+    }
+
+    public interface IVectorType<V,T> : IVectorType, ITypeKind<T>
         where V : struct
         where T : unmanaged
     {
         VectorWidth IVectorType.Width 
         { 
             [MethodImpl(Inline)]
-            get => (VectorWidth)(Unsafe.SizeOf<V>()*8); 
+            get => (VectorWidth)Widths.measure<V>();
         }
     }
 
-    public readonly struct VectorTypeKind : IVectorKind
+    public readonly struct VectorTypeKind : IVectorType
     {
+        public VectorWidth Width {get;}
+        
+        [MethodImpl(Inline)]
+        public static implicit operator VectorTypeKind(VectorWidth width)
+            => new VectorTypeKind(width);
 
+        [MethodImpl(Inline)]
+        public VectorTypeKind(VectorWidth width)
+        {
+            this.Width = width;
+        }
     }        
 }

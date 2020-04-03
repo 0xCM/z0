@@ -11,7 +11,7 @@ namespace Z0
 
 
     public abstract class OperatorComparer<W,T> : SFMatch
-        where W : struct, ITypeWidth
+        where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
         protected OperatorComparer(ITestContext context, bool xzero = false)
@@ -22,7 +22,7 @@ namespace Z0
 
         protected string CaseName(ISFuncApi f)
         {
-            var id = Identify.Op(f.Id.Name, default(W).Class, NumericTypes.kind<T>(),true);
+            var id = Identify.Op(f.Id.Name, Widths.literal<W>(), NumericKinds.kind<T>(),true);
             var owner = Identify.Owner(Context.HostType);
             var host = Context.HostType.Name;
             return $"{owner}/{host}/{id}";            

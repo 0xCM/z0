@@ -54,6 +54,6 @@ namespace Z0
             
         void vmin_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckBinaryScalarMatch(VSvc.vmin(w,t), w, t);
+                => Comparisons.CheckBinaryOp(VSvc.vmin(w,t), w, t);
     }
 }

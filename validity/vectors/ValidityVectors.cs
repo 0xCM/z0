@@ -24,6 +24,11 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    public static partial class XTend
+    {
+
+    }
+    
     public static class ValidityVectors
     {
         const char Sep = UriDelimiters.FS;

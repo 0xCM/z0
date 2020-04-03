@@ -23,7 +23,7 @@ namespace Z0
             where F : unmanaged, ITypeNat
             where D : unmanaged, ITypeNat
             where T : unmanaged
-                => new MaskSpec(m, NumericTypes.kind<T>(), (uint)TypeNats.value<F>(), (uint)TypeNats.value<D>());
+                => new MaskSpec(m, NumericKinds.kind<T>(), (uint)TypeNats.value<F>(), (uint)TypeNats.value<D>());
 
         [MethodImpl(Inline)]
         MaskSpec(MaskKind m, NumericKind k, uint f, uint d)

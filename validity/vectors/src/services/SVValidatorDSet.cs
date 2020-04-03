@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static Core;
     using static VCore;
 
     using C = OpClass;
 
-    class SVValidatorD<T> : ISVValidatorD<T>
+    class SVValidatorD<T> : ISVFDecomposer<T>
         where T : unmanaged
     {   
         public IValidationContext Context {get;}
@@ -31,12 +29,31 @@ namespace Z0
             this.Random = context.Random;
         }
 
+        /// <summary>
+        /// Computes the vector component count for a given bit-width and component type
+        /// </summary>
+        /// <param name="w">The width selector</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        static int components<W>(W w = default)
+            where W : struct, ITypeWidth
+                => ((int)default(W).TypeWidth)/bitsize<T>();
+
+        static string CaseName<W>(IValidationContext context, ISFuncApi f)
+            where W : unmanaged, ITypeWidth
+        {
+            var id = Identify.Op<W,T>(f.Id.Name);
+            var owner = Identify.Owner(context.HostType);
+            var host = context.HostType.Name;
+            return $"{owner}/{host}/{id}";            
+        }
+
         public void Validate<F>(F f, C.UnaryOp op, W128 w)
             where F : ISVUnaryOp128DApi<T>
         {            
             void run()
             {
-                var cells = vcount(w);
+                var cells = components(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -55,7 +72,7 @@ namespace Z0
 
             void run()
             {
-                var cells = vcount(w);
+                var cells = components(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -73,7 +90,7 @@ namespace Z0
         {
             void run()
             {
-                var cells = vcount(w);
+                var cells = components(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -92,7 +109,7 @@ namespace Z0
         {
             void run()
             {
-                var cells = vcount(w);
+                var cells = components(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -114,7 +131,7 @@ namespace Z0
 
             void run()
             {
-                var cells = vcount(w);
+                var cells = components(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -134,7 +151,7 @@ namespace Z0
 
             void run()
             {
-                var cells = vcount(w);
+                var cells = components(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -147,10 +164,10 @@ namespace Z0
         }
 
         void Run<W>(ISFuncApi f, Action act, W width, C.OperatorClass c)
-            where W : struct, ITypeWidth
+            where W : unmanaged, ITypeWidth
         {
             var succeeded = true;
-            var casename = CaseName<W>(f);
+            var casename = Context.CaseName(f,width, default(T));
             var clock = time.counter();
 
             clock.Start();
@@ -167,25 +184,6 @@ namespace Z0
             {
                 Context.ReportOutcome(casename,succeeded,clock);
             }
-        }
-
-        /// <summary>
-        /// Computes the vector component count for a given bit-width and component type
-        /// </summary>
-        /// <param name="w">The width selector</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        static int vcount<W>(W w = default)
-            where W : struct, ITypeWidth
-                => ((int)default(W).TypeWidth)/bitsize<T>();
-
-        string CaseName<W>(ISFuncApi f)
-            where W : struct, ITypeWidth
-        {
-            var id = Identify.Op(f.Id.Name, default(W).Class, NumericTypes.kind<T>(),true);
-            var owner = Identify.Owner(Context.HostType);
-            var host = Context.HostType.Name;
-            return $"{owner}/{host}/{id}";            
         }
     }   
 }

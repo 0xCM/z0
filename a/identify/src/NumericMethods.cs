@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool test(MethodInfo m)
-            => (m.HasVoidReturn() || NumericTypes.test(m.ReturnType)) 
-             && m.ParameterTypes().All(t => NumericTypes.test(t));
+            => (m.HasVoidReturn() || NumericKinds.test(m.ReturnType)) 
+             && m.ParameterTypes().All(t => NumericKinds.test(t));
     }
 }

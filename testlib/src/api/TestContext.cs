@@ -123,7 +123,7 @@ namespace Z0
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
-                => Identify.NumericOp(opname, NumericTypes.kind<T>());
+                => Identify.NumericOp(opname, NumericKinds.kind<T>());
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged

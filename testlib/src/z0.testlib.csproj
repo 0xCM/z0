@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Reports)" />

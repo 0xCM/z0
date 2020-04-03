@@ -8,8 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
 
+    <ProjectReference Include="$(Agency)" />
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(Contained)" />

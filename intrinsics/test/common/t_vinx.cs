@@ -19,12 +19,12 @@ namespace Z0
         protected t_vinx()
         {
             Check = new CheckExec();
-            Comparisons = Context.Decompostions();
+            Comparisons = Context.Decomposer();
         }
         
-        protected ISVValidatorD Comparisons {get;}
+        protected ISVFDecomposer Comparisons {get;}
         
-        protected ISVValidatorD<T> Validator<T>()
+        protected ISVFDecomposer<T> Validator<T>()
             where T : unmanaged
                 => Context.Decomposer<T>();
 
@@ -144,53 +144,53 @@ namespace Z0
         protected void CheckUnaryScalarMatch<F,T>(F f, W128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : ISVUnaryOp128DApi<T>
-                => Comparisons.CheckUnaryScalarMatch(f,w,t);
+                => Comparisons.CheckUnaryOp(f,w,t);
 
         protected void CheckUnaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ISVUnaryOp256DApi<T>
-                => Comparisons.CheckUnaryScalarMatch(f,w,t);
+                => Comparisons.CheckUnaryOp(f,w,t);
     
         protected void CheckShiftScalarMatch<F,T>(F f, W128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : ISVShiftOp128DApi<T>
-                => Comparisons.CheckShiftScalarMatch(f,w,t);
+                => Comparisons.CheckShiftOp(f,w,t);
 
         protected void CheckShiftScalarMatch<F,T>(F f, W256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : ISVShiftOp256DApi<T>
-                => Comparisons.CheckShiftScalarMatch(f,w,t);
+                => Comparisons.CheckShiftOp(f,w,t);
 
         protected void CheckBinaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ISVBinaryOp128DApi<T>
-                => Comparisons.CheckBinaryScalarMatch(f,w,t);
+                => Comparisons.CheckBinaryOp(f,w,t);
 
         protected void CheckBinaryScalarMatch<F,T>(F f, W256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : ISVBinaryOp256DApi<T>
-                => Comparisons.CheckBinaryScalarMatch(f,w,t);
+                => Comparisons.CheckBinaryOp(f,w,t);
 
         protected void CheckTernaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ISVTernaryOp128DApi<T>
-                => Comparisons.CheckTernaryScalarMatch(f,w,t);
+                => Comparisons.CheckTernaryOp(f,w,t);
 
         protected void CheckTernaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ISVTernaryOp256DApi<T>
-                => Comparisons.CheckTernaryScalarMatch(f,w,t);
+                => Comparisons.CheckTernaryOp(f,w,t);
 
         protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src, SystemCounter count = default)
             where T : unmanaged
             where F : ISVBinaryOp128DApi<T>
-                =>  Comparisons.CheckScalarMatch(f,src);
+                =>  Comparisons.CheckMatch(f,src);
                 
 
         protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src, SystemCounter count = default)
             where T : unmanaged
             where F : ISVBinaryOp256DApi<T>
-                =>  Comparisons.CheckScalarMatch(f,src);
+                =>  Comparisons.CheckMatch(f,src);
 
 
         protected void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null, SystemCounter count = default) 

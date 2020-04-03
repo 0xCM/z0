@@ -99,8 +99,8 @@ namespace Z0
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
-            var srcSign = NumericTypes.signed<S>() ? "i" : string.Empty;
-            var dstSign = NumericTypes.signed<T>() ? "i" : string.Empty;            
+            var srcSign = NumericKinds.signed<S>() ? "i" : string.Empty;
+            var dstSign = NumericKinds.signed<T>() ? "i" : string.Empty;            
             var opname = $"unpack_{bitsize<S>()}{srcSign}x{bitsize<T>()}{dstSign}";
 
             Span<T> dst = new T[bitsize<S>()];   

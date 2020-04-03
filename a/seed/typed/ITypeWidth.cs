@@ -19,20 +19,20 @@ namespace Z0
         TypeWidth Class => TypeWidth;
     }
 
-    public interface ITypeWidth<K> : ITypeWidth
-        where K : unmanaged, ITypeWidth
+    public interface ITypeWidth<W> : ITypeWidth
+        where W : unmanaged, ITypeWidth
     {
-
-    }
-
-    public interface ITypeWidth<K,T> : ITypeWidth<K>
-        where K : unmanaged, ITypeWidth
-        where T : unmanaged
-    {     
         TypeWidth ITypeWidth.TypeWidth 
         {
             [MethodImpl(Inline)]
-            get => (TypeWidth)(Unsafe.SizeOf<T>() *8);            
+            get => Widths.literal<W>();
         }    
+    }
+
+    public interface ITypeWidth<W,T> : ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
+        where T : unmanaged
+    {     
+    
     }
 }

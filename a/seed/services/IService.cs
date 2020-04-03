@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using System;    
 
     /// <summary>
     /// Characterizes a type that defines something useful to someone
@@ -22,21 +22,44 @@ namespace Z0
     }
 
     /// <summary>
-    /// A stateful service, by definition, extends a state (referred to througout as a context) with operational semantics. 
+    /// Charaterizes a shared execution environment that may be stateful or stateless
     /// </summary>
-    /// <typeparam name="C">The context type</typeparam>
-    public interface IService<C> : IService, IContextual<C>
-        where C : IContext
+    public interface IContext
     {
         
     }
 
     /// <summary>
-    /// Characterizes a service that requires explcit resource managment
+    /// Charaterizes a component that maintains readonly-access to encapsulated state, here and throughout referred to as a context
+    /// </summary>
+    public interface IContextual<C>
+    {
+        C Context {get;}
+    }    
+
+    /// <summary>
+    /// Charaterizes a stateful shared execution environment over a parametric context
+    /// </summary>
+    /// <typeparam name="C">The context type</typeparam>
+    public interface IContext<C> : IContext, IContextual<C>
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a service that extends a parametric context with operational semantics. 
+    /// </summary>
+    /// <typeparam name="C">The context type</typeparam>
+    public interface IService<C> : IService, IContextual<C>
+    {
+        
+    }
+
+    /// <summary>
+    /// Characterizes a stateful service that requires explcit resource managment
     /// </summary>
     /// <typeparam name="C">The context type</typeparam>
     public interface IServiceAllocation<C> : IContextual<C>, IService, IDisposable
-        where C : IContext
     {
         
     }

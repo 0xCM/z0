@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Agency)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Dynamic)" />    
     <ProjectReference Include="$(Intrinsics)" />
     <ProjectReference Include="$(Stats)" />
-    <ProjectReference Include="$(WorkflowRuntime)" />
   </ItemGroup>
 
   <ItemGroup>

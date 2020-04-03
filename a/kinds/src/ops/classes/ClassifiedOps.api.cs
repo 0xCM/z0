@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsNumericFunction(MethodInfo m)
             => m.IsFunction() 
-            && NumericTypes.test(m.ReturnType)
+            && NumericKinds.test(m.ReturnType)
             && Enumerable.All<Type>(m.ParameterTypes(), t => t.NumericKind() != NumericKind.None);
 
         /// <summary>

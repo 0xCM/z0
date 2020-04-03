@@ -80,10 +80,10 @@ namespace Z0
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity contracted<W,T>(string opname, W w = default, T t = default, bool generic = true)
+        public static OpIdentity Op<W,T>(string opname, W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => Op(opname, w.TypeWidth, NumericTypes.kind<T>(), generic);
+                => Op(opname, w.TypeWidth, NumericKinds.kind<T>(), true);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -97,7 +97,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => Identify.Op(opname, (TypeWidth)TypeNats.value<W>(), NumericTypes.kind<T>(), generic);
+                => Identify.Op(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}

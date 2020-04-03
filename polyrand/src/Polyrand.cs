@@ -493,8 +493,8 @@ namespace Z0
                 return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
             else
             {
-                var min = NumericTypes.signed<T>() ? Numeric.negate(Numeric.sar(maxval<T>(), 1)) : minval<T>();                
-                var max = NumericTypes.signed<T>() ? Numeric.sar(maxval<T>(), 1)  : maxval<T>();
+                var min = NumericKinds.signed<T>() ? Numeric.negate(Numeric.sar(maxval<T>(), 1)) : minval<T>();                
+                var max = NumericKinds.signed<T>() ? Numeric.sar(maxval<T>(), 1)  : maxval<T>();
                 return (min,max);
             }            
         }

@@ -12,64 +12,68 @@ namespace Z0
 
     public readonly struct Vec128Kind : IVectorType
     {     
-        public const int BitCount = 128;
-
         [MethodImpl(Inline)]
         public static implicit operator VectorTypeKind(Vec128Kind src)
-            =>  default;
+            => src.Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator VectorWidth(Vec128Kind src)
+            => src.Width;
 
         [MethodImpl(Inline)]
         public static implicit operator Vec128Kind(W128 src)
-            =>  default;
+            => default;
 
-        public VectorWidth Width { [MethodImpl(Inline)] get=> VectorWidth.W128;}                
+        public VectorWidth Width => VectorWidth.W128;
     }        
 
     public readonly struct Vec128Kind<T> : IVectorType<Vector128<T>,T>, IVectorType
         where T : unmanaged
     {        
-
-        public const int BitCount = 128;
-
         [MethodImpl(Inline)]
         public static implicit operator VectorTypeKind(Vec128Kind<T> src)
-            =>  default;
+            => src.Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator VectorWidth(Vec128Kind<T> src)
+            => src.Width;
 
         [MethodImpl(Inline)]
         public static implicit operator Vec128Kind(Vec128Kind<T> src)
-            =>  default;
+            => default;
 
-        public VectorWidth Width { [MethodImpl(Inline)] get=> VectorWidth.W128;}                
+        public VectorWidth Width => VectorWidth.W128;
     }        
 
     public readonly struct Vec256Kind : IVectorType
     {
-        public const int BitCount = 256;             
-
         [MethodImpl(Inline)]
         public static implicit operator VectorTypeKind(Vec256Kind src)
-            =>  default;
+            => src.Width;
 
         [MethodImpl(Inline)]
         public static implicit operator Vec256Kind(W256 src)
-            =>  default;
+            => default;
                     
-        public VectorWidth Width { [MethodImpl(Inline)] get=> VectorWidth.W256;}       
+        public VectorWidth Width => VectorWidth.W256;       
     }        
 
     public readonly struct Vec256Kind<T> : IVectorType<Vector256<T>,T>, IVectorType
         where T : unmanaged
-    {
-        public const int BitCount = 256;
-    
+    {    
+        [MethodImpl(Inline)]
+        public static implicit operator VectorWidth(Vec256Kind<T> src)
+            => src.Width;
+
         [MethodImpl(Inline)]
         public static implicit operator VectorTypeKind(Vec256Kind<T> src)
-            =>  default;
+            => src.Width;
 
         [MethodImpl(Inline)]
         public static implicit operator Vec256Kind(Vec256Kind<T> src)
-            =>  default;                    
-        public VectorWidth Width { [MethodImpl(Inline)] get=> VectorWidth.W256;}       
+            => default;                    
+
+        public VectorWidth Width => VectorWidth.W256;       
     }   
 
     public static class VecKindOps     

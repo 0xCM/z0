@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
+    using System.Reflection;
+
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
@@ -32,7 +34,7 @@ namespace Z0.Asm
         AsmContextData State {get;}
 
         IAppPaths IAppEnv.Paths 
-            => AppPathProvider.Create(Owner, Env.Current.LogDir);  
+            => AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
 
     }   
 }

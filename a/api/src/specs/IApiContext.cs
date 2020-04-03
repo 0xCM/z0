@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+        
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IApiContext : IComposedContext, IContext
+    public interface IApiContext :  IContext
     {
         /// <summary>
         /// The composition assigned to the context
@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The assemblies available via the assigned composition
         /// </summary>
-        IEnumerable<PartId> IComposedContext.Components
+        IEnumerable<PartId> Components
             => from r in Compostion.Resolved
                 select r.Id;        
 

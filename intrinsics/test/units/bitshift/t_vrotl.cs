@@ -35,11 +35,11 @@ namespace Z0
 
         void vrotl_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckShiftScalarMatch(VSvc.vrotl(w,t), w,t);
+                => Comparisons.CheckShiftOp(VSvc.vrotl(w,t), w,t);
             
         void vrotl_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckShiftScalarMatch(VSvc.vrotl(w,t), w,t);
+                => Comparisons.CheckShiftOp(VSvc.vrotl(w,t), w,t);
 
     }
 }

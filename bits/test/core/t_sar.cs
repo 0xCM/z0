@@ -83,7 +83,7 @@ namespace Z0
             where T : unmanaged
         {
 
-            var signed = NumericTypes.signed<T>();
+            var signed = NumericKinds.signed<T>();
             BitSize bitsize = bitsize<T>();
             var bs10 = BitString.parse("1" + Arrays.replicate('0', bitsize - 1).Concat());
             var x10 = bs10.TakeScalar<T>();

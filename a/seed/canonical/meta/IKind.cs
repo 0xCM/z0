@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Characterizes metaclass stratifiers
+    /// Characterizes a metaclass stratifier
     /// </summary>
     public interface IKind : IClassifier
     {

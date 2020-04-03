@@ -27,7 +27,7 @@ namespace Z0
 
         public static TypeWidth NumericWidth(this Type t)
         {
-            var k = NumericTypes.kind(t);
+            var k = NumericKinds.kind(t);
             if(k != 0)
                 return (TypeWidth)(ushort)k;
             else

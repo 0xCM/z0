@@ -5,38 +5,21 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
-    partial class XTend
+    using static Seed;
+
+    public static partial class XTend
     {
-
         /// <summary>
-        /// Searches an assembly for api host types
+        /// Defines a query service over a catalog
         /// </summary>
-        /// <param name="src">The assembly to search</param>
-        public static IEnumerable<Type> ApiHostTypes(this Assembly src)
-            => Api.HostTypes(src); 
-
-        /// <summary>
-        /// Instantiates the api hosts found in a specified assembly
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        public static IEnumerable<ApiHost> ApiHosts(this Assembly src)
-            => Api.Hosts(src); 
-
-        public static OpIndex<M> ToOpIndex<M>(this IEnumerable<M> src)
-            where M : struct, IApiMember
-                => OpIndex.From(src.Select(h => (h.Id, h)));
-
-        public static OpIndex<M> ToOpIndex<M>(this ReadOnlySpan<M> src)
-            where M : struct, IApiMember
-                => OpIndex.From(src.MapArray(h => (h.Id, h)));
-
-        public static OpIndex<M> ToOpIndex<M>(this Span<M> src)
-            where M : struct, IApiMember            
-               => src.ReadOnly().ToOpIndex();
-
+        /// <param name="src">The source catalog</param>
+        [MethodImpl(Inline)]
+        public static ApiQuery Query(this IApiCatalog src)
+            => ApiQuery.Over(src);
     }
 }

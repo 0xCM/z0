@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static variant FromGeneric<T>(T src)
             where T : unmanaged
-                => new variant(Store((ulong)Cast.to<T,ulong>(src), NumericTypes.kind<T>(), (uint)bitsize<T>()));
+                => new variant(Store((ulong)Cast.to<T,ulong>(src), NumericKinds.kind<T>(), (uint)bitsize<T>()));
 
         [MethodImpl(Inline)]
         public static variant FromScalar(sbyte src)

@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber Define<T>(T src)
             where T : unmanaged
-                => new BoxedNumber(src, NumericTypes.kind<T>());
+                => new BoxedNumber(src, NumericKinds.kind<T>());
 
         [MethodImpl(Inline)]
         public static BoxedNumber Define(object src, NumericKind kind)
@@ -56,13 +56,13 @@ namespace Z0
         }
 
         public bool IsSignedInt
-            => NumericTypes.signed(Boxed);
+            => NumericKinds.signed(Boxed);
 
         public bool IsUnsignedInt
-            => NumericTypes.unsigned(Boxed);
+            => NumericKinds.unsigned(Boxed);
 
         public bool IsFloat
-            => NumericTypes.floating(Boxed);
+            => NumericKinds.floating(Boxed);
 
         [MethodImpl(Inline)]
         public T Unbox<T>()

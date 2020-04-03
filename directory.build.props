@@ -26,7 +26,11 @@
     <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup>  
+    <Parts>$(TopDir)parts/z0.parts.csproj</Parts>
+  </PropertyGroup>
+
+  <PropertyGroup>  
     <AsmTypes>$(TopDir)asm/types/z0.asm.types.csproj</AsmTypes>
     <AsmModels>$(TopDir)asm/models/z0.asm.models.csproj</AsmModels>
     <AsmCore>$(TopDir)asm/core/z0.asm.core.csproj</AsmCore>
@@ -54,7 +58,6 @@
     <VData>$(VTop)vdata/z0.vdata.csproj</VData>
     <Vectorized>$(VTop)vcore/z0.vcore.csproj</Vectorized>  
     <VSvc>$(VTop)vsvc/z0.vsvc.csproj</VSvc>
-
     <Intrinsics>$(TopDir)intrinsics/src/z0.intrinsics.csproj</Intrinsics>
   </PropertyGroup>
   
@@ -82,13 +85,11 @@
     <ValidityCore>$(TopDir)validity/core/z0.validity.core.csproj</ValidityCore>
     <ValidityVectors>$(TopDir)validity/vectors/z0.validity.vectors.csproj</ValidityVectors>
     <VBits>$(TopDir)bits/vbits/z0.bits.vbits.csproj</VBits>
-    <WorkflowRuntime>$(TopDir)workflow/runtime/z0.workflow.runtime.csproj</WorkflowRuntime>
     <Feeders>$(TopDir)a/</Feeders>
     <Z>$(TopDir)a/z/z0.z.csproj</Z>
   </PropertyGroup>
 
   <Import Project="$(Feeders)export.props"/>
 
+
 </Project>
-
-

@@ -21,7 +21,7 @@ namespace Z0
     public interface ISImmResolverApi<T> : ISImmResolverApi
         where T : unmanaged
     {
-        NumericKind ISImmResolverApi.ImmKind => NumericTypes.kind<T>();
+        NumericKind ISImmResolverApi.ImmKind => NumericKinds.kind<T>();
     }
 
     [SuppressUnmanagedCodeSecurity]

@@ -25,7 +25,7 @@ namespace Z0.Asm
                 ;        
         public t_asm()
         {
-            Context =  AsmContext.Create(ApiComposition.Assemble(DefaultResolutions), AppSettings.Empty, AppMsgExchange.Create(Queue), Random, AsmFormatConfig.New);
+            Context =  AsmContext.Create(ApiComposition.Assemble(DefaultResolutions), AppSettings.Empty, AppMsgExchange.From(Queue), Random, AsmFormatConfig.New);
         }
     }
 }

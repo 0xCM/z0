@@ -12,44 +12,39 @@ namespace Z0
         
     }
 
+    /// <summary>
+    /// Metaclassification
+    /// </summary>
     public interface IClassifier : IMetaclass
     {
         
     }
 
     /// <summary>
-    /// Metaclassification
-    /// </summary>
-    public interface IClass :  IClassifier
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes an F-bound polymorphic class
+    /// Characterizes an F-bound polymorphic classifier reification
     /// </summary>
     /// <typeparam name="T">The parametric type</typeparam>    
-    public interface IClassF<F> : IClass
+    public interface IClassF<F> : IClassifier
         where F : IClassF<F>, new()
     {
 
     }
 
     /// <summary>
-    /// Characterizes a parametric class
+    /// Characterizes a T-parametric classifier
     /// </summary>
     /// <typeparam name="T">The parametric type</typeparam>    
-    public interface IClassT<T> : IClass
+    public interface IClassT<T> : IClassifier
     {
 
     }
 
     /// <summary>
-    /// Characterizes a F-bound polymorphic and T-parametric class
+    /// Characterizes an F-bound polymorphic T-parametric classifier reification
     /// </summary>
     /// <typeparam name="T">The parametric type</typeparam>    
-    public interface IClassT<F,T> : IClassF<F>, IClassT<T>
-        where F : IClassT<F,T>, new()
+    public interface IClass<F,T> : IClassF<F>, IClassT<T>
+        where F : IClass<F,T>, new()
     {
 
     }

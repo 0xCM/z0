@@ -17,10 +17,10 @@ namespace Z0
 
         public event Action<AppMsg> Next;
 
-        public static IAppMsgExchange Create(IAppMsgQueue dst)
+        public static IAppMsgExchange From(IAppMsgQueue dst)
             => new AppMsgExchange(dst);          
 
-        public static IAppMsgExchange Create()
+        public static IAppMsgExchange New()
             => new AppMsgExchange();
 
         AppMsgExchange(IAppMsgQueue dst)

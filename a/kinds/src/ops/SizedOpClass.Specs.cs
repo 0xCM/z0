@@ -21,7 +21,7 @@ namespace Z0
     public interface ISizedOpClass<W> : ISizedOpClass
         where W : unmanaged, ITypeWidth
     {
-        TypeWidth ISizedOpClass.Width => default(W).Class;
+        TypeWidth ISizedOpClass.Width => Widths.literal<W>();
     }
     
     /// <summary>

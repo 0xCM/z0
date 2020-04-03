@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <Seed>$(Feeders)seed/z0.seed.csproj</Seed>
+    <Agency>$(Feeders)agency/z0.agency.csproj</Agency>
     <Api>$(Feeders)api/z0.api.csproj</Api>
-    <Apps>$(Feeders)apps/z0.apps.csproj</Apps>
     <Canonical>$(Feeders)canonical/z0.canonical.csproj</Canonical>
     <Cast>$(Feeders)cast/z0.cast.csproj</Cast>
     <Checks>$(Feeders)checks/z0.checks.csproj</Checks>
@@ -12,6 +12,7 @@
     <Custom>$(Feeders)custom/z0.custom.csproj</Custom>
     <Reports>$(Feeders)reports/z0.reports.csproj</Reports>
     <Fixed>$(Feeders)fixed/z0.fixed.csproj</Fixed>
+
 
     <Flow>$(Feeders)flow/z0.flow.csproj</Flow>
     <WorkflowCore>$(Feeders)flow/z0.flow.csproj</WorkflowCore>

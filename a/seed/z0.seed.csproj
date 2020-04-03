@@ -5,5 +5,11 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>    
+
+    <ProjectReference Include="$(Parts)" />
+    <!-- <Compile Include="$(TopDir).parts/Part.cs" /> -->
+
+  </ItemGroup>
 
 </Project>
