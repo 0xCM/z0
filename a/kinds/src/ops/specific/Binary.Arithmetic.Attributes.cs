@@ -5,33 +5,31 @@
 namespace Z0
 {
     using System;
-    
-    using static BinaryArithmeticKind;
-    using BA = BinaryArithmeticKind;
-    
+        
+    using K = BinaryArithmeticKind;    
     using A = OpKindAttribute;
 
-    public sealed class AddAttribute : A { public AddAttribute() : base(Add) {} }
+    public sealed class AddAttribute : A { public AddAttribute() : base(K.Add) {} }
 
-    public sealed class AddSAttribute : A { public AddSAttribute() : base(AddS) {} }
+    public sealed class AddSAttribute : A { public AddSAttribute() : base(K.AddS) {} }
 
-    public sealed class AddHAttribute : A { public AddHAttribute() : base(AddH) {} }
+    public sealed class AddHAttribute : A { public AddHAttribute() : base(K.AddH) {} }
 
-    public sealed class AddHSAttribute : A { public AddHSAttribute() : base(AddHS) {} }
+    public sealed class AddHSAttribute : A { public AddHSAttribute() : base(K.AddHS) {} }
 
-    public sealed class SubAttribute : A { public SubAttribute() : base(Sub) {} }
+    public sealed class SubAttribute : A { public SubAttribute() : base(K.Sub) {} }
 
-    public sealed class SubHAttribute : A { public SubHAttribute() : base(SubH) {} }
+    public sealed class SubHAttribute : A { public SubHAttribute() : base(K.SubH) {} }
 
-    public sealed class MulAttribute : A { public MulAttribute() : base(Mul) {} }
+    public sealed class MulAttribute : A { public MulAttribute() : base(K.Mul) {} }
 
-    public sealed class DivAttribute : A { public DivAttribute() : base(Div) {} }
+    public sealed class DivAttribute : A { public DivAttribute() : base(K.Div) {} }
         
-    public sealed class ModAttribute : A { public ModAttribute() : base(BA.Mod) {} }
+    public sealed class ModAttribute : A { public ModAttribute() : base(K.Mod) {} }
 
-    public sealed class ClampAttribute : A { public ClampAttribute() : base(Clamp) {} }
+    public sealed class ClampAttribute : A { public ClampAttribute() : base(K.Clamp) {} }
 
-    public sealed class DistanceAttribute : A { public DistanceAttribute() : base(Distance) {} }
+    public sealed class DistanceAttribute : A { public DistanceAttribute() : base(K.Distance) {} }
 
-    public sealed class DotAttribute : A { public DotAttribute() : base(Dot) {} }
+    public sealed class DotAttribute : A { public DotAttribute() : base(K.Dot) {} }
 }

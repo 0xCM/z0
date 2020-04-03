@@ -6,62 +6,71 @@ namespace Z0
 {
     using System;
 
-    using C = OpClass;
+    using K = OpClass;
 
     partial class OpClasses
     {
-        public static C.Emitter Emitter 
+        public static K.Emitter Emitter 
             => default;
 
-        public static C.UnaryFunc UnaryFunc 
+        public static K.UnaryFunc UnaryFunc 
             => default;
 
-        public static C.BinaryFunc BinaryFunc 
+        public static K.BinaryFunc BinaryFunc 
             => default;
 
-        public static C.TernaryFunc TernaryFunc 
+        public static K.TernaryFunc TernaryFunc 
             => default;
             
-        public static C.Emitter func(A0 rep) 
+        public static K.Emitter func(A0 rep) 
             => default;
 
-        public static C.UnaryFunc func(A1 rep) 
+        public static K.UnaryFunc func(A1 rep) 
             => default;
 
-        public static C.BinaryFunc func(A2 rep) 
+        public static K.BinaryFunc func(A2 rep) 
             => default;
 
-        public static C.TernaryFunc func(A3 rep) 
+        public static K.TernaryFunc func(A3 rep) 
             => default;
 
-        public static C.Emitter<T> emitter<T>(T t = default) 
+        public static K.Emitter<T> emitter<T>(T t = default) 
             where T : unmanaged => default;
 
-        public static C.UnaryFunc<T> unaryfunc<T>(T t = default) 
+        public static K.UnaryFunc<T> func<T>(A1<T> rep) 
             where T : unmanaged =>  default;
 
-        public static C.BinaryFunc<T> binaryfunc<T>(T t = default) 
+        public static K.BinaryFunc<T> func<T>(A2<T> rep) 
             where T : unmanaged => default;
 
-        public static C.TernaryFunc<T> ternaryfunc<T>(T t = default) 
+        public static K.TernaryFunc<T> func<T>(A3<T> rep) 
             where T : unmanaged => default;
 
-        public static C.UnaryFunc<T> func<T>(A1<T> rep) 
+        public static K.UnaryFunc<T> func<T>(A1 rep) 
             where T : unmanaged =>  default;
 
-        public static C.BinaryFunc<T> func<T>(A2<T> rep) 
+        public static K.BinaryFunc<T> func<T>(A2 rep) 
             where T : unmanaged => default;
 
-        public static C.TernaryFunc<T> func<T>(A3<T> rep) 
+        public static K.TernaryFunc<T> func<T>(A3 rep) 
             where T : unmanaged => default;
 
-        public static C.UnaryFunc<T> func<T>(A1 rep) 
-            where T : unmanaged =>  default;
+        public static K.UnaryFunc<A,R> func<A,R>(A a = default, R r = default) 
+            => default;
 
-        public static C.BinaryFunc<T> func<T>(A2 rep) 
-            where T : unmanaged => default;
+        public static K.BinaryFunc<A,B,R> func<A,B,R>(A a = default, B b = default, R r = default) 
+            => default;
 
-        public static C.TernaryFunc<T> func<T>(A3 rep) 
-            where T : unmanaged => default;
+        public static K.TernaryFunc<A,B,C,R> func<A,B,C,R>(A a = default, B b = default, C c = default, R r = default) 
+            => default;
+
+        public static K.UnaryFunc<A,R> As<A,R>(this K.UnaryFunc f, 
+            A a = default, R r = default) => default;
+
+        public static K.BinaryFunc<A,B,R> As<A,B,R>(this K.BinaryFunc f, 
+            A a = default, B b = default, R r = default)  => default;
+
+        public static K.TernaryFunc<A,B,C,R> As<A,B,C,R>(this K.TernaryFunc f, 
+            A a = default, B b = default, C c = default,  R r = default)  => default;
     }
 }

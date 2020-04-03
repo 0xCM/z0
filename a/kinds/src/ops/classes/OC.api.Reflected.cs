@@ -61,7 +61,6 @@ namespace Z0
         public static PredicateClass ClassifyPredicate(this MethodInfo src)
             => ClassifiedOps.ClassifyPredicate(src);
 
-
         /// <summary>
         /// Queries the stream for methods that are functions
         /// </summary>

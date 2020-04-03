@@ -6,63 +6,78 @@ namespace Z0
 {
     using System;
 
-    using C = FunctionClass;
+    using K = FunctionClass;
 
     public static partial class OpClass
     {
-        public readonly struct FunctionClass : IOpClass<C> 
+        public readonly struct FunctionClass : IOpClass<K> 
         { 
-            public C Class => C.Function; 
+            public K Class => K.Function; 
         }
 
-        public readonly struct Emitter : IOpClass<C> 
+        public readonly struct Emitter : IOpClass<K> 
         { 
-            public C Class => C.Emitter; 
+            public K Class => K.Emitter; 
         }
 
-        public readonly struct UnaryFunc : IOpClass<C> 
+        public readonly struct UnaryFunc : IOpClass<K> 
         { 
-            public C Class => C.UnaryFunc; 
+            public K Class => K.UnaryFunc; 
         }
 
-        public readonly struct BinaryFunc : IOpClass<C> 
+        public readonly struct BinaryFunc : IOpClass<K> 
         { 
-            public C Class => C.BinaryFunc; 
+            public K Class => K.BinaryFunc; 
         }
 
-        public readonly struct TernaryFunc : IOpClass<C> 
+        public readonly struct TernaryFunc : IOpClass<K> 
         { 
-            public C Class => C.TernaryFunc; 
+            public K Class => K.TernaryFunc; 
         }
      
-        public readonly struct FunctionClass<T> : IOpClass<C,T> 
+        public readonly struct FunctionClass<T> : IOpClass<K,T> 
             where T : unmanaged 
         { 
-            public C Class => C.Function; 
+            public K Class => K.Function; 
         }
 
-        public readonly struct Emitter<T> : IOpClass<C,T> 
+        public readonly struct Emitter<T> : IOpClass<K,T> 
             where T : unmanaged 
         { 
-            public C Class => C.Emitter; 
+            public K Class => K.Emitter; 
         }
 
-        public readonly struct UnaryFunc<T> : IOpClass<C,T> 
+        public readonly struct UnaryFunc<T> : IOpClass<K,T> 
             where T : unmanaged 
         { 
-            public C Class => C.UnaryFunc; 
+            public K Class => K.UnaryFunc; 
+        }
+        
+        public readonly struct BinaryFunc<T> : IOpClass<K,T> 
+            where T : unmanaged 
+        { 
+            public K Class => K.BinaryFunc; 
         }
 
-        public readonly struct BinaryFunc<T> : IOpClass<C,T> 
+        public readonly struct TernaryFunc<T> : IOpClass<K,T> 
             where T : unmanaged 
         { 
-            public C Class => C.BinaryFunc; 
+            public K Class => K.TernaryFunc; 
         }
 
-        public readonly struct TernaryFunc<T> : IOpClass<C,T> 
-            where T : unmanaged 
+        public readonly struct UnaryFunc<A,R> : IOpClassF<UnaryFunc<A,R>, K>
         { 
-            public C Class => C.TernaryFunc; 
+            public K Class => K.UnaryFunc;             
+        }
+
+        public readonly struct BinaryFunc<A,B,R> : IOpClassF<BinaryFunc<A,B,R>, K>
+        { 
+            public K Class => K.BinaryFunc;             
+        }
+
+        public readonly struct TernaryFunc<A,B,C,R> : IOpClassF<TernaryFunc<A,B,C,R>, K>
+        { 
+            public K Class => K.TernaryFunc;                         
         }
     }    
 }

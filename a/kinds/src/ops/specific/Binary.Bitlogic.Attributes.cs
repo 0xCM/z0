@@ -5,42 +5,39 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
-    using static BinaryBitLogicKind;
-
     using A = OpKindAttribute;
+    using K = BinaryBitLogicKind;
 
-    public sealed class AndAttribute : A { public AndAttribute() : base(And) {} }
+    public sealed class AndAttribute : A { public AndAttribute() : base(K.And) {} }
 
-    public sealed class CNonImplAttribute : A { public CNonImplAttribute() : base(CNonImpl) {} }
+    public sealed class CNonImplAttribute : A { public CNonImplAttribute() : base(K.CNonImpl) {} }
 
-    public sealed class LProjectAttribute : A { public LProjectAttribute() : base(LProject) {} }
+    public sealed class LProjectAttribute : A { public LProjectAttribute() : base(K.LProject) {} }
 
-    public sealed class NonImplAttribute : A { public NonImplAttribute() : base(NonImpl) {} }
+    public sealed class NonImplAttribute : A { public NonImplAttribute() : base(K.NonImpl) {} }
 
-    public sealed class RProjectAttribute : A { public RProjectAttribute() : base(RProject) {} }
+    public sealed class RProjectAttribute : A { public RProjectAttribute() : base(K.RProject) {} }
 
-    public sealed class OrAttribute : A { public OrAttribute() : base(Or) {} }
+    public sealed class OrAttribute : A { public OrAttribute() : base(K.Or) {} }
 
-    public sealed class XorAttribute : A { public XorAttribute() : base(Xor) {} }
+    public sealed class XorAttribute : A { public XorAttribute() : base(K.Xor) {} }
 
-    public sealed class NorAttribute : A { public NorAttribute() : base(Nor) {} }
+    public sealed class NorAttribute : A { public NorAttribute() : base(K.Nor) {} }
 
-    public sealed class XnorAttribute : A { public XnorAttribute() : base(Xnor) {} }
+    public sealed class XnorAttribute : A { public XnorAttribute() : base(K.Xnor) {} }
 
-    public sealed class RNotAttribute : A { public RNotAttribute() : base(RNot) {} }
+    public sealed class RNotAttribute : A { public RNotAttribute() : base(K.RNot) {} }
 
-    public sealed class CImplAttribute : A { public CImplAttribute() : base(CImpl) {} }
+    public sealed class CImplAttribute : A { public CImplAttribute() : base(K.CImpl) {} }
 
-    public sealed class NandAttribute : A { public NandAttribute() : base(Nand) {} }
+    public sealed class NandAttribute : A { public NandAttribute() : base(K.Nand) {} }
 
-    public sealed class TrueAttribute : A { public TrueAttribute() : base(True) {} }
+    public sealed class TrueAttribute : A { public TrueAttribute() : base(K.True) {} }
 
-    public sealed class ImplAttribute : A { public ImplAttribute() : base(Impl) {} }
+    public sealed class ImplAttribute : A { public ImplAttribute() : base(K.Impl) {} }
 
-    public sealed class LNotAttribute : A { public LNotAttribute() : base(LNot) {} }
+    public sealed class LNotAttribute : A { public LNotAttribute() : base(K.LNot) {} }
 
-    public sealed class FalseAttribute : A { public FalseAttribute() : base(False) {} }
-
+    public sealed class FalseAttribute : A { public FalseAttribute() : base(K.False) {} }
 }

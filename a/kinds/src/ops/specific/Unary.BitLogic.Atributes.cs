@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    
-    using static UnaryBitLogicKind;
+    using System;    
 
     using A = OpKindAttribute;
+    using K = UnaryBitLogicKind;
 
-    public sealed class NotAttribute : A { public NotAttribute() : base(Not) {} }
-
+    public sealed class NotAttribute : A { public NotAttribute() : base(K.Not) {} }
 }

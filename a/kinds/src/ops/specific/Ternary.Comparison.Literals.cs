@@ -7,9 +7,6 @@ namespace Z0
     using System;
     
     using Id = OpKindId;
-    using A = OpKindAttribute;
-
-    using static TernaryComparisonKind;
 
     /// <summary>
     /// Identifies binary comparison predicates
@@ -22,8 +19,4 @@ namespace Z0
 
         Within = Id.Within,
     }
-
-    public sealed class BetweenAttribute : A { public BetweenAttribute() : base(Between) {} }
-
-    public sealed class WithinAttribute : A { public WithinAttribute() : base(Within) {} }
 }

@@ -82,20 +82,21 @@ namespace Z0
         public static BinaryOp256 Emit(IBufferToken dst, C.BinaryOp op, W256 w, in ApiCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
+
         [MethodImpl(Inline)]
-        static BinaryOp8 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, N8 w)
+        static BinaryOp8 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W8 w)
             => (BinaryOp8)Emit(buffer, id, op, typeof(BinaryOp8), typeof(Fixed8));
 
         [MethodImpl(Inline)]
-        static BinaryOp16 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, N16 w)
+        static BinaryOp16 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W16 w)
             => (BinaryOp16)Emit(buffer, id, op, typeof(BinaryOp16), typeof(Fixed16));
 
         [MethodImpl(Inline)]
-        static BinaryOp32 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, N32 w)
+        static BinaryOp32 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W32 w)
             => (BinaryOp32)Emit(buffer, id, op, typeof(BinaryOp32), typeof(Fixed32));
 
         [MethodImpl(Inline)]
-        static BinaryOp64 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, N64 w)
+        static BinaryOp64 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W64 w)
             => (BinaryOp64)Emit(buffer, id, op, typeof(BinaryOp64), typeof(Fixed64));
 
         [MethodImpl(Inline)]

@@ -6,29 +6,28 @@ namespace Z0
 {
     using System;
     
-    using static BinaryComparisonKind;
-
     using A = OpKindAttribute;
+    using K = BinaryComparisonKind;
 
-    public sealed class EqAttribute : A { public EqAttribute() : base(Eq) {} }
+    public sealed class EqAttribute : A { public EqAttribute() : base(K.Eq) {} }
 
-    public sealed class EqzAttribute : A { public EqzAttribute() : base(Eqz) {} }
+    public sealed class EqzAttribute : A { public EqzAttribute() : base(K.Eqz) {} }
 
-    public sealed class NeqAttribute : A { public NeqAttribute() : base(Neq) {} }
+    public sealed class NeqAttribute : A { public NeqAttribute() : base(K.Neq) {} }
 
-    public sealed class LtAttribute : A { public LtAttribute() : base(Lt) {} }
+    public sealed class LtAttribute : A { public LtAttribute() : base(K.Lt) {} }
 
-    public sealed class LtzAttribute : A { public LtzAttribute() : base(Ltz) {} }
+    public sealed class LtzAttribute : A { public LtzAttribute() : base(K.Ltz) {} }
 
-    public sealed class LtEqAttribute : A { public LtEqAttribute() : base(LtEq) {} }
+    public sealed class LtEqAttribute : A { public LtEqAttribute() : base(K.LtEq) {} }
 
-    public sealed class GtAttribute : A { public GtAttribute() : base(Gt) {} }
+    public sealed class GtAttribute : A { public GtAttribute() : base(K.Gt) {} }
 
-    public sealed class GtzAttribute : A { public GtzAttribute() : base(Gtz) {} }
+    public sealed class GtzAttribute : A { public GtzAttribute() : base(K.Gtz) {} }
 
-    public sealed class GtEqAttribute : A { public GtEqAttribute() : base(GtEq) {} }
+    public sealed class GtEqAttribute : A { public GtEqAttribute() : base(K.GtEq) {} }
 
-    public sealed class MaxAttribute : A { public MaxAttribute() : base(Max) {} }
+    public sealed class MaxAttribute : A { public MaxAttribute() : base(K.Max) {} }
 
-    public sealed class MinAttribute : A { public MinAttribute() : base(Min) {} }
+    public sealed class MinAttribute : A { public MinAttribute() : base(K.Min) {} }
 }

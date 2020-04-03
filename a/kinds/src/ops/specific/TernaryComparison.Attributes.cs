@@ -7,6 +7,9 @@ namespace Z0
     using System;
     
     using A = OpKindAttribute;
+    using K = TernaryComparisonKind;
 
-    public sealed class SelectAttribute : A { public SelectAttribute() : base(OpKindId.Select) {} } 
+    public sealed class BetweenAttribute : A { public BetweenAttribute() : base(K.Between) {} }
+
+    public sealed class WithinAttribute : A { public WithinAttribute() : base(K.Within) {} }
 }

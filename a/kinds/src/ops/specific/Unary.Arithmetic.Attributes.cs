@@ -5,21 +5,19 @@
 namespace Z0
 {
     using System;
-    
-    using static UnaryArithmeticKind;
-    
+        
     using A = OpKindAttribute;
+    using K = UnaryArithmeticKind;
 
-    public sealed class IncAttribute : A { public IncAttribute() : base(Inc) {} }
+    public sealed class IncAttribute : A { public IncAttribute() : base(K.Inc) {} }
 
-    public sealed class DecAttribute : A { public DecAttribute() : base(Dec) {} }
+    public sealed class DecAttribute : A { public DecAttribute() : base(K.Dec) {} }
 
-    public sealed class NegateAttribute : A { public NegateAttribute() : base(Negate) {} }
+    public sealed class NegateAttribute : A { public NegateAttribute() : base(K.Negate) {} }
 
-    public sealed class AbsAttribute : A { public AbsAttribute() : base(Abs) {} }
+    public sealed class AbsAttribute : A { public AbsAttribute() : base(K.Abs) {} }
 
-    public sealed class SquareAttribute : A { public SquareAttribute() : base(Square) {} }
+    public sealed class SquareAttribute : A { public SquareAttribute() : base(K.Square) {} }
 
-    public sealed class SqrtAttribute : A { public SqrtAttribute() : base(Sqrt) {} }
-
+    public sealed class SqrtAttribute : A { public SqrtAttribute() : base(K.Sqrt) {} }
 }

@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
     
-    using static UnaryComparisonKind;
-
     using A = OpKindAttribute;
+    using K = UnaryComparisonKind;
 
-    public sealed class NegativeAttribute : A { public NegativeAttribute() : base(Negative) {} }
+    public sealed class NegativeAttribute : A { public NegativeAttribute() : base(K.Negative) {} }
 
-    public sealed class PositiveAttribute : A { public PositiveAttribute() : base(Positive) {} }
+    public sealed class PositiveAttribute : A { public PositiveAttribute() : base(K.Positive) {} }
 
-    public sealed class DividesAttribute : A { public DividesAttribute() : base(Divides) {} }
+    public sealed class DividesAttribute : A { public DividesAttribute() : base(K.Divides) {} }
 
-    public sealed class NonzAttribute : A { public NonzAttribute() : base(Nonz) {} }
+    public sealed class NonzAttribute : A { public NonzAttribute() : base(K.Nonz) {} }
 }

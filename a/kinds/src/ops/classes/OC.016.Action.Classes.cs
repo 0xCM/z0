@@ -6,57 +6,57 @@ namespace Z0
 {
     using System;
     
-    using C = ActionClass;
+    using K = ActionClass;
 
     public static partial class OpClass
     {
-        public readonly struct ActionClass : IOpClass<C> 
+        public readonly struct ActionClass : IOpClass<K> 
         { 
-            public C Class => C.Action; 
+            public K Class => K.Action; 
         }
 
-        public readonly struct Receiver : IOpClass<C> 
+        public readonly struct Receiver : IOpClass<K> 
         { 
-            public C Class => C.Receiver; 
+            public K Class => K.Receiver; 
         }
 
-        public readonly struct UnaryAction : IOpClass<C> 
+        public readonly struct UnaryAction : IOpClass<K> 
         { 
-            public C Class => C.UnaryAction; 
+            public K Class => K.UnaryAction; 
         }
 
-        public readonly struct BinaryAction : IOpClass<C> 
+        public readonly struct BinaryAction : IOpClass<K> 
         {
-             public C Class => C.BinaryAction; 
+             public K Class => K.BinaryAction; 
         }
 
-        public readonly struct TernaryAction : IOpClass<C> 
+        public readonly struct TernaryAction : IOpClass<K> 
         { 
-            public C Class => C.TernaryAction; 
+            public K Class => K.TernaryAction; 
         }
 
-        public readonly struct Receiver<T> : IOpClassF<Receiver<T>,C,T> 
+        public readonly struct Receiver<T> : IOpClassF<Receiver<T>,K,T> 
             where T : unmanaged 
         {
-             public C Class => C.Receiver; 
+             public K Class => K.Receiver; 
         }
 
-        public readonly struct UnaryAction<T> : IOpClassF<UnaryAction<T>,C,T> 
+        public readonly struct UnaryAction<T> : IOpClassF<UnaryAction<T>,K,T> 
             where T : unmanaged 
         { 
-            public C Class => C.UnaryAction; 
+            public K Class => K.UnaryAction; 
         }
 
-        public readonly struct BinaryAction<T> : IOpClassF<BinaryAction<T>, C,T> 
+        public readonly struct BinaryAction<T> : IOpClassF<BinaryAction<T>, K,T> 
             where T : unmanaged 
         {
-            public C Class => C.BinaryAction; 
+            public K Class => K.BinaryAction; 
         }
 
-        public readonly struct TernaryAction<T> : IOpClass<C,T>
+        public readonly struct TernaryAction<T> : IOpClass<K,T>
              where T : unmanaged 
         {
-            public C Class => C.TernaryAction; 
+            public K Class => K.TernaryAction; 
         }
     }
 }

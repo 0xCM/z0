@@ -22,18 +22,6 @@ namespace Z0
         public static C.TernaryOp TernaryOp 
             => default;
 
-        public static C.OperatorClass oper8or() 
-            => default;
-
-        public static C.UnaryOp unaryop() 
-            => default;
-
-        public static C.BinaryOp binaryop() 
-            => default;
-
-        public static C.TernaryOp ternaryop() 
-            => default;
-
         public static C.OperatorClass<T> oper8or<T>(T t = default) 
             where T : unmanaged => default;
 
@@ -57,5 +45,18 @@ namespace Z0
 
         public static C.TernaryOp<T> As<T>(this C.TernaryOp src) 
             where T : unmanaged => default;
+
+        public static C.OperatorClass<W> Fixed<W>(this C.OperatorClass src) 
+            where W : unmanaged, ITypeWidth => default;
+
+        public static C.UnaryOp<W> Fixed<W>(this C.UnaryOp src)
+            where W : unmanaged, ITypeWidth => default;
+
+        public static C.BinaryOp<W> Fixed<W>(this C.BinaryOp src)
+            where W : unmanaged, ITypeWidth => default;
+
+        public static C.TernaryOp<W> Fixed<W>(this C.TernaryOp src)
+            where W : unmanaged, ITypeWidth => default;
+
     }
 }
