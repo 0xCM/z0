@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using FT = FixedTypeKind;
+    using FT = FixedKind;
 
     [Flags]
     public enum FixedOperationKind : uint

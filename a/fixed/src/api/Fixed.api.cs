@@ -15,8 +15,6 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity, ApiHost("api")]
     public static partial class Fixed
     {
-        //const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
-
         [MethodImpl(Inline)]
         internal static int bitsize<T>()
             => Unsafe.SizeOf<T>()*8;
