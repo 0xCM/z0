@@ -39,7 +39,7 @@ namespace Z0
                  TC.Single => NC.Float32,
 
                 TC.Double => NC.Float64,
-                 _ => src.Name == "bit"  ? NC.Bit : NC.None
+                 _ => src == typeof(bit)  ? NC.Bit : NC.None
                  };        
 
         /// <summary>
@@ -49,6 +49,7 @@ namespace Z0
         [Op]
         public static Type classified(NC k)
             => k switch {
+                NC.Bit => typeof(bit),
                 NC.Int8u => typeof(byte),
                 NC.Int8i => typeof(sbyte),
                 NC.Int16u => typeof(ushort),
@@ -59,8 +60,7 @@ namespace Z0
                 NC.Int64u => typeof(ulong),
                 NC.Float32 => typeof(float),
                 NC.Float64 => typeof(double),
-                // NC.Bit => typeof(bit),
-                _ => throw new NotSupportedException(k.ToString())
+                _ => typeof(void)
             };
 
         /// <summary>

@@ -131,33 +131,6 @@ namespace Z0.Asm.Check
             Notify($"{BufferCount} buffers of length {BufferSize} successfully allocated");
             var catalogs = Context.Compostion.Catalogs;
             iter(catalogs,ExecuteCatalog);
-
-
-            // var host = ApiHostUri.FromHost(typeof(math));
-            // var paths = HostPaths(host);
-            // var apiIndex = Correlator.CreateApiIndex(HostMemberIndex(host), HostCodeIndex(host));
-
-            //Notify($"Correlated {apiIndex.EntryCount} {host} implemented operations with executable code");
-
-            // var selected = apiIndex.BinaryOperators;
-
-            // Notify($"Found {selected.Length} {host} kinded binary operarators");
-
-            // var messages = list<AppMsg>(selected.Length);        
-
-
-            // foreach(var api in selected)
-            // {
-            //     var uri = api.Uri;
-            //     var oc = OperatorTypeClass.Infer(api.Method).Format();
-            //     var kind = api.Method.KindId().Format();
-            //     var ok = default(C.BinaryOp);
-            //     messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
-            //     Dispatcher.Dispatch(buffers, api, ok);
-            // }
-            
-            // using var log = OpenLog("kinded-binary-ops", FileExtensions.Csv, FileWriteMode.Append);
-            // log.Write(messages.ToArray());
         }
 
     }

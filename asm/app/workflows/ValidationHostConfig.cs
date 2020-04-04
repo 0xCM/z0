@@ -8,9 +8,6 @@ namespace Z0.Asm.Check
 
     public class ValidationHostConfig : AppSettingSet<ValidationHostConfig>
     {
-        // public static ValidationHostConfig From(IAppSettings src)
-        //     => IAppSettingSet<ValidationHostConfig>.From(src);
-
         public IAppSettingSet Ops => this;        
 
         public bool EmitArtifacts {get; set;} = true;

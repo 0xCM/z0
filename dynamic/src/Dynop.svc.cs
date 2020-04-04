@@ -9,7 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;
+    using static VectorKinds;
+
     using C = OpClasses;
+
 
     [ServiceFactory]
     public static partial class ServiceFactory
@@ -24,9 +27,9 @@ namespace Z0
             where W : ITypeWidth
         {
             if(typeof(W) == typeof(W128))
-                return new ImmInjector(context, VK.vk128(), C.UnaryOp);
+                return new ImmInjector(context, v128, C.UnaryOp);
             else if(typeof(W) == typeof(W256))
-                return new ImmInjector(context, VK.vk256(), C.UnaryOp);
+                return new ImmInjector(context, v256, C.UnaryOp);
             else 
                 throw Unsupported.define<W>();
         }
@@ -36,9 +39,9 @@ namespace Z0
             where W : ITypeWidth
         {
             if(typeof(W) == typeof(W128))
-                return new ImmInjector(context,VK.vk128(), C.BinaryOp);
+                return new ImmInjector(context, v128, C.BinaryOp);
             else if(typeof(W) == typeof(W256))
-                return new ImmInjector(context, VK.vk256(), C.BinaryOp);
+                return new ImmInjector(context, v256, C.BinaryOp);
             else 
                 throw Unsupported.define<W>();
         }

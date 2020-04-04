@@ -7,13 +7,13 @@ bash $Cmd
 export ProjectId=agency
 bash $Cmd
 
-export ProjectId=apps
-bash $Cmd
-
 export ProjectId=canonical
 bash $Cmd
 
 export ProjectId=checks
+bash $Cmd
+
+export ProjectId=code
 bash $Cmd
 
 export ProjectId=collective

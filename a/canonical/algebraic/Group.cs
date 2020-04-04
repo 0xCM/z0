@@ -44,11 +44,12 @@ namespace Z0
         
     }
 
-    public interface IGroupA<S> : IGroup<S>, IMonoidA<S>, INegatable<S>
+    public interface IGroupA<S> : IGroup<S>, IMonoidA<S>, IInvertible<S>
         where S : IGroupA<S>, new()
     {
 
     }
+    
     /// <summary>
     /// Characterizes a group structure
     /// </summary>
@@ -71,7 +72,6 @@ namespace Z0
         
     }
 
-
     /// <summary>
     /// Characterizes an additive group structure
     /// </summary>
@@ -82,5 +82,4 @@ namespace Z0
     {
         
     }
-
 }

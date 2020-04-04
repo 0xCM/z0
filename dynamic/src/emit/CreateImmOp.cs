@@ -13,6 +13,7 @@ namespace Z0
     using System.Linq;
 
     using static Core;
+    using static VectorKinds;
 
     partial class Dynop
     {
@@ -85,7 +86,7 @@ namespace Z0
         [MethodImpl(Inline)]            
         public static DynamicDelegate<UnaryOp<Vector128<T>>> CreateImmV128UnaryOp<T>(MethodInfo src, byte imm)
             where T : unmanaged
-                => EmbedVUnaryOpImm(VK.vk128<T>(), Identity.identify(src), src, imm);
+                => EmbedVUnaryOpImm(vk128<T>(), Identity.identify(src), src, imm);
 
         /// <summary>
         /// Creates a parametric 128-bit vectorized binary operator that adapts a like-kinded operator that consumes an immediate value in the third argument
@@ -95,7 +96,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public static DynamicDelegate<BinaryOp<Vector128<T>>> CreateImmV128BinaryOp<T>(MethodInfo src, byte imm)
             where T : unmanaged
-                => EmbedVBinaryOpImm(VK.vk128<T>(), Identity.identify(src), src, imm);
+                => EmbedVBinaryOpImm(vk128<T>(), Identity.identify(src), src, imm);
 
         /// <summary>
         /// Creates a parametric 128-bit vectorized unary operator that adapts a like-kinded operator that consumes an immediate value in the second argument
@@ -105,7 +106,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public static DynamicDelegate<UnaryOp<Vector256<T>>> CreateImmV256UnaryOp<T>(MethodInfo src, byte imm)        
             where T : unmanaged
-                => EmbedVUnaryOpImm(VK.vk256<T>(), Identity.identify(src), src, imm);
+                => EmbedVUnaryOpImm(vk256<T>(), Identity.identify(src), src, imm);
 
         /// <summary>
         /// Creates a parametric 256-bit vectorized binary operator that adapts a like-kinded operator that consumes an immediate value in the third argument
@@ -115,7 +116,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public static DynamicDelegate<BinaryOp<Vector256<T>>> EmbedV256BinaryOpImm<T>(MethodInfo src, byte imm)        
             where T : unmanaged
-                => EmbedImmVBinaryOpImm(VK.vk256<T>(), Identity.identify(src), src, imm);
+                => EmbedImmVBinaryOpImm(vk256<T>(), Identity.identify(src), src, imm);
 
         public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedV128UnaryOpImm<T>(MethodInfo src, byte imm8, OpIdentity? baseid = null)
             where T : unmanaged

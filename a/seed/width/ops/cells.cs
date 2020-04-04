@@ -1,0 +1,137 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
+    partial class Widths
+    {        
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of width W
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<W,T>()
+            where W : unmanaged, ITypeWidth
+            where T : unmanaged
+                => cells_lo<W,T>();
+
+        [MethodImpl(Inline)]
+        static int cells_lo<W,T>()
+            where W : unmanaged, ITypeWidth
+            where T : unmanaged
+        {
+            if(typeof(W) == typeof(W8))
+                return cells<T>(w8);
+            else if(typeof(W) == typeof(W16))
+                return cells<T>(w16);
+            else if(typeof(W) == typeof(W32))
+                return cells<T>(w32);
+            else if(typeof(W) == typeof(W64))
+                return cells<T>(w64);
+            else
+                return cells_hi<W,T>();
+        }
+
+        [MethodImpl(Inline)]
+        static int cells_hi<W,T>()
+            where W : unmanaged,ITypeWidth
+            where T : unmanaged
+        {
+            if(typeof(W) == typeof(W128))
+                return cells<T>(w128);
+            else if(typeof(W) == typeof(W256))
+                return cells<T>(w256);
+            else if(typeof(W) == typeof(W512))
+                return cells<T>(w512);
+            else if(typeof(W) == typeof(W1024))
+                return cells<T>(w1024);
+            else
+                return 0;
+        }
+
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<T>(W8 w)
+            where T : unmanaged
+                => 1/size<T>();
+
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<T>(W16 w)
+            where T : unmanaged
+                => 2/size<T>();
+
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<T>(W32 w)
+            => 4/size<T>();
+
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<T>(W64 w)
+            => 8/size<T>();
+
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<T>(W128 w)
+            where T : unmanaged
+                => 16/size<T>();
+
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<T>(W256 w)
+            where T : unmanaged
+                => 32/size<T>();
+
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<T>(W512 w)
+            where T : unmanaged
+                => 64/size<T>();
+
+        /// <summary>
+        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// </summary>
+        /// <param name="w">The memory bit-width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cells<T>(W1024 w)
+            where T : unmanaged
+                => 128/size<T>();
+    }
+}

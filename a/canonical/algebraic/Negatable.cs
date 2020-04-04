@@ -14,16 +14,5 @@ namespace Z0
         /// </summary>
         /// <param name="x">The input value</param>
         T Negate(T x);
-
-    }
-
-    public interface INegatable<S>
-        where S : INegatable<S>, new()
-    {
-        /// <summary>
-        /// Unary structural negation
-        /// </summary>
-        /// <param name="a">The input value</param>
-        S Negate();
     }
 }

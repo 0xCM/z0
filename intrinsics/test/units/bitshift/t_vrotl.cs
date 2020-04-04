@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Gone;
-
     public class t_vrotl : t_vinx<t_vrotl>
     {
         public void vrotl_check()

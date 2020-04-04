@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using FT = FixedKind;
+    using FW = FixedWidth;
 
     [Flags]
     public enum FixedOperationKind : uint
@@ -547,43 +547,43 @@ namespace Z0
        TernaryOp512 = SigSpec | Fixed512x0 | Fixed512x1 | Fixed512x2 | Return512,
 
        /// <summary>
-       /// Redeclaration of <see cref="FT.Fixed1"/>
+       /// Redeclaration of <see cref="FW.W1"/>
        /// </summary>        
-       Fixed1 = FT.Fixed1,
+       Fixed1 = FW.W1,
 
        /// <summary>
-       /// Redeclaration of <see cref="FT.Fixed8"/>
+       /// Redeclaration of <see cref="FW.W8"/>
        /// </summary>        
-       Fixed8 = FT.Fixed8,
+       Fixed8 = FW.W8,
 
        /// <summary>
-       /// Redeclaration of <see cref="FT.Fixed16"/>
+       /// Redeclaration of <see cref="FW.W16"/>
        /// </summary>        
-       Fixed16 = FT.Fixed16,
+       Fixed16 = FW.W16,
 
        /// <summary>
-       /// Redeclaration of <see cref="FT.Fixed32"/>
+       /// Redeclaration of <see cref="FW.W32"/>
        /// </summary>        
-       Fixed32 = FT.Fixed32,
+       Fixed32 = FW.W32,
 
        /// <summary>
-       /// Redeclaration of <see cref="FT.Fixed64"/>
+       /// Redeclaration of <see cref="FW.W64"/>
        /// </summary>        
-       Fixed64 = FT.Fixed64,
+       Fixed64 = FW.W64,
 
        /// <summary>
-       /// Redeclaration of <see cref="FT.Fixed128"/>
+       /// Redeclaration of <see cref="FW.W128"/>
        /// </summary>        
-       Fixed128 = FT.Fixed128,
+       Fixed128 = FW.W128,
 
        /// <summary>
-       /// Redeclaration of <see cref="FT.Fixed256"/>
+       /// Redeclaration of <see cref="FW.W256"/>
        /// </summary>        
-       Fixed256 = FT.Fixed256,
+       Fixed256 = FW.W256,
 
        /// <summary>
-       /// Redeclaration of <see cref="FT.Fixed512"/>
+       /// Redeclaration of <see cref="FW.W512"/>
        /// </summary>        
-       Fixed512 = FT.Fixed512,
+       Fixed512 = FW.W512,
     }
 }

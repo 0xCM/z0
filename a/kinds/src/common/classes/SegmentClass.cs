@@ -13,7 +13,7 @@ namespace Z0
     /// Clasifies concrete storage linear memory segments of total width w over segments of numeric width
     /// </summary>
     [Flags]
-    public enum SegmentedClass : ushort
+    public enum SegmentedClass : uint
     {        
         /// <summary>
         /// Classifier that classifies nothing

@@ -6,43 +6,37 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Seed;
+    using static Z0.Seed;
 
-    /// <summary>
-    /// Characterises a vector type stratifier
-    /// </summary>
-    public interface IVectorKind : ITypeKind
+    public interface IVectorKind : ITypeKind, IVectorWidth
     {
-
-    }
-
-    public interface IVectorType : ITypeKind
-    {
-        VectorWidth Width {get;}
+        
     }    
 
-    public interface IVectorType<W> : IVectorType
-        where W : unmanaged, ITypeWidth
+    public interface IVectorKind<W> : IVectorKind, IVectorWidth<W>
+        where W : struct, IVectorWidth<W>
     {
-        VectorWidth IVectorType.Width => default;
+        
     }
 
-    public interface IVectorType<V,T> : IVectorType, ITypeKind<T>
-        where V : struct
+    public interface IVectorKind<F,W,T> : IVectorKind<W>, ITypeKind<T>
+        where F : struct, IVectorKind<F,W,T>
+        where W : struct, IVectorWidth<W>
         where T : unmanaged
     {
-        VectorWidth IVectorType.Width 
-        { 
-            [MethodImpl(Inline)]
-            get => (VectorWidth)Widths.measure<V>();
-        }
+        NumericKind CellKind => NumericKinds.kind<T>();
+
+        NumericWidth CellWidth => (NumericWidth)Widths.measure<T>();
     }
 
-    public readonly struct VectorTypeKind : IVectorType
+    public readonly struct VectorTypeKind : IVectorKind
     {
-        public VectorWidth Width {get;}
-        
+        public VectorWidth VectorWidth {get;}
+
+        public TypeWidth TypeWidth => (TypeWidth)VectorWidth;
+
+        public DataWidth DataWidth => (DataWidth)VectorWidth;
+
         [MethodImpl(Inline)]
         public static implicit operator VectorTypeKind(VectorWidth width)
             => new VectorTypeKind(width);
@@ -50,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public VectorTypeKind(VectorWidth width)
         {
-            this.Width = width;
+            this.VectorWidth = width;
         }
     }        
 }

@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="nk">The numeric kind</param>
         [MethodImpl(Inline)]
         public static TypeIdentity Segmented(string name, TypeWidth wk, NumericKind nk)
-            => TypeIdentity.Define($"{name}{wk.Format()}x{nk.Format()}");
+            => TypeIdentity.Define($"{name}{wk.FormatValue()}x{nk.Format()}");
 
         public static TypeIdentity NumericClosure(string root, Type arg)
         {

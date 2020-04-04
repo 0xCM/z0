@@ -22,7 +22,7 @@ namespace Z0
 
         protected string CaseName(ISFuncApi f)
         {
-            var id = Identify.Op(f.Id.Name, Widths.literal<W>(), NumericKinds.kind<T>(),true);
+            var id = Identify.Op(f.Id.Name, Widths.type<W>(), NumericKinds.kind<T>(),true);
             var owner = Identify.Owner(Context.HostType);
             var host = Context.HostType.Name;
             return $"{owner}/{host}/{id}";            

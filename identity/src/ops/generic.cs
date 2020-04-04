@@ -43,11 +43,11 @@ namespace Z0
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = text.concat(IDI.Vector, width(argtype).Format());
+                        last = text.concat(IDI.Vector, width(argtype).FormatValue());
                     else if(argtype.IsBlocked())
-                        last = text.concat(IDI.Block, width(argtype).Format());
+                        last = text.concat(IDI.Block, width(argtype).FormatValue());
                     else if(SpanTypes.IsSystemSpan(argtype))
-                        last = SpanTypes.Kind(argtype).Format();
+                        last = SpanTypes.kind(argtype).Format();
                 }
                 
                 id += last;

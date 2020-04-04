@@ -14,7 +14,7 @@ namespace Z0.Asm.Validation
 
     using static Core;
     using static time;
-    using static NumericTypes;
+    using static NumericKinds;
     using static BufferSeqId;
     
     public class AsmChecks : IAsmChecks
@@ -173,7 +173,7 @@ namespace Z0.Asm.Validation
             where W : unmanaged, ITypeWidth
         {
             var archive = Context.CodeArchive(catalog,host);
-            var id = Identify.Op(opname, Widths.literal<W>(), NumericKinds.kind<T>(), true);
+            var id = Identify.Op(opname, Widths.type<W>(), NumericKinds.kind<T>(), true);
             Context.Notify($"{id}");
             var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)

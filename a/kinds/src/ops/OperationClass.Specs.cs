@@ -109,7 +109,7 @@ namespace Z0
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {
-        TypeWidth IFixedOpClass.Width => Widths.literal<W>();
+        TypeWidth IFixedOpClass.Width => Widths.type<W>();
     }
     
     public interface IFixedOpClassF<F,W,E> : IFixedOpClass<W,E>, IOpClassF<F,E>

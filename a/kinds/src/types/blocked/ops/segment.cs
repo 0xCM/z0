@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class BlockedType
+    partial class BlockedKinds
     {
         /// <summary>
         /// Determines the segment kind classifier for a blocked type

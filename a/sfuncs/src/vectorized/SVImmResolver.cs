@@ -23,7 +23,7 @@ namespace Z0
     {
         DynamicDelegate<UnaryOp<V>>  @delegate(byte imm8);  
 
-        TypeWidth ISImmResolverApi.OperandWidth => Widths.literal<W>();
+        TypeWidth ISImmResolverApi.OperandWidth => Widths.type<W>();
 
         ArityValue ISImmResolverApi.ResolvedArity => ArityValue.Unary;           
     }
@@ -35,7 +35,7 @@ namespace Z0
     {
         DynamicDelegate<BinaryOp<V>>  @delegate(byte imm8);  
 
-        TypeWidth ISImmResolverApi.OperandWidth => Widths.literal<W>();
+        TypeWidth ISImmResolverApi.OperandWidth => Widths.type<W>();
 
         ArityValue ISImmResolverApi.ResolvedArity => ArityValue.Binary;
     }

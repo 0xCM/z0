@@ -122,7 +122,6 @@ namespace Z0.Asm.Check
 
         void ConnectReceivers(IHostCaptureEventRelay broker)
         {
-
             broker.Error.Subscribe(broker, OnEvent);
 
             if(Settings.HandleExtractReportCreated)
@@ -153,11 +152,11 @@ namespace Z0.Asm.Check
             static int CountInstructions(in AsmFunction f)
                 => f.InstructionCount;
 
-            var _analyzer = SpanAnalyzer.Create<AsmFunction,int>(CountInstructions);
-            var _counts = _analyzer.Analyze(functions);
-            var _total = gspan.sum(_counts.AsUInt64());
+            var analyzer = SpanAnalyzer.Create<AsmFunction,int>(CountInstructions);
+            var counts = analyzer.Analyze(functions);
+            var total = gspan.sum(counts.AsUInt64());
 
-            NotifyConsole($"The {host} host members define a total of {_total} instructions", AppMsgColor.Cyan);            
+            NotifyConsole($"The {host} host members define a total of {total} instructions", AppMsgColor.Cyan);            
         }
             
         void Analyze(in ApiHostUri hosturi, ReadOnlySpan<AsmOpBits> ops, FilePath dst)

@@ -85,11 +85,11 @@ namespace Z0
             =>  from i in SegIndicator(t)
                 let segwidth = Identity.width(t)
                 where segwidth.IsSome()
-                let segfmt = segwidth.Format()
+                let segfmt = segwidth.FormatValue()
                 let arg = t.GetGenericArguments().Single()
                 let argwidth = Identity.width(arg)
                 where argwidth.IsSome()
-                let argfmt = argwidth.Format()
+                let argfmt = argwidth.FormatValue()
                 let nk = arg.NumericKind()
                 where  nk != 0
                 let nki = nk.Indicator().Format()
@@ -103,7 +103,7 @@ namespace Z0
         
         static Option<TypeIdentity> SystemSpanId(Type arg)
         {
-            var kind = SpanTypes.Kind(arg);
+            var kind = SpanTypes.kind(arg);
             if(kind != 0 && kind != SpanKind.Custom)
             {
                 var cellid = DoDivination(arg.GetGenericArguments().Single());

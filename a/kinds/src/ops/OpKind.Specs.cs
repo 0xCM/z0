@@ -6,12 +6,6 @@ namespace Z0
 {
     using System;
 
-    public interface IOpKind<E> : IOpKind, ILiteralKind<E>
-        where E : unmanaged, Enum
-    {
-        E ITypedLiteral<E>.Class 
-            => default;
-    }
 
     public interface IComparisonKind : IOpKind
     {

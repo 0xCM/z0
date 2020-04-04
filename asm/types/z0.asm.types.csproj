@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(AsmModels)" />
   </ItemGroup>
 
 </Project>

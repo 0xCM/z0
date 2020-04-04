@@ -6,184 +6,182 @@ namespace Z0
 {
     using System;
 
-    using TK = BlockedTypes;
-
-    partial class BlockedType    
+    partial class BlockedKinds    
     {
-        public static TK.Blocked16 Blocked16
+        public static Blocked16 b16
             => default;
 
-        public static TK.Blocked32 Blocked32
+        public static Blocked32 b32
             => default;
 
-        public static TK.Blocked64 Blocked64
+        public static Blocked64 b64
             => default;
 
-        public static TK.Blocked128 Blocked128
+        public static Blocked128 b128
             => default;
 
-        public static TK.Blocked256 Blocked256
+        public static Blocked256 b256
             => default;
 
-        public static TK.Blocked512 Blocked512
+        public static Blocked512 b512
             => default;    
         
-        public static TK.Block16x8u Blocked16x8u
+        public static Block16x8u b16x8u
             => default;
         
-        public static TK.Block16x8i Blocked16x8i
+        public static Block16x8i b16x8i
             => default;
         
-        public static TK.Block16x16u Blocked16x16u
+        public static Block16x16u b16x16u
             => default;
         
-        public static TK.Block16x16i Blocked16x16i
+        public static Block16x16i b16x16i
             => default;
         
-        public static TK.Block32x8u Blocked32x8u
+        public static Block32x8u b32x8u
             => default;
         
-        public static TK.Block32x8i Blocked32x8i
+        public static Block32x8i b32x8i
             => default;
         
-        public static TK.Block32x16u Blocked32x16u
+        public static Block32x16u b32x16u
             => default;
         
-        public static TK.Block32x16i Blocked32x16i
+        public static Block32x16i b32x16i
             => default;
         
-        public static TK.Block32x32u Blocked32x32u
+        public static Block32x32u b32x32u
             => default;
         
-        public static TK.Block32x32i Blocked32x32i
+        public static Block32x32i b32x32i
             => default;
         
-        public static TK.Block64x8u Blocked64x8u
-            => default;
-
-        
-        public static TK.Block64x8i Blocked64x8i
+        public static Block64x8u b64x8u
             => default;
 
         
-        public static TK.Block64x16u Blocked64x16u
+        public static Block64x8i b64x8i
             => default;
 
         
-        public static TK.Block64x16i Blocked64x16i
+        public static Block64x16u b64x16u
             => default;
 
         
-        public static TK.Block64x32u Blocked64x32u
+        public static Block64x16i b64x16i
             => default;
 
         
-        public static TK.Block64x32i Blocked64x32i
+        public static Block64x32u b64x32u
             => default;
 
         
-        public static TK.Block64x64u Blocked64x64u
+        public static Block64x32i b64x32i
             => default;
 
         
-        public static TK.Block64x64i Blocked64x64i
+        public static Block64x64u b64x64u
             => default;
 
         
-        public static TK.Block128x8u Blocked128x8u
+        public static Block64x64i b64x64i
             => default;
 
         
-        public static TK.Block128x8i Blocked128x8i
+        public static Block128x8u b128x8u
             => default;
 
         
-        public static TK.Block128x16u Blocked128x16u
-            => default;
-        
-        public static TK.Block128x16i Blocked128x16i
-            => default;
-        
-        public static TK.Block128x32u Blocked128x32u
-            => default;
-        
-        public static TK.Block128x32i Blocked128x32i
-            => default;
-        
-        public static TK.Block128x64u Blocked128x64u
+        public static Block128x8i b128x8i
             => default;
 
         
-        public static TK.Block128x64i Blocked128x64i
+        public static Block128x16u b128x16u
+            => default;
+        
+        public static Block128x16i b128x16i
+            => default;
+        
+        public static Block128x32u b128x32u
+            => default;
+        
+        public static Block128x32i b128x32i
+            => default;
+        
+        public static Block128x64u b128x64u
             => default;
 
         
-        public static TK.Block128x32f Blocked128x32f
+        public static Block128x64i b128x64i
             => default;
 
         
-        public static TK.Block128x64f Blocked128x64f
+        public static Block128x32f b128x32f
             => default;
 
         
-        public static TK.Block256x8u Blocked256x8u
+        public static Block128x64f b128x64f
+            => default;
+
+        
+        public static Block256x8u b256x8u
             => default;
         
-        public static TK.Block256x8i Blocked256x8i
+        public static Block256x8i b256x8i
             => default;
         
-        public static TK.Block256x16u Blocked256x16u
+        public static Block256x16u b256x16u
             => default;
         
-        public static TK.Block256x16i Blocked256x16i
+        public static Block256x16i b256x16i
             => default;
         
-        public static TK.Block256x32u Blocked256x32u
+        public static Block256x32u b256x32u
             => default;
         
-        public static TK.Block256x32i Blocked256x32i
+        public static Block256x32i b256x32i
             => default;
         
-        public static TK.Block256x64u Blocked256x64u
+        public static Block256x64u b256x64u
             => default;
         
-        public static TK.Block256x64i Blocked256x64i
+        public static Block256x64i b256x64i
             => default;
         
-        public static TK.Block256x32f Blocked256x32f
+        public static Block256x32f b256x32f
             => default;
     
-        public static TK.Block256x64f Blocked256x64f
+        public static Block256x64f b256x64f
             => default;
         
-        public static TK.Block512x8u Blocked512x8u
+        public static Block512x8u b512x8u
             => default;
         
-        public static TK.Block512x8i Blocked512x8i
+        public static Block512x8i b512x8i
             => default;
         
-        public static TK.Block512x16u Blocked512x16u
+        public static Block512x16u b512x16u
             => default;
         
-        public static TK.Block512x16i Blocked512x16i
+        public static Block512x16i b512x16i
             => default;
         
-        public static TK.Block512x32u Blocked512x32u
+        public static Block512x32u b512x32u
             => default;
     
-        public static TK.Block512x32i Blocked512x32i
+        public static Block512x32i b512x32i
             => default;
         
-        public static TK.Block512x64u Blocked512x64u
+        public static Block512x64u b512x64u
             => default;
         
-        public static TK.Block512x64i Blocked512x64i
+        public static Block512x64i b512x64i
             => default;
         
-        public static TK.Block512x32f Blocked512x32f
+        public static Block512x32f b512x32f
             => default;
         
-        public static TK.Block512x64f Blocked512x64f
+        public static Block512x64f b512x64f
             => default;       
     }
 }

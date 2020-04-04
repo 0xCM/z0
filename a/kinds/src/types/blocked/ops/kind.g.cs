@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static BlockedTypes;
     using static Kinds;
 
-    partial class BlockedType
+    partial class BlockedKinds
     {
         [MethodImpl(Inline)]
         public static BlockedKind kind<W,T>(W w = default, T t = default)

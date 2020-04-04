@@ -78,11 +78,10 @@ namespace Z0
         public static FixedOpInfo<W256,BinaryPredicate256V,Fixed256V> BinaryPredicate256 => default;
 
         public static FixedOpInfo<W512,BinaryPredicate512V,Fixed512V> BinaryPredicate512 => default;
-
     }
 
     public readonly struct FixedOpInfo<W,D,T>
-        where W : unmanaged, ITypeWidth
+        where W : unmanaged, IFixedWidth
         where D : Delegate
         where T : IFixed
     {
@@ -90,7 +89,7 @@ namespace Z0
 
         public Type FixedType => typeof(T);
 
-        public TypeWidth Width => Widths.literal<W>();
+        public FixedWidth Width => Widths.fwidth<W>();
     }
 
 }

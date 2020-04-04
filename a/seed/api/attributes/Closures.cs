@@ -23,11 +23,4 @@ namespace Z0
 
         public TypeClosureKind Kind {get;}
     }
-
-    public enum TypeClosureKind : byte
-    {
-        None = 0,
-
-        Numeric = 1, 
-    }
 }

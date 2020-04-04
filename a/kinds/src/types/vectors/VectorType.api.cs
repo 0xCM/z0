@@ -315,10 +315,10 @@ namespace Z0
             => typeof(Vector256<>);
 
         public static IEnumerable<Type> types(W128 w)
-            => from nt in NumericKinds.Defined select definition(w).MakeGenericType(nt);
+            => from nt in NumericKinds.NumericTypes select definition(w).MakeGenericType(nt);
 
         public static IEnumerable<Type> types(W256 w)
-            => from nt in NumericKinds.Defined select definition(w).MakeGenericType(nt);
+            => from nt in NumericKinds.NumericTypes select definition(w).MakeGenericType(nt);
 
 
         [MethodImpl(Inline)]

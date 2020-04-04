@@ -8,11 +8,10 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class BlockedType
+    partial class BlockedKinds
     {
         public static TypeWidth width(Type src)
             => tag(src)?.TotalWdth ?? TypeWidth.None;
-
 
         static BlockedAttribute tag(Type t)
             => (BlockedAttribute)t.EffectiveType().GetCustomAttribute(typeof(BlockedAttribute));        

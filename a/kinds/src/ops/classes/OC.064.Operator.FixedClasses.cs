@@ -49,7 +49,7 @@ namespace Z0
 
             public K Class => K.UnaryOp; 
 
-            public TypeWidth Width => Widths.literal<W>();
+            public TypeWidth Width => Widths.type<W>();
 
             public OperatorClass<W> Generalized => default;
 
@@ -92,7 +92,7 @@ namespace Z0
 
             public K Class => K.BinaryOp; 
 
-            public TypeWidth Width => Widths.literal<W>();
+            public TypeWidth Width => Widths.type<W>();
 
             public OperatorClass<W> Generalized => default;
 
@@ -135,7 +135,7 @@ namespace Z0
 
             public K Class => K.TernaryOp; 
 
-            public TypeWidth Width => Widths.literal<W>();
+            public TypeWidth Width => Widths.type<W>();
 
             public OperatorClass<W> Generalized => default;
 

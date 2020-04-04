@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(AsmTypes)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Api)" />
   </ItemGroup>
 
 </Project>
