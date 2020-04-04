@@ -1,0 +1,33 @@
+| Mnemonic | Meaning                               | Jump Condition   |
+| JA       | Jump if Above                         | CF=0 and ZF=0    |
+| JAE      | Jump if Above or Equal                | CF=0             |
+| JB       | Jump if Below                         | CF=1             |
+| JBE      | Jump if Below or Equal                | CF=1 or ZF=1     |
+| JC       | Jump if Carry                         | CF=1             |
+| JCXZ     | Jump if CX Zero                       | CX=0             |
+| JE       | Jump if Equal                         | ZF=1             |
+| JG       | Jump if Greater (signed)              | ZF=0 and SF=OF   |
+| JGE      | Jump if Greater or Equal (signed)     | SF=OF            |
+| JL       | Jump if Less (signed)                 | SF != OF         |
+| JLE      | Jump if Less or Equal (signed)        | ZF=1 or SF != OF |
+| JMP      | Unconditional Jump                    | unconditional    |
+| JNA      | Jump if Not Above                     | CF=1 or ZF=1     |
+| JNAE     | Jump if Not Above or Equal            | CF=1             |
+| JNB      | Jump if Not Below                     | CF=0             |
+| JNBE     | Jump if Not Below or Equal            | CF=0 and ZF=0    |
+| JNC      | Jump if Not Carry                     | CF=0             |
+| JNE      | Jump if Not Equal                     | ZF=0             |
+| JNG      | Jump if Not Greater (signed)          | ZF=1 or SF != OF |
+| JNGE     | Jump if Not Greater or Equal (signed) | SF != OF         |
+| JNL      | Jump if Not Less (signed)             | SF=OF            |
+| JNLE     | Jump if Not Less or Equal (signed)    | ZF=0 and SF=OF   |
+| JNO      | Jump if Not Overflow (signed)         | OF=0             |
+| JNP      | Jump if No Parity                     | PF=0             |
+| JNS      | Jump if Not Signed (signed)           | SF=0             |
+| JNZ      | Jump if Not Zero                      | ZF=0             |
+| JO       | Jump if Overflow (signed)             | OF=1             |
+| JP       | Jump if Parity                        | PF=1             |
+| JPE      | Jump if Parity Even                   | PF=1             |
+| JPO      | Jump if Parity Odd                    | PF=0             |
+| JS       | Jump if Signed (signed)               | SF=1             |
+| JZ       | Jump if Zero                          | ZF=1             |

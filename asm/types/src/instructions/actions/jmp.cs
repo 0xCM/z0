@@ -5,20 +5,20 @@
 namespace Z0.Asm.Types
 {
 
-    public interface IRegister
+    public interface jmp
+    {
+
+    }
+    
+    public readonly struct ja : action<ja>
+    {
+
+    }    
+
+    public readonly struct je : action<je>
     {
         
     }
 
-    public enum RegisterWidth : uint
-    {
 
-
-    }
-
-    public readonly struct Register
-    {
-
-
-    }
 }

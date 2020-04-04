@@ -2,14 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.CpuModel
+namespace Z0.AsmTypes
 {
-
     using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-
-    using static zfunc;
 
     /// <summary>
     /// Characterizes a register's intrinsic volatility. Volatile registers are
@@ -36,13 +31,10 @@ namespace Z0.CpuModel
         /// entry/exit
         /// </summary>
         NonVolatile = 2,
-
         
         /// <summary>
         /// Register has some segments that are volatile and some that are not
         /// </summary>
         Mixed = Volatile | NonVolatile
-
     }
-
 }
