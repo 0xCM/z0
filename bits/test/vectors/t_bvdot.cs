@@ -292,7 +292,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {            
-            var opname = $"bvdot_n{n}x{Identify.NumericType<T>()}";
+            var opname = $"bvdot_n{n}x{Identify.numeric<T>()}";
 
             void check()
             {
@@ -306,7 +306,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, Identify.TestCase(GetType(),opname));
+            CheckAction(check, Identify.testcase(GetType(),opname));
         }
     }
 }

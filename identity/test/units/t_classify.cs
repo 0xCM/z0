@@ -131,61 +131,64 @@ namespace Z0
             Claim.eq(TypeWidth.W512, BlockedKinds.width(typeof(Block512<>)));
         }
 
+        static bool blocked(Type t)
+            => t.IsBlocked();
+
         public void test_generic_blocks()
         {
-            Claim.require(BlockedKinds.test(typeof(Block16<>)));
-            Claim.require(BlockedKinds.test(typeof(Block32<>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<>)));
-            Claim.require(BlockedKinds.test(typeof(Block256<>)));
-            Claim.require(BlockedKinds.test(typeof(Block512<>)));
+            Claim.require(blocked(typeof(Block16<>)));
+            Claim.require(blocked(typeof(Block32<>)));
+            Claim.require(blocked(typeof(Block64<>)));
+            Claim.require(blocked(typeof(Block128<>)));
+            Claim.require(blocked(typeof(Block256<>)));
+            Claim.require(blocked(typeof(Block512<>)));
         }
 
         public void test_block_16()
         {
-            Claim.require(BlockedKinds.test(typeof(Block16<byte>)));
-            Claim.require(BlockedKinds.test(typeof(Block16<sbyte>)));
-            Claim.require(BlockedKinds.test(typeof(Block16<ushort>)));
-            Claim.require(BlockedKinds.test(typeof(Block16<short>)));
+            Claim.require(blocked(typeof(Block16<byte>)));
+            Claim.require(blocked(typeof(Block16<sbyte>)));
+            Claim.require(blocked(typeof(Block16<ushort>)));
+            Claim.require(blocked(typeof(Block16<short>)));
         }
 
         public void test_block_32()
         {
-            Claim.require(BlockedKinds.test(typeof(Block32<byte>)));
-            Claim.require(BlockedKinds.test(typeof(Block32<sbyte>)));
-            Claim.require(BlockedKinds.test(typeof(Block32<ushort>)));
-            Claim.require(BlockedKinds.test(typeof(Block32<short>)));
-            Claim.require(BlockedKinds.test(typeof(Block32<int>)));
-            Claim.require(BlockedKinds.test(typeof(Block32<uint>)));
-            Claim.require(BlockedKinds.test(typeof(Block32<float>)));
+            Claim.require(blocked(typeof(Block32<byte>)));
+            Claim.require(blocked(typeof(Block32<sbyte>)));
+            Claim.require(blocked(typeof(Block32<ushort>)));
+            Claim.require(blocked(typeof(Block32<short>)));
+            Claim.require(blocked(typeof(Block32<int>)));
+            Claim.require(blocked(typeof(Block32<uint>)));
+            Claim.require(blocked(typeof(Block32<float>)));
         }
 
         public void test_block_64()
         {
-            Claim.require(BlockedKinds.test(typeof(Block64<byte>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<sbyte>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<ushort>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<short>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<int>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<uint>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<long>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<ulong>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<float>)));
-            Claim.require(BlockedKinds.test(typeof(Block64<double>)));
+            Claim.require(blocked(typeof(Block64<byte>)));
+            Claim.require(blocked(typeof(Block64<sbyte>)));
+            Claim.require(blocked(typeof(Block64<ushort>)));
+            Claim.require(blocked(typeof(Block64<short>)));
+            Claim.require(blocked(typeof(Block64<int>)));
+            Claim.require(blocked(typeof(Block64<uint>)));
+            Claim.require(blocked(typeof(Block64<long>)));
+            Claim.require(blocked(typeof(Block64<ulong>)));
+            Claim.require(blocked(typeof(Block64<float>)));
+            Claim.require(blocked(typeof(Block64<double>)));
         }
 
         public void test_block_128()
         {
-            Claim.require(BlockedKinds.test(typeof(Block128<byte>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<sbyte>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<ushort>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<short>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<int>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<uint>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<long>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<ulong>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<float>)));
-            Claim.require(BlockedKinds.test(typeof(Block128<double>)));
+            Claim.require(blocked(typeof(Block128<byte>)));
+            Claim.require(blocked(typeof(Block128<sbyte>)));
+            Claim.require(blocked(typeof(Block128<ushort>)));
+            Claim.require(blocked(typeof(Block128<short>)));
+            Claim.require(blocked(typeof(Block128<int>)));
+            Claim.require(blocked(typeof(Block128<uint>)));
+            Claim.require(blocked(typeof(Block128<long>)));
+            Claim.require(blocked(typeof(Block128<ulong>)));
+            Claim.require(blocked(typeof(Block128<float>)));
+            Claim.require(blocked(typeof(Block128<double>)));
         }
 
         public void classify_block_16()

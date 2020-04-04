@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
 
     [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W128,false,FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W128)]
     public struct Fixed128 : IFixed<Fixed128>, IEquatable<Fixed128>
     {
         ulong X0;

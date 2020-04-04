@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 16-bit blocks
     /// </summary>
-    [Blocked(FixedWidth.W16,true, FixedWidth.W8, FixedWidth.W16)]
+    [Blocked(TypeWidth.W16, true, CellWidth.W8, CellWidth.W16)]
     public readonly ref struct Block16<T>
         where T : unmanaged
     {

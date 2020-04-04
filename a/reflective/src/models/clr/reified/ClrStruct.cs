@@ -8,7 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-
     using static Reflective;
 
     public readonly struct ClrStruct : IClrType<ClrStruct>
@@ -50,6 +49,8 @@ namespace Z0
 
         public IEnumerable<ClrStruct> NestedTypes 
             => Subject.GetNestedTypes().Select(t => new ClrStruct(t));
+
+        public ClrTypeKind Kind => ClrTypeKind.Struct;
     }
 
     /// <summary>
@@ -83,5 +84,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Untyped.NestedTypes;
         }
+
+        public ClrTypeKind Kind => ClrTypeKind.Struct;        
     }
 }

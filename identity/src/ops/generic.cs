@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Core;
 
@@ -43,9 +41,9 @@ namespace Z0
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = text.concat(IDI.Vector, width(argtype).FormatValue());
+                        last = text.concat(IDI.Vector, divine(argtype).FormatValue());
                     else if(argtype.IsBlocked())
-                        last = text.concat(IDI.Block, width(argtype).FormatValue());
+                        last = text.concat(IDI.Block, divine(argtype).FormatValue());
                     else if(SpanTypes.IsSystemSpan(argtype))
                         last = SpanTypes.kind(argtype).Format();
                 }

@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         public static ISet<Type> DistinctTypes(this NumericKind k)
-            => Identify.TypeSet(k);
+            => Identify.types(k);
 
         [MethodImpl(Inline)]
         public static Option<NI> NumericIndicator(this Type t)
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind to evaluate</param>
         public static ISet<NK> DistinctKinds(this NK k)  
-            => Identify.KindSet(k);    
+            => Identify.kinds(k);    
 
         /// <summary>
         /// Determines whether a method is a numeric operator with a specified arity

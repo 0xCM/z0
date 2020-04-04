@@ -24,6 +24,7 @@ namespace Z0
     [
         IdentityProvider,
         UserType(UserTypeId.BitId), 
+        Width(TypeWidth.W1),
         ConversionProvider(typeof(BitDataTypeConverter))
     ]
     public readonly struct bit : IFormattable<bit>, ITypeIdentityProvider<bit> 
@@ -651,7 +652,7 @@ namespace Z0
             => new bit((uint)state & 1);
 
         [MethodImpl(Inline)]
-        public TypeIdentity DefineIdentity()
+        public TypeIdentity Identity()
             => TypeIdentity.Define("1u");
     }
 

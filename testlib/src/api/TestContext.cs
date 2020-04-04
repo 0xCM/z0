@@ -85,7 +85,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function</param>
         public static string testcase(Type host, ISFuncApi f)
-            => $"{Identify.Owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
+            => $"{Identify.owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
 
         /// <summary>
         /// Produces the name of the test case for the specified function
@@ -99,14 +99,14 @@ namespace Z0
         /// </summary>
         /// <param name="id">Moniker that identifies the operation under test</param>
         public string CaseName(OpIdentity id)
-            => Identify.TestCase(GetType(), id);
+            => Identify.testcase(GetType(), id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         public string CaseName(string fullname)
-            => Identify.TestCase(GetType(), fullname);
+            => Identify.testcase(GetType(), fullname);
 
         /// <summary>
         /// Produces the name of the test case predicated on a root name and parametric type
@@ -114,12 +114,12 @@ namespace Z0
         /// <param name="root">The root name</param>
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
-            => Identify.TestCase(GetType(),root, t);
+            => Identify.testcase(GetType(),root, t);
 
         protected string CaseName<W,C>(string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => Identify.TestCase(GetType(), root, w, t, generic);
+                => Identify.testcase(GetType(), root, w, t, generic);
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
@@ -127,7 +127,7 @@ namespace Z0
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
-                => Identify.SFunc<K>($"{opname}_baseline");
+                => Identify.sFunc<K>($"{opname}_baseline");
 
         protected virtual bool TraceEnabled
             => true;

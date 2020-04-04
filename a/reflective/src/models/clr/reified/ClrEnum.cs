@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Reflective;
@@ -19,7 +17,7 @@ namespace Z0
         {
             get => ClrType.From(Subject);
         }
-
+    
         [MethodImpl(Inline)]
         public static implicit operator ClrType(ClrEnum src)
             => src.Generalized;
@@ -55,6 +53,7 @@ namespace Z0
         where T : unmanaged, Enum
     {
         public Type Subject => typeof(T);
+
 
         public ClrEnum Untyped 
         {

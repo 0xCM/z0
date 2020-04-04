@@ -19,6 +19,5 @@ namespace Z0
         public static uint measure<T>()
             where T : struct
                 =>  (uint)(Unsafe.SizeOf<T>()*8);
-
     }
 }

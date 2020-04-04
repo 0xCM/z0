@@ -31,6 +31,6 @@ namespace Z0
         }
 
         public string Format()
-            => $"n(f:{value<N>()}, t:{Identify.NumericType<T>()})";        
+            => $"n(f:{value<N>()}, t:{Identify.numeric<T>()})";        
     }
 }

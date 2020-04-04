@@ -9,7 +9,7 @@ namespace Z0
     
     using static Root;
 
-    [ApiHost("generic", ApiHostKind.Generic)]
+    [ApiHost]
     public static partial class VCore
     {
 

@@ -118,16 +118,16 @@ namespace Z0
             var index = UnitsIndex;
 
             w = w128;
-            Register(index++, Identify.Resource(basename, w, NumericKind.U8), Units128x8u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U16), Units128x16u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U32), Units128x32u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U64), Units128x64u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U8), Units128x8u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U16), Units128x16u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U32), Units128x32u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U64), Units128x64u);
             
             w = w256;
-            Register(index++, Identify.Resource(basename, w, NumericKind.U8), Units256x8u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U16), Units256x16u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U32), Units256x32u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U64), Units256x64u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U8), Units256x8u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U16), Units256x16u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U32), Units256x32u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U64), Units256x64u);
         }
     }
 }

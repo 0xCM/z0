@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Seed;
 
@@ -25,6 +26,24 @@ namespace Z0
                 return K.W512;
             else
                 return 0;
+        }
+
+        /// <summary>
+        /// Determines the width of a system-defined or custom intrinsic vector type
+        /// </summary>
+        /// <param name="t">The source type</param>
+        public static TypeWidth vector(Type t)
+        {
+            var eff = t.EffectiveType();
+            var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
+            if(def == null)
+                return TypeWidth.None;
+            else if(def == typeof(Vector128<>))            
+                return TypeWidth.W128;
+            else if(def == typeof(Vector256<>))
+                return TypeWidth.W256;
+            else
+                return t.Tag<VectorAttribute>().MapValueOrDefault(a => a.TypeWidth, TypeWidth.None);
         }
     }
 }

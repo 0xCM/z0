@@ -17,14 +17,8 @@ namespace Z0
 
     partial class Identify
     {
-        public static TypeIdentity EnumType(Type src)        
-            => src.IsEnum ? EnumIdentity.Define(src.Name, src.GetEnumUnderlyingType().NumericKind()) : EnumIdentity.Empty;
-
-        public static EnumIdentity EnumType(string name, NumericKind basetype)
-            => EnumIdentity.Define(name, basetype);
-
         [MethodImpl(Inline)]
-        public static PrimalIdentity Primal(Type t)
+        public static PrimalIdentity primal(Type t)
             => t.IsSystemDefined() ? 
                (NumericKinds.test(t)
                ? PrimalIdentity.Define(t.NumericKind(), t.SystemKeyword())
@@ -36,7 +30,7 @@ namespace Z0
         /// Attempts to parse a numeric kind from a string in the form {width}{indicator} 
         /// </summary>
         /// <param name="src">The source text</param>
-        public static NumericKind Numeric(string src)
+        public static NumericKind numeric(string src)
         {
             var input = src.Trim();
             if(string.IsNullOrWhiteSpace(input))
@@ -65,11 +59,11 @@ namespace Z0
         /// Attempts to parse a sequence of numeric kinds from a sequence of strings in the form {width}{indicator} 
         /// </summary>
         /// <param name="src">The source text</param>
-        public static IEnumerable<NumericKind> Numeric(IEnumerable<string> kinds)
+        public static IEnumerable<NumericKind> numeric(IEnumerable<string> kinds)
             => from part in kinds
                let x = part.StartsWith(OpIdentity.GenericLocator)
-                    ? Identify.Numeric(part.Substring(1, part.Length - 1)) 
-                    : Identify.Numeric(part)
+                    ? Identify.numeric(part.Substring(1, part.Length - 1)) 
+                    : Identify.numeric(part)
                 select x;        
 
         /// <summary>
@@ -77,7 +71,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]
-        public static ISet<Type> TypeSet(NumericKind k)
+        public static ISet<Type> types(NumericKind k)
             => GetTypeset(k);
 
         /// <summary>
@@ -85,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]
-        public static ISet<NumericKind> KindSet(NumericKind k)
+        public static ISet<NumericKind> kinds(NumericKind k)
             => GetKindset(k);
 
         static HashSet<Type> CreateTypeset(NumericKind k)

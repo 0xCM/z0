@@ -10,7 +10,7 @@ namespace Z0
     {
         public static string TestCaseName(this IExplicitTest unit)
         {
-            var owner = Identify.Owner(unit.GetType());
+            var owner = Identify.owner(unit.GetType());
             var hostname = unit.GetType().Name;
             var opname = "explicit";
             return $"{owner}/{hostname}/{opname}";
@@ -18,7 +18,7 @@ namespace Z0
 
         public static string TestActionName(this IUnitTest unit)
         {
-            var owner = Identify.Owner(unit.GetType());
+            var owner = Identify.owner(unit.GetType());
             var hostname = unit.GetType().Name;
             var opname = "action";
          

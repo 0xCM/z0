@@ -36,7 +36,7 @@ namespace Z0
 
             public static BitClear128<T> Op => default;
 
-            public OpIdentity Id => Identify.SFunc(Name,VKind);
+            public OpIdentity Id => Identify.sfunc(Name,VKind);
 
 
             [MethodImpl(Inline)]
@@ -58,7 +58,7 @@ namespace Z0
 
             public static BitClear256<T> Op => default;
 
-            public OpIdentity Id => Identify.SFunc(Name,VKind);
+            public OpIdentity Id => Identify.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) 

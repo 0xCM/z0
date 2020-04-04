@@ -65,6 +65,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public Option<TypeIdentity> ToOption()
             => IsEmpty ? Option.none<TypeIdentity>() : Option.some(this);
-
     }
 }

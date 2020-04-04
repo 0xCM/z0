@@ -24,6 +24,10 @@ namespace Z0
             => new EnumIdentity(name, basetype);
 
         [MethodImpl(Inline)]
+        public static EnumIdentity Define(Type src)        
+            => src.IsEnum ? Define(src.Name, src.GetEnumUnderlyingType().NumericKind()) : Empty;
+
+        [MethodImpl(Inline)]
         public static implicit operator string(EnumIdentity src)
             => src.Identifier;
 

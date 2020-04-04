@@ -7,14 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-    readonly struct NatSpanIdentity : ITypeIdentityProvider
-    {
-        public TypeIdentity DefineIdentity(Type src)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public readonly struct NatSpanSig : IEquatable<NatSpanSig>
     {
         public static Option<NatSpanSig> From(Type t)

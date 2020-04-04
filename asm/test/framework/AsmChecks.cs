@@ -85,14 +85,14 @@ namespace Z0.Asm.Validation
         /// </summary>
         /// <param name="id">Moniker that identifies the operation under test</param>
         string CaseName(OpIdentity id)
-            => Identify.TestCase(GetType(),id);
+            => Identify.testcase(GetType(),id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         string CaseName(string fullname)
-            => Identify.TestCase(GetType(), fullname);
+            => Identify.testcase(GetType(), fullname);
 
         protected OpIdentity TestOpName<T>(string basename, T t = default)
             where T : unmanaged
@@ -580,7 +580,7 @@ namespace Z0.Asm.Validation
             var results = list<TestCaseRecord>();
 
             var w = w64;
-            var id = Identify.NumericOp(name, kind, false);
+            var id = Identify.Op(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -616,8 +616,8 @@ namespace Z0.Asm.Validation
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = Identify.NumericOp(name, kind, false);
-            var gId = Identify.NumericOp(name, kind, true);
+            var dId = Identify.Op(name, kind, false);
+            var gId = Identify.Op(name, kind, true);
 
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);

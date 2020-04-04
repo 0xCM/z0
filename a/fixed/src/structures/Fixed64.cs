@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    [Fixed(FixedWidth.W32,false, FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W64)]
     public struct Fixed64 : IFixedNumeric<Fixed64,ulong>, IEquatable<Fixed64>
     {
         ulong X0;

@@ -32,7 +32,7 @@ namespace Z0
             internal BinaryPredicate(Z0.BinaryPredicate<T> f, string name)            
             {
                 this.F = f;
-                this.Id = Identify.SFunc<T>(name);
+                this.Id = Identify.sFunc<T>(name);
             }
 
             [MethodImpl(Inline)]

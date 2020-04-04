@@ -165,16 +165,16 @@ namespace Z0
             var index = IncIndex;
 
             w = w128;
-            Register(index++, Identify.Resource(basename, w, NumericKind.U8), Inc128x8u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U16), Inc128x16u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U32), Inc128x32u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U64), Inc128x64u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U8), Inc128x8u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U16), Inc128x16u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U32), Inc128x32u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U64), Inc128x64u);
             
             w = w256;
-            Register(index++, Identify.Resource(basename, w, NumericKind.U8), Inc256x8u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U16), Inc256x16u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U32), Inc256x32u);
-            Register(index++, Identify.Resource(basename, w, NumericKind.U64), Inc256x64u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U8), Inc256x8u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U16), Inc256x16u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U32), Inc256x32u);
+            Register(index++, Identify.resource(basename, w, NumericKind.U64), Inc256x64u);
         }
     }
 }

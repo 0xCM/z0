@@ -48,6 +48,18 @@ namespace Z0
             this.PartKind = kind;
             this.Identifier = text;
         }
+
+        public bool IsName
+            => PartKind == IdentityPartKind.Name;
+
+        public bool IsSuffix
+            => PartKind == IdentityPartKind.Suffix;
+
+        public bool IsNumeric
+            => PartKind == IdentityPartKind.Numeric;
+
+        public bool IsSegment
+            => PartKind == IdentityPartKind.Segment;        
         
         public IdentityPart WithText(string src)
             => Define(PartIndex, PartKind, src);

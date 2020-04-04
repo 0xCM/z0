@@ -22,7 +22,7 @@ namespace Z0
 
             public static TestZ128<T> Op => default;
 
-            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x,Vector128<T> y) => gvec.vtestz(x,y);
@@ -45,7 +45,7 @@ namespace Z0
 
             public static TestZ256<T> Op => default;
 
-            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x,Vector256<T> y) => gvec.vtestz(x,y);

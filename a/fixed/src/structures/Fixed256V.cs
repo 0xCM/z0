@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
 
     [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W256,false,FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W256)]
     public struct Fixed256V : IFixed<Fixed256V>, IEquatable<Fixed256V>
     {
         internal Vector256<ulong> data;

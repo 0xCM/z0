@@ -12,7 +12,7 @@ namespace Z0
 
     using static Core;
 
-    [StructLayout(LayoutKind.Sequential, Size = 64), Vector(FixedWidth.W512)]
+    [StructLayout(LayoutKind.Sequential, Size = 64), Vector(TypeWidth.W512)]
     public readonly struct Vector512<T>
         where T : unmanaged
     {        

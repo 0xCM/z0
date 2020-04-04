@@ -4,7 +4,6 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
-
   
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
@@ -19,8 +18,6 @@
     <ProjectReference Include="$(VBits)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(VData)" />
-    <!-- <ProjectReference Include="$(Numeric)" /> -->
-
   </ItemGroup>
 
 </Project>

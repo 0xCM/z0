@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    [Fixed(FixedWidth.W16,false,FixedWidth.W8 | FixedWidth.W16)]
+    [Fixed(FixedWidth.W16)]
     public struct Fixed16 : IFixedNumeric<Fixed16,ushort>, IEquatable<Fixed16>
     {
         ushort X0;

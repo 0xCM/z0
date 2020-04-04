@@ -24,18 +24,18 @@ namespace Z0
         /// Determines whether an attribute of specified type is attached to a member
         /// </summary>
         /// <param name="m">The member to test</param>
-        /// <param name="t">The target attribute type</param>
-        public static bool Tagged(this MemberInfo m, Type t)
-            => System.Attribute.IsDefined(m, t);
+        /// <param name="tAttrib">The target attribute type</param>
+        public static bool Tagged(this MemberInfo m, Type tAttrib)
+            => System.Attribute.IsDefined(m, tAttrib);
 
         /// <summary>
         /// Selects the members with a particular attribute
         /// </summary>
         /// <param name="src">The members to examine</param>
         /// <param name="name">The name to match</param>
-        public static IEnumerable<T> Tagged<T>(this IEnumerable<T> src, Type attrib)
+        public static IEnumerable<T> Tagged<T>(this IEnumerable<T> src, Type tAttrib)
             where T : MemberInfo
-                => src.Where(m => m.Tagged(attrib));
+                => src.Where(m => m.Tagged(tAttrib));
  
         /// <summary>
         /// Returns true if a parametrically-identified attribute is not applied to the subject

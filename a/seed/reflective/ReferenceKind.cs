@@ -22,7 +22,6 @@ namespace Z0
             ? Z0.ParamRefKind.Out : src.ParameterType.IsByRef 
             ? Z0.ParamRefKind.Ref : Z0.ParamRefKind.None;
 
-
         public static string Keyword(this ParamRefKind src)        
             => src switch{
                 ParamRefKind.In => "in",

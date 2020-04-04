@@ -33,35 +33,38 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to test</param>
         public static bool test(Type t)
-        {
-            var eff = t.EffectiveType();
-            var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
-            if(def == null)
-                return false;
+            => t.IsVector();
+        // {
+        //     var eff = t.EffectiveType();
+        //     var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
+        //     if(def == null)
+        //         return false;
 
-            return def == typeof(Vector128<>) || def == typeof(Vector256<>) || VectorAttribute.Test(def);             
-        }
+        //     return def == typeof(Vector128<>) || def == typeof(Vector256<>) || VectorAttribute.Test(def);             
+        // }
+
 
         [MethodImpl(Inline)]
         public static TypeWidth width(Type t)
-        {
-            var eff = t.EffectiveType();
-            var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
-            if(def == null)
-                return TypeWidth.None;
-            else if(def == typeof(Vector128<>))            
-                return TypeWidth.W128;
-            else if(def == typeof(Vector256<>))
-                return TypeWidth.W256;
-            else
-            {
-                var tag = t.GetCustomAttribute<VectorAttribute>();
-                if(tag != null)
-                    return tag.TotalWdth;
-                else
-                    return TypeWidth.None;
-            }            
-        }
+            => Widths.vector(t);
+        // {
+        //     var eff = t.EffectiveType();
+        //     var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
+        //     if(def == null)
+        //         return TypeWidth.None;
+        //     else if(def == typeof(Vector128<>))            
+        //         return TypeWidth.W128;
+        //     else if(def == typeof(Vector256<>))
+        //         return TypeWidth.W256;
+        //     else
+        //     {
+        //         var tag = t.GetCustomAttribute<VectorAttribute>();
+        //         if(tag != null)
+        //             return tag.TotalWdth;
+        //         else
+        //             return TypeWidth.None;
+        //     }            
+        // }
 
         /// <summary>
         /// Determines whether a type is an intrinsic vector of specified width

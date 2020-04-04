@@ -9,10 +9,15 @@ namespace Z0
     using TW = TypeWidth;
 
     /// <summary>
-    /// Defines a <see cref="FixedWidth"/> subset that is constrained to widths of numeric primitives
+    /// Defines a <see cref="TypeWidth"/> subset that is constrained to widths of numeric primitives
     /// </summary>
     public enum NumericWidth : uint
     {
+        /// <summary>
+        /// A width without substance
+        /// </summary>
+        None = 0,
+
         /// <summary>
         /// Indicates a synthetic, but useful, bit-width of 1
         /// </summary>

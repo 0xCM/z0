@@ -320,7 +320,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check,CaseName(Identify.SFunc<T>("bsparse")));
+            CheckAction(check,CaseName(Identify.sFunc<T>("bsparse")));
         }
 
         void bitspan_check(Span<byte> packed, BitSpan bitspan)

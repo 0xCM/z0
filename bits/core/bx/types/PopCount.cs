@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "popcount";
 
-            public OpIdentity Id => Identify.SFunc<T>(Name);
+            public OpIdentity Id => Identify.sFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(T a) => gbits.pop(a);

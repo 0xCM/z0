@@ -11,6 +11,7 @@
     <ProjectReference Include="$(TestLib)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />    
+    <ProjectReference Include="$(Intrinsics)" />
   </ItemGroup>
 
 </Project>

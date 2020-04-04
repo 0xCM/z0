@@ -26,7 +26,7 @@ namespace Z0
             Claim.eq(opid, uri.OpId);
             Claim.eq(true, opid.IsGeneric);
             Claim.eq("vgeneric", opid.Name);
-            var parts  = Identify.Parts(opid).ToArray();
+            var parts  = Identify.parts(opid).ToArray();
             foreach(var p in parts)
                 trace(p.PartKind, p);                            
         }

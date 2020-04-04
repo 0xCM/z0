@@ -279,7 +279,7 @@ namespace Z0
         [MethodImpl(Inline)]
         string IFormattable.ToString(string format, IFormatProvider formatProvider)        
             => Formattable.ToString(format, formatProvider);     
-        public TypeIdentity DefineIdentity()
+        public TypeIdentity Identity()
             => TypeIdentity.Define("nbox");
     }
 }

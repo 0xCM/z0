@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 64-bit blocks
     /// </summary>
-    [Blocked(FixedWidth.W64,true,FixedWidth.NumericWidths)]
+    [Blocked(TypeWidth.W64,true, CellWidth.Numeric)]
     public readonly ref struct Block64<T>
         where T : unmanaged
     {

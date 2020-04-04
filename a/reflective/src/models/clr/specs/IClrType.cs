@@ -21,6 +21,8 @@ namespace Z0
     /// </summary>
     public interface IClrType : IClrArtifact<Type>
     {
+        ClrTypeKind Kind {get;}
+
         string IArtifactModel.Name
             => Subject.Name;
         

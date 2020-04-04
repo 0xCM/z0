@@ -8,7 +8,7 @@ namespace Z0
     
     readonly struct BitGridIdentity : ITypeIdentityProvider
     {        
-        public TypeIdentity DefineIdentity(Type src)
+        public TypeIdentity Identify(Type src)
         {
             var kind = src.GridKind().ValueOrDefault();
             if(!kind.IsSome())

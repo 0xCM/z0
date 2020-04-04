@@ -11,9 +11,6 @@ namespace Z0
     partial class BlockedKinds
     {
         public static TypeWidth width(Type src)
-            => tag(src)?.TotalWdth ?? TypeWidth.None;
-
-        static BlockedAttribute tag(Type t)
-            => (BlockedAttribute)t.EffectiveType().GetCustomAttribute(typeof(BlockedAttribute));        
+            => Widths.blocked(src);
     }
 }

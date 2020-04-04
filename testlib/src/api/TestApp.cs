@@ -80,7 +80,7 @@ namespace Z0
             if(!HasAny(host,filters))
                 return;
 
-            var hosturi = Identify.HostUri(host);
+            var hosturi = Identify.host(host);
             var results = new List<TestCaseRecord>();
             var unit = default(IUnitTest);
             try
@@ -305,7 +305,7 @@ namespace Z0
         Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
         {
             var exectime = Duration.Zero;
-            var casename = Identify.TestCase(method);
+            var casename = Identify.testcase(method);
             var clock = counter(false);
             var control = unit as ITestControl;
 

@@ -89,7 +89,7 @@ namespace Z0
 
         public Type FixedType => typeof(T);
 
-        public FixedWidth Width => Widths.fwidth<W>();
+        public FixedWidth Width => Widths.tfixed<W>();
     }
 
 }

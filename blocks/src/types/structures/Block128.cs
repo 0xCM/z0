@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that with content length can be evenly partitioned into 128-bit blocks
     /// </summary>
-    [Blocked(FixedWidth.W128,true,FixedWidth.NumericWidths)]
+    [Blocked(TypeWidth.W128,true,CellWidth.Numeric)]
     public readonly ref struct Block128<T>
         where T : unmanaged
     {

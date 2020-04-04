@@ -16,6 +16,7 @@ namespace Z0
     /// </summary>
     public interface IClrRaw : IClrType
     {
+        ClrTypeKind IClrType.Kind => ClrTypeKind.Struct;
         
     }
 

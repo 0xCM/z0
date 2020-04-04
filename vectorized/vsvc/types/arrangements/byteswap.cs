@@ -21,7 +21,7 @@ namespace Z0
 
             public static ByteSwap128<T> Op => default;
 
-            public OpIdentity Id => Identify.SFunc(Name,VKind);
+            public OpIdentity Id => Identify.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vbyteswap(x);
@@ -39,7 +39,7 @@ namespace Z0
 
             public static ByteSwap256<T> Op => default;
 
-            public OpIdentity Id => Identify.SFunc(Name,VKind);
+            public OpIdentity Id => Identify.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => gvec.vbyteswap(x);

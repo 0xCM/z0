@@ -21,7 +21,7 @@ namespace Z0
         IdentityTargetKind IIdentityProvider.ProviderKind 
             => IdentityTargetKind.Method;
 
-        IIdentified IIdentifier<MethodInfo>.Identify(MethodInfo src)
+        IIdentified IIdentityProvider<MethodInfo>.Identify(MethodInfo src)
             => DefineIdentity(src);
 
     }

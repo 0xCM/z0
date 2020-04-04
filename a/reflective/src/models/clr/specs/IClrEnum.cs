@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     public interface IClrEnum : IClrType
     {
-
+        ClrTypeKind IClrType.Kind => ClrTypeKind.Enum;
     }
 
     /// <summary>

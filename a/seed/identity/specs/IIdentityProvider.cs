@@ -17,30 +17,21 @@ namespace Z0
     /// <summary>
     /// Characterizes a serviice capable of assigning identity to T-values
     /// </summary>
-    /// <typeparam name="T">The subject of</typeparam>
-    public interface IIdentifier<T> : IIdentityProvider
+    /// <typeparam name="S">The subject of identification</typeparam>
+    public interface IIdentityProvider<S> : IIdentityProvider
     {
-        IIdentified Identify(T src);
+        IIdentified Identify(S src);
 
         IIdentified IIdentityProvider.Identify(object src)
-            => Identify((T)src);
+            => Identify((S)src);
     }
 
-    public interface ITypeIdentifier : IIdentifier<Type>
-    {
-        IdentityTargetKind IIdentityProvider.ProviderKind 
-            => IdentityTargetKind.Type;
-    }
-
-    public interface IMethodIdentifier : IIdentifier<MethodInfo>
-    {
-        IdentityTargetKind IIdentityProvider.ProviderKind 
-            => IdentityTargetKind.Method;        
-    }
-
-    public interface IIdentityProvider<S,T> : IIdentifier<S>
+    public interface IIdentityProvider<S,T> : IIdentityProvider<S>
         where T : IIdentified
     {
-
+        new T Identify(S src);
+        
+        IIdentified IIdentityProvider<S>.Identify(S src)
+            => Identify(src);
     }
 }

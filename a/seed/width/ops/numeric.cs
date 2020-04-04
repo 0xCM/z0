@@ -13,6 +13,15 @@ namespace Z0
 
     partial class Widths
     {        
+        public static K numeric(Type t)
+        {
+            var k = NumericKinds.kind(t);
+            if(k != 0)
+                return (K)(uint)k;
+            else
+                return K.None;            
+        }         
+
         /// <summary>
         /// Computes the literal numeric width from a parametric width
         /// </summary>

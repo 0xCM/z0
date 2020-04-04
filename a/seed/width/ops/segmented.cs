@@ -5,19 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Seed;
 
-    partial class XTend
-    {
+    partial class Widths
+    {        
         /// <summary>
-        /// Determines whether a type is blocked memory store
+        /// Determines the width of a (known) segmented type
         /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsBlocked(this Type t)
-            => BlockedKinds.test(t);
+        /// <param name="src">The source type</param>
+        public static TypeWidth segmented(Type src)
+            => src.Tag<SegmentedAttribute>().MapValueOrElse(a => a.TypeWidth, () => vector(src));
     }
 }

@@ -10,9 +10,9 @@ namespace Z0
 
     using static root;
     
-    readonly struct RowBitsIdentity : ITypeIdentityProvider
+    readonly struct RowBitsIdentityProvider : ITypeIdentityProvider
     {        
-        public static TypeIdentity IdentifyNumericClosure(string root, Type arg)
+        public static TypeIdentity NumericClosure(string root, Type arg)
         {
             var kind = arg.NumericKind();
             var indicator = kind.Indicator().ToChar();
@@ -24,7 +24,7 @@ namespace Z0
 
         public IEnumerable<Type> Identifiable => items(typeof(RowBits<>));
         
-        public TypeIdentity DefineIdentity(Type src)
+        public TypeIdentity Identify(Type src)
         {
             var t = src.GenericDefinition();
             if(t.IsNone())
@@ -38,7 +38,7 @@ namespace Z0
             else
             {
                 var arg = src.GetGenericArguments().Single();
-                return Identify.NumericClosure(@base, arg);
+                return Z0.Identify.numeric(@base, arg);
             }
         }
     }

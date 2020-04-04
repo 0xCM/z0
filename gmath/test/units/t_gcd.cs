@@ -63,8 +63,8 @@ namespace Z0
                 compare.Stop();
             }
 
-            ReportBenchmark($"gcdbin{Identify.NumericType<T>()}", OpCount,subject);
-            ReportBenchmark($"gcd{Identify.NumericType<T>()}", OpCount,compare);
+            ReportBenchmark($"gcdbin{Identify.numeric<T>()}", OpCount,subject);
+            ReportBenchmark($"gcd{Identify.numeric<T>()}", OpCount,compare);
         }
 
         /// <summary>

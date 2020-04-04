@@ -22,7 +22,7 @@ namespace Z0
 
             public static Broadcast128<T> Op => default;
 
-            public OpIdentity Id => Identify.SFunc(Name,VKind);
+            public OpIdentity Id => Identify.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(T a) => VCore.vbroadcast(n128, a);            
@@ -38,7 +38,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => Identify.SFunc<T>($"{Name}_{Identify.NumericType<S>()}", VKind);
+            public OpIdentity Id => Identify.sfunc<T>($"{Name}_{Identify.numeric<S>()}", VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(S a) => VCore.vbroadcast(n128, convert<S,T>(a));            
@@ -53,7 +53,7 @@ namespace Z0
 
             public static Broadcast256<T> Op => default;
 
-            public OpIdentity Id => Identify.SFunc(Name,VKind);
+            public OpIdentity Id => Identify.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(T a) => VCore.vbroadcast(n256, a);            
@@ -69,7 +69,7 @@ namespace Z0
 
             public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => Identify.SFunc<T>($"{Name}_{Identify.NumericType<S>()}", VKind);
+            public OpIdentity Id => Identify.sfunc<T>($"{Name}_{Identify.numeric<S>()}", VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(S a) => VCore.vbroadcast(n256, convert<S,T>(a));            

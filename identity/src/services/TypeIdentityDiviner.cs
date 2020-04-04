@@ -23,10 +23,10 @@ namespace Z0
             else if(arg.IsTypeNat())
                 return NatId(arg);
             else if(arg.IsSystemDefined())
-                return Identify.Primal(arg).AsTypeIdentity().ToOption();
+                return Identify.primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
-                return Identify.EnumType(arg).ToOption();
-            else if(IsSegmented(arg))
+                return some(EnumIdentity.Define(arg).AsTypeIdentity());
+            else if(arg.IsSegmented())
                 return SegmentedId(arg);
             else if(SpanTypes.IsSystemSpan(arg))
                 return SystemSpanId(arg);
@@ -83,18 +83,18 @@ namespace Z0
 
         static Option<TypeIdentity> SegmentedId(Type t)
             =>  from i in SegIndicator(t)
-                let segwidth = Identity.width(t)
+                let segwidth = Identity.divine(t)
                 where segwidth.IsSome()
                 let segfmt = segwidth.FormatValue()
                 let arg = t.GetGenericArguments().Single()
-                let argwidth = Identity.width(arg)
+                let argwidth = Identity.divine(arg)
                 where argwidth.IsSome()
                 let argfmt = argwidth.FormatValue()
                 let nk = arg.NumericKind()
                 where  nk != 0
                 let nki = nk.Indicator().Format()
                 let identifer = concat(i, segfmt, IDI.SegSep,argfmt, nki)                
-                select SegmentedIdentity.Define(i,segwidth,nk).AsTypeIdentity();
+                select Segmentation.identify(i,segwidth,nk).AsTypeIdentity();
 
         static Option<TypeIdentity> NatId(Type arg)
             => from v in arg.NatValue() 
@@ -154,7 +154,7 @@ namespace Z0
                 => this.f = f;
             
             [MethodImpl(Inline)]
-            public TypeIdentity DefineIdentity(Type src)
+            public TypeIdentity Identify(Type src)
                 => f(src);
         }
     }

@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
 
     [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W512, false, FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W512)]
     public struct Fixed512V  : IFixed<Fixed512V>
     {
         Fixed256V X0;

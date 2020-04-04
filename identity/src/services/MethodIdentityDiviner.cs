@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static TypeIdentity identify(Type t)
-            => TypeIdentityDiviner.IdentityProvider(t).DefineIdentity(t);
+            => TypeIdentityDiviner.IdentityProvider(t).Identify(t);
 
         /// <summary>
         /// Extracts an index-identified segmented identity part from an operation identity
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="partidx">The 0-based part index</param>
         public static Option<SegmentedIdentity> segment(OpIdentity src, int partidx)
             => from p in part(src, partidx)
-                from s in segmented(p)
+                from s in Segmentation.identify(p)
                 select s;
 
         static OpIdentity identify(MethodInfo src, NumericKind k)
@@ -59,44 +59,20 @@ namespace Z0
         }
 
         /// <summary>
-        /// Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
-        /// </summary>
-        /// <param name="part">The source part</param>
-        static Option<SegmentedIdentity> segmented(IdentityPart part)
-        {
-            if(part.PartKind == IdentityPartKind.Segment)
-            {
-                if(Z0.SegmentedIdentity.TryParse(part.Identifier, out var seg))
-                    return seg;                
-            }
-
-            return none<SegmentedIdentity>();                
-        }
-
-        /// <summary>
         /// Divines the bit-width of a specified type, if possible
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
-        public static TypeWidth width(Type t)
-        {
-            if(t.IsVector())
-                return VectorType.width(t);
-            else if(t.IsBlocked())
-                return BlockedKinds.width(t);
-            if(NumericKinds.test(t))
-                return t.NumericWidth();
-            else if(t == typeof(bit))
-                return TypeWidth.W1;
-            else
-                return TypeWidth.None;
-        }
+        public static TypeWidth divine(Type t)
+            => Widths.divine(t);
 
         public static string identify(ParameterInfo p)
         {
             if(!p.IsParametric())
             {
-                var id = Identity.identify(p.ParameterType.EffectiveType());
+                var id = p.ParameterType.IsEnum 
+                    ? identify(p.ParameterType) 
+                    : identify(p.ParameterType.EffectiveType());
                 if(!id.IsEmpty)
                     return text.concat(id.Identifier, p.ReferenceKind().Format());                
             }
@@ -110,13 +86,12 @@ namespace Z0
         /// <param name="partidx">The 0-based part index</param>
         static Option<IdentityPart> part(OpIdentity src, int partidx)
         {
-            var parts = Identify.Parts(src).ToArray();
+            var parts = Identify.parts(src).ToArray();
             if(partidx <= parts.Length - 1)
                 return parts[partidx];
             else
                 return Option.none<IdentityPart>();
         }
-
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports

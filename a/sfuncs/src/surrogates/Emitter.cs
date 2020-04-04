@@ -39,7 +39,7 @@ namespace Z0
             public Emitter(Z0.Emitter<T> f, string name)            
             {
                 this.F = f;
-                this.Id = Identify.SFunc<T>(name);
+                this.Id = Identify.sFunc<T>(name);
             }
 
             [MethodImpl(Inline)]

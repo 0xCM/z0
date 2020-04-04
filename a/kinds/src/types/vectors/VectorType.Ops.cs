@@ -12,27 +12,11 @@ namespace Z0
     public static class VectorTypesOps
     {
         /// <summary>
-        /// Determines whether a type is an intrinsic vector
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static bool IsVector(this Type t)
-            => VectorType.test(t);
-
-        /// <summary>
         /// Determines whether a method returns an intrinsic vector
         /// </summary>
         /// <param name="src">The method to test</param>
         public static bool ReturnsVector(this MethodInfo src)
             => src.ReturnType.IsVector();
-
-        public static TypeWidth NumericWidth(this Type t)
-        {
-            var k = NumericKinds.kind(t);
-            if(k != 0)
-                return (TypeWidth)(ushort)k;
-            else
-                return TypeWidth.None;            
-        }         
 
         /// <summary>
         /// Determines whether a type is a 128-bit intrinsic vector

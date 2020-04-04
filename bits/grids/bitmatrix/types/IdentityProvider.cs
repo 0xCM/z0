@@ -9,7 +9,7 @@ namespace Z0
     
     readonly struct BitMatrixIdentityProvider : ITypeIdentityProvider
     {
-        public TypeIdentity DefineIdentity(Type src)
+        public TypeIdentity Identify(Type src)
         {
             const string prefix = "bm";
             

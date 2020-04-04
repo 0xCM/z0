@@ -24,7 +24,7 @@ namespace Z0
                 foreach(var t in method.ParameterTypes())
                 {
                     Claim.require(t.IsBlocked());
-                    Claim.require(Identity.width(t) == TypeWidth.W128 || Identity.width(t) == TypeWidth.W256);
+                    Claim.require(Identity.divine(t) == TypeWidth.W128 || Identity.divine(t) == TypeWidth.W256);
                 }
                     
                 var id = Identity.generic(method);

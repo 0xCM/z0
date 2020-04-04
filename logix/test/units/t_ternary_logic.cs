@@ -7,11 +7,9 @@ namespace Z0.Logix
     using System;
     
     using static root;
-    using static Gone;
 
     public class t_ternary_logic : UnitTest<t_ternary_logic>
     {
-
         protected override int RepCount => Pow2.T08;
         
         ReadOnlySpan<TernaryBitLogicKind> TernaryKinds
@@ -147,7 +145,7 @@ namespace Z0.Logix
                 BitVector<T> v = NumericOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
-                    Notify($"Equivalence failed for ternary op {kind}:{Identify.NumericType<T>()}");
+                    Notify($"Equivalence failed for ternary op {kind}:{Identify.numeric<T>()}");
 
                 Claim.eq(u,v);
 

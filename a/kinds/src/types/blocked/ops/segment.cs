@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static NumericKind segment(Type t)
-            => test(t) ?  t.SuppliedTypeArgs().First().NumericKind() : NumericKind.None;
+            => t.IsBlocked() ?  t.SuppliedTypeArgs().First().NumericKind() : NumericKind.None;
 
     }
 }

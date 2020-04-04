@@ -43,7 +43,7 @@ namespace Z0
             where W : unmanaged, ITypeWidth
         {
             var id = Identify.Op<W,T>(f.Id.Name);
-            var owner = Identify.Owner(context.HostType);
+            var owner = Identify.owner(context.HostType);
             var host = context.HostType.Name;
             return $"{owner}/{host}/{id}";            
         }

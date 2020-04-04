@@ -37,5 +37,4 @@ namespace Z0
         /// </example>
         Segment ,
     }
-
 }

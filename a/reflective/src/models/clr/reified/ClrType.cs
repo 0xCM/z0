@@ -8,8 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-
-    using static Seed;
+    using static Z0.Seed;
 
     public readonly struct ClrType : IClrType<ClrType>
     {
@@ -41,10 +40,13 @@ namespace Z0
         public ClrType(Type src)
         {
             this.Subject = src;
+            this.Kind = ClrTypeKind.None;
         }
 
         public IEnumerable<ClrType> NestedTypes 
             => Subject.GetNestedTypes().Select(t => new ClrType(t));
+
+        public ClrTypeKind Kind {get;}
     }
 
     /// <summary>
@@ -70,5 +72,7 @@ namespace Z0
 
         public IEnumerable<ClrType> NestedTypes 
             => Untyped.NestedTypes;
+
+        public ClrTypeKind Kind => ClrTypeKind.None;
     }
 }

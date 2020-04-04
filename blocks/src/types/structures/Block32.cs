@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 32-bit blocks
     /// </summary>
-    [Blocked(FixedWidth.W32,true,FixedWidth.W8, FixedWidth.W16, FixedWidth.W32)]
+    [Blocked(TypeWidth.W32,true,CellWidth.W8, CellWidth.W16, CellWidth.W32)]
     public readonly ref struct Block32<T>
         where T : unmanaged
     {

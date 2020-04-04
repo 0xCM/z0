@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
 
     [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W256, false, FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W256)]
     public struct Fixed256  : IFixed<Fixed256>, IEquatable<Fixed256>
     {
         Fixed128 X0;
@@ -85,5 +85,4 @@ namespace Z0
         public override string ToString() 
             => Arrays.from(X0,X1).FormatDataList();
     }
-
 }

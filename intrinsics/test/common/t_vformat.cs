@@ -49,9 +49,9 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var srcType = Identify.NumericType<S>();
+            var srcType = Identify.numeric<S>();
             var srcCount = x.Length();
-            var dstType = Identify.NumericType<T>();
+            var dstType = Identify.numeric<T>();
             var dstCount = y.Length();
             var srcWidth = srcCount * bitsize<S>();
             var dstWidth = dstCount * bitsize<T>();
@@ -66,9 +66,9 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var srcType = Identify.NumericType<S>();
+            var srcType = Identify.numeric<S>();
             var srcCount = x.CellCount;
-            var dstType = Identify.NumericType<T>();
+            var dstType = Identify.numeric<T>();
             var dstCount = y.Length();
             var srcWidth = srcCount * bitsize<S>();
             var dstWidth = dstCount * bitsize<T>();

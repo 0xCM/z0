@@ -72,7 +72,7 @@ namespace Z0
         void veq_basecase<T>(W128 w, T t = default)
             where T : unmanaged
         {
-            var name = CaseName(Identify.SFunc(nameof(veq_basecase), w.VectorKind<T>()));
+            var name = CaseName(Identify.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
             var f = VSvc.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = Blocks.alloc<T>(w, x.BlockCount);
@@ -84,7 +84,7 @@ namespace Z0
             where T : unmanaged
         {
             
-            var name = CaseName(Identify.SFunc(nameof(veq_basecase), w.VectorKind<T>()));
+            var name = CaseName(Identify.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
             var f = VSvc.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = Blocks.alloc<T>(w, x.BlockCount);

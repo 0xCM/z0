@@ -29,6 +29,7 @@ namespace Z0.Asm.Check
                 P.Seed.Resolved,
                 P.Symbolic.Resolved,
                 P.Vectorized.Resolved,
+                P.Intrinsics.Resolved,
                 };
 
         static IAppSettings LoadSettings()
