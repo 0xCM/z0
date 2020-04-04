@@ -11,7 +11,6 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     
-    using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
     
@@ -23,8 +22,8 @@ namespace Z0
 
         public static MethodInfo vbroadcast<N>(this VMethodSearch search, Type tCell, N w = default)
             where N : unmanaged, ITypeNat
-            => typeof(vdirect).DeclaredMethods()
-                    .WithName(nameof(vdirect.vbroadcast))
+            => typeof(VCoreD).DeclaredMethods()
+                    .WithName(nameof(VCoreD.vbroadcast))
                     .WithParameterTypes(w.GetType(), tCell)
                     .WithParameterCount(2)
                     .Single();

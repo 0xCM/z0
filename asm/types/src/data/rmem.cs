@@ -5,13 +5,16 @@
 namespace Z0.Asm.Types
 {
 
-    public interface rmem : data
+    /// <summary>
+    /// Register or memory
+    /// </summary>
+    public interface rmem : reg,mem
     {
 
 
     }
 
-    public interface rmem<W> : rmem, data<W>
+    public interface rmem<W> : rmem, reg<W>
         where W : unmanaged, IDataWidth
     {
         
@@ -50,7 +53,6 @@ namespace Z0.Asm.Types
 
     public readonly struct rmem8 : rmem8<rmem8>
     {
-
 
     }
 

@@ -13,7 +13,7 @@ namespace Z0
 
     using static Core;
 
-    static partial class vdirect
+    static partial class VCoreD
     {
         /// <summary>
         /// Creates a 256-bit vector by concatenating two 128-bit source vectors

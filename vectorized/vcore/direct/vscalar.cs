@@ -10,7 +10,7 @@ namespace Z0
 
     using static Core;
 
-    static partial class vdirect
+    static partial class VCoreD
     {
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector

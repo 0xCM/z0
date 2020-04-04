@@ -24,8 +24,6 @@ namespace Z0
     public struct BitFieldSpec256x8<I>
         where I : unmanaged, Enum
     {        
-        const int MaxFieldCount = 32;
-
         internal Vector256<byte> widths;
             
         [MethodImpl(Inline)]
@@ -37,24 +35,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public byte SegWidth(I id)
             => vcell(widths, Enums.numeric<I,int>(id));
-
-        // FieldSegment[] Segments()
-        // {
-        //     Span<FieldSegment> parts = alloc<FieldSegment>(MaxFieldCount);
-        //     var count = 0;
-        //     var start = 0;
-        //     var index = FieldIndex.Create<I>().Entries;
-        //     for(int i=0; i < MaxFieldCount; i++)
-        //     {
-        //         var width = vcell(widths,i);
-        //         if(width == 0)
-        //             break;                
-
-        //         var seg = BitFields.segment(index[i].FieldName, evalue<I,byte>(index[i].FieldWidth), (byte)start, (byte)(start + width), width);
-        //         parts[count++] = seg;
-        //         start = start + width + 1;
-        //     }
-        //     return parts.Slice(0,count).ToArray();
-        // }
     }
 }

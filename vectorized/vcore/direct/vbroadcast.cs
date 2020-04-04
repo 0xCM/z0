@@ -13,7 +13,7 @@ namespace Z0
 
     using static Core;
 
-    static partial class vdirect
+    static partial class VCoreD
     {
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value

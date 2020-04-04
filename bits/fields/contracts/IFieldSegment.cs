@@ -55,10 +55,4 @@ namespace Z0
 
     }    
 
-    public interface IFixedSegment<S> : IFieldSegment<S>
-        where S : unmanaged, IFixed
-    {
-
-
-    }
 }

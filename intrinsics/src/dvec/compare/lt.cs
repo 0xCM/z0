@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<long> vlt(Vector128<long> x, Vector128<long> y)
         {
-            var a = vdirect.vconcat(x,y);
+            var a = VCoreD.vconcat(x,y);
             var b = vswaphl(a);
             return vlo(vlt(a,b));
         }
@@ -108,7 +108,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ulong> vlt(Vector128<ulong> x, Vector128<ulong> y)
         {
-            var a = vdirect.vconcat(x,y);
+            var a = VCoreD.vconcat(x,y);
             var b = vswaphl(a);
             return vlo(vlt(a,b));
         }

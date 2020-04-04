@@ -138,6 +138,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vlo(Vector128<ulong> src)
-            =>  vdirect.vscalar(n128,src.GetElement(0));
+            =>  VCoreD.vscalar(n128,src.GetElement(0));
     }
 }

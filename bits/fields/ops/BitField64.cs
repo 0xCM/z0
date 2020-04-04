@@ -31,19 +31,19 @@ namespace Z0
         FieldSegment segment(I index)
             => skip(segments, Enums.numeric<I,byte>(index));
 
-        NumericBitOps<ulong> Ops
+        BitFieldOps<ulong> Ops
         {
             [MethodImpl(Inline)]
-            get => default(NumericBitOps<ulong>);
+            get => default(BitFieldOps<ulong>);
         }
 
         public ulong this[I index]
         {
             [MethodImpl(Inline)]
-            get => Ops.read(segment(index), data);
+            get => Ops.Read(segment(index), data);
             
             [MethodImpl(Inline)]
-            set => Ops.write(segment(index), value, ref data);
+            set => Ops.Write(segment(index), value, ref data);
         }
 
         /// <summary>
@@ -53,6 +53,6 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void Read(Span<ulong> dst)
-            => Ops.read(spec, data, dst);
+            => Ops.Read(spec, data, dst);
     }
 }

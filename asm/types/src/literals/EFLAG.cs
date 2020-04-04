@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.AsmTypes
+namespace Z0.Asm.Types
 {
     using System;
 
@@ -67,5 +67,4 @@ namespace Z0.AsmTypes
         ///</summary>
         OF = Pow2.T11,
     }
-
 }

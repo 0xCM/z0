@@ -4,23 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Types
 {
-
-    public interface reg256 : reg<W256>
+   public interface reg512 : reg<W512>
     {
 
     }
 
-    public interface ymm<F> : reg256, reg<F,W256>
-        where F : struct, ymm<F>
+    public interface zmm<F> : reg512, reg<F,W512>
+        where F : struct, zmm<F>
     {
 
     }
 
-    public interface ymm<F,N> : ymm<F>
-        where F : struct, ymm<F,N>
+    public interface zmm<F,N> : zmm<F>
+        where F : struct, zmm<F,N>
         where N : unmanaged, ITypeNat
     {
 
     }
-
 }

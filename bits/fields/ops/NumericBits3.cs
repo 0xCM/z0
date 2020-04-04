@@ -33,7 +33,7 @@ namespace Z0
             this.Segments = spec.Segments;            
         }
 
-        NumericBitOps<S,T> Ops
+        BitFieldOps<S,T> Ops
         {
             [MethodImpl(Inline)]
             get => default;
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Read(in FieldSegment segment, in S src)
-            => Ops.read(segment, src);
+            => Ops.Read(segment, src);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source value per the spegment specification
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Read(I index, in S src)
-            => Ops.read(Segment(index), src);
+            => Ops.Read(Segment(index), src);
 
         /// <summary>
         /// Extracts all segments from the source value and deposits the result in a caller-suppled span
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void Read(in S src, Span<T> dst)
-            => Ops.read(Spec, src, dst);
+            => Ops.Read(Spec, src, dst);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
         public T Read(in FieldSegment segment, in S src, bool offset)
-            => Ops.read(segment, src, offset);
+            => Ops.Read(segment, src, offset);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
         public T Read(I index, in S src, bool offset)
-            => Ops.read(Segment(index), src, offset);
+            => Ops.Read(Segment(index), src, offset);
 
         /// <summary>
         /// Overwrites an identified target segment with the bits from the corresponding source segment
@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Write(in FieldSegment segment, in S src, ref T dst)
         {
-            Ops.write(segment, src, ref dst);
+            Ops.Write(segment, src, ref dst);
             return ref dst;
         }            
 
@@ -116,7 +116,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref S Write(in FieldSegment segment, in S src, ref S dst)
         {
-            Ops.write(segment, src, ref dst);
+            Ops.Write(segment, src, ref dst);
             return ref dst;
         }            
 
@@ -129,7 +129,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref S Write(I index, in S src, ref S dst)
         {
-            Ops.write(Segment(index), src, ref dst);
+            Ops.Write(Segment(index), src, ref dst);
             return ref dst;
         }            
 
@@ -142,7 +142,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Write(I index, in S src, ref T dst)
         {
-            Ops.write(Segment(index), src, ref dst);
+            Ops.Write(Segment(index), src, ref dst);
             return ref dst;
         }            
 
@@ -150,14 +150,14 @@ namespace Z0
         public ref S Write(ReadOnlySpan<T> src, ref S dst)
         {   
             var data = dst.Scalar;
-            dst.Scalar = Ops.write(Spec, src, ref data);
+            dst.Scalar = Ops.Write(Spec, src, ref data);
             return ref dst;
         }                 
 
         [MethodImpl(Inline)]
         public ref T Write(ReadOnlySpan<T> src, ref T dst)
         {   
-            Ops.write(Spec, src, ref dst);
+            Ops.Write(Spec, src, ref dst);
             return ref dst;
         }                 
     }

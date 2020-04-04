@@ -15,7 +15,7 @@ namespace Z0
     
     using static Core;
 
-    static partial class vdirect
+    static partial class VCoreD
     {
         /// <summary>
         /// Stores vector content to a memory location

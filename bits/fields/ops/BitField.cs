@@ -30,7 +30,7 @@ namespace Z0
             this.Segments = spec.Segments;            
         }
 
-        NumericBitOps<T> Ops
+        BitFieldOps<T> Ops
         {
             [MethodImpl(Inline)]
             get => default;
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="bf">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Read(in FieldSegment segment, T bf)
-            => Ops.read(segment, bf);
+            => Ops.Read(segment, bf);
 
         /// <summary>
         /// Extracts all segments from the source value and deposits the result in a caller-suppled span
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void Read(T bf, Span<T> dst)
-            => Ops.read(Spec, bf, dst);
+            => Ops.Read(Spec, bf, dst);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -70,19 +70,19 @@ namespace Z0
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
         public T Read(in FieldSegment segment, T bf, bool offset)
-            => Ops.read(segment, bf, offset);
+            => Ops.Read(segment, bf, offset);
 
         [MethodImpl(Inline)]
         public ref T Write(in FieldSegment segment, T bf, ref T dst)
         {
-            Ops.write(segment, bf, ref dst);
+            Ops.Write(segment, bf, ref dst);
             return ref dst;
         }            
 
         [MethodImpl(Inline)]
         public ref T Write(ReadOnlySpan<T> src, ref T dst)
         {   
-            Ops.write(Spec, src, ref dst);
+            Ops.Write(Spec, src, ref dst);
             return ref dst;
         }        
     }

@@ -10,7 +10,7 @@ namespace Z0.Asm.Types
 
     }
 
-    public interface reg64<F> : reg64
+    public interface reg64<F> : reg64, reg<F,W64>
         where F : struct, reg64<F>
     {
 

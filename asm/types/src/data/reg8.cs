@@ -10,7 +10,7 @@ namespace Z0.Asm.Types
 
     }
 
-    public interface reg8<F> : reg8
+    public interface reg8<F> : reg8, reg<F,W8>
         where F : struct, reg8<F>
     {
 

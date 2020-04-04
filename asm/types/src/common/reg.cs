@@ -4,8 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Types
 {
-
-    public interface reg : data
+   /// <summary>
+    /// A register - considers as data and an absolute location
+    /// </summary>
+    public interface reg : absolute, data
     {
 
     }
@@ -16,13 +18,11 @@ namespace Z0.Asm.Types
         
     }
 
-    public interface reg<F,W> : reg<W>
+    public interface reg<F,W> : reg<W>, location<F>
         where F : struct, reg<F,W>
         where W : unmanaged, IDataWidth
     {
 
     }
 
-
-    
 }

@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vconvert(Vector128<ulong> lo, Vector128<ulong> hi, N128 w, uint t = default)
-            => vconvert(vdirect.vconcat(lo,hi), w,t);
+            => vconvert(VCoreD.vconcat(lo,hi), w,t);
 
         // ~ 128x8i -> X
         // ~ ------------------------------------------------------------------

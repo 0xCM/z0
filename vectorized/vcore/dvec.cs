@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [ApiHost(ApiHostKind.Direct)]
-    public static partial class vdirect
+    public static partial class VCoreD
     {
 
 

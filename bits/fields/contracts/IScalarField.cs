@@ -9,12 +9,10 @@ namespace Z0
     
     using static Core;    
 
-    public interface IIndexedBits<F> : IBitField
-        where F : unmanaged, Enum
-    {
-
-    }
-
+    /// <summary>
+    /// Characterizes a bitfield defined over a numeric value
+    /// </summary>
+    /// <typeparam name="T">The numeric type</typeparam>
     public interface IScalarField<T> : IBitField, IScalarBits<T>
         where T : unmanaged
     {
@@ -28,11 +26,5 @@ namespace Z0
 
         T IScalarBits<T>.Scalar
             => Scalar;
-    }
-
-    public interface IScalarField<S,T> : IScalarField<T>, INumericFormatProvider<T>
-        where T : unmanaged
-        where S : IScalarField<T>
-    {        
     }
 }

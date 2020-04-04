@@ -5,14 +5,13 @@
 namespace Z0.Asm.Types
 {
 
-    public readonly struct mov : func<mov>
+    /// <summary>
+    /// Characterizes a dereferencing operation, commonly denoted by enclosing an address/register in brackets
+    /// </summary>
+    /// <typeparam name="C">The content type</typeparam>
+    public interface content<C>
     {
         
-    }
-
-    public struct mov<S,T>
-    {
-
     }
 
 }

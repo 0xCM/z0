@@ -4,58 +4,51 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Types
 {
-    public interface location
-    {
 
-    }
-    public interface relative : location
-    {
-        
-    }
-
-    public interface relative<T> : relative
-        where T : unmanaged
-    {
-        T offset {get;}
-    }
-
-    public interface absolute : location
-    {
-        
-    }
-
-    public interface absolute<T> : absolute
-        where T : unmanaged
-    {
-        T address {get;}        
-    }
-
+    /// <summary>
+    /// A displacement
+    /// </summary>
     public interface offset
     {
         
     }
 
+    /// <summary>
+    /// A displacement specified with W bits of information
+    /// </summary>
     public interface offset<W> : offset
         where W : unmanaged, ITypeWidth
     {
         
     }
 
+    /// <summary>
+    /// An 8-bit displacement
+    /// </summary>
     public interface offset8 : offset<W8>
     {
 
     }
 
+    /// <summary>
+    /// A 16-bit displacement
+    /// </summary>
     public interface offset16 : offset<W16>
     {
         
     }
 
+    /// <summary>
+    /// A 32-bit displacement
+    /// </summary>
     public interface offset32 : offset<W32>
     {
         
     }
 
+    /// <summary>
+    /// A 64-bit displacement
+    /// </summary>
     public interface offset64 : offset<W64>
     {
         

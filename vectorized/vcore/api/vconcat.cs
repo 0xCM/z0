@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Core;
-    using D = vdirect;
+    using D = VCoreD;
 
     partial class VCore
     {

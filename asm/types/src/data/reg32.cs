@@ -9,7 +9,7 @@ namespace Z0.Asm.Types
 
     }
 
-    public interface reg32<F> : reg32
+    public interface reg32<F> : reg32, reg<F,W32>
         where F : struct, reg32<F>
     {
 

@@ -110,6 +110,6 @@ namespace Z0
             => FieldSegments.formatter<byte>().Format(this);
 
         public override string ToString()
-            =>  Format();
+            => Format();
     }
 }

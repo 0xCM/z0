@@ -6,17 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    
+    using static Core;    
 
-    using static Core;
-
-    public interface IScalarBits<T>
-        where T : unmanaged
+    public interface IFixedBits<W,F> : IBitField<W>
+        where W : unmanaged, ITypeWidth
+        where F : unmanaged, IFixed
     {
-        /// <summary>
-        /// The value over which the bitvector is defined
-        /// </summary>
-        T Scalar {get;}
 
-        TypeWidth Width => width<T>();
     }
+
 }
