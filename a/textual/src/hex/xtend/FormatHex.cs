@@ -62,6 +62,5 @@ namespace Z0
         public static string FormatHex<T>(this IEnumerable<T> src, bool bracket, char sep, bool specifier)
             where T : unmanaged
                 => src.ToSpan().FormatHex(bracket, sep, specifier);
-
     }
 }

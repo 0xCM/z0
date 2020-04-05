@@ -19,7 +19,7 @@ namespace Z0.Asm
 			dst.AppendLine($"; label   : {src.Operation.Signature}");
 			dst.AppendLine($"; location: {src.AddressRange.Format()}, length: {src.AddressRange.Length} bytes");
             var lines = data.Bytes.FormatHexLines(null);
-            dst.Append(lines.Concat(AsciEscape.Eol));
+            dst.Append(lines.Concat(Chars.Eol));
             dst.AppendLine(new string('_',80));
             return dst.ToString(); 
         }                         

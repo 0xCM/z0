@@ -28,6 +28,7 @@ namespace Z0.Asm.Check
                 P.Numeric.Resolved,
                 P.Seed.Resolved,
                 P.Symbolic.Resolved,
+                P.Textual.Resolved,
                 P.Vectorized.Resolved,
                 P.Intrinsics.Resolved,
                 };

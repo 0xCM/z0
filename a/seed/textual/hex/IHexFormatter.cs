@@ -5,10 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    partial class XTend
-    {
-    }
+    public interface IHexFormatter<T> : ISpanFormatter<T,HexSeqFormatConfig,HexFormatConfig>
+        where T : struct
+         
+    {        
+
+        
+    }    
 }

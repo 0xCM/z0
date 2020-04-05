@@ -55,7 +55,7 @@ namespace Z0
 
         public string Format()
         {
-            var formatter = SpanFormatter.Define<FieldIndexEntry<I,W>>(AsciEscape.Eol);
+            var formatter = SpanFormatter.Define<FieldIndexEntry<I,W>>(Chars.Eol);
             return formatter.Format(Entries);
         }
 

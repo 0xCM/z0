@@ -50,7 +50,7 @@ namespace Z0.Asm
                 foreach(var line in FormatHeader(src))
                     dst.AppendLine(line);            
 
-            dst.AppendLine(FormatLines(src).Concat(AsciEscape.Eol));
+            dst.AppendLine(FormatLines(src).Concat(Chars.Eol));
             
             return dst.ToString();
         }
@@ -146,7 +146,7 @@ namespace Z0.Asm
 
             if(Config.EmitFunctionHeaderEncoding)
             {
-                var formatter = HexFormatter.Define<byte>();
+                var formatter = Hex.formatter<byte>();
                 var formatted = formatter.Format(code.Data, Config.FunctionHeaderEncodingFormat);                
                 dataline += text.concat(text.spaced(Chars.Eq), text.embrace(formatted));
             }

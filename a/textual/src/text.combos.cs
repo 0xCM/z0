@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]   
         public static string eol() 
-            => AsciEscape.Eol;
+            => Chars.Eol;
 
         /// <summary>
         /// Encloses text content between left and right braces
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="width">The with of the padded string</param>
         [MethodImpl(Inline)]   
         public static string zpad(object src, int width)
-            => $"{src}".PadLeft(width, AsciDigits.D0);
+            => $"{src}".PadLeft(width, Chars.D0);
 
         /// <summary>
         /// Right-Pads the input string with an optionally-specified character.

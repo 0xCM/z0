@@ -9,14 +9,6 @@ namespace Z0
     using System.Text;
     
     using static Seed;
-
-    public static class HexFormatter 
-    {
-        [MethodImpl(Inline)]
-        public static HexFormatter<T> Define<T>()
-            where T : unmanaged
-                => new HexFormatter<T>(SystemHexFormatters.Create<T>());                   
-    }
     
     public readonly struct HexFormatter<T> : IHexFormatter<T>
         where T : unmanaged
@@ -32,14 +24,6 @@ namespace Z0
         {
             this.BaseFormatter = formatter;
         }
-
-        [MethodImpl(Inline)]
-        public string FormatItem(object item)
-            => FormatItem((T)item);
-
-        [MethodImpl(Inline)]
-        public string FormatItem(object item, string format)
-            => BaseFormatter.Format(item, format);
         
         [MethodImpl(Inline)]
         public string FormatItem(T src)

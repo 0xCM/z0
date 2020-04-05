@@ -44,7 +44,7 @@ namespace Z0
             {
                 var f = this[i];
                 var index = i.ToString();
-                var width = f.Width.ToString().PadLeft(2,AsciDigits.D0);
+                var width = f.Width.ToString().PadLeft(2,Chars.D0);
 
                 fmt.Append($"{index}:{f.StartPos}..{f.EndPos}");
                 if(i != FieldCount - 1)

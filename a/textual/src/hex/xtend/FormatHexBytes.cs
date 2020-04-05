@@ -30,7 +30,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {                
                 var value = src[i].ToString(spec);
-                var padded = zpad ? value.PadLeft(2,AsciDigits.D0) : value;
+                var padded = zpad ? value.PadLeft(2,Chars.D0) : value;
 
                 builder.Append(string.Concat(pre, padded, post));
                 if(i != src.Length - 1)

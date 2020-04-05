@@ -100,7 +100,7 @@ namespace Z0
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = (ConsoleColor)color;                
                 Console.Error.Write(src);
-                Console.Error.Write(AsciEscape.Eol);
+                Console.Error.Write(Chars.Eol);
                 Console.ForegroundColor = current;
             }
         }

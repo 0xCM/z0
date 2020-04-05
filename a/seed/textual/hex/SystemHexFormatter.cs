@@ -9,7 +9,7 @@ namespace Z0
     
     using static Seed;
 
-    public readonly struct SystemHexFormatter : ISystemHexFormatter
+    public readonly struct SystemHexFormatter : ISystemFormatter
     {
         [MethodImpl(Inline)]
         public static SystemHexFormatter<T> Define<T>(Func<T,string,string> f)

@@ -56,10 +56,10 @@ namespace Z0
         public ParseResult<byte> Parse(char c)
         {
             var u = Char.ToUpperInvariant(c);
-            if(IsLo(c))
-                return ParseResult.Success(c, (byte)((byte)u - MinCode));
-            else if(IsHi(c))
-                return ParseResult.Success(c,  (byte)((byte)u - MinHiCode + 0xA));
+            if(IsScalar(c))
+                return ParseResult.Success(c, (byte)((byte)u - MinScalarCode));
+            else if(IsUpperChar(c))
+                return ParseResult.Success(c,  (byte)((byte)u - MinCharCodeU + 0xA));
             else
                 return ParseResult.Fail<byte>(c);
         }

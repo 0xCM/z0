@@ -9,58 +9,15 @@ namespace Z0
 
     using static Seed;
     using static refs;
-    using static As;
     using static HexSpecs;
 
     [ApiHost]
-    public static class Hex
+    public static partial class Hex
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Unsigned)]
-        public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+        [MethodImpl(Inline)]
+        public static HexFormatter<T> formatter<T>()
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return hexdigits_u(src, zpad, specifier, uppercase, prespec);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return hexdigits_i(src, zpad, specifier, uppercase, prespec);
-            else 
-                return hexdigits_f(src, zpad, specifier, uppercase, prespec);
-        }
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Unsigned)]
-        public static ReadOnlySpan<char> digits<T>(T value)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return digits(uint8(value));
-            else if(typeof(T) == typeof(ushort))
-                return digits(uint16(value));
-            else if(typeof(T) == typeof(uint))
-                return digits(uint32(value));
-            else if(typeof(T) == typeof(ulong))
-                return digits(uint64(value));
-            else
-                throw Unsupported.define<T>();
-        }
-
-        /// <summary>
-        /// Formats a sequence of hex characters encoded in a string according to the characteristics of the parametric
-        /// type over which the operation is closed
-        /// </summary>
-        /// <typeparam name="T">The type the source text presumes to render</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Unsigned)]
-        public static string format<T>(string digits, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            where T : unmanaged
-        {
-            var spec = specifier ? HexSpecs.PreSpec : string.Empty;
-            return zpad ?  (spec + digits.PadLeft(Unsafe.SizeOf<T>() * 2, '0')) : (spec + digits);
-        }
+                => new HexFormatter<T>(SystemHexFormatters.Create<T>());                   
 
         /// <summary>
         /// Returns the hex character code for a number in the interval [0,15]
@@ -71,7 +28,7 @@ namespace Z0
             => skip(in head(Uppercase), value & 0xf);
 
         [MethodImpl(Inline), Op]
-        public static bool ishex(char c)
+        public static bool test(char c)
             => HexSpecs.IsHex(c);
 
         [MethodImpl(Inline), Op]
@@ -82,150 +39,5 @@ namespace Z0
             d1 = (char)skip(in codes, (value >> 4) & 0xF);
         }
 
-        [MethodImpl(Inline), Op]
-        public static (char d0, char d1) tuple(byte value)
-        {
-            ref readonly var codes = ref head(Uppercase);
-            return (
-                (char)skip(in codes, 0xF & value),
-                (char)skip(in codes, (value >> 4) & 0xF)
-            );
-        }
-
-        [MethodImpl(Inline), Op]
-        public static (char d0, char d1, char d2, char d3) tuple(ushort value)
-            => (digit(value,0), digit(value,1), digit(value,3), digit(value,3));
-
-        /// <summary>
-        /// Presuming a source value int the range [0,15], returns the corresponding hex 
-        /// </summary>
-        /// <param name="value">The value to interpret</param>
-        [MethodImpl(Inline), Op]
-        public static char digit(byte value)
-            => (char)skip(in head(Uppercase), 0xF & value);
-
-        [MethodImpl(Inline), Op]
-        public static char digit(byte value, int pos)
-            => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
-
-        [MethodImpl(Inline), Op]
-        public static char digit(ushort value, int pos)
-            => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
-
-        [MethodImpl(Inline), Op]
-        public static char digit(uint value, int pos)
-            => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
-
-        [MethodImpl(Inline), Op]
-        public static char digit(ulong value, int pos)
-            => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
-
-        /// <summary>
-        /// Returns the 2-character hex representation of a byte
-        /// </summary>
-        /// <param name="value">The byte value</param>
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<char> digits(byte value)
-        {
-            ref readonly var codes = ref head(Uppercase);
-            var storage = Stacks.char2();
-            ref var dst = ref storage.C0;
-            
-            seek(ref dst,0) = (char)skip(in codes, 0xF & value);
-            seek(ref dst,1) = (char)skip(in codes, (value >> 4) & 0xF);
-            return Stacks.span(ref storage);
-        }
-
-        /// <summary>
-        /// Returns the 4-character hex representation of an unsigned 16-bit integer
-        /// </summary>
-        /// <param name="value">The byte value</param>
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<char> digits(ushort value)
-        {
-            const int count = 4;
-            ref readonly var codes = ref head(Uppercase);
-            var storage = Stacks.char4();
-            ref var dst = ref storage.C0;
-
-            for(var i=0; i < count; i++)
-                Stacks.cell(ref dst, i) = (char)skip(in codes, (value >> i*4) & 0xF);
-            return Stacks.span(ref storage);
-        }
-
-        /// <summary>
-        /// Returns the 8-character hex representation of an unsigned 32-bit integer
-        /// </summary>
-        /// <param name="value">The byte value</param>
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<char> digits(uint value)
-        {
-            const int count = 8;
-            ref readonly var codes = ref head(Uppercase);
-            var storage = Stacks.char8();
-            ref var dst = ref storage.C0;
-
-            for(var i=0; i < count; i++)
-                Stacks.cell(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
-            return Stacks.span(ref storage);
-        }
-
-        /// <summary>
-        /// Returns the 16-character hex representation of an unsigned 64-bit integer
-        /// </summary>
-        /// <param name="value">The byte value</param>
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<char> digits(ulong value)
-        {
-            const int count = 16;
-            ref readonly var codes = ref head(Uppercase);
-            var storage = Stacks.char16();
-            ref var dst = ref storage.C0;
-
-            for(var i=0; i < count; i++)
-                Stacks.cell(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
-            return Stacks.span(ref storage);
-        }
-               
-
-        [MethodImpl(Inline)]
-        static string hexdigits_i<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return int8(src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typeof(T) == typeof(short))
-                return int16(src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typeof(T) == typeof(int))
-                return int32(src).FormatHex(zpad,specifier,uppercase,prespec);
-            else 
-                return int64(src).FormatHex(zpad,specifier,uppercase,prespec);
-        } 
-
-        [MethodImpl(Inline)]
-        static string hexdigits_u<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return uint8(src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typeof(T) == typeof(ushort))
-                return uint16(src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typeof(T) == typeof(uint))
-                return uint32(src).FormatHex(zpad,specifier,uppercase,prespec);
-            else 
-                return  uint64(src).FormatHex(zpad,specifier,uppercase,prespec);
-        } 
-
-        [MethodImpl(Inline)]
-        static string hexdigits_f<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return float32(src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typeof(T) == typeof(double))
-                return float64(src).FormatHex(zpad,specifier,uppercase,prespec);
-            else
-                throw Unsupported.define<T>();
-        } 
     }
 }

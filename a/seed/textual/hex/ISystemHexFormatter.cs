@@ -8,14 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-
-
-    public interface ISystemHexFormatter : ISystemFormatter
-    {
-        
-    }
     
-    public interface ISystemHexFormatter<T> : ISystemHexFormatter
+    public interface ISystemHexFormatter<T> : ISystemFormatter
         where T : struct
     {
         string Format(T src, string config = null);

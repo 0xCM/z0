@@ -271,43 +271,111 @@ namespace Z0
         /// </summary>
         public const char MapsTo = '↦';
 
-    }
-
-    public class AsciDigits
-    {        
-        public const char D0 = '0';
-        
-        public const char D1 = '1';
-        
-        public const char D2 = '2';
-        
-        public const char D3 = '3';
-        
-        public const char D4 = '4';
-        
-        public const char D5 = '5';
-        
-        public const char D6 = '6';
-        
-        public const char D7 = '7';
-        
-        public const char D8 = '8';
-        
-        public const char D9 = '9';
-        
-    }    
-
-    public class AsciEscape
-    {        
-        public const char Tab = Chars.Tab;
-
-        public const char NewLine = Chars.NewLine;
-
-        public const char LineFeed = Chars.LineFeed;
-
         /// <summary>
-        /// The end-of-line escape sequence
+        /// The 'a character
         /// </summary>
-        public const string Eol = Chars.Eol;
-    }    
+        public const char a = 'a';
+        
+        public const char b = 'b';
+        
+        public const char c = 'c';
+        
+        public const char d = 'd';
+        
+        public const char e = 'e';
+        
+        public const char f = 'f';
+        
+        public const char g = 'g';
+        
+        public const char h = 'h';
+        
+        public const char i = 'i';
+        
+        public const char j = 'j';
+        
+        public const char k = 'k';
+        
+        public const char l = 'l';
+        
+        public const char m = 'm';
+        
+        public const char n = 'n';
+        
+        public const char o = 'o';
+        
+        public const char p = 'p';
+        
+        public const char q = 'q';
+        
+        public const char r = 'r';
+        
+        public const char s = 's';
+        
+        public const char t = 't';
+        
+        public const char u = 'u';
+        
+        public const char v = 'v';
+        
+        public const char w = 'w';
+        
+        public const char x = 'x';
+        
+        public const char y = 'y';
+        
+        public const char z = 'z';
+
+        public const char A = 'A';
+        
+        public const char B = 'B';
+        
+        public const char C = 'C';
+        
+        public const char D = 'D';
+        
+        public const char E = 'E';
+        
+        public const char F = 'F';
+        
+        public const char G = 'G';
+        
+        public const char H = 'H';
+        
+        public const char I = 'I';
+        
+        public const char J = 'J';
+
+        public const char K = 'K';
+
+        public const char L = 'L';
+        
+        public const char M = 'M';
+        
+        public const char N = 'N';
+        
+        public const char O = 'O';
+        
+        public const char P = 'P';
+        
+        public const char Q = 'Q';
+        
+        public const char R = 'R';
+        
+        public const char S = 'S';
+        
+        public const char T = 'T';
+        
+        public const char U = 'U';
+        
+        public const char V = 'V';
+
+        public const char W = 'W';
+
+        public const char X = 'X';
+
+        public const char Y = 'Y';
+
+        public const char Z = 'Z';
+    }
 }

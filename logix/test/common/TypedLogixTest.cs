@@ -17,7 +17,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_a<V>()
             where V : unmanaged
-                => variable<V>(AsciLower.a);
+                => variable<V>(Chars.a);
 
         /// <summary>
         /// Creates a typed variable named 'b'
@@ -25,7 +25,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_b<V>()
             where V : unmanaged
-                => variable<V>(AsciLower.b);
+                => variable<V>(Chars.b);
 
         /// <summary>
         /// Creates a typed variable named 'c'
@@ -33,7 +33,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_c<V>()
             where V : unmanaged
-                => variable<V>(AsciLower.c);
+                => variable<V>(Chars.c);
 
         /// <summary>
         /// Creates a typed variable named 'x'
@@ -41,7 +41,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_x<V>()
             where V : unmanaged
-                => variable<V>(AsciLower.a);
+                => variable<V>(Chars.a);
 
         /// <summary>
         /// Creates a typed variable named 'y'
@@ -49,7 +49,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_y<V>()
             where V : unmanaged
-                => variable<V>(AsciLower.b);
+                => variable<V>(Chars.b);
 
         /// <summary>
         /// Creates a typed variable named 'z'
@@ -57,6 +57,6 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_z<V>()
             where V : unmanaged
-                => variable<V>(AsciLower.c);
+                => variable<V>(Chars.c);
    }
 }

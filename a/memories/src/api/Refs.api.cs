@@ -73,6 +73,26 @@ namespace Z0
             => ref Unsafe.Add(ref edit(in src), count);
 
         /// <summary>
+        /// Skips a specified number of source elements and returns a readonly reference to the resulting element
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The number of elements to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(in T src, uint count)
+            => ref Unsafe.Add(ref edit(in src), (int)count);
+
+        /// <summary>
+        /// Skips a specified number of source elements and returns a readonly reference to the resulting element
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The number of elements to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(in T src, ulong count)
+            => ref Unsafe.Add(ref edit(in src), (int)count);
+
+        /// <summary>
         /// Presents a reference as a byte reference
         /// </summary>
         /// <param name="src">The source reference</param>
