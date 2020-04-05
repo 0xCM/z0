@@ -12,7 +12,7 @@ namespace Z0
     using static Core;
     using static VCore;
 
-    partial class VectorExtensions
+    partial class XTend
     {
         /// <summary>
         /// Combines two 128-bit source vectors into a 256-bit target vector via alternating application of a mapping function

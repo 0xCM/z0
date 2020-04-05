@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
         public static ref BitMatrix<T> cnonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static ref BitMatrix8 cnonimpl(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+             LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         public static BitMatrix8 cnonimpl(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -76,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static ref BitMatrix16 cnonimpl(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -89,7 +89,7 @@ namespace Z0
         public static BitMatrix16 cnonimpl(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -102,7 +102,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static ref BitMatrix32 cnonimpl(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -115,7 +115,7 @@ namespace Z0
         public static BitMatrix32 cnonimpl(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -128,7 +128,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static ref BitMatrix64 cnonimpl(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -141,7 +141,7 @@ namespace Z0
         public static BitMatrix64 cnonimpl(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            BitSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Core)" />        
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Vectors)" />        
     <ProjectReference Include="$(Blocks)" />

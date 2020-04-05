@@ -187,7 +187,7 @@ namespace Z0
             where F : ISVBinaryOp128Api<T>
             where T : unmanaged
         {
-            var last = vzero(w,t);
+            var last = Vectors.vzero(w,t);
             var blocklen = (int)NatCalc.divT(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
@@ -211,7 +211,7 @@ namespace Z0
             where F : ISVBinaryOp256Api<T>
             where T : unmanaged
         {
-            var last = vzero(w,t);
+            var last = Vectors.vzero(w,t);
             var blocklen = (int)NatCalc.divT(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
@@ -235,7 +235,7 @@ namespace Z0
             where F : ISVImm8UnaryOp128Api<T>
             where T : unmanaged
         {
-            var last = vzero(w,t);
+            var last = Vectors.vzero(w,t);
             var blocklen = (int)NatCalc.divT(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
@@ -259,7 +259,7 @@ namespace Z0
             where F : ISVImm8UnaryOp256Api<T>
             where T : unmanaged
         {
-            var last = vzero(w,t);
+            var last = Vectors.vzero(w,t);
             var blocklen = (int)NatCalc.divT(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);

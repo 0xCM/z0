@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.InteropServices;
     
-    using static Seed;
+    using static Core;
 
     using NK = NumericKind;
     
@@ -239,23 +239,23 @@ namespace Z0
         [MethodImpl(Inline)]
         Vector128<T> to<T>()
             where T : unmanaged
-                => VCore.generic<T>(data);
+                => Core.generic<T>(data);
 
         [MethodImpl(Inline)]
         T cell<T>(int index)
             where T : unmanaged
-                => Core.vcell(to<T>(), index);
+                => vcell(to<T>(), index);
 
         ulong Low64
         {
             [MethodImpl(Inline)]
-            get => Core.vcell(data,0);
+            get => vcell(data,0);
         }
 
         ulong Hi64
         {
             [MethodImpl(Inline)]
-            get => Core.vcell(data,1);
+            get => vcell(data,1);
         }
 
         [MethodImpl(Inline)]
@@ -272,6 +272,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<ulong> SetWidth(Vector128<ulong> src, uint width)
-            => Core.v64u(Core.vcell(Core.v32u(src), 3, width));
+            => v64u(vcell(v32u(src), 3, width));
     }
 }

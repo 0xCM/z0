@@ -97,7 +97,7 @@ namespace Z0
         {
             var sep = nati(n);
             var pattern = BitMask.lo(sep, z64) << sep;                        
-            return VCore.generic<T>(VCore.vbroadcast(w,gbits.replicate(pattern)));
+            return generic<T>(VCore.vbroadcast(w,gbits.replicate(pattern)));
         }
 
     }

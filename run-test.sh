@@ -13,4 +13,4 @@ cd $ProjectDir
 echo Executing tests defined by $Project
 
 dotnet run 
-#> $LogDir/$LogName
+

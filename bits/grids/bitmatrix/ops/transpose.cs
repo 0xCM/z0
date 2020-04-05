@@ -120,8 +120,8 @@ namespace Z0
 
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
-            var vec = VCore.vload(n128,A.Bytes);
-            vstore(dvec.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
+            var vec = Vectors.vload(n128,A.Bytes);
+            Vectors.vstore(dvec.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Data);
         }
 

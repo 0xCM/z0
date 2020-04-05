@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static Core;
-
     partial class VCore
     {
         /// <summary>
@@ -18,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
-        public static Vector128<byte> vparts(N128 w,
+        public static Vector128<byte> vparts(W128 w,
             byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7,
             byte x8, byte x9, byte xa, byte xb, byte xc, byte xd, byte xe, byte xf)
                 => Vector128.Create(x0,x1, x2, x3, x4, x5, x6, x7,x8,x9,xa,xb,xc,xd,xe,xf);
@@ -28,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
-        public static Vector128<ushort> vparts(N128 w, ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7)
+        public static Vector128<ushort> vparts(W128 w, ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7)
             => Vector128.Create(x0,x1, x2, x3, x4, x5, x6, x7);
 
         /// <summary>
@@ -36,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
-        public static Vector128<uint> vparts(N128 w,uint x0, uint x1, uint x2, uint x3)
+        public static Vector128<uint> vparts(W128 w,uint x0, uint x1, uint x2, uint x3)
             => Vector128.Create(x0, x1, x2, x3);
 
         /// <summary>
@@ -60,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
-        public static Vector128<long> vpartsi(N128 w, long x0, long x1)
+        public static Vector128<long> vpartsi(W128 w, long x0, long x1)
             => Vector128.Create(x0,x1);
 
         /// <summary>
@@ -68,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
-        public static Vector128<ulong> vparts(N128 w, ulong x0, ulong x1)
+        public static Vector128<ulong> vparts(W128 w, ulong x0, ulong x1)
             => Vector128.Create(x0,x1);
 
         /// <summary>
@@ -76,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
-        public static Vector128<float> vpartsf(N128 w, float x0, float x1, float x2, float x3)
+        public static Vector128<float> vpartsf(W128 w, float x0, float x1, float x2, float x3)
             => Vector128.Create(x0,x1,x2,x3);
 
         /// <summary>
@@ -84,7 +82,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
-        public static Vector128<double> vpartsf(N128 w,double x0, double x1)
+        public static Vector128<double> vpartsf(W128 w,double x0, double x1)
             => Vector128.Create(x0,x1);
 
         /// <summary>

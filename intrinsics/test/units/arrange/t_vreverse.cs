@@ -78,7 +78,7 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = VCore.vzero(w,t);
+                var expect = Vectors.vzero(w,t);
                 for(var j = 0; j < n; j++)
                     expect = vcell(vcell(input,(n - 1) - j),j,expect);
 
@@ -99,7 +99,7 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = VCore.vzero(w,t);
+                var expect = Vectors.vzero(w,t);
                 for(var j = 0; j < n; j++)
                     expect = vcell(vcell(input,(n - 1) - j),j,expect);
 

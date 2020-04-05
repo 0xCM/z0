@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Typed)" />
+    <ProjectReference Include="$(Messages)" />
+
   </ItemGroup>
 
 </Project>

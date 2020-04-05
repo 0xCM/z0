@@ -33,7 +33,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)
-                vstore(gvec.vand<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.BlockRef(i));                             
+                Vectors.vstore(gvec.vand<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.BlockRef(i));                             
             return dst;        
         } 
 

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Core;
-    using D = VCoreD;
+    using D = Vectors;
 
     partial class VCore
     {
@@ -124,7 +124,7 @@ namespace Z0
             else if(typeof(T) == typeof(int))
                 return generic<T>(D.vbroadcast(n256, int32(src)));
             else 
-                return  generic<T>(D.vbroadcast(n256, int64(src)));
+                return  generic<T>(D.broadcast(n256, int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -136,7 +136,7 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(D.vbroadcast(n256, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(D.vbroadcast(n256, uint32(src)));
+                return generic<T>(D.broadcast(n256, uint32(src)));
             else 
                 return generic<T>(D.vbroadcast(n256, uint64(src)));
         }

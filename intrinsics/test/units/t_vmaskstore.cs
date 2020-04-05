@@ -37,7 +37,7 @@ namespace Z0
                 dvec.vmaskstore(v2, m2, dst);
                 dvec.vmaskstore(v3, m3, dst);
 
-                var v4 = VCore.vload(dst);
+                var v4 = Vectors.vload(dst);
                 var v5 = VCore.vparts(n128, 
                     vcell(v0,0), vcell(v0,1), vcell(v0,2), vcell(v0,3),
                     vcell(v1,4), vcell(v1,5), vcell(v1,6), vcell(v1,7),
@@ -54,8 +54,8 @@ namespace Z0
             var count = 32;
             var x = Random.CpuVector(n256,z8);
             var storage = Blocks.single(n256,z8);
-            var stored = VCore.vzero(n256,z8);
-            var mask = VCore.vzero(n256,z8);
+            var stored = Vectors.vzero(n256,z8);
+            var mask = Vectors.vzero(n256,z8);
 
             // Store every component
             storage.Clear();

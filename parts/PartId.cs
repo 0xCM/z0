@@ -59,9 +59,11 @@ public enum PartId : ulong
 
     Permute = 400, PermuteTest = Permute | Test,
 
+    Fixed = 250,  FixedTest = Fixed | Test,
+    
     Polyrand = 420,
 
-    Seed = 802, Typed = 846, Fixed = 250, Time = 350, Graphs = 370,
+    Seed = 802, Typed = 846, Time = 350, Graphs = 370,
     
     Symbolic = 410, 
     
@@ -102,6 +104,8 @@ public enum PartId : ulong
     ValidityCore = 434,
 
     ValidityVectors = 436,
+
+    CoreTest = Core | Test,
 
     ValidityTest = Validity | Test,
 

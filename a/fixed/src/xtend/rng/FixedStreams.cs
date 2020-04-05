@@ -12,19 +12,10 @@ namespace Z0
 
     using static Widths;
     using static Fixed;
+    using Api = FixedStream;
 
     partial class XRng
     {
-        public static IEnumerable<F> FixedStream<F,T>(this IPolyrand random, F f = default, T t = default)
-            where F : unmanaged, IFixed
-            where T : unmanaged
-                => new FixedStreamProvider<F,T>(random, random.Domain<T>()).Stream;
-
-        public static IEnumerable<F> FixedStream<F,T>(this IPolyrand random, Interval<T> celldomain)
-            where F : unmanaged, IFixed
-            where T : unmanaged
-                => new FixedStreamProvider<F,T>(random, celldomain).Stream;
-
         /// <summary>
         /// Creates a stream of fixed values
         /// </summary>

@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => VCore.vload(n128,x,offset);            
+            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n128,x,offset);            
         }
 
         public readonly struct LoadSpan256<T> : ISVFSpanLoad256Api<T>
@@ -39,7 +39,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => VCore.vload(n256,x,offset);
+            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n256,x,offset);
         }
     }
 }

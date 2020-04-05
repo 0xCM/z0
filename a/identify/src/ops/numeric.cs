@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="width">The scalar bit-width</param>
         [MethodImpl(Inline)]
         public static NumericIdentity numeric(NumericKind nk)
-            => NumericIdentity.Define(nk);
+            => TypeIdentity.numeric(nk);
 
         /// <summary>
         /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
@@ -27,14 +27,9 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static TypeIdentity numeric<T>(T t = default)
             where T : unmanaged
-                => TypeIdentity.Define(typeof(T).NumericKind().Format());
+                => TypeIdentity.numeric(t);
 
         public static TypeIdentity numeric(string prefix, Type arg)
-        {
-            var kind = arg.NumericKind();
-            var indicator = kind.Indicator().ToChar();
-            var width = kind.Width();
-            return TypeIdentity.Define($"{prefix}{width}{indicator}");
-        }
+            => TypeIdentity.numeric(prefix,arg);
     }
 }

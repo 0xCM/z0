@@ -72,7 +72,7 @@ namespace Z0
             odd = vadd(vadd(maj, maj), odd);
 
             var dst = Stacks.alloc(n128);
-            VCore.vstore(odd, ref dst.X0);
+            Vectors.vstore(odd, ref dst.X0);
             var total = 0ul;
 
             total += (dst.X0 * kf) >> 56;
@@ -114,7 +114,7 @@ namespace Z0
 
             var dst = Stacks.alloc(n256);
             ref var X = ref Stacks.head(ref dst, z64);
-            VCore.vstore(odd, ref X);
+            Vectors.vstore(odd, ref X);
             
             var total = 0ul;
             total += (seek(ref X, 0) * kf) >> 56;

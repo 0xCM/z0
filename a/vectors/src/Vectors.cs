@@ -16,4 +16,17 @@ namespace Z0
     {
         
     }
+
+
+    [ApiHost]
+    public static partial class Store
+    {
+
+    }
+
+    public static partial class XTend
+    {
+        
+    }
+
 }

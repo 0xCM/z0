@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="n">The number to evaluate</param>
         [MethodImpl(Inline)]   
         public static Type primitive(byte n)
-        {
+        { 
             if(n == 1)
                 return typeof(N1);
             else if(n == 2)
