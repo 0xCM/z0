@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Gone;
+    using static Core;
 
     public class t_bm_create : t_bm<t_bm_create>
     {
@@ -80,6 +79,5 @@ namespace Z0
             for(var i=0; i<matrix.RowCount; i++)
                 Claim.require(fill == matrix[i]);
         }
-
     }
 }

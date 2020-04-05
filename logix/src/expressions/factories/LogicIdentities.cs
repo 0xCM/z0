@@ -9,13 +9,13 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
     using static BitLogicSpec;
 
     public static class LogicIdentities
     {
         public static IEnumerable<ComparisonExpr> All
-            => items(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
+            => seq(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
 
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))

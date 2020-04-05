@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static root;
-    using static Gone;
+    using static Core;
 
     public class t_testbit : t_bitcore<t_testbit>
     {     

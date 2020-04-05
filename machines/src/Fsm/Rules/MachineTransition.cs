@@ -9,7 +9,7 @@ namespace Z0.Machines
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Encapsulates the set of all rules (input : E, source : S) -> target : S that define state machine transitions

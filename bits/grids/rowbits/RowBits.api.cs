@@ -20,7 +20,6 @@ namespace Z0
         /// </summary>
         /// <param name="rows">The row count</param>
         /// <typeparam name="T">The primal type that implicitly defines the number of coluns in each row</typeparam>
-        [MethodImpl(NotInline)]
         public static RowBits<T> alloc<T>(int rows)
             where T : unmanaged
                 => new RowBits<T>(new T[rows]);

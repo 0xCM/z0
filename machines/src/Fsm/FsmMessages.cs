@@ -9,8 +9,7 @@ namespace Z0.Machines
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static root;
-
+    using static Core;
 
     /// <summary>
     /// Defines common messages that are issued during setup/execution

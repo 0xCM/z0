@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static root;
+    using static Core;
 
     public class t_lsboff : t_bitcore<t_lsboff>
     {

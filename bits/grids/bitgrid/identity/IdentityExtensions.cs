@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
     using static GridKind;
 
     public static class BitGridIdentityX

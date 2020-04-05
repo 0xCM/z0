@@ -5,9 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
 
-    partial class root
-    {        
+    using static Seed;
+
+    partial class Core
+    {
         public static AppMsg msg(object content, AppMsgKind level = AppMsgKind.Info)
             => level == AppMsgKind.Warning ? AppMsg.Define($"{content} (warning)",level) : AppMsg.Define($"{content}",level);
 

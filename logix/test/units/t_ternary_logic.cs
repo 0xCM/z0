@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     
-    using static root;
+    using static Core;
 
     public class t_ternary_logic : UnitTest<t_ternary_logic>
     {

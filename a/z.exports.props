@@ -1,10 +1,7 @@
 ﻿<Project>
 
   <ItemGroup>    
-    <ProjectReference Include="$(Core)" />
-    
-    <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(SFuncs)" />    
+    <ProjectReference Include="$(Core)" />    
   </ItemGroup>
 
 </Project>

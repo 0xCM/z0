@@ -7,7 +7,7 @@ namespace Z0.Machines
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Specifies a state machine rule of the form (input:E, source:S) -> output:O

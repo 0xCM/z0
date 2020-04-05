@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Diagnostics;
 
-    partial class root
+    partial class Core
     {
         /// <summary>
         /// Returns after specified duration has elapsed

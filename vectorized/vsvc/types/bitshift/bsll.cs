@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
 
-    using static root;
+    using static Core;
 
     partial class VSvcHosts
     {

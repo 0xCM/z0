@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {            
             var zed = zero<T>();
-            var lit = root.ones<T>();
+            var lit = ones<T>();
             var min = byte.MinValue;
             var max = (byte)bitsize<T>();
 
