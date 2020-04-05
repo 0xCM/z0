@@ -71,10 +71,10 @@ namespace Z0
         }
 
         public string Format()
-            => string.Concat(Id.Identifier.PadRight(0), CharText.Space, Encoded.Bytes.FormatHex());
+            => string.Concat(Id.Identifier.PadRight(0), CharText.Space, Encoded.Bytes.FormatHexBytes(Chars.Space,true));
 
         public string Format(int idpad)
-            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Encoded.Bytes.FormatHex());
+            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Encoded.Bytes.FormatHexBytes(Chars.Space,true,true));
 
         public override string ToString()
             => Format();

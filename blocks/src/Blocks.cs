@@ -21,7 +21,7 @@ namespace Z0
     [ApiHost("api")]
     public static partial class Blocks
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
     }
 

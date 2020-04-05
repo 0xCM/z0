@@ -162,7 +162,7 @@ namespace Z0
             {
                 var x = VCore.vparts(n128,127,0,127,0,127,0,127,0);
                 var y = dvec.vpackus(x,x);
-                Notify(y.FormatAsList());
+                Notify(y.FormatList());
             }        
             case1();
             case2();            

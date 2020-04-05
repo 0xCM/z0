@@ -7,7 +7,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="$(Vectorized)" />
+    <ProjectReference Include="$(VCore)" />
     <ProjectReference Include="$(FVec)" />
     <ProjectReference Include="$(TestLib)" />
   </ItemGroup>

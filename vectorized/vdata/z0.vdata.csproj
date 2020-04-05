@@ -9,7 +9,7 @@
     <ProjectReference Include="$(Z)" />
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(Vectorized)" />
+    <ProjectReference Include="$(VCore)" />
   </ItemGroup>
 
 </Project>

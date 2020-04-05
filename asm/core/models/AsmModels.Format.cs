@@ -83,7 +83,7 @@ namespace Z0.Asm
             description.Append(text.concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(config.InstructionPad, text.space())));
             description.Append(Comment(Format(src.Spec, config)));
             description.Append(text.concat(config.FieldDelimiter,"encoded", text.bracket(src.Encoded.Length.ToString())));
-            description.Append(text.embrace(src.Encoded.FormatHex(text.space(), true, false)));
+            description.Append(text.embrace(src.Encoded.FormatHexBytes(text.space(), true, false)));
             return description.ToString();
         }
     }

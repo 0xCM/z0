@@ -110,7 +110,7 @@ namespace Z0
         public byte this[int i] { [MethodImpl(Inline)] get=> Data[i]; }
 
         public string Format()
-            => Data.FormatHex();
+            => Data.FormatHexBytes(Chars.Space,true,true);
 
         
         public override string ToString() 

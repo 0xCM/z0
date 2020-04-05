@@ -52,11 +52,12 @@
 
   <PropertyGroup>
     <VTop>$(TopDir)vectorized/</VTop>
+    <VCore>$(VTop)vcore/z0.vcore.csproj</VCore>  
+
     <Circuits>$(VTop)circuits/z0.circuits.csproj</Circuits>
     <DVec>$(VTop)dvec/z0.dvec.csproj</DVec>
     <FVec>$(VTop)fvec/z0.fvec.csproj</FVec>
     <VData>$(VTop)vdata/z0.vdata.csproj</VData>
-    <Vectorized>$(VTop)vcore/z0.vcore.csproj</Vectorized>  
     <VSvc>$(VTop)vsvc/z0.vsvc.csproj</VSvc>
     <Intrinsics>$(TopDir)intrinsics/src/z0.intrinsics.csproj</Intrinsics>
   </PropertyGroup>

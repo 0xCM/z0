@@ -22,7 +22,7 @@ namespace Z0
         public static Span<T> span<T>(Vector128<T> src)
             where T : unmanaged            
         {
-            var dst = Blocks.single<T>(n128);
+            var dst = Blocks.single<T>(w128);
             vstore(src, ref dst.Head);
             return dst.Data;
         }
@@ -36,7 +36,7 @@ namespace Z0
         public static Span<T> span<T>(Vector256<T> src)
             where T : unmanaged            
         {
-            var dst = Blocks.single<T>(n256);
+            var dst = Blocks.single<T>(w256);
             vstore(src, ref dst.Head);
             return dst.Data;
         }
@@ -50,10 +50,9 @@ namespace Z0
         public static Span<T> span<T>(Vector512<T> src)
             where T : unmanaged            
         {
-            var dst = Blocks.single<T>(n512);
+            var dst = Blocks.single<T>(w512);
             vstore(src, ref dst.Head);
             return dst.Data;
         }
-
     }
 }

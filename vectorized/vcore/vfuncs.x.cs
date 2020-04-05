@@ -11,6 +11,12 @@ namespace Z0
     
     using static Root;
 
+    public static partial class XTend
+    {
+
+        
+    }
+
     public static partial class VectorExtensions
     {
         /// <summary>

@@ -13,7 +13,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     
-    using static Core;
+    using static Seed;
+    using static Pointers;
 
     static partial class VCoreD
     {
@@ -388,6 +389,6 @@ namespace Z0
         ///<intrinsic>void _mm256_storeu_pd (double * mem_addr, __m256d a) MOVUPD m256, ymm</intrinsic>
         [MethodImpl(Inline), Op]
         public static unsafe void vstore(Vector256<double> src, ref double dst, int offset)
-            => Store(ptr(ref dst, offset), src);             
+            => Store(ptr(ref dst, offset), src);
     }
 }

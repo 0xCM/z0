@@ -30,5 +30,6 @@ namespace Z0
         public static string FormatList<T>(this Block256<T> src, char delimiter = ',', int offset = 0, int pad = 0, bool bracketed = true)
             where T : unmanaged
                 => src.Data.FormatDataList(delimiter, offset, pad,bracketed); 
+
     }
 }

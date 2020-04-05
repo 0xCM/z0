@@ -11,7 +11,10 @@ namespace Z0
     using static HexSpecs;
 
     partial class XTend
-    {
+    {        
+        public static string FormatHexBytes(this byte[] src, char sep, bool zpad = true, bool specifier = true)
+            => src.ToReadOnlySpan().FormatHexBytes(sep, zpad, specifier, false, true, null);
+
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = Chars.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {

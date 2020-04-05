@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     partial class XTend
     {
@@ -38,7 +40,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Formats a span of integral type as a sequence of hex values
+        /// Formats a span of numeric cell type as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
@@ -49,10 +51,17 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().FormatHex(bracket, sep, specifier);
 
-        public static string FormatHex(this Span<byte> src, char sep = Chars.Space)
-            => src.ReadOnly().FormatHex(sep);
+        /// <summary>
+        /// Formats a (hopefully finite) stream of values (hopefully numeric) as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
+        /// <param name="sep">The character to use when separating digits</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static string FormatHex<T>(this IEnumerable<T> src, bool bracket, char sep, bool specifier)
+            where T : unmanaged
+                => src.ToSpan().FormatHex(bracket, sep, specifier);
 
-        public static string FormatHex(this ReadOnlySpan<byte> src, char sep = Chars.Space)
-            => src.FormatHexBytes(sep:sep, zpad:true, specifier:false, uppercase: false);
     }
 }

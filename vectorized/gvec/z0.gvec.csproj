@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Vectorized)" />
+    <ProjectReference Include="$(VCore)" />
     <ProjectReference Include="$(VData)" />    
     <ProjectReference Include="$(DVec)" />
     <ProjectReference Include="$(FVec)" />

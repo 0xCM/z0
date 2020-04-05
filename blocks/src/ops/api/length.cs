@@ -11,6 +11,8 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    using static Seed;        
+
     partial class Blocks
     {
         /// <summary>

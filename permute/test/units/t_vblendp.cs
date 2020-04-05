@@ -333,8 +333,8 @@ namespace Z0
             if(EmitInfo)
             {
                 Notify($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typeof(T).DisplayName()}, perm length = {pn}");
-                Notify($"left:  {left.FormatAsList(pad:2)}");
-                Notify($"right: {right.FormatAsList(pad:2)}");
+                Notify($"left:  {left.FormatList(2)}");
+                Notify($"right: {right.FormatList(2)}");
                 Notify(perm.Format());  
                 Notify(string.Empty);  
             }

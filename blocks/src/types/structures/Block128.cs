@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
-    using System.Runtime.Intrinsics;    
         
-    using static Blocks;
+    using static Seed;
 
     /// <summary>
     /// Encapsulates a span that with content length can be evenly partitioned into 128-bit blocks
@@ -71,21 +70,30 @@ namespace Z0
         }
 
         /// <summary>
+        /// The number of cells in a block
+        /// </summary>
+        public int BlockLength 
+        {
+            [MethodImpl(Inline)]
+            get => 16/Unsafe.SizeOf<T>();
+        }            
+
+        /// <summary>
         /// The number of covered blocks
         /// </summary>
         public int BlockCount 
         {
             [MethodImpl(Inline)]
-            get => blockcount<T>(W,CellCount);
+            get => CellCount/BlockLength;
         }
 
         /// <summary>
-        /// The number of cells in a block
+        /// The number of covered bits
         /// </summary>
-        public int BlockLength
+        public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => length<T>(W);        
+            get => (ulong)CellCount * (ulong)Unsafe.SizeOf<T>()*8;
         }
 
         /// <summary>

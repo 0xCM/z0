@@ -106,7 +106,7 @@ namespace Z0
         }
 
         public string Format(int idpad)
-            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Data.Bytes.FormatHex());
+            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Data.Bytes.FormatHexBytes(Chars.Space,true,true));
 
         public string Format()
             => Format(0);

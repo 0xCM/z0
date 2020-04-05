@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
         
+    using static Seed;        
+
     partial class Blocks
     {
-
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells
         /// </summary>
