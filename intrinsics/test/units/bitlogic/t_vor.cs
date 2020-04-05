@@ -147,7 +147,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = BlockStats.Calc(blocks,w,t);
+            var stats = Blocks.stats(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -164,7 +164,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = BlockStats.Calc(blocks,w,t);
+            var stats = Blocks.stats(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 

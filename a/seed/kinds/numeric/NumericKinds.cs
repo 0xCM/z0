@@ -75,7 +75,7 @@ namespace Z0
         /// <summary>
         /// Recognized unsigned integral kinds
         /// </summary>
-        public static IEnumerable<NumericKind> UnsignedKinds
+        public static IEnumerable<NumericKind> UnsignedKindSeq
             => seq(NK.U8, NK.U16, NK.U32, NK.U64);
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// <summary>
         /// Recognized signed integral kinds
         /// </summary>
-        public static IEnumerable<NumericKind> SignedKinds
+        public static IEnumerable<NumericKind> SignedKindSeq
             => seq(NK.I8, NK.I16, NK.I32, NK.I64);
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace Z0
         /// <summary>
         /// Recognized integral kinds
         /// </summary>
-        public static IEnumerable<NumericKind> IntegralKinds
-            => UnsignedKinds.Union(SignedKinds);
+        public static IEnumerable<NumericKind> IntegralKindSeq
+            => UnsignedKindSeq.Union(SignedKindSeq);
 
         /// <summary>
         /// recognized floating-point types
@@ -111,7 +111,7 @@ namespace Z0
         /// <summary>
         /// Recognized floating-point kinds
         /// </summary>
-        public static IEnumerable<NumericKind> FloatingKinds
+        public static IEnumerable<NumericKind> FloatingKindSeq
             => seq(NK.F32, NK.F64);
 
         /// <summary>
@@ -119,5 +119,6 @@ namespace Z0
         /// </summary>
         public static IEnumerable<Type> NumericTypes
             => IntegralTypes.Union(FloatingTypes);
+
     }
 }

@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Width8)]
         public static int length<T>(W8 w, T t = default)
             where T : unmanaged
                 => Unsafe.SizeOf<T>();
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
         public static int length<T>(W16 w, T t = default)
             where T : unmanaged
                 => 2/Unsafe.SizeOf<T>();
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
         public static int length<T>(W32 w, T t = default)
             where T : unmanaged
                 => 4/Unsafe.SizeOf<T>();
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int length<T>(W64 w, T t = default)
             where T : unmanaged
                 => 8/Unsafe.SizeOf<T>();
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int length<T>(W128 w, T t = default)
             where T : unmanaged
                 => 16/Unsafe.SizeOf<T>();
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int length<T>(W256 w, T t = default)
             where T : unmanaged
                 => 32/Unsafe.SizeOf<T>();
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int length<T>(W512 w, T t = default)
             where T : unmanaged
                 => 64/Unsafe.SizeOf<T>();

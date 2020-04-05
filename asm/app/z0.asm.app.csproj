@@ -12,6 +12,11 @@
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />    
     <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(BitGrids)" />
+    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(VBits)" />
+    <ProjectReference Include="$(BitPack)" />
+
   </ItemGroup>
 
 </Project>

@@ -34,7 +34,7 @@ namespace Z0
             => new Fixed512(x.x0,x.x1);
 
         public string Format() 
-            => Arrays.from(X0,X1).FormatDataList();
+            => Arrays.from(X0,X1).Format();
 
         public override string ToString() 
             => Format();                      

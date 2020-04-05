@@ -24,7 +24,7 @@ namespace Z0
             => (char)Digits.symbol(src);
 
         public static Span<DeciDigit> ToDeciDigits(this long src)
-            => DeciDigits.Parse(src.ToString());
+            => DeciDigits.digits(src.ToString());
 
         /// <summary>
         /// Formats a span of binary digits as a contiguous block

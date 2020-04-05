@@ -57,10 +57,10 @@ namespace Z0
                 var lo = gvec.vmergelo(x,y);
                 var hi = gvec.vmergehi(x,y);
 
-                Notify(x.FormatList(2));
-                Notify(y.FormatList(2));
-                Notify(lo.FormatList(2));
-                Notify(hi.FormatList(2));
+                Notify(x.Format());
+                Notify(y.Format());
+                Notify(lo.Format());
+                Notify(hi.Format());
             }
 
             void merge_hi()
@@ -71,9 +71,9 @@ namespace Z0
                 var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
                 var z = dvec.vmergehi(x,y);
                 Notify($"mergehi");
-                Notify(x.Format(pad:2));
-                Notify(y.Format(pad:2));
-                Notify(z.Format(pad:2));
+                Notify(x.Format());
+                Notify(y.Format());
+                Notify(z.Format());
             }
 
             void merge()
@@ -83,9 +83,9 @@ namespace Z0
                 var x = gvec.vinc(w,t);
                 var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
                 var z = dvec.vmerge(x,y);
-                Notify(x.Format(pad:2));
-                Notify(y.Format(pad:2));
-                Notify(z.Format(pad:2));
+                Notify(x.Format());
+                Notify(y.Format());
+                Notify(z.Format());
             }
         }
     }

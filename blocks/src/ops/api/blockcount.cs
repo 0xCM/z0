@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="w">The block width</param>
         /// <param name="cells">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
         public static int blockcount<T>(W16 w, int cells)
             where T : unmanaged
                 => cells/length<T>(w);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="w">The block width</param>
         /// <param name="cells">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
         public static int blockcount<T>(W32 w, int cells)
             where T : unmanaged
                 => cells/length<T>(w);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="w">The block width</param>
         /// <param name="cells">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W64 w, int cells)
             where T : unmanaged
                 => cells/length<T>(w);
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="w">The block width</param>
         /// <param name="cells">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W128 w, int cells)
             where T : unmanaged
                 => cells/length<T>(w);
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="w">The block width</param>
         /// <param name="cells">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W256 w, int cells)
             where T : unmanaged
                 => cells/length<T>(w);
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="w">The block width</param>
         /// <param name="cells">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W512 w, int cells)
             where T : unmanaged
                 => cells/length<T>(w);
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="cells">The cell count</param>
         /// <param name="uncovered">The number of cells that remain uncovered</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
         public static int blockcount<T>(W16 w, int length, out int uncovered)
             where T : unmanaged   
         {       
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="cells">The cell count</param>
         /// <param name="uncovered">The number of cells that remain uncovered</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
         public static int blockcount<T>(W32 w, int length, out int uncovered)
             where T : unmanaged   
         {       
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="cells">The cell count</param>
         /// <param name="uncovered">The number of cells that remain uncovered</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W64 w, int length, out int uncovered)
             where T : unmanaged   
         {       
@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="cells">The cell count</param>
         /// <param name="uncovered">The number of cells that remain uncovered</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W128 w, int length, out int uncovered)
             where T : unmanaged          
         {       
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="cells">The cell count</param>
         /// <param name="uncovered">The number of cells that remain uncovered</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W256 w, int length, out int uncovered)
             where T : unmanaged          
         {       
@@ -165,7 +165,7 @@ namespace Z0
         /// <param name="cells">The cell count</param>
         /// <param name="uncovered">The number of cells that remain uncovered</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int blockcount<T>(W512 w, int length, out int uncovered)
             where T : unmanaged          
         {       
@@ -204,7 +204,7 @@ namespace Z0
             where N : unmanaged, ITypeWidth
             where T : unmanaged        
         {
-            var srclen = ((int)default(M).TypeWidth) * ((int)default(N).TypeWidth);            
+            var srclen = ((int)Widths.type<M>()) * ((int)Widths.type<N>());            
             var bz = blockcount<T>(w,srclen, out int remainder);
             return remainder == 0 ? bz : bz + 1;
         }

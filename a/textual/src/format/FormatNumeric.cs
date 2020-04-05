@@ -28,25 +28,25 @@ namespace Z0
             switch(kind)
             {
                 case NumericKind.I8:
-                    return dst.As<sbyte>().FormatDataList();
+                    return dst.As<sbyte>().Format();
                 case NumericKind.U8:
-                    return dst.As<byte>().FormatDataList();
+                    return dst.As<byte>().Format();
                 case NumericKind.I16:
-                    return dst.As<short>().FormatDataList();
+                    return dst.As<short>().Format();
                 case NumericKind.U16:
-                    return dst.As<ushort>().FormatDataList();
+                    return dst.As<ushort>().Format();
                 case NumericKind.I32:
-                    return dst.As<int>().FormatDataList();
+                    return dst.As<int>().Format();
                 case NumericKind.U32:
-                    return dst.As<uint>().FormatDataList();
+                    return dst.As<uint>().Format();
                 case NumericKind.I64:
-                    return dst.As<long>().FormatDataList();
+                    return dst.As<long>().Format();
                 case NumericKind.U64:
-                    return dst.As<ulong>().FormatDataList();
+                    return dst.As<ulong>().Format();
                 case NumericKind.F32:
-                    return dst.As<float>().FormatDataList();
+                    return dst.As<float>().Format();
                 case NumericKind.F64:
-                    return dst.As<double>().FormatDataList();
+                    return dst.As<double>().Format();
                 default:
                     throw Unsupported.define(kind);
             }

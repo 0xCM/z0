@@ -58,8 +58,8 @@ namespace Z0
 
             dst.AppendLabeled(nameof(TargetsFar), eol, TargetsFar);
             //dst.DelimitLabeled(nameof(HostedCount), eol, HostedCount, pad, sep);
-            dst.DelimitLabeled(nameof(HostedReceivers), eol, HostedReceivers, pad, sep);
-            dst.DelimitLabeled(nameof(UnhostedReceivers), eol, UnhostedReceivers, pad, sep);
+            dst.AppendDelimited(nameof(HostedReceivers), eol, HostedReceivers, pad, sep);
+            dst.AppendDelimited(nameof(UnhostedReceivers), eol, UnhostedReceivers, pad, sep);
 
             return dst.ToString();
         }

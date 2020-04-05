@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellcover<T>(W8 w, int cellcount)
             where T : unmanaged        
         {
@@ -33,7 +33,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellcover<T>(W16 w, int cellcount)
             where T : unmanaged        
         {
@@ -48,7 +48,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellcover<T>(W32 w, int cellcount)
             where T : unmanaged        
         {
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellcover<T>(W64 w, int cellcount)
             where T : unmanaged        
         {
@@ -78,7 +78,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellcover<T>(W128 w, int cellcount)
             where T : unmanaged        
         {
@@ -93,7 +93,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellcover<T>(W256 w, int cellcount)
             where T : unmanaged        
         {
@@ -108,7 +108,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int cellcover<T>(W512 w, int cellcount)
             where T : unmanaged        
         {

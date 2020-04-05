@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The type of the referenced data</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         static unsafe void* pvoid<T>(ref T src)
             => Unsafe.AsPointer(ref src);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         static unsafe T* ptr<T>(ref T src)
             where T : unmanaged
                 => (T*)pvoid(ref src);
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16)]
         public static unsafe T* ptr<T>(in Block16<T> src)
             where T : unmanaged
                 => ptr(ref src.Head);
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16 | NumericKind.Width32)]
         public static unsafe T* ptr<T>(in Block32<T> src)
             where T : unmanaged
                 => ptr(ref src.Head);
@@ -55,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in Block64<T> src)
             where T : unmanaged
                 => ptr(ref src.Head);
@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in Block128<T> src)
             where T : unmanaged
                 => ptr(ref src.Head);
@@ -75,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in Block256<T> src)
             where T : unmanaged
                 => ptr(ref src.Head);
@@ -85,7 +85,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
+        [MethodImpl(Inline),Op, Closures(Numeric8x16)]
         public static unsafe T* ptr<T>(in Block16<T> src, int block)
             where T : unmanaged
                 => ptr(ref src.BlockRef(block));
@@ -95,7 +95,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
+        [MethodImpl(Inline),Op, Closures(Numeric8x16 | NumericKind.Width32)]
         public static unsafe T* ptr<T>(in Block32<T> src, int block)
             where T : unmanaged
                 => ptr(ref src.BlockRef(block));
@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in Block64<T> src, int block)
             where T : unmanaged
                 => ptr(ref src.BlockRef(block));
@@ -115,7 +115,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in Block128<T> src, int block)
             where T : unmanaged
                 => ptr(ref src.BlockRef(block));
@@ -125,7 +125,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source block</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in Block256<T> src, int block)
             where T : unmanaged
                 => ptr(ref src.BlockRef(block));

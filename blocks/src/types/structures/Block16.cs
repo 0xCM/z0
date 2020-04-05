@@ -17,9 +17,7 @@ namespace Z0
     public readonly ref struct Block16<T>
         where T : unmanaged
     {
-        internal readonly Span<T> data;
-
-        public static W16 W => default;
+        readonly Span<T> data;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block16<T> src)
@@ -144,6 +142,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block16<T> Extract(int block)
             => new Block16<T>(Block(block));
+
+        [MethodImpl(Inline)]
+        public void Fill(T src)
+            => data.Fill(src);
 
         /// <summary>
         /// Reinterprets the storage cell type

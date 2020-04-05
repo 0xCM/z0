@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
+        [MethodImpl(Inline)]
         public static Block16<T> load<T>(W16 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
+        [MethodImpl(Inline)]
         public static Block32<T> load<T>(W32 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
         public static Block64<T> load<T>(W64 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
         public static Block128<T> load<T>(W128 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
         public static Block256<T> load<T>(W256 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
         public static Block512<T> load<T>(W512 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {

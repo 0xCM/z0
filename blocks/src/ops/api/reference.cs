@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
+        [MethodImpl(Inline),Op, Closures(Numeric8x16)]
         public static ref T reference<T>(in Block16<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
+        [MethodImpl(Inline),Op, Closures(Numeric8x16x32)]
         public static ref T reference<T>(in Block32<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T reference<T>(in Block64<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T reference<T>(in Block128<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T reference<T>(in Block256<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T reference<T>(in Block512<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 

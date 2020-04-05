@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool aligned<T>(W8 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool aligned<T>(W16 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool aligned<T>(W32 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool aligned<T>(W64 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool aligned<T>(W128 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block element type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool aligned<T>(W256 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;
@@ -76,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The element count</param>
         /// <typeparam name="T">The block element type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool aligned<T>(W512 w, int count)
             where T : unmanaged        
                 => count % length<T>(w) == 0;

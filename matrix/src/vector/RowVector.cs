@@ -106,10 +106,10 @@ namespace Z0
         /// <summary>
         /// Formats components as a list
         /// </summary>
-        /// <param name="delimiter">The component delimiter</param>
+        /// <param name="sep">The component delimiter</param>
         [MethodImpl(Inline)]
-        public string Format(char? delimiter = null)
-            => data.FormatDataList(delimiter ?? Chars.Comma);    
+        public string Format()
+            => data.Format();    
 
         /// <summary>
         /// Copies vector content into a caller-provided span

@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
+        [MethodImpl(Inline), Load, Closures(Numeric16u)]
         public static Block16<T> parts<T>(W16 w, params T[] src)
             where T : unmanaged        
         {
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
+        [MethodImpl(Inline), Load, Closures(Numeric32u)]
         public static Block32<T> parts<T>(W32 w, params T[] src)
             where T : unmanaged        
         {
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Load, Closures(Numeric32u)]
         public static Block64<T> parts<T>(W64 w, params T[] src)
             where T : unmanaged        
         {
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Load, Closures(Numeric32u)]
         public static Block128<T> parts<T>(W128 w, params T[] src)
             where T : unmanaged        
         {
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Load, Closures(Numeric32u)]
         public static Block256<T> parts<T>(W256 w, params T[] src)
             where T : unmanaged        
         {
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Load, Closures(Numeric32u)]
         public static Block512<T> parts<T>(W512 w, params T[] src)
             where T : unmanaged        
         {

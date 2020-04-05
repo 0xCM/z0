@@ -17,9 +17,7 @@ namespace Z0
     public readonly ref struct Block512<T>
         where T : unmanaged
     {
-        internal readonly Span<T> data;
-
-        public static W512 W => default;
+        readonly Span<T> data;        
 
         [MethodImpl(Inline)]
         public static explicit operator Span<T>(in Block512<T> src)
@@ -169,6 +167,10 @@ namespace Z0
             var count = BlockLength / 2;
             return data.Slice(block * BlockLength + count, count);
         }
+
+        [MethodImpl(Inline)]
+        public void Fill(T src)
+            => data.Fill(src);
 
         /// <summary>
         /// Reinterprets the storage cell type

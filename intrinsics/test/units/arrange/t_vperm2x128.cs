@@ -13,6 +13,10 @@ namespace Z0
         static string describe<T>(Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
             where T : unmanaged
         {
+            var sfk = SequenceFormatKind.List;  
+            var sep = Chars.Comma;         
+            var pad = 2;
+         
             var dst = gvec.vperm2x128(src, p0, p1);
             var sym0 = p0.Symbols().ToString();
             var sym1 = p1.Symbols().ToString();
@@ -33,7 +37,6 @@ namespace Z0
                 var actual = gvec.vperm2x128(src, p0, p1);
                 Claim.eq(actual,expect);
                 Notify(describe(src,p0,p1));
-
             }
 
             case1();

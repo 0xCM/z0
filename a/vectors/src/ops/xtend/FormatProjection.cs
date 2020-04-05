@@ -25,7 +25,7 @@ namespace Z0
             var srcLabel = $"v{srcWidth}x{srcType}";
             var dstLabel = $"v{dstWidth}x{dstType}";
             var label = $"{srcLabel}_{dstLabel}";
-            var formatted = $"{label}:{x.FormatHex(true)} -> {y.FormatHex(true)}";
+            var formatted = $"{label}:[{x.FormatHex()}] -> [{y.FormatHex()}]";
             return formatted;
         }
 
@@ -33,6 +33,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
+            var sep = Chars.Space;
             var srcType = TypeIdentity.numeric<S>();
             var srcCount = x.CellCount;
             var dstType = TypeIdentity.numeric<T>();
@@ -42,7 +43,7 @@ namespace Z0
             var srcLabel = $"m{srcWidth}x{srcType}";
             var dstLabel = $"v{dstWidth}x{dstType}";
             var label = $"{srcLabel}_{dstLabel}";
-            var formatted = $"{label}:{x.Data.FormatHex(true,' ',false)} -> {y.FormatHex(true,' ',false)}";
+            var formatted = $"{label}:[{x.Data.FormatHex(sep, false)}] -> [{y.FormatHex(sep, false)}]";
             return formatted;
         }
     }

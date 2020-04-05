@@ -166,8 +166,8 @@ namespace Z0
                => new RowVector256<N,U>(Blocks.convert<T,U>(data));
 
         [MethodImpl(Inline)]
-        public string Format(char? delimiter = null)
-            => data.FormatList(delimiter ?? Chars.Comma);    
+        public string Format()
+            => data.Format();    
 
         public RowVector256<N,T> Replicate()
             => new RowVector256<N,T>(data.Replicate());

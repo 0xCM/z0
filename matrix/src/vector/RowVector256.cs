@@ -83,8 +83,8 @@ namespace Z0
                 => data.As<U>();
                 
         [MethodImpl(Inline)]
-        public string Format(char delimiter = ',')
-            => data.Data.FormatDataList(delimiter);    
+        public string Format()
+            => data.Data.Format();    
 
         [MethodImpl(Inline)]
         public ref RowVector256<T> CopyTo(ref RowVector256<T> dst)

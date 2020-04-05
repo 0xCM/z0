@@ -49,8 +49,8 @@ namespace Z0.Asm
             {
                 var dst = text.factory.Builder();
                 dst.AppendField(TermCode.ToString(), (int)((ulong)F.TermCode >> 32));
-                dst.DelimitField(Size.ToString(), (int)((ulong)F.Size >> 32), delimiter);
-                dst.DelimitField(Uri.Format(),delimiter);
+                dst.AppendDelimited(Size.ToString(), (int)((ulong)F.Size >> 32), delimiter);
+                dst.AppendDelimited(Uri.Format(),delimiter);
                 return dst.ToString();
             }
         }

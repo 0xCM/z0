@@ -160,7 +160,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Block64<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.scalars(src.Data, maxbits ?? Block64<T>.W);
+                => BitString.scalars(src.Data, maxbits ?? w64);
 
         /// <summary>
         /// Converts blocked content to a bitstring
@@ -169,7 +169,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Block128<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.scalars(src.Data, maxbits ?? Block128<T>.W);
+                => BitString.scalars(src.Data, maxbits ?? w128);
 
         /// <summary>
         /// Converts datablock content to a bitstring
@@ -178,7 +178,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Block256<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.scalars(src.Data, maxbits ?? Block256<T>.W);    
+                => BitString.scalars(src.Data, maxbits ?? w256);    
  
         /// <summary>
         /// Converts an 128-bit intrinsic vector representation to a bistring

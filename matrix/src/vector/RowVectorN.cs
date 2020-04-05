@@ -146,8 +146,8 @@ namespace Z0
             => new RowVector<N,T>(data.Replicate());
 
         [MethodImpl(Inline)]
-        public string Format(char? delimiter = null)
-            => data.FormatDataList(delimiter ?? Chars.Comma);    
+        public string Format()
+            => data.Format();    
 
         public override bool Equals(object rhs)
             => rhs is RowVector<N,T> x && Equals(x);

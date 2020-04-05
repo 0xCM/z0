@@ -6,10 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+    using System.Collections.Generic;
+    using System.Linq;
 
     partial class XTend
     {
+        public static IEnumerable<string> FormatLines<F>(this IEnumerable<F> items)
+            where F : ICustomFormattable
+                => items.Select(m => m.Format());                
+
         /// <summary>
         /// Formats each source element on a new line
         /// </summary>
@@ -28,6 +33,5 @@ namespace Z0
         /// <param name="src">The source span</param>
         public static string FormatLines<T>(this Span<T> src)
             => src.ReadOnly().FormatLines();
-
     }
 }

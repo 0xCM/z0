@@ -5,44 +5,56 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    partial class XBlocks
+    using System.Collections.Generic;
+    using System.Linq;
+
+    partial class XTend
     {
         /// <summary>
-        /// Formats a blocked sequence as a sequence of hex values
+        /// Formats a span pf presumed integral values as a sequence of hex values
         /// </summary>
-        /// <param name="src">The source block</param>
-        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
+        /// <param name="src">The source span</param>
+        /// <param name="bracket">Whether to format the result as a vector</param>
         /// <param name="sep">The character to use when separating digits</param>
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static string FormatHex<T>(this Block64<T> src, bool bracket = false, char? sep = null, bool specifier = false)
+        public static string FormatHex<T>(this ReadOnlySpan<T> src,  char sep = Chars.Space, bool specifier = false)
             where T : unmanaged
-                => src.Data.FormatHex(bracket, sep, specifier);
+        {
+            var builder = text.build();
+
+            for(var i = 0; i<src.Length; i++)
+            {
+                builder.Append(Hex.format(src[i], true, specifier));
+                if(i != src.Length - 1)
+                    builder.Append(sep);
+            }
+                        
+            return builder.ToString();
+        }
 
         /// <summary>
-        /// Formats a 128-bit blocked span as a sequence of hex values
+        /// Formats a span of numeric cell type as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
         /// <param name="sep">The character to use when separating digits</param>
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static string FormatHex<T>(this Block128<T> src, bool bracket = false, char? sep = null, bool specifier = false)
+        public static string FormatHex<T>(this Span<T> src, char sep, bool specifier)
             where T : unmanaged
-                => src.Data.FormatHex(bracket, sep, specifier);
+                => src.ReadOnly().FormatHex(sep, specifier);
 
         /// <summary>
-        /// Formats a span of integral type as a sequence of hex values
+        /// Formats a (hopefully finite) stream of values (hopefully numeric) as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
         /// <param name="sep">The character to use when separating digits</param>
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static string FormatHex<T>(this Block256<T> src, bool bracket = false, char? sep = null, bool specifier = false)
+        public static string FormatHex<T>(this IEnumerable<T> src, char sep, bool specifier)
             where T : unmanaged
-                => src.Data.FormatHex(bracket, sep, specifier);
+                => src.ToSpan().FormatHex(sep, specifier);
     }
 }

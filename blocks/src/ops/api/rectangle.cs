@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric16u)]
         public static Block16<T> rectangle<T>(W16 w, int m, int n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  m*n));
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric32u)]
         public static Block32<T> rectangle<T>(W32 w, int m, int n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  m*n));
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric32u)]
         public static Block64<T> rectangle<T>(W64 w, int m, int n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  m*n));
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric32u)]
         public static Block128<T> rectangle<T>(W128 w, int m, int n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  m*n));
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric32u)]
         public static Block256<T> rectangle<T>(W256 w, int m, int n)
             where T : unmanaged
                 => alloc<T>(w, cellcover<T>(w,  m*n));

@@ -14,31 +14,23 @@ namespace Z0
 
     public static class DeciDigits
     {
-        static readonly IReadOnlyDictionary<char, DeciDigit> Index 
-            = new Dictionary<char, DeciDigit>
-            {
-                ['0'] = D0, ['1'] = D1, ['2'] = D2, ['3'] = D3, 
-                ['4'] = D4, ['5'] = D5, ['6'] = D6, ['7'] = D7,
-                ['8'] = D8, ['9'] = D9, 
-            };
-
         /// <summary>
         /// Parses the decimal digit if possible; oterwise, raises an error
         /// </summary>
         /// <param name="c">The source character</param>
-        public static DeciDigit Parse(char c)
-            => Index.TryGetValue(c, out var digit) ? digit : throw Unsupported.value(c);
+        public static DeciDigit digit(char c)
+            => (DeciDigit)((uint)c - (uint)'0');
 
         /// <summary>
         /// Parses valid decimail digits from the source string
         /// </summary>
         /// <param name="src">The source string</param>
-        public static Span<DeciDigit> Parse(string src)
+        public static Span<DeciDigit> digits(string src)
         {
             var len = src.Length;
-            var dst = new DeciDigit[len];
+            Span<DeciDigit> dst = new DeciDigit[len];
             for(var i = 0; i< len; i++)
-                dst[i] = Parse(src[i]);            
+                dst[i] = digit(src[i]);            
             return dst;            
         }
 
@@ -48,7 +40,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static DeciDigit[] Get(byte src)
-            => src.ToString().Select(DeciDigits.Parse).ToArray();
+            => src.ToString().Select(DeciDigits.digit).ToArray();
 
         /// <summary>
         /// Gets the sequence of decimal digits defined by a source value
@@ -56,7 +48,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static DeciDigit[] Get(ushort src)
-            => src.ToString().Select(DeciDigits.Parse).ToArray();
+            => src.ToString().Select(DeciDigits.digit).ToArray();
 
         /// <summary>
         /// Gets the sequence of decimal digits defined by a source value
@@ -64,6 +56,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static DeciDigit[] Get(uint src)
-            => src.ToString().Select(DeciDigits.Parse).ToArray();
+            => src.ToString().Select(DeciDigits.digit).ToArray();
     }
 }

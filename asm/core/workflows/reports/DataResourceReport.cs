@@ -56,9 +56,9 @@ namespace Z0.Asm
             {
                 var dst = text.factory.Builder();
                 dst.AppendField(Offset.FormatAsmHex(), 8);
-                dst.DelimitField(Location.FormatAsmHex(),16, delimiter); 
-                dst.DelimitField(Length.FormatAsmHex(4),10,delimiter); 
-                dst.DelimitField(Id,delimiter);                        
+                dst.AppendDelimited(Location.FormatAsmHex(),16, delimiter); 
+                dst.AppendDelimited(Length.FormatAsmHex(4),10,delimiter); 
+                dst.AppendDelimited(Id,delimiter);                        
                 return dst.ToString();
             }
         }

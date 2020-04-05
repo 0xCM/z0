@@ -24,6 +24,42 @@ namespace Z0
 
         public const NumericKind AllNumeric = NumericKind.All;
 
+        public const NumericKind Numeric8 = NumericKind.Width8;
+
+        public const NumericKind Numeric16 = NumericKind.Width16;
+
+        public const NumericKind Numeric32 = NumericKind.Width32;
+
+        public const NumericKind Numeric64 = NumericKind.Width64;
+
+        public const NumericKind Numeric8u = NumericKind.U8;
+
+        public const NumericKind Numeric8i = NumericKind.I8;
+
+        public const NumericKind Numeric16u = NumericKind.U16;
+
+        public const NumericKind Numeric16i = NumericKind.I16;
+
+        public const NumericKind Numeric32u = NumericKind.U32;
+
+        public const NumericKind Numeric32i = NumericKind.I32;
+
+        public const NumericKind Numeric64u = NumericKind.U64;
+
+        public const NumericKind Numeric64i = NumericKind.I64;
+
+        public const NumericKind Numeric32f = NumericKind.F32;
+
+        public const NumericKind Numeric64f = NumericKind.F64;
+
+        public const NumericKind Numeric8x16 = NumericKind.Width8 | NumericKind.Width16;
+
+        public const NumericKind Numeric8x16x32 = NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32;
+
+        public const NumericKind Numeric16x32 = NumericKind.Width16 | NumericKind.Width32;
+
+        public const NumericKind Numeric32x64 = NumericKind.Width32 | NumericKind.Width64;
+
         [MethodImpl(Inline)]
         internal static IEnumerable<T> seq<T>(params T[] src)
             => src;

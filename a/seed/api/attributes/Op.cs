@@ -15,21 +15,14 @@ namespace Z0
     {
         public string Name {get;}
 
-        /// <summary>
-        /// Indicates whether the operation return type should be reflected in the identity
-        /// </summary>
-        public bool IncludeReturn {get;}
-
-        public OpAttribute(bool @return = false)
+        public OpAttribute()
         {
             this.Name = string.Empty;
-            this.IncludeReturn = @return;
         }
 
-        public OpAttribute(string name, bool @return = false)
+        public OpAttribute(string name)
         {
             this.Name = name;          
-            this.IncludeReturn = @return;  
         }
 
         public override string ToString()

@@ -58,9 +58,14 @@ namespace Z0
         Predicate = 128,
 
         /// <summary>
+        /// Classifies system-level operations
+        /// </summary>        
+        System = 256,
+
+        /// <summary>
         /// The last pure classifier
         /// </summary>        
-        LastClass = Predicate,        
+        LastClass = System,        
 
         /// <summary>
         /// Classifies actions that accept one argument

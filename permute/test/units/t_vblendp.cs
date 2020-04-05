@@ -44,10 +44,13 @@ namespace Z0
             var description = text.factory.Builder();
             var indent = "/// ";
             var bits = BitString.scalar(sample).Format(specifier:true);
-            var header = $"{indent}512x{bitsize(default(T))}, {maskspec}, {bits}";            
+            var header = $"{indent}512x{bitsize(default(T))}, {maskspec}, {bits}"; 
+            var sfk = SequenceFormatKind.List;  
+            var sep = Chars.Comma;         
+            var pad = 2;
             description.AppendLine(header);
-            description.AppendLine($"{indent}source: {source.Format(pad:2)}");
-            description.AppendLine($"{indent}target: {target.Format(pad:2)}");            
+            description.AppendLine($"{indent}source: {source.Format()}");
+            description.AppendLine($"{indent}target: {target.Format()}");            
             return description.ToString();
         }
 
@@ -330,9 +333,12 @@ namespace Z0
 
             if(EmitInfo)
             {
+                var sfk = SequenceFormatKind.List;
+                var sep = Chars.Comma;
+                var pad = 2;
                 Notify($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typeof(T).DisplayName()}, perm length = {pn}");
-                Notify($"left:  {left.FormatList(2)}");
-                Notify($"right: {right.FormatList(2)}");
+                Notify($"left:  {left.Format()}");
+                Notify($"right: {right.Format()}");
                 Notify(perm.Format());  
                 Notify(string.Empty);  
             }

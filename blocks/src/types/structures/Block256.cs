@@ -13,13 +13,11 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 256-bit blocks
     /// </summary>
-    [Blocked(TypeWidth.W256,true, CellWidth.Numeric)]
+    [Blocked(TypeWidth.W256, true, CellWidth.Numeric)]
     public readonly ref struct Block256<T>
         where T : unmanaged
     {
-        internal readonly Span<T> data;
-
-        public static W256 W => default;
+        readonly Span<T> data;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block256<T> src)
@@ -147,6 +145,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block256<T> Extract(int block)
             => new Block256<T>(Block(block));
+
+        [MethodImpl(Inline)]
+        public void Fill(T src)
+            => data.Fill(src);
 
         /// <summary>
         /// Reinterprets the storage cell type

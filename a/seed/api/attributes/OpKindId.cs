@@ -12,9 +12,7 @@ namespace Z0
     public abstract class OpKindAttribute : OpAttribute
     {
         protected OpKindAttribute(object id) 
-            : base(false) 
         {
-
             KindId = (OpKindId)(ulong)Convert.ChangeType(id,typeof(ulong));
         }
 

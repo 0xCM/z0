@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
+        [Alloc, Closures(Numeric16u)]
         public static Block16<T> alloc<T>(W16 w, int blocks, T t = default)
             where T : unmanaged        
                 => new Block16<T>(new T[blocks * length<T>(w)]);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
+        [Alloc, Closures(Numeric32u)]
         public static Block32<T> alloc<T>(W32 w, int blocks, T t = default)
             where T : unmanaged        
                 => new Block32<T>(new T[blocks * length<T>(w)]);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, NumericClosures(NumericKind.All)]
+        [Alloc, Closures(Numeric32u)]
         public static Block64<T> alloc<T>(W64 w, int blocks, T t = default)
             where T : unmanaged        
                 => new Block64<T>(new T[blocks * length<T>(w)]);
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, NumericClosures(NumericKind.All)]
+        [Alloc, Closures(Numeric32u)]
         public static Block128<T> alloc<T>(W128 w, int blocks, T t = default)
             where T : unmanaged        
                 => new Block128<T>(new T[blocks * length<T>(w)]);
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, NumericClosures(NumericKind.All)]
+        [Alloc, Closures(Numeric32u)]
         public static Block256<T> alloc<T>(W256 w, int blocks, T t = default)
             where T : unmanaged        
                 => new Block256<T>(new T[blocks * length<T>(w)]);
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, NumericClosures(NumericKind.All)]
+        [Alloc, Closures(Numeric32u)]
         public static Block512<T> alloc<T>(W512 w, int blocks, T t = default)
             where T : unmanaged        
                 => new Block512<T>(new T[blocks * length<T>(w)]);

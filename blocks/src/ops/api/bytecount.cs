@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="cellcount">The number of allocated cells</param>
         /// <param name="cellwidth">The bit-width of a cell</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int bytecount(int cellcount, int cellwidth)
             => cellcount * (cellwidth/8);
 
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="cellcount">The number of allocated cells</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int bytecount<T>(int cellcount)
             => cellcount * Unsafe.SizeOf<T>();
     }

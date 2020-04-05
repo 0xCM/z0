@@ -15,17 +15,10 @@ namespace Z0
         /// Calculates the number of bytes required to represent a block constituent
         /// </summary>
         /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
         public static int cellsize<T>()
             where T : unmanaged        
                 => Unsafe.SizeOf<T>();
 
-        /// <summary>
-        /// The bit width of a cell
-        /// </summary>
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
-        public static int cellwidth<T>() 
-            where T : unmanaged
-                => Unsafe.SizeOf<T>() * 8;
     }
 }

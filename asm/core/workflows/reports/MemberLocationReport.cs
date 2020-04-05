@@ -53,8 +53,8 @@ namespace Z0.Asm
         {
             var dst = text.factory.Builder();
             dst.AppendField(Location, 16);
-            dst.DelimitField(Gap, 8, delimiter);
-            dst.DelimitField(Member, delimiter);
+            dst.AppendDelimited(Gap, 8, delimiter);
+            dst.AppendDelimited(Member, delimiter);
             return dst.ToString();
         }
     }

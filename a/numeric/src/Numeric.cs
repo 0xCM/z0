@@ -8,7 +8,7 @@ namespace Z0
         
     }
 
-    [ApiHost("numeric.api")]
+    [ApiHost("api")]
     public static partial class Numeric
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;

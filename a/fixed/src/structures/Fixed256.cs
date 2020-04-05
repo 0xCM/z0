@@ -79,7 +79,7 @@ namespace Z0
             => X0.Equals(src.X0) && X1.Equals(src.X1);
  
         public string Format() 
-            => Arrays.from(X0,X1).FormatDataList();
+            => Arrays.from(X0,X1).Format();
         
         public override string ToString() 
             => Format();

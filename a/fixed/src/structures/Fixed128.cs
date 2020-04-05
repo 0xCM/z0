@@ -78,7 +78,7 @@ namespace Z0
         public bool Equals(Fixed128 src)
             => X0 == src.X0 && X1 == src.X1;
         public string Format()
-            => Arrays.from(X0,X1).FormatDataList();       
+            => Arrays.from(X0,X1).Format();       
  
         public override string ToString() 
             => Format();

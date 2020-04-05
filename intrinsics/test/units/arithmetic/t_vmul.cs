@@ -108,8 +108,8 @@ namespace Z0
             var a1 = gvec.vinc(ws,a0.LastCell() + 1);
             var b0 = dvec.vmul(a0,a1);
             var b1 = dvec.vmul(dvec.vswaphl(a0), dvec.vswaphl(a1));
-            trace("x",a0.FormatList());
-            trace("y",a1.FormatList());
+            trace("x", a0.Format());
+            trace("y", a1.Format());
             trace("lo", b0.Format());
             trace("hi", b1.Format());
 
