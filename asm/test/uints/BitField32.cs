@@ -9,8 +9,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed;
-    using static VCore;
+    using static Core;
 
     public struct BitField32
     {

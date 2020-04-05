@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Core;
-    using static VCore;
     
     public class tv_mul : t_vinx<tv_mul>
     {
@@ -158,7 +157,7 @@ namespace Z0
             
             var zb = Blocks.single(n512,t);
             var eb = Blocks.single(n512,t);            
-            var count = VCore.vcount(w,s);
+            var count = vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)
             {

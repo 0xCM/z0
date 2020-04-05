@@ -37,5 +37,7 @@
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Typed)" />
 
+    <ProjectReference Include="$(Vectors)" />
+
   </ItemGroup>
 </Project>

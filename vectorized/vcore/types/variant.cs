@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics.X86;
     
+    using static Seed;
+
     using NK = NumericKind;
-
-    using static Core;
-
+    
     public interface IVariant
     {
         /// <summary>
@@ -69,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static variant FromGeneric<T>(T src)
             where T : unmanaged
-                => new variant(Store((ulong)Cast.to<T,ulong>(src), NumericKinds.kind<T>(), (uint)bitsize<T>()));
+                => new variant(Store((ulong)Cast.to<T,ulong>(src), NumericKinds.kind<T>(), (uint)BitSize.measure<T>()));
 
         [MethodImpl(Inline)]
         public static variant FromScalar(sbyte src)
@@ -237,7 +236,6 @@ namespace Z0
         public override string ToString()
             => Format();
 
-
         [MethodImpl(Inline)]
         Vector128<T> to<T>()
             where T : unmanaged
@@ -246,18 +244,18 @@ namespace Z0
         [MethodImpl(Inline)]
         T cell<T>(int index)
             where T : unmanaged
-                => VCore.vcell(to<T>(), index);
+                => Core.vcell(to<T>(), index);
 
         ulong Low64
         {
             [MethodImpl(Inline)]
-            get => VCore.vcell(data,0);
+            get => Core.vcell(data,0);
         }
 
         ulong Hi64
         {
             [MethodImpl(Inline)]
-            get => VCore.vcell(data,1);
+            get => Core.vcell(data,1);
         }
 
         [MethodImpl(Inline)]
@@ -274,6 +272,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<ulong> SetWidth(Vector128<ulong> src, uint width)
-            => VCore.v64u(VCore.vcell(VCore.v32u(src), 3, width));
+            => Core.v64u(Core.vcell(Core.v32u(src), 3, width));
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Gone;
+    using static Core;
     using static VCore;
 
     partial class vexamples
@@ -21,7 +21,7 @@ namespace Z0
             
             var w = n256;
             var t = z32;
-            var count = VCore.vcount(w,t);
+            var count = vcount(w,t);
 
             var x = gvec.vinc(w,t);
             var y = gvec.vinc(w, (x.LastCell() + 1));

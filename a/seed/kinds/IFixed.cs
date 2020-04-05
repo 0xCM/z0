@@ -19,30 +19,54 @@ namespace Z0
         /// </summary>
         int BitWidth {get;}
 
-        int ByteCount
-        {
-            [MethodImpl(Inline)]
-            get => BitWidth / 8;
-        }
+        int ByteCount {get;}
     }
 
     /// <summary>
     ///  Characterizes a fixed type with storage and reification types of equal size
     /// </summary>
-    /// <typeparam name="F">The storage type</typeparam>
-    public interface IFixed<F> : IFixed
-        where F : unmanaged
+    /// <typeparam name="S">The storage type</typeparam>
+    public interface IFixed<W> : IFixed
+        where W : unmanaged, ITypeWidth
     {
-        int IFixed.ByteCount 
+
+    }
+
+    public interface IFixed<F,W> : IFixed<W>, IEquatable<F>, IFormattable<F>
+        where F : unmanaged, IFixed<F,W>
+        where W : unmanaged, ITypeWidth  
+    {
+    
+    }
+    
+    public interface IFixed<F,W,S> : IFixed<F,W>
+        where F : unmanaged, IFixed<F,W,S>
+        where W : unmanaged, ITypeWidth  
+        where S : unmanaged      
+    {
+    
+    }
+
+    public interface IFixedNumeric<W,S> : IFixed<W>
+        where S : unmanaged        
+        where W : unmanaged, ITypeWidth  
+    {
+        S Data {get;}
+
+        NumericKind NumericKind
         {
             [MethodImpl(Inline)]
-            get => Unsafe.SizeOf<F>();
+            get => typeof(S).NumericKind();
         }
 
-        int IFixed.BitWidth
-        {
-            [MethodImpl(Inline)]
-            get => (int)bitsize<F>();
-        }        
     }
+
+    public interface IFixedNumeric<F,W,S> : IFixed<F,W,S>, IFixedNumeric<W,S>
+        where F : unmanaged, IFixed<F,W,S>
+        where S : unmanaged        
+        where W : unmanaged, ITypeWidth  
+    {
+
+
+    }    
 }

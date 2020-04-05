@@ -2,22 +2,33 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Types
+namespace Z0.Asm
 {
-   public interface reg512 : reg<W512>
-    {
+    using static AsmSpecs;
+    using static AsmTypes;
 
+    partial class AsmSpecs
+    {
+        public interface reg512 : reg<W512>
+        {
+
+        }
+
+        public interface zmm<F> : reg512, reg<F,W512>
+            where F : struct, zmm<F>
+        {
+
+        }
+
+        public interface zmm<F,N> : zmm<F>
+            where F : struct, zmm<F,N>
+            where N : unmanaged, ITypeNat
+        {
+
+        }
     }
 
-    public interface zmm<F> : reg512, reg<F,W512>
-        where F : struct, zmm<F>
-    {
-
-    }
-
-    public interface zmm<F,N> : zmm<F>
-        where F : struct, zmm<F,N>
-        where N : unmanaged, ITypeNat
+    partial class AsmTypes
     {
 
     }

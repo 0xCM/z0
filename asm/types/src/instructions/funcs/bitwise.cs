@@ -2,11 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Types
+namespace Z0.Asm
 {
 
-    public readonly struct xor : func<xor>
+    using static AsmSpecs;
+    using static AsmTypes;
+
+    partial class AsmSpecs
     {
 
     }
+
+    partial class AsmOps
+    {
+        public readonly struct xor : func<xor>
+        {
+
+        }
+    }
+
 }

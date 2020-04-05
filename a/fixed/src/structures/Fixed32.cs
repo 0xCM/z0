@@ -10,23 +10,18 @@ namespace Z0
     using static Seed;
 
     [Fixed(FixedWidth.W32)]
-    public struct Fixed32 : IFixedNumeric<Fixed32,uint>, IEquatable<Fixed32>
+    public readonly struct Fixed32 : IFixedNumeric<Fixed32,W32,uint>
     {
-        uint X0;
+        readonly uint X0;
 
         public uint Data
         {
             [MethodImpl(Inline)] get => X0;
-            [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 32; }
+        public int BitWidth => 32;
 
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
+        public int ByteCount => 4;
 
         [MethodImpl(Inline)]
         public static Fixed32 From(uint src)
@@ -99,13 +94,17 @@ namespace Z0
         public bool Equals(uint src)
             => X0 == src;
        
+        public string Format()
+            => X0.ToString();
+
+        public override string ToString() 
+            => Format();
+ 
         public override int GetHashCode()
             => X0.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed32 x && Equals(x);
 
-        public override string ToString() 
-            => X0.ToString();
     }
 }

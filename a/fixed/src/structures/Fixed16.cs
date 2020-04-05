@@ -10,23 +10,18 @@ namespace Z0
     using static Seed;
 
     [Fixed(FixedWidth.W16)]
-    public struct Fixed16 : IFixedNumeric<Fixed16,ushort>, IEquatable<Fixed16>
+    public readonly struct Fixed16 : IFixedNumeric<Fixed16,W16,ushort>
     {
-        ushort X0;
+        readonly ushort X0;
 
         public ushort Data
         {
             [MethodImpl(Inline)] get => X0;
-            [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 16; }
+        public int BitWidth => 16;
 
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
+        public int ByteCount => 2;
 
         [MethodImpl(Inline)]
         public static Fixed16 From(ushort src)
@@ -94,6 +89,12 @@ namespace Z0
         public bool Equals(Fixed16 src)
             => X0 == src.X0;
 
+        public string Format()
+            => X0.ToString();
+
+        public override string ToString() 
+            => Format();
+ 
         [MethodImpl(Inline)]
         public bool Equals(ushort src)
             => X0 == src;
@@ -104,7 +105,5 @@ namespace Z0
         public override bool Equals(object src)
             => src is Fixed16 x && Equals(x);
 
-        public override string ToString() 
-            => X0.ToString();
-    }
+   }
 }

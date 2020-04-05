@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Gone;
 
     public class t_vbfly : t_vinx<t_vbfly>
     {

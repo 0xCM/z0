@@ -2,17 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Types
+namespace Z0.Asm
 {
 
-    public readonly struct add : func<add>
+    using static AsmSpecs;
+    using static AsmTypes;
+
+    partial class AsmSpecs
     {
 
-    }    
+    }
 
-    public readonly struct sub : func<sub>
+    partial class AsmOps
     {
+        public readonly struct add : func<add>
+        {
 
-    }    
+        }    
 
+        public readonly struct sub : func<sub>
+        {
+
+        }    
+    }
 }

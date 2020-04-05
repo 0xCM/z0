@@ -21,7 +21,7 @@ namespace Z0
             var v1 = VSvc.vbitlogic<T>(n128).and(x,y);
             var buffer = Fixed.alloc<Fixed128>();
             ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
-            var count = VCore.vcount<T>(n128);            
+            var count = vcount<T>(n128);            
             for(var i=0; i< count; i++)
                 seek(ref dst, i) = svc.and(vcell(x,i), vcell(y,i));
             var v2 = VCore.vload(n128, in dst);

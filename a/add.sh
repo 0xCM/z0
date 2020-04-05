@@ -79,5 +79,8 @@ bash $Cmd
 export ProjectId=typed
 bash $Cmd
 
+export ProjectId=vectors
+bash $Cmd
+
 export ProjectId=z
 bash $Cmd

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static refs;
-    using static Gone;
 
     public class t_vswaps : t_vinx<t_vswaps>
     {        

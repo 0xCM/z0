@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public static partial class Surrogates
+    partial class Surrogates
     {
         /// <summary>
         /// Captures a delegate that is exposed as an emitter

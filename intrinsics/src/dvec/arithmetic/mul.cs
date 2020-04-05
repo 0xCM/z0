@@ -17,7 +17,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Ssse3;
 
     using static Core;    
-    using static VCore;
 
     partial class dvec
     {

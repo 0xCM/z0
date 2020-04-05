@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static ulong vcompact(Vector128<ushort> src, N64 w, ulong t = default)            
-            => VCore.vcell64(vcompact(src, default, n128, z8),0);
+            => vcell64(vcompact(src, default, n128, z8),0);
 
         /// <summary>
         /// 16x8u -> 16x16u

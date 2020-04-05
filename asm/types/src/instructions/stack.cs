@@ -2,16 +2,28 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Types
+namespace Z0.Asm
 {
 
-    public readonly struct push : func<push>
+    using static AsmSpecs;
+    using static AsmTypes;
+
+    partial class AsmSpecs
     {
-        
+
     }
 
-    public readonly struct pop : func<pop>
+    partial class AsmTypes
     {
-        
+        public readonly struct push : func<push>
+        {
+            
+        }
+
+        public readonly struct pop : func<pop>
+        {
+            
+        }
     }
+
 }

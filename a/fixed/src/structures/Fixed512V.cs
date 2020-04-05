@@ -12,13 +12,15 @@ namespace Z0
 
     [StructLayout(LayoutKind.Sequential)]
     [Fixed(FixedWidth.W512)]
-    public struct Fixed512V  : IFixed<Fixed512V>
+    public readonly struct Fixed512V  : IFixed<Fixed512V,W512>
     {
-        Fixed256V X0;
+        readonly Fixed256V X0;
 
-        Fixed256V X1;
+        readonly Fixed256V X1;
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 512; }
+        public int BitWidth => 512;
+
+        public int ByteCount => 64;
 
         [MethodImpl(Inline)]
         Fixed512V(Fixed256V x0, Fixed256V x1)

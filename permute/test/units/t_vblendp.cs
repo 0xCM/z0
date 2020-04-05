@@ -9,9 +9,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static root;
-    using static Gone;
-    using static VCore;
+    using static Core;
 
     public class t_vblendp : UnitTest<t_vblendp>
     {

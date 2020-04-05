@@ -8,11 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
     
-    using static refs;
-    using static Gone;
-    using static VCore;
     using static HexConst;
-    using static As;
+    using static Core;
     
     partial class vexamples
     {        

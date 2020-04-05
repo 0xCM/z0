@@ -13,18 +13,13 @@ namespace Z0
 
     [StructLayout(LayoutKind.Sequential)]
     [Fixed(FixedWidth.W128)]
-    public struct Fixed128V : IFixed<Fixed128V>, IEquatable<Fixed128V>, IFormattable<Fixed128V>
+    public readonly struct Fixed128V : IFixed<Fixed128V,W128,Vector128<ulong>>
     {
+        readonly Vector128<ulong> data;
 
-        internal Vector128<ulong> data;
+        public int BitWidth => 128;
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 128; }
-
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
+        public int ByteCount => 16;
 
         [MethodImpl(Inline)]
         public static Fixed128V From<T>(Vector128<T> src)
@@ -95,17 +90,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(Fixed128V src)
             => data.Equals(src.data);
-        
+
+        [MethodImpl(Inline)]
+        public bool Equals(Vector128<ulong> src)
+            => data.Equals(src);
+
+        [MethodImpl(Inline)]
+        public Vector128<T> ToVector<T>()
+            where T : unmanaged
+                => data.As<ulong,T>();
         public string Format()
             => data.ToString();
 
+        public override string ToString() 
+            => Format();
+ 
         public override int GetHashCode()
             => data.GetHashCode();
         
         public override bool Equals(object src)
-            => src is Fixed128V x && Equals(x);
-        
-        public override string ToString() 
-            => Format();
+            => src is Fixed128V x && Equals(x);       
     }
 }

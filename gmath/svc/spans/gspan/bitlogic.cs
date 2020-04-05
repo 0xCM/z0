@@ -23,6 +23,11 @@ namespace Z0
             where T : unmanaged
                 => SFuncs.apply(MathSvc.and<T>(), l,r,dst);
 
+        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        public static Span<T> and<T>(Span<T> lhs, Span<T> rhs)
+            where T : unmanaged
+                => SFuncs.apply(MathSvc.and<T>(),lhs,rhs);
+
         /// <summary>
         /// Computes the bitwise or between corresponding span elements
         /// </summary>

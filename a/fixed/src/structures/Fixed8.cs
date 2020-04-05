@@ -10,23 +10,18 @@ namespace Z0
     using static Seed;
 
     [Fixed(FixedWidth.W8)]
-    public struct Fixed8 : IFixedNumeric<Fixed8, byte>, IEquatable<Fixed8>
+    public readonly struct Fixed8 : IFixedNumeric<Fixed8,W8,byte>
     {        
-        byte X0;
+        readonly byte X0;
 
         public byte Data
         {
             [MethodImpl(Inline)] get => X0;
-            [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 8; }
+        public int BitWidth => 8;
 
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
+        public int ByteCount => 1;
 
         [MethodImpl(Inline)]
         public static Fixed8 From(byte src)
@@ -90,13 +85,16 @@ namespace Z0
         public bool Equals(byte src)
             => X0 == src;
 
+        public string Format()
+            => X0.ToString();
+
+        public override string ToString() 
+            => Format();
+
         public override int GetHashCode()
             => X0.GetHashCode();
         
         public override bool Equals(object src)
-            => src is Fixed8 x && Equals(x);
-        
-        public override string ToString() 
-            => X0.ToString();
+            => src is Fixed8 x && Equals(x);    
     }
 }

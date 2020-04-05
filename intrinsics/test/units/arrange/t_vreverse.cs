@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Gone;
-    using static VCore;
+    using static Core;
 
     public class t_vreverse : t_vinx<t_vreverse>
     {
@@ -81,7 +80,7 @@ namespace Z0
                 var output = f.Invoke(input);
                 var expect = VCore.vzero(w,t);
                 for(var j = 0; j < n; j++)
-                    expect = VCore.vcell(VCore.vcell(input,(n - 1) - j),j,expect);
+                    expect = vcell(vcell(input,(n - 1) - j),j,expect);
 
                 Claim.veq(expect,output);
             }
@@ -102,7 +101,7 @@ namespace Z0
                 var output = f.Invoke(input);
                 var expect = VCore.vzero(w,t);
                 for(var j = 0; j < n; j++)
-                    expect = VCore.vcell(vcell(input,(n - 1) - j),j,expect);
+                    expect = vcell(vcell(input,(n - 1) - j),j,expect);
 
                 Claim.veq(expect,output);
             }

@@ -2,20 +2,29 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Types
+namespace Z0.Asm
 {
-    public interface sized
+    using static AsmSpecs;
+    using static AsmTypes;
+
+    partial class AsmSpecs
     {
-        uint Size {get;}
+        public interface sized
+        {
+            uint Size {get;}
+        }
+
+        public interface sized<W> : sized
+            where W : unmanaged, IDataWidth
+        {
+            uint sized.Size => Widths.measure<W>();
+
+            DataWidth Width => Widths.data<W>();            
+        }
     }
 
-    public interface sized<W> : sized
-        where W : unmanaged, IDataWidth
+    partial class AsmTypes
     {
-        uint sized.Size => Widths.measure<W>();
 
-        DataWidth Width => Widths.data<W>();
-        
     }
-
 }

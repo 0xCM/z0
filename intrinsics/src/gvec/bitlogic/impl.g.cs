@@ -11,8 +11,7 @@ namespace Z0
     
     using static Core;
     using static VCore;
-    
-    
+        
     partial class gvec
     {
         /// <summary>

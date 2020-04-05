@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Gone;
-    using static VCore;
+    using static Core;
 
     public class t_vtakemask : t_vinx<t_vtakemask>
     {

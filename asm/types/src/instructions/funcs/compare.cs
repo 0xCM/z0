@@ -2,16 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Types
+namespace Z0.Asm
 {
 
-    public readonly struct cmp : func<cmp>
+    using static AsmSpecs;
+    using static AsmTypes;
+
+    partial class AsmSpecs
     {
 
     }
 
-    public readonly struct test : func<test>
+    partial class AsmOps
     {
-        
+        public readonly struct cmp : func<cmp>
+        {
+
+        }
+
+        public readonly struct test : func<test>
+        {
+            
+        }
     }
 }

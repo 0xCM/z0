@@ -13,13 +13,15 @@ namespace Z0
 
     [StructLayout(LayoutKind.Sequential)]
     [Fixed(FixedWidth.W256)]
-    public struct Fixed256  : IFixed<Fixed256>, IEquatable<Fixed256>
+    public readonly struct Fixed256 : IFixed<Fixed256,W256>
     {
-        Fixed128 X0;
+        readonly Fixed128 X0;
 
-        Fixed128 X1;
+        readonly Fixed128 X1;
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 256; }
+        public int BitWidth => 256;
+
+        public int ByteCount => 32;
 
         [MethodImpl(Inline)]
         Fixed256(Fixed128 x0, Fixed128 x1)
@@ -75,14 +77,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(Fixed256 src)
             => X0.Equals(src.X0) && X1.Equals(src.X1);
+ 
+        public string Format() 
+            => Arrays.from(X0,X1).FormatDataList();
         
+        public override string ToString() 
+            => Format();
+ 
         public override int GetHashCode()
             => HashCode.Combine(X0,X1);
         
         public override bool Equals(object src)
             => src is Fixed256 x && Equals(x);
-
-        public override string ToString() 
-            => Arrays.from(X0,X1).FormatDataList();
     }
 }

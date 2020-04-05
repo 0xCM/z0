@@ -8,8 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Gone;
-    using static VCore;
+    using static Core;
     using static HexConst;
     using K = Core;
 

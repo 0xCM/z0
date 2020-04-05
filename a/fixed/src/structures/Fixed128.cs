@@ -13,19 +13,15 @@ namespace Z0
 
     [StructLayout(LayoutKind.Sequential)]
     [Fixed(FixedWidth.W128)]
-    public struct Fixed128 : IFixed<Fixed128>, IEquatable<Fixed128>
+    public readonly struct Fixed128 : IFixed<Fixed128,W128>
     {
-        ulong X0;
+        readonly ulong X0;
 
-        ulong X1;       
+        readonly ulong X1;       
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 128; }
+        public int BitWidth => 128;
 
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
+        public int ByteCount => 16;
 
         [MethodImpl(Inline)]
         Fixed128(ulong x0, ulong x1)
@@ -81,14 +77,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(Fixed128 src)
             => X0 == src.X0 && X1 == src.X1;
-        
+        public string Format()
+            => Arrays.from(X0,X1).FormatDataList();       
+ 
+        public override string ToString() 
+            => Format();
+
         public override int GetHashCode()
             => HashCode.Combine(X0,X1);
         
         public override bool Equals(object src)
             => src is Fixed128 x && Equals(x);
-
-        public override string ToString() 
-            => Arrays.from(X0,X1).FormatDataList();       
     }
 }

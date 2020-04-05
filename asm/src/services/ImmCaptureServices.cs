@@ -15,7 +15,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static IImmCapture<T> ImmVCapture<R,T>(this IAsmContext context, R resolver)
             where T : unmanaged        
-            where R : ISImm8ResolverApi<T>
+            where R : ISFImm8ResolverApi<T>
             => resolver switch {
                 ISVImm8UnaryResolver128Api<T> r => ImmV128UnaryCaptureService<T>.New(context,r),
                 ISVImm8UnaryResolver256Api<T> r => ImmV256UnaryCaptureService<T>.New(context,r),

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Gone;
-
     partial class vexamples
     {
         public void vcover_basecase()

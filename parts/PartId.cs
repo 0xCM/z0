@@ -91,6 +91,8 @@ public enum PartId : ulong
 
     Code = 856,
 
+    Vectors = 858,
+
     Z = 1024,
 
     TestLib = 430,

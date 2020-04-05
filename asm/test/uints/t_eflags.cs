@@ -9,10 +9,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using Z0.Asm.Types;
-
     using static VCore;
-
 
     public class t_eflags : UnitTest<t_eflags>
     {

@@ -17,6 +17,23 @@ namespace Z0
     public static unsafe class memory
     {
         /// <summary>
+        /// Allocates an array
+        /// </summary>
+        /// <param name="length">The numer of array elements</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static T[] alloc<T>(int length)
+            => new T[length];
+
+        /// <summary>
+        /// Allocates a span
+        /// </summary>
+        /// <param name="length">The numer of array elements</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> span<T>(int length)
+            => alloc<T>(length);
+
+        /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>
         /// <param name="src">The source reference</param>

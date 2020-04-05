@@ -17,8 +17,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FieldSegment segment<E>(E segid, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => BitField.segment(segid, startpos, endpos); //BitField.segment(segid.ToString(), Enums.numeric<E,byte>(segid), startpos, endpos, (byte)(endpos - startpos + 1));
-
+                => BitField.segment(segid, startpos, endpos); 
+                
         enum BF_A : byte
         {
             F08_0 = 0,
@@ -95,7 +95,7 @@ namespace Z0
                 segment(BFB_I.BFB_2, 8, 9),
                 segment(BFB_I.BFB_3, 10, 15)
                 );
-            var dst = alloc<ushort>(spec.FieldCount);
+            var dst = memory.alloc<ushort>(spec.FieldCount);
             var bf = BitField.create<ushort>(spec);
 
             Claim.eq((byte)4,spec.FieldCount);
@@ -144,7 +144,7 @@ namespace Z0
         {
             var spec = BitField.specify<BFC_I, BFC_W>();
             var bf = BitField.create<byte>(spec);
-            var dst = alloc<byte>(spec.FieldCount);
+            var dst = memory.alloc<byte>(spec.FieldCount);
 
             Claim.eq((byte)4, spec.FieldCount);
 
@@ -221,8 +221,8 @@ namespace Z0
         {
             var spec = BitField.specify<BFD_I,BFD_W>();
             var bf = BitField.create<ulong>(spec);
-            var dst = alloc<ulong>(spec.FieldCount);
-            var tmp = alloc<ulong>(spec.FieldCount);
+            var dst = memory.span<ulong>(spec.FieldCount);
+            var tmp = memory.span<ulong>(spec.FieldCount);
             var positions = spec.Segments.Map(s => s.StartPos);
 
             trace(spec);
@@ -270,8 +270,7 @@ namespace Z0
             var bf = BitField.@fixed<BFD_I,byte,BFD_W>(64);
 
             bf[3] = byte.MaxValue;
-            trace(bf.FormatBits(32));                            
-
+            trace(bf.FormatBits(32));
         }
     }
 }

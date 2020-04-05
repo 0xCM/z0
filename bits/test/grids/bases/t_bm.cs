@@ -25,7 +25,7 @@ namespace Z0
                 var A = Random.BitMatrix(n,t);
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.and(A,B).Data;
-                var C2 = and(A.Data, B.Data);
+                var C2 = gspan.and(A.Data, B.Data);
                 eq(A.Order, nati<N>());
                 eq(B.Order, nati<N>());                
                 eq(C1,C2);

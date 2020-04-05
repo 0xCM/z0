@@ -12,31 +12,7 @@ namespace Z0
 
     public abstract class t_bitgrids_base<U> : UnitTest<U>
         where U : t_bitgrids_base<U>, new()
-    {     
-        static Span<T> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : unmanaged
-            where F : ISBinaryOpApi<T>
-        {        
-            var count = lhs.Length;
-            var dst = alloc<T>(count);
-            ref readonly var lSrc = ref head(lhs);
-            ref readonly var rSrc = ref head(rhs);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
-            return dst;
-        }
-
-        static Span<T> apply<F,T>(F f, Span<T> lhs, Span<T> rhs)
-            where T : unmanaged
-            where F : ISBinaryOpApi<T>
-                => apply(f,lhs.ReadOnly(), rhs.ReadOnly());
-     
-        protected static Span<T> and<T>(Span<T> lhs, Span<T> rhs)
-            where T : unmanaged
-                => apply(MathSvc.and<T>(),lhs,rhs);
-
+    {          
         /// <summary>
         /// Asserts logical bitvector/bitstring equality
         /// </summary>

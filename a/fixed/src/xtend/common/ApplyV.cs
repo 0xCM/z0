@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> Apply<T>(this UnaryOp128V f, Vector128<T> x)
             where T : unmanaged
-                => f(x.ToFixedV()).ToVector<T>();
+                => ToVector<T>(f(x.ToFixedV()));
 
         [MethodImpl(Inline)]
         public static Vector128<T> ApplyV<T>(this BinaryOp128 f, Vector128<T> x, Vector128<T> y)

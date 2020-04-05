@@ -10,23 +10,18 @@ namespace Z0
     using static Seed;
 
     [Fixed(FixedWidth.W64)]
-    public struct Fixed64 : IFixedNumeric<Fixed64,ulong>, IEquatable<Fixed64>
+    public readonly struct Fixed64 : IFixedNumeric<Fixed64,W64,ulong>
     {
-        ulong X0;
+        readonly ulong X0;
 
         public ulong Data
         {
             [MethodImpl(Inline)] get => X0;
-            [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 64; }
+        public int BitWidth => 64;
 
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
+        public int ByteCount => 8;
 
         [MethodImpl(Inline)]
         public static Fixed64 From<T>(T src)
@@ -104,15 +99,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed64 src)
-            => X0 == src.X0;
-        
-        public override int GetHashCode()
+            => X0 == src.X0;     
+        public string Format()
+            => X0.ToString();
+
+        public override string ToString() 
+            => Format();
+ 
+         public override int GetHashCode()
             => X0.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed64 x && Equals(x);
-
-        public override string ToString() 
-            => X0.ToString();
-    }
+   }
 }

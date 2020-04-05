@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Gone;
-
     public class t_vperm2x128 : t_vinx<t_vperm2x128>
     {
         static string describe<T>(Vector512<T> src, Perm2x4 p0, Perm2x4 p1)

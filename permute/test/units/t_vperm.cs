@@ -10,28 +10,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static root;
-    using static Gone;
+    using static Core;
 
     public class t_vperm : UnitTest<t_vperm>
     {
-
-        // [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] 
-        //
-
-        // public void bitfield_outline()
-        // {
-        //     var spec = BitField.specify((0,3),(4,6),(7,8),(9,9),(10,14),(15,17),(18,20));  
-        //     var data = 0b100_101_11010_1_11_110_0111ul;          
-        //     var bf = BitField.init(data,spec);
-
-        //     Claim.eq(7,spec.FieldCount);
-
-        //     var expect = new long[]{0b0111,0b110,0b11,0b1,0b11010,0b101,0b100};
-        //     for(byte i=0; i < spec.FieldCount; i++)
-        //         Claim.eq(bf[i], expect[i]);
-        // }
-
         /// <summary>
         /// Asserts content equality for two natural spans of coincident length
         /// </summary>

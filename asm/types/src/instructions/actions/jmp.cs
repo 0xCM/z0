@@ -2,23 +2,31 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Types
+namespace Z0.Asm
 {
 
-    public interface jmp
+    using static AsmSpecs;
+    using static AsmTypes;
+
+    partial class AsmSpecs
     {
+        public interface jmp
+        {
+
+        }
 
     }
-    
-    public readonly struct ja : action<ja>
-    {
 
-    }    
-
-    public readonly struct je : action<je>
+    partial class AsmOps
     {
-        
+        public readonly struct ja : action<ja>
+        {
+
+        }    
+
+        public readonly struct je : action<je>
+        {
+            
+        }
     }
-
-
 }

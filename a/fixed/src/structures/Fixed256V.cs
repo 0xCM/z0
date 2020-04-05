@@ -13,23 +13,18 @@ namespace Z0
 
     [StructLayout(LayoutKind.Sequential)]
     [Fixed(FixedWidth.W256)]
-    public struct Fixed256V : IFixed<Fixed256V>, IEquatable<Fixed256V>
+    public readonly struct Fixed256V : IFixed<Fixed256V,W256,Vector256<ulong>>
     {
-        internal Vector256<ulong> data;
+        readonly Vector256<ulong> data;
 
-        public int BitWidth  { [MethodImpl(Inline)] get => 256; }
+        public int BitWidth => 256;
 
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
+        public int ByteCount => 32;
 
         [MethodImpl(Inline)]
         public static Fixed256V From<T>(Vector256<T> src)
             where T : unmanaged
                 => new Fixed256V(src.AsUInt64());
-
 
         [MethodImpl(Inline)]
         Fixed256V(Vector256<ulong> src)
@@ -72,18 +67,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(Fixed256V src)
             => data.Equals(src.data);
-        
+
+        [MethodImpl(Inline)]
+        public bool Equals(Vector256<ulong> src)
+            => data.Equals(src);
+
+        [MethodImpl(Inline)]
+        public Vector256<T> ToVector<T>()
+            where T : unmanaged
+                => data.As<ulong,T>();
+
+        public string Format() 
+            => data.ToString();
+ 
+        public override string ToString() 
+            => Format();
+ 
         public override int GetHashCode()
             => data.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed256V x && Equals(x);
-
-        public override string ToString() 
-            => data.ToString();
-    }
-
-    partial class XFixed
-    {
     }
 }

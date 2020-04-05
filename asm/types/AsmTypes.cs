@@ -21,4 +21,20 @@ namespace Z0.Asm
         
     }
 
+    public static partial class AsmSpecs
+    {
+
+    }
+
+    public static partial class AsmCells
+    {
+
+        
+    }
+
+    public static partial class AsmOps
+    {
+
+
+    }
 }
