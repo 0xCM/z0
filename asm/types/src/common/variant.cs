@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AsmSpecs;
-    using static AsmTypes;
 
     partial class AsmTypes
     {

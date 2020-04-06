@@ -22,16 +22,22 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a typenat
+    /// Characterizes a type with which a natural number type is associated
     /// </summary>
     /// <typeparam name="T">The represented type</typeparam>
     public interface ITypeNat<K> : ITypeNat
         where K: unmanaged, ITypeNat
     {
-        K NatRep
-        {
-            [MethodImpl(Inline)]
-            get => default(K);
-        }
+
+    }
+
+    /// <summary>
+    /// Characterizes an F-bound polymorphic type nat reification
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    public interface ITypeNatF<F> : ITypeNat<F>
+        where F : unmanaged, ITypeNatF<F>
+    {
+
     }
 }

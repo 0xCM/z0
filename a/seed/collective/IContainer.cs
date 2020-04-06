@@ -238,11 +238,20 @@ namespace Z0
         int Position {get;}
     }
 
-    public interface IIndexed<I> : IIndexed
-        where I : struct, IIndexed<I>
+    public interface IIndexed<F> : IIndexed
+        where F : struct, IIndexed<F>
     {
         
     }
+
+    public interface IIndexed<F,N> : IIndexed<F>, ITypeNat<N>
+        where F : struct, IIndexed<F,N>
+        where N : unmanaged, ITypeNat
+    {
+        ulong ITypeNat.NatValue => default(N).NatValue;
+
+    }
+
 
     /// <summary>
     /// Characterizes a container I with immutable content such that: 

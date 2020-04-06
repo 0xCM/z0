@@ -9,16 +9,32 @@ namespace Z0
 
     using static Seed;    
 
-    public readonly struct N10 : INatSeq<N10,N1,N0>, INatEven<N10>, INatDivisible<N10,N5>
+    public readonly struct N10 : ITypeNatF<N10>
     {
         public const ulong Value = 10;
 
+        public const string Text = "10";
+
+        public ulong NatValue => Value;
+
+        public string NatText => Text;
+
         [MethodImpl(Inline)]
-        public static implicit operator int(N10 src) => 10;
+        public static implicit operator int(N10 src) => (int)Value;
 
-        public ulong NatValue  => Value;
+        [MethodImpl(Inline)]
+        public static implicit operator byte(N10 src) => (byte)Value;
 
-        public override string ToString() 
-            => Value.ToString();
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(N10 src) => (ushort)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(N10 src) => (uint)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(N10 src) => Value;
+
+
+        public override string ToString() => Text;
     }
 }

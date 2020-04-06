@@ -122,13 +122,6 @@ namespace Z0
         public static bool eq(ulong lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        [MethodImpl(Inline)]   
-        public static bool eq(long lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == (long)rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
-
-        [MethodImpl(Inline)]   
-        public static bool eq(ulong lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => (long)lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

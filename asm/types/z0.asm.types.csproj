@@ -8,6 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(Vectors)" />
+    <ProjectReference Include="$(Math)" />
+    <ProjectReference Include="$(Enums)" />
+
     <ProjectReference Include="$(AsmModels)" />
   </ItemGroup>
 

@@ -9,18 +9,17 @@ namespace Z0.Asm
 
     partial class AsmSpecs
     {
+        /// <summary>
+        /// An aspect applied to those things that can exhibit a meaningful answer to the question "How many are your bits?"
+        /// </summary>
         public interface sized
         {
+            /// <summary>
+            /// The size measure, specified in bits
+            /// </summary>
             uint Size {get;}
         }
 
-        public interface sized<W> : sized
-            where W : unmanaged, IDataWidth
-        {
-            uint sized.Size => Widths.measure<W>();
-
-            DataWidth Width => Widths.data<W>();            
-        }
     }
 
     partial class AsmTypes

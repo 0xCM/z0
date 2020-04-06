@@ -56,14 +56,6 @@ namespace Z0
             => Claim.eq(lhs, rhs, caller,file, line);
 
         [MethodImpl(Inline)]   
-        bool eq(long lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Claim.eq(lhs, rhs, caller,file, line);
-
-        [MethodImpl(Inline)]   
-        bool eq(ulong lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Claim.eq(lhs,rhs, caller,file, line);
-
-        [MethodImpl(Inline)]   
         bool eq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Claim.eq(lhs, rhs, caller,file, line);
 
