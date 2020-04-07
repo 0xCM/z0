@@ -1,7 +1,0 @@
-﻿<Project>
-
-  <ItemGroup>    
-    <ProjectReference Include="$(Core)" />    
-  </ItemGroup>
-
-</Project>

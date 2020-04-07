@@ -6,10 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(VCore)" />
-    <ProjectReference Include="$(ValidityCore)" />
 
   </ItemGroup>
 

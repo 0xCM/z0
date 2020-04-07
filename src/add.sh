@@ -82,5 +82,3 @@ bash $Cmd
 export ProjectId=vectors
 bash $Cmd
 
-export ProjectId=z
-bash $Cmd

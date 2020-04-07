@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(ValidityCore)" />
+    <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
   </ItemGroup>

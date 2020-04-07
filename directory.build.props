@@ -1,6 +1,5 @@
 <Project>
 
-
   <PropertyGroup>
     <TopDir>$(MSBuildThisFileDirectory)</TopDir>
     <PlatformTarget>x64</PlatformTarget>    
@@ -26,11 +25,22 @@
     <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Src>$(TopDir)src/</Src>
+    <SrcDir>$(TopDir)src/</SrcDir>
+    <TestDir>$(TopDir)test/</TestDir>
+  </PropertyGroup>
+
   <PropertyGroup>  
     <Parts>$(TopDir)parts/z0.parts.csproj</Parts>
   </PropertyGroup>
 
-  <PropertyGroup>  
+  <PropertyGroup>
+    <Validity>$(TestDir)validity/z0.validity.csproj</Validity>
+
+  </PropertyGroup>
+
+  <PropertyGroup>    
     <AsmTypes>$(TopDir)asm/types/z0.asm.types.csproj</AsmTypes>
     <AsmModels>$(TopDir)asm/models/z0.asm.models.csproj</AsmModels>
     <AsmCore>$(TopDir)asm/core/z0.asm.core.csproj</AsmCore>
@@ -54,8 +64,7 @@
 
   <PropertyGroup>
     <VTop>$(TopDir)vectorized/</VTop>
-    <VCore>$(VTop)vcore/z0.vcore.csproj</VCore>  
-
+    <VCore>$(TopDir)/vectorized/vcore/z0.vcore.csproj</VCore>
     <Circuits>$(VTop)circuits/z0.circuits.csproj</Circuits>
     <DVec>$(VTop)dvec/z0.dvec.csproj</DVec>
     <FVec>$(VTop)fvec/z0.fvec.csproj</FVec>
@@ -65,7 +74,6 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Blocks>$(TopDir)blocks/src/z0.blocks.csproj</Blocks>
     <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
     <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
     <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
@@ -75,21 +83,16 @@
     <Logix>$(TopDir)logix/src/z0.logix.csproj</Logix>
     <Machines>$(TopDir)machines/src/z0.machines.csproj</Machines>
     <Matrix>$(TopDir)matrix/src/z0.matrix.csproj</Matrix>
-    <Math>$(TopDir)math/src/z0.math.csproj</Math>
     <MathSvc>$(TopDir)gmath/svc/z0.gmath.svc.csproj</MathSvc>
     <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
     <Nats>$(TopDir)nats/src/z0.nats.csproj</Nats>
     <Polyrand>$(TopDir)polyrand/z0.polyrand.csproj</Polyrand>
     <Permute>$(TopDir)permute/src/z0.permute.csproj</Permute>
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
-    <TestLib>$(TopDir)testlib/src/z0.testlib.csproj</TestLib>
-    <Validity>$(TopDir)validity/src/z0.validity.src.csproj</Validity>
-    <ValidityCore>$(TopDir)validity/core/z0.validity.core.csproj</ValidityCore>
     <ValidityVectors>$(TopDir)validity/vectors/z0.validity.vectors.csproj</ValidityVectors>
-    <Src>$(TopDir)src/</Src>
   </PropertyGroup>
 
-  <Import Project="$(Src)core.export.props"/>
+  <Import Project="$(SrcDir)core.export.props"/>
 
 
 </Project>

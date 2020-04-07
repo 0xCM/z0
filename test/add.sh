@@ -45,4 +45,6 @@ bash $Cmd
 export ProjectId=machines
 bash $Cmd
 
+export ProjectId=validity
+bash $Cmd
 

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TestLib)" />
+    <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(MklApi)" />        
   </ItemGroup>
 

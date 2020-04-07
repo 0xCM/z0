@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Blocks)" />
   </ItemGroup>
 

@@ -39,6 +39,7 @@
 
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Vectors)" />
+    <ProjectReference Include="$(Math)" />
 
   </ItemGroup>
 </Project>

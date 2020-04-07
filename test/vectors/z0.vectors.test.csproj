@@ -7,9 +7,9 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(VCore)" />
     <ProjectReference Include="$(FVec)" />
-    <ProjectReference Include="$(TestLib)" />
   </ItemGroup>
 
 </Project>
