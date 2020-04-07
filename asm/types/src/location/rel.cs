@@ -9,18 +9,11 @@ namespace Z0.Asm
 
     partial class AsmSpecs
     {
-        /// <summary>
-        /// A relative location
-        /// </summary>
-        public interface rel : location
-        {
-            
-        }
 
         /// <summary>
         /// A relative location specified using an W-bit displacement
         /// </summary>
-        public interface rel<W,T> : rel
+        public interface rel<W,T>
             where W : unmanaged, IDataWidth
             where T : unmanaged
         {

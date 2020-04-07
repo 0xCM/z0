@@ -5,55 +5,36 @@
 namespace Z0.Asm
 {
  
-    using static AsmTypes;
-
     partial class AsmSpecs
     {
-        /// <summary>
-        /// Characterizes a memory segment of known width and location
-        /// </summary>
-        public interface mem : data
+        public interface mem<W> : data<W>
+            where W : unmanaged, IDataWidth
         {
-            new MemoryWidth Width {get;}            
 
-            address Address {get;}
+        }
+    
+        /// <summary>
+        /// Characterizes a memory segment of parametric width and known location
+        /// </summary>
+        public interface mem<F,W,S> : mem<W>
+            where F : struct, mem<F,W,S>
+            where W : unmanaged, IDataWidth
+            where S : unmanaged
+        {
+            S Content {get;}
         }
 
         /// <summary>
         /// Characterizes a memory segment of parametric width and known location
         /// </summary>
-        public interface mem<W> : mem
+        public interface mem<F,W,S,A> : mem<F,W,S>
+            where F : struct, mem<F,W,S,A>
             where W : unmanaged, IDataWidth
+            where S : unmanaged
+            where A : address<W>
         {
-            uint sized.Size => (uint)Widths.data<W>(); 
-                     
-            MemoryWidth mem.Width => (MemoryWidth)Widths.data<W>();
-
-            DataWidth data.Width => Widths.data<W>();
+            A Location {get;}            
         }
 
-        /// <summary>
-        /// Characterizes a reified memory segment of parametric width and known location
-        /// </summary>
-        public interface mem<F,W> : mem<W>
-            where F : struct, mem<F,W>
-            where W : unmanaged, IDataWidth
-        {
-
-
-        }
-
-        /// <summary>
-        /// Characterizes a reified memory segment of parametric width and parametric address
-        /// </summary>
-        public interface mem<F,W,A> : mem<F,W>
-            where F : struct, mem<F,W,A>
-            where W : unmanaged, IDataWidth
-            where A : struct, address<W>
-        {
-            new A Address {get;}
-                    
-            address mem.Address => new address(Address.Scalar);
-        }
     }
 }

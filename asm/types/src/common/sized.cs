@@ -22,8 +22,5 @@ namespace Z0.Asm
 
     }
 
-    partial class AsmTypes
-    {
 
-    }
 }

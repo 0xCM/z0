@@ -5,25 +5,18 @@ namespace Z0.Asm
 {
     partial class AsmSpecs
     {
-        public interface ymm : reg<W256>
+        public interface zmm : reg<W512>
         {
-            const uint Width = 256;
+            const uint Width = 512;
 
-            RegisterKind reg.Kind => RegisterKind.Ymm;
+            RegisterKind reg.Kind => RegisterKind.Zmm;
         }
 
-        public interface ymm<S> : ymm, reg<W256,S>
-            where S : unmanaged
-        {            
-        
-        }
-
-        public interface ymm<F,N,S> : ymm<S>, IIndexed<N> 
-            where F : struct, ymm<F,N,S>
+        public interface zmm<F,N,S> : zmm, reg<F,W512,S>, IIndexed<N> 
+            where F : struct, zmm<F,N,S>
             where N : unmanaged, ITypeNat
             where S : unmanaged
         {
-
         }
 
         /// <summary>
@@ -31,8 +24,8 @@ namespace Z0.Asm
         /// </summary>
         /// <typeparam name="F">The reification type</typeparam>
         /// <typeparam name="N">The index type</typeparam>
-        public interface ymm<F,N> : ymm<F,N,Fixed256V>
-            where F : struct, ymm<F,N>
+        public interface zmm<F,N> : zmm<F,N,Fixed512V>
+            where F : struct, zmm<F,N>
             where N : unmanaged, ITypeNat
         {
             

@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
-    using static AsmSpecs;
-    using static AsmTypes;
-
     partial class AsmSpecs
     {
         /// <summary>
@@ -32,7 +28,6 @@ namespace Z0.Asm
             
 
             DataWidth Width => (DataWidth)Widths.measure<T>();
-
         }
 
         /// <summary>
@@ -40,7 +35,7 @@ namespace Z0.Asm
         /// </summary>
         /// <typeparam name="W">The data width</typeparam>
         /// <typeparam name="T">The data representation type type</typeparam>
-        public interface constant<W,T> : constant<T>
+        public interface constant<W,T> : constant<T>, IMeasured<W>
             where W : unmanaged, IDataWidth
             where T : unmanaged
         {        

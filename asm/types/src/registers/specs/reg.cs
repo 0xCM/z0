@@ -9,19 +9,12 @@ namespace Z0.Asm
         /// <summary>
         /// Characterizes a register
         /// </summary>
-        public interface reg : location, data
+        public interface reg : data
         {
             /// <summary>
             /// The register's kind classifier
             /// </summary>
             RegisterKind Kind {get;}
-
-            /// <summary>
-            /// The register's width
-            /// </summary>
-            new RegisterWidth Width {get;}
-
-            DataWidth data.Width => (DataWidth)Width;
         }
 
         /// <summary>
@@ -34,17 +27,7 @@ namespace Z0.Asm
             /// <summary>
             /// The register kind with blended width facet
             /// </summary>
-            RegisterKind reg.Kind => (RegisterKind)Widths.data<W>();    
-            
-            /// <summary>
-            /// The (sealed) data width, for it is known absolutely
-            /// </summary>
-            DataWidth data.Width => Widths.data<W>();
-
-            /// <summary>
-            /// The (sealed) register width, for it is known absolutely
-            /// </summary>
-            RegisterWidth reg.Width => (RegisterWidth)Widths.data<W>();                          
+            RegisterKind reg.Kind => (RegisterKind)Widths.data<W>();            
         }
 
         /// <summary>
@@ -52,9 +35,9 @@ namespace Z0.Asm
         /// </summary>
         /// <typeparam name="F">The reifying type</typeparam>
         /// <typeparam name="W">The register width</typeparam>
-        public interface reg<F,W> : reg<W>, location<F>
-            where F : struct, reg<F,W>
+        public interface reg<W,S> : reg<W>, data<W,S>
             where W : unmanaged, IDataWidth
+            where S : unmanaged
         {
 
         }
@@ -64,10 +47,10 @@ namespace Z0.Asm
         /// </summary>
         /// <typeparam name="F">The reifying type</typeparam>
         /// <typeparam name="W">The register width</typeparam>
-        public interface reg<F,W,S> : reg<F,W>, data<F,W,S>
+        public interface reg<F,W,S> : reg<W,S>
             where F : struct, reg<F,W,S>
             where W : unmanaged, IDataWidth
-            where S : unmanaged, IFixed
+            where S : unmanaged
         {
 
         }
@@ -77,15 +60,13 @@ namespace Z0.Asm
         /// </summary>
         /// <typeparam name="F">The reifying type</typeparam>
         /// <typeparam name="W">The register width</typeparam>
-        public interface reg<F,N,W,S> : reg<F,W,S>
+        public interface reg<F,N,W,S> : reg<F,W,S>, IIndexed<N>
             where F : struct, reg<F,N,W,S>
             where W : unmanaged, IDataWidth
-            where S : unmanaged, IFixed
+            where S : unmanaged
             where N : unmanaged, ITypeNat
         {
 
         }
-
     }
-
 }

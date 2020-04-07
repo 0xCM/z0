@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
 
-    public interface IBank<F,N,W>
+    public interface IBank<F,N,W> : IMeasured<W>
         where F : struct
         where N : unmanaged, ITypeNat
         where W : unmanaged, ITypeWidth

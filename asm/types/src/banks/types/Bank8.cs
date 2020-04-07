@@ -8,9 +8,6 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
     using System.Runtime.InteropServices;
 
-    using specs = AsmSpecs;
-    
-
     partial class Banks
     {
         public readonly struct Bank8x16 : IBank8<Bank8x16,N16>
