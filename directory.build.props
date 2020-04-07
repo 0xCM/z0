@@ -41,13 +41,15 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BitCore>$(TopDir)bits/core/z0.bits.core.csproj</BitCore>
-    <BitFields>$(TopDir)bits/fields/z0.bits.fields.csproj</BitFields>
-    <BitGrids>$(TopDir)/bits/grids/z0.bits.grids.csproj</BitGrids>
-    <BitPack>$(TopDir)bits/bitpack/z0.bits.bitpack.csproj</BitPack>
-    <BitSpans>$(TopDir)bits/spans/z0.bits.spans.csproj</BitSpans>
-    <BitStrings>$(TopDir)bits/strings/z0.bits.strings.csproj</BitStrings>
-    <BitVectors>$(TopDir)bits/vectors/z0.bits.vectors.csproj</BitVectors>
+    <BitCore>$(TopDir)bitcore/src/z0.bitcore.csproj</BitCore>
+    <BitStrings>$(TopDir)bitstrings/src/z0.bitstrings.csproj</BitStrings>
+    <BitPack>$(TopDir)bitpack/src/z0.bitpack.csproj</BitPack>
+    <BitFields>$(TopDir)bitfields/src/z0.bitfields.csproj</BitFields>
+    <BitVectors>$(TopDir)bitvectors/src/z0.bitvectors.csproj</BitVectors>
+
+    <VBits>$(TopDir)vbits/src/z0.vbits.csproj</VBits>
+    <BitGrids>$(TopDir)bitgrids/src/z0.bitgrids.csproj</BitGrids>
+    <BitSpans>$(TopDir)bitspans/src/z0.bitspans.csproj</BitSpans>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -84,9 +86,7 @@
     <Validity>$(TopDir)validity/src/z0.validity.src.csproj</Validity>
     <ValidityCore>$(TopDir)validity/core/z0.validity.core.csproj</ValidityCore>
     <ValidityVectors>$(TopDir)validity/vectors/z0.validity.vectors.csproj</ValidityVectors>
-    <VBits>$(TopDir)bits/vbits/z0.bits.vbits.csproj</VBits>
     <Feeders>$(TopDir)a/</Feeders>
-    <!-- <Z>$(TopDir)a/z/z0.z.csproj</Z> -->
   </PropertyGroup>
 
   <Import Project="$(Feeders)core.export.props"/>
