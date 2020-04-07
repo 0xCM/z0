@@ -11,16 +11,6 @@ namespace Z0
 
     partial class XTend
     {
-        [MethodImpl(Inline)]
-        public static string FormatNumeric<F>(this F src)
-            where F : unmanaged, INumericFormatProvider<F>
-                => src.Formatter.Format(src);
-
-        [MethodImpl(Inline)]
-        public static string FormatNumeric<F>(this F src, NumericBase @base)
-            where F : unmanaged, INumericFormatProvider<F>
-                => src.Formatter.Format(src, @base);
-
         public static string FormatNumeric<T>(this T src, NumericKind kind)
             where T : unmanaged, IFixed
         {

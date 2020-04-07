@@ -26,7 +26,7 @@ namespace Z0
         public void Write(IEnumerable<AppMsg> src)
         {
             using var writer = Path.Writer();
-            Control.iter(src.FormatLines(), line => writer.WriteLine(line));                
+            Control.iter(Formattable.items(src), item => writer.WriteLine(item));                
         }
 
         public void Write<R>(IReadOnlyList<R> records, char delimiter, bool header)

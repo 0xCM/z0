@@ -9,11 +9,8 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct MemoryRangeParser : IParser<MemoryRange>
+    readonly struct MemoryRangeParser : IParser<MemoryRange>
     {        
-        public static IParser<MemoryRange> Default        
-            => default(MemoryRangeParser);
-
         /// <summary>
         /// Attempts to parse an address segment in standard form, [start,end]
         /// </summary>
@@ -31,14 +28,8 @@ namespace Z0
                 let inner = src.Substring(i0 + 1, i1 - i0 - 1)
                 let parts = inner.Split(text.comma()).Trim()
                 where parts.Length == 2
-                from start in xParser.Parse(parts[0]).ToOption()
-                from end in xParser.Parse(parts[1]).ToOption()
+                from start in HexParsers.Numeric.Parse(parts[0]).ToOption()
+                from end in HexParsers.Numeric.Parse(parts[1]).ToOption()
                 select MemoryRange.Define(start, end);
-
-        static HexNumberParser xParser
-        {
-            [MethodImpl(Inline)]
-            get => HexParser.Default;
-        }
     }
 }

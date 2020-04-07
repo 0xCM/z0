@@ -17,7 +17,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static MemberExtract Define(ApiLocatedMember member, MemoryExtract encoded)
             => new MemberExtract(member.Id, member.Uri, member, encoded);
-
          
         [MethodImpl(Inline)]
         MemberExtract(OpIdentity id, OpUri uri, ApiLocatedMember member, MemoryExtract encoded)
@@ -37,18 +36,4 @@ namespace Z0.Asm
         public readonly MemoryExtract EncodedData;
     }
 
-    public readonly struct OpExtracts
-    {
-        [MethodImpl(Inline)]
-        public static implicit operator OpExtracts(MemberExtract[] src)
-            => new OpExtracts(src);
-        
-        [MethodImpl(Inline)]
-        public OpExtracts(MemberExtract[] content)
-        {
-            this.Content = content;
-        }
-        
-        public MemberExtract[] Content {get;}
-    }
 }

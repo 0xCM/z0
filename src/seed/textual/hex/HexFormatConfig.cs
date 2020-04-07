@@ -14,12 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct HexFormatConfig
     {   
-        public const string PreSpecString = "0x";             
-        
-        public const string PostSpecString = "h";
-
-        public string FormatString => $"{CaseFormatChar}";
-
         /// <summary>
         /// Indicates whether the numeric content should be left-padded with zeros
         /// </summary>
@@ -50,22 +44,32 @@ namespace Z0
         /// </summary>
         public readonly char Delimiter;
 
-        [MethodImpl(Inline)]
-        public static implicit operator HexSeqFormatConfig(in HexFormatConfig src)
-            => HexSeqFormatConfig.Define(src);
+        /// <summary>
+        /// The hex format string as determined by configuration
+        /// </summary>
+        public string FormatCode => $"{CaseFormatChar}";
 
+        /// <summary>
+        /// Specifies the default configuration for hex data emission
+        /// </summary>
+        public static HexFormatConfig HexData => Define(true, false, false, false, Chars.Space);
+        
         [MethodImpl(Inline)]
         public static HexFormatConfig Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
             => new HexFormatConfig(zpad,specifier,uppercase,prespec, delimiter ?? Chars.Comma);
+
+        [MethodImpl(Inline)]
+        public static implicit operator HexSeqFormatConfig(in HexFormatConfig src)
+            => HexSeqFormatConfig.Define(src);
         
         [MethodImpl(Inline)]
         HexFormatConfig(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)
-        {
+        {            
             this.ZPad = zpad;
             this.Specifier = specifier;
             this.Uppercase = uppercase;
             this.PreSpec = prespec;    
-            this.CaseFormatChar = uppercase ? 'X' : 'x';
+            this.CaseFormatChar = HexSpecs.CaseSpec(uppercase);
             this.Delimiter = delimiter;
         }
     }

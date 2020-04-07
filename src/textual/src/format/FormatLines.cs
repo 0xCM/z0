@@ -11,10 +11,6 @@ namespace Z0
 
     partial class XTend
     {
-        public static IEnumerable<string> FormatLines<F>(this IEnumerable<F> items)
-            where F : ICustomFormattable
-                => items.Select(m => m.Format());                
-
         /// <summary>
         /// Formats each source element on a new line
         /// </summary>

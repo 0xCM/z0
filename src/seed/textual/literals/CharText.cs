@@ -7,8 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Defines an arbitrary collection of text literals, including character 
-    /// literals represented as text
+    /// Defines an arbitrary collection of text literals
     /// </summary>
     public static class CharText
     {

@@ -29,15 +29,13 @@ namespace Z0
         /// Parses a row of identified hex text
         /// </summary>
         /// <param name="formatted">The formatted text</param>
-        /// <param name="idsep">A character that partitions the identifier and the code</param>
-        /// <param name="bytesep">A character that partitions the code bytes</param>
-        public static Option<AsmHexLine> Parse(string formatted, char idsep = AsmHexLine.DefaultIdSep, char bytesep = AsmHexLine.DefaultByteSep)
+        public static Option<AsmHexLine> Parse(string formatted)
         {
             try
             {
-                var parser = HexParser.ByteParser;
-                var id = Identify.Op(formatted.TakeBefore(idsep).Trim());
-                var bytes = formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(parser.ParseByte).ToArray();
+                var parser = HexParsers.Bytes;
+                var id = Identify.Op(formatted.TakeBefore(Chars.Space).Trim());
+                var bytes = formatted.TakeAfter(Chars.Space).Split(HexSpecs.DataDelimiter, StringSplitOptions.RemoveEmptyEntries).Select(parser.ParseByte).ToArray();
                 var encoded = MemoryExtract.Define(bytes);
                 return AsmHexLine.Define(id, encoded);                
             }
@@ -71,10 +69,10 @@ namespace Z0
         }
 
         public string Format()
-            => string.Concat(Id.Identifier.PadRight(0), CharText.Space, Encoded.Bytes.FormatHexBytes(Chars.Space,true));
+            => string.Concat(Id.Identifier.PadRight(0), CharText.Space,  HexFormat.data(Encoded.Bytes)); 
 
         public string Format(int idpad)
-            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Encoded.Bytes.FormatHexBytes(Chars.Space,true,true));
+            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, HexFormat.data(Encoded.Bytes));
 
         public override string ToString()
             => Format();

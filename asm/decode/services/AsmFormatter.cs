@@ -18,19 +18,17 @@ namespace Z0.Asm
     {        
         public AsmFormatConfig Config {get;}
 
-        public IAsmContext Context {get;}
         
         [MethodImpl(Inline)]
         public static AsmFormatter Internal(IAsmContext context)
-            => new AsmFormatter(context, context.AsmFormat);
+            => new AsmFormatter(context.AsmFormat);
 
         [MethodImpl(Inline)]
-        public static IAsmFormatter Create(IAsmContext context, AsmFormatConfig config)
-            => new AsmFormatter(context, config);
+        public static IAsmFormatter Create(IContext context, AsmFormatConfig config)
+            => new AsmFormatter(config);
 
-        AsmFormatter(IAsmContext context, AsmFormatConfig config)
+        AsmFormatter(AsmFormatConfig config)
         {
-            this.Context = context;
             this.Config = config;
         }
 
@@ -57,7 +55,7 @@ namespace Z0.Asm
 
         public string FormatInstruction(in MemoryAddress @base, in AsmInstructionInfo src)
         {
-            var description = text.factory.Builder();
+            var description = text.build();
             var absolute = @base + (MemoryAddress)src.Offset;  
             description.Append(text.concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(Config.InstructionPad, text.space())));
             description.Append(Comment(Format(src.Spec, Config)));
@@ -146,7 +144,7 @@ namespace Z0.Asm
 
             if(Config.EmitFunctionHeaderEncoding)
             {
-                var formatter = Hex.formatter<byte>();
+                var formatter = HexFormat.formatter<byte>();
                 var formatted = formatter.Format(code.Data, Config.FunctionHeaderEncodingFormat);                
                 dataline += text.concat(text.spaced(Chars.Eq), text.embrace(formatted));
             }
@@ -160,7 +158,7 @@ namespace Z0.Asm
         ReadOnlySpan<string> FormatHeader(AsmFunction src)
         {            
             var lines = new List<string>();
-            var label = Comment($"{src.Operation.Signature}, {src.Uri}");
+            var label = Comment($"{src.OpSig}, {src.Uri}");
             lines.Add(label); 
             
             if(Config.EmitEncodingProp)           
@@ -194,7 +192,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static string FormatLabelAddress(string text, ulong baseaddress)
-            => HexParser.Default.Parse(text).ToOption().Map(address => (address - baseaddress).FormatSmallHex(true),  
+            => HexParsers.Numeric.Parse(text).ToOption().Map(address => (address - baseaddress).FormatSmallHex(true),  
                     () => $"{text}?");
 
         class AsmOutput : Iced.FormatterOutput

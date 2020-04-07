@@ -140,7 +140,7 @@ namespace Z0
             
             id += name(src);
             id += IDI.PartSep;
-            id += formatargs(IDI.ValueArgsOpen, IDI.ValueArgsClose, IDI.ArgSep, src.ParameterIdentities());
+            id += FormatArgs(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, src.ParameterIdentities());
 
             return Identify.Op(id);
         }        
@@ -148,13 +148,13 @@ namespace Z0
         static IEnumerable<string> TypeArgIdentities(this MethodInfo src)
             => src.GenericArguments().Select(targ => identify(targ).Identifier);
 
-        static string formatargs(char open, char close, char sep, IEnumerable<string> args)
+        static string FormatArgs(object open, object close, char sep, IEnumerable<string> args)
             => text.concat(open, string.Join(sep,args), close);
 
         static string FormatParameterIdentity(this MethodInfo src)
-            => formatargs(IDI.ValueArgsOpen, IDI.ValueArgsClose, IDI.ArgSep, ParameterIdentities(src));
+            => FormatArgs(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ParameterIdentities(src));
 
         static string FormatTypeArgIdentity(this MethodInfo src)
-            => formatargs(IDI.TypeArgsOpen, IDI.TypeArgsClose, IDI.ArgSep, TypeArgIdentities(src));                
+            => FormatArgs(IDI.TypeArgsOpen, IDI.TypeArgsClose, IDI.ArgSep, TypeArgIdentities(src));                
     }
 }

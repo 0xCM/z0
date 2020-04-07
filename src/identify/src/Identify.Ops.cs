@@ -26,10 +26,10 @@ namespace Z0
         /// </summary>
         public static OpIdentity WithAsm(this OpIdentity src)
         {
-            if(src.Identifier.Contains(OpIdentity.AsmLocator))
+            if(src.Identifier.Contains(IDI.AsmLocator))
                 return src;
             else
-                return Identify.Op(src.Identifier + OpIdentity.AsmLocator);
+                return Identify.Op(src.Identifier + IDI.AsmLocator);
         }            
 
         static IEnumerable<string> SuffixText(OpIdentity src)

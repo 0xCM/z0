@@ -26,7 +26,7 @@ namespace Z0.Logix
 
         public string Format(bool bracket = false, char sep = Chars.Comma)
         {
-            var sb = text.factory.Builder();
+            var sb = text.build();
             if(bracket)
                 sb.Append(Chars.LBracket);
 

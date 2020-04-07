@@ -14,68 +14,103 @@ namespace Z0
         /// <summary>
         /// An identity part delimiter
         /// </summary>
-        public const char PartSep = '_';
+        public const char PartSep = Chars.Underscore;
 
         /// <summary>
         /// A suffix part delimiter
         /// </summary>
-        public const char SuffixSep = '-';
+        public const char SuffixSep = Chars.Dash;
 
         /// <summary>
         /// A separator between the bit width of a segmented type and the width of each segment
         /// </summary>
-        public const char SegSep = 'x';        
+        public const char SegSep = Letters.x;        
 
         /// <summary>
         /// A separator between an identifier body and an applied modifier
         /// </summary>
-        public const char ModSep = '~';
+        public const char ModSep = Chars.Tilde;
 
         /// <summary>
         /// A type or value argument delimiter
         /// </summary>
-        public const char ArgSep = ',';
+        public const char ArgSep = SymNot.Dot;
 
         /// <summary>
         /// Indicates a signed integral type
         /// </summary>
-        public const char Signed = 'i';
+        public const char Signed = Letters.i;
 
         /// <summary>
         /// Indicates an unsigned integral type
         /// </summary>
-        public const char Unsigned = 'u';
+        public const char Unsigned = Letters.u;
 
         /// <summary>
         /// Indicates a floating-point type
         /// </summary>
-        public const char Float = 'f';
+        public const char Float = Letters.f;
 
         /// <summary>
         /// Indicates an intrinsic vector
         /// </summary>        
-        public const char Vector = 'v';
+        public const char Vector = Letters.v;
 
         /// <summary>
         /// Indicates a blocked type
         /// </summary>        
-        public const char Block = 'b';
+        public const char Block = Letters.b;
 
         /// <summary>
         /// Indicates a natural number type
         /// </summary>        
-        public const char Nat = 'n';
+        public const char Nat = Letters.n;
 
         /// <summary>
         /// Indicates a generic type or method
         /// </summary>
-        public const char Generic = 'g';
+        public const char Generic = Letters.g;
  
         /// <summary>
-        /// Indicates a nongeneric type or method
+        /// Opens a value parameter list
         /// </summary>
-        public const char NonGeneric = 'd';
- 
+        public const char ArgsOpen = SymNot.Up;
+
+        /// <summary>
+        /// Closes a value parameter list
+        /// </summary>
+        public const char ArgsClose = SymNot.Down;
+        
+        /// <summary>
+        /// Opens a type argument list
+        /// </summary>
+        public const char TypeArgsOpen = SymNot.Lt;
+
+        /// <summary>
+        /// Closes a type argument list
+        /// </summary>
+        public const char TypeArgsClose = SymNot.Gt;
+
+        /// <summary>
+        /// The text used to terminate a uri scheme and trailing '//'
+        /// </summary>
+        public const string EndOfScheme = "://";
+
+        /// <summary>
+        /// The symbol used to separate uri path components
+        /// </summary>
+        public const char UriPathSep = Chars.FSlash;        
+
+        /// <summary>
+        /// The symbol used to delimit a uri query segment from the path
+        /// </summary>
+        public const char UriQueryMarker = Chars.Question;
+
+        /// <summary>
+        /// The symbol used to announce a fragment
+        /// </summary>
+        public const char UriFragment = Chars.Hash;
+
         /// <summary>
         /// Indicates a pointer
         /// </summary>
@@ -101,16 +136,9 @@ namespace Z0
         /// </summary>
         public const string Imm = "imm";        
 
-        public const char ValueArgsOpen = '(';
+        public const string GenericLocator = "_g";
 
-        public const char ValueArgsClose = ')';
-
-        public const char TypeArgsOpen = '[';
-
-        public const char TypeArgsClose = ']';
-
-        public const char SizeArgOpen = '{';
-
-        public const char SizeArgClose = '}';
+        public const string AsmLocator = "-asm";
+    
     }
 }

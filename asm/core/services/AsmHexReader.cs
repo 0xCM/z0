@@ -13,27 +13,9 @@ namespace Z0.Asm
 
     readonly struct AsmHexReader : IAsmHexReader
     {
-        const char DefaultIdSep = Chars.Space;
-
-        const char DefaultByteSep = Chars.Space;
-
-        public IAsmContext Context {get;}
-
-        readonly char IdSep;
-        
-        readonly char ByteSep;
-
         [MethodImpl(Inline)]
-        public static IAsmHexReader New(IAsmContext context, char? idsep = null, char? bytesep = null)
-            => new AsmHexReader(context, idsep, bytesep);
-
-        [MethodImpl(Inline)]
-        AsmHexReader(IAsmContext context, char? idsep = null, char? bytesep = null)
-        {
-            this.Context = context;
-            this.IdSep = idsep ?? DefaultIdSep;
-            this.ByteSep = bytesep ?? DefaultByteSep;
-        }
+        public static IAsmHexReader New(IContext context)
+            => default(AsmHexReader);
 
         /// <summary>
         /// Parses a row of identified hex text
@@ -45,10 +27,10 @@ namespace Z0.Asm
         {
             try
             {
-                var parser = HexParser.ByteParser;
-                var uritext = formatted.TakeBefore(IdSep).Trim();
+                var parser = HexParsers.Bytes;
+                var uritext = formatted.TakeBefore(Chars.Space).Trim();
                 var uri = OpUri.Parse(uritext);
-                var bytes = formatted.TakeAfter(IdSep).SplitClean(ByteSep).Select(parser.ParseByte).ToArray();
+                var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexSpecs.DataDelimiter).Select(parser.ParseByte).ToArray();
                 return AsmOpBits.Define(uri, bytes);                
             }
             catch(Exception e)

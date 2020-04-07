@@ -17,16 +17,13 @@ namespace Z0.Asm
 
         public FilePath TargetPath {get;}
 
-        public IAsmContext Context {get;}
+        [MethodImpl(Inline)]
+        public static IAsmHexWriter New(IContext context, FilePath dst)
+            => new AsmHexWriter(dst);
 
         [MethodImpl(Inline)]
-        public static IAsmHexWriter New(IAsmContext context, FilePath dst)
-            => new AsmHexWriter(context, dst);
-
-        [MethodImpl(Inline)]
-        AsmHexWriter(IAsmContext context, FilePath path)
+        AsmHexWriter(FilePath path)
         {
-            this.Context = context;
             this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }

@@ -13,16 +13,16 @@ namespace Z0.Asm
     {        
         public readonly OpIdentity Id;
 
-        public readonly ExtractionOutcome Outcome;
+        public readonly ExtractResult Outcome;
 
         public readonly byte[] Content;
 
         [MethodImpl(Inline)]
-        public static ParsedBuffer Define(OpIdentity id, ExtractionOutcome outcome, byte[] content)
+        public static ParsedBuffer Define(OpIdentity id, ExtractResult outcome, byte[] content)
             => new ParsedBuffer(id,outcome,content);
 
         [MethodImpl(Inline)]
-        ParsedBuffer(OpIdentity id, ExtractionOutcome info, byte[] content)
+        ParsedBuffer(OpIdentity id, ExtractResult info, byte[] content)
         {
             this.Id = id;
             this.Outcome = info;

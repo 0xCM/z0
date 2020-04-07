@@ -15,12 +15,6 @@ namespace Z0
 
     public readonly struct HexByteParser : IParser<byte>
     {    
-        public static HexByteParser Default
-        {
-            [MethodImpl(Inline)]
-            get => default(HexByteParser);
-        }
-
         public ParseResult<byte> Parse(string src) 
         {
             try
@@ -59,10 +53,9 @@ namespace Z0
             if(IsScalar(c))
                 return ParseResult.Success(c, (byte)((byte)u - MinScalarCode));
             else if(IsUpperChar(c))
-                return ParseResult.Success(c,  (byte)((byte)u - MinCharCodeU + 0xA));
+                return ParseResult.Success(c, (byte)((byte)u - MinCharCodeU + 0xA));
             else
                 return ParseResult.Fail<byte>(c);
         }
-
     }
 }    

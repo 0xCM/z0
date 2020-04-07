@@ -105,11 +105,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        static ExtractionOutcome Complete(in ExtractionState state, ExtractTermCode tc, long start, long end, int delta)
-            => ExtractionOutcome.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
+        static ExtractResult Complete(in ExtractState state, ExtractTermCode tc, long start, long end, int delta)
+            => ExtractResult.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
-        static ParsedMemory SummarizeParse(in OpExtractExchange exchange, in ExtractionState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        static ParsedMemory SummarizeParse(in OpExtractExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
         {
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
@@ -134,14 +134,14 @@ namespace Z0.Asm
             var offset = 0;            
             int? ret_offset = null;
             var end = (long)pSrc;
-            var state = default(ExtractionState);
+            var state = default(ExtractState);
 
             while(offset < limit)
             {
                 state = Step(exchange, id, ref offset, ref end, ref pSrc);                                
                 exchange.CaptureStep(state);                
 
-                if(ret_offset == null && state.Payload == RET)
+                if(ret_offset == null && state.Extracted == RET)
                     ret_offset = offset;                 
 
                 var tc = CalcTerm(exchange, offset, ret_offset, out var delta);
@@ -152,12 +152,12 @@ namespace Z0.Asm
         }                    
 
         [MethodImpl(Inline)]
-        static ExtractionState Step(in OpExtractExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
+        static ExtractState Step(in OpExtractExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
         {
             var code = Unsafe.Read<byte>(pSrc++);
             exchange.Target(offset++) = code;
             location = (long)pSrc;
-            return ExtractionState.Define(id, offset, location, code);
+            return ExtractState.Define(id, offset, location, code);
         }
 
         static ExtractTermCode? CalcTerm(in OpExtractExchange exchange, int offset, int? ret_offset, out int delta)

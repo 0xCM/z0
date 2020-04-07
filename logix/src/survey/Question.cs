@@ -55,7 +55,7 @@ namespace Z0.Logix
 
         public string Format()
         {
-            var format = text.factory.Builder();
+            var format = text.build();
             format.Append(Label.PadRight(12));
             format.Append(Chars.Colon);
             format.Append(Chars.Space);

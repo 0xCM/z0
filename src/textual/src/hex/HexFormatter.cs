@@ -32,9 +32,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public string FormatItem(T src, in HexFormatConfig hex)
             => string.Concat(
-                hex.Specifier && hex.Specifier ? HexFormatConfig.PreSpecString : string.Empty, 
-                hex.ZPad ? BaseFormatter.Format(src, hex.FormatString).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatString),
-                hex.Specifier && !hex.PreSpec ? HexFormatConfig.PostSpecString : string.Empty
+                hex.Specifier && hex.Specifier ? HexSpecs.PreSpec : string.Empty, 
+                hex.ZPad ? BaseFormatter.Format(src, hex.FormatCode).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatCode),
+                hex.Specifier && !hex.PreSpec ? HexSpecs.PostSpec : string.Empty
                 );
 
         public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in HexSeqFormatConfig config)
@@ -51,7 +51,7 @@ namespace Z0
 
             for(var i = 0; i<src.Length; i++)
             {
-                var formatted = Hex.format(src[i], hex.ZPad, hex.Specifier, hex.Uppercase, hex.PreSpec);
+                var formatted = HexFormat.scalar(src[i], hex.ZPad, hex.Specifier, hex.Uppercase, hex.PreSpec);
                 result.Append(formatted);
                 if(i != src.Length - 1)
                     result.Append(seq.Delimiter);
@@ -67,7 +67,7 @@ namespace Z0
 
             for(var i = 0; i<src.Length; i++)
             {
-                var formatted = Hex.format(src[i], config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+                var formatted = HexFormat.scalar(src[i], config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
                 result.Append(formatted);
                 if(i != src.Length - 1)
                     result.Append(seq.Delimiter);

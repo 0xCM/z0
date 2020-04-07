@@ -21,7 +21,7 @@ namespace Z0
             var builder = string.Empty.Build();
             var pre = (specifier && prespec) ? "0x" : string.Empty;
             var post = (specifier && !prespec) ? "h" : string.Empty;
-            var spec = HexFmtSpec(uppercase);
+            var spec = CaseSpec(uppercase).ToString();
             var width = segwidth ?? int.MaxValue;
             var counter = 0;
             if(segwidth != null)

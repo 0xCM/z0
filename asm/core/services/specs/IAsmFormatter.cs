@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines service contract for asm text formatting support
     /// </summary>
-    public interface IAsmFormatter : IAsmService
+    public interface IAsmFormatter : IService
     {
         /// <summary>
         /// The configuration used when rendering the formatted text

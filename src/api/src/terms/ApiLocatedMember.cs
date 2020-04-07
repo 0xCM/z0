@@ -27,6 +27,8 @@ namespace Z0
 
         public MemoryAddress Address {get;}
 
+        public MethodSig MethodSig => Method.Signature();
+
         public OpUri Uri => Api.MemberUri(this);
 
         public bool IsEmpty

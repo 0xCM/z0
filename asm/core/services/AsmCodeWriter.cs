@@ -36,8 +36,20 @@ namespace Z0.Asm
             StreamOut.WriteLine(src.Format(idpad ?? 0));
         }
         
+        public void WriteDiagnostic(in CapturedOp src)
+        {
+            var data = src.Code;
+            var dst = text.build();
+			dst.AppendLine($"; label   : {src.OpSig}");
+			dst.AppendLine($"; location: {src.AddressRange.Format()}, length: {src.AddressRange.Length} bytes");
+            var lines = data.Bytes.FormatHexLines(null);
+            dst.Append(lines.Concat(Chars.Eol));
+            dst.AppendLine(new string('_',80));
+            StreamOut.Write(dst.ToString());
+        }
+
         public void WriteHexLine(in CapturedOp src, int? idpad = null)
-            => StreamOut.WriteLine(AsmHexLine.Define(src.Id, src.RawBits.Bytes).Format(idpad ?? 0));  //StreamOut.WriteHexLine(src.Id, src.RawBits.Bytes, idpad);
+            => StreamOut.WriteLine(AsmHexLine.Define(src.OpId, src.RawBits.Bytes).Format(idpad ?? 0)); 
 
         public void Write(AsmCode[] src)
         {

@@ -13,14 +13,8 @@ namespace Z0
     using static Seed;
     using static HexSpecs;
 
-    public readonly struct HexNumberParser : IParser<ulong>
+    public readonly struct HexNumericParser : IParser<ulong>
     {        
-        public static HexNumberParser Default
-        {
-            [MethodImpl(Inline)]
-            get => default(HexNumberParser);
-        }
-
         public ParseResult<ulong> Parse(string src)  
             => SystemParse(src)
                 .MapValueOrElse(
@@ -31,7 +25,7 @@ namespace Z0
         /// Attempts to parse a hex string as an unsigned long
         /// </summary>
         /// <param name="src">The source text</param>
-        static Option<ulong> SystemParse(string src)
+        Option<ulong> SystemParse(string src)
         {            
             if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
                 return value;

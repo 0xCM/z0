@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static string normalize(string src)        
-            => src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, Chars.b);
+            => src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, Letters.b);
 
         /// <summary>
         /// Assembles a bistring given parts ordered from lo to hi

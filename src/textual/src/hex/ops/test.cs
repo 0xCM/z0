@@ -9,18 +9,10 @@ namespace Z0
 
     using static Seed;
 
-    public static class HexParser
+    partial class Hex
     {
-        public static HexNumberParser Default
-        {
-            [MethodImpl(Inline)]
-            get => HexNumberParser.Default;
-        }
-
-        public static HexByteParser ByteParser
-        {
-            [MethodImpl(Inline)]
-            get => HexByteParser.Default;
-        }
+        [MethodImpl(Inline), Op]
+        public static bool test(char c)
+            => HexSpecs.IsHex(c);
     }
 }

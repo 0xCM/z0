@@ -97,7 +97,7 @@ namespace Z0.Asm
         {
             try
             {
-                var idpad = src.Members.Select(f => f.Id.Identifier.Length).Max() + 1;
+                var idpad = src.Members.Select(f => f.OpId.Identifier.Length).Max() + 1;
                 using var writer = new StreamWriter(HexPath(src.Id).FullPath, append);
                 foreach(var f in src.Members)
                     writer.WriteLine(f.Code.Format(idpad));
@@ -141,7 +141,7 @@ namespace Z0.Asm
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
-                    var uri = OpUri.asm(HostPath, src.Id, f.Id);
+                    var uri = OpUri.asm(HostPath, src.Id, f.OpId);
                     writer.Write(GroupFormatter.FormatFunction(f));
                     tokens[i] = AsmEmissionToken.Define(uri, f.AddressRange, f.TermCode);
                 }

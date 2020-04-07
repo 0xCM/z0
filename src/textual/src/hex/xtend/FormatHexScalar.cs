@@ -23,15 +23,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this sbyte src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
-            + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad8, '0') 
-            : src.ToString(HexFmtSpec(uppercase)))
+            + (zpad ? src.ToString(CaseSpec(uppercase).ToString()).PadLeft(HexPad8, '0') 
+            : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec ? "h" : string.Empty);
+
 
         [MethodImpl(Inline)]
         public static string FormatHex(this byte src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
-             + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad8, '0') 
-                     : src.ToString(HexFmtSpec(uppercase)))
+             + (zpad ? src.ToString(CaseSpec(uppercase).ToString()).PadLeft(HexPad8, '0') 
+                     : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec ? "h" : string.Empty);
 
         /// <summary>
@@ -45,8 +46,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this short src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
-             + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad16, '0') 
-                     : src.ToString(HexFmtSpec(uppercase)))
+             + (zpad ? src.ToString(CaseSpec(uppercase).ToString()).PadLeft(HexPad16, '0') 
+                     : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec ? "h" : string.Empty);
 
         /// <summary>
@@ -60,8 +61,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this ushort src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
-             + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad16, '0') 
-                     : src.ToString(HexFmtSpec(uppercase)))
+             + (zpad ? src.ToString(CaseSpec(uppercase).ToString()).PadLeft(HexPad16, '0') 
+                     : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec ? "h" : string.Empty);
 
         /// <summary>
@@ -75,8 +76,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this int src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
-             + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad32, '0') 
-                     : src.ToString(HexFmtSpec(uppercase)))
+             + (zpad ? src.ToString(CaseSpec(uppercase).ToString()).PadLeft(HexPad32, '0') 
+                     : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec ? "h" : string.Empty);
 
         /// <summary>
@@ -90,8 +91,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this uint src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
-             + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad32, '0') 
-                     : src.ToString(HexFmtSpec(uppercase)))
+             + (zpad ? src.ToString(CaseSpec(uppercase).ToString()).PadLeft(HexPad32, '0') 
+                     : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec ? "h" : string.Empty);
 
         /// <summary>
@@ -105,8 +106,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this long src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
-             + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad64, '0') 
-                     : src.ToString(HexFmtSpec(uppercase)))
+             + (zpad ? src.ToString(CaseSpec(uppercase).ToString()).PadLeft(HexPad64, '0') 
+                     : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec  ? "h" : string.Empty);
 
         /// <summary>
@@ -120,8 +121,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this ulong src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
-             + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad64, '0') 
-                     : src.ToString(HexFmtSpec(uppercase)))
+             + (zpad ? src.ToString(CaseSpec(uppercase).ToString()).PadLeft(HexPad64, '0') 
+                     : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec  ? "h" : string.Empty);    
 
         /// <summary>

@@ -14,6 +14,14 @@ namespace Z0
 
     partial class Hex
     {
+        [MethodImpl(Inline), Op]
+        public static void digits(byte value, out char d0, out char d1)
+        {
+            ref readonly var codes = ref head(Uppercase);
+            d0 = (char)skip(in codes, 0xF & value);
+            d1 = (char)skip(in codes, (value >> 4) & 0xF);
+        }
+
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ReadOnlySpan<char> digits<T>(T value)
             where T : unmanaged

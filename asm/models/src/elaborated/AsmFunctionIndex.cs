@@ -23,8 +23,8 @@ namespace Z0.Asm
             index = new Dictionary<OpIdentity, AsmFunction>();
             foreach(var item in src.Members)            
             {
-                if(!index.TryAdd(item.Id, item))
-                    AppErrors.Throw($"Duplicate identifier found: Id = {item.Id}");
+                if(!index.TryAdd(item.OpId, item))
+                    AppErrors.Throw($"Duplicate identifier found: Id = {item.OpId}");
             }
         }
         

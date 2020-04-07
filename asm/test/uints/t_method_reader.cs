@@ -23,9 +23,16 @@ namespace Z0.Asm
             return dstPath.Writer();
         }
 
+        IAsmCodeWriter AsmCodeWriter([Caller] string test = null)
+        {
+            var dstDir = Context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_native_reader).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
+            return Context.CodeWriter(dstPath);
+        }
+
         public void parse_address_segment()
         {
-            var parser = MemoryRangeParser.Default;
+            var parser = HexParsers.MemoryRange;
             for(var i=0; i<RepCount; i++)
             {
                 var start = Random.Next(0ul, uint.MaxValue);
@@ -75,9 +82,13 @@ namespace Z0.Asm
 
 
 
-            using var target = NativeTestWriter();
+            using var target = AsmCodeWriter();
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
-                target.WriteMember(ops.Capture(in exchange, m.Identify(), m));
+            {
+                var captured = ops.Capture(in exchange, m.Identify(), m);
+                target.WriteDiagnostic(captured);
+                //target.WriteMember(ops.Capture(in exchange, m.Identify(), m));
+            }
         }
 
         static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
@@ -96,19 +107,19 @@ namespace Z0.Asm
             var exchange = Context.ExtractExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
-            using var target = NativeTestWriter();
+            using var target = AsmCodeWriter();
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            target.WriteMember(ops.Capture(in exchange, dAnd.Identify(), dAnd));
+            target.WriteDiagnostic(ops.Capture(in exchange, dAnd.Identify(), dAnd));
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            target.WriteMember(ops.Capture(in exchange, mAnd.Identify(), mAnd));
+            target.WriteDiagnostic(ops.Capture(in exchange, mAnd.Identify(), mAnd));
 
             var dShuffle = shuffler(4);
-            target.WriteMember(ops.Capture(in exchange, dShuffle.Identify(), dShuffle));
+            target.WriteDiagnostic(ops.Capture(in exchange, dShuffle.Identify(), dShuffle));
 
             var dShift = shifter(4);
-            target.WriteMember(ops.Capture(in exchange, dShift.Identify(), dShift));
+            target.WriteDiagnostic(ops.Capture(in exchange, dShift.Identify(), dShift));
 
             #if Dependencies
             var methods = typeof(gvec).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();            

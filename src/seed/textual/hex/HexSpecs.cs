@@ -14,12 +14,17 @@ namespace Z0
         /// <summary>
         /// The uppercase hex format code
         /// </summary>
-        public const string UC = "X";
+        public const string UC = LetterText.X;
 
         /// <summary>
         /// The lowercase hex format code
         /// </summary>
-        public const string LC = "x";
+        public const string LC = LetterText.x;
+
+        /// <summary>
+        /// The delimiter used to separate hex numbers when rendering a hex data sequence
+        /// </summary>
+        public const char DataDelimiter = Chars.Space;
 
         /// <summary>
         /// The maximum number of hex characters required to represent an 8-bit number
@@ -49,7 +54,7 @@ namespace Z0
         /// <summary>
         /// Standard hex specifier that trails the numeric content
         /// </summary>
-        public const char PostSpec = 'h';
+        public const string PostSpec = "h";
 
         /// <summary>
         /// The asci code of the '0' digit
@@ -126,12 +131,12 @@ namespace Z0
             => IsScalar(c) || IsUpperChar(c) || IsLowerChar(c);
 
         /// <summary>
-        /// Selects the uppercase or lowercase hex format code
+        /// Selects either the uppercase format code 'X' or lowercase format code 'x'
         /// </summary>
         /// <param name="upper">True for uppercase, false for lowercase</param>
         [MethodImpl(Inline)]
-        public static string HexFmtSpec(bool upper)
-            => upper ? "X" : "x";
+        public static char CaseSpec(bool upper)
+            => upper ? 'X' : 'x';
 
         /// <summary>
         /// Removes leading or trailing hex specifiers

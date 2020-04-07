@@ -9,9 +9,9 @@ namespace Z0
 
     using static Seed;
 
+    
     public static class EnumFormatter
     {
-
         /// <summary>
         /// Reads a generic numeric value from a generic enum. 
         /// </summary>

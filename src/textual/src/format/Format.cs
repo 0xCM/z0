@@ -12,16 +12,6 @@ namespace Z0
 
     partial class XTend
     {
-        /// <summary>
-        /// Formats a type that provides intrinsic format capability
-        /// </summary>
-        /// <param name="src">The value to format</param>
-        /// <typeparam name="T">The formattable value type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Format<T>(this T src)
-            where T : ICustomFormattable
-                => src.Format();
-
         public static string Format<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma, int offset = 0, int pad = 0, bool bracketed = true)
         {
             if(src.Length == 0)

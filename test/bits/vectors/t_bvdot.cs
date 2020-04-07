@@ -306,7 +306,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, Identify.testcase(GetType(),opname));
+            CheckAction(check, OpUriBuilder.TestCase(GetType(),opname));
         }
     }
 }

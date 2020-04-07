@@ -46,10 +46,5 @@ namespace Z0.Asm
         /// <param name="src">The source path</param>
         IEnumerable<AsmCode> Read(string name); 
 
-        /// <summary>
-        /// Reads the content of a hexline-formatted file with specified identity and byte separators
-        /// </summary>
-        /// <param name="src">The source path</param>
-        IEnumerable<AsmCode> Read(FilePath src, char idsep, char bytesep);
     }    
 }

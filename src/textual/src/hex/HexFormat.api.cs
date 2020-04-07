@@ -10,10 +10,25 @@ namespace Z0
     using static Seed;
     using static As;
 
-    partial class Hex
+    [ApiHost("hex.format")]
+    public static class HexFormat
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Unsigned)]
-        public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+        [MethodImpl(Inline)]
+        public static HexFormatter<T> formatter<T>()
+            where T : unmanaged
+                => new HexFormatter<T>(SystemHexFormatters.Create<T>());                   
+
+        /// <summary>
+        /// Formats a numeric array as hex data
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        public static string data<T>(T[] src)
+            where T : unmanaged
+                => HexFormat.formatter<T>().Format(src, HexFormatConfig.HexData);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static string scalar<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
                 => format_u(src,zpad, specifier,uppercase,prespec);
 
@@ -22,11 +37,11 @@ namespace Z0
         /// type over which the operation is closed
         /// </summary>
         /// <typeparam name="T">The type the source text presumes to render</typeparam>
-        public static string format<T>(string digits, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+        public static string digits<T>(string src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
         {
             var spec = specifier ? HexSpecs.PreSpec : string.Empty;
-            return zpad ?  (spec + digits.PadLeft(Unsafe.SizeOf<T>() * 2, '0')) : (spec + digits);
+            return zpad ?  (spec + src.PadLeft(Unsafe.SizeOf<T>() * 2, '0')) : (spec + src);
         }
 
         [MethodImpl(Inline)]

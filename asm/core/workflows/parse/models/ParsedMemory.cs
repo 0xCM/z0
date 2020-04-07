@@ -11,16 +11,16 @@ namespace Z0.Asm
 
     public readonly struct ParsedMemory
     {        
-        public readonly ExtractionOutcome Outcome;
+        public readonly ExtractResult Outcome;
 
         public readonly ParsedMemoryExtract Bits;
 
         [MethodImpl(Inline)]
-        public static ParsedMemory Define(ExtractionOutcome outcome, ParsedMemoryExtract bits)
+        public static ParsedMemory Define(ExtractResult outcome, ParsedMemoryExtract bits)
             => new ParsedMemory(outcome, bits);
 
         [MethodImpl(Inline)]
-        ParsedMemory(ExtractionOutcome outcome, ParsedMemoryExtract bits)
+        ParsedMemory(ExtractResult outcome, ParsedMemoryExtract bits)
         {            
             this.Outcome = outcome;
             this.Bits = bits;

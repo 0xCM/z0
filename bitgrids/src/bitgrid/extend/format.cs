@@ -19,7 +19,7 @@ namespace Z0
         internal static string FormatMatrixBits(this Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false) 
         {
             var dst = BitString.bitchars(src);
-            var sb = text.factory.Builder();
+            var sb = text.build();
             var limit = maxbits ?? dst.Length;
 
             for(int i=0, rowidx=0; i<limit; i+= rowlen, rowidx++)

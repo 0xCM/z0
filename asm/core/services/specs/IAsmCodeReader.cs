@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines service contract to support reading text-formatted encoded x86 asm data
     /// </summary>
-    public interface IAsmCodeReader : IAsmService
+    public interface IAsmCodeReader : IService
     {
         /// <summary>
         /// Reads the content of a source file

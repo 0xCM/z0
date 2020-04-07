@@ -75,7 +75,7 @@ namespace Z0
         
         string IRecord.DelimitedText(char delimiter)
             => text.concat(
-                $"{OpId.Format().PadRight(OpNamePad)}{delimiter}{Chars.Space}",  
+                $"{Formattable.format(OpId).PadRight(OpNamePad)}{delimiter}{Chars.Space}",  
                  OpCount.ToString("#,#").PadRight(OpCountPad),  $"{delimiter}{Chars.Space}",
                 $"{Timing.Ms}");
 

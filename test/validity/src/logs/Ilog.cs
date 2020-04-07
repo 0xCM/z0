@@ -73,7 +73,7 @@ namespace Z0
             public void Write(IEnumerable<AppMsg> src)
             {
                 lock(locker)
-                    LogPath.Append(src.FormatLines());
+                    LogPath.Append(Formattable.items(src));
             }
 
             void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)

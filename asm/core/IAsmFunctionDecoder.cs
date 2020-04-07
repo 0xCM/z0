@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// Decodes a function from the parsed encoding package
         /// </summary>
         /// <param name="parsed">The parsed data</param>
-        AsmFunction DecodeFunction(ParsedOpExtract parsed);
+        AsmFunction DecodeFunction(ParsedMemberCode parsed);
 
         AsmFunction[] Decode(params ParsedExtract[] src);     
     }

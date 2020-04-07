@@ -58,6 +58,6 @@ namespace Z0
                 => default;
 
         public override string ToString()
-            => this.Format();
+            => Formattable.format(this);
    }
 }

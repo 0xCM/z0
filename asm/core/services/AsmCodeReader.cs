@@ -13,29 +13,15 @@ namespace Z0.Asm
 
     readonly struct AsmCodeReader : IAsmCodeReader
     {
-        public IAsmContext Context {get;}
-
-        readonly char IdSep;
-        
-        readonly char ByteSep;
-
         [MethodImpl(Inline)]
-        public static IAsmCodeReader New(IAsmContext context, char? idsep = null, char? bytesep = null)
-            => new AsmCodeReader(context, idsep, bytesep);
-
-        [MethodImpl(Inline)]
-        AsmCodeReader(IAsmContext context, char? idsep = null, char? bytesep = null)
-        {
-            this.Context = context;
-            this.IdSep = idsep ?? AsmHexLine.DefaultIdSep;
-            this.ByteSep = bytesep ?? AsmHexLine.DefaultByteSep;
-        }
+        public static IAsmCodeReader New(IContext context)
+            => default(AsmCodeReader);
 
         public IEnumerable<AsmCode> Read(FilePath src)
         {
             foreach(var line in src.ReadLines())
             {
-                var hex = AsmHexLine.Parse(line,IdSep,ByteSep);
+                var hex = AsmHexLine.Parse(line);
                 if(hex.OnNone(() => term.error($"Could not parse the line {line} from {src}")))
                     yield return hex.MapRequired(h => AsmCode.Define(h.Id, h.Encoded));
             }

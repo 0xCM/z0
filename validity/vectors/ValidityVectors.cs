@@ -31,7 +31,7 @@ namespace Z0
     
     public static class ValidityVectors
     {
-        const char Sep = UriDelimiters.FS;
+        const char Sep = UriDelimiters.PathSep;
 
         /// <summary>
         /// Produces the name of the test case for the specified function

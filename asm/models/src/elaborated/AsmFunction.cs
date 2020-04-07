@@ -14,39 +14,46 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction Empty => new AsmFunction(ApiMemberInfo.Empty, AsmCode.Empty, 0, AsmInstructionList.Empty);
+        public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, AsmCode.Empty, 0, AsmInstructionList.Empty);
 
-        public static AsmFunction Define(ParsedOpExtract encoding,  AsmInstructionList instructions)
+        public static AsmFunction Define(ParsedMemberCode encoding,  AsmInstructionList instructions)
         {         
-            var code = AsmCode.Define(encoding.Operation.Id, encoding.Content);
-            return new AsmFunction(encoding.Operation, code, encoding.TermCode, instructions);
+            var code = AsmCode.Define(encoding.MemberUri.OpId, encoding.Content);
+            return new AsmFunction(encoding.MemberUri, encoding.MemberSig, code, encoding.TermCode, instructions);
         }
 
         public static AsmFunction Define(ParsedExtract encoding,  AsmInstructionList instructions)
         {         
-            var code = AsmCode.Define(encoding.Id, encoding.ParsedContent);            
-            return new AsmFunction(encoding.Descriptor, code, encoding.TermCode, instructions);
+            var code = AsmCode.Define(encoding.Id, encoding.ParsedContent);  
+            var sig = encoding.SourceMember.Signature().Format();          
+            return new AsmFunction(encoding.Uri, sig, code, encoding.TermCode, instructions);
         }
 
-        AsmFunction(ApiMemberInfo op, AsmCode code, ExtractTermCode term, AsmInstructionList instructions)
+        AsmFunction(OpUri uri, string sig, AsmCode code, ExtractTermCode term, AsmInstructionList instructions)
         {
-            this.Id = op.Id;
-            this.Operation = op;
+            this.Uri = uri;
+            this.OpId = uri.OpId;
+            this.OpSig = sig;
             this.Instructions = instructions;
             this.Code = code;            
             this.TermCode =term;
         }
 
         /// <summary>
-        /// The defining operation
+        /// The definining operation uri
         /// </summary>
-        public ApiMemberInfo Operation {get;}
+        public OpUri Uri {get;}
 
         /// <summary>
         /// The function identifier
         /// </summary>
-        public OpIdentity Id {get;}
+        public OpIdentity OpId {get;}
 
+        /// <summary>
+        /// The source member signature
+        /// </summary>
+        public string OpSig {get;}
+        
         /// <summary>
         /// The function encoding
         /// </summary>
@@ -61,15 +68,6 @@ namespace Z0.Asm
         /// Specifies the reason for capture termination
         /// </summary>
         public ExtractTermCode TermCode {get;}
-
-        /// <summary>
-        /// The definining operation uri
-        /// </summary>
-        public OpUri Uri
-        {
-            [MethodImpl(Inline)]
-            get => Operation.Uri;
-        }
 
         /// <summary>
         /// The memory segment from which the function was extracted

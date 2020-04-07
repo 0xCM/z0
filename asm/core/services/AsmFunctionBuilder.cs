@@ -26,7 +26,7 @@ namespace Z0.Asm
             this.Context = context;
         }
 
-        public AsmFunction BuildFunction(ApiMemberInfo op, AsmInstructionBlock src)
+        public AsmFunction BuildFunction(OpUri uri, string sig, AsmInstructionBlock src)
         {
             var info = new AsmInstructionInfo[src.InstructionCount];
             var offset = (ushort)0;
@@ -46,9 +46,8 @@ namespace Z0.Asm
             if(blocklen != src.NativeCode.Length)
                 throw AppException.Define(InstructionBlockSizeMismatch(src.Origin, src.NativeCode.Length, blocklen));
         
-            var parsed = ParsedOpExtract.Define(op, src.TermCode, src.NativeCode.Data);
+            var parsed = ParsedMemberCode.Define(uri,sig, src.TermCode, src.NativeCode.Data);
             var instructions = AsmInstructionList.Create(src.Decoded, src.NativeCode.Data);
-            //return AsmFunction.Define(parsed, src.Decoded);
             return AsmFunction.Define(parsed, instructions);
         }
     }

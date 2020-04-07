@@ -25,7 +25,7 @@ namespace Z0
 
             for(var i = 0; i<src.Length; i++)
             {
-                builder.Append(Hex.format(src[i], true, specifier));
+                builder.Append(HexFormat.scalar(src[i], true, specifier));
                 if(i != src.Length - 1)
                     builder.Append(sep);
             }

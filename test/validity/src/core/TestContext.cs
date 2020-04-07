@@ -78,7 +78,7 @@ namespace Z0
             => true;
 
         //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-        const char Sep = UriDelimiters.FS;
+        const char Sep = UriDelimiters.PathSep;
 
         /// <summary>
         /// Produces the name of the test case for the specified function
@@ -99,14 +99,14 @@ namespace Z0
         /// </summary>
         /// <param name="id">Moniker that identifies the operation under test</param>
         public string CaseName(OpIdentity id)
-            => Identify.testcase(GetType(), id);
+            => OpUriBuilder.TestCase(GetType(), id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         public string CaseName(string fullname)
-            => Identify.testcase(GetType(), fullname);
+            => OpUriBuilder.TestCase(GetType(), fullname);
 
         /// <summary>
         /// Produces the name of the test case predicated on a root name and parametric type
@@ -114,12 +114,12 @@ namespace Z0
         /// <param name="root">The root name</param>
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
-            => Identify.testcase(GetType(),root, t);
+            => OpUriBuilder.TestCase(GetType(),root, t);
 
         protected string CaseName<W,C>(string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => Identify.testcase(GetType(), root, w, t, generic);
+                => OpUriBuilder.TestCase(GetType(), root, w, t, generic);
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged

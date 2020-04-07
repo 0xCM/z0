@@ -63,13 +63,13 @@ namespace Z0.Asm
 
             public string DelimitedText(char sep)
             {
-                var dst = Model.Formatter.Reset();            
+                var dst = Model.Formatter.Reset();                   
                 dst.AppendField(F.Sequence, Sequence);
                 dst.DelimitField(F.Address, Address, sep);
                 dst.DelimitField(F.Length, Length, sep);
                 dst.DelimitField(F.Uri, Uri, sep);
                 dst.DelimitField(F.OpSig, OpSig, sep);
-                dst.DelimitField(F.Data, Data, sep);
+                dst.DelimitField(F.Data, HexFormat.data(Data.Bytes), sep);
                 return dst.Format();            
             }
 

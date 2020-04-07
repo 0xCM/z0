@@ -12,12 +12,12 @@ namespace Z0.Asm
     /// <summary>
     /// Describes the outcome of a native capture operation
     /// </summary>
-    public readonly struct ExtractionOutcome
+    public readonly struct ExtractResult
     {
         /// <summary>
         /// The final state in the capture process
         /// </summary>
-        public readonly ExtractionState State;
+        public readonly ExtractState State;
 
         /// <summary>
         /// The origin of the captured data
@@ -29,18 +29,18 @@ namespace Z0.Asm
         /// </summary>
         public readonly ExtractTermCode TermCode;
 
-        public static ExtractionOutcome Empty => Define(ExtractionState.Empty, 0,0, ExtractTermCode.None);
+        public static ExtractResult Empty => Define(ExtractState.Empty, 0,0, ExtractTermCode.None);
 
         [MethodImpl(Inline)]
-        public static ExtractionOutcome Define(in ExtractionState state, ulong start, ulong end, ExtractTermCode cc)
-            => new ExtractionOutcome(state, (start, end), cc);
+        public static ExtractResult Define(in ExtractState state, ulong start, ulong end, ExtractTermCode cc)
+            => new ExtractResult(state, (start, end), cc);
 
         [MethodImpl(Inline)]
-        public static ExtractionOutcome Define(in ExtractionState state, MemoryRange source, ExtractTermCode cc)
-            => new ExtractionOutcome(state, source, cc);
+        public static ExtractResult Define(in ExtractState state, MemoryRange source, ExtractTermCode cc)
+            => new ExtractResult(state, source, cc);
 
         [MethodImpl(Inline)]
-        ExtractionOutcome(in ExtractionState state, MemoryRange range, ExtractTermCode cc)
+        ExtractResult(in ExtractState state, MemoryRange range, ExtractTermCode cc)
         {   
             this.State = state;
             this.Range = range;

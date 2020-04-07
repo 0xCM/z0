@@ -19,8 +19,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmFormatter AsmFormatter(this IAsmContext context, AsmFormatConfig config = null)
-            => Svc.AsmFormatter.Create(context, config ?? context.AsmFormat);
+        public static IAsmFormatter AsmFormatter(this IContext context, AsmFormatConfig config = null)
+            => Svc.AsmFormatter.Create(context, config ?? AsmFormatConfig.New);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer

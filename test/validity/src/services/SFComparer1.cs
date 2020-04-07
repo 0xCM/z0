@@ -52,7 +52,7 @@ namespace Z0
 
         void ISFMatch<T,R>.Match<F, G>(F baseline, G subject)
         {
-            var casename = Identify.testcase(Context.HostType, $"{subject.Id}_span");
+            var casename = OpUriBuilder.TestCase(Context.HostType, $"{subject.Id}_span");
             var succeeded = true;       
             var clock = counter();
 

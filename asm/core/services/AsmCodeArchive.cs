@@ -52,15 +52,6 @@ namespace Z0.Asm
         IEnumerable<FilePath> Files 
             => RootFolder.Files(FileExtensions.Hex,true);
                     
-        /// <summary>
-        /// Reads a hex-line formatted file
-        /// </summary>
-        /// <param name="src">The source file path</param>
-        /// <param name="idsep">The id delimiter</param>
-        /// <param name="bytesep">The hex byte delimiter</param>
-        public IEnumerable<AsmCode> Read(FilePath src, char idsep, char bytesep)
-            => Context.CodeReader(idsep,bytesep).Read(src);
-
         public IEnumerable<AsmCode> Read(string name)
             => Read(fn => fn.NoExtension == name);
         
@@ -81,7 +72,7 @@ namespace Z0.Asm
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
         public IEnumerable<AsmCode> Read(FilePath src)
-            => Read(src, AsmHexLine.DefaultIdSep, AsmHexLine.DefaultByteSep);
+            => Context.CodeReader().Read(src);
 
         /// <summary>
         /// Reads a moniker-identified, default-formatted hex-line file
@@ -107,7 +98,7 @@ namespace Z0.Asm
         /// <param name="id">The identity to confer</param>
         static AsmCode Parse<T>(string data, OpIdentity id, T t = default)
             where T : unmanaged
-                => new AsmCode(id, MemoryExtract.Define(MemoryAddress.Zero, HexParser.ByteParser.ParseBytes(data).ToArray()));
+                => new AsmCode(id, MemoryExtract.Define(MemoryAddress.Zero, HexParsers.Bytes.ParseBytes(data).ToArray()));
 
         Option<AsmCode> Read<T>(FilePath src, OpIdentity m, T t = default)
             where T : unmanaged

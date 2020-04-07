@@ -30,7 +30,6 @@ namespace Z0
 
     public static class TextFactoryOps
     {
-
         [MethodImpl(Inline)]
         public static StringBuilder Builder(this IFactory<string> src)        
             => new StringBuilder();

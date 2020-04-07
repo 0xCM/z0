@@ -39,9 +39,6 @@ namespace Z0.Asm
         {                        
             public static MemberParseRecord Empty => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, MemoryExtract.Empty);
             
-            public static implicit operator ParsedOpExtract(MemberParseRecord src)
-                => src.ToParsedEncoding();
-
             public static R From(in ParsedExtract extract, int seq)
                 => MemberParseRecord.Define
                     (
@@ -119,7 +116,7 @@ namespace Z0.Asm
                 dst.DelimitField(F.TermCode, TermCode, sep);
                 dst.DelimitField(F.Uri, Uri, sep);
                 dst.DelimitField(F.OpSig, OpSig, sep);
-                dst.DelimitField(F.Data, Data, sep);
+                dst.DelimitField(F.Data, HexFormat.data(Data.Bytes), sep);
                 return dst.Format();            
             }
 
@@ -129,15 +126,14 @@ namespace Z0.Asm
             /// Gets the parsed encoding described by the source record
             /// </summary>
             /// <param name="src">The source record</param>
-            public ParsedOpExtract ToParsedEncoding()
+            public ParsedMemberCode ToParsedEncoding()
             {
                 var src = this;
                 var count = src.Length;
-                var op = ApiMemberInfo.Define(src.Uri, src.OpSig);
                 var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
-                var final = ExtractionState.Define(op.Id, count, range.End, src.Data.LastByte);
-                var outcome = ExtractionOutcome.Define(final, range, src.TermCode);
-                return ParsedOpExtract.Define(op, outcome.TermCode, src.Data);
+                var final = ExtractState.Define(src.Uri.OpId, count, range.End, src.Data.LastByte);
+                var outcome = ExtractResult.Define(final, range, src.TermCode);
+                return ParsedMemberCode.Define(src.Uri, src.OpSig, outcome.TermCode, src.Data);
             }
         }
 

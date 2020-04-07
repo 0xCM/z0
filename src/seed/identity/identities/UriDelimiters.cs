@@ -9,28 +9,24 @@ namespace Z0
     public static class UriDelimiters
     {
         /// <summary>
-        /// End of scheme
+        /// The text used to terminate a uri scheme and trailing '//'
         /// </summary>
-        public const char EOS = ':';
+        public const string EOS = IDI.EndOfScheme;
 
         /// <summary>
         /// Forward slash
         /// </summary>
-        public const char FS = '/';
+        public const char PathSep = IDI.UriPathSep;
 
         /// <summary>
         /// Query marker
         /// </summary>
-        public const char Q = '?';
+        public const char QueryMarker = IDI.UriQueryMarker;
 
         /// <summary>
         /// Hash marker
         /// </summary>
-        public const char H = '#';
+        public const char Fragment = IDI.UriFragment;
         
-        /// <summary>
-        /// FS*2
-        /// </summary>
-        public const string FS2 = "//";
     }
 }

@@ -15,15 +15,15 @@ namespace Z0.Asm
     public readonly ref struct AsmCaptureEvent
     {
         [MethodImpl(Inline)]
-        public static AsmCaptureEvent Define(ExtractionState state, Span<byte> buffer)
+        public static AsmCaptureEvent Define(ExtractState state, Span<byte> buffer)
             => new AsmCaptureEvent(state,buffer);        
 
         [MethodImpl(Inline)]
-        public static AsmCaptureEvent Define(ExtractionState state, Span<byte> buffer, in CapturedOp captured)
+        public static AsmCaptureEvent Define(ExtractState state, Span<byte> buffer, in CapturedOp captured)
             => new AsmCaptureEvent(state,buffer, captured);
 
         [MethodImpl(Inline)]
-        AsmCaptureEvent(ExtractionState state, Span<byte> buffer, in CapturedOp captured)
+        AsmCaptureEvent(ExtractState state, Span<byte> buffer, in CapturedOp captured)
         {
             this.EventKind = CaptureEventKind.Complete;
             this.CaptureState = state;
@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        AsmCaptureEvent(ExtractionState state, Span<byte> buffer)
+        AsmCaptureEvent(ExtractState state, Span<byte> buffer)
         {
             this.CaptureState = state;
             this.StateBuffer = buffer;
@@ -48,7 +48,7 @@ namespace Z0.Asm
         /// <summary>
         /// The capture state when the even occurred
         /// </summary>
-        public readonly ExtractionState CaptureState;
+        public readonly ExtractState CaptureState;
 
         /// <summary>
         /// The state buffer

@@ -14,5 +14,7 @@ namespace Z0.Asm
         void WriteCode(in AsmCode src, int? idpad = null);
 
         void Write(AsmCode[] src);
+
+        void WriteDiagnostic(in CapturedOp src);        
     }
 }

@@ -16,16 +16,16 @@ namespace Z0.Asm
 
         readonly AsmFormatConfig Config;
 
-        public IAsmContext Context {get;}
+        readonly IContext Context;
 
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter Create(IAsmContext context, AsmFormatConfig config, FilePath dst)
+        public static IAsmFunctionWriter Create(IContext context, AsmFormatConfig config, FilePath dst)
             => new AsmFunctionWriter(context, config, dst);
 
         [MethodImpl(Inline)]
-        AsmFunctionWriter(IAsmContext context, AsmFormatConfig config, FilePath path)
+        AsmFunctionWriter(IContext context, AsmFormatConfig config, FilePath path)
         {
             this.TargetPath = path;
             this.Context = context;

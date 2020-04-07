@@ -9,7 +9,6 @@ namespace Z0
 
     using static Seed;
     using static refs;
-    using static As;
     using static HexSpecs;
 
     partial class Hex
@@ -33,7 +32,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static char digit(ulong value, int pos)
             => (char)skip(in head(Uppercase), 0xF & (byte)(value >> pos*4));
-
 
     }
 }

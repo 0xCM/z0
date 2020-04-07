@@ -33,10 +33,6 @@ namespace Z0
         public static implicit operator string(OpIdentity src)
             => src.Identifier;
 
-        // [MethodImpl(Inline)]
-        // public static implicit operator OpIdentity(IdentityPart[] src)
-        //     => Identify.Op(src);
-
         [MethodImpl(Inline)]
         public static bool operator==(OpIdentity a, OpIdentity b)
             => a.Equals(b);
@@ -68,7 +64,6 @@ namespace Z0
             this.HasImm = false;
             this.TextComponents = new string[]{};
         }
-
 
         /// <summary>
         /// The unqualified operation name
@@ -111,9 +106,5 @@ namespace Z0
 
         public override string ToString()
             => Identified.Format();
-
-        public const string AsmLocator = "-asm";
-
-        public const string GenericLocator = "_g";              
     }
 }

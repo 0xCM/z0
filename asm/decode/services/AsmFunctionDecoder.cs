@@ -26,24 +26,16 @@ namespace Z0.Asm
             this.Decoder = context.AsmInstructionDecoder();
         }
 
-        // Option<CilFunction> GetCil(CapturedOp src)
-        //     => from c in Context.ClrIndex.FindCil(src.Method.MetadataToken)
-        //        select c.WithSig(src.Method.Signature());
-
         public AsmFunction DecodeFunction(CapturedOp src)
         {
             var list = Decoder.DecodeInstructions(src.Code).Require();
             var block = Asm.AsmInstructionBlock.Define(src.Code, list, src.TermCode);
-            var f = Context.FunctionBuilder().BuildFunction(src.Operation, block);
-            // if(emitcil)
-            //     f = f.WithCil(GetCil(src).ValueOrDefault());
-            return f;
+            return Context.FunctionBuilder().BuildFunction(src.Uri, src.OpSig, block);
         }
 
-        public AsmFunction DecodeFunction(ParsedOpExtract parsed)
+        public AsmFunction DecodeFunction(ParsedMemberCode parsed)
         {
-            var op = parsed.Operation;
-            var code = AsmCode.Define(op.Id, parsed.Content);
+            var code = AsmCode.Define(parsed.MemberUri.OpId, parsed.Content);
             var instructions = Decoder.DecodeInstructions(code).Require();
             return AsmFunction.Define(parsed, instructions);
         }

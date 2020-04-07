@@ -23,19 +23,19 @@ namespace Z0
             var parts = text.SplitClean(EOS);
             var msg = string.Empty;
             if(parts.Length != 2)
-                msg = $"Splitting on {EOS} produces {parts.Length} pieces";
+                msg = $"Splitting on {EOS} produced {parts.Length} pieces";
             else
             {
                 var scheme = ParseScheme(parts[0]);
-                var rest = parts[1].TakeAfter(FS2);
-                var pathText = rest.TakeBefore(Q);
+                var rest = parts[1];
+                var pathText = rest.TakeBefore(QueryMarker);
                 var path = ApiHostUri.Parse(pathText);
                 if(!path.Succeeded)
                     msg = $"Failed to parse {pathText} as an api host path";
                 else
                 {
-                    var id = Identify.Op(rest.TakeAfter(H));
-                    var group = rest.Between(Q,H);
+                    var id = Identify.Op(rest.TakeAfter(Fragment));
+                    var group = rest.Between(QueryMarker,Fragment);
                     var uri = OpUri.Define(scheme, path.Value, group, id);
                     return ParseResult.Success(text,uri);
                 }                

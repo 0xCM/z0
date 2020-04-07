@@ -19,6 +19,7 @@ namespace Z0.Asm.Validation
     
     public class AsmChecks : IAsmChecks
     {
+
         public IAsmContext Context {get;}
 
         readonly IAppMsgSink MsgSink;
@@ -85,14 +86,14 @@ namespace Z0.Asm.Validation
         /// </summary>
         /// <param name="id">Moniker that identifies the operation under test</param>
         string CaseName(OpIdentity id)
-            => Identify.testcase(GetType(),id);
+            => OpUriBuilder.TestCase(GetType(),id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         string CaseName(string fullname)
-            => Identify.testcase(GetType(), fullname);
+            => OpUriBuilder.TestCase(GetType(), fullname);
 
         protected OpIdentity TestOpName<T>(string basename, T t = default)
             where T : unmanaged

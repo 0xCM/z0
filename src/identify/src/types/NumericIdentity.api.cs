@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         public static IEnumerable<NumericKind> numeric(IEnumerable<string> kinds)
             => from part in kinds
-               let x = part.StartsWith(OpIdentity.GenericLocator)
+               let x = part.StartsWith(IDI.GenericLocator)
                     ? Identify.numeric(part.Substring(1, part.Length - 1)) 
                     : Identify.numeric(part)
                 select x;        

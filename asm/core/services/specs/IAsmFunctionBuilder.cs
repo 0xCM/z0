@@ -10,8 +10,8 @@ namespace Z0.Asm
         /// <summary>
         /// Builds a function from an instruction block
         /// </summary>
-        /// <param name="op">The source operation</param>
+        /// <param name="uri">The operation uri</param>
         /// <param name="src">The instructions that comprise the function</param>
-        AsmFunction BuildFunction(ApiMemberInfo op, AsmInstructionBlock src);   
+        AsmFunction BuildFunction(OpUri uri, string sig, AsmInstructionBlock src);   
     }
 }

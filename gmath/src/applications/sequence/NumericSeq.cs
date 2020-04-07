@@ -96,7 +96,7 @@ namespace Z0
 
         public string Format(char? delimiter = null)
         {
-            var fmt = text.factory.Builder();
+            var fmt = text.build();
             fmt.Append(Chars.LBrace);
             for(var i=0; i<terms.Length; i++)
             {

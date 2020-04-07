@@ -15,10 +15,9 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <param name="sep">The item separator</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static string FormatAsVector<T>(this ReadOnlySpan<T> src, string sep = ",")
+        public static string FormatAsVector<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma)
         {
-            var components = src.Map(x => x.ToString());
-            var body = components.Concat(sep);
+            var body = src.Map(x => x.ToString()).Concat(sep);
             return Chars.Lt + body + Chars.Gt;
         }
  
@@ -28,7 +27,7 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <param name="sep">The item separator</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static string FormatAsVector<T>(this Span<T> src, string sep = ",")
+        public static string FormatAsVector<T>(this Span<T> src, char sep = Chars.Comma)
             => src.ReadOnly().FormatAsVector(sep);        
     }
 }

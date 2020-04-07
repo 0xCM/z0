@@ -54,7 +54,7 @@ namespace Z0.Asm
             return parsed;
         }
 
-        AsmFunctionList Decode(ApiHost host, MemberExtract[] extracted, ParsedOpExtract[] parsed)
+        AsmFunctionList Decode(ApiHost host, MemberExtract[] extracted, ParsedMemberCode[] parsed)
         {
             var path = Paths.DecodedPath(host.Path);
             var decoder = Context.AsmFunctionDecoder();

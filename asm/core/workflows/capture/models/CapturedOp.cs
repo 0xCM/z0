@@ -15,18 +15,18 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct CapturedOp
     {        
-        public readonly OpIdentity Id; 
+        public readonly OpUri Uri;
 
-        public readonly ApiMemberInfo Operation;
+        public readonly OpIdentity OpId; 
+
+        public readonly string OpSig;
 
         public readonly AsmCode Code;
         
         public readonly ExtractTermCode TermCode;
 
-        public readonly MemoryExtract RawBits {get;}
+        public readonly MemoryExtract RawBits;
                 
-        public readonly MethodInfo Method;
-
         public static CapturedOp Empty => default;
 
         [MethodImpl(Inline)]
@@ -41,10 +41,10 @@ namespace Z0.Asm
         CapturedOp(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange memsrc, ParsedMemoryExtract bits, ExtractTermCode term)
         {
             require((int)memsrc.Length == bits.Parsed.Length);    
-            this.Id = id;        
+            this.OpId = id;        
             this.Code = AsmCode.Define(id, bits.Parsed);
-            this.Operation = ApiMemberInfo.Define(OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id), method.Signature().Format());
-            this.Method = method;
+            this.Uri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
+            this.OpSig = method.Signature().Format();
             this.TermCode = term;
             this.RawBits = bits.Source;            
         }
@@ -52,19 +52,4 @@ namespace Z0.Asm
         public readonly MemoryRange AddressRange    
             => Code.Location;        
     }
-
-    public readonly struct CapturedOps : IFiniteSeq<CapturedOp>
-    {
-        [MethodImpl(Inline)]
-        public static implicit operator CapturedOps(CapturedOp[] src)
-            => new CapturedOps(src);
-        
-        [MethodImpl(Inline)]
-        public CapturedOps(CapturedOp[] content)
-        {
-            this.Content = content;
-        }
-        
-        public CapturedOp[] Content {get;}
-    }    
 }

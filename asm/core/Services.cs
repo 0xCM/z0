@@ -64,8 +64,8 @@ namespace Z0.Asm
         /// <param name="idsep">The identifer/code delimiter</param>
         /// <param name="bytesep">The byte delimiter</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeReader CodeReader(this IAsmContext context, char? idsep = null, char? bytesep = null)
-            => AsmCodeReader.New(context,idsep, bytesep);
+        public static IAsmCodeReader CodeReader(this IContext context)
+            => AsmCodeReader.New(context);
 
         /// <summary>
         /// Instantiates a contextual service allocation that streams lines of operation hex to a target file
@@ -73,7 +73,7 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="dst">The target file</param>
         [MethodImpl(Inline)]
-        public static IAsmHexWriter HexWriter(this IAsmContext context, FilePath dst)
+        public static IAsmHexWriter HexWriter(this IContext context, FilePath dst)
             => AsmHexWriter.New(context, dst);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="dst">The target file</param>
         [MethodImpl(Inline)]
-        public static IAsmHexReader HexReader(this IAsmContext context)
+        public static IAsmHexReader HexReader(this IContext context)
             => AsmHexReader.New(context);
 
         /// <summary>
@@ -130,7 +130,6 @@ namespace Z0.Asm
         /// <param name="triggers">The triggers that fire when instructions satisfy criterea of interest</param>
         public static IAsmInstructionFlow InstructionFlow(this IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
-
 
         public static OpExtractExchange ExtractExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
         {

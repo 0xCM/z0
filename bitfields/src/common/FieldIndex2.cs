@@ -54,10 +54,7 @@ namespace Z0
         }
 
         public string Format()
-        {
-            var formatter = SpanFormatter.Define<FieldIndexEntry<I,W>>(Chars.Eol);
-            return formatter.Format(Entries);
-        }
+            => Formattable.format(Entries, Chars.Eol);
 
         public override string ToString()
             => Format();

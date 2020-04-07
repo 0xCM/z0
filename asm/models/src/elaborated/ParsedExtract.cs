@@ -79,40 +79,4 @@ namespace Z0.Asm
         public AsmCode Code
             => AsmCode.Define(Id, ParsedContent);
     }
-
-    public readonly struct ParsedOpExtract
-    {
-        public readonly ApiMemberInfo Operation;        
-
-        public readonly ExtractTermCode TermCode;
-
-        public readonly MemoryExtract Content;   
-
-        [MethodImpl(Inline)]
-        public static ParsedOpExtract Define(ApiMemberInfo op, ExtractTermCode term, MemoryExtract parsed)
-            => new ParsedOpExtract(op,term,parsed);
-
-        [MethodImpl(Inline)]
-        ParsedOpExtract(ApiMemberInfo op, ExtractTermCode term, MemoryExtract parsed)
-        {
-            this.Operation = op;
-            this.Content = parsed;
-            this.TermCode = term;
-        }        
-    }
-
-    public readonly struct ParsedOpExtracts : IFiniteSeq<ParsedOpExtract>
-    {
-        [MethodImpl(Inline)]
-        public static implicit operator ParsedOpExtracts(ParsedOpExtract[] src)
-            => new ParsedOpExtracts(src);
-        
-        [MethodImpl(Inline)]
-        public ParsedOpExtracts(ParsedOpExtract[] content)
-        {
-            this.Content = content;
-        }
-        
-        public ParsedOpExtract[] Content {get;}
-    }    
 }

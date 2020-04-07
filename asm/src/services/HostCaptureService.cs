@@ -62,7 +62,7 @@ namespace Z0.Asm
 
         AsmFunction Decode(MemberParseRecord src, IAsmFunctionDecoder decoder,  IAsmFunctionWriter dst)
         {
-            var f = decoder.DecodeFunction(src);
+            var f = decoder.DecodeFunction(src.ToParsedEncoding());
             dst.Write(f);
             return f;
         }

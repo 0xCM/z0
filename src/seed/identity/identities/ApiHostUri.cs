@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ParseResult<ApiHostUri> Parse(string text)
         {
-            var parts = text.Split('/');
+            var parts = text.Split(UriDelimiters.PathSep);
             if(parts.Length == 2 && Enum.TryParse(parts[0], true, out PartId owner))
                 return ParseResult.Success(text,Define(owner, parts[1]));
             else
@@ -70,7 +70,7 @@ namespace Z0
         {
             this.Owner = owner;
             this.Name = name;
-            this.Identifier = owner != 0 ? $"{Owner.Format()}/{Name}" : name;
+            this.Identifier = owner != 0 ? $"{Owner.Format()}{UriDelimiters.PathSep}{Name}" : name;
         }
  
         public string Format()

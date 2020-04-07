@@ -9,14 +9,6 @@ namespace Z0
 
     using static Seed;
 
-    public static class SpanFormatter
-    {
-        [MethodImpl(Inline)]
-        public static SpanFormatter<T> Define<T>(string delimiter = null)
-            where T : ICustomFormattable
-                => new SpanFormatter<T>(SeqFormatConfig.Define(delimiter ?? DefaultSeqFormatConfig.Default.Delimiter));
-    }
-
     public readonly struct SpanFormatter<T> : ISpanFormatter<T>
         where T : ICustomFormattable
     {

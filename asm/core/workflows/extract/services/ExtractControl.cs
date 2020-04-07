@@ -48,11 +48,11 @@ namespace Z0.Asm
             => Context.Capture().Capture(exchange, src, args);
 
         [MethodImpl(Inline)]
-        void IExtractJunction.OnCaptureStep(in OpExtractExchange exchange, in ExtractionState state)
+        void IExtractJunction.OnCaptureStep(in OpExtractExchange exchange, in ExtractState state)
             => Observer(AsmCaptureEvent.Define(state, exchange.StateBuffer));
 
         [MethodImpl(Inline)]
-        void IExtractJunction.OnCaptureComplete(in OpExtractExchange exchange, in ExtractionState state, in CapturedOp captured)
+        void IExtractJunction.OnCaptureComplete(in OpExtractExchange exchange, in ExtractState state, in CapturedOp captured)
             => Observer(AsmCaptureEvent.Define(state, exchange.StateBuffer, captured));
 
     }
