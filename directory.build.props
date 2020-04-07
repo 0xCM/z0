@@ -86,10 +86,10 @@
     <Validity>$(TopDir)validity/src/z0.validity.src.csproj</Validity>
     <ValidityCore>$(TopDir)validity/core/z0.validity.core.csproj</ValidityCore>
     <ValidityVectors>$(TopDir)validity/vectors/z0.validity.vectors.csproj</ValidityVectors>
-    <Feeders>$(TopDir)a/</Feeders>
+    <Src>$(TopDir)src/</Src>
   </PropertyGroup>
 
-  <Import Project="$(Feeders)core.export.props"/>
+  <Import Project="$(Src)core.export.props"/>
 
 
 </Project>

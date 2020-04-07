@@ -90,51 +90,51 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.validity.src", "validity
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "a", "a", "{17B312F6-4382-4292-B8AC-59BF2BC9ED99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.canonical", "a\canonical\z0.canonical.csproj", "{8AB904AF-FF4E-4C61-B294-CA3C7980E63B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.canonical", "src\canonical\z0.canonical.csproj", "{8AB904AF-FF4E-4C61-B294-CA3C7980E63B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.collective", "a\collective\z0.collective.csproj", "{85683EF4-BA29-4B08-AF81-C76EFF38E548}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.collective", "src\collective\z0.collective.csproj", "{85683EF4-BA29-4B08-AF81-C76EFF38E548}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.custom", "a\custom\z0.custom.csproj", "{CA17CC0A-BCB7-4B5F-B086-6189981F19DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.custom", "src\custom\z0.custom.csproj", "{CA17CC0A-BCB7-4B5F-B086-6189981F19DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.fixed", "a\fixed\z0.fixed.csproj", "{DE663001-2654-4794-8624-E5926398FC70}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.fixed", "src\fixed\z0.fixed.csproj", "{DE663001-2654-4794-8624-E5926398FC70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.identify", "a\identify\z0.identify.csproj", "{EA65474B-2B6F-42B5-BDE8-B9FEBE6E5AEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.identify", "src\identify\z0.identify.csproj", "{EA65474B-2B6F-42B5-BDE8-B9FEBE6E5AEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.kinds", "a\kinds\z0.kinds.csproj", "{AA59D14F-F87B-48B4-BEB3-66C79D7AEF60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.kinds", "src\kinds\z0.kinds.csproj", "{AA59D14F-F87B-48B4-BEB3-66C79D7AEF60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.memories", "a\memories\z0.memories.csproj", "{AF8FA8E9-6FB2-44B9-AD22-60EE9D65B959}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.memories", "src\memories\z0.memories.csproj", "{AF8FA8E9-6FB2-44B9-AD22-60EE9D65B959}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.numeric", "a\numeric\z0.numeric.csproj", "{5FE5CD81-9A01-4213-8229-70E06D0ADE61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.numeric", "src\numeric\z0.numeric.csproj", "{5FE5CD81-9A01-4213-8229-70E06D0ADE61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.reflective", "a\reflective\z0.reflective.csproj", "{5BD16A6E-2762-4EB3-AF3F-F6F67A9BFE01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.reflective", "src\reflective\z0.reflective.csproj", "{5BD16A6E-2762-4EB3-AF3F-F6F67A9BFE01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.symbolic", "a\symbolic\z0.symbolic.csproj", "{FDA157C9-45A1-4074-8716-7300B31EAFF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.symbolic", "src\symbolic\z0.symbolic.csproj", "{FDA157C9-45A1-4074-8716-7300B31EAFF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.sfuncs", "a\sfuncs\z0.sfuncs.csproj", "{DD741D59-D51D-452B-8B41-7E31EDE91FE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.sfuncs", "src\sfuncs\z0.sfuncs.csproj", "{DD741D59-D51D-452B-8B41-7E31EDE91FE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.time", "a\time\z0.time.csproj", "{087EFA60-3D46-46EA-9F43-16516A688369}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.time", "src\time\z0.time.csproj", "{087EFA60-3D46-46EA-9F43-16516A688369}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.tuples", "a\tuples\z0.tuples.csproj", "{24654181-3CF0-483E-A9F6-4B382E17D844}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.tuples", "src\tuples\z0.tuples.csproj", "{24654181-3CF0-483E-A9F6-4B382E17D844}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.core", "a\core\z0.core.csproj", "{53B371D2-01EF-47A5-8FB2-EBA13458AB11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.core", "src\core\z0.core.csproj", "{53B371D2-01EF-47A5-8FB2-EBA13458AB11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.graphs", "a\graphs\z0.graphs.csproj", "{C7CCC1CA-4FB7-4F39-BFE8-C98ED0716533}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.graphs", "src\graphs\z0.graphs.csproj", "{C7CCC1CA-4FB7-4F39-BFE8-C98ED0716533}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.messages", "a\messages\z0.messages.csproj", "{2F2D9D72-E6C3-42D1-B4FF-A6BB4766718D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.messages", "src\messages\z0.messages.csproj", "{2F2D9D72-E6C3-42D1-B4FF-A6BB4766718D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.polyrand", "polyrand\z0.polyrand.csproj", "{0051C2CA-91A7-4306-B698-EE323802D3BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.typed", "a\typed\z0.typed.csproj", "{9E83FCC7-BBCF-4286-A296-FE9D3D27FA82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.typed", "src\typed\z0.typed.csproj", "{9E83FCC7-BBCF-4286-A296-FE9D3D27FA82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.seed", "a\seed\z0.seed.csproj", "{A87FD6E9-3D24-427B-BFCB-61F0599342C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.seed", "src\seed\z0.seed.csproj", "{A87FD6E9-3D24-427B-BFCB-61F0599342C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.asm.types", "asm\types\z0.asm.types.csproj", "{D223B3E6-D46B-435A-9834-9904C0134557}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.asm.models", "asm\models\z0.asm.models.csproj", "{AEAE80B7-A947-4C1D-95D1-0472EBA5DB55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.textual", "a\textual\z0.textual.csproj", "{D69E2AC5-C8AD-4018-8D01-8A298416BCB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.textual", "src\textual\z0.textual.csproj", "{D69E2AC5-C8AD-4018-8D01-8A298416BCB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.checks", "a\checks\z0.checks.csproj", "{C9359080-7E84-4B57-9B6D-DA3A9F4F0675}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.checks", "src\checks\z0.checks.csproj", "{C9359080-7E84-4B57-9B6D-DA3A9F4F0675}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vectorized", "vectorized", "{E8F10D9E-F468-4162-8261-3E5EB095B000}"
 EndProject
@@ -152,21 +152,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.vdata", "vectorized\vdat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.vsvc", "vectorized\vsvc\z0.vsvc.csproj", "{3D2CA82E-6444-4D74-B07B-5B58FD8398B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.flow", "a\flow\z0.flow.csproj", "{FD59BB91-D127-4C1D-990A-51900D9E637B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.flow", "src\flow\z0.flow.csproj", "{FD59BB91-D127-4C1D-990A-51900D9E637B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.reports", "a\reports\z0.reports.csproj", "{38082128-3A62-4122-AB06-A6AF13F40049}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.reports", "src\reports\z0.reports.csproj", "{38082128-3A62-4122-AB06-A6AF13F40049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.enums", "a\enums\z0.enums.csproj", "{29290A9D-38FD-420E-BF41-DC6059613544}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.enums", "src\enums\z0.enums.csproj", "{29290A9D-38FD-420E-BF41-DC6059613544}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.contained", "a\contained\z0.contained.csproj", "{B3F256A8-192D-42D3-BDB3-D744D16713F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.contained", "src\contained\z0.contained.csproj", "{B3F256A8-192D-42D3-BDB3-D744D16713F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.parts", "parts\z0.parts.csproj", "{38C551F9-C9A0-4040-AF1B-7101F8716CF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.agency", "a\agency\z0.agency.csproj", "{C4A2BDCE-10F4-49EE-975F-1B051DEF70A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.agency", "src\agency\z0.agency.csproj", "{C4A2BDCE-10F4-49EE-975F-1B051DEF70A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.code", "a\code\z0.code.csproj", "{C932AC45-A6C2-4CCF-84B3-2C6DF5821A1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.code", "src\code\z0.code.csproj", "{C932AC45-A6C2-4CCF-84B3-2C6DF5821A1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.vectors", "a\vectors\z0.vectors.csproj", "{988C10A1-18B7-4A0B-A6E2-8B7CE97C0D6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.vectors", "src\vectors\z0.vectors.csproj", "{988C10A1-18B7-4A0B-A6E2-8B7CE97C0D6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B605FCCB-10D6-47B2-B0BB-C55D9E1DED83}"
 EndProject
