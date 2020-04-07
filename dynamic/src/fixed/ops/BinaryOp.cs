@@ -82,7 +82,6 @@ namespace Z0
         public static BinaryOp256 Emit(IBufferToken dst, C.BinaryOp op, W256 w, in ApiCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
-
         [MethodImpl(Inline)]
         static BinaryOp8 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W8 w)
             => (BinaryOp8)Emit(buffer, id, op, typeof(BinaryOp8), typeof(Fixed8));

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmSpecs;
-    using static AsmTypes;
-
     partial class AsmSpecs
     {
         /// <summary>
@@ -21,8 +18,8 @@ namespace Z0.Asm
         public interface imm<W> : imm
             where W : unmanaged, IDataWidth
         {
-             ImmWidth Width  => (ImmWidth)Widths.data<W>();                  
-                          
+             ImmWidth Width  => (ImmWidth)Widths.data<W>();    
+
         }   
 
         public interface imm<F,W> : imm<W>

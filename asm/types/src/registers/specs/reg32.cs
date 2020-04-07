@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         }
 
-        public interface reg32<F,N,S> : reg32<S>, IIndexed<N>
+        public interface reg32<F,N,S> : reg32<S>, reg<F,W32,S>,  ISlotted<N>
             where F : unmanaged, reg32<F,N,S>
             where N : unmanaged, ITypeNat
             where S : unmanaged

@@ -7,17 +7,31 @@ namespace Z0.Asm
 
     using static AsmSpecs;
 
-    partial class AsmTypes
-    {
-            
+    partial class AsmOps
+    {            
         public readonly struct mov : func<mov>
         {
             
         }
 
-        public struct mov<S,T>
+
+        public readonly struct movzx 
         {
 
+        }
+
+
+        public readonly struct movzx<S,T>
+        {
+            public movzx(S src, T dst)
+            {
+                this.Source = src;
+                this.Target = dst;
+            }
+
+            public readonly S Source;
+
+            public readonly T Target;
         }
     }
 }

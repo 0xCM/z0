@@ -17,20 +17,19 @@ namespace Z0.Asm
         
         }
 
-        public interface reg8<F,N,S> : reg8<S>, IIndexed<N>
+        public interface reg8<F,N,S> : reg8<S>, reg<F,W8,S>, ISlotted<N>
             where F : unmanaged, reg8<F,N,S>
             where N : unmanaged, ITypeNat
             where S : unmanaged
         {
-
+            
         }
 
-        public interface reg8<F,N> : reg16<F,N,Fixed8>
+        public interface reg8<F,N> : reg8<F,N,Fixed8>
             where F : unmanaged, reg8<F,N>
             where N : unmanaged, ITypeNat
         {
 
         }
-
     }
 }

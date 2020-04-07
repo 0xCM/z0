@@ -18,7 +18,7 @@ namespace Z0.Asm
         
         }
 
-        public interface ymm<F,N,S> : ymm<S>, IIndexed<N> 
+        public interface ymm<F,N,S> : ymm<S>,reg<F,W256,S>,  ISlotted<N> 
             where F : struct, ymm<F,N,S>
             where N : unmanaged, ITypeNat
             where S : unmanaged

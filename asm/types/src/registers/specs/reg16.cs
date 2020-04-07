@@ -19,7 +19,7 @@ namespace Z0.Asm
         }
 
 
-        public interface reg16<F,N,S> : reg16<S>, IIndexed<N>
+        public interface reg16<F,N,S> : reg16<S>,reg<F,W16,S>, ISlotted<N>
             where F : unmanaged, reg16<F,N,S>
             where N : unmanaged, ITypeNat
             where S : unmanaged
@@ -33,6 +33,5 @@ namespace Z0.Asm
         {
 
         }
-
     }
 }

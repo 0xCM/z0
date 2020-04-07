@@ -12,21 +12,7 @@ namespace Z0.Asm
 
     partial class Registers
     {
-        public readonly struct Reg16 : reg16<Fixed16>
-        {    
-            public const uint Width = reg16.Width;
 
-            public Fixed16 State {get;}
-        }
-
-        public readonly struct Reg16<N> : reg16<Reg16<N>, N>
-            where N : unmanaged, ITypeNat
-        {
-            public const uint Width = reg16.Width;
-
-            public Fixed16 State {get;}
-        }
-             
         public readonly struct ax : reg16<ax,N0>
         {
             public const uint Width = reg16.Width;

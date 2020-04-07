@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial class AsmSpecs
     {
 
-        public interface scalar<W,T> : IMeasured<W>
+        public interface scalar<W,T> : ISized<W>
             where W : unmanaged, IDataWidth
             where T : unmanaged
         {

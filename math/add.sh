@@ -1,2 +1,2 @@
-export ProjectId="$(dirname "$0")"
-bash $ZDev/.scripts/add-project.sh
+source $(dirname $0)/id.sh
+bash $ZDev/.scripts/add.sh

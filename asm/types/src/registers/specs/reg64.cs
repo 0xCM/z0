@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         }
 
-        public interface reg64<F,N,S> : reg64<S>, IIndexed<N>
+        public interface reg64<F,N,S> : reg64<S>, reg<F,W64,S>, ISlotted<N>
             where F : unmanaged, reg64<F,N,S>
             where N : unmanaged, ITypeNat
             where S : unmanaged

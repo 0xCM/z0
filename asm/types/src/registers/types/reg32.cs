@@ -12,20 +12,6 @@ namespace Z0.Asm
 
     partial class Registers
     {
-        public readonly struct Reg32 : reg32<Fixed32>
-        {    
-            public const uint Width = reg32.Width;
-
-            public Fixed32 State {get;}
-        }
-
-        public readonly struct Reg32<N> : reg32<Reg32<N>, N>
-            where N : unmanaged, ITypeNat
-        {
-            public const uint Width = reg32.Width;
-
-            public Fixed32 State {get;}
-        }
 
         public readonly struct eax : reg32<eax,N0>
         {

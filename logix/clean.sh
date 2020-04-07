@@ -1,2 +1,2 @@
-export ProjectId="$(dirname "$0")"
-bash $ZDev/.scripts/build-clean.sh
+source $(dirname $0)/id.sh
+bash $ZDev/.scripts/clean.sh

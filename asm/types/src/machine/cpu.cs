@@ -18,10 +18,5 @@ namespace Z0.Asm
         
     }
 
-    public static class asm
-    {
-
-
-    }
 
 }

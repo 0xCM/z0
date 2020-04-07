@@ -22,7 +22,7 @@ namespace Z0.Asm
         /// Characterizes data of parametric width
         /// </summary>
         /// <typeparam name="W">The data width</typeparam>
-        public interface data<W> : IMeasured<W>
+        public interface data<W> : ISized<W>
             where W : unmanaged, IDataWidth
         {        
 

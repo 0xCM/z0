@@ -161,6 +161,8 @@ namespace Z0
 
         Avgz,
 
+        Avgi,
+
         AggMax,
 
         AggMin,

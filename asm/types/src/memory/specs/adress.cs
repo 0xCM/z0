@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial class AsmSpecs
     {
-        public interface address<W>
+        public interface address<W> : ISized<W>
             where W : unmanaged, IDataWidth
         {
         }

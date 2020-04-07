@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avgz]
         public static byte avgz(byte a, byte b)
             => (byte)((a & b) + ((a ^ b) >> 1));
 
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avgz]
         public static ushort avgz(ushort a, ushort b)
             => (ushort)((a & b) + ((a ^ b) >> 1));
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avgz]
         public static uint avgz(uint a, uint b)
             => (a & b) + ((a ^ b) >> 1);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avgz]
         public static ulong avgz(ulong a, ulong b)
             => (a & b) + ((a ^ b) >> 1);
 
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avgi]
         public static byte avgi(byte a, byte b)
             => (byte)((a | b) - ((a ^ b) >> 1));
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avgi]
         public static ushort avgi(ushort a, ushort b)
             => (ushort)((a | b) - ((a ^ b) >> 1));
 
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avgi]
         public static uint avgi(uint a, uint b)
             => (a | b) - ((a ^ b) >> 1);
 
@@ -87,72 +87,72 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avgi]
         public static ulong avgi(ulong a, ulong b)
             => (a | b) - ((a ^ b) >> 1);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static sbyte avg(ReadOnlySpan<sbyte> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static byte avg(ReadOnlySpan<byte> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static short avg(ReadOnlySpan<short> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static ushort avg(ReadOnlySpan<ushort> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static int avg(ReadOnlySpan<int> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static uint avg(ReadOnlySpan<uint> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static long avg(ReadOnlySpan<long> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static ulong avg(ReadOnlySpan<ulong> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static sbyte avg(ReadOnlySpan<sbyte> src)
             => avg(src,true);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static byte avg(ReadOnlySpan<byte> src)
             => avg(src,true);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static short avg(ReadOnlySpan<short> src)
             => avg(src,true);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static ushort avg(ReadOnlySpan<ushort> src)
             => avg(src,true);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static int avg(ReadOnlySpan<int> src)
             => avg(src,true);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static uint avg(ReadOnlySpan<uint> src)
             => avg(src,true);
 
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static long avg(ReadOnlySpan<long> src)
             => avg(src,true);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static ulong avg(ReadOnlySpan<ulong> src)
             => avg(src,true);
 

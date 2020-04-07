@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Negate]
         public static sbyte negate(sbyte src)
-            => (sbyte)(- src);
+            => (sbyte)(-src);
 
         /// <summary>
         /// Computes the two's complement negation of the source value
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Negate]
         public static short negate(short src)
-            => (short)(- src);
+            => (short)(-src);
 
         /// <summary>
         /// Computes the two's complement negation of the source value
@@ -59,7 +59,9 @@ namespace Z0
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
         [MethodImpl(Inline), Negate]
         public static uint negate(uint src)
-            => ~src + 1;
+            => 0 - src;
+
+            //=> ~src + 1;
 
         /// <summary>
         /// Negates the source value
@@ -76,7 +78,9 @@ namespace Z0
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
         [MethodImpl(Inline), Negate]
         public static ulong negate(ulong src)
-            => ~src + 1;
+            => 0 - src;
+            //=> ~ src + 1;
+
 
         /// <summary>
         /// Negates the source value

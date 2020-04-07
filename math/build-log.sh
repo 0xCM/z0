@@ -1,4 +1,4 @@
-export ProjectId="$(dirname "$0")"
-export Kind=test
+source $(dirname $0)/id.sh
+export Kind=src
 bash $ZDev/.scripts/build-project-log.sh
 

@@ -12,26 +12,11 @@ namespace Z0.Asm
     
     partial class Registers
     {
-        public readonly struct Reg64 : reg64<Fixed64>
-        {    
-            public const uint Width = reg64.Width;
-
-            public Fixed64 State {get;}
-        }
-
-        public readonly struct Reg64<N> : reg64<Reg64<N>, N>
-            where N : unmanaged, ITypeNat
-        {
-            public const uint Width = reg64.Width;
-
-            public Fixed64 State {get;}
-        }
-
         public readonly struct rax : reg64<rax,N0>
         {
             public const uint Width = reg64.Width;
 
-            public const int Index = 1;
+            public const int Index = 0;
 
             public S State {get;}
 
@@ -42,7 +27,7 @@ namespace Z0.Asm
         {
             public const uint Width = reg64.Width;
 
-            public const int Index = 0;
+            public const int Index = 1;
 
             public S State {get;}
 
@@ -123,7 +108,7 @@ namespace Z0.Asm
 
             public S State {get;}
 
-            public K Kind => R8;
+            public K Kind => K.R8;
         }                    
 
         public readonly struct r9 : reg64<r9,N9>

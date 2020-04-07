@@ -12,7 +12,7 @@ namespace Z0.Asm
             RegisterKind reg.Kind => RegisterKind.Zmm;
         }
 
-        public interface zmm<F,N,S> : zmm, reg<F,W512,S>, IIndexed<N> 
+        public interface zmm<F,N,S> : zmm, reg<F,W512,S>, ISlotted<N> 
             where F : struct, zmm<F,N,S>
             where N : unmanaged, ITypeNat
             where S : unmanaged

@@ -13,22 +13,7 @@ namespace Z0.Asm
     
     
     partial class Registers
-    {
-        public readonly struct Reg8 : reg8<Fixed8>
-        {    
-            public const uint Width = reg8.Width;
-
-            public Fixed8 State {get;}
-        }
-
-        public readonly struct Reg8<N> : reg8<Reg8<N>, N>
-            where N : unmanaged, ITypeNat
-        {
-            public const uint Width = reg8.Width;
-
-            public Fixed8 State {get;}
-        }
-
+    {        
         public readonly struct al : reg8<al,N0>
         {
             public const uint Width = reg8.Width;

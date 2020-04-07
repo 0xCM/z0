@@ -35,7 +35,7 @@ namespace Z0.Asm
         /// </summary>
         /// <typeparam name="W">The data width</typeparam>
         /// <typeparam name="T">The data representation type type</typeparam>
-        public interface constant<W,T> : constant<T>, IMeasured<W>
+        public interface constant<W,T> : constant<T>
             where W : unmanaged, IDataWidth
             where T : unmanaged
         {        

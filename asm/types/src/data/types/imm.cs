@@ -23,7 +23,7 @@ namespace Z0.Asm
             specs.imm<imm,W8,byte>, 
             specs.imm<imm,W16,ushort>, 
             specs.imm<imm,W32,uint>, 
-            specs.imm<imm,W32,ulong>
+            specs.imm<imm,W64,ulong>
         {
             [FieldOffset(0)]
             readonly ulong L64;

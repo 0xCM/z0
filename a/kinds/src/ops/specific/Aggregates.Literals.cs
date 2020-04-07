@@ -18,6 +18,8 @@ namespace Z0
 
         Avgz = Id.Avgz,
 
+        Avgi = Id.Avgz,
+
         AggMax = Id.AggMax,
 
         AggMin = Id.AggMin

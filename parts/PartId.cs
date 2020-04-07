@@ -17,9 +17,11 @@ public enum PartId : ulong
 
     CoreFunc = 41, CoreFuncTest = CoreFunc | Test,
 
-    Math = 45, GMath = 50, MathSvc = 51, 
+    Math = 45, MathTest = Math | Test, 
+    
+    GMath = 50, MathSvc = 51, 
 
-    MathTest = Math | Test, GMathTest = GMath | Test, 
+    GMathTest = GMath | Test, 
         
     BitSuite = 500, BitCore = 80, BitFields = 90, BitVectors = 100, VBits = 110, BitSpan = 170, BitString = 230, BitGrids = 700, BitPack = 710,
 

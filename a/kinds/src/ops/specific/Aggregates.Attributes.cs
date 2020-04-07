@@ -15,6 +15,8 @@ namespace Z0
 
     public sealed class AvgzAttribute : A { public AvgzAttribute() : base(K.Avgz) {} }
 
+    public sealed class AvgiAttribute : A { public AvgiAttribute() : base(K.Avgi) {} }
+
     public sealed class AggMaxAttribute : A { public AggMaxAttribute() : base(K.AggMax) {} }
 
     public sealed class AggMinAttribute : A { public AggMinAttribute() : base(K.AggMin) {} }

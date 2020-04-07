@@ -24,6 +24,7 @@ namespace Z0
         TypeWidth ISizedOpClass.Width => Widths.type<W>();
     }
     
+    
     /// <summary>
     /// Characterizes a width-parametric operation class that is also class-parametric
     /// </summary>

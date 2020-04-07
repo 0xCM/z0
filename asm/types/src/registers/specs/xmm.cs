@@ -18,7 +18,7 @@ namespace Z0.Asm
         
         }
 
-        public interface xmm<F,N,S> : xmm<S>, IIndexed<N> 
+        public interface xmm<F,N,S> : xmm<S>, reg<F,W128,S>, ISlotted<N> 
             where F : struct, xmm<F,N,S>
             where N : unmanaged, ITypeNat
             where S : unmanaged

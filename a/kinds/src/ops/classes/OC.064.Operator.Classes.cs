@@ -106,6 +106,5 @@ namespace Z0
 
             public TernaryOp NonGeneric => default;
         }
-
    }
 }
