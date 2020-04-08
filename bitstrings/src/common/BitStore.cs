@@ -8,9 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Core;
+    using static Seed;
     using static AsIn;
-         
+    using static BitSize;         
+    using static refs;
+    
     public static class BitStore
     {
         /// <summary>
@@ -52,7 +54,7 @@ namespace Z0
         public static ReadOnlySpan<byte> bitseq<T>(T src)
             where T : unmanaged
         {
-            var dst = new byte[bitsize<T>()];
+            var dst = new byte[measure<T>()];
             bitseq(src,dst);
             return dst;                
         }
@@ -60,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> bitseq<T>(T src, int count)
             where T : unmanaged
-                => bitseq(src).Slice(0, Math.Min(bitsize<T>(), count));
+                => bitseq(src).Slice(0, Math.Min(measure<T>(), count));
 
         [MethodImpl(Inline)]
         public static void bitseq<T>(T src, Span<byte> dst, int offset = 0)

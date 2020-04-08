@@ -10,4 +10,6 @@ namespace Z0
     using K = UnaryBitLogicKind;
 
     public sealed class NotAttribute : A { public NotAttribute() : base(K.Not) {} }
+
+    public sealed class ReverseAttribute : A { public ReverseAttribute() : base(K.Reverse) {} }
 }

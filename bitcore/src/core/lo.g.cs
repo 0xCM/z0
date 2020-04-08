@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;    
-    
+    using static Seed;
+    using static As;
 
     partial class gbits
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// Extracts the lower source bits
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lo<T>(T src)
             where T : unmanaged
         {

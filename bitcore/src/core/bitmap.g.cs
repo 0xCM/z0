@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static As;
+    using static Typed;
 
     partial class gbits
     {
@@ -19,7 +21,7 @@ namespace Z0
         /// <param name="count">The number bits to read from the source an replace in the target</param>
         /// <param name="index">The target-relative index at which to begin the overwrite</param>
         /// <typeparam name="T">The primal scalar type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T bitmap<T>(T src, T dst, byte count, byte index)
             where T : unmanaged
         {

@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
-    
+    using static Seed;
+    using static As;
+    using static Typed;
     
     partial class gbits
     {    
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="index">The index at which to begin</param>
         /// <param name="count">The number of bits to fill</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T bitfill<T>(T src, byte index, byte count)
             where T : unmanaged
                 => bitfill_u(src,index,count);

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed;    
 
     using P = parity;
 
@@ -20,7 +20,7 @@ namespace Z0
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bit parity<T>(BitVector<T> src)
             where T : unmanaged
                 => P.odd(gbits.pop(src.Scalar));
@@ -32,7 +32,7 @@ namespace Z0
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit parity(BitVector4 src)
             => P.odd(pop(src));
 
@@ -43,7 +43,7 @@ namespace Z0
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit parity(BitVector8 src)
             => P.odd(pop(src));
 
@@ -54,7 +54,7 @@ namespace Z0
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit parity(BitVector16 src)
             => P.odd(pop(src));
 
@@ -65,7 +65,7 @@ namespace Z0
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit parity(BitVector32 src)
             => P.odd(pop(src));
 
@@ -76,7 +76,7 @@ namespace Z0
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit parity(BitVector64 src)
             => P.odd(pop(src));
     }

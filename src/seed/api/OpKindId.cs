@@ -48,6 +48,8 @@ namespace Z0
         
         Not,
 
+        Reverse,
+
         Select,
 
         Inc,

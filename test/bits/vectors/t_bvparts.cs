@@ -30,9 +30,9 @@ namespace Z0
             {
                 var x = Random.BitVector(n32);
                 BitVector.partition(x,dst);
-                for(int j=0,k=0; j<28; j+=4, k++)
+                for(byte j=0,k=0; j<28; j+=4, k++)
                 {
-                    var y = (BitVector4)x[j,j+4];
+                    var y = (BitVector4)x[j,(byte)(j+4)];
                     Claim.eq(y, dst[k]);
                 }
             }         

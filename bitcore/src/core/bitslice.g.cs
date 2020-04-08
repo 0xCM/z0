@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static As;
 
     partial class gbits
     {
@@ -17,7 +18,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="start">The bit posiion within the source where extraction should begin</param>
         /// <param name="length">The number of bits that should be extracted</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T bitslice<T>(T src, byte start, byte length)
             where T : unmanaged
                 => bitslice_u(src,start,length);

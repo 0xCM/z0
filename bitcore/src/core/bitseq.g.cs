@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static refs;
+    using static Typed;
 
     partial class gbits
     {        
@@ -16,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<byte> storeseq<T>(T src)
             where T : unmanaged
                 => BitStore.bitseq(src);
@@ -26,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void storeseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
                 => BitStore.bitseq(src, dst, offset);
@@ -36,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> bitseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
         {
@@ -53,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
         public static Span<byte> bitseq<T>(T src)
             where T : unmanaged
         {

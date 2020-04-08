@@ -354,7 +354,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The position of the first bit</param>
         /// <param name="last">The position of the last bit</param>
-        public BitVector8 this[int first, int last]
+        public BitVector8 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
             get => BitVector.seg(this,first,last);

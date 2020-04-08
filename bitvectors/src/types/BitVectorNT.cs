@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;        
-    
+    using static Seed;            
+    using static CastNumeric;
 
     /// <summary>
     /// Defines a natural bitvector over a primal cell
@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// The physical width of the vector
         /// </summary>
-        public static int MaxWidth => bitsize<T>();
+        public static int MaxWidth => BitSize.measure<T>();
 
         /// <summary>
         /// The maximum arithmetic value of the vector, constrained by the natural width
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator ++(BitVector<N,T> src)
-            =>  gmath.eq(src.data,MaxValue) ? zero<T>() : gmath.inc(src.data);
+            =>  gmath.eq(src.data,MaxValue) ? Literals.zero<T>() : gmath.inc(src.data);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
@@ -266,7 +266,7 @@ namespace Z0
         public int Width
         {
             [MethodImpl(Inline)]
-            get => (int)value<N>();
+            get => (int)TypeNats.value<N>();
         }
 
         /// <summary>

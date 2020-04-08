@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
-    using static Gone2;
+    using static Seed;
+    using static Vectors;
 
     /// <summary>
     /// Defines a natural bitvector over an intrinsic vector
@@ -175,7 +175,7 @@ namespace Z0
         public int Width
         {
             [MethodImpl(Inline)]
-            get => nati<N>();
+            get => (int)TypeNats.value<N>();
         }
 
         /// <summary>

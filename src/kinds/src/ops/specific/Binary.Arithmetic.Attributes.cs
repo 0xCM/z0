@@ -9,7 +9,6 @@ namespace Z0
     using K = BinaryArithmeticKind;    
     using A = OpKindAttribute;
 
-
     public sealed class AddAttribute : A { public AddAttribute() : base(K.Add) {} }
 
     public sealed class AddSAttribute : A { public AddSAttribute() : base(K.AddS) {} }

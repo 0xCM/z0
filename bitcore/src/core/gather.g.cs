@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
  
-    using static Core;
-    
+    using static Seed;
+    using static As;
     
     partial class gbits
     {                       
@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vale</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T gather<T>(T src, T mask)
             where T : unmanaged
         {

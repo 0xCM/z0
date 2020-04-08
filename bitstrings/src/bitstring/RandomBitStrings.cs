@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Core;
+    using static Seed;
     using BS = Z0.BitString;
 
     public static class RandomBitStrings

@@ -38,7 +38,7 @@ namespace Z0
                 var y = BitString.scalar(x);
                 Claim.eq(x, y.TakeScalar<T>());
                 
-                x = gbits.rotl(x, offset);
+                x = gbits.rotl(x, (byte)offset);
                 y = y.RotL(offset);
                 
                 var z = y.TakeScalar<T>();

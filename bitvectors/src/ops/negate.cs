@@ -7,20 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed;    
 
     partial class BitVector
     {
-        /// <summary>
-        /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitVector<T> negate<T>(BitVector<T> x)
-            where T : unmanaged
-                => gmath.negate(x.Scalar);
-
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
         /// </summary>
@@ -60,5 +50,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 negate(BitVector64 x)
             => gmath.negate(x.data);
+
+        /// <summary>
+        /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static BitVector<T> negate<T>(BitVector<T> x)
+            where T : unmanaged
+                => gmath.negate(x.Scalar);
     }
 }

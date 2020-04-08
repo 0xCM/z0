@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Core;
+    using static Seed;
 
     /// <summary>
     /// Represents a sequence of bits
@@ -596,7 +596,7 @@ namespace Z0
         public T Scalar<T>(int offset = 0, int? count = null)
             where T : unmanaged
         {
-            var len = Math.Min((count == null ? (int)bitsize<T>() : count.Value), Length - offset);       
+            var len = Math.Min((count == null ? BitSize.measure<T>() : count.Value), Length - offset);       
             var bits = BitSeq.Slice(offset, len);
             return bits.TakeScalar<T>();
         }
@@ -606,7 +606,7 @@ namespace Z0
             where T : unmanaged
         {                        
             var src = data.ToReadOnlySpan();
-            var packed = PackedBits(src, offset, size<T>());
+            var packed = PackedBits(src, offset, BitSize.measure<T>());
             return packed.Length != 0 ? packed.Singleton<byte,T>() : default;
         }
 

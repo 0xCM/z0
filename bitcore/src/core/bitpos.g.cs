@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     partial class gbits
     {
@@ -16,12 +16,12 @@ namespace Z0
         /// </summary>
         /// <param name="index">The sequence-relative index of the target bit</param>
         /// <typeparam name="T">The sequence element type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitPos<T> bitpos<T>(int index)
             where T : unmanaged
                 => BitPos.FromBitIndex<T>((uint)index);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitPos<T> bitpos<T>(int index, NK<T> k)
             where T : unmanaged
                 => bitpos<T>(index);

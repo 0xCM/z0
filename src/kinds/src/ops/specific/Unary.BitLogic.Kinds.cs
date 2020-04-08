@@ -14,5 +14,7 @@ namespace Z0
     partial class OpKinds
     {
         public readonly struct Not : IUnaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Not;}}
+
+        public readonly struct Reverse : IUnaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Reverse;}}
     }
 }

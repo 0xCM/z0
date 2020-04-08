@@ -14,11 +14,22 @@ namespace Z0.Parts
 
 namespace Z0
 {
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
     [ApiHost("bits",ApiHostKind.Direct)]
     public static partial class Bits { }
 
     [ApiHost(ApiHostKind.Generic)]
-    public static partial class gbits { }
+    public static partial class gbits 
+    {
+        [MethodImpl(Inline)]
+        static int bitsize<T>()
+            where T : unmanaged
+                => BitSize.measure<T>();
+
+     }
 
     public static partial class XBits { }    
 

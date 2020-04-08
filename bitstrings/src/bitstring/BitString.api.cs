@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
+    using static refs;
 
     partial struct BitString
     {
@@ -34,7 +35,7 @@ namespace Z0
         public static ReadOnlySpan<char> bitchars<T>(in T src)
             where T : unmanaged
         {
-            var dst = new char[bitsize<T>()];
+            var dst = new char[BitSize.measure<T>()];
             bitchars(src, dst);
             return dst;
         }
@@ -48,7 +49,7 @@ namespace Z0
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
             where T : unmanaged
         {
-            var seglen = bitsize<T>();
+            var seglen = BitSize.measure<T>();
             var srclen = src.Length;
             Span<char> dst = new char[srclen * seglen];
             ref readonly var input = ref head(src);

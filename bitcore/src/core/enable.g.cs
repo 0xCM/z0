@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
-    
+    using static Seed;
+    using static As;
     
     partial class gbits
     {                       
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source segment</param>
         /// <param name="pos">The 0-based index of the bit to change</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static T enable<T>(T src, int pos)
             where T : unmanaged
         {

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Core;    
+    using static Seed;    
 
     partial class BitVector
     {
@@ -27,7 +27,7 @@ namespace Z0
             where T : unmanaged
         {
             var index = Enums.dictionary<E,T>();
-            var bitcount = maxbits ?? bitsize<T>();
+            var bitcount = maxbits ?? BitSize.measure<T>();
             var count = BitCalcs.mincells(segwidth, bitcount);
             Span<char> symbols = new char[count];
             for(int i=0, bitpos = 0; i<count; i++, bitpos += segwidth)

@@ -363,10 +363,10 @@ namespace Z0
         /// <remarks>Unfortuantely, the range spec/select syntanx [a..b] results in about 50 extra bytes
         /// of assembly (!) of the jmp/cmp/test variety. So, defining a range operator for
         /// performance-sensitive types is hard no-go </remarks>
-        public BitVector24 this[int first, int last]
+        public BitVector24 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get =>  Bits.between(data, (byte)first,(byte)last);
+            get =>  Bits.between(data, first, last);
         }
 
         [MethodImpl(Inline)]

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
+    using static Seed;
 
     public static class VectorFormatting
     {
@@ -20,7 +20,7 @@ namespace Z0
         public static string FormatBits<T>(this Vector128<T> src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged        
-                    => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);
+                    => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth ?? BitSize.measure<T>(), blocksep ,rowWidth);
         
         /// <summary>
         /// Formats vector bits
@@ -30,7 +30,7 @@ namespace Z0
         public static string FormatBits<T>(this Vector256<T> src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged        
-                    => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);        
+                    => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth ?? BitSize.measure<T>(), blocksep ,rowWidth);        
 
         /// <summary>
         /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where by default the size of each block is the bit-width of a component
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         public static string FormatBlockedBits<T>(this Vector128<T> src, int? blocksize = null, int? maxbits = null)
             where T : unmanaged        
-                => text.bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? bitsize<T>(), Chars.Space,null));
+                => text.bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? BitSize.measure<T>(), Chars.Space,null));
 
         /// <summary>
         /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where default the size of each block is the bit-width of a component
@@ -48,6 +48,6 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         public static string FormatBlockedBits<T>(this Vector256<T> src, int? blocksize = null, int? maxbits = null)
             where T : unmanaged        
-                => text.bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? bitsize<T>(), Chars.Space,null));
+                => text.bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? BitSize.measure<T>(), Chars.Space,null));
     }
 }

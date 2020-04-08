@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     partial class gbits
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T bitcopy<T>(T src, byte index, byte count, T dst)
             where T : unmanaged
         {
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref T bitcopy<T>(T src, byte index, byte count, ref T dst)
             where T : unmanaged
         {
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T bitcopy<T>(T src, byte srcidx, byte dstidx, byte count, T dst)
             where T : unmanaged
         {
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref T bitcopy<T>(T src, byte srcidx, byte dstidx, byte count, ref T dst)
             where T : unmanaged
         {

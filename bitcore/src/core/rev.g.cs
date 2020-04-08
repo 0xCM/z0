@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
  
-    using static Core;
-    
+    using static Seed;
+    using static As;
     
     partial class gbits
     {                        
@@ -17,7 +17,7 @@ namespace Z0
         /// Reverses the bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T rev<T>(T src)
             where T : unmanaged
         {

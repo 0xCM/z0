@@ -32,5 +32,7 @@ namespace Z0
         /// The unary operator that always returns true
         /// </summary>
         True = 0b11,
+
+        Reverse = (byte)OpKindId.Reverse,
     }  
 }

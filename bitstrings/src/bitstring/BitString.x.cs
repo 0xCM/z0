@@ -10,7 +10,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
-    using static Core;
+    using static Seed;
+    using static Typed;
 
     public static class BitStringX
     {

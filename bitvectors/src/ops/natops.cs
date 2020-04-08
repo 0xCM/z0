@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;    
-    using static Gone2;
 
     using P = parity;
 
@@ -25,45 +24,6 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => new BitVector<N, T>(fill);
-
-        /// <summary>
-        /// Computes the sum of two 128-bit integers
-        /// </summary>
-        /// <param name="x">The first integer, represented via paired hi/lo components</param>
-        /// <param name="y">The second integer, represented via paired hi/lo components</param>
-        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> add<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            var sum = dvec.vadd(v64u(x.data), v64u(y.data));            
-            bit carry = x.Lo > vcell(sum,0);
-            return  As.vgeneric<T>(dvec.vadd(sum, Vectors.vbroadcast(n128, (ulong)carry)));
-        }
-
-        /// <summary>
-        /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> sub<N,T>(BitVector<N,T> x, BitVector<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.sub(x.Scalar, y.Scalar);
-
-        /// <summary>
-        /// Arithmetically decrements the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> dec<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.dec(x.data);
 
         /// <summary>
         /// Computes the bitvector z := x & y from bitvectors x and y
@@ -596,7 +556,7 @@ namespace Z0
         /// <param name="s">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> rotr<N,T>(BitVector<N,T> x, int s)
+        public static BitVector<N,T> rotr<N,T>(BitVector<N,T> x, byte s)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gbits.rotr(x.Scalar, s, x.Width);
@@ -608,10 +568,10 @@ namespace Z0
         /// <param name="s">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, int s)
+        public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, byte s)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vrotrx(x.data, (byte)s);
+                => gvec.vrotrx(x.data, s);
 
         /// <summary>
         /// Creates a copy of the source vector
@@ -641,34 +601,34 @@ namespace Z0
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> seg<N,T>(BitVector<N,T> x, int first, int last)
+        public static BitVector<N,T> seg<N,T>(BitVector<N,T> x, byte first, byte last)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.between(x.data, (byte)first, (byte)last);
+                => gbits.between(x.data, first, last);
 
         /// <summary>
         /// Rotates source bits leftward
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="s">The rotation magnitude</param>
+        /// <param name="offset">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> rotl<N,T>(BitVector<N,T> x, int s)
+        public static BitVector<N,T> rotl<N,T>(BitVector<N,T> x, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.rotl(x.Scalar, s, x.Width);
+                => gbits.rotl(x.Scalar, offset, x.Width);
 
         /// <summary>
         /// Rotates source bits leftward
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="s">The rotation magnitude</param>
+        /// <param name="offset">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector128<N,T> rotl<N,T>(in BitVector128<N,T> x, int s)
+        public static BitVector128<N,T> rotl<N,T>(in BitVector128<N,T> x, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vrotlx(x.data, (byte)s);
+                => gvec.vrotlx(x.data, offset);
 
         /// <summary>
         /// Computes the parity of a natural bitvector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -728,29 +688,8 @@ namespace Z0
             where T : unmanaged
                 => gvec.vor(x.data,y.data);
  
-         /// <summary>
-        /// Computes z := x >> s for a bitvector x and shift offset s
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="s">The shift amount</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> sll<N,T>(BitVector<N,T> x, byte s)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.sll(x.Scalar,s);
  
         /// <summary>
-        /// Computes z := x >> s for a bitvector x and shift offset s
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="s">The shift amount</param>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> sll<N,T>(in BitVector128<N,T> x, byte s)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => gvec.vsllx(x.data,(byte)s);
- 
-         /// <summary>
         /// Computes the effective width of the bitvector as determined by the number of leading zero bits
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -814,27 +753,5 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gbits.pop(x.data.AsUInt64().GetElement(0)) + gbits.pop(x.data.AsUInt64().GetElement(1));
- 
-         /// <summary>
-        /// Computes z := x >> s for a bitvector x and shift offset s
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="s">The shift amount</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> srl<N,T>(BitVector<N,T> x, byte s)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.srl(x.Scalar,s);
-
-        /// <summary>
-        /// Computes z := x >> s for a bitvector x and shift offset s
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="s">The shift amount</param>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> srl<N,T>(in BitVector128<N,T> x, byte s)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => gvec.vsrlx(x.data,s); 
     }
 }

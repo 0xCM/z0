@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed;    
 
     partial class BitVector
     {
@@ -16,55 +16,55 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source bitvector</param>
         /// <param name="y">The rotation magnitude</param>
-        [MethodImpl(Inline)]
-        public static BitVector4 rotr(BitVector4 x, int s)
-            => gbits.rotr(x.data,s, x.Width);
+        [MethodImpl(Inline), Rotr]
+        public static BitVector4 rotr(BitVector4 x, byte offset)
+            => gbits.rotr(x.data,offset, x.Width);
 
         /// <summary>
         /// Computes a rightward bit rotation
         /// </summary>
         /// <param name="x">The source bitvector</param>
         /// <param name="y">The rotation magnitude</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 rotr(BitVector8 x, int s)
-            => gbits.rotr(x.data,s);
+        [MethodImpl(Inline), Rotr]
+        public static BitVector8 rotr(BitVector8 x, byte offset)
+            => gbits.rotr(x.data,offset);
             
         /// <summary>
         /// Rotates source bits rightward
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="s">The rotation magnitude</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 rotr(BitVector16 x, int s)
-            => gbits.rotr(x.data,s);
+        /// <param name="offset">The rotation magnitude</param>
+        [MethodImpl(Inline), Rotr]
+        public static BitVector16 rotr(BitVector16 x, byte offset)
+            => gbits.rotr(x.data,offset);
 
         /// <summary>
         /// Computes a rightward bit rotation
         /// </summary>
         /// <param name="x">The source bitvector</param>
         /// <param name="y">The rotation magnitude</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 rotr(BitVector32 x, int s)
-            => gbits.rotr(x.data,s);
+        [MethodImpl(Inline), Rotr]
+        public static BitVector32 rotr(BitVector32 x, byte offset)
+            => gbits.rotr(x.data,offset);
 
         /// <summary>
         /// Rotates source bits rightward
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="s">The rotation magnitude</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 rotr(BitVector64 x, int s)
-             => gbits.rotr(x.data,s);
+        /// <param name="offset">The rotation magnitude</param>
+        [MethodImpl(Inline), Rotr]
+        public static BitVector64 rotr(BitVector64 x, byte offset)
+             => gbits.rotr(x.data,offset);
 
         /// <summary>
         /// Rotates source bits rightward
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="s">The rotation magnitude</param>
+        /// <param name="offset">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> rotr<T>(BitVector<T> x, int s)
+        [MethodImpl(Inline), Rotr, Closures(UnsignedInts)]
+        public static BitVector<T> rotr<T>(BitVector<T> x, byte offset)
             where T : unmanaged
-                => gbits.rotr(x.Scalar,s);
+                => gbits.rotr(x.Scalar,offset);
     }
 }

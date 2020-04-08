@@ -282,7 +282,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
-        public BitVector<T> this[int first, int last]
+        public BitVector<T> this[byte first, byte last]
         {
             [MethodImpl(Inline)]
             get => BitVector.seg(this, first, last);

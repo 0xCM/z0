@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
     
     partial class gbits
     {    
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The left scalar</param>
         /// <param name="y">The right scalar</param>
         /// <typeparam name="T">The primal unsigned integral type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Dot, Closures(Integers)]
         public static bit dot<T>(T x, T y)
             where T : unmanaged
                 => parity.odd(pop(gmath.and(x,y)));

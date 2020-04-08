@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
-    
+    using static Seed;
+    using static As;
 
     partial class gbits
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// Disables the least set bit in the source and is logically equivalent to the composite operation (src - 1) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsboff<T>(T src)
             where T : unmanaged
         {

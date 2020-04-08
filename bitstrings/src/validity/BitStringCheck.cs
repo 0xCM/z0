@@ -7,7 +7,6 @@ namespace Z0
     using System;
         
     using static AppErrorMsg;
-    using static Core;
     
     public interface IBitStringEqualityCheck : IEqualCheck<BitString>, INotEqualCheck<BitString>
     {
