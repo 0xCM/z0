@@ -10,7 +10,18 @@ namespace Z0
     partial class XBlocks
     {
         /// <summary>
-        /// Formats a blocked sequence as a sequence of hex values
+        /// Formats blocked content as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source block</param>
+        /// <param name="sep">The character to use when separating digits</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static string FormatHex<T>(this Block8<T> src, char sep = Chars.Space, bool specifier = false)
+            where T : unmanaged
+                => src.Data.FormatHex(sep, specifier);
+
+        /// <summary>
+        /// Formats blocked content as a sequence of hex values
         /// </summary>
         /// <param name="src">The source block</param>
         /// <param name="sep">The character to use when separating digits</param>
@@ -21,7 +32,7 @@ namespace Z0
                 => src.Data.FormatHex(sep, specifier);
 
         /// <summary>
-        /// Formats a blocked sequence as a sequence of hex values
+        /// Formats blocked content as a sequence of hex values
         /// </summary>
         /// <param name="src">The source block</param>
         /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
@@ -33,7 +44,7 @@ namespace Z0
                 => src.Data.FormatHex(sep, specifier);
 
         /// <summary>
-        /// Formats a blocked sequence as a sequence of hex values
+        /// Formats blocked content as a sequence of hex values
         /// </summary>
         /// <param name="src">The source block</param>
         /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
@@ -45,7 +56,7 @@ namespace Z0
                 => src.Data.FormatHex(sep, specifier);
 
         /// <summary>
-        /// Formats a 128-bit blocked span as a sequence of hex values
+        /// Formats blocked content as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
@@ -57,7 +68,7 @@ namespace Z0
                 => src.Data.FormatHex(sep, specifier);
 
         /// <summary>
-        /// Formats a span of integral type as a sequence of hex values
+        /// Formats blocked content as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
@@ -69,7 +80,7 @@ namespace Z0
                 => src.Data.FormatHex(sep, specifier);
 
         /// <summary>
-        /// Formats a span of integral type as a sequence of hex values
+        /// Formats blocked content as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>

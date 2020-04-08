@@ -9,8 +9,8 @@ namespace Z0
 
     public sealed class BlockedAttribute : SegmentedAttribute
     {
-        public BlockedAttribute(TypeWidth width, bool sequenced, params CellWidth[] cells)
-            : base(width, sequenced, cells)
+        public BlockedAttribute(TypeWidth width, params CellWidth[] cells)
+            : base(width, false, cells)
         {
         }
     }        

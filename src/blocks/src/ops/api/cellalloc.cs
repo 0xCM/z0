@@ -12,7 +12,18 @@ namespace Z0
     partial class Blocks
     {
         /// <summary>
-        /// Allocates a 32-bit block container to cover a specified number of cells
+        /// Allocates a sequence of 8-bit blocks sufficient to cover a specified number of cells
+        /// </summary>
+        /// <param name="n">The block width selector</param>
+        /// <param name="cellcount">The number of cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [Alloc, Closures(Numeric8u)]
+        public static Block8<T> cellalloc<T>(W8 n, int cellcount)
+            where T : unmanaged        
+                => alloc<T>(n, cellcover<T>(n, cellcount));
+
+        /// <summary>
+        /// Allocates a sequence of 16-bit blocks sufficient to cover a specified number of cells
         /// </summary>
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
@@ -23,7 +34,7 @@ namespace Z0
                 => alloc<T>(n, cellcover<T>(n, cellcount));
 
         /// <summary>
-        /// Allocates a 32-bit block container to cover a specified number of cells
+        /// Allocates a sequence of 32-bit blocks sufficient to cover a specified number of cells
         /// </summary>
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
@@ -34,7 +45,7 @@ namespace Z0
                 => alloc<T>(n, cellcover<T>(n, cellcount));
 
         /// <summary>
-        /// Allocates a 32-bit block container to cover a specified number of cells
+        /// Allocates a sequence of 64-bit blocks sufficient to cover a specified number of cells
         /// </summary>
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
@@ -45,7 +56,7 @@ namespace Z0
                 => alloc<T>(n, cellcover<T>(n, cellcount));
 
         /// <summary>
-        /// Allocates a 32-bit block container to cover a specified number of cells
+        /// Allocates a sequence of 128-bit blocks sufficient to cover a specified number of cells
         /// </summary>
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
@@ -56,7 +67,7 @@ namespace Z0
                 => alloc<T>(n, cellcover<T>(n, cellcount));
 
         /// <summary>
-        /// Allocates a 32-bit block container to cover a specified number of cells
+        /// Allocates a sequence of 256-bit blocks sufficient to cover a specified number of cells
         /// </summary>
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>
@@ -67,7 +78,7 @@ namespace Z0
                 => alloc<T>(n, cellcover<T>(n, cellcount));
 
         /// <summary>
-        /// Allocates a 32-bit block container to cover a specified number of cells
+        /// Allocates a sequence of 512-bit blocks sufficient to cover a specified number of cells
         /// </summary>
         /// <param name="n">The block width selector</param>
         /// <param name="cellcount">The number of cells to cover</param>

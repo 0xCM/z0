@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
+    using static Seed;
 
     /// <summary>
     /// Defines a 256-bit bitmap over cells of unmanaged parameteric type
     /// </summary>
-    public readonly struct BitMap256<T> : IBitMap<T>
+    public readonly struct BitMap256<T> : IBitMap<BitMap256<T>,W256,T>
         where T : unmanaged
     {
         readonly BitMap Data;        
@@ -68,7 +68,7 @@ namespace Z0
         static BitMap256<T> Map256()        
         {
             const int bitcount = 256;
-            var cellwidth = bitsize<T>();
+            var cellwidth = BitSize.measure<T>();
             var cellcount = Vector256<T>.Count;
             var indices = new BitIndex[bitcount];
             for(var cell = 0u; cell < cellcount; cell++)

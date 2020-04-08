@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp8 EmitFixedBinaryOp(this IBufferToken buffer, N8 w, in ApiCode src)
+        public static BinaryOp8 EmitFixedBinaryOp(this IBufferToken buffer, N8 w, in IdentifiedCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp16 EmitFixedBinaryOp(this IBufferToken buffer, N16 w, in ApiCode src)
+        public static BinaryOp16 EmitFixedBinaryOp(this IBufferToken buffer, N16 w, in IdentifiedCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp32 EmitFixedBinaryOp(this IBufferToken buffer, N32 w, in ApiCode src)
+        public static BinaryOp32 EmitFixedBinaryOp(this IBufferToken buffer, N32 w, in IdentifiedCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp64 EmitFixedBinaryOp(this IBufferToken buffer, N64 w, in ApiCode src)
+        public static BinaryOp64 EmitFixedBinaryOp(this IBufferToken buffer, N64 w, in IdentifiedCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128 EmitFixedBinaryOp(this IBufferToken buffer, N128 w, in ApiCode src)
+        public static BinaryOp128 EmitFixedBinaryOp(this IBufferToken buffer, N128 w, in IdentifiedCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256 EmitFixedBinaryOp(this IBufferToken buffer, N256 w, in ApiCode src)
+        public static BinaryOp256 EmitFixedBinaryOp(this IBufferToken buffer, N256 w, in IdentifiedCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);  
     }
 }

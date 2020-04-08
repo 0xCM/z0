@@ -17,6 +17,17 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Load, Closures(Numeric8u)]
+        internal static Block8<T> unsafeload<T>(W8 w, Span<T> src)
+            where T : unmanaged
+                => new Block8<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Load, Closures(Numeric16u)]
         internal static Block16<T> unsafeload<T>(W16 w, Span<T> src)
             where T : unmanaged

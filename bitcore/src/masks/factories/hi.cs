@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static CastNumeric;
     
     partial class BitMask
     {           
@@ -28,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T hi<T>(int n, T t = default)
             where T : unmanaged
-            => convert<T>(lo64(n) << (bitsize<T>() - n));
+            => convert<T>(lo64(n) << (BitSize.measure<T>() - n));
 
         /// <summary>
         /// Produces a sequence of N enabled hi bits

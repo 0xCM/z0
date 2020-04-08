@@ -22,13 +22,17 @@ namespace Z0
 
         public readonly BinaryCode Code;
 
-        public ApiCode ApiCode
+        public OpKindId? KindId {get;}
+
+        [MethodImpl(Inline)]
+        public static ApiMemberCode Define(ApiStatelessMember member, BinaryCode code)
+            => new ApiMemberCode(member, code);
+
+        public IdentifiedCode ApiCode
         {
             [MethodImpl(Inline)]
-            get => ApiCode.Define(Id,Code);
+            get => IdentifiedCode.Define(Id,Code);
         }
-
-        public OpKindId? KindId {get;}
 
         public ApiHostUri HostUri => Member.HostUri;
 
@@ -44,11 +48,7 @@ namespace Z0
             => Empty;
 
         [MethodImpl(Inline)]
-        public static ApiMemberCode Define(ApiStatelessMember member, BinaryCode code)
-            => new ApiMemberCode(member, code);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiCode(ApiMemberCode src)
+        public static implicit operator IdentifiedCode(ApiMemberCode src)
             => src.ApiCode;
 
         [MethodImpl(Inline)]
@@ -70,6 +70,7 @@ namespace Z0
 
         public string Format(int uripad)
             => text.concat(Member.Uri.Format().PadRight(uripad), Code.Format());
+
         public string Format()
             => Format(20);
 

@@ -5,12 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Text;
-    //using Iced.Intel.InstructionInfoInternal;
-
 
 	/// <summary>
 	/// Contains information about an instruction, eg. read/written registers, read/written RFLAGS bits, CPUID feature bit, etc

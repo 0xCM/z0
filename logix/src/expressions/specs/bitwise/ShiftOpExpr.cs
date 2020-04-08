@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Seed;
 
     /// <summary>
     /// Defines a bitwise shift operator expression
@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public ShiftOpKind OpKind {get;}
+        public BitShiftKind OpKind {get;}
 
         /// <summary>
         /// The operand
@@ -31,7 +31,7 @@ namespace Z0.Logix
         public IExpr<byte> Offset {get;}
 
         [MethodImpl(Inline)]
-        public ShiftOpExpr(ShiftOpKind op, IExpr<T> subject, IExpr<byte> offset)
+        public ShiftOpExpr(BitShiftKind op, IExpr<T> subject, IExpr<byte> offset)
         {
             this.OpKind = op;
             this.Subject = subject;

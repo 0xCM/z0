@@ -17,13 +17,26 @@ namespace Z0
             where T : unmanaged
                 => Unsafe.As<T, S>(ref dst) = src;
 
+
         /// <summary>
         /// Stores the source value to the leading target cell blocks
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly Block64<byte> store(ulong src, in Block64<byte> dst)
+        public static ref readonly Block8<byte> store(ulong src, in Block8<byte> dst)
+        {         
+            store(in src, ref dst.Head);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Stores the source value to the leading target cell blocks
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static ref readonly Block16<byte> store(ulong src, in Block16<byte> dst)
         {         
             store(in src, ref dst.Head);
             return ref dst;
@@ -47,7 +60,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly Block16<byte> store(ulong src, in Block16<byte> dst)
+        public static ref readonly Block64<byte> store(ulong src, in Block64<byte> dst)
         {         
             store(in src, ref dst.Head);
             return ref dst;

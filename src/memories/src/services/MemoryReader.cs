@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static refs;
+    using static Memories;
 
     public readonly struct MemoryReader : IMemoryReader
     {

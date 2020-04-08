@@ -14,6 +14,7 @@ namespace Z0.Asm
     /// </summary>
     public struct AsmMemInfo : IFormattable<AsmMemInfo>
     {      
+        [MethodImpl(Inline)]
         public static AsmMemInfo Init(MemorySize size, string sizefmt)
         {
             var dst = default(AsmMemInfo);

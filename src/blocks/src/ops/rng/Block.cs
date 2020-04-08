@@ -18,6 +18,17 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
+        public static Block8<T> Block<T>(this IPolyrand random, W8 w, T t = default)
+            where T : unmanaged
+                => random.Stream<T>().ToSpan(B.cellblocks<T>(w,1)).Blocked(w); 
+
+        /// <summary>
+        /// Allocates and fills a single 16-bit block
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The block width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The block cell type</typeparam>
         public static Block16<T> Block<T>(this IPolyrand random, W16 w, T t = default)
             where T : unmanaged
                 => random.Stream<T>().ToSpan(B.cellblocks<T>(w,1)).Blocked(w); 

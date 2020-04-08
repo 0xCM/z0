@@ -139,13 +139,13 @@ namespace Z0.Asm
         {
             var dataline = Comment(code.Id);
 
-            dataline += text.bracket(code.Location.Length);
+            //dataline += text.bracket(code.Location.Length);
 
             if(Config.EmitFunctionHeaderEncoding)
             {
                 var formatter = HexFormat.formatter<byte>();
                 var formatted = formatter.Format(code.Data, Config.FunctionHeaderEncodingFormat);                
-                dataline += text.concat(text.spaced(Chars.Eq), text.embrace(formatted));
+                dataline += text.concat(text.spaced(Chars.Eq), "new byte", text.bracket(code.Location.Length), text.embrace(formatted));
             }
             return dataline;
         }

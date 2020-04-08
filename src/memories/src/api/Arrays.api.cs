@@ -11,13 +11,14 @@ namespace Z0
 
     using static Seed;
     
+    [ApiHost]
     public static class Arrays
     {    
         /// <summary>
         /// Returns an empty array
         /// </summary>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] empty<T>() => new T[]{};
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The array to test</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bool empty<T>(T[] src)
             =>  src == null || src.Length == 0;
 
@@ -34,6 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="length">The array length</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(UnsignedInts)]
         public static T[] alloc<T>(int length)
             => new T[length];
 
@@ -43,17 +45,20 @@ namespace Z0
         /// <param name="length">The array length</param>
         /// <param name="src">The value with which to populate the array</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(UnsignedInts)]
         public static T[] alloc<T>(int length, T src)
         {
             var dst = alloc<T>(length);
             return fill(dst,src);
         }            
 
+        [Op, Closures(UnsignedInts)]
         public static T[] from<T>(IEnumerable<T> src)
             => src.ToArray();
 
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] from<T>(params T[] src)
-            => src.ToArray();
+            => src;
 
         /// <summary>
         /// Fills an array, in-place, with a specified value
@@ -61,7 +66,7 @@ namespace Z0
         /// <param name="dst">The target array</param>
         /// <param name="dst">The source value</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] fill<T>(T[] dst, T src)
         {
             Array.Fill(dst, src);
@@ -73,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The source array</param>
         /// <typeparam name="T">The array element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] clear<T>(T[] dst)
         {
             if(dst != null)
@@ -87,6 +92,7 @@ namespace Z0
         /// <param name="value">The value to replicate</param>
         /// <param name="count">The number of replicants</param>
         /// <typeparam name="T">The replicant type</typeparam>
+        [Op, Closures(UnsignedInts)]
         public static T[] replicate<T>(T value, int count)
         {
             var dst = alloc<T>((int)count);
@@ -100,12 +106,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] reverse<T>(T[] src)
         {
             Array.Reverse(src);
             return src;        
         }
 
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void copy<T>(T[] src, T[] dst)
             => Array.Copy(src,dst, src.Length);
 
@@ -115,6 +123,7 @@ namespace Z0
         /// <param name="first">The first array of bytes</param>
         /// <param name="second">The second array of bytes</param>
         /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
+        [MethodImpl(Inline), Op]
         public static byte[] concat(byte[] first, byte[] second)
         {
             byte[] ret = new byte[first.Length + second.Length];
@@ -154,6 +163,7 @@ namespace Z0
         /// Concatentates a parameter array of byte arrays
         /// </summary>
         /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
+        [Op]
         public static byte[] concat(params byte[][] src)
         {
             byte[] ret = new byte[src.Sum(x => x.Length)];
@@ -171,6 +181,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source arrays</param>
         /// <remarks>See https://stackoverflow.com/questions/415291/best-way-to-combine-two-or-more-byte-arrays-in-c-sharp</remarks>
+        [Op]
         public static byte[] concat(IEnumerable<byte[]> src)
         {
             byte[] ret = new byte[src.Sum(x => x.Length)];
@@ -183,6 +194,7 @@ namespace Z0
             return ret;
         }
 
+        [Op, Closures(UnsignedInts)]
         public static IEnumerable<T> singletons<T>(params IEnumerable<T>[] src)
             where T : unmanaged
                 => src.SelectMany(x => x);
@@ -193,6 +205,7 @@ namespace Z0
         /// <param name="src">The source array</param>
         /// <param name="indices">The indices that define the values to be extracted from the source</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(UnsignedInts)]
         public static T[] indexed<T>(T[] src, int[] indices)
         {
             var dst = new T[indices.Length];

@@ -12,7 +12,27 @@ namespace Z0
     partial class Blocks
     {
         /// <summary>
-        /// Loads 32-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
+        /// Loads a sequence of 16-bit blocks from an unblocked span, reallocating if the source span isn't properly blocked
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The data type</typeparam>
+        /// <remarks>The use of this method is discouraged</remarks>
+        public static Block8<T> safeload<T>(W8 w, Span<T> src)
+            where T : unmanaged
+        {                    
+            var bz = blockcount<T>(w, src.Length, out int remainder);
+            if(remainder == 0)
+                return new Block8<T>(src);
+            else
+            {
+                var dst = alloc<T>(w, bz + 1);
+                src.CopyTo(dst);
+                return dst;
+            }
+        }
+
+        /// <summary>
+        /// Loads a sequence of 16-bit blocks from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The data type</typeparam>

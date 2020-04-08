@@ -28,6 +28,8 @@ namespace Z0
                 return some(EnumIdentity.Define(arg).AsTypeIdentity());
             else if(arg.IsSegmented())
                 return SegmentedId(arg);
+            else if(arg.IsArray)
+                return ArrayId(arg);
             else if(SpanTypes.IsSystemSpan(arg))
                 return SystemSpanId(arg);
             else if(NatSpan.test(arg))
@@ -59,14 +61,6 @@ namespace Z0
 
         static TypeIdentity DoDivination(Type arg)
             => default(TypeIdentityDiviner).DivineIdentity(arg);        
-
-        /// <summary>
-        /// Returns true if the source type is intrinsic or blocked
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        static bool IsSegmented(Type t)
-            => t.IsBlocked() || t.IsVector();
 
         static TypeIdentity PointerId(Type arg)
             => TypeIdentity.Define(text.concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));    
@@ -112,7 +106,19 @@ namespace Z0
             else
                 return none<TypeIdentity>();
         }
-                                
+
+        static Option<TypeIdentity> ArrayId(Type arg)
+        {
+            if(arg.IsArray)
+            {
+                var cellType = arg.GetElementType();
+                var cellId = DoDivination(cellType);
+                return TypeIdentity.Define(text.concat(IDI.Array, cellId));
+            }
+            else
+                return none<TypeIdentity>();
+        }
+
         /// <summary>
         /// Defines an identity for a type-natural span type
         /// </summary>

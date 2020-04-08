@@ -6,7 +6,11 @@ namespace Z0
 {
     using System;
     using System.Security;
-    
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate ref readonly Block8<T> BinaryBlockedOp8<T>(in Block8<T> a, in Block8<T> b, in Block8<T> dst)
+        where T : unmanaged;
+
     [SuppressUnmanagedCodeSecurity]
     public delegate ref readonly Block16<T> BinaryBlockedOp16<T>(in Block16<T> a, in Block16<T> b, in Block16<T> dst)
         where T : unmanaged;

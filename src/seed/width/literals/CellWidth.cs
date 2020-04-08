@@ -40,8 +40,28 @@ namespace Z0
         W64 = W.W64,
 
         /// <summary>
-        /// The widths of primal numeric cells 
+        /// Indicates a bit-width of 128
+        /// </summary>
+        W128 = W.W128,
+
+        /// <summary>
+        /// Indicates a bit-width of 256
+        /// </summary>
+        W256 = W.W256,
+
+        /// <summary>
+        /// Indicates a bit-width of 512
+        /// </summary>
+        W512 = W.W512,
+
+        /// <summary>
+        /// Identifies the widths of primal numeric cells 
         /// </summary>
         Numeric =  W8 | W16 | W32 | W64,    
+
+        /// <summary>
+        /// Identifies the widths of vectors, themselves considered as cells 
+        /// </summary>
+        Vector = W128 | W256 | W512
     }
 }

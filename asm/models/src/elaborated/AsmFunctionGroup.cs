@@ -7,22 +7,26 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
+    using static Memories;
+
     /// <summary>
     /// Defines a group of assembly functions related by an operation identity
     /// </summary>
     public readonly struct AsmFunctionGroup
     {        
+        [MethodImpl(Inline)]
         public static AsmFunctionGroup Define(OpIdentity id, AsmFunction[] members)
         {            
-            if(members.Length == 0)
-                AppErrors.ThrowFeatureUnsupported($"{id}: Empty groups are disallowed");            
-            
+            require(members.Length != 0, $"{id}: Empty groups are disallowed");            
             return new AsmFunctionGroup(id, members);
         }
-
+        
+        [MethodImpl(Inline)]
         public static AsmFunctionGroup Define(GenericOpIdentity id, AsmFunction[] members)
             => Define(id.Generialize(), members);
 
+        [MethodImpl(Inline)]
         AsmFunctionGroup(OpIdentity id, AsmFunction[] members)
         {
             this.Id = id;

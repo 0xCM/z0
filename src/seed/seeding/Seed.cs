@@ -60,6 +60,7 @@ namespace Z0
 
         public const NumericKind Numeric32x64 = NumericKind.Width32 | NumericKind.Width64;
 
+
         [MethodImpl(Inline)]
         internal static IEnumerable<T> seq<T>(params T[] src)
             => src;

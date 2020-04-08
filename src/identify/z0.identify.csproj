@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Typed)" />
     <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(Code)" />
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Kinds)" />
   </ItemGroup>

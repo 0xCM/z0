@@ -11,7 +11,7 @@ namespace Z0
     using System.Buffers;
 
     using static Seed;
-    using static refs;
+    using static Memories;
 
     [ApiHost]
     public static unsafe class memory

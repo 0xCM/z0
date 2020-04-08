@@ -11,6 +11,43 @@ namespace Z0
     partial class RandomBlocks
     {
         /// <summary>
+        /// Allocates and fills specified number of 8-bit blocks
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The block width selector</param>
+        /// <param name="count">The number of blocks to allocate and fill</param>
+        /// <param name="domain">An optional domain to which values are constrained</param>
+        /// <param name="filter">An optional filter that refines the domain</param>
+        /// <typeparam name="T">The primal random value type</typeparam>
+        public static Block8<T> Blocks<T>(this IPolyrand random, W8 w, int count, Interval<T> domain, Func<T,bool> filter)
+            where T : unmanaged
+                => random.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,count)).Blocked(w); 
+
+        /// <summary>
+        /// Allocates and fills specified number of 8-bit blocks
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The block width selector</param>
+        /// <param name="count">The number of blocks to allocate and fill</param>
+        /// <param name="filter">An optional filter that refines the domain</param>
+        /// <typeparam name="T">The primal random value type</typeparam>
+        public static Block8<T> Blocks<T>(this IPolyrand random, W8 w, int count, T min, T max)
+            where T : unmanaged
+                => random.Stream<T>((min,max)).ToSpan(B.cellblocks<T>(w,count)).Blocked(w); 
+
+        /// <summary>
+        /// Allocates and fills a specified number of 16-bit blocks
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The block width selector</param>
+        /// <param name="count">The number of blocks to allocate and fill</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The block cell type</typeparam>
+        public static Block8<T> Blocks<T>(this IPolyrand random, W8 w, int count, T t = default)
+            where T : unmanaged
+                => random.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w); 
+
+        /// <summary>
         /// Allocates and fills specified number of 16-bit blocks
         /// </summary>
         /// <param name="random">The random source</param>
@@ -36,7 +73,7 @@ namespace Z0
                 => random.Stream<T>((min,max)).ToSpan(B.cellblocks<T>(w,count)).Blocked(w); 
 
         /// <summary>
-        /// Allocates and fills a specified number of 128-bit blocks
+        /// Allocates and fills a specified number of 16-bit blocks
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="w">The block width selector</param>

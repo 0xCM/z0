@@ -6,17 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Seed;
     using static AsIn;
-    using static As;
-    using static refs;
+    using static Memories;
     using static Stacked;
 
     partial class Stacks
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.U8 | NumericKind.U16 | NumericKind.U32)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16x32)]
         public static MemStack32 init<T>(W32 w, in T src)
             where T : unmanaged
         {
@@ -25,7 +23,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static MemStack64 init<T>(W64 w, in T src)
             where T : unmanaged
         {
@@ -34,7 +32,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static MemStack128 init<T>(W128 w, in T src)
             where T : unmanaged
         {
@@ -47,7 +45,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static MemStack256 init<T>(W256 w, in T src)
             where T : unmanaged
         {
@@ -62,7 +60,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static MemStack512 init<T>(W512 w, in T src)
             where T : unmanaged
         {

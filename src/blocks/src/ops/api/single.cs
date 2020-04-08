@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block16<T> single<T>(W16 w, T t = default)
             where T : unmanaged        
-                => alloc<T>(w,1);
+                => new Block16<T>(t);
 
         /// <summary>
         /// Allocates a single 32-bit block
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block32<T> single<T>(W32 w, T t = default)
             where T : unmanaged        
-                => alloc<T>(w,1);
+                => new Block32<T>(t);
 
         /// <summary>
         /// Allocates a single 64-bit block
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block64<T> single<T>(W64 w, T t = default)
             where T : unmanaged        
-                => alloc<T>(w,1);
+                => new Block64<T>(t);
 
         /// <summary>
         /// Allocates a single 128-bit block
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<T> single<T>(W128 w, T t = default)
             where T : unmanaged        
-                => alloc<T>(w,1);
+                => new Block128<T>(t);
 
         /// <summary>
         /// Allocates a single 256-bit block
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block256<T> single<T>(W256 w, T t = default)
             where T : unmanaged        
-                => alloc<T>(w,1);
+                => new Block256<T>(t);
 
         /// <summary>
         /// Allocates a single 512-bit block
@@ -75,7 +75,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block512<T> single<T>(W512 w, T t = default)
             where T : unmanaged        
-                => alloc<T>(w,1);  
+                => new Block512<T>(t);
+
+        /// <summary>
+        /// Loads a single 16-bit block from the leading elements of a source span (unchecked)
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block8<T> single<T>(W8 w, Span<T> src)
+            where T : unmanaged        
+                => unsafeload(w, src.Slice(0, length<T>(w)));
 
         /// <summary>
         /// Loads a single 16-bit block from the leading elements of a source span (unchecked)

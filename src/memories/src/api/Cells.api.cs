@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Seed;
-    using static As;
+    using static Memories;
 
     [ApiHost]
     public static class Cells

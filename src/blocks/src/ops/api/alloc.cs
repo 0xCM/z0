@@ -12,6 +12,17 @@ namespace Z0
     partial class Blocks
     {
         /// <summary>
+        /// Allocates a specified number of 8-bit blocks, filled with an optional pattern
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="blocks">The block allocation count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [Alloc, Closures(Numeric16u)]
+        public static Block8<T> alloc<T>(W8 w, int blocks, T t = default)
+            where T : unmanaged        
+                => new Block8<T>(new T[blocks * length<T>(w)]);
+
+        /// <summary>
         /// Allocates a specified number of 16-bit blocks, filled with an optional pattern
         /// </summary>
         /// <param name="w">The block width selector</param>

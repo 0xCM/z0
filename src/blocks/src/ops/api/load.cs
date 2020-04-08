@@ -12,6 +12,23 @@ namespace Z0
     partial class Blocks
     {
         /// <summary>
+        /// Loads 8-bit segments from a span, raising an error if said source does not evenly partition
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block8<T> load<T>(W8 w, Span<T> src, int offset = 0)
+            where T : unmanaged
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                AppErrors.ThrowBadSize(w, src.Length - offset);      
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
+
+        /// <summary>
         /// Loads 16-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
         /// <param name="w">The block width selector</param>

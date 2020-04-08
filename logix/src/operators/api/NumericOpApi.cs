@@ -221,29 +221,29 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static T eval<T>(ShiftOpKind kind, T a, byte count)
+        public static T eval<T>(BitShiftKind kind, T a, byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKind.Sll: return sll(a, count);
-                case ShiftOpKind.Srl: return srl(a, count);
-                case ShiftOpKind.Rotl: return rotl(a, count);
-                case ShiftOpKind.Rotr: return rotr(a, count);
+                case BitShiftKind.Sll: return sll(a, count);
+                case BitShiftKind.Srl: return srl(a, count);
+                case BitShiftKind.Rotl: return rotl(a, count);
+                case BitShiftKind.Rotr: return rotr(a, count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
             
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<T> lookup<T>(ShiftOpKind kind)
+        public static Shifter<T> lookup<T>(BitShiftKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ShiftOpKind.Sll: return sll;
-                case ShiftOpKind.Srl: return srl;
-                case ShiftOpKind.Rotl: return rotl;
-                case ShiftOpKind.Rotr: return rotr;
+                case BitShiftKind.Sll: return sll;
+                case BitShiftKind.Srl: return srl;
+                case BitShiftKind.Rotl: return rotl;
+                case BitShiftKind.Rotr: return rotr;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

@@ -12,6 +12,22 @@ namespace Z0
     partial class Blocks
     {
         /// <summary>
+        /// Creates a sequence of 8-bit blocks from a parameter array and raises an error if the data source is not block-aligned
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Load, Closures(Numeric16u)]
+        public static Block16<T> parts<T>(W8 w, params T[] src)
+            where T : unmanaged        
+        {
+            if(!aligned<T>(w,src.Length))
+                AppErrors.ThrowBadSize(w, src.Length);      
+            
+            return new Block16<T>(src);
+        }
+
+        /// <summary>
         /// Creates 16-bit blocked container from a parameter array and raises an error if the data source is not block-aligned
         /// </summary>
         /// <param name="w">The block width selector</param>

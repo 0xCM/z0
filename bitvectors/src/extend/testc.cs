@@ -16,28 +16,28 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static bit TestC(this BitVector8 src)
-            => (byte.MaxValue & src.data) == byte.MaxValue;
+            => BitVector.testc(src);
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
         [MethodImpl(Inline)]
         public static bit TestC(this BitVector16 src)
-            => (ushort.MaxValue & src.data) == ushort.MaxValue;
+            => BitVector.testc(src);
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
         [MethodImpl(Inline)]
         public static bit TestC(this BitVector32 src)
-            => (uint.MaxValue & src.data) == uint.MaxValue;
+            => BitVector.testc(src);
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
         [MethodImpl(Inline)]
         public static bit TestC(this BitVector64 src)
-            => (ulong.MaxValue & src.data) == ulong.MaxValue;
+            => BitVector.testc(src);
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
@@ -45,21 +45,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit TestC<T>(this BitVector<T> src)
             where T : unmanaged
-                => gmath.eq(gmath.and(maxval<T>(), src.data), maxval<T>());
+                => BitVector.testc(src);
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
         [MethodImpl(Inline)]
-        public static bit TestC<N,T>(this BitVector<N,T> src, N n = default)
+        public static bit TestC<N,T>(this BitVector<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.eq(gmath.and(maxval<T>(), src.data), maxval<T>());
+                => BitVector.testc(src);
 
         [MethodImpl(Inline)]
         public static bit TestC<N,T>(this BitVector128<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vtestc(src.data);
+                => BitVector.testc(src);
     }
 }

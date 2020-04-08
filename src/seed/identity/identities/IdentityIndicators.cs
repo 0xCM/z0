@@ -74,12 +74,12 @@ namespace Z0
         /// <summary>
         /// Opens a value parameter list
         /// </summary>
-        public const char ArgsOpen = SymNot.Up;
+        public const char ArgsOpen = SymNot.Circle;
 
         /// <summary>
         /// Closes a value parameter list
         /// </summary>
-        public const char ArgsClose = SymNot.Down;
+        public const char ArgsClose = SymNot.Circle;
         
         /// <summary>
         /// Opens a type argument list
@@ -120,6 +120,11 @@ namespace Z0
         /// Indicates a span
         /// </summary>
         public const string Span = "span";
+
+        /// <summary>
+        /// Indicates an array
+        /// </summary>
+        public const string Array = "arr";
 
         /// <summary>
         /// Indicates an unmodifiable (readonly, immutable, etc) span

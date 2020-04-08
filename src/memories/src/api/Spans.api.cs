@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Memories;
+    using static Seed;
 
     [ApiHost]
     public static class Spans
@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T head<T>(Span<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T head<T>(Span<T> src, int offset)
             => ref Unsafe.Add(ref head(src), offset);        
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T head<T>(ReadOnlySpan<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
             where T : unmanaged
                 => ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="bytes">The number of elements to advance</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T skip<T>(Span<T> src, int count)
             => ref seek(ref head(src), count);
 
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="count">The number of elements to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
             => ref skip(in head(src), count);
 
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="count">The number of 64-bit segments to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref ulong seek64<T>(Span<T> src, int count)
             => ref Unsafe.Add(ref Unsafe.As<T,ulong>(ref head(src)), count);
 
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="bytes">The number of elements to advance</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T seek<T>(Span<T> src, int count)
             => ref Unsafe.Add(ref head(src), count);
 
@@ -97,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ref T head<T>(T[] src)
             => ref spanhead<T>(src);
 
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="count">The number of source cells to read</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> view<T>(in T src, int count)
             => MemoryMarshal.CreateReadOnlySpan(ref Unsafe.AsRef(in src), count);
 
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="count">The number of source cells to read</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<T> edit<T>(ref T src, int count)
             => MemoryMarshal.CreateSpan(ref src, count);
 
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="pSrc">The memory source</param>
         /// <param name="size">The number of bytes to cover</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> cover<T>(T* pSrc, int size)
             where T : unmanaged
                 => new Span<T>(pSrc, size);

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static refs;
+    using static Memories;
 
     [ApiHost,SuppressUnmanagedCodeSecurity]
     public static unsafe class Buffers

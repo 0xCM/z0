@@ -17,6 +17,16 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
+        public static Block8<T> Blocked<T>(this Span<T> src, W8 w)
+             where T : unmanaged
+                => Blocks.load(w,src);
+
+        /// <summary>
+        /// Constructs a 32-bit blocked span from an unblocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
         public static Block16<T> Blocked<T>(this Span<T> src, W16 w)
              where T : unmanaged
                 => Blocks.load(w,src);

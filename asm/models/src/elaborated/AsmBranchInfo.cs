@@ -40,6 +40,5 @@ namespace Z0.Asm
             this.TargetAddress = target;
             this.BaseAddress = @base;
         }
-
     }
 }

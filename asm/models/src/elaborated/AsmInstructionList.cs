@@ -26,25 +26,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator Instruction[](AsmInstructionList src)
             => src.Instructions;
-
-        // [MethodImpl(Inline)]
-        // public static AsmInstructionList Create(Instruction[] src)
-        //     => new AsmInstructionList(src);
-         
-        // [MethodImpl(Inline)]
-        // public static AsmInstructionList Create(Instruction[] src, byte[] data)
-        //     => new AsmInstructionList(src, data);
          
         [MethodImpl(Inline)]
         public static AsmInstructionList Create(Instruction[] src, MemoryExtract data)
             => new AsmInstructionList(src, data);
-
-        // [MethodImpl(Inline)]
-        // AsmInstructionList(Instruction[] instructions)
-        // {
-        //     this.Instructions = instructions;
-        //     this.EncodedBytes = EncodedData.Empty;
-        // }
 
         [MethodImpl(Inline)]
         AsmInstructionList(Instruction[] instructions, MemoryExtract data)
@@ -53,15 +38,6 @@ namespace Z0.Asm
             this.EncodedBytes = data;
         }
 
-        // [MethodImpl(Inline)]
-        // AsmInstructionList(Instruction[] instructions, byte[] data)
-        // {
-        //     this.Instructions = instructions;
-        //     this.EncodedBytes =  
-        //         instructions.Length != 0 ?  
-        //         EncodedData.Define(instructions[0].IP, data) 
-        //         : EncodedData.Empty;
-        // }
         public Instruction this[int index] 
         {
             [MethodImpl(Inline)]

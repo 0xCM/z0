@@ -12,7 +12,19 @@ namespace Z0
     partial class Blocks
     {
         /// <summary>
-        /// Allocates the minimum number of blocks required to block-align tabular data in 32-bit blocks
+        /// Allocates the minimum number of blocks required to block-align tabular data in 8-bit blocks
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="m">The row count</param>
+        /// <param name="n">The col count</param>
+        /// <typeparam name="T">The storage cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Numeric8u)]
+        public static Block8<T> rectangle<T>(W8 w, int m, int n)
+            where T : unmanaged
+                => alloc<T>(w, cellcover<T>(w,  m*n));
+
+        /// <summary>
+        /// Allocates the minimum number of blocks required to block-align tabular data in 16-bit blocks
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <param name="m">The row count</param>

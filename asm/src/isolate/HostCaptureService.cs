@@ -114,7 +114,7 @@ namespace Z0.Asm
             var path = Paths.DecodedPath(host.Path);
             var decoder = Context.AsmFunctionDecoder();
             var functions = new AsmFunction[captured.RecordCount];
-            using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
+            using var dst = Context.AsmWriter(path, Context.AsmFormat.WithSectionDelimiter());            
             for(var i=0; i< captured.RecordCount; i++)
             {
                 var record = parsed[i];

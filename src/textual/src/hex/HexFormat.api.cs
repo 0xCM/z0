@@ -27,6 +27,15 @@ namespace Z0
             where T : unmanaged
                 => HexFormat.formatter<T>().Format(src, HexFormatConfig.HexData);
 
+        /// <summary>
+        /// Formats a numeric array as hex data
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        public static string data<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => HexFormat.formatter<T>().Format(src, HexFormatConfig.HexData);
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string scalar<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged

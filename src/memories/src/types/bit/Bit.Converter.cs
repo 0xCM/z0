@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Seed;
-    using static As;
+    using static Memories;
     using static Cast;
 
     /// <summary>

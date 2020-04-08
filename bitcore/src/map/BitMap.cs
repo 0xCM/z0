@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Core;
+    using static Seed;
 
     public readonly struct BitMap : IBitMap
     {
@@ -24,7 +24,7 @@ namespace Z0
         public static BitMap<T> FromCells<T>(int cellcount)
             where T : unmanaged
         {
-            var cellwidth = bitsize<T>();
+            var cellwidth = BitSize.measure<T>();
             var bits = cellcount * cellwidth;
             var indices = new BitIndex[bits];
             for(var cell=0u; cell< cellcount; cell++)
@@ -42,7 +42,7 @@ namespace Z0
         public static BitMap<T> FromBits<T>(BitSize bitcount)
             where T : unmanaged
         {
-            var cellwidth = bitsize<T>();
+            var cellwidth = BitSize.measure<T>();
             var q = Math.DivRem(bitcount,cellwidth, out int r);
             var cellcount = r == 0 ? q : q + 1;
             var indices = new BitIndex[bitcount];

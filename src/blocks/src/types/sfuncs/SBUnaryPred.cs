@@ -7,6 +7,13 @@ namespace Z0
     using System;
     using System.Security;
 
+   [SuppressUnmanagedCodeSecurity]
+    public interface ISBUnaryPred8Api<T> : ISBOpApi<W8,T>
+        where T : unmanaged
+    {
+        Span<bit> Invoke(in Block8<T> src, Span<bit> dst);
+    }
+
     [SuppressUnmanagedCodeSecurity]
     public interface ISBUnaryPred16Api<T> : ISBOpApi<W16,T>
         where T : unmanaged

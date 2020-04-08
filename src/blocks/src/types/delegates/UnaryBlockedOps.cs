@@ -8,6 +8,10 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
+    public delegate ref readonly Block8<T> UnaryBlockedOp8<T>(in Block8<T> src, in Block8<T> dst)
+        where T : unmanaged;
+
+    [SuppressUnmanagedCodeSecurity]
     public delegate ref readonly Block16<T> UnaryBlockedOp16<T>(in Block16<T> src, in Block16<T> dst)
         where T : unmanaged;
 

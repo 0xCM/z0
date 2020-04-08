@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
+    using static Seed;
 
     /// <summary>
     /// Defines a 128-bit bitmap over cells of unmanaged parameteric type
     /// </summary>
-    public readonly struct BitMap128<T> : IBitMap<T>
+    public readonly struct BitMap128<T> : IBitMap<BitMap128<T>,W128,T>
         where T : unmanaged
     {
         readonly BitMap Data;        
@@ -83,7 +83,7 @@ namespace Z0
         static BitMap128<T> Create()        
         {
             const int bitcount = 128;
-            var cellwidth = bitsize<T>();
+            var cellwidth = BitSize.measure<T>();
             var cellcount = Vector128<T>.Count;
             var indices = new BitIndex[bitcount];
             for(var cell = 0u; cell < cellcount; cell++)

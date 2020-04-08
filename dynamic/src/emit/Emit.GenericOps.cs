@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="buffer">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static UnaryOp<T> EmitUnaryOp<T>(this IBufferToken buffer, in ApiCode src)
+        public static UnaryOp<T> EmitUnaryOp<T>(this IBufferToken buffer, in IdentifiedCode src)
             where T : unmanaged
                 => buffer.Load(src.BinaryCode).EmitUnaryOp<T>(src.Id);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="buffer">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, in ApiCode src)
+        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, in IdentifiedCode src)
             where T : unmanaged
                 => buffer.Load(src.BinaryCode).EmitBinaryOp<T>(src.Id);
 
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="buffer">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static TernaryOp<T> EmitTernaryOp<T>(this IBufferToken buffer, in ApiCode src)
+        public static TernaryOp<T> EmitTernaryOp<T>(this IBufferToken buffer, in IdentifiedCode src)
             where T : unmanaged
                 => buffer.Load(src.BinaryCode).EmitTernaryOp<T>(src.Id);
     }

@@ -11,9 +11,9 @@ namespace Z0
     using static Seed;
 
     /// <summary>
-    /// Encapsulates a span that can be evenly partitioned into 64-bit blocks
+    /// Defines a span of contiguous memory that can be evenly partitioned into 8, 16, 32 and 64-bit segments
     /// </summary>
-    [Blocked(TypeWidth.W64, true, CellWidth.Numeric)]
+    [Blocked(TypeWidth.W64, CellWidth.Numeric)]
     public readonly ref struct Block64<T>
         where T : unmanaged
     {
@@ -29,6 +29,10 @@ namespace Z0
                     
         [MethodImpl(Inline)]
         internal Block64(Span<T> src)
+            => this.data = src;
+
+        [MethodImpl(Inline)]
+        internal Block64(params T[] src)
             => this.data = src;
 
         /// <summary>
@@ -143,9 +147,28 @@ namespace Z0
         public Block64<T> Extract(int block)
             => new Block64<T>(Block(block));
 
+        /// <summary>
+        /// Broadcasts a value to all blocked cells
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public void Fill(T src)
             => data.Fill(src);
+
+        /// <summary>
+        /// Zero-fills all blocked cells
+        /// </summary>
+        [MethodImpl(Inline)]
+        public void Clear()
+            => Data.Clear();
+
+        /// <summary>
+        /// Copies blocked content to a target span
+        /// </summary>
+        /// <param name="dst">The target span</param>
+        [MethodImpl(Inline)]
+        public void CopyTo(Span<T> dst)
+            => data.CopyTo(dst);
 
         /// <summary>
         /// Reinterprets the storage cell type
@@ -162,7 +185,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();                
-        
+            => ref data.GetPinnableReference();                        
    }
 }

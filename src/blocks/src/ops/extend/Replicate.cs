@@ -16,6 +16,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
+        public static Block8<T> Replicate<T>(this in Block8<T> src)
+            where T : unmanaged
+        {
+            Span<T> dst = new T[src.CellCount];
+            src.CopyTo(dst);
+            return new Block8<T>(dst);
+        }
+
+        /// <summary>
+        /// Clones a 32-bit blocked container
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
         public static Block16<T> Replicate<T>(this in Block16<T> src)
             where T : unmanaged
         {

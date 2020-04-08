@@ -98,7 +98,7 @@ namespace Z0.Asm
             var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
             var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Asm);    
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.AsmWriter(format,dstPath);
+            return context.AsmWriter(dstPath,format);
         }
     }
 }

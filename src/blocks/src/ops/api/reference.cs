@@ -17,6 +17,17 @@ namespace Z0
         /// <param name="src">The blocked container</param>
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, Closures(Numeric8)]
+        public static ref T reference<T>(in Block8<T> src, int index)
+            where T : unmanaged
+                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+
+        /// <summary>
+        /// Returns a reference to the leading cell of an index-identified block
+        /// </summary>
+        /// <param name="src">The blocked container</param>
+        /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(Numeric8x16)]
         public static ref T reference<T>(in Block16<T> src, int index)
             where T : unmanaged

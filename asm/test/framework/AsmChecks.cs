@@ -145,7 +145,7 @@ namespace Z0.Asm.Validation
             return CheckAction(check, CaseName(TestOpName<T>(opname)));
         }
 
-        protected TestCaseRecord CheckAsmMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in ApiCode src)
+        protected TestCaseRecord CheckAsmMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in IdentifiedCode src)
             where T : unmanaged
         {
                       
@@ -165,10 +165,10 @@ namespace Z0.Asm.Validation
         }
 
 
-        protected ApiCode ReadAsm(PartId id, string host, OpIdentity m)
-            => Context.CodeArchive(id,host).Read(m).Single().ApiCode;
+        protected IdentifiedCode ReadAsm(PartId id, string host, OpIdentity m)
+            => Context.CodeArchive(id,host).Read(m).Single().ToApiCode();
 
-        protected ApiCode ReadAsm<W,T>(PartId catalog, string host, string opname, W w = default, T t = default)
+        protected IdentifiedCode ReadAsm<W,T>(PartId catalog, string host, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
         {
@@ -178,7 +178,7 @@ namespace Z0.Asm.Validation
             var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)
                 Claim.failwith($"Could not find {id} in the archive at {archive.RootFolder}");
-            return result.Require().ApiCode;
+            return result.Require().ToApiCode();
         }
         
         protected TestCaseRecord CheckMatch<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
@@ -446,7 +446,7 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, in ApiCode dCode, in ApiCode gCode, 
+        protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, in IdentifiedCode dCode, in IdentifiedCode gCode, 
             BinaryOp<sbyte> primal, BinaryOp<sbyte> generic, NK<sbyte> kind)
         {
             var results = list<TestCaseRecord>();
@@ -622,13 +622,13 @@ namespace Z0.Asm.Validation
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);
 
-            var d = dArchive.Read(dId).Single().ApiCode;
-            var g = gArchive.Read(gId).Single().ApiCode;
+            var d = dArchive.Read(dId).Single().ToApiCode();
+            var g = gArchive.Read(gId).Single().ToApiCode();
 
             Claim.require(binop_match(buffers, w,d,g));                                     
         }
 
-        bit binop_match(in BufferSeq buffers, TypeWidth w, ApiCode a, ApiCode b)
+        bit binop_match(in BufferSeq buffers, TypeWidth w, IdentifiedCode a, IdentifiedCode b)
         {
             switch(w)
             {
@@ -663,42 +663,42 @@ namespace Z0.Asm.Validation
             return bit.On;
         }
 
-        protected void binop_match(in BufferSeq buffers, W8 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W8 w, IdentifiedCode a, IdentifiedCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, W16 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W16 w, IdentifiedCode a, IdentifiedCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, W32 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W32 w, IdentifiedCode a, IdentifiedCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, W64 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W64 w, IdentifiedCode a, IdentifiedCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, W128 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W128 w, IdentifiedCode a, IdentifiedCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, W256 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W256 w, IdentifiedCode a, IdentifiedCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
@@ -968,7 +968,7 @@ namespace Z0.Asm.Validation
         {
             var dst = LogDir + FileName.Define($"{test}", FileExtensions.Asm);
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.AsmWriter(format,dst);
+            return context.AsmWriter(dst,format);
         }
 
 
@@ -978,8 +978,8 @@ namespace Z0.Asm.Validation
             
             var dArchive = Context.CodeArchive(PartId.GMath, nameof(math));
             var gArchive = Context.CodeArchive(PartId.GMath, nameof(gmath));
-            var dAdd = dArchive.Read("add").Select(x => x.ApiCode).ToArray();
-            var gAdd = gArchive.Read("add_g").Select(code => code.WithIdentity(code.Id.WithoutGeneric()).ApiCode).ToArray();
+            var dAdd = dArchive.Read("add").Select(x => x.ToApiCode()).ToArray();
+            var gAdd = gArchive.Read("add_g").Select(code => code.WithIdentity(code.Id.WithoutGeneric()).ToApiCode()).ToArray();
             Claim.eq(dAdd.Length, gAdd.Length);
             for(var i=0; i< dAdd.Length; i++)
             {
@@ -1122,8 +1122,8 @@ namespace Z0.Asm.Validation
             where F : unmanaged, IFixed
         {                        
 
-            var f = dst[Left].EmitFixedUnaryOp<F>(a.Code.ApiCode);
-            var g = dst[Right].EmitFixedUnaryOp<F>(b.Code.ApiCode);            
+            var f = dst[Left].EmitFixedUnaryOp<F>(a.Code.ToApiCode());
+            var g = dst[Right].EmitFixedUnaryOp<F>(b.Code.ToApiCode());            
 
             var stream = Random.FixedStream<F>();
             if(stream == null)

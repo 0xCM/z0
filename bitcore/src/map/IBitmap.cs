@@ -64,4 +64,21 @@ namespace Z0
     {
         
     }
+
+    public interface IBitMap<W,T> : IBitMap<T>
+        where W : unmanaged, ITypeWidth
+        where T : unmanaged
+    {
+        
+    }
+
+    public interface IBitMap<F,W,T> : IBitMap<W,T>
+        where F : struct, IBitMap<F,W,T>
+        where W : unmanaged, ITypeWidth
+        where T : unmanaged
+
+    {
+        
+    }
+
 }

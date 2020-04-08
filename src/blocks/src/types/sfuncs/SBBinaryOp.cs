@@ -8,6 +8,13 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
+    public interface ISBBinaryOp8Api<T> : ISBOpApi<W8,T>
+        where T : unmanaged
+    {
+        ref readonly Block8<T> Invoke(in Block8<T> a, in Block8<T> b, in Block8<T> dst);
+    }
+
+    [SuppressUnmanagedCodeSecurity]
     public interface ISBBinaryOp16Api<T> : ISBOpApi<W16,T>
         where T : unmanaged
     {

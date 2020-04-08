@@ -154,7 +154,7 @@ namespace Z0.Asm
 
             public void SaveDecoded(in ApiHost host, AsmFunction[] src, FilePath dst)
             {
-                using var writer = Context.AsmWriter(Format, dst);                
+                using var writer = Context.AsmWriter(dst,Format);                
                 writer.Write(src);
             }
 

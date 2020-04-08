@@ -58,11 +58,4 @@ namespace Z0.Asm
         public string Format(int uripad)
             => text.concat(Op.Identifier.PadRight(uripad), Bits.Format());            
     }
-
-    public static class AsmOpBitsOps
-    {
-        public static OpIndex<AsmOpBits> ToOpIndex(this IEnumerable<AsmOpBits> src)
-            => OpIndex.From(src.Select(x => (x.Op.OpId, x)));
-
-    }
 }

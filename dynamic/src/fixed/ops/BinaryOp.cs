@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp8 Emit(IBufferToken dst, C.BinaryOp op, W8 w, in ApiCode src)
+        public static BinaryOp8 Emit(IBufferToken dst, C.BinaryOp op, W8 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp16 Emit(IBufferToken dst, C.BinaryOp op, W16 w, in ApiCode src)
+        public static BinaryOp16 Emit(IBufferToken dst, C.BinaryOp op, W16 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp32 Emit(IBufferToken dst, C.BinaryOp op, W32 w, in ApiCode src)
+        public static BinaryOp32 Emit(IBufferToken dst, C.BinaryOp op, W32 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp64 Emit(IBufferToken dst, C.BinaryOp op, W64 w, in ApiCode src)
+        public static BinaryOp64 Emit(IBufferToken dst, C.BinaryOp op, W64 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128 Emit(IBufferToken dst, C.BinaryOp op, W128 w, in ApiCode src)
+        public static BinaryOp128 Emit(IBufferToken dst, C.BinaryOp op, W128 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256 Emit(IBufferToken dst, C.BinaryOp op, W256 w, in ApiCode src)
+        public static BinaryOp256 Emit(IBufferToken dst, C.BinaryOp op, W256 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         [MethodImpl(Inline)]

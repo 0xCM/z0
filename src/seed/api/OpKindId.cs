@@ -183,5 +183,9 @@ namespace Z0
         AggMax,
 
         AggMin,
+
+        TestC,
+
+        TestZ
     }    
 }

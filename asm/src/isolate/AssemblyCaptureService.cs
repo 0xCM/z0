@@ -59,7 +59,7 @@ namespace Z0.Asm
             var path = Paths.DecodedPath(host.Path);
             var decoder = Context.AsmFunctionDecoder();
             var functions = new AsmFunction[extracted.Length];
-            using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
+            using var dst = Context.AsmWriter(path, Context.AsmFormat.WithSectionDelimiter());            
             return AsmFunctionList.Define(functions);
         }
 

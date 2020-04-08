@@ -58,7 +58,7 @@ namespace Z0.Asm
                 var instructions = new Asm.Instruction[decoded.Count];
                 var formatted = AsmFormatter.Internal(AsmFormat).FormatInstructions(decoded, src.Address);
                 for(var i=0; i<instructions.Length; i++)
-                    instructions[i] =  decoded[i].ToSpec(formatted[i]);
+                    instructions[i] =  decoded[i].ToInstruction(formatted[i]);
                 return AsmInstructionList.Create(instructions,src);
             }
             catch(Exception e)

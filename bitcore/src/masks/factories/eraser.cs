@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     partial class BitMask
     {                
@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T eraser<T>(byte start, byte count)
             where T : unmanaged
-                => gmath.xor(maxval<T>(), gmath.sll(BitMask.lo<T>(count - 1), start));
+                => gmath.xor(Literals.maxval<T>(), gmath.sll(BitMask.lo<T>(count - 1), start));
     }
 }

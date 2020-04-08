@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Seed;
-    using static refs;
+    using static Memories;
 
     public readonly ref struct BufferSeq<F>
         where F : unmanaged, IFixed    

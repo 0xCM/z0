@@ -18,6 +18,17 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
+        public static void Fill<T>(this IPolyrand random, in Block8<T> dst)
+            where T : unmanaged
+                => random.SpanFill(dst.Data);
+
+        /// <summary>
+        /// Fills caller-allocated block storage with random values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="dst">The target block</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, in Block16<T> dst)
             where T : unmanaged
                 => random.SpanFill(dst.Data);
