@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     
-    partial class XBits
+    partial class XTend
     {    
         /// <summary>
         /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
@@ -30,5 +31,7 @@ namespace Z0
         public static T BitSeg<T>(this Block256<T> src, int first, int last)
             where T : unmanaged
                 => gbits.bitseg(src,first,last);
+
+ 
     }
 }

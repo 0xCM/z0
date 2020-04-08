@@ -20,7 +20,7 @@ namespace Z0
         {
             Span<char> dst = stackalloc char[len];
             
-            var bs = spec.ToBitString();
+            var bs =  spec.ToBitString();
             for(var i=0; i<dst.Length; i++)
                 dst[i] = blendsymbol(bs[i]);
 

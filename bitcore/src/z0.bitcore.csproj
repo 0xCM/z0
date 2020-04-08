@@ -6,11 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(BitStrings)" />    
+    <!-- <ProjectReference Include="$(BitStrings)" />     -->
     <ProjectReference Include="$(Identity)" />    
   </ItemGroup>
 

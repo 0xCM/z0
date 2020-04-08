@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
-    
+    using static Seed;
+    using static Memories;
 
     partial class gbits
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="index">The index that partitions the source</param>
         /// <param name="x0">The lo partition</param>
         /// <param name="x1">The hi partition</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
         public static void split<T>(T src, int index, out T x0, out T x1)
             where T : unmanaged
         {

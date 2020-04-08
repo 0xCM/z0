@@ -14,6 +14,7 @@ namespace Z0.Asm
 
     using Iced = Iced.Intel;
 
+
     readonly struct AsmFormatter : IAsmFormatter
     {        
         public AsmFormatConfig Config {get;}
@@ -125,29 +126,12 @@ namespace Z0.Asm
         static string Comment(string text)
             =>  $"; {text}";
 
-        /// <summary>
-        /// Formats the function body encoding as a comma-separated list of hex values
-        /// </summary>
-        /// <param name="src">The source function</param>
-        static string EmbraceHex(AsmCode src)
-            => text.embrace(src.Bytes.FormatHexBytes(sep: Chars.Comma, uppercase:true));
-
-        static string FormatEncodingProp(AsmCode src)
-            => Comment($"static ReadOnlySpan<byte> {src.Id}_Bytes => new byte[{src.Data.Length}]{EmbraceHex(src)};");
-
         string FormatHeaderCode(AsmCode code)
         {
-            var dataline = Comment(code.Id);
-
-            //dataline += text.bracket(code.Location.Length);
-
             if(Config.EmitFunctionHeaderEncoding)
-            {
-                var formatter = HexFormat.formatter<byte>();
-                var formatted = formatter.Format(code.Data, Config.FunctionHeaderEncodingFormat);                
-                dataline += text.concat(text.spaced(Chars.Eq), "new byte", text.bracket(code.Location.Length), text.embrace(formatted));
-            }
-            return dataline;
+                return Comment(ByteSpanProperty.Define(code.Id, code.Data).Format());
+            else
+                return Comment(code.Id);
         }
 
         /// <summary>
@@ -160,9 +144,6 @@ namespace Z0.Asm
             var label = Comment($"{src.OpSig}, {src.Uri}");
             lines.Add(label); 
             
-            if(Config.EmitEncodingProp)           
-                lines.Add(FormatEncodingProp(src.Code));
-
             lines.Add(FormatHeaderCode(src.Code));
 
             if(Config.EmitLocation)

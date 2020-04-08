@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
- 
+    using static Memories;
+
     partial class gbits
     {
         /// <summary>

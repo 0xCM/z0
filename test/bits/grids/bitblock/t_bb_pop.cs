@@ -25,13 +25,6 @@ namespace Z0
                 Claim.eq(expect, bcpop);                
             }
 
-            var srcSpan = Random.Span<ulong>(RepCount);
-            var spPop = Bits.pop(srcSpan);            
-            var spPopExpect = 0u;
-            for(var i=0; i<srcSpan.Length; i++)
-                spPopExpect += gbits.pop(srcSpan[i]);
-            Claim.eq(spPopExpect, spPop);
-
         }
 
         public void nbb_pop_8x8()

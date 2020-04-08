@@ -10,7 +10,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Popcnt;
     using static System.Runtime.Intrinsics.X86.Popcnt.X64;
  
-    using static Core;
+    using static Seed;
+    using static Memories;
     
     partial class Bits
     {                
@@ -127,26 +128,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5)
             => pop(x0,x1,x2) + pop(x3,x4,x5);
- 
-        static uint pop(in ulong src, int len)
-        {
-            var count = 0u;
-            var current = 0;
-            do
-                count += Bits.pop(skip(in src, current));                
-            while(++current < len);
 
-            return count;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint pop<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => pop(in head(src.AsUInt64()), src.Length);
-
-        [MethodImpl(Inline), Op]
-        public static uint pop<T>(Span<T> src)
-            where T : unmanaged
-                => pop(in head(src.AsUInt64()), src.Length);
     }
 }

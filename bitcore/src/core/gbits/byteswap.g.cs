@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static As;
+    using static Memories;    
     
     partial class gbits
     {    
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.U16 | NumericKind.U32 | NumericKind.U64)]
+        [MethodImpl(Inline), Op, Closures(Numeric16x32x64u)]
         public static T byteswap<T>(T src)
             where T : unmanaged
         {

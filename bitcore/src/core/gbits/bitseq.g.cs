@@ -8,31 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static refs;
-    using static Typed;
+    using static Memories;    
 
     partial class gbits
     {        
-        /// <summary>
-        /// Constructs a bitsequence via the bitstore and populates an allocated target with the result
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<byte> storeseq<T>(T src)
-            where T : unmanaged
-                => BitStore.bitseq(src);
-
-        /// <summary>
-        /// Constructs a bitsequence via the bitstore and populates a caller-supplied target with the result
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void storeseq<T>(T src, Span<byte> dst, int offset = 0)
-            where T : unmanaged
-                => BitStore.bitseq(src, dst, offset);
-
         /// <summary>
         /// Constructs a bitsequence via calculation and populates a caller-supplied target with the result
         /// </summary>

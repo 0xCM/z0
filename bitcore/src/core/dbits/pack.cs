@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Core;
+    using static Seed;
 
     partial class Bits
     {         
@@ -71,6 +71,5 @@ namespace Z0
             dst |= (pack(b4, b5, b6, b7) << 4);
             return dst;
         }
-
     }
 }

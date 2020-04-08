@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static As;
+    using static Memories;
 
     partial class gbits
     {        
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static int ntz<T>(T src)
             where T : unmanaged
         {

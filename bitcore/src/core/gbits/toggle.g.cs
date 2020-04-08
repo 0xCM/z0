@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     partial class gbits
     {
@@ -17,7 +18,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The bit position</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static T toggle<T>(T src, int pos)
             where T : unmanaged
         {

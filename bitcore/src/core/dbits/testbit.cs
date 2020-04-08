@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
+
 
     partial class gbits
     {        
@@ -17,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static bit testbit<T>(T src, int pos)
             where T : unmanaged
         {

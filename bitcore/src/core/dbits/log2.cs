@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Numerics;
  
-    using static Core;
+    using static Seed;
     
     partial class Bits
     {                

@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Typed;
-    using static As;
+    using static Memories;
     using static BitMasks;
 
     partial class BitMask

@@ -11,8 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
 
     using static Seed;
-    using static CastNumeric;
-    using static As;
+    using static Memories;
     
     public static partial class BitMask
     {           
@@ -27,7 +26,7 @@ namespace Z0
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lo<T>(int n, T t = default)
             where T : unmanaged
                 => convert<ulong,T>(lo64(n));

@@ -7,17 +7,26 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
     using static Memories;
 
-    public interface IScalarBits<T>
-        where T : unmanaged
+    [Flags]
+    public enum MaskKind : uint
     {
-        /// <summary>
-        /// The value over which the bitvector is defined
-        /// </summary>
-        T Scalar {get;}
+        None,
 
-        TypeWidth Width => width<T>();
+        Lsb = 1,
+
+        Msb = 2,
+
+        Jsb = Lsb | Msb,
+
+        Central = 4,
+
+        Cjsb = Central | Jsb,
+
+        Parity,
+
+        Index = 128,
     }
+
 }

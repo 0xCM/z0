@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static As;
-    using static refs;
+    using static Memories;
 
     partial class gbits
     {
@@ -58,7 +57,7 @@ namespace Z0
         /// <param name="offset">The magnitude of the rotation</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Rotr, Closures(UnsignedInts)]
-        public static T rotr<T>(T src, byte offset, int width)
+        public static T rotr<T>(T src, byte offset, byte width)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

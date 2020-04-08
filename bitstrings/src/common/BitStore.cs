@@ -16,6 +16,26 @@ namespace Z0
     public static class BitStore
     {
         /// <summary>
+        /// Constructs a bitsequence via the bitstore and populates an allocated target with the result
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ReadOnlySpan<byte> storeseq<T>(T src)
+            where T : unmanaged
+                => BitStore.bitseq(src);
+
+        /// <summary>
+        /// Constructs a bitsequence via the bitstore and populates a caller-supplied target with the result
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void storeseq<T>(T src, Span<byte> dst, int offset = 0)
+            where T : unmanaged
+                => BitStore.bitseq(src, dst, offset);
+
+        /// <summary>
         /// Constructs a sequence of 8 characters {ci} := [c7,...c0] over the domain {'0','1'} according to whether the
         /// bit in the i'th position of the source is respecively disabled/enabled
         /// </summary>

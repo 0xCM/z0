@@ -58,7 +58,19 @@ namespace Z0
 
         public const NumericKind Numeric16x32 = NumericKind.Width16 | NumericKind.Width32;
 
+        public const NumericKind Numeric16x32x64 = NumericKind.Width16 | NumericKind.Width32 | NumericKind.Width64;
+
         public const NumericKind Numeric32x64 = NumericKind.Width32 | NumericKind.Width64;
+
+        public const NumericKind Numeric8x16u = NumericKind.U8 | NumericKind.U16;
+
+        public const NumericKind Numeric8x16x32u = NumericKind.U8 | NumericKind.U16 | NumericKind.U32;
+
+        public const NumericKind Numeric16x32u = NumericKind.U16 | NumericKind.U32;
+
+        public const NumericKind Numeric16x32x64u = NumericKind.U16 | NumericKind.U32 | NumericKind.U64;
+
+        public const NumericKind Numeric32x64u = NumericKind.U32 | NumericKind.U64;
 
 
         [MethodImpl(Inline)]

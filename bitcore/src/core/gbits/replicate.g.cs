@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
  
     using static Seed;
-    using static CastNumeric;    
+    using static Memories;    
    
     partial class gbits
     {                       

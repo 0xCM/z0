@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static As;
-    using static CastNumeric;
+    using static Memories;
 
     partial class gbits
     {
@@ -22,6 +21,17 @@ namespace Z0
         public static uint pop<T>(T src)
             where T : unmanaged
                 => pop_u(src);
+
+        [MethodImpl(Inline), Op,  Closures(Integers)]
+        public static uint pop<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+        {
+            var cells = src.Length;
+            var result = 0u;
+            for(var i=0; i<cells; i++)
+                result += pop(skip(src,i));
+            return result;
+        }
 
         /// <summary>
         /// Counts the number of enabled primal operand bits

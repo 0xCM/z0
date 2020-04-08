@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     partial class gbits
     {
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         /// <param name="value">The value to be applied</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static T set<T>(T src, int pos, bit value)            
             where T : unmanaged
                 => value ? enable(src, pos) : disable(src, pos);        
@@ -29,7 +30,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
         /// <typeparam name="T">The sequence type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static void set<T>(in Block256<T> src, int index, bit value)
             where T : unmanaged
         {
@@ -45,7 +46,7 @@ namespace Z0
         /// <param name="value">The value to be applied</param>
         /// <typeparam name="T">The source element type</typeparam>
         /// <remarks>See https://stackoverflow.com/questions/17803889/set-or-reset-a-given-bit-without-branching</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T setnb<T>(T src, byte pos, bit value)
             where T : unmanaged
         {

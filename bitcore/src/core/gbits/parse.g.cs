@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static refs;
+    using static Memories;
 
     partial class gbits
     {
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T parse<T>(ReadOnlySpan<char> src, byte offset, out T dst)
             where T : unmanaged
         {            

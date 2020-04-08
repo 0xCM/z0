@@ -19,6 +19,5 @@ namespace Z0
         public static TypeWidth width<T>()     
             where T : struct       
                 => (TypeWidth)bitsize<T>();
-
     }
 }

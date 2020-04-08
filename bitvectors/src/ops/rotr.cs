@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="y">The rotation magnitude</param>
         [MethodImpl(Inline), Rotr]
         public static BitVector4 rotr(BitVector4 x, byte offset)
-            => gbits.rotr(x.data,offset, x.Width);
+            => gbits.rotr(x.data,offset, (byte)x.Width);
 
         /// <summary>
         /// Computes a rightward bit rotation
@@ -66,5 +66,30 @@ namespace Z0
         public static BitVector<T> rotr<T>(BitVector<T> x, byte offset)
             where T : unmanaged
                 => gbits.rotr(x.Scalar,offset);
+
+
+        /// <summary>
+        /// Rotates source bits rightward
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="offset">The rotation magnitude</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> rotr<N,T>(BitVector<N,T> x, byte offset)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.rotr(x.Scalar, offset, (byte)x.Width);
+
+        /// <summary>
+        /// Rotates source bits rightward
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="offset">The rotation magnitude</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, byte offset)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gvec.vrotrx(x.data, offset);
     }
 }

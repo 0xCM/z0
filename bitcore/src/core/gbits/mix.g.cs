@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     partial class gbits
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mix<T>(N0 parity, T x, T y)        
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mix<T>(N1 parity, T x, T y)        
             where T : unmanaged
         {

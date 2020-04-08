@@ -7,20 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     /// <summary>
-    /// Defines a specification for producing MSB-oriented masks
+    /// Defines a specification for producing parity masks
     /// </summary>
     /// <typeparam name="F">The repetition frequency type</typeparam>
     /// <typeparam name="D">The bit density type</typeparam>
     /// <typeparam name="T">The mask data type</typeparam>
-    public readonly struct MsbMask<F,D,T> : IMaskSpec<F,D,T>
+    public readonly struct ParityMask<F,D,T> : IMaskSpec<F,D,T>
         where F : unmanaged, ITypeNat
         where D : unmanaged, ITypeNat
         where T : unmanaged
     {
-        public const MaskKind M = MaskKind.Msb;
+        public const MaskKind M = MaskKind.Parity;
 
         public F f => default;
 
@@ -29,7 +29,7 @@ namespace Z0
         public T t => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator MaskSpec(MsbMask<F,D,T> src)
+        public static implicit operator MaskSpec(ParityMask<F,D,T> src)
             => MaskSpec.Define<F,D,T>(M);
 
         MaskKind IMaskSpec.M => M;
@@ -53,7 +53,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public MsbMask<F,D,S> As<S>(S s = default)
+        public ParityMask<F,D,S> As<S>(S s = default)
             where S : unmanaged
                 => default;
 

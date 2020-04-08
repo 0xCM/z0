@@ -46,5 +46,4 @@ namespace Z0
         public const long Ones64i = -1;
 
     }
-
 }

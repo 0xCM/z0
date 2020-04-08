@@ -53,6 +53,11 @@ namespace Z0
         /// Specifies the default configuration for hex data emission
         /// </summary>
         public static HexFormatConfig HexData => Define(true, false, false, false, Chars.Space);
+
+        /// <summary>
+        /// The default configuration for array initialization content
+        /// </summary>
+        public static HexFormatConfig ArrayContent => Define(true, true, false, true, Chars.Comma);
         
         [MethodImpl(Inline)]
         public static HexFormatConfig Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)

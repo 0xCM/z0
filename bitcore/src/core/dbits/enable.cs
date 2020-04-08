@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Core;
+
+    using static Seed;
 
     partial class Bits
     {         
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong enable(ulong src, int pos)
             =>  src |= (1ul << pos);
- 
+
         /// <summary>
         /// Enables a specified source bit
         /// </summary>

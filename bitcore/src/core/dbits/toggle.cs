@@ -7,7 +7,7 @@ namespace Z0
      using System;
      using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
      partial class Bits
      {                
@@ -43,30 +43,30 @@ namespace Z0
           public static ulong toggle(ulong src, int pos)
                => src ^= (1ul << pos);
 
-        /// <summary>
-        /// Flips an identified source bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit to toggle</param>
-        [MethodImpl(Inline), Op]
-        internal static float toggle(float src, int pos)
-        {
-            ref var bits = ref Unsafe.As<float,int>(ref src);
-            bits ^= (1 << pos);
-            return src;
-        }
+          /// <summary>
+          /// Flips an identified source bit
+          /// </summary>
+          /// <param name="src">The bit source</param>
+          /// <param name="pos">The position of the bit to toggle</param>
+          [MethodImpl(Inline), Op]
+          internal static float toggle(float src, int pos)
+          {
+               ref var bits = ref Unsafe.As<float,int>(ref src);
+               bits ^= (1 << pos);
+               return src;
+          }
 
-        /// <summary>
-        /// Flips an identified source bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit to toggle</param>
-        [MethodImpl(Inline), Op]
-        internal static double toggle(double src, int pos)
-        {
-            ref var bits = ref Unsafe.As<double,long>(ref src);
-            bits ^= (1L << pos);
-            return src;
-        }
+          /// <summary>
+          /// Flips an identified source bit
+          /// </summary>
+          /// <param name="src">The bit source</param>
+          /// <param name="pos">The position of the bit to toggle</param>
+          [MethodImpl(Inline), Op]
+          internal static double toggle(double src, int pos)
+          {
+               ref var bits = ref Unsafe.As<double,long>(ref src);
+               bits ^= (1L << pos);
+               return src;
+          }
      }
 }

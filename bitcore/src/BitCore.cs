@@ -18,21 +18,25 @@ namespace Z0
 
     using static Seed;
 
-    [ApiHost("bits",ApiHostKind.Direct)]
+    [ApiHost("api")]
     public static partial class Bits { }
 
-    [ApiHost(ApiHostKind.Generic)]
+    [ApiHost]
     public static partial class gbits 
     {
-        [MethodImpl(Inline)]
-        static int bitsize<T>()
-            where T : unmanaged
-                => BitSize.measure<T>();
 
-     }
+    }
 
+    public static partial class XTend{}
+    
     public static partial class XBits { }    
 
     [ApiHost]
     public static partial class BitMask { }       
+
+    public static partial class BitMasks
+    {            
+
+    }
+
 }

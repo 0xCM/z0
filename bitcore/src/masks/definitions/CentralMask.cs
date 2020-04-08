@@ -6,21 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static Core;
+    
+    using static Seed;
 
     /// <summary>
-    /// Defines a specification for producing joint lsb/msb mask compositions
+    /// Defines a specification for producing Central-oriented masks
     /// </summary>
     /// <typeparam name="F">The repetition frequency type</typeparam>
     /// <typeparam name="D">The bit density type</typeparam>
     /// <typeparam name="T">The mask data type</typeparam>
-    public readonly struct JsbMask<F,D,T> : IMaskSpec<F,D,T>
+    public readonly struct CentralMask<F,D,T> : IMaskSpec<F,D,T>
         where F : unmanaged, ITypeNat
         where D : unmanaged, ITypeNat
         where T : unmanaged
     {
-        public const MaskKind M = MaskKind.Jsb;
+        public const MaskKind M = MaskKind.Central;
 
         public F f => default;
 
@@ -29,11 +29,11 @@ namespace Z0
         public T t => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator MaskSpec(JsbMask<F,D,T> src)
+        public static implicit operator MaskSpec(CentralMask<F,D,T> src)
             => MaskSpec.Define<F,D,T>(M);
 
         MaskKind IMaskSpec.M => M;
-
+        
         NumericKind IMaskSpec.K 
         {
             [MethodImpl(Inline)]
@@ -53,11 +53,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public JsbMask<F,D,S> As<S>(S s = default)
+        public CentralMask<F,D,S> As<S>(S s = default)
             where S : unmanaged
                 => default;
 
         public override string ToString()
             => Formattable.format(this);
-    }
+   }
 }

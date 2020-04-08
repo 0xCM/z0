@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed;
+    using static Memories;
     using static BitMasks;
 
     partial class BitMask
@@ -52,7 +53,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N1 f, N1 d, T t = default)
             where T : unmanaged
         {
@@ -77,7 +78,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit out of each two bits is enabled</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N2 f, N1 d, T t = default)
             where T : unmanaged
         {
@@ -102,7 +103,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit out of each four bits is enabled</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N4 f, N1 d, T t = default)
             where T : unmanaged
         {
@@ -126,7 +127,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N8 f, N1 d, T t = default)
             where T : unmanaged
         {
@@ -150,7 +151,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N16 f, N1 d, T t = default)
             where T : unmanaged
         {
@@ -173,7 +174,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N8 f, N2 d, T t = default)
             where T : unmanaged
         {
@@ -196,7 +197,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N8 f, N3 d, T t = default)
             where T : unmanaged
         {
@@ -219,7 +220,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N8 f, N4 d, T t = default)
             where T : unmanaged
         {
@@ -242,7 +243,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N8 f, N5 d, T t = default)
             where T : unmanaged
         {
@@ -265,7 +266,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N8 f, N6 d, T t = default)
             where T : unmanaged
         {
@@ -288,7 +289,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T lsb<T>(N8 f, N7 d, T t = default)
             where T : unmanaged
         {
@@ -342,7 +343,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N1,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -352,7 +353,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N2,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -363,7 +364,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N4,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -374,7 +375,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N8,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -385,7 +386,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N16,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -395,7 +396,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N8,N2,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -405,7 +406,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N8,N3,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -415,7 +416,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N8,N4,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -425,7 +426,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N8,N5,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -435,7 +436,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N8,N6,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
@@ -445,7 +446,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(LsbMask<N8,N7,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);

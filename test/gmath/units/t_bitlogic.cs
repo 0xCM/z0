@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Gone;
     using S = Surrogates;
 
     public class t_bitlogic : t_gmath<t_bitlogic>
-    {
+    {              
         public void and_check()
         {
             const string name = "and";

@@ -35,9 +35,6 @@ namespace Z0.Asm
         public bool EmitSectionDelimiter {get;set;}
             = false;
 
-        public bool EmitEncodingProp {get; set;}
-            = false;                 
-
         public int InstructionPad {get;set;}
             = 40;
 

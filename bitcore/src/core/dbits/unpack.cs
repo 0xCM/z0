@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     partial class Bits
     {
@@ -28,7 +29,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack8x1(byte src, Span<byte> dst)
             => unpack8x1(src, ref refs.head64(dst));
-
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell

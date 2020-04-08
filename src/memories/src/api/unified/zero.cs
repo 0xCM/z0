@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    partial class Core
+    partial class Memories
     {
         [MethodImpl(Inline)]
         public static T zero<T>()

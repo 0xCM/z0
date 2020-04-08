@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed;
+    using static Memories;
     using static BitMasks;
 
     public static partial class BitMask
@@ -19,7 +20,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T even<T>(N2 f, N1 d, T t = default)
             where T : unmanaged
         {
@@ -42,7 +43,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T even<T>(N2 f, N2 d, T t = default)
             where T : unmanaged
         {
@@ -65,7 +66,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T odd<T>(N2 f, N1 d, T t = default)
             where T : unmanaged
         {
@@ -88,7 +89,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T odd<T>(N2 f, N2 d, T t = default)
             where T : unmanaged
         {
@@ -107,7 +108,7 @@ namespace Z0
         /// <summary>
         /// [01010101]    
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(ParityMask<N2,N1,T> spec, N0 e)
             where T : unmanaged
                 => even(spec.f, spec.d, spec.t);
@@ -117,7 +118,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(ParityMask<N2,N1,T> spec, N1 o)
             where T : unmanaged
                 => odd(spec. f,spec.d, spec.t);
@@ -125,7 +126,7 @@ namespace Z0
         /// <summary>
         /// [00110011]    
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(ParityMask<N2,N2,T> spec, N0 e)
             where T : unmanaged
                 => even(spec.f, spec.d, spec.t);
@@ -135,7 +136,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(ParityMask<N2,N2,T> spec, N1 o)
             where T : unmanaged
                 => odd(spec.f, spec.d, spec.t);

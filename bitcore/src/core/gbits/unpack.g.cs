@@ -8,10 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     partial class gbits
     {
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        public static Span<bit> unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)
+            where T : unmanaged
+        {
+            var srcsize = bitsize<T>();
+            var bitcount = bitsize<T>()*src.Length;
+            //require(dst.Length >= bitcount);
+            
+            ref var target = ref head(dst);
+            var k = 0;
+            for(var i=0; i < src.Length; i++)
+            for(byte j=0; j < srcsize; j++, k++)
+                seek(ref target, k) = test(skip(src,i), j);
+            return dst;
+        }
+
         /// <summary>
         /// Projects each bit from a source value into target span element at the corresponding index
         /// </summary>
@@ -62,21 +79,6 @@ namespace Z0
             where T : unmanaged
                 => unpack(src.ReadOnly(), dst);
         
-        public static Span<bit> unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)
-            where T : unmanaged
-        {
-            var srcsize = bitsize<T>();
-            var bitcount = bitsize<T>()*src.Length;
-            require(dst.Length >= bitcount);
-
-            ref var target = ref head(dst);
-            var k = 0;
-            for(var i=0; i < src.Length; i++)
-            for(byte j=0; j < srcsize; j++, k++)
-                seek(ref target, k) = test(skip(src,i), j);
-            return dst;
-        }
-
         /// <summary>
         /// Extracts each bit from each source element into caller-supplied target at the corresponding index
         /// </summary>

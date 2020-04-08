@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static As;
+    using static Memories;
 
     partial class BitMask
     {                
@@ -16,7 +16,7 @@ namespace Z0
         /// Defines an alternating bit pattern 01 01...01
         /// </summary>
         /// <typeparam name="T">The primal unsigned type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
         public static T altodd<T>()
             where T : unmanaged
         {

@@ -19,13 +19,22 @@ namespace Z0
                 => new HexFormatter<T>(SystemHexFormatters.Create<T>());                   
 
         /// <summary>
-        /// Formats a numeric array as hex data
+        /// Formats a numeric array as hex data content
         /// </summary>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The numeric type</typeparam>
         public static string data<T>(T[] src)
             where T : unmanaged
                 => HexFormat.formatter<T>().Format(src, HexFormatConfig.HexData);
+
+        /// <summary>
+        /// Formats a numeric aray as...numeric array content
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        public static string array<T>(T[] src)
+            where T : unmanaged
+                => formatter<T>().Format(src,HexFormatConfig.ArrayContent);
 
         /// <summary>
         /// Formats a numeric array as hex data

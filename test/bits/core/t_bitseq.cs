@@ -51,9 +51,9 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Next<T>();
-                gbits.storeseq(a,s0);
-                gbits.storeseq(a,s1);
-                s2 = gbits.storeseq(a);
+                BitStore.storeseq(a,s0);
+                BitStore.storeseq(a,s1);
+                s2 = BitStore.storeseq(a);
                 CheckNumeric.eq(s0, s1);
                 CheckNumeric.eq(s1, s2);
             }

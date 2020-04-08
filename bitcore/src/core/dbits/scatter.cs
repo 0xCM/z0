@@ -10,8 +10,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
-    using static Core;
-
+    using static Seed;
+    
     partial class Bits
     {                
         /// <summary>
@@ -51,7 +51,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong scatter(ulong src, ulong mask)        
             => X64.ParallelBitDeposit(src,mask);
-
     }
-
 }
