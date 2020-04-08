@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
         
     partial class fspan
     {                
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="lhs">The left source span</param>
         /// <param name="rhs">The right source span</param>
         /// <typeparam name="T">The floating-point type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
         public static Span<T> div<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The left source span</param>
         /// <param name="rhs">The right source span</param>
         /// <typeparam name="T">The floating-point type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
         public static Span<T> div<T>(Span<T> src, T rhs)
             where T : unmanaged
         {
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="lhs">The left integer source</param>
         /// <param name="rhs">The right integer source</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
         public static Span<T> div<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Not, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Not, Closures(Integers)]
         public static T not<T>(T a)
             where T : unmanaged
                 => not_u(a);

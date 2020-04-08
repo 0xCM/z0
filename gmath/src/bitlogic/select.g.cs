@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Select, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Select, Closures(Integers)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
         {            
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>Code generation for this is good; type-specific specializations exist for convenience. Algorithm
         /// taken from https://graphics.stanford.edu/~seander/bithacks.html</remarks>
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Closures(Integers)]
         public static T blend<T>(T a, T b, T mask)
             where T : unmanaged
                 => xor(a, and(xor(a,b), mask));

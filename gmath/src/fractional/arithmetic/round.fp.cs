@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gfp
     {
-        [MethodImpl(Inline), NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Closures(NumericKind.Floats)]
         public static T round<T>(T src, int scale)
             where T : unmanaged
         {

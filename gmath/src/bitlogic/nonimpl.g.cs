@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), NonImpl, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), NonImpl, Closures(Integers)]
         public static T nonimpl<T>(T a, T b)
             where T : unmanaged
                 => nonimpl_u(a,b);

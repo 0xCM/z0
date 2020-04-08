@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class BitVector
     {
@@ -15,7 +15,7 @@ namespace Z0
         /// Disables a bit if it is enabled
         /// </summary>
         /// <param name="index">The position of the bit to disable</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> disable<T>(BitVector<T> x, int index)
             where T : unmanaged
                 => gbits.disable(x.data,index);

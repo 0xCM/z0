@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {        
-        [MethodImpl(Inline), Max, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Max, Closures(Integers)]
         public static T max<T>(T a, T b)
             where T : unmanaged
                 => max_u(a,b);

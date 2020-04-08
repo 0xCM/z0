@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {        
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Sub, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Sub, Closures(Integers)]
         public static T sub<T>(T a, T b)
             where T : unmanaged
                 => sub_u(a,b);

@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), And, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), And, Closures(UnsignedInts)]
         public static BitVector<T> and<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.and(x.Scalar, y.Scalar);

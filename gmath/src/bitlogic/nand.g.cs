@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), Nand, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Nand, Closures(Integers)]
         public static T nand<T>(T a, T b)
             where T : unmanaged
                 => nand_u(a,b);

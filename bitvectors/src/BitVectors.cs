@@ -21,7 +21,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed; using static Memories;    
 
     [ApiHost("api")]
     public static partial class BitVector 

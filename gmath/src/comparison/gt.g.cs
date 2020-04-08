@@ -7,21 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Gt, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Gt, Closures(Integers)]
         public static bit gt<T>(T a, T b)
             where T : unmanaged
                 => Numeric.gt(a,b);
 
-        [MethodImpl(Inline), GtEq, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), GtEq, Closures(Integers)]
         public static bit gteq<T>(T a, T b)
             where T : unmanaged
                 => Numeric.gteq(a,b);
 
-        [MethodImpl(Inline), Gtz, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Gtz, Closures(Integers)]
         public static T gtz<T>(T a, T b)
             where T : unmanaged
                 => gmath.mul(convert<T>((uint)gt(a,b)),ones<T>());

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; 
 
     partial class BitVector
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> cimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.cimpl(x.Scalar, y.Scalar);

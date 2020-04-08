@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Positive, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Positive, Closures(Integers)]
         public static bit positive<T>(T a)
             where T : unmanaged 
                 => positive_u(a);

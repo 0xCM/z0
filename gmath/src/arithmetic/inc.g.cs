@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Inc, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Inc, Closures(Integers)]
         public static T inc<T>(T a)
             where T : unmanaged
                 => inc_u(a);

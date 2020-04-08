@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gspan
     {
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), SpanOp, Closures(NumericKind.All)]
         public static Span<T> pow<T>(ReadOnlySpan<T> src, uint exp, Span<T> dst)
             where T : unmanaged
         {

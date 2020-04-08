@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Abs, NumericClosures(NumericKind.SignedInts)]
+        [MethodImpl(Inline), Abs, Closures(NumericKind.SignedInts)]
         public static T abs<T>(T src)
             where T : unmanaged
         {

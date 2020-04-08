@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Square, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Square, Closures(Integers)]
         public static T square<T>(T a)
             where T : unmanaged
                 => square_u(a);

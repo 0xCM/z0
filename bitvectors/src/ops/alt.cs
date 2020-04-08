@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
     
 
     partial class BitVector
@@ -17,7 +17,7 @@ namespace Z0
         /// the first bit is determine by a parity bit
         /// </summary>
         /// <param name="parity">The state of the first bit</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> alt<T>(bit parity)
             where T : unmanaged
                 => parity ? convert<T>(BitMasks.Even64) : convert<T>(BitMasks.Odd64);        

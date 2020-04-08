@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class BitVector
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The pivot/mask vector</param>
         /// <param name="y">The primary choice</param>
         /// <param name="z">The alternative choice</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
             where T : unmanaged
                 => gmath.select(x.data, y.data, z.data);

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gfp
     {
-        [MethodImpl(Inline), Nonz, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Nonz, Closures(NumericKind.Floats)]
         public static bit nonz<T>(T a)
             where T : unmanaged
         {

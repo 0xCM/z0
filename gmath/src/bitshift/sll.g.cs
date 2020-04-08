@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="a">The value to shift</param>
         /// <param name="count">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T sll<T>(T a, byte count)
             where T : unmanaged
                 => sll_u(a,count);

@@ -7,51 +7,51 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gspan
     {
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> add<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.add<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> sub<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.sub<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> mul<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.mul<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> div<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.div<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> mod<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.mod<T>(), l, r, dst);
 
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Closures(Integers)]
         public static Span<T> modmul<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.modmul<T>(), a,b,c, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> negate<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.negate<T>(), src, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> inc<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.inc<T>(), src, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> dec<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.dec<T>(), src, dst);
@@ -77,17 +77,17 @@ namespace Z0
             where T : unmanaged
                 => sum(src.ReadOnly());
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> clamp<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.clamp<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> square<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.square<T>(), src, dst);
 
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SFuncs.apply(MathSvc.abs<T>(), src, dst);

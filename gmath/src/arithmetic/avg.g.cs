@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {        
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Avgz, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Avgz, Closures(UnsignedInts)]
         public static T avgz<T>(T a, T b)
             where T : unmanaged
         {

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
-        [MethodImpl(Inline), Negate, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Negate, Closures(Integers)]
         public static T negate<T>(T src)
             where T : unmanaged
             => negate_u(src);

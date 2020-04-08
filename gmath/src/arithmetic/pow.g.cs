@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -16,12 +16,12 @@ namespace Z0
         /// and 2^i does not exceed the maximum value of T
         /// </summary>
         /// <param name="i">The exponent</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T pow2<T>(byte i)
             where T : unmanaged
                 => convert<ulong,T>(1ul << i); 
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged
         {

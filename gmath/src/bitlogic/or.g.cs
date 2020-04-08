@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {        
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Or, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Or, Closures(Integers)]
         public static T or<T>(T a, T b)
             where T : unmanaged
                 => or_u(a,b);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T or<T>(T a, T b, T c)
             where T : unmanaged
                 => or_u(a,b,c);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T or<T>(T a, T b, T c, T d)
             where T : unmanaged
                 => or(or(a,b,c), d);
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T or<T>(T a, T b, T c, T d, T e)
             where T : unmanaged
                 => or(or(a,b,c), or(d, e));

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Xnor, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Xnor, Closures(Integers)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
                 => xnor_u(a,b);

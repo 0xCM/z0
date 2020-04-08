@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Divides, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Divides, Closures(Integers)]
         public static bit divides<T>(T a, T b)
             where T : unmanaged
         {

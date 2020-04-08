@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {        
-        [MethodImpl(Inline), Min, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Min, Closures(Integers)]
         public static T min<T>(T a, T b)
             where T : unmanaged
                 => min_u(a,b);

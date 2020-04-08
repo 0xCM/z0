@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class BitVector
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The number of bits to store</param>
         /// <typeparam name="T">The primal storage type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> alloc<T>(T fill = default)
             where T : unmanaged
                 => BitVector.generic(fill);

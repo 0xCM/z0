@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Neq, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Neq, Closures(Integers)]
         public static bit neq<T>(T a, T b)
             where T : unmanaged
                 => neq_u(a,b);

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class MathSvcHosts
     {
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct And<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -30,7 +30,7 @@ namespace Z0
                 => gspan.and(l,r,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Or<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -49,7 +49,7 @@ namespace Z0
                 => gspan.or(l,r,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Xor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -68,7 +68,7 @@ namespace Z0
                 => gspan.xor(l,r,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Nand<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -87,7 +87,7 @@ namespace Z0
                 => gspan.nand(l,r,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Nor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -105,7 +105,7 @@ namespace Z0
                 => gspan.nor(l,r,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Xnor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -124,7 +124,7 @@ namespace Z0
                 => gspan.nor(l,r,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Select<T> : ISTernaryOpApi<T>, ISTernarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -143,7 +143,7 @@ namespace Z0
                 => gspan.select(a,b,c,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Not<T> : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>
             where T : unmanaged        
         {
@@ -162,7 +162,7 @@ namespace Z0
                 => gspan.not(src,dst);
         }    
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Impl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -181,7 +181,7 @@ namespace Z0
                 => gspan.impl(lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct NonImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -201,7 +201,7 @@ namespace Z0
 
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct CImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
@@ -220,7 +220,7 @@ namespace Z0
                 => gspan.cimpl(lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct CNonImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    

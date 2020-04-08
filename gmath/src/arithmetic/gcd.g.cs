@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
             
-    using static Core;
+    using static Seed; using static Memories;
     
     partial class gmath
     {
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Closures(Integers)]
         public static T gcd<T>(T a, T b)
             where T : unmanaged
         {
@@ -29,7 +29,7 @@ namespace Z0
                 return gcd_f(a,b);
         }           
 
-        [MethodImpl(Inline), NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Closures(UnsignedInts)]
         public static T gcdbin<T>(T a, T b)
             where T : unmanaged
         {

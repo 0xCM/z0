@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class BitVector
     {
@@ -15,7 +15,7 @@ namespace Z0
         /// Initialzes a generic bitvector with a supplied value
         /// </summary>
         /// <param name="src">The value used to initialize the bitvector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> init<T>(T src)
             where T : unmanaged
                 => new BitVector<T>(src);

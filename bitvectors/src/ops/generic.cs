@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class BitVector
     {
@@ -15,7 +15,7 @@ namespace Z0
         /// Creates a generic bitvector
         /// </summary>
         /// <param name="src">The source cell</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> generic<T>(T src)
             where T : unmanaged
                 => new BitVector<T>(src);
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="n">The bitvector length</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> generic<T>(Span<byte> src)
             where T : unmanaged
                 => generic(src.TakeScalar<T>());
@@ -34,7 +34,7 @@ namespace Z0
         /// Loads an bitvector of minimal size from a source bitstring
         /// </summary>
         /// <param name="src">The bitstring source</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> generic<T>(BitString src)
             where T : unmanaged
                 => generic<T>(src.ToPackedBytes());

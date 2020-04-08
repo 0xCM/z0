@@ -9,8 +9,7 @@
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(GMath)" />
-    <!-- <ProjectReference Include="$(BitStrings)" />     -->
-    <ProjectReference Include="$(Identity)" />    
+    <ProjectReference Include="$(Custom)" />
   </ItemGroup>
 
 </Project>

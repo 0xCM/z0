@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gfp
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
-        [MethodImpl(Inline), Div, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Div, Closures(NumericKind.Floats)]
         public static T div<T>(T a, T b)
             where T : unmanaged
         {
@@ -29,7 +29,7 @@ namespace Z0
                 throw Unsupported.define<T>();
         }
 
-        [MethodImpl(Inline), Divides, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Divides, Closures(NumericKind.Floats)]
         public static bool divides<T>(T a, T b)
             where T : unmanaged
         {

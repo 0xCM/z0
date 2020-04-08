@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {        
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="max">The maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Clamp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Clamp, Closures(Integers)]
         public static T clamp<T>(T a, T b)
             where T : unmanaged
         {

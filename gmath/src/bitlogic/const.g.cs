@@ -7,46 +7,46 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
-        [MethodImpl(Inline), False, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), False, Closures(Integers)]
         public static T @false<T>()
             where T:unmanaged
                 => zero<T>();
 
-        [MethodImpl(Inline), False, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), False, Closures(Integers)]
         public static T @false<T>(T a)
             where T:unmanaged
                 => @false<T>();
 
-        [MethodImpl(Inline), False, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), False, Closures(Integers)]
         public static T @false<T>(T a, T b, T c)
             where T:unmanaged
                 => @false<T>();
 
-        [MethodImpl(Inline), True, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>()
             where T:unmanaged
                 => Literals.ones<T>();
 
-        [MethodImpl(Inline), True, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>(T a)
             where T:unmanaged
                 => @true<T>();
 
-        [MethodImpl(Inline), True, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>(T a, T b)
             where T:unmanaged
                 => @true<T>();
 
-        [MethodImpl(Inline), False, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), False, Closures(Integers)]
         public static T @false<T>(T a, T b)
             where T:unmanaged
                 => @false<T>();
 
-        [MethodImpl(Inline), True, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>(T a, T b, T c)
             where T:unmanaged
                 => @true<T>();

@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static refs;
+    using static Seed;
+    using static Memories;
 
     public class t_collector : t_gmath<t_collector>
     {

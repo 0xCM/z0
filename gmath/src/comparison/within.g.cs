@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         /// <param name="delta">The tolerance</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static bit within<T>(T a, T b, T delta)
             where T : unmanaged
                 => within_u(a,b,delta);

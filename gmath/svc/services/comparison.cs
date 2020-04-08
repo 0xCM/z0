@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class MathSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Eq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -30,7 +30,7 @@ namespace Z0
                 => SFuncs.apply(this, lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Neq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -48,7 +48,7 @@ namespace Z0
                 => SFuncs.apply(this, lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Lt<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -67,7 +67,7 @@ namespace Z0
                 => SFuncs.apply(this, lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct LtEq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -86,7 +86,7 @@ namespace Z0
                 => SFuncs.apply(this, lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Gt<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -105,7 +105,7 @@ namespace Z0
                 => SFuncs.apply(this, lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct GtEq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -124,7 +124,7 @@ namespace Z0
                 => SFuncs.apply(this, lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Between<T> : ISFuncApi<T,T,T,bit>
             where T : unmanaged        
         {
@@ -139,7 +139,7 @@ namespace Z0
                 => gmath.between(x,a,b);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Nonz<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -158,7 +158,7 @@ namespace Z0
                 => SFuncs.apply(this, src, dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct NegativeOp<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -177,7 +177,7 @@ namespace Z0
                 => SFuncs.apply(this, src, dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct PositiveOp<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
@@ -196,7 +196,7 @@ namespace Z0
                 => SFuncs.apply(this, src, dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Min<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {
@@ -215,7 +215,7 @@ namespace Z0
                 => SFuncs.apply(this, lhs,rhs,dst);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Max<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {

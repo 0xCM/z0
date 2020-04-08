@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
-        [MethodImpl(Inline), Xors, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Xors, Closures(Integers)]
         public static T xors<T>(T a, byte offset)
             where T : unmanaged
                 => xors_u(a,offset);

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; 
+    using static Memories;
 
     partial class BitVector
     {        
@@ -95,7 +96,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 concat(BitVector32 lo, BitVector32 hi)
             => create(n64, lo.data, hi.data);
-
     }
-
 }

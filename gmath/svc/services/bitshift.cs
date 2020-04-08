@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class MathSvcHosts
     {
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Srl<T> : ISImm8UnaryOpApi<T>, ISImm8SpanShiftApi<T>
             where T : unmanaged        
         {
@@ -30,7 +30,7 @@ namespace Z0
                 => gspan.srl(src,count,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Sll<T> : ISImm8UnaryOpApi<T>, ISImm8SpanShiftApi<T>
             where T : unmanaged        
         {
@@ -49,7 +49,7 @@ namespace Z0
                 => gspan.sll(src,count,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Sllv<T> : ISSpanShiftVarApi<T>
             where T : unmanaged        
         {
@@ -64,7 +64,7 @@ namespace Z0
                 => gspan.sllv(src,counts,dst);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct Srlv<T> : ISSpanShiftVarApi<T>
             where T : unmanaged        
         {

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class MathSvcHosts
     {
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct BitLogicOps<T> : IBitLogic<T>
             where T : unmanaged
         {

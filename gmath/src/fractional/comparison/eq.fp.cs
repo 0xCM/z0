@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gfp
     {
-        [MethodImpl(Inline), Eq, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Eq, Closures(NumericKind.Floats)]
         public static bit eq<T>(T a, T b)
             where T : unmanaged
         {
@@ -24,7 +24,7 @@ namespace Z0
         }
 
 
-        [MethodImpl(Inline), Neq, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Neq, Closures(NumericKind.Floats)]
         public static bit neq<T>(T a, T b)
             where T : unmanaged
         {

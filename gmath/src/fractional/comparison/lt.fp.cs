@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gfp
     {
-        [MethodImpl(Inline), Lt, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Lt, Closures(NumericKind.Floats)]
         public static bit lt<T>(T lhs, T rhs)
             where T : unmanaged
         {
@@ -23,7 +23,7 @@ namespace Z0
                 throw Unsupported.define<T>();
         }
 
-        [MethodImpl(Inline), LtEq, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), LtEq, Closures(NumericKind.Floats)]
         public static bit lteq<T>(T lhs, T rhs)
             where T : unmanaged
         {

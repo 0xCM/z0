@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gspan
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         /// <typeparam name="T">The primal scalar type</typeparam>
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), SpanOp, Closures(NumericKind.All)]
         public static T dot<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {

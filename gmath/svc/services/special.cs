@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class MathSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
+        [Closures(NumericKind.All)]
         public readonly struct Parse<T>  : ISFNumericParserApi<T>
             where T : unmanaged        
         {

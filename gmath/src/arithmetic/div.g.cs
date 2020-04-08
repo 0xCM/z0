@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gmath
     {        
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Div, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Div, Closures(NumericKind.All)]
         public static T div<T>(T a, T b)
             where T : unmanaged
                 => div_u(a,b);
