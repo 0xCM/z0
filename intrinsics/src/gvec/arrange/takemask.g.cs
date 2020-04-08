@@ -13,8 +13,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Core;
-    using static VCore;
+    using static Seed;
+    using static Vectors;
 
     partial class gvec
     {
@@ -23,7 +23,7 @@ namespace Z0
         /// Creates a 16-bit mask from the most significant bit of each byte in the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static ushort vtakemask<T>(Vector128<T> src)
             where T : unmanaged
                 => (ushort)MoveMask(v8u(src));
@@ -33,7 +33,7 @@ namespace Z0
         /// Creates a 32-bit mask from the most significant bit of each byte in the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static uint vtakemask<T>(Vector256<T> src)
             where T : unmanaged
                 => (uint)MoveMask(v8u(src));
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static ushort vtakemask<T>(Vector128<T> src, [Imm] byte index)
             where T : unmanaged
                 => (ushort)MoveMask(v8u(dvec.vsll(v64u(src), (byte)(7 - index))));
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static uint vtakemask<T>(Vector256<T> src, [Imm] byte index)
             where T : unmanaged
                 => (uint)MoveMask(v8u(dvec.vsll(v64u(src), (byte)(7 - index))));

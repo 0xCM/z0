@@ -15,16 +15,8 @@ namespace Z0.Asm
     public readonly struct AsmFunctionBuilder : IAsmFunctionBuilder
     {
         [MethodImpl(Inline)]
-        public static AsmFunctionBuilder Create(IAsmContext context)
-            => new AsmFunctionBuilder(context);
-
-        public IAsmContext Context {get;}
-        
-        [MethodImpl(Inline)]
-        AsmFunctionBuilder(IAsmContext context)
-        {
-            this.Context = context;
-        }
+        public static AsmFunctionBuilder Create(IContext context)
+            => default(AsmFunctionBuilder);
 
         public AsmFunction BuildFunction(OpUri uri, string sig, AsmInstructionBlock src)
         {
@@ -50,11 +42,5 @@ namespace Z0.Asm
             var instructions = AsmInstructionList.Create(src.Decoded, src.NativeCode.Data);
             return AsmFunction.Define(parsed, instructions);
         }
-    }
-
-
-    static class ModelBuild
-    {
-
     }
 }

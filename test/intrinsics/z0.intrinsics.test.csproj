@@ -14,7 +14,7 @@
     <ProjectReference Include="$(Intrinsics)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Permute)" />
-    <ProjectReference Include="$(VCore)" />    
+    <ProjectReference Include="$(Vectors)" />    
     <ProjectReference Include="$(VBits)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(VData)" />

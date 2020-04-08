@@ -27,13 +27,12 @@ namespace Z0.Asm
         readonly BufferAllocation RBuffer;
 
         [MethodImpl(Inline)]
-        public static AsmBuffers New(IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
+        public static AsmBuffers New(IContext context, AsmCaptureEventObserver observer, int? size = null)
             => new AsmBuffers(context, observer, size);
 
         [MethodImpl(Inline)]
-        AsmBuffers(IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
+        AsmBuffers(IContext context, AsmCaptureEventObserver observer, int? size = null)
         {
-            AsmContext = context;
             Exchange = context.ExtractExchange(observer, size);     
             Capture = Exchange.Operations;
             CaptureTarget = Exchange.TargetBuffer;
@@ -43,7 +42,6 @@ namespace Z0.Asm
             RBuffer = Buffers.native(size ?? DefaultSize);            
         }
 
-        public readonly IAsmContext AsmContext;
 
         public BufferToken MainExec
             => MBuffer;

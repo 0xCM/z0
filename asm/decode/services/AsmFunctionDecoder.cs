@@ -11,19 +11,19 @@ namespace Z0.Asm
 
     readonly struct AsmFunctionDecoder : IAsmFunctionDecoder
     {
-        public IAsmContext Context {get;}
+        readonly IContext Context;
 
         readonly IAsmInstructionDecoder Decoder;
 
         [MethodImpl(Inline)]
-        public static AsmFunctionDecoder Create(IAsmContext context)
-            => new AsmFunctionDecoder(context);
+        public static AsmFunctionDecoder Create(IContext context, AsmFormatConfig format)
+            => new AsmFunctionDecoder(context, format);
         
         [MethodImpl(Inline)]
-        AsmFunctionDecoder(IAsmContext context)
+        AsmFunctionDecoder(IContext context, AsmFormatConfig format)
         {
             this.Context = context;
-            this.Decoder = context.AsmInstructionDecoder();
+            this.Decoder = context.AsmInstructionDecoder(format);
         }
 
         public AsmFunction DecodeFunction(CapturedOp src)

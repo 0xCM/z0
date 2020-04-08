@@ -29,4 +29,8 @@ namespace Z0
         
     }
 
+    public static partial class Gone2
+    {
+        
+    }
 }

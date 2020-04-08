@@ -12,8 +12,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Core;    
-
     partial class dvec
     {
         /// <summary>
@@ -21,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Sad]
         public static Vector128<ushort> vsad(Vector128<byte> lhs, Vector128<byte> rhs)
             => SumAbsoluteDifferences(lhs,rhs);
 
@@ -34,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Sad]
         public static Vector256<ushort> vsad(Vector256<byte> lhs, Vector256<byte> rhs)
             => SumAbsoluteDifferences(lhs,rhs);
     }

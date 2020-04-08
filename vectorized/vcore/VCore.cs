@@ -9,9 +9,4 @@ namespace Z0
     
     public static partial class XTend{}
     
-    [ApiHost]
-    public static partial class VCore
-    {
-        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-    }
 }

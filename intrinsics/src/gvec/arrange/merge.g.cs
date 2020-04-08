@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;
-    using static VCore;
+    using static Seed;
+    using static Vectors;
 
     partial class gvec
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vmerge<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> vmerge<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {

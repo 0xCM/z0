@@ -17,7 +17,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
     using static AppErrorMsg;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

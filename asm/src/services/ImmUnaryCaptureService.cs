@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     readonly struct ImmUnaryCaptureService : IImmCapture
     {
-        public IAsmContext Context {get;}
+        public IContext Context {get;}
         
         readonly MethodInfo Method;
 

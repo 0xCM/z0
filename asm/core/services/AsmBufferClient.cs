@@ -11,18 +11,15 @@ namespace Z0.Asm
 
     readonly struct AsmBufferedClient : IAsmBufferClient
     {
-        public IAsmContext Context {get;}
-
         readonly AsmBufferClient Client;
 
         [MethodImpl(Inline)]
-        public static IAsmBufferClient New(IAsmContext context, AsmBufferClient client)
-            => new AsmBufferedClient(context, client);
+        public static IAsmBufferClient New(IContext context, AsmBufferClient client)
+            => new AsmBufferedClient(client);
         
         [MethodImpl(Inline)]
-        AsmBufferedClient(IAsmContext context, AsmBufferClient client)
+        AsmBufferedClient(AsmBufferClient client)
         {
-            this.Context = context;
             this.Client = client;
         }
 

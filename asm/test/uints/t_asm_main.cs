@@ -13,14 +13,17 @@ namespace Z0.Asm
     {
         protected override void OnExecute(in AsmBuffers buffers)
         {                    
-            //buffer_client(Context);
+            
         }
 
         void archive_selected(in AsmBuffers buffers)
         {
-            var archive = Context.Archiver();
-            //archive.Archive(AssemblyId.Root);
+            
+            
         }
+
+
+        #if Dependencies
 
         void archive_context(in AsmBuffers buffers)
         {
@@ -33,7 +36,6 @@ namespace Z0.Asm
                 archive.Archive(id);    
         }
 
-        #if Dependencies
 
         static void buffer_client(IAsmContext context)
         {
@@ -96,7 +98,7 @@ namespace Z0.Asm
             var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
             var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Asm);    
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.WithFormat(format).AsmWriter(dstPath);
+            return context.AsmWriter(format,dstPath);
         }
     }
 }

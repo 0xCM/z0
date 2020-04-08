@@ -48,6 +48,5 @@ namespace Z0
         public static int vcount<T>(W512 w, T t = default)
             where T : unmanaged
                 => Vector512<T>.Count;
-
     }
 }

@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
     
-    using static Core;
+    using static Seed;
+    using static Vectors;
+    using static refs;
  
     partial class Data
     {                
@@ -21,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vload<T>(N128 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(VCore.vload(n, in head(src)));
+                => generic<T>(Vectors.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 256-bit pattern described by a readonly bytespan
@@ -32,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vload<T>(N256 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(VCore.vload(n, in head(src)));
+                => generic<T>(Vectors.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 512-bit pattern described by a readonly bytespan

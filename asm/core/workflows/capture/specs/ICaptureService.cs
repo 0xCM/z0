@@ -10,7 +10,7 @@ namespace Z0.Asm
     /// <summary>
     /// Characterizes a service that extracts identified member operation x86 encodings
     /// </summary>
-    public interface ICaptureService : IAsmService
+    public interface ICaptureService : IService
     {               
         /// <summary>
         /// Captures native x86 encoded assembly produced by the jitter for a method

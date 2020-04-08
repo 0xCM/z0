@@ -49,7 +49,6 @@ namespace Z0.Asm.Check
                 P.Tuples.Resolved,
                 P.Typed.Resolved,
                 P.VBits.Resolved,
-                P.Vectorized.Resolved,
                 P.Vectors.Resolved,
                 };
 

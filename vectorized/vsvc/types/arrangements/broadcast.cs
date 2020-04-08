@@ -25,7 +25,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(T a) => VCore.vbroadcast(n128, a);            
+            public Vector128<T> Invoke(T a) => Vectors.vbroadcast(n128, a);            
         }
 
         public readonly struct Broadcast128<S,T> : ISVFactory128Api<S,T>
@@ -41,7 +41,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc<T>($"{Name}_{Identify.numeric<S>()}", VKind);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(S a) => VCore.vbroadcast(n128, convert<S,T>(a));            
+            public Vector128<T> Invoke(S a) => Vectors.vbroadcast(n128, convert<S,T>(a));            
         }
 
         public readonly struct Broadcast256<T> : ISVFactory256Api<T,T>
@@ -56,7 +56,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(T a) => VCore.vbroadcast(n256, a);            
+            public Vector256<T> Invoke(T a) => Vectors.vbroadcast(n256, a);            
         }
 
         public readonly struct Broadcast256<S,T> : ISVFactory256Api<S,T>
@@ -72,7 +72,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc<T>($"{Name}_{Identify.numeric<S>()}", VKind);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(S a) => VCore.vbroadcast(n256, convert<S,T>(a));            
+            public Vector256<T> Invoke(S a) => Vectors.vbroadcast(n256, convert<S,T>(a));            
         }
     }
 }

@@ -13,7 +13,9 @@ namespace Z0.Asm
 
     public readonly struct OpExtractParser : IOpExtractParser
     {
-        public IAsmContext Context {get;}
+        readonly IContext Context;
+
+        readonly IAppMsgSink MsgSink;
 
         byte[] PatternBuffer {get;}
 
@@ -28,18 +30,16 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         OpExtractParser(IAsmContext context, byte[] buffer)
         {
+            MsgSink = context;
             Context = context;
             PatternBuffer = buffer;
         }
-
 
         Option<ParsedExtract> Parse(in MemberExtract src, int seq, ByteParser<EncodingPatternKind> parser)
         {
             var status = parser.Parse(src.EncodedData);                
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success(); 
-            // if(!succeeded)               
-            //     Context.NotifyConsole(ExtractParseFailure(src.Uri, matched.ToTermCode()));
             var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
             return succeeded 
                 ? ParsedExtract.Define(src, seq, matched.ToTermCode(), MemoryExtract.Define(src.EncodedData.Address, data))
@@ -64,7 +64,7 @@ namespace Z0.Asm
         {
             var records = list<MemberParseRecord>(extracts.RecordCount);
             var parser = Context.PatternParser(PatternBuffer.Clear());            
-            Context.Notify($"Parsing {extracts.Records.Length} {host} records");
+            MsgSink.Notify($"Parsing {extracts.Records.Length} {host} records");
             
             var seq = 0;
             for(var i=0; i< extracts.RecordCount; i++)
@@ -101,7 +101,7 @@ namespace Z0.Asm
             if(duplicated.Length != 0)
             {
                 var format = string.Join(text.comma(), duplicated);
-                Context.Notify($"Identifier duplicates: {format}", AppMsgKind.Warning);           
+                MsgSink.Notify($"Identifier duplicates: {format}", AppMsgKind.Warning);           
             }
         }
     }

@@ -36,7 +36,7 @@ namespace Z0.Asm
         AsmInstructionList Flow(AsmInstructionList instruction);
     }
 
-    public interface IAsmInstructionFlow : IAsmService
+    public interface IAsmInstructionFlow : IService
     {
         IEnumerable<AsmInstructionList> Flow(IAsmInstructionPipe pipe);
     }

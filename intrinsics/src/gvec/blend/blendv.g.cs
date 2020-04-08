@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static VCore;
+    using static Gone2;
 
     partial class gvec
     {
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> valt<T>(W256 w, T a, T b)
             where T : unmanaged
-                => gvec.vblend(VCore.vbroadcast(w,a), VCore.vbroadcast(w,b), Data.blendspec<T>(w,false));
+                => gvec.vblend(Vectors.vbroadcast(w,a), Vectors.vbroadcast(w,b), Data.blendspec<T>(w,false));
 
         /// <summary>
         /// 

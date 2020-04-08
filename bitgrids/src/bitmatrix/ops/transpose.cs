@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;    
-    using static VCore;
+    using static Seed;
+    using static Typed;
+    using static Vectors;
 
     partial class BitMatrix
     {
@@ -121,7 +122,7 @@ namespace Z0
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
             var vec = Vectors.vload(n128,A.Bytes);
-            Vectors.vstore(dvec.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
+            Vectors.vstore(dvec.vshuf16x8(vec, Tr8x16Mask), ref refs.head(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Data);
         }
 
@@ -136,7 +137,7 @@ namespace Z0
         static Vector128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
-            get => VCore.vload(n128,in head(Tr8x16MaskBytes));
+            get => Vectors.vload(n128,in refs.head(Tr8x16MaskBytes));
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static VCore;
+    using static Gone2;
 
     partial class gvec
     {
@@ -21,12 +21,12 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector256<T> vperm2x128<T>(Vector256<T> x, Vector256<T> y, [Imm] byte spec)
             where T : unmanaged
                 => vperm2x128_u(x,y,spec);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector512<T> vperm2x128<T>(in Vector512<T> src, [Imm] byte lo, [Imm] byte hi)
             where T : unmanaged
                 => (vperm2x128(src.Lo, src.Hi, lo),vperm2x128(src.Lo, src.Hi, hi));

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe Vector128<T> vload<T>(W128 w, in T src)
             where T : unmanaged                    
                 => vload(constptr(in src), out Vector128<T> _);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe Vector256<T> vload<T>(W256 w, in T src)
             where T : unmanaged
                 => vload(constptr(in src), out Vector256<T> _);
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe Vector512<T> vload<T>(W512 w, in T src)
             where T : unmanaged
                 => vload(constptr(in src), out Vector512<T> _);
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe Vector128<T> vload<T>(W128 w, in T src, int offset)
             where T : unmanaged                    
                 => vload(constptr(in src, offset), out Vector128<T> _);
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe Vector256<T> vload<T>(W256 w, in T src, int offset)
             where T : unmanaged
                 => vload(constptr(in src, offset), out Vector256<T> _);
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe Vector512<T> vload<T>(W512 w, in T src, int offset)
             where T : unmanaged
                 => vload(constptr(in src, offset), out Vector512<T> _);
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe ref Vector128<T> vload<T>(in T src, out Vector128<T> dst)
             where T : unmanaged
                 => ref vload(constptr(in src), out dst);
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe ref Vector256<T> vload<T>(in T src, out Vector256<T> dst)
             where T : unmanaged
                 => ref vload(constptr(in src), out dst);
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static unsafe ref Vector512<T> vload<T>(in T src, out Vector512<T> dst)
             where T : unmanaged
                 => ref vload(constptr(in src), out dst);

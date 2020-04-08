@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
-    using static VCore;
+    using static Vectors;
+    using static Typed;
 
     partial class dvec
     {    
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vmakemask(ushort src)
-            => v8u(VCore.vparts(n128,maskpart(src,0), maskpart(src,8)));
+            => v8u(vparts(n128,maskpart(src,0), maskpart(src,8)));
 
         /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vmakemask(uint src)
-            => Vectors.vconcat(vmakemask((ushort)src), vmakemask((ushort)(src >> 16)));
+            => vconcat(vmakemask((ushort)src), vmakemask((ushort)(src >> 16)));
 
         /// <summary>
         /// Distributes each source bit to an index-identified bit of each byte in a 128-bit target vector
@@ -39,7 +39,7 @@ namespace Z0
         public static Vector128<byte> vmakemask(ushort src, byte index)
         {
             var m = BitMasks.Lsb64x8x1 << index;
-            return v8u(VCore.vparts(n128, maskpart(src,0, m), maskpart(src,8, m)));
+            return v8u(vparts(n128, maskpart(src,0, m), maskpart(src,8, m)));
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace Z0
         public static Vector256<byte> vmakemask(uint src, byte index)
         {
             var m = BitMasks.Lsb64x8x1 << index;
-            var lo = v8u(VCore.vparts(n128, maskpart(src, 0, m), maskpart(src, 8, m)));
-            var hi = v8u(VCore.vparts(n128, maskpart(src, 16, m), maskpart(src, 24, m)));
+            var lo = v8u(vparts(n128, maskpart(src, 0, m), maskpart(src, 8, m)));
+            var hi = v8u(vparts(n128, maskpart(src, 16, m), maskpart(src, 24, m)));
             return Vectors.vconcat(lo,hi);            
         }
 

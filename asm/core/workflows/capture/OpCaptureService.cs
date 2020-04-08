@@ -13,17 +13,9 @@ namespace Z0.Asm
     
     unsafe readonly struct CaptureService : ICaptureService
     {        
-        public IAsmContext Context {get;}
-
         [MethodImpl(Inline)]
-        public static CaptureService New(IAsmContext context)
-            => new CaptureService(context);
-
-        [MethodImpl(Inline)]
-        CaptureService(IAsmContext context)
-        {
-            Context = context;
-        }
+        public static CaptureService New(IContext context)
+            => default(CaptureService);
 
         public Option<ParsedBuffer> ParseBuffer(in OpExtractExchange exchange, in OpIdentity id, Span<byte> src)
         {

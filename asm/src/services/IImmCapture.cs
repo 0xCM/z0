@@ -7,7 +7,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    public interface IImmCapture : IAsmService
+    public interface IImmCapture : IService
     {
         AsmFunction Capture(in OpExtractExchange exchange, byte imm8);
 

@@ -15,7 +15,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
 
     using static Core;    
-    using static VCore;
+    using static Gone2;
 
     partial class dvec
     {
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = VCore.vbroadcast(n128, (ushort)(byte.MaxValue));
+            var mask = Vectors.vbroadcast(n128, (ushort)(byte.MaxValue));
             var v1 = v16i(dvec.vand(x,mask));
             var v2 = v16i(dvec.vand(y,mask));
             return PackUnsignedSaturate(v1,v2);         
@@ -77,7 +77,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpackus(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = VCore.vbroadcast(n128, (uint)(ushort.MaxValue));
+            var mask = Vectors.vbroadcast(n128, (uint)(ushort.MaxValue));
             var z0 = v32i(vand(x,mask));
             var z1 = v32i(vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
@@ -116,7 +116,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackus(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = VCore.vbroadcast(n256, (ushort)(byte.MaxValue));
+            var mask = Vectors.vbroadcast(n256, (ushort)(byte.MaxValue));
             var v1 = v16i(dvec.vand(x,mask));
             var v2 = v16i(dvec.vand(y,mask));
             return PackUnsignedSaturate(v1,v2);         
@@ -156,7 +156,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = VCore.vbroadcast(n256, (uint)(ushort.MaxValue));
+            var mask = Vectors.vbroadcast(n256, (uint)(ushort.MaxValue));
             var z0 = v32i(dvec.vand(x,mask));
             var z1 = v32i(dvec.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);

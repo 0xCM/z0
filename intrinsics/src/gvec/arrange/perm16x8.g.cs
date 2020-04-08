@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static VCore;
+    using static Gone2;
 
     partial class gvec
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector128<T> vperm16x8<T>(Vector128<T> src, Vector128<byte> spec)        
             where T : unmanaged
                 => vperm16x8_u(src,spec);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector256<T> vperm16x8<T>(Vector256<T> src, Vector256<byte> spec)        
             where T : unmanaged
                 => vperm16x8_u(src,spec);

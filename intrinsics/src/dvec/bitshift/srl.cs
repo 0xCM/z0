@@ -13,8 +13,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
 
-    using static Core;    
-    using static VCore;
+    using static Seed;
+    using static Typed;
+    using static Vectors;    
 
     partial class dvec
     {         
@@ -25,7 +26,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
@@ -37,7 +38,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
@@ -65,7 +66,7 @@ namespace Z0
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
             var x = v16u(ShiftRightLogical(vinflate(src, n256, z16i),count));
-            var y = vand(x,v16u(VCore.vbroadcast(n256, byte.MaxValue)));
+            var y = vand(x,v16u(Vectors.vbroadcast(n256, byte.MaxValue)));
             return v8i(vcompact(y,n128,z8));
         } 
 
@@ -139,7 +140,7 @@ namespace Z0
         {
             var x = v16u(ShiftRightLogical(vinflate(vlo(src), n256, z16i),count));
             var y = v16u(ShiftRightLogical(vinflate(vhi(src), n256, z16i),count));
-            var m = v16u(VCore.vbroadcast(n256, byte.MaxValue));
+            var m = v16u(Vectors.vbroadcast(n256, byte.MaxValue));
             return v8i(vcompact(vand(x,m),vand(y,m),n256,z8));
         } 
 

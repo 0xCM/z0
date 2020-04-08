@@ -17,7 +17,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Fma;        
     using static System.Runtime.Intrinsics.X86.Sse.X64;
     
-    using static Core;    
+    using static Seed;    
+    using static refs;
 
     /// <summary>
     /// Direct floating-point scalar intrinsics

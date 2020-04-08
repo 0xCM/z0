@@ -11,7 +11,6 @@ namespace Z0
 
     using static Seed;
     using static refs;
-    using D = Vectors;
 
     partial class Vectors
     {

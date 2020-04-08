@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Math)" />        
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />        
-    <ProjectReference Include="$(VCore)" />        
+    <ProjectReference Include="$(Vectors)" />        
   </ItemGroup>
 
 </Project>

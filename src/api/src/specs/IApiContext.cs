@@ -34,12 +34,4 @@ namespace Z0
             => Hosts.Where(h => h.Path == uri).FirstOrDefault();
     }
 
-    /// <summary>
-    /// Characterizes an api context reification
-    /// </summary>
-    public interface IApiContext<C> : IApiContext
-        where C : IApiContext<C>
-    {
- 
-    }
 }

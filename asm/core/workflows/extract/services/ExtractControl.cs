@@ -12,16 +12,16 @@ namespace Z0.Asm
 
     readonly struct ExtractControl : IExtractControl
     {                    
-        public IAsmContext Context {get;}
+        readonly IContext Context;
         
         readonly AsmCaptureEventObserver Observer;
 
         [MethodImpl(Inline)]
-        public static IExtractControl New(IAsmContext context, AsmCaptureEventObserver observer)
+        public static IExtractControl New(IContext context, AsmCaptureEventObserver observer)
             => new ExtractControl(context,observer);
                     
         [MethodImpl(Inline)]
-        ExtractControl(IAsmContext context, AsmCaptureEventObserver observer)
+        ExtractControl(IContext context, AsmCaptureEventObserver observer)
         {
             this.Context = context;
             this.Observer = observer;

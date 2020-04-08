@@ -26,11 +26,21 @@ namespace Z0
 
         AddHS = Id.AddHS,
 
+        Sad = Id.Sad,
+
         Sub = Id.Sub,
 
         SubH = Id.SubH,
 
+        SubHS = Id.SubHS,
+
+        SubS = Id.SubS,
+
         Mul = Id.Mul,
+
+        MulLo = Id.MulLo,
+
+        MulHi = Id.MulHi,
 
         Div = Id.Div,
 
@@ -39,6 +49,8 @@ namespace Z0
         Clamp = Id.Clamp,
 
         Distance = Id.Distance,
+
+        ClMul = Id.ClMul,
 
         Dot = Id.Dot,
     }    

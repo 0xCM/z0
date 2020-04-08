@@ -6,7 +6,7 @@ namespace Z0.Asm
 {        
     using System;
 
-    public interface IAsmFunctionDecoder : IAsmService
+    public interface IAsmFunctionDecoder : IService
     {        
         /// <summary>
         /// Decodes a function from a member capture

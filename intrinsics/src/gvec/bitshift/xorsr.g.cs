@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;    
-    using static VCore;
+    using static Seed;
+    using static Vectors;
 
     partial class gvec
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The amount by which to shift each component</param>
-        [MethodImpl(Inline), XorSr, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), XorSr, Closures(UnsignedInts)]
         public static Vector128<T> vxorsr<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The amount by which to shift each component</param>
-        [MethodImpl(Inline), XorSr, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), XorSr, Closures(UnsignedInts)]
         public static Vector256<T> vxorsr<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {

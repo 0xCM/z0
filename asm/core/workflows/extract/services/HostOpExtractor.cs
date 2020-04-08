@@ -16,19 +16,19 @@ namespace Z0.Asm
     /// </summary>
     readonly struct HostOpExtractor : IHostOpExtractor
     {
-        public IAsmContext Context {get;}
+        public IContext Context {get;}
 
         public int BufferLength {get;}
 
         [MethodImpl(Inline)]
-        public static IHostOpExtractor New(IAsmContext context, int? bufferlen = null)
+        public static IHostOpExtractor New(IContext context, int bufferlen)
             => new HostOpExtractor(context,bufferlen);
             
         [MethodImpl(Inline)]
-        HostOpExtractor(IAsmContext context, int? bufferlen)            
+        HostOpExtractor(IContext context, int bufferlen)            
         {
             this.Context = context;
-            this.BufferLength = bufferlen ?? Context.DefaultBufferLength;
+            this.BufferLength = bufferlen;
         }
 
         /// <summary>

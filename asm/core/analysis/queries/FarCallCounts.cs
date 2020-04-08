@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static FarCallCounts Define(int targets, int hosted, int hostedTargets, int unhostedTargets)
-            => new FarCallCounts(targets,hosted,hostedTargets,unhostedTargets);
+            => new FarCallCounts(targets, hosted, hostedTargets, unhostedTargets);
         
         [MethodImpl(Inline)]
         FarCallCounts(int targets, int hosted, int hostedTargets, int unhostedTargets)
@@ -52,15 +52,10 @@ namespace Z0
 
         public string Format()
         {            
-            var dst = text.factory.Builder();
-            var fieldSep = text.pipe();
-            var labelSep = text.colon();
-
+            var dst = text.build();
             dst.AppendLabeled(nameof(TargetsFar), eol, TargetsFar);
-            //dst.DelimitLabeled(nameof(HostedCount), eol, HostedCount, pad, sep);
             dst.AppendDelimited(nameof(HostedReceivers), eol, HostedReceivers, pad, sep);
             dst.AppendDelimited(nameof(UnhostedReceivers), eol, UnhostedReceivers, pad, sep);
-
             return dst.ToString();
         }
     }

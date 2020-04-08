@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static refs;
+    using static Vectors;
 
     public class t_vswaps : t_vinx<t_vswaps>
     {        
@@ -47,10 +48,10 @@ namespace Z0
             
             
             var dst = new uint[cells];
-            Vectors.vstore(a, ref head(dst), step*0);
-            Vectors.vstore(b, ref head(dst), step*1);
-            Vectors.vstore(c, ref head(dst), step*2);
-            Vectors.vstore(d, ref head(dst), step*3);
+            vstore(a, ref head(dst), step*0);
+            vstore(b, ref head(dst), step*1);
+            vstore(c, ref head(dst), step*2);
+            vstore(d, ref head(dst), step*3);
 
             var A = Matrix.load(order, src.Data.ToArray());
             var B = Matrix.load(order, dst);
@@ -71,7 +72,7 @@ namespace Z0
                 else
                     spec[k] = k;
             }
-            return dvec.vperm8x32(src, VCore.vload(n256, head(spec)));
+            return dvec.vperm8x32(src, vload(n256, head(spec)));
         }
 
         public void swap_256_i32()

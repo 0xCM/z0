@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
     
-    using static VCore;
+    using static Gone2;
     using static Core;
 
     partial class gvec

@@ -15,7 +15,6 @@ namespace Z0.Asm
         public static CallerTarget Define(OpUri src, MemoryAddress dst)
             => new CallerTarget(src, dst);
 
-
         [MethodImpl(Inline)]
         CallerTarget(OpUri src, MemoryAddress dst)
         {

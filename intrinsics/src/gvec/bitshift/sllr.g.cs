@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;    
-    using static VCore;
+    using static Seed;
+    using static Vectors;
+    using static As;
     
     partial class gvec
     {        
@@ -20,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Sll, Closures(Integers)]
         public static Vector128<T> vsllr<T>(Vector128<T> x, Vector128<T> offset)
             where T : unmanaged
                 => vsllr_u(x,offset);
@@ -32,7 +33,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Sll, Closures(NumericKind.Integers)]
         public static Vector256<T> vsllr<T>(Vector256<T> x, Vector256<T> offset)
             where T : unmanaged
                 => vsllr_u(x,offset);
@@ -43,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Sll, Closures(NumericKind.Integers)]
         public static Vector128<T> vsllr<T>(Vector128<T> x, T offset)
             where T : unmanaged
                 => vsllr_u(x,offset);
@@ -54,7 +55,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Sll, Closures(NumericKind.Integers)]
         public static Vector256<T> vsllr<T>(Vector256<T> x, T offset)
             where T : unmanaged
                 => vsllr_u(x,offset);

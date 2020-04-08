@@ -12,7 +12,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static Core;
+    using static Seed;
+    using static Typed;
 
     partial class dinxfp
     {
@@ -116,6 +117,6 @@ namespace Z0
             => dinxfp.vperm8x32(src,MRev256f32);    
 
         static Vector256<int> MRev256f32 
-            => VCore.vpartsi(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
+            => Vectors.vpartsi(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
     }
 }

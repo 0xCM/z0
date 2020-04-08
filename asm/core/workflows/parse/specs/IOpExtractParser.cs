@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using static AsmWorkflowReports;
     
-    public interface IOpExtractParser : IAsmService
+    public interface IOpExtractParser : IService
     {
         MemberParseReport Parse(ApiHost src, MemberExtractReport encoded);        
 

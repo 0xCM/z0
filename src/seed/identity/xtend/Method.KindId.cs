@@ -15,6 +15,9 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static OpKindId? KindId(this MethodInfo m)
-            => m.Tag<OpKindAttribute>().MapValueOrNull(a => a.KindId);
+        {
+            var attrib = m.Tag<OpKindAttribute>();
+            return attrib.IsSome() ? attrib.Value.KindId : (OpKindId?)null;
+        }
     }
 }

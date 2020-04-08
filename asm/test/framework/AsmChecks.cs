@@ -19,7 +19,6 @@ namespace Z0.Asm.Validation
     
     public class AsmChecks : IAsmChecks
     {
-
         public IAsmContext Context {get;}
 
         readonly IAppMsgSink MsgSink;
@@ -969,7 +968,7 @@ namespace Z0.Asm.Validation
         {
             var dst = LogDir + FileName.Define($"{test}", FileExtensions.Asm);
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.WithFormat(format).AsmWriter(dst);
+            return context.AsmWriter(format,dst);
         }
 
 
@@ -1069,7 +1068,7 @@ namespace Z0.Asm.Validation
         void RunPipe()
         {
             var archive =  Context.CodeArchive(PartId.Intrinsics);
-            var source = archive.ToInstructionSource();
+            var source = archive.ToInstructionSource(Context);
             var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
             var triggers = AsmTriggerSet.Define(trigger);
             var flow =  Context.InstructionFlow(source, triggers);

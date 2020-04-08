@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {        
 
-    public interface IAsmFunctionBuilder : IAsmService
+    public interface IAsmFunctionBuilder : IService
     {
         /// <summary>
         /// Builds a function from an instruction block

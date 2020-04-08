@@ -10,6 +10,11 @@ namespace Z0.Asm
 
     using static Core;
 
+    public interface IAsmHostArchive : IService
+    {
+        IEnumerable<ArchivedContent<AsmCode>> ArchivedCode {get;}
+    }
+
     public interface IArchivedContent
     {
         int Sequence {get;}
@@ -25,6 +30,7 @@ namespace Z0.Asm
             => Content;
     }
 
+    
     public readonly struct ArchivedContent<T> : IArchivedContent<T>
     {
         [MethodImpl(Inline)]
@@ -39,8 +45,5 @@ namespace Z0.Asm
         public T Content {get;}
     }
 
-    public interface IAsmHostArchive : IAsmService
-    {
-        IEnumerable<ArchivedContent<AsmCode>> ArchivedCode {get;}
-    }
+
 }

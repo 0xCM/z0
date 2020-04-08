@@ -11,17 +11,17 @@ namespace Z0
         
     partial class gvec
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Pair<Vector128<T>> vsplit<T>(Vector256<T> src)
             where T : unmanaged
                 => (vlo(src), vhi(src));
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Pair<Vector256<T>> vsplit<T>(Vector512<T> src)
             where T : unmanaged
                 => (vlo(src), vhi(src));
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Pair<Vector512<T>> vsplit<T>(Vector1024<T> src)
             where T : unmanaged
                 => (vlo(src), vhi(src));

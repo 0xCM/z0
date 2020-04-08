@@ -23,37 +23,28 @@ namespace Z0.Asm
             => Svc.AsmFormatter.Create(context, config ?? AsmFormatConfig.New);
 
         /// <summary>
-        /// Allocates a caller-disposed asm text writer
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="dst">The target path</param>
-        [MethodImpl(Inline)]
-        public static IAsmFunctionWriter AsmWriter(this IAsmContext context, FilePath dst)
-            => AsmFunctionWriter.Create(context, context.AsmFormat, dst);
-
-        /// <summary>
         /// Allocates a caller-disposed asm text writer with a customized format configuration
         /// </summary>
         /// <param name="context">The source context</param>
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter AsmWriter(this IAsmContext context, AsmFormatConfig config, FilePath dst)
+        public static IAsmFunctionWriter AsmWriter(this IContext context, AsmFormatConfig config, FilePath dst)
             => AsmFunctionWriter.Create(context, config, dst);
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionDecoder AsmFunctionDecoder(this IAsmContext context)
-            => Svc.AsmFunctionDecoder.Create(context);
+        public static IAsmFunctionDecoder AsmFunctionDecoder(this IContext context, AsmFormatConfig format = null)
+            => Svc.AsmFunctionDecoder.Create(context, format ?? AsmFormatConfig.New);
 
         [MethodImpl(Inline)]
-        public static IAsmInstructionDecoder AsmInstructionDecoder(this IAsmContext context)
-            => Svc.AsmInstructionDecoder.Create(context);
+        public static IAsmInstructionDecoder AsmInstructionDecoder(this IContext context, AsmFormatConfig format)
+            => Svc.AsmInstructionDecoder.Create(context,format);
 
-        public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
+        public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive, IAsmContext context)
         {
             IEnumerable<AsmInstructionList> Enumerate()
             {            
-                var decoder = archive.Context.AsmInstructionDecoder();
+                var decoder = context.AsmInstructionDecoder(context.AsmFormat);
                 foreach(var codeblock in archive.Read())
                 {
                     var decoded = decoder.DecodeInstructions(codeblock);

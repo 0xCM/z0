@@ -13,7 +13,6 @@ namespace Z0
     
     partial class Vectors
     {
-
         /// <summary>
         /// Extracts an index-identified component from the source vector
         /// </summary>
@@ -294,6 +293,5 @@ namespace Z0
         public static double vcell64f<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v64f(x).GetElement(index);
-
     }
 }

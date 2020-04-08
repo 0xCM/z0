@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(VCore)" />
+    <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(BitStrings)" />    

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
         
     using static Core;
-    using static VCore;
+    using static Gone2;
     using static BitPop;
 
     partial class gvec
@@ -128,16 +128,16 @@ namespace Z0
 
     public static class BitPop
     {        
-        public static Vector256<ulong> K1 => VCore.vbroadcast(n256, BitMasks.Even64);
+        public static Vector256<ulong> K1 => Vectors.vbroadcast(n256, BitMasks.Even64);
 
-        public static Vector256<ulong> K2 => VCore.vbroadcast(n256, BitMasks.Even64x2);
+        public static Vector256<ulong> K2 => Vectors.vbroadcast(n256, BitMasks.Even64x2);
 
-        public static Vector256<ulong> K4 => VCore.vbroadcast(n256, BitMasks.Lsb64x8x4);        
+        public static Vector256<ulong> K4 => Vectors.vbroadcast(n256, BitMasks.Lsb64x8x4);        
 
-        public static Vector128<ulong> v128K1 => VCore.vbroadcast(n128, BitMasks.Even64);
+        public static Vector128<ulong> v128K1 => Vectors.vbroadcast(n128, BitMasks.Even64);
 
-        public static Vector128<ulong> v128K2 => VCore.vbroadcast(n128, BitMasks.Even64x2);
+        public static Vector128<ulong> v128K2 => Vectors.vbroadcast(n128, BitMasks.Even64x2);
 
-        public static Vector128<ulong> v128K4 => VCore.vbroadcast(n128, BitMasks.Lsb64x8x4);
+        public static Vector128<ulong> v128K4 => Vectors.vbroadcast(n128, BitMasks.Lsb64x8x4);
     }
 }

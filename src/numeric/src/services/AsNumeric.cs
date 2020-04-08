@@ -13,6 +13,8 @@ namespace Z0
     [ApiHost("as.numeric", ApiHostKind.Generic)]
     public static class AsNumeric
     {                
+
+
         [MethodImpl(Inline)]
         public static AsI8<S> I8<S>()        
             => default(AsI8<S>);

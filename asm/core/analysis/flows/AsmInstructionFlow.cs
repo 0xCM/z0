@@ -12,21 +12,18 @@ namespace Z0.Asm
     using static Seed;
 
     readonly struct AsmInstructionFlow : IAsmInstructionFlow
-    {
-        public IAsmContext Context {get;}
-        
+    {        
         readonly IAsmInstructionSource Source;
 
         readonly AsmTriggerSet Triggers;
 
         [MethodImpl(Inline)]
-        public static IAsmInstructionFlow Create(IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
-            => new AsmInstructionFlow(context, source, triggers);
+        public static IAsmInstructionFlow Create(IContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
+            => new AsmInstructionFlow(source, triggers);
 
         [MethodImpl(Inline)]
-        AsmInstructionFlow(IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
+        AsmInstructionFlow(IAsmInstructionSource source, AsmTriggerSet triggers)
         {
-            this.Context = context;
             this.Source  = source;
             this.Triggers = triggers;
         }

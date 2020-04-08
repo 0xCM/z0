@@ -10,7 +10,6 @@ namespace Z0
 
     using static Core;
     
-    using static VCore;
 
     partial class BitGrid
     {        
@@ -19,7 +18,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = alloc64<N8,N8,byte>();                        
-            var src = VCoreD.vscalar(n128,g);
+            var src = Vectors.vscalar(n128,g);
             for(var i=7; i>= 0; i--)
             {
                 dst.Cell(i) = (byte)dvec.vtakemask(v8u(src));

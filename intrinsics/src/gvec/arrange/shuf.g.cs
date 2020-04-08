@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
-    
-    using static Core;
-    using static VCore;
+        
+    using static Seed;
+    using static Vectors;
 
     partial class gvec
     {
@@ -21,7 +20,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vshuf4x32<T>(Vector128<T> src, [Imm] byte spec)
             where T : unmanaged
                 => generic<T>(dvec.vshuf4x32(v32u(src), spec));
@@ -32,7 +31,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vshuf4x32<T>(Vector256<T> src, [Imm] byte spec)
             where T : unmanaged
                 => generic<T>(dvec.vshuf4x32(v32u(src), spec));
@@ -65,7 +64,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vshuf16x8<T>(Vector128<T> src, Vector128<byte> spec)
             where T : unmanaged
                 => generic<T>(dvec.vshuf16x8(v8u(src), spec));
@@ -75,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vshuf16x8<T>(Vector256<T> src, Vector256<byte> spec)
             where T : unmanaged
                 => generic<T>(dvec.vshuf16x8(v8u(src), spec));
@@ -85,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vshuf32x8<T>(Vector256<T> src, Vector256<byte> spec)
             where T : unmanaged
                 => generic<T>(dvec.vshuf32x8(v8u(src), spec));

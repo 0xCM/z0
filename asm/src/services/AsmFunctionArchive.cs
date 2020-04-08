@@ -20,8 +20,6 @@ namespace Z0.Asm
 
         public FolderPath RootFolder {get;}
         
-        public IAsmContext Context {get;}
-
         public PartId Origin {get;}
 
         public string HostName {get;}
@@ -36,40 +34,39 @@ namespace Z0.Asm
 
         readonly ICilFunctionFormatter CilFormatter;
 
-        AsmEmissionPaths EmissionPaths
-            => Context.EmissionPaths();
+        readonly AsmEmissionPaths EmissionPaths;
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive Create(IAsmContext context, PartId catalog, string host)
+        public static IAsmFunctionArchive Create(IContext context, PartId catalog, string host)
             => new AsmFunctionArchive(context, catalog,host);
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive Create(IAsmContext context, ApiHostUri host, bool imm)
+        public static IAsmFunctionArchive Create(IContext context, ApiHostUri host, bool imm)
             => new AsmFunctionArchive(context, host, imm);
 
-        AsmFunctionArchive(IAsmContext context, ApiHostUri host, bool imm)
+        AsmFunctionArchive(IContext context, ApiHostUri host, bool imm)
         {
-            this.Context = context;
+            this.EmissionPaths = context.EmissionPaths();
             this.Origin = host.Owner;
             this.HostName = $"{host.Name}-imm";
             this.HostPath = host;
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(host.Owner.Format(), $"{host.Name}-imm"));
             this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.New.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
-            this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
+            this.GroupFormatter = context.AsmFormatter(GroupFormatConfig);
             this.CilFormatter = context.CilFormatter();
         }
         
-        AsmFunctionArchive(IAsmContext context, PartId catalog, string hostname)
+        AsmFunctionArchive(IContext context, PartId catalog, string hostname)
         {
-            this.Context = context;
+            this.EmissionPaths = context.EmissionPaths();
             this.Origin = catalog;
             this.HostName = hostname;
             this.HostPath = ApiHostUri.Define(catalog, hostname);
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(catalog.Format(), hostname));
             this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.New.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
-            this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
+            this.GroupFormatter = context.AsmFormatter(GroupFormatConfig);
             this.CilFormatter = context.CilFormatter();
         }
 

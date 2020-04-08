@@ -11,31 +11,28 @@ namespace Z0.Asm
 
     class MemoryCaptureService : IMemoryCapture
     {
-        public IAsmContext Context {get;}
+        readonly IContext Context;
 
         readonly byte[] ExtractBuffer;
 
-        readonly IMemoryExtractor Extractor;
-
         readonly byte[] ParseBuffer;
 
-        readonly IAsmFormatter Formatter;
+        readonly IMemoryExtractor Extractor;
 
         readonly IAsmInstructionDecoder Decoder;
 
         [MethodImpl(Inline)]
-        public static IMemoryCapture Create(IAsmContext context)
-            => new MemoryCaptureService(context);
+        public static IMemoryCapture Create(IContext context, int bufferlen, AsmFormatConfig format = null)
+            => new MemoryCaptureService(context,bufferlen, format ?? AsmFormatConfig.New);
 
         [MethodImpl(Inline)]
-        MemoryCaptureService(IAsmContext context)
+        MemoryCaptureService(IContext context, int bufferlen,AsmFormatConfig format)
         {
             this.Context = context;
-            this.ExtractBuffer = new byte[context.DefaultBufferLength];
-            this.ParseBuffer = new byte[context.DefaultBufferLength];
+            this.ExtractBuffer = new byte[bufferlen];
+            this.ParseBuffer = new byte[bufferlen];
             this.Extractor = context.MemoryExtractor(ExtractBuffer);
-            this.Decoder = context.AsmInstructionDecoder();
-            this.Formatter = context.AsmFormatter(context.AsmFormat.WithSectionDelimiter());
+            this.Decoder = context.AsmInstructionDecoder(format);
         }
         
         public Option<CapturedMemory> Capture(MemoryAddress src)        

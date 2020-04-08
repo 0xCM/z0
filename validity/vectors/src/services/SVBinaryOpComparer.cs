@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Core;
-
+    using static Seed;
+    using static Vectors;
+    
     sealed class SVBinaryOp128DApiComparer<T> : OperatorComparer<W128,T>, ISVBinaryOpMatch128D<T>
         where T : unmanaged
     {

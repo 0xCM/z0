@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;    
-    using static VCore;    
+    using static Seed;
+    using static Vectors;
+    using static As;
     
     partial class gvec
     {        
@@ -18,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static Vector128<T> vrotrx<T>(Vector128<T> src, [Imm] byte count)        
             where T : unmanaged
                 => generic<T>(dvec.vrotrx(v64u(src), count));
@@ -28,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static Vector256<T> vrotrx<T>(Vector256<T> src, [Imm] byte count)        
             where T : unmanaged
                 => generic<T>(dvec.vrotrx(v64u(src), count));

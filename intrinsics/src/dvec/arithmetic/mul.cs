@@ -16,7 +16,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Ssse3;
 
-    using static Core;    
+    using static Typed;    
+    using static Vectors;
 
     partial class dvec
     {
@@ -27,7 +28,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="lo">Receiver for the product of the lower components</param>
         /// <param name="hi">Receiver for the product of the upper components</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector256<short> vmul(Vector128<sbyte> x, Vector128<sbyte> y)
             => vmullo(vinflate(x,n256,z16i), vinflate(y,n256,z16i));
 
@@ -38,7 +39,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="lo">Receiver for the product of the lower components</param>
         /// <param name="hi">Receiver for the product of the upper components</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector256<ushort> vmul(Vector128<byte> x, Vector128<byte> y)
         {
             var z0 = vinflate(x, n256, z16);
@@ -53,7 +54,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="lo">Receiver for the product of the lower components</param>
         /// <param name="hi">Receiver for the product of the upper components</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector256<int> vmul(Vector128<short> x, Vector128<short> y)
         {
             var z0 = vinflate(x, n256, z32i);
@@ -68,7 +69,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="lo">Receiver for the product of the lower components</param>
         /// <param name="hi">Receiver for the product of the upper components</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector256<uint> vmul(Vector128<ushort> x, Vector128<ushort> y)
         {
             var z0 = vinflate(x, n256, z32);
@@ -81,7 +82,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector256<long> vmul(Vector128<int> x, Vector128<int> y)
         {
             var lo = Multiply(x, y);                        
@@ -94,7 +95,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector256<ulong> vmul(Vector128<uint> x, Vector128<uint> y)
         {
             var lo = Multiply(x, y);                        
@@ -109,7 +110,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="lo">Receiver for the product of the lower components</param>
         /// <param name="hi">Receiver for the product of the upper components</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector512<short> vmul(Vector256<sbyte> x, Vector256<sbyte> y)
         {
             (var x1, var x2) = vinflate(x,n512,z16i);
@@ -124,7 +125,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="lo">Receiver for the product of the lower components</param>
         /// <param name="hi">Receiver for the product of the upper components</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector512<ushort> vmul(Vector256<byte> x, Vector256<byte> y)
         {
             (var x1, var x2) = vinflate(x,n512,z16);
@@ -137,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector512<uint> vmul(Vector256<ushort> x, Vector256<ushort> y)
         {
             (var x1, var x2) = vinflate(x, n512, z32);
@@ -150,7 +151,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector512<int> vmul(Vector256<short> x, Vector256<short> y)
         {
             (var x1, var x2) = vinflate(x, n512, z32i);
@@ -163,7 +164,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector512<long> vmul(Vector256<int> x,Vector256<int> y)
         {
             var lo = Multiply(x, y);                        
@@ -176,7 +177,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         public static Vector512<ulong> vmul(Vector256<uint> x,Vector256<uint> y)
         {
             var lo = Multiply(x, y);                        
@@ -190,10 +191,10 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mul]
         static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
-            var loMask = VCore.vbroadcast(n256, 0x00000000fffffffful);                
+            var loMask = Vectors.vbroadcast(n256, 0x00000000fffffffful);                
             var xh = v32u(vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
             return vadd(
@@ -201,23 +202,5 @@ namespace Z0
                 vadd(vsll(Multiply(xh, yl), 32), 
                     vsll(Multiply(xh, v32u(vsrl(y, 32))), 32)));
         }
-
-        /// <summary>
-        /// __m128i _mm_mulhrs_epi16 (__m128i a, __m128i b)PMULHRSW xmm, xmm/m128
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<short> vmulhrs(Vector128<short> x, Vector128<short> y)
-            => MultiplyHighRoundScale(x,y);
-
-        /// <summary>
-        ///  __m256i _mm256_mulhrs_epi16 (__m256i a, __m256i b)VPMULHRSW ymm, ymm, ymm/m256
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<short> vmulhrs(Vector256<short> x, Vector256<short> y)
-            => MultiplyHighRoundScale(x,y);
     }
 }

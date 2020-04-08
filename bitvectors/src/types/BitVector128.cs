@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;
-    using static VCore;
+    using static Gone2;
 
     /// <summary>
     /// Defines a natural bitvector over an intrinsic vector

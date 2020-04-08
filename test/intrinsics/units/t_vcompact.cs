@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Core;
+    using static Vectors;
 
     public class t_vcompact : t_vinx<t_vcompact>
     {
@@ -16,8 +16,8 @@ namespace Z0
             var w = n128;
             var cellmax = u8max;
             
-            var vsmax = VCore.vbroadcast(w, (ushort)cellmax);
-            var vtmax = VCore.vbroadcast(w,cellmax);
+            var vsmax = vbroadcast(w, (ushort)cellmax);
+            var vtmax = vbroadcast(w,cellmax);
             var expect = dvec.vsub(vtmax, gvec.vinc(w,z8));
 
             var x = dvec.vsub(vsmax, gvec.vinc(w, z16));
@@ -32,8 +32,8 @@ namespace Z0
             var w = n256;
             var cellmax = u8max;
             
-            var vsmax = VCore.vbroadcast(w, (ushort)cellmax);
-            var vtmax = VCore.vbroadcast(w,cellmax);
+            var vsmax = vbroadcast(w, (ushort)cellmax);
+            var vtmax = vbroadcast(w,cellmax);
             var expect = dvec.vsub(vtmax, gvec.vinc(w,z8));
 
             var x = dvec.vsub(vsmax, gvec.vinc(w, z16));
@@ -48,8 +48,8 @@ namespace Z0
             var w = n128;
             var cellmax = u16max;
             
-            var vsmax = VCore.vbroadcast(w, (uint)cellmax);
-            var vtmax = VCore.vbroadcast(w,cellmax);
+            var vsmax = vbroadcast(w, (uint)cellmax);
+            var vtmax = vbroadcast(w,cellmax);
             var expect = dvec.vsub(vtmax, gvec.vinc(w,z16));
 
             var x = dvec.vsub(vsmax, gvec.vinc(w, 0u));
@@ -64,8 +64,8 @@ namespace Z0
             var w = n256;
             var cellmax = u16max;
 
-            var vsmax = VCore.vbroadcast(w,(uint)cellmax);
-            var vtmax = VCore.vbroadcast(w,cellmax);
+            var vsmax = vbroadcast(w,(uint)cellmax);
+            var vtmax = vbroadcast(w,cellmax);
             
             var x = dvec.vsub(vsmax, gvec.vinc(w, 0u));
             var y = dvec.vsub(vsmax, gvec.vinc(w, 8u));
@@ -77,10 +77,10 @@ namespace Z0
         public void vcompact_2x128x64u_128x32u_outline()
         {
             var n = n128;
-            var x0 = VCore.vparts(n, 25, 50);
-            var x1 = VCore.vparts(n, 75, 10);
+            var x0 = vparts(n, 25, 50);
+            var x1 = vparts(n, 75, 10);
             var dst = dvec.vcompact(x0,x1,n128,z32);
-            var expect = VCore.vparts(n,25,50,75,10);
+            var expect = vparts(n,25,50,75,10);
             Claim.veq(expect,dst);
         }
 
@@ -151,16 +151,16 @@ namespace Z0
         {
             void case1()
             {
-                var x = VCore.vparts(n128,0,1,2,4,4,5,6,7);
-                var y = VCore.vparts(n128,8,9,10,11,12,13,14,15);
+                var x = vparts(n128,0,1,2,4,4,5,6,7);
+                var y = vparts(n128,8,9,10,11,12,13,14,15);
                 var z = dvec.vpackus(x,y);
-                var e = VCore.vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
+                var e = vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
                 Claim.veq(e,z);
             }
 
             void case2()
             {
-                var x = VCore.vparts(n128,127,0,127,0,127,0,127,0);
+                var x = vparts(n128,127,0,127,0,127,0,127,0);
                 var y = dvec.vpackus(x,x);
                 Notify(y.Format());
             }        

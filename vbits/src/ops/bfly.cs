@@ -323,114 +323,114 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<byte> v666(N128 w, N8 n)
-            => VCore.vbroadcast(w,BitMasks.Central8x4x2);
+            => Vectors.vbroadcast(w,BitMasks.Central8x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v666(N128 w, N16 n)
-            => VCore.vbroadcast(w,BitMasks.Central16x4x2);
+            => Vectors.vbroadcast(w,BitMasks.Central16x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v666(N128 w, N32 n)
-            => VCore.vbroadcast(w,BitMasks.Central32x4x2);
+            => Vectors.vbroadcast(w,BitMasks.Central32x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v666(N128 w, N64 n)
-            => VCore.vbroadcast(w,BitMasks.Central64x4x2);
+            => Vectors.vbroadcast(w,BitMasks.Central64x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<byte> v3C(N128 w, N8 f)
-            => VCore.vbroadcast(w,BitMasks.Central8x8x4);
+            => Vectors.vbroadcast(w,BitMasks.Central8x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v3C(N128 w, N16 n)
-            => VCore.vbroadcast(w,BitMasks.Central16x8x4);
+            => Vectors.vbroadcast(w,BitMasks.Central16x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v3C(N128 w, N32 n)
-            => VCore.vbroadcast(w,BitMasks.Central32x8x4);
+            => Vectors.vbroadcast(w,BitMasks.Central32x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v3C(N128 w, N64 n)
-            => VCore.vbroadcast(w, BitMasks.Central64x8x4);
+            => Vectors.vbroadcast(w, BitMasks.Central64x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v0FF0(N128 w, N16 n)
-            => VCore.vbroadcast(w,BitMasks.Central16x16x8);
+            => Vectors.vbroadcast(w,BitMasks.Central16x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v0FF0(N128 w, N32 n)
-            => VCore.vbroadcast(w,BitMasks.Central32x16x8);
+            => Vectors.vbroadcast(w,BitMasks.Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0FF0(N128 w, N64 n)
-            => VCore.vbroadcast(w,BitMasks.Central64x16x8);
+            => Vectors.vbroadcast(w,BitMasks.Central64x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v00FFFF00(N128 w)
-            => VCore.vbroadcast(w,BitMasks.Central32x32x16);
+            => Vectors.vbroadcast(w,BitMasks.Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v00FFFF0000FFFF00(N128 w)
-            => VCore.vbroadcast(w,BitMasks.Central64x32x16);
+            => Vectors.vbroadcast(w,BitMasks.Central64x32x16);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0000FFFFFFFF0000(N128 w)
-            => VCore.vbroadcast(w,BitMasks.Central64x64x32);
+            => Vectors.vbroadcast(w,BitMasks.Central64x64x32);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v666(N256 w, N8 n)
-            => VCore.vbroadcast(w,BitMasks.Central8x4x2);
+            => Vectors.vbroadcast(w,BitMasks.Central8x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v666(N256 w, N16 n)
-            => VCore.vbroadcast(w,BitMasks.Central16x4x2);
+            => Vectors.vbroadcast(w,BitMasks.Central16x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v666(N256 w, N32 n)
-            => VCore.vbroadcast(w,BitMasks.Central32x4x2);
+            => Vectors.vbroadcast(w,BitMasks.Central32x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v666(N256 w, N64 n)
-            => VCore.vbroadcast(w,BitMasks.Central64x4x2);
+            => Vectors.vbroadcast(w,BitMasks.Central64x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v3C(N256 w, N8 n)
-            => VCore.vbroadcast(w,BitMasks.Central8x8x4);
+            => Vectors.vbroadcast(w,BitMasks.Central8x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v3C(N256 w, N16 n)
-            => VCore.vbroadcast(w,BitMasks.Central16x8x4);
+            => Vectors.vbroadcast(w,BitMasks.Central16x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v3C(N256 w, N32 n)
-            => VCore.vbroadcast(w,BitMasks.Central32x8x4);
+            => Vectors.vbroadcast(w,BitMasks.Central32x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v3C(N256 w, N64 n)
-            => VCore.vbroadcast(w,BitMasks.Central64x8x4);
+            => Vectors.vbroadcast(w,BitMasks.Central64x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v0FF0(N256 w, N16 n)
-            => VCore.vbroadcast(w,BitMasks.Central16x16x8);
+            => Vectors.vbroadcast(w,BitMasks.Central16x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v0FF0(N256 w, N32 n)
-            => VCore.vbroadcast(w,BitMasks.Central32x16x8);
+            => Vectors.vbroadcast(w,BitMasks.Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0FF0(N256 w, N64 n)
-            => VCore.vbroadcast(w,BitMasks.Central64x16x8);
+            => Vectors.vbroadcast(w,BitMasks.Central64x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v00FFFF00(N256 w)
-            => VCore.vbroadcast(w,BitMasks.Central32x32x16);
+            => Vectors.vbroadcast(w,BitMasks.Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v00FFFF0000FFFF00(N256 w)
-            => VCore.vbroadcast(w,BitMasks.Central64x32x16);
+            => Vectors.vbroadcast(w,BitMasks.Central64x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0000FFFFFFFF0000(N256 w)
-            => VCore.vbroadcast(w,BitMasks.Central64x64x32);
+            => Vectors.vbroadcast(w,BitMasks.Central64x64x32);
     }
 }

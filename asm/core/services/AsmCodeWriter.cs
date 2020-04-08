@@ -17,16 +17,14 @@ namespace Z0.Asm
 
         public FilePath TargetPath {get;}
 
-        public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmCodeWriter New(IAsmContext context, FilePath dst)
-            => new AsmCodeWriter(context, dst);
+        public static IAsmCodeWriter New(IContext context, FilePath dst)
+            => new AsmCodeWriter(dst);
 
         [MethodImpl(Inline)]
-        AsmCodeWriter(IAsmContext context, FilePath path)
+        AsmCodeWriter(FilePath path)
         {
-            this.Context = context;
             this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }

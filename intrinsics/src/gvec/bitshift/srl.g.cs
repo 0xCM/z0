@@ -8,17 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;    
-    using static VCore;
+    using static Seed;
+    using static Vectors;
+    using static As;
     
     partial class gvec
     {            
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector128<T> vsrl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
                 => vsrl_u(x,count);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector256<T> vsrl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
                 => vsrl_u(x,count);

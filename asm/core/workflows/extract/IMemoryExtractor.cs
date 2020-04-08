@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Characterizes a service that extracts encoded data from a given base address
     /// </summary>
-    public interface IMemoryExtractor : IAsmService
+    public interface IMemoryExtractor : IService
     {
         Option<MemoryExtract> Extract(MemoryAddress src);        
     }    

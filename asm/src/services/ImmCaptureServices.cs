@@ -45,7 +45,7 @@ namespace Z0.Asm
             => ImmBinaryCaptureService.New(context,src,baseid);
 
         [MethodImpl(Inline)]
-        internal static AsmFunction Decode(this IAsmContext context, IAsmFunctionDecoder decoder, in OpExtractExchange exchange, OpIdentity id, DynamicDelegate src)
+        internal static AsmFunction Decode(this IContext context, IAsmFunctionDecoder decoder, in OpExtractExchange exchange, OpIdentity id, DynamicDelegate src)
             => decoder.DecodeFunction(context.Capture().Capture(in exchange, id, src));
     }
 }

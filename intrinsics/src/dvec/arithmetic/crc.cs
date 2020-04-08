@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
             
-    using static Core;    
-
     using CRC = System.Runtime.Intrinsics.X86.Sse42;
     using CRC64 = System.Runtime.Intrinsics.X86.Sse42.X64; 
 
@@ -25,7 +23,7 @@ namespace Z0
         /// <param name="data"></param>
         [MethodImpl(Inline), Op]
         public static uint crc(uint crc, byte data)
-            => CRC.Crc32(crc,data);
+            => CRC.Crc32(crc, data);
 
         /// <summary>
         /// unsigned int _mm_crc32_u16 (unsigned int crc, unsigned short v) CRC32 reg, reg/m16
@@ -52,6 +50,6 @@ namespace Z0
         /// <param name="data"></param>
         [MethodImpl(Inline), Op]
         public static ulong crc(uint crc, ulong data)
-            => CRC64.Crc32(crc,data);
+            => CRC64.Crc32(crc, data);
     }
 }

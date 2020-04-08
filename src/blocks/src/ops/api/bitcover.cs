@@ -19,6 +19,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int bitcover(int srcbits, int blockwidth)
         {
+            if(blockwidth == 0)
+                return 0;
+                
             var a = srcbits / blockwidth;
             return a + (srcbits % a == 0 ? 0 : 1);
         }

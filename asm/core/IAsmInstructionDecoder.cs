@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {        
 
-    public interface IAsmInstructionDecoder : IAsmService
+    public interface IAsmInstructionDecoder : IService
     {
         /// <summary>
         /// Decodes an instruction list

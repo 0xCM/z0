@@ -12,8 +12,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
     
-    using static Core;    
-    using static VCore;
+    using static Seed;
+    using static Typed;
+    using static Vectors;    
     
     partial class dvec
     {           
@@ -24,7 +25,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector128<T> vmsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
@@ -36,7 +37,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector256<T> vmsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));

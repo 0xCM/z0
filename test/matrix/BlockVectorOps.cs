@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static root;
-    using static VCore;
+    using static Gone2;
 
     partial class Linear
     {

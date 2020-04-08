@@ -11,20 +11,18 @@ namespace Z0.Asm
 
     readonly struct MemoryExtractor : IMemoryExtractor
     {
-        public IAsmContext Context {get;}
 
         public readonly IMemoryReader Reader;
 
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        public static IMemoryExtractor New(IAsmContext context, byte[] buffer)
+        public static IMemoryExtractor New(IContext context, byte[] buffer)
             => new MemoryExtractor(context, buffer);
 
         [MethodImpl(Inline)]
-        MemoryExtractor(IAsmContext context, byte[] buffer)
+        MemoryExtractor(IContext context, byte[] buffer)
         {
-            this.Context = context;
             this.Buffer = buffer;
             this.Reader = context.MemoryReader();
         }

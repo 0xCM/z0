@@ -11,21 +11,18 @@ namespace Z0.Asm
     using static Core;
 
     readonly struct AsmHostArchive : IAsmHostArchive
-    {
-        public IAsmContext Context {get;}
-        
+    {        
         public ApiHostUri Host {get;}
         
         public IEnumerable<ArchivedContent<AsmCode>> ArchivedCode {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmHostArchive Create(IAsmContext context, ApiHostUri host)
-            => new AsmHostArchive(context, host);
+        public static IAsmHostArchive Create(IContext context, ApiHostUri host)
+            => new AsmHostArchive(host);
 
         [MethodImpl(Inline)]
-        AsmHostArchive(IAsmContext context, ApiHostUri host)
+        AsmHostArchive(ApiHostUri host)
         {
-            this.Context = context;
             this.Host = host;
             this.ArchivedCode = new ArchivedContent<AsmCode>[]{};
         }       

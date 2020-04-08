@@ -12,9 +12,7 @@ namespace Z0.Asm
 
     public ref struct ByteParser<T>
         where T : unmanaged, Enum
-    {
-        public IAsmContext Context {get;}
-        
+    {        
         readonly Span<byte> Buffer;
 
         int Offset;
@@ -32,15 +30,14 @@ namespace Z0.Asm
         public ReadOnlySpan<byte> Parsed
             =>  (Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : new byte[]{};
 
-        public static ByteParser<T> New(IAsmContext context, IBytePatternSet<T> patterns, int? bufferlen)
-            => new ByteParser<T>(context, patterns, bufferlen);
+        public static ByteParser<T> New(IContext context, IBytePatternSet<T> patterns, int bufferlen)
+            => new ByteParser<T>(patterns, bufferlen);
 
-        public static ByteParser<T> New(IAsmContext context, IBytePatternSet<T> patterns, byte[] buffer)
-            => new ByteParser<T>(context, patterns, buffer);
+        public static ByteParser<T> New(IContext context, IBytePatternSet<T> patterns, byte[] buffer)
+            => new ByteParser<T>(patterns, buffer);
 
-        ByteParser(IAsmContext context, IBytePatternSet<T> patterns, byte[] buffer)
+        ByteParser(IBytePatternSet<T> patterns, byte[] buffer)
         {
-            this.Context = context;
             this.Buffer = buffer;
             this.Accepted = new Dictionary<byte, int>();
             this.Patterns = patterns;
@@ -50,8 +47,8 @@ namespace Z0.Asm
             this.Delta = default;
         }
 
-        ByteParser(IAsmContext context, IBytePatternSet<T> patterns, int? bufferlen)
-             : this(context, patterns,new byte[bufferlen ?? context.DefaultBufferLength])
+        ByteParser(IBytePatternSet<T> patterns, int bufferlen)
+             : this(patterns,new byte[bufferlen])
         {}
 
         public void Start()

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Seed;
-    using static refs;
     using D = Vectors;
     
     partial class Vectors
@@ -27,13 +26,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(D.vconcat(v8u(lo), v8u(hi)));
+                return generic<T>(vconcat(v8u(lo), v8u(hi)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(D.vconcat(v16u(lo), v16u(hi)));
+                return generic<T>(vconcat(v16u(lo), v16u(hi)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(D.vconcat(v32u(lo), v32u(hi)));
+                return generic<T>(vconcat(v32u(lo), v32u(hi)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(D.vconcat(v64u(lo), v64u(hi)));
+                return generic<T>(vconcat(v64u(lo), v64u(hi)));
             else 
                 return vconcat_i(lo,hi);
         }
@@ -43,13 +42,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(D.vconcat(v8i(lo), v8i(hi)));
+                return generic<T>(vconcat(v8i(lo), v8i(hi)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(D.vconcat(v16i(lo), v16i(hi)));
+                return generic<T>(vconcat(v16i(lo), v16i(hi)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(D.vconcat(v32i(lo), v32i(hi)));
+                return generic<T>(vconcat(v32i(lo), v32i(hi)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(D.vconcat(v64i(lo), v64i(hi)));
+                return generic<T>(vconcat(v64i(lo), v64i(hi)));
             else
                 return vconcat_f(lo,hi);                
         }
@@ -59,9 +58,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(D.vconcat(v32f(lo), v32f(hi)));
+                return generic<T>(vconcat(v32f(lo), v32f(hi)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(D.vconcat(v64f(lo), v64f(hi)));
+                return generic<T>(vconcat(v64f(lo), v64f(hi)));
             else
                 throw Unsupported.define<T>();                
         }        

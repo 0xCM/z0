@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;
-    using static VCore;
+    using static Gone2;
     using static CheckSpecs;
 
     static class VChecks
@@ -24,7 +24,7 @@ namespace Z0
             var count = vcount<T>(n128);            
             for(var i=0; i< count; i++)
                 seek(ref dst, i) = svc.and(vcell(x,i), vcell(y,i));
-            var v2 = VCore.vload(n128, in dst);
+            var v2 = Vectors.vload(n128, in dst);
             return gvec.vsame(v1,v2);
         }
 

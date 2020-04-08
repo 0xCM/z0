@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Core;
+    using static As;
+    using static Vectors;
+
     
     public class tv_mul : t_vinx<tv_mul>
     {
@@ -121,7 +123,7 @@ namespace Z0
                 var x1 = Math128.mul(vcell(x,1), vcell(y,1));
                 var x2 = Math128.mul(vcell(x,2), vcell(y,2));
                 var x3 = Math128.mul(vcell(x,3), vcell(y,3));
-                var expect = VCore.vparts(wt, x0,x1,x2,x3);
+                var expect = vparts(wt, x0,x1,x2,x3);
                 var actual = dvec.vmul(x,y);
 
                 Claim.veq(expect,actual);

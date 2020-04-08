@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="n">The target width</param>
         [MethodImpl(Inline), Op]
-        public static BitVector8 extend(BitVector4 src, N8 n)
+        public static BitVector8 extend(BitVector4 src, W8 n)
             => BitVector.create(n, src.data);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="n">The target width</param>
         [MethodImpl(Inline), Op]
-        public static BitVector16 extend(BitVector8 src, N16 n)
+        public static BitVector16 extend(BitVector8 src, W16 n)
             => BitVector.create(n, src.data);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="n">The target width</param>
         [MethodImpl(Inline), Op]
-        public static BitVector32 extend(BitVector16 src, N32 n)
+        public static BitVector32 extend(BitVector16 src, W32 n)
             => BitVector.create(n, src.data);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="n">The target width</param>
         [MethodImpl(Inline), Op]
-        public static BitVector64 extend(BitVector32 src, N64 n)
+        public static BitVector64 extend(BitVector32 src, W64 n)
             => BitVector.create(n, src.data);
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="n">The target width</param>
         [MethodImpl(Inline), Op]
-        public static BitVector128<N128,ulong> extend(BitVector64 src, N128 n)
-            => new BitVector128<N128, ulong>(VCoreD.vscalar(n,src));
+        public static BitVector128<N128,ulong> extend(BitVector64 src, W128 n)
+            => new BitVector128<N128, ulong>(Vectors.vscalar(n,src.data));
     }
 }

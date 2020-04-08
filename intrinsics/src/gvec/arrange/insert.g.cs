@@ -9,7 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;
+    using static Seed;
+    using static Vectors;
+    using static Typed;
             
     partial class gvec
     {
@@ -19,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] byte index)        
             where T : unmanaged
                 => vinsert_u(src,dst,(byte)index);

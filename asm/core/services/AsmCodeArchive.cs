@@ -15,22 +15,22 @@ namespace Z0.Asm
     {
         public FolderPath RootFolder {get;}
 
-        public IAsmContext Context {get;}
+        readonly IContext Context;
         
         public PartId Origin {get;}
 
         public string HostName {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive New(IAsmContext context, PartId catalog)
+        public static IAsmCodeArchive New(IContext context, PartId catalog)
             => new AsmCodeArchive(context, catalog);
 
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive New(IAsmContext context, PartId catalog, string host)
+        public static IAsmCodeArchive New(IContext context, PartId catalog, string host)
             => new AsmCodeArchive(context, catalog, host);
 
         [MethodImpl(Inline)]
-        AsmCodeArchive(IAsmContext context, PartId catalog, string host)
+        AsmCodeArchive(IContext context, PartId catalog, string host)
         {
             this.Context = context;
             this.Origin = catalog;
@@ -38,7 +38,7 @@ namespace Z0.Asm
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(Origin.Format(),host));
         }
 
-        AsmCodeArchive(IAsmContext context, PartId catalog)
+        AsmCodeArchive(IContext context, PartId catalog)
         {
             this.Context = context;
             this.Origin = catalog;

@@ -56,7 +56,7 @@ namespace Z0
         {
             this.Member = member;
             this.Code = code;       
-            this.KindId = null;     
+            this.KindId = member.KindId;     
         }
 
         public bool Equals(ApiMemberCode other)

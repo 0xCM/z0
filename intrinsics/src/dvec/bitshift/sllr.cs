@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     
-    using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
     
-    using static Core;    
-    using static VCore;
-    
+    using static Typed;
+    using static Vectors;
+        
     partial class dvec
     {           
         /// <summary>
@@ -26,8 +25,8 @@ namespace Z0
         public static Vector128<byte> vsllr(Vector128<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
-            var dst = vsllr(vinflate(src,n256,z16),y);
-            return vcompact(dst, n128, z8);
+            var dst = vsllr(vinflate(src,w256,z16),y);
+            return vcompact(dst, w128, z8);
         }
 
         /// <summary>
@@ -39,8 +38,8 @@ namespace Z0
         public static Vector128<sbyte> vsllr(Vector128<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
-            var dst = vsllr(vinflate(src,n256,z16i),y);
-            return vcompact(dst, n128, z8i);
+            var dst = vsllr(vinflate(src,w256,z16i),y);
+            return vcompact(dst, w128, z8i);
         }
 
         /// <summary>
@@ -111,9 +110,9 @@ namespace Z0
         public static Vector256<sbyte> vsllr(Vector256<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
-            var lo = vsllr(vinflate(vlo(src),n256,z16i),y);
-            var hi = vsllr(vinflate(vhi(src),n256,z16i),y);
-            return vcompact(lo,hi, n256, z8i);
+            var lo = vsllr(vinflate(vlo(src),w256,z16i),y);
+            var hi = vsllr(vinflate(vhi(src),w256,z16i),y);
+            return vcompact(lo,hi, w256, z8i);
         }
 
         /// <summary>
@@ -125,9 +124,9 @@ namespace Z0
         public static Vector256<byte> vsllr(Vector256<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
-            var lo = vsllr(vinflate(vlo(src),n256,z16),y);
-            var hi = vsllr(vinflate(vhi(src),n256,z16),y);
-            return vcompact(lo,hi, n256, z8);
+            var lo = vsllr(vinflate(vlo(src),w256,z16),y);
+            var hi = vsllr(vinflate(vhi(src),w256,z16),y);
+            return vcompact(lo,hi, w256, z8);
         }
 
         /// <summary>
@@ -197,7 +196,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsllr(Vector128<sbyte> src, sbyte count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -206,7 +205,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vsllr(Vector128<byte> src, byte count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -215,7 +214,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vsllr(Vector128<short> src, short count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -224,7 +223,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vsllr(Vector128<ushort> src, ushort count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -233,7 +232,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vsllr(Vector128<int> src, int count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -242,7 +241,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vsllr(Vector128<uint> src, uint count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -251,7 +250,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector128<long> vsllr(Vector128<long> src, long count)
-            => vsllr(src, vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -260,7 +259,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vsllr(Vector128<ulong> src, ulong count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -269,7 +268,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vsllr(Vector256<sbyte> src, sbyte count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -278,7 +277,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vsllr(Vector256<byte> src, byte count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -287,7 +286,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vsllr(Vector256<short> src, short count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -296,7 +295,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vsllr(Vector256<ushort> src, ushort count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -305,7 +304,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vsllr(Vector256<int> src, int count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -314,7 +313,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vsllr(Vector256<uint> src, uint count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -323,7 +322,7 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vsllr(Vector256<long> src, long count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
 
         /// <summary>
         /// Promotes the offset scalar to a vector and applies the register-based right shift operator
@@ -332,6 +331,6 @@ namespace Z0
         /// <param name="count">The offset amount</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vsllr(Vector256<ulong> src, ulong count)
-            => vsllr(src, VCoreD.vscalar(n128,count));
+            => vsllr(src, vscalar(w128,count));
     }
 }

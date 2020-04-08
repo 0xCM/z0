@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System.Collections.Generic;
 
-    public interface IApiCorrelator : IAsmService
+    public interface IApiCorrelator : IService
     {
         IEnumerable<ApiStatelessMember> FindHostedMembers(in ApiHostUri host);
 

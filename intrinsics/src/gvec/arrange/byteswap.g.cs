@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static VCore;
+    using static Gone2;
 
     partial class gvec
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// Effects the reversal of the byte-level representation of each component in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.U16 | NumericKind.U32 | NumericKind.U64)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.U16 | NumericKind.U32 | NumericKind.U64)]
         public static Vector128<T> vbyteswap<T>(Vector128<T> x)
             where T : unmanaged
         {
@@ -38,7 +38,7 @@ namespace Z0
         /// Effects the reversal of the byte-level representation of each component in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.U16 | NumericKind.U32 | NumericKind.U64)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.U16 | NumericKind.U32 | NumericKind.U64)]
         public static Vector256<T> vbyteswap<T>(Vector256<T> x)
             where T : unmanaged
         {

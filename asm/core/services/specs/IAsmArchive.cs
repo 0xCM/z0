@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines base interface for archival services that support persistence/lookup for x86 encoded asm
     /// </summary>
-    public interface IAsmArchive : IAsmService
+    public interface IAsmArchive : IService
     {
         /// <summary>
         /// The archive root to which all uri's and locations are relative

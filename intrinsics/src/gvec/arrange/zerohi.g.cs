@@ -12,8 +12,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;    
     
-    using static Core;
-    using static VCore;
+    using static Seed;
+    using static Vectors;
     
     partial class gvec
     {        
@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector128<T> vzerohi<T>(Vector128<T> src)
             where T : unmanaged
                 => MoveScalar(v64u(src)).As<ulong,T>();
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector256<T> vzerohi<T>(Vector256<T> src)
             where T : unmanaged
                 => vinsert(vlo(src), default,0);

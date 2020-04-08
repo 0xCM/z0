@@ -124,7 +124,7 @@ namespace Z0.Asm.Check
                 ref readonly var result = ref eval.Target;
                 var x = result.Target[i].Left;
                 var y = result.Target[i].Right;
-                Claim.eq(x, y);
+                Claim.eq(x,y);
             }
         }
 
@@ -132,7 +132,7 @@ namespace Z0.Asm.Check
         {
             var kid = api.Member.KindId;
             int count = 128;
-            if(kid == 0 || kid == OpKindId.Div || kid == OpKindId.Mod)
+            if(kid == null || kid == 0 || kid == OpKindId.Div || kid == OpKindId.Mod)
                 return;
 
             var nk = api.Method.ReturnType.NumericKind();
@@ -171,6 +171,7 @@ namespace Z0.Asm.Check
             }
             catch(Exception e)
             {
+                Notify(AppMsg.Error($"Failure evaluating operation {api.Id} of kind {kid}"));
                 Notify(AppMsg.Error(e));
             }           
         }

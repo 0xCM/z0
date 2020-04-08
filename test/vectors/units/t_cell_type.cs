@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Core;
+    using static Seed;
+    using static Control;
 
     public class t_cell_type : UnitTest<t_cell_type>
     {    

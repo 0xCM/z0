@@ -18,7 +18,7 @@ namespace Z0.Asm
             => new IPart[]{
                 R.Blocks.Resolved, 
                 R.Math.Resolved,
-                R.Vectorized.Resolved,
+                R.Vectors.Resolved,
                 R.GMath.Resolved,
                 R.Cast.Resolved
                 }

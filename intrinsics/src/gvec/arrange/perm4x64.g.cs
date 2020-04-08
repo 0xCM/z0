@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;
-    using static VCore;
+    using static Seed;
+    using static Vectors;
 
     partial class gvec
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vperm4x64<T>(Vector256<T> x, [Imm] byte spec)
             where T : unmanaged
                 => vperm4x64_u(x,spec);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)
             where T : unmanaged
                 => vperm4x64_u(x, (byte)spec);

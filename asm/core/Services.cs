@@ -15,36 +15,33 @@ namespace Z0.Asm
     using static Seed;
 
     public static class AsmCoreServices
-    {            
-        public static IApiCorrelator ApiCorrelator(this IAsmContext c)
-            => Svc.ApiCorrelator.Create(c);
-            
+    {                        
         [MethodImpl(Inline)]
-        public static IAsmFunctionBuilder FunctionBuilder(this IAsmContext context)
+        public static IAsmFunctionBuilder FunctionBuilder(this IContext context)
             => AsmFunctionBuilder.Create(context);        
 
         [MethodImpl(Inline)]
-        public static AsmEmissionPaths EmissionPaths(this IAsmContext context)    
+        public static AsmEmissionPaths EmissionPaths(this IContext context)    
             => AsmEmissionPaths.The;
 
         [MethodImpl(Inline)]
-        public static IHostOpExtractor HostExtractor(this IAsmContext context, int? bufferlen = null)
-            => HostOpExtractor.New(context, bufferlen);
+        public static IHostOpExtractor HostExtractor(this IContext context, int? bufferlen = null)
+            => HostOpExtractor.New(context, bufferlen ?? Pow2.T14);
 
         [MethodImpl(Inline)]
-        public static IMemoryExtractor MemoryExtractor(this IAsmContext context, byte[] buffer)
+        public static IMemoryExtractor MemoryExtractor(this IContext context, byte[] buffer)
             => Svc.MemoryExtractor.New(context, buffer);
 
         [MethodImpl(Inline)]
-        public static IMemoryExtractParser MemoryExtractParser(this IAsmContext context, byte[] buffer)
+        public static IMemoryExtractParser MemoryExtractParser(this IContext context, byte[] buffer)
             => Svc.MemoryExtractParser.New(context, buffer);
 
         [MethodImpl(Inline)]
-        public static ByteParser<EncodingPatternKind> PatternParser(this IAsmContext context, byte[] buffer)
+        public static ByteParser<EncodingPatternKind> PatternParser(this IContext context, byte[] buffer)
             => ByteParser<EncodingPatternKind>.New(context, EncodingPatterns.Default,  buffer);
 
         [MethodImpl(Inline)]
-        public static ICaptureService Capture(this IAsmContext context)
+        public static ICaptureService Capture(this IContext context)
             => CaptureService.New(context);
 
         /// <summary>
@@ -54,7 +51,7 @@ namespace Z0.Asm
         /// <param name="dst">The target path</param>
         /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeWriter CodeWriter(this IAsmContext context, FilePath dst)
+        public static IAsmCodeWriter CodeWriter(this IContext context, FilePath dst)
             => AsmCodeWriter.New(context, dst);
 
         /// <summary>
@@ -92,17 +89,8 @@ namespace Z0.Asm
         /// <param name="sink">The target to which capture events are routed</param>
         /// <param name="size">The (uniform) buffer length</param>
         [MethodImpl(Inline)]
-        public static AsmBuffers Buffers(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
-            => AsmBuffers.New(context,observer,size);
-
-        /// <summary>
-        /// Instantiates a contextual buffered client
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="client">The client to interwine</param>
-        [MethodImpl(Inline)]
-        public static IAsmBufferClient BufferedClient(this IAsmContext context, AsmBufferClient client)
-            => AsmBufferedClient.New(context, client);
+        public static AsmBuffers Buffers(this IContext context, AsmCaptureEventObserver observer, int? size = null)
+            => AsmBuffers.New(context, observer, size);
 
         /// <summary>
         /// Instantiates a contextual archive service that is specialized for an assembly
@@ -110,7 +98,7 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="id">The assembly identifier</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive CodeArchive(this IAsmContext context, PartId id)
+        public static IAsmCodeArchive CodeArchive(this IContext context, PartId id)
             => AsmCodeArchive.New(context,id);
 
         /// <summary>
@@ -119,7 +107,7 @@ namespace Z0.Asm
         /// <param name="catalog">The catalog name</param>
         /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive CodeArchive(this IAsmContext context, PartId assembly, string host)
+        public static IAsmCodeArchive CodeArchive(this IContext context, PartId assembly, string host)
             => AsmCodeArchive.New(context, assembly, host);
 
         /// <summary>
@@ -128,10 +116,10 @@ namespace Z0.Asm
         /// <param name="context">The context within which the flow will be created</param>
         /// <param name="source">The instruction source</param>
         /// <param name="triggers">The triggers that fire when instructions satisfy criterea of interest</param>
-        public static IAsmInstructionFlow InstructionFlow(this IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
+        public static IAsmInstructionFlow InstructionFlow(this IContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
 
-        public static OpExtractExchange ExtractExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
+        public static OpExtractExchange ExtractExchange(this IContext context, AsmCaptureEventObserver observer, int? size = null)
         {
             const int DefaultBufferLen = 1024*8;
 
@@ -141,25 +129,16 @@ namespace Z0.Asm
             return OpExtractExchange.New(control, cBuffer, sBuffer);
         }        
 
-        public static Option<Assembly> ResolvedAssembly(this IAsmContext context, PartId id)
+        [MethodImpl(Inline)]
+        public static IApiCorrelator ApiCorrelator(this IApiContext c)
+            => Svc.ApiCorrelator.Create(c);
+
+        public static Option<Assembly> ResolvedAssembly(this IApiContext context, PartId id)
             =>  (from r in  context.Compostion.Resolved
                 where r.Id == id
                 select r.Owner).FirstOrDefault();
 
-        public static IEnumerable<PartId> ActiveAssemblies(this IAsmContext context)
-        {
-            return context.Compostion.Resolved.Select(r => r.Id);
-             //var settings = AppSettings.Load("z0.control").Pairs;
-            // foreach(var (key,value) in settings)
-            // {
-            //     var index = key.Split(text.colon());            
-            //     if(index.Length == 2 && bit.Parse(index[1]))
-            //     {
-            //         var id = Enums.parse<AssemblyId>(value, AssemblyId.None);
-            //         if(id != AssemblyId.None)
-            //             yield return id;                        
-            //     }
-            // }
-        }
+        public static IEnumerable<PartId> ActiveAssemblies(this IApiContext context)
+            => context.Compostion.Resolved.Select(r => r.Id);
     }
 }

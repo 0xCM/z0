@@ -10,9 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Seed;
-    using static As;
-    using static Widths;
-    using static refs;
     
     partial class Vectors
     {

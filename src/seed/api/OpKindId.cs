@@ -89,13 +89,26 @@ namespace Z0
         AddHS,
 
         /// <summary>
+        /// Sum absolute differences
+        /// </summary>        
+        Sad,
+
+        /// <summary>
         /// Horizontal subtraction
         /// </summary>        
         Sub,
 
         SubH,
 
+        SubHS,
+
+        SubS,
+
         Mul,
+
+        MulLo,
+
+        MulHi,
 
         Div,
 
@@ -106,6 +119,8 @@ namespace Z0
         Clamp,
 
         Distance,
+
+        ClMul,
 
         Dot,
 

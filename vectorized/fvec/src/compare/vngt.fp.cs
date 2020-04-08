@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     
-    using static Core;
+    using static Seed;
 
     partial class dinxfp
     {

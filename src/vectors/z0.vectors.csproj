@@ -11,6 +11,8 @@
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(Blocks)" />
+    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 
 </Project>

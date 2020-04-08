@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
     
-    using static Core;
-    using static VCore;
+    using static Seed;
+    using static Vectors;
+    using static Typed;
 
     partial class gvec
     {        
@@ -18,39 +19,26 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => generic<T>(VCore.vscalar(n128, vcell(v64u(src),1)));
+                => generic<T>(vscalar(n128, vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts hi 128-bit lane of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vhi<T>(Vector256<T> src)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vhi_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vhi_i(src);
-            else 
-                return vhi_f(src);
-        }
+                => vhi_u(src);
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to scalar targets
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vhi<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
                 => dvec.vhi(v64u(src), out x0, out x1);
@@ -59,7 +47,7 @@ namespace Z0
         /// Extracts the hi 128-bit lane of the source vector to a pair
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public static ref Pair<ulong> vhi<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged
                 => ref dvec.vhi(src.AsUInt64(), ref dst);
@@ -68,7 +56,7 @@ namespace Z0
         /// Extracts the upper 256-bits from the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vhi<T>(Vector512<T> src)
             where T : unmanaged
                 => src.Hi;       
@@ -77,7 +65,7 @@ namespace Z0
         /// Extracts the lower 256-bits from the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public static Vector512<T> vhi<T>(Vector1024<T> src)
             where T : unmanaged
                 => src.Hi;       
@@ -92,8 +80,10 @@ namespace Z0
                 return generic<T>(dvec.vhi(v16u(src)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dvec.vhi(v32u(src)));
-            else 
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(dvec.vhi(v64u(src)));
+            else
+                return vhi_i(src);
         }
 
         [MethodImpl(Inline)]
@@ -106,8 +96,10 @@ namespace Z0
                 return generic<T>(dvec.vhi(v16i(src)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(dvec.vhi(v32i(src)));
-            else
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dvec.vhi(v64i(src)));
+            else
+                return vhi_f(src);
         }
 
         [MethodImpl(Inline)]

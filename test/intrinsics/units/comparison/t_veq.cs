@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
 
     using static Core;
-    using static VCore;
+    using static Gone2;
 
     public class t_veq : t_vinx<t_veq>
     {     

@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IApiContext<IAsmContext>, IAppMsgQueue, IPolyrandProvider, IAppContext
+    public interface IAsmContext : IApiContext, IAppMsgQueue, IPolyrandProvider, IAppContext
     {
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified

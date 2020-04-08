@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;    
-    using static VCore;
+    using static Seed;
+    using static Vectors;
+    using static As;
     
     partial class gvec
     {        
@@ -18,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector128<T> vsllv<T>(Vector128<T> x, Vector128<T> counts)
             where T : unmanaged
                 => vsllv_u(x, counts);
@@ -28,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector256<T> vsllv<T>(Vector256<T> x, Vector256<T> counts)
             where T : unmanaged
                 => vsllv_u(x,counts);

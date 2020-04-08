@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;    
-    using static VCore;
+    using static Seed;
+    using static Vectors;
     
     partial class gvec
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static Vector128<T> vrotr<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static Vector256<T> vrotr<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
 
-    using static Core;
-    using static VCore;
+    using static Vectors;
+    using static Typed;
 
     partial class dvec
     {   
@@ -411,7 +411,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vcompact(Vector256<ulong> src, N128 w, uint t = default)
-            => VCore.vparts(n128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
+            => Vectors.vparts(n128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
 
         /// <summary>
         /// 4x64w -> 4x32w
@@ -420,7 +420,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vcompact(Vector256<long> src, N128 w, int t = default)            
-            => VCore.vpartsi(n128, (int)vcell(src, 0),(int)vcell(src, 1),(int)vcell(src, 2),(int)vcell(src, 3));
+            => Vectors.vpartsi(n128, (int)vcell(src, 0),(int)vcell(src, 1),(int)vcell(src, 2),(int)vcell(src, 3));
 
         // ~ 8x64w <-> 8x32w
         // ~ 8:32 <-> 64

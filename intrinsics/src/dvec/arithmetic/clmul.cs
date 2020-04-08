@@ -10,7 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
  
-    using static Core;    
+    using static Vectors;    
+    using static Typed;
 
     partial class dvec
     {
@@ -20,7 +21,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="poly">The reducing polynomial</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static byte clmulr(N8 r, byte a, byte b, ushort poly)
         {
             var prod = dvec.clmul(a,b);
@@ -29,7 +30,7 @@ namespace Z0
             return (byte)prod;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static ulong clmulr(N8 r, ulong a, ulong b, ulong poly)
         {
             var product = clmul64(a,b);            
@@ -44,7 +45,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="poly">The reducing polynomial</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static ushort clmulr(N16 r, ushort a, ushort b, uint poly)
         {
             var prod = dvec.clmul(a,b);
@@ -59,7 +60,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="poly">The reducing polynomial</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static uint clmulr(N32 r, uint a, uint b, ulong poly)
         {
             var prod = clmul(a,b);
@@ -74,20 +75,20 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static ConstPair<ulong> clmul(ulong lhs, ulong rhs)
         {
-            var a = VCore.vscalar(n128, lhs);
-            var b = VCore.vscalar(n128, rhs);
+            var a = Vectors.vscalar(n128, lhs);
+            var b = Vectors.vscalar(n128, rhs);
             var result = CarrylessMultiply(a,b,0x00);
             return (vcell(result,0), vcell(result,1));
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static ulong clmul64(ulong x, ulong y)
         {
-            var u = VCore.vscalar(n128, x);
-            var v = VCore.vscalar(n128, y);
+            var u = Vectors.vscalar(n128, x);
+            var v = Vectors.vscalar(n128, y);
             var z = CarrylessMultiply(u, v, 0);
             return vcell(z,0);
         }
@@ -97,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static ushort clmul(byte lhs, byte rhs)
             => (ushort)clmul((uint)lhs, (uint)rhs);
 
@@ -106,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static uint clmul(ushort lhs, ushort rhs)
             => (uint)clmul((uint)lhs, (uint)rhs);
 
@@ -115,7 +116,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static ulong clmul(uint lhs, uint rhs)
             => clmul((ulong)lhs, (ulong)rhs).Left;
 
@@ -125,7 +126,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), ClMul]
         public static Vector128<ulong> vclmul(Vector128<ulong> a, Vector128<ulong> b)
             => CarrylessMultiply(a,b,0x00);
 
@@ -135,7 +136,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <param name="mask">Specifies the components of the source vectors to multiply</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ClMul]
         public static Vector128<ulong> vclmul(Vector128<ulong> lhs, Vector128<ulong> rhs, ClMulMask mask)
             =>  CarrylessMultiply(lhs, rhs, (byte)mask);
 
@@ -145,7 +146,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="poly">The reducing polynomial</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ClMul]
         public static Vector128<ulong> vclmulr(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> poly)
         {
             var prod = vclmul(a,b);

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Vectors;
 
     using C = OpClass;
 
@@ -36,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static int components<W>(W w = default)
             where W : struct, ITypeWidth
-                => ((int)default(W).TypeWidth)/bitsize<T>();
+                => ((int)default(W).TypeWidth)/BitSize.measure<T>();
 
         static string CaseName<W>(IValidationContext context, ISFuncApi f)
             where W : unmanaged, ITypeWidth
@@ -126,7 +127,7 @@ namespace Z0
             where F : ISVShiftOp128DApi<T>
         {
             var t = default(T);
-            var bounds = ((byte)0, (byte)(bitsize<T>() - 1));
+            var bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
 
             void run()
             {
@@ -146,7 +147,7 @@ namespace Z0
             where F : ISVShiftOp256DApi<T>
         {
             var t = default(T);
-            var bounds = ((byte)0, (byte)(bitsize<T>() - 1));
+            var bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
 
             void run()
             {

@@ -13,16 +13,19 @@ namespace Z0.Asm
 
     readonly struct AsmInstructionDecoder : IAsmInstructionDecoder
     {
-        public IAsmContext Context {get;}
+        public IContext Context {get;}
+
+        readonly AsmFormatConfig AsmFormat;
 
         [MethodImpl(Inline)]
-        public static AsmInstructionDecoder Create(IAsmContext context)
-            => new AsmInstructionDecoder(context);
+        public static AsmInstructionDecoder Create(IContext context, AsmFormatConfig format)
+            => new AsmInstructionDecoder(context, format);
 
         [MethodImpl(Inline)]
-        AsmInstructionDecoder(IAsmContext context)
+        AsmInstructionDecoder(IContext context, AsmFormatConfig format)
         {
             this.Context = context;
+            this.AsmFormat = format;
         }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace Z0.Asm
                 }
 
                 var instructions = new Asm.Instruction[decoded.Count];
-                var formatted = AsmFormatter.Internal(Context).FormatInstructions(decoded, src.Address);
+                var formatted = AsmFormatter.Internal(AsmFormat).FormatInstructions(decoded, src.Address);
                 for(var i=0; i<instructions.Length; i++)
                     instructions[i] =  decoded[i].ToSpec(formatted[i]);
                 return AsmInstructionList.Create(instructions,src);

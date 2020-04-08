@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;
-    using static VCore;
+    using static Gone2;
     using static HexConst;
 
     public class t_vmaskstore : t_vinx<t_vmaskstore>
@@ -20,7 +20,7 @@ namespace Z0
 
             var n = n128;
             var dst = Blocks.single<byte>(n);
-            var m0 = VCore.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
+            var m0 = Vectors.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
             var m1 = dvec.vsllx(m0,32);
             var m2 = dvec.vsllx(m1,32);
             var m3 = dvec.vsllx(m2,32);
@@ -38,7 +38,7 @@ namespace Z0
                 dvec.vmaskstore(v3, m3, dst);
 
                 var v4 = Vectors.vload(dst);
-                var v5 = VCore.vparts(n128, 
+                var v5 = Vectors.vparts(n128, 
                     vcell(v0,0), vcell(v0,1), vcell(v0,2), vcell(v0,3),
                     vcell(v1,4), vcell(v1,5), vcell(v1,6), vcell(v1,7),
                     vcell(v2,8), vcell(v2,9), vcell(v2,A), vcell(v2,B),

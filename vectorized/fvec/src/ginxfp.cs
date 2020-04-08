@@ -9,8 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;    
-    using static VCore;
+    using static Seed;    
+    using static Vectors;
+    using static Typed;
 
     /// <summary>
     /// Generic intrinsics over floating-point domains

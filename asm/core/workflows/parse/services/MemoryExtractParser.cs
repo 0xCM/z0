@@ -11,28 +11,28 @@ namespace Z0.Asm
 
     public readonly struct MemoryExtractParser : IMemoryExtractParser
     {
-        public IAsmContext Context {get;}
+        readonly IContext Context;
 
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        public static MemoryExtractParser New(IAsmContext context, int? bufferlen)
+        public static MemoryExtractParser New(IContext context, int bufferlen)
             => new MemoryExtractParser(context, bufferlen);
 
         [MethodImpl(Inline)]
-        public static MemoryExtractParser New(IAsmContext context, byte[] buffer)
+        public static MemoryExtractParser New(IContext context, byte[] buffer)
             => new MemoryExtractParser(context, buffer);
 
         [MethodImpl(Inline)]
-        MemoryExtractParser(IAsmContext context, byte[] buffer)
+        MemoryExtractParser(IContext context, byte[] buffer)
         {
             this.Context = context;
             this.Buffer = buffer;
         }
 
         [MethodImpl(Inline)]
-        MemoryExtractParser(IAsmContext context, int? bufferlen)
-            : this(context, new byte[bufferlen ?? context.DefaultBufferLength])
+        MemoryExtractParser(IContext context, int bufferlen)
+            : this(context, new byte[bufferlen])
         {}
 
         public Option<MemoryExtract> Parse(MemoryExtract src)

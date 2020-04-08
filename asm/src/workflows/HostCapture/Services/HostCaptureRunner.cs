@@ -31,8 +31,8 @@ namespace Z0.Asm
             public HostCaptureRunner(IAsmContext context, IHostCaptureEventRelay broker)
             {
                 this.Context = context;
-                Extractor = Context.HostExtractor(Context.DefaultBufferLength);
-                Parser = Context.ExtractParser(Context.DefaultBufferLength);
+                Extractor = Context.HostExtractor();
+                Parser = Context.ExtractParser();
                 Decoder = Context.AsmFunctionDecoder();
                 Format = Context.AsmFormat.WithSectionDelimiter();
                 Broker = broker;

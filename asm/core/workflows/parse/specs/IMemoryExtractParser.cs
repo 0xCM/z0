@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
     
-    public interface IMemoryExtractParser : IAsmService
+    public interface IMemoryExtractParser : IService
     {
         Option<MemoryExtract> Parse(MemoryExtract src);        
     }

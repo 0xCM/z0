@@ -13,14 +13,14 @@ namespace Z0.Asm
 
     readonly struct ApiCorrelator : IApiCorrelator
     {
-        public IAsmContext Context {get;}
+        public IApiContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static IApiCorrelator Create(IAsmContext context)
+        public static IApiCorrelator Create(IApiContext context)
             => new ApiCorrelator(context);
         
         [MethodImpl(Inline)]
-        ApiCorrelator(IAsmContext context)
+        ApiCorrelator(IApiContext context)
         {
             this.Context = context;
         }
@@ -62,7 +62,7 @@ namespace Z0.Asm
                           let l = pair.Item1
                           let r = pair.Item2
                           select ApiMemberCode.Define(r.left, r.right.Bits);                                      
-            return  ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
+            return ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
 
         }
     }

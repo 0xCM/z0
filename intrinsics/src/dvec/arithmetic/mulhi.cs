@@ -12,7 +12,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
 
-    using static Core;    
 
     partial class dvec
     {
@@ -21,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), MulHi]
         public static Vector128<short> vmulhi(Vector128<short> x, Vector128<short> y)
             => MultiplyHigh(x, y);
 
@@ -30,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), MulHi]
         public static Vector128<ushort> vmulhi(Vector128<ushort> x, Vector128<ushort> y)
             => MultiplyHigh(x, y);
 
@@ -39,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), MulHi]
         public static Vector256<short> vmulhi(Vector256<short> x, Vector256<short> y)
             => MultiplyHigh(x, y);
 
@@ -48,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), MulHi]
         public static Vector256<ushort> vmulhi(Vector256<ushort> x, Vector256<ushort> y)
             => MultiplyHigh(x, y);
     }

@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Core;
-    using static VCore;
+    using static Vectors;
 
     partial class vexamples
     {
@@ -32,10 +31,10 @@ namespace Z0
 
         public void vmerge_example()
         {
-            var a = VCore.vparts(n128, 0u,1,2,3);
-            var b = VCore.vparts(n128, 4u,5,6,7);
-            var c = VCore.vparts(n128, 8u,9,10,11);
-            var d = VCore.vparts(n128, 12u,13,14,15);
+            var a = vparts(n128, 0u,1,2,3);
+            var b = vparts(n128, 4u,5,6,7);
+            var c = vparts(n128, 8u,9,10,11);
+            var d = vparts(n128, 12u,13,14,15);
             var x0 = dvec.vmergelo(v8u(a), v8u(b));
             var y0 = dvec.vmergelo(v8u(c), v8u(d));
             var z0 = v8u(dvec.vmergelo(v16u(x0),v16u(y0)));
@@ -52,7 +51,7 @@ namespace Z0
             void report()
             {
                 var x = Data.vincrements<byte>(n128);
-                var y = dvec.vadd(x, VCore.vbroadcast(n128, (byte)16));
+                var y = dvec.vadd(x, Vectors.vbroadcast(n128, (byte)16));
 
                 var lo = gvec.vmergelo(x,y);
                 var hi = gvec.vmergehi(x,y);

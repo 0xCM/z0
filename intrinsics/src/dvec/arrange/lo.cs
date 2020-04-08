@@ -11,8 +11,9 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Avx;
     
-    using static Core;
-    using static VCore;
+    using static Vectors;
+    using static Typed;
+
 
     partial class dvec
     {
@@ -138,6 +139,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vlo(Vector128<ulong> src)
-            =>  VCoreD.vscalar(n128,src.GetElement(0));
+            =>  Vectors.vscalar(n128,src.GetElement(0));
     }
 }
