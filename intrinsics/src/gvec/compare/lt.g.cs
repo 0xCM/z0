@@ -9,24 +9,24 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;
+    using static Seed; using static Memories;
     using static Gone2;
 
     using static As;
 
     partial class gvec
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector128<T> vlt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vlt_u(x,y);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector256<T> vlt<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vlt_u(x,y);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector512<T> vlt<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vlt(x.Lo, y.Lo), vlt(x.Hi, y.Hi));

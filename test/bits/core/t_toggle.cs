@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static root;
+    using static Seed;
+    using static Memories;
 
     public class t_toggle : t_bitcore<t_toggle>
     {

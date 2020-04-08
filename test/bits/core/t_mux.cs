@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_mux : t_bitcore<t_mux>
     {

@@ -14,7 +14,7 @@ namespace Z0
     
     partial class LogicSquares
     {     
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vnot<T>(N128 n, in T a)
             where T : unmanaged
         {                    
@@ -22,7 +22,7 @@ namespace Z0
             return gvec.vnot(vA);
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vnot<T>(N256 n, in T a)
             where T : unmanaged
         {                    
@@ -30,12 +30,12 @@ namespace Z0
             return gvec.vnot(vA);
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void not<T>(N128 n, in T a, ref T z)
             where T : unmanaged
                 => Vectors.vstore(vnot(n, in a),ref z);
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void not<T>(N128 n, int vcount, int blocklen, in T a, ref T z)
             where T : unmanaged
         {
@@ -43,12 +43,12 @@ namespace Z0
                 not(n, in skip(in a, offset), ref seek(ref z, offset));
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void not<T>(N256 n, in T a, ref T z)
             where T : unmanaged
                 => Vectors.vstore(vnot(n, in a),ref z);
         
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void not<T>(N256 n, int vcount, int blocklen, in T a, ref T z)
             where T : unmanaged
         {

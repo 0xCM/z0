@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.IO;
     
-    using static root;
+    using static Seed;
     using static Gone;
 
     using static BinaryBitLogicKind;

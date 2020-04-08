@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static root;
+    using static Seed;
 
     public class t_perm : t_bitcore<t_perm>
     {

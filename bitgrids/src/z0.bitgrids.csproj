@@ -9,9 +9,9 @@
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />    
     <ProjectReference Include="$(Graphs)" />
+    <ProjectReference Include="$(Matrix)" />    
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Matrix)" />    
     <ProjectReference Include="$(Intrinsics)" />
   </ItemGroup>
 

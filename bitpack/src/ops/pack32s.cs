@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static Core;    
+    using static Seed;
+    using static Memories;
     using static Vectors;
     
     partial class BitPack
@@ -57,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static byte pack(Span<bit> src, N8 n)
         {
-            var v0 = vload(n256, head(convert(src, 0, Core.bitsize<byte>())));
+            var v0 = vload(n256, head(convert(src, 0, bitsize<byte>())));
             return (byte)packlsb8(dvec.vcompact(v0,n128,z8));
         }
 
@@ -69,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ushort pack(Span<bit> src, N16 n)
         {
-            ref readonly var unpacked = ref head(convert(src, 0, Core.bitsize<ushort>())); 
+            ref readonly var unpacked = ref head(convert(src, 0, bitsize<ushort>())); 
             return pack32(unpacked, n);
         }
 
@@ -81,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint pack(Span<bit> src, N32 n)
         {
-            ref readonly var unpacked = ref head(convert(src, 0, Core.bitsize<uint>()));
+            ref readonly var unpacked = ref head(convert(src, 0, bitsize<uint>()));
             return pack32(unpacked,n);            
         }
 
@@ -93,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ulong pack(Span<bit> src, N64 n)
         {
-            ref readonly var unpacked = ref head(convert(src, 0, Core.bitsize<ulong>()));
+            ref readonly var unpacked = ref head(convert(src, 0, bitsize<ulong>()));
             return pack32(unpacked,n);
         }
     }

@@ -9,17 +9,17 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;
+    using static Seed; using static Memories;
     using static Gone2;
     
     partial class gvec
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector128<T> vnegate<T>(Vector128<T> src)
             where T : unmanaged
                 => vnegate_u(src);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector256<T> vnegate<T>(Vector256<T> src)
             where T : unmanaged
                 => vnegate_u(src);

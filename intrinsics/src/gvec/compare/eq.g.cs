@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;
+    using static Seed; using static Memories;
     using static Gone2;
     using static As;
     
@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector128<T> veq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector256<T> veq<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -72,7 +72,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector512<T> veq<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (veq(x.Lo, y.Lo), veq(x.Hi, y.Hi));

@@ -8,7 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public struct RowVector<N,T>  
         where N : unmanaged, ITypeNat

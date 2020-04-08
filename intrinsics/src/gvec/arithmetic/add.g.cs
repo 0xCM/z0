@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Gone2;
-    using static Core;
+    using static Seed; 
+    using static Memories;
 
     partial class gvec
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vadd_u(x,y);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vadd_u(x,y);
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector512<T> vadd<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vadd(x.Lo,y.Lo),vadd(x.Hi, y.Hi));
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Closures(NumericKind.All)]
         public static Vector128<T> vadd<T>(Vector128<T> x, T a)
             where T : unmanaged
                 => vadd(x, Vectors.vbroadcast(n128,a));
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Closures(NumericKind.All)]
         public static Vector256<T> vadd<T>(Vector256<T> x, T a)
             where T : unmanaged
                 => vadd(x, Vectors.vbroadcast(n256,a));
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Closures(NumericKind.All)]
         public static Vector512<T> vadd<T>(Vector512<T> x, T a)
             where T : unmanaged
                 => vadd(x, Vectors.vbroadcast(n512,a));

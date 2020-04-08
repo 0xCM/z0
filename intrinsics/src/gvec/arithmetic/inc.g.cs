@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;
+    using static Seed; using static Memories;
     using static Gone2;
     
     partial class gvec
@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector128<T> vinc<T>(Vector128<T> src)
             where T : unmanaged
                 => vinc_u(src);
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector256<T> vinc<T>(Vector256<T> src)
             where T : unmanaged
                 => vinc_u(src);
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="x0">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector128<T> vinc<T>(N128 n, T x0)
             where T : unmanaged
                 => vadd(Data.vincrements<T>(n), x0);
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="x0">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector256<T> vinc<T>(N256 n, T x0)
             where T : unmanaged
                 => vadd(Data.vincrements<T>(n), x0);

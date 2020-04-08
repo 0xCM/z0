@@ -9,6 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
         
+    using static Seed;
+        
     partial class gvec
     {
         [MethodImpl(Inline), Op, Closures(NumericKind.All)]

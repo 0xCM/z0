@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Core;
+    using static Seed; using static Memories;
     using static Gone2;
     
     partial class gvec
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), NonImpl, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), NonImpl, Closures(NumericKind.Integers)]
         public static Vector128<T> vnonimpl<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vnonimpl_u(x,y);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), NonImpl, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), NonImpl, Closures(NumericKind.Integers)]
         public static Vector256<T> vnonimpl<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vnonimpl_u(x,y);
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), NonImpl, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), NonImpl, Closures(NumericKind.Integers)]
         public static Vector512<T> vnonimpl<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vnonimpl(x.Lo,y.Lo), (vnonimpl(x.Hi, y.Hi)));

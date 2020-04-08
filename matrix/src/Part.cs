@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+[assembly: PartId(PartId.Matrix)]
+
+namespace Z0.Parts
 {
-    using System;
-
-    // public static class vdata
-    // {
-
-    // }
-
-
+    public sealed class Matrix : Part<Matrix>
+    {
+            
+        
+    }
 }
+

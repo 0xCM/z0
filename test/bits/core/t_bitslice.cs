@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static As;
+    using static Seed;
+    using static Memories;
 
     public class t_bitslice : t_bitcore<t_bitslice>
     {        

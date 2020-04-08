@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;    
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public interface ICheckRowVector : ICheck
     {

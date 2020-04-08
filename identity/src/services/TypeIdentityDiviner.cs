@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
     {        

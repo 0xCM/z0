@@ -15,7 +15,7 @@ namespace Z0
     using static X86Missing;
 
     using static Gone2;
-    using static Core;
+    using static Seed; using static Memories;
     using static BitMasks;
 
     partial class dvec

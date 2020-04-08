@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Core;
+    using static Seed;
 
     partial class Identity
     {

@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static root;
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_masks : t_bitcore<t_masks>
     {                    

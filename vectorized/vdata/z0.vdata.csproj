@@ -6,11 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Vectors)" />
-    <ProjectReference Include="$(Vectors)" />
-    <ProjectReference Include="$(Fixed)" />        
-    <ProjectReference Include="$(Blocks)" />
   </ItemGroup>
 
 </Project>

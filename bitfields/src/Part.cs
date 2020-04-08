@@ -22,7 +22,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static Core;
 
     public static partial class BitField
     {

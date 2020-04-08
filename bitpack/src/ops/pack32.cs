@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static Seed;
+    using static Memories;
     using static Vectors;
-    using static Typed;
-    using static refs;
 
     partial class BitPack
     {

@@ -10,7 +10,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Core;
+    using static Seed; 
+    using static Memories;
 
     partial class Dynop
     {

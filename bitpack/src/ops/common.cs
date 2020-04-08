@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static Core;
     using static dvec;
+    using static Seed;
+    using static Memories;
     using static Vectors;
 
     partial class BitPack

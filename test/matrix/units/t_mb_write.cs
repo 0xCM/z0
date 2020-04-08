@@ -7,7 +7,7 @@ namespace Z0.Test
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Seed;
     using static Gone;
 
     public class t_mb_write : UnitTest<t_mb_write>

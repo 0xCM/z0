@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static Seed;
-    using static refs;
+    using static Memories;
 
     partial class dinxfp
     {

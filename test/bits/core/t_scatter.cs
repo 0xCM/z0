@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static root;
+    using static Seed;
     using static As;
 
     public class t_scatter : t_bitcore<t_scatter>

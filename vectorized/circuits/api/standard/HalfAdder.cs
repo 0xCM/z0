@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static root;
+    using static Seed;
 
     public readonly struct HalfAdder
     {

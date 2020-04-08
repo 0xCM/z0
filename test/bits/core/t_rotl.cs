@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_rotl : t_bitcore<t_rotl>
     {

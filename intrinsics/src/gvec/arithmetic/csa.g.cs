@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static Core;
+    using static Seed; using static Memories;
             
     partial class gvec
     {
@@ -26,7 +26,7 @@ namespace Z0
         /// https://arxiv.org/pdf/1611.07612.pdf 
         /// https://github.com/WojciechMula/sse-popcount
         /// </remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector512<T> vcsa<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
         {

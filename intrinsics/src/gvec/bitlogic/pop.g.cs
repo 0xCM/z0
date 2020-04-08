@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
         
-    using static Core;
+    using static Seed; using static Memories;
     using static Gone2;
     using static BitPop;
 
@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <param name="z">The third vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static uint vpop<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
                 => dvec.vpop(v64u(x), v64u(y), v64u(z));
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <param name="z">The third vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static uint vpop<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => dvec.vpop(v64u(x), v64u(y), v64u(z));

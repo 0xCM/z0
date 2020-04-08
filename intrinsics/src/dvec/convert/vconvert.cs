@@ -15,7 +15,7 @@ namespace Z0
      
     using static AsIn;
     using static Gone2;
-    using static Core;
+    using static Seed; using static Memories;
     
     partial class dvec
     {                

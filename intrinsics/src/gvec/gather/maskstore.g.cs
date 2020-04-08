@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Gone2;
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gvec
     {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static root;
+    using static Seed;
 
     public abstract class t_bitgrids_base<U> : UnitTest<U>
         where U : t_bitgrids_base<U>, new()

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static root;
+    using static Seed;
 
     public class t_bitfields : UnitTest<t_bitfields>
     {

@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Collections.Generic;        
 
-    using static Core;
-    
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Defines the vector api surface
@@ -29,7 +29,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => Blocks.safeload(n,src.Data);        
 
-        [MethodImpl(NotInline)]
         public static RowVector<T> alloc<T>(int minlen)               
             where T : unmanaged  
             => new RowVector<T>(new T[minlen]);

@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector128<T> vbsll<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
                 => vbsll_u(x,count);
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector256<T> vbsll<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
                 => vbsll_u(x,count);

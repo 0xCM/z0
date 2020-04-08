@@ -12,7 +12,7 @@ namespace Z0
     [ApiHost(ApiHostKind.Generic)]
     public static partial class gvec
     {        
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    
+        //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    
     }
 
 }

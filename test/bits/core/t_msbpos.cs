@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Seed;
+    using static Memories;
 
     public class t_msbpos : t_bitcore<t_msbpos>
     {

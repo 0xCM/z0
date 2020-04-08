@@ -10,11 +10,11 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Gone2;
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class gvec
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.SignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.SignedInts)]
         public static Vector128<T> vabs<T>(Vector128<T> x)
             where T : unmanaged
         {
@@ -30,7 +30,7 @@ namespace Z0
                 throw Unsupported.define<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.SignedInts)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.SignedInts)]
         public static Vector256<T> vabs<T>(Vector256<T> x)
             where T : unmanaged
         {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Core;
+    using static Seed;
 
     partial class XTend
     {        
@@ -18,6 +18,5 @@ namespace Z0
         /// <param name="generics">Metadata for generic operations</param>
         public static IEnumerable<ClosedApiOp> Close(this GenericApiOp op)
              => Identity.close(op);
-
     }
 }

@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
+
     public class t_embed_imm8 : UnitTest<t_embed_imm8>
     {    
         protected override bool TraceDetailEnabled

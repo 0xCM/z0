@@ -15,7 +15,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse.X64;
      
-    using static Core;
+    using static Seed; using static Memories;
     using static Gone2;
 
     partial class dvec

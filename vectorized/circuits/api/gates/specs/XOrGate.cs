@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Seed;
 
     public readonly struct XOrGate : IBinaryLogicGate
     {

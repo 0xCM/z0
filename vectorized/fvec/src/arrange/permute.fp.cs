@@ -36,7 +36,6 @@ namespace Z0
         public static Vector256<double> vperm4x64(Vector256<double> x, [Imm] Perm4L spec)
             => vperm4x64(x,(byte)spec);
 
-
         /// <summary>
         /// Permutes components in the source vector across lanes as specified by the control vector
         /// __m256 _mm256_permutevar8x32_ps (__m256 a, __m256i idx)VPERMPS ymm, ymm/m256, ymm

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     
-    using static root;
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_vblock_add : UnitTest<t_vblock_add>
     {   

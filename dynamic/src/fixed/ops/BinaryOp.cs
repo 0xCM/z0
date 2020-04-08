@@ -12,7 +12,7 @@ namespace Z0
 
     using C = OpClass;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class FixedDynamic
     {

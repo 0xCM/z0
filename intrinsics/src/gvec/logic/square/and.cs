@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static Core;
+    using static Seed; using static Memories;
     using static AsIn;
     
     using BL = ByteLogic;
@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     partial class LogicSquares
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Unsigned)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Unsigned)]
         public static void and<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {

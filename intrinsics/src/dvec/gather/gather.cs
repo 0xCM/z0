@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static Gone2;
-    using static Core;
+    using static Seed; using static Memories;
     using static AsIn;
 
     partial class dvec

@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />        
+    <ProjectReference Include="$(Seed)" />        
+    <ProjectReference Include="$(Api)" />   
+    <ProjectReference Include="$(Kinds)" />   
+
+    <ProjectReference Include="$(Custom)" />       
     <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(Vectors)" />        
 
