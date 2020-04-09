@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
-    using static Seed; using static Memories;
+    using static Seed; 
             
     partial class gvec
     {
@@ -49,7 +48,7 @@ namespace Z0
         /// https://arxiv.org/pdf/1611.07612.pdf 
         /// https://github.com/WojciechMula/sse-popcount
         /// </remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static void csa<T>(T a, T b, T c, out T lo, out T hi)
             where T : unmanaged
         {

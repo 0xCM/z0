@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
-    using System.Runtime.Intrinsics.X86;
-        
+
+    using static Seed;
+
     partial class dvec
     {   
         [MethodImpl(Inline), Select]

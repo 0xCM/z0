@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
     
     partial class gvec
     {
@@ -78,7 +77,6 @@ namespace Z0
             else 
                 throw Unsupported.define<T>();
         }
-
 
         [MethodImpl(Inline)]
         static Vector256<T> vnonimpl_u<T>(Vector256<T> x, Vector256<T> y)

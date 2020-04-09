@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
-    using System.Runtime.Intrinsics.X86;
     
-    using static Seed; using static Memories;    
-    using static Gone2;
+    using static Seed; 
+    using static Memories;    
 
     partial class dvec
     {
@@ -67,7 +66,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vsllx(Vector256<uint> src, [Imm] byte count)        
             => v32u(vsllx(v64u(src), count));
-
     }
-
 }

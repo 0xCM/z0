@@ -7,30 +7,29 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    
-    using static Gone2;    
-    using static Seed; using static Memories;
+
+    using static Seed; 
+    using static Memories;
     using static AsIn;
         
     partial class gvec
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vgather<T>(in T src, Vector128<T> vidx)
             where T : unmanaged        
                 => vgather_u(n128,src,vidx);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vgather<T>(in T src, Vector256<T> vidx)
             where T : unmanaged        
                 => vgather_u(n256,src,vidx);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vgather<T>(ReadOnlySpan<T> src, Vector128<T> vidx)
             where T : unmanaged        
                 => vgather_u(n128, head(src),vidx);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vgather<T>(ReadOnlySpan<T> src, Vector256<T> vidx)
             where T : unmanaged        
                 => vgather_u(n256, head(src), vidx);

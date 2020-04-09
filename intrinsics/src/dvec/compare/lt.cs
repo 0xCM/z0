@@ -7,15 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static X86Missing;
 
-    using static Gone2;
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
     using static BitMasks;
 
     partial class dvec
@@ -25,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector128<sbyte> vlt(Vector128<sbyte> x, Vector128<sbyte> y)
             => CompareLessThan(x,y);
 
@@ -34,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector128<byte> vlt(Vector128<byte> x, Vector128<byte> y)
         {
             var mask = Vectors.vbroadcast(n128, SignMask8);
@@ -48,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector128<short> vlt(Vector128<short> x, Vector128<short> y)
             => CompareLessThan(x,y);
 
@@ -57,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector128<ushort> vlt(Vector128<ushort> x, Vector128<ushort> y)
         {
             var mask = Vectors.vbroadcast(n128, SignMask16);
@@ -71,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector128<int> vlt(Vector128<int> x, Vector128<int> y)
             => CompareLessThan(x,y);
 
@@ -80,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector128<uint> vlt(Vector128<uint> x, Vector128<uint> y)
         {
             var mask = Vectors.vbroadcast(n128, SignMask32);
@@ -92,7 +91,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector128<long> vlt(Vector128<long> x, Vector128<long> y)
         {
             var a = Vectors.vconcat(x,y);
@@ -105,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Lt]
         public static Vector128<ulong> vlt(Vector128<ulong> x, Vector128<ulong> y)
         {
             var a = Vectors.vconcat(x,y);
@@ -118,7 +117,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector256<sbyte> vlt(Vector256<sbyte> x, Vector256<sbyte> y)
             => CompareLessThan(x,y);
 
@@ -127,7 +126,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector256<byte> vlt(Vector256<byte> x, Vector256<byte> y)
         {
             var mask = Vectors.vbroadcast(n256,SignMask8);
@@ -139,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector256<short> vlt(Vector256<short> x, Vector256<short> y)
             => CompareLessThan(x,y);
 
@@ -148,7 +147,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector256<ushort> vlt(Vector256<ushort> x, Vector256<ushort> y)
         {
             var mask = Vectors.vbroadcast(n256, SignMask16);
@@ -160,7 +159,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector256<int> vlt(Vector256<int> x, Vector256<int> y)
             => CompareLessThan(x,y);
 
@@ -169,7 +168,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector256<uint> vlt(Vector256<uint> x, Vector256<uint> y)
         {
             var mask = Vectors.vbroadcast(n256, SignMask32);
@@ -181,7 +180,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static Vector256<long> vlt(Vector256<long> x, Vector256<long> y)
             => CompareLessThan(x,y);
 
@@ -190,7 +189,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Lt]
         public static Vector256<ulong> vlt(Vector256<ulong> x, Vector256<ulong> y)
         {
             var mask = Vectors.vbroadcast(n256,SignMask64);

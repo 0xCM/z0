@@ -7,24 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
 
     partial class gvec
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector128<T> vgt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vgt_u(x,y);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector256<T> vgt<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vgt_u(x,y);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
         public static Vector512<T> vgt<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vgt(x.Lo, y.Lo), vgt(x.Hi, y.Hi));

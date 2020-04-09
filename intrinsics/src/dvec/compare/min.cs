@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Sse;    
     using static System.Runtime.Intrinsics.X86.Sse2;    
@@ -15,8 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;    
     using static System.Runtime.Intrinsics.X86.Avx2;    
     
-    using static Seed; using static Memories;    
-    using static Gone2;
+    using static Memories;    
 
     public partial class dvec
     {
@@ -25,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector128<byte> vmin(Vector128<byte> x, Vector128<byte> y)
             => Min(x, y);
 
@@ -34,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector128<sbyte> vmin(Vector128<sbyte> x, Vector128<sbyte> y)
             => Min(x, y);
 
@@ -43,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector128<short> vmin(Vector128<short> x, Vector128<short> y)
             => Min(x, y);
 
@@ -52,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector128<ushort> vmin(Vector128<ushort> x, Vector128<ushort> y)
             => Min(x, y);
 
@@ -61,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector128<int> vmin(Vector128<int> x, Vector128<int> y)
             => Min(x, y);
 
@@ -70,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector128<uint> vmin(Vector128<uint> x, Vector128<uint> y)
             => Min(x, y);
 
@@ -79,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector128<long> vmin(Vector128<long> x, Vector128<long> y)
         {
             var xL = vinsert(x,default,0);
@@ -99,18 +97,18 @@ namespace Z0
         /// <summary>
         /// __m256i _mm256_min_epu8 (__m256i a, __m256i b) VPMINUB ymm, ymm, ymm/m256
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        [MethodImpl(Inline), Op]
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline), Min]
         public static Vector256<byte> vmin(Vector256<byte> x, Vector256<byte> y)
             => Min(x, y);
 
         /// <summary>
         /// __m256i _mm256_min_epi8 (__m256i a, __m256i b)VPMINSB ymm, ymm, ymm/m256
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        [MethodImpl(Inline), Op]
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline), Min]
         public static Vector256<sbyte> vmin(Vector256<sbyte> x, Vector256<sbyte> y)
             => Min(x, y);
 
@@ -119,7 +117,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector256<short> vmin(Vector256<short> x, Vector256<short> y)
             => Min(x, y);
 
@@ -128,7 +126,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector256<ushort> vmin(Vector256<ushort> x, Vector256<ushort> y)
             => Min(x, y);
 
@@ -137,7 +135,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector256<int> vmin(Vector256<int> x, Vector256<int> y)
             => Min(x, y);
 
@@ -146,7 +144,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static Vector256<uint> vmin(Vector256<uint> x, Vector256<uint> y)
             => Min(x, y);
 
@@ -155,7 +153,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Min]
         public static Vector256<ulong> vmin(Vector256<ulong> x, Vector256<ulong> y)
             => vselect(vlt(x,y),x,y);
 
@@ -164,7 +162,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Min]
         public static Vector256<long> vmin(Vector256<long> x, Vector256<long> y)
             => vblend(y, x, v8u(vlt(x,y)));
     }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;    
+    using static Seed; 
     
     partial class dvec
     {                
@@ -48,5 +48,4 @@ namespace Z0
         public static Vector256<ulong> vrotlv(Vector256<ulong> src, Vector256<ulong> counts)
             => dvec.vor(dvec.vsllv(src,counts),dvec.vsrlv(src, dvec.vsub(Vector256u64,counts)));
     }
-
 }

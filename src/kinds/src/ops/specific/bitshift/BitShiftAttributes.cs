@@ -15,7 +15,7 @@ namespace Z0
 
     public sealed class SalAttribute : A { public SalAttribute() : base(K.Sal) {} }
 
-    public sealed class SarAttribute : A { public SarAttribute() : base(K.Sar) {} }
+    public sealed class Sra : A { public Sra() : base(K.Sar) {} }
 
     public sealed class RotlAttribute : A { public RotlAttribute() : base(K.Rotl) {} }
         

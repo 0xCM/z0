@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline), Sar]
+        [MethodImpl(Inline), Sra]
         public static sbyte sar(sbyte src, byte offset)
             =>(sbyte)(src >> offset);
 
@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline), Sar]
+        [MethodImpl(Inline), Sra]
         public static byte sar(byte src, byte offset)
             => (byte)(src >> offset);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline), Sar]
+        [MethodImpl(Inline), Sra]
         public static short sar(short src, byte offset)
             => (short)(src >> offset);
 
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline), Sar]
+        [MethodImpl(Inline), Sra]
         public static ushort sar(ushort src, byte offset)
             => (ushort)(src >> offset);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline), Sar]
+        [MethodImpl(Inline), Sra]
         public static int sar(int src, byte offset)
             => src >> offset;
 
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline), Sar]
+        [MethodImpl(Inline), Sra]
         public static uint sar(uint src, byte offset)
             => src >> offset;
 
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline), Sar]
+        [MethodImpl(Inline), Sra]
         public static long sar(long src, byte offset)
             => src >> offset;
 
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline), Sar]
+        [MethodImpl(Inline), Sra]
         public static ulong sar(ulong src, byte offset)
             => src >> offset; 
     }

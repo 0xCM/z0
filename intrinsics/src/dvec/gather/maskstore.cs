@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Seed; using static Memories;    
-    using static Gone2;
+    using static Seed; 
+    using static Memories;    
     using static Blocks;
     
     partial class dvec
@@ -28,7 +27,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector128<sbyte> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(v8u(src), v8u(mask), ptr(dst));
 
@@ -41,7 +40,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector128<byte> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(src, mask, ptr(dst));
 
@@ -54,7 +53,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector128<short> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(v8u(src), mask, ptr(dst));
 
@@ -67,7 +66,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector128<ushort> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(v8u(src), mask, ptr(dst));
 
@@ -81,7 +80,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector128<int> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(v8u(src), mask, ptr(dst));
 
@@ -94,7 +93,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector128<uint> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(v8u(src), mask, ptr(dst));
 
@@ -107,7 +106,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector128<long> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(v8u(src), mask, ptr(dst));
 
@@ -120,7 +119,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector128<ulong> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(v8u(src), mask, ptr(dst));
 
@@ -132,7 +131,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<sbyte> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmstore(vlo(src), vlo(mask), ref dst.Head);
@@ -147,7 +146,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<byte> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmaskstore(vlo(src), vlo(mask), ref dst.Head);
@@ -162,7 +161,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<short> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmaskstore(vlo(src), vlo(mask), ref dst.Head);
@@ -177,7 +176,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<ushort> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmstore(vlo(src), vlo(mask), ref dst.Head);
@@ -192,7 +191,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<int> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmaskstore(vlo(src), vlo(mask), ref dst.Head);
@@ -207,7 +206,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<uint> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmaskstore(vlo(src), vlo(mask), ref dst.Head);
@@ -222,7 +221,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<long> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmaskstore(vlo(src), vlo(mask), ref dst.Head);
@@ -237,7 +236,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore8(Vector256<ulong> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmaskstore(vlo(src), vlo(mask), ref dst.Head);
@@ -253,7 +252,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore32(Vector256<uint> src, Vector256<uint> mask, in Block256<uint> dst)
             => MaskStore(ptr(dst), src, mask);
 
@@ -265,7 +264,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore32(Vector256<byte> src, Vector256<uint> mask, in Block256<uint> dst)
             => vmaskstore(v32u(src), mask, dst);
 
@@ -277,7 +276,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore32(Vector256<ushort> src, Vector256<uint> mask, in Block256<uint> dst)
             => vmaskstore(v32u(src), mask, dst);
 
@@ -287,7 +286,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore32(Vector256<ulong> src, Vector256<uint> mask, in Block256<uint> dst)
             => vmaskstore(v32u(src), mask, dst);
 
@@ -298,7 +297,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore64(Vector256<byte> src, Vector256<ulong> mask, in Block256<ulong> dst)
             => vmaskstore(v64u(src), mask, dst);
 
@@ -309,7 +308,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore64(Vector256<ushort> src, Vector256<ulong> mask, in Block256<ulong> dst)
             => vmaskstore(v64u(src), mask, dst);
 
@@ -320,7 +319,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore64(Vector256<uint> src, Vector256<ulong> mask, in Block256<ulong> dst)
             => vmaskstore(v64u(src), mask, dst);
 
@@ -333,7 +332,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore64(Vector256<ulong> src, Vector256<ulong> mask, in Block256<ulong> dst)
             => MaskStore(ptr(dst), src, mask);
 
@@ -346,7 +345,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target block</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector128<byte> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(src, mask, ptr(dst));
 
@@ -359,7 +358,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target block</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector128<sbyte> src, Vector128<sbyte> mask, in Block128<sbyte> dst)
             => MaskMove(src, mask, ptr(dst));
 
@@ -369,7 +368,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector128<int> src, Vector128<int> mask, in Block128<int> dst)
             => MaskStore(ptr(dst), src,mask);
 
@@ -379,7 +378,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector128<uint> src, Vector128<uint> mask, in Block128<uint> dst)
             => MaskStore(ptr(dst), src,mask);
 
@@ -392,7 +391,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector128<ulong> src, Vector128<ulong> mask, in Block128<ulong> dst)
             => MaskStore(ptr(dst), src, mask);
 
@@ -404,7 +403,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector256<byte> src, Vector256<byte> mask, in Block256<byte> dst)
         {
             vmaskstore(vlo(src), vlo(mask), ref dst.Head);
@@ -420,7 +419,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector256<int> src, Vector256<int> mask, in Block256<int> dst)
             => MaskStore(ptr(dst), src, mask);
 
@@ -433,7 +432,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector256<uint> src, Vector256<uint> mask, in Block256<uint> dst)
             => MaskStore(ptr(dst), src, mask);
 
@@ -446,7 +445,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector256<long> src, Vector256<long> mask, in Block256<long> dst)
             => MaskStore(ptr(dst), src, mask);
 
@@ -459,39 +458,39 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void vmaskstore(Vector256<ulong> src, Vector256<ulong> mask, in Block256<ulong> dst)
             => MaskStore(ptr(dst), src, mask);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe void vmaskstore(Vector128<byte> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(src, mask, ptr(ref dst));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe void vmstore(Vector128<sbyte> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(v8u(src), v8u(mask), ptr(ref dst));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe void vmaskstore(Vector128<short> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(v8u(src), mask, ptr(ref dst));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe void vmstore(Vector128<ushort> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(v8u(src), mask, ptr(ref dst));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe void vmaskstore(Vector128<int> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(v8u(src), mask, ptr(ref dst));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe void vmaskstore(Vector128<uint> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(v8u(src), mask, ptr(ref dst));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe void vmaskstore(Vector128<long> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(v8u(src), mask, ptr(ref dst));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe void vmaskstore(Vector128<ulong> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(v8u(src), mask, ptr(ref dst));
     }

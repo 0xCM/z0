@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;    
     
-    using static Seed; using static Memories;  
+    using static Seed; 
+    using static Memories;  
         
     partial class gvec
     {
@@ -42,7 +42,6 @@ namespace Z0
         public static Vector512<T> vones<T>(N512 n, T t = default)
             where T : unmanaged
                 => veq(default(Vector512<T>), default(Vector512<T>));
-
 
         [MethodImpl(Inline)]
         public static Vector128<T> vones<T>(Vec128Kind<T> kind)

@@ -7,49 +7,48 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static Seed; using static Memories;
-    using D = Vectors;
+    using static Seed; 
+    using static Vectors;
 
     partial class dvec
     {
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vmerge(Vector128<sbyte> x, Vector128<sbyte> y)
-            => D.vconcat(vmergelo(x,y),vmergehi(x,y));
+            => vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vmerge(Vector128<byte> x, Vector128<byte> y)
-            => D.vconcat(vmergelo(x,y),vmergehi(x,y));
+            => vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmerge(Vector128<short> x, Vector128<short> y)
-            => D.vconcat(vmergelo(x,y),vmergehi(x,y));
+            => vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmerge(Vector128<ushort> x, Vector128<ushort> y)
-            => D.vconcat(vmergelo(x,y),vmergehi(x,y));
+            => vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmerge(Vector128<int> x, Vector128<int> y)
-            => D.vconcat(vmergelo(x,y),vmergehi(x,y));
+            => vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmerge(Vector128<uint> x, Vector128<uint> y)
-            => D.vconcat(vmergelo(x,y),vmergehi(x,y));
+            => vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmerge(Vector128<long> x, Vector128<long> y)
-            => D.vconcat(vmergelo(x,y),vmergehi(x,y));
+            => vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmerge(Vector128<ulong> x, Vector128<ulong> y)
-            => D.vconcat(vmergelo(x,y),vmergehi(x,y));
+            => vconcat(vmergelo(x,y),vmergehi(x,y));
 
         /// <summary>
         /// [A,B,C,D] x [E,F,G,H] -> [A,E,B,F,C,G,D,H]

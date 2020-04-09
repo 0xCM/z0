@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse41;
         
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
 
     partial class dvec
     {
@@ -192,7 +192,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vblend(Vector256<ulong> x, Vector256<ulong> y, Vector256<byte> spec)        
             => BlendVariable(x, y, v64u(spec)); 
-
     }
-
 }
