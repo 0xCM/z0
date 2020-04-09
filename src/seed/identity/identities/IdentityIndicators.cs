@@ -32,11 +32,6 @@ namespace Z0
         public const char ModSep = Chars.Tilde;
 
         /// <summary>
-        /// A type or value argument delimiter
-        /// </summary>
-        public const char ArgSep = SymNot.Dot;
-
-        /// <summary>
         /// Indicates a signed integral type
         /// </summary>
         public const char Signed = Letters.i;
@@ -71,25 +66,40 @@ namespace Z0
         /// </summary>
         public const char Generic = Letters.g;
  
+         /// <summary>
+        /// A type or value argument delimiter
+        /// </summary>
+        public const char ArgSep = Chars.Comma;
+
+        public const char ArgSepAlt = SymNot.Dot;
+
         /// <summary>
         /// Opens a value parameter list
         /// </summary>
-        public const char ArgsOpen = SymNot.Circle;
+        public const char ArgsOpen = Chars.LParen;
+
+        public const char ArgsOpenAlt = SymNot.Circle;
 
         /// <summary>
         /// Closes a value parameter list
         /// </summary>
-        public const char ArgsClose = SymNot.Circle;
-        
+        public const char ArgsClose = Chars.RParen;
+
+        public const char ArgsCloseAlt = SymNot.Circle;
+
         /// <summary>
         /// Opens a type argument list
         /// </summary>
-        public const char TypeArgsOpen = SymNot.Lt;
+        public const char TypeArgsOpen = Chars.LBracket;
+
+        public const char TypeArgsOpenAlt = SymNot.Lt;
 
         /// <summary>
         /// Closes a type argument list
         /// </summary>
-        public const char TypeArgsClose = SymNot.Gt;
+        public const char TypeArgsClose = Chars.RBracket;
+
+        public const char TypeArgsCloseAlt = SymNot.Gt;
 
         /// <summary>
         /// The text used to terminate a uri scheme and trailing '//'

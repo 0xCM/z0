@@ -14,8 +14,53 @@ namespace Z0.Asm
     
     using static Seed;
 
-    public static class AsmCoreServices
-    {                        
+    public static class ServiceFactory
+    {                       
+        [MethodImpl(Inline)]
+        public static IImmCapture<T> ImmVCapture<R,T>(this IContext context, R resolver, IAsmFunctionDecoder decoder)
+            where T : unmanaged        
+            where R : ISFImm8ResolverApi<T>
+            => resolver switch {
+                ISVImm8UnaryResolver128Api<T> r => ImmV128UnaryCaptureService<T>.New(context,r, decoder),
+                ISVImm8UnaryResolver256Api<T> r => ImmV256UnaryCaptureService<T>.New(context,r, decoder),
+                ISVImm8BinaryResolver128Api<T> r => ImmV128BinaryCaptureService<T>.New(context,r, decoder),
+                ISVImm8BinaryResolver256Api<T> r => ImmV256BinaryCaptureService<T>.New(context,r, decoder),
+                _ => throw Unsupported.define(resolver.GetType())
+            };           
+
+        /// <summary>
+        /// Instantiates a contextual immediate capture service for a unary operator
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="src">A unary operator that requires an immediate value</param>
+        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
+        [MethodImpl(Inline)]
+        public static IImmCapture ImmUnaryCapture(this IContext context, MethodInfo src, OpIdentity baseid, IAsmFunctionDecoder decoder)
+            => ImmUnaryCaptureService.Create(context,src,baseid, decoder);
+
+        /// <summary>
+        /// Instantiates a contextual immediate capture service for a binary operator
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="src">A unary operator that requires an immediate value</param>
+        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
+        [MethodImpl(Inline)]
+        public static IImmCapture ImmBinaryCapture(this IContext context, MethodInfo src, OpIdentity baseid, IAsmFunctionDecoder decoder)
+            => ImmBinaryCaptureService.Create(context,src,baseid, decoder);
+
+
+        [MethodImpl(Inline)]
+        public static IOpExtractParser ExtractParser(this IAsmContext context, byte[] buffer)
+            => OpExtractParser.New(context, buffer);
+
+        [MethodImpl(Inline)]
+        public static IOpExtractParser ExtractParser(this IAsmContext context, int? bufferlen = null)
+            => OpExtractParser.New(context, bufferlen);
+
+        [MethodImpl(Inline)]
+        public static IMemoryCapture MemoryCapture(this IContext context, IAsmInstructionDecoder decoder,  int? bufferlen = null)
+            => MemoryCaptureService.Create(context, decoder, bufferlen ?? Pow2.T14);
+
         [MethodImpl(Inline)]
         public static IAsmFunctionBuilder FunctionBuilder(this IContext context)
             => AsmFunctionBuilder.Create(context);        
@@ -35,6 +80,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static IMemoryExtractParser MemoryExtractParser(this IContext context, byte[] buffer)
             => Svc.MemoryExtractParser.New(context, buffer);
+
+        [MethodImpl(Inline)]
+        public static IMemberExtractReader MemberExtractReader(this IContext context)
+            => Svc.MemberExtractReader.Create(context);
 
         [MethodImpl(Inline)]
         public static ByteParser<EncodingPatternKind> PatternParser(this IContext context, byte[] buffer)
@@ -128,6 +177,14 @@ namespace Z0.Asm
             var sBuffer = new byte[size ?? DefaultBufferLen];
             return OpExtractExchange.New(control, cBuffer, sBuffer);
         }        
+
+        [MethodImpl(Inline)]
+        public static IAsmFunctionArchive FunctionArchive(this IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter)
+            => AsmFunctionArchive.Create(context,host,imm,formatter);
+        
+        [MethodImpl(Inline)]
+        public static IAsmFunctionArchive FunctionArchive(this IContext context, PartId catalog, string host, IAsmFormatter formatter)
+            => AsmFunctionArchive.Create(context,catalog,host,formatter);
 
         [MethodImpl(Inline)]
         public static IApiCorrelator ApiCorrelator(this IApiContext c)

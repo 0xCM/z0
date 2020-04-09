@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The source method</param>
         public static bool IsKinded(this MethodInfo m)
-            => m.KindId().HasValue;
+            => m.KindId() != 0;
 
         /// <summary>
         /// Determines whether a method defines an operator with identified kind

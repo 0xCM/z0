@@ -31,7 +31,7 @@ namespace Z0
                 select host;
 
         Option<ApiHost> FindHost(ApiHostUri uri)
-            => Hosts.Where(h => h.Path == uri).FirstOrDefault();
+            => Hosts.Where(h => h.UriPath == uri).FirstOrDefault();
     }
 
 }

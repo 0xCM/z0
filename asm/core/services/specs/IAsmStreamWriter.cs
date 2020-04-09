@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
 
-    public interface IAsmStreamWriter :  IServiceAllocation
+    public interface IAsmStreamWriter : IServiceAllocation
     {
         /// <summary>
         /// The writer output path

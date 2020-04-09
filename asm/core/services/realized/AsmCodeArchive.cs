@@ -9,7 +9,8 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     readonly struct AsmCodeArchive : IAsmCodeArchive
     {

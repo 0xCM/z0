@@ -6,7 +6,8 @@ namespace Z0.Asm
 {        
     using System;
     
-    using static Core;    
+    using static Seed;
+    using static Memories;
     using static OpKind;
     using static AsmServiceMessages;
 

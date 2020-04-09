@@ -10,7 +10,8 @@ namespace Z0.Asm
     using System.Linq;
     using System.Reflection;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     using F = MemberLocationField;
     using R = MemberLocationRecord;
@@ -100,7 +101,7 @@ namespace Z0.Asm
         /// </summary>
         public Option<FilePath> Save()
             => ApiHost.MapValueOrElse(
-                    h => AsmEmissionPaths.The.LocationPath(h.Path),
+                    h => AsmEmissionPaths.The.LocationPath(h.UriPath),
                    () => AsmEmissionPaths.The.LocationPath(AssemblyId));            
     }
 }

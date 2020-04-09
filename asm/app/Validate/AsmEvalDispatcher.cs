@@ -140,7 +140,6 @@ namespace Z0.Asm.Check
             {
                 switch(nk)
                 {
-
                     case NumericKind.U8:
                         Analyze(api,Context.Evaluate(buffers, api, k.As<byte>()));
                         break;

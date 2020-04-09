@@ -28,7 +28,7 @@ namespace Z0
 
         public PartId Owner {get;}
 
-        public ApiHostUri Path {get;}
+        public ApiHostUri UriPath {get;}
         
         public Type HostingType {get;}
         
@@ -38,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiHost src)
-            => src.Path;
+            => src.UriPath;
 
         [MethodImpl(Inline)]
         public static bool operator==(ApiHost a, ApiHost b)
@@ -56,8 +56,8 @@ namespace Z0
             var attrib = t.GetCustomAttribute<ApiHostAttribute>();
             this.HostKind = attrib?.HostKind ?? ApiHostKind.DirectAndGeneric;
             this.HostName = text.ifempty(attrib?.HostName, t.Name).ToLower();
-            this.Path = ApiHostUri.Define(Owner, HostName);
-            this.Identifier = Path.Format();
+            this.UriPath = ApiHostUri.Define(Owner, HostName);
+            this.Identifier = UriPath.Format();
         }
                                   
         public IEnumerable<MethodInfo> DeclaredMethods

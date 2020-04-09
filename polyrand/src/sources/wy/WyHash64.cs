@@ -29,9 +29,9 @@ namespace Z0
         public ulong Next()
         {
             State += X1;
-            Math128.mul(State, X2, out Pair<ulong> Y1);
+            ScalarPairs.mul(State, X2, out Pair<ulong> Y1);
             var m1 = Y1.Left ^ Y1.Right;
-            Math128.mul(m1, X3, out Pair<ulong> Y2);
+            ScalarPairs.mul(m1, X3, out Pair<ulong> Y2);
             var m2 = Y2.Left ^ Y2.Right;
             return m2;
         }

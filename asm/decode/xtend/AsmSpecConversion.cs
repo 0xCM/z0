@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Core;
+    using static Seed;
 
     using Iced = Iced.Intel;
 
@@ -223,7 +223,7 @@ namespace Z0.Asm
                 UsedMemory = src.GetUsedMemory().Select(x => x.ToUsedMemory()).ToArray(),
                 UsedRegisters = src.GetUsedRegisters().Select(x => x.ToUsedRegister()).ToArray(),
                 CpuidFeatures = src.CpuidFeatures.Select(x => x.ToCpuid()).ToArray(),
-                Access = array(
+                Access = Memories.array(
                     src.Op0Access.ToOpAccess(), 
                     src.Op0Access.ToOpAccess(), 
                     src.Op2Access.ToOpAccess(), 

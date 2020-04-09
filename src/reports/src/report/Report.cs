@@ -14,6 +14,8 @@ namespace Z0
     {             
         public static Report<R> Empty => new Report<R>();
 
+        public const char DefaultDelimiter = Chars.Pipe;
+
         public R[] Records {get;}
 
         public ReportInfo Description {get;}

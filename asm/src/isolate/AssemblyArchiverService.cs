@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Core;
+    using static Seed;
     using static AsmWorkflowReports;
     
     readonly struct AssemblyArchiverService :  IAsmAssemblyArchiver

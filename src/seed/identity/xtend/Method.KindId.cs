@@ -14,10 +14,11 @@ namespace Z0
         /// Returns the source method's kind identifier if it exists
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static OpKindId? KindId(this MethodInfo m)
-        {
-            var attrib = m.Tag<OpKindAttribute>();
-            return attrib.IsSome() ? attrib.Value.KindId : (OpKindId?)null;
-        }
+        public static OpKindId KindId(this MethodInfo m)
+            => m.Tag<OpKindAttribute>().MapValueOrDefault(a => a.KindId, OpKindId.None);
+        // {
+        //     var attrib = m.Tag<OpKindAttribute>();
+        //     return attrib.IsSome() ? attrib.Value.KindId : (OpKindId?)null;
+        // }
     }
 }

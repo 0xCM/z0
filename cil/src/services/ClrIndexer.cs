@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
 
-    using Z0.ClrSpecs;
+    using Z0.CilSpecs;
 
     using static Seed;
     using static Control;
@@ -122,8 +122,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The dnlib source value</param>
         [MethodImpl(Inline)]
-        public static ClrSpecs.MethodImplAttributes ToSpec(Dn.MethodImplAttributes src)
-            => (ClrSpecs.MethodImplAttributes)src;
+        public static CilSpecs.MethodImplAttributes ToSpec(Dn.MethodImplAttributes src)
+            => (CilSpecs.MethodImplAttributes)src;
 
         /// <summary>
         /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure

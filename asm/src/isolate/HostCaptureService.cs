@@ -10,24 +10,28 @@ namespace Z0.Asm
     using System.Linq;
     using System.Reflection;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     using static AsmServiceMessages;
-    using static AsmWorkflowReports;
 
     readonly struct HostCaptureService : IHostCapture
     {
         public IAsmContext Context {get;}
 
+        readonly IAsmFunctionDecoder Decoder;
+
+
         public HashSet<PartId> Selected {get;}
 
         [MethodImpl(Inline)]
-        public static IHostCapture Create(IAsmContext context, params PartId[] selected)
-            => new HostCaptureService(context,selected);
+        public static IHostCapture Create(IAsmContext context, IAsmFunctionDecoder decoder, params PartId[] selected)
+            => new HostCaptureService(context, decoder, selected);
 
         [MethodImpl(Inline)]
-        HostCaptureService(IAsmContext context, PartId[] selected)
+        HostCaptureService(IAsmContext context, IAsmFunctionDecoder decoder, PartId[] selected)
         {
             this.Context = context;
+            this.Decoder = decoder;
             this.Selected = selected.Length == 0 ? context.Components.ToHashSet() : selected.ToHashSet();
         }
 
@@ -41,10 +45,9 @@ namespace Z0.Asm
         void CreateLocationReport(PartId id)
             => LocationReport(id).OnSome(report => report.Save());
         
-        public IEnumerable<CapturedHost> Execute(params string[] args)
+        public IEnumerable<ApiHostCapture> Execute(params string[] args)
         {            
             var owners = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
-            var config = Context.AsmFormat.WithSectionDelimiter();
             Paths.DecodedDir.Clear();
             Paths.ParsedDir.Clear();
             Paths.ExtractDir.Clear();
@@ -60,9 +63,9 @@ namespace Z0.Asm
             iter(Selected, CreateLocationReport);
         }
 
-        AsmFunction Decode(MemberParseRecord src, IAsmFunctionDecoder decoder,  IAsmFunctionWriter dst)
+        AsmFunction Decode(MemberParseRecord src, IAsmFunctionWriter dst)
         {
-            var f = decoder.DecodeFunction(src.ToParsedEncoding());
+            var f = Decoder.DecodeFunction(src.ToParsedEncoding());
             dst.Write(f);
             return f;
         }
@@ -75,7 +78,7 @@ namespace Z0.Asm
 
             foreach(var host in src.ApiHosts())
             {
-                var dstPath = AsmEmissionPaths.The.CilPath(host.Path);
+                var dstPath = AsmEmissionPaths.The.CilPath(host.UriPath);
                 //var functions = capture.CaptureFunctions(host);
                 //context.CilEmitter().EmitCil(functions, dstPath).OnSome(e => throw e);
             }            
@@ -85,14 +88,14 @@ namespace Z0.Asm
         {
             var extractor = Context.HostExtractor();
             var ops = extractor.Extract(host);
-            var report = MemberExtractReport.Create(host.Path, ops);
+            var report = MemberExtractReport.Create(host.UriPath, ops);
 
             //var report = extractor.ExtractOps(host);
-            var dstpath = Paths.ExtractPath(host.Path);  
+            var dstpath = Paths.ExtractPath(host.UriPath);  
             var sink = Context;
             report.Save(dstpath)
-                     .OnSome(file => sink.Notify(ExractedHost(host.Path,file)))
-                     .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
+                     .OnSome(file => sink.Notify(ExractedHost(host.UriPath,file)))
+                     .OnNone(() => sink.Notify(HostExtractionFailed(host.UriPath)));
             return report;
         }
 
@@ -100,39 +103,38 @@ namespace Z0.Asm
         {
             var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
             var parsed = parser.Parse(host,extract);
-            var target = Paths.ParsedPath(host.Path);
+            var target = Paths.ParsedPath(host.UriPath);
             var sink = Context;
             parsed.Save(target)
-                        .OnSome(file => sink.Notify(ParsedExtracts(host.Path,file)))
-                        .OnNone(() => sink.Notify(ExtractParseFailure(host.Path)));
+                        .OnSome(file => sink.Notify(ParsedExtracts(host.UriPath,file)))
+                        .OnNone(() => sink.Notify(ExtractParseFailure(host.UriPath)));
             require(extract.RecordCount == parsed.RecordCount);
             return parsed;
         }
 
         AsmFunctionList Decode(ApiHost host, MemberExtractReport captured, MemberParseReport parsed)
         {
-            var path = Paths.DecodedPath(host.Path);
-            var decoder = Context.AsmFunctionDecoder();
+            var path = Paths.DecodedPath(host.UriPath);
             var functions = new AsmFunction[captured.RecordCount];
             using var dst = Context.AsmWriter(path, Context.AsmFormat.WithSectionDelimiter());            
             for(var i=0; i< captured.RecordCount; i++)
             {
                 var record = parsed[i];
                 if(record.Length != 0)
-                    functions[i] = Decode(record, decoder, dst);
+                    functions[i] = Decode(record, dst);
                 else
                     functions[i] = AsmFunction.Empty;
             }
             return AsmFunctionList.Define(functions);
         }
 
-        public CapturedHost CaptureHostOps(ApiHost host)        
+        public ApiHostCapture CaptureHostOps(ApiHost host)        
         {
             Context.Notify($"Executing {host} capture workflow");
             var extracted = Extract(host);
             var parsed = Parse(host, extracted);
             var decoded = Decode(host, extracted, parsed);        
-            return CapturedHost.Define(host.Path, extracted, parsed, decoded);
+            return ApiHostCapture.Define(host.UriPath, extracted, parsed, decoded);
         }
     }
 }

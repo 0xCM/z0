@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="e">The event to relay</param>
         /// <typeparam name="E">The event type</typeparam>
-        ref readonly E RaiseEvent<E>(in E e)
+        ref readonly E Raise<E>(in E e)
             where E : IAppEvent;
     }
 }

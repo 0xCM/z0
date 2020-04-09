@@ -119,10 +119,10 @@ namespace Z0
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
-                var x0 = Math128.mul(vcell(x,0), vcell(y,0));
-                var x1 = Math128.mul(vcell(x,1), vcell(y,1));
-                var x2 = Math128.mul(vcell(x,2), vcell(y,2));
-                var x3 = Math128.mul(vcell(x,3), vcell(y,3));
+                var x0 = BmiMul.mul(vcell(x,0), vcell(y,0));
+                var x1 = BmiMul.mul(vcell(x,1), vcell(y,1));
+                var x2 = BmiMul.mul(vcell(x,2), vcell(y,2));
+                var x3 = BmiMul.mul(vcell(x,3), vcell(y,3));
                 var expect = vparts(wt, x0,x1,x2,x3);
                 var actual = dvec.vmul(x,y);
 

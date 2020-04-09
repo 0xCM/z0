@@ -9,8 +9,6 @@ namespace Z0.Asm.Check
     using System.Linq;
 
     using static Core;
-    using static AsmWorkflowReports;
-    using static HostCaptureWorkflow;
     using static AsmServiceMessages;
 
     class ValidationHost : TestContext<ValidationHost,IAsmContext>, IAsmValidationHost
@@ -27,14 +25,14 @@ namespace Z0.Asm.Check
         public ValidationHost(IAsmContext context)
             : base(context)
         {            
-            Root = RootEmissionPaths.Define(RootEmissionPath);
-            Root.LogDir.Clear();
+            Paths = RootEmissionPaths.Define(RootEmissionPath);
+            Paths.LogDir.Clear();
             Settings = ValidationHostConfig.From(context.Settings);            
         }
 
         ValidationHostConfig Settings {get;}
 
-        RootEmissionPaths Root {get;}
+        RootEmissionPaths Paths {get;}
 
         protected override void OnDispose()
         {
@@ -53,9 +51,10 @@ namespace Z0.Asm.Check
 
         void Emit()
         {
-            var workflow = HostCaptureWorkflow.Create(Context);
-            var config = HostCaptureConfig.Define(RootEmissionPath);            
-
+            var decoder = Context.AsmFunctionDecoder();
+            var formatter = Context.AsmFormatter(Context.AsmFormat.WithSectionDelimiter());
+            var workflow = HostCaptureWorkflow.Create(Context, decoder,formatter,Context.AsmWriterFactory());
+            var config = AsmWorkflowConfig.Define(RootEmissionPath);            
             ConnectReceivers(workflow.EventBroker);
             workflow.Runner.Run(config);
         }
@@ -66,23 +65,10 @@ namespace Z0.Asm.Check
             workflow.Run();
         }
 
-        void OnEvent(MembersLocated e)
+        void OnEvent(HostMembersLocated e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
             Analyze(e.Host, e.Payload);
-        }
-
-        void OnEvent(FunctionsDecoded e)
-        {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
-            Analyze(e.Host, e.Payload);
-        }
-
-        void OnEvent(AsmHexSaved e)
-        {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
-            NotifyConsole(msg);
-            Analyze(e.Host, e.Payload, e.Target);
         }
 
         void OnEvent(ExtractReportCreated e)
@@ -91,15 +77,28 @@ namespace Z0.Asm.Check
             NotifyConsole(msg);
         }
 
-        void OnEvent(ParseReportCreated e)
-        {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Blue);
-            NotifyConsole(msg);
-        }
-
         void OnEvent(ExtractReportSaved e)
         {            
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            NotifyConsole(msg);
+        }
+
+        void OnEvent(HostFunctionsDecoded e)
+        {
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
+            Analyze(e.Host, e.Payload);
+        }
+
+        void OnEvent(HostAsmHexSaved e)
+        {
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            NotifyConsole(msg);
+            Analyze(e.Host, e.Payload, e.Target);
+        }
+
+        void OnEvent(ParseReportCreated e)
+        {
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Blue);
             NotifyConsole(msg);
         }
 
@@ -120,12 +119,18 @@ namespace Z0.Asm.Check
             NotifyConsole(msg);            
         }
 
-        void ConnectReceivers(IHostCaptureEventRelay broker)
+        void ConnectReceivers(IHostCaptureWorkflowRelay broker)
         {
             broker.Error.Subscribe(broker, OnEvent);
 
+            if(Settings.HandleMembersLocated)
+                broker.MembersLocated.Subscribe(broker, OnEvent);
+
             if(Settings.HandleExtractReportCreated)
                 broker.ExtractReportCreated.Subscribe(broker, OnEvent);
+
+            if(Settings.HandleExtractReportSaved)
+                broker.ExtractReportSaved.Subscribe(broker, OnEvent);
 
             if(Settings.HandleParseReportCreated)
                 broker.ParseReportCreated.Subscribe(broker, OnEvent);
@@ -134,13 +139,7 @@ namespace Z0.Asm.Check
                 broker.FunctionsDecoded.Subscribe(broker, OnEvent);
 
             if(Settings.HandleParsedExtractSaved)            
-                broker.HexSaved.Subscribe(broker, OnEvent);
-
-            if(Settings.HandleHostReportSaved)
-                broker.HostReportSaved.Subscribe(broker, OnEvent);
-            
-            if(Settings.HandleMembersLocated)
-                broker.MembersLocated.Subscribe(broker, OnEvent);
+                broker.HexSaved.Subscribe(broker, OnEvent);            
             
             broker.CaptureCatalogStart.Subscribe(broker, OnEvent);            
             broker.CaptureCatalogEnd.Subscribe(broker, OnEvent);

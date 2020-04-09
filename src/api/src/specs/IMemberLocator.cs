@@ -9,8 +9,8 @@ namespace Z0
     
     public interface IMemberLocator : IService
     {
-        IEnumerable<ApiMember> Hosted(ApiHost src);
+        IEnumerable<ApiMember> Hosted(IApiHost src);
 
-        IEnumerable<ApiMember> Located(ApiHost host);        
+        IEnumerable<ApiMember> Located(IApiHost host);        
     }
 }

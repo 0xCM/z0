@@ -6,9 +6,8 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static Core;
+    using static Seed;
 
     using Svc = Z0.Asm;
 
@@ -40,7 +39,17 @@ namespace Z0.Asm
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
         public static IAsmFunctionWriter writer(IContext context, FilePath dst, AsmFormatConfig config = null)
-            => AsmFunctionWriter.Create(context, dst, config ?? AsmFormatConfig.New);
+            => AsmFunctionWriter.Create(context, dst, formatter(context, config));
+
+        /// <summary>
+        /// Allocates a caller-disposed asm function writer
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="config">The format configuration</param>
+        /// <param name="dst">The target path</param>
+        [MethodImpl(Inline)]
+        public static IAsmFunctionWriter writer(IContext context, FilePath dst, IAsmFormatter formatter)
+            => AsmFunctionWriter.Create(context, dst, formatter);
 
         /// <summary>
         /// Instantiates a contextual asm formatter service

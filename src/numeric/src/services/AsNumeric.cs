@@ -10,11 +10,28 @@ namespace Z0
     using static Seed;
     using static As;
 
-    [ApiHost("as.numeric", ApiHostKind.Generic)]
-    public static class AsNumeric
+    public interface IAs<S,T>
+    {
+        T As(S src);
+    }
+    
+    public interface IAsNumeric<S,T> : IAs<S,T>
+        where T : unmanaged
+        
+    {
+
+    }
+
+    public interface IAsNumeric<R,S,T> : IAsNumeric<S,T>
+        where T : unmanaged
+        where R : unmanaged, IAsNumeric<R,S,T>
+        
+    {
+
+    }
+    
+    partial class AsNumeric
     {                
-
-
         [MethodImpl(Inline)]
         public static AsI8<S> I8<S>()        
             => default(AsI8<S>);
@@ -53,33 +70,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static AsF64<S> F64<S>()        
-            => default(AsF64<S>);
-        
-        [MethodImpl(Inline)]
-        static AsU32<S> AsU32<S>()
-            => AsU32<AsU32<S>,S>();
-        
-        [MethodImpl(Inline)]
-        static R AsU32<R,S>()
-            where R : unmanaged, IAsNumeric<R,S,uint>
-                => As<R,S,uint>();
+            => default(AsF64<S>);                
 
         [MethodImpl(Inline)]
         static ref readonly R generalize<X,R>(in X src)
             where R : unmanaged            
                 => ref Unsafe.As<X,R>(ref Unsafe.AsRef(in src));
 
-        [MethodImpl(Inline)]
-        static T As<R,S,T>(S src)
-            where T : unmanaged
-            where R : unmanaged, IAsNumeric<R,S,T>
-                => As_u<R,S,T>().As(src);
-
-        [MethodImpl(Inline)]
-        static R As<R,S,T>()
-            where T : unmanaged
-            where R : unmanaged, IAsNumeric<R,S,T>
-                => As_u<R,S,T>();
 
         [MethodImpl(Inline)]
         static R As_u<R,S,T>()
@@ -171,7 +168,6 @@ namespace Z0
             else
                 throw Unsupported.define<T>();
         }
-
     }
 
     public readonly struct AsNumeric<R,S,T> : IAsNumeric<S,T>

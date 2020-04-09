@@ -18,11 +18,11 @@ namespace Z0.Asm.Check
 
         public bool HandleExtractsParsed {get; set;} = true;
 
-        public bool HandleFunctionsDecoded {get; set;} = false;
+        public bool HandleFunctionsDecoded {get; set;} = true;
 
         public bool HandleParsedExtractSaved {get; set;} = true;
 
-        public bool HandleHostReportSaved {get; set;} = false;
+        public bool HandleExtractReportSaved {get; set;} = true;
 
         public bool HandleExtractReportCreated {get; set;} = false;
 

@@ -8,35 +8,35 @@ namespace Z0.Asm
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     readonly struct AsmFunctionWriter : IAsmFunctionWriter
     {        
         readonly StreamWriter StreamOut;
 
-        readonly AsmFormatConfig Config;
+        readonly IAsmFormatter Formatter;
 
         readonly IContext Context;
 
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter Create(IContext context, FilePath dst, AsmFormatConfig config)
-            => new AsmFunctionWriter(context, dst, config);
+        public static IAsmFunctionWriter Create(IContext context, FilePath dst, IAsmFormatter formatter)
+            => new AsmFunctionWriter(context, dst, formatter);
 
         [MethodImpl(Inline)]
-        AsmFunctionWriter(IContext context, FilePath path, AsmFormatConfig config)
+        AsmFunctionWriter(IContext context, FilePath path, IAsmFormatter formatter)
         {
             this.TargetPath = path;
             this.Context = context;
-            this.Config = config;
+            this.Formatter = formatter;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
     
         public void Write(params AsmFunction[] src)
         {
             foreach(var f in src)
-                StreamOut.Write(Context.AsmFormatter(Config).FormatFunction(f));
+                StreamOut.Write(Formatter.FormatFunction(f));
         }
         
         public void Dispose()

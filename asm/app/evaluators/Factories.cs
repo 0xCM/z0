@@ -17,7 +17,7 @@ namespace Z0.Asm.Check
 
     public static class Evaluation
     {            
-        public static BinaryEval<T> Evaluate<T>(this IAsmContext context, 
+        static BinaryEval<T> Evaluate<T>(this IAsmContext context, 
             in BufferSeq execBuffers, Pair<T>[] sourceBuffer, Pair<T>[] targetBuffer, 
             in ApiMemberCode code,  C.BinaryOp<T> k)
                 where T : unmanaged

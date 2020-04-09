@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public uint mod(uint a)
-            => (uint) Math128.mulhi(_M * a, _N);
+            => (uint) BmiMul.mulhi(_M * a, _N);
 
         /// <summary>
         /// Computes the quotient a / N
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public uint div(uint a)        
-            => (uint) Math128.mulhi(_M, a);
+            => (uint) BmiMul.mulhi(_M, a);
 
         /// <summary>
         /// Computes whether a % n == 0

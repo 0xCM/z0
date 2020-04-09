@@ -43,7 +43,7 @@ namespace Z0
         Outcome IAppEventBroker.Subscribe<S, E>(S sink, E model)
             => Subscribe(sink,model);
 
-        ref readonly E IAppEventRelay.RaiseEvent<E>(in E e)
+        ref readonly E IAppEventRelay.Raise<E>(in E e)
         {                
             if(Subscriptions.TryGetValue(e.GetType(), out var sink))
                 ((IAppEventSink<E>)sink).Accept(e);

@@ -20,13 +20,13 @@ namespace Z0
         where R : IRecord
     {
         string[] IRecord.HeaderNames
-            =>  Reports.headers<R>();
+            => Reports.headers<R>();
     }
 
     public interface IRecord<F,R> : IRecord<R>
         where F : unmanaged, Enum
         where R : IRecord
     {
-
+        
     }   
 }

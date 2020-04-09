@@ -8,14 +8,20 @@ namespace Z0.Asm.Check
 
     using C = OpClass;
 
-    public interface IAsmExecWorkflow : IAsmService
+    public interface IAsmWorkflow : IService
     {
         void Run();
+        
     }
 
-    public interface IAsmValidationHost : IAsmService, IDisposable
+    public interface IAsmExecWorkflow : IAsmWorkflow
     {
-        void Run();
+        
+    }
+
+    public interface IAsmValidationHost : IAsmWorkflow, IDisposable
+    {
+        
     }
 
     public interface IAsmExecutor : IAsmService

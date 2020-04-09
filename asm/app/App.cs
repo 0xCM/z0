@@ -16,7 +16,7 @@ namespace Z0.Asm.Check
         static IPart[] Dependencies
             => new IPart[]{
                 P.Api.Resolved,
-                P.AsmCore.Resolved, 
+                P.AsmModels.Resolved, 
                 P.BitCore.Resolved,
                 P.BitFields.Resolved,
                 P.BitGrids.Resolved,
@@ -87,15 +87,22 @@ namespace Z0.Asm.Check
             term.print("Created application");
         }
             
-        void ExecuteValidationWorkflow()
+        void ValidateArtifacts()
         {
             using var host = ValidationHost.Create(Context);
             host.Run();
         }
 
+        void AnalyzeExtracts()
+        {
+            ExtractAnalyzer.Create(Context).Run();
+            
+        }
+
         public override void RunShell(params string[] args)
         {
-            ExecuteValidationWorkflow();
+            AnalyzeExtracts();
+            //ValidateArtifacts();
         }
 
         public static void Main(params string[] args)

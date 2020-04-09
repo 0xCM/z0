@@ -20,17 +20,17 @@ namespace Z0
                 var y = Random.Next<uint>(2, Pow2.T08);
                 var z = Random.Next<uint>(2, Pow2.T08);
             
-                var lo = Math128.mullo(x,y);
+                var lo = BmiMul.mullo(x,y);
                 Claim.eq(x*y,lo);
 
-                var hi = Math128.mulhi(x,y);
+                var hi = BmiMul.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                Math128.mul(x,y, out uint a, out uint b);
+                BmiMul.mul(x,y, out uint a, out uint b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
-                Math128.mul(z,MAX, out uint c, out uint d);
+                BmiMul.mul(z,MAX, out uint c, out uint d);
                 CheckNumeric.gt(c,0u);
                 CheckNumeric.gt(d,0u);
 
@@ -43,7 +43,7 @@ namespace Z0
                 var xi = Random.Next<uint>();
                 var yi = Random.Next<uint>();
                 var z = (ulong)xi * (ulong)yi;
-                Claim.eq(z, Math128.mul(xi,yi));
+                Claim.eq(z, BmiMul.mul(xi,yi));
             }
         }        
 
@@ -78,19 +78,19 @@ namespace Z0
                 var y = Random.Next<ulong>(2, Pow2.T08);
                 var z = Random.Next<ulong>(2, Pow2.T08);
             
-                var lo = Math128.mullo(x,y);
+                var lo = BmiMul.mullo(x,y);
                 Claim.eq(x*y,lo);
 
-                var hi = Math128.mulhi(x,y);
+                var hi = BmiMul.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                CheckNumeric.nonzero(Math128.mulhi(z,MAX));
+                CheckNumeric.nonzero(BmiMul.mulhi(z,MAX));
 
-                Math128.mul(x,y, out ulong a, out ulong b);
+                BmiMul.mul(x,y, out ulong a, out ulong b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
-                Math128.mul(z,MAX, out ulong c, out ulong d);
+                BmiMul.mul(z,MAX, out ulong c, out ulong d);
                 CheckNumeric.gt(c,0ul);
                 CheckNumeric.gt(d,0ul);
             }
@@ -103,7 +103,7 @@ namespace Z0
             {
                 var a = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
                 var b = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
-                Claim.eq(Math128.lo_ref(a,b), Math128.mullo(a,b));
+                Claim.eq(BmiMul.lo_ref(a,b), BmiMul.mullo(a,b));
             }
 
         }

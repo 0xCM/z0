@@ -10,15 +10,16 @@ namespace Z0.Asm
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Core;
-
+    using static Seed;
+    
     using Iced = Iced.Intel;
-
 
     readonly struct AsmFormatter : IAsmFormatter
     {        
         public AsmFormatConfig Config {get;}
-        
+
+        readonly Iced.MasmFormatter MasmFormatter;
+
         [MethodImpl(Inline)]
         public static AsmFormatter Internal(AsmFormatConfig config)
             => new AsmFormatter(config);
@@ -30,7 +31,22 @@ namespace Z0.Asm
         AsmFormatter(AsmFormatConfig config)
         {
             this.Config = config;
+            this.MasmFormatter = new Iced.MasmFormatter(DefaultOptions);               
         }
+
+        static Iced.MasmFormatterOptions DefaultOptions => new Iced.MasmFormatterOptions
+                {
+                    DecimalDigitGroupSize = 4,
+                    BranchLeadingZeroes = false,
+                    HexDigitGroupSize = 4,
+                    UpperCaseRegisters = false, 
+                    LeadingZeroes = false,
+                    DisplInBrackets = true, 
+                    UpperCaseHex = false,
+                    RipRelativeAddresses = true,
+                    SignedMemoryDisplacements = true,
+                            
+                };
 
         /// <summary>
         /// Formats the assembly function detail
@@ -86,36 +102,29 @@ namespace Z0.Asm
             return lines.ToArray();
         }    
 
+        public string FormatInstruction(in Iced.Instruction src, ulong @base)
+        {
+            var sb = text.build();
+            var writer = new StringWriter(sb);
+            var output = new AsmOutput(writer, @base);
+            MasmFormatter.Format(in src, output);
+            return sb.ToString();
+        }
+
         public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base)
         {            
-            static string LineLabel(ulong src)
-                => text.concat(src.FormatSmallHex(), HexSpecs.PostSpec, text.space());
             
             if(src.Count == 0)
                 return ReadOnlySpan<string>.Empty;
 
-            var formatter = new Iced.MasmFormatter(new Iced.MasmFormatterOptions
-                {
-                    DecimalDigitGroupSize = 4,
-                    BranchLeadingZeroes = false,
-                    HexDigitGroupSize = 4,
-                    UpperCaseRegisters = false, 
-                    LeadingZeroes = false,
-                    DisplInBrackets = true, 
-                    UpperCaseHex = false,
-                    RipRelativeAddresses = true,
-                    SignedMemoryDisplacements = true,
-                            
-                });                
-
             var dst = new string[src.Count];
-            var sb = text.factory.Builder();
+            var sb = text.build();
             var writer = new StringWriter(sb);
             var output = new AsmOutput(writer, @base);
             for(var i = 0; i < src.Count; i++)
             {
                 ref readonly var instruction = ref src[i];
-                formatter.Format(in instruction, output);                    
+                MasmFormatter.Format(in instruction, output);                    
                 dst[i] = sb.ToString();
                 sb.Clear();
             }
@@ -129,7 +138,7 @@ namespace Z0.Asm
         string FormatHeaderCode(AsmCode code)
         {
             if(Config.EmitFunctionHeaderEncoding)
-                return Comment(ByteSpanProperty.Define(code.Id, code.Data).Format());
+                return Comment(ByteSpanProperty.Define(code.Id.ToLegal(), code.Data).Format());
             else
                 return Comment(code.Id);
         }

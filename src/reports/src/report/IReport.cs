@@ -14,8 +14,20 @@ namespace Z0
         string[] HeaderNames {get;}
 
         string ReportName {get;}
+
+        int RecordCount {get;}
     }
         
+    public readonly struct EmptyReport : IReport
+    {
+        public string[] HeaderNames => new string[]{};
+
+        public string ReportName => string.Empty;
+
+        public int RecordCount => 0;
+
+    }
+
     public interface IReport<R> : IReport
         where R : IRecord<R>
     {
@@ -30,7 +42,7 @@ namespace Z0
         R this[int index]
             => Records[index];
         
-        int RecordCount
+        int IReport.RecordCount
             => Records.Length;
 
         Option<FilePath> Save(FilePath dst)

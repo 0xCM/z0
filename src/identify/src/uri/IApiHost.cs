@@ -14,7 +14,7 @@ namespace Z0
 
         PartId Owner {get;}
 
-        ApiHostUri Path {get;}
+        ApiHostUri UriPath {get;}
         
         Type HostingType {get;}        
     }

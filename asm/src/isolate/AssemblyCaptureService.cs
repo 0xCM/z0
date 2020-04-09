@@ -8,9 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     using static AsmServiceMessages;
-    using static AsmWorkflowReports;
 
     readonly struct AssemblyCaptureService : IAssemblyCapture
     {
@@ -29,21 +29,16 @@ namespace Z0.Asm
         AsmEmissionPaths Paths
             => Context.EmissionPaths();
 
-        public FiniteSeq<CapturedOp> Capture(PartId src)
-        {
-            return default;
-        }
-
         public Option<MemberExtractReport> ExtractOps(ApiHost host)
         {
             var capture = Context.HostExtractor();
             var ops = capture.Extract(host);
-            var report = MemberExtractReport.Create(host.Path, ops);            
-            var target = Paths.ExtractPath(host.Path);  
+            var report = MemberExtractReport.Create(host.UriPath, ops);            
+            var target = Paths.ExtractPath(host.UriPath);  
             var saved = report.Save(target);
             var sink = Context;            
-            saved.OnSome(file => sink.Notify(ExractedHost(host.Path, file)))
-                .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
+            saved.OnSome(file => sink.Notify(ExractedHost(host.UriPath, file)))
+                .OnNone(() => sink.Notify(HostExtractionFailed(host.UriPath)));
             return saved ? some(report) : none<MemberExtractReport>();
         }
 
@@ -56,7 +51,7 @@ namespace Z0.Asm
 
         AsmFunctionList Decode(ApiHost host, MemberExtract[] extracted, ParsedMemberCode[] parsed)
         {
-            var path = Paths.DecodedPath(host.Path);
+            var path = Paths.DecodedPath(host.UriPath);
             var decoder = Context.AsmFunctionDecoder();
             var functions = new AsmFunction[extracted.Length];
             using var dst = Context.AsmWriter(path, Context.AsmFormat.WithSectionDelimiter());            
@@ -70,12 +65,12 @@ namespace Z0.Asm
 
             var capture = Context.HostExtractor();
             var extract = capture.Extract(host);
-            var report = MemberExtractReport.Create(host.Path, extract);
-            var target = Paths.ExtractPath(host.Path);  
+            var report = MemberExtractReport.Create(host.UriPath, extract);
+            var target = Paths.ExtractPath(host.UriPath);  
             var sink = Context;
             report.Save(target)
-                     .OnSome(file => sink.Notify(ExractedHost(host.Path, file)))
-                     .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
+                     .OnSome(file => sink.Notify(ExractedHost(host.UriPath, file)))
+                     .OnNone(() => sink.Notify(HostExtractionFailed(host.UriPath)));
         
 
             return extracts.ToArray();

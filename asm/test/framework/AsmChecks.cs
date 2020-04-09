@@ -1068,7 +1068,7 @@ namespace Z0.Asm.Validation
         void RunPipe()
         {
             var archive =  Context.CodeArchive(PartId.Intrinsics);
-            var source = archive.ToInstructionSource(Context);
+            var source = archive.ToInstructionSource(Context, Context.AsmFormat);
             var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
             var triggers = AsmTriggerSet.Define(trigger);
             var flow =  Context.InstructionFlow(source, triggers);
