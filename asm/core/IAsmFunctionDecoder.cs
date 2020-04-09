@@ -20,6 +20,7 @@ namespace Z0.Asm
         /// <param name="parsed">The parsed data</param>
         AsmFunction DecodeFunction(ParsedMemberCode parsed);
 
+        
         AsmFunction[] Decode(params ParsedExtract[] src);     
     }
 }

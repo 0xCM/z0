@@ -72,9 +72,6 @@ namespace Z0.Asm
 
         public MethodInfo SourceMember 
             => SourceExtract.Member.Method;
-
-        public ApiMemberInfo Descriptor 
-            => ApiMemberInfo.Define(Uri, SourceMember.Signature().Format());
         
         public AsmCode Code
             => AsmCode.Define(Id, ParsedContent);

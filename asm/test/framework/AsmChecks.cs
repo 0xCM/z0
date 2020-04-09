@@ -10,6 +10,7 @@ namespace Z0.Asm.Validation
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static Core;
@@ -56,14 +57,14 @@ namespace Z0.Asm.Validation
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public IEnumerable<ApiStatelessMember> HostedMembers(in ApiHostUri host)
+        public IEnumerable<ApiMember> HostedMembers(in ApiHostUri host)
             => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
 
         /// <summary>
         /// Retrieves located members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public IEnumerable<ApiLocatedMember> LocateMembers(in ApiHostUri host)
+        public IEnumerable<ApiMember> LocateMembers(in ApiHostUri host)
             => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Located(host));
 
         /// <summary>
@@ -72,7 +73,6 @@ namespace Z0.Asm.Validation
         /// <param name="src">The source path</param>
         public ReadOnlySpan<AsmOpBits> LoadCode(FilePath src)
             => Context.HexReader().Read(src).ToArray();
-
 
         protected string Math
             => nameof(math);

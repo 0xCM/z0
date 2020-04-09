@@ -11,16 +11,16 @@ namespace Z0.Asm
 
     partial class HostCaptureWorkflow
     {
-        public readonly struct MembersLocated : IAppEvent<MembersLocated, ApiLocatedMember[]>
+        public readonly struct MembersLocated : IAppEvent<MembersLocated, ApiMember[]>
         {
-            public static MembersLocated Empty => new MembersLocated(ApiHostUri.Empty, new ApiLocatedMember[]{});
+            public static MembersLocated Empty => new MembersLocated(ApiHostUri.Empty, new ApiMember[]{});
 
             [MethodImpl(Inline)]
-            public static MembersLocated Define(ApiHostUri host, ApiLocatedMember[] members)
+            public static MembersLocated Define(ApiHostUri host, ApiMember[] members)
                 => new MembersLocated(host, members);
 
             [MethodImpl(Inline)]
-            MembersLocated(ApiHostUri host, ApiLocatedMember[] functions)
+            MembersLocated(ApiHostUri host, ApiMember[] functions)
             {
                 this.Host = host;
                 this.Payload = functions;
@@ -28,7 +28,7 @@ namespace Z0.Asm
             
             public ApiHostUri Host {get;}
             
-            public ApiLocatedMember[] Payload {get;}
+            public ApiMember[] Payload {get;}
 
             public string Description
                 => $"{Payload.Length} {Host} members located";

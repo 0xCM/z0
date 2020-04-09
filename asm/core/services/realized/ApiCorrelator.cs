@@ -25,7 +25,7 @@ namespace Z0.Asm
             this.Context = context;
         }
         
-        IEnumerable<ApiStatelessMember> HostedMembers(ApiHost host)
+        IEnumerable<ApiMember> HostedMembers(ApiHost host)
             => Context.MemberLocator().Hosted(host);
 
         ApiHost FindHost(in ApiHostUri uri)
@@ -35,7 +35,7 @@ namespace Z0.Asm
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public IEnumerable<ApiStatelessMember> FindHostedMembers(in ApiHostUri host)
+        public IEnumerable<ApiMember> FindHostedMembers(in ApiHostUri host)
             => HostedMembers(FindHost(host));
 
         /// <summary>
@@ -56,14 +56,13 @@ namespace Z0.Asm
             return CreateApiIndex(members, code);
         }
 
-        public ApiCodeIndex CreateApiIndex(OpIndex<ApiStatelessMember> members, OpIndex<AsmOpBits> code)
+        public ApiCodeIndex CreateApiIndex(OpIndex<ApiMember> members, OpIndex<AsmOpBits> code)
         {
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
                           select ApiMemberCode.Define(r.left, r.right.Bits);                                      
             return ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
-
         }
     }
 }

@@ -9,7 +9,23 @@ namespace Z0
     using System.Reflection;
 
     using static Seed;
-        
+
+    public enum ApiMemberKind
+    {
+        None,
+
+        Stateless,
+
+        Service
+    }
+
+    public enum ApiDisposition
+    {
+        None,
+
+        Located
+    }
+
     /// <summary>
     /// Identifies a host-defined operation and the memory address that leads the member's executable code
     /// </summary>
@@ -26,8 +42,6 @@ namespace Z0
         public OpKindId? KindId {get;}
 
         public MemoryAddress Address {get;}
-
-        public MethodSig MethodSig => Method.Signature();
 
         public OpUri Uri => Api.MemberUri(this);
 

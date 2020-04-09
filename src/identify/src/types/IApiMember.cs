@@ -11,7 +11,7 @@ namespace Z0
         /// <summary>
         /// The method's kind identifier if it exists
         /// </summary>
-        OpKindId? KindId {get;}
+        OpKindId KindId  => OpKindId.None;
     
     }        
 

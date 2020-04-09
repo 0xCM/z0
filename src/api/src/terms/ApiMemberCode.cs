@@ -14,18 +14,18 @@ namespace Z0
     /// Identifies a member defined by executable code (derived from the method implementation)
     /// </summary>
     
-    public readonly struct ApiMemberCode : IApiMember<ApiMemberCode>
+    public readonly struct ApiMemberCode 
     {
-        public static ApiMemberCode Empty => Define(ApiStatelessMember.Empty, BinaryCode.Empty);
+        public static ApiMemberCode Empty => Define(ApiMember.Empty, BinaryCode.Empty);
 
-        public readonly ApiStatelessMember Member;
+        public readonly ApiMember Member;
 
         public readonly BinaryCode Code;
 
         public OpKindId? KindId {get;}
 
         [MethodImpl(Inline)]
-        public static ApiMemberCode Define(ApiStatelessMember member, BinaryCode code)
+        public static ApiMemberCode Define(ApiMember member, BinaryCode code)
             => new ApiMemberCode(member, code);
 
         public IdentifiedCode ApiCode
@@ -38,21 +38,16 @@ namespace Z0
 
         public OpIdentity Id => Member.Id;
 
-        public OpUri Uri => Member.Uri;
+        public OpUri Uri => Member.OpUri;
 
         public MethodInfo Method => Member.Method;
-
-        public bool IsEmpty => Code.IsEmpty && Member.IsEmpty;
-
-        ApiMemberCode INullary<ApiMemberCode>.Zero 
-            => Empty;
 
         [MethodImpl(Inline)]
         public static implicit operator IdentifiedCode(ApiMemberCode src)
             => src.ApiCode;
 
         [MethodImpl(Inline)]
-        ApiMemberCode(ApiStatelessMember member, BinaryCode code)
+        ApiMemberCode(ApiMember member, BinaryCode code)
         {
             this.Member = member;
             this.Code = code;       
@@ -69,7 +64,7 @@ namespace Z0
             => src is ApiMemberCode m && Equals(m);        
 
         public string Format(int uripad)
-            => text.concat(Member.Uri.Format().PadRight(uripad), Code.Format());
+            => text.concat(Member.OpUri.Format().PadRight(uripad), Code.Format());
 
         public string Format()
             => Format(20);

@@ -36,21 +36,21 @@ namespace Z0
         public static OpUri MemberUri(ApiLocatedMember src)        
             => OpUri.Define(OpUriScheme.Located, src.HostUri, src.Method.Name, src.Id);
 
-        /// <summary>
-        /// Defines a uri for a stateless member
-        /// </summary>
-        /// <param name="src">The member</param>
-        [MethodImpl(Inline)]
-        public static OpUri MemberUri(ApiStatelessMember src)        
-            => OpUri.Define(OpUriScheme.Type, src.HostUri, src.Method.Name, src.Id);
+        // /// <summary>
+        // /// Defines a uri for a stateless member
+        // /// </summary>
+        // /// <param name="src">The member</param>
+        // [MethodImpl(Inline)]
+        // public static OpUri MemberUri(ApiStatelessMember src)        
+        //     => OpUri.Define(OpUriScheme.Type, src.HostUri, src.Method.Name, src.Id);
 
-        /// <summary>
-        /// Defines a uri for a service member
-        /// </summary>
-        /// <param name="src">The member</param>
-        [MethodImpl(Inline)]
-        public static OpUri MemberUri(ApiServiceMember src)        
-            => OpUri.Define(OpUriScheme.Svc, src.HostUri, src.Method.Name, src.Id);
+        // /// <summary>
+        // /// Defines a uri for a service member
+        // /// </summary>
+        // /// <param name="src">The member</param>
+        // [MethodImpl(Inline)]
+        // public static OpUri MemberUri(ApiServiceMember src)        
+        //     => OpUri.Define(OpUriScheme.Svc, src.HostUri, src.Method.Name, src.Id);
 
         /// <summary>
         /// Creates a (possibly empy) api catalog for the source part

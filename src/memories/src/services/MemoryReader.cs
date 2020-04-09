@@ -12,41 +12,36 @@ namespace Z0
 
     public readonly struct MemoryReader : IMemoryReader
     {
-        public IContext Context {get;}
+        const int MaxZeroCount = 10;
         
         [MethodImpl(Inline)]
         public static MemoryReader Create(IContext context)
-            => new MemoryReader(context);
+            => default(MemoryReader);
 
         [MethodImpl(Inline)]
-        MemoryReader(IContext context)
-        {
-            this.Context = context;
-        }
-
-        [MethodImpl(Inline)]
-        public unsafe int Read(MemoryAddress src, int count, Span<byte> dst)
+        public unsafe int Read(MemoryAddress src, Span<byte> dst)
         {
             var pSrc = src.ToPointer<byte>();
-            return Read(ref pSrc, count, dst);
+            var limit = dst.Length;
+            return Read(ref pSrc, limit, dst);
         }
 
         [MethodImpl(Inline)]
-        public unsafe int Read(MemoryAddress src, int count, ref byte dst)
+        public unsafe int Read(MemoryAddress src, int limit, ref byte dst)
         {
             var pSrc = src.ToPointer<byte>();
-            return Read(ref pSrc, count, ref dst);
+            return Read(ref pSrc, limit, ref dst);
         }
 
         [MethodImpl(Inline)]
-        unsafe int Read(ref byte* pSrc, int count, Span<byte> dst)
-            => Read(ref pSrc, count, ref head(dst));
+        unsafe int Read(ref byte* pSrc, int limit, Span<byte> dst)
+            => Read(ref pSrc, limit, ref head(dst));
 
-        unsafe int Read(ref byte* pSrc, int count, ref byte dst)
+        unsafe int Read(ref byte* pSrc, int limit, ref byte dst)
         {
             var offset = 0;
             var zcount = 0;
-            while(offset < count && zcount < 10)        
+            while(offset < limit && zcount < MaxZeroCount)        
             {
                 var value = Unsafe.Read<byte>(pSrc++);
                 seek(ref dst, offset++) = value;
@@ -58,12 +53,4 @@ namespace Z0
             return offset;
         }
     }
-
-    public static class ReaderExtensions
-    {
-        [MethodImpl(Inline)]
-        public static IMemoryReader MemoryReader(this IContext context)
-            => Z0.MemoryReader.Create(context);        
-
-    }    
 }

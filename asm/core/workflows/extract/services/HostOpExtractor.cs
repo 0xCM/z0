@@ -10,6 +10,7 @@ namespace Z0.Asm
     using System.Linq;
     
     using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Extracts operations from an api host
@@ -35,14 +36,14 @@ namespace Z0.Asm
         /// Extracts encoded content that defines executable code for a located member
         /// </summary>
         /// <param name="src">The source member</param>
-        public MemberExtract Extract(ApiLocatedMember src)
+        public MemberExtract Extract(in ApiMember src)
         {
             Span<byte> buffer = stackalloc byte[BufferLength];
             var reader = Context.MemoryReader();
             return Extract(src, reader, buffer);
         }
 
-        public MemberExtract[] Extract(ApiLocatedMember[] members)
+        public MemberExtract[] Extract(ApiMember[] members)
         {
             var dst = new MemberExtract[members.Length];
             Span<byte> buffer = stackalloc byte[BufferLength];            
@@ -64,10 +65,10 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        MemberExtract Extract(ApiLocatedMember src, IMemoryReader reader,  Span<byte> buffer)
+        MemberExtract Extract(in ApiMember src, IMemoryReader reader, Span<byte> buffer)
         {
             buffer.Clear();                
-            var length = reader.Read(src.Address, BufferLength, buffer);
+            var length = reader.Read(src.Address, buffer);
             var data = MemoryExtract.Define(src.Address, buffer.Slice(0,length).ToArray());
             return MemberExtract.Define(src, data);
         }

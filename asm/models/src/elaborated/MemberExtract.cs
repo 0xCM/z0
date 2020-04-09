@@ -15,11 +15,11 @@ namespace Z0.Asm
     public readonly struct MemberExtract
     {        
         [MethodImpl(Inline)]
-        public static MemberExtract Define(ApiLocatedMember member, MemoryExtract encoded)
-            => new MemberExtract(member.Id, member.Uri, member, encoded);
+        public static MemberExtract Define(ApiMember member, MemoryExtract encoded)
+            => new MemberExtract(member.Id, member.OpUri, member, encoded);
          
         [MethodImpl(Inline)]
-        MemberExtract(OpIdentity id, OpUri uri, ApiLocatedMember member, MemoryExtract encoded)
+        MemberExtract(OpIdentity id, OpUri uri, ApiMember member, MemoryExtract encoded)
         {
             this.Id = id;
             this.Uri = uri;
@@ -31,7 +31,7 @@ namespace Z0.Asm
 
         public readonly OpUri Uri;
 
-        public readonly ApiLocatedMember Member;
+        public readonly ApiMember Member;
 
         public readonly MemoryExtract EncodedData;
     }

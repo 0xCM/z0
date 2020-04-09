@@ -121,12 +121,10 @@ namespace Z0.Asm
                 finally
                 {
                     Raise(WorkflowSteps.Ended(host, step.Correlation));
-
                 }
-
             }
 
-            public ApiLocatedMember[] LocateMembers(in ApiHost host)
+            public ApiMember[] LocateMembers(in ApiHost host)
             {
                 var locator = Context.MemberLocator();  
                 var located = locator.Located(host).ToArray();
@@ -134,11 +132,11 @@ namespace Z0.Asm
                 return located;
             }
 
+
             public MemberExtract[] ExtractMembers(in ApiHost host)
             {
                 var members = LocateMembers(host);            
-                var dst = Extractor.Extract(members);                
-                return dst;
+                return Extractor.Extract(members);
             }
 
             AsmOpBits[] HandleSave(in ApiHost host, ParsedExtract[] src, FilePath dst)
@@ -197,7 +195,6 @@ namespace Z0.Asm
                 Raise(report.CreatedEvent());
                 return report;
             }
-
         }   
     }
 }

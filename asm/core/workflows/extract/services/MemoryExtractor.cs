@@ -11,7 +11,6 @@ namespace Z0.Asm
 
     readonly struct MemoryExtractor : IMemoryExtractor
     {
-
         public readonly IMemoryReader Reader;
 
         readonly byte[] Buffer;
@@ -33,7 +32,7 @@ namespace Z0.Asm
             try
             {
                 Span<byte> buffer = Buffer.Clear();
-                var length = Reader.Read(src, buffer.Length, buffer);            
+                var length = Reader.Read(src, buffer);            
                 return MemoryExtract.Define(src, buffer.Slice(0,length).ToArray());
             }
             catch(Exception e)

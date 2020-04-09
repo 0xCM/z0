@@ -72,10 +72,10 @@ namespace Z0.Asm.Check
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public IEnumerable<ApiStatelessMember> HostedMembers(in ApiHostUri host)
+        public IEnumerable<ApiMember> HostedMembers(in ApiHostUri host)
             => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
 
-        OpIndex<ApiStatelessMember> HostMemberIndex(ApiHostUri host)
+        OpIndex<ApiMember> HostMemberIndex(ApiHostUri host)
         {
             var hosted = HostedMembers(host);
             var index = hosted.ToOpIndex();
@@ -122,7 +122,6 @@ namespace Z0.Asm.Check
             {
                 ExecuteHost(buffers, host);
             }
-
         }
         public void Run()
         {
