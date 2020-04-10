@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public static class Services
+    public static class ServiceFactory
     {
         [MethodImpl(Inline)]
         public static IMemberLocator MemberLocator(this IContext context, IMultiDiviner diviner = null)

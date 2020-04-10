@@ -36,7 +36,6 @@ namespace Z0.Asm.Check
         
     }
 
-
     class ExtractAnalyzer : TestContext<ExtractAnalyzer,IAsmContext>, IExtractAnalyzer
     {
         public static IExtractAnalyzer Create(IAsmContext context)    
@@ -48,7 +47,7 @@ namespace Z0.Asm.Check
             ApiSet = context.ApiSet;
             Sink = context;
             Extractor = Context.HostExtractor();
-            Locator = Context.MemberLocator();            
+            MemberLocator = Context.MemberLocator();            
             Decoder = context.AsmFunctionDecoder();
             var format = Context.AsmFormat.WithSectionDelimiter();
             Formatter = Context.AsmFormatter(format);
@@ -64,8 +63,7 @@ namespace Z0.Asm.Check
 
         readonly IHostOpExtractor Extractor;
 
-        readonly IMemberLocator Locator;
-
+        readonly IMemberLocator MemberLocator;
 
         readonly IApiSet ApiSet;
 
@@ -145,26 +143,18 @@ namespace Z0.Asm.Check
         void AnalyzeExtract(FilePath src)
         {
             Raise(AnalyzingExtractReport.Define(src));
+            var reader = Context.MemberExtractReader(ApiSet);
 
-            var reader = Context.MemberExtractReader();
-            var records = reader.Read(src).ToArray();
-            if(records.Length != 0)     
-            {                               
-                var host = records[0].Uri.HostPath;
-                AnalyzeExtract(host, records);
-            }
-            
-        }
-
-        void AnalyzeExtract(ApiHostUri host, MemberExtractRecord[] records)
-        {
-            for(var i = 0; i<records.Length; i++)
-            {
-
-            }
+            var extracts = reader.ReadExtracts(src);
+            Report($"Loaded {extracts.Length} member extracts from {src}");
 
         }
 
+        OpIndex<ApiMember> MemberIndex(IApiHost host)
+            => MemberLocator.Hosted(host).ToOpIndex();
+
+        Option<IApiHost> Host(ApiHostUri uri)
+            => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
 
         MemberExtractReport CreateReport(IApiHost host, MemberExtract[] src)
         {
@@ -178,8 +168,7 @@ namespace Z0.Asm.Check
 
         ApiMember[] LocateMembers(IApiHost host)
         {
-            var locator = Context.MemberLocator();  
-            var located = locator.Located(host).ToArray();
+            var located = MemberLocator.Located(host).ToArray();
             Raise(HostMembersLocated.Define(host.UriPath, located));
             return located;
         }

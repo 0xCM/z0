@@ -14,6 +14,8 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct MemberExtract
     {        
+        public static MemberExtract Empty => Define(ApiMember.Empty, MemoryExtract.Empty);
+        
         [MethodImpl(Inline)]
         public static MemberExtract Define(ApiMember member, MemoryExtract encoded)
             => new MemberExtract(member.Id, member.OpUri, member, encoded);

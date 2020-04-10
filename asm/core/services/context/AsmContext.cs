@@ -20,12 +20,11 @@ namespace Z0.Asm
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
         [MethodImpl(Inline)]
         public static IAsmContext Create(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange, IPolyrand random, AsmFormatConfig format)
-            => new AsmContext(assemblies,settings, exchange,random,format);
+            => new AsmContext(assemblies, settings, exchange,random,format);
 
         AsmContext(IApiComposition composition, IAppSettings settings, IAppMsgExchange exchange, IPolyrand random, AsmFormatConfig format)
         {
             Next += BlackHole;
-            ApiSet = Z0.ApiSet.Create(composition);
             Messaging = exchange;
             Settings = settings;
             Messaging.Next += Relay;            
@@ -33,6 +32,7 @@ namespace Z0.Asm
             AsmFormat = format;
             Settings = settings;
             Paths = AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
+            ApiSet = Z0.ApiSet.Create(composition);
         }
 
         public event Action<AppMsg> Next;

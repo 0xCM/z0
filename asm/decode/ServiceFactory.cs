@@ -91,7 +91,7 @@ namespace Z0.Asm
         public static IAsmFunctionWriter AsmWriter(this IContext context, FilePath dst, IAsmFormatter formatter)
             => AsmDecoder.writer(context, dst, formatter);
 
-        public static Func<FilePath, IAsmFormatter, IAsmFunctionWriter> AsmWriterFactory(this IContext context)
+        public static AsmWriterFactory AsmWriterFactory(this IContext context)
             =>  (dst,formatter) => context.AsmWriter(dst,formatter);
 
         [MethodImpl(Inline)]

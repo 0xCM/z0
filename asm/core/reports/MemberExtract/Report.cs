@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
     
     using static Seed;
 
@@ -16,6 +18,19 @@ namespace Z0.Asm
 
     public class MemberExtractReport : Report<Report,F,R>
     {        
+        /// <summary>
+        /// Loads a saved extract report
+        /// </summary>
+        /// <param name="src">The report path</param>
+        public static MemberExtractReport Load(FilePath src)
+        {
+            var lines = src.ReadLines().Skip(1). Select(R.Parse).ToArray();
+            if(lines.Length != 0)
+                return new MemberExtractReport(lines[0].Uri.HostPath, lines);
+            else
+                return Empty;
+        }        
+
         public ApiHostUri ApiHost {get;}
 
         public override string ReportName => $"Extract report for {ApiHost.Format()}";
@@ -42,7 +57,7 @@ namespace Z0.Asm
         
         public MemberExtractReport(){}
 
-        MemberExtractReport(ApiHostUri host, MemberExtractRecord[] records)
+        MemberExtractReport(ApiHostUri host, R[] records)
             : base(records)
         {
             this.ApiHost = host;

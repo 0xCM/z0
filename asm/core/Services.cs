@@ -82,8 +82,8 @@ namespace Z0.Asm
             => Svc.MemoryExtractParser.New(context, buffer);
 
         [MethodImpl(Inline)]
-        public static IMemberExtractReader MemberExtractReader(this IContext context)
-            => Svc.MemberExtractReader.Create(context);
+        public static IMemberExtractReader MemberExtractReader(this IContext context, IApiSet api)
+            => Svc.MemberExtractReader.Create(context,api);
 
         [MethodImpl(Inline)]
         public static ByteParser<EncodingPatternKind> PatternParser(this IContext context, byte[] buffer)
@@ -187,7 +187,41 @@ namespace Z0.Asm
             => AsmFunctionArchive.Create(context,catalog,host,formatter);
 
         [MethodImpl(Inline)]
-        public static IApiCorrelator ApiCorrelator(this IContext c, IApiComposition composition)
-            => Svc.ApiCorrelator.Create(c, composition);
+        public static IApiCodeIndexer CodeIndexer(this IContext c, IApiSet api)
+            => Svc.ApiCodeIndexer.Create(c, api);
+
+        /// <summary>
+        /// Retrieves the members defined by an api host
+        /// </summary>
+        /// <param name="host">The host uri</param>
+        public static IEnumerable<ApiMember> HostedMembers(this IContext context, IApiSet api, in ApiHostUri host)
+            => api.FindHost(host).MapRequired(host => context.MemberLocator().Hosted(host));
+
+        public static OpIndex<ApiMember> HostMemberIndex(this IContext context, IApiSet api, in ApiHostUri host)
+            => context.HostedMembers(api,host).ToOpIndex();
+
+        /// <summary>
+        /// Reads code from a hex file
+        /// </summary>
+        /// <param name="src">The source path</param>
+        public static ReadOnlySpan<AsmOpBits> LoadHexCode(this IContext context, FilePath src)
+            => context.HexReader().Read(src).ToArray();
+
+        public static OpIndex<AsmOpBits> HostCodeIndex(this IContext context, in ApiHostUri host, FolderPath root)
+        {
+            var emissions = RootEmissionPaths.Define(root);            
+            var paths = emissions.HostPaths(host);
+            var code = context.LoadHexCode(paths.CodePath);
+            var index = code.ToEnumerable().ToOpIndex();    
+            return index;
+        }
+
+        public static ApiCodeIndex ApiCodeIndex(this IContext context, IApiSet api, in ApiHostUri host, FolderPath root)
+        {
+            var indexer = context.CodeIndexer(api);
+            return indexer.CreateIndex(
+                context.HostMemberIndex(api, host), 
+                context.HostCodeIndex(host, root));            
+        }
     }
 }

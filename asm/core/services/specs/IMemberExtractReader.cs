@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -11,10 +12,8 @@ namespace Z0.Asm
     /// </summary>
     public interface IMemberExtractReader : IService
     {
-        /// <summary>
-        /// Reads the content of a source file
-        /// </summary>
-        /// <param name="src">The source file path</param>
-        IEnumerable<MemberExtractRecord> Read(FilePath src);
+
+        Span<MemberExtract> ReadExtracts(FilePath src);
+        
     }
 }

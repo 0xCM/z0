@@ -11,31 +11,30 @@ namespace Z0.Asm
 
     using static Seed;
 
-    readonly struct ApiCorrelator : IApiCorrelator
+    readonly struct ApiCodeIndexer : IApiCodeIndexer
     {
-        readonly IApiContext Context;
+        readonly IContext Context;
+
+        readonly IApiSet ApiSet;
         
         [MethodImpl(Inline)]
-        public static IApiCorrelator Create(IContext context, IApiComposition composition)
-            =>  new ApiCorrelator(ApiSet.Create(composition));
+        public static IApiCodeIndexer Create(IContext context, IApiSet api)
+            =>  new ApiCodeIndexer(context, api);
         
         [MethodImpl(Inline)]
-        ApiCorrelator(IApiContext context)
+        ApiCodeIndexer(IContext context, IApiSet api)
         {
             this.Context = context;
+            this.ApiSet = api;
         }
         
-        IEnumerable<ApiMember> HostedMembers(ApiHost host)
+        IEnumerable<ApiMember> HostedMembers(IApiHost host)
             => Context.MemberLocator().Hosted(host);
 
-        ApiHost FindHost(in ApiHostUri uri)
-            => Context.FindHost(uri).Require();
+        IApiHost FindHost(in ApiHostUri uri)
+            => ApiSet.FindHost(uri).Require();
 
-        /// <summary>
-        /// Retrieves the members defined by an api host
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        public IEnumerable<ApiMember> FindHostedMembers(in ApiHostUri host)
+        IEnumerable<ApiMember> FindHostedMembers(in ApiHostUri host)
             => HostedMembers(FindHost(host));
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace Z0.Asm
         public ReadOnlySpan<AsmOpBits> LoadCode(FilePath src)
             => Context.HexReader().Read(src).ToArray();
 
-        public ApiCodeIndex CreateApiIndex(ApiHostUri host, FilePath src)
+        public ApiCodeIndex CreateIndex(ApiHostUri host, FilePath src)
         {
             var loaded = LoadCode(src);
             var hosted = FindHostedMembers(host).ToArray();
@@ -53,10 +52,10 @@ namespace Z0.Asm
             var code = loaded.ToEnumerable().ToOpIndex();
             var members = hosted.ToOpIndex();
 
-            return CreateApiIndex(members, code);
+            return CreateIndex(members, code);
         }
 
-        public ApiCodeIndex CreateApiIndex(OpIndex<ApiMember> members, OpIndex<AsmOpBits> code)
+        public ApiCodeIndex CreateIndex(OpIndex<ApiMember> members, OpIndex<AsmOpBits> code)
         {
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1

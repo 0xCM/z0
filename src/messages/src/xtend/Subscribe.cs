@@ -22,5 +22,12 @@ namespace Z0
         public static Outcome Subscribe<E>(this E e, IAppEventBroker broker, Action<E> receiver)
             where E : IAppEvent
                 => AppEvents.subscribe(e, broker, receiver);
+
+        public static IAppMsgWriter OpenMessageLog(this FolderPath dst, string name, FileExtension ext = null, FileWriteMode mode = FileWriteMode.Overwrite,  bool display = false)
+        {
+            var target = dst + FileName.Define(name, ext ?? FileExtensions.Log);
+            return AppMessages.writer(target, name, mode, display);
+        }
+
     }
 }

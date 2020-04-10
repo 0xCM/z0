@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static HostCaptureSteps;
     
     sealed class HostCaptureBroker : AppEventRelay, IHostCaptureWorkflowRelay
     {
@@ -18,21 +19,24 @@ namespace Z0.Asm
 
     public partial class HostCaptureWorkflow : IHostCaptureWorkflow
     {
-        public IHostCaptureWorkflowRelay EventBroker {get;}
+        readonly HostCaptureContext Context;
 
-        public IHostCaptureRunner Runner {get;}
+        public IHostCaptureWorkflowRelay EventBroker {get;}
         
         [MethodImpl(Inline)]
-        public static IHostCaptureWorkflow Create(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter,Func<FilePath, IAsmFormatter, IAsmFunctionWriter> writerfactory)
-            => new HostCaptureWorkflow(context, decoder,formatter,writerfactory);      
+        public static IHostCaptureWorkflow Create(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory)
+            => new HostCaptureWorkflow(context, decoder, formatter, writerfactory);      
 
         [MethodImpl(Inline)]
-        HostCaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter,Func<FilePath, IAsmFormatter, IAsmFunctionWriter> writerfactory)
+        HostCaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory)
         {
             this.EventBroker = HostCaptureBroker.Create();
-            this.Runner = new HostCaptureRunner(context,EventBroker,decoder,formatter,writerfactory);
+            this.Context = new HostCaptureContext(context,context.ApiSet, decoder, formatter, writerfactory, context.HostExtractor(), context.ExtractParser(), EventBroker);
         }
  
-        public void Run(AsmWorkflowConfig dst) => Runner.Run(dst);
+        public void Run(AsmWorkflowConfig config) 
+        {
+            DriveCatalogCapture.Create(Context).CaptureCatalogs(config);
+        }
     }
 }

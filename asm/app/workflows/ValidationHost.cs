@@ -29,6 +29,7 @@ namespace Z0.Asm.Check
             Paths.LogDir.Clear();
             Settings = ValidationHostConfig.From(context.Settings);            
             ApiSet = context.ApiSet;
+            MemberLocator = context.MemberLocator();
         }
 
         ValidationHostConfig Settings {get;}
@@ -36,6 +37,14 @@ namespace Z0.Asm.Check
         RootEmissionPaths Paths {get;}
 
         IApiSet ApiSet {get;}
+
+        IMemberLocator MemberLocator {get;}
+
+        OpIndex<ApiMember> MemberIndex(IApiHost host)
+            => MemberLocator.Hosted(host).ToOpIndex();
+
+        Option<IApiHost> Host(ApiHostUri uri)
+            => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
 
         protected override void OnDispose()
         {
@@ -58,7 +67,7 @@ namespace Z0.Asm.Check
             var formatter = Context.AsmFormatter(Context.AsmFormat.WithSectionDelimiter());
             var workflow = HostCaptureWorkflow.Create(Context, decoder, formatter, Context.AsmWriterFactory());
             ConnectReceivers(workflow.EventBroker);
-            workflow.Runner.Run(AsmWorkflowConfig.Define(RootEmissionPath));
+            workflow.Run(AsmWorkflowConfig.Define(RootEmissionPath));
         }
 
         void Exec()
@@ -162,7 +171,7 @@ namespace Z0.Asm.Check
             
         void Analyze(in ApiHostUri hosturi, ReadOnlySpan<AsmOpBits> ops, FilePath dst)
         {
-            var hosted = ApiSet.FindHost(hosturi).MapRequired(host => Context.MemberLocator().Hosted(host)).ToOpIndex();            
+            var hosted = Host(hosturi).MapRequired(host => MemberIndex(host));
             var saved = Context.HexReader().Read(dst).ToArray();
             Claim.eq(saved.Length, ops.Length);
             

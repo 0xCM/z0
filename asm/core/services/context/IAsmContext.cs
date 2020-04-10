@@ -18,15 +18,10 @@ namespace Z0.Asm
         /// </summary>
         AsmFormatConfig AsmFormat => AsmFormatConfig.New;
 
-
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
         /// </summary>
         int DefaultBufferLength 
-            => Pow2.T14;
-
-
-        // IAppPaths IAppEnv.Paths 
-        //     => AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
+            => Pow2.T14;        
     }   
 }

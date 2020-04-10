@@ -87,5 +87,9 @@ namespace Z0
         }
 
         public readonly RecordFormatter<F,R> Formatter;
+
+        public bool IsEmpty => RecordCount == 0;
+
+        public bool IsNonEmpty => RecordCount != 0;
     }    
 }

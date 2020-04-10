@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public interface IApiSet : IApiContext
     {
@@ -14,7 +12,10 @@ namespace Z0
 
         IApiCatalog[] Catalogs {get;}
 
-        Option<IPart> FindPart(PartId id);        
-    }
+        Option<IPart> FindPart(PartId id);      
 
+        PartId[] PartIdentities {get;}
+
+        IApiHost[] Hosts {get;}
+    }
 }

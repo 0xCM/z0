@@ -8,8 +8,8 @@ namespace Z0.Asm
 
     public interface IHostCaptureWorkflow : IService
     {
-        IHostCaptureRunner Runner {get;}
-
         IHostCaptureWorkflowRelay EventBroker {get;}
+
+        void Run(AsmWorkflowConfig config);         
     }
 }

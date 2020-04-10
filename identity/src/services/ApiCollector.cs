@@ -13,19 +13,16 @@ namespace Z0
     using static Seed;
 
     class ApiCollector : IApiCollector
-    {
-        public IContext Context {get;}
-        
+    {        
         readonly IMultiDiviner Diviner;
 
         [MethodImpl(Inline)]
         public static IApiCollector Create(IContext context, IMultiDiviner diviner)
-            => new ApiCollector(context,diviner);
+            => new ApiCollector(diviner);
         
         [MethodImpl(Inline)]
-        ApiCollector(IContext context, IMultiDiviner diviner)
+        ApiCollector(IMultiDiviner diviner)
         {
-            this.Context = context;
             this.Diviner = diviner;
         }
 

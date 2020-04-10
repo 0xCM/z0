@@ -13,11 +13,15 @@ namespace Z0
 
     public readonly struct ApiSet : IApiSet
     {
-        readonly ApiComposition Composition;
+        public IApiComposition Composition {get;}
 
-        public ApiHost[] Hosts {get;}
+        public IApiHost[] Hosts {get;}
 
         public IApiCatalog[] Catalogs {get;}
+
+        public IPart[] Parts {get;}
+
+        public PartId[] PartIdentities {get;}
 
         [MethodImpl(Inline)]
         public static ApiSet Create(IApiComposition composition)
@@ -30,25 +34,15 @@ namespace Z0
             Catalogs = api.Catalogs.ToArray();    
             Hosts = (from owner in Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner)
                 from  host in owner
-                select host).ToArray();            
+                select host as IApiHost).ToArray();     
+            Parts = Composition.Resolved;       
+            PartIdentities = Parts.Map(p => p.Id);            
         }
 
-        public readonly IPart[] Parts => Composition.Resolved;
-
-        public Option<ApiHost> FindHost(ApiHostUri uri)
-            => Hosts.Where(h => h.UriPath == uri).FirstOrDefault();
+        public Option<IApiHost> FindHost(ApiHostUri uri)
+            => option(Hosts.Where(h => h.UriPath == uri).FirstOrDefault());
 
         public Option<IPart> FindPart(PartId id)
             => option(Parts.FirstOrDefault(p => p.Id == id));
-
-        IApiComposition IApiContext.Composition 
-            => Composition;
-
-        IEnumerable<PartId> IApiContext.Components
-            => from r in Parts select r.Id;
-
-        IEnumerable<ApiHost> IApiContext.Hosts
-            => Hosts;
-
     }
 }

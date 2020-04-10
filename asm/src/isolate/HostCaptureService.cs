@@ -34,7 +34,7 @@ namespace Z0.Asm
             this.Context = context;
             this.Decoder = decoder;
             this.ApiSet = context.ApiSet;
-            this.Selected = selected.Length == 0 ? context.ApiSet.Components.ToHashSet() : selected.ToHashSet();
+            this.Selected = selected.Length == 0 ? context.ApiSet.PartIdentities.ToHashSet() : selected.ToHashSet();
         }
 
         AsmEmissionPaths Paths

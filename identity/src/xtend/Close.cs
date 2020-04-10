@@ -5,22 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
-    using static Memories;
 
-    /// <summary>
-    /// Characterizes a context that carries and provides access to a composition
-    /// </summary>
-    public interface IApiContext : IContext
-    {
+    partial class XTend
+    {        
         /// <summary>
-        /// The composition assigned to the context
+        /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
-        IApiComposition Composition {get;}
-
-        Option<IApiHost> FindHost(ApiHostUri uri);
+        /// <param name="generics">Metadata for generic operations</param>
+        public static IEnumerable<ClosedApiOp> Close(this GenericApiOp op)
+             => Identity.close(op);
     }
 }

@@ -5,21 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
 
     using static Seed;
     
     partial class Identity
     {
+
         /// <summary>
-        /// Extracts an index-identified segmented identity part from an operation identity
+        /// Extracts an index-identified operation identity part from an operation identity
         /// </summary>
         /// <param name="src">The source identity</param>
         /// <param name="partidx">The 0-based part index</param>
-        public static Option<SegmentedIdentity> segment(OpIdentity src, int partidx)
-            => from p in part(src, partidx)
-                from s in Segmentation.identify(p)
-                select s;
-
+        static Option<IdentityPart> part(OpIdentity src, int partidx)
+        {
+            var parts = Identify.parts(src).ToArray();
+            if(partidx <= parts.Length - 1)
+                return parts[partidx];
+            else
+                return Option.none<IdentityPart>();
+        }
     }
 }

@@ -6,12 +6,10 @@ namespace Z0.Asm
 {
     using System.Collections.Generic;
 
-    public interface IApiCorrelator : IService
+    public interface IApiCodeIndexer : IService
     {
-        IEnumerable<ApiMember> FindHostedMembers(in ApiHostUri host);
+        ApiCodeIndex CreateIndex(ApiHostUri host, FilePath src);
 
-        ApiCodeIndex CreateApiIndex(ApiHostUri host, FilePath src);
-
-        ApiCodeIndex CreateApiIndex(OpIndex<ApiMember> members, OpIndex<AsmOpBits> code);        
+        ApiCodeIndex CreateIndex(OpIndex<ApiMember> members, OpIndex<AsmOpBits> code);        
     }
 }
