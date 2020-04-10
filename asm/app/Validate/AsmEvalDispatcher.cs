@@ -14,28 +14,27 @@ namespace Z0.Asm.Check
 
     class AsmEvalDispatcher : IAsmEvalDispatcher
     {        
-        public IAsmContext Context {get;}
+        readonly IAsmContext Context;
 
         readonly IAppMsgSink Sink;
 
         readonly IPolyrand Random;
         
         readonly IAsmExecutor Executor;
-        
-        
-        public static IAsmEvalDispatcher Create(IAsmContext context, IAppMsgSink sink)
-            => new AsmEvalDispatcher(context,sink);
+                
+        public static IAsmEvalDispatcher Create(IAsmContext context, IAppMsgSink sink, IPolyrand random)
+            => new AsmEvalDispatcher(context,sink,random);
 
-        AsmEvalDispatcher(IAsmContext context, IAppMsgSink sink)
+        AsmEvalDispatcher(IAsmContext context, IAppMsgSink sink, IPolyrand random)
         {
             this.Context = context;
             this.Sink = sink;
-            this.Executor = AsmExecutor.Create(context);
-            this.Random = context.Random;
+            this.Random = random;
+            this.Executor = AsmExecutor.Create(context, random);
         }
 
         AsmEvaluator Evaluator(in BufferSeq buffers)
-            => AsmEvaluator.Create(Context, buffers);
+            => AsmEvaluator.Create(Context, Random, buffers);
 
         public void Notify(AppMsg msg)
             => Sink.NotifyConsole(msg);
@@ -104,7 +103,6 @@ namespace Z0.Asm.Check
                     return 0;
             }
         }
-
         
        void Analyze<T>(in ApiMemberCode api, in BinaryEval<T> eval)
             where T : unmanaged
@@ -113,7 +111,7 @@ namespace Z0.Asm.Check
             var sample = 0;
             var sampleMax = 10;
 
-            Context.AnalyzingEvaluation(api);
+            Sink.AnalyzingEvaluation(api);
 
             var xLabel = eval.LeftLabel;                
             var yLabel = eval.RightLabel;

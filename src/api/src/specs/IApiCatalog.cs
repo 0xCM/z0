@@ -79,6 +79,7 @@ namespace Z0
         string CatalogName
             => PartId.Format();        
     }
+    
     /// <summary>
     /// Characterizes a type that provides access to an operation catalog
     /// </summary>

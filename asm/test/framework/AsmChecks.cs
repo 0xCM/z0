@@ -23,6 +23,8 @@ namespace Z0.Asm.Validation
         public IAsmContext Context {get;}
 
         readonly IAppMsgSink MsgSink;
+
+        readonly IApiSet ApiSet;
         
         IPolyrand Random => Context.Random;
         
@@ -38,6 +40,7 @@ namespace Z0.Asm.Validation
             this.Context = context;
             this.RepCount = 128;
             this.MsgSink = sink;
+            this.ApiSet = context.ApiSet;
             this.LogDir = context.EmissionPaths().DataSubDir(FolderName.Define(GetType().Name));
         }                
 
@@ -58,14 +61,14 @@ namespace Z0.Asm.Validation
         /// </summary>
         /// <param name="host">The host uri</param>
         public IEnumerable<ApiMember> HostedMembers(in ApiHostUri host)
-            => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
+            => ApiSet.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
 
         /// <summary>
         /// Retrieves located members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
         public IEnumerable<ApiMember> LocateMembers(in ApiHostUri host)
-            => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Located(host));
+            => ApiSet.FindHost(host).MapRequired(host => Context.MemberLocator().Located(host));
 
         /// <summary>
         /// Reads code from a hex file

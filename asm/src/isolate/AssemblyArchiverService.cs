@@ -16,6 +16,8 @@ namespace Z0.Asm
     {                
         readonly IAsmContext Context;
 
+        readonly IApiSet ApiSet;
+
         readonly BinaryResources Resources;
 
         [MethodImpl(Inline)]
@@ -26,14 +28,15 @@ namespace Z0.Asm
         AssemblyArchiverService(IAsmContext context)
         {
             Context = context;
-            Resources = Context.Compostion.FindCatalog(PartId.VData).MapValueOrElse(c => c.Resources, () => BinaryResources.Empty);
+            ApiSet = context.ApiSet;
+            Resources = ApiSet.Composition.FindCatalog(PartId.VData).MapValueOrElse(c => c.Resources, () => BinaryResources.Empty);
         }
 
         IApiComposition Resolved 
-            => Context.Compostion;
+            => ApiSet.Composition;
 
         IEnumerable<PartId> ActiveAssemblies
-            => Context.ActiveAssemblies();
+            => ApiSet.Composition.Resolved.Select(r => r.Id);
 
         Option<FilePath> ReportEmissions(PartId src, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
             => AsmEmissionReport.Create(src, emitted, kind).Save(AsmEmissionPaths.The.EmissionPath(src, kind));

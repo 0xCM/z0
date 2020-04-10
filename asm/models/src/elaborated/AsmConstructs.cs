@@ -10,10 +10,9 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    [ApiHost("constructs")]
-    public static class AsmConstructs
+    [ApiHost]
+    static class Constructs
     {
-
         [Op]
         public static void for_min_max(int i0, int i1, Action<int> f)
         {

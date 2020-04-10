@@ -24,14 +24,14 @@ namespace Z0.Asm.Check
         
     }
 
-    public interface IAsmExecutor : IAsmService
+    public interface IAsmExecutor : IService
     {
         AsmExecResult ExecAction(Action action, OpUri f);   
 
         AsmExecResult ExecAction(Action action, OpUri f, OpUri g);
     }
 
-    interface IAsmExecChecks : IAsmService
+    interface IAsmExecChecks : IService
     {
         void Execute(in BufferSeq buffers, ApiMemberCode code);        
 

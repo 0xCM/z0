@@ -17,27 +17,27 @@ namespace Z0.Asm.Check
         public static AsmEvaluator Evaluator0<E,T>(this IAsmContext context, in BufferSeq buffers, IOpClass<E,T> k)
             where T : unmanaged
             where E : unmanaged, Enum
-                => AsmEvaluator.Create(context, buffers);
+                => AsmEvaluator.Create(context, context.Random, buffers);
     }
 
     public readonly ref struct AsmEvaluator
     {
-        readonly IAsmContext Context;
+        readonly IContext Context;
 
         readonly BufferSeq buffers;
 
         readonly IPolyrand Random;
 
         [MethodImpl(Inline)]        
-        public static AsmEvaluator Create(IAsmContext context, in BufferSeq buffers)
-            => new AsmEvaluator(context,buffers);
+        public static AsmEvaluator Create(IContext context, IPolyrand random, in BufferSeq buffers)
+            => new AsmEvaluator(context, random, buffers);
 
         [MethodImpl(Inline)]        
-        AsmEvaluator(IAsmContext context, in BufferSeq buffers)
+        AsmEvaluator(IContext context, IPolyrand random, in BufferSeq buffers)
         {
             this.Context = context;
             this.buffers = buffers;
-            this.Random = context.Random;
+            this.Random = random;;
         }
 
         /// <summary>

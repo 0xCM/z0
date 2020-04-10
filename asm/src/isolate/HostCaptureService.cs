@@ -18,8 +18,9 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        readonly IAsmFunctionDecoder Decoder;
+        readonly IApiSet ApiSet;
 
+        readonly IAsmFunctionDecoder Decoder;
 
         public HashSet<PartId> Selected {get;}
 
@@ -32,22 +33,29 @@ namespace Z0.Asm
         {
             this.Context = context;
             this.Decoder = decoder;
-            this.Selected = selected.Length == 0 ? context.Components.ToHashSet() : selected.ToHashSet();
+            this.ApiSet = context.ApiSet;
+            this.Selected = selected.Length == 0 ? context.ApiSet.Components.ToHashSet() : selected.ToHashSet();
         }
 
         AsmEmissionPaths Paths
             => Context.EmissionPaths();
 
         Option<MemberLocationReport> LocationReport(PartId src)
-            => from a in Context.ResolvedAssembly(src)
+            => from a in ResolvedAssembly(src)
                 let methods = a.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOperators()
                 select MemberLocationReport.Create(src, methods);
+        
+        Option<Assembly> ResolvedAssembly(PartId id)
+            =>  (from r in  ApiSet.Composition.Resolved
+                where r.Id == id
+                select r.Owner).FirstOrDefault();
+
         void CreateLocationReport(PartId id)
             => LocationReport(id).OnSome(report => report.Save());
         
         public IEnumerable<ApiHostCapture> Execute(params string[] args)
         {            
-            var owners = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
+            var owners = ApiSet.Composition.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
             Paths.DecodedDir.Clear();
             Paths.ParsedDir.Clear();
             Paths.ExtractDir.Clear();

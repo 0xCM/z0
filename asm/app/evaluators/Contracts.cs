@@ -10,7 +10,7 @@ namespace Z0.Asm.Check
     using static Core;
     using C = OpClass;
 
-    interface IAsmEvalDispatcher : IAsmService
+    interface IAsmEvalDispatcher : IService
     {
 
         bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api);
@@ -26,7 +26,7 @@ namespace Z0.Asm.Check
 
     }
 
-    public interface IApiEvaluator<C,T> : IApiEvaluator<C>, IAsmService
+    public interface IApiEvaluator<C,T> : IApiEvaluator<C>, IService
         where C : IOpClass
         where T : unmanaged
     {

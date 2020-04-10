@@ -81,12 +81,16 @@ namespace Z0.Asm.Check
             return AsmContext.Create(resolved, settings, AppMessages.exchange(), random, AsmFormatConfig.New);
         }
         
+
         public App()
             : base(CreateContext())
         {
             term.print("Created application");
+            Resolved = Context.ApiSet.Composition.Resolved;
         }
             
+        public override IPart[] Resolved {get;}
+        
         void ValidateArtifacts()
         {
             using var host = ValidationHost.Create(Context);
@@ -101,8 +105,8 @@ namespace Z0.Asm.Check
 
         public override void RunShell(params string[] args)
         {
-            AnalyzeExtracts();
-            //ValidateArtifacts();
+            //AnalyzeExtracts();
+            ValidateArtifacts();
         }
 
         public static void Main(params string[] args)

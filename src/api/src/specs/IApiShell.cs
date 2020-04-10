@@ -11,7 +11,7 @@ namespace Z0
     /// Characterizes a shell with api composition support
     /// </summary>
     /// <typeparam name="A">The reification type</typeparam>
-    public interface IApiShell<A> : IShell, IApiComposition<A>
+    public interface IApiShell<A> : IShell, IApiComposition
         where A : IApiShell<A>, new()
     {
         

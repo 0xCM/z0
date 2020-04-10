@@ -28,11 +28,14 @@ namespace Z0.Asm.Check
             Paths = RootEmissionPaths.Define(RootEmissionPath);
             Paths.LogDir.Clear();
             Settings = ValidationHostConfig.From(context.Settings);            
+            ApiSet = context.ApiSet;
         }
 
         ValidationHostConfig Settings {get;}
 
         RootEmissionPaths Paths {get;}
+
+        IApiSet ApiSet {get;}
 
         protected override void OnDispose()
         {
@@ -53,10 +56,9 @@ namespace Z0.Asm.Check
         {
             var decoder = Context.AsmFunctionDecoder();
             var formatter = Context.AsmFormatter(Context.AsmFormat.WithSectionDelimiter());
-            var workflow = HostCaptureWorkflow.Create(Context, decoder,formatter,Context.AsmWriterFactory());
-            var config = AsmWorkflowConfig.Define(RootEmissionPath);            
+            var workflow = HostCaptureWorkflow.Create(Context, decoder, formatter, Context.AsmWriterFactory());
             ConnectReceivers(workflow.EventBroker);
-            workflow.Runner.Run(config);
+            workflow.Runner.Run(AsmWorkflowConfig.Define(RootEmissionPath));
         }
 
         void Exec()
@@ -160,7 +162,7 @@ namespace Z0.Asm.Check
             
         void Analyze(in ApiHostUri hosturi, ReadOnlySpan<AsmOpBits> ops, FilePath dst)
         {
-            var hosted = Context.FindHost(hosturi).MapRequired(host => Context.MemberLocator().Hosted(host)).ToOpIndex();            
+            var hosted = ApiSet.FindHost(hosturi).MapRequired(host => Context.MemberLocator().Hosted(host)).ToOpIndex();            
             var saved = Context.HexReader().Read(dst).ToArray();
             Claim.eq(saved.Length, ops.Length);
             

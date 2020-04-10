@@ -32,9 +32,4 @@ namespace Z0
                 select c;
     }
 
-    public interface IApiComposition<T> :  IApiComposition, IFormattable<T>
-        where T : IApiComposition<T>
-    {
-
-    }
 }

@@ -8,17 +8,19 @@ namespace Z0
 
     public abstract class ApiShell<A,C> : Shell<A,C>, IApiShell<A>, IAppMsgSink
         where A : ApiShell<A,C>, new()
-        where C : IApiContext
+        where C : IContext
     {
         readonly IAppMsgQueue MsgQueue;
 
         public virtual IPart[] Resolved {get;}
 
+
+
         protected ApiShell(C context)
             : base(context)
         {
             this.MsgQueue = AppMessages.queue();
-            this.Resolved = context.Compostion.Resolved;
+            //this.Resolved = api.Composition.Resolved;
         }
 
         public string Format()

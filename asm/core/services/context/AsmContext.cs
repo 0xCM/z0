@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
     
     using static Seed;
     using static Memories;
@@ -18,33 +19,35 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
         [MethodImpl(Inline)]
-        public static IAsmContext Create(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange,  IPolyrand random, AsmFormatConfig format)
-            => new AsmContext(AsmContextData.Create(assemblies, settings, exchange, random, format));
+        public static IAsmContext Create(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange, IPolyrand random, AsmFormatConfig format)
+            => new AsmContext(assemblies,settings, exchange,random,format);
 
-        [MethodImpl(Inline)]
-        protected AsmContext(AsmContextData state)
+        AsmContext(IApiComposition composition, IAppSettings settings, IAppMsgExchange exchange, IPolyrand random, AsmFormatConfig format)
         {
-            this.State = state;
-            this.Next += BlackHole;
-            this.State.Messaging.Next += Relay;            
-        }            
-
-        public AsmContextData State {get;}
+            Next += BlackHole;
+            ApiSet = Z0.ApiSet.Create(composition);
+            Messaging = exchange;
+            Settings = settings;
+            Messaging.Next += Relay;            
+            Random = random;
+            AsmFormat = format;
+            Settings = settings;
+            Paths = AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
+        }
 
         public event Action<AppMsg> Next;
 
-        public IPolyrand Random => State.Random;
+        public IPolyrand Random {get;}
 
-        IAppMsgExchange Messaging  => State.Messaging;
+        IAppMsgExchange Messaging {get;}
         
-        public IAppSettings Settings  => State.Settings;
+        public IAppSettings Settings {get;}
 
-        public AsmFormatConfig AsmFormat  => State.AsmFormat;
-        
-        public IApiComposition Compostion => State.Assemblies;
+        public AsmFormatConfig AsmFormat {get;}
 
-        public IAsmContext WithFormat(AsmFormatConfig config)
-            => new AsmContext(State);
+        public IApiSet ApiSet {get;}
+
+        public IAppPaths Paths {get;}
 
         void BlackHole(AppMsg msg) {}
 

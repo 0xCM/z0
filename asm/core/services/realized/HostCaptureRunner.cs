@@ -35,7 +35,7 @@ namespace Z0.Asm
             Context = context;
             Extractor = context.HostExtractor();
             Parser = context.ExtractParser();
-            Composition = context.Compostion;
+            Composition = context.ApiSet.Composition;
             Decoder = decoder;
             Formatter = formatter;
             WriterFactory = writerfactory;

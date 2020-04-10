@@ -8,14 +8,14 @@ namespace Z0.Asm
 
     public class AsmContextData
     {
-        public static AsmContextData Create(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange,  IPolyrand random, AsmFormatConfig format)
-            => new AsmContextData(assemblies, settings, exchange, random, format);
+        public static AsmContextData Create(IApiComposition composition, IAppSettings settings, IAppMsgExchange exchange,  IPolyrand random, AsmFormatConfig format)
+            => new AsmContextData(composition, settings, exchange, random, format);
 
-        AsmContextData(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange,  IPolyrand random, AsmFormatConfig format)
+        AsmContextData(IApiComposition composition, IAppSettings settings, IAppMsgExchange exchange,  IPolyrand random, AsmFormatConfig format)
         {
-            this.Assemblies = assemblies;
             this.AsmFormat = format;
             this.Settings = settings ?? AppSettings.Empty;
+            this.ApiSet = Z0.ApiSet.Create(composition);
             
             Control.require(exchange != null);
             this.Messaging = exchange;
@@ -24,7 +24,7 @@ namespace Z0.Asm
             this.Random = random;
         }
 
-        public IApiComposition Assemblies {get;}
+        public IApiSet ApiSet {get;}
 
         public IAppSettings Settings {get;}
 

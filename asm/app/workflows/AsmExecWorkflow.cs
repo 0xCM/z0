@@ -13,37 +13,24 @@ namespace Z0.Asm.Check
     
     using static Core;
 
-    
-
     class AsmExecWorkflow : IAsmExecWorkflow
     {
-        public IAsmContext Context {get;}
+        readonly IAsmContext Context;
 
-        IAppMsgSink Sink {get;}
+        readonly IAppMsgSink Sink;
         
-        IAsmEvalDispatcher Dispatcher {get;}
+        readonly IAsmEvalDispatcher Dispatcher;
         
-        ByteSize BufferSize {get;}
+        readonly ByteSize BufferSize;
 
-        int BufferCount {get;}
+        readonly int BufferCount;
 
-        RootEmissionPaths RootPaths {get;}
+        readonly RootEmissionPaths RootPaths;
+
+        readonly IApiCorrelator Correlator;
+
+        readonly IApiSet ApiSet;
         
-        HostEmissionPaths HostPaths(in ApiHostUri host)
-            => RootPaths.HostPaths(host);
-        
-        public void Notify(string msg, AppMsgKind? severity = null)
-            => Sink.Notify(msg, severity);
-        
-        public void Notify(AppMsg msg)
-            => Sink.Notify(msg);
-
-        public void NotifyConsole(AppMsg msg)
-            => Sink.NotifyConsole(msg);
-
-        public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
-            => Sink.NotifyConsole(content, color);
-
         public static AsmExecWorkflow Create(IAsmContext context, IAppMsgSink sink, FolderPath root)
             => new AsmExecWorkflow(context, sink, root);
 
@@ -51,11 +38,29 @@ namespace Z0.Asm.Check
         {                    
             this.Sink = msgsink;
             this.Context = context;
-            this.Dispatcher = AsmEvalDispatcher.Create(Context, msgsink);
+            this.Dispatcher = AsmEvalDispatcher.Create(context, msgsink, context.Random);
             this.BufferSize = 1024;
             this.BufferCount = 3;
             this.RootPaths = RootEmissionPaths.Define(root);
+            this.ApiSet = Context.ApiSet;
+            this.Correlator = context.ApiCorrelator(ApiSet.Composition);
         }
+
+
+        HostEmissionPaths HostPaths(in ApiHostUri host)
+            => RootPaths.HostPaths(host);
+        
+        void Notify(string msg, AppMsgKind? severity = null)
+            => Sink.Notify(msg, severity);
+        
+        void Notify(AppMsg msg)
+            => Sink.Notify(msg);
+
+        void NotifyConsole(AppMsg msg)
+            => Sink.NotifyConsole(msg);
+
+        void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
+            => Sink.NotifyConsole(content, color);
 
         IAppMsgWriter OpenLog(string name, FileExtension ext = null, FileWriteMode mode = FileWriteMode.Overwrite,  bool display = false)
         {
@@ -75,7 +80,7 @@ namespace Z0.Asm.Check
         /// </summary>
         /// <param name="host">The host uri</param>
         public IEnumerable<ApiMember> HostedMembers(in ApiHostUri host)
-            => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
+            => ApiSet.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
 
         OpIndex<ApiMember> HostMemberIndex(ApiHostUri host)
         {
@@ -93,9 +98,6 @@ namespace Z0.Asm.Check
             Notify($"Found {index.EntryCount} encoded functions emitted fo {host}");
             return index;
         }
-
-        IApiCorrelator Correlator
-            => Context.ApiCorrelator();
         
         void ExecuteHost(in BufferSeq buffers, in ApiHost host)
         {
@@ -125,14 +127,14 @@ namespace Z0.Asm.Check
                 ExecuteHost(buffers, host);
             }
         }
+        
         public void Run()
         {
             using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
 
             Notify($"{BufferCount} buffers of length {BufferSize} successfully allocated");
-            var catalogs = Context.Compostion.Catalogs;
+            var catalogs = ApiSet.Composition.Catalogs;
             iter(catalogs,ExecuteCatalog);
         }
-
     }
 }

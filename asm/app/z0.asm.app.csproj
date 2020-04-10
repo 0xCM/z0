@@ -5,9 +5,12 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <Import Project="$(TopDir)asm/z0.asm.exports.props"/>
-
   <ItemGroup>
+    <ProjectReference Include="$(AsmTypes)" />
+    <ProjectReference Include="$(AsmModels)" />
+    <ProjectReference Include="$(AsmCore)" />
+    <ProjectReference Include="$(AsmDecode)" />
+    <ProjectReference Include="$(AsmSuite)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />    

@@ -13,11 +13,11 @@ namespace Z0.Asm
 
     readonly struct ApiCorrelator : IApiCorrelator
     {
-        public IApiContext Context {get;}
-
+        readonly IApiContext Context;
+        
         [MethodImpl(Inline)]
-        public static IApiCorrelator Create(IApiContext context)
-            => new ApiCorrelator(context);
+        public static IApiCorrelator Create(IContext context, IApiComposition composition)
+            =>  new ApiCorrelator(ApiSet.Create(composition));
         
         [MethodImpl(Inline)]
         ApiCorrelator(IApiContext context)

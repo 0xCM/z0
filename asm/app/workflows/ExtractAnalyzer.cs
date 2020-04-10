@@ -45,10 +45,14 @@ namespace Z0.Asm.Check
         ExtractAnalyzer(IAsmContext context)
             : base(context)
         {
-            ComposedApi = Context.Compostion;
+            ApiSet = context.ApiSet;
             Sink = context;
             Extractor = Context.HostExtractor();
-            Locator = Context.MemberLocator();
+            Locator = Context.MemberLocator();            
+            Decoder = context.AsmFunctionDecoder();
+            var format = Context.AsmFormat.WithSectionDelimiter();
+            Formatter = Context.AsmFormatter(format);
+            
             Paths = RootEmissionPaths.Define(RootEmissionPath);
             Paths.Clear();
             var broker = ExtractAnalyzerBroker.Create();
@@ -62,11 +66,16 @@ namespace Z0.Asm.Check
 
         readonly IMemberLocator Locator;
 
-        readonly IApiComposition ComposedApi;
+
+        readonly IApiSet ApiSet;
 
         readonly IAppMsgSink Sink;
 
         readonly RootEmissionPaths Paths;
+
+        readonly IAsmFunctionDecoder Decoder;
+
+        readonly IAsmFormatter Formatter;
 
         void ConnectReceivers(IExtractAnalyzerBroker broker)
         {
@@ -126,7 +135,7 @@ namespace Z0.Asm.Check
             => Context.Paths.TestDataDir(GetType());                
 
         IEnumerable<IApiCatalog> Catalogs
-            => ComposedApi.Catalogs.Where(c => c.ApiHostCount !=0 && c.HasApiHostContent);
+            => ApiSet.Catalogs.Where(c => c.ApiHostCount !=0 && c.HasApiHostContent);
 
         IEnumerable<IApiHost> Hosts
             => from c in Catalogs
@@ -138,13 +147,24 @@ namespace Z0.Asm.Check
             Raise(AnalyzingExtractReport.Define(src));
 
             var reader = Context.MemberExtractReader();
-            var count = 0;
-            foreach(var record in reader.Read(src))
-            {
-                count++;
+            var records = reader.Read(src).ToArray();
+            if(records.Length != 0)     
+            {                               
+                var host = records[0].Uri.HostPath;
+                AnalyzeExtract(host, records);
             }
-            Report($"Analyzed {count} extract report records");
+            
         }
+
+        void AnalyzeExtract(ApiHostUri host, MemberExtractRecord[] records)
+        {
+            for(var i = 0; i<records.Length; i++)
+            {
+
+            }
+
+        }
+
 
         MemberExtractReport CreateReport(IApiHost host, MemberExtract[] src)
         {

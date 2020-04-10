@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Seed;
 
@@ -15,6 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The value</param>
         /// <typeparam name="T">The type of the extant value</typeparam>
+        [MethodImpl(Inline)]
         public static Option<T> some<T>(T value)
             => Option<T>.Some(value);
     }

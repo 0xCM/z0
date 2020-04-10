@@ -13,23 +13,24 @@ namespace Z0.Asm.Check
 
     class AsmExecutor : IAsmExecutor
     {
-        public IAsmContext Context {get;}
-        
-        [MethodImpl(Inline)]
-        public static IAsmExecutor Create(IAsmContext context)
-            => new AsmExecutor(context);
+        readonly IAsmContext Context;
+
+        readonly IPolyrand Random;
+
+        readonly int RepCount;
 
         [MethodImpl(Inline)]
-        AsmExecutor(IAsmContext context)
+        public static IAsmExecutor Create(IAsmContext context, IPolyrand random)
+            => new AsmExecutor(context,random);
+
+        [MethodImpl(Inline)]
+        AsmExecutor(IAsmContext context, IPolyrand random)
         {
             this.Context = context;
             this.RepCount = 128;
+            this.Random = random;
         }
 
-        IPolyrand Random => Context.Random;
-
-
-        readonly int RepCount;
 
         static int _checkseq;
 

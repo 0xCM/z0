@@ -187,15 +187,7 @@ namespace Z0.Asm
             => AsmFunctionArchive.Create(context,catalog,host,formatter);
 
         [MethodImpl(Inline)]
-        public static IApiCorrelator ApiCorrelator(this IApiContext c)
-            => Svc.ApiCorrelator.Create(c);
-
-        public static Option<Assembly> ResolvedAssembly(this IApiContext context, PartId id)
-            =>  (from r in  context.Compostion.Resolved
-                where r.Id == id
-                select r.Owner).FirstOrDefault();
-
-        public static IEnumerable<PartId> ActiveAssemblies(this IApiContext context)
-            => context.Compostion.Resolved.Select(r => r.Id);
+        public static IApiCorrelator ApiCorrelator(this IContext c, IApiComposition composition)
+            => Svc.ApiCorrelator.Create(c, composition);
     }
 }
