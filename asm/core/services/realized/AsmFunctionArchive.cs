@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         public FolderPath RootFolder {get;}
         
-        public PartId Origin {get;}
+        public PartId SourcePart {get;}
 
         public string HostName {get;}
 
@@ -43,7 +43,7 @@ namespace Z0.Asm
         AsmFunctionArchive(IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter)
         {
             this.EmissionPaths = context.EmissionPaths();
-            this.Origin = host.Owner;
+            this.SourcePart = host.Owner;
             this.HostName = $"{host.Name}-imm";
             this.HostPath = host;
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(host.Owner.Format(), $"{host.Name}-imm"));
@@ -54,7 +54,7 @@ namespace Z0.Asm
         AsmFunctionArchive(IContext context, PartId catalog, string hostname, IAsmFormatter formatter)
         {
             this.EmissionPaths = context.EmissionPaths();
-            this.Origin = catalog;
+            this.SourcePart = catalog;
             this.HostName = hostname;
             this.HostPath = ApiHostUri.Define(catalog, hostname);
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(catalog.Format(), hostname));
@@ -155,12 +155,12 @@ namespace Z0.Asm
             => term.print(EmissionMismatch(id,incount,outcount));
             
         FilePath HexPath(OpIdentity id)
-            => EmissionPaths.OpArchivePath(ArchiveFileKind.Hex, Origin, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Hex, SourcePart, HostName, id).CreateParentIfMissing();
 
         FilePath AsmPath(OpIdentity id)
-            => EmissionPaths.OpArchivePath(ArchiveFileKind.Asm, Origin, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Asm, SourcePart, HostName, id).CreateParentIfMissing();
 
         FilePath CilPath(OpIdentity id)
-            => EmissionPaths.OpArchivePath(ArchiveFileKind.Cil, Origin, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Cil, SourcePart, HostName, id).CreateParentIfMissing();
     }
 }

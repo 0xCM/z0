@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// <summary>
         /// The .net assembly from which deposited asm originates
         /// </summary>
-        PartId Origin {get;}
+        PartId SourcePart {get;}
 
         /// <summary>
         /// An optional api host name - that usually corresponds the the name of a type that defines the operations of interest

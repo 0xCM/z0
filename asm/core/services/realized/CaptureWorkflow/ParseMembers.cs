@@ -6,34 +6,28 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
-    using static Memories;
 
     partial class HostCaptureSteps
     {
         public readonly struct ParseMembers
         {
-            readonly HostCaptureContext Context;
-
-            readonly IOpExtractParser Parser;
+            readonly CaptureWorkflowContext Context;
 
             [MethodImpl(Inline)]
-            internal static ParseMembers Create(HostCaptureContext context)
+            internal static ParseMembers Create(CaptureWorkflowContext context)
                 => new ParseMembers(context);
             
             [MethodImpl(Inline)]
-            ParseMembers(HostCaptureContext context)
+            ParseMembers(CaptureWorkflowContext context)
             {
                 this.Context = context;
-                this.Parser = Context.Parser;
             }
 
             public ParsedExtract[] ParseExtracts(in ApiHost host, MemberExtract[] extracts)
             {
-                var parsed = Parser.Parse(extracts);                
+                var parsed = Context.Parser.Parse(extracts);                
                 Context.Raise(HostExtractsParsed.Define(host, parsed));
                 return parsed;
             }

@@ -10,6 +10,12 @@ namespace Z0.Asm
     using static Seed;
     using static HostCaptureSteps;
     
+    static partial class HostCaptureSteps
+    {
+
+
+    }    
+    
     sealed class HostCaptureBroker : AppEventRelay, IHostCaptureWorkflowRelay
     {
         [MethodImpl(Inline)]
@@ -17,9 +23,9 @@ namespace Z0.Asm
             => new HostCaptureBroker();
     }
 
-    public partial class HostCaptureWorkflow : IHostCaptureWorkflow
+    public class HostCaptureWorkflow : IHostCaptureWorkflow
     {
-        readonly HostCaptureContext Context;
+        readonly CaptureWorkflowContext Context;
 
         public IHostCaptureWorkflowRelay EventBroker {get;}
         
@@ -31,7 +37,7 @@ namespace Z0.Asm
         HostCaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory)
         {
             this.EventBroker = HostCaptureBroker.Create();
-            this.Context = new HostCaptureContext(context,context.ApiSet, decoder, formatter, writerfactory, context.HostExtractor(), context.ExtractParser(), EventBroker);
+            this.Context = new CaptureWorkflowContext(context,context.ApiSet, decoder, formatter, writerfactory, context.HostExtractor(), context.ExtractParser(), EventBroker);
         }
  
         public void Run(AsmWorkflowConfig config) 

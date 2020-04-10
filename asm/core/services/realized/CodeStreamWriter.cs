@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    readonly struct AsmCodeWriter : IAsmCodeWriter
+    readonly struct CodeStreamWriter : ICodeStreamWriter
     {        
         readonly StreamWriter StreamOut;
 
@@ -19,11 +19,11 @@ namespace Z0.Asm
 
 
         [MethodImpl(Inline)]
-        public static IAsmCodeWriter New(IContext context, FilePath dst)
-            => new AsmCodeWriter(dst);
+        public static ICodeStreamWriter New(IContext context, FilePath dst)
+            => new CodeStreamWriter(dst);
 
         [MethodImpl(Inline)]
-        AsmCodeWriter(FilePath path)
+        CodeStreamWriter(FilePath path)
         {
             this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);

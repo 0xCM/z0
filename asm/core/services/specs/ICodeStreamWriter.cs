@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines serivce contract for persting text-formatted x86 encoded assembly 
     /// </summary>
-    public interface IAsmCodeWriter : IAsmStreamWriter
+    public interface ICodeStreamWriter : IAsmStreamWriter
     {
         void WriteHexLine(in CapturedOp src, int? idpad = null);
 

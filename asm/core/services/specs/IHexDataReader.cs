@@ -6,7 +6,7 @@ namespace Z0.Asm
 {        
     using System.Collections.Generic;
 
-    public interface IAsmHexReader : IService
+    public interface IHexDataReader : IService
     {
         /// <summary>
         /// Reads the content of a source file

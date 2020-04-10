@@ -8,37 +8,10 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    
-    readonly struct ImmV128UnaryCaptureService<T> : IImmUnaryCapture<T>
-        where T : unmanaged
-    {     
-        readonly ISVImm8UnaryResolver128Api<T> Resolver;
-
-        readonly ICaptureService CaptureService;
-
-        readonly IAsmFunctionDecoder Decoder;
-
-        [MethodImpl(Inline)]
-        public static IImmUnaryCapture<T> New(IContext context, ISVImm8UnaryResolver128Api<T> resolver, IAsmFunctionDecoder decoder)
-            => new ImmV128UnaryCaptureService<T>(context, resolver, decoder);
-
-        [MethodImpl(Inline)]
-        ImmV128UnaryCaptureService(IContext context, ISVImm8UnaryResolver128Api<T> resolver, IAsmFunctionDecoder decoder)
-        {
-            this.Resolver = resolver;
-            this.Decoder = decoder;
-            this.CaptureService = context.Capture();
-        }
-        
-        [MethodImpl(Inline)]
-        public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
-            => Decoder.DecodeFunction(CaptureService.Capture(exchange,Resolver.Id.WithImm8(imm8),Resolver.@delegate(imm8)));
-    }
 
     readonly struct ImmV256UnaryCaptureService<T> : IImmUnaryCapture<T>
         where T : unmanaged
     {
-
         readonly ISVImm8UnaryResolver256Api<T> Resolver;
 
         readonly ICaptureService CaptureService;
@@ -61,4 +34,5 @@ namespace Z0.Asm
         public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
             => Decoder.DecodeFunction(CaptureService.Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8)));
     }
+
 }

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     public interface IAsmStreamWriter : IServiceAllocation
     {
         /// <summary>

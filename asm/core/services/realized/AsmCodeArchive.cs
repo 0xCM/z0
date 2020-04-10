@@ -18,33 +18,33 @@ namespace Z0.Asm
 
         readonly IContext Context;
         
-        public PartId Origin {get;}
+        public PartId SourcePart {get;}
 
         public string HostName {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive New(IContext context, PartId catalog)
+        public static IAsmCodeArchive Create(IContext context, PartId catalog)
             => new AsmCodeArchive(context, catalog);
 
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive New(IContext context, PartId catalog, string host)
+        public static IAsmCodeArchive Create(IContext context, PartId catalog, string host)
             => new AsmCodeArchive(context, catalog, host);
 
         [MethodImpl(Inline)]
         AsmCodeArchive(IContext context, PartId catalog, string host)
         {
             this.Context = context;
-            this.Origin = catalog;
+            this.SourcePart = catalog;
             this.HostName = host;
-            this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(Origin.Format(),host));
+            this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(SourcePart.Format(),host));
         }
 
         AsmCodeArchive(IContext context, PartId catalog)
         {
             this.Context = context;
-            this.Origin = catalog;
+            this.SourcePart = catalog;
             this.HostName = string.Empty;
-            this.RootFolder = context.EmissionPaths().DataSubDir(FolderName.Define(Origin.Format()));
+            this.RootFolder = context.EmissionPaths().DataSubDir(FolderName.Define(SourcePart.Format()));
         }
 
         /// <summary>

@@ -6,24 +6,21 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
-    using static Memories;
 
     partial class HostCaptureSteps
     {
         public readonly struct DriveHostCapture
         {
-            readonly HostCaptureContext Context;
+            readonly CaptureWorkflowContext Context;
 
             [MethodImpl(Inline)]
-            internal static DriveHostCapture Create(HostCaptureContext context)
+            internal static DriveHostCapture Create(CaptureWorkflowContext context)
                 => new DriveHostCapture(context);
             
             [MethodImpl(Inline)]
-            DriveHostCapture(HostCaptureContext context)
+            DriveHostCapture(CaptureWorkflowContext context)
             {
                 this.Context = context;
             }

@@ -10,25 +10,22 @@ namespace Z0.Asm
 
     using static Seed;
 
-    readonly struct AsmFunctionWriter : IAsmFunctionWriter
+    readonly struct AsmFunctionWriter : IFunctionStreamWriter
     {        
         readonly StreamWriter StreamOut;
 
         readonly IAsmFormatter Formatter;
 
-        readonly IContext Context;
-
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter Create(IContext context, FilePath dst, IAsmFormatter formatter)
+        public static IFunctionStreamWriter Create(IContext context, FilePath dst, IAsmFormatter formatter)
             => new AsmFunctionWriter(context, dst, formatter);
 
         [MethodImpl(Inline)]
         AsmFunctionWriter(IContext context, FilePath path, IAsmFormatter formatter)
         {
             this.TargetPath = path;
-            this.Context = context;
             this.Formatter = formatter;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }

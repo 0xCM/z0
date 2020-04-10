@@ -11,18 +11,18 @@ namespace Z0.Asm
 
     using static Seed;
 
-    readonly struct AsmHexWriter : IAsmHexWriter
+    readonly struct HexStreamWriter : IHexStreamWriter
     {        
         readonly StreamWriter StreamOut;
 
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmHexWriter New(IContext context, FilePath dst)
-            => new AsmHexWriter(dst);
+        public static IHexStreamWriter Create(IContext context, FilePath dst)
+            => new HexStreamWriter(dst);
 
         [MethodImpl(Inline)]
-        AsmHexWriter(FilePath path)
+        HexStreamWriter(FilePath path)
         {
             this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);

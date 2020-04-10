@@ -6,24 +6,21 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
-    using static Memories;
 
     partial class HostCaptureSteps
     {
         public readonly struct ManageParseReport
         {
-            readonly HostCaptureContext Context;
+            readonly CaptureWorkflowContext Context;
 
             [MethodImpl(Inline)]
-            internal static ManageParseReport Create(HostCaptureContext context)
+            internal static ManageParseReport Create(CaptureWorkflowContext context)
                 => new ManageParseReport(context);
 
             [MethodImpl(Inline)]
-            ManageParseReport(HostCaptureContext context)
+            ManageParseReport(CaptureWorkflowContext context)
             {
                 this.Context = context;
             }

@@ -45,7 +45,7 @@ namespace Z0.Asm
             }
         }        
 
-        public Span<MemberExtract> ReadExtracts(FilePath src)
+        public MemberExtract[] ReadExtracts(FilePath src)
         {
             var report = MemberExtractReport.Load(src);
             
@@ -64,11 +64,11 @@ namespace Z0.Asm
         OpIndex<ApiMember> MemberIndex(IApiHost host)
             => Context.MemberLocator().Hosted(host).ToOpIndex();
 
-        Span<MemberExtract> MemberExtracts(IApiHost host, MemberExtractRecord[] records)
+        MemberExtract[] MemberExtracts(IApiHost host, MemberExtractRecord[] records)
         {
-            
+            var data = new MemberExtract[records.Length];
             var index = MemberIndex(host);
-            Span<MemberExtract> extracts = new MemberExtract[records.Length];
+            Span<MemberExtract> extracts = data;
             for(var i = 0; i<records.Length; i++)
             {
                 ref readonly var record = ref skip(extracts,i);
@@ -76,7 +76,7 @@ namespace Z0.Asm
                 var member = index.Lookup(record.Id);
                 seek(extracts,i) = member ? MemberExtract.Define(member.Value, encoded) : MemberExtract.Empty;
             }
-            return extracts;
+            return data;
         }
 
     }

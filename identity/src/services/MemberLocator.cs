@@ -24,6 +24,12 @@ namespace Z0
                   let spec = (NumericKind)tag.Spec
                   select spec.DistinctKinds().ToArray()).ValueOrElse(() => Arrays.empty<NumericKind>());              
 
+            static IEnumerable<Type> Closures(MethodInfo m)
+                  => from c in NumericClosures(m)
+                  let t = c.SystemType()
+                  where t != typeof(void)
+                  select t;
+
             [MethodImpl(Inline)]
             public static MemberLocator New(IContext context, IMultiDiviner diviner)
                   => new MemberLocator(context,diviner);
@@ -31,14 +37,9 @@ namespace Z0
             [MethodImpl(Inline)]
             MemberLocator(IContext context, IMultiDiviner diviner)
             {
-                  this.Context = context;
-                  this.Diviner = diviner;
+                  Context = context;
+                  Diviner = diviner;
             }
-
-            public IEnumerable<ApiMember> Hosted(Assembly src)
-                  => from h in src.ApiHosts()
-                  from member in Hosted(h)
-                  select member;
 
             [MethodImpl(Inline)]
             static IntPtr Jit(MethodInfo src)
@@ -48,55 +49,54 @@ namespace Z0
             }
 
             public IEnumerable<ApiMember> Hosted(IApiHost src)
-                  => HostedGeneric(src).Union(HostedDirect(src)).OrderBy(x => x.Method.MetadataToken);
-
-            public IEnumerable<ApiMember> Located(Assembly src)
-                  => from h in src.ApiHosts()
-                     from member in Located(h)
-                     select member;
+                  => HostedGeneric(src).Concat(HostedDirect(src)).OrderBy(x => x.Method.MetadataToken);
 
             public IEnumerable<ApiMember> Located(IApiHost src)
-                  => LocatedGeneric(src).Union(LocatedDirect(src)).OrderBy(x => x.Address);
+                  => LocatedGeneric(src).Concat(LocatedDirect(src)).OrderBy(x => x.Address);
 
             IEnumerable<ApiMember> HostedDirect(IApiHost src)
-                  => from m in src.HostingType.DeclaredMethods().NonGeneric()
-                  where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
+                  => from m in DirectMethods(src)
                   let kid = m.KindId()
                   let id = Diviner.Identify(m)
                   let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
                   select ApiMember.Define(uri, m, kid);
 
             IEnumerable<ApiMember> LocatedDirect(IApiHost src)
-                  => from m in src.HostingType.DeclaredMethods().NonGeneric()
-                  where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
+                  => from m in DirectMethods(src)
                   let kid = m.KindId()
                   let address = MemoryAddress.Define(Jit(m))
                   let id = Diviner.Identify(m)
                   let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Name, id)
                   select ApiMember.Define(uri, m, kid, address);
-
+            
             IEnumerable<ApiMember> HostedGeneric(IApiHost src)
-                  => from m in src.HostingType.DeclaredMethods().OpenGeneric(1)
-                  where m.Tagged<OpAttribute>() && m.Tagged<ClosuresAttribute>() && !m.AcceptsImmediate()
+                  => from m in GenericMethods(src)
                   let kid = m.KindId()
-                  from t in NumericClosures(m).Select(x => x.SystemType().ToOption())
-                  where t.IsSome()
-                  let reified = m.MakeGenericMethod(t.Value)
+                  from t in Closures(m)
+                  let reified = m.MakeGenericMethod(t)
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
                   select ApiMember.Define(uri, reified, kid);
-
+      
             IEnumerable<ApiMember> LocatedGeneric(IApiHost src)
-                  => from m in src.HostingType.DeclaredMethods().OpenGeneric(1)
-                  where m.Tagged<OpAttribute>() && m.Tagged<ClosuresAttribute>() && !m.AcceptsImmediate()
+                  => from m in GenericMethods(src)
                   let kid = m.KindId()
-                  from t in NumericClosures(m).Select(x => x.SystemType().ToOption())
-                  where t.IsSome()
-                  let reified = m.MakeGenericMethod(t.Value)
+                  from t in Closures(m)
+                  let reified = m.MakeGenericMethod(t)
                   let address = MemoryAddress.Define(Jit(reified))
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Name, id)
                   select ApiMember.Define(uri, reified, kid, address);
+
+            IEnumerable<MethodInfo> GenericMethods(IApiHost src)
+                  => from m in src.HostingType.DeclaredMethods().OpenGeneric(1)
+                  where m.Tagged<OpAttribute>() && m.Tagged<ClosuresAttribute>() && !m.AcceptsImmediate()
+                  select m;
+      
+            IEnumerable<MethodInfo> DirectMethods(IApiHost src)
+                  => from m in src.HostingType.DeclaredMethods().NonGeneric()
+                  where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
+                  select m;
 
       }
 }

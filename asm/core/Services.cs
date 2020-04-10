@@ -100,8 +100,8 @@ namespace Z0.Asm
         /// <param name="dst">The target path</param>
         /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeWriter CodeWriter(this IContext context, FilePath dst)
-            => AsmCodeWriter.New(context, dst);
+        public static ICodeStreamWriter CodeWriter(this IContext context, FilePath dst)
+            => CodeStreamWriter.New(context, dst);
 
         /// <summary>
         /// Instantiates a contextual code reader service
@@ -119,8 +119,8 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="dst">The target file</param>
         [MethodImpl(Inline)]
-        public static IAsmHexWriter HexWriter(this IContext context, FilePath dst)
-            => AsmHexWriter.New(context, dst);
+        public static IHexStreamWriter HexWriter(this IContext context, FilePath dst)
+            => HexStreamWriter.Create(context, dst);
 
         /// <summary>
         /// Instantiates a contextual service allocation that streams lines of operation hex to a target file
@@ -128,7 +128,7 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="dst">The target file</param>
         [MethodImpl(Inline)]
-        public static IAsmHexReader HexReader(this IContext context)
+        public static IHexDataReader HexReader(this IContext context)
             => AsmHexReader.New(context);
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Z0.Asm
         /// <param name="id">The assembly identifier</param>
         [MethodImpl(Inline)]
         public static IAsmCodeArchive CodeArchive(this IContext context, PartId id)
-            => AsmCodeArchive.New(context,id);
+            => AsmCodeArchive.Create(context,id);
 
         /// <summary>
         /// Instantiates a contextual code archive service that is specialized for an assembly and api host
@@ -157,7 +157,7 @@ namespace Z0.Asm
         /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
         public static IAsmCodeArchive CodeArchive(this IContext context, PartId assembly, string host)
-            => AsmCodeArchive.New(context, assembly, host);
+            => AsmCodeArchive.Create(context, assembly, host);
 
         /// <summary>
         /// Creates a flow over an instruction source

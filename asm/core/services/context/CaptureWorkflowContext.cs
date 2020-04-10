@@ -6,15 +6,13 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
     using static Memories;
 
-    public class HostCaptureContext : IContext
+    public class CaptureWorkflowContext : IContext
     {
-        public HostCaptureContext(IAsmContext context, IApiSet api, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
+        public CaptureWorkflowContext(IAsmContext context, IApiSet api, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
             IHostOpExtractor extractor, IOpExtractParser parser,  IHostCaptureWorkflowRelay broker)
         {
             this.RootContext = context;

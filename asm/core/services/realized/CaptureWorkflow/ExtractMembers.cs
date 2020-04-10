@@ -10,21 +10,19 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Seed;
-    using static Memories;
 
     partial class HostCaptureSteps
     {
         public readonly struct ExtractMembers
         {
-            readonly HostCaptureContext Context;
-
+            readonly CaptureWorkflowContext Context;
 
             [MethodImpl(Inline)]
-            internal static ExtractMembers Create(HostCaptureContext context)
+            internal static ExtractMembers Create(CaptureWorkflowContext context)
                 => new ExtractMembers(context);
             
             [MethodImpl(Inline)]
-            ExtractMembers(HostCaptureContext context)
+            ExtractMembers(CaptureWorkflowContext context)
             {
                 this.Context = context;
             }
@@ -43,7 +41,6 @@ namespace Z0.Asm
                 var extractor = Context.HostExtractor();
                 return extractor.Extract(members);
             }
- 
         }
     }
 }

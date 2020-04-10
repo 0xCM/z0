@@ -6,9 +6,10 @@ namespace Z0.Asm
 {        
     public interface IAssemblyCapture : IService
     {
-
         ParsedExtract[] Parse(MemberExtract[] src);
         
-        Option<MemberExtractReport> ExtractOps(ApiHost host);        
+        MemberExtract[] Extract(ApiHost host);        
+
+        AsmFunction[] Decode(ApiHost host, ParsedMemberCode[] parsed);        
     }
 }

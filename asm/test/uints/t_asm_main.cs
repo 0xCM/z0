@@ -79,21 +79,21 @@ namespace Z0.Asm
 
         #endif
 
-        static IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
+        static ICodeStreamWriter CodeWriter(IAsmContext context, [Caller] string test = null)
         {
             var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
             var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
             return  context.CodeWriter(dstPath);
         }
 
-        static IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
+        static ICodeStreamWriter HexWriter(IAsmContext context, [Caller] string test = null)
         {
             var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
             var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Raw);    
             return  context.CodeWriter(dstPath);
         }
 
-        static IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
+        static IFunctionStreamWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
         {
             var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
             var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Asm);    

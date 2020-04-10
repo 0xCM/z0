@@ -3,12 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{
-
-    public delegate IAsmFunctionWriter AsmWriterFactory(FilePath dst, IAsmFormatter formatter);
-
-    public interface IAsmFunctionWriter : IAsmStreamWriter
+{    
+    public interface IHexStreamWriter : IAsmStreamWriter
     {
-        void Write(params AsmFunction[] src);
+        void Write(in AsmOpBits src, int? uripad = null);
+
+        void Write(AsmOpBits[] src);
     }
 }

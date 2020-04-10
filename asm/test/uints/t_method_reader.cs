@@ -23,7 +23,7 @@ namespace Z0.Asm
             return dstPath.Writer();
         }
 
-        IAsmCodeWriter AsmCodeWriter([Caller] string test = null)
+        ICodeStreamWriter AsmCodeWriter([Caller] string test = null)
         {
             var dstDir = Context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_native_reader).Name));            
             var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    

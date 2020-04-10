@@ -71,7 +71,7 @@ namespace Z0.Asm
             iter(Selected, CreateLocationReport);
         }
 
-        AsmFunction Decode(MemberParseRecord src, IAsmFunctionWriter dst)
+        AsmFunction Decode(MemberParseRecord src, IFunctionStreamWriter dst)
         {
             var f = Decoder.DecodeFunction(src.ToParsedEncoding());
             dst.Write(f);
@@ -92,7 +92,7 @@ namespace Z0.Asm
             }            
         }
 
-        MemberExtractReport Extract(ApiHost host)
+        MemberExtractReport Extract(IApiHost host)
         {
             var extractor = Context.HostExtractor();
             var ops = extractor.Extract(host);
@@ -107,7 +107,7 @@ namespace Z0.Asm
             return report;
         }
 
-        MemberParseReport Parse(ApiHost host, MemberExtractReport extract)
+        MemberParseReport Parse(IApiHost host, MemberExtractReport extract)
         {
             var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
             var parsed = parser.Parse(host,extract);
@@ -120,7 +120,7 @@ namespace Z0.Asm
             return parsed;
         }
 
-        AsmFunctionList Decode(ApiHost host, MemberExtractReport captured, MemberParseReport parsed)
+        AsmFunctionList Decode(IApiHost host, MemberExtractReport captured, MemberParseReport parsed)
         {
             var path = Paths.DecodedPath(host.UriPath);
             var functions = new AsmFunction[captured.RecordCount];

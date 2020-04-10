@@ -57,7 +57,7 @@ namespace Z0.Asm
         /// Extracts encoded content for all operations defined by a host
         /// </summary>
         /// <param name="src">The source member</param>
-        public MemberExtract[] Extract(ApiHost src)
+        public MemberExtract[] Extract(IApiHost src)
         {
             var locator = Context.MemberLocator();
             var members = locator.Located(src).ToArray();

@@ -60,7 +60,7 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
-        public MemberParseReport Parse(ApiHost host, MemberExtractReport extracts)
+        public MemberParseReport Parse(IApiHost host, MemberExtractReport extracts)
         {
             var records = list<MemberParseRecord>(extracts.RecordCount);
             var parser = Context.PatternParser(PatternBuffer.Clear());            
@@ -93,7 +93,7 @@ namespace Z0.Asm
             }
 
             ReportDuplicates(Identify.duplicates(records.Select(x => x.Uri.OpId)));
-            return MemberParseReport.Create(host, records.ToArray());
+            return MemberParseReport.Create(host.UriPath, records.ToArray());
         }
 
         void ReportDuplicates(OpIdentity[] duplicated)

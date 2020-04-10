@@ -9,7 +9,7 @@ namespace Z0.Asm.Check
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Core;
+    using static Seed;
 
     public interface IExtractAnalyzerBroker : IWorkflowRelay
     {
@@ -140,13 +140,18 @@ namespace Z0.Asm.Check
                 from h in c.ApiHosts
                 select h as IApiHost;
 
-        void AnalyzeExtract(FilePath src)
+        void AnalyzeExtracts(FilePath src)
         {
             Raise(AnalyzingExtractReport.Define(src));
             var reader = Context.MemberExtractReader(ApiSet);
 
             var extracts = reader.ReadExtracts(src);
             Report($"Loaded {extracts.Length} member extracts from {src}");
+        }
+
+        void AnalyzeExtracts(MemberExtract[] src)
+        {
+            Raise(AnalyzingExtracts.Define(src));
 
         }
 
@@ -186,11 +191,11 @@ namespace Z0.Asm.Check
             foreach(var host in Hosts)
             {
                 var members = ExtractMembers(host);
-                var paths = Paths.HostPaths(host.UriPath);                
                 if(members.Length !=0)
                 {
                     var report = CreateReport(host,members);
-                    SaveReport(report, paths.ExtractPath).OnSome(AnalyzeExtract);
+                    var paths = Paths.HostPaths(host.UriPath);                
+                    SaveReport(report, paths.ExtractPath).OnSome(AnalyzeExtracts);
                 }
             }
         }               

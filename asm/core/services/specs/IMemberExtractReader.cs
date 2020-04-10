@@ -13,7 +13,7 @@ namespace Z0.Asm
     public interface IMemberExtractReader : IService
     {
 
-        Span<MemberExtract> ReadExtracts(FilePath src);
+        MemberExtract[] ReadExtracts(FilePath src);
         
     }
 }

@@ -11,10 +11,10 @@ namespace Z0.Asm
 
     using static Seed;
 
-    readonly struct AsmHexReader : IAsmHexReader
+    readonly struct AsmHexReader : IHexDataReader
     {
         [MethodImpl(Inline)]
-        public static IAsmHexReader New(IContext context)
+        public static IHexDataReader New(IContext context)
             => default(AsmHexReader);
 
         /// <summary>

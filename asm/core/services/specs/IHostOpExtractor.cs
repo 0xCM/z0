@@ -25,6 +25,6 @@ namespace Z0.Asm
         /// Extracts encoded content for all operations defined by a host
         /// </summary>
         /// <param name="src">The source member</param>
-        MemberExtract[] Extract(ApiHost src);        
+        MemberExtract[] Extract(IApiHost src);        
     }
 }

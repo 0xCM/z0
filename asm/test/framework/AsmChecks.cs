@@ -954,20 +954,20 @@ namespace Z0.Asm.Validation
         AsmFormatConfig AsmFormat
             => AsmFormatConfig.New.WithoutFunctionTimestamp();
 
-        IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
+        ICodeStreamWriter CodeWriter(IAsmContext context, [Caller] string test = null)
         {
             var dst = LogDir + FileName.Define($"{test}", FileExtensions.Hex);
             return  context.CodeWriter(dst);
         }
 
-        protected IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
+        protected ICodeStreamWriter HexWriter(IAsmContext context, [Caller] string test = null)
         {            
 
             var dst = LogDir + FileName.Define($"{test}", FileExtensions.Raw);
             return  context.CodeWriter(dst);
         }
 
-        protected IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
+        protected IFunctionStreamWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
         {
             var dst = LogDir + FileName.Define($"{test}", FileExtensions.Asm);
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
