@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static Seed;
     using static AsmServiceMessages;    
 
-    class AsmFunctionArchive : IAsmFunctionArchive
+    public class AsmFunctionArchive : IAsmFunctionArchive
     {        
         public static AppMsg Emitted(AsmEmissionTokens<OpUri> src)
             => AppMsg.Info($"Emitted {src.Source}");
@@ -31,6 +31,22 @@ namespace Z0.Asm
         readonly ICilFunctionFormatter CilFormatter;
 
         readonly AsmEmissionPaths EmissionPaths;
+
+        [MethodImpl(Inline)]
+        public static IAsmFunctionArchive ImmArchive(IContext context, ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+            => new AsmFunctionArchive(context, host, true, formatter, dst);
+
+        AsmFunctionArchive(IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter, FolderPath dst)
+        {
+            this.EmissionPaths = AsmEmissionPaths.Define(dst);
+            this.SourcePart = host.Owner;
+            this.HostName = $"{host.Name}-imm";
+            this.HostPath = host;
+            this.RootFolder = EmissionPaths.DataSubDir(RelativeLocation.Define(host.Owner.Format(), $"{host.Name}-imm"));
+            this.AsmFormatter = formatter;
+            this.CilFormatter = context.CilFormatter();
+        }
+
 
         [MethodImpl(Inline)]
         public static IAsmFunctionArchive Create(IContext context, PartId catalog, string host, IAsmFormatter formatter)

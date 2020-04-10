@@ -8,31 +8,33 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using E = AsmEvents.HostFunctionsDecoded;
 
-    public readonly struct HostFunctionsDecoded : IAppEvent<HostFunctionsDecoded, AsmFunction[]>
+    partial class AsmEvents
     {
-        public static HostFunctionsDecoded Empty => new HostFunctionsDecoded(ApiHostUri.Empty, new AsmFunction[]{});
-
-        [MethodImpl(Inline)]
-        public static HostFunctionsDecoded Define(ApiHostUri host, AsmFunction[] functions)
-            => new HostFunctionsDecoded(host,functions);
-
-        [MethodImpl(Inline)]
-        HostFunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
+        public readonly struct HostFunctionsDecoded : IAppEvent<E, AsmFunction[]>
         {
-            this.Host = host;
-            this.Payload = functions;
-        }
-        
-        public ApiHostUri Host {get;}
-        
-        public AsmFunction[] Payload {get;}
+            public static HostFunctionsDecoded Empty => new HostFunctionsDecoded(ApiHostUri.Empty, new AsmFunction[]{});
 
-        public string Description
-            => $"{Payload.Length} {Host} functions decoded";
-        
-        public string Format()
-            => Description;         
-    }    
+            [MethodImpl(Inline)]
+            public static E Define(ApiHostUri host, AsmFunction[] functions)
+                => new E(host,functions);
 
+            [MethodImpl(Inline)]
+            HostFunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
+            {
+                this.Host = host;
+                this.Payload = functions;
+            }
+            
+            public ApiHostUri Host {get;}
+            
+            public AsmFunction[] Payload {get;}
+
+            public string Description
+                => $"{Payload.Length} {Host} functions decoded";
+            
+            public E Zero => Empty;
+        }    
+    }
 }

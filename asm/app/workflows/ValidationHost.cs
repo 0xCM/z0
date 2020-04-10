@@ -6,13 +6,19 @@ namespace Z0.Asm.Check
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using System.Linq;
 
     using static Core;
+    using static AsmEvents;
     using static AsmServiceMessages;
 
-    class ValidationHost : TestContext<ValidationHost,IAsmContext>, IAsmValidationHost
+    class ValidationHost : IAsmValidationHost
     {               
+        readonly IAsmContext Context;
+
+        readonly IAppMsgSink Sink;
+
         FolderPath RootEmissionPath
             => Context.Paths.TestDataDir(GetType());                
 
@@ -23,22 +29,45 @@ namespace Z0.Asm.Check
             => new ValidationHost(context);
 
         public ValidationHost(IAsmContext context)
-            : base(context)
-        {            
+        {                    
+            Context = context;
+            Sink = context;
             Paths = RootEmissionPaths.Define(RootEmissionPath);
             Paths.LogDir.Clear();
             Settings = ValidationHostConfig.From(context.Settings);            
             ApiSet = context.ApiSet;
             MemberLocator = context.MemberLocator();
+            Decoder = context.AsmFunctionDecoder();            
+            Formatter = Context.AsmFormatter(Context.AsmFormat.WithSectionDelimiter());
+            CaptureWorkflow = HostCaptureWorkflow.Create(Context, Decoder, Formatter, Context.AsmWriterFactory());
+            var relay = CaptureWorkflow.EventBroker;
+            ConnectReceivers(relay);
+            Relay = relay;
+            WorkflowConfig = AsmWorkflowConfig.Define(RootEmissionPath);
         }
 
-        ValidationHostConfig Settings {get;}
+        readonly IHostCaptureWorkflow CaptureWorkflow;
 
-        RootEmissionPaths Paths {get;}
+        readonly ValidationHostConfig Settings;
 
-        IApiSet ApiSet {get;}
+        readonly RootEmissionPaths Paths;
 
-        IMemberLocator MemberLocator {get;}
+        readonly AsmWorkflowConfig WorkflowConfig;
+
+        readonly IApiSet ApiSet;
+
+        readonly IAsmFormatter Formatter;
+
+        readonly IAsmFunctionDecoder Decoder;
+
+        readonly IMemberLocator MemberLocator;
+
+        readonly IAppEventRelay Relay;
+
+        [MethodImpl(Inline)]
+        ref readonly E Raise<E>(in E e)
+            where E : IAppEvent
+                => ref Relay.Raise(e);
 
         OpIndex<ApiMember> MemberIndex(IApiHost host)
             => MemberLocator.Hosted(host).ToOpIndex();
@@ -46,70 +75,102 @@ namespace Z0.Asm.Check
         Option<IApiHost> Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
 
-        protected override void OnDispose()
+        void Notify(string msg, AppMsgKind? severity = null)
+            => Sink.Notify(msg, severity);
+        
+        void Notify(AppMsg msg)
+            => Sink.Notify(msg);
+
+        void NotifyConsole(AppMsg msg)
+            => Sink.NotifyConsole(msg);
+
+        void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
+            => Sink.NotifyConsole(content, color);
+
+        public void Dispose()
         {
             term.print($"Writting app messages to {AppMsgLogPath}");
-            Emit(AppMsgLogPath);
         }
-
+        
         public void Run()
         {
-            if(Settings.EmitArtifacts)
-                Emit();
+            if(Settings.EmitImmArtifacts)
+                EmitImm();
+
+            if(Settings.EmitPrimaryArtifacts)
+                EmitPrimary();
 
             if(Settings.CheckExecution)
                 Exec();
         }
 
-        void Emit()
+
+        void EmitImm()
         {
-            var decoder = Context.AsmFunctionDecoder();
-            var formatter = Context.AsmFormatter(Context.AsmFormat.WithSectionDelimiter());
-            var workflow = HostCaptureWorkflow.Create(Context, decoder, formatter, Context.AsmWriterFactory());
-            ConnectReceivers(workflow.EventBroker);
-            workflow.Run(AsmWorkflowConfig.Define(RootEmissionPath));
+            var imm8 = new byte[]{3,5,12,9};                        
+            var emitter = ImmEmitter.Create(Context, ApiSet, Decoder, RootEmissionPath);
+            emitter.Emit(imm8);            
+        }
+
+        void EmitPrimary()
+        {
+            // var decoder = Context.AsmFunctionDecoder();
+            // var formatter = Context.AsmFormatter(Context.AsmFormat.WithSectionDelimiter());
+            // var workflow = HostCaptureWorkflow.Create(Context, decoder, formatter, Context.AsmWriterFactory());
+            CaptureWorkflow.Run(WorkflowConfig);
         }
 
         void Exec()
         {
-            var workflow = AsmExecWorkflow.Create(Context, this, RootEmissionPath);
+            var workflow = AsmExecWorkflow.Create(Context, Sink, RootEmissionPath);
             workflow.Run();
         }
 
+        static string Format(IAppEvent e) => e?.Format() ?? string.Empty;
+
         void OnEvent(HostMembersLocated e)
         {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
+            NotifyConsole(msg);
+
             Analyze(e.Host, e.Payload);
+        }
+
+        void OnEvent(EmittingImmInjections e)
+        {
+            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
+            NotifyConsole(msg);
         }
 
         void OnEvent(ExtractReportCreated e)
         {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Blue);
+            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Blue);
             NotifyConsole(msg);
         }
 
         void OnEvent(ExtractReportSaved e)
         {            
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
             NotifyConsole(msg);
         }
 
         void OnEvent(HostFunctionsDecoded e)
         {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
+            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Magenta);
+            NotifyConsole(msg);
             Analyze(e.Host, e.Payload);
         }
 
         void OnEvent(HostAsmHexSaved e)
         {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
             NotifyConsole(msg);
             Analyze(e.Host, e.Payload, e.Target);
         }
 
         void OnEvent(ParseReportCreated e)
         {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Blue);
+            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Blue);
             NotifyConsole(msg);
         }
 
@@ -120,13 +181,13 @@ namespace Z0.Asm.Check
 
         void OnEvent(StepStart<IApiCatalog> e)
         {
-            var msg = AppMsg.Colorize($"{e}: {e.Payload.CatalogName}", AppMsgColor.Green);
+            var msg = AppMsg.Colorize($"{Format(e)}: {e.Payload.CatalogName}", AppMsgColor.Green);
             NotifyConsole(msg);
         }
 
         void OnEvent(StepEnd<IApiCatalog> e)
         {
-            var msg = AppMsg.Colorize($"{e}: {e.Payload.CatalogName}", AppMsgColor.Magenta);
+            var msg = AppMsg.Colorize($"{Format(e)}: {e.Payload.CatalogName}", AppMsgColor.Magenta);
             NotifyConsole(msg);            
         }
 
@@ -136,6 +197,9 @@ namespace Z0.Asm.Check
 
             if(Settings.HandleMembersLocated)
                 broker.MembersLocated.Subscribe(broker, OnEvent);
+
+            if(Settings.EmitImmArtifacts)
+                broker.EmittingImmInjections.Subscribe(broker, OnEvent);
 
             if(Settings.HandleExtractReportCreated)
                 broker.ExtractReportCreated.Subscribe(broker, OnEvent);

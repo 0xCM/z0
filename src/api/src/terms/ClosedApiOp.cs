@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The delcaring host
         /// </summary>
-        public ApiHost Host {get;}
+        public IApiHost Host {get;}
 
         /// <summary>
         /// The closure identity
@@ -38,7 +38,7 @@ namespace Z0
         /// <summary>
         /// The hosting type uri
         /// </summary>
-        public ApiHostUri HostUri => Host;
+        public ApiHostUri HostUri => Host.UriPath;
 
         /// <summary>
         /// Creates a closure specification
@@ -47,11 +47,11 @@ namespace Z0
         /// <param name="kind">The primal kind over which the subject was closed</param>
         /// <param name="closed">The closed method</param>
         [MethodImpl(Inline)]
-        public static ClosedApiOp Define(ApiHost host, OpIdentity id, NumericKind kind, MethodInfo closed)
+        public static ClosedApiOp Define(IApiHost host, OpIdentity id, NumericKind kind, MethodInfo closed)
             => new ClosedApiOp(host, id,kind,closed);
 
         [MethodImpl(Inline)]
-        ClosedApiOp(ApiHost host, OpIdentity id, NumericKind kind, MethodInfo method)
+        ClosedApiOp(IApiHost host, OpIdentity id, NumericKind kind, MethodInfo method)
         {
             this.Host = host;
             this.Id = id;

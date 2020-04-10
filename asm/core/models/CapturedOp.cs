@@ -35,6 +35,10 @@ namespace Z0.Asm
             => new CapturedOp(id, src.Signature().Format(), null, src, memsrc, bits, term);
 
         [MethodImpl(Inline)]
+        public static CapturedOp Define(OpIdentity id, DynamicDelegate src, MemoryRange memsrc, ParsedMemoryExtract bits, ExtractTermCode term)
+            => new CapturedOp(id, id, src, src.SourceMethod, memsrc, bits, term);
+
+        [MethodImpl(Inline)]
         public static CapturedOp Define(OpIdentity id, Delegate src, MemoryRange memsrc, ParsedMemoryExtract bits, ExtractTermCode term)
             => new CapturedOp(id, id, src, src.Method, memsrc, bits, term);
 
@@ -42,12 +46,12 @@ namespace Z0.Asm
         CapturedOp(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange memsrc, ParsedMemoryExtract bits, ExtractTermCode term)
         {
             require((int)memsrc.Length == bits.Parsed.Length);    
-            this.OpId = id;        
-            this.Code = AsmCode.Define(id, bits.Parsed);
-            this.Uri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
-            this.OpSig = method.Signature().Format();
-            this.TermCode = term;
-            this.RawBits = bits.Source;            
+            OpId = id;        
+            Code = AsmCode.Define(id, bits.Parsed);
+            Uri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
+            OpSig = method.Signature().Format();
+            TermCode = term;
+            RawBits = bits.Source;            
         }
 
         public readonly MemoryRange AddressRange    

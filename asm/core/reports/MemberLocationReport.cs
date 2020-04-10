@@ -101,7 +101,7 @@ namespace Z0.Asm
         /// </summary>
         public Option<FilePath> Save()
             => ApiHost.MapValueOrElse(
-                    h => AsmEmissionPaths.The.LocationPath(h.UriPath),
-                   () => AsmEmissionPaths.The.LocationPath(AssemblyId));            
+                    h => AsmEmissionPaths.Define().LocationPath(h.UriPath),
+                   () => AsmEmissionPaths.Define().LocationPath(AssemblyId));            
     }
 }

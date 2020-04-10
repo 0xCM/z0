@@ -10,7 +10,9 @@ namespace Z0.Asm.Check
     {
         public IAppSettingSet Ops => this;        
 
-        public bool EmitArtifacts {get; set;} = true;
+        public bool EmitPrimaryArtifacts {get; set;} = true;
+
+        public bool EmitImmArtifacts {get; set;} = true;
 
         public bool CheckExecution {get; set;} = true;
 

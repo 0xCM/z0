@@ -9,10 +9,8 @@ namespace Z0.Asm
 
     public readonly struct AsmEmissionPaths
     {
-        public static AsmEmissionPaths The => Define();
-
-        public static AsmEmissionPaths Define()
-            => new AsmEmissionPaths(Env.Current.LogDir);
+        public static AsmEmissionPaths Define(FolderPath root  = null)
+            => new AsmEmissionPaths(root ?? Env.Current.LogDir);
 
         readonly FolderPath LogRoot;
 

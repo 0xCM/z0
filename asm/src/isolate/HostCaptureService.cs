@@ -71,22 +71,22 @@ namespace Z0.Asm
             iter(Selected, CreateLocationReport);
         }
 
-        AsmFunction Decode(MemberParseRecord src, IFunctionStreamWriter dst)
-        {
-            var f = Decoder.DecodeFunction(src.ToParsedEncoding());
-            dst.Write(f);
+        Option<AsmFunction> Decode(MemberParseRecord src, IFunctionStreamWriter dst)
+        {            
+            var f = Decoder.DecodeParsed(src.ToParsedEncoding());
+            f.OnSome(x => dst.Write(x)).OnNone(() => term.error($"Decoding {src.Uri} failed"));
             return f;
         }
 
         static void EmitCil(Assembly src)
         {
             var index = src.CreateClrIndex();
-            var dir = AsmEmissionPaths.The.CilDir;
+            var dir = AsmEmissionPaths.Define().CilDir;
             var srcId = src.Id();
 
             foreach(var host in src.ApiHosts())
             {
-                var dstPath = AsmEmissionPaths.The.CilPath(host.UriPath);
+                var dstPath = AsmEmissionPaths.Define().CilPath(host.UriPath);
                 //var functions = capture.CaptureFunctions(host);
                 //context.CilEmitter().EmitCil(functions, dstPath).OnSome(e => throw e);
             }            
@@ -129,7 +129,11 @@ namespace Z0.Asm
             {
                 var record = parsed[i];
                 if(record.Length != 0)
-                    functions[i] = Decode(record, dst);
+                {   
+                    var f = Decode(record,dst);
+                    if(f)
+                        functions[i] = f.Value;
+                }
                 else
                     functions[i] = AsmFunction.Empty;
             }

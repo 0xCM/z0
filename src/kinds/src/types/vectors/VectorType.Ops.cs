@@ -466,9 +466,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to query</param>
         public static bool IsVectorizedImm(this MethodInfo src)
-            => src.IsVectorized() && src.AcceptsImmediate();
+            => src.IsVectorized() && src.AcceptsImmediate() && src.ReturnsVector();
         
-
         /// <summary>
         /// Determines whether a method is a vectorized unary operator that accepts an immediate value
         /// </summary>
@@ -478,7 +477,8 @@ namespace Z0
             var parameters = src.GetParameters().ToArray();
             return parameters.Length == 2 
                 && parameters[0].ParameterType.IsVector() 
-                && parameters[1].IsImmediate();
+                && parameters[1].IsImmediate()
+                && src.ReturnsVector();
         }
 
         /// <summary>
@@ -491,7 +491,8 @@ namespace Z0
             return parameters.Length == 3 
                 && parameters[0].ParameterType.IsVector() 
                 && parameters[1].ParameterType.IsVector() 
-                && parameters[2].IsImmediate();
+                && parameters[2].IsImmediate()
+                && src.ReturnsVector();
         }
 
         /// <summary>

@@ -25,8 +25,8 @@ namespace Z0
         /// Instantiates the api hosts defined in a .net assembly
         /// </summary>
         /// <param name="src">The assembly to search</param>
-        public static IEnumerable<ApiHost> Hosts(Assembly src)
-            => HostTypes(src).Select(h => ApiHost.Define(h.Assembly.Id(), h));
+        public static IEnumerable<IApiHost> Hosts(Assembly src)
+            => HostTypes(src).Select(h => ApiHost.Define(h.Assembly.Id(), h) as IApiHost);
 
         /// <summary>
         /// Creates a (possibly empy) api catalog for the source part

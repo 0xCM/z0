@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The delcaring host
         /// </summary>
-        public ApiHost Host {get;}
+        public IApiHost Host {get;}
 
         /// <summary>
         /// The grouped operations
@@ -34,14 +34,14 @@ namespace Z0
         /// <summary>
         /// The hosting type uri
         /// </summary>
-        public ApiHostUri HostUri => Host;
+        public ApiHostUri HostUri => Host.UriPath;
 
         [MethodImpl(Inline)]
-        public static DirectApiGroup Define(ApiHost host, OpIdentity id, IEnumerable<DirectApiOp> src)  
+        public static DirectApiGroup Define(IApiHost host, OpIdentity id, IEnumerable<DirectApiOp> src)  
             => new DirectApiGroup(host,id, src.ToArray());
 
         [MethodImpl(Inline)]
-        DirectApiGroup(ApiHost host, OpIdentity id, DirectApiOp[] members)
+        DirectApiGroup(IApiHost host, OpIdentity id, DirectApiOp[] members)
         {
             this.GroupId = id;
             this.Host = host;

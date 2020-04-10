@@ -39,7 +39,7 @@ namespace Z0.Asm
             => ApiSet.Composition.Resolved.Select(r => r.Id);
 
         Option<FilePath> ReportEmissions(PartId src, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
-            => AsmEmissionReport.Create(src, emitted, kind).Save(AsmEmissionPaths.The.EmissionPath(src, kind));
+            => AsmEmissionReport.Create(src, emitted, kind).Save(AsmEmissionPaths.Define().EmissionPath(src, kind));
 
         AsmEmissionTokens<OpUri>[] EmitPrimary(in OpExtractExchange exchange, IApiCatalogProvider src,  IAsmCatalogEmitter emitter)
         {

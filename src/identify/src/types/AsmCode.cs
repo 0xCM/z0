@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static AsmCode Empty => new AsmCode(OpIdentity.Empty, MemoryExtract.Empty);
+        public static AsmCode Empty => Define(OpIdentity.Empty, MemoryExtract.Empty);
 
         /// <summary>
         /// The assigned identity
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="data">The encoded bytes</param>
         [MethodImpl(Inline)]
         public static AsmCode Define(OpIdentity id, MemoryAddress @base, byte[] data)
-            => new AsmCode(id, MemoryExtract.Define(@base,data));
+            => Define(id, MemoryExtract.Define(@base,data));
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(in AsmCode src)
@@ -84,13 +84,19 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.IsEmpty;
         }
-                
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)
             => code.Bytes;
 
         [MethodImpl(Inline)]
-        public AsmCode(OpIdentity id, MemoryExtract encoded)
+        AsmCode(OpIdentity id, MemoryExtract encoded)
         {
             this.Id = id;
             this.Location = encoded.AddressRange;

@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
      
     using static Seed;
+    using static Memories;
 
     using Iced = Iced.Intel;
 
@@ -40,7 +41,8 @@ namespace Z0.Asm
         public Option<AsmInstructionList> DecodeInstructions(in MemoryExtract src)        
         {
             try
-            {
+            {   
+                require(src.IsNonEmpty);
                 var decoded = new Iced.InstructionList();
                 var reader = new Iced.ByteArrayCodeReader(src.Bytes);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);

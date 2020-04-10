@@ -34,7 +34,7 @@ namespace Z0.Asm
             }
         }
 
-        public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
+        public Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
         {
             try
             {
@@ -47,11 +47,11 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return CapturedOp.Empty;                    
+                return none<CapturedOp>();
             }
         }
 
-        public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
+        public Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
         {
             try
             {
@@ -60,12 +60,12 @@ namespace Z0.Asm
                 var outcome =  summary.Outcome;   
                 var captured = CapturedOp.Define(id, src, outcome.Range, summary.Bits, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
-
             }
             catch(Exception e)
             {
+                term.error($"Capture service failure");
                 term.error(e);
-                return CapturedOp.Empty;
+                return none<CapturedOp>();
             }
         }
 
@@ -86,15 +86,15 @@ namespace Z0.Asm
             }
         }
 
-        public CapturedOp Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
+        public Option<CapturedOp> Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
         {
             if(src.IsOpenGeneric())
             {
                 var target = src.Reify(args);
-                return Capture(in exchange, target.Identify(), target);
+                return Capture(exchange, target.Identify(), target);
             }
             else
-                return Capture(in exchange, src.Identify(), src);                
+                return Capture(exchange, src.Identify(), src);                
         }
 
         [MethodImpl(Inline)]

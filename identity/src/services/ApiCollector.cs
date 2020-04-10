@@ -32,21 +32,21 @@ namespace Z0
         public IEnumerable<GenericApiOp> CollectGeneric(Assembly src)
             => src.ApiHosts().SelectMany(CollectGeneric);
 
-        public IEnumerable<DirectApiGroup> CollectDirect(ApiHost src)        
+        public IEnumerable<DirectApiGroup> CollectDirect(IApiHost src)        
             => from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
                 select DirectApiGroup.Define(src, Identify.Op(d.Key), d);
                         
-        public IEnumerable<GenericApiOp> CollectGeneric(ApiHost src)
+        public IEnumerable<GenericApiOp> CollectGeneric(IApiHost src)
              => from m in Tagged(src).OpenGeneric()
                 let closures = MemberLocator.NumericClosures(m)
                 where closures.Length != 0
                 select GenericApiOp.Define(src, Diviner.GenericIdentity(m), m.GenericDefintion(), closures);
 
-        IEnumerable<DirectApiOp> DirectOpSpecs(ApiHost src)
+        IEnumerable<DirectApiOp> DirectOpSpecs(IApiHost src)
             => from m in Tagged(src).NonGeneric()
                 select DirectApiOp.Define(src, Diviner.Identify(m), m);
 
-        IEnumerable<MethodInfo> Tagged(ApiHost src)
+        IEnumerable<MethodInfo> Tagged(IApiHost src)
             => src.DeclaredMethods.Tagged<OpAttribute>();
     }
 }

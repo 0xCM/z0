@@ -5,16 +5,12 @@
 namespace Z0.Asm
 {
     using System;
+    
+    using static AsmEvents;
 
-   public interface IHostCaptureWorkflowRelay : 
-        IExtractReportRelay, 
-        IMemberLocationRelay, 
-        IHostExtractParseRelay,
-        IHostFunctionsDecodedRelay,
-        ICatalogCaptureRelay,
-        IHostHexSavedRelay,
-        IHostCaptureRelay
+    public interface IMembersLocatedRelay : IWorkflowRelay
     {
-        
+        HostMembersLocated MembersLocated => HostMembersLocated.Empty;
     }
+
 }

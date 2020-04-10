@@ -8,12 +8,27 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     
     using static Seed;
+    using static Memories;
 
     readonly struct AsmFunctionDecoder : IAsmFunctionDecoder
     {
-        readonly IContext Context;
+        readonly C Context;
 
-        readonly IAsmInstructionDecoder Decoder;
+
+        struct C
+        {
+            public static C Create(IContext context, AsmFormatConfig format)
+                => new C
+                {
+                    Decoder = context.AsmInstructionDecoder(format),
+                    Builder =context.FunctionBuilder()
+                };
+
+            public IAsmInstructionDecoder Decoder;
+
+            public IAsmFunctionBuilder Builder;
+        }
+
 
         [MethodImpl(Inline)]
         public static AsmFunctionDecoder Create(IContext context, AsmFormatConfig format)
@@ -22,35 +37,24 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         AsmFunctionDecoder(IContext context, AsmFormatConfig format)
         {
-            this.Context = context;
-            this.Decoder = context.AsmInstructionDecoder(format);
+            Context = C.Create(context,format);
         }
 
-        public AsmFunction DecodeFunction(CapturedOp src)
-        {
-            var list = Decoder.DecodeInstructions(src.Code).Require();
-            var block = Asm.AsmInstructionBlock.Define(src.Code, list, src.TermCode);
-            return Context.FunctionBuilder().BuildFunction(src.Uri, src.OpSig, block);
-        }
+        public Option<AsmFunction> DecodeCaptured(CapturedOp src)
+            => DecodeCaptured(Context, src);
 
-        public AsmFunction DecodeFunction(ParsedMemberCode parsed)
-        {
-            var code = AsmCode.Define(parsed.MemberUri.OpId, parsed.Content);
-            var instructions = Decoder.DecodeInstructions(code).Require();
-            return AsmFunction.Define(parsed, instructions);
-        }
+        public Option<AsmFunction> DecodeParsed(ParsedMemberCode parsed)
+            =>  from i in Context.Decoder.DecodeInstructions(AsmCode.Define(parsed.MemberUri.OpId, parsed.Content))
+                select AsmFunction.Define(parsed, i);
 
-        public AsmFunction[] Decode(params ParsedExtract[] src)
-        {
-            var dst = new AsmFunction[src.Length];
-            for(var i=0; i<src.Length; i++)
-            {
-                var parsed = src[i];
-                var code = AsmCode.Define(parsed.Id, parsed.ParsedContent);
-                var instructions = Decoder.DecodeInstructions(code).Require();
-                dst[i] = AsmFunction.Define(parsed, instructions);
-            }
-            return dst;
-        }
+        public Option<AsmFunction> DecodeExtract(ParsedExtract src)
+            =>  from i in Context.Decoder.DecodeInstructions(AsmCode.Define(src.Id, src.ParsedContent))
+                select AsmFunction.Define(src,i);
+
+        static Option<AsmFunction> DecodeCaptured(C context, CapturedOp src)
+            => from i in context.Decoder.DecodeInstructions(src.Code)
+                let block = Asm.AsmInstructionBlock.Define(src.Code, i, src.TermCode)
+                select context.Builder.BuildFunction(src.Uri, src.OpSig, block);
+
     }
 }

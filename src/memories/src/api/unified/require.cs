@@ -16,6 +16,44 @@ namespace Z0
             if(!invariant)
                 throw new Exception($"Application invaraiant failed");
         }
+    
+        /// <summary>
+        /// Demands that a reference type value is non-null
+        /// </summary>
+        /// <param name="value">The value to test</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static T require<T>(T value)
+            where T : class
+        {
+            require(value != null);
+            return value;
+        }
+
+        /// <summary>
+        /// Demands that a nullable value type value is non-null
+        /// </summary>
+        /// <param name="value">The value to test</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static T require<T>(T? value)
+            where T : struct
+        {
+            require(value.HasValue);
+            return value.Value;
+        }
+
+        /// <summary>
+        /// Demands that an option be valued
+        /// </summary>
+        /// <param name="perhaps">The potential value</param>
+        /// <typeparam name="T">The value type, should it exist</typeparam>
+        [MethodImpl(Inline)]
+        public static T require<T>(Option<T> perhaps)
+        {
+            require(perhaps.IsSome());
+            return perhaps.Value;
+        }
 
         public static void require(bool invariant, string msg)
         {

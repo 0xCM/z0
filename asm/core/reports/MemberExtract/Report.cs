@@ -14,7 +14,7 @@ namespace Z0.Asm
     using F = MemberExtractField;
     using R = MemberExtractRecord;
     using Report = MemberExtractReport;
-    using Created = ExtractReportCreated;
+    using Created = AsmEvents.ExtractReportCreated;
 
     public class MemberExtractReport : Report<Report,F,R>
     {        

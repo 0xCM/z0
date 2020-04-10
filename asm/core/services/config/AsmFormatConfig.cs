@@ -9,6 +9,12 @@ namespace Z0.Asm
     {
         public static AsmFormatConfig New => new AsmFormatConfig();
 
+        public static AsmFormatConfig DefaultStreamFormat => new AsmFormatConfig{
+            EmitSectionDelimiter = true,
+            EmitFunctionTimestamp = false,
+            EmitLocation = false            
+        };
+
         AsmFormatConfig() { }
 
         public bool EmitCaptureTermCode {get; set;}

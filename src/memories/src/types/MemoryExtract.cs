@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
@@ -36,7 +37,7 @@ namespace Z0
         /// <param name="data">The source data</param>
         [MethodImpl(Inline)]
         public static MemoryExtract Define(MemoryAddress src, byte[] data)
-            => new MemoryExtract(src, data);
+            => new MemoryExtract(src, require(data));
         
         /// <summary>
         /// Defines a 0-based block of encoded data
@@ -44,7 +45,7 @@ namespace Z0
         /// <param name="data">The source data</param>
         [MethodImpl(Inline)]
         public static MemoryExtract Define(byte[] data)
-            => new MemoryExtract(MemoryAddress.Zero, data);
+            => new MemoryExtract(MemoryAddress.Zero, require(data));
         
         [MethodImpl(Inline)]
         public static implicit operator byte[](MemoryExtract src)
@@ -85,8 +86,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Length == 0 ) || (Length == 1 && Bytes[0] == 0);
+            get => Bytes == null || (Length == 0 ) || (Length == 1 && Bytes[0] == 0);
         }
-        
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => ! IsEmpty;
+        }
     }
 }

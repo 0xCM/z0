@@ -9,15 +9,17 @@ namespace Z0
 
     using static Seed;
 
+    using Svc = Z0;
+
     public static class ServiceFactory
     {
         [MethodImpl(Inline)]
         public static IMemberLocator MemberLocator(this IContext context, IMultiDiviner diviner = null)
-            => Z0.MemberLocator.New(context, diviner ?? context.MultiDiviner());
+            => Svc.MemberLocator.New(context, diviner ?? context.MultiDiviner());
 
         [MethodImpl(Inline)]
-        public static IApiCollector OpCollector(this IContext context, IMultiDiviner diviner = null)
-            => ApiCollector.Create(context, diviner ?? context.MultiDiviner());
+        public static IApiCollector ApiCollector(this IContext context, IMultiDiviner diviner = null)
+            => Svc.ApiCollector.Create(context, diviner ?? context.MultiDiviner());
 
         [MethodImpl(Inline)]
         public static IMultiDiviner MultiDiviner(this IContext context)

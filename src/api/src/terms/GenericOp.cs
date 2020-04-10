@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The operation host to which generic definition and any concrete closures belowng
         /// </summary>
-        public ApiHost Host {get;}
+        public IApiHost Host {get;}
     
         /// <summary>
         /// The generic operation identity
@@ -44,14 +44,14 @@ namespace Z0
         /// <summary>
         /// The hosting type uri
         /// </summary>
-        public ApiHostUri HostUri => Host;
+        public ApiHostUri HostUri => Host.UriPath;
 
         [MethodImpl(Inline)]
-        public static GenericApiOp Define(ApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)            
+        public static GenericApiOp Define(IApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)            
             => new GenericApiOp(host, id,method, kinds);
 
         [MethodImpl(Inline)]
-        GenericApiOp(ApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)
+        GenericApiOp(IApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)
         {
             this.Kinds = kinds;
             this.Host = host;

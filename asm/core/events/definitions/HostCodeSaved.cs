@@ -8,33 +8,36 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using E = AsmEvents.HostCodeSaved;
 
-    public readonly struct HostCodeSaved : IAppEvent<HostCodeSaved, AsmCode[]>
+    partial class AsmEvents
     {
-        public static HostCodeSaved Empty => new HostCodeSaved(ApiHostUri.Empty, new AsmCode[]{}, FilePath.Empty);
-
-        [MethodImpl(Inline)]
-        public static HostCodeSaved Define(ApiHostUri host, AsmCode[] code, FilePath dst)
-            => new HostCodeSaved(host,code,dst);
-        
-        [MethodImpl(Inline)]
-        HostCodeSaved(ApiHostUri host, AsmCode[] code, FilePath dst)
+        public readonly struct HostCodeSaved : IAppEvent<E, AsmCode[]>
         {
-            this.Host = host;
-            this.Payload = code;
-            this.Target = dst;
-        }
-        
-        public ApiHostUri Host {get;}
-        
-        public AsmCode[] Payload {get;}
+            public static E Empty => new E(ApiHostUri.Empty, new AsmCode[]{}, FilePath.Empty);
 
-        public FilePath Target {get;}
+            [MethodImpl(Inline)]
+            public static E Define(ApiHostUri host, AsmCode[] code, FilePath dst)
+                => new E(host,code,dst);
+            
+            [MethodImpl(Inline)]
+            HostCodeSaved(ApiHostUri host, AsmCode[] code, FilePath dst)
+            {
+                this.Host = host;
+                this.Payload = code;
+                this.Target = dst;
+            }
+            
+            public ApiHostUri Host {get;}
+            
+            public AsmCode[] Payload {get;}
 
-        public string Description
-            => $"{Payload.Length} {Host} functions saved to {Target}";
-        
-        public string Format()
-            => Description;         
-    }    
+            public FilePath Target {get;}
+
+            public string Description
+                => $"{Payload.Length} {Host} functions saved to {Target}";
+                
+            public E Zero => Empty;            
+        }    
+    }
 }

@@ -10,6 +10,6 @@ namespace Z0.Asm
         
         MemberExtract[] Extract(ApiHost host);        
 
-        AsmFunction[] Decode(ApiHost host, ParsedMemberCode[] parsed);        
+        AsmFunction[] Decode(ApiHost host, ParsedExtract[] parsed);        
     }
 }

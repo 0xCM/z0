@@ -63,7 +63,10 @@ namespace Z0.Asm
         {
             foreach(var file in Files.Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
-                yield return item;
+            {
+                if(item.IsNonEmpty)
+                    yield return item;
+            }
         }
 
         /// <summary>        
@@ -90,20 +93,20 @@ namespace Z0.Asm
         /// <param name="id">The identifying moniker</param>
         public Option<AsmCode> Read<T>(OpIdentity id, T t = default)
             where T : unmanaged
-                => Read(Context.EmissionPaths().HexPath(RootFolder, id), id, t);
+                => Read<T>(Context.EmissionPaths().HexPath(RootFolder, id), id);
         
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
         /// </summary>
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
-        static AsmCode Parse<T>(string data, OpIdentity id, T t = default)
+        static AsmCode Parse<T>(string data, OpIdentity id)
             where T : unmanaged
-                => new AsmCode(id, MemoryExtract.Define(MemoryAddress.Zero, HexParsers.Bytes.ParseBytes(data).ToArray()));
+                => AsmCode.Define(id, MemoryExtract.Define(MemoryAddress.Zero, HexParsers.Bytes.ParseBytes(data).ToArray()));
 
-        Option<AsmCode> Read<T>(FilePath src, OpIdentity m, T t = default)
+        Option<AsmCode> Read<T>(FilePath src, OpIdentity m)
             where T : unmanaged
-                => Try(() => Parse<T>(src.ReadText(), m,t ));
+                => Try(() => Parse<T>(src.ReadText(), m));
 
         public IAsmCodeArchive Clear()
         {

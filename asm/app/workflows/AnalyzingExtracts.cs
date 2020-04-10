@@ -8,14 +8,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using E = AnalyzingExtracts;
 
-    public readonly struct AnalyzingExtracts : IAppEvent<AnalyzingExtracts, MemberExtract[]>
+    public readonly struct AnalyzingExtracts : IAppEvent<E, MemberExtract[]>
     {        
-        public static AnalyzingExtracts Empty => Define(new MemberExtract[]{});
+        public static E Empty => Define(new MemberExtract[]{});
         
         [MethodImpl(Inline)]
-        public static AnalyzingExtracts Define(MemberExtract[] extracts)
-            => new AnalyzingExtracts(extracts);
+        public static E Define(MemberExtract[] extracts)
+            => new E(extracts);
 
         [MethodImpl(Inline)]
         AnalyzingExtracts(MemberExtract[] extracts)
@@ -28,10 +29,6 @@ namespace Z0.Asm
 
         public MemberExtract[] Payload{get;}
 
-        public string Format() 
-            => Description;
-
-        public override string ToString() 
-            => Format();    
+        public E Zero => Empty;        
     }
 }

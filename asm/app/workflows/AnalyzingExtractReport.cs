@@ -8,33 +8,27 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using E = AnalyzingExtractReport;
 
-    public readonly struct AnalyzingExtractReport : IAppEvent<AnalyzingExtractReport, FilePath>
+    public readonly struct AnalyzingExtractReport : IAppEvent<E, FilePath>
     {        
-        public static AnalyzingExtractReport Empty => Define(FilePath.Empty);
+        public static E Empty => Define(FilePath.Empty);
         
         [MethodImpl(Inline)]
-        public static AnalyzingExtractReport Define(FilePath src)
-            => new AnalyzingExtractReport(src);
+        public static E Define(FilePath src)
+            => new E(src);
 
         [MethodImpl(Inline)]
         AnalyzingExtractReport(FilePath src)
         {
-            this.SourcePath = src;
+            this.Payload = src;
         }
 
-        public readonly FilePath SourcePath;
+        public FilePath Payload {get;}
 
         public string Description 
-            => $"Analyzing extract report {SourcePath}";
+            => $"Analyzing extract report {Payload}";
 
-        public FilePath Payload 
-            => SourcePath;
-
-        public string Format() 
-            => Description;
-
-        public override string ToString() 
-            => Format();    
+        public E Zero => Empty;
     }
 }

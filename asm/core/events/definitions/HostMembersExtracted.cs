@@ -8,31 +8,33 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using E = AsmEvents.HostMembersExtracted;
 
-    public readonly struct HostMembersExtracted : IAppEvent<HostMembersExtracted, MemberExtract[]>
+    partial class AsmEvents
     {
-        public static HostMembersExtracted Empty => new HostMembersExtracted(ApiHostUri.Empty, new MemberExtract[]{});
-
-        [MethodImpl(Inline)]
-        public static HostMembersExtracted Define(ApiHostUri host, MemberExtract[] members)
-            => new HostMembersExtracted(host, members);
-
-        [MethodImpl(Inline)]
-        HostMembersExtracted(ApiHostUri host, MemberExtract[] extracted)
+        public readonly struct HostMembersExtracted : IAppEvent<E, MemberExtract[]>
         {
-            this.Host = host;
-            this.Payload = extracted;
-        }
-        
-        public ApiHostUri Host {get;}
-        
-        public MemberExtract[] Payload {get;}
+            public static E Empty => new E(ApiHostUri.Empty, new MemberExtract[]{});
 
-        public string Description
-            => $"{Payload.Length} {Host} members extracted";
-        
-        public string Format()
-            => Description;         
-    }    
+            [MethodImpl(Inline)]
+            public static E Define(ApiHostUri host, MemberExtract[] members)
+                => new E(host, members);
 
+            [MethodImpl(Inline)]
+            HostMembersExtracted(ApiHostUri host, MemberExtract[] extracted)
+            {
+                this.Host = host;
+                this.Payload = extracted;
+            }
+            
+            public ApiHostUri Host {get;}
+            
+            public MemberExtract[] Payload {get;}
+
+            public string Description
+                => $"{Payload.Length} {Host} members extracted";
+
+            public E Zero => Empty; 
+        }    
+    }
 }

@@ -9,6 +9,6 @@ namespace Z0
 
     public interface IHostedApiMethod : IApiMethod
     {
-        ApiHost Host {get;}
+        IApiHost Host {get;}
     }
 }

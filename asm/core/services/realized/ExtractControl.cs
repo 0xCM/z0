@@ -13,6 +13,8 @@ namespace Z0.Asm
     readonly struct ExtractControl : IExtractControl
     {                    
         readonly IContext Context;
+
+        readonly ICaptureService Service;
         
         readonly AsmCaptureEventObserver Observer;
 
@@ -25,27 +27,28 @@ namespace Z0.Asm
         {
             this.Context = context;
             this.Observer = observer;
+            this.Service = CaptureService.New(context);
         }
 
         [MethodImpl(Inline)]
-        public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
-            => Context.Capture().Capture(exchange, id, src);
+        public Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
+            => Service.Capture(exchange, id, src);
 
         [MethodImpl(Inline)]
         public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src)
-            => Context.Capture().Capture(exchange, id,src);
+            => Service.Capture(exchange, id,src);
 
         [MethodImpl(Inline)]
-        public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
-            => Context.Capture().Capture(exchange, id, src);                                    
+        public Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
+            => Service.Capture(exchange, id, src);                                    
 
         [MethodImpl(Inline)]
         public Option<ParsedBuffer> ParseBuffer(in OpExtractExchange exchange, in OpIdentity id, Span<byte> src)
-            => Context.Capture().ParseBuffer(exchange, id, src);
+            => Service.ParseBuffer(exchange, id, src);
 
         [MethodImpl(Inline)]
-        public CapturedOp Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
-            => Context.Capture().Capture(exchange, src, args);
+        public Option<CapturedOp> Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
+            => Service.Capture(exchange, src, args);
 
         [MethodImpl(Inline)]
         void IExtractJunction.OnCaptureStep(in OpExtractExchange exchange, in ExtractState state)

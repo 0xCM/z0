@@ -9,7 +9,7 @@ namespace Z0.Asm
     
     using static Seed;
     
-    readonly struct ImmV128BinaryCaptureService<T> : IImmBinaryCapture<T>
+    class ImmV128BinaryCaptureService<T> : IImmBinaryCapture<T>
         where T : unmanaged
     {
         readonly ISVImm8BinaryResolver128Api<T> Resolver;
@@ -30,7 +30,9 @@ namespace Z0.Asm
             this.CaptureService = context.Capture();            
         }
         
-        public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
-            => Decoder.DecodeFunction(CaptureService.Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8)));
+        public Option<AsmFunction> Capture(in OpExtractExchange exchange, byte imm8)
+            => from c in CaptureService.Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8))
+                from d in Decoder.DecodeCaptured(c)
+                select d;
     } 
 }

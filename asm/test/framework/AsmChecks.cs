@@ -946,7 +946,7 @@ namespace Z0.Asm.Validation
             var data = capture.Capture(buffers.Exchange, src.Identify(), src);
             hexout.WriteCode(data.Code);
             rawout.WriteHexLine(data);
-            asmout.Write(decoder.DecodeFunction(data));            
+            asmout.Write(decoder.DecodeCaptured(data).Require());            
         }
 
 

@@ -11,6 +11,8 @@ namespace Z0
 
     public readonly struct AppEvent : IFormattable<AppEvent>, IAppEvent<AppEvent,object>
     {
+        public static AppEvent Empty => Create(string.Empty, default(EmptyPayload));
+        
         public string Description {get;}
         
         public object Payload {get;}
@@ -39,6 +41,8 @@ namespace Z0
             get => Payload != null && !(Payload is IEmptyPayload);
         }
 
+        public AppEvent Zero => Empty;
+
         public string Format()
             => string.Concat(Payload, CharText.Colon, CharText.Space, Payload);
 
@@ -61,6 +65,8 @@ namespace Z0
 
     public readonly struct AppEvent<T> : IFormattable<AppEvent<T>>, IAppEvent<AppEvent<T>,T>
     {
+        public static AppEvent<T> Empty => new AppEvent<T>(string.Empty, default(T));
+        
         public string Description {get;}
         
         public T Payload {get;}
@@ -78,6 +84,7 @@ namespace Z0
             this.Payload = data;
             this.Correlation = ct ?? CorrelationToken.Empty;
         }
+        public AppEvent<T> Zero => Empty;
 
         public string Format()
             => string.Concat(Payload, CharText.Colon, CharText.Space, Payload);

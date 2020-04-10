@@ -9,29 +9,33 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct HostMembersLocated : IAppEvent<HostMembersLocated, ApiMember[]>
+    using E = AsmEvents.HostMembersLocated;
+
+    partial class AsmEvents
     {
-        public static HostMembersLocated Empty => new HostMembersLocated(ApiHostUri.Empty, new ApiMember[]{});
-
-        [MethodImpl(Inline)]
-        public static HostMembersLocated Define(ApiHostUri host, ApiMember[] members)
-            => new HostMembersLocated(host, members);
-
-        [MethodImpl(Inline)]
-        HostMembersLocated(ApiHostUri host, ApiMember[] functions)
+        public readonly struct HostMembersLocated : IAppEvent<E, ApiMember[]>
         {
-            this.Host = host;
-            this.Payload = functions;
-        }
-        
-        public ApiHostUri Host {get;}
-        
-        public ApiMember[] Payload {get;}
+            public static E Empty => new E(ApiHostUri.Empty, new ApiMember[]{});
 
-        public string Description
-            => $"{Payload.Length} {Host} members located";
-        
-        public string Format()
-            => Description;         
-    }    
+            [MethodImpl(Inline)]
+            public static E Define(ApiHostUri host, ApiMember[] members)
+                => new E(host, members);
+
+            [MethodImpl(Inline)]
+            HostMembersLocated(ApiHostUri host, ApiMember[] functions)
+            {
+                this.Host = host;
+                this.Payload = functions;
+            }
+            
+            public ApiHostUri Host {get;}
+            
+            public ApiMember[] Payload {get;}
+
+            public string Description
+                => $"{Payload.Length} {Host} members located";
+
+            public E Zero => Empty;            
+        }    
+    }
 }

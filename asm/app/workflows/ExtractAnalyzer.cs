@@ -10,8 +10,9 @@ namespace Z0.Asm.Check
     using System.Linq;
 
     using static Seed;
+    using static AsmEvents;
 
-    public interface IExtractAnalyzerBroker : IWorkflowRelay
+    public interface IExtractAnalyzerRelay : IWorkflowRelay
     {
         HostMembersLocated MembersLocated => HostMembersLocated.Empty;
 
@@ -24,11 +25,11 @@ namespace Z0.Asm.Check
         AnalyzingExtractReport AnalyzingExtractReport => AnalyzingExtractReport.Empty;
     }
 
-    sealed class ExtractAnalyzerBroker : AppEventRelay, IExtractAnalyzerBroker
+    sealed class ExtractAnalyzerRelay : AppEventRelay, IExtractAnalyzerRelay
     {
         [MethodImpl(Inline)]
-        public new static IExtractAnalyzerBroker Create()
-            => new ExtractAnalyzerBroker();
+        public new static IExtractAnalyzerRelay Create()
+            => new ExtractAnalyzerRelay();
     }
 
     public interface IExtractAnalyzer : IAsmWorkflow
@@ -36,30 +37,31 @@ namespace Z0.Asm.Check
         
     }
 
-    class ExtractAnalyzer : TestContext<ExtractAnalyzer,IAsmContext>, IExtractAnalyzer
+    class ExtractAnalyzer : IExtractAnalyzer
     {
         public static IExtractAnalyzer Create(IAsmContext context)    
             => new ExtractAnalyzer(context);
 
+        readonly IAsmContext Context;
         ExtractAnalyzer(IAsmContext context)
-            : base(context)
         {
+            Context = context;
             ApiSet = context.ApiSet;
             Sink = context;
-            Extractor = Context.HostExtractor();
-            MemberLocator = Context.MemberLocator();            
+            Extractor = context.HostExtractor();
+            MemberLocator = context.MemberLocator();            
             Decoder = context.AsmFunctionDecoder();
-            var format = Context.AsmFormat.WithSectionDelimiter();
-            Formatter = Context.AsmFormatter(format);
+            var format = context.AsmFormat.WithSectionDelimiter();
+            Formatter = context.AsmFormatter(format);
             
             Paths = RootEmissionPaths.Define(RootEmissionPath);
             Paths.Clear();
-            var broker = ExtractAnalyzerBroker.Create();
-            Broker = broker;
-            ConnectReceivers(broker);
+            var relay = ExtractAnalyzerRelay.Create();
+            Relay = relay;
+            ConnectReceivers(relay);
         }
 
-        readonly IAppEventRelay Broker;
+        readonly IAppEventRelay Relay;
 
         readonly IHostOpExtractor Extractor;
 
@@ -75,7 +77,7 @@ namespace Z0.Asm.Check
 
         readonly IAsmFormatter Formatter;
 
-        void ConnectReceivers(IExtractAnalyzerBroker broker)
+        void ConnectReceivers(IExtractAnalyzerRelay broker)
         {
             broker.Error.Subscribe(broker, OnError);
             broker.MembersLocated.Subscribe(broker, OnEvent);
@@ -85,10 +87,12 @@ namespace Z0.Asm.Check
             broker.AnalyzingExtractReport.Subscribe(broker, OnEvent);
         }
 
+        static string Format(IAppEvent e) => e?.Format() ?? string.Empty;
+
         [MethodImpl(Inline)]
         ref readonly E Raise<E>(in E e)
             where E : IAppEvent
-                => ref Broker.Raise(e);
+                => ref Relay.Raise(e);
 
         void OnError(WorkflowError e)
         {
@@ -97,27 +101,27 @@ namespace Z0.Asm.Check
 
         void OnEvent(HostMembersLocated e)
         {
-            Report(AppMsg.Colorize(e.Format(), AppMsgColor.Blue));
+            Report(AppMsg.Colorize(Format(e), AppMsgColor.Blue));
         }
 
         void OnEvent(HostMembersExtracted e)
         {
-            Report(AppMsg.Colorize(e.Format(), AppMsgColor.Blue));
+            Report(AppMsg.Colorize(Format(e), AppMsgColor.Blue));
         }
 
         void OnEvent(ExtractReportCreated e)
         {
-            Report(AppMsg.Colorize(e.Format(), AppMsgColor.Blue));
+            Report(AppMsg.Colorize(Format(e), AppMsgColor.Blue));
         }
 
         void OnEvent(ExtractReportSaved e)
         {            
-            Report(AppMsg.Colorize(e.Format(), AppMsgColor.Cyan));
+            Report(AppMsg.Colorize(Format(e), AppMsgColor.Cyan));
         }
 
         void OnEvent(AnalyzingExtractReport e)
         {            
-            Report(AppMsg.Colorize(e.Format(), AppMsgColor.Magenta));
+            Report(AppMsg.Colorize(Format(e), AppMsgColor.Magenta));
         }
 
         public void Report(AppMsg msg)

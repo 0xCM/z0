@@ -9,18 +9,13 @@ namespace Z0.Asm
     public interface IAsmFunctionDecoder : IService
     {        
         /// <summary>
-        /// Decodes a function from a member capture
-        /// </summary>
-        /// <param name="src">The cource capture</param>
-        AsmFunction DecodeFunction(CapturedOp member);   
-
-        /// <summary>
         /// Decodes a function from the parsed encoding package
         /// </summary>
         /// <param name="parsed">The parsed data</param>
-        AsmFunction DecodeFunction(ParsedMemberCode parsed);
+        Option<AsmFunction> DecodeParsed(ParsedMemberCode parsed);
 
-        
-        AsmFunction[] Decode(params ParsedExtract[] src);     
+        Option<AsmFunction> DecodeCaptured(CapturedOp src);       
+
+        Option<AsmFunction> DecodeExtract(ParsedExtract src);                 
     }
 }

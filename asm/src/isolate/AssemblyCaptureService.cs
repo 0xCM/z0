@@ -49,13 +49,13 @@ namespace Z0.Asm
             return parsed;
         }
 
-        public AsmFunction[] Decode(ApiHost host, ParsedMemberCode[] parsed)
+        public AsmFunction[] Decode(ApiHost host, ParsedExtract[] parsed)
         {
             var path = Paths.DecodedPath(host.UriPath);
             var decoder = Context.AsmFunctionDecoder();
             var functions = new AsmFunction[parsed.Length];
             for(var i=0; i<parsed.Length; i++)
-                functions[i] = decoder.DecodeFunction(parsed[i]);
+                functions[i] = require(decoder.DecodeExtract(parsed[i]));
 
             using var dst = Context.AsmWriter(path, Context.AsmFormat.WithSectionDelimiter());  
             for(var i=0 ;i<functions.Length; i++)          

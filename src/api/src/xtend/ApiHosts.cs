@@ -18,7 +18,7 @@ namespace Z0
         /// Instantiates the api hosts found in a specified assembly
         /// </summary>
         /// <param name="src">The assembly to search</param>
-        public static IEnumerable<ApiHost> ApiHosts(this Assembly src)
+        public static IEnumerable<IApiHost> ApiHosts(this Assembly src)
             => Api.Hosts(src); 
 
         /// <summary>

@@ -44,8 +44,12 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmFormatter AsmFormatter(this IContext context, AsmFormatConfig config = null)
+        public static IAsmFormatter AsmFormatter(this IContext context, AsmFormatConfig config)
             => AsmDecoder.formatter(context,config);
+
+        [MethodImpl(Inline)]
+        public static IAsmFormatter AsmFormatter(this IContext context)
+            => context.AsmFormatter(AsmFormatConfig.DefaultStreamFormat);
 
         /// <summary>
         /// Instantiates a contextual function archive service that is specialized for an assembly and api host
@@ -54,18 +58,12 @@ namespace Z0.Asm
         /// <param name="catalog">The catalog identity</param>
         /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(this IContext context, PartId catalog, string host)
-        {
-            var formatter = context.AsmFormatter(AsmFormatConfig.New.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin());
-            return context.FunctionArchive(catalog,host,formatter);
-        }
+        public static IAsmFunctionArchive FunctionArchive(this IContext context, IApiHost host)
+            => context.FunctionArchive(host.Owner, host.HostName, context.AsmFormatter());
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(this IContext context, ApiHostUri host, bool imm)
-        {
-            var formatter = context.AsmFormatter(AsmFormatConfig.New.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin());
-            return context.FunctionArchive(host, imm, formatter);
-        }
+        public static IAsmFunctionArchive ImmFunctionArchive(this IContext context, ApiHostUri host, FolderPath dst)
+            => context.ImmFunctionArchive(host, context.AsmFormatter(), dst);
 
         [MethodImpl(Inline)]
         public static IMemoryCapture MemoryCapture(this IContext context, int? bufferlen = null)
@@ -108,7 +106,7 @@ namespace Z0.Asm
             {            
                 var decoder = AsmDecoder.instruction(context, format ?? AsmFormatConfig.New);
                 foreach(var codeblock in archive.Read())
-                {
+                {                    
                     var decoded = decoder.DecodeInstructions(codeblock);
                     if(decoded)
                         yield return decoded.Value;                

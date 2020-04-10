@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The delcaring host
         /// </summary>
-        public ApiHost Host {get;}
+        public IApiHost Host {get;}
 
         /// <summary>
         /// The operation identity
@@ -30,14 +30,14 @@ namespace Z0
         /// <summary>
         /// The hosting type uri
         /// </summary>
-        public ApiHostUri HostUri => Host;
+        public ApiHostUri HostUri => Host.UriPath;
 
         [MethodImpl(Inline)]
-        public static DirectApiOp Define(ApiHost host, OpIdentity id, MethodInfo method)            
+        public static DirectApiOp Define(IApiHost host, OpIdentity id, MethodInfo method)            
             => new DirectApiOp(host, id,method);
 
         [MethodImpl(Inline)]
-        DirectApiOp(ApiHost host, OpIdentity id, MethodInfo method)
+        DirectApiOp(IApiHost host, OpIdentity id, MethodInfo method)
         {
             Host = host;
             Id = id;

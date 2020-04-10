@@ -36,7 +36,7 @@ namespace Z0.Asm
         /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
         [MethodImpl(Inline)]
         public static IImmCapture ImmUnaryCapture(this IContext context, MethodInfo src, OpIdentity baseid, IAsmFunctionDecoder decoder)
-            => ImmUnaryCaptureService.Create(context,src,baseid, decoder);
+            => ImmUnaryCaptureService.Create(context, src, baseid,  decoder);
 
         /// <summary>
         /// Instantiates a contextual immediate capture service for a binary operator
@@ -67,7 +67,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static AsmEmissionPaths EmissionPaths(this IContext context)    
-            => AsmEmissionPaths.The;
+            => AsmEmissionPaths.Define();
 
         [MethodImpl(Inline)]
         public static IHostOpExtractor HostExtractor(this IContext context, int? bufferlen = null)
@@ -177,14 +177,14 @@ namespace Z0.Asm
             var sBuffer = new byte[size ?? DefaultBufferLen];
             return OpExtractExchange.New(control, cBuffer, sBuffer);
         }        
-
-        [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(this IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter)
-            => AsmFunctionArchive.Create(context,host,imm,formatter);
         
         [MethodImpl(Inline)]
         public static IAsmFunctionArchive FunctionArchive(this IContext context, PartId catalog, string host, IAsmFormatter formatter)
-            => AsmFunctionArchive.Create(context,catalog,host,formatter);
+            => AsmFunctionArchive.Create(context, catalog, host, formatter);
+
+        [MethodImpl(Inline)]
+        public static IAsmFunctionArchive ImmFunctionArchive(this IContext context, ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+            => AsmFunctionArchive.ImmArchive(context, host, formatter, dst);
 
         [MethodImpl(Inline)]
         public static IApiCodeIndexer CodeIndexer(this IContext c, IApiSet api)
@@ -223,5 +223,8 @@ namespace Z0.Asm
                 context.HostMemberIndex(api, host), 
                 context.HostCodeIndex(host, root));            
         }
+
+        public static IImmSpecializer ImmSpecializer(this IContext context, IAsmFunctionDecoder decoder)
+            => Svc.ImmSpecializer.Create(context, decoder);
     }
 }

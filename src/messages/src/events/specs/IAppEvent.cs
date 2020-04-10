@@ -43,10 +43,13 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="T">The payload type</typeparam>
-    public interface IAppEvent<F,T> : IAppEvent<T>
+    public interface IAppEvent<F,T> : IAppEvent<T>, INullary<F>
         where F : struct, IAppEvent<F,T>
     {
         string IAppEvent.Description
             => typeof(F).DisplayName();
+
+        string ICustomFormattable.Format()        
+            => Description;                        
     }
 }

@@ -10,6 +10,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Seed;
+    using static AsmEvents;
 
     partial class HostCaptureSteps
     {

@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static AsmEvents;
 
     partial class HostCaptureSteps
     {
@@ -27,7 +28,7 @@ namespace Z0.Asm
 
             public AsmFunction[] DecodeParsed(in ApiHost host, ParsedExtract[] parsed)
             {                
-                var functions = Context.Decoder.Decode(parsed);
+                var functions = DecodeExtracts(parsed);
                 Context.Raise(HostFunctionsDecoded.Define(host, functions));
                 return functions;
             }
@@ -37,6 +38,19 @@ namespace Z0.Asm
                 using var writer = Context.WriterFactory(dst,Context.Formatter);                
                 writer.Write(src);
             }
+
+            AsmFunction[] DecodeExtracts(params ParsedExtract[] src)
+            {
+                var dst = new AsmFunction[src.Length];
+                for(var i=0; i<src.Length; i++)
+                {
+                    var parsed = src[i];
+                    var decoded = Context.Decoder.DecodeExtract(parsed).OnNone(() => term.error($"Parse failure for {parsed.Id}"));
+                    dst[i] = decoded ? decoded.Value : AsmFunction.Empty;                
+                }
+                return dst;
+            }
+
         }
     }
 }

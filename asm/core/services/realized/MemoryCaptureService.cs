@@ -38,7 +38,8 @@ namespace Z0.Asm
         public Option<ParsedMemoryCapture> Capture(MemoryAddress src)        
             => from raw in Extract(src)
                 from parsed in Parse(raw)
-                from instructions in Decode(parsed)
+                where parsed.IsNonEmpty
+                from instructions in Decoder.DecodeInstructions(parsed)
                 let bits = ParsedMemoryExtract.Define(src, raw, parsed)
                 select ParsedMemoryCapture.Define(src, bits, instructions, string.Empty);
 

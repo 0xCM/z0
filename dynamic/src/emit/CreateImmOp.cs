@@ -122,6 +122,7 @@ namespace Z0
         public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedV128UnaryOpImm<T>(MethodInfo src, byte imm8, OpIdentity? baseid = null)
             where T : unmanaged
         {
+            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var idSrc = baseid ?? src.Identify();
             var tCell = typeof(T);
             var wrapped = src.Reify(typeof(T));
@@ -134,6 +135,7 @@ namespace Z0
 
         public static DynamicDelegate EmbedV128BinaryOpImm(MethodInfo src, byte imm8, OpIdentity? baseid = null)
         {
+            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var idSrc = baseid ?? src.Identify();
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
             var wrapped = src.Reify(tCell);
@@ -147,6 +149,7 @@ namespace Z0
 
         public static DynamicDelegate EmbedV256BinaryOpImm(MethodInfo src, byte imm8, OpIdentity? baseid = null)
         {
+            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var idSrc = baseid ?? src.Identify();
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var wrapped = src.Reify(tCell);
@@ -167,6 +170,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public static DynamicDelegate EmbedVUnaryOpImm(MethodInfo src, byte imm8, OpIdentity? baseid = null)
         {
+            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var id = baseid ?? src.Identify();
             require(NumericKinds.test(tCell));
@@ -181,6 +185,7 @@ namespace Z0
 
         public static DynamicDelegate EmbedVBinaryOpImm(MethodInfo src, byte imm8, OpIdentity? baseid = null)
         {
+            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var id = baseid ?? src.Identify();
             require(NumericKinds.test(tCell));

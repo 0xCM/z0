@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    readonly struct ImmUnaryCaptureService : IImmCapture
+    class ImmUnaryCaptureService : IImmCapture
     {        
         readonly MethodInfo Method;
 
@@ -39,10 +39,12 @@ namespace Z0.Asm
             this.CaptureService = context.Capture();
         }
 
-        public AsmFunction Capture(in OpExtractExchange exchange, byte imm)
+        public Option<AsmFunction> Capture(in OpExtractExchange exchange, byte imm)
         {
             var op = Dynop.EmbedVUnaryOpImm(Method, imm, BaseId);
-            return Decoder.DecodeFunction(CaptureService.Capture(in exchange, op.Id, op));
+            return from c in CaptureService.Capture(exchange, op.Id, op)
+                from d in Decoder.DecodeCaptured(c)
+                select d;            
         }
     }
 }

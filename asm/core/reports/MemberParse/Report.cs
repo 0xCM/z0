@@ -12,7 +12,7 @@ namespace Z0.Asm
     using F = MemberParseField;
     using R = MemberParseRecord;
     using Report = MemberParseReport;
-    using Created = ParseReportCreated;
+    using Created = AsmEvents.ParseReportCreated;
 
     public class MemberParseReport : Report<Report,F,R>
     {             

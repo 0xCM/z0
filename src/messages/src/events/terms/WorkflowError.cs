@@ -29,16 +29,10 @@ namespace Z0
             this.Payload = error;
         }
                    
-        public bool IsEmpty 
-            => Payload == null || Payload.Message == Empty.Payload.Message;
+        public bool IsEmpty  => Payload == null || Payload.Message == Empty.Payload.Message;
 
-        public string Description
-            => IsEmpty ? string.Empty : Payload.Message;
-        
-        public string Format()
-            => Description;         
-        
-        public override string ToString()
-            => Format();        
+        public string Description => IsEmpty ? string.Empty : Payload.Message;
+
+        public WorkflowError Zero => Empty;        
     }
 }

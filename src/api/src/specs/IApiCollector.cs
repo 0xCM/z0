@@ -15,7 +15,7 @@ namespace Z0
         IEnumerable<GenericApiOp> CollectGeneric(S src);
     }
 
-    public interface IApiCollector : IApiCollector<ApiHost>, IApiCollector<Assembly>
+    public interface IApiCollector : IApiCollector<IApiHost>, IApiCollector<Assembly>
     {
         
     } 

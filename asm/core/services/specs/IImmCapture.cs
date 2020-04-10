@@ -4,19 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-
     using Z0.Asm;
+    
+    using static Seed;
+    using static Memories;
 
     public interface IImmCapture : IService
     {
-        AsmFunction Capture(in OpExtractExchange exchange, byte imm8);
+        Option<AsmFunction> Capture(in OpExtractExchange exchange, byte imm8);
 
         AsmFunction[] Capture(in OpExtractExchange exchange, params byte[] immediates)
         {
             var dst = new AsmFunction[immediates.Length];
 
             for(var i=0; i<dst.Length; i++)
-                dst[i] = Capture(in exchange, immediates[i]);
+            {
+                var cap = Capture(exchange, immediates[i]).OnNone(()=> term.error($"Capture failure")); 
+                dst[i] = cap ? cap.Value : AsmFunction.Empty;
+            }
             return dst;
         }                    
     }

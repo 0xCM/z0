@@ -86,7 +86,7 @@ namespace Z0.Asm
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
             {
                 var captured = ops.Capture(in exchange, m.Identify(), m);
-                target.WriteDiagnostic(captured);
+                target.WriteDiagnostic(captured.Require());
                 //target.WriteMember(ops.Capture(in exchange, m.Identify(), m));
             }
         }
@@ -113,7 +113,7 @@ namespace Z0.Asm
             target.WriteDiagnostic(ops.Capture(in exchange, dAnd.Identify(), dAnd));
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            target.WriteDiagnostic(ops.Capture(in exchange, mAnd.Identify(), mAnd));
+            target.WriteDiagnostic(ops.Capture(in exchange, mAnd.Identify(), mAnd).Require());
 
             var dShuffle = shuffler(4);
             target.WriteDiagnostic(ops.Capture(in exchange, dShuffle.Identify(), dShuffle));

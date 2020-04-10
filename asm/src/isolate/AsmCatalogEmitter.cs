@@ -23,6 +23,8 @@ namespace Z0.Asm
 
         readonly AsmEmissionObserver Observer;
 
+        readonly AsmEmissionPaths Paths;
+
         [MethodImpl(Inline)]
         public static IAsmCatalogEmitter Create(IAsmContext context, IApiCatalog catalog, AsmEmissionObserver observer)
             => new AsmCatalogEmitter(context,catalog,observer);
@@ -34,10 +36,9 @@ namespace Z0.Asm
             this.Catalog = catalog;
             this.Decoder = Context.AsmFunctionDecoder();
             this.Observer = observer;
+            this.Paths = context.EmissionPaths();
         }
 
-        IAsmFunctionArchive Archive(ApiHostUri host, bool imm)
-            => Context.FunctionArchive(host, imm);
 
         IAsmCatalogEmitter Me
         {
@@ -70,7 +71,7 @@ namespace Z0.Asm
             foreach(var host in Catalog.DirectApiHosts)
             {
                 var archive = HostImmArchive(host);
-                var specs = from g in  Context.OpCollector().CollectDirect(host)
+                var specs = from g in  Context.ApiCollector().CollectDirect(host)
                              let immg = ImmGroup(host,g)
                              where !immg.IsEmpty
                              select immg;
@@ -91,7 +92,7 @@ namespace Z0.Asm
             foreach(var host in Catalog.GenericApiHosts)
             {
                 var archive = HostImmArchive(host);
-                var specs = Context.OpCollector().CollectGeneric(host).Where(op => op.Method.AcceptsImmediate());
+                var specs = Context.ApiCollector().CollectGeneric(host).Where(op => op.Method.AcceptsImmediate());
 
                 foreach(var spec in specs)
                     EmitGenericImm(exchange, spec, archive, observer);                
@@ -101,7 +102,7 @@ namespace Z0.Asm
         void EmitDirectPrimary(in OpExtractExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
             var primary = HostArchive(host);
-            var specs =  Context.OpCollector().CollectDirect(host);
+            var specs =  Context.ApiCollector().CollectDirect(host);
 
             foreach(var spec in specs)
                 Emit(exchange, PrimaryGroup(host,spec), primary, observer);
@@ -110,7 +111,7 @@ namespace Z0.Asm
         void EmitGenericPrimary(in OpExtractExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
             var primary = HostArchive(host);            
-            var specs = Context.OpCollector().CollectGeneric(host);
+            var specs = Context.ApiCollector().CollectGeneric(host);
 
             foreach(var spec in specs.Where(spec => !spec.Method.AcceptsImmediate()))
                 Emit(exchange, spec, primary, observer);
@@ -120,7 +121,10 @@ namespace Z0.Asm
         {                                    
             var functions = new List<AsmFunction>();
             foreach(var spec in group.Members)
-                functions.Add(Decode(Decoder, exchange, spec));
+            {
+                var decoded = Decode(Decoder, exchange, spec);
+                decoded.OnSome(f => functions.Add(f)).OnNone(() => term.error($"{group} decoding failure"));
+            }
             
             if(functions.Count != 0)
             {
@@ -129,17 +133,26 @@ namespace Z0.Asm
             }                        
         }
 
-        AsmFunction Decode(IAsmFunctionDecoder decoder, in OpExtractExchange exchange, DirectApiOp src)
-            => decoder.DecodeFunction(Context.Capture().Capture(in exchange, src.Id, src.Method));
+        Option<AsmFunction> Decode(IAsmFunctionDecoder decoder, in OpExtractExchange exchange, DirectApiOp src)
+            => from c in Context.Capture().Capture(exchange, src.Id, src.Method)
+            from d in decoder.DecodeCaptured(c)
+            select d;
+        
 
-        AsmFunction Decode(IAsmFunctionDecoder decoder, in OpExtractExchange exchange, ClosedApiOp closure)
-            => decoder.DecodeFunction(Context.Capture().Capture(in exchange, closure.Id, closure.Method));
-
+        Option<AsmFunction> Decode(IAsmFunctionDecoder decoder, in OpExtractExchange exchange, ClosedApiOp closure)
+            => from c in Context.Capture().Capture(exchange, closure.Id, closure.Method)
+            from d in decoder.DecodeCaptured(c)
+            select d;
+            
         void Emit(in OpExtractExchange exchange, GenericApiOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
             var functions = new List<AsmFunction>();
-            foreach(var closure in op.Close())                        
-                functions.Add(Decode(Decoder, in exchange, closure));
+            foreach(var closure in op.Close()) 
+            {
+                var decoded = Decode(Decoder, exchange, closure);                       
+                decoded.OnSome(f => functions.Add(f)).OnNone(() => term.error($"{op} decoding failed"));
+            }
+            
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(op.GenericId, functions.ToArray());
@@ -234,22 +247,19 @@ namespace Z0.Asm
         }
 
         void ISink<AsmEmissionTokens<OpUri>>.Accept(in AsmEmissionTokens<OpUri> src)
-        {
-            Observer(src);
-        }
+            => Observer(src);
 
-        string ArchiveSubject(ApiHost host, bool imm)
-            =>  host.HostName + (imm ?  "_imm" : string.Empty);
-
-        IAsmFunctionArchive HostArchive(ApiHost host)
-            => Archive(ArchiveSubject(host,false));
 
         IAsmFunctionArchive HostImmArchive(ApiHost host)
-            => Archive(ArchiveSubject(host,true));
+            => Context.ImmFunctionArchive(host.UriPath, Paths.DecodedDir);
 
-        IAsmFunctionArchive Archive(string subject)
-            => Context.FunctionArchive(Catalog.PartId, subject);
+        IAsmFunctionArchive Archive(IApiHost host)
+            => Context.FunctionArchive(host);
 
         static byte[] ImmSelection => new byte[]{5,9,13}; 
+
+        IAsmFunctionArchive HostArchive(ApiHost host)
+            => Context.FunctionArchive(host);
+
     }
 }
