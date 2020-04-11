@@ -129,7 +129,7 @@ namespace Z0.Asm
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(group.GroupId, functions.ToArray());
-                OnSave(dst.Save(fGroup, true), observer);
+                dst.Save(fGroup, true);
             }                        
         }
 
@@ -156,7 +156,7 @@ namespace Z0.Asm
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(op.GenericId, functions.ToArray());
-                OnSave(dst.Save(fGroup, true), observer);
+                dst.Save(fGroup, true);
             }
         }
 
@@ -171,7 +171,7 @@ namespace Z0.Asm
                     if(functions.Length != 0)
                     {
                         var fGroup = AsmFunctionGroup.Define(op.GenericId, functions);
-                        OnSave(dst.Save(fGroup, true), observer);
+                        dst.Save(fGroup, true);
                     }
                 }
             }
@@ -184,7 +184,7 @@ namespace Z0.Asm
                     if(functions.Length != 0)
                     {
                         var fGroup = AsmFunctionGroup.Define(op.GenericId, functions);
-                        OnSave(dst.Save(fGroup, true), observer);
+                        dst.Save(fGroup, true);
                     }
                 }
             }
@@ -199,8 +199,7 @@ namespace Z0.Asm
                 if(resolutions.Length != 0)
                 {
                     var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
-                    var tGroup = dst.Save(fGroup, true);
-                    tGroup.OnSome(t => tokens.AddRange(t.Content)).OnSome(g => Me.Accept(g));
+                    dst.Save(fGroup, true);
                 }
             }
 
@@ -210,13 +209,10 @@ namespace Z0.Asm
                 if(resolutions.Length != 0)
                 {
                     var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
-                    var tGroup = dst.Save(fGroup, true);
-                    tGroup.OnSome(t => tokens.AddRange(t.Content)).OnSome(g => Me.Accept(g));
+                    dst.Save(fGroup, true);
                 }
             }
 
-            if(tokens.Count != 0)
-                observer(AsmEmissionTokens.From(tokens[0].Uri.GroupUri,tokens));
         }                    
 
         DirectApiGroup PrimaryGroup(ApiHost host, DirectApiGroup g)
@@ -236,19 +232,14 @@ namespace Z0.Asm
                 iter(ApiHosts.Select(HostArchive), a => a.Clear());
         }    
 
-        void OnSave(Option<AsmEmissionTokens<OpUri>> g, AsmEmissionObserver observer)
+        void OnSave(Option<int> g, AsmEmissionObserver observer)
         {
             if(g.IsSome())
-            {
-                observer(g.Value);            
-                foreach(var t in g.Value.Content)
-                    term.inform(Emitted(t));
-            }
+                term.inform($"Emitted {g} functions");
         }
 
         void ISink<AsmEmissionTokens<OpUri>>.Accept(in AsmEmissionTokens<OpUri> src)
             => Observer(src);
-
 
         IAsmFunctionArchive HostImmArchive(ApiHost host)
             => Context.ImmFunctionArchive(host.UriPath, Paths.DecodedDir);

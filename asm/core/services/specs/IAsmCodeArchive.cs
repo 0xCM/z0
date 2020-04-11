@@ -9,14 +9,6 @@ namespace Z0.Asm
 
     public interface IAsmCodeArchive : IAsmArchive<IAsmCodeArchive>
     {
-        /// <summary>
-        /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
-        /// from hex data contained in the assembly log archive.
-        /// </summary>
-        /// <param name="subfolder">The asm log subfolder</param>
-        /// <param name="m">The identifying moniker</param>
-        Option<AsmCode> Read<T>(OpIdentity m, T t = default)
-            where T : unmanaged;
 
         /// <summary>
         /// Reads all files in the archive

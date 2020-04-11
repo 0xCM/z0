@@ -41,10 +41,13 @@ namespace Z0.Asm
 
         public Option<AsmFunction> Capture(in OpExtractExchange exchange, byte imm)
         {
-            var op = Dynop.EmbedVUnaryOpImm(Method, imm, BaseId);
-            return from c in CaptureService.Capture(exchange, op.Id, op)
-                from d in Decoder.DecodeCaptured(c)
-                select d;            
+            var f = Dynop.EmbedVUnaryOpImm(Method, imm, BaseId);
+            if(f)
+                return from c in CaptureService.Capture(exchange, f.Value.Id, f.Value)
+                       from d in Decoder.DecodeCaptured(c)                
+                       select d;            
+            else
+                return Option.none<AsmFunction>();
         }
     }
 }

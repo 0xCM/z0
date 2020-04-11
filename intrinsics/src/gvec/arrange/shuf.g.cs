@@ -36,27 +36,15 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
-        /// <summary>
-        /// Shuffles unsigned 32-bit source segments to/from arbitrary locations according to the shuffle spec
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vshuf4x32<T>(Vector128<T> src, Arrange4L spec)
-            where T : unmanaged
-                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
+        // [MethodImpl(Inline)]
+        // public static Vector128<T> vshuf4x32<T>(Vector128<T> src, Arrange4L spec)
+        //     where T : unmanaged
+        //         => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
-        /// <summary>
-        /// Shuffles unsigned 32-bit source segments within 128-bit lanes according to the shuffle spec
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vshuf4x32<T>(Vector256<T> src, Arrange4L spec)
-            where T : unmanaged
-                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
+        // [MethodImpl(Inline)]
+        // public static Vector256<T> vshuf4x32<T>(Vector256<T> src, Arrange4L spec)
+        //     where T : unmanaged
+        //         => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 8-bit source segments according to the shuffle spec

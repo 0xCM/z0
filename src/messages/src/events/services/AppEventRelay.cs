@@ -31,7 +31,7 @@ namespace Z0
             if(Subscriptions.TryAdd(typeof(E), sink))
                 return true;
             else
-                return (false, AppMsg.Warn($"Key for {model} was previously specified added for {sink}"));
+                return (false, AppMsg.Warn($"Key for {model} was previously added for {sink}"));
         }
 
         [MethodImpl(Inline)]
@@ -48,6 +48,14 @@ namespace Z0
             if(Subscriptions.TryGetValue(e.GetType(), out var sink))
                 ((IAppEventSink<E>)sink).Accept(e);
             return ref e;
+        }
+
+        public Outcome Subscribe(Action<IAppEvent> receiver, IAppEvent model)
+        {
+            if(Subscriptions.TryAdd(model.GetType(), AppEvents.sink(receiver)))
+                return true;
+            else
+                return (false, AppMsg.Warn($"Key for {model.GetType()} was previously added"));            
         }
     }
 }

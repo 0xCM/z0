@@ -27,4 +27,23 @@ namespace Z0
         public void Accept(in E e)
             => Receiver(e);
     }
+
+    /// <summary>
+    /// Defines a sink that forwards deposits to a receiver
+    /// </summary>
+    public readonly struct AppEventReceiver : IAppEventSink<IAppEvent>
+    {
+        readonly Action<IAppEvent> Receiver;
+
+        [MethodImpl(Inline)]
+        internal AppEventReceiver(Action<IAppEvent> receiver)
+        {
+            this.Receiver = receiver;
+        }
+        
+        [MethodImpl(Inline)]
+        public void Accept(in IAppEvent e)
+            => Receiver(e);
+    }
+
 }

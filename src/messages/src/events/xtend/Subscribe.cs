@@ -23,6 +23,10 @@ namespace Z0
             where E : IAppEvent
                 => AppEvents.subscribe(e, broker, receiver);
 
+        [MethodImpl(Inline)]
+        public static Outcome Weak(this IAppEvent e, IAppEventBroker broker, Action<IAppEvent> receiver)
+            => e.Subscribe(broker, receiver);
+
         public static IAppMsgWriter OpenMessageLog(this FolderPath dst, string name, FileExtension ext = null, FileWriteMode mode = FileWriteMode.Overwrite,  bool display = false)
         {
             var target = dst + FileName.Define(name, ext ?? FileExtensions.Log);

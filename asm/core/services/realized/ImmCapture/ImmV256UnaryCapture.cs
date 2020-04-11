@@ -36,5 +36,4 @@ namespace Z0.Asm
                 from d in Decoder.DecodeCaptured(c)
                 select d;
     }
-
 }

@@ -20,9 +20,9 @@ namespace Z0.Asm
         PartId SourcePart {get;}
 
         /// <summary>
-        /// An optional api host name - that usually corresponds the the name of a type that defines the operations of interest
+        /// The api host
         /// </summary>
-        string HostName {get;}        
+        ApiHostUri ApiHost {get;}        
     }
 
     public interface IAsmArchive<T> : IAsmArchive

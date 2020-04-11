@@ -30,5 +30,8 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         Outcome Subscribe<E>(Action<E> receiver, E model = default)
             where E : IAppEvent;        
+        
+        Outcome Subscribe(Action<IAppEvent> receiver, IAppEvent model);
+
     }
 }

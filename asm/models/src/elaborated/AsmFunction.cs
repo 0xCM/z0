@@ -97,5 +97,7 @@ namespace Z0.Asm
         }
 
         public bool IsEmpty => InstructionCount == 0;
+
+        public bool IsNonEmpty => InstructionCount != 0;
     }
 }

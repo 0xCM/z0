@@ -77,11 +77,11 @@ namespace Z0.Asm.Validation
         public ReadOnlySpan<AsmOpBits> LoadCode(FilePath src)
             => Context.HexReader().Read(src).ToArray();
 
-        protected string Math
-            => nameof(math);
+        protected ApiHostUri Math
+            => ApiHostUri.FromHost(typeof(math));
         
-        protected string GMath
-            => nameof(gmath);
+        protected ApiHostUri GMath
+            => ApiHostUri.FromHost(typeof(gmath));
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
@@ -168,22 +168,9 @@ namespace Z0.Asm.Validation
         }
 
 
-        protected IdentifiedCode ReadAsm(PartId id, string host, OpIdentity m)
+        protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.CodeArchive(id,host).Read(m).Single().ToApiCode();
 
-        protected IdentifiedCode ReadAsm<W,T>(PartId catalog, string host, string opname, W w = default, T t = default)
-            where T : unmanaged
-            where W : unmanaged, ITypeWidth
-        {
-            var archive = Context.CodeArchive(catalog,host);
-            var id = Identify.Op(opname, Widths.type<W>(), NumericKinds.kind<T>(), true);
-            Context.Notify($"{id}");
-            var result = Context.CodeArchive(catalog,host).Read<T>(id);
-            if(!result)
-                Claim.failwith($"Could not find {id} in the archive at {archive.RootFolder}");
-            return result.Require().ToApiCode();
-        }
-        
         protected TestCaseRecord CheckMatch<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
             where T : unmanaged
         {
@@ -616,8 +603,8 @@ namespace Z0.Asm.Validation
         void primal_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         {
             var catalog = PartId.GMath;
-            var dSrc = nameof(math);
-            var gSrc = nameof(gmath);
+            var dSrc = ApiHostUri.FromHost(typeof(math));
+            var gSrc = ApiHostUri.FromHost(typeof(gmath));
 
             var dId = Identify.Op(name, kind, false);
             var gId = Identify.Op(name, kind, true);
@@ -978,9 +965,12 @@ namespace Z0.Asm.Validation
         public void add_megacheck(in BufferSeq buffers)
         {
             var name = nameof(math.add);
-            
-            var dArchive = Context.CodeArchive(PartId.GMath, nameof(math));
-            var gArchive = Context.CodeArchive(PartId.GMath, nameof(gmath));
+
+            var dSrc = ApiHostUri.FromHost(typeof(math));
+            var gSrc = ApiHostUri.FromHost(typeof(gmath));
+
+            var dArchive = Context.CodeArchive(PartId.GMath, dSrc);
+            var gArchive = Context.CodeArchive(PartId.GMath, gSrc);
             var dAdd = dArchive.Read("add").Select(x => x.ToApiCode()).ToArray();
             var gAdd = gArchive.Read("add_g").Select(code => code.WithIdentity(code.Id.WithoutGeneric()).ToApiCode()).ToArray();
             Claim.eq(dAdd.Length, gAdd.Length);
@@ -1094,9 +1084,12 @@ namespace Z0.Asm.Validation
 
         void Run50(in BufferSeq buffers)
         {
+            var dSrc = ApiHostUri.FromHost(typeof(math));
+            var gSrc = ApiHostUri.FromHost(typeof(gmath));
+
             var id = PartId.GMath;
-            var direct = Context.CodeArchive(id, nameof(math));
-            var generic = Context.CodeArchive(id, nameof(gmath));
+            var direct = Context.CodeArchive(id, dSrc);
+            var generic = Context.CodeArchive(id, gSrc);
 
             foreach(var a in direct.Read().Where(asm => asm.ParameterCount() == 1))
             {                

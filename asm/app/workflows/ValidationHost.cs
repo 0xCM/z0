@@ -108,7 +108,7 @@ namespace Z0.Asm.Check
         void EmitImm()
         {
             var imm8 = new byte[]{3,5,12,9};                        
-            var emitter = ImmEmitter.Create(Context, ApiSet, Decoder, RootEmissionPath);
+            var emitter = ImmEmitter.Create(Context,  Context, ApiSet, Decoder, RootEmissionPath);
             emitter.Emit(imm8);            
         }
 

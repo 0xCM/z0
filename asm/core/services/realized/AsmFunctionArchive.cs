@@ -11,20 +11,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AsmServiceMessages;    
 
     public class AsmFunctionArchive : IAsmFunctionArchive
     {        
-        public static AppMsg Emitted(AsmEmissionTokens<OpUri> src)
-            => AppMsg.Info($"Emitted {src.Source}");
-
         public FolderPath RootFolder {get;}
         
         public PartId SourcePart {get;}
 
-        public string HostName {get;}
 
-        public ApiHostUri HostPath {get;}
+        public ApiHostUri ApiHost {get;}
     
         readonly IAsmFormatter AsmFormatter;
 
@@ -32,64 +27,43 @@ namespace Z0.Asm
 
         readonly AsmEmissionPaths EmissionPaths;
 
+        readonly bool Imm;
+
+
         [MethodImpl(Inline)]
         public static IAsmFunctionArchive ImmArchive(IContext context, ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
             => new AsmFunctionArchive(context, host, true, formatter, dst);
-
-        AsmFunctionArchive(IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter, FolderPath dst)
-        {
-            this.EmissionPaths = AsmEmissionPaths.Define(dst);
-            this.SourcePart = host.Owner;
-            this.HostName = $"{host.Name}-imm";
-            this.HostPath = host;
-            this.RootFolder = EmissionPaths.DataSubDir(RelativeLocation.Define(host.Owner.Format(), $"{host.Name}-imm"));
-            this.AsmFormatter = formatter;
-            this.CilFormatter = context.CilFormatter();
-        }
-
 
         [MethodImpl(Inline)]
         public static IAsmFunctionArchive Create(IContext context, PartId catalog, string host, IAsmFormatter formatter)
             => new AsmFunctionArchive(context, catalog, host, formatter);
 
-        [MethodImpl(Inline)]
-        public static IAsmFunctionArchive Create(IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter)
-            => new AsmFunctionArchive(context, host, imm, formatter);
-
-        AsmFunctionArchive(IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter)
+        AsmFunctionArchive(IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter, FolderPath dst)
         {
-            this.EmissionPaths = context.EmissionPaths();
+            this.Imm = true;
+            this.EmissionPaths = AsmEmissionPaths.Define(dst);
             this.SourcePart = host.Owner;
-            this.HostName = $"{host.Name}-imm";
-            this.HostPath = host;
-            this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(host.Owner.Format(), $"{host.Name}-imm"));
+            this.ApiHost = host;
+            this.RootFolder = EmissionPaths.ImmSubDir(RelativeLocation.Define(host.Owner.Format(), host.Name));
             this.AsmFormatter = formatter;
             this.CilFormatter = context.CilFormatter();
         }
         
         AsmFunctionArchive(IContext context, PartId catalog, string hostname, IAsmFormatter formatter)
         {
+            this.Imm = false;
             this.EmissionPaths = context.EmissionPaths();
             this.SourcePart = catalog;
-            this.HostName = hostname;
-            this.HostPath = ApiHostUri.Define(catalog, hostname);
+            this.ApiHost = ApiHostUri.Define(catalog, hostname);
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(catalog.Format(), hostname));
             this.AsmFormatter = formatter;
             this.CilFormatter = context.CilFormatter();
         }
 
-        public Option<AsmEmissionTokens<OpUri>> Save(AsmFunctionGroup src, bool append)
+        public void Save(AsmFunctionGroup src, bool append)
         {            
-            OnEmitting(src);
-            WriteHex(src, append).OnSome(e => term.error(e));
-            //WriteCil(src, append).OnSome(e => term.error(e));            
-            var emissions = WriteAsm(src,append);
-            var incount = src.Members.Length;
-            var outcount = emissions.MapValueOrDefault(t => t.Content.Length);
-            if(incount != outcount)
-               OnInOutMismatch(src.Id, incount, outcount);                
-            
-            return emissions.OnSome(OnEmitted);
+            SaveHex(src, append);
+            SaveAsm(src, append);
         }
 
         public IAsmFunctionArchive Clear()
@@ -97,86 +71,104 @@ namespace Z0.Asm
             RootFolder.Clear();
             return this;
         }
-            
-        Option<Exception> WriteHex(AsmFunctionGroup src, bool append)
+
+        public Option<FilePath> SaveHex(AsmFunction[] src, bool append, FileName file)    
         {
             try
             {
-                var idpad = src.Members.Select(f => f.OpId.Identifier.Length).Max() + 1;
-                using var writer = new StreamWriter(HexPath(src.Id).FullPath, append);
-                foreach(var f in src.Members)
-                    writer.WriteLine(f.Code.Format(idpad));
-                return default;
-            }
-            catch(Exception e)
-            {
-                return e;
-            }
-        }
-
-        // Option<Exception> WriteCil(AsmFunctionGroup src, bool append)
-        // {
-        //     try
-        //     {                
-        //         var cilfuncs = src.Members.Where(f => f.Cil.IsSome()).Select(f => f.Cil.Value).ToArray();
-        //         if(cilfuncs.Length == 0)
-        //             return default;
-
-        //         using var writer = new StreamWriter(CilPath(src.Id).FullPath,append);
-        //         foreach(var f in cilfuncs)
-        //         {
-        //             writer.Write(CilFormatter.Format(f));
-        //             if(GroupFormatConfig.EmitSectionDelimiter)
-        //                 writer.WriteLine(GroupFormatConfig.SectionDelimiter);
-        //         }                    
-        //         return default;
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         return e;                
-        //     }
-        // }
-
-        Option<AsmEmissionTokens<OpUri>> WriteAsm(AsmFunctionGroup src, bool append)
-        {
-            try
-            {
-                var tokens = new AsmEmissionToken[src.Members.Length];
-                using var writer = new StreamWriter(AsmPath(src.Id).FullPath, append);            
-                for(var i=0; i < src.Members.Length;i++)
+                var idpad = src.Select(f => f.OpId.Identifier.Length).Max() + 1;
+                var dst = HexRoot + file;
+                using var writer = new StreamWriter(dst.FullPath, append);                
+                for(var i=0; i<src.Length; i++)
                 {
-                    var f = src.Members[i];
-                    var uri = OpUri.asm(HostPath, src.Id, f.OpId);
-                    writer.Write(AsmFormatter.FormatFunction(f));
-                    tokens[i] = AsmEmissionToken.Define(uri, f.AddressRange, f.TermCode);
+                    ref readonly var f = ref src[i];
+                    if(f.IsNonEmpty)
+                        writer.WriteLine(f.Code.Format(idpad));
                 }
-                return AsmEmissionTokens.From(OpUri.asm(HostPath, src.Id),tokens);
+                return dst;
             }
             catch(Exception e)
             {
                 term.error(e);
-                return Option.none<AsmEmissionTokens<OpUri>>();
+                return Option.none<FilePath>();
             }
         }
- 
-        void OnEmitting(AsmFunctionGroup src)
-        {
-            
+
+        public Option<FilePath> SaveAsm(AsmFunction[] src, bool append, FileName file)
+        {            
+            try
+            {
+                var idpad = src.Select(f => f.OpId.Identifier.Length).Max() + 1;
+                var dst = AsmRoot + file;
+                using var writer = new StreamWriter(dst.FullPath, append);                
+                for(var i=0; i<src.Length; i++)
+                {
+                    ref readonly var f = ref src[i];
+                    if(f.IsNonEmpty)
+                        writer.Write(AsmFormatter.FormatFunction(f));
+                }
+                return dst;                
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return Option.none<FilePath>();
+            }
         }
 
-        void OnEmitted(AsmEmissionTokens<OpUri> emitted)
-            => term.print(Emitted(emitted));            
+        Option<FilePath> SaveHex(AsmFunctionGroup src, bool append, FileName file = null)
+        {
+            try
+            {
+                var idpad = src.Members.Select(f => f.OpId.Identifier.Length).Max() + 1;
+                var dst = FileName.IsSome(file) ? (HexRoot + file) : HexPath(src.Id);
+                using var writer = new StreamWriter(dst.FullPath, append);                
+                foreach(var f in src.Members)
+                {
+                    if(f.IsNonEmpty)
+                        writer.WriteLine(f.Code.Format(idpad));
+                }                    
+                return dst;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return Option.none<FilePath>();
+            }
+        }
 
-        void OnInOutMismatch(OpIdentity id, int incount, int outcount)
-            => term.print(EmissionMismatch(id,incount,outcount));
-            
+        Option<FilePath> SaveAsm(AsmFunctionGroup src, bool append, FileName file = null)
+        {            
+            try
+            {
+                var dst = FileName.IsSome(file) ? (AsmRoot + file) : AsmPath(src.Id);
+                using var writer = new StreamWriter(dst.FullPath, append);            
+                for(var i=0; i < src.Members.Length;i++)
+                {
+                    var f = src.Members[i];
+                    if(f.IsNonEmpty)
+                        writer.Write(AsmFormatter.FormatFunction(f));
+                }
+                return dst;                
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return Option.none<FilePath>();
+            }
+        }
+
+        FolderPath HexRoot => EmissionPaths.HexRootDir(SourcePart, ApiHost, Imm).CreateIfMissing();
+
+        FolderPath AsmRoot => EmissionPaths.AsmRootDir(SourcePart, ApiHost, Imm).CreateIfMissing();
+
         FilePath HexPath(OpIdentity id)
-            => EmissionPaths.OpArchivePath(ArchiveFileKind.Hex, SourcePart, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Hex, SourcePart, ApiHost, id, Imm).CreateParentIfMissing();
 
         FilePath AsmPath(OpIdentity id)
-            => EmissionPaths.OpArchivePath(ArchiveFileKind.Asm, SourcePart, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Asm, SourcePart, ApiHost, id, Imm).CreateParentIfMissing();
 
         FilePath CilPath(OpIdentity id)
-            => EmissionPaths.OpArchivePath(ArchiveFileKind.Cil, SourcePart, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Cil, SourcePart, ApiHost, id, Imm).CreateParentIfMissing();
     }
 }

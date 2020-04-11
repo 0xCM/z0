@@ -12,28 +12,28 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct EmittingImmInjections : IAppEvent<E, byte[]>
+        public readonly struct EmittingImmInjections : IAppEvent<E, ApiHostUri>
         {
-            public byte[] Payload {get;}
+            public ApiHostUri Payload {get;}
 
-            public static E Empty => new E(new byte[]{});
+            public readonly bool Generic;
 
-            [MethodImpl(Inline)]
-            public static E Define(byte[] imm)
-                => new E(imm);
+            public static E Empty => new E(ApiHostUri.Empty,false);
 
             [MethodImpl(Inline)]
-            EmittingImmInjections(byte[] imm)
+            public static E Define(ApiHostUri imm, bool generic)
+                => new E(imm,generic);
+
+            [MethodImpl(Inline)]
+            EmittingImmInjections(ApiHostUri imm, bool generic)
             {
                 this.Payload = imm;
+                this.Generic = generic;
             }
                         
             public string Description
-                => $"Emitting immediate specializations {Payload.Format()}";
+                => $"Emitting {Payload.Format()} immediate specializations" + (Generic ? " (generic)" : string.Empty);
             
-            public string Format()
-                => Description;         
-
             public E Zero => Empty;
 
         }            

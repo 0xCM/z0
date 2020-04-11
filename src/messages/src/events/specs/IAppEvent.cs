@@ -24,6 +24,10 @@ namespace Z0
 
         IAppEvent<K> As<K>()
             => AppEvent.Create<K>(Description, (K)Payload);
+
+        Outcome Subscribe(IAppEventBroker broker, Action<IAppEvent> receiver)
+            => AppEvents.subscribe(this, broker, receiver);
+
     }
 
     /// <summary>

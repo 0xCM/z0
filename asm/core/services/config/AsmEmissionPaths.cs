@@ -19,19 +19,31 @@ namespace Z0.Asm
             this.LogRoot = root;
         }
 
-        FolderName ReportFolder => FolderName.Define($"reports");  
-        
-        FolderPath ReportRootDir => LogRoot + ReportFolder;
-
         FolderName DataRootFolder => FolderName.Define("asm");
+
+        FolderName ReportFolder => FolderName.Define($"reports");  
+
+        FolderName ImmRootFolder => FolderName.Define("imm");
+
+        FolderName ExtractFolder => FolderName.Define("extracted");
+
+        FolderName ParsedFolder => FolderName.Define("parsed");
+    
+        FolderName DecodedFolder => FolderName.Define("decoded");
+
+        FolderPath ReportRootDir => LogRoot + ReportFolder;
 
         FolderPath DataRootDir => LogRoot + DataRootFolder;
 
-        public FolderPath DataSubDir(FolderName folder) => DataRootDir + folder; 
+        public FolderPath DataSubDir(FolderName folder) => DataRootDir + folder;         
 
         public FolderPath DataSubDir(RelativeLocation location) => DataRootDir +  location;
 
-        FolderName ExtractFolder => FolderName.Define("extracted");
+        public FolderPath ImmRootDir => LogRoot + ImmRootFolder;
+
+        public FolderPath ImmSubDir(FolderName folder) => ImmRootDir + folder;         
+
+        public FolderPath ImmSubDir(RelativeLocation location) => ImmRootDir +  location;
 
         public FolderPath ExtractDir => DataSubDir(ExtractFolder);
 
@@ -44,8 +56,6 @@ namespace Z0.Asm
 
         FileExtension ParsedExt => FileExtensions.Csv;
 
-        FolderName ParsedFolder => FolderName.Define("parsed");
-    
         public FolderPath ParsedDir => DataSubDir(ParsedFolder);
         
         public FileName ParsedFileName(ApiHostUri host)
@@ -54,8 +64,6 @@ namespace Z0.Asm
         public FilePath ParsedPath(ApiHostUri host) => ParsedDir + ParsedFileName(host);
 
         FileExtension DecodedExt => FileExtensions.Asm;
-
-        FolderName DecodedFolder => FolderName.Define("decoded");
 
         public FolderPath DecodedDir => DataSubDir(DecodedFolder);
         
@@ -79,12 +87,6 @@ namespace Z0.Asm
 
         FileExtension EmissionExt => FileExtensions.Csv;
 
-        public FilePath EmissionPath(PartId id, AsmEmissionKind kind)
-            => DataRootDir + FolderName.Define($".emissions") 
-            + (kind == AsmEmissionKind.Imm 
-                    ? FileName.Define($"{id.Format()}-imm", EmissionExt) 
-                    : FileName.Define($"{id.Format()}", EmissionExt));                
-
         FileExtension LocationExt => FileExtensions.Csv;
 
         FolderName LocationFolder => FolderName.Define("locations"); 
@@ -101,35 +103,43 @@ namespace Z0.Asm
         public FilePath LocationPath(PartId assembly) => LocationDir + LocationFileName(assembly);
 
         FileName HexFileName(OpIdentity m) => FileName.Define(m, Ext.Hex);
+        
+        public FilePath HexPath(PartId origin, ApiHostUri host, OpIdentity id)
+            => DataSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + HexFileName(id);
 
-        public FilePath HexPath(PartId origin, string host, OpIdentity id)
-            => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + HexFileName(id);
+        public FilePath HexImmPath(PartId origin, ApiHostUri host, OpIdentity id)
+            => ImmSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + HexFileName(id);
+
+        public FilePath AsmImmPath(PartId origin, ApiHostUri host, OpIdentity id)
+            => ImmSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + DecodedOpFileName(id);
+
+        public FolderPath HexRootDir(PartId part, ApiHostUri host, bool imm)
+            => imm ? ImmSubDir(RelativeLocation.Define(part.Format(), host.Name)) : DataSubDir(RelativeLocation.Define(part.Format(), host.Name));
+
+        public FolderPath AsmRootDir(PartId part, ApiHostUri host, bool imm)
+            => imm ? ImmSubDir(RelativeLocation.Define(part.Format(), host.Name)) : DataSubDir(RelativeLocation.Define(part.Format(), host.Name));
 
         public FilePath HexPath(FolderPath dir, OpIdentity m) => dir + HexFileName(m);
 
         FileName RawFileName(OpIdentity m) => FileName.Define(m, Ext.Raw);
 
-        public FilePath RawPath(PartId origin, string host, OpIdentity id)
-            => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + RawFileName(id);
-
         FileName CilFileName(OpIdentity m) => FileName.Define(m, Ext.Il);
 
-        FilePath CilPath(PartId catalog, string host, OpIdentity id)
-            => DataSubDir(RelativeLocation.Define(catalog.Format(), host)) + CilFileName(id);
+        FilePath CilPath(PartId catalog, ApiHostUri host, OpIdentity id)
+            => DataSubDir(RelativeLocation.Define(catalog.Format(), host.Name)) + CilFileName(id);
 
         FilePath CilPath(ApiHostUri host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + CilFileName(id);
 
         public FileName DecodedOpFileName(OpIdentity m) => FileName.Define(m, DecodedExt);
 
-        public FilePath DecodedOpPath(PartId origin, string host, OpIdentity id)
-            => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + DecodedOpFileName(id);
+        public FilePath AsmPath(PartId origin, ApiHostUri host, OpIdentity id)
+            => DataSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + DecodedOpFileName(id);
 
-        public FilePath OpArchivePath(ArchiveFileKind kind, PartId origin, string host, OpIdentity id)
+        public FilePath OpArchivePath(ArchiveFileKind kind, PartId origin, ApiHostUri host, OpIdentity id, bool imm)
             => kind switch {
-                ArchiveFileKind.Hex  => HexPath(origin, host, id),
-                ArchiveFileKind.Raw  => RawPath(origin, host, id),
-                ArchiveFileKind.Asm  => DecodedOpPath(origin, host, id),
+                ArchiveFileKind.Hex  => imm ? HexImmPath(origin,host,id) : HexPath(origin, host, id),
+                ArchiveFileKind.Asm  =>  imm ? AsmImmPath(origin,host,id) : AsmPath(origin, host, id),
                 ArchiveFileKind.Cil  => CilPath(origin, host, id),
                 _  => FilePath.Empty,
             };

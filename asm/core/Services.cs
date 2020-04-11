@@ -156,7 +156,7 @@ namespace Z0.Asm
         /// <param name="catalog">The catalog name</param>
         /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive CodeArchive(this IContext context, PartId assembly, string host)
+        public static IAsmCodeArchive CodeArchive(this IContext context, PartId assembly, ApiHostUri host)
             => AsmCodeArchive.Create(context, assembly, host);
 
         /// <summary>

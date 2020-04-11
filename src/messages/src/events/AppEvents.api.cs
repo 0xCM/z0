@@ -43,15 +43,29 @@ namespace Z0
                 => new AppEventReceiver<E>(receiver);
 
         /// <summary>
+        /// Creates an even sink predicated on a receiver
+        /// </summary>
+        /// <param name="receiver">The receiver to invoke upon event receipt</param>
+        /// <typeparam name="E">The event type</typeparam>
+        [MethodImpl(Inline)]
+        public static AppEventReceiver sink(Action<IAppEvent> receiver)
+            => new AppEventReceiver(receiver);
+
+        /// <summary>
         /// Registers an event receiver to which brokered events will be relayed
         /// </summary>
-        /// <param name="e">An event representative</param>
+        /// <param name="model">An event representative</param>
         /// <param name="broker">The broker</param>
         /// <param name="receiver">The handler ivoked upon event occurrence</param>
         /// <typeparam name="E">The event type</typeparam>
         [MethodImpl(Inline)]
-        public static Outcome subscribe<E>(E e, IAppEventBroker broker, Action<E> receiver)
+        public static Outcome subscribe<E>(E model, IAppEventBroker broker, Action<E> receiver)
             where E : IAppEvent
                 => broker.Subscribe(receiver);        
+
+        
+        [MethodImpl(Inline)]
+        public static Outcome subscribe(IAppEvent model, IAppEventBroker broker, Action<IAppEvent> receiver)
+            => broker.Subscribe(receiver, model);
     }
 }

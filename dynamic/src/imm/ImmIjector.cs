@@ -32,12 +32,12 @@ namespace Z0
             => ImmProvider.EmbedImmediate(method,imm);
     }        
 
-    readonly struct VImm8BinaryOp128Injector : IImmInjector
+    readonly struct V1286BinaryOpImmInjector : IImmInjector
     {
         public IContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal VImm8BinaryOp128Injector(IContext context)
+        internal V1286BinaryOpImmInjector(IContext context)
         {
             this.Context = context;
         }
@@ -47,14 +47,14 @@ namespace Z0
             => Dynop.EmbedV128BinaryOpImm(src,imm);
     }
 
-    readonly struct VImm8BinaryOp128Injector<T> : IImmInjector<BinaryOp<Vector128<T>>>
+    readonly struct V1286BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector128<T>>>
         where T : unmanaged
     {
         public IContext Context {get;}
 
 
         [MethodImpl(Inline)]            
-        internal VImm8BinaryOp128Injector(IContext context)
+        internal V1286BinaryOpImmInjector(IContext context)
         {
             this.Context = context;
         }
@@ -64,12 +64,12 @@ namespace Z0
             => Dynop.CreateImmV128BinaryOp<T>(src,imm);
     }
 
-    readonly struct VImm8BinaryOp256Injector : IImmInjector
+    readonly struct V256BinaryOpImmInjector : IImmInjector
     {
         public IContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal VImm8BinaryOp256Injector(IContext context)
+        internal V256BinaryOpImmInjector(IContext context)
         {
             this.Context = context;
         }
@@ -79,13 +79,13 @@ namespace Z0
             => Dynop.EmbedV256BinaryOpImm(src,imm);
     }
 
-    readonly struct VImm8BinaryOp256Injector<T> : IImmInjector<BinaryOp<Vector256<T>>>
+    readonly struct V256BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector256<T>>>
         where T : unmanaged
     { 
         public IContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal VImm8BinaryOp256Injector(IContext context)
+        internal V256BinaryOpImmInjector(IContext context)
         {
             this.Context = context;
         }
@@ -107,16 +107,16 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmbedVUnaryOpImm(src,imm);
+            => Dynop.EmbedV256UnaryOpImm(src,imm);
     }
 
-    readonly struct VUnaryOpImmInjector<T> : IImmInjector<UnaryOp<Vector256<T>>>
+    readonly struct V256UnaryOpImmInjector<T> : IImmInjector<UnaryOp<Vector256<T>>>
         where T : unmanaged
     {            
         public IContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal VUnaryOpImmInjector(IContext context)
+        internal V256UnaryOpImmInjector(IContext context)
         {
             this.Context = context;
         }
@@ -138,7 +138,7 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmbedVUnaryOpImm(src,imm);
+            => Dynop.EmbedV128UnaryOpImm(src,imm);
     }
 
     readonly struct V128UnaryOpImmInjector<T> : IImmInjector<UnaryOp<Vector128<T>>>
@@ -181,14 +181,14 @@ namespace Z0
         internal ImmInjector(IContext context, Vec128Kind vk, C.BinaryOp opk)
         {
             this.Context = context;
-            this.Embedder = new VImm8BinaryOp128Injector(context);
+            this.Embedder = new V1286BinaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
         internal ImmInjector(IContext context, Vec256Kind vk, C.BinaryOp opk)
         {
             this.Context = context;
-            this.Embedder = new VImm8BinaryOp256Injector(context);
+            this.Embedder = new V256BinaryOpImmInjector(context);
         }
     }    
 }

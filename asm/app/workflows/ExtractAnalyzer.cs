@@ -32,6 +32,7 @@ namespace Z0.Asm.Check
             => new ExtractAnalyzerRelay();
     }
 
+
     public interface IExtractAnalyzer : IAsmWorkflow
     {
         

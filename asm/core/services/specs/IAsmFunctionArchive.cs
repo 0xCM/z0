@@ -13,6 +13,10 @@ namespace Z0.Asm
         /// Saves a group of related functtions to the archive
         /// </summary>
         /// <param name="group">The source group</param>
-        Option<AsmEmissionTokens<OpUri>> Save(AsmFunctionGroup group, bool append);
+        void Save(AsmFunctionGroup group, bool append);
+
+        Option<FilePath> SaveAsm(AsmFunction[] src, bool append, FileName file);
+
+        Option<FilePath> SaveHex(AsmFunction[] src, bool append, FileName file);
     }    
 }

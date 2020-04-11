@@ -16,6 +16,9 @@ namespace Z0
     /// </summary>
     public class FileName : PathComponent<FileName>
     {        
+        public static bool IsSome(FileName src)
+            => !string.IsNullOrEmpty(src?.Name);
+        
         [MethodImpl(Inline)]
         public static FileName Define(string name)
             => new FileName(name);

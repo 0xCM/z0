@@ -53,16 +53,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IImmInjector<BinaryOp<Vector128<T>>> V128BinaryOpImmInjector<T>(this IContext context)
             where T : unmanaged
-                => new ImmInjector<BinaryOp<Vector128<T>>>(context, new VImm8BinaryOp128Injector<T>(context));
+                => new ImmInjector<BinaryOp<Vector128<T>>>(context, new V1286BinaryOpImmInjector<T>(context));
 
         [MethodImpl(Inline)]
         public static IImmInjector<UnaryOp<Vector256<T>>> V256UnaryOpImmInjector<T>(this IContext context)
             where T : unmanaged
-                => new ImmInjector<UnaryOp<Vector256<T>>>(context, new VUnaryOpImmInjector<T>(context));
+                => new ImmInjector<UnaryOp<Vector256<T>>>(context, new V256UnaryOpImmInjector<T>(context));
 
         [MethodImpl(Inline)]
         public static IImmInjector<BinaryOp<Vector256<T>>> V256BinaryOpImmInjector<T>(this IContext context)
             where T : unmanaged
-                => new ImmInjector<BinaryOp<Vector256<T>>>(context, new VImm8BinaryOp256Injector<T>(context));
+                => new ImmInjector<BinaryOp<Vector256<T>>>(context, new V256BinaryOpImmInjector<T>(context));
     }
 }

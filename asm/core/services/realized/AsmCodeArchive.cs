@@ -20,30 +20,30 @@ namespace Z0.Asm
         
         public PartId SourcePart {get;}
 
-        public string HostName {get;}
+        public ApiHostUri ApiHost {get;}
 
         [MethodImpl(Inline)]
         public static IAsmCodeArchive Create(IContext context, PartId catalog)
             => new AsmCodeArchive(context, catalog);
 
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive Create(IContext context, PartId catalog, string host)
+        public static IAsmCodeArchive Create(IContext context, PartId catalog, ApiHostUri host)
             => new AsmCodeArchive(context, catalog, host);
 
         [MethodImpl(Inline)]
-        AsmCodeArchive(IContext context, PartId catalog, string host)
+        AsmCodeArchive(IContext context, PartId catalog, ApiHostUri host)
         {
             this.Context = context;
             this.SourcePart = catalog;
-            this.HostName = host;
-            this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(SourcePart.Format(),host));
+            this.ApiHost = host;
+            this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(SourcePart.Format(),host.Name));
         }
 
         AsmCodeArchive(IContext context, PartId catalog)
         {
             this.Context = context;
             this.SourcePart = catalog;
-            this.HostName = string.Empty;
+            this.ApiHost = ApiHostUri.Empty;
             this.RootFolder = context.EmissionPaths().DataSubDir(FolderName.Define(SourcePart.Format()));
         }
 
@@ -84,29 +84,7 @@ namespace Z0.Asm
         /// <param name="id">The identifying moniker</param>
         public IEnumerable<AsmCode> Read(OpIdentity id)
             => Read(RootFolder + FileName.Define(id, AsmHexLine.FileExt));
-
-        /// <summary>
-        /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
-        /// from hex data contained in the assembly log archive
-        /// </summary>
-        /// <param name="subfolder">The asm log subfolder</param>
-        /// <param name="id">The identifying moniker</param>
-        public Option<AsmCode> Read<T>(OpIdentity id, T t = default)
-            where T : unmanaged
-                => Read<T>(Context.EmissionPaths().HexPath(RootFolder, id), id);
         
-        /// <summary>
-        /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
-        /// </summary>
-        /// <param name="data">The encoded assembly</param>
-        /// <param name="id">The identity to confer</param>
-        static AsmCode Parse<T>(string data, OpIdentity id)
-            where T : unmanaged
-                => AsmCode.Define(id, MemoryExtract.Define(MemoryAddress.Zero, HexParsers.Bytes.ParseBytes(data).ToArray()));
-
-        Option<AsmCode> Read<T>(FilePath src, OpIdentity m)
-            where T : unmanaged
-                => Try(() => Parse<T>(src.ReadText(), m));
 
         public IAsmCodeArchive Clear()
         {

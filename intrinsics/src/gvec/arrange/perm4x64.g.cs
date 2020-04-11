@@ -25,16 +25,10 @@ namespace Z0
             where T : unmanaged
                 => vperm4x64_u(x,spec);
 
-        /// <summary>
-        /// Permutes 4 64-bit source vector segments
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="spec">The perm spec</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Closures(AllNumeric)]
-        public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)
-            where T : unmanaged
-                => vperm4x64_u(x, (byte)spec);
+        // [MethodImpl(Inline)]
+        // public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)
+        //     where T : unmanaged
+        //         => vperm4x64_u(x, (byte)spec);
 
         [MethodImpl(Inline)]
         static Vector256<T> vperm4x64_u<T>(Vector256<T> x, byte spec)
@@ -50,7 +44,6 @@ namespace Z0
                 return generic<T>(dvec.vperm4x64(v64u(x), spec));
             else
                 return vperm4x64_i(x,spec);
-
         }
 
         [MethodImpl(Inline)]
