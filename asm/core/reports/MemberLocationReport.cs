@@ -31,9 +31,6 @@ namespace Z0.Asm
     /// </summary>
     public class MemberLocationRecord :  IRecord<F, R>
     {    
-        public static MemberLocationRecord Define(MemoryAddress location, ushort gap, OpIdentity member)
-            => new MemberLocationRecord(location, gap, member);
-
         MemberLocationRecord(MemoryAddress location, ushort gap, OpIdentity member)
         {
             this.Location = location;
@@ -61,9 +58,6 @@ namespace Z0.Asm
     }
     public class MemberLocationReport : IReport<MemberLocationRecord>
     {
-        public static MemberLocationReport Create(PartId id, Assembly src)
-            => MemberLocationReport.Create(id, src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOperators());
-
         public static MemberLocationReport Create(PartId assemblyid, IEnumerable<MethodInfo> methods)
         {   
             var src = (from m in methods
@@ -80,13 +74,6 @@ namespace Z0.Asm
         {
             this.AssemblyId = id;
             this.ApiHost = none<ApiHost>();
-            this.Records = records;
-        }
-
-        MemberLocationReport(ApiHost host, MemberLocationRecord[] records)
-        {
-            this.AssemblyId = host.Owner;
-            this.ApiHost = host;
             this.Records = records;
         }
 

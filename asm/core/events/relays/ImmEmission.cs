@@ -2,19 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
 
     using static Seed;
+    using static Memories;
+    using static AsmEvents;
 
-    partial class XTend
+    public interface IImmEmissionRelay : IWorkflowRelay
     {
-        [MethodImpl(Inline)]
-        public static IdentifiedCode ToApiCode(this AsmCode src)
-            => IdentifiedCode.Define(src.Id, src.Data.Bytes);
+        EmittingImmInjections EmittingImmInjections => EmittingImmInjections.Empty;
+
     }
+
 }

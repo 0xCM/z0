@@ -13,32 +13,6 @@ namespace Z0.Asm
 
     public static class ServiceFactory
     {
-        [MethodImpl(Inline)]
-        public static IImmCapture<T> ImmVCapture<R,T>(this IContext context, R resolver)
-            where T : unmanaged        
-            where R : ISFImm8ResolverApi<T>
-                => context.ImmVCapture<R,T>(resolver, context.AsmFunctionDecoder());
-
-        /// <summary>
-        /// Instantiates a contextual immediate capture service for a unary operator
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="src">A unary operator that requires an immediate value</param>
-        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
-        [MethodImpl(Inline)]
-        public static IImmCapture ImmUnaryCapture(this IContext context, MethodInfo src, OpIdentity baseid)
-            => context.ImmUnaryCapture(src,baseid, context.AsmFunctionDecoder());
-
-        /// <summary>
-        /// Instantiates a contextual immediate capture service for a binary operator
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="src">A unary operator that requires an immediate value</param>
-        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
-        [MethodImpl(Inline)]
-        public static IImmCapture ImmBinaryCapture(this IContext context, MethodInfo src, OpIdentity baseid)
-            => context.ImmBinaryCapture(src,baseid, context.AsmFunctionDecoder());
-
         /// <summary>
         /// Instantiates a contextual asm formatter service
         /// </summary>

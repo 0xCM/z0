@@ -108,15 +108,12 @@ namespace Z0.Asm.Check
         void EmitImm()
         {
             var imm8 = new byte[]{3,5,12,9};                        
-            var emitter = ImmEmitter.Create(Context,  Context, ApiSet, Decoder, RootEmissionPath);
+            var emitter = ImmEmissionWorkflow.Create(Context,  Context, ApiSet, Formatter, Decoder, RootEmissionPath);
             emitter.Emit(imm8);            
         }
 
         void EmitPrimary()
         {
-            // var decoder = Context.AsmFunctionDecoder();
-            // var formatter = Context.AsmFormatter(Context.AsmFormat.WithSectionDelimiter());
-            // var workflow = HostCaptureWorkflow.Create(Context, decoder, formatter, Context.AsmWriterFactory());
             CaptureWorkflow.Run(WorkflowConfig);
         }
 

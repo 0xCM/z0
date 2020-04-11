@@ -16,38 +16,6 @@ namespace Z0.Asm
 
     public static class ServiceFactory
     {                       
-        [MethodImpl(Inline)]
-        public static IImmCapture<T> ImmVCapture<R,T>(this IContext context, R resolver, IAsmFunctionDecoder decoder)
-            where T : unmanaged        
-            where R : ISFImm8ResolverApi<T>
-            => resolver switch {
-                ISVImm8UnaryResolver128Api<T> r => ImmV128UnaryCaptureService<T>.New(context,r, decoder),
-                ISVImm8UnaryResolver256Api<T> r => ImmV256UnaryCaptureService<T>.New(context,r, decoder),
-                ISVImm8BinaryResolver128Api<T> r => ImmV128BinaryCaptureService<T>.New(context,r, decoder),
-                ISVImm8BinaryResolver256Api<T> r => ImmV256BinaryCaptureService<T>.New(context,r, decoder),
-                _ => throw Unsupported.define(resolver.GetType())
-            };           
-
-        /// <summary>
-        /// Instantiates a contextual immediate capture service for a unary operator
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="src">A unary operator that requires an immediate value</param>
-        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
-        [MethodImpl(Inline)]
-        public static IImmCapture ImmUnaryCapture(this IContext context, MethodInfo src, OpIdentity baseid, IAsmFunctionDecoder decoder)
-            => ImmUnaryCaptureService.Create(context, src, baseid,  decoder);
-
-        /// <summary>
-        /// Instantiates a contextual immediate capture service for a binary operator
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="src">A unary operator that requires an immediate value</param>
-        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
-        [MethodImpl(Inline)]
-        public static IImmCapture ImmBinaryCapture(this IContext context, MethodInfo src, OpIdentity baseid, IAsmFunctionDecoder decoder)
-            => ImmBinaryCaptureService.Create(context,src,baseid, decoder);
-
 
         [MethodImpl(Inline)]
         public static IOpExtractParser ExtractParser(this IAsmContext context, byte[] buffer)

@@ -13,32 +13,43 @@ namespace Z0.Asm
     using static Memories;
     using static AsmEvents;
 
-    public interface IImmEmitter : IService
-    {
-        void Emit(params byte[] immediates);
-    }
-
-    public interface IImmEmiterRelay : IWorkflowRelay
-    {
-        EmittingImmInjections EmittingImmInjections => EmittingImmInjections.Empty;
-
-    }
-
-    sealed class ImmEmitterRelay : AppEventRelay,  IImmEmiterRelay
+    public sealed class ImmEmitterRelay : AppEventRelay,  IImmEmissionRelay
     {
         [MethodImpl(Inline)]
         public new static ImmEmitterRelay Create()
             => new ImmEmitterRelay();
     }
 
-    public class ImmEmitter : IImmEmitter
+    public class ImmEmissionWorkflow : IAsmWorkflow<ImmEmissionWorkflow,ImmEmitterRelay>, IImmEmissionWorkflow
     {                
-        public static IImmEmitter Create(IContext context, IAppMsgSink sink, IApiSet api, IAsmFunctionDecoder decoder, FolderPath dst)        
-            => new ImmEmitter(context, sink, decoder, api, dst);
+        public static IImmEmissionWorkflow Create(IContext context, IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
+            => new ImmEmissionWorkflow(context, sink, formatter, decoder, api, dst);
 
-        readonly IContext Context;
+        public ImmEmitterRelay Relay {get;} 
+            = new ImmEmitterRelay();
+
+        public IAppMsgSink Sink {get;}
+
+        ImmEmissionWorkflow(IContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
+        {
+            Context = context;
+            Formatter = formatter;
+            Decoder = decoder;
+            ImmSpecializer = context.ImmSpecializer(decoder);
+            ApiSet = api;
+            Paths = RootEmissionPaths.Define(root);
+            Paths.Clear();
+            ApiCollector = context.ApiCollector();
+            ConnectReceivers(Relay);
+        }
+
+        IAsmWorkflow<ImmEmitterRelay> Flow => this;
 
         readonly IApiSet ApiSet;
+
+        readonly IAsmFormatter Formatter;
+
+        readonly IAsmFunctionDecoder Decoder;
 
         readonly IApiCollector ApiCollector;
 
@@ -46,46 +57,17 @@ namespace Z0.Asm
 
         readonly IImmSpecializer ImmSpecializer;
 
-        readonly IAppMsgSink Sink;
+        readonly IContext Context;
 
-        ImmEmitter(IContext context, IAppMsgSink sink, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
+        void ConnectReceivers(IImmEmissionRelay relay)
         {
-            Context = context;
-            Sink = sink;
-            ImmSpecializer = context.ImmSpecializer(decoder);
-            ApiSet = api;
-            Paths = RootEmissionPaths.Define(root);
-            Paths.Clear();
-            Relay = ConnectReceivers(ImmEmitterRelay.Create());
-            ApiCollector = context.ApiCollector();
-        }
-
-
-        public void Report(IAppEvent e, AppMsgColor color = AppMsgColor.Green)
-            => Sink.NotifyConsole(e.Format(), color);
-
-        readonly IAppEventRelay Relay;
-
-        void Connect(IAppEventRelay relay, IAppEvent model, Action<IAppEvent> receiver)
-        {
-            relay.Subscribe(receiver, model);
-        }
-
-        IImmEmiterRelay ConnectReceivers(IImmEmiterRelay relay)
-        {
-            relay.EmittingImmInjections.Subscribe(relay,OnEvent);
-            return relay;
+            relay.EmittingImmInjections.Subscribe(relay,OnEvent);            
         }
 
         void OnEvent(EmittingImmInjections e)
         {
-            Report(e);
+            Flow.Report(e);
         }
-
-        [MethodImpl(Inline)]
-        ref readonly E Raise<E>(in E e)
-            where E : IAppEvent
-                => ref Relay.Raise(e);
 
         public void Emit(params byte[] imm8)
             => EmitImm(Context.ExtractExchange(OnCapture), imm8);
@@ -98,7 +80,7 @@ namespace Z0.Asm
         IEnumerable<IApiHost> ApiHosts => ApiSet.Hosts;
 
         IAsmFunctionArchive Archive(IApiHost host)
-            => Context.ImmFunctionArchive(host.UriPath, Paths.RootDir);
+            => Context.ImmFunctionArchive(host.UriPath, Formatter, Paths.RootDir);
 
         void EmitImm(in OpExtractExchange exchange, byte[] imm8)
         {
@@ -119,7 +101,7 @@ namespace Z0.Asm
         {
             foreach(var host in ApiHosts)
             {
-                Raise(EmittingImmInjections.Define(host.UriPath, false));
+                Flow.Raise(EmittingImmInjections.Define(host.UriPath, false));
                 var archive = Archive(host).Clear();
                 var groups = DirectImmGroups(host);
                 Emit(exchange, groups,imm8, archive);

@@ -11,7 +11,6 @@ namespace Z0.Asm
 
     using static Seed;
     using static Memories;    
-    using static AsmServiceMessages;
 
     class AsmCatalogEmitter : IAsmCatalogEmitter
     {
@@ -55,9 +54,6 @@ namespace Z0.Asm
 
         void IAsmCatalogEmitter.EmitImm(in OpExtractExchange exchange, AsmEmissionObserver observer)
         {
-            ClearArchives(true);
-            EmitDirectImm(exchange,observer);
-            EmitGenericImm(exchange,observer);
         }
 
         void EmitDirectPrimary(in OpExtractExchange exchange, AsmEmissionObserver observer)
@@ -66,20 +62,6 @@ namespace Z0.Asm
                 EmitDirectPrimary(exchange, host, observer);
         }
 
-        void EmitDirectImm(in OpExtractExchange exchange, AsmEmissionObserver observer)
-        {
-            foreach(var host in Catalog.DirectApiHosts)
-            {
-                var archive = HostImmArchive(host);
-                var specs = from g in  Context.ApiCollector().CollectDirect(host)
-                             let immg = ImmGroup(host,g)
-                             where !immg.IsEmpty
-                             select immg;
-                
-                foreach(var g in specs)
-                    EmitDirectImm(exchange, g, archive, observer);
-            }
-        }
 
         void EmitGenericPrimary(in OpExtractExchange exchange, AsmEmissionObserver observer)
         {
@@ -87,17 +69,6 @@ namespace Z0.Asm
                 EmitGenericPrimary(exchange, host, observer);
         }
 
-        void EmitGenericImm(in OpExtractExchange exchange, AsmEmissionObserver observer)
-        {        
-            foreach(var host in Catalog.GenericApiHosts)
-            {
-                var archive = HostImmArchive(host);
-                var specs = Context.ApiCollector().CollectGeneric(host).Where(op => op.Method.AcceptsImmediate());
-
-                foreach(var spec in specs)
-                    EmitGenericImm(exchange, spec, archive, observer);                
-            }        
-        }
 
         void EmitDirectPrimary(in OpExtractExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
@@ -159,61 +130,6 @@ namespace Z0.Asm
                 dst.Save(fGroup, true);
             }
         }
-
-        void EmitGenericImm(in OpExtractExchange exchange, GenericApiOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
-        {
-            if(op.Method.IsVectorizedUnaryImm())
-            {                                                
-                foreach(var closure in op.Close())
-                {
-                    var svc = Context.ImmUnaryCapture(closure.Method, closure.Id);
-                    var functions = svc.Capture(in exchange, ImmSelection);
-                    if(functions.Length != 0)
-                    {
-                        var fGroup = AsmFunctionGroup.Define(op.GenericId, functions);
-                        dst.Save(fGroup, true);
-                    }
-                }
-            }
-            else if(op.Method.IsVectorizedBinaryImm())
-            {
-                foreach(var closure in op.Close())
-                {
-                    var svc = Context.ImmBinaryCapture(closure.Method, closure.Id);
-                    var functions = svc.Capture(in exchange, ImmSelection);
-                    if(functions.Length != 0)
-                    {
-                        var fGroup = AsmFunctionGroup.Define(op.GenericId, functions);
-                        dst.Save(fGroup, true);
-                    }
-                }
-            }
-        }
-
-        void EmitDirectImm(in OpExtractExchange exchange, DirectApiGroup op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
-        {
-            var tokens = new List<AsmEmissionToken>();
-            foreach(var member in op.Members.Where(m => m.Method.IsVectorizedUnaryImm()))
-            {
-                var resolutions = Context.ImmUnaryCapture(member.Method, member.Id).Capture(in exchange, ImmSelection);
-                if(resolutions.Length != 0)
-                {
-                    var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
-                    dst.Save(fGroup, true);
-                }
-            }
-
-            foreach(var member in op.Members.Where(m => m.Method.IsVectorizedBinaryImm()))
-            {
-                var resolutions = Context.ImmBinaryCapture(member.Method, member.Id).Capture(in exchange, ImmSelection);
-                if(resolutions.Length != 0)
-                {
-                    var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
-                    dst.Save(fGroup, true);
-                }
-            }
-
-        }                    
 
         DirectApiGroup PrimaryGroup(ApiHost host, DirectApiGroup g)
             => DirectApiGroup.Define(host, g.GroupId, g.Members.Where(m => !m.Method.AcceptsImmediate()));

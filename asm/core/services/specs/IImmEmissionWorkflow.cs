@@ -5,12 +5,10 @@
 namespace Z0.Asm
 {
     using System;
-    
-    using static AsmEvents;
 
-
-    public interface IImmSpecializationRelay : IWorkflowRelay
+    public interface IImmEmissionWorkflow : IAsmWorkflow
     {
-        EmittingImmInjections EmittingImmInjections => EmittingImmInjections.Empty;
+        void Emit(params byte[] immediates);
     }
+
 }

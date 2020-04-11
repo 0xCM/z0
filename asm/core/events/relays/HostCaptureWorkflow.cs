@@ -14,7 +14,7 @@ namespace Z0.Asm
         ICatalogCaptureRelay,
         IHostHexSavedRelay,
         IHostCaptureRelay,
-        IImmSpecializationRelay
+        IImmEmissionRelay
     {
         
     }
