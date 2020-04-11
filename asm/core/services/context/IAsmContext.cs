@@ -16,12 +16,18 @@ namespace Z0.Asm
         /// <summary>
         /// The default asm formatting configuration
         /// </summary>
-        AsmFormatConfig AsmFormat => AsmFormatConfig.New;
+        AsmFormatConfig AsmFormat {get;}
 
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
         /// </summary>
         int DefaultBufferLength 
             => Pow2.T14;        
+
+        IAsmFormatter AsmFormatter {get;}
+
+        IAsmFunctionDecoder AsmDecoder {get;}
+
+        IAsmStreamWriter AsmWriter(FilePath dst);            
     }   
 }

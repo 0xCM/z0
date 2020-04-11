@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    public interface IAssemblyCapture : IService
+    public interface IHostCaptureService : IService
     {
         ParsedExtract[] Parse(MemberExtract[] src);
         

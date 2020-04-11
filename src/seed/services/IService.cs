@@ -20,13 +20,18 @@ namespace Z0
     {
         
     }
-
+    
     /// <summary>
     /// Charaterizes a shared execution environment that may be stateful or stateless
     /// </summary>
     public interface IContext
     {
-        
+        static IContext Default => default(DefaultContext);
+    }
+
+    readonly struct DefaultContext : IContext
+    {
+
     }
 
     /// <summary>

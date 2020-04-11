@@ -25,7 +25,16 @@ namespace Z0.Asm
                 ;        
         public t_asm()
         {
-            Context =  AsmContext.Create(ApiComposition.Assemble(DefaultResolutions), AppSettings.Empty, AppMessages.exchange(Queue), Random, AsmFormatConfig.New);
+            Context = AsmContext.Create(
+                ApiComposition.Assemble(DefaultResolutions), 
+                AppSettings.Empty, 
+                AppMessages.exchange(Queue), 
+                Random, 
+                AsmFormatConfig.New,
+                Context.AsmFormatter(),
+                Context.AsmFunctionDecoder(),
+                Context.AsmWriterFactory()
+                );
         }
     }
 }

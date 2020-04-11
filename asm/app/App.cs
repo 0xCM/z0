@@ -11,6 +11,8 @@ namespace Z0.Asm.Check
     using System.Reflection;
     using System.Linq;
 
+
+    
     class App : ApiShell<App,IAsmContext>
     {
         static IPart[] Dependencies
@@ -69,16 +71,15 @@ namespace Z0.Asm.Check
         
         static IAsmContext CreateContext()
         {
+            var context = IContext.Default;
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            term.print($"Created {random.RngKind} random source");
-
             var settings = LoadSettings();
-            term.print($"loaded settings");
-
             var resolved = ApiComposition.Assemble(Dependencies.Where(r => r.Id != 0));
-            term.print($"Assembled {resolved.Resolved.Length} parts");
-
-            return AsmContext.Create(resolved, settings, AppMessages.exchange(), random, AsmFormatConfig.New);
+            var format = AsmFormatConfig.New;            
+            var decoder = AsmDecoder.function(context, format);
+            var formatter = AsmDecoder.formatter(context, format);
+            var factory = AsmDecoder.writerFactory(context);
+            return AsmContext.Create(resolved, settings, AppMessages.exchange(), random, format, formatter, decoder, factory);
         }
         
 

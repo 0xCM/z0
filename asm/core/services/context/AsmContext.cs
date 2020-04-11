@@ -18,11 +18,26 @@ namespace Z0.Asm
         /// Creates a base context with a specified composition
         /// </summary>
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
-        [MethodImpl(Inline)]
-        public static IAsmContext Create(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange, IPolyrand random, AsmFormatConfig format)
-            => new AsmContext(assemblies, settings, exchange,random,format);
+        public static IAsmContext Create(
+            IApiComposition assemblies, 
+            IAppSettings settings, 
+            IAppMsgExchange exchange, 
+            IPolyrand random, 
+            AsmFormatConfig format,
+            IAsmFormatter formatter,
+            IAsmFunctionDecoder decoder,
+            AsmWriterFactory writerFactory)
+                => new AsmContext(assemblies, settings, exchange, random, format, formatter, decoder, writerFactory);
 
-        AsmContext(IApiComposition composition, IAppSettings settings, IAppMsgExchange exchange, IPolyrand random, AsmFormatConfig format)
+        AsmContext(
+            IApiComposition composition, 
+            IAppSettings settings, 
+            IAppMsgExchange exchange, 
+            IPolyrand random, 
+            AsmFormatConfig format,
+            IAsmFormatter formatter,
+            IAsmFunctionDecoder decoder,
+            AsmWriterFactory writerFactory)
         {
             Next += BlackHole;
             Messaging = exchange;
@@ -33,6 +48,9 @@ namespace Z0.Asm
             Settings = settings;
             Paths = AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
             ApiSet = Z0.ApiSet.Create(composition);
+            AsmFormatter = formatter;
+            AsmDecoder = decoder;
+            WriterFactory = writerFactory;            
         }
 
         public event Action<AppMsg> Next;
@@ -48,6 +66,15 @@ namespace Z0.Asm
         public IApiSet ApiSet {get;}
 
         public IAppPaths Paths {get;}
+
+        public IAsmFormatter AsmFormatter {get;}
+        
+        public IAsmFunctionDecoder AsmDecoder {get;}
+        
+        AsmWriterFactory WriterFactory {get;}
+
+        public IAsmStreamWriter AsmWriter(FilePath dst)
+            => WriterFactory(dst, AsmFormatter);
 
         void BlackHole(AppMsg msg) {}
 

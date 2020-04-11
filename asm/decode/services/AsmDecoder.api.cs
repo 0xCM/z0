@@ -58,5 +58,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static IAsmFormatter formatter(IContext context, AsmFormatConfig config = null)
             => Svc.AsmFormatter.Create(context, config ?? AsmFormatConfig.New);        
+
+        [MethodImpl(Inline)]
+        public static AsmWriterFactory writerFactory(IContext context)
+            =>  (dst,formatter) => context.AsmWriter(dst,formatter);
+
     }
 }
