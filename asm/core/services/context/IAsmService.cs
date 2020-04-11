@@ -5,14 +5,42 @@
 namespace Z0.Asm
 {        
 
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Characterizes a contextual asm service where caller-managed lifecyle is not needed
     /// </summary>
     public interface IAsmService :  IService<IAsmContext>
     {
-    
-    }
+        IAppPaths AppPaths => Context.Paths;
 
+        AsmEmissionPaths EmissionPaths => AsmEmissionPaths.Default;
+
+        IAppSettings Settings => Context.Settings;
+
+        IApiSet ApiSet => Context.ApiSet;
+
+        IApiHost[] Hosts => ApiSet.Hosts;
+        
+        IAppMsgSink Sink => Context;
+
+        IAppMsgQueue Queue => Context;
+
+        IPolyrand Random => Context.Random;
+
+        IAsmFormatter Formatter => Context.AsmFormatter;
+
+        IAsmFunctionDecoder Decoder => Context.AsmDecoder;
+
+        IFunctionStreamWriter Writer(FilePath dst) => Context.AsmWriter(dst);
+
+        void Notify(AppMsg msg) => Sink.Notify(msg);
+        
+        void Notify(object content, AppMsgColor color = AppMsgColor.Green)
+            => Context.NotifyConsole(content, color);
+    }
 
     /// <summary>
     /// Characterizes contexutal asm service with caller-managed lifecycle

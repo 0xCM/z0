@@ -30,6 +30,10 @@ namespace Z0
             => a < b ? a : b;
 
         [MethodImpl(Inline), Min]
+        public static int min(int a, int b, int c)
+            => min(min(a,b),min(b,c));
+
+        [MethodImpl(Inline), Min]
         public static uint min(uint a, uint b)
             => a < b ? a : b;
 

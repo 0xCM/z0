@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    public interface IHostCaptureService : IService
+    public interface IHostCaptureService : IAsmService
     {
         ParsedExtract[] Parse(MemberExtract[] src);
         
-        MemberExtract[] Extract(ApiHost host);        
+        MemberExtract[] Extract(ApiHostUri host);        
 
-        AsmFunction[] Decode(ApiHost host, ParsedExtract[] parsed);        
+        AsmFunction[] Decode(ApiHostUri host, ParsedExtract[] parsed);        
     }
 }

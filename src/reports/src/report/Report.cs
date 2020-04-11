@@ -67,12 +67,12 @@ namespace Z0
 
     }
 
-   public class Report<B,F,R> : Report<R>
+   public class Report<B,F,R> : Report<R>, INullary<B>
         where F : unmanaged, Enum
-        where R : IRecord<F, R>
+        where R : IRecord<F,R>
         where B : Report<B,F,R>, new()
     {             
-        public static readonly new B Empty = new B();
+        public static new B Empty => new B();
 
         public Report(R[] records)
             : base(records)
@@ -91,5 +91,7 @@ namespace Z0
         public bool IsEmpty => RecordCount == 0;
 
         public bool IsNonEmpty => RecordCount != 0;
+
+        public B Zero => Empty;
     }    
 }

@@ -40,13 +40,16 @@ namespace Z0
              => from m in Tagged(src).OpenGeneric()
                 let closures = MemberLocator.NumericClosures(m)
                 where closures.Length != 0
-                select GenericApiOp.Define(src, Diviner.GenericIdentity(m), m.GenericDefintion(), closures);
+                select GenericApiOp.Define(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 
         IEnumerable<DirectApiOp> DirectOpSpecs(IApiHost src)
             => from m in Tagged(src).NonGeneric()
                 select DirectApiOp.Define(src, Diviner.Identify(m), m);
 
-        IEnumerable<MethodInfo> Tagged(IApiHost src)
+        static MethodInfo GenericDefintion(MethodInfo src)
+            => src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();
+
+        static IEnumerable<MethodInfo> Tagged(IApiHost src)
             => src.DeclaredMethods.Tagged<OpAttribute>();
     }
 }

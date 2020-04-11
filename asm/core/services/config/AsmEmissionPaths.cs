@@ -4,19 +4,31 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
+    using System;
+    using System.Runtime.CompilerServices;
+    
+    using static Seed;
 
     using Ext = FileExtensions;
 
     public readonly struct AsmEmissionPaths
     {
+        readonly FolderPath EmissionRoot;
+
+        public static AsmEmissionPaths Default => Define(Env.Current.LogDir);
+        
+        [MethodImpl(Inline)]
         public static AsmEmissionPaths Define(FolderPath root  = null)
             => new AsmEmissionPaths(root ?? Env.Current.LogDir);
 
-        readonly FolderPath LogRoot;
+        [MethodImpl(Inline)]
+        public AsmEmissionPaths Rooted(FolderPath root)
+            => new AsmEmissionPaths(root);
 
+        [MethodImpl(Inline)]
         AsmEmissionPaths(FolderPath root)
         {
-            this.LogRoot = root;
+            EmissionRoot = root;
         }
 
         FolderName DataRootFolder => FolderName.Define("asm");
@@ -31,15 +43,15 @@ namespace Z0.Asm
     
         FolderName DecodedFolder => FolderName.Define("decoded");
 
-        FolderPath ReportRootDir => LogRoot + ReportFolder;
+        FolderPath ReportRootDir => EmissionRoot + ReportFolder;
 
-        FolderPath DataRootDir => LogRoot + DataRootFolder;
+        FolderPath DataRootDir => EmissionRoot + DataRootFolder;
 
         public FolderPath DataSubDir(FolderName folder) => DataRootDir + folder;         
 
         public FolderPath DataSubDir(RelativeLocation location) => DataRootDir +  location;
 
-        public FolderPath ImmRootDir => LogRoot + ImmRootFolder;
+        public FolderPath ImmRootDir => EmissionRoot + ImmRootFolder;
 
         public FolderPath ImmSubDir(FolderName folder) => ImmRootDir + folder;         
 

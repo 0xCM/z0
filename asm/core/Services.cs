@@ -194,5 +194,12 @@ namespace Z0.Asm
 
         public static IImmSpecializer ImmSpecializer(this IContext context, IAsmFunctionDecoder decoder)
             => Svc.ImmSpecializer.Create(context, decoder);
+
+        /// <summary>
+        /// Instantiates a basic capture service that supports the extract/parse/decode workflow
+        /// </summary>
+        /// <param name="context">The source context</param>
+        public static IHostCaptureService HostCaptureService(this IAsmContext context)
+            => Svc.HostCaptureService.Create(context);
     }
 }

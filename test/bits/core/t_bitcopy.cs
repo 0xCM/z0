@@ -37,8 +37,8 @@ namespace Z0
                     var actual = gbits.bitcopy(lit, range.Left, count, zed); 
                     if(gmath.neq(expect,actual))
                     {
-                        trace("expect", BitSpan.from(expect).Format());
-                        trace("actual", BitSpan.from(actual).Format());
+                        trace("expect", BitSpans.from(expect).Format());
+                        trace("actual", BitSpans.from(actual).Format());
                         Claim.eq(expect,actual);            
                     }
                 }

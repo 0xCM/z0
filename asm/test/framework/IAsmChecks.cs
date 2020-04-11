@@ -6,7 +6,7 @@ namespace Z0.Asm.Validation
 {
     using System;
     
-    public interface IAsmChecks : IAsmService
+    public interface IAsmChecks : IService
     {
         void Execute(in BufferSeq buffers, ApiMemberCode code);        
 

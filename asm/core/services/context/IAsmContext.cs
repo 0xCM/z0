@@ -28,6 +28,6 @@ namespace Z0.Asm
 
         IAsmFunctionDecoder AsmDecoder {get;}
 
-        IAsmStreamWriter AsmWriter(FilePath dst);            
+        IFunctionStreamWriter AsmWriter(FilePath dst);            
     }   
 }

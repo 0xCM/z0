@@ -28,6 +28,7 @@ namespace Z0
         Method = 4,
     }
 
+
     public interface IIdentifiedTarget : IIdentified, ICustomFormattable, IComparable
     {
         IdentityTargetKind TargetKind  

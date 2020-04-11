@@ -37,11 +37,11 @@ namespace Z0.Asm
                     $"origin = {origin}, block length = {reported}, reported length = {reported}"),
                         caller, file, line);
 
-        public static AppMsg ExractedHost(ApiHostUri host, FilePath dst)
-            => AppMsg.Info($"Emitted extracted {host} operations to {dst}");
+        public static void ExractedHost(this IHostCaptureService service, ApiHostUri host, FilePath dst)
+            => service.Notify(AppMsg.Info($"Emitted extracted {host} operations to {dst}"));
 
-        public static AppMsg HostExtractionFailed(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppMsg.Error($"Error extracting {host} operations", caller, file, line);
+        public static void HostExtractionFailed(this IHostCaptureService service, ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => service.Notify(AppMsg.Error($"Error extracting {host} operations", caller, file, line));
 
         public static AppMsg ParsedExtracts(ApiHostUri host, FilePath dst)
             => AppMsg.Info($"Emitted parsed {host} op extracts to {dst}");

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    public static class Seed
+    public static partial class Seed
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 

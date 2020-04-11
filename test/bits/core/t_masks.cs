@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Seed;
     using static Memories;
@@ -29,7 +28,7 @@ namespace Z0
             var masks = literals.ToArray();            
             foreach(var m in masks)
             {
-                var bits = BitSpan.parse(m.Text);
+                var bits = BitSpans.parse(m.Text);
                 var bitval = bits.Convert<T>();
                 if(gmath.neq(bitval,m.Value))
                     Claim.failwith($"{m.Name}:{BitString.normalize(m.Text)} != {BitString.scalar(m.Value)}");

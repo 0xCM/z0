@@ -33,6 +33,7 @@ namespace Z0.Asm
         ImmEmissionWorkflow(IContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
         {
             Context = context;
+            Sink = sink;
             Formatter = formatter;
             Decoder = decoder;
             ImmSpecializer = context.ImmSpecializer(decoder);

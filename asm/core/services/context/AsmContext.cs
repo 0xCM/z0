@@ -73,7 +73,7 @@ namespace Z0.Asm
         
         AsmWriterFactory WriterFactory {get;}
 
-        public IAsmStreamWriter AsmWriter(FilePath dst)
+        public IFunctionStreamWriter AsmWriter(FilePath dst)
             => WriterFactory(dst, AsmFormatter);
 
         void BlackHole(AppMsg msg) {}

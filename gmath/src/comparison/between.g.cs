@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gmath
     {
@@ -53,6 +54,7 @@ namespace Z0
             else
                 return gfp.between(x,min,max);
         }
+
 
         [MethodImpl(Inline)]
         public static Interval<T> add<T>(Interval<T> lhs, Interval<T> rhs)

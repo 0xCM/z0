@@ -13,7 +13,7 @@ namespace Z0
     
     partial class BitPack
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T pack<T>(Span<bit> src, T t = default)
             where T : unmanaged
                 => pack_u<T>(src);

@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-
-[assembly: PartId(PartId.Math)]
-
-namespace Z0.Parts
+namespace Z0
 {    
-    public sealed class Math : Part<Math>
-    {        
-        
+    using System.Runtime.CompilerServices;
+
+    [ApiHost("api", ApiHostKind.Direct)]
+    public partial class math : IApiHost<math>
+    {
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    
     }
 }
-

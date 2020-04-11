@@ -50,7 +50,7 @@ namespace Z0
             
             Bits.part27x3(src, dst);
 
-            var expect = BitSpan.parse("000001110000011100000111000001110000011100000111000001110000011100000111");
+            var expect = BitSpans.parse("000001110000011100000111000001110000011100000111000001110000011100000111");
             var actual = dst.Data.ToBitSpan();
 
             Notify(expect.Format());

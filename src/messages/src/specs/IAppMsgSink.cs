@@ -6,10 +6,6 @@ namespace Z0
 {    
     public interface IAppMsgSink : IMessageSink<AppMsg>
     {
-        /// <summary>
-        /// Posts a text message to the context queue with optional severity
-        /// </summary>
-        /// <param name="msg">The message to post</param>
         void Notify(string msg, AppMsgKind? kind = null)
             => Notify(AppMsg.NoCaller(msg, kind));
 

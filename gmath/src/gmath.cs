@@ -9,10 +9,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     [ApiHost("api", ApiHostKind.Generic)]
-    public static partial class gmath
+    public partial class gmath : IApiHost<gmath>
     {
-        //const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
           
     }
 
+    public static partial class XTend
+    {
+
+        
+    }
 }
