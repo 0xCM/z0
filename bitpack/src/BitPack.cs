@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    [ApiHost]
+    [ApiHost("api")]
     public partial class BitPack : IApiHost<BitPack>
     {
         
     }
+
 }

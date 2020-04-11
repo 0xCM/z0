@@ -111,7 +111,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)            
             {
                 Random.SpanFill(packed);
-                BitPack.unpack32(packed, unpacked);
+                BitPack.unpack(packed, unpacked);
                 var bitspan = BitSpans.load(unpacked.As<bit>());
                 bitspan_check(packed,bitspan);
             }            

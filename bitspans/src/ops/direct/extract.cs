@@ -13,31 +13,31 @@ namespace Z0
     partial class SpannedBits
     {
         [MethodImpl(Inline), Op]
-        public static byte extract(in BitSpan src, N8 n, int offset)
+        public static byte extract(in BitSpan src, N8 count, int offset)
         {
-            var v0 = Vectors.vload(n256, head(extract(src, offset, bitsize<byte>())));
-            return (byte)BitPack.packlsb8(dvec.vcompact(v0,n128,z8));
+            var v0 = Vectors.vload(n256, head(extract(src, offset, count)));
+            return (byte)BitPack.packlsb(dvec.vcompact(v0,n128,z8), n8);
         }
 
         [MethodImpl(Inline), Op]
-        public static ushort extract(in BitSpan src, N16 n, int offset)
+        public static ushort extract(in BitSpan src, N16 count, int offset)
         {
-            ref readonly var unpacked = ref head(extract(src, offset, bitsize<ushort>())); 
-            return BitPack.pack32(unpacked, n);
+            ref readonly var unpacked = ref head(extract(src, offset, count)); 
+            return BitPack.pack(unpacked, count, w16);
         }
 
         [MethodImpl(Inline), Op]
-        public static uint extract(in BitSpan src, N32 n, int offset)
+        public static uint extract(in BitSpan src, N32 count, int offset)
         {
-            ref readonly var unpacked = ref head(extract(src, offset, bitsize<uint>()));            
-            return BitPack.pack32(unpacked,n);            
+            ref readonly var unpacked = ref head(extract(src, offset, count));            
+            return BitPack.pack(unpacked,count,w32);            
         }
 
         [MethodImpl(Inline), Op]
-        public static ulong extract(in BitSpan src, N64 n, int offset)
+        public static ulong extract(in BitSpan src, N64 count, int offset)
         {
-            ref readonly var unpacked = ref head(extract(src, offset, bitsize<ulong>()));
-            return BitPack.pack32(unpacked,n);
+            ref readonly var unpacked = ref head(extract(src, offset, count));
+            return BitPack.pack(unpacked, count, w64);
         }
 
         [MethodImpl(Inline), Op]

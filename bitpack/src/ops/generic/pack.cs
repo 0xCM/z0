@@ -49,53 +49,5 @@ namespace Z0
             else
                 throw Unsupported.define<T>();            
         }
-
-        /// <summary>
-        /// Packs the leading 8 source bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="n">The number of bits to pack</param>
-        [MethodImpl(Inline)]
-        static byte pack(Span<bit> src, N8 n)
-        {
-            var v0 = vload(n256, head(convert(src, 0, bitsize<byte>())));
-            return (byte)packlsb8(dvec.vcompact(v0,n128,z8));
-        }
-
-        /// <summary>
-        /// Packs the 16 leading source bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="n">The number of bits to pack</param>
-        [MethodImpl(Inline)]
-        static ushort pack(Span<bit> src, N16 n)
-        {
-            ref readonly var unpacked = ref head(convert(src, 0, bitsize<ushort>())); 
-            return pack32(unpacked, n);
-        }
-
-        /// <summary>
-        /// Packs the 32 source bits that follow a specified offset
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="n">The number of bits to pack</param>
-        [MethodImpl(Inline)]
-        static uint pack(Span<bit> src, N32 n)
-        {
-            ref readonly var unpacked = ref head(convert(src, 0, bitsize<uint>()));
-            return pack32(unpacked,n);            
-        }
-
-        /// <summary>
-        /// Packs the 64 leading source bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="n">The number of bits to pack</param>
-        [MethodImpl(Inline)]
-        static ulong pack(Span<bit> src, N64 n)
-        {
-            ref readonly var unpacked = ref head(convert(src, 0, bitsize<ulong>()));
-            return pack32(unpacked,n);
-        }
     }
 }

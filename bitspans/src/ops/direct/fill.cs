@@ -19,7 +19,7 @@ namespace Z0
             ref var tmp = ref Stacks.head<byte>(ref buffer);
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
-            BitPack.unpack8(src, ref tmp); 
+            BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             return ref dst;
         }
@@ -31,7 +31,7 @@ namespace Z0
             ref var tmp = ref Stacks.head<byte>(ref buffer);
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
-            BitPack.unpack8(src, ref tmp); 
+            BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
             return ref dst;
@@ -43,7 +43,7 @@ namespace Z0
             ref var tmp = ref head(dst.Bits.Slice(24,8).As<bit,byte>());
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
-            BitPack.unpack8(src, ref tmp); 
+            BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
             distribute(in tmp, 2, ref target);
@@ -58,13 +58,13 @@ namespace Z0
             ref var tmp = ref head(dst.Bits.Slice(56,8).As<bit,byte>());
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
-            BitPack.unpack8((uint)src, ref tmp); 
+            BitPack.unpack((uint)src, ref tmp); 
             distribute(in tmp, 0, ref target, 0);
             distribute(in tmp, 1, ref target, 1);
             distribute(in tmp, 2, ref target, 2);
             distribute(in tmp, 3, ref target, 3);
             
-            BitPack.unpack8((uint)(src >> 32), ref tmp); 
+            BitPack.unpack((uint)(src >> 32), ref tmp); 
             distribute(in tmp, 0, ref target, 4);
             distribute(in tmp, 1, ref target, 5);
             distribute(in tmp, 2, ref target, 6);

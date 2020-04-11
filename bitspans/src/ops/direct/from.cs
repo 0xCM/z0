@@ -21,7 +21,7 @@ namespace Z0
             var storage = Stacks.alloc(w256);
             ref var target = ref Stacks.head<uint>(ref storage);
 
-            BitPack.unpack8(src, ref tmp); 
+            BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             return BitSpans.load(Stacks.span<uint>(ref storage).As<bit>());
         }
@@ -35,7 +35,7 @@ namespace Z0
             var storage = Stacks.alloc(w512);
             ref var target = ref Stacks.head<uint>(ref storage);            
             
-            BitPack.unpack8(src, ref tmp); 
+            BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
             return BitSpans.load(Stacks.span<uint>(ref storage).As<bit>());
@@ -50,7 +50,7 @@ namespace Z0
             var storage = Stacks.alloc(w1024);
             ref var target = ref Stacks.head<uint>(ref storage);            
             
-            BitPack.unpack8(src, ref tmp); 
+            BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
             distribute(in tmp, 2, ref target);
@@ -67,7 +67,7 @@ namespace Z0
             Span<uint> storage = new uint[64];
             ref var target = ref head(storage);
 
-            BitPack.unpack8(src, ref tmp); 
+            BitPack.unpack(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
             distribute(in tmp, 2, ref target);
