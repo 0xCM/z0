@@ -37,24 +37,24 @@ namespace Z0.Asm
             => typeof(Type);
 
         [Op]
-        public static uint compute_32u(BinaryBitLogicKind op, uint a, uint b)            
+        public static uint compute_32u(BitLogicKind op, uint a, uint b)            
             => op switch {
-                BinaryBitLogicKind.False => zero<uint>(),
-                BinaryBitLogicKind.And => a & b,
+                BitLogicKind.False => zero<uint>(),
+                BitLogicKind.And => a & b,
                 //BinaryBitLogicKind.CNonImpl => math.cnonimpl(a,b),
-                BinaryBitLogicKind.LProject => a,
+                BitLogicKind.LProject => a,
                 //BinaryBitLogicKind.NonImpl => math.nonimpl(a,b),   
-                BinaryBitLogicKind.RProject => b,
-                BinaryBitLogicKind.Xor => a ^ b,
-                BinaryBitLogicKind.Or => a | b,
-                BinaryBitLogicKind.Nor => ~(a | b),
-                BinaryBitLogicKind.Xnor => ~(a ^ b),
-                BinaryBitLogicKind.RNot => ~b,
+                BitLogicKind.RProject => b,
+                BitLogicKind.Xor => a ^ b,
+                BitLogicKind.Or => a | b,
+                BitLogicKind.Nor => ~(a | b),
+                BitLogicKind.Xnor => ~(a ^ b),
+                BitLogicKind.RNot => ~b,
                 //BinaryBitLogicKind.Impl => math.impl(a,b),                
-                BinaryBitLogicKind.LNot => ~a,
+                BitLogicKind.LNot => ~a,
                 //BinaryBitLogicKind.CImpl => math.cimpl(a,b),
-                BinaryBitLogicKind.Nand => ~(a & b),
-                BinaryBitLogicKind.True => Literals.ones<uint>(),
+                BitLogicKind.Nand => ~(a & b),
+                BitLogicKind.True => Literals.ones<uint>(),
                 _ => 0
             };
     }

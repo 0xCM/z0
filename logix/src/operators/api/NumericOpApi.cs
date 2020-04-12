@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     
-    using static TernaryBitLogicKind;
+    using static TernaryLogicFunction;
     using static NumericOps;
     using static OpHelpers;
 
@@ -20,8 +20,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary bitlogic operators
         /// </summary>
-        public static ReadOnlySpan<UnaryBitLogicKind> UnaryBitLogicKinds
-            => Enums.valarray<UnaryBitLogicKind>();
+        public static ReadOnlySpan<UnaryLogicKind> UnaryBitLogicKinds
+            => Enums.valarray<UnaryLogicKind>();
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
@@ -32,8 +32,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators
         /// </summary>
-        public static ReadOnlySpan<TernaryBitLogicKind> TernaryBitLogicKinds
-            => Numeric.range((byte)1,(byte)X5F).Cast<TernaryBitLogicKind>().ToArray();
+        public static ReadOnlySpan<TernaryLogicFunction> TernaryBitLogicKinds
+            => Numeric.range((byte)1,(byte)X5F).Cast<TernaryLogicFunction>().ToArray();
 
         /// <summary>
         /// Advertises the supported unary arithmetic operators
@@ -81,13 +81,13 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static T eval<T>(UnaryBitLogicKind kind, T a)
+        public static T eval<T>(UnaryLogicKind kind, T a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not(a);
-                case UnaryBitLogicKind.Identity: return NumericOps.identity(a);
+                case UnaryLogicKind.Not: return not(a);
+                case UnaryLogicKind.Identity: return NumericOps.identity(a);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -116,7 +116,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static T eval<T>(TernaryBitLogicKind kind, T a, T b, T c)
+        public static T eval<T>(TernaryLogicFunction kind, T a, T b, T c)
             where T : unmanaged
         {
             switch(kind)
@@ -265,13 +265,13 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static UnaryOp<T> lookup<T>(UnaryBitLogicKind kind)
+        public static UnaryOp<T> lookup<T>(UnaryLogicKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not;
-                case UnaryBitLogicKind.Identity: return NumericOps.identity;
+                case UnaryLogicKind.Not: return not;
+                case UnaryLogicKind.Identity: return NumericOps.identity;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -302,7 +302,7 @@ namespace Z0.Logix
             }
         }
 
-        public static TernaryOp<T> lookup<T>(TernaryBitLogicKind kind)
+        public static TernaryOp<T> lookup<T>(TernaryLogicFunction kind)
             where T : unmanaged
         {
             switch(kind)

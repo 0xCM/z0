@@ -214,5 +214,6 @@ namespace Z0
         /// bv(1111) = id(False)
         /// </remarks>
         True = Id.True,
+ 
     }      
 }

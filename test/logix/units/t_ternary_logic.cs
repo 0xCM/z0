@@ -13,7 +13,7 @@ namespace Z0.Logix
     {
         protected override int RepCount => Pow2.T08;
         
-        ReadOnlySpan<TernaryBitLogicKind> TernaryKinds
+        ReadOnlySpan<TernaryLogicFunction> TernaryKinds
             => NumericOpApi.TernaryBitLogicKinds;
         
         public void op_identities()
@@ -114,7 +114,7 @@ namespace Z0.Logix
 
         }
 
-        void check_op_identity<T>(TernaryBitLogicKind id)
+        void check_op_identity<T>(TernaryLogicFunction id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -128,7 +128,7 @@ namespace Z0.Logix
         }
 
 
-        void check_op_equivalence<T>(TernaryBitLogicKind kind)
+        void check_op_equivalence<T>(TernaryLogicFunction kind)
             where T: unmanaged
         {
             var width = bitsize<T>();

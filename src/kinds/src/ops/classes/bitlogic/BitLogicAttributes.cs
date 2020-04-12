@@ -7,7 +7,7 @@ namespace Z0
     using System;
     
     using A = OpKindAttribute;    
-    using K = BinaryBitLogicKind;
+    using K = BitLogicKind;
 
     public sealed class AndAttribute : A { public AndAttribute() : base(K.And) {} }
 
@@ -40,4 +40,9 @@ namespace Z0
     public sealed class LNotAttribute : A { public LNotAttribute() : base(K.LNot) {} }
 
     public sealed class FalseAttribute : A { public FalseAttribute() : base(K.False) {} }
+
+    public sealed class SelectAttribute : A { public SelectAttribute() : base(K.Select) {} } 
+
+    public sealed class NotAttribute : A { public NotAttribute() : base(K.Not) {} }
+
 }

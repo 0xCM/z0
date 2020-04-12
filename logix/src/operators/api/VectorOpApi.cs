@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     using static Seed;    
     using static Memories;
-    using static TernaryBitLogicKind;
+    using static TernaryLogicFunction;
     using static OpHelpers;
     using static VectorizedOps;
 
@@ -25,7 +25,7 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary bitlogic operators
         /// </summary>
-        public static ReadOnlySpan<UnaryBitLogicKind> UnaryBitLogicKinds
+        public static ReadOnlySpan<UnaryLogicKind> UnaryBitLogicKinds
             => NumericOpApi.UnaryBitLogicKinds;
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators
         /// </summary>
-        public static ReadOnlySpan<TernaryBitLogicKind> TernaryBitLogicKinds
-            => Numeric.range((byte)1,(byte)X18).Cast<TernaryBitLogicKind>().ToArray();
+        public static ReadOnlySpan<TernaryLogicFunction> TernaryBitLogicKinds
+            => Numeric.range((byte)1,(byte)X18).Cast<TernaryLogicFunction>().ToArray();
 
         /// <summary>
         /// Specifies the supported comparison operators
@@ -53,15 +53,15 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector128<T> eval<T>(UnaryBitLogicKind kind, Vector128<T> a)
+        public static Vector128<T> eval<T>(UnaryLogicKind kind, Vector128<T> a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not(a);
-                case UnaryBitLogicKind.Identity: return identity(a);
-                case UnaryBitLogicKind.False: return @false(a);
-                case UnaryBitLogicKind.True: return @true(a);
+                case UnaryLogicKind.Not: return not(a);
+                case UnaryLogicKind.Identity: return identity(a);
+                case UnaryLogicKind.False: return @false(a);
+                case UnaryLogicKind.True: return @true(a);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -73,15 +73,15 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> eval<T>(UnaryBitLogicKind kind, Vector256<T> a)
+        public static Vector256<T> eval<T>(UnaryLogicKind kind, Vector256<T> a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not(a);
-                case UnaryBitLogicKind.Identity: return identity(a);
-                case UnaryBitLogicKind.False: return @false(a);
-                case UnaryBitLogicKind.True: return @true(a);
+                case UnaryLogicKind.Not: return not(a);
+                case UnaryLogicKind.Identity: return identity(a);
+                case UnaryLogicKind.False: return @false(a);
+                case UnaryLogicKind.True: return @true(a);
                 default: throw new NotSupportedException(sig<T>(kind));
              }
         }
@@ -201,7 +201,7 @@ namespace Z0.Logix
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector128<T> eval<T>(TernaryBitLogicKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
+        public static Vector128<T> eval<T>(TernaryLogicFunction kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
                 => lookup<T>(n128,kind)(x,y,z);
 
@@ -214,7 +214,7 @@ namespace Z0.Logix
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> eval<T>(TernaryBitLogicKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
+        public static Vector256<T> eval<T>(TernaryLogicFunction kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => lookup<T>(n256,kind)(x,y,z);
 
@@ -290,13 +290,13 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static UnaryOp<Vector128<T>> lookup<T>(N128 w, UnaryBitLogicKind kind)
+        public static UnaryOp<Vector128<T>> lookup<T>(N128 w, UnaryLogicKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not;
-                case UnaryBitLogicKind.Identity: return identity;
+                case UnaryLogicKind.Not: return not;
+                case UnaryLogicKind.Identity: return identity;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -307,13 +307,13 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static UnaryOp<Vector256<T>> lookup<T>(N256 w, UnaryBitLogicKind kind)
+        public static UnaryOp<Vector256<T>> lookup<T>(N256 w, UnaryLogicKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not;
-                case UnaryBitLogicKind.Identity: return identity;
+                case UnaryLogicKind.Not: return not;
+                case UnaryLogicKind.Identity: return identity;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -449,7 +449,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static TernaryOp<Vector128<T>> lookup<T>(N128 w, TernaryBitLogicKind kind)
+        public static TernaryOp<Vector128<T>> lookup<T>(N128 w, TernaryLogicFunction kind)
             where T : unmanaged
         {
             switch(kind)
@@ -491,7 +491,7 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static TernaryOp<Vector256<T>> lookup<T>(N256 w, TernaryBitLogicKind kind)
+        public static TernaryOp<Vector256<T>> lookup<T>(N256 w, TernaryLogicFunction kind)
             where T : unmanaged
         {
             switch(kind)

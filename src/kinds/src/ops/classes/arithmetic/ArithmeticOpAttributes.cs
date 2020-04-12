@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
         
-    using K = BinaryArithmeticKind;    
+    using K = ArithmeticOpKind;    
     using A = OpKindAttribute;
 
     public sealed class AddAttribute : A { public AddAttribute() : base(K.Add) {} }
@@ -44,4 +44,20 @@ namespace Z0
     public sealed class ClMulAttribute : A { public ClMulAttribute() : base(K.ClMul) {} }
 
     public sealed class DotAttribute : A { public DotAttribute() : base(K.Dot) {} }
+
+    public sealed class IncAttribute : A { public IncAttribute() : base(K.Inc) {} }
+
+    public sealed class DecAttribute : A { public DecAttribute() : base(K.Dec) {} }
+
+    public sealed class NegateAttribute : A { public NegateAttribute() : base(K.Negate) {} }
+
+    public sealed class AbsAttribute : A { public AbsAttribute() : base(K.Abs) {} }
+
+    public sealed class SquareAttribute : A { public SquareAttribute() : base(K.Square) {} }
+
+    public sealed class SqrtAttribute : A { public SqrtAttribute() : base(K.Sqrt) {} }
+
+    public sealed class FmaAttribute : A { public FmaAttribute() : base(K.Fma) {} }
+
+    public sealed class ModMulAttribute : A { public ModMulAttribute() : base(K.ModMul) {} }
 }

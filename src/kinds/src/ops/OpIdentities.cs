@@ -7,12 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static OpKindId;
-
-    using A = OpKindAttribute;
-    
-    public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(Identity) {} }
-
     public static class OpIdentities
     {
         public static string name(MethodInfo m)

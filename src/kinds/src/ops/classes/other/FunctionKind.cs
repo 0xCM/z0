@@ -8,7 +8,8 @@ namespace Z0
     
     using Id = OpKindId;
 
-    public enum BinaryFunctionKind : ulong
+
+    public enum FunctionKind : ulong
     {
         None = 0,
 
@@ -16,6 +17,8 @@ namespace Z0
 
         Broadcast = Id.Broadcast,
 
-    }
+        Reverse = Id.Reverse,
 
+        Identity = Id.Identity,
+    }
 }

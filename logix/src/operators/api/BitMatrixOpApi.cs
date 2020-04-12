@@ -17,38 +17,27 @@ namespace Z0.Logix
     //[ApiHost("bitmatrix.api",ApiHostKind.Generic)]
     public static class BitMatrixOpApi
     {
-        /// <summary>
-        /// Advertises the supported unary bitwise operators
-        /// </summary>
-        public static ReadOnlySpan<UnaryBitLogicKind> UnaryBitwiseKinds
-            => array(UnaryBitLogicKind.Not, UnaryBitLogicKind.Identity);
-
-        /// <summary>
-        /// Advertises the supported binary bitwise operators
-        /// </summary>
-        public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
-            => NumericOpApi.BinaryBitLogicKinds;
 
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A)
+        public static BitMatrix<T> eval<T>(UnaryLogicKind kind, BitMatrix<T> A)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not(A);
-                case UnaryBitLogicKind.Identity: return identity(A);
+                case UnaryLogicKind.Not: return not(A);
+                case UnaryLogicKind.Identity: return identity(A);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A, ref BitMatrix<T> Z)
+        public static BitMatrix<T> eval<T>(UnaryLogicKind kind, BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not(A, ref Z);
-                case UnaryBitLogicKind.Identity: return identity(A, ref Z);
+                case UnaryLogicKind.Not: return not(A, ref Z);
+                case UnaryLogicKind.Identity: return identity(A, ref Z);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

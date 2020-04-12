@@ -14,7 +14,7 @@ namespace Z0.Logix
     internal static class OpHelpers
     {
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(UnaryBitLogicKind kind)
+        public static string sig(UnaryLogicKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
@@ -22,11 +22,11 @@ namespace Z0.Logix
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(TernaryBitLogicKind kind)
+        public static string sig(TernaryLogicFunction kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(UnaryBitLogicKind kind)
+        public static string sig<T>(UnaryLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
@@ -36,7 +36,7 @@ namespace Z0.Logix
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(TernaryBitLogicKind kind)
+        public static string sig<T>(TernaryLogicFunction kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 

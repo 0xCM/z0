@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Identifies binary arithmetic operators classes
     /// </summary>
-    public enum BinaryArithmeticKind : ulong
+    public enum ArithmeticOpKind : ulong
     {
         /// <summary>
         /// The empty identity
@@ -53,5 +53,22 @@ namespace Z0
         ClMul = Id.ClMul,
 
         Dot = Id.Dot,
+
+        Inc = Id.Inc,
+
+        Dec = Id.Dec,
+
+        Negate = Id.Negate,
+
+        Abs = Id.Abs,
+
+        Square = Id.Square,
+
+        Sqrt = Id.Sqrt,        
+
+
+        Fma = Id.Fma,
+
+        ModMul = Id.ModMul
     }    
 }

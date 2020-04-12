@@ -9,7 +9,7 @@ namespace Z0.Logix
         
     using static LogicOps;
     using static OpHelpers;
-    using static TernaryBitLogicKind;
+    using static TernaryLogicFunction;
     using LO = LogicOps;
 
     public static class LogicOpApi
@@ -17,8 +17,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary opeators
         /// </summary>
-        public static ReadOnlySpan<UnaryBitLogicKind> UnaryOpKinds
-            => Enums.valarray<UnaryBitLogicKind>();
+        public static ReadOnlySpan<UnaryLogicKind> UnaryOpKinds
+            => Enums.valarray<UnaryLogicKind>();
 
         /// <summary>
         /// Advertises the supported binary opeators
@@ -29,8 +29,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static ReadOnlySpan<TernaryBitLogicKind> TernaryOpKinds
-            => Numeric.range((byte)1,(byte)X5F).Cast<TernaryBitLogicKind>().ToArray();
+        public static ReadOnlySpan<TernaryLogicFunction> TernaryOpKinds
+            => Numeric.range((byte)1,(byte)X5F).Cast<TernaryLogicFunction>().ToArray();
 
         /// <summary>
         /// Evaluates a unary operator directly without lookup/delegate indirection
@@ -38,14 +38,14 @@ namespace Z0.Logix
         /// <param name="op">The operator classifier</param>
         /// <param name="a">The operand</param>        
         [Op]
-        public static bit eval(UnaryBitLogicKind kind, bit a)
+        public static bit eval(UnaryLogicKind kind, bit a)
         {        
             switch(kind)
             {
-                case UnaryBitLogicKind.False: return bit.Off;
-                case UnaryBitLogicKind.Not: return bit.not(a);
-                case UnaryBitLogicKind.Identity: return a;
-                case UnaryBitLogicKind.True: return bit.On;
+                case UnaryLogicKind.False: return bit.Off;
+                case UnaryLogicKind.Not: return bit.not(a);
+                case UnaryLogicKind.Identity: return a;
+                case UnaryLogicKind.True: return bit.On;
                 default: throw new NotSupportedException(sig(kind));
             }
         }    
@@ -95,14 +95,14 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static UnaryOp<bit> lookup(UnaryBitLogicKind kind)
+        public static UnaryOp<bit> lookup(UnaryLogicKind kind)
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.False: return @false;
-                case UnaryBitLogicKind.Not: return LO.not;
-                case UnaryBitLogicKind.Identity: return identity;
-                case UnaryBitLogicKind.True: return @true;
+                case UnaryLogicKind.False: return @false;
+                case UnaryLogicKind.Not: return LO.not;
+                case UnaryLogicKind.Identity: return identity;
+                case UnaryLogicKind.True: return @true;
                 default: throw new NotSupportedException(sig(kind));
             }
         }
@@ -143,7 +143,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static bit eval(TernaryBitLogicKind kind, bit a, bit b, bit c)
+        public static bit eval(TernaryLogicFunction kind, bit a, bit b, bit c)
         {
             switch(kind)
             {
@@ -255,7 +255,7 @@ namespace Z0.Logix
         /// Returns a kind-indentified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static TernaryOp<bit> lookup(TernaryBitLogicKind kind)
+        public static TernaryOp<bit> lookup(TernaryLogicFunction kind)
         {
             switch(kind)
             {

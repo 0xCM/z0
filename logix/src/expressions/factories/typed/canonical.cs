@@ -128,7 +128,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static UnaryBitwiseOpExpr<T> not<T>(IExpr<T> operand)
             where T : unmanaged
-                => unary(UnaryBitLogicKind.Not, operand);
+                => unary(UnaryLogicKind.Not, operand);
 
         /// <summary>
         /// Defines a a bitwise complement expression with a literal operand

@@ -15,7 +15,7 @@ namespace Z0.Logix
         public new ILogicExpr<T> Arg{get;}
 
         [MethodImpl(Inline)]
-        internal UnaryLogicOpExpr(UnaryBitLogicKind op, ILogicExpr<T> arg)
+        internal UnaryLogicOpExpr(UnaryLogicKind op, ILogicExpr<T> arg)
             : base(op,arg)
                 => this.Arg = arg;
     }
