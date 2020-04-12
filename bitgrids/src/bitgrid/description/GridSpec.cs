@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     /// <summary>
     /// Characterizes the memory layout of a BitMatrix

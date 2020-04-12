@@ -14,6 +14,10 @@ namespace Z0.Asm.Check
         public readonly ref struct BinaryOpPackage<T>
             where T : unmanaged
         {            
+            public readonly ApiEvalContext Context;
+
+            public readonly BinaryEval<T> Content;
+
             [MethodImpl(Inline)]
             internal BinaryOpPackage(in ApiEvalContext context, in BinaryEval<T> content)
             {
@@ -21,9 +25,6 @@ namespace Z0.Asm.Check
                 this.Content = content;
             }
 
-            public readonly ApiEvalContext Context;
-
-            public readonly BinaryEval<T> Content;
 
             public Pairs<T> Src 
             {

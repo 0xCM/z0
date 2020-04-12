@@ -25,6 +25,8 @@ public enum PartId : ulong
         
     BitSuite = 500, BitCore = 80, BitFields = 90, BitVectors = 100, VBits = 110, BitSpan = 170, BitString = 230, BitGrids = 700, BitPack = 710,
 
+    BitSvc = BitSuite | Svc,
+    
     BitTest = BitSuite | Test,
     
     Logix = 120, LogixTest = Logix | Test, 
