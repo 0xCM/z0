@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="w">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector128<T> vbroadcast<T>(W128 w, T src)
             where T : unmanaged
         {
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="w">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector256<T> vbroadcast<T>(W256 w, T src)
             where T : unmanaged
         {
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="w">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static Vector512<T> vbroadcast<T>(W512 w, T src)
             where T : unmanaged
                 => (vbroadcast(w256,src), vbroadcast(w256,src));
@@ -125,7 +125,7 @@ namespace Z0
             else if(typeof(T) == typeof(int))
                 return generic<T>(vbroadcast(w256, int32(src)));
             else 
-                return  generic<T>(broadcast(w256, int64(src)));
+                return  generic<T>(vbroadcast(w256, int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -137,7 +137,7 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(vbroadcast(w256, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(broadcast(w256, uint32(src)));
+                return generic<T>(vbroadcast(w256, uint32(src)));
             else 
                 return generic<T>(vbroadcast(w256, uint64(src)));
         }

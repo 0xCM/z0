@@ -8,7 +8,7 @@ namespace Z0
     using static Vectors;
     using static Typed;
 
-    using R = OpClasses;
+    using K = Kinds;
     
     public readonly struct SVFDecomposer : ISVFDecomposer
     {
@@ -31,12 +31,12 @@ namespace Z0
         public void CheckUnaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ISVUnaryOp128DApi<T>
-                => Typed<T>().Validate(f, R.UnaryOp, w);
+                => Typed<T>().Validate(f, K.UnaryOp, w);
 
         public void CheckUnaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ISVUnaryOp256DApi<T>
-                => Typed<T>().Validate(f, R.UnaryOp, w);
+                => Typed<T>().Validate(f, K.UnaryOp, w);
 
         public void CheckShiftOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
@@ -51,12 +51,12 @@ namespace Z0
         public void CheckBinaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ISVBinaryOp128DApi<T>
-                => Typed<T>().Validate(f, R.BinaryOp, w);
+                => Typed<T>().Validate(f, K.BinaryOp, w);
 
         public void CheckBinaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ISVBinaryOp256DApi<T>
-                => Typed<T>().Validate(f, R.BinaryOp, w);
+                => Typed<T>().Validate(f, K.BinaryOp, w);
 
         public void CheckTernaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged

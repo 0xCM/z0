@@ -12,6 +12,7 @@ namespace Z0
 
     using static Seed;
 
+
     public readonly struct ApiQuery : IService<IApiCatalog>
     {
         public IApiCatalog Context {get;}
@@ -28,18 +29,18 @@ namespace Z0
 
         public IEnumerable<MethodInfo> Generic
             => from host in Context.GenericApiHosts
-                from m in host.DeclaredMethods.OpenGeneric()
+                from m in host.HostedMethods.OpenGeneric()
                 select m;
 
         public IEnumerable<MethodInfo> Direct
             => from host in Context.DirectApiHosts
-                from m in host.DeclaredMethods.NonGeneric()
+                from m in host.HostedMethods.NonGeneric()
                 select m;
 
         public IEnumerable<MethodInfo> Vectorized<T>(W256 w, bool generic)
             where T : unmanaged
                 => from host in (generic ? Context.GenericApiHosts : Context.DirectApiHosts)
-                    from m in host.DeclaredMethods.VectorizedDirect<T>(w)
+                    from m in host.HostedMethods.VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
                     select m;
 
@@ -90,7 +91,7 @@ namespace Z0
         public IEnumerable<MethodInfo> Vectorized<T>(W128 w, bool generic)
             where T : unmanaged
                 => from host in (generic ? Context.GenericApiHosts : Context.DirectApiHosts)
-                    from m in host.DeclaredMethods.VectorizedDirect<T>(w)                    
+                    from m in host.HostedMethods.VectorizedDirect<T>(w)                    
                     where m.IsGenericMethod == generic
                     select m;
     }

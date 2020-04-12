@@ -190,6 +190,10 @@ namespace Z0
 
         Fma,
 
-        ModMul
+        ModMul,
+
+        Concat,
+
+        Broadcast,
     }    
 }

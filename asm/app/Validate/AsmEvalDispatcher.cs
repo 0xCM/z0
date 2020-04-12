@@ -8,7 +8,7 @@ namespace Z0.Asm.Check
     using System.Linq;
 
     using C = OpClass;
-    using R = OpClasses;
+    using K = Kinds;
     
     using static Core;
 
@@ -213,7 +213,7 @@ namespace Z0.Asm.Check
         bit Dispatch(in BufferSeq buffers, in Pairs<byte> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).Eval(api, R.BinaryOp, src);
+            var dst = Evaluator(buffers).Eval(api, K.BinaryOp, src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -233,7 +233,7 @@ namespace Z0.Asm.Check
         bit Dispatch(in BufferSeq buffers, in Pairs<Fixed8> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).EvalFixed(api, R.BinaryOp, src);
+            var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -251,7 +251,7 @@ namespace Z0.Asm.Check
         {        
             
             var evaluator = Context.Evaluator0(buffers, k);
-            var dst = evaluator.Eval(api, R.BinaryOp, src);
+            var dst = evaluator.Eval(api, K.BinaryOp, src);
             Analyze(src, dst, api);
             return dst;
         }

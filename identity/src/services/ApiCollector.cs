@@ -50,6 +50,6 @@ namespace Z0
             => src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();
 
         static IEnumerable<MethodInfo> Tagged(IApiHost src)
-            => src.DeclaredMethods.Tagged<OpAttribute>();
+            => src.HostedMethods.Tagged<OpAttribute>();
     }
 }

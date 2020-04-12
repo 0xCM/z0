@@ -17,7 +17,7 @@ namespace Z0
     using static Seed; 
     using static Memories;
     
-    public static partial class dvec
+    partial class dvec
     {                
         /// <summary>
         /// Computes the material nomimplication, ~x & y for vectors x and y

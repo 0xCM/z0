@@ -94,7 +94,7 @@ namespace Z0
         static Vector256<uint> Vector256u32 
         {
             [MethodImpl(Inline), Rotr]
-            get => Vectors.vbroadcast(n256,32u);
+            get => Vectors.vbroadcast<uint>(n256, 32u);
         }
 
         static Vector128<ulong> Vector128u64 

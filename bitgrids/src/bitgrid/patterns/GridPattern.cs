@@ -12,7 +12,7 @@ namespace Z0
     using static gvec;
     using static BitGrid;
 
-    public partial class GridPatterns : IApiHost<GridPatterns>
+    partial class GridPatterns
     {
         [MethodImpl(Inline), Op, Closures(Numeric8x16u)]
         public static BitGrid16<N4,N4,T> identity<T>(N16 w, N4 m, N4 n, T t = default)
@@ -100,6 +100,5 @@ namespace Z0
             var pattern = BitMask.lo(sep, z64) << sep;                        
             return generic<T>(Vectors.vbroadcast(w,gbits.replicate(pattern)));
         }
-
     }
 }

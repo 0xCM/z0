@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="cell">The data to replicate across all grid cells</param>
         /// <param name="dst">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Broadcast, NumericClosures(UnsignedInts)]
         public static ref readonly BitGrid<T> broadcast<T>(T cell, in BitGrid<T> dst)            
             where T : unmanaged
         {

@@ -191,7 +191,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector256<uint> vlt(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = Vectors.vbroadcast(n256, SignMask32);
+            var mask = Vectors.vbroadcast<uint>(n256, SignMask32);
             return v32u(CompareLessThan(v32i(vxor(x,mask)),v32i(vxor(y,mask))));
         }
 

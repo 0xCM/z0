@@ -1,0 +1,36 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Reflection;
+    
+    partial class XTend
+    {
+        /// <summary>
+        /// Determines whether a method is a binary operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsBinaryOperator(this MethodInfo m)
+            => m.IsHomogenous() && m.IsBinaryFunction();
+
+        /// <summary>
+        /// Determines whether a method defines a binary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsBinaryFunction(this MethodInfo m)
+            => m.IsFunction() && m.HasArityValue(2);
+
+        /// <summary>
+        /// Selects binary operators from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> BinaryOperators(this IEnumerable<MethodInfo> src)
+            => src.Where(x => x.IsBinaryOperator());
+    }
+}

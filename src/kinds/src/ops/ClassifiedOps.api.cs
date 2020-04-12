@@ -12,15 +12,6 @@ namespace Z0
     using AC = ArityClass;
     using OC = OperatorClass;
 
-    public static partial class OpClass
-    {
-    
-    }
-
-    public static partial class OpClasses
-    {
-    }
-
     public static class ClassifiedOps
     {
         /// <summary>

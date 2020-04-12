@@ -18,10 +18,21 @@ namespace Z0
         /// <param name="bitpos">The linear bit position</param>
         /// <param name="src">A reference to grid storage</param>
         /// <typeparam name="T">The storage segment type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref T src, int bitpos)
             where T : unmanaged
                 => ref seek(ref src, bitpos / bitsize<T>()); 
+
+        /// <summary>
+        /// Reads/manipulates a cell identified by a linear bit position
+        /// </summary>
+        /// <param name="bitpos">The linear bit position</param>
+        /// <param name="src">A reference to grid storage</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref T cell<T>(in BitGrid<T> src, int bitpos)
+            where T : unmanaged
+                => ref seek(ref src.Head, bitpos / bitsize<T>()); 
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
@@ -36,17 +47,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => ref seek(ref src.Head, bitpos / bitsize<T>()); 
-
-        /// <summary>
-        /// Reads/manipulates a cell identified by a linear bit position
-        /// </summary>
-        /// <param name="bitpos">The linear bit position</param>
-        /// <param name="src">A reference to grid storage</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static ref T cell<T>(in BitGrid<T> src, int bitpos)
-            where T : unmanaged
                 => ref seek(ref src.Head, bitpos / bitsize<T>()); 
  
         [MethodImpl(Inline)]

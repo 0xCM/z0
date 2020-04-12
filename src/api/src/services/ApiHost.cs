@@ -60,7 +60,7 @@ namespace Z0
             this.Identifier = UriPath.Format();
         }
                                   
-        public IEnumerable<MethodInfo> DeclaredMethods
+        public IEnumerable<MethodInfo> HostedMethods
             => HostingType.DeclaredMethods(false);
 
         public bool IsEmtpy 

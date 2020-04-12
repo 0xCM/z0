@@ -46,8 +46,8 @@ namespace Z0
         {
             var w = K.n256;
             var altOdd = (uint)BitMasks.Msb16x8x1 << 16; 
-            var altEven = (uint)BitMasks.Msb16x8x1; 
-            dvec.vcover(v16u(Vectors.vbroadcast(w,altOdd)), out Vector256<byte> spec);
+            var altEven = (uint)BitMasks.Msb16x8x1;
+            dvec.vcover(v16u(Vectors.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
             var x = gvec.vinc(w,K.z16);
             var y = gvec.vdec(w,u16max);
             var z = gvec.vblend(x,y,spec);

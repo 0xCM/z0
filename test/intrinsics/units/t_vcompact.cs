@@ -64,7 +64,7 @@ namespace Z0
             var w = n256;
             var cellmax = u16max;
 
-            var vsmax = vbroadcast(w,(uint)cellmax);
+            var vsmax = vbroadcast<uint>(w, (uint)cellmax);
             var vtmax = vbroadcast(w,cellmax);
             
             var x = dvec.vsub(vsmax, gvec.vinc(w, 0u));

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
   
-    public static partial class VectorKinds
+    partial class Kinds
     {
         /// <summary>
         /// Specifies the nonparametric v128 kind

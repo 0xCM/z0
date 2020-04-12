@@ -12,11 +12,10 @@ namespace Z0
     using static Seed;
 
     [ApiHost("api")]
-    public static partial class Vectors
+    public partial class Vectors : IApiHost<Vectors>
     {
         
     }
-
 
     [ApiHost]
     public static partial class Store
@@ -24,6 +23,11 @@ namespace Z0
 
     }
 
+    public static partial class SBlock
+    {
+
+    }
+    
     public static partial class XTend
     {
         

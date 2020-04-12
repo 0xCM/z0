@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class BlockedKinds
+    partial class BlockedTypeKinds
     {
         /// <summary>
         /// Determines the segment kind classifier for a blocked type
@@ -16,6 +16,5 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static NumericKind segment(Type t)
             => t.IsBlocked() ?  t.SuppliedTypeArgs().First().NumericKind() : NumericKind.None;
-
     }
 }

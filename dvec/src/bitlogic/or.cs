@@ -15,7 +15,7 @@ namespace Z0
 
     using static Seed; 
 
-    public static partial class dvec
+    partial class dvec
     {        
         /// <summary>
         ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128

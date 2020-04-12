@@ -15,7 +15,7 @@ namespace Z0
      
     using static Seed;
 
-    public static partial class dvec
+    partial class dvec
     {                
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y

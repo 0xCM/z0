@@ -120,6 +120,9 @@ namespace Z0
             }
         }
 
+        IAppPaths Paths => Context.Paths;
+
+
         const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
         
         const int ExecutedPad = (int)((ulong)TestCaseField.Executed >> 32);
@@ -384,6 +387,10 @@ namespace Z0
             return GetLogger(LogTarget.Define(LogArea.Bench)).Write(records, FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
+        FilePath LogTestResults2<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
+            where R : IRecord
+                => LogTestResults(Paths.TestResultFolder, basename, records, mode, header, delimiter);
+
         void EmitLogs()
         {
             var basename = AppName;
@@ -401,7 +408,7 @@ namespace Z0
                 LogTestResults(FolderName.Define("history"), basename, results, LogWriteMode.Create);
                 
                 // Overwrite the current test log file for the app
-                LogTestResults(basename, results, LogWriteMode.Overwrite);
+                LogTestResults2(basename, results, LogWriteMode.Overwrite);
             }
         }
 

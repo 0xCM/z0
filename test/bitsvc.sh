@@ -1,4 +1,6 @@
+export ProjectId=bitsvc
 Cmd=$ZDev/test/run-test.sh
 
-export ProjectId=bitsvc
 bash $Cmd
+
+

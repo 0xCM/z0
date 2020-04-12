@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public static partial class SBlock
+    partial class SBlock
     {
         [MethodImpl(Inline)]
         public static bit all<F,T>(in Block128<T> lhs, F f)
@@ -145,7 +145,6 @@ namespace Z0
             for(var block = 0; block < blocks; block++)
                 f.Invoke(src.LoadVector(block)).StoreTo(dst, block);
             return ref dst;
-        }
-         
+        }         
     }
 }

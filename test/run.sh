@@ -1,9 +1,10 @@
 Cmd=$ZDev/test/run-test.sh
 
+export ProjectId=bits
+bash $Cmd
+
+export ProjectId=bitsvc
+bash $Cmd
+
 export ProjectId=core
 bash $Cmd
-
-export ProjectId=nats
-bash $Cmd
-
-bash $ZDev/test/dynamic.sh

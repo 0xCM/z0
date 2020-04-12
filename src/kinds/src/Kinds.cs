@@ -7,14 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static class Kinds
+    public static partial class Kinds
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
-        [MethodImpl(Inline)]
-        internal static int bitsize<T>()            
-            where T : unmanaged
-                => Unsafe.SizeOf<T>()*8;
+
+    }
+
+    public static partial class OpClass
+    {
+    
+    }
+
+    public static partial class NumericType
+    {
+       
+    }
+
+    public static partial class BlockedTypeKinds
+    {
+    
     }
 
     public static partial class XTend
@@ -22,9 +33,5 @@ namespace Z0
 
 
     }
-    public static partial class XKind
-    {
-
-
-    }
+    
 }

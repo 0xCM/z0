@@ -24,7 +24,7 @@ namespace Z0
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
-        BlockedKind ITypedLiteral<BlockedKind>.Class => BlockedKinds.kind<W,T>();
+        BlockedKind ITypedLiteral<BlockedKind>.Class => BlockedTypeKinds.kind<W,T>();
 
         TypeWidth BlockWidth => default(W).TypeWidth;        
     }

@@ -16,7 +16,7 @@ namespace Z0
     using static Seed; 
     using static Memories;
     
-    public static partial class dvec
+    partial class dvec
     {                
         /// <summary>
         /// Computes the material implication, x | ~y for vectors x and y

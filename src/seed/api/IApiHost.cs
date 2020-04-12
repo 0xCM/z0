@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Reflection;
 
@@ -22,7 +23,15 @@ namespace Z0
 
         PartId Owner => HostingType.Assembly.Id();
     
-        IEnumerable<MethodInfo> DeclaredMethods => HostingType.DeclaredMethods(false);
+        IEnumerable<MethodInfo> HostedMethods => HostingType.DeclaredMethods(false);
+
+        IEnumerable<MethodInfo> HostedKind<K>(K k = default)
+            where K : unmanaged, Enum
+                => from m in HostedMethods.Tagged(typeof(OpKindAttribute))
+                let a = m.Tag<OpKindAttribute>().Require()
+                where a.KindId.ToString() == k.ToString()
+                    select m;
+
     }
 
     public interface IApiHost<H> : IApiHost

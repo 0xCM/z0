@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static Seed;
-    using D = Vectors;
     
     partial class Vectors
     {
@@ -21,7 +19,7 @@ namespace Z0
         /// <param name="lo">The lo part</param>
         /// <param name="hi">The hi part</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vconcat<T>(Vector128<T> lo, Vector128<T> hi)
             where T : unmanaged
         {

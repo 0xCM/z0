@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Collections.Generic;
     
     using static Seed;
-    using static VectorKinds;
+    using static Kinds;
 
     public class t_dynamic : t_vinx<t_dynamic>
     {   

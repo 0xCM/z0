@@ -16,53 +16,55 @@ namespace Z0
         /// <summary>
         /// The application-wide root output directory
         /// </summary>
-        FolderPath GlobalRootDir {get;}
+        FolderPath Root {get;}
 
         /// <summary>
         /// The system-wide root data directory
         /// </summary>
-        FolderPath DataRootDir {get;}
+        FolderPath DataRoot {get;}
 
         /// <summary>
         /// The directory into wich error console streams are deposited
         /// </summary>
-        FolderPath StandardOutDir {get;}
+        FolderPath StandardOut {get;}
 
         /// <summary>
         /// The directory into standard  console streams are deposited
         /// </summary>
-        FolderPath StandardErrorDir {get;}
+        FolderPath StandardError {get;}
 
         /// <summary>
         /// The directory into which structured data describing test results are deposited
         /// </summary>
-        FolderPath TestResultDir {get;}
+        FolderPath TestResults {get;}
 
         /// <summary>
         /// The directory into which structured data describing test results are deposited
         /// </summary>
-        FolderPath BenchResultDir {get;}
+        FolderPath BenchResults {get;}
 
         FilePath StandardOutPath
-            => StandardOutDir + FileName.Define($"{AppId.Format()}.stdout.log");
+            => StandardOut + FileName.Define($"{AppId.Format()}.stdout.log");
 
         FilePath StandardErrorPath
-            => StandardOutDir + FileName.Define($"{AppId.Format()}.stderr.log");
+            => StandardOut + FileName.Define($"{AppId.Format()}.stderr.log");
+
+        FolderName TestResultFolder => FolderName.Define("results");
 
         FilePath TestResultPath
-            => TestResultDir + FileName.Define($"{AppId.Format()}", FileExtensions.Csv);
+            => TestResults + FileName.Define($"{AppId.Format()}", FileExtensions.Csv);
 
         FilePath BenchResultPath
-            => BenchResultDir + FileName.Define($"{AppId.Format()}", FileExtensions.Csv);
+            => BenchResults + FileName.Define($"{AppId.Format()}", FileExtensions.Csv);
 
         FolderPath TestDataDir(Type test)
-            => StandardOutDir +  FolderName.Define((test ?? GetType()).Name);
+            => StandardOut +  FolderName.Define((test ?? GetType()).Name);
 
         FolderPath TestDataDir<T>()
             => TestDataDir(typeof(T));
         
         FolderPath ComponentDataDir(PartId owner, string subfolder = null)
-            => (DataRootDir + FolderName.Define(owner.Format())) + FolderName.Define(subfolder ?? string.Empty);
+            => (DataRoot + FolderName.Define(owner.Format())) + FolderName.Define(subfolder ?? string.Empty);
     }
 
     public interface IAppPaths<T> : IAppPaths,  IFormattable<T>

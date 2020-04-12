@@ -20,16 +20,16 @@ namespace Z0
             => VMethods.Search;
 
         public void unary_shift_v128_embed_imm8()
-            => iter(VImmTestCases.V128UnaryShifts, m =>  check_unary_shift(m,n128));
+            => iter(VImmTestCases.V128UnaryShifts, m =>  check_unary_shift(m, w128));
 
         public void unary_shift_v256_embed_imm8()
-            => iter(VImmTestCases.V256UnaryShifts, m => check_unary_shift(m, n256));
+            => iter(VImmTestCases.V256UnaryShifts, m => check_unary_shift(m, w256));
 
         byte[] Immediates => new byte[]{1,2,3,4};
 
         BoxedNumber one(Type t) => BoxedNumber.Define(1).Convert(t);
 
-        void check_unary_shift(MethodInfo src, N128 w)
+        void check_unary_shift(MethodInfo src, W128 w)
         {
             Claim.require(src.IsVectorized(w));
             Claim.require(src.AcceptsVector(0,w));
@@ -41,7 +41,7 @@ namespace Z0
             check_imm_embedding(src,w,tVector);
         }
 
-        void check_imm_embedding(MethodInfo src, N128 w, Type tVector)
+        void check_imm_embedding(MethodInfo src, W128 w, Type tVector)
         {            
             var kVector = VectorType.kind(tVector);
             var tCell = kVector.CellType();
@@ -55,7 +55,7 @@ namespace Z0
             }
         }
 
-        void check_unary_shift(MethodInfo src, N256 w)
+        void check_unary_shift(MethodInfo src, W256 w)
         {
             Claim.require(src.IsVectorized(w));
             Claim.require(src.AcceptsVector(0,w));
@@ -67,7 +67,7 @@ namespace Z0
             check_imm_embedding(src,w,tVector);
         }
 
-        void check_imm_embedding(MethodInfo src, N256 w, Type tVector)
+        void check_imm_embedding(MethodInfo src, W256 w, Type tVector)
         {
             var kVector = VectorType.kind(tVector);
             var tCell = kVector.CellType();
@@ -82,7 +82,7 @@ namespace Z0
             }            
         }
 
-        void check_cell_type(Type tVector, N128 w)
+        void check_cell_type(Type tVector, W128 w)
         {
             var kVector = VectorType.kind(tVector);
             var tCell = kVector.CellType();
@@ -140,7 +140,7 @@ namespace Z0
                 Claim.fail();
         }
 
-        void check_cell_type(Type tVector, N256 w)
+        void check_cell_type(Type tVector, W256 w)
         {
             var kVector = VectorType.kind(tVector);
             var tCell = kVector.CellType();

@@ -15,16 +15,16 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     
     using static Seed;
+    using Z0.Parts;
     using static Memories;
     
     public static class VMethods
     {
         public static VMethodSearch Search => default(VMethodSearch);
-
+                
+        public static MethodInfo vbroadcast<W>(this VMethodSearch search, Type tCell, W w = default)
+            where W : unmanaged, ITypeWidth
         
-        
-        public static MethodInfo vbroadcast<N>(this VMethodSearch search, Type tCell, N w = default)
-            where N : unmanaged, ITypeNat
             => typeof(Vectors).DeclaredMethods()
                     .WithName(nameof(Vectors.vbroadcast))
                     .WithParameterTypes(w.GetType(), tCell)
@@ -39,15 +39,13 @@ namespace Z0
 
     static class VImmTestCases
     {           
-        public static IEnumerable<MethodInfo> VUnaryShifts 
-            => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_");
-
         public static IEnumerable<MethodInfo> V128UnaryShifts 
             => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_128");
 
         public static IEnumerable<MethodInfo> V256UnaryShifts 
             => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_256");
 
+        public static ApiHostQuery<dvec> Query => ApiHostQuery.Over<dvec>();
 
         [MethodImpl(Inline)]
         public static Vector128<short> vsll_128x16i(Vector128<short> src, [Imm] byte count)

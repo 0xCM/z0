@@ -19,30 +19,6 @@ namespace Z0
     partial class dvec
     {         
         /// <summary>
-        /// The f least significant bits of each 8 bit segment are enabled
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="f">The repetition frequency</param>
-        /// <param name="d">A value in the range [2,7] that defines the bit density</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
-            where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
-
-        /// <summary>
-        /// The f least significant bits of each 8 bit segment are enabled
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="f">The repetition frequency</param>
-        /// <param name="d">A value in the range [2,7] that defines the bit density</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
-            where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
-
-        /// <summary>
         /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -214,5 +190,30 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector256<ulong> vsrl(Vector256<ulong> src, [Imm] byte count)
             => ShiftRightLogical(src, count); 
+
+        /// <summary>
+        /// The f least significant bits of each 8 bit segment are enabled
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the bit density</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
+            where T : unmanaged
+                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
+
+        /// <summary>
+        /// The f least significant bits of each 8 bit segment are enabled
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the bit density</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
+            where T : unmanaged
+                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
+
     }
 }

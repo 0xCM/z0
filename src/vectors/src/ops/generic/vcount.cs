@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int vcount<T>(W128 w, T t = default)
             where T : unmanaged
                 => Vector128<T>.Count;
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int vcount<T>(W256 w, T t = default)
             where T : unmanaged
                 => Vector256<T>.Count;
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int vcount<T>(W512 w, T t = default)
             where T : unmanaged
                 => Vector512<T>.Count;

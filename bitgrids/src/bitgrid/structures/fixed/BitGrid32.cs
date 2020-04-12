@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     /// <summary>
     /// Defines a 32-bit grid

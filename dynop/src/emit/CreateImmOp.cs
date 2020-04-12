@@ -14,7 +14,7 @@ namespace Z0
 
     using static Seed; 
     using static Memories;
-    using static VectorKinds;
+    using static Kinds;
 
     partial class Dynop
     {

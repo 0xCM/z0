@@ -154,7 +154,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = Vectors.vbroadcast(n256, (uint)(ushort.MaxValue));
+            var mask = Vectors.vbroadcast<uint>(n256, (uint)(ushort.MaxValue));
             var z0 = v32i(dvec.vand(x,mask));
             var z1 = v32i(dvec.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);

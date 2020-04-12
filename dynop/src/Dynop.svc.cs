@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed;
-    using static VectorKinds;
+    using static Kinds;
 
-    using C = OpClasses;
+    using K = Kinds;
 
     [ServiceFactory]
     public static partial class ServiceFactory
@@ -26,9 +26,9 @@ namespace Z0
             where W : ITypeWidth
         {
             if(typeof(W) == typeof(W128))
-                return new ImmInjector(context, v128, C.UnaryOp);
+                return new ImmInjector(context, v128, K.UnaryOp);
             else if(typeof(W) == typeof(W256))
-                return new ImmInjector(context, v256, C.UnaryOp);
+                return new ImmInjector(context, v256, K.UnaryOp);
             else 
                 throw Unsupported.define<W>();
         }
@@ -38,9 +38,9 @@ namespace Z0
             where W : ITypeWidth
         {
             if(typeof(W) == typeof(W128))
-                return new ImmInjector(context, v128, C.BinaryOp);
+                return new ImmInjector(context, v128, K.BinaryOp);
             else if(typeof(W) == typeof(W256))
-                return new ImmInjector(context, v256, C.BinaryOp);
+                return new ImmInjector(context, v256, K.BinaryOp);
             else 
                 throw Unsupported.define<W>();
         }

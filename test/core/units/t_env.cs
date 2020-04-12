@@ -18,7 +18,7 @@ namespace Z0
             Claim.eq(rundir_expect, rundir);
 
             var paths = Context.Paths;
-            Claim.eq(rundir_expect, paths.GlobalRootDir);  
+            Claim.eq(rundir_expect, paths.Root);  
                                   
         }
     }

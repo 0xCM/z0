@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
 
     using T = t_dynamic_op_factories;
-    using C = OpClasses;
+    using K = Kinds;
 
     public class t_dynamic_op_factories : UnitTest<t_dynamic_op_factories>
     {    
@@ -34,7 +34,7 @@ namespace Z0
             var t = z32;
             var m = suprise;
             
-            var factory = Context.OperatorFactory(C.emitter(t));
+            var factory = Context.OperatorFactory(K.emitter(t));
             var f = factory.Manufacture(m);            
             Claim.eq(f(), Suprise());        
         }
@@ -45,7 +45,7 @@ namespace Z0
             var t = z32;
             var m = square;
             
-            var factory = Context.OperatorFactory(C.unaryop(t));
+            var factory = Context.OperatorFactory(K.unaryop(t));
             var f = factory.Manufacture(m);            
             Claim.eq(f(3), Square(3));        
         }
@@ -56,7 +56,7 @@ namespace Z0
             var t = z32;
             var m = add2;
             
-            var factory = Context.OperatorFactory(C.binaryop(t));
+            var factory = Context.OperatorFactory(K.binaryop(t));
             var f = factory.Manufacture(m);            
             Claim.eq(f(10,5), Add2(10,5));        
         }
@@ -68,7 +68,7 @@ namespace Z0
             var m = add3;
         
             
-            var factory = Context.OperatorFactory(C.ternaryop(t));
+            var factory = Context.OperatorFactory(K.ternaryop(t));
             var f = factory.Manufacture(m);            
             Claim.eq(f(10,5,5), Add3(10,5,5));        
         }

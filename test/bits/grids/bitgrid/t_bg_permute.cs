@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static Gone;
     
     public class t_bg_permute : t_bg<t_bg_permute>
     {                
@@ -16,7 +14,7 @@ namespace Z0
             var p = Permute.natural(n32);
             Claim.eq(p.Length,32);
             
-            var g = BitGrid.from(p);
+            var g = SubGrid.define(p);
 
 
         }

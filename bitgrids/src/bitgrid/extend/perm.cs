@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static SubGrid32<N8,N3,uint> ToSubGrid(this NatPerm<N8> src)
-            => BitGrid.from(src);            
+            => SubGrid.define(src);            
 
         [MethodImpl(Inline)]
         public static SubGrid32<N8,N3,uint> ToSubGrid(this Perm8L src)
@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> ToBitGrid(this NatPerm<N16> src)
-            => BitGrid.from(src);
+            => BitGrid.define(src);
 
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> ToBitGrid(this Perm16L src)

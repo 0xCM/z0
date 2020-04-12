@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed;
-    using static Widths;
+    using static Memories;
 
     partial class Vectors
     {
@@ -54,5 +54,7 @@ namespace Z0
             Vectors.vstore(src, ref dst.Head);
             return dst.Data;
         }
+
+ 
     }
 }

@@ -7,11 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed;
     using static MathSvcHosts;
-    
-    using OK = OpKinds;
-    
+        
     partial class MathSvc
     {
         [MethodImpl(Inline)]
@@ -96,7 +94,7 @@ namespace Z0
             where T : unmanaged  
             where K : unmanaged, IBitLogicKind      
         {
-            if(typeof(K) == typeof(OK.Not))
+            if(typeof(K) == typeof(Kinds.Not))
                 return not<T>().Invoke(a);
             else 
                 throw Unsupported.define<T>();
@@ -107,17 +105,17 @@ namespace Z0
             where T : unmanaged  
             where K : unmanaged, IBitLogicKind      
         {
-            if(typeof(K) == typeof(OK.And))
+            if(typeof(K) == typeof(Kinds.And))
                 return and<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OK.Or))
+            else if(typeof(K) == typeof(Kinds.Or))
                 return or<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OK.Xor))
+            else if(typeof(K) == typeof(Kinds.Xor))
                 return xor<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OK.Nand))
+            else if(typeof(K) == typeof(Kinds.Nand))
                 return nand<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OK.Nor))
+            else if(typeof(K) == typeof(Kinds.Nor))
                 return nor<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OK.Xnor))
+            else if(typeof(K) == typeof(Kinds.Xnor))
                 return xnor<T>().Invoke(a,b);
             else
                 return eval_2(kind,a,b);
@@ -128,13 +126,13 @@ namespace Z0
             where T : unmanaged  
             where K : unmanaged, IBitLogicKind      
         {
-            if(typeof(K) == typeof(OK.Impl))
+            if(typeof(K) == typeof(Kinds.Impl))
                 return impl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OK.NonImpl))
+            else if(typeof(K) == typeof(Kinds.NonImpl))
                 return nonimpl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OK.CImpl))
+            else if(typeof(K) == typeof(Kinds.CImpl))
                 return cimpl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OK.CNonImpl))
+            else if(typeof(K) == typeof(Kinds.CNonImpl))
                 return cnonimpl<T>().Invoke(a,b);
             else
                  throw Unsupported.define<T>();

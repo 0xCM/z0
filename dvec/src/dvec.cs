@@ -2,16 +2,6 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.DVec)]
-
-namespace Z0.Parts
-{
-    public sealed class DVec : Part<DVec>
-    {        
-        
-    }
-}
-
 namespace Z0
 {
     using System;
@@ -21,9 +11,10 @@ namespace Z0
     /// Direct vectorized intrinsics
     /// </summary>
     [ApiHost(ApiHostKind.Direct)]
-    public static partial class dvec
-    {
+    public partial class dvec : IApiHost<dvec>
+    {        
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    
     }
+
 
 }

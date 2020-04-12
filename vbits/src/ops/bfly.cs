@@ -387,7 +387,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> v666(N256 w, N32 n)
-            => Vectors.vbroadcast(w,BitMasks.Central32x4x2);
+            => Vectors.vbroadcast<uint>(w, BitMasks.Central32x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v666(N256 w, N64 n)
@@ -403,7 +403,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> v3C(N256 w, N32 n)
-            => Vectors.vbroadcast(w,BitMasks.Central32x8x4);
+            => Vectors.vbroadcast<uint>(w, BitMasks.Central32x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v3C(N256 w, N64 n)
@@ -415,7 +415,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> v0FF0(N256 w, N32 n)
-            => Vectors.vbroadcast(w,BitMasks.Central32x16x8);
+            => Vectors.vbroadcast<uint>(w, BitMasks.Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0FF0(N256 w, N64 n)
@@ -423,7 +423,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> v00FFFF00(N256 w)
-            => Vectors.vbroadcast(w,BitMasks.Central32x32x16);
+            => Vectors.vbroadcast<uint>(w, BitMasks.Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v00FFFF0000FFFF00(N256 w)

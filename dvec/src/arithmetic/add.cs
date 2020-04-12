@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
 
-    public static partial class dvec
+    partial class dvec
     {
         /// <summary>
         /// __m128i _mm_add_epi8 (__m128i a, __m128i b) PADDB xmm, xmm/m128

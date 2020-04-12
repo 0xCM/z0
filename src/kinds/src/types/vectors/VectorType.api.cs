@@ -34,37 +34,10 @@ namespace Z0
         /// <param name="t">The type to test</param>
         public static bool test(Type t)
             => t.IsVector();
-        // {
-        //     var eff = t.EffectiveType();
-        //     var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
-        //     if(def == null)
-        //         return false;
-
-        //     return def == typeof(Vector128<>) || def == typeof(Vector256<>) || VectorAttribute.Test(def);             
-        // }
-
 
         [MethodImpl(Inline)]
         public static TypeWidth width(Type t)
             => Widths.vector(t);
-        // {
-        //     var eff = t.EffectiveType();
-        //     var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
-        //     if(def == null)
-        //         return TypeWidth.None;
-        //     else if(def == typeof(Vector128<>))            
-        //         return TypeWidth.W128;
-        //     else if(def == typeof(Vector256<>))
-        //         return TypeWidth.W256;
-        //     else
-        //     {
-        //         var tag = t.GetCustomAttribute<VectorAttribute>();
-        //         if(tag != null)
-        //             return tag.TotalWdth;
-        //         else
-        //             return TypeWidth.None;
-        //     }            
-        // }
 
         /// <summary>
         /// Determines whether a type is an intrinsic vector of specified width
@@ -244,7 +217,6 @@ namespace Z0
                 return VectorKind.None;
         }
 
-
         /// <summary>
         /// Determines the component width of a k-kinded vector
         /// </summary>
@@ -268,14 +240,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int size(VectorKind kind)
             => width(kind)/8;
-
-        /// <summary>
-        /// Specifies the bit-width of a classified cpu vector
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static int BitWidth(this VectorKind k)
-            => width(k);
  
         /// <summary>
         /// Determines whether a classfied vector is defined over primal unsigned integer components
@@ -322,7 +286,6 @@ namespace Z0
 
         public static IEnumerable<Type> types(W256 w)
             => from nt in NumericKinds.NumericTypes select definition(w).MakeGenericType(nt);
-
 
         [MethodImpl(Inline)]
         public static VectorKind kind<T>(Vector128<T> v)

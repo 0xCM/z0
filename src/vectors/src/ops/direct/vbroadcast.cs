@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Seed;
-    using static refs;
-    using static Widths;
+    using static Memories;
 
     partial class Vectors
     {
@@ -22,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<sbyte> vbroadcast(W128 w, sbyte src)
             => BroadcastScalarToVector128(&src);
 
@@ -31,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<byte> vbroadcast(W128 w, byte src)
             => BroadcastScalarToVector128(&src);
 
@@ -40,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<short> vbroadcast(W128 w, short src)
             => BroadcastScalarToVector128(&src);
 
@@ -49,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<ushort> vbroadcast(W128 w, ushort src)
             => BroadcastScalarToVector128(&src);
 
@@ -58,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<int> vbroadcast(W128 w, int src)
             => BroadcastScalarToVector128(&src);
 
@@ -67,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<uint> vbroadcast(W128 w, uint src)
             => BroadcastScalarToVector128(&src);
 
@@ -76,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<long> vbroadcast(W128 w, long src)
             => BroadcastScalarToVector128(&src);
 
@@ -85,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<ulong> vbroadcast(W128 w, ulong src)
             => BroadcastScalarToVector128(&src);
 
@@ -95,7 +94,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<sbyte> vbroadcast(W256 w, sbyte src)
             => BroadcastScalarToVector256(&src);
 
@@ -105,8 +104,8 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector256<byte> vbroadcast(W256 w,byte src)
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<byte> vbroadcast(W256 w, byte src)
             => BroadcastScalarToVector256(&src);
                         
         /// <summary>
@@ -115,7 +114,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<short> vbroadcast(W256 w, short src)
             => BroadcastScalarToVector256(&src);
 
@@ -125,7 +124,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<ushort> vbroadcast(W256 w, ushort src)
             => BroadcastScalarToVector256(&src);
 
@@ -135,7 +134,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<int> vbroadcast(W256 w, int src)
             => BroadcastScalarToVector256(&src);
 
@@ -145,8 +144,8 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> broadcast(W256 w, uint src)
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<uint> vbroadcast(W256 w, uint src)
             => BroadcastScalarToVector256(&src);
 
         /// <summary>
@@ -155,8 +154,8 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector256<long> broadcast(W256 w, long src)
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<long> vbroadcast(W256 w, long src)
             => BroadcastScalarToVector256(&src);
 
         /// <summary>
@@ -165,7 +164,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<ulong> vbroadcast(W256 w, ulong src)
             => BroadcastScalarToVector256(&src);            
 
@@ -174,7 +173,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<float> vbroadcast(W256 w, float src)
             => BroadcastScalarToVector256(ptr(ref edit(in src)));
 
@@ -183,7 +182,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<double> vbroadcast(W256 w, double src)
             => BroadcastScalarToVector256(ptr(ref edit(in src)));
 
@@ -192,12 +191,17 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector128<float> vbroadcast(W128 n128, float src)
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<float> vbroadcast(W128 w, float src)
             => BroadcastScalarToVector128(ptr(ref edit(in src)));
 
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector128<double> vbroadcast(W128 n128, double src)
+        /// <summary>
+        /// Broadcasts a 64-bit floating point value to the upper and lower cells of a 128-bit floating-point vector
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<double> vbroadcast(W128 w, double src)
             => Vector128.Create(src);             
 
         /// <summary>
