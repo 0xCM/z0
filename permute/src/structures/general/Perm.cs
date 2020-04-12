@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
-    
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
@@ -127,7 +127,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm Swap(int i, int j)
         {
-            swap(ref terms[i], ref terms[j]);
+            refs.swap(ref terms[i], ref terms[j]);
             return this;
         }
 
@@ -137,7 +137,7 @@ namespace Z0
         public Perm Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                refs.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -147,7 +147,7 @@ namespace Z0
         public Perm Apply(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                refs.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 

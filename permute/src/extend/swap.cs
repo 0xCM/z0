@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     partial class PermX
     {
@@ -28,7 +29,7 @@ namespace Z0
             for(var k = 0; k < len; k++)
             {
                 (var i, var j) = skip(in swapmem, k);
-                swap(ref seek(ref srcmem, i), ref seek(ref srcmem, j));
+                refs.swap(ref seek(ref srcmem, i), ref seek(ref srcmem, j));
             }
             return src;
         }

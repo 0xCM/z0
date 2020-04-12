@@ -8,9 +8,9 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     
-
     public class Histogram
     {
         public static Histogram<T> Define<T>(Interval<T> domain, T? grain = null)            

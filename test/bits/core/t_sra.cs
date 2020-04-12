@@ -10,31 +10,31 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_sar : t_bitcore<t_sar>
+    public class t_sra : t_bitcore<t_sra>
     {
-        public void bs_sar_8i_check()
-            => bs_sar_check<sbyte>();
+        public void bs_sra_8i_check()
+            => bs_sra_check<sbyte>();
 
-        public void bs_sar_8u_check()
-            => bs_sar_check<byte>();
+        public void bs_sra_8u_check()
+            => bs_sra_check<byte>();
             
-        public void bs_sar_16i_check()        
-            => bs_sar_check<short>();            
+        public void bs_sra_16i_check()        
+            => bs_sra_check<short>();            
         
-        public void bs_sar_16u_check()        
-            => bs_sar_check<ushort>();
+        public void bs_sra_16u_check()        
+            => bs_sra_check<ushort>();
         
-        public void bs_sar_32i_check()        
-            => bs_sar_check<int>();            
+        public void bs_sra_32i_check()        
+            => bs_sra_check<int>();            
         
-        public void bs_sar_32u_check()        
-            => bs_sar_check<uint>();            
+        public void bs_sra_32u_check()        
+            => bs_sra_check<uint>();            
         
-        public void bs_sar_64i_check()        
-            => bs_sar_check<long>();           
+        public void bs_sra_64i_check()        
+            => bs_sra_check<long>();           
     
-        public void bs_sar_64u_check()        
-            => bs_sar_check<ulong>();
+        public void bs_sra_64u_check()        
+            => bs_sra_check<ulong>();
 
         public void sb_sal_8i()
         {
@@ -43,11 +43,11 @@ namespace Z0
             Control.iteri(RepCount, i => Claim.eq((sbyte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));    
         }
 
-        public void sb_sar_8i()
+        public void sb_sra_8i()
         {
             var src = Random.Array<sbyte>(RepCount);            
             var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<sbyte>()));                
-            Control.iteri(RepCount, i => Claim.eq((sbyte)(src[i] >> offset[i]), gmath.sar(src[i], offset[i])));    
+            Control.iteri(RepCount, i => Claim.eq((sbyte)(src[i] >> offset[i]), gmath.sra(src[i], offset[i])));    
         }
 
         public void sb_sal_32i()
@@ -57,11 +57,11 @@ namespace Z0
             Control.iteri(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
         }
 
-        public void sb_sar_32i()
+        public void sb_sra_32i()
         {
             var src = Random.Array<int>(RepCount);            
             var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<int>()));            
-            Control.iteri(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sar(src[i], offset[i])));
+            Control.iteri(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sra(src[i], offset[i])));
         }
 
         public void sb_sal_64i()
@@ -72,15 +72,15 @@ namespace Z0
             Control.iteri(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
         }
 
-        public void sb_sar_64i()
+        public void sb_sra_64i()
         {
             var src = Random.Array<long>(RepCount);            
             var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<long>()));            
 
-            Control.iteri(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sar(src[i], offset[i])));
+            Control.iteri(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sra(src[i], offset[i])));
         }
 
-        protected void bs_sar_check<T>()
+        protected void bs_sra_check<T>()
             where T : unmanaged
         {
 
@@ -92,7 +92,7 @@ namespace Z0
             var x11 = bs11.TakeScalar<T>();
             var bs01 = BitString.parse("01" + Arrays.replicate('0', bitsize - 2).Concat());
             var x01 = bs01.TakeScalar<T>();
-            var y = gmath.sar(x10, 1);
+            var y = gmath.sra(x10, 1);
             if(signed)
                 Claim.eq(x11, y);
             else

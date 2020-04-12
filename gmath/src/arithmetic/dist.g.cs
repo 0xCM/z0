@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
                 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gmath
     {        
@@ -17,7 +18,7 @@ namespace Z0
         /// <param name="a">The first value</param>
         /// <param name="b">The second value</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Distance, Closures(Integers)]
+        [MethodImpl(Inline), Dist, Closures(Integers)]
         public static ulong dist<T>(T a, T b)
             where T : unmanaged
                 => dist_u(a,b);

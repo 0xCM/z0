@@ -2,15 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+[assembly: PartId(PartId.Permute)]
+
+namespace Z0.Parts
 {
-
-    public enum CaptureEventKind
-    {
-        None = 0,
-
-        Step = 1,
-
-        Complete = 2
+    public sealed class Permute : Part<Permute>
+    {        
+        
     }
 }
+

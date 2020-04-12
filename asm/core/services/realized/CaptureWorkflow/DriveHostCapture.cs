@@ -66,7 +66,7 @@ namespace Z0.Asm
                     if(parsed.Length != 0)
                     {
                         ParseReportManager.SaveReport(ParseReportManager.CreateReport(host, parsed), paths.ParsedPath);                                                
-                        MemberParse.SaveParsed(host, parsed, paths.CodePath);
+                        MemberParse.SaveHex(host, parsed, paths.CodePath);
 
                         var decoded = MemberDecode.DecodeParsed(host, parsed);
                         MemberDecode.SaveDecoded(host, decoded, paths.DecodedPath);

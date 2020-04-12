@@ -10,7 +10,8 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Defines a state machine with minimal feature-set

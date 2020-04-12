@@ -18,6 +18,10 @@ namespace Z0.Asm
 
         AsmEmissionPaths EmissionPaths => AsmEmissionPaths.Default;
 
+        AsmEmissionPaths Emissions(FolderName area, FolderName subject) => EmissionPaths.Subject(area,subject);
+
+        FolderPath EmissionRoot => EmissionPaths.EmissionRoot;
+        
         IAppSettings Settings => Context.Settings;
 
         IApiSet ApiSet => Context.ApiSet;

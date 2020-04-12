@@ -39,7 +39,7 @@ namespace Z0
 
     public sealed class ClampAttribute : A { public ClampAttribute() : base(K.Clamp) {} }
 
-    public sealed class DistanceAttribute : A { public DistanceAttribute() : base(K.Distance) {} }
+    public sealed class DistAttribute : A { public DistAttribute() : base(K.Dist) {} }
 
     public sealed class ClMulAttribute : A { public ClMulAttribute() : base(K.ClMul) {} }
 

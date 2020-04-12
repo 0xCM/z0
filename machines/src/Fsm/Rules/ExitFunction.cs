@@ -8,7 +8,8 @@ namespace Z0.Machines
     using System.Linq;
     using System.Collections.Generic;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Defines a set of rules that define actions associated with state Exit

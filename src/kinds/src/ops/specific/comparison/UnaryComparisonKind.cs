@@ -16,8 +16,6 @@ namespace Z0
 
         Positive = Id.Positive,
 
-        Nonz = Id.Nonz,
-
-        Divides  = Id.Divides,
+        Nonz = Id.Nonz,        
     }
 }

@@ -9,9 +9,10 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
 
-    [ApiHost("logic.engine", ApiHostKind.Generic)]
+    [ApiHost("logic.engine")]
     public static partial class LogicEngine
     {
         /// <summary>

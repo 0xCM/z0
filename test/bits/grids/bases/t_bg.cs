@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public abstract class t_bg<X> : t_bitgrids_base<X>
         where X : t_bg<X>, new()

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gmath
     {
@@ -17,7 +18,7 @@ namespace Z0
         /// <param name="src">The value to shift</param>
         /// <param name="offset">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Sal, Closures(Integers)]
         public static T sal<T>(T src, byte offset)
             where T : unmanaged
                 => sal_u(src,offset);

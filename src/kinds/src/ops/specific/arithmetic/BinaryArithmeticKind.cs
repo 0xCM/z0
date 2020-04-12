@@ -48,7 +48,7 @@ namespace Z0
 
         Clamp = Id.Clamp,
 
-        Distance = Id.Distance,
+        Dist = Id.Dist,
 
         ClMul = Id.ClMul,
 

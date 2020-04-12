@@ -16,17 +16,14 @@ namespace Z0.Asm
 
         readonly ICaptureService Service;
         
-        readonly AsmCaptureEventObserver Observer;
-
         [MethodImpl(Inline)]
-        public static IExtractControl New(IContext context, AsmCaptureEventObserver observer)
-            => new ExtractControl(context,observer);
+        public static IExtractControl New(IContext context)
+            => new ExtractControl(context);
                     
         [MethodImpl(Inline)]
-        ExtractControl(IContext context, AsmCaptureEventObserver observer)
+        ExtractControl(IContext context)
         {
             this.Context = context;
-            this.Observer = observer;
             this.Service = CaptureService.New(context);
         }
 
@@ -52,11 +49,13 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         void IExtractJunction.OnCaptureStep(in OpExtractExchange exchange, in ExtractState state)
-            => Observer(AsmCaptureEvent.Define(state, exchange.StateBuffer));
+        {
+
+        }
 
         [MethodImpl(Inline)]
         void IExtractJunction.OnCaptureComplete(in OpExtractExchange exchange, in ExtractState state, in CapturedOp captured)
-            => Observer(AsmCaptureEvent.Define(state, exchange.StateBuffer, captured));
+        {}
 
     }
 }

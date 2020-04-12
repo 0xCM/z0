@@ -9,7 +9,8 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_vblendp : UnitTest<t_vblendp>
     {
@@ -305,7 +306,7 @@ namespace Z0
             var t = default(T);
             var pn = n32;
 
-            Claim.eq(Core.value(pn), NatCalc.divT(w,t) * 2);
+            Claim.eq(value(pn), NatCalc.divT(w,t) * 2);
 
             var left = gvec.vinc(w, t);
             var right = gvec.vadd(left, gmath.add(left.LastCell(), one(t)));            

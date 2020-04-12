@@ -13,7 +13,5 @@ namespace Z0
 
     public sealed class PositiveAttribute : A { public PositiveAttribute() : base(K.Positive) {} }
 
-    public sealed class DividesAttribute : A { public DividesAttribute() : base(K.Divides) {} }
-
     public sealed class NonzAttribute : A { public NonzAttribute() : base(K.Nonz) {} }
 }

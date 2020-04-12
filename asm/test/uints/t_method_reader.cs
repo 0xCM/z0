@@ -46,14 +46,10 @@ namespace Z0.Asm
 
         public void capture_vectorized_generics()
         {
-            void OnCaptureEvent(in AsmCaptureEvent data)
-            {
-
-            }
 
             using var writer = NativeTestWriter();
 
-            var exchange = Context.ExtractExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
 
             var types = NumericKind.All.DistinctTypes();
@@ -73,13 +69,8 @@ namespace Z0.Asm
 
         public void capture_direct()
         {
-            void OnCaptureEvent(in AsmCaptureEvent data)
-            {
-
-            }            
-            var exchange = Context.ExtractExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
-
 
 
             using var target = AsmCodeWriter();
@@ -99,12 +90,8 @@ namespace Z0.Asm
 
         public void capture_delegates()
         {
-            void OnCaptureEvent(in AsmCaptureEvent data)
-            {
 
-            }
-
-            var exchange = Context.ExtractExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
 
             using var target = AsmCodeWriter();
@@ -130,12 +117,7 @@ namespace Z0.Asm
 
         public void read_library()
         {
-            void OnCaptureEvent(in AsmCaptureEvent data)
-            {
-
-            }
-
-            var exchange = Context.ExtractExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
 
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
@@ -143,7 +125,6 @@ namespace Z0.Asm
             for(var i=0; i<src.Length; i++)
             {
                 var capture = ops.Capture(in exchange, src[i].Identify(), src[i]);
-                //PostMessage(capture.FormatCode());
             }
         }
     }

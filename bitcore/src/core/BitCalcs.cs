@@ -10,8 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    [ApiHost]
-    public class BitCalcs : IApiHost<BitCalcs>
+    public partial class BitCalcs
     {
         /// <summary>
         /// Computes the number of bytes covered by a specified number of cells of a given width

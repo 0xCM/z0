@@ -41,11 +41,5 @@ namespace Z0
         public ApiHostUri HostUri {get;}
     
         public OpIdentity Id {get;}
-
-        public bool IsLocated
-        {
-            [MethodImpl(Inline)]
-            get => Address.NonZero;
-        }
     }        
 }

@@ -21,12 +21,8 @@ namespace Z0.Asm
    
         public void Execute(params string[] args)
         {
-            void OnCaptureEvent(in AsmCaptureEvent data)
-            {
-                //Trace($"{data.CaptureState}");
-            }
 
-            using var buffers = Context.Buffers(OnCaptureEvent);
+            using var buffers = Context.Buffers();
             OnExecute(buffers);
         }
 

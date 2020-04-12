@@ -18,12 +18,12 @@ namespace Z0.Asm
     {                       
 
         [MethodImpl(Inline)]
-        public static IOpExtractParser ExtractParser(this IAsmContext context, byte[] buffer)
-            => OpExtractParser.New(context, buffer);
+        public static IExtractParser ExtractParser(this IAsmContext context, byte[] buffer)
+            => Svc.ExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
-        public static IOpExtractParser ExtractParser(this IAsmContext context, int? bufferlen = null)
-            => OpExtractParser.New(context, bufferlen);
+        public static IExtractParser ExtractParser(this IAsmContext context, int? bufferlen = null)
+            => Svc.ExtractParser.Create(context, bufferlen);
 
         [MethodImpl(Inline)]
         public static IMemoryCapture MemoryCapture(this IContext context, IAsmInstructionDecoder decoder,  int? bufferlen = null)
@@ -38,8 +38,8 @@ namespace Z0.Asm
             => AsmEmissionPaths.Define();
 
         [MethodImpl(Inline)]
-        public static IHostOpExtractor HostExtractor(this IContext context, int? bufferlen = null)
-            => HostOpExtractor.New(context, bufferlen ?? Pow2.T14);
+        public static IHostExtractor HostExtractor(this IContext context, int? bufferlen = null)
+            => Svc.HostExtractor.New(context, bufferlen ?? Pow2.T14);
 
         [MethodImpl(Inline)]
         public static IMemoryExtractor MemoryExtractor(this IContext context, byte[] buffer)
@@ -106,8 +106,8 @@ namespace Z0.Asm
         /// <param name="sink">The target to which capture events are routed</param>
         /// <param name="size">The (uniform) buffer length</param>
         [MethodImpl(Inline)]
-        public static AsmBuffers Buffers(this IContext context, AsmCaptureEventObserver observer, int? size = null)
-            => AsmBuffers.New(context, observer, size);
+        public static AsmBuffers Buffers(this IContext context, int? size = null)
+            => AsmBuffers.New(context, size);
 
         /// <summary>
         /// Instantiates a contextual archive service that is specialized for an assembly
@@ -136,11 +136,10 @@ namespace Z0.Asm
         public static IAsmInstructionFlow InstructionFlow(this IContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
 
-        public static OpExtractExchange ExtractExchange(this IContext context, AsmCaptureEventObserver observer, int? size = null)
+        public static OpExtractExchange ExtractExchange(this IContext context, int? size = null)
         {
             const int DefaultBufferLen = 1024*8;
-
-            var control = ExtractControl.New(context, observer);
+            var control = ExtractControl.New(context);
             var cBuffer = new byte[size ?? DefaultBufferLen];
             var sBuffer = new byte[size ?? DefaultBufferLen];
             return OpExtractExchange.New(control, cBuffer, sBuffer);
@@ -199,7 +198,7 @@ namespace Z0.Asm
         /// Instantiates a basic capture service that supports the extract/parse/decode workflow
         /// </summary>
         /// <param name="context">The source context</param>
-        public static IHostCaptureService HostCaptureService(this IAsmContext context)
-            => Svc.HostCaptureService.Create(context);
+        public static IHostCaptureService HostCaptureService(this IAsmContext context, FolderName area = null, FolderName subject = null)
+            => Svc.HostCaptureService.Create(context, area, subject);
     }
 }

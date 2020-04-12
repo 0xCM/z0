@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
-
     public static partial class PermX
     {                
         public static NatPerm<N4> ToNatural(this Perm4L src)

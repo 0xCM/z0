@@ -156,8 +156,8 @@ namespace Z0
             modmul_check(S.ternary(math.modmul, name, z32i));
             modmul_check(S.ternary(math.modmul, name, z64));
             modmul_check(S.ternary(math.modmul, name, z64i));
-            modmul_check(S.ternary(math.modmul, name, z64f));
-            modmul_check(S.ternary(math.modmul, name, z32f));
+            modmul_check(S.ternary(fmath.modmul, name, z64f));
+            modmul_check(S.ternary(fmath.modmul, name, z32f));
         }
 
         [MethodImpl(Inline)]

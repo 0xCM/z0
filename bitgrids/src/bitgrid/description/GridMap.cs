@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     public class GridMap
     {        
@@ -26,7 +26,6 @@ namespace Z0
         /// </summary>
         /// <param name="rows">The number of rows in the grid</param>
         /// <param name="cols">The number of columns in the grid</param>
-        [MethodImpl(NotInline)]
         public static GridMap Define<T>(ushort rows, ushort cols)    
             where T : unmanaged
                 => Define(GridSpec.Define<T>(rows,cols));

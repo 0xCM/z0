@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Seed;
 
     /// <summary>
     /// Defines a question in the context of a survey

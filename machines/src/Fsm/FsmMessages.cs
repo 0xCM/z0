@@ -5,11 +5,9 @@
 namespace Z0.Machines
 {
     using System;
-    using System.Threading.Tasks;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Defines common messages that are issued during setup/execution
@@ -17,23 +15,23 @@ namespace Z0.Machines
     static class FsmMessages
     {
         public static AppMsg Transition<S>(string machine, S s1, S s2)
-            => msg($"{machine} Transitioned {s1} -> {s2}", AppMsgKind.HiliteCL);
+            => AppMsg.Colorize($"{machine} Transitioned {s1} -> {s2}", AppMsgColor.Cyan);
 
         public static AppMsg Completed(string machine, FsmStats stats, bool asPlanned)
-            => msg($"{machine} executed for {stats.Runtime.Ms} ms and completed" 
+            => AppMsg.Colorize($"{machine} executed for {stats.Runtime.Ms} ms and completed" 
             + (asPlanned ? $" as planned after receiving {stats.ReceiptCount} events and experiencing {stats.TransitionCount} transitions" : " abnormally"), 
-                AppMsgKind.HiliteBL);
+                AppMsgColor.Blue);
         
         public static AppMsg Receipt<E>(string machine, E input, ulong receipts)
-            => msg($"{machine} received event {input.ToString().PadLeft(6)} | Total Receipts: {receipts}", AppMsgKind.Babble);
+            => AppMsg.Babble($"{machine} received event {input.ToString().PadLeft(6)} | Total Receipts: {receipts}");
 
         public static AppMsg Error(string machine, Exception error)
-            => msg($"{machine} encountered an error: {error}", AppMsgKind.Error);
+            => AppMsg.Error($"{machine} encountered an error: {error}");
 
         public static AppMsg ReceiptAfterFinish(string machine)
-            => msg($"{machine} continuing to receive input after finished has been signaled", AppMsgKind.Warning);
+            => AppMsg.Warn($"{machine} continuing to receive input after finished has been signaled");
 
         public static AppMsg ReceiptBeforeStart(string machine)
-            => msg($"{machine} received input before start", AppMsgKind.Warning);
+            => AppMsg.Warn($"{machine} received input before start");
     }
 }

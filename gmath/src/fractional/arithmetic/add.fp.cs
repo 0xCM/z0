@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gfp
     {
-
-        [MethodImpl(Inline), Add, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Add, Closures(Floats)]
         public static T add<T>(T lhs, T rhs)
             where T : unmanaged
         {

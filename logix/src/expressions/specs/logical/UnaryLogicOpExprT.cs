@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Seed;
 
     public sealed class UnaryLogicOpExpr<T> : UnaryLogicOpExpr,  IUnaryLogicOpExpr<T>
         where T : unmanaged

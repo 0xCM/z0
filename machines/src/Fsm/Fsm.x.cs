@@ -9,8 +9,7 @@ namespace Z0.Machines
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static root;
-
+    using static Seed;
     using static ObserverTrace;
 
     public static class FsmX

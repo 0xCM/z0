@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class BitMatrix
     {        
@@ -16,7 +16,6 @@ namespace Z0
         /// </summary>
         /// <param name="row">The source vector used to fill each row</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<N,T> init<N,T>(in BitBlock<N,T> row)
             where T : unmanaged
             where N : unmanaged, ITypeNat
@@ -36,7 +35,6 @@ namespace Z0
         /// </summary>
         /// <param name="row">The source vector used to fill each row</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> init<M,N,T>(in BitBlock<N,T> row, M m = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat

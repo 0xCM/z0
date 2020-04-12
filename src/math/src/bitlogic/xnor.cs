@@ -40,7 +40,5 @@ namespace Z0
         [MethodImpl(Inline), Xnor]
         public static ulong xnor(ulong a, ulong b)
             => ~ (a ^ b);
-
     }
-
 }

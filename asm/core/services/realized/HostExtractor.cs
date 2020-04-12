@@ -15,18 +15,18 @@ namespace Z0.Asm
     /// <summary>
     /// Extracts operations from an api host
     /// </summary>
-    readonly struct HostOpExtractor : IHostOpExtractor
+    readonly struct HostExtractor : IHostExtractor
     {
         public IContext Context {get;}
 
         public int BufferLength {get;}
 
         [MethodImpl(Inline)]
-        public static IHostOpExtractor New(IContext context, int bufferlen)
-            => new HostOpExtractor(context,bufferlen);
+        public static IHostExtractor New(IContext context, int bufferlen)
+            => new HostExtractor(context,bufferlen);
             
         [MethodImpl(Inline)]
-        HostOpExtractor(IContext context, int bufferlen)            
+        HostExtractor(IContext context, int bufferlen)            
         {
             this.Context = context;
             this.BufferLength = bufferlen;

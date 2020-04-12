@@ -64,7 +64,7 @@ namespace Z0.Asm.Check
 
         readonly IAppEventRelay Relay;
 
-        readonly IHostOpExtractor Extractor;
+        readonly IHostExtractor Extractor;
 
         readonly IMemberLocator MemberLocator;
 

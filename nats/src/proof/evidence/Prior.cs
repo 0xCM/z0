@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Requires k1:K1 & k2:K2 => k1 + 1 = k2

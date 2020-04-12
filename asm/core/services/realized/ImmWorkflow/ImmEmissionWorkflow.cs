@@ -71,12 +71,7 @@ namespace Z0.Asm
         }
 
         public void Emit(params byte[] imm8)
-            => EmitImm(Context.ExtractExchange(OnCapture), imm8);
-
-        void OnCapture(in AsmCaptureEvent data)
-        {
-
-        }
+            => EmitImm(Context.ExtractExchange(), imm8);
 
         IEnumerable<IApiHost> ApiHosts => ApiSet.Hosts;
 

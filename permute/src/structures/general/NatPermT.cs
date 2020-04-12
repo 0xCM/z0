@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
-    
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1

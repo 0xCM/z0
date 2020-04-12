@@ -8,7 +8,8 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;    
+    using static Memories;
 
     public static partial class TypedLogicSpec
     {

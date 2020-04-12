@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
 
     using static nfunc;
     using static Seed;    
@@ -33,8 +29,5 @@ namespace Z0
         public static NatPrime<K> prime<K>(K k)
             where K: unmanaged, ITypeNat
                 => new NatPrime<K>(k);
-
-
     }
-
 }

@@ -7,7 +7,8 @@ namespace Z0.Logix
     using System;
     using System.IO;
     
-    using static Core;
+    using static Seed;    
+    using static Memories;
 
     using Api = LogicOpApi;
 

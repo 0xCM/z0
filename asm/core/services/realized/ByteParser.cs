@@ -11,6 +11,9 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
+    /// <summary>
+    /// Parses sequences of bytes, governed by patterns supplied upon initialization 
+    /// </summary>
     public ref struct ByteParser<T>
         where T : unmanaged, Enum
     {        

@@ -6,10 +6,13 @@ namespace Z0.Asm
 {        
     public interface IHostCaptureService : IAsmService
     {
-        ParsedExtract[] Parse(MemberExtract[] src);
-        
-        MemberExtract[] Extract(ApiHostUri host);        
+        MemberExtract[] Extract(ApiHostUri host, bool save);        
 
-        AsmFunction[] Decode(ApiHostUri host, ParsedExtract[] parsed);        
+        ParsedExtract[] Parse(ApiHostUri host, MemberExtract[] src, bool save);        
+
+        AsmFunction[] Decode(ApiHostUri host, ParsedExtract[] parsed, bool save);      
+
+        ApiHostCapture CaptureHost(ApiHostUri host, bool save);  
+        
     }
 }

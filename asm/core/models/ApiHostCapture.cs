@@ -14,37 +14,26 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct ApiHostCapture
     {
+        public readonly ApiHostUri Host;
+
+        public readonly MemberExtract[] Extracts;
+
+        public readonly ParsedExtract[] Parsed;
+        
+        public readonly AsmFunction[] Decoded;
+
         [MethodImpl(Inline)]
-        public static ApiHostCapture Define(ApiHostUri host, MemberExtractReport captured, MemberParseReport parsed, AsmFunctionList decoded)
-            => new ApiHostCapture(host, captured, parsed, decoded);
+        public static ApiHostCapture Define(ApiHostUri host, MemberExtract[] extracts, ParsedExtract[] parsed, AsmFunction[] decoded)
+            => new ApiHostCapture(host, extracts, parsed, decoded);
         
         [MethodImpl(Inline)]
-        ApiHostCapture(ApiHostUri host, MemberExtractReport captured, MemberParseReport parsed, AsmFunctionList decoded)
+        ApiHostCapture(ApiHostUri host, MemberExtract[] extracts, ParsedExtract[] parsed, AsmFunction[] decoded)
         {
             this.Host = host;
-            this.Extracted = captured;
+            this.Extracts = extracts;
             this.Parsed = parsed;
             this.Decoded = decoded;
         }
 
-        /// <summary>
-        /// The host uri
-        /// </summary>
-        public readonly ApiHostUri Host;
-
-        /// <summary>
-        /// The extract report
-        /// </summary>
-        public readonly MemberExtractReport Extracted;
-
-        /// <summary>
-        /// The parse reprt
-        /// </summary>
-        public readonly MemberParseReport Parsed;
-        
-        /// <summary>
-        /// The decoded functions
-        /// </summary>
-        public readonly AsmFunctionList Decoded;
     }
 }

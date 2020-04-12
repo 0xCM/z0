@@ -12,7 +12,8 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Core;    
+    using static Seed;
+    using static Memories;
 
     public static class TimeSeries
     {

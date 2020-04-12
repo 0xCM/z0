@@ -56,6 +56,8 @@ namespace Z0
 
         Max = Id.Max,
 
-        Min = Id.Min,        
+        Min = Id.Min,      
+
+        Divides  = Id.Divides,          
     }    
 }

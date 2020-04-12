@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
  
-    using static Core;
-    
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Defines a permutation over an integral type based at 0, [0, 1, ..., n - 1] where n is the permutation length
@@ -158,7 +158,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm<T> Swap(T i, T j)
         {            
-            swap(ref terms[iVal(i)], ref terms[iVal(j)]);
+            refs.swap(ref terms[iVal(i)], ref terms[iVal(j)]);
             return this;
         }
 
@@ -169,7 +169,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm<T> Swap(int i, int j)
         {            
-            swap(ref seek(ref Head, i), ref seek(ref Head,j));
+            refs.swap(ref seek(ref Head, i), ref seek(ref Head,j));
             return this;
         }
 
@@ -179,7 +179,7 @@ namespace Z0
         public Perm<T> Swap(params (T i, T j)[] specs)
         {            
             for(var k=0; k<specs.Length; k++)
-                swap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
+                refs.swap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
             return this;
         }
 
@@ -189,7 +189,7 @@ namespace Z0
         public Perm<T> Swap(params (int i, int j)[] specs)
         {            
             for(var k=0; k<specs.Length; k++)
-                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                refs.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -199,7 +199,7 @@ namespace Z0
         public Perm<T> Swap(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                refs.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 

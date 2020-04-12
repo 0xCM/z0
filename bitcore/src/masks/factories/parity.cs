@@ -109,7 +109,7 @@ namespace Z0
         /// [01010101]    
         /// </summary>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T mask<T>(ParityMask<N2,N1,T> spec, N0 e)
+        public static T mask<T>(in ParityMask<N2,N1,T> spec, N0 e)
             where T : unmanaged
                 => even(spec.f, spec.d, spec.t);
         
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T mask<T>(ParityMask<N2,N1,T> spec, N1 o)
+        public static T mask<T>(in ParityMask<N2,N1,T> spec, N1 o)
             where T : unmanaged
                 => odd(spec. f,spec.d, spec.t);
 
@@ -127,7 +127,7 @@ namespace Z0
         /// [00110011]    
         /// </summary>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T mask<T>(ParityMask<N2,N2,T> spec, N0 e)
+        public static T mask<T>(in ParityMask<N2,N2,T> spec, N0 e)
             where T : unmanaged
                 => even(spec.f, spec.d, spec.t);
         
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T mask<T>(ParityMask<N2,N2,T> spec, N1 o)
+        public static T mask<T>(in ParityMask<N2,N2,T> spec, N1 o)
             where T : unmanaged
                 => odd(spec.f, spec.d, spec.t);
     }

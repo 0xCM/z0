@@ -8,53 +8,54 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Core;    
+    using static Seed;    
+    using static Memories;
 
     internal static class OpHelpers
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig(UnaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig(BinaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig(TernaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(UnaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(BinaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(TernaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(BitShiftKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(BinaryComparisonKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(UnaryArithmeticKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(BinaryArithmeticKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";

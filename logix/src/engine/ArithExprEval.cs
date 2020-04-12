@@ -9,8 +9,8 @@ namespace Z0.Logix
     
     using static OpHelpers;
 
-    [ApiHost("expr.arith.eval", ApiHostKind.Generic)]
-    public static class ArithExprEval
+    [ApiHost("expr.arith.eval")]
+    public class ArithExprEval : IApiHost<ArithExprEval>
     {
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged

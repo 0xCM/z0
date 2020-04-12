@@ -7,7 +7,8 @@ namespace Z0.Logix
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
     using static TypedLogicSpec;
 
     public class t_bitwise_expr : UnitTest<t_bitwise_expr>

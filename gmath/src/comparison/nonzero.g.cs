@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gmath
     {
@@ -16,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Nonz, Closures(Integers)]
         public static bit nonz<T>(T a)
             where T : unmanaged
                 => Numeric.nonz(a); 

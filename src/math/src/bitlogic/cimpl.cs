@@ -81,5 +81,4 @@ namespace Z0
         public static ulong cimpl(ulong a, ulong b)
             => ~a | b;
     }
-
 }

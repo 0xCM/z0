@@ -52,5 +52,4 @@ namespace Z0
             => ~src | (src - 1);
 
     }
-
 }

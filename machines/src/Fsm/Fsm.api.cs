@@ -10,7 +10,6 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
-
     public static class Fsm
     {
         /// <summary>

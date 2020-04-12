@@ -10,8 +10,10 @@ namespace Z0.Asm
     
     using static Seed;
     using static Memories;
+    
+    using ByteParser = ByteParser<EncodingPatternKind>;
 
-    readonly struct OpExtractParser : IOpExtractParser
+    readonly struct ExtractParser : IExtractParser
     {
         readonly IContext Context;
 
@@ -20,36 +22,28 @@ namespace Z0.Asm
         byte[] PatternBuffer {get;}
 
         [MethodImpl(Inline)]
-        public static IOpExtractParser New(IAsmContext context, byte[] buffer)
-            => new OpExtractParser(context,buffer);
+        public static IExtractParser Create(IAsmContext context, byte[] buffer)
+            => new ExtractParser(context,buffer);
 
         [MethodImpl(Inline)]
-        public static IOpExtractParser New(IAsmContext context, int? bufferlen = null)
-            => new OpExtractParser(context, new byte[bufferlen ?? context.DefaultBufferLength]);
+        public static IExtractParser Create(IAsmContext context, int? bufferlen = null)
+            => new ExtractParser(context, new byte[bufferlen ?? context.DefaultBufferLength]);
 
         [MethodImpl(Inline)]
-        OpExtractParser(IAsmContext context, byte[] buffer)
+        ExtractParser(IAsmContext context, byte[] buffer)
         {
             MsgSink = context;
             Context = context;
             PatternBuffer = buffer;
         }
 
-        Option<ParsedExtract> Parse(in MemberExtract src, int seq, ByteParser<EncodingPatternKind> parser)
-        {
-            var status = parser.Parse(src.EncodedData);                
-            var matched = parser.Result;
-            var succeeded = matched.IsSome() && status.Success(); 
-            var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-            return succeeded 
-                ? ParsedExtract.Define(src, seq, matched.ToTermCode(), MemoryExtract.Define(src.EncodedData.Address, data))
-                : none<ParsedExtract>();
-        }
+        public Option<ParsedExtract> Parse(in MemberExtract src, int seq = 0)
+            => Parse(src, seq, Parser());
 
         public ParsedExtract[] Parse(MemberExtract[] extracts)
         {
             var dst = list<ParsedExtract>(extracts.Length);
-            var parser = Context.PatternParser(PatternBuffer.Clear());               
+            var parser = Parser();
             for(var i=0; i< extracts.Length; i++)
             {
                 ref readonly var extract = ref extracts[i];                
@@ -58,6 +52,19 @@ namespace Z0.Asm
             }
 
             return dst.ToArray();
+        }
+
+        ByteParser Parser() => Context.PatternParser(PatternBuffer.Clear());
+
+        Option<ParsedExtract> Parse(in MemberExtract src, int seq, ByteParser parser)
+        {
+            var status = parser.Parse(src.EncodedData);                
+            var matched = parser.Result;
+            var succeeded = matched.IsSome() && status.Success(); 
+            var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
+            return succeeded 
+                ? ParsedExtract.Define(src, seq, matched.ToTermCode(), MemoryExtract.Define(src.EncodedData.Address, data))
+                : none<ParsedExtract>();
         }
 
         public MemberParseReport Parse(IApiHost host, MemberExtractReport extracts)

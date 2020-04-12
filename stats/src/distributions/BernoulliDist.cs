@@ -8,7 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Realizes a Bernoulli distribution

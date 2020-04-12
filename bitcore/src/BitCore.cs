@@ -32,6 +32,12 @@ namespace Z0
 
     }
 
+    [ApiHost]
+    public partial class BitCalcs : IApiHost<BitCalcs>
+    {
+
+    }
+
     public partial class BitMasks
     {            
 

@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_zerohi : t_bitcore<t_zerohi>
     {    

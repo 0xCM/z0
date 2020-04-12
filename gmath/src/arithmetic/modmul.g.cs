@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gmath
     {        
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="b">The second factor</param>
         /// <param name="m">The modulus</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), ModMul, Closures(Integers)]
         public static T modmul<T>(T a, T b, T m)
             where T : unmanaged
                 => modmul_u(a,b,m);

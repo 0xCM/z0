@@ -7,11 +7,6 @@ namespace Z0.Asm
     using System;
 
 
-    /// <summary>
-    /// Delegate contract for capture event receipt
-    /// </summary>
-    /// <param name="data">The event data</param>
-    public delegate void AsmCaptureEventObserver(in AsmCaptureEvent data);
 
     /// <summary>
     /// Delegate contract for emission event receipt

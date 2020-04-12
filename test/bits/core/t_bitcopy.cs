@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Core;
-    
+    using static Seed;
+    using static Memories;
+   
     public class t_bitcopy : t_bitcore<t_bitcopy>
     {            
         public void bitcopy_check()

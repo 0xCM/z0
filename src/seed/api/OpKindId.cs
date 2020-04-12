@@ -120,7 +120,7 @@ namespace Z0
 
         Clamp,
 
-        Distance,
+        Dist,
 
         ClMul,
 
@@ -132,7 +132,7 @@ namespace Z0
 
         Sal,
 
-        Sar,
+        Sra,
 
         Rotl,
 
@@ -186,6 +186,10 @@ namespace Z0
 
         TestC,
 
-        TestZ
+        TestZ,
+
+        Fma,
+
+        ModMul
     }    
 }

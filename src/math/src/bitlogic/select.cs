@@ -9,35 +9,35 @@ namespace Z0
     
     partial class math
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Select]
         public static sbyte select(sbyte a, sbyte b, sbyte c)
             => (sbyte)select((int)a, (int)b, (int)c);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Select]
         public static byte select(byte a, byte b, byte c)
             => (byte)select((uint)a, (uint)b, (uint)c);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Select]
         public static short select(short a, short b, short c)
             => (short)select((int)a, (int)b, (int)c);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Select]
         public static ushort select(ushort a, ushort b, ushort c)
             => (ushort)select((uint)a, (uint)b, (uint)c);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Select]
         public static int select(int a, int b, int c)
             => or(and(a,b), nonimpl(a,c));
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Select]
         public static uint select(uint a, uint b, uint c)
             => or(and(a,b), nonimpl(a,c));
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Select]
         public static long select(long a, long b, long c)
             => or(and(a,b), nonimpl(a,c)); 
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Select]
         public static ulong select(ulong a, ulong b, ulong c)
             => or(and(a,b), nonimpl(a,c)); 
 

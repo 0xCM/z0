@@ -7,14 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Runtime.Intrinsics;
-    using System.Linq;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public static class PRngX
     {
-
         /// <summary>
         /// Produces a random permutation of a specified length
         /// </summary>

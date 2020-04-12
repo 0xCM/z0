@@ -128,6 +128,15 @@ namespace Z0
             => a * b;
 
         /// <summary>
+        /// Computes the arithmetic product of the operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Mul]
+        public static double mul(double a, double b)
+            => a * b;
+
+        /// <summary>
         /// Computes the arithmetic quotient of the first operand over the second
         /// </summary>
         /// <param name="a">The first operand</param>
@@ -154,10 +163,6 @@ namespace Z0
         public static float mod(float a, float b)
             => a % b;
 
-        [MethodImpl(Inline), Mod]
-        public static double mul(double a, double b)
-            => a * b;
-
         /// <summary>
         /// Computes the modulus of the first operand over the second
         /// </summary>
@@ -166,6 +171,26 @@ namespace Z0
         [MethodImpl(Inline), Mod]
         public static double mod(double a, double b)
             => a % b;
+
+        /// <summary>
+        /// Computes z := (a*b) mod m
+        /// </summary>
+        /// <param name="a">The first factor</param>
+        /// <param name="b">The second factor</param>
+        /// <param name="m">The modulus</param>
+        [MethodImpl(Inline), ModMul]
+        public static float modmul(float a, float b, float m)
+            => (a*b) % m;
+
+        /// <summary>
+        /// Computes z := (a*b) mod m
+        /// </summary>
+        /// <param name="a">The first factor</param>
+        /// <param name="b">The second factor</param>
+        /// <param name="m">The modulus</param>
+        [MethodImpl(Inline), ModMul]
+        public static double modmul(double a, double b, double m)
+            => (a*b) % m;
 
         /// <summary>
         /// Computes the smallest integral value greater than or equal to the source value
@@ -222,7 +247,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The first number</param>
         /// <param name="b">The second number</param>
-        [MethodImpl(Inline), Distance]
+        [MethodImpl(Inline), Dist]
         public static ulong dist(double a, double b)
             => a >= b ? (ulong)(a - b) : (ulong)(b - a);
 
@@ -234,11 +259,11 @@ namespace Z0
         public static bit divides(double a, double b)
             => b % a == 0;
  
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Fma]
         public static float fma(float x, float y, float z)
             => MathF.FusedMultiplyAdd(x,y,z);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Fma]
         public static double fma(double x, double y, double z)
             => Math.FusedMultiplyAdd(x, y, z);
 
@@ -284,11 +309,11 @@ namespace Z0
         public static Sign signum(double src)
             => (Sign)Math.Sign(src);            
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Square]
         public static float square(float src)
             => fmath.mul(src,src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Square]
         public static double square(double src)
             => fmath.mul(src,src);
 

@@ -13,7 +13,7 @@ namespace Z0.Asm
     public class CaptureWorkflowContext : IContext
     {
         public CaptureWorkflowContext(IAsmContext context, IApiSet api, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
-            IHostOpExtractor extractor, IOpExtractParser parser,  IHostCaptureWorkflowRelay broker)
+            IHostExtractor extractor, IExtractParser parser,  IHostCaptureWorkflowRelay broker)
         {
             this.RootContext = context;
             this.ApiSet = api;
@@ -29,9 +29,9 @@ namespace Z0.Asm
 
         public IApiSet ApiSet {get;}
 
-        public IHostOpExtractor Extractor {get;}
+        public IHostExtractor Extractor {get;}
 
-        public IOpExtractParser Parser {get;}
+        public IExtractParser Parser {get;}
 
         public IAsmFunctionDecoder Decoder {get;}
 

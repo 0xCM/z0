@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Characterizes a service that extracts host-defined operations
     /// </summary>
-    public interface IHostOpExtractor : IService
+    public interface IHostExtractor : IService
     {
         /// <summary>
         /// Extracts encoded content that defines executable code for a located member

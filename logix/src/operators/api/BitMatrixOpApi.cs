@@ -6,7 +6,8 @@ namespace Z0.Logix
 {
     using System;
 
-    using static Core;    
+    using static Seed;    
+    using static Memories;
     using static OpHelpers;
     using static BitMatrixOps;
 

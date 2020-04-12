@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class BitMatrix
     {                                
@@ -58,7 +58,6 @@ namespace Z0
         /// <param name="n">The matrix order</param>
         /// <typeparam name="N">The matrix order type</typeparam>
         /// <typeparam name="T">The matrix cell type</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> load<M,N,T>(M m, N n, Span<T> src)        
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -72,7 +71,6 @@ namespace Z0
         /// <param name="n">The matrix order</param>
         /// <typeparam name="N">The matrix order type</typeparam>
         /// <typeparam name="T">The matrix cell type</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> load<M,N,T>(Span<T> src)        
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

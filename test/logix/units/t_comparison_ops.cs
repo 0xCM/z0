@@ -8,8 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Gone2;
-    using static Core;
+    using static Memories;
 
     using static VectorizedOps;
     
@@ -122,13 +121,13 @@ namespace Z0.Logix
                 Claim.require(y0);
 
                 var y1 = S.equals(x,x);
-                Claim.eq(Core.maxval<T>(), y1);
+                Claim.eq(Literals.maxval<T>(), y1);
 
                 var y2 = gmath.eq(x,y);
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);
-                Claim.eq(Core.zero<T>(),y3);
+                Claim.eq(Literals.zero<T>(),y3);
 
             }
         }

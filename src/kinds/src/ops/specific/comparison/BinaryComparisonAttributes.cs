@@ -30,4 +30,7 @@ namespace Z0
     public sealed class MaxAttribute : A { public MaxAttribute() : base(K.Max) {} }
 
     public sealed class MinAttribute : A { public MinAttribute() : base(K.Min) {} }
+
+    public sealed class DividesAttribute : A { public DividesAttribute() : base(K.Divides) {} }
+
 }

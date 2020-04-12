@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     /// <summary>
     /// Defines bitmatrix of natural dimensions over a primal type
@@ -29,7 +29,6 @@ namespace Z0
         /// <summary>
         /// Allocates a Zero-filled mxn matrix
         /// </summary>
-        [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> Alloc()
             => new BitMatrix<M, N, T>(new T[BitMatrix.totalcells<M,N,T>()]);
 

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />

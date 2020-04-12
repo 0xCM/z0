@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Gone;
-
     public class t_natproof : UnitTest<t_natproof>
     {    
         public static void equality()

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
  
-    using static Core;
+    using static Seed;
     using static NatCalc;
     using static CheckNumeric;
 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed; using static Memories;
 
     partial class BitMatrix
     {
@@ -233,7 +233,6 @@ namespace Z0
             return ref Z;
         }
 
-        [MethodImpl(NotInline)]
         public static BitMatrix<M, N, T> mul<M,P,N,T>(in BitMatrix<M,P,T> A, in BitMatrix<P,N,T> B)
             where M : unmanaged, ITypeNat
             where P : unmanaged, ITypeNat
@@ -277,7 +276,6 @@ namespace Z0
         /// <param name="Z">The target matrix</param>
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The matrix storage type</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<N,T> mul<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
             where N : unmanaged, ITypeNat
             where T : unmanaged

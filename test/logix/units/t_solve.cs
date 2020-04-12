@@ -6,7 +6,8 @@ namespace Z0.Logix
 {
     using System;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_solve : UnitTest<t_solve>
     {

@@ -9,7 +9,8 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;    
+    using static Memories;
     using static BitLogicSpec;
 
     public static class LogicIdentities

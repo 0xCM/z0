@@ -30,7 +30,6 @@ namespace Z0.Asm
         static void OnCaptureFailed(OpIdentity id)
             => term.error($"Capture failure for {id}");
 
-
         static void OnEmbeddingFailure(OpIdentity id)
             => term.error($"Embedding failure for {id}");
 

@@ -26,7 +26,7 @@ namespace Z0
         /// <summary>
         /// Classifies an arithmetic right-shift
         /// </summary>
-        Sar = Id.Sar,
+        Sra = Id.Sra,
 
         /// <summary>
         /// Classifies a logical left-shift

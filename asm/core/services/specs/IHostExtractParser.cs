@@ -5,11 +5,12 @@
 namespace Z0.Asm
 {
     using System;
-    
-    public interface IOpExtractParser : IService
-    {
-        MemberParseReport Parse(IApiHost src, MemberExtractReport encoded);        
 
-        ParsedExtract[] Parse(MemberExtract[] src);
+    public interface IHostExtractParser : IService
+    {
+        ParsedExtract[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts);
+
+        void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst);
+
     }
 }

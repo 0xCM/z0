@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gmath
     {
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="y">The right factor</param>
         /// <param name="z">The summand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Fma, Closures(Integers)]
         public static T fma<T>(T x, T y, T z)
             where T : unmanaged
                 => fma_u(x,y,z);

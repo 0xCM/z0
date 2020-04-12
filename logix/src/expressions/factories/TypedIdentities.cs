@@ -10,7 +10,8 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Core;
+    using static Seed;    
+    using static Memories;
     using static TypedLogicSpec;
 
     using TLS = TypedLogicSpec;

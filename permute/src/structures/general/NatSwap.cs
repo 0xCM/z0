@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
-    
+    using static Seed;
+    using static Memories;    
     
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length

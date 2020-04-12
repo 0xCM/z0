@@ -7,12 +7,13 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;    
+    using static Memories;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
     /// </summary>
-    [ApiHost("logic.ops",ApiHostKind.Direct)]
+    [ApiHost("logic.ops")]
     public static class LogicOps
     {        
         [MethodImpl(Inline)]

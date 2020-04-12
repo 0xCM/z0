@@ -7,8 +7,8 @@ namespace Z0.Logix
 {
     using System;
     
-    using static Core;
-
+    using static Seed;
+    using static Memories;
     using static BitLogicSpec;
 
     public class t_logic_identities : UnitTest<t_logic_identities>

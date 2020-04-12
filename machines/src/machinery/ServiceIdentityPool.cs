@@ -9,7 +9,7 @@ namespace Z0
     using System.Threading;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Seed;
 
     public class ServiceIdentityPool
     {

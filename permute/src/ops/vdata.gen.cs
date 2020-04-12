@@ -10,9 +10,7 @@ namespace Z0
     
     using static Seed;
     using static Vectors;
-    using static refs;
-    using static CastNumeric;
-    using static Typed;
+    using static Memories;
     
     /// <summary>
     /// Generates the data presented by VData

@@ -39,39 +39,6 @@ namespace Z0
 
         [MethodImpl(Inline), Div]
         public static ulong div(ulong a, ulong b)
-            => a / b;
-
-        [MethodImpl(Inline), Div]
-        public static bit divides(sbyte a, sbyte b)
-            => b % a == 0;
-
-        [MethodImpl(Inline), Div]
-        public static bit divides(byte a, byte b)
-            => b % a == 0;
-
-        [MethodImpl(Inline), Div]
-        public static bit divides(short a, short b)
-            => b % a == 0;
-
-        [MethodImpl(Inline), Div]
-        public static bit divides(ushort a, ushort b)
-            => b % a == 0;
-
-        [MethodImpl(Inline), Div]
-        public static bit divides(int a, int b)
-            => b % a == 0;
-
-        [MethodImpl(Inline), Div]
-        public static bit divides(uint a, uint b)
-            => b % a == 0;
-
-        [MethodImpl(Inline), Div]
-        public static bit divides(long a, long b)
-            => b % a == 0;
-
-        [MethodImpl(Inline), Div]
-        public static bit divides(ulong a, ulong b)
-            => b % a == 0;
-
+            => a / b; 
    }
 }

@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Seed;
     
     /// <summary>
     /// Defines factories that create structures for logic over a single bit

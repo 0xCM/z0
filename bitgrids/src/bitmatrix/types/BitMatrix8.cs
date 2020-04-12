@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Core;
+    using static Seed; using static Memories;
 
     /// <summary>
     /// Defines an 8x8 matrix of bits

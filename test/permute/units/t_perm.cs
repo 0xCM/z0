@@ -8,7 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
  
     public sealed class t_perm : UnitTest<t_perm>
     {

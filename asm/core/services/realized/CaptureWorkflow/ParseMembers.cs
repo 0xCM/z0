@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     partial class HostCaptureSteps
     {
-        public readonly struct ParseMembers
+        public readonly struct ParseMembers : IHostExtractParser
         {
             readonly CaptureWorkflowContext Context;
 
@@ -26,14 +26,17 @@ namespace Z0.Asm
                 this.Context = context;
             }
 
-            public ParsedExtract[] ParseExtracts(in ApiHost host, MemberExtract[] extracts)
+            public ParsedExtract[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
             {
                 var parsed = Context.Parser.Parse(extracts);                
                 Context.Raise(HostExtractsParsed.Define(host, parsed));
                 return parsed;
             }
 
-            AsmOpBits[] HandleSave(in ApiHost host, ParsedExtract[] src, FilePath dst)
+            public void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
+                => Context.Raise(HostAsmHexSaved.Define(host, HandleSave(host, src, dst), dst));
+
+            AsmOpBits[] HandleSave(ApiHostUri host, ParsedExtract[] src, FilePath dst)
             {
                 using var writer = Context.HexWriter(dst);
                 var data = src.Map(x => AsmOpBits.Define(x.Uri, x.ParsedContent.Bytes));
@@ -42,8 +45,6 @@ namespace Z0.Asm
                 return data;
             }
 
-            public void SaveParsed(in ApiHost host, ParsedExtract[] src, FilePath dst)
-                => Context.Raise(HostAsmHexSaved.Define(host, HandleSave(host, src, dst), dst));
         }
     }
 }

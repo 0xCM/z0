@@ -7,7 +7,8 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;    
+    using static Memories;
 
     public static class ExprX
     {        
