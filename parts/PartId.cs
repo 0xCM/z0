@@ -11,18 +11,15 @@ public enum PartId : ulong
 {
     None = 0,
             
-    Root = 12, RootTest = Root | Test,
-
     Nats = 225, NatsTest = Nats | Test,
-
-    CoreFunc = 41, CoreFuncTest = CoreFunc | Test,
 
     Math = 45, MathTest = Math | Test, 
     
-    GMath = 50, MathSvc = 51, 
+    GMath = 50, GMathTest = GMath | Test, 
+   
+    MathSvc = 51, 
 
-    GMathTest = GMath | Test, 
-        
+            
     BitSuite = 500, BitCore = 80, BitFields = 90, BitVectors = 100, VBits = 110, BitSpan = 170, BitString = 230, BitGrids = 700, BitPack = 710,
 
     BitSvc = BitSuite | Svc,
@@ -31,14 +28,26 @@ public enum PartId : ulong
     
     Logix = 120, LogixTest = Logix | Test, 
     
-    Asm = 300, AsmTypes = 302, AsmModels = 304, AsmCore = 310, AsmDecoder = 314,
-
-    AsmTest = Asm | Test, AsmApp = Asm | App,
-
-    Intrinsics = 70, Vectorized = 330, VData = 331, DVec = 332, GVec = 333, FVec = 334, VSvc = 75, Circuits = 720,
-
-    IntrinsicsTest = Intrinsics | Test, VectorizedTest = Vectorized | Test,
+    Asm = 300,  AsmTest = Asm | Test, 
     
+    AsmTypes = 302, AsmModels = 304, AsmCore = 310, AsmDecoder = 314,
+        
+    AsmApp = Asm | App,
+
+    Vectors = 858, VectorTest = Vectors | Test,
+    
+    VData = 331, 
+
+    FVec = 334, 
+
+    DVec = 332, 
+    
+    GVec = 333, GVecTest = GVec | Test, 
+    
+    VSvc = 75, 
+    
+    Circuits = 720,
+        
     LibM = 150, LibMTest = LibM | Test,
 
     Matrix = 160, MatrixTest = Matrix | Test,
@@ -51,10 +60,8 @@ public enum PartId : ulong
 
     Blocks = 260, BlocksTest = Blocks | Test,
 
-    Agency = 270, WorkflowTest = Agency | Test,
-
-    Analogs = 280, AnalogsTest = Analogs | Test,
-
+    Agency = 270, 
+            
     Dynamic = 290, DynamicTest = Dynamic | Test,
     
     Identity = 360, IdentityTest = Identity | Test,
@@ -97,7 +104,6 @@ public enum PartId : ulong
 
     Code = 856,
 
-    Vectors = 858,
 
     Z = 1024,
 

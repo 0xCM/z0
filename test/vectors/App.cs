@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.VectorizedTest)]
+[assembly: PartId(PartId.VectorTest)]
 
 namespace Z0.Parts
 {        

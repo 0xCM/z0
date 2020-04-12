@@ -74,7 +74,7 @@
   <PropertyGroup>
     <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
     <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
-    <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
+    <Dynamic>$(TopDir)dynop/src/z0.dynop.csproj</Dynamic>
     <GMath>$(TopDir)gmath/src/z0.gmath.csproj</GMath>
     <Identity>$(TopDir)identity/src/z0.identity.csproj</Identity>
     <LibM>$(TopDir)libm/src/z0.libm.csproj</LibM>

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Intrinsics)]
+[assembly: PartId(PartId.GVec)]
 
 namespace Z0.Parts
 {
