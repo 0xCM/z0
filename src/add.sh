@@ -13,9 +13,6 @@ bash $Cmd
 export ProjectId=checks
 bash $Cmd
 
-export ProjectId=code
-bash $Cmd
-
 export ProjectId=collective
 bash $Cmd
 
@@ -82,3 +79,5 @@ bash $Cmd
 export ProjectId=vectors
 bash $Cmd
 
+export ProjectId=gmath
+bash $Cmd
