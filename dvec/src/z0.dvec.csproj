@@ -6,8 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(VData)" />
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitStrings)" />
+    <ProjectReference Include="$(FVec)" />
   </ItemGroup>
 
 </Project>

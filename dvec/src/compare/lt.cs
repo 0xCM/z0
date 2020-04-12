@@ -15,10 +15,30 @@ namespace Z0
 
     using static Seed; 
     using static Memories;
-    using static BitMasks;
+    //using static BitMasks;
 
     partial class dvec
     {
+        /// <summary>
+        /// [10000000]
+        /// </summary>
+        const byte SignMask8 = Pow2.T07;
+
+        /// <summary>
+        /// [10000000 00000000]
+        /// </summary>
+        const ushort SignMask16 = Pow2.T15;
+        
+        /// <summary>
+        /// [10000000 00000000 00000000 00000000]
+        /// </summary>
+        const uint SignMask32 = Pow2.T31;
+
+        /// <summary>
+        /// [10000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000]
+        /// </summary>
+        const ulong SignMask64 = Pow2.T63;
+
         /// <summary>
         /// __m128i _mm_cmplt_epi8 (__m128i a, __m128i b)PCMPGTB xmm, xmm/m128
         /// </summary>

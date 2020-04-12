@@ -117,9 +117,9 @@ namespace Z0
         [MethodImpl(Inline), Gt]
         public static Vector128<long> vgt(Vector128<long> x, Vector128<long> y)
         {
-            var a = gvec.vinsert(x,default,0);
-            var b = gvec.vinsert(y,default,0);
-            return gvec.vlo(vgt(a,b));
+            var a = vpattern.vinsert(x,default,0);
+            var b = vpattern.vinsert(y,default,0);
+            return vpattern.vlo(vgt(a,b));
         }
 
         /// <summary>
