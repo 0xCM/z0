@@ -11,7 +11,7 @@
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitSpans)" />    
     <ProjectReference Include="$(Circuits)" />
-    <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Permute)" />
     <ProjectReference Include="$(Vectors)" />    

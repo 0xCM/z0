@@ -2,18 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+[assembly: PartId(PartId.Intrinsics)]
+
+namespace Z0.Parts
 {
-    using System;
-
-    /// <summary>
-    /// Generic vectorized intrinsics
-    /// </summary>
-    [ApiHost(ApiHostKind.Generic)]
-    public static partial class gvec
-    {
-
+    public sealed class Intrinsics : Part<Intrinsics>
+    {        
+        
     }
-
-
 }

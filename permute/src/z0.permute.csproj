@@ -9,6 +9,6 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(GVec)" />
   </ItemGroup>
 </Project>

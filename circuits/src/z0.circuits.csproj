@@ -10,7 +10,7 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Vectors)" />
-    <ProjectReference Include="$(Intrinsics)" />    
+    <ProjectReference Include="$(GVec)" />
 
   </ItemGroup>
 

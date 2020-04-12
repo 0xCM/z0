@@ -10,7 +10,7 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(GVec)" />
   </ItemGroup>
 
 </Project>

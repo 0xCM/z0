@@ -11,7 +11,7 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Dynamic)" />    
-    <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Stats)" />
   </ItemGroup>
 

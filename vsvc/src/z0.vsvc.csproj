@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(VData)" />    
-    <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Dynamic)" />    
     <ProjectReference Include="$(BitCore)" />
   </ItemGroup>

@@ -8,7 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Matrix)" />    
-    <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Permute)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitSpans)" />

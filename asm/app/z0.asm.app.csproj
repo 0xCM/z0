@@ -14,7 +14,7 @@
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />    
-    <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(VBits)" />
