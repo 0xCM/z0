@@ -17,13 +17,19 @@ public enum PartId : ulong
     
     GMath = 50, GMathTest = GMath | Test, 
    
-    MathSvc = 51, 
 
             
     BitSuite = 500, BitCore = 80, BitFields = 90, BitVectors = 100, VBits = 110, BitSpan = 170, BitString = 230, BitGrids = 700, BitPack = 710,
 
-    BitSvc = BitSuite | Svc,
-    
+
+    MathSvc = 51, 
+
+    MathSvcTest = MathSvc | Test,
+
+    BitSvc = 81,
+
+    BitSvcTest = BitSvc | Test,
+
     BitTest = BitSuite | Test,
     
     Logix = 120, LogixTest = Logix | Test, 
@@ -45,6 +51,8 @@ public enum PartId : ulong
     GVec = 333, GVecTest = GVec | Test, 
     
     VSvc = 75, 
+    
+    VSvcTest = VSvc | Test,
     
     Circuits = 720,
         

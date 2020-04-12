@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
 
-    public static partial class CheckSpecs
+    public static class CheckSpecs
     {   
 
     }
@@ -30,14 +30,13 @@ namespace Z0
         
     }
 
-    public partial class CheckExec  : UnitTest<CheckExec>
+    public class CheckExec  : UnitTest<CheckExec>
     {
         public CheckExec()
         {
             
         }
 
-        [MethodImpl(NotInline)]
         static void CheckFailed()
             => throw new Exception();
                 

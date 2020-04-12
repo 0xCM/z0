@@ -45,6 +45,12 @@ bash $Cmd
 export ProjectId=machines
 bash $Cmd
 
-export ProjectId=validity
+export ProjectId=bitsvc
+bash $Cmd
+
+export ProjectId=mathsvc
+bash $Cmd
+
+export ProjectId=vsvc
 bash $Cmd
 

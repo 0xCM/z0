@@ -5,14 +5,24 @@
 namespace Z0
 {
     using System;
-    
-    /// <summary>
-    /// Base type for intrinsic tests
-    /// </summary>
-    /// <typeparam name="X">The concrete subtype</typeparam>
-    public abstract class t_inx<X> : UnitTest<X>
-        where X : t_inx<X>
+
+
+    public abstract class t_vsvc<X> : UnitTest<X>    
+        where X : t_vsvc<X>, new()
     {
+
         protected ICheckNumeric Claim => ICheckNumeric.Checker;
+
+        protected ISVFDecomposer Comparisons {get;}
+
+        protected CheckExec Check {get;}
+
+        protected t_vsvc()
+        {
+            Check = new CheckExec();
+            Comparisons = Context.Decomposer();
+        }
+
+    
     }
 }

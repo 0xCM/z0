@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
-    using static Gone2;
-    using static CheckSpecs;
+    using static Seed;
+    using static Memories;
 
     static class VChecks
     {
@@ -42,52 +41,49 @@ namespace Z0
                 => VBroadcastCheck256<S, T>.Op;
     }
 
-    partial class CheckSpecs
+    public readonly struct VBroadcastCheck128<S, T> : ISFChecker128Api<S, T>
+        where S : unmanaged
+        where T : unmanaged
     {
-        public readonly struct VBroadcastCheck128<S, T> : ISFChecker128Api<S, T>
-            where S : unmanaged
-            where T : unmanaged
+        public static VBroadcastCheck128<S, T> Op => default;
+        
+        public const string Name = "vbroadcast_check";
+
+        public Vec128Kind<T> VKind => default;
+        
+        public OpIdentity Id => Identify.sfunc(Name,VKind);
+
+        public bit Invoke(S a, Vector128<T> x)
         {
-            public static VBroadcastCheck128<S, T> Op => default;
-            
-            public const string Name = "vbroadcast_check";
-
-            public Vec128Kind<T> VKind => default;
-            
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
-            public bit Invoke(S a, Vector128<T> x)
-            {
-                var count = vcount<T>(Widths.w128);
-                var result = bit.On;
-                var y = x.As<T,S>();
-                for(var i=0; i< count; i++)
-                    result &= gmath.eq(a, y.Cell(i));
-                return result;
-            }
-        }
-
-        public readonly struct VBroadcastCheck256<S, T> : ISFChecker256Api<S, T>
-            where S : unmanaged
-            where T : unmanaged
-        {
-            public static VBroadcastCheck256<S, T> Op => default;
-
-            public Vec256Kind<T> VKind => default;
-            
-            public const string Name = "vbroadcast_check";
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
-            public bit Invoke(S a, Vector256<T> x)
-            {
-                var count = vcount<T>(Widths.w256);
-                var result = bit.On;
-                var y = x.As<T,S>();
-                for(var i=0; i< count; i++)
-                    result &= gmath.eq(a, y.Cell(i));
-                return result;
-            }
+            var count = vcount<T>(Widths.w128);
+            var result = bit.On;
+            var y = x.As<T,S>();
+            for(var i=0; i< count; i++)
+                result &= gmath.eq(a, y.Cell(i));
+            return result;
         }
     }
+
+    public readonly struct VBroadcastCheck256<S, T> : ISFChecker256Api<S, T>
+        where S : unmanaged
+        where T : unmanaged
+    {
+        public static VBroadcastCheck256<S, T> Op => default;
+
+        public Vec256Kind<T> VKind => default;
+        
+        public const string Name = "vbroadcast_check";
+
+        public OpIdentity Id => Identify.sfunc(Name,VKind);
+
+        public bit Invoke(S a, Vector256<T> x)
+        {
+            var count = vcount<T>(Widths.w256);
+            var result = bit.On;
+            var y = x.As<T,S>();
+            for(var i=0; i< count; i++)
+                result &= gmath.eq(a, y.Cell(i));
+            return result;
+        }
+    } 
 }

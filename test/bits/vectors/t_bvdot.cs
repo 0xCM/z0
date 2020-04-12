@@ -27,14 +27,6 @@ namespace Z0
             bvdot_natcheck(z64);
         }
 
-        public void bvdot_gcheck()
-        {
-            bvdot_gcheck<byte>();
-            bvdot_gcheck<ushort>();
-            bvdot_gcheck<uint>();
-            bvdot_gcheck<ulong>();
-        }
-
         void bvdot_natcheck(byte t)
         {   
             bvdot_natcheck<N2,byte>();
@@ -257,31 +249,7 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Verifies the generic bitvector dot product operation
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        protected void bvdot_gcheck<T>(T t = default)
-            where T : unmanaged
-        {
-            var f = BV.bvdot(t);
-
-            void check()
-            {
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.BitVector<T>();
-                    var y = Random.BitVector<T>();
-                    var actual = f.Invoke(x,y);
-                    var expect = BitVector.modprod(x,y);
-                    Claim.require(actual == expect);
-                    Claim.require(actual == f.InvokeScalar(x,y));
-                }
-            }
-
-            CheckAction(check, CaseName(f));
-        }
-
+ 
         /// <summary>
         /// Verifies the natural bitvector dot product operation
         /// </summary>

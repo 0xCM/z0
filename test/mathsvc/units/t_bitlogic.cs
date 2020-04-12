@@ -10,7 +10,7 @@ namespace Z0
 
     using S = Surrogates;
 
-    public class t_bitlogic : t_gmath<t_bitlogic>
+    public class t_bitlogic : t_mathsvc<t_bitlogic>
     {              
         public void and_check()
         {

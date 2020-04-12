@@ -37,7 +37,7 @@
 
   <PropertyGroup>
     <Validity>$(TestDir)validity/z0.validity.csproj</Validity>
-
+    <ValidityVectors>$(TestDir)vvalidity/z0.vvalidity.csproj</ValidityVectors>
   </PropertyGroup>
 
   <PropertyGroup>    
@@ -88,7 +88,6 @@
     <Polyrand>$(TopDir)polyrand/z0.polyrand.csproj</Polyrand>
     <Permute>$(TopDir)permute/src/z0.permute.csproj</Permute>
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
-    <ValidityVectors>$(TopDir)validity/vectors/z0.validity.vectors.csproj</ValidityVectors>
   </PropertyGroup>
 
   <Import Project="$(SrcDir)core.export.props"/>

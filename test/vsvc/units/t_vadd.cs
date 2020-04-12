@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     
-    using static Core;
+    using static Seed;
 
-    public class t_vadd : t_vinx<t_vadd>
+    public class t_vadd : t_vsvc<t_vadd>
     {
         public void vadd_check()
         {            

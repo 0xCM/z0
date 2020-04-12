@@ -12,14 +12,6 @@ namespace Z0
 
     public class t_bvxor : t_bitvectors<t_bvxor>
     {
-        public void bvxor_check()
-        {
-            bvxor_check(z8);
-            bvxor_check(z16);
-            bvxor_check(z32);
-            bvxor_check(z64);
-        }
-
         public void bvxor_n13x8u()
         {
             var x0 = Random.BitBlock<N13,byte>();
@@ -277,26 +269,5 @@ namespace Z0
             }
         }
 
-
-        void bvxor_check<T>(T t = default)
-            where T : unmanaged
-        {
-            var f = BV.bvxor(t);
-
-            void check()
-            {
-                for(var rep=0; rep<RepCount; rep++)
-                {
-                    var x = Random.BitVector<T>();
-                    var y = Random.BitVector<T>();
-                    var result = f.Invoke(x,y);
-                    var expect = f.InvokeScalar(x.Scalar,y.Scalar);
-                    Claim.eq(expect,result.Scalar);
-                }
-
-            }
-
-            CheckAction(check, CaseName(f));
-        }
     }
 }
