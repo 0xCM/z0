@@ -63,16 +63,18 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VTop>$(TopDir)vectorized/</VTop>
+    <Intrinsics>$(TopDir)intrinsics/src/z0.intrinsics.csproj</Intrinsics>
 
     <VSvc>$(TopDir)vsvc/src/z0.vsvc.csproj</VSvc>
     <FVec>$(TopDir)fvec/src/z0.fvec.csproj</FVec>
+    <DVec>$(TopDir)dvec/src/z0.dvec.csproj</DVec>
+    <GVec>$(TopDir)gvec/src/z0.gvec.csproj</GVec>    
+    <VData>$(TopDir)vdata/src/z0.vdata.csproj</VData>
+    <Circuits>$(TopDir)circuits/src/z0.circuits.csproj</Circuits>
 
-    <VCore>$(TopDir)/vectorized/vcore/z0.vcore.csproj</VCore>
-    <Circuits>$(VTop)circuits/z0.circuits.csproj</Circuits>
-    <DVec>$(VTop)dvec/z0.dvec.csproj</DVec>
-    <VData>$(VTop)vdata/z0.vdata.csproj</VData>
-    <Intrinsics>$(TopDir)intrinsics/src/z0.intrinsics.csproj</Intrinsics>
+
+    <VTop>$(TopDir)vectorized/</VTop>
+
   </PropertyGroup>
   
   <PropertyGroup>
