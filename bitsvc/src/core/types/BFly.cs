@@ -9,19 +9,20 @@ namespace Z0
         
     using static Seed;
 
-    partial class BitService
+    partial class BitCoreSvc
     {
-        public readonly struct PopCount<T> : ISFuncApi<T,uint>
-            where T : unmanaged        
+        public readonly struct Bfly<N,T> : ISUnaryOpApi<T>
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
         {
-            public static PopCount<T> Op => default;
+            public const string Name = "bfly";
 
-            public const string Name = "popcount";
+            public static Bfly<N,T> Op => default;
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<N,T>(Name);
 
             [MethodImpl(Inline)]
-            public uint Invoke(T a) => gbits.pop(a);
+            public T Invoke(T a) => gbits.bfly<N,T>(a);
         }
     }
 }

@@ -7,18 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    partial class BitService
+    using static Seed;
+
+    partial class BitCoreSvc
     {
-        public readonly struct BitSlice<T> : ISImm8x2UnaryOpApi<T>
+        public readonly struct Dot<T> : ISFuncApi<T,T,bit>
             where T : unmanaged        
         {
-            public static BitSlice<T> Op => default;
+            public static Dot<T> Op => default;
 
-            public const string Name = "bitslice";
+            public const string Name = "dot";
 
             public OpIdentity Id => Identify.sFunc<T>(Name);
 
-            public T Invoke(T a, byte k1, byte k2) => gbits.bitslice(a,k1,k2);
+            [MethodImpl(Inline)]
+            public bit Invoke(T a, T b) => gbits.dot(a,b);
         }
     }
 }

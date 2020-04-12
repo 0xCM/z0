@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
 
         
-    public partial class BitService
+    public partial class BitCoreSvc
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ByteSwap<T> byteswap<T>(T t = default)

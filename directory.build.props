@@ -56,6 +56,7 @@
     <BitPack>$(TopDir)bitpack/src/z0.bitpack.csproj</BitPack>
     <BitFields>$(TopDir)bitfields/src/z0.bitfields.csproj</BitFields>
     <BitVectors>$(TopDir)bitvectors/src/z0.bitvectors.csproj</BitVectors>
+    <BitSvc>$(TopDir)bitsvc/src/z0.bitsvc.csproj</BitSvc>
 
     <VBits>$(TopDir)vbits/src/z0.vbits.csproj</VBits>
     <BitGrids>$(TopDir)bitgrids/src/z0.bitgrids.csproj</BitGrids>
