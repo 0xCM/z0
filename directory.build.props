@@ -66,11 +66,11 @@
     <VTop>$(TopDir)vectorized/</VTop>
 
     <VSvc>$(TopDir)vsvc/src/z0.vsvc.csproj</VSvc>
+    <FVec>$(TopDir)fvec/src/z0.fvec.csproj</FVec>
 
     <VCore>$(TopDir)/vectorized/vcore/z0.vcore.csproj</VCore>
     <Circuits>$(VTop)circuits/z0.circuits.csproj</Circuits>
     <DVec>$(VTop)dvec/z0.dvec.csproj</DVec>
-    <FVec>$(VTop)fvec/z0.fvec.csproj</FVec>
     <VData>$(VTop)vdata/z0.vdata.csproj</VData>
     <Intrinsics>$(TopDir)intrinsics/src/z0.intrinsics.csproj</Intrinsics>
   </PropertyGroup>
