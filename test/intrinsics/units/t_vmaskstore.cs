@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;
-    using static Gone2;
     using static HexConst;
 
     public class t_vmaskstore : t_vinx<t_vmaskstore>
@@ -72,7 +71,7 @@ namespace Z0
 
 
             for(var i=0; i< count; i++)
-                if(parity.odd(i)) 
+                if(Numeric.odd(i)) 
                     Claim.eq(vcell(x,i), storage[i]);
                 else
                     Claim.eq(z8, storage[i]);
@@ -85,7 +84,7 @@ namespace Z0
 
 
             for(var i=0; i< count; i++)
-                if(parity.even(i)) 
+                if(Numeric.even(i)) 
                     Claim.eq(vcell(x,i), storage[i]);
                 else
                     Claim.eq(z8, storage[i]);

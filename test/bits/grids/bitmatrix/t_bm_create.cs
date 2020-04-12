@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_bm_create : t_bm<t_bm_create>
     {
@@ -31,11 +32,11 @@ namespace Z0
             byte p1 = 0b010;
 
             for(var row=0; row < bm.RowCount; row++)
-                bm[row] = BitBlocks.literal<N3,byte>(parity.even(row) ? p0 : p1);
+                bm[row] = BitBlocks.single<N3,byte>(Numeric.even(row) ? p0 : p1);
 
             for(var row=0; row < bm.RowCount; row++)
             for(var col=0; col < bm.ColCount; col++)
-                Claim.eq(bm[row,col], parity.even(row) ? bit.test(p0,col) : bit.test(p1,col));
+                Claim.eq(bm[row,col], Numeric.even(row) ? bit.test(p0,col) : bit.test(p1,col));
         }
 
         public void bm_create_fromfixed_16x16x16()
@@ -74,7 +75,7 @@ namespace Z0
         public void bm_init_n7x9x8()
         {
             const byte pattern = 0b01010101;
-            var fill = BitBlocks.init(n9, pattern);
+            var fill = BitBlocks.alloc(n9, pattern);
             var matrix = BitMatrix.init(fill, n7);
             for(var i=0; i<matrix.RowCount; i++)
                 Claim.require(fill == matrix[i]);

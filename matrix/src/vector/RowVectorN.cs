@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The vector's dimension
         /// </summary>
-        public static readonly int Dim = nati<N>();     
+        public static int Dim => nati<N>();     
 
         /// <summary>
         /// The zero vector
@@ -120,7 +120,6 @@ namespace Z0
                 dst[i] = f(data[i]);
             return ref dst;
         }
-
         
         [MethodImpl(Inline)]
         public RowVector<N,U> Convert<U>()

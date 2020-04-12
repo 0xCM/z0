@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     partial class BitGrid
     {
@@ -525,7 +526,6 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline)]
         public static BitGrid<M,N,T> init<M,N,T>(M m = default, N n = default, T d = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

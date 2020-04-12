@@ -13,16 +13,14 @@ namespace Z0
     partial class Numeric
     {
         /// <summary>
-        /// If the source value is signed, negates it; otherwise, computes
-        /// the two's complement negation
+        /// If the source value is signed, negates it; otherwise, computes the two's complement negation
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T negate<T>(T src)
             where T : unmanaged
-            => negate_u(src);
+                => negate_u(src);
             
         [MethodImpl(Inline)]
         static T negate_u<T>(T src)

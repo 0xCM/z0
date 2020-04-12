@@ -17,4 +17,10 @@ namespace Z0
     {
         public const string SvcCollectionName = "math.services";        
     }
+
+    public static partial class XTend
+    {
+
+        
+    }
 }

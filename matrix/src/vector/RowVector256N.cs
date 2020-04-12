@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// Specifies the length of the vector, i.e. its component count
         /// </summary>
-        public static readonly int Length = nati<N>();     
+        public static int Length => nati<N>();     
 
         /// <summary>
         /// Vec => Slice

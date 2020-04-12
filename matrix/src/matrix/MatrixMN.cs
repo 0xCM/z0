@@ -23,42 +23,20 @@ namespace Z0
     {        
         T[] data;
 
-        public static readonly Dim<M,N> Dim = default;        
-
         /// <summary>
         /// The number of rows in the structure
         /// </summary>
-        static int _RowCount => nati<M>();
+        public static int Rows => nati<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
-        static int _ColCount => nati<N>();
-
-        /// <summary>
-        /// The number of cells in each row
-        /// </summary>
-        static int _RowLenth => nati<N>();
-
-        /// <summary>
-        /// The number of cells in each column
-        /// </summary>
-        static int _ColLength => nati<M>();
+        public static int Cols => nati<N>();
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static int CellCount => _RowLenth * _ColLength;
-
-        /// <summary>
-        /// The Row dimension representative
-        /// </summary>
-        public static M RowRep => default;
-
-        /// <summary>
-        /// The Column dimension representative
-        /// </summary>
-        public static N ColRep => default;
+        public static int Cells => Rows * Cols;
 
         [MethodImpl(Inline)]
         public static bool operator == (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs) 
@@ -71,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            require(src.Length >= CellCount);
+            require(src.Length >= Cells);
             data = src;
         }
 
@@ -81,16 +59,7 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => _RowCount;
-        }
-
-        /// <summary>
-        /// The number of cells in each row
-        /// </summary>
-        public readonly int RowLength
-        {
-            [MethodImpl(Inline)]
-            get => nati<N>();
+            get => Rows;
         }
 
         /// <summary>
@@ -99,16 +68,7 @@ namespace Z0
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => _ColCount;
-        }
-
-        /// <summary>
-        /// The number of cells in each column
-        /// </summary>
-        public readonly int ColLength
-        {
-            [MethodImpl(Inline)]
-            get => _ColLength;
+            get => Cols;
         }
 
         /// <summary>
@@ -122,7 +82,7 @@ namespace Z0
 
         [MethodImpl(Inline)]        
         public ref T Cell(int r, int c)
-            => ref data[_RowLenth*r + c];
+            => ref data[Cols*r + c];
 
         public ref T this[int r, int c]
         {
@@ -148,29 +108,29 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector256<N,T> GetRow(int row)
         {
-            if(row < 0 || row >= _RowCount)
-                throw AppErrors.IndexOutOfRange(row, 0, _RowCount - 1);
+            if(row < 0 || row >= Rows)
+                throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
             
-            return RowVector.blockload<N,T>(data.AsSpan().Slice(row * _RowLenth, _RowLenth));
+            return RowVector.blockload<N,T>(data.AsSpan().Slice(row * Cols, Cols));
         }
 
         [MethodImpl(Inline)]
         public ref RowVector256<N,T> GetRow(int row, ref RowVector256<N,T> dst)
         {
-            if(row < 0 || row >= _RowCount)
-                throw AppErrors.IndexOutOfRange(row, 0, _RowCount - 1);
-             var src = data.AsSpan().Slice(row * _RowLenth, _RowLenth);
+            if(row < 0 || row >= Rows)
+                throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
+             var src = data.AsSpan().Slice(row * Cols, Cols);
              src.CopyTo(dst.Unsized);
              return ref dst;
         }
 
         public ref RowVector256<M,T> GetCol(int col, ref RowVector256<M,T> dst)
         {
-            if(col < 0 || col >= _ColCount)
-                throw AppErrors.IndexOutOfRange(col, 0, _ColCount - 1);
+            if(col < 0 || col >= Cols)
+                throw AppErrors.IndexOutOfRange(col, 0, Cols - 1);
             
-            for(var row = 0; row < _ColLength; row++)
-                dst[row] = data[row*_RowLenth + col];
+            for(var row = 0; row < Rows; row++)
+                dst[row] = data[row*Cols + col];
             return ref dst;
         }
 
@@ -188,7 +148,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void SetCol(int col, RowVector256<M,T> src)
         {
-            for(var row=0; row < _RowCount; row++)
+            for(var row=0; row < Rows; row++)
                 this[row,col] = src[row];
         }
 
@@ -198,7 +158,7 @@ namespace Z0
         public Matrix<N,M,T> Transpose()
         {
             var dst = Matrix.alloc<N,M,T>();
-            for(var row = 0; row < _RowCount; row++)
+            for(var row = 0; row < Rows; row++)
                 dst.SetCol(row, GetRow(row));            
             return dst;
         }
@@ -209,8 +169,8 @@ namespace Z0
         /// <param name="f">The function to apply</param>
         public Matrix<M,N,T> Apply(Func<T,T> f)
         {
-            for(var r = 0; r < _RowCount; r++)
-            for(var c = 0; c < _ColCount; c++)
+            for(var r = 0; r < Rows; r++)
+            for(var c = 0; c < Cols; c++)
                 this[r,c] = f(this[r,c]);
             return this;
         }
@@ -228,8 +188,8 @@ namespace Z0
 
         public bool Equals(Matrix<M,N,T> rhs)
         {
-            for(var r = 0; r < (int)_RowCount; r ++)
-            for(var c = 0; c < (int)_ColCount; c ++)
+            for(var r = 0; r < (int)Rows; r ++)
+            for(var c = 0; c < (int)Cols; c ++)
                 if(!gmath.eq(this[r,c], rhs[r,c]))
                     return false;
             return true;

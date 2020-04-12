@@ -13,13 +13,13 @@ namespace Z0
 
     partial class XTend
     {
-        public static NatSpan<N,T> Contract<N,T>(this NatSpan<N,T> src, NatSpan<N,T> max)
+        public static NatSpan<N,T> Squeeze<N,T>(this NatSpan<N,T> src, NatSpan<N,T> max)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dst = api.alloc<N, T>();
             for(var i=0; i<dst.Length; i++)
-                dst[i] = Numeric.contract(src[i],max[i]);
+                dst[i] = Numeric.squeeze(src[i],max[i]);
             return dst;
         }
 

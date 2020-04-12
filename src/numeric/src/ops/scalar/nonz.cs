@@ -51,5 +51,4 @@ namespace Z0
         public static bit nonz(double src)
             => src != 0;
     }            
-
 }

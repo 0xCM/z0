@@ -7,21 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed;    
+    using static Memories;
 
     partial class BitMatrix
     {        
         /// <summary>
         /// Counts the number of enabled bits in the matrix
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(in BitMatrix8 A)
             => Bits.pop((ulong)A);
 
         /// <summary>
         /// Counts the number of enabled bits in the matrix
         /// </summary>
-        [MethodImpl(Inline)] 
+        [MethodImpl(Inline), Op]
         public static uint pop(in BitMatrix16 A)
         {
             ref readonly var src = ref head(A.Data.AsUInt64());
@@ -36,7 +37,7 @@ namespace Z0
         /// <summary>
         /// Counts the number of enabled bits in the matrix
         /// </summary>
-        [MethodImpl(Inline)] 
+        [MethodImpl(Inline), Op]
         public static uint pop(in BitMatrix32 A)
         {
             const uint bytes = BitMatrix32.N * 3;
@@ -49,7 +50,7 @@ namespace Z0
         /// <summary>
         /// Counts the number of enabled bits in the matrix
         /// </summary>
-        [MethodImpl(Inline)] 
+        [MethodImpl(Inline), Op]
         public static uint pop(in BitMatrix64 A)
         {
             const int N = 64;

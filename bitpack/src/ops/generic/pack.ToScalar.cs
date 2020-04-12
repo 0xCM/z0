@@ -15,13 +15,24 @@ namespace Z0
     partial class BitPack
     {
         /// <summary>
+        /// Packs 8 1-bit values taken from the least significant bit of each source byte
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="mod">The bit selection modulus</param>
+        /// <param name="block">The index of the block to pack</param>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static byte pack<T>(in T src, N8 count, N8 mod)
+            where T : unmanaged
+                => (byte)Bits.gather(convert<T,ulong>(src), BitMasks.Lsb64x8x1);
+
+        /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ushort maskpack<T>(in T src, N16 count, N8 mod)
+        public static ushort pack<T>(in T src, N16 count, N8 mod)
             where T : unmanaged
                 => vtakemask(gvec.vsll(vload(n128, refs.const64(src)),7));
 
@@ -32,7 +43,7 @@ namespace Z0
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static uint maskpack<T>(in T src, N32 count, N8 mod)
+        public static uint pack<T>(in T src, N32 count, N8 mod)
             where T : unmanaged
                 => vtakemask(gvec.vsll(vload(n256, refs.const64(src)),7));
 
@@ -43,12 +54,12 @@ namespace Z0
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ulong maskpack<T>(in T src, N64 count, N8 mod)
+        public static ulong pack<T>(in T src, N64 count, N8 mod)
             where T : unmanaged
         {
             var dst = 0ul;
-            dst = (ulong)maskpack(in src, n32, n8);
-            dst |=(ulong)maskpack(in skip(in src, 32), n32, n8) << 32;
+            dst = (ulong)pack(in src, n32, n8);
+            dst |=(ulong)pack(in skip(in src, 32), n32, n8) << 32;
             return dst;
         }        
     }

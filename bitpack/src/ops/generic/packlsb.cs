@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ushort packlsb<T>(Vector128<T> src, N8 mod)
             where T : unmanaged
-                => packindex(src,0);
+                => vpack(src,0);
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -29,6 +29,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static uint packlsb<T>(Vector256<T> src, N8 mod)
             where T : unmanaged
-                => packindex(src,0);
+                => vpack(src,0);
     }
 }

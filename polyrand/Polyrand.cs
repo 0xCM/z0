@@ -16,6 +16,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using static Seed;
     
     public static partial class Rng
     {
@@ -24,6 +26,23 @@ namespace Z0
 
     public static partial class XTend
     {
+        /// <summary>
+        /// Evenly projects points from the interval [0,2^31 - 1] onto the interval [0,max]
+        /// </summary>
+        /// <param name="src">The value to contract</param>
+        /// <param name="max">The maximum value in the target interval</param>
+        [MethodImpl(Inline)]
+        internal static uint Contract(this uint src, uint max)
+            => (uint)(((ulong)src * (ulong)max) >> 32);
+
+        /// <summary>
+        /// Evenly projects points from the interval [0,2^63 - 1] onto the interval [0,max]
+        /// </summary>
+        /// <param name="src">The value to contract</param>
+        /// <param name="max">The maximum value in the target interval</param>
+        [MethodImpl(Inline)]
+        internal static ulong Contract(this ulong src, ulong max)
+            => BmiMul.mulhi(src,max); 
 
     }
 

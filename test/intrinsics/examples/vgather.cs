@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static Gone2;
     using static dvec;
 
     partial class vexamples
@@ -135,7 +133,7 @@ namespace Z0
             for(var block = 0; block < BlockCount; block++)
             {
                 var target = A.Block(block);
-                var source = parity.even(block) ? pattern0 : pattern1;
+                var source = Numeric.even(block) ? pattern0 : pattern1;
                 source.StoreTo(target);
             }
 
@@ -151,7 +149,7 @@ namespace Z0
                 
                 var indices = Vectors.vparts(w,i0,i1,i2,i3);
                 var result = vgather(w, in A.Head, indices);
-                var expect = parity.even(block) ? pattern0 : pattern1;
+                var expect = Numeric.even(block) ? pattern0 : pattern1;
                 Claim.veq(result,expect);                
             }
         }

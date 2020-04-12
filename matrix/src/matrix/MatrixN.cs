@@ -29,28 +29,7 @@ namespace Z0
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static int CellCount => nati<N>() * nati<N>();
-
-        /// <summary>
-        /// The number of rows in the structure
-        /// </summary>
-        static readonly int _RowCount = nati<N>();
-
-        /// <summary>
-        /// The number of columns in the structure
-        /// </summary>
-        static readonly int _ColCount = nati<N>();
-
-        /// <summary>
-        /// The number of cells in each row
-        /// </summary>
-        static readonly int _RowLenth = nati<N>();
-
-        /// <summary>
-        /// The number of cells in each column
-        /// </summary>
-        static readonly int _ColLength = nati<N>();
-
+        public static int Cells => nati<N>() * nati<N>();
 
         [MethodImpl(Inline)]
         public static implicit operator Matrix<N,T>(Matrix<N,N,T> src)
@@ -79,13 +58,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            require(src.Length >= CellCount);
+            require(src.Length >= Cells);
             data = src;
         }
 
         [MethodImpl(Inline)]        
         public ref T Cell(int r, int c)
-            => ref data[_RowLenth*r + c];
+            => ref data[Order*r + c];
 
         /// <summary>
         /// The data contained in the matrix
@@ -112,16 +91,7 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => _RowCount;
-        }
-
-        /// <summary>
-        /// The number of cells in each row
-        /// </summary>
-        public readonly int RowLength
-        {
-            [MethodImpl(Inline)]
-            get => _RowLenth;
+            get => Order;
         }
 
         /// <summary>
@@ -130,16 +100,7 @@ namespace Z0
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => _ColCount;
-        }
-
-        /// <summary>
-        /// The number of cells in each column
-        /// </summary>
-        public readonly int ColLength
-        {
-            [MethodImpl(Inline)]
-            get => _ColLength;
+            get => Order;
         }
 
         public ref T this[int r, int c]
@@ -184,15 +145,15 @@ namespace Z0
         [MethodImpl(Inline)]
         void CheckRowIndex(int row)
         {
-            if(row < 0 || row >= _RowCount)
-                throw AppErrors.IndexOutOfRange(row, 0, _RowCount - 1);
+            if(row < 0 || row >= Order)
+                throw AppErrors.IndexOutOfRange(row, 0, Order - 1);
         }
 
         [MethodImpl(Inline)]
         public void SetRow(int row, RowVector<N,T> src)
         {
             CheckRowIndex(row);
-            var offset = row * _RowLenth; 
+            var offset = row * Order; 
             src.Data.AsSpan().CopyTo(data, offset);                         
         }
 
@@ -200,18 +161,18 @@ namespace Z0
         public ref RowVector<N,T> GetRow(int row, ref RowVector<N,T> dst)
         {
              CheckRowIndex(row);
-             var offset = row * _RowLenth;
-             data.AsSpan().Slice(offset, _RowLenth).CopyTo(dst.Data);
+             var offset = row * Order;
+             data.AsSpan().Slice(offset, Order).CopyTo(dst.Data);
              return ref dst;
         }
 
         public ref RowVector<N,T> GetCol(int col, ref RowVector<N,T> dst)
         {
-            if(col < 0 || col >= _ColCount)
-                throw AppErrors.IndexOutOfRange(col, 0, _ColCount - 1);
+            if(col < 0 || col >= Order)
+                throw AppErrors.IndexOutOfRange(col, 0, Order - 1);
             
-            for(var row = 0; row < _ColLength; row++)
-                dst[row] = data[row*_RowLenth + col];
+            for(var row = 0; row < Order; row++)
+                dst[row] = data[row*Order + col];
             return ref dst;
         }
 
@@ -229,8 +190,8 @@ namespace Z0
         /// <param name="f">The function to apply</param>
         public void Apply(Func<T,T> f)
         {
-            for(var r = 0; r < _RowCount; r++)
-            for(var c = 0; c < _ColCount; c++)
+            for(var r = 0; r < Order; r++)
+            for(var c = 0; c < Order; c++)
                 this[r,c] = f(this[r,c]);
         }
 
@@ -247,8 +208,8 @@ namespace Z0
 
         public bool Equals(Matrix<N,T> rhs)
         {
-            for(var r = 0; r < (int)_RowCount; r ++)
-            for(var c = 0; c < (int)_ColCount; c ++)
+            for(var r = 0; r < (int)Order; r ++)
+            for(var c = 0; c < (int)Order; c ++)
                 if(!gmath.eq(this[r,c], rhs[r,c]))
                     return false;
             return true;
@@ -262,8 +223,8 @@ namespace Z0
         public Option<T> First(Func<T,bool> f, out (int i, int j) pos)
         {
             pos = (0,0);
-            for(var r = 0; r < (int)_RowCount; r ++)
-            for(var c = 0; c < (int)_ColCount; c ++)
+            for(var r = 0; r < (int)Order; r ++)
+            for(var c = 0; c < (int)Order; c ++)
             {                
                 if(f(this[r,c]))
                 {
@@ -276,8 +237,8 @@ namespace Z0
 
         public Option<T> First(Func<T,bool> f)
         {
-            for(var r = 0; r < (int)_RowCount; r ++)
-            for(var c = 0; c < (int)_ColCount; c ++)
+            for(var r = 0; r < (int)Order; r ++)
+            for(var c = 0; c < (int)Order; c ++)
                 if(f(this[r,c]))
                     return this[r,c];
             return default;            

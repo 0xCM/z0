@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Seed;
 
     public static class RowBitsX
     {
@@ -15,7 +15,6 @@ namespace Z0
             where T : unmanaged
                 => src.Bytes.FormatMatrixBits(src.RowWidth);
 
-        [MethodImpl(Inline)]
         public static RowBits<T> Replicate<T>(this RowBits<T> src)
             where T : unmanaged
                 => new RowBits<T>(src.data.Replicate());

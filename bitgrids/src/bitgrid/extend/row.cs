@@ -9,7 +9,7 @@ namespace Z0
 
     using static root;
 
-    partial class BitGrid
+    partial class XTend
     {                
 
         [MethodImpl(Inline)]

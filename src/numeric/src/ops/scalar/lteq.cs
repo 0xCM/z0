@@ -51,5 +51,4 @@ namespace Z0
         public static bit lteq(double lhs, double rhs)
             => lhs <= rhs;                    
     }    
-
 }

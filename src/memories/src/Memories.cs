@@ -11,9 +11,14 @@ namespace Z0
     {
 
 
-
     }
 
+    [ApiHost]
+    public partial class Spans : IApiHost<Spans>
+    {    
+
+
+    }
     public static partial class XMem    
     {
 

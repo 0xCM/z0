@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
     using static BitMasks;
 
-    public static partial class BitMask
+    partial class BitMask
     {                
         /// <summary>
         /// [01010101]    

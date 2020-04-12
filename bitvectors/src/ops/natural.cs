@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class BitVector
     {
@@ -64,7 +65,6 @@ namespace Z0
 
     static class BvUtil
     {
-
         [MethodImpl(Inline)]
         public static ref T packseq<T>(ReadOnlySpan<byte> src, out T dst)
             where T : unmanaged

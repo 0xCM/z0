@@ -7,18 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
-    partial class BitGridX
+    partial class XTend
     {
-        [MethodImpl(NotInline)]
         public static BitGrid<M,N,T> Replicate<M,N,T>(this BitGrid<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged 
                 => new BitGrid<M,N,T>(src.Data.Replicate());
 
-        [MethodImpl(NotInline)]
         public static BitGrid<T> Replicate<T>(this BitGrid<T> src)
             where T : unmanaged
                 => new BitGrid<T>(src.Data.Replicate(), src.RowCount, src.ColCount);

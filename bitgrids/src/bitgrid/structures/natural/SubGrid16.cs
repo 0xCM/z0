@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= 16
@@ -91,14 +92,14 @@ namespace Z0
         }
 
         /// <summary>
-        /// The number of grid rows
+        /// The number of rows in the grid
         /// </summary>
-        public int RowCount => (int)value<M>();         
+        public int RowCount => nati<M>();         
 
         /// <summary>
-        /// The number of grid columns
+        /// The number of columns in the grid
         /// </summary>
-        public int ColCount => (int)value<N>();  
+        public int ColCount => nati<N>();  
 
         public Span<T> Cells
         {

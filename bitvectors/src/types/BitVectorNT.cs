@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         internal static BitVector<N,T> Inject(T src)
-            => new BitVector<N, T>(src, true);
+            => new BitVector<N,T>(src, true);
 
         /// <summary>
         /// Implicitly convers a scalar to a bitvector
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="src">The scalar value</param>
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N,T>(T src)
-            => new BitVector<N, T>(src);
+            => new BitVector<N,T>(src);
 
         /// <summary>
         /// Implicitly convers a bitvector to its scalar representation
@@ -66,6 +66,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T(BitVector<N,T> src)
             => src.data;
+
+        /// <summary>
+        /// Implicitly convers a bitvector to its scalar representation
+        /// </summary>
+        /// <param name="src">The scalar value</param>
+        [MethodImpl(Inline)]
+        public static implicit operator BitVector<T>(BitVector<N,T> src)
+            => new BitVector<T>(src.data);
 
         /// <summary>
         /// Computes the bitwias AND between the operands

@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
-    partial class BitGridX
+    partial class XTend
     {   
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation

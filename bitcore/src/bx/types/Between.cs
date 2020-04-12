@@ -9,7 +9,7 @@ namespace Z0
         
     using static Seed;
 
-    partial class BitCoreServices
+    partial class BitService
     {
         public readonly struct Between<T> : ISImm8x2UnaryOpApi<T>
             where T : unmanaged        

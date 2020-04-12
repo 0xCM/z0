@@ -22,31 +22,10 @@ namespace Z0
             var g = BitGrid.broadcast(pattern, BitGrid.alloc(w,m,n,t));            
             var gT = BitGrid.transpose(g);            
             var bsT = g.ToBitString().Transpose(m,n).ToBitGrid(w,m,n,t);
-            Claim.require(gT == bsT);
-        }
 
-        void nbg_transpose_8x8()
-        {
-            var w = n64;
-            var m = n8;
-            var n = n8;
-            var t = z8;
-
-            for(var i=0; i<RepCount; i++)
-            {
-                var g = Random.BitGrid(m,n,t);
-                var gt = BitGrid.transpose(g);
-                var bs = g.ToBitString();
-                var bst = bs.Transpose(m,n);
-                var bstg = bst.ToBitGrid(w,n,m,t);
-                if(gt != bstg)
-                {
-                    Notify(gt.Format());
-                    Notify("!=");
-                    Notify(bstg.Format());
-                    Claim.fail();
-                }
-            }
+            var g1 = gT.ToBitString();
+            var g2 = bsT.ToBitString();
+            Claim.eq(g1,g2);
         }
 
         public void nbg_transpose_16x4()

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static class GridInfoX
+    partial class XTend
     {
         /// <summary>
         /// Calculates a grid layout from a specification

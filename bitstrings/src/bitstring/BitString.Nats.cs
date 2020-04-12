@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using static Seed;
+    using static Memories;
+
     
     public static class BitStringNatX
     {
@@ -17,22 +19,7 @@ namespace Z0
         public static BitString Transpose<M,N>(this BitString src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-        {
-            var bitcount = (int)NatCalc.mul(m,n);
-            if(src.Length < bitcount)
-                return BitString.Empty;
-
-            var dst = BitString.alloc(bitcount);
-
-            var cols = (int)TypeNats.value(n);
-            var k = 0;
-
-            for(var col = 0; col < cols; col++)
-            for(var j = col; j<bitcount; j+=cols, k++)
-                dst[k] = src[j];
-
-            return dst;
-        }        
+                => BitString.transpose(src, nati(m), nati(n));
         
         public static BitString Transpose(this BitString bs, int m, int n)        
             => BitString.transpose(bs,m,n);                         

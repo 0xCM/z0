@@ -14,58 +14,11 @@ namespace Z0
     partial class BitPack
     {
         /// <summary>
-        /// Packs the leading 8 source bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
-        [MethodImpl(Inline), Op]
-        public static byte pack(Span<bit> src, N8 count)
-        {
-            var v0 = vload(n256, head(convert(src, 0, bitsize<byte>())));
-            return (byte)packlsb(dvec.vcompact(v0,n128,z8), n8);
-        }
-
-        /// <summary>
-        /// Packs the 16 leading source bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
-        [MethodImpl(Inline), Op]
-        public static ushort pack(Span<bit> src, N16 count)
-        {
-            ref readonly var unpacked = ref head(convert(src, 0, bitsize<ushort>())); 
-            return pack(unpacked, count, w16);
-        }
-
-        /// <summary>
-        /// Packs the 32 leading source bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
-        [MethodImpl(Inline), Op]
-        public static uint pack(Span<bit> src, N32 count)
-        {
-            ref readonly var unpacked = ref head(convert(src, 0, bitsize<uint>()));
-            return pack(unpacked,count, w32);            
-        }
-
-        /// <summary>
-        /// Packs the 64 leading source bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
-        [MethodImpl(Inline), Op]
-        public static ulong pack(Span<bit> src, N64 count)
-        {
-            ref readonly var unpacked = ref head(convert(src, 0, bitsize<ulong>()));
-            return pack(unpacked, count, w64);
-        }
-
-        /// <summary>
         /// Packs the least significant bit from 8 32-bit unsigned integers to an 8-bit target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="count">The target width selector</param>
+        /// <param name="count">The number of bits to pack</param>                
+        /// <param name="dst">The target width</param>
         [MethodImpl(Inline), Op]
         public static byte pack(in uint src, N8 count, W8 dst)
         {
@@ -77,7 +30,8 @@ namespace Z0
         /// Packs the least significant bit from 16 32-bit unsigned integers to a 16-bit target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="count">The target width selector</param>
+        /// <param name="count">The number of bits to pack</param>                
+        /// <param name="dst">The target width</param>
         [MethodImpl(Inline), Op]
         public static ushort pack(in uint src, N16 count, W16 dst)
         {
@@ -90,7 +44,8 @@ namespace Z0
         /// Packs the least significant bit from 32 32-bit unsigned integers to a 32-bit target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="count">The target width selector</param>
+        /// <param name="count">The number of bits to pack</param>                
+        /// <param name="dst">The target width</param>
         [MethodImpl(Inline), Op]
         public static uint pack(in uint src, N32 count, W32 dst)
         {            
@@ -109,7 +64,8 @@ namespace Z0
         /// Packs the least significant bit from 64 32-bit unsigned integers to a 64-bit target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="count">The target width selector</param>
+        /// <param name="count">The number of bits to pack</param>                
+        /// <param name="dst">The target width</param>
         [MethodImpl(Inline), Op]
         public static ulong pack(in uint src, N64 count, W64 dst)
         {

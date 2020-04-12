@@ -21,8 +21,6 @@ namespace Z0
     {        
         readonly Block256<T> data;
 
-        public static Dim<N,N> Dim => default;        
-
         /// <summary>
         /// The square matrix dimension
         /// </summary>

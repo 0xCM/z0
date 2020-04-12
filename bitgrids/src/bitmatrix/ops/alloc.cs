@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed;    
+    using static Memories;
 
     partial class BitMatrix
     {        
@@ -15,7 +16,6 @@ namespace Z0
         /// Allocates a square generic bitmatrix filled with a specified row
         /// </summary>
         /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<T> init<T>(BitVector<T> src)
             where T : unmanaged
         {
@@ -28,7 +28,6 @@ namespace Z0
         /// Allocates a generic bitmatrix filled with a specified row
         /// </summary>
         /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<T> init<T>(BitVector<T> src, int rows)
             where T : unmanaged
         {
@@ -42,7 +41,6 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The square dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<N,T> init<N,T>(T src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -58,7 +56,6 @@ namespace Z0
         /// <typeparam name="M">The row dimension</typeparam>
         /// <typeparam name="N">The column dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> init<M,N,T>(T src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -73,7 +70,6 @@ namespace Z0
         /// Allocates a zero-filled square generic bitmatrix
         /// </summary>
         /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<T> alloc<T>()
             where T : unmanaged
                 => new BitMatrix<T>(new T[BitMatrix<T>.N]);
@@ -82,7 +78,6 @@ namespace Z0
         /// Allocates a zero-filled generic bitmatrix with a specified number of rows
         /// </summary>
         /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<T> alloc<T>(int rows)
             where T : unmanaged
                 => new BitMatrix<T>(new T[rows]);
@@ -92,7 +87,6 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The square dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<N,T> alloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -104,7 +98,6 @@ namespace Z0
         /// <typeparam name="M">The row dimension</typeparam>
         /// <typeparam name="N">The column dimension</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> alloc<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -116,7 +109,6 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        [MethodImpl(Inline)]
         public static BitMatrix4 alloc(N4 n, bit fill = default)
             => fill == bit.On ? new BitMatrix4(ushort.MaxValue) : new BitMatrix4(ushort.MinValue);
             
@@ -125,7 +117,6 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
         public static BitMatrix8 alloc(N8 n, bit fill = default)
             => new BitMatrix8(((uint)fill)*UInt64.MaxValue);
 
@@ -133,7 +124,6 @@ namespace Z0
         /// Allocates a primal bitmatrix with rows filled by a specified vector
         /// </summary>
         /// <param name="fill">The row with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
         public static BitMatrix8 alloc(N8 n, BitVector8 fill)
         {
             var data = new byte[n];
@@ -146,7 +136,6 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
         public static BitMatrix16 alloc(N16 n, bit fill = default)
             => BitMatrix16.Alloc(fill);
 
@@ -154,7 +143,6 @@ namespace Z0
         /// Allocates a primal bitmatrix with rows filled by a specified vector
         /// </summary>
         /// <param name="fill">The row with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
         public static BitMatrix16 alloc(BitVector16 fill)
         {
             Span<ushort> data = new ushort[16];
@@ -167,7 +155,6 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
         public static BitMatrix32 alloc(N32 n, bit fill = default)
             => new BitMatrix32(fill);
 
@@ -175,7 +162,6 @@ namespace Z0
         /// Allocates a primal bitmatrix with rows filled by a specified vector
         /// </summary>
         /// <param name="fill">The row with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
         public static BitMatrix32 alloc(BitVector32 fill)
         {
             Span<uint> data = new uint[32];
@@ -188,7 +174,6 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
         public static BitMatrix64 alloc(N64 n, bit fill = default)
             => new BitMatrix64(fill);
  
@@ -196,7 +181,6 @@ namespace Z0
         /// Allocates a primal bitmatrix with rows filled by a specified vector
         /// </summary>
         /// <param name="fill">The row with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
         public static BitMatrix64 alloc(BitVector64 fill)        
         {
             Span<ulong> data = new ulong[64];

@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ushort pack<T>(ReadOnlySpan<T> src, N16 count, N8 mod, int offset = 0)
             where T : unmanaged
-                => maskpack(skip(src,offset), count, mod);
+                => pack(skip(src,offset), count, mod);
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static uint pack<T>(ReadOnlySpan<T> src, N32 count, N8 mod, int offset = 0)
             where T : unmanaged
-                => maskpack(skip(src,offset), count, mod);
+                => pack(skip(src,offset), count, mod);
 
         /// <summary>
         /// Packs 64 1-bit values taken from the least significant bit of each source byte
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong pack<T>(ReadOnlySpan<T> src, N64 count, N8 mod, int offset = 0)
             where T : unmanaged
-                => maskpack(skip(src,offset),count,mod);        
+                => pack(skip(src,offset),count,mod);        
 
         /// <summary>
         /// Packs bitsize[T] values taken from the least significant bit of each source byte

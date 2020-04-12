@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
-    public static class BitMatrixX
+    partial class XTend
     {   
         /// <summary>
         /// Loads a generic bitmatrix from size-conformant sequence of row bits

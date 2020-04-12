@@ -13,7 +13,7 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-    public static partial class BitMask
+    partial class BitMask
     {           
         /// <summary>
         /// Produces a sequence of n enabled bits, starting from index 0 and extending to index n - 1

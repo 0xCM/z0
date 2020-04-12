@@ -6,11 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
-    public static partial class BitMatrix
+    using static Seed;
+    using static Memories;
+
+    partial class XTend
     {
+ 
 
     }
-
-
 }

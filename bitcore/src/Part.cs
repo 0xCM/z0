@@ -2,18 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
-    using System;
+[assembly: PartId(PartId.BitCore)]
 
-    [ApiHost("bitgrid")]
-    public static partial class BitGrid
+namespace Z0.Parts
+{        
+    public sealed class BitCore : Part<BitCore>
     {
-                    
-    }
-
-    public static partial class BitGridX
-    {   
-
+        
     }
 }

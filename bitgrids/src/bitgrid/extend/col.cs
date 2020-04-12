@@ -9,7 +9,7 @@ namespace Z0
 
     using static Core;
 
-    partial class BitGrid
+    partial class XTend
     {                
         [MethodImpl(Inline)]
         public static BitVector<N16,ushort> Col<T>(this BitGrid64<N16,N4,T> g, int index)

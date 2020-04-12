@@ -48,13 +48,6 @@ namespace Z0
              :  k.ToString();
             
 
-        [MethodImpl(Inline)]
-        public static bool BitGridClosed(this Type src)
-            => src.GridKind().MapValueOrDefault(k => src.OpenTypeParameterCount() == 0);
-
-        [MethodImpl(Inline)]
-        public static bool BitGridOpen(this Type src)
-            => src.GridKind().MapValueOrDefault(k => src.OpenTypeParameterCount() != 0);
         
         public static Tripled<FixedWidth,FixedWidth,NumericKind> GridClosures(this Type src )
         {

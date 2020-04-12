@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     using BG = Z0.BitGrid;
     using BS = Z0.BitBlocks;

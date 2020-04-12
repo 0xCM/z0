@@ -80,7 +80,7 @@ namespace Z0
             if(!math.ispow2(a))
                 throw new Exception($"{a} is not a power of 2");
             
-            if(!parity.odd(b))
+            if(!Numeric.odd(b))
                 throw new Exception($"{b} is not odd");
             
             u = 1ul;

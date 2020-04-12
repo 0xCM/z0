@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;    
-
-    using P = parity;
+    using static Seed; 
+    using static Memories;    
 
     partial class BitVector
     {
@@ -410,7 +409,7 @@ namespace Z0
             var result = 0u;
             for(var i=0; i<x.Width; i++)
                 result += ((uint)x[i]*(uint)y[i]);                
-            return P.odd(result);
+            return Numeric.odd(result);
         }
 
         /// <summary>

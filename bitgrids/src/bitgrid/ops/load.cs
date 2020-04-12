@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
+    using static Seed;
 
     partial class BitGrid
     {
@@ -460,7 +460,6 @@ namespace Z0
             where T : unmanaged
                 => new BitGrid<M, N, T>(src);
 
-        [MethodImpl(NotInline)]
         public static BitGrid<M,N,T> load<M,N,T>(M m, N n, Block256<T> src)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat

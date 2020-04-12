@@ -13,6 +13,15 @@ namespace Z0
 
     public class t_bitstring : t_bitcore<t_bitstring>
     {                
+        void bs_bitview()
+        {
+            var x = Random.CpuVector<int>(n128);
+            var y = BitView.Over(ref x);
+            var ys = y.Bytes.ToBitString();
+            var xs = x.ToBitString();
+            Claim.eq(ys,xs);
+        }
+
         public void bs_seq_8u()
             => bs_seq_check<byte>();
 
@@ -174,15 +183,6 @@ namespace Z0
                 for(var j=0; j<len; j++)
                     Claim.eq(src[j], dst[j]);
             }
-        }
-
-        public void bs_bitview()
-        {
-            var x = Random.CpuVector<int>(n128);
-            var y = BitView.Over(ref x);
-            var ys = y.Bytes.ToBitString();
-            var xs = x.ToBitString();
-            Claim.eq(ys,xs);
         }
 
         public void bs_wordgen()

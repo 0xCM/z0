@@ -12,9 +12,28 @@ namespace Z0
 
     using static Seed;
 
-    [ApiHost]
-    public static class Spans
+    partial class Spans
     {    
+        /// <summary>
+        /// Interchanges span elements i and j
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="i">An index of a span element</param>
+        /// <param name="j">An index of a span element</param>
+        /// <typeparam name="T">The span element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void swap<T>(Span<T> src, int i, int j)
+            where T : unmanaged
+        {
+            if(i==j)
+                return;
+            
+            ref var data = ref head(src);
+            var a = seek(ref data, i);
+            seek(ref data, i) = skip(in data, j);
+            seek(ref data, j) = a;
+        }
+
         /// <summary>
         /// Returns a reference to the head of a readonly span
         /// </summary>
@@ -551,7 +570,7 @@ namespace Z0
             return dst;     
         }
 
-        public static Span<T> Fuse<T>(this Span<T> xs, Span<T> ys, Func<T,T,T> f)
+        public static Span<T> Fuse<T>(Span<T> xs, Span<T> ys, Func<T,T,T> f)
         {        
             var len = xs.Length;
             ref var xh = ref head(xs);

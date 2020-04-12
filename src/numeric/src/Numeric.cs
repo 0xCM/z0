@@ -3,50 +3,32 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static partial class XNumeric
+    [ApiHost("api")]
+    public partial class Numeric : IApiHost<Numeric>
     {
         
     }
 
-    [ApiHost("api")]
-    public static partial class Numeric
-    {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-    }
-
-
-    [ApiHost("parity.generic", ApiHostKind.Generic)]
-    public static partial class parity
-    {
-
-    }
-
-    [ApiHost("parity.direct", ApiHostKind.Direct)]
-    static partial class Parity
-    {
-
-    }
-
     [ApiHost("as.numeric")]
-    public static partial class AsNumeric
+    public partial class AsNumeric : IApiHost<AsNumeric>
     {                
 
     }
 
     [ApiHost]
-    public static partial class Scalar
+    public partial class Scalar : IApiHost<Scalar>
     {
 
     }
 
     [ApiHost]
-    public static partial class ScalarPairs
+    public partial class ScalarPairs : IApiHost<ScalarPairs>
     {
 
     }
 
     [ApiHost]
-    public static partial class BmiMul
+    public partial class BmiMul : IApiHost<BmiMul>
     {
 
     }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class MathSvcHosts
     {
@@ -132,7 +132,7 @@ namespace Z0
             public OpIdentity Id => Identify.sFunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => parity.even(a);
+            public readonly bit Invoke(T a) => Numeric.even(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
@@ -150,7 +150,7 @@ namespace Z0
             public OpIdentity Id => Identify.sFunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => parity.odd(a);
+            public readonly bit Invoke(T a) => Numeric.odd(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)

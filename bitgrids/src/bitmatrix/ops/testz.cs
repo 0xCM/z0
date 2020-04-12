@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Seed;    
+    using static Memories;
 
     partial class BitMatrix
     {
@@ -16,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is defined</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ, Closures(UnsignedInts)]
         public static bit testz<T>(in BitMatrix<T> A)
             where T : unmanaged
                 => LogicSquares.testz(in A.Head, in A.Head);
@@ -27,7 +28,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is defined</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ, Closures(UnsignedInts)]
         public static bit testz<T>(in BitMatrix<T> A, in BitMatrix<T> M)
             where T : unmanaged
                 => LogicSquares.testz(in A.Head, in M.Head);
@@ -36,7 +37,7 @@ namespace Z0
         /// Returns true if all bits in a matrix are disabled, false otherwise
         /// </summary>
         /// <param name="A">The source matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix8 A)
             => LogicSquares.testz(in A.Head, in A.Head);
 
@@ -45,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix8 A, in BitMatrix8 M)
             => LogicSquares.testz(in A.Head, in M.Head);
 
@@ -53,7 +54,7 @@ namespace Z0
         /// Returns true if all bits in a matrix are disabled, false otherwise
         /// </summary>
         /// <param name="A">The source matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix16 A)
             => LogicSquares.testz(in A.Head, in A.Head);
 
@@ -62,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix16 A, in BitMatrix16 M)
             => LogicSquares.testz(in A.Head, in M.Head);
 
@@ -70,7 +71,7 @@ namespace Z0
         /// Returns true if all bits in a matrix are disabled, false otherwise
         /// </summary>
         /// <param name="A">The source matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix32 A)
             => LogicSquares.testz(in A.Head, in A.Head);
 
@@ -87,7 +88,7 @@ namespace Z0
         /// Returns true if all bits in a matrix are disabled, false otherwise
         /// </summary>
         /// <param name="A">The source matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix64 A)
             => LogicSquares.testz(in A.Head, in A.Head);
 
@@ -96,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix64 A, in BitMatrix64 M)
             => LogicSquares.testz(in A.Head, in M.Head);
     }

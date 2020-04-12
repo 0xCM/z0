@@ -16,8 +16,12 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static Span<T> Intersperse<T>(this ReadOnlySpan<T> src, T x)
         {
-            Span<T> dst = new T[src.Length*2 - 1];
-            for(int i=0, j=0; i<src.Length; i++, j+= 2)
+            var len = src.Length;
+            if(len == 0)
+                return new T[]{};
+
+            Span<T> dst = new T[len*2 - 1];
+            for(int i=0, j=0; i<len; i++, j+= 2)
             {
                 dst[j] = src[i];                
                 if(i != src.Length - 1)

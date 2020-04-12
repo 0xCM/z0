@@ -23,32 +23,20 @@ namespace Z0
     {        
         readonly Block256<T> data;
 
-        public static Dim<M,N> Dim => default;        
-
         /// <summary>
         /// The number of matrix rows
         /// </summary>
-        public static int RowCount => nati<M>();
+        public static int Rows => nati<M>();
 
         /// <summary>
         /// The number of matrix colums
         /// </summary>
-        public static int ColCount => nati<N>();
-
-        /// <summary>
-        /// A synonym for ColCount
-        /// </summary>
-        public static int RowLenth => ColCount;
-
-        /// <summary>
-        /// A synonym for RowCount
-        /// </summary>
-        public static int ColLength => RowCount;
+        public static int Cols => nati<N>();
 
         /// <summary>
         /// The total number of matrix cells
         /// </summary>
-        public static int CellCount => RowLenth * ColLength;
+        public static int Cells => Rows*Cols;
 
         public static implicit operator Matrix256<M,N,T>(in Block256<T> src)
             => new Matrix256<M,N,T>(src);
@@ -70,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256(in Block256<T> src)
         {
-            require(src.CellCount >= CellCount);
+            require(src.CellCount >= Cells);
             data = src;
         }
 
@@ -80,7 +68,7 @@ namespace Z0
 
         [MethodImpl(Inline)]        
         public ref T Cell(int r, int c)
-            => ref data[RowLenth*r + c];
+            => ref data[Cols*r + c];
 
         public ref T this[int r, int c]
         {
@@ -97,29 +85,29 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector256<N,T> GetRow(int row)
         {
-            if(row < 0 || row >= RowCount)
-                throw AppErrors.IndexOutOfRange(row, 0, RowCount - 1);
+            if(row < 0 || row >= Rows)
+                throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
             
-            return RowVector.blockload<N,T>(data.Slice(row * RowLenth, RowLenth));
+            return RowVector.blockload<N,T>(data.Slice(row * Cols, Cols));
         }
 
         [MethodImpl(Inline)]
         public ref RowVector256<N,T> GetRow(int row, ref RowVector256<N,T> dst)
         {
-            if(row < 0 || row >= RowCount)
-                throw AppErrors.IndexOutOfRange(row, 0, RowCount - 1);
-             var src = data.Slice(row * RowLenth, RowLenth);
+            if(row < 0 || row >= Rows)
+                throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
+             var src = data.Slice(row * Cols, Cols);
              src.CopyTo(dst.Unsized);
              return ref dst;
         }
 
         public ref RowVector256<M,T> GetCol(int col, ref RowVector256<M,T> dst)
         {
-            if(col < 0 || col >= ColCount)
-                throw AppErrors.IndexOutOfRange(col, 0, ColCount - 1);
+            if(col < 0 || col >= Cols)
+                throw AppErrors.IndexOutOfRange(col, 0, Cols - 1);
             
-            for(var row = 0; row < ColLength; row++)
-                dst[row] = data[row*RowLenth + col];
+            for(var row = 0; row < Rows; row++)
+                dst[row] = data[row*Cols + col];
             return ref dst;
         }
 
@@ -137,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void SetCol(int col, RowVector256<M,T> src)
         {
-            for(var row=0; row < RowCount; row++)
+            for(var row=0; row < Rows; row++)
                 this[row,col] = src[row];
         }
 
@@ -147,7 +135,7 @@ namespace Z0
         public Matrix256<N,M,T> Transpose()
         {
             var dst = Matrix.blockalloc<N,M,T>();
-            for(var row = 0; row < RowCount; row++)
+            for(var row = 0; row < Rows; row++)
                 dst.SetCol(row, GetRow(row));            
             return dst;
         }
@@ -185,8 +173,8 @@ namespace Z0
         /// <param name="f">The function to apply</param>
         public Matrix256<M,N,T> Apply(Func<T,T> f)
         {
-            for(var r = 0; r < RowCount; r++)
-            for(var c = 0; c < ColCount; c++)
+            for(var r = 0; r < Rows; r++)
+            for(var c = 0; c < Cols; c++)
                 this[r,c] = f(this[r,c]);
             return this;
         }
@@ -209,8 +197,8 @@ namespace Z0
 
         public bool Equals(Matrix256<M,N,T> rhs)
         {
-            for(var r = 0; r < (int)RowCount; r ++)
-            for(var c = 0; c < (int)ColCount; c ++)
+            for(var r = 0; r < (int)Rows; r ++)
+            for(var c = 0; c < (int)Cols; c ++)
                 if(!gmath.eq(this[r,c], rhs[r,c]))
                     return false;
             return true;

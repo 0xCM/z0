@@ -12,6 +12,25 @@ namespace Z0
     
     public class t_bg_row : t_bg<t_bg_row>
     {        
+        void bg_row_128x32x4()
+        {
+            var t = z32;
+            var m = n32;
+            var n = n4;
+
+            for(var sample = 0; sample < RepCount; sample++)
+            {
+                var bg = Random.BitGrid(m,n,t);
+                var bs = BitGrid.bitstring(bg);
+                for(var row = 0; row<m; row++)
+                {
+                    var r1 = BitGrid.row(bg,row);
+                    var r2 = BitVector.natural(bs.Slice(row*n,n), n, z8);
+                    Claim.eq(r1,r2);
+                }
+            }
+        }
+
         public void bg_row_32x8x4()
         {
             var t = z32;
@@ -53,7 +72,6 @@ namespace Z0
                 }
             }
         }
-
 
         public void bg_row_256x4x64()
         {
@@ -98,23 +116,5 @@ namespace Z0
             }
         }
 
-        public void bg_row_128x32x4()
-        {
-            var t = z32;
-            var m = n32;
-            var n = n4;
-
-            for(var sample = 0; sample < RepCount; sample++)
-            {
-                var bg = Random.BitGrid(m,n,t);
-                var bs = BitGrid.bitstring(bg);
-                for(var row = 0; row<m; row++)
-                {
-                    var r1 = BitGrid.row(bg,row);
-                    var r2 = BitVector.natural(bs.Slice(row*n,n), n, z8);
-                    Claim.eq(r1,r2);
-                }
-            }
-        }
     }
 }

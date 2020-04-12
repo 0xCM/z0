@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
-    partial class BitGridX
+    partial class GridLoad
     {   
         /// <summary>
         /// Represents the source matrix as a generic bitgrid of dimension 32x32 over cells of width 32

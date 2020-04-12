@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
-    partial class BitGridX
+    partial class XTend
     {   
         /// <summary>
         /// Creates a subgrid of dimensions 2x12 from a 24-bit bitvector

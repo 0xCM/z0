@@ -9,15 +9,10 @@ namespace Z0
         
     using static Seed;
 
-    [ApiHost,ApiServiceProvider("bitcore.services")]
-    public partial class BitCoreServices : IApiServiceProvider<BitCoreServices>
-    {
-
-    }
         
-    public partial class BitCoreServices
+    public partial class BitService
     {
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ByteSwap<T> byteswap<T>(T t = default)
             where T : unmanaged        
                 => ByteSwap<T>.Op;
@@ -28,27 +23,27 @@ namespace Z0
             where T : unmanaged        
                 => Bfly<N,T>.Op;
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Between<T> between<T>(T t = default)
             where T : unmanaged        
                 => Between<T>.Op;
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitSlice<T> bitslice<T>(T t = default)
             where T : unmanaged        
                 => BitSlice<T>.Op;
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitSlice<T> bitslice2<T>(T t = default)
             where T : unmanaged        
                 => ApiServices.Service<BitSlice<T>>();
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static PopCount<T> pop<T>(T t = default)
             where T : unmanaged        
                 => PopCount<T>.Op;
 
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Dot<T> dot<T>(T t = default)
             where T : unmanaged        
                 => Dot<T>.Op;

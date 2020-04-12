@@ -4,6 +4,8 @@
 namespace Z0
 {
     using System;    
+    using System.Runtime.CompilerServices;
+    using static Seed;
     
     public readonly struct GridKind<E>
         where E : unmanaged, Enum
@@ -13,7 +15,12 @@ namespace Z0
 
     public class GridKinds
     {
+        [MethodImpl(Inline)]
+        public static bool closed(Type src)
+            => src.GridKind().MapValueOrDefault(k => src.OpenTypeParameterCount() == 0);
 
-
+        [MethodImpl(Inline)]
+        public static bool open(Type src)
+            => src.GridKind().MapValueOrDefault(k => src.OpenTypeParameterCount() != 0);
     }
 }

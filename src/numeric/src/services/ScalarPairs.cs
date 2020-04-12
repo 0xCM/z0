@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static refs;
 
-    public static partial class ScalarPairs
+    partial class ScalarPairs
     {       
         /// <summary>
         /// Zero, the the one and only.
@@ -28,7 +28,6 @@ namespace Z0
         /// One, so many
         /// </summary>
         public static ConstPair<ulong> Ones => (ulong.MaxValue, ulong.MaxValue);
-
 
         /// <summary>
         /// Computes the bitwise complement of a 128-bit integer

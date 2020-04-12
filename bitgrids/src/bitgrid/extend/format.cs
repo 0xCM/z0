@@ -58,11 +58,11 @@ namespace Z0
             where T : unmanaged
                 => BitGrid.format(src, cols, showrow, maxbits);
 
-        public static string Format<M,N,T>(this BitGrid<M,N,T> src, bool showrow = false, int? maxbits = null)
+        public static string Format<M,N,T>(this BitGrid<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src, showrow, maxbits);
+                => BitGrid.format(src);
 
         public static string Format<M,N,T>(this BitGrid16<M,N,T> src, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat

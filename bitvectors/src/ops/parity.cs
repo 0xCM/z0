@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;    
-
-    using P = parity;
+    using static Numeric;
 
     partial class BitVector
     {
@@ -23,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bit parity<T>(BitVector<T> src)
             where T : unmanaged
-                => P.odd(gbits.pop(src.Scalar));
+                => odd(gbits.pop(src.Scalar));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -34,7 +33,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static bit parity(BitVector4 src)
-            => P.odd(pop(src));
+            => odd(pop(src));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -45,7 +44,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static bit parity(BitVector8 src)
-            => P.odd(pop(src));
+            => odd(pop(src));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -56,7 +55,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static bit parity(BitVector16 src)
-            => P.odd(pop(src));
+            => odd(pop(src));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -67,7 +66,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static bit parity(BitVector32 src)
-            => P.odd(pop(src));
+            => odd(pop(src));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -78,7 +77,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static bit parity(BitVector64 src)
-            => P.odd(pop(src));
+            => odd(pop(src));
 
         /// <summary>
         /// Computes the parity of a natural bitvector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -91,7 +90,7 @@ namespace Z0
         public static bit parity<N,T>(BitVector<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => P.odd(gbits.pop(src.Scalar));
+                => odd(gbits.pop(src.Scalar));
 
         /// <summary>
         /// Computes the parity of the source vector
@@ -100,6 +99,6 @@ namespace Z0
         public static bit parity<N,T>(in BitVector128<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => P.odd(pop(src));
+                => odd(pop(src));
     }
 }

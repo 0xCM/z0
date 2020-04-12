@@ -17,7 +17,7 @@ namespace Z0
         /// Creates a parametric numeric comparer
         /// </summary>
         /// <typeparam name="T">The numeric type to compare</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static NumericComparer<T> comparer<T>()
             where T : unmanaged
         {

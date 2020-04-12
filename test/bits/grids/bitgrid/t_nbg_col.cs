@@ -9,8 +9,49 @@ namespace Z0
 
     using static Core;
     
-    public class t_bg_col : t_bg<t_bg_col>
+    public class t_nbg_col : t_bg<t_nbg_col>
     {        
+        void nbg_col_256x32x8()
+        {
+            var m = n32;
+            var n = n8;
+            var t = z64;
+
+            for(var i=0; i< RepCount; i++)
+            {
+                var xg = Random.BitGrid(m,n,t);
+                var xs = BitGrid.bitstring(xg).Transpose(m,n);
+
+                for(var col=0; col<n; col++)
+                {
+                    BitVector<uint> bv1 = BitGrid.col(xg,col);     
+                    BitVector<uint> bv2 = BitVector.create(m,xs.Slice(col*m, m));
+                    Claim.eq(bv1,bv2);                    
+                }
+            }            
+        }
+
+        void nbg_col_128x16x8()
+        {
+            var m = n16;
+            var n = n8;
+            var t = z64;
+
+            for(var i=0; i<RepCount; i++)
+            {
+                var xg = Random.BitGrid(m,n,t);
+                var xs = BitGrid.bitstring(xg).Transpose(m,n);
+
+                for(var col=0; col<n; col++)
+                {
+                    BitVector<ushort> bv1 = BitGrid.col(xg,col);     
+                    BitVector<ushort> bv2 = BitVector.create(m,xs.Slice(col*m, m));
+                    Claim.eq(bv1, bv2);
+                }
+            }            
+        }
+
+
         public void nbg_col_32x8x4()
         {
             var m = n8;
@@ -111,44 +152,5 @@ namespace Z0
             }
         }
 
-        public void nbg_col_256x32x8()
-        {
-            var m = n32;
-            var n = n8;
-            var t = z64;
-
-            for(var i=0; i< RepCount; i++)
-            {
-                var xg = Random.BitGrid(m,n,t);
-                var xs = BitGrid.bitstring(xg).Transpose(m,n);
-
-                for(var col=0; col<n; col++)
-                {
-                    var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = BitVector.create(m,xs.Slice(col*m, m));
-                    Claim.eq(bv1, bv2);
-                }
-            }            
-        }
-
-        public void nbg_col_128x16x8()
-        {
-            var m = n16;
-            var n = n8;
-            var t = z64;
-
-            for(var i=0; i<RepCount; i++)
-            {
-                var xg = Random.BitGrid(m,n,t);
-                var xs = BitGrid.bitstring(xg).Transpose(m,n);
-
-                for(var col=0; col<n; col++)
-                {
-                    var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = BitVector.create(m,xs.Slice(col*m, m));
-                    Claim.eq(bv1, bv2);
-                }
-            }            
-        }
     }
 }

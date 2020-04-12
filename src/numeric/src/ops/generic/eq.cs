@@ -17,11 +17,6 @@ namespace Z0
             where T : unmanaged
                 => eq_u(a,b);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static bit neq<T>(T a, T b)
-            where T : unmanaged
-                => !eq(a,b);
-
         [MethodImpl(Inline)]
         static bit eq_u<T>(T a, T b)
             where T : unmanaged

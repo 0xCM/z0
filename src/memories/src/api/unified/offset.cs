@@ -7,11 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    [ApiHost("bitmatrix")]
-    public static partial class BitMatrix
-    {        
+    using static Seed;
 
-
+    partial class Memories
+    {
+        [MethodImpl(Inline)]
+        public static ref T offset<T>(ref T src, IntPtr offset)
+            => ref refs.offset(ref src, offset);
     }
-
 }

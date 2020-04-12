@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
-    
-    using static Gone2;
+    using static Seed;
+    using static Memories;
 
     partial class BitGrid
     {        
@@ -159,7 +158,7 @@ namespace Z0
             where T : unmanaged
         {
             uint cell = v8u(g.Data).GetElement(index/2);
-            return CastNumeric.convert<byte>((parity.odd(index) ? cell >> 4 : 0xF & cell));
+            return CastNumeric.convert<byte>((Numeric.odd(index) ? cell >> 4 : 0xF & cell));
         }
 
         /// <summary>

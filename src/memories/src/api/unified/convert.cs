@@ -23,7 +23,6 @@ namespace Z0
             where S : unmanaged
                 => Cast.to<S,T>(src);
 
-
         /// <summary>
         /// If possible, applies the conversion byte -> T
         /// </summary>

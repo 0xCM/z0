@@ -140,13 +140,13 @@ namespace Z0
         {
 
             ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;           
-            var bvz = BitBlocks.literal(z,40);
+            var bvz = BitBlocks.single(z,40);
             var xSrc =  BitConvert.GetBytes(z);
             Span<ushort> ySrc = xSrc.AsUInt16();
             Claim.eq(ySrc.Length*2, xSrc.Length);
 
-            var bvx = BitBlocks.literals(xSrc.Slice(0,5).ToArray());
-            var bvy = BitBlocks.literals(ySrc.Slice(0,2).ToArray());            
+            var bvx = BitBlocks.load(xSrc.Slice(0,5).ToArray());
+            var bvy = BitBlocks.load(ySrc.Slice(0,2).ToArray());            
             var bsx = bvx.ToBitString().Format(true);
             var bsz = bvz.ToBitString().Format(true);
             Claim.eq(bsx, bsz);

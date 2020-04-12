@@ -9,7 +9,7 @@ namespace Z0
         
     using static Seed;
 
-    partial class BitCoreServices
+    partial class BitService
     {
         public readonly struct Dot<T> : ISFuncApi<T,T,bit>
             where T : unmanaged        

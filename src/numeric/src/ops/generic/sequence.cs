@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using static Seed;
     partial class Numeric
     {
         /// <summary>
@@ -17,7 +18,7 @@ namespace Z0
         /// <param name="x0">The lower bound</param>
         /// <param name="x1">The upper bound</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static IEnumerable<T> sequence<T>(T x0, T x1)
             where T : unmanaged
                 => range_1(x0,x1,null);

@@ -7,13 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     using static gvec;
     using static BitGrid;
 
-    public static partial class GridPattern
+    public partial class GridPatterns : IApiHost<GridPatterns>
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric8x16u)]
         public static BitGrid16<N4,N4,T> identity<T>(N16 w, N4 m, N4 n, T t = default)
             where T : unmanaged
         {
@@ -21,7 +22,7 @@ namespace Z0
             return init(w,m,n,pattern).As<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, Closures(Numeric8x16x32u)]
         public static SubGrid32<N5,N5,T> identity<T>(N32 w, N5 m, N5 n, T t = default)
             where T : unmanaged
         {
@@ -29,7 +30,7 @@ namespace Z0
             return subgrid(w,pattern,m,n).As<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static SubGrid64<N6,N6,T> identity<T>(N64 w, N6 m, N6 n, T t = default)
             where T : unmanaged
         {
@@ -37,7 +38,7 @@ namespace Z0
             return subgrid(w,pattern,m,n).As<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static SubGrid64<N7,N7,T> identity<T>(N64 w, N7 m, N7 n, T t = default)
             where T : unmanaged
         {
@@ -45,7 +46,7 @@ namespace Z0
             return subgrid(w,pattern,m,n).As<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid64<N8,N8,T> identity<T>(N64 w, N8 m, N8 n, T t = default)
             where T : unmanaged
         {
@@ -53,7 +54,7 @@ namespace Z0
             return init(w,m,n,pattern).As<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N16,N16,T> identity<T>(N256 w, N16 m, N16 n, T t = default)
             where T : unmanaged
         {
@@ -72,7 +73,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         /// <remarks>See https://en.wikipedia.org/wiki/Exchange_matrix</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N16,N16,T> exchange<T>(N256 w, N16 m, N16 n, T t = default)
             where T : unmanaged
         {

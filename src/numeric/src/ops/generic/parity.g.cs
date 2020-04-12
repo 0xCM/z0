@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static As;
             
-    public static partial class parity
+    partial class Numeric
     {
         /// <summary>
         /// Returns true if a primal integer is odd; false otherwise
@@ -94,7 +94,6 @@ namespace Z0
                 return Scalar.even(int64(a)); 
             else
                 throw Unsupported.define<T>();
-        }           
-
-    }
+        }             
+    }   
 }
