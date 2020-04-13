@@ -18,10 +18,6 @@ namespace Z0
 
         readonly ReportInfo Report;
         
-        [MethodImpl(Inline)]
-        static int width(F f)
-            => Reports.width(f);
-
         /// <summary>
         /// Appends a space to the source content
         /// </summary>
@@ -38,26 +34,26 @@ namespace Z0
 
         public void AppendField(F f, object content)
         {
-            Builder.Append($"{content}".PadRight(width(f)));
+            Builder.Append($"{content}".PadRight(Reports.width(f)));
         }
 
         public void DelimitField(F f, object content, char delimiter)
         {
             Builder.Append(rspace(delimiter));            
-            Builder.Append($"{content}".PadRight(width(f)));
+            Builder.Append($"{content}".PadRight(Reports.width(f)));
         }
 
         public void AppendField<T>(F f, T content)
             where T : ICustomFormattable
         {
-            Builder.Append($"{content?.Format()}".PadRight(width(f)));
+            Builder.Append($"{content?.Format()}".PadRight(Reports.width(f)));
         }
 
         public void DelimitField<T>(F f, T content, char delimiter)
             where T : ICustomFormattable
         {
             Builder.Append(rspace(delimiter));            
-            Builder.Append($"{content?.Format()}".PadRight(width(f)));
+            Builder.Append($"{content?.Format()}".PadRight(Reports.width(f)));
         }
 
         public string Format()

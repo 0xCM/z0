@@ -18,43 +18,28 @@ namespace Z0
         protected virtual bool TraceEnabled
             => true;
 
-        protected void trace(object msg, [Caller] string caller = null)
-        {
-            if(TraceEnabled)
-                NotifyConsole(AppMsg.NoCaller($"{CaseName(caller)}: {msg}"));
-        }
+        int CasePadding
+            => Reports.width(TestCaseField.Case);
 
-        protected void trace(object title, object msg, [Caller] string caller = null)
-        {
-            if(TraceEnabled)
-                NotifyConsole(AppMsg.NoCaller($"{CaseName(caller)} {title} - {msg}"));
-        }
+        IAppMsg TraceMsg(object title, object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
+            => AppMsg.NoCaller(text.concat(text.concat(CaseName(caller), Chars.Space, title, Chars.Colon).PadRight(CasePadding), msg, color));
 
-        protected void trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null, [Caller] string caller = null)
-        {
-            if(TraceEnabled)
-            {
-                var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
-                NotifyConsole(AppMsg.NoCaller($"{CaseName(caller)} {titleFmt}: {msg}", severity ?? AppMsgKind.Babble));
-            }
-        }
+        IAppMsg TraceMsg(object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
+            => AppMsg.NoCaller(text.concat(text.concat(CaseName(caller)).PadRight(CasePadding), msg, color));
 
-        protected void trace(AppMsg msg)
+        protected void trace(IAppMsg msg)
         {
             if(TraceEnabled)
                 NotifyConsole(msg);
         }
 
-        protected void trace(object msg, AppMsgColor color, [Caller] string caller = null)
-        {
-            if(TraceEnabled)
-                NotifyConsole(AppMsg.Colorize($"{CaseName(caller)} {msg}", color));
-        }
-        
+        protected void trace(object msg, [Caller] string caller = null)
+            => trace(TraceMsg(msg, caller));
+
         protected void trace(string title, object msg, AppMsgColor color, [Caller] string caller = null)
-        {
-            if(TraceEnabled)
-                NotifyConsole(AppMsg.Colorize($"{CaseName(caller)}  {title}: {msg}", color));
-        }
+            => trace(TraceMsg(title, msg, caller, color));
+
+        protected void trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null, [Caller] string caller = null)
+            => trace(TraceMsg(title, msg, caller));        
     }
 }

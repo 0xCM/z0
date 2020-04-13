@@ -43,7 +43,7 @@ namespace Z0.Machines
 
         ulong ReceiptCount;
         
-        void Trace(AppMsg msg)
+        void Trace(IAppMsg msg)
         {
             term.print(msg);
         }

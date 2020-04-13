@@ -94,7 +94,7 @@ namespace Z0
             
             var usAvg1 = gspan.avgz(data);
             var usAvg2 = avg(data);
-            Notify($"{usAvg1} vs {usAvg2}");
+            trace($"{usAvg1} vs {usAvg2}");
 
 
             Claim.almost(min, c.Min);
@@ -118,7 +118,7 @@ namespace Z0
             
             var usAvg1 = gspan.avgz(data);
             var usAvg2 = avg(data);
-            Notify($"{usAvg1} vs {usAvg2}");
+            trace($"{usAvg1} vs {usAvg2}");
 
 
             Claim.almost(min, c.Min);

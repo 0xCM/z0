@@ -53,7 +53,7 @@ namespace Z0.Asm
             WriterFactory = writerFactory;            
         }
 
-        public event Action<AppMsg> Next;
+        public event Action<IAppMsg> Next;
 
         public IPolyrand Random {get;}
 
@@ -76,21 +76,21 @@ namespace Z0.Asm
         public IFunctionStreamWriter AsmWriter(FilePath dst)
             => WriterFactory(dst, AsmFormatter);
 
-        void BlackHole(AppMsg msg) {}
+        void BlackHole(IAppMsg msg) {}
 
-        void Relay(AppMsg msg)
+        void Relay(IAppMsg msg)
             => Next(msg);
               
-        public void Deposit(AppMsg msg)
+        public void Deposit(IAppMsg msg)
             => Messaging.Deposit(msg);
 
         public void Notify(string msg, AppMsgKind? severity = null)
             => Messaging.Notify(msg, severity);
 
-        public IReadOnlyList<AppMsg> Dequeue()
+        public IReadOnlyList<IAppMsg> Dequeue()
             => Messaging.Dequeue();
 
-        public IReadOnlyList<AppMsg> Flush(Exception e)
+        public IReadOnlyList<IAppMsg> Flush(Exception e)
             => Messaging.Flush(e);
 
         public void Emit(FilePath dst) 

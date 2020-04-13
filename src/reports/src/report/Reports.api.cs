@@ -50,11 +50,21 @@ namespace Z0
             where T : IRecord
                 => describe<T>().HeaderNames;
 
+        /// <summary>
+        /// Computes the field width from a specifier
+        /// </summary>
+        /// <param name="f">The source field</param>
+        /// <typeparam name="F">The field specification type</typeparam>
         [MethodImpl(Inline)]
         public static int width<F>(F f)
             where F : unmanaged, Enum                
                 => (int)(Enums.numeric<F,ulong>(f) >> 32);
 
+        /// <summary>
+        /// Computes a field index from a specifier
+        /// </summary>
+        /// <param name="f">The source field</param>
+        /// <typeparam name="F">The field specification type</typeparam>
         [MethodImpl(Inline)]
         public static int index<F>(F f)
             where F : unmanaged, Enum                

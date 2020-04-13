@@ -23,7 +23,6 @@ namespace Z0.Asm
         Gap = 8,
 
         Member = 1,
-
     }
 
     /// <summary>

@@ -496,7 +496,7 @@ namespace Z0
         /// if specified, when block formatting, indicates the block delimiter to place between the block partitions</param>
         public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null)
         {                                            
-            if(blockWidth == null)
+            if(blockWidth == null || blockWidth == 0)
                 return FormatUnblocked(tlz,specifier);
             else
             {
@@ -510,7 +510,7 @@ namespace Z0
                     sb.Append(blocks[i].FormatUnblocked(false,false));
                     if(i != lastix)
                     {
-                        if(rowWidth != null)
+                        if(rowWidth != null && rowWidth != 0)
                         {
                             if(++counter % rowWidth.Value == 0)
                             {
@@ -530,9 +530,9 @@ namespace Z0
             }            
         }
 
-        public string Format(BitFormatConfig? fmt = null)
+        public string Format(BitFormatConfig? config = null)
         {                                            
-            var style = fmt ?? BitFormatConfig.Default;
+            var style = config ?? BitFormatConfig.Default;
             var sep = style.BlockSep;
             var rowWidth = style.RowWidth;
             var specifier = style.SpecifierPrefix;
