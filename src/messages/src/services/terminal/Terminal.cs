@@ -132,12 +132,12 @@ namespace Z0
         public void WriteChar(char c, AppMsgKind? severity = null)
             => Write(c, ForeColor(severity ?? AppMsgKind.Info));
 
-        public void WriteMessage(IAppMsg msg)
+        public void WriteMessage(IAppMsg msg, AppMsgColor? color = null)
         {   
             if(msg.Kind == AppMsgKind.Error)
                 WriteError(msg);
             else
-                WriteLine(msg, msg.Color); 
+                WriteLine(msg, color ?? msg.Color); 
         }
 
         public void WriteLines<F>(params F[] src)
@@ -175,7 +175,7 @@ namespace Z0
             }            
         }
 
-        public void WriteMessages(IEnumerable<AppMsg> messages)
+        public void WriteMessages(IEnumerable<IAppMsg> messages)
         {
             lock(locker)            
             {

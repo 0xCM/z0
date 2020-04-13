@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a message that encapsulates application diagnstic/status/error message content
     /// </summary>
-    public class AppMsg  : IAppMsg
+    public class AppMsg : IAppMsg
     {
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind, caller, FilePath.Define(file), line);
@@ -92,42 +92,17 @@ namespace Z0
             => Content == null || (Content is string s && string.IsNullOrWhiteSpace(s));
 
         /// <summary>
-        /// Returns a kind-aligned messages
-        /// </summary>
-        /// <param name="kind">The target kind</param>
-        public AppMsg AsKind(AppMsgKind kind)
-            => this.Kind == kind ? this : new AppMsg(Content, kind, Color, Caller, CallerFile, FileLine);
-
-        /// <summary>
-        /// Edits the message to include specifed caller info data
-        /// </summary>
-        /// <param name="caller">The invokind method</param>
-        /// <param name="file">The file in which the invocation occurred</param>
-        /// <param name="line">The line number at which the invocation occurred</param>
-        public AppMsg WithCallerInfo(string caller, string file, int? line)
-            => new AppMsg(Content, Kind, Color, caller, FilePath.Define(file), line);
-
-        /// <summary>
         /// Prepends the message body with specified content
         /// </summary>
         /// <param name="prefix">The prefix conent</param>
         public AppMsg WithPrependedContent(object prefix)    
             => new AppMsg($"{prefix}{Content}", Kind, Color, Caller, CallerFile, FileLine);
-
-        /// <summary>
-        /// Appends specified content to the message body
-        /// </summary>
-        /// <param name="suffix">The suffix content</param>
-        public AppMsg WithAppendedContent(object suffix)    
-            => new AppMsg($"{Content}{suffix}", Kind, Color, Caller, CallerFile, FileLine);
         
         /// <summary>
         /// Sets the display state to true
         /// </summary>
-        public AppMsg Printed()
+        public IAppMsg AsDisplayed()
             => new AppMsg(Content, Kind, Color, Caller, CallerFile, FileLine, true);
-
-        public bool IsError => Kind == AppMsgKind.Error;
         
         public string Format()
         {

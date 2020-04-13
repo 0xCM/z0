@@ -8,7 +8,6 @@ namespace Z0
 
     public interface IValidationContext : ITestContext
     {
-
         string ITestContext.CaseName(ISFuncApi f)
             => Validity.testcase(HostType, f);
     }

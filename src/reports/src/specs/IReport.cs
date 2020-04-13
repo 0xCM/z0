@@ -16,6 +16,8 @@ namespace Z0
         string ReportName {get;}
 
         int RecordCount {get;}
+
+        IRecord[] Records {get;}
     }
         
     public readonly struct EmptyReport : IReport
@@ -26,12 +28,16 @@ namespace Z0
 
         public int RecordCount => 0;
 
+        public IRecord[] Records => new IRecord[]{};
+
     }
 
     public interface IReport<R> : IReport
         where R : IRecord<R>
     {
-        R[] Records {get;}
+        new R[] Records {get;}
+
+        IRecord[] IReport.Records => Records.Map(r => (IRecord)r);
 
         string[] IReport.HeaderNames 
             =>  Reports.headers<R>();

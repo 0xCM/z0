@@ -59,8 +59,11 @@ namespace Z0
         /// </summary>
         /// <param name="op">The kind of claim that failed</param>
         /// <param name="msg">The failure description</param>
-        public static ValidityException failed(ValidityClaim op, AppMsg msg)
-            => ValidityException.Define(op, msg);
+        public static ValidityException failed(ValidityClaim op, IAppMsg msg)
+        {
+            require(msg != null, $"Defining validity exceptions with invalid messages is bad");
+            return ValidityException.Define(op, msg);
+        }
 
         /// <summary>
         /// Fails unconditionally with a message

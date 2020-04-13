@@ -24,7 +24,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public void Accept(in E e)
+        public void Deposit(E e)
             => Receiver(e);
     }
 
@@ -42,7 +42,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public void Accept(in IAppEvent e)
+        public void Deposit(IAppEvent e)
             => Receiver(e);
     }
 

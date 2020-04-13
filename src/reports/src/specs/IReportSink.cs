@@ -3,15 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Collections.Generic;
+    using System.IO;
 
-    public interface IMessageQueue<M> : IMessageSink<M>, ICallbackSouce<M>
-        where M : IAppMsg
+    using static Seed;
+
+    public interface IReportSink : ISink<IReport>
     {
-        IReadOnlyList<M> Dequeue();       
-
-        void Emit(FilePath dst);         
+        void Deposit<R>(IReport<R> src)
+            where R : IRecord<R>;
     }
 }

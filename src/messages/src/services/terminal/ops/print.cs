@@ -19,8 +19,15 @@ namespace Z0
         /// Writes a single messages to the terminal
         /// </summary>
         /// <param name="msg">The message to print</param>    
-        public static void print(AppMsg msg)
+        public static void print(IAppMsg msg)
             => T.WriteMessage(msg);
+
+        /// <summary>
+        /// Writes a single messages to the terminal
+        /// </summary>
+        /// <param name="msg">The message to print</param>    
+        public static void print(IAppMsg msg, AppMsgColor color)
+            => T.WriteMessage(msg, color);
 
         /// <summary>
         /// Writes a single line to the terminal

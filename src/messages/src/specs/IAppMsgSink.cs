@@ -4,19 +4,35 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    public interface IAppMsgSink : IMessageSink<AppMsg>
-    {
-        void Notify(string msg, AppMsgKind? kind = null)
-            => Notify(AppMsg.NoCaller(msg, kind));
+    using System;
+    using System.Collections.Generic;
 
-        void IMessageSink<AppMsg>.Displayed(AppMsg msg)
-            => Notify(msg.Printed());
+    public interface IAppMsgSink : ISink<IAppMsg>
+    {
+        void Deposit(IEnumerable<IAppMsg> msg)
+            => Control.iter(msg,Deposit);        
+
+        void Notify(string msg, AppMsgKind? kind = null)
+            => Deposit(AppMsg.NoCaller(msg, kind));
+
+        void Displayed(IAppMsg msg)
+            => Deposit(msg.AsDisplayed());
+
+        void NotifyConsole(IAppMsg msg, AppMsgColor color)
+        {
+            if(msg.Kind == AppMsgKind.Error)
+                term.print(msg);
+            else
+                term.print(msg,color);
+            
+            Displayed(msg);
+        }
+
+        void NotifyConsole(IAppMsg msg)
+            => NotifyConsole(msg, msg.Color);
 
         void NotifyConsole(object content, AppMsgColor color)
-        {
-            var msg = AppMsg.Colorize(content, color);
-            term.print(msg, color);
-            Displayed(msg);            
-        }
+            => NotifyConsole(AppMsg.NoCaller(content), color);
+
     }
 }

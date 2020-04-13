@@ -8,6 +8,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
+    using static Memories;
+
     public class t_vconcat : t_vinx<t_vconcat>
     {     
         public void vconcat_check()

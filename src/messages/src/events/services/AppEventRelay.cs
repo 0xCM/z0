@@ -46,7 +46,7 @@ namespace Z0
         ref readonly E IAppEventRelay.Raise<E>(in E e)
         {                
             if(Subscriptions.TryGetValue(e.GetType(), out var sink))
-                ((IAppEventSink<E>)sink).Accept(e);
+                ((IAppEventSink<E>)sink).Deposit(e);
             return ref e;
         }
 

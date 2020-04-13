@@ -13,29 +13,17 @@ namespace Z0
     [Serializable]
     public class ValidityException : AppException
     {
-        public static ValidityException Define(ValidityClaim op, AppMsg msg)
-            => new ValidityException(op, msg);
-        
-        public static ValidityException Define(ValidityClaim op, string msg, string caller, string file, int? line)
-            => new ValidityException(op, msg, caller, file, line);
+        public static ValidityException Define(ValidityClaim op, IAppMsg msg)
+            => new ValidityException(op, msg);        
 
         public ValidityException() { }
      
-        ValidityException(ValidityClaim kind, AppMsg msg) 
+        ValidityException(ValidityClaim kind, IAppMsg msg) 
             : base(msg)
             { 
                 this.OpKind = kind;
             }
-
-        ValidityException(ValidityClaim kind, string msg, string caller, string file, int? line) 
-            : base(AppMsg.NoCaller($"{msg} {caller} {file} {line}", AppMsgKind.Error)) 
-            { 
-                this.OpKind = kind;
-            }
-     
-        protected ValidityException(SerializationInfo info, StreamingContext context) 
-            : base(info, context) { }
-    
+         
         public ValidityClaim OpKind {get;}         
     }
 }

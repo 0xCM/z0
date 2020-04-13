@@ -39,7 +39,7 @@ namespace Z0
         protected bool ExcludeZero {get;}
 
         protected void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Context.Notify(AppMsg.Error(e, caller,file,line));
+            => Context.Deposit(AppMsg.Error(e, caller,file,line));
     }
 
 }

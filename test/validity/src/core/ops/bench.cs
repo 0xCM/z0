@@ -8,8 +8,19 @@ namespace Z0
     
     using static Seed;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
     partial class TestContext<U>
     {
+        /// <summary>
+        /// Captures a duration and the number of operations executed within the period
+        /// </summary>
+        /// <param name="time">The running time</param>
+        /// <param name="opcount">The operation count</param>
+        /// <param name="label">The label associated with the measure, if specified</param>
+        protected static BenchmarkRecord measured(long opcount, Duration time, [Caller] string label = null)
+            => BenchmarkRecord.Define(opcount, time, label);
+
         protected void bench<T>(UnaryOp<T> f, UnaryOp<T> cf, string opname,  SystemCounter clock = default)
             where T :unmanaged
         {

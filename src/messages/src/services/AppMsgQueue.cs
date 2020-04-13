@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
+    using static Memories;
 
     /// <summary>
     /// A container of messages which isnt't realy a queue but is more-or-less thread-safe
@@ -18,27 +19,27 @@ namespace Z0
     {
         object lockobj = new object();
 
-        public event Action<AppMsg> Next;
+        public event Action<IAppMsg> Next;
 
-        List<AppMsg> Messages {get;} 
+        List<IAppMsg> Messages {get;} 
 
         [MethodImpl(Inline)]
-        public static AppMsgQueue Create(params AppMsg[] src)
+        public static AppMsgQueue Create(params IAppMsg[] src)
             => new AppMsgQueue(src);
 
         [MethodImpl(Inline)]
-        AppMsgQueue(params AppMsg[] src)
+        AppMsgQueue(params IAppMsg[] src)
         {
             this.Messages = src.ToList();
             this.Next += BlackHole;
         }
 
-        void BlackHole(AppMsg msg) { }
+        void BlackHole(IAppMsg msg) { }
 
-        void Relay(AppMsg msg)
+        void Relay(IAppMsg msg)
             => Next(msg);
 
-        public IReadOnlyList<AppMsg> Dequeue()
+        public IReadOnlyList<IAppMsg> Dequeue()
         {
             lock(lockobj)
             {
@@ -48,19 +49,20 @@ namespace Z0
             }
         }
 
-        public void Notify(AppMsg msg)
+        public void Deposit(IAppMsg msg)
         {
+            require(msg != null, $"Depositing null messages to the queue is bad");
             lock(lockobj)
                 Messages.Add(msg);
             
             Relay(msg);
         }
 
-        public IReadOnlyList<AppMsg> Flush(Exception e)
+        public IReadOnlyList<IAppMsg> Flush(Exception e)
         {
             lock(lockobj)
             {
-                Notify(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
+                Deposit(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
                 return Dequeue();
             }
         }
@@ -72,6 +74,6 @@ namespace Z0
         }
 
         public void Notify(string msg, AppMsgKind? severity = null)
-            => Notify(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
+            => Deposit(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
     }
 }

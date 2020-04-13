@@ -40,7 +40,7 @@ namespace Z0.Asm
 
         IFunctionStreamWriter Writer(FilePath dst) => Context.AsmWriter(dst);
 
-        void Notify(AppMsg msg) => Sink.Notify(msg);
+        void Notify(AppMsg msg) => Sink.Deposit(msg);
         
         void Notify(object content, AppMsgColor color = AppMsgColor.Green)
             => Context.NotifyConsole(content, color);

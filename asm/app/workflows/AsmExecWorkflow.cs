@@ -53,7 +53,7 @@ namespace Z0.Asm.Check
             => Sink.Notify(msg, severity);
         
         void Notify(AppMsg msg)
-            => Sink.Notify(msg);
+            => Sink.Deposit(msg);
 
         void NotifyConsole(AppMsg msg)
             => Sink.NotifyConsole(msg);

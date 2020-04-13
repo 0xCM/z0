@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using static Seed;
+    using static Memories;
+
     public class t_vor : t_vinx<t_vor>
     {
         public void vor_check()

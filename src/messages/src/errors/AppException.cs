@@ -9,7 +9,9 @@ namespace Z0
         
     public class AppException : Exception
     {
-        public static AppException Define(AppMsg msg)
+        public new IAppMsg Message {get;}
+
+        public static AppException Define(IAppMsg msg)
             => new AppException(msg);
 
         public static AppException Define(object reason, string caller, string file, int? line)
@@ -17,20 +19,12 @@ namespace Z0
 
         public AppException() { }
      
-        public AppException(AppMsg msg) 
-            : base(msg.ToString()) 
-            { 
-                this.Message = Message;
-            }
-     
-        protected AppException(SerializationInfo info, StreamingContext context) 
-            : base(info, context) { }    
-                
-        public new AppMsg Message {get;}
-
-        public AppMsgKind Severity
-            => Message.Kind;
-
+        public AppException(IAppMsg src) 
+            : base(src.Format()) 
+        { 
+            this.Message = src;
+        }
+          
         public override string ToString()
             => Message.ToString();
     }

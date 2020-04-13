@@ -42,7 +42,7 @@ namespace Z0
 
         internal static class Claim
         {
-            public static ValidityException failed(ValidityClaim op, AppMsg msg)
+            public static ValidityException failed(ValidityClaim op, IAppMsg msg)
                 => ValidityException.Define(op, msg);
 
             /// <summary>

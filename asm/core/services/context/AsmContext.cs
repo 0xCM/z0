@@ -81,8 +81,8 @@ namespace Z0.Asm
         void Relay(AppMsg msg)
             => Next(msg);
               
-        public void Notify(AppMsg msg)
-            => Messaging.Notify(msg);
+        public void Deposit(AppMsg msg)
+            => Messaging.Deposit(msg);
 
         public void Notify(string msg, AppMsgKind? severity = null)
             => Messaging.Notify(msg, severity);

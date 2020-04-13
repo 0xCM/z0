@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static refs;
+    using static Seed;
+    using static Memories;
     using static Vectors;
 
     public class t_vswaps : t_vinx<t_vswaps>

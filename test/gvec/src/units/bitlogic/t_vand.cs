@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
+    using static Seed;
+    using static Memories;
+
     public class t_vand : t_vinx<t_vand>
     {
         public void vand_check()

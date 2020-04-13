@@ -14,9 +14,11 @@ namespace Z0
     /// Base type for test applications
     /// </summary>
     /// <typeparam name="A">The concrete subtype</typeparam>
-    public abstract class TestApp<A> : TestContext<A>, ITestControl
+    public abstract class TestApp<A> : TestContext<A>
         where A : TestApp<A>, new()
     {
+
+        protected IAppMsgSink Log => this.MessageLog();
 
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
             = new ConcurrentQueue<TestCaseRecord>();
@@ -24,16 +26,16 @@ namespace Z0
         ConcurrentQueue<BenchmarkRecord> BenchmarkQueue {get;}
             = new ConcurrentQueue<BenchmarkRecord>();
 
-        protected void PostTestResults(IEnumerable<TestCaseRecord> outcomes)
+        void PostTestResults(IEnumerable<TestCaseRecord> outcomes)
             => TestResultQueue.Enqueue(outcomes);
 
-        protected void PostTestResult(TestCaseRecord outcome)
+        void PostTestResult(TestCaseRecord outcome)
             => TestResultQueue.Enqueue(outcome);
 
-        protected void PostBenchResult(IEnumerable<BenchmarkRecord> outcomes)
+        void PostBenchResult(IEnumerable<BenchmarkRecord> outcomes)
             => BenchmarkQueue.Enqueue(outcomes);
 
-        protected BenchmarkRecord[] TakeSortedBenchmarks()
+        BenchmarkRecord[] TakeSortedBenchmarks()
         {
             var records = BenchmarkQueue.ToArray();
             BenchmarkQueue.Clear();
@@ -41,7 +43,7 @@ namespace Z0
             return records;
         }
 
-        protected TestCaseRecord[] TakeSortedResults()
+        TestCaseRecord[] TakeSortedResults()
         {
             static TestCaseRecord[] Sort(IEnumerable<TestCaseRecord> src)
                 => src.OrderBy(x => x.Case).Where(x => x.Status == 0).Concat(src.Where(x => x.Status != 0)).ToArray();
@@ -123,7 +125,6 @@ namespace Z0
 
         IAppPaths Paths => Context.Paths;
 
-
         const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
         
         const int ExecutedPad = (int)((ulong)TestCaseField.Executed >> 32);
@@ -191,7 +192,7 @@ namespace Z0
 
         public Duration RunAction(IUnitTest unit, Action exec)
         {
-            var messages = new List<AppMsg>();
+            var messages = new List<IAppMsg>();
             var clock = counter(false);
             var casename = unit.TestActionName();
             var control = unit as ITestControl;
@@ -235,22 +236,23 @@ namespace Z0
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
 
-        IEnumerable<AppMsg> CreateErrorMessages(string name, Exception e)
+        IEnumerable<IAppMsg> CreateErrorMessages(string name, Exception e)
         {
             if(e.InnerException is ValidityException claim)
-                yield return claim.Message;
-            
+                yield return claim.Message;            
             else if(e.InnerException is AppException app)
                 yield return app.Message;
-            else                
-                yield return AppErrorMsg.Unanticipated(e?.InnerException ?? e);
-
-            yield return AppMsg.NoCaller($"{name} failed.", AppMsgKind.Error);
+            else if(e.InnerException != null)               
+                yield return AppMsg.NoCaller($"{e}",AppMsgKind.Error);
+            else
+                yield return AppMsg.NoCaller($"{name} failed {e}", AppMsgKind.Error);
         }
 
-        AppMsg[] CollectMessages(IUnitTest unit, string testName, Duration runtime, Exception e = null)
+
+
+        IAppMsg[] CollectMessages(IUnitTest unit, string testName, Duration runtime, Exception e = null)
         {
-            var messages = new List<AppMsg>();
+            var messages = new List<IAppMsg>();
             var control = unit as ITestControl;
             messages.AddRange(control.Dequeue());
             if(e != null)
@@ -278,7 +280,7 @@ namespace Z0
         Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
         {
             var clock = counter(false);
-            var messages = Arrays.empty<AppMsg>();
+            var messages = Arrays.empty<IAppMsg>();
             var casename = unit.TestCaseName();
 
             try
@@ -299,12 +301,13 @@ namespace Z0
             }
             finally
             {            
-                messages.Save(Context);
+                Log.Deposit(messages);                
                 Control.iter(messages.Where(m => !m.Displayed), term.print);
             }
 
             return clock;
         }
+
 
         Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
         {
@@ -313,7 +316,7 @@ namespace Z0
             var clock = counter(false);
             var control = unit as ITestControl;
 
-            var collected = new List<AppMsg>();
+            var collected = new List<IAppMsg>();
             try
             {
                 var tsStart = time.now();
@@ -336,13 +339,12 @@ namespace Z0
             {                
                 clock.Stop();
                 collected.AddRange(control.Dequeue());                
-                collected.AddRange(CreateErrorMessages(casename, e));
-             
+                collected.AddRange(CreateErrorMessages(casename, e));             
                 cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
             }
             finally
             {     
-                collected.Save(Context);
+                Log.Deposit(collected);                
                 Control.iter(collected.Where(m => !m.Displayed), term.print);       
             }
             return exectime;
@@ -359,9 +361,9 @@ namespace Z0
 
         static ILogger GetLogger(ILogTarget dst)
             => dst.Area switch{
-                LogArea.App => Log.App,
-                LogArea.Bench => Log.Bench,
-                LogArea.Test => Log.Test,
+                LogArea.App => Z0.Log.App,
+                LogArea.Bench => Z0.Log.Bench,
+                LogArea.Test => Z0.Log.Test,
                 _ => throw new ArgumentException()
             };
 
@@ -422,7 +424,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                Flush(e, Log.Test);
+                Flush(e, Z0.Log.Test);
             }
         }
 

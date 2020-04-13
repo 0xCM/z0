@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_vsub : t_vinx<t_vsub>
     {

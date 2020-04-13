@@ -14,20 +14,17 @@ namespace Z0
 
         public virtual IPart[] Resolved {get;}
 
-
-
         protected ApiShell(C context)
             : base(context)
         {
             this.MsgQueue = AppMessages.queue();
-            //this.Resolved = api.Composition.Resolved;
         }
 
         public string Format()
             => GetType().Name;
 
-        public void Notify(AppMsg msg)
-            => MsgQueue.Accept(msg);
+        public void Deposit(IAppMsg msg)
+            => MsgQueue.Deposit(msg);
 
         public override void OnFatalError(Exception e)
             => Control.iter(MsgQueue.Flush(e), term.print);

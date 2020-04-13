@@ -20,6 +20,10 @@ namespace Z0
         
         ConcurrentQueue<SFCaseResult> Outcomes {get;}
 
+        public ITestContext Context => this;
+
+        public bool Enabled => true;
+
         public static IValidationContext From(ITestContext context)
             => new ValidationContext(context.HostType, context as IAppMsgSink, context.Random, context.ReportOutcome);
 
@@ -32,8 +36,8 @@ namespace Z0
             this.Relay = relay ?? BlackHole;
         }
 
-        public void Notify(AppMsg msg)        
-            => Sink?.Notify(msg);
+        public void Deposit(IAppMsg msg)        
+            => Sink?.Deposit(msg);
 
         void BlackHole(TestCaseOutcome outcome) {}
 

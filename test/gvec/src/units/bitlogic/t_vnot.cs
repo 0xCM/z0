@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_vnot : t_vinx<t_vnot>
     {

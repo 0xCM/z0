@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static As;
-    using static Vectors;
-
+    using static Seed;
+    using static Memories;
     
     public class tv_mul : t_vinx<tv_mul>
     {
-
         public void vmul_128x8i()
         {
             var ws = n128;
@@ -123,7 +121,7 @@ namespace Z0
                 var x1 = BmiMul.mul(vcell(x,1), vcell(y,1));
                 var x2 = BmiMul.mul(vcell(x,2), vcell(y,2));
                 var x3 = BmiMul.mul(vcell(x,3), vcell(y,3));
-                var expect = vparts(wt, x0,x1,x2,x3);
+                var expect = Vectors.vparts(wt, x0,x1,x2,x3);
                 var actual = dvec.vmul(x,y);
 
                 Claim.veq(expect,actual);

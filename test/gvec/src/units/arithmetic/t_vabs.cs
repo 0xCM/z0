@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     
-     using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_vabs : t_vinx<t_vabs>
     {
-
         public void vabs_check()
         {
             vabs_check(n128);

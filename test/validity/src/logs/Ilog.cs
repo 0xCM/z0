@@ -20,18 +20,11 @@ namespace Z0
         Append
     }
 
-
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
-    interface ILogger : IAppMsgLog
-    {
-        /// <summary>
-        /// Appends unstructured text content to the log
-        /// </summary>
-        /// <param name="text">The text to append</param>
-        void Write(string text);
-
+    interface ILogger : IAppMsgSink
+    {        
         FilePath Write<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
             where R : IRecord;                
     }
@@ -64,13 +57,13 @@ namespace Z0
             FilePath LogPath
                 => Paths.Timestamped(Area,Area.ToString().ToLower());
 
-            public void Write(AppMsg src)
+            public void Write(IAppMsg src)
             {
                 lock(locker)
                     LogPath.AppendLine(src.ToString());
             }
 
-            public void Write(IEnumerable<AppMsg> src)
+            public void Write(IEnumerable<IAppMsg> src)
             {
                 lock(locker)
                     LogPath.Append(Formattable.items(src));
@@ -115,20 +108,18 @@ namespace Z0
                 return path;
             }
 
-            public void Write(string text)
-            {
-                lock(locker)
-                    LogPath.Append(text);
-            }
 
             [MethodImpl(Inline)]
-            public void Notify(AppMsg msg)
-                => Write(msg);
+            public void Deposit(IAppMsg src)
+            {
+                lock(locker)
+                    LogPath.AppendLine(src.ToString());
+            }
 
 
             [MethodImpl(Inline)]
             public void Notify(string msg, AppMsgKind? severity = null)
-                => Write(AppMsg.NoCaller(msg,severity ?? AppMsgKind.Info));
+                => Deposit(AppMsg.NoCaller(msg,severity ?? AppMsgKind.Info));
         }
 
         sealed class AppLog : Logger<AppLog>

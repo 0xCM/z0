@@ -48,5 +48,14 @@ namespace Z0
         public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
             where T : unmanaged
                 => ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);                
+
+        /// <summary>
+        /// Returns a reference to the head of a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T head<T>(T[] src)
+            => ref MemoryMarshal.GetReference<T>(src);
    }
 }

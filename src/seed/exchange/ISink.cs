@@ -28,6 +28,6 @@ namespace Z0
         /// Receives supplied input
         /// </summary>
         /// <param name="src">The input</param>
-        void Accept(in A src);        
+        void Deposit(A src);        
     }
 }

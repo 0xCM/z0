@@ -15,7 +15,7 @@ namespace Z0
     {
         readonly IAppMsgQueue Queue;
 
-        public event Action<AppMsg> Next;
+        public event Action<IAppMsg> Next;
 
         public static IAppMsgExchange From(IAppMsgQueue dst)
             => new AppMsgExchange(dst);          
@@ -37,9 +37,9 @@ namespace Z0
             Next += BlackHole;
         }
 
-        void BlackHole(AppMsg msg) {}
+        void BlackHole(IAppMsg msg) {}
 
-        void Relay(AppMsg msg)
+        void Relay(IAppMsg msg)
             => Next(msg);
 
         /// <summary>
@@ -47,23 +47,23 @@ namespace Z0
         /// </summary>
         /// <param name="msg">The messages to enqueue</param>
         [MethodImpl(Inline)]
-        public void Notify(AppMsg msg)
-            => Queue.Notify(msg);
+        public void Deposit(IAppMsg msg)
+            => Queue.Deposit(msg);
         
         [MethodImpl(Inline)]
         public void Notify(string msg, AppMsgKind? severity = null)
             => Queue.Notify(msg,severity);
 
-        public IReadOnlyList<AppMsg> Dequeue()
+        public IReadOnlyList<IAppMsg> Dequeue()
             => Queue.Dequeue();
 
-        public void Flush(Exception e, IAppMsgLog target)
-            => target.Write(Flush(e));
+        public void Flush(Exception e, IAppMsgSink target)
+            => target.Deposit(Flush(e));
 
         public void Emit(FilePath dst) 
             => Queue.Emit(dst);
 
-        public IReadOnlyList<AppMsg> Flush(Exception e)        
+        public IReadOnlyList<IAppMsg> Flush(Exception e)        
         {
             var messages = Queue.Flush(e);            
             Terminal.Get().WriteMessages(messages);

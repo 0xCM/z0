@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_vinsert : t_vinx<t_vinsert>
     {

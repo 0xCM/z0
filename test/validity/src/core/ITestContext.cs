@@ -6,27 +6,8 @@ namespace Z0
 {    
     using System;
     using System.Collections.Generic;
-
-    public readonly struct TestCaseOutcome
-    {
-        public static TestCaseOutcome Define(string name, bool succeeded, TimeSpan duration)
-            => new TestCaseOutcome(name, succeeded, duration);
-
-        TestCaseOutcome(string name, bool succeeded, TimeSpan duration)
-        {
-            this.CaseName = name;
-            this.Succeeded = succeeded;
-            this.Duration = duration;
-        }
-
-        public string CaseName {get;}
-
-        public bool Succeeded {get;}
-
-        public TimeSpan Duration {get;}
-    }
     
-    public interface ITestContext : IDisposable, IAppMsgSink, IPolyrandProvider, IAppContext
+    public interface ITestContext : IDisposable, IAppMsgSink, IPolyrandProvider, IAppContext, IService<ITestContext>
     {
         void ReportBenchmark(string name, long opcount, TimeSpan duration);        
 
@@ -36,13 +17,14 @@ namespace Z0
 
         Type HostType {get;}
 
+        bool Enabled {get;}
+
         void ReportOutcome(TestCaseOutcome outcome)
             => ReportOutcome(outcome.CaseName, outcome.Succeeded, outcome.Duration);
     }
 
-    public interface IUnitTest : IDisposable, ITestContext, IService<ITestContext>
+    public interface IUnitTest : ITestContext 
     {
-        bool Enabled {get;}
 
     }    
 

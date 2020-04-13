@@ -11,6 +11,6 @@ namespace Z0
     /// </summary>
     public interface IAppMsgExchange : IAppMsgQueue
     {        
-        void Flush(Exception exception, IAppMsgLog target);                       
+        void Flush(Exception exception, IAppMsgSink target);                       
     }
 }

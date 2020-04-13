@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Memories;
-    
+    using static Memories;    
 
     public class t_vsllv : t_vinx<t_vsllv>
     {

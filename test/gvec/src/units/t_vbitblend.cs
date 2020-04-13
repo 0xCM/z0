@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Core;
-    using static Gone2;
+    using static Seed;
+    using static Memories;
 
     public class t_vbitblend : t_vinx<t_vbitblend>
     {                

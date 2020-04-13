@@ -235,9 +235,9 @@ namespace Z0
         }
 
         protected void TypeCaseStart<C>([Caller] string caller = null)
-            => Notify(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", AppMsgKind.HiliteCL));
+            => Deposit(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", AppMsgKind.HiliteCL));
 
         protected void TypeCaseEnd<C>([Caller] string caller = null)
-            => Notify(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", AppMsgKind.HiliteCL));
+            => Deposit(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", AppMsgKind.HiliteCL));
     }
 }
