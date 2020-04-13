@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a typed comparison expression
     /// </summary>
-    public sealed class ComparisonExpr<T> : IComparisonExpr<T>
+    public readonly struct ComparisonExpr<T> : IComparisonExpr<T>
         where T : unmanaged
     {
         /// <summary>

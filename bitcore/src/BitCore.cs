@@ -26,11 +26,11 @@ namespace Z0
 
     }       
     
-    [ApiHost, ApiServiceProvider]
-    public partial class BitService : IApiServiceProvider<BitService>
-    {
+    // [ApiHost, ApiServiceProvider]
+    // public partial class BitService : IApiServiceProvider<BitService>
+    // {
 
-    }
+    // }
 
     [ApiHost]
     public partial class BitCalcs : IApiHost<BitCalcs>

@@ -8,52 +8,52 @@ namespace Z0.Logix
     using System.Linq;
     
     using static Seed;
-    using static Gone;
+    using static Memories;
 
     using static BitLogicSpec;
     using static LogicEngine;
     
-    using BL = BinaryBitLogicKind;
+    using BLK = BinaryLogicKind;
 
     public class t_binary_logic : LogixTest<t_binary_logic>
     {
         protected override int CycleCount => Pow2.T08;
                 
         public void and_op_check()
-            => logic_op_check(BL.And, (a,b) => a & b);
+            => logic_op_check(BLK.And, (a,b) => a & b);
 
         public void and_expr_check()
-            => logic_expr_check(BL.And, LogicOps.and);
+            => logic_expr_check(BLK.And, LogicOps.and);
 
         public void nand_op_check()
-            => logic_op_check(BL.Nand, (a,b) => !(a & b));
+            => logic_op_check(BLK.Nand, (a,b) => !(a & b));
 
         public void nand_expr_check()
-            => logic_expr_check(BL.Nand, LogicOps.nand);
+            => logic_expr_check(BLK.Nand, LogicOps.nand);
 
         public void or_op_check()
-            => logic_op_check(BL.Or, (a,b) => a | b);
+            => logic_op_check(BLK.Or, (a,b) => a | b);
 
         public void or_expr_check()
-            => logic_expr_check(BL.Or, LogicOps.or);
+            => logic_expr_check(BLK.Or, LogicOps.or);
 
         public void nor_op_check()
-            => logic_op_check(BL.Nor, (a,b) => !(a | b));
+            => logic_op_check(BLK.Nor, (a,b) => !(a | b));
 
         public void nor_expr_check()
-            => logic_expr_check(BL.Nor, LogicOps.nor);
+            => logic_expr_check(BLK.Nor, LogicOps.nor);
 
         public void xor_op_check()
-            => logic_op_check(BL.Xor, (a,b) => a ^ b);
+            => logic_op_check(BLK.Xor, (a,b) => a ^ b);
 
         public void xor_expr_check()
-            => logic_expr_check(BL.Xor, LogicOps.xor);
+            => logic_expr_check(BLK.Xor, LogicOps.xor);
 
         public void xnor_op_check()
-            => logic_op_check(BL.Xnor, (a,b) => !(a ^ b));
+            => logic_op_check(BLK.Xnor, (a,b) => !(a ^ b));
 
         public void xnor_expr_check()
-            => logic_expr_check(BL.Xnor, LogicOps.xnor);
+            => logic_expr_check(BLK.Xnor, LogicOps.xnor);
 
         public void t_seqential_op_check()
         {

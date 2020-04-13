@@ -8,21 +8,14 @@ namespace Z0
     
     using static Seed;    
 
-    /// <summary>
-    /// Vectorized functions
-    /// </summary>
-    public static partial class VSvc
+    [ApiServiceProvider]
+    public partial class VSvc : IApiService<VSvc,VSvcHosts>
     {
 
     }
 
-    /// <summary>
-    /// Vectorized operator types
-    /// </summary>
-    public static partial class VSvcHosts
+    public partial class VSvcHosts
     {
 
     }
-    
-
 }

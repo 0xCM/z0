@@ -11,6 +11,10 @@ namespace Z0.Logix
     using static OpHelpers;
     using static BitMatrixOps;
 
+    using ULK = UnaryLogicKind;
+    using BLK = BinaryLogicKind;
+    using TLK = TernaryLogicKind;
+
     /// <summary>
     /// Defines services for bitmatrix operators
     /// </summary>
@@ -18,106 +22,106 @@ namespace Z0.Logix
     public static class BitMatrixOpApi
     {
 
-        [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitMatrix<T> eval<T>(UnaryLogicKind kind, BitMatrix<T> A)
+        [Op, NumericClosures(UnsignedInts)]
+        public static BitMatrix<T> eval<T>(ULK kind, BitMatrix<T> A)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryLogicKind.Not: return not(A);
-                case UnaryLogicKind.Identity: return identity(A);
-                default: throw new NotSupportedException(sig<T>(kind));
+                case ULK.Not: return not(A);
+                case ULK.Identity: return identity(A);
+                default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
 
-        [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitMatrix<T> eval<T>(UnaryLogicKind kind, BitMatrix<T> A, ref BitMatrix<T> Z)
+        [Op, NumericClosures(UnsignedInts)]
+        public static BitMatrix<T> eval<T>(ULK kind, BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryLogicKind.Not: return not(A, ref Z);
-                case UnaryLogicKind.Identity: return identity(A, ref Z);
-                default: throw new NotSupportedException(sig<T>(kind));
+                case ULK.Not: return not(A, ref Z);
+                case ULK.Identity: return identity(A, ref Z);
+                default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
 
-        [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitMatrix<T> eval<T>(BinaryBitLogicKind kind, BitMatrix<T> A, BitMatrix<T> B)
+        [Op, NumericClosures(UnsignedInts)]
+        public static BitMatrix<T> eval<T>(BLK kind, BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true<T>();
-                case BinaryBitLogicKind.False: return @false<T>();
-                case BinaryBitLogicKind.And: return and(A,B);
-                case BinaryBitLogicKind.Nand: return nand(A,B);
-                case BinaryBitLogicKind.Or: return or(A,B);
-                case BinaryBitLogicKind.Nor: return nor(A,B);
-                case BinaryBitLogicKind.Xor: return xor(A,B);
-                case BinaryBitLogicKind.Xnor: return xnor(A,B);
-                case BinaryBitLogicKind.LProject: return left(A,B);
-                case BinaryBitLogicKind.RProject: return right(A,B);
-                case BinaryBitLogicKind.LNot: return lnot(A,B);
-                case BinaryBitLogicKind.RNot: return rnot(A,B);
-                case BinaryBitLogicKind.Impl: return impl(A,B);
-                case BinaryBitLogicKind.NonImpl: return nonimpl(A,B);
-                case BinaryBitLogicKind.CImpl: return cimpl(A,B);
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl(A,B);
-                default: throw new NotSupportedException(sig<T>(kind));
+                case BLK.True: return @true<T>();
+                case BLK.False: return @false<T>();
+                case BLK.And: return and(A,B);
+                case BLK.Nand: return nand(A,B);
+                case BLK.Or: return or(A,B);
+                case BLK.Nor: return nor(A,B);
+                case BLK.Xor: return xor(A,B);
+                case BLK.Xnor: return xnor(A,B);
+                case BLK.LProject: return left(A,B);
+                case BLK.RProject: return right(A,B);
+                case BLK.LNot: return lnot(A,B);
+                case BLK.RNot: return rnot(A,B);
+                case BLK.Impl: return impl(A,B);
+                case BLK.NonImpl: return nonimpl(A,B);
+                case BLK.CImpl: return cimpl(A,B);
+                case BLK.CNonImpl: return cnonimpl(A,B);
+                default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
 
-        [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitMatrix<T> eval<T>(BinaryBitLogicKind kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        [Op, NumericClosures(UnsignedInts)]
+        public static BitMatrix<T> eval<T>(BLK kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true<T>();
-                case BinaryBitLogicKind.False: return @false<T>();
-                case BinaryBitLogicKind.And: return and(A, B, ref Z);
-                case BinaryBitLogicKind.Nand: return nand(A, B, ref Z);
-                case BinaryBitLogicKind.Or: return or(A, B, ref Z);
-                case BinaryBitLogicKind.Nor: return nor(A, B, ref Z);
-                case BinaryBitLogicKind.Xor: return xor(A, B, ref Z);
-                case BinaryBitLogicKind.Xnor: return xnor(A, B, ref Z);
-                case BinaryBitLogicKind.LProject: return left(A,B, ref Z);
-                case BinaryBitLogicKind.LNot: return lnot(A,B, ref Z);
-                case BinaryBitLogicKind.RProject: return right(A,B, ref Z);
-                case BinaryBitLogicKind.RNot: return rnot(A, B, ref Z);
-                case BinaryBitLogicKind.Impl: return impl(A,B, ref Z);
-                case BinaryBitLogicKind.NonImpl: return nonimpl(A,B, ref Z);
-                case BinaryBitLogicKind.CImpl: return cimpl(A,B, ref Z);
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl(A,B, ref Z);
-                default: throw new NotSupportedException(sig<T>(kind));
+                case BLK.True: return @true<T>();
+                case BLK.False: return @false<T>();
+                case BLK.And: return and(A, B, ref Z);
+                case BLK.Nand: return nand(A, B, ref Z);
+                case BLK.Or: return or(A, B, ref Z);
+                case BLK.Nor: return nor(A, B, ref Z);
+                case BLK.Xor: return xor(A, B, ref Z);
+                case BLK.Xnor: return xnor(A, B, ref Z);
+                case BLK.LProject: return left(A,B, ref Z);
+                case BLK.LNot: return lnot(A,B, ref Z);
+                case BLK.RProject: return right(A,B, ref Z);
+                case BLK.RNot: return rnot(A, B, ref Z);
+                case BLK.Impl: return impl(A,B, ref Z);
+                case BLK.NonImpl: return nonimpl(A,B, ref Z);
+                case BLK.CImpl: return cimpl(A,B, ref Z);
+                case BLK.CNonImpl: return cnonimpl(A,B, ref Z);
+                default: throw Unsupported.define<T>(sig<T>(kind));
             }
 
         }
 
-        [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitMatrixBinaryRefOp<T> lookup<T>(BinaryBitLogicKind kind)
+        [Op, NumericClosures(UnsignedInts)]
+        public static BitMatrixBinaryRefOp<T> lookup<T>(BLK kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true;
-                case BinaryBitLogicKind.False: return @false;
-                case BinaryBitLogicKind.And: return and;
-                case BinaryBitLogicKind.Nand: return nand;
-                case BinaryBitLogicKind.Or: return or;
-                case BinaryBitLogicKind.Nor: return nor;
-                case BinaryBitLogicKind.Xor: return xor;
-                case BinaryBitLogicKind.Xnor: return xnor;
-                case BinaryBitLogicKind.LProject: return left;
-                case BinaryBitLogicKind.LNot: return lnot;
-                case BinaryBitLogicKind.RProject: return right;
-                case BinaryBitLogicKind.RNot: return rnot;
-                case BinaryBitLogicKind.Impl: return impl;
-                case BinaryBitLogicKind.NonImpl: return nonimpl;
-                case BinaryBitLogicKind.CImpl: return cimpl;
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl;
-                default: throw new NotSupportedException(sig<T>(kind));
+                case BLK.True: return @true;
+                case BLK.False: return @false;
+                case BLK.And: return and;
+                case BLK.Nand: return nand;
+                case BLK.Or: return or;
+                case BLK.Nor: return nor;
+                case BLK.Xor: return xor;
+                case BLK.Xnor: return xnor;
+                case BLK.LProject: return left;
+                case BLK.LNot: return lnot;
+                case BLK.RProject: return right;
+                case BLK.RNot: return rnot;
+                case BLK.Impl: return impl;
+                case BLK.NonImpl: return nonimpl;
+                case BLK.CImpl: return cimpl;
+                case BLK.CNonImpl: return cnonimpl;
+                default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
     }

@@ -9,7 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_parts : UnitTest<t_parts>
     {

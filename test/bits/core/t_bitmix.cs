@@ -99,15 +99,15 @@ namespace Z0
             var xOy = xO | yO;
             var t = text.factory.Builder();
             var sep = Chars.Colon;
-            t.AppendLabeled("x", sep, x.FormatBits(blockwidth:1));
-            t.AppendLabeled("x", sep, x.FormatBits(blockwidth:1));
-            t.AppendLabeled("y", sep, y.FormatBits(blockwidth:1));
-            t.AppendLabeled("xE", sep, xE.FormatBits(blockwidth:1));
-            t.AppendLabeled("xO", sep, xO.FormatBits(blockwidth:1));
-            t.AppendLabeled("yE", sep, yE.FormatBits(blockwidth:1));
-            t.AppendLabeled("yO", sep, yO.FormatBits(blockwidth:1));
-            t.AppendLabeled("xEy", sep, xEy.FormatBits(blockwidth:1));
-            t.AppendLabeled("xOy", sep, xOy.FormatBits(blockwidth:1));
+            t.AppendLabeled("x", sep, x.FormatBits(1));
+            t.AppendLabeled("x", sep, x.FormatBits(1));
+            t.AppendLabeled("y", sep, y.FormatBits(1));
+            t.AppendLabeled("xE", sep, xE.FormatBits(1));
+            t.AppendLabeled("xO", sep, xO.FormatBits(1));
+            t.AppendLabeled("yE", sep, yE.FormatBits(1));
+            t.AppendLabeled("yO", sep, yO.FormatBits(1));
+            t.AppendLabeled("xEy", sep, xEy.FormatBits(1));
+            t.AppendLabeled("xOy", sep, xOy.FormatBits(1));
             return t.ToString();
         }
     }

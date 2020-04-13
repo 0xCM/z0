@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
+    using static Memories;
+
     public class t_special : t_gmath<t_special>
     {
         public void ilog2()

@@ -12,12 +12,12 @@ namespace Z0.Logix
     /// <summary>
     /// Defines the application of an untyped ternary logic operator
     /// </summary>
-    public class TernaryLogicOpExpr : ITernaryLogicOpExpr
+    public readonly struct TernaryLogicOpExpr : ITernaryLogicOpExpr
     {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public TernaryLogicFunction OpKind {get;}
+        public TernaryLogicKind OpKind {get;}
 
         /// <summary>
         /// The first operand
@@ -35,7 +35,7 @@ namespace Z0.Logix
         public ILogicExpr ThirdArg {get;}
 
         [MethodImpl(Inline)]
-        public TernaryLogicOpExpr(TernaryLogicFunction op, ILogicExpr arg1, ILogicExpr arg2, ILogicExpr arg3)
+        public TernaryLogicOpExpr(TernaryLogicKind op, ILogicExpr arg1, ILogicExpr arg2, ILogicExpr arg3)
         {
             this.OpKind = op;
             this.FirstArg = arg1;

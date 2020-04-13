@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines an untyped comparison expression
     /// </summary>
-    public sealed class ComparisonExpr : IComparisonExpr
+    public readonly struct ComparisonExpr : IComparisonExpr
     {        
         /// <summary>
         /// The operator kind

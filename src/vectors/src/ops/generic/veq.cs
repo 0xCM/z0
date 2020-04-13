@@ -22,20 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> veq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return veq_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return veq_i(x,y);
-            else 
-                return veq_f<T>(x,y);
-        }
+                => veq_u(x,y);
 
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
@@ -47,20 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> veq<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return veq_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return veq_i(x,y);
-            else 
-                return veq_f<T>(x,y);
-        }
+                => veq_u(x,y);
 
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
@@ -73,20 +47,6 @@ namespace Z0
         public static Vector512<T> veq<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (veq(x.Lo, y.Lo), veq(x.Hi, y.Hi));
-        
-        [MethodImpl(Inline)]
-        static Vector128<T> veq_i<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(veq(v8i(x), v8i(y)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(veq(v16i(x), v16i(y)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(veq(v32i(x), v32i(y)));
-            else 
-                return generic<T>(veq(v64i(x), v64i(y)));
-        }
 
         [MethodImpl(Inline)]
         static Vector128<T> veq_u<T>(Vector128<T> x, Vector128<T> y)
@@ -98,8 +58,26 @@ namespace Z0
                 return generic<T>(veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(veq(v32u(x), v32u(y)));
-            else 
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(veq(v64u(x), v64u(y)));
+            else
+                return veq_i(x,y);
+        }
+
+        [MethodImpl(Inline)]
+        static Vector128<T> veq_i<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(veq(v8i(x), v8i(y)));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(veq(v16i(x), v16i(y)));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(veq(v32i(x), v32i(y)));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(veq(v64i(x), v64i(y)));
+            else
+                return veq_f(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -115,20 +93,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> veq_i<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(veq(v8i(x), v8i(y)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(veq(v16i(x), v16i(y)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(veq(v32i(x), v32i(y)));
-            else 
-                return generic<T>(veq(v64i(x), v64i(y)));
-        }
-
-        [MethodImpl(Inline)]
         static Vector256<T> veq_u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -138,9 +102,28 @@ namespace Z0
                 return generic<T>(veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(veq(v32u(x), v32u(y)));
-            else 
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(veq(v64u(x), v64u(y)));
+            else
+                return veq_i(x,y);
         }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> veq_i<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(veq(v8i(x), v8i(y)));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(veq(v16i(x), v16i(y)));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(veq(v32i(x), v32i(y)));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(veq(v64i(x), v64i(y)));
+            else
+                return veq_f(x,y);
+        }
+
 
         [MethodImpl(Inline)]
         static Vector256<T> veq_f<T>(Vector256<T> x, Vector256<T> y)

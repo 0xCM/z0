@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
+    using static Memories;
 
     public class t_bitspan_from : UnitTest<t_bitspan_from>
     {
@@ -367,7 +369,7 @@ namespace Z0
             {
                 var x = Random.BitVector<N,T>();
                 var y = x.ToBitSpan();
-                Claim.eq(natval<N>(), x.Width);
+                Claim.eq(nati<N>(), x.Width);
                 Claim.eq(x.Width, y.Length);
                 for(var j=0; j<length; j++)
                     Claim.eq(x[j],y[j]);                

@@ -10,7 +10,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a typed unary arithmetic operator expression
     /// </summary>
-    public sealed class UnaryAritheticOpExpr<T> : IUnaryArithmeticOpExpr<T>
+    public readonly struct UnaryAritheticOpExpr<T> : IUnaryArithmeticOpExpr<T>
         where T : unmanaged
     {
         /// <summary>

@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> GetBytes<T>(in T src)
-            where T : unmanaged
+            where T : struct
                 => Bytes.get(in src);
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<byte> GetBytes<T>(ReadOnlySpan<T> src, int offset, int count)
-            where T : unmanaged
+            where T : struct
                 => src.Slice(offset,count).AsBytes();
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void GetBytes<T>(in T src, Span<byte> dst)
-            where T : unmanaged
+            where T : struct
                 => Bytes.to(in src, dst);
 
         [MethodImpl(Inline), Op]

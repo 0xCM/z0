@@ -17,7 +17,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]   
         bool eq(byte lhs, byte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Claim.eq(lhs, rhs, caller,file, line);
+            => Claim.eq(lhs, rhs, caller, file, line);
 
         [MethodImpl(Inline)]   
         bool eq(sbyte lhs, sbyte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

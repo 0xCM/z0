@@ -37,39 +37,5 @@ namespace Z0
         True = 0b11,        
     }  
 
-    public static partial class XTend
-    {
-        [MethodImpl(Inline)]
-        public static string Format(this UnaryLogicKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryLogicKind kind, T arg)
-            => $"{kind.Format()}({arg})";
-
-        [MethodImpl(Inline)]
-        public static string Format(this UnaryArithmeticKind kind)
-            => kind switch {
-                UnaryArithmeticKind.Inc => "++",
-                UnaryArithmeticKind.Dec => "--",
-                UnaryArithmeticKind.Negate => "-",
-                _ => kind.ToString()
-            };
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryArithmeticKind kind, T arg)
-            => $"{kind.Format()}({arg})";
-
-        [MethodImpl(Inline)]
-        public static string Format(this BinaryBitLogicKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryBitLogicKind kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryArithmeticKind kind, T arg1, T arg2)
-            => $"{kind.ToString().ToLower()}({arg1}, {arg2})";
-    }
+ 
 }

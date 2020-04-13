@@ -6,7 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using static Seed;
+    using static Memories;
+
     public class t_bg_bitread : t_bg<t_bg_bitread>
     {        
         public void bg_bitread_20x20x32()

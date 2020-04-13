@@ -10,7 +10,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a typed binary arithmetic operator expression
     /// </summary>
-    public sealed class BinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr<T>
+    public readonly struct BinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr<T>
         where T : unmanaged
     {
         /// <summary>

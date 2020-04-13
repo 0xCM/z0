@@ -6,26 +6,26 @@ namespace Z0
 {
     using System;
 
-    [ApiHost("api",ApiHostKind.Generic)]
+    [ApiHost("api")]
     public static partial class vgbits
     {
 
     }
 
-    [ApiHost("api.direct",ApiHostKind.Direct)]
+    [ApiHost("api.direct")]
     public static partial class vBits
     {
 
     }
 
-    public partial class vBitSvcHosts
+    public partial class VBitSvcTypes
     {        
 
     }
 
-    [ApiServiceProvider(vBitServices.CollectionName)]
-    public partial class vBitServices : IApiServiceProvider<vBitSvcHosts>
+    [ApiServiceProvider]
+    public partial class VBitSvc : IApiService<VBitSvc,VBitSvcTypes>
     {
-        public const string CollectionName = "vbits.services";
+    
     }
 }

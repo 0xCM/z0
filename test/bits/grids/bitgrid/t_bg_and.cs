@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Gone;
+    using static Seed;
+    using static Memories;
     
     public class t_bg_and : t_bg<t_bg_and>
     {        

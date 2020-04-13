@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public abstract class t_bitpart<X> : t_bitgrids_base<X>
         where X : t_bitpart<X>, new()

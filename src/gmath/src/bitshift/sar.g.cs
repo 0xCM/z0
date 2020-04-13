@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The value to shift</param>
         /// <param name="offset">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline), Sra, Closures(Integers)]
+        [MethodImpl(Inline), SraAttribute, Closures(Integers)]
         public static T sra<T>(T src, byte offset)
             where T : unmanaged
                 => sra_u(src,offset);

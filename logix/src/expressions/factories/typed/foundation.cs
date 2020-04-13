@@ -42,7 +42,7 @@ namespace Z0.Logix
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOpExpr<T> binary<T>(BinaryBitLogicKind op, IExpr<T> left, IExpr<T> right)
+        public static BinaryBitwiseOpExpr<T> binary<T>(BinaryLogicKind op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new BinaryBitwiseOpExpr<T>(op,left,right);
 
@@ -66,7 +66,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static TernaryBitwiseOpExpr<T> ternary<T>(TernaryLogicFunction op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
+        public static TernaryBitwiseOpExpr<T> ternary<T>(TernaryLogicKind op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
             where T : unmanaged
                 => new TernaryBitwiseOpExpr<T>(op,a,b,c);
 

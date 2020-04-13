@@ -18,11 +18,11 @@ namespace Z0.Logix
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(BinaryBitLogicKind kind)
+        public static string sig(BinaryLogicKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(TernaryLogicFunction kind)
+        public static string sig(TernaryLogicKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
@@ -31,12 +31,12 @@ namespace Z0.Logix
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryBitLogicKind kind)
+        public static string sig<T>(BinaryLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(TernaryLogicFunction kind)
+        public static string sig<T>(TernaryLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 

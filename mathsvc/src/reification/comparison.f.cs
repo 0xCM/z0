@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Seed; using static Memories;
-    using static MathSvcHosts;
+    using static MathSvcTypes;
 
     partial class MathSvc
     {

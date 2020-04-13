@@ -10,7 +10,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a unary bitwise operator expression
     /// </summary>
-    public sealed class UnaryBitwiseOpExpr<T> : IUnaryBitwiseOpExpr<T>
+    public readonly struct UnaryBitwiseOpExpr<T> : IUnaryBitwiseOpExpr<T>
         where T : unmanaged
     {
         /// <summary>

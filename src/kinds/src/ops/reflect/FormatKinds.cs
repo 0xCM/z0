@@ -20,11 +20,11 @@ namespace Z0
             => src != 0;
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryComparisonKind kind)
+        public static string Format(this ComparisonKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryComparisonKind kind, T arg1, T arg2)
+        public static string Format<T>(this ComparisonKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         public static string Format(this OpKindId id)
@@ -46,18 +46,6 @@ namespace Z0
         public static string Format<T>(this ArithmeticOpKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
              
-        [MethodImpl(Inline)]
-        public static TernaryLogicFunction Next(this TernaryLogicFunction src)
-            => src != TernaryLogicFunction.XFF 
-                ? (TernaryLogicFunction)((uint)(src) + 1u)
-                : TernaryLogicFunction.X00; 
-
-        public static string Format(this TernaryLogicFunction kind)
-            => kind.ToString();
-
-        public static string Format<T>(this TernaryLogicFunction kind, T arg1, T arg2, T arg3)
-            => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
-
         public static string Format(this BitShiftKind kind)        
             => kind switch {
                 BitShiftKind.Sll => "<<",

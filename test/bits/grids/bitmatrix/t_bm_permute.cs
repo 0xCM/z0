@@ -7,10 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_bm_permute : t_bm<t_bm_permute>
     {
+        bit on => bit.On;
+
+        bit off => bit.Off;
+
         public void bm_fromperm_8x8x8()
         {
             var n = n8;

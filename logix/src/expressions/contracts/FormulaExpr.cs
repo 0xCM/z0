@@ -33,5 +33,7 @@ namespace Z0.Logix
         /// The defining expression
         /// </summary>
         new IExpr<T> Encoding {get;}
+
+        IExpr IFormulaExpr.Encoding => Encoding;
     }
 }

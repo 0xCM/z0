@@ -62,9 +62,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> vincrements<T>(N512 n, T x0)
+        public static Vector512<T> vincrements<T>(W512 w, T x0)
             where T : unmanaged
-                => vadd(Data.vincrements<T>(n), x0); 
+                => vadd(Data.vincrements<T>(w), x0); 
 
         [MethodImpl(Inline)]
         static Vector128<T> vinc_u<T>(Vector128<T> src)

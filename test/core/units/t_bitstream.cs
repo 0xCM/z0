@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
  
+    using static Seed;
+    using static Memories;
+
     public sealed class t_bitstream : UnitTest<t_bitstream>
     {
         public void check_singletons()

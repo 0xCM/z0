@@ -49,6 +49,6 @@ namespace Z0
             => FieldSegments.format(spec.Segments);
 
         public string FormatBits(int? maxbits = null)
-            => data.Bytes.FormatBits(maxbits ?? data.BitCount);
+            => data.Bytes.FormatBits(BitFormatConfig.Limited(maxbits ?? int.MaxValue));
     }
 }

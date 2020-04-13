@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// <summary>    
     /// Lifts a literal value to an expression
     /// </summary>
-    public sealed class LiteralExpr<T> : ILiteralExpr<T>
+    public readonly struct LiteralExpr<T> : ILiteralExpr<T>
         where T : unmanaged
     {
         /// <summary>

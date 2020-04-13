@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public class t_gcd : t_gmath<t_arithmetic>
+    public class t_gcd : t_gmath<t_gcd>
     {
         public void gcdbin_8u()
             => gcdbin_check((byte)2, (byte)225);

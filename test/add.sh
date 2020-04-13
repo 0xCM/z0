@@ -33,7 +33,7 @@ bash $Cmd
 export ProjectId=identity
 bash $Cmd
 
-export ProjectId=intrinsics
+export ProjectId=gvec
 bash $Cmd
 
 export ProjectId=libm

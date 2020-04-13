@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a bitwise shift operator expression
     /// </summary>
-    public sealed class ShiftOpExpr<T> : IShiftOpExpr<T>
+    public readonly struct ShiftOpExpr<T> : IShiftOpExpr<T>
         where T : unmanaged
     {
         /// <summary>

@@ -9,7 +9,7 @@ namespace Z0
         
     using static Seed; using static Memories;
 
-    partial class MathSvcHosts
+    partial class MathSvcTypes
     {
         [Closures(NumericKind.All)]
         public readonly struct Eq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>

@@ -127,7 +127,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr binary(BinaryBitLogicKind kind, ILogicExpr a, ILogicExpr b)
+        public static BinaryLogicOpExpr binary(BinaryLogicKind kind, ILogicExpr a, ILogicExpr b)
             => new BinaryLogicOpExpr(kind,a,b);
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr<T> binary<T>(BinaryBitLogicKind kind, ILogicExpr<T> a, ILogicExpr<T> b)
+        public static BinaryLogicOpExpr<T> binary<T>(BinaryLogicKind kind, ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
                 => new BinaryLogicOpExpr<T>(kind,a,b);
 
@@ -148,7 +148,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr binary(BinaryBitLogicKind kind, bit a, bit b)
+        public static BinaryLogicOpExpr binary(BinaryLogicKind kind, bit a, bit b)
             => new BinaryLogicOpExpr(kind,literal(a),literal(b));
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> binary<T>(BinaryBitLogicKind kind, bit a, bit b)
+        static BinaryLogicOpExpr<T> binary<T>(BinaryLogicKind kind, bit a, bit b)
             where T : unmanaged
                 => new BinaryLogicOpExpr<T>(kind,literal<T>(a),literal<T>(b));
 
@@ -170,7 +170,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOpExpr ternary(TernaryLogicFunction kind, ILogicExpr a, ILogicExpr b, ILogicExpr c)
+        public static TernaryLogicOpExpr ternary(TernaryLogicKind kind, ILogicExpr a, ILogicExpr b, ILogicExpr c)
             => new TernaryLogicOpExpr(kind,a,b,c);
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOpExpr<T> ternary<T>(TernaryLogicFunction kind, ILogicExpr<T> a, ILogicExpr<T> b, ILogicExpr<T> c)
+        public static TernaryLogicOpExpr<T> ternary<T>(TernaryLogicKind kind, ILogicExpr<T> a, ILogicExpr<T> b, ILogicExpr<T> c)
             where T : unmanaged
                 => new TernaryLogicOpExpr<T>(kind,a,b,c);
 
@@ -193,7 +193,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOpExpr ternary(TernaryLogicFunction kind, bit a, bit b, bit c)
+        public static TernaryLogicOpExpr ternary(TernaryLogicKind kind, bit a, bit b, bit c)
             => new TernaryLogicOpExpr(kind,literal(a),literal(b),literal(c));
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        static TernaryLogicOpExpr<T> ternary<T>(TernaryLogicFunction kind, bit a, bit b, bit c)
+        static TernaryLogicOpExpr<T> ternary<T>(TernaryLogicKind kind, bit a, bit b, bit c)
             where T : unmanaged
                 => new TernaryLogicOpExpr<T>(kind,literal<T>(a),literal<T>(b),literal<T>(c));
     }

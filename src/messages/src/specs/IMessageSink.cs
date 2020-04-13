@@ -21,7 +21,11 @@ namespace Z0
 
         void NotifyConsole(M msg, AppMsgColor color)
         {
-            term.print(msg, color);
+            if(msg.Kind == AppMsgKind.Error)
+                term.print(msg);
+            else
+                term.print(msg, color);
+            
             Displayed(msg);
         }
 

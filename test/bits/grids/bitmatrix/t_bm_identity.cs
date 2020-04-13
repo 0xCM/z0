@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_bm_identity : t_bm<t_bm_identity>
     {

@@ -12,7 +12,7 @@ namespace Z0.Logix
    /// <summary>
    /// Defines a natural-length sequence of literal bit values
    /// </summary>
-   public sealed class LiteralLogicSeqExpr<N> : ILiteralLogicSeqExpr
+   public readonly struct LiteralLogicSeqExpr<N> : ILiteralLogicSeqExpr
         where N : unmanaged, ITypeNat
     {
         public bit[] Terms {get;}

@@ -8,7 +8,7 @@ namespace Z0.Test
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Gone;
+    using static Memories;
 
     public class t_mb_write : UnitTest<t_mb_write>
     {

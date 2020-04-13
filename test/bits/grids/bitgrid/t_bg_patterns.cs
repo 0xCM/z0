@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
+    using static Memories;
     
     public class t_bg_patterns : t_bg<t_bg_patterns>
     {        

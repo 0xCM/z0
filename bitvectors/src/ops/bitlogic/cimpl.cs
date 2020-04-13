@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BitVector
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), CImpl(BL), Closures(UnsignedInts)]
         public static BitVector<T> cimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.cimpl(x.Scalar, y.Scalar);

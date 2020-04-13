@@ -9,28 +9,32 @@ namespace Z0.Logix
         
     using static LogicOps;
     using static OpHelpers;
-    using static TernaryLogicFunction;
+    using static TernaryLogicKind;
+    
     using LO = LogicOps;
+    using BLK = BinaryLogicKind;
+    using TLK = TernaryLogicKind;
+    using ULK = UnaryLogicKind;
 
     public static class LogicOpApi
     {
         /// <summary>
         /// Advertises the supported unary opeators
         /// </summary>
-        public static ReadOnlySpan<UnaryLogicKind> UnaryOpKinds
-            => Enums.valarray<UnaryLogicKind>();
+        public static ReadOnlySpan<ULK> UnaryOpKinds
+            => Enums.valarray<ULK>();
 
         /// <summary>
         /// Advertises the supported binary opeators
         /// </summary>
-        public static ReadOnlySpan<BinaryBitLogicKind> BinaryOpKinds
-            => Enums.valarray<BinaryBitLogicKind>();
+        public static ReadOnlySpan<BLK> BinaryOpKinds
+            => Enums.valarray<BLK>();
          
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static ReadOnlySpan<TernaryLogicFunction> TernaryOpKinds
-            => Numeric.range((byte)1,(byte)X5F).Cast<TernaryLogicFunction>().ToArray();
+        public static ReadOnlySpan<TLK> TernaryOpKinds
+            => Numeric.range((byte)1,(byte)X5F).Cast<TLK>().ToArray();
 
         /// <summary>
         /// Evaluates a unary operator directly without lookup/delegate indirection
@@ -38,15 +42,15 @@ namespace Z0.Logix
         /// <param name="op">The operator classifier</param>
         /// <param name="a">The operand</param>        
         [Op]
-        public static bit eval(UnaryLogicKind kind, bit a)
+        public static bit eval(ULK kind, bit a)
         {        
             switch(kind)
             {
-                case UnaryLogicKind.False: return bit.Off;
-                case UnaryLogicKind.Not: return bit.not(a);
-                case UnaryLogicKind.Identity: return a;
-                case UnaryLogicKind.True: return bit.On;
-                default: throw new NotSupportedException(sig(kind));
+                case ULK.False: return bit.Off;
+                case ULK.Not: return bit.not(a);
+                case ULK.Identity: return a;
+                case ULK.True: return bit.On;
+                default: throw Unsupported.value(sig(kind));
             }
         }    
 
@@ -58,35 +62,35 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [Op]
-        public static bit eval(BinaryBitLogicKind kind, bit a, bit b)
+        public static bit eval(BLK kind, bit a, bit b)
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true(a,b);
-                case BinaryBitLogicKind.False: return @false(a,b);
+                case BLK.True: return @true(a,b);
+                case BLK.False: return @false(a,b);
 
-                case BinaryBitLogicKind.And: return and(a,b);
-                case BinaryBitLogicKind.Nand: return nand(a,b);
+                case BLK.And: return and(a,b);
+                case BLK.Nand: return nand(a,b);
 
-                case BinaryBitLogicKind.Or: return or(a,b);
-                case BinaryBitLogicKind.Nor: return nor(a,b);
+                case BLK.Or: return or(a,b);
+                case BLK.Nor: return nor(a,b);
 
-                case BinaryBitLogicKind.Xor: return xor(a,b);
-                case BinaryBitLogicKind.Xnor: return xnor(a,b);
+                case BLK.Xor: return xor(a,b);
+                case BLK.Xnor: return xnor(a,b);
 
-                case BinaryBitLogicKind.Impl: return impl(a,b); 
-                case BinaryBitLogicKind.NonImpl: return nonimpl(a,b);
+                case BLK.Impl: return impl(a,b); 
+                case BLK.NonImpl: return nonimpl(a,b);
 
-                case BinaryBitLogicKind.LProject: return left(a,b);
-                case BinaryBitLogicKind.RProject: return right(a,b);
+                case BLK.LProject: return left(a,b);
+                case BLK.RProject: return right(a,b);
 
-                case BinaryBitLogicKind.LNot: return lnot(a,b);
-                case BinaryBitLogicKind.RNot: return rnot(a,b);
+                case BLK.LNot: return lnot(a,b);
+                case BLK.RNot: return rnot(a,b);
                 
-                case BinaryBitLogicKind.CImpl: return cimpl(a,b);
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl(a,b);
+                case BLK.CImpl: return cimpl(a,b);
+                case BLK.CNonImpl: return cnonimpl(a,b);
 
-                default: throw new NotSupportedException(sig(kind));
+                default: throw Unsupported.value(sig(kind));
             }
         }
 
@@ -95,15 +99,15 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static UnaryOp<bit> lookup(UnaryLogicKind kind)
+        public static UnaryOp<bit> lookup(ULK kind)
         {
             switch(kind)
             {
-                case UnaryLogicKind.False: return @false;
-                case UnaryLogicKind.Not: return LO.not;
-                case UnaryLogicKind.Identity: return identity;
-                case UnaryLogicKind.True: return @true;
-                default: throw new NotSupportedException(sig(kind));
+                case ULK.False: return @false;
+                case ULK.Not: return LO.not;
+                case ULK.Identity: return identity;
+                case ULK.True: return @true;
+                default: throw Unsupported.value(sig(kind));
             }
         }
 
@@ -112,27 +116,27 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static BinaryOp<bit> lookup(BinaryBitLogicKind kind)
+        public static BinaryOp<bit> lookup(BLK kind)
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true;
-                case BinaryBitLogicKind.False: return @false;
-                case BinaryBitLogicKind.And: return and;
-                case BinaryBitLogicKind.Nand: return nand;
-                case BinaryBitLogicKind.Or: return or;
-                case BinaryBitLogicKind.Nor: return nor;
-                case BinaryBitLogicKind.Xor: return xor;
-                case BinaryBitLogicKind.Xnor: return xnor;
-                case BinaryBitLogicKind.LProject: return left;
-                case BinaryBitLogicKind.RProject: return right;
-                case BinaryBitLogicKind.LNot: return lnot;
-                case BinaryBitLogicKind.RNot: return rnot;
-                case BinaryBitLogicKind.Impl: return impl;
-                case BinaryBitLogicKind.NonImpl: return nonimpl;
-                case BinaryBitLogicKind.CImpl: return cimpl;
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl;
-                default: throw new NotSupportedException(sig(kind));
+                case BLK.True: return @true;
+                case BLK.False: return @false;
+                case BLK.And: return and;
+                case BLK.Nand: return nand;
+                case BLK.Or: return or;
+                case BLK.Nor: return nor;
+                case BLK.Xor: return xor;
+                case BLK.Xnor: return xnor;
+                case BLK.LProject: return left;
+                case BLK.RProject: return right;
+                case BLK.LNot: return lnot;
+                case BLK.RNot: return rnot;
+                case BLK.Impl: return impl;
+                case BLK.NonImpl: return nonimpl;
+                case BLK.CImpl: return cimpl;
+                case BLK.CNonImpl: return cnonimpl;
+                default: throw Unsupported.value(sig(kind));
             }
         }
 
@@ -143,7 +147,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static bit eval(TernaryLogicFunction kind, bit a, bit b, bit c)
+        public static bit eval(TLK kind, bit a, bit b, bit c)
         {
             switch(kind)
             {
@@ -246,7 +250,7 @@ namespace Z0.Logix
                 case XCA: return select(a, b, c);
                 case XFF: return f5a(a, b, c);
 
-                default: throw new NotSupportedException(sig(kind));
+                default: throw Unsupported.value(sig(kind));
 
             }
         }
@@ -255,7 +259,7 @@ namespace Z0.Logix
         /// Returns a kind-indentified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static TernaryOp<bit> lookup(TernaryLogicFunction kind)
+        public static TernaryOp<bit> lookup(TLK kind)
         {
             switch(kind)
             {
@@ -357,8 +361,7 @@ namespace Z0.Logix
                 case X5F: return f5f; 
                 case XFF: return @true;
 
-                default: throw new NotSupportedException(sig(kind));
-
+                default: throw Unsupported.value(sig(kind));
             }
         }
     }

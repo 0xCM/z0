@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
     using static Seed;
 
@@ -250,7 +247,7 @@ namespace Z0
                 {
                     trace(src.FormatBits());
                     for(var i=0; i<dst.Length; i++)
-                        trace(dst[i].FormatBits(tlz:true));
+                        trace(dst[i].FormatBits(BitFormatConfig.Tlz));
                 }
 
 

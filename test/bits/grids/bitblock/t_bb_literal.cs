@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_bb_literal : t_bitblock<t_bb_literal>
     {

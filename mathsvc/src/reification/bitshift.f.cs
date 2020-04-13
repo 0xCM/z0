@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Seed; using static Memories;
-    using static MathSvcHosts;
+    using static MathSvcTypes;
 
     partial class MathSvc
     {
@@ -23,8 +23,8 @@ namespace Z0
                 => Srl<T>.Op;
 
         [MethodImpl(Inline)]
-        public static MathSvcHosts.Parse<T> parse<T>(T t = default)
+        public static MathSvcTypes.Parse<T> parse<T>(T t = default)
             where T : unmanaged        
-                => MathSvcHosts.Parse<T>.Op;
+                => MathSvcTypes.Parse<T>.Op;
     }
 }

@@ -13,7 +13,13 @@ namespace Z0
     
     partial class Vectors
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Stores vector content to the front of a span
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<T> vstore<T>(Vector128<T> src, Span<T> dst)
             where T : unmanaged            
         {
@@ -21,7 +27,13 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Stores vector content to the front of a span
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<T> vstore<T>(Vector256<T> src, Span<T> dst)
             where T : unmanaged            
         {
@@ -36,7 +48,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector128<T> src, Span<T> dst, int offset)
             where T : unmanaged
                 => vstore(src, ref head(dst), offset);
@@ -48,7 +60,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector256<T> src, Span<T> dst, int offset)
             where T : unmanaged
                 => vstore(src, ref head(dst), offset);
@@ -60,7 +72,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector512<T> src, Span<T> dst, int offset)
             where T : unmanaged
                 => vstore(src, ref head(dst), offset);

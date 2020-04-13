@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// <summary>    
     /// Defines a typed literal logic expression
     /// </summary>
-    public sealed class LiteralLogicExpr<T> : ILogicLiteralExpr<T>
+    public readonly struct LiteralLogicExpr<T> : ILogicLiteralExpr<T>
         where T : unmanaged
     {
         /// <summary>

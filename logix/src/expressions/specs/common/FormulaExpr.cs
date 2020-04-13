@@ -38,19 +38,27 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a typed identified expression, identifier := expression
     /// </summary>
-    public sealed class FormulaExpr<T> : FormulaExpr, IFormulaExpr<T>
+    public sealed class FormulaExpr<T> : IFormulaExpr<T>
         where T : unmanaged
     {
         /// <summary>
+        /// The identifier
+        /// </summary>
+        public string Name {get;}
+
+        /// <summary>
         /// The identified expression
         /// </summary>
-        public new IExpr<T> Encoding {get;}
+        public IExpr<T> Encoding {get;}
 
         [MethodImpl(Inline)]
         public FormulaExpr(string name, IExpr<T> encoding)
-            : base(name,encoding)
         {
+            this.Name = name;
             this.Encoding = encoding;
         }
+
+        public string Format()
+            => $"{Name} := {Encoding.Format()}";
     }
 }

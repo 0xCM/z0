@@ -12,12 +12,12 @@ namespace Z0.Logix
     /// <summary>
     /// Definesan untyped binary logical operator expression
     /// </summary>
-    public class BinaryLogicOpExpr : IBinaryLogicOpExpr
+    public readonly struct BinaryLogicOpExpr : IBinaryLogicOpExpr
     {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryBitLogicKind OpKind {get;}
+        public BinaryLogicKind OpKind {get;}
 
         /// <summary>
         /// The left operand
@@ -30,7 +30,7 @@ namespace Z0.Logix
         public ILogicExpr RightArg {get;}
 
         [MethodImpl(Inline)]
-        public BinaryLogicOpExpr(BinaryBitLogicKind op, ILogicExpr lhs, ILogicExpr rhs)
+        public BinaryLogicOpExpr(BinaryLogicKind op, ILogicExpr lhs, ILogicExpr rhs)
         {
             this.OpKind = op;
             this.LeftArg = lhs;

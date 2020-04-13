@@ -16,95 +16,101 @@ namespace Z0
 
     public static class AppErrorMsg
     {
+        static AppMsg Fail(string msg, string caller, string file, int? line)
+            => AppMsg.NoCaller($"{msg} {caller} {line} {file}", AppMsgKind.Error);
+
+        static AppMsg Fail(string msg)
+            => AppMsg.NoCaller(msg, AppMsgKind.Error);
+        
+        public static AppMsg Unanticipated(Exception e)
+            => AppMsg.NoCaller(e?.ToString() ??"Heh?", AppMsgKind.Error);
+
+        public static AppMsg NotEqual(object lhs, object rhs)
+            => Fail($"Equality failure: {lhs} != {rhs}");
+
+        public static AppMsg Equal(object lhs, object rhs)
+            => Fail($"Non-equality failure: {lhs} == {rhs}");
+
         public static AppMsg FeatureUnsupported(object feature, string caller, string file, int? line)
-            => AppMsg.Define($"Unsupported: {feature}", AppMsgKind.Error, caller, file, line);
+            => Fail($"Unsupported: {feature}", caller, file, line);
         
         public static AppMsg KindUnsupported<T>(T kind, string caller, string file, int? line)
             where T : Enum
-                => AppMsg.Define($"{typeof(T).Name}.{kind} not supported", AppMsgKind.Error, caller, file, line);
+                => Fail($"{typeof(T).Name}.{kind} not supported", caller, file, line);
      
         public static AppMsg TypeUnsupported(Type t, string caller, string file, int? line)
-            => AppMsg.Define($"Type {t.Name} is not supported in the current context", AppMsgKind.Error, caller, file, line);
+            => Fail($"Type {t.Name} is not supported in the current context", caller, file, line);
         
         public static AppMsg KindOpUnsupported<S,T>(S src, T dst, string caller, string file, int? line)
             where S : Enum
             where T : Enum
-                => AppMsg.Define($"Operation {src} => {dst} not supported", AppMsgKind.Error, caller, file, line);
-
+                => Fail($"Operation {src} => {dst} not supported", caller, file, line);
+        
         public static AppMsg NotEqual(object lhs, object rhs, string caller, string file, int? line)
-            => AppMsg.Define($"Equality failure: {lhs} != {rhs}", AppMsgKind.Error, caller, file, line) ;
-
-        public static AppMsg NotEqual(object lhs, object rhs)
-            => AppMsg.NoCaller($"Equality failure: {lhs} != {rhs}", AppMsgKind.Error);
+            => Fail($"Equality failure: {lhs} != {rhs} {caller} {line} {file}", caller, file, line);
 
         public static AppMsg NotClose(float lhs, float rhs, float err, float tolerance, string caller, string file, int? line)
-            => AppMsg.Define($"Approximate equality failure: relerr({lhs},{rhs}) = {err} > {tolerance}", AppMsgKind.Error, caller, file, line) ;
+            => Fail($"Approximate equality failure: relerr({lhs},{rhs}) = {err} > {tolerance}", caller, file, line) ;
 
         public static AppMsg NotClose(double lhs, double rhs, double err, double tolerance, string caller, string file, int? line)
-            => AppMsg.Define($"Approximate equality failure: relerr({lhs},{rhs}) = {err} > {tolerance}", AppMsgKind.Error, caller, file, line) ;
+            => Fail($"Approximate equality failure: relerr({lhs},{rhs}) = {err} > {tolerance}",  caller, file, line) ;
 
         public static AppMsg Equal(object lhs, object rhs, string caller, string file, int? line)
-            => AppMsg.Define($"Non-equality failure: {lhs} == {rhs}", AppMsgKind.Error, caller, file, line) ;
-
-        public static AppMsg Equal(object lhs, object rhs)
-            => AppMsg.NoCaller($"Non-equality failure: {lhs} == {rhs}", AppMsgKind.Error);
+            => Fail($"Non-equality failure: {lhs} == {rhs}", caller, file, line) ;
 
         public static AppMsg NotLessThan(object lhs, object rhs, string caller, string file, int? line)
-            => AppMsg.Define($"Not less than failure: !({lhs} < {rhs})", AppMsgKind.Error, caller, file, line) ;
+            => Fail($"Not less than failure: !({lhs} < {rhs})", caller, file, line) ;
 
         public static AppMsg NotGreaterThan(object lhs, object rhs, string caller, string file, int? line)
-            => AppMsg.Define($"Not greater than failure: !({lhs} > {rhs})", AppMsgKind.Error, caller, file, line) ;
+            => Fail($"Not greater than failure: !({lhs} > {rhs})", caller, file, line) ;
 
         public static AppMsg NotGreaterThanOrEqual(object lhs, object rhs, string caller, string file, int? line)
-            => AppMsg.Define($"!({lhs} >= {rhs})", AppMsgKind.Error, caller, file, line) ;
+            => Fail($"!({lhs} >= {rhs})", caller, file, line) ;
 
         public static AppMsg NotLessThanOrEqual(object lhs, object rhs, string caller, string file, int? line)
-            => AppMsg.Define($"!({lhs} <= {rhs})", AppMsgKind.Error, caller, file, line) ;
+            => Fail($"!({lhs} <= {rhs})", caller, file, line) ;
 
         public static AppMsg ItemsNotEqual(int index, object lhs, object rhs, string caller, string file, int? line)
-            => AppMsg.Define($"Equality failure: lhs[{index}] = {lhs} != rhs[{index}] = {rhs}", AppMsgKind.Error, caller, file, line);
+            => Fail($"Equality failure: lhs[{index}] = {lhs} != rhs[{index}] = {rhs}", caller, file, line);
         public static AppMsg NotNonzero(string caller, string file, int? line)
-            => AppMsg.Define($"Value is not nonzero",  AppMsgKind.Error, caller, file, line);        
+            => Fail($"Value is not nonzero", caller, file, line);        
         
         public static AppMsg NotTrue(string msg, string caller, string file, int? line)
-            => AppMsg.Define($"{msg ?? "The source value is not true"}", AppMsgKind.Error, caller, file, line);
+            => Fail($"{msg ?? "The source value is not true"}", caller, file, line);
 
         public static AppMsg NotFalse(string msg, string caller, string file, int? line)
-            => AppMsg.Define($"{msg ?? "The source value is is not false"}", AppMsgKind.Error, caller, file, line);
+            => Fail($"{msg ?? "The source value is is not false"}", caller, file, line);
         public static AppMsg CountMismatch(int lhs, int rhs, string caller, string file, int? line)
-            => AppMsg.Define($"Count mismatch: {lhs} != {rhs}", AppMsgKind.Error, caller, file, line);
+            => Fail($"Count mismatch: {lhs} != {rhs}", caller, file, line);
         
         public static AppMsg EmptySourceSpan(string caller, string file, int? line)
-            => AppMsg.Define($"The source span was empty", AppMsgKind.Error, caller, file, line);
+            => Fail($"The source span was empty", caller, file, line);
 
         public static AppMsg NonGenericMethod(MethodInfo t, string caller, string file, int? line)
-            => AppMsg.Define($"The method {t.Name} is nongeneric", AppMsgKind.Error, caller, file, line);
+            => Fail($"The method {t.Name} is nongeneric", caller, file, line);
 
         public static AppMsg GenericMethod(MethodInfo t, string caller, string file, int? line)
-            => AppMsg.Define($"The method {t.Name} is generic", AppMsgKind.Error, caller, file, line);
+            => Fail($"The method {t.Name} is generic", caller, file, line);
 
         public static AppMsg LengthMismatch(int lhs, int rhs, string caller, string file, int? line)
-            => AppMsg.Define($"Length mismatch: {lhs} != {rhs}", AppMsgKind.Error, caller, file, line);
+            => Fail($"Length mismatch: {lhs} != {rhs}", caller, file, line);
 
         public static AppMsg InvariantFailure(object description, string caller, string file, int? line)
-            => AppMsg.Error(description ?? "An required invariant was unsatisfied", caller,file,line);
+            => Fail(description?.ToString() ?? "An required invariant was unsatisfied", caller,file,line);
 
         public static AppMsg InvariantFailure(string caller, string file, int? line)
-            => InvariantFailure(null, caller, file, line);
+            => Fail(string.Empty, caller, file, line);
                 
         public static AppMsg NotBetween<T>(T x, T lhs, T rhs, string caller, string file, int? line)
-            => AppMsg.Define($"The source value {x} is not between {lhs} and {rhs}", AppMsgKind.Error, caller, file, line);
+            => Fail($"The source value {x} is not between {lhs} and {rhs}", caller, file, line);
         
         public static AppMsg IndexOutOfRange(int index, int min, int max, string caller, string file, int? line)
-            => AppMsg.Define($"The index {index} is not between {min} and {max}", AppMsgKind.Error, caller, file, line);
+            => Fail($"The index {index} is not between {min} and {max}", caller, file, line);
 
         public static AppMsg TooManyBytes(int requested, int available, string caller, string file, int? line)
-            => AppMsg.Define($"The number of bytes, {requested} exceeds the maximum available, {available}", AppMsgKind.Error, caller, file, line);
-
-        public static AppMsg Unanticipated(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppMsg.Define(e?.ToString() ??"Heh?", AppMsgKind.Error, caller, file, line);
+            => Fail($"The number of bytes, {requested} exceeds the maximum available, {available}", caller, file, line);
     
         public static AppMsg FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)    
-            => AppMsg.Define($"The file {path} does not exist", AppMsgKind.Error, caller, file, line);
+            => Fail($"The file {path} does not exist", caller, file, line);
     }
 }

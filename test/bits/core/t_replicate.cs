@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     
-    using static Gone;
-
     public class t_replicate : t_bitcore<t_replicate>
     {                
         public void replicate_8x32()
@@ -26,7 +24,7 @@ namespace Z0
         public void replicate_32u()
         {
             var src = 0b111000u;
-            var actual = gbits.replicate(src);
+            var actual = gbits.replicate(src).ToBitVector();
             var width = gbits.effwidth(src);
             Claim.eq(6,width);
 
@@ -42,7 +40,7 @@ namespace Z0
         {
 
             var src = 0b111000ul;
-            var actual = gbits.replicate(src);
+            var actual = gbits.replicate(src).ToBitVector();
 
             var width = gbits.effwidth(src);
             Claim.eq(6,width);
@@ -58,7 +56,7 @@ namespace Z0
             void report()
             {
                 trace("expect", text.bracket(expect.Format(6)));
-                trace("actual", actual.FormatBlockedBits(6));
+                trace("actual", actual.FormatBlocked(6));
             }
         }
     }

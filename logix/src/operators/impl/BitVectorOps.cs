@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static Seed;    
     using static Memories;
 
-    [ApiHost("bitvector.ops", ApiHostKind.Generic)]
+    [ApiHost("bitvector.ops")]
     public static class BitVectorOps
     {
         /// <summary>

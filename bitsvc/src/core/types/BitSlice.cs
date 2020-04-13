@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    partial class BitCoreSvc
+    partial class BC
     {
         public readonly struct BitSlice<T> : ISImm8x2UnaryOpApi<T>
             where T : unmanaged        

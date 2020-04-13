@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// <summary>    
     /// Defines an untyped literal logic expression
     /// </summary>
-    public sealed class LiteralLogicExpr : ILogicLiteralExpr
+    public readonly struct LiteralLogicExpr : ILogicLiteralExpr
     {
         /// <summary>
         /// The literal value

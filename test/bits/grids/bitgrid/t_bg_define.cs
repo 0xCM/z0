@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Vectors;
+    using static Seed;
+    using static Memories;
     
     public class t_bg_define : t_bg<t_bg_define>
     {        
@@ -115,8 +116,8 @@ namespace Z0
             var row126 = Vectors.vload(n, g32.BlockRef(126*cpr));
             var row127 = Vectors.vload(n, g32.BlockRef(127*cpr));
             
-            var diagA = dvec.vgather(n, in g32src, vparts(n, 496, 501, 506, 511));
-            var diagB = vparts(n, g32[496], g32[501], g32[506], g32[511]);
+            var diagA = dvec.vgather(n, in g32src, Vectors.vparts(n, 496, 501, 506, 511));
+            var diagB = Vectors.vparts(n, g32[496], g32[501], g32[506], g32[511]);
             Claim.veq(diagA,diagB);
         }
     }

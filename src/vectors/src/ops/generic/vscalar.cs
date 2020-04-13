@@ -59,71 +59,72 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vscalar_i<T>(W128 n, T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(vscalar(n, int8(src)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(vscalar(n, int16(src)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(vscalar(n,int32(src)));
-            else
-                return generic<T>(vscalar(n,int64(src)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector128<T> vscalar_u<T>(W128 n, T src)
+        static Vector128<T> vscalar_u<T>(W128 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(vscalar(n, uint8(src)));
+                return generic<T>(vscalar(w, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(vscalar(n,uint16(src)));
+                return generic<T>(vscalar(w, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(vscalar(n,uint32(src)));
+                return generic<T>(vscalar(w, uint32(src)));
             else 
-                return generic<T>(vscalar(n,uint64(src)));
+                return generic<T>(vscalar(w, uint64(src)));
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vscalar_f<T>(W128 n, T src)
+        static Vector128<T> vscalar_i<T>(W128 w, T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(vscalar(w, int8(src)));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(vscalar(w, int16(src)));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(vscalar(w, int32(src)));
+            else
+                return generic<T>(vscalar(w, int64(src)));
+        }
+
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vscalar_f<T>(W128 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(vscalar(n,float32(src)));
+                return generic<T>(vscalar(w, float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(vscalar(n,float64(src)));
+                return generic<T>(vscalar(w, float64(src)));
             else 
                 throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vscalar_i<T>(W256 n, T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(vscalar(n,int8(src)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(vscalar(n,int16(src)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(vscalar(n,int32(src)));
-            else
-                return generic<T>(vscalar(n,int64(src)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector256<T> vscalar_u<T>(W256 n, T src)
+        static Vector256<T> vscalar_u<T>(W256 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(vscalar(n,uint8(src)));
+                return generic<T>(vscalar(w,uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(vscalar(n,uint16(src)));
+                return generic<T>(vscalar(w,uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(vscalar(n,uint32(src)));
+                return generic<T>(vscalar(w,uint32(src)));
             else 
-                return generic<T>(vscalar(n,uint64(src)));
+                return generic<T>(vscalar(w,uint64(src)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vscalar_i<T>(W256 w, T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(vscalar(w, int8(src)));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(vscalar(w, int16(src)));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(vscalar(w, int32(src)));
+            else
+                return generic<T>(vscalar(w, int64(src)));
         }
 
         [MethodImpl(Inline)]

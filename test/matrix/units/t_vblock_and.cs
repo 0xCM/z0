@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
     
-    using static Gone;
+    using static Seed;
+    using static Memories;
 
     public class t_vblock_and : UnitTest<t_vblock_and>
     {
@@ -48,7 +49,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var length = natval(n);
+            var length = nati(n);
             var u = Random.VectorBlock(n,t);
             var v = Random.VectorBlock(n,t);
             var result = Linear.and(u, v);            
@@ -56,7 +57,5 @@ namespace Z0
             
             CheckNumeric.eq(expect.Data, result.Data);
         }
-
     }
-
 }

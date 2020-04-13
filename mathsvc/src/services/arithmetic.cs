@@ -9,7 +9,7 @@ namespace Z0
         
     using static Seed;
 
-    partial class MathSvcHosts
+    partial class MathSvcTypes
     {
         [Closures(NumericKind.All)]
         public readonly struct Add<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>

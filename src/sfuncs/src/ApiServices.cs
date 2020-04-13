@@ -18,13 +18,13 @@ namespace Z0
         /// Discovers the types declared within an enclosure that define serviced api operations
         /// </summary>
         public static IEnumerable<Type> HostTypes(Type enclosure)
-            => ApiServiceProvider.Hosts(enclosure);
+            => ApiService.Hosts(enclosure);
 
         /// <summary>
         /// Discovers the methods defined by a provider that intantiate reified services
         /// </summary>
         public static IEnumerable<MethodInfo> FactoryMethods(Type provider)
-            => ApiServiceProvider.Factories(provider);
+            => ApiService.Factories(provider);
 
         /// <summary>
         /// Searches an assembly for types that are attributed with the provider attribute
@@ -37,8 +37,8 @@ namespace Z0
         /// Creates a service provider reified by a specified type
         /// </summary>
         /// <param name="provider">The provider type</param>
-        public static IApiServiceProvider Provider(Type provider)
-            => (IApiServiceProvider)Activator.CreateInstance(provider);
+        public static IApiService Provider(Type provider)
+            => (IApiService)Activator.CreateInstance(provider);
 
         /// <summary>
         /// Instantiates a service operation host

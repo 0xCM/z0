@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift rightwards</param>
-        [MethodImpl(Inline), Sra]
+        [MethodImpl(Inline), SraAttribute]
         public static Vector128<short> vsra(Vector128<short> src, [Imm] byte count)
             => ShiftRightArithmetic(src, count);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift rightwards</param>
-        [MethodImpl(Inline), Sra]
+        [MethodImpl(Inline), SraAttribute]
         public static Vector128<int> vsra(Vector128<int> src, [Imm] byte count)
             => ShiftRightArithmetic(src, count);
 
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift rightwards</param>
-        [MethodImpl(Inline), Sra]
+        [MethodImpl(Inline), SraAttribute]
         public static Vector256<short> vsra(Vector256<short> src, [Imm] byte count)
             => ShiftRightArithmetic(src, count);
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift rightwards</param>
-        [MethodImpl(Inline), Sra]
+        [MethodImpl(Inline), SraAttribute]
         public static Vector256<int> vsra(Vector256<int> src, [Imm] byte count)
             => ShiftRightArithmetic(src, count);
     }

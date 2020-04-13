@@ -53,7 +53,7 @@ namespace Z0.Mkl
             => throw Define(retcode, caller, file,line);
 
         MklException(string msg,string caller, string file, int? line)        
-            : base(msg,caller,file,line)
+            : base(AppMsg.NoCaller($"{msg} {caller} {file} {line}",AppMsgKind.Error))
         {
 
         }

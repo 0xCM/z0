@@ -7,19 +7,19 @@ namespace Z0
     using System;
         
     using static AppErrorMsg;
-    
+
     public interface IBitStringEqualityCheck : IEqualCheck<BitString>, INotEqualCheck<BitString>
     {
-        void IEqualCheck<BitString>.eq(BitString a, BitString b)
+        void IEqualCheck<BitString>.eq(BitString a, BitString b, string caller, string file, int? line)
         {
             if(!a.Equals(b))
-                throw failed(ValidityClaim.Eq, NotEqual(a,b));
+                throw failed(ValidityClaim.Eq, NotEqual(a,b, caller, file, line));
         }
 
-        void INotEqualCheck<BitString>.neq(BitString a, BitString b)
+        void INotEqualCheck<BitString>.neq(BitString a, BitString b, string caller, string file, int? line)
         {
             if(a.Equals(b))
-                throw failed(ValidityClaim.NEq, Equal(a,b));
+                throw failed(ValidityClaim.NEq, Equal(a,b, caller, file, line));
         }
     }
 

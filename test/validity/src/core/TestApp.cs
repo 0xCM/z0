@@ -17,17 +17,18 @@ namespace Z0
     public abstract class TestApp<A> : TestContext<A>, ITestControl
         where A : TestApp<A>, new()
     {
+
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
             = new ConcurrentQueue<TestCaseRecord>();
+
+        ConcurrentQueue<BenchmarkRecord> BenchmarkQueue {get;}
+            = new ConcurrentQueue<BenchmarkRecord>();
 
         protected void PostTestResults(IEnumerable<TestCaseRecord> outcomes)
             => TestResultQueue.Enqueue(outcomes);
 
         protected void PostTestResult(TestCaseRecord outcome)
             => TestResultQueue.Enqueue(outcome);
-
-        ConcurrentQueue<BenchmarkRecord> BenchmarkQueue {get;}
-            = new ConcurrentQueue<BenchmarkRecord>();
 
         protected void PostBenchResult(IEnumerable<BenchmarkRecord> outcomes)
             => BenchmarkQueue.Enqueue(outcomes);
@@ -107,7 +108,7 @@ namespace Z0
                 }                
                 clock.Stop();
 
-                term.print(AftUnitMsg(hosturi, clock.Time, tsStart, time.now()));                
+                term.print(PostUnit(hosturi, clock.Time, tsStart, time.now()));                
             }
             catch(Exception e)
             {
@@ -148,7 +149,7 @@ namespace Z0
         static string FormatStatus(string status)
             => status.PadRight(StatusPad);
 
-        static AppMsg PreCaseMsg(string testName, DateTime start)
+        static AppMsg PreCase(string testName, DateTime start)
         {
             var fields = Arrays.from(
                 FormatName(testName), 
@@ -160,7 +161,7 @@ namespace Z0
             return AppMsg.Colorize(fields.Concat(FieldSep), AppMsgColor.Blue);
         }
 
-        static AppMsg AftCaseMsg(string testName, TimeSpan elapsed, DateTime start, DateTime end)
+        static AppMsg PostCase(string testName, TimeSpan elapsed, DateTime start, DateTime end)
         {
             var fields = Arrays.from(
                 FormatName(testName), 
@@ -174,7 +175,7 @@ namespace Z0
             return AppMsg.Colorize(fields.Concat(FieldSep), AppMsgColor.Blue);
         }
 
-        static AppMsg AftUnitMsg(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
+        static AppMsg PostUnit(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
         {
             var fields = Arrays.from(
                 FormatName(hosturi), 
@@ -198,14 +199,14 @@ namespace Z0
             try
             {                                
                 var tsStart = time.now();
-                messages.Add(PreCaseMsg(casename, tsStart));                
+                messages.Add(PreCase(casename, tsStart));                
                 
                 clock.Start();
                 exec();
                 clock.Stop();
 
                 messages.AddRange(control.Dequeue());
-                messages.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
+                messages.Add(PostCase(casename, clock.Time, tsStart, time.now()));
 
                 var outcomes = control.TakeOutcomes().ToArray();                
                 if(outcomes.Length != 0)
@@ -244,7 +245,7 @@ namespace Z0
             else                
                 yield return AppErrorMsg.Unanticipated(e?.InnerException ?? e);
 
-            yield return AppMsg.Error($"{name} failed.");
+            yield return AppMsg.NoCaller($"{name} failed.", AppMsgKind.Error);
         }
 
         AppMsg[] CollectMessages(IUnitTest unit, string testName, Duration runtime, Exception e = null)
@@ -316,15 +317,14 @@ namespace Z0
             try
             {
                 var tsStart = time.now();
-                collected.Add(PreCaseMsg(casename, tsStart));
+                collected.Add(PreCase(casename, tsStart));
 
                 clock.Start();
                 method.Invoke(unit,null);                    
                 clock.Stop();
 
-
                 collected.AddRange(control.Dequeue());
-                collected.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
+                collected.Add(PostCase(casename, clock.Time, tsStart, time.now()));
                 
                 var outcomes = control.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
@@ -374,10 +374,6 @@ namespace Z0
             return GetLogger(LogTarget.Define(LogArea.Test)).Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
-        static FilePath LogTestResults<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
-            where R : IRecord
-                => LogTestResults(FolderName.Empty, basename, records, mode, header, delimiter);
-
         static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = Chars.Pipe)
             where R : IRecord
         {
@@ -418,10 +414,10 @@ namespace Z0
             {  
                 Context.Paths.StandardErrorPath.Delete();
                 Context.Paths.StandardOutPath.Delete();          
+                
                 if(RunCustom())
-                {
                     Run(false,filters);
-                }
+
                 EmitLogs();
             }
             catch (Exception e)

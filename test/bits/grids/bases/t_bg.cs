@@ -21,8 +21,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var rows = natval(m);
-            var cols = natval(n);
+            var rows = nati(m);
+            var cols = nati(n);
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes*8;

@@ -18,7 +18,7 @@ namespace Z0.Logix
     {
         public void check_compositions()
         {
-            var ops = NumericOpApi.BinaryBitLogicKinds.ToArray();
+            var ops = NumericOpApi.BinaryLogicKinds.ToArray();
             var pairs = from op1 in ops
                         from op2 in ops
                         select (op1, op2);            
@@ -28,7 +28,7 @@ namespace Z0.Logix
 
         public void check_binop_vars()
         {
-            NumericOpApi.BinaryBitLogicKinds.ToArray().Iter(check_binop_vars);
+            NumericOpApi.BinaryLogicKinds.ToArray().Iter(check_binop_vars);
         }
 
         public void check_solution()
@@ -89,7 +89,7 @@ namespace Z0.Logix
             return sln;
         }
 
-        void check_4x2(BinaryBitLogicKind k0, BinaryBitLogicKind k1)
+        void check_4x2(BinaryLogicKind k0, BinaryLogicKind k1)
         {
             check_4x2<byte>(k0,k1);
             check_4x2<ushort>(k0,k1);
@@ -97,7 +97,7 @@ namespace Z0.Logix
             check_4x2<ulong>(k0,k1);
         }
 
-        void check_4x2<T>(BinaryBitLogicKind k0, BinaryBitLogicKind k1)
+        void check_4x2<T>(BinaryLogicKind k0, BinaryLogicKind k1)
             where T : unmanaged
         {
             var v0 = variable<T>(0);
@@ -132,7 +132,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_binop_vars(BinaryBitLogicKind kind)
+        void check_binop_vars(BinaryLogicKind kind)
         {
             check_binop_vars<byte>(kind);
             check_binop_vars<ushort>(kind);
@@ -140,7 +140,7 @@ namespace Z0.Logix
             check_binop_vars<ulong>(kind);
         }
 
-        void check_binop_vars<T>(BinaryBitLogicKind kind)
+        void check_binop_vars<T>(BinaryLogicKind kind)
             where T : unmanaged
         {
             var v0 = variable<T>(0);

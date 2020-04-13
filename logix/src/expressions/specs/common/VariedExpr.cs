@@ -35,7 +35,7 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         public void SetVars(params T[] values)
-            => OpHelpers.Set(this,values.Map(v => new LiteralExpr<T>(v)));
+            => OpHelpers.Set(this, values.Map(v => (new LiteralExpr<T>(v) as ILiteralExpr<T>)));
 
         [MethodImpl(Inline)]
         public void SetVars(params IExpr<T>[] values)
@@ -71,7 +71,7 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         public void SetVars(params T[] values)
-            => OpHelpers.Set(this,values.Map(v => new LiteralExpr<T>(v)));
+            => OpHelpers.Set(this, values.Map(v => (new LiteralExpr<T>(v) as ILiteralExpr<T>)));
 
         [MethodImpl(Inline)]
         public void SetVars(params IExpr<T>[] values)

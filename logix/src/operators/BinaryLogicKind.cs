@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>    
-    public enum BinaryBitLogicKind : ulong
+    public enum BinaryLogicKind : ulong
     {         
         /// <summary>
         /// The empty identity which, unfortunately conflicts with the inescapable defintion of 'False'
@@ -213,7 +213,6 @@ namespace Z0
         /// <remarks>
         /// bv(1111) = id(False)
         /// </remarks>
-        True = Id.True,
- 
+        True = Id.True, 
     }      
 }

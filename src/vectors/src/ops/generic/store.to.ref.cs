@@ -66,38 +66,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector128<T> src, ref T dst)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                vstore128_u(src, ref dst);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                vstore128_i(src, ref dst);
-            else 
-                vstore128_f(src, ref dst);
-        }
+                => vstore_u(src, ref dst);
 
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector256<T> src, ref T dst)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                vstore256_u(src, ref dst);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                vstore256_i(src, ref dst);
-            else 
-                vstore256_f(src, ref dst);
-        }
+                => vstore_u(src, ref dst);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector512<T> src, ref T dst, int offset = 0)
@@ -108,21 +82,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe void vstore128_u<T>(Vector128<T> src, ref T dst)
+        static unsafe void vstore_u<T>(Vector128<T> src, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Store.save(vcast8u(src), ref As.uint8(ref dst));
+                Store.save(vcast8u(src), ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
                 Store.save(vcast16u(src), ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
                 Store.save(vcast32u(src), ref uint32(ref dst));
-            else
+            else if(typeof(T) == typeof(ulong))
                 Store.save(vcast64u(src), ref uint64(ref dst));
+            else
+                 vstore_i(src,ref dst);
         }
 
         [MethodImpl(Inline)]
-        static unsafe void vstore128_i<T>(Vector128<T> src, ref T dst)
+        static unsafe void vstore_i<T>(Vector128<T> src, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -131,12 +107,14 @@ namespace Z0
                 Store.save(vcast16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))
                 Store.save(vcast32i(src), ref int32(ref dst));
-            else
+            else if(typeof(T) == typeof(long))
                 Store.save(vcast64i(src), ref int64(ref dst));
+            else
+                vstore_f(src, ref dst);
         }
 
         [MethodImpl(Inline)]
-        static unsafe void vstore128_f<T>(Vector128<T> src, ref T dst)
+        static unsafe void vstore_f<T>(Vector128<T> src, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -148,7 +126,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe void vstore256_u<T>(Vector256<T> src, ref T dst)
+        static unsafe void vstore_u<T>(Vector256<T> src, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -157,12 +135,14 @@ namespace Z0
                 Store.save(vcast16u(src), ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
                 Store.save(vcast32u(src), ref uint32(ref dst));
-            else
+            else if(typeof(T) == typeof(ulong))
                 Store.save(vcast64u(src), ref uint64(ref dst));
+            else
+                 vstore_i(src,ref dst);
         }
 
         [MethodImpl(Inline)]
-        static unsafe void vstore256_i<T>(Vector256<T> src, ref T dst)
+        static unsafe void vstore_i<T>(Vector256<T> src, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -171,12 +151,14 @@ namespace Z0
                 Store.save(vcast16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))
                 Store.save(vcast32i(src), ref int32(ref dst));
-            else
+            else if(typeof(T) == typeof(long))
                 Store.save(vcast64i(src), ref int64(ref dst));
+            else
+                vstore_f(src, ref dst);
         }
 
         [MethodImpl(Inline)]
-        static unsafe void vstore256_f<T>(Vector256<T> src, ref T dst)
+        static unsafe void vstore_f<T>(Vector256<T> src, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

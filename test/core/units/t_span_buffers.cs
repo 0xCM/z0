@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public sealed class t_spanbuffers : UnitTest<t_spanbuffers>
     {

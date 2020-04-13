@@ -12,9 +12,16 @@ namespace Z0
     [ApiHost("api")]
     public partial class BitVector : IApiHost<BitVector>
     {   
+        const string BL = "BitLogic";
+        
         [MethodImpl(Inline)]
         internal static Span<byte> bytes<T>(T src)
             where T : struct
                 => Bytes.from(src);
     }
+
+    public static partial class XTend
+    {
+        
+    }    
 }

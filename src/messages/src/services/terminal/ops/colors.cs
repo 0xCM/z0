@@ -1,0 +1,60 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Collections.Generic;
+
+    partial struct term
+    {
+        /// <summary>
+        /// Emits an information-level message with a magenta foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void magenta(object content)
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
+
+        /// <summary>
+        /// Emits an information-level message with a magenta foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void magenta(string title, object content)
+            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
+
+        /// <summary>
+        /// Emits an information-level message with a magenta foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void green(object content)
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Green));
+
+        /// <summary>
+        /// Emits an information-level message with a magenta foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void green(string title, object content)
+            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Green));
+
+        /// <summary>
+        /// Emits an information-level message with a cyan foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void cyan(object content)
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Cyan));
+
+        /// <summary>
+        /// Emits an information-level message with a cyan foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void cyan(string title, object content)
+            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Cyan));
+    }
+}

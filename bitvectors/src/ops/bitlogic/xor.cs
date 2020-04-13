@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class BitVector
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Xor(BL), Closures(UnsignedInts)]
         public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.xor(x.Scalar,y.Scalar);
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Xor(BL)]
         public static BitVector4 xor(BitVector4 x, BitVector4 y)
             => gmath.xor(x.data,y.data);
 
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Xor(BL)]
         public static BitVector8 xor(BitVector8 x, BitVector8 y)
             => gmath.xor(x.data,y.data);
 
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Xor(BL)]
         public static BitVector16 xor(BitVector16 x, BitVector16 y)
             => gmath.xor(x.data, y.data);
 
@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Xor(BL)]
         public static BitVector32 xor(BitVector32 x, BitVector32 y)
             => gmath.xor(x.data, y.data);
 
@@ -63,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Xor(BL)]
         public static BitVector64 xor(BitVector64 x, BitVector64 y)
             => gmath.xor(x.data, y.data);
     }

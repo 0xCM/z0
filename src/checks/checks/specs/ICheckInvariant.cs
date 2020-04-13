@@ -29,9 +29,8 @@ namespace Z0
             => Claim.require(invariant, caller,file,line);
 
         [MethodImpl(Inline)]   
-        void yea<T>(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged
-              => Claim.yea<T>(src, msg, caller,file, line);
+        void yea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+              => Claim.yea(src, msg, caller,file, line);
 
         [MethodImpl(Inline)]   
         void nea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

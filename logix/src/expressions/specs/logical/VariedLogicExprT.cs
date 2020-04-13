@@ -6,6 +6,8 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Seed;
 
@@ -24,7 +26,6 @@ namespace Z0.Logix
         /// The variables that parametrize the base expression
         /// </summary>
         public ILogicVarExpr<T>[] Vars {get;}
-
     
         [MethodImpl(Inline)]
         public VariedLogicExpr(ILogicExpr<T> baseExpr, params ILogicVarExpr<T>[] variables)
@@ -50,13 +51,9 @@ namespace Z0.Logix
             => BaseExpr.Format();
 
         public void SetVars(params ILogicExpr[] values)
-        {
-            throw new NotImplementedException();
-        }
+            => SetVars(values.Cast<ILogicExpr<T>>().ToArray());
 
         public void SetVars(params bit[] values)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotSupportedException();
     }
 }

@@ -117,7 +117,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            int n = natval<N>();
+            int n = nati<N>();
             var rep = default(N);
             var segcount = BitCalcs.mincells<T>(n);
             Claim.eq(BitBlock<N,T>.CellCount, segcount);

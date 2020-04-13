@@ -9,14 +9,24 @@ namespace Z0.Logix
     
     using static Seed;
 
-    public sealed class UnaryLogicOpExpr<T> : UnaryLogicOpExpr,  IUnaryLogicOpExpr<T>
+    public readonly struct UnaryLogicOpExpr<T> :  IUnaryLogicOpExpr<T>
         where T : unmanaged
     {
-        public new ILogicExpr<T> Arg{get;}
+        public UnaryLogicKind OpKind {get;}
+
+        public ILogicExpr<T> Arg{get;}
 
         [MethodImpl(Inline)]
-        internal UnaryLogicOpExpr(UnaryLogicKind op, ILogicExpr<T> arg)
-            : base(op,arg)
-                => this.Arg = arg;
+        internal UnaryLogicOpExpr(UnaryLogicKind kind, ILogicExpr<T> arg)
+        {
+            this.Arg = arg;
+            this.OpKind = kind;
+        }
+        
+        ILogicExpr IUnaryOpExpr<ILogicExpr>.Arg 
+            => Arg;
+
+        public string Format()
+            => OpKind.Format(Arg);        
     }
 }

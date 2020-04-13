@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;
-    using static vBitSvcHosts;
+    using static VBitSvcTypes;
 
-    partial class vBitServices
+    partial class VBitSvc
     {
         [MethodImpl(Inline)]
         public static BitClear128<T> vbitclear<T>(N128 w, T t = default)
@@ -24,7 +24,7 @@ namespace Z0
                 => BitClear256<T>.Op;
     }
 
-    partial class vBitSvcHosts
+    partial class VBitSvcTypes
     {
         [NumericClosures(NumericKind.Integers)]
         public readonly struct BitClear128<T> : ISVImm8x2UnaryOp128DApi<T>

@@ -24,8 +24,7 @@ namespace Z0.Logix
         /// <summary>
         /// Variables upon which the expression depends
         /// </summary>
-        ILogicVarExpr[] Vars {get;}
-        
+        ILogicVarExpr[] Vars {get;}        
     }
 
     /// <summary>

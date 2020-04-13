@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<byte> AsBytes<T>(this Span<T> src, int offset = 0, int ? length = null)
-            where T : unmanaged
+            where T : struct
             =>   (offset == 0 && length == null) 
                 ? MemoryMarshal.AsBytes(src)
                 : length == null  
@@ -35,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<byte> AsBytes<T>(this Span<T> src)
-            where T : unmanaged
+            where T : struct
                 => MemoryMarshal.AsBytes(src);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> AsBytes<T>(this ReadOnlySpan<T> src, int offset = 0, int ? length = null)
-            where T : unmanaged
+            where T : struct
             =>   (offset == 0 && length == null) 
                 ? MemoryMarshal.AsBytes(src)
                 : length == null  
@@ -61,7 +61,7 @@ namespace Z0
         /// <typeparam name="T">The source span element type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> AsBytes<T>(this ReadOnlySpan<T> src)
-            where T : unmanaged
+            where T : struct
                 => MemoryMarshal.AsBytes(src);
     }
 }

@@ -229,7 +229,7 @@ namespace Z0.Asm.Validation
             }
             catch(Exception e)
             {
-                term.error(e, id.Identifier);
+                term.errlabel(e, id.Identifier);
                 return TestCaseRecord.Define(name, false, clock);                
             }
         }
@@ -252,7 +252,7 @@ namespace Z0.Asm.Validation
             }
             catch(Exception e)
             {
-                term.error(e, name);
+                term.errlabel(e, name);
                 return TestCaseRecord.Define(name, true, clock);
             }
         }

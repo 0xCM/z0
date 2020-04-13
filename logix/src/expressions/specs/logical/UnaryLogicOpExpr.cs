@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines an untyped unary logic operator expression
     /// </summary>
-    public class UnaryLogicOpExpr : IUnaryLogicOpExpr
+    public readonly struct UnaryLogicOpExpr : IUnaryLogicOpExpr
     {
         /// <summary>
         /// The operator kind

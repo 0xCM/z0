@@ -61,7 +61,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<byte> get<T>(in T src)
-            where T : unmanaged
+            where T : struct
                 => from(ref edit(in src));
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <typeparam name="T">The soruce type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void to<T>(in T src, Span<byte> dst)
-            where T : unmanaged
+            where T : struct
                 => Unsafe.As<byte, T>(ref head(dst)) = src;
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T to<T>(Span<byte> src, int offset, ref T dst)
-            where T : unmanaged
+            where T : struct
         {            
             dst = Unsafe.ReadUnaligned<T>(ref seek(ref head(src), offset));
             return ref dst;
@@ -99,7 +99,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> from<T>(in T src, Span<byte> dst, int offset)
-            where T : unmanaged
+            where T : struct
         {
             generic<T>(ref seek(ref head(dst), offset)) = src;
             return dst;
@@ -107,7 +107,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> write<T>(in T src)
-            where T : unmanaged
+            where T : struct
         {
             Span<byte> dst =  new byte[size<T>()];
             generic<T>(ref head(dst)) = src;

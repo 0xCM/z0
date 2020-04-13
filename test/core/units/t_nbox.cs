@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
     public class t_boxed_number : UnitTest<t_boxed_number>
     {

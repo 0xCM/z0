@@ -59,5 +59,16 @@ namespace Z0.Mkl
         protected RowVector256<double> RVecF64<N>(N len = default, long? min = null, long? max = null)
             where N : unmanaged, ITypeNat
                 => Random.VectorBlock<N,long,double>(Interval.closed(min ?? -25L, max ?? 25L));
+
+        /// <summary>
+        /// Submits a diagnostic message to the queue related to performance/benchmarking
+        /// </summary>
+        /// <param name="msg">The message to submit</param>
+        protected void TracePerf(string msg)
+        {
+            if(TraceEnabled)
+                NotifyConsole(AppMsg.NoCaller($"{msg}", AppMsgKind.Benchmark));
+        }
+
     }
 }

@@ -12,6 +12,10 @@ namespace Z0
 
     public class t_mux : t_bitcore<t_mux>
     {
+        bit on => bit.On;
+
+        bit off => bit.Off;
+
         public void mux_4()
         {            
             for(var i=0; i< RepCount; i++)

@@ -29,18 +29,13 @@ namespace Z0
 
     }
 
-    public interface IEqualCheck : IValidator
+    public interface IEqualCheck<T> : IValidator
     {
-
-    }
-
-    public interface IEqualCheck<T> : IEqualCheck
-    {
-        void eq(T a, T b);
+        void eq(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null);
     }
 
     public interface INotEqualCheck<T> : IValidator
     {
-        void neq(T a, T b);
+        void neq(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null);
     }
 }

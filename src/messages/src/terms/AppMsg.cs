@@ -37,7 +37,7 @@ namespace Z0
             => new AppMsg(content, AppMsgKind.Warning, AppMsgColor.Yellow, string.Empty, FilePath.Empty, null);
 
         public static AppMsg Error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, AppMsgKind.Error, AppMsgColor.Red, caller, FilePath.Define(file), line);
+            => NoCaller($"{content} {caller} {line} {file}", AppMsgKind.Error);
         
         public static AppMsg Empty
             => new AppMsg(string.Empty, AppMsgKind.Info, AppMsgColor.Unspecified, string.Empty, FilePath.Empty, null);
@@ -127,6 +127,8 @@ namespace Z0
         public AppMsg Printed()
             => new AppMsg(Content, Kind, Color, Caller, CallerFile, FileLine, true);
 
+        public bool IsError => Kind == AppMsgKind.Error;
+        
         public string Format()
         {
             if(IsEmpty)

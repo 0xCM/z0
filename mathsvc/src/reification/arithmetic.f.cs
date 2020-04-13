@@ -9,7 +9,7 @@ namespace Z0
         
     using static Seed; 
     using static Memories;
-    using static MathSvcHosts;
+    using static MathSvcTypes;
 
     partial class MathSvc
     {

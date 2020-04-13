@@ -177,7 +177,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.error(e, casename);
+                term.errlabel(e, casename);
                 succeeded = false;
             }
             finally

@@ -9,7 +9,7 @@ namespace Z0
         
     using static Seed; using static Memories;
 
-    partial class MathSvcHosts
+    partial class MathSvcTypes
     {
         [Closures(Integers)]
         public readonly struct BitLogicOps<T> : IBitLogic<T>

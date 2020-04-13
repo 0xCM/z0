@@ -6,10 +6,19 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
-    
-    using static TernaryLogicFunction;
+
+    using static Seed;    
+    using static TernaryLogicKind;
     using static NumericOps;
     using static OpHelpers;
+
+    using BLK = BinaryLogicKind;
+    using TLK = TernaryLogicKind;
+    using ULK = UnaryLogicKind;
+    using UAR = UnaryArithmeticKind;
+    using BAR = BinaryArithmeticKind;
+    using BCK = BinaryComparisonKind;
+    using BSK = BitShiftKind;
 
     /// <summary>
     /// Services for scalar operators
@@ -20,90 +29,90 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary bitlogic operators
         /// </summary>
-        public static ReadOnlySpan<UnaryLogicKind> UnaryBitLogicKinds
-            => Enums.valarray<UnaryLogicKind>();
+        public static ReadOnlySpan<ULK> UnaryLogicKinds
+            => Enums.valarray<ULK>();
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
         /// </summary>
-        public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitLogicKinds
-            => Enums.valarray<BinaryBitLogicKind>();
+        public static ReadOnlySpan<BLK> BinaryLogicKinds
+            => Enums.valarray<BLK>();
 
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators
         /// </summary>
-        public static ReadOnlySpan<TernaryLogicFunction> TernaryBitLogicKinds
-            => Numeric.range((byte)1,(byte)X5F).Cast<TernaryLogicFunction>().ToArray();
+        public static ReadOnlySpan<TLK> TernaryLogicKinds
+            => Numeric.range((byte)1,(byte)X5F).Cast<TLK>().ToArray();
 
         /// <summary>
         /// Advertises the supported unary arithmetic operators
         /// </summary>
-        public static ReadOnlySpan<UnaryArithmeticKind> UnaryAritmeticKinds
-            => Enums.valarray<UnaryArithmeticKind>();
+        public static ReadOnlySpan<UAR> UnaryAritmeticKinds
+            => Enums.valarray<UAR>();
 
         /// <summary>
         /// Advertises the supported binary arithmetic operators
         /// </summary>
-        public static ReadOnlySpan<BinaryArithmeticKind> BinaryArithmeticKinds
-            => Enums.valarray<BinaryArithmeticKind>();
+        public static ReadOnlySpan<BAR> BinaryArithmeticKinds
+            => Enums.valarray<BAR>();
 
         /// <summary>
         /// Advertises the supported comparison operators
         /// </summary>
-        public static ReadOnlySpan<BinaryComparisonKind> ComparisonKinds
-            => Enums.valarray<BinaryComparisonKind>();
+        public static ReadOnlySpan<BCK> BinaryComparisonKinds
+            => Enums.valarray<BCK>();
 
 
-        [Op, NumericClosures(NumericKind.Integers)]
-        public static T eval<T>(BinaryBitLogicKind kind, T a, T b)
+        [Op, NumericClosures(Integers)]
+        public static T eval<T>(BLK kind, T a, T b)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true(a,b);
-                case BinaryBitLogicKind.False: return @false(a,b);
-                case BinaryBitLogicKind.And: return and(a,b);
-                case BinaryBitLogicKind.Nand: return nand(a,b);
-                case BinaryBitLogicKind.Or: return or(a,b);
-                case BinaryBitLogicKind.Nor: return nor(a,b);
-                case BinaryBitLogicKind.Xor: return xor(a,b);
-                case BinaryBitLogicKind.Xnor: return xnor(a,b);
-                case BinaryBitLogicKind.LProject: return left(a,b);
-                case BinaryBitLogicKind.RProject: return right(a,b);
-                case BinaryBitLogicKind.LNot: return lnot(a,b);
-                case BinaryBitLogicKind.RNot: return rnot(a,b);
-                case BinaryBitLogicKind.Impl: return impl(a,b);                    
-                case BinaryBitLogicKind.NonImpl: return nonimpl(a,b);
-                case BinaryBitLogicKind.CImpl: return cimpl(a,b);                    
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl(a,b);
+                case BLK.True: return @true(a,b);
+                case BLK.False: return @false(a,b);
+                case BLK.And: return and(a,b);
+                case BLK.Nand: return nand(a,b);
+                case BLK.Or: return or(a,b);
+                case BLK.Nor: return nor(a,b);
+                case BLK.Xor: return xor(a,b);
+                case BLK.Xnor: return xnor(a,b);
+                case BLK.LProject: return left(a,b);
+                case BLK.RProject: return right(a,b);
+                case BLK.LNot: return lnot(a,b);
+                case BLK.RNot: return rnot(a,b);
+                case BLK.Impl: return impl(a,b);                    
+                case BLK.NonImpl: return nonimpl(a,b);
+                case BLK.CImpl: return cimpl(a,b);                    
+                case BLK.CNonImpl: return cnonimpl(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, NumericClosures(NumericKind.Integers)]
-        public static T eval<T>(UnaryLogicKind kind, T a)
+        [Op, NumericClosures(Integers)]
+        public static T eval<T>(ULK kind, T a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryLogicKind.Not: return not(a);
-                case UnaryLogicKind.Identity: return NumericOps.identity(a);
+                case ULK.Not: return not(a);
+                case ULK.Identity: return NumericOps.identity(a);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op, NumericClosures(Integers)]
         public static T eval<T>(BinaryComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case BinaryComparisonKind.Eq: return equals(a,b);
-                case BinaryComparisonKind.Neq: return neq(a,b);
-                case BinaryComparisonKind.Lt: return lt(a,b);
-                case BinaryComparisonKind.LtEq: return lteq(a,b);
-                case BinaryComparisonKind.Gt: return gt(a,b);
-                case BinaryComparisonKind.GtEq: return gteq(a,b);
+                case BCK.Eq: return equals(a,b);
+                case BCK.Neq: return neq(a,b);
+                case BCK.Lt: return lt(a,b);
+                case BCK.LtEq: return lteq(a,b);
+                case BCK.Gt: return gt(a,b);
+                case BCK.GtEq: return gteq(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -115,8 +124,8 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        [Op, NumericClosures(NumericKind.Integers)]
-        public static T eval<T>(TernaryLogicFunction kind, T a, T b, T c)
+        [Op, NumericClosures(Integers)]
+        public static T eval<T>(TLK kind, T a, T b, T c)
             where T : unmanaged
         {
             switch(kind)
@@ -220,89 +229,89 @@ namespace Z0.Logix
             }
         }
 
-        [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static T eval<T>(BitShiftKind kind, T a, byte count)
+        [Op, NumericClosures(UnsignedInts)]
+        public static T eval<T>(BSK kind, T a, byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BitShiftKind.Sll: return sll(a, count);
-                case BitShiftKind.Srl: return srl(a, count);
-                case BitShiftKind.Rotl: return rotl(a, count);
-                case BitShiftKind.Rotr: return rotr(a, count);
+                case BSK.Sll: return sll(a, count);
+                case BSK.Srl: return srl(a, count);
+                case BSK.Rotl: return rotl(a, count);
+                case BSK.Rotr: return rotr(a, count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
             
-        [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<T> lookup<T>(BitShiftKind kind)
+        [Op, NumericClosures(Integers)]
+        public static Shifter<T> lookup<T>(BSK kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case BitShiftKind.Sll: return sll;
-                case BitShiftKind.Srl: return srl;
-                case BitShiftKind.Rotl: return rotl;
-                case BitShiftKind.Rotr: return rotr;
+                case BSK.Sll: return sll;
+                case BSK.Srl: return srl;
+                case BSK.Rotl: return rotl;
+                case BSK.Rotr: return rotr;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, NumericClosures(NumericKind.All)]
-        public static BinaryOp<T> lookup<T>(BinaryComparisonKind kind)
+        [Op, NumericClosures(AllNumeric)]
+        public static BinaryOp<T> lookup<T>(BCK kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryComparisonKind.Eq: return equals;
-                case BinaryComparisonKind.Neq: return neq;
-                case BinaryComparisonKind.Lt: return lt;
-                case BinaryComparisonKind.LtEq: return lteq;
-                case BinaryComparisonKind.Gt: return gt;
-                case BinaryComparisonKind.GtEq: return gteq;
+                case BCK.Eq: return equals;
+                case BCK.Neq: return neq;
+                case BCK.Lt: return lt;
+                case BCK.LtEq: return lteq;
+                case BCK.Gt: return gt;
+                case BCK.GtEq: return gteq;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, NumericClosures(NumericKind.Integers)]
-        public static UnaryOp<T> lookup<T>(UnaryLogicKind kind)
+        [Op, NumericClosures(Integers)]
+        public static UnaryOp<T> lookup<T>(ULK kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case UnaryLogicKind.Not: return not;
-                case UnaryLogicKind.Identity: return NumericOps.identity;
+                case ULK.Not: return not;
+                case ULK.Identity: return NumericOps.identity;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryOp<T> lookup<T>(BinaryBitLogicKind kind)
+        [Op, NumericClosures(Integers)]
+        public static BinaryOp<T> lookup<T>(BLK kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true;
-                case BinaryBitLogicKind.False: return @false;
-                case BinaryBitLogicKind.And: return and;
-                case BinaryBitLogicKind.Nand: return nand;
-                case BinaryBitLogicKind.Or: return or;
-                case BinaryBitLogicKind.Nor: return nor;
-                case BinaryBitLogicKind.Xor: return xor;
-                case BinaryBitLogicKind.Xnor: return xnor;
-                case BinaryBitLogicKind.LProject: return left;
-                case BinaryBitLogicKind.RProject: return right;
-                case BinaryBitLogicKind.LNot: return lnot;
-                case BinaryBitLogicKind.RNot: return rnot;
-                case BinaryBitLogicKind.Impl: return impl;
-                case BinaryBitLogicKind.NonImpl: return nonimpl;
-                case BinaryBitLogicKind.CImpl: return cimpl;
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl;
+                case BLK.True: return @true;
+                case BLK.False: return @false;
+                case BLK.And: return and;
+                case BLK.Nand: return nand;
+                case BLK.Or: return or;
+                case BLK.Nor: return nor;
+                case BLK.Xor: return xor;
+                case BLK.Xnor: return xnor;
+                case BLK.LProject: return left;
+                case BLK.RProject: return right;
+                case BLK.LNot: return lnot;
+                case BLK.RNot: return rnot;
+                case BLK.Impl: return impl;
+                case BLK.NonImpl: return nonimpl;
+                case BLK.CImpl: return cimpl;
+                case BLK.CNonImpl: return cnonimpl;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        public static TernaryOp<T> lookup<T>(TernaryLogicFunction kind)
+        public static TernaryOp<T> lookup<T>(TLK kind)
             where T : unmanaged
         {
             switch(kind)

@@ -22,13 +22,13 @@ namespace Z0
         public ValidityException() { }
      
         ValidityException(ValidityClaim kind, AppMsg msg) 
-            : base(msg.WithPrependedContent("fail(").WithAppendedContent(")"))
+            : base(msg)
             { 
                 this.OpKind = kind;
             }
 
         ValidityException(ValidityClaim kind, string msg, string caller, string file, int? line) 
-            : base($"fail({msg})", caller, file, line) 
+            : base(AppMsg.NoCaller($"{msg} {caller} {file} {line}", AppMsgKind.Error)) 
             { 
                 this.OpKind = kind;
             }

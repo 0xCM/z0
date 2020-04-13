@@ -45,10 +45,10 @@ namespace Z0
         public readonly int RowWidth;        
 
         public static BitFormatConfig Default 
-            => new BitFormatConfig(false);
+            => BitFormatConfig.Define(false);
 
         public static BitFormatConfig Tlz
-            => new BitFormatConfig(true);
+            => BitFormatConfig.Define(true);
 
         [MethodImpl(Inline)]
         public static implicit operator BitFormatConfig(int blockwidth)
@@ -56,18 +56,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitFormatConfig Limited(int maxbits)
-            => new BitFormatConfig(true, maxbits: maxbits);
+            => BitFormatConfig.Define(true, maxbits: maxbits);
 
         [MethodImpl(Inline)]
-        public static BitFormatConfig Blocked(int width, char? sep = null)
-            => new BitFormatConfig(blockWidth: width, blocksep: sep);
+        public static BitFormatConfig Blocked(int width, char? sep = null, int? maxbits = null, bool specifier = false)
+            => BitFormatConfig.Define(blockWidth: width, blocksep: sep, maxbits:maxbits, specifier: specifier);
 
         [MethodImpl(Inline)]
         public static BitFormatConfig RowBlocked(int blockWidth, int rowWidth, char? blockSep = null)
-            => new BitFormatConfig(blockWidth: blockWidth, rowWidth:rowWidth, blocksep: blockSep);
+            => BitFormatConfig.Define(blockWidth: blockWidth, rowWidth:rowWidth, blocksep: blockSep);
 
         [MethodImpl(Inline)]
-        public BitFormatConfig(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null, int? maxbits = null)
+        public static BitFormatConfig Define(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null, int? maxbits = null)
+            => new BitFormatConfig(tlz, specifier, blockWidth, blocksep, rowWidth, maxbits);
+
+        [MethodImpl(Inline)]
+        BitFormatConfig(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null, int? maxbits = null)
         {
             this.TrimLeadingZeros = tlz;
             this.SpecifierPrefix = specifier;
@@ -78,6 +82,6 @@ namespace Z0
         }
         
         public BitFormatConfig WithSpecifier()
-            => new BitFormatConfig(TrimLeadingZeros,true,BlockWidth,BlockSep,RowWidth,MaxBitCount);
+            => BitFormatConfig.Define(TrimLeadingZeros,true,BlockWidth,BlockSep,RowWidth,MaxBitCount);
     }
 }

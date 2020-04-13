@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static Seed;
     using static UnaryArithmeticKind;
     using static BinaryArithmeticKind;
-    using static TypedLogicSpec;
+    using TLS = TypedLogicSpec;
 
     public static class ArithmeticSpec
     {
@@ -34,7 +34,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticKind op, T a)
             where T : unmanaged
-                => new UnaryAritheticOpExpr<T>(op, literal(a));
+                => new UnaryAritheticOpExpr<T>(op, TLS.literal(a));
 
         /// <summary>
         /// Defines a binary arithmetic expression
@@ -56,7 +56,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryArithmeticOpExpr<T> binary<T>(BinaryArithmeticKind op, T a, T b)
             where T : unmanaged
-                => binary(op, literal(a), literal(b));
+                => new BinaryArithmeticOpExpr<T>(op, TLS.literal(a), TLS.literal(b));
 
         /// <summary>
         /// Defines a unary increment expression
