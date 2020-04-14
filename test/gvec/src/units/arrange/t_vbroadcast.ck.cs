@@ -13,19 +13,6 @@ namespace Z0
 
     static class VChecks
     {
-        public static bit vand<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-        {
-            var svc = MathSvc.bitlogic<T>();
-            var v1 = VSvc.vbitlogic<T>(n128).and(x,y);
-            var buffer = Fixed.alloc<Fixed128>();
-            ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
-            var count = vcount<T>(n128);            
-            for(var i=0; i< count; i++)
-                seek(ref dst, i) = svc.and(vcell(x,i), vcell(y,i));
-            var v2 = Vectors.vload(n128, in dst);
-            return gvec.vsame(v1,v2);
-        }
 
 
        [MethodImpl(Inline)]

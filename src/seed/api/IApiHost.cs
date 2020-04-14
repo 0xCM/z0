@@ -25,12 +25,6 @@ namespace Z0
     
         IEnumerable<MethodInfo> HostedMethods => HostingType.DeclaredMethods(false);
 
-        IEnumerable<MethodInfo> HostedKind<K>(K k = default)
-            where K : unmanaged, Enum
-                => from m in HostedMethods.Tagged(typeof(OpKindAttribute))
-                let a = m.Tag<OpKindAttribute>().Require()
-                where a.KindId.ToString() == k.ToString()
-                    select m;
 
     }
 

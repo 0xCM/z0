@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static As;
+    using static Memories;
 
     partial class Numeric
     {
+
         /// <summary>
         /// Returns 1 if the source operand is non-zero and 0 otherwise
         /// </summary>
@@ -27,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return Z0.Scalar.nonz(uint8(a));
+                 return Scalar.nonz(uint8(a));
             else if(typeof(T) == typeof(ushort))
-                 return Z0.Scalar.nonz(uint16(a));
+                 return Scalar.nonz(uint16(a));
             else if(typeof(T) == typeof(uint))
-                 return Z0.Scalar.nonzero(uint32(a));
+                 return Scalar.nonzero(uint32(a));
             else if(typeof(T) == typeof(ulong))
-                 return Z0.Scalar.nonz(uint64(a));
+                 return Scalar.nonz(uint64(a));
             else 
                 return nonz_i(a);
         }
@@ -43,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return Z0.Scalar.nonz(int8(a));
+                 return Scalar.nonz(int8(a));
             else if(typeof(T) == typeof(short))
-                 return Z0.Scalar.nonz(int16(a));
+                 return Scalar.nonz(int16(a));
             else if(typeof(T) == typeof(int))
-                 return Z0.Scalar.nonzero(int32(a));
+                 return Scalar.nonzero(int32(a));
             else if(typeof(T) == typeof(long))
-                 return Z0.Scalar.nonzero(int64(a));
+                 return Scalar.nonzero(int64(a));
             else 
                 return nonz_f(a);
         }
@@ -59,9 +60,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return Z0.Scalar.nonz(float32(a));
+                return Scalar.nonz(float32(a));
             else if(typeof(T) == typeof(double))
-                return Z0.Scalar.nonz(float64(a));
+                return Scalar.nonz(float64(a));
             else            
                 throw Unsupported.define<T>();
         }    

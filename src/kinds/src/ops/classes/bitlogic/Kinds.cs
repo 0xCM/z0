@@ -60,5 +60,17 @@ namespace Z0
         public readonly struct Not<T> : IBitLogicKind<Not,T> where T : unmanaged { }
 
         public readonly struct Select<T> : IBitLogicKind<Select,T> where T : unmanaged { } 
+
+        public readonly struct And<W,T> : IBitLogicKind<And,W,T> where W : unmanaged, ITypeWidth where T : unmanaged { }
+
+        public readonly struct Or<W,T> : IBitLogicKind<Or,W,T> where W : unmanaged, ITypeWidth where T : unmanaged { }
+
+        public readonly struct Xor<W,T> : IBitLogicKind<Xor,W,T> where W : unmanaged, ITypeWidth where T : unmanaged { }
+
+        public readonly struct Nand<W,T> : IBitLogicKind<Nand,W,T> where W : unmanaged, ITypeWidth where T : unmanaged { }
+
+        public readonly struct Nor<W,T> : IBitLogicKind<Nor,W,T> where W : unmanaged, ITypeWidth where T : unmanaged { }
+        
+        public readonly struct Xnor<W,T> : IBitLogicKind<Xnor,W,T> where W : unmanaged, ITypeWidth where T : unmanaged { }
     }
 }

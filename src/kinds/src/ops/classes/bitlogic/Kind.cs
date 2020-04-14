@@ -8,27 +8,6 @@ namespace Z0
     
     using Id = OpKindId;
 
-    public interface IBitLogicKind : IOpKind, IOpKind<BitLogicKind>
-    {
-        BitLogicKind Kind {get;}
-
-        OpKindId IOpKind.KindId => (OpKindId)Kind;        
-    }    
-
-    public interface IBitLogicKind<K> : IBitLogicKind, IOpKind<K,BitLogicKind>
-        where K : unmanaged, IBitLogicKind
-    {
-        OpKindId IOpKind.KindId => default(K).KindId;
-        
-    }
-    
-    public interface IBitLogicKind<K,T> : IBitLogicKind<K>
-        where K : unmanaged, IBitLogicKind
-        where T : unmanaged
-    {
-        BitLogicKind IBitLogicKind.Kind => default(K).Kind;
-    }
-
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>    

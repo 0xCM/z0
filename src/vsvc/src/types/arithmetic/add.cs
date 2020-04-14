@@ -7,13 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Security;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class VSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Add128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>
+        public readonly struct Add128<T> : IVSvcBinaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vadd";
@@ -38,7 +39,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Add256<T> : ISVBinaryOp256DApi<T>, ISBBinaryOp256Api<T>
+        public readonly struct Add256<T> : IVSvcBinaryOp256<T>
             where T : unmanaged
         {
             public const string Name = "vadd";

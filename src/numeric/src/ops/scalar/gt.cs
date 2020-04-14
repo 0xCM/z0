@@ -11,43 +11,43 @@ namespace Z0
 
     partial class Scalar
     {
-       [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(sbyte a, sbyte b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(byte a, byte b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(short a, short b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(ushort a, ushort b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(int a, int b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(uint a, uint b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(long a, long b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(ulong a, ulong b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(float a, float b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit gt(double a, double b)
             => a > b;        
     }

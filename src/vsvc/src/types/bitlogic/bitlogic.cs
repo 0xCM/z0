@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.Integers)]
+        [NumericClosures(Integers)]
         public readonly struct BitLogic128<T> : IBitLogic<Vector128<T>>
             where T : unmanaged
         {
@@ -79,7 +80,7 @@ namespace Z0
                 => gvec.vxnor(a,b);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [NumericClosures(Integers)]
         public readonly struct BitLogic256<T> : IBitLogic<Vector256<T>>
             where T : unmanaged
         {

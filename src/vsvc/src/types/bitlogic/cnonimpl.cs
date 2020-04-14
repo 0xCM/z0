@@ -12,8 +12,8 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.Integers)]
-        public readonly struct CNonImpl128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>
+        [Closures(Integers)]
+        public readonly struct CNonImpl128<T> : IVSvcBinaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vcnonimpl";
@@ -36,8 +36,8 @@ namespace Z0
 
         }
 
-        [NumericClosures(NumericKind.Integers)]
-        public readonly struct CNonImpl256<T> : ISVBinaryOp256DApi<T>, ISBBinaryOp256Api<T>
+        [Closures(Integers)]
+        public readonly struct CNonImpl256<T> : IVSvcBinaryOp256<T>
             where T : unmanaged
         {
             public const string Name = "vcnonimpl";

@@ -6,6 +6,12 @@ namespace Z0
 {
     using System;
 
+    public class TestCaseIdentity
+    {
+
+        
+    }
+
     public static class TestIdentityX
     {
         public static string TestCaseName(this IExplicitTest unit)

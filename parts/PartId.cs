@@ -100,8 +100,10 @@ public enum PartId : ulong
     
     Messages = 840, Apps = 828,
 
-    Numeric = 830, Tuples = 826,
-                        
+    Tuples = 826,
+    
+    Numeric = 830,  NumericTest = Numeric | Test,
+
     Flow = 850, Enums = 852, Reports = 832,
     
     Core = 836,
@@ -112,6 +114,7 @@ public enum PartId : ulong
 
     Code = 856,
 
+    MergeTest = 5000,
 
     Z = 1024,
 

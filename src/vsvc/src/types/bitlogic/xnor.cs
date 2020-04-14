@@ -14,7 +14,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Xnor128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>
+        public readonly struct Xnor128<T> : IVSvcBinaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vxnor";
@@ -34,11 +34,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
                 => ref gblocks.xnor(a,b,c);
-
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Xnor256<T> : ISVBinaryOp256DApi<T>, ISBBinaryOp256Api<T>
+        public readonly struct Xnor256<T> : IVSvcBinaryOp256<T>
             where T : unmanaged
         {
             public const string Name = "vxnor";

@@ -16,7 +16,7 @@ namespace Z0
         /// Allocates and optionally starts a system counter
         /// </summary>
         [MethodImpl(Inline)]   
-        protected static SystemCounter counter(bool start = false) 
+        public static SystemCounter counter(bool start = false) 
             => SystemCounter.Create(start);
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="start">Whether to start the new stopwatch</param>
         [MethodImpl(Inline)]   
-        protected static Stopwatch stopwatch(bool start = true) 
+        public static Stopwatch stopwatch(bool start = true) 
             => start ? Stopwatch.StartNew() : new Stopwatch();
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="sw">A running/stopped stopwatch</param>
         [MethodImpl(Inline)]   
-        protected static Duration snapshot(Stopwatch sw)     
+        public static Duration snapshot(Stopwatch sw)     
             => Duration.Define(sw.ElapsedTicks);        
 
     }

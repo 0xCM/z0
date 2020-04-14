@@ -8,26 +8,6 @@ namespace Z0
     
     using Id = OpKindId;
 
-    public interface IBitShiftKind : IOpKind, IOpKind<BitShiftKind>
-    {
-        BitShiftKind Kind {get;}
-
-        OpKindId IOpKind.KindId => (OpKindId)Kind;
-    }    
-
-    public interface IBitShiftKind<K> : IBitShiftKind, IOpKind<K,BitShiftKind>
-        where K : unmanaged, IBitShiftKind
-    {
-        OpKindId IOpKind.KindId => default(K).KindId;                
-    }
-    
-    public interface IBitShiftKind<K,T> : IBitShiftKind<K>
-        where K : unmanaged, IBitShiftKind
-        where T : unmanaged
-    {
-        BitShiftKind IBitShiftKind.Kind => default(K).Kind;
-    }
-
     /// <summary>
     /// Classifies bitwise shift operators
     /// </summary>
@@ -44,9 +24,19 @@ namespace Z0
         Sll = Id.Sll,
 
         /// <summary>
+        /// Classifies a variable logical left-shift
+        /// </summary>
+        Sllv = Id.Sllv,
+
+        /// <summary>
         /// Classifies a logical right-shift
         /// </summary>
         Srl = Id.Srl,
+
+        /// <summary>
+        /// Classifies a variable logical right-shift
+        /// </summary>
+        Srlv = Id.Srlv,
 
         /// <summary>
         /// Classifies an arithmetic left-shift

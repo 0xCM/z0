@@ -128,7 +128,11 @@ namespace Z0
 
         Sll,
 
+        Sllv,
+
         Srl,
+
+        Srlv,
 
         Sal,
 

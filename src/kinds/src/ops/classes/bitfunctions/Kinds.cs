@@ -22,5 +22,8 @@ namespace Z0
 
         public readonly struct TestC<T> : IBitFunctionKind<TestC,T> where T : unmanaged {}
 
+        public readonly struct TestZ<W,T> : IBitFunctionKind<TestZ,W,T> where W : unmanaged, ITypeWidth where T : unmanaged {}
+
+        public readonly struct TestC<W,T> : IBitFunctionKind<TestC,W,T> where W : unmanaged, ITypeWidth where T : unmanaged {}
     }
 }

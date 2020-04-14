@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public interface ISFMatch : IService<IValidationContext>
+    public interface ISFMatch : IService
     {
         
     }

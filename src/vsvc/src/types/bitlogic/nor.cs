@@ -8,12 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class VSvcHosts
     {        
-        [NumericClosures(NumericKind.Integers)]
-        public readonly struct Nor128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>
+        [Closures(Integers)]
+        public readonly struct Nor128<T> : IVSvcBinaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vnor";
@@ -33,11 +34,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
                 => ref gblocks.nor(a,b,c);
-
         }
 
-        [NumericClosures(NumericKind.Integers)]
-        public readonly struct Nor256<T> : ISVBinaryOp256DApi<T>, ISBBinaryOp256Api<T>
+        [Closures(Integers)]
+        public readonly struct Nor256<T> : IVSvcBinaryOp256<T>
             where T : unmanaged
         {
             public const string Name = "vnor";

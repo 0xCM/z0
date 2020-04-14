@@ -31,7 +31,12 @@ namespace Z0
         public ApiHostUri UriPath {get;}
         
         public Type HostingType {get;}
-        
+
+        [MethodImpl(Inline)]
+        public static IApiHost<H> Create<H>()
+            where H : IApiHost<H>, new()
+                => new H();
+
         [MethodImpl(Inline)]
         internal static ApiHost Define(PartId owner, Type src)
             => new ApiHost(owner, src);

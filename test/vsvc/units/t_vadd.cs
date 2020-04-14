@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
 
     public class t_vadd : t_vsvc<t_vadd>
-    {
+    {        
         public void vadd_check()
         {            
             vadd_check(n128);
@@ -38,18 +38,20 @@ namespace Z0
             vadd_check(w, z32i);
             vadd_check(w, z64);
             vadd_check(w, z64i);
+            
         }            
 
         void vadd_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            Comparisons.CheckBinaryOp(VSvc.vadd(w,t),w,t);
+            VChecks.CheckBinaryDecomp(VSvc.vadd(w,t),w,t);
         }
             
         void vadd_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            Comparisons.CheckBinaryOp(VSvc.vadd(w,t),w,t);
+            var svc = VSvc.vadd(w,t);
+            VChecks.CheckBinaryDecomp(svc,w,t);
         }
     }
 }

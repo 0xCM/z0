@@ -11,43 +11,43 @@ namespace Z0
 
     partial class Scalar
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(sbyte a, sbyte b)
             => a < b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(byte a, byte b)
             => a < b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(short a, short b)
             => a < b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(ushort a, ushort b)
             => a < b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(int a, int b)
             => a < b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(uint a, uint b)
             => a < b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(long a, long b)
             => a < b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(ulong a, ulong b)
             => a < b;        
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(float lhs, float rhs)
             => lhs < rhs;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit lt(double lhs, double rhs)
             => lhs < rhs;                    
     }

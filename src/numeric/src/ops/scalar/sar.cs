@@ -11,35 +11,35 @@ namespace Z0
 
     partial class Scalar
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static sbyte sar(sbyte src, byte offset)
             =>(sbyte)(src >> offset);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static byte sar(byte src, byte offset)
             => (byte)(src >> offset);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static short sar(short src, byte offset)
             => (short)(src >> offset);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static ushort sar(ushort src, byte offset)
             => (ushort)(src >> offset);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static int sar(int src, byte offset)
             => src >> offset;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static uint sar(uint src, byte offset)
             => src >> offset;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static long sar(long src, byte offset)
             => src >> offset;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static ulong sar(ulong src, byte offset)
             => src >> offset;             
     }    

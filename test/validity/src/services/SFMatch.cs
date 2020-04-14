@@ -24,12 +24,13 @@ namespace Z0
 
         protected SFMatch(ITestContext context, bool xzero = false, int? reps = null)
         {
-            this.Context = ValidationContext.From(context);
+            //this.Context = ValidationContext.From(context);
+            this.Context= context;
             this.RepCount = reps ?? Pow2.T07;
             this.ExcludeZero = xzero;
         }
 
-        public IValidationContext Context {get;}
+        public ITestContext Context {get;}
 
         protected IPolyrand Random
             => Context.Random;

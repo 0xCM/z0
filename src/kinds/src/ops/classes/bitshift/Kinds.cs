@@ -15,20 +15,26 @@ namespace Z0
     {
         public readonly struct Sll : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Sll; } }
 
+        public readonly struct Sllv : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Sllv; } }
+
         public readonly struct Srl : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Srl; } }
+
+        public readonly struct Srlv : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Srlv; } }
 
         public readonly struct Rotl : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Rotl; } }
 
         public readonly struct Rotr : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Rotr; } }
 
-
         public readonly struct Sll<T> : IBitShiftKind<Sll,T> where T : unmanaged {}
 
+        public readonly struct Sllv<T> : IBitShiftKind<Sllv,T> where T : unmanaged {}
+
         public readonly struct Srl<T> : IBitShiftKind<Srl,T> where T : unmanaged {}
+
+        public readonly struct Srlv<T> : IBitShiftKind<Srlv,T> where T : unmanaged {}
 
         public readonly struct Rotl<T> : IBitShiftKind<Rotl,T> where T : unmanaged {}
 
         public readonly struct Rotr<T> : IBitShiftKind<Rotr,T> where T : unmanaged {}
-
     }
 }
