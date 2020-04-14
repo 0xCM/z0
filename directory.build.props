@@ -51,31 +51,23 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BitStrings>$(TopDir)bitstrings/src/z0.bitstrings.csproj</BitStrings>
+
     <BitPack>$(TopDir)bitpack/src/z0.bitpack.csproj</BitPack>
     <BitFields>$(TopDir)bitfields/src/z0.bitfields.csproj</BitFields>
     <BitVectors>$(TopDir)bitvectors/src/z0.bitvectors.csproj</BitVectors>
     <BitSvc>$(TopDir)bitsvc/src/z0.bitsvc.csproj</BitSvc>
 
-    <VBits>$(TopDir)vbits/src/z0.vbits.csproj</VBits>
     <BitGrids>$(TopDir)bitgrids/src/z0.bitgrids.csproj</BitGrids>
     <BitSpans>$(TopDir)bitspans/src/z0.bitspans.csproj</BitSpans>
   </PropertyGroup>
 
   <PropertyGroup>
-    <VSvc>$(TopDir)vsvc/src/z0.vsvc.csproj</VSvc>
-    <FVec>$(TopDir)fvec/src/z0.fvec.csproj</FVec>
-    <DVec>$(TopDir)dvec/src/z0.dvec.csproj</DVec>
-    <GVec>$(TopDir)gvec/src/z0.gvec.csproj</GVec>    
-    <VData>$(TopDir)vdata/src/z0.vdata.csproj</VData>
     <Circuits>$(TopDir)circuits/src/z0.circuits.csproj</Circuits>
   </PropertyGroup>
   
   <PropertyGroup>
     <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
     <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
-    <Dynamic>$(TopDir)dynop/src/z0.dynop.csproj</Dynamic>
-    <Identity>$(TopDir)identity/src/z0.identity.csproj</Identity>
     <LibM>$(TopDir)libm/src/z0.libm.csproj</LibM>
     <Logix>$(TopDir)logix/src/z0.logix.csproj</Logix>
     <Machines>$(TopDir)machines/src/z0.machines.csproj</Machines>

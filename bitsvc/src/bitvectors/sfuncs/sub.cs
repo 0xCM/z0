@@ -9,10 +9,12 @@ namespace Z0
 
     using static Seed; 
 
+    using K = Kinds;
+
     partial class BV
     {
         [Closures(UnsignedInts)]
-        public readonly struct Sub<T> : IBVBinaryOpD<T>
+        public readonly struct Sub<T> : IBVBinaryOpD<T>, IArithmeticKind<K.Sub,T>
             where T : unmanaged        
         {    
             public static Sub<T> Op => default;

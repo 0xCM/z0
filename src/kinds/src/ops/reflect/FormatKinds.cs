@@ -34,16 +34,16 @@ namespace Z0
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [MethodImpl(Inline)]
-        public static string Format(this ArithmeticOpKind kind)
+        public static string Format(this ArithmeticKind kind)
             => kind switch {
-                ArithmeticOpKind.Inc => "++",
-                ArithmeticOpKind.Dec => "--",
-                ArithmeticOpKind.Negate => "-",
+                ArithmeticKind.Inc => "++",
+                ArithmeticKind.Dec => "--",
+                ArithmeticKind.Negate => "-",
                 _ => kind.ToString()
             };
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this ArithmeticOpKind kind, T arg1, T arg2)
+        public static string Format<T>(this ArithmeticKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
              
         public static string Format(this BitShiftKind kind)        

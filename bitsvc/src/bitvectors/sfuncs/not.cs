@@ -14,7 +14,7 @@ namespace Z0
     partial class BV
     {
         [Closures(UnsignedInts)]
-        public readonly struct Not<T> : IBVUnaryOpD<T>, IBitLogicKind<K.Not>
+        public readonly struct Not<T> : IBVUnaryOpD<T>, IBitLogicKind<K.Not,T>
             where T : unmanaged        
         {    
             public static Not<T> Op => default;

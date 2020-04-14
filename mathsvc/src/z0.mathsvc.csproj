@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Kinds)" />
   </ItemGroup>
 
 </Project>

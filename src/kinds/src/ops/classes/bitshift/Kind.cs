@@ -8,6 +8,26 @@ namespace Z0
     
     using Id = OpKindId;
 
+    public interface IBitShiftKind : IOpKind, IOpKind<BitShiftKind>
+    {
+        BitShiftKind Kind {get;}
+
+        OpKindId IOpKind.KindId => (OpKindId)Kind;
+    }    
+
+    public interface IBitShiftKind<K> : IBitShiftKind, IOpKind<K,BitShiftKind>
+        where K : unmanaged, IBitShiftKind
+    {
+        OpKindId IOpKind.KindId => default(K).KindId;                
+    }
+    
+    public interface IBitShiftKind<K,T> : IBitShiftKind<K>
+        where K : unmanaged, IBitShiftKind
+        where T : unmanaged
+    {
+        BitShiftKind IBitShiftKind.Kind => default(K).Kind;
+    }
+
     /// <summary>
     /// Classifies bitwise shift operators
     /// </summary>
@@ -19,16 +39,6 @@ namespace Z0
         None = 0,
 
         /// <summary>
-        /// Classifies an arithmetic left-shift
-        /// </summary>
-        Sal = Id.Sal,
-
-        /// <summary>
-        /// Classifies an arithmetic right-shift
-        /// </summary>
-        Sra = Id.Sra,
-
-        /// <summary>
         /// Classifies a logical left-shift
         /// </summary>
         Sll = Id.Sll,
@@ -37,6 +47,16 @@ namespace Z0
         /// Classifies a logical right-shift
         /// </summary>
         Srl = Id.Srl,
+
+        /// <summary>
+        /// Classifies an arithmetic left-shift
+        /// </summary>
+        Sal = Id.Sal,
+
+        /// <summary>
+        /// Classifies an arithmetic right-shift
+        /// </summary>
+        Sra = Id.Sra,
 
         /// <summary>
         /// Classifies a left circular shift

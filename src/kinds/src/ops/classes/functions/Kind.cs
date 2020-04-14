@@ -13,12 +13,9 @@ namespace Z0
     {
         None = 0,
 
-        Concat = Id.Concat,
 
         Broadcast = Id.Broadcast,
 
-        Reverse = Id.Reverse,
 
-        Identity = Id.Identity,
     }
 }

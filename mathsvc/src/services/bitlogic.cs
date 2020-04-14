@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+
+    using K = Kinds;
 
     partial class MathSvcTypes
     {
         [Closures(Integers)]
-        public readonly struct And<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct And<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.And,T>
             where T : unmanaged        
         {    
             public const string Name = "and";
@@ -31,7 +33,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Or<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct Or<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.Or,T>
             where T : unmanaged        
         {    
             public const string Name = "or";
@@ -50,7 +52,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Xor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct Xor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.Xor,T>
             where T : unmanaged        
         {    
             public const string Name = "xor";
@@ -69,7 +71,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Nand<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct Nand<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.Nand,T>
             where T : unmanaged        
         {    
             public const string Name = "nand";
@@ -88,7 +90,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Nor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct Nor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.Nor,T>
             where T : unmanaged        
         {    
             public const string Name = "not";
@@ -106,7 +108,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Xnor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct Xnor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.Xnor,T>
             where T : unmanaged        
         {    
             public const string Name = "xnor";
@@ -125,7 +127,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Select<T> : ISTernaryOpApi<T>, ISTernarySpanOpApi<T>
+        public readonly struct Select<T> : ISTernaryOpApi<T>, ISTernarySpanOpApi<T>, IBitLogicKind<K.Select,T>
             where T : unmanaged        
         {    
             public const string Name = "select";
@@ -144,7 +146,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Not<T> : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>
+        public readonly struct Not<T> : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>, IBitLogicKind<K.Not,T>
             where T : unmanaged        
         {
             public const string Name = "not";
@@ -163,7 +165,7 @@ namespace Z0
         }    
 
         [Closures(Integers)]
-        public readonly struct Impl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct Impl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.Impl,T>
             where T : unmanaged        
         {    
             public const string Name = "impl";
@@ -182,7 +184,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct NonImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct NonImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.NonImpl,T>
             where T : unmanaged        
         {    
             public const string Name = "impl";
@@ -202,7 +204,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct CImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct CImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.CImpl,T>
             where T : unmanaged        
         {    
             public const string Name = "cimpl";
@@ -221,7 +223,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct CNonImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct CNonImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>, IBitLogicKind<K.CNonImpl,T>
             where T : unmanaged        
         {    
             public const string Name = "cnonimpl";

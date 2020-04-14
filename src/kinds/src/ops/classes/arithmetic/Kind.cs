@@ -8,10 +8,30 @@ namespace Z0
         
     using Id = OpKindId;
 
+    public interface IArithmeticKind : IOpKind, IOpKind<ArithmeticKind>
+    {
+        ArithmeticKind Kind {get;}
+
+        OpKindId IOpKind.KindId => (OpKindId)Kind;
+    }    
+
+    public interface IArithmeticKind<K> : IArithmeticKind, IOpKind<K,ArithmeticKind>
+        where K : unmanaged, IArithmeticKind
+    {
+        OpKindId IOpKind.KindId => default(K).KindId;                
+    }
+    
+    public interface IArithmeticKind<K,T> : IArithmeticKind<K>
+        where K : unmanaged, IArithmeticKind
+        where T : unmanaged
+    {
+        ArithmeticKind IArithmeticKind.Kind => default(K).Kind;
+    }
+
     /// <summary>
     /// Identifies binary arithmetic operators classes
     /// </summary>
-    public enum ArithmeticOpKind : ulong
+    public enum ArithmeticKind : ulong
     {
         /// <summary>
         /// The empty identity

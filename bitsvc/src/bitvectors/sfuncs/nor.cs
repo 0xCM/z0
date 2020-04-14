@@ -15,7 +15,7 @@ namespace Z0
     partial class BV
     {
         [Closures(UnsignedInts)]
-        public readonly struct Nor<T> : IBVBinaryOpD<T>, IBitLogicKind<K.Nor>
+        public readonly struct Nor<T> : IBVBinaryOpD<T>, IBitLogicKind<K.Nor,T>
             where T : unmanaged        
         {    
             public static Nor<T> Op => default;

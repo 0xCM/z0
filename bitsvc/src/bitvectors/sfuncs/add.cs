@@ -14,7 +14,7 @@ namespace Z0
     partial class BV
     {
         [Closures(UnsignedInts)]
-        public readonly struct Add<T> : IBVBinaryOpD<T>, IBitLogicKind<K.And>
+        public readonly struct Add<T> : IBVBinaryOpD<T>, IArithmeticKind<K.Add,T>
             where T : unmanaged        
         {    
             public static Add<T> Op => default;

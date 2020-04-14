@@ -14,7 +14,7 @@ namespace Z0
     partial class BV
     {
         [Closures(UnsignedInts)]
-        public readonly struct And<T> : IBVBinaryOpD<T>, IBitLogicKind<K.And>
+        public readonly struct And<T> : IBVBinaryOpD<T>, IBitLogicKind<K.And,T>
             where T : unmanaged        
         {    
             public static And<T> Op => default;

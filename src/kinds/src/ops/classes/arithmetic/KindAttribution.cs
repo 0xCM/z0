@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
         
-    using K = ArithmeticOpKind;    
+    using K = ArithmeticKind;    
     using A = OpKindAttribute;
 
     public sealed class AddAttribute : A { public AddAttribute(string group = null) : base(K.Add, group) {} }
@@ -68,6 +68,4 @@ namespace Z0
     public sealed class MaxAttribute : A { public MaxAttribute(string group = null) : base(K.Max, group) {} }
 
     public sealed class MinAttribute : A { public MinAttribute(string group = null) : base(K.Min, group) {} }
-
-
 }
