@@ -35,6 +35,7 @@ namespace Z0
     /// The type that represents 2
     /// </summary>
     public readonly struct N2 : 
+        INativeNatural,
         INatPrimitive<N2>,
         INatSeq<N2>, 
         INatPrime<N2>, 

@@ -11,6 +11,7 @@ namespace Z0
 
     partial class BC
     {
+        [Closures(Integers)]
         public readonly struct Dot<T> : ISFuncApi<T,T,bit>
             where T : unmanaged        
         {
@@ -18,7 +19,7 @@ namespace Z0
 
             public const string Name = "dot";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) => gbits.dot(a,b);

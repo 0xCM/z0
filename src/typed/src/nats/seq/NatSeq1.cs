@@ -29,7 +29,7 @@ namespace Z0
 
         public ulong NatValue => Value;
 
-        public NatSeq Sequence => Rep; 
+        public INatSeq Sequence => Rep; 
     
         public string format()
             => Value.ToString();

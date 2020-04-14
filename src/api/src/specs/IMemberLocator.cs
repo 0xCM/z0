@@ -12,5 +12,9 @@ namespace Z0
         IEnumerable<ApiMember> Hosted(IApiHost src);
 
         IEnumerable<ApiMember> Located(IApiHost host);        
+
+        IEnumerable<ApiMember> HostedNaturalNumeric(IApiHost src);         
+
+        IEnumerable<ApiMember> LocatedNaturalNumeric(IApiHost src);         
     }
 }

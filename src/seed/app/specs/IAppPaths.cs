@@ -19,6 +19,11 @@ namespace Z0
         FolderPath Root {get;}
 
         /// <summary>
+        /// The test ro0t
+        /// </summary>
+        FolderPath TestRoot {get;}
+
+        /// <summary>
         /// The system-wide root data directory
         /// </summary>
         FolderPath DataRoot {get;}
@@ -51,6 +56,8 @@ namespace Z0
 
         FolderName TestResultFolder => FolderName.Define("results");
 
+        FolderPath TestDataRoot => TestRoot + FolderName.Define("data");
+
         FilePath TestResultPath
             => TestResults + FileName.Define($"{AppId.Format()}", FileExtensions.Csv);
 
@@ -58,7 +65,7 @@ namespace Z0
             => BenchResults + FileName.Define($"{AppId.Format()}", FileExtensions.Csv);
 
         FolderPath TestDataDir(Type test)
-            => StandardOut +  FolderName.Define((test ?? GetType()).Name);
+            => TestDataRoot +  FolderName.Define((test ?? GetType()).Name);
 
         FolderPath TestDataDir<T>()
             => TestDataDir(typeof(T));

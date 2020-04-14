@@ -6,46 +6,42 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+                
     using static Seed;
+    using static ApiServices;
         
     [ApiServiceProvider]
     public partial class BC : IApiService<BC>
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static ByteSwap<T> byteswap<T>(T t = default)
             where T : unmanaged        
-                => ByteSwap<T>.Op;
+                => ApiSvc<ByteSwap<T>>();
 
         [MethodImpl(Inline)]
         public static Bfly<N,T> bfly<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged        
-                => Bfly<N,T>.Op;
+                => ApiSvc<Bfly<N,T>>();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static Between<T> between<T>(T t = default)
             where T : unmanaged        
-                => Between<T>.Op;
+                => ApiSvc<Between<T>>();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static BitSlice<T> bitslice<T>(T t = default)
             where T : unmanaged        
-                => BitSlice<T>.Op;
+                => ApiSvc<BitSlice<T>>();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static BitSlice<T> bitslice2<T>(T t = default)
-            where T : unmanaged        
-                => ApiServices.Service<BitSlice<T>>();
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static PopCount<T> pop<T>(T t = default)
             where T : unmanaged        
-                => PopCount<T>.Op;
+                => ApiSvc<PopCount<T>>();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static Dot<T> dot<T>(T t = default)
             where T : unmanaged        
-                => Dot<T>.Op;
+                => ApiSvc<Dot<T>>();
     }
 }

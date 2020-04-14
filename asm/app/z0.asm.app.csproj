@@ -21,6 +21,7 @@
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(BitSvc)" />
     <ProjectReference Include="$(Logix)" />
 
   </ItemGroup>

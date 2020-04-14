@@ -7,18 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
+    using static Seed;
+
     partial class BC
     {
-        public readonly struct BitSlice<T> : ISImm8x2UnaryOpApi<T>
+        [Closures(Numeric16x32x64u)]
+        public readonly struct ByteSwap<T> : ISUnaryOpApi<T>
             where T : unmanaged        
         {
-            public static BitSlice<T> Op => default;
+            public static ByteSwap<T> Op => default;
 
-            public const string Name = "bitslice";
+            public const string Name = "byteswap";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
-            public T Invoke(T a, byte k1, byte k2) => gbits.bitslice(a,k1,k2);
+            [MethodImpl(Inline)]
+            public T Invoke(T a) => gbits.byteswap(a);
         }
     }
 }

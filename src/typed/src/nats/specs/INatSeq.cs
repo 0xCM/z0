@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a type-level sequence of typenats
     /// </summary>
-    public interface NatSeq : ITypeNat
+    public interface INatSeq : ITypeNat
     {
 
     }
@@ -18,7 +18,7 @@ namespace Z0
     /// Characterizes a reified natural sequence
     /// </summary>
     /// <typeparam name="S">The reification type</typeparam>
-    public interface INatSeq<S> : ITypeNat<S>, NatSeq
+    public interface INatSeq<S> : ITypeNat<S>, INatSeq
         where S : unmanaged, INatSeq<S>
     {
 

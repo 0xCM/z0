@@ -32,7 +32,7 @@ namespace Z0
             internal UnaryPredicate(Z0.UnaryPredicate<T> f, string name)            
             {
                 this.F = f;
-                this.Id = Identify.sFunc<T>(name);
+                this.Id = Identify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

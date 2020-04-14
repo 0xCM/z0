@@ -27,7 +27,7 @@ namespace Z0
         public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq Sequence
+        public INatSeq Sequence
             => Rep; 
 
         public string format()

@@ -32,7 +32,7 @@ namespace Z0
         public ulong NatValue 
             => Value;
 
-        public NatSeq Sequence
+        public INatSeq Sequence
             => Rep; 
 
         public string format()

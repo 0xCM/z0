@@ -13,20 +13,22 @@ namespace Z0
         {
             var data = root + FolderName.Define("data");
             var benchmarks = root + FolderName.Define("bench");
-            var test = root + FolderName.Define("test");
-            var stdout = test + FolderName.Define("stdout");
-            var stderr = test + FolderName.Define("stderr");
-            var testResults = test + FolderName.Define("results");            
-            return new AppPathProvider(id, root, data, stdout, stderr, testResults, benchmarks);
+            var testroot = root + FolderName.Define("test");
+            var stdout = testroot + FolderName.Define("stdout");
+            var stderr = testroot + FolderName.Define("stderr");
+            var testResults = testroot + FolderName.Define("results");            
+            return new AppPathProvider(id, root, data, stdout, stderr, testroot, testResults, benchmarks);
         }
 
-        AppPathProvider(PartId id, FolderPath root, FolderPath data, FolderPath stdout, FolderPath stderr, FolderPath testResults, FolderPath benchmarks)
+        AppPathProvider(PartId id, FolderPath root, FolderPath data, FolderPath stdout, FolderPath stderr, 
+            FolderPath testroot, FolderPath testResults, FolderPath benchmarks)
         {
             this.AppId = id;
             this.Root = root;
             this.DataRoot = data;
-            this.StandardOut = stdout;
+            this.StandardOut = stdout;            
             this.StandardError = stderr;
+            this.TestRoot = testroot;
             this.TestResults = testResults;
             this.BenchResults = benchmarks;
         }
@@ -41,6 +43,8 @@ namespace Z0
 
         public FolderPath StandardError {get;}
 
+        public FolderPath TestRoot {get;}
+        
         public FolderPath TestResults {get;}
 
         public FolderPath BenchResults {get;}
@@ -55,6 +59,7 @@ namespace Z0
             dst.AppendLine(string.Concat(nameof(DataRoot), sep, DataRoot));
             dst.AppendLine(string.Concat(nameof(StandardOut), sep, StandardOut));
             dst.AppendLine(string.Concat(nameof(StandardError), sep, StandardError));
+            dst.AppendLine(string.Concat(nameof(TestRoot), sep, TestRoot));
             dst.AppendLine(string.Concat(nameof(TestResults), sep, TestResults));
             dst.AppendLine(string.Concat(nameof(BenchResults), sep, BenchResults));
             return dst.ToString();

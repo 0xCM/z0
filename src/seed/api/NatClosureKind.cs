@@ -21,7 +21,7 @@ namespace Z0
         Range = 2,
 
         /// <summary>
-        /// Indicates closure is specified for an inclusive range of natural powers of 2
+        /// Indicates closure is specified for an inclusive power-of-two range specified by a min/max pair
         /// </summary>
         Powers2 = 3,
     }

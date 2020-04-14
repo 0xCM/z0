@@ -9,7 +9,12 @@ namespace Z0
 
     using static Seed;    
 
-    public readonly struct N36 : INatSeq<N36>, INatEven<N36>, INatDivisible<N36,N6>, INatDivisible<N36,N12>
+    public readonly struct N36 : 
+        INativeNatural, 
+        INatSeq<N36>, 
+        INatEven<N36>, 
+        INatDivisible<N36,N6>, 
+        INatDivisible<N36,N12>
     {
         public const ulong Value = 36;
 

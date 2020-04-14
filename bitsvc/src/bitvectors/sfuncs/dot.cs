@@ -10,23 +10,25 @@ namespace Z0
     using static Seed; 
     using static Memories;
 
-    public static partial class BVTypes
+    using K = Kinds;
+
+    partial class BV
     {
-        public readonly struct Nand<T> : IBVBinaryOpD<T>
+        [Closures(UnsignedInts)]
+        public readonly struct Dot<T> : IBVBinaryPredD<T>
             where T : unmanaged        
         {    
-            public static Nand<T> Op => default;
+            public static Dot<T> Op => default;
 
-            public const string Name = "bvnand";
+            public const string Name = "bvdot";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
-
-            [MethodImpl(Inline)]
-            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.nand(a,b);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.nand(a,b);
+            public readonly bit Invoke(BitVector<T> a, BitVector<T> b) => BitVector.dot(a,b);
 
+            [MethodImpl(Inline)]
+            public bit InvokeScalar(T a, T b) => gbits.dot(a,b);
         }
     }
 }

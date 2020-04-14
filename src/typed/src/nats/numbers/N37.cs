@@ -9,12 +9,11 @@ namespace Z0
 
     using static Seed;    
 
-    public readonly struct N37 : INatSeq<N37>
+    public readonly struct N37 : INativeNatural, INatSeq<N37>
     {
         public const ulong Value = 37;
 
         public static N37 Rep => default;
-
 
         [MethodImpl(Inline)]
         public static implicit operator int(N37 src) => 37;

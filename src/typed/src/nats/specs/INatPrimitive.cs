@@ -6,6 +6,11 @@ namespace Z0
 {
     using System;
 
+    internal interface INativeNatural : ITypeNat
+    {
+
+    }
+
     /// <summary>
     /// Characterizes an atom of the type natural grammar
     /// </summary>

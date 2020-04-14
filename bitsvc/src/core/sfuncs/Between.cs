@@ -11,17 +11,18 @@ namespace Z0
 
     partial class BC
     {
-        public readonly struct ByteSwap<T> : ISUnaryOpApi<T>
+        [Closures(AllNumeric)]
+        public readonly struct Between<T> : ISImm8x2UnaryOpApi<T>
             where T : unmanaged        
         {
-            public static ByteSwap<T> Op => default;
+            public static Between<T> Op => default;
 
-            public const string Name = "byteswap";
+            public const string Name = "between";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a) => gbits.byteswap(a);
+            public T Invoke(T a, byte k1, byte k2) => gbits.between(a,k1,k2);
         }
     }
 }

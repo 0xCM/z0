@@ -10,54 +10,53 @@ namespace Z0.Asm.Check
 
     using System.Reflection;
     using System.Linq;
-
-
     
     class App : ApiShell<App,IAsmContext>
     {
         static IPart[] Dependencies
             => new IPart[]{
-                P.Api.Resolved,
-                P.AsmModels.Resolved, 
+                P.GMath.Resolved, 
                 P.BitCore.Resolved,
                 P.BitFields.Resolved,
                 P.BitGrids.Resolved,
                 P.BitPack.Resolved,
-                P.BitSpan.Resolved,
+                P.BitSpan.Resolved,                
                 P.BitVectors.Resolved,
+                P.BitSvc.Resolved,
                 P.Blocks.Resolved,
-                P.Cast.Resolved,
-                P.Checks.Resolved,
-                P.Cil.Resolved,
-                P.Custom.Resolved,
-                P.Dynamic.Resolved,
-                P.Enums.Resolved,
-                P.Fixed.Resolved, 
-                P.FVec.Resolved,
-                P.GMath.Resolved, 
-                P.Graphs.Resolved,
-                P.Identify.Resolved,
-                P.Intrinsics.Resolved,
-                P.Logix.Resolved,
-                P.Kinds.Resolved,                
-                P.Math.Resolved,
-                P.MathServices.Resolved, 
-                P.Matrix.Resolved,
-                P.Memories.Resolved,                 
-                P.Numeric.Resolved,
-                P.Permute.Resolved,
-                P.Polyrand.Resolved,
-                P.Seed.Resolved,
-                P.SFuncs.Resolved,
-                P.Symbolic.Resolved,
-                P.Time.Resolved,
-                P.Textual.Resolved,
-                P.Tuples.Resolved,
-                P.Typed.Resolved,
-                P.Validity.Resolved,
-                P.VBits.Resolved,
-                P.Vectors.Resolved,
-                P.VSvc.Resolved
+                // P.Api.Resolved,
+                // P.AsmCore.Resolved, 
+                // P.Cast.Resolved,
+                // P.Checks.Resolved,
+                // P.Cil.Resolved,
+                // P.Custom.Resolved,
+                // P.Dynamic.Resolved,
+                // P.Enums.Resolved,
+                // P.Fixed.Resolved, 
+                // P.FVec.Resolved,
+                // P.Graphs.Resolved,
+                // P.Identify.Resolved,
+                // P.Intrinsics.Resolved,
+                // P.Logix.Resolved,
+                // P.Kinds.Resolved,                
+                // P.Math.Resolved,
+                // P.MathServices.Resolved, 
+                // P.Matrix.Resolved,
+                // P.Memories.Resolved,                 
+                // P.Numeric.Resolved,
+                // P.Permute.Resolved,
+                // P.Polyrand.Resolved,
+                // P.Seed.Resolved,
+                // P.SFuncs.Resolved,
+                // P.Symbolic.Resolved,
+                // P.Time.Resolved,
+                // P.Textual.Resolved,
+                // P.Tuples.Resolved,
+                // P.Typed.Resolved,
+                // P.Validity.Resolved,
+                // P.VBits.Resolved,
+                // P.Vectors.Resolved,
+                // P.VSvc.Resolved
                 };
 
         static IAppSettings LoadSettings()
@@ -80,7 +79,6 @@ namespace Z0.Asm.Check
             return AsmContext.Create(resolved, settings, AppMessages.exchange(), random, format, formatter, decoder, factory);
         }
         
-
         public App()
             : base(CreateContext())
         {

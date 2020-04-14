@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
-    public static partial class BVTypes
+    partial class BV
     {
+        [Closures(UnsignedInts)]
         public readonly struct Width<T> : ISFuncApi<BitVector<T>,int>
             where T : unmanaged        
         {    
@@ -18,7 +19,7 @@ namespace Z0
 
             public const string Name = "bvwidth";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly int Invoke(BitVector<T> a) => BitVector.width(a);

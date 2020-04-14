@@ -8,10 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed; 
-    using static Memories;
 
-    public static partial class BVTypes
+    using K = Kinds;
+
+    partial class BV
     {
+        [Closures(UnsignedInts)]
         public readonly struct Gather<T> : IBVBinaryOp<T>
             where T : unmanaged        
         {    
@@ -19,7 +21,7 @@ namespace Z0
 
             public const string Name = "bvgather";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.gather(a,b);

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;    
 
-    public readonly struct N11 : ITypeNatF<N11>
+    public readonly struct N11 : INativeNatural, ITypeNatF<N11>
     {
         public const ulong Value = 11;
 

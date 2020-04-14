@@ -13,7 +13,6 @@ namespace Z0
     {
         public const ulong Value = 19;
 
-
         [MethodImpl(Inline)]
         public static implicit operator int(N19 src) => 19;
 

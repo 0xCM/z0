@@ -12,11 +12,18 @@ namespace Z0
     partial class Reflective
     {
         /// <summary>
-        /// Returns true if the method has unspecified generic parameters, false otherwise
+        /// Returns true if the method accepts generic parameters, false otherwise
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsOpenGeneric(this MethodInfo m)
             => m.ContainsGenericParameters;
+
+        /// <summary>
+        /// Returns true if the method has a specified count of open generic parameters, false otherwise
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsOpenGeneric(this MethodInfo m, int count)
+            => m.ContainsGenericParameters && m.GenericParameters().Count() == count;
 
         /// <summary>
         /// Returns true if the method has unspecified generic parameters, false otherwise

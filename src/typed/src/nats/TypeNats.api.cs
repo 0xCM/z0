@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Seed;
-
-    public static partial class TypeNats
+    using static Seed;    
+    
+    public partial class TypeNats
     {        
         public static void require<N>(ulong src)
             where N : unmanaged, ITypeNat
@@ -45,17 +45,11 @@ namespace Z0
         /// </summary>
         /// <param name="digits">The source digits</param>
         [MethodImpl(Inline)]       
-        public static NatSeq reflect(ulong value)        
+        public static INatSeq reflect(ulong value)        
             => seq(digits(value));        
-
 
         [MethodImpl(Inline)]
         internal static int bitsize<T>()            
             => Unsafe.SizeOf<T>()*8;
-
-        [MethodImpl(Inline)]
-        internal static int size<T>()
-            => Unsafe.SizeOf<T>();
-
     }
 }

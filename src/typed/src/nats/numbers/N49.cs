@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;    
 
-    public readonly struct N49 : INatSeq<N49>
+    public readonly struct N49 : INativeNatural, INatSeq<N49>
     {
         public const ulong Value = 49;
 
@@ -19,9 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator int(N49 src) => 49;
-
-        
-
+    
         public ulong NatValue => Value;
 
         public override string ToString() 

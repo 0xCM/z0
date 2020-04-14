@@ -49,15 +49,15 @@ namespace Z0
             
         public static byte[] Digits => TypeNats.digits(Value);
 
-        public static NatSeq Seq => TypeNats.seq(Digits);
+        public static INatSeq Seq => TypeNats.seq(Digits);
 
-        public NatSeq Sequence
+        public INatSeq Sequence
             => Seq;
 
         public ulong NatValue 
             => Value;
 
-        public NatSeq natseq()
+        public INatSeq natseq()
             => Seq;
 
         public E Exponent 
@@ -78,7 +78,7 @@ namespace Z0
         public bool Equals(Pow<B, E> other)
             => Value == other.NatValue;
 
-        public bool Equals(NatSeq other)
+        public bool Equals(INatSeq other)
             => Value == other.NatValue;
     }
 }

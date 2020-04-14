@@ -14,6 +14,29 @@ namespace Z0
 
     class ApiCollector : IApiCollector
     {        
+        public static IEnumerable<NaturalNumericClosure> NaturalNumericClosures(MethodInfo src)  
+                => from natural in NaturalClosures(src)
+                from numeric in NumericClosures(src)
+                    select NaturalNumericClosure.Define(src,natural,numeric);
+
+        public static NumericKind[] NumericClosureKinds(MethodInfo m)
+                => (from tag in m.Tag<ClosuresAttribute>()
+                where tag.Kind == TypeClosureKind.Numeric
+                let spec = (NumericKind)tag.Spec
+                select spec.DistinctKinds().ToArray()).ValueOrElse(() => Arrays.empty<NumericKind>());              
+
+        public static IEnumerable<Type> NumericClosures(MethodInfo m)
+                  => from c in NumericClosureKinds(m)
+                  let t = c.SystemType()
+                  where t != typeof(void)
+                  select t;
+
+        public static Type[] NaturalClosures(MethodInfo m)
+                => (from tag in m.Tag<ClosuresAttribute>()
+                where tag.Kind == TypeClosureKind.Natural
+                let spec = (NatClosureKind)tag.Spec
+                select NativeNaturals.FindTypes(spec).ToArray()).ValueOrElse(() => Arrays.empty<Type>());   
+
         readonly IMultiDiviner Diviner;
 
         [MethodImpl(Inline)]
@@ -38,7 +61,7 @@ namespace Z0
                         
         public IEnumerable<GenericApiOp> CollectGeneric(IApiHost src)
              => from m in Tagged(src).OpenGeneric()
-                let closures = MemberLocator.NumericClosures(m)
+                let closures = NumericClosureKinds(m)
                 where closures.Length != 0
                 select GenericApiOp.Define(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 

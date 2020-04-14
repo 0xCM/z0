@@ -15,18 +15,6 @@ namespace Z0
     public static class ApiServices
     {
         /// <summary>
-        /// Discovers the types declared within an enclosure that define serviced api operations
-        /// </summary>
-        public static IEnumerable<Type> HostTypes(Type enclosure)
-            => ApiService.Hosts(enclosure);
-
-        /// <summary>
-        /// Discovers the methods defined by a provider that intantiate reified services
-        /// </summary>
-        public static IEnumerable<MethodInfo> FactoryMethods(Type provider)
-            => ApiService.Factories(provider);
-
-        /// <summary>
         /// Searches an assembly for types that are attributed with the provider attribute
         /// </summary>
         /// <param name="src">The assembly to search</param>
@@ -52,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="S">The host type</typeparam>
         [MethodImpl(Inline)]
-        public static S Service<S>()
+        public static S ApiSvc<S>()
             where S : unmanaged, ISFuncApi    
                 => default(S);        
     }

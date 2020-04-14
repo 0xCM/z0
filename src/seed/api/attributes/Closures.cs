@@ -56,4 +56,27 @@ namespace Z0
 
         public ulong[] Values {get;}
     }
+
+    /// <summary>
+    /// Applies to a generic type/method to advertise the types over which type parameter(s) may be closed
+    /// </summary>
+    public class NumericClosuresAttribute : ClosuresAttribute
+    {
+        public NumericClosuresAttribute(NumericKind nk)
+            : base(nk)
+        {
+            
+        }
+
+        public NumericKind NumericPrimitive => (NumericKind)Spec;
+    }    
+
+    public class NaturalsAttribute : ClosuresAttribute
+    {
+        public NaturalsAttribute(params ulong[] values)
+            : base(NatClosureKind.Individuals, values)
+        {
+
+        }
+    }
 }

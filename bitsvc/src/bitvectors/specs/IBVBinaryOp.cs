@@ -6,10 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    public static partial class BVTypes
+    public interface IBVBinaryOp<T> : ISBinaryOpApi<BitVector<T>>
+        where T : unmanaged
     {
 
     }
+
+    public interface IBVBinaryOpD<T> : IBVBinaryOp<T>
+        where T : unmanaged
+    {
+        T InvokeScalar(T a, T b);
+    }
+
 }

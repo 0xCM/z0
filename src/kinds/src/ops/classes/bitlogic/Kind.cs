@@ -12,6 +12,13 @@ namespace Z0
     {
 
     }    
+
+    public interface IBitLogicKind<K> : IBitLogicKind, IOpKind<K,BitLogicKind>
+        where K : unmanaged, IBitLogicKind
+    {
+        OpKindId IOpKind.KindId => default(K).KindId;
+        
+    }
     
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
@@ -222,7 +229,6 @@ namespace Z0
 
         Not = Id.Not,
 
-        Select = Id.Select,
- 
+        Select = Id.Select, 
     }      
 }

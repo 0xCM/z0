@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
-
+    using static Seed; 
+    
     partial class MathSvcTypes
     {
         [Closures(NumericKind.All)]
@@ -19,7 +19,7 @@ namespace Z0
 
             public static Parse<T> Op => default;
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(string a) => Numeric.parse<T>(a).ValueOrDefault();

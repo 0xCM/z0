@@ -13,12 +13,13 @@ namespace Z0
     /// The singleton type representative for 1
     /// </summary>
     public readonly struct N1 : 
+        INativeNatural,
         INatPrimitive<N1>,         
         INatPrior<N1,N0>, 
         INatSeq<N1>, 
         INatPow<N1,N1,N0>, 
         INatOdd<N1>, 
-        INatPow2<N0>         
+        INatPow2<N0>
     {
         public const ulong Value = 1;
 

@@ -6,12 +6,69 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Concurrent;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Seed;
     using NT = NatTypes;
 
     partial class TypeNats
     {
+        /// <summary>
+        /// For a natural number n <= 9, returns the type of the corresponding natural primitive. If n > 9, returns the zero type
+        /// </summary>
+        /// <param name="n">The number to evaluate</param>
+        [MethodImpl(Inline)]   
+        public static Type primitive(byte n)
+        { 
+            if(n == 1)
+                return typeof(N1);
+            else if(n == 2)
+                return typeof(N2);
+            else if(n == 3)
+                return typeof(N3);
+            else if(n == 4)
+                return typeof(N4);
+            else if(n == 5)
+                return typeof(N5);
+            else if(n == 6)
+                return typeof(N6);
+            else if(n == 7)
+                return typeof(N7);
+            else if(n == 8)
+                return typeof(N8);
+            else if(n == 9)
+                return typeof(N9);
+            else
+                return typeof(N0);
+        }
+
+        /// <summary>
+        /// Constructs an array of types that defines a sequence of natural primitives
+        /// </summary>
+        /// <param name="digits">The digit values where each value is in the range 0..9</param>
+        public static Type[] primitives(byte[] digits)
+        {
+            var types = new Type[digits.Length];
+            ref var tHead = ref types[0];
+            ref var dHead = ref digits[0];
+            for(var i=0; i< digits.Length; i++)
+                Unsafe.Add(ref tHead, i) = primitive(Unsafe.Add(ref dHead, i));
+            return types;            
+        }
+
+        /// <summary>
+        /// Creates a reflected natural sequence from a sequence of primitive values
+        /// </summary>
+        /// <param name="digits">The source digits</param>
+        public static INatSeq seq(byte[] digits)
+        {
+            var dtypes = primitives(digits);
+            var nattype = NatTypes.sequence((uint)dtypes.Length).MakeGenericType(dtypes);
+            return (INatSeq)Activator.CreateInstance(nattype);
+        }
+
         /// <summary>
         /// Creates a two-term natural sequence {D0, D1} from natural primative types D0 and D1
         /// that represents the value k = d0*10 + d1
@@ -86,16 +143,6 @@ namespace Z0
             where D4 : unmanaged, INatPrimitive<D4>
                 => NatSeq<D0,D1,D2,D3,D4>.Rep;
 
-        /// <summary>
-        /// Creates a reflected natural sequence from a sequence of primitive values
-        /// </summary>
-        /// <param name="digits">The source digits</param>
-        public static NatSeq seq(byte[] digits)
-        {
-            var dtypes = NatTypes.primitives(digits);
-            var nattype = NatTypes.sequence((uint)dtypes.Length).MakeGenericType(dtypes);
-            return (NatSeq)Activator.CreateInstance(nattype);
-        }
      
         /// <summary>
         /// Creates a reflected two-term natural sequence {d0, d1} from three primitive values d0 and d1
@@ -103,9 +150,8 @@ namespace Z0
         /// <param name="d0">The value of the leading term</param>
         /// <param name="d1">The value of the second term</param>
         [MethodImpl(Inline)]   
-        public static NatSeq seq(byte d0, byte d1)
-            => (NatSeq) Activator.CreateInstance(close(NT.sequence(2), 
-                    NT.primitive(d0), NT.primitive(d1)
+        public static INatSeq seq(byte d0, byte d1)
+            => (INatSeq) Activator.CreateInstance(close(NT.sequence(2), primitive(d0), primitive(d1)
                     ));                    
 
         /// <summary>
@@ -115,10 +161,8 @@ namespace Z0
         /// <param name="d1">The value of the second term</param>
         /// <param name="d2">The value of the third term</param>
         [MethodImpl(Inline)]   
-        public static NatSeq seq(byte d0, byte d1, byte d2)
-            => (NatSeq) Activator.CreateInstance(close(NT.sequence(3), 
-                    NT.primitive(d0), NT.primitive(d1), NT.primitive(d2)
-                    ));                    
+        public static INatSeq seq(byte d0, byte d1, byte d2)
+            => (INatSeq) Activator.CreateInstance(close(NT.sequence(3), primitive(d0), primitive(d1), primitive(d2)));                    
 
         /// <summary>
         /// Creates a reflected four-term natural sequence from three primitive values
@@ -128,10 +172,8 @@ namespace Z0
         /// <param name="d2">The value of the third term</param>
         /// <param name="d3">The value of the fourth term</param>
         [MethodImpl(Inline)]   
-        public static NatSeq seq(byte d0, byte d1, byte d2, byte d3)
-            => (NatSeq) Activator.CreateInstance(close(NT.sequence(4), 
-                    NT.primitive(d0), NT.primitive(d1), NT.primitive(d2), NT.primitive(d3)
-                    ));                    
+        public static INatSeq seq(byte d0, byte d1, byte d2, byte d3)
+            => (INatSeq) Activator.CreateInstance(close(NT.sequence(4), primitive(d0), primitive(d1), primitive(d2), primitive(d3)));                    
 
         [MethodImpl(Inline)]   
         static Type close(Type t, params Type[] args)

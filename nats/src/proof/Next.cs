@@ -34,24 +34,24 @@ namespace Z0
 
         public static byte[] Digits  => TypeNats.digits(Value);
 
-        public static NatSeq Seq => TypeNats.seq(Digits);
+        public static INatSeq Seq => TypeNats.seq(Digits);
 
         public ITypeNat rep 
             => Rep;
 
-        public NatSeq Sequence
+        public INatSeq Sequence
             => Seq;
 
         public ulong NatValue 
             => Value;
 
-        public NatSeq natseq()
+        public INatSeq natseq()
             => Seq;
 
         public bool Equals(Next<K> rhs)
             => Value == rhs.NatValue;
 
-        public bool Equals(NatSeq rhs)
+        public bool Equals(INatSeq rhs)
             => Value == rhs.NatValue;
 
         public string format()

@@ -7,18 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
-    public static partial class BVTypes
+    using K = Kinds;
+
+    partial class BV
     {
-        public readonly struct Or<T> : IBVBinaryOpD<T>
+        public readonly struct Or<T> : IBVBinaryOpD<T>, IBitLogicKind<K.Or>
             where T : unmanaged        
         {    
             public static Or<T> Op => default;
 
             public const string Name = "bvor";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.or(a,b);

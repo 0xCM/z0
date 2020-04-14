@@ -18,7 +18,6 @@ namespace Z0
         /// The number's value
         /// </summary>
         ulong NatValue {get;}
-
     }
 
     /// <summary>
@@ -40,4 +39,6 @@ namespace Z0
     {
 
     }
+
+
 }

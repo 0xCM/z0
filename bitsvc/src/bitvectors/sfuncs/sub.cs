@@ -8,24 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed; 
-    using static Memories;
 
-    public static partial class BVTypes
+    partial class BV
     {
-        public readonly struct And<T> : IBVBinaryOpD<T>
+        [Closures(UnsignedInts)]
+        public readonly struct Sub<T> : IBVBinaryOpD<T>
             where T : unmanaged        
         {    
-            public static And<T> Op => default;
+            public static Sub<T> Op => default;
 
-            public const string Name = "bvand";
+            public const string Name = "bvsub";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
-
-            [MethodImpl(Inline)]
-            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.and(a,b);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.and(a,b);
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.sub(a,b);
+
+            [MethodImpl(Inline)]
+            public T InvokeScalar(T a, T b) => gmath.sub(a,b);
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Z0
     public readonly struct N0 : 
         INatPrimitive<N0>, 
         INatSeq<N0>, 
-        INatEven<N0> 
+        INatEven<N0>,
+        INativeNatural
     {
         public const ulong Value = 0;
 

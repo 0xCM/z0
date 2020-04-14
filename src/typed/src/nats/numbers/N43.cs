@@ -9,13 +9,12 @@ namespace Z0
 
     using static Seed;    
 
-    public readonly struct N43 : INatSeq<N43,N4,N3>
+    public readonly struct N43 : INativeNatural, INatSeq<N43,N4,N3>
     {
         public const ulong Value = 43;
 
         public static N43 Rep => default;
                 
-
         [MethodImpl(Inline)]
         public static implicit operator int(N43 src) => 43;
 

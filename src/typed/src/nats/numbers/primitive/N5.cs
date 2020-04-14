@@ -13,6 +13,7 @@ namespace Z0
     /// The singleton type representative for 5
     /// </summary>
     public readonly struct N5 : 
+        INativeNatural,
         INatPrimitive<N5>, 
         INatPrior<N5,N4>, 
         INatSeq<N5>,

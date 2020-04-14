@@ -8,18 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed; 
-    using static Memories;
 
-    public static partial class BVTypes
+    using K = Kinds;
+
+    partial class BV
     {
-        public readonly struct Add<T> : IBVBinaryOpD<T>
+        [Closures(UnsignedInts)]
+        public readonly struct Add<T> : IBVBinaryOpD<T>, IBitLogicKind<K.And>
             where T : unmanaged        
         {    
             public static Add<T> Op => default;
 
             public const string Name = "bvadd";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.add(a,b);

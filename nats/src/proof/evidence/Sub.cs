@@ -28,7 +28,7 @@ namespace Z0
         public static byte[] Digits 
             => TypeNats.digits(Value);
 
-        public static NatSeq Seq
+        public static INatSeq Seq
             => TypeNats.seq(Digits);
 
         ulong ITypeNat.NatValue 
@@ -37,7 +37,7 @@ namespace Z0
         public bool Equals(Pow<K1, K2> other)
             => Value == other.NatValue;
 
-        public bool Equals(NatSeq other)
+        public bool Equals(INatSeq other)
             => Value == other.NatValue;
 
         public override string ToString() 

@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
-        public static IEnumerable<NatSeq> between(ulong min, ulong max)
+        public static IEnumerable<INatSeq> between(ulong min, ulong max)
         {
             for(var i = min; i<= max; i++)
                 yield return reflect(i);

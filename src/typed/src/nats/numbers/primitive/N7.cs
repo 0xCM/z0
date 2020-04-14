@@ -13,6 +13,7 @@ namespace Z0
     /// The singleton type representative for 7
     /// </summary>
     public readonly struct N7 : 
+        INativeNatural,
         INatPrimitive<N7>, 
         INatPrior<N7,N6>,
         INatSeq<N7>,

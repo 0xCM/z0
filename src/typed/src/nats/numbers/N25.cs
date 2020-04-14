@@ -9,7 +9,7 @@ namespace Z0
     
     using static Seed;    
 
-    public readonly struct N25 : INatSeq<N25>, INatDivisible<N25,N5>
+    public readonly struct N25 : INativeNatural, INatSeq<N25>, INatDivisible<N25,N5>
     {
         public const ulong Value = 25;
 

@@ -18,7 +18,7 @@ namespace Z0
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
-                => Identify.sFunc<K>($"{opname}_baseline");
+                => Identify.sfunc<K>($"{opname}_baseline");
 
         /// <summary>
         /// Produces the name of the test case for the specified function

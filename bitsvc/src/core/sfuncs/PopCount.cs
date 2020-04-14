@@ -11,6 +11,7 @@ namespace Z0
 
     partial class BC
     {
+        [Closures(Integers)]
         public readonly struct PopCount<T> : ISFuncApi<T,uint>
             where T : unmanaged        
         {
@@ -18,7 +19,7 @@ namespace Z0
 
             public const string Name = "popcount";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(T a) => gbits.pop(a);

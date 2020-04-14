@@ -10,6 +10,7 @@ namespace Z0
     using static Seed;    
 
     public readonly struct N2048 : 
+        INativeNatural,
         INatSeq<N2048>, 
         INatPow<N2048,N2,N11>, 
         INatPow2<N11>,

@@ -18,4 +18,12 @@ namespace Z0
         E ITypedLiteral<E>.Class 
             => default;
     }
+
+    public interface IOpKind<K,E> : IOpKind<E>
+        where E : unmanaged, Enum
+        where K : unmanaged, IOpKind<E>
+    {
+        K Kind => default;     
+    }
+
 }

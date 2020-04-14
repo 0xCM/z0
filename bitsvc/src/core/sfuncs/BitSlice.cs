@@ -8,20 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Seed;
-
+    
     partial class BC
     {
-        public readonly struct Between<T> : ISImm8x2UnaryOpApi<T>
+        [Closures(Integers)]
+        public readonly struct BitSlice<T> : ISImm8x2UnaryOpApi<T>
             where T : unmanaged        
         {
-            public static Between<T> Op => default;
+            public static BitSlice<T> Op => default;
 
-            public const string Name = "between";
+            public const string Name = "bitslice";
 
-            public OpIdentity Id => Identify.sFunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
-            [MethodImpl(Inline)]
-            public T Invoke(T a, byte k1, byte k2) => gbits.between(a,k1,k2);
+            public T Invoke(T a, byte k1, byte k2) => gbits.bitslice(a,k1,k2);
         }
     }
 }
