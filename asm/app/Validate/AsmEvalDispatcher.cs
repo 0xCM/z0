@@ -10,7 +10,8 @@ namespace Z0.Asm.Check
     using C = OpClass;
     using K = Kinds;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     class AsmEvalDispatcher : IAsmEvalDispatcher
     {        

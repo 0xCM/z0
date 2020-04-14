@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public class t_vlo : t_vinx<t_vlo>
     {   

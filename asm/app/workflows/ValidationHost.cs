@@ -9,7 +9,8 @@ namespace Z0.Asm.Check
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     using static AsmEvents;
     using static AsmServiceMessages;
 

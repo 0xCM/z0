@@ -8,7 +8,8 @@ namespace Z0.Asm.Check
     using System.Runtime.CompilerServices;
 
     using static time;
-    using static Core;    
+    using static Seed;
+    using static Memories;
     using static BufferSeqId;
 
     class AsmExecutor : IAsmExecutor

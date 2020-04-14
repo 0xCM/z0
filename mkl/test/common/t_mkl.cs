@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Seed;
     
     public abstract class t_mkl<U> : UnitTest<U>
         where U : t_mkl<U>

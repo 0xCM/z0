@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Core;
-    using static Gone2;
+    using static Seed;
+    using static Memories;
 
     public class t_intrinsic_bench : t_vinx<t_intrinsic_bench>
     {        

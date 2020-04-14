@@ -1,0 +1,44 @@
+<Project>
+
+  <PropertyGroup>
+    <Seed>$(Src)seed/z0.seed.csproj</Seed>
+    <Core>$(Src)core/z0.core.csproj</Core>  
+  </PropertyGroup>
+
+  <PropertyGroup>    
+    <Agency>$(Src)agency/z0.agency.csproj</Agency>
+    <Api>$(Src)api/z0.api.csproj</Api>
+    <BitCore>$(Src)bitcore/z0.bitcore.csproj</BitCore>
+    <Blocks>$(Src)blocks/src/z0.blocks.csproj</Blocks>
+    <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
+    <Cast>$(Src)cast/z0.cast.csproj</Cast>
+    <Checks>$(Src)checks/z0.checks.csproj</Checks>
+    <Code>$(Src)code/z0.code.csproj</Code>
+    <Collective>$(Src)collective/z0.collective.csproj</Collective>
+    <Contained>$(Src)contained/z0.contained.csproj</Contained>
+    <Custom>$(Src)custom/z0.custom.csproj</Custom>
+    <Reports>$(Src)reports/z0.reports.csproj</Reports>
+    <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>
+    <Flow>$(Src)flow/z0.flow.csproj</Flow>
+    <Enums>$(Src)enums/z0.enums.csproj</Enums>
+    <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
+    <Identify>$(Src)identify/z0.identify.csproj</Identify>
+    <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>
+    <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
+    <Memories>$(Src)memories/z0.memories.csproj</Memories>
+    <Messages>$(Src)messages/z0.messages.csproj</Messages>
+    <Numeric>$(Src)numeric/z0.numeric.csproj</Numeric>
+    <Reflective>$(Src)reflective/z0.reflective.csproj</Reflective>
+    <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
+    <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
+    <Textual>$(Src)textual/z0.textual.csproj</Textual>
+    <Time>$(Src)time/z0.time.csproj</Time>
+    <Tuples>$(Src)tuples/z0.tuples.csproj</Tuples>
+    <Typed>$(Src)typed/z0.typed.csproj</Typed>
+    <Vectors>$(Src)vectors/z0.vectors.csproj</Vectors>
+
+    <Math>$(Src)math/z0.math.csproj</Math>
+
+  </PropertyGroup>
+
+</Project>

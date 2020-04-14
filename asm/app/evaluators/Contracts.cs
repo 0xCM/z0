@@ -7,7 +7,8 @@ namespace Z0.Asm.Check
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     using C = OpClass;
 
     interface IAsmEvalDispatcher : IService

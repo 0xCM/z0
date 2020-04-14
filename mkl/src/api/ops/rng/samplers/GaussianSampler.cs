@@ -6,7 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     sealed class GaussianSampler<T> : Sampler<T, GaussianSpec<T>>
         where T : unmanaged

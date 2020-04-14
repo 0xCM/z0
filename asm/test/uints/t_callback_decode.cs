@@ -9,7 +9,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Gone2;
 
     public class t_callaback_decode : UnitTest<t_callaback_decode>
     {

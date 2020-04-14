@@ -7,7 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
 	
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     sealed class ExponentialSampler<T> : Sampler<T, ExponentialSpec<T>>
         where T : unmanaged

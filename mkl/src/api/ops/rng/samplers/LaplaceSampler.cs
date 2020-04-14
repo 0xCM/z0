@@ -6,7 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     using static Spans;
 
     sealed class LaplaceSampler<T> : Sampler<T, LaplaceSpec<T>>

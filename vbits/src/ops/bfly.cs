@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using System.Runtime.Intrinsics;
 
-    using static Core;    
+    using static Seed;
+    using static Memories;
 
     partial class vBits
     {

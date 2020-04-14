@@ -6,7 +6,8 @@ namespace Z0.Mkl
 {
     using System.Runtime.CompilerServices;
  
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     partial class mkl
     {

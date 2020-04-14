@@ -13,7 +13,8 @@ namespace Z0.Asm.Validation
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     using static time;
     using static NumericKinds;
     using static BufferSeqId;

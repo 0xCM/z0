@@ -51,7 +51,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BitCore>$(TopDir)bitcore/src/z0.bitcore.csproj</BitCore>
     <BitStrings>$(TopDir)bitstrings/src/z0.bitstrings.csproj</BitStrings>
     <BitPack>$(TopDir)bitpack/src/z0.bitpack.csproj</BitPack>
     <BitFields>$(TopDir)bitfields/src/z0.bitfields.csproj</BitFields>
@@ -89,7 +88,7 @@
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
   </PropertyGroup>
 
-  <Import Project="$(SrcDir)core.export.props"/>
+  <Import Project="$(SrcDir)src.export.props"/>
 
 
 </Project>

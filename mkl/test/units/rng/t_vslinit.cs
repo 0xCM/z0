@@ -7,6 +7,9 @@ namespace Z0.Mkl
     using System;
     using System.Linq;
    
+    using static Seed;
+    using static Memories;
+
     public class t_vslinit : UnitTest<t_vslinit>
     {
         public void t_bernoulli()

@@ -6,7 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     sealed class PoissonSampler<T> : Sampler<T, PoissonSpec<T>>
         where T : unmanaged

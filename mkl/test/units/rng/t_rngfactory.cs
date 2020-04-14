@@ -8,7 +8,8 @@ namespace Z0
 
     using Z0.Mkl;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     
     public class t_rngfactory : UnitTest<t_rngfactory>
     {

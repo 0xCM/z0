@@ -6,7 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Gone;
+    using static Seed;
+    using static Memories;
     
     public class t_potrf : UnitTest<t_potrf>
     {

@@ -5,13 +5,11 @@
 namespace Z0.Asm.Check
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     
     using C = OpClass;
     
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     class AsmExecWorkflow : IAsmExecWorkflow
     {

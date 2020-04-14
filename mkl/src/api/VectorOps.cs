@@ -9,7 +9,8 @@ namespace Z0
         
     using Z0.Mkl;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     public static class VectorOps
     {             

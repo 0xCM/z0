@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
     
-    using static Literals;
+    using static Seed;
+    using static Memories;
 
     public class t_fixed_rng : UnitTest<t_fixed_rng>
     {        

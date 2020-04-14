@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     
     public class t_vgather : t_vinx<t_vgather>
     {

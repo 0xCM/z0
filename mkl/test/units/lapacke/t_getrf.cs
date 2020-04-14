@@ -6,7 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
         
     public class t_getrf : t_mkl<t_getrf>
     {

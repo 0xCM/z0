@@ -8,7 +8,8 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
  
-    using static Core;
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// mkl + u = Unsafe, Unsized, Unchecked and Unblocked

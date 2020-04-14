@@ -8,7 +8,8 @@ namespace Z0.Mkl
     using System.Diagnostics;    
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static Memories;
     using static Examples;
 
     static class Examples
