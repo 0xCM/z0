@@ -6,19 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Seed;
+    using static Memories;
 
     partial class XTend
-    {                
+    {
         [MethodImpl(Inline)]
-        public static BitVector<N16,ushort> Col<T>(this BitGrid64<N16,N4,T> g, int index)
-            where T : unmanaged
-                => BitGrid.col(g,index);
+        public static bit Identical<T>(this Block128<T> xb, Block128<T> yb)        
+            where T : unmanaged        
+                => xb.Data.Identical(yb.Data);
 
         [MethodImpl(Inline)]
-        public static BitVector<N4,byte> Col<T>(this BitGrid64<N4,N16,T> g, int index)
-            where T : unmanaged
-                => BitGrid.col(g,index);
+        public static bit Identical<T>(this Block256<T> xb, Block256<T> yb)        
+            where T : unmanaged        
+                => xb.Data.Identical(yb.Data);
     }
 }

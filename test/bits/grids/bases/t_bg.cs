@@ -157,8 +157,6 @@ namespace Z0
             ReportBenchmark($"gbg_bitwrite_{Identify.numeric<T>()}", CycleCount*M*N, counter);
         }
 
-        void emit_grid_maps()
-            => GridWriter.EmitGridMaps();
 
         protected void bg_and_check<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged,ITypeNat

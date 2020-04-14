@@ -13,22 +13,23 @@ namespace Z0
     /// <summary>
     /// Characterizes the memory layout of a BitMatrix
     /// </summary>
-    public readonly struct GridSpec
+    public readonly struct GridSpec<T>
+        where T : unmanaged
     {
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public readonly ushort RowCount;
+        public readonly T RowCount;
         
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public readonly ushort ColCount;
+        public readonly T ColCount;
 
         /// <summary>
         /// The number of bits in a storage segment
         /// </summary>
-        public readonly ushort SegWidth;
+        public readonly T SegWidth;
 
         /// <summary>
         /// The the toal number of segment-aligned bits allocated for storage
@@ -46,19 +47,19 @@ namespace Z0
         public readonly int StorageSegs;
 
         [MethodImpl(Inline)]
-        public static GridSpec Define(ushort rows, ushort cols, ushort segwidth, int bytes, int bits, int segs)    
-            => new GridSpec(rows, cols, segwidth, bytes, bits, segs);
+        public static GridSpec<T> Define(T rows, T cols, T segwidth, int bytes, int bits, int segs)    
+            => new GridSpec<T>(rows, cols, segwidth, bytes, bits, segs);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(GridSpec a, GridSpec b)
+        public static bool operator ==(GridSpec<T> a, GridSpec<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(GridSpec a, GridSpec b)
+        public static bool operator !=(GridSpec<T> a, GridSpec<T> b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        GridSpec(ushort rows, ushort cols, ushort segwidth, int bytes, int bits, int segs)
+        GridSpec(T rows, T cols, T segwidth, int bytes, int bits, int segs)
         {
             this.RowCount = rows;
             this.ColCount = cols;
@@ -69,16 +70,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(GridSpec rhs)
-            => RowCount == rhs.RowCount && ColCount == rhs.ColCount 
-            && SegWidth == rhs.SegWidth && StorageBits == rhs.StorageBits 
-            && StorageBytes == rhs.StorageBytes;
+        public bool Equals(GridSpec<T> rhs)
+            => gmath.eq(RowCount,rhs.RowCount) 
+            && gmath.eq(ColCount,rhs.ColCount)
+            && gmath.eq(SegWidth,rhs.SegWidth) 
+            && gmath.eq(StorageBits, rhs.StorageBits) 
+            && gmath.eq(StorageBytes, rhs.StorageBytes);
         
         public override int GetHashCode()
             => HashCode.Combine(RowCount, ColCount, SegWidth, StorageBits, StorageSegs);
 
         public override bool Equals(object rhs)
-            => rhs is GridSpec x && Equals(x);
+            => rhs is GridSpec<T> x && Equals(x);
 
         public string Format()
             => $"{RowCount}x{ColCount}x{SegWidth}"; 

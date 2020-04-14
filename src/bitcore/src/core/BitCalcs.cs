@@ -135,6 +135,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes the number of bytes required to cover a grid, predicated on row/col counts
+        /// </summary>
+        /// <param name="rows">The number of grid rows</param>
+        /// <param name="cols">The number of grid columns</param>
+        [MethodImpl(Inline)]
+        public static T tablesize<T>(T rows, T cols)
+            where T : unmanaged
+        {
+            var points = gmath.mul(rows,cols);
+            var mod = gmath.mod(points, convert<T>(8));
+            return gmath.add(gmath.srl(points, 3), gmath.nonz(mod) ? one<T>() : zero<T>());
+        }
+
+        /// <summary>
         /// Computes the number of cells required to cover a rectangular region predicated on the 
         /// parametric cell type and supplied row/col dimensions
         /// </summary>

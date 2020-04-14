@@ -13,7 +13,7 @@ namespace Z0
 
     partial class XTend
     {
-         /// <summary>
+        /// <summary>
         /// Converts the source bitvector to bit cells
         /// </summary>
         /// <param name="src">The source vector</param>

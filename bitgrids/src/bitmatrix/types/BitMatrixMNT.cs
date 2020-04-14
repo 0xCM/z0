@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     /// <summary>
     /// Defines bitmatrix of natural dimensions over a primal type
@@ -208,7 +209,7 @@ namespace Z0
         {
             var sb = text.build();
             for(var i=0; i< RowCount; i++)
-                 sb.AppendLine(ReadRow(i).Format(blockWidth:1));
+                 sb.AppendLine(ReadRow(i).Format(1));
             return sb.ToString();
         }
 

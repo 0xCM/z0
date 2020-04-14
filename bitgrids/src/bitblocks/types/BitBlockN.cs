@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     /// <summary>
     /// A data structure that covers a natural count of packed bits
@@ -216,6 +217,10 @@ namespace Z0
             else
                 data.Clear();
         }
+
+        [MethodImpl(Inline)]
+        public BitBlock<T> Unsize()
+            => BitBlocks.load(Data, nati<N>()); 
 
         [MethodImpl(Inline)]
         public bool Equals(in BitBlock<N,T> rhs)

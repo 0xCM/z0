@@ -13,6 +13,7 @@ namespace Z0
 
     partial class BV
     {
+        [Closures(UnsignedInts)]
         public readonly struct Or<T> : IBVBinaryOpD<T>, IBitLogicKind<K.Or>
             where T : unmanaged        
         {    

@@ -13,6 +13,7 @@ namespace Z0
 
     partial class BV
     {
+        [Closures(UnsignedInts)]
         public readonly struct Nand<T> : IBVBinaryOpD<T>, IBitLogicKind<K.Nand>
             where T : unmanaged        
         {    

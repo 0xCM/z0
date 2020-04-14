@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using System.Linq;
+
     partial class XTend
     {
         /// <summary>
@@ -19,8 +21,5 @@ namespace Z0
 
         public static GridStats Stats(this GridMap map)
             => GridStats.Define(map);
-
-        public static string Format(this GridStats stats, int? colpad = null, char? delimiter = null)
-            => GridStats.Format(stats, colpad, delimiter);
     }
 }

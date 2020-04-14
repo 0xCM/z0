@@ -14,16 +14,16 @@ namespace Z0
     {        
         public void bg_layout_21x32x32()
         {
-            var a0 = GridSpec.Define(n21,n32,0u);
-            var b0 = GridSpec.Define(21, 32, 32);
+            var a0 = BitGrid.specify(n21,n32,0u);
+            var b0 = BitGrid.specify(21, 32, 32);
             Claim.eq(a0,b0);
 
-            var a1 = GridSpec.Define(n32,n64,ushort.MinValue);
-            var b1 = GridSpec.Define(32, 64, 16);
+            var a1 = BitGrid.specify(n32,n64,ushort.MinValue);
+            var b1 = BitGrid.specify(32, 64, 16);
             Claim.eq(a1,b1);
 
-            var a2 = GridSpec.Define(n5,n15,byte.MinValue);
-            var b2 = GridSpec.Define(5, 15, 8);
+            var a2 = BitGrid.specify(n5,n15,byte.MinValue);
+            var b2 = BitGrid.specify(5, 15, 8);
             Claim.eq(a2,b2);
         }
 
@@ -32,7 +32,7 @@ namespace Z0
             const ushort rows = 32;
             const ushort cols = 8;            
             const ushort cellwidth = 8;
-            var map = GridMap.Define(rows, cols, cellwidth);
+            var map = BitGrid.gridmap(rows, cols, cellwidth);
             Claim.eq(8*32, map.StorageBits);
             
             var current = 0;
@@ -53,7 +53,7 @@ namespace Z0
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes/8;
-            var map = GridMap.Define(rows,cols,segwidth);
+            var map = BitGrid.gridmap(rows,cols,segwidth);
             Claim.eq(bytes, map.SegCount);
             Claim.eq(points, map.PointCount);
 
@@ -64,8 +64,7 @@ namespace Z0
                 Claim.eq(map.Pos(row,col), current);
                 
             Claim.eq(current, rows*cols);
-            Claim.eq(current, map.PointCount);
-        
+            Claim.eq(current, map.PointCount);        
         }
 
         public void bg_layout_8x8()
@@ -75,7 +74,7 @@ namespace Z0
             data.Fill(0b10101010);
 
             ref readonly var src = ref refs.head64(data);
-            var spec = GridSpec.Define(n8, n8, byte.MinValue);
+            var spec = BitGrid.specify(n8, n8, byte.MinValue);
             var map = spec.Map();
             var state = bit.Off;
             Claim.eq(map.PointCount, data.Length * bitsize<byte>());

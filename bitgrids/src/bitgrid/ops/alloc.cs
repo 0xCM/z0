@@ -12,6 +12,7 @@ namespace Z0
 
     partial class BitGrid
     {
+
         /// <summary>
         /// Creates a zero-filled 16-bit grid of soft dimensions
         /// </summary>

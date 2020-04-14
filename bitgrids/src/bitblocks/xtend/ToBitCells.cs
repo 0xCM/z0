@@ -14,27 +14,20 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Extracts a 128-bit cpu vector from a bitsring of sufficient length
+        /// Extracts the bitcells froma span
         /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="w">The bit width selector</param>
-        /// <param name="t">The component type representative</param>
-        /// <typeparam name="T">The target vectror component type</typeparam>
+        /// <param name="src">The source span</param>
+        /// <param name="len">The bitvector length, if specified</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> ToCpuVector<T>(this BitString src, N128 w, T t = default)
-            where T : unmanaged   
-                => src.Pack().As<byte, T>().Blocked(w).LoadVector();
-
-        /// <summary>
-        /// Extracts a 256-bit cpu vector from a bitsring of sufficient length
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="w">The bit width selector</param>
-        /// <param name="t">The component type representative</param>
-        /// <typeparam name="T">The target vectror component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> ToCpuVector<T>(this BitString src, N256 w, T t = default)
+        public static BitBlock<T> ToBitCells<T>(this Span<T> src, int len)
             where T : unmanaged
-                => src.Pack().As<byte, T>().Blocked(w).LoadVector();
+                => BitBlocks.load(src,len);
+
+        [MethodImpl(Inline)]
+        public static BitBlock<N,T> ToBitCells<N,T>(this BitVector128<N,T> src, N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitBlocks.load(src.Data.ToSpan(),n);
     }
 }
