@@ -3,15 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    
+{    
     using System;
     using System.Runtime.CompilerServices;
 
     [ApiHost("api")]
     public partial class gmath : IApiHost<gmath>
     {
-
           
     }
 
@@ -27,9 +25,19 @@ namespace Z0
 
     }
 
-    public static partial class XTend
+    [ApiHost]
+    public partial class num : IApiHost<num>
     {
 
-        
+    }
+
+    [ApiHost("parser")]
+    public partial class NumericParser : IApiHost<NumericParser>
+    {
+
+    }
+    public static partial class XTend
+    {
+       
     }
 }

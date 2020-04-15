@@ -13,7 +13,6 @@ namespace Z0
 
     public partial class Partition
     {
-
         /// <summary>
         /// Slices an interval into manageable pieces, disjoint even
         /// </summary>
@@ -40,16 +39,6 @@ namespace Z0
                 yield return src.Right;
         }
 
-        /// <summary>
-        /// Computes the length of the interval by finding the magnituded of the difference 
-        /// between its left/right endpoints
-        /// </summary>
-        /// <param name="src">The source interval</param>
-        /// <typeparam name="T">The interval primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T length<T>(Interval<T> src)
-            where T : unmanaged
-                => gmath.abs(gmath.sub(src.Right, src.Left));
 
         /// <summary>
         /// Computes the points that determine a partitioning predicated on partition width
@@ -57,12 +46,9 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="width">The partition width</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        [Op, Closures(AllNumeric)]
-        public static Span<T> measuredPoints<T>(Interval<T> src, T width)
+        public static Span<T> measured<T>(Interval<T> src, T width)
             where T : unmanaged
-                => NumericKinds.floating<T>() 
-                 ? points_f<T>(src, width) 
-                 : points_i<T>(src,width);
+                => NumericKinds.floating<T>() ? floating<T>(src, width) : integral<T>(src,width);
 
         /// <summary>
         /// Calculates the points that determine a partitioning predicated on partition count
@@ -70,9 +56,9 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="count">The number of desired partitions</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        public static Span<T> countedPoints<T>(Interval<T> src, int count)
+        public static Span<T> counted<T>(Interval<T> src, int count)
             where T : unmanaged
-            => measuredPoints(src,gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count - 1)));
+                => measured(src,gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count - 1)));
 
         /// <summary>
         /// Partitions an interval predicated on partition count
@@ -94,7 +80,7 @@ namespace Z0
         public static Span<Interval<T>> width<T>(Interval<T> src, T width)
             where T : unmanaged
         {
-            var points = measuredPoints(src,width);
+            var points = measured(src,width);
             var dst = Spans.alloc<Interval<T>>(points.Length - 1);
             var lastIx = points.Length - 1;
             var lastCycleIx = lastIx - 1;
@@ -126,10 +112,11 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="width">The partition width</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        static Span<T> points_i<T>(Interval<T> src, T width)
+        [Op, Closures(Integers)]
+        static Span<T> integral<T>(Interval<T> src, T width)
             where T : unmanaged
         {
-            var len =  length(src);
+            var len =  gmath.length(src);
             var count = Cast.to<T,int>(gmath.div(len, width));            
             var dst = Spans.alloc<T>(count + 1);
             var point = src.Left;
@@ -151,11 +138,12 @@ namespace Z0
             return dst;
         }
 
-        static Span<T> points_f<T>(Interval<T> src, T width)
+        [Op, Closures(Floats)]
+        static Span<T> floating<T>(Interval<T> src, T width)
             where T : unmanaged
         {
             var scale = 4;
-            var len =  gfp.round(length(src), scale);
+            var len =  gfp.round(gmath.length(src), scale);
             var fcount = gfp.div(len, width);
             var count = convert<T,int>(gfp.ceil(fcount));            
             var dst = Spans.alloc<T>(count + 1);

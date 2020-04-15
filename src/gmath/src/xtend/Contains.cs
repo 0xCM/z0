@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Contains<T>(this Interval<T> src, T point)
             where T : unmanaged
-                => gmath.contains(src,point);
+                => Algorithms.contains(src,point);
 
         /// <summary>
         /// Determines whether any elements of the source match the target

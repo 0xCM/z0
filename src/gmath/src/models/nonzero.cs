@@ -10,6 +10,21 @@ namespace Z0
     using static Seed;
     using static Memories;
         
+    public static class nonzero
+    {
+        /// <summary>
+        /// Manufactures a numeric proxy defined over the punctured domain T / {0}. If a
+        /// zero value is supplied, it is replaced with -1
+        /// </summary>
+        /// <param name="value">The nonzero value</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline)]
+        public static nonzero<T> create<T>(T value)
+            where T : unmanaged
+                => new nonzero<T>(value);
+
+    }
+
     public readonly struct nonzero<T>  : INonZero<nonzero<T>,T>, IEquatable<T>
         where T : unmanaged
     {

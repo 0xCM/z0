@@ -29,6 +29,12 @@
     <Src>$(TopDir)src/</Src>
     <SrcDir>$(TopDir)src/</SrcDir>
     <TestDir>$(TopDir)test/</TestDir>
+    <NativeDir>$(TopDir)native/</NativeDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
+    <LibM>$(NativeDir)libm/z0.libm.csproj</LibM>
   </PropertyGroup>
 
   <PropertyGroup>  
@@ -48,22 +54,10 @@
     <AsmDecode>$(TopDir)asm/decode/z0.asm.decode.csproj</AsmDecode>
     <AsmEncode>$(TopDir)asm/encode/z0.asm.encode.csproj</AsmEncode>
     <AsmSuite>$(TopDir)asm/src/z0.asm.csproj</AsmSuite>
-  </PropertyGroup>
-
-  <PropertyGroup>
-
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
   </PropertyGroup>
   
   <PropertyGroup>
-    <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
-    <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
-    <LibM>$(TopDir)libm/src/z0.libm.csproj</LibM>
-    <Machines>$(TopDir)machines/src/z0.machines.csproj</Machines>
-    <Matrix>$(TopDir)matrix/src/z0.matrix.csproj</Matrix>
-    <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
     <Nats>$(TopDir)nats/src/z0.nats.csproj</Nats>
   </PropertyGroup>
 

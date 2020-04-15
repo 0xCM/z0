@@ -282,12 +282,13 @@ namespace Z0
             if(n != doc.Rows[0].Cells.Length)
                 return default;
 
+            var parser = NumericParser.create<T>();
             var dst =  Matrix.blockload<M,N,T>(Blocks.rectangle<T>(n256,(int)value<M>(),(int)value<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];
                 for(var j = 0; j<row.Cells.Length; j++)
-                    dst[i,j] = gmath.parse<T>(row.Cells[j].CellValue).ValueOrDefault();
+                    dst[i,j] = parser.Parse(row.Cells[j].CellValue).ValueOrDefault();
             }
 
             return dst;

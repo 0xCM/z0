@@ -13,45 +13,6 @@ namespace Z0
     
     partial class gmath
     {
-        [Op, Closures(UnsignedInts)]
-        public static Span<T> increments<T>(Interval<T> src)
-            where T : unmanaged
-        {
-            var min = src.Left;
-            var max = src.Right;
-            var current = min;
-            var count = convert<T,int>(src.Length()) + 1;
-            //var increments = new List<T>(convert<T,int>(src.Length()) + 1);
-            Span<T> increments = new T[count];
-            var index = 0;
-            while(lteq(current,max) && index < increments.Length)
-            {
-                //increments.Add(current);
-                seek(increments, index++) = current;
-                
-                if(lt(current, max))
-                    current = inc(current);
-                else
-                    break;
-            }
-            
-            return increments;
-        }
-
-        /// <summary>
-        /// Populates a memory target with consecutive values 0,1,...count-1
-        /// </summary>
-        /// <param name="count">The number of values to populate</param>
-        /// <param name="dst">The target memory reference</param>
-        /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static void increments<T>(int count, ref T dst)
-            where T : unmanaged
-        {
-            for(var i=0; i<count; i++)
-                seek(ref dst,i) = convert<T>(i);
-        }
-
         /// <summary>
         /// Populates a span of length n with consecutive values 0,1,...n - 1
         /// </summary>
@@ -83,6 +44,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// Populates a memory target with consecutive values 0,1,...count-1
+        /// </summary>
+        /// <param name="count">The number of values to populate</param>
+        /// <param name="dst">The target memory reference</param>
+        /// <typeparam name="T">The target value type</typeparam>    
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static void increments<T>(int count, ref T dst)
+            where T : unmanaged
+        {
+            for(var i=0; i<count; i++)
+                seek(ref dst,i) = convert<T>(i);
+        }
+
+        /// <summary>
         /// Populates a span with values first, first + 1, ... first + (n - 1)
         /// </summary>
         /// <param name="first">The first value</param>
@@ -91,6 +66,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void increments<T>(T first, Span<T> dst)
             where T : unmanaged
-                => increments(first, dst.Length, ref head(dst));
+                => gmath.increments(first, dst.Length, ref head(dst));
+
     }
 }

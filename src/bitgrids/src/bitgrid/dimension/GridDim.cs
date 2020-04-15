@@ -29,11 +29,13 @@ namespace Z0
         public static GridDim Parse(string s)
         {
             var parts = s.Split('x');
+            var parser = NumericParser.create<int>();
             if(parts.Length == 2)
             {
-                if(gmath.parse(parts[0], out int m))
-                if(gmath.parse(parts[1], out int n))
-                    return (m,n);
+                var result = from m in parser.Parse(parts[0])
+                             from n in parser.Parse(parts[1])
+                             select new GridDim(m,n);
+                return result.Succeeded ? result.Value : Empty;
             }
             return Empty;
         }

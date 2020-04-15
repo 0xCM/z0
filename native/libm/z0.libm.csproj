@@ -11,12 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ContentWithTargetPath Include="..\.assets\libopenlibm.dll">
+    <ContentWithTargetPath Include="$(NativeDir)/libm/.assets/libopenlibm.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>libopenlibm.dll</TargetPath>
     </ContentWithTargetPath>    
 
-    <ContentWithTargetPath Include="..\.assets\libopenlibm.dll.a">
+    <ContentWithTargetPath Include="$(NativeDir)/libm/.assets/libopenlibm.dll.a">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>libopenlibm.dll.a</TargetPath>
     </ContentWithTargetPath>    

@@ -15,6 +15,6 @@ namespace Z0
     {
         public static Span<T> Increments<T>(this Interval<T> src, T t = default)
             where T : unmanaged
-                => gmath.increments(src);
+                => Algorithms.increments(src);
     }
 }

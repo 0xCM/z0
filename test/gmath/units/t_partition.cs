@@ -53,7 +53,7 @@ namespace Z0
         public void part0()
         {
             var src = Interval.closed(5,12);
-            var dst = Partition.measuredPoints(src,1);
+            var dst = Partition.measured(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            
             CheckNumeric.eq(Arrays.from(5,6,7,8,9,10,11,12).ToSpan(),dst);
@@ -94,7 +94,7 @@ namespace Z0
         public void part4()
         {
             var src = Interval.rclosed(1,100);
-            var dst = Partition.measuredPoints(src,10);
+            var dst = Partition.measured(src,10);
             Claim.eq(10,dst.Length);
             Claim.eq(1, dst.First());
             Claim.eq(100, dst.Last());
@@ -111,7 +111,7 @@ namespace Z0
         protected void points_check<T>(T min, T max, T width)
             where T : unmanaged, IComparable<T>, IEquatable<T>
         {
-            var points = Partition.measuredPoints(Interval.open(min, max), width);
+            var points = Partition.measured(Interval.open(min, max), width);
             var len = gmath.sub(max,min);
             var deltaSum = Literals.zero<T>();
             for(var i=0; i<points.Length - 1; i++)           

@@ -16,6 +16,5 @@ namespace Z0
         where D : unmanaged, ITypeNat
     {
         D d => default;
-
     }
 }

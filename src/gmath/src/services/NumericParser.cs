@@ -10,10 +10,27 @@ namespace Z0
     using static Seed;
     using static CastNumeric;
 
-    partial class gmath
+    public readonly struct NumericParser<T> : IParser<T>
+        where T : unmanaged
     {
+        [MethodImpl(Inline)]
+        public ParseResult<T> Parse(string src)
+            => NumericParser.parse<T>(src);
+    }
+
+    public partial class NumericParser 
+    {
+        /// <summary>
+        /// Creates a numeric parser
+        /// </summary>
+        /// <typeparam name="T">The numeric type to parse</typeparam>
+        [MethodImpl(Inline)]
+        public static NumericParser<T> create<T>()
+            where T : unmanaged
+                => default(NumericParser<T>);
+
         [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
-        public static bit parse<T>(string src, out T dst)
+        static bit parse<T>(string src, out T dst)
             where T : unmanaged
                 => parse_u(src, out dst);
 
@@ -22,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
-        public static ParseResult<T> parse<T>(string src)
+        internal static ParseResult<T> parse<T>(string src)
             where T : unmanaged
         {
             if(parse(src, out T dst))

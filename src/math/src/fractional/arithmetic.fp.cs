@@ -311,11 +311,11 @@ namespace Z0
 
         [MethodImpl(Inline), Square]
         public static float square(float src)
-            => fmath.mul(src,src);
+            => mul(src,src);
 
         [MethodImpl(Inline), Square]
         public static double square(double src)
-            => fmath.mul(src,src);
+            => mul(src,src);
 
         /// <summary>
         /// Computes the square root of the source value
