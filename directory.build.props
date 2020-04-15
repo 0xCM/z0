@@ -65,7 +65,6 @@
     <Matrix>$(TopDir)matrix/src/z0.matrix.csproj</Matrix>
     <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
     <Nats>$(TopDir)nats/src/z0.nats.csproj</Nats>
-    <Permute>$(TopDir)permute/src/z0.permute.csproj</Permute>
   </PropertyGroup>
 
   <Import Project="$(SrcDir)src.export.props"/>

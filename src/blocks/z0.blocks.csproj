@@ -13,6 +13,7 @@
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Polyrand)" />
 
 
   </ItemGroup>

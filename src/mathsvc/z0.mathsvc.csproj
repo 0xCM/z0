@@ -6,10 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Fixed)" />
-    <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Fixed)" />
   </ItemGroup>
 
 </Project>

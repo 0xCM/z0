@@ -9,11 +9,6 @@ namespace Z0
         
     }
 
-    [ApiHost("as.numeric")]
-    public partial class AsNumeric : IApiHost<AsNumeric>
-    {                
-
-    }
 
     [ApiHost]
     public partial class Scalar : IApiHost<Scalar>
@@ -21,11 +16,6 @@ namespace Z0
 
     }
 
-    [ApiHost]
-    public partial class ScalarPairs : IApiHost<ScalarPairs>
-    {
-
-    }
 
 
     public static partial class XTend

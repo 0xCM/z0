@@ -13,6 +13,7 @@
     <VData>$(Src)vdata/z0.vdata.csproj</VData>
     <VBits>$(Src)vbits/z0.vbits.csproj</VBits>
     <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
+    <Permute>$(Src)permute/z0.permute.csproj</Permute>
   </PropertyGroup>
 
   <PropertyGroup>

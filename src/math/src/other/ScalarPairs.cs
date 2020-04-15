@@ -12,7 +12,8 @@ namespace Z0
     using static Seed;
     using static refs;
 
-    partial class ScalarPairs
+    [ApiHost]
+    public class ScalarPairs : IApiHost<ScalarPairs>
     {       
         /// <summary>
         /// Zero, the the one and only.

@@ -125,7 +125,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples, Interval<T> domain)
             where T : unmanaged
-                => random.Span<T>(samples, domain, x => Numeric.nonz(x));
+                => random.Span<T>(samples, domain, x => gmath.nonz(x));
 
         /// <summary>
         /// Allocates and produces a punctured span populated with nonzero random values
@@ -137,6 +137,6 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples)
             where T : unmanaged
-                => random.Span<T>(samples, random.Domain<T>(), x => Numeric.nonz(x));
+                => random.Span<T>(samples, random.Domain<T>(), x => gmath.nonz(x));
     }
 }

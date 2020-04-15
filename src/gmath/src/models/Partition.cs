@@ -5,20 +5,48 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     using static Seed;
     using static Memories;
 
-    public static class Partition
+    public partial class Partition
     {
+
+        /// <summary>
+        /// Slices an interval into manageable pieces, disjoint even
+        /// </summary>
+        /// <param name="src">The source interval</param>
+        /// <param name="width">The partition width</param>
+        /// <param name="precision">The precision with which the calculations are carried out</param>
+        /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
+        [Op, Closures(AllNumeric)]
+        public static IEnumerable<T> stream<T>(Interval<T> src, T width, int? precision = null)
+            where T : unmanaged
+        {            
+            var scale = precision ?? 4;
+            if(src.LeftClosed)
+                yield return src.Left;
+            
+            var next = gfp.round(gmath.add(src.Left, width), scale);
+            while(gmath.lt(next,src.Right))
+            {
+                yield return next;
+                next = gfp.round(gmath.add(next, width), scale);
+            }
+
+            if(src.RightClosed)
+                yield return src.Right;
+        }
+
         /// <summary>
         /// Computes the length of the interval by finding the magnituded of the difference 
         /// between its left/right endpoints
         /// </summary>
         /// <param name="src">The source interval</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T length<T>(Interval<T> src)
             where T : unmanaged
                 => gmath.abs(gmath.sub(src.Right, src.Left));
@@ -29,6 +57,7 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="width">The partition width</param>
         /// <typeparam name="T">The interval primal type</typeparam>
+        [Op, Closures(AllNumeric)]
         public static Span<T> measuredPoints<T>(Interval<T> src, T width)
             where T : unmanaged
                 => NumericKinds.floating<T>() 
@@ -61,6 +90,7 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="width">The partition width</param>
         /// <typeparam name="T">The interval primal type</typeparam>
+        [Op, Closures(AllNumeric)]
         public static Span<Interval<T>> width<T>(Interval<T> src, T width)
             where T : unmanaged
         {

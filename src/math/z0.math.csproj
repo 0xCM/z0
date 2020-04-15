@@ -6,9 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Collective)" />
+    <ProjectReference Include="$(Enums)" />  
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Collective)" />
   </ItemGroup>
 
 </Project>

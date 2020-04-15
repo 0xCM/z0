@@ -6,12 +6,38 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+    using System.Collections.Generic;        
+
     using static Seed; 
     using static Memories;
     
     partial class gmath
     {
+        [Op, Closures(UnsignedInts)]
+        public static Span<T> increments<T>(Interval<T> src)
+            where T : unmanaged
+        {
+            var min = src.Left;
+            var max = src.Right;
+            var current = min;
+            var count = convert<T,int>(src.Length()) + 1;
+            //var increments = new List<T>(convert<T,int>(src.Length()) + 1);
+            Span<T> increments = new T[count];
+            var index = 0;
+            while(lteq(current,max) && index < increments.Length)
+            {
+                //increments.Add(current);
+                seek(increments, index++) = current;
+                
+                if(lt(current, max))
+                    current = inc(current);
+                else
+                    break;
+            }
+            
+            return increments;
+        }
+
         /// <summary>
         /// Populates a memory target with consecutive values 0,1,...count-1
         /// </summary>
