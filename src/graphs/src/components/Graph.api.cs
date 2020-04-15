@@ -19,16 +19,33 @@ namespace Z0
     /// </summary>
     public static class Graph
     {
-        /// <summary>
-        /// Creates a graph from supplied vertices and edges, sorting the provided vertices according to their index
-        /// </summary>
-        /// <param name="vertices">The vertices in the graph</param>
-        /// <param name="edges">The edges that connect the vertices</param>
-        [MethodImpl(Inline)]    
-        public static Graph<V,T> define<V,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
-            where V : unmanaged
-            where T : unmanaged
-                => new Graph<V,T>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
+        // /// <summary>
+        // /// Creates a graph from supplied vertices and edges, sorting the provided vertices according to their index
+        // /// </summary>
+        // /// <param name="vertices">The vertices in the graph</param>
+        // /// <param name="edges">The edges that connect the vertices</param>
+        // [MethodImpl(Inline)]    
+        // public static Graph<V,T> define<V,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
+        //     where V : unmanaged
+        //     where T : unmanaged
+        //         => new Graph<V,T>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
+
+        // public static Graph<V> define<V>(IEnumerable<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
+        //     where V : unmanaged
+        //         => new Graph<V>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
+        
+        // public static Graph<V> define<V>(params Edge<V>[] edges)
+        //     where V : unmanaged
+        // {
+        //     var vertices = edges.Select(e => e.Source).Union(edges.Select(e => e.Target)).Select(x => new Vertex<V>(x));
+        //     return define(vertices,edges);
+        // }
+
+        // public static Graph<V,W,T> define<V,W,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V,W>> edges)
+        //     where V : unmanaged
+        //     where W : unmanaged
+        //     where T : unmanaged
+        //         => new Graph<V,W,T>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
 
         /// <summary>
         /// Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted
@@ -52,22 +69,6 @@ namespace Z0
             where V : unmanaged
                 => new Graph<V>(vertices.ToArray(), edges.ToArray());
 
-        public static Graph<V> define<V>(IEnumerable<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
-            where V : unmanaged
-                => new Graph<V>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
-        
-        public static Graph<V> define<V>(params Edge<V>[] edges)
-            where V : unmanaged
-        {
-            var vertices = edges.Select(e => e.Source).Union(edges.Select(e => e.Target)).Select(x => new Vertex<V>(x));
-            return define(vertices,edges);
-        }
-
-        public static Graph<V,W,T> define<V,W,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V,W>> edges)
-            where V : unmanaged
-            where W : unmanaged
-            where T : unmanaged
-                => new Graph<V,W,T>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
 
         /// <summary>
         /// Defines an edge from an index-identified source to an index identified target

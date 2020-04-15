@@ -36,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static int[] AllocIdentity()
-            => Numeric.range(0, n - 1).ToArray();
+            => gmath.range(0, n - 1).ToArray();
 
         /// <summary>
         /// Allocates an empty permutation

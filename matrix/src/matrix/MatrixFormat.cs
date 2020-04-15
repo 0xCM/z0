@@ -120,7 +120,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
-        public static string Fomat<N,T>(this RowVector256<N,T> src)
+        public static string Fomat<N,T>(this Block256<N,T> src)
             where T : unmanaged    
             where N: unmanaged, ITypeNat
                 => src.Unsized.Format();

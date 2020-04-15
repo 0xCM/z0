@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         /// <typeparam name="T">The primal scalar type</typeparam>
-        [MethodImpl(Inline), Dot, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static T dot<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
@@ -28,8 +28,8 @@ namespace Z0
             var dst = default(T);
 
             for(var i = 0; i< count; i++)
-                dst = gmath.fma(skip(lSrc, i), skip(rSrc,i), dst);
+                dst = fma(skip(lSrc, i), skip(rSrc,i), dst);
             return dst;                
         }
-    }
+   }
 }

@@ -15,9 +15,9 @@ namespace Z0
     {
         public void nonzero_create()
         {
-            Claim.nonzero(Numeric.nonzero(0u).Value);            
+            Claim.nonzero(gmath.nonzero(0u).Value);            
 
-            Claim.eq(Numeric.nonzero(5), 5);
+            Claim.eq(gmath.nonzero(5), 5);
 
         }
     }

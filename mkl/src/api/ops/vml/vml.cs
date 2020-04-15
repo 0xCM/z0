@@ -45,7 +45,7 @@ namespace Z0.Mkl
   		/// <param name="rhs">The right vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,float> add<N>(RowVector256<N,float> lhs, RowVector256<N,float> rhs, ref RowVector256<N,float> dst)
+        public static ref Block256<N,float> add<N>(Block256<N,float> lhs, Block256<N,float> rhs, ref Block256<N,float> dst)
             where N : unmanaged, ITypeNat
         {
             VmlImport.vsAdd(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
@@ -59,7 +59,7 @@ namespace Z0.Mkl
   		/// <param name="rhs">The right vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,double> add<N>(RowVector256<N,double> lhs, RowVector256<N,double> rhs, ref RowVector256<N,double> dst)
+        public static ref Block256<N,double> add<N>(Block256<N,double> lhs, Block256<N,double> rhs, ref Block256<N,double> dst)
             where N : unmanaged, ITypeNat
         {
             VmlImport.vdAdd(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
@@ -99,7 +99,7 @@ namespace Z0.Mkl
   		/// <param name="rhs">The right vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,float> sub<N>(RowVector256<N,float> lhs, RowVector256<N,float> rhs, ref RowVector256<N,float> dst)
+        public static ref Block256<N,float> sub<N>(Block256<N,float> lhs, Block256<N,float> rhs, ref Block256<N,float> dst)
             where N : unmanaged, ITypeNat
         {
             VmlImport.vsSub(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
@@ -113,7 +113,7 @@ namespace Z0.Mkl
   		/// <param name="rhs">The right vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,double> sub<N>(RowVector256<N,double> lhs, RowVector256<N,double> rhs, ref RowVector256<N,double> dst)
+        public static ref Block256<N,double> sub<N>(Block256<N,double> lhs, Block256<N,double> rhs, ref Block256<N,double> dst)
             where N : unmanaged, ITypeNat
         {
             VmlImport.vdSub(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
@@ -153,7 +153,7 @@ namespace Z0.Mkl
   		/// <param name="rhs">The right vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,float> mul<N>(RowVector256<N,float> lhs, RowVector256<N,float> rhs, ref RowVector256<N,float> dst)
+        public static ref Block256<N,float> mul<N>(Block256<N,float> lhs, Block256<N,float> rhs, ref Block256<N,float> dst)
             where N : unmanaged, ITypeNat
         {
             VmlImport.vsMul(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
@@ -167,7 +167,7 @@ namespace Z0.Mkl
   		/// <param name="rhs">The right vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,double> mul<N>(RowVector256<N,double> lhs, RowVector256<N,double> rhs, ref RowVector256<N,double> dst)
+        public static ref Block256<N,double> mul<N>(Block256<N,double> lhs, Block256<N,double> rhs, ref Block256<N,double> dst)
             where N : unmanaged, ITypeNat
         {
             VmlImport.vdMul(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));

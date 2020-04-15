@@ -243,7 +243,7 @@ namespace Z0
             Claim.eq(length, bitspan.Length);
             for(int i=0, j = length - 1; i< length; i++, j--)
             {
-                if(Numeric.even(i))
+                if(gmath.even(i))
                 {
                     Claim.require(bitspan[i]);
                     Claim.eq(bit.One, format[j]);

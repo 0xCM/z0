@@ -87,7 +87,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public RowVector256<N,T> Row(int row)
+        public Block256<N,T> Row(int row)
         {
             if(row < 0 || row >= Order)
                 throw AppErrors.IndexOutOfRange(row, 0, Order - 1);
@@ -96,7 +96,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref RowVector256<N,T> Row(int row, ref RowVector256<N,T> dst)
+        public ref Block256<N,T> Row(int row, ref Block256<N,T> dst)
         {
             if(row < 0 || row >= Order)
                 AppErrors.ThrowOutOfRange<T>(row, 0, Order - 1);
@@ -106,7 +106,7 @@ namespace Z0
              return ref dst;
         }
 
-        public ref RowVector256<N,T> Col(int col, ref RowVector256<N,T> dst)
+        public ref Block256<N,T> Col(int col, ref Block256<N,T> dst)
         {
             if(col < 0 || col >= Order)
                 AppErrors.ThrowOutOfRange<T>(col, 0, Order - 1);
@@ -117,7 +117,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public RowVector256<N,T> Col(int col)
+        public Block256<N,T> Col(int col)
         {
             var alloc = RowVector.blockalloc<N,T>();
             return Col(col, ref alloc);
@@ -161,16 +161,6 @@ namespace Z0
                 this[r,c] = f(this[r,c]);
         }
 
-        public bool IsZero
-        {
-            get
-            {
-                for(var i = 0; i < data.CellCount; i++)
-                    if(gmath.nonz(data[i]))
-                        return false;
-                return true;
-            }
-        }
 
         public bool Equals(Matrix256<N,T> rhs)
         {
@@ -181,34 +171,6 @@ namespace Z0
             return true;
         }
 
-        /// <summary>
-        /// Returns the first cell value, if any, that satisfies a supplied predicate
-        /// </summary>
-        /// <param name="f">The predicate</param>
-        /// <param name="pos">The cell position where the match was found</param>
-        public Option<T> First(Func<T,bool> f, out (int i, int j) pos)
-        {
-            pos = (0,0);
-            for(var r = 0; r < (int)Order; r ++)
-            for(var c = 0; c < (int)Order; c ++)
-            {                
-                if(f(this[r,c]))
-                {
-                    pos = (r,c);
-                    return this[r,c];
-                }
-            }
-            return default;            
-        }
-
-        public Option<T> First(Func<T,bool> f)
-        {
-            for(var r = 0; r < Order; r ++)
-            for(var c = 0; c < Order; c ++)
-                if(f(this[r,c]))
-                    return this[r,c];
-            return default;            
-        }
 
         [MethodImpl(Inline)]
         public Matrix256<N,N,T> ToRectangular()

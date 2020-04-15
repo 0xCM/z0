@@ -10,17 +10,40 @@ using System;
 public enum PartId : ulong
 {
     None = 0,
-            
+
+    Blank00 = 5010,
+
+    Blank01 = 5020,
+
+    Blank02 = 5030,
+
+    Blank03 = 5040,
+
     Nats = 225, NatsTest = Nats | Test,
 
     Math = 45, MathTest = Math | Test, 
     
     GMath = 50, GMathTest = GMath | Test, 
-   
+               
+    BitSuite = 500, 
+    
+    BitCore = 80, 
 
-            
-    BitSuite = 500, BitCore = 80, BitFields = 90, BitVectors = 100, VBits = 110, BitSpan = 170, BitString = 230, BitGrids = 700, BitPack = 710,
+    BitTest = BitSuite | Test,
 
+    BitFields = 90, 
+    
+    BitVectors = 100, 
+    
+    VBits = 110, 
+    
+    BitSpan = 170, 
+    
+    BitString = 230, 
+    
+    BitGrids = 700, 
+    
+    BitPack = 710,
 
     MathSvc = 51, 
 
@@ -30,7 +53,6 @@ public enum PartId : ulong
 
     BitSvcTest = BitSvc | Test,
 
-    BitTest = BitSuite | Test,
     
     Logix = 120, LogixTest = Logix | Test, 
     
@@ -82,12 +104,22 @@ public enum PartId : ulong
     
     Polyrand = 420,
 
-    Seed = 802, Typed = 846, Time = 350, Graphs = 370,
+    Seed = 802, 
+    
+    Typed = 846, 
+    
+    Time = 350, 
+    
+    Graphs = 370,
     
     Symbolic = 410, 
     
-    Textual = 810, Collective = 804, Reflective = 808, Monadic = 806,
-
+    Textual = 810, 
+    
+    Collective = 804, 
+    
+    Reflective = 808, 
+    
     Canonical = 812, 
     
     SFuncs = 816,
@@ -112,23 +144,16 @@ public enum PartId : ulong
             
     Contained = 854,
 
-    Code = 856,
-
     MergeTest = 5000,
 
-    Z = 1024,
+    Spans = 5005,
 
-    TestLib = 430,
 
     Validity = 432,
-
-    ValidityCore = 434,
 
     ValidityVectors = 436,
 
     CoreTest = Core | Test,
-
-    ValidityTest = Validity | Test,
 
     Svc = ushort.MaxValue + 1,
 

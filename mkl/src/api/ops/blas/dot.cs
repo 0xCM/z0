@@ -18,7 +18,7 @@ namespace Z0.Mkl
         /// <param name="X">The left vector</param>
         /// <param name="Y">The right vector</param>
         [MethodImpl(Inline)]
-        public static float dot<N>(RowVector256<N,float> x, RowVector256<N,float> y)
+        public static float dot<N>(Block256<N,float> x, Block256<N,float> y)
             where N : unmanaged, ITypeNat
                 => dot(x.Unsized, y.Unsized);
 
@@ -28,7 +28,7 @@ namespace Z0.Mkl
         /// <param name="X">The left vector</param>
         /// <param name="Y">The right vector</param>
         [MethodImpl(Inline)]
-        public static double dot<N>(RowVector256<N,double> x, RowVector256<N,double> y)
+        public static double dot<N>(Block256<N,double> x, Block256<N,double> y)
             where N : unmanaged, ITypeNat
                 => dot(x.Unsized, y.Unsized);
 

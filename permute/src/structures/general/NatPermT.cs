@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T[] AllocIdentity()
-            => Numeric.range<T>(default, convert<T>(n - 1)).ToArray();
+            => gmath.range<T>(default, convert<T>(n - 1)).ToArray();
 
         /// <summary>
         /// Allocates an empty permutation

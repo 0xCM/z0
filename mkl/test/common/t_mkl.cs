@@ -21,7 +21,7 @@ namespace Z0.Mkl
                 => Random.VectorBlock<T>(len ?? DefaultVectorLength);
 
         [MethodImpl(Inline)]
-        protected RowVector256<N,T> RVec<N,T>(N len = default, T rep = default)
+        protected Block256<N,T> RVec<N,T>(N len = default, T rep = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Random.VectorBlock<N,T>();

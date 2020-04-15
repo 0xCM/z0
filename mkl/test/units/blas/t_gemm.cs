@@ -35,7 +35,7 @@ namespace Z0.Mkl.Test
                     throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
-        internal static void refmul<M,N,T>(Matrix256<M,N,T> A, RowVector256<N,T> B, RowVector256<M,T> X)
+        internal static void refmul<M,N,T>(Matrix256<M,N,T> A, Block256<N,T> B, Block256<M,T> X)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -280,7 +280,7 @@ namespace Z0.Mkl.Test
             return measured(cycles, snapshot(sw), label);
         }
 
-        static double Dot<N>(RowVector256<N,double> x, RowVector256<N,double> y)
+        static double Dot<N>(Block256<N,double> x, Block256<N,double> y)
             where N : unmanaged, ITypeNat
         {
             var result = 0d;
@@ -291,7 +291,7 @@ namespace Z0.Mkl.Test
             return result;
         }
 
-        static float Dot<N>(RowVector256<N,float> x, RowVector256<N,float> y)
+        static float Dot<N>(Block256<N,float> x, Block256<N,float> y)
             where N : unmanaged, ITypeNat
         {
             var result = 0f;

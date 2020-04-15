@@ -11,11 +11,9 @@
     <ProjectReference Include="$(Agency)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Cast)" />
-    <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(Contained)" />
 
     <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Custom)" />
 
     <ProjectReference Include="$(Enums)" />
     <ProjectReference Include="$(Fixed)" />

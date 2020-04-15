@@ -18,7 +18,7 @@ namespace Z0.Mkl
                 => gspan.dot<T>(lhs.Unblocked, rhs.Unblocked);
 
         [MethodImpl(Inline)]
-        internal static T dot<N,T>(in RowVector256<N,T> lhs, in RowVector256<N,T> rhs)
+        internal static T dot<N,T>(in Block256<N,T> lhs, in Block256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => gspan.dot<T>(lhs.Unsized,rhs.Unsized);

@@ -46,7 +46,7 @@ namespace Z0.Logix
         /// Advertises the supported ternary bitlogic opeators
         /// </summary>
         public static ReadOnlySpan<TLK> TernaryBitLogicKinds
-            => Numeric.range((byte)1,(byte)X18).Cast<TLK>().ToArray();
+            => gmath.range((byte)1,(byte)X18).Cast<TLK>().ToArray();
 
         /// <summary>
         /// Specifies the supported comparison operators

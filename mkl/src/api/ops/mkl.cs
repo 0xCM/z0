@@ -51,7 +51,7 @@ namespace Z0.Mkl
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        static ref T head<N,T>(RowVector256<N,T> src)
+        static ref T head<N,T>(Block256<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src.Unsized);

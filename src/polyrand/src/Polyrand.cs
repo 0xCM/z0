@@ -293,17 +293,17 @@ namespace Z0
         [MethodImpl(Inline)]
         sbyte IBoundValueSource<sbyte>.Next(sbyte max)
         {
-            var amax = (ulong)Scalar.abs(max);
+            var amax = (ulong)math.abs(max);
             return (sbyte) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
         sbyte IBoundValueSource<sbyte>.Next(sbyte min, sbyte max)
         {
-            var delta = Scalar.sub(max, min);
+            var delta = math.sub(max, min);
             return delta > 0 
-                ? Scalar.add(min, (sbyte)Points.Next((ulong)delta)) 
-                : Scalar.add(min, (sbyte)Points.Next((ulong)Scalar.negate(delta)));
+                ? math.add(min, (sbyte)Points.Next((ulong)delta)) 
+                : math.add(min, (sbyte)Points.Next((ulong)math.negate(delta)));
         }
 
         [MethodImpl(Inline)]
@@ -325,17 +325,17 @@ namespace Z0
         [MethodImpl(Inline)]
         short IBoundValueSource<short>.Next(short max)
         {
-            var amax = (ulong)Scalar.abs(max);
+            var amax = (ulong)math.abs(max);
             return (short) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
         short IBoundValueSource<short>.Next(short min, short max)
         {
-            var delta = Scalar.sub(max, min);
+            var delta = math.sub(max, min);
             return delta > 0 
-                ? Scalar.add(min, (short)Points.Next((ulong)delta)) 
-                : Scalar.add(min, (short)Points.Next((ulong)Scalar.negate(delta)));
+                ? math.add(min, (short)Points.Next((ulong)delta)) 
+                : math.add(min, (short)Points.Next((ulong)math.negate(delta)));
         }
 
         [MethodImpl(Inline)]
@@ -361,17 +361,17 @@ namespace Z0
         [MethodImpl(Inline)]
         int IBoundValueSource<int>.Next(int max)
         {
-            var amax = (ulong)Scalar.abs(max);
+            var amax = (ulong)math.abs(max);
             return (int) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
         int IBoundValueSource<int>.Next(int min, int max)
         {
-            var delta = Scalar.sub(max, min);
+            var delta = math.sub(max, min);
             return delta > 0 
                 ? min + (int)Points.Next((ulong)delta) 
-                : min + (int)Points.Next((ulong)Scalar.negate(delta));
+                : min + (int)Points.Next((ulong)math.negate(delta));
         }
 
         [MethodImpl(Inline)]
@@ -392,7 +392,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         uint NextU32(uint min, uint max)
-            => Scalar.add(min, (uint)Points.Next((ulong)(max - min)));
+            => math.add(min, (uint)Points.Next((ulong)(max - min)));
 
         /// <summary>
         /// Enables a specified source bit
@@ -415,17 +415,17 @@ namespace Z0
         [MethodImpl(Inline)]
         long IBoundValueSource<long>.Next(long max)
         {
-            var amax = (ulong)Scalar.abs(max);
+            var amax = (ulong)math.abs(max);
             return (long) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
         long IBoundValueSource<long>.Next(long min, long max)
         {
-            var delta = Scalar.sub(max, min);
+            var delta = math.sub(max, min);
             return delta > 0 
                 ? min + (long)Points.Next((ulong)delta) 
-                : min + (long)Points.Next((ulong)Scalar.negate(delta));
+                : min + (long)Points.Next((ulong)math.negate(delta));
         }
 
         [MethodImpl(Inline)]
@@ -493,8 +493,8 @@ namespace Z0
                 return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
             else
             {
-                var min = NumericKinds.signed<T>() ? Numeric.negate(Numeric.sar(maxval<T>(), 1)) : minval<T>();                
-                var max = NumericKinds.signed<T>() ? Numeric.sar(maxval<T>(), 1)  : maxval<T>();
+                var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(maxval<T>(), 1)) : minval<T>();                
+                var max = NumericKinds.signed<T>() ? gmath.sra(maxval<T>(), 1)  : maxval<T>();
                 return (min,max);
             }            
         }

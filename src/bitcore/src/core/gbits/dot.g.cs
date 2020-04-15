@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Dot, Closures(Integers)]
         public static bit dot<T>(T x, T y)
             where T : unmanaged
-                => Numeric.odd(pop(gmath.and(x,y)));
+                => gmath.odd(pop(gmath.and(x,y)));
     }
 }

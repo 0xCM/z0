@@ -57,7 +57,7 @@ namespace Z0
             if(indices.Length != 2)
                 return Zero;
             
-            var result = Try(() => (Numeric.parse<T>(indices[0]).ValueOrDefault(), Numeric.parse<T>(indices[1]).ValueOrDefault()));
+            var result = Try(() => (gmath.parse<T>(indices[0]).ValueOrDefault(), gmath.parse<T>(indices[1]).ValueOrDefault()));
             if(result.IsSome())
                 return result.Value();
             else

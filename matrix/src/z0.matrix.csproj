@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Custom)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Polyrand)" />

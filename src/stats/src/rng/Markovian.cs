@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="len">The result vector length</param>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
-        public static RowVector256<N,T> MarkovBlock<N,T>(this IPolyrand random)
+        public static Block256<N,T> MarkovBlock<N,T>(this IPolyrand random)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -63,7 +63,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,T> MarkovBlock<N,T>(this IPolyrand random, ref RowVector256<N,T> dst)
+        public static ref Block256<N,T> MarkovBlock<N,T>(this IPolyrand random, ref Block256<N,T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {

@@ -39,7 +39,6 @@
     <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
     <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>
     <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
-    <Custom>$(Src)custom/z0.custom.csproj</Custom>
     <Contained>$(Src)contained/z0.contained.csproj</Contained>
   </PropertyGroup>
 
@@ -86,6 +85,7 @@
 
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Logix>$(Src)logix/z0.logix.csproj</Logix>
+    <Spans>$(Src)spans/z0.spans.csproj</Spans>
 
   </PropertyGroup>
 

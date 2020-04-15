@@ -26,8 +26,8 @@ namespace Z0
             using var dst = path.Writer();
             dst.WriteLine(FormatHeader());
             var points = (
-                from row in Numeric.range(minsegs,maxsegs)
-                from col in Numeric.range(minsegs,maxsegs)
+                from row in gmath.range(minsegs,maxsegs)
+                from col in gmath.range(minsegs,maxsegs)
                 let count = row*col
                 orderby count
                 select (row, col)).ToArray();

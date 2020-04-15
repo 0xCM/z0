@@ -53,7 +53,20 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.fma(int64(x), int64(y), int64(z)));
             else
-                return gfp.fma(x,y,z);
+                return fma_f(x,y,z);
+        }
+
+
+        [MethodImpl(Inline)]
+        static T fma_f<T>(T x, T y, T z)
+            where T : unmanaged
+        {            
+            if(typeof(T) == typeof(float))
+                return generic<T>(fmath.fma(float32(x), float32(y), float32(z)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(fmath.fma(float64(x), float64(y), float64(z)));
+            else            
+                throw Unsupported.define<T>();
         }
     }
 }

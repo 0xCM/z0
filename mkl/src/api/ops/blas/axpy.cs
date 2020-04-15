@@ -19,7 +19,7 @@ namespace Z0.Mkl
         /// <param name="Y">The vector to be added</param>
         /// <param name="Z">The target vector</param>        
         [MethodImpl(Inline)]
-        public static void axpy<N>(float a, RowVector256<N,float> X, RowVector256<N,float> Y, ref RowVector256<N,float> Z)
+        public static void axpy<N>(float a, Block256<N,float> X, Block256<N,float> Y, ref Block256<N,float> Z)
             where N : unmanaged, ITypeNat
         {
             Y.CopyTo(ref Z);        

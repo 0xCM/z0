@@ -65,7 +65,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Retreat(ulong count)
-            => Advance(Numeric.negate(count));        
+            => Advance(gmath.negate(count));        
 
         void Init(ulong s0, ulong index)
         {

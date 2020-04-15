@@ -44,7 +44,7 @@ namespace Z0.Logix
         }
         
         public IEnumerable<T> Terms
-            => Numeric.range(Min,Max,Step);
+            => gmath.range(Min,Max,Step);
 
         public int? Length 
             => convert<T,int>(gmath.sub(Max,Min));

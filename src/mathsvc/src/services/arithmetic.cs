@@ -134,7 +134,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => Numeric.even(a);
+            public readonly bit Invoke(T a) => gmath.even(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
@@ -152,7 +152,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => Numeric.odd(a);
+            public readonly bit Invoke(T a) => gmath.odd(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)

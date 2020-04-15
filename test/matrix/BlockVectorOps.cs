@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static RowVector256<N,T> and<N,T>(RowVector256<N,T> lhs, RowVector256<N,T> rhs)
+        public static Block256<N,T> and<N,T>(Block256<N,T> lhs, Block256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,T> add<N,T>(ref RowVector256<N,T> x, in RowVector256<N,T> y)
+        public static ref Block256<N,T> add<N,T>(ref Block256<N,T> x, in Block256<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -62,7 +62,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref RowVector256<N,T> sub<N,T>(RowVector256<N,T> x, RowVector256<N,T> y, ref RowVector256<N,T> z)
+        public static ref Block256<N,T> sub<N,T>(Block256<N,T> x, Block256<N,T> y, ref Block256<N,T> z)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {

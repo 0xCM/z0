@@ -7,8 +7,10 @@
 
   <ItemGroup>    
     <ProjectReference Include="$(Seed)" />    
+    <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(SFuncs)" />
+
   </ItemGroup>
 
 </Project>

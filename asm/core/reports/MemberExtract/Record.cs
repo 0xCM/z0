@@ -42,12 +42,11 @@ namespace Z0.Asm
                 return Empty;
 
             
-            var seq = Numeric.parse<int>(fields[0]).ValueOrDefault();            
+            var seq = gmath.parse<int>(fields[0]).ValueOrDefault();            
             var address = MemoryAddress.Define(HexParsers.Numeric.Parse(fields[1]).ValueOrDefault());
-            var len = Numeric.parse<int>(fields[2]).ValueOrDefault();            
+            var len = gmath.parse<int>(fields[2]).ValueOrDefault();            
             var uri = OpUri.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
-            //var extract = MemoryExtract.Define(HexParsers.Bytes.ParseBytes(fields[5], Chars.Space).ToArray());
             var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.ParseByte).ToArray();
             var extract = MemoryExtract.Define(data);
             return new R(seq,address,len,uri,sig,extract);

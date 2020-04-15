@@ -31,7 +31,7 @@ namespace Z0
             var len = Blocks.length<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
-                seek(ref mem, i) = Numeric.even(i) ? a : b;
+                seek(ref mem, i) = gmath.even(i) ? a : b;
             return vload(n, in data.Head);
         }
 

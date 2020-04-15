@@ -21,6 +21,18 @@ namespace Z0
         }
 
         /// <summary>
+        /// Adds a stream of items to a target set
+        /// </summary>
+        /// <typeparam name="T">The item type</typeparam>
+        /// <param name="dst">The target set</param>
+        /// <param name="src">The source stream</param>
+        public static HashSet<T> WithItems<T>(this HashSet<T> dst, IEnumerable<T> src)
+        {
+            src.Iter(item => dst.Add(item));
+            return dst;
+        }
+
+        /// <summary>
         /// Addes the entries of the source dictionary to the destination dictionary
         /// </summary>
         /// <typeparam name="TKey">The common dictionary key type</typeparam>

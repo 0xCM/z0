@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Custom)" />
   </ItemGroup>
 
 </Project>

@@ -7,10 +7,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />        
+    <ProjectReference Include="$(Enums)" />   
     <ProjectReference Include="$(Api)" />   
     <ProjectReference Include="$(Kinds)" />   
-
-    <ProjectReference Include="$(Custom)" />       
     <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(Vectors)" />        
 

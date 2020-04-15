@@ -22,7 +22,7 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(string a) => Numeric.parse<T>(a).ValueOrDefault();
+            public readonly T Invoke(string a) => gmath.parse<T>(a).ValueOrDefault();
         }
     }
 }

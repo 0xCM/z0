@@ -15,12 +15,12 @@ namespace Z0
         [MethodImpl(Inline), Gt, Closures(Integers)]
         public static bit gt<T>(T a, T b)
             where T : unmanaged
-                => Numeric.gt(a,b);
+                => gt_u(a,b);
 
         [MethodImpl(Inline), GtEq, Closures(Integers)]
         public static bit gteq<T>(T a, T b)
             where T : unmanaged
-                => Numeric.gteq(a,b);
+                => gteq_u(a,b);
 
         [MethodImpl(Inline), Gtz, Closures(Integers)]
         public static T gtz<T>(T a, T b)

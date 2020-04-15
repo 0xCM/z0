@@ -77,7 +77,7 @@ namespace Z0
                 if(typeof(T) == typeof(bit))
                     eq(bit.specific(lhs), bit.specific(rhs));
                 else
-                    Numeric.eq(lhs,rhs).OnNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
+                    gmath.eq(lhs,rhs).OnNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
             }
         }      
     }

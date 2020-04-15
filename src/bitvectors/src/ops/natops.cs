@@ -409,7 +409,7 @@ namespace Z0
             var result = 0u;
             for(var i=0; i<x.Width; i++)
                 result += ((uint)x[i]*(uint)y[i]);                
-            return Numeric.odd(result);
+            return gmath.odd(result);
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged 
         {
             for(var i = 0; i< lhs.CellCount; i++)
-                if(!Numeric.eq(lhs[i],rhs[i]))
+                if(!gmath.eq(lhs[i],rhs[i]))
                     throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
@@ -42,7 +42,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i = 0; i< Blocks.length(xb,yb); i++)
-                if(!Numeric.eq(xb[i],yb[i]))
+                if(!gmath.eq(xb[i],yb[i]))
                     throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
 
@@ -59,7 +59,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i = 0; i< Blocks.length(xb,yb); i++)
-                if(!Numeric.eq(xb[i],yb[i]))
+                if(!gmath.eq(xb[i],yb[i]))
                     throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
     }

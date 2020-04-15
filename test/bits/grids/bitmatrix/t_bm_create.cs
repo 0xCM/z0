@@ -32,11 +32,11 @@ namespace Z0
             byte p1 = 0b010;
 
             for(var row=0; row < bm.RowCount; row++)
-                bm[row] = BitBlocks.single<N3,byte>(Numeric.even(row) ? p0 : p1);
+                bm[row] = BitBlocks.single<N3,byte>(gmath.even(row) ? p0 : p1);
 
             for(var row=0; row < bm.RowCount; row++)
             for(var col=0; col < bm.ColCount; col++)
-                Claim.eq(bm[row,col], Numeric.even(row) ? bit.test(p0,col) : bit.test(p1,col));
+                Claim.eq(bm[row,col], gmath.even(row) ? bit.test(p0,col) : bit.test(p1,col));
         }
 
         public void bm_create_fromfixed_16x16x16()

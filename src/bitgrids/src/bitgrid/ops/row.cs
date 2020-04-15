@@ -158,7 +158,7 @@ namespace Z0
             where T : unmanaged
         {
             uint cell = v8u(g.Data).GetElement(index/2);
-            return CastNumeric.convert<byte>((Numeric.odd(index) ? cell >> 4 : 0xF & cell));
+            return CastNumeric.convert<byte>((gmath.odd(index) ? cell >> 4 : 0xF & cell));
         }
 
         /// <summary>

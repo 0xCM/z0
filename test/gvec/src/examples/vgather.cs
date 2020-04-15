@@ -134,7 +134,7 @@ namespace Z0
             for(var block = 0; block < BlockCount; block++)
             {
                 var target = A.Block(block);
-                var source = Numeric.even(block) ? pattern0 : pattern1;
+                var source = gmath.even(block) ? pattern0 : pattern1;
                 source.StoreTo(target);
             }
 
@@ -150,7 +150,7 @@ namespace Z0
                 
                 var indices = Vectors.vparts(w,i0,i1,i2,i3);
                 var result = vgather(w, in A.Head, indices);
-                var expect = Numeric.even(block) ? pattern0 : pattern1;
+                var expect = gmath.even(block) ? pattern0 : pattern1;
                 Claim.veq(result,expect);                
             }
         }

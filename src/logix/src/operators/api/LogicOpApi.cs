@@ -34,7 +34,7 @@ namespace Z0.Logix
         /// Advertises the supported ternary opeators
         /// </summary>
         public static ReadOnlySpan<TLK> TernaryOpKinds
-            => Numeric.range((byte)1,(byte)X5F).Cast<TLK>().ToArray();
+            => gmath.range((byte)1,(byte)X5F).Cast<TLK>().ToArray();
 
         /// <summary>
         /// Evaluates a unary operator directly without lookup/delegate indirection

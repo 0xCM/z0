@@ -155,7 +155,7 @@ namespace Z0
             
             var lrpattern = v32u(Vectors.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(var i=0; i < 8; i++)
-                Claim.eq(vcell(lrpattern,i), Numeric.even(i) ? 0u : uint.MaxValue);
+                Claim.eq(vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
             
             var zero = Vectors.vzero<uint>(n);            
             var ones = gvec.vones<uint>(n);
@@ -208,7 +208,7 @@ namespace Z0
                 var m = Data.blendspec(n256,false,n64);
                 var es = Blocks.single<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
-                    es[i] = Numeric.odd(i) ? ys[i] : xs[i];
+                    es[i] = gmath.odd(i) ? ys[i] : xs[i];
                 var expect = es.LoadVector();
                 var actual = gvec.vblend(x,y,m);
 

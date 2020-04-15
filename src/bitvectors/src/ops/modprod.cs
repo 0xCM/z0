@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed; 
-    
+    using static gmath;
+
     partial class BitVector
     {
         /// <summary>
@@ -28,7 +29,7 @@ namespace Z0
                 var b = y[i] ? 1 : 0;
                 result += a*b;
             }
-            return Numeric.odd(result);
+            return odd(result);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace Z0
                 var b = y[i] ? 1 : 0;
                 result += a*b;
             }
-            return Numeric.odd(result);
+            return odd(result);
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace Z0
                 var b = y[i] ? 1 : 0;
                 result += a*b;
             }
-            return Numeric.odd(result);
+            return odd(result);
         }
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace Z0
                 var b = y[i] ? 1 : 0;
                 result += a*b;
             }
-            return Numeric.odd(result);
+            return odd(result);
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace Z0
                 var b = y[i] ? 1 : 0;
                 result += a*b;
             }
-            return Numeric.odd(result);
+            return odd(result);
         }
 
         /// <summary>
@@ -123,7 +124,7 @@ namespace Z0
                 var b = y[i] ? 1 : 0;
                 result += a*b;
             }
-            return Numeric.odd(result);
+            return odd(result);
         }       
     }
 }

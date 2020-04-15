@@ -287,7 +287,7 @@ namespace Z0
             {
                 ref readonly var row = ref doc[i];
                 for(var j = 0; j<row.Cells.Length; j++)
-                    dst[i,j] = Numeric.parse<T>(row.Cells[j].CellValue).ValueOrDefault();
+                    dst[i,j] = gmath.parse<T>(row.Cells[j].CellValue).ValueOrDefault();
             }
 
             return dst;

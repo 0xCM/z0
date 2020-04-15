@@ -22,7 +22,7 @@ namespace Z0
         /// Retrieves the next vector from the suite, where the components 
         /// are bound only by the domain of the type
         /// </summary>
-        RowVector256<N,T> Next<T>()
+        Block256<N,T> Next<T>()
             where T : unmanaged;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The point type</typeparam>
-        RowVector256<N,T> Next<T>(T max)
+        Block256<N,T> Next<T>(T max)
             where T : unmanaged;
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The point type</typeparam>
-        RowVector256<N,T> Next<T>(T min, T max)
+        Block256<N,T> Next<T>(T min, T max)
             where T : unmanaged;
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="domain">The range</param>
         /// <typeparam name="T">The point type</typeparam>
-        RowVector256<N,T> Next<T>(Interval<T> domain)
+        Block256<N,T> Next<T>(Interval<T> domain)
             where T : unmanaged;
         
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
             require(this.members.Length == n);
         }
 
-        public RowVector256<N, T> Next<T>() 
+        public Block256<N, T> Next<T>() 
             where T : unmanaged
         {
             var dst = RowVector.blockalloc<N,T>();
@@ -92,7 +92,7 @@ namespace Z0
             return dst;
         }
 
-        public RowVector256<N, T> Next<T>(T min) 
+        public Block256<N, T> Next<T>(T min) 
             where T : unmanaged
         {
             var dst = RowVector.blockalloc<N,T>();
@@ -101,7 +101,7 @@ namespace Z0
             return dst;
         }
 
-        public RowVector256<N, T> Next<T>(T min, T max) 
+        public Block256<N, T> Next<T>(T min, T max) 
             where T : unmanaged
         {
             var dst = RowVector.blockalloc<N,T>();
@@ -110,7 +110,7 @@ namespace Z0
             return dst;
         }
 
-        public RowVector256<N, T> Next<T>(Interval<T> domain)
+        public Block256<N, T> Next<T>(Interval<T> domain)
              where T : unmanaged
         {
             var dst = RowVector.blockalloc<N,T>();

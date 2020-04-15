@@ -83,7 +83,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public RowVector256<N,T> GetRow(int row)
+        public Block256<N,T> GetRow(int row)
         {
             if(row < 0 || row >= Rows)
                 throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
@@ -92,7 +92,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref RowVector256<N,T> GetRow(int row, ref RowVector256<N,T> dst)
+        public ref Block256<N,T> GetRow(int row, ref Block256<N,T> dst)
         {
             if(row < 0 || row >= Rows)
                 throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
@@ -101,7 +101,7 @@ namespace Z0
              return ref dst;
         }
 
-        public ref RowVector256<M,T> GetCol(int col, ref RowVector256<M,T> dst)
+        public ref Block256<M,T> GetCol(int col, ref Block256<M,T> dst)
         {
             if(col < 0 || col >= Cols)
                 throw AppErrors.IndexOutOfRange(col, 0, Cols - 1);
@@ -112,7 +112,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public RowVector256<M,T> GetCol(int col)
+        public Block256<M,T> GetCol(int col)
         {
             var alloc = RowVector.blockalloc<M,T>();
             return GetCol(col, ref alloc);
@@ -123,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void SetCol(int col, RowVector256<M,T> src)
+        public void SetCol(int col, Block256<M,T> src)
         {
             for(var row=0; row < Rows; row++)
                 this[row,col] = src[row];

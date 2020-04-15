@@ -8,8 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Enums)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Collective)" />
 
   </ItemGroup>
 
