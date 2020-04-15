@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Seed)" />  
     <ProjectReference Include="$(Memories)" />  
     <ProjectReference Include="$(Enums)" />  
-    <ProjectReference Include="$(Numeric)" />  
     <ProjectReference Include="$(Math)" />
   </ItemGroup>
 

@@ -12,6 +12,7 @@ namespace Z0
     using static Tuples;
     using static refs;
 
+
     partial class BmiMul
     {
         [MethodImpl(Inline), Op]

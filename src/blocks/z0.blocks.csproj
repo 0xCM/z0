@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Spans)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Checks)" />
+    <ProjectReference Include="$(Numeric)" />
 
 
   </ItemGroup>

@@ -6,9 +6,16 @@ namespace Z0
 {    
     using System.Runtime.CompilerServices;
 
-    [ApiHost("api", ApiHostKind.Direct)]
+    [ApiHost("api")]
     public partial class math : IApiHost<math>
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    
     }
+
+    [ApiHost]
+    public partial class BmiMul : IApiHost<BmiMul>
+    {
+
+    }
+
 }

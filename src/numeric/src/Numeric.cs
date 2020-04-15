@@ -27,11 +27,6 @@ namespace Z0
 
     }
 
-    [ApiHost]
-    public partial class BmiMul : IApiHost<BmiMul>
-    {
-
-    }
 
     public static partial class XTend
     {
