@@ -10,7 +10,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
         
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class dvec    
     {                
@@ -100,8 +100,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<sbyte> vperm2x128(Vector256<sbyte> x, Vector256<sbyte> y, Perm2x4 spec)
+        [MethodImpl(Inline), Op]
+        public static Vector256<sbyte> vperm2x128(Vector256<sbyte> x, Vector256<sbyte> y, [Imm] Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<byte> vperm2x128(Vector256<byte> x, Vector256<byte> y, Perm2x4 spec)
+        [MethodImpl(Inline), Op]
+        public static Vector256<byte> vperm2x128(Vector256<byte> x, Vector256<byte> y, [Imm] Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -120,8 +120,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<short> vperm2x128(Vector256<short> x, Vector256<short> y, Perm2x4 spec)
+        [MethodImpl(Inline), Op]
+        public static Vector256<short> vperm2x128(Vector256<short> x, Vector256<short> y, [Imm] Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -130,8 +130,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ushort> vperm2x128(Vector256<ushort> x, Vector256<ushort> y, Perm2x4 spec)
+        [MethodImpl(Inline), Op]
+        public static Vector256<ushort> vperm2x128(Vector256<ushort> x, Vector256<ushort> y, [Imm] Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -140,8 +140,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<int> vperm2x128(Vector256<int> x, Vector256<int> y, Perm2x4 spec)
+        [MethodImpl(Inline), Op]
+        public static Vector256<int> vperm2x128(Vector256<int> x, Vector256<int> y, [Imm] Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -150,8 +150,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<uint> vperm2x128(Vector256<uint> x, Vector256<uint> y, Perm2x4 spec)
+        [MethodImpl(Inline), Op]
+        public static Vector256<uint> vperm2x128(Vector256<uint> x, Vector256<uint> y, [Imm] Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<long> vperm2x128(Vector256<long> x, Vector256<long> y, Perm2x4 spec)
+        [MethodImpl(Inline), Op]
+        public static Vector256<long> vperm2x128(Vector256<long> x, Vector256<long> y, [Imm] Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -170,8 +170,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vperm2x128(Vector256<ulong> x, Vector256<ulong> y, Perm2x4 spec)
+        [MethodImpl(Inline), Op]
+        public static Vector256<ulong> vperm2x128(Vector256<ulong> x, Vector256<ulong> y, [Imm] Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
     }
 }

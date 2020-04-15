@@ -160,8 +160,8 @@ namespace Z0.Asm.Check
 
         }
 
-        OpIndex<ApiMember> MemberIndex(IApiHost host)
-            => MemberLocator.Hosted(host).ToOpIndex();
+        ApiIndex MemberIndex(IApiHost host)
+            => ApiIndex.From(MemberLocator.Hosted(host));
 
         Option<IApiHost> Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        

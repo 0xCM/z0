@@ -9,6 +9,7 @@ namespace Z0.Asm
     public interface IImmEmissionWorkflow : IAsmWorkflow
     {
         void Emit(params byte[] immediates);
+        
     }
 
 }

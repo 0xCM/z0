@@ -12,6 +12,7 @@
     <GVec>$(Src)gvec/z0.gvec.csproj</GVec>    
     <VData>$(Src)vdata/z0.vdata.csproj</VData>
     <VBits>$(Src)vbits/z0.vbits.csproj</VBits>
+    <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -37,7 +38,7 @@
     <Enums>$(Src)enums/z0.enums.csproj</Enums>
     <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
     <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>
-    <Blocks>$(Src)blocks/src/z0.blocks.csproj</Blocks>
+    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
     <Custom>$(Src)custom/z0.custom.csproj</Custom>
     <Contained>$(Src)contained/z0.contained.csproj</Contained>
   </PropertyGroup>
@@ -80,6 +81,11 @@
     <Dynamic>$(Src)dynops/z0.dynops.csproj</Dynamic>
 
     <Flow>$(Src)flow/z0.flow.csproj</Flow>
+
+    <Stats>$(Src)stats/z0.stats.csproj</Stats>
+
+    <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
+    <Logix>$(Src)logix/z0.logix.csproj</Logix>
 
   </PropertyGroup>
 

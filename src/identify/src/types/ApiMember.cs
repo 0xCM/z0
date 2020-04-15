@@ -11,6 +11,9 @@ namespace Z0
 
     using static Seed;
 
+    /// <summary>
+    /// Defines a reified api member wich may be of hosted or located state
+    /// </summary>
     public readonly struct ApiMember : IApiMember
     {
         public static ApiMember Empty => Define(OpUri.Empty, null, OpKindId.None, null);

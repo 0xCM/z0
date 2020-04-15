@@ -40,7 +40,6 @@ namespace Z0.Asm
             return termidx;
         }
 
-
         public static bool TryMatch(EncodingPatternOffset offset, ReadOnlySpan<byte> input, ReadOnlySpan<byte?> pattern,  out ReadOnlySpan<byte> selected)
         {
             selected = input;

@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector128<T> vsub<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vsub_u(x,y);
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector256<T> vsub<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged 
                 => vsub_u(x,y);
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector128<T> vsub<T>(Vector128<T> x, T a)
             where T : unmanaged
                 => vsub(x, Vectors.vbroadcast(n128,a));
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="a">The constant</param>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector128<T> vsub<T>(T a, Vector128<T> x)
             where T : unmanaged
                 => vsub(Vectors.vbroadcast(n128,a), x);
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector256<T> vsub<T>(Vector256<T> x, T a)
             where T : unmanaged
                 => vsub(x, Vectors.vbroadcast(n256,a));
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="a">The constant</param>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector256<T> vsub<T>(T a, Vector256<T> x)
             where T : unmanaged
                 => vsub(Vectors.vbroadcast(n256,a), x);

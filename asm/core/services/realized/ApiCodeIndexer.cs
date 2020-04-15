@@ -16,6 +16,8 @@ namespace Z0.Asm
         readonly IContext Context;
 
         readonly IApiSet ApiSet;
+
+        readonly IMemberLocator MemberLocator;
         
         [MethodImpl(Inline)]
         public static IApiCodeIndexer Create(IContext context, IApiSet api)
@@ -26,10 +28,11 @@ namespace Z0.Asm
         {
             this.Context = context;
             this.ApiSet = api;
+            this.MemberLocator = context.MemberLocator();
         }
         
-        IEnumerable<ApiMember> HostedMembers(IApiHost host)
-            => Context.MemberLocator().Hosted(host);
+        ApiMembers HostedMembers(IApiHost host)
+            => MemberLocator.Hosted(host);
 
         IApiHost FindHost(in ApiHostUri uri)
             => ApiSet.FindHost(uri).Require();
@@ -50,12 +53,12 @@ namespace Z0.Asm
             var hosted = FindHostedMembers(host).ToArray();
             
             var code = loaded.ToEnumerable().ToOpIndex();
-            var members = hosted.ToOpIndex();
+            var members = ApiIndex.From(hosted);
 
             return CreateIndex(members, code);
         }
 
-        public ApiCodeIndex CreateIndex(OpIndex<ApiMember> members, OpIndex<AsmOpBits> code)
+        public ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<AsmOpBits> code)
         {
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1

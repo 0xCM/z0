@@ -7,11 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
+
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-
+    using static Seed;
+    
     partial class dvec
     {
         /// <summary>

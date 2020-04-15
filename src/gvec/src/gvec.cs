@@ -10,9 +10,9 @@ namespace Z0
     /// Generic vectorized intrinsics
     /// </summary>
     [ApiHost(ApiHostKind.Generic)]
-    public static partial class gvec
+    public partial class gvec : IApiHost<gvec>
     {        
-        //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    
+        
     }
 
 }

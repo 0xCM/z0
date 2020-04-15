@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
+    
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
  
-    using static Vectors;    
-    using static Typed;
+    using static Seed;    
+    using static Memories;
 
     partial class dvec
     {

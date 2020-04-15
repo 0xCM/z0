@@ -83,8 +83,7 @@ namespace Z0
             get => bit.test(Bytes[offset], pos);
             
             [MethodImpl(Inline)]
-            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);
-                
+            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);                
         }
 
         [MethodImpl(Inline)]

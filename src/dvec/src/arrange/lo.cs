@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static System.Runtime.Intrinsics.X86.Avx;
     
-    using static Vectors;
-    using static Typed;
-
+    using static Seed;
+    using static Memories;
 
     partial class dvec
     {
@@ -125,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">Receiver for the lo part of the exracted lane</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref Pair<ulong> vlo(Vector256<ulong> src, ref Pair<ulong> dst)
         {            
             dst.Left = src.GetElement(0);

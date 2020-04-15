@@ -7,16 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
 
     partial class dvec
     {
@@ -56,42 +54,40 @@ namespace Z0
         public static Vector128<double> vshuf2x64(Vector128<double> src, [Imm] byte spec)            
             => v64f(Shuffle(v32u(src), (byte)spec));
 
-        [MethodImpl(Inline)]
-        public static Vector128<sbyte> vshuf2x64(Vector128<sbyte> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<sbyte> vshuf2x64(Vector128<sbyte> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
 
-        [MethodImpl(Inline)]
-        public static Vector128<byte> vshuf2x64(Vector128<byte> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> vshuf2x64(Vector128<byte> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
 
-        [MethodImpl(Inline)]
-        public static Vector128<short> vshuf2x64(Vector128<short> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<short> vshuf2x64(Vector128<short> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
 
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vshuf2x64(Vector128<ushort> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<ushort> vshuf2x64(Vector128<ushort> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
 
-        [MethodImpl(Inline)]
-        public static Vector128<int> vshuf2x64(Vector128<int> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<int> vshuf2x64(Vector128<int> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
 
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vshuf2x64(Vector128<uint> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<uint> vshuf2x64(Vector128<uint> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
 
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vshuf2x64(Vector128<ulong> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<ulong> vshuf2x64(Vector128<ulong> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
 
-        [MethodImpl(Inline)]
-        public static Vector128<long> vshuf2x64(Vector128<long> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<long> vshuf2x64(Vector128<long> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
 
-        [MethodImpl(Inline)]
-        public static Vector128<double> vshuf2x64(Vector128<double> src, Arrange2L spec)            
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vshuf2x64(Vector128<double> src, [Imm] Arrange2L spec)            
             => vshuf2x64(src,(byte)spec);
- 
     }
-
 }

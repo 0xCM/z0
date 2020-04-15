@@ -9,42 +9,20 @@ namespace Z0
     using System.Collections;
     using System.Collections.Generic;
 
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
     using static Seed;
 
     public readonly struct OpIndex<T> : IEnumerable<KeyedValue<OpIdentity, T>>, IOpIndex<T>
     {
-        readonly Dictionary<OpIdentity, T> HashTable;
+        internal readonly Dictionary<OpIdentity, T> HashTable;
 
-        readonly OpIdentity[] Duplicates;
+        internal readonly OpIdentity[] Duplicates;
 
-        internal static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
-
-        internal OpIndex(IEnumerable<(OpIdentity,T)> src, bool deduplicate)
+        internal OpIndex(Dictionary<OpIdentity, T> index, OpIdentity[] duplicates)
         {
-            var items = src.ToArray();
-            var identities = items.Select(x => x.Item1).ToArray();
-            var duplicates = (from g in identities.GroupBy(i => i.Identifier)
-                             where g.Count() > 1
-                             select g.Key).ToHashSet();
-            
-            if(duplicates.Count() != 0)
-            {
-                if(deduplicate)
-                    HashTable = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
-                else
-                    throw DuplicateKeyException(duplicates);
-            }
-            else
-                HashTable = src.ToDictionary();
-            
-            Duplicates = duplicates.Select(d => Identify.Op(d)).ToArray();
+            this.HashTable = index;
+            this.Duplicates = duplicates;
         }
-    
+            
         public Option<T> Lookup(OpIdentity id)
             => HashTable.TryFind(id);
 

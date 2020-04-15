@@ -10,6 +10,6 @@ namespace Z0.Asm
     {
         ApiCodeIndex CreateIndex(ApiHostUri host, FilePath src);
 
-        ApiCodeIndex CreateIndex(OpIndex<ApiMember> members, OpIndex<AsmOpBits> code);        
+        ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<AsmOpBits> code);        
     }
 }

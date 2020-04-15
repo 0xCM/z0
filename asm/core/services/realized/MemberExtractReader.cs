@@ -61,8 +61,8 @@ namespace Z0.Asm
         Option<IApiHost> Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
 
-        OpIndex<ApiMember> MemberIndex(IApiHost host)
-            => Context.MemberLocator().Hosted(host).ToOpIndex();
+        ApiIndex MemberIndex(IApiHost host)
+            =>  ApiIndex.From(Context.MemberLocator().Hosted(host));
 
         MemberExtract[] MemberExtracts(IApiHost host, MemberExtractRecord[] records)
         {

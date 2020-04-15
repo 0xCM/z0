@@ -59,21 +59,21 @@ namespace Z0
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        IEnumerable<MethodInfo> UnaryOps(GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> UnaryOps(GenericPartition g = default)
             => Hosted.MemberOf(g).UnaryOperators();
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        IEnumerable<MethodInfo> BinaryOps(GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> BinaryOps(GenericPartition g = default)
             => Hosted.MemberOf(g).BinaryOperators();
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specifed generic partition
         /// </summary>
         /// <param name="g">The generic partition</param>
-        IEnumerable<MethodInfo> TernaryOps(GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> TernaryOps(GenericPartition g = default)
             => Hosted.MemberOf(g).TernaryOperators();
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <param name="generic">Whether generic or non-generc methods should be selected</param>
-        IEnumerable<MethodInfo> Vectorized(W128 w, GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> Vectorized(W128 w, GenericPartition g = default)
             => g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w);
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <param name="generic">Whether generic or non-generc methods should be selected</param>
-        IEnumerable<MethodInfo> Vectorized(W256 w, GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> Vectorized(W256 w, GenericPartition g = default)
             => g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        IEnumerable<MethodInfo> Vectorized(W128 w, string name, GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> Vectorized(W128 w, string name, GenericPartition g = default)
             => Hosted.Vectorized(w,name,g);
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        IEnumerable<MethodInfo> Vectorized(W256 w, string name, GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> Vectorized(W256 w, string name, GenericPartition g = default)
             => Hosted.Vectorized(w,name,g);
 
         /// <summary>
@@ -116,14 +116,14 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic parition to consider</param>
-        IEnumerable<MethodInfo> Vectorized(W512 w, string name, GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> Vectorized(W512 w, string name, GenericPartition g = default)
             => Hosted.Vectorized(w,name,g);
 
-        IEnumerable<MethodInfo> OfKind<K>(W128 w, K kind, GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> OfKind<K>(W128 w, K kind, GenericPartition g = default)
             where K : unmanaged, Enum
                 => OfKind(kind,g).VectorizedDirect(w);
 
-        IEnumerable<MethodInfo> OfKind<K>(W256 w, K kind, GenericPartition g = GenericPartition.NonGeneric)
+        IEnumerable<MethodInfo> OfKind<K>(W256 w, K kind, GenericPartition g = default)
             where K : unmanaged, Enum
                 => OfKind(kind,g).VectorizedDirect(w);
 
@@ -183,8 +183,6 @@ namespace Z0
         IEnumerable<MethodInfo> Vectorized<T>(W512 w, string name)
             where T : unmanaged
                 => Vectorized<T>(w).WithName(name);
-
-
     }
 
     public interface IApiHostQuery<H> : IApiHostQuery

@@ -73,6 +73,35 @@ namespace Z0.Asm
         public void Emit(params byte[] imm8)
             => EmitImm(Context.ExtractExchange(), imm8);
 
+
+        void EmitDirectRefinements(in OpExtractExchange exchange, IApiHost host, IAsmFunctionArchive dst)
+        {            
+            Flow.Raise(EmittingImmInjections.Define(host.UriPath, false));
+            var archive = Archive(host).Clear();
+            var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Refined);
+            foreach(var g in groups)
+            {
+                foreach(var member in g.Members)
+                {
+                    if(member.Method.IsVectorizedUnaryImm(ImmRefinementKind.Refined))
+                    {
+                        var imm8 = member.Method.ImmParameters(ImmRefinementKind.Refined).First().RefinedImmValues();
+                        var functions = ImmSpecializer.UnaryOps(exchange, member.Method, member.Id, imm8);
+                        if(functions.Length != 0)
+                            dst.Save(AsmFunctionGroup.Define(g.GroupId, functions), true);                    
+                    }
+                    else if(member.Method.IsVectorizedBinaryImm(ImmRefinementKind.Refined))
+                    {
+                        var imm8 = member.Method.ImmParameters(ImmRefinementKind.Refined).First().RefinedImmValues();
+                        var functions = ImmSpecializer.BinaryOps(exchange, member.Method, member.Id, imm8);
+                        if(functions.Length != 0)
+                            dst.Save(AsmFunctionGroup.Define(g.GroupId, functions), true);                    
+
+                    }
+                }
+            }
+        }
+
         IEnumerable<IApiHost> ApiHosts => ApiSet.Hosts;
 
         IAsmFunctionArchive Archive(IApiHost host)
@@ -81,39 +110,32 @@ namespace Z0.Asm
         void EmitImm(in OpExtractExchange exchange, byte[] imm8)
         {
             EmitDirect(exchange, imm8);
-            EmitGeneric(exchange, imm8);
+            EmitGeneric(exchange, imm8);            
         }
-
-        DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g)
-            => DirectApiGroup.Define(host, g.GroupId, g.Members.Where(m => m.Method.AcceptsImmediate() && m.Method.ReturnsVector()));
-
-        IEnumerable<DirectApiGroup> DirectImmGroups(IApiHost host)
-            => from g in ApiCollector.CollectDirect(host)
-                let immg = ImmGroup(host, g)
-                where !immg.IsEmpty
-                select g;
         
         void EmitDirect(in OpExtractExchange exchange, byte[] imm8)
-        {
+        {            
             foreach(var host in ApiHosts)
             {
                 Flow.Raise(EmittingImmInjections.Define(host.UriPath, false));
                 var archive = Archive(host).Clear();
-                var groups = DirectImmGroups(host);
+                var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Unrefined);
                 Emit(exchange, groups,imm8, archive);
+                //EmitDirectRefinements(exchange, host, archive);
+
             }
         }
 
         void Emit(in OpExtractExchange exchange, IEnumerable<DirectApiGroup> groups, byte[] imm8, IAsmFunctionArchive dst)
         {            
             var unary = from g in groups
-                        let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm())
+                        let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
                         select (g,members);
             foreach(var (g,members) in unary)
                 EmitUnary(exchange, g.GroupId, members, imm8, dst);
 
             var binary = from g in groups
-                        let members = g.Members.Where(m => m.Method.IsVectorizedBinaryImm())
+                        let members = g.Members.Where(m => m.Method.IsVectorizedBinaryImm(ImmRefinementKind.Unrefined))
                         select (g,members);
 
             foreach(var (g,members) in binary)
@@ -125,7 +147,7 @@ namespace Z0.Asm
             foreach(var host in ApiHosts)
             {
                 var archive = Archive(host);
-                var specs = ApiCollector.CollectGeneric(host).Where(op => op.Method.AcceptsImmediate());
+                var specs = ApiCollector.ImmGeneric(host,ImmRefinementKind.Unrefined);
                 foreach(var spec in specs)
                     Emit(exchange, spec, imm8, archive); 
             }        
@@ -173,9 +195,9 @@ namespace Z0.Asm
 
         void Emit(in OpExtractExchange exchange, GenericApiOp f,  byte[] imm8, IAsmFunctionArchive dst)
         {
-            if(f.Method.IsVectorizedUnaryImm())
+            if(f.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
                 EmitUnary(exchange, f, imm8, dst);           
-            else if(f.Method.IsVectorizedBinaryImm())
+            else if(f.Method.IsVectorizedBinaryImm(ImmRefinementKind.Unrefined))
                 EmitBinary(exchange, f, imm8, dst);
         }
     }

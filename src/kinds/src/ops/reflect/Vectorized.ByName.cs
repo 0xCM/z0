@@ -67,9 +67,8 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic partition to which the considered members belong</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W128 w, string name, 
-            GenericPartition g = GenericPartition.NonGeneric)
-                => src.Vectorized(w,g).WithName(name);
+        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W128 w, string name, bool generic = false)
+            => src.Vectorized(w,generic).WithName(name);
 
         /// <summary>
         /// Selects vectorized methods from a stream predicated on width, name and generic partition membership
@@ -78,9 +77,8 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic partition to which the considered members belong</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W256 w, string name, 
-            GenericPartition g = GenericPartition.NonGeneric)
-                => src.Vectorized(w,g).WithName(name);
+        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W256 w, string name, bool generic = false)
+                => src.Vectorized(w,generic).WithName(name);
 
         /// <summary>
         /// Selects vectorized methods from a stream predicated on width, name and generic partition membership
@@ -88,9 +86,8 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
-        /// <param name="g">The generic partition to which the considered members belong</param>
-        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W512 w, string name, 
-            GenericPartition g = GenericPartition.NonGeneric)
-                => src.Vectorized(w,g).WithName(name);
+        /// <param name="generic">The generic partition to which the considered members belong</param>
+        public static IEnumerable<MethodInfo> Vectorized(this IEnumerable<MethodInfo> src, W512 w, string name, bool generic = false)
+            => src.Vectorized(w,generic).WithName(name);
     }
 }

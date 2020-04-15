@@ -58,20 +58,6 @@ namespace Z0.Asm.Validation
         }
 
         /// <summary>
-        /// Retrieves the members defined by an api host
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        public IEnumerable<ApiMember> HostedMembers(in ApiHostUri host)
-            => ApiSet.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
-
-        /// <summary>
-        /// Retrieves located members defined by an api host
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        public IEnumerable<ApiMember> LocateMembers(in ApiHostUri host)
-            => ApiSet.FindHost(host).MapRequired(host => Context.MemberLocator().Located(host));
-
-        /// <summary>
         /// Reads code from a hex file
         /// </summary>
         /// <param name="src">The source path</param>

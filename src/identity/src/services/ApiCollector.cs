@@ -14,6 +14,19 @@ namespace Z0
 
     class ApiCollector : IApiCollector
     {        
+        DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g, ImmRefinementKind refinment)
+            => DirectApiGroup.Define(host, g.GroupId, 
+                g.Members.Where(m => m.Method.AcceptsImmediate(refinment) && m.Method.ReturnsVector()));
+
+        public IEnumerable<DirectApiGroup> ImmDirect(IApiHost host, ImmRefinementKind refinment)
+            => from g in CollectDirect(host)
+                let immg = ImmGroup(host, g, refinment)
+                where !immg.IsEmpty
+                select g;
+
+        public IEnumerable<GenericApiOp> ImmGeneric(IApiHost host, ImmRefinementKind refinment) 
+            => CollectGeneric(host).Where(op => op.Method.AcceptsImmediate(refinment));
+
         public static IEnumerable<NaturalNumericClosure> NaturalNumericClosures(MethodInfo src)  
                 => from natural in NaturalClosures(src)
                 from numeric in NumericClosures(src)

@@ -7,16 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
 
     partial class dvec
     {
@@ -176,6 +174,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vshuf16x8(Vector256<ulong> src, Vector256<byte> spec)
             => v64u(Shuffle(v8u(src), spec));
-
     }
 }

@@ -9,24 +9,52 @@ namespace Z0
 
     using static Seed;
 
-    public enum GenericPartition : byte
-    {        
-        /// <summary>
-        /// Indicates subject is nongeneric
-        /// </summary>
-        NonGeneric = 0,
+    public readonly struct GenericPartition
+    {   
+        public readonly byte State;
 
-        /// <summary>
-        /// Indicates subject is generic
-        /// </summary>
-        Generic = 1
+        public const byte NonGeneric = 0;
+        
+        public const byte Generic = 1;
 
-    }
-
-    partial class XTend
-    {
         [MethodImpl(Inline)]
-        public static bool IsGeneric(this GenericPartition src)
-            => src == GenericPartition.Generic;
+        public static bool operator ==(GenericPartition g1, GenericPartition g2)
+            => g1.State == g2.State;
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(GenericPartition g1, GenericPartition g2)
+            => g1.State != g2.State;
+
+        [MethodImpl(Inline)]
+        public static implicit operator bool(GenericPartition src)
+            => src.State != 0;
+
+        [MethodImpl(Inline)]
+        public static implicit operator GenericPartition(byte src)
+            => new GenericPartition(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(GenericPartition src)
+            => src.State;
+
+        [MethodImpl(Inline)]
+        public static implicit operator GenericPartition(bool src)
+            => new GenericPartition(src ? (byte)1 : (byte)0);
+
+        [MethodImpl(Inline)]
+        GenericPartition(byte state)
+        {
+            this.State = state;
+        }
+
+        [MethodImpl(Inline)]
+        public bool IsGeneric()
+            => State == GenericPartition.Generic;
+
+        public override int GetHashCode()
+            => State.GetHashCode();
+        
+        public override bool Equals(object src)
+            => src is GenericPartition p && p.State == State;
     }
 }

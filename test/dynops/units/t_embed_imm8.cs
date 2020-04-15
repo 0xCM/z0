@@ -33,8 +33,8 @@ namespace Z0
         {
             Claim.require(src.IsVectorized(w));
             Claim.require(src.AcceptsVector(0,w));
-            Claim.require(src.AcceptsImmediate(1));
-            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass());
+            Claim.require(src.AcceptsImmediate(1, ImmRefinementKind.Unrefined));
+            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ImmRefinementKind.Unrefined));
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);
@@ -59,8 +59,8 @@ namespace Z0
         {
             Claim.require(src.IsVectorized(w));
             Claim.require(src.AcceptsVector(0,w));
-            Claim.require(src.AcceptsImmediate(1));
-            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass());
+            Claim.require(src.AcceptsImmediate(1,ImmRefinementKind.Unrefined));
+            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ImmRefinementKind.Unrefined));
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);

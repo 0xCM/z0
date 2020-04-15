@@ -75,5 +75,32 @@ namespace Z0
         /// <param name="w">The width to match</param>
         public static bool IsVectorized(this MethodInfo m, W512 w, Type tCell)        
             => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,tCell)).Count() != 0;
+
+        /// <summary>
+        /// Selcts vectorized methods from a source stream
+        /// </summary>
+        /// <param name="src">The source strean</param>
+        /// <param name="w">The vector width</param>
+        /// <param name="g">The generic partition from which methods should be selected</param>
+        public static bool IsVectorized(this MethodInfo src, W128 w, GenericPartition g = default)
+            => src.IsVectorized(w) && src.IsMemberOf(g);
+
+        /// <summary>
+        /// Selcts vectorized methods from a source stream
+        /// </summary>
+        /// <param name="src">The source strean</param>
+        /// <param name="w">The vector width</param>
+        /// <param name="g">The generic partition from which methods should be selected</param>
+        public static bool IsVectorized(this MethodInfo src, W256 w, GenericPartition g = default)
+            => src.IsVectorized(w) && src.IsMemberOf(g);
+
+        /// <summary>
+        /// Selcts vectorized methods from a source stream
+        /// </summary>
+        /// <param name="src">The source strean</param>
+        /// <param name="w">The vector width</param>
+        /// <param name="g">The generic partition from which methods should be selected</param>
+        public static bool IsVectorized(this MethodInfo src, W512 w, GenericPartition g = default)
+            => src.IsVectorized(w) && src.IsMemberOf(g);
     }
 }

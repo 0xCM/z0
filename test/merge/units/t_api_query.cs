@@ -15,7 +15,7 @@ namespace Z0
     {
 
 
-        public void query_1()
+        void query_1()
         {
             var host = ApiHost.Create<math>();
             var locator = Context.MemberLocator();
@@ -24,7 +24,22 @@ namespace Z0
                 
         }
 
+        void query_2()
+        {
+            var host = ApiHost.Create<math>();
+            var locator = Context.MemberLocator();
+            var located = locator.Located(host);
+            iter(located, m => trace(m.OpUri));        
+        }
+
+        public void query_3()
+        {
+            var host = ApiHost.Create<dvec>();
+            var query = Context.QueryLocated(host);
+            var unary = query.UnaryOps();
+            iter(unary, m => trace(m.OpUri));
+
+        }
+
     }
 }
-
-

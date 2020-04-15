@@ -158,16 +158,6 @@ namespace Z0.Asm
             => Svc.ApiCodeIndexer.Create(c, api);
 
         /// <summary>
-        /// Retrieves the members defined by an api host
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        public static IEnumerable<ApiMember> HostedMembers(this IContext context, IApiSet api, in ApiHostUri host)
-            => api.FindHost(host).MapRequired(host => context.MemberLocator().Hosted(host));
-
-        public static OpIndex<ApiMember> HostMemberIndex(this IContext context, IApiSet api, in ApiHostUri host)
-            => context.HostedMembers(api,host).ToOpIndex();
-
-        /// <summary>
         /// Reads code from a hex file
         /// </summary>
         /// <param name="src">The source path</param>
@@ -186,9 +176,9 @@ namespace Z0.Asm
         public static ApiCodeIndex ApiCodeIndex(this IContext context, IApiSet api, in ApiHostUri host, FolderPath root)
         {
             var indexer = context.CodeIndexer(api);
-            return indexer.CreateIndex(
-                context.HostMemberIndex(api, host), 
-                context.HostCodeIndex(host, root));            
+            var apiIndex = ApiIndex.From(context.HostedMembers(api,host));
+            var codeIndex = context.HostCodeIndex(host, root);
+            return indexer.CreateIndex(apiIndex, codeIndex);            
         }
 
         public static IImmSpecializer ImmSpecializer(this IContext context, IAsmFunctionDecoder decoder)

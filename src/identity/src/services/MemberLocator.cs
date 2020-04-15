@@ -19,7 +19,7 @@ namespace Z0
             public IMultiDiviner Diviner {get;}
 
             [MethodImpl(Inline)]
-            public static MemberLocator New(IContext context, IMultiDiviner diviner)
+            public static MemberLocator Create(IContext context, IMultiDiviner diviner)
                   => new MemberLocator(context,diviner);
 
             [MethodImpl(Inline)]
@@ -36,15 +36,15 @@ namespace Z0
                   return src.MethodHandle.GetFunctionPointer();
             }
 
-            public IEnumerable<ApiMember> HostedKind<K>(IApiHost src, K kind, GenericPartition g = GenericPartition.NonGeneric)
+            public ApiMembers Hosted(IApiHost src)
+                  => HostedGeneric(src).Concat(HostedDirect(src)).OrderBy(x => x.Method.MetadataToken).ToArray();
+
+            public ApiMembers Located(IApiHost src)
+                  => LocatedGeneric(src).Concat(LocatedDirect(src)).OrderBy(x => x.Address).ToArray();
+
+            public IEnumerable<ApiMember> HostedKind<K>(IApiHost src, K kind, bool generic = false)
                   where K : unmanaged, Enum
                   => HostedGeneric(src,kind).Concat(HostedDirect(src,kind)).OrderBy(x => x.Method.MetadataToken);
-
-            public IEnumerable<ApiMember> Hosted(IApiHost src)
-                  => HostedGeneric(src).Concat(HostedDirect(src)).OrderBy(x => x.Method.MetadataToken);
-
-            public IEnumerable<ApiMember> Located(IApiHost src)
-                  => LocatedGeneric(src).Concat(LocatedDirect(src)).OrderBy(x => x.Address);
 
             public IEnumerable<ApiMember> HostedNaturalNumeric(IApiHost src)  
                   => from m in src.HostingType.DeclaredMethods().NaturalNumeric()  
