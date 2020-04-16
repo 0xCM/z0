@@ -19,6 +19,8 @@ public enum PartId : ulong
 
     Blank03 = 5040,
 
+    Evaluate = 5100,
+
     Nats = 225, NatsTest = Nats | Test,
 
     Math = 45, MathTest = Math | Test, 

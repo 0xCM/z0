@@ -45,13 +45,13 @@ namespace Z0.Asm
             ParseMembers MemberParse
                 => ParseMembers.Create(Context);
 
-            public void Execute(in ApiHost host, in RootEmissionPaths dst)
+            public void Execute(in ApiHost host, IApiCodeArchive dst)
             {
                 var step = Context.Raise(StepEvents.Started(host, Context.Correlate()));
 
                 try
                 {
-                    var paths = dst.HostPaths(host);
+                    var paths = dst.HostArchive(host);
                     if(host.Owner.IsNone())
                         return;
 
@@ -66,7 +66,7 @@ namespace Z0.Asm
                     if(parsed.Length != 0)
                     {
                         ParseReportManager.SaveReport(ParseReportManager.CreateReport(host, parsed), paths.ParsedPath);                                                
-                        MemberParse.SaveHex(host, parsed, paths.CodePath);
+                        MemberParse.SaveHex(host, parsed, paths.HexPath);
 
                         var decoded = MemberDecode.DecodeParsed(host, parsed);
                         MemberDecode.SaveDecoded(host, decoded, paths.DecodedPath);

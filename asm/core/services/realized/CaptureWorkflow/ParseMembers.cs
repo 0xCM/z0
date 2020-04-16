@@ -36,10 +36,10 @@ namespace Z0.Asm
             public void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
                 => Context.Raise(HostAsmHexSaved.Define(host, HandleSave(host, src, dst), dst));
 
-            AsmOpBits[] HandleSave(ApiHostUri host, ParsedExtract[] src, FilePath dst)
+            OpUriBits[] HandleSave(ApiHostUri host, ParsedExtract[] src, FilePath dst)
             {
                 using var writer = Context.HexWriter(dst);
-                var data = src.Map(x => AsmOpBits.Define(x.Uri, x.ParsedContent.Bytes));
+                var data = src.Map(x => OpUriBits.Define(x.Uri, x.ParsedContent.Bytes));
                 writer.Write(data);
                 var saved = HostAsmHexSaved.Define(host,data,dst);                
                 return data;

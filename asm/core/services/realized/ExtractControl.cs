@@ -28,15 +28,15 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
+        public Option<CapturedMember> Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
             => Service.Capture(exchange, id, src);
 
         [MethodImpl(Inline)]
-        public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src)
+        public CapturedMember Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src)
             => Service.Capture(exchange, id,src);
 
         [MethodImpl(Inline)]
-        public Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
+        public Option<CapturedMember> Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
             => Service.Capture(exchange, id, src);                                    
 
         [MethodImpl(Inline)]
@@ -44,7 +44,7 @@ namespace Z0.Asm
             => Service.ParseBuffer(exchange, id, src);
 
         [MethodImpl(Inline)]
-        public Option<CapturedOp> Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
+        public Option<CapturedMember> Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
             => Service.Capture(exchange, src, args);
 
         [MethodImpl(Inline)]
@@ -54,7 +54,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        void IExtractJunction.OnCaptureComplete(in OpExtractExchange exchange, in ExtractState state, in CapturedOp captured)
+        void IExtractJunction.OnCaptureComplete(in OpExtractExchange exchange, in ExtractState state, in CapturedMember captured)
         {}
 
     }

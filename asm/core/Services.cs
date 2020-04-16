@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.IO;
 
     using Svc = Z0.Asm;
     
@@ -16,7 +17,6 @@ namespace Z0.Asm
 
     public static class ServiceFactory
     {                       
-
         [MethodImpl(Inline)]
         public static IExtractParser ExtractParser(this IAsmContext context, byte[] buffer)
             => Svc.ExtractParser.Create(context, buffer);
@@ -38,8 +38,8 @@ namespace Z0.Asm
             => AsmEmissionPaths.Define();
 
         [MethodImpl(Inline)]
-        public static IHostExtractor HostExtractor(this IContext context, int? bufferlen = null)
-            => Svc.HostExtractor.New(context, bufferlen ?? Pow2.T14);
+        public static IHostCodeExtractor HostExtractor(this IContext context, int? bufferlen = null)
+            => Svc.HostCodeExtractor.New(context, bufferlen ?? Pow2.T14);
 
         [MethodImpl(Inline)]
         public static IMemoryExtractor MemoryExtractor(this IContext context, byte[] buffer)
@@ -62,44 +62,6 @@ namespace Z0.Asm
             => CaptureService.New(context);
 
         /// <summary>
-        /// Instantiates a contextual code writer services that targets a specified file path
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="dst">The target path</param>
-        /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
-        [MethodImpl(Inline)]
-        public static ICodeStreamWriter CodeWriter(this IContext context, FilePath dst)
-            => CodeStreamWriter.New(context, dst);
-
-        /// <summary>
-        /// Instantiates a contextual code reader service
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="idsep">The identifer/code delimiter</param>
-        /// <param name="bytesep">The byte delimiter</param>
-        [MethodImpl(Inline)]
-        public static IAsmCodeReader CodeReader(this IContext context)
-            => AsmCodeReader.New(context);
-
-        /// <summary>
-        /// Instantiates a contextual service allocation that streams lines of operation hex to a target file
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="dst">The target file</param>
-        [MethodImpl(Inline)]
-        public static IHexStreamWriter HexWriter(this IContext context, FilePath dst)
-            => HexStreamWriter.Create(context, dst);
-
-        /// <summary>
-        /// Instantiates a contextual service allocation that streams lines of operation hex to a target file
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="dst">The target file</param>
-        [MethodImpl(Inline)]
-        public static IHexDataReader HexReader(this IContext context)
-            => AsmHexReader.New(context);
-
-        /// <summary>
         /// Creates an asm buffer set, which is considered an asm service but cannot be contracted since it is a ref struct
         /// </summary>
         /// <param name="context">The context assubmed by the buffers</param>
@@ -108,24 +70,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static AsmBuffers Buffers(this IContext context, int? size = null)
             => AsmBuffers.New(context, size);
-
-        /// <summary>
-        /// Instantiates a contextual archive service that is specialized for an assembly
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="id">The assembly identifier</param>
-        [MethodImpl(Inline)]
-        public static IAsmCodeArchive CodeArchive(this IContext context, PartId id)
-            => AsmCodeArchive.Create(context,id);
-
-        /// <summary>
-        /// Instantiates a contextual code archive service that is specialized for an assembly and api host
-        /// <param name="context">The source context</param>
-        /// <param name="catalog">The catalog name</param>
-        /// <param name="host">The api host name</param>
-        [MethodImpl(Inline)]
-        public static IAsmCodeArchive CodeArchive(this IContext context, PartId assembly, ApiHostUri host)
-            => AsmCodeArchive.Create(context, assembly, host);
 
         /// <summary>
         /// Creates a flow over an instruction source
@@ -146,40 +90,12 @@ namespace Z0.Asm
         }        
         
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(this IContext context, PartId catalog, string host, IAsmFormatter formatter)
-            => AsmFunctionArchive.Create(context, catalog, host, formatter);
+        public static IHostAsmArchiver FunctionArchive(this IContext context, PartId catalog, string host, IAsmFormatter formatter)
+            => HostAsmArchiver.Create(context, catalog, host, formatter);
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive ImmFunctionArchive(this IContext context, ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => AsmFunctionArchive.ImmArchive(context, host, formatter, dst);
-
-        [MethodImpl(Inline)]
-        public static IApiCodeIndexer CodeIndexer(this IContext c, IApiSet api)
-            => Svc.ApiCodeIndexer.Create(c, api);
-
-        /// <summary>
-        /// Reads code from a hex file
-        /// </summary>
-        /// <param name="src">The source path</param>
-        public static ReadOnlySpan<AsmOpBits> LoadHexCode(this IContext context, FilePath src)
-            => context.HexReader().Read(src).ToArray();
-
-        public static OpIndex<AsmOpBits> HostCodeIndex(this IContext context, in ApiHostUri host, FolderPath root)
-        {
-            var emissions = RootEmissionPaths.Define(root);            
-            var paths = emissions.HostPaths(host);
-            var code = context.LoadHexCode(paths.CodePath);
-            var index = code.ToEnumerable().ToOpIndex();    
-            return index;
-        }
-
-        public static ApiCodeIndex ApiCodeIndex(this IContext context, IApiSet api, in ApiHostUri host, FolderPath root)
-        {
-            var indexer = context.CodeIndexer(api);
-            var apiIndex = ApiIndex.From(context.HostedMembers(api,host));
-            var codeIndex = context.HostCodeIndex(host, root);
-            return indexer.CreateIndex(apiIndex, codeIndex);            
-        }
+        public static IHostAsmArchiver ImmFunctionArchive(this IContext context, ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+            => HostAsmArchiver.ImmArchive(context, host, formatter, dst);
 
         public static IImmSpecializer ImmSpecializer(this IContext context, IAsmFunctionDecoder decoder)
             => Svc.ImmSpecializer.Create(context, decoder);
@@ -190,5 +106,38 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         public static IHostCaptureService HostCaptureService(this IAsmContext context, FolderName area = null, FolderName subject = null)
             => Svc.HostCaptureService.Create(context, area, subject);
+
+        /// <summary>
+        /// Instantiates a contextual archive service that is specialized for an assembly
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="id">The assembly identifier</param>
+        [MethodImpl(Inline)]
+        public static IHostCodeArchive CodeArchive(this IContext context, PartId id)
+            => HostCodeArchive.Create(context,id);
+
+        /// <summary>
+        /// Instantiates a contextual code archive service that is specialized for an assembly and api host
+        /// <param name="context">The source context</param>
+        /// <param name="catalog">The catalog name</param>
+        /// <param name="host">The api host name</param>
+        [MethodImpl(Inline)]
+        public static IHostCodeArchive CodeArchive(this IContext context, PartId assembly, ApiHostUri host)
+            => HostCodeArchive.Create(context, assembly, host);
+
+        public static void WriteDiagnostic(this StreamWriter writer, in CapturedMember src)
+        {
+            var data = src.Parsed;
+            var dst = text.build();
+			dst.AppendLine($"; label   : {src.OpSig}");
+			dst.AppendLine($"; location: {src.AddressRange.Format()}, length: {src.AddressRange.Length} bytes");
+            var lines = data.Bytes.FormatHexLines(null);
+            dst.Append(lines.Concat(Chars.Eol));
+            dst.AppendLine(new string('_',80));
+            writer.Write(dst.ToString());
+        }
+
+        public static void WriteHexLine(this ICodeStreamWriter writer, in CapturedMember src, int? idpad = null)
+            => writer.WriteCode(EncodedHexLine.Define(src.OpId, src.Extracted.Bytes),idpad); 
     }
 }

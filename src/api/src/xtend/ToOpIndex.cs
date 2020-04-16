@@ -8,12 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
 
     using static Seed;
 
     partial class XTend
     {
+        public static OpIndex<OpUriBits> ToOpIndex(this IEnumerable<OpUriBits> src)
+            => OpIndex.From(src.Select(x => (x.Op.OpId, x)));
+
         /// <summary>
         /// Creates an operation index
         /// </summary>

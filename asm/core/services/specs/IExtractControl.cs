@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-
-
     /// <summary>
     /// Delegate contract for emission event receipt
     /// </summary>
@@ -34,7 +32,7 @@ namespace Z0.Asm
         /// <param name="src">The source exchange</param>
         /// <param name="state">The final state</param>
         /// <param name="captured">The captured member</param>
-        void OnCaptureComplete(in OpExtractExchange src, in ExtractState state, in CapturedOp captured);        
+        void OnCaptureComplete(in OpExtractExchange src, in ExtractState state, in CapturedMember captured);        
     }
 
     public interface IExtractControl : ICaptureService, IExtractJunction

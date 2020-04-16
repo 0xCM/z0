@@ -8,7 +8,14 @@
     <Api>$(Src)api/z0.api.csproj</Api>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Cast>$(Src)cast/z0.cast.csproj</Cast>
+    <Memories>$(Src)memories/z0.memories.csproj</Memories>
+    <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
+  </PropertyGroup>
+
   <PropertyGroup>    
+
     <Vectors>$(Src)vectors/z0.vectors.csproj</Vectors>
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
@@ -65,8 +72,6 @@
   <PropertyGroup>    
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
-    <Cast>$(Src)cast/z0.cast.csproj</Cast>
-    <Memories>$(Src)memories/z0.memories.csproj</Memories>
 
     <Time>$(Src)time/z0.time.csproj</Time>
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>

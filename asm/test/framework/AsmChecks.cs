@@ -61,7 +61,7 @@ namespace Z0.Asm.Validation
         /// Reads code from a hex file
         /// </summary>
         /// <param name="src">The source path</param>
-        public ReadOnlySpan<AsmOpBits> LoadCode(FilePath src)
+        public ReadOnlySpan<OpUriBits> LoadCode(FilePath src)
             => Context.HexReader().Read(src).ToArray();
 
         protected ApiHostUri Math

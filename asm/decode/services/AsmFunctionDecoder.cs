@@ -14,7 +14,6 @@ namespace Z0.Asm
     {
         readonly C Context;
 
-
         struct C
         {
             public static C Create(IContext context, AsmFormatConfig format)
@@ -29,7 +28,6 @@ namespace Z0.Asm
             public IAsmFunctionBuilder Builder;
         }
 
-
         [MethodImpl(Inline)]
         public static AsmFunctionDecoder Create(IContext context, AsmFormatConfig format)
             => new AsmFunctionDecoder(context, format);
@@ -40,7 +38,7 @@ namespace Z0.Asm
             Context = C.Create(context,format);
         }
 
-        public Option<AsmFunction> DecodeCaptured(CapturedOp src)
+        public Option<AsmFunction> DecodeCaptured(CapturedMember src)
             => DecodeCaptured(Context, src);
 
         public Option<AsmFunction> DecodeParsed(ParsedMemberCode parsed)
@@ -51,10 +49,10 @@ namespace Z0.Asm
             =>  from i in Context.Decoder.DecodeInstructions(AsmCode.Define(src.Id, src.ParsedContent))
                 select AsmFunction.Define(src,i);
 
-        static Option<AsmFunction> DecodeCaptured(C context, CapturedOp src)
+        static Option<AsmFunction> DecodeCaptured(C context, CapturedMember src)
             => from i in context.Decoder.DecodeInstructions(src.Code)
                 let block = Asm.AsmInstructionBlock.Define(src.Code, i, src.TermCode)
-                select context.Builder.BuildFunction(src.Uri, src.OpSig, block);
+                select context.Builder.BuildFunction(src.Uri, src.OpSig.Format(), block);
 
     }
 }

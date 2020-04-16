@@ -61,5 +61,12 @@ namespace Z0
         public static ApiMembers LocatedMembers(this IContext context, IApiSet api, in ApiHostUri host)
             => api.FindHost(host).MapRequired(host => context.LocatedMembers(host));
 
+        public static ApiCodeIndex ApiCodeIndex(this IContext context, IApiSet api, in ApiHostUri host, FolderPath root)
+        {
+            var indexer = context.CodeIndexer(api, context.MemberLocator());
+            var apiIndex = ApiIndex.From(context.HostedMembers(api,host));
+            var codeIndex = context.HostCodeIndex(host, root);
+            return indexer.CreateIndex(apiIndex, codeIndex);            
+        }
     }
 }

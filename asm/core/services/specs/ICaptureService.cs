@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The source method</param>
-        Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src);            
+        Option<CapturedMember> Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src);            
 
         /// <summary>
         /// Captures native x86 encoded assembly produced by the jitter by either 
@@ -28,7 +28,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="src">The source method</param>
         /// <param name="args">The types over which to close the generic method</param>
-        Option<CapturedOp> Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args);        
+        Option<CapturedMember> Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args);        
 
         /// <summary>
         /// Captures native code produced by the JIT for a dynamic delegate
@@ -36,7 +36,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src);
+        Option<CapturedMember> Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src);
             
         /// <summary>
         /// Captures native x86 encoded assembly produced by the jitter for a delegate
@@ -44,7 +44,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The delegate to capture</param>
-        CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src);
+        CapturedMember Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src);
             
         /// <summary>
         /// Captures encoded data from a caller-supplied source buffer.

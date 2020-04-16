@@ -28,23 +28,23 @@ namespace Z0.Asm
 
             public void CaptureCatalogs(AsmWorkflowConfig config)
             {
-                var root = RootEmissionPaths.Define(config.EmissionRoot);
+                var root = ApiCodeArchive.Define(config.EmissionRoot);
                 CaptureCatalogs(root);
             }
 
-            void CaptureCatalogs(RootEmissionPaths root)
+            void CaptureCatalogs(IApiCodeArchive dst)
             {                
-                root.Clear();
+                dst.Clear();
                 var catalogs = Context.ApiSet.Composition.Catalogs;
 
                 foreach(var catalog in catalogs)   
                 {
                     if(catalog.ApiHostCount != 0)                    
-                        CaptureCatalog(catalog, root);
+                        CaptureCatalog(catalog, dst);
                 }
             }
 
-            void CaptureCatalog(IApiCatalog src, in RootEmissionPaths dst)
+            void CaptureCatalog(IApiCatalog src, IApiCodeArchive dst)
             {
                 if(src.HasApiHostContent)
                 {

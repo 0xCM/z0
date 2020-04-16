@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         readonly FolderName Subject;
 
-        readonly IHostExtractor Extractor;
+        readonly IHostCodeExtractor Extractor;
 
         readonly IExtractParser Parser;
 
@@ -76,7 +76,7 @@ namespace Z0.Asm
 
             var dst = EmissionPaths.CodePath(host);
             using var writer = Context.HexWriter(dst);
-            var data = src.Map(x => AsmOpBits.Define(x.Uri, x.ParsedContent.Bytes));
+            var data = src.Map(x => OpUriBits.Define(x.Uri, x.ParsedContent.Bytes));
             writer.Write(data);
         }
 

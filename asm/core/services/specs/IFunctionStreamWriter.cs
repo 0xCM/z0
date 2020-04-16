@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     public delegate IFunctionStreamWriter AsmWriterFactory(FilePath dst, IAsmFormatter formatter);
 
-    public interface IFunctionStreamWriter : IAsmStreamWriter
+    public interface IFunctionStreamWriter : IFileStreamWriter
     {
         void Write(params AsmFunction[] src);
     }

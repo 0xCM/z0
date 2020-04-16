@@ -77,7 +77,7 @@ namespace Z0.Asm
             => TargetBuffer.Slice(start, length);
 
         [MethodImpl(Inline)]
-        public ref readonly CapturedOp CaptureComplete(in ExtractState state, in CapturedOp captured)
+        public ref readonly CapturedMember CaptureComplete(in ExtractState state, in CapturedMember captured)
         {
             Junction.OnCaptureComplete(this, state, captured);
             return ref captured;

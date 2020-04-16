@@ -31,8 +31,8 @@ namespace Z0.Asm
             Decoder = decoder;
             ImmSpecializer = context.ImmSpecializer(decoder);
             ApiSet = api;
-            Paths = RootEmissionPaths.Define(root);
-            Paths.Clear();
+            CodeArchive = ApiCodeArchive.Define(root);
+            CodeArchive.Clear();
             ApiCollector = context.ApiCollector();
             ConnectReceivers(Broker);
         }
@@ -47,7 +47,7 @@ namespace Z0.Asm
 
         readonly IApiCollector ApiCollector;
 
-        readonly RootEmissionPaths Paths;
+        readonly IApiCodeArchive CodeArchive;
 
         readonly IImmSpecializer ImmSpecializer;
 
@@ -66,10 +66,11 @@ namespace Z0.Asm
         public void Emit(params byte[] imm8)
             => EmitImm(Context.ExtractExchange(), imm8);
 
-        void EmitDirectRefinements(in OpExtractExchange exchange, IApiHost host, IAsmFunctionArchive dst)
+        void EmitDirectRefinements(in OpExtractExchange exchange, IApiHost host, IHostAsmArchiver dst)
         {            
             Flow.Raise(EmittingImmInjections.Define(host.UriPath, false));
-            var archive = Archive(host).Clear();
+            var archive = Archive(host);
+            archive.Clear();
             var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Refined);
             foreach(var g in groups)
             {
@@ -96,8 +97,8 @@ namespace Z0.Asm
 
         IEnumerable<IApiHost> ApiHosts => ApiSet.Hosts;
 
-        IAsmFunctionArchive Archive(IApiHost host)
-            => Context.ImmFunctionArchive(host.UriPath, Formatter, Paths.RootDir);
+        IHostAsmArchiver Archive(IApiHost host)
+            => Context.ImmFunctionArchive(host.UriPath, Formatter, CodeArchive.RootDir);
 
         void EmitImm(in OpExtractExchange exchange, byte[] imm8)
         {
@@ -110,15 +111,15 @@ namespace Z0.Asm
             foreach(var host in ApiHosts)
             {
                 Flow.Raise(EmittingImmInjections.Define(host.UriPath, false));
-                var archive = Archive(host).Clear();
+                var archive = Archive(host);
+                archive.Clear();
                 var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Unrefined);
                 Emit(exchange, groups,imm8, archive);
                 //EmitDirectRefinements(exchange, host, archive);
-
             }
         }
 
-        void Emit(in OpExtractExchange exchange, IEnumerable<DirectApiGroup> groups, byte[] imm8, IAsmFunctionArchive dst)
+        void Emit(in OpExtractExchange exchange, IEnumerable<DirectApiGroup> groups, byte[] imm8, IHostAsmArchiver dst)
         {            
             var unary = from g in groups
                         let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
@@ -145,7 +146,7 @@ namespace Z0.Asm
             }        
         }
 
-        void EmitUnary(in OpExtractExchange exchange, OpIdentity idGroup, IEnumerable<DirectApiOp> unary, byte[] imm8, IAsmFunctionArchive dst)
+        void EmitUnary(in OpExtractExchange exchange, OpIdentity idGroup, IEnumerable<DirectApiOp> unary, byte[] imm8, IHostAsmArchiver dst)
         {
             foreach(var member in unary)
             {
@@ -155,7 +156,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitBinary(in OpExtractExchange exchange, OpIdentity idGroup,  IEnumerable<DirectApiOp> binary, byte[] imm8, IAsmFunctionArchive dst)
+        void EmitBinary(in OpExtractExchange exchange, OpIdentity idGroup,  IEnumerable<DirectApiOp> binary, byte[] imm8, IHostAsmArchiver dst)
         {
             foreach(var member in binary)
             {
@@ -165,7 +166,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnary(in OpExtractExchange exchange, GenericApiOp f, byte[] imm8, IAsmFunctionArchive dst)
+        void EmitUnary(in OpExtractExchange exchange, GenericApiOp f, byte[] imm8, IHostAsmArchiver dst)
         {
             foreach(var closure in f.Close())
             {
@@ -175,7 +176,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitBinary(in OpExtractExchange exchange, GenericApiOp f, byte[] imm8,  IAsmFunctionArchive dst)
+        void EmitBinary(in OpExtractExchange exchange, GenericApiOp f, byte[] imm8,  IHostAsmArchiver dst)
         {
             foreach(var closure in f.Close())
             {
@@ -185,7 +186,7 @@ namespace Z0.Asm
             }
         }
 
-        void Emit(in OpExtractExchange exchange, GenericApiOp f,  byte[] imm8, IAsmFunctionArchive dst)
+        void Emit(in OpExtractExchange exchange, GenericApiOp f,  byte[] imm8, IHostAsmArchiver dst)
         {
             if(f.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
                 EmitUnary(exchange, f, imm8, dst);           

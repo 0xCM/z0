@@ -32,11 +32,11 @@ namespace Z0.Asm
         /// <param name="catalog">The catalog identity</param>
         /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(this IContext context, IApiHost host)
+        public static IHostAsmArchiver FunctionArchive(this IContext context, IApiHost host)
             => context.FunctionArchive(host.Owner, host.HostName, context.AsmFormatter());
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive ImmFunctionArchive(this IContext context, ApiHostUri host, FolderPath dst)
+        public static IHostAsmArchiver ImmFunctionArchive(this IContext context, ApiHostUri host, FolderPath dst)
             => context.ImmFunctionArchive(host, context.AsmFormatter(), dst);
 
         [MethodImpl(Inline)]
@@ -75,7 +75,7 @@ namespace Z0.Asm
         public static IAsmInstructionDecoder AsmInstructionDecoder(this IContext context, AsmFormatConfig format)
             => AsmDecoder.instruction(context,format);
 
-        public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive, IContext context, AsmFormatConfig format = null)
+        public static IAsmInstructionSource ToInstructionSource(this IHostCodeArchive archive, IContext context, AsmFormatConfig format = null)
         {
             IEnumerable<AsmInstructionList> Enumerate()
             {            

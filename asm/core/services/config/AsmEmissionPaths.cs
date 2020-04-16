@@ -13,21 +13,17 @@ namespace Z0.Asm
 
     public readonly struct AsmEmissionPaths
     {
-        readonly FolderPath Top;
-
-        readonly FolderName AreaName;
-
-        readonly FolderName SubjectName;
-
         public static AsmEmissionPaths Default => Define(Env.Current.LogDir);
+
+        public FolderPath RootDir {get;}
+
+        public FolderName AreaName {get;}
+
+        public FolderName SubjectName {get;}
         
         [MethodImpl(Inline)]
         public static AsmEmissionPaths Define(FolderPath root  = null)
             => new AsmEmissionPaths(root ?? Env.Current.LogDir);
-
-        [MethodImpl(Inline)]
-        public AsmEmissionPaths Rooted(FolderPath root)
-            => new AsmEmissionPaths(root);
 
         [MethodImpl(Inline)]
         public AsmEmissionPaths Subject(FolderName area, FolderName subject)
@@ -36,16 +32,16 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         AsmEmissionPaths(FolderPath root, FolderName area = null, FolderName subject = null)
         {
-            Top = root;
+            RootDir = root;
             AreaName = area ?? FolderName.Empty;
             SubjectName = subject ?? FolderName.Empty;
         }
 
         FolderName RootFolder => FolderName.Define("emissions");
 
-        FolderPath DataRoot => Top + RootFolder;
+        FolderPath DataRoot => RootDir + RootFolder;
 
-        public FolderPath EmissionRoot => (Top + AreaName) + SubjectName;
+        public FolderPath EmissionRoot => (RootDir + AreaName) + SubjectName;
 
         public FolderName ImmRootFolder => FolderName.Define("imm");
 
@@ -55,7 +51,7 @@ namespace Z0.Asm
 
         public FolderName ReportFolder => FolderName.Define($"reports");  
 
-        public FolderPath ReportRoot => Top + ReportFolder;
+        public FolderPath ReportRoot => RootDir + ReportFolder;
 
         public FolderPath ExtractDir => EmissionRoot + ExtractFolder;
 
@@ -63,9 +59,7 @@ namespace Z0.Asm
 
         public FolderPath DataSubDir(RelativeLocation location) => DataRoot +  location;
 
-        public FolderPath ImmRootDir => Top + ImmRootFolder;
-
-        public FolderPath ImmSubDir(FolderName folder) => ImmRootDir + folder;         
+        public FolderPath ImmRootDir => RootDir + ImmRootFolder;
 
         public FolderPath ImmSubDir(RelativeLocation location) => ImmRootDir +  location;
 
@@ -94,7 +88,6 @@ namespace Z0.Asm
         public FileName CodeFileName(ApiHostUri host)
             => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), CodeExt);
 
-
         public FilePath CodePath(ApiHostUri host) => CodeDir + CodeFileName(host);
 
         public FolderName AsmFolder => FolderName.Define("asm");
@@ -103,25 +96,12 @@ namespace Z0.Asm
 
         public FolderPath AsmDir =>  EmissionRoot +  AsmFolder;
         
-        public FileName AsmFileName(ApiHostUri host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), AsmExt);
 
         public FilePath DecodedPath(ApiHostUri host) => AsmDir + AsmFileName(host);
-
-        public FolderPath CilDir => AsmDir;
-
-        FileExtension CilExt => FileExtensions.Il;
-
-        FileName CilFileName(ApiHostUri host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), CilExt);
-
-        public FilePath CilPath(ApiHostUri host) => CilDir + CilFileName(host);
 
         FileExtension ResourceExt => FileExtensions.Csv;
 
         public FilePath ResourcePath(PartId id) => ReportRoot + FileName.Define(id.Format(), ResourceExt);              
-
-        FileExtension EmissionExt => FileExtensions.Csv;
 
         FileExtension LocationExt => FileExtensions.Csv;
 
@@ -138,9 +118,6 @@ namespace Z0.Asm
 
         public FilePath LocationPath(PartId assembly) => LocationDir + LocationFileName(assembly);
 
-        FileName HexFileName(OpIdentity m) => FileName.Define(m, Ext.Hex);
-
-        FileName HexFileName(ApiHostUri host) => FileName.Define(host.Name, Ext.Hex);
 
         public FilePath HexPath(PartId origin, ApiHostUri host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + HexFileName(id);
@@ -157,17 +134,15 @@ namespace Z0.Asm
         public FolderPath AsmRootDir(PartId part, ApiHostUri host, bool imm)
             => imm ? ImmSubDir(RelativeLocation.Define(part.Format(), host.Name)) : DataSubDir(RelativeLocation.Define(part.Format(), host.Name));
 
-        public FilePath HexPath(FolderPath dir, OpIdentity m) => dir + HexFileName(m);
-
-        FileName RawFileName(OpIdentity m) => FileName.Define(m, Ext.Raw);
+        FileName HexFileName(OpIdentity m) => FileName.Define(m, Ext.Hex);
 
         FileName CilFileName(OpIdentity m) => FileName.Define(m, Ext.Il);
 
         FilePath CilPath(PartId catalog, ApiHostUri host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(catalog.Format(), host.Name)) + CilFileName(id);
 
-        FilePath CilPath(ApiHostUri host, OpIdentity id)
-            => DataSubDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + CilFileName(id);
+        public FileName AsmFileName(ApiHostUri host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), AsmExt);
 
         public FileName DecodedOpFileName(OpIdentity m) => FileName.Define(m, AsmExt);
 

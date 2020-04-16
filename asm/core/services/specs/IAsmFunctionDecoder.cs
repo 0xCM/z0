@@ -14,8 +14,9 @@ namespace Z0.Asm
         /// <param name="parsed">The parsed data</param>
         Option<AsmFunction> DecodeParsed(ParsedMemberCode parsed);
 
-        Option<AsmFunction> DecodeCaptured(CapturedOp src);       
+        Option<AsmFunction> DecodeCaptured(CapturedMember src);       
 
         Option<AsmFunction> DecodeExtract(ParsedExtract src);                 
+
     }
 }

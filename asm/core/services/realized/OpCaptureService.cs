@@ -34,59 +34,59 @@ namespace Z0.Asm
             }
         }
 
-        public Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
+        public Option<CapturedMember> Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
         {
             try
             {
                 var pSrc = jit(src);
                 var summary = Parse(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
-                var captured = CapturedOp.Define(id, src, outcome.Range, summary.Bits, outcome.TermCode);                
+                var captured = CapturedMember.Define(id, src, summary.Bits, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<CapturedOp>();
+                return none<CapturedMember>();
             }
         }
 
-        public Option<CapturedOp> Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
+        public Option<CapturedMember> Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
         {
             try
             {
                 var pSrc = jit(src).Ptr;
                 var summary = Parse(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
-                var captured = CapturedOp.Define(id, src, outcome.Range, summary.Bits, outcome.TermCode);                
+                var captured = CapturedMember.Define(id, src, summary.Bits, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
                 term.error($"Capture service failure");
                 term.error(e);
-                return none<CapturedOp>();
+                return none<CapturedMember>();
             }
         }
 
-        public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src)
+        public CapturedMember Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src)
         {
             try
             {
                 var pSrc = jit(src);
                 var summary = Parse(exchange, id, pSrc);
                 var outcome = summary.Outcome;
-                var captured = CapturedOp.Define(id, src, outcome.Range, summary.Bits, outcome.TermCode);  
+                var captured = CapturedMember.Define(id, src, summary.Bits, outcome.TermCode);  
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return CapturedOp.Empty;                    
+                return CapturedMember.Empty;                    
             }
         }
 
-        public Option<CapturedOp> Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
+        public Option<CapturedMember> Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
         {
             if(src.IsOpenGeneric())
             {

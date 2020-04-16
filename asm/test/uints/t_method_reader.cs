@@ -30,6 +30,13 @@ namespace Z0.Asm
             return Context.CodeWriter(dstPath);
         }
 
+        StreamWriter Writer([Caller] string test = null)
+        {
+            var dstDir = Context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_native_reader).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
+            return dstPath.Writer();
+        }
+
         public void parse_address_segment()
         {
             var parser = HexParsers.MemoryRange;
@@ -72,8 +79,7 @@ namespace Z0.Asm
             var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
 
-
-            using var target = AsmCodeWriter();
+            using var target = Writer();
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
             {
                 var captured = ops.Capture(in exchange, m.Identify(), m);
@@ -94,7 +100,7 @@ namespace Z0.Asm
             var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
 
-            using var target = AsmCodeWriter();
+            using var target = Writer();
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
             target.WriteDiagnostic(ops.Capture(in exchange, dAnd.Identify(), dAnd));

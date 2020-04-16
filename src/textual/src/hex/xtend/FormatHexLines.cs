@@ -61,5 +61,13 @@ namespace Z0
             builder.AppendLine();
             return lines;           
         } 
+
+        /// <summary>
+        /// Formats the source data with optional line length/numbering
+        /// </summary>
+        /// <param name="data">The source data</param>
+        /// <param name="fmt">The format options</param>
+        public static IReadOnlyList<string> FormatHexLines(this byte[] data, HexLineConfig? fmt = null)
+            => data.ToReadOnlySpan().FormatHexLines(fmt);    
     }
 }
