@@ -12,17 +12,17 @@ namespace Z0
 
     using static Seed;
 
-    using K = OpClass;
+    using K = Kinds;
 
     partial class Fixed
     {        
         [MethodImpl(Inline)]
-        static UnaryOp<T> create<T>(MethodInfo src, K.UnaryOp<T> k)
+        static UnaryOp<T> create<T>(MethodInfo src, K.UnaryOpClass<T> k)
             where T : unmanaged
                 => create<UnaryOp<T>>(src);
 
         [MethodImpl(Inline)]
-        static BinaryOp<T> create<T>(MethodInfo src, K.BinaryOp<T> K)
+        static BinaryOp<T> create<T>(MethodInfo src, K.BinaryOpClass<T> K)
             where T : unmanaged
                 => create<BinaryOp<T>>(src);
 
@@ -43,57 +43,57 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static UnaryOp1 fix(MethodInfo f, K.UnaryOp<bit> k) => fix(create(f,k));
+        public static UnaryOp1 fix(MethodInfo f, K.UnaryOpClass<bit> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static UnaryOp8 fix(MethodInfo f, K.UnaryOp<sbyte> k) => fix(create(f,k));
+        public static UnaryOp8 fix(MethodInfo f, K.UnaryOpClass<sbyte> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static UnaryOp8 fix(MethodInfo f, K.UnaryOp<byte> k) => fix(create(f,k));
+        public static UnaryOp8 fix(MethodInfo f, K.UnaryOpClass<byte> k) => fix(create(f,k));
         
         [MethodImpl(Inline)]
-        public static UnaryOp16 fix(MethodInfo f, K.UnaryOp<short> k) => fix(create(f,k));
+        public static UnaryOp16 fix(MethodInfo f, K.UnaryOpClass<short> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static UnaryOp16 fix(MethodInfo f, K.UnaryOp<ushort> k) => fix(create(f,k));
+        public static UnaryOp16 fix(MethodInfo f, K.UnaryOpClass<ushort> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static UnaryOp32 fix(MethodInfo f, K.UnaryOp<uint> k) => fix(create(f,k));
+        public static UnaryOp32 fix(MethodInfo f, K.UnaryOpClass<uint> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static UnaryOp32 fix(MethodInfo f, K.UnaryOp<int> k) => fix(create(f,k));
+        public static UnaryOp32 fix(MethodInfo f, K.UnaryOpClass<int> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static UnaryOp64 fix(MethodInfo f, K.UnaryOp<ulong> k) => fix(create(f,k));
+        public static UnaryOp64 fix(MethodInfo f, K.UnaryOpClass<ulong> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static UnaryOp64 fix(MethodInfo f, K.UnaryOp<long> k ) => fix(create(f,k));
+        public static UnaryOp64 fix(MethodInfo f, K.UnaryOpClass<long> k ) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static BinaryOp1 fix(MethodInfo f, K.BinaryOp<bit> k) => fix(create(f,k));
+        public static BinaryOp1 fix(MethodInfo f, K.BinaryOpClass<bit> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 fix(MethodInfo f, K.BinaryOp<sbyte> k) => fix(create(f,k));
+        public static BinaryOp8 fix(MethodInfo f, K.BinaryOpClass<sbyte> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 fix(MethodInfo f, K.BinaryOp<byte> k) => fix(create(f,k));
+        public static BinaryOp8 fix(MethodInfo f, K.BinaryOpClass<byte> k) => fix(create(f,k));
         
         [MethodImpl(Inline)]
-        public static BinaryOp16 fix(MethodInfo f, K.BinaryOp<short> k) => fix(create(f,k));
+        public static BinaryOp16 fix(MethodInfo f, K.BinaryOpClass<short> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 fix(MethodInfo f, K.BinaryOp<ushort> k) => fix(create(f,k));
+        public static BinaryOp16 fix(MethodInfo f, K.BinaryOpClass<ushort> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 fix(MethodInfo f, K.BinaryOp<uint> k) => fix(create(f,k));
+        public static BinaryOp32 fix(MethodInfo f, K.BinaryOpClass<uint> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 fix(MethodInfo f, K.BinaryOp<int> k) => fix(create(f,k));
+        public static BinaryOp32 fix(MethodInfo f, K.BinaryOpClass<int> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 fix(MethodInfo f, K.BinaryOp<ulong> k) => fix(create(f,k));
+        public static BinaryOp64 fix(MethodInfo f, K.BinaryOpClass<ulong> k) => fix(create(f,k));
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 fix(MethodInfo f, K.BinaryOp<long> k ) => fix(create(f,k));
+        public static BinaryOp64 fix(MethodInfo f, K.BinaryOpClass<long> k ) => fix(create(f,k));
     }
 }

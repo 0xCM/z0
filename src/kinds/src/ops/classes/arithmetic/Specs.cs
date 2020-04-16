@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
         
-    using Id = OpKindId;
-
     /// <summary>
     /// Characteries an arithmetic function classifier
     /// </summary>

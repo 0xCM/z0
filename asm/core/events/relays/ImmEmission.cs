@@ -6,17 +6,13 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static Seed;
     using static Memories;
     using static AsmEvents;
 
-    public interface IImmEmissionRelay : IWorkflowRelay
+    public interface IImmEmissionStep : IStepBroker, IEventBroker<EmittingImmInjections>
     {
         EmittingImmInjections EmittingImmInjections => EmittingImmInjections.Empty;
-
     }
-
 }

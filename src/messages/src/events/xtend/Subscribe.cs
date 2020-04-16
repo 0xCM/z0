@@ -19,19 +19,8 @@ namespace Z0
         /// <param name="receiver">The handler ivoked upon event occurrence</param>
         /// <typeparam name="E">The event type</typeparam>
         [MethodImpl(Inline)]
-        public static Outcome Subscribe<E>(this E e, IAppEventBroker broker, Action<E> receiver)
+        public static Outcome Subscribe<E>(this E e, IEventBroker broker, Action<E> receiver)
             where E : IAppEvent
                 => AppEvents.subscribe(e, broker, receiver);
-
-        [MethodImpl(Inline)]
-        public static Outcome Weak(this IAppEvent e, IAppEventBroker broker, Action<IAppEvent> receiver)
-            => e.Subscribe(broker, receiver);
-
-        public static IAppMsgWriter OpenMessageLog(this FolderPath dst, string name, FileExtension ext = null, FileWriteMode mode = FileWriteMode.Overwrite,  bool display = false)
-        {
-            var target = dst + FileName.Define(name, ext ?? FileExtensions.Log);
-            return AppMessages.writer(target, name, mode, display);
-        }
-
     }
 }

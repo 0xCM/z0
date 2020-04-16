@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -25,7 +25,6 @@ namespace Z0.Asm.Check
                 this.Context = context;
                 this.Content = content;
             }
-
 
             public Pairs<T> Src 
             {

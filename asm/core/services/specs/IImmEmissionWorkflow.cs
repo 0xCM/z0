@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface IImmEmissionWorkflow : IAsmWorkflow
+    public interface IImmEmissionWorkflow : IAppMsgReceiver
     {
         void Emit(params byte[] immediates);
         

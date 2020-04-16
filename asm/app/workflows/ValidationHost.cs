@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0.Asm
 {
     using System;
     using System.Collections.Generic;
@@ -63,7 +63,7 @@ namespace Z0.Asm.Check
 
         readonly IMemberLocator MemberLocator;
 
-        readonly IAppEventRelay Relay;
+        readonly IEventBroker Relay;
 
         [MethodImpl(Inline)]
         ref readonly E Raise<E>(in E e)
@@ -93,7 +93,7 @@ namespace Z0.Asm.Check
             term.print($"Writting app messages to {AppMsgLogPath}");
         }
         
-        public void Run()
+        public void Execute(params string[] args)
         {
             if(Settings.EmitImmArtifacts)
                 EmitImm();
@@ -121,7 +121,7 @@ namespace Z0.Asm.Check
         void Exec()
         {
             var workflow = AsmExecWorkflow.Create(Context, Sink, RootEmissionPath);
-            workflow.Run();
+            workflow.Execute();
         }
 
         static string Format(IAppEvent e) => e?.Format() ?? string.Empty;
@@ -172,7 +172,7 @@ namespace Z0.Asm.Check
             NotifyConsole(msg);
         }
 
-        void OnEvent(WorkflowError e)
+        void OnEvent(AppErrorEvent e)
         {
             NotifyConsole(AppMsg.Error(e.Payload));    
         }
@@ -189,9 +189,10 @@ namespace Z0.Asm.Check
             NotifyConsole(msg);            
         }
 
-        void ConnectReceivers(IHostCaptureWorkflowRelay broker)
+        void ConnectReceivers(IHostCaptureBroker broker)
         {
             broker.Error.Subscribe(broker, OnEvent);
+
 
             if(Settings.HandleMembersLocated)
                 broker.MembersLocated.Subscribe(broker, OnEvent);

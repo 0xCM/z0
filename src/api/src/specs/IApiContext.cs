@@ -14,13 +14,23 @@ namespace Z0
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IApiContext : IContext
-    {
-        /// <summary>
-        /// The composition assigned to the context
-        /// </summary>
-        IApiComposition Composition {get;}
+    public interface IApiContext : IAppContext, IAppMsgQueue, IPolyrandProvider, IApiSet
+    {        
+        IAppMsgExchange Messaging {get;}
+        
+        void ISink<IAppMsg>.Deposit(IAppMsg msg)
+            => Messaging.Deposit(msg);
 
-        Option<IApiHost> FindHost(ApiHostUri uri);
+        void IAppMsgSink.Notify(string msg, AppMsgKind? severity)
+            => Messaging.Notify(msg, severity);
+
+        IReadOnlyList<IAppMsg> IAppMsgQueue.Dequeue()
+            => Messaging.Dequeue();
+
+        IReadOnlyList<IAppMsg> IAppMsgQueue.Flush(Exception e)
+            => Messaging.Flush(e);
+
+        void IAppMsgQueue.Emit(FilePath dst) 
+            => Messaging.Emit(dst);
     }
 }

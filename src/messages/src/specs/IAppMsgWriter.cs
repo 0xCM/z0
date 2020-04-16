@@ -11,5 +11,11 @@ namespace Z0
 
         void Write<F>(F[] formattables)
             where F : ICustomFormattable;  
+
+        static IAppMsgWriter AllocateFile(FolderPath dst, string name, FileExtension ext = null, FileWriteMode mode = FileWriteMode.Overwrite,  bool display = false)
+        {
+            var target = dst + FileName.Define(name, ext ?? FileExtensions.Log);
+            return AppMessages.writer(target, name, mode, display);
+        }
     }
 }

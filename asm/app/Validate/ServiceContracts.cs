@@ -2,24 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0.Asm
 {
     using System;
 
-    public interface IAsmWorkflow : IService
+    public interface IAsmExecWorkflow : IExecutable
     {
-        void Run();
-        
+
     }
 
-    public interface IAsmExecWorkflow : IAsmWorkflow
+    public interface IAsmValidationHost : IExecutable, IDisposable
     {
-        
-    }
 
-    public interface IAsmValidationHost : IAsmWorkflow, IDisposable
-    {
-        
     }
 
     public interface IAsmExecutor : IService

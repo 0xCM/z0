@@ -16,18 +16,18 @@ namespace Z0.Asm.Check
         static IPart[] Dependencies
             => new IPart[]{
                 P.GMath.Resolved, 
-                // P.BitCore.Resolved,
-                // P.BitFields.Resolved,
-                // P.BitGrids.Resolved,
-                // P.BitPack.Resolved,
-                // P.BitSpan.Resolved,                
+                P.BitCore.Resolved,
+                P.BitFields.Resolved,
+                P.BitGrids.Resolved,
+                P.BitPack.Resolved,
+                P.BitSpan.Resolved,                
+                P.DVec.Resolved,
+                P.GVec.Resolved,
+                P.FVec.Resolved,
                 // P.BitVectors.Resolved,
                 // P.BitSvc.Resolved,
                 // P.Blocks.Resolved,
                 // P.Numeric.Resolved,
-                // P.DVec.Resolved,
-                // P.GVec.Resolved,
-                // P.FVec.Resolved,
                 // P.Api.Resolved,
                 // P.AsmCore.Resolved, 
                 // P.Cast.Resolved,
@@ -93,7 +93,7 @@ namespace Z0.Asm.Check
         void ValidateArtifacts()
         {
             using var host = ValidationHost.Create(Context);
-            host.Run();
+            host.Execute();
         }
 
         void AnalyzeExtracts()

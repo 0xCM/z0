@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0.Asm
 {
     using System;
     
-    using C = OpClass;
+    using K = Kinds;
     
     using static Seed;
     using static Memories;
@@ -17,7 +17,7 @@ namespace Z0.Asm.Check
 
         readonly IAppMsgSink Sink;
         
-        readonly IAsmEvalDispatcher Dispatcher;
+        readonly IEvalDispatcher Dispatcher;
         
         readonly ByteSize BufferSize;
 
@@ -36,7 +36,7 @@ namespace Z0.Asm.Check
         {                    
             this.Sink = msgsink;
             this.Context = context;
-            this.Dispatcher = AsmEvalDispatcher.Create(context, msgsink, context.Random);
+            this.Dispatcher = EvalDispatcher.Create(context, msgsink, context.Random);
             this.BufferSize = 1024;
             this.BufferCount = 3;
             this.RootPaths = RootEmissionPaths.Define(root);
@@ -73,7 +73,7 @@ namespace Z0.Asm.Check
                     var uri = api.Uri;
                     var oc = OperatorTypeClass.Infer(api.Method).Format();
                     var kind = api.Method.KindId().Format();
-                    var ok = default(C.BinaryOp);
+                    var ok = default(K.BinaryOpClass);
                     Dispatcher.Dispatch(buffers, api, ok);
                 }
             }
@@ -89,7 +89,7 @@ namespace Z0.Asm.Check
             }
         }
         
-        public void Run()
+        public void Execute(params string[] args)
         {
             using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
 

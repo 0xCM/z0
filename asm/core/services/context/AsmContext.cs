@@ -57,7 +57,7 @@ namespace Z0.Asm
 
         public IPolyrand Random {get;}
 
-        IAppMsgExchange Messaging {get;}
+        public IAppMsgExchange Messaging {get;}
         
         public IAppSettings Settings {get;}
 

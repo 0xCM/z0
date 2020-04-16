@@ -27,7 +27,7 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            WorkflowError Error(Exception e)
+            AppErrorEvent Error(Exception e)
                 => e;
 
             ManageExtractReport ExtractReportManager
@@ -47,7 +47,7 @@ namespace Z0.Asm
 
             public void Execute(in ApiHost host, in RootEmissionPaths dst)
             {
-                var step = Context.Raise(WorkflowSteps.Started(host, Context.Correlate()));
+                var step = Context.Raise(StepEvents.Started(host, Context.Correlate()));
 
                 try
                 {
@@ -78,7 +78,7 @@ namespace Z0.Asm
                 }
                 finally
                 {
-                    Context.Raise(WorkflowSteps.Ended(host, step.Correlation));
+                    Context.Raise(StepEvents.Ended(host, step.Correlation));
                 }
             }      
         }

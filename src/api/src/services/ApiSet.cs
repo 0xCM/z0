@@ -13,6 +13,10 @@ namespace Z0
 
     public readonly struct ApiSet : IApiSet
     {
+        [MethodImpl(Inline)]
+        public static IApiSet Create(IApiComposition composition)
+            => new ApiSet(composition);
+
         public IApiComposition Composition {get;}
 
         public IApiHost[] Hosts {get;}
@@ -22,10 +26,6 @@ namespace Z0
         public IPart[] Parts {get;}
 
         public PartId[] PartIdentities {get;}
-
-        [MethodImpl(Inline)]
-        public static ApiSet Create(IApiComposition composition)
-            => new ApiSet(composition);
                 
         [MethodImpl(Inline)]
         ApiSet(IApiComposition api)
@@ -38,11 +38,5 @@ namespace Z0
             Parts = Composition.Resolved;       
             PartIdentities = Parts.Map(p => p.Id);            
         }
-
-        public Option<IApiHost> FindHost(ApiHostUri uri)
-            => option(Hosts.Where(h => h.UriPath == uri).FirstOrDefault());
-
-        public Option<IPart> FindPart(PartId id)
-            => option(Parts.FirstOrDefault(p => p.Id == id));
     }
 }

@@ -32,11 +32,6 @@ namespace Z0
     {
 
     }
-
-    public interface IFuncType : ILiteralKind<FunctionClass>
-    {
-
-    }
     
     /// <summary>
     /// Charactrizes a class-parametric operation class
@@ -57,7 +52,6 @@ namespace Z0
     /// <typeparam name="E">The class type</typeparam>
     public interface IOpClass<E,T> : IOpClass<E>, IOpClassT<T>
         where E : unmanaged, Enum
-        where T : unmanaged
     {
 
     }
@@ -81,40 +75,6 @@ namespace Z0
     /// <typeparam name="E">The class type</typeparam>
     public interface IOpClassF<F,E,T> : IOpClass<E,T>, IOpClassF<F,E>
         where F : IOpClassF<F,E,T>, new()
-        where E : unmanaged, Enum
-        where T : unmanaged
-    {
-
-    }
-
-    public interface IFixedOpClass : IOpClass
-    {
-        TypeWidth Width {get;}
-    }
-
-    public interface IFixedOpClass<E> : IFixedOpClass, IOpClass<E>
-        where E : unmanaged, Enum
-    {
-        
-    }
-
-    public interface IFixedOpClassF<F,E> : IFixedOpClass, IOpClass<E>
-        where F : struct, IFixedOpClassF<F,E>
-        where E : unmanaged, Enum
-    {
-        
-    }
-
-    public interface IFixedOpClass<W,E> : IFixedOpClass<E>
-        where W : unmanaged, ITypeWidth
-        where E : unmanaged, Enum
-    {
-        TypeWidth IFixedOpClass.Width => Widths.type<W>();
-    }
-    
-    public interface IFixedOpClassF<F,W,E> : IFixedOpClass<W,E>, IOpClassF<F,E>
-        where F : struct, IFixedOpClassF<F,W,E>
-        where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {
 

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0.Asm
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Z0.Asm.Check
     using static Seed;
     using static AsmEvents;
 
-    public interface IExtractAnalyzerRelay : IWorkflowRelay
+    public interface IExtractAnalyzerRelay : IStepBroker
     {
         HostMembersLocated MembersLocated => HostMembersLocated.Empty;
 
@@ -25,17 +25,16 @@ namespace Z0.Asm.Check
         AnalyzingExtractReport AnalyzingExtractReport => AnalyzingExtractReport.Empty;
     }
 
-    sealed class ExtractAnalyzerRelay : AppEventRelay, IExtractAnalyzerRelay
+    sealed class ExtractAnalyzerRelay : EventBroker, IExtractAnalyzerRelay
     {
         [MethodImpl(Inline)]
         public new static IExtractAnalyzerRelay Create()
             => new ExtractAnalyzerRelay();
     }
 
-
-    public interface IExtractAnalyzer : IAsmWorkflow
+    public interface IExtractAnalyzer : IService
     {
-        
+        void Run();        
     }
 
     class ExtractAnalyzer : IExtractAnalyzer
@@ -62,7 +61,7 @@ namespace Z0.Asm.Check
             ConnectReceivers(relay);
         }
 
-        readonly IAppEventRelay Relay;
+        readonly IEventBroker Relay;
 
         readonly IHostExtractor Extractor;
 
@@ -95,7 +94,7 @@ namespace Z0.Asm.Check
             where E : IAppEvent
                 => ref Relay.Raise(e);
 
-        void OnError(WorkflowError e)
+        void OnError(AppErrorEvent e)
         {
             Report(AppMsg.Error(e.Payload));    
         }

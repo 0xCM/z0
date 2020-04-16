@@ -8,7 +8,7 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IHostFunctionsDecodedRelay : IWorkflowRelay
+    public interface IHostFunctionsDecodedRelay : IEventBroker<HostFunctionsDecoded>
     {
         HostFunctionsDecoded FunctionsDecoded => HostFunctionsDecoded.Empty;
     }

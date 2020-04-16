@@ -13,20 +13,13 @@ namespace Z0.Asm
     using static Memories;
     using static AsmEvents;
 
-    public sealed class ImmEmitterRelay : AppEventRelay,  IImmEmissionRelay
-    {
-        [MethodImpl(Inline)]
-        public new static ImmEmitterRelay Create()
-            => new ImmEmitterRelay();
-    }
-
-    public class ImmEmissionWorkflow : IAsmWorkflow<ImmEmissionWorkflow,ImmEmitterRelay>, IImmEmissionWorkflow
+    public class ImmEmissionWorkflow : IAsmWorkflow<ImmEmissionWorkflow,ImmEmissionBroker>, IImmEmissionWorkflow
     {                
         public static IImmEmissionWorkflow Create(IContext context, IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
             => new ImmEmissionWorkflow(context, sink, formatter, decoder, api, dst);
 
-        public ImmEmitterRelay Relay {get;} 
-            = new ImmEmitterRelay();
+        public ImmEmissionBroker Broker {get;} 
+            = new ImmEmissionBroker();
 
         public IAppMsgSink Sink {get;}
 
@@ -41,10 +34,10 @@ namespace Z0.Asm
             Paths = RootEmissionPaths.Define(root);
             Paths.Clear();
             ApiCollector = context.ApiCollector();
-            ConnectReceivers(Relay);
+            ConnectReceivers(Broker);
         }
 
-        IAsmWorkflow<ImmEmitterRelay> Flow => this;
+        IAsmWorkflow<ImmEmissionBroker> Flow => this;
 
         readonly IApiSet ApiSet;
 
@@ -60,7 +53,7 @@ namespace Z0.Asm
 
         readonly IContext Context;
 
-        void ConnectReceivers(IImmEmissionRelay relay)
+        void ConnectReceivers(IImmEmissionStep relay)
         {
             relay.EmittingImmInjections.Subscribe(relay,OnEvent);            
         }
@@ -72,7 +65,6 @@ namespace Z0.Asm
 
         public void Emit(params byte[] imm8)
             => EmitImm(Context.ExtractExchange(), imm8);
-
 
         void EmitDirectRefinements(in OpExtractExchange exchange, IApiHost host, IAsmFunctionArchive dst)
         {            

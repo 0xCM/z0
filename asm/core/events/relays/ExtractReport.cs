@@ -8,7 +8,7 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IExtractReportRelay : IWorkflowRelay
+    public interface IExtractReportRelay : IEventBroker<ExtractReportCreated>, IEventBroker<ExtractReportSaved>
     {
         ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
 

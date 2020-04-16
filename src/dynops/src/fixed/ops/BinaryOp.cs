@@ -10,9 +10,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using C = OpClass;
+    using C = Kinds;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class FixedDynamic
     {
@@ -24,7 +25,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp8 Emit(IBufferToken dst, C.BinaryOp op, W8 w, in IdentifiedCode src)
+        public static BinaryOp8 Emit(IBufferToken dst, C.BinaryOpClass op, W8 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp16 Emit(IBufferToken dst, C.BinaryOp op, W16 w, in IdentifiedCode src)
+        public static BinaryOp16 Emit(IBufferToken dst, C.BinaryOpClass op, W16 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp32 Emit(IBufferToken dst, C.BinaryOp op, W32 w, in IdentifiedCode src)
+        public static BinaryOp32 Emit(IBufferToken dst, C.BinaryOpClass op, W32 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp64 Emit(IBufferToken dst, C.BinaryOp op, W64 w, in IdentifiedCode src)
+        public static BinaryOp64 Emit(IBufferToken dst, C.BinaryOpClass op, W64 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128 Emit(IBufferToken dst, C.BinaryOp op, W128 w, in IdentifiedCode src)
+        public static BinaryOp128 Emit(IBufferToken dst, C.BinaryOpClass op, W128 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         /// <summary>
@@ -79,35 +80,35 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256 Emit(IBufferToken dst, C.BinaryOp op, W256 w, in IdentifiedCode src)
+        public static BinaryOp256 Emit(IBufferToken dst, C.BinaryOpClass op, W256 w, in IdentifiedCode src)
             => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
 
         [MethodImpl(Inline)]
-        static BinaryOp8 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W8 w)
+        static BinaryOp8 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOpClass op, W8 w)
             => (BinaryOp8)Emit(buffer, id, op, typeof(BinaryOp8), typeof(Fixed8));
 
         [MethodImpl(Inline)]
-        static BinaryOp16 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W16 w)
+        static BinaryOp16 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOpClass op, W16 w)
             => (BinaryOp16)Emit(buffer, id, op, typeof(BinaryOp16), typeof(Fixed16));
 
         [MethodImpl(Inline)]
-        static BinaryOp32 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W32 w)
+        static BinaryOp32 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOpClass op, W32 w)
             => (BinaryOp32)Emit(buffer, id, op, typeof(BinaryOp32), typeof(Fixed32));
 
         [MethodImpl(Inline)]
-        static BinaryOp64 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, W64 w)
+        static BinaryOp64 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOpClass op, W64 w)
             => (BinaryOp64)Emit(buffer, id, op, typeof(BinaryOp64), typeof(Fixed64));
 
         [MethodImpl(Inline)]
-        static BinaryOp128 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, N128 w)
+        static BinaryOp128 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOpClass op, N128 w)
             => (BinaryOp128)Emit(buffer, id, op, typeof(BinaryOp128), typeof(Fixed128));
 
         [MethodImpl(Inline)]
-        static BinaryOp256 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, N256 w)
+        static BinaryOp256 Emit(IBufferToken buffer, OpIdentity id, C.BinaryOpClass op, N256 w)
             => (BinaryOp256)Emit(buffer, id, op, typeof(BinaryOp256), typeof(Fixed256));
 
         [MethodImpl(Inline)]
-        internal static FixedDelegate Emit(IBufferToken buffer, OpIdentity id, C.BinaryOp op, Type operatorType, Type operandType)        
+        internal static FixedDelegate Emit(IBufferToken buffer, OpIdentity id, C.BinaryOpClass op, Type operatorType, Type operandType)        
             => Emit(buffer.Handle, id, functype:operatorType, result:operandType, args:array(operandType, operandType));
 
         internal static FixedDelegate Emit(IntPtr src, OpIdentity id, Type functype, Type result, params Type[] args)

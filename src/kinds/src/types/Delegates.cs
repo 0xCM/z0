@@ -13,7 +13,9 @@ namespace Z0
 
     using static Seed;
     
-    using K = OpClass;
+    using K = Kinds;
+
+    using C = OpClass;
 
     public static class Delegates
     {
@@ -22,27 +24,27 @@ namespace Z0
             => create<Action>(src);
 
         [MethodImpl(Inline)]
-        public static Emitter<T> create<T>(MethodInfo src, K.Emitter<T> k)
+        public static Emitter<T> create<T>(MethodInfo src, C.Emitter<T> k)
             where T : unmanaged
                 => create<Emitter<T>>(src);
 
         [MethodImpl(Inline)]
-        public static Receiver<T> create<T>(MethodInfo src, K.Receiver<T> k)
+        public static Receiver<T> create<T>(MethodInfo src, C.Receiver<T> k)
             where T : unmanaged
                 => create<Receiver<T>>(src);
 
         [MethodImpl(Inline)]
-        public static UnaryOp<T> create<T>(MethodInfo src, K.UnaryOp<T> k)
+        public static UnaryOp<T> create<T>(MethodInfo src, K.UnaryOpClass<T> k)
             where T : unmanaged
                 => create<UnaryOp<T>>(src);
 
         [MethodImpl(Inline)]
-        public static BinaryOp<T> create<T>(MethodInfo src, K.BinaryOp<T> K)
+        public static BinaryOp<T> create<T>(MethodInfo src, K.BinaryOpClass<T> K)
             where T : unmanaged
                 => create<BinaryOp<T>>(src);
 
         [MethodImpl(Inline)]
-        public static TernaryOp<T> create<T>(MethodInfo src, K.TernaryOp<T> k)
+        public static TernaryOp<T> create<T>(MethodInfo src, K.TernaryOpClass<T> k)
             where T : unmanaged
              => create<TernaryOp<T>>(src);
 

@@ -16,10 +16,10 @@ namespace Z0.Asm
 
     }    
     
-    sealed class HostCaptureBroker : AppEventRelay, IHostCaptureWorkflowRelay
+    sealed class HostCaptureBroker : EventBroker, IHostCaptureBroker
     {
         [MethodImpl(Inline)]
-        public new static IHostCaptureWorkflowRelay Create()
+        public new static IHostCaptureBroker Create()
             => new HostCaptureBroker();
     }
 
@@ -27,7 +27,7 @@ namespace Z0.Asm
     {
         readonly CaptureWorkflowContext Context;
 
-        public IHostCaptureWorkflowRelay EventBroker {get;}
+        public IHostCaptureBroker EventBroker {get;}
         
         [MethodImpl(Inline)]
         public static IHostCaptureWorkflow Create(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory)

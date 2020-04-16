@@ -2,36 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Seed;
     using static Memories;
-    using C = OpClass;
+    using C = Kinds;
 
-    interface IAsmEvalDispatcher : IService
+    interface IEvalDispatcher : IService
     {
 
         bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api);
 
-        void Dispatch(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp k);    
+        void Dispatch(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOpClass k);    
 
         bit EvalFixedOperator(in BufferSeq buffers, in ApiMemberCode api);
-    }
-
-    public interface IApiEvaluator<C>
-        where C : IOpClass
-    {
-
-    }
-
-    public interface IApiEvaluator<C,T> : IApiEvaluator<C>, IService
-        where C : IOpClass
-        where T : unmanaged
-    {
-
     }
 
     public readonly ref struct ApiEvalContext

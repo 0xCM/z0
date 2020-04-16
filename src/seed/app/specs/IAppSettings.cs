@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;    
     using System.Linq;
 
@@ -15,7 +16,7 @@ namespace Z0
         string Value {get;}        
     }
 
-    public interface IAppSettings
+    public interface IAppSettings : IEnumerable<IAppSetting>
     {
         Option<string> Setting(string name);
         
@@ -24,6 +25,12 @@ namespace Z0
         string this[string name] {get;}
 
         IEnumerable<IAppSetting> All {get;}
+
+        IEnumerator<IAppSetting> IEnumerable<IAppSetting>.GetEnumerator() 
+            => All.GetEnumerator();
+        
+        IEnumerator IEnumerable.GetEnumerator()
+            => All.GetEnumerator();
     }
 
     public interface IAppSettingSet : ICustomFormattable

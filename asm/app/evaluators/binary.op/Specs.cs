@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0.Asm
 {
     using System;
 
     using static EvalPackages;
-    using static OpClass;
 
-    public interface IBinaryOpEvaluator<T> : IApiEvaluator<BinaryOp, T>
+    public interface IBinaryOpEvaluator<T> : IService
         where T : unmanaged
     {
         ref readonly BinaryEval<T> Evaluate(in BinaryOpPackage<T> package);

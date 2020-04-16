@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -14,14 +14,6 @@ namespace Z0.Asm.Check
     readonly struct BinaryOpEvaluator<T> : IBinaryOpEvaluator<T>
         where T : unmanaged
     {
-        public IAsmContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public BinaryOpEvaluator(IAsmContext context)
-        {
-            this.Context = context;
-        }
-
         public ref readonly BinaryEval<T> Evaluate(in BinaryOpPackage<T> package)
         {
             var f = package.ApiCode.Member.Method.CreateDelegate<BinaryOp<T>>();

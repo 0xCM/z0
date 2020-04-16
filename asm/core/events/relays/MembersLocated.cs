@@ -8,7 +8,7 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IMembersLocatedRelay : IWorkflowRelay
+    public interface IMembersLocatedRelay : IEventBroker<HostMembersLocated>
     {
         HostMembersLocated MembersLocated => HostMembersLocated.Empty;
     }

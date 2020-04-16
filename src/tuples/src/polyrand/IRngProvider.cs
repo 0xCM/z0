@@ -23,4 +23,10 @@ namespace Z0
     {
 
     }
+
+    public interface IRandomContext : IPolyrandProvider, IAppContext
+    {
+
+
+    }
 }

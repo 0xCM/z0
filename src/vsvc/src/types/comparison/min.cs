@@ -9,6 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Seed;
+    
+    using K = Kinds;
 
     public interface IClassifiedOperator<K>
         where K : IOpClass<OperatorClass>
@@ -20,7 +22,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Min128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>, IClassifiedOperator<OpClass.BinaryOp<T>>
+        public readonly struct Min128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>, IClassifiedOperator<K.BinaryOpClass<T>>
             where T : unmanaged
         {
             public const string Name = "vmin";
@@ -31,7 +33,7 @@ namespace Z0
 
             public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
-            public OpClass.BinaryOp<T> Class => default;
+            public K.BinaryOpClass<T> Class => default;
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vmin(x,y);

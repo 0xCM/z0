@@ -5,17 +5,27 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
 
-    public interface IApiSet : IApiContext
+    using static Seed;
+    using static Memories;
+
+    public interface IApiSet
     {
         IPart[] Parts {get;}   
 
         IApiCatalog[] Catalogs {get;}
 
-        Option<IPart> FindPart(PartId id);      
-
         PartId[] PartIdentities {get;}
 
         IApiHost[] Hosts {get;}
+
+        IApiComposition Composition {get;}
+
+        Option<IPart> FindPart(PartId id)
+            => option(Parts.FirstOrDefault(p => p.Id == id));      
+
+        Option<IApiHost> FindHost(ApiHostUri uri)
+            => option(Hosts.Where(h => h.UriPath == uri).FirstOrDefault());
     }
 }

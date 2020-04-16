@@ -11,7 +11,7 @@ public enum PartId : ulong
 {
     None = 0,
 
-    Blank00 = 5010,
+    Control = 5010,
 
     Blank01 = 5020,
 

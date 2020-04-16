@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Vectors;
 
-    using C = OpClass;
+    using K = Kinds;
 
     class SVValidatorD<T> : ISVFDecomposer<T>
         where T : unmanaged
@@ -48,7 +48,7 @@ namespace Z0
             return $"{owner}/{host}/{id}";            
         }
 
-        public void Validate<F>(F f, C.UnaryOp op, W128 w)
+        public void Validate<F>(F f, K.UnaryOpClass op, W128 w)
             where F : ISVUnaryOp128DApi<T>
         {            
             void run()
@@ -66,7 +66,7 @@ namespace Z0
             Run(f, run, w, op.Generalized);
         }
 
-        public void Validate<F>(F f, C.UnaryOp op,  W256 w)
+        public void Validate<F>(F f, K.UnaryOpClass op,  W256 w)
             where F : ISVUnaryOp256DApi<T>
         {
 
@@ -85,7 +85,7 @@ namespace Z0
             Run(f, run, w, op.Generalized);
         }
 
-        public void Validate<F>(F f, C.BinaryOp op,  W128 w)
+        public void Validate<F>(F f, K.BinaryOpClass op,  W128 w)
             where F : ISVBinaryOp128DApi<T>
         {
             void run()
@@ -104,7 +104,7 @@ namespace Z0
             Run(f, run, w, op.Generalized);
         }
 
-        public void Validate<F>(F f, C.BinaryOp op,  W256 w)
+        public void Validate<F>(F f, K.BinaryOpClass op,  W256 w)
             where F : ISVBinaryOp256DApi<T>
         {
             void run()
@@ -163,7 +163,7 @@ namespace Z0
             }
         }
 
-        void Run<W>(ISFuncApi f, Action act, W width, C.OperatorClass c)
+        void Run<W>(ISFuncApi f, Action act, W width, K.OperatorClass c)
             where W : unmanaged, ITypeWidth
         {
             var succeeded = true;

@@ -9,27 +9,27 @@ namespace Z0
 
     using static Seed;
 
-    using C = OpClass;
+    using C = Kinds;
 
     partial class ServiceFactory
     {
         [MethodImpl(Inline)]
-        public static IEmitterFactory<T> OperatorFactory<T>(this IContext context, C.Emitter<T> op)        
+        public static IEmitterFactory<T> OperatorFactory<T>(this IContext context, OpClass.Emitter<T> op)        
             where T : unmanaged
                 => default(EmitterFactory<T>);
 
         [MethodImpl(Inline)]
-        public static IUnaryOpFactory<T> OperatorFactory<T>(this IContext context, C.UnaryOp<T> op)        
+        public static IUnaryOpFactory<T> OperatorFactory<T>(this IContext context, C.UnaryOpClass<T> op)        
             where T : unmanaged
                 => default(UnaryOpFactory<T>);
 
         [MethodImpl(Inline)]
-        public static IBinaryOpFactory<T> OperatorFactory<T>(this IContext context, C.BinaryOp<T> op)        
+        public static IBinaryOpFactory<T> OperatorFactory<T>(this IContext context, C.BinaryOpClass<T> op)        
             where T : unmanaged
                 => default(BinaryOpFactory<T>);
 
         [MethodImpl(Inline)]
-        public static ITernaryOpFactory<T> OperatorFactory<T>(this IContext context, C.TernaryOp<T> op)        
+        public static ITernaryOpFactory<T> OperatorFactory<T>(this IContext context, C.TernaryOpClass<T> op)        
             where T : unmanaged
                 => default(TernaryOpFactory<T>);
     }

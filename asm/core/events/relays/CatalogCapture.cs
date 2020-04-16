@@ -8,7 +8,7 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface ICatalogCaptureRelay : IWorkflowRelay
+    public interface ICatalogCaptureRelay : IStepBroker
     {
         StepStart<IApiCatalog> CaptureCatalogStart => StepStarted<IApiCatalog>();
 

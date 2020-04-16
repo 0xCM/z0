@@ -1,36 +1,7 @@
 <Project>
 
-  <PropertyGroup>
-    <TopDir>$(MSBuildThisFileDirectory)</TopDir>
-    <PlatformTarget>x64</PlatformTarget>    
-    <BuildRootDir>$(TopDir)bin\</BuildRootDir>
-    <LibBuildDir>$(BuildRootDir)lib\</LibBuildDir>
-    <OutputDir>$(LibBuildDir)</OutputDir>
-    <OutputPath>$(LibBuildDir)</OutputPath>
-    <DocumentationFile>$(LibBuildDir)$(MsBuildProjectName).xml</DocumentationFile>
-    <IntermediateBuildDir>$(BuildRootDir)obj\$(MSBuildProjectName)\</IntermediateBuildDir>
-    <BaseIntermediateOutputPath>$(IntermediateBuildDir)</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(IntermediateBuildDir)</IntermediateOutputPath>
-    <NoWarn>1591;1572;1573;1701;1702;1712;1711;1570;1571;1574;1710;8321;NETSDK1057;0169;0414;0219</NoWarn>
-    <NullableReferenceTypes>true</NullableReferenceTypes>
-    <NullableContextOptions>disable</NullableContextOptions>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>    
-    <Prefer32Bit>false</Prefer32Bit>
-    <DebugSymbols>true</DebugSymbols>
-    <LangVersion>preview</LangVersion>
-    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
-    <AssemblyVersion>1.0.41</AssemblyVersion>
-    <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <Src>$(TopDir)src/</Src>
-    <SrcDir>$(TopDir)src/</SrcDir>
-    <TestDir>$(TopDir)test/</TestDir>
-    <NativeDir>$(TopDir)native/</NativeDir>
-  </PropertyGroup>
+  <Import Project="z0.props"/>
+  <Import Project="$(SrcDir)src.symbols.props"/>
 
   <PropertyGroup>
     <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
@@ -53,15 +24,11 @@
     <AsmApp>$(TopDir)asm/app/z0.asm.app.csproj</AsmApp>
     <AsmDecode>$(TopDir)asm/decode/z0.asm.decode.csproj</AsmDecode>
     <AsmEncode>$(TopDir)asm/encode/z0.asm.encode.csproj</AsmEncode>
-    <AsmSuite>$(TopDir)asm/src/z0.asm.csproj</AsmSuite>
-    <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
+    <AsmWorkflows>$(TopDir)asm/workflows/z0.asm.workflows.csproj</AsmWorkflows>
   </PropertyGroup>
   
   <PropertyGroup>
     <Nats>$(TopDir)nats/src/z0.nats.csproj</Nats>
   </PropertyGroup>
-
-  <Import Project="$(SrcDir)src.export.props"/>
-
 
 </Project>

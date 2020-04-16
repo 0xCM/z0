@@ -48,7 +48,7 @@ namespace Z0.Asm
             {
                 if(src.HasApiHostContent)
                 {
-                    var start = Context.Raise(WorkflowSteps.Started(src, Context.Correlate()));
+                    var start = Context.Raise(StepEvents.Started(src, Context.Correlate()));
 
                     var step = DriveHostCapture.Create(Context);
                     foreach(var host in src.ApiHosts)
@@ -56,7 +56,7 @@ namespace Z0.Asm
                         step.Execute(host, dst);
                     }
 
-                    Context.Raise(WorkflowSteps.Ended(src, start.Correlation));
+                    Context.Raise(StepEvents.Ended(src, start.Correlation));
                 }
             }
        }

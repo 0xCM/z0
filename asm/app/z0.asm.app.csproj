@@ -6,11 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(AsmTypes)" />
-    <ProjectReference Include="$(AsmModels)" />
-    <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(AsmDecode)" />
-    <ProjectReference Include="$(AsmSuite)" />
+    <ProjectReference Include="$(AsmWorkflows)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />    

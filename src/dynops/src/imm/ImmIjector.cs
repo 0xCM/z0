@@ -11,7 +11,7 @@ namespace Z0
    
     using static Seed;
 
-    using C = OpClass;
+    using K = Kinds;
 
     readonly struct ImmInjector<D> : IImmInjector<D>
         where D : Delegate
@@ -164,28 +164,28 @@ namespace Z0
         readonly IImmInjector Embedder;
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, Vec128Kind vk, C.UnaryOp opk)
+        internal ImmInjector(IContext context, Vec128Kind vk, K.UnaryOpClass opk)
         {
             this.Context = context;
             this.Embedder = new V128UnaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, Vec256Kind vk, C.UnaryOp opk)
+        internal ImmInjector(IContext context, Vec256Kind vk, K.UnaryOpClass opk)
         {
             this.Context = context;
             this.Embedder = new V256UnaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, Vec128Kind vk, C.BinaryOp opk)
+        internal ImmInjector(IContext context, Vec128Kind vk, K.BinaryOpClass opk)
         {
             this.Context = context;
             this.Embedder = new V1286BinaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, Vec256Kind vk, C.BinaryOp opk)
+        internal ImmInjector(IContext context, Vec256Kind vk, K.BinaryOpClass opk)
         {
             this.Context = context;
             this.Embedder = new V256BinaryOpImmInjector(context);

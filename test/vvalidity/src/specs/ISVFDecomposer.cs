@@ -5,6 +5,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using C = OpClass;
+    using K = Kinds;
 
     /// <summary>
     /// Characterizes a vectorized sfunc decomposition validator
@@ -20,7 +21,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void Validate<F>(F f, C.UnaryOp op, W128 w)
+        void Validate<F>(F f, K.UnaryOpClass op, W128 w)
             where F : ISVUnaryOp128DApi<T>;   
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void Validate<F>(F f, C.UnaryOp op, W256 w)
+        void Validate<F>(F f, K.UnaryOpClass op, W256 w)
             where F : ISVUnaryOp256DApi<T>;
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void Validate<F>(F f, C.BinaryOp op, W128 w)
+        void Validate<F>(F f, K.BinaryOpClass op, W128 w)
             where F : ISVBinaryOp128DApi<T>;
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void Validate<F>(F f, C.BinaryOp op, W256 w)
+        void Validate<F>(F f, K.BinaryOpClass op, W256 w)
             where F : ISVBinaryOp256DApi<T>;
     }
 

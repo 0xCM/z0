@@ -8,7 +8,7 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IHostHexSavedRelay : IWorkflowRelay
+    public interface IHostHexSavedRelay : IEventBroker<HostAsmHexSaved>
     {
         HostAsmHexSaved HexSaved => HostAsmHexSaved.Empty;        
     }
