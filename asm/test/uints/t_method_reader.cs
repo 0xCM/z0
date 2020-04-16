@@ -6,36 +6,15 @@ namespace Z0.Asm
 {
     using System;
     using System.Linq;
-    using System.IO;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    using System.IO;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     
     public sealed class t_native_reader : t_asm<t_native_reader>
     {
         protected override bool TraceEnabled => true;
-
-        StreamWriter NativeTestWriter([Caller] string test = null)
-        {
-            var dstDir = Context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_native_reader).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
-            return dstPath.Writer();
-        }
-
-        ICodeStreamWriter AsmCodeWriter([Caller] string test = null)
-        {
-            var dstDir = Context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_native_reader).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
-            return Context.CodeWriter(dstPath);
-        }
-
-        StreamWriter Writer([Caller] string test = null)
-        {
-            var dstDir = Context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_native_reader).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
-            return dstPath.Writer();
-        }
 
         public void parse_address_segment()
         {
@@ -54,7 +33,7 @@ namespace Z0.Asm
         public void capture_vectorized_generics()
         {
 
-            using var writer = NativeTestWriter();
+            using var writer = FileStreamWriter();
 
             var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
@@ -79,7 +58,7 @@ namespace Z0.Asm
             var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
 
-            using var target = Writer();
+            using var target = FileStreamWriter();
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
             {
                 var captured = ops.Capture(in exchange, m.Identify(), m);
@@ -100,7 +79,7 @@ namespace Z0.Asm
             var exchange = Context.ExtractExchange();
             var ops  = exchange.Operations;
 
-            using var target = Writer();
+            using var target = FileStreamWriter();
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
             target.WriteDiagnostic(ops.Capture(in exchange, dAnd.Identify(), dAnd));

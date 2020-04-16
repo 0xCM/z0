@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     class t_asm_main : t_asm_explicit<t_asm_main>
     {
@@ -76,29 +75,6 @@ namespace Z0.Asm
             var stateBytes = state.Select(s => s.Payload).ToArray();
         }
 
-
         #endif
-
-        static ICodeStreamWriter CodeWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
-            return  context.CodeWriter(dstPath);
-        }
-
-        static ICodeStreamWriter HexWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Raw);    
-            return  context.CodeWriter(dstPath);
-        }
-
-        static IFunctionStreamWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Asm);    
-            var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.AsmWriter(dstPath,format);
-        }
     }
 }

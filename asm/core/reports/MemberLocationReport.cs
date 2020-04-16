@@ -55,6 +55,7 @@ namespace Z0.Asm
             return dst.ToString();
         }
     }
+
     public class MemberLocationReport : IReport<MemberLocationRecord>
     {
         public static MemberLocationReport Create(PartId assemblyid, IEnumerable<MethodInfo> methods)
@@ -82,12 +83,5 @@ namespace Z0.Asm
 
         public MemberLocationRecord[] Records {get;}
 
-        /// <summary>
-        /// Intentionally not being saved because the report is useless
-        /// </summary>
-        public Option<FilePath> Save()
-            => ApiHost.MapValueOrElse(
-                    h => AsmEmissionPaths.Define().LocationPath(h.UriPath),
-                   () => AsmEmissionPaths.Define().LocationPath(AssemblyId));            
     }
 }

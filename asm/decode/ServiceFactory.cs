@@ -26,24 +26,6 @@ namespace Z0.Asm
             => context.AsmFormatter(AsmFormatConfig.DefaultStreamFormat);
 
         /// <summary>
-        /// Instantiates a contextual function archive service that is specialized for an assembly and api host
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="catalog">The catalog identity</param>
-        /// <param name="host">The api host name</param>
-        [MethodImpl(Inline)]
-        public static IHostAsmArchiver FunctionArchive(this IContext context, IApiHost host)
-            => context.FunctionArchive(host.Owner, host.HostName, context.AsmFormatter());
-
-        [MethodImpl(Inline)]
-        public static IHostAsmArchiver ImmFunctionArchive(this IContext context, ApiHostUri host, FolderPath dst)
-            => context.ImmFunctionArchive(host, context.AsmFormatter(), dst);
-
-        [MethodImpl(Inline)]
-        public static IMemoryCapture MemoryCapture(this IContext context, int? bufferlen = null)
-            => context.MemoryCapture(context.AsmInstructionDecoder(AsmFormatConfig.New), bufferlen);
-
-        /// <summary>
         /// Allocates a caller-disposed asm text writer with a customized format configuration
         /// </summary>
         /// <param name="context">The source context</param>

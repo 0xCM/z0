@@ -27,5 +27,4 @@ namespace Z0.Asm
 
         public const byte Call_xE8 = 0xe8;
     }
-
 }

@@ -10,9 +10,31 @@ namespace Z0
     /// <summary>
     /// Characterizes console-controlled, perhaps user-initiated, thread of execution
     /// </summary>
-    public interface IShell : IExecutable
+    public interface IShell : IExecutable, IServiceAllocation, ICustomFormattable
     {        
+        void OnFatalError(Exception e);
 
+        FolderPath AppLogDir => Env.Current.LogDir + FolderName.Define("apps");
+
+        FilePath AppLogPath {get;}
+
+        PartId AppId {get;}
+
+        void RunShell(params string[] args);
+
+        string ICustomFormattable.Format() => AppId.Format();
+        
+        void IExecutable.Execute(params string[] args)
+        {
+            try   
+            {
+               RunShell(args); 
+            }
+            catch (Exception e) 
+            { 
+                OnFatalError(e); 
+            }
+        }
     }
 
     /// <summary>
@@ -21,13 +43,15 @@ namespace Z0
     public interface IShell<S> : IShell
         where S : IShell<S>, new()
     {
-        
+        PartId IShell.AppId => typeof(S).Assembly.Id();
+
+        FilePath IShell.AppLogPath => AppLogDir + FileName.Define(AppId.Format(), FileExtensions.Log);
     }
 
     /// <summary>
     /// Characterizes a reified shell with parametric context
     /// </summary>
-    public interface IShell<S,C> : IShell
+    public interface IShell<S,C> : IShell<S>
         where S : IShell<S,C>, new()
         where C : IContext    
     {

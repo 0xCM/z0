@@ -16,11 +16,9 @@ namespace Z0.Asm
     {
         IAppPaths AppPaths => Context.Paths;
 
-        AsmEmissionPaths EmissionPaths => AsmEmissionPaths.Default;
+        IApiCodeArchive EmissionPaths => ApiCodeArchive.Default;
 
-        AsmEmissionPaths Emissions(FolderName area, FolderName subject) => EmissionPaths.Subject(area,subject);
-
-        FolderPath EmissionRoot => EmissionPaths.EmissionRoot;
+        IApiCodeArchive Emissions(FolderName area, FolderName subject) => EmissionPaths.WithSubject(area,subject);
         
         IAppSettings Settings => Context.Settings;
 

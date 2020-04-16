@@ -14,6 +14,24 @@ namespace Z0
 
     public static class ApiArchiveServices
     {
+        /// <summary>
+        /// Instantiates a contextual archive service that is specialized for an assembly
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="id">The assembly identifier</param>
+        [MethodImpl(Inline)]
+        public static IHostCodeArchive CodeArchive(this IContext context, PartId id, FolderPath root = null)
+            => HostCodeArchive.Create(context,id, root ?? ApiCodeArchive.Default.RootDir);
+
+        /// <summary>
+        /// Instantiates a contextual code archive service that is specialized for an assembly and api host
+        /// <param name="context">The source context</param>
+        /// <param name="catalog">The catalog name</param>
+        /// <param name="host">The api host name</param>
+        [MethodImpl(Inline)]
+        public static IHostCodeArchive CodeArchive(this IContext context, PartId assembly, ApiHostUri host, FolderPath root = null)
+            => HostCodeArchive.Create(context, assembly, host, root ?? ApiCodeArchive.Default.RootDir);
+
         [MethodImpl(Inline)]
         public static IApiCodeIndexer CodeIndexer(this IContext c, IApiSet api, IMemberLocator locator)
             => ApiCodeIndexer.Create(c, api, locator);

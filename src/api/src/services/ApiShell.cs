@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public abstract class ApiShell<A,C> : Shell<A,C>, IApiShell<A>, IAppMsgSink
+    public abstract class ApiShell<A,C> : Shell<A,C>, IApiShell<A>
         where A : ApiShell<A,C>, new()
         where C : IContext
     {
@@ -20,13 +20,24 @@ namespace Z0
             this.MsgQueue = AppMessages.queue();
         }
 
-        public string Format()
-            => GetType().Name;
-
         public void Deposit(IAppMsg msg)
             => MsgQueue.Deposit(msg);
 
+        protected IApiShell Shelled => this;
+
+        PartId AppId => typeof(A).Assembly.Id();
+
         public override void OnFatalError(Exception e)
-            => Control.iter(MsgQueue.Flush(e), term.print);
+        {
+            Print(AppMsg.Error(e));            
+        }
+                    
+        protected override void OnDispose()
+        {
+            MsgQueue.Emit(Shelled.AppLogPath);
+        }        
+
+        protected void Print(object content, AppMsgColor? color = null)
+            => Shelled.Print(content, color);
     }
 }

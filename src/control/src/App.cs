@@ -30,20 +30,22 @@ namespace Z0
             
         }
 
-        bool Verbose => false;
+        bool Verbose => true;
 
         public override void RunShell(params string[] args)
         {
+            Print("Executing control");
+            
             if(Verbose)
             {
-                term.print("I assemble parts:");
-                iter(Context.Parts, part => term.print(part));
+                Print("I assemble parts:");
+                iter(Context.Parts, part => Print(part));
 
-                term.print("I know parts:");
-                iter(Part.known(), part => term.print(part));
+                Print("I know parts:");
+                iter(Part.known(), part => Print(part));
 
-                term.print("I am configured with:");
-                iter(Context.Settings, setting => term.print(setting));
+                Print("I am configured with:");
+                iter(Context.Settings, setting => Print(setting));
             }
         }
 

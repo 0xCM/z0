@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Direct vectorized intrinsics
     /// </summary>
-    [ApiHost(ApiHostKind.Direct)]
+    [ApiHost("api")]
     public partial class dvec : IApiHost<dvec>
     {        
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    

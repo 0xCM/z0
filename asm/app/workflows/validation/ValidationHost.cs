@@ -133,7 +133,7 @@ namespace Z0.Asm
             Analyze(e.Host, e.Payload);
         }
 
-        void OnEvent(EmittingImmInjections e)
+        void OnEvent(EmittingImmTargets e)
         {
             var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
             NotifyConsole(msg);
@@ -197,7 +197,7 @@ namespace Z0.Asm
                 broker.MembersLocated.Subscribe(broker, OnEvent);
 
             if(Settings.EmitImmArtifacts)
-                broker.EmittingImmInjections.Subscribe(broker, OnEvent);
+                broker.EmittingImmTargets.Subscribe(broker, OnEvent);
 
             if(Settings.HandleExtractReportCreated)
                 broker.ExtractReportCreated.Subscribe(broker, OnEvent);

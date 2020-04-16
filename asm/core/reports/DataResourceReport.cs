@@ -68,9 +68,6 @@ namespace Z0.Asm
             public readonly PartId Id;
 
             public DataResourceRecord[] Records {get;}
-
-            public readonly FilePath ReportPath
-                => AsmEmissionPaths.Define().ResourcePath(Id);
             
             readonly BinaryResources Index;        
 
@@ -83,9 +80,6 @@ namespace Z0.Asm
                 Index = index;
                 Records = CreateRecords(id,index);
             }
-
-            public Option<FilePath> Save()
-                => Records.Save(ReportPath); 
 
             static DataResourceRecord[] CreateRecords(PartId id, BinaryResources index)
             {

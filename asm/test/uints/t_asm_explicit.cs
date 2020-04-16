@@ -10,12 +10,9 @@ namespace Z0.Asm
         where E : t_asm_explicit<E>
     {
 
-        FolderPath LogDir;
 
         public t_asm_explicit()
         {
-            //Context = AsmContext.Rooted(this,DefaultComposition.Create());
-            this.LogDir = Context.EmissionPaths().DataSubDir(FolderName.Define(GetType().Name));
                                     
         }
    

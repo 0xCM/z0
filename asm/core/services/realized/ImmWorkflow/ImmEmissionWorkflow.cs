@@ -31,7 +31,7 @@ namespace Z0.Asm
             Decoder = decoder;
             ImmSpecializer = context.ImmSpecializer(decoder);
             ApiSet = api;
-            CodeArchive = ApiCodeArchive.Define(root);
+            CodeArchive = ApiCodeArchive.Define(root + FolderName.Define("imm"));
             CodeArchive.Clear();
             ApiCollector = context.ApiCollector();
             ConnectReceivers(Broker);
@@ -55,10 +55,22 @@ namespace Z0.Asm
 
         void ConnectReceivers(IImmEmissionStep relay)
         {
-            relay.EmittingImmInjections.Subscribe(relay,OnEvent);            
+            relay.EmittingImmTargets.Subscribe(relay,OnEvent);  
+            relay.EmittedImmRefinements.Subscribe(relay,OnEvent);          
+            relay.HostFileEmissionFailed.Subscribe(relay,OnEvent);
         }
 
-        void OnEvent(EmittingImmInjections e)
+        void OnEvent(EmittingImmTargets e)
+        {
+            
+        }
+
+        void OnEvent(EmittedImmRefinements e)
+        {
+            Flow.Report(e);
+        }
+
+        void OnEvent(HostFileEmissionFailed e)
         {
             Flow.Report(e);
         }
@@ -68,7 +80,6 @@ namespace Z0.Asm
 
         void EmitDirectRefinements(in OpExtractExchange exchange, IApiHost host, IHostAsmArchiver dst)
         {            
-            Flow.Raise(EmittingImmInjections.Define(host.UriPath, false));
             var archive = Archive(host);
             archive.Clear();
             var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Refined);
@@ -78,17 +89,32 @@ namespace Z0.Asm
                 {
                     if(member.Method.IsVectorizedUnaryImm(ImmRefinementKind.Refined))
                     {
-                        var imm8 = member.Method.ImmParameters(ImmRefinementKind.Refined).First().RefinedImmValues();
+                        var immParam = member.Method.ImmParameters(ImmRefinementKind.Refined).First();
+                        var imm8 = immParam.RefinedImmValues();
                         var functions = ImmSpecializer.UnaryOps(exchange, member.Method, member.Id, imm8);
                         if(functions.Length != 0)
-                            dst.Save(AsmFunctionGroup.Define(g.GroupId, functions), true);                    
+                        {
+                            var fg = AsmFunctionGroup.Define(g.GroupId, functions);
+                            dst.SaveHex(fg.Members, true)
+                                .OnSome(path => Flow.Raise(EmittedImmRefinements.Define(host.UriPath, false, immParam.ParameterType, path)));
+                            dst.SaveAsm(fg.Members, true)
+                                .OnSome(path => Flow.Raise(EmittedImmRefinements.Define(host.UriPath, false, immParam.ParameterType, path)))
+                            ;
+                        }
                     }
                     else if(member.Method.IsVectorizedBinaryImm(ImmRefinementKind.Refined))
                     {
-                        var imm8 = member.Method.ImmParameters(ImmRefinementKind.Refined).First().RefinedImmValues();
+                        var immParam = member.Method.ImmParameters(ImmRefinementKind.Refined).First();
+                        var imm8 = immParam.RefinedImmValues();
                         var functions = ImmSpecializer.BinaryOps(exchange, member.Method, member.Id, imm8);
                         if(functions.Length != 0)
-                            dst.Save(AsmFunctionGroup.Define(g.GroupId, functions), true);                    
+                        {
+                            var fg = AsmFunctionGroup.Define(g.GroupId, functions);
+                            dst.SaveHex(fg.Members, true)
+                                .OnSome(path => Flow.Raise(EmittedImmRefinements.Define(host.UriPath, false, immParam.ParameterType, path)));
+                            dst.SaveAsm(fg.Members, true)
+                                .OnSome(path => Flow.Raise(EmittedImmRefinements.Define(host.UriPath, false, immParam.ParameterType, path)));
+                        }
 
                     }
                 }
@@ -110,12 +136,12 @@ namespace Z0.Asm
         {            
             foreach(var host in ApiHosts)
             {
-                Flow.Raise(EmittingImmInjections.Define(host.UriPath, false));
+                Flow.Raise(EmittingImmTargets.Define(host.UriPath, false));
                 var archive = Archive(host);
                 archive.Clear();
                 var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Unrefined);
                 Emit(exchange, groups,imm8, archive);
-                //EmitDirectRefinements(exchange, host, archive);
+                EmitDirectRefinements(exchange, host, archive);
             }
         }
 

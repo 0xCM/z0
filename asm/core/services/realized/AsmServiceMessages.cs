@@ -10,19 +10,7 @@ namespace Z0.Asm
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     public static class AsmServiceMessages
-    {
-        public static AppMsg CatalogEmitted(IApiCatalog catalog)
-            => AppMsg.Define($"Successfully emitted {catalog.CatalogName} catalog",AppMsgKind.Info);
-
-        public static AppMsg CatalogEmissionFailed(IApiCatalog catalog, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppMsg.Error($"Error occurred while emitting catalog {catalog.CatalogName}", caller, file, line);
-
-        public static AppMsg Emitted(AsmEmissionToken src)
-            => AppMsg.Babble($"Emitted {src.Uri}");
-
-        public static AppMsg EmissionMismatch(OpIdentity id, int incount, int outcount)
-            => AppMsg.Warn($"In/out mismatch on function group {id}, in = {incount}, out = {outcount}");
-        
+    {        
         public static AppMsg InstructionSizeMismatch(MemoryAddress location, int offset, int actual, int reported,
             [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
                 => AppMsg.Error(text.concat(

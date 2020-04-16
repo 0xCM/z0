@@ -69,7 +69,7 @@ namespace Z0.Asm
                         MemberParse.SaveHex(host, parsed, paths.HexPath);
 
                         var decoded = MemberDecode.DecodeParsed(host, parsed);
-                        MemberDecode.SaveDecoded(host, decoded, paths.DecodedPath);
+                        MemberDecode.SaveDecoded(host, decoded, paths.AsmPath);
                     }
                 }
                 catch(Exception e)

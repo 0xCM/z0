@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Generic vectorized intrinsics
     /// </summary>
-    [ApiHost(ApiHostKind.Generic)]
+    [ApiHost("api")]
     public partial class gvec : IApiHost<gvec>
     {        
         

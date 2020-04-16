@@ -10,6 +10,7 @@ namespace Z0.Asm.Validation
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    using System.IO;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
@@ -31,10 +32,45 @@ namespace Z0.Asm.Validation
         
         readonly int RepCount;
 
-        FolderPath LogDir;
-
         public static AsmChecks Create(IAsmContext context, IAppMsgSink sink)
             => new AsmChecks(context,sink);
+
+        protected IApiCodeArchive CodeArchive 
+            => Context.CodeArchive(
+                Env.Current.LogDir + FolderName.Define("test"), 
+                FolderName.Define("data"), 
+                FolderName.Define(GetType().Name)
+                );
+
+        protected ICodeStreamWriter HexCodeWriter([Caller] string caller = null)
+        {
+            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
+            return Context.CodeWriter(dstPath);
+        }
+
+        protected StreamWriter FileStreamWriter([Caller] string caller = null)
+            => CodeArchive.HexPath(FileName.Define(caller)).Writer();
+
+        protected ICodeStreamWriter CodeWriter([Caller] string caller = null)
+        {
+            
+            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
+            return Context.CodeWriter(dstPath);
+        }
+
+        protected ICodeStreamWriter HexWriter([Caller] string caller = null)
+        {            
+
+            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Raw));
+            return Context.CodeWriter(dstPath);
+        }
+
+        protected IFunctionStreamWriter FunctionWriter([Caller] string caller = null)
+        {
+            var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
+            var format = AsmFormatConfig.New.WithFunctionTimestamp();
+            return Context.AsmWriter(dst,format);
+        }
 
         AsmChecks(IAsmContext context, IAppMsgSink sink)
         {
@@ -42,7 +78,6 @@ namespace Z0.Asm.Validation
             this.RepCount = 128;
             this.MsgSink = sink;
             this.ApiSet = context.ApiSet;
-            this.LogDir = context.EmissionPaths().DataSubDir(FolderName.Define(GetType().Name));
         }                
 
         public void Execute(in BufferSeq buffers, ApiMemberCode code)
@@ -910,9 +945,9 @@ namespace Z0.Asm.Validation
         {
             var src = shifter(4);
 
-            using var rawout = HexWriter(Context);            
-            using var hexout = CodeWriter(Context);
-            using var asmout = FunctionWriter(Context);            
+            using var rawout = HexWriter();            
+            using var hexout = CodeWriter();
+            using var asmout = FunctionWriter();            
 
             var capture = buffers.Capture;
             var decoder = Context.AsmFunctionDecoder();
@@ -923,31 +958,8 @@ namespace Z0.Asm.Validation
             asmout.Write(decoder.DecodeCaptured(data).Require());            
         }
 
-
-
         AsmFormatConfig AsmFormat
             => AsmFormatConfig.New.WithoutFunctionTimestamp();
-
-        ICodeStreamWriter CodeWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Hex);
-            return  context.CodeWriter(dst);
-        }
-
-        protected ICodeStreamWriter HexWriter(IAsmContext context, [Caller] string test = null)
-        {            
-
-            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Raw);
-            return  context.CodeWriter(dst);
-        }
-
-        protected IFunctionStreamWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Asm);
-            var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.AsmWriter(dst,format);
-        }
-
 
         public void add_megacheck(in BufferSeq buffers)
         {

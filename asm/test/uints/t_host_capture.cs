@@ -13,7 +13,7 @@ namespace Z0.Asm
         public void capture_1()
         {
             var service =  Context.HostCaptureService(FolderName.Define("test"), FolderName.Define(GetType().Name));
-            NotifyConsole($"Emission root {service.EmissionRoot}");
+            //NotifyConsole($"Emission root {service.EmissionRoot}");
 
             var uri = ApiHostUri.FromHost<math>();
             var capture = service.CaptureHost(uri,true);

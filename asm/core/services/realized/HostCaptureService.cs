@@ -26,7 +26,7 @@ namespace Z0.Asm
 
         IHostCaptureService S => this;
 
-        AsmEmissionPaths EmissionPaths => S.Emissions(Area, Subject);
+        IApiCodeArchive CodeArchive => S.Emissions(Area, Subject);
 
 
         [MethodImpl(Inline)]
@@ -42,8 +42,6 @@ namespace Z0.Asm
             Extractor = Context.HostExtractor();
             Parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
-
-        public FolderPath EmissionRoot => EmissionPaths.EmissionRoot;
 
         public MemberExtract[] Extract(ApiHostUri host, bool save)
             => Extract(FindHost(host),save);
@@ -71,26 +69,26 @@ namespace Z0.Asm
 
         void Save(ApiHostUri host, ParsedExtract[] src)
         {
+            var hostArchive = CodeArchive.HostArchive(host);
             var report = MemberParseReport.Create(host,src);
-            report.Save(EmissionPaths.ParsedPath(host));
+            report.Save(hostArchive.ParsedPath);
 
-            var dst = EmissionPaths.CodePath(host);
-            using var writer = Context.HexWriter(dst);
+            using var writer = Context.HexWriter(hostArchive.HexPath);
             var data = src.Map(x => OpUriBits.Define(x.Uri, x.ParsedContent.Bytes));
             writer.Write(data);
         }
 
         void Save(ApiHostUri host, MemberExtract[] extracts)
         {
+            var hostArchive = CodeArchive.HostArchive(host);
             var report = MemberExtractReport.Create(host, extracts);            
-            var dst = EmissionPaths.ExtractPath(host);  
-            Extracted(host, extracts, report.Save(dst));
+            Extracted(host, extracts, report.Save(hostArchive.ExtractPath));
         }
 
         void Save(ApiHostUri host, AsmFunction[] decoded)
         {
-            var dst = EmissionPaths.DecodedPath(host);
-            using var writer = S.Writer(dst);
+            var hostArchive = CodeArchive.HostArchive(host);
+            using var writer = S.Writer(hostArchive.AsmPath);
             for(var i=0 ;i<decoded.Length; i++)          
                 writer.Write(decoded[i]);
         }
