@@ -11,16 +11,16 @@ namespace Z0.Asm
 
     partial class ExtractionEvents
     {
-        public readonly struct AnalyzingExtracts : IAppEvent<AnalyzingExtracts, MemberExtract[]>
+        public readonly struct AnalyzingExtracts : IAppEvent<AnalyzingExtracts, ExtractedMember[]>
         {        
-            public static AnalyzingExtracts Empty => Define(new MemberExtract[]{});
+            public static AnalyzingExtracts Empty => Define(new ExtractedMember[]{});
             
             [MethodImpl(Inline)]
-            public static AnalyzingExtracts Define(MemberExtract[] extracts)
+            public static AnalyzingExtracts Define(ExtractedMember[] extracts)
                 => new AnalyzingExtracts(extracts);
 
             [MethodImpl(Inline)]
-            AnalyzingExtracts(MemberExtract[] extracts)
+            AnalyzingExtracts(ExtractedMember[] extracts)
             {
                 Payload = extracts;
             }
@@ -28,7 +28,7 @@ namespace Z0.Asm
             public string Description 
                 => $"Analyzing extract report {Payload.Length} member extracts";
 
-            public MemberExtract[] Payload{get;}
+            public ExtractedMember[] Payload{get;}
 
             public AnalyzingExtracts Zero => Empty;        
         }

@@ -17,7 +17,6 @@ namespace Z0
     public abstract class TestApp<A> : TestContext<A>
         where A : TestApp<A>, new()
     {
-
         protected IAppMsgSink Log => this.MessageLog();
 
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
@@ -308,7 +307,6 @@ namespace Z0
             return clock;
         }
 
-
         Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
         {
             var exectime = Duration.Zero;
@@ -359,21 +357,13 @@ namespace Z0
         protected virtual bool RunCustom()
             => true;
 
-        static ILogger GetLogger(ILogTarget dst)
-            => dst.Area switch{
-                LogArea.App => Z0.Log.App,
-                LogArea.Bench => Z0.Log.Bench,
-                LogArea.Test => Z0.Log.Test,
-                _ => throw new ArgumentException()
-            };
-
         static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
             where R : IRecord
         {
             if(records.Length == 0)
                 return FilePath.Empty;
             
-            return GetLogger(LogTarget.Define(LogArea.Test)).Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
+            return Z0.Log.TestLog.Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
         static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = Chars.Pipe)
@@ -382,7 +372,7 @@ namespace Z0
             if(records.Length == 0)
                 return FilePath.Empty;
                         
-            return GetLogger(LogTarget.Define(LogArea.Bench)).Write(records, FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
+            return Z0.Log.BenchLog.Write(records, FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
         FilePath LogTestResults2<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
@@ -424,7 +414,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                Flush(e, Z0.Log.Test);
+                Flush(e, Z0.Log.TestMsgTarget);
             }
         }
 

@@ -14,14 +14,17 @@ namespace Z0
 
     public static class ApiArchiveServices
     {
-        /// <summary>
-        /// Instantiates a contextual archive service that is specialized for an assembly
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="id">The assembly identifier</param>
         [MethodImpl(Inline)]
-        public static IHostCodeArchive CodeArchive(this IContext context, PartId id, FolderPath root = null)
-            => HostCodeArchive.Create(context,id, root ?? ApiCodeArchive.Default.RootDir);
+        public static ICaptureArchive CaptureArchive(this IContext context, FolderPath root = null, FolderName area = null, FolderName subject = null)    
+            => Z0.CaptureArchive.Define(root, area, subject);
+
+        [MethodImpl(Inline)]
+        public static IUriBitsReader UriBitsReader(this IContext context)
+            => Z0.UriBitsReader.Create(context);
+
+        [MethodImpl(Inline)]
+        public static IHostBitsArchive CodeArchive(this IContext context, PartId id, FolderPath root = null)
+            => Z0.HostBitsArchive.Create(context, id, root ?? Z0.CaptureArchive.Default.RootDir);
 
         /// <summary>
         /// Instantiates a contextual code archive service that is specialized for an assembly and api host
@@ -29,19 +32,12 @@ namespace Z0
         /// <param name="catalog">The catalog name</param>
         /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
-        public static IHostCodeArchive CodeArchive(this IContext context, PartId assembly, ApiHostUri host, FolderPath root = null)
-            => HostCodeArchive.Create(context, assembly, host, root ?? ApiCodeArchive.Default.RootDir);
+        public static IHostBitsArchive HostBitsArchive(this IContext context, PartId assembly, ApiHostUri host, FolderPath root = null)
+            => Z0.HostBitsArchive.Create(context, assembly, host, root ?? Z0.CaptureArchive.Default.RootDir);
 
         [MethodImpl(Inline)]
-        public static IApiCodeIndexer CodeIndexer(this IContext c, IApiSet api, IMemberLocator locator)
-            => ApiCodeIndexer.Create(c, api, locator);
-
-        /// <summary>
-        /// Reads code from a hex file
-        /// </summary>
-        /// <param name="src">The source path</param>
-        public static ReadOnlySpan<OpUriBits> LoadHexCode(this IContext context, FilePath src)
-            => context.HexReader().Read(src).ToArray();
+        public static IApiIndexBuilder ApiIndexBuilder(this IContext c, IApiSet api, IMemberLocator locator)
+            => Z0.ApiIndexBuilder.Create(c, api, locator);
 
         /// <summary>
         /// Instantiates a contextual service allocation that streams lines of operation hex to a target file
@@ -49,8 +45,8 @@ namespace Z0
         /// <param name="context">The source context</param>
         /// <param name="dst">The target file</param>
         [MethodImpl(Inline)]
-        public static IHexStreamWriter HexWriter(this IContext context, FilePath dst)
-            => HexStreamWriter.Create(context, dst);
+        public static IUriBitsWriter UriBitsWriter(this IContext context, FilePath dst)
+            => Z0.UriBitsWriter.Create(context, dst);
 
         /// <summary>
         /// Instantiates a contextual code reader service
@@ -59,17 +55,8 @@ namespace Z0
         /// <param name="idsep">The identifer/code delimiter</param>
         /// <param name="bytesep">The byte delimiter</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeReader CodeReader(this IContext context)
-            => AsmCodeReader.New(context);
-
-        public static OpIndex<OpUriBits> HostCodeIndex(this IContext context, in ApiHostUri host, FolderPath root)
-        {
-            var emissions = ApiCodeArchive.Define(root);            
-            var paths = emissions.HostArchive(host);
-            var code = context.LoadHexCode(paths.HexPath);
-            var index = code.ToEnumerable().ToOpIndex();    
-            return index;
-        }
+        public static IBitArchiveReader BitArchiveReader(this IContext context)
+            => Z0.BitArchiveReader.New(context);
 
         /// <summary>
         /// Instantiates a contextual code writer services that targets a specified file path
@@ -78,7 +65,23 @@ namespace Z0
         /// <param name="dst">The target path</param>
         /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
         [MethodImpl(Inline)]
-        public static ICodeStreamWriter CodeWriter(this IContext context, FilePath dst)
-            => CodeStreamWriter.Create(context, dst);
+        public static IBitArchiveWriter BitArchiveWriter(this IContext context, FilePath dst)
+            => Z0.BitArchiveWriter.Create(context, dst);
+
+        /// <summary>
+        /// Reads code from a hex file
+        /// </summary>
+        /// <param name="src">The source path</param>
+        public static ReadOnlySpan<UriBits> ReadUriBits(this IContext context, FilePath src)
+            => context.UriBitsReader().Read(src).ToArray();
+
+        public static OpIndex<UriBits> IndexUriBits(this IContext context, in ApiHostUri host, FolderPath root)
+        {
+            var emissions = Z0.CaptureArchive.Define(root);            
+            var paths = emissions.HostArchive(host);
+            var code = context.ReadUriBits(paths.HexPath);
+            var index = code.ToEnumerable().ToOpIndex();    
+            return index;
+        }
     }
 }

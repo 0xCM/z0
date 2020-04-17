@@ -36,7 +36,7 @@ namespace Z0.Asm
             public MemberParseReport CreateReport(in ApiHost host, ParsedExtract[] src)
             {
                 var report = MemberParseReport.Create(host,src);                    
-                Context.Raise(report.CreatedEvent());
+                Context.Raise(ParseReportCreated.Define(report));
                 return report;
             }
 

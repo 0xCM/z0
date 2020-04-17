@@ -11,19 +11,10 @@ namespace Z0
 
     using static Seed;
 
-    enum LogWriteMode
-    {
-        Create,
-        
-        Overwrite,
-        
-        Append
-    }
-
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
-    interface ILogger : IAppMsgSink
+    public interface IRecordSink : IService
     {        
         FilePath Write<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
             where R : IRecord;                
@@ -31,19 +22,21 @@ namespace Z0
 
     static class Log
     {        
-        static LogPaths Paths 
-            => LogPaths.The;
+        static TestLogPaths Paths 
+            => TestLogPaths.The;
             
-        public static ILogger Test => TestLog.TheOnly;
+        public static IRecordSink TestLog => TestLogger.TheOnly;
 
-        public static ILogger Bench => BenchLog.TheOnly;
+        public static IAppMsgSink TestMsgTarget => TestLogger.TheOnly;
 
-        public static ILogger App => AppLog.TheOnly;
+        public static IRecordSink BenchLog => BenchLogger.TheOnly;
 
-        abstract class Logger<A> : ILogger
+        public static IRecordSink AppLog => AppLogger.TheOnly;
+
+        class Logger<A> : IRecordSink, IAppMsgSink
             where A : Logger<A>, new()
         {
-            public static ILogger TheOnly = new A();
+            public static A TheOnly = new A();
             
             public LogArea Area {get;}
 
@@ -116,33 +109,32 @@ namespace Z0
                     LogPath.AppendLine(src.ToString());
             }
 
-
             [MethodImpl(Inline)]
             public void Notify(string msg, AppMsgKind? severity = null)
                 => Deposit(AppMsg.NoCaller(msg,severity ?? AppMsgKind.Info));
         }
 
-        sealed class AppLog : Logger<AppLog>
+        sealed class AppLogger : Logger<AppLogger>
         {
-            public AppLog()            
+            public AppLogger()            
              : base(LogArea.App)
             {
 
             }
         }
 
-        sealed class TestLog : Logger<TestLog>
+        sealed class TestLogger : Logger<TestLogger>
         {
-            public TestLog()            
+            public TestLogger()            
              : base(LogArea.Test)
             {
 
             }
         }
 
-        sealed class BenchLog : Logger<BenchLog>
+        sealed class BenchLogger : Logger<BenchLogger>
         {
-            public BenchLog()            
+            public BenchLogger()            
              : base(LogArea.Bench)
             {
 

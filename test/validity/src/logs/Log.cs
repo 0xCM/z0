@@ -40,9 +40,9 @@ namespace Z0
             => OutputFolder + (FolderName.Define(target.ToString().ToLower()) + subdir);
     }
 
-    public readonly struct LogPaths
+    readonly struct TestLogPaths
     {
-        public static LogPaths The => default;
+        public static TestLogPaths The => default;
 
         public FilePath DataPath(FolderName subject, FileName file)
             => Settings.DataDir(subject) + file;
@@ -93,36 +93,4 @@ namespace Z0
         static FolderPath LogDir(LogArea target, FolderName subject)        
             => Settings.LogDir(target, subject);
     }
-
-    public interface ILogTarget
-    {
-        LogArea Area {get;}
-
-        string Name {get;}
-    }    
-    
-    /// <summary>
-    /// Defines a classifier relative to a predefined application area
-    /// </summary>
-    public readonly struct LogTarget : ILogTarget
-    {
-        public static LogTarget Define(LogArea area, string name = null)
-            => new LogTarget(area, name ?? area.ToString().ToLower());
-
-        public LogTarget(LogArea Area, string Name)
-        {
-            this.Area = Area;
-            this.Name = Name;
-        }
-
-        public readonly LogArea Area {get;}
-        
-        /// <summary>
-        /// The classifier name
-        /// </summary>
-        public readonly string Name {get;}
-        
-        public override string ToString()
-            => $"{Area}/{Name}";
-    }    
 }

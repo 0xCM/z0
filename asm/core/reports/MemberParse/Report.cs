@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,7 +12,6 @@ namespace Z0.Asm
     using F = MemberParseField;
     using R = MemberParseRecord;
     using Report = MemberParseReport;
-    using Created = AsmEvents.ParseReportCreated;
 
     public class MemberParseReport : Report<Report,F,R>
     {             
@@ -42,8 +41,5 @@ namespace Z0.Asm
         {
 
         }
-
-        public Created CreatedEvent()
-            => Created.Define(this);
     }
 }

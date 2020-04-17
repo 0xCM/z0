@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         readonly int BufferCount;
 
-        readonly IApiCodeArchive CodeArchive;
+        readonly ICaptureArchive CodeArchive;
 
         readonly IApiSet ApiSet;
         
@@ -37,7 +37,7 @@ namespace Z0.Asm
             this.Dispatcher = EvalDispatcher.Create(context.Random, msgsink);
             this.BufferSize = 1024;
             this.BufferCount = 3;
-            this.CodeArchive = ApiCodeArchive.Define(root);
+            this.CodeArchive = CaptureArchive.Define(root);
             this.ApiSet = context.ApiSet;
         }
                 

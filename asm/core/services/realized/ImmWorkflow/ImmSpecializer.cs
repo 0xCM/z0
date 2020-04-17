@@ -40,7 +40,7 @@ namespace Z0.Asm
             this.Capture = context.Capture();
         }
 
-        public Option<AsmFunction> UnaryOp(in OpExtractExchange exchange, MethodInfo src, OpIdentity id, byte imm)
+        public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
             var f = Dynop.EmbedVUnaryOpImm(src, imm, id).OnNone(() => OnEmbeddingFailure(id));
             if(f)
@@ -52,7 +52,7 @@ namespace Z0.Asm
                 return none<AsmFunction>();
         }
 
-        public AsmFunction[] UnaryOps(in OpExtractExchange exchange, MethodInfo src, OpIdentity id, params byte[] imm)
+        public AsmFunction[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params byte[] imm)
         {   
             var count = imm.Length;
             var dst = new AsmFunction[count];
@@ -61,7 +61,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<AsmFunction> BinaryOp(in OpExtractExchange exchange, MethodInfo src, OpIdentity id, byte imm)
+        public Option<AsmFunction> BinaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
             var f = Dynop.EmbedVBinaryOpImm(src, imm, id).OnNone(() => OnEmbeddingFailure(id));
             if(f)
@@ -73,7 +73,7 @@ namespace Z0.Asm
                 return none<AsmFunction>();
         }
 
-        public AsmFunction[] BinaryOps(in OpExtractExchange exchange, MethodInfo src, OpIdentity id, params byte[] imm)
+        public AsmFunction[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params byte[] imm)
         {   
             var count = imm.Length;
             var dst = new AsmFunction[count];
@@ -82,13 +82,13 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<AsmFunction> Single<T>(in OpExtractExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, byte imm)
+        public Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, byte imm)
             where T : unmanaged
                 => from c in Capture.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
                    from d in Decoder.DecodeCaptured(c)
                    select d;
 
-        public AsmFunction[] Many<T>(in OpExtractExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, params byte[] imm)
+        public AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, params byte[] imm)
             where T : unmanaged
         {
             var count = imm.Length;
@@ -98,13 +98,13 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<AsmFunction> Single<T>(in OpExtractExchange exchange, ISVImm8UnaryResolver256Api<T> resolver, byte imm)
+        public Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8UnaryResolver256Api<T> resolver, byte imm)
             where T : unmanaged
                 => from c in Capture.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
                    from d in Decoder.DecodeCaptured(c)
                    select d;
 
-        public AsmFunction[] Many<T>(in OpExtractExchange exchange, ISVImm8UnaryResolver256Api<T> resolver, params byte[] imm)
+        public AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8UnaryResolver256Api<T> resolver, params byte[] imm)
             where T : unmanaged
         {
             var count = imm.Length;
@@ -114,13 +114,13 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<AsmFunction> Single<T>(in OpExtractExchange exchange, ISVImm8BinaryResolver128Api<T> resolver, byte imm)
+        public Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8BinaryResolver128Api<T> resolver, byte imm)
             where T : unmanaged
                 => from c in Capture.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
                    from d in Decoder.DecodeCaptured(c)
                    select d;
 
-        public AsmFunction[] Many<T>(in OpExtractExchange exchange, ISVImm8BinaryResolver128Api<T> resolver, params byte[] imm)
+        public AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8BinaryResolver128Api<T> resolver, params byte[] imm)
             where T : unmanaged
         {
             var count = imm.Length;
@@ -130,13 +130,13 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<AsmFunction> Single<T>(in OpExtractExchange exchange, ISVImm8BinaryResolver256Api<T> resolver, byte imm)
+        public Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8BinaryResolver256Api<T> resolver, byte imm)
             where T : unmanaged
                 => from c in Capture.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
                    from d in Decoder.DecodeCaptured(c)
                    select d;
 
-        public AsmFunction[] Many<T>(in OpExtractExchange exchange, ISVImm8BinaryResolver256Api<T> resolver, params byte[] imm)
+        public AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8BinaryResolver256Api<T> resolver, params byte[] imm)
             where T : unmanaged
         {
             var count = imm.Length;

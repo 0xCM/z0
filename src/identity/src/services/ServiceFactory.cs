@@ -63,9 +63,9 @@ namespace Z0
 
         public static ApiCodeIndex ApiCodeIndex(this IContext context, IApiSet api, in ApiHostUri host, FolderPath root)
         {
-            var indexer = context.CodeIndexer(api, context.MemberLocator());
-            var apiIndex = ApiIndex.From(context.HostedMembers(api,host));
-            var codeIndex = context.HostCodeIndex(host, root);
+            var indexer = context.ApiIndexBuilder(api, context.MemberLocator());
+            var apiIndex = ApiIndex.Create(context.HostedMembers(api,host));
+            var codeIndex = context.IndexUriBits(host, root);
             return indexer.CreateIndex(apiIndex, codeIndex);            
         }
     }

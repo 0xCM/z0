@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="t">The source type</param>
         [MethodImpl(Inline)]
         public static ITypeIdentityProvider IdentityProvider(Type src)
-            => IdentityProviders.find(src, CreateProvider);
+            => Identify.provider(src, CreateProvider);
 
         static TypeIdentity DoDivination(Type arg)
             => default(TypeIdentityDiviner).DivineIdentity(arg);        

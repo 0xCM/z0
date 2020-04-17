@@ -26,7 +26,7 @@ namespace Z0.Asm
                 this.Context = context;
             }
 
-            public ParsedExtract[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
+            public ParsedExtract[] ParseExtracts(ApiHostUri host, ExtractedMember[] extracts)
             {
                 var parsed = Context.Parser.Parse(extracts);                
                 Context.Raise(HostExtractsParsed.Define(host, parsed));
@@ -36,10 +36,10 @@ namespace Z0.Asm
             public void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
                 => Context.Raise(HostAsmHexSaved.Define(host, HandleSave(host, src, dst), dst));
 
-            OpUriBits[] HandleSave(ApiHostUri host, ParsedExtract[] src, FilePath dst)
+            UriBits[] HandleSave(ApiHostUri host, ParsedExtract[] src, FilePath dst)
             {
-                using var writer = Context.HexWriter(dst);
-                var data = src.Map(x => OpUriBits.Define(x.Uri, x.ParsedContent.Bytes));
+                using var writer = Context.UriBitsWriter(dst);
+                var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Bytes));
                 writer.Write(data);
                 var saved = HostAsmHexSaved.Define(host,data,dst);                
                 return data;

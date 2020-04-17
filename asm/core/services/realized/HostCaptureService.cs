@@ -11,6 +11,7 @@ namespace Z0.Asm
 
     using static Seed;
     using static Memories;
+    using Z0;
 
     readonly struct HostCaptureService : IHostCaptureService
     {
@@ -24,10 +25,7 @@ namespace Z0.Asm
 
         readonly IExtractParser Parser;
 
-        IHostCaptureService S => this;
-
-        IApiCodeArchive CodeArchive => S.Emissions(Area, Subject);
-
+        ICaptureArchive CodeArchive => Context.Emissions(Area, Subject);
 
         [MethodImpl(Inline)]
         public static HostCaptureService Create(IAsmContext context, FolderName area, FolderName subject = null)
@@ -43,10 +41,10 @@ namespace Z0.Asm
             Parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
 
-        public MemberExtract[] Extract(ApiHostUri host, bool save)
+        public ExtractedMember[] Extract(ApiHostUri host, bool save)
             => Extract(FindHost(host),save);
 
-        public ParsedExtract[] Parse(ApiHostUri host, MemberExtract[] src, bool save)
+        public ParsedExtract[] Parse(ApiHostUri host, ExtractedMember[] src, bool save)
         {
             var parsed = Parser.Parse(src);
             if(parsed.Length != 0 && save)
@@ -73,12 +71,12 @@ namespace Z0.Asm
             var report = MemberParseReport.Create(host,src);
             report.Save(hostArchive.ParsedPath);
 
-            using var writer = Context.HexWriter(hostArchive.HexPath);
-            var data = src.Map(x => OpUriBits.Define(x.Uri, x.ParsedContent.Bytes));
+            using var writer = Context.UriBitsWriter(hostArchive.HexPath);
+            var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Bytes));
             writer.Write(data);
         }
 
-        void Save(ApiHostUri host, MemberExtract[] extracts)
+        void Save(ApiHostUri host, ExtractedMember[] extracts)
         {
             var hostArchive = CodeArchive.HostArchive(host);
             var report = MemberExtractReport.Create(host, extracts);            
@@ -88,7 +86,7 @@ namespace Z0.Asm
         void Save(ApiHostUri host, AsmFunction[] decoded)
         {
             var hostArchive = CodeArchive.HostArchive(host);
-            using var writer = S.Writer(hostArchive.AsmPath);
+            using var writer = Context.Writer(hostArchive.AsmPath);
             for(var i=0 ;i<decoded.Length; i++)          
                 writer.Write(decoded[i]);
         }
@@ -100,7 +98,7 @@ namespace Z0.Asm
                 var host = mayhaps.Value;
                 var decoded = new AsmFunction[parsed.Length];
                 for(var i=0; i<parsed.Length; i++)
-                    decoded[i] = require(S.Decoder.DecodeExtract(parsed[i]));
+                    decoded[i] = require(Context.Decoder.DecodeExtract(parsed[i]));
 
                 if(save)
                     Save(host.UriPath, decoded);
@@ -111,7 +109,7 @@ namespace Z0.Asm
                 return Arrays.empty<AsmFunction>();
         }
 
-        MemberExtract[] Extract(Option<IApiHost> mayhaps, bool save)
+        ExtractedMember[] Extract(Option<IApiHost> mayhaps, bool save)
         {            
             if(mayhaps)
             {
@@ -122,20 +120,23 @@ namespace Z0.Asm
                 return extract;
             }
             else
-                return Arrays.empty<MemberExtract>();
+                return Arrays.empty<ExtractedMember>();
         }
 
-        MemberExtract[] Extracted(ApiHostUri host, MemberExtract[] extracts, Option<FilePath> dst)
+        ExtractedMember[] Extracted(ApiHostUri host, ExtractedMember[] extracts, Option<FilePath> dst)
         {
             if(dst)
-                S.ExractedHost(host,dst.Value);
+                this.ExractedHost(host,dst.Value);
             else
-                S.HostExtractionFailed(host);
+                this.HostExtractionFailed(host);
             return extracts;
         }    
 
         [MethodImpl(Inline)]
         Option<IApiHost> FindHost(ApiHostUri uri)
-            => S.Hosts.TryFind(h => h.UriPath == uri);
+            => Context.Hosts.TryFind(h => h.UriPath == uri);
+
+        public void Deposit(IAppMsg src)
+            => Context.Deposit(src);
     }
 }

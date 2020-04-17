@@ -12,6 +12,9 @@ namespace Z0
         void Deposit(IEnumerable<IAppMsg> msg)
             => Control.iter(msg,Deposit);        
 
+        void Notify(AppMsg msg)
+            => Deposit(msg);
+
         void Notify(string msg, AppMsgKind? kind = null)
             => Deposit(AppMsg.NoCaller(msg, kind));
 

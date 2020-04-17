@@ -22,7 +22,7 @@ namespace Z0.Asm
 
         readonly ICilFunctionFormatter CilFormatter;
 
-        readonly IApiHostArchive HostArchive;
+        readonly IHostCaptureArchive HostArchive;
 
         readonly bool Imm;
 
@@ -37,7 +37,7 @@ namespace Z0.Asm
         HostAsmArchiver(IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter, FolderPath dst)
         {
             this.Imm = true;
-            this.HostArchive = ApiHostArchive.Define(ApiCodeArchive.Define(dst), host);
+            this.HostArchive = HostCaptureArchive.Define(CaptureArchive.Define(dst), host);
             this.DefiningPart = host.Owner;
             this.ApiHost = host;
             this.AsmFormatter = formatter;
@@ -47,7 +47,7 @@ namespace Z0.Asm
         HostAsmArchiver(IContext context, PartId part, string hostname, IAsmFormatter formatter)
         {
             this.Imm = false;
-            this.HostArchive = ApiHostArchive.Define(ApiCodeArchive.Define(), ApiHostUri.Define(part, hostname));
+            this.HostArchive = HostCaptureArchive.Define(CaptureArchive.Define(), ApiHostUri.Define(part, hostname));
             this.DefiningPart = part;
             this.ApiHost = ApiHostUri.Define(part, hostname);
             this.AsmFormatter = formatter;

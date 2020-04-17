@@ -19,20 +19,20 @@ namespace Z0.Asm
     {        
         readonly Instruction[] Instructions;
 
-        public readonly MemoryExtract EncodedBytes;
+        public readonly Addressable EncodedBytes;
 
-        public static AsmInstructionList Empty = new AsmInstructionList(new Instruction[0]{}, MemoryExtract.Empty);
+        public static AsmInstructionList Empty = new AsmInstructionList(new Instruction[0]{}, Addressable.Empty);
 
         [MethodImpl(Inline)]
         public static implicit operator Instruction[](AsmInstructionList src)
             => src.Instructions;
          
         [MethodImpl(Inline)]
-        public static AsmInstructionList Create(Instruction[] src, MemoryExtract data)
+        public static AsmInstructionList Create(Instruction[] src, Addressable data)
             => new AsmInstructionList(src, data);
 
         [MethodImpl(Inline)]
-        AsmInstructionList(Instruction[] instructions, MemoryExtract data)
+        AsmInstructionList(Instruction[] instructions, Addressable data)
         {
             this.Instructions = instructions;
             this.EncodedBytes = data;

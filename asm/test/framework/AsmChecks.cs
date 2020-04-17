@@ -35,34 +35,34 @@ namespace Z0.Asm.Validation
         public static AsmChecks Create(IAsmContext context, IAppMsgSink sink)
             => new AsmChecks(context,sink);
 
-        protected IApiCodeArchive CodeArchive 
-            => Context.CodeArchive(
+        protected ICaptureArchive CodeArchive 
+            => Context.CaptureArchive(
                 Env.Current.LogDir + FolderName.Define("test"), 
                 FolderName.Define("data"), 
                 FolderName.Define(GetType().Name)
                 );
 
-        protected ICodeStreamWriter HexCodeWriter([Caller] string caller = null)
+        protected IBitArchiveWriter HexCodeWriter([Caller] string caller = null)
         {
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return Context.CodeWriter(dstPath);
+            return Context.BitArchiveWriter(dstPath);
         }
 
         protected StreamWriter FileStreamWriter([Caller] string caller = null)
             => CodeArchive.HexPath(FileName.Define(caller)).Writer();
 
-        protected ICodeStreamWriter CodeWriter([Caller] string caller = null)
+        protected IBitArchiveWriter CodeWriter([Caller] string caller = null)
         {
             
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return Context.CodeWriter(dstPath);
+            return Context.BitArchiveWriter(dstPath);
         }
 
-        protected ICodeStreamWriter HexWriter([Caller] string caller = null)
+        protected IBitArchiveWriter HexWriter([Caller] string caller = null)
         {            
 
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Raw));
-            return Context.CodeWriter(dstPath);
+            return Context.BitArchiveWriter(dstPath);
         }
 
         protected IFunctionStreamWriter FunctionWriter([Caller] string caller = null)
@@ -96,8 +96,8 @@ namespace Z0.Asm.Validation
         /// Reads code from a hex file
         /// </summary>
         /// <param name="src">The source path</param>
-        public ReadOnlySpan<OpUriBits> LoadCode(FilePath src)
-            => Context.HexReader().Read(src).ToArray();
+        public ReadOnlySpan<UriBits> LoadCode(FilePath src)
+            => Context.UriBitsReader().Read(src).ToArray();
 
         protected ApiHostUri Math
             => ApiHostUri.FromHost(typeof(math));
@@ -191,7 +191,7 @@ namespace Z0.Asm.Validation
 
 
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
-            => Context.CodeArchive(id,host).Read(m).Single().ToApiCode();
+            => Context.HostBitsArchive(id,host).Read(m).Single().ToApiCode();
 
         protected TestCaseRecord CheckMatch<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
             where T : unmanaged
@@ -631,8 +631,8 @@ namespace Z0.Asm.Validation
             var dId = Identify.Op(name, kind, false);
             var gId = Identify.Op(name, kind, true);
 
-            var dArchive = Context.CodeArchive(catalog, dSrc);
-            var gArchive = Context.CodeArchive(catalog, gSrc);
+            var dArchive = Context.HostBitsArchive(catalog, dSrc);
+            var gArchive = Context.HostBitsArchive(catalog, gSrc);
 
             var d = dArchive.Read(dId).Single().ToApiCode();
             var g = gArchive.Read(gId).Single().ToApiCode();
@@ -941,7 +941,7 @@ namespace Z0.Asm.Validation
         static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
             => v => Avx2.ShiftLeftLogical(v,imm);
 
-        void capture_shifter(in AsmBuffers buffers)
+        void capture_shifter(in BufferSeq buffers)
         {
             var src = shifter(4);
 
@@ -949,13 +949,11 @@ namespace Z0.Asm.Validation
             using var hexout = CodeWriter();
             using var asmout = FunctionWriter();            
 
-            var capture = buffers.Capture;
             var decoder = Context.AsmFunctionDecoder();
+            var captured = Context.Capture().Capture(Context.ExtractExchange(), src.Identify(), src);
+            var decoded = decoder.DecodeCaptured(captured);
             
-            var data = capture.Capture(buffers.Exchange, src.Identify(), src);
-            hexout.WriteCode(data.Code);
-            rawout.WriteHexLine(data);
-            asmout.Write(decoder.DecodeCaptured(data).Require());            
+            
         }
 
         AsmFormatConfig AsmFormat
@@ -968,8 +966,8 @@ namespace Z0.Asm.Validation
             var dSrc = ApiHostUri.FromHost(typeof(math));
             var gSrc = ApiHostUri.FromHost(typeof(gmath));
 
-            var dArchive = Context.CodeArchive(PartId.GMath, dSrc);
-            var gArchive = Context.CodeArchive(PartId.GMath, gSrc);
+            var dArchive = Context.HostBitsArchive(PartId.GMath, dSrc);
+            var gArchive = Context.HostBitsArchive(PartId.GMath, gSrc);
             var dAdd = dArchive.Read("add").Select(x => x.ToApiCode()).ToArray();
             var gAdd = gArchive.Read("add_g").Select(code => code.WithIdentity(code.Id.WithoutGeneric()).ToApiCode()).ToArray();
             Claim.eq(dAdd.Length, gAdd.Length);
@@ -1087,8 +1085,8 @@ namespace Z0.Asm.Validation
             var gSrc = ApiHostUri.FromHost(typeof(gmath));
 
             var id = PartId.GMath;
-            var direct = Context.CodeArchive(id, dSrc);
-            var generic = Context.CodeArchive(id, gSrc);
+            var direct = Context.HostBitsArchive(id, dSrc);
+            var generic = Context.HostBitsArchive(id, gSrc);
 
             foreach(var a in direct.Read().Where(asm => asm.ParameterCount() == 1))
             {                

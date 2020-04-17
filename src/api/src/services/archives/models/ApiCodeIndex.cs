@@ -13,6 +13,9 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+    /// <summary>
+    /// Correlates operation identifiers and coded members
+    /// </summary>
     public readonly struct ApiCodeIndex 
     {
         readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;

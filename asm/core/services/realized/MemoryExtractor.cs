@@ -17,7 +17,7 @@ namespace Z0.Asm
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        public static IMemoryExtractor New(IContext context, byte[] buffer)
+        public static IMemoryExtractor Create(IContext context, byte[] buffer)
             => new MemoryExtractor(context, buffer);
 
         [MethodImpl(Inline)]
@@ -28,18 +28,18 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public Option<MemoryExtract> Extract(MemoryAddress src)
+        public Option<Addressable> Extract(MemoryAddress src)
         {
             try
             {
                 Span<byte> buffer = Buffer.Clear();
                 var length = Reader.Read(src, buffer);            
-                return MemoryExtract.Define(src, buffer.Slice(0,length).ToArray());
+                return Addressable.Define(src, buffer.Slice(0,length).ToArray());
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<MemoryExtract>();
+                return none<Addressable>();
             }
         }
     }

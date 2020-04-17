@@ -12,16 +12,16 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct HostMembersExtracted : IAppEvent<E, MemberExtract[]>
+        public readonly struct HostMembersExtracted : IAppEvent<E, ExtractedMember[]>
         {
-            public static E Empty => new E(ApiHostUri.Empty, new MemberExtract[]{});
+            public static E Empty => new E(ApiHostUri.Empty, new ExtractedMember[]{});
 
             [MethodImpl(Inline)]
-            public static E Define(ApiHostUri host, MemberExtract[] members)
+            public static E Define(ApiHostUri host, ExtractedMember[] members)
                 => new E(host, members);
 
             [MethodImpl(Inline)]
-            HostMembersExtracted(ApiHostUri host, MemberExtract[] extracted)
+            HostMembersExtracted(ApiHostUri host, ExtractedMember[] extracted)
             {
                 this.Host = host;
                 this.Payload = extracted;
@@ -29,7 +29,7 @@ namespace Z0.Asm
             
             public ApiHostUri Host {get;}
             
-            public MemberExtract[] Payload {get;}
+            public ExtractedMember[] Payload {get;}
 
             public string Description
                 => $"{Payload.Length} {Host} members extracted";

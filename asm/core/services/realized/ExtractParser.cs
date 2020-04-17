@@ -37,10 +37,10 @@ namespace Z0.Asm
             PatternBuffer = buffer;
         }
 
-        public Option<ParsedExtract> Parse(in MemberExtract src, int seq = 0)
+        public Option<ParsedExtract> Parse(in ExtractedMember src, int seq = 0)
             => Parse(src, seq, Parser());
 
-        public ParsedExtract[] Parse(MemberExtract[] extracts)
+        public ParsedExtract[] Parse(ExtractedMember[] extracts)
         {
             var dst = list<ParsedExtract>(extracts.Length);
             var parser = Parser();
@@ -56,14 +56,14 @@ namespace Z0.Asm
 
         ByteParser Parser() => Context.PatternParser(PatternBuffer.Clear());
 
-        Option<ParsedExtract> Parse(in MemberExtract src, int seq, ByteParser parser)
+        Option<ParsedExtract> Parse(in ExtractedMember src, int seq, ByteParser parser)
         {
             var status = parser.Parse(src.EncodedData);                
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success(); 
             var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
             return succeeded 
-                ? ParsedExtract.Define(src, seq, matched.ToTermCode(), MemoryExtract.Define(src.EncodedData.Address, data))
+                ? ParsedExtract.Define(src, seq, matched.ToTermCode(), Addressable.Define(src.EncodedData.Address, data))
                 : none<ParsedExtract>();
         }
 
@@ -83,7 +83,7 @@ namespace Z0.Asm
                 {
                     var bytes = parser.Parsed.ToArray();
                     var uri = OpUri.hex(host.UriPath, extract.Uri.GroupName, extract.Uri.OpId);
-                    var data = MemoryExtract.Define(extract.Address, bytes);
+                    var data = Addressable.Define(extract.Address, bytes);
                     var record = MemberParseRecord.Define
                     (
                         Sequence: seq++,

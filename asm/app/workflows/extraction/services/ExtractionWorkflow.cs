@@ -30,7 +30,7 @@ namespace Z0.Asm
             var format = context.AsmFormat.WithSectionDelimiter();
             Formatter = context.AsmFormatter(format);
             
-            CodeArchive = ApiCodeArchive.Define(ArchiveRoot);
+            CodeArchive = CaptureArchive.Define(ArchiveRoot);
             CodeArchive.Clear();
             var relay = ExtractionBroker.Create();
             Relay = relay;
@@ -47,7 +47,7 @@ namespace Z0.Asm
 
         readonly IAppMsgSink Sink;
 
-        readonly IApiCodeArchive CodeArchive;
+        readonly ICaptureArchive CodeArchive;
 
         readonly IAsmFunctionDecoder Decoder;
 
@@ -129,22 +129,22 @@ namespace Z0.Asm
             Report($"Loaded {extracts.Length} member extracts from {src}");
         }
 
-        void AnalyzeExtracts(MemberExtract[] src)
+        void AnalyzeExtracts(ExtractedMember[] src)
         {
             Raise(AnalyzingExtracts.Define(src));
 
         }
 
         ApiIndex MemberIndex(IApiHost host)
-            => ApiIndex.From(MemberLocator.Hosted(host));
+            => ApiIndex.Create(MemberLocator.Hosted(host));
 
         Option<IApiHost> Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
 
-        MemberExtractReport CreateReport(IApiHost host, MemberExtract[] src)
+        MemberExtractReport CreateReport(IApiHost host, ExtractedMember[] src)
         {
             var report = MemberExtractReport.Create(host.UriPath, src); 
-            Raise(report.CreatedEvent());
+            Raise(ExtractReportCreated.Define(report));
             return report;
         }
 
@@ -158,7 +158,7 @@ namespace Z0.Asm
             return located;
         }
 
-        MemberExtract[] ExtractMembers(IApiHost host)
+        ExtractedMember[] ExtractMembers(IApiHost host)
         {
             var members = LocateMembers(host);            
             var extracted = Extractor.Extract(members);

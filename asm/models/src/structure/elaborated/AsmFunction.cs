@@ -14,22 +14,22 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, AsmCode.Empty, 0, AsmInstructionList.Empty);
+        public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, LocatedBits.Empty, 0, AsmInstructionList.Empty);
 
-        public static AsmFunction Define(ParsedMemberCode encoding,  AsmInstructionList instructions)
+        public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList instructions)
         {         
-            var code = AsmCode.Define(encoding.MemberUri.OpId, encoding.Content);
+            var code = LocatedBits.Define(encoding.MemberUri.OpId, encoding.Content);
             return new AsmFunction(encoding.MemberUri, encoding.MemberSig, code, encoding.TermCode, instructions);
         }
 
         public static AsmFunction Define(ParsedExtract encoding,  AsmInstructionList instructions)
         {         
-            var code = AsmCode.Define(encoding.Id, encoding.ParsedContent);  
+            var code = LocatedBits.Define(encoding.Id, encoding.ParsedContent);  
             var sig = encoding.SourceMember.Signature().Format();          
             return new AsmFunction(encoding.Uri, sig, code, encoding.TermCode, instructions);
         }
 
-        AsmFunction(OpUri uri, string sig, AsmCode code, ExtractTermCode term, AsmInstructionList instructions)
+        AsmFunction(OpUri uri, string sig, LocatedBits code, ExtractTermCode term, AsmInstructionList instructions)
         {
             this.Uri = uri;
             this.OpId = uri.OpId;
@@ -57,7 +57,7 @@ namespace Z0.Asm
         /// <summary>
         /// The function encoding
         /// </summary>
-        public AsmCode Code {get;}
+        public LocatedBits Code {get;}
 
         /// <summary>
         /// The encoded instructions

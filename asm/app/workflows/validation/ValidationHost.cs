@@ -33,7 +33,7 @@ namespace Z0.Asm
         {                    
             Context = context;
             Sink = context;
-            CodeArchive = ApiCodeArchive.Define(RootEmissionPath);
+            CodeArchive = CaptureArchive.Define(RootEmissionPath);
             CodeArchive.LogDir.Clear();
             Settings = ValidationHostConfig.From(context.Settings);            
             ApiSet = context.ApiSet;
@@ -51,7 +51,7 @@ namespace Z0.Asm
 
         readonly ValidationHostConfig Settings;
 
-        readonly IApiCodeArchive CodeArchive;
+        readonly ICaptureArchive CodeArchive;
 
         readonly AsmWorkflowConfig WorkflowConfig;
 
@@ -71,7 +71,7 @@ namespace Z0.Asm
                 => ref Relay.Raise(e);
 
         ApiIndex MemberIndex(IApiHost host)
-            => ApiIndex.From(MemberLocator.Hosted(host));
+            => ApiIndex.Create(MemberLocator.Hosted(host));
 
         Option<IApiHost> Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
@@ -231,10 +231,10 @@ namespace Z0.Asm
             NotifyConsole($"The {host} host members define a total of {total} instructions", AppMsgColor.Cyan);            
         }
             
-        void Analyze(in ApiHostUri hosturi, ReadOnlySpan<OpUriBits> ops, FilePath dst)
+        void Analyze(in ApiHostUri hosturi, ReadOnlySpan<UriBits> ops, FilePath dst)
         {
             var hosted = Host(hosturi).MapRequired(host => MemberIndex(host));
-            var saved = Context.HexReader().Read(dst).ToArray();
+            var saved = Context.UriBitsReader().Read(dst).ToArray();
             Claim.eq(saved.Length, ops.Length);
             
             var emptycount = saved.Where(s => s.Op.IsEmpty).Count();

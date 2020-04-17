@@ -45,7 +45,7 @@ namespace Z0.Asm
             ParseMembers MemberParse
                 => ParseMembers.Create(Context);
 
-            public void Execute(in ApiHost host, IApiCodeArchive dst)
+            public void Execute(in ApiHost host, ICaptureArchive dst)
             {
                 var step = Context.Raise(StepEvents.Started(host, Context.Correlate()));
 

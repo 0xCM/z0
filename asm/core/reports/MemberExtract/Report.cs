@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -14,7 +14,6 @@ namespace Z0.Asm
     using F = MemberExtractField;
     using R = MemberExtractRecord;
     using Report = MemberExtractReport;
-    using Created = AsmEvents.ExtractReportCreated;
 
     public class MemberExtractReport : Report<Report,F,R>
     {        
@@ -35,7 +34,7 @@ namespace Z0.Asm
 
         public override string ReportName => $"Extract report for {ApiHost.Format()}";
 
-        public static Report Create(ApiHostUri host, MemberExtract[] extracts)
+        public static Report Create(ApiHostUri host, ExtractedMember[] extracts)
         {
             var records = new MemberExtractRecord[extracts.Length];
             for(var i=0; i< extracts.Length; i++)
@@ -61,9 +60,6 @@ namespace Z0.Asm
             : base(records)
         {
             this.ApiHost = host;
-        }        
-        
-        public Created CreatedEvent()
-            => Created.Define(this);
+        }            
     }     
 }

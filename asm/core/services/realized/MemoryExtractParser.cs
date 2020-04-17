@@ -21,7 +21,7 @@ namespace Z0.Asm
             => new MemoryExtractParser(context, bufferlen);
 
         [MethodImpl(Inline)]
-        public static MemoryExtractParser New(IContext context, byte[] buffer)
+        public static MemoryExtractParser Create(IContext context, byte[] buffer)
             => new MemoryExtractParser(context, buffer);
 
         [MethodImpl(Inline)]
@@ -36,15 +36,15 @@ namespace Z0.Asm
             : this(context, new byte[bufferlen])
         {}
 
-        public Option<MemoryExtract> Parse(MemoryExtract src)
+        public Option<Addressable> Parse(Addressable src)
         {
             var parser = Context.PatternParser(Buffer.Clear());
             var status = parser.Parse(src);            
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
             return succeeded 
-                ? MemoryExtract.Define(src.Address, parser.Parsed.ToArray()) 
-                : none<MemoryExtract>();
+                ? Addressable.Define(src.Address, parser.Parsed.ToArray()) 
+                : none<Addressable>();
         }               
     }
 }

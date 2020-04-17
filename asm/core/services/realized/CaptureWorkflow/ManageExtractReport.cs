@@ -26,10 +26,10 @@ namespace Z0.Asm
                 this.Context = context;
             }
             
-            public MemberExtractReport CreateReport(in ApiHost host, MemberExtract[] src)
+            public MemberExtractReport CreateReport(in ApiHost host, ExtractedMember[] src)
             {
                 var report = MemberExtractReport.Create(host.UriPath, src); 
-                Context.Raise(report.CreatedEvent());                
+                Context.Raise(ExtractReportCreated.Define(report));                
                 return report;
             }
 

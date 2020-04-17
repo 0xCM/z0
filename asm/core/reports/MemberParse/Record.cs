@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -33,7 +33,20 @@ namespace Z0.Asm
 
     public readonly struct MemberParseRecord : IRecord<F, R>
     {                        
-        public static MemberParseRecord Empty => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, MemoryExtract.Empty);
+        /// <summary>
+        /// Gets the parsed encoding described by the source record
+        /// </summary>
+        /// <param name="src">The source record</param>
+        public static ParsedMember ToParsedEncoding(MemberParseRecord src)
+        {
+            var count = src.Length;
+            var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
+            var final = ApiExtractState.Define(src.Uri.OpId, count, range.End, src.Data.LastByte);
+            var outcome = ApiExtractResult.Define(final, range, src.TermCode);
+            return ParsedMember.Define(src.Uri, src.OpSig, outcome.TermCode, src.Data);
+        }        
+        
+        public static MemberParseRecord Empty => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, Addressable.Empty);
         
         public static R From(in ParsedExtract extract, int seq)
             => MemberParseRecord.Define
@@ -48,10 +61,10 @@ namespace Z0.Asm
                     Data : extract.ParsedContent
                 );
 
-        public static MemberParseRecord Define(int Sequence, int SourceSequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, MemoryExtract Data)
+        public static MemberParseRecord Define(int Sequence, int SourceSequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, Addressable Data)
             => new MemberParseRecord(Sequence, SourceSequence, Address, Length, TermCode, Uri,OpSig,Data);
         
-        MemberParseRecord(int Sequence, int SourceSequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, MemoryExtract Data)
+        MemberParseRecord(int Sequence, int SourceSequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, Addressable Data)
         {
             this.Seq = Sequence;
             this.SourceSeq = SourceSequence;                
@@ -85,7 +98,7 @@ namespace Z0.Asm
         public string OpSig {get; }
 
         [ReportField(F.Data)]
-        public MemoryExtract Data {get; }
+        public Addressable Data {get; }
 
         public dynamic this[F f]
         {
@@ -117,19 +130,5 @@ namespace Z0.Asm
         }
 
         static Report<F,R> Model => Report<F,R>.Empty;
-
-        /// <summary>
-        /// Gets the parsed encoding described by the source record
-        /// </summary>
-        /// <param name="src">The source record</param>
-        public ParsedMemberCode ToParsedEncoding()
-        {
-            var src = this;
-            var count = src.Length;
-            var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
-            var final = ExtractState.Define(src.Uri.OpId, count, range.End, src.Data.LastByte);
-            var outcome = ExtractResult.Define(final, range, src.TermCode);
-            return ParsedMemberCode.Define(src.Uri, src.OpSig, outcome.TermCode, src.Data);
-        }
     }
 }

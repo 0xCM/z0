@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Messages)" />
+    <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 
 </Project>

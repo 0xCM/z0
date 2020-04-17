@@ -36,7 +36,7 @@ namespace Z0.Asm
                 return located;
             }
 
-            public MemberExtract[] Extracts(in ApiHost host)
+            public ExtractedMember[] Extracts(in ApiHost host)
             {
                 var members = Members(host);    
                 var extractor = Context.HostExtractor();

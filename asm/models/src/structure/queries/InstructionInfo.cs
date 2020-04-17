@@ -56,7 +56,7 @@ namespace Z0.Asm
                 if(src.Code.Length < offset + instruction.ByteLength)
                     throw AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
             
-                dst[i] = instruction.SummarizeInstruction(src.Code.Data, instruction.FormattedInstruction, offset, src.Code.Location.Start);
+                dst[i] = instruction.SummarizeInstruction(src.Code.Encoded, instruction.FormattedInstruction, offset, src.Code.Location.Start);
                 offset += (ushort)instruction.ByteLength;
             }
             return dst;

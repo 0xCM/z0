@@ -37,7 +37,7 @@ namespace Z0.Asm
         public static ByteParser<T> New(IContext context, IBytePatternSet<T> patterns, int bufferlen)
             => new ByteParser<T>(patterns, bufferlen);
 
-        public static ByteParser<T> New(IContext context, IBytePatternSet<T> patterns, byte[] buffer)
+        public static ByteParser<T> Create(IContext context, IBytePatternSet<T> patterns, byte[] buffer)
             => new ByteParser<T>(patterns, buffer);
 
         ByteParser(IBytePatternSet<T> patterns, byte[] buffer)

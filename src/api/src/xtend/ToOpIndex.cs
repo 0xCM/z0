@@ -13,8 +13,8 @@ namespace Z0
 
     partial class XTend
     {
-        public static OpIndex<OpUriBits> ToOpIndex(this IEnumerable<OpUriBits> src)
-            => OpIndex.From(src.Select(x => (x.Op.OpId, x)));
+        public static OpIndex<UriBits> ToOpIndex(this IEnumerable<UriBits> src)
+            => Identify.index(src.Select(x => (x.Op.OpId, x)));
 
         /// <summary>
         /// Creates an operation index
@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         public static OpIndex<M> ToOpIndex<M>(this IEnumerable<M> src)
             where M : struct, IApiMember
-                => OpIndex.From(src.Select(h => (h.Id, h)));
+                => Identify.index(src.Select(h => (h.Id, h)));
 
         /// <summary>
         /// Creates an operation index
@@ -32,7 +32,7 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         public static OpIndex<M> ToOpIndex<M>(this ReadOnlySpan<M> src)
             where M : struct, IApiMember
-                => OpIndex.From(src.MapArray(h => (h.Id, h)));
+                => Identify.index(src.MapArray(h => (h.Id, h)));
 
         /// <summary>
         /// Creates an operation index

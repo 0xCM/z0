@@ -22,7 +22,7 @@ namespace Z0.Asm
         public int BufferLength {get;}
 
         [MethodImpl(Inline)]
-        public static IHostCodeExtractor New(IContext context, int bufferlen)
+        public static IHostCodeExtractor Create(IContext context, int bufferlen)
             => new HostCodeExtractor(context,bufferlen);
             
         [MethodImpl(Inline)]
@@ -36,16 +36,16 @@ namespace Z0.Asm
         /// Extracts encoded content that defines executable code for a located member
         /// </summary>
         /// <param name="src">The source member</param>
-        public MemberExtract Extract(in ApiMember src)
+        public ExtractedMember Extract(in ApiMember src)
         {
             Span<byte> buffer = stackalloc byte[BufferLength];
             var reader = Context.MemoryReader();
             return Extract(src, reader, buffer);
         }
 
-        public MemberExtract[] Extract(ApiMember[] members)
+        public ExtractedMember[] Extract(ApiMember[] members)
         {
-            var dst = new MemberExtract[members.Length];
+            var dst = new ExtractedMember[members.Length];
             Span<byte> buffer = stackalloc byte[BufferLength];            
             var reader = Context.MemoryReader();
             for(var i=0; i<members.Length; i++)
@@ -57,7 +57,7 @@ namespace Z0.Asm
         /// Extracts encoded content for all operations defined by a host
         /// </summary>
         /// <param name="src">The source member</param>
-        public MemberExtract[] Extract(IApiHost src)
+        public ExtractedMember[] Extract(IApiHost src)
         {
             var locator = Context.MemberLocator();
             var members = locator.Located(src).ToArray();
@@ -65,12 +65,12 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        MemberExtract Extract(in ApiMember src, IMemoryReader reader, Span<byte> buffer)
+        ExtractedMember Extract(in ApiMember src, IMemoryReader reader, Span<byte> buffer)
         {
             buffer.Clear();                
             var length = reader.Read(src.Address, buffer);
-            var data = MemoryExtract.Define(src.Address, buffer.Slice(0,length).ToArray());
-            return MemberExtract.Define(src, data);
+            var data = Addressable.Define(src.Address, buffer.Slice(0,length).ToArray());
+            return ExtractedMember.Define(src, data);
         }
     }
 }

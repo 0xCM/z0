@@ -23,6 +23,10 @@ namespace Z0
         public static FileExtension Raw =>  FileExtension.Define("raw");
 
         public static FileExtension Log =>  FileExtension.Define("log");
+
+        public static FileExtension StdOut =>  FileExtension.Define("stdout");
+
+        public static FileExtension ErrOut =>  FileExtension.Define("errors");
         
     }
 }

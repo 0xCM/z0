@@ -31,14 +31,14 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The code source</param>
         [MethodImpl(Inline)]
-        public Option<AsmInstructionList> DecodeInstructions(in AsmCode src)
-            => DecodeInstructions(src.Data);
+        public Option<AsmInstructionList> DecodeInstructions(in LocatedBits src)
+            => DecodeInstructions(src.Encoded);
 
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        public Option<AsmInstructionList> DecodeInstructions(in MemoryExtract src)        
+        public Option<AsmInstructionList> DecodeInstructions(in Addressable src)        
         {
             try
             {   
@@ -66,7 +66,7 @@ namespace Z0.Asm
             }
         }
 
-        public void DecodeInstructions(in MemoryExtract src, Func<Asm.Instruction,bool> f)        
+        public void DecodeInstructions(in Addressable src, Func<Asm.Instruction,bool> f)        
         {
             try
             {

@@ -13,17 +13,17 @@ namespace Z0.Asm
 
         public t_asm_explicit()
         {
-                                    
+                
         }
    
         public void Execute(params string[] args)
         {
 
-            using var buffers = Context.Buffers();
+            using var buffers = Context.Buffers(Pow2.T14, 3);
             OnExecute(buffers);
         }
 
-        protected abstract void OnExecute(in AsmBuffers buffers);
+        protected abstract void OnExecute(in BufferSeq buffers);
 
     }
 }

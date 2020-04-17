@@ -48,8 +48,8 @@ namespace Z0.Asm
             Settings = settings;
             Paths = AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
             ApiSet = Z0.ApiSet.Create(composition);
-            AsmFormatter = formatter;
-            AsmDecoder = decoder;
+            Formatter = formatter;
+            Decoder = decoder;
             WriterFactory = writerFactory;            
         }
 
@@ -67,14 +67,14 @@ namespace Z0.Asm
 
         public IAppPaths Paths {get;}
 
-        public IAsmFormatter AsmFormatter {get;}
+        public IAsmFormatter Formatter {get;}
         
-        public IAsmFunctionDecoder AsmDecoder {get;}
+        public IAsmFunctionDecoder Decoder {get;}
         
         AsmWriterFactory WriterFactory {get;}
 
-        public IFunctionStreamWriter AsmWriter(FilePath dst)
-            => WriterFactory(dst, AsmFormatter);
+        public IFunctionStreamWriter Writer(FilePath dst)
+            => WriterFactory(dst, Formatter);
 
         void BlackHole(IAppMsg msg) {}
 

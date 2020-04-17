@@ -35,25 +35,25 @@ namespace Z0.Asm
             this.Decoder = decoder;
         }
 
-        public Option<ParsedMemoryCapture> Capture(MemoryAddress src)        
+        public Option<ApiMemoryCapture> Capture(MemoryAddress src)        
             => from raw in Extract(src)
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
                 from instructions in Decoder.DecodeInstructions(parsed)
                 let bits = ParsedMemoryExtract.Define(src, raw, parsed)
-                select ParsedMemoryCapture.Define(src, bits, instructions, string.Empty);
+                select ApiMemoryCapture.Define(src, bits, instructions, string.Empty);
 
         [MethodImpl(Inline)]
-        public Option<MemoryExtract> Extract(MemoryAddress src)
+        public Option<Addressable> Extract(MemoryAddress src)
             => Extractor.Extract(src);
 
-        public Option<MemoryExtract> Parse(MemoryExtract src)
+        public Option<Addressable> Parse(Addressable src)
             => from parsed in Context.MemoryExtractParser(ParseBuffer.Clear()).Parse(src)
-                let encoded = MemoryExtract.Define(src.Address, parsed)
+                let encoded = Addressable.Define(src.Address, parsed)
                 select encoded;
 
         [MethodImpl(Inline)]
-        public Option<AsmInstructionList> Decode(MemoryExtract src)
+        public Option<AsmInstructionList> Decode(Addressable src)
             => Decoder.DecodeInstructions(src);
     }
 }

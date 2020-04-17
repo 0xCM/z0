@@ -53,5 +53,30 @@ namespace Z0
                for(var j=0; j< suffixes.Length; j++, i++)
                     yield return (i, IdentityPartKind.Suffix, suffixes[j]);
         }
+
+        static IEnumerable<string> SuffixText(OpIdentity src)
+        {
+            if(src.Identifier.Contains(IDI.SuffixSep))
+            {
+                var suffixes = src.Identifier.TakeAfter(IDI.SuffixSep);
+                if(!string.IsNullOrWhiteSpace(suffixes))
+                {
+                    var seperated = suffixes.Split(IDI.SuffixSep, StringSplitOptions.RemoveEmptyEntries);
+                    foreach(var suffix in seperated)
+                        yield return suffix;
+                }
+            }
+        }
+
+        static IEnumerable<string> PartText(OpIdentity src)
+        {
+            var parts = (src.Identifier.Contains(IDI.SuffixSep) 
+            ? src.Identifier.TakeBefore(IDI.SuffixSep) 
+            : src.Identifier).Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
+            {
+                foreach(var part in parts)
+                    yield return part;                     
+            }
+        }
     }
 }

@@ -12,21 +12,13 @@ namespace Z0
 
     public static class FixedAsm
     {
-        /// <summary>
-        /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
-        /// </summary>
-        /// <param name="data">The encoded assembly</param>
-        /// <param name="id">The identity to confer</param>
-        public static AsmCode ParseAsm(OpIdentity id, string data)
-            => AsmCode.Define(id, MemoryExtract.Define(HexParsers.Bytes.ParseBytes(data).ToArray()));
-
         [MethodImpl(Inline)]
         public static FixedAsm<T> Parse<T>(OpIdentity id, string data)
             where T : unmanaged, IFixed
-                => ParseAsm(id,data).ToFixed<T>();
+                => LocatedBits.Parse(id,data).ToFixed<T>();
         
         [MethodImpl(Inline)]
-        public static FixedAsm<T> ToFixed<T>(this AsmCode src)
+        public static FixedAsm<T> ToFixed<T>(this LocatedBits src)
             where T : unmanaged, IFixed
                 => new FixedAsm<T>(src);
     }
@@ -36,12 +28,12 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        internal FixedAsm(in AsmCode code)
+        internal FixedAsm(in LocatedBits code)
         {
             this.Code = code;
         }
 
-        public readonly AsmCode Code;        
+        public readonly LocatedBits Code;        
 
         /// <summary>
         /// The identifying moniker
@@ -52,10 +44,10 @@ namespace Z0
         /// <summary>
         /// The encoded asm bytes
         /// </summary>
-        public MemoryExtract Encoded
+        public Addressable Encoded
         {
             [MethodImpl(Inline)]
-            get => Code.Data;
+            get => Code.Encoded;
         }
         
         public int Length

@@ -12,16 +12,16 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct HostCodeSaved : IAppEvent<E, AsmCode[]>
+        public readonly struct HostCodeSaved : IAppEvent<E, LocatedBits[]>
         {
-            public static E Empty => new E(ApiHostUri.Empty, new AsmCode[]{}, FilePath.Empty);
+            public static E Empty => new E(ApiHostUri.Empty, new LocatedBits[]{}, FilePath.Empty);
 
             [MethodImpl(Inline)]
-            public static E Define(ApiHostUri host, AsmCode[] code, FilePath dst)
+            public static E Define(ApiHostUri host, LocatedBits[] code, FilePath dst)
                 => new E(host,code,dst);
             
             [MethodImpl(Inline)]
-            HostCodeSaved(ApiHostUri host, AsmCode[] code, FilePath dst)
+            HostCodeSaved(ApiHostUri host, LocatedBits[] code, FilePath dst)
             {
                 this.Host = host;
                 this.Payload = code;
@@ -30,7 +30,7 @@ namespace Z0.Asm
             
             public ApiHostUri Host {get;}
             
-            public AsmCode[] Payload {get;}
+            public LocatedBits[] Payload {get;}
 
             public FilePath Target {get;}
 

@@ -18,16 +18,21 @@ namespace Z0.Asm
         /// </summary>
         AsmFormatConfig AsmFormat {get;}
 
+        IAsmFormatter Formatter {get;}
+
+        IAsmFunctionDecoder Decoder {get;}
+
+        IFunctionStreamWriter Writer(FilePath dst);            
+
+        ICaptureArchive EmissionPaths => CaptureArchive.Default;
+
+        IApiHost[] Hosts => ApiSet.Hosts;
+
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
         /// </summary>
-        int DefaultBufferLength 
-            => Pow2.T14;        
+        int DefaultBufferLength => Pow2.T14;        
 
-        IAsmFormatter AsmFormatter {get;}
-
-        IAsmFunctionDecoder AsmDecoder {get;}
-
-        IFunctionStreamWriter AsmWriter(FilePath dst);            
+        ICaptureArchive Emissions(FolderName area, FolderName subject) => EmissionPaths.WithSubject(area,subject);
     }   
 }

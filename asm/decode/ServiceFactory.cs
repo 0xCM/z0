@@ -57,7 +57,7 @@ namespace Z0.Asm
         public static IAsmInstructionDecoder AsmInstructionDecoder(this IContext context, AsmFormatConfig format)
             => AsmDecoder.instruction(context,format);
 
-        public static IAsmInstructionSource ToInstructionSource(this IHostCodeArchive archive, IContext context, AsmFormatConfig format = null)
+        public static IAsmInstructionSource ToInstructionSource(this IHostBitsArchive archive, IContext context, AsmFormatConfig format = null)
         {
             IEnumerable<AsmInstructionList> Enumerate()
             {            

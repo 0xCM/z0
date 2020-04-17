@@ -38,18 +38,18 @@ namespace Z0.Asm
             Context = C.Create(context,format);
         }
 
-        public Option<AsmFunction> DecodeCaptured(CapturedMember src)
+        public Option<AsmFunction> DecodeCaptured(ApiMemberCapture src)
             => DecodeCaptured(Context, src);
 
-        public Option<AsmFunction> DecodeParsed(ParsedMemberCode parsed)
-            =>  from i in Context.Decoder.DecodeInstructions(AsmCode.Define(parsed.MemberUri.OpId, parsed.Content))
+        public Option<AsmFunction> DecodeParsed(ParsedMember parsed)
+            =>  from i in Context.Decoder.DecodeInstructions(LocatedBits.Define(parsed.MemberUri.OpId, parsed.Content))
                 select AsmFunction.Define(parsed, i);
 
         public Option<AsmFunction> DecodeExtract(ParsedExtract src)
-            =>  from i in Context.Decoder.DecodeInstructions(AsmCode.Define(src.Id, src.ParsedContent))
+            =>  from i in Context.Decoder.DecodeInstructions(LocatedBits.Define(src.Id, src.ParsedContent))
                 select AsmFunction.Define(src,i);
 
-        static Option<AsmFunction> DecodeCaptured(C context, CapturedMember src)
+        static Option<AsmFunction> DecodeCaptured(C context, ApiMemberCapture src)
             => from i in context.Decoder.DecodeInstructions(src.Code)
                 let block = Asm.AsmInstructionBlock.Define(src.Code, i, src.TermCode)
                 select context.Builder.BuildFunction(src.Uri, src.OpSig.Format(), block);

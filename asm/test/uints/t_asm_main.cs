@@ -10,17 +10,10 @@ namespace Z0.Asm
 
     class t_asm_main : t_asm_explicit<t_asm_main>
     {
-        protected override void OnExecute(in AsmBuffers buffers)
+        protected override void OnExecute(in BufferSeq buffers)
         {                    
             
         }
-
-        void archive_selected(in AsmBuffers buffers)
-        {
-            
-            
-        }
-
 
         #if Dependencies
 

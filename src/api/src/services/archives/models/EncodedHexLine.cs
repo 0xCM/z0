@@ -23,7 +23,7 @@ namespace Z0
 
         public readonly OpIdentity Id;
 
-        public readonly MemoryExtract Encoded;
+        public readonly Addressable Encoded;
 
         /// <summary>
         /// Parses a row of identified hex text
@@ -36,7 +36,7 @@ namespace Z0
                 var parser = HexParsers.Bytes;
                 var id = Identify.Op(formatted.TakeBefore(Chars.Space).Trim());
                 var bytes = formatted.TakeAfter(Chars.Space).Split(HexSpecs.DataDelimiter, StringSplitOptions.RemoveEmptyEntries).Select(parser.ParseByte).ToArray();
-                var encoded = MemoryExtract.Define(bytes);
+                var encoded = Addressable.Define(bytes);
                 return EncodedHexLine.Define(id, encoded);                
             }
             catch(Exception e)
@@ -47,22 +47,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static EncodedHexLine Define(OpIdentity id, MemoryExtract encoded)
+        public static EncodedHexLine Define(OpIdentity id, Addressable encoded)
             => new EncodedHexLine(id, encoded);
 
         [MethodImpl(Inline)]
         public static EncodedHexLine Define(OpIdentity id, byte[] encoded)
-            => new EncodedHexLine(id, MemoryExtract.Define(encoded));
+            => new EncodedHexLine(id, Addressable.Define(encoded));
         
         [MethodImpl(Inline)]
-        EncodedHexLine(OpIdentity id, MemoryExtract encoded)
+        EncodedHexLine(OpIdentity id, Addressable encoded)
         {
             this.Id = id;
             this.Encoded = encoded;
         }
         
         [MethodImpl(Inline)]
-        public void Deconstruct(out OpIdentity id, out MemoryExtract data)
+        public void Deconstruct(out OpIdentity id, out Addressable data)
         {
             id = Id;
             data = Encoded;

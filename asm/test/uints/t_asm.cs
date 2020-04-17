@@ -15,8 +15,8 @@ namespace Z0.Asm
         where U : t_asm<U>
     {
 
-        protected IApiCodeArchive CodeArchive 
-            => Context.CodeArchive(
+        protected ICaptureArchive CodeArchive 
+            => Context.CaptureArchive(
                 Env.Current.LogDir + FolderName.Define("test"), 
                 FolderName.Define("data"), 
                 FolderName.Define(typeof(U).Name)
@@ -25,10 +25,10 @@ namespace Z0.Asm
         protected StreamWriter FileStreamWriter([Caller] string caller = null)
             => CodeArchive.HexPath(FileName.Define(caller)).Writer();
 
-        protected ICodeStreamWriter HexCodeWriter([Caller] string caller = null)
+        protected IBitArchiveWriter HexCodeWriter([Caller] string caller = null)
         {
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return Context.CodeWriter(dstPath);
+            return Context.BitArchiveWriter(dstPath);
         }
 
         protected new IAsmContext Context;

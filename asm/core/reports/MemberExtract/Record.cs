@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -33,7 +33,7 @@ namespace Z0.Asm
     {
         public const int FieldCount = 6;
 
-        public static R Empty => new R(0, MemoryAddress.Zero, 0, OpUri.Empty, text.blank, MemoryExtract.Empty);
+        public static R Empty => new R(0, MemoryAddress.Zero, 0, OpUri.Empty, text.blank, Addressable.Empty);
 
         public static R Parse(string src)
         {
@@ -48,10 +48,10 @@ namespace Z0.Asm
             var uri = OpUri.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
             var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.ParseByte).ToArray();
-            var extract = MemoryExtract.Define(data);
+            var extract = Addressable.Define(data);
             return new R(seq,address,len,uri,sig,extract);
         }
-        public MemberExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, MemoryExtract Data)
+        public MemberExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, Addressable Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -77,7 +77,7 @@ namespace Z0.Asm
         public readonly string OpSig;
 
         [ReportField(F.Data)]
-        public readonly MemoryExtract Data;
+        public readonly Addressable Data;
 
         public string DelimitedText(char sep)
         {

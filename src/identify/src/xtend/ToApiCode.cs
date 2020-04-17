@@ -14,7 +14,7 @@ namespace Z0
     partial class XTend
     {
         [MethodImpl(Inline)]
-        public static IdentifiedCode ToApiCode(this AsmCode src)
-            => IdentifiedCode.Define(src.Id, src.Data.Bytes);
+        public static IdentifiedCode ToApiCode(this LocatedBits src)
+            => IdentifiedCode.Define(src.Id, src.Encoded.Bytes);
     }
 }

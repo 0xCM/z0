@@ -135,10 +135,10 @@ namespace Z0.Asm
         static string Comment(string text)
             =>  $"; {text}";
 
-        string FormatHeaderCode(AsmCode code)
+        string FormatHeaderCode(LocatedBits code)
         {
             if(Config.EmitFunctionHeaderEncoding)
-                return Comment(ByteSpanProperty.Define(code.Id.ToLegal(), code.Data).Format());
+                return Comment(ByteSpanProperty.Define(code.Id.ToLegal(), code.Encoded).Format());
             else
                 return Comment(code.Id);
         }
