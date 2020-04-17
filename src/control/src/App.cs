@@ -15,7 +15,7 @@ namespace Z0
     {
         static FolderPath AppDir => Env.Current.DevDir + RelativeLocation.Define("src/control");
 
-        static FolderPath CaptureDir => Env.Current.LogDir + RelativeLocation.Define("reference/capture");
+        static FolderPath CaptureDir => Env.Current.LogDir + RelativeLocation.Define("test/data/ValidationHost");
 
         static IApiContext CreateContext()
         {
@@ -44,8 +44,11 @@ namespace Z0
             Print($"Examining capture archive rooted at {Archive.RootDir}");
 
             Control.iter(Archive.AsmFiles, file => Print(file));            
-            Control.iter(Archive.HexFiles, file => Print(file));            
-
+            Control.iter(Archive.HexFiles, file => Print(file));  
+            Control.iter(Archive.ExtractFiles, file => Print(file));  
+            Control.iter(Archive.ParseFiles, file => Print(file));              
+            Control.iter(Archive.ImmAsmFiles, file => Print(file));  
+            Control.iter(Archive.ImmHexFiles, file => Print(file));  
         }
 
         public override void RunShell(params string[] args)

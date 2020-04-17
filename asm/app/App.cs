@@ -29,7 +29,7 @@ namespace Z0.Asm.Check
                 P.Blocks.Resolved,
                 P.Numeric.Resolved,
                 P.Api.Resolved,
-                P.AsmCore.Resolved, 
+                P.Capture.Resolved, 
                 P.Cast.Resolved,
                 P.Checks.Resolved,
                 P.Logix.Resolved,

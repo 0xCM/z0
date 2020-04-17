@@ -28,6 +28,10 @@ namespace Z0
             => Z0.UriBitsWriter.Create(context, dst);
 
         [MethodImpl(Inline)]
+        public static UriBitsWriterFactory UriBitsWriter(this IContext context)
+            => dst => context.UriBitsWriter(dst);
+
+        [MethodImpl(Inline)]
         public static IUriBitsReader UriBitsReader(this IContext context)
             => Z0.UriBitsReader.Create(context);
 

@@ -58,15 +58,18 @@ public enum PartId : ulong
     BitSvc = 81,
 
     BitSvcTest = BitSvc | Test,
-
     
     Logix = 120, LogixTest = Logix | Test, 
     
-    Asm = 300,  AsmTest = Asm | Test, 
+    Asm = 300,  
     
-    AsmTypes = 302, AsmModels = 304, AsmCore = 310, AsmDecoder = 314,
+    Capture = 316,
+
+    AsmTest = Capture | Test, 
         
-    AsmApp = Asm | App,
+    AsmDecoder = 314,
+        
+    AsmApp = Capture | App,
 
     Vectors = 858, VectorTest = Vectors | Test,
     

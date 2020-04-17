@@ -11,8 +11,16 @@ namespace Z0
 
     using static Seed;
 
-    readonly struct UriBitsWriter : IUriBitsWriter
+    public readonly struct UriBitsWriter : IUriBitsWriter
     {        
+        public static UriBits[] Save(ApiHostUri host, ParsedExtract[] src, FilePath dst)
+        {
+            using var writer = new UriBitsWriter(dst);
+            var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Bytes));
+            writer.Write(data);
+            return data;
+        }
+
         readonly StreamWriter StreamOut;
 
         public FilePath TargetPath {get;}

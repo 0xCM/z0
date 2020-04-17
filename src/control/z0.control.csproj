@@ -8,12 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Archives)" />
-    <ProjectReference Include="$(Evaluate)" />
-
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(AsmCore)" />
-
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Archives)" />
+    <ProjectReference Include="$(Extract)" />
+    <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(Evaluate)" />
   </ItemGroup>
 
 </Project>

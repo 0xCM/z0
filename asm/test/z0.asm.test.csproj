@@ -7,13 +7,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(AsmTypes)" />
-    <ProjectReference Include="$(AsmModels)" />
-    <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(AsmDecode)" />
-    <ProjectReference Include="$(AsmSuite)" />
-    <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(AsmApp)" />
+
+    <ProjectReference Include="$(MathSvc)" />
   </ItemGroup>
 
 </Project>

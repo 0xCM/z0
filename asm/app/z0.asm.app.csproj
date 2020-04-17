@@ -6,9 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(AsmWorkflows)" />
+    <ProjectReference Include="$(Capture)" />    
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Evaluate)" />
+
+    <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(Identity)" />
 
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />    

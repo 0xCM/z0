@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Messages)" />
+    <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(Vectors)" />
+  </ItemGroup>
+
+</Project>

@@ -14,6 +14,8 @@
   </PropertyGroup>
 
   <PropertyGroup>    
+    <Asm>$(Src)asm/z0.asm.csproj</Asm>
+    <Capture>$(Src)capture/z0.capture.csproj</Capture>
 
     <Vectors>$(Src)vectors/z0.vectors.csproj</Vectors>
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>

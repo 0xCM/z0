@@ -18,13 +18,7 @@
   </PropertyGroup>
 
   <PropertyGroup>    
-    <AsmTypes>$(TopDir)asm/types/z0.asm.types.csproj</AsmTypes>
-    <AsmModels>$(TopDir)asm/models/z0.asm.models.csproj</AsmModels>
-    <AsmCore>$(TopDir)asm/core/z0.asm.core.csproj</AsmCore>
     <AsmApp>$(TopDir)asm/app/z0.asm.app.csproj</AsmApp>
-    <AsmDecode>$(TopDir)asm/decode/z0.asm.decode.csproj</AsmDecode>
-    <AsmEncode>$(TopDir)asm/encode/z0.asm.encode.csproj</AsmEncode>
-    <AsmWorkflows>$(TopDir)asm/workflows/z0.asm.workflows.csproj</AsmWorkflows>
   </PropertyGroup>
   
   <PropertyGroup>
