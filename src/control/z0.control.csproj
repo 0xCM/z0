@@ -9,6 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(MathSvc)" />
+    
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Extract)" />

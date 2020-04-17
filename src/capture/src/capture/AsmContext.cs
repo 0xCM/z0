@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Reflection;
     
@@ -14,6 +15,18 @@ namespace Z0.Asm
 
     public class AsmContext : IAsmContext 
     {            
+        public static IAsmContext Create(IAppSettings settings, params IPart[] parts)
+        {
+            var context = IContext.Default;
+            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
+            var resolved = ApiComposition.Assemble(parts.Where(r => r.Id != 0));
+            var format = AsmFormatConfig.New;            
+            var decoder = AsmDecoder.function(context, format);
+            var formatter = AsmDecoder.formatter(context, format);
+            var factory = AsmDecoder.writerFactory(context);
+            return AsmContext.Create(resolved, settings, AppMessages.exchange(), random, format, formatter, decoder, factory);
+        }
+
         /// <summary>
         /// Creates a base context with a specified composition
         /// </summary>

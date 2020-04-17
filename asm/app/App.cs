@@ -97,7 +97,7 @@ namespace Z0.Asm.Check
 
         void AnalyzeExtracts()
         {
-            ExtractionWorkflow.Create(Context).Run();
+            //ExtractionWorkflow.Create(Context).Run();
             
         }
 

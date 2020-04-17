@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
 
-    class ValidationHostConfig : AppSettingSet<ValidationHostConfig>
+    public class CaptureConfig : AppSettingSet<CaptureConfig>
     {
         public IAppSettingSet Ops => this;        
 

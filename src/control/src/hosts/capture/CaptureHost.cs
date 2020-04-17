@@ -2,40 +2,61 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
 
+    using Z0.Asm;
+
     using static Seed;
     using static Memories;
-    using static AsmEvents;
-    using static AsmServiceMessages;
+    
+    using static Asm.AsmEvents;
+    using static Asm.AsmServiceMessages;
 
-    class ValidationHost : IAsmValidationHost
+    public class CaptureHost : ICaptureHost
     {               
-        readonly IAsmContext Context;
+        IAsmContext Context;
 
-        readonly IAppMsgSink Sink;
+        IAppMsgSink Sink;
 
-        FolderPath RootEmissionPath
-            => Context.Paths.TestDataDir(GetType());                
+        IHostCaptureWorkflow CaptureWorkflow;
 
-        FilePath AppMsgLogPath
-            => (RootEmissionPath + FolderName.Define("logs")) + FileName.Define("host","log");
+        CaptureConfig Settings;
 
-        public static IAsmValidationHost Create(IAsmContext context)    
-            => new ValidationHost(context);
+        ICaptureArchive CodeArchive;
 
-        public ValidationHost(IAsmContext context)
+        AsmWorkflowConfig WorkflowConfig;
+
+        IApiSet ApiSet;
+
+        IAsmFormatter Formatter;
+
+        IAsmFunctionDecoder Decoder;
+
+        IMemberLocator MemberLocator;
+
+        IEventBroker Relay;
+
+        FolderPath CaptureRoot;
+
+        FilePath AppMsgLogPath;
+            
+        public static ICaptureHost Create(IAsmContext context, FolderPath root)    
+            => new CaptureHost(context,root);
+
+        public CaptureHost(IAsmContext context, FolderPath root)
         {                    
             Context = context;
             Sink = context;
-            CodeArchive = CaptureArchive.Define(RootEmissionPath);
+            CaptureRoot = root;
+            //RootEmissionPath = context.Paths.TestDataDir(GetType());
+            CodeArchive = CaptureArchive.Define(root);
             CodeArchive.LogDir.Clear();
-            Settings = ValidationHostConfig.From(context.Settings);            
+            Settings = CaptureConfig.From(context.Settings);            
             ApiSet = context.ApiSet;
             MemberLocator = context.MemberLocator();
             Decoder = context.AsmFunctionDecoder();            
@@ -44,43 +65,15 @@ namespace Z0.Asm
             var relay = CaptureWorkflow.EventBroker;
             ConnectReceivers(relay);
             Relay = relay;
-            WorkflowConfig = AsmWorkflowConfig.Define(RootEmissionPath);
+            WorkflowConfig = AsmWorkflowConfig.Define(root);
+            AppMsgLogPath = (root + FolderName.Define("logs")) + FileName.Define("host","log");
         }
-
-        readonly IHostCaptureWorkflow CaptureWorkflow;
-
-        readonly ValidationHostConfig Settings;
-
-        readonly ICaptureArchive CodeArchive;
-
-        readonly AsmWorkflowConfig WorkflowConfig;
-
-        readonly IApiSet ApiSet;
-
-        readonly IAsmFormatter Formatter;
-
-        readonly IAsmFunctionDecoder Decoder;
-
-        readonly IMemberLocator MemberLocator;
-
-        readonly IEventBroker Relay;
-
-        [MethodImpl(Inline)]
-        ref readonly E Raise<E>(in E e)
-            where E : IAppEvent
-                => ref Relay.Raise(e);
 
         ApiIndex MemberIndex(IApiHost host)
             => ApiIndex.Create(MemberLocator.Hosted(host));
 
         Option<IApiHost> Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
-
-        void Notify(string msg, AppMsgKind? severity = null)
-            => Sink.Notify(msg, severity);
-        
-        void Notify(AppMsg msg)
-            => Sink.Deposit(msg);
 
         void NotifyConsole(AppMsg msg)
             => Sink.NotifyConsole(msg);
@@ -108,7 +101,7 @@ namespace Z0.Asm
         void EmitImm()
         {
             var imm8 = new byte[]{3,5,12,9};                        
-            var emitter = ImmEmissionWorkflow.Create(Context,  Context, ApiSet, Formatter, Decoder, RootEmissionPath);
+            var emitter = ImmEmissionWorkflow.Create(Context,  Context, ApiSet, Formatter, Decoder, CaptureRoot);
             emitter.Emit(imm8);            
         }
 
@@ -119,7 +112,7 @@ namespace Z0.Asm
 
         void Exec()
         {
-            var workflow = EvalWorkflow.Create(Context.ApiContext, Context.Random, RootEmissionPath);
+            var workflow = EvalWorkflow.Create(Context.ApiContext, Context.Random, CaptureRoot);
             workflow.Execute();
         }
 
