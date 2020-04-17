@@ -19,11 +19,11 @@ namespace Z0.Asm
     {                       
         [MethodImpl(Inline)]
         public static IExtractParser ExtractParser(this IAsmContext context, byte[] buffer)
-            => Svc.ExtractParser.Create(context, buffer);
+            => Z0.ExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static IExtractParser ExtractParser(this IAsmContext context, int? bufferlen = null)
-            => Svc.ExtractParser.Create(context, bufferlen);
+            => Z0.ExtractParser.Create(context, bufferlen);
 
         [MethodImpl(Inline)]
         public static IAsmFunctionBuilder FunctionBuilder(this IContext context)
@@ -31,15 +31,15 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static IHostCodeExtractor HostExtractor(this IContext context, int? bufferlen = null)
-            => Svc.HostCodeExtractor.Create(context, bufferlen ?? Pow2.T14);
+            => HostCodeExtractor.Create(context, bufferlen ?? Pow2.T14);
 
         [MethodImpl(Inline)]
         public static IMemoryExtractor MemoryExtractor(this IContext context, byte[] buffer)
-            => Svc.MemoryExtractor.Create(context, buffer);
+            => Z0.MemoryExtractor.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static IMemoryExtractParser MemoryExtractParser(this IContext context, byte[] buffer)
-            => Svc.MemoryExtractParser.Create(context, buffer);
+            => Z0.MemoryExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static IMemberExtractReader MemberExtractReader(this IContext context, IApiSet api)
@@ -66,7 +66,7 @@ namespace Z0.Asm
         public static CaptureExchange CaptureExchange(this IContext context, int? size = null)
         {
             const int DefaultBufferLen = 1024*8;
-            var control = MemberExtractControl.New(context);
+            var control = MemberCaptureControl.New(context);
             var cBuffer = new byte[size ?? DefaultBufferLen];
             var sBuffer = new byte[size ?? DefaultBufferLen];
             return Svc.CaptureExchange.Create(control, cBuffer, sBuffer);

@@ -13,10 +13,13 @@ namespace Z0
 
     class App : ApiShell<App,IApiContext>
     {
+        static FolderPath AppDir => Env.Current.DevDir + RelativeLocation.Define("src/control");
+
+        static FolderPath CaptureDir => Env.Current.LogDir + RelativeLocation.Define("reference/capture");
+
         static IApiContext CreateContext()
         {
-            var dir = Env.Current.DevDir + RelativeLocation.Define("src/control");
-            var src = dir + FileName.Define("config.json");        
+            var src = AppDir + FileName.Define("config.json");        
             var parts = PartSelection.Selected;
             var resolved = ApiComposition.Assemble(parts.Where(r => r.Id != 0));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
@@ -27,15 +30,30 @@ namespace Z0
         public App()
             : base(CreateContext())
         {
-            
+            Archive = CaptureArchive.Define(CaptureDir);
         }
 
-        bool Verbose => true;
+        
+        readonly ICaptureArchive Archive;
+
+        bool Verbose => false;
+
+
+        void SurveyArchive()
+        {
+            Print($"Examining capture archive rooted at {Archive.RootDir}");
+
+            Control.iter(Archive.AsmFiles, file => Print(file));            
+            Control.iter(Archive.HexFiles, file => Print(file));            
+
+        }
 
         public override void RunShell(params string[] args)
         {
             Print("Executing control");
-            
+
+            SurveyArchive();            
+
             if(Verbose)
             {
                 Print("I assemble parts:");

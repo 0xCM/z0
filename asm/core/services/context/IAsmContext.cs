@@ -34,5 +34,7 @@ namespace Z0.Asm
         int DefaultBufferLength => Pow2.T14;        
 
         ICaptureArchive Emissions(FolderName area, FolderName subject) => EmissionPaths.WithSubject(area,subject);
+
+        IApiContext ApiContext => Z0.ApiContext.Create(ApiSet.Composition, Random, Settings, AppMsgExchange.From(this));
     }   
 }

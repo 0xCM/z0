@@ -8,6 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="$(AsmWorkflows)" />
     <ProjectReference Include="$(Validity)" />
+    <ProjectReference Include="$(Evaluate)" />
+
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />    
     <ProjectReference Include="$(GVec)" />

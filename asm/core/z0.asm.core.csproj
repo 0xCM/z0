@@ -11,7 +11,10 @@
     <ProjectReference Include="$(AsmTypes)" />
     <ProjectReference Include="$(Graphs)" />
     <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(Identity)" />    
+    <ProjectReference Include="$(Identity)" />  
+    <ProjectReference Include="$(Archives)" />
+    <ProjectReference Include="$(Extract)" />
+
   </ItemGroup>
 
 </Project>

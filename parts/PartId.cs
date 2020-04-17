@@ -21,6 +21,10 @@ public enum PartId : ulong
 
     Evaluate = 5100,
 
+    Archives = 5110,
+
+    Extract = 5120,
+
     Nats = 225, NatsTest = Nats | Test,
 
     Math = 45, MathTest = Math | Test, 

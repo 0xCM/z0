@@ -51,12 +51,16 @@ namespace Z0
         /// Enumerates all files contained in the folder with a specified extension
         /// </summary>
         public IEnumerable<FilePath> Files(FileExtension ext, bool recursive = false)        
-            => recursive ? Recurse(ext) : from f in Directory.GetFiles(FullPath, $"*.{ext}") select FilePath.Define(f);
+            => recursive 
+                ? Recurse(ext) 
+                : from f in Directory.GetFiles(FullPath, $"*.{ext}") 
+                  select FilePath.Define(f);
+        
 
         IEnumerable<FilePath> Recurse(FileExtension ext)        
             => from d in (new string[]{FullPath}).Union(Directory.EnumerateDirectories(FullPath))
                from f in Directory.GetFiles(d,$"*.{ext}")
-               select FilePath.Define(f);             
+                  select FilePath.Define(f);
 
         /// <summary>
         /// Enumerates the files contained in the folder with filenames that satisfy a substring match predicate

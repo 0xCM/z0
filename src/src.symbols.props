@@ -11,7 +11,6 @@
   <PropertyGroup>
     <Cast>$(Src)cast/z0.cast.csproj</Cast>
     <Memories>$(Src)memories/z0.memories.csproj</Memories>
-    <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
   </PropertyGroup>
 
   <PropertyGroup>    
@@ -41,6 +40,10 @@
     <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>
     <Identify>$(Src)identify/z0.identify.csproj</Identify>
     <Identity>$(Src)identity/z0.identity.csproj</Identity>
+    <Extract>$(Src)extract/z0.extract.csproj</Extract>
+
+    <Archives>$(Src)archives/z0.archives.csproj</Archives>
+    <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
   </PropertyGroup>
 
   <PropertyGroup>    
@@ -71,7 +74,6 @@
 
   <PropertyGroup>    
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
-
 
     <Time>$(Src)time/z0.time.csproj</Time>
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>

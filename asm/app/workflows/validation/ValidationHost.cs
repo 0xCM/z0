@@ -119,7 +119,7 @@ namespace Z0.Asm
 
         void Exec()
         {
-            var workflow = EvalWorkflow.Create(Context, Sink, RootEmissionPath);
+            var workflow = EvalWorkflow.Create(Context.ApiContext, Context.Random, RootEmissionPath);
             workflow.Execute();
         }
 
