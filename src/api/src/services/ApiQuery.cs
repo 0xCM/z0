@@ -12,7 +12,6 @@ namespace Z0
 
     using static Seed;
 
-
     public readonly struct ApiQuery : IService<IApiCatalog>
     {
         public IApiCatalog Context {get;}

@@ -950,8 +950,8 @@ namespace Z0.Asm.Validation
             using var asmout = FunctionWriter();            
 
             var decoder = Context.AsmFunctionDecoder();
-            var captured = Context.Capture().Capture(Context.ExtractExchange(), src.Identify(), src);
-            var decoded = decoder.DecodeCaptured(captured);
+            var captured = Context.Capture().Capture(Context.CaptureExchange(), src.Identify(), src);
+            var decoded = captured.OnSome(c => decoder.DecodeCaptured(c));
             
             
         }
@@ -1057,7 +1057,7 @@ namespace Z0.Asm.Validation
 
         void RunPipe()
         {
-            var archive =  Context.CodeArchive(PartId.GVec);
+            var archive =  Context.HostBitsArchive(PartId.GVec);
             var source = archive.ToInstructionSource(Context, Context.AsmFormat);
             var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
             var triggers = AsmTriggerSet.Define(trigger);

@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    public interface IHostCaptureService : IAppMsgSink
+    public interface IHostCaptureService : IAppMsgContext
     {
-        ExtractedMember[] Extract(ApiHostUri host, bool save);        
+        ApiMemberExtract[] Extract(ApiHostUri host, bool save);        
 
-        ParsedExtract[] Parse(ApiHostUri host, ExtractedMember[] src, bool save);        
+        ParsedExtract[] Parse(ApiHostUri host, ApiMemberExtract[] src, bool save);        
 
         AsmFunction[] Decode(ApiHostUri host, ParsedExtract[] parsed, bool save);      
 

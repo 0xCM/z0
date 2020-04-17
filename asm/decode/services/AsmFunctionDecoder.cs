@@ -42,11 +42,11 @@ namespace Z0.Asm
             => DecodeCaptured(Context, src);
 
         public Option<AsmFunction> DecodeParsed(ParsedMember parsed)
-            =>  from i in Context.Decoder.DecodeInstructions(LocatedBits.Define(parsed.MemberUri.OpId, parsed.Content))
+            =>  from i in Context.Decoder.DecodeInstructions(ApiBits.Define(parsed.MemberUri.OpId, parsed.Content))
                 select AsmFunction.Define(parsed, i);
 
         public Option<AsmFunction> DecodeExtract(ParsedExtract src)
-            =>  from i in Context.Decoder.DecodeInstructions(LocatedBits.Define(src.Id, src.ParsedContent))
+            =>  from i in Context.Decoder.DecodeInstructions(ApiBits.Define(src.Id, src.ParsedContent))
                 select AsmFunction.Define(src,i);
 
         static Option<AsmFunction> DecodeCaptured(C context, ApiMemberCapture src)

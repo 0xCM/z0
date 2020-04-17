@@ -11,10 +11,6 @@ namespace Z0
 
     public static class AppMessages
     {
-        public static IAppMsgWriter writer(FilePath target, string devname = null, 
-            FileWriteMode mode = FileWriteMode.Overwrite, bool display = false)
-                => AppMsgWriter.Open(target, devname, mode, display);
-
         public static IAppMsgExchange exchange(IAppMsgQueue dst)
             => AppMsgExchange.From(dst);
 

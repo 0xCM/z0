@@ -53,13 +53,13 @@ namespace Z0
         IEnumerable<FilePath> Files 
             => RootFolder.Files(FileExtensions.Hex,true);
                     
-        public IEnumerable<LocatedBits> Read(string name)
+        public IEnumerable<ApiBits> Read(string name)
             => Read(fn => fn.NoExtension == name);
         
-        public IEnumerable<LocatedBits> Read()
+        public IEnumerable<ApiBits> Read()
             => Read(_ => true);
 
-        public IEnumerable<LocatedBits> Read(Func<FileName,bool> predicate)
+        public IEnumerable<ApiBits> Read(Func<FileName,bool> predicate)
         {
             foreach(var file in Files.Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
@@ -75,14 +75,14 @@ namespace Z0
         /// <param name="src">The source file path</param>
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
-        public IEnumerable<LocatedBits> Read(FilePath src)
+        public IEnumerable<ApiBits> Read(FilePath src)
             => ArchiveReader.Read(src);
 
         /// <summary>
         /// Reads a moniker-identified, default-formatted hex-line file
         /// </summary>
         /// <param name="id">The identifying moniker</param>
-        public IEnumerable<LocatedBits> Read(OpIdentity id)
+        public IEnumerable<ApiBits> Read(OpIdentity id)
             => Read(RootFolder + FileName.Define(id, EncodedHexLine.FileExt));        
     }
 }

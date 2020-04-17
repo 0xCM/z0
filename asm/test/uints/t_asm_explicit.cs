@@ -10,7 +10,6 @@ namespace Z0.Asm
         where E : t_asm_explicit<E>
     {
 
-
         public t_asm_explicit()
         {
                 
@@ -19,7 +18,7 @@ namespace Z0.Asm
         public void Execute(params string[] args)
         {
 
-            using var buffers = Context.Buffers(Pow2.T14, 3);
+            using var buffers = BufferSeq.alloc(Pow2.T14, 3);
             OnExecute(buffers);
         }
 

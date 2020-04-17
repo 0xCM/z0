@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Seed;
 
     using E = AsmEvents.ExtractReportSaved;
-    using R = MemberExtractReport;
+    using R = ApiExtractReport;
 
     partial class AsmEvents
     {

@@ -11,5 +11,8 @@
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Reports)" />
+    <ProjectReference Include="$(GMath)" />
+
   </ItemGroup>
 </Project>

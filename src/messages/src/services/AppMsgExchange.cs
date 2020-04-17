@@ -11,7 +11,7 @@ namespace Z0
     
     using static Seed;
 
-    sealed class AppMsgExchange : IAppMsgExchange
+    sealed class AppMsgExchange : IAppMsgExchange, IAppMsgContext
     {
         readonly IAppMsgQueue Queue;
 

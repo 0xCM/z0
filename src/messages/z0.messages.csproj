@@ -11,6 +11,8 @@
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Reports)" />
+
   </ItemGroup>
 
 </Project>

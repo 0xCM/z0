@@ -129,7 +129,7 @@ namespace Z0.Asm
             Report($"Loaded {extracts.Length} member extracts from {src}");
         }
 
-        void AnalyzeExtracts(ExtractedMember[] src)
+        void AnalyzeExtracts(ApiMemberExtract[] src)
         {
             Raise(AnalyzingExtracts.Define(src));
 
@@ -141,14 +141,14 @@ namespace Z0.Asm
         Option<IApiHost> Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
 
-        MemberExtractReport CreateReport(IApiHost host, ExtractedMember[] src)
+        ApiExtractReport CreateReport(IApiHost host, ApiMemberExtract[] src)
         {
-            var report = MemberExtractReport.Create(host.UriPath, src); 
+            var report = ApiExtractReport.Create(host.UriPath, src); 
             Raise(ExtractReportCreated.Define(report));
             return report;
         }
 
-        Option<FilePath> SaveReport(MemberExtractReport src, FilePath dst)
+        Option<FilePath> SaveReport(ApiExtractReport src, FilePath dst)
             => src.Save(dst).OnSome(f => Raise(ExtractReportSaved.Define(src.ApiHost, src.GetType(), src.RecordCount, f)));
 
         ApiMember[] LocateMembers(IApiHost host)
@@ -158,7 +158,7 @@ namespace Z0.Asm
             return located;
         }
 
-        ExtractedMember[] ExtractMembers(IApiHost host)
+        ApiMemberExtract[] ExtractMembers(IApiHost host)
         {
             var members = LocateMembers(host);            
             var extracted = Extractor.Extract(members);

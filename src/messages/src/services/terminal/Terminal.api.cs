@@ -9,6 +9,6 @@ namespace Z0
 
     public readonly partial struct term
     {
-        static readonly Terminal T = Terminal.Get();
+        static readonly ITerminal T = Terminal.Get();
     }
 }

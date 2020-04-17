@@ -17,13 +17,13 @@ namespace Z0
         public static IBitArchiveReader New(IContext context)
             => default(BitArchiveReader);
 
-        public IEnumerable<LocatedBits> Read(FilePath src)
+        public IEnumerable<ApiBits> Read(FilePath src)
         {
             foreach(var line in src.ReadLines())
             {
                 var hex = EncodedHexLine.Parse(line);
                 if(hex.OnNone(() => term.error($"Could not parse the line {line} from {src}")))
-                    yield return hex.MapRequired(h => LocatedBits.Define(h.Id, h.Encoded));
+                    yield return hex.MapRequired(h => ApiBits.Define(h.Id, h.Encoded));
             }
         }        
     }

@@ -28,4 +28,18 @@ namespace Z0
         Option<IRngNav> Navigator {get;}    
     } 
 
+    /// <summary>
+    /// Characterizes a type that provides access to a stateful and parametric-polymorphic 
+    /// pseudorandom number generator
+    /// </summary>
+    public interface IPolyrandProvider 
+    {
+        IPolyrand Random {get;}
+    }
+
+    public interface IPolyrandContext : IPolyrandProvider, IAppContext
+    {
+
+
+    }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IEvaluationSink : IService, IAppMsgSink
+    public interface IEvaluationSink : IService
     {
         void ReportBenchmark(string name, long opcount, TimeSpan duration);        
 

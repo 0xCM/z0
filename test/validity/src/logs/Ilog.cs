@@ -33,7 +33,7 @@ namespace Z0
 
         public static IRecordSink AppLog => AppLogger.TheOnly;
 
-        class Logger<A> : IRecordSink, IAppMsgSink
+        class Logger<A> : IRecordSink, IAppMsgContext
             where A : Logger<A>, new()
         {
             public static A TheOnly = new A();

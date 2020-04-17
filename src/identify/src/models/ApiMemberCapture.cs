@@ -60,8 +60,8 @@ namespace Z0
             TermCode = term;
         }
 
-        public LocatedBits Code 
-            => LocatedBits.Define(OpId, Parsed);
+        public ApiBits Code 
+            => ApiBits.Define(OpId, Parsed);
 
         public readonly MemoryRange AddressRange    
             => Code.Location;        

@@ -15,14 +15,14 @@ namespace Z0
     partial class XTend
     {
         [MethodImpl(Inline)]
-        public static LocatedBits WithIdentity(this LocatedBits src, OpIdentity id)
-            => LocatedBits.Define(id, src.Encoded);
+        public static ApiBits WithIdentity(this ApiBits src, OpIdentity id)
+            => ApiBits.Define(id, src.Encoded);
 
         [MethodImpl(Inline)]
-        public static int ParameterCount(this LocatedBits src)
+        public static int ParameterCount(this ApiBits src)
             => src.Id.TextComponents.Count() - 1;
                     
-        public static IEnumerable<LocatedBits> HasParameterCount(this IEnumerable<LocatedBits> src, int count)
+        public static IEnumerable<ApiBits> HasParameterCount(this IEnumerable<ApiBits> src, int count)
             => from code in src
                 where code.ParameterCount() == count
                 select code;

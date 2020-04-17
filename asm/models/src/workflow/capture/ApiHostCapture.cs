@@ -16,18 +16,18 @@ namespace Z0.Asm
     {
         public readonly ApiHostUri Host;
 
-        public readonly ExtractedMember[] Extracts;
+        public readonly ApiMemberExtract[] Extracts;
 
         public readonly ParsedExtract[] Parsed;
         
         public readonly AsmFunction[] Decoded;
 
         [MethodImpl(Inline)]
-        public static ApiHostCapture Define(ApiHostUri host, ExtractedMember[] extracts, ParsedExtract[] parsed, AsmFunction[] decoded)
+        public static ApiHostCapture Define(ApiHostUri host, ApiMemberExtract[] extracts, ParsedExtract[] parsed, AsmFunction[] decoded)
             => new ApiHostCapture(host, extracts, parsed, decoded);
         
         [MethodImpl(Inline)]
-        ApiHostCapture(ApiHostUri host, ExtractedMember[] extracts, ParsedExtract[] parsed, AsmFunction[] decoded)
+        ApiHostCapture(ApiHostUri host, ApiMemberExtract[] extracts, ParsedExtract[] parsed, AsmFunction[] decoded)
         {
             this.Host = host;
             this.Extracts = extracts;

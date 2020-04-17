@@ -13,18 +13,18 @@ namespace Z0.Asm
         /// Extracts encoded content that defines executable code for a located member
         /// </summary>
         /// <param name="src">The source member</param>
-        ExtractedMember Extract(in ApiMember src);        
+        ApiMemberExtract Extract(in ApiMember src);        
 
         /// <summary>
         /// Extracts encoded content that defines executable code for an array of located members
         /// </summary>
         /// <param name="src">The source member</param>
-        ExtractedMember[] Extract(ApiMember[] src);
+        ApiMemberExtract[] Extract(ApiMember[] src);
 
         /// <summary>
         /// Extracts encoded content for all operations defined by a host
         /// </summary>
         /// <param name="src">The source member</param>
-        ExtractedMember[] Extract(IApiHost src);        
+        ApiMemberExtract[] Extract(IApiHost src);        
     }
 }

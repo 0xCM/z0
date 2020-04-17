@@ -7,11 +7,10 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />    
+    <ProjectReference Include="$(AsmModels)" />    
+    <ProjectReference Include="$(AsmTypes)" />
     <ProjectReference Include="$(Graphs)" />
     <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(Reports)" />
-    <ProjectReference Include="$(AsmTypes)" />
-    <ProjectReference Include="$(AsmModels)" />    
     <ProjectReference Include="$(Identity)" />    
   </ItemGroup>
 

@@ -10,11 +10,7 @@ namespace Z0
 
     public static class ServiceFactory
     {
-        public static IAppMsgSink MessageLog(this IAppEnv env)
-            => AppMsgLog.Create(env);
-
-        public static IAppMsgWriter AppMsgWriter(this IContext context, FilePath target, string devname = null, 
-            FileWriteMode mode = FileWriteMode.Overwrite, bool display = false)
-                => AppMessages.writer(target, devname, mode, display);
+        public static IAppMsgLog MessageLog(this IAppEnv env)
+            => AppMsgLog.Create(env);        
     }
 }

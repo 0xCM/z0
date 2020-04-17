@@ -8,14 +8,14 @@ namespace Z0
     using System.Collections.Generic;
 
     public interface ITestContext : 
+        IServiceAllocation,
         ISpeedTest, 
         IPolyrandProvider, 
         IActionValidator,
-        IAppContext, 
+        IAppMsgContext, 
         IService<ITestContext>, 
         IEvaluationSink, 
-        IDisposable,
-        ITracer,
+        IAppMsgTrace,
         ITestQueueControl,
         IConsoleNotifier          
     {

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    readonly struct ApiIndexBuilder : IApiIndexBuilder
+    readonly struct ApiIndexBuilder : ICodeIndexBuilder
     {
         readonly IContext Context;
 
@@ -20,7 +20,7 @@ namespace Z0
         readonly IMemberLocator MemberLocator;
         
         [MethodImpl(Inline)]
-        public static IApiIndexBuilder Create(IContext context, IApiSet api, IMemberLocator locator)
+        public static ICodeIndexBuilder Create(IContext context, IApiSet api, IMemberLocator locator)
             =>  new ApiIndexBuilder(context, api, locator);
         
         [MethodImpl(Inline)]

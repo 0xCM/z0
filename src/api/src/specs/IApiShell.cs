@@ -7,7 +7,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    public interface IApiShell : IShell, IAppMsgSink,  IApiComposition
+    public interface IApiShell : IShell, IAppMsgContext,  IApiComposition
     {
     }
 

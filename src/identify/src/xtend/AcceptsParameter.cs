@@ -13,16 +13,16 @@ namespace Z0
 
     partial class XTend
     {
-        public static bool AcceptsParameter(this LocatedBits src, NumericKind kind)
+        public static bool AcceptsParameter(this ApiBits src, NumericKind kind)
             => Identify.numeric(src.Id.TextComponents.Skip(1)).Contains(kind);
 
-        public static IEnumerable<LocatedBits> AcceptsParameters(this IEnumerable<LocatedBits> src, NumericKind k1, NumericKind k2)
+        public static IEnumerable<ApiBits> AcceptsParameters(this IEnumerable<ApiBits> src, NumericKind k1, NumericKind k2)
             => from code in src
                 let kinds = Identify.numeric(code.Id.TextComponents.Skip(1))
                 where kinds.Contains(k1) && kinds.Contains(k2)
                 select code;
 
-        public static IEnumerable<LocatedBits> AcceptsParameter(this IEnumerable<LocatedBits> src, NumericKind kind)
+        public static IEnumerable<ApiBits> AcceptsParameter(this IEnumerable<ApiBits> src, NumericKind kind)
             => from code in src
                 where code.AcceptsParameter(kind)
                 select code;

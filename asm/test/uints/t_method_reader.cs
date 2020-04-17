@@ -35,7 +35,7 @@ namespace Z0.Asm
 
             using var writer = FileStreamWriter();
 
-            var exchange = Context.ExtractExchange();
+            var exchange = Context.CaptureExchange();
             var ops  = exchange.Operations;
 
             var types = NumericKind.All.DistinctTypes();
@@ -55,7 +55,7 @@ namespace Z0.Asm
 
         public void capture_direct()
         {
-            var exchange = Context.ExtractExchange();
+            var exchange = Context.CaptureExchange();
             var ops  = exchange.Operations;
 
             using var target = FileStreamWriter();
@@ -76,7 +76,7 @@ namespace Z0.Asm
         public void capture_delegates()
         {
 
-            var exchange = Context.ExtractExchange();
+            var exchange = Context.CaptureExchange();
             var ops  = exchange.Operations;
 
             using var target = FileStreamWriter();
@@ -102,7 +102,7 @@ namespace Z0.Asm
 
         public void read_library()
         {
-            var exchange = Context.ExtractExchange();
+            var exchange = Context.CaptureExchange();
             var ops  = exchange.Operations;
 
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();

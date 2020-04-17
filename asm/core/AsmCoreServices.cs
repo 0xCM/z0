@@ -54,16 +54,6 @@ namespace Z0.Asm
             => CaptureService.Create(context);
 
         /// <summary>
-        /// Creates an asm buffer set, which is considered an asm service but cannot be contracted since it is a ref struct
-        /// </summary>
-        /// <param name="context">The context assubmed by the buffers</param>
-        /// <param name="sink">The target to which capture events are routed</param>
-        /// <param name="size">The (uniform) buffer length</param>
-        [MethodImpl(Inline)]
-        public static BufferSeq Buffers(this IContext context, int size, int count)
-            => BufferSeq.alloc(size,count);
-
-        /// <summary>
         /// Creates a flow over an instruction source
         /// </summary>
         /// <param name="context">The context within which the flow will be created</param>
@@ -73,13 +63,13 @@ namespace Z0.Asm
         public static IAsmInstructionFlow InstructionFlow(this IContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
 
-        public static CaptureExchange ExtractExchange(this IContext context, int? size = null)
+        public static CaptureExchange CaptureExchange(this IContext context, int? size = null)
         {
             const int DefaultBufferLen = 1024*8;
-            var control = ExtractControl.New(context);
+            var control = MemberExtractControl.New(context);
             var cBuffer = new byte[size ?? DefaultBufferLen];
             var sBuffer = new byte[size ?? DefaultBufferLen];
-            return CaptureExchange.New(control, cBuffer, sBuffer);
+            return Svc.CaptureExchange.Create(control, cBuffer, sBuffer);
         }        
         
         [MethodImpl(Inline)]
@@ -98,12 +88,16 @@ namespace Z0.Asm
         public static IHostCaptureService HostCaptureService(this IAsmContext context, FolderName area = null, FolderName subject = null)
             => Svc.HostCaptureService.Create(context, area, subject);
 
-        public static void WriteDiagnostic(this StreamWriter writer, in ApiMemberCapture src)
+        public static void WriteDiagnostic(this StreamWriter writer, Option<ApiMemberCapture> mayhaps)
         {
-            var data = src.Parsed;
+            if(mayhaps.IsNone())
+                return;
+            var definite = mayhaps.Value;
+
+            var data = definite.Parsed;
             var dst = text.build();
-			dst.AppendLine($"; label   : {src.OpSig}");
-			dst.AppendLine($"; location: {src.AddressRange.Format()}, length: {src.AddressRange.Length} bytes");
+			dst.AppendLine($"; label   : {definite.OpSig}");
+			dst.AppendLine($"; location: {definite.AddressRange.Format()}, length: {definite.AddressRange.Length} bytes");
             var lines = data.Bytes.FormatHexLines(null);
             dst.Append(lines.Concat(Chars.Eol));
             dst.AppendLine(new string('_',80));

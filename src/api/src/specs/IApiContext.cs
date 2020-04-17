@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IApiContext : IAppContext, IAppMsgQueue, IPolyrandProvider, IApiSet
+    public interface IApiContext : IAppContext, IAppMsgQueue, IPolyrandProvider, IApiSet, IAppMsgContext
     {        
         IAppMsgExchange Messaging {get;}
         

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Seed;
 
@@ -15,6 +16,5 @@ namespace Z0
 
         void Report(IAppEvent e, AppMsgColor color = AppMsgColor.Green)
             => Sink.NotifyConsole(e.Format(), color);        
-
     }
 }

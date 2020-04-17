@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// A container of messages which isnt't realy a queue but is more-or-less thread-safe
     /// </summary>
-    class AppMsgQueue : IAppMsgQueue
+    class AppMsgQueue : IAppMsgQueue, IAppMsgContext
     {
         object lockobj = new object();
 

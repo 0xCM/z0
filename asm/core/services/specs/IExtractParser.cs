@@ -18,13 +18,13 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source extract</param>
         /// <param name="seq">The sequence number to confer upon the result</param>
-        Option<ParsedExtract> Parse(in ExtractedMember src, int seq = 0);
+        Option<ParsedExtract> Parse(in ApiMemberExtract src, int seq = 0);
 
         /// <summary>
         /// Parses an extract sequence
         /// </summary>
         /// <param name="src">The source extracts</param>
-        ParsedExtract[] Parse(ExtractedMember[] src);
+        ParsedExtract[] Parse(ApiMemberExtract[] src);
     }
 
 }

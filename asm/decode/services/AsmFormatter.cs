@@ -135,7 +135,7 @@ namespace Z0.Asm
         static string Comment(string text)
             =>  $"; {text}";
 
-        string FormatHeaderCode(LocatedBits code)
+        string FormatHeaderCode(ApiBits code)
         {
             if(Config.EmitFunctionHeaderEncoding)
                 return Comment(ByteSpanProperty.Define(code.Id.ToLegal(), code.Encoded).Format());

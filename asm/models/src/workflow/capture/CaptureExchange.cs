@@ -33,10 +33,10 @@ namespace Z0.Asm
         readonly IExtractJunction Junction;
 
         [MethodImpl(Inline)]
-        public static CaptureExchange New(IExtractControl control, Span<byte> capture, Span<byte> state)
+        public static CaptureExchange Create(IMemberExtractControl control, Span<byte> capture, Span<byte> state)
             => new CaptureExchange(control,capture,state);
 
-        CaptureExchange(IExtractControl control, Span<byte> capture, Span<byte> state)            
+        CaptureExchange(IMemberExtractControl control, Span<byte> capture, Span<byte> state)            
         {
             require(capture.Length == state.Length);
             this.TargetBuffer = capture;

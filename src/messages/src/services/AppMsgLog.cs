@@ -12,14 +12,9 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public interface IAppMsgLog : IAppMsgSink
-    {
-        
-    }
-
     readonly struct AppMsgLog : IAppMsgLog
     {   
-        public static IAppMsgSink Create(IAppEnv env)         
+        public static IAppMsgLog Create(IAppEnv env)         
             => new AppMsgLog(env);
         
         readonly IAppEnv AppEnv;

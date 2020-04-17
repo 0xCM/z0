@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-
     
     public readonly struct BrokeredMessage<E>
         where E : IAppEvent        

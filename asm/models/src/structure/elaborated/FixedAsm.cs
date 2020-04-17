@@ -15,10 +15,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FixedAsm<T> Parse<T>(OpIdentity id, string data)
             where T : unmanaged, IFixed
-                => LocatedBits.Parse(id,data).ToFixed<T>();
+                => ApiBits.Parse(id,data).ToFixed<T>();
         
         [MethodImpl(Inline)]
-        public static FixedAsm<T> ToFixed<T>(this LocatedBits src)
+        public static FixedAsm<T> ToFixed<T>(this ApiBits src)
             where T : unmanaged, IFixed
                 => new FixedAsm<T>(src);
     }
@@ -28,12 +28,12 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        internal FixedAsm(in LocatedBits code)
+        internal FixedAsm(in ApiBits code)
         {
             this.Code = code;
         }
 
-        public readonly LocatedBits Code;        
+        public readonly ApiBits Code;        
 
         /// <summary>
         /// The identifying moniker

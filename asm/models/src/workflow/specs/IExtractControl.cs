@@ -29,7 +29,7 @@ namespace Z0.Asm
         void OnCaptureComplete(in CaptureExchange src, in ApiExtractState state, in ApiMemberCapture captured);        
     }
 
-    public interface IExtractControl : ICaptureService, IExtractJunction
+    public interface IMemberExtractControl : ICaptureService, IExtractJunction
     {
 
     }

@@ -42,7 +42,7 @@ namespace Z0
         //         Trace(AppMsg.Warn($"Memory capture failed for {fail}"));
         // }
 
-        bool MemcapCheck(IMemoryCapture memcap, LocatedBits src)
+        bool MemcapCheck(IMemoryCapture memcap, ApiBits src)
         {
             var section = new string('-',120);
             var captured = memcap.Capture(src.BaseAddress);

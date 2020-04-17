@@ -9,9 +9,9 @@ namespace Z0
     /// </summary>
     public interface IBitArchiveWriter : IFileStreamWriter
     {
-        void WriteCode(in LocatedBits src, int? idpad = null);
+        void WriteCode(in ApiBits src, int? idpad = null);
 
-        void Write(LocatedBits[] src);
+        void Write(ApiBits[] src);
 
         void WriteCode(in EncodedHexLine src, int? idpad = null);
     }
