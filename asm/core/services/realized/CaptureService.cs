@@ -70,7 +70,7 @@ namespace Z0.Asm
                 var pSrc = jit(src).Ptr;
                 var summary = Parse(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
-                var captured = DefineMember(id, src, summary.Bits.Source, summary.Bits.Parsed, outcome.TermCode);                
+                var captured = ApiMemberCapture.Define(id, src.DynamicOp, src.SourceMethod, summary.Bits.Source, summary.Bits.Parsed, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -81,7 +81,7 @@ namespace Z0.Asm
             }
         }
 
-        public ApiMemberCapture Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return ApiMemberCapture.Empty;                    
+                return none<ApiMemberCapture>();
             }
         }
 

@@ -18,6 +18,9 @@ namespace Z0
         /// <param name="m">The member</param>
         public static Option<A> Tag<A>(this Type t) 
             where A : Attribute
-                => t.EffectiveType().GetCustomAttribute<A>();
+        {
+            return t.EffectiveType().GetCustomAttribute<A>();
+
+        }
     }
 }

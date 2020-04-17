@@ -44,7 +44,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The delegate to capture</param>
-        ApiMemberCapture Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src);
+        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src);
             
         /// <summary>
         /// Captures encoded data from a caller-supplied source buffer.

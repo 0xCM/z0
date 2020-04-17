@@ -32,7 +32,7 @@ namespace Z0.Asm
             => Service.Capture(exchange, id, src);
 
         [MethodImpl(Inline)]
-        public ApiMemberCapture Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
             => Service.Capture(exchange, id,src);
 
         [MethodImpl(Inline)]
