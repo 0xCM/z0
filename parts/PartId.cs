@@ -35,7 +35,7 @@ public enum PartId : ulong
     
     BitCore = 80, 
 
-    BitTest = BitSuite | Test,
+    BitsTest = BitSuite | Test,
 
     BitFields = 90, 
     
@@ -65,13 +65,13 @@ public enum PartId : ulong
     
     Capture = 316,
 
-    AsmTest = Capture | Test, 
+    CaptureTest = Capture | Test, 
         
     AsmDecoder = 314,
         
     AsmApp = Capture | App,
 
-    Vectors = 858, VectorTest = Vectors | Test,
+    Vectors = 858, VectorsTest = Vectors | Test,
     
     VData = 331, 
 
@@ -101,7 +101,7 @@ public enum PartId : ulong
 
     Agency = 270, 
             
-    Dynamic = 290, DynamicTest = Dynamic | Test,
+    Dynamic = 290, DynopsTest = Dynamic | Test,
     
     Identity = 360, IdentityTest = Identity | Test,
 
@@ -114,6 +114,8 @@ public enum PartId : ulong
     Polyrand = 420,
 
     Seed = 802, 
+
+    SeedTest = Seed | Test,
     
     Typed = 846, 
     
@@ -123,7 +125,7 @@ public enum PartId : ulong
     
     Symbolic = 410, 
     
-    Textual = 810, 
+    Textual = 810, TextualTest = Textual | Test,
     
     Collective = 804, 
     
@@ -133,11 +135,15 @@ public enum PartId : ulong
     
     SFuncs = 816,
 
-    Cast = 842, Memories = 814, 
+    Cast = 842, 
+    
+    Memories = 814,  MemoriesTest = Memories | Test,
     
     Custom = 818,
 
-    Identify = 820, Kinds = 822, Api = 824,
+    Identify = 820, Kinds = 822, 
+    
+    Api = 824, ApiTest = Api | Test,
     
     Messages = 840, Apps = 828,
 
@@ -157,6 +163,8 @@ public enum PartId : ulong
 
     Spans = 5005,
 
+
+    Validate = 10000,
 
     Validity = 432,
 

@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class GVecTest : Part<GVecTest> 
+    public sealed class GVecTest : ExecutablePart<GVecTest> 
     {
-         
+         public override void Execute(params string[] args) => App.Run(args);
     }
 }

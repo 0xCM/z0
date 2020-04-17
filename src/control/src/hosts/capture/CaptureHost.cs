@@ -19,54 +19,58 @@ namespace Z0
 
     public class CaptureHost : ICaptureHost
     {               
-        IAsmContext Context;
+        readonly IAsmContext Context;
 
-        IAppMsgSink Sink;
+        readonly IAppMsgSink Sink;
 
-        IHostCaptureWorkflow CaptureWorkflow;
+        readonly IPolyrand Random;
 
-        CaptureConfig Settings;
+        readonly CaptureConfig Settings;
 
-        ICaptureArchive CodeArchive;
+        readonly ICaptureArchive Archive;
 
-        AsmWorkflowConfig WorkflowConfig;
+        readonly AsmWorkflowConfig WorkflowConfig;
 
-        IApiSet ApiSet;
+        readonly IApiSet ApiSet;
 
-        IAsmFormatter Formatter;
+        readonly IAsmFormatter Formatter;
 
-        IAsmFunctionDecoder Decoder;
+        readonly IAsmFunctionDecoder Decoder;
 
-        IMemberLocator MemberLocator;
+        readonly IMemberLocator MemberLocator;
 
-        IEventBroker Relay;
+        readonly FolderPath CaptureRoot;
 
-        FolderPath CaptureRoot;
-
-        FilePath AppMsgLogPath;
+        readonly FilePath LogPath;
             
+        readonly IHostCaptureWorkflow PrimaryWorkflow;
+
+        readonly IImmEmissionWorkflow ImmWorkflow;
+        
         public static ICaptureHost Create(IAsmContext context, FolderPath root)    
             => new CaptureHost(context,root);
 
-        public CaptureHost(IAsmContext context, FolderPath root)
+        CaptureHost(IAsmContext context, FolderPath root)
         {                    
             Context = context;
             Sink = context;
             CaptureRoot = root;
-            //RootEmissionPath = context.Paths.TestDataDir(GetType());
-            CodeArchive = CaptureArchive.Define(root);
-            CodeArchive.LogDir.Clear();
-            Settings = CaptureConfig.From(context.Settings);            
+            Random = context.Random;
             ApiSet = context.ApiSet;
+            WorkflowConfig = AsmWorkflowConfig.Define(root);
+            Settings = CaptureConfig.From(context.Settings);            
+            LogPath = (root + FolderName.Define("logs")) + FileName.Define("host","log");
+            Archive = CaptureArchive.Define(root);
+            Archive.LogDir.Clear();
             MemberLocator = context.MemberLocator();
             Decoder = context.AsmFunctionDecoder();            
-            Formatter = Context.AsmFormatter(Context.AsmFormat.WithSectionDelimiter());
-            CaptureWorkflow = HostCaptureWorkflow.Create(Context, Decoder, Formatter, Context.AsmWriterFactory());
-            var relay = CaptureWorkflow.EventBroker;
-            ConnectReceivers(relay);
-            Relay = relay;
-            WorkflowConfig = AsmWorkflowConfig.Define(root);
-            AppMsgLogPath = (root + FolderName.Define("logs")) + FileName.Define("host","log");
+            Formatter = context.AsmFormatter(context.AsmFormat.WithSectionDelimiter());
+
+            PrimaryWorkflow = HostCaptureWorkflow.Create(context, Decoder, Formatter, context.AsmWriterFactory());
+            ImmWorkflow = ImmEmissionWorkflow.Create(context,  context, ApiSet, Formatter, Decoder, root);
+            
+            ConnectReceivers(PrimaryWorkflow.EventBroker);
+
         }
 
         ApiIndex MemberIndex(IApiHost host)
@@ -83,7 +87,7 @@ namespace Z0
 
         public void Dispose()
         {
-            term.print($"Writting app messages to {AppMsgLogPath}");
+            term.print($"Writting app messages to {LogPath}");
         }
         
         public void Execute(params string[] args)
@@ -101,13 +105,13 @@ namespace Z0
         void EmitImm()
         {
             var imm8 = new byte[]{3,5,12,9};                        
-            var emitter = ImmEmissionWorkflow.Create(Context,  Context, ApiSet, Formatter, Decoder, CaptureRoot);
-            emitter.Emit(imm8);            
+            //var emitter = ImmEmissionWorkflow.Create(Context,  Context, ApiSet, Formatter, Decoder, CaptureRoot);
+            ImmWorkflow.Emit(imm8);            
         }
 
         void EmitPrimary()
         {
-            CaptureWorkflow.Run(WorkflowConfig);
+            PrimaryWorkflow.Run(WorkflowConfig);
         }
 
         void Exec()
@@ -181,7 +185,7 @@ namespace Z0
             NotifyConsole(msg);            
         }
 
-        void ConnectReceivers(IHostCaptureBroker broker)
+        IHostCaptureBroker ConnectReceivers(IHostCaptureBroker broker)
         {
             broker.Error.Subscribe(broker, OnEvent);
 
@@ -208,6 +212,8 @@ namespace Z0
             
             broker.CaptureCatalogStart.Subscribe(broker, OnEvent);            
             broker.CaptureCatalogEnd.Subscribe(broker, OnEvent);
+
+            return broker;
         }
         
         void Analyze(in ApiHostUri host, ReadOnlySpan<AsmFunction> functions)

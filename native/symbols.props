@@ -1,0 +1,9 @@
+<Project>
+
+
+  <PropertyGroup>
+    <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
+    <LibM>$(NativeDir)libm/z0.libm.csproj</LibM>
+  </PropertyGroup>
+
+</Project>

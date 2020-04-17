@@ -122,7 +122,7 @@ namespace Z0
             }
         }
 
-        IAppPaths Paths => Context.Paths;
+        IAppPaths Paths => Context.AppPaths;
 
         const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
         
@@ -404,8 +404,8 @@ namespace Z0
         {
             try            
             {  
-                Context.Paths.StandardErrorPath.Delete();
-                Context.Paths.StandardOutPath.Delete();          
+                Context.AppPaths.StandardErrorPath.Delete();
+                Context.AppPaths.StandardOutPath.Delete();          
                 
                 if(RunCustom())
                     Run(false,filters);

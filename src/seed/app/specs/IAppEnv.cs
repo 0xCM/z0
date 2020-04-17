@@ -8,7 +8,7 @@ namespace Z0
 
     public interface IAppEnv : IContext
     {
-        IAppPaths Paths {get;}      
+        IAppPaths AppPaths {get;}      
 
         IAppSettings Settings {get;}   
     }

@@ -12,7 +12,7 @@ namespace Z0
     /// </summary>
     public interface IAppContext : IAppEnv
     {        
-        IAppPaths IAppEnv.Paths 
+        IAppPaths IAppEnv.AppPaths 
             => AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
 
         IAppSettings IAppEnv.Settings

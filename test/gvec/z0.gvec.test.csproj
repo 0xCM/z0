@@ -8,16 +8,13 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(ValidityVectors)" />
-    <ProjectReference Include="$(BitPack)" />
-    <ProjectReference Include="$(BitSpans)" />    
-    <ProjectReference Include="$(Circuits)" />
     <ProjectReference Include="$(GVec)" />
-    <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(Permute)" />
-    <ProjectReference Include="$(Vectors)" />    
-    <ProjectReference Include="$(VBits)" />
     <ProjectReference Include="$(VSvc)" />
-    <ProjectReference Include="$(VData)" />
+    <ProjectReference Include="$(VBits)" />
+    <ProjectReference Include="$(BitSpans)" />    
+    <ProjectReference Include="$(BitVectors)" />    
+    <ProjectReference Include="$(Circuits)" />
+
   </ItemGroup>
 
 </Project>

@@ -14,6 +14,21 @@ namespace Z0
 
     public sealed class EmptyPart : PartId<EmptyPart> { public override PartId Id => PartId.None; }    
     
+    public interface IExecutablePart<P> : IExecutable, IPart<P>
+        where P : IPart<P>, new()
+    {
+
+    }
+
+    public abstract class ExecutablePart<P> : Part<P>, IExecutablePart<P>
+        where P : Part<P>, IExecutablePart<P>, new()
+    {
+        public static void RunPart(params string[] args)
+            => new P().Execute(args);
+        
+        public abstract void Execute(params string[] args);
+    }
+
     public abstract class Part<P> : IPart<P> 
         where P : Part<P>, IPart<P>, new()
     {                

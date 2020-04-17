@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Threading;
 
-    public class App : TestApp<App>
+    class App : TestApp<App>
     {            
         AgentContext AgentContext;
 

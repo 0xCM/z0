@@ -26,6 +26,9 @@
 
   <PropertyGroup>
     <Src>$(TopDir)src/</Src>
+    <Test>$(TopDir)test/</Test>
+    <Native>$(TopDir)native/</Native>
+
     <SrcDir>$(TopDir)src/</SrcDir>
     <TestDir>$(TopDir)test/</TestDir>
     <NativeDir>$(TopDir)native/</NativeDir>

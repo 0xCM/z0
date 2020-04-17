@@ -9,6 +9,8 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Identity)" />
+    <ProjectReference Include="$(Asm)" />
+
   </ItemGroup>
 
 </Project>
