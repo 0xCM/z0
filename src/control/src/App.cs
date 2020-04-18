@@ -14,40 +14,31 @@ namespace Z0
     using static Memories;
 
     class App : ApiShell<App,IApiContext>
-    {
-        static FolderName CaptureFolder => FolderName.Define("capture");
-
-        static string AppName => Parts.Control.Resolved.Id.Format();
-
-        static RelativeLocation AppSrcLocation => RelativeLocation.Define($"src/{AppName}");
-
-        static RelativeLocation AppDataLocation => RelativeLocation.Define($"apps/{AppName}");
-
-        static FolderPath AppSrc => Env.Current.DevDir + AppSrcLocation;
-
-        static FilePath AppConfig => AppSrc + FileName.Define("config.json");
-
-        static FolderPath AppData => Env.Current.LogDir + AppDataLocation;
-
-        static FolderPath CaptureData => AppData + CaptureFolder;
-        
+    {        
         static IApiContext CreateApiContext()
         {
             var parts = PartSelection.Selected;
             var resolved = ApiComposition.Assemble(parts.Where(r => r.Id != 0));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var settings = AppSettings.Load(AppConfig);
-            return ApiContext.Create(resolved, random, settings);
+            var settings = AppSettings.Load(AppPaths.AppConfigPath);
+            var exchange = AppMessages.exchange();
+            return ApiContext.Create(resolved, random, settings, exchange);
         }
         
         public App()
             : base(CreateApiContext())
         {
         }
-    
+
+        IAsmContext CreateAsmContext()
+            => AsmContext.Create(Context.Settings, Context.Messaging, KnownParts.ToArray());
+
+        ICaptureHost CreateCaptureHost()
+            => CaptureHost.Create(CreateAsmContext(), AppPaths.CaptureDataPath);
+
         void SurveyArchive()
         {
-            var archive = CaptureArchive.Define(CaptureData);
+            var archive = CaptureArchive.Define(AppPaths.CaptureDataPath);
 
             Print($"Examining capture archive rooted at {archive.RootDir}");
 
@@ -61,9 +52,7 @@ namespace Z0
 
         void RunCapture()
         {
-            var context = AsmContext.Create(Context.Settings, Part.Known.ToArray());
-            var host =  CaptureHost.Create(context,CaptureData);
-            host.Execute();            
+            CreateCaptureHost().Execute();            
         }
 
         void DescribeControl()
@@ -82,7 +71,6 @@ namespace Z0
         public override void RunShell(params string[] args)
         {
             RunCapture();            
-            SurveyArchive();
         }
 
         public static void Main(params string[] args)

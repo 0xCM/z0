@@ -6,12 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Seed;    
     
-    public abstract class Shell<S> :  IShell<S>
+    public abstract class Shell<S> : IShell<S>
         where S : Shell<S>, new()
     {
+        /// <summary>
+        /// The default application path collection
+        /// </summary>
+        protected static IAppPaths AppPaths => AppPathProvider.FromApp<S>();
+
         public abstract void RunShell(params string[] args);
 
         protected virtual void OnDispose() { }
@@ -21,6 +27,11 @@ namespace Z0
 
         public virtual void OnFatalError(Exception e)
             => Console.Error.WriteLine(e);   
+
+        /// <summary>
+        /// The parts that are not unknown
+        /// </summary>
+        protected IEnumerable<IPart> KnownParts => Part.KnownParts;
 
         static void Execute(IShell shell, params string[] args)
             => shell.Execute(args);        

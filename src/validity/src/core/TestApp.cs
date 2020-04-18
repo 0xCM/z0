@@ -404,8 +404,8 @@ namespace Z0
         {
             try            
             {  
-                Context.AppPaths.StandardErrorPath.Delete();
-                Context.AppPaths.StandardOutPath.Delete();          
+                Context.AppPaths.ErrorLogPath.Delete();
+                Context.AppPaths.StandardLogPath.Delete();          
                 
                 if(RunCustom())
                     Run(false,filters);

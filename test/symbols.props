@@ -2,8 +2,6 @@
 
   <PropertyGroup>
 
-    <Validity>$(Test)validity/z0.validity.csproj</Validity>
-    <ValidityVectors>$(Test)vvalidity/z0.vvalidity.csproj</ValidityVectors>
 
     <AsmTest>$(Test)asm/z0.asm.test.csproj</AsmTest>
 

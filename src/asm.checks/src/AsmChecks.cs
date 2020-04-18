@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Validation
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -14,6 +14,7 @@ namespace Z0.Asm.Validation
     using System.Reflection;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Asm;
 
     using static Seed;
     using static Memories;
@@ -33,8 +34,16 @@ namespace Z0.Asm.Validation
         
         readonly int RepCount;
 
-        public static AsmChecks Create(IAsmContext context, IAppMsgSink sink)
-            => new AsmChecks(context,sink);
+        public static AsmChecks Create(IAsmContext context)
+            => new AsmChecks(context);
+
+        AsmChecks(IAsmContext context)
+        {
+            this.Context = context;
+            this.RepCount = 128;
+            this.MsgSink = context;
+            this.ApiSet = context.ApiSet;
+        }                
 
         protected ICaptureArchive CodeArchive 
             => Context.CaptureArchive(
@@ -43,18 +52,8 @@ namespace Z0.Asm.Validation
                 FolderName.Define(GetType().Name)
                 );
 
-        protected IBitArchiveWriter HexCodeWriter([Caller] string caller = null)
-        {
-            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return Context.BitArchiveWriter(dstPath);
-        }
-
-        protected StreamWriter FileStreamWriter([Caller] string caller = null)
-            => CodeArchive.HexPath(FileName.Define(caller)).Writer();
-
         protected IBitArchiveWriter CodeWriter([Caller] string caller = null)
-        {
-            
+        {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
             return Context.BitArchiveWriter(dstPath);
         }
@@ -73,13 +72,6 @@ namespace Z0.Asm.Validation
             return Context.AsmWriter(dst,format);
         }
 
-        AsmChecks(IAsmContext context, IAppMsgSink sink)
-        {
-            this.Context = context;
-            this.RepCount = 128;
-            this.MsgSink = sink;
-            this.ApiSet = context.ApiSet;
-        }                
 
         public void Execute(in BufferSeq buffers, ApiMemberCode code)
         {
@@ -92,13 +84,6 @@ namespace Z0.Asm.Validation
             //Executioner.EvalOperators(buffers, code);
             //Executioner.EvalFixedOperators(buffers, code);
         }
-
-        /// <summary>
-        /// Reads code from a hex file
-        /// </summary>
-        /// <param name="src">The source path</param>
-        public ReadOnlySpan<UriBits> LoadCode(FilePath src)
-            => Context.UriBitsReader().Read(src).ToArray();
 
         protected ApiHostUri Math
             => ApiHostUri.FromHost(typeof(math));
@@ -123,9 +108,6 @@ namespace Z0.Asm.Validation
         protected OpIdentity TestOpName<T>(string basename, T t = default)
             where T : unmanaged
                 => Identify.NumericOp($"{basename}_asm",typeof(T).NumericKind());
-
-        protected AsmFormatConfig DefaultAsmFormat
-            => AsmFormatConfig.New.WithoutFunctionTimestamp();
 
         /// <summary>
         /// Evaluates a pair of unary operators and asserts their equality over a random sequence
@@ -213,7 +195,6 @@ namespace Z0.Asm.Validation
             return CheckAction(check, CaseName($"{fId}~/~{gId}"));                   
         }
 
-
         protected TestCaseRecord CheckMatch<T>(in BufferSeq buffers, BinaryOp<Vector256<T>> f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
             where T : unmanaged
         {
@@ -233,7 +214,6 @@ namespace Z0.Asm.Validation
 
             return CheckAction(check, CaseName($"{fId}~/~{gId}"));            
         }
-
 
         /// <summary>
         /// Manages the execution of an action test case
@@ -860,7 +840,7 @@ namespace Z0.Asm.Validation
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.veq(z1,z2);
         }
-
+        
         void CheckUnaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W256 w, string name, byte imm)
             where T : unmanaged
         {            
@@ -882,8 +862,6 @@ namespace Z0.Asm.Validation
             var f = buffers[Main].EmitFixedUnaryOp<Fixed256>(capture.Code);
             var z2 = f(x.ToFixed()).ToVector<T>();
             Claim.veq(z1,z2);
-
-
         }
 
         void vector_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
@@ -963,9 +941,7 @@ namespace Z0.Asm.Validation
 
             var decoder = Context.AsmFunctionDecoder();
             var captured = Context.Capture().Capture(Context.CaptureExchange(), src.Identify(), src);
-            var decoded = captured.OnSome(c => decoder.DecodeCaptured(c));
-            
-            
+            var decoded = captured.OnSome(c => decoder.DecodeCaptured(c));                    
         }
 
         AsmFormatConfig AsmFormat

@@ -1,20 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(MathSvc)" />    
-    <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Extract)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Evaluate)" />
+    <ProjectReference Include="$(Validity)" />
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(DVec)" />
+    <ProjectReference Include="$(GVec)" />
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(VData)" />
   </ItemGroup>
 
 </Project>

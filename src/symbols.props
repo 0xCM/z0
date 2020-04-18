@@ -20,12 +20,15 @@
 
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
 
+    <Validity>$(Src)validity/z0.validity.csproj</Validity>
+
     <Vectors>$(Src)vectors/z0.vectors.csproj</Vectors>
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
     <GVec>$(Src)gvec/z0.gvec.csproj</GVec>    
     <VData>$(Src)vdata/z0.vdata.csproj</VData>
     <VBits>$(Src)vbits/z0.vbits.csproj</VBits>
+    <VCheck>$(Src)vcheck/z0.vcheck.csproj</VCheck>
     <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
     <Permute>$(Src)permute/z0.permute.csproj</Permute>
   </PropertyGroup>

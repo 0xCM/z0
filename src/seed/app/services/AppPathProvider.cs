@@ -5,64 +5,42 @@
 namespace Z0
 {
     using System;
-    using System.Text;
+    using System.Runtime.CompilerServices;
 
-    public readonly struct AppPathProvider : IAppPaths<AppPathProvider>
-    {
-        public static AppPathProvider Create(PartId id, FolderPath root)
-        {
-            var data = root + FolderName.Define("data");
-            var benchmarks = root + FolderName.Define("bench");
-            var testroot = root + FolderName.Define("test");
-            var stdout = testroot + FolderName.Define("stdout");
-            var stderr = testroot + FolderName.Define("stderr");
-            var testResults = testroot + FolderName.Define("results");            
-            return new AppPathProvider(id, root, data, stdout, stderr, testroot, testResults, benchmarks);
-        }
+    using static Seed;
 
-        AppPathProvider(PartId id, FolderPath root, FolderPath data, FolderPath stdout, FolderPath stderr, 
-            FolderPath testroot, FolderPath testResults, FolderPath benchmarks)
+    public readonly struct AppPathProvider : IAppPaths
+    {    
+        [MethodImpl(Inline)]
+        public static IAppPaths FromApp<S>(FolderPath root = null)
+            where S : IShell<S>, new()
+                 => new AppPaths<S>(root ?? Env.Current.LogDir);
+        
+        [MethodImpl(Inline)]
+        public static IAppPaths Create(PartId id, FolderPath root)
+            => new AppPathProvider(id, root);
+
+        [MethodImpl(Inline)]
+        AppPathProvider(PartId id, FolderPath root)
         {
             this.AppId = id;
             this.Root = root;
-            this.DataRoot = data;
-            this.StandardOut = stdout;            
-            this.StandardError = stderr;
-            this.TestRoot = testroot;
-            this.TestResults = testResults;
-            this.BenchResults = benchmarks;
         }
 
         public PartId AppId {get;}
 
         public FolderPath Root {get;}
+    }
 
-        public FolderPath DataRoot {get;}
-
-        public FolderPath StandardOut {get;}
-
-        public FolderPath StandardError {get;}
-
-        public FolderPath TestRoot {get;}
-        
-        public FolderPath TestResults {get;}
-
-        public FolderPath BenchResults {get;}
-
-        const string sep = " := ";
-
-        public string Format()
+    readonly struct AppPaths<S> : IAppPaths<S>
+        where S : IShell<S>, new()
+    {
+        [MethodImpl(Inline)]
+        internal AppPaths(FolderPath root)
         {
-            var dst = new StringBuilder();
-            dst.AppendLine(string.Concat(nameof(AppId), sep, AppId.Format()));
-            dst.AppendLine(string.Concat(nameof(Root), sep, Root));
-            dst.AppendLine(string.Concat(nameof(DataRoot), sep, DataRoot));
-            dst.AppendLine(string.Concat(nameof(StandardOut), sep, StandardOut));
-            dst.AppendLine(string.Concat(nameof(StandardError), sep, StandardError));
-            dst.AppendLine(string.Concat(nameof(TestRoot), sep, TestRoot));
-            dst.AppendLine(string.Concat(nameof(TestResults), sep, TestResults));
-            dst.AppendLine(string.Concat(nameof(BenchResults), sep, BenchResults));
-            return dst.ToString();
+            this.Root = root;
         }
+
+        public FolderPath Root {get;}
     }
 }

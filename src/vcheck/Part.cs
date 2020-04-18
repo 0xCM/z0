@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.ValidityVectors)]
+[assembly: PartId(PartId.VCheck)]
 
 namespace Z0.Parts
 {
-    public sealed class ValidityVectors : Part<ValidityVectors>
+    public sealed class VCheck : Part<VCheck>
     {        
         
     }
@@ -29,7 +29,7 @@ namespace Z0
 
     }
     
-    public static class ValidityVectors
+    public static class VCheck
     {
         const char Sep = UriDelimiters.PathSep;
 

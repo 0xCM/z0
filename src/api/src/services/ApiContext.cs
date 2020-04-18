@@ -15,9 +15,8 @@ namespace Z0
     public class ApiContext : IApiContext             
     {
         [MethodImpl(Inline)]
-        public static IApiContext Create(IApiComposition composition, IPolyrand random,
-            IAppSettings settings = null, IAppMsgExchange exchange = null )
-                => new ApiContext(composition, random, settings ?? AppSettings.Empty, exchange ?? AppMessages.exchange());
+        public static IApiContext Create(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgExchange exchange)
+            => new ApiContext(composition, random, settings ?? AppSettings.Empty, exchange);
         
         [MethodImpl(Inline)]
         ApiContext(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgExchange exchange)

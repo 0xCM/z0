@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(ValidityVectors)" />
+    <ProjectReference Include="$(VCheck)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(MathSvc)" />
   </ItemGroup>

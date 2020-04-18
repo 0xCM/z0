@@ -71,6 +71,8 @@ public enum PartId : ulong
         
     AsmApp = Capture | App,
 
+    AsmChecks = 3333,
+
     Vectors = 858, VectorsTest = Vectors | Test,
     
     VData = 331, 
@@ -168,7 +170,7 @@ public enum PartId : ulong
 
     Validity = 432,
 
-    ValidityVectors = 436,
+    VCheck = 436,
 
     CoreTest = Core | Test,
 

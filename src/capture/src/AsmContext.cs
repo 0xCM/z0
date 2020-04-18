@@ -15,7 +15,7 @@ namespace Z0.Asm
 
     public class AsmContext : IAsmContext 
     {            
-        public static IAsmContext Create(IAppSettings settings, params IPart[] parts)
+        public static IAsmContext Create(IAppSettings settings, IAppMsgExchange exchange,  params IPart[] parts)
         {
             var context = IContext.Default;
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
@@ -24,7 +24,8 @@ namespace Z0.Asm
             var decoder = AsmDecoder.function(context, format);
             var formatter = AsmDecoder.formatter(context, format);
             var factory = AsmDecoder.writerFactory(context);
-            return AsmContext.Create(resolved, settings, AppMessages.exchange(), random, format, formatter, decoder, factory);
+            //AppMessages.exchange()
+            return AsmContext.Create(resolved, settings, exchange, random, format, formatter, decoder, factory);
         }
 
         /// <summary>

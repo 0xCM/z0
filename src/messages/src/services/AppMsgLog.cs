@@ -19,9 +19,9 @@ namespace Z0
         
         readonly IAppEnv AppEnv;
 
-        FilePath DefaultTarget => AppEnv.AppPaths.StandardOutPath;
+        FilePath DefaultTarget => AppEnv.AppPaths.StandardLogPath;
 
-        FilePath ErrorTarget => AppEnv.AppPaths.StandardErrorPath;
+        FilePath ErrorTarget => AppEnv.AppPaths.ErrorLogPath;
                 
         [MethodImpl(Inline)]
         AppMsgLog(IAppEnv env)

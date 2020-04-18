@@ -39,7 +39,7 @@ namespace Z0
         /// process, a random file deletion algorithm rampaging throgh the environs 'digitale, or any 
         /// unforseen for forseen reason.
         /// </summary>
-        public static IEnumerable<IPart> Known
+        public static IEnumerable<IPart> KnownParts
             => known();
 
         /// <summary>

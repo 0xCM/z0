@@ -24,8 +24,10 @@ namespace Z0
             // NumericTest.RunPart(args);
             // PermuteTest.RunPart(args);
             // TextualTest.RunPart(args);
-            //NatsTest.RunPart(args);      
-            VSvcTest.RunPart(args);
+            // NatsTest.RunPart(args);      
+            // VSvcTest.RunPart(args);
+            AsmTest.RunPart(args);
+            
 
         }
     }
