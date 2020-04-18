@@ -21,7 +21,7 @@ namespace Z0
                 => CheckRowVector.length(lhs,rhs);        
     }
 
-    public interface ICheckRowVector<C> : ICheckRowVector, ICheck<C>
+    public interface ICheckRowVector<C> : ICheckRowVector
         where C : ICheckRowVector<C>, new()
     {
 

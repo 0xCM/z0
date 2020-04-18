@@ -11,7 +11,7 @@ namespace Z0
         IServiceAllocation,
         ISpeedTest, 
         IPolyrandProvider, 
-        IActionValidator,
+        ICheckAction,
         IAppMsgContext, 
         IService<ITestContext>, 
         IEvaluationSink, 

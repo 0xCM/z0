@@ -14,17 +14,17 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public readonly struct CheckNumeric : ICheckNumeric<CheckNumeric>
+    public readonly struct CheckNumeric : ICheckNumeric
     {
-        public static ICheckNumeric<CheckNumeric> Check => default(CheckNumeric);
+        public static ICheckNumeric Check => default(CheckNumeric);
         
         [MethodImpl(Inline)]
         public static bool eq(bit lhs, bit rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw Check.failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw Check.failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]
         public static bool neq(bit lhs, bit rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw Check.failed(ValidityClaim.NEq, Equal(lhs, rhs, caller, file, line));
+            => lhs != rhs ? true : throw Check.failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]
         public static void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -33,7 +33,7 @@ namespace Z0
             if(typeof(T) == typeof(bit))
                 eq(bit.specific(lhs), bit.specific(rhs));
             else
-                gmath.eq(lhs,rhs).OnNone(() => throw Check.failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line)));
+                gmath.eq(lhs,rhs).OnNone(() => throw Check.failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
         }
 
         [MethodImpl(Inline)]
@@ -43,7 +43,7 @@ namespace Z0
             if(typeof(T) == typeof(bit))
                 neq(bit.specific(lhs), bit.specific(rhs));
             else
-                gmath.neq(lhs,rhs).OnNone(() => throw Check.failed(ValidityClaim.NEq, Equal(lhs, rhs, caller, file, line)));
+                gmath.neq(lhs,rhs).OnNone(() => throw Check.failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
         }
 
         [MethodImpl(Inline)]
@@ -59,22 +59,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool gt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.gt(lhs,rhs) ? true : throw Check.failed(ValidityClaim.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
+                => gmath.gt(lhs,rhs) ? true : throw Check.failed(ClaimKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]
         public static bool gteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.gteq(lhs,rhs) ? true : throw Check.failed(ValidityClaim.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
+                => gmath.gteq(lhs,rhs) ? true : throw Check.failed(ClaimKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
         
         [MethodImpl(Inline)]
         public static bool lt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.lt(lhs,rhs) ? true : throw Check.failed(ValidityClaim.Lt, NotLessThan(lhs, rhs, caller, file, line));
+                => gmath.lt(lhs,rhs) ? true : throw Check.failed(ClaimKind.Lt, NotLessThan(lhs, rhs, caller, file, line));
         
         [MethodImpl(Inline)]
         public static bool lteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.lteq(lhs,rhs) ? true : throw Check.failed(ValidityClaim.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
+                => gmath.lteq(lhs,rhs) ? true : throw Check.failed(ClaimKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]
         public static void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

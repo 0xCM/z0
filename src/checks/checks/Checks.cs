@@ -27,8 +27,6 @@ namespace Z0
         internal static ulong u64<E>(E e)
             where E : unmanaged, Enum
                 => numeric<E,ulong>(e);
-
-
     }
 
     public static partial class XTend

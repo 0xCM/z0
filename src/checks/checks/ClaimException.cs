@@ -11,19 +11,19 @@ namespace Z0
     /// Raised when a validation check has failed
     /// </summary>
     [Serializable]
-    public class ValidityException : AppException
+    public class ClaimException : AppException
     {
-        public static ValidityException Define(ValidityClaim op, IAppMsg msg)
-            => new ValidityException(op, msg);        
+        public static ClaimException Define(ClaimKind op, IAppMsg msg)
+            => new ClaimException(op, msg);        
 
-        public ValidityException() { }
+        public ClaimException() { }
      
-        ValidityException(ValidityClaim kind, IAppMsg msg) 
+        ClaimException(ClaimKind kind, IAppMsg msg) 
             : base(msg)
             { 
                 this.OpKind = kind;
             }
          
-        public ValidityClaim OpKind {get;}         
+        public ClaimKind OpKind {get;}         
     }
 }

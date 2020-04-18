@@ -18,9 +18,9 @@ namespace Z0
     using static Seed;
     using static AppErrorMsg;    
     
-    public readonly struct Claim : ICheck<Claim>
+    public readonly struct Claim : ICheck
     {
-        public static ICheck<Claim> Checker => default(Claim);
+        public static ICheck Checker => default(Claim);
         
         [MethodImpl(Inline)]   
         public static int length<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
@@ -59,10 +59,10 @@ namespace Z0
         /// </summary>
         /// <param name="op">The kind of claim that failed</param>
         /// <param name="msg">The failure description</param>
-        public static ValidityException failed(ValidityClaim op, IAppMsg msg)
+        public static ClaimException failed(ClaimKind op, IAppMsg msg)
         {
             require(msg != null, $"Defining validity exceptions with invalid messages is bad");
-            return ValidityException.Define(op, msg);
+            return ClaimException.Define(op, msg);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void failwith(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw failed(ValidityClaim.Fail, AppMsg.Error(msg, caller, file,line));
+            => throw failed(ClaimKind.Fail, AppMsg.Error(msg, caller, file,line));
 
         /// <summary>
         /// Fails unconditionally
@@ -83,103 +83,103 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw failed(ValidityClaim.Fail, AppMsg.Error("failed", caller, file,line));
+            => throw failed(ClaimKind.Fail, AppMsg.Error("failed", caller, file,line));
 
         [MethodImpl(Inline)]   
         public static bool eq(byte lhs, byte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(sbyte lhs, sbyte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(short lhs, short rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(ushort lhs, ushort rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(int lhs, int rhs, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, AppMsg.Define(msg, AppMsgKind.Error, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, AppMsg.Define(msg, AppMsgKind.Error, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(uint lhs, uint rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool neq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw failed(ValidityClaim.NEq, Equal(lhs, rhs, caller, file, line));
+            => lhs != rhs ? true : throw failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(ulong lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool eq(bool lhs, bool rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
         
         [MethodImpl(Inline)]   
         public static bool eq(string lhs, string rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Equals(rhs) ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs,rhs, caller, file, line));
+            => lhs.Equals(rhs) ? true : throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         [MethodImpl(Inline)]   
         public static bool require(bool invariant, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => invariant ? true : throw failed(ValidityClaim.Invariant, InvariantFailure(caller, file, line));
+            => invariant ? true : throw failed(ClaimKind.Invariant, InvariantFailure(caller, file, line));
 
         [MethodImpl(Inline)]
         public static bool require(bool invariant, AppMsg msg)
-            => invariant ? true : throw failed(ValidityClaim.Invariant, msg);
+            => invariant ? true : throw failed(ClaimKind.Invariant, msg);
 
         [MethodImpl(Inline)]
         public static bool no(bool invariant, AppMsg msg)
-            => !invariant ? true : throw failed(ValidityClaim.False, msg);
+            => !invariant ? true : throw failed(ClaimKind.False, msg);
 
         [MethodImpl(Inline)]
         public static bool eq(byte lhs, byte rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, msg);
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
 
         [MethodImpl(Inline)]
         public static bool eq(sbyte lhs, sbyte rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, msg);
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
 
         [MethodImpl(Inline)]
         public static bool eq(short lhs, short rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, msg);
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
 
         [MethodImpl(Inline)]
         public static bool eq(ushort lhs, ushort rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, msg);
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
 
         [MethodImpl(Inline)]
         public static bool eq(int lhs, int rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, msg);
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
 
         [MethodImpl(Inline)]
         public static bool eq(uint lhs, uint rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, msg);
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
 
         [MethodImpl(Inline)]
         public static bool eq(long lhs, long rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, msg);
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
 
         [MethodImpl(Inline)]
         public static bool eq(ulong lhs, ulong rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ValidityClaim.Eq, msg);
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
 
         [MethodImpl(Inline)]
         internal static ulong dist(double a, double b)
@@ -201,14 +201,14 @@ namespace Z0
         {
             var err = relerr(lhs,rhs);
             var tolerance = .1f;            
-            return err < tolerance ? true : throw failed(ValidityClaim.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
+            return err < tolerance ? true : throw failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
         public static bool almost(double lhs, double rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var err = relerr(lhs,rhs);
             var tolerance = .1f;            
-            return err < tolerance ? true : throw failed(ValidityClaim.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
+            return err < tolerance ? true : throw failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace Z0
             var count = length(lhs,rhs);
             for(var i = 0; i< count; i++)
                 if(lhs[i] != rhs[i])
-                    throw failed(ValidityClaim.EqItem, ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line));
+                    throw failed(ClaimKind.EqItem, ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line));
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T"></typeparam>
         public static bool contains<T>(ISet<T> set, T item, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => set.Contains(item) ? true : throw  failed(ValidityClaim.NotIn, AppMsg.Error($"Item {item} not in set"));
+            => set.Contains(item) ? true : throw  failed(ClaimKind.NotIn, AppMsg.Error($"Item {item} not in set"));
 
         /// <summary>
         /// Asserts the equality of two sets
@@ -294,7 +294,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>        
         public static bool seteq<T>(ISet<T> lhs, ISet<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.SetEquals(rhs) ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs,rhs, caller, file, line));
+            => lhs.SetEquals(rhs) ? true : throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
         /// Asserts the equality of two vectors
@@ -306,7 +306,7 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static bool veq<T>(Vector128<T> lhs, Vector128<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => lhs.Equals(rhs) ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs,rhs, caller, file, line));
+                => lhs.Equals(rhs) ? true : throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
         /// Asserts the equality of two vectors
@@ -318,7 +318,7 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static bool veq<T>(Vector256<T> lhs, Vector256<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => lhs.Equals(rhs) ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs,rhs, caller, file, line));
+                => lhs.Equals(rhs) ? true : throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
                 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -336,7 +336,7 @@ namespace Z0
 
         public static void yea<T>(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => src.OnNone(() => throw ValidityException.Define(NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line)));
+                => src.OnNone(() => throw ClaimException.Define(NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line)));
 
         /// <summary>
         /// Asserts the operand is true
@@ -347,7 +347,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void yea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => src.OnNone(() => throw ValidityException.Define(NotTrue(msg, caller, file,line)));
+            => src.OnNone(() => throw ClaimException.Define(NotTrue(msg, caller, file,line)));
 
         /// <summary>
         /// Asserts the operand is false
@@ -358,18 +358,18 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void nea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => src.OnSome(() => throw ValidityException.Define(NotFalse(msg, caller, file,line)));
+            => src.OnSome(() => throw ClaimException.Define(NotFalse(msg, caller, file,line)));
 
         public static void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(!object.Equals(lhs,rhs))
-                throw failed(ValidityClaim.Eq, NotEqual(lhs,rhs, caller, file, line));
+                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }            
 
         public static void neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(object.Equals(lhs,rhs))
-                throw failed(ValidityClaim.Eq, NotEqual(lhs,rhs, caller, file, line));
+                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }            
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     
     using static Seed;
 
-    public interface IActionValidator
+    public interface ICheckAction : IValidator
     {
         /// <summary>
         /// Manages the execution of an identified action that performs a validation exercise
@@ -27,5 +27,4 @@ namespace Z0
         /// <param name="name">The action name</param>
         void CheckAction(Action f, string name);        
     }
-
 }

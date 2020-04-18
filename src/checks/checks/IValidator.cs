@@ -12,7 +12,7 @@ namespace Z0
 
     public interface IValidator
     {
-        ValidityException failed(ValidityClaim op, AppMsg msg)
+        ClaimException failed(ClaimKind op, AppMsg msg)
             => Claim.failed(op,msg);
 
         void failwith(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -20,22 +20,5 @@ namespace Z0
 
         void fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Claim.fail(caller, file, line);        
-    }
-
-    public interface IValidator<V> : IValidator
-        where V : IValidator<V>, new()
-    {
-
-
-    }
-
-    public interface IEqualCheck<T> : IValidator
-    {
-        void eq(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null);
-    }
-
-    public interface INotEqualCheck<T> : IValidator
-    {
-        void neq(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null);
     }
 }

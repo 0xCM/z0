@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Serialization;
 
-    public enum ValidityClaim
+    public enum ClaimKind
     {
         Eq,
         

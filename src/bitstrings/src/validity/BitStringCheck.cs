@@ -13,13 +13,13 @@ namespace Z0
         void IEqualCheck<BitString>.eq(BitString a, BitString b, string caller, string file, int? line)
         {
             if(!a.Equals(b))
-                throw failed(ValidityClaim.Eq, NotEqual(a,b, caller, file, line));
+                throw failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
         }
 
         void INotEqualCheck<BitString>.neq(BitString a, BitString b, string caller, string file, int? line)
         {
             if(a.Equals(b))
-                throw failed(ValidityClaim.NEq, Equal(a,b, caller, file, line));
+                throw failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
         }
     }
 
@@ -28,7 +28,7 @@ namespace Z0
         static new IBitStringCheck<BitStringCheck> Checker => BitStringCheck.Checker;
     }
 
-    public interface IBitStringCheck<C> : IBitStringCheck, ICheckNumeric<C>
+    public interface IBitStringCheck<C> : IBitStringCheck
         where C : IBitStringCheck<C>, new()
     {
 

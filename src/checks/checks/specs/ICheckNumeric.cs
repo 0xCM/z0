@@ -9,13 +9,7 @@ namespace Z0
         
     public interface ICheckNumeric : ICheck, ICheckNumericSpan, ICheckNumericComparison, ICheckNumericEquality
     {
-        static new ICheckNumeric<CheckNumeric> Checker => CheckNumeric.Check;
-    }
-
-    public interface ICheckNumeric<C> : ICheckNumeric, ICheck<C>
-        where C : ICheckNumeric<C>, new()
-    {
-        
+        static new ICheckNumeric Checker => CheckNumeric.Check;
     }
 
 }

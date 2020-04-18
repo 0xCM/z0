@@ -42,8 +42,8 @@ namespace Z0
 
         internal static class Claim
         {
-            public static ValidityException failed(ValidityClaim op, IAppMsg msg)
-                => ValidityException.Define(op, msg);
+            public static ClaimException failed(ClaimKind op, IAppMsg msg)
+                => ClaimException.Define(op, msg);
 
             /// <summary>
             /// Asserts the equality of two bit values
@@ -62,7 +62,7 @@ namespace Z0
             /// <param name="file">The source file of the calling function</param>
             /// <param name="line">The source file line number where invocation ocurred</param>        
             public static bool eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                => lhs.Equals(rhs) ? true : throw failed(ValidityClaim.Eq, NotEqual(lhs,rhs, caller, file, line));
+                => lhs.Equals(rhs) ? true : throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
             /// <summary>
             /// Asserts the equality of two primal values

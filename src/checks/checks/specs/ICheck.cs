@@ -21,13 +21,6 @@ namespace Z0
         IEquatableCheck,
         ICheckEnum
     {
-
-        static ICheck<Claim> Checker => Claim.Checker;
-    }
-
-    public interface ICheck<C> : ICheck, IValidator<C>
-        where C : ICheck<C>, new()
-    {
-
+        static ICheck Checker => Claim.Checker;
     }
 }
