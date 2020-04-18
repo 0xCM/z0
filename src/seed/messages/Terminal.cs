@@ -165,6 +165,17 @@ namespace Z0
             }
         }
 
+        void WriteWarning(object src)
+        {
+            lock(locker)
+            {
+                var current = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(src);
+                Console.ForegroundColor = current;
+            }
+        }
+
         void Write(object src, ConsoleColor color)
         {
             lock(locker)
@@ -175,5 +186,15 @@ namespace Z0
                 Console.ForegroundColor = current;
             }
         }
+
+        public void Error(Exception e)
+            => WriteError((object)e);
+
+        public void Error(string description)
+            => WriteError((object)description);
+        
+        public void Warn(string description)
+            => WriteWarning((object)description);
+
     }
 }

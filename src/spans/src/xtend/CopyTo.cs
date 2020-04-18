@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
     partial class XTend
     {
@@ -17,5 +18,19 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Data.CopyTo(dst);
+
+        public static int Count<T>(this ReadOnlySpan<T> src, Func<T,bool> predicate)
+        {
+            var len = src.Length;
+            var count = 0;
+            for(var i=0; i<len; i++)
+                if(predicate(skip(src,i)))
+                    count++;                    
+            return count;
+        }        
+        
+        [MethodImpl(Inline)]
+        public static int Count<T>(this Span<T> src, Func<T,bool> predicate)
+            => src.ReadOnly().Count(predicate);
     }
 }

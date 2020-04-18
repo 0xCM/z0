@@ -8,9 +8,7 @@ namespace Z0
     
     public interface IAsmChecks : IService
     {
-        void Execute(in BufferSeq buffers, ApiMemberCode code);        
 
-        void Execute(in BufferSeq buffers, ApiMemberCode[] code);        
     }
 
 }

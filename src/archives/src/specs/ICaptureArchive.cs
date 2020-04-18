@@ -17,11 +17,11 @@ namespace Z0
     {
         ICaptureArchive Clear();
         
+        ICaptureArchive Narrow(FolderName area, FolderName subject);
+
         [MethodImpl(Inline)]
         IHostCaptureArchive HostArchive(ApiHostUri host)
             => HostCaptureArchive.Define(this, host);        
-
-        ICaptureArchive WithSubject(FolderName area, FolderName subject);
 
         FolderName AreaName => FolderName.Empty;
 
@@ -47,7 +47,6 @@ namespace Z0
 
         FolderName ReportFolder 
             => FolderName.Define($"reports");  
-
 
         FolderName ImmRootFolder 
             => FolderName.Define("imm");
@@ -137,6 +136,5 @@ namespace Z0
         IEnumerable<FilePath> ImmAsmFiles => ImmAsmDir.Files(AsmExt);
 
         IEnumerable<FilePath> ImmHexFiles => ImmHexDir.Files(HexExt);
-
     }
 }

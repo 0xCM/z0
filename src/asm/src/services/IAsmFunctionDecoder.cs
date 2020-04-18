@@ -16,7 +16,6 @@ namespace Z0.Asm
 
         Option<AsmFunction> DecodeCaptured(ApiMemberCapture src);       
 
-        Option<AsmFunction> DecodeExtract(ParsedExtract src);                 
-
+        Option<AsmFunction> DecodeExtract(ParsedExtract src);
     }
 }

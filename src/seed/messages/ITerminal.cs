@@ -16,6 +16,12 @@ namespace Z0
     {
         void SetTerminationHandler(Action handler);        
 
+        void Error(Exception e);
+
+        void Error(string description);
+
+        void Warn(string description);
+         
         void WriteLine();
 
         void WriteLine(object src, AppMsgKind kind);        

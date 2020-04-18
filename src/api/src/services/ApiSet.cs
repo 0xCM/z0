@@ -27,16 +27,16 @@ namespace Z0
 
         public PartId[] PartIdentities {get;}
                 
-        [MethodImpl(Inline)]
         ApiSet(IApiComposition api)
         {
-            Composition = ApiComposition.Assemble(api.Resolved);
+            //Composition = ApiComposition.Assemble(api.Resolved);
+            Composition = api;
             Catalogs = api.Catalogs.ToArray();    
             Hosts = (from owner in Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner)
                 from  host in owner
                 select host as IApiHost).ToArray();     
-            Parts = Composition.Resolved;       
-            PartIdentities = Parts.Map(p => p.Id);            
+            Parts = api.Resolved;       
+            PartIdentities = api.Resolved.Map(p => p.Id);            
         }
     }
 }

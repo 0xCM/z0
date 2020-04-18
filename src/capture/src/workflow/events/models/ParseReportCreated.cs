@@ -40,7 +40,7 @@ namespace Z0.Asm
             public string Description
                 => $"{Payload.RecordCount} records created for {Payload.ReportName}";
             
-            public E Zero => Empty;                
+            public E Zero => Empty;
         }        
     }
 }

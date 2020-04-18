@@ -26,8 +26,8 @@ namespace Z0
             return this;
         }
 
-        public ICaptureArchive WithSubject(FolderName area, FolderName subject)
-            => Parent.WithSubject(area, subject);
+        public ICaptureArchive Narrow(FolderName area, FolderName subject)
+            => Parent.Narrow(area, subject);
 
         [MethodImpl(Inline)]
         HostCaptureArchive(ICaptureArchive root, in ApiHostUri host)

@@ -3,7 +3,7 @@
     "CheckExecution": "True",
     "HandleMembersLocated": "True",
     "HandleExtractsParsed": "True",
-    "HandleFunctionsDecoded": "False",
+    "HandleFunctionsDecoded": "True",
     "HandleParsedExtractSaved": "True",
     "HandleHostReportSaved": "False",
     "HandleExtractReportCreated": "False",

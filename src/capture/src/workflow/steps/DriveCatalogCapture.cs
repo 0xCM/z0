@@ -28,7 +28,7 @@ namespace Z0.Asm
 
             public void CaptureCatalogs(AsmWorkflowConfig config)
             {
-                var root = CaptureArchive.Define(config.EmissionRoot);
+                var root = CaptureArchive.Create(config.EmissionRoot);
                 CaptureCatalogs(root);
             }
 

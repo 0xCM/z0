@@ -38,7 +38,7 @@ namespace Z0.Asm
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
-        public static IFunctionStreamWriter writer(IContext context, FilePath dst, AsmFormatConfig config = null)
+        public static IAsmFunctionWriter writer(IContext context, FilePath dst, AsmFormatConfig config = null)
             => AsmFunctionWriter.Create(context, dst, formatter(context, config));
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0.Asm
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
-        public static IFunctionStreamWriter writer(IContext context, FilePath dst, IAsmFormatter formatter)
+        public static IAsmFunctionWriter writer(IContext context, FilePath dst, IAsmFormatter formatter)
             => AsmFunctionWriter.Create(context, dst, formatter);
 
         /// <summary>

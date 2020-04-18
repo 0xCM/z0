@@ -28,19 +28,16 @@ namespace Z0.Asm
         internal static void ExractedHost(this IHostCaptureService service, ApiHostUri host, FilePath dst)
             => service.Notify(AppMsg.Info($"Emitted extracted {host} operations to {dst}"));
 
-        internal static void HostExtractionFailed(this IHostCaptureService service, ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        internal static void ExtractionFailed(this IHostCaptureService service, ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => service.Notify(AppMsg.Error($"Error extracting {host} operations", caller, file, line));
 
-        public static AppMsg ParsedExtracts(ApiHostUri host, FilePath dst)
-            => AppMsg.Info($"Emitted parsed {host} op extracts to {dst}");
 
         public static AppMsg ExtractParseFailure(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppMsg.Error($"Extract parse failure for {host}", caller, file, line);
         
         public static AppMsg ExtractParseFailure(OpUri op, ExtractTermCode code)
             => AppMsg.Warn($"Extract parse failure {code} for {op}");
-        
-        public static AppMsg DuplicateWarning(ApiHostUri host, OpIdentity id)
-            => AppMsg.Warn($"The host {host} defines operations with a duplicated identifer: {id}");
+
+
     }
 }

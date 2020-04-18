@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Seed;
 
     using E = AsmEvents.ExtractReportSaved;
-    using R = ApiExtractReport;
 
     partial class AsmEvents
     {
@@ -46,6 +45,8 @@ namespace Z0.Asm
                 => TargetPath;
 
             public E Zero => Empty;
+
+            public AppMsgColor Flair => AppMsgColor.Cyan;
         }
     }
 }

@@ -135,10 +135,6 @@ namespace Z0
         /// </summary>
         FolderName AppRootFolder => FolderName.Define("apps");
 
-        /// <summary>
-        /// The name of the folder into which capture results are deposited
-        /// </summary>
-        FolderName CaptureFolder => FolderName.Define("capture");        
 
         /// <summary>
         /// The path to the root development directory
@@ -161,9 +157,15 @@ namespace Z0
         FolderPath AppDataPath => Root + RelativeLocation.Define($"apps/{AppName}");
 
         /// <summary>
+        /// The name of the folder into which capture results are deposited
+        /// </summary>
+        FolderName CaptureFolder => FolderName.Define("capture");        
+
+        /// <summary>
         /// The application-relative capture directory
         /// </summary>
-        FolderPath CaptureDataPath => AppDataPath + CaptureFolder;
+        FolderPath AppCapturePath => AppDataPath + CaptureFolder;
+
 
         string ICustomFormattable.Format() => AppName;
     }

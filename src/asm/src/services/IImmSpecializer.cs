@@ -14,11 +14,11 @@ namespace Z0.Asm
     {
         Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm);
 
-        AsmFunction[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params byte[] imm);
+        AsmFunction[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8Value[] imm);
 
         Option<AsmFunction> BinaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm);         
 
-        AsmFunction[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params byte[] imm);         
+        AsmFunction[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8Value[] imm);         
 
         Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, byte imm)
             where T : unmanaged;        

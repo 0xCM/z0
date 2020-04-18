@@ -52,7 +52,7 @@ namespace Z0.Asm
                 return none<AsmFunction>();
         }
 
-        public AsmFunction[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params byte[] imm)
+        public AsmFunction[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8Value[] imm)
         {   
             var count = imm.Length;
             var dst = new AsmFunction[count];
@@ -73,12 +73,12 @@ namespace Z0.Asm
                 return none<AsmFunction>();
         }
 
-        public AsmFunction[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params byte[] imm)
+        public AsmFunction[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8Value[] imm)
         {   
             var count = imm.Length;
             var dst = new AsmFunction[count];
             for(var i=0; i<count; i++)
-                dst[i] = BinaryOp(exchange,src,id,imm[i]).OnNone(() => OnCaptureFailed(id )).ValueOrDefault(AsmFunction.Empty);
+                dst[i] = BinaryOp(exchange,src,id,imm[i]).OnNone(() => OnCaptureFailed(id)).ValueOrDefault(AsmFunction.Empty);
             return dst;
         }
 

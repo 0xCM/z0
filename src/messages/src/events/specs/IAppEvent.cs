@@ -19,8 +19,12 @@ namespace Z0
 
         string Description {get;}
 
+        AppMsgColor Flair => AppMsgColor.Blue;
+
         string ICustomFormattable.Format()        
             => text.concat(Description, text.colon(), text.space(), Payload?.ToString() ?? string.Empty);  
+
+        IAppMsg Message => AppMsg.Colorize(Format(), Flair);
 
         IAppEvent<K> As<K>()
             => AppEvent.Create<K>(Description, (K)Payload);

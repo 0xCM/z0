@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ICaptureArchive CaptureArchive(this IContext context, FolderPath root = null, FolderName area = null, FolderName subject = null)    
-            => Z0.CaptureArchive.Define(root, area, subject);
+            => Z0.CaptureArchive.Create(root, area, subject);
 
         /// <summary>
         /// Instantiates a contextual service allocation that streams lines of operation hex to a target file
@@ -83,7 +83,7 @@ namespace Z0
 
         public static OpIndex<UriBits> IndexUriBits(this IContext context, in ApiHostUri host, FolderPath root)
         {
-            var emissions = Z0.CaptureArchive.Define(root);            
+            var emissions = Z0.CaptureArchive.Create(root);            
             var paths = emissions.HostArchive(host);
             var code = context.ReadUriBits(paths.HexPath);
             var index = code.ToEnumerable().ToOpIndex();    

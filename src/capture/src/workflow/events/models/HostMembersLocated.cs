@@ -36,6 +36,8 @@ namespace Z0.Asm
                 => $"{Payload.Length} {Host} members located";
 
             public E Zero => Empty;            
+
+            public AppMsgColor Flair => AppMsgColor.Cyan;            
         }    
     }
 }

@@ -15,15 +15,12 @@ namespace Z0
     using static Memories;
     
     using static Asm.AsmEvents;
-    using static Asm.AsmServiceMessages;
 
     public class CaptureHost : ICaptureHost
     {               
         readonly IAsmContext Context;
 
         readonly IAppMsgSink Sink;
-
-        readonly IPolyrand Random;
 
         readonly CaptureConfig Settings;
 
@@ -46,6 +43,8 @@ namespace Z0
         readonly IHostCaptureWorkflow PrimaryWorkflow;
 
         readonly IImmEmissionWorkflow ImmWorkflow;
+
+        readonly IUriBitsReader UriBitsReader;
         
         public static ICaptureHost Create(IAsmContext context, FolderPath root)    
             => new CaptureHost(context,root);
@@ -55,39 +54,30 @@ namespace Z0
             Context = context;
             Sink = context;
             CaptureRoot = root;
-            Random = context.Random;
             ApiSet = context.ApiSet;
             WorkflowConfig = AsmWorkflowConfig.Define(root);
             Settings = CaptureConfig.From(context.Settings);            
             LogPath = (root + FolderName.Define("logs")) + FileName.Define("host","log");
-            Archive = CaptureArchive.Define(root);
+            Archive = CaptureArchive.Create(root);
             Archive.LogDir.Clear();
             MemberLocator = context.MemberLocator();
             Decoder = context.AsmFunctionDecoder();            
             Formatter = context.AsmFormatter(context.AsmFormat.WithSectionDelimiter());
-
+            UriBitsReader = context.UriBitsReader();
             PrimaryWorkflow = HostCaptureWorkflow.Create(context, Decoder, Formatter, context.AsmWriterFactory());
             ImmWorkflow = ImmEmissionWorkflow.Create(context,  context, ApiSet, Formatter, Decoder, root);
             
             ConnectReceivers(PrimaryWorkflow.EventBroker);
-
         }
 
-        ApiIndex MemberIndex(IApiHost host)
-            => ApiIndex.Create(MemberLocator.Hosted(host));
+        ICheckNumeric Claim => ICheckNumeric.Checker;
 
-        Option<IApiHost> Host(ApiHostUri uri)
-            => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
-
-        void NotifyConsole(AppMsg msg)
-            => Sink.NotifyConsole(msg);
-
-        void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
-            => Sink.NotifyConsole(content, color);
+        IApiHost Host(ApiHostUri uri)
+            => ApiSet.FindHost(uri).Require();
 
         public void Dispose()
         {
-            term.print($"Writting app messages to {LogPath}");
+            term.print($"Commpleted capture workflow");
         }
         
         public void Execute(params string[] args)
@@ -104,9 +94,8 @@ namespace Z0
 
         void EmitImm()
         {
-            var imm8 = new byte[]{3,5,12,9};                        
-            //var emitter = ImmEmissionWorkflow.Create(Context,  Context, ApiSet, Formatter, Decoder, CaptureRoot);
-            ImmWorkflow.Emit(imm8);            
+            //ImmWorkflow.EmitLiteral(3,5,12,9);            
+            ImmWorkflow.EmitRefined();
         }
 
         void EmitPrimary()
@@ -120,69 +109,52 @@ namespace Z0
             workflow.Execute();
         }
 
-        static string Format(IAppEvent e) => e?.Format() ?? string.Empty;
-
         void OnEvent(HostMembersLocated e)
         {
-            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
-            NotifyConsole(msg);
-
+            Sink.Deposit(e);
             Analyze(e.Host, e.Payload);
-        }
-
-        void OnEvent(EmittingImmTargets e)
-        {
-            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
-            NotifyConsole(msg);
         }
 
         void OnEvent(ExtractReportCreated e)
         {
-            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Blue);
-            NotifyConsole(msg);
+            Sink.Deposit(e);
         }
 
         void OnEvent(ExtractReportSaved e)
         {            
-            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
-            NotifyConsole(msg);
+            Sink.Deposit(e);
         }
 
         void OnEvent(HostFunctionsDecoded e)
         {
-            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Magenta);
-            NotifyConsole(msg);
+            Sink.Deposit(e);
             Analyze(e.Host, e.Payload);
         }
 
         void OnEvent(HostAsmHexSaved e)
         {
-            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Cyan);
-            NotifyConsole(msg);
-            Analyze(e.Host, e.Payload, e.Target);
+            Sink.Deposit(e);
+            CheckEmission(e.Host, e.Payload, e.Target);
         }
 
         void OnEvent(ParseReportCreated e)
         {
-            var msg = AppMsg.Colorize(Format(e), AppMsgColor.Blue);
-            NotifyConsole(msg);
+            Sink.Deposit(e);
         }
 
         void OnEvent(AppErrorEvent e)
         {
-            NotifyConsole(AppMsg.Error(e.Payload));    
+            Sink.Deposit(e);
         }
 
         void OnEvent(StepStart<IApiCatalog> e)
         {
-            var msg = AppMsg.Colorize($"{Format(e)}: {e.Payload.CatalogName}", AppMsgColor.Green);
-            NotifyConsole(msg);
+            Sink.Deposit(e);
         }
 
         void OnEvent(StepEnd<IApiCatalog> e)
         {
-            var msg = AppMsg.Colorize($"{Format(e)}: {e.Payload.CatalogName}", AppMsgColor.Magenta);
-            NotifyConsole(msg);            
+            Sink.Deposit(e);
         }
 
         IHostCaptureBroker ConnectReceivers(IHostCaptureBroker broker)
@@ -191,9 +163,6 @@ namespace Z0
 
             if(Settings.HandleMembersLocated)
                 broker.MembersLocated.Subscribe(broker, OnEvent);
-
-            if(Settings.EmitImmArtifacts)
-                broker.EmittingImmTargets.Subscribe(broker, OnEvent);
 
             if(Settings.HandleExtractReportCreated)
                 broker.ExtractReportCreated.Subscribe(broker, OnEvent);
@@ -216,7 +185,7 @@ namespace Z0
             return broker;
         }
         
-        void Analyze(in ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
+        void Analyze(ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
         {
             static int CountInstructions(in AsmFunction f)
                 => f.InstructionCount;
@@ -224,34 +193,30 @@ namespace Z0
             var analyzer = SpanAnalyzer.Create<AsmFunction,int>(CountInstructions);
             var counts = analyzer.Analyze(functions);
             var total = gspan.sum(counts.AsUInt64());
-
-            NotifyConsole($"The {host} host members define a total of {total} instructions", AppMsgColor.Cyan);            
+            Sink.CountedInstructions(host, total);                   
         }
             
-        void Analyze(in ApiHostUri hosturi, ReadOnlySpan<UriBits> ops, FilePath dst)
+        void CheckEmission(ApiHostUri host, ReadOnlySpan<UriBits> memSrc, FilePath dst)
         {
-            var hosted = Host(hosturi).MapRequired(host => MemberIndex(host));
-            var saved = Context.UriBitsReader().Read(dst).ToArray();
-            Claim.eq(saved.Length, ops.Length);
-            
-            var emptycount = saved.Where(s => s.Op.IsEmpty).Count();
-            Claim.eq(emptycount,0);
+            var fileSrc = UriBitsReader.Read(dst).ToArray().ToSpan();                        
 
-            ref readonly var src = ref head(ops);
-            var count = ops.Length;
-            for(var i=0; i<count; i++)
+            Claim.eq(fileSrc.Length, memSrc.Length);            
+            Claim.eq(fileSrc.Count(s => s.Op.IsEmpty), 0);
+            
+            for(var i=0; i<memSrc.Length; i++)
             {
-                ref readonly var subject = ref skip(src, i);   
-                Claim.eq(saved[i].Op, subject.Op);  
-                Claim.eq(saved[i].Bits.Length, subject.Bits.Length);           
+                Claim.eq(skip(fileSrc,i).Op, skip(memSrc,i).Op);  
+                Claim.eq(skip(fileSrc,i).Bits.Length, skip(memSrc, i).Bits.Length);
             }
+
+            Sink.MatchedEmissions(host, memSrc.Length, dst);
         }
 
-        void Analyze(in ApiHostUri host, ReadOnlySpan<ApiMember> src)
+        void Analyze(ApiHostUri host, ReadOnlySpan<ApiMember> src)
         {
             var index = src.ToOpIndex();
             foreach(var key in index.DuplicateKeys)
-                NotifyConsole(DuplicateWarning(host,key));
+                Sink.DuplicateWarning(host,key);
         }
     }
 }

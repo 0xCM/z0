@@ -18,35 +18,39 @@ namespace Z0
         /// </summary>
         protected static IAppPaths AppPaths => AppPathProvider.FromApp<S>();
 
-        public abstract void RunShell(params string[] args);
-
-        protected virtual void OnDispose() { }
+        /// <summary>
+        /// The shell terminal
+        /// </summary>
+        protected static ITerminal Term => Terminal.Get();
 
         public void Dispose()
             => OnDispose();
 
+        public abstract void RunShell(params string[] args);
+
+        protected virtual void OnDispose() 
+            => Term.Warn($"Dispose handler not implemented");
+
         public virtual void OnFatalError(Exception e)
-            => Console.Error.WriteLine(e);   
+            => Term.Error(e);
 
         /// <summary>
         /// The parts that are not unknown
         /// </summary>
-        protected IEnumerable<IPart> KnownParts => Part.KnownParts;
-
-        static void Execute(IShell shell, params string[] args)
-            => shell.Execute(args);        
+        protected static IEnumerable<IPart> KnownParts => Part.KnownParts;
 
         protected static void Launch(params string[] args)
         {
             try
             {
-                using var shell = new S();            
-                Execute(shell, args);
+                using var shell = new S() as IShell;            
+                shell.Execute(args);
+                //Execute(shell, args);
             }
             catch(Exception e)
             {
-                Console.Error.WriteLine("Unable to launch host");
-                Console.Error.WriteLine(e);
+                Term.Error("Unable to launch host");
+                Term.Error(e);
             }
         }
     }    

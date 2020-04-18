@@ -25,7 +25,7 @@ namespace Z0.Asm
 
         readonly IExtractParser Parser;
 
-        ICaptureArchive CodeArchive => Context.Emissions(Area, Subject);
+        ICaptureArchive CodeArchive => Context.CaptureArchive(Area, Subject);
 
         [MethodImpl(Inline)]
         public static HostCaptureService Create(IAsmContext context, FolderName area, FolderName subject = null)
@@ -128,7 +128,7 @@ namespace Z0.Asm
             if(dst)
                 this.ExractedHost(host,dst.Value);
             else
-                this.HostExtractionFailed(host);
+                this.ExtractionFailed(host);
             return extracts;
         }    
 

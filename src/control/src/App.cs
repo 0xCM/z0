@@ -30,15 +30,20 @@ namespace Z0
         {
         }
 
+        FolderPath CaptureRoot => AppPaths.AppCapturePath;
+
+        IApiComposition Api 
+            => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
+        
         IAsmContext CreateAsmContext()
-            => AsmContext.Create(Context.Settings, Context.Messaging, KnownParts.ToArray());
+            => AsmContext.Create(Context.Settings, Context.Messaging, Api, CaptureRoot);
 
         ICaptureHost CreateCaptureHost()
-            => CaptureHost.Create(CreateAsmContext(), AppPaths.CaptureDataPath);
+            => CaptureHost.Create(CreateAsmContext(), CaptureRoot);
 
         void SurveyArchive()
         {
-            var archive = CaptureArchive.Define(AppPaths.CaptureDataPath);
+            var archive = CaptureArchive.Create(CaptureRoot);
 
             Print($"Examining capture archive rooted at {archive.RootDir}");
 
@@ -52,7 +57,8 @@ namespace Z0
 
         void RunCapture()
         {
-            CreateCaptureHost().Execute();            
+            using var host = CreateCaptureHost();
+            host.Execute();
         }
 
         void DescribeControl()
@@ -71,6 +77,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {
             RunCapture();            
+            //SurveyArchive();
         }
 
         public static void Main(params string[] args)

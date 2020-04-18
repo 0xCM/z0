@@ -34,5 +34,7 @@ namespace Z0
         public string Description => IsEmpty ? string.Empty : Payload.Message;
 
         public AppErrorEvent Zero => Empty;        
+
+        public AppMsgColor Flair => AppMsgColor.Red;
     }
 }

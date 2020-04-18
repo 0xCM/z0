@@ -20,15 +20,32 @@ namespace Z0.Asm
         ApiHostUri ApiHost {get;}        
 
         /// <summary>
-        /// Saves a group of related functtions to the archive
+        /// Saves an array of functions, rendered as formatted asm code, to the archive
         /// </summary>
-        /// <param name="group">The source group</param>
-        void Save(AsmFunctionGroup group, bool append);
-
+        /// <param name="src">The source functions</param>
+        /// <param name="append">Whether to append to an existing file or else overwrite</param>
         Option<FilePath> SaveAsm(AsmFunction[] src, bool append);
 
+        /// <summary>
+        /// Saves an array of functions, rendered as lines of hex text, to the archive
+        /// </summary>
+        /// <param name="src">The source functions</param>
+        /// <param name="append">Whether to append to an existing file or else overwrite</param>
         Option<FilePath> SaveHex(AsmFunction[] src, bool append);
+
+        /// <summary>
+        /// Saves an array of functions, rendered as formatted asm code, to the archive
+        /// </summary>
+        /// <param name="src">The source functions</param>
+        /// <param name="append">Whether to append to an existing file or else overwrite</param>
+        Option<FilePath> SaveAsm(OpIdentity id, AsmFunction[] src, bool append);
+
+        /// <summary>
+        /// Saves an array of functions, rendered as lines of hex text, to the archive
+        /// </summary>
+        /// <param name="src">The source functions</param>
+        /// <param name="append">Whether to append to an existing file or else overwrite</param>
+        Option<FilePath> SaveHex(OpIdentity id, AsmFunction[] src, bool append);
         
-        void Clear();
     }    
 }

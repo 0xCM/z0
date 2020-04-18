@@ -116,7 +116,7 @@ namespace Z0.Asm
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
-        public static IFunctionStreamWriter AsmWriter(this IContext context, FilePath dst, AsmFormatConfig config)
+        public static IAsmFunctionWriter AsmWriter(this IContext context, FilePath dst, AsmFormatConfig config)
             => AsmDecoder.writer(context,dst,config);
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0.Asm
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
-        public static IFunctionStreamWriter AsmWriter(this IContext context, FilePath dst, IAsmFormatter formatter)
+        public static IAsmFunctionWriter AsmWriter(this IContext context, FilePath dst, IAsmFormatter formatter)
             => AsmDecoder.writer(context, dst, formatter);
 
         [MethodImpl(Inline)]

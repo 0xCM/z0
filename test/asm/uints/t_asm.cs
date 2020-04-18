@@ -45,9 +45,10 @@ namespace Z0.Asm
         public t_asm()
         {
             Context = AsmContext.Create(
-                ApiComposition.Assemble(DefaultResolutions), 
                 AppSettings.Empty, 
                 AppMessages.exchange(Queue), 
+                ApiComposition.Assemble(DefaultResolutions), 
+                Env.Current.LogDir,
                 Random, 
                 AsmFormatConfig.New,
                 Context.AsmFormatter(),

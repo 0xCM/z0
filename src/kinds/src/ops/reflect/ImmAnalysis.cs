@@ -11,6 +11,13 @@ namespace Z0
 
     using static ImmFunctionClass;
 
+    public enum ImmSourceKind : byte
+    {
+        Literal = 0,
+
+        Refinement = 1
+    }
+
     [Flags]
     public enum ImmRefinementKind : byte
     {
@@ -48,35 +55,49 @@ namespace Z0
             }
             return false;
         }
-            
-        public static byte[] RefinedImmValues(this ParameterInfo param)           
+
+        public static Imm8Value[] ToImm8Values(this byte[] src, ImmSourceKind source)
+            => src.Map(x => Imm8Value.Define(x,source));
+
+        public static Imm8Value[] ToImm8Values(this IEnumerable<byte> src, ImmSourceKind source)
+            => src.Map(x => Imm8Value.Define(x,source));
+
+        public static Imm8Value[] RefinedImmValues(this ParameterInfo param)           
         {
             if(param.IsRefinedImmediate())
-                return param.ParameterType.GetEnumValues().Cast<byte>().ToArray();
-            else return Arrays.empty<byte>();
+                return param.ParameterType.GetEnumValues().Cast<byte>().ToImm8Values(ImmSourceKind.Refinement);
+            else 
+                return Arrays.empty<Imm8Value>();
         }
         
-        public static ImmRefinementKind ClassifyImmRefinement(this ParameterInfo param)
+        public static ImmRefinementKind ClassifyImmRefinement(this ParameterInfo src)
         {
-            if(!param.Tagged<ImmAttribute>())
+            if(!src.Tagged<ImmAttribute>())
                 return ImmRefinementKind.None;
             else
-                return param.ParameterType.IsEnum ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined;
+                return src.ParameterType.IsEnum ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined;
         }
 
         /// <summary>
         /// Determines whether a parameters is an immediate
         /// </summary>
         /// <param name="src">The source parameter</param>
-        public static bool IsUnrefinedImmediate(this ParameterInfo param)
-            => param.Tagged<ImmAttribute>() && !param.ParameterType.IsEnum;
+        public static bool IsUnrefinedImmediate(this ParameterInfo src)
+            => src.Tagged<ImmAttribute>() && !src.ParameterType.IsEnum;
 
         /// <summary>
         /// Determines whether a parameters is an immediate
         /// </summary>
         /// <param name="src">The source parameter</param>
-        public static bool IsRefinedImmediate(this ParameterInfo param)
-            => param.Tagged<ImmAttribute>() && param.ParameterType.IsEnum;
+        public static bool IsRefinedImmediate(this ParameterInfo src)
+            => src.Tagged<ImmAttribute>() && src.ParameterType.IsEnum;
+
+        /// <summary>
+        /// Determines the imm refinement type, if any
+        /// </summary>
+        /// <param name="src">The source parameter</param>
+        public static Option<Type> ImmRefinementType(this ParameterInfo src)
+            => src.IsRefinedImmediate() ? Option.some(src.ParameterType) : Option.none<Type>();
 
         /// <summary>
         /// Selects parameters from a method, if any, that acceptrequire an immediate value
@@ -207,7 +228,6 @@ namespace Z0
                 && parameters[1].ParameterType.IsVector() 
                 && parameters[2].IsImmediate(refinment)
                 && src.ReturnsVector();
-        }
- 
+        } 
     }
 }

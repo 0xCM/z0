@@ -35,6 +35,8 @@ namespace Z0.Asm
                 => $"{Payload.Length} {Host} functions decoded";
             
             public E Zero => Empty;
+
+            public AppMsgColor Flair => AppMsgColor.Magenta;            
         }    
     }
 }

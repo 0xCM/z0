@@ -36,6 +36,8 @@ namespace Z0
         public string Description => StepName;
         
         public StepStart<T> Zero => Empty;        
+
+        public AppMsgColor Flair => AppMsgColor.Green;
  
     }
 }

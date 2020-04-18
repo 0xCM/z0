@@ -11,11 +11,9 @@ namespace Z0.Asm
     using static Memories;
     using static AsmEvents;
 
-    public interface IImmEmissionStep : IStepBroker, IEventBroker<EmittingImmTargets>
+    public interface IImmEmissionStep : IStepBroker
     {
-        EmittingImmTargets EmittingImmTargets => EmittingImmTargets.Empty;
-
-        EmittedImmRefinements EmittedImmRefinements => EmittedImmRefinements.Empty;
+        EmittedEmbeddedImm EmittedEmbeddedImm => EmittedEmbeddedImm.Empty;
 
         HostFileEmissionFailed HostFileEmissionFailed => HostFileEmissionFailed.Empty;
     }

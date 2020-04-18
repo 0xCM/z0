@@ -25,10 +25,6 @@ namespace Z0
     public class AsmChecks : IAsmChecks
     {
         public IAsmContext Context {get;}
-
-        readonly IAppMsgSink MsgSink;
-
-        readonly IApiSet ApiSet;
         
         IPolyrand Random => Context.Random;
         
@@ -41,8 +37,6 @@ namespace Z0
         {
             this.Context = context;
             this.RepCount = 128;
-            this.MsgSink = context;
-            this.ApiSet = context.ApiSet;
         }                
 
         protected ICaptureArchive CodeArchive 
@@ -65,24 +59,11 @@ namespace Z0
             return Context.BitArchiveWriter(dstPath);
         }
 
-        protected IFunctionStreamWriter FunctionWriter([Caller] string caller = null)
+        protected IAsmFunctionWriter FunctionWriter([Caller] string caller = null)
         {
             var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
             return Context.AsmWriter(dst,format);
-        }
-
-
-        public void Execute(in BufferSeq buffers, ApiMemberCode code)
-        {
-            //Executioner.EvalOperator(buffers, code);
-
-        }
-
-        public void Execute(in BufferSeq buffers, ApiMemberCode[] code)
-        {
-            //Executioner.EvalOperators(buffers, code);
-            //Executioner.EvalFixedOperators(buffers, code);
         }
 
         protected ApiHostUri Math
@@ -171,7 +152,6 @@ namespace Z0
 
             return CheckAction(check, src.Id);
         }
-
 
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.HostBitsArchive(id,host).Read(m).Single().ToApiCode();

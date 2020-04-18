@@ -18,23 +18,39 @@ namespace Z0.Asm
         /// </summary>
         AsmFormatConfig AsmFormat {get;}
 
+        /// <summary>
+        /// The context formatter
+        /// </summary>
         IAsmFormatter Formatter {get;}
 
+        /// <summary>
+        /// The context decoder
+        /// </summary>
         IAsmFunctionDecoder Decoder {get;}
 
-        IFunctionStreamWriter Writer(FilePath dst);            
+        /// <summary>
+        /// The context writer factory
+        /// </summary>
+        IAsmFunctionWriter Writer(FilePath dst);            
+        
+        /// <summary>
+        /// The capture archive root
+        /// </summary>
+        FolderPath RootCapturePath => Env.Current.LogDir;
 
-        ICaptureArchive EmissionPaths => CaptureArchive.Default;
+        ICaptureArchive RootCaptureArchive => Z0.CaptureArchive.Create(RootCapturePath);
+
+        ICaptureArchive CaptureArchive(FolderName area, FolderName subject) 
+            => RootCaptureArchive.Narrow(area,subject);
 
         IApiHost[] Hosts => ApiSet.Hosts;
 
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
         /// </summary>
-        int DefaultBufferLength => Pow2.T14;        
+        int DefaultBufferLength => Pow2.T14;
 
-        ICaptureArchive Emissions(FolderName area, FolderName subject) => EmissionPaths.WithSubject(area,subject);
-
-        IApiContext ApiContext => Z0.ApiContext.Create(ApiSet.Composition, Random, Settings, AppMsgExchange.From(this));
+        IApiContext ApiContext 
+            => Z0.ApiContext.Create(ApiSet.Composition, Random, Settings, AppMsgExchange.From(this));
     }   
 }

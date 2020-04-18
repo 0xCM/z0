@@ -21,5 +21,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ApiQuery Query(this IApiCatalog src)
             => ApiQuery.Over(src);
+
+        /// <summary>
+        /// Creates an api set that includes the source composition
+        /// </summary>
+        /// <param name="src">The source composition</param>
+        [MethodImpl(Inline)]
+        public static IApiSet ApiSet(this IApiComposition src)
+            => Z0.ApiSet.Create(src);
     }
 }

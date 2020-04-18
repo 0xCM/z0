@@ -76,10 +76,12 @@ namespace Z0
             where T : unmanaged
                 => gmath.lteq(lhs,rhs) ? true : throw Check.failed(ValidityClaim.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
+        [MethodImpl(Inline)]
         public static void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
                 => Spans.iter(lhs, rhs, (a,b) => eq(a,b, caller,file,line));
 
+        [MethodImpl(Inline)]
         public static void eq<T>(Span<T> lhs, Span<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged             
                 => Spans.iter(lhs,rhs, (a,b) => eq(a,b, caller,file,line));

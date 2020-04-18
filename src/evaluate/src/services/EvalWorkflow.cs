@@ -24,7 +24,7 @@ namespace Z0.Asm
         readonly ICaptureArchive CodeArchive;
 
         readonly IApiSet ApiSet;
-        
+                
         public static EvalWorkflow Create(IApiContext context, IPolyrand random, FolderPath root)
             => new EvalWorkflow(context, random, root);
 
@@ -34,7 +34,7 @@ namespace Z0.Asm
             this.Dispatcher = EvalDispatcher.Create(random, context);
             this.BufferSize = 1024;
             this.BufferCount = 3;
-            this.CodeArchive = CaptureArchive.Define(root);
+            this.CodeArchive = CaptureArchive.Create(root);
             this.ApiSet = context;
         }
                 

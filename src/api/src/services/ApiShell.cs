@@ -11,7 +11,6 @@ namespace Z0
         where A : ApiShell<A,C>, new()
         where C : IApiContext
     {
-        //readonly IAppMsgQueue MsgQueue;
 
         public virtual IPart[] Resolved {get;}
 
@@ -20,7 +19,6 @@ namespace Z0
         protected ApiShell(C context)
             : base(context)
         {
-            //this.MsgQueue = AppMessages.queue();
             Messaging = context.Messaging;
         }
 
@@ -28,13 +26,6 @@ namespace Z0
             => Messaging.Deposit(msg);
 
         protected IApiShell Shelled => this;
-
-        PartId AppId => typeof(A).Assembly.Id();
-
-        public override void OnFatalError(Exception e)
-        {
-            Print(AppMsg.Error(e));            
-        }
                     
         protected override void OnDispose()
         {

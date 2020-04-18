@@ -39,6 +39,8 @@ namespace Z0.Asm
                 => $"{Payload.Length} {Host} functions saved to {Target}";
             
             public E Zero => Empty;            
+
+            public AppMsgColor Flair => AppMsgColor.Cyan;
         }    
     }
 }

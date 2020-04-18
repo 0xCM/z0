@@ -5,7 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
+    using static Seed;
     using static AppErrorMsg;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -14,6 +16,7 @@ namespace Z0
 
     public interface IEquatableCheck : IValidator
     {
+        [MethodImpl(Inline)]
         void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : IEquatable<T>
         {

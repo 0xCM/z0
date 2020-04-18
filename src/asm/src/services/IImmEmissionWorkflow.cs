@@ -8,8 +8,9 @@ namespace Z0.Asm
 
     public interface IImmEmissionWorkflow : IAppMsgReceiver
     {
-        void Emit(params byte[] immediates);
+        void EmitLiteral(params byte[] imm8);
+
+        void EmitRefined();
         
     }
-
 }

@@ -12,10 +12,10 @@ namespace Z0
 
     public readonly struct CaptureArchive : ICaptureArchive
     {
-        public static ICaptureArchive Default => Define(Env.Current.LogDir);
+        public static ICaptureArchive Default => Create(Env.Current.LogDir);
 
         [MethodImpl(Inline)]
-        public static ICaptureArchive Define(FolderPath root = null, FolderName area = null, FolderName subject = null)
+        public static ICaptureArchive Create(FolderPath root = null, FolderName area = null, FolderName subject = null)
             => new CaptureArchive(root ?? Env.Current.LogDir, area ?? FolderName.Empty, subject ?? FolderName.Empty);
         
         [MethodImpl(Inline)]
@@ -32,7 +32,7 @@ namespace Z0
 
         public FolderName SubjectName {get;}
 
-        public ICaptureArchive WithSubject(FolderName area, FolderName subject) => Define(RootDir, area, subject);
+        public ICaptureArchive Narrow(FolderName area, FolderName subject) => Create(RootDir, area, subject);
 
         ICaptureArchive Me => this;
         

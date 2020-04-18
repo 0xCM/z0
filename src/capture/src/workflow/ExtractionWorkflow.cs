@@ -30,7 +30,7 @@ namespace Z0.Asm
             var format = context.AsmFormat.WithSectionDelimiter();
             Formatter = context.AsmFormatter(format);
             
-            CodeArchive = CaptureArchive.Define(ArchiveRoot);
+            CodeArchive = CaptureArchive.Create(ArchiveRoot);
             CodeArchive.Clear();
             var relay = ExtractionBroker.Create();
             Relay = relay;

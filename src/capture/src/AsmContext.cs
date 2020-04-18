@@ -15,58 +15,6 @@ namespace Z0.Asm
 
     public class AsmContext : IAsmContext 
     {            
-        public static IAsmContext Create(IAppSettings settings, IAppMsgExchange exchange,  params IPart[] parts)
-        {
-            var context = IContext.Default;
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var resolved = ApiComposition.Assemble(parts.Where(r => r.Id != 0));
-            var format = AsmFormatConfig.New;            
-            var decoder = AsmDecoder.function(context, format);
-            var formatter = AsmDecoder.formatter(context, format);
-            var factory = AsmDecoder.writerFactory(context);
-            //AppMessages.exchange()
-            return AsmContext.Create(resolved, settings, exchange, random, format, formatter, decoder, factory);
-        }
-
-        /// <summary>
-        /// Creates a base context with a specified composition
-        /// </summary>
-        /// <param name="assemblies">A composition of assemblies to share with the context</param>
-        public static IAsmContext Create(
-            IApiComposition assemblies, 
-            IAppSettings settings, 
-            IAppMsgExchange exchange, 
-            IPolyrand random, 
-            AsmFormatConfig format,
-            IAsmFormatter formatter,
-            IAsmFunctionDecoder decoder,
-            AsmWriterFactory writerFactory)
-                => new AsmContext(assemblies, settings, exchange, random, format, formatter, decoder, writerFactory);
-
-        AsmContext(
-            IApiComposition composition, 
-            IAppSettings settings, 
-            IAppMsgExchange exchange, 
-            IPolyrand random, 
-            AsmFormatConfig format,
-            IAsmFormatter formatter,
-            IAsmFunctionDecoder decoder,
-            AsmWriterFactory writerFactory)
-        {
-            Next += BlackHole;
-            Messaging = exchange;
-            Settings = settings;
-            Messaging.Next += Relay;            
-            Random = random;
-            AsmFormat = format;
-            Settings = settings;
-            AppPaths = AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
-            ApiSet = Z0.ApiSet.Create(composition);
-            Formatter = formatter;
-            Decoder = decoder;
-            WriterFactory = writerFactory;            
-        }
-
         public event Action<IAppMsg> Next;
 
         public IPolyrand Random {get;}
@@ -77,6 +25,8 @@ namespace Z0.Asm
 
         public AsmFormatConfig AsmFormat {get;}
 
+        public FolderPath RootCapturePath {get;}
+
         public IApiSet ApiSet {get;}
 
         public IAppPaths AppPaths {get;}
@@ -84,17 +34,65 @@ namespace Z0.Asm
         public IAsmFormatter Formatter {get;}
         
         public IAsmFunctionDecoder Decoder {get;}
+
+        public static IAsmContext Create(IAppSettings settings, IAppMsgExchange exchange, IApiComposition api, FolderPath root)
+        {
+            var context = IContext.Default;
+            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
+            var format = AsmFormatConfig.New;            
+            var decoder = AsmDecoder.function(context, format);
+            var formatter = AsmDecoder.formatter(context, format);
+            var factory = AsmDecoder.writerFactory(context);
+            return AsmContext.Create(settings, exchange, api, root, random, format, formatter, decoder, factory);
+        }
+
+        /// <summary>
+        /// Creates a base context with a specified composition
+        /// </summary>
+        /// <param name="assemblies">A composition of assemblies to share with the context</param>
+        public static IAsmContext Create(
+            IAppSettings settings, 
+            IAppMsgExchange exchange, 
+            IApiComposition assemblies, 
+            FolderPath root,            
+            IPolyrand random, 
+            AsmFormatConfig format,
+            IAsmFormatter formatter,
+            IAsmFunctionDecoder decoder,
+            AsmWriterFactory writerFactory)
+                => new AsmContext(assemblies, settings, exchange, root, random, format, formatter, decoder, writerFactory);
+
+        AsmContext(
+            IApiComposition composition, 
+            IAppSettings settings, 
+            IAppMsgExchange exchange, 
+            FolderPath root,            
+            IPolyrand random, 
+            AsmFormatConfig format,
+            IAsmFormatter formatter,
+            IAsmFunctionDecoder decoder,
+            AsmWriterFactory writerFactory)
+        {
+            Next += BlackHole;
+            Messaging = exchange;
+            Settings = settings;
+            Messaging.Next += Relay;      
+            RootCapturePath = root;      
+            Random = random;
+            AsmFormat = format;
+            Settings = settings;
+            AppPaths = IAppPaths.Default;
+            ApiSet = composition.ApiSet();
+            Formatter = formatter;
+            Decoder = decoder;
+            WriterFactory = writerFactory;            
+        }
         
         AsmWriterFactory WriterFactory {get;}
 
-        public IFunctionStreamWriter Writer(FilePath dst)
+        public IAsmFunctionWriter Writer(FilePath dst)
             => WriterFactory(dst, Formatter);
 
-        void BlackHole(IAppMsg msg) {}
-
-        void Relay(IAppMsg msg)
-            => Next(msg);
-              
         public void Deposit(IAppMsg msg)
             => Messaging.Deposit(msg);
 
@@ -109,5 +107,10 @@ namespace Z0.Asm
 
         public void Emit(FilePath dst) 
             => Messaging.Emit(dst);
+
+        void BlackHole(IAppMsg msg) {}
+
+        void Relay(IAppMsg msg)
+            => Next(msg);
     }   
 }
