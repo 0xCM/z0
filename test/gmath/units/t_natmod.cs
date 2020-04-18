@@ -131,7 +131,6 @@ namespace Z0
             TypeCaseEnd<N>();
         }
 
-
         static string CreateModReport<T>(T[,] entries, uint offset = 0)
         {
             var sb = text.factory.Builder();

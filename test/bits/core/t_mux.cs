@@ -50,7 +50,7 @@ namespace Z0
                 ov[5] = BitVector.mux(iv, ++cv);
                 ov[6] = BitVector.mux(iv, ++cv);
                 ov[7] = BitVector.mux(iv, ++cv);
-                Claim.eq(iv,ov);                
+                Claim.eq(iv.Scalar,ov.Scalar);                
             }
         }
 

@@ -73,7 +73,7 @@ namespace Z0
         public void vblock_add_123x64f_bench()
             => vblock_add_bench(L,z64f);
 
-        public static Span<T> add<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
+        public Span<T> add<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged        
         {
             for(var i=0; i< Claim.length(lhs,rhs); i++)

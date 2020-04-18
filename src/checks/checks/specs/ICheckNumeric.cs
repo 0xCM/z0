@@ -11,5 +11,4 @@ namespace Z0
     {
         static new ICheckNumeric Checker => CheckNumeric.Check;
     }
-
 }

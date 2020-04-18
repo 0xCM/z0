@@ -120,7 +120,7 @@ namespace Z0
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
                 var actual = vcmpf(lhs, rhs, mode);
-                Z0.Claim.eq(expect, actual);
+                Claim.eq(expect, actual);
             }
         }
 
@@ -140,7 +140,7 @@ namespace Z0
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
                 var actual = cmpf(x, y, mode);
-                Z0.Claim.eq(expect, actual);
+                Claim.eq(expect, actual);
             }
         }
 
@@ -159,7 +159,7 @@ namespace Z0
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
                 var actual = cmpf(x, y, mode);
-                Z0.Claim.eq(expect, actual);
+                Claim.eq(expect, actual);
             }
         }
 

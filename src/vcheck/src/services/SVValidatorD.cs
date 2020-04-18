@@ -151,7 +151,7 @@ namespace Z0
                     var y = right.LoadVector(block);
                     var actual = f.Invoke(x,y);
                     var expect = dst.LoadVector(block);
-                    Z0.Claim.veq(actual, expect);
+                    Claim.veq(actual, expect);
                 }
             }
             catch(Exception e)
@@ -186,7 +186,7 @@ namespace Z0
                     var y = right.LoadVector(block);
                     var actual = f.Invoke(x,y);
                     var expect = dst.LoadVector(block);
-                    Z0.Claim.veq(actual, expect);
+                    Claim.veq(actual, expect);
                 }
             }
             catch(Exception e)

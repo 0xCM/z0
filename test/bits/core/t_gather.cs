@@ -19,7 +19,7 @@ namespace Z0
             var x2 = Bits.gather(UInt32.MaxValue, m2);
             var y2 = Bits.scatter(x2, m2).ToBitVector();
             var bv = m2.ToBitVector();
-            Claim.eq(y2,bv);
+            Claim.eq(y2.Scalar,bv.Scalar);
             
             for(var i=0; i<y2.Width; i++)
                 Claim.eq(y2[i], i % 8 == 0 ? bit.On : bit.Off);

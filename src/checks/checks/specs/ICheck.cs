@@ -13,13 +13,13 @@ namespace Z0
         ICheckPrimal, 
         ICheckPrimalSeq, 
         ICheckApproximate, 
-        ICheckCollective, 
         ICheckFileSystem,
         ICheckInvariant,
-        ICheckIntrinsic,
-        ICheckEquality,
-        IEquatableCheck,
-        ICheckEnum
+        ICheckEqual,
+        ICheckEnum,
+        ICheckVectorEquality,
+        ICheckSets,
+        ICheckNull
     {
         static ICheck Checker => Claim.Checker;
     }

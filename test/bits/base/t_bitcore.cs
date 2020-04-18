@@ -14,7 +14,7 @@ namespace Z0
 
         protected override int CycleCount => Pow2.T03;       
 
-        protected IBitSuiteMix Claim => IBitSuiteMix.Checker;        
+        protected new IBitSuiteMix Claim => IBitSuiteMix.Checker;        
     }
 
     public readonly struct BitSuiteCheck : IBitSuiteMix

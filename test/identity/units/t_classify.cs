@@ -14,7 +14,7 @@ namespace Z0
     using static Memories;
 
     public sealed class t_classify : t_identity<t_classify>
-    {
+    {        
         static string FormatList(IEnumerable<NumericKind> src, char? sep = null)
             => src.Select(k => k.ToString()).Concat(sep ?? text.comma());
 
@@ -310,5 +310,4 @@ namespace Z0
             Claim.eq(VectorType.kind(typeof(Vector256<double>)), VectorKind.v256x64f);
         }
     }
-
 }

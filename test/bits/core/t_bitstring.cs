@@ -248,7 +248,7 @@ namespace Z0
             var x =  0b111010010110011010111001110000100001101ul;
             var xbs = BitString.parse("111010010110011010111001110000100001101");
             var ybs = x.ToBitString();
-            Claim.eq(xbs, ybs);                
+            Claim.yea(xbs == ybs);                
 
             var y = xbs.TakeScalar<ulong>();
             Claim.eq(x, y);

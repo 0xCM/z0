@@ -16,6 +16,8 @@ namespace Z0
         protected virtual bool TraceDetailEnabled
             => false;
 
+        protected ICheck Claim => Z0.Claim.Checker;
+
         public static N0 n0 => default;
 
         public static N1 n1 => default;

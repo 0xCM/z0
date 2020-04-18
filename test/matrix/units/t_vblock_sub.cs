@@ -112,7 +112,7 @@ namespace Z0
             vblock_sub_bench<VecLen,double>();
         }
 
-        static Span<T> sub<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
+        Span<T> sub<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
             var count = Claim.length(lhs,rhs);
@@ -157,8 +157,5 @@ namespace Z0
             }
             ReportBenchmark(opname,opcount,sw.Elapsed);
         }
-
     }
-
-
 }

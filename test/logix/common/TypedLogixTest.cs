@@ -5,7 +5,9 @@
 namespace Z0.Logix
 {
     using System;
-    
+
+    using static Seed;
+    using static Memories;
     using static TypedLogicSpec;
 
     public abstract class TypedLogixTest<X> : LogixTest<X>

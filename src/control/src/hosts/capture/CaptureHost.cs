@@ -70,7 +70,9 @@ namespace Z0
             ConnectReceivers(PrimaryWorkflow.EventBroker);
         }
 
-        ICheckNumeric Claim => ICheckNumeric.Checker;
+        ICheckNumeric ClaimNumeric => ICheckNumeric.Checker;
+
+        ICheck Claim => Z0.Claim.Checker;
 
         IApiHost Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).Require();

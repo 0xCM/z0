@@ -14,7 +14,7 @@ namespace Z0
         where X : t_vsvc<X>, new()
     {
 
-        protected ICheckNumeric Claim => ICheckNumeric.Checker;
+        protected new ICheckNumeric Claim => ICheckNumeric.Checker;
 
         protected CheckExec Check {get;}
 

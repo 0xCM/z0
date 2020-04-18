@@ -11,6 +11,25 @@ namespace Z0
 
     public class t_bitpack : t_vinx<t_bitpack>
     {
+        void pack_32x4()
+        {
+            var block = w32;
+            var count = n4;
+            var mod = n8;
+            for(var sample = 0; sample < RepCount; sample++)
+            {
+                var bs = Random.BitString(count);
+                var bitseq = bs.BitSeq.Blocked(block);
+                Claim.eq(bitseq.CellCount,n4);
+
+                var packed = BitPack.pack(bitseq,mod);
+                trace("bitstring", bs, AppMsgColor.Magenta);
+                trace("bitseq", bitseq.Format(), AppMsgColor.Magenta);
+
+                Claim.eq(bs.TakeScalar<byte>(), packed);
+            }
+        }
+
         public void unpack_16()
         {
             for(var sample = 0; sample < RepCount; sample ++)
@@ -57,24 +76,6 @@ namespace Z0
 
         }
 
-        public void pack_32x4()
-        {
-            var block = w32;
-            var count = n4;
-            var mod = n8;
-            for(var sample = 0; sample < RepCount; sample++)
-            {
-                var bs = Random.BitString(count);
-                var bitseq = bs.BitSeq.Blocked(block);
-                Claim.eq(bitseq.CellCount,n4);
-
-                var packed = BitPack.pack(bitseq,mod);
-                trace("bitstring", bs, AppMsgColor.Magenta);
-                trace("bitseq", bitseq.Format(), AppMsgColor.Magenta);
-
-                Claim.eq(bs.TakeScalar<byte>(), packed);
-            }
-        }
 
         public void pack_32x4_2()
         {

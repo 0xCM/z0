@@ -51,7 +51,7 @@ namespace Z0
             }
         }
 
-        static Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+        Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
             for(var i=0; i< Claim.length(lhs,rhs); i++)
@@ -59,7 +59,7 @@ namespace Z0
            return dst;        
         }
 
-        static Span<T> xor<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
+        Span<T> xor<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
                 => xor(lhs,rhs, lhs);
 

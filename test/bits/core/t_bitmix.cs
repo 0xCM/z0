@@ -52,11 +52,11 @@ namespace Z0
                 
                 // bitstring reference interspersal for the even bits
                 var bsEven = bsaEven.Intersperse(bsbEven);                
-                Claim.eq(bsEven, abEven);
+                Claim.yea(bsEven == abEven);
 
                 // bitstring reference interspersal for the odd bits
                 var bsOdd = bsaOdd.Intersperse(bsbOdd);
-                Claim.eq(bsOdd, abOdd);                                
+                Claim.yea(bsOdd == abOdd);                                
             }
         }
 
@@ -71,7 +71,7 @@ namespace Z0
                 for(int j=0, k = 0; j<64; j+=2, k++)
                     z[k] = x[j];
 
-                Claim.eq(z, y);
+                Claim.eq(z.Scalar, y.Scalar);
             }            
 
             for(var i=0; i<RepCount; i++)
@@ -83,7 +83,7 @@ namespace Z0
                 for(int j=1, k = 0; j<64; j+=2, k++)
                     z[k] = x[j];
 
-                Claim.eq(z, y);
+                Claim.eq(z.Scalar, y.Scalar);
             }
         }
 

@@ -5,17 +5,22 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    using static Seed;
+    using static AppErrorMsg;
+
     public interface ICheckFileSystem : IValidator
     {
         void exists(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Claim.exists(path, caller, file, line);
+            => path.Exists().OnNone(() => throw AppException.Define($"The file {path} does not exist", caller, file,line));
 
         void exists(FolderPath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Claim.exists(path, caller, file, line);
+            => path.Exists().OnNone(() => throw AppException.Define($"The folder {path} does not exist", caller, file,line));
     }
 }

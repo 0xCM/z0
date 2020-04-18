@@ -9,27 +9,22 @@ namespace Z0
         
     using static Seed;
 
-    public interface IBitVectorEqualityCheck : 
-        IEqualCheck<BitVector8>, 
-        IEqualCheck<BitVector16>, 
-        IEqualCheck<BitVector32>, 
-        IEqualCheck<BitVector64>
+    public interface IBitVectorEqualityCheck : IValidator
     {
         [MethodImpl(Inline)]
-        void IEqualCheck<BitVector8>.eq(BitVector8 x, BitVector8 y, string caller, string file, int? line)
+        void eq(BitVector8 x, BitVector8 y, string caller, string file, int? line)
             => CheckNumeric.eq(x.Scalar, y.Scalar, caller, file, line);
 
         [MethodImpl(Inline)]
-        void IEqualCheck<BitVector16>.eq(BitVector16 x, BitVector16 y, string caller, string file, int? line)
+        void eq(BitVector16 x, BitVector16 y, string caller, string file, int? line)
             => CheckNumeric.eq(x.Scalar, y.Scalar, caller, file, line);
 
         [MethodImpl(Inline)]
-        void IEqualCheck<BitVector32>.eq(BitVector32 x, BitVector32 y, string caller, string file, int? line)
+        void eq(BitVector32 x, BitVector32 y, string caller, string file, int? line)
             => CheckNumeric.eq(x.Scalar, y.Scalar, caller, file, line);
 
         [MethodImpl(Inline)]
-        void IEqualCheck<BitVector64>.eq(BitVector64 x, BitVector64 y, string caller, string file, int? line)
+        void eq(BitVector64 x, BitVector64 y, string caller, string file, int? line)
             => CheckNumeric.eq(x.Scalar, y.Scalar, caller, file, line);
     }
-
 }

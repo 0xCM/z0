@@ -6,26 +6,26 @@ namespace Z0
 {
     using System;
 
+    using static Seed;
+    using static AppErrorMsg;
+
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckEquality : IValidator
+    public interface ICheckEqual : IValidator
     {
         void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Claim.eq(lhs, rhs, caller, file, line);
+        {
+            if(!object.Equals(lhs,rhs))
+                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+        }            
 
         void neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Claim.neq(lhs, rhs, caller, file, line);
+        {
+            if(object.Equals(lhs,rhs))
+                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+        }            
     }
 
-    public interface IEqualCheck<T> : IValidator
-    {
-        void eq(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null);
-    }    
-
-    public interface INotEqualCheck<T> : IValidator
-    {
-        void neq(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null);
-    }    
 }

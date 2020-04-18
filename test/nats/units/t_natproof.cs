@@ -11,46 +11,47 @@ namespace Z0
 
     public class t_natproof : UnitTest<t_natproof>
     {    
-        public static void equality()
+        public void equality()
         {
             NatClaim.eq<N16>(16);
             NatClaim.eq<N512>(512);
             NatClaim.eq<NatSeq<N8, N2, N1>>(821);
         }
-        public static void smaller()
+ 
+        public void smaller()
         {
             NatClaim.lt(n11, n12);
             NatClaim.lt(n512, n1024);
         }
 
-        public static void larger()
+        public void larger()
         {
             NatClaim.gt(n12, n11);
             NatClaim.gt(n1024, n512);
         }
 
-        public static void nonzero()
+        public void nonzero()
         {
             NatClaim.nonzero(n12);
             NatClaim.nonzero(n4);
             NatClaim.nonzero(n1);
         }
 
-        public static void sum()
+        public void sum()
         {
             NatClaim.sum(n5, n5, n10.NatValue);
             NatClaim.sum(n13, n0, n13.NatValue);
             NatClaim.sum(n512, n10, 522);
         }
 
-        public static void product()
+        public void product()
         {
             NatClaim.mul(n5, n5, 25);
             NatClaim.mul(n13, n10, 130);
             NatClaim.mul(n512, n10, 5120);
         }
 
-        public static void next()
+        public void next()
         {
             NatClaim.next(n0, n1);            
             NatClaim.next(n5, n6);            
@@ -65,7 +66,7 @@ namespace Z0
 
         }
 
-        public static void iterate()
+        public void iterate()
         {
            var n11 = NextNat.get(n10);
            var n12 = NextNat.get(n11);
@@ -76,7 +77,7 @@ namespace Z0
            var n17 = NextNat.get(n16);
            var n18 = NextNat.get(n17);
            var n19 = NextNat.get(n18);
-           Claim.eq(n19.NatValue,19);
+           Claim.eq(n19.NatValue,19ul);
         }
     }
 }

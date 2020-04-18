@@ -8,34 +8,25 @@ namespace Z0
         
     using static AppErrorMsg;
 
-    public interface IBitStringEqualityCheck : IEqualCheck<BitString>, INotEqualCheck<BitString>
+    public interface IBitStringEqualityCheck : IValidator
     {
-        void IEqualCheck<BitString>.eq(BitString a, BitString b, string caller, string file, int? line)
+        void eq(BitString a, BitString b, string caller, string file, int? line)
         {
             if(!a.Equals(b))
                 throw failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
         }
 
-        void INotEqualCheck<BitString>.neq(BitString a, BitString b, string caller, string file, int? line)
+        void neq(BitString a, BitString b, string caller, string file, int? line)
         {
             if(a.Equals(b))
                 throw failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
         }
     }
 
-    public interface IBitStringCheck : IBitStringEqualityCheck, ICheckNumeric
+    public interface IBitStringCheck : IBitStringEqualityCheck
     {
-        static new IBitStringCheck<BitStringCheck> Checker => BitStringCheck.Checker;
+
     }
 
-    public interface IBitStringCheck<C> : IBitStringCheck
-        where C : IBitStringCheck<C>, new()
-    {
 
-    }    
-
-    public readonly struct BitStringCheck : IBitStringCheck<BitStringCheck>
-    {
-        public static IBitStringCheck<BitStringCheck> Checker => default(BitStringCheck);        
-    }
 }

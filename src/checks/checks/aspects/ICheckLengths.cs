@@ -13,14 +13,14 @@ namespace Z0
     {
         [MethodImpl(Inline)]   
         int length<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            => Claim.length(lhs, rhs);
+            => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
 
         [MethodImpl(Inline)]   
         int length<T>(T[] lhs, T[] rhs)
-            => Claim.length(lhs, rhs);
+            => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
 
         [MethodImpl(Inline)]   
         int length<T>(Span<T> lhs, Span<T> rhs)
-            => Claim.length(lhs, rhs);
+            => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
     }
 }

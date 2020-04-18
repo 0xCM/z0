@@ -17,23 +17,23 @@ namespace Z0.Mkl.Test
     
     public class t_gemm : UnitTest<t_gemm>
     {        
-        /// <summary>
-        /// Asserts that corresponding elements of two source spans of the same length are "close" as determined by a specified tolerance
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <param name="tolerance">The acceptable difference between corresponding left/right elements</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
-        {
-            for(var i = 0; i< Claim.length(lhs,rhs); i++)
-                if(!gmath.within(lhs[i],rhs[i],tolerance))
-                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
-        }
+        // /// <summary>
+        // /// Asserts that corresponding elements of two source spans of the same length are "close" as determined by a specified tolerance
+        // /// </summary>
+        // /// <param name="lhs">The left span</param>
+        // /// <param name="rhs">The right span</param>
+        // /// <param name="tolerance">The acceptable difference between corresponding left/right elements</param>
+        // /// <param name="caller">The invoking function</param>
+        // /// <param name="file">The file in which the invoking function is defined </param>
+        // /// <param name="line">The file line number of invocation</param>
+        // /// <typeparam name="T">The element type</typeparam>        
+        // public void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        //     where T : unmanaged 
+        // {
+        //     for(var i = 0; i< Claim.length(lhs,rhs); i++)
+        //         if(!gmath.within(lhs[i],rhs[i],tolerance))
+        //             throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
+        // }
 
         internal static void refmul<M,N,T>(Matrix256<M,N,T> A, Block256<N,T> B, Block256<M,T> X)
             where M : unmanaged, ITypeNat
@@ -178,7 +178,7 @@ namespace Z0.Mkl.Test
                     Notify($"E = {E.Format()}");
                 }
                 
-                close(E.Unblocked, X.Unblocked, epsilon);
+                Claim.close(E.Unblocked, X.Unblocked, epsilon);
             }
 
             BenchmarkRecord timing = measured(CycleCount, runtime, label);
@@ -302,7 +302,7 @@ namespace Z0.Mkl.Test
             return result;
         }
 
-        static float Dot(Span<float> x, Span<float> y)
+        float Dot(Span<float> x, Span<float> y)
         {
             var result = 0f;
             for(var i=0; i< Claim.length(x,y); i++)
@@ -312,7 +312,7 @@ namespace Z0.Mkl.Test
             return result;
         }
 
-        static double Dot(Span<double> x, Span<double> y)
+        double Dot(Span<double> x, Span<double> y)
         {
             var result = 0d;
             for(var i=0; i< Claim.length(x,y); i++)

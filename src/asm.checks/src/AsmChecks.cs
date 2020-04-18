@@ -33,6 +33,8 @@ namespace Z0
         public static AsmChecks Create(IAsmContext context)
             => new AsmChecks(context);
 
+        ICheck Claim => Z0.Claim.Checker;
+
         AsmChecks(IAsmContext context)
         {
             this.Context = context;
@@ -325,7 +327,9 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    var a = f(x,y);
+                    var b = g(x,y);
+                    Claim.eq(a,b);
                 }
             }
 
