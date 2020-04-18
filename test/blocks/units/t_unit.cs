@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     public class t_unit : UnitTest<t_unit>
-    {
-        protected ICheckNumeric Claim => ICheckNumeric.Checker;        
+    {           
 
     }
 }

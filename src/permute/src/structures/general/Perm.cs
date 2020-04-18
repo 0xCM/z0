@@ -185,7 +185,7 @@ namespace Z0
         /// <param name="g">The right permutation</param>
         public Perm Compose(Perm g)
         {
-            var n = Claim.length(terms, g.terms);
+            var n = terms.Length;
             var dst = Permute.alloc(n);
             var f = this;
             for(var i=0; i< n; i++)

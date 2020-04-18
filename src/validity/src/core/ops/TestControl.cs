@@ -16,8 +16,8 @@ namespace Z0
     {
         public IEnumerable<TestCaseRecord> TakeOutcomes()
         {
-            while(Outcomes.Any())
-                yield return Outcomes.Dequeue();
+            while(TestResults.Any())
+                yield return TestResults.Dequeue();
         }
 
         public IEnumerable<BenchmarkRecord> TakeBenchmarks()

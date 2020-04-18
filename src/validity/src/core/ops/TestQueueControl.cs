@@ -14,18 +14,18 @@ namespace Z0
     partial class TestContext<U>
     {
         public IReadOnlyList<IAppMsg> Dequeue()
-            => Queue.Dequeue();
+            => Messages.Dequeue();
 
         public IReadOnlyList<IAppMsg> Flush(Exception e)
-            => Queue.Flush(e);
+            => Messages.Flush(e);
             
         public void Flush(Exception e, IAppMsgSink target)
-            => Queue.Flush(e, target);
+            => Messages.Flush(e, target);
 
         public void Emit(FilePath dst) 
-            => Queue.Emit(dst);        
+            => Messages.Emit(dst);        
 
         public void Notify(string msg, AppMsgKind? severity = null)
-            => Queue.Notify(msg, severity);
+            => Messages.Notify(msg, severity);
     }
 }

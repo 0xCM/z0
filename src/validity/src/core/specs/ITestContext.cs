@@ -9,20 +9,19 @@ namespace Z0
 
     public interface ITestContext : 
         IServiceAllocation,
+        ITestValidator,
         ISpeedTest, 
+        IStopClocks,
+        ISpeedTestSink,
         IPolyrandProvider, 
         ICheckAction,
         IAppMsgContext, 
         IService<ITestContext>, 
-        IEvaluationSink, 
+        ITestResultSink, 
         IAppMsgTrace,
         ITestQueueControl,
-        IConsoleNotifier          
+        IConsoleNotifier
     {
-        string CaseName(ISFuncApi f);
-
-        Type HostType {get;}
-
-        bool Enabled {get;}
+        
     }
 }

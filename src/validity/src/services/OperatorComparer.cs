@@ -9,7 +9,6 @@ namespace Z0
     
     using static Seed;
 
-
     public abstract class OperatorComparer<W,T> : SFMatch
         where W : unmanaged, ITypeWidth
         where T : unmanaged
@@ -23,11 +22,9 @@ namespace Z0
         protected string CaseName(ISFuncApi f)
         {
             var id = Identify.Op(f.Id.Name, Widths.type<W>(), NumericKinds.kind<T>(),true);
-            var owner = Identify.owner(Context.HostType);
-            var host = Context.HostType.Name;
+            var owner = Identify.owner(Context.ValidatorType);
+            var host = Context.ValidatorType.Name;
             return $"{owner}/{host}/{id}";            
         }
     }
-
-
 }

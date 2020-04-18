@@ -64,7 +64,7 @@ namespace Z0.Logix
                 }
             }
             clock.Stop();
-            ReportBenchmark(opname, opcount,clock);
+            Context.ReportBenchmark(opname, opcount,clock);
             Claim.require(sat);
         }
         

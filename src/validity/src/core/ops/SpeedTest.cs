@@ -43,7 +43,7 @@ namespace Z0
                 }
                 clock.Stop();
 
-                ReportBenchmark(SubjectId<T>(opname),oc,clock);
+                Context.ReportBenchmark(SubjectId<T>(opname),oc,clock);
 
             }
 
@@ -62,7 +62,7 @@ namespace Z0
                 }            
                 clock.Stop();
 
-                ReportBenchmark(BaselineId<T>(opname),oc,clock);            
+                Context.ReportBenchmark(BaselineId<T>(opname),oc,clock);            
             }
 
             run_cf();            
@@ -95,7 +95,7 @@ namespace Z0
                 }
                 clock.Stop();
 
-                ReportBenchmark(SubjectId<T>(opname),oc,clock);
+                Context.ReportBenchmark(SubjectId<T>(opname),oc,clock);
             }
 
             void run_cf()
@@ -115,7 +115,7 @@ namespace Z0
                 }            
                 clock.Stop();
 
-                ReportBenchmark(BaselineId<T>(opname),oc,clock);            
+                Context.ReportBenchmark(BaselineId<T>(opname),oc,clock);            
             }
 
             run_cf();            

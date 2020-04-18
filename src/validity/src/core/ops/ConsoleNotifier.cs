@@ -14,7 +14,7 @@ namespace Z0
     partial class TestContext<U>  
     {
         public void NotifyConsole(IAppMsg msg)            
-            => Queue.NotifyConsole(msg, msg.Color);
+            => Messages.NotifyConsole(msg, msg.Color);
 
         public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
             => NotifyConsole(AppMsg.Colorize(content, color));

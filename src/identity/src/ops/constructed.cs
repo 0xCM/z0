@@ -14,9 +14,19 @@ namespace Z0
     
     public static partial class Identity
     {
+        /// <summary>
+        /// Raises an error if the source method is not a constructed generic method
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        static void RequireConstructed(MethodInfo src)
+        {
+            if(!src.IsConstructedGenericMethod)
+                throw AppErrors.NonGenericMethod(src);
+        }
+
         static OpIdentity constructed(MethodInfo src)
         {
-            Claim.RequireConstructed(src);
+            RequireConstructed(src);
 
             static string ParamIdentity(MethodInfo src)
                 => FormatArgs(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, args(src));

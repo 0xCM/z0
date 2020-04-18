@@ -13,9 +13,19 @@ namespace Z0
     
     public static partial class Identity
     {
+        /// <summary>
+        /// Raises an error if the source method is any flavor of generic
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        static void RequireNonGeneric(MethodInfo src)
+        {
+            if(src.IsGenericMethod || src.IsConstructedGenericMethod || src.IsGenericMethodDefinition)
+                throw AppErrors.GenericMethod(src);
+        }
+
         static OpIdentity nongeneric(MethodInfo src)
         {
-            Claim.RequireNonGeneric(src);
+            RequireNonGeneric(src);
             var id = string.Empty;
             
             id += OpIdentities.name(src);

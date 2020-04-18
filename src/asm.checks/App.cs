@@ -16,9 +16,9 @@ namespace Z0.Asm
 
         public override void RunShell(params string[] args)
         {
-            var checks = AsmChecks.Create(Context);
-            using var buffers = BufferSeq.alloc(Context.DefaultBufferLength, 3);
-            checks.sub_megacheck(buffers);
+            // var checks = AsmChecks.Create(Context);
+            // using var buffers = BufferSeq.alloc(Context.DefaultBufferLength, 3);
+            // checks.sub_megacheck(buffers);
         }
 
         public static void Main(params string[] args)

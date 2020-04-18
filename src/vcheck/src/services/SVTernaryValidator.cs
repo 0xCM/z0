@@ -48,7 +48,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename,succeeded,clock);
+                Context.ReportCaseResult(casename,succeeded,clock);
             }
         }
     }
@@ -92,7 +92,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename,succeeded,clock);
+                Context.ReportCaseResult(casename,succeeded,clock);
             }
         }
     }

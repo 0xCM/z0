@@ -17,6 +17,9 @@
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(VData)" />
+
+    <ProjectReference Include="$(Validate)" />
+
   </ItemGroup>
 
 </Project>

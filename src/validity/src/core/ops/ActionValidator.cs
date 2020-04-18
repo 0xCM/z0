@@ -11,7 +11,6 @@ namespace Z0
     
     using static Seed;
 
-
     partial class TestContext<U>  
     {
         /// <summary>
@@ -37,7 +36,7 @@ namespace Z0
             }
             finally
             {
-                ReportOutcome(CaseName(name), succeeded,count);
+                Context.ReportCaseResult(CaseName(name), succeeded,count);
             }
         }
 
@@ -64,7 +63,7 @@ namespace Z0
             }
             finally
             {
-                ReportOutcome(name,succeeded,count);
+                Context.ReportCaseResult(name,succeeded,count);
             }
         }
     }

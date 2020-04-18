@@ -9,30 +9,31 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
+    using static Memories;
 
-    partial class TestContext<U>
+    public interface IStopClocks : IValidator
     {
         /// <summary>
         /// Allocates and optionally starts a system counter
         /// </summary>
         [MethodImpl(Inline)]   
-        public SystemCounter counter(bool start = false) 
-            => Context.counter(start);
+        SystemCounter counter(bool start = false) 
+            => SystemCounter.Create(start);
 
         /// <summary>
         /// Creates a new stopwatch and optionally start it
         /// </summary>
         /// <param name="start">Whether to start the new stopwatch</param>
         [MethodImpl(Inline)]   
-        public Stopwatch stopwatch(bool start = true) 
-            => Context.stopwatch(start);
+        Stopwatch stopwatch(bool start = true) 
+            => start ? Stopwatch.StartNew() : new Stopwatch();
 
         /// <summary>
         /// Captures a stopwatch duration
         /// </summary>
         /// <param name="sw">A running/stopped stopwatch</param>
         [MethodImpl(Inline)]   
-        public Duration snapshot(Stopwatch sw)     
-            => Context.snapshot(sw);
+        Duration snapshot(Stopwatch sw)     
+            => Duration.Define(sw.ElapsedTicks);                
     }
 }

@@ -92,51 +92,8 @@ namespace Z0
             where T : unmanaged
                 => Identify.NumericOp($"{basename}_asm",typeof(T).NumericKind());
 
-        /// <summary>
-        /// Evaluates a pair of unary operators and asserts their equality over a random sequence
-        /// </summary>
-        /// <param name="f">The first operator, often interpreted as the reference implementation</param>
-        /// <param name="g">The second operator, often interpreted as the operator under test</param>
-        /// <param name="name">The operator name</param>
-        /// <typeparam name="T">The operator domain type</typeparam>
-        TestCaseRecord CheckMatch<T>(in BufferSeq buffers, string basename, UnaryOp<T> f, UnaryOp<T> g)
-            where T :unmanaged
-        {
-            void check()
-            {
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.Next<T>();
-                    Claim.eq(f(x),g(x));
-                }
-            }
 
-            return CheckAction(check, CaseName(TestOpName<T>(basename)));
-        }    
-
-        /// <summary>
-        /// Evaluates a pair of binary operators and asserts their equality over a random sequence
-        /// </summary>
-        /// <param name="f">The first operator, often interpreted as the reference implementation</param>
-        /// <param name="g">The second operator, often interpreted as the operator under test</param>
-        /// <param name="name">The operator name</param>
-        /// <typeparam name="T">The operator domain type</typeparam>
-        TestCaseRecord CheckMatch<T>(in BufferSeq buffers, string opname, BinaryOp<T> f, BinaryOp<T> g)
-            where T :unmanaged
-        {
-            void check()
-            {
-                for(var i=0; i<RepCount; i++)
-                {
-                    (var x, var y) = Random.NextPair<T>();
-                    Claim.eq(f(x,y),g(x,y));
-                }
-            }
-
-            return CheckAction(check, CaseName(TestOpName<T>(opname)));
-        }
-
-        protected TestCaseRecord CheckAsmMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in IdentifiedCode src)
+        protected TestCaseRecord TestAsmMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in IdentifiedCode src)
             where T : unmanaged
         {
                       
@@ -152,57 +109,18 @@ namespace Z0
                 }
             }
 
-            return CheckAction(check, src.Id);
+            return TestAction(check, src.Id);
         }
 
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.HostBitsArchive(id,host).Read(m).Single().ToApiCode();
-
-        protected TestCaseRecord CheckMatch<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
-            where T : unmanaged
-        {
-            var w = w128;
-            var t = default(T);
-
-            void check()
-            {
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
-                    Claim.veq(f(x,y), g.Apply(x,y));
-                }
-            }            
-
-            return CheckAction(check, CaseName($"{fId}~/~{gId}"));                   
-        }
-
-        protected TestCaseRecord CheckMatch<T>(in BufferSeq buffers, BinaryOp<Vector256<T>> f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
-            where T : unmanaged
-        {
-            var w = w256;
-            var t = default(T);
-
-            void check()            
-            {
-
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
-                    Claim.veq(f(x,y), g.Apply(x,y));
-                }
-            }            
-
-            return CheckAction(check, CaseName($"{fId}~/~{gId}"));            
-        }
 
         /// <summary>
         /// Manages the execution of an action test case
         /// </summary>
         /// <param name="f">The action under test</param>
         /// <param name="id">The action name</param>
-        private TestCaseRecord CheckAction(Action f, OpIdentity id)
+        private TestCaseRecord TestAction(Action f, OpIdentity id)
         {
             
             var name = CaseName(id);
@@ -225,7 +143,7 @@ namespace Z0
         /// <param name="f">The action under test</param>
         /// <param name="name">The action name</param>
         /// <param name="clock">Accumulates the test case execution time</param>
-        private TestCaseRecord CheckAction(Action f, string name)
+        private TestCaseRecord TestAction(Action f, string name)
         {
             var succeeded = true;
             
@@ -262,7 +180,7 @@ namespace Z0
                 }
             }
 
-            return CheckAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
         /// <summary>
@@ -285,7 +203,7 @@ namespace Z0
                 }
             }
 
-            return CheckAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
         /// <summary>
@@ -308,7 +226,7 @@ namespace Z0
                 }
             }
 
-            return CheckAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
         /// <summary>
@@ -333,7 +251,7 @@ namespace Z0
                 }
             }
 
-            return CheckAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
         /// <summary>
@@ -357,7 +275,7 @@ namespace Z0
                 }
             }
 
-            return CheckAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
         /// <summary>
@@ -380,7 +298,7 @@ namespace Z0
                 }
             }
 
-            return CheckAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, BinaryOp<byte> primal, BinaryOp<byte> generic, NK<byte> kind)
@@ -890,7 +808,7 @@ namespace Z0
             where T : unmanaged
         {            
             var f = buffers[Main].EmitFixedBinaryOp(w,asm);            
-            CheckMatch<T>(gvec.vadd, f, asm.Id);
+            TestMatch<T>(gvec.vadd, f, asm.Id);
         }
 
 
@@ -898,7 +816,7 @@ namespace Z0
             where T : unmanaged
         {            
             var f = buffers[Main].EmitFixedBinaryOp(w,asm);
-            CheckMatch<T>(gvec.vadd, f, asm.Id);
+            TestMatch<T>(gvec.vadd, f, asm.Id);
         }
 
         void datares_check(in BufferSeq buffers)
@@ -931,31 +849,6 @@ namespace Z0
         AsmFormatConfig AsmFormat
             => AsmFormatConfig.New.WithoutFunctionTimestamp();
 
-        public void add_megacheck(in BufferSeq buffers)
-        {
-            var name = nameof(math.add);
-
-            var dSrc = ApiHostUri.FromHost(typeof(math));
-            var gSrc = ApiHostUri.FromHost(typeof(gmath));
-
-            var dArchive = Context.HostBitsArchive(PartId.GMath, dSrc);
-            var gArchive = Context.HostBitsArchive(PartId.GMath, gSrc);
-            var dAdd = dArchive.Read("add").Select(x => x.ToApiCode()).ToArray();
-            var gAdd = gArchive.Read("add_g").Select(code => code.WithIdentity(code.Id.WithoutGeneric()).ToApiCode()).ToArray();
-            Claim.eq(dAdd.Length, gAdd.Length);
-            for(var i=0; i< dAdd.Length; i++)
-            {
-                var d = dAdd[i];
-                var g = gAdd[i];
-                var opname = d.Id;
-                switch(opname)
-                {
-                    case "add_8i_8i":
-                        megacheck(buffers, name, d, g, math.add, gmath.add, i8);
-                    break;                       
-                }                
-            }
-        }
 
         /// <summary>
         /// Verifies that two 128-bit vectorized binary operators agree over a random set of points
@@ -964,7 +857,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
+        protected TestCaseRecord TestMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
             where T : unmanaged
         {
             void check()
@@ -979,7 +872,7 @@ namespace Z0
                 }            
             }
 
-            CheckAction(check, name);      
+            return TestAction(check, name);      
         }
 
         /// <summary>
@@ -989,7 +882,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
+        protected TestCaseRecord TestMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
             where T : unmanaged
         {
             void check()
@@ -1004,7 +897,7 @@ namespace Z0
                 }
             }      
 
-            CheckAction(check, name);      
+            return TestAction(check, name);      
         }
 
         static int activations;
@@ -1026,7 +919,6 @@ namespace Z0
         static unsafe ulong ptr(ReadOnlySpan<byte> src)
             => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
 
-
         void RunPipe()
         {
             var archive =  Context.HostBitsArchive(PartId.GVec);
@@ -1045,10 +937,7 @@ namespace Z0
                     if(trigger.CanFire(i))
                         count++;
                 }
-            }
-            
-            // TraceCaller($"{listcount} instruction lists were processed out of {source.Instructions.Count()} available");
-            // TraceCaller($"Trigger activate {activations} times");
+            }            
         }
 
         void Run50(in BufferSeq buffers)
@@ -1096,6 +985,34 @@ namespace Z0
 
             var points = stream.Take(RepCount);
             iter(points, x => Claim.eq(f(x), g(x)));            
+        }
+
+    #if Megacheck
+
+        public void add_megacheck(in BufferSeq buffers)
+        {
+            var name = nameof(math.add);
+
+            var dSrc = ApiHostUri.FromHost(typeof(math));
+            var gSrc = ApiHostUri.FromHost(typeof(gmath));
+
+            var dArchive = Context.HostBitsArchive(PartId.GMath, dSrc);
+            var gArchive = Context.HostBitsArchive(PartId.GMath, gSrc);
+            var dAdd = dArchive.Read("add").Select(x => x.ToApiCode()).ToArray();
+            var gAdd = gArchive.Read("add_g").Select(code => code.WithIdentity(code.Id.WithoutGeneric()).ToApiCode()).ToArray();
+            Claim.eq(dAdd.Length, gAdd.Length);
+            for(var i=0; i< dAdd.Length; i++)
+            {
+                var d = dAdd[i];
+                var g = gAdd[i];
+                var opname = d.Id;
+                switch(opname)
+                {
+                    case "add_8i_8i":
+                        megacheck(buffers, name, d, g, math.add, gmath.add, i8);
+                    break;                       
+                }                
+            }
         }
 
         public void sub_megacheck(in BufferSeq buffers)
@@ -1176,5 +1093,8 @@ namespace Z0
             megacheck(buffers, name, math.xnor, gmath.xnor, u64);            
             megacheck(buffers, name, math.xnor, gmath.xnor, i64);            
         }
+
+
+    #endif
     }
 }

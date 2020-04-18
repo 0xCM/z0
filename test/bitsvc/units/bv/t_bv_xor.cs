@@ -38,7 +38,7 @@ namespace Z0
 
             }
 
-            CheckAction(check, CaseName(f));
+            CheckAction(check, Context.CaseName(f));
         }
     }
 }

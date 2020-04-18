@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         bool ContentEqual(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)  
         {
-            var count = Claim.length(lhs,rhs);
+            var count = length(lhs,rhs);
             for(var i=0; i<count; i++)
                 if(refs.skip(lhs, i) != refs.skip(rhs, i))
                     return false;
@@ -44,7 +44,6 @@ namespace Z0
                 if(lhs[i] != rhs[i])
                     throw failed(ClaimKind.EqItem, ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line));
         }
-
 
         /// <summary>
         /// Asserts content equality for two character spans

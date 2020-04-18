@@ -3,12 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     using System;
-
-    public interface IValidationContext : ITestContext
+    using System.Collections.Generic;
+    
+    public interface IRecordSink<R> : IService, ISink<R>
+        where R : IRecord
     {
-        string ITestContext.CaseName(ISFuncApi f)
-            => Validity.testcase(HostType, f);
+
+        //void ISink<R>.Deposit(R src) => Report(src);
     }
 }

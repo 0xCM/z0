@@ -16,13 +16,13 @@ namespace Z0
         /// <param name="f">The function under test</param>
         /// <typeparam name="W">The type width</typeparam>
         /// <typeparam name="T">The cell width</typeparam>
-        public static string CaseName<W,T>(this IValidationContext context, ISFuncApi f, W w = default, T t = default)
+        public static string CaseName<W,T>(this ITestContext context, ISFuncApi f, W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
         {
             var id = Identify.Op<W,T>(f.Id.Name);
-            var owner = Identify.owner(context.HostType);
-            var host = context.HostType.Name;
+            var owner = Identify.owner(context.ValidatorType);
+            var host = context.ValidatorType.Name;
             return $"{owner}/{host}/{id}";            
         }
     }

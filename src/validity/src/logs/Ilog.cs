@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
-    public interface IRecordSink : IService
+    public interface ITestLogger : IService
     {        
         FilePath Write<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
             where R : IRecord;                
@@ -25,15 +25,15 @@ namespace Z0
         static TestLogPaths Paths 
             => TestLogPaths.The;
             
-        public static IRecordSink TestLog => TestLogger.TheOnly;
+        public static ITestLogger TestLog => TestLogger.TheOnly;
 
         public static IAppMsgSink TestMsgTarget => TestLogger.TheOnly;
 
-        public static IRecordSink BenchLog => BenchLogger.TheOnly;
+        public static ITestLogger BenchLog => BenchLogger.TheOnly;
 
-        public static IRecordSink AppLog => AppLogger.TheOnly;
+        public static ITestLogger AppLog => AppLogger.TheOnly;
 
-        class Logger<A> : IRecordSink, IAppMsgContext
+        class Logger<A> : ITestLogger, IAppMsgContext
             where A : Logger<A>, new()
         {
             public static A TheOnly = new A();

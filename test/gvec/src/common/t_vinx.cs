@@ -50,7 +50,7 @@ namespace Z0
                 Claim.veq(expect,actual);
             }
 
-            CheckAction(exec, CaseName(f));            
+            CheckAction(exec, Context.CaseName(f));            
         }
 
         /// <summary>

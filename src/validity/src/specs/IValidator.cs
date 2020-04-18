@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface ISFValidator : IService<IValidationContext>
+    public interface ISFValidator : IService<ITestContext>
     {
 
     }

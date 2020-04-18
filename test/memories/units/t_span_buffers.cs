@@ -26,7 +26,7 @@ namespace Z0
             var x3 = stack.Pop();
             Claim.eq(x1,3);
             Claim.eq(x2,2);
-            Z0.Claim.eq(x3, 1u);           
+            Claim.eq(x3,1u);
         }
 
         public void bitstack_basecase()

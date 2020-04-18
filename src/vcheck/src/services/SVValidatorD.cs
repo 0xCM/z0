@@ -14,9 +14,9 @@ namespace Z0
     {
         ICheckNumeric Claim => ICheckNumeric.Checker;
 
-        public IValidationContext Context {get;}
+        public ITestContext Context {get;}
 
-        public SVFDecomposer(IValidationContext context)
+        public SVFDecomposer(ITestContext context)
         {
             this.Context = context;
             this.RepCount = 250;
@@ -95,7 +95,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename,succeeded,count);
+                Context.ReportCaseResult(casename,succeeded,count);
             }
         }
 
@@ -126,7 +126,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename,succeeded,count);
+                Context.ReportCaseResult(casename,succeeded,count);
             }
         }       
 
@@ -161,7 +161,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename, succeeded,count);
+                Context.ReportCaseResult(casename, succeeded,count);
             }
         }
 
@@ -196,7 +196,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename,succeeded,count);
+                Context.ReportCaseResult(casename,succeeded,count);
             }
         }
     }

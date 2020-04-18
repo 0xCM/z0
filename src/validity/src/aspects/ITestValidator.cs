@@ -4,15 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
+    using System;
+    
+    using static Seed;
+    using static Memories;
 
     /// <summary>
-    /// Base type for intrinsic tests
+    /// Root aspect for validators that return validation outcomes in lieu of raising exceptions
     /// </summary>
-    /// <typeparam name="X">The concrete subtype</typeparam>
-    public abstract class t_inx<X> : UnitTest<X>
-        where X : t_inx<X>
+    public interface ITestValidator : ITestOptions, ITestCaseIdentity, IValidator, IPolyrandContext
     {
-        protected new IVectorCheck Claim => IVectorCheck.Checker;
+        
     }
 }

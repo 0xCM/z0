@@ -22,7 +22,7 @@ namespace Z0
 
         void ISFMatch<T0,T1,R>.Match<F, G>(F baseline, G subject)
         {
-            var casename = Validity.testcase(Context.HostType, subject);
+            var casename = Validity.testcase(Context.ValidatorType, subject);
             var succeeded = true;       
             var clock = counter();
 
@@ -49,13 +49,13 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename,succeeded,clock);
+                Context.ReportCaseResult(casename,succeeded,clock);
             }
         }
 
         void ISFMatch<T0,T1,R>.MatchSpan<F, G>(F baseline, G subject)
         {
-            var casename = OpUriBuilder.TestCase(Context.HostType, $"{subject.Id}_span");
+            var casename = OpUriBuilder.TestCase(Context.ValidatorType, $"{subject.Id}_span");
             var succeeded = true;
             var count = RepCount;
             var clock = counter();
@@ -83,7 +83,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename, succeeded, clock);
+                Context.ReportCaseResult(casename, succeeded, clock);
             }
         }
     }

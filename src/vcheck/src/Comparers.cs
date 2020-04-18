@@ -13,7 +13,7 @@ namespace Z0
              => new SVValidatorD<T>(context);
 
         public static ISVFDecomposer Decomposer(this ITestContext context)
-            => new SVFDecomposer(ValidationContext.From(context));            
+            => new SVFDecomposer(context);
 
     }
 }

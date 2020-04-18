@@ -146,7 +146,7 @@ namespace Z0
             }
             
             var opname = $"{stream.RngKind}<{typeof(T).DisplayName()}>";
-            ReportBenchmark(BenchmarkRecord.Define(total, sw.Elapsed,opname));            
+            Deposit(BenchmarkRecord.Define(total, sw.Elapsed,opname));            
         }
 
     }

@@ -15,7 +15,7 @@ namespace Z0
     class SVValidatorD<T> : ISVFDecomposer<T>
         where T : unmanaged
     {   
-        public IValidationContext Context {get;}
+        public ITestContext Context {get;}
 
         public IPolyrand Random {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
 
         public SVValidatorD(ITestContext context)
         {
-            this.Context = ValidationContext.From(context);
+            this.Context = context;
             this.Random = context.Random;
         }
 
@@ -38,15 +38,6 @@ namespace Z0
         static int components<W>(W w = default)
             where W : struct, ITypeWidth
                 => ((int)default(W).TypeWidth)/BitSize.measure<T>();
-
-        static string CaseName<W>(IValidationContext context, ISFuncApi f)
-            where W : unmanaged, ITypeWidth
-        {
-            var id = Identify.Op<W,T>(f.Id.Name);
-            var owner = Identify.owner(context.HostType);
-            var host = context.HostType.Name;
-            return $"{owner}/{host}/{id}";            
-        }
 
         public void Validate<F>(F f, K.UnaryOpClass op, W128 w)
             where F : ISVUnaryOp128DApi<T>
@@ -167,7 +158,7 @@ namespace Z0
             where W : unmanaged, ITypeWidth
         {
             var succeeded = true;
-            var casename = Context.CaseName(f,width, default(T));
+            var casename = Context.CaseName<W,T>(f);
             var clock = time.counter();
 
             clock.Start();
@@ -182,7 +173,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportOutcome(casename,succeeded,clock);
+                Context.ReportCaseResult(casename,succeeded,clock);
             }
         }
     }   

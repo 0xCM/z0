@@ -84,7 +84,6 @@ namespace Z0
 
         public const float z32f = 0;
 
-        public const double z64f = 0;
- 
+        public const double z64f = 0; 
     }
 }

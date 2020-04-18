@@ -46,7 +46,7 @@ namespace Z0.Asm
         {
             Context = AsmContext.Create(
                 AppSettings.Empty, 
-                AppMessages.exchange(Queue), 
+                AppMessages.exchange(Messages), 
                 ApiComposition.Assemble(DefaultResolutions), 
                 Env.Current.LogDir,
                 Random, 

@@ -14,33 +14,35 @@ namespace Z0
     {
         public ITestContext Context {get;}
 
-        public IPolyrand Random {get;}
+        public virtual IPolyrand Random {get;}
+            =  Polyrand.WyHash64(PolySeed64.Seed00);
 
         public event Action<IAppMsg> Next;
 
-        protected IAppMsgExchange Queue {get; private set;}
+        protected IAppMsgExchange Messages {get; private set;}
 
-        Queue<TestCaseRecord> Outcomes {get;}
+        Queue<TestCaseRecord> TestResults {get;}
             = new Queue<TestCaseRecord>();
 
         Queue<BenchmarkRecord> Benchmarks {get;}
             = new Queue<BenchmarkRecord>();
 
-        protected TestContext(IPolyrand random = null)
+        protected TestContext()
         {
             this.Context = this;            
-            this.Random = random ?? Polyrand.WyHash64(PolySeed64.Seed00);
+            // this.Random = random ?? Polyrand.WyHash64(PolySeed64.Seed00);
             this.Next += BlackHole;
-            this.Queue = AppMessages.exchange();
-            this.Queue.Next += Relay;
+            this.Messages = AppMessages.exchange();
+            this.Messages.Next += Relay;
         }
-
-        public Type HostType => typeof(U);
 
         public virtual void Dispose()
             => OnDispose();
 
-        protected virtual void OnDispose() { }
+        protected virtual void OnDispose() 
+        {
+
+        }
 
         void BlackHole(IAppMsg msg) {}
                 
@@ -51,19 +53,19 @@ namespace Z0
         /// The number of elements to be selected from some sort of stream
         /// </summary>
         protected virtual int RepCount
-            => Pow2.T06;
+            => Context.RepCount;
         
         /// <summary>
         /// The number times to repeat an action
         /// </summary>
         protected virtual int CycleCount
-            => Pow2.T03;
+            => Context.CycleCount;
 
         /// <summary>
         /// The number of times to repeat a cycle
         /// </summary>
         protected virtual int RoundCount
-            => Pow2.T01;
+            => Context.RoundCount;
 
         /// <summary>
         /// The number of operations performed in a benchmarking expercise
@@ -72,6 +74,10 @@ namespace Z0
             => RoundCount*CycleCount;
         
         public virtual bool Enabled 
-            => true;
+            => Context.Enabled;
+
+        protected void ReportBenchmark(string name, long opcount, TimeSpan duration)
+            => Context.ReportBenchmark(name,opcount, duration);
+
     }
 }
