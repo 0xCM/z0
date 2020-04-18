@@ -73,43 +73,42 @@ namespace Z0
         /// <summary>
         /// Recursively close an IEnumerable generic type
         /// </summary>
-        /// <param name="stype">The sequence type</param>
+        /// <param name="seq">The sequence type</param>
         /// <remarks>
         /// Adapted from https://blogs.msdn.microsoft.com/mattwar/2007/07/30/linq-building-an-iqueryable-provider-part-i/
         /// </remarks>
-        public static Type CloseEnumerableType(this Type stype)
+        public static Option<Type> CloseEnumerableType(this Type seq)
         {
-            if (stype == typeof(string))
-                return typeof(void);
+            if (seq == typeof(string))
+                return null;
 
-            if (stype.IsArray)
-                return typeof(IEnumerable<>).MakeGenericType(stype.GetElementType());
+            if (seq.IsArray)
+                return typeof(IEnumerable<>).MakeGenericType(seq.GetElementType());
 
-            if (stype.IsGenericType)
+            if (seq.IsGenericType)
             {
-                foreach (var arg in stype.GetGenericArguments())
+                foreach (var arg in seq.GetGenericArguments())
                 {
                     var enumerable = typeof(IEnumerable<>).MakeGenericType(arg);
-                    if (enumerable.IsAssignableFrom(stype))
+                    if (enumerable.IsAssignableFrom(seq))
                         return enumerable;
                 }
             }
 
-            var interfaces = stype.Interfaces().ToList();
-            if (interfaces.Count > 0)
+            var interfaces = seq.GetInterfaces();
+            if (interfaces != null && interfaces.Length > 0)
             {
                 foreach (var i in interfaces)
                 {
                     var ienum = CloseEnumerableType(i);
-                    if (ienum.IsSome())
+                    if (ienum.Exists)
                         return ienum;
                 }
             }
 
-            if (stype.BaseType != null && stype.BaseType != typeof(object))
-                return CloseEnumerableType(stype.BaseType);
-            
-            return typeof(void);
+            if (seq.BaseType != null && seq.BaseType != typeof(object))
+                return CloseEnumerableType(seq.BaseType);
+            return null;
         }
 
         /// <summary>

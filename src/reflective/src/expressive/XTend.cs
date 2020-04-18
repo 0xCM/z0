@@ -345,7 +345,7 @@ namespace Z0
         /// Tests whether an expression is a logical disjunction
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        static bool IsDisjunction<X>(this X x)
+        public static bool IsDisjunction<X>(this X x)
             where X : Expression
             => x.TryGetDisjunction().Exists;
 
@@ -353,7 +353,7 @@ namespace Z0
         /// Tests whether an expression is a logical conjunction
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        static bool IsConjunction<X>(this X x)
+        public static bool IsConjunction<X>(this X x)
             where X : Expression
             => x.TryGetConjunction().Exists;
 
@@ -502,7 +502,7 @@ namespace Z0
         /// Returns the expression if it is a logical conjunction and None otherwise
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        static Option<X> TryGetConjunction<X>(this X x)
+        public static Option<X> TryGetConjunction<X>(this X x)
             where X : Expression
             => x.NodeType == ExpressionType.AndAlso ? x : Option.none<X>();
 
@@ -510,7 +510,7 @@ namespace Z0
         /// Returns the expression if it is a logical disjunction and None otherwise
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        static Option<X> TryGetDisjunction<X>(this X x)
+        public static Option<X> TryGetDisjunction<X>(this X x)
             where X : Expression
                 => x.NodeType == ExpressionType.OrElse ? x : Option.none<X>();
 
@@ -518,7 +518,7 @@ namespace Z0
         /// Extracts the value from a constant expression or returns 
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        static object GetConstant(this Expression x)
+        public static object GetConstant(this Expression x)
             => cast<ConstantExpression>(x)?.Value;
     }
 }
