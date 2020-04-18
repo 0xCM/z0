@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.AsmTest)]
+//[assembly: PartId(PartId.AsmTest)]
 
 namespace Z0.Parts
 {

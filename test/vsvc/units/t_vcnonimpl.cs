@@ -9,15 +9,16 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+
     public class t_vcnonimpl : t_vsvc<t_vcnonimpl>
     {
         public void vcnonimpl_check()
         {            
-            vcnonimpl_check(n128);
-            vcnonimpl_check(n256);
+            vcnonimpl_check(w128);
+            vcnonimpl_check(w128);
         }
 
-        void vcnonimpl_check(N128 w)
+        void vcnonimpl_check(W128 w)
         {
             vcnonimpl_check(w, z8);                
             vcnonimpl_check(w, z8i);
@@ -30,7 +31,7 @@ namespace Z0
 
         }
 
-        void vcnonimpl_check(N256 w)
+        void vcnonimpl_check(W256 w)
         {
             vcnonimpl_check(w, z8);                
             vcnonimpl_check(w, z8i);
@@ -42,11 +43,11 @@ namespace Z0
             vcnonimpl_check(w, z64i);
         }            
 
-        void vcnonimpl_check<T>(N128 w, T t = default)
+        void vcnonimpl_check<T>(W128 w, T t = default)
             where T : unmanaged
                 => VChecks.CheckBinaryDecomp(VSvc.vcnonimpl(w,t), w, t);
             
-        void vcnonimpl_check<T>(N256 w, T t = default)
+        void vcnonimpl_check<T>(W256 w, T t = default)
             where T : unmanaged
                 => VChecks.CheckBinaryDecomp(VSvc.vcnonimpl(w,t), w, t);
      }

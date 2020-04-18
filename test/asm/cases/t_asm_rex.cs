@@ -6,6 +6,9 @@ namespace Z0.Asm
 {
     using System;
  
+    using static Seed;
+    using static Memories;
+
     using RFI = Z0.Asm.RexFieldIndex;
 
     public class t_asm_rex : UnitTest<t_asm_rex>

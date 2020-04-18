@@ -36,15 +36,15 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
-        // [MethodImpl(Inline)]
-        // public static Vector128<T> vshuf4x32<T>(Vector128<T> src, Arrange4L spec)
-        //     where T : unmanaged
-        //         => generic<T>(dvec.vshuf4x32(v32u(src), spec));
+        [MethodImpl(Inline)]
+        public static Vector128<T> vshuf4x32<T>(Vector128<T> src, [Imm] Arrange4L spec)
+            where T : unmanaged
+                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
-        // [MethodImpl(Inline)]
-        // public static Vector256<T> vshuf4x32<T>(Vector256<T> src, Arrange4L spec)
-        //     where T : unmanaged
-        //         => generic<T>(dvec.vshuf4x32(v32u(src), spec));
+        [MethodImpl(Inline)]
+        public static Vector256<T> vshuf4x32<T>(Vector256<T> src, [Imm] Arrange4L spec)
+            where T : unmanaged
+                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 8-bit source segments according to the shuffle spec

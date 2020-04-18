@@ -12,29 +12,35 @@ namespace Z0
     using DW = DataWidth;
     using TW = TypeWidth;
     using FW = FixedWidth;
+    using W = W1024;
 
-    public readonly struct W1024 : IFixedWidth<W1024> 
+    public readonly struct W1024 : IFixedWidth<W> 
     {
         public DW DataWidth => DW.W1024;         
 
-        public TW TypeWidth => TW.W1024; 
-
         public FW FixedWidth => FW.W1024; 
 
-        [MethodImpl(Inline)]
-        public static implicit operator int(W1024 src)
-            => (int)src.DataWidth;
+        public TW TypeWidth => TW.W1024; 
 
         [MethodImpl(Inline)]
-        public bool Equals(W1024 w) => true;
+        public static implicit operator int(W src) => (int)src.DataWidth;
 
-        public override string ToString() 
-            => DataWidth.FormatValue();
+        [MethodImpl(Inline)]
+        public static implicit operator DW(W src) => src.DataWidth;
+
+        [MethodImpl(Inline)]
+        public static implicit operator FW(W src) => src.FixedWidth;
+
+        [MethodImpl(Inline)]
+        public static implicit operator TW(W src) => src.TypeWidth;
+
+        [MethodImpl(Inline)]
+        public bool Equals(W w) => true;
+
+        public override string ToString() => DataWidth.FormatValue();
         
-        public override int GetHashCode()
-            => DataWidth.GetHashCode();
+        public override int GetHashCode() => DataWidth.GetHashCode();
 
-        public override bool Equals(object obj)
-            => obj is W1024;
+        public override bool Equals(object obj) => obj is W;
     }
 }

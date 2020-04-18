@@ -19,6 +19,7 @@ namespace Z0
         E Class {get;}
 
         string Name => Class.ToString().ToLower();
+
     }
 
     /// <summary>
@@ -46,5 +47,4 @@ namespace Z0
     {
         
     }
-
 }

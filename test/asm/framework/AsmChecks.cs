@@ -11,6 +11,7 @@ namespace Z0.Asm.Validation
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using System.IO;
+    using System.Reflection;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
@@ -717,23 +718,24 @@ namespace Z0.Asm.Validation
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
 
-        #if Dependencies
 
-        void capture_constants(in AsmBuffers buffers)
+        void capture_constants(in BufferSeq buffers)
         {
             var src = typeof(gmath).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
-
-            using var rawout = HexWriter(Context);            
-            using var hexout = CodeWriter(Context);
-            using var asmout = FunctionWriter(Context);            
+        
+            var control = MemberCaptureControl.New(Context);
+            var exchange = CaptureExchange.Create(control, buffers.Buffer(0), buffers.Buffer(1));
+            var capture = Context.Capture();
+            var decoder = Context.AsmFunctionDecoder();            
+            var captured = capture.Capture(exchange, src.Identify(), src).Require();
             
-            var decoder = Context.AsmFunctionDecoder();
-            var capture = buffers.Capture;
+            using var rawout = HexWriter();            
+            using var hexout = CodeWriter();
+            using var asmout = FunctionWriter();            
             
-            var data = capture.Capture(buffers.Exchange, src);        
-            hexout.WriteCode(data.Code);
-            rawout.WriteHexLine(data);
-            asmout.Write(decoder.DecodeFunction(data));
+            hexout.WriteCode(captured.Code);
+            rawout.WriteHexLine(captured);
+            asmout.Write(decoder.DecodeCaptured(captured).Require());
         }
 
         [MethodImpl(Inline)]
@@ -745,30 +747,34 @@ namespace Z0.Asm.Validation
         static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
             => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
 
-        void capture_shuffler(in AsmBuffers buffers)
+        void capture_shuffler(in BufferSeq buffers)
         {
             var f = shuffler<uint>(n2);
             var g = shuffler(n3);
 
-            using var rawout = HexWriter(Context);            
-            using var hexout = CodeWriter(Context);
-            using var asmout = FunctionWriter(Context);            
+            using var rawout = HexWriter();            
+            using var hexout = CodeWriter();
+            using var asmout = FunctionWriter();         
 
-            var capture = buffers.Capture;
+            var control = MemberCaptureControl.New(Context);
+            var exchange = CaptureExchange.Create(control, buffers.Buffer(0), buffers.Buffer(1));
+            var capture = Context.Capture();
             var decoder = Context.AsmFunctionDecoder();
 
-            var fData = capture.Capture(buffers.Exchange, f.Identify(), f);
-            hexout.WriteCode(fData.Code);
-            rawout.WriteHexLine(fData);
-            asmout.Write(decoder.DecodeFunction(fData));
+            var fCaptured = capture.Capture(exchange, f.Identify(), f).Require();
+            hexout.WriteCode(fCaptured.Code);
+            rawout.WriteHexLine(fCaptured);
+            asmout.Write(decoder.DecodeCaptured(fCaptured).Require());
 
-            var gData = capture.Capture(buffers.Exchange, g.Identify(), g);
-            hexout.WriteCode(gData.Code);
-            rawout.WriteHexLine(fData);
-            asmout.Write(decoder.DecodeFunction(gData));
+            var gCaptured = capture.Capture(exchange, g.Identify(), g).Require();
+            hexout.WriteCode(gCaptured.Code);
+            rawout.WriteHexLine(fCaptured);
+            asmout.Write(decoder.DecodeCaptured(gCaptured).Require());
         }
-
-        void binary_imm(in AsmBuffers buffers)
+        
+        MethodInfo Method => default;
+        
+        void binary_imm(in BufferSeq buffers)
         {
             var w = w256;
             var name = nameof(dvec.vblend8x16);
@@ -778,29 +784,33 @@ namespace Z0.Asm.Validation
             var x = Random.CpuVector<ushort>(w);
             var y = Random.CpuVector<ushort>(w);
             
-            var method = Intrinsics.Vectorized<ushort>(w, false, name).Single();            
+            //var method = Intrinsics.Vectorized<ushort>(w, false, name).Single();      
+            var capture = Context.Capture();
+            var control = MemberCaptureControl.New(Context);
+            var exchange = CaptureExchange.Create(control, buffers.Buffer(0), buffers.Buffer(1));
+            var decoder = Context.AsmFunctionDecoder();
+
+            var method = Method;
             var dynop = provider.EmbedImmediate(method,imm);
             var f = dynop.DynamicOp;
             var z1 = f.Invoke(x,y);
-            var decoder = Context.AsmFunctionDecoder();
-            var captured = Context.Capture().Capture(buffers.Exchange, dynop.Id, dynop);
-            var asm = decoder.DecodeFunction(captured);        
+            var captured = capture.Capture(exchange, dynop.Id, dynop).Require();
+            var asm = decoder.DecodeCaptured(captured);        
 
-
-            var g = buffers.MainExec.EmitFixedBinaryOp<Fixed256>(asm.Code.ApiCode);
+            var exec = buffers[2];
+            var g = exec.EmitFixedBinaryOp<Fixed256>(asm.Require().Code);
             var z3 = g(x,y).ToVector<ushort>();
             Claim.veq(z1,z3);
         }
 
-        void CheckImm(in BufferSeq buffers, in OpExtractExchange exchange)
+        void CheckImm(in BufferSeq buffers, in CaptureExchange exchange)
         {
             CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend4x32), (byte)Blend4x32.LRLR);    
             CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
             CheckUnaryImm<ushort>(buffers, exchange, w256, nameof(dvec.vbsll), 3);        
         }
 
-
-        void CheckBinaryImm<T>(in BufferSeq buffers, in OpExtractExchange exchange, W128 w, string name, byte imm)
+        void CheckBinaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W128 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = Context.V128BinaryOpImmInjector<T>();
@@ -808,22 +818,25 @@ namespace Z0.Asm.Validation
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
             
-            var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            //var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            var capture = Context.Capture();
+            var decoder = Context.AsmFunctionDecoder();
+
+            var method = Method;
             var dynop = provider.EmbedImmediate(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
-            var decoder = Context.AsmFunctionDecoder();
-            var captured = Context.Capture().Capture(exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(captured);
+            var captured = capture.Capture(exchange, dynop.Id, dynop).Require();            
+            var asm = decoder.DecodeCaptured(captured);
 
             // Trace(asm.Id);
             // iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffers[Main].EmitFixedBinaryOp<Fixed128>(asm.Code.ApiCode);
+            var f = buffers[Main].EmitFixedBinaryOp<Fixed128>(asm.Require().Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.veq(z1,z2);
         }
 
-        void CheckBinaryImm<T>(in OpExtractExchange exchange, BufferToken buffer, W256 w, string name, byte imm)
+        void CheckBinaryImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = Context.V256BinaryOpImmInjector<T>();
@@ -831,26 +844,29 @@ namespace Z0.Asm.Validation
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
             
-            var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            //var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            var method = Method;            
             var dynop = provider.EmbedImmediate(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
             
             var decoder = Context.AsmFunctionDecoder();
-            var captured = Context.Capture().Capture(in exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(captured);
+            var captured = Context.Capture().Capture(in exchange, dynop.Id, dynop).Require();            
+            var asm = decoder.DecodeCaptured(captured).Require();
 
             // Trace(asm.Id);
             // iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffer.EmitFixedBinaryOp<Fixed256>(asm.Code.ApiCode);
+            var f = buffer.EmitFixedBinaryOp<Fixed256>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.veq(z1,z2);
         }
 
-        void CheckUnaryImm<T>(in BufferSeq buffers, in OpExtractExchange exchange, W256 w, string name, byte imm)
+        void CheckUnaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W256 w, string name, byte imm)
             where T : unmanaged
         {            
-            var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            //var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            
+            var method = Method;            
             var provider = Context.V256UnaryOpImmInjector<T>();
 
             
@@ -860,13 +876,10 @@ namespace Z0.Asm.Validation
             var z1 = dynop.DynamicOp.Invoke(x);
             
             var decoder = Context.AsmFunctionDecoder();
-            var capture = Context.Capture().Capture(in exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(capture);
+            var capture = Context.Capture().Capture(in exchange, dynop.Id, dynop).Require();            
+            var asm = decoder.DecodeCaptured(capture).Require();
 
-            // Trace(asm.Id);
-            // iter(asm.Instructions, i => Trace(i));  
-
-            var f = buffers[Main].EmitFixedUnaryOp<Fixed256>(capture.Code.ApiCode);
+            var f = buffers[Main].EmitFixedUnaryOp<Fixed256>(capture.Code);
             var z2 = f(x.ToFixed()).ToVector<T>();
             Claim.veq(z1,z2);
 
@@ -875,29 +888,29 @@ namespace Z0.Asm.Validation
 
         void vector_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         {
-            var catalog = PartId.Intrinsics;
+            var catalog = PartId.GVec;
             
             var idD = Identify.Op(name, w, kind, false);
             var idG = Identify.Op(name, w, kind, true);
 
-            var d = Context.CodeArchive(catalog, nameof(dvec)).Read(idD).Single().ApiCode;
-            var g = Context.CodeArchive(catalog, nameof(gvec)).Read(idG).Single().ApiCode;
+            var d = Context.HostBitsArchive(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
+            var g = Context.HostBitsArchive(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
 
             Claim.require(binop_match(buffers, w,d,g));
         }
 
-        public void vadd_check(in BufferSeq buffers)
-        {
-            var catalog = PartId.Intrinsics;
-            var subject = nameof(dvec);
-            var name = nameof(dvec.vadd);
+        // public void vadd_check(in BufferSeq buffers)
+        // {
+        //     var catalog = PartId.GVec;
+        //     var host = ApiHost.Create<dvec>().UriPath;
+        //     var name = nameof(dvec.vadd);
 
-            vadd_check<byte>(buffers, w128, ReadAsm(catalog, subject, name, w128, z8));            
-            vadd_check<ushort>(buffers, w128, ReadAsm(catalog, subject, name, w128,z16));
-            vadd_check<uint>(buffers, w128, ReadAsm(catalog, subject, name, w128,z32));
-            vadd_check<ushort>(buffers, w256, ReadAsm(catalog, subject, name, w256,z16));
-            vadd_check<uint>(buffers, w256, ReadAsm(catalog, subject, name, w256,z32));
-        }
+        //     vadd_check<byte>(buffers, w128, ReadAsm(catalog, host, name, w128, z8));            
+        //     vadd_check<ushort>(buffers, w128, ReadAsm(catalog, host, name, w128,z16));
+        //     vadd_check<uint>(buffers, w128, ReadAsm(catalog, host, name, w128,z32));
+        //     vadd_check<ushort>(buffers, w256, ReadAsm(catalog, host, name, w256,z16));
+        //     vadd_check<uint>(buffers, w256, ReadAsm(catalog, host, name, w256,z32));
+        // }
 
 
         public void vector_bitlogic_match(in BufferSeq buffers)
@@ -911,7 +924,7 @@ namespace Z0.Asm.Validation
                 vector_match(buffers, n, w, k);                        
         }
 
-        void vadd_check<T>(in BufferSeq buffers, W128 w, ApiCode asm)
+        void vadd_check<T>(in BufferSeq buffers, W128 w, ApiBits asm)
             where T : unmanaged
         {            
             var f = buffers[Main].EmitFixedBinaryOp(w,asm);            
@@ -919,7 +932,7 @@ namespace Z0.Asm.Validation
         }
 
 
-        void vadd_check<T>(in BufferSeq buffers, W256 w, ApiCode asm)
+        void vadd_check<T>(in BufferSeq buffers, W256 w, ApiBits asm)
             where T : unmanaged
         {            
             var f = buffers[Main].EmitFixedBinaryOp(w,asm);
@@ -935,8 +948,7 @@ namespace Z0.Asm.Validation
                 Claim.eq(d.Location, ptr(d.GetBytes()));
         }
 
-        #endif
-
+ 
         [MethodImpl(Inline)]
         static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
             => v => Avx2.ShiftLeftLogical(v,imm);

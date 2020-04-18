@@ -5,8 +5,5 @@
   <Import Project="$(Test)symbols.props"/>
   <Import Project="$(Native)symbols.props"/>
 
-  <PropertyGroup>  
-    <Parts>$(TopDir)parts/z0.parts.csproj</Parts>
-  </PropertyGroup>
   
 </Project>

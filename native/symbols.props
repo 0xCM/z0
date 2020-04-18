@@ -2,8 +2,8 @@
 
 
   <PropertyGroup>
-    <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
-    <LibM>$(NativeDir)libm/z0.libm.csproj</LibM>
+    <MklApi>$(Native)mkl/src/z0.mkl.csproj</MklApi>
+    <LibM>$(Native)libm/z0.libm.csproj</LibM>
   </PropertyGroup>
 
 </Project>

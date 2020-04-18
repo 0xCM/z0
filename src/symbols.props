@@ -1,6 +1,7 @@
 <Project>
 
   <PropertyGroup>
+    <Parts>$(Src)parts/z0.parts.csproj</Parts>
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
     <Agency>$(Src)agency/z0.agency.csproj</Agency>
     <Messages>$(Src)messages/z0.messages.csproj</Messages>

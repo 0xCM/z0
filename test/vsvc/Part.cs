@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class VSvcTest : Part<VSvcTest> 
+    public sealed class VSvcTest : ExecutablePart<VSvcTest> 
     {
-         
+         public override void Execute(params string[] args) => App.Run(args);
     }
 }

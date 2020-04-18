@@ -10,7 +10,7 @@ namespace Z0.Asm
     
     using static Seed;
 
-    readonly struct MemberCaptureControl : IMemberCaptureControl
+    public readonly struct MemberCaptureControl : IMemberCaptureControl
     {                    
         readonly IContext Context;
 
