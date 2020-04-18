@@ -13,12 +13,12 @@ namespace Z0
 
     partial class gvec
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bit vtestznc<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
                 => vtestznc_u(src,mask);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bit vtestznc<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
                 => vtestznc_u(src,mask);

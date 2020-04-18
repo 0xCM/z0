@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vrotlx<T>(Vector128<T> src, [Imm] byte count)        
             where T : unmanaged
                 => generic<T>(dvec.vrotlx(v64u(src), count));
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vrotlx<T>(Vector256<T> src, [Imm] byte count)        
             where T : unmanaged
                 => generic<T>(dvec.vrotlx(v64u(src), count));

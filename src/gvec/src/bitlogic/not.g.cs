@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
 
     partial class gvec
     {
@@ -20,7 +19,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Not, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Not, Closures(Integers)]
         public static Vector128<T> vnot<T>(Vector128<T> x)
             where T : unmanaged
                 => vnot_u(x);
@@ -31,7 +30,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Not, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Not, Closures(Integers)]
         public static Vector256<T> vnot<T>(Vector256<T> x)
             where T : unmanaged
                 => vnot_u(x);
@@ -42,7 +41,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Not, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Not, Closures(Integers)]
         public static Vector512<T> vnot<T>(in Vector512<T> x)
             where T : unmanaged
                 => (vnot(x.Lo), vnot(x.Hi));

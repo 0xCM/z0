@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static Seed; 
     using static Memories;
@@ -31,7 +30,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vperm16x8<T>(Vector256<T> src, Vector256<byte> spec)        
             where T : unmanaged
                 => vperm16x8_u(src,spec);

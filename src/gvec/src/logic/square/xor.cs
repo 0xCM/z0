@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     partial class LogicSquares
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Unsigned)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void xor<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {

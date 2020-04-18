@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
         
     using static Seed;
     using static Vectors;
@@ -36,12 +35,12 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vshuf4x32<T>(Vector128<T> src, [Imm] Arrange4L spec)
             where T : unmanaged
                 => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vshuf4x32<T>(Vector256<T> src, [Imm] Arrange4L spec)
             where T : unmanaged
                 => generic<T>(dvec.vshuf4x32(v32u(src), spec));

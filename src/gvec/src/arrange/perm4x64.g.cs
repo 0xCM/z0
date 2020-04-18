@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static Seed;
     using static Vectors;
@@ -25,10 +24,10 @@ namespace Z0
             where T : unmanaged
                 => vperm4x64_u(x,spec);
 
-        // [MethodImpl(Inline)]
-        // public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)
-        //     where T : unmanaged
-        //         => vperm4x64_u(x, (byte)spec);
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)
+            where T : unmanaged
+                => vperm4x64_u(x, (byte)spec);
 
         [MethodImpl(Inline)]
         static Vector256<T> vperm4x64_u<T>(Vector256<T> x, byte spec)

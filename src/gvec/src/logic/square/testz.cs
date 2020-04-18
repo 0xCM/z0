@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     partial class LogicSquares
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Unsigned)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bit testz<T>(in T A, in T B)
             where T : unmanaged
         {

@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Nand, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Nand, Closures(AllNumeric)]
         public static Vector128<T> vnand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vnand_u(x,y);
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Nand, Closures(NumericKind.All)]        
+        [MethodImpl(Inline), Nand, Closures(AllNumeric)]        
         public static Vector256<T> vnand<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vnand_u(x,y);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Nand, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Nand, Closures(AllNumeric)]
         public static Vector512<T> vnand<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vnand(x.Lo,y.Lo), (vnand(x.Hi, y.Hi)));

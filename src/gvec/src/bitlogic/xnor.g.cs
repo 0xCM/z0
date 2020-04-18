@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
 
     partial class gvec
     {
@@ -19,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Xnor, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Xnor, Closures(AllNumeric)]
         public static Vector128<T> vxnor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vxnor_u(x,y);
@@ -29,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Xnor, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Xnor, Closures(AllNumeric)]
         public static Vector256<T> vxnor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vxnor_u(x,y);

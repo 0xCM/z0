@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Nor, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Nor, Closures(AllNumeric)]
         public static Vector128<T> vnor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vnor_u(x,y);
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Nor, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Nor, Closures(AllNumeric)]
         public static Vector256<T> vnor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vnor_u(x,y);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Nor, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Nor, Closures(AllNumeric)]
         public static Vector512<T> vnor<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vnor(x.Lo,y.Lo), (vnor(x.Hi, y.Hi)));

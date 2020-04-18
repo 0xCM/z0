@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
 
     partial class gvec
     {
@@ -20,7 +19,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> valt<T>(W256 w, T a, T b)
             where T : unmanaged
                 => gvec.vblend(Vectors.vbroadcast(w,a), Vectors.vbroadcast(w,b), Data.blendspec<T>(w,false));
@@ -31,8 +30,12 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vblendv<T>(Vector128<T> x, Vector128<T> y, Vector128<T> spec)        
+            where T : unmanaged
+                => vblendv_u(x,y,spec);
+
+        static Vector128<T> vblendv_u<T>(Vector128<T> x, Vector128<T> y, Vector128<T> spec)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -53,8 +56,12 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vblendv<T>(Vector256<T> x, Vector256<T> y, Vector256<T> spec)        
+            where T : unmanaged
+                => vblendv_u(x,y,spec);
+
+        static Vector256<T> vblendv_u<T>(Vector256<T> x, Vector256<T> y, Vector256<T> spec)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -111,7 +118,6 @@ namespace Z0
                 return generic<T>(dvec.vblendv(v64i(x), v64i(y), v64i(spec)));
             else
                 return vblendv_f(x,y,spec);
-
         }
 
         [MethodImpl(Inline)]

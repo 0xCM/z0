@@ -20,17 +20,17 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vperm2x128<T>(Vector256<T> x, Vector256<T> y, [Imm] byte spec)
             where T : unmanaged
                 => vperm2x128_u(x,y,spec);
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector512<T> vperm2x128<T>(in Vector512<T> src, [Imm] byte lo, [Imm] byte hi)
             where T : unmanaged
                 => (vperm2x128(src.Lo, src.Hi, lo),vperm2x128(src.Lo, src.Hi, hi));
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector512<T> vperm2x128<T>(in Vector512<T> src, Perm2x4 lo, Perm2x4 hi)
             where T : unmanaged
                 => (vperm2x128(src.Lo, src.Hi, lo),vperm2x128(src.Lo, src.Hi, hi));
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vperm2x128<T>(Vector256<T> x, Vector256<T> y, [Imm] Perm2x4 spec)
             where T : unmanaged
                 => vperm2x128_u(x,y,(byte)spec);

@@ -21,5 +21,4 @@ namespace Z0
         /// </summary>
         D1 = 1
     }
-
 }
