@@ -113,10 +113,10 @@ namespace Z0
             var x1 = (UInt4)1;
             var x2 = (UInt4)2;
             var x3 = (UInt4)3;
-            Claim.eq(x0.Format(), "0");
-            Claim.eq(x1.Format(), "1");
-            Claim.eq(x2.Format(), "2");
-            Claim.eq(x3.Format(), "3");
+            Primal.eq(x0.Format(), "0");
+            Primal.eq(x1.Format(), "1");
+            Primal.eq(x2.Format(), "2");
+            Primal.eq(x3.Format(), "3");
 
         }
 
@@ -190,9 +190,7 @@ namespace Z0
             x0.Lo = (UInt4)0b01;
             x0.Hi = (UInt4)0b01;
             var y0 = (UInt4)0b0101;
-            Claim.eq(y0,x0);
-            
+            Claim.eq(y0,x0);            
         }
-
     }
 }

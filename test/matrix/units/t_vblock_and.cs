@@ -55,7 +55,7 @@ namespace Z0
             var result = Linear.and(u, v);            
             var expect = and(u.Data, v.Data);
             
-            CheckNumeric.eq(expect.Data, result.Data);
+            Numeric.eq(expect.Data, result.Data);
         }
     }
 }

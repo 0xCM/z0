@@ -12,8 +12,6 @@
     <ProjectReference Include="$(Permute)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitSpans)" />
-    <ProjectReference Include="$(Checks)" />
-
   </ItemGroup>
 
 </Project>

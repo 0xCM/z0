@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Security;
 
-
     [SuppressUnmanagedCodeSecurity]
     public delegate bit BinaryOp1(bit a, bit b);
 

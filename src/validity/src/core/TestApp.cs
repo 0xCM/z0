@@ -118,7 +118,7 @@ namespace Z0
             }
         }
 
-        IAppPaths Paths => Context.AppPaths;
+        //IAppPaths Paths => Context.AppPaths;
 
         const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
         

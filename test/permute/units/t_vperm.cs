@@ -29,7 +29,7 @@ namespace Z0
         public void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
-                => CheckNumeric.eq(lhs.Data,rhs.Data);
+                => Numeric.eq(lhs.Data,rhs.Data);
 
         /// <summary>
         /// Asserts content equality for two tabular spans of coincident dimension
@@ -46,7 +46,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged 
-                => CheckNumeric.eq(lhs.Data, rhs.Data);
+                => Numeric.eq(lhs.Data, rhs.Data);
 
 
         public void perm_symbols()
@@ -67,16 +67,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            CheckNumeric.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
+            Numeric.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            CheckNumeric.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
+            Numeric.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            CheckNumeric.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
+            Numeric.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            CheckNumeric.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
+            Numeric.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermlo_4x16_outline()

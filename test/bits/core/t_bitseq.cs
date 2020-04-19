@@ -53,8 +53,8 @@ namespace Z0
                 BitStore.storeseq(a,s0);
                 BitStore.storeseq(a,s1);
                 s2 = BitStore.storeseq(a);
-                CheckNumeric.eq(s0, s1);
-                CheckNumeric.eq(s1, s2);
+                Numeric.eq(s0, s1);
+                Numeric.eq(s1, s2);
             }
         }
     }

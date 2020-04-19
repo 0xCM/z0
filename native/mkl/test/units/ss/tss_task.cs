@@ -23,7 +23,7 @@ namespace Z0.Mkl
             {
                 var v = sorted.Observation(i);
                 for(var j = 0; j< dim - 1; j++)
-                    CheckNumeric.lteq(v[j], v[j+1]);                    
+                    Numeric.lteq(v[j], v[j+1]);                    
             }                    
         }
     }

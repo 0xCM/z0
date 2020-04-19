@@ -16,8 +16,12 @@ namespace Z0
 
         protected ICheck Claim => ICheck.Checker;
 
-        protected ICheckNumeric CheckNumeric => ICheckNumeric.Checker;
+        protected ICheckPrimalSeq Primal => Claim;
 
+        protected ICheckNumeric Numeric => ICheckNumeric.Checker;
+
+        protected ICheckEquatable Equatable => ICheckEquatable.Checker;
+    
         public static N0 n0 => default;
 
         public static N1 n1 => default;

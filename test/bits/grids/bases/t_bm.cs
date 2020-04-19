@@ -26,9 +26,9 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.and(A,B).Data;
                 var C2 = gspan.and(A.Data, B.Data);
-                CheckNumeric.eq(A.Order, nati<N>());
-                CheckNumeric.eq(B.Order, nati<N>());                
-                CheckNumeric.eq(C1,C2);
+                Numeric.eq(A.Order, nati<N>());
+                Numeric.eq(B.Order, nati<N>());                
+                Numeric.eq(C1,C2);
             }
         }
 
@@ -72,9 +72,9 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.xor(A, B).Data;
                 var C2 = xor(A.Data, B.Data);
-                CheckNumeric.eq(A.Order, nati<N>());
-                CheckNumeric.eq(B.Order, nati<N>());                
-                CheckNumeric.eq(C1,C2);
+                Numeric.eq(A.Order, nati<N>());
+                Numeric.eq(B.Order, nati<N>());                
+                Numeric.eq(C1,C2);
             }
         }
 
@@ -112,7 +112,7 @@ namespace Z0
                 {
                     var x = vector[col];
                     var y = src[row,col];
-                    CheckNumeric.eq(vector[col], src[row,col]);
+                    Numeric.eq(vector[col], src[row,col]);
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace Z0
                 var B = A.Transpose();
                 for(var i=0; i<B.RowCount; i++)
                 for(var j=0; j<B.ColCount; j++)
-                    CheckNumeric.eq(B[i,j], A[j,i]);
+                    Numeric.eq(B[i,j], A[j,i]);
             }
         }
 

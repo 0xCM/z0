@@ -17,7 +17,7 @@ namespace Z0.Mkl
             var s1Range = Interval.closed(350.0, 1000.0);
             var s1 = Random.Array<double>(samplesize, s1Range);
             var s1Max = Dataset.Load(s1).Max()[0];
-            CheckNumeric.neq(s1Max,0.0);
+            Numeric.neq(s1Max,0.0);
 
             var zeroCount = s1.Count(x => x == 0);
             Notify($"Found {zeroCount} zeroes");

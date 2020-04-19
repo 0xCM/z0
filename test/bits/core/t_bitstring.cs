@@ -136,7 +136,7 @@ namespace Z0
         {
             var x = (byte)0b10110110;
             var y = x.ToBitString();
-            Claim.eq("10110110", y);
+            Claim.eq("10110110".ToBitString(), y);
             Claim.eq(5, y.PopCount());
             
             var z = y.Pack();
@@ -198,7 +198,7 @@ namespace Z0
             {
                 var w = words[i];
                 var value = w.TakeScalar<byte>();
-                CheckNumeric.eq(i, value);
+                Numeric.eq(i, value);
             }
         }    
 
@@ -233,10 +233,10 @@ namespace Z0
 
         public void bs_tlz()
         {
-            Claim.eq("100", BitString.scalar(0b00000100).Format(true));
-            Claim.eq("101", BitString.scalar(0b00000101).Format(true));
-            Claim.eq("1000101", BitString.scalar(0b01000101).Format(true));
-            Claim.eq("11010101", BitString.scalar(0b11010101).Format(true));
+            Primal.eq("100", BitString.scalar(0b00000100).Format(true));
+            Primal.eq("101", BitString.scalar(0b00000101).Format(true));
+            Primal.eq("1000101", BitString.scalar(0b01000101).Format(true));
+            Primal.eq("11010101", BitString.scalar(0b11010101).Format(true));
         }
 
         public void bs_parselit()
@@ -259,7 +259,7 @@ namespace Z0
             
             var byx = BitConverter.GetBytes(x).ToSpan();
             var byy = Bytes.write(x);
-            CheckNumeric.eq(byx,byy);
+            Numeric.eq(byx,byy);
         }
 
         public void bs_assemble()
@@ -285,7 +285,6 @@ namespace Z0
                     bytes[j++], bytes[j++], bytes[j++], bytes[j++]);
                 Claim.eq(x,y);                
             }
-
         }
 
         void bs_seq_check<T>()
@@ -364,7 +363,7 @@ namespace Z0
                 var bs = BitString.scalar(src[i]);
                 var y = bs.TakeScalar<T>();
                 Claim.eq(x,y);
-                Claim.eq(bs.Format(), BitString.scalar(y).Format());
+                Primal.eq(bs.Format(), BitString.scalar(y).Format());
             }
         }
 
@@ -376,7 +375,7 @@ namespace Z0
             {
                 var bc1 =  BitString.scalar(src[i]).Format();
                 var bc3 = BitString.scalar(src[i]);
-                Claim.eq(bc1,bc3);
+                Primal.eq(bc1,bc3);
             }
         }
     }

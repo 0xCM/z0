@@ -15,6 +15,11 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    public readonly struct CheckInvariant : ICheckInvariant
+    {
+
+    }
+
     public interface ICheckInvariant : IValidator
     {         
         void nongeneric(MethodInfo src)

@@ -16,6 +16,11 @@ namespace Z0
     using static Seed;
     using static AppErrorMsg;
 
+    public readonly struct CheckSets : ICheckSets
+    {
+
+    }
+
     public interface ICheckSets : IValidator
     {
         /// <summary>

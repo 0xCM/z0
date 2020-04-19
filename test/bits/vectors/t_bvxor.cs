@@ -249,19 +249,19 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.BitVector<T>(width);
-                CheckNumeric.lteq(BitVector.width(x), width);
+                Numeric.lteq(BitVector.width(x), width);
                 
                 var y = Random.BitVector<T>(width);
-                CheckNumeric.lteq(BitVector.width(y),width);
+                Numeric.lteq(BitVector.width(y),width);
 
                 var z = x ^ y;
-                CheckNumeric.eq(gmath.xor(x.Scalar, y.Scalar), z.Scalar);
+                Numeric.eq(gmath.xor(x.Scalar, y.Scalar), z.Scalar);
 
                 var xbs = x.ToBitString().Truncate(width);
                 Claim.eq(width, xbs.Length);
 
                 var ybs = y.ToBitString().Truncate(width);
-                CheckNumeric.eq(width, ybs.Length);
+                Numeric.eq(width, ybs.Length);
 
                 var zbs = xbs.Xor(ybs);
 

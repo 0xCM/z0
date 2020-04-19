@@ -14,28 +14,17 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckApproximate : ICheckLengths
+    public readonly struct CheckClose : ICheckClose
     {
-        [MethodImpl(Inline)]
-        private static ulong dist(double a, double b)
-            => a >= b ? (ulong)(a - b) : (ulong)(b - a);
 
-        [MethodImpl(Inline)]
-        private static double relerr(double lhs, double rhs)
-        {
-            var err = dist(lhs,rhs)/lhs;
-            return double.IsNaN(err) ? 0 : err;
-        }
+    }
 
-        [MethodImpl(Inline)]
-        private static bool within(double a, double b, double delta)
-            => a > b ? a - b <= delta 
-              : b - a <= delta;
-
+    public interface ICheckClose : ICheckLengths
+    {
         [MethodImpl(Inline)]   
         bool almost(float lhs, float rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            var err = relerr(lhs,rhs);
+            var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;            
             return err < tolerance ? true : throw failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
@@ -43,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         bool almost(double lhs, double rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            var err = relerr(lhs,rhs);
+            var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;            
             return err < tolerance ? true : throw failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }

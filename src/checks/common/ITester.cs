@@ -9,6 +9,12 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+    public interface ITester : ITestOptions, IPolyrandContext, ITestCaseIdentity
+    {
+
+    }
+        
+
     public interface ITestOptions
     {
         int RepCount => 128;
@@ -27,5 +33,5 @@ namespace Z0
         /// The number of times to repeat a cycle
         /// </summary>
         int RoundCount => Pow2.T01;
-    }
+    }    
 }

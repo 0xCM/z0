@@ -13,6 +13,6 @@ namespace Z0
     public abstract class t_inx<X> : UnitTest<X>
         where X : t_inx<X>
     {
-        protected new IVectorCheck Claim => IVectorCheck.Checker;
+        protected new ICheck Claim => ICheck.Checker;
     }
 }

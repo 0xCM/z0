@@ -239,13 +239,13 @@ namespace Z0
             {
                 var x = Random.BitVector(n128, n, t);
                 var y = Random.BitVector(n128,n, t);
-                CheckNumeric.lteq(x.ToBitString().Nlz(), x.Width);
+                Numeric.lteq(x.ToBitString().Nlz(), x.Width);
 
                 var a = x % y;
                 var xc = x.ToBitCells();
                 var yc = y.ToBitCells();
                 var b = xc % yc;
-                CheckNumeric.eq(a,b);
+                Numeric.eq(a,b);
             }
         }
 

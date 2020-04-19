@@ -10,13 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Reports)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(Checks)" />
-    <ProjectReference Include="$(Spans)" />
 
   </ItemGroup>
 

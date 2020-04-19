@@ -26,6 +26,7 @@ namespace Z0
             }
         }
 
+
         public void bsequals()
         {
             for(var i=0; i<RepCount; i++)
@@ -246,12 +247,12 @@ namespace Z0
                 if(gmath.even(i))
                 {
                     Claim.require(bitspan[i]);
-                    Claim.eq(bit.One, format[j]);
+                    Primal.eq(bit.One, format[j]);
                 }
                 else
                 {
                     Claim.nea(bitspan[i]);
-                    Claim.eq(bit.Zero, format[j]);
+                    Primal.eq(bit.Zero, format[j]);
                 }
             }            
         }

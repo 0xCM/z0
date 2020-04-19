@@ -6,27 +6,25 @@ namespace Z0
 {
     using System;
         
+    using static Seed;
     using static AppErrorMsg;
 
-    public interface IBitStringEqualityCheck : IValidator
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
+    public interface IBitStringCheck : IValidator
     {
-        void eq(BitString a, BitString b, string caller, string file, int? line)
+        void eq(BitString a, BitString b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(!a.Equals(b))
                 throw failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
         }
 
-        void neq(BitString a, BitString b, string caller, string file, int? line)
+        void neq(BitString a, BitString b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(a.Equals(b))
                 throw failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
         }
     }
-
-    public interface IBitStringCheck : IBitStringEqualityCheck
-    {
-
-    }
-
-
 }

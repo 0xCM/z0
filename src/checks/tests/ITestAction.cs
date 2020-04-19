@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-    public interface ITestAction : ITestValidator
+    public interface ITestAction : ITester
     {
         /// <summary>
         /// Captures the outcome of an action invocation, identified by a supplied label

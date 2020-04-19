@@ -18,7 +18,7 @@ namespace Z0
                 var x = Random.Next<uint>();
                 var y = x.AsBytes();
                 Span<byte> z = BitConverter.GetBytes(x);
-                CheckNumeric.eq(y,z);
+                Numeric.eq(y,z);
             }
         }
 
@@ -29,7 +29,7 @@ namespace Z0
                 var x = Random.Next<ulong>();
                 var y = x.AsBytes();
                 Span<byte> z = BitConverter.GetBytes(x);
-                CheckNumeric.eq(y,z);
+                Numeric.eq(y,z);
             }
         }
 
@@ -40,7 +40,7 @@ namespace Z0
                 var x = Random.Next<double>();
                 var y = x.AsBytes();
                 Span<byte> z = BitConverter.GetBytes(x);
-                CheckNumeric.eq(y,z);
+                Numeric.eq(y,z);
             }
         }
     }

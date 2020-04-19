@@ -31,12 +31,12 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var xpos = gbits.msbpos(x);
-                CheckNumeric.lt(xpos, (int)bitsize<T>());
+                Numeric.lt(xpos, (int)bitsize<T>());
                 
                 var xcount = gbits.nlz(x);
                 var bs = BitString.scalar(x);
                 var bscount = bs.Nlz();
-                CheckNumeric.eq(xcount, bscount);
+                Numeric.eq(xcount, bscount);
                 
                 var bspos = bs.Length - 1 - bscount;
                 Claim.eq(xpos,bspos);

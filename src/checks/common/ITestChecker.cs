@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics;
+    using System.Runtime.CompilerServices;
+    
+    using static Seed;
+    using static Memories;
 
-    public class t_butterfly : t_bitcore<t_butterfly>    
+    public interface ITestChecker : ITester, ITestResultSink
     {
-        public void bfly_4x2()
-        {
-
-
-        }
-
-
+        
     }
+
 }

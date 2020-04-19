@@ -11,7 +11,7 @@ namespace Z0
     
     using static Seed;
 
-    public interface ICheckAction : IValidator
+    public interface ICheckAction : ITestChecker
     {
         /// <summary>
         /// Manages the execution of an identified action that performs a validation exercise

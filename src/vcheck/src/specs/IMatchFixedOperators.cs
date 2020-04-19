@@ -10,8 +10,10 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public interface IMatchFixedOperators : ITestAction, ICheckEquatable
+    public interface IMatchFixedOperators : ITestAction, ICheckVectors
     {
+        ICheckEquatable Equatable => default(CheckEquatable);
+        
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points
         /// </summary>
@@ -28,7 +30,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    eq(f(x,y),g(x,y));
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -51,7 +53,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    eq(f(x,y),g(x,y));
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -74,7 +76,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    eq(f(x,y),g(x,y));
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -99,7 +101,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    eq(a,b);
+                    Equatable.eq(a,b);
                 }
             }
 
@@ -123,7 +125,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    eq(f(x,y),g(x,y));
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -146,11 +148,51 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    eq(f(x,y),g(x,y));
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
             return TestAction(check, MatchCaseName(fId, gId));
         }        
+
+
+        TestCaseRecord TestMatch<T>(BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
+            where T : unmanaged
+        {
+            var w = w128;
+            var t = default(T);
+
+            void check()
+            {
+                for(var i=0; i<RepCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var y = Random.CpuVector(w,t);
+                    eq(f(x,y), g.Apply(x,y));
+                }
+            }            
+
+            return TestAction(check, CaseName<T>($"{fId}~/~{gId}"));                   
+        }
+
+        TestCaseRecord TestMatch<T>(BinaryOp<Vector256<T>> f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
+            where T : unmanaged
+        {
+            var w = w256;
+            var t = default(T);
+
+            void check()            
+            {
+
+                for(var i=0; i<RepCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var y = Random.CpuVector(w,t);
+                    eq(f(x,y), g.Apply(x,y));
+                }
+            }            
+
+            return TestAction(check, CaseName<T>($"{fId}~/~{gId}"));            
+        }         
     }
 }

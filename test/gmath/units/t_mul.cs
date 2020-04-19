@@ -34,8 +34,8 @@ namespace Z0
                 Claim.eq(hi, b);
 
                 BmiMul.mul(z,MAX, out uint c, out uint d);
-                CheckNumeric.gt(c,0u);
-                CheckNumeric.gt(d,0u);
+                Numeric.gt(c,0u);
+                Numeric.gt(d,0u);
 
                 var c2 = (uint)(((ulong)z) * ((ulong)(MAX)));
                 Claim.eq(c2, c);
@@ -87,15 +87,15 @@ namespace Z0
                 var hi = BmiMul.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                CheckNumeric.nonzero(BmiMul.mulhi(z,MAX));
+                Numeric.nonzero(BmiMul.mulhi(z,MAX));
 
                 BmiMul.mul(x,y, out ulong a, out ulong b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
                 BmiMul.mul(z,MAX, out ulong c, out ulong d);
-                CheckNumeric.gt(c,0ul);
-                CheckNumeric.gt(d,0ul);
+                Numeric.gt(c,0ul);
+                Numeric.gt(d,0ul);
             }
         }        
 

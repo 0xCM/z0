@@ -55,7 +55,7 @@ namespace Z0
                     var before = gbits.test(x, j);
                     x = gbits.toggle(x, j);
                     var after = gbits.test(x, j);
-                    CheckNumeric.neq(before, after);
+                    Numeric.neq(before, after);
                     x = gbits.toggle(x, j);
                     Claim.eq(x, src[i]);
                 }
@@ -87,24 +87,21 @@ namespace Z0
             Claim.require(gbits.test(0b00000111, (byte)2));
         }
 
-
         public void enable_outline()
         {
             var x1 = (sbyte)0;
             var y1 = Bits.enable(x1, 7);
             Claim.eq(SByte.MinValue, y1);
-            Claim.eq("10000000", y1.ToBitString());
+            Primal.eq("10000000", y1.ToBitString());
 
 
             var x2 = (byte)0;
             var y2 = Bits.enable(x2, 7);
             Claim.eq(SByte.MinValue, (sbyte)y1);
-            Claim.eq("10000000", y1.ToBitString());
+            Primal.eq("10000000", y1.ToBitString());
 
             var x3 = -1;
-            Claim.eq(x3 >> 10, -1);
-            
+            Claim.eq(x3 >> 10, -1);            
         }
     }
-
 }

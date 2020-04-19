@@ -9,8 +9,15 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+    public readonly struct TestCaseIdentity : ITestCaseIdentity
+    {
+
+    }
+    
     public interface ITestCaseIdentity : IValidator
     {
+        private const char Sep = UriDelimiters.PathSep;
+
         Type ValidatorType => GetType();
 
         /// <summary>
@@ -24,7 +31,11 @@ namespace Z0
             => OpUriBuilder.TestCase(ValidatorType, label);
 
         string CaseName(ISFuncApi f) 
-            => TestCaseIdentity.sfunc(ValidatorType, f);
+            =>$"{Identify.owner(ValidatorType)}{Sep}{ValidatorType.Name}{Sep}{f.Id}";
+
+        OpIdentity BaselineId<K>(string label,K t = default)
+            where K : unmanaged
+                => Identify.sfunc<K>($"{label}_baseline");
 
         string CaseName<W,T>(ISFuncApi f, bool generic = true)
             where W : unmanaged, ITypeWidth

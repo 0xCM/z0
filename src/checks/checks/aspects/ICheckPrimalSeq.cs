@@ -13,7 +13,12 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckPrimalSeq : ICheckLengths, ICheckInvariant
+    public readonly struct CheckPrimalSeq : ICheckPrimalSeq
+    {
+
+    }
+    
+    public interface ICheckPrimalSeq : ICheckLengths, ICheckInvariant, ICheckPrimal
     {
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise

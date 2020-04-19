@@ -117,7 +117,7 @@ namespace Z0
                 byte b = (byte)i;
                 var x = BitStore.bitseq(b);
                 var y = BitStore.select(b);
-                CheckNumeric.eq(x,y);
+                Numeric.eq(x,y);
 
                 var up1 = BitStore.select((byte)i);
                 Span<byte> up2 = stackalloc byte[8];

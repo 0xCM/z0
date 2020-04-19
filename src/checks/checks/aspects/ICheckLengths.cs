@@ -9,6 +9,11 @@ namespace Z0
 
     using static Seed;
 
+    public readonly struct CheckLengths : ICheckLengths
+    {
+
+    }
+
     public interface ICheckLengths : IValidator
     {
         [MethodImpl(Inline)]   

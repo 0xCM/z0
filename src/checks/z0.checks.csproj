@@ -9,7 +9,7 @@
     <ProjectReference Include="$(Seed)" />    
     <ProjectReference Include="$(Messages)" />
     <ProjectReference Include="$(Spans)" />
-    <ProjectReference Include="$(Records)" />
+    <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(GMath)" />
   </ItemGroup>
 

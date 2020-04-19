@@ -8,24 +8,24 @@ namespace Z0
 
     using static Seed;
 
+    public readonly struct Check : ICheck
+    {                    
+
+    }    
+
     public interface ICheck : 
         IChecker<Check>, 
         ICheckLengths, 
         ICheckPrimal, 
         ICheckPrimalSeq, 
-        ICheckApproximate, 
+        ICheckClose, 
         ICheckFileSystem,
         ICheckInvariant,
         ICheckEqual,
-        ICheckVectorEquality,
         ICheckSets,
-        ICheckNull
+        ICheckNull,
+        ICheckVectors
     {
         
     }
-
-    public readonly struct Check : ICheck
-    {                    
-
-    }    
 }
