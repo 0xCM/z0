@@ -8,13 +8,10 @@ namespace Z0
     
     using Id = OpKindId;
 
-
     public enum FunctionKind : ulong
     {
         None = 0,
 
-
         Broadcast = Id.Broadcast,
-
     }
 }

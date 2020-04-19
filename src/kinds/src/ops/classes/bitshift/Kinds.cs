@@ -9,32 +9,21 @@ namespace Z0
     
     using static Seed;
 
-    using Id = BitShiftKind;
+    using K = BitShiftKind;
+    using I = IBitShiftKind;
 
     partial class Kinds
     {
-        public readonly struct Sll : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Sll; } }
+        public readonly struct Sll : I { public K Kind { [MethodImpl(Inline)] get => K.Sll; } }
 
-        public readonly struct Sllv : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Sllv; } }
+        public readonly struct Sllv : I { public K Kind { [MethodImpl(Inline)] get => K.Sllv; } }
 
-        public readonly struct Srl : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Srl; } }
+        public readonly struct Srl : I { public K Kind { [MethodImpl(Inline)] get => K.Srl; } }
 
-        public readonly struct Srlv : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Srlv; } }
+        public readonly struct Srlv : I { public K Kind { [MethodImpl(Inline)] get => K.Srlv; } }
 
-        public readonly struct Rotl : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Rotl; } }
+        public readonly struct Rotl : I { public K Kind { [MethodImpl(Inline)] get => K.Rotl; } }
 
-        public readonly struct Rotr : IBitShiftKind { public Id Kind { [MethodImpl(Inline)] get => Id.Rotr; } }
-
-        public readonly struct Sll<T> : IBitShiftKind<Sll,T> where T : unmanaged {}
-
-        public readonly struct Sllv<T> : IBitShiftKind<Sllv,T> where T : unmanaged {}
-
-        public readonly struct Srl<T> : IBitShiftKind<Srl,T> where T : unmanaged {}
-
-        public readonly struct Srlv<T> : IBitShiftKind<Srlv,T> where T : unmanaged {}
-
-        public readonly struct Rotl<T> : IBitShiftKind<Rotl,T> where T : unmanaged {}
-
-        public readonly struct Rotr<T> : IBitShiftKind<Rotr,T> where T : unmanaged {}
+        public readonly struct Rotr : I { public K Kind { [MethodImpl(Inline)] get => K.Rotr; } }
     }
 }

@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Structured)" />
   </ItemGroup>
 
 </Project>

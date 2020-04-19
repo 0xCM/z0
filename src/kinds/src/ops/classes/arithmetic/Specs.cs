@@ -5,16 +5,19 @@
 namespace Z0
 {
     using System;
-        
+
+    using K = ArithmeticKind;
+    using I = IArithmeticKind;
+
     /// <summary>
     /// Characteries an arithmetic function classifier
     /// </summary>
-    public interface IArithmeticKind : IOpKind, IOpKind<ArithmeticKind>
+    public interface IArithmeticKind : IOpKind, IOpKind<K>
     {
         /// <summary>
         /// The literal identifier that will be lifted to the type-level
         /// </summary>
-        ArithmeticKind Kind {get;}
+        K Kind {get;}
 
         OpKindId IOpKind.KindId => (OpKindId)Kind;
     }    
@@ -23,8 +26,8 @@ namespace Z0
     /// Characterizes a reified arithmetic function classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IArithmeticKind<F> : IArithmeticKind, IOpKind<F,ArithmeticKind>
-        where F : unmanaged, IArithmeticKind
+    public interface IArithmeticKind<F> : I, IOpKind<F,K>
+        where F : unmanaged, I
     {
         OpKindId IOpKind.KindId => default(F).KindId;                
     }
@@ -32,14 +35,14 @@ namespace Z0
     /// <summary>
     /// Characterizes a kind-parametric and numeric-parametric arithmetic operation classifier
     /// </summary>
-    /// <typeparam name="K">The kind classifier type</typeparam>
+    /// <typeparam name="F">The kind classifier type</typeparam>
     /// <typeparam name="T">The numeric type</typeparam>
-    public interface IArithmeticKind<K,T> : IArithmeticKind<K>
-        where K : unmanaged, IArithmeticKind
+    public interface IArithmeticKind<F,T> : IArithmeticKind<F>
+        where F : unmanaged, I
         where T : unmanaged
     {
 
-        ArithmeticKind IArithmeticKind.Kind => default(K).Kind;
+        K I.Kind => default(F).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind
@@ -50,12 +53,12 @@ namespace Z0
     /// <summary>
     /// Characterizes a kind, numeric, and width-parametric arithmetic operation classifier
     /// </summary>
-    /// <typeparam name="K">The kind classifier type</typeparam>
+    /// <typeparam name="F">The kind classifier type</typeparam>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="T">The numeric type</typeparam>
-    public interface IArithmeticKind<K,W,T> : IArithmeticKind<K,T>
+    public interface IArithmeticKind<F,W,T> : IArithmeticKind<F,T>
         where W : unmanaged, ITypeWidth
-        where K : unmanaged, IArithmeticKind
+        where F : unmanaged, I
         where T : unmanaged
     {
         /// <summary>

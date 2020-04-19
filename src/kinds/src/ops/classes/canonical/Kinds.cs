@@ -9,20 +9,15 @@ namespace Z0
 
     using static Seed;
 
-    using Id = CanonicalKind;
+    using K = CanonicalKind;
+    using I = ICanonicalKind;
 
     partial class Kinds
     {
-        public readonly struct Reverse : ICanonicalKind { public Id Kind { [MethodImpl(Inline)] get => Id.Reverse;}}
+        public readonly struct Reverse : I { public K Kind { [MethodImpl(Inline)] get => K.Reverse;}}
 
-        public readonly struct Identity : ICanonicalKind { public Id Kind { [MethodImpl(Inline)] get => Id.Identity;}}
+        public readonly struct Identity : I { public K Kind { [MethodImpl(Inline)] get => K.Identity;}}
 
-        public readonly struct Concat : ICanonicalKind { public Id Kind { [MethodImpl(Inline)] get => Id.Concat;}}
-
-        public readonly struct Reverse<T> : ICanonicalKind<Reverse,T> where T : unmanaged { }
-
-        public readonly struct Identity<T> : ICanonicalKind<Identity,T> where T : unmanaged { }
-
-        public readonly struct Concat<T> : ICanonicalKind<Concat,T> where T : unmanaged { }
+        public readonly struct Concat : I { public K Kind { [MethodImpl(Inline)] get => K.Concat;}}
     }
 }

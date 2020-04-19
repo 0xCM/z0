@@ -9,13 +9,12 @@
     <BitSvcTest>$(Test)bitsvc/z0.bitsvc.test.csproj</BitSvcTest>
     <BlocksTest>$(Test)blocks/z0.blocks.test.csproj</BlocksTest>
     <DynopsTest>$(Test)dynops/z0.dynops.test.csproj</DynopsTest>
-    <GMathTest>$(Test)gmath/z0.gmath.test.csproj</GMathTest>
     <GVecTest>$(Test)gvec/z0.gvec.test.csproj</GVecTest>
 
     <IdentityTest>$(Test)identity/z0.identity.test.csproj</IdentityTest>
     <LogixTest>$(Test)logix/z0.logix.test.csproj</LogixTest>
 
-    <MathSvcTest>$(Test)mathsvc/z0.mathsvc.test.csproj</MathSvcTest>
+    <MathTest>$(Test)math/z0.math.test.csproj</MathTest>
     <MachinesTest>$(Test)machines/z0.machines.test.csproj</MachinesTest>
     <MemoriesTest>$(Test)memories/z0.memories.test.csproj</MemoriesTest>
     <NatsTest>$(Test)nats/z0.nats.test.csproj</NatsTest>

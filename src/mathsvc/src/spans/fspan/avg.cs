@@ -7,11 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
         
     partial class fspan
     {                
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Avg, Closures(Floats)]
         public static T avg<T>(ReadOnlySpan<T> src, bool @checked)
             where T : unmanaged
         {
@@ -23,7 +24,7 @@ namespace Z0
                 throw Unsupported.define<T>();
         }           
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Avg, Closures(Floats)]
         public static T avg<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => avg(src,true);

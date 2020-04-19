@@ -9,21 +9,14 @@ namespace Z0
     
     using static Seed;
 
-    using Id = BitFunctionKind;
+    using K = BitFunctionKind;
+    using I = IBitFunctionKind;
 
     partial class Kinds
     {
+        public readonly struct TestZ : I { public K Kind { [MethodImpl(Inline)] get => K.TestZ;}}
 
-        public readonly struct TestZ : IBitFunctionKind { public Id Kind { [MethodImpl(Inline)] get => Id.TestZ;}}
+        public readonly struct TestC : I { public K Kind { [MethodImpl(Inline)] get => K.TestC;}}
 
-        public readonly struct TestC : IBitFunctionKind { public Id Kind { [MethodImpl(Inline)] get => Id.TestC;}}
-
-        public readonly struct TestZ<T> : IBitFunctionKind<TestZ,T> where T : unmanaged {}
-
-        public readonly struct TestC<T> : IBitFunctionKind<TestC,T> where T : unmanaged {}
-
-        public readonly struct TestZ<W,T> : IBitFunctionKind<TestZ,W,T> where W : unmanaged, ITypeWidth where T : unmanaged {}
-
-        public readonly struct TestC<W,T> : IBitFunctionKind<TestC,W,T> where W : unmanaged, ITypeWidth where T : unmanaged {}
     }
 }

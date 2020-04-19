@@ -199,5 +199,17 @@ namespace Z0
         Concat,
 
         Broadcast,
+
+        Ceil,
+
+        Floor,
+
+        Even,
+
+        Odd,
+
+        Round,
+
+        Pow,
     }    
 }

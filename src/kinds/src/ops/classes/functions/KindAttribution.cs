@@ -9,8 +9,5 @@ namespace Z0
     using A = OpKindAttribute;    
     using K = FunctionKind;
 
-
     public sealed class BroadcastAttribute : A { public BroadcastAttribute(string group = null) : base(K.Broadcast, group) {} }
-
-
 }

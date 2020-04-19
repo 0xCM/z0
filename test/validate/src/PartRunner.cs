@@ -11,7 +11,7 @@ namespace Z0
         public static void RunParts(params string[] args)
         {
             term.inform("Running parts");
-            GMathTest.RunPart(args);
+            MathTest.RunPart(args);
 
             // BitsTest.RunPart(args);
             // BitSvcTest.RunPart(args);

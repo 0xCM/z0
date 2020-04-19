@@ -12,12 +12,11 @@
     <ProjectReference Include="$(BitSvcTest)" />
     <ProjectReference Include="$(BlocksTest)" />
     <ProjectReference Include="$(DynopsTest)" />
-    <ProjectReference Include="$(GMathTest)" />
+    <ProjectReference Include="$(MathTest)" />
     <ProjectReference Include="$(GVecTest)" />
     <ProjectReference Include="$(IdentityTest)" />
     <ProjectReference Include="$(LogixTest)" />
     <ProjectReference Include="$(MachinesTest)" />
-    <ProjectReference Include="$(MathSvcTest)" />
     <ProjectReference Include="$(MemoriesTest)" />
     <ProjectReference Include="$(NatsTest)" />
     <ProjectReference Include="$(NumericTest)" />

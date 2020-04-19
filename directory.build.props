@@ -4,6 +4,5 @@
   <Import Project="$(Src)symbols.props"/>
   <Import Project="$(Test)symbols.props"/>
   <Import Project="$(Native)symbols.props"/>
-
   
 </Project>

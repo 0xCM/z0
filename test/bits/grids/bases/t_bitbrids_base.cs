@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
 
@@ -34,5 +35,10 @@ namespace Z0
         protected static NatSeq<N2,N1,N7> n217 => default;
 
         protected static NatSeq<N2,N1,N3> n213 = default;
+
+        [MethodImpl(Inline), And, Closures(Integers)]
+        public static Span<T> and<T>(Span<T> lhs, Span<T> rhs)
+            where T : unmanaged
+                => Structured.apply(MathSvc.and<T>(),lhs,rhs);
     }
 }

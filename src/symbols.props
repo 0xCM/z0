@@ -40,6 +40,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Structured>$(Src)structured/z0.structured.csproj</Structured>
+
     <Identity>$(Src)identity/z0.identity.csproj</Identity>
     <Api>$(Src)api/z0.api.csproj</Api>
   </PropertyGroup>

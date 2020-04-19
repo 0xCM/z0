@@ -7,11 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gspan
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Finds a numeric cell of maximal value
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline), Max, Closures(AllNumeric)]
         public static T max<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -31,10 +37,5 @@ namespace Z0
 
             return result;
         }
-
-        [MethodImpl(Inline)]
-        public static T max<T>(Span<T> src)
-            where T : unmanaged
-                => max(src.ReadOnly());       
     }
 }

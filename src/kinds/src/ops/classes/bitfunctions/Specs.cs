@@ -6,12 +6,13 @@ namespace Z0
 {
     using System;
         
-    using Id = OpKindId;
+    using K = BitFunctionKind;
+    using I = IBitFunctionKind;
 
     /// <summary>
     /// Characteries a bitfunction classifier
     /// </summary>
-    public interface IBitFunctionKind : IOpKind, IOpKind<BitFunctionKind>
+    public interface IBitFunctionKind : IOpKind, IOpKind<K>
     {
         BitFunctionKind Kind {get;}
 
@@ -22,8 +23,8 @@ namespace Z0
     /// Characterizes a reified bitfunction classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IBitFunctionKind<F> : IBitFunctionKind, IOpKind<F,BitFunctionKind>
-        where F : unmanaged, IBitFunctionKind
+    public interface IBitFunctionKind<F> : I, IOpKind<F,K>
+        where F : unmanaged, I
     {
         OpKindId IOpKind.KindId => default(F).KindId;                
     }
@@ -33,11 +34,11 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">The kind classifier type</typeparam>
     /// <typeparam name="T">The numeric type</typeparam>
-    public interface IBitFunctionKind<K,T> : IBitFunctionKind<K>
-        where K : unmanaged, IBitFunctionKind
+    public interface IBitFunctionKind<F,T> : IBitFunctionKind<F>
+        where F : unmanaged, I
         where T : unmanaged
     {
-        BitFunctionKind IBitFunctionKind.Kind => default(K).Kind;
+        K I.Kind => default(F).Kind;
     }
 
     /// <summary>
@@ -46,9 +47,9 @@ namespace Z0
     /// <typeparam name="K">The kind classifier type</typeparam>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="T">The numeric type</typeparam>
-    public interface IBitFunctionKind<K,W,T> : IBitFunctionKind<K,T>
+    public interface IBitFunctionKind<F,W,T> : IBitFunctionKind<F,T>
         where W : unmanaged, ITypeWidth
-        where K : unmanaged, IBitFunctionKind
+        where F : unmanaged, I
         where T : unmanaged
     {
         /// <summary>

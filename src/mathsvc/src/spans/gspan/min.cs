@@ -7,11 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gspan
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Finds a numeric cell of minimal value
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline), Min, Closures(AllNumeric)]
         public static T min<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {

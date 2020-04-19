@@ -27,10 +27,16 @@ public enum PartId : ulong
 
     Nats = 225, NatsTest = Nats | Test,
 
-    Math = 45, MathTest = Math | Test, 
+    Math = 45,     
     
-    GMath = 50, GMathTest = GMath | Test, 
-               
+    GMath = 50, 
+
+    MathSvc = 51, 
+
+    MathTest = Math | Test, 
+
+    Structured = 999,
+    
     BitSuite = 500, 
     
     BitCore = 80, 
@@ -51,9 +57,6 @@ public enum PartId : ulong
     
     BitPack = 710,
 
-    MathSvc = 51, 
-
-    MathSvcTest = MathSvc | Test,
 
     BitSvc = 81,
 

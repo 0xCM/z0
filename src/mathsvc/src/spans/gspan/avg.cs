@@ -7,26 +7,27 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gspan
     {
-        [MethodImpl(Inline), SpanOp, Closures(NumericKind.All)]
+        [MethodImpl(Inline), SpanOp, Closures(AllNumeric)]
         public static T avg<T>(ReadOnlySpan<T> src, bool @checked)
             where T : unmanaged
                 => avg_u(src,@checked);
 
-        [MethodImpl(Inline), SpanOp, Closures(NumericKind.All)]
+        [MethodImpl(Inline), SpanOp, Closures(AllNumeric)]
         public static T avg<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => avg_u(src,true);
 
-        [MethodImpl(Inline), SpanOp, Closures(NumericKind.All)]
+        [MethodImpl(Inline), SpanOp, Closures(AllNumeric)]
         public static T avg<T>(Span<T> src, bool @checked)
             where T : unmanaged
                 => avg(src.ReadOnly(), @checked);
 
-        [MethodImpl(Inline), SpanOp, Closures(NumericKind.All)]
+        [MethodImpl(Inline), SpanOp, Closures(AllNumeric)]
         public static T avg<T>(Span<T> src)
             where T : unmanaged
                 => avg(src.ReadOnly(), true);

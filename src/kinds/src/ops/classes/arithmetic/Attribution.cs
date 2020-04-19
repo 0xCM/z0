@@ -68,4 +68,12 @@ namespace Z0
     public sealed class MaxAttribute : A { public MaxAttribute(string group = null) : base(K.Max, group) {} }
 
     public sealed class MinAttribute : A { public MinAttribute(string group = null) : base(K.Min, group) {} }
+
+    public sealed class CeilAttribute : A { public CeilAttribute(string group = null) : base(K.Ceil, group) {} }
+
+    public sealed class FloorAttribute : A { public FloorAttribute(string group = null) : base(K.Floor, group) {} }
+
+    public sealed class RoundAttribute : A { public RoundAttribute(string group = null) : base(K.Round, group) {} }    
+
+    public sealed class PowAttribute : A { public PowAttribute(string group = null) : base(K.Pow, group) {} }    
 }

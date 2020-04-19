@@ -7,11 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;    
+    using static Seed; 
+    using static Memories;    
         
     partial class fspan
     {                
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Sqrt, Closures(Floats)]
         public static Span<T> sqrt<T>(Span<T> src)
             where T : unmanaged
         {
@@ -19,6 +20,5 @@ namespace Z0
                 src[i] = gfp.sqrt(src[i]);
             return src;
         }
-
     }
 }

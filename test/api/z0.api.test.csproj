@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Math)" />
   </ItemGroup>
 
 </Project>

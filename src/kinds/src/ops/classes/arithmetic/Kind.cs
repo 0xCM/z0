@@ -78,5 +78,12 @@ namespace Z0
 
         ModMul = Id.ModMul,
 
+        Ceil = Id.Ceil,
+
+        Floor = Id.Floor,
+
+        Round = Id.Round,
+
+        Pow = Id.Pow,
     }    
 }

@@ -214,6 +214,16 @@ namespace Z0
             F8 = 8
         }
 
+        [MethodImpl(Inline)]
+        public static T or<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+        {
+            var result = default(T);
+            for(var i=0; i<src.Length; i++)
+                result = MathSvc.or<T>().Invoke(result, refs.skip(src,i));
+            return result;
+        }                
+
         public void bitfield_d()
         {
             var spec = BitField.specify<BFD_I,BFD_W>();
@@ -235,7 +245,7 @@ namespace Z0
 
                 bf.Read(src, dst);
                 gspan.sllv(dst, positions, tmp);
-                var result1 = gspan.or(tmp.ReadOnly());
+                var result1 = or(tmp.ReadOnly());
                                 
                 var result2 = 0ul;
                 for(byte j=0; j<spec.FieldCount; j++)

@@ -7,11 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gspan
     {
-        [MethodImpl(Inline), SpanOp, Closures(NumericKind.All)]
+        /// <summary>
+        /// Computes the integral exponent of each numeric source cell and deposits the result in a caller-supplied target
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="exp">The exponent value</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline), Pow, Closures(AllNumeric)]
         public static Span<T> pow<T>(ReadOnlySpan<T> src, uint exp, Span<T> dst)
             where T : unmanaged
         {

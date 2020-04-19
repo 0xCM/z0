@@ -88,7 +88,7 @@ namespace Z0
                 var B = Random.BitMatrix32();
                 var C = A & B;
 
-                var D = BitMatrix.from(n32,gspan.and(A.Bytes, B.Bytes));
+                var D = BitMatrix.from(n32,and(A.Bytes, B.Bytes));
                 Claim.require(C == D);
             }
         }
@@ -101,7 +101,7 @@ namespace Z0
                 var B = Random.BitMatrix64();
                 var C = A & B;
 
-                var D = BitMatrix.primal(n64,gspan.and(A.Bytes, B.Bytes));
+                var D = BitMatrix.primal(n64,and(A.Bytes, B.Bytes));
                 Claim.require(C == D);
             }
         }

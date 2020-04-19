@@ -7,6 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+
+    [ApiHost]
+    public partial class gspan : IApiHost<gspan>
+    {
+
+    }
+
+    [ApiHost]
+    public partial class fspan : IApiHost<fspan>
+    {                
+
+
+    }
+
     public sealed partial class MathSvcTypes
     {
     
