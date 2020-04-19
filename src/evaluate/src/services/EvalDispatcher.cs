@@ -31,6 +31,9 @@ namespace Z0
         MemberEvaluator Evaluator(in BufferSeq buffers)
             => MemberEvaluator.Create(buffers);
 
+        ICheckNumeric Numeric => ICheckNumeric.Checker;
+
+
         BinaryEval<T> eval<T>(in BufferSeq execBuffers, in ApiMemberCode code,  K.BinaryOpClass<T> k)
             where T : unmanaged
         {
@@ -136,7 +139,7 @@ namespace Z0
                 ref readonly var result = ref eval.Target;
                 var x = result.Target[i].Left;
                 var y = result.Target[i].Right;
-                Claim.eq(x,y);
+                Numeric.eq(x,y);
             }
         }
 

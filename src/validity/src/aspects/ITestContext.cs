@@ -7,21 +7,26 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
+    public interface IExplicitTest : IUnitTest, IExecutable
+    {
+        
+    }        
+
+    public interface IUnitTest : ITestContext 
+    {
+    }    
+
     public interface ITestContext : 
         IServiceAllocation,
         ITestValidator,
-        ISpeedTest, 
         IStopClocks,
-        ISpeedTestSink,
         IPolyrandProvider, 
         ICheckAction,
-        IAppMsgContext, 
-        IService<ITestContext>, 
-        ITestResultSink, 
-        IAppMsgTrace,
-        ITestQueueControl,
-        IConsoleNotifier
+        IService<ITestContext>,         
+        ITestQueue
     {
-        
+        ICheckNumeric Numeric => ICheckNumeric.Checker;
+
+        ICheckEquatable Equatable => ICheckEquatable.Checker;
     }
 }

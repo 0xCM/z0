@@ -14,7 +14,6 @@ namespace Z0.Asm
     public abstract class t_asm<U> : UnitTest<U>
         where U : t_asm<U>
     {
-
         protected ICaptureArchive CodeArchive 
             => Context.CaptureArchive(
                 Env.Current.LogDir + FolderName.Define("test"), 
@@ -46,7 +45,7 @@ namespace Z0.Asm
         {
             Context = AsmContext.Create(
                 AppSettings.Empty, 
-                AppMessages.exchange(Messages), 
+                Queue, 
                 ApiComposition.Assemble(DefaultResolutions), 
                 Env.Current.LogDir,
                 Random, 

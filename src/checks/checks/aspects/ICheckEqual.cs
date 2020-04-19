@@ -27,5 +27,4 @@ namespace Z0
                 throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }            
     }
-
 }

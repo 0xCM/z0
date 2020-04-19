@@ -9,6 +9,7 @@ namespace Z0
 
     public interface IApiShell : IShell, IAppMsgContext,  IApiComposition
     {
+    
     }
 
     /// <summary>

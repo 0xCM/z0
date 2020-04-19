@@ -5,12 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+
+    using static Seed;
 
     /// <summary>
     /// Characterizes a stateful thing that functions as an exchange for application messages
     /// </summary>
-    public interface IAppMsgExchange : IAppMsgQueue
+    public interface IAppMsgExchange : IAppMsgQueue, IAppMsgContext
     {        
-        void Flush(Exception exception, IAppMsgSink target);                       
+        
     }
 }

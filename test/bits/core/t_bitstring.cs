@@ -336,9 +336,6 @@ namespace Z0
             }
         }
 
-        void TraceError(string description)
-            => trace(AppMsg.Error(description));
-
         void bs_parse_range_check(int minlen, int maxlen)
         {
             for(var cycle=0; cycle< CycleCount; cycle++)
@@ -352,7 +349,7 @@ namespace Z0
                 for(var i=0; i< x.Length; i++)
                     Claim.eq(x[i], z[i]);
                 
-                Claim.require(x.Equals(z, TraceError));
+                Claim.require(x.Equals(z, error));
                 Claim.eq(x,z);
             }
         }

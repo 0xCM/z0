@@ -5,8 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Serialization;
-        
+
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     /// <summary>
     /// Raised when a validation check has failed
     /// </summary>
@@ -25,5 +28,5 @@ namespace Z0
             }
          
         public ClaimKind OpKind {get;}         
-    }
+    }    
 }

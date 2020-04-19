@@ -18,13 +18,17 @@ namespace Z0
 
         void Error(Exception e);
 
-        void Error(string description);
+        void Error(string message);
 
-        void Warn(string description);
+        void Warn(string message);
+
+        void Info(string message);
          
         void WriteLine();
 
         void WriteLine(object src, AppMsgKind kind);        
+
+        void WriteLine(string src, AppMsgColor kind);        
 
         void WriteChar(char c, AppMsgColor? color = null);
 

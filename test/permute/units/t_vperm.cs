@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
+        public void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
                 => CheckNumeric.eq(lhs.Data,rhs.Data);
@@ -42,7 +42,7 @@ namespace Z0
         /// <typeparam name="M">The row dimension type</typeparam>
         /// <typeparam name="N">The column dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs)
+        public void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged 
@@ -67,16 +67,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            NatCheck.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
+            CheckNumeric.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            NatCheck.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
+            CheckNumeric.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            NatCheck.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
+            CheckNumeric.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            NatCheck.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
+            CheckNumeric.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermlo_4x16_outline()

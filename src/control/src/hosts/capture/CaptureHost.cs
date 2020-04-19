@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Linq;
 
     using Z0.Asm;
@@ -72,7 +70,7 @@ namespace Z0
 
         ICheckNumeric ClaimNumeric => ICheckNumeric.Checker;
 
-        ICheck Claim => Z0.Claim.Checker;
+        ICheck Claim => ICheck.Checker;
 
         IApiHost Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).Require();
@@ -107,7 +105,8 @@ namespace Z0
 
         void Exec()
         {
-            var workflow = EvalWorkflow.Create(Context.ApiContext, Context.Random, CaptureRoot);
+            var api = Z0.ApiContext.Create(ApiSet.Composition, Context.Random, Context.Settings, AppMsgExchange.Create(Context));
+            var workflow = EvalWorkflow.Create(api, Context.Random, CaptureRoot);
             workflow.Execute();
         }
 

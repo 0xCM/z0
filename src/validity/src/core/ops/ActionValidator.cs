@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
     using static Seed;
 
@@ -17,9 +14,9 @@ namespace Z0
         /// Manages the execution of an action test case
         /// </summary>
         /// <param name="f">The action under test</param>
-        /// <param name="name">The action name</param>
+        /// <param name="id">The action name</param>
         /// <param name="clock">Accumulates the test case execution time</param>
-        public void CheckAction(Action f, OpIdentity name)
+        public void CheckAction(Action f, OpIdentity id)
         {
             var succeeded = true;
             var count = counter();
@@ -31,12 +28,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.errlabel(e, name.Identifier);
+                term.errlabel(e, id.Identifier);
                 succeeded = false;
             }
             finally
             {
-                Context.ReportCaseResult(CaseName(name), succeeded,count);
+                Context.ReportCaseResult(CaseName(id), succeeded,count);
             }
         }
 

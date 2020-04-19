@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Serialization;
 
     public enum ClaimKind
     {
@@ -38,5 +37,5 @@ namespace Z0
         NotIn,
 
         Invariant
-    }
+    }    
 }

@@ -38,6 +38,8 @@ namespace Z0
 
         protected bool ExcludeZero {get;}
 
+        protected ICheckNumeric CheckNumeric => ICheckNumeric.Checker;
+
         protected void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Context.Deposit(AppMsg.Error(e, caller,file,line));
     }

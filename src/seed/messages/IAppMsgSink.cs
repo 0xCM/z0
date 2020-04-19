@@ -21,8 +21,6 @@ namespace Z0
 
         void NotifyConsole(IAppMsg msg);
 
-        void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green);
-
-        void Print(object content, AppMsgColor? color = null);
+        void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green);            
     }
 }

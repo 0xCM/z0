@@ -25,8 +25,8 @@ namespace Z0
         /// </summary>
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
-        public static void inform(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.Info, caller, file, line));
+        public static void inform(object content)
+            => T.Info($"{content}");
 
         /// <summary>
         /// Emits a warning-level message

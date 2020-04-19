@@ -11,36 +11,24 @@ namespace Z0
     
     using static Seed;
 
-    public sealed class AppMsgExchange : IAppMsgExchange, IAppMsgContext
+    public sealed class AppMsgExchange : IAppMsgExchange
     {
+        public static IAppMsgExchange Create(IAppMsgQueue queue = null)
+            => new AppMsgExchange(queue ?? AppMsgQueue.Create());
+
         readonly IAppMsgQueue Queue;
 
-        public event Action<IAppMsg> Next;
-
-        public static IAppMsgExchange From(IAppMsgQueue dst)
-            => new AppMsgExchange(dst);          
-
-        public static IAppMsgExchange New()
-            => new AppMsgExchange();
+        public event Action<IAppMsg> Next;        
 
         AppMsgExchange(IAppMsgQueue dst)
         {
+            void Relay(IAppMsg msg)
+                => Next(msg);
+
             Queue = dst;
             Queue.Next += Relay;
-            Next += BlackHole;
+            Next = x => {};
         }
-
-        AppMsgExchange()
-        {
-            Queue = AppMessages.queue();
-            Queue.Next += Relay;
-            Next += BlackHole;
-        }
-
-        void BlackHole(IAppMsg msg) {}
-
-        void Relay(IAppMsg msg)
-            => Next(msg);
 
         /// <summary>
         /// Enqueues application messages
@@ -57,9 +45,6 @@ namespace Z0
         public IReadOnlyList<IAppMsg> Dequeue()
             => Queue.Dequeue();
 
-        public void Flush(Exception e, IAppMsgSink target)
-            => target.Deposit(Flush(e));
-
         public void Emit(FilePath dst) 
             => Queue.Emit(dst);
 
@@ -69,5 +54,8 @@ namespace Z0
             Terminal.Get().WriteMessages(messages);
             return messages;
         }
+
+        public void Flush(Exception e, IAppMsgSink target)
+            => target.Deposit(Flush(e));
     }
 }

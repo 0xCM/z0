@@ -43,6 +43,7 @@ namespace Z0
         {
             try
             {
+                Term.Info($"Launching shell");
                 using var shell = new S() as IShell;            
                 shell.Execute(args);
                 //Execute(shell, args);

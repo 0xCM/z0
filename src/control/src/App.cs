@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     using Z0.Asm;
@@ -21,7 +20,7 @@ namespace Z0
             var resolved = ApiComposition.Assemble(parts.Where(r => r.Id != 0));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
-            var exchange = AppMessages.exchange();
+            var exchange = AppMsgExchange.Create();
             return ApiContext.Create(resolved, random, settings, exchange);
         }
         
@@ -71,7 +70,6 @@ namespace Z0
 
             Print("I am configured with:");
             iter(Context.Settings, setting => Print(setting));
-
         }
 
         public override void RunShell(params string[] args)

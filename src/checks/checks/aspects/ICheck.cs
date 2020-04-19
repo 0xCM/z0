@@ -8,7 +8,8 @@ namespace Z0
 
     using static Seed;
 
-    public interface ICheck : IValidator, 
+    public interface ICheck : 
+        IChecker<Check>, 
         ICheckLengths, 
         ICheckPrimal, 
         ICheckPrimalSeq, 
@@ -16,11 +17,15 @@ namespace Z0
         ICheckFileSystem,
         ICheckInvariant,
         ICheckEqual,
-        ICheckEnum,
         ICheckVectorEquality,
         ICheckSets,
         ICheckNull
     {
-        static ICheck Checker => Claim.Checker;
+        
     }
+
+    public readonly struct Check : ICheck
+    {                    
+
+    }    
 }

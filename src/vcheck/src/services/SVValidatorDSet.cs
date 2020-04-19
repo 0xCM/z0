@@ -19,6 +19,8 @@ namespace Z0
 
         public IPolyrand Random {get;}
 
+        protected ICheckNumeric CheckNumeric => ICheckNumeric.Checker;
+
         int RepCount {get;}
 
         static T t => default;
@@ -129,7 +131,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        Claim.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
                 }
             }
         }
@@ -149,7 +151,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        Claim.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
                 }
             }
         }

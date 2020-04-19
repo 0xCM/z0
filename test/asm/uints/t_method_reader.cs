@@ -9,13 +9,9 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using System.IO;
-    
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    
+        
     public sealed class t_native_reader : t_asm<t_native_reader>
     {
-        protected override bool TraceEnabled => true;
-
         public void parse_address_segment()
         {
             var parser = HexParsers.MemoryRange;

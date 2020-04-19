@@ -61,6 +61,5 @@ namespace Z0.Asm
                         
             Claim.eq(src.Format(), dst.Format());
         }
-
     }
 }

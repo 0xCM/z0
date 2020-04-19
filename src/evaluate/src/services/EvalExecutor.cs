@@ -18,6 +18,8 @@ namespace Z0
 
         readonly int RepCount;
 
+        ICheckEquatable Claim => ICheckEquatable.Checker;        
+
         [MethodImpl(Inline)]
         public static IEvalExecutor Create(IContext context, IPolyrand random)
             => new EvalExecutor(context,random);

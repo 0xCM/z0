@@ -14,5 +14,8 @@ namespace Z0
         void Emit(FilePath dst);         
 
         IReadOnlyList<IAppMsg> Flush(Exception e);
+
+        void Flush(Exception e, IAppMsgSink target)
+            => target.Deposit(Flush(e));        
     }
 }

@@ -10,7 +10,9 @@ namespace Z0
     
     using static Seed;
 
-    public partial class TestContext<U> : ITestContext, ITestControl
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
+    public partial class TestContext<U> : ITestContext, IConsoleNotifier, IAppMsgContext  
     {
         public ITestContext Context {get;}
 
@@ -19,7 +21,7 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        protected IAppMsgExchange Messages {get; private set;}
+        protected readonly IAppMsgQueue Queue;
 
         Queue<TestCaseRecord> TestResults {get;}
             = new Queue<TestCaseRecord>();
@@ -30,10 +32,9 @@ namespace Z0
         protected TestContext()
         {
             this.Context = this;            
-            // this.Random = random ?? Polyrand.WyHash64(PolySeed64.Seed00);
             this.Next += BlackHole;
-            this.Messages = AppMessages.exchange();
-            this.Messages.Next += Relay;
+            this.Queue = AppMsgExchange.Create();
+            this.Queue.Next += Relay;
         }
 
         public virtual void Dispose()
@@ -74,10 +75,74 @@ namespace Z0
             => RoundCount*CycleCount;
         
         public virtual bool Enabled 
-            => Context.Enabled;
+            => true;
+
+        /// <summary>
+        /// Captures a duration and the number of operations executed within the period
+        /// </summary>
+        /// <param name="time">The running time</param>
+        /// <param name="opcount">The operation count</param>
+        /// <param name="label">The label associated with the measure, if specified</param>
+        protected static BenchmarkRecord measured(long opcount, Duration time, [Caller] string label = null)
+            => BenchmarkRecord.Define(opcount, time, label);
 
         protected void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Context.ReportBenchmark(name,opcount, duration);
 
+        protected string CaseName<C>(string root, C t = default)
+            where C : unmanaged
+                => Context.CaseName<C>(root);
+
+        protected string CaseName(OpIdentity id)
+            => Context.CaseName(id);
+
+        protected string CaseName<C>(OpIdentity id, C t = default)
+            where C : unmanaged
+                => Context.CaseName<C>(id);
+
+        protected static OpIdentity SubjectId<T>(string opname, T t = default)
+            where T : unmanaged
+                => TestCaseIdentity.SubjectId<T>(opname);
+                
+        protected static OpIdentity BaselineId<K>(string opname,K t = default)
+            where K : unmanaged
+                => TestCaseIdentity.SFuncBaseline<K>(opname);
+
+        protected string CaseName<W,C>(string root, W w = default, C t = default, bool generic = true)
+            where W : unmanaged, ITypeWidth
+            where C : unmanaged
+                => Context.CaseName<W,C>(root, generic: generic);
+
+        protected string CaseName(ISFuncApi f) 
+            => Context.CaseName(f);
+
+        protected void Notify(string msg, AppMsgKind? severity = null)
+            => Queue.Notify(msg, severity);
+
+        void trace(IAppMsg msg)
+        {
+            Queue.NotifyConsole(msg);
+        }
+
+        int CasePadding
+            => Reports.width(TestCaseField.Case);
+
+        IAppMsg TraceMsg(object title, object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
+            => AppMsg.Colorize(string.Concat(string.Concat(caller, Chars.Space, title, Chars.Colon).PadRight(CasePadding), "| ", msg), color);
+
+        IAppMsg TraceMsg(object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
+            => AppMsg.Colorize(text.concat(text.concat(caller).PadRight(CasePadding), "| ", msg), color);
+
+        protected void error(object msg)
+            => trace(AppMsg.Error(msg));
+
+        public void trace(object msg, [Caller] string caller = null)
+            => trace(TraceMsg(msg, caller));
+
+        public void trace(string title, object msg, AppMsgColor color, [Caller] string caller = null)
+            => trace(TraceMsg(title, msg, caller, color));
+
+        public void trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null, [Caller] string caller = null)
+            => trace(TraceMsg(title, msg, caller));        
     }
 }

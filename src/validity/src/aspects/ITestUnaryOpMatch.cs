@@ -13,7 +13,7 @@ namespace Z0
     /// Defines operations that determine whether pairs of unary operators produce identical results 
     /// when evaluated over identical input sequences
     /// </summary>
-    public interface ITestUnaryOpMatch : ITestAction
+    public interface ITestUnaryOpMatch : ITestAction, ICheckNumericEquality
     {
         /// <summary>
         /// Evaluates a pair of unary operators and asserts their equality over a random sequence
@@ -30,7 +30,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Next<T>();
-                    Claim.eq(f(x),g(x));
+                    eq(f(x),g(x));
                 }
             }
 

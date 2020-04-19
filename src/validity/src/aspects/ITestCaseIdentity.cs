@@ -24,7 +24,7 @@ namespace Z0
             => OpUriBuilder.TestCase(ValidatorType, label);
 
         string CaseName(ISFuncApi f) 
-            => TestCaseNaming.sfunc(ValidatorType, f);
+            => TestCaseIdentity.sfunc(ValidatorType, f);
 
         string CaseName<W,T>(ISFuncApi f, bool generic = true)
             where W : unmanaged, ITypeWidth

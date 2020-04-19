@@ -14,7 +14,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface IVectorEqualityCheck : IValidator
+    public interface IVectorEqualityCheck : ICheckVectorEquality, ICheckNumericEquality, ICheckPrimalSeq
     {
         void eq<T>(Vector128<T> a, Vector128<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
@@ -60,10 +60,9 @@ namespace Z0
         }
     }
 
-    public interface IVectorCheck : IVectorEqualityCheck, ICheckNumeric
+    public interface IVectorCheck : IVectorEqualityCheck
     {
-        static new IVectorCheck<VectorCheck> Checker => VectorCheck.Check;        
-        
+        static IVectorCheck<VectorCheck> Checker => VectorCheck.Check;                
     }
 
     public interface IVectorCheck<C> : IVectorCheck

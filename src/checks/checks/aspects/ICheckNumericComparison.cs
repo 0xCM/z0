@@ -19,21 +19,21 @@ namespace Z0
         [MethodImpl(Inline)]
         bool gt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => CheckNumeric.gt(lhs,rhs, caller, file, line);
+                => gmath.gt(lhs,rhs) ? true : throw failed(ClaimKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));        
 
         [MethodImpl(Inline)]
         bool gteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => CheckNumeric.gteq(lhs,rhs, caller, file, line);
+                => gmath.gt(lhs,rhs) ? true : throw failed(ClaimKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
         
         [MethodImpl(Inline)]
         bool lt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => CheckNumeric.lt(lhs,rhs, caller, file, line);
+                => gmath.lt(lhs,rhs) ? true : throw failed(ClaimKind.Lt, NotLessThan(lhs, rhs, caller, file, line));
         
         [MethodImpl(Inline)]
         bool lteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => CheckNumeric.lteq(lhs,rhs, caller, file, line);
+                => gmath.lteq(lhs,rhs) ? true : throw failed(ClaimKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
     }
 }

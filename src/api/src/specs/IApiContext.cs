@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     public interface IApiContext : IAppContext, IAppMsgQueue, IPolyrandProvider, IApiSet, IAppMsgContext
     {        
-        IAppMsgExchange Messaging {get;}
+        IAppMsgQueue Messaging {get;}
         
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => Messaging.Deposit(msg);

@@ -9,6 +9,8 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Checks)" />
+
   </ItemGroup>
 
 </Project>

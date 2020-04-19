@@ -8,7 +8,6 @@ namespace Z0
     
     using static Seed;
     using static Memories;
-    using static CheckNumeric;
 
     public sealed class t_convert : UnitTest<t_convert>
     {
@@ -19,7 +18,7 @@ namespace Z0
                 var x = Random.Next<uint>();
                 var y = x.AsBytes();
                 Span<byte> z = BitConverter.GetBytes(x);
-                eq(y,z);
+                CheckNumeric.eq(y,z);
             }
         }
 
@@ -30,7 +29,7 @@ namespace Z0
                 var x = Random.Next<ulong>();
                 var y = x.AsBytes();
                 Span<byte> z = BitConverter.GetBytes(x);
-                eq(y,z);
+                CheckNumeric.eq(y,z);
             }
         }
 
@@ -41,7 +40,7 @@ namespace Z0
                 var x = Random.Next<double>();
                 var y = x.AsBytes();
                 Span<byte> z = BitConverter.GetBytes(x);
-                eq(y,z);
+                CheckNumeric.eq(y,z);
             }
         }
     }

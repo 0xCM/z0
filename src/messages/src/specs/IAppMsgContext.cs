@@ -37,12 +37,16 @@ namespace Z0
         }
 
         void IAppMsgSink.NotifyConsole(IAppMsg msg)
-            => NotifyConsole(msg, msg.Color);
+        {
+            if(msg.Kind == AppMsgKind.Error)
+                term.print(msg);
+            else
+                term.print(msg, msg.Color);
+            
+            Displayed(msg);
+        }
 
         void IAppMsgSink.NotifyConsole(object content, AppMsgColor color)
-            => NotifyConsole(AppMsg.NoCaller(content), color);
-
-        void IAppMsgSink.Print(object content, AppMsgColor? color)
-            => NotifyConsole(content,color ?? AppMsgColor.DarkMagenta);        
+            => NotifyConsole(AppMsg.Colorize(content, color));
     }
 }

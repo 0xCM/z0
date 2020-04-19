@@ -5,18 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static Seed;
 
-    public abstract class UnitTest<U> : TestContext<U>, IUnitTest, ITestControl
+    public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {        
         protected virtual bool TraceDetailEnabled
             => false;
 
-        protected ICheck Claim => Z0.Claim.Checker;
+        protected ICheck Claim => ICheck.Checker;
+
+        protected ICheckNumeric CheckNumeric => ICheckNumeric.Checker;
 
         public static N0 n0 => default;
 

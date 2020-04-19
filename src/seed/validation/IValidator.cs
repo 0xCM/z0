@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="op">The kind of claim that failed</param>
         /// <param name="msg">The failure description</param>
-        ClaimException failed(ClaimKind op, AppMsg msg)    
+        ClaimException failed(ClaimKind op, IAppMsg msg)    
             => ClaimException.Define(op, msg);
 
         /// <summary>

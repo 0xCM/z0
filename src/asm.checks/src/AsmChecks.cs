@@ -19,7 +19,6 @@ namespace Z0
     using static Seed;
     using static Memories;
     using static time;
-    using static NumericKinds;
     using static BufferSeqId;
     
     public class AsmChecks : IAsmChecks
@@ -33,7 +32,7 @@ namespace Z0
         public static AsmChecks Create(IAsmContext context)
             => new AsmChecks(context);
 
-        ICheck Claim => Z0.Claim.Checker;
+        ICheck Claim => ICheck.Checker;
 
         AsmChecks(IAsmContext context)
         {

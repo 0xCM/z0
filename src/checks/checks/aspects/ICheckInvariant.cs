@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
+    using static Seed;
+    using static AppErrorMsg;
+
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    using static Seed;
-    using static AppErrorMsg;
 
     public interface ICheckInvariant : IValidator
     {         

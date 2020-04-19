@@ -38,7 +38,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        Claim.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -82,7 +82,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        Claim.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
                 }
             }
             catch(Exception e)

@@ -9,22 +9,27 @@ namespace Z0
         
     using static Seed;
 
-    public interface IBitVectorEqualityCheck : IValidator
+    public interface IBitVectorCheck : IChecker<BitVectorCheck>, ICheckPrimal
     {
         [MethodImpl(Inline)]
         void eq(BitVector8 x, BitVector8 y, string caller, string file, int? line)
-            => CheckNumeric.eq(x.Scalar, y.Scalar, caller, file, line);
+            => eq(x.Scalar, y.Scalar, caller, file, line);
 
         [MethodImpl(Inline)]
         void eq(BitVector16 x, BitVector16 y, string caller, string file, int? line)
-            => CheckNumeric.eq(x.Scalar, y.Scalar, caller, file, line);
+            => eq(x.Scalar, y.Scalar, caller, file, line);
 
         [MethodImpl(Inline)]
         void eq(BitVector32 x, BitVector32 y, string caller, string file, int? line)
-            => CheckNumeric.eq(x.Scalar, y.Scalar, caller, file, line);
+            => eq(x.Scalar, y.Scalar, caller, file, line);
 
         [MethodImpl(Inline)]
         void eq(BitVector64 x, BitVector64 y, string caller, string file, int? line)
-            => CheckNumeric.eq(x.Scalar, y.Scalar, caller, file, line);
+            => eq(x.Scalar, y.Scalar, caller, file, line);        
+    }
+    
+    public readonly struct BitVectorCheck : IBitVectorCheck
+    {
+
     }
 }

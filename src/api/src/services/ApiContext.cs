@@ -15,16 +15,16 @@ namespace Z0
     public class ApiContext : IApiContext             
     {
         [MethodImpl(Inline)]
-        public static IApiContext Create(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgExchange exchange)
-            => new ApiContext(composition, random, settings ?? AppSettings.Empty, exchange);
+        public static IApiContext Create(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+            => new ApiContext(composition, random, settings ?? AppSettings.Empty, queue);
         
         [MethodImpl(Inline)]
-        ApiContext(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgExchange exchange)
+        ApiContext(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
         {
             Next = msg => {};
             Random = random;
             Settings = settings;
-            Messaging = exchange;
+            Messaging = queue;
             Api = ApiSet.Create(composition);
         }
 
@@ -34,7 +34,7 @@ namespace Z0
 
         public IPolyrand Random {get;}
 
-        public IAppMsgExchange Messaging {get;}
+        public IAppMsgQueue Messaging {get;}
 
         public event Action<IAppMsg> Next;
 

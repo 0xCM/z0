@@ -8,7 +8,7 @@ namespace Z0
     
     using static Seed;
 
-    static class TestCaseNaming
+    static class TestCaseIdentity
     {
         const char Sep = UriDelimiters.PathSep;
 

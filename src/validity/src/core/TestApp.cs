@@ -18,7 +18,7 @@ namespace Z0
         where A : TestApp<A>, new()
     {
         protected IAppMsgSink Log => this.MessageLog();
-
+        
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
             = new ConcurrentQueue<TestCaseRecord>();
 
@@ -80,22 +80,19 @@ namespace Z0
         public void Run(Type host, string[] filters)
         {        
             if(!HasAny(host,filters))
-                return;
+                return;            
 
             var hosturi = OpUriBuilder.HostUri(host);
+
             var results = new List<TestCaseRecord>();
-            var unit = default(IUnitTest);
+
             try
             {
                 var execTime = Duration.Zero;
-                var runtimer = time.stopwatch();
                 var clock = counter(false);
-                
-                unit = host.Instantiate<IUnitTest>();
-                var control = unit as ITestControl;
-                if(!unit.Enabled)
-                    return;
-                                
+
+                using var unit = host.Instantiate<IUnitTest>();
+             
                 clock.Start();
                 
                 var tsStart = time.now();
@@ -103,9 +100,9 @@ namespace Z0
                 if(unit is IExplicitTest et)  
                     ExecExplicit(et, host.Name,results);
                 else
-                {
-                    Control.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));                                    
-                    PostBenchResult(control.TakeBenchmarks().ToArray());
+                {                    
+                    Control.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));   
+                    PostBenchResult(unit.TakeBenchmarks().ToArray());
                 }                
                 clock.Stop();
 
@@ -118,7 +115,6 @@ namespace Z0
             finally
             {
                 PostTestResults(results);
-                unit.Dispose();
             }
         }
 
@@ -189,12 +185,23 @@ namespace Z0
             return AppMsg.Colorize(fields.Concat(FieldSep), AppMsgColor.Blue);
         }
 
+        string TestActionName
+        {
+            get 
+            {
+                var owner = Identify.owner(GetType());
+                var hostname = GetType().Name;
+                var opname = "action";         
+                return $"{owner}/{hostname}/{opname}";
+            }
+        }
+
         public Duration RunAction(IUnitTest unit, Action exec)
         {
             var messages = new List<IAppMsg>();
             var clock = counter(false);
-            var casename = unit.TestActionName();
-            var control = unit as ITestControl;
+            var casename = TestActionName;
+            var control = unit as ITestQueue;
             
             try
             {                                
@@ -205,7 +212,7 @@ namespace Z0
                 exec();
                 clock.Stop();
 
-                messages.AddRange(control.Dequeue());
+                messages.AddRange(unit.Dequeue());
                 messages.Add(PostCase(casename, clock.Time, tsStart, time.now()));
 
                 var outcomes = control.TakeOutcomes().ToArray();                
@@ -218,7 +225,7 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
-                messages.AddRange(control.Dequeue());                
+                messages.AddRange(unit.Dequeue());                
                 messages.AddRange(CreateErrorMessages(casename,e));
                 PostTestResult(TestCaseRecord.Define(casename,false,clock.Time));                
             }
@@ -230,7 +237,10 @@ namespace Z0
         }
 
         void Run(bool concurrent, params string[] filters)
-            => Control.iter(Hosts(), h =>  Run(h,filters), concurrent);
+        {
+            var hosts = Hosts().ToArray();
+            Control.iter(hosts, h =>  Run(h,filters), concurrent);
+        }
         
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
@@ -247,13 +257,11 @@ namespace Z0
                 yield return AppMsg.NoCaller($"{name} failed {e}", AppMsgKind.Error);
         }
 
-
-
         IAppMsg[] CollectMessages(IUnitTest unit, string testName, Duration runtime, Exception e = null)
         {
             var messages = new List<IAppMsg>();
-            var control = unit as ITestControl;
-            messages.AddRange(control.Dequeue());
+            var control = unit as ITestQueue;
+            messages.AddRange(unit.Dequeue());
             if(e != null)
                 messages.AddRange(CreateErrorMessages(testName,e));
             else
@@ -263,7 +271,7 @@ namespace Z0
 
         TestCaseRecord[] CollectTestResults(IExplicitTest unit, string casename, Duration runtime, Exception e = null)
         {
-            var control = unit as ITestControl;
+            var control = unit as ITestQueue;
             var outcomes = new List<TestCaseRecord>();
             if(e!= null)
                 outcomes.Add(TestCaseRecord.Define(casename,false,runtime));
@@ -276,11 +284,19 @@ namespace Z0
             return outcomes.ToArray();
         }
 
+        static string TestCaseName(IExplicitTest unit)
+        {
+            var owner = Identify.owner(unit.GetType());
+            var hostname = unit.GetType().Name;
+            var opname = "explicit";
+            return $"{owner}/{hostname}/{opname}";
+        }
+
         Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
         {
             var clock = counter(false);
             var messages = Arrays.empty<IAppMsg>();
-            var casename = unit.TestCaseName();
+            var casename = TestCaseName(unit);
 
             try
             {
@@ -311,8 +327,8 @@ namespace Z0
         {
             var exectime = Duration.Zero;
             var casename = OpUriBuilder.TestCase(method);
+
             var clock = counter(false);
-            var control = unit as ITestControl;
 
             var collected = new List<IAppMsg>();
             try
@@ -324,10 +340,10 @@ namespace Z0
                 method.Invoke(unit,null);                    
                 clock.Stop();
 
-                collected.AddRange(control.Dequeue());
+                collected.AddRange(unit.Dequeue());
                 collected.Add(PostCase(casename, clock.Time, tsStart, time.now()));
                 
-                var outcomes = control.TakeOutcomes().ToArray();
+                var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
                     cases.WithItems(outcomes);
                 else
@@ -336,26 +352,24 @@ namespace Z0
             catch(Exception e)
             {                
                 clock.Stop();
-                collected.AddRange(control.Dequeue());                
+                collected.AddRange(unit.Dequeue());                
                 collected.AddRange(CreateErrorMessages(casename, e));             
                 cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
             }
             finally
             {     
+                
                 Log.Deposit(collected);                
                 Control.iter(collected.Where(m => !m.Displayed), term.print);       
+
             }
+
             return exectime;
         }            
 
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
-        /// <summary>
-        /// When overriding, return true to signal that standard tests should also be executed
-        /// </summary>
-        protected virtual bool RunCustom()
-            => true;
 
         static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
             where R : IRecord
@@ -407,8 +421,7 @@ namespace Z0
                 Context.AppPaths.ErrorLogPath.Delete();
                 Context.AppPaths.StandardLogPath.Delete();          
                 
-                if(RunCustom())
-                    Run(false,filters);
+                Run(false,filters);
 
                 EmitLogs();
             }

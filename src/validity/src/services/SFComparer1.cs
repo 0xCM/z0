@@ -65,7 +65,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = next_x();
-                    Claim.eq(baseline.Invoke(x), subject.Invoke(x));
+                    CheckNumeric.eq(baseline.Invoke(x), subject.Invoke(x));
                 }
             }
             catch(Exception e)

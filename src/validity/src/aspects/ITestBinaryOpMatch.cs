@@ -14,7 +14,7 @@ namespace Z0
     /// Defines operations that determine whether pairs of binary operators produce identical results 
     /// when evaluated over identical input sequences
     /// </summary>
-    public interface ITestBinaryOpMatch : ITestAction
+    public interface ITestBinaryOpMatch : ITestAction, ICheckNumericEquality
     {
         /// <summary>
         /// Evaluates a pair of binary operators and asserts their equality over a random sequence
@@ -32,7 +32,7 @@ namespace Z0
                 {
                     var x = Random.Next<T>();
                     var y = Random.Next<T>();                    
-                    Claim.eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 

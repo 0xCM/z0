@@ -5,17 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
     using static Seed;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public interface IAppMsgTrace
+    public interface ITracer : IConsoleNotifier
     {
-        void trace(IAppMsg msg);        
+        bool TraceEnabled => true;
+
+        void trace(IAppMsg msg)        
+        {
+            if(TraceEnabled)
+                NotifyConsole(msg);
+        }
+
 
         void trace(object msg, [Caller] string caller = null);
 

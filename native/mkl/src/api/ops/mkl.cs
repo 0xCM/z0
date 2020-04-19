@@ -100,11 +100,6 @@ namespace Z0.Mkl
                 =>  ref MemoryMarshal.GetReference<T>(src.Data);
 
         [MethodImpl(Inline)]   
-        static int length<T>(Span<T> lhs, Span<T> rhs)
-            where T : unmanaged
-                => Check.length(lhs,rhs);
-
-        [MethodImpl(Inline)]   
         static int length<T>(RowVector256<T> lhs, RowVector256<T> rhs) 
             where T : unmanaged
                 => Check.length(lhs,rhs);

@@ -39,7 +39,7 @@ namespace Z0
                 {
                     var x = next_x();
                     var y = next_y();
-                    Claim.eq(baseline.Invoke(x,y), subject.Invoke(x,y));
+                    CheckNumeric.eq(baseline.Invoke(x,y), subject.Invoke(x,y));
                 }
             }
             catch(Exception e)

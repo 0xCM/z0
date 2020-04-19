@@ -11,9 +11,9 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public interface ICheckRowVector : ICheck
+    public interface ICheckRowVector : IValidator
     {
-        static new ICheckRowVector<CheckRowVector> Checker => default(CheckRowVector);
+        static ICheckRowVector<CheckRowVector> Checker => default(CheckRowVector);
 
         [MethodImpl(Inline)]           
         int length<T>(RowVector256<T> lhs, RowVector256<T> rhs)

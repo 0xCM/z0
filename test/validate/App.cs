@@ -13,5 +13,11 @@ namespace Z0
 
         public static void Main(params string[] args) 
             => Launch(args); 
+        
+        protected override void OnDispose()
+        {
+            term.inform("Finished part execution");
+
+        }
     } 
 }

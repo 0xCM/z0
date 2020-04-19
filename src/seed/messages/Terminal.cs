@@ -195,6 +195,12 @@ namespace Z0
         
         public void Warn(string description)
             => WriteWarning((object)description);
+        
+        public void Info(string message)
+            => WriteLine((object)message, AppMsgColor.Green);
+
+        public void WriteLine(string message, AppMsgColor color)
+            => WriteLine((object)message, color);
 
     }
 }

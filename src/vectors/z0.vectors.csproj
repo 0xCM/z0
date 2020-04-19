@@ -13,6 +13,8 @@
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Checks)" />
+
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,6 @@ namespace Z0
     using static Seed;
     using static Memories;
     using static NatCalc;
-    using static CheckNumeric;
 
     public class t_natmath : UnitTest<t_natmath>
     {    
@@ -26,8 +25,8 @@ namespace Z0
         {
             var sum1 = add(a,b);   
             var sum2 = default(A).NatValue + default(B).NatValue;
-            eq(expect, sum1);
-            eq(expect, sum2);
+            CheckNumeric.eq(expect, sum1);
+            CheckNumeric.eq(expect, sum2);
         }
 
         void add_check<A,B>(int expect, A a = default, B b = default)
@@ -35,7 +34,7 @@ namespace Z0
             where B : unmanaged, ITypeNat
         {
             var sum1 = (int)add(a,b);   
-            eq(expect, sum1);
+            CheckNumeric.eq(expect, sum1);
         }
     }
 }

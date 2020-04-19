@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
 
      public abstract class AsmShell<S> : Shell<S,IAsmContext>
@@ -14,11 +13,9 @@ namespace Z0.Asm
         static IAsmContext CreateContext()
         {
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
-            var exchange = AppMessages.exchange();
-            var resolved = ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-
-            var context = AsmContext.Create(settings, exchange, resolved, Env.Current.LogDir);
-            return context;
+            var exchange = AppMsgExchange.Create();
+            var composed = ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
+            return AsmContext.Create(settings, exchange, composed, Env.Current.LogDir);
         }
 
         protected AsmShell()

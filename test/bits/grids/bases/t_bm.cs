@@ -8,7 +8,6 @@ namespace Z0
 
     using static Seed;
     using static Memories;
-    using static CheckNumeric;
 
     public abstract class t_bm<X> : t_bitgrids_base<X>
         where X : t_bm<X>, new()
@@ -27,9 +26,9 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.and(A,B).Data;
                 var C2 = gspan.and(A.Data, B.Data);
-                eq(A.Order, nati<N>());
-                eq(B.Order, nati<N>());                
-                eq(C1,C2);
+                CheckNumeric.eq(A.Order, nati<N>());
+                CheckNumeric.eq(B.Order, nati<N>());                
+                CheckNumeric.eq(C1,C2);
             }
         }
 
@@ -73,9 +72,9 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.xor(A, B).Data;
                 var C2 = xor(A.Data, B.Data);
-                eq(A.Order, nati<N>());
-                eq(B.Order, nati<N>());                
-                eq(C1,C2);
+                CheckNumeric.eq(A.Order, nati<N>());
+                CheckNumeric.eq(B.Order, nati<N>());                
+                CheckNumeric.eq(C1,C2);
             }
         }
 
@@ -110,7 +109,11 @@ namespace Z0
             {
                 var vector = src.ReadRow(row);
                 for(var col=0; col<vector.Width; col++)
-                    eq(vector[col], src[row,col]);
+                {
+                    var x = vector[col];
+                    var y = src[row,col];
+                    CheckNumeric.eq(vector[col], src[row,col]);
+                }
             }
         }
 
@@ -125,7 +128,7 @@ namespace Z0
                 var B = A.Transpose();
                 for(var i=0; i<B.RowCount; i++)
                 for(var j=0; j<B.ColCount; j++)
-                    eq(B[i,j], A[j,i]);
+                    CheckNumeric.eq(B[i,j], A[j,i]);
             }
         }
 

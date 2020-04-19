@@ -5,21 +5,27 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     
     using static Seed;
 
-    public interface ISpeedTest : IService
+    public interface ITestResultSink : IService, IRecordSink<TestCaseRecord>
     {
-        void Measure<T>(UnaryOp<T> f, UnaryOp<T> cf, string opname)
-            where T : unmanaged;        
-
-        void Measure<T>(BinaryOp<T> cf, BinaryOp<T> f, string opname)
-            where T : unmanaged;            
+        void ReportCaseResult(string casename, bool succeeded, TimeSpan duration)
+            => Deposit(TestCaseRecord.Define(casename,succeeded,duration));
     }
-
+    
     public interface ISpeedTestSink : IRecordSink<BenchmarkRecord>          
     {
         void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Deposit(BenchmarkRecord.Define(opcount, duration, name));
+    }
+
+    public interface ITestQueue : ITestResultSink, ISpeedTestSink, IAppMsgQueue
+    {
+        IEnumerable<BenchmarkRecord> TakeBenchmarks();
+
+        IEnumerable<TestCaseRecord> TakeOutcomes();
     }
 }

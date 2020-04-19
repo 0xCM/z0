@@ -10,10 +10,12 @@ namespace Z0
     {
         public static void RunParts(params string[] args)
         {
+            term.inform("Running parts");
+            GMathTest.RunPart(args);
+
             // BitsTest.RunPart(args);
             // BitSvcTest.RunPart(args);
             // DynopsTest.RunPart(args);
-            // GMathTest.RunPart(args);
             // GVecTest.RunPart(args);
             // IdentityTest.RunPart(args);
             // LogixTest.RunPart(args);   
@@ -26,7 +28,7 @@ namespace Z0
             // TextualTest.RunPart(args);
             // NatsTest.RunPart(args);      
             // VSvcTest.RunPart(args);
-            AsmTest.RunPart(args);
+            //AsmTest.RunPart(args);
             
 
         }

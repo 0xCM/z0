@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public interface IMatchFixedOperators : ITestAction, IVectorEqualityCheck
+    public interface IMatchFixedOperators : ITestAction, ICheckEquatable
     {
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points
@@ -28,7 +28,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 
@@ -51,7 +51,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 
@@ -74,7 +74,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 
@@ -99,7 +99,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Claim.eq(a,b);
+                    eq(a,b);
                 }
             }
 
@@ -123,7 +123,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 
@@ -146,7 +146,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 

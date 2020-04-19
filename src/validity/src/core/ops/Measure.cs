@@ -4,22 +4,35 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using System.Diagnostics;
+    using System.Runtime.CompilerServices;
     
     using static Seed;
-
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     partial class TestContext<U>
     {
         /// <summary>
-        /// Captures a duration and the number of operations executed within the period
+        /// Allocates and optionally starts a system counter
         /// </summary>
-        /// <param name="time">The running time</param>
-        /// <param name="opcount">The operation count</param>
-        /// <param name="label">The label associated with the measure, if specified</param>
-        protected static BenchmarkRecord measured(long opcount, Duration time, [Caller] string label = null)
-            => BenchmarkRecord.Define(opcount, time, label);
+        [MethodImpl(Inline)]   
+        public SystemCounter counter(bool start = false) 
+            => SystemCounter.Create(start);
+
+        /// <summary>
+        /// Creates a new stopwatch and optionally start it
+        /// </summary>
+        /// <param name="start">Whether to start the new stopwatch</param>
+        [MethodImpl(Inline)]   
+        public Stopwatch stopwatch(bool start = true) 
+            => start ? Stopwatch.StartNew() : new Stopwatch();
+
+        /// <summary>
+        /// Captures a stopwatch duration
+        /// </summary>
+        /// <param name="sw">A running/stopped stopwatch</param>
+        [MethodImpl(Inline)]   
+        public Duration snapshot(Stopwatch sw)     
+            => Duration.Define(sw.ElapsedTicks);                
 
         public void Measure<T>(UnaryOp<T> f, UnaryOp<T> cf, string opname)
             where T :unmanaged

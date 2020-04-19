@@ -23,6 +23,12 @@ namespace Z0
         void RunShell(params string[] args);
 
         string ICustomFormattable.Format() => AppId.Format();
+
+        void Print(object content, AppMsgColor? color = null)
+        {
+            var term = Terminal.Get();
+            term.WriteLine($"{content}", color ?? AppMsgColor.Green);
+        }
         
         void IExecutable.Execute(params string[] args)
         {

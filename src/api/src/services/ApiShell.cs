@@ -11,10 +11,12 @@ namespace Z0
         where A : ApiShell<A,C>, new()
         where C : IApiContext
     {
-
+        protected void Print(object content, AppMsgColor? color = null)
+            => Shelled.Print(content,color);
+            
         public virtual IPart[] Resolved {get;}
 
-        protected IAppMsgExchange Messaging {get;}
+        protected IAppMsgQueue Messaging {get;}
 
         protected ApiShell(C context)
             : base(context)
@@ -31,8 +33,5 @@ namespace Z0
         {
             Messaging.Emit(Shelled.AppLogPath);
         }        
-
-        protected void Print(object content, AppMsgColor? color = null)
-            => Shelled.Print(content, color);
     }
 }

@@ -38,7 +38,8 @@ namespace Z0.Asm
         /// </summary>
         FolderPath RootCapturePath => Env.Current.LogDir;
 
-        ICaptureArchive RootCaptureArchive => Z0.CaptureArchive.Create(RootCapturePath);
+        ICaptureArchive RootCaptureArchive 
+            => Z0.CaptureArchive.Create(RootCapturePath);
 
         ICaptureArchive CaptureArchive(FolderName area, FolderName subject) 
             => RootCaptureArchive.Narrow(area,subject);
@@ -49,8 +50,5 @@ namespace Z0.Asm
         /// The buffer length to use whenever a buffer length is unspecified
         /// </summary>
         int DefaultBufferLength => Pow2.T14;
-
-        IApiContext ApiContext 
-            => Z0.ApiContext.Create(ApiSet.Composition, Random, Settings, AppMsgExchange.From(this));
     }   
 }

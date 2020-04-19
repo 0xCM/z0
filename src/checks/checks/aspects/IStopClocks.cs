@@ -17,23 +17,20 @@ namespace Z0
         /// Allocates and optionally starts a system counter
         /// </summary>
         [MethodImpl(Inline)]   
-        SystemCounter counter(bool start = false) 
-            => SystemCounter.Create(start);
+        SystemCounter counter(bool start = false);
 
         /// <summary>
         /// Creates a new stopwatch and optionally start it
         /// </summary>
         /// <param name="start">Whether to start the new stopwatch</param>
         [MethodImpl(Inline)]   
-        Stopwatch stopwatch(bool start = true) 
-            => start ? Stopwatch.StartNew() : new Stopwatch();
+        Stopwatch stopwatch(bool start = true);
 
         /// <summary>
         /// Captures a stopwatch duration
         /// </summary>
         /// <param name="sw">A running/stopped stopwatch</param>
         [MethodImpl(Inline)]   
-        Duration snapshot(Stopwatch sw)     
-            => Duration.Define(sw.ElapsedTicks);                
+        Duration snapshot(Stopwatch sw);     
     }
 }
