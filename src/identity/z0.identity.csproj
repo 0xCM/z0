@@ -6,13 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />        
-    <ProjectReference Include="$(Enums)" />   
+    <ProjectReference Include="$(Core)" />        
     <ProjectReference Include="$(Api)" />   
-    <ProjectReference Include="$(Kinds)" />   
     <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(Vectors)" />        
-
   </ItemGroup>
 
 </Project>

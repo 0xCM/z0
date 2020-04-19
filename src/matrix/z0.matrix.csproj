@@ -6,9 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 </Project>

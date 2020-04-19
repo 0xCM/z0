@@ -6,9 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Core)" />
   </ItemGroup>
 
 </Project>

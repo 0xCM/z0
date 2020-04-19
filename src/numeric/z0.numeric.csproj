@@ -12,7 +12,6 @@
     <ProjectReference Include="$(Enums)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Collective)" />
-
   </ItemGroup>
 
 </Project>

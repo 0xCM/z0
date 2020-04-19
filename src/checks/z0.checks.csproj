@@ -6,11 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />    
-    <ProjectReference Include="$(Messages)" />
-    <ProjectReference Include="$(Spans)" />
-    <ProjectReference Include="$(Identify)" />
-    <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Core)" />
   </ItemGroup>
 
 </Project>

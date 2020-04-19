@@ -1,27 +1,58 @@
 <Project>
 
   <PropertyGroup>
+    <Core>$(Src)Core/z0.core.csproj</Core>
+
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
-    <Agency>$(Src)agency/z0.agency.csproj</Agency>
-    <Messages>$(Src)messages/z0.messages.csproj</Messages>
+    <Collective>$(Src)collective/z0.collective.csproj</Collective>
+    <Reflective>$(Src)reflective/z0.reflective.csproj</Reflective>
+    <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
+    <Enums>$(Src)enums/z0.enums.csproj</Enums>
+    <Typed>$(Src)typed/z0.typed.csproj</Typed>
+    <Cast>$(Src)cast/z0.cast.csproj</Cast>
+    <Contained>$(Src)contained/z0.contained.csproj</Contained>
+    
+    <Time>$(Src)time/z0.time.csproj</Time>
+    <Memories>$(Src)memories/z0.memories.csproj</Memories>
+
+    <Flow>$(Src)flow/z0.flow.csproj</Flow>
     <Reports>$(Src)reports/z0.reports.csproj</Reports>
-    <Api>$(Src)api/z0.api.csproj</Api>
+    <Textual>$(Src)textual/z0.textual.csproj</Textual>
+    <Tuples>$(Src)tuples/z0.tuples.csproj</Tuples>
+
+    <Messages>$(Src)messages/z0.messages.csproj</Messages>
+
+    <Agency>$(Src)agency/z0.agency.csproj</Agency>
+    <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>
+    <Spans>$(Src)spans/z0.spans.csproj</Spans>
+
+    <Math>$(Src)math/z0.math.csproj</Math>
+    
+    <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
+
+    <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>
+    <Numeric>$(Src)numeric/z0.numeric.csproj</Numeric>
+
+    <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
+    <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
+    <Identify>$(Src)identify/z0.identify.csproj</Identify>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Cast>$(Src)cast/z0.cast.csproj</Cast>
-    <Memories>$(Src)memories/z0.memories.csproj</Memories>
+    <Identity>$(Src)identity/z0.identity.csproj</Identity>
+    <Api>$(Src)api/z0.api.csproj</Api>
+  </PropertyGroup>
+
+  <PropertyGroup>    
+    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
   </PropertyGroup>
 
   <PropertyGroup>    
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
-
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
-
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
-
     <Vectors>$(Src)vectors/z0.vectors.csproj</Vectors>
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
@@ -44,30 +75,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Typed>$(Src)typed/z0.typed.csproj</Typed>
-    <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>
-    <Identify>$(Src)identify/z0.identify.csproj</Identify>
-    <Identity>$(Src)identity/z0.identity.csproj</Identity>
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
-
     <Archives>$(Src)archives/z0.archives.csproj</Archives>
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
   </PropertyGroup>
 
-  <PropertyGroup>    
-    <Tuples>$(Src)tuples/z0.tuples.csproj</Tuples>
-    <Enums>$(Src)enums/z0.enums.csproj</Enums>
-    <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
-    <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>
-    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
-    <Contained>$(Src)contained/z0.contained.csproj</Contained>
-  </PropertyGroup>
 
-  <PropertyGroup>    
-    <Numeric>$(Src)numeric/z0.numeric.csproj</Numeric>
-    <Math>$(Src)math/z0.math.csproj</Math>
-    <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
-  </PropertyGroup>
 
   <PropertyGroup>    
     <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
@@ -81,27 +94,13 @@
   </PropertyGroup>
 
   <PropertyGroup>    
-    <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
-
-    <Time>$(Src)time/z0.time.csproj</Time>
-    <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
-    <Textual>$(Src)textual/z0.textual.csproj</Textual>
-    <Collective>$(Src)collective/z0.collective.csproj</Collective>
-    <Reflective>$(Src)reflective/z0.reflective.csproj</Reflective>
-    
+    <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>    
     <Dynamic>$(Src)dynops/z0.dynops.csproj</Dynamic>
-
-    <Flow>$(Src)flow/z0.flow.csproj</Flow>
-
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
-
-    <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Logix>$(Src)logix/z0.logix.csproj</Logix>
-    <Spans>$(Src)spans/z0.spans.csproj</Spans>
     <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>  
     <Machines>$(Src)machines/z0.machines.csproj</Machines>
     <Cil>$(Src)cil/z0.cil.csproj</Cil>
-
   </PropertyGroup>
 
 </Project>

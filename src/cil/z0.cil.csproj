@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Time)" />
-
   </ItemGroup>
 
   <ItemGroup>

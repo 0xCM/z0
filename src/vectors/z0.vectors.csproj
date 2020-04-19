@@ -6,12 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Tuples)" />
-    <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 

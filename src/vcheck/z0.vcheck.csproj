@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Vectors)" />
-
   </ItemGroup>
 
 </Project>

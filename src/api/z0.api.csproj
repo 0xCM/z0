@@ -6,11 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>    
-    <ProjectReference Include="$(Seed)" />    
-    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Core)" />    
     <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(Messages)" />
-
   </ItemGroup>
 
 </Project>

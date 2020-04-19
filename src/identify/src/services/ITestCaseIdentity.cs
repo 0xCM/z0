@@ -5,12 +5,21 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     
     using static Seed;
     using static Memories;
+    using static TestCaseIdentity;
 
     public readonly struct TestCaseIdentity : ITestCaseIdentity
     {
+        /// <summary>
+        /// Produces the formatted identifier of the declaring assembly
+        /// </summary>
+        /// <param name="host">The source type</param>
+        [MethodImpl(Inline)]   
+        internal static string owner(Type host)
+            => host.Assembly.Id().Format();
 
     }
     
@@ -31,7 +40,7 @@ namespace Z0
             => OpUriBuilder.TestCase(ValidatorType, label);
 
         string CaseName(ISFuncApi f) 
-            =>$"{Identify.owner(ValidatorType)}{Sep}{ValidatorType.Name}{Sep}{f.Id}";
+            =>$"{owner(ValidatorType)}{Sep}{ValidatorType.Name}{Sep}{f.Id}";
 
         OpIdentity BaselineId<K>(string label,K t = default)
             where K : unmanaged

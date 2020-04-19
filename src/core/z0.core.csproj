@@ -13,16 +13,32 @@
     <ProjectReference Include="$(Enums)" />    
     <ProjectReference Include="$(Typed)" />
     <ProjectReference Include="$(Cast)" />
-    
+    <ProjectReference Include="$(Contained)" />    
+
     <ProjectReference Include="$(Time)" />    
     <ProjectReference Include="$(Memories)" />    
 
+    <ProjectReference Include="$(Flow)" />
     <ProjectReference Include="$(Reports)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Tuples)" />
-    
-    <ProjectReference Include="$(Kinds)" />
 
+
+    <ProjectReference Include="$(Math)" />    
+    <ProjectReference Include="$(GMath)" />    
+
+    <ProjectReference Include="$(Messages)" />
+
+    <ProjectReference Include="$(Agency)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Spans)" />
+
+    <ProjectReference Include="$(Fixed)" />    
     <ProjectReference Include="$(Numeric)" />
+    
+    <ProjectReference Include="$(Polyrand)" />    
+    <ProjectReference Include="$(Graphs)" />
+    <ProjectReference Include="$(Identify)" />
   </ItemGroup>
+
 </Project>

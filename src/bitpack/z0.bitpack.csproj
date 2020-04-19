@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(VData)" />    
   </ItemGroup>

@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Identity)" />
-
   </ItemGroup>
 
 </Project>

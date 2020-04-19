@@ -6,12 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Typed)" />
-    <ProjectReference Include="$(Messages)" />
-    <ProjectReference Include="$(Spans)" />
-    <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 

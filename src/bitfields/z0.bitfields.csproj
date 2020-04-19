@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(GVec)" />
   </ItemGroup>

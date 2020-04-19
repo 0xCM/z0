@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(GMath)" />
   </ItemGroup>
 
 </Project>

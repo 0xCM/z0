@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Spans)" />
-
+    <ProjectReference Include="$(Core)" />
   </ItemGroup>
 
 </Project>

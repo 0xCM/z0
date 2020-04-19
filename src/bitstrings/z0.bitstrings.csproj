@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />  
+    <ProjectReference Include="$(Core)" />  
     <ProjectReference Include="$(Symbolic)" />  
     <ProjectReference Include="$(Spans)" />  
     <ProjectReference Include="$(Vectors)" />        

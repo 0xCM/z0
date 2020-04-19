@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Core)" />    
     <ProjectReference Include="$(Vectors)" />    
-    <ProjectReference Include="$(Math)" />    
   </ItemGroup>
 
 </Project>

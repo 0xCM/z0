@@ -10,6 +10,8 @@ namespace Z0
     using static Seed;
     using static CastNumeric;
 
+    using SP = ScalarParser;
+
     public readonly struct NumericParser<T> : IParser<T>
         where T : unmanaged
     {
@@ -18,7 +20,52 @@ namespace Z0
             => NumericParser.parse<T>(src);
     }
 
-    public partial class NumericParser 
+    public class ScalarParser
+    {
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out sbyte dst)
+            => sbyte.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out byte dst)
+            => byte.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out short dst)
+            => short.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out ushort dst)
+            => ushort.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out int dst)
+            => int.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out uint dst)
+            => uint.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out long dst)
+            => long.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out ulong dst)
+            => ulong.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out float dst)
+            => float.TryParse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static bit parse(string src, out double dst)
+            => double.TryParse(src, out dst);            
+
+    }
+
+    [ApiHost("parser")]
+    public class NumericParser  : IApiHost<NumericParser>
     {
         /// <summary>
         /// Creates a numeric parser
@@ -55,7 +102,7 @@ namespace Z0
             dst = default;
             if(typeof(T) == typeof(byte))
             {
-                if(math.parse(src, out byte x))
+                if(SP.parse(src, out byte x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -65,7 +112,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(ushort))
             {
-                if(math.parse(src, out ushort x))
+                if(SP.parse(src, out ushort x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -76,7 +123,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(uint))
             {
-                if(math.parse(src, out uint x))
+                if(SP.parse(src, out uint x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -87,7 +134,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(ulong))
             {
-                if(math.parse(src, out ulong x))
+                if(SP.parse(src, out ulong x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -98,7 +145,6 @@ namespace Z0
             }
             else
                 return parse_i(src, out dst);
-
         }
 
         [MethodImpl(Inline)]
@@ -108,7 +154,7 @@ namespace Z0
             dst = default;
             if(typeof(T) == typeof(sbyte))
             {
-                if(math.parse(src, out sbyte x))
+                if(SP.parse(src, out sbyte x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -118,7 +164,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(short))
             {
-                if(math.parse(src, out short x))
+                if(SP.parse(src, out short x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -129,7 +175,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(int))
             {
-                if(math.parse(src, out int x))
+                if(SP.parse(src, out int x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -140,7 +186,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(long))
             {
-                if(math.parse(src, out long x))
+                if(SP.parse(src, out long x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -161,7 +207,7 @@ namespace Z0
             
             if(typeof(T) == typeof(float))
             {
-                if(math.parse(src, out float x))
+                if(SP.parse(src, out float x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -171,14 +217,13 @@ namespace Z0
             }
             else if(typeof(T) == typeof(double))
             {
-                if(math.parse(src, out double x))
+                if(SP.parse(src, out double x))
                 {
                     dst = convert<T>(x);
                     return true;
                 }
                 else
                     return false;
-
             }
             return false;
         }    

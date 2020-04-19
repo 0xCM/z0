@@ -31,11 +31,6 @@ namespace Z0
 
     }
 
-    [ApiHost("parser")]
-    public partial class NumericParser : IApiHost<NumericParser>
-    {
-
-    }
     public static partial class XTend
     {
        
