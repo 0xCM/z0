@@ -17,12 +17,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline), Op,  Closures(Integers)]
+        [MethodImpl(Inline), Pop,  Closures(Integers)]
         public static uint pop<T>(T src)
             where T : unmanaged
                 => pop_u(src);
 
-        [MethodImpl(Inline), Op,  Closures(Integers)]
+        [MethodImpl(Inline), Pop,  Closures(Integers)]
         public static uint pop<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -37,7 +37,7 @@ namespace Z0
         /// Counts the number of enabled primal operand bits
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint pop<T>(T x0, T x1, T x2)
             where T : unmanaged
                 => Bits.pop(convert<T,ulong>(x0), convert<T,ulong>(x1), convert<T,ulong>(x2));
@@ -46,7 +46,7 @@ namespace Z0
         /// Counts the number of enabled primal operand bits
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint pop<T>(T x0, T x1, T x2, T x3)
             where T : unmanaged
                 => Bits.pop(convert<T,ulong>(x0), convert<T,ulong>(x1), convert<T,ulong>(x2), convert<T,ulong>(x3));
@@ -55,7 +55,7 @@ namespace Z0
         /// Counts the number of enabled primal operand bits
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint pop<T>(T x0, T x1, T x2, T x3,T x4, T x5, T x6, T x7)
             where T : unmanaged
                 => Bits.pop(

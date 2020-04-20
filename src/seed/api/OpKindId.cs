@@ -211,5 +211,21 @@ namespace Z0
         Round,
 
         Pow,
+
+        Ntz,
+
+        Nlz,
+
+        Pop,
+
+        Mux,
+
+        Scatter,
+
+        Gather,
+
+        Mix,
+
+        Rank,
     }    
 }

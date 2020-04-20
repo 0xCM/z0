@@ -19,7 +19,7 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Ntz]
         public static int ntz(sbyte src)
            => src == 0 ? 8 : (int)TrailingZeroCount((uint)src);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Ntz]
         public static int ntz(byte src)
            => src == 0 ? 8 : (int)TrailingZeroCount((uint)src);
 
@@ -37,7 +37,7 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Ntz]
         public static int ntz(short src)
            => src == 0 ? 16 : (int)TrailingZeroCount((uint)src);
 
@@ -46,7 +46,7 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Ntz]
         public static int ntz(ushort src)
             => src == 0 ? 16 : (int)TrailingZeroCount((uint)src);
 
@@ -55,7 +55,7 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-         [MethodImpl(Inline), Op]
+         [MethodImpl(Inline), Ntz]
          public static int ntz(int src)
             => (int)TrailingZeroCount((uint)src);
 
@@ -64,7 +64,7 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Ntz]
         public static int ntz(uint src)
             => (int)TrailingZeroCount(src);
 
@@ -72,7 +72,7 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-         [MethodImpl(Inline), Op]
+         [MethodImpl(Inline), Ntz]
          public static int ntz(long src)
             => (int)TrailingZeroCount((ulong)src);
 
@@ -81,7 +81,7 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Ntz]
         public static int ntz(ulong src)
             => (int) TrailingZeroCount(src);
     }

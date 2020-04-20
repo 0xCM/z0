@@ -11,11 +11,11 @@ namespace Z0
 
     public static class Mux
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mux]
         public static bit mux(bit i0, bit i1, bit c0)
             => !c0 ? i0 : i1;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mux]
         public static bit mux(bit i0, bit i1, bit i2, bit i3, bit c0, bit c1)
         {
             if(!c0 && !c1)
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="control">Specifies the output selection</param>
         /// <param name="src">The input from which a bit will be selected</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mux]
         public static bit mux(byte src, byte control)
             => gbits.testbit(src, control);
 
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mux]
         public static bit mux(ushort src, byte control)
             => gbits.testbit(src, control);
 
@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mux]
         public static bit mux(uint src, byte control)
             => gbits.testbit(src, control);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Mux]
         public static bit mux(ulong src, byte control)
             => gbits.testbit(src, control);
     }

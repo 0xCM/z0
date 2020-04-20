@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vale</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Gather, Closures(UnsignedInts)]
         public static T gather<T>(T src, T mask)
             where T : unmanaged
         {

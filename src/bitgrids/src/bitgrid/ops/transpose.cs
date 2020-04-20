@@ -76,8 +76,8 @@ namespace Z0
             const uint O = BitMasks.Odd32;
 
             var mask = gvec.vtakemask(src, (byte)i);
-            var gT = gcell(g0, i, convert<T>(Bits.select(mask, E)));
-            gT = gcell(gT, j, convert<T>(Bits.select(mask, O)));
+            var gT = gcell(g0, i, convert<T>(Bits.gather(mask, E)));
+            gT = gcell(gT, j, convert<T>(Bits.gather(mask, O)));
             return gT;
         }
 

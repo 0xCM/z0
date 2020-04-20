@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Mix, Closures(UnsignedInts)]
         public static T mix<T>(N0 parity, T x, T y)        
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Mix, Closures(UnsignedInts)]
         public static T mix<T>(N1 parity, T x, T y)        
             where T : unmanaged
         {

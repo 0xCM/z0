@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="mask">The mask that defines the bits to select</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Gather]
         public static byte gather(byte src, byte mask)        
             => (byte)ParallelBitExtract((uint)src,(uint)mask);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="mask">The mask that defines the bits to select</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Gather]
         public static ushort gather(ushort src, ushort mask)        
             => (ushort)ParallelBitExtract((uint)src,(uint)mask);
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="mask">The mask that defines the bits to select</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Gather]
         public static uint gather(uint src, uint mask)        
             => ParallelBitExtract(src, mask);
 
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="mask">The mask that defines the bits to select</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Gather]
         public static ulong gather(ulong src, ulong mask)        
             => ParallelBitExtract(src,mask);
     }

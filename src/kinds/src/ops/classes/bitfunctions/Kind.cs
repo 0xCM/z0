@@ -17,6 +17,23 @@ namespace Z0
 
         TestC = Id.TestC,
 
-        TestZ = Id.TestZ
+        TestZ = Id.TestZ,
+
+        Ntz = Id.Ntz,
+
+        Nlz = Id.Nlz,
+
+        Pop = Id.Pop,
+
+        Mux = Id.Mux,
+
+        Scatter = Id.Scatter,
+
+        Gather = Id.Gather,
+
+        Mix = Id.Mix,
+
+        Rank = Id.Rank,
+
     }
 }

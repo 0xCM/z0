@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Scatter]
         public static byte scatter(byte src, byte mask)  
             => (byte)ParallelBitDeposit(src, mask); 
 
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Scatter]
         public static ushort scatter(ushort src, ushort mask)          
             => (ushort)ParallelBitDeposit(src,mask); 
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Scatter]
         public static uint scatter(uint src, uint mask)  
             => ParallelBitDeposit(src, mask); 
 
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Scatter]
         public static ulong scatter(ulong src, ulong mask)        
             => X64.ParallelBitDeposit(src,mask);
     }

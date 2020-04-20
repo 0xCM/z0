@@ -65,7 +65,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)Bits.select(x, BitMasks.Even64);
+                BitVector32 y = (uint)Bits.gather(x, BitMasks.Even64);
                 BitVector32 z = default;
 
                 for(int j=0, k = 0; j<64; j+=2, k++)
@@ -77,7 +77,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)Bits.select(x, BitMasks.Odd64);
+                BitVector32 y = (uint)Bits.gather(x, BitMasks.Odd64);
                 BitVector32 z = default;
 
                 for(int j=1, k = 0; j<64; j+=2, k++)
@@ -91,10 +91,10 @@ namespace Z0
         {            
             var x = Random.Next<uint>();
             var y = Random.Next<uint>();
-            var xE = Bits.project(Bits.select(x,BitMasks.Even32), BitMasks.Even32);
-            var xO = Bits.project(Bits.select(x,BitMasks.Odd32), BitMasks.Even32);
-            var yE = Bits.project(Bits.select(y,BitMasks.Even32), BitMasks.Odd32);
-            var yO = Bits.project(Bits.select(y,BitMasks.Odd32), BitMasks.Odd32);
+            var xE = Bits.scatter(Bits.gather(x,BitMasks.Even32), BitMasks.Even32);
+            var xO = Bits.scatter(Bits.gather(x,BitMasks.Odd32), BitMasks.Even32);
+            var yE = Bits.scatter(Bits.gather(y,BitMasks.Even32), BitMasks.Odd32);
+            var yO = Bits.scatter(Bits.gather(y,BitMasks.Odd32), BitMasks.Odd32);
             var xEy = xE | yE;
             var xOy = xO | yO;
             var t = text.factory.Builder();
