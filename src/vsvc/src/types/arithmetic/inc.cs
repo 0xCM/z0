@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.Integers)]
+        [NumericClosures(Integers)]
         public readonly struct Inc128<T> : ISVUnaryOp128DApi<T>, ISBUnaryOp128Api<T>
             where T : unmanaged
         {
@@ -37,7 +37,7 @@ namespace Z0
                 => ref gblocks.inc(a,c);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [NumericClosures(Integers)]
         public readonly struct Inc256<T> : ISVUnaryOp256DApi<T>, ISBUnaryOp256Api<T>
             where T : unmanaged
         {

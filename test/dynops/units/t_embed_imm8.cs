@@ -16,6 +16,8 @@ namespace Z0
         protected override bool TraceDetailEnabled
             => false;
 
+        IDynamicOps Dynamic => Context.Dynamic();
+
         VMethodSearch Search
             => VMethods.Search;
 
@@ -50,7 +52,7 @@ namespace Z0
 
             foreach(var imm in Immediates)
             {
-                var method = Dynop.EmbedV128UnaryOpImm(src,imm,src.Identify());
+                var method = Dynamic.EmbedVUnaryOpImm(src,imm).Require();
                 var vOutput = method.Invoke(vones);
             }
         }
@@ -76,7 +78,7 @@ namespace Z0
 
             foreach(var imm in Immediates)
             {
-                var method = Dynop.EmbedV256UnaryOpImm(src,imm, src.Identify());
+                var method = Dynamic.EmbedVUnaryOpImm(src,imm).Require();
                 var vOutput = method.Invoke(vones);
                 trace(vOutput.ToString());
             }            

@@ -20,29 +20,14 @@ namespace Z0
 
     }
 
-    [ApiHost]
-    public partial class BitMask : IApiHost<BitMask>
-    {
-
-    }       
     
-    // [ApiHost, ApiServiceProvider]
-    // public partial class BitService : IApiServiceProvider<BitService>
-    // {
-
-    // }
-
     [ApiHost]
     public partial class BitCalcs : IApiHost<BitCalcs>
     {
 
     }
 
-    public partial class BitMasks
-    {            
-
-    }
-
+ 
     public static partial class XTend
     {
 

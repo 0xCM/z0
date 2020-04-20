@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]        
         public readonly struct Blend2x64x128<T> : ISVImm8BinaryOp128Api<T>, ISVImm8BinaryResolver128Api<T>
             where T : unmanaged
         {
@@ -32,6 +32,7 @@ namespace Z0
                 => gvec.vblend2x64(x,y,spec);            
         }
 
+        [Closures(Integers)]        
         public readonly struct Blend4x64x256<T> : ISVImm8BinaryOp256Api<T>, ISVImm8BinaryResolver256Api<T>
             where T : unmanaged
         {
@@ -44,13 +45,14 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => Dynop.EmbedImmVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
+                => Dynop.EmbedImmVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name), spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
                 => gvec.vblend4x64(x,y,spec);
         }
 
+        [Closures(Integers)]        
         public readonly struct Blend4x32x128<T> : ISVImm8BinaryOp128Api<T>, ISVImm8BinaryResolver128Api<T>
             where T : unmanaged
         {
@@ -70,6 +72,7 @@ namespace Z0
                 => gvec.vblend4x32(x,y,spec);            
         }
 
+        [Closures(Integers)]
         public readonly struct Blend8x32x256<T> : ISVImm8BinaryOp256Api<T>, ISVImm8BinaryResolver256Api<T>
             where T : unmanaged
         {
@@ -86,10 +89,10 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
-                =>  gvec.vblend8x32(x,y,spec);
-
+                => gvec.vblend8x32(x,y,spec);
         }
 
+        [Closures(Integers)]        
         public readonly struct Blend8x16x128<T> : ISVImm8BinaryOp128Api<T>, ISVImm8BinaryResolver128Api<T>
             where T : unmanaged
         {
@@ -109,6 +112,7 @@ namespace Z0
                 => gvec.vblend8x16(x,y,spec);            
         }
 
+        [Closures(Integers)]        
         public readonly struct Blend8x16x256<T> : ISVImm8BinaryOp256Api<T>, ISVImm8BinaryResolver256Api<T>
             where T : unmanaged
         {

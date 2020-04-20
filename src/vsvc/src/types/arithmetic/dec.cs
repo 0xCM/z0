@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.Integers)]
+        [NumericClosures(Integers)]
         public readonly struct Dec128<T> : ISVUnaryOp128DApi<T>, ISBUnaryOp128Api<T>
             where T : unmanaged
         {
@@ -37,7 +37,7 @@ namespace Z0
                 => ref gblocks.dec(a,c);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [NumericClosures(Integers)]
         public readonly struct Dec256<T> : ISVUnaryOp256DApi<T>, ISBUnaryOp256Api<T>
             where T : unmanaged
         {

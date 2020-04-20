@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
+        [NumericClosures(AllNumeric)]
         public readonly struct Negate128<T> : ISVUnaryOp128DApi<T>, ISBUnaryOp128Api<T>
             where T : unmanaged
         {
@@ -37,7 +37,7 @@ namespace Z0
                 => ref gblocks.negate(a,c);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [NumericClosures(AllNumeric)]
         public readonly struct Negate256<T> : ISVUnaryOp256DApi<T>, ISBUnaryOp256Api<T>
             where T : unmanaged
         {

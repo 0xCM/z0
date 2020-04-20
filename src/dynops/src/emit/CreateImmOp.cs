@@ -40,7 +40,7 @@ namespace Z0
             return DynamicDelegate.Create<BinaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }
 
-        public static DynamicDelegate<UnaryBlockedOp128<T>> EmbedBlockedUnaryOpImm<T>(N128 w, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryBlockedOp128<T>> EmbedBlockedUnaryOpImm<T>(W128 w, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -78,20 +78,7 @@ namespace Z0
             return DynamicDelegate.Create<UnaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }
 
-        public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedV128UnaryOpImm<T>(MethodInfo src, byte imm8, OpIdentity id)
-            where T : unmanaged
-        {
-            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
-            var tCell = typeof(T);
-            var wrapped = src.Reify(typeof(T));
-            var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector128<T>); 
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
-            target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
-            return DynamicDelegate.Create<UnaryOp<Vector128<T>>>(idTarget, wrapped, target);
-        }
-
-        public static DynamicDelegate EmbedV128UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
+        internal static DynamicDelegate EmbedV128UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
             require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
@@ -104,7 +91,7 @@ namespace Z0
             return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
         }
 
-        public static DynamicDelegate EmbedV256UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
+        internal static DynamicDelegate EmbedV256UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
             require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
@@ -117,7 +104,7 @@ namespace Z0
             return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
         }
 
-        public static DynamicDelegate EmbedV128BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
+        internal static DynamicDelegate EmbedV128BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
             require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
@@ -130,7 +117,7 @@ namespace Z0
             return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
         }
 
-        public static DynamicDelegate EmbedV256BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
+        internal static DynamicDelegate EmbedV256BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
             require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();

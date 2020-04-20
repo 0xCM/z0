@@ -13,6 +13,7 @@ namespace Z0
     
     partial class VSvcHosts
     {
+        [Closures(AllNumeric)]
         public readonly struct Broadcast128<T> : ISVFactory128Api<T,T>
             where T : unmanaged
         {
@@ -44,6 +45,7 @@ namespace Z0
             public Vector128<T> Invoke(S a) => Vectors.vbroadcast(n128, convert<S,T>(a));            
         }
 
+        [Closures(AllNumeric)]
         public readonly struct Broadcast256<T> : ISVFactory256Api<T,T>
             where T : unmanaged
         {

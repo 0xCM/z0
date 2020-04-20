@@ -1,6 +1,6 @@
 {
-    "EmitPrimaryArtifacts": "False",
-    "CheckExecution": "False",
+    "EmitPrimaryArtifacts": "True",
+    "CheckExecution": "True",
     "EmitImmArtifacts" : "True",
     "HandleMembersLocated": "True",
     "HandleExtractsParsed": "True",

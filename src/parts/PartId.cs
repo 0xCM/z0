@@ -57,8 +57,9 @@ public enum PartId : ulong
     
     BitPack = 710,
 
-
     BitSvc = 81,
+
+    BitMasks = 903,
 
     BitSvcTest = BitSvc | Test,
     

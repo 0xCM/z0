@@ -16,7 +16,7 @@ namespace Z0
         /// Defines an alternating bit pattern 01 01...01
         /// </summary>
         /// <typeparam name="T">The primal unsigned type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T altodd<T>()
             where T : unmanaged
         {

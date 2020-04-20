@@ -60,5 +60,7 @@ namespace Z0
         Option<DynamicDelegate> EmbedVBinaryOpImm(MethodInfo src, byte imm8, OpIdentity id);
 
         Option<DynamicDelegate> EmbedVBinaryOpImm(MethodInfo src, byte imm8);
+
+        //Option<DynamicDelegate> EmbedV256UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id);
     }   
 }

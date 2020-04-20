@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
+        [NumericClosures(AllNumeric)]
         public readonly struct Add128<T> : IVSvcBinaryOp128<T>
             where T : unmanaged
         {
@@ -38,7 +38,7 @@ namespace Z0
                 => ref gblocks.add(a,b,c);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [NumericClosures(AllNumeric)]
         public readonly struct Add256<T> : IVSvcBinaryOp256<T>
             where T : unmanaged
         {

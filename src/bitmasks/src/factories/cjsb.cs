@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="t">The mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>CJSB := jsb | csb (8x2x1)</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T cjsb<T>(N8 f, N2 cd, N1 jsbd, T t = default)
             where T : unmanaged
         {

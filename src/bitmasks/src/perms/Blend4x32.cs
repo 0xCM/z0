@@ -13,7 +13,6 @@ namespace Z0
     [Flags]
     public enum Blend4x32 : byte
     {
-
         /// <summary>
         /// ([0 1 2 3], [4 5 6 7]) -> [0 1 2 3]
         /// </summary>

@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmbedV256BinaryOpImm(src,imm,Context.Identify(src));
+            => Dynop.EmbedV256BinaryOpImm(src,imm, Context.Identify(src));
     }
 
     readonly struct V256BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector256<T>>>

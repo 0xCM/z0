@@ -30,7 +30,7 @@ namespace Z0
         T t => default;
 
         string ICustomFormattable.Format()
-            => $"lsb(f:{value<F>()}, d:{value<D>()}, t:{Identify.numeric<T>()})";        
+            => $"lsb(f:{value<F>()}, d:{value<D>()}, t:{typeof(T).NumericKind().Format()})";        
     }
 
 }

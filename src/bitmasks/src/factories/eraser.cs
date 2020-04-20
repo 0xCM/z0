@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="start">The index at which to begin</param>
         /// <param name="count">The number of bits to disable</param>
         /// <typeparam name="T">The primal type over which the mask is defined</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T eraser<T>(byte start, byte count)
             where T : unmanaged
                 => gmath.xor(Literals.maxval<T>(), gmath.sll(BitMask.lo<T>(count - 1), start));

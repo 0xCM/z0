@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
+        [Closures(AllNumeric)]
         public readonly struct Sub128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>
             where T : unmanaged
         {
@@ -22,7 +22,7 @@ namespace Z0
 
             public static Sub128<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identify.sfunc(Name, VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) 
@@ -37,7 +37,7 @@ namespace Z0
                 => ref gblocks.sub(a,b,c);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(AllNumeric)]
         public readonly struct Sub256<T> : ISVBinaryOp256DApi<T>, ISBBinaryOp256Api<T>
             where T : unmanaged
         {

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.SignedInts)]
+        [NumericClosures(SignedInts)]
         public readonly struct Abs128<T> : ISVUnaryOp128DApi<T>, ISBUnaryOp128Api<T>
             where T : unmanaged
         {
@@ -37,7 +37,7 @@ namespace Z0
                 => ref gblocks.abs(a,c);
         }
 
-        [NumericClosures(NumericKind.SignedInts)]
+        [NumericClosures(SignedInts)]
         public readonly struct Abs256<T> : ISVUnaryOp256DApi<T>, ISBUnaryOp256Api<T>
             where T : unmanaged
         {

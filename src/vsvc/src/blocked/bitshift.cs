@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="count">The shift offset</param>
         /// <param name="dst">The blocked computation target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void xors<T>(in Block128<T> x, [Imm] byte count, in Block128<T> dst)
             where T : unmanaged
         {
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="offset">The shift offset</param>
         /// <param name="dst">The blocked computation target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void xors<T>(in Block256<T> x, [Imm] byte count, in Block256<T> dst)
             where T : unmanaged
         {
