@@ -66,7 +66,7 @@ namespace Z0
             iter(Context.Parts, part => Print(part));
 
             Print("I know parts:");
-            iter(Part.known(), part => Print(part));
+            iter(KnownParts, part => Print(part));
 
             Print("I am configured with:");
             iter(Context.Settings, setting => Print(setting));
@@ -74,7 +74,8 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            RunCapture();            
+            RunCapture();   
+            //DescribeControl();         
         }
 
         public static void Main(params string[] args)

@@ -7,6 +7,9 @@ namespace Z0.Asm
     using System;
     using System.Collections.Generic;
     using System.IO;
+
+    using static Seed;
+    using static Memories;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using R = Z0.Parts;
@@ -14,6 +17,29 @@ namespace Z0.Asm
     public abstract class t_asm<U> : UnitTest<U>
         where U : t_asm<U>
     {
+     
+        protected void WriteHex(ApiMemberCapture captured, StreamWriter dst)
+        {
+            var xLineFormatter = HexLineFormatter.Create();
+            var parsed = captured.Parsed;
+			dst.WriteLine($"; label   : {captured.OpSig}");
+			dst.WriteLine($"; location: {captured.AddressRange.Format()}, length: {captured.AddressRange.Length} bytes");
+            var lines = xLineFormatter.FormatHexLines(parsed.Bytes);
+            iter(lines, line => dst.WriteLine(line));            
+            dst.WriteLine(new string('_',80));
+
+        }
+     
+        protected void WriteAsm(ApiMemberCapture capture, StreamWriter dst)
+        {
+            //var parsed = capture.Parsed;
+			// dst.WriteLine($"; label   : {capture.OpSig}");
+			// dst.WriteLine($"; location: {capture.AddressRange.Format()}, length: {capture.AddressRange.Length} bytes");
+            var asm = Context.Decoder.Decode(capture).Require();
+            var formatted = Context.Formatter.FormatFunction(asm);
+            dst.WriteLine(formatted);            
+        }
+
         protected ICaptureArchive CodeArchive 
             => Context.CaptureArchive(
                 Env.Current.LogDir + FolderName.Define("test"), 
@@ -24,11 +50,6 @@ namespace Z0.Asm
         protected StreamWriter FileStreamWriter([Caller] string caller = null)
             => CodeArchive.HexPath(FileName.Define(caller)).Writer();
 
-        protected IBitArchiveWriter HexCodeWriter([Caller] string caller = null)
-        {
-            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return Context.BitArchiveWriter(dstPath);
-        }
 
         protected new IAsmContext Context;
         
@@ -48,11 +69,7 @@ namespace Z0.Asm
                 Queue, 
                 ApiComposition.Assemble(DefaultResolutions), 
                 Env.Current.LogDir,
-                Random, 
-                AsmFormatConfig.New,
-                Context.AsmFormatter(),
-                Context.AsmFunctionDecoder(),
-                Context.AsmWriterFactory()
+                AsmFormatConfig.DefaultStreamFormat
                 );
         }
     }

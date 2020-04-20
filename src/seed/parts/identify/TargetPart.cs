@@ -9,6 +9,15 @@ namespace Z0
 
     using static Seed;
 
+    public static class TargetPart
+    {
+        [MethodImpl(Inline)]
+        public static TargetPart<S,T> Target<S,T>(S src, T dst)        
+            where S : struct, IPart
+            where T : struct, IPart
+                => new TargetPart<S,T>(src,dst);
+    }
+
     public readonly struct TargetPart<S,T> : ITargetPart<S,T>
         where S : struct, IPart
         where T : struct, IPart

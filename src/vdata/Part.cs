@@ -11,11 +11,11 @@ namespace Z0.Parts
 
     public sealed class VData : Part<VData>
     {        
-        public override IBinaryResourceProvider ResourceProvider => default(ProvidedResources);   
+        public override IPartData ResourceProvider => default(ProvidedResources);   
         
     }
 
-    readonly struct ProvidedResources : IBinaryResourceProvider
+    readonly struct ProvidedResources : IPartData
     {
         public IEnumerable<BinaryResource> Resources => Data.Resources;
     }

@@ -85,7 +85,7 @@ namespace Z0.Asm
             if(src.Length == 0)
                 return default;
             
-            var descriptions = src.DescribeInstructions();
+            var descriptions =  AsmInstruction.describe(src);
             var lines = Spans.alloc<string>(src.Length);
             var @base = src[0].IP;
             for(var i=0; i< src.Length; i++)
@@ -95,7 +95,7 @@ namespace Z0.Asm
 
         public ReadOnlySpan<string> FormatLines(AsmFunction src)
         {
-            var descriptions = src.DescribeInstructions();
+            var descriptions = AsmInstruction.describe(src);
             var lines = new List<string>();
             for(var i = 0; i< descriptions.Length; i++)
                 lines.Add(FormatInstruction(src.BaseAddress, descriptions[i]));

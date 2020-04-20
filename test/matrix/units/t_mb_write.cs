@@ -23,9 +23,6 @@ namespace Z0.Test
             VerifyWriter<N7,N7,double>(Pow2.T03);                
         }
 
-        static FolderPath DataDir
-            =>  Env.Current.LogDir + FolderName.Define(typeof(t_mb_write).Name);  
-
         static T round<T>(T src)
             where T : unmanaged
         {
@@ -62,7 +59,7 @@ namespace Z0.Test
 
             for(var i=0; i< count; i++)
             {                                
-                var path = DataDir + Matrix.filename<M,N,T>(i);                
+                var path = DataFilePath(Matrix.filename<M,N,T>(i));                
                 var A = Write(path);
                 var B = Read(path);                                    
                 Claim.require(A == B);

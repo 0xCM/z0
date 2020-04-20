@@ -121,7 +121,7 @@ namespace Z0
         
         ICaptureService Capture => Context.CaptureService;
 
-        IMemberCaptureControl CaptureControl => Context.CaptureControl;
+        ICaptureControl CaptureControl => Context.CaptureControl;
 
         IAsmFunctionDecoder Decoder => Context.Decoder;
 
@@ -132,10 +132,16 @@ namespace Z0
         CaptureExchange Exchange(in BufferSeq buffers)   
             => CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);     
 
-        Option<AsmFunction> CaptureAsm(in CaptureExchange exchange, DynamicDelegate src)
-            => from capture in Capture.Capture(exchange, src.Id, src)
-               from asm in Decoder.Decode(capture)
-               select asm;
+        // Option<AsmFunction> CaptureAsm(in CaptureExchange exchange, DynamicDelegate src)
+        //     => from capture in Capture.Capture(exchange, src.Id, src)
+        //        from asm in Decoder.Decode(capture)
+        //        select asm;
+
+        Option<AsmFunction> CaptureAsm<D>(in CaptureExchange exchange, DynamicDelegate<D> src)
+            where D : Delegate
+                => from capture in Capture.Capture(exchange, src.Id, src)
+                from asm in Decoder.Decode(capture)
+                select asm;
 
         void CheckImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
             where T : unmanaged
@@ -175,25 +181,7 @@ namespace Z0
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.HostBits(id,host).Read(m).Single().ToApiCode();
 
-        // private TestCaseRecord TestAction(Action f, OpIdentity id)
-        // {            
-        //     var name = CaseName(id);
-        //     var clock = counter(true);
-        //     try
-        //     {
-        //         f();
-        //         return TestCaseRecord.Define(name, true, clock);
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         term.errlabel(e, id.Identifier);
-        //         return TestCaseRecord.Define(name, false, clock);                
-        //     }
-        // }
-
         ITestFixed Test => this;
-
-
 
         IEnumerable<string> PrimalBitLogicOps
             => seq("and", "or", "xor", "nand", "nor", "xnor",
@@ -384,7 +372,7 @@ namespace Z0
 
             var dynop = provider.EmbedImmediate(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
-            var captured = capture.Capture(exchange, dynop.Id, dynop).Require();            
+            var captured = capture.Capture(exchange, dynop.Id, dynop.DynamicOp).Require();            
             var asm = decoder.Decode(captured).Require();
 
 

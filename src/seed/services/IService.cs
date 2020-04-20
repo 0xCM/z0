@@ -34,16 +34,6 @@ namespace Z0
 
     }
 
-    public interface IStateless
-    {
-        
-    }
-
-    readonly struct Stateless : IStateless
-    {
-        public static IStateless Empty => default(Stateless);
-    }
-
     /// <summary>
     /// Charaterizes a component that maintains readonly-access to encapsulated state, here and throughout referred to as a context
     /// </summary>

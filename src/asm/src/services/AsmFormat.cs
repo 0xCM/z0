@@ -19,9 +19,9 @@ namespace Z0.Asm
         /// <param name="config">The format configuration</param>
         /// <param name="@base">The base address</param>
         /// <param name="src">The instruction description</param>
-        public static string render(in MemoryAddress @base, AsmInstructionInfo src, AsmFormatConfig fmt = null)        
+        public static string render(MemoryAddress @base, in AsmInstructionInfo src)
         {
-            var config = fmt ?? AsmFormatConfig.New;
+            var config = AsmFormatConfig.New;
             var description = text.factory.Builder();
             var absolute = @base + (MemoryAddress)src.Offset;  
             description.Append(text.concat(label(src.Offset), src.AsmContent.PadRight(config.InstructionPad, text.space())));
@@ -32,26 +32,16 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Formats an instruction
-        /// </summary>
-        /// <param name="src">The instruction description</param>
-        /// <param name="@base">The base address</param>
-        /// <param name="config">An optional format configuration</param>
-        [MethodImpl(Inline)]
-        public static string render(AsmInstructionInfo src, in MemoryAddress @base, AsmFormatConfig config = null)
-            => render(@base, src, config);
-
-        /// <summary>
         /// Formats the instructions in a function
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="config">An optional format configuration</param>
-        public static ReadOnlySpan<string> lines(in AsmFunction src, AsmFormatConfig config = null)
+        public static ReadOnlySpan<string> lines(in AsmFunction src)
         {
-            var descriptions = src.DescribeInstructions();
+            var descriptions = AsmInstruction.describe(src);
             var lines = new List<string>();
             for(var i = 0; i< descriptions.Length; i++)
-                lines.Add(render(src.BaseAddress, descriptions[i], config));
+                lines.Add(render(src.BaseAddress, descriptions[i]));
             return lines.ToArray();
         }    
 
@@ -60,16 +50,16 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The instruction source</param>
         /// <param name="config">An optional format configuration</param>
-        public static ReadOnlySpan<string> lines(AsmInstructionList src, AsmFormatConfig config = null)
+        public static ReadOnlySpan<string> lines(in AsmInstructionList src)
         {
             if(src.Length == 0)
                 return default;
 
-            var descriptions = src.DescribeInstructions();
+            var descriptions =  AsmInstruction.describe(src);
             var lines = new List<string>();
             var @base = src[0].IP;
             for(var i = 0; i< descriptions.Length; i++)
-                lines.Add(render(@base, descriptions[i], config));
+                lines.Add(render(@base, descriptions[i]));
             return lines.ToArray();
         }
 
@@ -110,11 +100,5 @@ namespace Z0.Asm
                 MemorySize.UInt64 => "64u",
                 _   => src.ToString()
             };
-    }
-
-	partial class XTend
-    {
-        public static string Format(this MemorySize src)
-            => AsmFormat.render(src);
     }
 }

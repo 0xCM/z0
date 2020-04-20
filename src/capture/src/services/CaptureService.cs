@@ -14,6 +14,8 @@ namespace Z0.Asm
     
     unsafe readonly struct CaptureService : ICaptureService
     {        
+        readonly IMultiDiviner Diviner;
+
         [MethodImpl(Inline)]
         static ApiMemberCapture DefineMember(OpIdentity id, MethodInfo src, ParsedMemoryExtract bits, ExtractTermCode term)
             => ApiMemberCapture.Define(id, null, src, bits.Source, bits.Parsed, term);
@@ -27,10 +29,16 @@ namespace Z0.Asm
             => ApiMemberCapture.Define(id, src, src.Method, extracted, parsed, term);
 
         [MethodImpl(Inline)]
-        public static CaptureService Create(IContext context)
-            => default(CaptureService);
+        public static CaptureService Create(IDivinationContext context)
+            => new CaptureService(context);
 
-        public Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, in OpIdentity id, Span<byte> src)
+        [MethodImpl(Inline)]
+        CaptureService(IDivinationContext context)
+        {
+            this.Diviner = context.Diviner;
+        }
+
+        public Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
             {
@@ -46,11 +54,11 @@ namespace Z0.Asm
             }
         }
 
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, MethodInfo src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
         {
             try
             {
-                var pSrc = jit(src);
+                var pSrc = DynamicOps.jit(src);
                 var summary = Parse(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
                 var captured = DefineMember(id, src, summary.Bits, outcome.TermCode);                
@@ -63,11 +71,11 @@ namespace Z0.Asm
             }
         }
 
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, in DynamicDelegate src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
         {
             try
             {
-                var pSrc = jit(src).Ptr;
+                var pSrc = DynamicOps.jit(src).Ptr;
                 var summary = Parse(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
                 var captured = ApiMemberCapture.Define(id, src.DynamicOp, src.SourceMethod, summary.Bits.Source, summary.Bits.Parsed, outcome.TermCode);                
@@ -81,11 +89,11 @@ namespace Z0.Asm
             }
         }
 
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
         {
             try
             {
-                var pSrc = jit(src);
+                var pSrc = DynamicOps.jit(src);
                 var summary = Parse(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.Bits, outcome.TermCode);  
@@ -103,7 +111,9 @@ namespace Z0.Asm
             if(src.IsOpenGeneric())
             {
                 var target = src.Reify(args);
-                return Capture(exchange, target.Identify(), target);
+                var id = Diviner.DivineIdentity(target);
+                return Capture(exchange, id, target);
+                //return Capture(exchange, target.Identify(), target);
             }
             else
                 return Capture(exchange, src.Identify(), src);                
@@ -291,29 +301,29 @@ namespace Z0.Asm
             && d.x == d.y
             && e.x == e.y;
 
-        /// <summary>
-        /// Jits the methd and returns a pointer to the resulting method
-        /// </summary>
-        /// <param name="src">The soruce method</param>
-        [MethodImpl(Inline)]
-        static IntPtr jit(MethodInfo src)
-        {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            return src.MethodHandle.GetFunctionPointer();
-        }
+        // /// <summary>
+        // /// Jits the methd and returns a pointer to the resulting method
+        // /// </summary>
+        // /// <param name="src">The soruce method</param>
+        // [MethodImpl(Inline)]
+        // static IntPtr jit(MethodInfo src)
+        // {
+        //     RuntimeHelpers.PrepareMethod(src.MethodHandle);
+        //     return src.MethodHandle.GetFunctionPointer();
+        // }
 
-        [MethodImpl(Inline)]
-        static IntPtr jit(Delegate d)
-        {   
-            RuntimeHelpers.PrepareDelegate(d);
-            return d.Method.MethodHandle.GetFunctionPointer();
-        }    
+        // [MethodImpl(Inline)]
+        // static IntPtr jit(Delegate d)
+        // {   
+        //     RuntimeHelpers.PrepareDelegate(d);
+        //     return d.Method.MethodHandle.GetFunctionPointer();
+        // }    
 
-        [MethodImpl(Inline)]
-        static DynamicPointer jit(DynamicDelegate d)
-        {   
-            RuntimeHelpers.PrepareDelegate(d.DynamicOp);
-            return d.GetDynamicPointer();
-        }        
+        // [MethodImpl(Inline)]
+        // static DynamicPointer jit(DynamicDelegate d)
+        // {   
+        //     RuntimeHelpers.PrepareDelegate(d.DynamicOp);
+        //     return DynamicOps.pointer(d);
+        // }        
     }
 }

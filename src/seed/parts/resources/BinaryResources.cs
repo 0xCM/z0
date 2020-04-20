@@ -7,11 +7,6 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IBinaryResourceProvider
-    {
-        IEnumerable<BinaryResource> Resources {get;}
-    }
-
     public class BinaryResources
     {
         public static BinaryResources Empty => Create(new BinaryResource[]{});
@@ -24,7 +19,7 @@ namespace Z0
             return dst;
         }   
 
-        public static BinaryResources Create(IBinaryResourceProvider src)
+        public static BinaryResources Create(IPartData src)
             => Create(src.Resources);
 
         public static implicit operator BinaryResources(BinaryResource[] src)
@@ -34,7 +29,6 @@ namespace Z0
         {
 
         }
-
 
         Dictionary<ulong,BinaryResource> Index {get;}
             = new Dictionary<ulong, BinaryResource>();

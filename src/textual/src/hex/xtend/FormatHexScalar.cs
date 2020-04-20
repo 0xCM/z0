@@ -65,6 +65,7 @@ namespace Z0
                      : src.ToString(CaseSpec(uppercase).ToString()))
              + (specifier && !prespec ? "h" : string.Empty);
 
+
         /// <summary>
         /// Renders a number as a hexadecimal string
         /// </summary>
@@ -142,5 +143,41 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this double src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => BitConverter.DoubleToInt64Bits(src).FormatHex(zpad, specifier, uppercase, prespec);
+
+
+        [MethodImpl(Inline)]
+        public static string FormatHex(this byte src, HexFormatConfig config)
+            => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+
+
+        [MethodImpl(Inline)]
+        public static string FormatHex(this sbyte src, HexFormatConfig config)
+            => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+
+
+        [MethodImpl(Inline)]
+        public static string FormatHex(this short src, HexFormatConfig config)
+            => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+
+        [MethodImpl(Inline)]
+        public static string FormatHex(this ushort src, HexFormatConfig config)
+            => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+
+        [MethodImpl(Inline)]
+        public static string FormatHex(this int src, HexFormatConfig config)
+            => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+
+        [MethodImpl(Inline)]
+        public static string FormatHex(this uint src, HexFormatConfig config)
+            => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+
+
+        [MethodImpl(Inline)]
+        public static string FormatHex(this ulong src, HexFormatConfig config)
+            => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+
+        [MethodImpl(Inline)]
+        public static string FormatHex(this long src, HexFormatConfig config)
+            => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
     }
 }

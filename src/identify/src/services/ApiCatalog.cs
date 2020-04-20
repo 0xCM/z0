@@ -51,7 +51,7 @@ namespace Z0
             Resources = resources ?? BinaryResources.Empty;
         }                            
 
-        public ApiCatalog(Assembly source, PartId id, IBinaryResourceProvider provider)
+        public ApiCatalog(Assembly source, PartId id, IPartData provider)
             : this(source,id)
         {
             Resources = BinaryResources.Create(provider);

@@ -10,6 +10,17 @@ namespace Z0
 
     using static Seed;
 
+    public static class UserTypeCode
+    {
+        [MethodImpl(Inline)]
+        public static UserTypeCode<T> Define<T>(ITypeCodeSource src, ulong id)
+        {
+            if(!src.AssignedCodes.Contains(id))
+               throw new Exception($"I dont understand {typeof(T)}");
+            return new UserTypeCode<T>(id);
+        }
+    }
+
     public readonly struct UserTypeCode<T> : ITypeCode<T>
     {        
         /// <summary>

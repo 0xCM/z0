@@ -37,13 +37,13 @@ namespace Z0
         /// </summary>
         public readonly D DynamicOp;
 
-        [MethodImpl(Inline)]
-        public static implicit operator DynamicDelegate(DynamicDelegate<D> src)
-            => src.AsNonParametric();
+        // [MethodImpl(Inline)]
+        // public static implicit operator DynamicDelegate(DynamicDelegate<D> src)
+        //     => src.Untyped;
 
-        [MethodImpl(Inline)]
-        public static implicit operator D(DynamicDelegate<D> d)
-            => d.DynamicOp;
+        // [MethodImpl(Inline)]
+        // public static implicit operator D(DynamicDelegate<D> d)
+        //     => d.DynamicOp;
 
         [MethodImpl(Inline)]
         internal DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, D op)
@@ -54,8 +54,10 @@ namespace Z0
             this.DynamicOp = op;
         }
 
-        [MethodImpl(Inline)]
-        public DynamicDelegate AsNonParametric()
-            => DynamicDelegate.Define(Id, Source, Target, DynamicOp);
+        public DynamicDelegate Untyped
+        {
+            [MethodImpl(Inline)]
+            get => DynamicDelegate.Create(Id, Source, Target, DynamicOp);
+        }
     }
 }

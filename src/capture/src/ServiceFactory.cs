@@ -14,6 +14,7 @@ namespace Z0.Asm
     using Svc = Z0.Asm;
     
     using static Seed;
+    using static Memories;
 
     public static class AsmCoreServices
     {                       
@@ -39,7 +40,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static ICaptureService Capture(this IContext context)
-            => CaptureService.Create(context);
+            => CaptureService.Create(DivinationContext.Create(context, context.MultiDiviner()));
 
         /// <summary>
         /// Creates a flow over an instruction source
@@ -51,16 +52,13 @@ namespace Z0.Asm
         public static IAsmInstructionFlow InstructionFlow(this IContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
 
-        [MethodImpl(Inline)]
-        public static IMemberCaptureControl CaptureControl(this IContext context, ICaptureService capture)
-            => MemberCaptureControl.Create(context, capture);
-
-        public static CaptureExchange CaptureExchange(this IContext context, int? size = null)
+        public static CaptureExchange CaptureExchange(this IAsmContext context)
         {
-            const int DefaultBufferLen = 1024*8;
-            var control = context.CaptureControl(context.Capture());
-            var cBuffer = new byte[size ?? DefaultBufferLen];
-            var sBuffer = new byte[size ?? DefaultBufferLen];
+            var size = context.DefaultBufferLength;                                    
+            //var control = context.CaptureControl(context.Capture());
+            var control = context.CaptureControl;            
+            var cBuffer = new byte[size];
+            var sBuffer = new byte[size];
             return Svc.CaptureExchange.Create(control, cBuffer, sBuffer);
         }        
         
@@ -80,24 +78,6 @@ namespace Z0.Asm
         public static IHostCaptureService HostCaptureService(this IAsmContext context, FolderName area = null, FolderName subject = null)
             => Svc.HostCaptureService.Create(context, area, subject);
 
-        public static void WriteDiagnostic(this StreamWriter writer, Option<ApiMemberCapture> mayhaps)
-        {
-            if(mayhaps.IsNone())
-                return;
-            var definite = mayhaps.Value;
-
-            var data = definite.Parsed;
-            var dst = text.build();
-			dst.AppendLine($"; label   : {definite.OpSig}");
-			dst.AppendLine($"; location: {definite.AddressRange.Format()}, length: {definite.AddressRange.Length} bytes");
-            var lines = data.Bytes.FormatHexLines(null);
-            dst.Append(lines.Concat(Chars.Eol));
-            dst.AppendLine(new string('_',80));
-            writer.Write(dst.ToString());
-        }
-
-        public static void WriteHexLine(this IBitArchiveWriter writer, in ApiMemberCapture src, int? idpad = null)
-            => writer.WriteCode(EncodedHexLine.Define(src.OpId, src.Extracted.Bytes),idpad); 
 
 
         /// <summary>
@@ -107,10 +87,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static IAsmFormatter AsmFormatter(this IContext context, AsmFormatConfig config)
             => AsmDecoder.formatter(context,config);
-
-        [MethodImpl(Inline)]
-        public static IAsmFormatter AsmFormatter(this IContext context)
-            => context.AsmFormatter(AsmFormatConfig.DefaultStreamFormat);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer with a customized format configuration

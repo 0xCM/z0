@@ -65,7 +65,7 @@ public enum PartId : ulong
     
     Logix = 120, LogixTest = Logix | Test, 
     
-    Asm = 300,  
+    Asm = 300,  AsmTest = Asm | Test,
     
     Capture = 316,
 

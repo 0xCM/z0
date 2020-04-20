@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         string Name {get;}        
 
-        IBinaryResourceProvider ResourceProvider {get;}
+        IPartData ResourceProvider {get;}
 
     }
 

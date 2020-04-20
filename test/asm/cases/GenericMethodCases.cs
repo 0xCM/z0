@@ -13,17 +13,17 @@ namespace Z0
 
     static class GenericMethodCases
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T and<T>(T a, T b)
             where T : unmanaged
                 => gmath.and(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T or<T>(T a, T b)
             where T : unmanaged
                 => gmath.or(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T xor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xor(a,b);

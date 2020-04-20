@@ -16,7 +16,7 @@ namespace Z0.Asm
 
     public class ImmEmissionWorkflow : IAsmWorkflow<ImmEmissionWorkflow,ImmEmissionBroker>, IImmEmissionWorkflow
     {                        
-        public static IImmEmissionWorkflow Create(IContext context, IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
+        public static IImmEmissionWorkflow Create(IAsmContext context, IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
             => new ImmEmissionWorkflow(context, sink, formatter, decoder, api, dst);
 
         public ImmEmissionBroker Broker {get;} 
@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         public IAppMsgSink Sink {get;}
 
-        ImmEmissionWorkflow(IContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
+        ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
         {
             Context = context;
             Sink = sink;
@@ -54,12 +54,13 @@ namespace Z0.Asm
 
         readonly IImmSpecializer ImmSpecializer;
 
-        readonly IContext Context;
+        readonly IAsmContext Context;
 
         void ConnectReceivers(IImmEmissionStep relay)
         {
             relay.EmittedEmbeddedImm.Subscribe(relay,OnEvent);          
             relay.HostFileEmissionFailed.Subscribe(relay,OnEvent);
+            
         }
 
         void OnEvent(EmittedEmbeddedImm e)

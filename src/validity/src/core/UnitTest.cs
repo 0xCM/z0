@@ -5,14 +5,40 @@
 namespace Z0
 {
     using System;
-    
+    using System.IO;
+
     using static Seed;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {        
         protected virtual bool TraceDetailEnabled
             => false;
+
+        protected FolderPath DataDir => Paths.TestDataDir<U>();
+        
+        protected FilePath DataFilePath(FileName filename)
+            => DataDir + filename;
+
+        protected StreamWriter DataFileWriter(FileName filename)
+            => DataFilePath(filename).Writer();
+
+        /// <summary>
+        /// Creates a file path with a filename derived from the calling method
+        /// </summary>
+        /// <param name="ext">The file extension</param>
+        protected FilePath CaseFilePath(FileExtension ext, [Caller] string caller = null)
+            =>  DataFilePath(FileName.Define(caller, ext));
+
+        /// <summary>
+        /// Creates a stream writer with a filename derived from the calling method
+        /// </summary>
+        /// <param name="ext">The file extension</param>
+        /// <param name="caller">The calling method</param>
+        protected StreamWriter CaseFileWriter(FileExtension ext, [Caller] string caller = null)
+            => CaseFilePath(ext, caller).Writer();
 
         protected ICheck Claim => ICheck.Checker;
 

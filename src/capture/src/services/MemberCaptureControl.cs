@@ -10,12 +10,12 @@ namespace Z0.Asm
     
     using static Seed;
 
-    public readonly struct MemberCaptureControl : IMemberCaptureControl
+    public readonly struct MemberCaptureControl : ICaptureControl
     {                    
         readonly ICaptureService Service;
         
         [MethodImpl(Inline)]
-        public static IMemberCaptureControl Create(IContext context, ICaptureService capture)
+        public static ICaptureControl Create(IContext context, ICaptureService capture)
             => new MemberCaptureControl(context, capture);
                     
         [MethodImpl(Inline)]
@@ -25,19 +25,19 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, in DynamicDelegate src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
             => Service.Capture(exchange, id, src);
 
         [MethodImpl(Inline)]
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
             => Service.Capture(exchange, id,src);
 
         [MethodImpl(Inline)]
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, MethodInfo src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
             => Service.Capture(exchange, id, src);                                    
 
         [MethodImpl(Inline)]
-        public Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, in OpIdentity id, Span<byte> src)
+        public Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
             => Service.ParseBuffer(exchange, id, src);
 
         [MethodImpl(Inline)]
@@ -53,6 +53,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         void ICaptureJunction.OnCaptureComplete(in CaptureExchange exchange, in ApiExtractState state, in ApiMemberCapture captured)
         {}
-
     }
 }

@@ -37,7 +37,10 @@ namespace Z0
         /// <summary>
         /// The parts that are not unknown
         /// </summary>
-        protected static IEnumerable<IPart> KnownParts => Part.KnownParts;
+        protected static PartIndex KnownParts => LazyParts.Value; //Part.Index;//Part.KnownParts;
+
+        static Lazy<PartIndex> LazyParts {get;} 
+            = new Lazy<PartIndex>(PartIndex.Build);        
 
         protected static void Launch(params string[] args)
         {

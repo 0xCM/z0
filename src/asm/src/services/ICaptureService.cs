@@ -8,50 +8,61 @@ namespace Z0.Asm
     using System.Reflection;
 
     /// <summary>
-    /// Characterizes a service that extracts identified member operation x86 encodings
+    /// Defines supported x86-encoding capture operations
     /// </summary>
     public interface ICaptureService : IService
     {               
         /// <summary>
-        /// Captures native x86 encoded assembly produced by the jitter for a method
+        /// Captures jitted x86 encoded assembly for nongeneric methods
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The source method</param>
-        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, MethodInfo src);            
+        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src);            
 
         /// <summary>
-        /// Captures native x86 encoded assembly produced by the jitter by either 
-        /// closing an open generic method definition over supplied type arguments or, if
-        /// the method is non-generic or closed generic, submits the method directly for capture
+        /// Captures jitted x86 encoded assembly for generic or nongeneric methods
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="src">The source method</param>
-        /// <param name="args">The types over which to close the generic method</param>
+        /// <param name="args">The types over which to close open generic methods, if applicable</param>
+        /// <remarks>
+        /// If the method is open generic, it is closed over supplied type arguments or
+        /// If the method is nongeneric or closed-generic, the method is captured as-is
+        /// </remarks>
         Option<ApiMemberCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args);        
 
         /// <summary>
-        /// Captures native code produced by the JIT for a dynamic delegate
+        /// Captures jitted x86 encoded assembly for a dynamic delegate
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, in DynamicDelegate src);
-            
+        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src);
+
         /// <summary>
-        /// Captures native x86 encoded assembly produced by the jitter for a delegate
+        /// Captures jitted x86 encoded assembly for a dynamic delegate
+        /// </summary>
+        /// <param name="exchange">The selected exchange</param>
+        /// <param name="id">The identity to confer to the captured member</param>
+        /// <param name="src">The dynamic delegate to capture</param>
+        Option<ApiMemberCapture> Capture<D>(in CaptureExchange exchange, OpIdentity id, DynamicDelegate<D> src)
+            where D : Delegate => Capture(exchange,id, src.Untyped);
+
+        /// <summary>
+        /// Captures jitted x86 encoded assembly for a delegate
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The delegate to capture</param>
-        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src);
+        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src);
             
         /// <summary>
         /// Captures encoded data from a caller-supplied source buffer.
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
-        /// <param name="id"></param>
+        /// <param name="id">The identity to confer to the parsed buffer</param>
         /// <param name="src">The source buffer</param>
-        Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, in OpIdentity id, Span<byte> src);
+        Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src);
     }
 }

@@ -10,64 +10,44 @@ namespace Z0
 
     using static Seed;
 
-    partial class XTend
+    public readonly struct HexLineFormatter : IHexLineFormatter
     {
-        /// <summary>
-        /// Formats the source data with optional line length/numbering
-        /// </summary>
-        /// <param name="data">The source data</param>
-        /// <param name="fmt">The format options</param>
-        public static IReadOnlyList<string> FormatHexLines(this ReadOnlySpan<byte> data, HexLineConfig? fmt = null)
+        public static IHexLineFormatter Create()
+            => default(HexLineFormatter);
+
+        public string[] FormatHexLines(byte[] data, HexLineConfig lineConfig)
         {
-            var builder = string.Empty.Build();
-            var configured = fmt ?? HexLineConfig.Default;  
+            var labelConfig = HexFormatConfig.Define(zpad:true, specifier: true, uppercase: false, prespec:false);
+            var dataConfig = HexFormatConfig.HexData;
             var lines = new List<string>();
-            var line = string.Empty.Build();
+            var line = string.Empty.Build();            
+
             for(ushort i=0; i< data.Length; i++)
             {                
-                if(i % configured.BytesPerLine == 0)
+                if(i % lineConfig.BytesPerLine == 0)
                 {
                     if(i != 0)
-                    {                        
-                        builder.AppendLine();
-                        
-                        line.AppendLine();
+                    {                                                
                         lines.Add(line.ToString());
                         line.Clear();
                     }
 
-                    if(configured.LineLabels)
+                    if(lineConfig.LineLabels)
                     {
-                        builder.Append(i.FormatHex(true,false,false,true));
-                        builder.Append('h');
-                        builder.Append(Chars.Space);
-
-                        line.Append(i.FormatHex(true,false,false,true));
-                        line.Append('h');
+                        line.Append(i.FormatHex(labelConfig));
                         line.Append(Chars.Space);
                     }
                 }
 
-                builder.Append(data[i].FormatHex(true, true, false, true));
-                builder.Append(Chars.Space);
-
-                line.Append(data[i].FormatHex(true, true, false, true));
+                line.Append(data[i].FormatHex(dataConfig));
                 line.Append(Chars.Space);
             }
+
             var last = line.ToString();
             if(!string.IsNullOrWhiteSpace(last))
                 lines.Add(last);   
 
-            builder.AppendLine();
-            return lines;           
-        } 
-
-        /// <summary>
-        /// Formats the source data with optional line length/numbering
-        /// </summary>
-        /// <param name="data">The source data</param>
-        /// <param name="fmt">The format options</param>
-        public static IReadOnlyList<string> FormatHexLines(this byte[] data, HexLineConfig? fmt = null)
-            => data.ToReadOnlySpan().FormatHexLines(fmt);    
+            return lines.ToArray();           
+        }         
     }
 }

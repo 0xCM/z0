@@ -13,16 +13,10 @@ namespace Z0.Logix
     using static BinaryLogicKind;
 
     public class t_truthtable : UnitTest<t_truthtable>
-    {
-        FilePath TruthPath(FileName filename)
-                => Paths.TestDataDir<t_truthtable>() + filename;
-                
-        StreamWriter writer(FileName filename)
-            => TruthPath(filename).Writer();
-        
+    {                        
         public void unary_truth()
         {
-            using var dst = writer(FileName.Define(caller()));
+            using var dst = DataFileWriter(FileName.Define(caller()));
             var ops = LogicOpApi.UnaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Unary);
@@ -30,7 +24,7 @@ namespace Z0.Logix
 
         public void binary_truth()
         {
-            using var dst = writer(FileName.Define(caller()));
+            using var dst = DataFileWriter(FileName.Define(caller()));
             var ops = LogicOpApi.BinaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Binary);
@@ -38,7 +32,7 @@ namespace Z0.Logix
 
         public void ternary_truth()
         {
-            using var dst = writer(FileName.Define(caller()));
+            using var dst = DataFileWriter(FileName.Define(caller()));
             var ops = LogicOpApi.TernaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Ternary);

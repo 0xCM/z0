@@ -38,7 +38,7 @@ namespace Z0.Asm
         /// </summary>
         ICaptureService CaptureService {get;}       
 
-        IMemberCaptureControl CaptureControl {get;}
+        ICaptureControl CaptureControl {get;}
 
         /// <summary>
         /// Provides access to dynamic operator production facilities

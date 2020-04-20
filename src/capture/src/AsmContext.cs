@@ -34,21 +34,22 @@ namespace Z0.Asm
 
         public ICaptureService CaptureService {get;}
 
-        public IMemberCaptureControl CaptureControl {get;}
+        public ICaptureControl CaptureControl {get;}
         
         public IDynamicOps Dynamic {get;}
-        public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition api, FolderPath root)
+
+        public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition api, FolderPath root, AsmFormatConfig format = null)
         {
             var context = IContext.Default;
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var format = AsmFormatConfig.New;            
-            var decoder = AsmDecoder.function(context, format);
-            var formatter = AsmDecoder.formatter(context, format);
+            var _format = format ?? AsmFormatConfig.New;
+            var decoder = AsmDecoder.function(context, _format);
+            var formatter = AsmDecoder.formatter(context, _format);
             var factory = AsmDecoder.writerFactory(context);
             var capture = context.Capture();
             var control =  MemberCaptureControl.Create(context, capture);
             var dynops = context.Dynamic();
-            return AsmContext.Create(settings, queue, api, root, random, format, formatter, decoder, factory, capture, control,dynops);
+            return AsmContext.Create(settings, queue, api, root, random, _format, formatter, decoder, factory, capture, control,dynops);
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace Z0.Asm
             IAsmFunctionDecoder decoder,
             AsmWriterFactory writerFactory,
             ICaptureService capture,
-            IMemberCaptureControl control,
+            ICaptureControl control,
             IDynamicOps dynops)
                 => new AsmContext(assemblies, settings, queue, root, random, format, formatter, 
                     decoder, writerFactory, capture,control, dynops);
@@ -82,7 +83,7 @@ namespace Z0.Asm
             IAsmFunctionDecoder decoder,
             AsmWriterFactory writerFactory,
             ICaptureService capture,
-            IMemberCaptureControl control,
+            ICaptureControl control,
             IDynamicOps dynops
             )
         {

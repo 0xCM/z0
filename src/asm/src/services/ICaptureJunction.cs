@@ -7,10 +7,12 @@ namespace Z0.Asm
     using System;
 
     /// <summary>
-    /// Defines a source for events that originate within a capture exchange context. This
-    /// device is used as a means to compensate for the fact that the exchange itself, which is a
-    /// ref struct, cannot be contracted.
+    /// Defines a source for events that originate within a capture exchange context. 
     /// </summary>
+    /// <remarks>
+    /// This device is used as a means to compensate for the fact that the exchange itself, which is a
+    /// ref struct, cannot be contracted.
+    /// </remarks>
     public interface ICaptureJunction
     {
         /// <summary>
@@ -27,10 +29,5 @@ namespace Z0.Asm
         /// <param name="state">The final state</param>
         /// <param name="captured">The captured member</param>
         void OnCaptureComplete(in CaptureExchange src, in ApiExtractState state, in ApiMemberCapture captured);        
-    }
-
-    public interface IMemberCaptureControl : ICaptureService, ICaptureJunction
-    {
-
-    }
+    } 
 }

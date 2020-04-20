@@ -15,9 +15,18 @@ namespace Z0
     /// </summary>
     public unsafe readonly struct DynamicPointer
     {
+        readonly DynamicDelegate Op;
+
+        public readonly IntPtr Ptr;
+
         [MethodImpl(Inline)]
-        public static DynamicPointer Define(DynamicDelegate dynamicOp, IntPtr pointer)
-            => new DynamicPointer(dynamicOp, pointer);
+        public static DynamicPointer Define(DynamicDelegate d, IntPtr pointer)
+            => new DynamicPointer(d, pointer);
+
+        [MethodImpl(Inline)]
+        public static DynamicPointer Define<D>(DynamicDelegate<D> d, IntPtr pointer)
+            where D : Delegate
+                => Define(d.Untyped, pointer);
 
         [MethodImpl(Inline)]
         public DynamicPointer(DynamicDelegate dynamicOp, IntPtr pointer)
@@ -25,10 +34,6 @@ namespace Z0
             Ptr = pointer;
             Op = dynamicOp;
         }
-
-        readonly DynamicDelegate Op;
-
-        public readonly IntPtr Ptr;
 
         public byte* BytePtr
         {

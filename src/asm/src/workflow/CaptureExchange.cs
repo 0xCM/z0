@@ -25,7 +25,7 @@ namespace Z0.Asm
         /// <summary>
         /// The juncture-coincident operation set 
         /// </summary>
-        public readonly ICaptureService Operations;
+        public readonly ICaptureService Service;
 
         /// <summary>
         /// The junction to which events will be relayed
@@ -33,16 +33,16 @@ namespace Z0.Asm
         readonly ICaptureJunction Junction;
 
         [MethodImpl(Inline)]
-        public static CaptureExchange Create(IMemberCaptureControl control, Span<byte> capture, Span<byte> state)
+        public static CaptureExchange Create(ICaptureControl control, Span<byte> capture, Span<byte> state)
             => new CaptureExchange(control,capture,state);
 
-        CaptureExchange(IMemberCaptureControl control, Span<byte> capture, Span<byte> state)            
+        CaptureExchange(ICaptureControl control, Span<byte> capture, Span<byte> state)            
         {
             require(capture.Length == state.Length);
             this.TargetBuffer = capture;
             this.StateBuffer = state;
             this.Junction = control as ICaptureJunction;
-            this.Operations = control;
+            this.Service = control;
         }
 
         public void ClearBuffers()

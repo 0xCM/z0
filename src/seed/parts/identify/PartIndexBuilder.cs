@@ -14,10 +14,20 @@ namespace Z0
     using static Seed;
     using static PartId;
 
-    public static class Part
+    readonly struct PartIndexBuilder : IPartIndexBuilder
     {
-        public static PartIndex Index => DeferredIndex.Value;        
+        /// <summary>
+        /// Creates the builkder, not the index
+        /// </summary>
+        public static IPartIndexBuilder Create()
+            => default(PartIndexBuilder);
 
+        /// <summary>
+        /// Creates an index over the known parts
+        /// </summary>
+        public PartIndex Build()
+            => PartIndex.Define(Known);
+ 
         /// <summary>
         /// The location of potentially knowable parts
         /// </summary>
@@ -32,15 +42,6 @@ namespace Z0
 
         static IEnumerable<IPart> Known
             => resolve(paths());
-
-        /// <summary>
-        /// Creates an index over the known parts
-        /// </summary>
-        static PartIndex index()
-            => PartIndex.Define(Known);
-
-        static Lazy<PartIndex> DeferredIndex {get;} 
-            = new Lazy<PartIndex>(Part.index);        
 
         /// <summary>
         /// Loads an assembly from a potential part path
@@ -90,6 +91,6 @@ namespace Z0
                 if(part.IsSome())
                     yield return part.Value;
             }
-        }
+        } 
     }
 }

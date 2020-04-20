@@ -11,7 +11,6 @@ namespace Z0
 
     using static Seed;
     
-
     /// <summary>
     /// Encloses a delegate that was manufactured dynamically
     /// </summary>
@@ -47,12 +46,8 @@ namespace Z0
             => new DynamicDelegate(id, src, dst, dst.CreateDelegate(@delegate));
 
         [MethodImpl(Inline)]
-        public static DynamicDelegate Define(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
+        public static DynamicDelegate Create(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
             => new DynamicDelegate(id, src, dst, op);
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator Delegate(DynamicDelegate d)
-        //     => d.DynamicOp;
 
         [MethodImpl(Inline)]
         DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
