@@ -13,7 +13,6 @@ namespace Z0
 
     using static Memories;
     using static XPressive;
-
     
     readonly struct BinaryOpFactory<T> : IBinaryOpFactory<T>
     {

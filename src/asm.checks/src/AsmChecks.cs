@@ -20,50 +20,45 @@ namespace Z0
     using static Memories;
     using static time;
     using static BufferSeqId;
+
+    using K = Kinds;
     
     public class AsmChecks : IAsmChecks
     {
         public IAsmContext Context {get;}
-        
-        readonly IDynamicOps Dynamic;
-
-        IPolyrand Random => Context.Random;
-        
+                
         readonly int RepCount;
 
         public static AsmChecks Create(IAsmContext context)
             => new AsmChecks(context);
 
-        ICheck Claim => ICheck.Checker;
-
         AsmChecks(IAsmContext context)
         {
             this.Context = context;
             this.RepCount = 128;
-            this.Dynamic = Context.Dynamic();
         }                
 
-        protected ICaptureArchive CodeArchive 
+        public IPolyrand Random => Context.Random;
+
+        ICheck Claim => ICheck.Checker;
+
+        IDynamicOps Dynamic => Context.Dynamic;
+
+        ICaptureArchive CodeArchive 
             => Context.CaptureArchive(
                 Env.Current.LogDir + FolderName.Define("test"), 
                 FolderName.Define("data"), 
                 FolderName.Define(GetType().Name)
                 );
 
-        protected IBitArchiveWriter CodeWriter([Caller] string caller = null)
+
+        protected IBitArchiveWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
             return Context.BitArchiveWriter(dstPath);
         }
 
-        protected IBitArchiveWriter HexWriter([Caller] string caller = null)
-        {            
-
-            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Raw));
-            return Context.BitArchiveWriter(dstPath);
-        }
-
-        protected IAsmFunctionWriter FunctionWriter([Caller] string caller = null)
+        protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
         {
             var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
@@ -90,10 +85,43 @@ namespace Z0
         string CaseName(string fullname)
             => OpUriBuilder.TestCase(GetType(), fullname);
 
-        protected OpIdentity TestOpName<T>(string basename, T t = default)
-            where T : unmanaged
-                => Identify.NumericOp($"{basename}_asm",typeof(T).NumericKind());
+        K.UnaryOpClass Unary => default;
 
+        K.BinaryOpClass Binary => default;
+
+        K.TernaryOpClass Ternary => default;
+        
+        ICaptureService Capture => Context.CaptureService;
+
+        IMemberCaptureControl CaptureControl => Context.CaptureControl;
+
+        IAsmFunctionDecoder Decoder => Context.Decoder;
+
+        IAsmFormatter Formatter => Context.Formatter;
+
+        CaptureExchange Exchange(in BufferSeq buffers)   
+            => CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);     
+
+        Option<AsmFunction> CaptureAsm(in CaptureExchange exchange, DynamicDelegate src)
+            => from capture in Capture.Capture(exchange, src.Id, src)
+               from asm in Decoder.Decode(capture)
+               select asm;
+
+        void CheckImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
+            where T : unmanaged
+        {            
+            var injector = Dynamic.Injector<T>(w, k);
+            var f = injector.EmbedImmediate(src, imm);
+
+            var x = Random.CpuVector<T>(w);
+            var y = Random.CpuVector<T>(w);            
+            var v1 = f.DynamicOp.Invoke(x,y);
+            
+            var asm = CaptureAsm(exchange, f).Require();
+            var h = Dynamic.Emit(buffer, k, w, asm.Code);
+            var v2 = h(x.ToFixed(),y.ToFixed()).ToVector<T>();
+            Claim.veq(v1,v2);
+        }
 
         protected TestCaseRecord TestAsmMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in IdentifiedCode src)
             where T : unmanaged
@@ -115,7 +143,7 @@ namespace Z0
         }
 
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
-            => Context.HostBitsArchive(id,host).Read(m).Single().ToApiCode();
+            => Context.HostBits(id,host).Read(m).Single().ToApiCode();
 
         /// <summary>
         /// Manages the execution of an action test case
@@ -123,8 +151,7 @@ namespace Z0
         /// <param name="f">The action under test</param>
         /// <param name="id">The action name</param>
         private TestCaseRecord TestAction(Action f, OpIdentity id)
-        {
-            
+        {            
             var name = CaseName(id);
             var clock = counter(true);
             try
@@ -138,6 +165,8 @@ namespace Z0
                 return TestCaseRecord.Define(name, false, clock);                
             }
         }
+
+        ITestFixed Test => this;
 
         /// <summary>
         /// Manages the execution of an action test case
@@ -169,7 +198,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord CheckMatch(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
+        protected TestCaseRecord TestMatch(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
         {
             var w = w8;
             void check()
@@ -192,7 +221,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord CheckMatch(BinaryOp16 f, OpIdentity fId, BinaryOp16 g, OpIdentity gId)
+        protected TestCaseRecord TestMatch(BinaryOp16 f, OpIdentity fId, BinaryOp16 g, OpIdentity gId)
         {
             var w = w16;
             void check()
@@ -215,7 +244,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord CheckMatch(BinaryOp32 f, OpIdentity fId, BinaryOp32 g, OpIdentity gId)
+        protected TestCaseRecord TestMatch(BinaryOp32 f, OpIdentity fId, BinaryOp32 g, OpIdentity gId)
         {
             var w = w32;
             void check()
@@ -238,7 +267,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord CheckMatch(BinaryOp64 f, OpIdentity fId, BinaryOp64 g, OpIdentity gId)
+        protected TestCaseRecord TestMatch(BinaryOp64 f, OpIdentity fId, BinaryOp64 g, OpIdentity gId)
         {
             var w = w64;
             void check()
@@ -302,6 +331,433 @@ namespace Z0
 
             return TestAction(check, CaseName($"{fId}~/~{gId}"));
         }
+
+
+        IEnumerable<string> PrimalBitLogicOps
+            => seq("and", "or", "xor", "nand", "nor", "xnor",
+                "impl","nonimpl", "cimpl", "cnonimpl");
+
+        void bitlogic_match(in BufferSeq buffers)
+        {
+            var names = PrimalBitLogicOps;
+            var kinds = NumericKind.Integers.DistinctKinds();
+            var widths = array(TypeWidth.W8, TypeWidth.W16, TypeWidth.W32, TypeWidth.W64);
+            foreach(var n in names)
+            foreach(var w in widths)
+            foreach(var k in kinds)
+                primal_match(buffers, n, w, k);                        
+        }
+
+        IHostBitsArchive HostBits(ApiHostUri host)
+            => Context.HostBits(host.Owner, host);
+
+        TestCaseRecord primal_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
+        {
+            var catalog = PartId.GMath;
+            var dSrc = ApiHostUri.FromHost(typeof(math));
+            var gSrc = ApiHostUri.FromHost(typeof(gmath));
+
+            var dId = Identify.Op(name, kind, false);
+            var gId = Identify.Op(name, kind, true);
+
+            var dArchive = Context.HostBits(catalog, dSrc);
+            var gArchive = Context.HostBits(catalog, gSrc);
+
+            var d = dArchive.Read(dId).Single().ToApiCode();
+            var g = gArchive.Read(gId).Single().ToApiCode();
+
+            return binop_match(buffers, w,d,g);
+        }
+
+        TestCaseRecord binop_match(in BufferSeq buffers, TypeWidth w, IdentifiedCode a, IdentifiedCode b)
+        {
+            switch(w)
+            {
+                case TypeWidth.W8:
+                    return binop_match(buffers, w8,a,b);
+
+                case TypeWidth.W16:
+                    return binop_match(buffers, w16,a,b);
+
+                case TypeWidth.W32:
+                    return binop_match(buffers, w32,a,b);
+
+                case TypeWidth.W64:
+                    return binop_match(buffers, w64,a,b);
+
+                case TypeWidth.W128:
+                    return binop_match(buffers, w128,a,b);
+
+                case TypeWidth.W256:
+                    return binop_match(buffers, w256, a, b);
+            }
+            throw Unsupported.define(w.GetType());
+        }
+
+        TestCaseRecord binop_match(in BufferSeq buffers, W8 w, IdentifiedCode a, IdentifiedCode b)
+        {
+            var f = buffers[Left].EmitFixedBinaryOp(w, a);
+            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        TestCaseRecord binop_match(in BufferSeq buffers, W16 w, IdentifiedCode a, IdentifiedCode b)
+        {
+            var f = buffers[Left].EmitFixedBinaryOp(w, a);
+            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        TestCaseRecord binop_match(in BufferSeq buffers, W32 w, IdentifiedCode a, IdentifiedCode b)
+        {
+            var f = buffers[Left].EmitFixedBinaryOp(w, a);
+            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        TestCaseRecord binop_match(in BufferSeq buffers, W64 w, IdentifiedCode a, IdentifiedCode b)
+        {
+            var f = buffers[Left].EmitFixedBinaryOp(w, a);
+            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        TestCaseRecord binop_match(in BufferSeq buffers, W128 w, IdentifiedCode a, IdentifiedCode b)
+        {
+            var f = buffers[Left].EmitFixedBinaryOp(w, a);
+            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        TestCaseRecord binop_match(in BufferSeq buffers, W256 w, IdentifiedCode a, IdentifiedCode b)
+        {
+            var f = buffers[Left].EmitFixedBinaryOp(w, a);
+            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
+        }
+
+
+        void capture_constants(in BufferSeq buffers)
+        {
+            var src = typeof(gmath).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
+                
+            var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
+            var captured = Capture.Capture(exchange, src.Identify(), src).Require();
+            
+            using var hexout = HexWriter();
+            using var asmout = AsmWriter();            
+            
+            hexout.WriteCode(captured.Code);
+            asmout.Write(Decoder.Decode(captured).Require());
+        }
+
+        [MethodImpl(Inline)]
+        static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
+            where T : unmanaged
+                => x => gvec.vshuf4x32<T>(x, Arrange4L.AABB);
+
+        [MethodImpl(Inline)]
+        static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
+            => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
+
+        void capture_shuffler(in BufferSeq buffers)
+        {
+            var f = shuffler<uint>(n2);
+            var g = shuffler(n3);
+
+            using var hexout = HexWriter();
+            using var asmout = AsmWriter();         
+    
+            var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
+
+            var fCaptured = Capture.Capture(exchange, f.Identify(), f).Require();
+            hexout.WriteCode(fCaptured.Code);
+            asmout.Write(Decoder.Decode(fCaptured).Require());
+
+            var gCaptured = Capture.Capture(exchange, g.Identify(), g).Require();
+            hexout.WriteCode(gCaptured.Code);
+            asmout.Write(Decoder.Decode(gCaptured).Require());
+        }
+                
+        void binary_imm(in BufferSeq buffers, MethodInfo method)
+        {
+            var w = w256;
+            var name = nameof(dvec.vblend8x16);
+            var imm = (byte)Blend8x16.LRLRLRLR;
+
+            var injector = Dynamic.Injector<ushort>(w,Binary);
+            var x = Random.CpuVector<ushort>(w);
+            var y = Random.CpuVector<ushort>(w);
+            
+            var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
+
+            var f = injector.EmbedImmediate(method,imm);
+            var v1 = f.DynamicOp.Invoke(x,y);
+            var captured = Capture.Capture(exchange, f.Id, f).Require();
+            var asm = Decoder.Decode(captured).Require();        
+
+            
+
+            var g = buffers[Main].EmitFixedBinaryOp<Fixed256>(asm.Code);
+            var v2 = g(x,y).ToVector<ushort>();
+            Claim.veq(v1,v2);
+        }
+
+        // void CheckImm(in BufferSeq buffers, in CaptureExchange exchange)
+        // {
+        //     CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend4x32), (byte)Blend4x32.LRLR);    
+        //     CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
+        //     CheckUnaryImm<ushort>(buffers, exchange, w256, nameof(dvec.vbsll), 3);        
+        // }
+
+        void CheckBinaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W128 w, MethodInfo method, byte imm)
+            where T : unmanaged
+        {            
+            var provider = Dynamic.V128BinaryOpImmInjector<T>();
+
+            var x = Random.CpuVector<T>(w);
+            var y = Random.CpuVector<T>(w);
+            
+            var capture = Context.Capture();
+            var decoder = Context.AsmFunctionDecoder();
+
+            var dynop = provider.EmbedImmediate(method,imm);
+            var z1 = dynop.DynamicOp.Invoke(x,y);
+            var captured = capture.Capture(exchange, dynop.Id, dynop).Require();            
+            var asm = decoder.Decode(captured).Require();
+
+
+            var f = buffers[Main].EmitFixedBinaryOp<Fixed128>(asm.Code);
+            var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
+            Claim.veq(z1,z2);
+        }
+
+
+        
+        void CheckUnaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W256 w, MethodInfo method, byte imm)
+            where T : unmanaged
+        {            
+            //var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            var k = Unary;
+            var injector = Dynamic.Injector<T>(w,k);
+                        
+            var dynop = injector.EmbedImmediate(method,imm);
+
+            var x = Random.CpuVector<T>(w);
+            var v1 = dynop.DynamicOp.Invoke(x);
+            
+            var capture = Capture.Capture(exchange, dynop.Id, dynop).Require();            
+            var asm = Decoder.Decode(capture).Require();
+
+            var f = Dynamic.Emit<Fixed256>(buffers[Main], k, capture.Code);
+            var v2 = f(x.ToFixed()).ToVector<T>();
+            Claim.veq(v1,v2);
+        }
+
+        TestCaseRecord vector_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
+        {
+            var catalog = PartId.GVec;
+            
+            var idD = Identify.Op(name, w, kind, false);
+            var idG = Identify.Op(name, w, kind, true);
+
+            var d = Context.HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
+            var g = Context.HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
+
+            return binop_match(buffers, w,d,g);
+        }
+
+        public TestCaseRecord[] vector_bitlogic_match(in BufferSeq buffers)
+        {
+            var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
+            var kinds = NumericKind.Integers.DistinctKinds();
+            var widths = array(TypeWidth.W128, TypeWidth.W256);
+            var dst = new TestCaseRecord[names.Length * widths.Length * kinds.Count];
+            var i = 0;
+            foreach(var n in names)
+            foreach(var w in widths)
+            foreach(var k in kinds)
+                dst[i++] =vector_match(buffers, n, w, k);                        
+            return dst;
+        }
+
+        void vadd_check<T>(in BufferSeq buffers, W128 w, ApiBits asm)
+            where T : unmanaged
+        {            
+            var f = buffers[Main].EmitFixedBinaryOp(w,asm);            
+            TestMatch<T>(gvec.vadd, f, asm.Id);
+        }
+
+        void vadd_check<T>(in BufferSeq buffers, W256 w, ApiBits asm)
+            where T : unmanaged
+        {            
+            var f = buffers[Main].EmitFixedBinaryOp(w,asm);
+            TestMatch<T>(gvec.vadd, f, asm.Id);
+        }
+
+        void datares_check(in BufferSeq buffers)
+        {
+            //Verifies that the "GetBytes" function doesn't return
+            //a copy of the data but rather a refererence to the
+            //data that exists in memory as a resource
+            foreach(var d in Data.Resources)
+                Claim.eq(d.Location, ptr(d.GetBytes()));
+        }
+
+ 
+        [MethodImpl(Inline)]
+        static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
+            => v => Avx2.ShiftLeftLogical(v,imm);
+
+        void capture_shifter(in BufferSeq buffers)
+        {
+            var src = shifter(4);
+
+            using var hexout = HexWriter();
+            using var asmout = AsmWriter();            
+
+            var captured = Capture.Capture(Context.CaptureExchange(), src.Identify(), src);
+            var decoded = captured.OnSome(c => Decoder.Decode(c));                    
+        }
+
+        /// <summary>
+        /// Verifies that two 128-bit vectorized binary operators agree over a random set of points
+        /// </summary>
+        /// <param name="f">The first operator, considered as a basline</param>
+        /// <param name="fId">The identity of the first operator</param>
+        /// <param name="g">The second operator, considered as the operation under test</param>
+        /// <param name="gId">The identity of the second operator</param>
+        protected TestCaseRecord TestMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
+            where T : unmanaged
+        {
+            void check()
+            {
+                var w = w128;
+                var t = default(T);
+                for(var i=0; i<RepCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var y = Random.CpuVector(w,t);
+                    Claim.veq(f(x,y), g.Apply(x,y));
+                }            
+            }
+
+            return TestAction(check, name);      
+        }
+
+        /// <summary>
+        /// Verifies that two 256-bit vectorized binary operators agree over a random set of points
+        /// </summary>
+        /// <param name="f">The first operator, considered as a basline</param>
+        /// <param name="fId">The identity of the first operator</param>
+        /// <param name="g">The second operator, considered as the operation under test</param>
+        /// <param name="gId">The identity of the second operator</param>
+        protected TestCaseRecord TestMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
+            where T : unmanaged
+        {
+            void check()
+            {
+                var w = w256;
+                var t = default(T);
+                for(var i=0; i<RepCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var y = Random.CpuVector(w,t);
+                    Claim.veq(f(x,y), g.Apply(x,y));
+                }
+            }      
+
+            return TestAction(check, name);      
+        }
+
+        static int activations;
+        
+        static void OnMnemonid(Instruction i)
+        {            
+            activations++;
+        }
+
+        static int listcount = 0;
+        
+        static AsmInstructionList Pipe(AsmInstructionList src)
+        {        
+            listcount++;
+            return src;
+        }
+
+        [MethodImpl(Inline)]
+        static unsafe ulong ptr(ReadOnlySpan<byte> src)
+            => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
+
+        void RunPipe()
+        {
+            var archive =  Context.HostBits(PartId.GVec);
+            var source = archive.ToInstructionSource(Context);
+            var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
+            var triggers = AsmTriggerSet.Define(trigger);
+            var flow =  Context.InstructionFlow(source, triggers);
+            var pipe = AsmInstructionPipe.From(Pipe); 
+            var results = flow.Flow(pipe).Force();
+
+            var count = 0;
+            foreach(var result in results)
+            {
+                foreach(var i in result)
+                {
+                    if(trigger.CanFire(i))
+                        count++;
+                }
+            }            
+        }
+
+        void Run50(in BufferSeq buffers)
+        {
+            var dSrc = ApiHostUri.FromHost(typeof(math));
+            var gSrc = ApiHostUri.FromHost(typeof(gmath));
+
+            var id = PartId.GMath;
+            var direct = Context.HostBits(id, dSrc);
+            var generic = Context.HostBits(id, gSrc);
+
+            foreach(var a in direct.Read().Where(asm => asm.ParameterCount() == 1))
+            {                
+                if(a.AcceptsParameter(NumericKind.U8))
+                {
+                    var af = a.ToFixed<Fixed8>();
+                    var bf = a.ToFixed<Fixed8>();
+                    CheckUnaryOp(buffers, af, bf);
+                }
+                if(a.AcceptsParameter(NumericKind.U32))
+                {
+                    var af = a.ToFixed<Fixed32>();
+                    var bf = a.ToFixed<Fixed32>();
+                    CheckUnaryOp(buffers, af, bf);
+                }
+                else if(a.AcceptsParameter(NumericKind.U64))
+                {
+                    var af = a.ToFixed<Fixed64>();
+                    var bf = a.ToFixed<Fixed64>();
+                    CheckUnaryOp(buffers, af, bf);
+                }
+            }
+        }
+
+         void CheckUnaryOp<F>(in BufferSeq dst, in FixedAsm<F> a, in FixedAsm<F> b)
+            where F : unmanaged, IFixed
+        {                        
+
+            var f = dst[Left].EmitFixedUnaryOp<F>(a.Code.ToApiCode());
+            var g = dst[Right].EmitFixedUnaryOp<F>(b.Code.ToApiCode());            
+
+            var stream = Random.FixedStream<F>();
+            if(stream == null)
+                Claim.fail($"random stream null!");
+
+            var points = stream.Take(RepCount);
+            iter(points, x => Claim.eq(f(x), g(x)));            
+        }
+
+    #if Megacheck
 
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, BinaryOp<byte> primal, BinaryOp<byte> generic, NK<byte> kind)
         {
@@ -491,505 +947,6 @@ namespace Z0
 
             return results.ToArray();
         }
-
-        IEnumerable<string> PrimalBitLogicOps
-            => seq("and", "or", "xor", "nand", "nor", "xnor",
-                "impl","nonimpl", "cimpl", "cnonimpl");
-
-        void bitlogic_match(in BufferSeq buffers)
-        {
-            var names = PrimalBitLogicOps;
-            var kinds = NumericKind.Integers.DistinctKinds();
-            var widths = array(TypeWidth.W8, TypeWidth.W16, TypeWidth.W32, TypeWidth.W64);
-            foreach(var n in names)
-            foreach(var w in widths)
-            foreach(var k in kinds)
-                primal_match(buffers, n, w, k);                        
-        }
-
-        void primal_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
-        {
-            var catalog = PartId.GMath;
-            var dSrc = ApiHostUri.FromHost(typeof(math));
-            var gSrc = ApiHostUri.FromHost(typeof(gmath));
-
-            var dId = Identify.Op(name, kind, false);
-            var gId = Identify.Op(name, kind, true);
-
-            var dArchive = Context.HostBitsArchive(catalog, dSrc);
-            var gArchive = Context.HostBitsArchive(catalog, gSrc);
-
-            var d = dArchive.Read(dId).Single().ToApiCode();
-            var g = gArchive.Read(gId).Single().ToApiCode();
-
-            Claim.require(binop_match(buffers, w,d,g));                                     
-        }
-
-        bit binop_match(in BufferSeq buffers, TypeWidth w, IdentifiedCode a, IdentifiedCode b)
-        {
-            switch(w)
-            {
-                case TypeWidth.W8:
-                    binop_match(buffers, w8,a,b);
-                    break;
-
-                case TypeWidth.W16:
-                    binop_match(buffers, w16,a,b);
-                    break;
-
-                case TypeWidth.W32:
-                    binop_match(buffers, w32,a,b);
-                    break;
-
-                case TypeWidth.W64:
-                    binop_match(buffers, w64,a,b);
-                    break;
-
-                case TypeWidth.W128:
-                    binop_match(buffers, w128,a,b);
-                    break;
-
-                case TypeWidth.W256:
-                    binop_match(buffers, w256, a, b);
-                    break;
-
-                default:
-                    Claim.fail();
-                break;
-            }
-            return bit.On;
-        }
-
-        protected void binop_match(in BufferSeq buffers, W8 w, IdentifiedCode a, IdentifiedCode b)
-        {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
-            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        }
-
-        protected void binop_match(in BufferSeq buffers, W16 w, IdentifiedCode a, IdentifiedCode b)
-        {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
-            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        }
-
-        protected void binop_match(in BufferSeq buffers, W32 w, IdentifiedCode a, IdentifiedCode b)
-        {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
-            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        }
-
-        protected void binop_match(in BufferSeq buffers, W64 w, IdentifiedCode a, IdentifiedCode b)
-        {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
-            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        }
-
-        protected void binop_match(in BufferSeq buffers, W128 w, IdentifiedCode a, IdentifiedCode b)
-        {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
-            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        }
-
-        protected void binop_match(in BufferSeq buffers, W256 w, IdentifiedCode a, IdentifiedCode b)
-        {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
-            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
-        }
-
-
-        void capture_constants(in BufferSeq buffers)
-        {
-            var src = typeof(gmath).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
-        
-            var control = MemberCaptureControl.New(Context);
-            var exchange = CaptureExchange.Create(control, buffers.Buffer(0), buffers.Buffer(1));
-            var capture = Context.Capture();
-            var decoder = Context.AsmFunctionDecoder();            
-            var captured = capture.Capture(exchange, src.Identify(), src).Require();
-            
-            using var rawout = HexWriter();            
-            using var hexout = CodeWriter();
-            using var asmout = FunctionWriter();            
-            
-            hexout.WriteCode(captured.Code);
-            rawout.WriteHexLine(captured);
-            asmout.Write(decoder.DecodeCaptured(captured).Require());
-        }
-
-        [MethodImpl(Inline)]
-        static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
-            where T : unmanaged
-                => x => gvec.vshuf4x32<T>(x, Arrange4L.AABB);
-
-        [MethodImpl(Inline)]
-        static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
-            => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
-
-        void capture_shuffler(in BufferSeq buffers)
-        {
-            var f = shuffler<uint>(n2);
-            var g = shuffler(n3);
-
-            using var rawout = HexWriter();            
-            using var hexout = CodeWriter();
-            using var asmout = FunctionWriter();         
-
-            var control = MemberCaptureControl.New(Context);
-            var exchange = CaptureExchange.Create(control, buffers.Buffer(0), buffers.Buffer(1));
-            var capture = Context.Capture();
-            var decoder = Context.AsmFunctionDecoder();
-
-            var fCaptured = capture.Capture(exchange, f.Identify(), f).Require();
-            hexout.WriteCode(fCaptured.Code);
-            rawout.WriteHexLine(fCaptured);
-            asmout.Write(decoder.DecodeCaptured(fCaptured).Require());
-
-            var gCaptured = capture.Capture(exchange, g.Identify(), g).Require();
-            hexout.WriteCode(gCaptured.Code);
-            rawout.WriteHexLine(fCaptured);
-            asmout.Write(decoder.DecodeCaptured(gCaptured).Require());
-        }
-        
-        MethodInfo Method => default;
-        
-        void binary_imm(in BufferSeq buffers)
-        {
-            var w = w256;
-            var name = nameof(dvec.vblend8x16);
-            var imm = (byte)Blend8x16.LRLRLRLR;
-
-            var provider = Dynamic.V256BinaryOpImmInjector<ushort>();
-            var x = Random.CpuVector<ushort>(w);
-            var y = Random.CpuVector<ushort>(w);
-            
-            //var method = Intrinsics.Vectorized<ushort>(w, false, name).Single();      
-            var capture = Context.Capture();
-            var control = MemberCaptureControl.New(Context);
-            var exchange = CaptureExchange.Create(control, buffers.Buffer(0), buffers.Buffer(1));
-            var decoder = Context.AsmFunctionDecoder();
-
-            var method = Method;
-            var dynop = provider.EmbedImmediate(method,imm);
-            var f = dynop.DynamicOp;
-            var z1 = f.Invoke(x,y);
-            var captured = capture.Capture(exchange, dynop.Id, dynop).Require();
-            var asm = decoder.DecodeCaptured(captured);        
-
-            var exec = buffers[2];
-            var g = exec.EmitFixedBinaryOp<Fixed256>(asm.Require().Code);
-            var z3 = g(x,y).ToVector<ushort>();
-            Claim.veq(z1,z3);
-        }
-
-        void CheckImm(in BufferSeq buffers, in CaptureExchange exchange)
-        {
-            CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend4x32), (byte)Blend4x32.LRLR);    
-            CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
-            CheckUnaryImm<ushort>(buffers, exchange, w256, nameof(dvec.vbsll), 3);        
-        }
-
-        void CheckBinaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W128 w, string name, byte imm)
-            where T : unmanaged
-        {            
-            var provider = Dynamic.V128BinaryOpImmInjector<T>();
-
-            var x = Random.CpuVector<T>(w);
-            var y = Random.CpuVector<T>(w);
-            
-            //var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
-            var capture = Context.Capture();
-            var decoder = Context.AsmFunctionDecoder();
-
-            var method = Method;
-            var dynop = provider.EmbedImmediate(method,imm);
-            var z1 = dynop.DynamicOp.Invoke(x,y);
-            var captured = capture.Capture(exchange, dynop.Id, dynop).Require();            
-            var asm = decoder.DecodeCaptured(captured);
-
-            // Trace(asm.Id);
-            // iter(asm.Instructions, i => Trace(i));  
-
-            var f = buffers[Main].EmitFixedBinaryOp<Fixed128>(asm.Require().Code);
-            var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
-            Claim.veq(z1,z2);
-        }
-
-        void CheckBinaryImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, string name, byte imm)
-            where T : unmanaged
-        {            
-            var provider = Dynamic.V256BinaryOpImmInjector<T>();
-
-            var x = Random.CpuVector<T>(w);
-            var y = Random.CpuVector<T>(w);
-            
-            //var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
-            var method = Method;            
-            var dynop = provider.EmbedImmediate(method,imm);
-            var z1 = dynop.DynamicOp.Invoke(x,y);
-            
-            var decoder = Context.AsmFunctionDecoder();
-            var captured = Context.Capture().Capture(in exchange, dynop.Id, dynop).Require();            
-            var asm = decoder.DecodeCaptured(captured).Require();
-
-            // Trace(asm.Id);
-            // iter(asm.Instructions, i => Trace(i));  
-
-            var f = buffer.EmitFixedBinaryOp<Fixed256>(asm.Code);
-            var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
-            Claim.veq(z1,z2);
-        }
-        
-        void CheckUnaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W256 w, string name, byte imm)
-            where T : unmanaged
-        {            
-            //var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
-            
-            var method = Method;            
-            var provider = Dynamic.V256UnaryOpImmInjector<T>();
-
-            
-            var dynop = provider.EmbedImmediate(method,imm);
-
-            var x = Random.CpuVector<T>(w);
-            var z1 = dynop.DynamicOp.Invoke(x);
-            
-            var decoder = Context.AsmFunctionDecoder();
-            var capture = Context.Capture().Capture(in exchange, dynop.Id, dynop).Require();            
-            var asm = decoder.DecodeCaptured(capture).Require();
-
-            var f = buffers[Main].EmitFixedUnaryOp<Fixed256>(capture.Code);
-            var z2 = f(x.ToFixed()).ToVector<T>();
-            Claim.veq(z1,z2);
-        }
-
-        void vector_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
-        {
-            var catalog = PartId.GVec;
-            
-            var idD = Identify.Op(name, w, kind, false);
-            var idG = Identify.Op(name, w, kind, true);
-
-            var d = Context.HostBitsArchive(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
-            var g = Context.HostBitsArchive(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
-
-            Claim.require(binop_match(buffers, w,d,g));
-        }
-
-        // public void vadd_check(in BufferSeq buffers)
-        // {
-        //     var catalog = PartId.GVec;
-        //     var host = ApiHost.Create<dvec>().UriPath;
-        //     var name = nameof(dvec.vadd);
-
-        //     vadd_check<byte>(buffers, w128, ReadAsm(catalog, host, name, w128, z8));            
-        //     vadd_check<ushort>(buffers, w128, ReadAsm(catalog, host, name, w128,z16));
-        //     vadd_check<uint>(buffers, w128, ReadAsm(catalog, host, name, w128,z32));
-        //     vadd_check<ushort>(buffers, w256, ReadAsm(catalog, host, name, w256,z16));
-        //     vadd_check<uint>(buffers, w256, ReadAsm(catalog, host, name, w256,z32));
-        // }
-
-
-        public void vector_bitlogic_match(in BufferSeq buffers)
-        {
-            var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
-            var kinds = NumericKind.Integers.DistinctKinds();
-            var widths = array(TypeWidth.W128, TypeWidth.W256);
-            foreach(var n in names)
-            foreach(var w in widths)
-            foreach(var k in kinds)
-                vector_match(buffers, n, w, k);                        
-        }
-
-        void vadd_check<T>(in BufferSeq buffers, W128 w, ApiBits asm)
-            where T : unmanaged
-        {            
-            var f = buffers[Main].EmitFixedBinaryOp(w,asm);            
-            TestMatch<T>(gvec.vadd, f, asm.Id);
-        }
-
-
-        void vadd_check<T>(in BufferSeq buffers, W256 w, ApiBits asm)
-            where T : unmanaged
-        {            
-            var f = buffers[Main].EmitFixedBinaryOp(w,asm);
-            TestMatch<T>(gvec.vadd, f, asm.Id);
-        }
-
-        void datares_check(in BufferSeq buffers)
-        {
-            //Verifies that the "GetBytes" function doesn't return
-            //a copy of the data but rather a refererence to the
-            //data that exists in memory as a resource
-            foreach(var d in Data.Resources)
-                Claim.eq(d.Location, ptr(d.GetBytes()));
-        }
-
- 
-        [MethodImpl(Inline)]
-        static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
-            => v => Avx2.ShiftLeftLogical(v,imm);
-
-        void capture_shifter(in BufferSeq buffers)
-        {
-            var src = shifter(4);
-
-            using var rawout = HexWriter();            
-            using var hexout = CodeWriter();
-            using var asmout = FunctionWriter();            
-
-            var decoder = Context.AsmFunctionDecoder();
-            var captured = Context.Capture().Capture(Context.CaptureExchange(), src.Identify(), src);
-            var decoded = captured.OnSome(c => decoder.DecodeCaptured(c));                    
-        }
-
-        AsmFormatConfig AsmFormat
-            => AsmFormatConfig.New.WithoutFunctionTimestamp();
-
-
-        /// <summary>
-        /// Verifies that two 128-bit vectorized binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord TestMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
-            where T : unmanaged
-        {
-            void check()
-            {
-                var w = w128;
-                var t = default(T);
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
-                    Claim.veq(f(x,y), g.Apply(x,y));
-                }            
-            }
-
-            return TestAction(check, name);      
-        }
-
-        /// <summary>
-        /// Verifies that two 256-bit vectorized binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord TestMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
-            where T : unmanaged
-        {
-            void check()
-            {
-                var w = w256;
-                var t = default(T);
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
-                    Claim.veq(f(x,y), g.Apply(x,y));
-                }
-            }      
-
-            return TestAction(check, name);      
-        }
-
-        static int activations;
-        
-        static void OnMnemonid(Instruction i)
-        {            
-            activations++;
-        }
-
-        static int listcount = 0;
-        
-        static AsmInstructionList Pipe(AsmInstructionList src)
-        {        
-            listcount++;
-            return src;
-        }
-
-        [MethodImpl(Inline)]
-        static unsafe ulong ptr(ReadOnlySpan<byte> src)
-            => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
-
-        void RunPipe()
-        {
-            var archive =  Context.HostBitsArchive(PartId.GVec);
-            var source = archive.ToInstructionSource(Context, Context.AsmFormat);
-            var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
-            var triggers = AsmTriggerSet.Define(trigger);
-            var flow =  Context.InstructionFlow(source, triggers);
-            var pipe = AsmInstructionPipe.From(Pipe); 
-            var results = flow.Flow(pipe).Force();
-
-            var count = 0;
-            foreach(var result in results)
-            {
-                foreach(var i in result)
-                {
-                    if(trigger.CanFire(i))
-                        count++;
-                }
-            }            
-        }
-
-        void Run50(in BufferSeq buffers)
-        {
-            var dSrc = ApiHostUri.FromHost(typeof(math));
-            var gSrc = ApiHostUri.FromHost(typeof(gmath));
-
-            var id = PartId.GMath;
-            var direct = Context.HostBitsArchive(id, dSrc);
-            var generic = Context.HostBitsArchive(id, gSrc);
-
-            foreach(var a in direct.Read().Where(asm => asm.ParameterCount() == 1))
-            {                
-                if(a.AcceptsParameter(NumericKind.U8))
-                {
-                    var af = a.ToFixed<Fixed8>();
-                    var bf = a.ToFixed<Fixed8>();
-                    CheckUnaryOp(buffers, af, bf);
-                }
-                if(a.AcceptsParameter(NumericKind.U32))
-                {
-                    var af = a.ToFixed<Fixed32>();
-                    var bf = a.ToFixed<Fixed32>();
-                    CheckUnaryOp(buffers, af, bf);
-                }
-                else if(a.AcceptsParameter(NumericKind.U64))
-                {
-                    var af = a.ToFixed<Fixed64>();
-                    var bf = a.ToFixed<Fixed64>();
-                    CheckUnaryOp(buffers, af, bf);
-                }
-            }
-        }
-
-         void CheckUnaryOp<F>(in BufferSeq dst, in FixedAsm<F> a, in FixedAsm<F> b)
-            where F : unmanaged, IFixed
-        {                        
-
-            var f = dst[Left].EmitFixedUnaryOp<F>(a.Code.ToApiCode());
-            var g = dst[Right].EmitFixedUnaryOp<F>(b.Code.ToApiCode());            
-
-            var stream = Random.FixedStream<F>();
-            if(stream == null)
-                Claim.fail($"random stream null!");
-
-            var points = stream.Take(RepCount);
-            iter(points, x => Claim.eq(f(x), g(x)));            
-        }
-
-    #if Megacheck
 
         public void add_megacheck(in BufferSeq buffers)
         {

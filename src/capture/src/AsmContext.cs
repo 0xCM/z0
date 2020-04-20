@@ -32,6 +32,11 @@ namespace Z0.Asm
         
         public IAsmFunctionDecoder Decoder {get;}
 
+        public ICaptureService CaptureService {get;}
+
+        public IMemberCaptureControl CaptureControl {get;}
+        
+        public IDynamicOps Dynamic {get;}
         public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition api, FolderPath root)
         {
             var context = IContext.Default;
@@ -40,7 +45,10 @@ namespace Z0.Asm
             var decoder = AsmDecoder.function(context, format);
             var formatter = AsmDecoder.formatter(context, format);
             var factory = AsmDecoder.writerFactory(context);
-            return AsmContext.Create(settings, queue, api, root, random, format, formatter, decoder, factory);
+            var capture = context.Capture();
+            var control =  MemberCaptureControl.Create(context, capture);
+            var dynops = context.Dynamic();
+            return AsmContext.Create(settings, queue, api, root, random, format, formatter, decoder, factory, capture, control,dynops);
         }
 
         /// <summary>
@@ -56,8 +64,12 @@ namespace Z0.Asm
             AsmFormatConfig format,
             IAsmFormatter formatter,
             IAsmFunctionDecoder decoder,
-            AsmWriterFactory writerFactory)
-                => new AsmContext(assemblies, settings, queue, root, random, format, formatter, decoder, writerFactory);
+            AsmWriterFactory writerFactory,
+            ICaptureService capture,
+            IMemberCaptureControl control,
+            IDynamicOps dynops)
+                => new AsmContext(assemblies, settings, queue, root, random, format, formatter, 
+                    decoder, writerFactory, capture,control, dynops);
 
         AsmContext(
             IApiComposition composition, 
@@ -68,7 +80,11 @@ namespace Z0.Asm
             AsmFormatConfig format,
             IAsmFormatter formatter,
             IAsmFunctionDecoder decoder,
-            AsmWriterFactory writerFactory)
+            AsmWriterFactory writerFactory,
+            ICaptureService capture,
+            IMemberCaptureControl control,
+            IDynamicOps dynops
+            )
         {
             Next += BlackHole;
             Queue = queue;
@@ -82,7 +98,10 @@ namespace Z0.Asm
             ApiSet = composition.ApiSet();
             Formatter = formatter;
             Decoder = decoder;
-            WriterFactory = writerFactory;            
+            WriterFactory = writerFactory;   
+            CaptureService = capture;         
+            CaptureControl = control;
+            Dynamic = dynops;
         }
         
         AsmWriterFactory WriterFactory {get;}

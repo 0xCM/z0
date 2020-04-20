@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether the test is enabled
         /// </summary>
-        bool Enabled {get;}
+        bool Enabled  => true;
         
         /// <summary>
         /// The number times to repeat an action

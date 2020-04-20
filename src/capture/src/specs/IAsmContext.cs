@@ -32,7 +32,19 @@ namespace Z0.Asm
         /// The context writer factory
         /// </summary>
         IAsmFunctionWriter Writer(FilePath dst);            
-        
+
+        /// <summary>
+        /// The capture service
+        /// </summary>
+        ICaptureService CaptureService {get;}       
+
+        IMemberCaptureControl CaptureControl {get;}
+
+        /// <summary>
+        /// Provides access to dynamic operator production facilities
+        /// </summary>
+        IDynamicOps Dynamic {get;}
+
         /// <summary>
         /// The capture archive root
         /// </summary>

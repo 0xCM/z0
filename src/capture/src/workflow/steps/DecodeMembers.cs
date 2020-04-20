@@ -45,7 +45,7 @@ namespace Z0.Asm
                 for(var i=0; i<src.Length; i++)
                 {
                     var parsed = src[i];
-                    var decoded = Context.Decoder.DecodeExtract(parsed).OnNone(() => term.error($"Parse failure for {parsed.Id}"));
+                    var decoded = Context.Decoder.Decode(parsed).OnNone(() => term.error($"Parse failure for {parsed.Id}"));
                     dst[i] = decoded ? decoded.Value : AsmFunction.Empty;                
                 }
                 return dst;

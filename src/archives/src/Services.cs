@@ -36,17 +36,16 @@ namespace Z0
             => Z0.UriBitsReader.Create(context);
 
         [MethodImpl(Inline)]
-        public static IHostBitsArchive HostBitsArchive(this IContext context, PartId id, FolderPath root = null)
+        public static IHostBitsArchive HostBits(this IContext context, PartId id, FolderPath root = null)
             => Z0.HostBitsArchive.Create(context, id, root ?? Z0.CaptureArchive.Default.RootDir);
 
-        /// <summary>
-        /// Instantiates a contextual code archive service that is specialized for an assembly and api host
-        /// <param name="context">The source context</param>
-        /// <param name="catalog">The catalog name</param>
-        /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
-        public static IHostBitsArchive HostBitsArchive(this IContext context, PartId assembly, ApiHostUri host, FolderPath root = null)
-            => Z0.HostBitsArchive.Create(context, assembly, host, root ?? Z0.CaptureArchive.Default.RootDir);
+        public static IHostBitsArchive HostBits(this IContext context, PartId assembly, ApiHostUri host, FolderPath root = null)
+            => HostBitsArchive.Create(context, assembly, host, root ?? Z0.CaptureArchive.Default.RootDir);
+
+        [MethodImpl(Inline)]
+        public static IHostBitsArchive HostBits(this IContext context, ApiHostUri host, FolderPath root = null)
+            => HostBitsArchive.Create(context, host.Owner, host, root ?? Z0.CaptureArchive.Default.RootDir);
 
         /// <summary>
         /// Instantiates a contextual code reader service

@@ -11,16 +11,16 @@ namespace Z0
 
     using K = Kinds;
 
-    readonly struct DynamicFactorySource : IService
+    readonly struct DynamicFactories : IDynamicFactories
     {
         public IInnerContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static DynamicFactorySource Create(IInnerContext context)
-            => new DynamicFactorySource(context);
+        public static DynamicFactories Create(IInnerContext context)
+            => new DynamicFactories(context);
 
         [MethodImpl(Inline)]
-        DynamicFactorySource(IInnerContext context)
+        DynamicFactories(IInnerContext context)
         {
             this.Context = context;
         }    

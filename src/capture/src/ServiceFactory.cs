@@ -37,7 +37,6 @@ namespace Z0.Asm
         public static IMemberExtractReader MemberExtractReader(this IContext context, IApiSet api)
             => Z0.MemberExtractReader.Create(context.MemberLocator(), api);
 
-
         [MethodImpl(Inline)]
         public static ICaptureService Capture(this IContext context)
             => CaptureService.Create(context);
@@ -52,10 +51,14 @@ namespace Z0.Asm
         public static IAsmInstructionFlow InstructionFlow(this IContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
 
+        [MethodImpl(Inline)]
+        public static IMemberCaptureControl CaptureControl(this IContext context, ICaptureService capture)
+            => MemberCaptureControl.Create(context, capture);
+
         public static CaptureExchange CaptureExchange(this IContext context, int? size = null)
         {
             const int DefaultBufferLen = 1024*8;
-            var control = MemberCaptureControl.New(context);
+            var control = context.CaptureControl(context.Capture());
             var cBuffer = new byte[size ?? DefaultBufferLen];
             var sBuffer = new byte[size ?? DefaultBufferLen];
             return Svc.CaptureExchange.Create(control, cBuffer, sBuffer);

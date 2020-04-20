@@ -12,19 +12,16 @@ namespace Z0.Asm
 
     public readonly struct MemberCaptureControl : IMemberCaptureControl
     {                    
-        readonly IContext Context;
-
         readonly ICaptureService Service;
         
         [MethodImpl(Inline)]
-        public static IMemberCaptureControl New(IContext context)
-            => new MemberCaptureControl(context);
+        public static IMemberCaptureControl Create(IContext context, ICaptureService capture)
+            => new MemberCaptureControl(context, capture);
                     
         [MethodImpl(Inline)]
-        MemberCaptureControl(IContext context)
+        MemberCaptureControl(IContext context, ICaptureService capture)
         {
-            this.Context = context;
-            this.Service = CaptureService.Create(context);
+            this.Service = capture;
         }
 
         [MethodImpl(Inline)]

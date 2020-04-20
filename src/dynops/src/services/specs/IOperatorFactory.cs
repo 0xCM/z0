@@ -7,6 +7,11 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    public interface IOperatorFactoryProvider : IService
+    {
+        
+    }
+
     public interface IOperatorFactory<D,T> : IService
         where D : Delegate
     {
@@ -15,4 +20,24 @@ namespace Z0
         D Manufacture(MethodInfo method)
             => Manufacture(method,null);
     }
+
+    public interface IEmitterOpFactory<T> : IOperatorFactory<Func<T>,T>
+    {
+
+    }    
+
+    public interface IUnaryOpFactory<T> : IOperatorFactory<Func<T,T>,T>
+    {
+
+    }
+    
+    public interface IBinaryOpFactory<T> : IOperatorFactory<Func<T,T,T>,T>
+    {
+
+    }
+
+    public interface ITernaryOpFactory<T> : IOperatorFactory<Func<T,T,T,T>,T>
+    {
+
+    }    
 }

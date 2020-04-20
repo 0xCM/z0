@@ -49,7 +49,7 @@ namespace Z0.Asm
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
-                    from d in Decoder.DecodeCaptured(c)
+                    from d in Decoder.Decode(c)
                     select d;
             else
                 return none<AsmFunction>();
@@ -61,7 +61,7 @@ namespace Z0.Asm
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
-                    from d in Decoder.DecodeCaptured(c)
+                    from d in Decoder.Decode(c)
                     select d;
             else
                 return none<AsmFunction>();
@@ -82,7 +82,7 @@ namespace Z0.Asm
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
-                    from d in Decoder.DecodeCaptured(c)
+                    from d in Decoder.Decode(c)
                     select d;
             else
                 return none<AsmFunction>();
@@ -100,7 +100,7 @@ namespace Z0.Asm
         public Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, byte imm)
             where T : unmanaged
                 => from c in Capture.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
-                   from d in Decoder.DecodeCaptured(c)
+                   from d in Decoder.Decode(c)
                    select d;
 
         public AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, params byte[] imm)
@@ -116,7 +116,7 @@ namespace Z0.Asm
         public Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8UnaryResolver256Api<T> resolver, byte imm)
             where T : unmanaged
                 => from c in Capture.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
-                   from d in Decoder.DecodeCaptured(c)
+                   from d in Decoder.Decode(c)
                    select d;
 
         public AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8UnaryResolver256Api<T> resolver, params byte[] imm)
@@ -132,7 +132,7 @@ namespace Z0.Asm
         public Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8BinaryResolver128Api<T> resolver, byte imm)
             where T : unmanaged
                 => from c in Capture.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
-                   from d in Decoder.DecodeCaptured(c)
+                   from d in Decoder.Decode(c)
                    select d;
 
         public AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8BinaryResolver128Api<T> resolver, params byte[] imm)
@@ -148,7 +148,7 @@ namespace Z0.Asm
         public Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8BinaryResolver256Api<T> resolver, byte imm)
             where T : unmanaged
                 => from c in Capture.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
-                   from d in Decoder.DecodeCaptured(c)
+                   from d in Decoder.Decode(c)
                    select d;
 
         public AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8BinaryResolver256Api<T> resolver, params byte[] imm)

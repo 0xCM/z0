@@ -98,7 +98,7 @@ namespace Z0.Asm
                 var host = mayhaps.Value;
                 var decoded = new AsmFunction[parsed.Length];
                 for(var i=0; i<parsed.Length; i++)
-                    decoded[i] = require(Context.Decoder.DecodeExtract(parsed[i]));
+                    decoded[i] = require(Context.Decoder.Decode(parsed[i]));
 
                 if(save)
                     Save(host.UriPath, decoded);

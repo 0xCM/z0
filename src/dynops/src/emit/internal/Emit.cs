@@ -58,29 +58,29 @@ namespace Z0
         internal static FixedDelegate EmitFixedTernaryOp(this IBufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
             => buffer.Handle.EmitFixed(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType));
 
-        [MethodImpl(Inline)]
-        internal static UnaryOp8 EmitFixedUnaryOp(this IBufferToken buffer, N8 w, OpIdentity id)
-            => (UnaryOp8)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp8), typeof(Fixed8));
+        // [MethodImpl(Inline)]
+        // internal static UnaryOp8 EmitFixedUnaryOp(this IBufferToken buffer, N8 w, OpIdentity id)
+        //     => (UnaryOp8)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp8), typeof(Fixed8));
 
-        [MethodImpl(Inline)]
-        internal static UnaryOp16 EmitFixedUnaryOp(this IBufferToken buffer, N16 w, OpIdentity id)
-            => (UnaryOp16)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp16), typeof(Fixed16));
+        // [MethodImpl(Inline)]
+        // internal static UnaryOp16 EmitFixedUnaryOp(this IBufferToken buffer, N16 w, OpIdentity id)
+        //     => (UnaryOp16)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp16), typeof(Fixed16));
 
-        [MethodImpl(Inline)]
-        internal static UnaryOp32 EmitFixedUnaryOp(this IBufferToken buffer, N32 w, OpIdentity id)
-            => (UnaryOp32)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp32), typeof(Fixed32));
+        // [MethodImpl(Inline)]
+        // internal static UnaryOp32 EmitFixedUnaryOp(this IBufferToken buffer, N32 w, OpIdentity id)
+        //     => (UnaryOp32)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp32), typeof(Fixed32));
 
-        [MethodImpl(Inline)]
-        internal static UnaryOp64 EmitFixedUnaryOp(this IBufferToken buffer, N64 w, OpIdentity id)
-            => (UnaryOp64)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp64), typeof(Fixed64));
+        // [MethodImpl(Inline)]
+        // internal static UnaryOp64 EmitFixedUnaryOp(this IBufferToken buffer, N64 w, OpIdentity id)
+        //     => (UnaryOp64)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp64), typeof(Fixed64));
 
-        [MethodImpl(Inline)]
-        internal static UnaryOp128 EmitFixedUnaryOp(this IBufferToken buffer, N128 w, OpIdentity id)
-            => (UnaryOp128)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp128), typeof(Fixed128));
+        // [MethodImpl(Inline)]
+        // internal static UnaryOp128 EmitFixedUnaryOp(this IBufferToken buffer, N128 w, OpIdentity id)
+        //     => (UnaryOp128)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp128), typeof(Fixed128));
 
-        [MethodImpl(Inline)]
-        internal static UnaryOp256 EmitFixedUnaryOp(this IBufferToken buffer, N256 w, OpIdentity id)
-            => (UnaryOp256)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp256), typeof(Fixed256));
+        // [MethodImpl(Inline)]
+        // internal static UnaryOp256 EmitFixedUnaryOp(this IBufferToken buffer, N256 w, OpIdentity id)
+        //     => (UnaryOp256)buffer.EmitFixedUnaryOp(id, typeof(UnaryOp256), typeof(Fixed256));
 
         [MethodImpl(Inline)]
         internal static BinaryOp8 EmitFixedBinaryOp(this IBufferToken buffer, N8 w,OpIdentity id)

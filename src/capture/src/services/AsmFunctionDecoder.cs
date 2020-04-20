@@ -38,14 +38,14 @@ namespace Z0.Asm
             Context = C.Create(context,format);
         }
 
-        public Option<AsmFunction> DecodeCaptured(ApiMemberCapture src)
+        public Option<AsmFunction> Decode(ApiMemberCapture src)
             => DecodeCaptured(Context, src);
 
-        public Option<AsmFunction> DecodeParsed(ParsedMember parsed)
+        public Option<AsmFunction> Decode(ParsedMember parsed)
             =>  from i in Context.Decoder.DecodeInstructions(ApiBits.Define(parsed.MemberUri.OpId, parsed.Content))
                 select AsmFunction.Define(parsed, i);
 
-        public Option<AsmFunction> DecodeExtract(ParsedExtract src)
+        public Option<AsmFunction> Decode(ParsedExtract src)
             =>  from i in Context.Decoder.DecodeInstructions(ApiBits.Define(src.Id, src.ParsedContent))
                 select AsmFunction.Define(src,i);
 

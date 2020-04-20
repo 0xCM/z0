@@ -5,11 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.Reflection;
 
-    public interface ITernaryOpFactory<T> : IOperatorFactory<Func<T,T,T,T>,T>
+    using static Seed;
+
+    using K = Kinds;
+
+    public interface IDynamicOps : IDynamicVImm, IDynamicFactories, IFixedDynamic
     {
-
+        
     }
-
 }

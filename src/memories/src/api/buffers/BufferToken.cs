@@ -25,6 +25,7 @@ namespace Z0
         /// </summary>
         public int Size {get;}
 
+
         /// <summary>
         /// Creates an array of tokens that identify a squence of buffers
         /// </summary>
@@ -38,7 +39,11 @@ namespace Z0
                 tokens[i] = (IntPtr.Add(@base, size*i), size); 
             return tokens;
         }
-        
+
+        [MethodImpl(Inline)]
+        public static implicit operator Span<byte>(BufferToken src)
+            => src.Content<byte>();
+
         [MethodImpl(Inline)]
         public static implicit operator BufferToken((IntPtr handle, int size) src)
             => new BufferToken(src.handle, src.size);
