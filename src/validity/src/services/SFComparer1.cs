@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     
-    using static refs;
+    using static Seed;
+    using static Memories;
+    using static Structured;
 
     class SFOpMatch<T,R> : SFMatch, ISFMatch<T,R>
         where T : unmanaged
@@ -35,7 +37,7 @@ namespace Z0
             clock.Start();
             try
             {
-                SFuncs.apply(subject, lhs, dst);
+                apply(subject, lhs, dst);
                 for(var i=0; i<count; i++)
                     CheckNumeric.eq(baseline.Invoke(skip(in leftIn, i)), skip(in target, i));
             }

@@ -13,6 +13,9 @@ namespace Z0
         public static C.OperatorClass Operator 
             => default;
 
+        public static C.EmitterOpClass EmitterOp
+            => default;
+
         public static C.UnaryOpClass UnaryOp 
             => default;
 
@@ -21,6 +24,9 @@ namespace Z0
 
         public static C.TernaryOpClass TernaryOp 
             => default;
+
+        public static C.EmitterOpClass<T> emitter<T>(T t = default) 
+            where T : unmanaged => default;
 
         public static C.UnaryOpClass<T> unaryop<T>(T t = default) 
             where T : unmanaged => default;

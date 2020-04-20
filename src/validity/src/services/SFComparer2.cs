@@ -7,7 +7,8 @@ namespace Z0
     using System;
 
     using static Seed;
-    using static refs;
+    using static Memories;
+    using static Structured;
 
     class SFComparer<T0,T1,R> : SFMatch, ISFMatch<T0,T1,R>
         where T0 : unmanaged
@@ -72,7 +73,7 @@ namespace Z0
             clock.Start();
             try
             {                
-                SFuncs.apply(subject, lhs, rhs, dst);
+                apply(subject, lhs, rhs, dst);
                 for(var i=0; i<count; i++)
                     CheckNumeric.eq(baseline.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
             }

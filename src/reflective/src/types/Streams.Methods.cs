@@ -15,7 +15,6 @@ namespace Z0
     
     partial class Reflective
     {
-
         /// <summary>
         /// Selects the methods available through the type, including those that were inherited; 
         /// however, property getters/setters and other compiler-generated artifacts may be excluded 

@@ -24,7 +24,7 @@ namespace Z0
             => create<Action>(src);
 
         [MethodImpl(Inline)]
-        public static Emitter<T> create<T>(MethodInfo src, C.Emitter<T> k)
+        public static Emitter<T> create<T>(MethodInfo src, C.EmitterFunc<T> k)
             where T : unmanaged
                 => create<Emitter<T>>(src);
 

@@ -94,7 +94,7 @@ namespace Z0
 
         void EmitImm()
         {
-            //ImmWorkflow.EmitLiteral(3,5,12,9);            
+            ImmWorkflow.ClearArchive();
             ImmWorkflow.EmitRefined();
         }
 

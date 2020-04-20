@@ -19,6 +19,18 @@ namespace Z0
             public K Class => K.Operator; 
         } 
 
+        public readonly struct EmitterOpClass : IOperatorClass<EmitterOpClass,K> 
+        {
+            public K Class => K.Emitter; 
+
+            [MethodImpl(Inline)]
+            public static implicit operator OperatorClass(EmitterOpClass src)
+                => default;
+
+            public OperatorClass Generalized => default;
+        }
+
+
         public readonly struct UnaryOpClass : IOperatorClass<UnaryOpClass,K> 
         {
             public K Class => K.UnaryOp; 
@@ -54,6 +66,19 @@ namespace Z0
             where T : unmanaged 
         { 
             public K Class => K.Operator; 
+        }
+
+        public readonly struct EmitterOpClass<T> : IOperatorClass<EmitterOpClass<T>, K,T> 
+            where T : unmanaged 
+        { 
+            public K Class => K.Emitter; 
+
+            public static implicit operator OperatorClass<T>(EmitterOpClass<T> src)
+                => default;
+            
+            [MethodImpl(Inline)]
+            public static implicit operator EmitterOpClass(EmitterOpClass<T> src)
+                => default;
         }
 
         public readonly struct UnaryOpClass<T> : IOperatorClass<UnaryOpClass<T>, K,T> 

@@ -15,7 +15,7 @@ namespace Z0
             public K Class => K.Function; 
         }
 
-        public readonly struct Emitter : IOpClass<K> 
+        public readonly struct EmitterFunc : IOpClass<K> 
         { 
             public K Class => K.Emitter; 
         }
@@ -41,7 +41,7 @@ namespace Z0
             public K Class => K.Function; 
         }
 
-        public readonly struct Emitter<T> : IOpClass<K,T> 
+        public readonly struct EmitterFunc<T> : IOpClass<K,T> 
             where T : unmanaged 
         { 
             public K Class => K.Emitter; 

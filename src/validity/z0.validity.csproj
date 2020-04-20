@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Checks)" />
-    <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 
 </Project>

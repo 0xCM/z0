@@ -12,7 +12,9 @@ namespace Z0.Asm
 
     public interface IImmSpecializer : IService
     {
-        Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm);
+        Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm);
+
+        Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm);        
 
         AsmFunction[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8Value[] imm);
 

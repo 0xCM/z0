@@ -8,8 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
                 
     using static Seed;
-    using static ApiServices;
+    using static ApiUtility;
         
+    static class ApiUtility
+    {
+        /// <summary>
+        /// Instantiates a strongly-typed operation host
+        /// </summary>
+        /// <typeparam name="S">The host type</typeparam>
+        [MethodImpl(Inline)]
+        public static S ApiSvc<S>()
+            where S : unmanaged, ISFuncApi    
+                => default(S);        
+
+    }   
+
     [ApiServiceProvider]
     public partial class BC : IApiService<BC>
     {

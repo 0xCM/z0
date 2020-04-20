@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />        
-    <ProjectReference Include="$(Api)" />   
     <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(Vectors)" />        
   </ItemGroup>

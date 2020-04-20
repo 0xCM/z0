@@ -37,11 +37,11 @@
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
     <Identify>$(Src)identify/z0.identify.csproj</Identify>
+
+    <Structured>$(Src)structured/z0.structured.csproj</Structured>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Structured>$(Src)structured/z0.structured.csproj</Structured>
-
     <Identity>$(Src)identity/z0.identity.csproj</Identity>
     <Api>$(Src)api/z0.api.csproj</Api>
   </PropertyGroup>
@@ -82,10 +82,7 @@
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
   </PropertyGroup>
 
-
-
   <PropertyGroup>    
-    <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
     <MathSvc>$(Src)mathsvc/z0.mathsvc.csproj</MathSvc>
     <BitSvc>$(Src)bitsvc/z0.bitsvc.csproj</BitSvc>

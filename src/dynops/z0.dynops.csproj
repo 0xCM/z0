@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Fixed)" />        
+    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Identity)" />
   </ItemGroup>
 

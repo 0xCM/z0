@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 
 </Project>

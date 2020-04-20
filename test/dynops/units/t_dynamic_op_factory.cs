@@ -28,13 +28,15 @@ namespace Z0
 
         static MethodInfo add3 => typeof(T).Method(nameof(Add3)).Require();
 
+        IDynamicOps Dynamic => Context.Dynamic();
+
         public void create_emitter()
         {
             var n = n0;
             var t = z32;
             var m = suprise;
             
-            var factory = Context.OperatorFactory(K.emitter(t));
+            var factory = Dynamic.Factory(K.emitter(t));
             var f = factory.Manufacture(m);            
             Claim.eq(f(), Suprise());        
         }
@@ -45,7 +47,7 @@ namespace Z0
             var t = z32;
             var m = square;
             
-            var factory = Context.OperatorFactory(K.unaryop(t));
+            var factory = Dynamic.Factory(K.unaryop(t));
             var f = factory.Manufacture(m);            
             Claim.eq(f(3), Square(3));        
         }
@@ -56,7 +58,7 @@ namespace Z0
             var t = z32;
             var m = add2;
             
-            var factory = Context.OperatorFactory(K.binaryop(t));
+            var factory = Dynamic.Factory(K.binaryop(t));
             var f = factory.Manufacture(m);            
             Claim.eq(f(10,5), Add2(10,5));        
         }
@@ -68,7 +70,7 @@ namespace Z0
             var m = add3;
         
             
-            var factory = Context.OperatorFactory(K.ternaryop(t));
+            var factory = Dynamic.Factory(K.ternaryop(t));
             var f = factory.Manufacture(m);            
             Claim.eq(f(10,5,5), Add3(10,5,5));        
         }

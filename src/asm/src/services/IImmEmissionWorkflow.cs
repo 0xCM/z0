@@ -11,6 +11,7 @@ namespace Z0.Asm
         void EmitLiteral(params byte[] imm8);
 
         void EmitRefined();
-        
+
+        void ClearArchive();        
     }
 }

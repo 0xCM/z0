@@ -25,6 +25,8 @@ namespace Z0
     {
         public IAsmContext Context {get;}
         
+        readonly IDynamicOps Dynamic;
+
         IPolyrand Random => Context.Random;
         
         readonly int RepCount;
@@ -38,6 +40,7 @@ namespace Z0
         {
             this.Context = context;
             this.RepCount = 128;
+            this.Dynamic = Context.Dynamic();
         }                
 
         protected ICaptureArchive CodeArchive 
@@ -661,7 +664,7 @@ namespace Z0
             var name = nameof(dvec.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
 
-            var provider = Context.V256BinaryOpImmInjector<ushort>();
+            var provider = Dynamic.V256BinaryOpImmInjector<ushort>();
             var x = Random.CpuVector<ushort>(w);
             var y = Random.CpuVector<ushort>(w);
             
@@ -694,7 +697,7 @@ namespace Z0
         void CheckBinaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W128 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = Context.V128BinaryOpImmInjector<T>();
+            var provider = Dynamic.V128BinaryOpImmInjector<T>();
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -720,7 +723,7 @@ namespace Z0
         void CheckBinaryImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = Context.V256BinaryOpImmInjector<T>();
+            var provider = Dynamic.V256BinaryOpImmInjector<T>();
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -748,7 +751,7 @@ namespace Z0
             //var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
             
             var method = Method;            
-            var provider = Context.V256UnaryOpImmInjector<T>();
+            var provider = Dynamic.V256UnaryOpImmInjector<T>();
 
             
             var dynop = provider.EmbedImmediate(method,imm);

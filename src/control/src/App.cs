@@ -75,7 +75,6 @@ namespace Z0
         public override void RunShell(params string[] args)
         {
             RunCapture();            
-            //SurveyArchive();
         }
 
         public static void Main(params string[] args)

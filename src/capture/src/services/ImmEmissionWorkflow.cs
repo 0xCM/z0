@@ -72,6 +72,11 @@ namespace Z0.Asm
             Flow.Report(e);
         }
 
+        public void ClearArchive()
+        {
+            CodeArchive.ImmRootDir.Delete();
+        }
+
         public void EmitLiteral(params byte[] imm8)
         {
             if(imm8.Length != 0)

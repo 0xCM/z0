@@ -17,6 +17,8 @@ namespace Z0.Asm
 
         readonly ICaptureService Capture;
 
+        readonly IDynamicOps Dynamic;
+
         /// <summary>
         /// Instantiates a contextual immediate capture service for a unary operator
         /// </summary>
@@ -30,19 +32,32 @@ namespace Z0.Asm
         static void OnCaptureFailed(OpIdentity id)
             => term.error($"Capture failure for {id}");
 
-        static void OnEmbeddingFailure(OpIdentity id)
-            => term.error($"Embedding failure for {id}");
+        static void OnEmbeddingFailure(MethodInfo src)
+            => term.error($"Embedding failure for {src.Name}");
 
         [MethodImpl(Inline)]
         ImmSpecializer(IContext context, IAsmFunctionDecoder decoder)
         {            
             this.Decoder = decoder;
             this.Capture = context.Capture();
+            this.Dynamic = context.Dynamic();
+        }
+
+        public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm)
+        {
+            var f = Dynamic.EmbedVUnaryOpImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
+            if(f)
+              return     
+                    from c in Capture.Capture(exchange, f.Value.Id, f.Value)
+                    from d in Decoder.DecodeCaptured(c)
+                    select d;
+            else
+                return none<AsmFunction>();
         }
 
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
-            var f = Dynop.EmbedVUnaryOpImm(src, imm, id).OnNone(() => OnEmbeddingFailure(id));
+            var f = Dynamic.EmbedVUnaryOpImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
@@ -57,13 +72,13 @@ namespace Z0.Asm
             var count = imm.Length;
             var dst = new AsmFunction[count];
             for(var i=0; i<count; i++)
-                dst[i] = UnaryOp(exchange,src,id,imm[i]).OnNone(() => OnCaptureFailed(id)).ValueOrDefault(AsmFunction.Empty);
+                dst[i] = UnaryOp(exchange,src, id, imm[i]).OnNone(() => OnCaptureFailed(id)).ValueOrDefault(AsmFunction.Empty);
             return dst;
         }
 
         public Option<AsmFunction> BinaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
-            var f = Dynop.EmbedVBinaryOpImm(src, imm, id).OnNone(() => OnEmbeddingFailure(id));
+            var f = Dynamic.EmbedVBinaryOpImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)

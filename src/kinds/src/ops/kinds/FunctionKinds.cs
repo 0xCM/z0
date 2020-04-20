@@ -10,7 +10,7 @@ namespace Z0
 
     partial class Kinds
     {
-        public static K.Emitter Emitter 
+        public static K.EmitterFunc EmitterFunc
             => default;
 
         public static K.UnaryFunc UnaryFunc 
@@ -22,7 +22,7 @@ namespace Z0
         public static K.TernaryFunc TernaryFunc 
             => default;
             
-        public static K.Emitter func(A0 rep) 
+        public static K.EmitterFunc func(A0 rep) 
             => default;
 
         public static K.UnaryFunc func(A1 rep) 
@@ -34,8 +34,8 @@ namespace Z0
         public static K.TernaryFunc func(A3 rep) 
             => default;
 
-        public static K.Emitter<T> emitter<T>(T t = default) 
-            where T : unmanaged => default;
+        public static K.EmitterFunc<T> func<T>(A0<T> rep) 
+            where T : unmanaged =>  default;
 
         public static K.UnaryFunc<T> func<T>(A1<T> rep) 
             where T : unmanaged =>  default;

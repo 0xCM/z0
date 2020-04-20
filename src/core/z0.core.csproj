@@ -39,6 +39,9 @@
     <ProjectReference Include="$(Polyrand)" />    
     <ProjectReference Include="$(Graphs)" />
     <ProjectReference Include="$(Identify)" />
+
+    <ProjectReference Include="$(Structured)" />
+
   </ItemGroup>
 
 </Project>

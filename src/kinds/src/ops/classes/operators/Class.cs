@@ -9,7 +9,7 @@ namespace Z0
     using OC = OperationClass;
     
     /// <summary>
-    /// Classifies operators of arity either 1, 2, or 3
+    /// Classifies operators of arity up to 3
     /// </summary>
     [Flags]
     public enum OperatorClass : ushort
@@ -18,6 +18,8 @@ namespace Z0
         /// The empty class
         /// </summary>
         None = 0,
+
+        Emitter = OC.Emitter,
 
         /// <summary>
         /// Classifies functions for which operands and return type are homogenous

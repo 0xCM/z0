@@ -56,7 +56,6 @@ namespace Z0
                 : from f in Directory.GetFiles(FullPath, $"*.{ext}") 
                   select FilePath.Define(f);
         
-
         IEnumerable<FilePath> Recurse(FileExtension ext)        
             => from d in (new string[]{FullPath}).Union(Directory.EnumerateDirectories(FullPath))
                from f in Directory.GetFiles(d,$"*.{ext}")
@@ -81,5 +80,30 @@ namespace Z0
         [MethodImpl(Inline)]
         public FolderPath WithSubFolder(RelativeLocation folder)
             => this + folder;             
+
+        /// <summary>
+        /// Specifies whether the represented directory exists within the file system
+        /// </summary>
+        public bool Exists
+            => Directory.Exists(FullPath);
+
+        /// <summary>
+        /// Consigns the folder and its contents to oblivion
+        /// </summary>
+        /// <param name="recursive">How sure are you?</param>
+        public Option<int> Delete(bool recursive = true)
+        {
+            try
+            {
+                if(Exists)
+                    Directory.Delete(FullPath, recursive);
+                return 0;
+            }
+            catch(Exception e)
+            {
+                e.Report();
+                return Option.none<int>();
+            }
+        }
     }
 }
