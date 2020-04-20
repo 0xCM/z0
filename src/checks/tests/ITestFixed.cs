@@ -7,12 +7,15 @@ namespace Z0
     using System;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static Seed;
     using static Memories;
     
     public interface ITestFixed : ITestAction
     {
+        ICheckEquatable Equatable => default(CheckEquatable);
+
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points
         /// </summary>
@@ -29,13 +32,11 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    var a = f(x,y);
-                    var b = g(x,y);
-                    require(a.Equals(b), $"{a} != {b}");                    
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, MatchCaseName(fId, gId));
         }
 
         /// <summary>
@@ -56,11 +57,11 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    require(a.Equals(b), $"{a} != {b}");                    
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, MatchCaseName(fId, gId));
         }
 
         /// <summary>
@@ -81,11 +82,11 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    require(a.Equals(b), $"{a} != {b}");                    
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, MatchCaseName(fId, gId));
         }
 
         /// <summary>
@@ -106,11 +107,11 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    require(a.Equals(b), $"{a} != {b}");                    
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, MatchCaseName(fId, gId));
         }
 
         /// <summary>
@@ -131,11 +132,11 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    require(a.Equals(b), $"{a} != {b}");                    
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, MatchCaseName(fId, gId));
         }
 
         /// <summary>
@@ -156,11 +157,11 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    require(a.Equals(b), $"{a} != {b}");                    
+                    Equatable.eq(f(x,y),g(x,y));
                 }
             }
 
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
+            return TestAction(check, MatchCaseName(fId, gId));
         }
     }
 }

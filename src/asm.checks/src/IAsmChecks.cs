@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public interface IAsmChecks : IService, ITestFixed
+    public interface IAsmChecks : IService, ITestFixed, ITestVectors, ITestAction
     {
 
     }

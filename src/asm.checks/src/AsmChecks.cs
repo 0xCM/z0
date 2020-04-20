@@ -52,6 +52,34 @@ namespace Z0
                 );
 
 
+        /// <summary>
+        /// Verfies that a delegate evaluation matches a that of a function materialized from binary code
+        /// </summary>
+        /// <param name="buffers">The buffers to use</param>
+        /// <param name="f">The source delegate</param>
+        /// <param name="bits">The binary code</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        TestCaseRecord TestMatch<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, ApiBits bits)
+            where T : unmanaged
+        {
+            var g = Dynamic.Emit(buffers[Main], Binary, w128, bits);
+            return Checks.TestMatch<T>(f, g, bits.Id);
+        }
+
+        /// <summary>
+        /// Verfies that a delegate evaluation matches a that of a function materialized from binary code
+        /// </summary>
+        /// <param name="buffers">The buffers to use</param>
+        /// <param name="f">The source delegate</param>
+        /// <param name="bits">The binary code</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        TestCaseRecord TestMatch<T>(in BufferSeq buffers, BinaryOp<Vector256<T>> f, ApiBits bits)
+            where T : unmanaged
+        {
+            var g = Dynamic.Emit(buffers[Main], Binary, w256, bits);
+            return Checks.TestMatch<T>(f, g, bits.Id);
+        }
+
         protected IBitArchiveWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
@@ -99,6 +127,8 @@ namespace Z0
 
         IAsmFormatter Formatter => Context.Formatter;
 
+        IAsmChecks Checks => this;
+
         CaptureExchange Exchange(in BufferSeq buffers)   
             => CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);     
 
@@ -123,7 +153,7 @@ namespace Z0
             Claim.veq(v1,v2);
         }
 
-        protected TestCaseRecord TestAsmMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in IdentifiedCode src)
+        TestCaseRecord TestAsmMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in IdentifiedCode src)
             where T : unmanaged
         {
                       
@@ -139,198 +169,30 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, src.Id);
+            return Checks.TestAction(check, src.Id);
         }
 
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.HostBits(id,host).Read(m).Single().ToApiCode();
 
-        /// <summary>
-        /// Manages the execution of an action test case
-        /// </summary>
-        /// <param name="f">The action under test</param>
-        /// <param name="id">The action name</param>
-        private TestCaseRecord TestAction(Action f, OpIdentity id)
-        {            
-            var name = CaseName(id);
-            var clock = counter(true);
-            try
-            {
-                f();
-                return TestCaseRecord.Define(name, true, clock);
-            }
-            catch(Exception e)
-            {
-                term.errlabel(e, id.Identifier);
-                return TestCaseRecord.Define(name, false, clock);                
-            }
-        }
+        // private TestCaseRecord TestAction(Action f, OpIdentity id)
+        // {            
+        //     var name = CaseName(id);
+        //     var clock = counter(true);
+        //     try
+        //     {
+        //         f();
+        //         return TestCaseRecord.Define(name, true, clock);
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         term.errlabel(e, id.Identifier);
+        //         return TestCaseRecord.Define(name, false, clock);                
+        //     }
+        // }
 
         ITestFixed Test => this;
 
-        /// <summary>
-        /// Manages the execution of an action test case
-        /// </summary>
-        /// <param name="f">The action under test</param>
-        /// <param name="name">The action name</param>
-        /// <param name="clock">Accumulates the test case execution time</param>
-        private TestCaseRecord TestAction(Action f, string name)
-        {
-            var succeeded = true;
-            
-            var clock = counter(true);
-            try
-            {
-                f();
-                return TestCaseRecord.Define(name, true, clock);
-            }
-            catch(Exception e)
-            {
-                term.errlabel(e, name);
-                return TestCaseRecord.Define(name, true, clock);
-            }
-        }
-
-        /// <summary>
-        /// Verifies that two 8-bit binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord TestMatch(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
-        {
-            var w = w8;
-            void check()
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
-                }
-            }
-
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
-        }
-
-        /// <summary>
-        /// Verifies that two 16-bit binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord TestMatch(BinaryOp16 f, OpIdentity fId, BinaryOp16 g, OpIdentity gId)
-        {
-            var w = w16;
-            void check()
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
-                }
-            }
-
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
-        }
-
-        /// <summary>
-        /// Verifies that two 32-bit binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord TestMatch(BinaryOp32 f, OpIdentity fId, BinaryOp32 g, OpIdentity gId)
-        {
-            var w = w32;
-            void check()
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
-                }
-            }
-
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
-        }
-
-        /// <summary>
-        /// Verifies that two 64-bit binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord TestMatch(BinaryOp64 f, OpIdentity fId, BinaryOp64 g, OpIdentity gId)
-        {
-            var w = w64;
-            void check()
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
-                    var a = f(x,y);
-                    var b = g(x,y);
-                    Claim.eq(a,b);
-                }
-            }
-
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
-        }
-
-        /// <summary>
-        /// Verifies that two 128-bit binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord CheckMatch(BinaryOp128 f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
-        {
-            var w = w128;
-            
-            void check()
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
-                }
-            }
-
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
-        }
-
-        /// <summary>
-        /// Verifies that two 128-bit binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord CheckMatch(BinaryOp256 f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
-        {
-            var w = w256;
-            void check()
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
-                    Claim.eq(f(x,y),g(x,y));
-                }
-            }
-
-            return TestAction(check, CaseName($"{fId}~/~{gId}"));
-        }
 
 
         IEnumerable<string> PrimalBitLogicOps
@@ -345,13 +207,13 @@ namespace Z0
             foreach(var n in names)
             foreach(var w in widths)
             foreach(var k in kinds)
-                primal_match(buffers, n, w, k);                        
+                TestPrimalMatch(buffers, n, w, k);                        
         }
 
         IHostBitsArchive HostBits(ApiHostUri host)
             => Context.HostBits(host.Owner, host);
 
-        TestCaseRecord primal_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
+        TestCaseRecord TestPrimalMatch(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         {
             var catalog = PartId.GMath;
             var dSrc = ApiHostUri.FromHost(typeof(math));
@@ -366,76 +228,75 @@ namespace Z0
             var d = dArchive.Read(dId).Single().ToApiCode();
             var g = gArchive.Read(gId).Single().ToApiCode();
 
-            return binop_match(buffers, w,d,g);
+            return TestMatch(buffers, Binary, w,d,g);
         }
 
-        TestCaseRecord binop_match(in BufferSeq buffers, TypeWidth w, IdentifiedCode a, IdentifiedCode b)
+        TestCaseRecord TestMatch(in BufferSeq buffers, K.BinaryOpClass k,  TypeWidth w, IdentifiedCode a, IdentifiedCode b)
         {
             switch(w)
             {
                 case TypeWidth.W8:
-                    return binop_match(buffers, w8,a,b);
+                    return TestMatch(buffers, k, w8,a,b);
 
                 case TypeWidth.W16:
-                    return binop_match(buffers, w16,a,b);
+                    return TestMatch(buffers, k, w16,a,b);
 
                 case TypeWidth.W32:
-                    return binop_match(buffers, w32,a,b);
+                    return TestMatch(buffers, k, w32,a,b);
 
                 case TypeWidth.W64:
-                    return binop_match(buffers, w64,a,b);
+                    return TestMatch(buffers, k, w64,a,b);
 
                 case TypeWidth.W128:
-                    return binop_match(buffers, w128,a,b);
+                    return TestMatch(buffers, k, w128,a,b);
 
                 case TypeWidth.W256:
-                    return binop_match(buffers, w256, a, b);
+                    return TestMatch(buffers, k, w256, a, b);
             }
             throw Unsupported.define(w.GetType());
         }
 
-        TestCaseRecord binop_match(in BufferSeq buffers, W8 w, IdentifiedCode a, IdentifiedCode b)
+        TestCaseRecord TestMatch(in BufferSeq buffers, K.BinaryOpClass k, W8 w, IdentifiedCode a, IdentifiedCode b)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            var f = Dynamic.Emit(buffers[Left], k, w, a);
+            var g = Dynamic.Emit(buffers[Right], k, w, b);
             return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord binop_match(in BufferSeq buffers, W16 w, IdentifiedCode a, IdentifiedCode b)
+        TestCaseRecord TestMatch(in BufferSeq buffers, K.BinaryOpClass k, W16 w, IdentifiedCode a, IdentifiedCode b)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            var f = Dynamic.Emit(buffers[Left], k, w, a);
+            var g = Dynamic.Emit(buffers[Right], k, w, b);
             return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord binop_match(in BufferSeq buffers, W32 w, IdentifiedCode a, IdentifiedCode b)
+        TestCaseRecord TestMatch(in BufferSeq buffers, K.BinaryOpClass k, W32 w, IdentifiedCode a, IdentifiedCode b)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            var f = Dynamic.Emit(buffers[Left], k, w, a);
+            var g = Dynamic.Emit(buffers[Right], k, w, b);
             return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord binop_match(in BufferSeq buffers, W64 w, IdentifiedCode a, IdentifiedCode b)
+        TestCaseRecord TestMatch(in BufferSeq buffers, K.BinaryOpClass k, W64 w, IdentifiedCode a, IdentifiedCode b)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            var f = Dynamic.Emit(buffers[Left], k, w, a);
+            var g = Dynamic.Emit(buffers[Right], k, w, b);
             return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord binop_match(in BufferSeq buffers, W128 w, IdentifiedCode a, IdentifiedCode b)
+        TestCaseRecord TestMatch(in BufferSeq buffers, K.BinaryOpClass k,  W128 w, IdentifiedCode a, IdentifiedCode b)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            var f = Dynamic.Emit(buffers[Left], k, w, a);
+            var g = Dynamic.Emit(buffers[Right], k, w, b);
             return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord binop_match(in BufferSeq buffers, W256 w, IdentifiedCode a, IdentifiedCode b)
+        TestCaseRecord TestMatch(in BufferSeq buffers, K.BinaryOpClass k, W256 w, IdentifiedCode a, IdentifiedCode b)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, a);
-            var g = buffers[Right].EmitFixedBinaryOp(w, b);
+            var f = Dynamic.Emit(buffers[Left], k, w, a);
+            var g = Dynamic.Emit(buffers[Right], k, w, b);
             return Test.TestMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
-
 
         void capture_constants(in BufferSeq buffers)
         {
@@ -554,7 +415,7 @@ namespace Z0
             Claim.veq(v1,v2);
         }
 
-        TestCaseRecord vector_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
+        TestCaseRecord TestVectorMatch(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         {
             var catalog = PartId.GVec;
             
@@ -564,7 +425,7 @@ namespace Z0
             var d = Context.HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
             var g = Context.HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
 
-            return binop_match(buffers, w,d,g);
+            return TestMatch(buffers, Binary, w,d,g);
         }
 
         public TestCaseRecord[] vector_bitlogic_match(in BufferSeq buffers)
@@ -577,23 +438,11 @@ namespace Z0
             foreach(var n in names)
             foreach(var w in widths)
             foreach(var k in kinds)
-                dst[i++] =vector_match(buffers, n, w, k);                        
+                dst[i++] =TestVectorMatch(buffers, n, w, k);                        
             return dst;
         }
 
-        void vadd_check<T>(in BufferSeq buffers, W128 w, ApiBits asm)
-            where T : unmanaged
-        {            
-            var f = buffers[Main].EmitFixedBinaryOp(w,asm);            
-            TestMatch<T>(gvec.vadd, f, asm.Id);
-        }
 
-        void vadd_check<T>(in BufferSeq buffers, W256 w, ApiBits asm)
-            where T : unmanaged
-        {            
-            var f = buffers[Main].EmitFixedBinaryOp(w,asm);
-            TestMatch<T>(gvec.vadd, f, asm.Id);
-        }
 
         void datares_check(in BufferSeq buffers)
         {
@@ -620,55 +469,6 @@ namespace Z0
             var decoded = captured.OnSome(c => Decoder.Decode(c));                    
         }
 
-        /// <summary>
-        /// Verifies that two 128-bit vectorized binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord TestMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
-            where T : unmanaged
-        {
-            void check()
-            {
-                var w = w128;
-                var t = default(T);
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
-                    Claim.veq(f(x,y), g.Apply(x,y));
-                }            
-            }
-
-            return TestAction(check, name);      
-        }
-
-        /// <summary>
-        /// Verifies that two 256-bit vectorized binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected TestCaseRecord TestMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
-            where T : unmanaged
-        {
-            void check()
-            {
-                var w = w256;
-                var t = default(T);
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
-                    Claim.veq(f(x,y), g.Apply(x,y));
-                }
-            }      
-
-            return TestAction(check, name);      
-        }
 
         static int activations;
         
