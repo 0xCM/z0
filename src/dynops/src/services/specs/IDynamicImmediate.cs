@@ -13,33 +13,21 @@ namespace Z0
 
     using K = Kinds;
 
-    public interface IDynamicVImm
+    public interface IDynamicImmediate
     {
         /// <summary>
         /// Creates an immediate injector for unary operators with non-immediate operands of parametric width
         /// </summary>
         /// <typeparam name="W">The operand width</typeparam>
-        IImmInjector VUnaryImmInjector<W>()
+        IImmInjector UnaryInjector<W>()
             where W : ITypeWidth;
 
         /// <summary>
         /// Creates an immediate injector for binary operators with non-immediate operands of parametric width
         /// </summary>
         /// <typeparam name="W">The operand width</typeparam>
-        IImmInjector VBinaryImmInjector<W>()
+        IImmInjector BinaryInjector<W>()
             where W : ITypeWidth;         
-
-        IImmInjector<UnaryOp<Vector128<T>>> V128UnaryOpImmInjector<T>()
-            where T : unmanaged;                   
-
-        IImmInjector<UnaryOp<Vector256<T>>> V256UnaryOpImmInjector<T>()            
-            where T : unmanaged;            
-        
-        IImmInjector<BinaryOp<Vector128<T>>> V128BinaryOpImmInjector<T>()        
-            where T : unmanaged;            
-
-        IImmInjector<BinaryOp<Vector256<T>>> V256BinaryOpImmInjector<T>()
-            where T : unmanaged;     
 
         /// <summary>
         /// Creates a 128-bit T-parametric unary immediate injector
@@ -48,10 +36,8 @@ namespace Z0
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]            
-        IImmInjector<UnaryOp<Vector128<T>>> Injector<T>(W128 w, K.UnaryOpClass k)
-            where T : unmanaged                   
-                => V128UnaryOpImmInjector<T>();
-
+        IImmInjector<UnaryOp<Vector128<T>>> UnaryInjector<T>(W128 w)
+            where T : unmanaged;               
 
         /// <summary>
         /// Creates a 256-bit T-parametric unary immediate injector
@@ -60,9 +46,8 @@ namespace Z0
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]            
-        IImmInjector<UnaryOp<Vector256<T>>> Injector<T>(W256 w, K.UnaryOpClass k)
-            where T : unmanaged                   
-                => V256UnaryOpImmInjector<T>();
+        IImmInjector<UnaryOp<Vector256<T>>> UnaryInjector<T>(W256 w)
+            where T : unmanaged;               
 
         /// <summary>
         /// Creates a 128-bit T-parametric binary immediate injector
@@ -71,9 +56,8 @@ namespace Z0
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]            
-        IImmInjector<BinaryOp<Vector128<T>>> Injector<T>(W128 w, K.BinaryOpClass k)
-            where T : unmanaged                   
-                => V128BinaryOpImmInjector<T>();
+        IImmInjector<BinaryOp<Vector128<T>>> BinaryInjector<T>(W128 w)
+            where T : unmanaged;               
 
         /// <summary>
         /// Creates a 256-bit T-parametric binary immediate injector
@@ -82,9 +66,8 @@ namespace Z0
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]            
-        IImmInjector<BinaryOp<Vector256<T>>> Injector<T>(W256 w, K.BinaryOpClass k)
-            where T : unmanaged                   
-                => V256BinaryOpImmInjector<T>();
+        IImmInjector<BinaryOp<Vector256<T>>> BinaryInjector<T>(W256 w)
+            where T : unmanaged;               
 
         /// <summary>
         /// Creates a 128-bit vectorized parametric unary operator that consumes an immediate value in the second argument
@@ -93,7 +76,7 @@ namespace Z0
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]            
-        DynamicDelegate<UnaryOp<Vector128<T>>> CreateImmV128UnaryOp<T>(MethodInfo src, byte imm)
+        DynamicDelegate<UnaryOp<Vector128<T>>> UnaryOp<T>(MethodInfo src, W128 w, byte imm)
             where T : unmanaged;
 
         /// <summary>
@@ -102,7 +85,7 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        DynamicDelegate<BinaryOp<Vector128<T>>> CreateImmV128BinaryOp<T>(MethodInfo src, byte imm)
+        DynamicDelegate<BinaryOp<Vector128<T>>> BinaryOp<T>(MethodInfo src, W128 w, byte imm)
             where T : unmanaged;
 
         /// <summary>
@@ -111,7 +94,7 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        DynamicDelegate<UnaryOp<Vector256<T>>> CreateImmV256UnaryOp<T>(MethodInfo src, byte imm)        
+        DynamicDelegate<UnaryOp<Vector256<T>>> UnaryOp<T>(MethodInfo src, W256 w, byte imm)        
             where T : unmanaged;
 
         /// <summary>
@@ -120,15 +103,15 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        DynamicDelegate<BinaryOp<Vector256<T>>> CreateV256BinaryOpImm<T>(MethodInfo src, byte imm)        
+        DynamicDelegate<BinaryOp<Vector256<T>>> BinaryOp<T>(MethodInfo src, W256 w, byte imm)        
             where T : unmanaged;
 
-        Option<DynamicDelegate> EmbedVUnaryOpImm(MethodInfo src, byte imm8, OpIdentity id);
+        Option<DynamicDelegate> EmbedUnaryImm(MethodInfo src, byte imm8, OpIdentity id);
 
-        Option<DynamicDelegate> EmbedVUnaryOpImm(MethodInfo src, byte imm8);
+        Option<DynamicDelegate> EmbedUnaryImm(MethodInfo src, byte imm8);
 
-        Option<DynamicDelegate> EmbedVBinaryOpImm(MethodInfo src, byte imm8, OpIdentity id);
+        Option<DynamicDelegate> EmbedBinaryImm(MethodInfo src, byte imm8, OpIdentity id);
 
-        Option<DynamicDelegate> EmbedVBinaryOpImm(MethodInfo src, byte imm8);
+        Option<DynamicDelegate> EmbedBinaryImm(MethodInfo src, byte imm8);
     }   
 }

@@ -13,63 +13,63 @@ namespace Z0
 
     using K = Kinds;
 
-    readonly struct ImmInjector : IImmInjector
+    readonly struct ImmediateInjector : IImmInjector
     {                
         public IInnerContext Context {get;}
 
         readonly IImmInjector Injective;
 
         [MethodImpl(Inline)]
-        public static ImmInjector<D> FromFactory<D>(IInnerContext context, IImmInjector<D> factory)
+        public static ImmediateInjector<D> FromFactory<D>(IInnerContext context, IImmInjector<D> factory)
             where D : Delegate
-                => new ImmInjector<D>(context,factory);
+                => new ImmediateInjector<D>(context,factory);
 
         [MethodImpl(Inline)]
         public static IImmInjector Create(IInnerContext context, Vec128Kind v, K.UnaryOpClass k)
-            => new ImmInjector(context, v, k);
+            => new ImmediateInjector(context, v, k);
 
         [MethodImpl(Inline)]
         public static IImmInjector Create(IInnerContext context, Vec256Kind v, K.UnaryOpClass k)
-            => new ImmInjector(context, v, k);
+            => new ImmediateInjector(context, v, k);
 
         [MethodImpl(Inline)]
         public static IImmInjector Create(IInnerContext context, Vec128Kind v, K.BinaryOpClass k)
-            => new ImmInjector(context, v, k);
+            => new ImmediateInjector(context, v, k);
 
         [MethodImpl(Inline)]
         public static IImmInjector Create(IInnerContext context, Vec256Kind v, K.BinaryOpClass k)
-            => new ImmInjector(context, v, k);
+            => new ImmediateInjector(context, v, k);
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec128Kind vk, K.UnaryOpClass opk)
+        ImmediateInjector(IInnerContext context, Vec128Kind vk, K.UnaryOpClass opk)
         {
             Injective = V128UnaryOpImmInjector.Create(context);
             Context = context;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec256Kind vk, K.UnaryOpClass opk)
+        ImmediateInjector(IInnerContext context, Vec256Kind vk, K.UnaryOpClass opk)
         {
             Injective = V256UnaryOpImmInjector.Create(context);
             Context = context;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec128Kind vk, K.BinaryOpClass opk)
+        ImmediateInjector(IInnerContext context, Vec128Kind vk, K.BinaryOpClass opk)
         {
             Injective = V128BinaryOpImmInjector.Create(context);
             Context = context;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec256Kind vk, K.BinaryOpClass opk)
+        ImmediateInjector(IInnerContext context, Vec256Kind vk, K.BinaryOpClass opk)
         {
             Injective = V256BinaryOpImmInjector.Create(context);
             Context = context;
         }
     }    
 
-    readonly struct ImmInjector<D> : IImmInjector<D>
+    readonly struct ImmediateInjector<D> : IImmInjector<D>
         where D : Delegate
     {
         readonly IImmInjector<D> Injective;
@@ -77,7 +77,7 @@ namespace Z0
         public IInnerContext Context {get;}
 
         [MethodImpl(Inline)]
-        public ImmInjector(IInnerContext context, IImmInjector<D> factory)
+        public ImmediateInjector(IInnerContext context, IImmInjector<D> factory)
         {
             this.Context = context;
             this.Injective = factory;

@@ -7,11 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public interface IOperatorFactoryProvider : IService
-    {
-        
-    }
-
     public interface IOperatorFactory<D,T> : IService
         where D : Delegate
     {

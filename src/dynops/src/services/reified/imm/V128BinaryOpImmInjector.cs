@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmbedV128BinaryOpImm(src,imm, Context.Identify(src));
+            => DynamicImmediate.EmbedV128BinaryOpImm(src,imm, Context.Identify(src));
     }
 
     readonly struct V128BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector128<T>>>
@@ -53,6 +53,6 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<BinaryOp<Vector128<T>>> EmbedImmediate(MethodInfo src, byte imm)
-            => Dynop.EmbedVBinaryOpImm(vk128<T>(), Context.Identify(src), src, imm);
+            => DynamicImmediate.EmbedVBinaryOpImm(vk128<T>(), Context.Identify(src), src, imm);
     }
 }

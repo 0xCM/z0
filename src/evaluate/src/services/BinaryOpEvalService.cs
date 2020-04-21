@@ -14,10 +14,14 @@ namespace Z0
     readonly struct BinaryOpEvalService<T> : IBinaryOpEvalService<T>
         where T : unmanaged
     {
+        IDynamicOps Dynamic => IContext.Default.Dynamic();
+
         public ref readonly BinaryEval<T> Evaluate(in BinaryOpEval<T> package)
         {
             var f = package.ApiCode.Member.Method.CreateDelegate<BinaryOp<T>>();
-            var g = package.Buffers[Left].EmitBinaryOp<T>(package.ApiCode);
+            //var g = package.Buffers[Left].EmitBinaryOp<T>(package.ApiCode);
+            var g = Dynamic.EmitBinaryOp<T>(package.Buffers[Left], package.ApiCode);
+
             for(var i=0; i<package.SrcCount; i++)
             {
                 ref readonly var pair = ref package.Src[i];

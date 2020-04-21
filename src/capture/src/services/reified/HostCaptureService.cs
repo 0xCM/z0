@@ -56,7 +56,6 @@ namespace Z0.Asm
         public AsmFunction[] Decode(ApiHostUri host, ParsedExtract[] parsed, bool save)
             => Decode(FindHost(host), parsed, save);
 
-
         public ApiHostCapture CaptureHost(ApiHostUri host, bool save )
         {
             var extracts = Extract(host, save);
@@ -126,9 +125,9 @@ namespace Z0.Asm
         ApiMemberExtract[] Extracted(ApiHostUri host, ApiMemberExtract[] extracts, Option<FilePath> dst)
         {
             if(dst)
-                this.ExractedHost(host,dst.Value);
+                this.ExtractionSuccess(host,dst.Value);
             else
-                this.ExtractionFailed(host);
+                this.ExtractionFailure(host);
             return extracts;
         }    
 

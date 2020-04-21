@@ -32,11 +32,11 @@ namespace Z0
         /// <summary>
         /// Loads executable code into a token-identified buffer and covers it with a parametric ternary operator
         /// </summary>
-        /// <param name="buffer">The buffer hande</param>
+        /// <param name="dst">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static TernaryOp<T> EmitTernaryOp<T>(this IBufferToken buffer, in IdentifiedCode src)
+        public static TernaryOp<T> EmitTernaryOp<T>(this IBufferToken dst, in IdentifiedCode src)
             where T : unmanaged
-                => buffer.Load(src.BinaryCode).EmitTernaryOp<T>(src.Id);
+                => dst.Load(src.BinaryCode).EmitTernaryOp<T>(src.Id);
     }
 }

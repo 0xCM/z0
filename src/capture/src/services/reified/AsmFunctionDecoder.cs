@@ -12,21 +12,7 @@ namespace Z0.Asm
 
     readonly struct AsmFunctionDecoder : IAsmFunctionDecoder
     {
-        readonly C Context;
-
-        struct C
-        {
-            public static C Create(IContext context, AsmFormatConfig format)
-                => new C
-                {
-                    Decoder = context.AsmInstructionDecoder(format),
-                    Builder =context.FunctionBuilder()
-                };
-
-            public IAsmInstructionDecoder Decoder;
-
-            public IAsmFunctionBuilder Builder;
-        }
+        readonly IAsmInstructionDecoder Decoder;
 
         [MethodImpl(Inline)]
         public static AsmFunctionDecoder Create(IContext context, AsmFormatConfig format)
@@ -35,24 +21,25 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         AsmFunctionDecoder(IContext context, AsmFormatConfig format)
         {
-            Context = C.Create(context,format);
+            Decoder = context.AsmInstructionDecoder(format);
         }
 
+        static IAsmFunctionBuilder Builder => AsmFunctionBuilder.Default;
+
         public Option<AsmFunction> Decode(ApiMemberCapture src)
-            => DecodeCaptured(Context, src);
+            => DecodeCaptured(Decoder, src);
 
         public Option<AsmFunction> Decode(ParsedMember parsed)
-            =>  from i in Context.Decoder.DecodeInstructions(ApiBits.Define(parsed.MemberUri.OpId, parsed.Content))
+            =>  from i in Decoder.DecodeInstructions(ApiBits.Define(parsed.MemberUri.OpId, parsed.Content))
                 select AsmFunction.Define(parsed, i);
 
         public Option<AsmFunction> Decode(ParsedExtract src)
-            =>  from i in Context.Decoder.DecodeInstructions(ApiBits.Define(src.Id, src.ParsedContent))
+            =>  from i in Decoder.DecodeInstructions(ApiBits.Define(src.Id, src.ParsedContent))
                 select AsmFunction.Define(src,i);
 
-        static Option<AsmFunction> DecodeCaptured(C context, ApiMemberCapture src)
-            => from i in context.Decoder.DecodeInstructions(src.Code)
+        static Option<AsmFunction> DecodeCaptured(IAsmInstructionDecoder decoder, ApiMemberCapture src)
+            => from i in decoder.DecodeInstructions(src.Code)
                 let block = Asm.AsmInstructionBlock.Define(src.Code, i, src.TermCode)
-                select context.Builder.BuildFunction(src.Uri, src.OpSig.Format(), block);
-
+                select Builder.BuildFunction(src.Uri, src.OpSig.Format(), block);
     }
 }

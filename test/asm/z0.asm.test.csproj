@@ -8,6 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(AsmChecks)" />
+
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(BitFields)" />

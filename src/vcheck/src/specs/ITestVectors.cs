@@ -93,6 +93,5 @@ namespace Z0
 
             return TestAction(check, MatchCaseName(fId, gId));
         }         
-
     }
 }

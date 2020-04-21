@@ -18,7 +18,7 @@ namespace Z0.Asm
             // using var buffers = BufferSeq.alloc(Context.DefaultBufferLength, 3);
             // checks.sub_megacheck(buffers);
         }
-
+        
         public static void Main(params string[] args)
             => Launch(args);
     }

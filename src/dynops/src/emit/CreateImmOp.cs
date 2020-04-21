@@ -40,22 +40,6 @@ namespace Z0
             return DynamicDelegate.Create<BinaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }
 
-        public static DynamicDelegate<UnaryBlockedOp128<T>> EmbedBlockedUnaryOpImm<T>(W128 w, OpIdentity id, MethodInfo src, byte imm8)
-            where T : unmanaged
-        {
-            var wrapped = src.Reify(typeof(T));
-            var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Block128<T>); 
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, @return: tOperand, args: array(tOperand, tOperand));            
-            var gTarget = target.GetILGenerator();
-            gTarget.Emit(OpCodes.Ldarg_0);
-            gTarget.EmitImmLoad(imm8);
-            gTarget.Emit(OpCodes.Ldarg_1);
-            gTarget.EmitCall(OpCodes.Call, wrapped, null);
-            gTarget.Emit(OpCodes.Ret);
-            return DynamicDelegate.Create<UnaryBlockedOp128<T>>(idTarget, wrapped, target);
-        }
-
         public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedVUnaryOpImm<T>(Vec128Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
@@ -76,94 +60,6 @@ namespace Z0
             var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
             return DynamicDelegate.Create<UnaryOp<Vector256<T>>>(idTarget, wrapped, target);
-        }
-
-        internal static DynamicDelegate EmbedV128UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-        {
-            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
-            var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
-            var wrapped = src.Reify(tCell);
-            var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector128<>).MakeGenericType(tCell);  
-            var tWrapper = typeof(UnaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
-            target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
-            return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
-        }
-
-        internal static DynamicDelegate EmbedV256UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-        {
-            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
-            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
-            var wrapped = src.Reify(tCell);
-            var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);  
-            var tWrapper = typeof(UnaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
-            target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
-            return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
-        }
-
-        internal static DynamicDelegate EmbedV128BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-        {
-            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
-            var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
-            var wrapped = src.Reify(tCell);
-            var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector128<>).MakeGenericType(tCell);  
-            var tWrapper = typeof(BinaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
-            target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
-            return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
-        }
-
-        internal static DynamicDelegate EmbedV256BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-        {
-            require(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
-            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
-            var wrapped = src.Reify(tCell);
-            var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);  
-            var tWrapper = typeof(BinaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
-            target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
-            return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
-        }
-
-        internal static Option<DynamicDelegate> EmbedVUnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-        {
-            try
-            {
-                var width = VectorType.width(src.ReturnType);            
-                return width switch{
-                    TypeWidth.W128 => EmbedV128UnaryOpImm(src, imm8, id),
-                    TypeWidth.W256 => EmbedV256UnaryOpImm(src, imm8, id),
-                    _ => none<DynamicDelegate>()
-                };
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return none<DynamicDelegate>();
-            }
-        }
-
-        internal static Option<DynamicDelegate> EmbedVBinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-        {
-            try
-            {
-                var width = VectorType.width(src.ReturnType);
-                return width switch{
-                    TypeWidth.W128 => Dynop.EmbedV128BinaryOpImm(src, imm8, id),
-                    TypeWidth.W256 => Dynop.EmbedV256BinaryOpImm(src, imm8, id),
-                    _ => none<DynamicDelegate>()
-                };
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return none<DynamicDelegate>();
-            }
         }
     }
 }

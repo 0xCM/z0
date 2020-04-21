@@ -28,6 +28,8 @@ namespace Z0
             this.buffers = buffers;
         }
 
+        IDynamicOps Dynamic => IContext.Default.Dynamic();
+
         /// <summary>
         /// Evaluates a binary operator over a pair index and deposits the result into a caller-supplied triple index
         /// </summary>
@@ -38,7 +40,8 @@ namespace Z0
             where T : unmanaged
         {
             var count = src.Count;
-            var f = buffers[Left].EmitBinaryOp<T>(api);
+            //var f = buffers[Left].EmitBinaryOp<T>(api);
+            var f = Dynamic.EmitBinaryOp<T>(buffers[Left], api);
             for(var i=0; i<count; i++)
             {
                 ref readonly var pair = ref src[i];
@@ -67,7 +70,8 @@ namespace Z0
             where F : unmanaged, IFixed
         {
             var count = src.Count;
-            var f = buffers[Left].EmitBinaryOp<F>(api);
+            //var f = buffers[Left].EmitBinaryOp<F>(api);
+            var f = Dynamic.EmitBinaryOp<F>(buffers[Left], api);
             var dst = Tuples.triples<F>(src.Count);
             for(var i=0; i<count; i++)
             {

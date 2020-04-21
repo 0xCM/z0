@@ -6,11 +6,8 @@ namespace Z0
 {        
     using System;
     using System.Reflection;
-    using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
-    using System.Linq;
    
     using static Seed; 
     using static Memories;
@@ -37,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmbedV256BinaryOpImm(src,imm, Context.Identify(src));
+            => DynamicImmediate.EmbedV256BinaryOpImm(src,imm, Context.Identify(src));
     }
 
     readonly struct V256BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector256<T>>>
@@ -53,6 +50,6 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmediate(MethodInfo src, byte imm)
-            => Dynop.EmbedImmVBinaryOpImm(vk256<T>(), Context.Identify(src), src, imm);
+            => DynamicImmediate.EmbedImmVBinaryOpImm(vk256<T>(), Context.Identify(src), src, imm);
     }
 }

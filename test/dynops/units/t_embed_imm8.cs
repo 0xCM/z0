@@ -52,7 +52,7 @@ namespace Z0
 
             foreach(var imm in Immediates)
             {
-                var method = Dynamic.EmbedVUnaryOpImm(src,imm).Require();
+                var method = Dynamic.EmbedUnaryImm(src,imm).Require();
                 var vOutput = method.Invoke(vones);
             }
         }
@@ -78,7 +78,7 @@ namespace Z0
 
             foreach(var imm in Immediates)
             {
-                var method = Dynamic.EmbedVUnaryOpImm(src,imm).Require();
+                var method = Dynamic.EmbedUnaryImm(src,imm).Require();
                 var vOutput = method.Invoke(vones);
                 trace(vOutput.ToString());
             }            

@@ -11,8 +11,8 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
 
-    using static Seed;
-    using static Memories;
+    using static Z0.Seed;
+    using static Z0.Memories;
     using static Kinds;
 
     using K = Kinds;
@@ -22,8 +22,7 @@ namespace Z0
     using B = Kinds.BinaryOpClass;
     using T = Kinds.TernaryOpClass;
 
-
-    readonly struct DynamicOpsSvc : IInnerContext, IDynamicOps, IFixedDynamic
+    readonly struct DynamicOpsSvc : IInnerContext, IDynamicOps
     {
         readonly IMultiDiviner Diviner;      
 
@@ -49,42 +48,48 @@ namespace Z0
         public OpIdentity Identify(Delegate src)        
             => Diviner.Identify(src);
 
+        U Unary => default;
+
+        B Binary => default;
+
+        T Ternary => default;
+
         DynamicFactories FactorySource => DynamicFactories.Create(this);
 
-        IImmInjector IDynamicVImm.VUnaryImmInjector<W>()
+        IImmInjector IDynamicImmediate.UnaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.Create(this, v128, K.UnaryOp);
+                return ImmediateInjector.Create(this, v128, K.UnaryOp);
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.Create(this, v256, K.UnaryOp);
+                return ImmediateInjector.Create(this, v256, K.UnaryOp);
             else 
                 throw Unsupported.define<W>();
         }            
 
-        IImmInjector IDynamicVImm.VBinaryImmInjector<W>()
+        IImmInjector IDynamicImmediate.BinaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.Create(this, v128, K.BinaryOp);
+                return ImmediateInjector.Create(this, v128, K.BinaryOp);
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.Create(this, v256, K.BinaryOp);
+                return ImmediateInjector.Create(this, v256, K.BinaryOp);
             else 
                 throw Unsupported.define<W>();
         }
 
         [MethodImpl(Inline)]
-        DynamicDelegate<UnaryOp<Vector128<T>>> IDynamicVImm.CreateImmV128UnaryOp<T>(MethodInfo src, byte imm)            
+        DynamicDelegate<UnaryOp<Vector128<T>>> IDynamicImmediate.UnaryOp<T>(MethodInfo src, W128 w, byte imm)            
             => Dynop.EmbedVUnaryOpImm(vk128<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
-        DynamicDelegate<BinaryOp<Vector128<T>>> IDynamicVImm.CreateImmV128BinaryOp<T>(MethodInfo src, byte imm)
+        DynamicDelegate<BinaryOp<Vector128<T>>> IDynamicImmediate.BinaryOp<T>(MethodInfo src, W128 w, byte imm)
             => Dynop.EmbedVBinaryOpImm(vk128<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
-        DynamicDelegate<UnaryOp<Vector256<T>>> IDynamicVImm.CreateImmV256UnaryOp<T>(MethodInfo src, byte imm)        
+        DynamicDelegate<UnaryOp<Vector256<T>>> IDynamicImmediate.UnaryOp<T>(MethodInfo src, W256 w, byte imm)        
             => Dynop.EmbedVUnaryOpImm(vk256<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
-        DynamicDelegate<BinaryOp<Vector256<T>>> IDynamicVImm.CreateV256BinaryOpImm<T>(MethodInfo src, byte imm)        
+        DynamicDelegate<BinaryOp<Vector256<T>>> IDynamicImmediate.BinaryOp<T>(MethodInfo src, W256 w, byte imm)        
             => Dynop.EmbedImmVBinaryOpImm(vk256<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
@@ -104,97 +109,136 @@ namespace Z0
             => FactorySource.Factory(k);
 
         [MethodImpl(Inline)]
-        Option<DynamicDelegate> IDynamicVImm.EmbedVUnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-            => Dynop.EmbedVUnaryOpImm(src,imm8, id);
+        Option<DynamicDelegate> IDynamicImmediate.EmbedUnaryImm(MethodInfo src, byte imm8, OpIdentity id)
+            => DynamicImmediate.EmbedVUnaryOpImm(src,imm8, id);
 
         [MethodImpl(Inline)]
-        Option<DynamicDelegate> IDynamicVImm.EmbedVUnaryOpImm(MethodInfo src, byte imm8)
-            => Dynop.EmbedVUnaryOpImm(src,imm8, Identify(src));
+        Option<DynamicDelegate> IDynamicImmediate.EmbedUnaryImm(MethodInfo src, byte imm8)
+            => DynamicImmediate.EmbedVUnaryOpImm(src,imm8, Identify(src));
 
         [MethodImpl(Inline)]
-        Option<DynamicDelegate> IDynamicVImm.EmbedVBinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-            => Dynop.EmbedVBinaryOpImm(src,imm8, id);
+        Option<DynamicDelegate> IDynamicImmediate.EmbedBinaryImm(MethodInfo src, byte imm8, OpIdentity id)
+            => DynamicImmediate.EmbedVBinaryOpImm(src,imm8, id);
 
         [MethodImpl(Inline)]
-        Option<DynamicDelegate> IDynamicVImm.EmbedVBinaryOpImm(MethodInfo src, byte imm8)
-            => Dynop.EmbedVBinaryOpImm(src,imm8, Identify(src));
+        Option<DynamicDelegate> IDynamicImmediate.EmbedBinaryImm(MethodInfo src, byte imm8)
+            => DynamicImmediate.EmbedVBinaryOpImm(src,imm8, Identify(src));
+
+        /// <summary>
+        /// Creates a 128-bit T-parametric unary immediate injector
+        /// </summary>
+        /// <param name="w">The vector operand width</param>
+        /// <param name="k">The operator kind</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]            
+        public IImmInjector<UnaryOp<Vector128<T>>> UnaryInjector<T>(W128 w)
+            where T : unmanaged                   
+                => ImmediateInjector.FromFactory(this, I.V128UnaryOpImmInjector.Create<T>(this));
+
+        /// <summary>
+        /// Creates a 256-bit T-parametric unary immediate injector
+        /// </summary>
+        /// <param name="w">The vector operand width</param>
+        /// <param name="k">The operator kind</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]            
+        public IImmInjector<UnaryOp<Vector256<T>>> UnaryInjector<T>(W256 w)
+            where T : unmanaged                   
+                => ImmediateInjector.FromFactory(this, I.V256UnaryOpImmInjector.Create<T>(this));
+
+        /// <summary>
+        /// Creates a 128-bit T-parametric binary immediate injector
+        /// </summary>
+        /// <param name="w">The vector operand width</param>
+        /// <param name="k">The operator kind</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]            
+        public IImmInjector<BinaryOp<Vector128<T>>> BinaryInjector<T>(W128 w)
+            where T : unmanaged                   
+                => ImmediateInjector.FromFactory(this, I.V128BinaryOpImmInjector.Create<T>(this));
+
+        /// <summary>
+        /// Creates a 256-bit T-parametric binary immediate injector
+        /// </summary>
+        /// <param name="w">The vector operand width</param>
+        /// <param name="k">The operator kind</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]            
+        public IImmInjector<BinaryOp<Vector256<T>>> BinaryInjector<T>(W256 w)
+            where T : unmanaged                   
+                => ImmediateInjector.FromFactory(this, I.V256BinaryOpImmInjector.Create<T>(this));
 
         [MethodImpl(Inline)]
-        IImmInjector<UnaryOp<Vector128<T>>> IDynamicVImm.V128UnaryOpImmInjector<T>()        
-            => ImmInjector.FromFactory(this, I.V128UnaryOpImmInjector.Create<T>(this));
-
-        [MethodImpl(Inline)]
-        IImmInjector<BinaryOp<Vector128<T>>> IDynamicVImm.V128BinaryOpImmInjector<T>()        
-            => ImmInjector.FromFactory(this, I.V128BinaryOpImmInjector.Create<T>(this));
-
-        [MethodImpl(Inline)]
-        IImmInjector<UnaryOp<Vector256<T>>> IDynamicVImm.V256UnaryOpImmInjector<T>()            
-            => ImmInjector.FromFactory(this, I.V256UnaryOpImmInjector.Create<T>(this));
-
-        [MethodImpl(Inline)]
-        IImmInjector<BinaryOp<Vector256<T>>> IDynamicVImm.V256BinaryOpImmInjector<T>()            
-            => ImmInjector.FromFactory(this, I.V256BinaryOpImmInjector.Create<T>(this));
-
-
-        [MethodImpl(Inline)]
-        FixedUnaryOp<F> IFixedDynamic.Emit<F>(IBufferToken dst, U op, in IdentifiedCode src)
+        FixedUnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(IBufferToken dst, in IdentifiedCode src)
             => (FixedUnaryOp<F>)Emit(dst.Load(src.BinaryCode).Handle, src.Id, typeof(FixedUnaryOp<F>), typeof(F), typeof(F));
 
         [MethodImpl(Inline)]
-        FixedBinaryOp<F> IFixedDynamic.Emit<F>(IBufferToken dst, B op, in IdentifiedCode src)
+        FixedBinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(IBufferToken dst, in IdentifiedCode src)
             => (FixedBinaryOp<F>)Emit(dst.Load(src.BinaryCode).Handle, src.Id, typeof(FixedBinaryOp<F>), typeof(F), typeof(F),typeof(F));
 
         [MethodImpl(Inline)]
-        FixedTernaryOp<F> IFixedDynamic.Emit<F>(IBufferToken dst, T op, in IdentifiedCode src)
+        FixedTernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(IBufferToken dst, in IdentifiedCode src)
             => (FixedTernaryOp<F>)Emit(dst.Load(src.BinaryCode).Handle, src.Id, typeof(FixedTernaryOp<F>), typeof(F), typeof(F), typeof(F), typeof(F));
 
         [MethodImpl(Inline)]
-        UnaryOp8 IFixedDynamic.Emit(IBufferToken dst, U op, W8 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        UnaryOp8 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W8 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        UnaryOp16 IFixedDynamic.Emit(IBufferToken dst, U op, W16 w, in IdentifiedCode src)               
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        UnaryOp16 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W16 w, in IdentifiedCode src)               
+            => Emit(dst.Load(src.BinaryCode), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        UnaryOp32 IFixedDynamic.Emit(IBufferToken dst, U op, W32 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        UnaryOp32 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W32 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        UnaryOp64 IFixedDynamic.Emit(IBufferToken dst, U op, W64 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        UnaryOp64 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W64 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        UnaryOp128 IFixedDynamic.Emit(IBufferToken dst, U op, W128 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        UnaryOp128 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W128 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        UnaryOp256 IFixedDynamic.Emit(IBufferToken dst, U op, W256 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        UnaryOp256 IFixedDynamic.EmitFixedUnary(IBufferToken dst, W256 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp8 IFixedDynamic.Emit(IBufferToken dst, B op, W8 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        BinaryOp8 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W8 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp16 IFixedDynamic.Emit(IBufferToken dst, B op, W16 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        BinaryOp16 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W16 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp32 IFixedDynamic.Emit(IBufferToken dst, B op, W32 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        BinaryOp32 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W32 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp64 IFixedDynamic.Emit(IBufferToken dst, B op, W64 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        BinaryOp64 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W64 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp128 IFixedDynamic.Emit(IBufferToken dst, B op, W128 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        BinaryOp128 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W128 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp256 IFixedDynamic.Emit(IBufferToken dst, B op, W256 w, in IdentifiedCode src)
-            => Emit(dst.Load(src.BinaryCode), src.Id, op, w);
+        BinaryOp256 IFixedDynamic.EmitFixedBinary(IBufferToken dst, W256 w, in IdentifiedCode src)
+            => Emit(dst.Load(src.BinaryCode), src.Id, Binary, w);
+
+        [MethodImpl(Inline)]
+        UnaryOp<T> IDynamicNumeric.EmitUnaryOp<T>(IBufferToken dst, in IdentifiedCode src)
+            => EmitUnaryOp<T>(dst.Load(src.BinaryCode), src.Id);
+
+        [MethodImpl(Inline)]
+        BinaryOp<T> IDynamicNumeric.EmitBinaryOp<T>(IBufferToken dst, in IdentifiedCode src)
+            => EmitBinaryOp<T>(dst.Load(src.BinaryCode), src.Id);
+
+        [MethodImpl(Inline)]
+        TernaryOp<T> IDynamicNumeric.EmitTernaryOp<T>(IBufferToken dst, in IdentifiedCode src)
+            => EmitTernaryOp<T>(dst.Load(src.BinaryCode), src.Id);
 
         [MethodImpl(Inline)]
         UnaryOp8 Emit(IBufferToken buffer, OpIdentity id, U op, W8 w)
@@ -252,6 +296,33 @@ namespace Z0
         FixedDelegate Emit(IBufferToken buffer, OpIdentity id, B op, Type operatorType, Type operandType)        
             => Emit(buffer.Handle, id, functype:operatorType, result:operandType, args:array(operandType, operandType));
 
+        [MethodImpl(Inline)]
+        UnaryOp<T> EmitUnaryOp<T>(IBufferToken dst, OpIdentity id)
+            where T : unmanaged
+                => (UnaryOp<T>)EmitFixedUnaryOp(dst, id,typeof(UnaryOp<T>), typeof(T));
+
+        [MethodImpl(Inline)]
+        BinaryOp<T> EmitBinaryOp<T>(IBufferToken dst, OpIdentity id)
+            where T : unmanaged
+                => (BinaryOp<T>)EmitFixedBinaryOp(dst, id,typeof(BinaryOp<T>), typeof(T));
+
+        [MethodImpl(Inline)]
+        TernaryOp<T> EmitTernaryOp<T>(IBufferToken dst, OpIdentity id)
+            where T : unmanaged
+                => (TernaryOp<T>)EmitFixedTernaryOp(dst, id,typeof(TernaryOp<T>), typeof(T));
+
+        [MethodImpl(Inline)]
+        FixedDelegate EmitFixedUnaryOp(IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)        
+            => Emit(dst.Handle, id, functype: operatorType, result: operandType, args: operandType);
+
+        [MethodImpl(Inline)]
+        FixedDelegate EmitFixedBinaryOp(IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)        
+            => Emit(dst.Handle, id,functype:operatorType, result:operandType, args: array(operandType, operandType));
+
+        [MethodImpl(Inline)]
+        FixedDelegate EmitFixedTernaryOp(IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)        
+            => Emit(dst.Handle, id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType));
+
         FixedDelegate Emit(IntPtr src, OpIdentity id, Type functype, Type result, params Type[] args)
         {
             var method = new DynamicMethod(id, result, args, functype.Module);            
@@ -282,6 +353,6 @@ namespace Z0
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, result, args);
             g.Emit(OpCodes.Ret);
             return FixedDelegate.Define(id, src, method, method.CreateDelegate(functype));
-        }          
+        }
     }
 }

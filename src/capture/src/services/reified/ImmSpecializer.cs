@@ -45,7 +45,7 @@ namespace Z0.Asm
 
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm)
         {
-            var f = Dynamic.EmbedVUnaryOpImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var f = Dynamic.EmbedUnaryImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
@@ -57,7 +57,7 @@ namespace Z0.Asm
 
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
-            var f = Dynamic.EmbedVUnaryOpImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var f = Dynamic.EmbedUnaryImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
@@ -78,7 +78,7 @@ namespace Z0.Asm
 
         public Option<AsmFunction> BinaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
-            var f = Dynamic.EmbedVBinaryOpImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var f = Dynamic.EmbedBinaryImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)

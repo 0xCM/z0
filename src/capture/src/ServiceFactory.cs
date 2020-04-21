@@ -18,9 +18,6 @@ namespace Z0.Asm
 
     public static class AsmCoreServices
     {                       
-        [MethodImpl(Inline)]
-        public static IAsmFunctionBuilder FunctionBuilder(this IContext context)
-            => AsmFunctionBuilder.Create(context);        
 
         [MethodImpl(Inline)]
         public static IHostCodeExtractor HostExtractor(this IContext context, int? bufferlen = null)
@@ -55,7 +52,6 @@ namespace Z0.Asm
         public static CaptureExchange CaptureExchange(this IAsmContext context)
         {
             var size = context.DefaultBufferLength;                                    
-            //var control = context.CaptureControl(context.Capture());
             var control = context.CaptureControl;            
             var cBuffer = new byte[size];
             var sBuffer = new byte[size];
@@ -77,40 +73,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static IHostCaptureService HostCaptureService(this IAsmContext context, FolderName area = null, FolderName subject = null)
             => Svc.HostCaptureService.Create(context, area, subject);
-
-
-
-        /// <summary>
-        /// Instantiates a contextual asm formatter service
-        /// </summary>
-        /// <param name="context">The source context</param>
-        [MethodImpl(Inline)]
-        public static IAsmFormatter AsmFormatter(this IContext context, AsmFormatConfig config)
-            => AsmDecoder.formatter(context,config);
-
-        /// <summary>
-        /// Allocates a caller-disposed asm text writer with a customized format configuration
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="config">The format configuration</param>
-        /// <param name="dst">The target path</param>
-        [MethodImpl(Inline)]
-        public static IAsmFunctionWriter AsmWriter(this IContext context, FilePath dst, AsmFormatConfig config)
-            => AsmDecoder.writer(context,dst,config);
-
-        /// <summary>
-        /// Allocates a caller-disposed asm text writer with a customized format configuration
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="config">The format configuration</param>
-        /// <param name="dst">The target path</param>
-        [MethodImpl(Inline)]
-        public static IAsmFunctionWriter AsmWriter(this IContext context, FilePath dst, IAsmFormatter formatter)
-            => AsmDecoder.writer(context, dst, formatter);
-
-        [MethodImpl(Inline)]
-        public static AsmWriterFactory AsmWriterFactory(this IContext context)
-            => AsmDecoder.writerFactory(context);
 
         [MethodImpl(Inline)]
         public static IAsmFunctionDecoder AsmFunctionDecoder(this IContext context, AsmFormatConfig format = null)

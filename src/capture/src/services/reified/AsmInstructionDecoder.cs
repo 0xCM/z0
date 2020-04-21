@@ -53,8 +53,9 @@ namespace Z0.Asm
                     decoder.Decode(out instruction); 
                 }
 
+                var formatter = AsmCaptureFormatter.Create(AsmFormat);
                 var instructions = new Asm.Instruction[decoded.Count];
-                var formatted = AsmFormatter.Internal(AsmFormat).FormatInstructions(decoded, src.Address);
+                var formatted = formatter.FormatInstructions(decoded, src.Address);
                 for(var i=0; i<instructions.Length; i++)
                     instructions[i] = decoded[i].ToInstruction(formatted[i]);
                 return AsmInstructionList.Create(instructions,src);
@@ -72,7 +73,8 @@ namespace Z0.Asm
             {
                 var decoded = new Iced.InstructionList();
                 var reader = new Iced.ByteArrayCodeReader(src.Bytes);
-                var formatter = AsmFormatter.Internal(AsmFormat);
+                //var formatter = AsmFormatter.Internal(AsmFormat);
+                var formatter = AsmCaptureFormatter.Create(AsmFormat);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
                 decoder.IP = src.AddressRange.Start;
                 var stop = false;
@@ -87,8 +89,7 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                term.error(e);
-                
+                term.error(e);                
             }
         }
     }

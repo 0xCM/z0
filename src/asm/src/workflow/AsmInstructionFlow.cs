@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    readonly struct AsmInstructionFlow : IAsmInstructionFlow
+    public readonly struct AsmInstructionFlow : IAsmInstructionFlow
     {        
         readonly IAsmInstructionSource Source;
 

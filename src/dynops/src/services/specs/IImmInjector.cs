@@ -17,6 +17,4 @@ namespace Z0
     {
         DynamicDelegate<D> EmbedImmediate(MethodInfo src, byte imm);    
     }   
-
-
 }

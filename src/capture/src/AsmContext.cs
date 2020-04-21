@@ -44,8 +44,8 @@ namespace Z0.Asm
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var _format = format ?? AsmFormatConfig.New;
             var decoder = AsmDecoder.function(context, _format);
-            var formatter = AsmDecoder.formatter(context, _format);
-            var factory = AsmDecoder.writerFactory(context);
+            var formatter = context.AsmFormatter(_format);
+            var factory = context.AsmWriterFactory();
             var capture = context.Capture();
             var control =  MemberCaptureControl.Create(context, capture);
             var dynops = context.Dynamic();

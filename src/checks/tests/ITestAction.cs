@@ -31,10 +31,32 @@ namespace Z0
             catch(Exception e)
             {
                 term.errlabel(e, label);
-                return TestCaseRecord.Define(label, true, clock);
+                return TestCaseRecord.Define(label, false, clock);
             }
         }
-        
+
+        /// <summary>
+        /// Captures the outcome of an action invocation, identified by a supplied label
+        /// </summary>
+        /// <param name="f">The action to invoke</param>
+        /// <param name="label">The case label</param>
+        TestCaseRecord TestAction<T>(Action<T> f, T point, string label)
+        {
+            var succeeded = true;
+            
+            var clock = time.counter(true);
+            try
+            {
+                f(point);
+                return TestCaseRecord.Define(label, true, clock);
+            }
+            catch(Exception e)
+            {
+                term.errlabel(e, label);
+                return TestCaseRecord.Define(label, false, clock);
+            }
+        }
+
         /// <summary>
         /// Captures the outcome of action invocation, identified by a parametrically-specialized label
         /// </summary>
@@ -55,7 +77,7 @@ namespace Z0
             catch(Exception e)
             {
                 term.errlabel(e, label);
-                return TestCaseRecord.Define(CaseName<T>(label), true, clock);
+                return TestCaseRecord.Define(CaseName<T>(label), false, clock);
             }
         }
     }
