@@ -36,10 +36,4 @@ namespace Z0
     {
         IPolyrand Random {get;}
     }
-
-    public interface IPolyrandContext : IPolyrandProvider, IAppContext
-    {
-
-
-    }
 }

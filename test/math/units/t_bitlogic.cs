@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     using S = Surrogates;
 
     public class t_bitlogic : t_mathsvc<t_bitlogic>
@@ -31,8 +30,8 @@ namespace Z0
         {
             var g = MathSvc.and(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void or_check()
@@ -54,8 +53,8 @@ namespace Z0
         {
             var g = MathSvc.or(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void xor_check()
@@ -78,8 +77,8 @@ namespace Z0
         {
             var g = MathSvc.xor(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void nand_check()
@@ -101,8 +100,8 @@ namespace Z0
         {
             var g = MathSvc.nand(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void nor_check()
@@ -124,8 +123,8 @@ namespace Z0
         {
             var g = MathSvc.nor(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void xnor_check()
@@ -147,8 +146,8 @@ namespace Z0
         {
             var g = MathSvc.xnor(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void not_check()
@@ -170,8 +169,8 @@ namespace Z0
         {
             var g = MathSvc.not(t);            
             var validator = this.UnaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);            
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);            
         }
 
         public void impl_check()
@@ -193,8 +192,8 @@ namespace Z0
         {
             var g = MathSvc.impl(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void nonimpl_check()
@@ -216,8 +215,8 @@ namespace Z0
         {
             var g = MathSvc.nonimpl(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void cimpl_check()
@@ -239,8 +238,8 @@ namespace Z0
         {
             var g = MathSvc.cimpl(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void cnonimpl_check()
@@ -262,8 +261,8 @@ namespace Z0
         {
             var g = MathSvc.cnonimpl(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
     }
 }

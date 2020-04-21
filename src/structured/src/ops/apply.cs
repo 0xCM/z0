@@ -102,7 +102,6 @@ namespace Z0
             return dst;
         }        
 
-
         [MethodImpl(Inline)]
         public static Span<T2> apply<F,T1,T2>(F f, ReadOnlySpan<T1> src, Span<T2> dst)
             where F : ISFuncApi<T1,T2>

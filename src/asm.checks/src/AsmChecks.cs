@@ -23,9 +23,13 @@ namespace Z0
 
     using K = Kinds;
     
+    public interface ITestCapture : ITester
+    {
+        TestCaseRecord TestImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
+            where T : unmanaged;        
+    }
 
-
-    public class AsmChecks : IAsmChecks
+    public class AsmChecks : ITestDynamic, ITestCapture
     {
         public IAsmContext Context {get;}
                 
@@ -42,11 +46,11 @@ namespace Z0
 
         public IPolyrand Random => Context.Random;
 
-        ICheck Claim => ICheck.Checker;
+        public ICheck Check => ICheck.Checker;
 
         public IDynamicOps Dynamic => Context.Dynamic;
 
-        IAsmChecks Me => this;
+        ITestDynamic Me => this;
 
         ICaptureArchive CodeArchive 
             => Context.CaptureArchive(
@@ -54,20 +58,6 @@ namespace Z0
                 FolderName.Define("data"), 
                 FolderName.Define(GetType().Name)
                 );
-
-        public TestCaseRecord TestMatch<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, ApiBits bits)
-            where T : unmanaged
-        {
-            var g = Dynamic.EmitFixedBinary(buffers[Main], w128, bits);
-            return Checks.TestMatch<T>(f, g, bits.Id);
-        }
-
-        public TestCaseRecord TestMatch<T>(in BufferSeq buffers, BinaryOp<Vector256<T>> f, ApiBits bits)
-            where T : unmanaged
-        {
-            var g = Dynamic.EmitFixedBinary(buffers[Main], w256, bits);
-            return Checks.TestMatch<T>(f, g, bits.Id);
-        }
 
         public TestCaseRecord TestImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
             where T : unmanaged
@@ -86,7 +76,7 @@ namespace Z0
                 var asm = CaptureAsm(xchange, f).Require();
                 var h = Dynamic.EmitFixedBinary(buffer, w, asm.Code);
                 var v2 = h(x.ToFixed(),y.ToFixed()).ToVector<T>();
-                Claim.veq(v1,v2);
+                Check.veq(v1,v2);
             }
 
             var clock = time.counter(true);
@@ -130,7 +120,7 @@ namespace Z0
 
         IAsmFormatter Formatter => Context.Formatter;
 
-        IAsmChecks Checks => this;
+        ITestDynamic Checks => this;
 
         CaptureExchange Exchange(in BufferSeq buffers)   
             => CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);     
@@ -141,7 +131,6 @@ namespace Z0
                 from asm in Decoder.Decode(capture)
                 select asm;
 
-
         public TestCaseRecord TestMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in IdentifiedCode src)
             where T : unmanaged
         {                                  
@@ -151,7 +140,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y) = Random.NextPair<T>();
-                    Claim.eq(f(x,y),g(x,y));
+                    Check.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -161,7 +150,7 @@ namespace Z0
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.HostBits(id,host).Read(m).Single().ToApiCode();
 
-        public ITestFixed TestFixed => this;
+        public ITestFixedMatch TestFixed => this;
 
         IEnumerable<string> PrimalBitLogicOps
             => seq("and", "or", "xor", "nand", "nor", "xnor",
@@ -262,7 +251,7 @@ namespace Z0
 
             var g = buffers[Main].EmitFixedBinaryOp<Fixed256>(asm.Code);
             var v2 = g(x,y).ToVector<ushort>();
-            Claim.veq(v1,v2);
+            Check.veq(v1,v2);
         }
 
         // void CheckImm(in BufferSeq buffers, in CaptureExchange exchange)
@@ -272,10 +261,10 @@ namespace Z0
         //     CheckUnaryImm<ushort>(buffers, exchange, w256, nameof(dvec.vbsll), 3);        
         // }
 
-        void CheckBinaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W128 w, MethodInfo method, byte imm)
+        public void CheckBinaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W128 w, MethodInfo method, byte imm)
             where T : unmanaged
         {            
-            var provider = Dynamic.BinaryInjector<T>(w);
+            var injector = Dynamic.BinaryInjector<T>(w);
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -283,23 +272,21 @@ namespace Z0
             var capture = Context.Capture();
             var decoder = Context.AsmFunctionDecoder();
 
-            var dynop = provider.EmbedImmediate(method,imm);
+            var dynop = injector.EmbedImmediate(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
             var captured = capture.Capture(exchange, dynop.Id, dynop.DynamicOp).Require();            
             var asm = decoder.Decode(captured).Require();
 
-
             var f = buffers[Main].EmitFixedBinaryOp<Fixed128>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
-            Claim.veq(z1,z2);
+            Check.veq(z1,z2);
         }
         
-        void CheckUnaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W256 w, MethodInfo method, byte imm)
+        public void CheckUnaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W256 w, MethodInfo method, byte imm)
             where T : unmanaged
         {            
             var k = Unary;
-            var injector = Dynamic.UnaryInjector<T>(w);
-                        
+            var injector = Dynamic.UnaryInjector<T>(w);                        
             var dynop = injector.EmbedImmediate(method,imm);
 
             var x = Random.CpuVector<T>(w);
@@ -310,7 +297,7 @@ namespace Z0
 
             var f = Dynamic.EmitFixedUnary<Fixed256>(buffers[Main], capture.Code);
             var v2 = f(x.ToFixed()).ToVector<T>();
-            Claim.veq(v1,v2);
+            Check.veq(v1,v2);
         }
 
         TestCaseRecord TestVectorMatch(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
@@ -323,7 +310,7 @@ namespace Z0
             var d = Context.HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
             var g = Context.HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
 
-            return Me.TestMatch(buffers, Binary, w,d,g);
+            return Me.Match(buffers, Binary, w,d,g);
         }
 
         public TestCaseRecord[] vector_bitlogic_match(in BufferSeq buffers)
@@ -347,7 +334,7 @@ namespace Z0
             //a copy of the data but rather a refererence to the
             //data that exists in memory as a resource
             foreach(var d in Data.Resources)
-                Claim.eq(d.Location, ptr(d.GetBytes()));
+                Check.eq(d.Location, ptr(d.GetBytes()));
         }
 
  
@@ -416,43 +403,20 @@ namespace Z0
             var direct = Context.HostBits(id, dSrc);
             var generic = Context.HostBits(id, gSrc);
 
-            foreach(var a in direct.Read().Where(asm => asm.ParameterCount() == 1))
+            foreach(var a in direct.Read().WithParameterCount(1))
             {                
+                var code = a.ToApiCode();
                 if(a.AcceptsParameter(NumericKind.U8))
-                {
-                    var af = a.ToFixed<Fixed8>();
-                    var bf = a.ToFixed<Fixed8>();
-                    CheckUnaryOp(buffers, af, bf);
-                }
-                if(a.AcceptsParameter(NumericKind.U32))
-                {
-                    var af = a.ToFixed<Fixed32>();
-                    var bf = a.ToFixed<Fixed32>();
-                    CheckUnaryOp(buffers, af, bf);
-                }
+                    Me.CheckFixedMatch<Fixed8>(buffers, Unary, code, code);
+                else if(a.AcceptsParameter(NumericKind.U16))
+                    Me.CheckFixedMatch<Fixed16>(buffers, Unary, code,code);
+                else if(a.AcceptsParameter(NumericKind.U32))
+                    Me.CheckFixedMatch<Fixed32>(buffers, Unary, code, code);
                 else if(a.AcceptsParameter(NumericKind.U64))
-                {
-                    var af = a.ToFixed<Fixed64>();
-                    var bf = a.ToFixed<Fixed64>();
-                    CheckUnaryOp(buffers, af, bf);
-                }
+                    Me.CheckFixedMatch<Fixed64>(buffers, Unary, code, code);
             }
         }
 
-         void CheckUnaryOp<F>(in BufferSeq dst, in FixedAsm<F> a, in FixedAsm<F> b)
-            where F : unmanaged, IFixed
-        {                        
-
-            var f = dst[Left].EmitFixedUnaryOp<F>(a.Code.ToApiCode());
-            var g = dst[Right].EmitFixedUnaryOp<F>(b.Code.ToApiCode());            
-
-            var stream = Random.FixedStream<F>();
-            if(stream == null)
-                Claim.fail($"random stream null!");
-
-            var points = stream.Take(RepCount);
-            iter(points, x => Claim.eq(f(x), g(x)));            
-        }
 
     #if Megacheck
 

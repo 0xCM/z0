@@ -6,45 +6,42 @@ namespace Z0
 {
     using System;
 
-    public interface ISVShiftMatch128D<T> : ISFMatch
+    public interface ISVShiftMatch128D<T> : ISFCheck
         where T : unmanaged
     {
         void CheckMatch<F>(F f)
             where F : ISVShiftOp128DApi<T>;
     }
 
-    public interface IVShiftMatch256D<T> : ISFMatch
+    public interface IVShiftMatch256D<T> : ISFCheck
         where T : unmanaged
     {
         void CheckMatch<F>(F f)
             where F : ISVShiftOp256DApi<T>;
     }
 
-    public interface IVUnaryOpMatch128D<T> : ISFMatch
+    public interface IVUnaryOpMatch128D<T> : ISFCheck
         where T : unmanaged
-
     {
         void CheckMatch<F>(F f)
             where F : ISVUnaryOp128DApi<T>;
     }
 
-    public interface ISVUnaryOpMatch256D<T> : ISFMatch
+    public interface ISVUnaryOpMatch256D<T> : ISFCheck
         where T : unmanaged
-
     {
         void CheckMatch<F>(F f)
             where F : ISVUnaryOp256DApi<T>;
     }
 
-    public interface ISVBinaryOpMatch128D<T> : ISFMatch
+    public interface ISVBinaryOpMatch128D<T> : ISFCheck
         where T : unmanaged
-
     {
         void CheckMatch<F>(F f)
             where F : ISVBinaryOp128DApi<T>;
     }
     
-    public interface ISVBinaryOpMatch256D<T> : ISFMatch
+    public interface ISVBinaryOpMatch256D<T> : ISFCheck
         where T : unmanaged
 
     {
@@ -52,7 +49,7 @@ namespace Z0
             where F : ISVBinaryOp256DApi<T>;
     }
 
-    public interface ISVTernaryOpMatch128D<T> : ISFMatch
+    public interface ISVTernaryOpMatch128D<T> : ISFCheck
         where T : unmanaged
 
     {
@@ -60,7 +57,7 @@ namespace Z0
             where F : ISVTernaryOp128DApi<T>;
     }
     
-    public interface ISVTernaryOpMatch256D<T> : ISFMatch
+    public interface ISVTernaryOpMatch256D<T> : ISFCheck
         where T : unmanaged
 
     {

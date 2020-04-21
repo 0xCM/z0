@@ -11,13 +11,12 @@ namespace Z0
 
     using static Seed;
 
+    /// <summary>
+    /// Identifies a service that carries no state
+    /// </summary>
     public interface IStateless : IService
     {
-        // [MethodImpl(Inline)]
-        // I Create<S,I>()                
-        //     where S : unmanaged, I
-        //     where I : class
-        //         => default(S);
+
     }
     
     public interface IStateless<I> : IStateless
@@ -27,10 +26,6 @@ namespace Z0
         I Create<S>()                
             where S : unmanaged, I
                 => default(S);
-
-        // [MethodImpl(Inline)]
-        // K IStateless.Create<S,K>()
-        //     => default(S);
     }
 
     /// <summary>

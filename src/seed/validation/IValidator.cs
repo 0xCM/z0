@@ -12,6 +12,8 @@ namespace Z0
 
     public interface IValidator
     {
+        Type ValidatorType => GetType();
+        
         /// <summary>
         /// Creates, but does not throw, a claim exception
         /// </summary>

@@ -20,9 +20,9 @@ namespace Z0
 
         }
 
-        void ISFMatch<T,R>.MatchSpan<F, G>(F baseline, G subject)
+        void ISFMatch<T,R>.CheckSpanMatch<F, G>(F f, G g)
         {
-            var casename = Validity.testcase(Context.ValidatorType, subject);
+            var casename = Validity.testcase(Context.ValidatorType, g);
             var succeeded = true;
             var count = RepCount;
             var clock = counter();
@@ -37,9 +37,9 @@ namespace Z0
             clock.Start();
             try
             {
-                apply(subject, lhs, dst);
+                apply(g, lhs, dst);
                 for(var i=0; i<count; i++)
-                    CheckNumeric.eq(baseline.Invoke(skip(in leftIn, i)), skip(in target, i));
+                    CheckNumeric.eq(f.Invoke(skip(in leftIn, i)), skip(in target, i));
             }
             catch(Exception e)
             {
@@ -52,9 +52,9 @@ namespace Z0
             }
         }
 
-        void ISFMatch<T,R>.Match<F, G>(F baseline, G subject)
+        void ISFMatch<T,R>.CheckMatch<F, G>(F f, G g)
         {
-            var casename = OpUriBuilder.TestCase(Context.ValidatorType, $"{subject.Id}_span");
+            var casename = OpUriBuilder.TestCase(Context.ValidatorType, $"{g.Id}_span");
             var succeeded = true;       
             var clock = counter();
 
@@ -67,7 +67,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = next_x();
-                    CheckNumeric.eq(baseline.Invoke(x), subject.Invoke(x));
+                    CheckNumeric.eq(f.Invoke(x), g.Invoke(x));
                 }
             }
             catch(Exception e)

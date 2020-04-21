@@ -7,12 +7,15 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Runtime.CompilerServices;
     
     using static Seed;
+    
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public partial class TestContext<U> : ITestContext, IConsoleNotifier, IAppMsgContext  
+    public class TestContext<U> : ITestContext, IConsoleNotifier, IAppMsgContext  
     {
         public ITestContext Context {get;}
 
@@ -39,7 +42,6 @@ namespace Z0
             this.Queue = AppMsgExchange.Create();
             this.Queue.Next += Relay;
         }
-
 
         protected string caller([Caller] string caller = null)
             => caller;
@@ -93,6 +95,60 @@ namespace Z0
         protected void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Context.ReportBenchmark(name,opcount, duration);
 
+        /// <summary>
+        /// Manages the execution of an action test case
+        /// </summary>
+        /// <param name="f">The action under test</param>
+        /// <param name="id">The action name</param>
+        /// <param name="clock">Accumulates the test case execution time</param>
+        public void CheckAction(Action f, OpIdentity id)
+        {
+            var succeeded = true;
+            var count = counter();
+            
+            count.Start();
+            try
+            {
+                f();
+            }
+            catch(Exception e)
+            {
+                term.errlabel(e, id.Identifier);
+                succeeded = false;
+            }
+            finally
+            {
+                Context.ReportCaseResult(CaseName(id), succeeded,count);
+            }
+        }
+
+        /// <summary>
+        /// Manages the execution of an action test case
+        /// </summary>
+        /// <param name="f">The action under test</param>
+        /// <param name="name">The action name</param>
+        /// <param name="clock">Accumulates the test case execution time</param>
+        public void CheckAction(Action f, string name)
+        {
+            var succeeded = true;
+            var count = counter();
+            
+            count.Start();
+            try
+            {
+                f();
+            }
+            catch(Exception e)
+            {
+                term.errlabel(e, name);
+                succeeded = false;
+            }
+            finally
+            {
+                Context.ReportCaseResult(name,succeeded,count);
+            }
+        }
+ 
         ITestCaseIdentity CaseIdentity => this;
 
         protected string CaseName<C>(string root, C t = default)
@@ -153,5 +209,172 @@ namespace Z0
 
         protected void trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null, [Caller] string caller = null)
             => trace(TraceMsg(title, msg, caller));        
+
+        public void Deposit(TestCaseRecord result)
+            => TestResults.Enqueue(result);
+
+        public void Deposit(BenchmarkRecord record)
+            => Benchmarks.Enqueue(record);
+
+        public IEnumerable<TestCaseRecord> TakeOutcomes()
+        {
+            while(TestResults.Any())
+                yield return TestResults.Dequeue();
+        }
+
+        public IEnumerable<BenchmarkRecord> TakeBenchmarks()
+        {
+            while(Benchmarks.Any())
+                yield return Benchmarks.Dequeue();
+        }
+
+        public IReadOnlyList<IAppMsg> Dequeue()
+            => Queue.Dequeue();
+
+        public IReadOnlyList<IAppMsg> Flush(Exception e)
+            => Queue.Flush(e);
+            
+        public void Flush(Exception e, IAppMsgSink target)
+            => Queue.Flush(e, target);
+
+        public void Emit(FilePath dst) 
+            => Queue.Emit(dst);        
+        
+        public void Deposit(IAppMsg msg)
+            => Queue.Deposit(msg);
+
+        public void NotifyConsole(IAppMsg msg)            
+            => Queue.NotifyConsole(msg);
+
+        public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
+            => Queue.NotifyConsole(AppMsg.Colorize(content, color));            
+
+
+        /// <summary>
+        /// Allocates and optionally starts a system counter
+        /// </summary>
+        [MethodImpl(Inline)]   
+        public SystemCounter counter(bool start = false) 
+            => SystemCounter.Create(start);
+
+        /// <summary>
+        /// Creates a new stopwatch and optionally start it
+        /// </summary>
+        /// <param name="start">Whether to start the new stopwatch</param>
+        [MethodImpl(Inline)]   
+        public Stopwatch stopwatch(bool start = true) 
+            => start ? Stopwatch.StartNew() : new Stopwatch();
+
+        /// <summary>
+        /// Captures a stopwatch duration
+        /// </summary>
+        /// <param name="sw">A running/stopped stopwatch</param>
+        [MethodImpl(Inline)]   
+        public Duration snapshot(Stopwatch sw)     
+            => Duration.Define(sw.ElapsedTicks);                
+
+        public void Measure<T>(UnaryOp<T> f, UnaryOp<T> cf, string opname)
+            where T :unmanaged
+        {
+            const int SampleSize = 256;
+            var last = default(T);
+            var clock = counter();
+            
+            void run_f()
+            {
+                var src = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref refs.skip(src,j);
+                    last = f(x);
+                }
+                clock.Stop();
+
+                Context.ReportBenchmark(SubjectId<T>(opname),oc,clock);
+
+            }
+
+            void run_cf()
+            {
+                var src = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref refs.skip(src,j);
+                    last = cf(x);
+                }            
+                clock.Stop();
+
+                Context.ReportBenchmark(BaselineId<T>(opname),oc,clock);            
+            }
+
+            run_cf();            
+            
+            clock.Reset();
+            
+            run_f();
+        }
+
+        public void Measure<T>(BinaryOp<T> cf, BinaryOp<T> f, string opname)
+            where T :unmanaged
+        {
+            const int SampleSize = 256;
+            var last = default(T);
+            var clock = counter();
+            void run_f()
+            {
+                var lhs = Random.Span<T>(SampleSize);
+                var rhs = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref refs.skip(lhs,j);
+                    ref readonly var y = ref refs.skip(rhs,j);                
+                    last = f(x,y);
+                }
+                clock.Stop();
+
+                Context.ReportBenchmark(SubjectId<T>(opname),oc,clock);
+            }
+
+            void run_cf()
+            {
+                var lhs = Random.Span<T>(SampleSize);
+                var rhs = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref refs.skip(lhs,j);
+                    ref readonly var y = ref refs.skip(rhs,j);                
+                    last = cf(x,y);
+                }            
+                clock.Stop();
+
+                Context.ReportBenchmark(BaselineId<T>(opname),oc,clock);            
+            }
+
+            run_cf();            
+            
+            clock.Reset();
+            
+            run_f();
+        } 
     }
 }

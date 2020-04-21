@@ -21,7 +21,7 @@ namespace Z0
             
         }
 
-        void ISFMatch<T0,T1,R>.Match<F, G>(F baseline, G subject)
+        void ISFMatch<T0,T1,R>.CheckMatch<F, G>(F baseline, G subject)
         {
             var casename = Validity.testcase(Context.ValidatorType, subject);
             var succeeded = true;       
@@ -54,7 +54,7 @@ namespace Z0
             }
         }
 
-        void ISFMatch<T0,T1,R>.MatchSpan<F, G>(F baseline, G subject)
+        void ISFMatch<T0,T1,R>.CheckSpanMatch<F, G>(F baseline, G subject)
         {
             var casename = OpUriBuilder.TestCase(Context.ValidatorType, $"{subject.Id}_span");
             var succeeded = true;

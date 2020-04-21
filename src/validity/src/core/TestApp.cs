@@ -72,6 +72,7 @@ namespace Z0
             return true;
         }
 
+
         /// <summary>
         /// Executes the tests defined by a host type
         /// </summary>
@@ -369,7 +370,6 @@ namespace Z0
 
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
-
 
         static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
             where R : IRecord

@@ -13,7 +13,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public abstract class SFMatch : ISFMatch
+    public abstract class SFMatch : ISFCheck
     {
         /// <summary>
         /// Allocates and optionally starts a system counter

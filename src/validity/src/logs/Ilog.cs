@@ -11,30 +11,19 @@ namespace Z0
 
     using static Seed;
 
-    /// <summary>
-    /// Defines minimal contract for a log message sink
-    /// </summary>
-    public interface ITestLogger : IService
-    {        
-        FilePath Write<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
-            where R : IRecord;                
-    }
-
     static class Log
     {        
         static TestLogPaths Paths 
             => TestLogPaths.The;
-            
+
         public static ITestLogger TestLog => TestLogger.TheOnly;
 
         public static IAppMsgSink TestMsgTarget => TestLogger.TheOnly;
 
         public static ITestLogger BenchLog => BenchLogger.TheOnly;
 
-        public static ITestLogger AppLog => AppLogger.TheOnly;
-
-        class Logger<A> : ITestLogger, IAppMsgContext
-            where A : Logger<A>, new()
+        class TestLogger<A> : ITestLogger, IAppMsgContext
+            where A : TestLogger<A>, new()
         {
             public static A TheOnly = new A();
             
@@ -42,7 +31,7 @@ namespace Z0
 
             protected object locker = new object();
             
-            protected Logger(LogArea Area)
+            protected TestLogger(LogArea Area)
             {
                 this.Area = Area;
             }
@@ -101,7 +90,6 @@ namespace Z0
                 return path;
             }
 
-
             [MethodImpl(Inline)]
             public void Deposit(IAppMsg src)
             {
@@ -114,7 +102,7 @@ namespace Z0
                 => Deposit(AppMsg.NoCaller(msg,severity ?? AppMsgKind.Info));
         }
 
-        sealed class AppLogger : Logger<AppLogger>
+        sealed class AppLogger : TestLogger<AppLogger>
         {
             public AppLogger()            
              : base(LogArea.App)
@@ -123,7 +111,7 @@ namespace Z0
             }
         }
 
-        sealed class TestLogger : Logger<TestLogger>
+        sealed class TestLogger : TestLogger<TestLogger>
         {
             public TestLogger()            
              : base(LogArea.Test)
@@ -132,7 +120,7 @@ namespace Z0
             }
         }
 
-        sealed class BenchLogger : Logger<BenchLogger>
+        sealed class BenchLogger : TestLogger<BenchLogger>
         {
             public BenchLogger()            
              : base(LogArea.Bench)

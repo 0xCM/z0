@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IAppMsgQueue, IPolyrandContext, IAppMsgContext
+    public interface IAsmContext : IAppMsgQueue, IPolyrandProvider, IAppMsgContext
     {
         IApiSet ApiSet {get;}
         

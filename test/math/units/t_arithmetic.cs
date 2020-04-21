@@ -36,8 +36,8 @@ namespace Z0
         {
             var g = MathSvc.add(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
         
         public void sub_check()
@@ -62,8 +62,8 @@ namespace Z0
         {
             var g = MathSvc.sub(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void mul_check()
@@ -88,8 +88,8 @@ namespace Z0
         {
             var g = MathSvc.mul(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void div_check()
@@ -114,8 +114,8 @@ namespace Z0
         {
             var g = MathSvc.div(t);
             var validator = this.BinaryOpMatch(true,t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void mod_check()
@@ -140,8 +140,8 @@ namespace Z0
         {
             var g = MathSvc.mod(t);
             var validator = this.BinaryOpMatch(true,t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void modmul_check()
@@ -166,8 +166,8 @@ namespace Z0
         {
             var g = MathSvc.modmul(t);
             var validator = this.TernaryOpMatch(true,t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void clamp_check()
@@ -192,8 +192,8 @@ namespace Z0
         {
             var g = MathSvc.clamp(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void inc_check()
@@ -218,8 +218,8 @@ namespace Z0
         {
             var g = MathSvc.inc(t);
             var comparer = this.UnaryOpMatch(t);
-            comparer.Match(f, g);
-            comparer.MatchSpan(f, g);            
+            comparer.CheckMatch(f, g);
+            comparer.CheckSpanMatch(f, g);            
         }
 
         public void dec_check()
@@ -244,8 +244,8 @@ namespace Z0
         {
             var g = MathSvc.dec(t);
             var comparer = this.UnaryOpMatch(t);
-            comparer.Match(f,g);
-            comparer.MatchSpan(f,g);            
+            comparer.CheckMatch(f,g);
+            comparer.CheckSpanMatch(f,g);            
         }
 
         public void negate_check()
@@ -270,8 +270,8 @@ namespace Z0
         {
             var g = MathSvc.negate(t);
             var comparer = this.UnaryOpMatch(t);
-            comparer.Match(f, g);
-            comparer.MatchSpan(f, g);            
+            comparer.CheckMatch(f, g);
+            comparer.CheckSpanMatch(f, g);            
         }
 
         public void abs_check()
@@ -292,8 +292,8 @@ namespace Z0
         {
             var g = MathSvc.abs(t);
             var comparer = this.UnaryOpMatch(t);
-            comparer.Match(f,g);
-            comparer.MatchSpan(f,g);            
+            comparer.CheckMatch(f,g);
+            comparer.CheckSpanMatch(f,g);            
         }
 
         public void check_increments()

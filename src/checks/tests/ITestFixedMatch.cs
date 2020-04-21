@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    
-    using static Seed;
-    using static Memories;
-
-    public interface ITestOperatorMatch : ITestFixedMatch, ITestNumericMatch
-    {
         
+    public interface ITestFixedMatch : ITestBinaryFixedMatch, ITestUnaryFixedMatch
+    {        
+
     }
 }

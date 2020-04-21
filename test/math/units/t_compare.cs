@@ -36,8 +36,8 @@ namespace Z0
         {
             var g = MathSvc.eq(t);
             var validator = this.BinaryPredicateMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void neq()
@@ -63,8 +63,8 @@ namespace Z0
         {
             var g = MathSvc.neq(t);
             var validator = this.BinaryPredicateMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void gt()
@@ -90,8 +90,8 @@ namespace Z0
         {
             var g = MathSvc.gt(t);
             var validator = this.BinaryPredicateMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void gteq()
@@ -115,8 +115,8 @@ namespace Z0
         {
             var g = MathSvc.gteq(t);
             var validator = this.BinaryPredicateMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void lt()
@@ -141,8 +141,8 @@ namespace Z0
         {
             var g = MathSvc.lt(t);
             var validator = this.BinaryPredicateMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void lteq()
@@ -167,8 +167,8 @@ namespace Z0
         {
             var g = MathSvc.lteq(t);
             var validator = this.BinaryPredicateMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void max_check()
@@ -192,8 +192,8 @@ namespace Z0
         {
             var g = MathSvc.max(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
 
         public void min_check()
@@ -217,8 +217,8 @@ namespace Z0
         {
             var g = MathSvc.min(t);
             var validator = this.BinaryOpMatch(t);
-            validator.Match(f,g);
-            validator.MatchSpan(f,g);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
         }
     }
 }

@@ -9,6 +9,8 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Vectors)" />
+    <ProjectReference Include="$(Dynamic)" />
+
   </ItemGroup>
 
 </Project>

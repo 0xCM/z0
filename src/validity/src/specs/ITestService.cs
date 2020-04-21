@@ -3,13 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     using System;
-    
-    using static Seed;
-    using static Memories;
+    using System.Collections.Generic;
 
-    public interface ITestOperatorMatch : ITestFixedMatch, ITestNumericMatch
+    /// <summary>
+    /// Defines a test service which is, by definition, a contextual service of test context kind
+    /// </summary>
+    public interface ITestService : IService<ITestContext>
     {
         
     }

@@ -9,9 +9,24 @@ namespace Z0
 
     using static Seed;
     using static Memories;
+    using static BufferSeqId;
 
-    public interface ITestVectors : ITestAction, ICheckVectors
+    public interface ITestVectorOps : ICheckVectors, ITestAction, ITestDynamic
     {
+        TestCaseRecord Match<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, ApiBits bits)
+            where T : unmanaged
+        {
+            var g = Dynamic.EmitFixedBinary(buffers[Main], w128, bits);
+            return Match<T>(f, g, bits.Id);
+        }
+
+        TestCaseRecord Match<T>(in BufferSeq buffers, BinaryOp<Vector256<T>> f, ApiBits bits)
+            where T : unmanaged                    
+        {
+            var g = Dynamic.EmitFixedBinary(buffers[Main], w256, bits);
+            return Match<T>(f, g, bits.Id);
+        }
+
         /// <summary>
         /// Verifies that two 128-bit vectorized binary operators agree over a random set of points
         /// </summary>
@@ -19,7 +34,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        TestCaseRecord TestMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
+        TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
             where T : unmanaged
         {
             void check()
@@ -37,7 +52,7 @@ namespace Z0
             return TestAction(check, name);      
         }
 
-        TestCaseRecord TestMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
+        TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
             where T : unmanaged
         {
             void check()
@@ -55,7 +70,7 @@ namespace Z0
             return TestAction(check, name);      
         }
 
-        TestCaseRecord TestMatch<T>(BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
+        TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
             where T : unmanaged
         {
             var w = w128;
@@ -74,7 +89,7 @@ namespace Z0
             return TestAction(check, MatchCaseName(fId, gId));
         }
 
-        TestCaseRecord TestMatch<T>(BinaryOp<Vector256<T>> f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
+        TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
             where T : unmanaged
         {
             var w = w256;

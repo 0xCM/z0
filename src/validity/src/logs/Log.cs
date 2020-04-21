@@ -27,12 +27,6 @@ namespace Z0
         FolderPath OutputFolder
             => FolderPath.Define(Settings.LogRoot);
 
-        FolderPath DataFolder
-            => OutputFolder + FolderName.Define("data");
-
-        public FolderPath DataDir(FolderName subfolder)
-            => DataFolder + subfolder;
-
         public FolderPath LogDir(LogArea target)        
             => OutputFolder + FolderName.Define(target.ToString().ToLower());
 
@@ -43,9 +37,6 @@ namespace Z0
     readonly struct TestLogPaths
     {
         public static TestLogPaths The => default;
-
-        public FilePath DataPath(FolderName subject, FileName file)
-            => Settings.DataDir(subject) + file;
 
         public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
             => Settings.LogDir(area) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
