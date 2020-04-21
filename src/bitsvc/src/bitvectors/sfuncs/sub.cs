@@ -21,7 +21,7 @@ namespace Z0
 
             public const string Name = "bvsub";
 
-            public OpIdentity Id => Identify.sfunc<T>(Name);
+            public OpIdentity Id => Identities.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.sub(a,b);

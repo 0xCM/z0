@@ -21,8 +21,8 @@ namespace Z0
 
         protected string CaseName(ISFuncApi f)
         {
-            var id = Identify.Op(f.Id.Name, Widths.type<W>(), NumericKinds.kind<T>(),true);
-            var owner = Identify.owner(Context.ValidatorType);
+            var id = Identities.Op(f.Id.Name, Widths.type<W>(), NumericKinds.kind<T>(),true);
+            var owner = Identities.Owner(Context.ValidatorType);
             var host = Context.ValidatorType.Name;
             return $"{owner}/{host}/{id}";            
         }

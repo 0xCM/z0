@@ -9,7 +9,7 @@ namespace Z0
 
     public interface ITestContext : 
         IServiceAllocation,
-        IAppContext,
+        IAppEnv,
         IStopClocks,
         IPolyrandProvider, 
         ICheckAction,

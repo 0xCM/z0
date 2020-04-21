@@ -22,7 +22,7 @@ namespace Z0
 
             public static Xnor<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc<T>(Name);
+            public OpIdentity Id => Identities.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 

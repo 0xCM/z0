@@ -45,7 +45,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, CaseName(Identify.NumericOp<T>(nameof(gbits.bitcopy))));
+            CheckAction(check, CaseName(Identities.NumericOp<T>(nameof(gbits.bitcopy))));
         }
     }
 }

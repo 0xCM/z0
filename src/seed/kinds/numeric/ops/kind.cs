@@ -20,7 +20,7 @@ namespace Z0
         /// Determines the numeric kind of a parametrically-identified type
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static NumericKind kind<T>()
             => kind_u<T>();
 

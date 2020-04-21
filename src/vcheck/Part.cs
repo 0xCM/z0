@@ -31,14 +31,6 @@ namespace Z0
     
     public static class VCheck
     {
-        const char Sep = UriDelimiters.PathSep;
-
-        /// <summary>
-        /// Produces the name of the test case for the specified function
-        /// </summary>
-        /// <param name="f">The function</param>
-        public static string testcase(Type host, ISFuncApi f)
-            => $"{Identify.owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
 
         internal static class Claim
         {

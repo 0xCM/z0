@@ -8,8 +8,10 @@ namespace Z0
 
     public interface IAppEnv : IContext
     {
-        IAppPaths AppPaths {get;}      
+        IAppPaths AppPaths             
+            => IAppPaths.Default;
 
-        IAppSettings Settings {get;}   
+        IAppSettings Settings 
+            => AppSettings.Empty;
     }
 }

@@ -105,7 +105,7 @@ namespace Z0
 
         void Exec()
         {
-            var api = Z0.ApiContext.Create(ApiSet.Composition, Context.Random, Context.Settings, AppMsgExchange.Create(Context));
+            var api = Z0.AppContext.Create(ApiSet.Composition, Context.Random, Context.Settings, AppMsgExchange.Create(Context));
             var workflow = EvalWorkflow.Create(api, Context.Random, CaptureRoot);
             workflow.Execute();
         }

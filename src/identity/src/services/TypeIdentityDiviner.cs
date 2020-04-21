@@ -24,7 +24,7 @@ namespace Z0
             else if(arg.IsTypeNat())
                 return NatId(arg);
             else if(arg.IsSystemDefined())
-                return Identify.primal(arg).AsTypeIdentity().ToOption();
+                return Identities.primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
                 return some(EnumIdentity.Define(arg).AsTypeIdentity());
             else if(arg.IsSegmented())
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="t">The source type</param>
         [MethodImpl(Inline)]
         public static ITypeIdentityProvider IdentityProvider(Type src)
-            => Identify.provider(src, CreateProvider);
+            => Identities.provider(src, CreateProvider);
 
         static TypeIdentity DoDivination(Type arg)
             => default(TypeIdentityDiviner).DivineIdentity(arg);        

@@ -6,12 +6,6 @@ namespace Z0
 {
     using System;
 
-    public static partial class Identify
-    {
-
-
-    }
-
     public static partial class XTend
     {
 

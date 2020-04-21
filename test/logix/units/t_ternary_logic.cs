@@ -146,7 +146,7 @@ namespace Z0.Logix
                 BitVector<T> v = NumericOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
-                    Notify($"Equivalence failed for ternary op {kind}:{Identify.numeric<T>()}");
+                    Notify($"Equivalence failed for ternary op {kind}:{Identities.numeric<T>()}");
 
                 Claim.eq(u,v);
 

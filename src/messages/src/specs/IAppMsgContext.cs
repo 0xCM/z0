@@ -10,7 +10,7 @@ namespace Z0
 
     using static Seed;
 
-    public interface IAppMsgContext : IAppMsgSink, IAppContext, IAppMsgReceiver
+    public interface IAppMsgContext : IAppMsgSink, IAppEnv, IAppMsgReceiver
     {
         IAppMsgSink IAppMsgReceiver.Sink => this;
         

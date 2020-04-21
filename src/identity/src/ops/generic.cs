@@ -21,7 +21,7 @@ namespace Z0
             if(!src.IsGenericMethod)
                 return GenericOpIdentity.Empty;
                         
-            var id = OpIdentities.name(src);
+            var id = Identities.Name(src);
             id += IDI.PartSep; 
             id += IDI.Generic;
 

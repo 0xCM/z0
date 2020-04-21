@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public class EvalWorkflow : IEvalWorkflow
     {
-        readonly IApiContext Context;
+        readonly IAppContext Context;
         
         readonly IEvalDispatcher Dispatcher;
         
@@ -25,10 +25,10 @@ namespace Z0.Asm
 
         readonly IApiSet ApiSet;
                 
-        public static EvalWorkflow Create(IApiContext context, IPolyrand random, FolderPath root)
+        public static EvalWorkflow Create(IAppContext context, IPolyrand random, FolderPath root)
             => new EvalWorkflow(context, random, root);
 
-        EvalWorkflow(IApiContext context, IPolyrand random, FolderPath root)
+        EvalWorkflow(IAppContext context, IPolyrand random, FolderPath root)
         {                    
             this.Context = context;
             this.Dispatcher = EvalDispatcher.Create(random, context);

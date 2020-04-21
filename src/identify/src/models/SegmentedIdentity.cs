@@ -13,6 +13,28 @@ namespace Z0
 
     public readonly struct SegmentedIdentity : IIdentifiedType<SegmentedIdentity>
     {        
+        /// <summary>
+        /// Extracts an index-identified segmented identity part from an operation identity
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="partidx">The 0-based part index</param>
+        public static Option<SegmentedIdentity> Identify(OpIdentity src, int partidx)
+            => from p in Identities.Part(src, partidx)
+                from s in SegmentedIdentity.Identify(p)
+                select s;
+
+        /// <summary>
+        /// Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
+        /// </summary>
+        /// <param name="part">The source part</param>
+        public static Option<SegmentedIdentity> Identify(IdentityPart part)
+        {
+            if(part.IsSegment && Segmentation.TryParse(part.Identifier, out var seg))
+                return seg;
+            else
+                return Option.none<SegmentedIdentity>();
+        }
+
         public static SegmentedIdentity Empty => new SegmentedIdentity(TypeIndicator.Empty, FixedWidth.None, NumericKind.None);
 
         public readonly TypeIndicator Indicator;

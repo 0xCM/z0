@@ -22,7 +22,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
                 => Dynop.EmbedVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
@@ -42,7 +42,7 @@ namespace Z0
 
             public static Blend4x64x256<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
                 => Dynop.EmbedImmVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name), spec);
@@ -62,7 +62,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
                 => Dynop.EmbedVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
@@ -82,7 +82,7 @@ namespace Z0
 
             public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
                 => Dynop.EmbedImmVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
@@ -102,7 +102,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
                 => Dynop.EmbedVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
@@ -122,7 +122,7 @@ namespace Z0
 
             public static Blend8x16x256<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
                 => Dynop.EmbedImmVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);

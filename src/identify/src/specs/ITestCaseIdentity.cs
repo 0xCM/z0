@@ -12,6 +12,7 @@ namespace Z0
     using static Seed;
     using static Memories;
     using static TestCaseIdentity;
+    using static UriDelimiters;
     
     public interface ITestCaseIdentity : IValidator
     {
@@ -31,7 +32,7 @@ namespace Z0
         /// <typeparam name="T">The label specialization type</typeparam>
         OpIdentity CaseOpId<T>([Caller] string label = null)
             where T : unmanaged
-                => Identify.NumericOp($"{label}", typeof(T).NumericKind());
+                => Identities.NumericOp($"{label}", typeof(T).NumericKind());
         
         /// <summary>
         /// Produces a test case name predicated on a parametrically-specialized label
@@ -44,20 +45,33 @@ namespace Z0
 
         OpIdentity BaselineId<K>(string label, K t = default)
             where K : unmanaged
-                => Identify.sfunc<K>($"{label}_baseline");
+                => Identities.sfunc<K>($"{label}_baseline");
 
         string CaseName(ISFuncApi f) 
             =>$"{owner(ValidatorType)}{Sep}{ValidatorType.Name}{Sep}{f.Id}";
 
-        string CaseName<W,T>(ISFuncApi f, bool generic = true)
+        string CaseName<W,T>(ISFuncApi f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => OpUriBuilder.TestCase<W,T>(ValidatorType, Identify.Op<W,T>(f.Id.Name), generic: generic);
+                => CaseName<W,T>(ValidatorType, Identities.Op<W,T>(f.Id.Name), true);
 
-        string CaseName<W,T>([Caller] string label = null, W w = default, T t = default, bool generic = true)
+        string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => OpUriBuilder.TestCase(GetType(), label, w, t, generic);
+                => CaseName<W,T>(GetType(), label, generic);
+
+        /// <summary>
+        /// Produces the name of the test case predicated on a root name and parametric type
+        /// </summary>
+        /// <param name="label">The root name</param>
+        string CaseName<C>(Type host, string label)
+            where C : unmanaged
+                => text.concat(Identities.Owner(host), PathSep, host.Name, PathSep, label, '_', Identities.numeric<C>());
+
+        string CaseName<W,C>(Type host, string label, bool generic)
+            where W : unmanaged, ITypeWidth
+            where C : unmanaged
+                => $"{Identities.Owner(host)}{host.Name}{PathSep}{Identities.Op(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
 
         /// <summary>
         /// Computes a test case identifier for a segmented structured function
@@ -70,7 +84,7 @@ namespace Z0
         string CaseName<W,T>(ISFuncApi f, W w, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => OpUriBuilder.TestCase<W,T>(ValidatorType, Identify.Op<W,T>(f.Id.Name), generic: generic);
+                => CaseName<W,T>(ValidatorType, Identities.Op<W,T>(f.Id.Name), generic: generic);
 
         /// <summary>
         /// Produces a case name for an identified operation match test

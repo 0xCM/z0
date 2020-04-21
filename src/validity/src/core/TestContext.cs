@@ -170,10 +170,10 @@ namespace Z0
             where K : unmanaged
                 => CaseIdentity.BaselineId<K>(label);
 
-        protected string CaseName<W,C>(string root, W w = default, C t = default, bool generic = true)
+        protected string CaseName<W,C>([Caller] string label = null, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => CaseIdentity.CaseName<W,C>(root, generic: generic);
+                => CaseIdentity.CaseName<W,C>(label, generic);
 
         protected string CaseName(ISFuncApi f) 
             => CaseIdentity.CaseName(f);

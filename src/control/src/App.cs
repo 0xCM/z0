@@ -12,16 +12,16 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    class App : ApiShell<App,IApiContext>
+    class App : AppShell<App,IAppContext>
     {        
-        static IApiContext CreateApiContext()
+        static IAppContext CreateApiContext()
         {
             var parts = PartSelection.Selected;
             var resolved = ApiComposition.Assemble(parts.Where(r => r.Id != 0));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
-            return ApiContext.Create(resolved, random, settings, exchange);
+            return AppContext.Create(resolved, random, settings, exchange);
         }
         
         public App()

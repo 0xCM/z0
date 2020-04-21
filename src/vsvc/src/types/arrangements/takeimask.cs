@@ -21,7 +21,7 @@ namespace Z0
 
             public static TakeIMask128<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x, byte index) 
@@ -37,7 +37,7 @@ namespace Z0
 
             public static TakeIMask256<T> Op => default;
             
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x,byte index) 

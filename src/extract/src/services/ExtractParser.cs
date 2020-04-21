@@ -101,7 +101,7 @@ namespace Z0
                 }
             }
 
-            ReportDuplicates(Identify.duplicates(records.Select(x => x.Uri.OpId)));
+            ReportDuplicates(Identities.duplicates(records.Select(x => x.Uri.OpId)));
             return MemberParseReport.Create(host.UriPath, records.ToArray());
         }
 

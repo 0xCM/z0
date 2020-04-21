@@ -19,7 +19,7 @@ namespace Z0
 
             public static Parse<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc<T>(Name);            
+            public OpIdentity Id => Identities.sfunc<T>(Name);            
 
             [MethodImpl(Inline)]
             public readonly T Invoke(string a) => NumericParser.create<T>().Parse(a).ValueOrDefault();

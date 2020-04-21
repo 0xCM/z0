@@ -20,7 +20,7 @@ namespace Z0
 
             public static Nonz<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc<T>(Name);
+            public OpIdentity Id => Identities.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a) 

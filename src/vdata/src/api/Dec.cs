@@ -101,16 +101,16 @@ namespace Z0
             var index = DecIndex;
 
             w = w128;
-            Register(index++, Identify.resource(basename, w, NumericKind.U8), Dec128x8u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U16), Dec128x16u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U32), Dec128x32u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U64), Dec128x64u);
+            Register(index++, Identities.resource(basename, w, NumericKind.U8), Dec128x8u);
+            Register(index++, Identities.resource(basename, w, NumericKind.U16), Dec128x16u);
+            Register(index++, Identities.resource(basename, w, NumericKind.U32), Dec128x32u);
+            Register(index++, Identities.resource(basename, w, NumericKind.U64), Dec128x64u);
             
             w = w256;
-            Register(index++, Identify.resource(basename, w, NumericKind.U8), Dec256x8u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U16), Dec256x16u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U32), Dec256x32u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U64), Dec256x64u);
+            Register(index++, Identities.resource(basename, w, NumericKind.U8), Dec256x8u);
+            Register(index++, Identities.resource(basename, w, NumericKind.U16), Dec256x16u);
+            Register(index++, Identities.resource(basename, w, NumericKind.U32), Dec256x32u);
+            Register(index++, Identities.resource(basename, w, NumericKind.U64), Dec256x64u);
         }
     }
 }

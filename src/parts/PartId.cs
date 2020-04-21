@@ -139,19 +139,17 @@ public enum PartId : ulong
     
     Canonical = 812, 
     
-    SFuncs = 816,
-
     Cast = 842, 
     
     Memories = 814,  MemoriesTest = Memories | Test,
     
-    Custom = 818,
-
     Identify = 820, Kinds = 822, 
     
     Api = 824, ApiTest = Api | Test,
     
-    Messages = 840, Apps = 828,
+    Messages = 840, 
+    
+    Apps = 828,
 
     Tuples = 826,
     
@@ -165,10 +163,7 @@ public enum PartId : ulong
             
     Contained = 854,
 
-    MergeTest = 5000,
-
     Spans = 5005,
-
 
     Validate = 10000,
 

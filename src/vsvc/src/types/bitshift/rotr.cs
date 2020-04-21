@@ -21,7 +21,7 @@ namespace Z0
 
             public static Rotr128<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
                 => Dynop.EmbedVUnaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),imm8);
@@ -44,7 +44,7 @@ namespace Z0
 
             public static Rotr256<T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
+            public OpIdentity Id => Identities.sfunc(Name,VKind);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
                 => Dynop.EmbedVUnaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),count);

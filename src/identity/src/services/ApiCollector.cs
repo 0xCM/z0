@@ -70,7 +70,7 @@ namespace Z0
 
         public IEnumerable<DirectApiGroup> CollectDirect(IApiHost src)        
             => from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
-                select DirectApiGroup.Define(src, Identify.Op(d.Key), d);
+                select DirectApiGroup.Define(src, Identities.Op(d.Key), d);
                         
         public IEnumerable<GenericApiOp> CollectGeneric(IApiHost src)
              => from m in Tagged(src).OpenGeneric()

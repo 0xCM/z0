@@ -34,7 +34,7 @@ namespace Z0
             try
             {
                 var parser = HexParsers.Bytes;
-                var id = Identify.Op(formatted.TakeBefore(Chars.Space).Trim());
+                var id = Identities.Op(formatted.TakeBefore(Chars.Space).Trim());
                 var bytes = formatted.TakeAfter(Chars.Space).Split(HexSpecs.DataDelimiter, StringSplitOptions.RemoveEmptyEntries).Select(parser.ParseByte).ToArray();
                 var encoded = Addressable.Define(bytes);
                 return EncodedHexLine.Define(id, encoded);                

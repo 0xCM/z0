@@ -43,7 +43,7 @@
 
   <PropertyGroup>
     <Identity>$(Src)identity/z0.identity.csproj</Identity>
-    <Api>$(Src)api/z0.api.csproj</Api>
+    <Apps>$(Src)apps/z0.apps.csproj</Apps>
   </PropertyGroup>
 
   <PropertyGroup>    
