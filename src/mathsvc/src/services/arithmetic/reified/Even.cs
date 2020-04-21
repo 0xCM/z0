@@ -21,7 +21,7 @@ namespace Z0
 
             public static Even<T> Op => default;
 
-            public OpIdentity Id => Identities.sfunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.even(a);

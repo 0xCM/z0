@@ -146,16 +146,16 @@ namespace Z0
 
 
             name = "PackUSLo";
-            Register(index++, Identities.resource(name, w16, w128, NumericKind.U8), PackUSLo16x128x8u);
-            Register(index++, Identities.resource(name, w32, w128, NumericKind.U16), PackUSLo32x128x16u);
-            Register(index++, Identities.resource(name, w16, w256, NumericKind.U8), PackUSLo16x256x8u);
-            Register(index++, Identities.resource(name, w32, w256, NumericKind.U16), PackUSLo32x256x16u);
+            Register(index++, Identify.resource(name, w16, w128, NumericKind.U8), PackUSLo16x128x8u);
+            Register(index++, Identify.resource(name, w32, w128, NumericKind.U16), PackUSLo32x128x16u);
+            Register(index++, Identify.resource(name, w16, w256, NumericKind.U8), PackUSLo16x256x8u);
+            Register(index++, Identify.resource(name, w32, w256, NumericKind.U16), PackUSLo32x256x16u);
 
             name = "PackUSHi";
-            Register(index++, Identities.resource(name, w16, w128, NumericKind.U8), PackUSHi16x128x8u);
-            Register(index++, Identities.resource(name, w32, w128, NumericKind.U16), PackUSHi32x128x16u);
-            Register(index++, Identities.resource(name, w16, w256, NumericKind.U8), PackUSHi16x256x8u);
-            Register(index++, Identities.resource(name, w32, w256, NumericKind.U16), PackUSHi32x256x16u);
+            Register(index++, Identify.resource(name, w16, w128, NumericKind.U8), PackUSHi16x128x8u);
+            Register(index++, Identify.resource(name, w32, w128, NumericKind.U16), PackUSHi32x128x16u);
+            Register(index++, Identify.resource(name, w16, w256, NumericKind.U8), PackUSHi16x256x8u);
+            Register(index++, Identify.resource(name, w32, w256, NumericKind.U16), PackUSHi32x256x16u);
         }
     }
 }

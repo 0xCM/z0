@@ -12,7 +12,7 @@ namespace Z0
 
     using static Seed;
 
-    partial class Identities
+    partial class Identify
     {
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -26,7 +26,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => Identities.Op(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
+                => Identify.Op(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -36,23 +36,23 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(string opname)
-            => Identities.NumericOp(opname, typeof(T).NumericKind());
+            => Identify.NumericOp(opname, typeof(T).NumericKind());
 
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(IOpKind kind)
-            => Identities.NumericOp(kind.KindId.ToString(), typeof(T).NumericKind());
+            => Identify.NumericOp(kind.KindId.ToString(), typeof(T).NumericKind());
 
         [MethodImpl(Inline)]   
         public static OpIdentity vfunc<T>(IOpKind kind, W128 w, bool generic = true)
-            => Identities.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
+            => Identify.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
 
         [MethodImpl(Inline)]   
         public static OpIdentity vfunc<T>(IOpKind kind, W256 w, bool generic = true)
-            => Identities.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
+            => Identify.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
 
         [MethodImpl(Inline)]   
         public static OpIdentity vfunc<T>(IOpKind kind, W512 w, bool generic = true)
-            => Identities.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
+            => Identify.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(string opname, Vec128Kind<T> k)
             where T : unmanaged
-                => Identities.Op(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => Identify.Op(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -74,6 +74,6 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(string opname, Vec256Kind<T> k)
             where T : unmanaged
-                => Identities.Op(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);        
+                => Identify.Op(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);        
     }
 }

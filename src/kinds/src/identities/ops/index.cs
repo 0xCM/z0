@@ -17,7 +17,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    partial class Identities
+    partial class Identify
     {
         static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
@@ -65,7 +65,7 @@ namespace Z0
             else
                 HashTable = src.ToDictionary();
             
-            var duplicated = duplicates.Select(d => Identities.Op(d)).ToArray();
+            var duplicated = duplicates.Select(d => Identify.Op(d)).ToArray();
             return new OpIndex<T>(HashTable, duplicated);
         }
 

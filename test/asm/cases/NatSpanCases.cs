@@ -17,7 +17,7 @@ namespace Z0
     {        
         public static IEnumerable<(OpIdentity id, Type type)> All
             => from p in typeof(NatSpanCases).Properties().Where(p => p.Name != nameof(All))
-                let id = Identities.Op(p.DisplayName())
+                let id = Identify.Op(p.DisplayName())
                 let type = p.PropertyType
                 select (id,type);   
 

@@ -304,8 +304,8 @@ namespace Z0
         {
             var catalog = PartId.GVec;
             
-            var idD = Identities.Op(name, w, kind, false);
-            var idG = Identities.Op(name, w, kind, true);
+            var idD = Identify.Op(name, w, kind, false);
+            var idG = Identify.Op(name, w, kind, true);
 
             var d = Context.HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
             var g = Context.HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();

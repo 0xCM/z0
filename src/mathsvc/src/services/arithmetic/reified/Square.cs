@@ -21,7 +21,7 @@ namespace Z0
 
             public static Square<T> Op => default;
 
-            public OpIdentity Id => Identities.sfunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.square(a);

@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         public static ISet<Type> DistinctTypes(this NumericKind k)
-            => Identities.types(k);
+            => Identify.types(k);
 
         [MethodImpl(Inline)]
         public static Option<NumericIndicator> NumericIndicator(this Type t)
@@ -37,6 +37,6 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind to evaluate</param>
         public static ISet<NumericKind> DistinctKinds(this NumericKind k)  
-            => Identities.kinds(k);    
+            => Identify.kinds(k);    
     }
 }

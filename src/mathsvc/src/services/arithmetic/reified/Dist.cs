@@ -21,7 +21,7 @@ namespace Z0
 
             public static Dist<T> Op => default;
 
-            public OpIdentity Id => Identities.sfunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly ulong Invoke(T a, T b) => gmath.dist(a,b);

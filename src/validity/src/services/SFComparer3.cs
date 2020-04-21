@@ -24,7 +24,7 @@ namespace Z0
 
         void ISFMatch<T0,T1,T2,R>.CheckMatch<F, G>(F f, G g)
         {
-            var casename = Identities.TestCase(Context.ValidatorType, g);
+            var casename = Identify.TestCase(Context.ValidatorType, g);
             var succeeded = true;       
             var clock = counter();
 

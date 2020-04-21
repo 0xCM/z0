@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source identity</param>
         /// <param name="partidx">The 0-based part index</param>
         public static Option<SegmentedIdentity> Identify(OpIdentity src, int partidx)
-            => from p in Identities.Part(src, partidx)
+            => from p in Z0.Identify.Part(src, partidx)
                 from s in SegmentedIdentity.Identify(p)
                 select s;
 

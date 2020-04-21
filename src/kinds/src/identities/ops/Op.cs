@@ -13,7 +13,7 @@ namespace Z0
     using static Seed;
     using static UriDelimiters;
 
-    partial class Identities
+    partial class Identify
     {
         public static OpIdentity Op(string src)
         {

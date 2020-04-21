@@ -29,7 +29,7 @@ namespace Z0
             => ApiHost.HostTypes(src);
 
         public static OpIndex<UriBits> ToOpIndex(this IEnumerable<UriBits> src)
-            => Identities.index(src.Select(x => (x.Op.OpId, x)));
+            => Identify.index(src.Select(x => (x.Op.OpId, x)));
 
         /// <summary>
         /// Creates an operation index
@@ -38,7 +38,7 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         public static OpIndex<M> ToOpIndex<M>(this IEnumerable<M> src)
             where M : struct, IApiMember
-                => Identities.index(src.Select(h => (h.Id, h)));
+                => Identify.index(src.Select(h => (h.Id, h)));
 
         /// <summary>
         /// Creates an operation index
@@ -47,7 +47,7 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         public static OpIndex<M> ToOpIndex<M>(this ReadOnlySpan<M> src)
             where M : struct, IApiMember
-                => Identities.index(src.MapArray(h => (h.Id, h)));
+                => Identify.index(src.MapArray(h => (h.Id, h)));
 
         /// <summary>
         /// Creates an operation index

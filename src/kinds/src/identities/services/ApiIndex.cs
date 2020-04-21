@@ -15,7 +15,7 @@ namespace Z0
         public static ApiIndex Create(IEnumerable<ApiMember> src)
         {
             var pairs = src.Select(h => (h.Id, h));
-            var opindex = Identities.index(pairs,true);
+            var opindex = Identify.index(pairs,true);
             return new ApiIndex(opindex.HashTable, opindex.Duplicates);                
         }
             

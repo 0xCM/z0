@@ -13,7 +13,7 @@ namespace Z0
     using static Seed;
     using static UriDelimiters;
 
-    partial class Identities
+    partial class Identify
     {
         public static Option<IdentityPart> Part(OpIdentity src, int partidx)
         {
@@ -26,7 +26,7 @@ namespace Z0
 
         public static IEnumerable<IdentityPart> Parts(OpIdentity src)
         {
-               var parts = Identities.ComponentText(src).ToArray();
+               var parts = Identify.ComponentText(src).ToArray();
                byte i = 0;
                for(;i<parts.Length; i++)
                {                   
@@ -50,7 +50,7 @@ namespace Z0
                     yield return (i, partkind, part);
                }
 
-               var suffixes = Identities.SuffixText(src).ToArray();
+               var suffixes = Identify.SuffixText(src).ToArray();
                for(var j=0; j< suffixes.Length; j++, i++)
                     yield return (i, IdentityPartKind.Suffix, suffixes[j]);
         }

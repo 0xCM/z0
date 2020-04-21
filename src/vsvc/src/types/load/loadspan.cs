@@ -22,7 +22,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => Identities.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n128,x,offset);            
@@ -37,7 +37,7 @@ namespace Z0
 
             public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => Identities.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n256,x,offset);

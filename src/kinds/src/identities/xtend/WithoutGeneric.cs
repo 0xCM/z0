@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         public static OpIdentity WithoutGeneric(this OpIdentity src)
         {
-            var parts = Identities.Parts(src).ToArray();
+            var parts = Identify.Parts(src).ToArray();
             if(parts.Length < 2)
                 return src;
             
@@ -25,7 +25,7 @@ namespace Z0
                 return src;
 
             parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
-            return Identities.Op(parts);
+            return Identify.Op(parts);
         }        
     }
 }

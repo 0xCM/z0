@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "bvwidth";
 
-            public OpIdentity Id => Identities.sfunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly int Invoke(BitVector<T> a) => BitVector.width(a);

@@ -17,12 +17,10 @@ namespace Z0
     using NK = NumericKind;
     using ID = NumericTypeId;
 
-    public partial class Identities
+    public partial class Identify
     {        
-
         public static ITypeIdentityProvider provider(Type src, Func<Type,ITypeIdentityProvider> fallback)
             => TypeIdentityProviders.GetOrAdd(src.EffectiveType(), fallback);
-
 
        /// <summary>
         /// 
@@ -131,7 +129,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function</param>
         public static string TestCase(Type host, ISFuncApi f)
-            => $"{Identities.Owner(host)}{PathSep}{host.Name}{PathSep}{f.Id}";
+            => $"{Identify.Owner(host)}{PathSep}{host.Name}{PathSep}{f.Id}";
 
         /// <summary>
         /// Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly
@@ -139,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The source type</param>
         public static string HostUri(Type host)
-            => $"{Identities.Owner(host)}{PathSep}{host.Name}";
+            => $"{Identify.Owner(host)}{PathSep}{host.Name}";
 
 
         static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> KindsetCache {get;}       

@@ -31,7 +31,7 @@ namespace Z0
 
             public static Min128<T> Op => default;
 
-            public OpIdentity Id => Identities.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             public K.BinaryOpClass<T> Class => default;
 
@@ -57,7 +57,7 @@ namespace Z0
 
             public static Min256<T> Op => default;
 
-            public OpIdentity Id => Identities.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vmin(x,y);

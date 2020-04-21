@@ -20,7 +20,7 @@ namespace Z0
 
             public static Neq<T> Op => default;
             
-            public OpIdentity Id => Identities.sfunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.neq(x,y);

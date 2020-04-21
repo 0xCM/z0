@@ -40,13 +40,13 @@ namespace Z0
             
             var id = string.Empty;
             
-            id += Identities.Name(src);
+            id += Identify.Name(src);
             id += IDI.PartSep;   
 
             id += IDI.Generic;                           
             id += TypeArgIdentity(src);
             id += ParamIdentity(src);
-            return Identities.Op(id);
+            return Identify.Op(id);
         }                
     }
 }

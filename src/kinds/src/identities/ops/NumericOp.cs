@@ -13,7 +13,7 @@ namespace Z0
     using static Seed;
     using static UriDelimiters;
 
-    partial class Identities
+    partial class Identify
     {
         /// <summary>
         /// Defines a scalar type identity

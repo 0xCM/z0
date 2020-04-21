@@ -21,7 +21,7 @@ namespace Z0
 
             public const string Name = "bvnot";
 
-            public OpIdentity Id => Identities.sfunc<T>(Name);
+            public OpIdentity Id => Identify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a) => BitVector.not(a);

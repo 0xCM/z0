@@ -22,7 +22,7 @@ namespace Z0
 
         void ISFMatch<T,R>.CheckSpanMatch<F, G>(F f, G g)
         {
-            var casename = Identities.TestCase(Context.ValidatorType, g);
+            var casename = Identify.TestCase(Context.ValidatorType, g);
             var succeeded = true;
             var count = RepCount;
             var clock = counter();

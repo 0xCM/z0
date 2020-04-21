@@ -28,11 +28,11 @@ namespace Z0
             RequireNonGeneric(src);
             var id = string.Empty;
             
-            id += Identities.Name(src);
+            id += Identify.Name(src);
             id += IDI.PartSep;
             id += FormatArgs(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, args(src));
 
-            return Identities.Op(id);
+            return Identify.Op(id);
         }        
 
         static string FormatArgs(object open, object close, char sep, IEnumerable<string> args)
