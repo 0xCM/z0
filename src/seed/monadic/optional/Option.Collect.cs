@@ -32,7 +32,7 @@ namespace Z0
         /// <typeparam name="V">The type of value identified by the key</typeparam>
         /// <param name="subject">The collection to query</param>
         /// <param name="key">The key that identifies the value</param>
-        public static Option<V> TryFind<K, V>(this Dictionary<K, V> subject, K key)
+        public static Option<V> TryFind<K,V>(this Dictionary<K,V> subject, K key)
             => guard(key,
                 k => k != null,
                 k => subject.TryGetValue(k, out V value)
@@ -46,7 +46,7 @@ namespace Z0
         /// <typeparam name="V">The type of value identified by the key</typeparam>
         /// <param name="subject">The collection to query</param>
         /// <param name="key">The key that identifies the value</param>
-        public static Option<V> TryFind<K, V>(this IReadOnlyDictionary<K, V> subject, K key)
+        public static Option<V> TryFind<K,V>(this IReadOnlyDictionary<K,V> subject, K key)
                 => key == null ? none<V>()
                 : (subject.TryGetValue(key, out V value)
                 ? some(value) : none<V>());        
@@ -66,9 +66,8 @@ namespace Z0
         /// <typeparam name="V">The type of value identified by the key</typeparam>
         /// <param name="subject">The collection to query</param>
         /// <param name="key">The key that identifies the value</param>
-        public static Option<V> TryRemove<K, V>(this ConcurrentDictionary<K, V> subject, K key)
-            => Option.guard(key,
-                k => k != null,
+        public static Option<V> TryRemove<K, V>(this ConcurrentDictionary<K,V> subject, K key)
+            => guard(key, k => k != null,
                 k => subject.TryRemove(k, out V value)
                     ? some(value)
                     : none<V>());
@@ -95,7 +94,7 @@ namespace Z0
         /// <param name="stream">The stream to search</param>
         /// <param name="predicate">The predicate to match</param>
         /// <typeparam name="T">The stream item type</typeparam>
-        public static Option<T> TryGetSingle<T>(this IEnumerable<T> stream, Func<T, bool> predicate)
+        public static Option<T> TryGetSingle<T>(this IEnumerable<T> stream, Func<T,bool> predicate)
         {
             var satisfied = stream.Where(predicate).ToList();
             if (satisfied.Count != 1)
@@ -118,7 +117,7 @@ namespace Z0
         /// <typeparam name="X">The stream item type</typeparam>
         /// <param name="stream">The stream to search</param>
         /// <param name="predicate">The predicate to match</param>
-        public static Option<X> TryGetFirst<X>(this IEnumerable<X> stream, Func<X, bool> predicate)
+        public static Option<X> TryGetFirst<X>(this IEnumerable<X> stream, Func<X,bool> predicate)
             => stream.FirstOrDefault(predicate);
 
         public static Option<T> TryGetFirst<T>(this IEnumerable<Option<T>> potentials)

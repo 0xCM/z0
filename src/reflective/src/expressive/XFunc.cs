@@ -10,138 +10,111 @@ namespace Z0
     using System.Linq.Expressions;
     
     using static Seed;
-    
-    /// <summary>
-    /// Wraps a delegate that implicitly converts into a LINQ expression
-    /// </summary>
-    /// <typeparam name="X">The function return type</typeparam>
-    public readonly struct XFunc<X>
+
+    public class XFunc
     {
         /// <summary>
-        /// Implicitly converts a func expression to linq expression
+        /// Creates a function expression for an emitter
         /// </summary>
-        /// <param name="fx">The source func expression</param>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X">The function argument type</typeparam>
+        /// <typeparam name="Y">The return type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator Expression<Func<X>>(XFunc<X> fx)
-            => fx.Fx;
+        public static XFunc<X> f<X>(Func<X> f)
+            => f;
 
         /// <summary>
-        /// Implicitly constructs a func expression from a func
+        /// Creates a function expression over a fuction delegate of arity 1
         /// </summary>
-        /// <param name="f">The source function</param>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X">The function argument type</typeparam>
+        /// <typeparam name="Y">The return type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator XFunc<X>(Func<X> f)
-            => new XFunc<X>(f);
-
-        [MethodImpl(Inline)]
-        public XFunc(Func<X> f)
-            => this.Fx = () => f();
+        public static XFunc<X,Y> f<X,Y>(Func<X,Y> f)
+            => f;
 
         /// <summary>
-        /// The expression derived from the source function
+        /// Creates a function expression over a fuction delegate of arity 2
         /// </summary>
-        public Expression<Func<X>> Fx { get; }
-    }
-
-    /// <summary>
-    /// Wraps a delegate that implicitly converts into a LINQ expression
-    /// </summary>
-    /// <typeparam name="X">The function argument type</typeparam>
-    /// <typeparam name="Y">The function return type</typeparam>
-    public readonly struct XFunc<X,R>
-    {
-        /// <summary>
-        /// Implicitly converts a func expression to linq expression
-        /// </summary>
-        /// <param name="fx">The source func expression</param>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X1">The type of the first argument</typeparam>
+        /// <typeparam name="X2">The type of the second argument</typeparam>
+        /// <typeparam name="R">The return type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator Expression<Func<X,R>>(XFunc<X,R> fx)
-            => fx.Fx;
+        public static XFunc<X1,X2,R> f<X1,X2,R>(Func<X1,X2,R> f)
+            => f;
 
         /// <summary>
-        /// Implicitly constructs a func expression from a func
+        /// Creates a function expression over a fuction delegate of arity 3
         /// </summary>
-        /// <param name="f">The source function</param>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X1">The type of the first argument</typeparam>
+        /// <typeparam name="X2">The type of the second argument</typeparam>
+        /// <typeparam name="X3">The type of the third argument</typeparam>
+        /// <typeparam name="Y">The return type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator XFunc<X,R>(Func<X,R> f)
-            => new XFunc<X,R>(f);
-
-        [MethodImpl(Inline)]
-        public XFunc(Func<X,R> f)
-            => this.Fx = x => f(x);
+        public static XFunc<X1,X2,X3,R> f<X1,X2,X3,R>(Func<X1,X2,X3,R> f)
+            => f;
 
         /// <summary>
-        /// The expression derived from the source function
+        /// Creates a function expression over an homogenous function delegate of arity 2
         /// </summary>
-        public Expression<Func<X,R>> Fx { get; }
-    }
-
-    /// <summary>
-    /// Wraps a delegate that implicitly converts into a LINQ expression
-    /// </summary>
-    /// <typeparam name="X1">The type of the first argument</typeparam>
-    /// <typeparam name="X2">The type of the second argument</typeparam>
-    /// <typeparam name="Y">The function return type</typeparam>
-    public readonly struct XFunc<X1,X2,R>
-    {
-        /// <summary>
-        /// Implicitly converts a func expression to linq expression
-        /// </summary>
-        /// <param name="fx">The source func expression</param>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator Expression<Func<X1,X2,R>>(XFunc<X1,X2,R> fx)
-            => fx.Fx;
+        public static XFunc<X,X,X> f<X>(Func<X,X,X> f)
+            => f;
 
         /// <summary>
-        /// Implicitly constructs a func expression from a func
+        /// Creates a function expression over an homogenous function delegate of arity 3
         /// </summary>
-        /// <param name="f">The source function</param>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator XFunc<X1,X2,R>(Func<X1,X2,R> f)
-            => new XFunc<X1,X2,R>(f);
-
-        [MethodImpl(Inline)]
-        public XFunc(Func<X1,X2,R> f)
-            => this.Fx = (x1, x2) => f(x1,x2);
+        public static XFunc<X,X,X,X> f<X>(Func<X,X,X,X> f)
+            => f;    
 
         /// <summary>
-        /// The expression derived from the source function
+        /// Creates a linq expression over an emitter
         /// </summary>
-        public Expression<Func<X1,X2,R>> Fx { get; }
-    }
-
-    /// <summary>
-    /// Wraps a delegate that implicitly converts into a LINQ expression
-    /// </summary>
-    /// <typeparam name="X1">The type of the first argument</typeparam>
-    /// <typeparam name="X2">The type of the second argument</typeparam>
-    /// <typeparam name="X3">The type of the third argument</typeparam>
-    /// <typeparam name="Y">The function return type</typeparam>
-    public readonly struct XFunc<X1,X2,X3,R>
-    {
-        /// <summary>
-        /// Implicitly converts a func expression to linq expression
-        /// </summary>
-        /// <param name="fx">The source func expression</param>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X">The function operand type</typeparam>
+        /// <typeparam name="R">The function return type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator Expression<Func<X1,X2,X3,R>>(XFunc<X1,X2,X3,R> fx)
-            => fx.Fx;
+        public static Expression<Func<X>> fx<X>(Func<X> f)
+            => XFunc.f(f);
 
         /// <summary>
-        /// Implicitly constructs a func expression from a func
+        /// Creates a linq expression over a function delegate of arity 1
         /// </summary>
-        /// <param name="f">The source function</param>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X">The function operand type</typeparam>
+        /// <typeparam name="R">The function return type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator XFunc<X1,X2,X3,R>(Func<X1,X2,X3,R> f)
-            => new XFunc<X1,X2,X3,R>(f);
-
-        [MethodImpl(Inline)]
-        public XFunc(Func<X1,X2,X3,R> f)
-            => this.Fx = (x1, x2, x3) => f(x1, x2, x3);
+        public static Expression<Func<X,R>> fx<X,R>(Func<X,R> f)
+            => XFunc.f(f);
 
         /// <summary>
-        /// The expression derived from the source function
+        /// Creates a linq expression over a function delegate of arity 2
         /// </summary>
-        public Expression<Func<X1,X2,X3,R>> Fx {get;}
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X1">The type of the first operand</typeparam>
+        /// <typeparam name="X2">The type of the second operand</typeparam>
+        /// <typeparam name="R">The function return type</typeparam>
+        [MethodImpl(Inline)]
+        public static Expression<Func<X1,X2,R>> fx<X1,X2,R>(Func<X1,X2,R> f)
+            => XFunc.f(f);
+
+        /// <summary>
+        /// Creates a linq expression over a function delegate of arity 3
+        /// </summary>
+        /// <param name="f">The source delegate</param>
+        /// <typeparam name="X1">The type of the first operand</typeparam>
+        /// <typeparam name="X2">The type of the second operand</typeparam>
+        /// <typeparam name="X3">The type of the third operand</typeparam>
+        /// <typeparam name="Y">The function return type</typeparam>
+        [MethodImpl(Inline)]
+        public static Expression<Func<X1,X2,X3,R>> fx<X1,X2,X3,R>(Func<X1,X2,X3,R> f)
+            => XFunc.f(f);
     }
 }

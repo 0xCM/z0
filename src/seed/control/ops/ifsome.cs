@@ -13,6 +13,15 @@ namespace Z0
     partial class Control
     {
         /// <summary>
+        /// Defines a valued option
+        /// </summary>
+        /// <param name="value">The value</param>
+        /// <typeparam name="T">The type of the extant value</typeparam>
+        [MethodImpl(Inline)]
+        public static Option<T> some<T>(T value)
+            => Option<T>.Some(value);
+
+        /// <summary>
         /// Invokes an action if the supplied value is not null
         /// </summary>
         /// <typeparam name="V">The value type</typeparam>
@@ -39,8 +48,5 @@ namespace Z0
             if(x.HasValue)
                 f(x.Value);
         }
-
-
     }
 }
-

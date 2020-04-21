@@ -4,21 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Dynamics
 {
-
     public interface IBinaryOperator : IOperator
     {
         IOperatorApplication Apply(object Left, object Right);
     }
 
+    public interface IBinaryOperator<F> : IBinaryOperator, IOperator<F>
+        where F : IBinaryOperator<F>
+    {
 
-    public interface IBinaryOperator<T>
+    }
+
+    public interface IBinaryOperator<F,T> : IBinaryOperator<F>
+        where F : IBinaryOperator<F,T>
     {
         T Apply(T x, T y);
     }
 
-    public interface IBinaryPredicate<T>
+    public interface IBinaryPredicate<F,T> : IBinaryOperator<F,T>
+        where F : IBinaryOperator<F,T>
     {
-        bool Apply(T x, T y);
+        
     }
-
 }

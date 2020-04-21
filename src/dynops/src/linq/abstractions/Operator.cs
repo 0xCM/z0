@@ -10,8 +10,9 @@ namespace Z0.Dynamics
     /// <summary>
     /// Represents an operator
     /// </summary>
-    /// <typeparam name="OP">The operator type</typeparam>
-    public abstract class Operator<OP> : IOperator where OP : Operator<OP>
+    /// <typeparam name="F">The operator type</typeparam>
+    public abstract class Operator<F> : IOperator<F>
+        where F : Operator<F>
     {
         protected Operator(string Name, string Symbol)
         {
@@ -39,8 +40,5 @@ namespace Z0.Dynamics
 
         IOperatorApplication IOperator.Apply(params object[] args)
             => DoApply(args);
-
-    }
-
-    
+    }    
 }

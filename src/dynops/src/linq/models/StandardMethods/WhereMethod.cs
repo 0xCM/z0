@@ -15,6 +15,8 @@ namespace Z0.Dynamics
     {
         public WhereMethod()
             : base(nameof(Enumerable.Where))
-        { }
+        { 
+            
+        }
     }
 }

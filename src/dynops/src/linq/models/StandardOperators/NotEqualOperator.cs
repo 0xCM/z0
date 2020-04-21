@@ -13,5 +13,4 @@ namespace Z0.Dynamics
             : base("neq", "==")
         { }
     }
-
 }

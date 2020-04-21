@@ -15,6 +15,4 @@ namespace Z0.Dynamics
 
         M CreateModel<M>(Expression X, params SelectionFacet[] facets);
     }
-
-
 }

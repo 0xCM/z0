@@ -7,11 +7,11 @@ namespace Z0.Dynamics
     using System;
     using System.Collections.Generic;    
 
-    public sealed class UnaryOperatorApplication<OP, T> : OperatorApplication<OP>
-        where OP : UnaryOperator<OP>
+    public sealed class UnaryOperatorApplication<F,T> : OperatorApplication<F>
+        where F : UnaryOperator<F>
     {
-        public UnaryOperatorApplication(UnaryOperator<OP> Operator, T Operand)
-            : base(Operator, Operand)
+        public UnaryOperatorApplication(UnaryOperator<F> f, T x)
+            : base(f, x)
         {
 
         }

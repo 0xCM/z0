@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed; 
     using static Memories;
-    using static XPressive;
+    using static XPress;
 
     readonly struct TernaryOpFactory<T> : ITernaryOpFactory<T>
     {          
@@ -25,7 +25,7 @@ namespace Z0
 
         public Func<T,T,T,T> Manufacture(MethodInfo method, object instance)
         {
-            var args = seq(paramX<T>("x1"), paramX<T>("x2"), paramX<T>("x3"));
+            var args = paramX<T,T,T>();
             var callExpr = call(instance, method, args.ToArray());
             var f = lambda<T, T, T, T>(args, callExpr).Compile();
             return f;

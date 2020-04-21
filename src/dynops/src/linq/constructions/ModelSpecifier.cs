@@ -12,13 +12,19 @@ namespace Z0.Dynamics
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
+    using static Seed;
+    using static Memories;
 
     using X = System.Linq.Expressions;
 
-    public class ModelSpecifier<T> : IModelSpecifier, 
+    public static class ModelSpecifier
+    {
+        public static ModelSpecifier<M,T> Create<M,T>(ModelQueryProvider<M> provider)
+            => new ModelSpecifier<M,T>(provider);
+    }
+
+    public class ModelSpecifier<T> : 
+        IModelSpecifier, 
         IQueryable<T>, 
         IQueryable, 
         IEnumerable<T>, 
@@ -27,31 +33,35 @@ namespace Z0.Dynamics
         IOrderedQueryable
     {
         protected readonly IQueryProvider Provider;
-        protected readonly Expression X;
+        
+        protected readonly Expression Content;
 
-        public ModelSpecifier(ModelQueryProvider Provider)
+        public ModelSpecifier(ModelQueryProvider provider)
         {
-            if (Provider == null)
-                throw new ArgumentNullException("provider");
+            if (provider == null)
+                throw new ArgumentNullException(nameof(provider));
 
-            this.Provider = Provider;
-            this.X = Expression.Constant(this);
+            this.Provider = provider;
+            this.Content = Expression.Constant(this);
         }
 
-        public ModelSpecifier(ModelQueryProvider Provider, Expression X)
+        public ModelSpecifier(ModelQueryProvider provider, Expression content)
         {
-            if (X == null)
-                throw new ArgumentNullException("expression");
+            if (content == null)
+                throw new ArgumentNullException(nameof(content));
 
-            if (!typeof(IQueryable<T>).IsAssignableFrom(X.Type))
-                throw new ArgumentOutOfRangeException("expression");
+            if (provider == null)
+                throw new ArgumentNullException(nameof(provider));
 
-            this.Provider = Provider ?? throw new ArgumentNullException("provider");
-            this.X = X;
+            if (!typeof(IQueryable<T>).IsAssignableFrom(content.Type))
+                throw new ArgumentOutOfRangeException(nameof(content));
+
+            Provider = provider;
+            Content = content;
         }
 
         Expression IQueryable.Expression
-            => X;
+            => Content;
 
         Type IQueryable.ElementType
             => typeof(T);
@@ -60,19 +70,19 @@ namespace Z0.Dynamics
             => Provider;
 
         public IEnumerator<T> GetEnumerator()
-            => ((IEnumerable<T>)Provider.Execute(X)).GetEnumerator();
+            => ((IEnumerable<T>)Provider.Execute(Content)).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
-            => ((IEnumerable)Provider.Execute(X)).GetEnumerator();
+            => ((IEnumerable)Provider.Execute(Content)).GetEnumerator();
 
         object IModelSpecifier.SpecifyModel()
-            => Provider.Execute(X);
+            => Provider.Execute(Content);
 
         public override string ToString()
-            => Provider.Execute(X).ToString();
+            => Provider.Execute(Content).ToString();
     }
 
-    public class ModelSpecifier<M, T> : ModelSpecifier<T>, IModelSpecifier<M>
+    public class ModelSpecifier<M,T> : ModelSpecifier<T>, IModelSpecifier<M>
     {
         public ModelSpecifier(ModelQueryProvider<M> provider)
             : base(provider)
@@ -83,12 +93,6 @@ namespace Z0.Dynamics
         { }
 
         public M SpecifyModel()
-            => (M)Provider.Execute(X);
-    }
-
-    public static class ModelSpecifier
-    {
-        public static ModelSpecifier<M, T> Create<M, T>(ModelQueryProvider<M> provider)
-            => new ModelSpecifier<M, T>(provider);
+            => (M)Provider.Execute(Content);
     }
 }

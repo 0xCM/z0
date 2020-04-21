@@ -9,5 +9,10 @@ namespace Z0.Dynamics
 
     }
 
+    public interface INullityOperator<F> : INullityOperator, IOperator<F>
+        where F : INullityOperator<F>
+    {
+
+    }
 
 }

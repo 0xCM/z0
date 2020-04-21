@@ -8,15 +8,15 @@ namespace Z0.Dynamics
     using System.Collections.Generic;
     using System.Text;
 
-    public class PredicateApplication<O,X> : IPredicateAplication
-        where O : Operator<O>
+    public class PredicateApplication<F,T> : IPredicateAplication
+        where F : Operator<F>
     {
 
-        public PredicateApplication(O Operator)
+        public PredicateApplication(F f)
         {
-            this.Operator = Operator;
+            this.Operator = f;
         }
-        public O Operator { get; }
+        public F Operator { get; }
 
         protected virtual IReadOnlyList<object> Operands
             => new object[] { };

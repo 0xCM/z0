@@ -14,7 +14,7 @@ namespace Z0.Dynamics
     using Z0;
     using static Z0.Seed;
     using static Z0.Memories;
-    using static Z0.XPressive;
+    using static Z0.XPress;
     using static Z0.XFunc;
 
     public static class MemberAssociationSetBuilder
@@ -25,7 +25,7 @@ namespace Z0.Dynamics
 
     public class MemberAssociationSetBuilder<S, T>
     {
-        public static implicit operator MemberAssociationSet<S, T>(MemberAssociationSetBuilder<S, T> builder)
+        public static implicit operator MemberAssociations<S, T>(MemberAssociationSetBuilder<S, T> builder)
             => builder.Complete();
 
         HashSet<MemberAssociation> Associations { get; } 
@@ -45,7 +45,7 @@ namespace Z0.Dynamics
             return this;
         }
 
-        public MemberAssociationSet<S, T> Complete()
-            => new MemberAssociationSet<S, T>(Associations);
+        public MemberAssociations<S, T> Complete()
+            => new MemberAssociations<S, T>(Associations);
     }
 }

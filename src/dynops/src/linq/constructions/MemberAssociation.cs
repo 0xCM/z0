@@ -17,8 +17,8 @@ namespace Z0.Dynamics
     /// </summary>
     public class MemberAssociation
     {
-        public static MemberAssociation<S, T> Associate<S, T>(Expression<Func<S, object>> s, Expression<Func<T, object>> t)
-            => new MemberAssociation<S, T>(s.GetValueMember(), t.GetValueMember());
+        public static MemberAssociation<S,T> Associate<S,T>(Expression<Func<S,object>> s, Expression<Func<T,object>> t)
+            => new MemberAssociation<S,T>(s.GetValueMember(), t.GetValueMember());
 
         public MemberAssociation(ValueMember s, ValueMember t)
         {
@@ -48,7 +48,6 @@ namespace Z0.Dynamics
     /// <typeparam name="Y">The target type</typeparam>
     public sealed class MemberAssociation<X, Y> : MemberAssociation
     {
-
         public MemberAssociation(ValueMember s, ValueMember t)
             : base(s, t)
         {

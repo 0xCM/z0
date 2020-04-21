@@ -10,11 +10,6 @@ namespace Z0.Dynamics
     using System.Diagnostics;
     using System.Collections.Generic;
 
-
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
-
     using X = System.Linq.Expressions;
 
     class LinqExpressionVisitor : ExpressionVisitor

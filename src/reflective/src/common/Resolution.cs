@@ -9,23 +9,6 @@ namespace Z0
     
     partial class Reflective
     {
-        /// <summary>
-        /// Searches a type for an instance constructor that matches a specified signature
-        /// </summary>
-        /// <param name="declaringType">The type to search</param>
-        /// <param name="argTypes">The method parameter types in ordinal position</param>
-        [MethodImpl(Inline)]
-        public static Option<ConstructorInfo> ctor(Type declaringType, params Type[] argTypes)
-            => declaringType.GetConstructor(BF_Instance, null, argTypes, new ParameterModifier[]{});
-
-        /// <summary>
-        /// Searches a type for an instance constructor that matches a specified signature
-        /// </summary>
-        /// <param name="argTypes">The method parameter types in ordinal position</param>
-        /// <typeparam name="T">The type to search</typeparam>
-        [MethodImpl(Inline)]
-        public static Option<ConstructorInfo> ctor<T>(params Type[] argTypes)
-            => ctor(typeof(T), argTypes);
 
         /// <summary>
         /// Attempts to retrieves the value of a static or instance property
@@ -100,17 +83,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T propval<T>(object o, string propname)
             => (T)propval(o, propname);
-
-        [MethodImpl(Inline)]
-        public static string myname([CallerMemberName] string name = null)
-            => name ?? string.Empty;
-
-        [MethodImpl(Inline)]
-        public static string myfile([CallerFilePath] string path = null)
-            => path ?? string.Empty;
-
-        [MethodImpl(Inline)]
-        public static int myline([CallerLineNumber] int? line = null)
-            => line ?? 0;    
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Dynamics.Operators
     using Z0;
     using static Z0.Seed;
     using static Z0.Memories;
-    using static Z0.XPressive;
+    using static Z0.XPress;
     using static Z0.XFunc;
 
     public static class LessThanOrEqual<T>

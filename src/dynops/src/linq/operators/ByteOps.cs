@@ -14,34 +14,34 @@ namespace Z0.Dynamics.Operators
 
     public static class ByteOps
     {
-        public static Expression<Func<byte, byte>> Abs
+        public static Expression<Func<byte,byte>> Abs
             => f((byte x) => x);
 
-        public static Expression<Func<byte, byte, byte>> Add
+        public static Expression<Func<byte,byte,byte>> Add
             => f<byte>((x, y) => (byte)(x + y));
 
-        public static Expression<Func<byte, byte, byte>> Sub
+        public static Expression<Func<byte,byte,byte>> Sub
             => f<byte>((x, y) => (byte)(x - y));
 
-        public static Expression<Func<byte, byte, byte>> Mul
+        public static Expression<Func<byte,byte,byte>> Mul
             => f<byte>((x, y) => (byte)(x * y));
 
-        public static Expression<Func<byte, byte>> Inc
+        public static Expression<Func<byte,byte>> Inc
             => f((byte x) => ++x);
 
-        public static Expression<Func<byte, byte>> Dec
+        public static Expression<Func<byte,byte>> Dec
             => f((byte x) => --x);
 
-        public static Expression<Func<byte, byte, bool>> LT
+        public static Expression<Func<byte,byte,bool>> LT
             => f((byte x, byte y) => x < y);
 
-        public static Expression<Func<byte, byte, bool>> LTEQ
+        public static Expression<Func<byte,byte,bool>> LTEQ
             => f((byte x, byte y) => x <= y);
 
-        public static Expression<Func<byte, byte, bool>> GT
+        public static Expression<Func<byte,byte,bool>> GT
             => f((byte x, byte y) => x > y);
 
-        public static Expression<Func<byte, byte, bool>> GTEQ
+        public static Expression<Func<byte,byte,bool>> GTEQ
             => f((byte x, byte y) => x >= y);
     }
 }

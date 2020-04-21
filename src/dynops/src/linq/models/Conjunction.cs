@@ -12,16 +12,15 @@ namespace Z0.Dynamics
     /// </summary>
     public sealed class Conjunction : Junction
     {
-        public Conjunction(Junction Parent = null)
-            : base(new IPredicateAplication[] { }, Parent)
+        public Conjunction(Junction parent = null)
+            : base(new IPredicateAplication[] { }, parent)
         { }
 
-        public Conjunction(IEnumerable<IPredicateAplication> Predicates, Junction Parent = null)
-            : base(Predicates, Parent)
+        public Conjunction(IEnumerable<IPredicateAplication> predicates, Junction parent = null)
+            : base(predicates, parent)
         { }
 
         protected override ILogicalOperator Connective
             => StandardOperators.And;
     }
-
 }

@@ -13,6 +13,4 @@ namespace Z0.Dynamics
             : base("false", "false")
         { }
     }
-
-
 }

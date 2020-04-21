@@ -9,6 +9,9 @@ namespace Z0.Dynamics
 
     }
 
+    public interface IComparisonOperator<F> : IComparisonOperator, IBinaryOperator<F>
+        where F : IComparisonOperator<F>
+    {
 
-
+    }    
 }

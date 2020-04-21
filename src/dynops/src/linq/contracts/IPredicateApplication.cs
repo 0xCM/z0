@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Dynamics
 {
-
     public interface IPredicateAplication : IOperatorApplication
     {
 
     }
-
-
-
-
 
 }
 

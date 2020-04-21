@@ -20,14 +20,14 @@ namespace Z0.Dynamics
         /// Creates an expression that defines a function that returns true
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public static Expression<Func<T, bool>> True<T>()
+        public static Expression<Func<T,bool>> True<T>()
             => f => true;
 
         /// <summary>
         /// Creates an expression that defines a function that returns false
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public static Expression<Func<T, bool>> False<T>()
+        public static Expression<Func<T,bool>> False<T>()
             => f => false;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0.Dynamics
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <typeparam name="T"></typeparam>
-        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
+        public static Expression<Func<T,bool>> Or<T>(this Expression<Func<T,bool>> left, Expression<Func<T,bool>> right)
         {
             var invokedExpr = XPR.Invoke(right, left.Parameters.Cast<XPR>());
             return XPR.Lambda<Func<T, bool>>
@@ -46,26 +46,26 @@ namespace Z0.Dynamics
         /// <summary>
         /// Creates an expression that defines a logical AND function
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
         /// <typeparam name="T"></typeparam>
-        public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
+        public static Expression<Func<T,bool>> And<T>(this Expression<Func<T,bool>> lhs, Expression<Func<T,bool>> rhs)
         {
-            var invokedExpr = XPR.Invoke(right, left.Parameters.Cast<XPR>());
+            var invokedExpr = XPR.Invoke(rhs, lhs.Parameters.Cast<XPR>());
             return XPR.Lambda<Func<T, bool>>
-                  (XPR.AndAlso(left.Body, invokedExpr), left.Parameters);
+                  (XPR.AndAlso(lhs.Body, invokedExpr), lhs.Parameters);
         }
 
         /// <summary>
         /// Creates an expression tha defines an equality comparison
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
         /// <typeparam name="T"></typeparam>
-        public static Expression<Func<bool>> Equal<T>(this Expression<Func<T>> left, Expression<Func<T>> right)
+        public static Expression<Func<bool>> Equal<T>(this Expression<Func<T>> lhs, Expression<Func<T>> rhs)
         {
-            var lValue = XPR.Invoke(left);
-            var rValue = XPR.Invoke(right);
+            var lValue = XPR.Invoke(lhs);
+            var rValue = XPR.Invoke(rhs);
             return XPR.Lambda<Func<bool>>(XPR.Equal(lValue, rValue));
         }
     }

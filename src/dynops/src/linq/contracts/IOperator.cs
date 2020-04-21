@@ -15,8 +15,9 @@ namespace Z0.Dynamics
         string FormatApply(params object[] args);
     }
 
+    public interface IOperator<F> : IOperator
+        where F : IOperator
+    {
 
-
-
-
+    }
 }

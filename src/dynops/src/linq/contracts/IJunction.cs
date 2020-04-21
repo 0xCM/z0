@@ -12,7 +12,4 @@ namespace Z0.Dynamics
     {
         IReadOnlyList<IPredicateAplication> Criteria { get; }
     }
-
-
-
 }

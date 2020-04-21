@@ -8,11 +8,6 @@ namespace Z0.Dynamics
     using System.Collections.Generic;
     using System.Text;
     using System.Linq;
-    using System.Linq.Expressions;
-
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
     
     /// <summary>
     /// Represents a logical connective where each constituent is a member predicate
@@ -82,7 +77,6 @@ namespace Z0.Dynamics
                 sb.Append(")");
 
             return sb.ToString();
-
         }
     }
 }

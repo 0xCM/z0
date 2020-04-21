@@ -16,7 +16,6 @@ namespace Z0.Dynamics
     public abstract class OperatorApplication<O> : IOperatorApplication
         where O : Operator<O>
     {
-
         protected OperatorApplication(IOperator Operator, params object[] Operands)
         {
             this.Operator = Operator;

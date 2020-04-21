@@ -8,14 +8,11 @@ namespace Z0.Dynamics.Operators
     using System.Linq.Expressions;
 
     using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
-    using static Z0.XPressive;
-    using static Z0.XFunc;
+    
+    using static XPress;
 
     public static partial class Ops
     {
-
         public static class Divide<T>
         {
             static readonly Func<T, T, T> _OP
@@ -24,8 +21,5 @@ namespace Z0.Dynamics.Operators
             public static T Apply(T x, T y)
                 => _OP(x, y);
         }
-
-
     }
-
 }

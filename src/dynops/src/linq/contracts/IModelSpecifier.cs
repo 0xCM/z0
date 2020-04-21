@@ -13,5 +13,4 @@ namespace Z0.Dynamics
     {
         new M SpecifyModel();
     }
-
 }

@@ -10,13 +10,13 @@ namespace Z0.Dynamics
     using System.Text;
 
    
-    public class TypeSelectionBuilder<TResult>
+    public class TypeSelectionBuilder<R>
     {
-        public static implicit operator Selector<Type, object, TResult>(TypeSelectionBuilder<TResult> builder)
+        public static implicit operator Selector<Type,object,R>(TypeSelectionBuilder<R> builder)
             => builder.Finish();
 
-        Dictionary<Type, Func<object, TResult>> functions { get; } 
-            = new Dictionary<Type, Func<object, TResult>>();
+        Dictionary<Type, Func<object,R>> functions { get; } 
+            = new Dictionary<Type, Func<object,R>>();
 
         readonly object value;
 
@@ -30,20 +30,19 @@ namespace Z0.Dynamics
             this.value = value;
         }
 
-        public TypeSelectionBuilder<TResult> When<T>(Func<T, TResult> f)
+        public TypeSelectionBuilder<R> When<T>(Func<T, R> f)
         {
             functions[typeof(T)] = x => f((T)x);
             return this;
         }
 
-        public Selector<Type, object, TResult> Finish()
-            => new Selector<Type, object, TResult>(functions);
+        public Selector<Type, object, R> Finish()
+            => new Selector<Type, object, R>(functions);
 
-        public TResult Eval(object value)
+        public R Eval(object value)
             => Finish().Select(value.GetType(), value);
 
-        public TResult Eval()
+        public R Eval()
             => Finish().Select(value.GetType(), value);
     }
-
 }

@@ -13,11 +13,8 @@ namespace Z0.Dynamics
     using X = System.Linq.Expressions;
     using G = System.Collections.Generic;
     
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
-    using static Z0.XPressive;
-    using static Z0.XFunc;
+    using static Seed;
+    using static Memories;
 
     public class SelectionModelBuilder
     {
@@ -70,11 +67,11 @@ namespace Z0.Dynamics
             if (!SpecifiesMemberPredicate(X))
                 return;
 
-            var member = X.TryGetAccessedMember();
+            var member = X.AccessedMember();
             if (!member)
                 return;
 
-            var value = X.GetValue();
+            var value = X.EvaluateFirst();
             if (!value)
                 return;
 
@@ -89,7 +86,7 @@ namespace Z0.Dynamics
             if (!SpecifiesMemberPredicate(X))
                 return;
 
-            var member = X.TryGetAccessedMember();
+            var member = X.AccessedMember();
             if (!member)
                 return;
 
@@ -111,7 +108,7 @@ namespace Z0.Dynamics
             if (selector.Parameters.Count != 1)
                 return;
 
-            var property = selector.TryGetAccesedProperty().ValueOrDefault();
+            var property = selector.AccesedProperty().ValueOrDefault();
             if (property == null)
                 return;
 

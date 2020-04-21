@@ -13,6 +13,14 @@ namespace Z0
     partial class Control
     {
         /// <summary>
+        /// Defines a non-valued option
+        /// </summary>
+        /// <typeparam name="T">The value type, if the value existed</typeparam>
+        [MethodImpl(Inline)]
+        public static Option<T> none<T>()
+            => Option<T>.None();
+
+        /// <summary>
         /// Transforms an input, branching on nullity evaluation
         /// </summary>
         /// <param name="x">The input</param>
@@ -21,7 +29,7 @@ namespace Z0
         /// <typeparam name="X">The input type</typeparam>
         /// <typeparam name="Y">The output type</typeparam>
         [MethodImpl(Inline)]
-        public static Y ifnone<X, Y>(X x, Func<Y> @null, Func<X,Y> @else)
+        public static Y ifnone<X,Y>(X x, Func<Y> @null, Func<X,Y> @else)
             where X : class
                 => x == null ? @null() : @else(x);
 
@@ -35,7 +43,7 @@ namespace Z0
         /// <typeparam name="X">The input type</typeparam>
         /// <typeparam name="Y">The output type</typeparam>
         [MethodImpl(Inline)]
-        public static Y ifnone<X, Y>(X? x, Func<Y> @null, Func<X,Y> @else = null)
+        public static Y ifnone<X,Y>(X? x, Func<Y> @null, Func<X,Y> @else = null)
             where X : struct
             where Y : struct
                 => !x.HasValue ? @null() : @else?.Invoke(x.Value) ?? default(Y);

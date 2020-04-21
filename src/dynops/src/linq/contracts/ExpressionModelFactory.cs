@@ -13,6 +13,5 @@ namespace Z0.Dynamics
     /// </summary>
     /// <typeparam name="M">The type of model the function will produce</typeparam>
     /// <param name="X">The expression from which the model's structure will be derived</param>
-    /// <returns></returns>
     public delegate M ExpressionModelFactory<out M>(Expression X, params SelectionFacet[] facets);
 }

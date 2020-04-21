@@ -81,7 +81,7 @@ namespace Z0.Dynamics
        public static bool OnConjunction<X>(this X x, Action<X> a)
             where X : Expression
         {
-            var conjunction = x.TryGetConjunction();
+            var conjunction = x.Conjunction();
             if (conjunction)
             {
                 conjunction.OnSome(a);
@@ -135,7 +135,7 @@ namespace Z0.Dynamics
         public static bool OnDisjunction<X>(this X x, Action<X> a)
             where X : Expression
         {
-            var D = x.TryGetDisjunction();
+            var D = x.Disjunction();
             if (D)
             {
                 D.OnSome(a);

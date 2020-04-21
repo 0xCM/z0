@@ -5,26 +5,20 @@
 namespace Z0.Dynamics
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
-    public abstract class UnaryOperator<OP> : Operator<OP>
-        where OP : UnaryOperator<OP>
+    public abstract class UnaryOperator<F> : Operator<F>
+        where F : UnaryOperator<F>
     {
-
         protected UnaryOperator(string Name, string Symbol)
             : base(Name, Symbol)
         { }
 
-
-        public UnaryOperatorApplication<OP, T> Apply<T>(T Operand)
-            => new UnaryOperatorApplication<OP, T>(this, Operand);
-
+        public UnaryOperatorApplication<F,T> Apply<T>(T Operand)
+            => new UnaryOperatorApplication<F,T>(this, Operand);
 
         protected override IOperatorApplication DoApply(params object[] args)
             => Apply(args.First());
-
 
         public override string FormatApply(params object[] args)
             => $"{Symbol}({args.FirstOrDefault()}";

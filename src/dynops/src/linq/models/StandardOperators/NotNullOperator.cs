@@ -8,7 +8,7 @@ namespace Z0.Dynamics
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed class NotNullOperator : UnaryOperator<NotNullOperator>, INullityOperator
+    public sealed class NotNullOperator : UnaryOperator<NotNullOperator>, INullityOperator<NotNullOperator>
     {
         internal NotNullOperator()
             : base("not_null", "not_null")

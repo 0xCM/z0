@@ -7,7 +7,7 @@ namespace Z0.Dynamics
     using System;
     using System.Linq;
 
-    public sealed class NotOperator : UnaryOperator<NotOperator>, ILogicalOperator
+    public sealed class NotOperator : UnaryOperator<NotOperator>, ILogicalOperator<NotOperator>
     {
         public NotOperator()
             : base("not", "not")

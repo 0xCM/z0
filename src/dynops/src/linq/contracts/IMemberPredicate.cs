@@ -14,6 +14,4 @@ namespace Z0.Dynamics
         MemberInfo Member { get; }
     }
 
-
-
 }

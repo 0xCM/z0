@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed; 
     using static Memories;
-    using static XPressive;
+    using static XPress;
 
     readonly struct EmitterOpFactory<T> : IEmitterOpFactory<T>
     {
@@ -26,7 +26,7 @@ namespace Z0
         public Func<T> Manufacture(MethodInfo method, object instance)
         {
             var callExpr = call(instance, method);
-            var convExpr = conversion<T>(callExpr);
+            var convExpr = convert<T>(callExpr);
             var f = emitter<T>(convExpr); 
             return f.Compile();
         }

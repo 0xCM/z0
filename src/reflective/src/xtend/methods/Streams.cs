@@ -39,7 +39,6 @@ namespace Z0
         public static IEnumerable<MethodInfo> Instance(this IEnumerable<MethodInfo> src)
             => src.Where(t => !t.IsStatic);
 
-
         /// <summary>
         /// Selects the non-public methods from a stream
         /// </summary>

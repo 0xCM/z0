@@ -1,7 +1,7 @@
-﻿// OSS developed by Chris Moore and licensed via MIT: https://opensource.org/licenses/MIT
-// This license grants rights to merge, copy, distribute, sell or otherwise do with it 
-// as you like. But please, for the love of Zeus, don't clutter it with regions.
-//-------------------------------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
 namespace Z0.Dynamics.Operators
 {
     using System;
@@ -9,7 +9,7 @@ namespace Z0.Dynamics.Operators
     using Z0;
     using static Z0.Seed;
     using static Z0.Memories;
-    using static Z0.XPressive;
+    using static Z0.XPress;
     using static Z0.XFunc;
 
     public static class Zero<T>
@@ -22,7 +22,5 @@ namespace Z0.Dynamics.Operators
     {
         public static T Value { get; }
             = Increment<T>.Apply(Zero<T>.Value);
-
     }
-
 }

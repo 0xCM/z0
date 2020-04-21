@@ -9,16 +9,16 @@ namespace Z0.Dynamics
     /// <summary>
     /// Represents a comparison operator
     /// </summary>
-    /// <typeparam name="O"></typeparam>
-    public abstract class ComparisonOperator<O> : BinaryOperator<O>, IComparisonOperator
-        where O : ComparisonOperator<O>
+    /// <typeparam name="F"></typeparam>
+    public abstract class ComparisonOperator<F> : BinaryOperator<F>, IComparisonOperator<F>
+        where F : ComparisonOperator<F>
     {
         protected ComparisonOperator(string Name, string Symbol)
             : base(Name, Symbol)
         { }
 
-        public new ComparisonOperatorApplication<O, T> Apply<T>(T Left, T Right)
-            => new ComparisonOperatorApplication<O, T>(this, Left, Right);
+        public new ComparisonOperatorApplication<F,T> Apply<T>(T Left, T Right)
+            => new ComparisonOperatorApplication<F,T>(this, Left, Right);
 
         protected override IOperatorApplication DoApply(params object[] args)
             => Apply(args[0], args[1]);

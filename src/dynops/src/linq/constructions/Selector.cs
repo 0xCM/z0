@@ -10,15 +10,13 @@ namespace Z0.Dynamics
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
+    using static Seed;
 
-    public readonly struct Selector<T, Y>
+    public readonly struct Selector<T,Y>
     {
         [MethodImpl(Inline)]
-        public static SelectionBuilder<T, Y> Define()
-            => new SelectionBuilder<T, Y>();
+        public static SelectionBuilder<T,Y> Define()
+            => new SelectionBuilder<T,Y>();
 
         readonly IReadOnlyDictionary<T, Func<Y>> functions;
 

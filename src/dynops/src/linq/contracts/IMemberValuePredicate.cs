@@ -8,7 +8,4 @@ namespace Z0.Dynamics
     {
         object Value { get; }
     }
-
-
-
 }

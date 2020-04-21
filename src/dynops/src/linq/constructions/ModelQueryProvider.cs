@@ -10,15 +10,10 @@ namespace Z0.Dynamics
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
-
     using X = System.Linq.Expressions;
 
     public abstract class ModelQueryProvider : IModelQueryProvider
     {
-
         static Type GetElementType(Type stype)
             => stype.CloseEnumerableType().Map(                
                     t => t.GetGenericArguments()[0], () => stype);
@@ -73,7 +68,7 @@ namespace Z0.Dynamics
         }
 
         protected override IQueryable<T> CreateQuery<T>(Expression X)
-            => new ModelSpecifier<M, T>(this, X);
+            => new ModelSpecifier<M,T>(this, X);
 
         protected override object Execute(Expression X, params SelectionFacet[] facets)
             => F(X,facets);
