@@ -48,6 +48,8 @@ namespace Z0
 
         public ICheck Check => ICheck.Checker;
 
+        ICheck Claim => ICheck.Checker;
+
         public IDynamicOps Dynamic => Context.Dynamic;
 
         ITestDynamic Me => this;
@@ -76,7 +78,7 @@ namespace Z0
                 var asm = CaptureAsm(xchange, f).Require();
                 var h = Dynamic.EmitFixedBinary(buffer, w, asm.Code);
                 var v2 = h(x.ToFixed(),y.ToFixed()).ToVector<T>();
-                Check.veq(v1,v2);
+                Claim.veq(v1,v2);
             }
 
             var clock = time.counter(true);
@@ -140,7 +142,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y) = Random.NextPair<T>();
-                    Check.eq(f(x,y),g(x,y));
+                    Claim.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -251,7 +253,7 @@ namespace Z0
 
             var g = buffers[Main].EmitFixedBinaryOp<Fixed256>(asm.Code);
             var v2 = g(x,y).ToVector<ushort>();
-            Check.veq(v1,v2);
+            Claim.veq(v1,v2);
         }
 
         // void CheckImm(in BufferSeq buffers, in CaptureExchange exchange)
@@ -279,7 +281,7 @@ namespace Z0
 
             var f = buffers[Main].EmitFixedBinaryOp<Fixed128>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
-            Check.veq(z1,z2);
+            Claim.veq(z1,z2);
         }
         
         public void CheckUnaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W256 w, MethodInfo method, byte imm)
@@ -297,7 +299,7 @@ namespace Z0
 
             var f = Dynamic.EmitFixedUnary<Fixed256>(buffers[Main], capture.Code);
             var v2 = f(x.ToFixed()).ToVector<T>();
-            Check.veq(v1,v2);
+            Claim.veq(v1,v2);
         }
 
         TestCaseRecord TestVectorMatch(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
@@ -334,7 +336,7 @@ namespace Z0
             //a copy of the data but rather a refererence to the
             //data that exists in memory as a resource
             foreach(var d in Data.Resources)
-                Check.eq(d.Location, ptr(d.GetBytes()));
+                Claim.eq(d.Location, ptr(d.GetBytes()));
         }
 
  

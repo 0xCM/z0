@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Seed;
     using static AppErrorMsg;
@@ -13,18 +14,21 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckEqual : IValidator
-    {
-        void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            if(!object.Equals(lhs,rhs))
-                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
-        }            
+    using static Enums;
 
-        void neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+    public readonly struct CheckEnum : ICheckEnum
+    {
+        public static ICheckEnum Checker => default(CheckEnum);
+    }
+
+    public interface ICheckEnum : IValidator<CheckEnum,ICheckEnum>
+    {        
+        [MethodImpl(Inline)]
+        void eq<E>(E lhs, E rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where E : unmanaged, Enum
         {
-            if(object.Equals(lhs,rhs))
+            if(!u64(lhs).Equals(u64(rhs)))
                 throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
-        }            
+        }
     }
 }

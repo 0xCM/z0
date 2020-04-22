@@ -14,7 +14,7 @@ namespace Z0.Logix
 
     using static TypedLogicSpec;
 
-    public class t_variables : UnitTest<t_variables>
+    public class t_variables : LogixTest<t_variables>
     {
         public void check_compositions()
         {

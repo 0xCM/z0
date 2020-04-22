@@ -39,7 +39,7 @@ namespace Z0
             {
                 apply(g, lhs, dst);
                 for(var i=0; i<count; i++)
-                    CheckNumeric.eq(f.Invoke(skip(in leftIn, i)), skip(in target, i));
+                    Check.eq(f.Invoke(skip(in leftIn, i)), skip(in target, i));
             }
             catch(Exception e)
             {
@@ -67,7 +67,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = next_x();
-                    CheckNumeric.eq(f.Invoke(x), g.Invoke(x));
+                    Check.eq(f.Invoke(x), g.Invoke(x));
                 }
             }
             catch(Exception e)

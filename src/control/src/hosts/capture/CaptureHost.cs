@@ -68,9 +68,10 @@ namespace Z0
             ConnectReceivers(PrimaryWorkflow.EventBroker);
         }
 
-        ICheckNumeric ClaimNumeric => ICheckNumeric.Checker;
 
         ICheck Claim => ICheck.Checker;
+
+        ICheckEquatable Equatable => CheckEquatable.Checker;
 
         IApiHost Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).Require();
@@ -206,8 +207,8 @@ namespace Z0
             
             for(var i=0; i<memSrc.Length; i++)
             {
-                Claim.eq(skip(fileSrc,i).Op, skip(memSrc,i).Op);  
-                Claim.eq(skip(fileSrc,i).Bits.Length, skip(memSrc, i).Bits.Length);
+                Equatable.eq(skip(fileSrc,i).Op, skip(memSrc,i).Op);  
+                Equatable.eq(skip(fileSrc,i).Bits.Length, skip(memSrc, i).Bits.Length);
             }
 
             Sink.MatchedEmissions(host, memSrc.Length, dst);

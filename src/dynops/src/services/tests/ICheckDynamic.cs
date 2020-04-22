@@ -15,7 +15,7 @@ namespace Z0
 
     using K = Kinds.UnaryOpClass;
 
-    public interface ICheckDynamic : ITester
+    public interface ICheckDynamic : ITestRandom, ICheckNull
     {
         void CheckFixedMatch<F>(in BufferSeq dst, K k, IdentifiedCode a, IdentifiedCode b)
             where F : unmanaged, IFixed
@@ -24,10 +24,11 @@ namespace Z0
             var g = Dynamic.EmitFixedUnary<F>(dst[Left], b);
             
             var stream = Random.FixedStream<F>();
-            Check.notnull(stream);
+            notnull(stream);
 
             var points = stream.Take(RepCount);
-            iter(points, x => Check.eq(f(x), g(x)));            
+            var checker = CheckEqual.Checker;
+            iter(points, x => checker.eq(f(x), g(x)));            
         }       
     }
 }

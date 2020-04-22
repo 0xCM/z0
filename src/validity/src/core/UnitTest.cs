@@ -44,9 +44,9 @@ namespace Z0
 
         protected ICheckPrimalSeq Primal => Claim;
 
-        protected ICheckNumeric Numeric => ICheckNumeric.Checker;
+        protected ICheckNumeric Numeric => CheckNumeric.Checker;
 
-        protected ICheckEquatable Equatable => ICheckEquatable.Checker;
+        protected ICheckEquatable Equatable => CheckEquatable.Checker;
     
         public static N0 n0 => default;
 
@@ -115,5 +115,20 @@ namespace Z0
         public const float z32f = 0;
 
         public const double z64f = 0; 
+    }
+
+    public abstract class UnitTest<U,V> : UnitTest<U>
+        where U : UnitTest<U>
+        where V : IValidator
+    {        
+        protected new abstract V Claim {get;}
+    }
+
+    public abstract class UnitTest<U,V,I> : UnitTest<U,I>
+        where U : UnitTest<U>
+        where V : struct, I
+        where I : IValidator
+    {        
+        protected override I Claim => default(V);
     }
 }

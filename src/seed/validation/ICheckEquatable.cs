@@ -16,12 +16,11 @@ namespace Z0
 
     public readonly struct CheckEquatable : ICheckEquatable
     {                    
+        public static ICheckEquatable Checker => default(CheckEquatable);        
     }
 
     public interface ICheckEquatable : IValidator
     {
-        static ICheckEquatable Checker => default(CheckEquatable);
-
         [MethodImpl(Inline)]
         void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : IEquatable<T>

@@ -16,7 +16,7 @@ namespace Z0
 
     public readonly struct CheckPrimal : ICheckPrimal
     {
-
+        public static ICheckPrimal Checker => default(CheckPrimal);
     }
 
     public interface ICheckPrimal : IValidator
@@ -124,5 +124,16 @@ namespace Z0
         [MethodImpl(Inline)]   
         bool neq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs != rhs ? true : throw failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line));
+
+
+        [MethodImpl(Inline)]   
+        bool eq(int? lhs, int? rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+
+        [MethodImpl(Inline)]   
+        bool eq(int? lhs, int? rhs, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+
+
     }
 }

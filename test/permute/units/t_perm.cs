@@ -18,7 +18,7 @@ namespace Z0
             var p = Permute.identity(16);
             for(var i=0; i<16; i++)
                 p.Inc();
-            Claim.eq(p, Permute.identity(16));
+            Claim.eq(p.Terms, Permute.identity(16).Terms);
         }
 
         public void perm_dec()
@@ -27,7 +27,7 @@ namespace Z0
             for(var i=0; i<16; i++)
                 p.Dec();
 
-            Claim.eq(p, Permute.identity(16));
+            Claim.eq(p.Terms, Permute.identity(16).Terms);
         }
 
         public void perm_invert()

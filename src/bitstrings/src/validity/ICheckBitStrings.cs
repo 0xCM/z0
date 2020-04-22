@@ -13,7 +13,13 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface IBitStringCheck : IValidator
+    public readonly struct CheckBitStrings : ICheckBitStrings
+    {
+
+        public static ICheckBitStrings Checker => default(CheckBitStrings);
+    }
+
+    public interface ICheckBitStrings : IValidator
     {
         void eq(BitString a, BitString b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {

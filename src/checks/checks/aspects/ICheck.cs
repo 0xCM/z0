@@ -21,7 +21,6 @@ namespace Z0
         ICheckClose, 
         ICheckFileSystem,
         ICheckInvariant,
-        ICheckEqual,
         ICheckSets,
         ICheckNull,
         ICheckVectors

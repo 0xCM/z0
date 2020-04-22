@@ -31,7 +31,7 @@ namespace Z0
         MemberEvaluator Evaluator(in BufferSeq buffers)
             => MemberEvaluator.Create(buffers);
 
-        ICheckNumeric Numeric => ICheckNumeric.Checker;
+        ICheckNumeric Numeric => CheckNumeric.Checker;
 
 
         BinaryEval<T> eval<T>(in BufferSeq execBuffers, in ApiMemberCode code,  K.BinaryOpClass<T> k)

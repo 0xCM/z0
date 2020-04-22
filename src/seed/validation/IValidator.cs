@@ -35,4 +35,19 @@ namespace Z0
         void fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw failed(ClaimKind.Fail, AppMsg.Error("failed", caller, file,line));
     }
+
+    public interface IValidator<I> : IValidator
+        where I : IValidator
+    {
+        I Validator {get;}
+    }
+
+    public interface IValidator<V,I> : IValidator<I>
+        where V : struct, IValidator<V,I>, I
+        where I : IValidator
+    {
+        static I Checker => default(V);
+
+        I IValidator<I>.Validator => Checker;
+    }
 }

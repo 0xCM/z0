@@ -35,6 +35,48 @@ namespace Z0
         }      
 
         /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        bool ContentEqual(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs)  
+        {
+            var count = length(lhs,rhs);
+            for(var i=0; i<count; i++)
+                if(refs.skip(lhs, i) != refs.skip(rhs, i))
+                    return false;
+            return true;
+        }      
+
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        bool ContentEqual(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs)  
+        {
+            var count = length(lhs,rhs);
+            for(var i=0; i<count; i++)
+                if(refs.skip(lhs, i) != refs.skip(rhs, i))
+                    return false;
+            return true;
+        }      
+
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        bool ContentEqual(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs)  
+        {
+            var count = length(lhs,rhs);
+            for(var i=0; i<count; i++)
+                if(refs.skip(lhs, i) != refs.skip(rhs, i))
+                    return false;
+            return true;
+        }      
+
+        /// <summary>
         /// Asserts the equality of two boolean arrays
         /// </summary>
         /// <param name="lhs">The left operand</param>
@@ -73,5 +115,42 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         void eq(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => require(ContentEqual(lhs, rhs), caller, file, line);
+
+        /// <summary>
+        /// Asserts content equality for two byte spans
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="T">The element type</typeparam>
+        void eq(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => require(ContentEqual(lhs, rhs), caller, file, line);
+
+        /// <summary>
+        /// Asserts content equality for two byte spans
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="T">The element type</typeparam>
+        void eq(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => require(ContentEqual(lhs, rhs), caller, file, line);
+
+        /// <summary>
+        /// Asserts content equality for two byte spans
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="T">The element type</typeparam>
+        void eq(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => require(ContentEqual(lhs, rhs), caller, file, line);
+
     }
 }

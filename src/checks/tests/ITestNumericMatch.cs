@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public interface ITestNumericMatch : ITestAction, ICheckNumeric
+    public interface ITestNumericMatch : ITestAction, ICheckNumeric, ITestRandom
     {
         /// <summary>
         /// Evaluates a pair of unary operators and asserts their equality over a random sequence
@@ -27,7 +27,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Next<T>();
-                    eq(f(x),g(x));
+                    numeq(f(x),g(x));
                 }
             }
 
@@ -50,7 +50,7 @@ namespace Z0
                 {
                     var x = Random.Next<T>();
                     var y = Random.Next<T>();                    
-                    eq(f(x,y),g(x,y));
+                    numeq(f(x,y),g(x,y));
                 }
             }
 

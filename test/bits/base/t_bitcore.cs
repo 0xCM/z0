@@ -7,24 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    public abstract class t_bitcore<X> : UnitTest<X>
+    public abstract class t_bitcore<X> : UnitTest<X, ICheckBitThings>
         where X : t_bitcore<X>, new()
     {
         protected override int RepCount => Pow2.T04;
 
         protected override int CycleCount => Pow2.T03;       
 
-        protected new IBitSuiteMix Claim => IBitSuiteMix.Checker;
+        protected override ICheckBitThings Claim => CheckBitThings.Checker;
     }
 
-    public readonly struct BitSuiteCheck : IBitSuiteMix
-    {        
-    
-    }
-
-    public interface IBitSuiteMix : IBitVectorCheck, IBitStringCheck, ICheckInvariant, ICheckNumeric, ICheckPrimalSeq
-    {
-    
-        static new IBitSuiteMix Checker => default(BitSuiteCheck);         
-    }
 }

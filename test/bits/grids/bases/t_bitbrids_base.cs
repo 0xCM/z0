@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public abstract class t_bitgrids_base<U> : UnitTest<U>
+    public abstract class t_bitgrids_base<U> : t_bitcore<U>
         where U : t_bitgrids_base<U>, new()
     {          
         /// <summary>

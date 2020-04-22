@@ -10,7 +10,7 @@ namespace Z0
     public abstract class t_numeric<X> : UnitTest<X>
         where X : t_numeric<X>, new()
     {
-        protected new ICheckNumeric Claim => ICheckNumeric.Checker;
+        protected new ICheckNumeric Claim => CheckNumeric.Checker;
     }
 
 }

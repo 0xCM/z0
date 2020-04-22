@@ -9,7 +9,7 @@ namespace Z0.Logix
     using static Seed;
     using static Memories;
 
-    public class t_ternary_logic : UnitTest<t_ternary_logic>
+    public class t_ternary_logic : LogixTest<t_ternary_logic>
     {
         protected override int RepCount => Pow2.T08;
         

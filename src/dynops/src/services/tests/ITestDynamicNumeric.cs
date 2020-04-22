@@ -12,18 +12,19 @@ namespace Z0
     using static Memories;
     using static TestDynamic;
 
-    public interface ITestDynamicNumeric : ITester, ITestOperatorMatch
+    public interface ITestDynamicNumeric : ITestRandom, ITestOperatorMatch, ICheckNumeric
     {
         TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, UnaryOp<T> f, IdentifiedCode src)
             where T : unmanaged
         {                                  
             var g = Dynamic.EmitUnaryOp<T>(buffers[Main],src);
+            
             void check()
             {
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Next<T>();
-                    Check.eq(f(x), g(x));
+                    eq(f(x), g(x));
                 }
             }
 
@@ -39,7 +40,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y) = Random.NextPair<T>();
-                    Check.eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 
@@ -55,7 +56,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y, var z) = Random.NextTriple<T>();
-                    Check.eq(f(x,y,z),g(x,y,z));
+                    eq(f(x,y,z),g(x,y,z));
                 }
             }
 

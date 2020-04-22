@@ -12,7 +12,7 @@ namespace Z0
     
     public readonly struct SVFDecomposer : ISVFDecomposer
     {
-        ICheckNumeric Claim => ICheckNumeric.Checker;
+        ICheckVectors Claim => CheckVectors.Checker;
 
         public ITestContext Context {get;}
 

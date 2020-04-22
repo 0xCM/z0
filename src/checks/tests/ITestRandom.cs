@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    public abstract class t_bitvectors<X> : t_bitcore<X>
-        where X : t_bitvectors<X>, new()
+    public interface ITestRandom : ITester, IPolyrandProvider
     {
-        protected override int RepCount => Pow2.T08;
 
-        protected override int CycleCount => Pow2.T03;
+
     }
 }

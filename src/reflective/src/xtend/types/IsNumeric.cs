@@ -12,19 +12,6 @@ namespace Z0
     partial class Reflective
     {
         /// <summary>
-        /// Determines whether a type is a system-defined and architecture-suppored numeric type or a system-defined variation thereof
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-         /// <remarks>
-        /// Variations accounted for include
-        /// A) System-defined nullable parametric closures over the type 
-        /// B) System-defined reference types that cover the type, including ref/out parameters and such
-        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
-        /// </remarks>
-        public static bool IsPrimalNumeric(this Type t)
-            => t.IsFloatingPoint() || t.IsIntegral();
-
-        /// <summary>
         /// Determines whether a type is the sytem-defined 8-bit unsigned integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>

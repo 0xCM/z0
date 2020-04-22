@@ -33,8 +33,8 @@ namespace Z0
         public static void Throw(AppMsg msg)
             => throw AppException.Define(msg);
 
-        public static AppException DuplicateKeys(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppMsg.Error($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
+        // public static AppException DuplicateKeys(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        //     => AppException.Define(AppMsg.Error($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
         
         public static AppException Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.Equal(lhs,rhs,caller,file,line));

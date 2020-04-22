@@ -19,7 +19,7 @@ namespace Z0
 
         public IPolyrand Random {get;}
 
-        protected ICheckNumeric CheckNumeric => ICheckNumeric.Checker;
+        protected ICheckNumeric Check => CheckNumeric.Checker;
 
         int RepCount {get;}
 
@@ -52,7 +52,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var z = f.Invoke(x);
                     for(var j=0; j< cells; j++)
-                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                        Check.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
                 }
             }
             
@@ -71,7 +71,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var z = f.Invoke(x);
                     for(var j=0; j< cells; j++)
-                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                        Check.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
                 }
             }
 
@@ -90,7 +90,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Check.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
 
@@ -109,7 +109,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Check.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
 
@@ -131,7 +131,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                        Check.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
                 }
             }
         }
@@ -151,7 +151,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                        Check.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
                 }
             }
         }

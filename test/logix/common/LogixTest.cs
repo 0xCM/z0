@@ -21,7 +21,17 @@ namespace Z0.Logix
     
     using BL = BinaryLogicKind;
 
-    public abstract class LogixTest<X> : UnitTest<X>
+    public interface ICheckLogic : ICheckGenericNumeric, ICheckBitThings
+    {
+
+    }
+    
+    public readonly struct CheckLogic : ICheckLogic
+    {
+        public static ICheckLogic Checker => default(CheckLogic);
+    }
+
+    public abstract class LogixTest<X> : UnitTest<X, CheckLogic, ICheckLogic>
         where X : LogixTest<X>
     {
         protected void logic_op_check(BL kind, Func<bit,bit,bit> rule)

@@ -17,10 +17,10 @@ namespace Z0
 
     public readonly struct CheckVectors : ICheckVectors
     {
-        
+        public static ICheckVectors Checker => default(CheckVectors);
     }
 
-    public interface ICheckVectors : ICheckPrimalSeq
+    public interface ICheckVectors : ICheckPrimalSeq, ICheckNumeric
     {
         /// <summary>
         /// Asserts the equality of two vectors

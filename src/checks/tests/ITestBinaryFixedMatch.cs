@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-    public interface ITestBinaryFixedMatch : ITestAction
+    public interface ITestBinaryFixedMatch : ITestAction, ITestRandom
     {
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points
