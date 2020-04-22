@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
+
     public readonly ref struct CaptureExchange
     {
         /// <summary>
@@ -18,7 +19,7 @@ namespace Z0.Asm
         public readonly Span<byte> TargetBuffer;
 
         /// <summary>
-        /// A buffer tracks state meaningful to the capture workflow
+        /// A buffer that tracks state meaningful to the capture workflow
         /// </summary>
         public readonly Span<byte> StateBuffer;
 

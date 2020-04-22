@@ -44,10 +44,10 @@ namespace Z0
 
         void vxor_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vxor(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(VSvc.vxor(w,t),w,t);
             
         void vxor_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vxor(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(VSvc.vxor(w,t),w,t);
      }
 }

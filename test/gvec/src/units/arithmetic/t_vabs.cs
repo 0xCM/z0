@@ -35,11 +35,11 @@ namespace Z0
 
         void vabs_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckUnaryOp(VSvc.vabs(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(VSvc.vabs(w,t),w,t);
             
         void vabs_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckUnaryOp(VSvc.vabs(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(VSvc.vabs(w,t),w,t);
     }
 
 }

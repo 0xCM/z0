@@ -44,10 +44,10 @@ namespace Z0
 
         void vsll_check<T>(W128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckShiftOp(VSvc.vsll(w,t),w,t);
+                => CheckSVF.CheckShiftOp(VSvc.vsll(w,t),w,t);
             
         void vsll_check<T>(W256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckShiftOp(VSvc.vsll(w,t),w,t);
+                => CheckSVF.CheckShiftOp(VSvc.vsll(w,t),w,t);
     }
 }

@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    
+    using static Seed;
+    using static Memories;
+    using static BufferSeqId;
 
-    using static Vectors;
-
-
-    public interface ISVTernaryOpMatch256D<T> : ICheckSF
-        where T : unmanaged
+    public interface IBufferedTester : ITester, IServiceAllocation
     {
-        void CheckMatch<F>(F f)
-            where F : ISVTernaryOp256DApi<T>;
+        IBufferToken this[BufferSeqId id] {get;}       
     }
 }

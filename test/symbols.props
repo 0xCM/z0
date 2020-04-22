@@ -26,8 +26,6 @@
 
     <TextualTest>$(Test)textual/z0.textual.test.csproj</TextualTest>
 
-    <VSvcTest>$(Test)vsvc/z0.vsvc.test.csproj</VSvcTest>
-
   </PropertyGroup>
 
 </Project>

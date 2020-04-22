@@ -58,9 +58,14 @@ namespace Z0
         Predicate = 128,
 
         /// <summary>
+        /// Classifies functions that shift/rotate bits
+        /// </summary>        
+        Shift = 256,
+
+        /// <summary>
         /// Classifies system-level operations
         /// </summary>        
-        System = 256,
+        System = 512,
 
         /// <summary>
         /// The last pure classifier
@@ -123,6 +128,21 @@ namespace Z0
         TernaryOp = Ternary | Function | Operator,
 
         /// <summary>
+        /// Classifies shift functions that accept two argument types: the value to shift and the magnitude of the shift
+        /// </summary>        
+        ShiftOp = Function | Operator,        
+
+        /// <summary>
+        /// Classifies shift operators with two arguments
+        /// </summary>        
+        UnaryShiftOp = ShiftOp | Unary,
+
+        /// <summary>
+        /// Classifies shift operators with three arguments
+        /// </summary>        
+        BinaryShiftOp = ShiftOp | Unary,
+
+        /// <summary>
         /// Classifies an operation as a unary predicate
         /// </summary>        
         UnaryPredicate = Unary | Function | Predicate,
@@ -137,6 +157,4 @@ namespace Z0
         /// </summary>        
         TernaryPredicate = Ternary | Function | Predicate
     }
-
-
 }

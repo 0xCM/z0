@@ -20,6 +20,7 @@ namespace Z0
         public static ICheckVectors Checker => default(CheckVectors);
     }
 
+
     public interface ICheckVectors : ICheckPrimalSeq, ICheckNumeric, ICheckSets
     {
         /// <summary>

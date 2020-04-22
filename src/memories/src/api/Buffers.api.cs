@@ -34,7 +34,6 @@ namespace Z0
             where T : unmanaged
                 => new SpanStack<T>(new T[capacity]);
 
-
         /// <summary>
         /// Covers a span with a stack buffer
         /// </summary>

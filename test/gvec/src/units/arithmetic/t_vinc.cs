@@ -44,11 +44,11 @@ namespace Z0
 
         void vinc_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckUnaryOp(VSvc.vinc(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(VSvc.vinc(w,t),w,t);
             
         void vinc_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckUnaryOp(VSvc.vinc(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(VSvc.vinc(w,t),w,t);
 
     }
 }

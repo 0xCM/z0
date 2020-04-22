@@ -45,10 +45,10 @@ namespace Z0
 
         void vcnonimpl_check<T>(W128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vcnonimpl(w,t), w, t);
+                => CheckSVF.CheckBinaryOp(VSvc.vcnonimpl(w,t), w, t);
             
         void vcnonimpl_check<T>(W256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vcnonimpl(w,t), w, t);
+                => CheckSVF.CheckBinaryOp(VSvc.vcnonimpl(w,t), w, t);
      }
 }

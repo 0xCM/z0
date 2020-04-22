@@ -44,10 +44,10 @@ namespace Z0
 
         void vsub_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vsub(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(VSvc.vsub(w,t),w,t);
             
         void vsub_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vsub(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(VSvc.vsub(w,t),w,t);
     }
 }

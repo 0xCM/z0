@@ -48,11 +48,11 @@ namespace Z0
 
         void vnegate_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckUnaryOp(VSvc.vnegate(w,t), w, t);
+                => CheckSVF.CheckUnaryOp(VSvc.vnegate(w,t), w, t);
             
         void vnegate_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckUnaryOp(VSvc.vnegate(w,t), w, t);
+                => CheckSVF.CheckUnaryOp(VSvc.vnegate(w,t), w, t);
 
    }
 }

@@ -5,16 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
-    
-    using static Seed;
+    using System.Runtime.Intrinsics;
 
-    public interface ICheckSF128<S,T> : ISFuncApi<S, Vector128<T>, bit>
+    using static Seed;
+    using static Memories;
+
+    using K = Kinds;
+
+    public interface ICheckSF128<S,T> : ISFuncApi<S,Vector128<T>,bit>
         where S : unmanaged
         where T : unmanaged
     {
         
     }
 
+    public interface ICheckSF256<S,T> : ISFuncApi<S, Vector256<T>, bit>
+        where S : unmanaged
+        where T : unmanaged
+    {
+        
+    }
 }

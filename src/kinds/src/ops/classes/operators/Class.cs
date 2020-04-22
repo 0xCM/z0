@@ -40,5 +40,20 @@ namespace Z0
         /// Classifies operators that accept three arguments
         /// </summary>        
         TernaryOp = OC.TernaryOp,
+
+        /// <summary>
+        /// Classifies shift operators
+        /// </summary>        
+        ShiftOp = OC.ShiftOp,
+
+        /// <summary>
+        /// Classifies shift operators with one operand under shift
+        /// </summary>        
+        UnaryShiftOp = OC.UnaryShiftOp,
+
+        /// <summary>
+        /// Classifies shift operators with two operands under shift
+        /// </summary>        
+        BinaryShiftOp = OC.BinaryShiftOp
     }     
 }

@@ -23,7 +23,6 @@
     <ProjectReference Include="$(PermuteTest)" />
     <ProjectReference Include="$(SeedTest)" />
     <ProjectReference Include="$(TextualTest)" />
-    <ProjectReference Include="$(VSvcTest)" />
   </ItemGroup>
 
 </Project>

@@ -6,59 +6,62 @@ namespace Z0
 {
     using System;
     
-    using C = Kinds;
+    using K = Kinds;
 
     partial class Kinds
     {
-        public static C.OperatorClass Operator 
+        public static K.OperatorClass Operator 
             => default;
 
-        public static C.EmitterOpClass EmitterOp
+        public static K.EmitterOpClass EmitterOp
             => default;
 
-        public static C.UnaryOpClass UnaryOp 
+        public static K.UnaryOpClass UnaryOp 
             => default;
 
-        public static C.BinaryOpClass BinaryOp 
+        public static K.BinaryOpClass BinaryOp 
             => default;
 
-        public static C.TernaryOpClass TernaryOp 
+        public static K.TernaryOpClass TernaryOp 
             => default;
 
-        public static C.EmitterOpClass<T> emitter<T>(T t = default) 
+        public static K.ShiftOpClass ShiftOp 
+            => default;
+
+        public static K.EmitterOpClass<T> emitter<T>(T t = default) 
             where T : unmanaged => default;
 
-        public static C.UnaryOpClass<T> unaryop<T>(T t = default) 
+        public static K.UnaryOpClass<T> unaryop<T>(T t = default) 
             where T : unmanaged => default;
 
-        public static C.BinaryOpClass<T> binaryop<T>(T t = default) 
+        public static K.BinaryOpClass<T> binaryop<T>(T t = default) 
             where T : unmanaged => default;
 
-        public static C.TernaryOpClass<T> ternaryop<T>(T t = default)  
+        public static K.TernaryOpClass<T> ternaryop<T>(T t = default)  
             where T : unmanaged => default;
 
-        public static C.OperatorClass<T> As<T>(this C.OperatorClass src) 
+        public static K.OperatorClass<T> As<T>(this K.OperatorClass src) 
             where T : unmanaged => default;
 
-        public static C.UnaryOpClass<T> As<T>(this C.UnaryOpClass src) 
+        public static K.UnaryOpClass<T> As<T>(this K.UnaryOpClass src) 
             where T : unmanaged => default;
         
-        public static C.BinaryOpClass<T> As<T>(this C.BinaryOpClass src)
+        public static K.BinaryOpClass<T> As<T>(this K.BinaryOpClass src)
              where T : unmanaged => default;
 
-        public static C.TernaryOpClass<T> As<T>(this C.TernaryOpClass src) 
+        public static K.TernaryOpClass<T> As<T>(this K.TernaryOpClass src) 
             where T : unmanaged => default;
 
-        public static C.OperatorClass<W> Fixed<W>(this C.OperatorClass src) 
+        public static K.OperatorClass<W> Fixed<W>(this K.OperatorClass src) 
             where W : unmanaged, ITypeWidth => default;
 
-        public static C.UnaryOpClass<W> Fixed<W>(this C.UnaryOpClass src)
+        public static K.UnaryOpClass<W> Fixed<W>(this K.UnaryOpClass src)
             where W : unmanaged, ITypeWidth => default;
 
-        public static C.BinaryOpClass<W> Fixed<W>(this C.BinaryOpClass src)
+        public static K.BinaryOpClass<W> Fixed<W>(this K.BinaryOpClass src)
             where W : unmanaged, ITypeWidth => default;
 
-        public static C.TernaryOpClass<W> Fixed<W>(this C.TernaryOpClass src)
+        public static K.TernaryOpClass<W> Fixed<W>(this K.TernaryOpClass src)
             where W : unmanaged, ITypeWidth => default;
     }
 }

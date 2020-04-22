@@ -35,10 +35,10 @@ namespace Z0
 
         void vselect_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckTernaryOp(VSvc.vselect(w,t), w, t);
+                => CheckSVF.CheckTernaryOp(VSvc.vselect(w,t), w, t);
             
         void vselect_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckTernaryOp(VSvc.vselect(w,t), w, t);
+                => CheckSVF.CheckTernaryOp(VSvc.vselect(w,t), w, t);
      }
 }

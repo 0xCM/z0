@@ -47,10 +47,10 @@ namespace Z0
 
         void vmax_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vmax(w,t), w, t);
+                => CheckSVF.CheckBinaryOp(VSvc.vmax(w,t), w, t);
             
         void vmax_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vmax(w,t), w, t);
+                => CheckSVF.CheckBinaryOp(VSvc.vmax(w,t), w, t);
     }
 }

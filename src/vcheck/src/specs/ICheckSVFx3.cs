@@ -4,10 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICheckBinarySF128D<T> : ICheckSF
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+    using static Memories;
+
+    using K = Kinds;
+
+    public interface ICheckBinarySVFD<W,F,T>
         where T : unmanaged
+        where W : ITypeWidth
+        where F : IVBinaryOpD<T>
     {
-        void CheckMatch<F>(F f)
-            where F : ISVBinaryOp128DApi<T>;
+        void CheckSVF(F f);
     }
 }

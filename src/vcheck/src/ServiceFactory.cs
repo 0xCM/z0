@@ -5,14 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static Seed;
+    using static Memories;
 
     public static class ServiceFactory
     {
-        public static ICheckSVF<T> Decomposer<T>(this ITestContext context)
+        public static ICheckSVF<T> CheckSVF<T>(this ITestContext context)
             where T : unmanaged
-             => new SVValidatorD<T>(context);
+             => Z0.CheckSVF<T>.Create(context);
 
-        public static ICheckSFCells Decomposer(this ITestContext context)
-            => new CheckDecomposition(context);
+        public static ICheckSVF CheckSVF(this ITestContext context)
+            => Z0.CheckSVF.Create(context);
     }
 }

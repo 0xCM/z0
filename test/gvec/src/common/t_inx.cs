@@ -25,10 +25,10 @@ namespace Z0
     {
         protected t_inx()
         {
-            VSvcChecks  = CheckVectorServices.Create(Context, Context.Decomposer());
+            CheckSVF  =   Context.CheckSVF();  //CheckVectorServices.Create(Context, Context.CheckSVF());
         }
         
-        protected readonly ICheckVectorServices VSvcChecks;        
+        protected readonly ICheckSVF CheckSVF;        
 
     }
 }

@@ -11,19 +11,19 @@ namespace Z0
     using static Memories;
     using static BufferSeqId;
 
-    public interface ITestVectorOps : ICheckVectors, ITestAction, ITestDynamic
+    public interface ITestDynamicVectors : ICheckVectors, ITestAction, ITestDynamic, IBufferedTester
     {
-        TestCaseRecord Match<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, ApiBits bits)
+        TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, ApiBits bits)
             where T : unmanaged
         {
-            var g = Dynamic.EmitFixedBinary(buffers[Main], w128, bits);
+            var g = Dynamic.EmitFixedBinary(this[Main], w128, bits);
             return Match<T>(f, g, bits.Id);
         }
 
-        TestCaseRecord Match<T>(in BufferSeq buffers, BinaryOp<Vector256<T>> f, ApiBits bits)
+        TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, ApiBits bits)
             where T : unmanaged                    
         {
-            var g = Dynamic.EmitFixedBinary(buffers[Main], w256, bits);
+            var g = Dynamic.EmitFixedBinary(this[Main], w256, bits);
             return Match<T>(f, g, bits.Id);
         }
 

@@ -44,14 +44,14 @@ namespace Z0
         void vadd_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            VSvcChecks.CheckBinaryOp(VSvc.vadd(w,t),w,t);
+            CheckSVF.CheckBinaryOp(VSvc.vadd(w,t),w,t);
         }
             
         void vadd_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var svc = VSvc.vadd(w,t);
-            VSvcChecks.CheckBinaryOp(svc,w,t);
+            CheckSVF.CheckBinaryOp(svc,w,t);
         }
     }
 }

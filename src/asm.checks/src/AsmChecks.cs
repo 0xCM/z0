@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Linq;
@@ -10,29 +10,26 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    using System.IO;
     using System.Reflection;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Asm;
+    using Z0.Asm;
 
     using static Seed;
-    using static Memories;
-    using static time;
-    using static BufferSeqId;
+    using static Z0.Memories;
+    using static Z0.BufferSeqId;
 
     using K = Kinds;
-    
-    public interface ITestCapture : ITester
-    {
-        TestCaseRecord TestImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
-            where T : unmanaged;        
-    }
+    using Z0;
 
-    public class AsmChecks : ITestDynamic, ITestCapture
+    public class AsmChecks : ITestAsm
     {
         public IAsmContext Context {get;}
-                
+
+        readonly BufferAllocation BufferAlloc;
+
+        readonly IBufferToken[] Buffers;
+
         readonly int RepCount;
 
         public static AsmChecks Create(IAsmContext context)
@@ -42,7 +39,16 @@ namespace Z0
         {
             this.Context = context;
             this.RepCount = 128;
+
+            Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();            
+
         }                
+
+        public void Dispose()
+        {
+            BufferAlloc.Dispose();
+            
+        }
 
         public IPolyrand Random => Context.Random;
 
@@ -58,40 +64,6 @@ namespace Z0
                 FolderName.Define("data"), 
                 FolderName.Define(GetType().Name)
                 );
-
-        public TestCaseRecord TestImm<T>(in CaptureExchange exchange, BufferToken buffer, W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
-            where T : unmanaged
-        {            
-            var label = Checks.CaseName<T>(src.Name);
-
-            void check(in CaptureExchange xchange)
-            {
-                var injector = Dynamic.BinaryInjector<T>(w);
-                var f = injector.EmbedImmediate(src, imm);
-
-                var x = Random.CpuVector<T>(w);
-                var y = Random.CpuVector<T>(w);            
-                var v1 = f.DynamicOp.Invoke(x,y);
-                
-                var asm = CaptureAsm(xchange, f).Require();
-                var h = Dynamic.EmitFixedBinary(buffer, w, asm.Code);
-                var v2 = h(x.ToFixed(),y.ToFixed()).ToVector<T>();
-                Claim.veq(v1,v2);
-            }
-
-            var clock = time.counter(true);
-
-            try
-            {
-                check(exchange);
-                return TestCaseRecord.Define(label, true, clock);
-            }
-            catch(Exception e)
-            {
-                term.errlabel(e, label);
-                return TestCaseRecord.Define(label, false, clock);
-            }                                    
-        }
 
         protected IBitArchiveWriter HexWriter([Caller] string caller = null)
         {            
@@ -125,27 +97,6 @@ namespace Z0
         CaptureExchange Exchange(in BufferSeq buffers)   
             => CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);     
 
-        Option<AsmFunction> CaptureAsm<D>(in CaptureExchange exchange, DynamicDelegate<D> src)
-            where D : Delegate
-                => from capture in Capture.Capture(exchange, src.Id, src)
-                from asm in Decoder.Decode(capture)
-                select asm;
-
-        public TestCaseRecord TestMatch<T>(in BufferSeq buffers, BinaryOp<T> f, in IdentifiedCode src)
-            where T : unmanaged
-        {                                  
-            var g = Dynamic.EmitBinaryOp<T>(buffers[Main],src);
-            void check()
-            {
-                for(var i=0; i<RepCount; i++)
-                {
-                    (var x, var y) = Random.NextPair<T>();
-                    Claim.eq(f(x,y),g(x,y));
-                }
-            }
-
-            return Checks.TestAction(check, src.Id);
-        }
 
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.HostBits(id,host).Read(m).Single().ToApiCode();
@@ -156,6 +107,11 @@ namespace Z0
             => seq("and", "or", "xor", "nand", "nor", "xnor",
                 "impl","nonimpl", "cimpl", "cnonimpl");
 
+        public IBufferToken this[BufferSeqId id]
+        {
+            [MethodImpl(Inline)]
+            get => Buffers[(int)id];
+        }
         // void bitlogic_match(in BufferSeq buffers)
         // {
         //     var names = PrimalBitLogicOps;

@@ -14,86 +14,51 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct OperatorClass : IOperatorClass<OperatorClass,K> 
-        {
-            public K Class => K.Operator; 
-        } 
-
-        public readonly struct EmitterOpClass : IOperatorClass<EmitterOpClass,K> 
-        {
-            public K Class => K.Emitter; 
-
-            [MethodImpl(Inline)]
-            public static implicit operator OperatorClass(EmitterOpClass src)
-                => default;
-
-            public OperatorClass Generalized => default;
-        }
-
-
-        public readonly struct UnaryOpClass : IOperatorClass<UnaryOpClass,K> 
-        {
-            public K Class => K.UnaryOp; 
-
-            [MethodImpl(Inline)]
-            public static implicit operator OperatorClass(UnaryOpClass src)
-                => default;
-
-            public OperatorClass Generalized => default;
-        }
-
-        public readonly struct BinaryOpClass : IOperatorClass<BinaryOpClass,K> 
-        {
-            public K Class => K.BinaryOp; 
-
-            public static implicit operator OperatorClass(BinaryOpClass src)
-                => default;
-
-            public OperatorClass Generalized => default;
-        }
-
-        public readonly struct TernaryOpClass : IOperatorClass<TernaryOpClass,K> 
-        {
-            public K Class => K.TernaryOp; 
-
-            public static implicit operator OperatorClass(TernaryOpClass src)
-                => default;
-
-            public OperatorClass Generalized => default;
-        }
-
         public readonly struct OperatorClass<T> : IOpClass<K,T> 
             where T : unmanaged 
         { 
-            public K Class => K.Operator; 
+            public static implicit operator OperatorClass(OperatorClass<T> src)
+                =>  new OperatorClass(src.Class);
+
+            public K Class {get;}
+
+            public OperatorClass(K k)
+            {
+                Class = k;
+            }
         }
 
-        public readonly struct EmitterOpClass<T> : IOperatorClass<EmitterOpClass<T>, K,T> 
+        public readonly struct EmitterOpClass<T> : IOperatorClass<EmitterOpClass<T>, K, T> 
             where T : unmanaged 
         { 
             public K Class => K.Emitter; 
 
             public static implicit operator OperatorClass<T>(EmitterOpClass<T> src)
-                => default;
+                => src.Generalized;
             
             [MethodImpl(Inline)]
             public static implicit operator EmitterOpClass(EmitterOpClass<T> src)
-                => default;
+                => src.NonGeneric;
+
+            public OperatorClass<T> Generalized => new OperatorClass<T>(Class);
+
+            public EmitterOpClass NonGeneric => default;
         }
 
         public readonly struct UnaryOpClass<T> : IOperatorClass<UnaryOpClass<T>, K,T> 
             where T : unmanaged 
         { 
+            public K Class => K.UnaryOp; 
+
+            [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(UnaryOpClass<T> src)
-                => default;
+                => src.Generalized;
             
             [MethodImpl(Inline)]
             public static implicit operator UnaryOpClass(UnaryOpClass<T> src)
-                => default;
+                => src.NonGeneric;
                         
-            public K Class => K.UnaryOp; 
-
-            public OperatorClass<T> Generalized => default;
+            public OperatorClass<T> Generalized => new OperatorClass<T>(Class);
 
             public UnaryOpClass NonGeneric => default;
         }
@@ -101,16 +66,17 @@ namespace Z0
         public readonly struct BinaryOpClass<T> : IOperatorClass<BinaryOpClass<T>,K,T> 
             where T : unmanaged 
         { 
+            public K Class => K.BinaryOp; 
+
+            [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(BinaryOpClass<T> src)
-                => default;
+                => src.Generalized;
             
             [MethodImpl(Inline)]
             public static implicit operator BinaryOpClass(BinaryOpClass<T> src)
-                => default;
+                => src.NonGeneric;
                         
-            public K Class => K.BinaryOp; 
-
-            public OperatorClass<T> Generalized => default;
+            public OperatorClass<T> Generalized => new OperatorClass<T>(Class);
 
             public BinaryOpClass NonGeneric => default;            
         }
@@ -118,19 +84,37 @@ namespace Z0
         public readonly struct TernaryOpClass<T> : IOperatorClass<TernaryOpClass<T>,K,T> 
             where T : unmanaged 
         {
+            public K Class => K.TernaryOp; 
+
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(TernaryOpClass<T> src)
-                => default;
+                => src.Generalized;
 
             [MethodImpl(Inline)]
             public static implicit operator TernaryOpClass(TernaryOpClass<T> src)
-                => default;
+                => src.NonGeneric;
 
-            public K Class => K.TernaryOp; 
-
-            public OperatorClass<T> Generalized => default;
+            public OperatorClass<T> Generalized => new OperatorClass<T>(Class);
 
             public TernaryOpClass NonGeneric => default;
+        }
+
+        public readonly struct ShiftOpClass<T> : IOperatorClass<ShiftOpClass<T>,K,T> 
+            where T : unmanaged 
+        {
+            public K Class => K.ShiftOp; 
+
+            [MethodImpl(Inline)]
+            public static implicit operator OperatorClass<T>(ShiftOpClass<T> src)
+                => src.Generalized;
+
+            [MethodImpl(Inline)]
+            public static implicit operator ShiftOpClass(ShiftOpClass<T> src)
+                => src.NonGeneric;
+
+            public OperatorClass<T> Generalized => new OperatorClass<T>(Class);
+
+            public ShiftOpClass NonGeneric => default;
         }
     }
 }

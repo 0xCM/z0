@@ -68,10 +68,10 @@ namespace Z0
 
         void vand_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vand(w,t), w, t);
+                => CheckSVF.CheckBinaryOp(VSvc.vand(w,t), w, t);
             
         void vand_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckBinaryOp(VSvc.vand(w,t), w, t);
+                => CheckSVF.CheckBinaryOp(VSvc.vand(w,t), w, t);
      }
 }

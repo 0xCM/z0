@@ -71,7 +71,7 @@ namespace Z0
         string CaseName<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{Identify.Owner(host)}{host.Name}{PathSep}{Identify.Op(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
+                => $"{Identify.Owner(host)}/{host.Name}{PathSep}{Identify.Op(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
 
         /// <summary>
         /// Computes a test case identifier for a segmented structured function

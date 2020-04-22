@@ -13,7 +13,6 @@ namespace Z0
 
     static class VChecks
     {
-
        [MethodImpl(Inline)]
        public static VBroadcastCheck128<S,T> vbroadcast<S,T>(N128 w, S s = default, T t = default)
             where S : unmanaged

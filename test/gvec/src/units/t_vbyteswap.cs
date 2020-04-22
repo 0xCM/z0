@@ -70,11 +70,11 @@ namespace Z0
 
         void vbyteswap_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckUnaryOp(VSvc.vbyteswap(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(VSvc.vbyteswap(w,t),w,t);
 
         void vbyteswap_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckUnaryOp(VSvc.vbyteswap(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(VSvc.vbyteswap(w,t),w,t);
 
     }
 }

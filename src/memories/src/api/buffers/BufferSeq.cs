@@ -9,26 +9,35 @@ namespace Z0
 
     using static Seed;
 
-    public enum BufferSeqId : int
-    {
-        Left = 0,
-
-        Right = 1,
-
-        Main = 2,
-
-    }
-
     public readonly ref struct BufferSeq
     {
+        /// <summary>
+        /// Creates a buffer sequence that owns the underlying memory allocation and releases
+        /// it upon disposal
+        /// </summary>
+        /// <param name="size">The size of each buffer</param>
+        /// <param name="count">The number of buffers to allocate</param>
         public static BufferSeq alloc(int size, int count)
             => new BufferSeq(size,count);
+
+        /// <summary>
+        /// Creates a caller-owed buffer sequence
+        /// </summary>
+        /// <param name="size">The size of each buffer</param>
+        /// <param name="count">The number of buffers to allocate</param>
+        /// <param name="allocation">The allocation handle that defines ownership</param>
+        public static BufferSeq alloc(int size, int count, out BufferAllocation allocation)
+        {            
+            var buffers = new BufferSeq(size,count,false);
+            allocation = buffers.Allocation;
+            return buffers;
+        }
+
+        readonly BufferAllocation Allocation;
 
         readonly Span<byte> View;
 
         readonly Span<BufferToken> Tokens;
-
-        readonly BufferAllocation Allocation;
 
         readonly int BufferCount;
 
@@ -36,8 +45,11 @@ namespace Z0
 
         readonly int TotalSize;
 
-        unsafe BufferSeq(int size, int count)
+        readonly bool OwnsBuffer;
+
+        unsafe BufferSeq(int size, int count, bool owns = true)
         {
+            this.OwnsBuffer = owns;
             this.BufferCount = count;
             this.BufferSize = size;
             this.TotalSize = BufferCount*BufferSize;
@@ -112,7 +124,14 @@ namespace Z0
             where T : unmanaged
                 => Token(index).Fill(src);
 
+        [MethodImpl(Inline)]
+        public IBufferToken[] Tokenize() 
+            => Tokens.ToArray().Map(t => t as IBufferToken);
+
         public void Dispose()
-            => Allocation.Dispose();
+        {
+            if(OwnsBuffer)   
+                Allocation.Dispose();
+        }
     }
 }

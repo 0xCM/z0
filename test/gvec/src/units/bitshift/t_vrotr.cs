@@ -36,11 +36,11 @@ namespace Z0
 
         void vrotr_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckShiftOp(VSvc.vrotr(w,t), w,t);
+                => CheckSVF.CheckShiftOp(VSvc.vrotr(w,t), w,t);
             
         void vrotr_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckShiftOp(VSvc.vrotr(w,t), w,t);
+                => CheckSVF.CheckShiftOp(VSvc.vrotr(w,t), w,t);
 
     }
 }

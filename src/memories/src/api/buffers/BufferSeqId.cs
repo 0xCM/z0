@@ -4,10 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICheckUnarySF128D<T> : ICheckSF
-        where T : unmanaged
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public enum BufferSeqId : int
     {
-        void CheckMatch<F>(F f)
-            where F : ISVUnaryOp128DApi<T>;
+        Left = 0,
+
+        Right = 1,
+
+        Main = 2,
+        
+        Aux3 = 3,
+
+        Aux4 = 4
     }
 }

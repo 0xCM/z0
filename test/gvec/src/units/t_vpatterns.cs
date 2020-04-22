@@ -71,21 +71,21 @@ namespace Z0
             vones_check(w,z64i);
         }
 
-        protected void vunits_check<T>(N128 w, T t = default)
+        void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
+                => CheckSVF.CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
 
-        protected void vunits_check<T>(N256 w, T t = default)
+        void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
+                => CheckSVF.CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
 
-        protected void vones_check<T>(N128 w, T t = default)
+        void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
+                => CheckSVF.CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
 
-        protected void vones_check<T>(N256 w, T t = default)
+        void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => VSvcChecks.CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
+                => CheckSVF.CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
 
    }
 }

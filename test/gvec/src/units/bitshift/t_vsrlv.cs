@@ -50,7 +50,7 @@ namespace Z0
                 return (x,offsets);
             }
 
-            VSvcChecks.CheckCells(VSvc.vsrlv(w,t),@case);            
+            CheckSVF.CheckCells(VSvc.vsrlv(w,t),@case);            
         }
 
         void vsrlv_check<T>(N256 w, T t = default)
@@ -65,7 +65,7 @@ namespace Z0
                 return (x,offsets);
             }
 
-            VSvcChecks.CheckCells(VSvc.vsrlv(w,t),@case);            
+            CheckSVF.CheckCells(VSvc.vsrlv(w,t),@case);            
         }
     }
 }
