@@ -13,7 +13,7 @@ namespace Z0
     using static Seed;
     using static Memories;
         
-    public class t_vfcmp : t_vinx<t_vfcmp>
+    public class t_vfcmp : t_inx<t_vfcmp>
     {                    
         public void eq_128xf64()
             => cmp_128x64_check(FpCmpMode.EQ_OQ);

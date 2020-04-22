@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vlt : t_vinx<t_vlt>
+    public class t_vlt : t_inx<t_vlt>
     {        
         public void vlt_check()
         {
@@ -45,10 +45,10 @@ namespace Z0
 
         void v_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vlt(w,t), w, t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vlt(w,t), w, t);
 
         void v_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vlt(w,t), w, t); 
+                => VSvcChecks.CheckBinaryOp(VSvc.vlt(w,t), w, t); 
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vtakemask : t_vinx<t_vtakemask>
+    public class t_vtakemask : t_inx<t_vtakemask>
     {
         public void vtakemask_check()
         {

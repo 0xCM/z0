@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vcompact : t_vinx<t_vcompact>
+    public class t_vcompact : t_inx<t_vcompact>
     {
         public void vcompact2_128x16x2_128x8_outline()
         {

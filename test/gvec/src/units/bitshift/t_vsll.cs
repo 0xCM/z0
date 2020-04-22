@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vsll : t_vinx<t_vsll>
+    public class t_vsll : t_inx<t_vsll>
     {
         public void vsll_check()
         {
@@ -44,10 +44,10 @@ namespace Z0
 
         void vsll_check<T>(W128 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckShiftOp(VSvc.vsll(w,t),w,t);
+                => VSvcChecks.CheckShiftOp(VSvc.vsll(w,t),w,t);
             
         void vsll_check<T>(W256 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckShiftOp(VSvc.vsll(w,t),w,t);
+                => VSvcChecks.CheckShiftOp(VSvc.vsll(w,t),w,t);
     }
 }

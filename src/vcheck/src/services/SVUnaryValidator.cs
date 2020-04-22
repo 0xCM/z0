@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Vectors;
 
-    sealed class SVUnaryValidator128D<T> : OperatorComparer<W128,T>, IVUnaryOpMatch128D<T>
+    sealed class SVUnaryValidator128D<T> : CheckOperatorSF<W128,T>, ICheckUnarySF128D<T>
         where T : unmanaged
     {
         public SVUnaryValidator128D(ITestContext context, bool xzero = false)
@@ -20,7 +20,7 @@ namespace Z0
 
         N128 w => default;
 
-        void IVUnaryOpMatch128D<T>.CheckMatch<F>(F f)
+        void ICheckUnarySF128D<T>.CheckMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);
@@ -51,7 +51,7 @@ namespace Z0
         }
     }
     
-    sealed class SVUnaryValidator256D<T> : OperatorComparer<W256,T>, ISVUnaryOpMatch256D<T>
+    sealed class SVUnaryValidator256D<T> : CheckOperatorSF<W256,T>, ICheckUnarySF256D<T>
         where T : unmanaged
     {
 
@@ -63,7 +63,7 @@ namespace Z0
 
         N256 w => default;
 
-        void ISVUnaryOpMatch256D<T>.CheckMatch<F>(F f)
+        void ICheckUnarySF256D<T>.CheckMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);

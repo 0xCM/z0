@@ -16,7 +16,7 @@ namespace Z0
 
     public readonly struct CheckClose : ICheckClose
     {
-
+        public static ICheckClose Checker => default(CheckClose);
     }
 
     public interface ICheckClose : ICheckLengths
@@ -26,7 +26,7 @@ namespace Z0
         {
             var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;            
-            return err < tolerance ? true : throw failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
+            return err < tolerance ? true : throw Failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
         [MethodImpl(Inline)]   
@@ -34,7 +34,7 @@ namespace Z0
         {
             var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;            
-            return err < tolerance ? true : throw failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
+            return err < tolerance ? true : throw Failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
         /// <summary>

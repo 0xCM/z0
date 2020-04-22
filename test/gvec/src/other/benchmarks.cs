@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_intrinsic_bench : t_vinx<t_intrinsic_bench>
+    public class t_intrinsic_bench : t_inx<t_intrinsic_bench>
     {        
         protected override int CycleCount => Pow2.T08;
 

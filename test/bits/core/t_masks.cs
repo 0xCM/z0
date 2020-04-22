@@ -31,7 +31,7 @@ namespace Z0
                 var bits = BitSpans.parse(m.Text);
                 var bitval = bits.Convert<T>();
                 if(gmath.neq(bitval,m.Value))
-                    Claim.failwith($"{m.Name}:{BitString.normalize(m.Text)} != {BitString.scalar(m.Value)}");
+                    Claim.FailWith($"{m.Name}:{BitString.normalize(m.Text)} != {BitString.scalar(m.Value)}");
                 
             }
         }

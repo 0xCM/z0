@@ -13,8 +13,7 @@ namespace Z0
 
 
     public class t_asm_capture : t_asm<t_asm_capture>
-    {
-    
+    {    
         bool MemcapCheck(IMemoryCapture memcap, ApiBits src)
         {
             var section = new string('-',120);
@@ -34,7 +33,7 @@ namespace Z0
             if(patterns.TryPartialMatch(EncodingPatternKind.CALL32_INTR, AsChar_Span8u_Input, out var selected))
                 Claim.eq(AsChar_Span8u_Output,selected);
             else
-                Claim.fail();
+                Claim.Fail();
         }
 
         static ReadOnlySpan<byte> AsChar_Span8u_Input 

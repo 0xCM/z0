@@ -34,7 +34,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!lhs.Equals(rhs)) 
-                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }
 
         /// <summary>
@@ -49,35 +49,35 @@ namespace Z0
             where T : unmanaged
         {
             if(!lhs.Equals(rhs)) 
-                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }
 
         void eq<T>(Vector128<T> a, Vector128<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             if(!a.Equals(b))
-                throw failed(ClaimKind.Eq, NotEqual(a, b, caller, file, line));
+                throw Failed(ClaimKind.Eq, NotEqual(a, b, caller, file, line));
         }
 
         void neq<T>(Vector128<T> a, Vector128<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             if(a.Equals(b))
-                throw failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
+                throw Failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
         }
 
         void eq<T>(Vector256<T> a, Vector256<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             if(!a.Equals(b))
-                throw failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
+                throw Failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
         }
 
         void neq<T>(Vector256<T> a, Vector256<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             if(a.Equals(b))
-                throw failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
+                throw Failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
         }
 
         // void eq<T>(Vector512<T> a, Vector512<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

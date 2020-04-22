@@ -11,22 +11,6 @@ namespace Z0
 
     public class t_bitspan_ops : t_bitcore<t_bitspan_ops>
     {
-        /// <summary>
-        /// Asserts the equality of two bitspans
-        /// </summary>
-        /// <param name="a">The left bitspan</param>
-        /// <param name="b">The right bitspan</param>
-        protected void ClaimEqual(in BitSpan a, in BitSpan b)
-        {
-            if(a != b)
-            {
-                Notify(a.Format());
-                Notify(b.Format());
-                Claim.fail();
-            }
-        }
-
-
         public void bsequals()
         {
             for(var i=0; i<RepCount; i++)
@@ -61,7 +45,7 @@ namespace Z0
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
             var bs2 = BitSpans.from(x);
-            ClaimEqual(bs1.Trim(),bs2.Trim());
+            Claim.eq(bs1.Trim(),bs2.Trim());
 
             var y = bs1.Convert<uint>();
             Claim.eq(x,y);

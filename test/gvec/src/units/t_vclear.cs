@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vclear :  t_vinx<t_vconvert>
+    public class t_vclear :  t_inx<t_vconvert>
     {
         public void vclear_128x8()
             => vclear_check(n128,z8);

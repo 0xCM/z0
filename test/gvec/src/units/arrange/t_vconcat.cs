@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vconcat : t_vinx<t_vconcat>
+    public class t_vconcat : t_inx<t_vconcat>
     {     
         public void vconcat_check()
         {

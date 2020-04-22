@@ -6,23 +6,12 @@ namespace Z0
 {    
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices; 
-    using System.Text;
 
     using static Seed;
 
     public interface ITerminal : IService
     {
         void SetTerminationHandler(Action handler);        
-
-        void Error(Exception e);
-
-        void Error(string message);
-
-        void Warn(string message);
-
-        void Info(string message);
          
         void WriteLine();
 

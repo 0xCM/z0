@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_fixed_rng : t_vinx<t_fixed_rng>
+    public class t_fixed_rng : t_inx<t_fixed_rng>
     {        
         T next<T>()
             where T : unmanaged

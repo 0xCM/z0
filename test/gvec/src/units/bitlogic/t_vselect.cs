@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vselect : t_vinx<t_vselect>
+    public class t_vselect : t_inx<t_vselect>
     {
         public void vselect_check()
         {            
@@ -35,10 +35,10 @@ namespace Z0
 
         void vselect_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckTernaryScalarMatch(VSvc.vselect(w,t), w, t);
+                => VSvcChecks.CheckTernaryOp(VSvc.vselect(w,t), w, t);
             
         void vselect_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckTernaryScalarMatch(VSvc.vselect(w,t), w, t);
+                => VSvcChecks.CheckTernaryOp(VSvc.vselect(w,t), w, t);
      }
 }

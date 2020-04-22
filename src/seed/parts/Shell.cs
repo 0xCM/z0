@@ -29,15 +29,15 @@ namespace Z0
         public abstract void RunShell(params string[] args);
 
         protected virtual void OnDispose() 
-            => Term.Warn($"Dispose handler not implemented");
+            => term.warn($"Dispose handler not implemented");
 
         public virtual void OnFatalError(Exception e)
-            => Term.Error(e);
+            => term.error(e);
 
         /// <summary>
         /// The parts that are not unknown
         /// </summary>
-        protected static PartIndex KnownParts => LazyParts.Value; //Part.Index;//Part.KnownParts;
+        protected static PartIndex KnownParts => LazyParts.Value;
 
         static Lazy<PartIndex> LazyParts {get;} 
             = new Lazy<PartIndex>(PartIndex.Build);        
@@ -46,15 +46,14 @@ namespace Z0
         {
             try
             {
-                Term.Info($"Launching shell");
+                term.inform($"Launching shell");
                 using var shell = new S() as IShell;            
                 shell.Execute(args);
-                //Execute(shell, args);
             }
             catch(Exception e)
             {
-                Term.Error("Unable to launch host");
-                Term.Error(e);
+                term.error("Unable to launch host");
+                term.error(e);
             }
         }
     }    

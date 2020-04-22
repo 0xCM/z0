@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static HexConst;
 
-    public class t_vblend : t_vinx<t_vblend>
+    public class t_vblend : t_inx<t_vblend>
     {            
         public void vblend_256x32f_outline()
         {

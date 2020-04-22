@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    public class t_vbfly : t_vinx<t_vbfly>
+    public class t_vbfly : t_inx<t_vbfly>
     {
         //[0 1 2 3] -> [0 2 1 3]
         public void butterfly_16x64u()

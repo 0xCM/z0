@@ -15,7 +15,7 @@ namespace Z0
 
     public readonly struct CheckPrimalSeq : ICheckPrimalSeq
     {
-
+        public static ICheckPrimalSeq Checker => default(CheckPrimalSeq);
     }
     
     public interface ICheckPrimalSeq : ICheckLengths, ICheckInvariant, ICheckPrimal
@@ -103,7 +103,7 @@ namespace Z0
             var count = length(lhs,rhs);
             for(var i = 0; i< count; i++)
                 if(lhs[i] != rhs[i])
-                    throw failed(ClaimKind.EqItem, ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line));
+                    throw Failed(ClaimKind.EqItem, ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line));
         }
 
         /// <summary>
@@ -165,6 +165,5 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         void eq(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => require(ContentEqual(lhs, rhs), caller, file, line);
-
     }
 }

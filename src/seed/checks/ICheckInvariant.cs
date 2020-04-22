@@ -17,7 +17,7 @@ namespace Z0
 
     public readonly struct CheckInvariant : ICheckInvariant
     {
-
+        public static ICheckInvariant Checker => default(CheckInvariant);
     }
 
     public interface ICheckInvariant : IValidator
@@ -35,7 +35,7 @@ namespace Z0
         }
 
         bool require(bool invariant, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => invariant ? true : throw failed(ClaimKind.Invariant, InvariantFailure(caller, file, line));
+            => invariant ? true : throw Failed(ClaimKind.Invariant, InvariantFailure(caller, file, line));
 
         /// <summary>
         /// Asserts the operand is true

@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vreverse : t_vinx<t_vreverse>
+    public class t_vreverse : t_inx<t_vreverse>
     {
         public void vreverse()
         {

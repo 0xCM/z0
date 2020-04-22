@@ -10,25 +10,6 @@ namespace Z0
     
     using static Seed;
 
-    public static class CheckSpecs
-    {   
-
-    }
-
-
-    public interface ISFChecker128Api<S,T> : ISFuncApi<S, Vector128<T>, bit>
-        where S : unmanaged
-        where T : unmanaged
-    {
-        
-    }
-
-    public interface ISFChecker256Api<S,T> : ISFuncApi<S, Vector256<T>, bit>
-        where S : unmanaged
-        where T : unmanaged
-    {
-        
-    }
 
     public class CheckExec  : UnitTest<CheckExec>
     {
@@ -44,7 +25,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where F : ISVFactory128Api<S,T>
-            where C : ISFChecker128Api<S,T>
+            where C : ICheckSF128<S,T>
         {
             for(var i=0; i < RepCount; i++)
             {
@@ -59,7 +40,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where F : ISVFactory256Api<S,T>
-            where C : ISFChecker256Api<S,T>
+            where C : ICheckSF256<S,T>
         {
             for(var i=0; i< RepCount; i++)
             {

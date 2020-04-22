@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vdec : t_vinx<t_vdec>
+    public class t_vdec : t_inx<t_vdec>
     {
         public void vdec_check()
         {
@@ -44,11 +44,11 @@ namespace Z0
 
         void vdec_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckUnaryOp(VSvc.vdec(w,t),w,t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vdec(w,t),w,t);
             
         void vdec_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckUnaryOp(VSvc.vdec(w,t),w,t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vdec(w,t),w,t);
 
     }
 }

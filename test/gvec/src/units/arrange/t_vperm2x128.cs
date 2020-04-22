@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vperm2x128 : t_vinx<t_vperm2x128>
+    public class t_vperm2x128 : t_inx<t_vperm2x128>
     {
         static string describe<T>(Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
             where T : unmanaged

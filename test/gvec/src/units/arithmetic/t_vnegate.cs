@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vnegate : t_vinx<t_vnegate>
+    public class t_vnegate : t_inx<t_vnegate>
     {
 
         public void vnegate_check()
@@ -48,11 +48,11 @@ namespace Z0
 
         void vnegate_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvc.vnegate(w,t), w, t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vnegate(w,t), w, t);
             
         void vnegate_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvc.vnegate(w,t), w, t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vnegate(w,t), w, t);
 
    }
 }

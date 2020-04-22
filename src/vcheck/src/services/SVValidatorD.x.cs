@@ -8,33 +8,33 @@ namespace Z0
 
     static class SVValidatorDFactories
     {
-        public static IVUnaryOpMatch128D<T> UnaryOpMatchD<T>(this ITestContext context, W128 w, T t = default)
+        public static ICheckUnarySF128D<T> UnaryOpMatchD<T>(this ITestContext context, W128 w, T t = default)
             where T : unmanaged
                 => new SVUnaryValidator128D<T>(context);
 
-        public static ISVUnaryOpMatch256D<T> UnaryOpMatchD<T>(this ITestContext context, W256 w, T t = default)
+        public static ICheckUnarySF256D<T> UnaryOpMatchD<T>(this ITestContext context, W256 w, T t = default)
             where T : unmanaged
                 => new SVUnaryValidator256D<T>(context);
 
-        public static ISVBinaryOpMatch128D<T> BinaryOpMatchD<T>(this ITestContext context, W128 w, T t = default)
+        public static ICheckBinarySF128D<T> BinaryOpMatchD<T>(this ITestContext context, W128 w, T t = default)
             where T : unmanaged
                 => new SVBinaryOp128DApiComparer<T>(context);
 
-        public static ISVBinaryOpMatch256D<T> BinaryOpMatchD<T>(this ITestContext context, W256 w, T t = default)
+        public static ICheckBinarySF256D<T> BinaryOpMatchD<T>(this ITestContext context, W256 w, T t = default)
             where T : unmanaged
                 => new VBinaryValidator256D<T>(context);
 
-        public static ISVShiftMatch128D<T> ShiftOpMatchD<T>(this ITestContext context, W128 w, T t = default)
+        public static ICheckShiftSF128D<T> ShiftOpMatchD<T>(this ITestContext context, W128 w, T t = default)
             where T : unmanaged
                 => new SVShiftValidator128D<T>(context);
 
-        public static IVShiftMatch256D<T> ShiftOpMatchD<T>(this ITestContext context, W256 w, T t = default)
+        public static ICheckShiftSF256D<T> ShiftOpMatchD<T>(this ITestContext context, W256 w, T t = default)
             where T : unmanaged
                 => new SVShiftValidator256D<T>(context);
 
-        public static ISVTernaryOpMatch128D<T> TernaryOpMatchD<T>(this ITestContext context, W128 w, T t = default)
+        public static ICheckTernarySF128D<T> TernaryOpMatchD<T>(this ITestContext context, W128 w, T t = default)
             where T : unmanaged
-                => new SVTernaryValidator128D<T>(context);
+                => SVTernaryValidator128D<T>.Create(context);
 
         public static ISVTernaryOpMatch256D<T> TernaryOpMatchD<T>(this ITestContext context, W256 w, T t = default)
             where T : unmanaged

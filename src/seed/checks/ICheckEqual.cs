@@ -13,23 +13,23 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    public readonly struct CheckEqual : ICheckEqual
+    {
+        public static ICheckEqual Checker => default(CheckEqual);
+    }
+
     public interface ICheckEqual : IValidator
     {
         void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(!object.Equals(lhs,rhs))
-                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }            
 
         void neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(object.Equals(lhs,rhs))
-                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }            
-    }
-
-    public readonly struct CheckEqual : ICheckEqual
-    {
-        public static ICheckEqual Checker => default(CheckEqual);
     }
 }

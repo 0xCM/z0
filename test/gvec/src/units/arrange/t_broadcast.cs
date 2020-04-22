@@ -7,7 +7,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_broadcast : t_vinx<t_broadcast>
+    public class t_broadcast : t_inx<t_broadcast>
     {
         public void broadcast_outline()
         {

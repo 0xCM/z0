@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vpatterns : t_vinx<t_vpatterns>
+    public class t_vpatterns : t_inx<t_vpatterns>
     {
         public void vunits_check()
         {
@@ -73,19 +73,19 @@ namespace Z0
 
         protected void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
+                => VSvcChecks.CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
 
         protected void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
+                => VSvcChecks.CheckPattern(VSvc.vunits(w,t), Vectors.vbroadcast(w,one(t)));
 
         protected void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
+                => VSvcChecks.CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
 
         protected void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
+                => VSvcChecks.CheckPattern(VSvc.vones(w,t), Vectors.vbroadcast(w,ones(t)));
 
    }
 }

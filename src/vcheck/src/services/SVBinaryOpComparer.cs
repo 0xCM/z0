@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Vectors;
     
-    sealed class SVBinaryOp128DApiComparer<T> : OperatorComparer<W128,T>, ISVBinaryOpMatch128D<T>
+    sealed class SVBinaryOp128DApiComparer<T> : CheckOperatorSF<W128,T>, ICheckBinarySF128D<T>
         where T : unmanaged
     {
         public SVBinaryOp128DApiComparer(ITestContext context, bool xzero = false)
@@ -20,7 +20,7 @@ namespace Z0
 
         N128 w => default;
 
-        void ISVBinaryOpMatch128D<T>.CheckMatch<F>(F f)
+        void ICheckBinarySF128D<T>.CheckMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);
@@ -52,7 +52,7 @@ namespace Z0
         }
     }
 
-    sealed class VBinaryValidator256D<T> : OperatorComparer<W256,T>,  ISVBinaryOpMatch256D<T>
+    sealed class VBinaryValidator256D<T> : CheckOperatorSF<W256,T>,  ICheckBinarySF256D<T>
         where T : unmanaged
     {
         public VBinaryValidator256D(ITestContext context, bool xzero = false)
@@ -63,7 +63,7 @@ namespace Z0
 
         N256 w => default;
 
-        void ISVBinaryOpMatch256D<T>.CheckMatch<F>(F f)
+        void ICheckBinarySF256D<T>.CheckMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);

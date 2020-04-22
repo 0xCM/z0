@@ -8,7 +8,6 @@ namespace Z0
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
     
-
     using static Seed;
 
     public interface IClocked

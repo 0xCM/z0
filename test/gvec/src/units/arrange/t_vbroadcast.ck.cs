@@ -14,25 +14,24 @@ namespace Z0
     static class VChecks
     {
 
-
        [MethodImpl(Inline)]
-       public static VBroadcastCheck128<S, T> vbroadcast<S,T>(N128 w, S s = default, T t = default)
+       public static VBroadcastCheck128<S,T> vbroadcast<S,T>(N128 w, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => VBroadcastCheck128<S, T>.Op;
+                => VBroadcastCheck128<S,T>.Op;
 
        [MethodImpl(Inline)]
-       public static VBroadcastCheck256<S, T> vbroadcast<S,T>(N256 w, S s = default, T t = default)
+       public static VBroadcastCheck256<S,T> vbroadcast<S,T>(N256 w, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => VBroadcastCheck256<S, T>.Op;
+                => VBroadcastCheck256<S,T>.Op;
     }
 
-    public readonly struct VBroadcastCheck128<S, T> : ISFChecker128Api<S, T>
+    public readonly struct VBroadcastCheck128<S,T> : ICheckSF128<S,T>
         where S : unmanaged
         where T : unmanaged
     {
-        public static VBroadcastCheck128<S, T> Op => default;
+        public static VBroadcastCheck128<S,T> Op => default;
         
         public const string Name = "vbroadcast_check";
 
@@ -51,11 +50,11 @@ namespace Z0
         }
     }
 
-    public readonly struct VBroadcastCheck256<S, T> : ISFChecker256Api<S, T>
+    public readonly struct VBroadcastCheck256<S,T> : ICheckSF256<S,T>
         where S : unmanaged
         where T : unmanaged
     {
-        public static VBroadcastCheck256<S, T> Op => default;
+        public static VBroadcastCheck256<S,T> Op => default;
 
         public Vec256Kind<T> VKind => default;
         

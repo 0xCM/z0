@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vlo : t_vinx<t_vlo>
+    public class t_vlo : t_inx<t_vlo>
     {   
         public void vlo_128x8u()
             => vlo_check<byte>(n128,z8);

@@ -5,10 +5,6 @@
 namespace Z0
 {    
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices; 
-    using System.Text;
 
     using static Seed;
 
@@ -19,6 +15,6 @@ namespace Z0
         /// </summary>
         /// <param name="e">The exection to emit</param>
         public static void Report(this Exception e)
-            => Terminal.Get().Error(e);
+            => term.error(e);
     }
 }

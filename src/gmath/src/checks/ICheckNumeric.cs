@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
-    using static AppErrorMsg;
 
     public readonly struct CheckNumeric : ICheckNumeric 
     {
@@ -16,7 +12,7 @@ namespace Z0
     }    
 
     public interface ICheckNumeric : 
-        ICheckGenericNumeric, 
+        ICheckGeneric, 
         ICheckSpans, 
         ICheckClose,
         ICheckPrimalSeq

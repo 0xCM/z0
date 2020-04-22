@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vinc : t_vinx<t_vinc>
+    public class t_vinc : t_inx<t_vinc>
     {
         public void vinc_check()
         {
@@ -44,11 +44,11 @@ namespace Z0
 
         void vinc_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvc.vinc(w,t),w,t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vinc(w,t),w,t);
             
         void vinc_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvc.vinc(w,t),w,t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vinc(w,t),w,t);
 
     }
 }

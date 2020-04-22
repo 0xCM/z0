@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vsub : t_vinx<t_vsub>
+    public class t_vsub : t_inx<t_vsub>
     {
         public void vsub_check()
         {            
@@ -44,10 +44,10 @@ namespace Z0
 
         void vsub_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vsub(w,t),w,t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vsub(w,t),w,t);
             
         void vsub_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vsub(w,t),w,t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vsub(w,t),w,t);
     }
 }

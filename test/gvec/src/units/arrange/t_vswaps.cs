@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
     using static Vectors;
 
-    public class t_vswaps : t_vinx<t_vswaps>
+    public class t_vswaps : t_inx<t_vswaps>
     {        
         public void vswap_128x8u()
         {

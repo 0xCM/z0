@@ -21,10 +21,10 @@ namespace Z0
         /// </summary>
         /// <param name="id">Identifies the operation under test</param>
         string CaseName(OpIdentity id)
-            => OpUriBuilder.TestCase(ValidatorType, id);
+            => OpUriBuilder.TestCase(HostType, id);
 
         string CaseName([Caller] string label = null)
-            => OpUriBuilder.TestCase(ValidatorType, label);
+            => OpUriBuilder.TestCase(HostType, label);
 
         /// <summary>
         /// Produces a test case identifier predicated on a parametrically-specialized label
@@ -48,12 +48,12 @@ namespace Z0
                 => Identify.sfunc<K>($"{label}_baseline");
 
         string CaseName(ISFuncApi f) 
-            =>$"{owner(ValidatorType)}{Sep}{ValidatorType.Name}{Sep}{f.Id}";
+            =>$"{owner(HostType)}{Sep}{HostType.Name}{Sep}{f.Id}";
 
         string CaseName<W,T>(ISFuncApi f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(ValidatorType, Identify.Op<W,T>(f.Id.Name), true);
+                => CaseName<W,T>(HostType, Identify.Op<W,T>(f.Id.Name), true);
 
         string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth
@@ -84,7 +84,7 @@ namespace Z0
         string CaseName<W,T>(ISFuncApi f, W w, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(ValidatorType, Identify.Op<W,T>(f.Id.Name), generic: generic);
+                => CaseName<W,T>(HostType, Identify.Op<W,T>(f.Id.Name), generic: generic);
 
         /// <summary>
         /// Produces a case name for an identified operation match test

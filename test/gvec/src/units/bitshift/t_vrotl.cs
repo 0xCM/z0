@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vrotl : t_vinx<t_vrotl>
+    public class t_vrotl : t_inx<t_vrotl>
     {
         public void vrotl_check()
         {
@@ -36,11 +36,11 @@ namespace Z0
 
         void vrotl_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckShiftOp(VSvc.vrotl(w,t), w,t);
+                => VSvcChecks.CheckShiftOp(VSvc.vrotl(w,t), w,t);
             
         void vrotl_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckShiftOp(VSvc.vrotl(w,t), w,t);
+                => VSvcChecks.CheckShiftOp(VSvc.vrotl(w,t), w,t);
 
     }
 }

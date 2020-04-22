@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vor : t_vinx<t_vor>
+    public class t_vor : t_inx<t_vor>
     {
         public void vor_check()
         {            
@@ -44,11 +44,11 @@ namespace Z0
 
         void vor_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vor(w,t),w,t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vor(w,t),w,t);
             
         void vor_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vor(w,t),w,t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vor(w,t),w,t);
 
         public void vor_128x8i()
             => vor_check<sbyte>(n128);

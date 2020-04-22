@@ -14,6 +14,8 @@
     <ProjectReference Include="$(BitSpans)" />    
     <ProjectReference Include="$(BitVectors)" />    
     <ProjectReference Include="$(Circuits)" />
+    <ProjectReference Include="$(MathSvc)" />
+
   </ItemGroup>
 
 </Project>

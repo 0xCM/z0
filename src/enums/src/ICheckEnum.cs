@@ -28,7 +28,7 @@ namespace Z0
             where E : unmanaged, Enum
         {
             if(!u64(lhs).Equals(u64(rhs)))
-                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }
     }
 }

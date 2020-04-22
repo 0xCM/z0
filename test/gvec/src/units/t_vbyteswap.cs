@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vbyteswap : t_vinx<t_vbyteswap>
+    public class t_vbyteswap : t_inx<t_vbyteswap>
     {   
         public void vbyteswap_outline()
         {
@@ -70,11 +70,11 @@ namespace Z0
 
         void vbyteswap_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvc.vbyteswap(w,t),w,t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vbyteswap(w,t),w,t);
 
         void vbyteswap_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvc.vbyteswap(w,t),w,t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vbyteswap(w,t),w,t);
 
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
 
     public readonly struct CheckSets : ICheckSets
     {
-
+        public static ICheckSets Checker => default(CheckSets);
     }
 
     public interface ICheckSets : IValidator
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>        
         bool seteq<T>(ISet<T> lhs, ISet<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.SetEquals(rhs) ? true : throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+            => lhs.SetEquals(rhs) ? true : throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
         /// Asserts that a set contains a specified element
@@ -44,6 +44,6 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T"></typeparam>
         bool contains<T>(ISet<T> set, T item, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => set.Contains(item) ? true : throw  failed(ClaimKind.NotIn, AppMsg.Error($"Item {item} not in set"));
+            => set.Contains(item) ? true : throw  Failed(ClaimKind.NotIn, AppMsg.Error($"Item {item} not in set"));
     }
 }

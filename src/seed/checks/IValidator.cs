@@ -12,15 +12,40 @@ namespace Z0
 
     public interface IValidator
     {
-        Type ValidatorType => GetType();
+        Type HostType => GetType();
         
         /// <summary>
         /// Creates, but does not throw, a claim exception
         /// </summary>
-        /// <param name="op">The kind of claim that failed</param>
+        /// <param name="claim">The sort of claim that failed</param>
         /// <param name="msg">The failure description</param>
-        ClaimException failed(ClaimKind op, IAppMsg msg)    
-            => ClaimException.Define(op, msg);
+        ClaimException Failed(ClaimKind claim, IAppMsg msg)    
+            => ClaimException.Define(claim, msg);
+
+        /// <summary>
+        /// Handles a claim failure by throwing an exception
+        /// </summary>
+        /// <param name="claim">The sort of claim that failed</param>
+        void OnFailure(ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw Failed(claim, caller, file,line);
+
+        /// <summary>
+        /// Raises an exception if an invariant does not hold
+        /// </summary>
+        /// <param name="condition">The invariant state</param>
+        /// <param name="claim">The sort of claim that failed</param>
+        void Require(bool condition, ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        {
+            if(!condition)
+                throw Failed(claim,caller,file,line);
+        }
+
+        /// <summary>
+        /// Creates, but does not throw, a claim exception
+        /// </summary>
+        /// <param name="claim">The sort of claim that failed</param>
+        ClaimException Failed(ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)    
+            => Failed(claim, AppMsg.Error("failed", caller, file,line));
 
         /// <summary>
         /// Fails unconditionally with a message
@@ -29,11 +54,11 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        void failwith(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw failed(ClaimKind.Fail, AppMsg.Error(msg, caller, file,line));
+        void FailWith(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw Failed(ClaimKind.Fail, AppMsg.Error(msg, caller, file,line));
 
-        void fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw failed(ClaimKind.Fail, AppMsg.Error("failed", caller, file,line));
+        void Fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw Failed(ClaimKind.Fail, AppMsg.Error("failed", caller, file,line));
     }
 
     public interface IValidator<I> : IValidator

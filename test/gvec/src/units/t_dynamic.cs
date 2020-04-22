@@ -13,7 +13,7 @@ namespace Z0
     using static Seed;
     using static Kinds;
 
-    public class t_dynamic : t_vinx<t_dynamic>
+    public class t_dynamic : t_inx<t_dynamic>
     {   
         public void check_blocks()
         {

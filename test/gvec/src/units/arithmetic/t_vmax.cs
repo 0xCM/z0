@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vmax : t_vinx<t_vmax>
+    public class t_vmax : t_inx<t_vmax>
     {
         public void vmax_check()
         {
@@ -47,10 +47,10 @@ namespace Z0
 
         void vmax_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vmax(w,t), w, t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vmax(w,t), w, t);
             
         void vmax_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vmax(w,t), w, t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vmax(w,t), w, t);
     }
 }

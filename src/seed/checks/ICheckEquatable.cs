@@ -26,7 +26,7 @@ namespace Z0
             where T : IEquatable<T>
         {
             if(!lhs.Equals(rhs))
-                throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }        
     }    
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
     using static HexConst;
 
-    public class t_vmaskstore : t_vinx<t_vmaskstore>
+    public class t_vmaskstore : t_inx<t_vmaskstore>
     {   
         public void vmstore_128x8()
         {

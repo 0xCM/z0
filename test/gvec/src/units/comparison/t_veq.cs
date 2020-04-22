@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_veq : t_vinx<t_veq>
+    public class t_veq : t_inx<t_veq>
     {     
         public void veq_check()
         {            
@@ -77,7 +77,7 @@ namespace Z0
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = Blocks.alloc<T>(w, x.BlockCount);
             result.Fill(ones(t));
-            CheckExplicit(f,x,x,result, name);
+            VSvcChecks.CheckExplicit(f,x,x,result, name);
         }
 
         void veq_basecase<T>(W256 w, T t = default)
@@ -89,15 +89,15 @@ namespace Z0
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = Blocks.alloc<T>(w, x.BlockCount);
             result.Fill(ones(t));
-            CheckExplicit(f,x,x,result,name);
+            VSvcChecks.CheckExplicit(f,x,x,result,name);
         }
 
         void veq_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.veq(w,t),w,t);
+                => VSvcChecks.CheckBinaryOp(VSvc.veq(w,t),w,t);
 
         void veq_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.veq(w,t),w,t);            
+                => VSvcChecks.CheckBinaryOp(VSvc.veq(w,t),w,t);            
     }
 }

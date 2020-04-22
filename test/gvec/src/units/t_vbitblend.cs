@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vbitblend : t_vinx<t_vbitblend>
+    public class t_vbitblend : t_inx<t_vbitblend>
     {                
         public void vbitblend_basecases()
         {

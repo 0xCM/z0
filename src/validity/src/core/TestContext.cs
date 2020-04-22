@@ -12,10 +12,10 @@ namespace Z0
     
     using static Seed;
     
-
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public class TestContext<U> : ITestContext, IConsoleNotifier, IAppMsgContext  
+    public abstract class TestContext<U> : ITestContext<U>
+        where U : TestContext<U>
     {
         public ITestContext Context {get;}
 
@@ -95,88 +95,31 @@ namespace Z0
         protected void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Context.ReportBenchmark(name,opcount, duration);
 
-        /// <summary>
-        /// Manages the execution of an action test case
-        /// </summary>
-        /// <param name="f">The action under test</param>
-        /// <param name="id">The action name</param>
-        /// <param name="clock">Accumulates the test case execution time</param>
-        public void CheckAction(Action f, OpIdentity id)
-        {
-            var succeeded = true;
-            var count = counter();
-            
-            count.Start();
-            try
-            {
-                f();
-            }
-            catch(Exception e)
-            {
-                term.errlabel(e, id.Identifier);
-                succeeded = false;
-            }
-            finally
-            {
-                Context.ReportCaseResult(CaseName(id), succeeded,count);
-            }
-        }
-
-        /// <summary>
-        /// Manages the execution of an action test case
-        /// </summary>
-        /// <param name="f">The action under test</param>
-        /// <param name="name">The action name</param>
-        /// <param name="clock">Accumulates the test case execution time</param>
-        public void CheckAction(Action f, string name)
-        {
-            var succeeded = true;
-            var count = counter();
-            
-            count.Start();
-            try
-            {
-                f();
-            }
-            catch(Exception e)
-            {
-                term.errlabel(e, name);
-                succeeded = false;
-            }
-            finally
-            {
-                Context.ReportCaseResult(name,succeeded,count);
-            }
-        }
+        protected void CheckAction(Action f, string name)
+            => Context.CheckAction(f,name);         
  
-        ITestCaseIdentity CaseIdentity => this;
-
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
-                => CaseIdentity.CaseName<C>(root);
+                => Context.CaseName<C>(root);
 
         protected string CaseName(OpIdentity id)
-            => CaseIdentity.CaseName(id);
-
-        protected string CaseName<C>(OpIdentity id, C t = default)
-            where C : unmanaged
-                => CaseIdentity.CaseName<C>(id);
+            => Context.CaseName(id);
 
         protected OpIdentity SubjectId<T>(string label, T t = default)
             where T : unmanaged
-                => CaseIdentity.CaseOpId<T>(label);
+                => Context.CaseOpId<T>(label);
                 
         protected OpIdentity BaselineId<K>(string label,K t = default)
             where K : unmanaged
-                => CaseIdentity.BaselineId<K>(label);
+                => Context.BaselineId<K>(label);
 
         protected string CaseName<W,C>([Caller] string label = null, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => CaseIdentity.CaseName<W,C>(label, generic);
+                => Context.CaseName<W,C>(label, generic);
 
         protected string CaseName(ISFuncApi f) 
-            => CaseIdentity.CaseName(f);
+            => Context.CaseName(f);
 
         protected void Notify(string msg, AppMsgKind? severity = null)
             => Queue.Notify(msg, severity);
@@ -190,13 +133,8 @@ namespace Z0
         IAppMsg TraceMsg(object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
             => AppMsg.Colorize(text.concat(text.concat(caller).PadRight(CasePadding), "| ", msg), color);
 
-        ITracer Tracer => ITracer.Create(this,CasePadding);
-
         void trace(IAppMsg msg)
-        {
-            //Queue.NotifyConsole(msg);
-            Tracer.trace(msg);
-        }
+            => NotifyConsole(msg);
 
         protected void error(object msg)
             => trace(AppMsg.Error(msg));

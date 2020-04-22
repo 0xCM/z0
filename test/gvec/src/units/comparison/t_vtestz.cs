@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vtestz : t_vinx<t_vtestz>
+    public class t_vtestz : t_inx<t_vtestz>
     {
         public void vtestz_128x8i()
             => vtestz_check<sbyte>(n128);

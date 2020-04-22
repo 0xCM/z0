@@ -8,13 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Seed;
-    using static AppErrorMsg;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckSpans : IValidator, ICheckGenericNumeric
+    public readonly struct CheckSpans : ICheckSpans
+    {
+        public static ICheckSpans Checker => default(CheckSpans);
+    }
+
+    public interface ICheckSpans : IValidator, ICheckGeneric
     {
         void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

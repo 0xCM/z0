@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vhi : t_vinx<t_vhi>
+    public class t_vhi : t_inx<t_vhi>
     {   
         public void vhi_128x8u()
             => vhi_check<byte>(n128,z8);

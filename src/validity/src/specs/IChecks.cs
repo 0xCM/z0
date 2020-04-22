@@ -17,7 +17,6 @@ namespace Z0
         ICheckInvariant,
         ICheckSets,
         ICheckNull        
-
     {
 
     }

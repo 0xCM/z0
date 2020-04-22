@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vpop : t_vinx<t_vpop>
+    public class t_vpop : t_inx<t_vpop>
     {
         public void vpop_check()
         {

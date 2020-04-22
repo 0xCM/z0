@@ -15,7 +15,6 @@ namespace Z0.Logix
     {
         protected override ICheckVectorBits Claim => CheckVectorBits.Checker;        
 
-
         public void check_not_scalar_expr()  
         {      
             check_scalar_expr<byte>(UnaryLogicKind.Not);
@@ -275,7 +274,7 @@ namespace Z0.Logix
 
                 var z3 = SC(sa, sb, sc);
                 if(!NumericOps.same(z3, z0.Scalar))
-                    Claim.failwith($"Evalutation of ternary op {id} failed");
+                    Claim.FailWith($"Evalutation of ternary op {id} failed");
 
                 var v1 = Vectors.vbroadcast(n256,sa);
                 var v2 = Vectors.vbroadcast(n256,sb);

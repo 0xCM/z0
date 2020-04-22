@@ -10,13 +10,12 @@ namespace Z0
     using static Seed;
     using static AppErrorMsg;
 
-
     public readonly struct CheckVectorBits : ICheckVectorBits, IValidator<CheckVectorBits,ICheckVectorBits>
     {        
         public static ICheckVectorBits Checker => default(CheckVectorBits);         
     }
 
-    public interface ICheckVectorBits : ICheckBitVectors, ICheckBitStrings, ICheckNumeric, ICheckVectors
+    public interface ICheckVectorBits : ICheckBitVectors, ICheckBitStrings, ICheckNumeric, ICheckVectors, ICheckBitSpans
     {
             
     }

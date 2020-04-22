@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vmin : t_vinx<t_vmin>
+    public class t_vmin : t_inx<t_vmin>
     {
         public void vmin_check()
         {
@@ -47,14 +47,10 @@ namespace Z0
 
         void vmin_check<T>(N128 w, T t = default)
             where T : unmanaged
-        {
-            var f = VSvc.vmin(w,t);
-            Validator<T>().Validate(f, f.Class, w);
-        }
-
+                => VSvcChecks.CheckBinaryOp(VSvc.vmin(w,t), w, t);
             
         void vmin_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => Comparisons.CheckBinaryOp(VSvc.vmin(w,t), w, t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vmin(w,t), w, t);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-    public class t_vsrlv : t_vinx<t_vsrlv>
+    public class t_vsrlv : t_inx<t_vsrlv>
     {
         public void vsrlv_check()
         {
@@ -50,7 +50,7 @@ namespace Z0
                 return (x,offsets);
             }
 
-            CheckScalarMatch(VSvc.vsrlv(w,t),@case);            
+            VSvcChecks.CheckCells(VSvc.vsrlv(w,t),@case);            
         }
 
         void vsrlv_check<T>(N256 w, T t = default)
@@ -65,7 +65,7 @@ namespace Z0
                 return (x,offsets);
             }
 
-            CheckScalarMatch(VSvc.vsrlv(w,t),@case);            
+            VSvcChecks.CheckCells(VSvc.vsrlv(w,t),@case);            
         }
     }
 }

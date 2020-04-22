@@ -17,28 +17,28 @@ namespace Z0
 
     public static class ServiceFactory
     {
-        public static ISFMatch<T,T> UnaryOpMatch<T>(this ITestContext context, T t = default)
+        public static ICheckSF<T,T> UnaryOpMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new SFOpMatch1<T>(context);
+                => new CheckUnaryOpSF<T>(context);
 
-        public static ISFMatch<T,T,T> BinaryOpMatch<T>(this ITestContext context, T t = default)
+        public static ICheckSF<T,T,T> BinaryOpMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new SBinaryOpComparer<T>(context);
+                => new CheckBinaryOpSF<T>(context);
 
-        public static ISFMatch<T,T,T> BinaryOpMatch<T>(this ITestContext context, bool xzero, T t = default)
+        public static ICheckSF<T,T,T> BinaryOpMatch<T>(this ITestContext context, bool xzero, T t = default)
             where T : unmanaged
-            => new SBinaryOpComparer<T>(context,xzero);
+            => new CheckBinaryOpSF<T>(context,xzero);
 
-        public static ISFMatch<T,T,T,T> TernaryOpMatch<T>(this ITestContext context, bool xzero = false, T t = default)
+        public static ICheckSF<T,T,T,T> TernaryOpMatch<T>(this ITestContext context, bool xzero = false, T t = default)
             where T : unmanaged
-                => new SFOpMatch3<T>(context,xzero);
+                => new CheckTernaryOpSF<T>(context,xzero);
 
-        public static ISFMatch<T,T,bit> BinaryPredicateMatch<T>(this ITestContext context, T t = default)
+        public static ICheckSF<T,T,bit> BinaryPredicateMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new SBinaryPredMatch<T>(context);
+                => new CheckBinaryPredSF<T>(context);
 
-        public static ISFMatch<T,T,T,bit> TernaryPredicateComparer<T>(this ITestContext context, T t = default)
+        public static ICheckSF<T,T,T,bit> TernaryPredicateComparer<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new STernaryPredMatch<T>(context);        
+                => new CheckTernaryPredSF<T>(context);        
     }
 }

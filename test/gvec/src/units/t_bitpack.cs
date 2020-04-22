@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_bitpack : t_vinx<t_bitpack>
+    public class t_bitpack : t_inx<t_bitpack>
     {
         void pack_32x4()
         {

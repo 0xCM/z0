@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vbroadcast : t_vinx<t_vbroadcast>
+    public class t_vbroadcast : t_inx<t_vbroadcast>
     {
         public void vbroadcast_check()        
         {
@@ -49,10 +49,10 @@ namespace Z0
 
         protected void vbroadcast_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckFactory(w, VSvc.vbroadcast(w,t,t), VChecks.vbroadcast(w,t,t),t,t);            
+                => VSvcChecks.CheckFactory(w, VSvc.vbroadcast(w,t,t), VChecks.vbroadcast(w,t,t),t,t);            
 
         protected void vbroadcast_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckFactory(w, VSvc.vbroadcast(w,t,t), VChecks.vbroadcast(w,t,t),t,t);            
+                => VSvcChecks.CheckFactory(w, VSvc.vbroadcast(w,t,t), VChecks.vbroadcast(w,t,t),t,t);            
     }
 }

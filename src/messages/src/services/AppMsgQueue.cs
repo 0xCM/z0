@@ -24,20 +24,18 @@ namespace Z0
         List<IAppMsg> Messages {get;} 
 
         [MethodImpl(Inline)]
-        public static AppMsgQueue Create(params IAppMsg[] src)
-            => new AppMsgQueue(src);
+        public static AppMsgQueue Create()
+            => new AppMsgQueue();
 
         [MethodImpl(Inline)]
-        AppMsgQueue(params IAppMsg[] src)
+        AppMsgQueue()
         {
-            this.Messages = src.ToList();
-            this.Next += BlackHole;
+            this.Messages = new List<IAppMsg>();
+            this.Next = x => {};
         }
 
-        void BlackHole(IAppMsg msg) { }
-
-        void Relay(IAppMsg msg)
-            => Next(msg);
+        [MethodImpl(Inline)]
+        void Relay(IAppMsg msg) => Next(msg);
 
         public IReadOnlyList<IAppMsg> Dequeue()
         {

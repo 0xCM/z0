@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vabs : t_vinx<t_vabs>
+    public class t_vabs : t_inx<t_vabs>
     {
         public void vabs_check()
         {
@@ -35,11 +35,11 @@ namespace Z0
 
         void vabs_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvc.vabs(w,t),w,t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vabs(w,t),w,t);
             
         void vabs_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvc.vabs(w,t),w,t);
+                => VSvcChecks.CheckUnaryOp(VSvc.vabs(w,t),w,t);
     }
 
 }

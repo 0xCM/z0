@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vrotx : t_vinx<t_vrotx>
+    public class t_vrotx : t_inx<t_vrotx>
     {
         public void vrotrx_128x8u()
         {

@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vxor : t_vinx<t_vxor>
+    public class t_vxor : t_inx<t_vxor>
     {
         public void vxor_check()
         {            
@@ -44,10 +44,10 @@ namespace Z0
 
         void vxor_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vxor(w,t),w,t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vxor(w,t),w,t);
             
         void vxor_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvc.vxor(w,t),w,t);
+                => VSvcChecks.CheckBinaryOp(VSvc.vxor(w,t),w,t);
      }
 }

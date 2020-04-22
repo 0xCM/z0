@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-    public class t_vgather : t_vinx<t_vgather>
+    public class t_vgather : t_inx<t_vgather>
     {
         const int BufferSize = 1024*8;
 

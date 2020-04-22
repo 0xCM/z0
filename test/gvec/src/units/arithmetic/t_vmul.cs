@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-    public class tv_mul : t_vinx<tv_mul>
+    public class tv_mul : t_inx<tv_mul>
     {
         public void vmul_128x8i()
         {
@@ -172,7 +172,7 @@ namespace Z0
                 for(var j=0; j< count; j++)
                     eb[j] = uint32(xs[j] * ys[j]);
                 
-                BlockChecks.eq(eb,zb);
+                Claim.eq(eb,zb);
             }
         }
     }

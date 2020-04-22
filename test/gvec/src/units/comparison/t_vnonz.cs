@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vnonz : t_vinx<t_vnonz>
+    public class t_vnonz : t_inx<t_vnonz>
     {
         public void vnonz_check()
         {

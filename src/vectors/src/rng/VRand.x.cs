@@ -241,8 +241,6 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, T t)        
             where T : unmanaged
-                => random.Blocks<T>(w,1).LoadVector();
-                    
-               
+                => random.Blocks<T>(w,1).LoadVector();                                   
     }
 }

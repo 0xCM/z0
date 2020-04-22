@@ -12,7 +12,7 @@ namespace Z0
 
     using K = Kinds;
 
-    class SVValidatorD<T> : ISVFDecomposer<T>
+    class SVValidatorD<T> : ICheckSVF<T>
         where T : unmanaged
     {   
         public ITestContext Context {get;}
@@ -37,16 +37,16 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        static int components<W>(W w = default)
+        static int CellCount<W>(W w = default)
             where W : struct, ITypeWidth
                 => ((int)default(W).TypeWidth)/BitSize.measure<T>();
 
-        public void Validate<F>(F f, K.UnaryOpClass op, W128 w)
+        public void Decompose<F>(F f, K.UnaryOpClass op, W128 w)
             where F : ISVUnaryOp128DApi<T>
         {            
             void run()
             {
-                var cells = components(w);
+                var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -59,13 +59,13 @@ namespace Z0
             Run(f, run, w, op.Generalized);
         }
 
-        public void Validate<F>(F f, K.UnaryOpClass op,  W256 w)
+        public void Decompose<F>(F f, K.UnaryOpClass op,  W256 w)
             where F : ISVUnaryOp256DApi<T>
         {
 
             void run()
             {
-                var cells = components(w);
+                var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -78,12 +78,12 @@ namespace Z0
             Run(f, run, w, op.Generalized);
         }
 
-        public void Validate<F>(F f, K.BinaryOpClass op,  W128 w)
+        public void Decompose<F>(F f, K.BinaryOpClass op,  W128 w)
             where F : ISVBinaryOp128DApi<T>
         {
             void run()
             {
-                var cells = components(w);
+                var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -97,12 +97,12 @@ namespace Z0
             Run(f, run, w, op.Generalized);
         }
 
-        public void Validate<F>(F f, K.BinaryOpClass op,  W256 w)
+        public void Decompose<F>(F f, K.BinaryOpClass op,  W256 w)
             where F : ISVBinaryOp256DApi<T>
         {
             void run()
             {
-                var cells = components(w);
+                var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -124,7 +124,7 @@ namespace Z0
 
             void run()
             {
-                var cells = components(w);
+                var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
@@ -144,7 +144,7 @@ namespace Z0
 
             void run()
             {
-                var cells = components(w);
+                var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);

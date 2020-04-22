@@ -13,12 +13,19 @@ namespace Z0
 
     public sealed class AppMsgExchange : IAppMsgExchange
     {
-        public static IAppMsgExchange Create(IAppMsgQueue queue = null)
-            => new AppMsgExchange(queue ?? AppMsgQueue.Create());
-
         readonly IAppMsgQueue Queue;
 
-        public event Action<IAppMsg> Next;        
+        /// <summary>
+        /// Creates an exchange over an existing queue
+        /// </summary>
+        public static IAppMsgExchange Create(IAppMsgQueue queue)
+            => new AppMsgExchange(queue);
+
+        /// <summary>
+        /// Creates an exchange and underlying queue
+        /// </summary>
+        public static IAppMsgExchange Create()
+            => new AppMsgExchange(AppMsgQueue.Create());
 
         AppMsgExchange(IAppMsgQueue dst)
         {
@@ -29,6 +36,8 @@ namespace Z0
             Queue.Next += Relay;
             Next = x => {};
         }
+
+        public event Action<IAppMsg> Next;        
 
         /// <summary>
         /// Enqueues application messages
