@@ -14,6 +14,8 @@ namespace Z0
 
     readonly struct UriBitsReader : IUriBitsReader
     {
+        public static IUriBitsReader Service => default(UriBitsReader);
+        
         [MethodImpl(Inline)]
         public static IUriBitsReader Create(IContext context)
             => default(UriBitsReader);

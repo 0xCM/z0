@@ -21,5 +21,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<T> reduce<T>(Option<Option<T>> src)
             => src.ValueOrDefault(none<T>());
+
+        /// <summary>
+        /// Implements the canonical join operation that reduces the (LiNQ-monadic) depth by one level
+        /// </summary>
+        /// <param name="src">The optional option</param>
+        /// <typeparam name="T">The encapsulated value</typeparam>
+        [MethodImpl(Inline)]
+        public static IEnumerable<T> reduce<T>(params IEnumerable<T>[] src)
+            => src.SelectMany(x => x);
     }
 }

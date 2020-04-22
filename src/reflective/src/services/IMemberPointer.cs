@@ -5,26 +5,24 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
     using static Seed;
 
-    public interface IMemberPointer : IStateless<MemberPointer, IMemberPointer>
+    public readonly struct MemberPointer : IMemberPointer
+    {
+        public static IMemberPointer Service => default(MemberPointer);
+    }
+
+    public interface IMemberPointer : IService
     {        
         [MethodImpl(Inline)]
         DynamicPointer Pointer(DynamicDelegate src)
-            => DynamicOps.pointer(src);
+            => Delegates.pointer(src);
         
         [MethodImpl(Inline)]
         DynamicPointer Pointer<D>(DynamicDelegate<D> src)
             where D : Delegate
-                => DynamicOps.pointer(src);
-    }
-
-    public readonly struct MemberPointer : IMemberPointer
-    {
-
+                => Delegates.pointer(src);
     }
 }

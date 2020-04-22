@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
     using static Seed;
@@ -15,30 +16,36 @@ namespace Z0
     /// </summary>
     public unsafe readonly struct DynamicPointer
     {
+        [MethodImpl(Inline)]
+        internal static DynamicPointer From(DynamicDelegate src)
+            => new DynamicPointer(src, pointer(src.TargetMethod));
+
         readonly DynamicDelegate Op;
 
-        public readonly IntPtr Ptr;
+        public readonly IntPtr Handle;
 
         [MethodImpl(Inline)]
-        public static DynamicPointer Define(DynamicDelegate d, IntPtr pointer)
-            => new DynamicPointer(d, pointer);
-
-        [MethodImpl(Inline)]
-        public static DynamicPointer Define<D>(DynamicDelegate<D> d, IntPtr pointer)
-            where D : Delegate
-                => Define(d.Untyped, pointer);
-
-        [MethodImpl(Inline)]
-        public DynamicPointer(DynamicDelegate dynamicOp, IntPtr pointer)
+        DynamicPointer(DynamicDelegate op, IntPtr handle)
         {
-            Ptr = pointer;
-            Op = dynamicOp;
+            Op = op;
+            Handle = handle;
+        }
+
+        /// <summary>
+        /// Finds the magical function pointer for a dynamic method
+        /// </summary>
+        /// <param name="method">The source method</param>
+        /// <remarks>See https://stackoverflow.com/questions/45972562/c-sharp-how-to-get-runtimemethodhandle-from-dynamicmethod</remarks>
+        static IntPtr pointer(DynamicMethod method)
+        {
+            var descriptor = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
+            return ((RuntimeMethodHandle)descriptor.Invoke(method, null)).GetFunctionPointer();
         }
 
         public byte* BytePtr
         {
             [MethodImpl(Inline)]
-            get => Ptr.ToPointer<byte>();
+            get => Handle.ToPointer<byte>();
         }
         
         public Delegate DynamicOp 

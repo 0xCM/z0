@@ -11,28 +11,28 @@ namespace Z0
 
     using static Seed;
 
-    public interface IMemberCil : IStateless<MemberCil,IMemberCil>
+    public readonly struct MemberJit : IMemberJit
     {
-        [MethodImpl(Inline)]
-        CilBody cil(DynamicMethod src)
-            => DynamicOps.cil(src);
-
-        [MethodImpl(Inline)]
-        CilBody cil(MethodInfo src)
-            => DynamicOps.cil(src);
-
-        [MethodImpl(Inline)]
-        CilBody cil(DynamicDelegate src)
-            => DynamicOps.cil(src);
-
-        [MethodImpl(Inline)]
-        CilBody cil<D>(DynamicDelegate<D> src)
-            where D : Delegate
-                => DynamicOps.cil(src);        
+        public static IMemberJit Service => default(MemberJit);
     }
-
-    public readonly struct MemberCil : IMemberCil
+    
+    public interface IMemberJit : IService
     {
+        [MethodImpl(Inline)]
+        IntPtr Jit(MethodInfo src)
+            => DynamicOps.jit(src);
 
+        [MethodImpl(Inline)]
+        IntPtr Jit(Delegate src)
+            => DynamicOps.jit(src);           
+
+        [MethodImpl(Inline)]
+        DynamicPointer Jit(DynamicDelegate src)
+            => DynamicOps.jit(src);
+
+        [MethodImpl(Inline)]
+        DynamicPointer Jit<D>(DynamicDelegate<D> d)            
+            where D : Delegate
+                => DynamicOps.jit(d);        
     }
 }

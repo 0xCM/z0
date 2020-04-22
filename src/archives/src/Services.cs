@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IUriBitsReader UriBitsReader(this IContext context)
-            => Z0.UriBitsReader.Create(context);
+            => Z0.UriBitsReader.Service;
 
         [MethodImpl(Inline)]
         public static IHostBitsArchive HostBits(this IContext context, PartId id, FolderPath root = null)
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="bytesep">The byte delimiter</param>
         [MethodImpl(Inline)]
         public static IBitArchiveReader BitArchiveReader(this IContext context)
-            => Z0.BitArchiveReader.New(context);
+            => Z0.BitArchiveReader.Service;
 
         /// <summary>
         /// Instantiates a contextual code writer services that targets a specified file path
@@ -65,38 +65,6 @@ namespace Z0
         /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
         [MethodImpl(Inline)]
         public static IBitArchiveWriter BitArchiveWriter(this IContext context, FilePath dst)
-            => Z0.BitArchiveWriter.Create(context, dst);
-
-
-        [MethodImpl(Inline)]
-        public static ICodeIndexBuilder ApiIndexBuilder(this IContext c, IApiSet api, IMemberLocator locator)
-            => Z0.ApiIndexBuilder.Create(c, api, locator);
-
-
-        /// <summary>
-        /// Reads code from a hex file
-        /// </summary>
-        /// <param name="src">The source path</param>
-        public static ReadOnlySpan<UriBits> ReadUriBits(this IContext context, FilePath src)
-            => context.UriBitsReader().Read(src).ToArray();
-
-        public static OpIndex<UriBits> IndexUriBits(this IContext context, in ApiHostUri host, FolderPath root)
-        {
-            var emissions = Z0.CaptureArchive.Create(root);            
-            var paths = emissions.HostArchive(host);
-            var code = context.ReadUriBits(paths.HexPath);
-            var index = code.ToEnumerable().ToOpIndex();    
-            return index;
-        }
-
-
-        public static ApiCodeIndex ApiCodeIndex(this IContext context, IApiSet api, in ApiHostUri host, FolderPath root)
-        {
-            var indexer = context.ApiIndexBuilder(api, context.MemberLocator());
-            var apiIndex = ApiIndex.Create(context.HostedMembers(api,host));
-            var codeIndex = context.IndexUriBits(host, root);
-            return indexer.CreateIndex(apiIndex, codeIndex);            
-        }
-
+            => Z0.BitArchiveWriter.Create(context, dst);        
     }
 }

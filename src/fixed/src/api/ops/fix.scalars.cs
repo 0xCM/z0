@@ -11,36 +11,36 @@ namespace Z0
 
     partial class Fixed
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Fixed8 fix(byte src)
             => src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Fixed8 fix(sbyte src)
             => src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Fixed16 fix(short src)
             => src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Fixed16 fix(ushort src)
             => src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Fixed32 fix(int src)
             => src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Fixed32 fix(uint src)
             => src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Fixed64 fix(long src)
             => src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Fixed64 fix(ulong src)
-            => src;
+            => src;        
     }
 }

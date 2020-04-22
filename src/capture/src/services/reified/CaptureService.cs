@@ -75,7 +75,7 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = DynamicOps.jit(src).Ptr;
+                var pSrc = DynamicOps.jit(src).Handle;
                 var summary = Parse(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
                 var captured = ApiMemberCapture.Define(id, src.DynamicOp, src.SourceMethod, summary.Bits.Source, summary.Bits.Parsed, outcome.TermCode);                

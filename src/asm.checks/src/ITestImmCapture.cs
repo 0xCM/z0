@@ -13,22 +13,45 @@ namespace Z0.Asm
 
     public interface ITestImmCapture : ITestCapture
     {
-        TestCaseRecord TestImm<T>(W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
+        TestCaseRecord TestImmInjection<T>(W128 w, K.BinaryOpClass k, MethodInfo src, byte imm)
             where T : unmanaged        
         {            
             void check()
             {
                 var injector = Dynamic.BinaryInjector<T>(w);
                 var f = injector.EmbedImmediate(src, imm);
+                var fAsm = CaptureAsm(f).Require();
+                var g = Dynamic.EmitFixedBinary(this[Main], w, fAsm.Code);
 
                 var x = Random.CpuVector<T>(w);
-                var y = Random.CpuVector<T>(w);            
-                var v1 = f.DynamicOp.Invoke(x,y);
-                
-                var asm = CaptureAsm(f).Require();
-                var h = Dynamic.EmitFixedBinary(this[Main], w, asm.Code);
-                var v2 = h(x.ToFixed(),y.ToFixed()).ToVector<T>();
-                veq(v1,v2);
+                var y = Random.CpuVector<T>(w);  
+
+                var v1 = f.DynamicOp.Invoke(x,y); 
+                var v2 = g(x.ToFixed(),y.ToFixed()).ToVector<T>();
+
+                eq(v1,v2);
+            }
+
+            return TestAction(check, CaseName<T>(src.Name));
+        }        
+
+        TestCaseRecord TestImmInjection<T>(W256 w, K.BinaryOpClass k, MethodInfo src, byte imm)
+            where T : unmanaged        
+        {            
+            void check()
+            {
+                var injector = Dynamic.BinaryInjector<T>(w);
+                var f = injector.EmbedImmediate(src, imm);
+                var fAsm = CaptureAsm(f).Require();
+                var g = Dynamic.EmitFixedBinary(this[Main], w, fAsm.Code);
+
+                var x = Random.CpuVector<T>(w);
+                var y = Random.CpuVector<T>(w);  
+
+                var v1 = f.DynamicOp.Invoke(x,y); 
+                var v2 = g(x.ToFixed(),y.ToFixed()).ToVector<T>();
+
+                eq(v1,v2);
             }
 
             return TestAction(check, CaseName<T>(src.Name));
@@ -39,11 +62,12 @@ namespace Z0.Asm
         {                        
             void check()
             {
-                var injector = Dynamic.BinaryInjector<T>(w);
+                var injector = Dynamic.BinaryInjector<T>(w);                
+                var f = injector.EmbedImmediate(method,imm);
+
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
-                
-                var f = injector.EmbedImmediate(method,imm);
+
                 var v1 = f.DynamicOp.Invoke(x,y);
                 var captured = CaptureService.Capture(Exchange.Context, f.Id, f.DynamicOp).Require();            
                 var asm = Decoder.Decode(captured).Require();

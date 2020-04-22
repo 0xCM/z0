@@ -15,24 +15,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> Apply<T>(this UnaryOp128 f, Vector128<T> x)
             where T : unmanaged
-                => f(x.ToFixed()).ToVector<T>();
+                => Fixed.apply(f,x);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> Apply<T>(this UnaryOp256 f, Vector256<T> x)
+           where T : unmanaged
+                => Fixed.apply(f,x);
 
         [MethodImpl(Inline)]
         public static Vector128<T> Apply<T>(this BinaryOp128 f, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
-                => f(x.ToFixed(), y.ToFixed()).ToVector<T>();  
-
-       [MethodImpl(Inline)]
-        public static Vector256<T> Apply<T>(this UnaryOp256 f, Vector256<T> x)
-           where T : unmanaged
-                => f(x.ToFixed()).ToVector<T>();
+                => Fixed.apply(f,x,y);
 
         [MethodImpl(Inline)]
         public static Vector256<T> Apply<T>(this BinaryOp256 f, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
-        {
-            var zf = f(Unsafe.As<Vector256<T>,Fixed256>(ref x), Unsafe.As<Vector256<T>,Fixed256>(ref y));
-            return Unsafe.As<Fixed256,Vector256<T>>(ref zf);
-        }                  
+                => Fixed.apply(f,x,y);
     }
 }

@@ -11,8 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W256)]
+    [StructLayout(LayoutKind.Sequential), Fixed(FixedWidth.W256)]
     public readonly struct Fixed256 : IFixed<Fixed256,W256>
     {
         readonly Fixed128 X0;

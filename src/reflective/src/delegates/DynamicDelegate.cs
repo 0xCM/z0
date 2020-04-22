@@ -37,16 +37,7 @@ namespace Z0
         public readonly Delegate DynamicOp;
 
         [MethodImpl(Inline)]
-        public static DynamicDelegate<D> Create<D>(OpIdentity id, MethodInfo src, DynamicMethod dst)
-            where D : Delegate
-                => new DynamicDelegate<D>(id, src,dst, (D)dst.CreateDelegate(typeof(D)));
-
-        [MethodImpl(Inline)]
-        public static DynamicDelegate Create(OpIdentity id, MethodInfo src, DynamicMethod dst, Type @delegate)
-            => new DynamicDelegate(id, src, dst, dst.CreateDelegate(@delegate));
-
-        [MethodImpl(Inline)]
-        public static DynamicDelegate Create(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
+        public static DynamicDelegate Define(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
             => new DynamicDelegate(id, src, dst, op);
 
         [MethodImpl(Inline)]

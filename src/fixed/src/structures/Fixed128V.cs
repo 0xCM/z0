@@ -11,8 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W128)]
+    [StructLayout(LayoutKind.Sequential),Fixed(FixedWidth.W128)]
     public readonly struct Fixed128V : IFixed<Fixed128V,W128,Vector128<ulong>>
     {
         readonly Vector128<ulong> data;
@@ -36,7 +35,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        Fixed128V(Vector128<ulong> src)
+        internal Fixed128V(Vector128<ulong> src)
         {
             data = src;
         }

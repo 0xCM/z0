@@ -12,24 +12,24 @@ namespace Z0
 
     partial class XTend
     {
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static Vector256<T> Apply<T>(this UnaryOp256V f, Vector256<T> x)
             where T : unmanaged
-                => f(x.ToFixedV()).ToVector<T>();
+                => Fixed.apply(f,x);
 
         [MethodImpl(Inline)]
         public static Vector128<T> Apply<T>(this UnaryOp128V f, Vector128<T> x)
             where T : unmanaged
-                => ToVector<T>(f(x.ToFixedV()));
+                => Fixed.apply(f,x);
 
         [MethodImpl(Inline)]
         public static Vector128<T> ApplyV<T>(this BinaryOp128 f, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
-                => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
+                => Fixed.apply(f,x,y);
 
         [MethodImpl(Inline)]
         public static Vector256<T> ApplyV<T>(this BinaryOp256 f, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
-                => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
+                => Fixed.apply(f,x,y);
     }
 }

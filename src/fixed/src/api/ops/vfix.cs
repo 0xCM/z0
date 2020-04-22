@@ -9,27 +9,28 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed;
+    using static Memories;
 
     partial class Fixed    
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> vector<T>(in Fixed256V src)
+        [MethodImpl(Inline), Op, Closures(Integers)]        
+        public static Fixed128 fix<T>(Vector128<T> x)
             where T : unmanaged
-                => src.ToVector<T>();
+                => Unsafe.As<Vector128<T>,Fixed128>(ref x);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static Vector128<T> vector<T>(in Fixed128V src)
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static Fixed256 fix<T>(Vector256<T> x)
             where T : unmanaged
-                => src.ToVector<T>();
+                => Unsafe.As<Vector256<T>,Fixed256>(ref x); 
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static Fixed128V fix<T>(Vector128<T> x)
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static Fixed128V vfix<T>(Vector128<T> x)
             where T : unmanaged
-                => Fixed128V.From(x);
+                => new Fixed128V(v64u(x));
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static Fixed256V fix<T>(Vector256<T> x)
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static Fixed256V vfix<T>(Vector256<T> x)
             where T : unmanaged
-                => Fixed256V.From(x);
+                => new Fixed256V(v64u(x));
     }
 }

@@ -43,10 +43,10 @@ namespace Z0.Asm
             var dst = CodeArchive.HostArchive(host.UriPath);
             if(dst.HexPath.Exists())
             {
-                var apiIndex = Context.ApiCodeIndex(ApiSet, host.UriPath, CodeArchive.RootDir);
-                Context.Notify($"Correlated {apiIndex.EntryCount} {host} implemented operations with executable code");
+                var code = Archives.code(Context.MemberLocator(), ApiSet, host.UriPath, CodeArchive.RootDir);
+                Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
-                foreach(var api in apiIndex.BinaryOperators)
+                foreach(var api in code.BinaryOperators)
                 {
                     var uri = api.Uri;
                     var oc = OperatorTypeClass.Infer(api.Method).Format();

@@ -217,45 +217,6 @@ namespace Z0.Asm
         //     CheckUnaryImm<ushort>(buffers, exchange, w256, nameof(dvec.vbsll), 3);        
         // }
 
-        public void CheckBinaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W128 w, MethodInfo method, byte imm)
-            where T : unmanaged
-        {            
-            var injector = Dynamic.BinaryInjector<T>(w);
-
-            var x = Random.CpuVector<T>(w);
-            var y = Random.CpuVector<T>(w);
-            
-            var capture = Context.Capture();
-            var decoder = Context.AsmFunctionDecoder();
-
-            var dynop = injector.EmbedImmediate(method,imm);
-            var z1 = dynop.DynamicOp.Invoke(x,y);
-            var captured = capture.Capture(exchange, dynop.Id, dynop.DynamicOp).Require();            
-            var asm = decoder.Decode(captured).Require();
-
-            var f = buffers[Main].EmitFixedBinaryOp<Fixed128>(asm.Code);
-            var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
-            Claim.veq(z1,z2);
-        }
-        
-        public void CheckUnaryImm<T>(in BufferSeq buffers, in CaptureExchange exchange, W256 w, MethodInfo method, byte imm)
-            where T : unmanaged
-        {            
-            var k = Unary;
-            var injector = Dynamic.UnaryInjector<T>(w);                        
-            var dynop = injector.EmbedImmediate(method,imm);
-
-            var x = Random.CpuVector<T>(w);
-            var v1 = dynop.DynamicOp.Invoke(x);
-            
-            var capture = Capture.Capture(exchange, dynop.Id, dynop).Require();            
-            var asm = Decoder.Decode(capture).Require();
-
-            var f = Dynamic.EmitFixedUnary<Fixed256>(buffers[Main], capture.Code);
-            var v2 = f(x.ToFixed()).ToVector<T>();
-            Claim.veq(v1,v2);
-        }
-
         TestCaseRecord TestVectorMatch(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         {
             var catalog = PartId.GVec;

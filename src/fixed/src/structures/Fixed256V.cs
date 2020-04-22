@@ -11,8 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W256)]
+    [StructLayout(LayoutKind.Sequential), Fixed(FixedWidth.W256)]
     public readonly struct Fixed256V : IFixed<Fixed256V,W256,Vector256<ulong>>
     {
         readonly Vector256<ulong> data;
@@ -27,7 +26,7 @@ namespace Z0
                 => new Fixed256V(src.AsUInt64());
 
         [MethodImpl(Inline)]
-        Fixed256V(Vector256<ulong> src)
+        internal Fixed256V(Vector256<ulong> src)
         {
             data = src;
         }

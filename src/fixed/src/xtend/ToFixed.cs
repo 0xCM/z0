@@ -76,66 +76,50 @@ namespace Z0
         public static Fixed64 ToFixed(this ulong x)
             => x;
 
-
         /// <summary>
         /// Creates a fixed 128-bit unary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static UnaryOp128 ToFixed128<T>(this Func<Vector128<T>, Vector128<T>> f)
+        public static UnaryOp128 ToFixed<T>(this Func<Vector128<T>, Vector128<T>> f)
             where T : unmanaged
-                => (Fixed128 a) =>f(a.ToVector<T>()).ToFixed();
+                => Fixed.fix(f);
 
         /// <summary>
         /// Creates a fixed 128-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128 ToFixed128<T>(this Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
+        public static BinaryOp128 ToFixed<T>(this Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
             where T : unmanaged
-                => (Fixed128 a, Fixed128 b) =>f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();
+                => Fixed.fix(f);
 
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256 ToFixed256<T>(this Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
+        public static BinaryOp256 ToFixed<T>(this Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
             where T : unmanaged
-                => (Fixed256 a, Fixed256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixed(); 
+                => Fixed.fix(f);
  
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static UnaryOp256 ToFixed256<T>(this Func<Vector256<T>,Vector256<T>> f)
+        public static UnaryOp256 ToFixed<T>(this Func<Vector256<T>,Vector256<T>> f)
             where T : unmanaged
-                => (Fixed256 a) => f(a.ToVector<T>()).ToFixed();  
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> ToVector<T>(this in Fixed128 src)
-            where T : unmanaged
-                => Unsafe.As<Fixed128,Vector128<T>>(ref Unsafe.AsRef(in src));
+                => Fixed.fix(f);
 
         [MethodImpl(Inline)]
         public static Fixed128 ToFixed<T>(this Vector128<T> x)
             where T : unmanaged
-                => Unsafe.As<Vector128<T>,Fixed128>(ref x);
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> ToVector<T>(this in Fixed128V src)
-            where T : unmanaged
-                => Fixed.vector<T>(src);
+                => Fixed.fix(x);
 
         [MethodImpl(Inline)]
         public static Fixed256 ToFixed<T>(this Vector256<T> x)
             where T : unmanaged
-                => Unsafe.As<Vector256<T>,Fixed256>(ref x);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> ToVector<T>(this in Fixed256 src)
-            where T : unmanaged
-                => Unsafe.As<Fixed256,Vector256<T>>(ref Unsafe.AsRef(in src));
+                => Fixed.fix(x);
     }
 }

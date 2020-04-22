@@ -5,19 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Reflection.Emit;
+    using System.Linq;
     using System.Runtime.CompilerServices;
-
+    using System.Collections.Generic;
+ 
     using static Seed;
 
-    public interface IMemberDynamic : IStateless<MemberDynamic,IMemberDynamic>, IMemberCil, IMemberPointer, IMemberJit  
+    partial class Control
     {
-
-    }
-
-    public readonly struct MemberDynamic : IMemberDynamic
-    {
-
+        public static T[] concat<T>(T[] a, T[] b)
+        {
+            var dst = new T[a.Length + b.Length];
+            a.CopyTo(dst,0);
+            b.CopyTo(dst,a.Length);
+            return dst;
+        }            
     }
 }

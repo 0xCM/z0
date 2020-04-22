@@ -13,22 +13,22 @@ namespace Z0
 
     readonly struct ApiIndexBuilder : ICodeIndexBuilder
     {
-        readonly IContext Context;
-
         readonly IApiSet ApiSet;
+
+        readonly IUriBitsReader BitsReader;
 
         readonly IMemberLocator MemberLocator;
         
         [MethodImpl(Inline)]
-        public static ICodeIndexBuilder Create(IContext context, IApiSet api, IMemberLocator locator)
-            =>  new ApiIndexBuilder(context, api, locator);
+        public static ICodeIndexBuilder Create(IApiSet api, IMemberLocator locator)
+            =>  new ApiIndexBuilder(api, locator);
         
         [MethodImpl(Inline)]
-        ApiIndexBuilder(IContext context, IApiSet api, IMemberLocator locator)
+        ApiIndexBuilder(IApiSet api, IMemberLocator locator)
         {
-            this.Context = context;
             this.ApiSet = api;
             this.MemberLocator = locator;
+            this.BitsReader = UriBitsReader.Service;
         }
         
         ApiMembers HostedMembers(IApiHost host)
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source path</param>
         public ReadOnlySpan<UriBits> LoadCode(FilePath src)
-            => Context.UriBitsReader().Read(src).ToArray();
+            => BitsReader.Read(src).ToArray();
 
         public ApiCodeIndex CreateIndex(ApiHostUri host, FilePath src)
         {

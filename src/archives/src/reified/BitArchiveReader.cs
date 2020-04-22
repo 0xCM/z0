@@ -13,10 +13,8 @@ namespace Z0
 
     readonly struct BitArchiveReader : IBitArchiveReader
     {
-        [MethodImpl(Inline)]
-        public static IBitArchiveReader New(IContext context)
-            => default(BitArchiveReader);
-
+        public static IBitArchiveReader Service => default(BitArchiveReader);
+        
         public IEnumerable<ApiBits> Read(FilePath src)
         {
             foreach(var line in src.ReadLines())

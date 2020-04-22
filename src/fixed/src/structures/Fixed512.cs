@@ -10,8 +10,7 @@ namespace Z0
 
     using static Seed;
 
-    [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W512)]
+    [StructLayout(LayoutKind.Sequential), Fixed(FixedWidth.W512)]
     public readonly struct Fixed512 : IFixed<Fixed512,W512>
     {
         readonly Fixed256 X0;
