@@ -40,7 +40,7 @@ namespace Z0
         protected StreamWriter CaseFileWriter(FileExtension ext, [Caller] string caller = null)
             => CaseFilePath(ext, caller).Writer();
 
-        protected ICheck Claim => ICheck.Checker;
+        protected IChecks Claim => Checks.Checker;
 
         protected ICheckPrimalSeq Primal => Claim;
 

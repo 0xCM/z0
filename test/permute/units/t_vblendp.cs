@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vblendp : UnitTest<t_vblendp>
+    public class t_vblendp : t_permute<t_vblendp>
     {
         bool EmitInfo
             => false;

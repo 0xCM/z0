@@ -11,7 +11,13 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_embed_imm8 : UnitTest<t_embed_imm8>
+    public abstract class t_dynamic<U> : UnitTest<U,CheckVectors,ICheckVectors>
+        where U : t_dynamic<U>,new()
+    {
+
+    }
+
+    public class t_embed_imm8 : t_dynamic<t_embed_imm8>
     {    
         protected override bool TraceDetailEnabled
             => false;

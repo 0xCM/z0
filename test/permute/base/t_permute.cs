@@ -5,12 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
-    public abstract class t_numeric<X> : UnitTest<X,CheckVectors, ICheckVectors>
-        where X : t_numeric<X>, new()
+    using static Seed;
+    using static Vectors;
+    using static Typed;
+
+    public abstract class t_permute<U> : UnitTest<U,CheckVectors,ICheckVectors>
+        where U : t_permute<U>,new()
     {
-        protected new ICheckNumeric Claim => CheckNumeric.Checker;
+
     }
 
 }

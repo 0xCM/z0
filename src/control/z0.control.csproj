@@ -16,6 +16,8 @@
     <ProjectReference Include="$(Extract)" />
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(Validity)" />
+
   </ItemGroup>
 
 </Project>

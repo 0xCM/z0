@@ -34,7 +34,6 @@ namespace Z0
         public static BenchmarkRecord Define(long count, Duration timing, string label)
             => new BenchmarkRecord(Identify.Op(label), count, timing);
 
-
         [MethodImpl(Inline)]
         BenchmarkRecord(OpIdentity id, long opcount, Duration elapsed)
         {

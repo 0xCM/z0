@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
  
-    public sealed class t_perm : UnitTest<t_perm>
+    public sealed class t_perm_ops : t_permute<t_perm_ops>
     {
         public void perm_inc()
         {

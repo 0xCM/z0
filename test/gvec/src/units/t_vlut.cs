@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_vlut : UnitTest<t_vlut>
+    public class t_vlut : t_inx<t_vlut>
     {     
         public void lut16_rep_check()
         {

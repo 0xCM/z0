@@ -15,33 +15,32 @@ namespace Z0
 
     public abstract class SFMatch : ISFCheck
     {
-        /// <summary>
-        /// Allocates and optionally starts a system counter
-        /// </summary>
-        [MethodImpl(Inline)]   
-        protected static SystemCounter counter(bool start = false, int? reps = null) 
-            => SystemCounter.Create(start);
-
-        protected SFMatch(ITestContext context, bool xzero = false, int? reps = null)
-        {
-            this.Context= context;
-            this.RepCount = reps ?? Pow2.T07;
-            this.ExcludeZero = xzero;
-        }
-
         public ITestContext Context {get;}
-
-        protected IPolyrand Random
-            => Context.Random;
-
-        public int RepCount {get;}
 
         protected bool ExcludeZero {get;}
 
-        protected ICheckNumeric Check => CheckNumeric.Checker;
+        protected SFMatch(ITestContext context, bool xzero = false)
+        {
+            this.Context= context;
+            this.ExcludeZero = xzero;
+        }
+
+        protected IPolyrand Random => Checker.Random;
+
+        protected int RepCount  => Checker.RepCount;
+
+        protected ICheckNumeric Claim => CheckNumeric.Checker;
+
+        protected ISFCheck Checker => this;
+
+        [MethodImpl(Inline)]   
+        protected SystemCounter counter(bool start = false) 
+            => Checker.counter(start);
+
+        protected string CaseName(ISFuncApi f)
+            => Checker.CaseName(f);
 
         protected void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Context.Deposit(AppMsg.Error(e, caller,file,line));
+            => Checker.Error(e,caller,file,line);
     }
-
 }

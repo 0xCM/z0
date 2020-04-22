@@ -69,7 +69,7 @@ namespace Z0
         }
 
 
-        ICheck Claim => ICheck.Checker;
+        IChecks Claim => Checks.Checker;
 
         ICheckEquatable Equatable => CheckEquatable.Checker;
 

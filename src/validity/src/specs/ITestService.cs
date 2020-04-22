@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines a test service which is, by definition, a contextual service of test context kind
     /// </summary>
-    public interface ITestService : IService<ITestContext>
+    public interface ITestService : IService<ITestContext>, ICheckOptions, ITestCaseIdentity, IClocked
     {
         
     }

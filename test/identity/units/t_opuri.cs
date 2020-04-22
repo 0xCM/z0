@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_opuri : UnitTest<t_opuri>
+    public class t_opuri : t_identity<t_opuri>
     {
         public void parse_uri_1()
         {

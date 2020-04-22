@@ -11,8 +11,13 @@ namespace Z0
     using static Seed;
     using static Memories;
     
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    
     public interface ITestAction : ITester
     {
+
         /// <summary>
         /// Captures the outcome of an action invocation, identified by a supplied label
         /// </summary>
@@ -30,7 +35,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.errlabel(e, label);
+                Print(e, label);
                 return TestCaseRecord.Define(label, false, clock);
             }
         }
@@ -52,7 +57,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.errlabel(e, label);
+                Print(e, label);
                 return TestCaseRecord.Define(label, false, clock);
             }
         }
@@ -76,7 +81,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.errlabel(e, label);
+                Print(e, label);
                 return TestCaseRecord.Define(CaseName<T>(label), false, clock);
             }
         }

@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_boxed_number : UnitTest<t_boxed_number>
+    public class t_boxed_number : t_numeric<t_boxed_number>
     {
 
         public void convert_1()

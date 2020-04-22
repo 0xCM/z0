@@ -40,7 +40,7 @@ namespace Z0
                 {
                     var x = next_x();
                     var y = next_y();
-                    Check.eq(baseline.Invoke(x,y), subject.Invoke(x,y));
+                    Claim.eq(baseline.Invoke(x,y), subject.Invoke(x,y));
                 }
             }
             catch(Exception e)
@@ -75,7 +75,7 @@ namespace Z0
             {                
                 apply(subject, lhs, rhs, dst);
                 for(var i=0; i<count; i++)
-                    Check.eq(baseline.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
+                    Claim.eq(baseline.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
             }
             catch(Exception e)
             {

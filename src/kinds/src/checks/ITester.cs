@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.ApiTest)]
-
-namespace Z0.Parts
+namespace Z0
 {
-    public sealed class ApiTest : ExecutablePart<ApiTest> 
-    {
-        public override void Execute(params string[] args) => App.Run(args);
-    } 
+    using System;
+    
+    public interface ITester : IClocked, ICheckOptions, ITestCaseIdentity, ICheckError
+    {        
+        
+    }       
 }

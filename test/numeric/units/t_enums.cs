@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public sealed class t_enums : UnitTest<t_enums>
+    public sealed class t_enums : t_numeric<t_enums>
     {
         public enum Choices8u : byte
         {

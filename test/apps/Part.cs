@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+[assembly: PartId(PartId.AppsTest)]
+
+namespace Z0.Parts
 {
-    using System;
-    
-    public interface ITester : ITestOptions, ITestCaseIdentity
-    {        
-        ICheckEquatable Equatable => CheckEquatable.Checker;
-    }       
+    public sealed class ApiTest : ExecutablePart<ApiTest> 
+    {
+        public override void Execute(params string[] args) => App.Run(args);
+    } 
 }

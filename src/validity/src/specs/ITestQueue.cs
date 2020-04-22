@@ -15,6 +15,5 @@ namespace Z0
 
         void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Deposit(BenchmarkRecord.Define(opcount, duration, name));
-
     }
 }

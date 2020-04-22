@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public sealed class t_span_convert : UnitTest<t_span_convert>
+    public sealed class t_span_convert : UnitTest<t_span_convert,CheckNumeric,ICheckNumeric>
     {
 
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)

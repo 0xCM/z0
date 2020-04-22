@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Checks)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Matrix)" />    
     <ProjectReference Include="$(GVec)" />

@@ -10,9 +10,9 @@ namespace Z0
     /// Base type for intrinsic tests
     /// </summary>
     /// <typeparam name="X">The concrete subtype</typeparam>
-    public abstract class t_inx<X> : UnitTest<X>
+    public abstract class t_inx<X> : UnitTest<X, CheckVectors, ICheckVectors>
         where X : t_inx<X>
     {
-        protected new ICheck Claim => ICheck.Checker;
+
     }
 }

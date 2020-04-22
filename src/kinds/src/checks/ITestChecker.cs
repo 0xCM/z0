@@ -2,13 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Checks)]
+namespace Z0
+{
+    using System;
+    using System.Diagnostics;
+    using System.Runtime.CompilerServices;
+    
+    using static Seed;
 
-namespace Z0.Parts
-{        
-    public sealed class Checks : Part<Checks>
+    public interface ITestChecker : ITester, ITestResultSink
     {
-
+        
     }
 }
-

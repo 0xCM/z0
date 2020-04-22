@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static Memories;
     using TL = TypedLogicSpec;
     
-    public class t_typed_identities : UnitTest<t_typed_identities>
+    public class t_typed_identities : LogixTest<t_typed_identities>
     {
         public void check_scalar_identities()
         {

@@ -144,12 +144,11 @@ public enum PartId : ulong
     Memories = 814,  MemoriesTest = Memories | Test,
     
     Identify = 820, Kinds = 822, 
-    
-    Api = 824, ApiTest = Api | Test,
+            
     
     Messages = 840, 
     
-    Apps = 828,
+    Apps = 828, AppsTest = Apps | Test,
 
     Tuples = 826,
     

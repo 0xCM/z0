@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    public abstract class t_identity<U> : UnitTest<U>
+    public abstract class t_identity<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_identity<U>
     {
         

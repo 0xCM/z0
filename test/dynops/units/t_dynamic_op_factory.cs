@@ -10,7 +10,7 @@ namespace Z0
     using T = t_dynamic_op_factories;
     using K = Kinds;
 
-    public class t_dynamic_op_factories : UnitTest<t_dynamic_op_factories>
+    public class t_dynamic_op_factories : t_dynamic<t_dynamic_op_factories>
     {    
         public static uint Suprise() => 17;
 

@@ -15,7 +15,6 @@ namespace Z0
 
     public readonly struct CheckBitStrings : ICheckBitStrings
     {
-
         public static ICheckBitStrings Checker => default(CheckBitStrings);
     }
 

@@ -46,9 +46,7 @@ namespace Z0
 
         public IPolyrand Random => Context.Random;
 
-        public ICheck Check => ICheck.Checker;
-
-        ICheck Claim => ICheck.Checker;
+        ICheckVectors Claim => CheckVectors.Checker;
 
         public IDynamicOps Dynamic => Context.Dynamic;
 

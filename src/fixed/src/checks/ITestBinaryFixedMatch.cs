@@ -8,7 +8,9 @@ namespace Z0
     
     using static Seed;
     using static Memories;
-    
+
+    using static CheckEquatable;    
+
     public interface ITestBinaryFixedMatch : ITestAction, ITestRandom
     {
         /// <summary>
@@ -21,13 +23,14 @@ namespace Z0
         TestCaseRecord Match(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
         {
             var w = w8;
+        
             void check()
             {
                 for(var i=0; i < RepCount; i++)
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Equatable.eq(f(x,y),g(x,y));
+                    Checker.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -52,7 +55,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Equatable.eq(f(x,y),g(x,y));
+                    Checker.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -77,7 +80,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Equatable.eq(f(x,y),g(x,y));
+                    Checker.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -102,7 +105,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Equatable.eq(f(x,y),g(x,y));
+                    Checker.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -127,7 +130,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Equatable.eq(f(x,y),g(x,y));
+                    Checker.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -152,7 +155,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x,y);
                     var b = g(x,y);
-                    Equatable.eq(f(x,y),g(x,y));
+                    Checker.eq(f(x,y),g(x,y));
                 }
             }
 

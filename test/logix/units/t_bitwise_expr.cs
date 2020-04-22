@@ -11,10 +11,9 @@ namespace Z0.Logix
     using static Memories;
     using static TypedLogicSpec;
 
-
-    public class t_bitwise_expr : UnitTest<t_bitwise_expr, ICheckBitThings>
+    public class t_bitwise_expr : UnitTest<t_bitwise_expr, ICheckVectorBits>
     {
-        protected override ICheckBitThings Claim => CheckBitThings.Checker;        
+        protected override ICheckVectorBits Claim => CheckVectorBits.Checker;        
 
 
         public void check_not_scalar_expr()  

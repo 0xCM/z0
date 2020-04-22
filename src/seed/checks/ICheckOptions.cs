@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public interface ITestOptions
+    public interface ICheckOptions
     {
         int RepCount => 128;
 

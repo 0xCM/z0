@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics;
-    using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Memories;
 
-    public interface ITestChecker : ITester, ITestResultSink
+    public interface ITestResultSink : IService, IRecordSink<TestCaseRecord>
     {
-        
+        void ReportCaseResult(string casename, bool succeeded, TimeSpan duration)
+            => Deposit(TestCaseRecord.Define(casename,succeeded,duration));
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
 
-    public abstract class t_mathsvc<X> : UnitTest<X>    
+    public abstract class t_mathsvc<X> : UnitTest<X,CheckNumeric,ICheckNumeric>    
         where X : t_mathsvc<X>, new()
     {
 

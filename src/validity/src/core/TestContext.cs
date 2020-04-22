@@ -249,7 +249,6 @@ namespace Z0
         public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
             => Queue.NotifyConsole(AppMsg.Colorize(content, color));            
 
-
         /// <summary>
         /// Allocates and optionally starts a system counter
         /// </summary>

@@ -10,7 +10,13 @@ namespace Z0
     using static Seed;
     using static Control;
 
-    public class t_cell_type : UnitTest<t_cell_type>
+    public abstract class t_vectors<U> : UnitTest<U,CheckVectors,ICheckVectors>
+        where U : t_vectors<U>,new()
+    {
+
+    }
+
+    public class t_cell_type : t_vectors<t_cell_type>
     {    
         public void check_cell_types()
         {

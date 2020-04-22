@@ -8,29 +8,32 @@ namespace Z0
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
-    using static Memories;
 
-    public interface IStopClocks : IValidator
+    using static Seed;
+
+    public interface IClocked
     {
         /// <summary>
         /// Allocates and optionally starts a system counter
         /// </summary>
         [MethodImpl(Inline)]   
-        SystemCounter counter(bool start = false);
+        SystemCounter counter(bool start = false)
+            => SystemCounter.Create(start);
 
         /// <summary>
         /// Creates a new stopwatch and optionally start it
         /// </summary>
         /// <param name="start">Whether to start the new stopwatch</param>
         [MethodImpl(Inline)]   
-        Stopwatch stopwatch(bool start = true);
-
+        Stopwatch stopwatch(bool start = true)
+            => start ? Stopwatch.StartNew() : new Stopwatch();
+            
         /// <summary>
         /// Captures a stopwatch duration
         /// </summary>
         /// <param name="sw">A running/stopped stopwatch</param>
         [MethodImpl(Inline)]   
-        Duration snapshot(Stopwatch sw);     
+        Duration snapshot(Stopwatch sw)
+            => Duration.Define(sw.ElapsedTicks);                
     }
 }

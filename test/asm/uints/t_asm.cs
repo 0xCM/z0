@@ -14,7 +14,7 @@ namespace Z0.Asm
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using R = Z0.Parts;
 
-    public abstract class t_asm<U> : UnitTest<U>
+    public abstract class t_asm<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_asm<U>
     {
      

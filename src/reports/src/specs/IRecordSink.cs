@@ -11,6 +11,6 @@ namespace Z0
         where R : IRecord
     {
 
-        //void ISink<R>.Deposit(R src) => Report(src);
+        
     }
 }

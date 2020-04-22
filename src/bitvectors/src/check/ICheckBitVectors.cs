@@ -14,27 +14,6 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public readonly struct CheckBitThings : ICheckBitThings, IValidator<CheckBitThings,ICheckBitThings>
-    {        
-        public static ICheckBitThings Checker => default(CheckBitThings);         
-    }
-
-    public interface ICheckBit : IValidator
-    {
-        [MethodImpl(Inline)]
-        bool eq(bit lhs, bit rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
-
-        [MethodImpl(Inline)]
-        bool neq(bit lhs, bit rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line));
-    }
-
-    public interface ICheckBitThings : ICheckBitVectors, ICheckBitStrings, ICheckInvariant, ICheckNumeric, ICheckPrimalSeq, ICheckVectors
-    {
-            
-    }
-
     public readonly struct CheckBitVectors : ICheckBitVectors
     {
         public static ICheckBitVectors Checker => default(CheckBitVectors);
@@ -80,6 +59,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => yea(x.Equals(y), $"{x} != {y}", caller, file, line);
-    }
-   
+    }  
 }

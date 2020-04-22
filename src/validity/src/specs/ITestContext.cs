@@ -10,12 +10,12 @@ namespace Z0
     public interface ITestContext : 
         IServiceAllocation,
         IAppEnv,
-        IStopClocks,
+        IClocked,
         IPolyrandProvider, 
         ICheckAction,
         ITestService,
         ITestQueue,
-        ITestOptions, 
+        ICheckOptions, 
         ITestCaseIdentity, 
         IValidator         
     {

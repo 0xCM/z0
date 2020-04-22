@@ -25,6 +25,20 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
+        bool ContentEqual(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)  
+        {
+            var count = length(lhs,rhs);
+            for(var i=0; i<count; i++)
+                if(refs.skip(lhs, i) != refs.skip(rhs, i))
+                    return false;
+            return true;
+        }      
+
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
         bool ContentEqual(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)  
         {
             var count = length(lhs,rhs);
@@ -102,7 +116,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         void eq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => require(lhs.ContentEqual(rhs), caller, file, line);
+            => require(ContentEqual(lhs,rhs), caller, file, line);
 
         /// <summary>
         /// Asserts content equality for two byte spans

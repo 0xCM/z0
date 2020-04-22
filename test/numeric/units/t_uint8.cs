@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
  
-    public sealed class t_uint8 : UnitTest<t_uint8>
+    public sealed class t_uint8 : t_numeric<t_uint8>
     {
         protected override int CycleCount => Pow2.T24;
 

@@ -14,7 +14,8 @@ namespace Z0
     using static Vectors;
     using static Typed;
 
-    public class t_vperm : UnitTest<t_vperm>
+
+    public class t_vperm : t_permute<t_vperm>
     {
         /// <summary>
         /// Asserts content equality for two natural spans of coincident length

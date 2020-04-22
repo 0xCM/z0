@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public class t_api_query : UnitTest<t_api_query>
+    public class t_api_query : t_identity<t_api_query>
     {
 
 
