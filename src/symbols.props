@@ -85,6 +85,7 @@
 
   <PropertyGroup>    
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
+    <VBlocks>$(Src)vblocks/z0.vblocks.csproj</VBlocks>
     <MathSvc>$(Src)mathsvc/z0.mathsvc.csproj</MathSvc>
     <BitSvc>$(Src)bitsvc/z0.bitsvc.csproj</BitSvc>
   </PropertyGroup>

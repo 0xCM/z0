@@ -14,7 +14,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), Nand]
-        public readonly struct Nand128<T> : IVSvcBinaryOp128<T>
+        public readonly struct Nand128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vnand";

@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), Impl]
-        public readonly struct Impl128<T> : IVSvcBinaryOp128<T>
+        public readonly struct Impl128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vimpl";
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [Closures(Integers), Impl]
-        public readonly struct Impl256<T> : IVSvcBinaryOp256<T>
+        public readonly struct Impl256<T> : ISVBinaryOp256D<T>
             where T : unmanaged
         {
             public const string Name = "vimpl";

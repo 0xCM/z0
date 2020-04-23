@@ -15,7 +15,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(AllNumeric)]
+        [Closures(AllNumeric), Min]
         public readonly struct Min128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {
@@ -35,12 +35,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.min(a,b);
 
-            [MethodImpl(Inline)]
-            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
-                => ref VBlocks.min(a,b,c);
         }
 
-        [NumericClosures(NumericKind.All)]
+        [Closures(AllNumeric), Min]
         public readonly struct Min256<T> : ISVBinaryOp256D<T>
             where T : unmanaged
         {

@@ -14,7 +14,7 @@ namespace Z0
 
     partial class VBlockHosts
     {
-        [NumericClosures(Integers), Select]
+        [Closures(Integers), Select]
         public readonly struct Select128<T> : IBlockedTernaryOp128<T>
             where T : unmanaged
         {
@@ -23,7 +23,7 @@ namespace Z0
                 => ref zip(a,b,c,dst, VSvc.vselect<T>(w128));
         }
 
-        [NumericClosures(Integers), Select]
+        [Closures(Integers), Select]
         public readonly struct Select256<T> : IBlockedTernaryOp256<T>
             where T : unmanaged
         {

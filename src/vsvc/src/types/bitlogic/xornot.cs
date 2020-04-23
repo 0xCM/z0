@@ -14,7 +14,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers)]
-        public readonly struct XorNot128<T> : IVSvcBinaryOp128<T>
+        public readonly struct XorNot128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vxornot";
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [NumericClosures(Integers)]
-        public readonly struct XorNot256<T> : IVSvcBinaryOp256<T>
+        public readonly struct XorNot256<T> : ISVBinaryOp256D<T>
             where T : unmanaged
         {
             public const string Name = "vxornot";

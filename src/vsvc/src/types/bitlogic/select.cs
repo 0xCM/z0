@@ -14,7 +14,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), Select]
-        public readonly struct Select128<T> : IVSvcTernaryOp128<T>
+        public readonly struct Select128<T> : ISVTernaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vselect";
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [Closures(Integers), Select]
-        public readonly struct Select256<T> : IVSvcTernaryOp256<T>
+        public readonly struct Select256<T> : ISVTernaryOp256D<T>
             where T : unmanaged
         {
             public const string Name = "vselect";

@@ -14,7 +14,7 @@ namespace Z0
     partial class VSvcHosts
     {        
         [Closures(Integers)]
-        public readonly struct Nor128<T> : IVSvcBinaryOp128<T>
+        public readonly struct Nor128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vnor";
@@ -31,13 +31,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.nor(a,b);
 
-            [MethodImpl(Inline)]
-            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
-                => ref VBlocks.nor(a,b,c);
         }
 
         [Closures(Integers)]
-        public readonly struct Nor256<T> : IVSvcBinaryOp256<T>
+        public readonly struct Nor256<T> : ISVBinaryOp256D<T>
             where T : unmanaged
         {
             public const string Name = "vnor";
@@ -54,9 +51,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.nor(a,b);
 
-            [MethodImpl(Inline)]
-            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
-                => ref VBlocks.nor(a,b,c);
         }
     }
 }

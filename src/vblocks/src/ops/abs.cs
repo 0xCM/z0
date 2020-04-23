@@ -14,7 +14,7 @@ namespace Z0
 
     partial class VBlockHosts
     {
-        [NumericClosures(AllNumeric), Abs]
+        [Closures(AllNumeric), Abs]
         public readonly struct Abs128<T> : IBlockedUnaryOp128<T>
             where T : unmanaged
         {
@@ -23,7 +23,7 @@ namespace Z0
                 => ref map(src, dst, VSvc.vabs<T>(w128));
         }
 
-        [NumericClosures(AllNumeric), Abs]
+        [Closures(AllNumeric), Abs]
         public readonly struct Abs256<T> : IBlockedUnaryOp256<T>
             where T : unmanaged
         {

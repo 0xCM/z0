@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(AllNumeric), TestC]
-        public readonly struct TestC128<T> : ISVBinaryPredicate128D<T>, IBlockedBinaryPred128<T>
+        public readonly struct TestC128<T> : ISVBinaryPredicate128D<T>
             where T : unmanaged
         {
             public const string Name = "vtestc";
@@ -30,13 +30,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a, T b) => default;
 
-            [MethodImpl(Inline)]
-            public Span<bit> Invoke(in Block128<T> x, in Block128<T> y, Span<bit> dst) 
-                => VBlocks.testc(x,y,dst);
         }
 
         [Closures(AllNumeric), TestC]
-        public readonly struct TestC256<T> : ISVBinaryPredicate256D<T>, IBlockedBinaryPred256<T>
+        public readonly struct TestC256<T> : ISVBinaryPredicate256D<T>
             where T : unmanaged
         {
             public const string Name = "vtestc";
@@ -52,10 +49,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a, T b) => default;
-
-            [MethodImpl(Inline)]
-            public Span<bit> Invoke(in Block256<T> x, in Block256<T> y, Span<bit> dst) 
-                => VBlocks.testc(x,y,dst);
         }
     }
 }
