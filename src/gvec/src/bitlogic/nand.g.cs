@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(AllNumeric)]
         public static Vector512<T> vnand<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
-                => (vnand(x.Lo,y.Lo), (vnand(x.Hi, y.Hi)));
+                => (vnand(x.Lo, y.Lo), (vnand(x.Hi, y.Hi)));
 
         [MethodImpl(Inline)]
         static Vector128<T> vnand_u<T>(Vector128<T> x, Vector128<T> y)

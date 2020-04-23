@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
     using static SBlock;
 
-    partial class VBlocks
+    partial class Blocked
     {
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block128<T> add<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
@@ -59,7 +59,7 @@ namespace Z0
                 => ref map(a, c, VSvc.vinc<T>(w128));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static ref readonly Block256<T> vinc<T>(in Block256<T> a, in Block256<T> c)
+        public static ref readonly Block256<T> inc<T>(in Block256<T> a, in Block256<T> c)
             where T : unmanaged
                 => ref map(a, c, VSvc.vinc<T>(w256));
 

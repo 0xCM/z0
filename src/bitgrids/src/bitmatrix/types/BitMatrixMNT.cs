@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
 
     /// <summary>
-    /// Defines bitmatrix of natural dimensions over a primal type
+    /// Defines a bitmatrix of natural dimensions over a primal type
     /// </summary>
     /// <typeparam name="M">The row dimension</typeparam>
     /// <typeparam name="N">The column dimension</typeparam>

@@ -15,48 +15,35 @@ namespace Z0
         /// <summary>
         /// The data associated with the event
         /// </summary>
-        object Payload {get;}
+        object Content {get;}
 
         string Description {get;}
 
         AppMsgColor Flair => AppMsgColor.Blue;
 
         string ICustomFormattable.Format()        
-            => text.concat(Description, text.colon(), text.space(), Payload?.ToString() ?? string.Empty);  
+            => Description;
 
         IAppMsg Message => AppMsg.Colorize(Format(), Flair);
-
-        IAppEvent<K> As<K>()
-            => AppEvent.Create<K>(Description, (K)Payload);
 
         Outcome Subscribe(IEventBroker broker, Action<IAppEvent> receiver)
             => AppEvents.subscribe(this, broker, receiver);
     }
 
     /// <summary>
-    /// Characterizes an application event with a parametric payload
-    /// </summary>
-    /// <typeparam name="T">The payload type</typeparam>
-    public interface IAppEvent<T> : IAppEvent
-    {
-        new T Payload {get;}
-
-        object IAppEvent.Payload
-            => Payload;                
-    }
-
-    /// <summary>
-    /// Characterizes an F-bound polymorphic payload-parametric application event reification
+    /// Characterizes an F-bound polymorphic application event reification
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    /// <typeparam name="T">The payload type</typeparam>
-    public interface IAppEvent<F,T> : IAppEvent<T>, INullary<F>
-        where F : struct, IAppEvent<F,T>
+    public interface IAppEvent<F> : IAppEvent, INullary<F>
+        where F : struct, IAppEvent<F>
     {
         string IAppEvent.Description
             => typeof(F).DisplayName();
 
-        string ICustomFormattable.Format()        
-            => Description;                        
+        new F Content => (F)this;
+
+        object IAppEvent.Content
+            => Content;                
     }
+
 }

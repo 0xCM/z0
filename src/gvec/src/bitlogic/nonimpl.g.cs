@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), NonImpl, Closures(Integers)]
         public static Vector512<T> vnonimpl<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
-                => (vnonimpl(x.Lo,y.Lo), (vnonimpl(x.Hi, y.Hi)));
+                => (vnonimpl(x.Lo, y.Lo), (vnonimpl(x.Hi, y.Hi)));
 
         [MethodImpl(Inline)]
         static Vector128<T> vnonimpl_u<T>(Vector128<T> x, Vector128<T> y)

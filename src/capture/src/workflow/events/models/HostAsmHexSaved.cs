@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct HostAsmHexSaved : IAppEvent<E, UriBits[]>
+        public readonly struct HostAsmHexSaved : IAppEvent<E>
         {
             public static E Empty => new E(ApiHostUri.Empty, new UriBits[]{}, FilePath.Empty);
 

@@ -9,26 +9,28 @@ namespace Z0.Asm
 
     using static Seed;
 
+    using E = ExtractionEvents.AnalyzingExtracts;
+
     partial class ExtractionEvents
     {
-        public readonly struct AnalyzingExtracts : IAppEvent<AnalyzingExtracts, ApiMemberExtract[]>
+        public readonly struct AnalyzingExtracts : IAppEvent<E>
         {        
-            public static AnalyzingExtracts Empty => Define(new ApiMemberExtract[]{});
+            public static E Empty => Define(new ApiMemberExtract[]{});
             
             [MethodImpl(Inline)]
-            public static AnalyzingExtracts Define(ApiMemberExtract[] extracts)
-                => new AnalyzingExtracts(extracts);
+            public static E Define(ApiMemberExtract[] extracts)
+                => new E(extracts);
 
             [MethodImpl(Inline)]
             AnalyzingExtracts(ApiMemberExtract[] extracts)
             {
-                Payload = extracts;
+                Extracts = extracts;
             }
 
             public string Description 
-                => $"Analyzing extract report {Payload.Length} member extracts";
+                => $"Analyzing extract report {Extracts.Length} member extracts";
 
-            public ApiMemberExtract[] Payload{get;}
+            public ApiMemberExtract[] Extracts {get;}
 
             public AnalyzingExtracts Zero => Empty;        
         }

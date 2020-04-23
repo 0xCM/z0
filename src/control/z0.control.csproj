@@ -8,15 +8,50 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
+
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Archives)" />
-    <ProjectReference Include="$(MathSvc)" />    
     <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Archives)" />
+
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitGrids)" />
+    <ProjectReference Include="$(BitMasks)" />
+    <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(BitPack)" />
+    <ProjectReference Include="$(BitStrings)" />
+    <ProjectReference Include="$(BitSvc)" />
+    <ProjectReference Include="$(Blocked)" />
+
+    <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(Circuits)" />
+
+    <ProjectReference Include="$(DVec)" />
+    <ProjectReference Include="$(Dynops)" />
+
     <ProjectReference Include="$(Extract)" />
     <ProjectReference Include="$(Evaluate)" />
-    <ProjectReference Include="$(Capture)" />
+    
+    <ProjectReference Include="$(FVec)" />
+    <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(GVec)" />
+
+    <ProjectReference Include="$(Logix)" />
+    <ProjectReference Include="$(Machines)" />
+
+    <ProjectReference Include="$(MathSvc)" />    
+    <ProjectReference Include="$(Matrix)" />    
+
+    <ProjectReference Include="$(Nats)" />    
+
+    <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Validity)" />
+
+    <ProjectReference Include="$(Stats)" />
+
+    <ProjectReference Include="$(Vectors)" />
+    <ProjectReference Include="$(VCheck)" />
+    <ProjectReference Include="$(VBits)" />
+    <ProjectReference Include="$(VSvc)" />
 
   </ItemGroup>
 

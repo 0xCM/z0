@@ -8,11 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    
     using E = AsmEvents.HostMembersExtracted;
 
     partial class AsmEvents
     {
-        public readonly struct HostMembersExtracted : IAppEvent<E, ApiMemberExtract[]>
+        public readonly struct HostMembersExtracted : IAppEvent<E>
         {
             public static E Empty => new E(ApiHostUri.Empty, new ApiMemberExtract[]{});
 
@@ -24,15 +25,15 @@ namespace Z0.Asm
             HostMembersExtracted(ApiHostUri host, ApiMemberExtract[] extracted)
             {
                 this.Host = host;
-                this.Payload = extracted;
+                this.Extracts = extracted;
             }
             
             public ApiHostUri Host {get;}
             
-            public ApiMemberExtract[] Payload {get;}
+            public ApiMemberExtract[] Extracts {get;}
 
             public string Description
-                => $"{Payload.Length} {Host} members extracted";
+                => $"{Extracts.Length} {Host} members extracted";
 
             public E Zero => Empty; 
         }    

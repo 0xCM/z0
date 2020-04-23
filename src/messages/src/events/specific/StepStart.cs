@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
             
-    public readonly struct StepStart<T> : ITimeStamped, IAppEvent<StepStart<T>, T>
+    public readonly struct StepStart<T> : ITimeStamped, IAppEvent<StepStart<T>>
     {        
         public static StepStart<T> Empty => new StepStart<T>(string.Empty, default, CorrelationToken.Empty, null);
 

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
     using static FileSystem;
 
     public readonly struct CaptureArchive : ICaptureArchive
@@ -36,13 +37,14 @@ namespace Z0
 
         ICaptureArchive Me => this;
         
-        public ICaptureArchive Clear()
+        public FolderPath[] Clear()
         {
-            Me.ExtractDir.Clear();
-            Me.ParsedDir.Clear();
-            Me.AsmDir.Clear();
-            Me.HexDir.Clear();
-            return this;
+            var dst = list<FolderPath>();
+            dst.Add(Me.ExtractDir.Clear());
+            dst.Add(Me.ParsedDir.Clear());
+            dst.Add(Me.AsmDir.Clear());
+            dst.Add(Me.HexDir.Clear());
+            return dst.ToArray();
         }        
     }
 }

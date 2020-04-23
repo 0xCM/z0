@@ -17,12 +17,12 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitMatrix<T> cnonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -33,11 +33,11 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref BitMatrix<T> cnonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static ref BitMatrix8 cnonimpl(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+             LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         public static BitMatrix8 cnonimpl(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -76,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static ref BitMatrix16 cnonimpl(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -89,7 +89,7 @@ namespace Z0
         public static BitMatrix16 cnonimpl(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -102,7 +102,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static ref BitMatrix32 cnonimpl(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -115,7 +115,7 @@ namespace Z0
         public static BitMatrix32 cnonimpl(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -128,7 +128,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static ref BitMatrix64 cnonimpl(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -141,7 +141,7 @@ namespace Z0
         public static BitMatrix64 cnonimpl(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            LSquares.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

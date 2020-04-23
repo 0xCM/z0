@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Nor, Closures(AllNumeric)]
         public static Vector512<T> vnor<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
-                => (vnor(x.Lo,y.Lo), (vnor(x.Hi, y.Hi)));
+                => (vnor(x.Lo, y.Lo), (vnor(x.Hi, y.Hi)));
 
         [MethodImpl(Inline)]
         static Vector128<T> vnor_u<T>(Vector128<T> x, Vector128<T> y)

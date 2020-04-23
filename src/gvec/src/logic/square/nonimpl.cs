@@ -16,9 +16,9 @@ namespace Z0
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
-    partial class LogicSquares
+    partial class LSquares
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
         public static void nonimpl<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {

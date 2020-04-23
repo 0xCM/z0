@@ -13,5 +13,7 @@ namespace Z0.Asm
         StepStart<IApiCatalog> CaptureCatalogStart => StepStarted<IApiCatalog>();
 
         StepEnd<IApiCatalog> CaptureCatalogEnd => StepEnded<IApiCatalog>();
+
+        PurgedArchiveFolder PurgedArchiveFolder => PurgedArchiveFolder.Empty;        
     }
 }

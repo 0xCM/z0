@@ -114,7 +114,7 @@ namespace Z0
         void OnEvent(HostMembersLocated e)
         {
             Sink.Deposit(e);
-            Analyze(e.Host, e.Payload);
+            Analyze(e.Host, e.Members);
         }
 
         void OnEvent(ExtractReportCreated e)

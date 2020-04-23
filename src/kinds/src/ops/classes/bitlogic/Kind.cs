@@ -218,5 +218,7 @@ namespace Z0
         Not = Id.Not,
 
         Select = Id.Select, 
+
+        XorNot = Id.XorNot
     }      
 }

@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct HostCodeSaved : IAppEvent<E, ApiBits[]>
+        public readonly struct HostCodeSaved : IAppEvent<E>
         {
             public static E Empty => new E(ApiHostUri.Empty, new ApiBits[]{}, FilePath.Empty);
 

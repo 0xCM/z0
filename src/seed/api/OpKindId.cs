@@ -231,5 +231,7 @@ namespace Z0
         Bsrl,
 
         Bsll,
+
+        XorNot
     }    
 }

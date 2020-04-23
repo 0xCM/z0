@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
             
-    public readonly struct AppErrorEvent : IAppEvent<AppErrorEvent, Exception>
+    public readonly struct AppErrorEvent : IAppEvent<AppErrorEvent>
     {        
         public static AppErrorEvent Empty => new AppErrorEvent(new Exception("empty"));
         

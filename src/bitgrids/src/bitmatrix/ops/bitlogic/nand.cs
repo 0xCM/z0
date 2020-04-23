@@ -17,12 +17,12 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Nand, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Nand, Closures(UnsignedInts)]
         public static unsafe BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -33,11 +33,11 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Nand, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Nand, Closures(UnsignedInts)]
         public static unsafe ref BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static unsafe ref BitMatrix8 nand(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+             LSquares.nand(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         public static unsafe BitMatrix8 nand(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -76,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static unsafe ref BitMatrix16 nand(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -89,7 +89,7 @@ namespace Z0
         public static unsafe BitMatrix16 nand(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -102,7 +102,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static unsafe ref BitMatrix32 nand(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -115,7 +115,7 @@ namespace Z0
         public static unsafe BitMatrix32 nand(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -128,7 +128,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static unsafe ref BitMatrix64 nand(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -141,7 +141,7 @@ namespace Z0
         public static unsafe BitMatrix64 nand(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquares.nand(in A.Head, in B.Head, ref Z.Head);
+            LSquares.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

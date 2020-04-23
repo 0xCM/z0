@@ -9,13 +9,13 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct AppEvent : IFormattable<AppEvent>, IAppEvent<AppEvent,object>
+    public readonly struct AppEvent : IFormattable<AppEvent>, IAppEvent<AppEvent>
     {
         public static AppEvent Empty => Create(string.Empty, default(EmptyPayload));
         
         public string Description {get;}
         
-        public object Payload {get;}
+        public object Content {get;}
 
         public CorrelationToken Correlation {get;}
 
@@ -31,27 +31,27 @@ namespace Z0
         internal AppEvent(string name, object data, CorrelationToken? ct = null)
         {
             this.Description = name;
-            this.Payload = data ?? default(EmptyPayload);
+            this.Content = data ?? default(EmptyPayload);
             this.Correlation = ct ?? CorrelationToken.Empty;
         }
 
         public bool HasPayload
         {
             [MethodImpl(Inline)]
-            get => Payload != null && !(Payload is IEmptyPayload);
+            get => Content != null && !(Content is IEmptyPayload);
         }
 
         public AppEvent Zero => Empty;
 
         public string Format()
-            => string.Concat(Payload, CharText.Colon, CharText.Space, Payload);
+            => string.Concat(Content, CharText.Colon, CharText.Space, Content);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public AppEvent<T> As<T>()
-            => Create<T>(Description, (T)Payload, Correlation);
+            => Create<T>(Description, (T)Content, Correlation);
 
         readonly struct EmptyPayload : IFormattable<EmptyPayload>, IEmptyPayload
         {            
@@ -63,7 +63,7 @@ namespace Z0
         interface IEmptyPayload {}
     }
 
-    public readonly struct AppEvent<T> : IFormattable<AppEvent<T>>, IAppEvent<AppEvent<T>,T>
+    public readonly struct AppEvent<T> : IFormattable<AppEvent<T>>, IAppEvent<AppEvent<T>>
     {
         public static AppEvent<T> Empty => new AppEvent<T>(string.Empty, default(T));
         

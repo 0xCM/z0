@@ -11,13 +11,13 @@ namespace Z0
 
     partial class BitMatrix
     {        
-        [MethodImpl(Inline), RNot, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), RNot, NumericClosures(UnsignedInts)]
         public static BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => not(B);
                 
 
-        [MethodImpl(Inline), RNot, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), RNot, NumericClosures(UnsignedInts)]
         public static ref BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
                 => ref not(B, ref Z);

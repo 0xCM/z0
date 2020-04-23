@@ -15,7 +15,10 @@ namespace Z0
 
     public interface ICaptureArchive : IService
     {
-        ICaptureArchive Clear();
+        /// <summary>
+        /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
+        /// </summary>
+        FolderPath[] Clear();
         
         ICaptureArchive Narrow(FolderName area, FolderName subject);
 

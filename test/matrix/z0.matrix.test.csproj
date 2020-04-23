@@ -11,7 +11,7 @@
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(VSvc)" />
-    <ProjectReference Include="$(VBlocks)" />
+    <ProjectReference Include="$(Blocked)" />
   </ItemGroup>
 
 </Project>

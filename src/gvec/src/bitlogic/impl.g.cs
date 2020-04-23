@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Impl, Closures(Integers)]
         public static Vector512<T> vimpl<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
-                => (vimpl(x.Lo,y.Lo), (vimpl(x.Hi, y.Hi)));
+                => (vimpl(x.Lo, y.Lo), (vimpl(x.Hi, y.Hi)));
 
         [MethodImpl(Inline)]
         static Vector128<T> vimpl_u<T>(Vector128<T> x, Vector128<T> y)

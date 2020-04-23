@@ -11,29 +11,29 @@ namespace Z0
     using static refs;
     using static Vectors;
     
-    partial class LogicSquares
+    partial class LSquares
     {     
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
         public static bit vtestc<T>(N128 w, in T a)
             where T : unmanaged
                 => gvec.vtestc(vload(w, in a));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
         public static bit vtestc<T>(N128 w, in T a, in T b)
             where T : unmanaged
                 => gvec.vtestc(vload(w, in a), vload(w, in b));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
         public static bit vtestc<T>(N256 w, in T a)
             where T : unmanaged
                 => gvec.vtestc(vload(w, in a));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
         public static bit vtestc<T>(N256 w, in T a, in T b)
             where T : unmanaged
                 => gvec.vtestc(vload(w, in a), vload(w, in b));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
         public static bit testc<T>(N128 n, int vcount, int blocklen, in T a)
             where T : unmanaged
         {
@@ -43,7 +43,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
         public static bit testc<T>(N128 n, int vcount, int blocklen, in T a, in T b)
             where T : unmanaged
         {
@@ -53,7 +53,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
         public static bit testc<T>(N256 n, int vcount, int blocklen, in T a)
             where T : unmanaged
         {
@@ -63,7 +63,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
         public static bit testc<T>(N256 n, int vcount, int blocklen, in T a, in T b)
             where T : unmanaged
         {

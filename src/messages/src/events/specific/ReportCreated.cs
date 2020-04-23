@@ -9,20 +9,20 @@ namespace Z0
 
     using static Seed;
     
-    public readonly struct ReportCreated<R> : IAppEvent<ReportCreated<R>,R>
+    public readonly struct ReportCreated<R> : IAppEvent<ReportCreated<R>>
         where R : IReport, new()
     {
         public static ReportCreated<R> Empty => new ReportCreated<R>(new R());
 
-        public R Payload {get;}
+        public R Report {get;}
         
         ReportCreated(R report)
         {
-            this.Payload = report;
+            this.Report = report;
         }
 
         public string Description
-            => $"{Payload.RecordCount} records created for {Payload.ReportName}";
+            => $"{Report.RecordCount} records created for {Report.ReportName}";
         
         public ReportCreated<R> Zero => Empty;
     }

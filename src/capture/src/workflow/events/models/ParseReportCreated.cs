@@ -22,7 +22,7 @@ namespace Z0.Asm
         public static E Define(R src)
             => E.Define(src);
 
-        public readonly struct ParseReportCreated : IAppEvent<E,R>
+        public readonly struct ParseReportCreated : IAppEvent<E>
         {
             public static E Empty => new E(MemberParseReport.Empty);
 

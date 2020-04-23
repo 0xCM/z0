@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct ExtractReportSaved : IAppEvent<E, FilePath>
+        public readonly struct ExtractReportSaved : IAppEvent<E>
         {        
             public static E Empty => Define(ApiHostUri.Empty, typeof(void), 0, FilePath.Empty);
             

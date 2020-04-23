@@ -17,12 +17,12 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Or, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Or, NumericClosures(UnsignedInts)]
         public static BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -33,11 +33,11 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Or, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Or, NumericClosures(UnsignedInts)]
         public static ref BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix8 or(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+             LSquares.or(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -76,7 +76,7 @@ namespace Z0
         public static BitMatrix8 or(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix16 or(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -102,7 +102,7 @@ namespace Z0
         public static BitMatrix16 or(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -115,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix32 or(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -128,7 +128,7 @@ namespace Z0
         public static BitMatrix32 or(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -141,7 +141,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix64 or(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -154,7 +154,7 @@ namespace Z0
         public static BitMatrix64 or(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquares.or(in A.Head, in B.Head, ref Z.Head);
+            LSquares.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

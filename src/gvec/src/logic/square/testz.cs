@@ -8,14 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static AsIn;
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
     
     using BL = ByteLogic;
     
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
-    partial class LogicSquares
+    partial class LSquares
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bit testz<T>(in T A, in T B)

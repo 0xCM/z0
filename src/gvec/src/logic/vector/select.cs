@@ -12,9 +12,9 @@ namespace Z0
     using static refs;
     using static Vectors;
     
-    partial class LogicSquares
+    partial class LSquares
     {     
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Select, Closures(UnsignedInts)]
         public static Vector128<T> vselect<T>(N128 n, in T a, in T b, in T c)
             where T : unmanaged
         {                    
@@ -24,7 +24,7 @@ namespace Z0
             return gvec.vselect(vA,vB,vC);
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Select, Closures(UnsignedInts)]
         public static Vector256<T> vselect<T>(N256 n, in T a, in T b, in T c)
             where T : unmanaged
         {                    
@@ -34,17 +34,17 @@ namespace Z0
             return gvec.vselect(vA,vB,vC);
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Select, Closures(UnsignedInts)]
         public static void select<T>(N128 n, in T a, in T b, in T c, ref T z)
             where T : unmanaged
                 => Vectors.vstore(vselect(n, in a, in b, in c), ref z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Select, Closures(UnsignedInts)]
         public static void select<T>(N256 n, in T a, in T b, in T c, ref T z)
             where T : unmanaged
                 => Vectors.vstore(vselect(n, in a, in b, in c), ref z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Select, Closures(UnsignedInts)]
         public static void select<T>(N128 n, int vcount, int blocklen, in T a, in T b, in T c, ref T z)
             where T : unmanaged
         {
@@ -52,7 +52,7 @@ namespace Z0
                 select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(ref z, offset));
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Select, Closures(UnsignedInts)]
         public static void select<T>(N256 n, int vcount, int blocklen, in T a, in T b, in T c, ref T z)
             where T : unmanaged
         {

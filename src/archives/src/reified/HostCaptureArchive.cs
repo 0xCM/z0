@@ -21,9 +21,9 @@ namespace Z0
         public static IHostCaptureArchive Define(ICaptureArchive root, in ApiHostUri host)
             => new HostCaptureArchive(root,host);
 
-        public ICaptureArchive Clear()
+        public FolderPath[] Clear()
         {
-            return this;
+            return Arrays.empty<FolderPath>();
         }
 
         public ICaptureArchive Narrow(FolderName area, FolderName subject)

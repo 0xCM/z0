@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct HostExtractsParsed : IAppEvent<E, ParsedExtract[]>
+        public readonly struct HostExtractsParsed : IAppEvent<E>
         {
             public static E Empty => new E(ApiHostUri.Empty, new ParsedExtract[]{});
 

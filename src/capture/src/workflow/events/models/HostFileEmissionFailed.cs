@@ -8,33 +8,34 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using E = AsmEvents.HostFileEmissionFailed;
 
     partial class AsmEvents
     {
-        public readonly struct HostFileEmissionFailed : IAppEvent<HostFileEmissionFailed, ApiHostUri>
+        public readonly struct HostFileEmissionFailed : IAppEvent<E>
         {
-            public ApiHostUri Payload {get;}
+            public static E Empty => new E(ApiHostUri.Empty,false, FilePath.Empty);
+
+            public readonly ApiHostUri Host;
 
             public readonly bool Generic;
 
             public readonly FilePath TargetFile;
 
-            public static HostFileEmissionFailed Empty => new HostFileEmissionFailed(ApiHostUri.Empty,false, FilePath.Empty);
-
             [MethodImpl(Inline)]
-            public static HostFileEmissionFailed Define(ApiHostUri uri, bool generic, FilePath dst)
-                => new HostFileEmissionFailed(uri,generic, dst);
+            public static E Define(ApiHostUri host, bool generic, FilePath dst)
+                => new E(host,generic, dst);
 
             [MethodImpl(Inline)]
             HostFileEmissionFailed(ApiHostUri uri, bool generic, FilePath dst)
             {
-                this.Payload = uri;
+                this.Host = uri;
                 this.Generic = generic;
                 this.TargetFile = dst;
             }
                         
             public string Description
-                => $"{Payload} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;
+                => $"{Host} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;
             
             public HostFileEmissionFailed Zero => Empty;
 

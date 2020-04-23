@@ -44,4 +44,6 @@ namespace Z0
     public sealed class SelectAttribute : A { public SelectAttribute(string group = null) : base(K.Select, group) {} } 
 
     public sealed class NotAttribute : A { public NotAttribute(string group = null) : base(K.Not, group) {} }
+
+    public sealed class XorNotAttribute : A { public XorNotAttribute(string group = null) : base(K.XorNot, group) {} }    
 }

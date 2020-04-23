@@ -11,24 +11,24 @@ namespace Z0
     using static Memories;
     using static SBlock;
 
-    partial class VBlocks
+    partial class Blocked
     {
-        [MethodImpl(Inline), Op, Closures(Integers & (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block128<T> max<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref zip(a,b,c, VSvc.vmax<T>(n128));
 
-        [MethodImpl(Inline), Op, Closures(Integers & (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block256<T> max<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref zip(a,b,c, VSvc.vmax<T>(n256));
 
-        [MethodImpl(Inline), Op, Closures(Integers & (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block128<T> min<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref zip(a,b,c, VSvc.vmin<T>(n128));
 
-        [MethodImpl(Inline), Op, Closures(Integers & (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block256<T> min<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref zip(a,b,c, VSvc.vmin<T>(n256));
@@ -43,22 +43,22 @@ namespace Z0
             where T : unmanaged
                 => ref zip(a,b,c, VSvc.veq<T>(n256));
 
-        [MethodImpl(Inline), Op, Closures(Integers & (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block128<T> lt<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref zip(a,b,c, VSvc.vlt<T>(n128));
 
-        [MethodImpl(Inline), Op, Closures(Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block256<T> lt<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref zip(a,b,c,VSvc.vlt<T>(n256));
 
-        [MethodImpl(Inline), Op, Closures(Integers & (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block128<T> gt<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref zip(a,b,c,VSvc.vgt<T>(n128));
 
-        [MethodImpl(Inline), Op, Closures(Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly Block256<T> gt<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref zip(a,b,c,VSvc.vgt<T>(n256));

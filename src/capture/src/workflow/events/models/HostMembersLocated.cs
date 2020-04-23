@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct HostMembersLocated : IAppEvent<E, ApiMember[]>
+        public readonly struct HostMembersLocated : IAppEvent<E>
         {
             public static E Empty => new E(ApiHostUri.Empty, new ApiMember[]{});
 
@@ -25,15 +25,15 @@ namespace Z0.Asm
             HostMembersLocated(ApiHostUri host, ApiMember[] functions)
             {
                 this.Host = host;
-                this.Payload = functions;
+                this.Members = functions;
             }
             
             public ApiHostUri Host {get;}
             
-            public ApiMember[] Payload {get;}
+            public ApiMember[] Members {get;}
 
             public string Description
-                => $"{Payload.Length} {Host} members located";
+                => $"{Members.Length} {Host} members located";
 
             public E Zero => Empty;            
 

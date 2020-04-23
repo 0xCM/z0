@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
             
-    public readonly struct StepEnd<T> : ITimeStamped, IAppEvent<StepEnd<T>, T>
+    public readonly struct StepEnd<T> : ITimeStamped, IAppEvent<StepEnd<T>>
     {        
         public string StepName {get;}
         

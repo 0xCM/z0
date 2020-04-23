@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
-    partial class LogicSquares
+    partial class LSquares
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void or<T>(in T A, in T B, ref T Z)

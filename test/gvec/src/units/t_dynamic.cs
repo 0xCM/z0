@@ -17,7 +17,7 @@ namespace Z0
     {   
         public void check_blocks()
         {
-            var methods = typeof(VBlocks).DeclaredMethods().Tagged<OpAttribute>().WithName("add");
+            var methods = typeof(Blocked).DeclaredMethods().Tagged<OpAttribute>().WithName("add");
             foreach(var method in methods)
             {                
                 foreach(var t in method.ParameterTypes())

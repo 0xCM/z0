@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Integers)]
         public static Vector512<T> vand<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
-                => (vand(x.Lo,y.Lo), (vand(x.Hi, y.Hi)));
+                => (vand(x.Lo, y.Lo), (vand(x.Hi, y.Hi)));
 
         [MethodImpl(Inline)]
         static Vector128<T> vand_u<T>(Vector128<T> x, Vector128<T> y)

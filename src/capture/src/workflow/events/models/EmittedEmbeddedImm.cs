@@ -11,9 +11,11 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {        
-        public readonly struct EmittedEmbeddedImm : IAppEvent<EmittedEmbeddedImm, ApiHostUri>
+        public readonly struct EmittedEmbeddedImm : IAppEvent<EmittedEmbeddedImm>
         {
-            public ApiHostUri Payload {get;}
+            public static EmittedEmbeddedImm Empty => new EmittedEmbeddedImm(ApiHostUri.Empty, false, ImmSourceKind.Literal, typeof(void), FilePath.Empty);
+
+            public readonly ApiHostUri Host;
 
             public readonly bool Generic;
 
@@ -22,8 +24,6 @@ namespace Z0.Asm
             public readonly Type Refinement;
 
             public readonly FilePath TargetFile;
-
-            public static EmittedEmbeddedImm Empty => new EmittedEmbeddedImm(ApiHostUri.Empty, false, ImmSourceKind.Literal, typeof(void), FilePath.Empty);
 
             [MethodImpl(Inline)]
             public static EmittedEmbeddedImm Refined(ApiHostUri uri, bool generic, Type refinement, FilePath dst)
@@ -40,7 +40,7 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             EmittedEmbeddedImm(ApiHostUri uri, bool generic, ImmSourceKind source, Type refinement, FilePath dst)
             {
-                this.Payload = uri;
+                this.Host = uri;
                 this.Generic = generic;
                 this.ImmSource = source;
                 this.Refinement = refinement;
@@ -53,8 +53,8 @@ namespace Z0.Asm
                 {                    
                     var description = 
                         (ImmSource == ImmSourceKind.Literal && Refinement != null)
-                      ? $"Emitted {Payload}{(Generic ? " generic" : string.Empty)} literal imm specializations to {TargetFile}"
-                      : $"Emitted {Payload}{(Generic ? " generic" : string.Empty)} imm {Refinement.DisplayName()} refinements to {TargetFile}";
+                      ? $"Emitted {Host}{(Generic ? " generic" : string.Empty)} literal imm specializations to {TargetFile}"
+                      : $"Emitted {Host}{(Generic ? " generic" : string.Empty)} imm {Refinement.DisplayName()} refinements to {TargetFile}";
                     return description;
                 }
             }

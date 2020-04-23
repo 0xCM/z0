@@ -44,17 +44,20 @@ namespace Z0.Asm
                 }
             }
 
+            void CaptureHost(DriveHostCapture step, IApiHost host, ICaptureArchive dst)
+            {                
+                step.Execute(host, dst);
+            }
+
             void CaptureCatalog(IApiCatalog src, ICaptureArchive dst)
             {
                 if(src.HasApiHostContent)
                 {
                     var start = Context.Raise(StepEvents.Started(src, Context.Correlate()));
 
-                    var step = DriveHostCapture.Create(Context);
+                    var step = DriveHostCapture.Create(Context);             
                     foreach(var host in src.ApiHosts)
-                    {
-                        step.Execute(host, dst);
-                    }
+                        CaptureHost(step, host, dst);
 
                     Context.Raise(StepEvents.Ended(src, start.Correlation));
                 }

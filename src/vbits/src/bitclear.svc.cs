@@ -27,7 +27,7 @@ namespace Z0
 
     partial class VBitSvcTypes
     {
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct BitClear128<T> : ISVImm8x2UnaryOp128D<T>
             where T : unmanaged
         {
@@ -49,7 +49,7 @@ namespace Z0
                 => gbits.bitclear(a, b, c);
         }
 
-        [NumericClosures(NumericKind.Integers)]
+        [Closures(Integers)]
         public readonly struct BitClear256<T> : ISVImm8x2UnaryOp256D<T>
             where T : unmanaged
         {

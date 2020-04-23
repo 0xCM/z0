@@ -15,7 +15,7 @@
     <ProjectReference Include="$(BitVectors)" />    
     <ProjectReference Include="$(Circuits)" />
     <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(VBlocks)" />
+    <ProjectReference Include="$(Blocked)" />
 
   </ItemGroup>
 

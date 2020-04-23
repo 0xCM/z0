@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     partial class AsmEvents
     {
-        public readonly struct HostFunctionsDecoded : IAppEvent<E, AsmFunction[]>
+        public readonly struct HostFunctionsDecoded : IAppEvent<E>
         {
             public static HostFunctionsDecoded Empty => new HostFunctionsDecoded(ApiHostUri.Empty, new AsmFunction[]{});
 
