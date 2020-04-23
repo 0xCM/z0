@@ -14,11 +14,11 @@ namespace Z0
         where S : IApiService<S>, new()
     {
         IEnumerable<Type> IApiService.HostTypes 
-            => typeof(S).GetNestedTypes().Realize<ISFuncApi>();
+            => typeof(S).GetNestedTypes().Realize<ISFunc>();
 
         IEnumerable<MethodInfo> IApiService.FactoryMethods 
             => from m in typeof(S).DeclaredStaticMethods()
-               where m.ReturnType.Realizes(typeof(ISFuncApi)) 
+               where m.ReturnType.Realizes(typeof(ISFunc)) 
                select m;
     }
 
@@ -26,11 +26,11 @@ namespace Z0
         where S : IApiService<S,H>, new()
     {
         IEnumerable<Type> IApiService.HostTypes 
-            => typeof(H).GetNestedTypes().Realize<ISFuncApi>();
+            => typeof(H).GetNestedTypes().Realize<ISFunc>();
 
         IEnumerable<MethodInfo> IApiService.FactoryMethods 
             => from m in typeof(S).DeclaredStaticMethods()
-               where m.ReturnType.Realizes(typeof(ISFuncApi)) 
+               where m.ReturnType.Realizes(typeof(ISFunc)) 
                select m;
     }
 }

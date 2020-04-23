@@ -8,7 +8,7 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISAction<A> : IStructuralOperation
+    public interface ISAction<A> : ISFunc
     {
         void Invoke(A a);
 
@@ -25,19 +25,6 @@ namespace Z0
         A Invoke();
 
         Func<A> Operation => Invoke;
-    }
-
-    /// <summary>
-    /// Characterizes a structural unary function
-    /// </summary>
-    /// <typeparam name="A">The first operand type</typeparam>
-    /// <typeparam name="B">The result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFunc<A,B> : ISFunc
-    {
-        B Invoke(A a);
-
-        Func<A,B> Operation => Invoke;
     }
 
     /// <summary>
@@ -60,24 +47,4 @@ namespace Z0
         Func<A,B,C> Operation => Invoke;
     }
 
-    /// <summary>
-    /// Characterizes a structural ternary function
-    /// </summary>
-    /// <typeparam name="A">The first operand type</typeparam>
-    /// <typeparam name="B">The second operand type</typeparam>
-    /// <typeparam name="C">The third operand type</typeparam>
-    /// <typeparam name="D">The result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFunc<A,B,C,D> : ISFunc
-    {
-        /// <summary>
-        /// Invokes the reified function over supplied operands
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        /// <param name="c">The third operand</param>
-        D Invoke(A a, B b, C c);
-
-        Func<A,B,C,D> Operation => Invoke; 
-    }
 }

@@ -30,9 +30,9 @@ namespace Z0
         {
             this.FactoryHost = factory;
             this.HostEnclosure = enclosure;
-            this.HostTypes = enclosure.GetNestedTypes().Realize<ISFuncApi>().ToArray();
+            this.HostTypes = enclosure.GetNestedTypes().Realize<ISFunc>().ToArray();
             this.FactoryMethods = (from m in factory.DeclaredStaticMethods()
-               where m.ReturnType.Realizes(typeof(ISFuncApi)) 
+               where m.ReturnType.Realizes(typeof(ISFunc)) 
                select m).ToArray();
         }
 

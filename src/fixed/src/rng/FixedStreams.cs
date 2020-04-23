@@ -127,8 +127,8 @@ namespace Z0
         {
             while(true)
             {
-                Fixed128 next = random.NextPair<ulong>();
-                yield return Unsafe.As<Fixed128, T>(ref next);
+                Fixed128V next = random.NextPair<ulong>();
+                yield return Unsafe.As<Fixed128V, T>(ref next);
             }
         }
 
@@ -137,8 +137,8 @@ namespace Z0
         {
             while(true)
             {
-                Fixed256 next = (random.Fixed(w128), random.Fixed(w128));
-                yield return Unsafe.As<Fixed256, T>(ref next);
+                Fixed256V next = (random.Fixed(w128), random.Fixed(w128));
+                yield return Unsafe.As<Fixed256V, T>(ref next);
             }
         }
 
@@ -147,8 +147,8 @@ namespace Z0
         {
             while(true)
             {
-                Fixed512 next = (random.Fixed(w256), random.Fixed(w256));
-                yield return Unsafe.As<Fixed512, T>(ref next);
+                Fixed512V next = (random.Fixed(w256), random.Fixed(w256));
+                yield return Unsafe.As<Fixed512V, T>(ref next);
             }
         }
     }

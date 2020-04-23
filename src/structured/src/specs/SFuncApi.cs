@@ -12,7 +12,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The emission type</typeparam>    
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFuncApi<A> : ISFuncApi, ISFunc<A>
+    public interface ISFuncApi<A> : ISFunc, ISFunc<A>
     {
 
     }
@@ -23,7 +23,7 @@ namespace Z0
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFuncApi<A,B> : ISFuncApi
+    public interface ISFunc<A,B> : ISFunc
     {
         B Invoke(A a);
 
@@ -37,7 +37,7 @@ namespace Z0
     /// <typeparam name="B">The second operand type</typeparam>
     /// <typeparam name="C">The third result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFuncApi<A,B,C> : ISFuncApi
+    public interface ISFuncApi<A,B,C> : ISFunc
     {
         /// <summary>
         /// Invokes the reified function over supplied operands
@@ -58,7 +58,7 @@ namespace Z0
     /// <typeparam name="C">The third operand type</typeparam>
     /// <typeparam name="D">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFuncApi<A,B,C,D> : ISFuncApi
+    public interface ISFuncApi<A,B,C,D> : ISFunc
     {
         /// <summary>
         /// Invokes the reified function over supplied operands
@@ -78,7 +78,7 @@ namespace Z0
     /// <typeparam name="A">The source domain type</typeparam>
     /// <typeparam name="B">The target domain type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFMapApi<A,B> : ISFuncApi<A,B>
+    public interface ISFMapApi<A,B> : ISFunc<A,B>
     {
 
     }
@@ -89,7 +89,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFNumericParserApi<T> : ISFuncApi<string,T>
+    public interface ISFNumericParserApi<T> : ISFunc<string,T>
         where T : unmanaged
     {
         

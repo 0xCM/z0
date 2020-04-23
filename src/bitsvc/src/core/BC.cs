@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="S">The host type</typeparam>
         [MethodImpl(Inline)]
         public static S ApiSvc<S>()
-            where S : unmanaged, ISFuncApi    
+            where S : unmanaged, ISFunc    
                 => default(S);        
 
     }   

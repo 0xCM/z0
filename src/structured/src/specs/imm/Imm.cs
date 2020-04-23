@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Security;
-
+    
     /// <summary>
     /// Characterizes a binary function F:A -> byte -> A that accepts an 8-bit immediate value in the second parameter. 
     /// </summary>
@@ -17,7 +17,7 @@ namespace Z0
     /// justifies the contract name
     /// </remarks>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8UnaryOp<A> : ISFunc<A,byte,A>
+    public interface ISImm8UnaryOpApi<A> :  ISFunc<A,byte,A>
     {
            
     }
@@ -28,7 +28,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8BinaryOp<A> : ISFuncApi<A,A,byte,A>
+    public interface ISImm8BinaryOpApi<A> : ISFuncApi<A,A,byte,A>
     {
 
     }    
@@ -39,7 +39,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8x2UnaryOp<A> : ISFuncApi<A,byte,byte,A>
+    public interface ISImm8x2UnaryOpApi<A> : ISFuncApi<A,byte,byte,A>
     {
 
     }

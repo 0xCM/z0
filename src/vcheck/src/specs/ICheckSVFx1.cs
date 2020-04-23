@@ -71,7 +71,7 @@ namespace Z0
             }
         }
 
-       void Run<W>(ISFuncApi f, Action act, W width, K.OperatorClass c)
+       void Run<W>(ISFunc f, Action act, W width, K.OperatorClass c)
             where W : unmanaged, ITypeWidth
         {
             var succeeded = true;

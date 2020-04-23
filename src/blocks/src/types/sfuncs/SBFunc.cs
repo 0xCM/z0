@@ -12,7 +12,7 @@ namespace Z0
     /// Characterizes identified (S)tructed (B)blocked functions
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBFuncApi : ISFuncApi
+    public interface ISBFuncApi : ISFunc
     {
 
     }

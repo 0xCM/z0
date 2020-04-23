@@ -12,7 +12,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISWFuncApi<W> : ISFuncApi, ISWFunc<W>
+    public interface ISWFuncApi<W> : ISFunc, ISWFunc<W>
         where W : unmanaged, ITypeWidth
     {
 
@@ -36,7 +36,7 @@ namespace Z0
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISWFuncApi<W,A,B> : ISFuncApi<A,B>, ISWFuncApi<W>, ISWFunc<W,A,B>
+    public interface ISWFuncApi<W,A,B> : ISFunc<A,B>, ISWFuncApi<W>, ISWFunc<W,A,B>
         where W : unmanaged, ITypeWidth
     {
 

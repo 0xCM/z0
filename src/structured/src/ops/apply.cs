@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> src, Span<bit> dst)
-            where F : ISFuncApi<T,bit>
+            where F : ISFunc<T,bit>
         {
             var count = dst.Length;
             ref readonly var input = ref head(src);
@@ -38,6 +38,7 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline)]
         public static Span<T> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
             where F : ISBinaryOpApi<T>
@@ -54,6 +55,7 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline)]
         public static Span<T> apply<F,T>(F f, Span<T> lhs, Span<T> rhs)
             where T : unmanaged
             where F : ISBinaryOpApi<T>
@@ -104,7 +106,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T2> apply<F,T1,T2>(F f, ReadOnlySpan<T1> src, Span<T2> dst)
-            where F : ISFuncApi<T1,T2>
+            where F : ISFunc<T1,T2>
         {
             var count = dst.Length;
             ref readonly var input = ref head(src);

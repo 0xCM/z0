@@ -157,18 +157,16 @@ namespace Z0
 
         F f512() => Fixed(random.Fixed(w512));    
 
-
         [MethodImpl(Inline)]
         public Fixed128V f128V(W128 w)
             => random.NextPair<ulong>();
 
         [MethodImpl(Inline)]
-        public Fixed256 Fixed(W256 w)
+        public Fixed256V Fixed(W256 w)
             =>  (random.Fixed(w128), random.Fixed(w128));
 
         [MethodImpl(Inline)]
-        public Fixed512 Fixed(W512 w)
+        public Fixed512V Fixed(W512 w)
             => (random.Fixed(w256), random.Fixed(w256));
-
     }
 }

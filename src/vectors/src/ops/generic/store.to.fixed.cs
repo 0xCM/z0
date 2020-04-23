@@ -13,13 +13,13 @@ namespace Z0
     partial class Vectors
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static void vstore<T>(Vector128<T> src, ref Fixed128 dst)
+        public static void vstore<T>(Vector128<T> src, ref Fixed128V dst)
             where T : unmanaged
-                => vstore(src, ref Fixed.head<Fixed128,T>(ref dst));
+                => vstore(src, ref Fixed.head<Fixed128V,T>(ref dst));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static void vstore<T>(Vector256<T> src, ref Fixed256 dst)
+        public static void vstore<T>(Vector256<T> src, ref Fixed256V dst)
             where T : unmanaged
-                => vstore(src, ref Fixed.head<Fixed256,T>(ref dst));
+                => vstore(src, ref Fixed.head<Fixed256V,T>(ref dst));
     }
 }

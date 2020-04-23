@@ -14,7 +14,7 @@ namespace Z0
     /// Base interface for span-oriented operations
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISSpanApi : ISFuncApi
+    public interface ISSpanApi : ISFunc
     {
 
     }
@@ -77,7 +77,7 @@ namespace Z0
     /// <typeparam name="A">The source span cell type</typeparam>
     /// <typeparam name="B">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISSpanFactoryApi<A,B> : ISFuncApi
+    public interface ISSpanFactoryApi<A,B> : ISFunc
     {
         Span<B> Invoke(A src);
     }

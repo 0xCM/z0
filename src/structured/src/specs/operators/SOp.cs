@@ -8,11 +8,11 @@ namespace Z0
     using System.Security;
 
     /// <summary>
-    /// Characterizes a structural unary operator
+    /// Characterizes a unary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISUnaryOp<A> : ISFunc<A,A>
+    public interface ISUnaryOpApi<A> : ISFunc<A,A>
     {
         new UnaryOp<A> Operation => (this as ISFunc<A,A>).Operation.ToUnaryOp();
     }
@@ -22,18 +22,18 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBinaryOp<A> : ISFunc<A,A,A>
+    public interface ISBinaryOpApi<A> : ISFuncApi<A,A,A>
     {
-        new BinaryOp<A> Operation => (this as ISFunc<A,A,A>).Operation.ToBinaryOp();
+        new BinaryOp<A> Operation => (this as ISFuncApi<A,A,A>).Operation.ToBinaryOp();    
     }
 
     /// <summary>
-    /// Characterizes a structural binary operator
+    /// Characterizes a structural ternary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISTernaryOp<A> : ISFunc<A,A,A,A>
+    public interface ISTernaryOpApi<A> : ISFuncApi<A,A,A,A>
     {
-        new TernaryOp<A> Operation => (this as ISFunc<A,A,A,A>).Operation.ToTernaryOp();
-    }
+        new TernaryOp<A> Operation => (this as ISFuncApi<A,A,A,A>).Operation.ToTernaryOp();
+    } 
 }

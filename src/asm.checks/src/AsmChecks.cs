@@ -205,7 +205,7 @@ namespace Z0.Asm
 
             
 
-            var g = buffers[Main].EmitFixedBinaryOp<Fixed256>(asm.Code);
+            var g = buffers[Main].EmitFixedBinaryOp<Fixed256V>(asm.Code);
             var v2 = g(x,y).ToVector<ushort>();
             Claim.veq(v1,v2);
         }

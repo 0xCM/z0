@@ -14,20 +14,20 @@ namespace Z0
             
 
             MathTest.RunPart(args);
-            BitsTest.RunPart(args);
-            BitSvcTest.RunPart(args);
-            DynopsTest.RunPart(args);
-            GVecTest.RunPart(args);
-            IdentityTest.RunPart(args);
-            LogixTest.RunPart(args);   
-            MachinesTest.RunPart(args);         
-            NatsTest.RunPart(args);      
-            MemoriesTest.RunPart(args);
-            NumericTest.RunPart(args);
-            PermuteTest.RunPart(args);
-            TextualTest.RunPart(args);
-            NatsTest.RunPart(args);      
-            AsmTest.RunPart(args);
+            // BitsTest.RunPart(args);
+            // BitSvcTest.RunPart(args);
+            // DynopsTest.RunPart(args);
+            // GVecTest.RunPart(args);
+            // IdentityTest.RunPart(args);
+            // LogixTest.RunPart(args);   
+            // MachinesTest.RunPart(args);         
+            // NatsTest.RunPart(args);      
+            // MemoriesTest.RunPart(args);
+            // NumericTest.RunPart(args);
+            // PermuteTest.RunPart(args);
+            // TextualTest.RunPart(args);
+            // NatsTest.RunPart(args);      
+            // AsmTest.RunPart(args);
             
 
         }

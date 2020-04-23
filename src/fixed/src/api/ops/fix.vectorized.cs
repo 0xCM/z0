@@ -17,35 +17,35 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static UnaryOp128 fix<T>(Func<Vector128<T>, Vector128<T>> f)
+        public static UnaryOp128V vfix<T>(Func<Vector128<T>, Vector128<T>> f)
             where T : unmanaged
-                => (Fixed128 a) => f(a.ToVector<T>()).ToFixed();
+                => (Fixed128V a) => f(a.ToVector<T>()).ToFixedV();
 
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static UnaryOp256 fix<T>(Func<Vector256<T>,Vector256<T>> f)
+        public static UnaryOp256V vfix<T>(Func<Vector256<T>,Vector256<T>> f)
             where T : unmanaged
-                => (Fixed256 a) => f(a.ToVector<T>()).ToFixed();  
+                => (Fixed256V a) => f(a.ToVector<T>()).ToFixedV();  
 
         /// <summary>
         /// Creates a fixed 128-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128 fix<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
+        public static BinaryOp128V vfix<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
             where T : unmanaged
-                => (Fixed128 a, Fixed128 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();
+                => (Fixed128V a, Fixed128V b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixedV();
 
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256 fix<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
+        public static BinaryOp256V vfix<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
             where T : unmanaged
-                => (Fixed256 a, Fixed256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixed(); 
+                => (Fixed256V a, Fixed256V b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixedV();          
     }
 }

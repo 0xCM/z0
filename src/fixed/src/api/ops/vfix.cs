@@ -13,15 +13,6 @@ namespace Z0
 
     partial class Fixed    
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]        
-        public static Fixed128 fix<T>(Vector128<T> x)
-            where T : unmanaged
-                => Unsafe.As<Vector128<T>,Fixed128>(ref x);
-
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Fixed256 fix<T>(Vector256<T> x)
-            where T : unmanaged
-                => Unsafe.As<Vector256<T>,Fixed256>(ref x); 
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Fixed128V vfix<T>(Vector128<T> x)

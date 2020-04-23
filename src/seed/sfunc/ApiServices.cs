@@ -32,7 +32,7 @@ namespace Z0
         /// Instantiates a service operation host
         /// </summary>
         /// <param name="host">The hosting type</param>
-        public static ISFuncApi Service(Type host)
-            => (ISFuncApi)Activator.CreateInstance(host);        
+        public static ISFunc Service(Type host)
+            => (ISFunc)Activator.CreateInstance(host);        
     }
 }

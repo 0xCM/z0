@@ -12,10 +12,6 @@ namespace Z0
 
     partial class XTend
     {
-        [MethodImpl(Inline)]
-        public static Vector128<T> ToVector<T>(this in Fixed128 src)
-            where T : unmanaged
-                => Fixed.vector<T>(src);
 
         [MethodImpl(Inline)]
         public static Vector128<T> ToVector<T>(this in Fixed128V src)
@@ -23,8 +19,9 @@ namespace Z0
                 => Fixed.vector<T>(src);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> ToVector<T>(this in Fixed256 src)
+        public static Vector256<T> ToVector<T>(this in Fixed256V src)
             where T : unmanaged
-                => Fixed.vector<T>(src);                 
+                => Fixed.vector<T>(src);
+
     }
 }

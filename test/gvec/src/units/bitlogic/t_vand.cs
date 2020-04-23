@@ -57,8 +57,8 @@ namespace Z0
         {
             var svc = MathSvc.bitlogic<T>();
             var v1 = VSvc.vbitlogic<T>(n128).and(x,y);
-            var buffer = Fixed.alloc<Fixed128>();
-            ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
+            var buffer = Fixed.alloc<Fixed128V>();
+            ref var dst = ref Fixed.head<Fixed128V,T>(ref buffer);
             var count = vcount<T>(n128);            
             for(var i=0; i< count; i++)
                 seek(ref dst, i) = svc.and(vcell(x,i), vcell(y,i));

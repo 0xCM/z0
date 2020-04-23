@@ -38,7 +38,7 @@ namespace Z0
             }
         }
 
-        public readonly struct Func<X0,R> : Z0.ISFuncApi<X0,R>
+        public readonly struct Func<X0,R> : Z0.ISFunc<X0,R>
         {
             readonly System.Func<X0,R> F;
 

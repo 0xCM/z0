@@ -75,12 +75,12 @@ namespace Z0
             => (BinaryOp64)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp64), typeof(Fixed64));
 
         [MethodImpl(Inline)]
-        internal static BinaryOp128 EmitFixedBinaryOp(this IBufferToken buffer, N128 w, OpIdentity id)
-            => (BinaryOp128)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp128), typeof(Fixed128));
+        internal static BinaryOp128V EmitFixedBinaryOp(this IBufferToken buffer, N128 w, OpIdentity id)
+            => (BinaryOp128V)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp128V), typeof(Fixed128V));
 
         [MethodImpl(Inline)]
-        internal static BinaryOp256 EmitFixedBinaryOp(this IBufferToken buffer, N256 w, OpIdentity id)
-            => (BinaryOp256)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp256), typeof(Fixed256));
+        internal static BinaryOp256V EmitFixedBinaryOp(this IBufferToken buffer, N256 w, OpIdentity id)
+            => (BinaryOp256V)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp256V), typeof(Fixed256V));
 
         internal static FixedDelegate EmitFixed(this IntPtr src, OpIdentity id, Type functype, Type result, params Type[] args)
         {

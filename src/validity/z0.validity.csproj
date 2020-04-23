@@ -10,7 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Structured)" />
+    <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Messages)" />
+    <ProjectReference Include="$(Polyrand)" />
+
   </ItemGroup>
 
 </Project>

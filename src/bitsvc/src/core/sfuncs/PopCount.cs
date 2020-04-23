@@ -12,7 +12,7 @@ namespace Z0
     partial class BC
     {
         [Closures(Integers)]
-        public readonly struct PopCount<T> : ISFuncApi<T,uint>
+        public readonly struct PopCount<T> : ISFunc<T,uint>
             where T : unmanaged        
         {
             public static PopCount<T> Op => default;

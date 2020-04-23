@@ -14,7 +14,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(Integers)]
-        public readonly struct Even<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
+        public readonly struct Even<T> : ISFunc<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "even";

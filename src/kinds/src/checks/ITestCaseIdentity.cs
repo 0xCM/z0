@@ -47,10 +47,10 @@ namespace Z0
             where K : unmanaged
                 => Identify.sfunc<K>($"{label}_baseline");
 
-        string CaseName(ISFuncApi f) 
+        string CaseName(ISFunc f) 
             =>$"{owner(HostType)}{Sep}{HostType.Name}{Sep}{f.Id}";
 
-        string CaseName<W,T>(ISFuncApi f)
+        string CaseName<W,T>(ISFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => CaseName<W,T>(HostType, Identify.Op<W,T>(f.Id.Name), true);
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="generic">Whether the test subject is generic</param>
         /// <typeparam name="W">The type width</typeparam>
         /// <typeparam name="T">The cell width</typeparam>
-        string CaseName<W,T>(ISFuncApi f, W w, bool generic = true)
+        string CaseName<W,T>(ISFunc f, W w, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => CaseName<W,T>(HostType, Identify.Op<W,T>(f.Id.Name), generic: generic);

@@ -12,7 +12,7 @@ namespace Z0
     partial class BV
     {
         [Closures(UnsignedInts)]
-        public readonly struct Width<T> : ISFuncApi<BitVector<T>,int>
+        public readonly struct Width<T> : ISFunc<BitVector<T>,int>
             where T : unmanaged        
         {    
             public static Width<T> Op => default;

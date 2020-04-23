@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
     using static Seed;
 
@@ -46,6 +47,16 @@ namespace Z0
             => src is Fixed512V x && Equals(x);
 
         public override string ToString() 
-            => Format();                      
+            => Format();              
+
+        [MethodImpl(Inline)]
+        public Vector256<T> Lo<T>()
+            where T : unmanaged
+                => X0.ToVector<T>();
+
+        [MethodImpl(Inline)]
+        public Vector256<T> Hi<T>()
+            where T : unmanaged
+                => X1.ToVector<T>();
     }    
 }

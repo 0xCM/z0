@@ -13,7 +13,6 @@ namespace Z0
     [ApiHost("v512")]
     public static class Vector512
     {
-
         [MethodImpl(Inline)]
         public static ref readonly F ToFixed<T,F>(this in Vector512<T> src)
             where F : unmanaged, IFixed
@@ -21,9 +20,9 @@ namespace Z0
                 => ref Fixed.from<Vector512<T>,F>(in src);
 
         [MethodImpl(Inline)]
-        public static Vector512<T> ToVector<T>(this in Fixed512 src)
+        public static Vector512<T> ToVector<T>(this in Fixed512V src)
             where T : unmanaged
-                => Unsafe.As<Fixed512,Vector512<T>>(ref Unsafe.AsRef(in src));
+                => Unsafe.As<Fixed512V,Vector512<T>>(ref Unsafe.AsRef(in src));
 
         [MethodImpl(Inline),Op]
         public static Vector512<short> Create(

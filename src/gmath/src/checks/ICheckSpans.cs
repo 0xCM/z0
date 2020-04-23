@@ -16,6 +16,7 @@ namespace Z0
     public readonly struct CheckSpans : ICheckSpans
     {
         public static ICheckSpans Checker => default(CheckSpans);
+        
     }
 
     public interface ICheckSpans : IValidator, ICheckGeneric

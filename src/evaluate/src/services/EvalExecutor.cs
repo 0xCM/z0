@@ -215,7 +215,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        public EvalResult CheckMatch(BinaryOp128 f, OpUri fUri, BinaryOp128 g, OpUri gUri)
+        public EvalResult CheckMatch(BinaryOp128V f, OpUri fUri, BinaryOp128V g, OpUri gUri)
         {
             var w = n128;
             void check()
@@ -238,7 +238,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        public EvalResult CheckMatch(BinaryOp256 f, OpUri fUri, BinaryOp256 g, OpUri gUri)
+        public EvalResult CheckMatch(BinaryOp256V f, OpUri fUri, BinaryOp256V g, OpUri gUri)
         {
             var w = n256;
             void check()
