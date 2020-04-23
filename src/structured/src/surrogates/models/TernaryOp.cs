@@ -11,41 +11,45 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct UnaryOp<T> : ISUnaryOpApi<T>
+        public readonly struct TernaryOp<T> : Z0.ISTernaryOp<T> 
         {
+            readonly Z0.TernaryOp<T> F;
+            
             public OpIdentity Id {get;}
 
-            readonly Z0.UnaryOp<T> F;
-
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T>(UnaryOp<T> src)
+            public static implicit operator Func<T,T,T,T>(TernaryOp<T> src)
                 => src.ToFunc();
 
             [MethodImpl(Inline)]
-            internal UnaryOp(Z0.UnaryOp<T> f, OpIdentity id)            
+            public static implicit operator TernaryOp<T>(Func<T,T,T,T> src)
+                => src.ToTernaryOp();
+
+            [MethodImpl(Inline)]
+            internal TernaryOp(Z0.TernaryOp<T> f, OpIdentity id)            
             {
                 this.F = f;
                 this.Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal UnaryOp(Z0.UnaryOp<T> f, string name)            
+            internal TernaryOp(Z0.TernaryOp<T> f, string name)            
             {
                 this.F = f;
                 this.Id = Identify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public T Invoke(T a) => F(a);
+            public T Invoke(T a, T b, T c) => F(a, b, c);
 
-            public Z0.UnaryOp<T> Subject
+            public Z0.TernaryOp<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
 
             [MethodImpl(Inline)]
-            public Func<T,T> AsFunc()
+            public Func<T,T,T,T> AsFunc()
                 => this.ToFunc();
         }            
     }

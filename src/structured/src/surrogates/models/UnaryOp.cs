@@ -11,50 +11,42 @@ namespace Z0
 
     partial class Surrogates
     {
-        /// <summary>
-        /// Captures a delegate that is exposed as an emitter
-        /// </summary>
-        public readonly struct Emitter<T> : ISEmitterApi<T>
+        public readonly struct UnaryOp<T> : ISUnaryOp<T>
         {
             public OpIdentity Id {get;}
 
-            readonly Z0.Emitter<T> F;
+            readonly Z0.UnaryOp<T> F;
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T>(Emitter<T> src)
+            public static implicit operator Func<T,T>(UnaryOp<T> src)
                 => src.ToFunc();
 
             [MethodImpl(Inline)]
-            public static implicit operator Emitter<T>(Func<T> src)
-                => src.ToEmitter();
-
-            [MethodImpl(Inline)]
-            public Emitter(Z0.Emitter<T> f, OpIdentity id)            
+            internal UnaryOp(Z0.UnaryOp<T> f, OpIdentity id)            
             {
                 this.F = f;
                 this.Id = id;
             }
 
             [MethodImpl(Inline)]
-            public Emitter(Z0.Emitter<T> f, string name)            
+            internal UnaryOp(Z0.UnaryOp<T> f, string name)            
             {
                 this.F = f;
                 this.Id = Identify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public T Invoke() => F();
+            public T Invoke(T a) => F(a);
 
-            public Z0.Emitter<T> Subject
+            public Z0.UnaryOp<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
 
             [MethodImpl(Inline)]
-            public Func<T> AsFunc()
+            public Func<T,T> AsFunc()
                 => this.ToFunc();
-        }
-
+        }            
     }
 }

@@ -15,4 +15,10 @@ namespace Z0
         
     }
 
+    public interface IKinded<K>
+        where K : unmanaged, IKind
+    {
+        K Kind  => default;
+    }
+
 }

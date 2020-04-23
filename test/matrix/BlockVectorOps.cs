@@ -49,7 +49,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            gblocks.add<T>(x,y,x);
+            VBlocks.add<T>(x,y,x);
             return ref x;
         }
 
@@ -66,7 +66,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            gblocks.sub(x.Data,y.Data,z.Data);
+            VBlocks.sub(x.Data,y.Data,z.Data);
             return ref z;
         }
     }

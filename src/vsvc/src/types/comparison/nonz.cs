@@ -12,8 +12,8 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
-        public readonly struct NonZ128<T> : ISVUnaryPredicate128DApi<T>, ISBUnaryPred128Api<T>
+        [NumericClosures(AllNumeric)]
+        public readonly struct NonZ128<T> : ISVUnaryPredicate128D<T>, IBlockedUnaryPred128<T>
             where T : unmanaged
         {
             public static NonZ128<T> Op => default;
@@ -32,12 +32,12 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(in Block128<T> x, Span<bit> dst) 
-                => gblocks.nonz(x,dst);
+                => VBlocks.nonz(x,dst);
 
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct NonZ256<T> : ISVUnaryPredicate256DApi<T>, ISBUnaryPred256Api<T>
+        public readonly struct NonZ256<T> : ISVUnaryPredicate256D<T>, IBlockedUnaryPred256<T>
             where T : unmanaged
         {
             public const string Name = "vnonz";
@@ -56,7 +56,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(in Block256<T> x, Span<bit> dst) 
-                => gblocks.nonz(x,dst);
+                => VBlocks.nonz(x,dst);
 
         }
     }

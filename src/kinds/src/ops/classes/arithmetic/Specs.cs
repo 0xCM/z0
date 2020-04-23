@@ -41,7 +41,6 @@ namespace Z0
         where F : unmanaged, I
         where T : unmanaged
     {
-
         K I.Kind => default(F).Kind;
 
         /// <summary>

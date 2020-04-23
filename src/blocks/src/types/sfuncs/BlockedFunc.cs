@@ -9,10 +9,10 @@ namespace Z0
     using System.Security;
     
     /// <summary>
-    /// Characterizes identified (S)tructed (B)blocked functions
+    /// Characterizes structed blocked functions
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBFuncApi : ISFunc
+    public interface IBlockedFunc : ISFunc
     {
 
     }
@@ -22,7 +22,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     [SuppressUnmanagedCodeSecurity]    
-    public interface ISBFuncApi<W> : ISBFuncApi
+    public interface IBlockedFunc<W> : IBlockedFunc
         where W : unmanaged, ITypeWidth
     {
 
@@ -34,7 +34,7 @@ namespace Z0
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBOpApi<W,T> : ISBFuncApi<W>
+    public interface IBlockedFunc<W,T> : IBlockedFunc<W>
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {

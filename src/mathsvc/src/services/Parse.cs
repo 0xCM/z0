@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(AllNumeric)]
-        public readonly struct Parse<T>  : ISFNumericParserApi<T>
+        public readonly struct Parse<T>  : ISFParser<T>
             where T : unmanaged        
         {
             public const string Name = "parse";

@@ -14,7 +14,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(AllNumeric)]
-        public readonly struct Dist<T> : ISFuncApi<T,T,ulong>
+        public readonly struct Dist<T> : ISFunc<T,T,ulong>
             where T : unmanaged        
         {
             public const string Name = "dist";

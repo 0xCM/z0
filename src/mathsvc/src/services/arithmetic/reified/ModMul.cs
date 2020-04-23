@@ -14,7 +14,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(Integers)]
-        public readonly struct ModMul<T> : ISTernaryOpApi<T>, ISTernarySpanOpApi<T>
+        public readonly struct ModMul<T> : ISTernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "modmul";

@@ -24,7 +24,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryOpApi<V> : ISVFunc, ISUnaryOpApi<V>
+    public interface ISVUnaryOp<V> : ISVFunc, ISUnaryOp<V>
         where V : struct
     {
    
@@ -36,7 +36,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryOpApi<W,V> : ISVUnaryOpApi<V>
+    public interface ISVUnaryOp<W,V> : ISVUnaryOp<V>
         where W : unmanaged, ITypeWidth
         where V : struct
     {
@@ -50,7 +50,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryOpApi<W,V,T> : ISVUnaryOpApi<W,V>
+    public interface ISVUnaryOp<W,V,T> : ISVUnaryOp<W,V>
         where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged
@@ -58,13 +58,12 @@ namespace Z0
 
     }
 
-
     /// <summary>
     /// Characterizes a vectorized unary operator over 128-bit operands
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryOp128Api<T> : ISVUnaryOpApi<W128,Vector128<T>,T>, ISVFunc128<T>
+    public interface ISVUnaryOp128<T> : ISVUnaryOp<W128,Vector128<T>,T>, ISVFunc128<T>
         where T : unmanaged
     {
 
@@ -75,7 +74,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryOp256Api<T> : ISVUnaryOpApi<W256,Vector256<T>,T>, ISVFunc256<T>
+    public interface ISVUnaryOp256<T> : ISVUnaryOp<W256,Vector256<T>,T>, ISVFunc256<T>
         where T : unmanaged
     {
                 
@@ -86,7 +85,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryOp128DApi<T> : ISVUnaryOp128Api<T>, IVUnaryOpD<T>
+    public interface ISVUnaryOp128D<T> : ISVUnaryOp128<T>, IVUnaryOpD<T>
         where T : unmanaged
     {
     }
@@ -96,7 +95,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryOp256DApi<T> : ISVUnaryOp256Api<T>, IVUnaryOpD<T>
+    public interface ISVUnaryOp256D<T> : ISVUnaryOp256<T>, IVUnaryOpD<T>
         where T : unmanaged
     {
         

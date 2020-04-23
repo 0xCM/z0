@@ -25,7 +25,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryPredicateApi<W,V> : ISVFunc, ISFunc<V,bit>
+    public interface ISVUnaryPredicate<W,V> : ISVFunc, ISFunc<V,bit>
         where W : unmanaged, ITypeWidth
         where V : struct
     {
@@ -39,7 +39,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryPredicateApi<W,V,T> : ISVUnaryPredicateApi<W,V>
+    public interface ISVUnaryPredicate<W,V,T> : ISVUnaryPredicate<W,V>
         where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged
@@ -52,7 +52,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryPredicate128Api<T> : ISVUnaryPredicateApi<W128,Vector128<T>,T>, ISVFunc128<T>
+    public interface ISVUnaryPredicate128<T> : ISVUnaryPredicate<W128,Vector128<T>,T>, ISVFunc128<T>
         where T : unmanaged
     {
         
@@ -63,7 +63,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryPredicate256Api<T> : ISVUnaryPredicateApi<W256,Vector256<T>,T>, ISVFunc256<T>
+    public interface ISVUnaryPredicate256<T> : ISVUnaryPredicate<W256,Vector256<T>,T>, ISVFunc256<T>
         where T : unmanaged
     {        
         
@@ -74,7 +74,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryPredicate128DApi<T> : ISVUnaryPredicate128Api<T>, IVUnaryPredicateD<T>
+    public interface ISVUnaryPredicate128D<T> : ISVUnaryPredicate128<T>, IVUnaryPredicateD<T>
         where T : unmanaged
     {
     
@@ -85,7 +85,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryPredicate256DApi<T> : ISVUnaryPredicate256Api<T>, IVUnaryPredicateD<T>
+    public interface ISVUnaryPredicate256D<T> : ISVUnaryPredicate256<T>, IVUnaryPredicateD<T>
         where T : unmanaged
     {
     

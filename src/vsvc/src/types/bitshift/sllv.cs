@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class VSvcHosts
     {
-        public readonly struct Sllv128<T> : ISVBinaryOp128DApi<T>
+        public readonly struct Sllv128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vsllv";
@@ -32,7 +33,7 @@ namespace Z0
                 => gmath.sll(a,convert<T,byte>(offset));
         }
 
-        public readonly struct Sllv256<T> : ISVBinaryOp256DApi<T>
+        public readonly struct Sllv256<T> : ISVBinaryOp256D<T>
             where T : unmanaged
         {
             public const string Name = "vsllv";

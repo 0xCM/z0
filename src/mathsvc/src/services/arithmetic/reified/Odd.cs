@@ -14,7 +14,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(Integers)]
-        public readonly struct Odd<T> : ISFunc<T,bit>, ISUnarySpanPredApi<T>
+        public readonly struct Odd<T> : ISFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged        
         {
             public const string Name = "odd";

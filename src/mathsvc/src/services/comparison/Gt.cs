@@ -13,7 +13,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(NumericKind.All)]
-        public readonly struct Gt<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
+        public readonly struct Gt<T> : ISFunc<T,T,bit>, IBinarySpanPred<T>
             where T : unmanaged        
         {
             public const string Name = "gt";

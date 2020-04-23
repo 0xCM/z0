@@ -7,14 +7,24 @@ namespace Z0
     using System;
     using System.Security;
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISAction<A> : ISFunc
+    {
+        void Invoke(A a);
+
+        Action<A> Operation => Invoke;
+    }    
+
     /// <summary>
     /// Characterizes a structural emitter; that is, the contract charactrizes a type that implements an emitter
     /// </summary>
     /// <typeparam name="A">The emission type</typeparam>    
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFuncApi<A> : ISFunc, ISFunc<A>
+    public interface ISFunc<A> : ISFunc
     {
+        A Invoke();
 
+        Func<A> Operation => Invoke;
     }
 
     /// <summary>
@@ -37,7 +47,7 @@ namespace Z0
     /// <typeparam name="B">The second operand type</typeparam>
     /// <typeparam name="C">The third result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFuncApi<A,B,C> : ISFunc
+    public interface ISFunc<A,B,C> : ISFunc
     {
         /// <summary>
         /// Invokes the reified function over supplied operands
@@ -58,7 +68,7 @@ namespace Z0
     /// <typeparam name="C">The third operand type</typeparam>
     /// <typeparam name="D">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFuncApi<A,B,C,D> : ISFunc
+    public interface ISFunc<A,B,C,D> : ISFunc
     {
         /// <summary>
         /// Invokes the reified function over supplied operands
@@ -71,27 +81,4 @@ namespace Z0
         Func<A,B,C,D> Operation => Invoke;
     }
 
-
-    /// <summary>
-    /// Characterizes a structural transformation function
-    /// </summary>
-    /// <typeparam name="A">The source domain type</typeparam>
-    /// <typeparam name="B">The target domain type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFMapApi<A,B> : ISFunc<A,B>
-    {
-
-    }
-
-
-    /// <summary>
-    /// Characterizes an operator that materializes a primal value from a string
-    /// </summary>
-    /// <typeparam name="T">The primal value type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFNumericParserApi<T> : ISFunc<string,T>
-        where T : unmanaged
-    {
-        
-    }
 }

@@ -12,8 +12,8 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
-        public readonly struct TestZ128<T> : ISVBinaryPredicate128DApi<T>, ISBBinaryPred128Api<T>
+        [Closures(AllNumeric)]
+        public readonly struct TestZ128<T> : ISVBinaryPredicate128D<T>, IBlockedBinaryPred128<T>
             where T : unmanaged
         {
             public const string Name = "vtestz";
@@ -32,11 +32,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(in Block128<T> x, in Block128<T> y, Span<bit> dst) 
-                => gblocks.testz(x,y,dst);
+                => VBlocks.testz(x,y,dst);
         }
 
-        [NumericClosures(NumericKind.All)]
-        public readonly struct TestZ256<T> : ISVBinaryPredicate256Api<T>, ISBBinaryPred256Api<T>
+        [Closures(AllNumeric)]
+        public readonly struct TestZ256<T> : ISVBinaryPredicate256<T>, IBlockedBinaryPred256<T>
             where T : unmanaged
         {
             public const string Name = "vtestz";
@@ -55,8 +55,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(in Block256<T> x, in Block256<T> y, Span<bit> dst) 
-                => gblocks.testz(x,y,dst);
-
+                => VBlocks.testz(x,y,dst);
         }
    }
 }

@@ -12,7 +12,8 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Reverse128<T> : ISVUnaryOp128Api<T>
+        [Closures(Integers)]
+        public readonly struct Reverse128<T> : ISVUnaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vreverse";
@@ -24,11 +25,11 @@ namespace Z0
             public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => gvec.vreverse(x);
-            
+            public Vector128<T> Invoke(Vector128<T> x) => gvec.vreverse(x);            
         }
 
-        public readonly struct Reverse256<T> : ISVUnaryOp256Api<T>
+        [Closures(Integers)]
+        public readonly struct Reverse256<T> : ISVUnaryOp256<T>
             where T : unmanaged
         {
             public const string Name = "vreverse";

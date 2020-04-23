@@ -10,7 +10,7 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImmResolverApi : ISFunc
+    public interface IImmResover : ISFunc
     {
         NumericKind ImmKind => NumericKind.None;
 
@@ -20,72 +20,66 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImmResolverApi<T> : ISFImmResolverApi
+    public interface IImmResolver<T> : IImmResover
         where T : unmanaged
     {
-        NumericKind ISFImmResolverApi.ImmKind => NumericKinds.kind<T>();
+        NumericKind IImmResover.ImmKind => NumericKinds.kind<T>();
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImm8ResolverApi<T> : ISFImmResolverApi<byte>
-        where T : struct
-    {
-
-    }
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8VResolverApi<V> : ISFImm8ResolverApi<V>
+    public interface IImm8Resolver<V> : IImmResolver<byte>
         where V : struct
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryResolverApi<W,V> : ISVImm8VResolverApi<V>
+    public interface IImm8UnaryResolver<W,V> : IImm8Resolver<V>
         where V : struct
         where W : unmanaged, ITypeWidth
     {
         DynamicDelegate<UnaryOp<V>>  @delegate(byte imm8);  
 
-        TypeWidth ISFImmResolverApi.OperandWidth => Widths.type<W>();
+        TypeWidth IImmResover.OperandWidth => Widths.type<W>();
 
-        ArityValue ISFImmResolverApi.ResolvedArity => ArityValue.Unary;           
+        ArityValue IImmResover.ResolvedArity => ArityValue.Unary;           
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8BinaryResolverApi<W,V> : ISVImm8VResolverApi<V>
+    public interface IImm8BinaryResolver<W,V> : IImm8Resolver<V>
         where V : struct
         where W : unmanaged, ITypeWidth
     {
         DynamicDelegate<BinaryOp<V>> @delegate(byte imm8);  
 
-        TypeWidth ISFImmResolverApi.OperandWidth => Widths.type<W>();
+        TypeWidth IImmResover.OperandWidth => Widths.type<W>();
 
-        ArityValue ISFImmResolverApi.ResolvedArity => ArityValue.Binary;
+        ArityValue IImmResover.ResolvedArity => ArityValue.Binary;
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryResolver128Api<T> : ISVImm8UnaryResolverApi<W128,Vector128<T>>
+    public interface IImm8UnaryResolver128<T> : IImm8UnaryResolver<W128,Vector128<T>>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryResolver256Api<T> : ISVImm8UnaryResolverApi<W256,Vector256<T>>
+    public interface IImm8UnaryResolver256<T> : IImm8UnaryResolver<W256,Vector256<T>>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8BinaryResolver128Api<T> : ISVImm8BinaryResolverApi<W128,Vector128<T>>
+    public interface IImm8BinaryResolver128<T> : IImm8BinaryResolver<W128,Vector128<T>>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8BinaryResolver256Api<T>  : ISVImm8BinaryResolverApi<W256,Vector256<T>>
+    public interface IImm8BinaryResolver256<T>  : IImm8BinaryResolver<W256,Vector256<T>>
         where T : unmanaged
     {
         

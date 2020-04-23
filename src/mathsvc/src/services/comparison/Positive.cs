@@ -13,7 +13,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(NumericKind.All)]
-        public readonly struct PositiveOp<T> : ISFunc<T,bit>, ISUnarySpanPredApi<T>
+        public readonly struct PositiveOp<T> : ISFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged        
         {
             public const string Name = "positive";

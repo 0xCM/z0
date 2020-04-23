@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(Integers)]
-        public readonly struct Dec128<T> : ISVUnaryOp128DApi<T>, ISBUnaryOp128Api<T>
+        public readonly struct Dec128<T> : ISVUnaryOp128D<T>, IBlockedUnaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vdec";
@@ -34,11 +34,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> c)            
-                => ref gblocks.dec(a,c);
+                => ref VBlocks.dec(a,c);
         }
 
         [NumericClosures(Integers)]
-        public readonly struct Dec256<T> : ISVUnaryOp256DApi<T>, ISBUnaryOp256Api<T>
+        public readonly struct Dec256<T> : ISVUnaryOp256D<T>, IBlockedUnaryOp256<T>
             where T : unmanaged
         {
             public const string Name = "vdec";
@@ -59,7 +59,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
-                => ref gblocks.dec(a,c);
+                => ref VBlocks.dec(a,c);
         }
     }
 }

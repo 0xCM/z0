@@ -38,6 +38,6 @@ namespace Z0
 
         public readonly struct Square : I { public K Kind { [MethodImpl(Inline)] get => K.Square;}}
 
-        public readonly struct Sqrt : I { public K Kind { [MethodImpl(Inline)] get => K.Sqrt;}}
+        public readonly struct Sqrt : I { public K Kind { [MethodImpl(Inline)] get => K.Sqrt;}}        
     }
 }

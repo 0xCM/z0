@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class VSvcHosts
     {
-        public readonly struct Bsrl128<T> : ISVShiftOp128Api<T>, ISVImm8UnaryResolver128Api<T>
+        public readonly struct Bsrl128<T> : ISVShiftOp128<T>, IImm8UnaryResolver128<T>
             where T : unmanaged
         {
             public const string Name = "vbsrl";
@@ -31,7 +31,7 @@ namespace Z0
                 => gvec.vbsrl(x,count);            
         }
 
-        public readonly struct Bsrl256<T> : ISVShiftOp256Api<T>, ISVImm8UnaryResolver256Api<T>
+        public readonly struct Bsrl256<T> : ISVShiftOp256<T>, IImm8UnaryResolver256<T>
             where T : unmanaged
         {
             public const string Name = "vbsrl";

@@ -13,7 +13,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(NumericKind.All)]
-        public readonly struct Max<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct Max<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "max";

@@ -26,7 +26,7 @@ namespace Z0
         }        
     }   
 
-    public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,ISVBinaryOp128DApi<T>,T> 
+    public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,ISVBinaryOp128D<T>,T> 
         where T : unmanaged
     {   
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
             where W : struct, ITypeWidth
                 => ((int)default(W).TypeWidth)/BitSize.measure<T>();
 
-        void ICheckBinarySVFD<W128,ISVBinaryOp128DApi<T>,T>.CheckSVF(ISVBinaryOp128DApi<T> f)
+        void ICheckBinarySVFD<W128,ISVBinaryOp128D<T>,T>.CheckSVF(ISVBinaryOp128D<T> f)
         {
             var t = default(T);
             var w = w128;
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.UnaryOpClass op, W128 w)
-            where F : ISVUnaryOp128DApi<T>
+            where F : ISVUnaryOp128D<T>
         {            
             var t = default(T);
             void run()
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.UnaryOpClass op, W256 w)
-            where F : ISVUnaryOp256DApi<T>
+            where F : ISVUnaryOp256D<T>
         {
 
             var t = default(T);
@@ -156,7 +156,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.BinaryOpClass op, W128 w)
-            where F : ISVBinaryOp128DApi<T>
+            where F : ISVBinaryOp128D<T>
         {
             var t = default(T);
 
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.BinaryOpClass k, W256 w)
-            where F : ISVBinaryOp256DApi<T>
+            where F : ISVBinaryOp256D<T>
         {
             var t = default(T);
 
@@ -212,7 +212,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.TernaryOpClass op, W128 w)
-            where F : ISVTernaryOp128DApi<T>
+            where F : ISVTernaryOp128D<T>
         {
             var t = default(T);
 
@@ -242,7 +242,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.TernaryOpClass op, W256 w)
-            where F : ISVTernaryOp256DApi<T>
+            where F : ISVTernaryOp256D<T>
         {
             var t = default(T);
 
@@ -265,7 +265,7 @@ namespace Z0
         }
 
         void CheckSVF<F>(F f, K.ShiftOpClass k, W128 w)
-            where F : ISVShiftOp128DApi<T>
+            where F : ISVShiftOp128D<T>
         {
             var t = default(T);
             var bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
@@ -287,7 +287,7 @@ namespace Z0
         }
 
         void CheckSVF<F>(F f, K.ShiftOpClass k, W256 w)
-            where F : ISVShiftOp256DApi<T>
+            where F : ISVShiftOp256D<T>
         {
             var t = default(T);
             var bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));

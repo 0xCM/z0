@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class VSvcHosts
     {
-        public readonly struct Hi128<T> : ISVUnaryOp128Api<T>
+        public readonly struct Hi128<T> : ISVUnaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vhi";

@@ -13,7 +13,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(AllNumeric)]
-        public readonly struct Eq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
+        public readonly struct Eq<T> : ISFunc<T,T,bit>, IBinarySpanPred<T>
             where T : unmanaged        
         {
             public const string Name = "eq";

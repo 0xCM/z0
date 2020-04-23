@@ -10,7 +10,7 @@ namespace Z0
 
     using static Seed; 
 
-    public interface IShiftOpSvc<T> : ISImm8UnaryOpApi<T>, ISImm8SpanShiftApi<T>
+    public interface IShiftOpSvc<T> : IUnaryImm8Op<T>, ISpanShiftImm8<T>
         where T : unmanaged
     {
         
@@ -23,7 +23,7 @@ namespace Z0
 
     }
 
-    public interface IVarShiftOpSvc<T> : ISSpanShiftVarApi<T>
+    public interface IVarShiftOpSvc<T> : IVarSpanShift<T>
         where T : unmanaged
     {
 

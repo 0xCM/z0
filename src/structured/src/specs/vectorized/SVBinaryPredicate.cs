@@ -25,7 +25,7 @@ namespace Z0
     /// <typeparam name="W">The natural type</typeparam>
     /// <typeparam name="V">The non-primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryPredicateApi<W,V> : ISVFunc, ISFuncApi<V,V,bit>
+    public interface ISVBinaryPredicate<W,V> : ISVFunc, ISFunc<V,V,bit>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
     {
@@ -39,7 +39,7 @@ namespace Z0
     /// <typeparam name="V">The non-primal type</typeparam>
     /// <typeparam name="T">The scalar type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryPredicateApi<W,V,T> : ISVBinaryPredicateApi<W,V>
+    public interface ISVBinaryPredicate<W,V,T> : ISVBinaryPredicate<W,V>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
@@ -52,7 +52,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryPredicate128Api<T> : ISVBinaryPredicateApi<W128,Vector128<T>,T>, ISVFunc128<T>
+    public interface ISVBinaryPredicate128<T> : ISVBinaryPredicate<W128,Vector128<T>,T>, ISVFunc128<T>
         where T : unmanaged
     {
 
@@ -63,7 +63,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryPredicate256Api<T> : ISVBinaryPredicateApi<W256,Vector256<T>,T>, ISVFunc256<T>
+    public interface ISVBinaryPredicate256<T> : ISVBinaryPredicate<W256,Vector256<T>,T>, ISVFunc256<T>
         where T : unmanaged
     {
         
@@ -75,7 +75,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryPredicate128DApi<T> : ISVBinaryPredicate128Api<T>, IBinaryPredicateD<T>
+    public interface ISVBinaryPredicate128D<T> : ISVBinaryPredicate128<T>, IBinaryPredicateD<T>
         where T : unmanaged
     {
     
@@ -87,7 +87,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryPredicate256DApi<T> : ISVBinaryPredicate256Api<T>, IBinaryPredicateD<T>
+    public interface ISVBinaryPredicate256D<T> : ISVBinaryPredicate256<T>, IBinaryPredicateD<T>
         where T : unmanaged
     {
     

@@ -13,7 +13,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(NumericKind.All)]
-        public readonly struct Between<T> : ISFuncApi<T,T,T,bit>
+        public readonly struct Between<T> : ISFunc<T,T,T,bit>
             where T : unmanaged        
         {
             public const string Name = "between";

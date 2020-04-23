@@ -9,11 +9,11 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
 
-    using static Seed; using static Memories;
+    using static Seed;    
 
     partial class VSvcHosts
     {
-        public readonly struct Bsll128<T> : ISVShiftOp128Api<T>, ISVImm8UnaryResolver128Api<T>, ISBImm8UnaryOp128Api<T>
+        public readonly struct Bsll128<T> : ISVShiftOp128<T>, IImm8UnaryResolver128<T>, IBlockedUnaryImm8Op128<T>
             where T : unmanaged
         {
             public const string Name = "vbsll";
@@ -33,10 +33,10 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, byte count, in Block128<T> c)            
-                => ref gblocks.bsll(a,count,c);            
+                => ref VBlocks.bsll(a,count,c);            
         }
 
-        public readonly struct Bsll256<T> : ISVShiftOp256Api<T>, ISVImm8UnaryResolver256Api<T>, ISBImm8UnaryOp256Api<T>
+        public readonly struct Bsll256<T> : ISVShiftOp256<T>, IImm8UnaryResolver256<T>, IBlockedUnaryImm8Op256<T>
             where T : unmanaged
         {
             public const string Name = "vbsll";
@@ -56,7 +56,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, byte count, in Block256<T> c)            
-                => ref gblocks.bsll(a,count,c);
+                => ref VBlocks.bsll(a,count,c);
         }    
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
     using static SBlock;
 
-    partial class gblocks
+    partial class VBlocks
     {
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static ref readonly Block128<T> add<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)

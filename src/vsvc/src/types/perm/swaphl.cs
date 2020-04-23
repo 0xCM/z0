@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct SwapHiLo128<T> : ISVUnaryOp128Api<T>
+        public readonly struct SwapHiLo128<T> : ISVUnaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vswaphl";
@@ -27,7 +27,7 @@ namespace Z0
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vswaphl(x);            
         }
 
-        public readonly struct SwapHiLo256<T> : ISVUnaryOp256Api<T>
+        public readonly struct SwapHiLo256<T> : ISVUnaryOp256<T>
             where T : unmanaged
         {
             public static SwapHiLo256<T> Op => default;

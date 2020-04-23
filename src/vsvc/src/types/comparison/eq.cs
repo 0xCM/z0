@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Eq128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>
+        public readonly struct Eq128<T> : ISVBinaryOp128D<T>, IBlockedBinaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "veq";
@@ -32,12 +32,12 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
-                => ref gblocks.eq(a,b,c);
+                => ref VBlocks.eq(a,b,c);
 
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Eq256<T> : ISVBinaryOp256DApi<T>, ISBBinaryOp256Api<T>
+        public readonly struct Eq256<T> : ISVBinaryOp256D<T>, IBlockedBinaryOp256<T>
             where T : unmanaged
         {
             public const string Name = "veq";
@@ -56,7 +56,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
-                => ref gblocks.eq(a,b,c);
+                => ref VBlocks.eq(a,b,c);
         }
     }
 }

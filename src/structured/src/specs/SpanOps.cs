@@ -14,7 +14,7 @@ namespace Z0
     /// Base interface for span-oriented operations
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISSpanApi : ISFunc
+    public interface ISpanFunc : ISFunc
     {
 
     }
@@ -23,7 +23,7 @@ namespace Z0
     /// Characterizes an operator that applies a bitwise shift or rotation to elements in a source span
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISSpanShiftApi : ISSpanApi
+    public interface ISpanShift : ISpanFunc
     {
 
     }
@@ -34,7 +34,7 @@ namespace Z0
     /// <typeparam name="A">The source span cell type</typeparam>
     /// <typeparam name="B">The target span cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISSpanMapApi<A,B> : ISSpanApi
+    public interface ISpanMap<A,B> : ISpanFunc
     {
         Span<B> Invoke(Span<A> src);
     }    
@@ -46,7 +46,7 @@ namespace Z0
     /// <typeparam name="W">The cell width</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISUnarySpanOpApi<T> : ISSpanApi        
+    public interface IUnarySpanOp<T> : ISpanFunc        
     {
         Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst);
     }
@@ -56,7 +56,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBinarySpanOpApi<T> : ISSpanApi        
+    public interface IBinarySpanOp<T> : ISpanFunc        
     {
         Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst);
     }
@@ -66,7 +66,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISSpanShiftVarApi<T> : ISSpanShiftApi
+    public interface IVarSpanShift<T> : ISpanShift
     {
         Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst);
     }
@@ -77,7 +77,7 @@ namespace Z0
     /// <typeparam name="A">The source span cell type</typeparam>
     /// <typeparam name="B">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISSpanFactoryApi<A,B> : ISFunc
+    public interface ISpanFactory<A,B> : ISFunc
     {
         Span<B> Invoke(A src);
     }
@@ -88,7 +88,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISTernarySpanOpApi<T> : ISSpanApi        
+    public interface ITernarySpanOp<T> : ISpanFunc        
     {
         Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst);
     }
@@ -98,7 +98,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISUnarySpanPredApi<T> : ISSpanApi        
+    public interface IUnarySpanPred<T> : ISpanFunc        
     {
         Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst);
     }
@@ -108,7 +108,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBinarySpanPredApi<T> : ISSpanApi        
+    public interface IBinarySpanPred<T> : ISpanFunc        
     {
         Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst);
     }
@@ -118,7 +118,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISTernarySpanPredApi<T> : ISSpanApi        
+    public interface ITernarySpanPred<T> : ISpanFunc        
     {
         Span<bit> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<bit> dst);
     }    
@@ -128,7 +128,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8SpanShiftApi<T> : ISSpanShiftApi
+    public interface ISpanShiftImm8<T> : ISpanShift
     {
         Span<T> Invoke(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
 
@@ -141,7 +141,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISpanEmitter<T> : ISSpanApi
+    public interface ISpanEmitter<T> : ISpanFunc
     {
         Span<T> Invoke();
     }

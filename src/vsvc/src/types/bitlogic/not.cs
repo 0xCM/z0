@@ -32,7 +32,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> c)            
-                => ref gblocks.not(a,c);
+                => ref VBlocks.not(a,c);
         }
 
         [NumericClosures(Integers)]
@@ -54,7 +54,7 @@ namespace Z0
             public T InvokeScalar(T a) => gmath.not(a);
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
-                => ref gblocks.vnot(a,c);
+                => ref VBlocks.vnot(a,c);
         }
    }
 }

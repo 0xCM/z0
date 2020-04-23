@@ -9,11 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed; 
-    using static Memories;
 
     partial class VSvcHosts
     {
-        public readonly struct ByteSwap128<T> : ISVUnaryOp128DApi<T>
+        public readonly struct ByteSwap128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vbyteswap";
@@ -31,7 +30,7 @@ namespace Z0
             public T InvokeScalar(T a) => gbits.byteswap(a);
         }
 
-        public readonly struct ByteSwap256<T> : ISVUnaryOp256DApi<T>
+        public readonly struct ByteSwap256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
             public const string Name = "vbyteswap";

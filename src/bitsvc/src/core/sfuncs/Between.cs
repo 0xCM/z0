@@ -12,7 +12,7 @@ namespace Z0
     partial class BC
     {
         [Closures(AllNumeric)]
-        public readonly struct Between<T> : ISImm8x2UnaryOpApi<T>
+        public readonly struct Between<T> : IUnaryImm8x2Op<T>
             where T : unmanaged        
         {
             public static Between<T> Op => default;

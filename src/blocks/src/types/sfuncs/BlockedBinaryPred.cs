@@ -8,49 +8,49 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBBinaryPred8Api<T> : ISBOpApi<W8,T>
+    public interface IBlockedBinaryPred8<T> : IBlockedFunc<W8,T>
         where T : unmanaged
     {
         Span<bit> Invoke(in Block8<T> a, in Block8<T> b, Span<bit> dst);
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBBinaryPred16Api<T> : ISBOpApi<W16,T>
+    public interface IBlockedBinaryPred16<T> : IBlockedFunc<W16,T>
         where T : unmanaged
     {
         Span<bit> Invoke(in Block16<T> a, in Block16<T> b, Span<bit> dst);
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBBinaryPred32Api<T> : ISBOpApi<W32,T>
+    public interface IBlockedBinaryPred32<T> : IBlockedFunc<W32,T>
         where T : unmanaged
     {
         Span<bit> Invoke(in Block32<T> a, in Block32<T> b, Span<bit> dst);
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBBinaryPred64Api<T> : ISBOpApi<W64,T>
+    public interface IBlockedBinaryPred64<T> : IBlockedFunc<W64,T>
         where T : unmanaged
     {
         Span<bit> Invoke(in Block64<T> a, in Block64<T> b, Span<bit> dst);
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBBinaryPred128Api<T> : ISBOpApi<W128,T>
+    public interface IBlockedBinaryPred128<T> : IBlockedFunc<W128,T>
         where T : unmanaged
     {
         Span<bit> Invoke(in Block128<T> a, in Block128<T> b, Span<bit> dst);
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBBinaryPred256Api<T> : ISBOpApi<W256,T>
+    public interface IBlockedBinaryPred256<T> : IBlockedFunc<W256,T>
         where T : unmanaged
     {
         Span<bit> Invoke(in Block256<T> a, in Block256<T> b, Span<bit> dst);
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBBinaryPred512Api<T> : ISBOpApi<W512,T>
+    public interface ISBBinaryPred512Api<T> : IBlockedFunc<W512,T>
         where T : unmanaged
     {
         Span<bit> Invoke(in Block512<T> a, in Block512<T> b, Span<bit> dst);

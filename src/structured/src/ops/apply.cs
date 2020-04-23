@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
         public static T apply<F,T>(T x, T y, F f)
-            where F : ISBinaryOpApi<T>
+            where F : ISBinaryOp<T>
                 => f.Invoke(x,y);
 
         [MethodImpl(Inline)]
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-            where F : ISBinaryOpApi<T>
+            where F : ISBinaryOp<T>
         {        
             var count = lhs.Length;
             var dst = memory.span<T>(count);
@@ -58,12 +58,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> apply<F,T>(F f, Span<T> lhs, Span<T> rhs)
             where T : unmanaged
-            where F : ISBinaryOpApi<T>
+            where F : ISBinaryOp<T>
                 => apply(f,lhs.ReadOnly(), rhs.ReadOnly());
 
         [MethodImpl(Inline)]
         public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-            where F : ISFuncApi<T,T,bit>
+            where F : ISFunc<T,T,bit>
         {
             var count = dst.Length;
             ref readonly var lSrc = ref head(lhs);
@@ -77,7 +77,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T3> apply<F,T0,T1,T2,T3>(F f, ReadOnlySpan<T0> A, ReadOnlySpan<T1> B, ReadOnlySpan<T2> C,  Span<T3> dst)
-            where F : ISFuncApi<T0,T1,T2,T3>
+            where F : ISFunc<T0,T1,T2,T3>
         {
             var count = dst.Length;
             ref readonly var a = ref head(A);
@@ -92,7 +92,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T2> apply<F,T0,T1,T2>(F f, ReadOnlySpan<T0> lhs, ReadOnlySpan<T1> rhs, Span<T2> dst)
-            where F : ISFuncApi<T0,T1,T2>
+            where F : ISFunc<T0,T1,T2>
         {
             var count = dst.Length;
             ref readonly var lSrc = ref head(lhs);

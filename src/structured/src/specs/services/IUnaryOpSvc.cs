@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Security;        
+    using System.Security;
 
     using static Seed; 
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ITernaryOpSvc<T> : ISTernaryOpApi<T>, ISTernarySpanOpApi<T>
+    public interface IUnaryOpSvc<T> : ISUnaryOp<T>, IUnarySpanOp<T>
         where T : unmanaged
     {
         

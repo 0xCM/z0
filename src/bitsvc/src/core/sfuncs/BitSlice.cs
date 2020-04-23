@@ -12,7 +12,7 @@ namespace Z0
     partial class BC
     {
         [Closures(Integers)]
-        public readonly struct BitSlice<T> : ISImm8x2UnaryOpApi<T>
+        public readonly struct BitSlice<T> : IUnaryImm8x2Op<T>
             where T : unmanaged        
         {
             public static BitSlice<T> Op => default;

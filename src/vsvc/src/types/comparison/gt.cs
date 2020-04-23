@@ -10,10 +10,12 @@ namespace Z0
 
     using static Seed;
 
+    using K = Kinds;
+
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
-        public readonly struct Gt128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>
+        [NumericClosures(AllNumeric),Gt]
+        public readonly struct Gt128<T> : ISVBinaryOp128D<T>, IBlockedBinaryOp128<T>
             where T : unmanaged
         {
             public const string Name = "vgt";
@@ -32,13 +34,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
-                => ref gblocks.gt(a,b,c);
-
-
+                => ref VBlocks.gt(a,b,c);
         }
 
-        [NumericClosures(NumericKind.All)]
-        public readonly struct Gt256<T> : ISVBinaryOp256DApi<T>, ISBBinaryOp256Api<T>
+        [NumericClosures(AllNumeric),Gt]
+        public readonly struct Gt256<T> : ISVBinaryOp256D<T>, IBlockedBinaryOp256<T>
             where T : unmanaged
         {
             public const string Name = "vgt";
@@ -57,7 +57,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
-                => ref gblocks.gt(a,b,c);
+                => ref VBlocks.gt(a,b,c);
         } 
     }
 }

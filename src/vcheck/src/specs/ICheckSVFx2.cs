@@ -13,14 +13,14 @@ namespace Z0
 
     using K = Kinds;
 
-    public interface ICheckSF128<S,T> : ISFuncApi<S,Vector128<T>,bit>
+    public interface ICheckSF128<S,T> : ISFunc<S,Vector128<T>,bit>
         where S : unmanaged
         where T : unmanaged
     {
         
     }
 
-    public interface ICheckSF256<S,T> : ISFuncApi<S, Vector256<T>, bit>
+    public interface ICheckSF256<S,T> : ISFunc<S, Vector256<T>, bit>
         where S : unmanaged
         where T : unmanaged
     {

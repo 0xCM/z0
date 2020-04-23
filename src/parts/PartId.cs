@@ -92,6 +92,8 @@ public enum PartId : ulong
     VSvcTest = VSvc | Test,
     
     Circuits = 720,
+
+    VBlocks = 8399,
         
     LibM = 150, LibMTest = LibM | Test,
 

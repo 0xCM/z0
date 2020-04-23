@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class VSvcHosts
     {
-        public readonly struct Sllx128<T> : ISVShiftOp128Api<T>
+        public readonly struct Sllx128<T> : ISVShiftOp128<T>
             where T : unmanaged
         {
             public const string Name = "vsllx";
@@ -31,7 +31,7 @@ namespace Z0
                 => gvec.vsllx(x,count);            
         }
 
-        public readonly struct Sllx256<T> : ISVShiftOp256Api<T>
+        public readonly struct Sllx256<T> : ISVShiftOp256<T>
             where T : unmanaged
         {
             public const string Name = "vsllx";

@@ -10,7 +10,7 @@ namespace Z0
     using static Seed; 
     using static Memories;
 
-    partial class gblocks
+    partial class VBlocks
     {
         /// <summary>
         /// Computes z[i] := x[i]^((x[i] >> offset)^(x[i] >> offset)) where i = 0,..., blocks - 1

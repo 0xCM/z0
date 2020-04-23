@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class VSvcHosts
     {
-        public readonly struct TakeMask128<T> : ISVUnaryScalar128Api<T,ushort>
+        public readonly struct TakeMask128<T> : ISVUnaryScalar128<T,ushort>
             where T : unmanaged
         {
             public const string Name = "vtakemask";
@@ -28,7 +28,7 @@ namespace Z0
                 => gvec.vtakemask(x);            
         }
 
-        public readonly struct TakeMask256<T> : ISVUnaryScalar256Api<T,uint>
+        public readonly struct TakeMask256<T> : ISVUnaryScalar256<T,uint>
             where T : unmanaged
         {
             public const string Name = "vtakemask";

@@ -33,7 +33,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
-                => ref gblocks.or(a,b,c);
+                => ref VBlocks.or(a,b,c);
         }
 
         [NumericClosures(Integers)]
@@ -56,7 +56,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
-                => ref gblocks.or(a,b,c);
+                => ref VBlocks.or(a,b,c);
         }
     }
 }

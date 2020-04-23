@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BC
     {
-        public readonly struct Bfly<N,T> : ISUnaryOpApi<T>
+        public readonly struct Bfly<N,T> : ISUnaryOp<T>
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

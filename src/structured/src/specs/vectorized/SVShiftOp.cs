@@ -23,7 +23,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVShiftOpApi<V> : ISVFunc, ISImm8UnaryOpApi<V>
+    public interface ISVShiftOp<V> : ISVFunc, IUnaryImm8Op<V>
         where V : struct
     {
         
@@ -35,7 +35,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVShiftOpApi<W,V> : ISVShiftOpApi<V>
+    public interface ISVShiftOp<W,V> : ISVShiftOp<V>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
     {
@@ -49,7 +49,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVShiftOpApi<W,V,T> : ISVShiftOpApi<W,V>
+    public interface ISVShiftOp<W,V,T> : ISVShiftOp<W,V>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
@@ -62,7 +62,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVShiftOp128Api<T> : ISVImm8UnaryOp128Api<T>, ISVFunc128<T>
+    public interface ISVShiftOp128<T> : ISVImm8UnaryOp128<T>, ISVFunc128<T>
         where T : unmanaged
     {
     }
@@ -72,7 +72,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVShiftOp256Api<T> : ISVImm8UnaryOp256Api<T>, ISVFunc256<T>
+    public interface ISVShiftOp256<T> : ISVImm8UnaryOp256<T>, ISVFunc256<T>
         where T : unmanaged
     {
         
@@ -83,7 +83,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVShiftOp128DApi<T> : ISVImm8UnaryOp128DApi<T>
+    public interface ISVShiftOp128D<T> : ISVImm8UnaryOp128D<T>
         where T : unmanaged
     {
     }
@@ -93,7 +93,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVShiftOp256DApi<T>  : ISVImm8UnaryOp256DApi<T>
+    public interface ISVShiftOp256D<T>  : ISVImm8UnaryOp256D<T>
         where T : unmanaged
     {
         

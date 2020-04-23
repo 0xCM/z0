@@ -17,21 +17,10 @@ namespace Z0
     /// justifies the contract name
     /// </remarks>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8UnaryOpApi<A> :  ISFunc<A,byte,A>
+    public interface IUnaryImm8Op<A> :  ISFunc<A,byte,A>
     {
            
     }
-
-    /// <summary>
-    /// Characterizes a ternary function F:A -> A -> byte -> A that accepts an 8-bit 
-    /// immediate value in the third parameter. 
-    /// </summary>
-    /// <typeparam name="A">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8BinaryOpApi<A> : ISFuncApi<A,A,byte,A>
-    {
-
-    }    
 
     /// <summary>
     /// Characterizes a ternary function F:A -> byte -> byte -> A that accepts 8-bit 
@@ -39,8 +28,19 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8x2UnaryOpApi<A> : ISFuncApi<A,byte,byte,A>
+    public interface IUnaryImm8x2Op<A> : ISFunc<A,byte,byte,A>
     {
 
     }
+    /// <summary>
+    /// Characterizes a ternary function F:A -> A -> byte -> A that accepts an 8-bit 
+    /// immediate value in the third parameter. 
+    /// </summary>
+    /// <typeparam name="A">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IBinaryImm8Op<A> : ISFunc<A,A,byte,A>
+    {
+
+    }    
+
 }

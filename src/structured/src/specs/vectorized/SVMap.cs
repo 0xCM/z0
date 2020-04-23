@@ -14,7 +14,7 @@ namespace Z0
     /// <typeparam name="U">The source operand type</typeparam>
     /// <typeparam name="T">The target operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVMapApi<U,V> : ISVFunc, ISFMapApi<U,V>
+    public interface ISVMap<U,V> : ISVFunc, ISFMap<U,V>
         where U : struct
         where V : struct
     {
@@ -31,7 +31,7 @@ namespace Z0
     /// <typeparam name="T1">The source component type</typeparam>
     /// <typeparam name="T2">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVMapApi<W1,W2,V1,V2,T1,T2> : ISVMapApi<V1,V2>
+    public interface ISVMap<W1,W2,V1,V2,T1,T2> : ISVMap<V1,V2>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
         where V1 : struct
@@ -48,7 +48,7 @@ namespace Z0
     /// <typeparam name="S">The source component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVMap128Api<S,T> : ISVMapApi<W128,W128,Vector128<S>,Vector128<T>,S,T>
+    public interface ISVMap128<S,T> : ISVMap<W128,W128,Vector128<S>,Vector128<T>,S,T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -61,7 +61,7 @@ namespace Z0
     /// <typeparam name="S">The source component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVMap128Api<T> : ISVMap128Api<T,T>
+    public interface ISVMap128<T> : ISVMap128<T,T>
         where T : unmanaged
     {
 
@@ -73,7 +73,7 @@ namespace Z0
     /// <typeparam name="S">The source component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVMap256Api<S,T> : ISVMapApi<W256,W256,Vector256<S>,Vector256<T>,S,T>
+    public interface ISVMap256<S,T> : ISVMap<W256,W256,Vector256<S>,Vector256<T>,S,T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -86,10 +86,9 @@ namespace Z0
     /// <typeparam name="S">The source component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVMap256Api<T> : ISVMap256Api<T,T>
+    public interface ISVMap256<T> : ISVMap256<T,T>
         where T : unmanaged
     {
 
     }
-
 }

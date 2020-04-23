@@ -11,46 +11,50 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct TernaryOp<T> : Z0.ISTernaryOpApi<T> 
+        /// <summary>
+        /// Captures a delegate that is exposed as an emitter
+        /// </summary>
+        public readonly struct Emitter<T> : ISEmitter<T>
         {
-            readonly Z0.TernaryOp<T> F;
-            
             public OpIdentity Id {get;}
 
+            readonly Z0.Emitter<T> F;
+
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T,T,T>(TernaryOp<T> src)
+            public static implicit operator Func<T>(Emitter<T> src)
                 => src.ToFunc();
 
             [MethodImpl(Inline)]
-            public static implicit operator TernaryOp<T>(Func<T,T,T,T> src)
-                => src.ToTernaryOp();
+            public static implicit operator Emitter<T>(Func<T> src)
+                => src.ToEmitter();
 
             [MethodImpl(Inline)]
-            internal TernaryOp(Z0.TernaryOp<T> f, OpIdentity id)            
+            public Emitter(Z0.Emitter<T> f, OpIdentity id)            
             {
                 this.F = f;
                 this.Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal TernaryOp(Z0.TernaryOp<T> f, string name)            
+            public Emitter(Z0.Emitter<T> f, string name)            
             {
                 this.F = f;
                 this.Id = Identify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b, T c) => F(a, b, c);
+            public T Invoke() => F();
 
-            public Z0.TernaryOp<T> Subject
+            public Z0.Emitter<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
 
             [MethodImpl(Inline)]
-            public Func<T,T,T,T> AsFunc()
+            public Func<T> AsFunc()
                 => this.ToFunc();
-        }            
+        }
+
     }
 }

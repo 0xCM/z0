@@ -5,25 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Security;
 
     using static Seed;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSvcUnaryOp128<T> : ISBUnaryOp128Api<T>, ISVUnaryOp128DApi<T>
+    public interface IVSvcUnaryOp128<T> : IBlockedUnaryOp128<T>, ISVUnaryOp128D<T>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSvcUnaryOp256<T> : ISBUnaryOp256Api<T>, ISVUnaryOp256DApi<T>
+    public interface IVSvcUnaryOp256<T> : IBlockedUnaryOp256<T>, ISVUnaryOp256D<T>
         where T : unmanaged
     {
 
     }
-
-
 }

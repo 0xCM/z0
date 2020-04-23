@@ -22,28 +22,28 @@ namespace Z0.Asm
 
         AsmFunction[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8Value[] imm);         
 
-        Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, byte imm)
+        Option<AsmFunction> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, byte imm)
             where T : unmanaged;        
 
-        AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8UnaryResolver128Api<T> resolver, params byte[] imm)
+        AsmFunction[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, params byte[] imm)
             where T : unmanaged;
 
-        Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8UnaryResolver256Api<T> resolver, byte imm)
+        Option<AsmFunction> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, byte imm)
             where T : unmanaged;                    
 
-        AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8UnaryResolver256Api<T> resolver, params byte[] imm)
+        AsmFunction[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, params byte[] imm)
             where T : unmanaged;
 
-        Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8BinaryResolver128Api<T> resolver, byte imm)
+        Option<AsmFunction> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, byte imm)
             where T : unmanaged;        
 
-        AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8BinaryResolver128Api<T> resolver, params byte[] imm)
+        AsmFunction[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, params byte[] imm)
             where T : unmanaged;            
 
-        Option<AsmFunction> Single<T>(in CaptureExchange exchange, ISVImm8BinaryResolver256Api<T> resolver, byte imm)
+        Option<AsmFunction> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, byte imm)
             where T : unmanaged;        
 
-        AsmFunction[] Many<T>(in CaptureExchange exchange, ISVImm8BinaryResolver256Api<T> resolver, params byte[] imm)
+        AsmFunction[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, params byte[] imm)
             where T : unmanaged;            
 
     }

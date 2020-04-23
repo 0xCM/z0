@@ -40,47 +40,47 @@ namespace Z0
 
         void CheckUnaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : ISVUnaryOp128DApi<T>
+            where F : ISVUnaryOp128D<T>
                 => Typed<T>().CheckSVF(f, K.UnaryOp, w);
         
         void CheckUnaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : ISVUnaryOp256DApi<T>
+            where F : ISVUnaryOp256D<T>
                 => Typed<T>().CheckSVF(f, K.UnaryOp, w);
 
         void CheckShiftOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : ISVShiftOp128DApi<T>
+            where F : ISVShiftOp128D<T>
                 => Typed<T>().CheckSVF(f, K.ShiftOp, w);
 
         void CheckShiftOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : ISVShiftOp256DApi<T>
+            where F : ISVShiftOp256D<T>
                 => Typed<T>().CheckSVF(f, K.ShiftOp, w);
 
         void CheckBinaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : ISVBinaryOp128DApi<T>
+            where F : ISVBinaryOp128D<T>
                 => Typed<T>().CheckSVF(f, K.BinaryOp, w);
 
         void CheckBinaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : ISVBinaryOp256DApi<T>
+            where F : ISVBinaryOp256D<T>
                 => Typed<T>().CheckSVF(f, K.BinaryOp, w);
 
         void CheckTernaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : ISVTernaryOp128DApi<T>
+            where F : ISVTernaryOp128D<T>
                 => Typed<T>().CheckSVF(f, K.TernaryOp, w);
 
         void CheckTernaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : ISVTernaryOp256DApi<T>
+            where F : ISVTernaryOp256D<T>
                 => Typed<T>().CheckSVF(f, K.TernaryOp, w);
 
         void CheckCells<F,T>(F f, Func<int,Pair<Vector128<T>>> src)
             where T : unmanaged
-            where F : ISVBinaryOp128DApi<T>
+            where F : ISVBinaryOp128D<T>
         {
             var cells = vcount<T>(n128);
             var succeeded = true;
@@ -111,7 +111,7 @@ namespace Z0
             
         void CheckCells<F,T>(F f, Func<int,Pair<Vector256<T>>> src)
             where T : unmanaged
-            where F : ISVBinaryOp256DApi<T>
+            where F : ISVBinaryOp256D<T>
         {
             var cells = vcount<T>(n256);
             var succeeded = true;
@@ -142,7 +142,7 @@ namespace Z0
 
         void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null) 
             where T : unmanaged
-            where F : ISVBinaryOp128Api<T>
+            where F : ISVBinaryOp128<T>
         {
             var casename = name ?? Context.CaseName(f);
             var w = n128;
@@ -177,7 +177,7 @@ namespace Z0
 
         void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null) 
             where T : unmanaged
-            where F : ISVBinaryOp256Api<T>
+            where F : ISVBinaryOp256<T>
         {
             var casename = name ?? Context.CaseName(f);
             var w = n256;
@@ -220,7 +220,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         void CheckPattern<F,T>(F f, Vector128<T> expect)
             where T : unmanaged
-            where F : ISVPatternSource128Api<T>
+            where F : ISVPatternSource128<T>
         {
             var succeeded = true;
             var casename = Context.CaseName(f);
@@ -252,7 +252,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         void CheckPattern<F,T>(F f, Vector256<T> expect)
             where T : unmanaged
-            where F : ISVPatternSource256Api<T>
+            where F : ISVPatternSource256<T>
         {
             var succeeded = true;
             var casename = Context.CaseName(f);
@@ -290,7 +290,7 @@ namespace Z0
         void CheckFactory<F,C,S,T>(N128 w, F f, C check, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-            where F : ISVFactory128Api<S,T>
+            where F : ISVFactory128<S,T>
             where C : ICheckSF128<S,T>
         {            
             var succeeded = true;
@@ -339,7 +339,7 @@ namespace Z0
         void CheckFactory<F,C,S,T>(N256 w, F f, C check, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-            where F : ISVFactory256Api<S,T>
+            where F : ISVFactory256<S,T>
             where C : ICheckSF256<S,T>
         {
             var succeeded = true;

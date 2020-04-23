@@ -20,6 +20,12 @@ namespace Z0
         
     }
 
+    public interface IClassified<C>
+        where C : unmanaged, IClassifier
+    {
+        C Class  => default;
+    }
+
     /// <summary>
     /// Characterizes an F-bound polymorphic classifier reification
     /// </summary>

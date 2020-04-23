@@ -28,7 +28,7 @@ namespace Z0
     partial class VBitSvcTypes
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct BitClear128<T> : ISVImm8x2UnaryOp128DApi<T>
+        public readonly struct BitClear128<T> : ISVImm8x2UnaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vbitclear";
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct BitClear256<T> : ISVImm8x2UnaryOp256DApi<T>
+        public readonly struct BitClear256<T> : ISVImm8x2UnaryOp256D<T>
             where T : unmanaged
         {
             public const string Name = "vbitclear";

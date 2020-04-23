@@ -10,7 +10,6 @@ namespace Z0
     /// <summary>
     /// Identifies a formal operation for inclusing in the identity assignment and catalog system
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property)]
     public class OpAttribute : Attribute
     {
         public string Name {get;}

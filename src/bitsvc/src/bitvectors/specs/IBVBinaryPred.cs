@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IBVBinaryPred<T> : ISFuncApi<BitVector<T>,BitVector<T>,bit>
+    public interface IBVBinaryPred<T> : ISFunc<BitVector<T>,BitVector<T>,bit>
         where T : unmanaged
     {
 

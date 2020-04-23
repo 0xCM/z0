@@ -13,7 +13,7 @@ namespace Z0
     /// <typeparam name="T">The production type</typeparam>
     /// <typeparam name="C">The cell type over which the production type is segmented</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IEmitterApi<W,T> : ISEmitterApi<T>
+    public interface IEmitter<W,T> : ISEmitter<T>
         where W : unmanaged, ITypeWidth<W>
     {
         
@@ -25,7 +25,7 @@ namespace Z0
     /// <typeparam name="T">The production type</typeparam>
     /// <typeparam name="C">The cell type over which the production type is segmented</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISegmentedEmitterApi<T,C> : ISEmitterApi<T>
+    public interface ISegmentedEmitter<T,C> : ISEmitter<T>
         where T : unmanaged
         where C : unmanaged
     {

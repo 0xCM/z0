@@ -8,6 +8,8 @@ namespace Z0
     using System.Security;
     using System.Runtime.Intrinsics;
 
+
+
     /// <summary>
     /// Characterizes an identified (S)tructrual (V)ector function
     /// </summary>
@@ -66,7 +68,7 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="T3">The component type of the result vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVFApi<W1,W2,W3,V1,V2,V3,T1,T2,T3> : ISVFunc, ISFuncApi<V1,V2,V3>
+    public interface ISVFApi<W1,W2,W3,V1,V2,V3,T1,T2,T3> : ISVFunc, ISFunc<V1,V2,V3>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
         where W3 : unmanaged, ITypeWidth
@@ -96,7 +98,7 @@ namespace Z0
     /// <typeparam name="T3">The component type of the third vector</typeparam>
     /// <typeparam name="T4">The component type of the result vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVFApi<W1,W2,W3,W4,V1,V2,V3,V4,T1,T2,T3,T4> : ISVFunc, ISFuncApi<V1,V2,V3,V4>
+    public interface ISVFApi<W1,W2,W3,W4,V1,V2,V3,V4,T1,T2,T3,T4> : ISVFunc, ISFunc<V1,V2,V3,V4>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
         where W3 : unmanaged, ITypeWidth

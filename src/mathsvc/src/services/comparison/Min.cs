@@ -13,7 +13,7 @@ namespace Z0
     partial class MathSvcTypes
     {
         [Closures(NumericKind.All)]
-        public readonly struct Min<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
+        public readonly struct Min<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "min";

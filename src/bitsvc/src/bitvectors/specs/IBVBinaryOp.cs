@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IBVBinaryOp<T> : ISBinaryOpApi<BitVector<T>>
+    public interface IBVBinaryOp<T> : ISBinaryOp<BitVector<T>>
         where T : unmanaged
     {
 

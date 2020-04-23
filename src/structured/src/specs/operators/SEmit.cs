@@ -12,7 +12,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The production type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISEmitterApi<A> : ISFuncApi<A>, ISource
+    public interface ISEmitter<A> : ISFunc<A>, ISource
     {
         
     }

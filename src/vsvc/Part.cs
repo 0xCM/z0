@@ -20,13 +20,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    [ApiHost(ApiHostKind.Generic)]
-    public static partial class gblocks
-    {
-
-
-    }
-
     partial class VSvc
     {
 
