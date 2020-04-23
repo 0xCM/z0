@@ -14,16 +14,16 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct Sll : I { public K Kind { [MethodImpl(Inline)] get => K.Sll; } }
+        public readonly struct Sll : I { K I.Kind => K.Sll; } 
 
-        public readonly struct Sllv : I { public K Kind { [MethodImpl(Inline)] get => K.Sllv; } }
+        public readonly struct Sllv : I { K I.Kind => K.Sllv; }
 
-        public readonly struct Srl : I { public K Kind { [MethodImpl(Inline)] get => K.Srl; } }
+        public readonly struct Srl : I { K I.Kind => K.Srl; } 
 
-        public readonly struct Srlv : I { public K Kind { [MethodImpl(Inline)] get => K.Srlv; } }
+        public readonly struct Srlv : I { K I.Kind => K.Srlv; }
 
-        public readonly struct Rotl : I { public K Kind { [MethodImpl(Inline)] get => K.Rotl; } }
+        public readonly struct Rotl : I { K I.Kind => K.Rotl; }
 
-        public readonly struct Rotr : I { public K Kind { [MethodImpl(Inline)] get => K.Rotr; } }
+        public readonly struct Rotr : I { K I.Kind => K.Rotr; }
     }
 }

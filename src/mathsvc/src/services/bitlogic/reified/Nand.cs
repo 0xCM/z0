@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct Nand<T> : IBinaryBitLogicSvc<K.Nand<T>,T>
+        [Closures(Integers), Nand]
+        public readonly struct Nand<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
-            public const string Name = "nand";
-
-            public static Nand<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.nand(a,b);

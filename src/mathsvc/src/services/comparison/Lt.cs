@@ -10,18 +10,12 @@ namespace Z0
     using static Seed;
     using static Structured;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(NumericKind.All)]
+        [Closures(AllNumeric), Lt]
         public readonly struct Lt<T> : ISFunc<T,T,bit>, IBinarySpanPred<T>
             where T : unmanaged        
         {
-            public const string Name = "lt";
-
-            public static Lt<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) 
                 => gmath.lt(x,y);

@@ -11,7 +11,7 @@ namespace Z0
     using static Seed; 
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryArithmeticSvc<T> : IBinaryOpSvc<T>
+    public interface IBinaryArithmeticSvc<T> : ISBinaryOp<T>, IBinarySpanOp<T>
         where T : unmanaged
     {
 

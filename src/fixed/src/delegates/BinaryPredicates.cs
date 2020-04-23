@@ -23,12 +23,12 @@ namespace Z0
     public delegate bit BinaryPredicate64(Fixed64 a, Fixed64 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate128V(Fixed128V a, Fixed128V b);
+    public delegate bit BinaryPredicate128(Fixed128 a, Fixed128 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate256V(Fixed256V a, Fixed256V b);
+    public delegate bit BinaryPredicate256(Fixed256 a, Fixed256 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate512V(Fixed512V a, Fixed512V b);
+    public delegate bit BinaryPredicate512(Fixed512 a, Fixed512 b);
 
 }

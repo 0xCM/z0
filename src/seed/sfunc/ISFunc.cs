@@ -16,6 +16,6 @@ namespace Z0
         /// <summary>
         /// The operation identity
         /// </summary>
-        OpIdentity Id {get;} 
+        OpIdentity Id  => OpIdentity.Empty;
     }
 }

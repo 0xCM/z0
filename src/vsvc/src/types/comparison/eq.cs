@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(NumericKind.All)]
+        [NumericClosures(AllNumeric)]
         public readonly struct Eq128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {

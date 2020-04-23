@@ -10,18 +10,12 @@ namespace Z0
     using static Seed;
     using static Structured;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(NumericKind.All)]
+        [Closures(AllNumeric), Negative]
         public readonly struct NegativeOp<T> : ISFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged        
         {
-            public const string Name = "negative";
-
-            public static NegativeOp<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public bit Invoke(T a) 
                 => gmath.negative(a);

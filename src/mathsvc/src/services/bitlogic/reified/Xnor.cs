@@ -9,21 +9,12 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-
-        [Closures(Integers)]
-        public readonly struct Xnor<T> : IBinaryBitLogicSvc<K.Xnor<T>,T>
+        [Closures(Integers), Xnor]
+        public readonly struct Xnor<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
-            public const string Name = "xnor";
-
-            public static Xnor<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.xnor(a, b);
@@ -32,6 +23,5 @@ namespace Z0
             public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
                 => gspan.nor(l,r,dst);
         }
-
     }
 }

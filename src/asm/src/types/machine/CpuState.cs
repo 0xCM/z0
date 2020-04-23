@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         readonly Span<Fixed64> GpBank;
 
-        readonly Span<Fixed256V> VectorBank;
+        readonly Span<Fixed256> VectorBank;
 
         public static CpuState Create(int vcount = 16)
             => new CpuState(vcount);
@@ -21,13 +21,13 @@ namespace Z0.Asm
         CpuState(int vcount)
         {
             GpBank = new Fixed64[16];
-            VectorBank = new Fixed256V[vcount];
+            VectorBank = new Fixed256[vcount];
         }
 
         [MethodImpl(Inline)]
         Span<V> v<V>()
             where V : unmanaged
-            => VectorBank.As<Fixed256V,V>();
+            => VectorBank.As<Fixed256,V>();
 
         [MethodImpl(Inline)]
         Span<G> gp<G>()

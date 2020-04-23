@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator</param>
         /// <param name="gId">The identity of the second operator</param>
-        TestCaseRecord Match(UnaryOp128V f, OpIdentity fId, UnaryOp128V g, OpIdentity gId)
+        TestCaseRecord Match(UnaryOp128 f, OpIdentity fId, UnaryOp128 g, OpIdentity gId)
         {
             var w = w128;
             void check()
@@ -143,7 +143,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator</param>
         /// <param name="gId">The identity of the second operator</param>
-        TestCaseRecord Match(UnaryOp256V f, OpIdentity fId, UnaryOp256V g, OpIdentity gId)
+        TestCaseRecord Match(UnaryOp256 f, OpIdentity fId, UnaryOp256 g, OpIdentity gId)
         {
             var w = w256;
             void check()

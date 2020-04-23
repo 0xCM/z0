@@ -11,7 +11,7 @@ namespace Z0
 
     using K = Kinds;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(AllNumeric)]
         public readonly struct Div<T> : IBinaryArithmeticSvc<K.Div<T>,T>

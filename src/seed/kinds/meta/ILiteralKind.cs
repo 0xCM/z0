@@ -27,4 +27,18 @@ namespace Z0
     {
 
     }
+
+    /// <summary>
+    /// Characterizes a T-parametric literal kind 
+    /// </summary>
+    /// <typeparam name="K">The literal kind </typeparam>
+    /// <typeparam name="E">The kind classifier type</typeparam>
+    /// <typeparam name="T">Free</typeparam>
+    public interface ILiteralKind<F,E,T> : ILiteralKind<E>
+        where F : ILiteralKind<E>, new()
+        where E : unmanaged, Enum
+    {
+        E ITypedLiteral<E>.Class => new F().Class;
+    }
+
 }

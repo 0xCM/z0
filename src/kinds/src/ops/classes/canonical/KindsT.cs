@@ -11,10 +11,12 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct Reverse<T> : ICanonicalKind<Reverse,T> where T : unmanaged { }
+        public readonly struct Reverse<T> : ICanonicalKind<Reverse,T> {}
 
-        public readonly struct Identity<T> : ICanonicalKind<Identity,T> where T : unmanaged { }
+        public readonly struct Identity<T> : ICanonicalKind<Identity,T> {}
 
-        public readonly struct Concat<T> : ICanonicalKind<Concat,T> where T : unmanaged { }
+        public readonly struct Concat<T> : ICanonicalKind<Concat,T> {}
+
+        public readonly struct Parse<T> : ICanonicalKind<Parse,T> {}
     }
 }

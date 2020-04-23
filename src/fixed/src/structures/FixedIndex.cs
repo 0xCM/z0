@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static refs;
-    using static Fixed;
-
+    using static Memories;
+    
     public static class FixedIndexes
     {
         public static FixedIndex<F> Alloc<F>(int length)

@@ -150,6 +150,7 @@ namespace Z0
 
         Eq,
 
+
         Eqz,
 
         Neq,
@@ -232,6 +233,20 @@ namespace Z0
 
         Bsll,
 
-        XorNot
+        XorNot,
+
+        Parse,
+
+        EqPred,
+
+        NeqPred,
+
+        LtPred,
+
+        LtEqPred,
+
+        GtPred,
+
+        GtEqPred,
     }    
 }

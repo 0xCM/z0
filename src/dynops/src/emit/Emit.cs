@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128V EmitFixedBinaryOp(this IBufferToken buffer, N128 w, in IdentifiedCode src)
+        public static BinaryOp128 EmitFixedBinaryOp(this IBufferToken buffer, N128 w, in IdentifiedCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256V EmitFixedBinaryOp(this IBufferToken buffer, N256 w, in IdentifiedCode src)
+        public static BinaryOp256 EmitFixedBinaryOp(this IBufferToken buffer, N256 w, in IdentifiedCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);  
     }
 }

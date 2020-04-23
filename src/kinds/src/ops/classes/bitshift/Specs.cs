@@ -33,7 +33,6 @@ namespace Z0
     /// <typeparam name="T">The numeric type</typeparam>
     public interface IBitShiftKind<K,T> : IBitShiftKind<K>
         where K : unmanaged, IBitShiftKind
-        where T : unmanaged
     {
         BitShiftKind IBitShiftKind.Kind => default(K).Kind;
 
@@ -52,12 +51,10 @@ namespace Z0
     public interface IBitShiftKind<K,W,T> : IBitShiftKind<K,T>
         where W : unmanaged, ITypeWidth
         where K : unmanaged, IBitShiftKind
-        where T : unmanaged
     {
         /// <summary>
         /// The parametrically-identified operand width
         /// </summary>
         TypeWidth OperandWidth => Widths.type<W>();
-
     }
 }

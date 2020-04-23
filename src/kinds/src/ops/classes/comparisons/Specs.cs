@@ -36,7 +36,6 @@ namespace Z0
     /// <typeparam name="T">The numeric type</typeparam>
     public interface IComparisonKind<F,T> : IComparisonKind<F>
         where F : unmanaged, I
-        where T : unmanaged
     {
         K I.Kind => default(F).Kind;
 
@@ -44,5 +43,21 @@ namespace Z0
         /// The parametrically-identified numeric kind
         /// </summary>
         NumericKind NumericKind => NumericKinds.kind<T>();
+    }
+
+    /// <summary>
+    /// Characterizes a kind, numeric, and width-parametric comparison operation classifier
+    /// </summary>
+    /// <typeparam name="K">The kind classifier type</typeparam>
+    /// <typeparam name="W">The width type</typeparam>
+    /// <typeparam name="T">The numeric type</typeparam>
+    public interface IComparisonKind<F,W,T> : IComparisonKind<F,T>
+        where W : unmanaged, ITypeWidth
+        where F : unmanaged, I
+    {
+        /// <summary>
+        /// The parametrically-identified operand width
+        /// </summary>
+        TypeWidth OperandWidth => Widths.type<W>();
     }
 }

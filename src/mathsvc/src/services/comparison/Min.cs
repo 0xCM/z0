@@ -10,18 +10,12 @@ namespace Z0
     using static Seed;
     using static Structured;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(NumericKind.All)]
+        [Closures(AllNumeric), Min]
         public readonly struct Min<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
-            public const string Name = "min";
-
-            public static Min<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.min(a, b);

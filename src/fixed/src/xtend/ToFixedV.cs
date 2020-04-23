@@ -12,22 +12,42 @@ namespace Z0
 
     partial class XTend
     {
+        /// <summary>
+        /// Presents a 128-bit vector as a 128-bit fixed block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Fixed128V ToFixedV<T>(this Vector128<T> x)
+        public static ref readonly Fixed128 ToFixed<T>(this in Vector128<T> x)
             where T : unmanaged
-                => Fixed128V.From(x);
+                => ref Fixed.from(x);
 
+        /// <summary>
+        /// Presents a 256-bit vector as a 256-bit fixed block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Fixed256V ToFixedV<T>(this Vector256<T> x)
+        public static ref readonly Fixed256 ToFixed<T>(this in Vector256<T> x)
             where T : unmanaged
-                => Fixed256V.From(x);
+                => ref Fixed.from(x);
+
+        /// <summary>
+        /// Presents a 512-bit vector as a 512-bit fixed block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly Fixed512 ToFixed<T>(this in Vector512<T> x)
+            where T : unmanaged
+                => ref Fixed.from(x);
 
         /// <summary>
         /// Creates a fixed 128-bit unary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static UnaryOp128V ToFixedV<T>(this Func<Vector128<T>, Vector128<T>> f)
+        public static UnaryOp128 ToFixed<T>(this Func<Vector128<T>, Vector128<T>> f)
             where T : unmanaged
                 => Fixed.vfix(f);
 
@@ -36,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128V ToFixedV<T>(this Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
+        public static BinaryOp128 ToFixed<T>(this Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
             where T : unmanaged
                 => Fixed.vfix(f);
 
@@ -45,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256V ToFixedV<T>(this Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
+        public static BinaryOp256 ToFixed<T>(this Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
             where T : unmanaged
                 => Fixed.vfix(f);
  
@@ -54,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static UnaryOp256V ToFixedV<T>(this Func<Vector256<T>,Vector256<T>> f)
+        public static UnaryOp256 ToFixed<T>(this Func<Vector256<T>,Vector256<T>> f)
             where T : unmanaged
                 => Fixed.vfix(f);
     }

@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct CNonImpl<T> : IBinaryBitLogicSvc<K.CNonImpl<T>,T>
+        [Closures(Integers), CNonImpl]
+        public readonly struct CNonImpl<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
-            public const string Name = "cnonimpl";
-
-            public static CNonImpl<T> Op => default;
-            
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.cnonimpl(a,b);

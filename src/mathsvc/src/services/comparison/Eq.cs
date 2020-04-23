@@ -10,18 +10,12 @@ namespace Z0
     using static Seed;
     using static Structured;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
+        [Closures(AllNumeric), Eq]
         public readonly struct Eq<T> : ISFunc<T,T,bit>, IBinarySpanPred<T>
             where T : unmanaged        
         {
-            public const string Name = "eq";
-
-            public static Eq<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) 
                 => gmath.eq(x,y);

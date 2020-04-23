@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static SBlock;
 
-    partial class VBlockHosts
+    partial class BSvcHosts
     {
         [NumericClosures(Integers), Not]
         public readonly struct Not128<T> : IBlockedUnaryOp128<T>

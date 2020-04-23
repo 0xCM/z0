@@ -14,28 +14,28 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct And : I { public K Kind { [MethodImpl(Inline)] get => K.And;}}
+        public readonly struct And : I { K I.Kind => K.And; }
 
-        public readonly struct Or : I { public K Kind { [MethodImpl(Inline)] get => K.Or;}}
+        public readonly struct Or : I { K I.Kind => K.Or; }
 
-        public readonly struct Xor : I { public K Kind { [MethodImpl(Inline)] get => K.Xor;}}
+        public readonly struct Xor : I { K I.Kind => K.Xor; }
 
-        public readonly struct Nand : I { public K Kind { [MethodImpl(Inline)] get => K.Nand;}}
+        public readonly struct Nand : I { K I.Kind => K.Nand; }
 
-        public readonly struct Nor : I { public K Kind { [MethodImpl(Inline)] get => K.Nor;}}
+        public readonly struct Nor : I { K I.Kind => K.Nor; }
 
-        public readonly struct Xnor : I { public K Kind { [MethodImpl(Inline)] get => K.Xnor;}}
+        public readonly struct Xnor : I { K I.Kind => K.Xnor; }
 
-        public readonly struct Impl : I { public K Kind { [MethodImpl(Inline)] get => K.Impl;}}
+        public readonly struct Impl : I { K I.Kind => K.Impl; }
 
-        public readonly struct NonImpl : I { public K Kind { [MethodImpl(Inline)] get => K.NonImpl;}}
+        public readonly struct NonImpl : I { K I.Kind => K.NonImpl; }
 
-        public readonly struct CImpl : I { public K Kind { [MethodImpl(Inline)] get => K.CImpl;}}
+        public readonly struct CImpl : I { K I.Kind => K.CImpl; }
 
-        public readonly struct CNonImpl : I { public K Kind { [MethodImpl(Inline)] get => K.CNonImpl;}}         
+        public readonly struct CNonImpl : I { K I.Kind => K.CNonImpl; }
 
-        public readonly struct Not : I { public K Kind { [MethodImpl(Inline)] get => K.Not;}}
+        public readonly struct Not : I { K I.Kind => K.Not; }
 
-        public readonly struct Select : I { public K Kind { [MethodImpl(Inline)] get => K.Select;}}
+        public readonly struct Select : I { K I.Kind => K.Select; }
     }
 }

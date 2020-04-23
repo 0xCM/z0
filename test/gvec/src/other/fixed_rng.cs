@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Runtime.Intrinsics;
     
     using static Seed;
     using static Memories;
@@ -22,7 +23,7 @@ namespace Z0
             var total = 0ul;
             var emit = Fixed.fix(next<byte>); 
             for(var i=0; i<RepCount; i++ )
-                total += Fixed.unfix(emit());
+                total += Fixed.scalar(emit());
 
             var expect = (ulong)(maxval<byte>()/2);
             var actual = total/(ulong)RepCount;

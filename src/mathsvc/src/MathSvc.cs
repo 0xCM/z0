@@ -21,13 +21,13 @@ namespace Z0
 
     }
 
-    public sealed partial class MathSvcTypes
+    public sealed partial class MSvcHosts
     {
     
     }
 
-    [ApiServiceProvider]
-    public partial class MathSvc : IApiService<MathSvc,MathSvcTypes>
+    [ApiServiceFactory]
+    public partial class MSvc : IApiService<MSvc,MSvcHosts>
     {
 
     }

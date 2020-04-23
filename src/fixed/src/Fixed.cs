@@ -5,7 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Security;
+
+    [SuppressUnmanagedCodeSecurity, ApiHost("api")]
+    public partial class Fixed : IApiHost<Fixed>
+    {
+
+    }
 
     public static partial class XFixed
     {

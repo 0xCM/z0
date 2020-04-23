@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct CImpl<T> : IBinaryBitLogicSvc<K.CImpl<T>,T>
+        [Closures(Integers), CImpl]
+        public readonly struct CImpl<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
-            public const string Name = "cimpl";
-
-            public static CImpl<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.cimpl(a,b);

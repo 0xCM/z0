@@ -23,11 +23,11 @@ namespace Z0
     public delegate Fixed64 Emitter64();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128V Emitter128V();
+    public delegate Fixed128 Emitter128V();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256V Emitter256V();
+    public delegate Fixed256 Emitter256V();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512V Emitter512V();
+    public delegate Fixed512 Emitter512V();
 }

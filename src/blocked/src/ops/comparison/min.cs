@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static SBlock;
 
-    partial class VBlockHosts
+    partial class BSvcHosts
     {
         [Closures(AllNumeric), Min]
         public readonly struct Min128<T> : IBlockedBinaryOp128<T>

@@ -11,28 +11,28 @@ namespace Z0
 
     using K = OperatorClass;
 
-
     partial class Kinds
     {
         public readonly struct OperatorClass<T> : IOpClass<K,T> 
-            where T : unmanaged 
         { 
+            [MethodImpl(Inline)]
             public static implicit operator OperatorClass(OperatorClass<T> src)
-                =>  new OperatorClass(src.Class);
+                => new OperatorClass(src.Class);
 
             public K Class {get;}
 
+            [MethodImpl(Inline)]
             public OperatorClass(K k)
             {
                 Class = k;
             }
         }
 
-        public readonly struct EmitterOpClass<T> : IOperatorClass<EmitterOpClass<T>, K, T> 
-            where T : unmanaged 
+        public readonly struct EmitterOpClass<T> : IOperatorClass<EmitterOpClass<T>,K,T> 
         { 
             public K Class => K.Emitter; 
 
+            [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(EmitterOpClass<T> src)
                 => src.Generalized;
             
@@ -46,7 +46,6 @@ namespace Z0
         }
 
         public readonly struct UnaryOpClass<T> : IOperatorClass<UnaryOpClass<T>, K,T> 
-            where T : unmanaged 
         { 
             public K Class => K.UnaryOp; 
 
@@ -64,7 +63,6 @@ namespace Z0
         }
 
         public readonly struct BinaryOpClass<T> : IOperatorClass<BinaryOpClass<T>,K,T> 
-            where T : unmanaged 
         { 
             public K Class => K.BinaryOp; 
 
@@ -82,7 +80,6 @@ namespace Z0
         }
 
         public readonly struct TernaryOpClass<T> : IOperatorClass<TernaryOpClass<T>,K,T> 
-            where T : unmanaged 
         {
             public K Class => K.TernaryOp; 
 
@@ -100,7 +97,6 @@ namespace Z0
         }
 
         public readonly struct ShiftOpClass<T> : IOperatorClass<ShiftOpClass<T>,K,T> 
-            where T : unmanaged 
         {
             public K Class => K.ShiftOp; 
 

@@ -11,28 +11,28 @@ namespace Z0
 
     partial class Kinds
     {
-       public readonly struct And<T> : IBitLogicKind<And,T> where T : unmanaged { }
+        public readonly struct And<T> : IBitLogicKind<And,T> {}
 
-        public readonly struct Or<T> : IBitLogicKind<Or,T> where T : unmanaged { }
+        public readonly struct Nand<T> : IBitLogicKind<Nand,T> {}
 
-        public readonly struct Xor<T> : IBitLogicKind<Xor,T> where T : unmanaged { }
+        public readonly struct Or<T> : IBitLogicKind<Or,T> {}
 
-        public readonly struct Nand<T> : IBitLogicKind<Nand,T> where T : unmanaged { }
+        public readonly struct Nor<T> : IBitLogicKind<Nor,T> {}
 
-        public readonly struct Nor<T> : IBitLogicKind<Nor,T> where T : unmanaged { }
+        public readonly struct Xor<T> : IBitLogicKind<Xor,T> {}
+  
+        public readonly struct Xnor<T> : IBitLogicKind<Xnor,T> {}
 
-        public readonly struct Xnor<T> : IBitLogicKind<Xnor,T> where T : unmanaged { }
+        public readonly struct Impl<T> : IBitLogicKind<Impl,T> {}
 
-        public readonly struct Impl<T> : IBitLogicKind<Impl,T> where T : unmanaged { }
+        public readonly struct NonImpl<T> : IBitLogicKind<NonImpl,T> {}
 
-        public readonly struct NonImpl<T> : IBitLogicKind<NonImpl,T> where T : unmanaged { }
+        public readonly struct CImpl<T> : IBitLogicKind<CImpl,T> {}
 
-        public readonly struct CImpl<T> : IBitLogicKind<CImpl,T> where T : unmanaged { }
+        public readonly struct CNonImpl<T> : IBitLogicKind<CNonImpl,T> {}
 
-        public readonly struct CNonImpl<T> : IBitLogicKind<CNonImpl,T> where T : unmanaged { }
+        public readonly struct Not<T> : IBitLogicKind<Not,T> {}
 
-        public readonly struct Not<T> : IBitLogicKind<Not,T> where T : unmanaged { }
-
-        public readonly struct Select<T> : IBitLogicKind<Select,T> where T : unmanaged { } 
+        public readonly struct Select<T> : IBitLogicKind<Select,T> {} 
     }
 }

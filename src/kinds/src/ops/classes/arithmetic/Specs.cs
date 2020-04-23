@@ -39,7 +39,6 @@ namespace Z0
     /// <typeparam name="T">The numeric type</typeparam>
     public interface IArithmeticKind<F,T> : IArithmeticKind<F>
         where F : unmanaged, I
-        where T : unmanaged
     {
         K I.Kind => default(F).Kind;
 
@@ -58,7 +57,6 @@ namespace Z0
     public interface IArithmeticKind<F,W,T> : IArithmeticKind<F,T>
         where W : unmanaged, ITypeWidth
         where F : unmanaged, I
-        where T : unmanaged
     {
         /// <summary>
         /// The parametrically-identified operand width

@@ -27,7 +27,6 @@ namespace Z0
     public interface IOperatorClass<F,E,T> : IOperatorClass<F,E>, IOpClassT<T>
         where F : struct, IOperatorClass<F,E>
         where E : unmanaged, Enum
-        where T : unmanaged
     {
         new Kinds.OperatorClass<T> Generalized {get;}
 

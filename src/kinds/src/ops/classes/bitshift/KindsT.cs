@@ -11,16 +11,16 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct Sll<T> : IBitShiftKind<Sll,T> where T : unmanaged {}
+        public readonly struct Sll<T> : IBitShiftKind<Sll,T> {}
 
-        public readonly struct Sllv<T> : IBitShiftKind<Sllv,T> where T : unmanaged {}
+        public readonly struct Sllv<T> : IBitShiftKind<Sllv,T> {}
 
-        public readonly struct Srl<T> : IBitShiftKind<Srl,T> where T : unmanaged {}
+        public readonly struct Srl<T> : IBitShiftKind<Srl,T> {}
 
-        public readonly struct Srlv<T> : IBitShiftKind<Srlv,T> where T : unmanaged {}
+        public readonly struct Srlv<T> : IBitShiftKind<Srlv,T> {}
 
-        public readonly struct Rotl<T> : IBitShiftKind<Rotl,T> where T : unmanaged {}
+        public readonly struct Rotl<T> : IBitShiftKind<Rotl,T> {}
 
-        public readonly struct Rotr<T> : IBitShiftKind<Rotr,T> where T : unmanaged {}
+        public readonly struct Rotr<T> : IBitShiftKind<Rotr,T> {}
     }
 }

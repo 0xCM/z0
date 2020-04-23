@@ -14,9 +14,25 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct TestZ : I { public K Kind { [MethodImpl(Inline)] get => K.TestZ;}}
+        public readonly struct TestZ : I {  K I.Kind => K.TestZ; }
 
-        public readonly struct TestC : I { public K Kind { [MethodImpl(Inline)] get => K.TestC;}}
+        public readonly struct TestC : I {  K I.Kind => K.TestC; }
+
+        public readonly struct Ntz : I {  K I.Kind => K.Ntz; }
+
+        public readonly struct Nlz : I {  K I.Kind => K.Nlz; }
+
+        public readonly struct Pop : I {  K I.Kind => K.Pop; }
+
+        public readonly struct Mux : I {  K I.Kind => K.Mux; }
+
+        public readonly struct Scatter : I {  K I.Kind => K.Scatter; }
+
+        public readonly struct Gather : I {  K I.Kind => K.Gather; }
+
+        public readonly struct Mix : I {  K I.Kind => K.Mix; }
+
+        public readonly struct Rank : I {  K I.Kind => K.Rank; }
 
     }
 }

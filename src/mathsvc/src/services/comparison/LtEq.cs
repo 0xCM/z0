@@ -10,18 +10,12 @@ namespace Z0
     using static Seed;
     using static Structured;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(NumericKind.All)]
+        [Closures(AllNumeric), LtEq]
         public readonly struct LtEq<T> : ISFunc<T,T,bit>, IBinarySpanPred<T>
             where T : unmanaged        
         {
-            public const string Name = "lteq";
-
-            public static LtEq<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public bit Invoke(T x, T y) 
                 => gmath.lteq(x,y);

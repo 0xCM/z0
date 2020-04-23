@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct And<T> : IBinaryBitLogicSvc<K.And<T>,T>
+        [Closures(Integers), And]
+        public readonly struct And<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
-            public const string Name = "and";
-
-            public static And<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.and(a,b);

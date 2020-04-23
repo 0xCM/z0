@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(AllNumeric)]
-        public readonly struct Negate<T> : IUnaryArithmeticSvc<T>
+        public readonly struct Negate<T> : ISUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
-            public const string Name = "negate";
-
-            public static Negate<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.negate(a);
 

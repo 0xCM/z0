@@ -30,15 +30,15 @@ namespace Z0
             => random.Next<ulong>();
 
         [MethodImpl(Inline)]
-        public static Fixed128V Fixed(this IPolyrand random, W128 w)
+        public static Fixed128 Fixed(this IPolyrand random, W128 w)
             => random.NextPair<ulong>();
 
         [MethodImpl(Inline)]
-        public static Fixed256V Fixed(this IPolyrand random, W256 w)
+        public static Fixed256 Fixed(this IPolyrand random, W256 w)
             => (random.Fixed(w128), random.Fixed(w128));
 
         [MethodImpl(Inline)]
-        public static Fixed512V Fixed(this IPolyrand random, W512 w)
+        public static Fixed512 Fixed(this IPolyrand random, W512 w)
             => (random.Fixed(w256), random.Fixed(w256));
     }
 }

@@ -24,7 +24,7 @@ namespace Z0.Asm
         /// </summary>
         /// <typeparam name="F">The reification type</typeparam>
         /// <typeparam name="N">The index type</typeparam>
-        public interface zmm<F,N> : zmm<F,N,Fixed512V>
+        public interface zmm<F,N> : zmm<F,N,Fixed512>
             where F : struct, zmm<F,N>
             where N : unmanaged, ITypeNat
         {

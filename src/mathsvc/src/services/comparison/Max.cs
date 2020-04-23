@@ -10,18 +10,12 @@ namespace Z0
     using static Seed;
     using static Structured;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(NumericKind.All)]
+        [Closures(AllNumeric), Max]
         public readonly struct Max<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
-            public const string Name = "max";
-
-            public static Max<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.max(a, b);

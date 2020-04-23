@@ -11,18 +11,12 @@ namespace Z0
 
     using K = Kinds;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(Integers)]
-        public readonly struct Srl<T> : IShiftOpSvc<K.Srl<T>,T>
+        public readonly struct Srl<T> : IUnaryImm8Op<T>, ISpanShiftImm8<T>
             where T : unmanaged        
         {
-            public const string Name = "srl";
-
-            public static Srl<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, byte offset) 
                 => gmath.srl(a, offset);
@@ -33,15 +27,9 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Srlv<T> : IVarShiftOpSvc<K.Srlv<T>,T>
+        public readonly struct Srlv<T> : IVarSpanShift<T>
             where T : unmanaged        
         {
-            public const string Name = "srlv";
-
-            public static Srlv<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
                 => gspan.srlv(src,counts,dst);

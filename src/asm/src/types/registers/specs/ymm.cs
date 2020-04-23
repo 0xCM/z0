@@ -31,7 +31,7 @@ namespace Z0.Asm
         /// </summary>
         /// <typeparam name="F">The reification type</typeparam>
         /// <typeparam name="N">The index type</typeparam>
-        public interface ymm<F,N> : ymm<F,N,Fixed256V>
+        public interface ymm<F,N> : ymm<F,N,Fixed256>
             where F : struct, ymm<F,N>
             where N : unmanaged, ITypeNat
         {

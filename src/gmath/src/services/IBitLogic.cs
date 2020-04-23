@@ -38,5 +38,14 @@ namespace Z0
         T @false();
 
         T identity(T a);
+
+        T eval<K>(T a, K kind = default)
+            where K : unmanaged, IBitLogicKind;      
+
+        T eval<K>(T a, T b, K kind = default)
+            where K : unmanaged, IBitLogicKind;      
+
+        T eval<K>(T a, T b, T c, K kind = default)
+            where K : unmanaged, IBitLogicKind;      
     }
 }

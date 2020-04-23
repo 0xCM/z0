@@ -36,7 +36,6 @@ namespace Z0
     /// <typeparam name="T">The numeric type</typeparam>
     public interface IBitLogicKind<F,T> : IBitLogicKind<F>
         where F : unmanaged, I
-        where T : unmanaged
     {
         BitLogicKind I.Kind => default(F).Kind;
 
@@ -55,7 +54,6 @@ namespace Z0
     public interface IBitLogicKind<F,W,T> : IBitLogicKind<F,T>
         where W : unmanaged, ITypeWidth
         where F : unmanaged, I
-        where T : unmanaged
     {
         /// <summary>
         /// The parametrically-identified operand width

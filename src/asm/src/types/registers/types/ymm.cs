@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static AsmSpecs;
     using static RegisterKind;
 
-    using S = Fixed256V;
+    using S = Fixed256;
     using K = RegisterKind;
 
     partial class Registers

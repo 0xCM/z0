@@ -34,7 +34,7 @@ namespace Z0
         void eq_check<T>(S.BinaryPredicate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MathSvc.eq(t);
+            var g = MSvc.eq(t);
             var validator = this.BinaryPredicateMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -61,7 +61,7 @@ namespace Z0
         void neq_check<T>(S.BinaryPredicate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MathSvc.neq(t);
+            var g = MSvc.neq(t);
             var validator = this.BinaryPredicateMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -88,7 +88,7 @@ namespace Z0
         void gt_check<T>(S.BinaryPredicate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MathSvc.gt(t);
+            var g = MSvc.gt(t);
             var validator = this.BinaryPredicateMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -113,7 +113,7 @@ namespace Z0
         void gteq_check<T>(S.BinaryPredicate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MathSvc.gteq(t);
+            var g = MSvc.gteq(t);
             var validator = this.BinaryPredicateMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -139,7 +139,7 @@ namespace Z0
         void lt_check<T>(S.BinaryPredicate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MathSvc.lt(t);
+            var g = MSvc.lt(t);
             var validator = this.BinaryPredicateMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -165,7 +165,7 @@ namespace Z0
         void lteq_check<T>(S.BinaryPredicate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MathSvc.lteq(t);
+            var g = MSvc.lteq(t);
             var validator = this.BinaryPredicateMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -190,7 +190,7 @@ namespace Z0
         void max_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MathSvc.max(t);
+            var g = MSvc.max(t);
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -215,7 +215,7 @@ namespace Z0
         void min_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MathSvc.min(t);
+            var g = MSvc.min(t);
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);

@@ -39,6 +39,6 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Integers)]
         public static Span<T> and<T>(Span<T> lhs, Span<T> rhs)
             where T : unmanaged
-                => Structured.apply(MathSvc.and<T>(),lhs,rhs);
+                => Structured.apply(MSvc.and<T>(),lhs,rhs);
     }
 }

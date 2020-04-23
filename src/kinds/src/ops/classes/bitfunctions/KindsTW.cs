@@ -11,8 +11,24 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct TestZ<W,T> : IBitFunctionKind<TestZ,W,T> where W : unmanaged, ITypeWidth where T : unmanaged {}
+        public readonly struct TestZ<W,T> : IBitFunctionKind<TestZ,W,T> where W : unmanaged, ITypeWidth { }
 
-        public readonly struct TestC<W,T> : IBitFunctionKind<TestC,W,T> where W : unmanaged, ITypeWidth where T : unmanaged {}
+        public readonly struct TestC<W,T> : IBitFunctionKind<TestC,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct Ntz<W,T> : IBitFunctionKind<Ntz,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct Nlz<W,T> : IBitFunctionKind<Nlz,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct Pop<W,T> : IBitFunctionKind<Pop,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct Mux<W,T> : IBitFunctionKind<Mux,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct Scatter<W,T> : IBitFunctionKind<Scatter,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct Gather<W,T> : IBitFunctionKind<Gather,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct Mix<W,T> : IBitFunctionKind<Mix,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct Rank<W,T> : IBitFunctionKind<Rank,W,T> where W : unmanaged, ITypeWidth { }
     }
 }

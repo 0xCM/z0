@@ -11,18 +11,12 @@ namespace Z0
 
     using K = Kinds;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(AllNumeric)]
         public readonly struct Mul<T> : IBinaryArithmeticSvc<K.Mul<T>,T>
             where T : unmanaged        
         {    
-            public const string Name = "mul";
-
-            public static Mul<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.mul(a, b);
 

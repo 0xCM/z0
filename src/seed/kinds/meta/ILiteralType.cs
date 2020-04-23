@@ -16,7 +16,6 @@ namespace Z0
     /// <typeparam name="T">The stratification type</typeparam>
     public interface ILiteralType<E,T> : ILiteralKind<E>, ITypeKind<T>
         where E : unmanaged, Enum
-        where T : unmanaged
     {
         
     }    
@@ -30,7 +29,6 @@ namespace Z0
     public interface ILiteralType<F,E,T> : ILiteralKind<F,E>, ILiteralType<E,T>
         where F : ILiteralType<F,E,T>, new()
         where E : unmanaged, Enum
-        where T : unmanaged
     {
 
     }

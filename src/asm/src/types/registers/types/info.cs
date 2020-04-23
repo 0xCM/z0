@@ -60,11 +60,11 @@ namespace Z0.Asm
         public int Position {get;}
     }   
 
-    public readonly struct Reg128 : xmm<Fixed128V>
+    public readonly struct Reg128 : xmm<Fixed128>
     {
         public const uint Width = xmm.Width;
 
-        public Fixed128V State {get;}
+        public Fixed128 State {get;}
 
         public string Name {get;}
 
@@ -72,22 +72,22 @@ namespace Z0.Asm
 
     }
 
-    public readonly struct Reg256 : ymm<Fixed256V>
+    public readonly struct Reg256 : ymm<Fixed256>
     {
         public const uint Width = ymm.Width;
 
-        public Fixed256V State {get;}
+        public Fixed256 State {get;}
 
         public string Name {get;}
 
         public int Position {get;}
     }
 
-    public readonly struct Reg512 : ymm<Fixed512V>
+    public readonly struct Reg512 : ymm<Fixed512>
     {
         public const uint Width = zmm.Width;
 
-        public Fixed512V State {get;}
+        public Fixed512 State {get;}
 
         public string Name {get;}
 

@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(AllNumeric)]
         public readonly struct Clamp<T> : IBinaryArithmeticSvc<T>
             where T : unmanaged        
         {
-            public const string Name = "clamp";
-
-            public static Clamp<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.clamp(a,b);
 

@@ -11,18 +11,12 @@ namespace Z0
 
     using K = Kinds;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(AllNumeric)]
         public readonly struct Add<T> : IBinaryArithmeticSvc<K.Add<T>,T>
             where T : unmanaged        
         {
-            public const string Name = "add";
-
-            public static Add<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.add(a, b);
 

@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static SBlock;
 
-    partial class VBlockHosts
+    partial class BSvcHosts
     {
         [Closures(Integers), Rotl]
         public readonly struct Rotl128<T> : IBlockedUnaryImm8Op128<T>

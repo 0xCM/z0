@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(AllNumeric)]
         public readonly struct Dist<T> : ISFunc<T,T,ulong>
             where T : unmanaged        
         {
-            public const string Name = "dist";
-
-            public static Dist<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly ulong Invoke(T a, T b) => gmath.dist(a,b);
         }

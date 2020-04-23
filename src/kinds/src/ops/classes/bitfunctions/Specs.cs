@@ -36,7 +36,6 @@ namespace Z0
     /// <typeparam name="T">The numeric type</typeparam>
     public interface IBitFunctionKind<F,T> : IBitFunctionKind<F>
         where F : unmanaged, I
-        where T : unmanaged
     {
         K I.Kind => default(F).Kind;
     }
@@ -50,7 +49,6 @@ namespace Z0
     public interface IBitFunctionKind<F,W,T> : IBitFunctionKind<F,T>
         where W : unmanaged, ITypeWidth
         where F : unmanaged, I
-        where T : unmanaged
     {
         /// <summary>
         /// The parametrically-identified operand width

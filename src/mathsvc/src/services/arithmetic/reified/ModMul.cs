@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(Integers)]
         public readonly struct ModMul<T> : ISTernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {
-            public const string Name = "modmul";
-
-            public static ModMul<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T m) => gmath.modmul(a,b,m);
 

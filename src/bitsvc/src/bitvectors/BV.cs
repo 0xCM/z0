@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
      
-    [ApiServiceProvider]
+    [ApiServiceFactory]
     public partial class BV : IApiService<BV>
     {
         [MethodImpl(Inline)]

@@ -220,7 +220,7 @@ namespace Z0
         {
             var result = default(T);
             for(var i=0; i<src.Length; i++)
-                result = MathSvc.or<T>().Invoke(result, refs.skip(src,i));
+                result = MSvc.or<T>().Invoke(result, refs.skip(src,i));
             return result;
         }                
 

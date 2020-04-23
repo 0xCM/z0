@@ -15,11 +15,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitLogic128<T> vbitlogic<T>(N128 w, T t = default)
             where T : unmanaged
-                => BitLogic128<T>.Svc;
+                => default(BitLogic128<T>);
 
         [MethodImpl(Inline)]
         public static BitLogic256<T> vbitlogic<T>(N256 w, T t = default)
             where T : unmanaged
-                => BitLogic256<T>.Svc;
+                => default(BitLogic256<T>);
     }
 }

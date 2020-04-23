@@ -7,8 +7,10 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />    
-    <ProjectReference Include="$(VData)" />    
+    <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(GVec)" />
+    <ProjectReference Include="$(VData)" />    
+    <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Dynamic)" />    
     <ProjectReference Include="$(BitCore)" />
   </ItemGroup>

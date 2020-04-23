@@ -22,6 +22,8 @@ namespace Z0
 
         Concat = Id.Concat,
 
-        Identity = Id.Identity,        
+        Identity = Id.Identity,
+
+        Parse = Id.Parse
     }   
 }

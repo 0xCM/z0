@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(Integers)]
         public readonly struct Even<T> : ISFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged        
         {
-            public const string Name = "even";
-
-            public static Even<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.even(a);
 

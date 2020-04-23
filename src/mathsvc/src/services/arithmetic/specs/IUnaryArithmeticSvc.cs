@@ -11,7 +11,7 @@ namespace Z0
     using static Seed; 
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryArithmeticSvc<T> : IUnaryOpSvc<T>
+    public interface IUnaryArithmeticSvc<T> : ISUnaryOp<T>, IUnarySpanOp<T>
         where T : unmanaged
     {
 

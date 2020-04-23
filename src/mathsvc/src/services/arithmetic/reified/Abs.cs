@@ -11,18 +11,12 @@ namespace Z0
 
     using K = Kinds;
 
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(AllNumeric)]
-        public readonly struct Abs<T>  : IUnaryArithmeticSvc<T>
+        public readonly struct Abs<T> : ISUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
-            public const string Name = "abs";
-
-            public static Abs<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.abs(a);
 

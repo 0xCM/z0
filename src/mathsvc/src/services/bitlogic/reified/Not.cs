@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct Not<T> : IUnaryBitLogicSvc<K.Not<T>,T>
+        [Closures(Integers), Not]
+        public readonly struct Not<T> : ISUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
-        {
-            public const string Name = "not";
-
-            public static Not<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
+        {            
             [MethodImpl(Inline)]
             public T Invoke(T a) 
                 => gmath.not(a);

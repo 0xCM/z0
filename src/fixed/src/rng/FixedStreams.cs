@@ -11,8 +11,6 @@ namespace Z0
     using System.Linq;
 
     using static Widths;
-    using static Fixed;
-    using Api = FixedStream;
 
     partial class XRng
     {
@@ -34,7 +32,7 @@ namespace Z0
                 case FixedWidth.W128: return random.FixedStream<F>(w128);
                 case FixedWidth.W256: return random.FixedStream<F>(w256);
                 case FixedWidth.W512: return random.FixedStream<F>(w512);
-                default: return seq<F>();                    
+                default: return Control.seq<F>();                    
             }
         }
 
@@ -127,8 +125,8 @@ namespace Z0
         {
             while(true)
             {
-                Fixed128V next = random.NextPair<ulong>();
-                yield return Unsafe.As<Fixed128V, T>(ref next);
+                Fixed128 next = random.NextPair<ulong>();
+                yield return Unsafe.As<Fixed128, T>(ref next);
             }
         }
 
@@ -137,8 +135,8 @@ namespace Z0
         {
             while(true)
             {
-                Fixed256V next = (random.Fixed(w128), random.Fixed(w128));
-                yield return Unsafe.As<Fixed256V, T>(ref next);
+                Fixed256 next = (random.Fixed(w128), random.Fixed(w128));
+                yield return Unsafe.As<Fixed256, T>(ref next);
             }
         }
 
@@ -147,8 +145,8 @@ namespace Z0
         {
             while(true)
             {
-                Fixed512V next = (random.Fixed(w256), random.Fixed(w256));
-                yield return Unsafe.As<Fixed512V, T>(ref next);
+                Fixed512 next = (random.Fixed(w256), random.Fixed(w256));
+                yield return Unsafe.As<Fixed512, T>(ref next);
             }
         }
     }

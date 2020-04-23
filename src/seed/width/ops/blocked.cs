@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Determines the attributed width of a blocked type
         /// </summary>
-        /// <param name="src">The source type</param>
+        /// <param name="src">The source type</param>        
         public static TypeWidth blocked(Type src)
             => src.Tag<BlockedAttribute>().MapValueOrDefault(a => a.TypeWidth, TypeWidth.None);
     }

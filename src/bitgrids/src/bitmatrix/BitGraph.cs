@@ -76,15 +76,15 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         /// <typeparam name="N">The dimension type</typeparam>
         /// <typeparam name="T">The source matrix element type</typeparam>
-        static Graph<T> create<N,T>(BitMatrix<N,T> src, N dim = default)
+        static Graph<T> create<N,T>(BitMatrix<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var n = (int)dim.NatValue;
+            var n = (int)value<N>();
             var nodes = Graph.vertices<T>(n);
             var edges = new List<Edge<T>>();
-            for(var row = 0; row < n; row++)
-            for(var col = 0; col < n; col++)
+            for(var row=0; row<n; row++)
+            for(var col=0; col<n; col++)
                 if(src[row,col])
                     edges.Add(Graph.connect(nodes[row], nodes[col]));
             return Graph.define(nodes, edges);

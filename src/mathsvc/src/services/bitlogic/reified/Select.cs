@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct Select<T> : ITernaryBitLogicSvc<K.Select<T>,T>
+        [Closures(Integers), Select]
+        public readonly struct Select<T> : ISTernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {    
-            public const string Name = "select";
-
-            public static Select<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c) 
                 => gmath.select(a, b, c);

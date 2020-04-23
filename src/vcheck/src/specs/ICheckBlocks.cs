@@ -15,6 +15,7 @@ namespace Z0
         public static ICheckBlocks Checker => default(BlockChecks);
     }
     
+
     public interface ICheckBlocks : ICheckNumeric
     {
         /// <summary>

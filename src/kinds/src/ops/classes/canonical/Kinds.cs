@@ -14,10 +14,12 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct Reverse : I { public K Kind { [MethodImpl(Inline)] get => K.Reverse;}}
+        public readonly struct Reverse : I { K I.Kind => K.Reverse; }
 
-        public readonly struct Identity : I { public K Kind { [MethodImpl(Inline)] get => K.Identity;}}
+        public readonly struct Identity : I { K I.Kind => K.Identity; }
 
-        public readonly struct Concat : I { public K Kind { [MethodImpl(Inline)] get => K.Concat;}}
+        public readonly struct Concat : I { K I.Kind => K.Concat; }
+
+        public readonly struct Parse : I { K I.Kind => K.Parse; }
     }
 }

@@ -23,12 +23,12 @@ namespace Z0
     public delegate Fixed64 UnaryOp64(Fixed64 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128V UnaryOp128V(Fixed128V a);
+    public delegate Fixed128 UnaryOp128(Fixed128 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256V UnaryOp256V(Fixed256V a);
+    public delegate Fixed256 UnaryOp256(Fixed256 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512V UnaryOp512V(Fixed512V a);
+    public delegate Fixed512 UnaryOp512(Fixed512 a);
 
 }

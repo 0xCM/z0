@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
         [Closures(Integers)]
         public readonly struct Odd<T> : ISFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged        
         {
-            public const string Name = "odd";
-
-            public static Odd<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.odd(a);
 
@@ -30,7 +22,5 @@ namespace Z0
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
                 => gspan.odd(src,dst);
         }
-
-
     }
 }

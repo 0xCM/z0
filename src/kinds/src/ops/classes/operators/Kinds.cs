@@ -18,6 +18,7 @@ namespace Z0
         {
             public K Class {get;}
 
+            [MethodImpl(Inline)]
             public OperatorClass(K k)
             {
                 this.Class = k;

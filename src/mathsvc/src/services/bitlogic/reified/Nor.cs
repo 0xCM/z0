@@ -9,19 +9,12 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
-    partial class MathSvcTypes
+    partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct Nor<T> : IBinaryBitLogicSvc<K.Nor<T>,T>
+        [Closures(Integers), Nor]
+        public readonly struct Nor<T> : ISBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
-            public const string Name = "not";
-
-            public static Nor<T> Op => default;
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.nor(a,b);

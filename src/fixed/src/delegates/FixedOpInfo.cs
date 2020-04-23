@@ -17,11 +17,11 @@ namespace Z0
 
         public static FixedOpInfo<W64,Emitter64,Fixed64> Emitter64 => default;
 
-        public static FixedOpInfo<W128,Emitter128V,Fixed128V> Emitter128 => default;
+        public static FixedOpInfo<W128,Emitter128V,Fixed128> Emitter128 => default;
 
-        public static FixedOpInfo<W256,Emitter256V,Fixed256V> Emitter256 => default;
+        public static FixedOpInfo<W256,Emitter256V,Fixed256> Emitter256 => default;
 
-        public static FixedOpInfo<W512,Emitter512V,Fixed512V> Emitter512 => default;
+        public static FixedOpInfo<W512,Emitter512V,Fixed512> Emitter512 => default;
 
         public static FixedOpInfo<W8,UnaryOp8,Fixed8> UnaryOp8 => default;
 
@@ -31,11 +31,11 @@ namespace Z0
 
         public static FixedOpInfo<W64,UnaryOp64,Fixed64> UnaryOp64 => default;
 
-        public static FixedOpInfo<W128,UnaryOp128V,Fixed128V> UnaryOp128 => default;
+        public static FixedOpInfo<W128,UnaryOp128,Fixed128> UnaryOp128 => default;
 
-        public static FixedOpInfo<W256,UnaryOp256V,Fixed256V> UnaryOp256 => default;
+        public static FixedOpInfo<W256,UnaryOp256,Fixed256> UnaryOp256 => default;
 
-        public static FixedOpInfo<W512,UnaryOp512V,Fixed512V> UnaryOp512 => default;
+        public static FixedOpInfo<W512,UnaryOp512,Fixed512> UnaryOp512 => default;
 
         public static FixedOpInfo<W8,UnaryPredicate8,Fixed8> UnaryPredicate8 => default;
 
@@ -45,11 +45,11 @@ namespace Z0
 
         public static FixedOpInfo<W64,UnaryPredicate64,Fixed64> UnaryPredicate64 => default;
 
-        public static FixedOpInfo<W128,UnaryPredicate128V,Fixed128V> UnaryPredicate128 => default;
+        public static FixedOpInfo<W128,UnaryPredicate128V,Fixed128> UnaryPredicate128 => default;
 
-        public static FixedOpInfo<W256,UnaryPredicate256V,Fixed256V> UnaryPredicate256 => default;
+        public static FixedOpInfo<W256,UnaryPredicate256V,Fixed256> UnaryPredicate256 => default;
 
-        public static FixedOpInfo<W512,UnaryPredicate512V,Fixed512V> UnaryPredicate512 => default;
+        public static FixedOpInfo<W512,UnaryPredicate512V,Fixed512> UnaryPredicate512 => default;
 
         public static FixedOpInfo<W8,BinaryOp8,Fixed8> BinaryOp8 => default;
 
@@ -59,11 +59,11 @@ namespace Z0
 
         public static FixedOpInfo<W64,BinaryOp64,Fixed64> BinaryOp64 => default;
 
-        public static FixedOpInfo<W128,BinaryOp128V,Fixed128V> BinaryOp128 => default;
+        public static FixedOpInfo<W128,BinaryOp128,Fixed128> BinaryOp128 => default;
 
-        public static FixedOpInfo<W256,BinaryOp256V,Fixed256V> BinaryOp256 => default;
+        public static FixedOpInfo<W256,BinaryOp256,Fixed256> BinaryOp256 => default;
 
-        public static FixedOpInfo<W512,BinaryOp512V,Fixed512V> BinaryOp512 => default;
+        public static FixedOpInfo<W512,BinaryOp512,Fixed512> BinaryOp512 => default;
 
         public static FixedOpInfo<W8,BinaryPredicate8,Fixed8> BinaryPredicate8 => default;
 
@@ -73,11 +73,11 @@ namespace Z0
 
         public static FixedOpInfo<W64,BinaryPredicate64,Fixed64> BinaryPredicate64 => default;
 
-        public static FixedOpInfo<W128,BinaryPredicate128V,Fixed128V> BinaryPredicate128 => default;
+        public static FixedOpInfo<W128,BinaryPredicate128,Fixed128> BinaryPredicate128 => default;
 
-        public static FixedOpInfo<W256,BinaryPredicate256V,Fixed256V> BinaryPredicate256 => default;
+        public static FixedOpInfo<W256,BinaryPredicate256,Fixed256> BinaryPredicate256 => default;
 
-        public static FixedOpInfo<W512,BinaryPredicate512V,Fixed512V> BinaryPredicate512 => default;
+        public static FixedOpInfo<W512,BinaryPredicate512,Fixed512> BinaryPredicate512 => default;
     }
 
     public readonly struct FixedOpInfo<W,D,T>

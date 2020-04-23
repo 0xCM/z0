@@ -23,7 +23,7 @@ namespace Z0
 
     }   
 
-    [ApiServiceProvider]
+    [ApiServiceFactory]
     public partial class BC : IApiService<BC>
     {
         [MethodImpl(Inline)]
