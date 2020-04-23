@@ -72,5 +72,9 @@ namespace Z0
         /// Classifies the composite operation a ^ ((a << offset) ^ (a >> offset))
         /// </summary>
         Xors = Id.Xors,
+
+        Bsrl = Id.Bsrl,
+
+        Bsll = Id.Bsll,
     }    
 }

@@ -10,14 +10,14 @@ namespace Z0
     using static Seed;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSvcUnaryOp128<T> : IBlockedUnaryOp128<T>, ISVUnaryOp128D<T>
+    public interface IVSvcUnaryOp128<T> : ISVUnaryOp128D<T>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSvcUnaryOp256<T> : IBlockedUnaryOp256<T>, ISVUnaryOp256D<T>
+    public interface IVSvcUnaryOp256<T> : ISVUnaryOp256D<T>
         where T : unmanaged
     {
 

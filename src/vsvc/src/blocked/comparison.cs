@@ -76,14 +76,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Span<bit> nonz<T>(in Block256<T> a, Span<bit> dst)
+        public static Span<bit> nonz<T>(in Block256<T> src, Span<bit> dst)
             where T : unmanaged
         {
             var f = VSvc.vnonz<T>(n256);
-            var blocks = a.BlockCount;            
+            var blocks = src.BlockCount;            
             ref var result = ref head(dst);
             for(var block = 0; block < blocks; block++)
-                seek(ref result, block) = f.Invoke(a.LoadVector(block));
+                seek(ref result, block) = f.Invoke(src.LoadVector(block));
             return dst;
         }
 
@@ -91,7 +91,6 @@ namespace Z0
         public static Span<bit> testc<T>(in Block128<T> a, in Block128<T> b, Span<bit> dst)
             where T : unmanaged
         {            
-
             var f = VSvc.vtestc<T>(n128);
             var blocks = a.BlockCount;            
             ref var result = ref head(dst);

@@ -227,5 +227,9 @@ namespace Z0
         Mix,
 
         Rank,
+
+        Bsrl,
+
+        Bsll,
     }    
 }

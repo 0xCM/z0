@@ -12,6 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
+        [Closures(Integers), Bsrl]
         public readonly struct Bsrl128<T> : ISVShiftOp128<T>, IImm8UnaryResolver128<T>
             where T : unmanaged
         {
@@ -31,6 +32,7 @@ namespace Z0
                 => gvec.vbsrl(x,count);            
         }
 
+        [Closures(Integers), Bsrl]
         public readonly struct Bsrl256<T> : ISVShiftOp256<T>, IImm8UnaryResolver256<T>
             where T : unmanaged
         {

@@ -146,5 +146,53 @@ namespace Z0
                 f.Invoke(src.LoadVector(block)).StoreTo(dst, block);
             return ref dst;
         }         
+
+        [MethodImpl(Inline)]
+        public static Span<bit> map<F,T>(in Block128<T> src, in Span<bit> dst, F f)
+            where T : unmanaged
+            where F : ISVUnaryPredicate128<T>
+        {
+            var blocks = src.BlockCount;            
+            ref var result = ref refs.head(dst);
+            for(var block = 0; block < blocks; block++)
+                refs.seek(ref result, block) = f.Invoke(src.LoadVector(block));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<bit> map<F,T>(in Block256<T> src, Span<bit> dst, F f)
+            where T : unmanaged
+            where F : ISVUnaryPredicate256<T>
+        {
+            var blocks = src.BlockCount;            
+            ref var result = ref refs.head(dst);
+            for(var block = 0; block < blocks; block++)
+                refs.seek(ref result, block) = f.Invoke(src.LoadVector(block));
+            return dst;
+        }         
+
+        [MethodImpl(Inline)]
+        public static Span<bit> zip<F,T>(in Block128<T> a, Block128<T> b, Span<bit> dst, F f)
+            where T : unmanaged
+            where F : ISVBinaryPredicate128<T>
+        {
+            var blocks = a.BlockCount;            
+            ref var result = ref refs.head(dst);
+            for(var block = 0; block < blocks; block++)
+                refs.seek(ref result, block) = f.Invoke(a.LoadVector(block), b.LoadVector(block));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<bit> zip<F,T>(in Block256<T> a, in Block256<T> b, Span<bit> dst, F f)
+            where T : unmanaged
+            where F : ISVBinaryPredicate256<T>
+        {
+            var blocks = a.BlockCount;            
+            ref var result = ref refs.head(dst);
+            for(var block = 0; block < blocks; block++)
+                refs.seek(ref result, block) = f.Invoke(a.LoadVector(block), b.LoadVector(block));
+            return dst;
+        }         
     }
 }

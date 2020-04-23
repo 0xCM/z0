@@ -30,4 +30,8 @@ namespace Z0
     public sealed class XorSrAttribute : A { public XorSrAttribute(string group = null) : base(K.XorSr, group) {} }
 
     public sealed class XorsAttribute : A { public XorsAttribute(string group = null) : base(K.Xors, group) {} }
+
+    public sealed class BsllAttribute : A { public BsllAttribute(string group = null) : base(K.Bsll, group) {} }    
+
+    public sealed class BsrlAttribute : A { public BsrlAttribute(string group = null) : base(K.Bsrl, group) {} }        
 }

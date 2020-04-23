@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Sll128<T> : ISVShiftOp128D<T>, IImm8UnaryResolver128<T>
+        public readonly struct Sll128<T> : ISVShiftOp128D<T>, ISVShiftOp128<T>, IImm8UnaryResolver128<T>
             where T : unmanaged
         {
             public const string Name = "vsll";
@@ -33,10 +33,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, byte count) 
                 => gmath.sll(a,count);
-
         }
 
-        public readonly struct Sll256<T> : ISVShiftOp256D<T>, IImm8UnaryResolver256<T>
+        public readonly struct Sll256<T> : ISVShiftOp256D<T>, ISVShiftOp256<T>, IImm8UnaryResolver256<T>
             where T : unmanaged
         {
             public const string Name = "vsll";            

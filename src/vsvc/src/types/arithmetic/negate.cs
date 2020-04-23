@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(AllNumeric)]
+        [Closures(AllNumeric), Negate]
         public readonly struct Negate128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
@@ -33,7 +33,7 @@ namespace Z0
                 => gmath.negate(a);
         }
 
-        [NumericClosures(AllNumeric)]
+        [NumericClosures(AllNumeric), Negate]
         public readonly struct Negate256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
@@ -52,7 +52,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) 
                 => gmath.negate(a);
-
         }
     }
 }

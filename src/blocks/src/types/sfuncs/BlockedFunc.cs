@@ -14,7 +14,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IBlockedFunc : ISFunc
     {
-
+        OpIdentity ISFunc.Id => OpIdentity.Empty;
     }
 
     /// <summary>

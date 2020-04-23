@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(Integers)]
-        public readonly struct Inc128<T> : ISVUnaryOp128D<T>, IBlockedUnaryOp128<T>
+        public readonly struct Inc128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
             public const string Name = "vinc";
@@ -31,14 +31,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) 
                 => gmath.inc(a);
-
-            [MethodImpl(Inline)]
-            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> c)            
-                => ref VBlocks.inc(a,c);
         }
 
         [NumericClosures(Integers)]
-        public readonly struct Inc256<T> : ISVUnaryOp256D<T>, IBlockedUnaryOp256<T>
+        public readonly struct Inc256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
             public const string Name = "vinc";
@@ -56,10 +52,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) 
                 => gmath.inc(a);
-
-            [MethodImpl(Inline)]
-            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
-                => ref VBlocks.vinc(a,c);
         }            
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {        
-        public readonly struct Srl128<T> : ISVShiftOp128D<T>, IImm8UnaryResolver128<T>
+        public readonly struct Srl128<T> : ISVShiftOp128D<T>, ISVShiftOp128<T>, IImm8UnaryResolver128<T>
             where T : unmanaged
         {
             public const string Name = "vsrl";
@@ -35,7 +35,7 @@ namespace Z0
                 => gmath.srl(a,count);
         }
 
-        public readonly struct Srl256<T> : ISVShiftOp256D<T>, IImm8UnaryResolver256<T>
+        public readonly struct Srl256<T> : ISVShiftOp256D<T>, ISVShiftOp256<T>, IImm8UnaryResolver256<T>
             where T : unmanaged
         {
             public const string Name = "vsrl";

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(Integers)]
+        [Closures(Integers), Not]
         public readonly struct Not128<T> : IVSvcUnaryOp128<T>
             where T : unmanaged
         {
@@ -30,12 +30,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.not(a);
 
-            [MethodImpl(Inline)]
-            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> c)            
-                => ref VBlocks.not(a,c);
         }
 
-        [NumericClosures(Integers)]
+        [NumericClosures(Integers), Not]
         public readonly struct Not256<T> : IVSvcUnaryOp256<T>
             where T : unmanaged
         {
@@ -52,9 +49,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.not(a);
-            [MethodImpl(Inline)]
-            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
-                => ref VBlocks.vnot(a,c);
         }
    }
 }

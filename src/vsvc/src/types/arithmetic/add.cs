@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(AllNumeric)]
+        [Closures(AllNumeric), Add]
         public readonly struct Add128<T> : IVSvcBinaryOp128<T>
             where T : unmanaged
         {
@@ -32,13 +32,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) 
                 => gmath.add(a,b);
-
-            [MethodImpl(Inline)]
-            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
-                => ref VBlocks.add(a,b,c);
         }
 
-        [NumericClosures(AllNumeric)]
+        [Closures(AllNumeric), Add]
         public readonly struct Add256<T> : IVSvcBinaryOp256<T>
             where T : unmanaged
         {
@@ -57,10 +53,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) 
                 => gmath.add(a,b);
-
-            [MethodImpl(Inline)]
-            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
-                => ref VBlocks.add(a,b,c);
         }
     }
 }

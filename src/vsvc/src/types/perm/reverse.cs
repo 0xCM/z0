@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [Closures(Integers)]
+        [Closures(Integers), Reverse]
         public readonly struct Reverse128<T> : ISVUnaryOp128<T>
             where T : unmanaged
         {
@@ -28,7 +28,7 @@ namespace Z0
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vreverse(x);            
         }
 
-        [Closures(Integers)]
+        [Closures(Integers), Reverse]
         public readonly struct Reverse256<T> : ISVUnaryOp256<T>
             where T : unmanaged
         {

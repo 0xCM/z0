@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(Integers)]
+        [Closures(Integers)]
         public readonly struct XorNot128<T> : IVSvcBinaryOp128<T>
             where T : unmanaged
         {
@@ -30,11 +30,6 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.xornot(a,b);
-
-            [MethodImpl(Inline)]
-            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
-                => ref VBlocks.xornot(a,b,c);
-
         }
 
         [NumericClosures(Integers)]
@@ -55,9 +50,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.xornot(a,b);
 
-            [MethodImpl(Inline)]
-            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
-                => ref VBlocks.xornot(a,b,c);
         }
     }
 }

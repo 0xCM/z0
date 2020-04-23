@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [Closures(AllNumeric)]
+        [Closures(AllNumeric), TestZ]
         public readonly struct TestZ128<T> : ISVBinaryPredicate128D<T>, IBlockedBinaryPred128<T>
             where T : unmanaged
         {
@@ -35,7 +35,7 @@ namespace Z0
                 => VBlocks.testz(x,y,dst);
         }
 
-        [Closures(AllNumeric)]
+        [Closures(AllNumeric), TestZ]
         public readonly struct TestZ256<T> : ISVBinaryPredicate256<T>, IBlockedBinaryPred256<T>
             where T : unmanaged
         {
