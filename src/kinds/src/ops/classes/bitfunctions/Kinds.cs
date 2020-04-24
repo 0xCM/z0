@@ -34,5 +34,17 @@ namespace Z0
 
         public readonly struct Rank : I {  K I.Kind => K.Rank; }
 
+        public readonly struct BitSeg : I {  K I.Kind => K.BitSeg; }
+
+        public readonly struct TestBit : I {  K I.Kind => K.TestBit; }
+
+        public readonly struct SetBit : I {  K I.Kind => K.SetBit; }
+
+        public readonly struct TestBits : I {  K I.Kind => K.TestBits; }
+
+        public readonly struct Stitch : I {  K I.Kind => K.Stitch; }
+
+        public readonly struct BitCopy : I {  K I.Kind => K.BitCopy; }
+
     }
 }

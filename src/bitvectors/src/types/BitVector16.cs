@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;    
+    using static Seed;
 
     /// <summary>
     /// Defines a 16-bit bitvector
     /// </summary>
     public struct BitVector16 : IBitVector<BitVector16,ushort>
     {
-        internal ushort data;            
+        internal ushort Data;            
 
         public static BitVector16 Zero => 0;
 
@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ushort>(BitVector16 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector16(ushort src)
@@ -34,19 +34,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ushort(BitVector16 src)
-            => src.data;        
+            => src.Data;        
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector32(BitVector16 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector16 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector16 src)
-            => (byte)src.data;
+            => (byte)src.Data;
 
         /// <summary>
         /// Computes the bitwise AND of the operands
@@ -229,7 +229,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector16(ushort src)
-            => this.data = src;
+            => this.Data = src;
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -237,7 +237,7 @@ namespace Z0
         public ushort Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Z0
         public bit Empty
         {
             [MethodImpl(Inline)]
-            get => data == 0;
+            get => Data == 0;
         }
 
         /// <summary>
@@ -264,13 +264,13 @@ namespace Z0
         public bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => data != 0;
+            get => Data != 0;
         }
 
         public bit AllOn
         {
             [MethodImpl(Inline)]
-            get => (UInt16.MaxValue & data) == UInt16.MaxValue;
+            get => (UInt16.MaxValue & Data) == UInt16.MaxValue;
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace Z0
         public BitVector8 Lo
         {
             [MethodImpl(Inline)]
-            get => (byte)data;
+            get => (byte)Data;
         }
 
         /// <summary>
@@ -288,7 +288,7 @@ namespace Z0
         public BitVector8 Hi
         {
             [MethodImpl(Inline)]
-            get => (byte)(data >> 8);
+            get => (byte)(Data >> 8);
         }
     
         /// <summary>
@@ -297,7 +297,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitVector.bytes(data);
+            get => BitVector.bytes(Data);
         }
 
         /// <summary>
@@ -306,10 +306,10 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => bit.test(data, pos);
+            get => bit.test(Data, pos);
             
             [MethodImpl(Inline)]
-            set => data = bit.set(data, (byte)pos, value);
+            set => Data = bit.set(Data, (byte)pos, value);
         }
         
         /// <summary>
@@ -320,18 +320,18 @@ namespace Z0
         public BitVector16 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.seg(this, first, last);
+            get => BitVector.bitseg(this, first, last);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector16 y)
-            => data == y.data;
+            => Data == y.Data;
 
         public override bool Equals(object obj)
             => obj is BitVector16 x ? Equals(x) : false;
         
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
         
          public string Format(BitFormatConfig config)
             => BitVector.format(this,config);

@@ -12,11 +12,27 @@ namespace Z0
     using K = CanonicalKind;
     using A = OpKindAttribute;    
 
-    public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute(object group = null) : base(K.Identity, group) {} }
+    public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(K.Identity) {} }
 
-    public sealed class ConcatAttribute : A { public ConcatAttribute(object group = null) : base(K.Concat, group) {} }
+    public sealed class ConcatAttribute : A { public ConcatAttribute() : base(K.Concat) {} }
 
-    public sealed class ReverseAttribute : A { public ReverseAttribute(object group = null) : base(K.Reverse, group) {} }    
+    public sealed class ReverseAttribute : A { public ReverseAttribute() : base(K.Reverse) {} }    
 
-    public sealed class ParseAttribute : A { public ParseAttribute(object group = null) : base(K.Parse, group) {} }    
+    public sealed class ParseAttribute : A { public ParseAttribute() : base(K.Parse) {} }    
+
+    public sealed class SliceAttribute : A { public SliceAttribute() : base(K.Slice) {} }    
+
+    public sealed class EnableAttribute : A { public EnableAttribute() : base(K.Enable) {} }    
+
+    public sealed class DisableAttribute : A { public DisableAttribute() : base(K.Disable) {} }
+
+    public sealed class LoAttribute : A { public LoAttribute() : base(K.Lo) {} }
+
+    public sealed class HiAttribute : A { public HiAttribute() : base(K.Hi) {} }
+
+    public sealed class LeftAttribute : A { public LeftAttribute() : base(K.Left) {} }
+
+    public sealed class RightAttribute : A { public RightAttribute() : base(K.Right) {} }
+
+    public sealed class ReplicateAttribute : A { public ReplicateAttribute() : base(K.Replicate) {} }    
 }

@@ -30,7 +30,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
-                var xpos = gbits.msbpos(x);
+                var xpos = gbits.hipos(x);
                 Numeric.lt(xpos, (int)bitsize<T>());
                 
                 var xcount = gbits.nlz(x);

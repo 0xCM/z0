@@ -48,7 +48,7 @@ namespace Z0
             Claim.eq(maxlen, bs1.PopCount());
             Claim.eq(maxlen, bs1.Length);
 
-            var bv1 = gbits.zerohi(bv0.Scalar, maxlen);
+            var bv1 = gbits.zhi(bv0.Scalar, maxlen);
             Claim.eq(maxlen, gbits.pop(bv1));
 
             var bs2 = bs1.Pad(width);
@@ -59,11 +59,11 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var j = Random.Next(2, width - width/2);
-                var y = gbits.zerohi(x, (int)j);
+                var y = gbits.zhi(x, (int)j);
 
-                var x0 = gbits.between(x,0, (byte)(j - 1));
-                var y0 = gbits.between(y,0, (byte)(j - 1));
-                var y1 = gbits.between(y,(byte)j, (byte)(width - 1));
+                var x0 = gbits.bitseg(x,0, (byte)(j - 1));
+                var y0 = gbits.bitseg(y,0, (byte)(j - 1));
+                var y1 = gbits.bitseg(y,(byte)j, (byte)(width - 1));
                 Claim.eq(x0,y0);
                 Claim.nea(gmath.nonz(y1));                        
             }

@@ -38,7 +38,7 @@ namespace Z0
                     var actual = f.Invoke(x,y);
                     var expect = BitVector.modprod(x,y);
                     Claim.require(actual == expect);
-                    Claim.require(actual == f.InvokeScalar(x,y));
+                    base.Claim.require(actual == f.Invoke((T)x, (T)y));
                 }
             }
 

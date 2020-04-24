@@ -35,5 +35,28 @@ namespace Z0
 
         Rank = Id.Rank,
 
+        BitSeg = Id.BitSeg,
+
+        TestBit = Id.TestBit,
+
+        SetBit = Id.SetBit,
+
+        TestBits = Id.TestBits,        
+
+        Stitch = Id.Stitch,
+
+        BitCopy = Id.BitCopy,
+
+        BitCell = Id.BitCell,
+
+        LoPos = Id.LoPos,
+
+        HiPos = Id.HiPos,
+
+        HiSeg = Id.HiSeg,
+
+        LoSeg = Id.LoSeg,
+
+        ZHi = Id.ZHi,
     }
 }

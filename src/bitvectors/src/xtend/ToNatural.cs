@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<N4,byte> ToNatural(this BitVector4 src)
-            => BitVector.inject(src.data,n4);
+            => BitVector.inject(src.Data,n4);
 
         /// <summary>
         /// Converts the source bitvector to an equivalent natural bitvector
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<N8,byte> ToNatural(this BitVector8 src)
-            => BitVector.inject(src.data,n8);
+            => BitVector.inject(src.Data,n8);
 
         /// <summary>
         /// Converts the source bitvector to an equivalent natural/generic bitvector
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<N32,uint> ToNatural(this BitVector32 src)
-            => BitVector.inject(src.data,n32);
+            => BitVector.inject(src.Data,n32);
 
         /// <summary>
         /// Converts the source bitvector to an equivalent natural/generic bitvector
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<N64,ulong> ToNatural(this BitVector64 src)
-            => BitVector.inject(src.data,n64);
+            => BitVector.inject(src.Data,n64);
 
         /// <summary>
         /// Converts a generic bitvector to natural bitvector

@@ -104,7 +104,7 @@ namespace Z0
             set
             {
                 var index = BitMatrix.tableindex(row, col, NatRep, NatRep, default(T));
-                data[index.CellIndex] = gbits.set(data[index.CellIndex], index.BitOffset, value);                
+                data[index.CellIndex] = gbits.setbit(data[index.CellIndex], index.BitOffset, value);                
             }
         }            
 

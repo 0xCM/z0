@@ -21,5 +21,7 @@ namespace Z0
         public readonly struct Concat : I { K I.Kind => K.Concat; }
 
         public readonly struct Parse : I { K I.Kind => K.Parse; }
+
+        public readonly struct Slice : I { K I.Kind => K.Slice; }
     }
 }

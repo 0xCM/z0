@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => generic<T>(Bits.bitslice(g.Data, uint8(nati<N>()*index),(byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Data, uint8(nati<N>()*index),(byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 32-bit grid
@@ -41,7 +41,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => generic<T>(Bits.bitslice(g.Data, uint8(nati<N>()*index),(byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Data, uint8(nati<N>()*index),(byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 64-bit grid
@@ -56,7 +56,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => generic<T>(gbits.bitslice(g.Data, (byte)(index*nati<N>()), val8u<N>()));
+                => generic<T>(gbits.slice(g.Data, (byte)(index*nati<N>()), val8u<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 16-bit subgrid
@@ -71,7 +71,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => generic<T>(Bits.bitslice(g.Data, uint8(index* nati<N>()), (byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Data, uint8(index* nati<N>()), (byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 32-bit subgrid
@@ -86,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => generic<T>(Bits.bitslice(g.Data, uint8(index* nati<N>()), (byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Data, uint8(index* nati<N>()), (byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 64-bit subgrid
@@ -101,7 +101,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => generic<T>(Bits.bitslice(g.Data, uint8(index*nati<N>()), (byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Data, uint8(index*nati<N>()), (byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identifed 64-bit grid row

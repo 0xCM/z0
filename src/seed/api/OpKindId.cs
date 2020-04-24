@@ -257,5 +257,45 @@ namespace Z0
 
         Srlx,
 
+        BitSeg,
+
+        TestBit,
+
+        SetBit,
+
+        TestBits,
+
+        Stitch,
+
+        Slice,
+
+        BitCopy,
+
+        BitCell,
+
+        Enable,
+
+        Disable,
+
+        Hi,
+
+        Lo,
+
+        HiPos,
+
+        LoPos,
+
+        Left,
+
+        Right,
+
+        Replicate,
+
+        HiSeg,
+
+        LoSeg,
+
+        ZHi,
+
     }    
 }

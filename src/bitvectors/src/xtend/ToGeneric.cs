@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<byte> ToGeneric(this BitVector8 src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Converts the source bitvector to an equivalent generic bitvector
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<ushort> ToGeneric(this BitVector16 src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Converts the source bitvector to an equivalent generic bitvector
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<uint> ToGeneric(this BitVector32 src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Converts the source bitvector to an equivalent generic bitvector
@@ -41,6 +41,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<ulong> ToGeneric(this BitVector64 src)
-            => src.data;
+            => src.Data;
     }
 }

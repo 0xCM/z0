@@ -30,5 +30,11 @@ namespace Z0
         public readonly struct Mix<W,T> : IBitFunctionKind<Mix,W,T> where W : unmanaged, ITypeWidth { }
 
         public readonly struct Rank<W,T> : IBitFunctionKind<Rank,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct BitSeg<W,T> : IBitFunctionKind<BitSeg,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct TestBit<W,T> : IBitFunctionKind<TestBit,W,T> where W : unmanaged, ITypeWidth { }
+
+        public readonly struct TestBits<W,T> : IBitFunctionKind<TestBits,W,T> where W : unmanaged, ITypeWidth { }
     }
 }

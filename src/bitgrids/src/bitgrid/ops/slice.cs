@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> slice<T>(BitGrid32<T> g, byte index, byte length)
             where T : unmanaged
-                => generic<T>(gbits.bitslice(g.Data, uint8(index*length), length));
+                => generic<T>(gbits.slice(g.Data, uint8(index*length), length));
 
         /// <summary>
         /// Extracts a sequence of bits
@@ -34,6 +34,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> slice<T>(BitGrid64<T> g, byte index, byte length)
             where T : unmanaged
-                => generic<T>(gbits.bitslice(g.Data, uint8(index*length), length));
+                => generic<T>(gbits.slice(g.Data, uint8(index*length), length));
     }
 }

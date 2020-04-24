@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="y">The shift s</param>
         [MethodImpl(Inline), Sll]
         public static BitVector4 sll(BitVector4 x, byte offset)
-            => math.sll(x.Scalar,offset);
+            => math.sll(x.Data,offset);
 
         /// <summary>
         /// Computes z := x << s for a bitvector x and shift offset s
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="y">The shift s</param>
         [MethodImpl(Inline), Sll]
         public static BitVector8 sll(BitVector8 x, byte offset)
-            => math.sll(x.Scalar,offset);
+            => math.sll(x.Data,offset);
             
         /// <summary>
         /// Computes z := x << s for a bitvector x and shift offset s
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="y">The shift s</param>
         [MethodImpl(Inline), Sll]
         public static BitVector16 sll(BitVector16 x, byte offset)
-            => math.sll(x.Scalar,offset);
+            => math.sll(x.Data,offset);
 
         /// <summary>
         /// Computes z := x << s for a bitvector x and shift offset s
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="y">The shift s</param>
         [MethodImpl(Inline), Sll]
         public static BitVector32 sll(BitVector32 x, byte offset)
-            => math.sll(x.Scalar,offset);
+            => math.sll(x.Data,offset);
 
         /// <summary>
         /// Computes z := x << s for a bitvector x and shift offset s
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="y">The shift s</param>
         [MethodImpl(Inline), Sll]
         public static BitVector64 sll(BitVector64 x, byte offset)
-            => math.sll(x.Scalar,offset);
+            => math.sll(x.Data,offset);
 
         /// <summary>
         /// Computes z := x << s for a bitvector x and shift offset s
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Sll, Closures(UnsignedInts)]
         public static BitVector<T> sll<T>(BitVector<T> x, byte offset)
             where T : unmanaged
-                => gmath.sll(x.Scalar,offset);
+                => gmath.sll(x.Data,offset);
 
         /// <summary>
         /// Computes z := x >> s for a bitvector x and shift offset s
@@ -76,7 +76,7 @@ namespace Z0
         public static BitVector<N,T> sll<N,T>(BitVector<N,T> x, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.sll(x.Scalar,offset);
+                => gmath.sll(x.Data,offset);
  
         /// <summary>
         /// Computes z := x >> s for a bitvector x and shift offset s
@@ -87,6 +87,6 @@ namespace Z0
         public static BitVector128<N,T> sll<N,T>(in BitVector128<N,T> x, byte offset)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vsllx(x.data,offset);
+                => gvec.vsllx(x.Data,offset);
    }
 }

@@ -302,7 +302,7 @@ namespace Z0
                     Claim.eq(seqlen, bitsize<T>());
 
                     for(byte j = 0; j < seqlen; j++)
-                        Claim.eq(gbits.test(x0, j), (bit)(x1[j] == 1));
+                        Claim.eq(gbits.testbit(x0, j), (bit)(x1[j] == 1));
                 }
 
             }

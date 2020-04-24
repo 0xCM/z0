@@ -26,7 +26,7 @@ namespace Z0
             var first = (byte)(index * segwidth);
             var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm4L)gbits.between((byte)src, first, last);
+            dst = (Perm4L)gbits.bitseg((byte)src, first, last);
             return dst.IsSymbol();
         }
 
@@ -44,7 +44,7 @@ namespace Z0
             var first = (byte)(index * segwidth);
             var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm8L)gbits.between((uint)src, first, last);
+            dst = (Perm8L)gbits.bitseg((uint)src, first, last);
             return dst.IsSymbol();
         }
 
@@ -62,7 +62,7 @@ namespace Z0
             var first = (byte)(index * segwidth);
             var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm16L)gbits.between((ulong)src, first, last);
+            dst = (Perm16L)gbits.bitseg((ulong)src, first, last);
             return dst.IsSymbol();
         }
 

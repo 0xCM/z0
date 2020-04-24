@@ -17,7 +17,7 @@ namespace Z0
     public struct BitVector<T> : IBitVector<BitVector<T>,T>
         where T : unmanaged
     {
-        internal T data;
+        internal T Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<T>(T src)
@@ -25,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator T(BitVector<T> src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator ==(BitVector<T> x, BitVector<T> y)
-            => gmath.eq(x.data,y.data);
+            => gmath.eq(x.Data,y.Data);
 
         /// <summary>
         /// Determines whether operand content is non-identical
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator !=(BitVector<T> x, BitVector<T> y)
-            => gmath.neq(x.data,y.data);
+            => gmath.neq(x.Data,y.Data);
 
         /// <summary>
         /// Determines whether the left operand is arithmetically less than the second
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator <(BitVector<T> x, BitVector<T> y)
-            => gmath.lt(x.data,y.data);
+            => gmath.lt(x.Data,y.Data);
 
         /// <summary>
         /// Determines whether the left operand is arithmetically greater than the second
@@ -179,7 +179,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator >(BitVector<T> x, BitVector<T> y)
-            => gmath.gt(x.data,y.data);
+            => gmath.gt(x.Data,y.Data);
 
         /// <summary>
         /// Determines whether the left operand is arithmetically less than or equal to the second
@@ -188,7 +188,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator <=(BitVector<T> x, BitVector<T> y)
-            => gmath.lteq(x.data,y.data);
+            => gmath.lteq(x.Data,y.Data);
 
         /// <summary>
         /// Determines whether the left operand is arithmetically greater than or equal to the second
@@ -197,11 +197,11 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator >=(BitVector<T> x, BitVector<T> y)
-            => gmath.gteq(x.data,y.data);
+            => gmath.gteq(x.Data,y.Data);
 
         [MethodImpl(Inline)]
         internal BitVector(T src)
-            => this.data = src;
+            => this.Data = src;
 
         /// <summary>
         /// Specifies the data over which the vector is defined
@@ -209,7 +209,7 @@ namespace Z0
         public readonly T Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace Z0
         public readonly T Lo
         {
             [MethodImpl(Inline)]
-            get => gbits.lo(data);
+            get => gbits.lo(Data);
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
         public readonly T Hi
         {
             [MethodImpl(Inline)]
-            get => gbits.hi(data);
+            get => gbits.hi(Data);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace Z0
         public readonly Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitVector.bytes(data);
+            get => BitVector.bytes(Data);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Z0
         public bit Empty
         {
             [MethodImpl(Inline)]
-            get => !gmath.nonz(data);
+            get => !gmath.nonz(Data);
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Z0
         public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => gmath.nonz(data);
+            get => gmath.nonz(Data);
         }
 
         /// <summary>
@@ -272,10 +272,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => gbits.test(data, index);
+            get => gbits.testbit(Data, (byte)index);
             
             [MethodImpl(Inline)]
-            set => data = gbits.set(data, index, value);
+            set => Data = gbits.setbit(Data, index, value);
         }
 
         /// <summary>
@@ -286,18 +286,18 @@ namespace Z0
         public BitVector<T> this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.seg(this, first, last);
+            get => BitVector.bitseg(this, first, last);
         }
 
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector<T> y)
-            => gmath.eq(data, y.data);
+            => gmath.eq(Data, y.Data);
 
         public readonly override bool Equals(object obj)
             => obj is BitVector<T> x && Equals(x);
         
         public readonly override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
     
          public string Format(BitFormatConfig config)
             => BitVector.format(this,config);

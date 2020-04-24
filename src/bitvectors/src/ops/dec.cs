@@ -19,8 +19,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector4 dec(BitVector4 x)
         {
-            if(x.data > 0)
-                return x.data--;
+            if(x.Data > 0)
+                return x.Data--;
             else
                 return  0xF;
         }
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitVector8 dec(BitVector8 x)        
-            => gmath.dec(x.data);
+            => gmath.dec(x.Data);
         
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitVector16 dec(BitVector16 x)        
-            => gmath.dec(x.data);
+            => gmath.dec(x.Data);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitVector32 dec(BitVector32 x)        
-            => gmath.dec(x.data);
+            => gmath.dec(x.Data);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 dec(BitVector64 x)        
-            => gmath.dec(x.data);
+            => gmath.dec(x.Data);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> dec<T>(BitVector<T> x)
             where T : unmanaged
-                => gmath.dec(x.data);
+                => gmath.dec(x.Data);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -76,6 +76,6 @@ namespace Z0
         public static BitVector<N,T> dec<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.dec(x.data);
+                => gmath.dec(x.Data);
     }
 }

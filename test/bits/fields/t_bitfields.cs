@@ -58,10 +58,10 @@ namespace Z0
                 var seg2 = bf.Read(spec[2], input);
                 var seg3 = bf.Read(spec[3], input);
 
-                Claim.eq(Bits.bitslice(input, 0, 2), seg0);
-                Claim.eq(Bits.bitslice(input, 2, 2), seg1);
-                Claim.eq(Bits.bitslice(input, 4, 2), seg2);
-                Claim.eq(Bits.bitslice(input, 6, 2), seg3);
+                Claim.eq(Bits.slice(input, 0, 2), seg0);
+                Claim.eq(Bits.slice(input, 2, 2), seg1);
+                Claim.eq(Bits.slice(input, 4, 2), seg2);
+                Claim.eq(Bits.slice(input, 6, 2), seg3);
 
                 var output =  gmath.or(
                     gmath.sll(seg0, spec[0].StartPos), 
@@ -241,7 +241,7 @@ namespace Z0
                 dst.Clear();
                 tmp.Clear();
 
-                var expect = gbits.bitslice(src,0, spec.TotalWidth);
+                var expect = gbits.slice(src,0, spec.TotalWidth);
 
                 bf.Read(src, dst);
                 gspan.sllv(dst, positions, tmp);

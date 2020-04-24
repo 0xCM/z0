@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class BitVector
     {
@@ -18,5 +18,16 @@ namespace Z0
         [MethodImpl(Inline), Op]
         internal static BitVector4 inject(N4 n, byte data)
             => new BitVector4(data,true);
+
+        /// <summary>
+        /// Creates an N-bit vector directly from the source data, bypassing masked initialization
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        internal static BitVector<N,T> inject<N,T>(T src, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitVector<N,T>.Inject(src);
+
     }
 }

@@ -13,19 +13,18 @@ namespace Z0
 
     partial class gbits
     {
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<bit> unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
         {
             var srcsize = bitsize<T>();
             var bitcount = bitsize<T>()*src.Length;
-            //require(dst.Length >= bitcount);
             
             ref var target = ref head(dst);
             var k = 0;
             for(var i=0; i < src.Length; i++)
             for(byte j=0; j < srcsize; j++, k++)
-                seek(ref target, k) = test(skip(src,i), j);
+                seek(ref target, k) = testbit(skip(src,i), j);
             return dst;
         }
 
@@ -43,7 +42,7 @@ namespace Z0
             var len = bitsize<S>();
             require(dst.Length - offset >= len);
             for(var i=0; i< len; i++)
-                seek(dst,offset + i)  = test(src, (byte)i) == bit.On ? one<T>() : zero<T>();            
+                seek(dst,offset + i)  = testbit(src, (byte)i) == bit.On ? one<T>() : zero<T>();            
             return dst;
         }
 
@@ -69,7 +68,7 @@ namespace Z0
                 var k = 0;
                 for(var i=0; i < src.Length; i++)
                 for(byte j=0; j < srcsize; j++)
-                    seek(dst,k++)  = test(skip(src,i), j) == bit.On ? one<T>() : zero<T>();            
+                    seek(dst,k++)  = testbit(skip(src,i), j) == bit.On ? one<T>() : zero<T>();            
                 return dst;
             }
         }
@@ -106,7 +105,7 @@ namespace Z0
             var k = 0;
             for(var i=0; i < src.Length; i++)
             for(byte j=0; j< srcsize; j++, k++)
-                seek(ref target, k) = test(src[i], j);
+                seek(ref target, k) = testbit(src[i], j);
             return dst;
         }
     }

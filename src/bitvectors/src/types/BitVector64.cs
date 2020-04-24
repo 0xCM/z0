@@ -7,14 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;    
+    using static Seed; 
+    using static Memories;    
 
     /// <summary>
     /// Defines a 64-bit bitvector
     /// </summary>
     public struct BitVector64 : IBitVector<BitVector64,ulong>
     {    
-        internal ulong data;
+        internal ulong Data;
 
         public static BitVector64 Zero => default;
 
@@ -26,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ulong>(BitVector64 src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Implicitly converts an unsigned 64-bit integer to a 64-bit bitvector
@@ -42,7 +43,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static implicit operator ulong(BitVector64 src)
-            => src.data;        
+            => src.Data;        
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to an 8-bit bitvector
@@ -50,7 +51,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector64 src)
-            => BitVector.create(n4,(byte)src.data);        
+            => BitVector.create(n4,(byte)src.Data);        
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to an 8-bit bitvector
@@ -58,7 +59,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector64 src)
-            => (byte)src.data;
+            => (byte)src.Data;
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to a 16-bit bitvector
@@ -66,7 +67,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector16(BitVector64 src)
-            => (ushort)src.data;
+            => (ushort)src.Data;
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to a 32-bit bitvector
@@ -74,7 +75,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector32(BitVector64 src)
-            => BitVector.create(n32, (uint)src.data);        
+            => BitVector.create(n32, (uint)src.Data);        
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -233,7 +234,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator ==(BitVector64 x, BitVector64 y)
-            => x.data == y.data;
+            => x.Data == y.Data;
 
         /// <summary>
         /// Determines whether operand content is non-identical
@@ -286,7 +287,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector64(ulong data)
-            => this.data = data;
+            => this.Data = data;
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -294,7 +295,7 @@ namespace Z0
         public readonly ulong Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -312,7 +313,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitVector.bytes(data);
+            get => BitVector.bytes(Data);
         }
 
         /// <summary>
@@ -321,7 +322,7 @@ namespace Z0
         public readonly bit Empty
         {
             [MethodImpl(Inline)]
-            get => data == 0;
+            get => Data == 0;
         }
 
         /// <summary>
@@ -330,7 +331,7 @@ namespace Z0
         public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => data != 0;
+            get => Data != 0;
         }
 
         /// <summary>
@@ -339,7 +340,7 @@ namespace Z0
         public readonly bool AllOn
         {
             [MethodImpl(Inline)]
-            get => (UInt64.MaxValue & data) == UInt64.MaxValue;
+            get => (UInt64.MaxValue & Data) == UInt64.MaxValue;
         }
 
         /// <summary>
@@ -348,7 +349,7 @@ namespace Z0
         public readonly BitVector32 Lo
         {
             [MethodImpl(Inline)]
-            get => BitVector.create(n32, (uint)data);
+            get => BitVector.create(n32, (uint)Data);
         }
 
         /// <summary>
@@ -357,7 +358,7 @@ namespace Z0
         public readonly BitVector32 Hi
         {
             [MethodImpl(Inline)]
-            get => BitVector.create(n32,(uint)(data >> 32));
+            get => BitVector.create(n32,(uint)(Data >> 32));
         }        
 
         /// <summary>
@@ -366,10 +367,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => bit.test(data, index);
+            get => bit.test(Data, index);
             
             [MethodImpl(Inline)]
-            set => data = bit.set(data, (byte)index, value);
+            set => Data = bit.set(Data, (byte)index, value);
         }
 
         /// <summary>
@@ -380,7 +381,7 @@ namespace Z0
         public BitVector64 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.seg(this,first, last);
+            get => BitVector.bitseg(this,first, last);
         }
 
         /// <summary>
@@ -393,13 +394,13 @@ namespace Z0
                                     
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector64 y)
-            => data == y.data;
+            => Data == y.Data;
 
         public override bool Equals(object obj)
             => obj is BitVector64 x && Equals(x); 
         
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
  
         public string Format(BitFormatConfig config)
             => BitVector.format(this,config);

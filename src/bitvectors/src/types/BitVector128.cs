@@ -22,7 +22,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        internal readonly Vector128<T> data;
+        internal readonly Vector128<T> Data;
 
         public static N128 MaxWidth => default;
         
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The scalar value</param>
         [MethodImpl(Inline)]
         public static implicit operator Vector128<T>(BitVector128<N,T> src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator ==(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            => BitVector.same(x,y);
+            => BitVector.eq(x,y);
 
         /// <summary>
         /// Determines whether operand content is non-identical
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator !=(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            => !BitVector.same(x,y);
+            => !BitVector.eq(x,y);
 
         /// <summary>
         /// Intializes a bitvector with the lo N bits of a scalar source
@@ -158,15 +158,15 @@ namespace Z0
         /// <param name="data">The scalar source value</param>
         [MethodImpl(Inline)]
         public BitVector128(Vector128<T> data)
-            => this.data = data;
+            => this.Data = data;
 
         /// <summary>
         /// The scalar representation of the vector
         /// </summary>
-        public Vector128<T> Data
+        public Vector128<T> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Z0
         public BitVector64 Lo
         {
             [MethodImpl(Inline)]
-            get => vcell(v64u(data),0);
+            get => vcell(v64u(Data),0);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Z0
         public BitVector64 Hi
         {
             [MethodImpl(Inline)]
-            get => vcell(v64u(data),1);
+            get => vcell(v64u(Data),1);
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0
         public bit Empty
         {
             [MethodImpl(Inline)]
-            get => !gmath.nonz(data);
+            get => !gmath.nonz(Data);
         }
 
         /// <summary>
@@ -211,18 +211,18 @@ namespace Z0
         public bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => gmath.nonz(data);
+            get => gmath.nonz(Data);
         }
  
         [MethodImpl(Inline)]
         public readonly bool Equals(in BitVector128<N,T> y)
-            => BitVector.same(this,y);
+            => BitVector.eq(this,y);
 
         public readonly override bool Equals(object obj)
             => obj is BitVector128<N,T> x && Equals(x);
         
         public readonly override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
 
         public override string ToString()
             => string.Empty;
@@ -230,6 +230,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128<N,U> As<U>()
             where U : unmanaged
-                => data.As<T,U>();
+                => Data.As<T,U>();
     }
 }

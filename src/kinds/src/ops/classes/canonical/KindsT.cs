@@ -18,5 +18,7 @@ namespace Z0
         public readonly struct Concat<T> : ICanonicalKind<Concat,T> {}
 
         public readonly struct Parse<T> : ICanonicalKind<Parse,T> {}
+
+        public readonly struct Slice<T> : ICanonicalKind<Slice,T> {}
     }
 }

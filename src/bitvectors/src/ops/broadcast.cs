@@ -11,42 +11,48 @@ namespace Z0
 
     partial class BitVector
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => Vectors.vbroadcast(w,a);
+
+        [MethodImpl(Inline), Broadcast]
         public static BitVector16 broadcast(N16 n, byte a)
         {
             var src = (uint)a;
             return (ushort)(src | (src << 8));
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static BitVector32 broadcast(N32 n, byte a)
         {
             var src = (uint)a;
             return src | (src << 8) | (src << 16) | (src << 24);
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static BitVector32 broadcast(N32 n, ushort a)
         {
             var src = (uint)a;
             return src | (src << 16);
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static BitVector64 broadcast(N64 n, byte a)
         {
             var src = (ulong)a;
             return src | (src << 8) | (src << 16) | (src << 24) | (src << 32) | (src << 48) | (src << 56);
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static BitVector64 broadcast(N64 n, ushort a)
         {
             var src = (ulong)a;
             return src | (src << 16) | (src << 32) | (src << 48);
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Broadcast]
         public static BitVector64 broadcast(N64 n, uint a)
         {
             var src = (ulong)a;

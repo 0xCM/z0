@@ -24,6 +24,23 @@ namespace Z0
 
         Identity = Id.Identity,
 
-        Parse = Id.Parse
+        Parse = Id.Parse,
+
+        Slice = Id.Slice,
+
+        Enable = Id.Enable,
+        
+        Disable = Id.Disable,
+
+        Lo = Id.Lo,
+
+        Hi = Id.Hi,
+
+        Left = Id.Left,
+
+        Right = Id.Right,
+
+        Replicate = Id.Replicate,
+
     }   
 }

@@ -136,7 +136,7 @@ namespace Z0
 
                 var x = src[i];
                 for(byte j = 0; j < n; j++)
-                    Claim.eq(gbits.test(x,j), bc[j]);     
+                    Claim.eq(gbits.testbit(x,j), bc[j]);     
             }
         }
 

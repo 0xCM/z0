@@ -52,9 +52,9 @@ namespace Z0
                 var x = src[i];
                 for(byte j =0; j< tLen; j++)
                 {
-                    var before = gbits.test(x, j);
+                    var before = gbits.testbit(x, j);
                     x = gbits.toggle(x, j);
-                    var after = gbits.test(x, j);
+                    var after = gbits.testbit(x, j);
                     Numeric.neq(before, after);
                     x = gbits.toggle(x, j);
                     Claim.eq(x, src[i]);
@@ -78,13 +78,13 @@ namespace Z0
 
         public void testbit_outline()
         {
-            Claim.require(gbits.test(0b00000101, (byte)0));
-            Claim.nea(gbits.test(0b00000101, (byte)1));
-            Claim.require(gbits.test(0b00000101, (byte)2));
+            Claim.require(gbits.testbit(0b00000101, (byte)0));
+            Claim.nea(gbits.testbit(0b00000101, (byte)1));
+            Claim.require(gbits.testbit(0b00000101, (byte)2));
             
-            Claim.require(gbits.test(0b00000111, (byte)0));
-            Claim.require(gbits.test(0b00000111, (byte)1));
-            Claim.require(gbits.test(0b00000111, (byte)2));
+            Claim.require(gbits.testbit(0b00000111, (byte)0));
+            Claim.require(gbits.testbit(0b00000111, (byte)1));
+            Claim.require(gbits.testbit(0b00000111, (byte)2));
         }
 
         public void enable_outline()

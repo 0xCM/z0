@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
     
-
     partial class BitVector
     {
         /// <summary>
@@ -21,6 +21,18 @@ namespace Z0
         public static BitVector<T> alt<T>(bit parity)
             where T : unmanaged
                 => parity ? convert<T>(BitMasks.Even64) : convert<T>(BitMasks.Odd64);        
+
+        /// <summary>
+        /// Creates a bitvector with uniformly alternating states where the state of 
+        /// the first bit is determined by a parity bit
+        /// </summary>
+        /// <param name="parity">The state of the first bit</param>
+        /// <param name="n">The width selector</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> alt<N,T>(bit parity, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => natural<N,T>(parity ? convert<T>(BitMasks.Even64) : convert<T>(BitMasks.Odd64));
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of the

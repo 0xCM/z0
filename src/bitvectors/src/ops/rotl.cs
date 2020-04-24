@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="offset">The rotation magnitude</param>
         [MethodImpl(Inline), Rotl]
         public static BitVector4 rotl(BitVector4 src, byte offset)
-            => gbits.rotl(src.Scalar, offset, src.Width);
+            => gbits.rotl(src.Data, offset, src.Width);
 
         /// <summary>
         /// Rotates source bits leftward
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="offset">The rotation magnitude</param>
         [MethodImpl(Inline), Rotl]
         public static BitVector8 rotl(BitVector8 src, byte offset)
-            => gbits.rotl(src.Scalar,offset);
+            => gbits.rotl(src.Data,offset);
             
         /// <summary>
         /// Rotates source bits leftward
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="offset">The rotation magnitude</param>
         [MethodImpl(Inline), Rotl]
         public static BitVector16 rotl(BitVector16 src, byte offset)
-            => gbits.rotl(src.Scalar,offset);
+            => gbits.rotl(src.Data,offset);
 
         /// <summary>
         /// Rotates source bits leftward
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="offset">The rotation magnitude</param>
         [MethodImpl(Inline), Rotl]
         public static BitVector32 rotl(BitVector32 src, byte offset)
-            => gbits.rotl(src.Scalar,offset);
+            => gbits.rotl(src.Data,offset);
 
         /// <summary>
         /// Rotates source bits leftward
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="offset">The rotation magnitude</param>
         [MethodImpl(Inline), Rotl]
         public static BitVector64 rotl(BitVector64 src, byte offset)
-             => gbits.rotl(src.Scalar,offset);
+             => gbits.rotl(src.Data,offset);
 
         /// <summary>
         /// Rotates source bits leftward
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Rotl, Closures(UnsignedInts)]
         public static BitVector<T> rotl<T>(BitVector<T> x, byte offset)
             where T : unmanaged
-                => gbits.rotl(x.Scalar,offset);
+                => gbits.rotl(x.Data,offset);
 
         /// <summary>
         /// Rotates source bits leftward
@@ -77,7 +77,7 @@ namespace Z0
         public static BitVector<N,T> rotl<N,T>(BitVector<N,T> x, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.rotl(x.Scalar, offset, x.Width);
+                => gbits.rotl(x.Data, offset, x.Width);
 
         /// <summary>
         /// Rotates source bits leftward
@@ -89,6 +89,6 @@ namespace Z0
         public static BitVector128<N,T> rotl<N,T>(in BitVector128<N,T> src, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vrotlx(src.data, offset);
+                => gvec.vrotlx(src.Data, offset);
     }
 }

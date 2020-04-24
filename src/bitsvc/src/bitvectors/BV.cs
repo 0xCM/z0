@@ -15,61 +15,61 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Add<T> add<T>(T t = default)
             where T : unmanaged        
-                => Add<T>.Op;
+                => default(Add<T>);
 
         [MethodImpl(Inline)]
         public static Sub<T> sub<T>(T t = default)
             where T : unmanaged        
-                => Sub<T>.Op;
+                => default(Sub<T>);
 
         [MethodImpl(Inline)]
         public static And<T> and<T>(T t = default)
             where T : unmanaged        
-                => And<T>.Op;
+                => default(And<T>);
 
         [MethodImpl(Inline)]
         public static Or<T> or<T>(T t = default)
             where T : unmanaged        
-                => Or<T>.Op;
+                => default(Or<T>);
 
         [MethodImpl(Inline)]
         public static Xor<T> xor<T>(T t = default)
             where T : unmanaged        
-                => Xor<T>.Op;
+                => default(Xor<T>);
 
         [MethodImpl(Inline)]
         public static Nand<T> nand<T>(T t = default)
             where T : unmanaged        
-                => Nand<T>.Op;
+                => default(Nand<T>);
 
         [MethodImpl(Inline)]
         public static Nor<T> nor<T>(T t = default)
             where T : unmanaged        
-                => Nor<T>.Op;
+                => default(Nor<T>);
 
         [MethodImpl(Inline)]
         public static Xnor<T> xnor<T>(T t = default)
             where T : unmanaged        
-                => Xnor<T>.Op;
+                => default(Xnor<T>);
 
         [MethodImpl(Inline)]
         public static Not<T> not<T>(T t = default)
             where T : unmanaged        
-                => Not<T>.Op;
+                => default(Not<T>);
 
         [MethodImpl(Inline)]
         public static Dot<T> dot<T>(T t = default)
             where T : unmanaged        
-                => Dot<T>.Op;
+                => default(Dot<T>);
 
         [MethodImpl(Inline)]
         public static Width<T> width<T>(T t = default)
             where T : unmanaged        
-                => Width<T>.Op;
+                => default(Width<T>);
 
         [MethodImpl(Inline)]
         public static Gather<T> gather<T>(T t = default)
             where T : unmanaged        
-                => Gather<T>.Op; 
+                => default(Gather<T>); 
     }
 }

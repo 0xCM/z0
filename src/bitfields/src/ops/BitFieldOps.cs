@@ -27,7 +27,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public T Read(in FieldSegment segment, T src)
-            => gbits.bitslice(src, segment.StartPos, segment.Width);
+            => gbits.slice(src, segment.StartPos, segment.Width);
 
         [MethodImpl(Inline)]
         public ref T Write(in FieldSegment segment, in T src, ref T dst)
@@ -68,7 +68,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public T Read(in FieldSegment segment, in S src)
-            => gbits.bitslice(src.Scalar, segment.StartPos, segment.Width);
+            => gbits.slice(src.Scalar, segment.StartPos, segment.Width);
 
         [MethodImpl(Inline)]
         public T Read(in FieldSegment segment, in S src, bool offset)            

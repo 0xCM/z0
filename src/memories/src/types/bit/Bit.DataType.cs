@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline)]
-        public static bit test(sbyte src, int pos)
+        public static bit test(sbyte src, byte pos)
             => new bit((src & (1 << pos)) != 0);
 
         /// <summary>

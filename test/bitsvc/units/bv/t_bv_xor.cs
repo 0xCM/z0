@@ -32,7 +32,7 @@ namespace Z0
                     var x = Random.BitVector<T>();
                     var y = Random.BitVector<T>();
                     var result = f.Invoke(x,y);
-                    var expect = f.InvokeScalar(x.Scalar,y.Scalar);
+                    var expect = f.Invoke(x.Scalar,y.Scalar);
                     Claim.eq(expect,result.Scalar);
                 }
 

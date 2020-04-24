@@ -28,6 +28,6 @@ namespace Z0
         public static BitBlock<N,T> ToBitCells<N,T>(this BitVector128<N,T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitBlocks.load(src.Data.ToSpan(),n);
+                => BitBlocks.load(src.Content.ToSpan(),n);
     }
 }

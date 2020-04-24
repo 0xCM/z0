@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;    
+    using static Seed;
 
     /// <summary>
     /// Defines a 4-bit bitvector
     /// </summary>
     public struct BitVector4
     {
-        internal byte data;
+        internal byte Data;
 
         public static BitVector4 Zero => default;
 
@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator byte(BitVector4 src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Computes the XOR of the source operands. 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator ^(in BitVector4 x, in BitVector4 y)
-            => (byte)(x.data ^ y.data);
+            => (byte)(x.Data ^ y.Data);
 
         /// <summary>
         /// Computes the bitwise AND of the source operands
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator &(in BitVector4 x, in BitVector4 y)
-            => (byte)(x.data & y.data);
+            => (byte)(x.Data & y.Data);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator *(in BitVector4 x, in BitVector4 y)
-            => (byte)(x.data & y.data);
+            => (byte)(x.Data & y.Data);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -172,11 +172,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitVector4(byte data, bit direct)
-            => this.data = data;
+            => this.Data = data;
 
         [MethodImpl(Inline)]
         public BitVector4(byte data)
-            => this.data = (byte)(data & 0xF);
+            => this.Data = (byte)(data & 0xF);
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -184,7 +184,7 @@ namespace Z0
         public byte Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0
         public readonly bit Empty
         {
             [MethodImpl(Inline)]
-            get => data == 0;
+            get => Data == 0;
         }
 
         /// <summary>
@@ -211,43 +211,43 @@ namespace Z0
         public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => data != 0;
+            get => Data != 0;
         }
 
         public bool AllOn
         {
             [MethodImpl(Inline)]
-            get => (0xF & data) == 0xF;
+            get => (0xF & Data) == 0xF;
         }
 
         public bit this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => (data & (1 << pos)) != 0;
+            get => (Data & (1 << pos)) != 0;
             
             [MethodImpl(Inline)]
-            set => data = bit.set(data, pos, value);
+            set => Data = bit.set(Data, pos, value);
         }
 
         public BitVector4 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.seg(this,first,last);
+            get => BitVector.bitseg(this,first,last);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(in BitVector4 y)
-            => data == y.data;
+            => Data == y.Data;
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector4 other)
-            => data == other.data;
+            => Data == other.Data;
 
         public override bool Equals(object obj)
             => obj is BitVector4 x  && Equals(x);
         
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
         
         public override string ToString()
             => this.Format();

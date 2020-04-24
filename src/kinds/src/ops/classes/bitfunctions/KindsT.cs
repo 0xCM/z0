@@ -30,5 +30,12 @@ namespace Z0
         public readonly struct Mix<T> : IBitFunctionKind<Mix,T> {}
 
         public readonly struct Rank<T> : IBitFunctionKind<Rank,T> {}
+
+        public readonly struct BitSeg<T> : IBitFunctionKind<BitSeg,T> {}
+
+        public readonly struct TestBit<T> : IBitFunctionKind<TestBit,T> {}
+
+        public readonly struct TestBits<T> : IBitFunctionKind<TestBits,T> {}
+
     }
 }

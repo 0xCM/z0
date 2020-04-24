@@ -9,41 +9,41 @@ namespace Z0
     using A = OpKindAttribute;    
     using K = BitLogicKind;
 
-    public sealed class AndAttribute : A { public AndAttribute(object group = null) : base(K.And, group) {} }
+    public sealed class AndAttribute : A { public AndAttribute() : base(K.And) {} }
 
-    public sealed class CNonImplAttribute : A { public CNonImplAttribute(object group = null) : base(K.CNonImpl, group) {} }
+    public sealed class CNonImplAttribute : A { public CNonImplAttribute() : base(K.CNonImpl) {} }
 
-    public sealed class LProjectAttribute : A { public LProjectAttribute(object group = null) : base(K.LProject, group) {} }
+    public sealed class LProjectAttribute : A { public LProjectAttribute() : base(K.LProject) {} }
 
-    public sealed class NonImplAttribute : A { public NonImplAttribute(object group = null) : base(K.NonImpl, group) {} }
+    public sealed class NonImplAttribute : A { public NonImplAttribute() : base(K.NonImpl) {} }
 
-    public sealed class RProjectAttribute : A { public RProjectAttribute(object group = null) : base(K.RProject, group) {} }
+    public sealed class RProjectAttribute : A { public RProjectAttribute() : base(K.RProject) {} }
 
-    public sealed class OrAttribute : A { public OrAttribute(object group = null) : base(K.Or, group) {} }
+    public sealed class OrAttribute : A { public OrAttribute() : base(K.Or) {} }
 
-    public sealed class XorAttribute : A { public XorAttribute(object group = null) : base(K.Xor, group) {} }
+    public sealed class XorAttribute : A { public XorAttribute() : base(K.Xor) {} }
 
-    public sealed class NorAttribute : A { public NorAttribute(object group = null) : base(K.Nor, group) {} }
+    public sealed class NorAttribute : A { public NorAttribute() : base(K.Nor) {} }
 
-    public sealed class XnorAttribute : A { public XnorAttribute(object group = null) : base(K.Xnor, group) {} }
+    public sealed class XnorAttribute : A { public XnorAttribute() : base(K.Xnor) {} }
 
-    public sealed class RNotAttribute : A { public RNotAttribute(object group = null) : base(K.RNot, group) {} }
+    public sealed class RNotAttribute : A { public RNotAttribute() : base(K.RNot) {} }
 
-    public sealed class CImplAttribute : A { public CImplAttribute(object group = null) : base(K.CImpl, group) {} }
+    public sealed class CImplAttribute : A { public CImplAttribute() : base(K.CImpl) {} }
 
-    public sealed class NandAttribute : A { public NandAttribute(object group = null) : base(K.Nand, group) {} }
+    public sealed class NandAttribute : A { public NandAttribute() : base(K.Nand) {} }
 
-    public sealed class TrueAttribute : A { public TrueAttribute(object group = null) : base(K.True, group) {} }
+    public sealed class TrueAttribute : A { public TrueAttribute() : base(K.True) {} }
 
-    public sealed class ImplAttribute : A { public ImplAttribute(object group = null) : base(K.Impl, group) {} }
+    public sealed class ImplAttribute : A { public ImplAttribute() : base(K.Impl) {} }
 
-    public sealed class LNotAttribute : A { public LNotAttribute(object group = null) : base(K.LNot, group) {} }
+    public sealed class LNotAttribute : A { public LNotAttribute() : base(K.LNot) {} }
 
-    public sealed class FalseAttribute : A { public FalseAttribute(object group = null) : base(K.False, group) {} }
+    public sealed class FalseAttribute : A { public FalseAttribute() : base(K.False) {} }
 
-    public sealed class SelectAttribute : A { public SelectAttribute(object group = null) : base(K.Select, group) {} } 
+    public sealed class SelectAttribute : A { public SelectAttribute() : base(K.Select) {} } 
 
-    public sealed class NotAttribute : A { public NotAttribute(object group = null) : base(K.Not, group) {} }
+    public sealed class NotAttribute : A { public NotAttribute() : base(K.Not) {} }
 
-    public sealed class XorNotAttribute : A { public XorNotAttribute(object group = null) : base(K.XorNot, group) {} }    
+    public sealed class XorNotAttribute : A { public XorNotAttribute() : base(K.XorNot) {} }    
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;    
+    using static Seed;
 
     /// <summary>
     /// Represents a base-2 polynomial of degree at most N = 15. The represented polynomial is of the form
@@ -57,10 +57,10 @@ namespace Z0
         /// <summary>
         /// Returns a bit indicating whether the coefficient for x^i is 1 or 0
         /// </summary>
-        public bit this[int i]
+        public bit this[byte i]
         {
             [MethodImpl(Inline)]
-            get => gbits.test(data,i);
+            get => gbits.testbit(data,i);
         }
 
         /// <summary>

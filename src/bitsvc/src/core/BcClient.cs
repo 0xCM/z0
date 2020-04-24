@@ -9,8 +9,8 @@ namespace Z0
 
     using static Seed;
 
-    [ApiHost]
-    public readonly struct BcClient : IApiHost<BcClient>
+    [ApiHost("bits")]
+    public readonly struct BcServices : IApiHost<BcServices>
     {
         [MethodImpl(Inline), Op, Closures(Numeric16x32x64u)]
         public static T byteswap<T>(T a)
@@ -22,7 +22,5 @@ namespace Z0
         public static T bitslice<T>(T src, byte a, byte b)
             where T : unmanaged        
                 => BC.bitslice<T>().Invoke(src,a,b);
-
-
    }
 }

@@ -7,14 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;    
+    using static Seed; 
+    using static Memories;    
 
     /// <summary>
     /// Defines a 32-bit bitvector
     /// </summary>
     public struct BitVector32 : IBitVector<BitVector32,uint>
     {
-        internal uint data;
+        internal uint Data;
 
         /// <summary>
         /// Allocates a vector with all bits disabled
@@ -35,27 +36,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<uint>(BitVector32 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector32 src)
-            => BitVector.create(n64,src.data);
+            => BitVector.create(n64,src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector32 src)
-            => new BitVector4((byte)src.data);
+            => new BitVector4((byte)src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector32 src)
-            => (byte)src.data;
+            => (byte)src.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector16(BitVector32 src)
-            =>(ushort)src.data;
+            =>(ushort)src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitVector32 src)
-            => src.data;        
+            => src.Data;        
 
         /// <summary>
         /// Implicitly converts a scalar value to a 32-bit bitvector
@@ -214,7 +215,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator ==(BitVector32 x, BitVector32 y)
-            => x.data == y.data;
+            => x.Data == y.Data;
 
         /// <summary>
         /// Determines whether operand content is non-identical
@@ -223,7 +224,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator !=(BitVector32 x, BitVector32 y)
-            => x.data != y.data;
+            => x.Data != y.Data;
 
         /// <summary>
         /// Determines whether the left operand is arithmetically less than the second
@@ -267,7 +268,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector32(uint src)
-            => this.data = src;
+            => this.Data = src;
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -275,7 +276,7 @@ namespace Z0
         public readonly uint Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -290,13 +291,13 @@ namespace Z0
         public BitVector16 Lo
         {
             [MethodImpl(Inline)]
-            get => Bits.lo(data);
+            get => Bits.lo(Data);
         }
 
         public BitVector16 Hi
         {
             [MethodImpl(Inline)]
-            get => Bits.hi(data);
+            get => Bits.hi(Data);
         }
         
         /// <summary>
@@ -305,7 +306,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitVector.bytes(data);
+            get => BitVector.bytes(Data);
         }
 
         /// <summary>
@@ -314,7 +315,7 @@ namespace Z0
         public readonly bool Empty
         {
             [MethodImpl(Inline)]
-            get => data == 0;
+            get => Data == 0;
         }
 
         /// <summary>
@@ -323,7 +324,7 @@ namespace Z0
         public readonly bool NonEmpty
         {
             [MethodImpl(Inline)]
-            get => data != 0;
+            get => Data != 0;
         }
 
         /// <summary>
@@ -332,10 +333,10 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => bit.test(data, pos);
+            get => bit.test(Data, pos);
             
             [MethodImpl(Inline)]
-            set => data = bit.set(data, (byte)pos, value);
+            set => Data = bit.set(Data, (byte)pos, value);
        }
 
         /// <summary>
@@ -349,18 +350,18 @@ namespace Z0
         public BitVector32 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get =>  Bits.between(data, first, last);
+            get =>  Bits.bitseg(Data, first, last);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector32 y)
-            => data == y.data;
+            => Data == y.Data;
 
         public override bool Equals(object obj)
             => obj is BitVector32 x ? Equals(x) : false;
         
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
  
          public string Format(BitFormatConfig config)
             => BitVector.format(this,config);

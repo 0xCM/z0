@@ -25,7 +25,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        internal T data;
+        internal T Data;
 
         /// <summary>
         /// The physical width of the vector
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="src">The scalar value</param>
         [MethodImpl(Inline)]
         public static implicit operator T(BitVector<N,T> src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Implicitly convers a bitvector to its scalar representation
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="src">The scalar value</param>
         [MethodImpl(Inline)]
         public static implicit operator BitVector<T>(BitVector<N,T> src)
-            => new BitVector<T>(src.data);
+            => new BitVector<T>(src.Data);
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator ++(BitVector<N,T> src)
-            =>  gmath.eq(src.data,MaxValue) ? Literals.zero<T>() : gmath.inc(src.data);
+            =>  gmath.eq(src.Data,MaxValue) ? Literals.zero<T>() : gmath.inc(src.Data);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator --(BitVector<N,T> src)
-            => gmath.nonz(src.data) ? gmath.dec(src.data) : MaxValue;
+            => gmath.nonz(src.Data) ? gmath.dec(src.Data) : MaxValue;
 
         /// <summary>
         /// Computes the N-modular arithmetic sum between the operands
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator +(BitVector<N,T> x,BitVector<N,T> y) 
-            => gmath.mod(gmath.add(x.data,y.data), MaxValue);
+            => gmath.mod(gmath.add(x.Data,y.Data), MaxValue);
         
         /// <summary>
         /// Computes the N-modular arithmetic difference between the operands
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         [MethodImpl(Inline)]
         public static bit operator <(BitVector<N,T> x, BitVector<N,T> y)
-            => gmath.lt(x.data, y.data);
+            => gmath.lt(x.Data, y.Data);
 
         /// <summary>
         /// Computes the arithmetic greater than between the operands
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         [MethodImpl(Inline)]
         public static bit operator >(BitVector<N,T> x, BitVector<N,T> y)
-            => gmath.gt(x.data, y.data);
+            => gmath.gt(x.Data, y.Data);
 
         /// <summary>
         /// Computes the arithmetic less than or equal between the operands
@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         [MethodImpl(Inline)]
         public static bit operator <=(BitVector<N,T> x, BitVector<N,T> y)
-            => gmath.lteq(x.data, y.data);
+            => gmath.lteq(x.Data, y.Data);
 
         /// <summary>
         /// Computes the arithmetic greater than or equal between the operands
@@ -211,7 +211,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         [MethodImpl(Inline)]
         public static bit operator >=(BitVector<N,T> x, BitVector<N,T> y)
-            => gmath.gteq(x.data, y.data);
+            => gmath.gteq(x.Data, y.Data);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -236,7 +236,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator ==(BitVector<N,T> x, BitVector<N,T> y)
-            => gmath.eq(x.data,y.data);
+            => gmath.eq(x.Data,y.Data);
 
         /// <summary>
         /// Determines whether operand content is non-identical
@@ -245,7 +245,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator !=(BitVector<N,T> x, BitVector<N,T> y)
-            => gmath.neq(x.data,y.data);
+            => gmath.neq(x.Data,y.Data);
 
         /// <summary>
         /// Intializes a bitvector with the lo N bits of a scalar source
@@ -253,11 +253,11 @@ namespace Z0
         /// <param name="data">The scalar source value</param>
         [MethodImpl(Inline)]
         internal BitVector(T data)
-            => this.data = gmath.and(BitMask.lo<N,T>(), data);
+            => this.Data = gmath.and(BitMask.lo<N,T>(), data);
 
         [MethodImpl(Inline)]
         BitVector(T data, bit inject)
-            => this.data = data;
+            => this.Data = data;
 
         /// <summary>
         /// The scalar representation of the vector
@@ -265,7 +265,7 @@ namespace Z0
         public T Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace Z0
         public bit Empty
         {
             [MethodImpl(Inline)]
-            get => !gmath.nonz(data);
+            get => !gmath.nonz(Data);
         }
 
         /// <summary>
@@ -292,13 +292,13 @@ namespace Z0
         public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => gmath.nonz(data);
+            get => gmath.nonz(Data);
         }
 
         public Span<byte> Bytes 
         {
             [MethodImpl(Inline)]
-            get => BitVector.bytes(data);
+            get => BitVector.bytes(Data);
         }
 
         /// <summary>
@@ -307,10 +307,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => gbits.test(data, index);
+            get => gbits.testbit(Data, (byte)index);
             
             [MethodImpl(Inline)]
-            set => data = gbits.set(data, index, value);
+            set => Data = gbits.setbit(Data, index, value);
         }
 
         /// <summary>
@@ -321,12 +321,12 @@ namespace Z0
         public BitVector<N,T> this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => gbits.between(data, first, last);
+            get => gbits.bitseg(Data, first, last);
         }
  
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector<N,T> y)
-            => gmath.eq(data, y.data);
+            => gmath.eq(Data, y.Data);
 
         /// <summary>
         /// Creates a new vector by converting the underlying cell to the target type 
@@ -335,13 +335,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector<N,U> As<U>()
             where U : unmanaged
-                => convert<T,U>(data);
+                => convert<T,U>(Data);
 
         public readonly override bool Equals(object obj)
             => obj is BitVector<N,T> x && Equals(x);
         
         public readonly override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
 
         public string Format(BitFormatConfig config)
             => BitVector.format(this,config);

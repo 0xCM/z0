@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitVector8 Replicate(this BitVector8 src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// Creates a copy of the source vector

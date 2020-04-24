@@ -50,7 +50,7 @@ namespace Z0
             Span<char> symbols = new char[count];
             for(int i=0, bitpos = 0; i<count; i++, bitpos += segwidth)
             {
-                var key = gbits.between(src, (byte)bitpos, (byte)(bitpos + segwidth - 1));                
+                var key = gbits.bitseg(src, (byte)bitpos, (byte)(bitpos + segwidth - 1));                
                 if(index.TryGetValue(key, out var value))
                     symbols[i] = value;
                 else

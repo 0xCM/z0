@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed; 
-    using static Memories;
 
     public struct BitVector8 : IBitVector<BitVector8,byte>
     {
-        internal byte data;
+        internal byte Data;
 
         public static BitVector8 Zero => default;
 
@@ -22,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<byte>(BitVector8 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector8(byte src)
@@ -42,7 +41,7 @@ namespace Z0
         /// <param name="src">The vector</param>
         [MethodImpl(Inline)]
         public static implicit operator HexByteKind(BitVector8 src)
-            => (HexByteKind)src.data;
+            => (HexByteKind)src.Data;
 
         /// <summary>
         /// Converts the source vector to the underlying scalar
@@ -50,19 +49,19 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static implicit operator byte(BitVector8 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector16(BitVector8 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector32(BitVector8 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector8 src)
-            => src.data;
+            => src.Data;
 
         /// <summary>
         /// <summary>
@@ -264,7 +263,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitVector8(byte src)
-            => this.data = src;        
+            => this.Data = src;        
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -272,7 +271,7 @@ namespace Z0
         public byte Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -290,7 +289,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitVector.bytes(data);
+            get => BitVector.bytes(Data);
         }
 
         /// <summary>
@@ -299,7 +298,7 @@ namespace Z0
         public readonly bit Empty
         {
             [MethodImpl(Inline)]
-            get => data == 0;
+            get => Data == 0;
         }
 
         /// <summary>
@@ -317,7 +316,7 @@ namespace Z0
         public readonly bit AllOn
         {
             [MethodImpl(Inline)]
-            get => (0xFF & data) == 0xFF;
+            get => (0xFF & Data) == 0xFF;
         }
 
         /// <summary>
@@ -326,7 +325,7 @@ namespace Z0
         public readonly BitVector4 Hi
         {
             [MethodImpl(Inline)]
-            get => Bits.hi(data);        
+            get => Bits.hi(Data);        
         }        
 
         /// <summary>
@@ -335,7 +334,7 @@ namespace Z0
         public readonly BitVector4 Lo
         {
             [MethodImpl(Inline)]
-            get => Bits.lo(data);        
+            get => Bits.lo(Data);        
         }        
 
         /// <summary>
@@ -344,10 +343,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => bit.test(data, index);
+            get => bit.test(Data, index);
             
             [MethodImpl(Inline)]
-            set => data = bit.set(data, (byte)index, value);
+            set => Data = bit.set(Data, (byte)index, value);
         }
 
         /// <summary>
@@ -358,18 +357,18 @@ namespace Z0
         public BitVector8 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.seg(this,first,last);
+            get => BitVector.bitseg(this,first,last);
         }
             
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector8 y)
-            => data == y.data;
+            => Data == y.Data;
 
         public override bool Equals(object obj)
             => obj is BitVector8 x ? Equals(x) : false;
         
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
 
         public string Format(BitFormatConfig config)
             => BitVector.format(this,config);

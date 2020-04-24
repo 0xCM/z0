@@ -31,7 +31,7 @@ namespace Z0
 
             var length = math.min(count, bitsize<S>());
             for(var i=0; i< length; i++)
-                seek(ref dst, i) = gbits.testbit(src,i) ? enabled : default;
+                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             
             return buffer.LoadVector(w);
         }
@@ -54,7 +54,7 @@ namespace Z0
 
             var length = math.min(count, bitsize<S>());
             for(var i=0; i< length; i++)
-                seek(ref dst, i) = gbits.testbit(src,i) ? enabled : default;
+                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             
             return buffer.LoadVector(w);
         }
@@ -74,7 +74,7 @@ namespace Z0
         {
             var length = math.min(dst.CellCount, bitsize<S>());
             for(var i=0; i< length; i++)
-                dst[i] = gbits.testbit(src,i) ? enabled : default;
+                dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
             return ref dst;
         }
 
@@ -93,7 +93,7 @@ namespace Z0
         {
             var length = math.min(dst.CellCount, bitsize<S>());
             for(var i=0; i< length; i++)
-                dst[i] = gbits.testbit(src,i) ? enabled : default;
+                dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
             return ref dst;
         }
 

@@ -123,10 +123,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => gbits.test(data,index);
+            get => gbits.testbit(data,index);
             
             [MethodImpl(Inline)]
-            set => gbits.set(data, index,value);
+            set => gbits.setbit(data, index,value);
         }
 
         /// <summary>

@@ -8,23 +8,56 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;    
-    using static Typed;
+    using static Memories;
 
     partial class BitVector
     {
         /// <summary>
         /// Creates a copy of the source vector
         /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Replicate, Closures(UnsignedInts)]
+        public static BitVector<T> replicate<T>(BitVector<T> x)
+            where T : unmanaged
+                => x.Data;
+
+        /// <summary>
+        /// Creates a copy of the source vector
+        /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> replicate<N,T>(BitVector<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => src.Data;
+
+        /// <summary>
+        /// Creates a copy of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> replicate<N,T>(in BitVector128<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => src.Data;        
+ 
+
+        /// <summary>
+        /// Creates a copy of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Replicate]
         public static BitVector4 replicate(BitVector4 src)
-            => inject(n4, src.data);
+            => inject(n4, src.Data);
 
         /// <summary>
         /// Creates an 8-bit vector by concatenating the source vector with a replicant
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector8 replicate(BitVector4 src, N2 n)
             => concat(src,src);
 
@@ -32,7 +65,7 @@ namespace Z0
         /// Creates a copy of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector8 replicate(BitVector8 src)
             => src;
 
@@ -41,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="n">The duplication factor</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector16 replicate(BitVector8 src, N2 n)
             => concat(src,src);
 
@@ -50,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="n">The duplication factor</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector32 replicate(BitVector8 src, N4 n)
             => concat(src,src,src,src);
 
@@ -59,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="n">The duplication factor</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector64 replicate(BitVector8 src, N8 n)
             => concat(replicate(src,n4),replicate(src,n4));
 
@@ -67,7 +100,7 @@ namespace Z0
         /// Creates a copy of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector16 replicate(BitVector16 src)
             => src;
 
@@ -76,7 +109,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="n">The duplication factor</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector32 replicate(BitVector16 src, N2 n)
             => concat(src,src);
 
@@ -85,7 +118,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="n">The duplication factor</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector64 replicate(BitVector16 src, N4 n)
             => concat(replicate(src,n2), replicate(src,n2));
 
@@ -93,7 +126,7 @@ namespace Z0
         /// Creates a copy of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector32 replicate(BitVector32 src)
             => src;
 
@@ -102,7 +135,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="n">The duplication factor</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector64 replicate(BitVector32 src, N2 n)
             => concat(src,src);
 
@@ -110,18 +143,8 @@ namespace Z0
         /// Creates a copy of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static BitVector64 replicate(BitVector64 src)
             => src;
-
-        /// <summary>
-        /// Creates a copy of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static BitVector<T> replicate<T>(BitVector<T> x)
-            where T : unmanaged
-                => x.data;
     }
 }

@@ -46,31 +46,31 @@ namespace Z0.Asm
 
         public bit B
         {            
-            [MethodImpl(Inline)] get => gbits.test(Content,(byte)RFI.B);
-            [MethodImpl(Inline)] set => Content = gbits.set(Content,(byte)RFI.B, value);
+            [MethodImpl(Inline)] get => gbits.testbit(Content,(byte)RFI.B);
+            [MethodImpl(Inline)] set => Content = gbits.setbit(Content,(byte)RFI.B, value);
         }
 
         public bit X
         {                
-            [MethodImpl(Inline)] get => gbits.test(Content, (byte)RFI.X);
-            [MethodImpl(Inline)] set => Content = gbits.set(Content, (byte)RFI.X, value);
+            [MethodImpl(Inline)] get => gbits.testbit(Content, (byte)RFI.X);
+            [MethodImpl(Inline)] set => Content = gbits.setbit(Content, (byte)RFI.X, value);
         }
 
         public bit R
         {                
-            [MethodImpl(Inline)] get => gbits.test(Content, (byte)RFI.R);
-            [MethodImpl(Inline)] set => Content = gbits.set(Content, (byte)RFI.R, value);
+            [MethodImpl(Inline)] get => gbits.testbit(Content, (byte)RFI.R);
+            [MethodImpl(Inline)] set => Content = gbits.setbit(Content, (byte)RFI.R, value);
         }
 
         public bit W
         {                
-            [MethodImpl(Inline)] get => gbits.test(Content, (byte)RFI.W);
-            [MethodImpl(Inline)] set => Content = gbits.set(Content, (byte)RFI.W, value);
+            [MethodImpl(Inline)] get => gbits.testbit(Content, (byte)RFI.W);
+            [MethodImpl(Inline)] set => Content = gbits.setbit(Content, (byte)RFI.W, value);
         }
 
         public RexCode Code
         {                
-            [MethodImpl(Inline)] get => (RexCode)gbits.bitslice(Content, 4, (byte)RFW.Code);
+            [MethodImpl(Inline)] get => (RexCode)gbits.slice(Content, 4, (byte)RFW.Code);
             [MethodImpl(Inline)] set => Content = gbits.bitcopy((byte)value, 4, (byte)RFW.Code, Content);
         }
 

@@ -7,20 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;    
+    using static Seed; 
+    using static Memories;    
 
     /// <summary>
     /// Defines a 32-bit bitvector
     /// </summary>
     public struct BitVector24 
     {        
-        [MethodImpl(Inline)]   
-        public static BitVector24 FromEnum<T>(T src)
-            where T : unmanaged, Enum
-                => Enums.numeric<T,uint>(src);
-        const uint MaxValue = uint.MaxValue >> 8;
+        internal uint Data;
 
-        internal uint data;
+        const uint MaxValue = uint.MaxValue >> 8;
 
         /// <summary>
         /// Allocates a vector with all bits disabled
@@ -38,26 +35,31 @@ namespace Z0
         public static BitVector24 Ones => MaxValue;
 
         public static N24 N => default;
-        
+
+        [MethodImpl(Inline)]   
+        public static BitVector24 FromEnum<T>(T src)
+            where T : unmanaged, Enum
+                => Enums.numeric<T,uint>(src);
+
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector24 src)
-            => BitVector.create(n64,src.data);
+            => BitVector.create(n64,src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector24 src)
-            => new BitVector4((byte)src.data);
+            => new BitVector4((byte)src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector24 src)
-            => (byte)src.data;
+            => (byte)src.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector16(BitVector24 src)
-            =>(ushort)src.data;
+            =>(ushort)src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitVector24 src)
-            => src.data;        
+            => src.Data;        
 
         /// <summary>
         /// Implicitly converts a scalar value to a 32-bit bitvector
@@ -98,7 +100,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector24 operator ^(BitVector24 x, BitVector24 y)
-            => x.data ^ y.data;
+            => x.Data ^ y.Data;
 
         /// <summary>
         /// Computes the bitwise AND of the source operands
@@ -107,7 +109,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector24 operator &(BitVector24 x, BitVector24 y)
-            => x.data & y.data;
+            => x.Data & y.Data;
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -116,7 +118,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static bit operator %(BitVector24 x, BitVector24 y)
-            => BitVector.dot(x.data, y.data);
+            => BitVector.dot(x.Data, y.Data);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -125,7 +127,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector24 operator |(BitVector24 x, BitVector24 y)
-            => x.data | y.data;
+            => x.Data | y.Data;
 
         /// <summary>
         /// Computes the bitwise complement of the operand. 
@@ -133,7 +135,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector24 operator ~(BitVector24 src)
-            =>  ~ src.data;
+            =>  ~ src.Data;
 
         /// <summary>
         /// Computes the two's complement of the operand
@@ -141,7 +143,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector24 operator -(BitVector24 x)
-            => math.negate(x.data);
+            => math.negate(x.Data);
 
         /// <summary>
         /// Left-shifts the bits in the source
@@ -149,7 +151,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector24 operator <<(BitVector24 x, int shift)
-            => x.data << shift;
+            => x.Data << shift;
 
         /// <summary>
         /// Right-shifts the bits in the source
@@ -157,7 +159,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector24 operator >>(BitVector24 x, int shift)
-            => x.data >> shift;
+            => x.Data >> shift;
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -190,7 +192,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator ==(BitVector24 x, BitVector24 y)
-            => x.data == y.data;
+            => x.Data == y.Data;
 
         /// <summary>
         /// Determines whether operand content is non-identical
@@ -199,7 +201,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator !=(BitVector24 x, BitVector24 y)
-            => x.data != y.data;
+            => x.Data != y.Data;
 
         /// <summary>
         /// Determines whether the left operand is arithmetically less than the second
@@ -243,7 +245,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector24(uint src)
-            => this.data = src & MaxValue;
+            => this.Data = src & MaxValue;
 
         /// <summary>
         /// Initializes the vector
@@ -251,7 +253,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector24(ushort lo, byte hi)
-            => this.data = (uint)lo | (uint)hi << 16;
+            => this.Data = (uint)lo | (uint)hi << 16;
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -259,7 +261,7 @@ namespace Z0
         public readonly uint Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -277,7 +279,7 @@ namespace Z0
         public BitVector8 Lo8
         {
             [MethodImpl(Inline)]
-            get => (byte)data;
+            get => (byte)Data;
         }
 
         /// <summary>
@@ -286,7 +288,7 @@ namespace Z0
         public BitVector8 Mid8
         {
             [MethodImpl(Inline)]
-            get => (byte)(data >> 8);
+            get => (byte)(Data >> 8);
         }
 
         /// <summary>
@@ -295,7 +297,7 @@ namespace Z0
         public BitVector8 Hi8
         {
             [MethodImpl(Inline)]
-            get => (byte)(data >> 16);
+            get => (byte)(Data >> 16);
         }
 
         /// <summary>
@@ -304,7 +306,7 @@ namespace Z0
         public BitVector16 Lo16
         {
             [MethodImpl(Inline)]
-            get => (ushort)data;
+            get => (ushort)Data;
         }
 
         /// <summary>
@@ -313,7 +315,7 @@ namespace Z0
         public BitVector16 Hi16
         {
             [MethodImpl(Inline)]
-            get => (ushort)(data >> 8);
+            get => (ushort)(Data >> 8);
         }
         
         /// <summary>
@@ -322,7 +324,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitVector.bytes(data).Slice(0,3);
+            get => BitVector.bytes(Data).Slice(0,3);
         }
 
         /// <summary>
@@ -331,7 +333,7 @@ namespace Z0
         public readonly bool Empty
         {
             [MethodImpl(Inline)]
-            get => data == 0;
+            get => Data == 0;
         }
 
         /// <summary>
@@ -340,7 +342,7 @@ namespace Z0
         public readonly bool NonEmpty
         {
             [MethodImpl(Inline)]
-            get => data != 0;
+            get => Data != 0;
         }
 
         /// <summary>
@@ -349,10 +351,10 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => bit.test(data, pos);
+            get => bit.test(Data, pos);
             
             [MethodImpl(Inline)]
-            set => data = bit.set(data, (byte)pos, value);
+            set => Data = bit.set(Data, (byte)pos, value);
        }
 
         /// <summary>
@@ -366,20 +368,20 @@ namespace Z0
         public BitVector24 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get =>  Bits.between(data, first, last);
+            get =>  Bits.bitseg(Data, first, last);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector24 y)
-            => data == y.data;
+            => Data == y.Data;
 
         public override bool Equals(object obj)
             => obj is BitVector24 x ? Equals(x) : false;
         
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
  
         public override string ToString()
-            => data.ToBitString(24).Format();
+            => Data.ToBitString(24).Format();
     }
 }
