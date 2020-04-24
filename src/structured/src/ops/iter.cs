@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static void iter<F>(F f, int count)
-            where F : ISAction<int>
+            where F : IAction<int>
         {                        
             for(var i=0; i<count; i++)
                 f.Invoke(i);

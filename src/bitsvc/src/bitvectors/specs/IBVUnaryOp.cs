@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IBVUnaryOp<T> : ISUnaryOp<BitVector<T>>
+    public interface IBVUnaryOp<T> : IUnaryOp<BitVector<T>>
         where T : unmanaged
     {
 

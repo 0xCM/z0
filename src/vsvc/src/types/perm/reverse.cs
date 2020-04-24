@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), Reverse]
-        public readonly struct Reverse128<T> : ISVUnaryOp128<T>
+        public readonly struct Reverse128<T> : IUnaryOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,7 +21,7 @@ namespace Z0
         }
 
         [Closures(Integers), Reverse]
-        public readonly struct Reverse256<T> : ISVUnaryOp256<T>
+        public readonly struct Reverse256<T> : IUnaryOp256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

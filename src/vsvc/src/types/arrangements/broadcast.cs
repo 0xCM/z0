@@ -14,7 +14,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(AllNumeric)]
-        public readonly struct Broadcast128<T> : ISVFactory128<T,T>
+        public readonly struct Broadcast128<T> : IFactory128<T,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -22,7 +22,7 @@ namespace Z0
         }
 
         [Closures(AllNumeric)]
-        public readonly struct Broadcast128<S,T> : ISVFactory128<S,T>
+        public readonly struct Broadcast128<S,T> : IFactory128<S,T>
             where T : unmanaged
             where S : unmanaged
         {
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [Closures(AllNumeric)]
-        public readonly struct Broadcast256<T> : ISVFactory256<T,T>
+        public readonly struct Broadcast256<T> : IFactory256<T,T>
             where T : unmanaged
         {
 
@@ -39,7 +39,7 @@ namespace Z0
             public Vector256<T> Invoke(T a) => Vectors.vbroadcast(n256, a);            
         }
 
-        public readonly struct Broadcast256<S,T> : ISVFactory256<S,T>
+        public readonly struct Broadcast256<S,T> : IFactory256<S,T>
             where T : unmanaged
             where S : unmanaged
         {

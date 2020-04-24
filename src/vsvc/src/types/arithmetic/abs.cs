@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(SignedInts), Abs]
-        public readonly struct Abs128<T> : ISVUnaryOp128D<T>
+        public readonly struct Abs128<T> : IUnaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,12 +21,12 @@ namespace Z0
                 => gvec.vabs(x);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) 
+            public T Invoke(T a) 
                 => gmath.abs(a);
         }
 
         [Closures(SignedInts), Abs]
-        public readonly struct Abs256<T> : ISVUnaryOp256D<T>
+        public readonly struct Abs256<T> : IUnaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -34,7 +34,7 @@ namespace Z0
                 => gvec.vabs(x);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) 
+            public T Invoke(T a) 
                 => gmath.abs(a);
         }
     }

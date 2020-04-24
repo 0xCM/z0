@@ -14,25 +14,25 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), Or]
-        public readonly struct Or128<T> : ISVBinaryOp128D<T>
+        public readonly struct Or128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vor(x,y);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.or(a,b);
+            public T Invoke(T a, T b) => gmath.or(a,b);
         }
 
         [Closures(Integers), Or]
-        public readonly struct Or256<T> : ISVBinaryOp256D<T>
+        public readonly struct Or256<T> : IBinaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vor(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.or(a,b);
+            public T Invoke(T a, T b) => gmath.or(a,b);
         }
     }
 }

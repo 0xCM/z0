@@ -9,20 +9,12 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
     partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
-        public readonly struct Div<T> : IBinaryArithmeticSvc<K.Div<T>,T>
+        [Closures(AllNumeric), Div]
+        public readonly struct Div<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
-            public const string Name = "div";
-
-            public static Div<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.div(a, b);
 

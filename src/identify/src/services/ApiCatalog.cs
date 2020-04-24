@@ -28,7 +28,7 @@ namespace Z0
 
         public BinaryResources Resources  {get;}
 
-        public Type[] HostTypes {get;}
+        public Type[] FunFactories {get;}
 
         public ApiHost[] GenericApiHosts {get;}
 
@@ -42,7 +42,7 @@ namespace Z0
             Resources = BinaryResources.Empty;
             DirectApiHosts = ApiHosts.Where(h => h.HostKind.DefinesDirectOps()).ToArray();
             GenericApiHosts = ApiHosts.Where(h => h.HostKind.DefinesGenericOps()).ToArray();
-            HostTypes = ApiServices.ProviderTypes(Part).ToArray();
+            FunFactories = FactoryTypes(Part).ToArray();            
         }
         
         public ApiCatalog(Assembly source, PartId id, BinaryResources resources)
@@ -56,6 +56,14 @@ namespace Z0
         {
             Resources = BinaryResources.Create(provider);
         }                            
+
+        /// <summary>
+        /// Searches an assembly for types that are attributed with the provider attribute
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        static IEnumerable<Type> FactoryTypes(Assembly src)
+            => src.GetTypes().Where(t => t.Tagged<ApiServiceFactoryAttribute>());
+
     }
 
     /// <summary>

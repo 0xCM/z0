@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), Bsrl]
-        public readonly struct Bsrl128<T> : ISVShiftOp128<T>
+        public readonly struct Bsrl128<T> : IShiftOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -22,7 +22,7 @@ namespace Z0
         }
 
         [Closures(Integers), Bsrl]
-        public readonly struct Bsrl256<T> : ISVShiftOp256<T>
+        public readonly struct Bsrl256<T> : IShiftOp256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

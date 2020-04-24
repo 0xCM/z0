@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct TakeIMask128<T> : ISVImm8UnaryScalar128<T,ushort>
+        public readonly struct TakeIMask128<T> : IUnaryScalarImm8Op128<T,ushort>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -20,7 +20,7 @@ namespace Z0
                 => gvec.vtakemask(x,index);            
         }
 
-        public readonly struct TakeIMask256<T>  : ISVImm8UnaryScalar256<T,uint>
+        public readonly struct TakeIMask256<T>  : IUnaryScalarImm8Op256<T,uint>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

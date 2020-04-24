@@ -15,7 +15,7 @@ namespace Z0
     public interface ICheckBinarySVFD<W,F,T>
         where T : unmanaged
         where W : ITypeWidth
-        where F : IVBinaryOpD<T>
+        where F : IBinaryOp<T>
     {
         void CheckSVF(F f);
     }

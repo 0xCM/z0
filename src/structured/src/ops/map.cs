@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static void map<F,T>(F f, in T src, ref T dst, int count)
-            where F : ISUnaryOp<T>
+            where F : IUnaryOp<T>
         {                        
             for(var i=0; i<count; i++)
                 seek(ref dst, i) = f.Invoke(skip(src, i));                

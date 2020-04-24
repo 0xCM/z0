@@ -12,14 +12,14 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct SwapHiLo128<T> : ISVUnaryOp128<T>
+        public readonly struct SwapHiLo128<T> : IUnaryOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vswaphl(x);            
         }
 
-        public readonly struct SwapHiLo256<T> : ISVUnaryOp256<T>
+        public readonly struct SwapHiLo256<T> : IUnaryOp256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

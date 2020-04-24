@@ -11,8 +11,8 @@ namespace Z0
 
     partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
-        public readonly struct Inc<T> : ISUnaryOp<T>, IUnarySpanOp<T>
+        [Closures(AllNumeric), Inc]
+        public readonly struct Inc<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {        
             [MethodImpl(Inline)]

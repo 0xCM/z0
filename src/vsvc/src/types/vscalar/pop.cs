@@ -20,18 +20,18 @@ namespace Z0
             public uint Invoke(Vector128<T> x,Vector128<T> y,Vector128<T> z) => gvec.vpop(x,y,z);
             
             [MethodImpl(Inline)]
-            public uint InvokeScalar(T a, T b, T c) => gbits.pop(a,b,c);
+            public uint Invoke(T a, T b, T c) => gbits.pop(a,b,c);
         }
 
         [Closures(Integers), Pop]
-        public readonly struct Pop256<T> : ISVTernaryScalar256D<T,uint>
+        public readonly struct Pop256<T> : ISVTernaryScalarFunc256D<T,uint>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public uint Invoke(Vector256<T> x,Vector256<T> y,Vector256<T> z) => gvec.vpop(x,y,z);
+            public uint Invoke(Vector256<T> x, Vector256<T> y, Vector256<T> z) => gvec.vpop(x,y,z);
 
             [MethodImpl(Inline)]
-            public uint InvokeScalar(T a, T b, T c) => gbits.pop(a,b,c);
+            public uint Invoke(T a, T b, T c) => gbits.pop(a,b,c);
         }    
     }
 }

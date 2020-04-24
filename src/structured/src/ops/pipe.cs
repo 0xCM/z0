@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
         public static T pipe<F,T>(T x, F f)
-            where F : ISUnaryOp<T>
+            where F : IUnaryOp<T>
                 => f.Invoke(x);
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Z0
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
         public static T pipe<F,G,T>(T x, F f, G g)
-            where F : ISUnaryOp<T>
-            where G : ISUnaryOp<T>
+            where F : IUnaryOp<T>
+            where G : IUnaryOp<T>
                 => g.Invoke(f.Invoke(x));
 
         /// <summary>
@@ -50,9 +50,9 @@ namespace Z0
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
         public static T pipe<F,G,H,T>(T x, F f, G g)
-            where F : ISUnaryOp<T>
-            where G : ISUnaryOp<T>
-            where H : ISUnaryOp<T>
+            where F : IUnaryOp<T>
+            where G : IUnaryOp<T>
+            where H : IUnaryOp<T>
                 => g.Invoke(g.Invoke(f.Invoke(x)));
     }
 }

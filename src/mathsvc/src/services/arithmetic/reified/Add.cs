@@ -9,12 +9,10 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
     partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
-        public readonly struct Add<T> : IBinaryArithmeticSvc<K.Add<T>,T>
+        [Closures(AllNumeric), Add]
+        public readonly struct Add<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

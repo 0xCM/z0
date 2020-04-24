@@ -31,8 +31,8 @@ namespace Z0
         where R : unmanaged
     {
         void CheckMatch<F,G>(F f, G g)
-            where F : ISFunc<T,R>
-            where G : ISFunc<T,R>
+            where F : IFunc<T,R>
+            where G : IFunc<T,R>
         {
             var casename = OpUriBuilder.TestCase(Context.HostType, $"{g.Id}_span");
             var succeeded = true;       
@@ -62,8 +62,8 @@ namespace Z0
         }
 
         void CheckSpanMatch<F,G>(F f, G g)
-            where F : ISFunc<T,R>
-            where G : ISFunc<T,R>
+            where F : IFunc<T,R>
+            where G : IFunc<T,R>
         {
             var casename = Identify.TestCase(Context.HostType, g);
             var succeeded = true;

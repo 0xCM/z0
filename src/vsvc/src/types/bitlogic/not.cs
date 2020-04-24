@@ -13,25 +13,25 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), Not]
-        public readonly struct Not128<T> : ISVUnaryOp128D<T>
+        public readonly struct Not128<T> : IUnaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vnot(x);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) => gmath.not(a);
+            public T Invoke(T a) => gmath.not(a);
         }
 
         [NumericClosures(Integers), Not]
-        public readonly struct Not256<T> : ISVUnaryOp256D<T>
+        public readonly struct Not256<T> : IUnaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => gvec.vnot(x);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) => gmath.not(a);
+            public T Invoke(T a) => gmath.not(a);
         }
    }
 }

@@ -12,7 +12,7 @@ namespace Z0
     partial class BC
     {
         [Closures(Numeric16x32x64u)]
-        public readonly struct ByteSwap<T> : ISUnaryOp<T>
+        public readonly struct ByteSwap<T> : IUnaryOp<T>
             where T : unmanaged        
         {
             public static ByteSwap<T> Op => default;

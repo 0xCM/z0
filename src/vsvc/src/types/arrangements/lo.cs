@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Lo128<T> : ISVUnaryOp128<T>
+        public readonly struct Lo128<T> : IUnaryOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -20,7 +20,7 @@ namespace Z0
                 => gvec.vlo(x);            
         }
 
-        public readonly struct Lo256<T> : ISVFReduder256Api<T>
+        public readonly struct Lo256<T> : IReducer256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

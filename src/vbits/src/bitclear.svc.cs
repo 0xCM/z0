@@ -28,7 +28,7 @@ namespace Z0
     partial class VBitSvcTypes
     {
         [Closures(Integers)]
-        public readonly struct BitClear128<T> : ISVImm8x2UnaryOp128D<T>
+        public readonly struct BitClear128<T> : IUnaryImm8x2Op128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -36,12 +36,12 @@ namespace Z0
                 => vgbits.vbitclear(x,offset,count);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte b, byte c) 
+            public T Invoke(T a, byte b, byte c) 
                 => gbits.bitclear(a, b, c);
         }
 
         [Closures(Integers)]
-        public readonly struct BitClear256<T> : ISVImm8x2UnaryOp256D<T>
+        public readonly struct BitClear256<T> : IUnaryImm8x2Op256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -49,7 +49,7 @@ namespace Z0
                 => vgbits.vbitclear(x,offset, count);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte b, byte c) 
+            public T Invoke(T a, byte b, byte c) 
                 => gbits.bitclear(a, b, c);
         }
     }

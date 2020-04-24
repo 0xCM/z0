@@ -18,7 +18,7 @@ namespace Z0
         void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Deposit(BenchmarkRecord.Define(opcount, duration, name));
 
-        void ReportBenchmark<W,T>(ISFunc f, int ops, Duration time, W w = default, T t = default)
+        void ReportBenchmark<W,T>(IFunc f, int ops, Duration time, W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => ReportBenchmark(TestCaseIdentity.Service.CaseName<W,T>(f), ops, time);

@@ -12,14 +12,14 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Units128<T> : ISVPatternSource128<T>
+        public readonly struct Units128<T> : IEmitter128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke() => Data.vunits(Kinds.vk128<T>());            
         }
 
-        public readonly struct Units256<T> : ISVPatternSource256<T>
+        public readonly struct Units256<T> : IEmitter256<T>
             where T : unmanaged
         {
 

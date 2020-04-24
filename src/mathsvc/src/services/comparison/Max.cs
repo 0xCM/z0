@@ -13,7 +13,7 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Max]
-        public readonly struct Max<T> : ISBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Max<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

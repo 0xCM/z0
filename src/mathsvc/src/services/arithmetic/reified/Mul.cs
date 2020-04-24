@@ -13,8 +13,8 @@ namespace Z0
 
     partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
-        public readonly struct Mul<T> : IBinaryArithmeticSvc<K.Mul<T>,T>
+        [Closures(AllNumeric), Mul]
+        public readonly struct Mul<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             [MethodImpl(Inline)]

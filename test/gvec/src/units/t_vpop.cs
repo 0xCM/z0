@@ -49,7 +49,7 @@ namespace Z0
                 var expect = 0u;
 
                 for(var i=0; i<vlen; i++)
-                    expect += f.InvokeScalar(vcell(x0,i),vcell(x1,i),vcell(x2,i));
+                    expect += f.Invoke(vcell(x0,i),vcell(x1,i),vcell(x2,i));
 
                 var result = f.Invoke(x0,x1,x2);
                 Claim.eq(expect,result);
@@ -74,7 +74,7 @@ namespace Z0
                 var expect = 0u;
 
                 for(var i=0; i<vlen; i++)
-                    expect += f.InvokeScalar(vcell(x0,i),vcell(x1,i), vcell(x2,i));
+                    expect += f.Invoke(vcell(x0,i),vcell(x1,i), vcell(x2,i));
 
                 var result = f.Invoke(x0,x1,x2);
                 Claim.eq(expect,result);

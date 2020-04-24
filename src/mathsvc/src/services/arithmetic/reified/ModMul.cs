@@ -12,7 +12,7 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(Integers)]
-        public readonly struct ModMul<T> : ISTernaryOp<T>, ITernarySpanOp<T>
+        public readonly struct ModMul<T> : ITernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

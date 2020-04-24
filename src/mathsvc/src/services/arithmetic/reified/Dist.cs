@@ -12,7 +12,7 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(AllNumeric)]
-        public readonly struct Dist<T> : ISFunc<T,T,ulong>
+        public readonly struct Dist<T> : IFunc<T,T,ulong>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

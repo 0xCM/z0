@@ -128,7 +128,7 @@ namespace Z0
         /// Produces the name of the test case for the specified function
         /// </summary>
         /// <param name="f">The function</param>
-        public static string TestCase(Type host, ISFunc f)
+        public static string TestCase(Type host, IFunc f)
             => $"{Identify.Owner(host)}{PathSep}{host.Name}{PathSep}{f.Id}";
 
         /// <summary>

@@ -40,8 +40,8 @@ namespace Z0
             this.Operations = catalog;
         }
 
-        Type[] IApiCatalog.HostTypes 
-            => Operations.HostTypes;
+        Type[] IApiCatalog.FunFactories 
+            => Operations.FunFactories;
 
         ApiHost[] IApiCatalog.GenericApiHosts 
             => Operations.GenericApiHosts;

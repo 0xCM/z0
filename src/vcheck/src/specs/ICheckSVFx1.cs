@@ -26,7 +26,7 @@ namespace Z0
         }        
     }   
 
-    public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,ISVBinaryOp128D<T>,T> 
+    public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,IBinaryOp128D<T>,T> 
         where T : unmanaged
     {   
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
             where W : struct, ITypeWidth
                 => ((int)default(W).TypeWidth)/BitSize.measure<T>();
 
-        void ICheckBinarySVFD<W128,ISVBinaryOp128D<T>,T>.CheckSVF(ISVBinaryOp128D<T> f)
+        void ICheckBinarySVFD<W128,IBinaryOp128D<T>,T>.CheckSVF(IBinaryOp128D<T> f)
         {
             var t = default(T);
             var w = w128;
@@ -57,7 +57,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -71,7 +71,7 @@ namespace Z0
             }
         }
 
-       void Run<W>(ISFunc f, Action act, W width, K.OperatorClass c)
+       void Run<W>(IFunc f, Action act, W width, K.OperatorClass c)
             where W : unmanaged, ITypeWidth
         {
             var succeeded = true;
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.UnaryOpClass op, W128 w)
-            where F : ISVUnaryOp128D<T>
+            where F : IUnaryOp128D<T>
         {            
             var t = default(T);
             void run()
@@ -113,7 +113,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var z = f.Invoke(x);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j)), vcell(z,j));
                 }
             }
             
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.UnaryOpClass op, W256 w)
-            where F : ISVUnaryOp256D<T>
+            where F : IUnaryOp256D<T>
         {
 
             var t = default(T);
@@ -141,7 +141,7 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var z = f.Invoke(x);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j)), vcell(z,j));
                 }
             }
 
@@ -156,7 +156,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.BinaryOpClass op, W128 w)
-            where F : ISVBinaryOp128D<T>
+            where F : IBinaryOp128D<T>
         {
             var t = default(T);
 
@@ -169,7 +169,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
 
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.BinaryOpClass k, W256 w)
-            where F : ISVBinaryOp256D<T>
+            where F : IBinaryOp256D<T>
         {
             var t = default(T);
 
@@ -197,7 +197,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
 
@@ -212,7 +212,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.TernaryOpClass op, W128 w)
-            where F : ISVTernaryOp128D<T>
+            where F : ITernaryOp128D<T>
         {
             var t = default(T);
 
@@ -227,7 +227,7 @@ namespace Z0
 
                     var z = f.Invoke(a,b,c);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
                 }
             }
 
@@ -242,7 +242,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
         void CheckSVF<F>(F f, K.TernaryOpClass op, W256 w)
-            where F : ISVTernaryOp256D<T>
+            where F : ITernaryOp256D<T>
         {
             var t = default(T);
 
@@ -257,7 +257,7 @@ namespace Z0
 
                     var z = f.Invoke(a,b,c);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(a,j),vcell(b,j),vcell(c,j)), vcell(z,j));
                 }
             }
 
@@ -265,7 +265,7 @@ namespace Z0
         }
 
         void CheckSVF<F>(F f, K.ShiftOpClass k, W128 w)
-            where F : ISVShiftOp128D<T>
+            where F : IShiftOp128D<T>
         {
             var t = default(T);
             var bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
@@ -279,7 +279,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j), offset), vcell(z,j));
                 }
             }
 
@@ -287,7 +287,7 @@ namespace Z0
         }
 
         void CheckSVF<F>(F f, K.ShiftOpClass k, W256 w)
-            where F : ISVShiftOp256D<T>
+            where F : IShiftOp256D<T>
         {
             var t = default(T);
             var bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
@@ -301,7 +301,7 @@ namespace Z0
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j), offset), vcell(z,j));
                 }
             }
 

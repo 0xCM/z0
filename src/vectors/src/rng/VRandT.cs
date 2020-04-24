@@ -10,7 +10,7 @@ namespace Z0
 
     using static Seed;
     
-    public readonly struct VRandom128<T> : ISVEmitter128<T>
+    public readonly struct VRandom128<T> : IEmitter128<T>
         where T : unmanaged
     {
         public const string Name = "vrandom";
@@ -29,7 +29,7 @@ namespace Z0
         public Vector128<T> Invoke() => Random.CpuVector<T>(VKind);
     }
 
-    public readonly struct VRandom256<T> : ISVEmitter256<T>
+    public readonly struct VRandom256<T> : IEmitter256<T>
         where T : unmanaged
     {
         public const string Name = "vrandom";

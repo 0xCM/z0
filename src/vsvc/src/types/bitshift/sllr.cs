@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Sllr128<T> : ISVBinaryOp128D<T>
+        public readonly struct Sllr128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,11 +21,11 @@ namespace Z0
                 => gvec.vsllr(x,offsets);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T offset) 
+            public T Invoke(T a, T offset) 
                 => gmath.sll(a,convert<T,byte>(offset));            
         }
 
-        public readonly struct Sllr256<T> : ISVBinaryOp256D<T>
+        public readonly struct Sllr256<T> : IBinaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -33,7 +33,7 @@ namespace Z0
                 => gvec.vsllr(x,offset);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T offset) 
+            public T Invoke(T a, T offset) 
                 => gmath.sll(a,convert<T,byte>(offset));
         }
     }

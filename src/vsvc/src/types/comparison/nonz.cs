@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(AllNumeric), Nonz]
-        public readonly struct NonZ128<T> : ISVUnaryPredicate128D<T>
+        public readonly struct NonZ128<T> : IUnaryPred128D<T>
             where T : unmanaged
         {
 
@@ -21,18 +21,18 @@ namespace Z0
             public bit Invoke(Vector128<T> x) => gvec.vnonz(x);
 
             [MethodImpl(Inline)]
-            public bit InvokeScalar(T a) => gmath.nonz(a);
+            public bit Invoke(T a) => gmath.nonz(a);
         }
 
         [Closures(AllNumeric), Nonz]
-        public readonly struct NonZ256<T> : ISVUnaryPredicate256D<T>
+        public readonly struct NonZ256<T> : IUnaryPred256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x) => gvec.vnonz(x);
 
             [MethodImpl(Inline)]
-            public bit InvokeScalar(T a) => gmath.nonz(a);
+            public bit Invoke(T a) => gmath.nonz(a);
 
         }
     }

@@ -9,12 +9,10 @@ namespace Z0
         
     using static Seed;
 
-    using K = Kinds;
-
     partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
-        public readonly struct Abs<T> : ISUnaryOp<T>, IUnarySpanOp<T>
+        [Closures(AllNumeric), Abs]
+        public readonly struct Abs<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

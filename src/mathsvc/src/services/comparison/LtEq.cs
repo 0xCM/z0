@@ -13,7 +13,7 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(AllNumeric), LtEq]
-        public readonly struct LtEq<T> : ISFunc<T,T,bit>, IBinarySpanPred<T>
+        public readonly struct LtEq<T> : IFunc<T,T,bit>, IBinarySpanPred<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

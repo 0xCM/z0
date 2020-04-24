@@ -89,7 +89,7 @@ namespace Z0
         protected void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Context.ReportBenchmark(name,opcount, duration);
 
-        protected void ReportBenchmark<W,T>(ISFunc f, int ops, Duration time, W w = default, T t = default)
+        protected void ReportBenchmark<W,T>(IFunc f, int ops, Duration time, W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => Context.ReportBenchmark<W,T>(f,ops,time);
@@ -117,7 +117,7 @@ namespace Z0
             where C : unmanaged
                 => Context.CaseName<W,C>(label, generic);
 
-        protected string CaseName(ISFunc f) 
+        protected string CaseName(IFunc f) 
             => Context.CaseName(f);
 
         protected void Notify(string msg, AppMsgKind? severity = null)

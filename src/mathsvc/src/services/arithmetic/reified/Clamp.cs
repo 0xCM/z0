@@ -11,8 +11,8 @@ namespace Z0
 
     partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
-        public readonly struct Clamp<T> : IBinaryArithmeticSvc<T>
+        [Closures(AllNumeric), Clamp]
+        public readonly struct Clamp<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

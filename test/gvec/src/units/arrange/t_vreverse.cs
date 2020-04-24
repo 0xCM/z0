@@ -70,7 +70,7 @@ namespace Z0
 
         void vreverse_check<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
-            where F : ISVUnaryOp128<T>
+            where F : IUnaryOp128<T>
         {
             var n = vcount(w,t);
             var r = Random.VectorEmitter(w,t);
@@ -91,7 +91,7 @@ namespace Z0
 
         void vreverse_check<F,T>(F f, N256 w, T t = default)
             where T : unmanaged
-            where F : ISVUnaryOp256<T>
+            where F : IUnaryOp256<T>
         {
             var n = vcount(w,t);
             var r = Random.VectorEmitter(w,t);

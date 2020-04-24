@@ -13,18 +13,18 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(AllNumeric), TestZ]
-        public readonly struct TestZ128<T> : ISVBinaryPredicate128D<T>
+        public readonly struct TestZ128<T> : IBinaryPred128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x,Vector128<T> y) => gvec.vtestz(x,y);
 
             [MethodImpl(Inline)]
-            public bit InvokeScalar(T a, T b) => default;
+            public bit Invoke(T a, T b) => default;
         }
 
         [Closures(AllNumeric), TestZ]
-        public readonly struct TestZ256<T> : ISVBinaryPredicate256<T>
+        public readonly struct TestZ256<T> : IBinaryPred256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

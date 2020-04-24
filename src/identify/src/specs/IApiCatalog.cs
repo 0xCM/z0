@@ -15,12 +15,12 @@ namespace Z0
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic
         /// </summary>
-        Type[] HostTypes {get;}
+        Type[] FunFactories {get;}
 
         /// <summary>
         /// Specifies the number of service hosts described by the catalog
         /// </summary>
-        int HostCount => HostTypes.Length;
+        int HostCount => FunFactories.Length;
 
         /// <summary>
         /// Specifies whether the catalog describes any service hosts
@@ -105,6 +105,6 @@ namespace Z0
 
         public BinaryResources Resources => BinaryResources.Empty;
 
-        public Type[] HostTypes => new Type[]{};
+        public Type[] FunFactories => new Type[]{};
     }
 }

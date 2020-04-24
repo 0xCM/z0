@@ -12,24 +12,24 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct ByteSwap128<T> : ISVUnaryOp128D<T>
+        public readonly struct ByteSwap128<T> : IUnaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vbyteswap(x);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) => gbits.byteswap(a);
+            public T Invoke(T a) => gbits.byteswap(a);
         }
 
-        public readonly struct ByteSwap256<T> : ISVUnaryOp256D<T>
+        public readonly struct ByteSwap256<T> : IUnaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => gvec.vbyteswap(x);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) => gbits.byteswap(a);
+            public T Invoke(T a) => gbits.byteswap(a);
         }
     }
 }

@@ -11,11 +11,10 @@ namespace Z0
     
     partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
+        [Closures(AllNumeric), Parse]
         public readonly struct Parse<T>  : ISFParser<T>
             where T : unmanaged        
         {
-
             [MethodImpl(Inline)]
             public readonly T Invoke(string a) => NumericParser.create<T>().Parse(a).ValueOrDefault();
         }

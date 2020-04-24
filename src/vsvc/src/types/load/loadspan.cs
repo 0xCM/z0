@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct LoadSpan128<T> : ISVFSpanLoad128<T>
+        public readonly struct LoadSpan128<T> : ISpanLoader128<T,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,7 +21,7 @@ namespace Z0
                 => Vectors.vload(n128,x,offset);            
         }
 
-        public readonly struct LoadSpan256<T> : ISVFSpanLoad256<T>
+        public readonly struct LoadSpan256<T> : ISpanLoader256<T,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

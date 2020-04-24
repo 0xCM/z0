@@ -13,7 +13,7 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Nonz]
-        public readonly struct Nonz<T> : ISFunc<T,bit>, IUnarySpanPred<T>
+        public readonly struct Nonz<T> : IFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

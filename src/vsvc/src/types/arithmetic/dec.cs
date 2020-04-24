@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(Integers), Dec]
-        public readonly struct Dec128<T> : ISVUnaryOp128D<T>
+        public readonly struct Dec128<T> : IUnaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,12 +21,12 @@ namespace Z0
                 => gvec.vdec(x);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) 
+            public T Invoke(T a) 
                 => gmath.dec(a);
         }
 
         [NumericClosures(Integers), Dec]
-        public readonly struct Dec256<T> : ISVUnaryOp256D<T>
+        public readonly struct Dec256<T> : IUnaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -34,7 +34,7 @@ namespace Z0
                 => gvec.vdec(x);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) 
+            public T Invoke(T a) 
                 => gmath.dec(a);
         }
     }

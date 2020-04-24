@@ -27,7 +27,7 @@ namespace Z0
     }
 
     [ApiServiceFactory]
-    public partial class MSvc : IApiService<MSvc,MSvcHosts>
+    public partial class MSvc : IFunctional<MSvc,MSvcHosts>
     {
 
     }

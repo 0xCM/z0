@@ -12,7 +12,7 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(Integers), CNonImpl]
-        public readonly struct CNonImpl<T> : ISBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct CNonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             [MethodImpl(Inline)]

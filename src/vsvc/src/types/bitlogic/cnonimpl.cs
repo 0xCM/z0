@@ -13,19 +13,19 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), CNonImpl]
-        public readonly struct CNonImpl128<T> : ISVBinaryOp128D<T>
+        public readonly struct CNonImpl128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vcnonimpl(x,y);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.cnonimpl(a,b);
+            public T Invoke(T a, T b) => gmath.cnonimpl(a,b);
 
         }
 
         [Closures(Integers), CNonImpl]
-        public readonly struct CNonImpl256<T> : ISVBinaryOp256D<T>
+        public readonly struct CNonImpl256<T> : IBinaryOp256D<T>
             where T : unmanaged
         {
 
@@ -33,7 +33,7 @@ namespace Z0
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vcnonimpl(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.cnonimpl(a,b);
+            public T Invoke(T a, T b) => gmath.cnonimpl(a,b);
         }
     }
 }

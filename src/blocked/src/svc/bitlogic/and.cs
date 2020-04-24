@@ -14,6 +14,15 @@ namespace Z0
 
     partial class BSvcHosts
     {
+        // [Closures(Integers), And]
+        // public readonly struct And64<T> : IBlockedBinaryOp64<T>
+        //     where T : unmanaged
+        // {
+        //     [MethodImpl(Inline)]
+        //     public ref readonly Block64<T> Invoke(in Block64<T> a, in Block64<T> b, in Block64<T> dst)            
+        //         => ref zip(a, b, dst, MSvc.and<T>);
+        // }
+
         [Closures(Integers), And]
         public readonly struct And128<T> : IBlockedBinaryOp128<T>
             where T : unmanaged

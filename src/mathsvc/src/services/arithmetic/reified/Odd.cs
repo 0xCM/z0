@@ -11,8 +11,8 @@ namespace Z0
 
     partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct Odd<T> : ISFunc<T,bit>, IUnarySpanPred<T>
+        [Closures(Integers), Odd]
+        public readonly struct Odd<T> : IFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

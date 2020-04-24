@@ -12,7 +12,7 @@ namespace Z0
     partial class BC
     {
         [Closures(Integers)]
-        public readonly struct Dot<T> : ISFunc<T,T,bit>
+        public readonly struct Dot<T> : IFunc<T,T,bit>
             where T : unmanaged        
         {
             public static Dot<T> Op => default;

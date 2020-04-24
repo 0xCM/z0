@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(AllNumeric), Max]
-        public readonly struct Max128<T> : ISVBinaryOp128D<T>
+        public readonly struct Max128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,12 +21,12 @@ namespace Z0
                 => gvec.vmax(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) 
+            public T Invoke(T a, T b) 
                 => gmath.max(a,b);
         }
 
         [Closures(AllNumeric), Max]
-        public readonly struct Max256<T> : ISVBinaryOp256D<T>
+        public readonly struct Max256<T> : IBinaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -34,7 +34,7 @@ namespace Z0
                 => gvec.vmax(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) 
+            public T Invoke(T a, T b) 
                 => gmath.max(a,b);
         }
     }

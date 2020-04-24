@@ -11,8 +11,8 @@ namespace Z0
 
     partial class MSvcHosts
     {
-        [Closures(AllNumeric)]
-        public readonly struct Dec<T> : IUnaryArithmeticSvc<T>
+        [Closures(AllNumeric), Dec]
+        public readonly struct Dec<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]

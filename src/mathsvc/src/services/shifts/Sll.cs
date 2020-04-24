@@ -9,12 +9,10 @@ namespace Z0
         
     using static Seed; 
 
-    using K = Kinds;
-
     partial class MSvcHosts
     {
-        [Closures(Integers)]
-        public readonly struct Sll<T> : IUnaryImm8Op<T>, ISpanShiftImm8<T>
+        [Closures(Integers), Sll]
+        public readonly struct Sll<T> : IUnaryImm8Op<T>, ISpanShift<T>
             where T : unmanaged        
         {
             [MethodImpl(Inline)]
@@ -26,7 +24,7 @@ namespace Z0
                 => gspan.sll(src,count,dst);
         }
 
-        [Closures(Integers)]
+        [Closures(Integers), Sllv]
         public readonly struct Sllv<T> : IVarSpanShift<T>
             where T : unmanaged        
         {
@@ -35,6 +33,5 @@ namespace Z0
             public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
                 => gspan.sllv(src,counts,dst);
         }
-
     }
 }

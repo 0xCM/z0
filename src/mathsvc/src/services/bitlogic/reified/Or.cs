@@ -12,7 +12,7 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(Integers), Or]
-        public readonly struct Or<T> : ISBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Or<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             [MethodImpl(Inline)]

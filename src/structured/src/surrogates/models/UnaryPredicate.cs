@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct UnaryPredicate<T> : ISFunc<T,bit>
+        public readonly struct UnaryPredicate<T> : IFunc<T,bit>
         {
             public OpIdentity Id {get;}
 

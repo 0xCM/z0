@@ -18,13 +18,13 @@ namespace Z0
         /// <typeparam name="S">The host type</typeparam>
         [MethodImpl(Inline)]
         public static S ApiSvc<S>()
-            where S : unmanaged, ISFunc    
+            where S : unmanaged, IFunc    
                 => default(S);        
 
     }   
 
     [ApiServiceFactory]
-    public partial class BC : IApiService<BC>
+    public partial class BC : IFunctional<BC>
     {
         [MethodImpl(Inline)]
         public static ByteSwap<T> byteswap<T>(T t = default)

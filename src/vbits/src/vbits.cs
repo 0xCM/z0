@@ -24,7 +24,7 @@ namespace Z0
     }
 
     [ApiServiceFactory]
-    public partial class VBitSvc : IApiService<VBitSvc,VBitSvcTypes>
+    public partial class VBitSvc : IFunctional<VBitSvc,VBitSvcTypes>
     {
     
     }

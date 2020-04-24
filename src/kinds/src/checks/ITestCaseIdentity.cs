@@ -18,7 +18,7 @@ namespace Z0
     {
         public static ITestCaseIdentity Service => default(TestCaseIdentity);
 
-        internal static string Name(ISFunc f)
+        internal static string Name(IFunc f)
             => Control.ifempty(f.GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.Name), f.GetType().DisplayName());
         
         internal const char Sep = UriDelimiters.PathSep;
@@ -65,10 +65,10 @@ namespace Z0
             where K : unmanaged
                 => Identify.sfunc<K>($"{label}_baseline");
 
-        string CaseName(ISFunc f) 
+        string CaseName(IFunc f) 
             =>$"{owner(HostType)}{Sep}{HostType.Name}{Sep}{Name(f)}";
 
-        string CaseName<W,T>(ISFunc f)
+        string CaseName<W,T>(IFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => CaseName<W,T>(HostType, Identify.Op<W,T>(Name(f)), true);
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="generic">Whether the test subject is generic</param>
         /// <typeparam name="W">The type width</typeparam>
         /// <typeparam name="T">The cell width</typeparam>
-        string CaseName<W,T>(ISFunc f, W w, bool generic = true)
+        string CaseName<W,T>(IFunc f, W w, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => CaseName<W,T>(HostType, Identify.Op<W,T>(Name(f)), generic: generic);

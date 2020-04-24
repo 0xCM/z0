@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [Closures(Integers), Sll]
-        public readonly struct Sll128<T> : ISVShiftOp128D<T>, ISVShiftOp128<T>
+        public readonly struct Sll128<T> : IShiftOp128D<T>, IShiftOp128<T>
             where T : unmanaged
         {            
             [MethodImpl(Inline)]
@@ -21,12 +21,12 @@ namespace Z0
                 => gvec.vsll(x,count);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte count) 
+            public T Invoke(T a, byte count) 
                 => gmath.sll(a,count);
         }
 
         [Closures(Integers), Sll]
-        public readonly struct Sll256<T> : ISVShiftOp256D<T>, ISVShiftOp256<T>
+        public readonly struct Sll256<T> : IShiftOp256D<T>, IShiftOp256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -34,7 +34,7 @@ namespace Z0
                 => gvec.vsll(x,count);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte count) 
+            public T Invoke(T a, byte count) 
                 => gmath.sll(a,count);
         }
     }

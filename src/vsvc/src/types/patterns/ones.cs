@@ -13,14 +13,14 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Ones128<T> : ISVPatternSource128<T>
+        public readonly struct Ones128<T> : IEmitter128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke() => gvec.vones<T>(w128);            
         }
 
-        public readonly struct Ones256<T> : ISVPatternSource256<T>
+        public readonly struct Ones256<T> : IEmitter256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

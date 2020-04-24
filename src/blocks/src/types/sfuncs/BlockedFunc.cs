@@ -12,9 +12,9 @@ namespace Z0
     /// Characterizes structed blocked functions
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface IBlockedFunc : ISFunc
+    public interface IBlockedFunc : IFunc
     {
-        OpIdentity ISFunc.Id => OpIdentity.Empty;
+        OpIdentity IFunc.Id => OpIdentity.Empty;
     }
 
     /// <summary>

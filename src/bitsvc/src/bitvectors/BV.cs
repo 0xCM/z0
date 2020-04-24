@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
      
     [ApiServiceFactory]
-    public partial class BV : IApiService<BV>
+    public partial class BV : IFunctional<BV>
     {
         [MethodImpl(Inline)]
         public static Add<T> add<T>(T t = default)
