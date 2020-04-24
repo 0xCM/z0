@@ -12,18 +12,10 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(Integers)]
+        [NumericClosures(Integers), Dec]
         public readonly struct Dec128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vdec";
-
-            public Vec128Kind<T> VKind => default;
-
-            public static Dec128<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) 
                 => gvec.vdec(x);
@@ -33,18 +25,10 @@ namespace Z0
                 => gmath.dec(a);
         }
 
-        [NumericClosures(Integers)]
+        [NumericClosures(Integers), Dec]
         public readonly struct Dec256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vdec";
-
-            public Vec256Kind<T> VKind => default;
-
-            public static Dec256<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) 
                 => gvec.vdec(x);

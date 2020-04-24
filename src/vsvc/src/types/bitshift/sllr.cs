@@ -16,14 +16,6 @@ namespace Z0
         public readonly struct Sllr128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vsllr";
-
-            public Vec128Kind<T> VKind => default;
-
-            public static Sllr128<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets) 
                 => gvec.vsllr(x,offsets);
@@ -36,14 +28,6 @@ namespace Z0
         public readonly struct Sllr256<T> : ISVBinaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vsllr";
-
-            public Vec256Kind<T> VKind => default;
-
-            public static Sllr256<T> Op => default;
-             
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offset) 
                 => gvec.vsllr(x,offset);

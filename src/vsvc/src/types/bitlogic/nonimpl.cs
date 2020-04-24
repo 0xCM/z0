@@ -16,13 +16,6 @@ namespace Z0
         public readonly struct NonImpl128<T> : ISVBinaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vnonimpl";
-
-            public static NonImpl128<T> Op => default;
-
-            public Vec128Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vnonimpl(x,y);
@@ -36,14 +29,6 @@ namespace Z0
         public readonly struct NonImpl256<T> : ISVBinaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vnonimpl";
-
-            public static NonImpl256<T> Op => default;
-
-            public Vec256Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vnonimpl(x,y);
 

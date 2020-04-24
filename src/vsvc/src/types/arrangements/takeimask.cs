@@ -15,14 +15,6 @@ namespace Z0
         public readonly struct TakeIMask128<T> : ISVImm8UnaryScalar128<T,ushort>
             where T : unmanaged
         {
-            public const string Name = "vtakeimask";
-
-            public Vec128Kind<T> VKind => default;
-
-            public static TakeIMask128<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x, byte index) 
                 => gvec.vtakemask(x,index);            
@@ -31,14 +23,6 @@ namespace Z0
         public readonly struct TakeIMask256<T>  : ISVImm8UnaryScalar256<T,uint>
             where T : unmanaged
         {
-            public const string Name = "vtakeimask";
-
-            public Vec256Kind<T> VKind => default;
-
-            public static TakeIMask256<T> Op => default;
-            
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x,byte index) 
                 => gvec.vtakemask(x,index);

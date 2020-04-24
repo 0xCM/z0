@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vunits<T>(N256 w, T t = default)
             where T : unmanaged
         {

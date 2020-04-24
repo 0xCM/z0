@@ -16,20 +16,20 @@ namespace Z0
         /// <summary>
         /// Creates a 128-bit vector with all bits enabled
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The vector width</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector128<T> vones<T>(N128 n, T t = default)
+        public static Vector128<T> vones<T>(W128 w, T t = default)
             where T : unmanaged
                 => veq(default(Vector128<T>), default(Vector128<T>));
 
         /// <summary>
         /// Creates a 256-bit vector with all bits enabled
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="n">The vector width</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector256<T> vones<T>(N256 n, T t = default)
+        public static Vector256<T> vones<T>(W256 w, T t = default)
             where T : unmanaged
                 => veq(default(Vector256<T>), default(Vector256<T>));
 
@@ -39,18 +39,8 @@ namespace Z0
         /// <param name="n">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector512<T> vones<T>(N512 n, T t = default)
+        public static Vector512<T> vones<T>(W512 w, T t = default)
             where T : unmanaged
                 => veq(default(Vector512<T>), default(Vector512<T>));
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> vones<T>(Vec128Kind<T> kind)
-            where T : unmanaged
-                => vones<T>(w128);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vones<T>(Vec256Kind<T> kind)
-            where T : unmanaged
-                => vones<T>(w256);
     }
 }

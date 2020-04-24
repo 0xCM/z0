@@ -15,32 +15,32 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Pop128<T> vpop<T>(N128 w, T t = default)
             where T : unmanaged
-                => Pop128<T>.Op;
+                => default(Pop128<T>);
 
         [MethodImpl(Inline)]
         public static Pop256<T> vpop<T>(N256 w, T t = default)
             where T : unmanaged
-                => Pop256<T>.Op;
+                => default(Pop256<T>);
 
         [MethodImpl(Inline)]
         public static TakeMask128<T> vtakemask<T>(N128 w, T t = default)
             where T : unmanaged
-                => TakeMask128<T>.Op;
+                => default(TakeMask128<T>);
 
         [MethodImpl(Inline)]
         public static TakeMask256<T> vtakemask<T>(N256 w, T t = default)
             where T : unmanaged
-                => TakeMask256<T>.Op;
+                => default(TakeMask256<T>);
 
         [MethodImpl(Inline)]
         public static TakeIMask128<T> vtakeimask<T>(N128 w, T t = default)
             where T : unmanaged
-                => TakeIMask128<T>.Op;
+                => default(TakeIMask128<T>);
 
         [MethodImpl(Inline)]
         public static TakeIMask256<T> vtakeimask<T>(N256 w, T t = default)
             where T : unmanaged
-                => TakeIMask256<T>.Op;
+                => default(TakeIMask256<T>);
 
     }
 }

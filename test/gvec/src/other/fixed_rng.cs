@@ -21,7 +21,7 @@ namespace Z0
         {
             const ulong tolerance = 5;
             var total = 0ul;
-            var emit = Fixed.fix(next<byte>); 
+            var emit = FixedOps.fix(next<byte>); 
             for(var i=0; i<RepCount; i++ )
                 total += Fixed.scalar(emit());
 
@@ -41,7 +41,7 @@ namespace Z0
         public void fixed_convert()
         {
             BinaryOp<uint> f = gmath.add<uint>;
-            BinaryOp32 g = Fixed.fix(gmath.add<uint>);            
+            BinaryOp32 g = FixedOps.fix(gmath.add<uint>);            
             var lhs = Random.FixedStream<Fixed32>().Take(RepCount).ToArray();
             var rhs = Random.FixedStream<Fixed32>().Take(RepCount).ToArray();
 

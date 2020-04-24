@@ -83,5 +83,18 @@ namespace Z0
         public static ulong uint64<W>(W w = default)
             where W : struct, INumericWidth
                 => (ulong)numeric(w);
+
+        /// <summary>
+        /// Computes k := width[W] / bitsize[T]
+        /// </summary>
+        /// <param name="n">The natural representative</param>
+        /// <param name="t">A type representative</param>
+        /// <typeparam name="N">The natural type</typeparam>
+        /// <typeparam name="T">The bit width type</typeparam>
+        [MethodImpl(Inline)]
+        public static int div<W,T>(W w = default, T t = default)
+            where W : struct, ITypeWidth
+            where T : unmanaged
+                => (int)type<W>() / bitsize<T>();
     }
 }

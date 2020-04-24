@@ -16,34 +16,17 @@ namespace Z0
         public readonly struct Not128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vnot";
-
-            public static Not128<T> Op => default;
-
-            public Vec128Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vnot(x);
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.not(a);
-
         }
 
         [NumericClosures(Integers), Not]
         public readonly struct Not256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vnot";
-
-            public static Not256<T> Op => default;
-
-            public Vec256Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => gvec.vnot(x);
 

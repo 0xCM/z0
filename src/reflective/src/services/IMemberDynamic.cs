@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
+    using System.Reflection.Emit;
+    using System.Runtime.CompilerServices;
 
     using static Seed;
 
@@ -15,6 +18,10 @@ namespace Z0
     
     public interface IMemberDynamic : IMemberCil, IMemberPointer, IMemberJit  
     {
-
+        RuntimeMethodHandle handle(DynamicMethod src)
+            => DynamicOps.handle(src);
+        
+        MethodBase method(RuntimeMethodHandle src)
+            => MethodBase.GetMethodFromHandle(src);
     }
 }

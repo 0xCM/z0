@@ -13,133 +13,133 @@ namespace Z0
     partial class VSvc
     {
         [MethodImpl(Inline)]
-        public static And128<T> vand<T>(N128 w, T t = default)
+        public static And128<T> vand<T>(W128 w, T t = default)
             where T : unmanaged
-                => And128<T>.Op;
+                => default(And128<T>);
 
         [MethodImpl(Inline)]
-        public static And256<T> vand<T>(N256 w, T t = default)
+        public static And256<T> vand<T>(W256 w, T t = default)
             where T : unmanaged
-                => And256<T>.Op;
+                => default(And256<T>);
 
         [MethodImpl(Inline)]
-        public static Or128<T> vor<T>(N128 w, T t = default)
+        public static Nand128<T> vnand<T>(W128 w, T t = default)
             where T : unmanaged
-                => Or128<T>.Op;
+                => default(Nand128<T>);
 
         [MethodImpl(Inline)]
-        public static Or256<T> vor<T>(N256 w, T t = default)
+        public static Nand256<T> vnand<T>(W256 w, T t = default)
             where T : unmanaged
-                => Or256<T>.Op;
+                => default(Nand256<T>);
 
         [MethodImpl(Inline)]
-        public static Xor128<T> vxor<T>(N128 w, T t = default)
+        public static Or128<T> vor<T>(W128 w, T t = default)
             where T : unmanaged
-                => Xor128<T>.Op;
+                => default(Or128<T>);
 
         [MethodImpl(Inline)]
-        public static Xor256<T> vxor<T>(N256 w, T t = default)
+        public static Or256<T> vor<T>(W256 w, T t = default)
             where T : unmanaged
-                => Xor256<T>.Op;
+                => default(Or256<T>);
 
         [MethodImpl(Inline)]
-        public static Nand128<T> vnand<T>(N128 w, T t = default)
+        public static Nor128<T> vnor<T>(W128 w, T t = default)
             where T : unmanaged
-                => Nand128<T>.Op;
+                => default(Nor128<T>);
 
         [MethodImpl(Inline)]
-        public static Nand256<T> vnand<T>(N256 w, T t = default)
+        public static Nor256<T> vnor<T>(W256 w, T t = default)
             where T : unmanaged
-                => Nand256<T>.Op;
+                => default(Nor256<T>);
 
         [MethodImpl(Inline)]
-        public static Nor128<T> vnor<T>(N128 w, T t = default)
+        public static Xor128<T> vxor<T>(W128 w, T t = default)
             where T : unmanaged
-                => Nor128<T>.Op;
+                => default(Xor128<T>);
 
         [MethodImpl(Inline)]
-        public static Nor256<T> vnor<T>(N256 w, T t = default)
+        public static Xor256<T> vxor<T>(W256 w, T t = default)
             where T : unmanaged
-                => Nor256<T>.Op;
+                => default(Xor256<T>);
 
         [MethodImpl(Inline)]
-        public static Xnor128<T> vxnor<T>(N128 w, T t = default)
+        public static Xnor128<T> vxnor<T>(W128 w, T t = default)
             where T : unmanaged
-                => Xnor128<T>.Op;
+                => default(Xnor128<T>);
 
         [MethodImpl(Inline)]
-        public static Xnor256<T> vxnor<T>(N256 w, T t = default)
+        public static Xnor256<T> vxnor<T>(W256 w, T t = default)
             where T : unmanaged
-                => Xnor256<T>.Op;
+                => default(Xnor256<T>);
 
         [MethodImpl(Inline)]
-        public static XorNot128<T> vxornot<T>(N128 w, T t = default)
+        public static XorNot128<T> vxornot<T>(W128 w, T t = default)
             where T : unmanaged
-                => XorNot128<T>.Op;
+                => default(XorNot128<T>);
 
         [MethodImpl(Inline)]
-        public static XorNot256<T> vxornot<T>(N256 w, T t = default)
+        public static XorNot256<T> vxornot<T>(W256 w, T t = default)
             where T : unmanaged
-                => XorNot256<T>.Op;
+                => default(XorNot256<T>);
 
         [MethodImpl(Inline)]
-        public static Not128<T> vnot<T>(N128 w, T t = default)
+        public static Not128<T> vnot<T>(W128 w, T t = default)
             where T : unmanaged
-                => Not128<T>.Op;
+                => default(Not128<T>);
 
         [MethodImpl(Inline)]
-        public static Not256<T> vnot<T>(N256 w, T t = default)
+        public static Not256<T> vnot<T>(W256 w, T t = default)
             where T : unmanaged
-                => Not256<T>.Op;
+                => default(Not256<T>);
 
         [MethodImpl(Inline)]
-        public static Select128<T> vselect<T>(N128 w, T t = default)
+        public static Select128<T> vselect<T>(W128 w, T t = default)
             where T : unmanaged
-                => Select128<T>.Op;
+                => default(Select128<T>);
 
         [MethodImpl(Inline)]
-        public static Select256<T> vselect<T>(N256 w, T t = default)
+        public static Select256<T> vselect<T>(W256 w, T t = default)
             where T : unmanaged
-                => Select256<T>.Op;
+                => default(Select256<T>);
 
         [MethodImpl(Inline)]
-        public static Impl128<T> vimpl<T>(N128 w, T t = default)
+        public static Impl128<T> vimpl<T>(W128 w, T t = default)
             where T : unmanaged
-                => Impl128<T>.Op;
+                => default(Impl128<T>);
 
         [MethodImpl(Inline)]
-        public static Impl256<T> vimpl<T>(N256 w, T t = default)
+        public static Impl256<T> vimpl<T>(W256 w, T t = default)
             where T : unmanaged
-                => Impl256<T>.Op;
+                => default(Impl256<T>);
 
         [MethodImpl(Inline)]
-        public static NonImpl128<T> vnonimpl<T>(N128 w, T t = default)
+        public static NonImpl128<T> vnonimpl<T>(W128 w, T t = default)
             where T : unmanaged
-                => NonImpl128<T>.Op;
+                => default(NonImpl128<T>);
 
         [MethodImpl(Inline)]
-        public static NonImpl256<T> vnonimpl<T>(N256 w, T t = default)
+        public static NonImpl256<T> vnonimpl<T>(W256 w, T t = default)
             where T : unmanaged
-                => NonImpl256<T>.Op;
+                => default(NonImpl256<T>);
 
         [MethodImpl(Inline)]
-        public static CImpl128<T> vcimpl<T>(N128 w, T t = default)
+        public static CImpl128<T> vcimpl<T>(W128 w, T t = default)
             where T : unmanaged
-                => CImpl128<T>.Op;
+                => default(CImpl128<T>);
 
         [MethodImpl(Inline)]
-        public static CImpl256<T> vcimpl<T>(N256 w, T t = default)
+        public static CImpl256<T> vcimpl<T>(W256 w, T t = default)
             where T : unmanaged
-                => CImpl256<T>.Op;
+                => default(CImpl256<T>);
 
         [MethodImpl(Inline)]
-        public static CNonImpl128<T> vcnonimpl<T>(N128 w, T t = default)
+        public static CNonImpl128<T> vcnonimpl<T>(W128 w, T t = default)
             where T : unmanaged
-                => CNonImpl128<T>.Op;
+                => default(CNonImpl128<T>);
 
         [MethodImpl(Inline)]
-        public static CNonImpl256<T> vcnonimpl<T>(N256 w, T t = default)
+        public static CNonImpl256<T> vcnonimpl<T>(W256 w, T t = default)
             where T : unmanaged
-                => CNonImpl256<T>.Op;
+                => default(CNonImpl256<T>);
    }
 }

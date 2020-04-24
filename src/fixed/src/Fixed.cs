@@ -13,6 +13,12 @@ namespace Z0
 
     }
 
+    [SuppressUnmanagedCodeSecurity, ApiHost("operators")]
+    public partial class FixedOps : IApiHost<FixedOps>
+    {
+
+    }
+    
     public static partial class XFixed
     {
 

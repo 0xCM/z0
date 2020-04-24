@@ -13,83 +13,83 @@ namespace Z0
     partial class VSvc
     {
         [MethodImpl(Inline)]
-        public static Eq128<T> veq<T>(N128 w, T t = default)
+        public static Eq128<T> veq<T>(W128 w, T t = default)
             where T : unmanaged
-                => Eq128<T>.Op;
+                => default(Eq128<T>);
 
         [MethodImpl(Inline)]
-        public static Eq256<T> veq<T>(N256 w, T t = default)
+        public static Eq256<T> veq<T>(W256 w, T t = default)
             where T : unmanaged
-                => Eq256<T>.Op;
+                => default(Eq256<T>);
 
         [MethodImpl(Inline)]
-        public static Lt128<T> vlt<T>(N128 w, T t = default)
+        public static Lt128<T> vlt<T>(W128 w, T t = default)
             where T : unmanaged
-                => Lt128<T>.Op;
+                => default(Lt128<T>);
 
         [MethodImpl(Inline)]
-        public static Lt256<T> vlt<T>(N256 w, T t = default)
+        public static Lt256<T> vlt<T>(W256 w, T t = default)
             where T : unmanaged
-                => Lt256<T>.Op;
+                => default(Lt256<T>);
 
         [MethodImpl(Inline)]
-        public static Gt128<T> vgt<T>(N128 w, T t = default)
+        public static Gt128<T> vgt<T>(W128 w, T t = default)
             where T : unmanaged
-                => Gt128<T>.Op;
+                => default(Gt128<T>);
 
         [MethodImpl(Inline)]
-        public static Gt256<T> vgt<T>(N256 w, T t = default)
+        public static Gt256<T> vgt<T>(W256 w, T t = default)
             where T : unmanaged
-                => Gt256<T>.Op;
+                => default(Gt256<T>);
  
         [MethodImpl(Inline)]
-        public static Max128<T> vmax<T>(N128 w, T t = default)
+        public static Max128<T> vmax<T>(W128 w, T t = default)
             where T : unmanaged
-                => Max128<T>.Op;
+                => default(Max128<T>);
 
         [MethodImpl(Inline)]
-        public static Max256<T> vmax<T>(N256 w, T t = default)
+        public static Max256<T> vmax<T>(W256 w, T t = default)
             where T : unmanaged
-                => Max256<T>.Op;
+                => default(Max256<T>);
 
         [MethodImpl(Inline)]
         public static Min128<T> vmin<T>(W128 w, T t = default)
             where T : unmanaged
-                => Min128<T>.Op;
+                => default(Min128<T>);
 
         [MethodImpl(Inline)]
         public static Min256<T> vmin<T>(W256 w, T t = default)
             where T : unmanaged
-                => Min256<T>.Op;
+                => default(Min256<T>);
 
         [MethodImpl(Inline)]
-        public static NonZ128<T> vnonz<T>(N128 w, T t = default)
+        public static NonZ128<T> vnonz<T>(W128 w, T t = default)
             where T : unmanaged
-                => NonZ128<T>.Op;
+                => default(NonZ128<T>);
 
         [MethodImpl(Inline)]
-        public static NonZ256<T> vnonz<T>(N256 w, T t = default)
+        public static NonZ256<T> vnonz<T>(W256 w, T t = default)
             where T : unmanaged
-                => NonZ256<T>.Op;
+                => default(NonZ256<T>);
 
         [MethodImpl(Inline)]
-        public static TestC128<T> vtestc<T>(N128 w, T t = default)
+        public static TestC128<T> vtestc<T>(W128 w, T t = default)
             where T : unmanaged
-                => TestC128<T>.Op;
+                => default(TestC128<T>);
 
         [MethodImpl(Inline)]
-        public static TestC256<T> vtestc<T>(N256 w, T t = default)
+        public static TestC256<T> vtestc<T>(W256 w, T t = default)
             where T : unmanaged
-                => TestC256<T>.Op;
+                => default(TestC256<T>);
 
         [MethodImpl(Inline)]
-        public static TestZ128<T> vtestz<T>(N128 w, T t = default)
+        public static TestZ128<T> vtestz<T>(W128 w, T t = default)
             where T : unmanaged
-                => TestZ128<T>.Op;
+                => default(TestZ128<T>);
 
         [MethodImpl(Inline)]
-        public static TestZ256<T> vtestz<T>(N256 w, T t = default)
+        public static TestZ256<T> vtestz<T>(W256 w, T t = default)
             where T : unmanaged
-                => TestZ256<T>.Op;
+                => default(TestZ256<T>);
     }
 }

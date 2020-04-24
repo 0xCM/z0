@@ -12,17 +12,10 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        [NumericClosures(AllNumeric), Nonz]
+        [Closures(AllNumeric), Nonz]
         public readonly struct NonZ128<T> : ISVUnaryPredicate128D<T>
             where T : unmanaged
         {
-            public static NonZ128<T> Op => default;
-
-            public const string Name = "vnonz";
-
-            public Vec128Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x) => gvec.vnonz(x);
@@ -31,18 +24,10 @@ namespace Z0
             public bit InvokeScalar(T a) => gmath.nonz(a);
         }
 
-        [NumericClosures(NumericKind.All), Nonz]
+        [Closures(AllNumeric), Nonz]
         public readonly struct NonZ256<T> : ISVUnaryPredicate256D<T>
             where T : unmanaged
         {
-            public const string Name = "vnonz";
-
-            public Vec256Kind<T> VKind => default;
-
-            public static NonZ256<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
-
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x) => gvec.vnonz(x);
 

@@ -11,14 +11,19 @@ namespace Z0
     /// </summary>
     public abstract class OpKindAttribute : OpAttribute
     {
-        protected OpKindAttribute(object id, string group = null) 
+        static OpKindId ToKindKid(object id)
+            => (OpKindId)(ulong)Convert.ChangeType(id, typeof(ulong));
+        
+        protected OpKindAttribute(object id, object group = null) 
         {
-            KindId = (OpKindId)(ulong)Convert.ChangeType(id,typeof(ulong));
-            Group = group ?? string.Empty;
+            KindId = ToKindKid(id);
+            Group = group?.ToString() ?? string.Empty;
         }
+
+        public OpKindId KindId {get;}
 
         public string Group {get;}
 
-        public OpKindId KindId {get;}
+        public override string Name => KindId.ToString().ToLower();
     }
 }

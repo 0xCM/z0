@@ -16,13 +16,6 @@ namespace Z0
         public readonly struct Concat2x128<T> : ISVMergeOp2x128x256Api<T>
             where T : unmanaged
         {
-            public const string Name = "vconcat";
-
-            public static Concat2x128<T> Op => default;
-
-            public OpIdentity Id 
-                => Identify.Op($"{Name}_2x128x{Identify.numeric<T>()}");
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y) 
                 => Vectors.vconcat(x,y);           

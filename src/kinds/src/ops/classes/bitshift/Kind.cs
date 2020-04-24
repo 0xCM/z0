@@ -76,5 +76,14 @@ namespace Z0
         Bsrl = Id.Bsrl,
 
         Bsll = Id.Bsll,
+
+        Rotrx = Id.Rotrx,
+
+        Rotlx = Id.Rotlx,
+
+        Sllx = Id.Sllx,
+
+        Srlx = Id.Srlx,
+
     }    
 }

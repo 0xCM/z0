@@ -12,11 +12,11 @@ namespace Z0
     using K = CanonicalKind;
     using A = OpKindAttribute;    
 
-    public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute(string group = null) : base(K.Identity, group) {} }
+    public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute(object group = null) : base(K.Identity, group) {} }
 
-    public sealed class ConcatAttribute : A { public ConcatAttribute(string group = null) : base(K.Concat, group) {} }
+    public sealed class ConcatAttribute : A { public ConcatAttribute(object group = null) : base(K.Concat, group) {} }
 
-    public sealed class ReverseAttribute : A { public ReverseAttribute(string group = null) : base(K.Reverse, group) {} }    
+    public sealed class ReverseAttribute : A { public ReverseAttribute(object group = null) : base(K.Reverse, group) {} }    
 
-    public sealed class ParseAttribute : A { public ParseAttribute(string group = null) : base(K.Parse, group) {} }    
+    public sealed class ParseAttribute : A { public ParseAttribute(object group = null) : base(K.Parse, group) {} }    
 }

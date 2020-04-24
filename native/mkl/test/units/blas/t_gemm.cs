@@ -181,7 +181,7 @@ namespace Z0.Mkl.Test
                 Claim.close(E.Unblocked, X.Unblocked, epsilon);
             }
 
-            BenchmarkRecord timing = measured(CycleCount, runtime, label);
+            BenchmarkRecord timing = Benchmark(CycleCount, runtime, label);
             
             if(collect)
                 ReportBenchmark(label,CycleCount, TimeSpan.FromMilliseconds(runtime.Ms));
@@ -211,7 +211,7 @@ namespace Z0.Mkl.Test
             }
 
             var label = $"gemm<{nati<M>()},{nati<K>()},{nati<N>()}>";
-            BenchmarkRecord timing = measured(CycleCount, runtime, label);
+            BenchmarkRecord timing = Benchmark(CycleCount, runtime, label);
 
             if(collect)
                 ReportBenchmark(label,CycleCount, TimeSpan.FromMilliseconds(runtime.Ms));
@@ -245,7 +245,7 @@ namespace Z0.Mkl.Test
             }
 
             var label = $"gemm<{nati<M>()},{nati<K>()},{nati<N>()}>";
-            var timing = measured(CycleCount, runtime, label);
+            var timing = Benchmark(CycleCount, runtime, label);
 
             if(collect)
                 ReportBenchmark(label,CycleCount, TimeSpan.FromMilliseconds(runtime.Ms));
@@ -277,7 +277,7 @@ namespace Z0.Mkl.Test
             }
 
             var label = $"gemv<{nati<M>()},{nati<N>()},{typeof(double).DisplayName()}>";
-            return measured(cycles, snapshot(sw), label);
+            return Benchmark(cycles, snapshot(sw), label);
         }
 
         static double Dot<N>(Block256<N,double> x, Block256<N,double> y)

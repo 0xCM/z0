@@ -16,11 +16,8 @@ namespace Z0
         /// </summary>
         /// <typeparam name="A">The attribute type</typeparam>
         /// <param name="m">The member</param>
-        public static Option<A> Tag<A>(this Type t) 
+        public static Option<A> Tag<A>(this Type t, bool effective = true) 
             where A : Attribute
-        {
-            return t.EffectiveType().GetCustomAttribute<A>();
-
-        }
+                => effective ? t.EffectiveType().GetCustomAttribute<A>() : t.GetCustomAttribute<A>();
     }
 }

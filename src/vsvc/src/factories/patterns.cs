@@ -15,21 +15,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Ones128<T> vones<T>(N128 w, T t = default)
             where T : unmanaged
-                => Ones128<T>.Op;
+                => default(Ones128<T>);
 
         [MethodImpl(Inline)]
         public static Ones256<T> vones<T>(N256 w, T t = default)
             where T : unmanaged
-                => Ones256<T>.Op;
+                => default(Ones256<T>);
 
         [MethodImpl(Inline)]
         public static Units128<T> vunits<T>(N128 w, T t = default)
             where T : unmanaged
-                => Units128<T>.Op;
+                => default(Units128<T>);
 
         [MethodImpl(Inline)]
         public static Units256<T> vunits<T>(N256 w, T t = default)
             where T : unmanaged
-                => Units256<T>.Op;
+                => default(Units256<T>);
     }
 }

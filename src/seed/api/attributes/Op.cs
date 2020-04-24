@@ -12,7 +12,7 @@ namespace Z0
     /// </summary>
     public class OpAttribute : Attribute
     {
-        public string Name {get;}
+        public virtual string Name {get;}
 
         public OpAttribute()
         {

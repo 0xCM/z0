@@ -13,7 +13,25 @@ namespace Z0
     using static Memories;
     using static TestCaseIdentity;
     using static UriDelimiters;
-    
+
+    public readonly struct TestCaseIdentity : ITestCaseIdentity
+    {
+        public static ITestCaseIdentity Service => default(TestCaseIdentity);
+
+        internal static string Name(ISFunc f)
+            => Control.ifempty(f.GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.Name), f.GetType().DisplayName());
+        
+        internal const char Sep = UriDelimiters.PathSep;
+
+        /// <summary>
+        /// Produces the formatted identifier of the declaring assembly
+        /// </summary>
+        /// <param name="host">The source type</param>
+        [MethodImpl(Inline)]   
+        internal static string owner(Type host)
+            => host.Assembly.Id().Format();
+    }
+            
     public interface ITestCaseIdentity : IValidator
     {
         /// <summary>
@@ -48,12 +66,12 @@ namespace Z0
                 => Identify.sfunc<K>($"{label}_baseline");
 
         string CaseName(ISFunc f) 
-            =>$"{owner(HostType)}{Sep}{HostType.Name}{Sep}{f.Id}";
+            =>$"{owner(HostType)}{Sep}{HostType.Name}{Sep}{Name(f)}";
 
         string CaseName<W,T>(ISFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, Identify.Op<W,T>(f.Id.Name), true);
+                => CaseName<W,T>(HostType, Identify.Op<W,T>(Name(f)), true);
 
         string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth
@@ -84,7 +102,7 @@ namespace Z0
         string CaseName<W,T>(ISFunc f, W w, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, Identify.Op<W,T>(f.Id.Name), generic: generic);
+                => CaseName<W,T>(HostType, Identify.Op<W,T>(Name(f)), generic: generic);
 
         /// <summary>
         /// Produces a case name for an identified operation match test
@@ -93,18 +111,5 @@ namespace Z0
         /// <param name="g">The right operation</param>
         string MatchCaseName(OpIdentity f, OpIdentity g)
             => CaseName($"{f.Identifier}_vs_{g.Identifier}");
-    }
-
-    readonly struct TestCaseIdentity : ITestCaseIdentity
-    {
-        internal const char Sep = UriDelimiters.PathSep;
-
-        /// <summary>
-        /// Produces the formatted identifier of the declaring assembly
-        /// </summary>
-        /// <param name="host">The source type</param>
-        [MethodImpl(Inline)]   
-        internal static string owner(Type host)
-            => host.Assembly.Id().Format();
     }
 }

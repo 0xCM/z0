@@ -17,12 +17,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitClear128<T> vbitclear<T>(N128 w, T t = default)
             where T : unmanaged
-                => BitClear128<T>.Op;
+                => default(BitClear128<T>);
 
         [MethodImpl(Inline)]
         public static BitClear256<T> vbitclear<T>(N256 w, T t = default)
             where T : unmanaged
-                => BitClear256<T>.Op;
+                => default(BitClear256<T>);
     }
 
     partial class VBitSvcTypes
@@ -31,15 +31,6 @@ namespace Z0
         public readonly struct BitClear128<T> : ISVImm8x2UnaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vbitclear";
-
-            public Vec128Kind<T> VKind => default;
-
-            public static BitClear128<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count) 
                 => vgbits.vbitclear(x,offset,count);
@@ -53,14 +44,6 @@ namespace Z0
         public readonly struct BitClear256<T> : ISVImm8x2UnaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vbitclear";
-             
-            public Vec256Kind<T> VKind => default;
-
-            public static BitClear256<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) 
                 => vgbits.vbitclear(x,offset, count);

@@ -248,5 +248,14 @@ namespace Z0
         GtPred,
 
         GtEqPred,
+
+        Rotrx,
+
+        Rotlx,
+
+        Sllx,
+
+        Srlx,
+
     }    
 }

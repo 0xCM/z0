@@ -25,33 +25,26 @@ namespace Z0
                     Claim.yea(t.IsBlocked(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
                     var width = Widths.divine(t);
                     Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
-                }
-                    
-                var id = Identity.generic(method);
-                trace(id);
+                }                    
             }
         }
 
-        static RuntimeMethodHandle GetMethodHandle(DynamicMethod method)
-        {
-            var getMethodDescriptorInfo = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
-            return (RuntimeMethodHandle)getMethodDescriptorInfo.Invoke(method, null);
-
-        }
-
-        public void handle_test()
+        public void vbsll_imm_handle()
         {   const byte imm8 = 9;
-            var method = typeof(gvec).DeclaredMethods().WithName(nameof(gvec.vbsll)).OfKind(v128).Single();
-            var op = Dynop.EmbedVUnaryOpImm(vk128<uint>(), Identity.identify(method), method,imm8);
-            var handle = GetMethodHandle(op.Target);
-            Notify(handle.Value.ToString());
+            var name = nameof(gvec.vbsll);
+            var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(v128).Single();
+            var op = Dynop.EmbedVUnaryOpImm(vk128<uint>(), Identity.identify(src), src,imm8);
+            var handle = MemberDynamic.Service.handle(op.Target);
+            var dst = MemberDynamic.Service.method(handle);
+            Claim.eq(dst.Name, name);
         }
          
         public unsafe void vbsll_128x32u()
         {
             const byte imm8 = 9;
 
-            var vbsll = VSvc.vbsll<uint>(n128).@delegate(imm8).DynamicOp;            
+            var resolver = default(VImm8UnaryResolver128<uint>);
+            var vbsll = resolver.inject(imm8, OpKindId.Bsll).DynamicOp;
                     
             for(var i=0; i<RepCount; i++)
             {

@@ -16,14 +16,6 @@ namespace Z0
         public readonly struct Inc128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vinc";
-
-            public Vec128Kind<T> VKind => default;
-
-            public static Inc128<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) 
                 => gvec.vinc(x);
@@ -37,14 +29,6 @@ namespace Z0
         public readonly struct Inc256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vinc";
-
-            public Vec256Kind<T> VKind => default;
-
-            public static Inc256<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x)
                 => gvec.vinc(x);

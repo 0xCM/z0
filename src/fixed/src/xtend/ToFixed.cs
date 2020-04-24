@@ -14,35 +14,35 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static BinaryOp8 ToFixed(this BinaryOp<byte> f)
-            => Fixed.fix(f);
+            => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
         public static BinaryOp8 ToFixed(this BinaryOp<sbyte> f)
-            => Fixed.fix(f);
+            => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
         public static BinaryOp16 ToFixed(this BinaryOp<short> f)
-            => Fixed.fix(f);
+            => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
         public static BinaryOp16 ToFixed(this BinaryOp<ushort> f)
-            => Fixed.fix(f);
+            => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
         public static BinaryOp32 ToFixed(this BinaryOp<int> f)
-            => Fixed.fix(f);
+            => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
         public static BinaryOp32 ToFixed(this BinaryOp<uint> f)
-            => Fixed.fix(f);
+            => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
         public static BinaryOp64 ToFixed(this BinaryOp<long> f)
-            => Fixed.fix(f);
+            => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
         public static BinaryOp64 ToFixed(this BinaryOp<ulong> f)
-            => Fixed.fix(f);
+            => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
         public static Fixed8 ToFixed(this byte x)

@@ -12,8 +12,14 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    using C = TestBitLogicMatch;
-    using K = Kinds;
+    public interface ITestBitLogicMatch<T,W> : ICheckVectors
+        where T : struct
+        where W : unmanaged, ITypeWidth
+    {
+        [MethodImpl(Inline)]
+        bit match<K>(T x, T y, K k = default)
+            where K : unmanaged, IBitLogicKind;
+    }    
 
     public interface ITestBitLogicMatch : ICheckVectors
     {        
@@ -21,9 +27,15 @@ namespace Z0
         bit match<K,T>(Vector128<T> x, Vector128<T> y, K k = default, W128 w = default)
             where T : unmanaged
             where K : unmanaged, IBitLogicKind
-                => C.Checker.match(x, y, k, w);
-    }
+                => TestBitLogic128<T>.Checker.match(x, y, k);
 
+        [MethodImpl(Inline)]
+        bit match<K,T>(Vector256<T> x, Vector256<T> y, K k = default, W256 w = default)
+            where T : unmanaged
+            where K : unmanaged, IBitLogicKind
+                =>  TestBitLogic256<T>.Checker.match(x, y, k);
+    }
+        
     public readonly struct TestBitLogicMatch : ITestBitLogicMatch
     {
         public static TestBitLogicMatch Checker => default(TestBitLogicMatch);
@@ -32,36 +44,62 @@ namespace Z0
         public bit match<K,T>(Vector128<T> x, Vector128<T> y, K k = default, W128 w = default)
             where T : unmanaged
             where K : unmanaged, IBitLogicKind
-        {
-            var mSvc = MSvc.bitlogic<T>();
-            var vSvc = VSvc.vbitlogic<T>(w);
-            
-            var buffer = Fixed.alloc<Fixed128>();
-            ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
-            
-            var count = vcount<T>(w);  
-            for(var i=0; i< count; i++)
-                seek(ref dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), k);
-            var v1 = Vectors.vload(w, in dst);
-            
-            var v2 = vSvc.eval(x,y,k);
-            
-            return gvec.vsame(v2,v1);
-        }
+                => TestBitLogic128<T>.Checker.match(x, y, k);
 
         [MethodImpl(Inline)]
         public bit match<K,T>(Vector256<T> x, Vector256<T> y, K k = default, W256 w = default)
             where T : unmanaged
             where K : unmanaged, IBitLogicKind
+                =>  TestBitLogic256<T>.Checker.match(x, y, k);
+    }
+
+    public readonly struct TestBitLogic128<T> : ITestBitLogicMatch<Vector128<T>, W128>
+        where T : unmanaged
+    {
+        public static TestBitLogic128<T> Checker => default(TestBitLogic128<T>);
+
+        W128 w => default;
+
+        [MethodImpl(Inline)]
+        public bit match<K>(Vector128<T> x, Vector128<T> y, K k = default)
+            where K : unmanaged, IBitLogicKind
         {
             var mSvc = MSvc.bitlogic<T>();
             var vSvc = VSvc.vbitlogic<T>(w);
             
-            var buffer = Fixed.alloc<Fixed256>();
-            ref var dst = ref Fixed.head<Fixed256,T>(ref buffer);
+            var buffer = Fixed.alloc(w);
+            ref var dst = ref Fixed.head<T>(ref buffer);
             
             var count = vcount<T>(w);  
-            for(var i=0; i< count; i++)
+            for(var i=0; i<count; i++)
+                seek(ref dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), k);
+            var v1 = Vectors.vload(w, in dst);            
+            
+            var v2 = vSvc.eval(x,y,k);            
+            
+            return gvec.vsame(v2,v1);
+        }
+    }    
+
+    public readonly struct TestBitLogic256<T> : ITestBitLogicMatch<Vector256<T>,W256>
+        where T : unmanaged
+    {
+        public static TestBitLogic256<T> Checker => default(TestBitLogic256<T>);
+
+        W256 w => default;
+
+        [MethodImpl(Inline)]
+        public bit match<K>(Vector256<T> x, Vector256<T> y, K k = default)
+            where K : unmanaged, IBitLogicKind
+        {
+            var mSvc = MSvc.bitlogic<T>();
+            var vSvc = VSvc.vbitlogic<T>(w);
+            
+            var buffer = Fixed.alloc(w);
+            ref var dst = ref Fixed.head<T>(ref buffer);
+            
+            var count = vcount<T>(w);  
+            for(var i=0; i<count; i++)
                 seek(ref dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), k);
             var v1 = Vectors.vload(w, in dst);
             

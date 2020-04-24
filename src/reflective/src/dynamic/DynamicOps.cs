@@ -69,5 +69,11 @@ namespace Z0
             if (resolver == null) throw new ArgumentException("The dynamic method's IL has not been finalized.");
             return (byte[])resolver.GetType().GetField("m_code", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(resolver);
         }
+
+        public static RuntimeMethodHandle handle(DynamicMethod method)
+        {
+            var getMethodDescriptorInfo = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
+            return (RuntimeMethodHandle)getMethodDescriptorInfo.Invoke(method, null);
+        }
     }
 }

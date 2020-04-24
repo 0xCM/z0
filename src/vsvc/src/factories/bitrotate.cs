@@ -15,41 +15,41 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Rotrx128<T> vrotrx<T>(N128 w, T t = default)
             where T : unmanaged
-                => Rotrx128<T>.Op;
+                => default(Rotrx128<T>);
 
         [MethodImpl(Inline)]
         public static Rotrx256<T> vrotrx<T>(N256 w, T t = default)
             where T : unmanaged
-                => Rotrx256<T>.Op;
+                => default(Rotrx256<T>);
 
         [MethodImpl(Inline)]
         public static Rotlx128<T> vrotlx<T>(N128 w, T t = default)
             where T : unmanaged
-                => Rotlx128<T>.Op;
+                => default(Rotlx128<T>);
 
         [MethodImpl(Inline)]
         public static Rotlx256<T> vrotlx<T>(N256 w, T t = default)
             where T : unmanaged
-                => Rotlx256<T>.Op;
+                => default(Rotlx256<T>);
 
         [MethodImpl(Inline)]
         public static Rotl128<T> vrotl<T>(N128 w, T t = default)
             where T : unmanaged
-                => Rotl128<T>.Op;
+                => default(Rotl128<T>);
 
         [MethodImpl(Inline)]
         public static Rotl256<T> vrotl<T>(N256 w, T t = default)
             where T : unmanaged
-                => Rotl256<T>.Op;
+                => default(Rotl256<T>);
 
         [MethodImpl(Inline)]
         public static Rotr128<T> vrotr<T>(N128 w, T t = default)
             where T : unmanaged
-                => Rotr128<T>.Op;
+                => default(Rotr128<T>);
 
         [MethodImpl(Inline)]
         public static Rotr256<T> vrotr<T>(N256 w, T t = default)
             where T : unmanaged
-                => Rotr256<T>.Op; 
+                => default(Rotr256<T>); 
     }
 }

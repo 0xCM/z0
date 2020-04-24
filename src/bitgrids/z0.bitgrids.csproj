@@ -13,6 +13,7 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />
+    <ProjectReference Include="$(LSquare)" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
     public interface ITestQueue : ITestResultSink, IAppMsgQueue, IRecordSink<BenchmarkRecord>
     {
         IEnumerable<BenchmarkRecord> TakeBenchmarks();
@@ -15,5 +17,20 @@ namespace Z0
 
         void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Deposit(BenchmarkRecord.Define(opcount, duration, name));
+
+        void ReportBenchmark<W,T>(ISFunc f, int ops, Duration time, W w = default, T t = default)
+            where W : unmanaged, ITypeWidth
+            where T : unmanaged
+                => ReportBenchmark(TestCaseIdentity.Service.CaseName<W,T>(f), ops, time);
+
+        /// <summary>
+        /// Captures a duration and the number of operations executed within the period
+        /// </summary>
+        /// <param name="time">The running time</param>
+        /// <param name="opcount">The operation count</param>
+        /// <param name="label">The label associated with the measure, if specified</param>
+        BenchmarkRecord Benchmark(long opcount, Duration time, [Caller] string label = null)
+            => BenchmarkRecord.Define(opcount, time, label);
+
     }
 }

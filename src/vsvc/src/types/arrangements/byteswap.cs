@@ -15,14 +15,6 @@ namespace Z0
         public readonly struct ByteSwap128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vbyteswap";
-
-            public Vec128Kind<T> VKind => default;
-
-            public static ByteSwap128<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vbyteswap(x);
             
@@ -33,20 +25,11 @@ namespace Z0
         public readonly struct ByteSwap256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vbyteswap";
-
-            public Vec256Kind<T> VKind => default;
-
-            public static ByteSwap256<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => gvec.vbyteswap(x);
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gbits.byteswap(a);
         }
-
     }
 }

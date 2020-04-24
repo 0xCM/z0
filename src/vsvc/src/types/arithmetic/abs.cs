@@ -16,14 +16,6 @@ namespace Z0
         public readonly struct Abs128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vabs";
-
-            public Vec128Kind<T> VKind => default;
-            
-            public static Abs128<T> Op => default;
-             
-            public OpIdentity Id => Identify.sfunc(Name, VKind);
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) 
                 => gvec.vabs(x);
@@ -37,14 +29,6 @@ namespace Z0
         public readonly struct Abs256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vabs";
-             
-            public Vec256Kind<T> VKind => default;
-
-            public static Abs256<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) 
                 => gvec.vabs(x);

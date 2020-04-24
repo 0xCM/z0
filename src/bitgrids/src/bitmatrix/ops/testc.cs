@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit testc<T>(in BitMatrix<T> A)
             where T : unmanaged
-                => LSquares.testc(in A.Head);
+                => LSquare.testc(in A.Head);
                 
         /// <summary>
         /// Returns true if all bits in a matrix are enabled, false otherwise
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit testc<T>(in BitMatrix<T> A, in BitMatrix<T> M)
             where T : unmanaged
-                => LSquares.testc(in A.Head, in M.Head);
+                => LSquare.testc(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are enabled, false otherwise
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
         public static bit testc(in BitMatrix8 A)
-            => LSquares.testc(in A.Head);
+            => LSquare.testc(in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are enabled, false otherwise
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
         public static bit testc(in BitMatrix8 A, in BitMatrix8 M)
-            => LSquares.testc(in A.Head, in M.Head);
+            => LSquare.testc(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are enabled, false otherwise
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
         public static bit testc(in BitMatrix16 A)
-            => LSquares.testc(in A.Head);
+            => LSquare.testc(in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are enabled, false otherwise
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
         public static bit testc(in BitMatrix16 A, in BitMatrix16 M)
-            => LSquares.testc(in A.Head, in M.Head);
+            => LSquare.testc(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are enabled, false otherwise
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
         public static bit testc(in BitMatrix32 A)
-            => LSquares.testc(in A.Head);
+            => LSquare.testc(in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are enabled, false otherwise
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
         public static bit testc(in BitMatrix32 A, in BitMatrix32 M)
-            => LSquares.testc(in A.Head, in M.Head);
+            => LSquare.testc(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are enabled, false otherwise
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
         public static bit testc(in BitMatrix64 A)
-            => LSquares.testc(in A.Head);
+            => LSquare.testc(in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are enabled, false otherwise
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
         public static bit testc(in BitMatrix64 A, in BitMatrix64 M)
-            => LSquares.testc(in A.Head, in M.Head);
+            => LSquare.testc(in A.Head, in M.Head);
     }
 
 }

@@ -81,19 +81,18 @@ namespace Z0
         public virtual bool Enabled 
             => true;
 
-        /// <summary>
-        /// Captures a duration and the number of operations executed within the period
-        /// </summary>
-        /// <param name="time">The running time</param>
-        /// <param name="opcount">The operation count</param>
-        /// <param name="label">The label associated with the measure, if specified</param>
-        protected static BenchmarkRecord measured(long opcount, Duration time, [Caller] string label = null)
-            => BenchmarkRecord.Define(opcount, time, label);
-
         protected IAppPaths Paths => Context.AppPaths;
+
+        protected BenchmarkRecord Benchmark(long opcount, Duration time, [Caller] string label = null)
+            => Context.Benchmark(opcount, time, label);
         
         protected void ReportBenchmark(string name, long opcount, TimeSpan duration)
             => Context.ReportBenchmark(name,opcount, duration);
+
+        protected void ReportBenchmark<W,T>(ISFunc f, int ops, Duration time, W w = default, T t = default)
+            where W : unmanaged, ITypeWidth
+            where T : unmanaged
+                => Context.ReportBenchmark<W,T>(f,ops,time);
 
         protected void CheckAction(Action f, string name)
             => Context.CheckAction(f,name);         
@@ -124,14 +123,14 @@ namespace Z0
         protected void Notify(string msg, AppMsgKind? severity = null)
             => Queue.Notify(msg, severity);
 
-        int CasePadding
+        static int CasePadding
             => Reports.width(TestCaseField.Case);
 
-        IAppMsg TraceMsg(object title, object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
+        static IAppMsg TraceMsg(object title, object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
             => AppMsg.Colorize(string.Concat(string.Concat(caller, Chars.Space, title, Chars.Colon).PadRight(CasePadding), "| ", msg), color);
 
-        IAppMsg TraceMsg(object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
-            => AppMsg.Colorize(text.concat(text.concat(caller).PadRight(CasePadding), "| ", msg), color);
+        static IAppMsg TraceMsg(object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
+            => AppMsg.Colorize(String.Concat(String.Concat(caller).PadRight(CasePadding), "| ", msg), color);
 
         void trace(IAppMsg msg)
             => NotifyConsole(msg);

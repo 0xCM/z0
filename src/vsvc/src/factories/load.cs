@@ -15,11 +15,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static LoadSpan128<T> vloadspan<T>(N128 w, T t = default)
             where T : unmanaged
-                => LoadSpan128<T>.Op;
+                => default(LoadSpan128<T>);
 
         [MethodImpl(Inline)]
         public static LoadSpan256<T> vloadspan<T>(N256 w, T t = default)
             where T : unmanaged
-                => LoadSpan256<T>.Op;
+                => default(LoadSpan256<T>);
     }
 }

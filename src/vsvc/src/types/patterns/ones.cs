@@ -9,37 +9,22 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed;
+    using static Memories;
 
     partial class VSvcHosts
     {
         public readonly struct Ones128<T> : ISVPatternSource128<T>
             where T : unmanaged
         {
-            public const string Name = "vones";
-
-            public static Ones128<T> Op => default;
-
-            public Vec128Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
-
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => gvec.vones<T>(VKind);            
+            public Vector128<T> Invoke() => gvec.vones<T>(w128);            
         }
 
         public readonly struct Ones256<T> : ISVPatternSource256<T>
             where T : unmanaged
         {
-            public const string Name = "vones";
-
-            public static Ones256<T> Op => default;
-
-            public Vec256Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
-
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => gvec.vones<T>(VKind);
+            public Vector256<T> Invoke() => gvec.vones<T>(w256);
         }
     }
 }

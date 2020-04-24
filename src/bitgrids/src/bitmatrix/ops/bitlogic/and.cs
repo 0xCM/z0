@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LSquares.and(in A.Head, in B.Head, ref Z.Head);
+            LSquare.and(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         public static ref BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> dst)
             where T : unmanaged
         {
-            LSquares.and(in A.Head, in B.Head, ref dst.Head);
+            LSquare.and(in A.Head, in B.Head, ref dst.Head);
             return ref dst;
         }
  
@@ -60,7 +60,7 @@ namespace Z0
         public static BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LSquares.and(in A.Head, in B.Head, ref Z.Head);
+            LSquare.and(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline), And]
         public static ref readonly BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 dst)
         {
-            LSquares.and(in A.Head, in B.Head, ref dst.Head);
+            LSquare.and(in A.Head, in B.Head, ref dst.Head);
             return ref dst;
         }
 
@@ -86,7 +86,7 @@ namespace Z0
         public static BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LSquares.and(in A.Head, in B.Head, ref Z.Head);
+            LSquare.and(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -99,7 +99,7 @@ namespace Z0
         [MethodImpl(Inline), And]
         public static ref readonly BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 dst)
         {
-            LSquares.and(in A.Head, in B.Head, ref dst.Head);
+            LSquare.and(in A.Head, in B.Head, ref dst.Head);
             return ref dst;
         }
 
@@ -112,7 +112,7 @@ namespace Z0
         public static BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LSquares.and(in A.Head, in B.Head, ref Z.Head);
+            LSquare.and(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -125,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline), And]
         public static ref readonly BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 Z)
         {
-            LSquares.and(in A.Head, in B.Head, ref Z.Head);
+            LSquare.and(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -138,7 +138,7 @@ namespace Z0
         public static BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LSquares.and(in A.Head, in B.Head, ref Z.Head);
+            LSquare.and(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -151,7 +151,7 @@ namespace Z0
         [MethodImpl(Inline), And]
         public static ref readonly BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 dst)
         {
-            LSquares.and(in A.Head, in B.Head, ref dst.Head);
+            LSquare.and(in A.Head, in B.Head, ref dst.Head);
             return ref dst;
         }
     }

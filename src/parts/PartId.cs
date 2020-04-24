@@ -172,6 +172,8 @@ public enum PartId : ulong
 
     VCheck = 436,
 
+    LSquare = 9831,
+
     CoreTest = Core | Test,
 
     Svc = ushort.MaxValue + 1,

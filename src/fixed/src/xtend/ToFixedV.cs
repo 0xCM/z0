@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static UnaryOp128 ToFixed<T>(this Func<Vector128<T>, Vector128<T>> f)
             where T : unmanaged
-                => Fixed.vfix(f);
+                => FixedOps.vfix(f);
 
         /// <summary>
         /// Creates a fixed 128-bit binary operator from caller-supplied delegate
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinaryOp128 ToFixed<T>(this Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
             where T : unmanaged
-                => Fixed.vfix(f);
+                => FixedOps.vfix(f);
 
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinaryOp256 ToFixed<T>(this Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
             where T : unmanaged
-                => Fixed.vfix(f);
+                => FixedOps.vfix(f);
  
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
@@ -76,6 +76,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static UnaryOp256 ToFixed<T>(this Func<Vector256<T>,Vector256<T>> f)
             where T : unmanaged
-                => Fixed.vfix(f);
+                => FixedOps.vfix(f);
     }
 }

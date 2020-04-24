@@ -13,9 +13,11 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface ISFunc
     {
+        string Name => Control.ifempty(GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.Name), GetType().Name);        
+        
         /// <summary>
         /// The operation identity
         /// </summary>
-        OpIdentity Id  => OpIdentity.Empty;
+        OpIdentity Id => OpIdentity.Set(Name);        
     }
 }

@@ -16,31 +16,17 @@ namespace Z0
         public readonly struct LoadSpan128<T> : ISVFSpanLoad128<T>
             where T : unmanaged
         {
-            public const string Name = "vloadspan";
-
-            public static LoadSpan128<T> Op => default;
-
-            public Vec128Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
-
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n128,x,offset);            
+            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) 
+                => Vectors.vload(n128,x,offset);            
         }
 
         public readonly struct LoadSpan256<T> : ISVFSpanLoad256<T>
             where T : unmanaged
         {
-            public const string Name = "vloadspan";
-
-            public static LoadSpan256<T> Op => default;
-
-            public Vec256Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
-
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n256,x,offset);
+            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) 
+                => Vectors.vload(n256,x,offset);
         }
     }
 }

@@ -15,21 +15,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Reverse128<T> vreverse<T>(N128 w, T t = default)
             where T : unmanaged
-                => Reverse128<T>.Op;
+                => default(Reverse128<T>);
 
         [MethodImpl(Inline)]
         public static Reverse256<T> vreverse<T>(N256 w, T t = default)
             where T : unmanaged
-                => Reverse256<T>.Op;
+                => default(Reverse256<T>);
 
         [MethodImpl(Inline)]
         public static SwapHiLo128<T> vswaphl<T>(N128 w, T t = default)
             where T : unmanaged
-                => SwapHiLo128<T>.Op;
+                => default(SwapHiLo128<T>);
 
         [MethodImpl(Inline)]
         public static SwapHiLo256<T> vswaphl<T>(N256 w, T t = default)
             where T : unmanaged
-                => SwapHiLo256<T>.Op;
+                => default(SwapHiLo256<T>);
     }
 }

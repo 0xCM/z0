@@ -12,39 +12,19 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Rotlx128<T> : ISVShiftOp128<T>, IImm8UnaryResolver128<T>
+        [Closures(Integers), Rotlx]
+        public readonly struct Rotlx128<T> : ISVShiftOp128<T>
             where T : unmanaged
         {
-            public const string Name = "vrotlx";
-
-            public Vec128Kind<T> VKind => default;
-
-            public static Rotlx128<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
-            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
-                => Dynop.EmbedVUnaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),count);
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte count)
                 => gvec.vrotlx(x,count);            
         }
 
-        public readonly struct Rotlx256<T> : ISVShiftOp256<T>, IImm8UnaryResolver256<T>
+        [Closures(Integers), Rotlx]
+        public readonly struct Rotlx256<T> : ISVShiftOp256<T>
             where T : unmanaged
         {
-            public const string Name = "vrotlx";
-
-            public Vec256Kind<T> VKind => default;
-
-            public static Rotlx256<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
-            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
-                => Dynop.EmbedVUnaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),count);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte count) 
                 => gvec.vrotlx(x,count);

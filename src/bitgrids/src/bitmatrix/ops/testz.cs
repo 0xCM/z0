@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), TestZ, Closures(UnsignedInts)]
         public static bit testz<T>(in BitMatrix<T> A)
             where T : unmanaged
-                => LSquares.testz(in A.Head, in A.Head);
+                => LSquare.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), TestZ, Closures(UnsignedInts)]
         public static bit testz<T>(in BitMatrix<T> A, in BitMatrix<T> M)
             where T : unmanaged
-                => LSquares.testz(in A.Head, in M.Head);
+                => LSquare.testz(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are disabled, false otherwise
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix8 A)
-            => LSquares.testz(in A.Head, in A.Head);
+            => LSquare.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix8 A, in BitMatrix8 M)
-            => LSquares.testz(in A.Head, in M.Head);
+            => LSquare.testz(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are disabled, false otherwise
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix16 A)
-            => LSquares.testz(in A.Head, in A.Head);
+            => LSquare.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix16 A, in BitMatrix16 M)
-            => LSquares.testz(in A.Head, in M.Head);
+            => LSquare.testz(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are disabled, false otherwise
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix32 A)
-            => LSquares.testz(in A.Head, in A.Head);
+            => LSquare.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
         public static bit testz(in BitMatrix32 A, in BitMatrix32 M)
-            => LSquares.testz(in A.Head, in M.Head);
+            => LSquare.testz(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are disabled, false otherwise
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix64 A)
-            => LSquares.testz(in A.Head, in A.Head);
+            => LSquare.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -99,6 +99,6 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline), TestZ]
         public static bit testz(in BitMatrix64 A, in BitMatrix64 M)
-            => LSquares.testz(in A.Head, in M.Head);
+            => LSquare.testz(in A.Head, in M.Head);
     }
 }

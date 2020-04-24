@@ -15,31 +15,16 @@ namespace Z0
         public readonly struct Units128<T> : ISVPatternSource128<T>
             where T : unmanaged
         {
-            public const string Name = "vunits";
-
-            public static Units128<T> Op => default;
-
-            public Vec128Kind<T> VKind => default;
-
-            public OpIdentity Id => Identify.sfunc<T>(Name, VKind);
-
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => Data.vunits(VKind);            
+            public Vector128<T> Invoke() => Data.vunits(Kinds.vk128<T>());            
         }
 
         public readonly struct Units256<T> : ISVPatternSource256<T>
             where T : unmanaged
         {
-            public const string Name = "vunits";
-
-            public static Units256<T> Op => default;
-
-            public Vec256Kind<T> VKind => default;
-            public OpIdentity Id => Identify.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => Data.vunits<T>(VKind);
-
+            public Vector256<T> Invoke() => Data.vunits<T>(Kinds.vk256<T>());
         }
     }
 }

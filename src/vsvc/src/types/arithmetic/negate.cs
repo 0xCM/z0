@@ -16,14 +16,6 @@ namespace Z0
         public readonly struct Negate128<T> : ISVUnaryOp128D<T>
             where T : unmanaged
         {
-            public const string Name = "vnegate";
-
-            public Vec128Kind<T> VKind => default;
-
-            public static Negate128<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) 
                 => gvec.vnegate(x);
@@ -33,18 +25,10 @@ namespace Z0
                 => gmath.negate(a);
         }
 
-        [NumericClosures(AllNumeric), Negate]
+        [Closures(AllNumeric), Negate]
         public readonly struct Negate256<T> : ISVUnaryOp256D<T>
             where T : unmanaged
         {
-            public const string Name = "vnegate";
-
-            public Vec256Kind<T> VKind => default;
-
-            public static Negate256<T> Op => default;
-
-            public OpIdentity Id => Identify.sfunc(Name,VKind);
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) 
                 => gvec.vnegate(x);
