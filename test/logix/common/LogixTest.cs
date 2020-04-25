@@ -6,14 +6,10 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static Seed;
     using static Memories;
-    using static NumericOpApi;
-    using static BitLogix;
     
     using static BitLogicSpec;
     using static LogicEngine;
@@ -102,7 +98,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample< RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = A[i] & B[i];
@@ -127,7 +123,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample< RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.nand(A[i], B[i]);
@@ -152,7 +148,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample< RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = A[i] | B[i];
@@ -177,7 +173,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample< RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.nor(A[i], B[i]);
@@ -202,7 +198,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = A[i] ^ B[i];
@@ -227,7 +223,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.xnor(A[i], B[i]);
@@ -253,7 +249,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.impl(A[i], B[i]);
@@ -278,7 +274,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.nonimpl(A[i], B[i]);
@@ -303,7 +299,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOpApi.eval(op, A, B, ref C);
+                BitMatrixOps.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.not(A[i]);
@@ -326,7 +322,7 @@ namespace Z0.Logix
             var C = Random.BitMatrix<T>();
             var Z = BitMatrix.alloc<T>();
             var opcount = 0;
-            var Op = BitMatrixOpApi.refop<T>(opkind);
+            var Op = BitMatrixOps.refop<T>(opkind);
 
             clock.Start();
 
@@ -362,12 +358,12 @@ namespace Z0.Logix
 
             for(var i=0; i<CycleCount; i++)
             {            
-                BitMatrixOpApi.eval(op, A, B, ref Z);
+                BitMatrixOps.eval(op, A, B, ref Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    BitMatrixOpApi.eval(op, Z, A, ref Z);                    
-                    BitMatrixOpApi.eval(op, B, Z, ref Z); 
+                    BitMatrixOps.eval(op, Z, A, ref Z);                    
+                    BitMatrixOps.eval(op, B, Z, ref Z); 
                     opcount +=2;                   
                 }
             }
@@ -444,13 +440,11 @@ namespace Z0.Logix
             {   
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();
-                var result1 = NumericOpApi.eval(kind,a,b);    
-                //var result2 = BitVectorOpApi.eval(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
+                var result1 = NumericBits.eval(kind,a,b);    
                 var result2 = BitVectorLogix.Service.EvalDirect(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
-                //var result3 = BitVectorOpApi.evalspec(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result3 = BitVectorLogix.Service.EvalRef(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
-                var result4 = VectorOpApi.eval(kind, Vectors.vbroadcast(n128,a), Vectors.vbroadcast(n128,b)).ToScalar();
-                var result5 = VectorOpApi.eval(kind, Vectors.vbroadcast(n256,a), Vectors.vbroadcast(n256,b)).ToScalar();
+                var result4 = VLogixOps.eval(kind, Vectors.vbroadcast(n128,a), Vectors.vbroadcast(n128,b)).ToScalar();
+                var result5 = VLogixOps.eval(kind, Vectors.vbroadcast(n256,a), Vectors.vbroadcast(n256,b)).ToScalar();
                 Claim.eq(result1, result2);
                 Claim.eq(result2, result3);
                 Claim.eq(result3, result4);

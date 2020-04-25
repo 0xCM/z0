@@ -140,7 +140,7 @@ namespace Z0.Logix
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
                 var result = eval(x);
-                var expect = PredicateApi.eval(kind,a,b);
+                var expect = NumericBits.eval(kind,a,b);
                 Claim.eq(expect,result);            
             }
         }

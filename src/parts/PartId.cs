@@ -41,6 +41,8 @@ public enum PartId : ulong
     
     BitCore = 80, 
 
+    BitMatrix = 833,
+    
     BitsTest = BitSuite | Test,
 
     BitFields = 90, 

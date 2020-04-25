@@ -128,7 +128,5 @@ namespace Z0
                 default: throw Unsupported.value(sig(kind));
             }
         }
-
-
     }
 }

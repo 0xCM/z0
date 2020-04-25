@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static Seed;
     using static Memories;
 
-    using static VectorizedOps;
+    using static VLogix;
     
     using S = NumericBits;
 
@@ -142,8 +142,8 @@ namespace Z0.Logix
             for(var i=0; i< RepCount; i++)
             {                
                 expect = gvec.vlt(x,y);
-                actual = lt(x,y);
-                Claim.require(same(expect,actual));
+                actual = gvec.vlt(x,y);
+                Claim.require(gvec.vsame(expect,actual));
 
                 var a =Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -161,8 +161,8 @@ namespace Z0.Logix
             for(var i=0; i< RepCount; i++)
             {                
                 expect = gvec.vlt(x,y);
-                actual = lt(x,y);
-                Claim.require(same(expect,actual));
+                actual = gvec.vlt(x,y);
+                Claim.require(gvec.vsame(expect,actual));
 
                 var a =Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -181,8 +181,8 @@ namespace Z0.Logix
             for(var i=0; i< RepCount; i++)
             {                
                 expect = gvec.vgt(x,y);
-                actual = gt(x,y);
-                Claim.require(same(expect,actual));
+                actual = gvec.vgt(x,y);
+                Claim.require(gvec.vsame(expect,actual));
 
                 var a =Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -201,8 +201,8 @@ namespace Z0.Logix
             for(var i=0; i< RepCount; i++)
             {                
                 expect = gvec.vgt(x,y);
-                actual = gt(x,y);
-                Claim.require(same(expect,actual));
+                actual = gvec.vgt(x,y);
+                Claim.require(gvec.vsame(expect,actual));
 
                 var a =Vectors.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);

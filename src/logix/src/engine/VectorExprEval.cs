@@ -8,7 +8,6 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    //[ApiHost("expr.vector.eval", ApiHostKind.Generic)]
     static class VectorExprEval
     {
         [Op("eval_vec128_expr"), NumericClosures(NumericKind.Integers)]
@@ -58,13 +57,13 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryBitwiseOpExpr<Vector128<T>> x:
-                    return VectorOpApi.eval(x.OpKind, eval(x.Arg).Value);
+                    return VLogixOps.eval(x.OpKind, eval(x.Arg).Value);
                 case IBinaryBitwiseOpExpr<Vector128<T>> x:
-                    return VectorOpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
+                    return VLogixOps.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 case IShiftOpExpr<Vector128<T>> x:
-                    return VectorOpApi.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
+                    return VLogixOps.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
                 case ITernaryBitwiseOpExpr<Vector128<T>> x:
-                    return VectorOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
+                    return VLogixOps.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
                 default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
@@ -76,13 +75,13 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryBitwiseOpExpr<Vector256<T>> x:
-                    return VectorOpApi.eval(x.OpKind, eval(x.Arg).Value);
+                    return VLogixOps.eval(x.OpKind, eval(x.Arg).Value);
                 case IBinaryBitwiseOpExpr<Vector256<T>> x:
-                    return VectorOpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
+                    return VLogixOps.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 case IShiftOpExpr<Vector256<T>> x:
-                    return VectorOpApi.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
+                    return VLogixOps.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
                 case ITernaryBitwiseOpExpr<Vector256<T>> x:
-                    return VectorOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
+                    return VLogixOps.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
                 default: throw new NotSupportedException(expr.GetType().Name);
             }
         } 

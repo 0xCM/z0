@@ -7,11 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    [ApiHost]
-    public partial class BitMatrix : IApiHost<BitMatrix>
-    {        
-
-    }
 
     [ApiHost]
     public partial class BitGrid : IApiHost<BitGrid>
@@ -37,11 +32,6 @@ namespace Z0
 
     }
 
-    [ApiHost("bitmatrix.ops")]
-    public partial class BitMatrixOps : IApiHost<BitMatrixOps>
-    {
-
-    }
 
     [ApiHost]
     public static partial class GridLoad

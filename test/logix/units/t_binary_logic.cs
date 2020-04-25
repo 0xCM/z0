@@ -15,7 +15,7 @@ namespace Z0.Logix
 
     
     using BLK = BinaryLogicKind;
-    using BL = BitLogixOps;
+    using BL = BitLogix;
 
     public class t_binary_logic : LogixTest<t_binary_logic>
     {

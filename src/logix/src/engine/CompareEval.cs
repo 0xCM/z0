@@ -13,25 +13,26 @@ namespace Z0.Logix
     [ApiHost("expr.cmp.eval")]
     public static class CmpExprEval
     {
+        
         [Op("eval_cmp_expr"), Closures(Integers & ~NumericKind.U64)]
         public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
-                => NumericOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op("eval_cmp_pred"), Closures(Integers & ~NumericKind.U64)]
         public static bit eval<T>(IComparisonPredExpr<T> expr)
             where T : unmanaged
-                => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericBits.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op("eval_vcmp_expr128"), Closures(Integers & ~NumericKind.U64)]
         public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
-                => VectorOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => VLogixOps.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op("eval_vcmp_expr256"), Closures(Integers & ~NumericKind.U64)]
         public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
-                => VectorOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => VLogixOps.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Closures(Integers & ~NumericKind.U64)]
         static LiteralExpr<T> eval<T>(IExpr<T> expr)

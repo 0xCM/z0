@@ -7,7 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
 
-    //[ApiHost("expr.scalar.eval", ApiHostKind.Generic)]
     static class ScalarExprEval
     {
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)
@@ -35,18 +34,18 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryBitwiseOpExpr<T> x:
-                    return NumericOpApi.eval(x.OpKind, eval(x.Arg).Value);
+                    return NumericBits.eval(x.OpKind, eval(x.Arg).Value);
 
                 case IBinaryBitwiseOpExpr<T> x:
-                    return NumericOpApi.eval(x.OpKind, 
+                    return NumericBits.eval(x.OpKind, 
                         eval(x.LeftArg).Value, eval(x.RightArg).Value);
 
                 case IShiftOpExpr<T> x:
-                    return NumericOpApi.eval(x.OpKind, 
+                    return NumericBits.eval(x.OpKind, 
                         eval(x.Subject).Value, eval(x.Offset).Value);
 
                 case ITernaryBitwiseOpExpr<T> x:
-                    return NumericOpApi.eval(x.OpKind, 
+                    return NumericBits.eval(x.OpKind, 
                         eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.SecondArg).Value);
                         
                 default: throw new NotSupportedException(expr.GetType().Name);

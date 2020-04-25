@@ -7,7 +7,9 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static OpHelpers;
+    using static LogicSig;
+
+    using UAR = UnaryArithmeticKind;
 
     [ApiHost("expr.arith.eval")]
     public class ArithExprEval : IApiHost<ArithExprEval>
@@ -84,9 +86,9 @@ namespace Z0.Logix
         {
             switch(expr.OpKind)               
             {
-                case UnaryArithmeticKind.Inc: return inc(expr);
-                case UnaryArithmeticKind.Dec: return dec(expr);
-                case UnaryArithmeticKind.Negate: return negate(expr);
+                case UAR.Inc: return inc(expr);
+                case UAR.Dec: return dec(expr);
+                case UAR.Negate: return negate(expr);
                 default: throw new NotSupportedException(sig<T>(expr.OpKind));
             }
         }
@@ -94,7 +96,7 @@ namespace Z0.Logix
         [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
-                => NumericOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<T> inc<T>(IUnaryArithmeticOpExpr<T> a)

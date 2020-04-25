@@ -14,7 +14,7 @@
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(LSquare)" />
-    <ProjectReference Include="$(BitMatrix)" />
+
   </ItemGroup>
 
 </Project>

@@ -5,55 +5,49 @@
 namespace Z0.Logix
 {
     using System;
+    using System.Security;
 
     using static Seed;    
     using static Memories;
-    using static OpHelpers;
+    using static LogicSig;
 
     using BCK = BinaryComparisonKind;
 
+
     public static class PredicateApi
     {
-        /// <summary>
-        /// Specifies the supported comparison predicates
-        /// </summary>
-        public static ReadOnlySpan<BCK> ComparisonKinds
-            => array(
-                BCK.Eq, BCK.Neq, 
-                BCK.Lt, BCK.LtEq, 
-                BCK.Gt, BCK.GtEq );
-
-
-        [Op, Closures(Integers)]
-        public static bit eval<T>(BCK kind, T a, T b)
+        [Op, NumericClosures(Integers)]
+        public static T eval<T>(BinaryComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case BCK.Eq: return gmath.eq(a,b);
-                case BCK.Neq: return gmath.neq(a,b);
-                case BCK.Lt: return gmath.lt(a,b);
-                case BCK.LtEq: return gmath.lteq(a,b);
-                case BCK.Gt: return gmath.gt(a,b);
-                case BCK.GtEq: return gmath.gteq(a,b);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                case BCK.Eq: return NumericBits.equals(a,b);
+                case BCK.Neq: return NumericBits.neq(a,b);
+                case BCK.Lt: return NumericBits.lt(a,b);
+                case BCK.LtEq: return NumericBits.lteq(a,b);
+                case BCK.Gt: return NumericBits.gt(a,b);
+                case BCK.GtEq: return NumericBits.gteq(a,b);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, Closures(Integers)]
-        public static BinaryPred<T> lookup<T>(BCK kind)
-            where T : unmanaged            
+        [Op, NumericClosures(AllNumeric)]
+        public static BinaryOp<T> lookup<T>(BCK kind)
+            where T : unmanaged
         {
             switch(kind)
             {
-                case BCK.Eq: return gmath.eq;
-                case BCK.Neq: return gmath.neq;
-                case BCK.Lt: return gmath.lt;
-                case BCK.LtEq: return gmath.lteq;
-                case BCK.Gt: return gmath.gt;
-                case BCK.GtEq: return gmath.gteq;
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                case BCK.Eq: return NumericBits.equals;
+                case BCK.Neq: return NumericBits.neq;
+                case BCK.Lt: return NumericBits.lt;
+                case BCK.LtEq: return NumericBits.lteq;
+                case BCK.Gt: return NumericBits.gt;
+                case BCK.GtEq: return NumericBits.gteq;
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
+
+
     }
 }

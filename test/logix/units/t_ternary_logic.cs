@@ -9,8 +9,6 @@ namespace Z0.Logix
     using static Seed;
     using static Memories;
 
-    using BL = BitLogixOps;
-
     public class t_ternary_logic : LogixTest<t_ternary_logic>
     {
         protected override int RepCount => Pow2.T08;
@@ -18,7 +16,7 @@ namespace Z0.Logix
         BitLogix bitlogix => BitLogix.Service;
 
         ReadOnlySpan<TernaryLogicKind> TernaryKinds
-            => NumericOpApi.TernaryLogicKinds;
+            => NumericBits.TernaryLogicKinds;
         
         public void op_identities()
         {                         
@@ -70,7 +68,7 @@ namespace Z0.Logix
                 var c = Random.BitVector<T>();
                 BitVector<T> x = NumericBits.select(a.Scalar, b.Scalar, c.Scalar);
                 for(var j=0; j<x.Width; j++)
-                    Claim.eq(x[j], BL.select(a[j],b[j],c[j]));
+                    Claim.eq(x[j], BitLogix.select(a[j],b[j],c[j]));
             }
 
         }
@@ -83,7 +81,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n);
                 var b = Random.CpuVector<T>(n);
                 var c = Random.CpuVector<T>(n);
-                var x = VectorizedOps.select(a,b,c);
+                var x = gvec.vselect(a,b,c);
 
                 var sa = a.ToSpan();
                 var sb = b.ToSpan();
@@ -105,7 +103,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n);
                 var b = Random.CpuVector<T>(n);
                 var c = Random.CpuVector<T>(n);
-                var x = VectorizedOps.select(a,b,c);
+                var x = gvec.vselect(a,b,c);
 
                 var sa = a.ToSpan();
                 var sb = b.ToSpan();
@@ -125,7 +123,7 @@ namespace Z0.Logix
             var b = convert<T>(0b1100_1100);
             var c = convert<T>(0b1010_1010);
             var d = convert<T>(0b1111_1111);
-            var f = NumericOpApi.lookup<T>(id);
+            var f = NumericBits.lookup<T>(id);
             var actual = convert<T,byte>(gmath.and(f(a,b,c), d));
             var expect = (byte)id;
             Claim.eq(expect.FormatHex(), actual.FormatHex());
@@ -146,7 +144,7 @@ namespace Z0.Logix
                     u[j] = bitlogix.Evaluate(kind, a[j], b[j], c[j]);
                 
                 
-                BitVector<T> v = NumericOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
+                BitVector<T> v = NumericBits.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
                     Notify($"Equivalence failed for ternary op {kind}:{Identify.numeric<T>()}");

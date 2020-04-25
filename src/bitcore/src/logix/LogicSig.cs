@@ -44,6 +44,26 @@ namespace Z0
             where T : unmanaged
                 => text.concat(format(kind), Chars.Colon, keyword<T>());
 
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
+        public static string sig<T>(BitShiftKind kind)
+            where T : unmanaged
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
+
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
+        public static string sig<T>(BinaryComparisonKind kind)
+            where T : unmanaged
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
+
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
+        public static string sig<T>(UnaryArithmeticKind kind)
+            where T : unmanaged
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
+
+        [MethodImpl(Inline), Op, NumericClosures(Integers)]
+        public static string sig<T>(BinaryArithmeticKind kind)
+            where T : unmanaged
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
+
         public static string format(ULK kind)                
             => kind.ToString().ToLower();
 

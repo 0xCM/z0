@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
     using System.IO;
@@ -10,9 +10,7 @@ namespace Z0.Logix
     using static Seed;    
     using static Memories;
 
-    using Api = BitLogix;
-
-    public static class TruthTables
+    public static class TabularTruth
     {
         static bit on => bit.On;
         
@@ -24,7 +22,7 @@ namespace Z0.Logix
         /// Computes a the signature, also referred to as the truth vector, for an identified unary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector4 sig(UnaryLogicKind kind)
+        public static BitVector4 Vector(UnaryLogicKind kind)
         {
             var x = BitVector4.Zero;
             x[0] = bitlogix.Evaluate(kind, off);
@@ -36,7 +34,7 @@ namespace Z0.Logix
         /// Computes a the signature, also referred to as the truth vector, for an identified binary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector4 sig(BinaryLogicKind kind)
+        public static BitVector4 Vector(BinaryLogicKind kind)
         {
             var x = BitVector.alloc(n4);
             x[0] = bitlogix.Evaluate(kind, off, off);
@@ -50,7 +48,7 @@ namespace Z0.Logix
         /// Computes a the signature, also referred to as the truth vector, for an identified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector8 sig(TernaryLogicKind kind)
+        public static BitVector8 Vector(TernaryLogicKind kind)
         {
             var x = BitVector8.Zero;
             x[0] = bitlogix.Evaluate(kind, off,off,off);
@@ -68,10 +66,10 @@ namespace Z0.Logix
         /// Constructs a canonical vector that defines a kind-identified operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector16 definition(BinaryLogicKind kind)
+        public static BitVector16 Define(BinaryLogicKind kind)
         {
             var dst = BitVector.alloc(n16);
-            var s = ((byte)sig(kind)).ToBitString().Truncate(4);            
+            var s = ((byte)Vector(kind)).ToBitString().Truncate(4);            
             var f = bitlogix.Lookup(kind);
             dst[0] = off;
             dst[1] = off;
@@ -92,7 +90,7 @@ namespace Z0.Logix
             return dst;
         }
 
-        public static BitMatrix<N2,N2,byte> build(UnaryLogicKind kind)
+        public static BitMatrix<N2,N2,byte> BuildTruth(UnaryLogicKind kind)
         {
             var f = bitlogix.Lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
@@ -101,7 +99,7 @@ namespace Z0.Logix
             return table;            
         }
 
-        public static BitMatrix<N4,N3,byte> build(BinaryLogicKind kind)
+        public static BitMatrix<N4,N3,byte> BuildTruth(BinaryLogicKind kind)
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = bitlogix.Lookup(kind);
@@ -112,7 +110,7 @@ namespace Z0.Logix
             return tt;
         }
 
-        public static BitMatrix<N8,N4,byte> build(TernaryLogicKind kind)
+        public static BitMatrix<N8,N4,byte> BuildTruth(TernaryLogicKind kind)
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = bitlogix.Lookup(kind);
@@ -127,65 +125,65 @@ namespace Z0.Logix
             return tt;
         }
 
-        public static void emit(TextWriter dst, ReadOnlySpan<UnaryLogicKind> kinds)
+        public static void WriteTruth(TextWriter dst, ReadOnlySpan<UnaryLogicKind> kinds)
         {
             for(var i=0; i<kinds.Length; i++)
-                emit(kinds[i],dst);
+                WriteTruth(kinds[i],dst);
         }
 
-        public static void emit(TextWriter dst, ReadOnlySpan<BinaryLogicKind> kinds)
+        public static void WriteTruth(TextWriter dst, ReadOnlySpan<BinaryLogicKind> kinds)
         {
             for(var i=0; i<kinds.Length; i++)
-                emit(kinds[i],dst);
+                WriteTruth(kinds[i],dst);
         }
 
-        public static void emit(TextWriter dst, ReadOnlySpan<TernaryLogicKind> kinds)
+        public static void WriteTruth(TextWriter dst, ReadOnlySpan<TernaryLogicKind> kinds)
         {
             for(var i=0; i<kinds.Length; i++)
-                emit(kinds[i],dst);
+                WriteTruth(kinds[i],dst);
         }
 
-        public static void emit(TextWriter dst, ArityValue arity)
+        public static void WriteTruth(TextWriter dst, ArityValue arity)
         {
             switch(arity)
             {
 
                 case ArityValue.Unary: 
-                    emitUnary(dst); 
+                    WriteUnaryTruth(dst); 
                     break;
                 case ArityValue.Binary: 
-                    emitBinary(dst); 
+                    WriteBinaryTruth(dst); 
                     break;
                 case ArityValue.Ternary: 
-                    emitTernary(dst); 
+                    WriteTernaryTruth(dst); 
                     break;
                 default: 
                     throw Unsupported.value(arity);
             }
         }
 
-        static BitMatrix<N2,N2,byte> emit(UnaryLogicKind kind, TextWriter dst)
+        static BitMatrix<N2,N2,byte> WriteTruth(UnaryLogicKind kind, TextWriter dst)
         {
-            var table = build(kind);
+            var table = BuildTruth(kind);
             table.emit(kind,dst);
             return table;
         }
 
-        static BitMatrix<N4,N3,byte> emit(BinaryLogicKind kind, TextWriter dst)
+        static BitMatrix<N4,N3,byte> WriteTruth(BinaryLogicKind kind, TextWriter dst)
         {
-            var table = build(kind);
+            var table = BuildTruth(kind);
             table.emit(kind,dst);
             return table;
         }
 
-        static BitMatrix<N8,N4,byte> emit(TernaryLogicKind kind, TextWriter dst)
+        static BitMatrix<N8,N4,byte> WriteTruth(TernaryLogicKind kind, TextWriter dst)
         {
-            var table = build(kind);
+            var table = BuildTruth(kind);
             table.emit(kind,dst);
             return table;
         }
 
-        static void emitUnary(TextWriter dst)
+        static void WriteUnaryTruth(TextWriter dst)
         {
             var ops = bitlogix.UnaryOpKinds.ToArray();
             for(var i=0; i< ops.Length; i++)
@@ -198,7 +196,7 @@ namespace Z0.Logix
             }
         }
 
-        static void emitBinary(TextWriter dst)
+        static void WriteBinaryTruth(TextWriter dst)
         {
             for(var i=0; i< 16; i++)
             {
@@ -215,7 +213,7 @@ namespace Z0.Logix
             }
         }
 
-        static void emitTernary(TextWriter dst)
+        static void WriteTernaryTruth(TextWriter dst)
         {
             for(var i=0; i< 256; i++)
             {

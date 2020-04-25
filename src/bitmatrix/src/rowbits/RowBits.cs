@@ -113,14 +113,15 @@ namespace Z0
             get => ref Unsafe.As<T,BitVector<T>>(ref head(data, row));
         }
 
-        public bit this[int row, int col]
-        {
-            [MethodImpl(Inline)]
-            get => BitGrid.readbit(Width, in Head, row, col); 
+        
+        // public bit this[int row, int col]
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => BitGrid.readbit(Width, in Head, row, col); 
 
-            [MethodImpl(Inline)]
-            set => BitGrid.setbit(Width, row, col, value, ref Head);
-        }
+        //     [MethodImpl(Inline)]
+        //     set => BitGrid.setbit(Width, row, col, value, ref Head);
+        // }
 
         [MethodImpl(Inline)]
         public RowBits<S> As<S>()

@@ -13,26 +13,6 @@ namespace Z0.Logix
     internal static class OpHelpers
     {
 
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BitShiftKind kind)
-            where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryComparisonKind kind)
-            where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(UnaryArithmeticKind kind)
-            where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryArithmeticKind kind)
-            where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
-
         public static void Set<T>(IVariedExpr<T> expr, params IExpr<T>[] values)
             where T : unmanaged
         {

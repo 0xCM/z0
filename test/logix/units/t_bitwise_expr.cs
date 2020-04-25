@@ -227,7 +227,7 @@ namespace Z0.Logix
         
         public void check_ternary_ops()
         {
-            Control.iter(Spans.set(VectorOpApi.TernaryBitLogicKinds, NumericOpApi.TernaryLogicKinds),
+            Control.iter(Spans.set(VLogixOps.TernaryBitLogicKinds, NumericBits.TernaryLogicKinds),
                 check_ternary_ops);
         }
 
@@ -246,7 +246,7 @@ namespace Z0.Logix
             var b = convert<T>(0b1100_1100);
             var c = convert<T>(0b1010_1010);
             var mask = convert<T>(0xFF);
-            var f = NumericOpApi.lookup<T>(id);
+            var f = NumericBits.lookup<T>(id);
             var actual = convert<T,byte>(gmath.and(f(a,b,c), mask));
             var expect = (byte)id;
             Claim.eq(expect.FormatHex(), actual.FormatHex());
@@ -256,9 +256,9 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var BL = bitlogix.Lookup(id);
-            var SC = NumericOpApi.lookup<T>(id);
-            var V128 = VectorOpApi.lookup<T>(n128,id);
-            var V256 = VectorOpApi.lookup<T>(n256,id);
+            var SC = NumericBits.lookup<T>(id);
+            var V128 = VLogixOps.lookup<T>(n128,id);
+            var V256 = VLogixOps.lookup<T>(n256,id);
             check_op_identity<T>(id);
 
             for(var sample = 0; sample< RepCount; sample++)
@@ -304,7 +304,7 @@ namespace Z0.Logix
                 var a = Random.Next<T>();
                 v1.Set(a);
                 BitVector<T> actual = LogicEngine.eval(expr).Value;
-                BitVector<T> expect = NumericOpApi.eval(kind,a);
+                BitVector<T> expect = NumericBits.eval(kind,a);
                 Claim.eq(actual,expect);                                            
             }
         }
@@ -322,7 +322,7 @@ namespace Z0.Logix
                 var b = Random.Next<T>();
                 v1.Set(a);
                 v2.Set(b);
-                T expect = NumericOpApi.eval(op,a,b);
+                T expect = NumericBits.eval(op,a,b);
                 T result1 = LogicEngine.eval(expr);
                 //T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
                 var result2 = BitVectorLogix.Service.EvalDirect(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
@@ -342,7 +342,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n128);
                 v1.Set(a);   
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = VectorOpApi.eval(op,a);
+                Vector128<T> expect = VLogixOps.eval(op,a);
                 Claim.veq(actual,expect);                            
             }
         }
@@ -358,7 +358,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n256);
                 v1.Set(a);   
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = VectorOpApi.eval(op,a);
+                Vector256<T> expect = VLogixOps.eval(op,a);
                 Claim.veq(actual,expect);                            
             }
         }
@@ -377,7 +377,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 v2.Set(b);
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = VectorOpApi.eval(op,a,b);
+                Vector128<T> expect = VLogixOps.eval(op,a,b);
                 Claim.veq(actual,expect);                            
             }
         }
@@ -397,7 +397,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 v2.Set(b);
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = VectorOpApi.eval(op,a,b);
+                Vector256<T> expect = VLogixOps.eval(op,a,b);
                 Claim.veq(actual,expect);                            
             }
         }
