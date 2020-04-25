@@ -7,13 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Monadic;
+
     /// <summary>
-    /// A value that realizes exactly one of two alternatives, 
-    /// named "left" and "right"
+    /// A value that realizes exactly one of two alternatives
     /// </summary>
     /// <typeparam name="L">The type of the left alternative</typeparam>
     /// <typeparam name="R">The type of the right alternative</typeparam>
-    public readonly struct Either<L, R> : IEither<L,R>, IEquatable<Either<L, R>>
+    public readonly struct Either<L,R> : IEither<L,R>, IEquatable<Either<L,R>>
     {
         /// <summary>
         /// Tracks the chosen alternative
@@ -30,22 +31,27 @@ namespace Z0
         /// </summary>
         public R Right { get; }
 
+        [MethodImpl(Inline)]
         public static implicit operator Either<L,R>(L left)
-            => new Either<L, R>(left);
+            => new Either<L,R>(left);
 
-        public static implicit operator Either<L, R>(R right)
-            => new Either<L, R>(right);
+        [MethodImpl(Inline)]
+        public static implicit operator Either<L,R>(R right)
+            => new Either<L,R>(right);
 
-        public static bool operator ==(Either<L, R> x, Either<L, R> y)
+        [MethodImpl(Inline)]
+        public static bool operator ==(Either<L,R> x, Either<L,R> y)
             => x.Equals(y);
 
-        public static bool operator !=(Either<L, R> x, Either<L, R> y)
+        [MethodImpl(Inline)]
+        public static bool operator !=(Either<L,R> x, Either<L,R> y)
             => !x.Equals(y);
 
         /// <summary>
         /// Constructs a left-valued alternative
         /// </summary>
         /// <param name="left">The alternative value</param>
+        [MethodImpl(Inline)]
         internal Either(L left)
         {
             this.Left = left;
@@ -57,6 +63,7 @@ namespace Z0
         /// Constructs a right-valued alternative
         /// </summary>
         /// <param name="right">The alternative value</param>
+        [MethodImpl(Inline)]
         internal Either(R right)
         {
             this.Right = right;
@@ -82,7 +89,7 @@ namespace Z0
         /// Invokes an action if the alternative is left-valued
         /// </summary>
         /// <param name="action">The action to invoke</param>
-        public Either<L, R> OnLeft(Action<L> action)
+        public Either<L,R> OnLeft(Action<L> action)
         {
             if (Selected == EitherCase.Left)
                 action(Left);
@@ -93,7 +100,7 @@ namespace Z0
         /// Invokes an action if the alternative is right values
         /// </summary>
         /// <param name="action">The action to invoke</param>
-        public Either<L, R> OnRight(Action<R> action)
+        public Either<L,R> OnRight(Action<R> action)
         {
             if (Selected == EitherCase.Right)
                 action(Right);
@@ -114,29 +121,41 @@ namespace Z0
         /// <typeparam name="Y">The type of the output value</typeparam>
         /// <param name="ifLeft">The transformation to invoke when the alternative is left-valued</param>
         /// <param name="ifRight">The transformation to invoke when the alternative is right-valued</param>
-        public Y Apply<Y>(Func<L, Y> ifLeft, Func<R, Y> ifRight)
+        public Y Apply<Y>(Func<L,Y> ifLeft, Func<R,Y> ifRight)
             => IsLeft ? ifLeft(Left) : ifRight(Right);
 
-        public Either<L, Y> Select<Y>(Func<R, Y> selector)
-                => IsRight  ? selector(Right) : new Either<L, Y>(Left);
+        /// <summary>
+        /// Defines a right-biased Linq-monad projector
+        /// </summary>
+        /// <param name="selector">A function that projects a right value, if extant, onto a target value</param>
+        /// <typeparam name="Y">The target value type</typeparam>
+        public Either<L,Y> Select<Y>(Func<R,Y> selector)
+            => IsRight  ? selector(Right) : new Either<L,Y>(Left);
 
-        public Either<L, Z> SelectMany<Y,Z>(Func<R, Either<L, Y>> selector, Func<R, Y, Z> projector)
+        /// <summary>
+        /// Defines a right-biased Linq-modad join
+        /// </summary>
+        /// <param name="selector">A function that lifts a right value, if extant, into monadic space</param>
+        /// <param name="projector">A function that projects a right monadic source value onto a target-parametric target monadic value</param>
+        /// <typeparam name="Y">The join type</typeparam>
+        /// <typeparam name="Z">The target type</typeparam>
+        public Either<L,Z> SelectMany<Y,Z>(Func<R, Either<L,Y>> selector, Func<R,Y,Z> projector)
         {
             if (IsLeft)
-                return new Either<L, Z>(Left);
+                return new Either<L,Z>(Left);
 
             var selected = selector(Right);
             if (selected.IsLeft)
-                return new Either<L, Z>(selected.Left);
+                return new Either<L,Z>(selected.Left);
             else
-                return new Either<L, Z>(projector(Right, selected.Right));
+                return new Either<L,Z>(projector(Right, selected.Right));
         }
 
         /// <summary>
-        /// Adjudicates structural equality
+        /// Determines structural equality
         /// </summary>
         /// <param name="other">The other either</param>
-        public bool Equals(Either<L, R> other)
+        public bool Equals(Either<L,R> other)
         {
             if (IsLeft && other.IsLeft)
                 return Equals(Left, other.Left);

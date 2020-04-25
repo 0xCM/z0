@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static Seed;
+    using static Monadic;
     using static Option;
 
     partial class XTend
@@ -103,26 +103,40 @@ namespace Z0
                 return satisfied[0];
         }
 
-        public static P First<P>(this Option<P[]> x)
-            => x.Items().First();
+        /// <summary>
+        /// Returns the value of the first element of an optional array, if extant; otherwise, raises an exception
+        /// </summary>
+        /// <param name="src">The optional array</param>
+        /// <typeparam name="P">The array element type</typeparam>
+        public static P First<P>(this Option<P[]> src)
+            => src.Items().First();
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Returns the value of the first element of an optional array, if extant; otherwise, returns a parametric default
+        /// </summary>
+        /// <param name="src">The optional array</param>
+        /// <typeparam name="P">The array element type</typeparam>
         public static P FirstOrDefault<P>(this Option<P[]> x)
             => x.Items().FirstOrDefault();
 
         /// <summary>
-        /// Searches for the first element in the stream that satisfies a predicate and returns the
-        /// element if found; otherwise, returns None
+        /// Searches for the first element in the stream that satisfies a predicate and returns the element if found; otherwise, returns None
         /// </summary>
         /// <typeparam name="X">The stream item type</typeparam>
-        /// <param name="stream">The stream to search</param>
+        /// <param name="src">The stream to search</param>
         /// <param name="predicate">The predicate to match</param>
-        public static Option<X> TryGetFirst<X>(this IEnumerable<X> stream, Func<X,bool> predicate)
-            => stream.FirstOrDefault(predicate);
+        public static Option<X> TryGetFirst<X>(this IEnumerable<X> src, Func<X,bool> predicate)
+            => src.FirstOrDefault(predicate);
 
-        public static Option<T> TryGetFirst<T>(this IEnumerable<Option<T>> potentials)
+        /// <summary>
+        /// Returns the the first realized value as a valued option, if extant, from a stream of potential values; 
+        /// otherwise, returns a non-valued option
+        /// </summary>
+        /// <param name="src">The potentials</param>
+        /// <typeparam name="T">The potential value type</typeparam>
+        public static Option<T> TryGetFirst<T>(this IEnumerable<Option<T>> src)
         {
-            var o = potentials.Where(x => x.IsSome()).ToList();
+            var o = src.Where(x => x.IsSome()).ToList();
             return o.Any() ? o.First() : Option.none<T>();
         }
 

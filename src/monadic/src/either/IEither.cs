@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    /// <summary>
+    /// Defines nonparametric either attributes 
+    /// </summary>
     public interface IEither : IMonadic
     {
         /// <summary>
@@ -20,18 +23,22 @@ namespace Z0
         bool IsRight { get; }
     }
 
-    public interface IEither<L, R> : IEither
+    /// <summary>
+    /// Characterizes a parametric disjoint union of arity two, where exactly one state
+    /// is populated for a given instantitation
+    /// </summary>
+    /// <typeparam name="L">The left potential value</typeparam>
+    /// <typeparam name="R">The right potential value</typeparam>
+    public interface IEither<L,R> : IEither
     {
         /// <summary>
         /// If <see cref="IsLeft"/> is true, specifies the value of the left alternative
         /// </summary>
         L Left { get; }
 
-
         /// <summary>
         /// If <see cref="IsRight"/> is true, specifies the value of the right alternative
         /// </summary>
         R Right { get; }
-
     }
 }

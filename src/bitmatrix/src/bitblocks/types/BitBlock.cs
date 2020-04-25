@@ -156,7 +156,7 @@ namespace Z0
                 count += gbits.pop(data[i]);
             return count;
         }
-                    
+                                        
         [MethodImpl(Inline)]
         public bool Equals(in BitBlock<T> y)
             => data.Identical(y.data);

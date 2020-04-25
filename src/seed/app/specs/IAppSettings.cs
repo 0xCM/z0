@@ -35,7 +35,7 @@ namespace Z0
 
     public interface IAppSettingSet : ICustomFormattable
     {
-        IEnumerable<IAppSetting> Settings{get;}
+        IEnumerable<IAppSetting> Settings {get;}
         
         void Save(FilePath dst);        
     }

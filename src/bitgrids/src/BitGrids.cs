@@ -20,11 +20,6 @@ namespace Z0
 
     }
 
-    [ApiHost]
-    public partial class BitBlocks : IApiHost<BitBlocks>
-    {
-
-    }
 
     [ApiHost]
     public partial class SubGrid : IApiHost<SubGrid>

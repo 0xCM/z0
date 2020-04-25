@@ -112,15 +112,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Unsafe.As<T,BitVector<T>>(ref head(data, row));
         }
-
         
         // public bit this[int row, int col]
         // {
         //     [MethodImpl(Inline)]
-        //     get => BitGrid.readbit(Width, in Head, row, col); 
+        //     get => BitBlocks.readbit(Width, in Head, row, col); 
 
         //     [MethodImpl(Inline)]
-        //     set => BitGrid.setbit(Width, row, col, value, ref Head);
+        //     set => BitBlocks.setbit(Width, row, col, value, ref Head);
         // }
 
         [MethodImpl(Inline)]

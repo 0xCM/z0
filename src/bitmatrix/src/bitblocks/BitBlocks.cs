@@ -10,8 +10,53 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+    [ApiHost]
+    public partial class BitBlocks : IApiHost<BitBlocks>
+    {
+
+    }
+
     partial class BitBlocks
     {
+        /// <summary>
+        /// Reads a cell determined by a linear bit position
+        /// </summary>
+        /// <param name="bitpos">The linear bit position</param>
+        /// <param name="src">A reference to grid storage</param>
+        /// <typeparam name="T">The storage segment type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ref readonly X readcell<X>(in X src, int bitpos)
+            where X : unmanaged
+                => ref skip(in src, bitpos / bitsize<X>()); 
+
+        [MethodImpl(Inline)]
+        internal static bit readbit<X>(in X src, int bitpos)
+            where X : unmanaged   
+                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % bitsize<X>()));
+
+        /// <summary>
+        /// Reads/manipulates a cell identified by a linear bit position
+        /// </summary>
+        /// <param name="bitpos">The linear bit position</param>
+        /// <param name="src">A reference to grid storage</param>
+        /// <typeparam name="T">The storage segment type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        internal static ref X cell<X>(ref X src, int bitpos)
+            where X : unmanaged
+                => ref seek(ref src, bitpos / bitsize<X>()); 
+
+        /// <summary>
+        /// Sets the state of a grid bit identified by its linear position
+        /// </summary>
+        /// <param name="bitpos">The 0-based linear bit index</param>
+        /// <param name="state">The source state</param>
+        /// <param name="dst">A reference to the grid storage</param>
+        /// <typeparam name="T">The grid storage segment type</typeparam>
+        [MethodImpl(Inline)]
+        internal static void setbit<X>(int bitpos, bit state, ref X dst)    
+            where X : unmanaged
+                => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % bitsize<X>()), state);      
+
         /// <summary>
         /// Transfers span content to a bitblock without checks
         /// </summary>

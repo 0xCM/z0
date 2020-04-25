@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Monadic;
     using static Option;
 
     partial class XTend
@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="X">The source type</typeparam>
         /// <typeparam name="Y">The target type</typeparam>
-        public static Y MapRequired<X, Y>(this Option<X> x, Func<X, Y> f)
+        public static Y MapRequired<X,Y>(this Option<X> x, Func<X, Y> f)
             => f(x.Require());
 
         [MethodImpl(Inline)]

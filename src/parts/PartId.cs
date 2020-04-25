@@ -123,7 +123,10 @@ public enum PartId : ulong
     
     Polyrand = 420,
 
+    Monadic = 769,
+    
     Seed = 802, 
+    
 
     SeedTest = Seed | Test,
     

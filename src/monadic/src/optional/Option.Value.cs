@@ -8,15 +8,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Monadic;
 
     partial class XTend
     {            
-       public static void OnValue<T>(this T? x, Action<T> f)
+       /// <summary>
+       /// Invokes an action if a nullable value type is valued
+       /// </summary>
+       /// <param name="src">The potential source value</param>
+       /// <param name="f">The action to invoke over a realized value, if extant</param>
+       /// <typeparam name="T">The potential value type</typeparam>
+       public static void OnValue<T>(this T? src, Action<T> f)
             where T : struct
         {
-            if(x.HasValue)
-                f(x.Value);
+            if(src.HasValue)
+                f(src.Value);
         }                
 
         /// <summary>

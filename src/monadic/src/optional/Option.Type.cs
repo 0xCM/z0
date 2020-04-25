@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Monadic;
 
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -17,7 +17,7 @@ namespace Z0
     /// Represents a potential value
     /// </summary>
     /// <typeparam name="T">The potential value type</typeparam>
-    public readonly struct Option<T> :  IOption<T>
+    public readonly struct Option<T> :  IOption<Option<T>,T>
     {
         /// <summary>
         /// The encapsulated value, iff Exists is true
@@ -29,6 +29,9 @@ namespace Z0
         /// </summary>
         public bool Exists { get; }
 
+        /// <summary>
+        /// Exposes the underlying data, if extant; otherwise, yeilds the default potential value, which may of course be null
+        /// </summary>
         public T Value
         {
             [MethodImpl(Inline)]
@@ -102,7 +105,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !(Option<T> x)
             => !x.Exists;
-
 
         /// <summary>
         /// Returns true if the value exists
@@ -349,7 +351,6 @@ namespace Z0
 
         public override string ToString()
             => this.MapValueOrElse(value => value?.ToString() ?? string.Empty, () => string.Empty);
-
 
         public override bool Equals(object obj)
             => obj is Option<T> x && Equals(x);

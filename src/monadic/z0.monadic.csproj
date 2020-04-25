@@ -5,11 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>    
-
+  <ItemGroup>
     <ProjectReference Include="$(Parts)" />
-    <ProjectReference Include="$(Monadic)" />
-
   </ItemGroup>
 
 </Project>

@@ -99,7 +99,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => this[row][col];
             
-
             [MethodImpl(Inline)]
             set
             {
@@ -161,7 +160,6 @@ namespace Z0
                 cv[row] = this[row, col];
             return cv;
         }
-
 
         /// <summary>
         /// Sets all the bits to align with the source value

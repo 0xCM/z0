@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
 
     /// <summary>
-    /// Defines primar api surface for rowbit manipulation
+    /// Defines primary api surface for rowbit manipulation
     /// </summary>
     [ApiHost]
     public class RowBits : IApiHost<RowBits>

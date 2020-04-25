@@ -8,20 +8,30 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Monadic;
     using static Option;
 
     partial class XTend
     {
+        /// <summary>
+        /// Lifts a nullable value type into the option monad
+        /// </summary>
+        /// <param name="src">The potential value</param>
+        /// <typeparam name="T">The potential value type</typeparam>
         [MethodImpl(Inline)]
         public static Option<T> ToOption<T>(this T? src)
             where T : struct
                 =>  src.HasValue ? src.Value : Option.none<T>();
 
+        /// <summary>
+        /// Extracts a nulluable value from an option over a nullable value type
+        /// </summary>
+        /// <param name="src">The potential value</param>
+        /// <typeparam name="T">The potential value type</typeparam>
         [MethodImpl(Inline)]
-        public static T? ToNullable<T>(this Option<T> x) 
+        public static T? ToNullable<T>(this Option<T> src) 
             where T : struct
-                => x.IsSome() ? new T?(x.ValueOrDefault()) : (T?)null;
+                => src.IsSome() ? new T?(src.ValueOrDefault()) : (T?)null;
 
         /// <summary>
         /// Lifts a type value to an option that is valued iff the source type is non-void

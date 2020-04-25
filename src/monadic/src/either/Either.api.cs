@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Monadic;
+
     /// <summary>
     /// Constructs and manipulates <see cref="IEither"/> values
     /// </summary>
@@ -21,8 +23,9 @@ namespace Z0
         /// <typeparam name="L">The left value type</typeparam>
         /// <typeparam name="R">The right value type</typeparam>
         /// <param name="left">The right value</param>
-        public static Either<L, R> make<L, R>(L left)
-            => new Either<L, R>(left);
+        [MethodImpl(Inline)]
+        public static Either<L,R> make<L,R>(L left)
+            => new Either<L,R>(left);
 
         /// <summary>
         /// Constructs a right-valued either
@@ -30,8 +33,9 @@ namespace Z0
         /// <typeparam name="L">The left value type</typeparam>
         /// <typeparam name="R">The right value type</typeparam>
         /// <param name="right">The right value</param>
-        public static Either<L, R> make<L, R>(R right)
-            => new Either<L, R>(right);
+        [MethodImpl(Inline)]
+        public static Either<L,R> make<L,R>(R right)
+            => new Either<L,R>(right);
 
         /// <summary>
         /// If either is Left, returns the left value; oterwise, raises an error
@@ -39,7 +43,8 @@ namespace Z0
         /// <typeparam name="L">The left type</typeparam>
         /// <typeparam name="R">The right type</typeparam>
         /// <param name="e">The either</param>
-        public static L left<L, R>(Either<L, R> e)
+        [MethodImpl(Inline)]
+        public static L left<L,R>(Either<L,R> e)
             => e.IsLeft ? e.Left : fail<L>(NotLeft(e));
 
         /// <summary>
@@ -48,7 +53,8 @@ namespace Z0
         /// <typeparam name="L">The left type</typeparam>
         /// <typeparam name="R">The right type</typeparam>
         /// <param name="e">The either</param>
-        public static R right<L, R>(Either<L, R> e)
+        [MethodImpl(Inline)]
+        public static R right<L,R>(Either<L,R> e)
             => e.IsRight ? e.Right : fail<R>(NotRight(e));
 
         /// <summary>
@@ -61,8 +67,9 @@ namespace Z0
         /// <param name="lf">The left function</param>
         /// <param name="rf">The right function</param>
         /// <param name="e">The either</param>
-        public static Either<X, Y> map<L, R, X, Y>(Func<L, X> lf, Func<R, Y> rf, Either<L, R> e)
-            => e.IsLeft ? make<X, Y>(lf(e.Left)) : make<X, Y>(rf(e.Right));
+        [MethodImpl(Inline)]
+        public static Either<X,Y> map<L,R,X,Y>(Func<L,X> lf, Func<R,Y> rf, Either<L,R> e)
+            => e.IsLeft ? make<X,Y>(lf(e.Left)) : make<X,Y>(rf(e.Right));
 
         /// <summary>
         /// Applies a left function if the either is left-valued; otherwise, passes the right 
@@ -73,8 +80,9 @@ namespace Z0
         /// <typeparam name="Y">The codomain of the left function</typeparam>
         /// <param name="lf">The function to apply to the left value if present</param>
         /// <param name="e">The either</param>
-        public static Either<Y, R> map<L, R, Y>(Func<L, Y> lf, Either<L, R> e)
-            => e.IsLeft ? make<Y,R>(lf(e.Left)) : make<Y, R>(e.Right);
+        [MethodImpl(Inline)]
+        public static Either<Y,R> map<L,R,Y>(Func<L,Y> lf, Either<L,R> e)
+            => e.IsLeft ? make<Y,R>(lf(e.Left)) : make<Y,R>(e.Right);
 
         /// <summary>
         /// Applies a right function if the either is right-valued; otherwise, passes the left
@@ -85,8 +93,9 @@ namespace Z0
         /// <typeparam name="Y">The codomain of the right function</typeparam>
         /// <param name="rf">The function to apply to the right value if present</param>
         /// <param name="e">The either</param>
-        public static Either<L, Y> map<L, R, Y>(Func<R, Y> rf, Either<L, R> e)
-            => e.IsLeft ? make<L, Y>(e.Left) : make<L, Y>(rf(e.Right));        
+        [MethodImpl(Inline)]
+        public static Either<L,Y> map<L,R,Y>(Func<R,Y> rf, Either<L,R> e)
+            => e.IsLeft ? make<L,Y>(e.Left) : make<L,Y>(rf(e.Right));        
 
         /// <summary>
         /// Determines whether the either is left-valued
@@ -94,7 +103,8 @@ namespace Z0
         /// <typeparam name="L">The left type</typeparam>
         /// <typeparam name="R">The right type</typeparam>
         /// <param name="e">The either</param>
-        public static bool isLeft<L, R>(Either<L, R> e)
+        [MethodImpl(Inline)]
+        public static bool isLeft<L,R>(Either<L,R> e)
             => e.IsLeft;
 
         /// <summary>
@@ -103,15 +113,17 @@ namespace Z0
         /// <typeparam name="L">The left type</typeparam>
         /// <typeparam name="R">The right type</typeparam>
         /// <param name="e">The either</param>
-        public static bool isRight<L, R>(Either<L, R> e)
+        [MethodImpl(Inline)]
+        public static bool isRight<L,R>(Either<L,R> e)
             => e.IsRight;
 
-        static T fail<T>(string reason) => throw new Exception(reason);
+        static T fail<T>(string reason) 
+            => throw new Exception(reason);
 
-        static string NotLeft<L, R>(Either<L, R> e)
+        static string NotLeft<L,R>(Either<L,R> e)
             => $"The either valeu {e} is not a left value";
 
-        static string NotRight<L, R>(Either<L, R> e)
+        static string NotRight<L,R>(Either<L,R> e)
             => $"The either valeu {e} is not a right value";
     }
 }

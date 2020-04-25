@@ -5,6 +5,9 @@
 
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
+    <Monadic>$(Src)monadic/z0.monadic.csproj</Monadic>
+
+
     <Collective>$(Src)collective/z0.collective.csproj</Collective>
     <Reflective>$(Src)reflective/z0.reflective.csproj</Reflective>
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
@@ -77,6 +80,7 @@
     <BitVectors>$(Src)bitvectors/z0.bitvectors.csproj</BitVectors>
     <BitGrids>$(Src)bitgrids/z0.bitgrids.csproj</BitGrids>
     <BitSpans>$(Src)bitspans/z0.bitspans.csproj</BitSpans>
+    <BitMatrix>$(Src)bitmatrix/z0.bitmatrix.csproj</BitMatrix>
   </PropertyGroup>
 
   <PropertyGroup>
