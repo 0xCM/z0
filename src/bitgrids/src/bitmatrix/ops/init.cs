@@ -59,7 +59,7 @@ namespace Z0
         public static BitMatrix8 init(BitVector8 x)
         {
             var A = alloc(n8);
-            A.data.Fill(x);
+            A.Data.Fill(x);
             return A;
         }
 
@@ -71,7 +71,7 @@ namespace Z0
         public static BitMatrix16 init(BitVector16 x)
         {
             var A = alloc(n16);
-            A.Data.Fill(x);
+            A.Content.Fill(x);
             return A;
         }
 
@@ -83,7 +83,7 @@ namespace Z0
         public static BitMatrix32 init(BitVector32 x)
         {
             var A = alloc(n32);
-            A.Data.Fill(x);
+            A.Content.Fill(x);
             return A;
         }
 

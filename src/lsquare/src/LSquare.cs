@@ -13,6 +13,12 @@ namespace Z0
     [ApiHost]
     public partial class LSquare : IApiHost<LSquare>
     {
-        static N256 n => default;
+        static W256 w => default;
+    }
+
+    [FunctionalService]
+    public partial class LogicSquares : IFunctional<LogicSquares>
+    {
+
     }
 }

@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
 
+
     [ApiHost("api")]
-    public static partial class vgbits
+    public partial class VBits : IApiHost<VBits>
     {
 
     }
 
-    [ApiHost("api.direct")]
-    public static partial class vBits
+    [ApiHost]
+    public partial class VMask : IApiHost<VMask>
     {
 
     }
@@ -23,7 +24,7 @@ namespace Z0
 
     }
 
-    [ApiServiceFactory]
+    [FunctionalService]
     public partial class VBitSvc : IFunctional<VBitSvc,VBitSvcTypes>
     {
     

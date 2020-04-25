@@ -17,7 +17,7 @@ namespace Z0
             var n = n16;
             var A = Random.BitMatrix(n);
             
-            var a = A.Data.Replicate();
+            var a = A.Content.Replicate();
             Claim.eq(a.Length, n);
 
             for(var sample=0; sample < RepCount; sample++)
@@ -40,7 +40,7 @@ namespace Z0
             var n = n64;
             var A = Random.BitMatrix(n);
             
-            var a = A.Data.Replicate();
+            var a = A.Content.Replicate();
             Claim.eq(a.Length, n);
 
             for(var sample=0; sample < RepCount; sample++)
@@ -63,7 +63,7 @@ namespace Z0
             var n = n32;
             var A = Random.BitMatrix(n);
             
-            var a = A.Data.Replicate();
+            var a = A.Content.Replicate();
             Claim.eq(a.Length, n);
 
             for(var sample=0; sample < RepCount; sample++)

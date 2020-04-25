@@ -25,11 +25,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                BL.cnonimpl(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
-                cnonimpl(n, in A, in B, ref Z);
+                cnonimpl(w, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
-                cnonimpl(n, 4, 8, in A, in B, ref Z);
+                cnonimpl(w, 4, 8, in A, in B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                cnonimpl(n, 16, 4, in A, in B, ref Z);
+                cnonimpl(w, 16, 4, in A, in B, ref Z);
             else
                 throw Unsupported.define<T>();
         }

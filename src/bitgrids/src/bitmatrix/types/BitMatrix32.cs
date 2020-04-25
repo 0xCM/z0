@@ -16,7 +16,7 @@ namespace Z0
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix32
     {                
-        readonly Span<uint> data;        
+        internal readonly Span<uint> Data;        
 
         /// <summary>
         /// The matrix order
@@ -35,7 +35,7 @@ namespace Z0
                 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<uint>(in BitMatrix32 src)
-            => BitMatrix.load(src.data);
+            => BitMatrix.load(src.Data);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 operator & (in BitMatrix32 A, in BitMatrix32 B)
@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix32 operator ^ (in BitMatrix32 A, in BitMatrix32 B)
-            => BitMatrix.xor(A, B);
+            => BitMatrixA.xor(A, B);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 operator ~ (in BitMatrix32 A)
@@ -75,23 +75,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix32(Span<uint> src)
-            => this.data = src;
+            => this.Data = src;
 
         [MethodImpl(Inline)]
         internal BitMatrix32(bit fill)
         {
-            this.data = new uint[N];
+            this.Data = new uint[N];
             if(fill)
-                data.Fill(uint.MaxValue);
+                Data.Fill(uint.MaxValue);
         }
 
         /// <summary>
         /// The underlying matrix data
         /// </summary>
-        public Span<uint> Data
+        public Span<uint> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => Data.AsBytes();
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Z0
         public unsafe ref uint Head
         {
             [MethodImpl(Inline)] 
-            get => ref head(data);
+            get => ref head(Data);
         }
 
         /// <summary>
@@ -129,10 +129,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => bit.test(data[row], col);
+            get => bit.test(Data[row], col);
 
             [MethodImpl(Inline)]
-            set =>  data[row] = bit.set(data[row], (byte)col, value);
+            set =>  Data[row] = bit.set(Data[row], (byte)col, value);
         }            
 
         /// <summary>

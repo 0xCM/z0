@@ -16,7 +16,7 @@ namespace Z0
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix16 
     {   
-        readonly Span<ushort> data;
+        internal readonly Span<ushort> Data;
 
         /// <summary>
         /// The matrix order
@@ -50,7 +50,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<ushort>(in BitMatrix16 src)
-            => BitMatrix.load(src.data);
+            => BitMatrix.load(src.Data);
 
         /// <summary>
         /// Computes the bitwise and of the operands
@@ -65,7 +65,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix16 operator ^ (in BitMatrix16 A, in BitMatrix16 B)
-            => BitMatrix.xor(A,B);
+            => BitMatrixA.xor(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix16 operator ~ (in BitMatrix16 A)
@@ -93,13 +93,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix16(Span<ushort> src)
-            => this.data = src;
+            => this.Data = src;
 
         internal BitMatrix16(bit fill)
         {
-            this.data = new ushort[N];
+            this.Data = new ushort[N];
             if(fill)
-                data.Fill(ushort.MaxValue);
+                Data.Fill(ushort.MaxValue);
         }
 
         /// <summary>
@@ -108,16 +108,16 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => Data.AsBytes();
         }
 
         /// <summary>
         /// The underlying matrix data
         /// </summary>
-        public Span<ushort> Data
+        public Span<ushort> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0
         public ref ushort Head
         {
             [MethodImpl(Inline)] 
-            get => ref head(data);
+            get => ref head(Data);
         }
 
         public readonly int Order
@@ -165,7 +165,7 @@ namespace Z0
         {
             ushort col = 0;
             for(var r = 0; r < N; r++)
-                col = Bits.setif(data[r], index, col, r);
+                col = Bits.setif(Data[r], index, col, r);
             return col;
         }
 
@@ -176,18 +176,18 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
-            => data.Swap(i,j);
+            => Data.Swap(i,j);
 
         public readonly BitMatrix16 Transpose()
         {
             var dst = Replicate();
             for(var i=0; i<N; i++)
-                dst.data[i] = Col(i);
+                dst.Data[i] = Col(i);
             return dst;
         }
 
         public readonly BitMatrix16 Replicate()
-            => From(data.ToArray());        
+            => From(Data.ToArray());        
 
         [MethodImpl(Inline)]
         public string Format()

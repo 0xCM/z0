@@ -50,6 +50,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong blsic(ulong src)
             => ~src | (src - 1);
-
     }
 }

@@ -297,5 +297,23 @@ namespace Z0
 
         ZHi,
 
+        Log2,
+
+        Log10,
+
+        Ln,
+
+        Log,
+
+        Split,
+
+        Toggle,
+
+        Pack,
+
+        Unpack,
+
+        HProd,
+
     }    
 }

@@ -42,5 +42,8 @@ namespace Z0
 
         Replicate = Id.Replicate,
 
+        Split = Id.Split,
+
+        Toggle = Id.Toggle,
     }   
 }

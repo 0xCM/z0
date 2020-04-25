@@ -20,7 +20,7 @@ namespace Z0
             for(var sample=0; sample<RepCount; sample++)
             {
                 var src = Random.BitMatrix8();
-                BitMatrix.unpack(src, ref dst);
+                BitMatrix.unpack(src, dst);
                 
                 for(var i=0; i< m; i++)
                 for(var j=0; j< n; j++)
@@ -36,7 +36,7 @@ namespace Z0
             for(var sample=0; sample<RepCount; sample++)
             {
                 var src = Random.BitMatrix64();
-                BitMatrix.unpack(src, ref dst);
+                BitMatrix.unpack(src, dst);
                 
                 for(var i=0; i< m; i++)
                 for(var j=0; j< n; j++)

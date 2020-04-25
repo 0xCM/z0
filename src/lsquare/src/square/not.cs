@@ -19,17 +19,17 @@ namespace Z0
     partial class LSquare
     {
         [MethodImpl(Inline), Not, Closures(UnsignedInts)]
-        public static void not<T>(in T A, ref T Z)
+        public static void not<T>(in T src, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.not(in uint8(in A), ref uint8(ref Z));
+               BL.not(in uint8(in src), ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                not(n, in A, ref Z);
+                not(w, in src, ref dst);
             else if(typeof(T) == typeof(uint))
-                not(n, 4, 8, in A, ref Z);
+                not(w, 4, 8, in src, ref dst);
             else if(typeof(T) == typeof(ulong))
-                not(n, 16, 4, in A, ref Z);
+                not(w, 16, 4, in src, ref dst);
             else
                 throw Unsupported.define<T>();
         }

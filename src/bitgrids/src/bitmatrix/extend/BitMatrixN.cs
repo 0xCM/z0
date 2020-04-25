@@ -14,7 +14,7 @@ namespace Z0
         public static BitMatrix<N,T> Replicate<N,T>(this BitMatrix<N,T> A)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitMatrix<N, T>(A.Data.Replicate());
+                => new BitMatrix<N, T>(A.Content.Replicate());
 
         public static BitBlock<N,T> Diagonal<N,T>(this BitMatrix<N,T> A)
             where N : unmanaged, ITypeNat

@@ -13,7 +13,7 @@ namespace Z0
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public ref struct BitMatrix4
     {        
-        ushort data;
+        internal ushort Data;
 
         /// <summary>
         /// The matrix order
@@ -42,11 +42,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(BitMatrix4 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator uint(BitMatrix4 src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix4(ushort src)
@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitMatrix4(ushort src)
         {
-            this.data = src;
+            this.Data = src;
         }
 
         public int Order => (int)N;
@@ -97,13 +97,13 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get =>  BitConvert.GetBytes(data);
+            get =>  BitConvert.GetBytes(Data);
         }
 
-        public BitView<ushort> Data
+        public BitView<ushort> Content
         {
             [MethodImpl(Inline)]
-            get => BitView.Over(ref data);
+            get => BitView.Over(ref Data);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="index">The row index</param>
         [MethodImpl(Inline)]
         BitVector4 GetRow(int index)
-            => (byte)(M4 & (data >> index*4));
+            => (byte)(M4 & (Data >> index*4));
 
         [MethodImpl(Inline)]
         void SetRow(int row, BitVector4 value)
@@ -120,16 +120,16 @@ namespace Z0
             ushort result = 0;
             for(var i=0; i<N; i++)
                 result |= (ushort)(i == row ? value.Scalar << 4*i : this[row]);
-            data = result;
+            Data = result;
         }
 
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => bit.test(data, row*4 + col);
+            get => bit.test(Data, row*4 + col);
 
             [MethodImpl(Inline)]
-            set => data = bit.set(data, (byte)(row*4 + col), value);
+            set => Data = bit.set(Data, (byte)(row*4 + col), value);
         }            
 
         public BitVector4 this[int row]
@@ -144,7 +144,7 @@ namespace Z0
             
         [MethodImpl(Inline)]
         public readonly bool Equals(in BitMatrix4 B)
-            => data == B.data;
+            => Data == B.Data;
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

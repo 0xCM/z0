@@ -8,12 +8,30 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;    
 
     /// <summary>
     /// Correlates a linear bit index, a cell index and bit offset, and a row/column coordinate in a grid/matrix
     /// </summary>
     public readonly struct TableIndex
     {           
+        [MethodImpl(Inline)]
+        public static TableIndex Create<M,N,T>(int row, int col, M m = default, N n = default, T t =default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var rowCellCount = uint16(BitCalcs.mincells<N,T>());
+            var rowOffset = uint32(rowCellCount*row);
+            return TableIndex.Define(
+                CellIndex: uint16(rowOffset + BitSize.div(col,t)), 
+                RowCellCount: rowCellCount,
+                BitOffset: uint8(BitSize.mod(col,t)), 
+                BitIndex: uint32(rowOffset + col), 
+                RowIndex: row, 
+                ColIndex: col);                    
+        }
+
         [MethodImpl(Inline)]
         public static TableIndex Define(ushort CellIndex, ushort RowCellCount, byte BitOffset, uint BitIndex, int RowIndex, int ColIndex)
             => new TableIndex(CellIndex, RowCellCount, BitOffset, BitIndex, RowIndex, ColIndex);        

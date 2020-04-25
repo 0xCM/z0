@@ -13,7 +13,7 @@ namespace Z0
             Claim.eq(3, gbits.ntz((byte)0b111000));
             Claim.eq(2, gbits.ntz(0b0001011000100u));
             Claim.eq(5, gbits.ntz(0b000101100000u));
-            Claim.eq(3, gbits.lsbpos(Pow2.pow(3)));            
+            Claim.eq(3, gbits.ntz(Pow2.pow(3)));            
         }
 
         public void ntz_8()

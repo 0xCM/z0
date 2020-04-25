@@ -9,7 +9,7 @@ namespace Z0
     using Id = OpKindId;
 
     /// <summary>
-    /// Identifies binary arithmetic operators classes
+    /// Identifies arithmetic operation kinds
     /// </summary>
     public enum ArithmeticKind : ulong
     {
@@ -85,5 +85,7 @@ namespace Z0
         Round = Id.Round,
 
         Pow = Id.Pow,
+
+        Log2 = Id.Log2
     }    
 }

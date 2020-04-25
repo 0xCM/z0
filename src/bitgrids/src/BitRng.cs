@@ -699,7 +699,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(m,n, random.Span<T>(BM.totalcells(m,n,t)));
+                => BM.load(m,n, random.Span<T>(BM.cellcount(m,n,t)));
 
         /// <summary>
         /// Produces an generic bitmatrix of natural order
@@ -712,6 +712,6 @@ namespace Z0
         public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(n,random.Span<T>(BM.totalcells(n,n,t)));        
+                => BM.load(n,random.Span<T>(BM.cellcount(n,n,t)));        
    }
 }

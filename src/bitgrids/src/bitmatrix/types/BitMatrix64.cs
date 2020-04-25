@@ -15,7 +15,7 @@ namespace Z0
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix64
     {                
-        readonly Span<ulong> data;
+        internal readonly Span<ulong> Data;
 
         /// <summary>
         /// The matrix order
@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<ulong>(in BitMatrix64 src)
-            => BitMatrix.load(src.data);
+            => BitMatrix.load(src.Data);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
@@ -46,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator ^ (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.xor(A,B);
+            => BitMatrixA.xor(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator ~ (BitMatrix64 A)
@@ -74,14 +74,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix64(Span<ulong> src)
-            => this.data = src;
+            => this.Data = src;
 
         [MethodImpl(Inline)]
         internal BitMatrix64(bit fill)
         {
-            this.data = new ulong[N];
+            this.Data = new ulong[N];
             if(fill)
-                data.Fill(ulong.MaxValue);
+                Data.Fill(ulong.MaxValue);
         }
 
         /// <summary>
@@ -99,16 +99,16 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => Data.AsBytes();
         }
 
         /// <summary>
         /// The underlying matrix data
         /// </summary>
-        public Span<ulong> Data
+        public Span<ulong> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         public ref ulong Head
         {
             [MethodImpl(Inline)] 
-            get => ref head(data);
+            get => ref head(Data);
         }
 
         /// <summary>
@@ -129,10 +129,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => bit.test(data[row], col);
+            get => bit.test(Data[row], col);
 
             [MethodImpl(Inline)]
-            set => data[row] = bit.set(data[row], (byte)col, value);
+            set => Data[row] = bit.set(Data[row], (byte)col, value);
         }            
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Z0
         {
             var col = 0ul;
             for(var r = 0; r < N; r++)
-                col = Bits.setif(data[r], index, col, r);
+                col = Bits.setif(Data[r], index, col, r);
             return col;
         }        
 
@@ -161,19 +161,19 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
-            => data.Swap(i,j);
+            => Data.Swap(i,j);
 
         public BitMatrix64 Transpose()
         {
             var dst = Replicate();
             for(var i=0; i<N; i++)
-                dst.data[i] = Column(i);
+                dst.Data[i] = Column(i);
             return dst;
         }
 
         [MethodImpl(Inline)] 
         public readonly BitMatrix64 Replicate()
-            => new BitMatrix64(data.Replicate()); 
+            => new BitMatrix64(Data.Replicate()); 
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix64 rhs)

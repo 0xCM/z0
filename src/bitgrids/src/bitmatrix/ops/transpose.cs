@@ -123,7 +123,7 @@ namespace Z0
         {
             var vec = Vectors.vload(n128,A.Bytes);
             Vectors.vstore(dvec.vshuf16x8(vec, Tr8x16Mask), ref refs.head(A.Bytes));
-            return BitMatrix.load<N16,N8,uint>(A.Data);
+            return BitMatrix.load<N16,N8,uint>(A.Content);
         }
 
         public static BitMatrix32 transpose(in BitMatrix32 A)

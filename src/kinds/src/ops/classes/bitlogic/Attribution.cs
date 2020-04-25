@@ -46,4 +46,8 @@ namespace Z0
     public sealed class NotAttribute : A { public NotAttribute() : base(K.Not) {} }
 
     public sealed class XorNotAttribute : A { public XorNotAttribute() : base(K.XorNot) {} }    
+
+
+
+    
 }

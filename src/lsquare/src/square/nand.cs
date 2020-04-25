@@ -25,11 +25,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                BL.nand(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
-                nand(n, in A, in B, ref Z);
+                nand(w, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
-                nand(n, 4, 8, in A, in B, ref Z);
+                nand(w, 4, 8, in A, in B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                nand(n, 16, 4, in A, in B, ref Z);
+                nand(w, 16, 4, in A, in B, ref Z);
             else
                 throw Unsupported.define<T>();
         }

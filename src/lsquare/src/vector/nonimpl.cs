@@ -47,7 +47,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                nonimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                nonimpl(LSquare.w, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
     }
 }

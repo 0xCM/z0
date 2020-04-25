@@ -58,5 +58,11 @@ namespace Z0
         LoSeg = Id.LoSeg,
 
         ZHi = Id.ZHi,
+
+        Pack = Id.Pack,
+
+        Unpack = Id.Unpack,
+
+        HProd = Id.HProd,
     }
 }

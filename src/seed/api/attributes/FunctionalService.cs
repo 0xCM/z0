@@ -1,0 +1,21 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+
+    /// <summary>
+    /// Identifies a type that defines an interface-contracted api surface
+    /// </summary>
+    public class FunctionalServiceAttribute : Attribute
+    {
+        public FunctionalServiceAttribute()
+        {
+
+        }
+
+    }
+
+}

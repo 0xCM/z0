@@ -112,7 +112,7 @@ namespace Z0
                 Claim.eq(count, gbits.pop(mask));
 
                 var lowered = gmath.srl(mask, (byte)(bitsize(t) -  count));
-                var width = gbits.effwidth(lowered);
+                var width = gbits.ewidth(lowered);
                 if(count != width)
                 {
                     trace("mask", BitString.scalar(mask).Format());

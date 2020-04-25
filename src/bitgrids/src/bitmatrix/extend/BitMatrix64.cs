@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitBlock<N4096,ulong> ToBitVector(this BitMatrix64 A)
-            => BitBlocks.load(A.Data, default(N4096));
+            => BitBlocks.load(A.Content, default(N4096));
 
         /// <summary>
         /// Creates the matrix determined by a permutation
@@ -36,25 +36,25 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<ulong> ToGeneric(this BitMatrix64 A)
-            => new BitMatrix<ulong>(A.Data);
+            => new BitMatrix<ulong>(A.Content);
 
         /// <summary>
         /// Converts the source matrix to a square matrix of natural order
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N64,ulong> ToNatural(this BitMatrix64 A)
-            => BitMatrix.load(n64,A.Data);
+            => BitMatrix.load(n64,A.Content);
 
         /// <summary>
         /// Converts the source matrix to a square matrix of natural order
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N64,ulong> ToNatural(this BitMatrix<ulong> A)
-            => BitMatrix.load(n64,A.Data);
+            => BitMatrix.load(n64,A.Content);
 
         [MethodImpl(Inline)]
         public static string Format(this BitMatrix64 src)            
-            => src.Data.FormatMatrixBits(src.Order);        
+            => src.Content.FormatMatrixBits(src.Order);        
     
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix

@@ -16,7 +16,7 @@ namespace Z0
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix8
     {        
-        internal readonly Span<byte> data;
+        internal readonly Span<byte> Data;
                                         
         /// <summary>
         /// The matrix order
@@ -40,11 +40,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<byte>(BitMatrix8 src)
-            => BitMatrix.load(src.data);
+            => BitMatrix.load(src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(BitMatrix8 src)
-            => BitConvert.ToUInt64(src.data);
+            => BitConvert.ToUInt64(src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitMatrix8(ulong src)
@@ -60,7 +60,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator ^ (in BitMatrix8 A, in BitMatrix8 B)
-            => BitMatrix.xor(A,B);
+            => BitMatrixA.xor(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator ~ (in BitMatrix8 src)
@@ -88,16 +88,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix8(Span<byte> src)
-            => this.data = src;
+            => this.Data = src;
 
         [MethodImpl(Inline)]
         internal BitMatrix8(ulong src)
-            => this.data = BitConvert.GetBytes(src).Replicate();
+            => this.Data = BitConvert.GetBytes(src).Replicate();
 
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data;            
+            get => Data;            
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         public unsafe ref byte Head
         {
             [MethodImpl(Inline)] 
-            get => ref head(data);
+            get => ref head(Data);
         }
 
         /// <summary>

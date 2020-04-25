@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="from">The first source bit</param>
         /// <param name="to">The last source bit</param>
         /// <param name="reps">The number of times to clone the defined segment</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static byte replicate(byte src, byte from, byte to, int reps)
         {
             var width = to - from;
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="from">The first source bit</param>
         /// <param name="to">The last source bit</param>
         /// <param name="reps">The number of times to clone the defined segment</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static ushort replicate(ushort src, byte from, byte to, int reps)
         {
             var width = to - from;
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="from">The first source bit</param>
         /// <param name="to">The last source bit</param>
         /// <param name="reps">The number of times to clone the defined segment</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static uint replicate(uint src, byte from, byte to, int reps)
         {
             var width = to - from;
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="from">The first source bit</param>
         /// <param name="to">The last source bit</param>
         /// <param name="reps">The number of times to clone the defined segment</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Replicate]
         public static ulong replicate(ulong src, byte from, byte to, int reps)
         {
             var width = (byte)(to - from + 1);

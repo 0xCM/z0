@@ -14,12 +14,12 @@ namespace Z0
     {
         public void bm_cellcount()
         {
-            Claim.eq(BitMatrix.totalcells<N2,N1,byte>(),2);
-            Claim.eq(BitMatrix.totalcells<N2,N2,byte>(),2);
-            Claim.eq(BitMatrix.totalcells<N4,N4,byte>(),4);
-            Claim.eq(BitMatrix.totalcells<N8,N3,byte>(),8);
-            Claim.eq(BitMatrix.totalcells<N8,N4,byte>(),8);
-            Claim.eq(BitMatrix.totalcells<N8,N5,byte>(),8);
+            Claim.eq(BitMatrix.cellcount<N2,N1,byte>(),2);
+            Claim.eq(BitMatrix.cellcount<N2,N2,byte>(),2);
+            Claim.eq(BitMatrix.cellcount<N4,N4,byte>(),4);
+            Claim.eq(BitMatrix.cellcount<N8,N3,byte>(),8);
+            Claim.eq(BitMatrix.cellcount<N8,N4,byte>(),8);
+            Claim.eq(BitMatrix.cellcount<N8,N5,byte>(),8);
         }
 
         public void bm_create_4x3x8g()

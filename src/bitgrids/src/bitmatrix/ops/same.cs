@@ -7,22 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;    
+    using static Seed; 
+    using static Memories;    
 
     partial class BitMatrix
     {
         /// <summary>
         /// Determines whether two generic bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
         /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
+        /// <param name="a">The left matrix</param>
+        /// <param name="b">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
         [MethodImpl(Inline)]
-        public static bit same<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+        public static bit same<T>(in BitMatrix<T> a, in BitMatrix<T> b)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LSquare.xnor(in A.Head,in B.Head, ref Z.Head);
+            LSquare.xnor(a.Head, b.Head, ref Z.Head);
             return LSquare.testc(in Z.Head);
         }
         

@@ -324,7 +324,7 @@ namespace Z0.Logix
             var C = Random.BitMatrix<T>();
             var Z = BitMatrix.alloc<T>();
             var opcount = 0;
-            var Op = BitMatrixOpApi.lookup<T>(opkind);
+            var Op = BitMatrixOpApi.refop<T>(opkind);
 
             clock.Start();
 

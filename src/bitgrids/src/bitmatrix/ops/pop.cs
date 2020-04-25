@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint pop(in BitMatrix16 A)
         {
-            ref readonly var src = ref head(A.Data.AsUInt64());
+            ref readonly var src = ref head(A.Content.AsUInt64());
             var count = 0u;
             count += Bits.pop(skip(in src, 0));
             count += Bits.pop(skip(in src, 1));
@@ -42,7 +42,7 @@ namespace Z0
         {
             const uint bytes = BitMatrix32.N * 3;
             
-            ref readonly var src = ref head(A.Data.AsUInt64());
+            ref readonly var src = ref head(A.Content.AsUInt64());
             var count = 0u;
             return count;            
         }

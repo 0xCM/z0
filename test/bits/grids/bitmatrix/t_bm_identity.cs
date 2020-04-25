@@ -116,7 +116,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
        {
-            var identity = BitMatrix.identity<N,T>();
+            var identity = BitMatrixA.identity<N,T>();
             for(var i=0; i< identity.Order; i++)
             for(var j=0; j< identity.Order; j++)
                 Claim.eq(identity[i,j], i==j ? bit.On : bit.Off);            

@@ -21,7 +21,6 @@ namespace Z0.Logix
     //[ApiHost("bitmatrix.api",ApiHostKind.Generic)]
     public static class BitMatrixOpApi
     {
-
         [Op, NumericClosures(UnsignedInts)]
         public static BitMatrix<T> eval<T>(ULK kind, BitMatrix<T> A)
             where T : unmanaged
@@ -73,7 +72,7 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(UnsignedInts)]
-        public static BitMatrix<T> eval<T>(BLK kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static BitMatrix<T> eval<T>(BLK kind, in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             switch(kind)
@@ -100,7 +99,7 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(UnsignedInts)]
-        public static BitMatrixBinaryRefOp<T> lookup<T>(BLK kind)
+        public static BitMatrixBinaryRefOp<T> refop<T>(BLK kind)
             where T : unmanaged
         {
             switch(kind)

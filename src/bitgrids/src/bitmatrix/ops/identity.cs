@@ -7,8 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
+
     partial class BitMatrix
     {   
+        [MethodImpl(Inline), IdentityFunction, Closures(UnsignedInts)]
+        public static ref readonly BitMatrix<T> identity<T>(in BitMatrix<T> A)
+            where T : unmanaged
+                => ref A;
+
+        [MethodImpl(Inline), IdentityFunction, Closures(UnsignedInts)]
+        public static ref BitMatrix<T> identity<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
+            where T : unmanaged
+        {
+            Z.Update(A);
+            return ref Z;
+        }
+
         public static BitMatrix4 identity(N4 n) 
             => BitMatrix.primal(n,(ushort)0b1000010000100001);
 

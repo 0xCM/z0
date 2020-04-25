@@ -37,11 +37,18 @@ namespace Z0
 
     }
 
+    [ApiHost("bitmatrix.ops")]
+    public partial class BitMatrixOps : IApiHost<BitMatrixOps>
+    {
+
+    }
+
     [ApiHost]
     public static partial class GridLoad
     {   
 
     }
+
 
     public static partial class BitGridX
     {   

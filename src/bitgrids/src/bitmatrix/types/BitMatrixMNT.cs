@@ -21,7 +21,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
-        readonly Span<T> data;
+        internal readonly Span<T> Data;
         
         public static M RowDim => default;
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Allocates a Zero-filled mxn matrix
         /// </summary>
         public static BitMatrix<M,N,T> Alloc()
-            => new BitMatrix<M, N, T>(new T[BitMatrix.totalcells<M,N,T>()]);
+            => new BitMatrix<M, N, T>(new T[BitMatrix.cellcount<M,N,T>()]);
 
         /// <summary>
         /// Loads a matrix from an array of appopriate length
@@ -39,29 +39,29 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> Load(Span<T> src)
         {
-            require(src.Length == BitMatrix.totalcells<M,N,T>());
+            require(src.Length == BitMatrix.cellcount<M,N,T>());
             return new BitMatrix<M, N, T>(src);
         }
 
         [MethodImpl(Inline)]
         internal BitMatrix(params T[] src)
         {
-            this.data = src;
+            this.Data = src;
         }
 
         [MethodImpl(Inline)]
         internal BitMatrix(Span<T> src)
         {
-            this.data = src;
+            this.Data = src;
         }
         
         /// <summary>
         /// Presents matrix storage as a span of generic cells
         /// </summary>
-        public Span<T> Data
+        public Span<T> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(data);
+            get => ref head(Data);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => Data.AsBytes();
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         public readonly int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => Data.Length;
         }
 
         /// <summary>
@@ -117,15 +117,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get 
             {
-                var index = BitMatrix.tableindex(row, col, RowDim, ColDim, default(T));
-                return gbits.testbit(data[index.CellIndex], index.BitOffset);
+                var index = TableIndex.Create(row, col, RowDim, ColDim, default(T));
+                return gbits.testbit(Data[index.CellIndex], index.BitOffset);
             }
 
             [MethodImpl(Inline)]
             set 
             {
-                var index = BitMatrix.tableindex(row, col, RowDim, ColDim, default(T));
-                data[index.CellIndex] = gbits.setbit(data[index.CellIndex], index.BitOffset, value);                
+                var index = TableIndex.Create(row, col, RowDim, ColDim, default(T));
+                Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);                
            }
         }            
 
@@ -144,16 +144,16 @@ namespace Z0
             get => ReadRow(row);
             
             [MethodImpl(Inline)]
-            set  => value.Data.Slice(0, RowCellCount).CopyTo(data,row);
+            set  => value.Data.Slice(0, RowCellCount).CopyTo(Data,row);
         }
                 
         [MethodImpl(Inline)]
         public BitBlock<N,T> ReadRow(int row)  
-            => new BitBlock<N,T>(data.Slice(row*RowCellCount, RowCellCount));
+            => new BitBlock<N,T>(Data.Slice(row*RowCellCount, RowCellCount));
 
         [MethodImpl(Inline)]
         public readonly BitBlock<N,T> CopyRow(int row)                    
-            => new BitBlock<N,T>(data.Slice(row*RowCellCount, RowCellCount).Replicate());
+            => new BitBlock<N,T>(Data.Slice(row*RowCellCount, RowCellCount).Replicate());
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector
@@ -188,9 +188,9 @@ namespace Z0
         public void Fill(bit value)
         {
             if(value)
-                Data.Fill(maxval<T>());
+                Content.Fill(maxval<T>());
             else
-                Data.Fill(minval<T>());
+                Content.Fill(minval<T>());
         }
 
         /// <summary>

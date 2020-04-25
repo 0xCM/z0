@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitBlock<N1024,uint> ToBitCells(this BitMatrix32 A)
-            => BitBlocks.load(A.Data, n1024);
+            => BitBlocks.load(A.Content, n1024);
 
         /// <summary>
         /// Creates the matrix determined by a permutation
@@ -36,21 +36,21 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<uint> ToGeneric(this BitMatrix32 A)
-            => new BitMatrix<uint>(A.Data);
+            => new BitMatrix<uint>(A.Content);
 
         /// <summary>
         /// Converts the source matrix to a square matrix of natural order
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N32,uint> ToNatural(this BitMatrix32 A)
-            => BitMatrix.load(n32,A.Data);
+            => BitMatrix.load(n32,A.Content);
 
         /// <summary>
         /// Converts the source matrix to a square matrix of natural order
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N32,uint> ToNatural(this BitMatrix<uint> A)
-            => BitMatrix.load(n32,A.Data);
+            => BitMatrix.load(n32,A.Content);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 AndNot(this BitMatrix32 A, in BitMatrix32 B)
@@ -64,11 +64,11 @@ namespace Z0
             => BitMatrix.empty(A);
 
         public static BitMatrix32 Replicate(this BitMatrix32 A)
-            => new BitMatrix32(A.Data.Replicate());
+            => new BitMatrix32(A.Content.Replicate());
 
         [MethodImpl(Inline)]
         public static string Format(this BitMatrix32 A)
-            => A.Data.FormatMatrixBits(A.Order);
+            => A.Content.FormatMatrixBits(A.Order);
 
         public static BitMatrix32 Transpose(this BitMatrix32 A)
             => BitMatrix.transpose(A);

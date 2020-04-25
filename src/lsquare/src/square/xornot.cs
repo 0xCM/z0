@@ -25,11 +25,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                BL.xornot(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
-                xornot(n, in A, in B, ref Z);
+                xornot(w, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
-                xornot(n, 4, 8, in A, in B, ref Z);
+                xornot(w, 4, 8, in A, in B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                xornot(n, 16, 4, in A, in B, ref Z);
+                xornot(w, 16, 4, in A, in B, ref Z);
             else
                 throw Unsupported.define<T>();
         }

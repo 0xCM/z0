@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
                 
     using static Seed;
-    using static ApiUtility;
+    using static Memories;
         
     static class ApiUtility
     {
@@ -17,44 +17,44 @@ namespace Z0
         /// </summary>
         /// <typeparam name="S">The host type</typeparam>
         [MethodImpl(Inline)]
-        public static S ApiSvc<S>()
+        public static S SFunc<S>()
             where S : unmanaged, IFunc    
                 => default(S);        
 
     }   
 
-    [ApiServiceFactory]
+    [FunctionalService]
     public partial class BC : IFunctional<BC>
     {
         [MethodImpl(Inline)]
         public static ByteSwap<T> byteswap<T>(T t = default)
             where T : unmanaged        
-                => ApiSvc<ByteSwap<T>>();
+                => sfunc<ByteSwap<T>>();
 
         [MethodImpl(Inline)]
         public static Bfly<N,T> bfly<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged        
-                => ApiSvc<Bfly<N,T>>();
+                => sfunc<Bfly<N,T>>();
 
         [MethodImpl(Inline)]
         public static Between<T> between<T>(T t = default)
             where T : unmanaged        
-                => ApiSvc<Between<T>>();
+                => sfunc<Between<T>>();
 
         [MethodImpl(Inline)]
         public static BitSlice<T> bitslice<T>(T t = default)
             where T : unmanaged        
-                => ApiSvc<BitSlice<T>>();
+                => sfunc<BitSlice<T>>();
 
         [MethodImpl(Inline)]
         public static PopCount<T> pop<T>(T t = default)
             where T : unmanaged        
-                => ApiSvc<PopCount<T>>();
+                => sfunc<PopCount<T>>();
 
         [MethodImpl(Inline)]
         public static Dot<T> dot<T>(T t = default)
             where T : unmanaged        
-                => ApiSvc<Dot<T>>();
+                => sfunc<Dot<T>>();
     }
 }

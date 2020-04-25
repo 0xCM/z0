@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The assembly to search</param>
         public static IEnumerable<Type> FactoryTypes(Assembly src)
-            => src.GetTypes().Where(t => t.Tagged<ApiServiceFactoryAttribute>());
+            => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
 
         /// <summary>
         /// Creates a service provider reified by a specified type

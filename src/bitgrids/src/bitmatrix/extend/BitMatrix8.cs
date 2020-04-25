@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     public static class BitMatrix8x
     {   
@@ -23,7 +24,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<byte> ToGeneric(this BitMatrix8 A)
-            => new BitMatrix<byte>(A.data);
+            => new BitMatrix<byte>(A.Data);
 
         /// <summary>
         /// Creates the matrix determined by a permutation
@@ -43,7 +44,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N8,byte> ToNatural(this BitMatrix8 A)
-            => BitMatrix.load(n8,A.data);
+            => BitMatrix.load(n8,A.Data);
 
         /// <summary>
         /// Converts the source matrix to a square matrix of natural order
@@ -54,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format(this BitMatrix8 src)            
-            => src.data.FormatMatrixBits(src.Order);
+            => src.Data.FormatMatrixBits(src.Order);
 
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
@@ -68,14 +69,14 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static Graph<byte> ToGraph(this BitMatrix8 A)
-            => BitGraph.create(A);
+            => BitMatrix.graph(A);
 
         /// <summary>
         /// Packs the matrix into an unsigned 64-bit integer
         /// </summary>
         [MethodImpl(Inline)]
         public static ulong Pack(this BitMatrix8 A)
-            => BitConvert.ToUInt64(A.data);
+            => BitConvert.ToUInt64(A.Data);
 
         /// <summary>
         /// Transposes a copy of the source matrix
@@ -102,7 +103,7 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public static void RowSwap(this BitMatrix8 A, int i, int j)
-            => A.data.Swap(i,j);
+            => A.Data.Swap(i,j);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 ToPrimalBits(this ulong src, N8 n = default)

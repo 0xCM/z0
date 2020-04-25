@@ -82,17 +82,6 @@ namespace Z0
         Func<A,B,C,D> Operation => Invoke;
     }
 
-    /// <summary>
-    /// Characterizes a structural function that is width-parametric
-    /// </summary>
-    /// <typeparam name="W">The width type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IFuncW<W> : IFunc
-        where W : unmanaged, ITypeWidth
-    {
-        TypeWidth TypeWidth => default(W).TypeWidth;
-    }
-
 
     [SuppressUnmanagedCodeSecurity]
     public interface IFunc128<T> : IFuncW<W128>
@@ -114,5 +103,4 @@ namespace Z0
     {
         Vec512Kind<T> VKind => default;
     }
-
 }

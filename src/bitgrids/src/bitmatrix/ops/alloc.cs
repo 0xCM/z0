@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;    
     using static Memories;
-
+    
     partial class BitMatrix
     {        
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = BitMatrix<M,N,T>.Alloc();
-            dst.Data.Fill(src);
+            dst.Content.Fill(src);
             return dst;
         }
 

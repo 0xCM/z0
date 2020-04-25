@@ -11,49 +11,50 @@ namespace Z0
     using static Seed;
     using static Memories;
     using static Vectors;
-        
+
+
     partial class LSquare
     {     
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Vector128<T> vnot<T>(N128 n, in T a)
+        public static Vector128<T> vnot<T>(W128 w, in T src)
             where T : unmanaged
         {                    
-            vload(a, out Vector128<T> vA);
-            return gvec.vnot(vA);
+            vload(src, out Vector128<T> dst);
+            return gvec.vnot(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Vector256<T> vnot<T>(W256 n, in T a)
+        public static Vector256<T> vnot<T>(W256 w, in T src)
             where T : unmanaged
         {                    
-            vload(a, out Vector256<T> vA);
-            return gvec.vnot(vA);
+            vload(src, out Vector256<T> dst);
+            return gvec.vnot(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void not<T>(N128 n, in T a, ref T z)
+        public static void not<T>(W128 w, in T src, ref T dst)
             where T : unmanaged
-                => Vectors.vstore(vnot(n, in a),ref z);
+                => Vectors.vstore(vnot(w, src), ref dst);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void not<T>(N128 n, int vcount, int blocklen, in T a, ref T z)
+        public static void not<T>(W128 w, int count, int step, in T src, ref T dst)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                not(n, in skip(in a, offset), ref seek(ref z, offset));
+            for(int i=0, offset = 0; i<count; i++, offset += step)
+                not(w, skip(src, offset), ref seek(ref dst, offset));
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void not<T>(W256 n, in T a, ref T z)
+        public static void not<T>(W256 w, in T src, ref T dst)
             where T : unmanaged
-                => vstore(vnot(n, in a),ref z);
+                => vstore(vnot(w, src), ref dst);
         
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void not<T>(W256 n, int vcount, int blocklen, in T a, ref T z)
+        public static void not<T>(W256 w, int count, int step, in T src, ref T dst)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                not(n, in skip(in a, offset), ref seek(ref z, offset));
+            for(int i=0, offset=0; i<count; i++, offset+=step)
+                not(w, skip(src, offset), ref seek(ref dst, offset));
         }
     }
 }

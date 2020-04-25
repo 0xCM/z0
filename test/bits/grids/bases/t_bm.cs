@@ -25,8 +25,8 @@ namespace Z0
             {
                 var A = Random.BitMatrix(n,t);
                 var B = Random.BitMatrix(n,t);
-                var C1 = BitMatrix.and(A,B).Data;
-                var C2 = and(A.Data, B.Data);
+                var C1 = BitMatrixA.and(A,B).Content;
+                var C2 = and(A.Content, B.Content);
                 Numeric.eq(A.Order, nati<N>());
                 Numeric.eq(B.Order, nati<N>());                
                 Numeric.eq(C1,C2);
@@ -71,8 +71,8 @@ namespace Z0
             {
                 var A = Random.BitMatrix(n,t);
                 var B = Random.BitMatrix(n,t);
-                var C1 = BitMatrix.xor(A, B).Data;
-                var C2 = xor(A.Data, B.Data);
+                var C1 = BitMatrixA.xor(A, B).Content;
+                var C2 = xor(A.Content, B.Content);
                 Numeric.eq(A.Order, nati<N>());
                 Numeric.eq(B.Order, nati<N>());                
                 Numeric.eq(C1,C2);
@@ -87,7 +87,7 @@ namespace Z0
             {
                 var A = Random.BitMatrix<T>();
                 var B = Random.BitMatrix<T>();
-                BitMatrix.xor(A,B, ref Z);
+                BitMatrix.xor(A,B, Z);
 
                 for(var j =0; j< Z.Order; j++)
                 {

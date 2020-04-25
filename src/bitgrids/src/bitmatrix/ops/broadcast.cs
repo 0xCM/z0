@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed;
 
     partial class BitMatrix
     {        
@@ -21,7 +21,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> broadcast<T>(BitVector<T> x, in BitMatrix<T> A)
             where T : unmanaged
         {
-            A.Data.Fill(x);
+            A.Content.Fill(x);
             return ref A;
         }
 
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly BitMatrix8 broadcast(BitVector8 x, in BitMatrix8 A)
         {
-            A.data.Fill(x);
+            A.Data.Fill(x);
             return ref A;
         }
 
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly BitMatrix16 broadcast(BitVector16 x, in BitMatrix16 A)
         {
-            A.Data.Fill(x);
+            A.Content.Fill(x);
             return ref A;
         }
 
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly BitMatrix32 broadcast(BitVector32 x, in BitMatrix32 A)
         {
-            A.Data.Fill(x);
+            A.Content.Fill(x);
             return ref A;
         }
 
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly BitMatrix64 broadcast(BitVector64 x, in BitMatrix64 A)
         {
-            A.Data.Fill(x);
+            A.Content.Fill(x);
             return ref A;
         }
     }

@@ -25,12 +25,12 @@ namespace Z0
         public static BitMatrix<N,T> AsSquare<N,T>(this BitMatrix<N,N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                    => BitMatrix.load<N,T>(src.Data);                    
+                    => BitMatrix.load<N,T>(src.Content);                    
 
         [MethodImpl(Inline)]
         public static RowBits<T> ToRowBits<T>(this BitMatrix<T> src)
             where T : unmanaged
-                => RowBits.load(src.Data);
+                => RowBits.load(src.Content);
 
         /// <summary>
         /// Exracts a contiguous bitstring that captures the defined matrix

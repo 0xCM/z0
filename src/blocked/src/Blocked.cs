@@ -18,7 +18,7 @@ namespace Z0
 
     }
 
-    [ApiServiceFactory]
+    [FunctionalService]
     public partial class BSvc : IFunctional<BSvc,BSvcHosts>
     {
 

@@ -53,4 +53,12 @@ namespace Z0
 
     public sealed class ZHiAttribute : A { public ZHiAttribute() : base(K.ZHi) {} } 
 
+    public sealed class PackAttribute : A { public PackAttribute() : base(K.Pack) {} } 
+
+    public sealed class UnpackAttribute : A { public UnpackAttribute() : base(K.Unpack) {} } 
+
+    public sealed class HProdAttribute : A { public HProdAttribute() : base(K.HProd) {} } 
+
+
+    
 }

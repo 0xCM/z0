@@ -15,17 +15,17 @@ namespace Z0
         public void bm_cellcount()
         {
             var row_14x16 = BitCalcs.mincells<N14,ushort>();
-            var total_12x14x16 = BitMatrix.totalcells<N12,N14,ushort>();
+            var total_12x14x16 = BitMatrix.cellcount<N12,N14,ushort>();
             Claim.eq(1, row_14x16);            
             Claim.eq(12*1, total_12x14x16);
             
             var row_64x32 = BitCalcs.mincells<N64,uint>();            
-            var total_13x64x32 = BitMatrix.totalcells<N13,N64,uint>();
+            var total_13x64x32 = BitMatrix.cellcount<N13,N64,uint>();
             Claim.eq(2, row_64x32);
             Claim.eq(13*2, total_13x64x32);
             
             var row_32x8 = BitCalcs.mincells<N32,byte>();
-            var total_32x32x8 = BitMatrix.totalcells<N32,N32,byte>();
+            var total_32x32x8 = BitMatrix.cellcount<N32,N32,byte>();
             Claim.eq(4,row_32x8);
             Claim.eq(32*4, total_32x32x8);
         }
@@ -38,7 +38,7 @@ namespace Z0
             const int cellwidth = 8;
             const int cellcount = 2;
 
-            var m = BitMatrix.ones<N16,byte>();
+            var m = BitMatrixA.ones<N16,byte>();
 
             Claim.eq(order, m.Order);
             Claim.eq(order, m.Order);

@@ -8,13 +8,13 @@ namespace Z0
 
     using static Seed;
 
-    [ApiHost("api")]
+    [ApiHost("scalar")]
     public partial class Bits : IApiHost<Bits>
     {
 
     }
 
-    [ApiHost]
+    [ApiHost("generic")]
     public partial class gbits : IApiHost<gbits>
     {
 

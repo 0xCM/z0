@@ -19,7 +19,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
-        readonly Span<T> data;
+        internal readonly Span<T> Data;
 
         static N NatRep => default;
 
@@ -76,13 +76,13 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitMatrix(params T[] src)
         {
-            this.data = src;
+            this.Data = src;
         }
 
         [MethodImpl(Inline)]
         internal BitMatrix(Span<T> src)
         {
-            this.data = src;
+            this.Data = src;
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(data);
+            get => ref head(Data);
         }
 
         public bit this[int row, int col]
@@ -103,8 +103,8 @@ namespace Z0
             [MethodImpl(Inline)]
             set
             {
-                var index = BitMatrix.tableindex(row, col, NatRep, NatRep, default(T));
-                data[index.CellIndex] = gbits.setbit(data[index.CellIndex], index.BitOffset, value);                
+                var index = TableIndex.Create(row, col, NatRep, NatRep, default(T));
+                Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);                
             }
         }            
 
@@ -132,10 +132,10 @@ namespace Z0
         /// <summary>
         /// Provides direct access to the underlying bitstore
         /// </summary>
-        public readonly Span<T> Data
+        public readonly Span<T> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -171,9 +171,9 @@ namespace Z0
         public void Fill(bit value)
         {            
             if(value)
-                Data.Fill(Literals.maxval<T>());
+                Content.Fill(Literals.maxval<T>());
             else
-                Data.Fill(zero<T>());
+                Content.Fill(zero<T>());
         }
 
         [MethodImpl(Inline)]
@@ -204,7 +204,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Span<T> GetRowData(int row)
-            => Data.Slice(row*RowCellCount, RowCellCount);
+            => Content.Slice(row*RowCellCount, RowCellCount);
 
         public override int GetHashCode()
             => 0;

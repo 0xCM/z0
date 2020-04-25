@@ -18,7 +18,7 @@ namespace Z0
     public readonly ref struct BitMatrix<T>
         where T : unmanaged
     {                        
-        readonly Span<T> data;
+        internal readonly Span<T> Data;
 
         public static int N => bitsize<T>();
 
@@ -28,31 +28,31 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix(Span<T> data)
-            => this.data = data;
+            => this.Data = data;
 
         [MethodImpl(Inline)]
         internal BitMatrix(BitVector<T> fill)
         {
-            this.data = new T[fill.Width];
-            this.data.Fill(fill);
+            this.Data = new T[fill.Width];
+            this.Data.Fill(fill);
         }
 
         public ref T Head 
         {
             [MethodImpl(Inline)]
-            get => ref head(data);
+            get => ref head(Data);
         }
 
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => Data.AsBytes();
         }
 
-        public Span<T> Data
+        public Span<T> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -67,16 +67,16 @@ namespace Z0
         public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref AsBitVector(ref head(data, row));
+            get => ref AsBitVector(ref head(Data, row));
         }
 
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(data[row],(byte)col);
+            get => gbits.testbit(Data[row],(byte)col);
             
             [MethodImpl(Inline)]
-            set => data[row] = gbits.setbit(data[row], (byte)col, value);
+            set => Data[row] = gbits.setbit(Data[row], (byte)col, value);
         }
 
         [MethodImpl(Inline)]
@@ -86,6 +86,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitMatrix<S> As<S>()
             where S : unmanaged
-                => new BitMatrix<S>(Data.As<T,S>());        
+                => new BitMatrix<S>(Content.As<T,S>());        
     }
 }

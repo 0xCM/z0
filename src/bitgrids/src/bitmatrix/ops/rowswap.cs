@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public static void rowswap(in BitMatrix16 A, int i, int j)
-            => A.Data.Swap(i,j);        
+            => A.Content.Swap(i,j);        
 
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public static void rowswap(in BitMatrix32 A, int i, int j)
-            => A.Data.Swap(i,j);        
+            => A.Content.Swap(i,j);        
 
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
@@ -36,6 +36,6 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public static void rowswap(in BitMatrix64 A, int i, int j)
-            => A.Data.Swap(i,j);        
+            => A.Content.Swap(i,j);        
     }
 }
