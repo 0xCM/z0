@@ -27,7 +27,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N>(g.Data, showrow, label);
+                => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -42,7 +42,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N>(g.Data, showrow, label);
+                => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -57,7 +57,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N>(g.Data, showrow, label);
+                => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -72,7 +72,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N,T>(g.data, showrow, label);
+                => export<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -87,7 +87,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N,T>(g.data, showrow, label);
+                => export<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -102,7 +102,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N>(g.Data, showrow, label);
+                => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -117,7 +117,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N>(g.Data, showrow, label);
+                => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -132,7 +132,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N>(g.Data, showrow, label);
+                => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -147,7 +147,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N,T>(g.data, showrow, label);
+                => export<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
         /// Exports a grid to a file
@@ -162,7 +162,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => export<M,N,T>(g.data, showrow, label);
+                => export<M,N,T>(g.Data, showrow, label);
 
         static FileName filename<W,M,N,T>(string label, W w, M m = default, N n = default, T t = default)
             where W: unmanaged, ITypeNat

@@ -10,8 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     public static class FormatComparison
-    {
-        
+    {        
         public static string Format<T>(Block128<T> x, Block128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
             where T : unmanaged
         {

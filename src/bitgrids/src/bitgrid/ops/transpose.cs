@@ -34,7 +34,7 @@ namespace Z0
             where P : unmanaged, ITypeNat
             where Q : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data;
+                => src.Content;
 
 
         [MethodImpl(Inline)]
@@ -45,10 +45,10 @@ namespace Z0
             var c = A.ColCount;
             var R = math.pow2m1(r);
                     
-            var c0 = Bits.gather(A.Data, C << 0);
-            var c1 = Bits.gather(A.Data, C << 1);
-            var c2 = Bits.gather(A.Data, C << 2);
-            var c3 = Bits.gather(A.Data, C << 3);
+            var c0 = Bits.gather(A.Content, C << 0);
+            var c1 = Bits.gather(A.Content, C << 1);
+            var c2 = Bits.gather(A.Content, C << 2);
+            var c3 = Bits.gather(A.Content, C << 3);
             
             var r0 = Bits.scatter(c0, R << 0*r);
             var r1 = Bits.scatter(c1, R << 1*r);
@@ -85,7 +85,7 @@ namespace Z0
         public static BitGrid256<N16,N16,ushort> transpose(in BitGrid256<N16,N16,ushort> g)                
         {
             var gT = default(Vector256<ushort>);
-            var src = g.Data;
+            var src = g.Content;
 
             gT = vT16x16step(src, gT, 0, 8);
             gT = vT16x16step(src, gT, 1, 9);

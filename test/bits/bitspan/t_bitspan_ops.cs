@@ -90,7 +90,7 @@ namespace Z0
         {            
             var bytecount = RepCount;
             Block256<uint> unpacked = Blocks.alloc(n256,bytecount,z32);
-            Block64<byte> buffer = Blocks.single(n64,z8);
+            Block64<byte> buffer = Blocks.alloc(n64,z8);
             Span<byte> packed = stackalloc byte[bytecount];
             
             for(var i=0; i<RepCount; i++)            

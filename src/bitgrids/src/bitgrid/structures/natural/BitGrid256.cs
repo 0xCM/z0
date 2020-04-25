@@ -22,7 +22,10 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        internal readonly Vector256<T> data;
+        /// <summary>
+        /// The grid state
+        /// </summary>
+        internal readonly Vector256<T> Data;
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -41,21 +44,20 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<T>(in BitGrid256<M,N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Block256<T>(in BitGrid256<M,N,T> src)
-            => src.data.ToBlock();
+            => src.Data.ToBlock();
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid256<M,N,T>(in Block256<T> src)
-            => new BitGrid256<M, N, T>(src);
+            => new BitGrid256<M,N,T>(src);
 
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid256<M,N,T>(Vector256<T> src)
             => new BitGrid256<M,N,T>(src);
-
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid256<M,N,T>(Vector256<byte> src)
@@ -95,16 +97,19 @@ namespace Z0
         
         [MethodImpl(Inline)]
         internal BitGrid256(Vector256<T> data)
-            => this.data = data;
+            => this.Data = data;
         
         [MethodImpl(Inline)]
         internal BitGrid256(in Block256<T> src)
-            => this.data = src.LoadVector();
+            => this.Data = src.LoadVector();
         
-        public Vector256<T> Data
+        /// <summary>
+        /// The exposed grid state
+        /// </summary>
+        public Vector256<T> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         public int CellCount
@@ -137,7 +142,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public T Cell(int cell)
-            => data.GetElement(cell);
+            => Data.GetElement(cell);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid256<M,N,T> rhs)

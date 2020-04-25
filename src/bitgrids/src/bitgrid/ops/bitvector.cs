@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => g.Data;
+                => g.Content;
 
         /// <summary>
         /// Presents a fixed 32-bit grid as a 32-bit bitvector
@@ -34,7 +34,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => g.Data;
+                => g.Content;
 
         /// <summary>
         /// Presents a fixed 64-bit grid as a 64-bit bitvector
@@ -46,7 +46,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => g.Data;
+                => g.Content;
 
         /// <summary>
         /// Presents a fixed 128-bit grid as a 128-bit bitvector
@@ -58,6 +58,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => g.Data;
+                => g.Content;
     }
 }

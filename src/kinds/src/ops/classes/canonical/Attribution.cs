@@ -38,10 +38,5 @@ namespace Z0
 
     public sealed class SplitAttribute : A { public SplitAttribute() : base(K.Split) {} }    
 
-    public sealed class ToggleAttribute : A { public ToggleAttribute() : base(K.Toggle) {} }    
-
-
-
-    
-
+    public sealed class ToggleAttribute : A { public ToggleAttribute() : base(K.Toggle) {} }        
 }

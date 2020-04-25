@@ -21,7 +21,10 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly ulong data;
+        /// <summary>
+        /// The grid state
+        /// </summary>
+        internal readonly ulong Data;
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -40,19 +43,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid64<M,N,T>(in Block64<T> src)
-            => new SubGrid64<M, N, T>(src);
+            => new SubGrid64<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid64<M,N,T>(ulong src)
-            => new SubGrid64<M, N, T>(src);
+            => new SubGrid64<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ulong(SubGrid64<M,N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<T>(SubGrid64<M,N,T> src)
-            => new BitGrid64<T>(src.data, val8u<M>(), val8u<N>());
+            => new BitGrid64<T>(src.Data, val8u<M>(), val8u<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid64<M,N,T>(BitGrid64<T> src)
@@ -68,22 +71,25 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal SubGrid64(ulong src)
-            => this.data = src;
+            => this.Data = src;
         
         [MethodImpl(Inline)]
         internal SubGrid64(Block64<T> src)
-            => this.data = src.As<ulong>().Head;
+            => this.Data = src.As<ulong>().Head;
 
-        public ulong Data
+        /// <summary>
+        /// The exposed grid state
+        /// </summary>
+        public ulong Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => Data.AsBytes().As<T>();
+            get => Content.AsBytes().As<T>();
         }
 
         public ref T Head
@@ -130,11 +136,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public SubGrid64<M,N,U> As<U>()
             where U : unmanaged
-                => new SubGrid64<M, N, U>(data);
+                => new SubGrid64<M, N, U>(Data);
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid64<M,N,T> rhs)
-            => data.Equals(rhs.data);
+            => Data.Equals(rhs.Data);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

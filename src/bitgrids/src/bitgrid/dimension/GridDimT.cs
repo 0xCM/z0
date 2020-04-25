@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     public readonly struct GridDim<T> : IGridDim<T>, IFormattable<GridDim<T>>
         where T : unmanaged

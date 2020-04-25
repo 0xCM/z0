@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => generic<T>(Bits.slice(g.Data, uint8(nati<N>()*index),(byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Content, uint8(nati<N>()*index),(byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 32-bit grid
@@ -41,7 +41,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => generic<T>(Bits.slice(g.Data, uint8(nati<N>()*index),(byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Content, uint8(nati<N>()*index),(byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 64-bit grid
@@ -56,7 +56,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => generic<T>(gbits.slice(g.Data, (byte)(index*nati<N>()), val8u<N>()));
+                => generic<T>(gbits.slice(g.Content, (byte)(index*nati<N>()), val8u<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 16-bit subgrid
@@ -71,7 +71,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => generic<T>(Bits.slice(g.Data, uint8(index* nati<N>()), (byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Content, uint8(index* nati<N>()), (byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 32-bit subgrid
@@ -86,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => generic<T>(Bits.slice(g.Data, uint8(index* nati<N>()), (byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Content, uint8(index* nati<N>()), (byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identified row from a 64-bit subgrid
@@ -101,7 +101,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => generic<T>(Bits.slice(g.Data, uint8(index*nati<N>()), (byte)nati<N>()));
+                => generic<T>(Bits.slice(g.Content, uint8(index*nati<N>()), (byte)nati<N>()));
 
         /// <summary>
         /// Extracts an index-identifed 64-bit grid row
@@ -112,7 +112,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N64,ulong> row<T>(in BitGrid128<N2,N64,T> g, int index)
             where T : unmanaged
-                => v64u(g.Data).GetElement(index);
+                => v64u(g.Content).GetElement(index);
 
         /// <summary>
         /// Extracts an index-identifed 32-bit grid row
@@ -123,7 +123,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N32,uint> row<T>(in BitGrid128<N4,N32,T> g, int index)
             where T : unmanaged
-                => v32u(g.Data).GetElement(index);
+                => v32u(g.Content).GetElement(index);
 
         /// <summary>
         /// Extracts an index-identifed 16-bit grid row
@@ -134,7 +134,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N16,ushort> row<T>(in BitGrid128<N8,N16,T> g, int index)
             where T : unmanaged
-                => v16u(g.Data).GetElement(index);
+                => v16u(g.Content).GetElement(index);
 
         /// <summary>
         /// Extracts an index-identifed 8-bit grid row
@@ -145,7 +145,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N8,byte> row<T>(in BitGrid128<N16,N8,T> g, int index)
             where T : unmanaged
-                => v8u(g.Data).GetElement(index);
+                => v8u(g.Content).GetElement(index);
 
         /// <summary>
         /// Extracts an index-identifed 4-bit grid row
@@ -157,7 +157,7 @@ namespace Z0
         public static BitVector<N4,byte> row<T>(in BitGrid128<N32,N4,T> g, int index)
             where T : unmanaged
         {
-            uint cell = v8u(g.Data).GetElement(index/2);
+            uint cell = v8u(g.Content).GetElement(index/2);
             return CastNumeric.convert<byte>((gmath.odd(index) ? cell >> 4 : 0xF & cell));
         }
 
@@ -170,7 +170,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N32,uint> row<T>(in BitGrid256<N8,N32,T> g, int index)
             where T : unmanaged
-                => v32u(g.Data).GetElement(index);
+                => v32u(g.Content).GetElement(index);
 
         /// <summary>
         /// Extracts an index-identifed 8-bit grid row
@@ -181,7 +181,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N8,byte> row<T>(in BitGrid256<N32,N8,T> g, int index)
             where T : unmanaged
-                => v8u(g.Data).GetElement(index);
+                => v8u(g.Content).GetElement(index);
 
         /// <summary>
         /// Extracts an index-identifed 16-bit grid row
@@ -192,12 +192,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N16,ushort> row<T>(in BitGrid256<N16,N16,T> g, int index)
             where T : unmanaged
-                => v16u(g.Data).GetElement(index);
+                => v16u(g.Content).GetElement(index);
 
         [MethodImpl(Inline)]
         public static BitGrid256<N16,N16,T> row<T>(in BitGrid256<N16,N16,T> g, int index, BitVector<N16,ushort> data)
             where T : unmanaged
-                => v16u(g.Data).WithElement(index, data);
+                => v16u(g.Content).WithElement(index, data);
 
         /// <summary>
         /// Extracts an index-identifed 64-bit grid row
@@ -208,7 +208,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N64,ulong> row<T>(in BitGrid256<N4,N64,T> g, int index)
             where T : unmanaged
-                => v64u(g.Data).GetElement(index);
+                => v64u(g.Content).GetElement(index);
 
         #if Unused
 

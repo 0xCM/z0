@@ -7,17 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static Seed;
 
     partial class XTend
     {
-        // [MethodImpl(Inline)]
-        // public static Vector512<T> ToVector<T>(this in Fixed512V src)
-        //     where T : unmanaged
-        //         => new Vector512<T>(src.Lo<T>(), src.Hi<T>());
-
         [MethodImpl(Inline)]
         public static Vector512<T> Apply<T>(this UnaryOp512 f, Vector512<T> x)
            where T : unmanaged

@@ -26,7 +26,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N>(g.Data, showrow, label);
+                => render<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -41,7 +41,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N>(g.Data, showrow, label);
+                => render<M,N>(g.Content, showrow, label);
         
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -56,7 +56,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N>(g.Data, showrow, label);
+                => render<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -71,7 +71,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N,T>(g.data, showrow, label);
+                => render<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -86,7 +86,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N,T>(g.data, showrow, label);
+                => render<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -101,7 +101,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N>(g.Data, showrow, label);
+                => render<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -116,7 +116,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N>(g.Data, showrow, label);
+                => render<M,N>(g.Content, showrow, label);
         
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -131,7 +131,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N>(g.Data, showrow, label);
+                => render<M,N>(g.Content, showrow, label);
 
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -146,7 +146,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N,T>(g.data, showrow, label);
+                => render<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
@@ -161,7 +161,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => render<M,N,T>(g.data, showrow, label);
+                => render<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
         /// Renders grid data

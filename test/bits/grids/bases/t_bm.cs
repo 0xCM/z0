@@ -41,7 +41,7 @@ namespace Z0
                 var A = Random.BitMatrix<T>();
                 var B = Random.BitMatrix<T>();
                 var C = BitMatrix.alloc<T>();                
-                BitMatrix.and(A,B, ref C);
+                BitMatrix.and(A,B,C);
 
                 var rbA = A.ToRowBits();
                 var rbB = B.ToRowBits();
@@ -137,16 +137,16 @@ namespace Z0
             where T : unmanaged
         {
             var clock = counter();
-            var A = BitMatrix.alloc<T>();
-            var B = BitMatrix.alloc<T>();
-            var C = BitMatrix.alloc<T>();
+            var a = BitMatrix.alloc<T>();
+            var b = BitMatrix.alloc<T>();
+            var c = BitMatrix.alloc<T>();
 
             for(var i=0; i<OpCount; i++)
             {
-                Random.BitMatrix<T>(ref A);
-                Random.BitMatrix<T>(ref B);
+                Random.BitMatrix<T>(ref a);
+                Random.BitMatrix<T>(ref b);
                 clock.Start();
-                BitMatrix.and(A,B,ref C);
+                BitMatrix.and(a, b, c);
                 clock.Stop();
             }
 

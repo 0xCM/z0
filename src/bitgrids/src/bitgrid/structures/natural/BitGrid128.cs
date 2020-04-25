@@ -23,7 +23,10 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        internal readonly Vector128<T> data;
+        /// <summary>
+        /// The grid state
+        /// </summary>
+        internal readonly Vector128<T> Data;
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -42,20 +45,32 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<T>(in BitGrid128<M,N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Block128<T>(in BitGrid128<M,N,T> src)
-            => src.data.ToBlock();
+            => src.Data.ToBlock();
 
+        /// <summary>
+        /// Creates a grid from the leading source block
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline)]
         public static implicit operator BitGrid128<M,N,T>(in Block128<T> src)
-            => new BitGrid128<M, N, T>(src);
+            => new BitGrid128<M,N,T>(src);
 
+        /// <summary>
+        /// Creates a grid from a generic vector
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline)]
         public static implicit operator BitGrid128<M,N,T>(Vector128<T> src)
             => new BitGrid128<M,N,T>(src);
 
+        /// <summary>
+        /// Creates a grid from a 128x8u vector
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline)]
         public static implicit operator BitGrid128<M,N,T>(Vector128<byte> src)
             => new BitGrid128<M,N,T>(src.As<byte,T>());
@@ -90,16 +105,19 @@ namespace Z0
         
         [MethodImpl(Inline)]
         internal BitGrid128(Vector128<T> data)
-            => this.data = data;
+            => this.Data = data;
         
         [MethodImpl(Inline)]
         internal BitGrid128(in Block128<T> src)
-            => this.data = src.LoadVector();
+            => this.Data = src.LoadVector();
 
-        public Vector128<T> Data
+        /// <summary>
+        /// The exposed grid state
+        /// </summary>
+        public Vector128<T> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -135,11 +153,11 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public T Cell(int cell)
-            => data.GetElement(cell);
+            => Data.GetElement(cell);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid128<M,N,T> rhs)
-            => gvec.vtestc(gvec.veq(data,rhs));
+            => gvec.vtestc(gvec.veq(Data,rhs));
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

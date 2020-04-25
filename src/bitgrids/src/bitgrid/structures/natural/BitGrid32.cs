@@ -22,7 +22,10 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly uint data;
+        /// <summary>
+        /// The grid state
+        /// </summary>
+        internal readonly uint Data;
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -45,15 +48,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitGrid32<M,N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<T>(BitGrid32<M,N,T> src)
-            => new BitGrid32<T>(src.data, val8u<M>(), val8u<N>());
+            => new BitGrid32<T>(src.Data, val8u<M>(), val8u<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(in Block32<T> src)
-            => new BitGrid32<M, N, T>(src);
+            => new BitGrid32<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(BitGrid32<T> src)
@@ -69,24 +72,25 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitGrid32(uint src)
-            => this.data = src;
-
+            => this.Data = src;
 
         [MethodImpl(Inline)]
         internal BitGrid32(Block32<T> src)
-            => this.data = src.As<uint>().Head;
+            => this.Data = src.As<uint>().Head;
 
-        public uint Data
+        /// <summary>
+        /// The exposed grid state
+        /// </summary>
+        public uint Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
-
 
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes().As<T>();
+            get => Data.AsBytes().As<T>();
         }
 
         public ref T Head
@@ -143,11 +147,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitGrid32<M,N,U> As<U>()
             where U : unmanaged
-                => new BitGrid32<M, N, U>(data);
+                => new BitGrid32<M, N, U>(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid32<M,N,T> rhs)
-            => data.Equals(rhs.data);
+            => Data.Equals(rhs.Data);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

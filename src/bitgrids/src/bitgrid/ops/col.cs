@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit col<T>(BitGrid16<N1,N16,T> g, int index)
             where T : unmanaged
-                => (bit)(g.Data & (BitMasks.Lsb16x16x1 << index));
+                => (bit)(g.Content & (BitMasks.Lsb16x16x1 << index));
 
         /// <summary>
         /// Extracts an index-identifed 2-bit grid column
@@ -186,7 +186,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N64,ulong> col<T>(BitGrid64<N64,N1,T> g, int index)
             where T : unmanaged
-                => g.Data;
+                => g.Content;
 
         /// <summary>
         /// Extracts an index-identifed 16-bit grid column
@@ -197,7 +197,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N16,ushort> col<T>(in BitGrid128<N16,N8,T> g, int index)
             where T : unmanaged
-                => gvec.vtakemask(gvec.vsll(g.Data, (byte)(7 - index)));
+                => gvec.vtakemask(gvec.vsll(g.Content, (byte)(7 - index)));
 
         /// <summary>
         /// Extracts an index-identifed 32-bit grid column
@@ -208,7 +208,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N32,uint> col<T>(in BitGrid256<N32,N8,T> g, int index)
             where T : unmanaged
-                => gvec.vtakemask(gvec.vsll(g.Data, (byte)(7 - index)));
+                => gvec.vtakemask(gvec.vsll(g.Content, (byte)(7 - index)));
 
         [MethodImpl(Inline)]
         public static int colidx<N>(N width, int row, int col)

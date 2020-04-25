@@ -53,7 +53,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitConvert.GetBytes(src.Data).As<T>();
+                => BitConvert.GetBytes(src.Content).As<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -67,7 +67,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitConvert.GetBytes(src.Data).As<T>();
+                => BitConvert.GetBytes(src.Content).As<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -81,7 +81,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.ToSpan();
+                => src.Content.ToSpan();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -95,7 +95,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.ToSpan();
+                => src.Content.ToSpan();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -109,7 +109,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitConvert.GetBytes(src.Data).As<T>();
+                => BitConvert.GetBytes(src.Content).As<T>();
         
         /// <summary>
         /// Extracts grid content to a span
@@ -123,7 +123,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitConvert.GetBytes(src.Data).As<T>();
+                => BitConvert.GetBytes(src.Content).As<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -137,7 +137,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitConvert.GetBytes(src.Data).As<T>();
+                => BitConvert.GetBytes(src.Content).As<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -151,7 +151,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.ToSpan();
+                => src.Content.ToSpan();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -165,6 +165,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.ToSpan();
+                => src.Content.ToSpan();
     }
 }

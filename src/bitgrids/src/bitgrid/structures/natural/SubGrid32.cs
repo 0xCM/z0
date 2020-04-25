@@ -21,7 +21,10 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly uint data;
+        /// <summary>
+        /// The grid state
+        /// </summary>
+        internal readonly uint Data;
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -48,11 +51,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator uint(SubGrid32<M,N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<T>(SubGrid32<M,N,T> src)
-            => new BitGrid32<T>(src.data, val8u<M>(), val8u<N>());
+            => new BitGrid32<T>(src.Data, val8u<M>(), val8u<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid32<M,N,T>(BitGrid32<T> src)
@@ -68,22 +71,25 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal SubGrid32(uint src)
-            => this.data = src;
+            => this.Data = src;
         
         [MethodImpl(Inline)]
         internal SubGrid32(Block32<T> src)
-            => this.data = src.As<uint>().Head;
+            => this.Data = src.As<uint>().Head;
 
-        public uint Data
+        /// <summary>
+        /// The exposed grid state
+        /// </summary>
+        public uint Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes().As<T>();
+            get => Data.AsBytes().As<T>();
         }
 
         public ref T Head
@@ -136,11 +142,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public SubGrid32<M,N,U> As<U>()
             where U : unmanaged
-                => new SubGrid32<M, N, U>(data);
+                => new SubGrid32<M, N, U>(Data);
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid32<M,N,T> rhs)
-            => data.Equals(rhs.data);
+            => Data.Equals(rhs.Data);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

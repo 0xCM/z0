@@ -32,21 +32,21 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotr(g.Data,offset);
+                => Bits.rotr(g.Content,offset);
 
         [MethodImpl(Inline)]
         public static BitGrid32<M,N,T> rotr<M,N,T>(BitGrid32<M,N,T> g, byte offset)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotr(g.Data,offset);
+                => Bits.rotr(g.Content,offset);
 
         [MethodImpl(Inline)]
         public static BitGrid64<M,N,T> rotr<M,N,T>(BitGrid64<M,N,T> g, byte offset)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotr(g.Data,offset);
+                => Bits.rotr(g.Content,offset);
 
         [MethodImpl(Inline)]
         public static BitGrid128<M,N,T> rotr<M,N,T>(in BitGrid128<M,N,T> g, byte offset)

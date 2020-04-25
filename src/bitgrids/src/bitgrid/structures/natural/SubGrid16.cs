@@ -21,7 +21,10 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly ushort data;
+        /// <summary>
+        /// The grid state
+        /// </summary>
+        internal readonly ushort Data;
 
         /// <summary>
         /// The maximum number of bytes covered by the grid
@@ -44,12 +47,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid16<M,N,T>(ushort src)
-            => new SubGrid16<M, N, T>(src);
+            => new SubGrid16<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ushort(SubGrid16<M,N,T> src)
-            => src.data;
-
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static bool operator ==(SubGrid16<M,N,T> g1, SubGrid16<M,N,T> g2)
@@ -61,16 +63,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal SubGrid16(ushort src)
-            => this.data = src;
+            => this.Data = src;
         
         [MethodImpl(Inline)]
         internal SubGrid16(Block16<T> src)
-            => this.data = src.As<ushort>().Head;
+            => this.Data = src.As<ushort>().Head;
 
-        public ushort Data
+        /// <summary>
+        /// The exposed grid state
+        /// </summary>
+        public ushort Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -104,7 +109,7 @@ namespace Z0
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes().As<T>();
+            get => Data.AsBytes().As<T>();
         }
 
         public ref T Head
@@ -132,12 +137,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public SubGrid16<M,N,U> As<U>()
             where U : unmanaged
-                => new SubGrid16<M,N,U>(data);
+                => new SubGrid16<M,N,U>(Data);
 
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid16<M,N,T> rhs)
-            => data.Equals(rhs.data);
+            => Data.Equals(rhs.Data);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

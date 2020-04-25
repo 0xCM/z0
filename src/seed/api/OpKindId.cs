@@ -317,7 +317,15 @@ namespace Z0
 
         TestZnC,
 
-        Same
+        Same,
+
+        Alloc,
+
+        Init,        
+
+        Load,
+
+        Store,
 
     }    
 }

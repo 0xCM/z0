@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                =>  Vectors.vstore(src.data, dst);
+                =>  Vectors.vstore(src.Data, dst);
 
         /// <summary>
         /// Allocates and stores a 128-bit bitgrid to a blocked span
@@ -42,8 +42,8 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = Blocks.single<T>(n128);
-            Vectors.vstore(src.data, dst);
+            var dst = Blocks.alloc<T>(n128);
+            Vectors.vstore(src.Data, dst);
             return dst;
         }
 
@@ -60,7 +60,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                =>  Vectors.vstore(src.data, dst);
+                =>  Vectors.vstore(src.Data, dst);
 
         /// <summary>
         /// Allocates and stores a 256-bit bitgrid to a blocked span
@@ -77,7 +77,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = Blocks.single<T>(n256);
-            Vectors.vstore(src.data, dst);
+            Vectors.vstore(src.Data, dst);
             return dst;
         }
 

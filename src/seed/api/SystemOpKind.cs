@@ -13,16 +13,21 @@ namespace Z0
         /// <summary>
         /// Identifies operations that allocate memory/resources
         /// </summary>
-        Alloc = 1,
+        Alloc = OpKindId.Alloc,
 
         /// <summary>
         /// Identifies operations that move data from A -> B
         /// </summary>
-        Store = 2,
+        Store = OpKindId.Store,
 
         /// <summary>
         /// Identifies operations that move data from B -> A
         /// </summary>
-        Load = 4
+        Load = OpKindId.Load,
+
+        /// <summary>
+        /// Identifies operations that initalize a resource where allocation may be required...or not
+        /// </summary>
+        Init = OpKindId.Init,
     }
 }

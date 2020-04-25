@@ -30,7 +30,7 @@ namespace Z0
 
         public void sb_pop_popcnt()
         {
-            var buffer16x8 = Blocks.single<byte>(n128);
+            var buffer16x8 = Blocks.alloc<byte>(n128);
             var src = (ushort)0b11001111;
 
             var srcPop = Bits.pop(src);

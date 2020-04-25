@@ -22,7 +22,7 @@ namespace Z0
         public static Block128<T> ToBlock<T>(this Vector128<T> src)
             where T : unmanaged            
         {
-            var dst = Blocks.single<T>(w128);
+            var dst = Blocks.alloc<T>(w128);
             Vectors.vstore(src, ref dst.Head);
             return dst;
         }                       

@@ -77,7 +77,7 @@ namespace Z0
                 var x = Random.CpuVector<uint>(n);
                 var y = VBits.bfly(w, x);
                 var xs = x.ToSpan();
-                var zs = Blocks.single<uint>(n);
+                var zs = Blocks.alloc<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
@@ -112,7 +112,7 @@ namespace Z0
                 var x = Random.CpuVector<ulong>(n);
                 var y = VBits.bfly(w, x);
                 var xs = x.ToSpan();
-                var zs = Blocks.single<ulong>(n);
+                var zs = Blocks.alloc<ulong>(n);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();

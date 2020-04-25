@@ -15,6 +15,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Perm16L perm(BitGrid64<N16,N4,ulong> g)
-            => (Perm16L)g.Data;
+            => (Perm16L)g.Content;
     }
 }

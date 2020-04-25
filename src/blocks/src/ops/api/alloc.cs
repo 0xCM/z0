@@ -12,6 +12,50 @@ namespace Z0
     partial class Blocks
     {
         /// <summary>
+        /// Allocates a single 8-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [Alloc, Closures(Numeric8)]
+        public static Block8<T> alloc<T>(W8 w, T t = default)
+            where T : unmanaged        
+                => alloc<T>(w,1);
+
+        /// <summary>
+        /// Allocates a single 16-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [Alloc, Closures(Numeric8x16)]
+        public static Block16<T> alloc<T>(W16 w, T t = default)
+            where T : unmanaged        
+                => alloc<T>(w,1);
+
+        /// <summary>
+        /// Allocates a single 32-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [Alloc, Closures(Numeric8x16x32)]
+        public static Block32<T> alloc<T>(W32 w, T t = default)
+            where T : unmanaged        
+                => alloc<T>(w,1);
+
+        /// <summary>
+        /// Allocates a single 64-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [Alloc, Closures(AllNumeric)]
+        public static Block64<T> alloc<T>(W64 w, T t = default)
+            where T : unmanaged        
+                => alloc<T>(w,1);
+
+        /// <summary>
         /// Allocates a specified number of 8-bit blocks, filled with an optional pattern
         /// </summary>
         /// <param name="w">The block width selector</param>

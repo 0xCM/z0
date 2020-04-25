@@ -115,7 +115,7 @@ namespace Z0
 
             var tbc = 1;
 
-            var sb = Blocks.single(sw,st);
+            var sb = Blocks.alloc(sw,st);
             var tb = Blocks.alloc(tw,tbc,tt);
 
             for(var sample = 0; sample < RepCount; sample++)
@@ -143,7 +143,7 @@ namespace Z0
 
             var tbc = 2;
 
-            var sb = Blocks.single(sw,st);
+            var sb = Blocks.alloc(sw,st);
             var tb = Blocks.alloc(tw,tbc,tt);
 
             for(var sample = 0; sample < RepCount; sample++)

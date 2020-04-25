@@ -19,7 +19,7 @@ namespace Z0
             const byte N = 0;
 
             var n = n128;
-            var dst = Blocks.single<byte>(n);
+            var dst = Blocks.alloc<byte>(n);
             var m0 = Vectors.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
             var m1 = dvec.vsllx(m0,32);
             var m2 = dvec.vsllx(m1,32);

@@ -268,7 +268,7 @@ namespace Z0
             where T : unmanaged
         {
             var pick = BitMask.msb(n1,n1,t);
-            var pattern = Blocks.single(w,t);
+            var pattern = Blocks.alloc(w,t);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
             return pattern.LoadVector();
@@ -280,19 +280,19 @@ namespace Z0
 
         static Vector128<T> rrll_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.even(n2,n2,z64), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.even(n2,n2,z64), enabled(t), Blocks.alloc(w,t)).LoadVector();
 
         static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.odd(n2,n2,z64), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.odd(n2,n2,z64), enabled(t), Blocks.alloc(w,t)).LoadVector();
 
         static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), Blocks.alloc(w,t)).LoadVector();
 
         static Vector128<T> lr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.msb(n2,n1,z64), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.msb(n2,n1,z64), enabled(t), Blocks.alloc(w,t)).LoadVector();
 
         static Vector256<T> rl_pattern<T>(N256 w, T t = default)
             where T : unmanaged

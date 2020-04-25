@@ -22,7 +22,10 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        internal readonly Vector256<T> data;
+        /// <summary>
+        /// The grid state
+        /// </summary>
+        internal readonly Vector256<T> Data;
 
         /// <summary>
         /// The maximum number of bytes covered by the grid
@@ -41,11 +44,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<T>(in SubGrid256<M,N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Block256<T>(in SubGrid256<M,N,T> src)
-            => src.data.ToBlock();
+            => src.Data.ToBlock();
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid256<M,N,T>(in Block256<T> src)
@@ -61,22 +64,25 @@ namespace Z0
         
         [MethodImpl(Inline)]
         internal SubGrid256(Vector256<T> data)
-            => this.data = data;
+            => this.Data = data;
         
         [MethodImpl(Inline)]
         internal SubGrid256(in Block256<T> src)
-            => this.data = src.LoadVector();
+            => this.Data = src.LoadVector();
         
-        public Vector256<T> Data
+        /// <summary>
+        /// The exposed grid state
+        /// </summary>
+        public Vector256<T> Content
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => data.ToSpan<T>();
+            get => Data.ToSpan<T>();
         }
 
         public ref T Head
@@ -109,16 +115,16 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public T Cell(int cell)
-            => data.GetElement(cell);
+            => Data.GetElement(cell);
 
         [MethodImpl(Inline)]
         public SubGrid256<M,N,U> As<U>()
             where U : unmanaged
-                => data.As<T,U>();
+                => Data.As<T,U>();
 
         [MethodImpl(Inline)]
         public bool Equals(SubGrid256<M,N,T> rhs)
-            => gvec.vsame(data,rhs.data);
+            => gvec.vsame(Data,rhs.Data);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

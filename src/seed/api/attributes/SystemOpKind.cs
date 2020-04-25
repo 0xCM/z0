@@ -6,20 +6,23 @@ namespace Z0
 {
     using System;
 
-    public class SystemOpKindAttribute : OpAttribute
+    using K = SystemOpKind;
+
+    public class SystemOpKindAttribute : OpKindAttribute
     {
-        public SystemOpKindAttribute(SystemOpKind kind) 
+        public SystemOpKindAttribute(K kind) 
+            : base(kind)
         {
             Kind = kind;
         }
 
-        public SystemOpKind Kind {get;}
+        public K Kind {get;}
     }
 
     public class LoadAttribute : SystemOpKindAttribute    
     {
         public LoadAttribute()
-            : base(SystemOpKind.Load)
+            : base(K.Load)
         {
 
         }
@@ -28,7 +31,7 @@ namespace Z0
     public class StoreAttribute : SystemOpKindAttribute    
     {
         public StoreAttribute()
-            : base(SystemOpKind.Store)
+            : base(K.Store)
         {
             
         }
@@ -37,9 +40,18 @@ namespace Z0
     public class AllocAttribute : SystemOpKindAttribute    
     {
         public AllocAttribute()
-            : base(SystemOpKind.Alloc)
+            : base(K.Alloc)
         {
             
         }
     }
+
+    public class InitAttribute : SystemOpKindAttribute    
+    {
+        public InitAttribute()
+            : base(K.Init)
+        {
+            
+        }
+    }    
 }

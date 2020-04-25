@@ -22,7 +22,7 @@ namespace Z0
         public static Span<T> ToSpan<T>(this Vector128<T> src)
             where T : unmanaged            
         {
-            var dst = Blocks.single<T>(w128);
+            var dst = Blocks.alloc<T>(w128);
             Vectors.vstore(src, ref dst.Head);
             return dst.Data;
         }

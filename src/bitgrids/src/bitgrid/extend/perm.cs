@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Perm8L ToPerm(this SubGrid32<N8,N3,uint> src)
-            => (Perm8L)src.Data;
+            => (Perm8L)src.Content;
 
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> ToBitGrid(this NatPerm<N16> src)
@@ -34,6 +34,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Perm16L ToPerm(this BitGrid64<N16,N4,ulong> src)
-            => (Perm16L)src.Data;
+            => (Perm16L)src.Content;
     }
 }
