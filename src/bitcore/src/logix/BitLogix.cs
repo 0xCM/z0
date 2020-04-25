@@ -15,35 +15,45 @@ namespace Z0
     using TLK = TernaryLogicKind;
     using ULK = UnaryLogicKind;
 
-    public partial class BitLogixOps
-    {
-
-    }
+    using K = Kinds;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
     /// </summary>
     [ApiHost]
-    public readonly struct BitLogix : IApiHost<BitLogix>, IBitLogix
+    public readonly partial struct BitLogix : IApiHost<BitLogix>, IBitLogix
     {        
         public static BitLogix Service => default(BitLogix);
         
+        [MethodImpl(Inline)]
+        public bit Evaluate<F>(bit a, bit b, F kind = default)
+            where F : unmanaged, IBitLogicKind
+                => BitLogixOps.eval(a, b, kind);
+
+        [MethodImpl(Inline), Op]
+        public bit Nand_kind(bit a, bit b)        
+            => BitLogixOps.eval(a, b, K.nand());
+
+        [MethodImpl(Inline), Op]
+        public bit Xor_kind(bit a, bit b)        
+            => BitLogixOps.eval(a, b, K.xor());
+
         /// <summary>
         /// Advertises the supported unary opeators
         /// </summary>
-        public static ReadOnlySpan<ULK> UnaryOpKinds
+        public ReadOnlySpan<ULK> UnaryOpKinds
             => Enums.valarray<ULK>();
 
         /// <summary>
         /// Advertises the supported binary opeators
         /// </summary>
-        public static ReadOnlySpan<BLK> BinaryOpKinds
+        public ReadOnlySpan<BLK> BinaryOpKinds
             => Enums.valarray<BLK>();
          
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static ReadOnlySpan<TLK> TernaryOpKinds
+        public ReadOnlySpan<TLK> TernaryOpKinds
             => gmath.range((byte)1,(byte)X5F).Cast<TLK>().ToArray();
 
         /// <summary>
@@ -96,39 +106,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public bit Evaluate(TLK kind, bit a, bit b, bit c)
             => BitLogixOps.eval(kind, a, b, c);
-
-        /// <summary>
-        /// Returns a kind-indentified binary operator
-        /// </summary>
-        /// <param name="kind">The operator kind</param>
-        public static BinaryOp<bit> lookup(BLK kind)
-            => BitLogixOps.lookup(kind);
-
-        /// <summary>
-        /// Returns a kind-indentified ternary operator
-        /// </summary>
-        /// <param name="kind">The operator kind</param>
-        public static TernaryOp<bit> lookup(TLK kind)
-            => BitLogixOps.lookup(kind);
-
-        /// <summary>
-        /// Evaluates a binary operator without lookup/delegate indirection
-        /// </summary>
-        /// <param name="op">The operator classifier</param>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        /// <param name="c">The third operand</param>
-        public static bit eval(BLK kind, bit a, bit b)
-            => BitLogixOps.eval(kind,a,b);
-
-        /// <summary>
-        /// Evaluates an identified ternary operator
-        /// </summary>
-        /// <param name="op">The ternary operator classifier</param>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        /// <param name="c">The third operand</param>
-        public static bit eval(TLK kind, bit a, bit b, bit c)
-            => BitLogixOps.eval(kind,a,b,c);
     }
 }

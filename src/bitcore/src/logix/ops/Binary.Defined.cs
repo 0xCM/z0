@@ -12,9 +12,7 @@ namespace Z0
     using static LogicSig;
     using static BitLogix;
 
-    using BLK = BinaryLogicKind;
-
-    partial class BitLogixOps
+    partial struct BitLogix
     {
         [MethodImpl(Inline), Op]
         public static bit @false(bit a, bit b)

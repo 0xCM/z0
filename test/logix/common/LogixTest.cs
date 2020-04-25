@@ -24,6 +24,8 @@ namespace Z0.Logix
     public abstract class LogixTest<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
         where X : LogixTest<X>
     {
+        BitLogix bitlogix => BitLogix.Service;
+
         protected void logic_op_check(BL kind, Func<bit,bit,bit> rule)
         {
             var lhs = Random.BitStream().Take(RepCount).ToArray();
@@ -33,7 +35,7 @@ namespace Z0.Logix
                 var a = lhs[i];
                 var b = rhs[i];
                 var expect = rule(a,b);
-                var actual = BitLogix.eval(kind, a,b);
+                var actual = bitlogix.Evaluate(kind, a,b);
                 Claim.eq(expect, actual);
             }
         }
@@ -63,7 +65,7 @@ namespace Z0.Logix
             var lhsSamples = Random.BitStream().Take(RepCount).ToArray();
             var rhsSamples = Random.BitStream().Take(RepCount).ToArray();
             var result = bit.Off;
-            var kinds = BitLogix.BinaryOpKinds;
+            var kinds = bitlogix.BinaryOpKinds;
             var opcount = 0;
 
             clock.Start();
@@ -73,14 +75,14 @@ namespace Z0.Logix
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
-                    result = BitLogix.lookup(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
+                    result = bitlogix.Lookup(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
             }
             else
             {
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
-                    result = BitLogix.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
+                    result = bitlogix.Evaluate(kinds[k],lhsSamples[sample], rhsSamples[sample]);
             }
 
             clock.Stop();

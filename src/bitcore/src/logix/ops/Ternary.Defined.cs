@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;    
     using static BitLogix;
 
-    partial class BitLogixOps
+    partial struct BitLogix
     {
         [MethodImpl(Inline), Op]
         public static bit select(bit a, bit b, bit c)

@@ -41,7 +41,7 @@ namespace Z0.Logix
         void check_identity<T>(ComparisonExpr<T> identity)
             where T :unmanaged
         {
-            var @true = NumericOps.@true<T>();
+            var @true = NumericBits.@true<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();

@@ -97,6 +97,8 @@ namespace Z0
             }
         }
 
+        BitLogix bitlogix => BitLogix.Service;
+
         /// <summary>
         /// Computes the bitwise AND of the source vetors via component-wise logical operations to define a reference implementation 
         /// </summary>
@@ -109,7 +111,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.And, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.And, x[i], y[i]);
             return z;
         }
 
@@ -125,7 +127,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.Nand, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.Nand, x[i], y[i]);
             return z;
         }
 
@@ -141,7 +143,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.Or, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.Or, x[i], y[i]);
             return z;
         }
 
@@ -157,7 +159,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.Nor, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.Nor, x[i], y[i]);
             return z;
         }
 
@@ -173,7 +175,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.Xor, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.Xor, x[i], y[i]);
             return z;
         }
 
@@ -189,7 +191,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.Xnor, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.Xnor, x[i], y[i]);
             return z;
         }
 
@@ -237,7 +239,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.Impl, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.Impl, x[i], y[i]);
             return z;
         }
 
@@ -253,7 +255,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.NonImpl, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.NonImpl, x[i], y[i]);
             return z;
         }
 
@@ -269,7 +271,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.CImpl, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.CImpl, x[i], y[i]);
             return z;
         }
 
@@ -285,7 +287,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.eval(BLK.CNonImpl, x[i], y[i]);
+                z[i] = bitlogix.Evaluate(BLK.CNonImpl, x[i], y[i]);
             return z;
         }
 
@@ -295,7 +297,7 @@ namespace Z0
             var len = x.Width;
             var dst = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                dst[i] = BitLogixOps.select(x[i], y[i], z[i]);
+                dst[i] = BitLogix.select(x[i], y[i], z[i]);
             return z;
         }
     }

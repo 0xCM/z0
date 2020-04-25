@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     using static VectorizedOps;
     
-    using S = NumericOps;
+    using S = NumericBits;
 
     public class t_comparison_ops : TypedLogixTest<t_comparison_ops>
     {
@@ -218,7 +218,7 @@ namespace Z0.Logix
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
-                var expect = S.promote<T>(gmath.lt(x,y));
+                var expect = gmath.lt(x,y).Promote<T>();
                 var actual = S.lt(x,y);
                 Claim.eq(expect,actual);
             }
@@ -231,7 +231,7 @@ namespace Z0.Logix
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
-                var expect = S.promote<T>(gmath.lteq(x,y));
+                var expect = gmath.lteq(x,y).Promote<T>();
                 var actual = S.lteq(x,y);
                 Claim.eq(expect,actual);
             }
@@ -244,7 +244,7 @@ namespace Z0.Logix
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
-                var expect = S.promote<T>(gmath.gt(x,y));
+                var expect = gmath.gt(x,y).Promote<T>();
                 var actual = S.gt(x,y);
                 Claim.eq(expect,actual);
             }
@@ -257,7 +257,7 @@ namespace Z0.Logix
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
-                var expect = S.promote<T>(gmath.gteq(x,y));
+                var expect = gmath.gteq(x,y).Promote<T>();
                 var actual = S.gteq(x,y);
                 Claim.eq(expect,actual);
             }

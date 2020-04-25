@@ -9,12 +9,81 @@ namespace Z0
 
     using static Seed;    
     using static LogicSig;
-    using static BitLogix;
+    using static BitLogix;    
 
     using BLK = BinaryLogicKind;
 
     partial class BitLogixOps
     {
+        [MethodImpl(Inline)]
+        public static bit eval<F>(bit a, bit b, F kind = default)
+            where F : unmanaged, IBitLogicKind
+                => eval_1(a,b, kind);
+
+        [MethodImpl(Inline)]
+        static bit eval_1<F>(bit a, bit b, F kind = default)
+            where F : unmanaged, IBitLogicKind
+        {
+            if(typeof(F) == typeof(Kinds.True))
+                return @true(a, b);
+            else if(typeof(F) == typeof(Kinds.False))  
+                return @false(a, b);
+            else if(typeof(F) == typeof(Kinds.And))
+                return and(a, b);
+            else if (typeof(F) == typeof(Kinds.Nand))
+                return nand(a, b);
+            else
+                return eval_2(a, b, kind);
+        }
+
+        [MethodImpl(Inline)]
+        static bit eval_2<F>(bit a, bit b, F kind = default)
+            where F : unmanaged, IBitLogicKind
+        {
+            if (typeof(F) == typeof(Kinds.Or))
+                return or(a, b);
+            else if (typeof(F) == typeof(Kinds.Nor))
+                return nor(a, b);
+            else if (typeof(F) == typeof(Kinds.Xor))
+                return xor(a, b);
+            else if (typeof(F) == typeof(Kinds.Xnor))
+                return xnor(a, b);
+            else
+                return eval_3(a, b, kind);
+        }
+
+        [MethodImpl(Inline)]
+        static bit eval_3<F>(bit a, bit b, F kind = default)
+            where F : unmanaged, IBitLogicKind
+        {
+            if (typeof(F) == typeof(Kinds.Impl))
+                return impl(a, b);
+            else if (typeof(F) == typeof(Kinds.NonImpl))
+                return nonimpl(a, b);
+            else if (typeof(F) == typeof(Kinds.LProject))
+                return left(a, b);
+            else if (typeof(F) == typeof(Kinds.RProject))
+                return right(a, b);
+            else
+                return eval_4(a, b, kind);
+        }
+
+        [MethodImpl(Inline)]
+        static bit eval_4<F>(bit a, bit b, F kind = default)
+            where F : unmanaged, IBitLogicKind
+        {
+            if (typeof(F) == typeof(Kinds.LNot))
+                return lnot(a, b);
+            else if (typeof(F) == typeof(Kinds.RNot))
+                return rnot(a, b);
+            else if (typeof(F) == typeof(Kinds.CImpl))
+                return cimpl(a, b);
+            else if (typeof(F) == typeof(Kinds.CNonImpl))
+                return cnonimpl(a, b);
+            else
+                throw Unsupported.define<F>();
+        }
+
         /// <summary>
         /// Evaluates a binary operator without lookup/delegate indirection
         /// </summary>

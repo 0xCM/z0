@@ -37,5 +37,18 @@ namespace Z0
         public readonly struct Not : I { K I.Kind => K.Not; }
 
         public readonly struct Select : I { K I.Kind => K.Select; }
+
+        public readonly struct True : I { K I.Kind => K.True; }
+
+        public readonly struct False : I { K I.Kind => K.False; }
+
+        public readonly struct LProject : I { K I.Kind => K.LProject; }
+
+        public readonly struct RProject : I { K I.Kind => K.RProject; }
+
+        public readonly struct LNot : I { K I.Kind => K.LNot; }
+
+        public readonly struct RNot : I { K I.Kind => K.RNot; }
+
     }
 }

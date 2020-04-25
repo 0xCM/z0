@@ -9,7 +9,7 @@ namespace Z0.Logix
 
     using static Seed;    
     using static TernaryLogicKind;
-    using static NumericOps;
+    using static NumericBits;
     using static OpHelpers;
     using static LogicSig;
 
@@ -97,7 +97,7 @@ namespace Z0.Logix
             switch(kind)
             {
                 case ULK.Not: return not(a);
-                case ULK.Identity: return NumericOps.identity(a);
+                case ULK.Identity: return NumericBits.identity(a);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -281,7 +281,7 @@ namespace Z0.Logix
             switch(kind)
             {
                 case ULK.Not: return not;
-                case ULK.Identity: return NumericOps.identity;
+                case ULK.Identity: return NumericBits.identity;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

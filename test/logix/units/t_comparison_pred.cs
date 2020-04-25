@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static LogicEngine;
     using static PredicateSpec;
     using static BinaryComparisonKind;
-    using static NumericOps;
+    using static NumericBits;
     using static BitLogix;
     
     public class t_comparison_pred : TypedLogixTest<t_comparison_pred>
@@ -116,15 +116,15 @@ namespace Z0.Logix
                 
                 var ab = gmath.lt(a,b);
                 var abx = eval(x);
-                Claim.require(same(ab, abx));
+                Claim.require(ab == abx);
                 
                 var bc = gmath.lt(b,c);
                 var bcy = eval(y);                
-                Claim.require(same(bc, bcy));
+                Claim.require(bc == bcy);
 
                 var ca = gmath.lt(c,a);
                 var caz = eval(z);
-                Claim.require(same(ca, caz));
+                Claim.require(ca == caz);
             }
 
         }

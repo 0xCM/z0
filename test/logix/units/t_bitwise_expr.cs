@@ -15,6 +15,8 @@ namespace Z0.Logix
     {
         protected override ICheckVectorBits Claim => CheckVectorBits.Checker;        
 
+        BitLogix bitlogix => BitLogix.Service;
+
         public void check_not_scalar_expr()  
         {      
             check_scalar_expr<byte>(UnaryLogicKind.Not);
@@ -253,7 +255,7 @@ namespace Z0.Logix
         void check_ternary_ops<T>(TernaryLogicKind id)
             where T : unmanaged
         {
-            var BL = BitLogix.lookup(id);
+            var BL = bitlogix.Lookup(id);
             var SC = NumericOpApi.lookup<T>(id);
             var V128 = VectorOpApi.lookup<T>(n128,id);
             var V256 = VectorOpApi.lookup<T>(n256,id);
@@ -273,7 +275,7 @@ namespace Z0.Logix
                     z0[i] = BL(va[i],vb[i],vc[i]);
 
                 var z3 = SC(sa, sb, sc);
-                if(!NumericOps.same(z3, z0.Scalar))
+                if(!NumericBits.same(z3, z0.Scalar))
                     Claim.FailWith($"Evalutation of ternary op {id} failed");
 
                 var v1 = Vectors.vbroadcast(n256,sa);

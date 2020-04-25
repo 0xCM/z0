@@ -24,6 +24,6 @@ namespace Z0
         /// <param name="tc">The type code to evaluate</param>
         [MethodImpl(Inline)]
         public static NumericKind NumericKind(this TypeCode tc)
-            => NumericKinds.kind(tc);
+            => NumericKinds.kind(tc);            
     }
 }

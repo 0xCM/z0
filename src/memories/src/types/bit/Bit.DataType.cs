@@ -611,10 +611,21 @@ namespace Z0
         public static bool operator !=(bit a, bit b)
             => a.state != b.state;
 
+        /// <summary>
+        /// Promotes a bit to a numeric value where all target bits are enabled if the state of the
+        /// bit is on; otherwise all target bits are disabled
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        /// <typeparam name="T">The target numeric type</typeparam>
+        [MethodImpl(Inline)]
+        public T Promote<T>()
+            where T : unmanaged
+                => this ? Memories.maxval<T>() : default;
+
         [MethodImpl(Inline)]
         public bool Equals(bit b)
-            => state == b.state;
-        
+            => state == b.state; 
+
         public override bool Equals(object b)
             => b is bit x && Equals(x);
 
@@ -693,6 +704,5 @@ namespace Z0
             Array.Reverse(src);
             return src;
         }
-
     }
 }

@@ -14,10 +14,12 @@ namespace Z0.Logix
 
     public class t_truthtable : UnitTest<t_truthtable>
     {                        
+        BitLogix bitlogix => BitLogix.Service;
+
         public void unary_truth()
         {
             using var dst = DataFileWriter(FileName.Define(caller()));
-            var ops = BitLogix.UnaryOpKinds;
+            var ops = bitlogix.UnaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Unary);
         }
@@ -25,7 +27,7 @@ namespace Z0.Logix
         public void binary_truth()
         {
             using var dst = DataFileWriter(FileName.Define(caller()));
-            var ops = BitLogix.BinaryOpKinds;
+            var ops = bitlogix.BinaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Binary);
         }
@@ -33,14 +35,14 @@ namespace Z0.Logix
         public void ternary_truth()
         {
             using var dst = DataFileWriter(FileName.Define(caller()));
-            var ops = BitLogix.TernaryOpKinds;
+            var ops = bitlogix.TernaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Ternary);
         }
 
         public void unary_sig_check()
         {
-            foreach(var op in BitLogix.UnaryOpKinds)
+            foreach(var op in bitlogix.UnaryOpKinds)
             {
                 var table = TruthTables.build(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8).Lo;
@@ -51,7 +53,7 @@ namespace Z0.Logix
 
         public void binary_sig_check()
         {
-            foreach(var op in BitLogix.BinaryOpKinds)
+            foreach(var op in bitlogix.BinaryOpKinds)
             {
                 var table = TruthTables.build(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8).Lo;
@@ -62,7 +64,7 @@ namespace Z0.Logix
 
         public void ternary_sig_check()
         {
-            foreach(var op in BitLogix.TernaryOpKinds)
+            foreach(var op in bitlogix.TernaryOpKinds)
             {
                 var table = TruthTables.build(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8);
@@ -148,10 +150,10 @@ namespace Z0.Logix
         void check_truth(BinaryLogicKind op)
         {
             var dst = BitVector.alloc(n4);
-            dst[0] = BitLogix.eval(op, bit.Off,bit.Off);
-            dst[1] = BitLogix.eval(op, bit.On,bit.Off);
-            dst[2] = BitLogix.eval(op, bit.Off,bit.On);
-            dst[3] = BitLogix.eval(op, bit.On,bit.On);
+            dst[0] = bitlogix.Evaluate(op, bit.Off,bit.Off);
+            dst[1] = bitlogix.Evaluate(op, bit.On,bit.Off);
+            dst[2] = bitlogix.Evaluate(op, bit.Off,bit.On);
+            dst[3] = bitlogix.Evaluate(op, bit.On,bit.On);
             var sig = TruthTables.sig(op);
             Claim.eq(sig,dst);
         }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,18 +10,13 @@ namespace Z0.Logix
     using static Seed;    
     using static Memories;
 
-    [ApiHost("numeric.ops")]
-    public static class NumericOps
+    [ApiHost]
+    public readonly struct NumericBits : IApiHost<NumericBits>
     {        
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T identity<T>(T a)
             where T : unmanaged
                 => gmath.identity(a);
-
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static T ones<T>()
-            where T : unmanaged
-                => maxval<T>();
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @false<T>()
@@ -56,13 +51,12 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @true<T>(T a, T b)
             where T:unmanaged
-                => gmath.@true(a,b);
-
+                => gmath.@true(a, b);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @true<T>(T a, T b, T c)
             where T:unmanaged
-                => gmath.@true(a,b,c);
+                => gmath.@true(a, b, c);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T not<T>(T a)
@@ -74,27 +68,16 @@ namespace Z0.Logix
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.generic<T>((byte)(uint8(a) ^ byte.MaxValue));
+                return generic<T>((byte)(uint8(a) ^ byte.MaxValue));
             else if(typeof(T) == typeof(ushort))
-                return As.generic<T>(uint16(a)^ ushort.MaxValue);
+                return generic<T>(uint16(a)^ ushort.MaxValue);
             else if(typeof(T) == typeof(uint))
-                return As.generic<T>(uint32(a)^ uint.MaxValue);
+                return generic<T>(uint32(a)^ uint.MaxValue);
             else if(typeof(T) == typeof(ulong))
-                return As.generic<T>(uint64(a)^ ulong.MaxValue);
+                return generic<T>(uint64(a)^ ulong.MaxValue);
             else
                 throw Unsupported.define<T>();
         }
-
-        /// <summary>
-        /// Promotes a T to the full splendor of a scalar, with all scalar bits enabled if
-        /// the source bit is enabled and no scalar bits enabled otherwise
-        /// </summary>
-        /// <param name="src">The source bit</param>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T promote<T>(bit src)
-            where T : unmanaged
-                => src ? ones<T>() : default;
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bit testc<T>(T a)
@@ -214,36 +197,36 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static T equals<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.eq(a,b));
+                => gmath.eq(a,b).Promote<T>();
 
         [MethodImpl(Inline)]
         public static T neq<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.neq(a,b));
+                => gmath.neq(a,b).Promote<T>();
 
         [MethodImpl(Inline)]
         public static T lt<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.lt(a,b));
+                => gmath.lt(a,b).Promote<T>();
 
         [MethodImpl(Inline)]
         public static T lteq<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.lteq(a,b));
+                => gmath.lteq(a,b).Promote<T>();
 
         [MethodImpl(Inline)]
         public static T gt<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.gt(a,b));
+                => gmath.gt(a,b).Promote<T>();
 
         [MethodImpl(Inline)]
         public static T gteq<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.gteq(a,b));
+                => gmath.gteq(a,b).Promote<T>();
 
         [MethodImpl(Inline)]
         public static bit same<T>(T a, T b)
-            where T : unmanaged
+            where T : unmanaged                    
                 => gmath.eq(a,b);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -821,7 +804,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T f5b<T>(T a, T b, T c)
             where T : unmanaged
-                => or(xor(a,c), xor(or(a,b),ones<T>()));
+                => or(xor(a,c), xor(or(a,b), maxval<T>()));
 
         //(A ? not (C) : B)
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

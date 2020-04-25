@@ -10,9 +10,10 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Specifies the C# keyword used to designate a kind-identified numeric type
+        /// Specifies the C# keyword used to designate a primal numeric type
         /// </summary>
-        public static string Keyword(this NumericKind k)
-            => NumericKinds.keyword(k);
+        /// <param name="src">The type to examine</param>
+        public static string NumericKeyword(this Type src)
+            => src.NumericKind().Keyword();
     }
 }

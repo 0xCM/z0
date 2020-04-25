@@ -10,33 +10,51 @@ namespace Z0
     using static Seed;    
     using static Memories;
 
+    using ULK = UnaryLogicKind;
+    using BLK = BinaryLogicKind;
+    using TLK = TernaryLogicKind;
+
     public class LogicSig
     {
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(UnaryLogicKind kind)
-            => $"{kind}:bit";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(BinaryLogicKind kind)
-            => $"{kind}:bit";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(TernaryLogicKind kind)
-            => $"{kind}:bit";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(UnaryLogicKind kind)
+        static string keyword<T>()
             where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
+                => typeof(T).NumericKeyword();
 
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryLogicKind kind)
-            where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
+        public static string sig(ULK kind)
+            => text.concat(format(kind), Chars.Colon, nameof(bit));
 
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(TernaryLogicKind kind)
+        public static string sig(BLK kind)
+            => text.concat(format(kind), Chars.Colon, nameof(bit));
+
+        public static string sig(TLK kind)
+            => text.concat(format(kind), Chars.Colon, nameof(bit));
+
+        public static string sig(BitLogicKind kind)
+            => text.concat(format(kind), Chars.Colon, nameof(bit));
+
+        public static string sig<T>(ULK kind)
             where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
+                => text.concat(format(kind), Chars.Colon, keyword<T>());
+
+        public static string sig<T>(BLK kind)
+            where T : unmanaged
+                => text.concat(format(kind), Chars.Colon, keyword<T>());
+
+        public static string sig<T>(TLK kind)
+            where T : unmanaged
+                => text.concat(format(kind), Chars.Colon, keyword<T>());
+
+        public static string format(ULK kind)                
+            => kind.ToString().ToLower();
+
+        public static string format(TLK kind)                
+            => kind.ToString().ToLower();
+
+        public static string format(BLK kind)                
+            => kind.ToString().ToLower();
+
+        public static string format(BitLogicKind kind)                
+            => kind.Format();
+             
     }
 }

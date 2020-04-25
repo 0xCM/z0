@@ -14,7 +14,9 @@ namespace Z0.Logix
     public class t_ternary_logic : LogixTest<t_ternary_logic>
     {
         protected override int RepCount => Pow2.T08;
-        
+
+        BitLogix bitlogix => BitLogix.Service;
+
         ReadOnlySpan<TernaryLogicKind> TernaryKinds
             => NumericOpApi.TernaryLogicKinds;
         
@@ -66,7 +68,7 @@ namespace Z0.Logix
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
-                BitVector<T> x = NumericOps.select(a.Scalar, b.Scalar, c.Scalar);
+                BitVector<T> x = NumericBits.select(a.Scalar, b.Scalar, c.Scalar);
                 for(var j=0; j<x.Width; j++)
                     Claim.eq(x[j], BL.select(a[j],b[j],c[j]));
             }
@@ -89,7 +91,7 @@ namespace Z0.Logix
                 var sx = x.ToSpan();
 
                 for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], NumericOps.select(sa[j], sb[j], sc[j]));
+                    Claim.eq(sx[j], NumericBits.select(sa[j], sb[j], sc[j]));
             }
 
         }
@@ -111,7 +113,7 @@ namespace Z0.Logix
                 var sx = x.ToSpan();
 
                 for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], NumericOps.select(sa[j], sb[j], sc[j]));
+                    Claim.eq(sx[j], NumericBits.select(sa[j], sb[j], sc[j]));
             }
 
         }
@@ -129,7 +131,6 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-
         void check_op_equivalence<T>(TernaryLogicKind kind)
             where T: unmanaged
         {
@@ -142,7 +143,7 @@ namespace Z0.Logix
                 var u = BitVector.alloc<T>();
 
                 for(var j=0; j<width; j++)
-                    u[j] = BitLogix.eval(kind, a[j], b[j], c[j]);
+                    u[j] = bitlogix.Evaluate(kind, a[j], b[j], c[j]);
                 
                 
                 BitVector<T> v = NumericOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);

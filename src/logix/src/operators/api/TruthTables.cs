@@ -18,6 +18,8 @@ namespace Z0.Logix
         
         static bit off => bit.Off;
 
+        static BitLogix bitlogix => BitLogix.Service;
+
         /// <summary>
         /// Computes a the signature, also referred to as the truth vector, for an identified unary operator
         /// </summary>
@@ -25,11 +27,10 @@ namespace Z0.Logix
         public static BitVector4 sig(UnaryLogicKind kind)
         {
             var x = BitVector4.Zero;
-            var service = BitLogix.Service;
-            x[0] = service.Evaluate(kind, off);
-            x[1] = service.Evaluate(kind, on);
+            x[0] = bitlogix.Evaluate(kind, off);
+            x[1] = bitlogix.Evaluate(kind, on);
             return x;
-        }
+        }        
 
         /// <summary>
         /// Computes a the signature, also referred to as the truth vector, for an identified binary operator
@@ -38,10 +39,10 @@ namespace Z0.Logix
         public static BitVector4 sig(BinaryLogicKind kind)
         {
             var x = BitVector.alloc(n4);
-            x[0] = Api.eval(kind, off, off);
-            x[1] = Api.eval(kind, on, off);
-            x[2] = Api.eval(kind, off, on);
-            x[3] = Api.eval(kind, on, on);
+            x[0] = bitlogix.Evaluate(kind, off, off);
+            x[1] = bitlogix.Evaluate(kind, on, off);
+            x[2] = bitlogix.Evaluate(kind, off, on);
+            x[3] = bitlogix.Evaluate(kind, on, on);
             return x;
         }
         
@@ -52,14 +53,14 @@ namespace Z0.Logix
         public static BitVector8 sig(TernaryLogicKind kind)
         {
             var x = BitVector8.Zero;
-            x[0] = Api.eval(kind, off,off,off);
-            x[1] = Api.eval(kind, off,off,on);
-            x[2] = Api.eval(kind, off,on,off);
-            x[3] = Api.eval(kind, off,on,on);
-            x[4] = Api.eval(kind, on,off,off);
-            x[5] = Api.eval(kind, on,off,on);
-            x[6] = Api.eval(kind, on,on, off);
-            x[7] = Api.eval(kind, on,on,on);
+            x[0] = bitlogix.Evaluate(kind, off,off,off);
+            x[1] = bitlogix.Evaluate(kind, off,off,on);
+            x[2] = bitlogix.Evaluate(kind, off,on,off);
+            x[3] = bitlogix.Evaluate(kind, off,on,on);
+            x[4] = bitlogix.Evaluate(kind, on,off,off);
+            x[5] = bitlogix.Evaluate(kind, on,off,on);
+            x[6] = bitlogix.Evaluate(kind, on,on, off);
+            x[7] = bitlogix.Evaluate(kind, on,on,on);
             return x;
         }
 
@@ -71,7 +72,7 @@ namespace Z0.Logix
         {
             var dst = BitVector.alloc(n16);
             var s = ((byte)sig(kind)).ToBitString().Truncate(4);            
-            var f = Api.lookup(kind);
+            var f = bitlogix.Lookup(kind);
             dst[0] = off;
             dst[1] = off;
             dst[2] = f(off, off);
@@ -93,7 +94,7 @@ namespace Z0.Logix
 
         public static BitMatrix<N2,N2,byte> build(UnaryLogicKind kind)
         {
-            var f = BitLogix.Service.Lookup(kind);
+            var f = bitlogix.Lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
             table[0] = BitBlocks.single<N2,byte>((byte)Bits.pack(f(off), off));
             table[1] = BitBlocks.single<N2,byte>((byte)Bits.pack(f(on), on));
@@ -103,7 +104,7 @@ namespace Z0.Logix
         public static BitMatrix<N4,N3,byte> build(BinaryLogicKind kind)
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
-            var f = Api.lookup(kind);
+            var f = bitlogix.Lookup(kind);
             tt[0] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(off, off), off, off));
             tt[1] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(on, off), off, on));
             tt[2] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(off, on), on, off));
@@ -114,7 +115,7 @@ namespace Z0.Logix
         public static BitMatrix<N8,N4,byte> build(TernaryLogicKind kind)
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
-            var f = Api.lookup(kind);
+            var f = bitlogix.Lookup(kind);
             tt[0] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(off, off, off), off, off, off));
             tt[1] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(off, off, on), off, off, on));
             tt[2] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(off, on, off), off, on, off));
@@ -149,9 +150,15 @@ namespace Z0.Logix
             switch(arity)
             {
 
-                case ArityValue.Unary: emitUnary(dst); break;
-                case ArityValue.Binary: emitBinary(dst); break;
-                case ArityValue.Ternary: emitTernary(dst); break;
+                case ArityValue.Unary: 
+                    emitUnary(dst); 
+                    break;
+                case ArityValue.Binary: 
+                    emitBinary(dst); 
+                    break;
+                case ArityValue.Ternary: 
+                    emitTernary(dst); 
+                    break;
                 default: 
                     throw Unsupported.value(arity);
             }
@@ -180,7 +187,7 @@ namespace Z0.Logix
 
         static void emitUnary(TextWriter dst)
         {
-            var ops = BitLogix.UnaryOpKinds.ToArray();
+            var ops = bitlogix.UnaryOpKinds.ToArray();
             for(var i=0; i< ops.Length; i++)
             {
                 BitVector4 result = (byte)i;
@@ -197,7 +204,6 @@ namespace Z0.Logix
             {
                 BitVector4 result = (byte)i;
                 var bbResult = BitBlocks.from(result);
-
 
                 var table = BitMatrix.alloc<N4,N3,byte>();
                 table[0] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[0], off, off));
@@ -267,7 +273,6 @@ namespace Z0.Logix
             dst.Write(src.header("Table"));
             dst.WriteLine(src.Format());
         }
-
 
         static void emit<M,N,T,K>(this BitMatrix<M,N,T> src, K kind, TextWriter dst)
             where M: unmanaged, ITypeNat

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;    
 
-    partial class BitLogixOps
+    partial struct BitLogix
     {
         [MethodImpl(Inline), Op]
         public static bit not(bit a)

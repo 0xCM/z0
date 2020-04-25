@@ -7,10 +7,10 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    //[ApiHost("expr.logic.eval",ApiHostKind.Direct)]
-    public static class LogicExprEval
+    public readonly struct LogicExprEval
     {
-        [Op("eval_logic_expr")]
+        static BitLogix bitlogix => BitLogix.Service;
+
         internal static bit eval(ILogicExpr expr)
         {
             switch(expr)               
@@ -33,17 +33,16 @@ namespace Z0.Logix
         /// Evaluates a logical operator expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op("eval_logic_op")]
         static bit eval(ILogicOpExpr expr)
         {
             switch(expr)               
             {
                 case IUnaryLogicOpExpr x:
-                    return BitLogix.Service.Evaluate(x.OpKind, eval(x.Arg));
+                    return bitlogix.Evaluate(x.OpKind, eval(x.Arg));
                 case IBinaryLogicOpExpr x:
-                    return BitLogix.eval(x.OpKind, eval(x.LeftArg), eval(x.RightArg));
+                    return bitlogix.Evaluate(x.OpKind, eval(x.LeftArg), eval(x.RightArg));
                 case ITernaryLogicOpExpr x:
-                    return BitLogix.eval(x.OpKind, eval(x.FirstArg), eval(x.SecondArg), eval(x.ThirdArg));
+                    return bitlogix.Evaluate(x.OpKind, eval(x.FirstArg), eval(x.SecondArg), eval(x.ThirdArg));
                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
