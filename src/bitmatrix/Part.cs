@@ -12,26 +12,3 @@ namespace Z0.Parts
     }
 }
 
-namespace Z0
-{
-    using System;
-
-
-    [ApiHost]
-    public partial class BitMatrix : IApiHost<BitMatrix>
-    {        
-
-    }
-
-    [ApiHost("bitmatrix.ops")]
-    public partial class BitMatrixOps : IApiHost<BitMatrixOps>
-    {
-
-    }
-
-    public static partial class XTend
-    {   
-
-    }
-
-}

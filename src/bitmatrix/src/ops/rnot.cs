@@ -7,19 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
 
     partial class BitMatrix
     {        
-        [MethodImpl(Inline), RNot, NumericClosures(UnsignedInts)]
-        public static BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
-            where T : unmanaged
-                => not(B);
                 
-
         [MethodImpl(Inline), RNot, NumericClosures(UnsignedInts)]
-        public static ref BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref readonly BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> b, in BitMatrix<T> dst)
             where T : unmanaged
-                => ref not(B, ref Z);
+                => ref not(b, dst);
     }
 }

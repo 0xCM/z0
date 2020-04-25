@@ -12,13 +12,8 @@ namespace Z0
     partial class BitMatrix
     {
         [MethodImpl(Inline), LNot, Closures(UnsignedInts)]
-        public static BitMatrix<T> lnot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+        public static ref readonly BitMatrix<T> lnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
-                => not(A);
-
-        [MethodImpl(Inline), LNot, Closures(UnsignedInts)]
-        public static ref BitMatrix<T> lnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
-            where T : unmanaged
-                => ref not(A, ref Z);
+                => ref not(A, Z);
     }
 }

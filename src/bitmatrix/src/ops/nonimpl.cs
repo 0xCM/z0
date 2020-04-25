@@ -11,20 +11,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-        /// <summary>
-        /// Computes the converse implication for generic bitmatrices, returning the allocated result
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
-        public static unsafe BitMatrix<T> nonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
-            where T : unmanaged
-        {
-            var Z = BitMatrix.alloc<T>();
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
-            return Z;
-        }
 
         /// <summary>
         /// Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
@@ -34,10 +20,10 @@ namespace Z0
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
         [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
-        public static unsafe ref BitMatrix<T> nonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref readonly BitMatrix<T> nonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.nonimpl(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -48,7 +34,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         [MethodImpl(Inline), NonImpl]
-        public static unsafe ref BitMatrix8 nonimpl(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
+        public static ref BitMatrix8 nonimpl(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
              LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
@@ -60,7 +46,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline), NonImpl]
-        public static unsafe BitMatrix8 nonimpl(in BitMatrix8 A, in BitMatrix8 B)
+        public static BitMatrix8 nonimpl(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
             LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);

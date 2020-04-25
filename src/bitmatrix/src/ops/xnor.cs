@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
         [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
-        public static ref BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref readonly BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
             LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);

@@ -10,11 +10,6 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    [ApiHost]
-    public partial class BitBlocks : IApiHost<BitBlocks>
-    {
-
-    }
 
     partial class BitBlocks
     {

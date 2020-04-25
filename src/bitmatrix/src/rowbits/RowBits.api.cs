@@ -12,8 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines primary api surface for rowbit manipulation
     /// </summary>
-    [ApiHost]
-    public class RowBits : IApiHost<RowBits>
+    partial class RowBits
     {
         /// <summary>
         /// xllocates a specified number of rows

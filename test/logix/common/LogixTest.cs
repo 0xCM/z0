@@ -98,7 +98,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample< RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = A[i] & B[i];
@@ -123,7 +123,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample< RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.nand(A[i], B[i]);
@@ -148,7 +148,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample< RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = A[i] | B[i];
@@ -173,7 +173,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample< RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.nor(A[i], B[i]);
@@ -198,7 +198,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = A[i] ^ B[i];
@@ -223,7 +223,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.xnor(A[i], B[i]);
@@ -249,7 +249,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.impl(A[i], B[i]);
@@ -274,7 +274,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.nonimpl(A[i], B[i]);
@@ -299,7 +299,7 @@ namespace Z0.Logix
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                BitMatrixOps.eval(op, A, B, ref C);
+                SquareBitLogix.eval(op, A, B, C);
                 for(var i=0; i<n; i++)
                 {
                     var expect = BitVector.not(A[i]);
@@ -316,24 +316,23 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var opname = $"bm_{opkind.Format()}_{Identify.numeric<T>()}_delegate";
-
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = Random.BitMatrix<T>();
             var Z = BitMatrix.alloc<T>();
             var opcount = 0;
-            var Op = BitMatrixOps.refop<T>(opkind);
+            var Op = SquareBitLogix.lookup<T>(opkind);
 
             clock.Start();
 
             for(var i=0; i<CycleCount; i++)
             {            
-                Op(A, B, ref Z);
+                Op(A, B, Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    Op(Z, A, ref Z);                    
-                    Op(B, Z, ref Z); 
+                    Op(Z, A, Z);                    
+                    Op(B, Z, Z); 
                     opcount +=2;                   
                 }
             }
@@ -358,12 +357,12 @@ namespace Z0.Logix
 
             for(var i=0; i<CycleCount; i++)
             {            
-                BitMatrixOps.eval(op, A, B, ref Z);
+                SquareBitLogix.eval(op, A, B, Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    BitMatrixOps.eval(op, Z, A, ref Z);                    
-                    BitMatrixOps.eval(op, B, Z, ref Z); 
+                    SquareBitLogix.eval(op, Z, A, Z);                    
+                    SquareBitLogix.eval(op, B, Z, Z); 
                     opcount +=2;                   
                 }
             }
@@ -388,12 +387,12 @@ namespace Z0.Logix
 
             for(var i=0; i<CycleCount; i++)
             {            
-                BitMatrixOps.and(A, B, ref Z);
+                SquareBitLogix.and(A, B, Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    BitMatrixOps.and(Z, A, ref Z);                    
-                    BitMatrixOps.and(B, Z, ref Z); 
+                    SquareBitLogix.and(Z, A, Z);                    
+                    SquareBitLogix.and(B, Z, Z); 
                     opcount +=2;                   
                 }
             }
@@ -418,12 +417,12 @@ namespace Z0.Logix
 
             for(var i=0; i<CycleCount; i++)
             {            
-                BitMatrixOps.xor(A, B, ref Z);
+                SquareBitLogix.xor(A, B, Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    BitMatrixOps.xor(Z, A, ref Z);                    
-                    BitMatrixOps.xor(B, Z, ref Z); 
+                    SquareBitLogix.xor(Z, A, Z);                    
+                    SquareBitLogix.xor(B, Z, Z); 
                     opcount +=2;                   
                 }
             }

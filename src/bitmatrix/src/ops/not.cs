@@ -7,23 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class BitMatrix
     {
         /// <summary>
         /// Computes the logical negation of a generic bitmatrix, returning the allocated result to the caller
         /// </summary>
-        /// <param name="A">The source matrix</param>
+        /// <param name="a">The source matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Not, NumericClosures(UnsignedInts)]
-        public static BitMatrix<T> not<T>(in BitMatrix<T> A)
+        [MethodImpl(Inline), Not, Closures(UnsignedInts)]
+        public static BitMatrix<T> not<T>(in BitMatrix<T> a)
             where T : unmanaged
-        {
-            var Z = BitMatrix.alloc<T>();
-            LogicSquare.not(in A.Head, ref Z.Head);
-            return Z;
-        }
+                => BitMatrixA.not(a);
 
         /// <summary>
         /// Computes the logical negation of a generic bitmatrix, depositing the result to the caller-supplied target
@@ -31,8 +28,8 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="Z">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Not, NumericClosures(UnsignedInts)]
-        public static ref BitMatrix<T> not<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
+        [MethodImpl(Inline), Not, Closures(UnsignedInts)]
+        public static ref readonly BitMatrix<T> not<T>(in BitMatrix<T> A, in BitMatrix<T> Z)
             where T : unmanaged
         {
             LogicSquare.not(in A.Head, ref Z.Head);
@@ -143,5 +140,4 @@ namespace Z0
             return ref Z;
         } 
     }
-
 }

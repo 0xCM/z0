@@ -12,8 +12,8 @@ namespace Z0
 
     partial class BitMatrix
     {
-        [MethodImpl(Inline), True, NumericClosures(UnsignedInts)]
-        public static ref BitMatrix<T> @true<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        [MethodImpl(Inline), True, Closures(UnsignedInts)]
+        public static ref readonly BitMatrix<T> @true<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T:unmanaged
         {
             Z.Content.Fill(maxval<T>());

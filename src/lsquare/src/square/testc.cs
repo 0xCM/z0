@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static AsIn;
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
     
     using BL = ByteLogic;
     
@@ -18,17 +19,17 @@ namespace Z0
     partial class LogicSquare
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static bit testc<T>(in T A)
+        public static bit testc<T>(in T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               return BL.testc(in uint8(in A));
+               return BL.testc(in uint8(in a));
             else if(typeof(T) == typeof(ushort))
-               return vtestc(w, in A);
+               return vtestc(w, a);
             else if(typeof(T) == typeof(uint))
-               return testc(w, 4, 8, in A);
+               return testc(w, 4, 8, a);
             else if(typeof(T) == typeof(ulong))
-                return testc(w, 16, 4, in A);
+                return testc(w, 16, 4, a);
             else
                 throw Unsupported.define<T>();
         }

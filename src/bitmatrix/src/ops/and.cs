@@ -21,11 +21,7 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(UnsignedInts)]
         public static BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
-        {
-            var Z = BitMatrix.alloc<T>();
-            LogicSquare.and(in A.Head, in B.Head, ref Z.Head);
-            return Z;
-        }
+                => BitMatrixA.and(A,B);
 
         /// <summary>
         /// Computes the logical and and between two generic bitmatrices, depositing the result to a caller-supplied target
@@ -35,7 +31,7 @@ namespace Z0
         /// <param name="dst">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
         [MethodImpl(Inline), And, Closures(UnsignedInts)]
-        public static ref BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> dst)
+        public static ref readonly BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> dst)
             where T : unmanaged
         {
             LogicSquare.and(in A.Head, in B.Head, ref dst.Head);

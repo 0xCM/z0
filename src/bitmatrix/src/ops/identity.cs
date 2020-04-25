@@ -17,7 +17,7 @@ namespace Z0
                 => ref A;
 
         [MethodImpl(Inline), IdentityFunction, Closures(UnsignedInts)]
-        public static ref BitMatrix<T> identity<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
+        public static ref readonly BitMatrix<T> identity<T>(in BitMatrix<T> A, in BitMatrix<T> Z)
             where T : unmanaged
         {
             Z.Update(A);

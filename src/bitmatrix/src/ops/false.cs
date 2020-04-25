@@ -19,15 +19,15 @@ namespace Z0
         [MethodImpl(Inline), False, Closures(UnsignedInts)]
         public static BitMatrix<T> @false<T>(in BitMatrix<T> A)
             where T:unmanaged
-                => @false<T>();
+                => BitMatrixA.@false(A);
 
         [MethodImpl(Inline), False, Closures(UnsignedInts)]
         public static BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T:unmanaged
-                => @false<T>();
+                => BitMatrixA.@false(A,B);
 
         [MethodImpl(Inline), False, Closures(UnsignedInts)]
-        public static ref BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref readonly BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T:unmanaged
         {
             Z.Content.Fill(Literals.zero<T>());

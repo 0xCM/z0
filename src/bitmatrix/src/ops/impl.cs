@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class BitMatrix
     {
@@ -17,12 +18,12 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Impl, NumericClosures(UnsignedInts)]
-        public static unsafe BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+        [MethodImpl(Inline), Impl, Closures(UnsignedInts)]
+        public static BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
             return Z;
         }
 
@@ -33,11 +34,11 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Impl, NumericClosures(UnsignedInts)]
-        public static unsafe ref BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        [MethodImpl(Inline), Impl, Closures(UnsignedInts)]
+        public static ref readonly BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -48,23 +49,23 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         [MethodImpl(Inline), Impl]
-        public static unsafe ref BitMatrix8 impl(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
+        public static ref readonly BitMatrix8 impl(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 Z)
         {
-             LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+             LogicSquare.impl(A.Head, B.Head, ref Z.Head);
              return ref Z;
         }
 
         /// <summary>
-        /// Computes the converse implication for primal bitmatrices, returning the allocated result
+        /// Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
+        /// <param name="B">The target matrix</param>
         [MethodImpl(Inline), Impl]
-        public static unsafe BitMatrix8 impl(in BitMatrix8 A, in BitMatrix8 B)
+        public static ref readonly BitMatrix16 impl(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 Z)
         {
-            var Z = BitMatrix.alloc(n8);
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
-            return Z;
+            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
+            return ref Z;
         }
 
         /// <summary>
@@ -74,23 +75,10 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         [MethodImpl(Inline), Impl]
-        public static unsafe ref BitMatrix16 impl(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
+        public static ref readonly BitMatrix32 impl(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 Z)
         {
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
             return ref Z;
-        }
-
-        /// <summary>
-        /// Computes the converse implication for primal bitmatrices, returning the allocated result
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline), Impl]
-        public static unsafe BitMatrix16 impl(in BitMatrix16 A, in BitMatrix16 B)
-        {
-            var Z = BitMatrix.alloc(n16);
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
-            return Z;
         }
 
         /// <summary>
@@ -100,49 +88,10 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         [MethodImpl(Inline), Impl]
-        public static unsafe ref BitMatrix32 impl(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
+        public static ref readonly BitMatrix64 impl(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 Z)
         {
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
             return ref Z;
-        }
-
-        /// <summary>
-        /// Computes the converse implication for primal bitmatrices, returning the allocated result
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline), Impl]
-        public static unsafe BitMatrix32 impl(in BitMatrix32 A, in BitMatrix32 B)
-        {
-            var Z = BitMatrix.alloc(n32);
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
-            return Z;
-        }
-
-        /// <summary>
-        /// Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline), Impl]
-        public static unsafe ref BitMatrix64 impl(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
-        {
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
-            return ref Z;
-        }
-
-        /// <summary>
-        /// Computes the converse implication for primal bitmatrices, returning the allocated result
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline), Impl]
-        public static unsafe BitMatrix64 impl(in BitMatrix64 A, in BitMatrix64 B)
-        {
-            var Z = BitMatrix.alloc(n64);
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
-            return Z;
         }
     }
 }

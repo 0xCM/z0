@@ -12,6 +12,114 @@ namespace Z0
 
     partial class BitMatrixA
     {
+        [MethodImpl(Inline), LNot, Closures(UnsignedInts)]
+        public static BitMatrix<T> lnot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+                => not(A);
+
+        [MethodImpl(Inline), False, Closures(UnsignedInts)]
+        public static BitMatrix<T> @false<T>()
+            where T:unmanaged
+                => BitMatrixA.zero<T>();
+
+        [MethodImpl(Inline), False, Closures(UnsignedInts)]
+        public static BitMatrix<T> @false<T>(in BitMatrix<T> A)
+            where T:unmanaged
+                => @false<T>();
+
+        [MethodImpl(Inline), False, Closures(UnsignedInts)]
+        public static BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T:unmanaged
+                => @false<T>();
+
+        /// <summary>
+        /// Computes the logical And between two generic bitmatrices, returning the allocated result
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
+        [MethodImpl(Inline), And, Closures(UnsignedInts)]
+        public static BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var Z = BitMatrix.alloc<T>();
+            LogicSquare.and(in A.Head, in B.Head, ref Z.Head);
+            return Z;
+        }
+
+        /// <summary>
+        /// Computes the converse implication for generic bitmatrices, returning the allocated result
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        [MethodImpl(Inline), Or, NumericClosures(UnsignedInts)]
+        public static BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var Z = BitMatrix.alloc<T>();
+            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            return Z;
+        }
+
+        /// <summary>
+        /// Computes the converse implication for generic bitmatrices, returning the allocated result
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
+        public static BitMatrix<T> nonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var Z = BitMatrix.alloc<T>();
+            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            return Z;
+        }
+
+        /// <summary>
+        /// Computes the logical negation of a generic bitmatrix, returning the allocated result to the caller
+        /// </summary>
+        /// <param name="A">The source matrix</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        [MethodImpl(Inline), Not, Closures(UnsignedInts)]
+        public static BitMatrix<T> not<T>(in BitMatrix<T> A)
+            where T : unmanaged
+        {
+            var Z = BitMatrix.alloc<T>();
+            LogicSquare.not(in A.Head, ref Z.Head);
+            return Z;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> xornot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var Z = BitMatrix.alloc<T>();
+            LogicSquare.xornot(in A.Head, in B.Head, ref Z.Head);
+            return Z;
+        }
+
+        [MethodImpl(Inline), RNot, NumericClosures(UnsignedInts)]
+        public static BitMatrix<T> rnot<T>(in BitMatrix<T> a, in BitMatrix<T> b)
+            where T : unmanaged
+                => BitMatrix.not(b);
+
+        /// <summary>
+        /// Computes the converse implication for generic bitmatrices, returning the allocated result
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static BitMatrix<T> cnonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var Z = BitMatrix.alloc<T>();
+            LogicSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            return Z;
+        }
+
         /// <summary>
         /// Computes the bitwise AND between two square bitmatrices of common order
         /// </summary>
@@ -24,8 +132,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitMatrix.and(A, B, BitMatrix.alloc<N,T>());
-
-
 
         /// <summary>
         /// Computes the converse implication for generic bitmatrices, returning the allocated result
@@ -50,12 +156,11 @@ namespace Z0
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
         [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
-        public static ref BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref readonly BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
             LogicSquare.nor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
     }
-
 }

@@ -7,17 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class BitMatrix
     {
-        [MethodImpl(Inline), LProject, NumericClosures(UnsignedInts)]
-        public static BitMatrix<T> left<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+        [MethodImpl(Inline), LProject, Closures(UnsignedInts)]
+        public static ref readonly BitMatrix<T> left<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
-                => A;
+                => ref A;
 
-        [MethodImpl(Inline), LProject, NumericClosures(UnsignedInts)]
-        public static ref BitMatrix<T> left<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        [MethodImpl(Inline), LProject, Closures(UnsignedInts)]
+        public static ref readonly BitMatrix<T> left<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
             Z.Update(A);
