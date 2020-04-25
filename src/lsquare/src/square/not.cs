@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
-    partial class LSquare
+    partial class LogicSquare
     {
         [MethodImpl(Inline), Not, Closures(UnsignedInts)]
         public static void not<T>(in T src, ref T dst)

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;
 
     using static Seed;
     using static Memories;
@@ -23,6 +22,6 @@ namespace Z0
         public static And<W,T> and<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => sfunc(w, sfunc<And<W,T>>(), t);
+                => sfunc(w, sfunc<And<W,T>>(), t);                
     }
 }

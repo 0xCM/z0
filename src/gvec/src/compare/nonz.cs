@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static Seed; using static Memories;    
-    using static Gone2;
+    using static Seed; 
+    using static Memories;    
     
     partial class gvec
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Nonz, Closures(AllNumeric)]
         public static bit vnonz<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Nonz, Closures(AllNumeric)]
         public static bit vnonz<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Nonz, Closures(AllNumeric)]
         public static bit vnonz<T>(in Vector512<T> src)
             where T : unmanaged
                 => vnonz(src.Lo) || vnonz(src.Hi);       

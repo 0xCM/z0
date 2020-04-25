@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    using static Seed; using static Memories;    
+    using static Seed; 
     
     partial class gvec
     {
@@ -19,7 +18,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Same, Closures(AllNumeric)]
         public static bit vsame<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged   
                 => vtestc(veq(x,y));
@@ -30,7 +29,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Same, Closures(AllNumeric)]
         public static bit vsame<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged   
                 => vtestc(veq(x,y));
@@ -41,7 +40,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Same, Closures(AllNumeric)]
         public static bit vsame<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged   
                 => vtestc(veq(x,y));

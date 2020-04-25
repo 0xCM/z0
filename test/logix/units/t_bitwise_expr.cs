@@ -253,7 +253,7 @@ namespace Z0.Logix
         void check_ternary_ops<T>(TernaryLogicKind id)
             where T : unmanaged
         {
-            var BL = LogicOpApi.lookup(id);
+            var BL = BitLogix.lookup(id);
             var SC = NumericOpApi.lookup<T>(id);
             var V128 = VectorOpApi.lookup<T>(n128,id);
             var V256 = VectorOpApi.lookup<T>(n256,id);
@@ -322,7 +322,8 @@ namespace Z0.Logix
                 v2.Set(b);
                 T expect = NumericOpApi.eval(op,a,b);
                 T result1 = LogicEngine.eval(expr);
-                T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
+                //T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
+                var result2 = BitVectorLogix.Service.EvalDirect(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
                 Claim.eq(expect, result1);                            
                 Claim.eq(expect, result2);                            
             }

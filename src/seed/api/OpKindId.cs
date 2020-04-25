@@ -315,5 +315,9 @@ namespace Z0
 
         HProd,
 
+        TestZnC,
+
+        Same
+
     }    
 }

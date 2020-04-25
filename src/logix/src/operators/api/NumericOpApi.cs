@@ -11,6 +11,7 @@ namespace Z0.Logix
     using static TernaryLogicKind;
     using static NumericOps;
     using static OpHelpers;
+    using static LogicSig;
 
     using BLK = BinaryLogicKind;
     using TLK = TernaryLogicKind;

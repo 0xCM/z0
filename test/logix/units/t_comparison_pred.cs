@@ -11,7 +11,7 @@ namespace Z0.Logix
     using static PredicateSpec;
     using static BinaryComparisonKind;
     using static NumericOps;
-    using static LogicOps;
+    using static BitLogix;
     
     public class t_comparison_pred : TypedLogixTest<t_comparison_pred>
     {

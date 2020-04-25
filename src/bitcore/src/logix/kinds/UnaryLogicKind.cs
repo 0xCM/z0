@@ -36,6 +36,4 @@ namespace Z0
         /// </summary>
         True = 0b11,        
     }  
-
- 
 }

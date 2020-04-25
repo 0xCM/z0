@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static Vectors;
         
-    partial class LSquare
+    partial class LogicSquare
     {     
         [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
         public static Vector128<T> vnonimpl<T>(W128 w, in T a, in T b)
@@ -47,7 +47,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                nonimpl(LSquare.w, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                nonimpl(LogicSquare.w, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
     }
 }

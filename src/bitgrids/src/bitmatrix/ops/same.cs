@@ -23,8 +23,8 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LSquare.xnor(a.Head, b.Head, ref Z.Head);
-            return LSquare.testc(in Z.Head);
+            LogicSquare.xnor(a.Head, b.Head, ref Z.Head);
+            return LogicSquare.testc(in Z.Head);
         }
         
         /// <summary>
@@ -45,8 +45,8 @@ namespace Z0
         public static bit same(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
-            return LSquare.testc(in Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            return LogicSquare.testc(in Z.Head);
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace Z0
         public static bit same(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
-            return LSquare.testc(in Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            return LogicSquare.testc(in Z.Head);
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace Z0
         public static bit same(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
-            return LSquare.testc(in Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            return LogicSquare.testc(in Z.Head);
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace Z0
         public static bit same(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
-            return LSquare.testc(in Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            return LogicSquare.testc(in Z.Head);
         }
     }
 }

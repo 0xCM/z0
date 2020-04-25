@@ -23,7 +23,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> xor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LSquare.xor(in A.Head,in B.Head, ref Z.Head);
+            LogicSquare.xor(in A.Head,in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline), Xor]
         public static ref readonly BitMatrix8 xor(in BitMatrix8 a, in BitMatrix8 b, in BitMatrix8 dst)
         {
-            LSquare.xor(a.Head, b.Head, ref dst.Head);
+            LogicSquare.xor(a.Head, b.Head, ref dst.Head);
             return ref dst;
         }
 
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline), Xor]
         public static ref readonly BitMatrix16 xor(in BitMatrix16 a, in BitMatrix16 b, in BitMatrix16 dst)
         {
-            LSquare.xor(a.Head, b.Head, ref dst.Head);
+            LogicSquare.xor(a.Head, b.Head, ref dst.Head);
             return ref dst;
         }
 
@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline), Xor]
         public static ref readonly BitMatrix32 xor(in BitMatrix32 a, in BitMatrix32 b, in BitMatrix32 dst)
         {
-            LSquare.xor(a.Head, b.Head, ref dst.Head);
+            LogicSquare.xor(a.Head, b.Head, ref dst.Head);
             return ref dst;
         }
 
@@ -93,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline), Xor]
         public static ref readonly BitMatrix64 xor(in BitMatrix64 a, in BitMatrix64 b, in BitMatrix64 dst)
         {
-            LSquare.xor(a.Head, b.Head, ref dst.Head);
+            LogicSquare.xor(a.Head, b.Head, ref dst.Head);
             return ref dst;
         }
     }

@@ -9,36 +9,9 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static Seed;    
-    using static Memories;
 
     internal static class OpHelpers
     {
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(UnaryLogicKind kind)
-                => $"{kind}:bit";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(BinaryLogicKind kind)
-                => $"{kind}:bit";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig(TernaryLogicKind kind)
-                => $"{kind}:bit";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(UnaryLogicKind kind)
-            where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryLogicKind kind)
-            where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
-
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(TernaryLogicKind kind)
-            where T : unmanaged
-                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(BitShiftKind kind)

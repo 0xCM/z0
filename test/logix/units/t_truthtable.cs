@@ -17,7 +17,7 @@ namespace Z0.Logix
         public void unary_truth()
         {
             using var dst = DataFileWriter(FileName.Define(caller()));
-            var ops = LogicOpApi.UnaryOpKinds;
+            var ops = BitLogix.UnaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Unary);
         }
@@ -25,7 +25,7 @@ namespace Z0.Logix
         public void binary_truth()
         {
             using var dst = DataFileWriter(FileName.Define(caller()));
-            var ops = LogicOpApi.BinaryOpKinds;
+            var ops = BitLogix.BinaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Binary);
         }
@@ -33,14 +33,14 @@ namespace Z0.Logix
         public void ternary_truth()
         {
             using var dst = DataFileWriter(FileName.Define(caller()));
-            var ops = LogicOpApi.TernaryOpKinds;
+            var ops = BitLogix.TernaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,ArityValue.Ternary);
         }
 
         public void unary_sig_check()
         {
-            foreach(var op in LogicOpApi.UnaryOpKinds)
+            foreach(var op in BitLogix.UnaryOpKinds)
             {
                 var table = TruthTables.build(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8).Lo;
@@ -51,7 +51,7 @@ namespace Z0.Logix
 
         public void binary_sig_check()
         {
-            foreach(var op in LogicOpApi.BinaryOpKinds)
+            foreach(var op in BitLogix.BinaryOpKinds)
             {
                 var table = TruthTables.build(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8).Lo;
@@ -62,7 +62,7 @@ namespace Z0.Logix
 
         public void ternary_sig_check()
         {
-            foreach(var op in LogicOpApi.TernaryOpKinds)
+            foreach(var op in BitLogix.TernaryOpKinds)
             {
                 var table = TruthTables.build(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8);
@@ -148,10 +148,10 @@ namespace Z0.Logix
         void check_truth(BinaryLogicKind op)
         {
             var dst = BitVector.alloc(n4);
-            dst[0] = LogicOpApi.eval(op, bit.Off,bit.Off);
-            dst[1] = LogicOpApi.eval(op, bit.On,bit.Off);
-            dst[2] = LogicOpApi.eval(op, bit.Off,bit.On);
-            dst[3] = LogicOpApi.eval(op, bit.On,bit.On);
+            dst[0] = BitLogix.eval(op, bit.Off,bit.Off);
+            dst[1] = BitLogix.eval(op, bit.On,bit.Off);
+            dst[2] = BitLogix.eval(op, bit.Off,bit.On);
+            dst[3] = BitLogix.eval(op, bit.On,bit.On);
             var sig = TruthTables.sig(op);
             Claim.eq(sig,dst);
         }

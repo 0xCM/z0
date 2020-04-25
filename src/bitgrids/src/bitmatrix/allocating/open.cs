@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LSquare.nor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.nor(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -53,7 +53,7 @@ namespace Z0
         public static ref BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            LSquare.nor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.nor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
     }

@@ -9,9 +9,9 @@ namespace Z0.Logix
     using static Seed;    
     using static Memories;
     using static OpHelpers;
+
     using BCK = BinaryComparisonKind;
 
-    //[ApiHost("predicate.api", ApiHostKind.Generic)]
     public static class PredicateApi
     {
         /// <summary>

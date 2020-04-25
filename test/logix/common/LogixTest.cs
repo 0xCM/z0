@@ -13,7 +13,7 @@ namespace Z0.Logix
     using static Seed;
     using static Memories;
     using static NumericOpApi;
-    using static LogicOpApi;
+    using static BitLogix;
     
     using static BitLogicSpec;
     using static LogicEngine;
@@ -33,7 +33,7 @@ namespace Z0.Logix
                 var a = lhs[i];
                 var b = rhs[i];
                 var expect = rule(a,b);
-                var actual = LogicOpApi.eval(kind, a,b);
+                var actual = BitLogix.eval(kind, a,b);
                 Claim.eq(expect, actual);
             }
         }
@@ -63,7 +63,7 @@ namespace Z0.Logix
             var lhsSamples = Random.BitStream().Take(RepCount).ToArray();
             var rhsSamples = Random.BitStream().Take(RepCount).ToArray();
             var result = bit.Off;
-            var kinds = LogicOpApi.BinaryOpKinds;
+            var kinds = BitLogix.BinaryOpKinds;
             var opcount = 0;
 
             clock.Start();
@@ -73,14 +73,14 @@ namespace Z0.Logix
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
-                    result = LogicOpApi.lookup(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
+                    result = BitLogix.lookup(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
             }
             else
             {
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
-                    result = LogicOpApi.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
+                    result = BitLogix.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
             }
 
             clock.Stop();
@@ -443,8 +443,10 @@ namespace Z0.Logix
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();
                 var result1 = NumericOpApi.eval(kind,a,b);    
-                var result2 = BitVectorOpApi.eval(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
-                var result3 = BitVectorOpApi.evalspec(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
+                //var result2 = BitVectorOpApi.eval(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
+                var result2 = BitVectorLogix.Service.EvalDirect(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
+                //var result3 = BitVectorOpApi.evalspec(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
+                var result3 = BitVectorLogix.Service.EvalRef(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result4 = VectorOpApi.eval(kind, Vectors.vbroadcast(n128,a), Vectors.vbroadcast(n128,b)).ToScalar();
                 var result5 = VectorOpApi.eval(kind, Vectors.vbroadcast(n256,a), Vectors.vbroadcast(n256,b)).ToScalar();
                 Claim.eq(result1, result2);

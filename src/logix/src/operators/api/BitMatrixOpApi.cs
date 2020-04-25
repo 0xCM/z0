@@ -10,6 +10,7 @@ namespace Z0.Logix
     using static Memories;
     using static OpHelpers;
     using static BitMatrixOps;
+    using static LogicSig;
 
     using ULK = UnaryLogicKind;
     using BLK = BinaryLogicKind;

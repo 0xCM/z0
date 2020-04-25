@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static Vectors;
     
-    partial class LSquare
+    partial class LogicSquare
     {     
         [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
         public static Vector128<T> vxnor<T>(W128 w, in T a, in T b)

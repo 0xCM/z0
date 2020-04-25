@@ -13,7 +13,7 @@ namespace Z0
     using static Vectors;
 
 
-    partial class LSquare
+    partial class LogicSquare
     {     
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vnot<T>(W128 w, in T src)

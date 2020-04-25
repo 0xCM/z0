@@ -23,7 +23,7 @@ namespace Z0
         public static ref BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor]
         public static ref BitMatrix8 xnor(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+             LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor]
         public static ref BitMatrix16 xnor(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
   
@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor]
         public static ref BitMatrix32 xnor(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor]
         public static ref BitMatrix64 xnor(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 

@@ -19,6 +19,62 @@ namespace Z0
     {
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), TestC]
+        public static bit vtestc(Vector128<sbyte> src)
+            => TestC(src, vones<sbyte>(n128));
+
+        /// <summary>
+        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), TestC]
+        public static bit vtestc(Vector128<byte> src)
+            => TestC(src, vones<byte>(n128));
+
+        /// <summary>
+        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), TestC]
+        public static bit vtestc(Vector128<ushort> src)
+            => TestC(src, vones<ushort>(n128));
+        
+        /// <summary>
+        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), TestC]
+        public static bit vtestc(Vector128<int> src)
+            => TestC(src, vones<int>(n128));
+
+        /// <summary>
+        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), TestC]
+        public static bit vtestc(Vector128<uint> src)
+            => TestC(src, vones<uint>(n128));
+
+        /// <summary>
+        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), TestC]
+        public static bit vtestc(Vector128<long> src)
+            => TestC(src, vones<long>(n128));
+
+        /// <summary>
+        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), TestC]
+        public static bit vtestc(Vector128<ulong> src)
+            => TestC(src, vones<ulong>(n128));
+
+        /// <summary>
+        /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -102,38 +158,6 @@ namespace Z0
         [MethodImpl(Inline), TestC]
         public static bit vtestc(Vector128<ulong> src, Vector128<ulong> mask)
             => TestC(src, mask);                     
-
-        /// <summary>
-        /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline), TestC]
-        public static bit vtestc(Vector128<sbyte> src)
-            => TestC(src, vones<sbyte>(n128));
-
-        [MethodImpl(Inline), TestC]
-        public static bit vtestc(Vector128<byte> src)
-            => TestC(src, vones<byte>(n128));
-
-        [MethodImpl(Inline), TestC]
-        public static bit vtestc(Vector128<ushort> src)
-            => TestC(src, vones<ushort>(n128));
-        
-        [MethodImpl(Inline), TestC]
-        public static bit vtestc(Vector128<int> src)
-            => TestC(src, vones<int>(n128));
-
-        [MethodImpl(Inline), TestC]
-        public static bit vtestc(Vector128<uint> src)
-            => TestC(src, vones<uint>(n128));
-
-        [MethodImpl(Inline), TestC]
-        public static bit vtestc(Vector128<long> src)
-            => TestC(src, vones<long>(n128));
-
-        [MethodImpl(Inline), TestC]
-        public static bit vtestc(Vector128<ulong> src)
-            => TestC(src, vones<ulong>(n128));
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256

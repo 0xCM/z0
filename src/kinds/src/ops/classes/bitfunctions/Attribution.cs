@@ -59,6 +59,9 @@ namespace Z0
 
     public sealed class HProdAttribute : A { public HProdAttribute() : base(K.HProd) {} } 
 
+    public sealed class TestZnCAttribute : A { public TestZnCAttribute() : base(K.TestZnC) {} }
+
+    public sealed class SameAttribute : A { public SameAttribute() : base(K.Same) {} }
 
     
 }

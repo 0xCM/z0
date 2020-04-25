@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestZ, Closures(AllNumeric)]
         public static bit vtestz<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
                 => vtestz_u(src,mask);
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestZ, Closures(AllNumeric)]
         public static bit vtestz<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
                 => vtestz_u(src,mask);
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestZ, Closures(AllNumeric)]
         public static bit vtestz<T>(in Vector512<T> src, in Vector512<T> mask)
             where T : unmanaged
                 => vtestz(src.Lo,mask.Lo) && vtestz(src.Hi,mask.Hi);

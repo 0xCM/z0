@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static Seed;    
     using static Memories;
 
-    using Api = LogicOpApi;
+    using Api = BitLogix;
 
     public static class TruthTables
     {
@@ -25,8 +25,9 @@ namespace Z0.Logix
         public static BitVector4 sig(UnaryLogicKind kind)
         {
             var x = BitVector4.Zero;
-            x[0] = Api.eval(kind, off);
-            x[1] = Api.eval(kind, on);
+            var service = BitLogix.Service;
+            x[0] = service.Evaluate(kind, off);
+            x[1] = service.Evaluate(kind, on);
             return x;
         }
 
@@ -92,7 +93,7 @@ namespace Z0.Logix
 
         public static BitMatrix<N2,N2,byte> build(UnaryLogicKind kind)
         {
-            var f = Api.lookup(kind);
+            var f = BitLogix.Service.Lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
             table[0] = BitBlocks.single<N2,byte>((byte)Bits.pack(f(off), off));
             table[1] = BitBlocks.single<N2,byte>((byte)Bits.pack(f(on), on));
@@ -179,7 +180,7 @@ namespace Z0.Logix
 
         static void emitUnary(TextWriter dst)
         {
-            var ops = LogicOpApi.UnaryOpKinds.ToArray();
+            var ops = BitLogix.UnaryOpKinds.ToArray();
             for(var i=0; i< ops.Length; i++)
             {
                 BitVector4 result = (byte)i;

@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static Vectors;
     
-    partial class LSquare
+    partial class LogicSquare
     {     
         [MethodImpl(Inline), TestZ, Closures(UnsignedInts)]
         public static bit vtestz<T>(W128 w, in T a, in T b)

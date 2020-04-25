@@ -12,8 +12,10 @@ namespace Z0.Logix
 
     using static BitLogicSpec;
     using static LogicEngine;
+
     
     using BLK = BinaryLogicKind;
+    using BL = BitLogixOps;
 
     public class t_binary_logic : LogixTest<t_binary_logic>
     {
@@ -23,37 +25,37 @@ namespace Z0.Logix
             => logic_op_check(BLK.And, (a,b) => a & b);
 
         public void and_expr_check()
-            => logic_expr_check(BLK.And, LogicOps.and);
+            => logic_expr_check(BLK.And, BL.and);
 
         public void nand_op_check()
             => logic_op_check(BLK.Nand, (a,b) => !(a & b));
 
         public void nand_expr_check()
-            => logic_expr_check(BLK.Nand, LogicOps.nand);
+            => logic_expr_check(BLK.Nand, BL.nand);
 
         public void or_op_check()
             => logic_op_check(BLK.Or, (a,b) => a | b);
 
         public void or_expr_check()
-            => logic_expr_check(BLK.Or, LogicOps.or);
+            => logic_expr_check(BLK.Or, BL.or);
 
         public void nor_op_check()
             => logic_op_check(BLK.Nor, (a,b) => !(a | b));
 
         public void nor_expr_check()
-            => logic_expr_check(BLK.Nor, LogicOps.nor);
+            => logic_expr_check(BLK.Nor, BL.nor);
 
         public void xor_op_check()
             => logic_op_check(BLK.Xor, (a,b) => a ^ b);
 
         public void xor_expr_check()
-            => logic_expr_check(BLK.Xor, LogicOps.xor);
+            => logic_expr_check(BLK.Xor, BL.xor);
 
         public void xnor_op_check()
             => logic_op_check(BLK.Xnor, (a,b) => !(a ^ b));
 
         public void xnor_expr_check()
-            => logic_expr_check(BLK.Xnor, LogicOps.xnor);
+            => logic_expr_check(BLK.Xnor, BL.xnor);
 
         public void t_seqential_op_check()
         {
@@ -72,12 +74,12 @@ namespace Z0.Logix
                 var s0 = seq[0];
                 var s1 = seq[1];
 
-                var e1 = LogicOps.and(s0,s1);
-                var e2 = LogicOps.or(s0,s1);
-                var e3 = LogicOps.xor(e1,e2);
-                var e4 = LogicOps.nand(e2,e3);
-                var e5 = LogicOps.nor(e3,e4);
-                var e6 = LogicOps.xnor(e4,e5);
+                var e1 = BL.and(s0,s1);
+                var e2 = BL.or(s0,s1);
+                var e3 = BL.xor(e1,e2);
+                var e4 = BL.nand(e2,e3);
+                var e5 = BL.nor(e3,e4);
+                var e6 = BL.xnor(e4,e5);
                 var expect = e6;
 
                 a.Set(s0);

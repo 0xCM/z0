@@ -64,5 +64,9 @@ namespace Z0
         Unpack = Id.Unpack,
 
         HProd = Id.HProd,
+
+        TestZnC = Id.TestZnC,
+
+        Same = Id.Same,
     }
 }

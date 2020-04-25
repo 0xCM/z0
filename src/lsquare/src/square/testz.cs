@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
-    partial class LSquare
+    partial class LogicSquare
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bit testz<T>(in T a, in T b)

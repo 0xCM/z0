@@ -9,6 +9,8 @@ namespace Z0.Logix
     using static Seed;
     using static Memories;
 
+    using BL = BitLogixOps;
+
     public class t_ternary_logic : LogixTest<t_ternary_logic>
     {
         protected override int RepCount => Pow2.T08;
@@ -66,7 +68,7 @@ namespace Z0.Logix
                 var c = Random.BitVector<T>();
                 BitVector<T> x = NumericOps.select(a.Scalar, b.Scalar, c.Scalar);
                 for(var j=0; j<x.Width; j++)
-                    Claim.eq(x[j], LogicOps.select(a[j],b[j],c[j]));
+                    Claim.eq(x[j], BL.select(a[j],b[j],c[j]));
             }
 
         }
@@ -140,7 +142,7 @@ namespace Z0.Logix
                 var u = BitVector.alloc<T>();
 
                 for(var j=0; j<width; j++)
-                    u[j] = LogicOpApi.eval(kind, a[j], b[j], c[j]);
+                    u[j] = BitLogix.eval(kind, a[j], b[j], c[j]);
                 
                 
                 BitVector<T> v = NumericOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);

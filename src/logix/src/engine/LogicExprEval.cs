@@ -39,11 +39,11 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryLogicOpExpr x:
-                    return LogicOpApi.eval(x.OpKind, eval(x.Arg));
+                    return BitLogix.Service.Evaluate(x.OpKind, eval(x.Arg));
                 case IBinaryLogicOpExpr x:
-                    return LogicOpApi.eval(x.OpKind, eval(x.LeftArg), eval(x.RightArg));
+                    return BitLogix.eval(x.OpKind, eval(x.LeftArg), eval(x.RightArg));
                 case ITernaryLogicOpExpr x:
-                    return LogicOpApi.eval(x.OpKind, eval(x.FirstArg), eval(x.SecondArg), eval(x.ThirdArg));
+                    return BitLogix.eval(x.OpKind, eval(x.FirstArg), eval(x.SecondArg), eval(x.ThirdArg));
                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }

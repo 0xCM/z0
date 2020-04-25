@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
                 => vtestc_u(src,mask);
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
                 => vtestc_u(src,mask);
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(in Vector512<T> src, in Vector512<T> mask)
             where T : unmanaged
                 => vtestc(src.Lo, mask.Lo) && vtestc(src.Hi, mask.Lo);
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(Vector128<T> src)
             where T : unmanaged
                 => vtestc(src, gvec.vones<T>(n128));
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(Vector256<T> src)
             where T : unmanaged
                 => vtestc(src, gvec.vones<T>(n256));        
@@ -72,7 +72,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(Vector512<T> src)
             where T : unmanaged
                 => vtestc(src, gvec.vones<T>(n512));        

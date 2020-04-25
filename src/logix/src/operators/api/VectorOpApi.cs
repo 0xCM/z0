@@ -15,6 +15,7 @@ namespace Z0.Logix
     using static TernaryLogicKind;
     using static OpHelpers;
     using static VectorizedOps;
+    using static LogicSig;
 
     using ULK = UnaryLogicKind;
     using BLK = BinaryLogicKind;
@@ -66,10 +67,10 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case ULK.Not: return not(a);
-                case ULK.Identity: return identity(a);
-                case ULK.False: return @false(a);
-                case ULK.True: return @true(a);
+                case ULK.Not: return gvec.vnot(a);
+                case ULK.Identity: return gvec.videntity(a);
+                case ULK.False: return gvec.vfalse(a);
+                case ULK.True: return gvec.vtrue(a);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -86,10 +87,10 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case ULK.Not: return not(a);
-                case ULK.Identity: return identity(a);
-                case ULK.False: return @false(a);
-                case ULK.True: return @true(a);
+                case ULK.Not: return gvec.vnot(a);
+                case ULK.Identity: return gvec.videntity(a);
+                case ULK.False: return gvec.vfalse(a);
+                case ULK.True: return gvec.vtrue(a);
                 default: throw Unsupported.define<T>(sig<T>(kind));
              }
         }
@@ -107,9 +108,9 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BCK.Eq: return equals(a,b);
-                case BCK.Lt: return lt(a,b);
-                case BCK.Gt: return gt(a,b);
+                case BCK.Eq: return gvec.veq(a,b);
+                case BCK.Lt: return gvec.vlt(a,b);
+                case BCK.Gt: return gvec.vgt(a,b);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }         
         }
@@ -127,9 +128,9 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BCK.Eq: return equals(a,b);
-                case BCK.Lt: return lt(a,b);
-                case BCK.Gt: return gt(a,b);
+                case BCK.Eq: return gvec.veq(a,b);
+                case BCK.Lt: return gvec.vlt(a,b);
+                case BCK.Gt: return gvec.vgt(a,b);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }         
         }
@@ -147,22 +148,22 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BLK.True: return @true(a,b);
-                case BLK.False: return @false(a,b);
-                case BLK.And: return and(a,b);
-                case BLK.Nand: return nand(a,b);
-                case BLK.Or: return or(a,b);
-                case BLK.Nor: return nor(a,b);
-                case BLK.Xor: return xor(a,b);
-                case BLK.Xnor: return xnor(a,b);
-                case BLK.LProject: return left(a,b);
-                case BLK.RProject: return right(a,b);
-                case BLK.LNot: return lnot(a,b);
-                case BLK.RNot: return rnot(a,b);
-                case BLK.Impl: return impl(a,b);
-                case BLK.NonImpl: return nonimpl(a,b);
-                case BLK.CImpl: return cimpl(a,b);
-                case BLK.CNonImpl: return cnonimpl(a,b);
+                case BLK.True: return gvec.vtrue(a,b);
+                case BLK.False: return gvec.vfalse(a,b);
+                case BLK.And: return gvec.vand(a,b);
+                case BLK.Nand: return gvec.vnand(a,b);
+                case BLK.Or: return gvec.vor(a,b);
+                case BLK.Nor: return gvec.vnor(a,b);
+                case BLK.Xor: return gvec.vxor(a,b);
+                case BLK.Xnor: return gvec.vxnor(a,b);
+                case BLK.LProject: return gvec.vleft(a,b);
+                case BLK.RProject: return gvec.vright(a,b);
+                case BLK.LNot: return gvec.vlnot(a,b);
+                case BLK.RNot: return gvec.vrnot(a,b);
+                case BLK.Impl: return gvec.vimpl(a,b);
+                case BLK.NonImpl: return gvec.vnonimpl(a,b);
+                case BLK.CImpl: return gvec.vcimpl(a,b);
+                case BLK.CNonImpl: return gvec.vcnonimpl(a,b);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -180,22 +181,22 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BLK.True: return @true(a,b);
-                case BLK.False: return @false(a,b);
-                case BLK.And: return and(a,b);
-                case BLK.Nand: return nand(a,b);
-                case BLK.Or: return or(a,b);
-                case BLK.Nor: return nor(a,b);
-                case BLK.Xor: return xor(a,b);
-                case BLK.Xnor: return xnor(a,b);
-                case BLK.LProject: return left(a,b);
-                case BLK.RProject: return right(a,b);
-                case BLK.LNot: return lnot(a,b);
-                case BLK.RNot: return rnot(a,b);
-                case BLK.Impl: return impl(a,b);
-                case BLK.NonImpl: return nonimpl(a,b);
-                case BLK.CImpl: return cimpl(a,b);
-                case BLK.CNonImpl: return cnonimpl(a,b);
+                case BLK.True: return gvec.vtrue(a,b);
+                case BLK.False: return gvec.vfalse(a,b);
+                case BLK.And: return gvec.vand(a,b);
+                case BLK.Nand: return gvec.vnand(a,b);
+                case BLK.Or: return gvec.vor(a,b);
+                case BLK.Nor: return gvec.vnor(a,b);
+                case BLK.Xor: return gvec.vxor(a,b);
+                case BLK.Xnor: return gvec.vxnor(a,b);
+                case BLK.LProject: return gvec.vleft(a,b);
+                case BLK.RProject: return gvec.vright(a,b);
+                case BLK.LNot: return gvec.vlnot(a,b);
+                case BLK.RNot: return gvec.vrnot(a,b);
+                case BLK.Impl: return gvec.vimpl(a,b);
+                case BLK.NonImpl: return gvec.vnonimpl(a,b);
+                case BLK.CImpl: return gvec.vcimpl(a,b);
+                case BLK.CNonImpl: return gvec.vcnonimpl(a,b);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -239,10 +240,10 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BSK.Sll: return sll(a,count);
-                case BSK.Srl: return srl(a,count);
-                case BSK.Rotl: return rotl(a,count);
-                case BSK.Rotr: return rotr(a,count);
+                case BSK.Sll: return gvec.vsll(a,count);
+                case BSK.Srl: return gvec.vsrl(a,count);
+                case BSK.Rotl: return gvec.vrotl(a,count);
+                case BSK.Rotr: return gvec.vrotr(a,count);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -260,10 +261,10 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BSK.Sll: return sll(a,count);
-                case BSK.Srl: return srl(a,count);
-                case BSK.Rotl: return rotl(a,count);
-                case BSK.Rotr: return rotr(a,count);
+                case BSK.Sll: return gvec.vsll(a,count);
+                case BSK.Srl: return gvec.vsrl(a,count);
+                case BSK.Rotl: return gvec.vrotl(a,count);
+                case BSK.Rotr: return gvec.vrotr(a,count);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -274,8 +275,8 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BAR.Add: return add(x,y);
-                case BAR.Sub: return sub(x,y);
+                case BAR.Add: return gvec.vadd(x,y);
+                case BAR.Sub: return gvec.vsub(x,y);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -286,8 +287,8 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BAR.Add: return add(x,y);
-                case BAR.Sub: return sub(x,y);
+                case BAR.Add: return gvec.vadd(x,y);
+                case BAR.Sub: return gvec.vsub(x,y);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -303,8 +304,8 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case ULK.Not: return not;
-                case ULK.Identity: return identity;
+                case ULK.Not: return gvec.vnot;
+                case ULK.Identity: return gvec.videntity;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -320,8 +321,8 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case ULK.Not: return not;
-                case ULK.Identity: return identity;
+                case ULK.Not: return gvec.vnot;
+                case ULK.Identity: return gvec.videntity;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -332,9 +333,9 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BCK.Eq: return equals;
-                case BCK.Lt: return lt;
-                case BCK.Gt: return gt;
+                case BCK.Eq: return gvec.veq;
+                case BCK.Lt: return gvec.vlt;
+                case BCK.Gt: return gvec.vgt;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -345,9 +346,9 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BCK.Eq: return equals;
-                case BCK.Lt: return lt;
-                case BCK.Gt: return gt;
+                case BCK.Eq: return gvec.veq;
+                case BCK.Lt: return gvec.vlt;
+                case BCK.Gt: return gvec.vgt;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -363,10 +364,10 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BSK.Sll: return sll;
-                case BSK.Srl: return srl;
-                case BSK.Rotl: return rotl;
-                case BSK.Rotr: return rotr;
+                case BSK.Sll: return gvec.vsll;
+                case BSK.Srl: return gvec.vsrl;
+                case BSK.Rotl: return gvec.vrotl;
+                case BSK.Rotr: return gvec.vrotr;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -382,10 +383,10 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BSK.Sll: return sll;
-                case BSK.Srl: return srl;
-                case BSK.Rotl: return rotl;
-                case BSK.Rotr: return rotr;
+                case BSK.Sll: return gvec.vsll;
+                case BSK.Srl: return gvec.vsrl;
+                case BSK.Rotl: return gvec.vrotl;
+                case BSK.Rotr: return gvec.vrotr;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -401,22 +402,22 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BLK.True: return @true;
-                case BLK.False: return @false;
-                case BLK.And: return and;
-                case BLK.Nand: return nand;
-                case BLK.Or: return or;
-                case BLK.Nor: return nor;
-                case BLK.Xor: return xor;
-                case BLK.Xnor: return xnor;
-                case BLK.LProject: return left;
-                case BLK.RProject: return right;
-                case BLK.LNot: return lnot;
-                case BLK.RNot: return rnot;
-                case BLK.Impl: return impl;
-                case BLK.NonImpl: return nonimpl;
-                case BLK.CImpl: return cimpl;
-                case BLK.CNonImpl: return cnonimpl;
+                case BLK.True: return gvec.vtrue;
+                case BLK.False: return gvec.vfalse;
+                case BLK.And: return gvec.vand;
+                case BLK.Nand: return gvec.vnand;
+                case BLK.Or: return gvec.vor;
+                case BLK.Nor: return gvec.vnor;
+                case BLK.Xor: return gvec.vxor;
+                case BLK.Xnor: return gvec.vxnor;
+                case BLK.LProject: return gvec.vleft;
+                case BLK.RProject: return gvec.vright;
+                case BLK.LNot: return gvec.vlnot;
+                case BLK.RNot: return gvec.vrnot;
+                case BLK.Impl: return gvec.vimpl;
+                case BLK.NonImpl: return gvec.vnonimpl;
+                case BLK.CImpl: return gvec.vcimpl;
+                case BLK.CNonImpl: return gvec.vcnonimpl;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
@@ -432,22 +433,22 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BLK.True: return @true;
-                case BLK.False: return @false;
-                case BLK.And: return and;
-                case BLK.Nand: return nand;
-                case BLK.Or: return or;
-                case BLK.Nor: return nor;
-                case BLK.Xor: return xor;
-                case BLK.Xnor: return xnor;
-                case BLK.LProject: return left;
-                case BLK.RProject: return right;
-                case BLK.LNot: return lnot;
-                case BLK.RNot: return rnot;
-                case BLK.Impl: return impl;
-                case BLK.NonImpl: return nonimpl;
-                case BLK.CImpl: return cimpl;
-                case BLK.CNonImpl: return cnonimpl;
+                case BLK.True: return gvec.vtrue;
+                case BLK.False: return gvec.vfalse;
+                case BLK.And: return gvec.vand;
+                case BLK.Nand: return gvec.vnand;
+                case BLK.Or: return gvec.vor;
+                case BLK.Nor: return gvec.vnor;
+                case BLK.Xor: return gvec.vxor;
+                case BLK.Xnor: return gvec.vxnor;
+                case BLK.LProject: return gvec.vleft;
+                case BLK.RProject: return gvec.vright;
+                case BLK.LNot: return gvec.vlnot;
+                case BLK.RNot: return gvec.vrnot;
+                case BLK.Impl: return gvec.vimpl;
+                case BLK.NonImpl: return gvec.vnonimpl;
+                case BLK.CImpl: return gvec.vcimpl;
+                case BLK.CNonImpl: return gvec.vcnonimpl;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }

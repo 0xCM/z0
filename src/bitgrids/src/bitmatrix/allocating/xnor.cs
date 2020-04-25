@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -49,7 +49,7 @@ namespace Z0
         public static BitMatrix8 xnor(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -62,7 +62,7 @@ namespace Z0
         public static BitMatrix16 xnor(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -75,7 +75,7 @@ namespace Z0
         public static BitMatrix32 xnor(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -88,7 +88,7 @@ namespace Z0
         public static BitMatrix64 xnor(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LSquare.xnor(in A.Head, in B.Head, ref Z.Head);
+            LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }
