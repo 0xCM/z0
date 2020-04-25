@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-
     using K = CanonicalKind;
     using I = ICanonicalKind;
 
@@ -23,5 +21,11 @@ namespace Z0
         public readonly struct Parse : I { K I.Kind => K.Parse; }
 
         public readonly struct Slice : I { K I.Kind => K.Slice; }
+
+        public readonly struct Zero : I { K I.Kind => K.Zero; }
+
+        public readonly struct One : I { K I.Kind => K.One; }
+
+        
     }
 }

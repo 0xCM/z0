@@ -236,7 +236,7 @@ namespace Z0
             var n = n64;
             var tf = 4;
             var pick = BitMask.msb(n1,n1,t);
-            var pattern = Blocks.single(w,t);
+            var pattern = Blocks.alloc(w,t);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
             
@@ -296,7 +296,7 @@ namespace Z0
 
         static Vector256<T> rl_pattern<T>(N256 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.lsb(n2,n1,t), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.lsb(n2,n1,t), enabled(t), Blocks.alloc(w,t)).LoadVector();
 
 
         void vblendp_check<T>(Vector128<T> spec, [Caller] string title = null)

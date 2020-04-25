@@ -6,7 +6,10 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
     /// <summary>
     /// Characterizes console-controlled, perhaps user-initiated, thread of execution
     /// </summary>

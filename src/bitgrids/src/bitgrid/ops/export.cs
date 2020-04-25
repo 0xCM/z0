@@ -12,10 +12,12 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
     partial class BitGrid
     {                
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -23,14 +25,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(BitGrid16<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(BitGrid16<M,N,T> g, bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -38,14 +40,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(BitGrid32<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(BitGrid32<M,N,T> g, bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -53,14 +55,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(BitGrid64<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(BitGrid64<M,N,T> g, bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -68,14 +70,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(BitGrid128<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(BitGrid128<M,N,T> g, bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -83,14 +85,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(BitGrid256<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(BitGrid256<M,N,T> g, bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -98,14 +100,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(SubGrid16<M,N,T> g, FilePath dst,  bool showrow = false,  [CallerMemberName] string label = null)
+        public static string export<M,N,T>(SubGrid16<M,N,T> g, FilePath dst,  bool showrow = false,  [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -113,14 +115,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(SubGrid32<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(SubGrid32<M,N,T> g, bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -128,14 +130,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(SubGrid64<M,N,T> g, FilePath dst, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(SubGrid64<M,N,T> g, FilePath dst, bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N>(g.Content, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -143,14 +145,14 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(SubGrid128<M,N,T> g, FilePath dst, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(SubGrid128<M,N,T> g, FilePath dst, bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => export<M,N,T>(g.Data, showrow, label);
 
         /// <summary>
-        /// Exports a grid to a file
+        /// Exports a grid report to a file
         /// </summary>
         /// <param name="g">The grid to render</param>
         /// <param name="showrow">Whether grid row indicies should be displayed</param>
@@ -158,7 +160,7 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(SubGrid256<M,N,T> g,  bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(SubGrid256<M,N,T> g,  bool showrow = false, [Caller] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
@@ -183,12 +185,12 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        static StreamWriter writer<W,M,N,T>([CallerMemberName] string label = null, W w = default, M m = default, N n = default, T t = default)
+        static StreamWriter writer<W,M,N,T>([Caller] string label = null, W w = default, M m = default, N n = default, T t = default)
             where W: unmanaged, ITypeNat
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged        
-                => ((Env.Current.LogDir + FolderName.Define("grids")) +  filename(label,w,m,n,t) ).Writer();
+                => ((Env.Current.LogDir + FolderName.Define("grids")) +  filename(label,w,m,n,t)).Writer();
 
         /// <summary>
         /// Exports grid data to a file
@@ -203,7 +205,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
         {
-            var data = render<M,N>(g,showrow,label);
+            var data = report<M,N>(g,showrow,label);
             using var sink = writer(label,n16, default(M), default(N), default(ushort));
             sink.WriteLine(data);
             sink.Flush();
@@ -223,7 +225,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
         {
-            var data = render<M,N>(g,showrow,label);
+            var data = report<M,N>(g,showrow,label);
             using var sink = writer(label,n32, default(M), default(N), default(uint));
             sink.WriteLine(data);
             sink.Flush();
@@ -243,7 +245,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
         {
-            var data = render<M,N>(g,showrow,label);
+            var data = report<M,N>(g,showrow,label);
             using var sink = writer(label,n64, default(M), default(N), default(ulong));
             sink.WriteLine(data);
             sink.Flush();
@@ -264,7 +266,7 @@ namespace Z0
             where N: unmanaged, ITypeNat
             where T: unmanaged
         {
-            var data = render<M,N,T>(g,showrow,label);
+            var data = report<M,N,T>(g,showrow,label);
             using var sink = writer(label,n128, default(M), default(N), default(T));
             sink.WriteLine(data);
             sink.Flush();
@@ -285,7 +287,7 @@ namespace Z0
             where N: unmanaged, ITypeNat
             where T: unmanaged
         {
-            var data = render<M,N,T>(g,showrow,label);
+            var data = report<M,N,T>(g,showrow,label);
             using var sink = writer(label,n256, default(M), default(N), default(T));
             sink.WriteLine(data);
             sink.Flush();

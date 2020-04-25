@@ -17,11 +17,11 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged 
-                => new BitGrid<M,N,T>(src.Data.Replicate());
+                => new BitGrid<M,N,T>(src.Content.Replicate());
 
         public static BitGrid<T> replicate<T>(BitGrid<T> src)
             where T : unmanaged
-                => new BitGrid<T>(src.Data.Replicate(), src.RowCount, src.ColCount);
+                => new BitGrid<T>(src.Content.Replicate(), src.RowCount, src.ColCount);
 
         [MethodImpl(Inline)]
         public static BitGrid32<M,N,T> replicate<M,N,T>(BitGrid32<M,N,T> src)

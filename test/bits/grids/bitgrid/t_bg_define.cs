@@ -105,8 +105,8 @@ namespace Z0
             var grid = BitGrid.alloc(n128, n128, z32);            
             Random.Fill(grid);
             
-            var g128 = grid.Data.Reblock(n128);
-            var g32 = grid.Data.Reblock(n32);
+            var g128 = grid.Content.Reblock(n128);
+            var g32 = grid.Content.Reblock(n32);
             Claim.eq(g32.BlockCount,w);
 
             ref var g32src = ref g32.Head;

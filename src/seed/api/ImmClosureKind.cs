@@ -25,5 +25,4 @@ namespace Z0
         /// </summary>
         Powers2 = 3,
     }
-
 }

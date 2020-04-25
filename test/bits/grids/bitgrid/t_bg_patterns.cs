@@ -28,25 +28,25 @@ namespace Z0
             => BitGrid.export(BitGrid.rotr(GridPatterns.exchange(n256,n16,n16,z16), 4));
         
         void identity_4x4()
-            => BitGrid.export(GridPatterns.identity(n16,n4,n4,z16));
+            => BitGrid.export(GridPatterns.one(n16,n4,n4,z16));
 
         void identity_5x5()
-            => BitGrid.export(GridPatterns.identity(n32,n5,n5,z32));
+            => BitGrid.export(GridPatterns.one(n32,n5,n5,z32));
 
         void identity_8x8()
-            => BitGrid.export(GridPatterns.identity(n64,n8,n8,z8));
+            => BitGrid.export(GridPatterns.one(n64,n8,n8,z8));
 
         void identity_16x16()
-            => BitGrid.export(GridPatterns.identity(n256,n16,n16,z16));
+            => BitGrid.export(GridPatterns.one(n256,n16,n16,z16));
 
         void exchange_16x16()
             => BitGrid.export(GridPatterns.exchange(n256,n16,n16,z16));
         
         void identity_rotl_4_16x16()        
-            => BitGrid.export(BitGrid.rotl(GridPatterns.identity(n256,n16,n16,z16), 4));
+            => BitGrid.export(BitGrid.rotl(GridPatterns.one(n256,n16,n16,z16), 4));
 
         void identity_rotr_4_16x16()        
-            => BitGrid.export(BitGrid.rotr(GridPatterns.identity(n256,n16,n16,z16), 4));
+            => BitGrid.export(BitGrid.rotr(GridPatterns.one(n256,n16,n16,z16), 4));
 
     }
 }

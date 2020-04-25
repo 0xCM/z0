@@ -18,11 +18,11 @@ namespace Z0
         /// <param name="cell">The data to replicate across all grid cells</param>
         /// <param name="dst">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Broadcast, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Broadcast, Closures(UnsignedInts)]
         public static ref readonly BitGrid<T> broadcast<T>(T cell, in BitGrid<T> dst)            
             where T : unmanaged
         {
-            dst.Data.Fill(cell);
+            dst.Content.Fill(cell);
             return ref dst;
         }
 
@@ -100,7 +100,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            dst.Data.Fill(cell);
+            dst.Content.Fill(cell);
             return ref dst;
         }
     }

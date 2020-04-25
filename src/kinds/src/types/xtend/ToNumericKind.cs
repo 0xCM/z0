@@ -16,7 +16,7 @@ namespace Z0
             => NumericClasses.classified(k).NumericKind();
 
         [MethodImpl(Inline)]
-        public static NumericKind ToNumericKind(this FixedWidth width, NumericIndicator indicator) 
-            => NumericKinds.kind(width,indicator);
+        public static NumericKind ToNumericKind(this NumericWidth width, NumericIndicator indicator) 
+            => NumericKinds.kind(width,indicator);            
     }
 }

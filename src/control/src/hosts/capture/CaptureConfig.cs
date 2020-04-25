@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    public class CaptureConfig : AppSettingSet<CaptureConfig>
+    public class CaptureConfig : AppSettings<CaptureConfig>
     {
-        public IAppSettingSet Ops => this;        
+        public IAppSettingsProvider Ops => this;        
 
         public bool EmitPrimaryArtifacts {get; set;} = true;
 

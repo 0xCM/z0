@@ -76,7 +76,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = Blocks.single<T>(n256);
+            var dst = Blocks.alloc<T>(n256);
             Vectors.vstore(src.Data, dst);
             return dst;
         }
@@ -90,7 +90,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void store<T>(Vector256<T> src, in BitGrid<T> dst, int block)
             where T : unmanaged
-                => Vectors.vstore(src, ref dst.data.BlockRef(block));
+                => Vectors.vstore(src, ref dst.Data.BlockRef(block));
 
         /// <summary>
         /// Stores a 256-bit cpu vector to an index-identified block
@@ -105,6 +105,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Vectors.vstore(src, ref dst.data.BlockRef(block));
+                => Vectors.vstore(src, ref dst.Data.BlockRef(block));
     }
 }

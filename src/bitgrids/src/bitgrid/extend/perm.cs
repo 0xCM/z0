@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static SubGrid32<N8,N3,uint> ToSubGrid(this NatPerm<N8> src)
-            => SubGrid.define(src);            
+            => SubGrid.init(src);            
 
         [MethodImpl(Inline)]
         public static SubGrid32<N8,N3,uint> ToSubGrid(this Perm8L src)

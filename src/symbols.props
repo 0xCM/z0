@@ -6,6 +6,7 @@
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
     <Monadic>$(Src)monadic/z0.monadic.csproj</Monadic>
+    <Configure>$(Src)configure/z0.configure.csproj</Configure>
 
 
     <Collective>$(Src)collective/z0.collective.csproj</Collective>

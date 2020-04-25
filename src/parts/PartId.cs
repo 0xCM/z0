@@ -124,7 +124,9 @@ public enum PartId : ulong
     Polyrand = 420,
 
     Monadic = 769,
-    
+
+    Configure = 771,
+
     Seed = 802, 
     
 

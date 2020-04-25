@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
-
     using K = BitLogicKind;
     using I = IBitLogicKind;
 
@@ -49,6 +47,8 @@ namespace Z0
         public readonly struct LNot : I { K I.Kind => K.LNot; }
 
         public readonly struct RNot : I { K I.Kind => K.RNot; }
+
+
 
     }
 }

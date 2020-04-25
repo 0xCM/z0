@@ -14,6 +14,8 @@ namespace Z0
 
     public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(K.Identity) {} }
 
+    public sealed class IdentityValueAttribute : A { public IdentityValueAttribute() : base(K.Identity) {} }
+
     public sealed class ConcatAttribute : A { public ConcatAttribute() : base(K.Concat) {} }
 
     public sealed class ReverseAttribute : A { public ReverseAttribute() : base(K.Reverse) {} }    
@@ -38,5 +40,12 @@ namespace Z0
 
     public sealed class SplitAttribute : A { public SplitAttribute() : base(K.Split) {} }    
 
-    public sealed class ToggleAttribute : A { public ToggleAttribute() : base(K.Toggle) {} }        
+    public sealed class ToggleAttribute : A { public ToggleAttribute() : base(K.Toggle) {} }
+
+    public sealed class ZeroAttribute : A { public ZeroAttribute() : base(K.Zero) {} }
+
+    public sealed class OneAttribute : A { public OneAttribute() : base(K.One) {} }
+
+
+
 }

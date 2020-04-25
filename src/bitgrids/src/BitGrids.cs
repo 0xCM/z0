@@ -20,20 +20,17 @@ namespace Z0
 
     }
 
-
     [ApiHost]
     public partial class SubGrid : IApiHost<SubGrid>
     {
 
     }
 
-
     [ApiHost]
     public static partial class GridLoad
     {   
 
     }
-
 
     public static partial class BitGridX
     {   

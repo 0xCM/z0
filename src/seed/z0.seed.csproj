@@ -9,6 +9,7 @@
 
     <ProjectReference Include="$(Parts)" />
     <ProjectReference Include="$(Monadic)" />
+    <ProjectReference Include="$(Configure)" />
 
   </ItemGroup>
 

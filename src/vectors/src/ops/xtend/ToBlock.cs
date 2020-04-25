@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static Seed;
     using static Widths;
@@ -35,7 +34,7 @@ namespace Z0
         public static Block256<T> ToBlock<T>(this Vector256<T> src)
             where T : unmanaged            
         {
-            var dst = Blocks.single<T>(w256);
+            var dst = Blocks.alloc<T>(w256);
             Vectors.vstore(src, ref dst.Head);
             return dst;
         }            
@@ -48,7 +47,7 @@ namespace Z0
         public static Block512<T> ToBlock<T>(this Vector512<T> src)
             where T : unmanaged            
         {
-            var dst = Blocks.single<T>(w512);
+            var dst = Blocks.alloc<T>(w512);
             Vectors.vstore(src, ref dst.Head);
             return dst;
         }            

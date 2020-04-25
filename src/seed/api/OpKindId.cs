@@ -327,5 +327,13 @@ namespace Z0
 
         Store,
 
+        Zero,
+
+        One,
+
+        Kind,
+
+
+
     }    
 }

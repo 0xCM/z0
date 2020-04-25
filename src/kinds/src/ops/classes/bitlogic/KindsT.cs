@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
-
     partial class Kinds
     {
         public readonly struct And<T> : IBitLogicKind<And,T> {}
@@ -34,5 +32,7 @@ namespace Z0
         public readonly struct Not<T> : IBitLogicKind<Not,T> {}
 
         public readonly struct Select<T> : IBitLogicKind<Select,T> {} 
+
+        
     }
 }

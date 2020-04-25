@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="W">The parametric width</typeparam>
         [MethodImpl(Inline)]
-        public static K type<W>()
+        public static K type<W>(W w = default)
             where W : struct, ITypeWidth
         {
             if(typeof(W) == typeof(W1))

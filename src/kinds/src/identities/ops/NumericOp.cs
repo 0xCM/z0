@@ -54,11 +54,11 @@ namespace Z0
             if(!uint.TryParse(input.Substring(0, input.Length - 1), out width))
                 return 0;
             
-            var fw = (FixedWidth)width;
-            if(!fw.IsLiteral())
+            var nw = (NumericWidth)width;
+            if(!nw.IsLiteral())
                 return 0;
             
-            var kind = fw.ToNumericKind(indicator);
+            var kind = nw.ToNumericKind(indicator);
             if(!kind.IsLiteral())
                 return 0;
                         

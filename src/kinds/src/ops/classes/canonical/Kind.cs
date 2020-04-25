@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
 
     using Id = OpKindId;
 
@@ -46,5 +45,14 @@ namespace Z0
 
         Toggle = Id.Toggle,
 
+        /// <summary>
+        /// Classifies an operation that produces an additive monoidal identity value
+        /// </summary>
+        Zero = Id.Zero,
+
+        /// <summary>
+        /// Classifies an operation that produces a multiplicative monoidal identity value
+        /// </summary>
+        One = Id.One,    
     }   
 }

@@ -53,7 +53,7 @@ namespace Z0
         {
             var count = 32;
             var x = Random.CpuVector(n256,z8);
-            var storage = Blocks.single(n256,z8);
+            var storage = Blocks.alloc(n256,z8);
             var stored = Vectors.vzero(n256,z8);
             var mask = Vectors.vzero(n256,z8);
 

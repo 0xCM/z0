@@ -62,8 +62,7 @@ namespace Z0
             => !a.Equals(b);
 
         public static implicit operator SegmentedIdentity((TypeIndicator si, FixedWidth w, FixedWidth t, NumericIndicator i) src)                
-            => new SegmentedIdentity(src.si,src.w, src.t.ToNumericKind(src.i));
-
+            => new SegmentedIdentity(src.si, src.w, ((NumericWidth)src.t).ToNumericKind(src.i));
 
         [MethodImpl(Inline)]
         internal SegmentedIdentity(TypeIndicator indicator, FixedWidth typewidth, NumericKind segkind)

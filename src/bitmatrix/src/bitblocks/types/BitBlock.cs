@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitBlock(T src, int bitcount)
         {            
-            this.data = Blocks.single<T>(n256);
+            this.data = Blocks.alloc<T>(n256);
             this.data.Head = src;
             this.BitCount = bitcount;
         }

@@ -17,7 +17,7 @@ namespace Z0
             var p = Permute.natural(n32);
             Claim.eq(p.Length,32);
             
-            var g = SubGrid.define(p);
+            var g = SubGrid.init(p);
 
 
         }

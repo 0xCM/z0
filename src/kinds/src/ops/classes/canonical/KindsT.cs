@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
 
     partial class Kinds
     {
@@ -20,5 +19,12 @@ namespace Z0
         public readonly struct Parse<T> : ICanonicalKind<Parse,T> {}
 
         public readonly struct Slice<T> : ICanonicalKind<Slice,T> {}
+
+        public readonly struct Zero<T> : ICanonicalKind<Zero,T> {}
+
+        public readonly struct One<T> : ICanonicalKind<One,T> {}
+
+
+
     }
 }

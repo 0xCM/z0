@@ -37,7 +37,7 @@ namespace Z0
             if(Enum.IsDefined(typeof(FixedWidth), (uint)totalwidth) &&
                 Enum.IsDefined(typeof(FixedWidth),(uint)segwidth) &&
                 Enum.IsDefined(typeof(NumericIndicator), (ushort)ni)
-            ) return identify(si, (FixedWidth)totalwidth, ((FixedWidth)segwidth).ToNumericKind((NumericIndicator)ni));
+            ) return identify(si, (FixedWidth)totalwidth, ((NumericWidth)segwidth).ToNumericKind((NumericIndicator)ni));
             else
                 return SegmentedIdentity.Empty;
         }
@@ -79,7 +79,7 @@ namespace Z0
                         {                                
                             if(Enum.IsDefined(typeof(FixedWidth), by))
                             {
-                                dst = identify(indicator, (FixedWidth)n, ((FixedWidth)by).ToNumericKind((NumericIndicator)part1.Last()));
+                                dst = identify(indicator, (FixedWidth)n, ((NumericWidth)by).ToNumericKind((NumericIndicator)part1.Last()));
                                 return true;
                             }
                         }

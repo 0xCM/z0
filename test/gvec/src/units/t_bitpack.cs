@@ -50,7 +50,7 @@ namespace Z0
             for(var sample=0; sample< RepCount; sample++)
             {
                 var src = Random.Next<uint>();
-                var dst = Blocks.single<byte>(n256);
+                var dst = Blocks.alloc<byte>(n256);
                 BitPack.unpack(src, dst);
 
                 unpack_check(src,dst);
@@ -65,7 +65,7 @@ namespace Z0
             for(var sample=0; sample< RepCount; sample++)
             {
                 var src = Random.Next<ulong>();
-                var dst = Blocks.single<byte>(n512);
+                var dst = Blocks.alloc<byte>(n512);
                 BitPack.unpack(src, dst);
 
                 unpack_check(src,dst.Data);
@@ -145,7 +145,7 @@ namespace Z0
         {
             void case1()
             {
-                var src = Blocks.single<byte>(n256);
+                var src = Blocks.alloc<byte>(n256);
                 gvec.vones<byte>(n256).StoreTo(src);
                 var dst = BitPack.pack(src,n8);
                 Claim.eq(dst,uint.MaxValue);

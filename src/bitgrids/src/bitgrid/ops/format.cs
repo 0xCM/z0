@@ -17,11 +17,11 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.Bytes.FormatMatrixBits(nati<N>(), (int)NatCalc.mul<M,N>(), false);
+                => src.Content.Bytes.FormatMatrixBits(nati<N>(), (int)NatCalc.mul<M,N>(), false);
 
         public static string format<T>(BitGrid<T> src, bool showrow = false, int? maxbits = null)
             where T : unmanaged
-                => src.Data.Bytes.FormatMatrixBits(src.ColCount, maxbits ,showrow);
+                => src.Content.Bytes.FormatMatrixBits(src.ColCount, maxbits ,showrow);
 
         public static string format<T>(BitGrid32<T> src, int? cols = null, bool showrow = false, int? maxbits = null)
             where T : unmanaged
@@ -30,7 +30,6 @@ namespace Z0
         public static string format<T>(BitGrid64<T> src, int? cols = null, bool showrow = false, int? maxbits = null)
             where T : unmanaged
                 => src.Cells.FormatMatrixBits(cols ?? bitsize<T>(), maxbits, showrow);
-
 
         public static string format<M,N,T>(BitGrid16<M,N,T> src, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat

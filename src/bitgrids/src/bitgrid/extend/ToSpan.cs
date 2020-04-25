@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid16<T> src)
             where T : unmanaged
-                => BitConvert.GetBytes(src.Data).As<T>();
+                => BitConvert.GetBytes(src.Content).As<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid32<T> src)
             where T : unmanaged
-                => BitConvert.GetBytes(src.Data).As<T>();
+                => BitConvert.GetBytes(src.Content).As<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid64<T> src)
             where T : unmanaged
-                => BitConvert.GetBytes(src.Data).As<T>();
+                => BitConvert.GetBytes(src.Content).As<T>();
 
         /// <summary>
         /// Extracts grid content to a span
