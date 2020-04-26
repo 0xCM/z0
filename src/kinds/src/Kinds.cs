@@ -7,23 +7,31 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static partial class Kinds
+    [ApiHost]
+    public partial class Kinds : IApiHost<Kinds>
     {
 
 
     }
 
-    public static partial class OpClass
+    public partial class Kinded
     {
-    
+
     }
 
-    public static partial class NumericType
+    [ApiHost]
+    public partial class VectorType : IApiHost<VectorType>
+    {
+
+    }
+
+    public partial class NumericType
     {
        
     }
 
-    public static partial class BlockedTypeKinds
+    [ApiHost]
+    public partial class BlockedKinds : IApiHost<BlockedKinds>
     {
     
     }
@@ -33,5 +41,4 @@ namespace Z0
 
 
     }
-    
 }

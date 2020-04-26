@@ -8,7 +8,7 @@ namespace Z0
 
     using K = PredicateClass;
 
-    partial class OpClass
+    partial class Kinds
     {
         public readonly struct PredicateClass<T> : IOpClass<PredicateClass,K,T> {}
 

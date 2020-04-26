@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Kinds;
 
-    partial class BlockedTypeKinds
+    partial class BlockedKinds
     {
         [MethodImpl(Inline)]
         public static BlockedKind kind<W,T>(W w = default, T t = default)
@@ -62,46 +63,6 @@ namespace Z0
             where T : unmanaged
                 => kind_u(w,t);
 
-        [MethodImpl(Inline)]
-        public static BlockedTypeKind<T> bk<T>(T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static BlockedTypeKind<W,T> bk<W,T>(W w = default, T t = default)
-            where W : unmanaged, ITypeWidth
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static BlockedTypeKind<W16,T> bk<T>(W16 w, T t = default)
-            where T : unmanaged, ITypeWidth
-                => default;
-
-        [MethodImpl(Inline)]
-        public static BlockedTypeKind<W32,T> bk<T>(W32 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static BlockedTypeKind<W64,T> bk<T>(W64 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static BlockedTypeKind<W128,T> bk<T>(W128 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static BlockedTypeKind<W256,T> bk<T>(W256 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static BlockedTypeKind<W512,T> bk<T>(W512 w, T t = default)
-            where T : unmanaged
-                => default;
 
         [MethodImpl(Inline)]
         static BlockedKind kind_u<T>(W16 w, T t = default)

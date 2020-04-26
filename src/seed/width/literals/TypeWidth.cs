@@ -15,7 +15,7 @@ namespace Z0
     /// <remarks>
     /// The selected subset is clearly biased towards x86 OS/sytem architectures
     /// </remarks>
-    public enum TypeWidth : uint
+    public enum TypeWidth : ushort
     {
         /// <summary>
         /// Clasifies nothing
@@ -29,47 +29,46 @@ namespace Z0
         /// Ok, this one is synthetic; but it is useful to pretend that the type system
         /// supports 1-bit types
         /// </remarks>
-        W1 = FW.W1,
+        W1 = (ushort)FW.W1,
 
         /// <summary>
         /// Indicates a bit-width of 8
         /// </summary>
-        W8 = FW.W8,
+        W8 = (ushort)FW.W8,
 
         /// <summary>
         /// Indicates a bit-width of 16
         /// </summary>
-        W16 = FW.W16,
+        W16 = (ushort)FW.W16,
 
         /// <summary>
         /// Indicates a bit-width of 32
         /// </summary>
-        W32 = FW.W32,
+        W32 = (ushort)FW.W32,
 
         /// <summary>
         /// Indicates a bit-width of 64
         /// </summary>
-        W64 = FW.W64,
+        W64 = (ushort)FW.W64,
 
         /// <summary>
         /// Indicates a bit-width of 128
         /// </summary>
-        W128 = FW.W128,
+        W128 = (ushort)FW.W128,
 
         /// <summary>
         /// Indicates a bit-width of 256
         /// </summary>
-        W256 = FW.W256,
+        W256 = (ushort)FW.W256,
 
         /// <summary>
         /// Indicates a bit-width of 512
         /// </summary>
-        W512 = FW.W512,
+        W512 = (ushort)FW.W512,
 
         /// <summary>
         /// Indicates a bit-width of 1024
         /// </summary>
-        W1024 = FW.W1024,
-
+        W1024 = (ushort)FW.W1024,
     }
 }

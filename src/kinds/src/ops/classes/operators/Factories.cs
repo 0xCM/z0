@@ -40,6 +40,11 @@ namespace Z0
         public static K.TernaryOpClass<T> ternaryop<T>(T t = default)  
             where T : unmanaged => default;
 
+
+    }
+
+    partial class XTend
+    {
         public static K.OperatorClass<T> As<T>(this K.OperatorClass src) 
             where T : unmanaged => default;
 

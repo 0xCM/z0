@@ -8,14 +8,15 @@ namespace Z0
     
     using K = ActionClass;
 
-    public static partial class OpClass
+
+    partial class Kinds
     {
         public readonly struct ActionClass : IOpClass<K> 
         { 
             public K Class => K.Action; 
         }
 
-        public readonly struct Receiver : IOpClass<K> 
+        public readonly struct ReceiverClass : IOpClass<K> 
         { 
             public K Class => K.Receiver; 
         }

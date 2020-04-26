@@ -6,18 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static OpClass;
-
     partial class Kinds
     {
-        public static PredicateClass Predicate => default;
-
-        public static UnaryPredicate UnaryPredicate => default;
-
-        public static BinaryPredicate BinaryPredicate => default;
-
-        public static TernaryPredicate TernaryPredicate => default;
-
         public static UnaryPredicate predicate(A1 rep) 
             => default;
 

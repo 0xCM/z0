@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Typed)" />
     <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Reflective)" />    
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Reports)" />

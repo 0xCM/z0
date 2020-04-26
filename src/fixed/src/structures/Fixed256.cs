@@ -17,7 +17,13 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential), Fixed(FixedWidth.W256)]
     public readonly struct Fixed256 : IFixed<Fixed256,W256,Vector256<ulong>>
     {
-        readonly Vector256<ulong> data;
+        internal readonly Vector256<ulong> Data;
+
+        public Vector256<ulong> Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public int BitWidth => 256;
 
@@ -48,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Fixed256(Vector256<ulong> src)
         {
-            data = src;
+            Data = src;
         }
 
         [MethodImpl(Inline)]
@@ -73,41 +79,41 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<byte>(Fixed256 x)
-            => x.data.AsByte();
+            => x.Data.AsByte();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<ushort>(Fixed256 x)
-            => x.data.AsUInt16();
+            => x.Data.AsUInt16();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<uint>(Fixed256 x)
-            => x.data.AsUInt32();
+            => x.Data.AsUInt32();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<ulong>(Fixed256 x)
-            => x.data.AsUInt64();
+            => x.Data.AsUInt64();
                 
         [MethodImpl(Inline)]
         public bool Equals(Fixed256 src)
-            => data.Equals(src.data);
+            => Data.Equals(src.Data);
 
         [MethodImpl(Inline)]
         public bool Equals(Vector256<ulong> src)
-            => data.Equals(src);
+            => Data.Equals(src);
 
         [MethodImpl(Inline)]
         public Vector256<T> ToVector<T>()
             where T : unmanaged
-                => data.As<ulong,T>();
+                => Data.As<ulong,T>();
 
         public string Format() 
-            => data.ToString();
+            => Data.ToString();
  
         public override string ToString() 
             => Format();
  
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed256 x && Equals(x);

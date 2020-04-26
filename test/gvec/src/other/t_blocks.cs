@@ -97,18 +97,19 @@ namespace Z0
             
         }
 
-        public void Fill1()
+        public void alloc_blocks()
         {
 
-            var blocks = Pow2.T08;   
+            var w = w128;
+            var count = Pow2.T08;   
                         
-            var src = Random.Blocks<int>(n128,blocks);
-            var dst = Z0.Blocks.alloc<int>(n128, blocks);
+            var src = Random.Blocks<int>(w, count);
+            var dst = Blocks.alloc<int>(w, count);
 
             Claim.eq(src.CellCount, dst.CellCount);
             var blocklen = src.BlockLength;
 
-            for(int block = 0, idx = 0; block<blocks; block++, idx ++)
+            for(int block = 0, idx = 0; block<count; block++, idx ++)
             {
                 for(var i =0; i<blocklen; i++)
                     dst[block*blocklen + i] = src[block*blocklen + i];                

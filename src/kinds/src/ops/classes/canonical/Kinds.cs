@@ -26,6 +26,7 @@ namespace Z0
 
         public readonly struct One : I { K I.Kind => K.One; }
 
+        public readonly struct Test : I { K I.Kind => K.Test; }
         
     }
 }

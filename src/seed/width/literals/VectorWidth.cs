@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     
-    using FW = FixedWidth;
+    using TW = TypeWidth;
     
     /// <summary>
-    /// Defines a <see cref="FixedWidth"/> subset that is constrained to widths that correspond to x86-supported widths
+    /// Defines a <see cref="TypeWidth"/> subset that is constrained to widths that correspond to x86-supported widths
     /// </summary>
-    public enum VectorWidth : uint
+    public enum VectorWidth : ushort
     {
         /// <summary>
         /// Clasifies nothing
@@ -21,16 +21,16 @@ namespace Z0
         /// <summary>
         /// Indicates a bit-width of 128
         /// </summary>
-        W128 = FW.W128,
+        W128 = TW.W128,
 
         /// <summary>
         /// Indicates a bit-width of 256
         /// </summary>
-        W256 = FW.W256,
+        W256 = TW.W256,
 
         /// <summary>
         /// Indicates a bit-width of 512
         /// </summary>
-        W512 = FW.W512,
+        W512 = TW.W512,
     }
 }

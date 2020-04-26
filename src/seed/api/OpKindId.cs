@@ -333,6 +333,10 @@ namespace Z0
 
         Kind,
 
+        /// <summary>
+        /// Classifies an operation that evaluates one or more operands to determine that a subject is, or is not, of some target kind
+        /// </summary>
+        Test,
 
 
     }    

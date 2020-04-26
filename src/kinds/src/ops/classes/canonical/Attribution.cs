@@ -46,6 +46,6 @@ namespace Z0
 
     public sealed class OneAttribute : A { public OneAttribute() : base(K.One) {} }
 
-
+    public sealed class TestAttribute : A { public TestAttribute() : base(K.Test) {} }
 
 }

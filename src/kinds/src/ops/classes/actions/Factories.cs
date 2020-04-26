@@ -6,18 +6,8 @@ namespace Z0
 {
     using System;    
 
-    using static OpClass;
-
     partial class Kinds
     {
-        public static Receiver Receiver => default;
-
-        public static UnaryAction UnaryAction => default;
-
-        public static BinaryAction BinaryAction => default;
-
-        public static TernaryAction TernaryAction => default;
-
         public static UnaryAction action(A1 rep) 
             => default;
 

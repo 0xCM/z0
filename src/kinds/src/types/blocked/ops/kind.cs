@@ -11,14 +11,14 @@ namespace Z0
     using TW = TypeWidth;
     using ID = NumericTypeId;
 
-    partial class BlockedTypeKinds
+    partial class BlockedKinds
     {
         /// <summary>
         /// Determines the block classifier for a blocked type
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static BK kind(Type t)
-            => t.IsBlocked() ? BlockedTypeKinds.kind(BlockedTypeKinds.width(t), BlockedTypeKinds.segment(t).NumericId()) : BlockedKind.None;
+            => t.IsBlocked() ? BlockedKinds.kind(BlockedKinds.width(t), BlockedKinds.segment(t).NumericId()) : BlockedKind.None;
 
         public static BK kind(TW width, ID id)            
         {

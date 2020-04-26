@@ -15,42 +15,26 @@ namespace Z0
     {     
         public void lut16_rep_check()
         {
-            var n = n128;
+            var w = w128;
 
-            var src = Blocks.alloc<byte>(n);
-            for(var i=0; i<src.BlockLength; i++)
-                src[i] = (byte)i;
-                        
-            var table = LUT.define(src);
-            for(var i=0; i< table.Count; i++)
-                Claim.eq(table[i], (byte)i);
+            var src = Data.vincrements<byte>(w);
+            var lut = LUT.define(src);
 
-            var x = Data.vincrements<byte>(n);
-            Claim.veq(x,table.Data);   
-
-            var items = gvec.vinc<byte>(n, 64);
-            var selected = dvec.vshuf16x8(items, table);
-            Claim.veq(items,selected);
+            var content = gvec.vinc<byte>(w, 64);
+            var selected =  lut.Select(content); //dvec.vshuf16x8(items, table);
+            Claim.veq(content, selected);
         }
 
         public void lut32_rep_check()
         {
-            var n = n256;
+            var w = w256;
 
-            var src = Blocks.alloc<byte>(n);
-            for(var i=0; i<src.BlockLength; i++)
-                src[i] = (byte)i;
-                        
-            var table = LUT.define(src);
-            for(var i=0; i< table.Count; i++)
-                Claim.eq(table[i], (byte)i);
+            var src = Data.vincrements<byte>(w);
+            var lut = LUT.define(src);
 
-            var x = Data.vincrements<byte>(n);
-            Claim.veq(x,table.Data);   
-
-            var items = gvec.vinc<byte>(n, 64);
-            var selected = dvec.vshuf32x8(items, table);
-            Claim.veq(items,selected);
+            var content = gvec.vinc<byte>(w, 64);
+            var selected =  lut.Select(content); //dvec.vshuf32x8(items, table);
+            Claim.veq(content, selected);
 
         }
     }

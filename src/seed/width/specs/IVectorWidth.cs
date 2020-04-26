@@ -28,4 +28,23 @@ namespace Z0
     {     
         VectorWidth IVectorWidth.VectorWidth => Widths.vector<F>();               
     }
+
+    public readonly struct VectorWidthKind : IVectorWidth
+    {
+        public VectorWidth VectorWidth {get;}
+
+        public TypeWidth TypeWidth => (TypeWidth)VectorWidth;
+
+        public DataWidth DataWidth => (DataWidth)VectorWidth;
+
+        [MethodImpl(Inline)]
+        public static implicit operator VectorWidthKind(VectorWidth width)
+            => new VectorWidthKind(width);
+
+        [MethodImpl(Inline)]
+        public VectorWidthKind(VectorWidth width)
+        {
+            this.VectorWidth = width;
+        }
+    }           
 }

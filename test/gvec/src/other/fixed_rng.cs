@@ -52,7 +52,7 @@ namespace Z0
                 {
                     var a = lhs[i];
                     var b = rhs[i];
-                    var x = Fixed.fix(f(a.Data, b.Data));
+                    var x = Fixed.fix(f(a.Content, b.Content));
                     var y = g(a,b);
                     Claim.eq(x,y);
                 }

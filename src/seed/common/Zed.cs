@@ -11,7 +11,6 @@ namespace Z0
         
     }
 
-
     public interface IZed<Z> : IZed
         where Z : INullary<Z>, new()
     {
@@ -30,10 +29,8 @@ namespace Z0
 
     }
 
-    partial class Seed
+    partial class XTend
     {
-        public static Zed Zed => default(Zed);
-
         public static Z Zero<Z>(this Zed z)
             where Z : INullary<Z>, new()
                 => new Z();                

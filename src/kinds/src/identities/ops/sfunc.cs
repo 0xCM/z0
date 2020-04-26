@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Reflection;
 
     using static Seed;
 
@@ -37,22 +34,6 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(string opname)
             => Identify.NumericOp(opname, typeof(T).NumericKind());
-
-        [MethodImpl(Inline)]   
-        public static OpIdentity sfunc<T>(IOpKind kind)
-            => Identify.NumericOp(kind.KindId.ToString(), typeof(T).NumericKind());
-
-        [MethodImpl(Inline)]   
-        public static OpIdentity vfunc<T>(IOpKind kind, W128 w, bool generic = true)
-            => Identify.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
-
-        [MethodImpl(Inline)]   
-        public static OpIdentity vfunc<T>(IOpKind kind, W256 w, bool generic = true)
-            => Identify.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
-
-        [MethodImpl(Inline)]   
-        public static OpIdentity vfunc<T>(IOpKind kind, W512 w, bool generic = true)
-            => Identify.Op(kind.KindId.ToString(), w.TypeWidth, NumericKinds.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]

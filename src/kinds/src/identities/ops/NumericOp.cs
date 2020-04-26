@@ -15,6 +15,10 @@ namespace Z0
 
     partial class Identify
     {
+        [MethodImpl(Inline)]
+        static NumericKind nkind<T>(T t = default)
+            => NumericKinds.kind<T>();
+
         /// <summary>
         /// Defines a scalar type identity
         /// </summary>
@@ -82,8 +86,8 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline)]   
-        public static OpIdentity NumericOp(string opname, NumericKind k)
-            => Op(opname, TypeWidth.None, k, false);
+        public static OpIdentity NumericOp(string opname, NumericKind k, bool generic = false)
+            => Op(opname, TypeWidth.None, k, generic);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
@@ -94,7 +98,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity NumericOp<T>(string opname, NK<T> k, bool generic)
             where T : unmanaged
-                => Op(opname, TypeWidth.None, typeof(T).NumericKind(), generic);       
+                => Op(opname, TypeWidth.None, k, generic);       
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
@@ -103,8 +107,8 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity NumericOp<T>(string opname)
+        public static OpIdentity NumericOp<T>(string opname, bool generic = true)
             where T : unmanaged
-                => Op(opname, TypeWidth.None, typeof(T).NumericKind(), true);
+                => Op(opname, TypeWidth.None, nkind<T>(), generic);
     }
 }

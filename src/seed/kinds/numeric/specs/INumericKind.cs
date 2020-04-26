@@ -14,7 +14,7 @@ namespace Z0
         
     }
 
-    public interface INumericKind<T> : INumericKind, ITypeKind<T>
+    public interface INumericKind<T> : INumericKind
         where T : unmanaged
     {
         TypeWidth Width => (TypeWidth)bitsize<T>();            

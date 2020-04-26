@@ -13,8 +13,7 @@ namespace Z0
 
     using static Seed;
 
-    [ApiHost]
-    public static partial class NumericKinds
+    partial class NumericKinds
     {            
         /// <summary>
         /// Specifies the int8 kind
@@ -119,6 +118,5 @@ namespace Z0
         /// </summary>
         public static IEnumerable<Type> NumericTypes
             => IntegralTypes.Union(FloatingTypes);
-
     }
 }

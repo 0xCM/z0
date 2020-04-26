@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class BlockedTypeKinds
+    partial class BlockedKinds
     {
         public static TypeWidth width(Type src)
             => Widths.blocked(src);

@@ -32,6 +32,7 @@ namespace Z0
         /// Determines the width of a system-defined or custom intrinsic vector type
         /// </summary>
         /// <param name="t">The source type</param>
+        [MethodImpl(Inline)]
         public static TypeWidth vector(Type t)
         {
             var eff = t.EffectiveType();

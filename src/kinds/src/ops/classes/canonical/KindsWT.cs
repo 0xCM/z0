@@ -13,6 +13,7 @@ namespace Z0
 
         public readonly struct One<W,T> : ICanonicalKind<One,W,T> where W : unmanaged, ITypeWidth {}
 
+        public readonly struct Test<W,T> : ICanonicalKind<Test,W,T> where W : unmanaged, ITypeWidth {}
 
     }
 }

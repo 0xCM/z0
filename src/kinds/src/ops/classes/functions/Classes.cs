@@ -8,7 +8,7 @@ namespace Z0
 
     using K = FunctionClass;
 
-    public static partial class OpClass
+    partial class Kinds
     {
         public readonly struct FunctionClass : IOpClass<K> { public K Class => K.Function; }
 
@@ -19,7 +19,7 @@ namespace Z0
         public readonly struct BinaryFunc : IOpClass<K> { public K Class => K.BinaryFunc; }
 
         public readonly struct TernaryFunc : IOpClass<K> { public K Class => K.TernaryFunc; }
-     
+
         public readonly struct FunctionClass<T> : IOpClass<FunctionClass,K,T>  {}
 
         public readonly struct EmitterFunc<T> : IOpClass<EmitterFunc,K,T> {}
@@ -35,5 +35,5 @@ namespace Z0
         public readonly struct BinaryFunc<A,B,R> : IOpClass<BinaryFunc,K,R> {}
 
         public readonly struct TernaryFunc<A,B,C,R> : IOpClass<TernaryFunc,K,R> {}
-    }    
+    }
 }

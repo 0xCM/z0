@@ -14,14 +14,10 @@ namespace Z0
     {
         readonly uint X0;
 
-        public uint Data
+        public uint Content
         {
             [MethodImpl(Inline)] get => X0;
         }
-
-        public int BitWidth => 32;
-
-        public int ByteCount => 4;
 
         [MethodImpl(Inline)]
         public static Fixed32 From(uint src)

@@ -14,11 +14,13 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential),Fixed(FixedWidth.W128)]
     public readonly struct Fixed128 : IFixed<Fixed128,W128,Vector128<ulong>>
     {
-        readonly Vector128<ulong> data;
+        internal readonly Vector128<ulong> Data;
 
-        public int BitWidth => 128;
-
-        public int ByteCount => 16;
+        public Vector128<ulong> Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         [MethodImpl(Inline)]
         public static Fixed128 From<T>(Vector128<T> src)
@@ -33,19 +35,18 @@ namespace Z0
         public static Fixed128 From(in ConstPair<ulong> x)
             => new Fixed128(x.Left,x.Right);
 
-
         [MethodImpl(Inline)]
         internal Fixed128(Vector128<ulong> src)
         {
-            data = src;
+            Data = src;
         }
 
         [MethodImpl(Inline)]
         Fixed128(ulong x0, ulong x1)
         {
-            data = Vector128.Create(x0,x1);
+            Data = Vector128.Create(x0,x1);
         }
-        
+
         [MethodImpl(Inline)]
         public static implicit operator Fixed128((ulong x0, ulong x1) x)
             => From(x);
@@ -72,40 +73,40 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<byte>(Fixed128 x)
-            => x.data.AsByte();
+            => x.Data.AsByte();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ushort>(Fixed128 x)
-            => x.data.AsUInt16();
+            => x.Data.AsUInt16();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<uint>(Fixed128 x)
-            => x.data.AsUInt32();
+            => x.Data.AsUInt32();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ulong>(Fixed128 x)
-            => x.data.AsUInt64();
+            => x.Data.AsUInt64();
                 
         [MethodImpl(Inline)]
         public bool Equals(Fixed128 src)
-            => data.Equals(src.data);
+            => Data.Equals(src.Data);
 
         [MethodImpl(Inline)]
         public bool Equals(Vector128<ulong> src)
-            => data.Equals(src);
+            => Data.Equals(src);
 
         [MethodImpl(Inline)]
         public Vector128<T> ToVector<T>()
             where T : unmanaged
-                => data.As<ulong,T>();
+                => Data.As<ulong,T>();
         public string Format()
-            => data.ToString();
+            => Data.ToString();
 
         public override string ToString() 
             => Format();
  
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed128 x && Equals(x);       

@@ -12,63 +12,61 @@ namespace Z0
 
     using K = Kinds;
 
-    using static Fixed;
-
     partial class FixedOps
     {
         [MethodImpl(Inline), Op]
         public static UnaryOp1 fix(UnaryOp<bit> f) => a => f(a);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp8 fix(UnaryOp<sbyte> f) => a => f((sbyte)a.Data);
+        public static UnaryOp8 fix(UnaryOp<sbyte> f) => a => f((sbyte)a.Content);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp8 fix(UnaryOp<byte> f) => a => f((byte)a.Data);
+        public static UnaryOp8 fix(UnaryOp<byte> f) => a => f((byte)a.Content);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp16 fix(UnaryOp<short> f) => a => f((short)a.Data);
+        public static UnaryOp16 fix(UnaryOp<short> f) => a => f((short)a.Content);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp16 fix(UnaryOp<ushort> f) => a => f((ushort)a.Data);
+        public static UnaryOp16 fix(UnaryOp<ushort> f) => a => f((ushort)a.Content);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp32 fix(UnaryOp<int> f) => a => f((int)a.Data);
+        public static UnaryOp32 fix(UnaryOp<int> f) => a => f((int)a.Content);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp32 fix(UnaryOp<uint> f) => a => f((uint)a.Data);
+        public static UnaryOp32 fix(UnaryOp<uint> f) => a => f((uint)a.Content);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp64 fix(UnaryOp<long> f) => a => f((long)a.Data);
+        public static UnaryOp64 fix(UnaryOp<long> f) => a => f((long)a.Content);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp64 fix(UnaryOp<ulong> f) => a => f(a.Data);        
+        public static UnaryOp64 fix(UnaryOp<ulong> f) => a => f(a.Content);        
 
         [MethodImpl(Inline), Op]
         public static BinaryOp1 fix(BinaryOp<bit> f) => (a,b) => f(a,b);
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp8 fix(BinaryOp<sbyte> f) => (a, b) => f((sbyte)a.Data, (sbyte)b.Data);
+        public static BinaryOp8 fix(BinaryOp<sbyte> f) => (a, b) => f((sbyte)a.Content, (sbyte)b.Content);
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp8 fix(BinaryOp<byte> f) => (a, b) => f(a.Data, b.Data);
+        public static BinaryOp8 fix(BinaryOp<byte> f) => (a, b) => f(a.Content, b.Content);
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp16 fix(BinaryOp<short> f) => (a, b) => f((short)a.Data, (short)b.Data);
+        public static BinaryOp16 fix(BinaryOp<short> f) => (a, b) => f((short)a.Content, (short)b.Content);
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp16 fix(BinaryOp<ushort> f) => (a, b) => f(a.Data, b.Data);
+        public static BinaryOp16 fix(BinaryOp<ushort> f) => (a, b) => f(a.Content, b.Content);
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp32 fix(BinaryOp<int> f) => (a, b) => f((int)a.Data, (int)a.Data);
+        public static BinaryOp32 fix(BinaryOp<int> f) => (a, b) => f((int)a.Content, (int)a.Content);
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp32 fix(BinaryOp<uint> f) => (a, b)  => f(a.Data, b.Data);
+        public static BinaryOp32 fix(BinaryOp<uint> f) => (a, b)  => f(a.Content, b.Content);
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp64 fix(BinaryOp<long> f) => (a, b)  => f((long)a.Data, (long)b.Data);
+        public static BinaryOp64 fix(BinaryOp<long> f) => (a, b)  => f((long)a.Content, (long)b.Content);
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp64 fix(BinaryOp<ulong> f) => (a, b)  => f(a.Data, b.Data);        
+        public static BinaryOp64 fix(BinaryOp<ulong> f) => (a, b)  => f(a.Content, b.Content);        
         
         [MethodImpl(Inline)]
         internal static UnaryOp<T> create<T>(MethodInfo src, K.UnaryOpClass<T> k)

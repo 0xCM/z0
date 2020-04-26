@@ -20,5 +20,4 @@ namespace Z0
     public class ClassifyAttribute : A { public ClassifyAttribute() : base(K.Kind) {} }
 
 
-
 }

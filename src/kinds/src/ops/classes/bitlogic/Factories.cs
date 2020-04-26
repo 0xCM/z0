@@ -8,28 +8,20 @@ namespace Z0
 
     partial class Kinds
     {
-        public static And and() => default(And);
+        public static And and() => Kinded.And;
 
-        public static Nand nand() => default(Nand);
+        public static Nand nand() => Kinded.Nand;
 
-        public static Or or() => default(Or);
+        public static Or or() => Kinded.Or;
 
-        public static Nor nor() => default(Nor);
+        public static Nor nor() => Kinded.Nor;
 
-        public static Xor xor() => default(Xor);
+        public static Xor xor() => Kinded.Xor;
 
-        public static Xnor xnor() => default(Xnor);
+        public static Xnor xnor() => Kinded.Xnor;
 
-        public static LNot lnot() => default(LNot);
+        public static LNot lnot() => Kinded.LNot;
 
-        public static RNot rnot() => default(RNot);
-        
-        public static And<T> and<T>() => default(And<T>);
-
-        public static Nand<T> nand<T>() => default(Nand<T>);
-
-        public static Or<T> or<T>() => default(Or<T>);
-
-        public static Nor<T> nor<T>() => default(Nor<T>);
+        public static RNot rnot() => Kinded.RNot;        
     }
 }

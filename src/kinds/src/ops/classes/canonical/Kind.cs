@@ -54,5 +54,10 @@ namespace Z0
         /// Classifies an operation that produces a multiplicative monoidal identity value
         /// </summary>
         One = Id.One,    
+
+        /// <summary>
+        /// Classifies an operation that evaluates one or more operands to determine that a subject is, or is not, of some target kind
+        /// </summary>
+        Test = Id.Test,
     }   
 }

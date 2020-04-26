@@ -32,7 +32,7 @@ namespace Z0
 
         static Type ApiG => typeof(gvec);
 
-        static MethodInfo gApiMethod(Vec128Kind hk, string name)
+        static MethodInfo gApiMethod(Vec128Type hk, string name)
             => ApiG.DeclaredMethods().WithName(name).OfKind(hk).Single();
     }
 
@@ -46,7 +46,7 @@ namespace Z0
 
         static Type ApiG => typeof(gvec);
 
-        static MethodInfo gApiMethod(Vec256Kind hk, string name)
+        static MethodInfo gApiMethod(Vec256Type hk, string name)
             => ApiG.DeclaredMethods().WithName(name).OfKind(hk).Single();
     }
 }

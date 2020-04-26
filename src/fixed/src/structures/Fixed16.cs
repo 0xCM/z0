@@ -12,16 +12,12 @@ namespace Z0
     [Fixed(FixedWidth.W16)]
     public readonly struct Fixed16 : IFixedNumeric<Fixed16,W16,ushort>
     {
-        readonly ushort X0;
+        internal readonly ushort Data;
 
-        public ushort Data
+        public ushort Content
         {
-            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] get => Data;
         }
-
-        public int BitWidth => 16;
-
-        public int ByteCount => 2;
 
         [MethodImpl(Inline)]
         public static Fixed16 From(ushort src)
@@ -46,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Fixed16(ushort x)
-            => X0 = x;
+            => Data = x;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(ushort x)
@@ -66,44 +62,43 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed16 x)
-            => (sbyte)x.X0;
+            => (sbyte)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator byte(Fixed16 x)
-            => (byte)x.X0;
+            => (byte)x.Data;
         
         [MethodImpl(Inline)]
         public static explicit operator short(Fixed16 x)
-            => (short)x.X0;
+            => (short)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(Fixed16 x)
-            => x.X0;
+            => x.Data;
 
         [MethodImpl(Inline)]
         public T As<T>()
             where T : unmanaged
-                => Cast.to<T>(X0);
+                => Cast.to<T>(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed16 src)
-            => X0 == src.X0;
+            => Data == src.Data;
 
         public string Format()
-            => X0.ToString();
+            => Data.ToString();
 
         public override string ToString() 
             => Format();
  
         [MethodImpl(Inline)]
         public bool Equals(ushort src)
-            => X0 == src;
+            => Data == src;
        
         public override int GetHashCode()
-            => X0.GetHashCode();
+            => Data.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed16 x && Equals(x);
-
    }
 }

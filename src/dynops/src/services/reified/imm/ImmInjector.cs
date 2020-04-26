@@ -29,44 +29,44 @@ namespace Z0
                 => new ImmInjector<D>(context, factory);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context, Vec128Kind v, K.UnaryOpClass k)
+        public static IImmInjector Create(IInnerContext context, Vec128Type v, K.UnaryOpClass k)
             => new ImmInjector(context, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context, Vec256Kind v, K.UnaryOpClass k)
+        public static IImmInjector Create(IInnerContext context, Vec256Type v, K.UnaryOpClass k)
             => new ImmInjector(context, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context, Vec128Kind v, K.BinaryOpClass k)
+        public static IImmInjector Create(IInnerContext context, Vec128Type v, K.BinaryOpClass k)
             => new ImmInjector(context, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context, Vec256Kind v, K.BinaryOpClass k)
+        public static IImmInjector Create(IInnerContext context, Vec256Type v, K.BinaryOpClass k)
             => new ImmInjector(context, v, k);
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec128Kind vk, K.UnaryOpClass opk)
+        ImmInjector(IInnerContext context, Vec128Type vk, K.UnaryOpClass opk)
         {
             Injective = V128UnaryOpImmInjector.Create(context);
             Context = context;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec256Kind vk, K.UnaryOpClass opk)
+        ImmInjector(IInnerContext context, Vec256Type vk, K.UnaryOpClass opk)
         {
             Injective = V256UnaryOpImmInjector.Create(context);
             Context = context;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec128Kind vk, K.BinaryOpClass opk)
+        ImmInjector(IInnerContext context, Vec128Type vk, K.BinaryOpClass opk)
         {
             Injective = V128BinaryOpImmInjector.Create(context);
             Context = context;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec256Kind vk, K.BinaryOpClass opk)
+        ImmInjector(IInnerContext context, Vec256Type vk, K.BinaryOpClass opk)
         {
             Injective = V256BinaryOpImmInjector.Create(context);
             Context = context;

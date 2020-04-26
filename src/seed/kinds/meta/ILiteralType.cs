@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="E">The classifier type</typeparam>
     /// <typeparam name="T">The stratification type</typeparam>
-    public interface ILiteralType<E,T> : ILiteralKind<E>, ITypeKind<T>
+    public interface ILiteralType<E,T> : ILiteralKind<E>
         where E : unmanaged, Enum
     {
         

@@ -6,22 +6,10 @@ namespace Z0
 {
     using System;
 
-    using K = OpClass;
+    using K = Kinds;
 
     partial class Kinds
-    {
-        public static K.EmitterFunc EmitterFunc
-            => default;
-
-        public static K.UnaryFunc UnaryFunc 
-            => default;
-
-        public static K.BinaryFunc BinaryFunc 
-            => default;
-
-        public static K.TernaryFunc TernaryFunc 
-            => default;
-            
+    {            
         public static K.EmitterFunc func(A0 rep) 
             => default;
 
@@ -63,7 +51,10 @@ namespace Z0
 
         public static K.TernaryFunc<A,B,C,R> func<A,B,C,R>(A a = default, B b = default, C c = default, R r = default) 
             => default;
+    }
 
+    partial class XTend
+    {
         public static K.UnaryFunc<A,R> As<A,R>(this K.UnaryFunc f, 
             A a = default, R r = default) => default;
 
@@ -71,6 +62,6 @@ namespace Z0
             A a = default, B b = default, R r = default)  => default;
 
         public static K.TernaryFunc<A,B,C,R> As<A,B,C,R>(this K.TernaryFunc f, 
-            A a = default, B b = default, C c = default,  R r = default)  => default;
+            A a = default, B b = default, C c = default,  R r = default)  => default;        
     }
 }

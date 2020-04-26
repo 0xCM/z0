@@ -17,35 +17,35 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static UnaryPredicate8 fix(UnaryPredicate<sbyte> f) 
-            => a => f((sbyte)a.Data);
+            => a => f((sbyte)a.Content);
 
         [MethodImpl(Inline), Op]
         public static UnaryPredicate8 fix(UnaryPredicate<byte> f) 
-            => a => f((byte)a.Data);
+            => a => f((byte)a.Content);
 
         [MethodImpl(Inline), Op]
         public static UnaryPredicate16 fix(UnaryPredicate<short> f) 
-            => a => f((short)a.Data);
+            => a => f((short)a.Content);
 
         [MethodImpl(Inline), Op]
         public static UnaryPredicate16 fix(UnaryPredicate<ushort> f) 
-            => a => f((ushort)a.Data);
+            => a => f((ushort)a.Content);
 
         [MethodImpl(Inline), Op]
         public static UnaryPredicate32 fix(UnaryPredicate<int> f) 
-            => a => f((int)a.Data);
+            => a => f((int)a.Content);
 
         [MethodImpl(Inline), Op]
         public static UnaryPredicate32 fix(UnaryPredicate<uint> f) 
-            => a => f((uint)a.Data);
+            => a => f((uint)a.Content);
 
         [MethodImpl(Inline), Op]
         public static UnaryPredicate64 fix(UnaryPredicate<long> f) 
-            => a => f((long)a.Data);
+            => a => f((long)a.Content);
 
         [MethodImpl(Inline), Op]
         public static UnaryPredicate64 fix(UnaryPredicate<ulong> f) 
-            => a => f(a.Data);
+            => a => f(a.Content);
  
         [MethodImpl(Inline), Op]
         public static BinaryPredicate1 fix(BinaryPredicate<bit> f) 
@@ -53,34 +53,34 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BinaryPredicate8 fix(BinaryPredicate<sbyte> f) 
-            => (a, b) => f((sbyte)a.Data, (sbyte)b.Data);
+            => (a, b) => f((sbyte)a.Content, (sbyte)b.Content);
 
         [MethodImpl(Inline), Op]
         public static BinaryPredicate8 fix(BinaryPredicate<byte> f) 
-            => (a, b) => f(a.Data, b.Data);
+            => (a, b) => f(a.Content, b.Content);
 
         [MethodImpl(Inline), Op]
         public static BinaryPredicate16 fix(BinaryPredicate<short> f) 
-            => (a, b) => f((short)a.Data, (short)b.Data);
+            => (a, b) => f((short)a.Content, (short)b.Content);
 
         [MethodImpl(Inline), Op]
         public static BinaryPredicate16 fix(BinaryPredicate<ushort> f) 
-            => (a, b) => f(a.Data, b.Data);
+            => (a, b) => f(a.Content, b.Content);
 
         [MethodImpl(Inline), Op]
         public static BinaryPredicate32 fix(BinaryPredicate<int> f) 
-            => (a, b) => f((int)a.Data, (int)a.Data);
+            => (a, b) => f((int)a.Content, (int)a.Content);
 
         [MethodImpl(Inline), Op]
         public static BinaryPredicate32 fix(BinaryPredicate<uint> f) 
-            => (a, b) => f(a.Data, b.Data);
+            => (a, b) => f(a.Content, b.Content);
 
         [MethodImpl(Inline), Op]
         public static BinaryPredicate64 fix(BinaryPredicate<long> f) 
-            => (a, b) => f((long)a.Data, (long)b.Data);
+            => (a, b) => f((long)a.Content, (long)b.Content);
 
         [MethodImpl(Inline), Op]
         public static BinaryPredicate64 fix(BinaryPredicate<ulong> f) 
-            => (a, b) => f(a.Data, b.Data);
+            => (a, b) => f(a.Content, b.Content);
     }
 }

@@ -12,16 +12,12 @@ namespace Z0
     [Fixed(FixedWidth.W8)]
     public readonly struct Fixed8 : IFixedNumeric<Fixed8,W8,byte>
     {        
-        readonly byte X0;
+        internal readonly byte Data;
 
-        public byte Data
+        public byte Content
         {
-            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] get => Data;
         }
-
-        public int BitWidth => 8;
-
-        public int ByteCount => 1;
 
         [MethodImpl(Inline)]
         public static Fixed8 From(byte src)
@@ -46,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Fixed8(byte x0)
-            => X0 = x0;
+            => Data = x0;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed8(byte x0)
@@ -66,33 +62,33 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed8 x)
-            => (sbyte)x.X0;
+            => (sbyte)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator byte(Fixed8 x)
-            => (byte)x.X0;
+            => (byte)x.Data;
 
         [MethodImpl(Inline)]
         public T As<T>()
             where T : unmanaged
-                => Cast.to<T>(X0);
+                => Cast.to<T>(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed8 src)
-            => X0 == src.X0;
+            => Data == src.Data;
 
         [MethodImpl(Inline)]
         public bool Equals(byte src)
-            => X0 == src;
+            => Data == src;
 
         public string Format()
-            => X0.ToString();
+            => Data.ToString();
 
         public override string ToString() 
             => Format();
 
         public override int GetHashCode()
-            => X0.GetHashCode();
+            => Data.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed8 x && Equals(x);    

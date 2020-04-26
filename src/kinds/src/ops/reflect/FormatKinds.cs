@@ -30,6 +30,9 @@ namespace Z0
         public static string Format(this OpKindId id)
             => id.ToString().ToLower();
 
+        public static string Format(this OpKindId id, bool vectorized)
+            => vectorized ? $"v{id.Format()}" : id.Format();
+
         public static string Format(this OpKindId? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 

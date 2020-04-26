@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="width">The required vector width</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsKind(this MethodInfo m, Vec128Kind hk, bool total)        
+        public static bool IsKind(this MethodInfo m, Vec128Type hk, bool total)        
             => m.IsVectorized(128,total);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="width">The required vector width</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsKind(this MethodInfo m, Vec256Kind hk, bool total)        
+        public static bool IsKind(this MethodInfo m, Vec256Type hk, bool total)        
             => m.IsVectorized(256, total);
 
         /// <summary>

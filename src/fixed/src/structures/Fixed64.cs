@@ -12,16 +12,12 @@ namespace Z0
     [Fixed(FixedWidth.W64)]
     public readonly struct Fixed64 : IFixedNumeric<Fixed64,W64,ulong>
     {
-        readonly ulong X0;
+        internal readonly ulong Data;
 
-        public ulong Data
+        public ulong Content
         {
-            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] get => Data;
         }
-
-        public int BitWidth => 64;
-
-        public int ByteCount => 8;
 
         [MethodImpl(Inline)]
         public static Fixed64 From<T>(T src)
@@ -42,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Fixed64(ulong x0)
-            => X0 = x0;
+            => Data = x0;
         
         [MethodImpl(Inline)]
         public static implicit operator Fixed64(int x0)
@@ -58,56 +54,56 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed64 x)
-            => (sbyte)x.X0;
+            => (sbyte)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator byte(Fixed64 x)
-            => (byte)x.X0;
+            => (byte)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator short(Fixed64 x)
-            => (short)x.X0;
+            => (short)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(Fixed64 x)
-            => (ushort)x.X0;
+            => (ushort)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator uint(Fixed64 x)
-            => (uint)x.X0;
+            => (uint)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator int(Fixed64 x)
-            => (int)x.X0;
+            => (int)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator long(Fixed64 x)
-            => (long)x.X0;
+            => (long)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(Fixed64 x)
-            => x.X0;
+            => x.Data;
 
         [MethodImpl(Inline)]
         public T As<T>()
             where T : unmanaged
-                => Cast.to<T>(X0);
+                => Cast.to<T>(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(ulong src)
-            => X0 == src;
+            => Data == src;
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed64 src)
-            => X0 == src.X0;     
+            => Data == src.Data;     
         public string Format()
-            => X0.ToString();
+            => Data.ToString();
 
         public override string ToString() 
             => Format();
  
          public override int GetHashCode()
-            => X0.GetHashCode();
+            => Data.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed64 x && Equals(x);
