@@ -38,6 +38,9 @@ namespace Z0.Asm
         /// </summary>
         ICaptureService CaptureService {get;}       
 
+        /// <summary>
+        /// The capture control service
+        /// </summary>
         ICaptureControl CaptureControl {get;}
 
         /// <summary>

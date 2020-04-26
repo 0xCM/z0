@@ -71,6 +71,10 @@ namespace Z0.Asm
                 Env.Current.LogDir,
                 AsmFormatConfig.DefaultStreamFormat
                 );
+            
+            AsmCheck = AsmTester.Create(Context);
         }
+
+        protected readonly IAsmTester AsmCheck;
     }
 }

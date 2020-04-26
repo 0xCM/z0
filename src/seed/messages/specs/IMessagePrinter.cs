@@ -2,16 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-
-    public interface IImmEmissionWorkflow : IAppMsgReceiver
+        
+    public interface IMessagePrinter
     {
-        void EmitLiteral(params byte[] imm8);
-
-        void EmitRefined();
-
-        void ClearArchive();        
+        void Print(IAppMsg message)
+            => Terminal.Get().WriteMessage(message);
     }
 }

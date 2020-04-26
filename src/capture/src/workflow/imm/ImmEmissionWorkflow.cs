@@ -14,18 +14,18 @@ namespace Z0.Asm
     using static Memories;
     using static AsmEvents;
 
-    public class ImmEmissionWorkflow : IAsmWorkflow<ImmEmissionWorkflow,ImmEmissionBroker>, IImmEmissionWorkflow
+    public class ImmEmissionWorkflow : IAsmWorkflow<IImmEmissionBroker>, IImmEmissionWorkflow
     {                        
         public static IImmEmissionWorkflow Create(IAsmContext context, IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
             => new ImmEmissionWorkflow(context, sink, formatter, decoder, api, dst);
 
-        public ImmEmissionBroker Broker {get;} 
-            = new ImmEmissionBroker();
+        public IImmEmissionBroker Broker {get;} 
 
         public IAppMsgSink Sink {get;}
 
         ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
         {
+            Broker = ImmEmissionBroker.New;
             Context = context;
             Sink = sink;
             Formatter = formatter;
@@ -40,8 +40,8 @@ namespace Z0.Asm
 
         bool Append = true;
 
-        IAsmWorkflow<ImmEmissionBroker> Flow => this;
-
+        IAsmWorkflow<IImmEmissionBroker> Flow => this;
+        
         readonly IApiSet ApiSet;
 
         readonly IAsmFormatter Formatter;
@@ -56,11 +56,11 @@ namespace Z0.Asm
 
         readonly IAsmContext Context;
 
-        void ConnectReceivers(IImmEmissionStep relay)
+        void ConnectReceivers(IImmEmissionBroker relay)
         {
-            relay.EmittedEmbeddedImm.Subscribe(relay,OnEvent);          
-            relay.HostFileEmissionFailed.Subscribe(relay,OnEvent);
-            
+            relay.EmittedEmbeddedImm.Subscribe(relay, OnEvent);          
+            relay.HostFileEmissionFailed.Subscribe(relay, OnEvent);
+            relay.ImmInjectionFailed.Subscribe(relay,OnEvent);            
         }
 
         void OnEvent(EmittedEmbeddedImm e)
@@ -69,6 +69,11 @@ namespace Z0.Asm
         }
 
         void OnEvent(HostFileEmissionFailed e)
+        {
+            Flow.Report(e);
+        }
+
+        void OnEvent(ImmInjectionFailed e)
         {
             Flow.Report(e);
         }
@@ -124,9 +129,9 @@ namespace Z0.Asm
                             if(functions.Length != 0)
                             {
                                 dst.SaveHex(gid, functions, Append)
-                                    .OnSome(path => Flow.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
+                                    .OnSome(path => Broker.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
                                 dst.SaveAsm(gid, functions, Append)
-                                    .OnSome(path => Flow.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
+                                    .OnSome(path => Broker.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
                             }
                         }
                     }
@@ -140,9 +145,9 @@ namespace Z0.Asm
                             if(functions.Length != 0)
                             {
                                 dst.SaveHex(gid, functions, Append)
-                                    .OnSome(path => Flow.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
+                                    .OnSome(path => Broker.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
                                 dst.SaveAsm(gid, functions, Append)
-                                    .OnSome(path => Flow.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
+                                    .OnSome(path => Broker.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
                             }
                         }
                     }

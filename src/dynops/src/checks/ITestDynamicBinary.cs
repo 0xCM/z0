@@ -5,16 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
-    
+    using System.Runtime.CompilerServices;
+
+    using static Seed;        
     using static BufferSeqId;
     using static Memories;
-    using static TestDynamic;
 
     using K = Kinds.BinaryOpClass;
     
-    public interface ITestDynamicBinary : ITester, ITestOperatorMatch
+    public interface ITestDynamicBinary : ITester, ITestOperatorMatch, ICheckDynamic
     {
         TestCaseRecord Match(in BufferSeq buffers, K k, TypeWidth w, IdentifiedCode a, IdentifiedCode b)
         {

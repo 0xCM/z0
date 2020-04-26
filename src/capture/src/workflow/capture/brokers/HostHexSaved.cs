@@ -8,9 +8,8 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IMembersLocatedRelay : IEventBroker<HostMembersLocated>
+    public interface IHostHexSavedBroker : IEventBroker
     {
-        HostMembersLocated MembersLocated => HostMembersLocated.Empty;
+        HostAsmHexSaved HexSaved => HostAsmHexSaved.Empty;        
     }
-
 }

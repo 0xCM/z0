@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics;
     using System.Text;
-    using System.Runtime.CompilerServices;
-    
-    using static Seed;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
 
-    public interface ICheckError : ICheckMessage
+    public interface ICheckError : IMessagePrinter
     {
         IAppMsg Describe(Exception e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {

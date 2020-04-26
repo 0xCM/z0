@@ -24,39 +24,32 @@ namespace Z0.Asm
 
     public class AsmChecks : ITestAsm
     {
-        public IAsmContext Context {get;}
-
-        readonly BufferAllocation BufferAlloc;
-
-        readonly IBufferToken[] Buffers;
-
-        readonly int RepCount;
-
         public static AsmChecks Create(IAsmContext context)
             => new AsmChecks(context);
 
+        public IAsmContext Context {get;}
+
+        public IBufferToken[] Buffers {get;}
+
+        readonly BufferAllocation BufferAlloc;
+
+        public ICaptureExchange CaptureExchange {get;}
+
         AsmChecks(IAsmContext context)
         {
-            this.Context = context;
-            this.RepCount = 128;
-
-            Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();            
-
+            Context = context;
+            Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
+            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureControl, Buffers[(int)Aux3], Buffers[(int)Aux4]);
         }                
 
         public void Dispose()
         {
-            BufferAlloc.Dispose();
-            
+            BufferAlloc.Dispose();            
         }
-
-        public IPolyrand Random => Context.Random;
 
         ICheckVectors Claim => CheckVectors.Checker;
 
-        public IDynamicOps Dynamic => Context.Dynamic;
-
-        ITestDynamic Me => this;
+        ITestAsm Me => this;
 
         ICaptureArchive CodeArchive 
             => Context.CaptureArchive(
@@ -81,37 +74,17 @@ namespace Z0.Asm
         static K.UnaryOpClass Unary => default;
 
         static K.BinaryOpClass Binary => default;
-
-        static K.TernaryOpClass Ternary => default;
-        
-        ICaptureService Capture => Context.CaptureService;
-
-        ICaptureControl CaptureControl => Context.CaptureControl;
-
+                
         IAsmFunctionDecoder Decoder => Context.Decoder;
-
-        IAsmFormatter Formatter => Context.Formatter;
-
-        ITestDynamic Checks => this;
-
-        CaptureExchange Exchange(in BufferSeq buffers)   
-            => CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);     
-
 
         protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.HostBits(id,host).Read(m).Single().ToApiCode();
 
-        public ITestFixedMatch TestFixed => this;
 
-        IEnumerable<string> PrimalBitLogicOps
-            => seq("and", "or", "xor", "nand", "nor", "xnor",
-                "impl","nonimpl", "cimpl", "cnonimpl");
+        // IEnumerable<string> PrimalBitLogicOps
+        //     => seq("and", "or", "xor", "nand", "nor", "xnor",
+        //         "impl","nonimpl", "cimpl", "cnonimpl");
 
-        public IBufferToken this[BufferSeqId id]
-        {
-            [MethodImpl(Inline)]
-            get => Buffers[(int)id];
-        }
         // void bitlogic_match(in BufferSeq buffers)
         // {
         //     var names = PrimalBitLogicOps;
@@ -144,13 +117,14 @@ namespace Z0.Asm
         //     return TestMatch(buffers, Binary, w,d,g);
         // }
 
-        void capture_constants(in BufferSeq buffers)
+        void capture_constants()
         {
             var src = typeof(gmath).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
-                
-            var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
-            var captured = Capture.Capture(exchange, src.Identify(), src).Require();
-            
+
+            var exchange = Me.CaptureExchange.Context;
+            var capture = Me.CaptureService;       
+            var captured = capture.Capture(exchange, src.Identify(), src).Require();
+                    
             using var hexout = HexWriter();
             using var asmout = AsmWriter();            
             
@@ -175,13 +149,13 @@ namespace Z0.Asm
             using var hexout = HexWriter();
             using var asmout = AsmWriter();         
     
-            var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
+            //var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
 
-            var fCaptured = Capture.Capture(exchange, f.Identify(), f).Require();
+            var fCaptured = Me.Capture(f.Identify(), f).Require();
             hexout.WriteCode(fCaptured.Code);
             asmout.Write(Decoder.Decode(fCaptured).Require());
 
-            var gCaptured = Capture.Capture(exchange, g.Identify(), g).Require();
+            var gCaptured = Me.Capture(g.Identify(), g).Require();
             hexout.WriteCode(gCaptured.Code);
             asmout.Write(Decoder.Decode(gCaptured).Require());
         }
@@ -192,17 +166,16 @@ namespace Z0.Asm
             var name = nameof(dvec.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
 
-            var injector = Dynamic.BinaryInjector<ushort>(w);
-            var x = Random.CpuVector<ushort>(w);
-            var y = Random.CpuVector<ushort>(w);
+            var injector = Me.Dynamic.BinaryInjector<ushort>(w);
+            var x = Me.Random.CpuVector<ushort>(w);
+            var y = Me.Random.CpuVector<ushort>(w);
             
-            var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
+            //var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
 
             var f = injector.EmbedImmediate(method,imm);
             var v1 = f.DynamicOp.Invoke(x,y);
-            var captured = Capture.Capture(exchange, f.Id, f).Require();
+            var captured = Me.Capture(f.Id, f).Require();
             var asm = Decoder.Decode(captured).Require();        
-
             
 
             var g = buffers[Main].EmitFixedBinaryOp<Fixed256>(asm.Code);
@@ -266,10 +239,9 @@ namespace Z0.Asm
             using var hexout = HexWriter();
             using var asmout = AsmWriter();            
 
-            var captured = Capture.Capture(Context.CaptureExchange(), src.Identify(), src);
+            var captured = Me.Capture(src.Identify(), src);
             var decoded = captured.OnSome(c => Decoder.Decode(c));                    
         }
-
 
         static int activations;
         

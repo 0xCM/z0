@@ -6,10 +6,13 @@ namespace Z0.Asm
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
+    using System.Reflection;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using System.IO;
         
+
     public sealed class t_method_catpure : t_asm<t_method_catpure>
     {
         public void parse_address_segment()
@@ -59,71 +62,27 @@ namespace Z0.Asm
 
         public void capture_delegates()
         {
-            Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
-                => v => Avx2.Shuffle(v,imm);
-
-            Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
-                => v => Avx2.ShiftLeftLogical(v,imm);
-
-            var exchange = Context.CaptureExchange();            
-            var service = exchange.Service;
             using var dst = CaseFileWriter(FileExtensions.Asm);
-            
-            void CaptureFromMethod(in CaptureExchange xchange)
-            {
-                var name = nameof(Avx2.And);
-                var src = typeof(Avx2).GetMethod(name, new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
 
-                service.Capture(xchange, src.Identify(), src)
-                    .OnSome(capture => WriteAsm(capture, dst))
-                    .OnNone(() => error($"{name} method capture failed"));
-            }
+            var case1In = CaptureCases.And256;
+            var case1Out = AsmCheck.Capture(case1In.Identify(), case1In).Require();
+            WriteAsm(case1Out, dst);
 
-            void CaptureFromDelegate(in CaptureExchange xchange)
-            {
-                var name = nameof(Avx2.And);
-                Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> src = Avx2.And;
+            var case2In = CaptureCases.And256;
+            var case2Out = AsmCheck.Capture(case2In.Identify(), case1In).Require();
+            WriteAsm(case2Out, dst);
 
-                service.Capture(xchange, src.Identify(), src)
-                    .OnSome(capture => WriteAsm(capture, dst))
-                    .OnNone(() => error($"{name} delegate capture failed"));
-            }
+            var case3In = CaptureCases.shuffler(4);
+            var case3Out = AsmCheck.Capture(case3In.Identify(), case3In).Require();
+            WriteAsm(case3Out, dst);
 
-            void CaptureShuffler(in CaptureExchange xchange)
-            {
-                var dShuffle = shuffler(4);
-                service.Capture(xchange, dShuffle.Identify(), dShuffle)
-                    .OnSome(capture => WriteAsm(capture, dst))
-                    .OnNone(() => error($"{dShuffle.Method.Name} capture failed"));                        
-            }
+            var case4In = CaptureCases.shifter(7);
+            var case4Out = AsmCheck.Capture(case4In.Identify(), case4In).Require();
+            WriteAsm(case4Out, dst);
 
-            void CaptureShifter(in CaptureExchange xchange)
-            {
-                var dShift = shifter(4);
-                service.Capture(xchange, dShift.Identify(), dShift)
-                    .OnSome(capture => WriteAsm(capture, dst))
-                    .OnNone(() => error($"{dShift.Method.Name} capture failed"));
-            }
-
-            void CaptureGeneric(in CaptureExchange xchange)
-            {
-                var methods = typeof(gvec).DeclaredStaticMethods()
-                            .OpenGeneric()
-                            .WithName("vand")
-                            .Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint)))
-                            .ToArray();            
-                
-                foreach(var src in methods)
-                    service.Capture(xchange, src.Identify(), src)
-                        .OnSome(capture => WriteAsm(capture, dst))
-                        .OnNone(() => error($"{src.Name} capture failed"));
-            }
-
-            CaptureFromMethod(exchange);
-            CaptureFromDelegate(exchange);
-            CaptureShuffler(exchange);
-            CaptureShifter(exchange);
-            CaptureGeneric(exchange);
+            var case5In = CaptureCases.vand;
+            Control.iter(case5In, 
+                src => WriteAsm(AsmCheck.Capture(src.Identify(), src).Require(), dst));
         }
 
         public void read_library()

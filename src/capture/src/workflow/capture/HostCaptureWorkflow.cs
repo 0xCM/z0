@@ -19,7 +19,7 @@ namespace Z0.Asm
     sealed class HostCaptureBroker : EventBroker, IHostCaptureBroker
     {
         [MethodImpl(Inline)]
-        public new static IHostCaptureBroker Create()
+        public static IHostCaptureBroker Create()
             => new HostCaptureBroker();
     }
 

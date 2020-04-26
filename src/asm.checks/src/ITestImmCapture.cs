@@ -69,7 +69,7 @@ namespace Z0.Asm
                 var y = Random.CpuVector<T>(w);
 
                 var v1 = f.DynamicOp.Invoke(x,y);
-                var captured = CaptureService.Capture(Exchange.Context, f.Id, f.DynamicOp).Require();            
+                var captured = CaptureService.Capture(CaptureExchange.Context, f.Id, f.DynamicOp).Require();            
                 var asm = Decoder.Decode(captured).Require();
                 var g = Dynamic.EmitFixedBinary<Fixed128>(this[Main], asm.Code);
                 var v2 = g(x.ToFixed(),y.ToFixed()).ToVector<T>();            
@@ -91,7 +91,7 @@ namespace Z0.Asm
                 var x = Random.CpuVector<T>(w);
                 var v1 = dynop.DynamicOp.Invoke(x);
                 
-                var capture = CaptureService.Capture(Exchange.Context, dynop.Id, dynop).Require();            
+                var capture = CaptureService.Capture(CaptureExchange.Context, dynop.Id, dynop).Require();            
                 var asm = Decoder.Decode(capture).Require();
 
                 var f = Dynamic.EmitFixedUnary<Fixed256>(this[Main], capture.Code);

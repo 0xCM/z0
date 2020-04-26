@@ -12,6 +12,10 @@ namespace Z0.Asm
 
     public class AsmContext : IAsmContext 
     {            
+        public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition,
+             FolderPath root, AsmFormatConfig format = null)
+                => new AsmContext(settings,queue, composition, root, format ?? AsmFormatConfig.New);
+
         public event Action<IAppMsg> Next;
 
         public IPolyrand Random {get;}
@@ -38,73 +42,31 @@ namespace Z0.Asm
         
         public IDynamicOps Dynamic {get;}
 
-        public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition api, FolderPath root, AsmFormatConfig format = null)
-        {
-            var context = IContext.Default;
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);                
-            var _format = format ?? AsmFormatConfig.New;
-            var decoder = AsmDecoder.function(context, _format);
-            var formatter = context.AsmFormatter(_format);
-            var factory = context.AsmWriterFactory();
-            var capture = context.Capture();
-            var control =  MemberCaptureControl.Create(context, capture);
-            var dynops = context.Dynamic();
-            return AsmContext.Create(settings, queue, api, root, random, _format, formatter, decoder, factory, capture, control,dynops);
-        }
+        public IImmSpecializer ImmServices {get;}
 
-        /// <summary>
-        /// Creates a base context with a specified composition
-        /// </summary>
-        /// <param name="assemblies">A composition of assemblies to share with the context</param>
-        public static IAsmContext Create(
-            IAppSettings settings, 
-            IAppMsgQueue queue, 
-            IApiComposition assemblies, 
-            FolderPath root,            
-            IPolyrand random, 
-            AsmFormatConfig format,
-            IAsmFormatter formatter,
-            IAsmFunctionDecoder decoder,
-            AsmWriterFactory writerFactory,
-            ICaptureService capture,
-            ICaptureControl control,
-            IDynamicOps dynops)
-                => new AsmContext(assemblies, settings, queue, root, random, format, formatter, 
-                    decoder, writerFactory, capture,control, dynops);
-
-        AsmContext(
-            IApiComposition composition, 
-            IAppSettings settings, 
-            IAppMsgQueue queue, 
-            FolderPath root,            
-            IPolyrand random, 
-            AsmFormatConfig format,
-            IAsmFormatter formatter,
-            IAsmFunctionDecoder decoder,
-            AsmWriterFactory writerFactory,
-            ICaptureService capture,
-            ICaptureControl control,
-            IDynamicOps dynops
-            )
+        AsmContext(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition, FolderPath root, AsmFormatConfig format)
         {
-            Next += BlackHole;
-            Queue = queue;
-            Settings = settings;
-            Queue.Next += Relay;      
-            RootCapturePath = root;      
-            Random = random;
-            AsmFormat = format;
-            Settings = settings;
+            Next  = e => {};
             AppPaths = IAppPaths.Default;
+
+            Settings = settings;
+            Queue = queue;
+            Queue.Next += Relay;      
             ApiSet = composition.ApiSet();
-            Formatter = formatter;
-            Decoder = decoder;
-            WriterFactory = writerFactory;   
-            CaptureService = capture;         
-            CaptureControl = control;
-            Dynamic = dynops;
+            RootCapturePath = root;      
+            AsmFormat = format;
+
+            var context = IContext.Default;
+            Random = Polyrand.Pcg64(PolySeed64.Seed05);
+            Decoder = AsmDecoder.function(context, AsmFormat);
+            Formatter  = context.AsmFormatter(AsmFormat);
+            WriterFactory = context.AsmWriterFactory();
+            CaptureService = context.Capture();
+            CaptureControl =  MemberCaptureControl.Create(context, CaptureService);
+            Dynamic = context.Dynamic();
+            ImmServices = ImmSpecializer.Create(context, Decoder);
         }
-        
+       
         AsmWriterFactory WriterFactory {get;}
 
         public IAsmFunctionWriter Writer(FilePath dst)
@@ -124,8 +86,6 @@ namespace Z0.Asm
 
         public void Emit(FilePath dst) 
             => Queue.Emit(dst);
-
-        void BlackHole(IAppMsg msg) {}
 
         void Relay(IAppMsg msg)
             => Next(msg);

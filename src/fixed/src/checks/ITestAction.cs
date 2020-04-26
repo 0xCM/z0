@@ -5,19 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics;
-    using System.Runtime.CompilerServices;
-    
-    using static Seed;
-    using static Memories;
-    
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    
+        
     public interface ITestAction : ITester
     {
-
         /// <summary>
         /// Captures the outcome of an action invocation, identified by a supplied label
         /// </summary>

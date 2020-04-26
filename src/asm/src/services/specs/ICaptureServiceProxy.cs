@@ -10,63 +10,77 @@ namespace Z0.Asm
 
     using static Seed;
 
-
     /// <summary>
-    /// Defines supported x86-encoding capture operations
+    /// Exposes capture services without the hassle of passing a ref struct about hither thither and yon
     /// </summary>
-    public interface ICaptureService : IService
+    public interface ICaptureServiceProxy : IService
     {
+        /// <summary>
+        /// The capture exchange
+        /// </summary>
+        ICaptureExchange CaptureExchange {get;}
+
+        /// <summary>
+        /// The exchange service
+        /// </summary>
+        ICaptureService CaptureService {get;}
+
         /// <summary>
         /// Captures jitted x86 encoded assembly for nongeneric methods
         /// </summary>
-        /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The source method</param>
-        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src);
+        [MethodImpl(Inline)]
+        Option<ApiMemberCapture> Capture(OpIdentity id, MethodInfo src)
+            => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for generic or nongeneric methods
         /// </summary>
-        /// <param name="exchange">The selected exchange</param>
         /// <param name="src">The source method</param>
         /// <param name="args">The types over which to close open generic methods, if applicable</param>
         /// <remarks>
         /// If the method is open generic, it is closed over supplied type arguments or
         /// If the method is nongeneric or closed-generic, the method is captured as-is
         /// </remarks>
-        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args);
+        [MethodImpl(Inline)]
+        Option<ApiMemberCapture> Capture(MethodInfo src, params Type[] args)
+            => CaptureService.Capture(CaptureExchange.Context, src, args);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for a dynamic delegate
         /// </summary>
-        /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src);
+        [MethodImpl(Inline)]
+        Option<ApiMemberCapture> Capture(OpIdentity id, in DynamicDelegate src)
+            => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for a delegate
         /// </summary>
-        /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The delegate to capture</param>
-        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src);
+        [MethodImpl(Inline)]
+        Option<ApiMemberCapture> Capture(OpIdentity id, Delegate src)
+            => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
         /// Captures encoded data from a caller-supplied source buffer.
         /// </summary>
-        /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the parsed buffer</param>
         /// <param name="src">The source buffer</param>
-        Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src);
+        [MethodImpl(Inline)]
+        Option<ParsedBuffer> ParseBuffer(OpIdentity id, Span<byte> src)
+            => CaptureService.ParseBuffer(CaptureExchange.Context, id, src);         
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for a dynamic delegate
         /// </summary>
-        /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        Option<ApiMemberCapture> Capture<D>(in CaptureExchange exchange, OpIdentity id, DynamicDelegate<D> src)
-            where D : Delegate => Capture(exchange,id, src.Untyped);
+        [MethodImpl(Inline)]
+        Option<ApiMemberCapture> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
+            where D : Delegate => Capture(id, src.Untyped);            
     }
 }

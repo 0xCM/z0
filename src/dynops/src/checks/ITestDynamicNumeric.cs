@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
     
     using static BufferSeqId;
-    using static Memories;
-    using static TestDynamic;
 
-    public interface ITestDynamicNumeric : ITestRandom, ITestOperatorMatch, ICheckNumeric
+    public interface ITestDynamicNumeric : ITestRandom, ITestOperatorMatch, ICheckNumeric, ICheckDynamic
     {
         TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, UnaryOp<T> f, IdentifiedCode src)
             where T : unmanaged

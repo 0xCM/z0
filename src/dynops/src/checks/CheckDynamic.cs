@@ -2,18 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Seed;
 
-    sealed class ExtractionBroker : EventBroker, IExtractionBroker
+    public readonly struct CheckDynamic : ICheckDynamic
     {
-        [MethodImpl(Inline)]
-        public new static IExtractionBroker Create()
-            => new ExtractionBroker();
+        public static ICheckDynamic Checker => default(CheckDynamic);
+    }
+
+    public interface ICheckDynamic : IValidator
+    {
+        IDynamicOps Dynamic => IContext.Default.Dynamic();
     }
 }

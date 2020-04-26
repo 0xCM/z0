@@ -8,9 +8,17 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Memories;
     using static BufferSeqId;
 
+    public interface IAsmTester : IService<IAsmContext>, IBufferedChecker, ITestDynamic, ICheckVectors, ICheckCapture 
+    {        
+        IAsmFunctionDecoder Decoder => Context.Decoder; 
+
+        IPolyrand IPolyrandProvider.Random  => Context.Random;
+
+        ICaptureService ICaptureServiceProxy.CaptureService => Context.CaptureService;        
+    }
+    
     public readonly struct AsmTester : IAsmTester
     {
         [MethodImpl(Inline)]
@@ -21,26 +29,27 @@ namespace Z0.Asm
         AsmTester(IAsmContext context)
         {
             Context = context;
-            Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();            
+            Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();  
+            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureControl, Buffers[(int)Aux3], Buffers[(int)Aux4]);
         }
         
         public IAsmContext Context {get;}
 
         readonly BufferAllocation BufferAlloc;
 
-        readonly IBufferToken[] Buffers;
+        public IBufferToken[] Buffers {get;}
 
-        public IPolyrand Random => Context.Random;
+        public ICaptureExchange CaptureExchange {get;}
         
-        public void Dispose()
-        {
-            BufferAlloc.Dispose();
-        }
-
         public IBufferToken this[BufferSeqId id]
         {
             [MethodImpl(Inline)]
             get => Buffers[(int)id];
+        }
+
+        public void Dispose()
+        {
+            BufferAlloc.Dispose();
         }
     }    
 }

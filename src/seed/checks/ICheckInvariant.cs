@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Seed;
     using static AppErrorMsg;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

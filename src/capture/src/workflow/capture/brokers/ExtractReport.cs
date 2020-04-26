@@ -8,9 +8,10 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IHostFunctionsDecodedRelay : IEventBroker<HostFunctionsDecoded>
+    public interface IExtractReportBroker : IEventBroker
     {
-        HostFunctionsDecoded FunctionsDecoded => HostFunctionsDecoded.Empty;
-    }
+        ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
 
+        ExtractReportSaved ExtractReportSaved => ExtractReportSaved.Empty;        
+    }
 }

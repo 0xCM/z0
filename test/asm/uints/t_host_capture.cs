@@ -13,7 +13,6 @@ namespace Z0.Asm
         public void capture_1()
         {
             var service =  Context.HostCaptureService(FolderName.Define("test"), FolderName.Define(GetType().Name));
-            //NotifyConsole($"Emission root {service.EmissionRoot}");
 
             var uri = ApiHostUri.FromHost<math>();
             var capture = service.CaptureHost(uri,true);
@@ -21,7 +20,6 @@ namespace Z0.Asm
             NotifyConsole($"Extracted {capture.Extracts.Length} {uri} members");
             NotifyConsole($"Parsed {capture.Parsed.Length} {uri} members");
             NotifyConsole($"Decoded {capture.Decoded.Length} {uri} members");
-
             
         }
     }

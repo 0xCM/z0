@@ -9,7 +9,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    using static CheckEquatable;
+    using Eq = CheckEquatable;
     
     public interface ITestUnaryFixedMatch : ITestAction, ITestRandom
     {
@@ -29,7 +29,7 @@ namespace Z0
                 {
                     var x = Random.Fixed(w);
                     var y = Random.Fixed(w);
-                    Checker.eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -54,7 +54,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x);
                     var b = g(x);
-                    Checker.eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -79,7 +79,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x);
                     var b = g(x);
-                    Checker.eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -104,7 +104,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x);
                     var b = g(x);
-                    Checker.eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -129,7 +129,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x);
                     var b = g(x);
-                    Checker.eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -154,7 +154,7 @@ namespace Z0
                     var y = Random.Fixed(w);
                     var a = f(x);
                     var b = g(x);
-                    Checker.eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 

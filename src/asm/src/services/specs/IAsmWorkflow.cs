@@ -9,16 +9,10 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public interface IAsmWorkflow<R> :  IAppMsgReceiver, IStepBrokerProvider<R>
-        where R : IStepBroker
+    public interface IAsmWorkflow<R> :  IAppMsgReceiver
+        where R : IEventBroker
     {
-
+        R Broker {get;}
     }
 
-    public interface IAsmWorkflow<W,R> : IAsmWorkflow<R>
-        where W : IAsmWorkflow<W,R>
-        where R : IStepBroker
-    {
-
-    }
 }

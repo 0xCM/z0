@@ -5,19 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Seed;
-    using static AppErrorMsg;
 
     public readonly struct CheckNull : ICheckNull
     {
-
+        public static ICheckNull Checker => default(CheckNull);
     }
     
     public interface ICheckNull : IValidator

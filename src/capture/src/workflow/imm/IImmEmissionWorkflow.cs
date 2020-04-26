@@ -6,8 +6,12 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface ITestAsm : ITestCapture, ITestImmCapture, ITestDynamicVectors
+    public interface IImmEmissionWorkflow : IAppMsgReceiver 
     {
-        
+        void EmitLiteral(params byte[] imm8);
+
+        void EmitRefined();
+
+        void ClearArchive();        
     }
 }

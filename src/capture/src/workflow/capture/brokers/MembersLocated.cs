@@ -8,14 +8,8 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IHostExtractParseRelay : 
-        IEventBroker<HostExtractsParsed>, 
-        IEventBroker<ParseReportCreated>
+    public interface IMembersLocatedBroker : IEventBroker
     {
-        HostExtractsParsed ExtractsParsed => HostExtractsParsed.Empty;            
-        
-        ParseReportCreated ParseReportCreated => ParseReportCreated.Empty;
+        HostMembersLocated MembersLocated => HostMembersLocated.Empty;
     }
-
-
 }

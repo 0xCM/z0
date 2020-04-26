@@ -19,6 +19,8 @@ namespace Z0
 
         string Description {get;}
 
+        bool IsError => false;
+
         AppMsgColor Flair => AppMsgColor.Blue;
 
         string ICustomFormattable.Format()        
@@ -45,5 +47,4 @@ namespace Z0
         object IAppEvent.Content
             => Content;                
     }
-
 }

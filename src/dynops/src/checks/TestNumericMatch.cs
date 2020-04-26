@@ -5,10 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    
-    using static Seed;
-    using static Memories;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;        
+
+    public readonly struct TestNumericMatch : ITestNumericMatch
+    {
+        [MethodImpl(Inline)]
+        public static ITestNumericMatch Create(IPolyrand random)        
+            => new TestDynamic(random);
+
+        public IPolyrand Random {get;}        
+        
+        [MethodImpl(Inline)]
+        public TestNumericMatch(IPolyrand random)
+            => Random = random;
+    }
 
     public interface ITestNumericMatch : ITestAction, ICheckNumeric, ITestRandom
     {

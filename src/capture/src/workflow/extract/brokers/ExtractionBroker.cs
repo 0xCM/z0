@@ -5,10 +5,16 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Seed;
     using static AsmEvents;
     using static ExtractionEvents;
+
+    sealed class ExtractionBroker : EventBroker<ExtractionBroker,IExtractionBroker>, IExtractionBroker
+    {
+        IExtractionBrokerClient Client => ExtractionBrokerClient.Create(this);
+    }
 
     public interface IExtractionBroker : IStepBroker
     {

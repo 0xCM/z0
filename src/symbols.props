@@ -58,6 +58,7 @@
 
   <PropertyGroup>    
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
+    <AsmChecks>$(Src)asm.checks/z0.asm.checks.csproj</AsmChecks>
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
     <Validity>$(Src)validity/z0.validity.csproj</Validity>

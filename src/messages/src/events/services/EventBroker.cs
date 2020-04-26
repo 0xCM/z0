@@ -11,16 +11,19 @@ namespace Z0
 
     using static Seed;
 
+    public class EventBroker<F,E> : EventBroker
+        where F : EventBroker<F,E>, E, new()
+        where E : IEventBroker
+    {        
+        public static E New => new F();
+    }
+
     public class EventBroker : IEventBroker
     {
         readonly Dictionary<Type, ISink> Subscriptions;
 
         [MethodImpl(Inline)]
-        public static IEventBroker Create()
-            => new EventBroker();            
-
-        [MethodImpl(Inline)]
-        protected EventBroker()
+        public EventBroker()
         {
             this.Subscriptions = new Dictionary<Type, ISink>();
         }

@@ -8,8 +8,12 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IHostHexSavedRelay : IEventBroker<HostAsmHexSaved>
+    public interface ICatalogCaptureBroker : IStepBroker
     {
-        HostAsmHexSaved HexSaved => HostAsmHexSaved.Empty;        
+        StepStart<IApiCatalog> CaptureCatalogStart => StepStarted<IApiCatalog>();
+
+        StepEnd<IApiCatalog> CaptureCatalogEnd => StepEnded<IApiCatalog>();
+
+        PurgedArchiveFolder PurgedArchiveFolder => PurgedArchiveFolder.Empty;        
     }
 }

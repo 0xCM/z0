@@ -5,17 +5,29 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     
+    using static Seed;
     using static BufferSeqId;
     using static Memories;
-    using static TestDynamic;
 
     using K = Kinds.UnaryOpClass;
 
-    public interface ICheckDynamic : ITestRandom, ICheckNull
+    public readonly struct CheckFixedDynamic : ICheckFixedDynamic
+    {   
+        [MethodImpl(Inline)]
+        public static ITestDynamic Create(IPolyrand random)        
+            => new TestDynamic(random);
+
+        public IPolyrand Random {get;}
+                
+        [MethodImpl(Inline)]
+        public CheckFixedDynamic(IPolyrand random)
+            => Random = random;
+    }
+
+    public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic
     {
         void CheckFixedMatch<F>(in BufferSeq dst, K k, IdentifiedCode a, IdentifiedCode b)
             where F : unmanaged, IFixed

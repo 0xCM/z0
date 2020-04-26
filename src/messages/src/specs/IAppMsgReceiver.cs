@@ -13,6 +13,6 @@ namespace Z0
         IAppMsgSink Sink {get;}
 
         void Report(IAppEvent e, AppMsgColor color = AppMsgColor.Green)
-            => Sink.NotifyConsole(e.Format(), color);        
+            => Sink.NotifyConsole(e.Format(), color);                
     }
 }

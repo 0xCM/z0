@@ -8,10 +8,10 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface IExtractReportRelay : IEventBroker<ExtractReportCreated>, IEventBroker<ExtractReportSaved>
+    public interface IHostExtractParseBroker : IEventBroker
     {
-        ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
-
-        ExtractReportSaved ExtractReportSaved => ExtractReportSaved.Empty;        
+        HostExtractsParsed ExtractsParsed => HostExtractsParsed.Empty;            
+        
+        ParseReportCreated ParseReportCreated => ParseReportCreated.Empty;
     }
 }

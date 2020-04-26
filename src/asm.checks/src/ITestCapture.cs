@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         Option<AsmFunction> CaptureAsm<D>(DynamicDelegate<D> src)
             where D : Delegate
-                => from capture in CaptureService.Capture(Exchange.Context, src.Id, src)
+                => from capture in CaptureService.Capture(CaptureExchange.Context, src.Id, src)
                 from asm in Decoder.Decode(capture)
                 select asm;        
 

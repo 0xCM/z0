@@ -19,6 +19,7 @@ namespace Z0.Asm
             => new ExtractionWorkflow(context);
 
         readonly IAsmContext Context;
+
         ExtractionWorkflow(IAsmContext context)
         {
             Context = context;
@@ -27,17 +28,13 @@ namespace Z0.Asm
             Extractor = context.HostExtractor();
             MemberLocator = context.MemberLocator();            
             Decoder = context.AsmFunctionDecoder();
-            var format = context.AsmFormat.WithSectionDelimiter();
-            Formatter = context.AsmFormatter(format);
-            
+            Formatter = context.AsmFormatter(context.AsmFormat.WithSectionDelimiter());            
             CodeArchive = CaptureArchive.Create(ArchiveRoot);
             CodeArchive.Clear();
-            var relay = ExtractionBroker.Create();
-            Relay = relay;
-            ConnectReceivers(relay);
+            Broker = ConnectBroker(this);          
         }
 
-        readonly IEventBroker Relay;
+        readonly IExtractionBroker Broker;
 
         readonly IHostCodeExtractor Extractor;
 
@@ -53,14 +50,16 @@ namespace Z0.Asm
 
         readonly IAsmFormatter Formatter;
 
-        void ConnectReceivers(IExtractionBroker broker)
+        IExtractionBroker ConnectBroker(ExtractionWorkflow workflow)
         {
-            broker.Error.Subscribe(broker, OnError);
-            broker.MembersLocated.Subscribe(broker, OnEvent);
-            broker.MembersExtracted.Subscribe(broker, OnEvent);
-            broker.ExtractReportCreated.Subscribe(broker, OnEvent);
-            broker.ExtractReportSaved.Subscribe(broker, OnEvent);
-            broker.AnalyzingExtractReport.Subscribe(broker, OnEvent);
+            var broker = ExtractionBroker.New;
+            broker.Error.Subscribe(broker, workflow.OnEvent);
+            broker.MembersLocated.Subscribe(broker, workflow.OnEvent);
+            broker.MembersExtracted.Subscribe(broker, workflow.OnEvent);
+            broker.ExtractReportCreated.Subscribe(broker, workflow.OnEvent);
+            broker.ExtractReportSaved.Subscribe(broker, workflow.OnEvent);
+            broker.AnalyzingExtractReport.Subscribe(broker, workflow.OnEvent);
+            return broker;
         }
 
         static string Format(IAppEvent e) => e?.Format() ?? string.Empty;
@@ -68,34 +67,34 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         ref readonly E Raise<E>(in E e)
             where E : IAppEvent
-                => ref Relay.Raise(e);
+                => ref Broker.Raise(e);
 
-        void OnError(AppErrorEvent e)
+        public void OnEvent(AppErrorEvent e)
         {
             Report(AppMsg.Error(e.Payload));    
         }
 
-        void OnEvent(HostMembersLocated e)
+        public void OnEvent(HostMembersLocated e)
         {
             Report(AppMsg.Colorize(Format(e), AppMsgColor.Blue));
         }
 
-        void OnEvent(HostMembersExtracted e)
+        public void OnEvent(HostMembersExtracted e)
         {
             Report(AppMsg.Colorize(Format(e), AppMsgColor.Blue));
         }
 
-        void OnEvent(ExtractReportCreated e)
+        public void OnEvent(ExtractReportCreated e)
         {
             Report(AppMsg.Colorize(Format(e), AppMsgColor.Blue));
         }
 
-        void OnEvent(ExtractReportSaved e)
+        public void OnEvent(ExtractReportSaved e)
         {            
             Report(AppMsg.Colorize(Format(e), AppMsgColor.Cyan));
         }
 
-        void OnEvent(AnalyzingExtractReport e)
+        public void OnEvent(AnalyzingExtractReport e)
         {            
             Report(AppMsg.Colorize(Format(e), AppMsgColor.Magenta));
         }

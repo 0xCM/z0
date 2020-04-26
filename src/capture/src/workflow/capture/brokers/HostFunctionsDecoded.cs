@@ -8,12 +8,9 @@ namespace Z0.Asm
     
     using static AsmEvents;
 
-    public interface ICatalogCaptureRelay : IStepBroker
+    public interface IHostFunctionsDecodedBroker : IEventBroker<HostFunctionsDecoded>
     {
-        StepStart<IApiCatalog> CaptureCatalogStart => StepStarted<IApiCatalog>();
-
-        StepEnd<IApiCatalog> CaptureCatalogEnd => StepEnded<IApiCatalog>();
-
-        PurgedArchiveFolder PurgedArchiveFolder => PurgedArchiveFolder.Empty;        
+        HostFunctionsDecoded FunctionsDecoded => HostFunctionsDecoded.Empty;
     }
+
 }

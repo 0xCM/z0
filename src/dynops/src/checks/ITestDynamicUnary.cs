@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
-    using System.Linq;
     
     using static BufferSeqId;
     using static Memories;
-    using static TestDynamic;
 
     using K = Kinds.UnaryOpClass;
 
-    public interface ITestDynamicUnary : ITester, ITestOperatorMatch
+    public interface ITestDynamicUnary : ITester, ITestOperatorMatch, ICheckDynamic
     {
         TestCaseRecord Match(in BufferSeq buffers, K k, TypeWidth w, IdentifiedCode a, IdentifiedCode b)
         {
