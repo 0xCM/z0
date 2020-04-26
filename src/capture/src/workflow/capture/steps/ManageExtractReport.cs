@@ -26,14 +26,14 @@ namespace Z0.Asm
                 this.Context = context;
             }
             
-            public ApiExtractReport CreateReport(ApiHostUri host, ApiMemberExtract[] src)
+            public ExtractReport CreateReport(ApiHostUri host, MemberExtract[] src)
             {
-                var report = ApiExtractReport.Create(host, src); 
+                var report = ExtractReport.Create(host, src); 
                 Context.Raise(ExtractReportCreated.Define(report));                
                 return report;
             }
 
-            public void SaveReport(ApiExtractReport src, FilePath dst)
+            public void SaveReport(ExtractReport src, FilePath dst)
             {
                 var context = Context;
                 src.Save(dst)

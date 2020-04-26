@@ -13,8 +13,8 @@ namespace Z0.Asm
     public class AsmContext : IAsmContext 
     {            
         public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition,
-             FolderPath root, AsmFormatConfig format = null)
-                => new AsmContext(settings,queue, composition, root, format ?? AsmFormatConfig.New);
+             FolderPath root = null, AsmFormatConfig format = null)
+                => new AsmContext(settings,queue, composition, root ?? Env.Current.LogDir, format ?? AsmFormatConfig.DefaultStreamFormat);
 
         public event Action<IAppMsg> Next;
 

@@ -12,7 +12,7 @@ namespace Z0.Asm
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        Option<AsmInstructionList> DecodeInstructions(in ApiBits src);        
+        Option<AsmInstructionList> DecodeInstructions(in OperationBits src);        
 
         /// <summary>
         /// Decodes an instruction list

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    public static partial class Control    
+    partial class Control    
     {
         /// <summary>
         /// Aplies an action to the sequence of integers min,min+1,...,max - 1

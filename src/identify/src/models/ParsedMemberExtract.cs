@@ -11,14 +11,14 @@ namespace Z0
  
     using static Seed;    
 
-    public readonly struct ParsedExtract
+    public readonly struct ParsedMemberExtract
     {
         [MethodImpl(Inline)]
-        public static ParsedExtract Define(ApiMemberExtract src, int seq, ExtractTermCode term, Addressable parsed)
-            => new ParsedExtract(src, seq, term,parsed);
+        public static ParsedMemberExtract Define(MemberExtract src, int seq, ExtractTermCode term, Addressable parsed)
+            => new ParsedMemberExtract(src, seq, term,parsed);
 
         [MethodImpl(Inline)]
-        ParsedExtract(ApiMemberExtract src, int seq, ExtractTermCode term, Addressable parsed)
+        ParsedMemberExtract(MemberExtract src, int seq, ExtractTermCode term, Addressable parsed)
         {
             this.Source = src;
             this.SourceSequence = seq;
@@ -29,7 +29,7 @@ namespace Z0
         /// <summary>
         /// The extracted member,
         /// </summary>
-        public readonly ApiMemberExtract Source;
+        public readonly MemberExtract Source;
 
         /// <summary>
         /// The extracted member sequence
@@ -73,7 +73,7 @@ namespace Z0
         public MethodInfo SourceMember 
             => Source.Member.Method;
         
-        public ApiBits ParsedBits
-            => ApiBits.Define(Id, ParsedContent);
+        public OperationBits ParsedBits
+            => OperationBits.Define(Id, ParsedContent);
     }
 }

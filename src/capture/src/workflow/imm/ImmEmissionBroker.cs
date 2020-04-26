@@ -11,6 +11,11 @@ namespace Z0.Asm
     using static Memories;
     using static AsmEvents;
 
+    public sealed class ImmEmissionBroker : EventBroker<ImmEmissionBroker,IImmEmissionBroker>, IImmEmissionBroker
+    {        
+    
+    }    
+
     public interface IImmEmissionBroker : IEventBroker
     {
         EmittedEmbeddedImm EmittedEmbeddedImm => EmittedEmbeddedImm.Empty;
@@ -19,9 +24,4 @@ namespace Z0.Asm
 
         ImmInjectionFailed ImmInjectionFailed => ImmInjectionFailed.Empty;
     }
-
-    public sealed class ImmEmissionBroker : EventBroker<ImmEmissionBroker,IImmEmissionBroker>, IImmEmissionBroker
-    {        
-    
-    }    
 }

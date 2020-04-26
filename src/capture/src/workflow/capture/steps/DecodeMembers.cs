@@ -26,7 +26,7 @@ namespace Z0.Asm
                 this.Context = context;
             }
 
-            public AsmFunction[] DecodeParsed(ApiHostUri host, ParsedExtract[] parsed)
+            public AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMemberExtract[] parsed)
             {                
                 var functions = DecodeExtracts(parsed);
                 Context.Raise(HostFunctionsDecoded.Define(host, functions));
@@ -39,7 +39,7 @@ namespace Z0.Asm
                 writer.Write(src);
             }
 
-            AsmFunction[] DecodeExtracts(params ParsedExtract[] src)
+            AsmFunction[] DecodeExtracts(params ParsedMemberExtract[] src)
             {
                 var dst = new AsmFunction[src.Length];
                 for(var i=0; i<src.Length; i++)

@@ -12,17 +12,17 @@ namespace Z0
     /// <summary>
     /// Defines the state of the routine capture workflow at a given step
     /// </summary>
-    public readonly struct ApiExtractState : IFormattable<ApiExtractState>
+    public readonly struct ExtractState : IFormattable<ExtractState>
     {
         /// <summary>
         /// The empty state
         /// </summary>
-        public static ApiExtractState Empty => new ApiExtractState(OpIdentity.Empty, 0,0,0);
+        public static ExtractState Empty => new ExtractState(OpIdentity.Empty, 0,0,0);
 
         /// <summary>
-        /// The subject identifier
+        /// The operation identifier
         /// </summary>
-        public readonly OpIdentity OpId;
+        public readonly OpIdentity Id;
 
         /// <summary>
         /// The zero-based and monotonically-increasing state index
@@ -42,27 +42,29 @@ namespace Z0
         /// <summary>
         /// Defines a capture state
         /// </summary>
+        /// <param name="id">The exraction subject identifier</param>
         /// <param name="offset">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
         /// <param name="location">The memory location from which data was extracted</param>
         /// <param name="extracted">The extracted data</param>
         [MethodImpl(Inline)]
-        public static ApiExtractState Define(OpIdentity opid, int offset, long location, byte extracted)
-            => new ApiExtractState(opid,offset,location,extracted);
+        public static ExtractState Define(OpIdentity id, int offset, long location, byte extracted)
+            => new ExtractState(id,offset,location,extracted);
 
         /// <summary>
         /// Defines a capture state
         /// </summary>
+        /// <param name="id">The exraction subject identifier</param>
         /// <param name="offset">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
         /// <param name="location">The memory location from which data was extracted</param>
         /// <param name="extracted">The extracted data</param>
         [MethodImpl(Inline)]
-        public static ApiExtractState Define(OpIdentity opid, int offset, MemoryAddress location, byte extracted)
-            => new ApiExtractState(opid,offset,location,extracted);
+        public static ExtractState Define(OpIdentity id, int offset, MemoryAddress location, byte extracted)
+            => new ExtractState(id,offset,location,extracted);
 
         [MethodImpl(Inline)]
-        ApiExtractState(OpIdentity opid, int offset, long location, byte extracted)
+        ExtractState(OpIdentity opid, int offset, long location, byte extracted)
         {
-            this.OpId = opid;
+            this.Id = opid;
             this.Offset = offset - 1;
             this.Location = MemoryAddress.Define((ulong)location - 1ul);
             this.Extracted = extracted;
@@ -75,7 +77,7 @@ namespace Z0
         }
 
         public string Format()
-            => text.concat(OpId.ToString(), text.space(), Offset.FormatAsmHex(4), text.space(), Location.Format(), text.space(), Extracted.FormatHex());
+            => text.concat(Id.ToString(), text.space(), Offset.FormatAsmHex(4), text.space(), Location.Format(), text.space(), Extracted.FormatHex());
 
         public override string ToString() 
             => Format();

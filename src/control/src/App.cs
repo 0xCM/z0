@@ -29,11 +29,12 @@ namespace Z0
         {
         }
 
-        FolderPath CaptureRoot => AppPaths.AppCapturePath;
 
         IApiComposition Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
-        
+
+        FolderPath CaptureRoot => AppPaths.AppCapturePath;
+
         IAsmContext CreateAsmContext()
             => AsmContext.Create(Context.Settings, Context.Messaging, Api, CaptureRoot);
 

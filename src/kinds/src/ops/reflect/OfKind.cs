@@ -15,14 +15,31 @@ namespace Z0
         /// Selects methods from a stream that accept and/or return intrinsic vectors
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> OfKind(this IEnumerable<MethodInfo> src, Vec128Kind hk, bool total = false)
-            => src.Where(m => m.IsKind(hk,total));
+        public static IEnumerable<MethodInfo> OfKind(this IEnumerable<MethodInfo> src, Vec128Kind vk, bool total = false)
+            => src.Where(m => m.IsKind(vk,total));
+
 
         /// <summary>
         /// Selects methods from a stream that accept and/or return intrinsic vectors
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> OfKind(this IEnumerable<MethodInfo> src, Vec256Kind hk, bool total = false)
-            => src.Where(m => m.IsKind(hk,total));
+        public static IEnumerable<MethodInfo> OfKind(this IEnumerable<MethodInfo> src, Vec256Kind vk, bool total = false)
+            => src.Where(m => m.IsKind(vk,total));
+
+        /// <summary>
+        /// Selects methods from a stream that accept and/or return intrinsic vectors
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> OfKind<T>(this IEnumerable<MethodInfo> src, Vec128Kind<T> vk)
+            where T : unmanaged
+                => src.Where(m => m.IsKind(vk));
+
+        /// <summary>
+        /// Selects methods from a stream that accept and/or return intrinsic vectors
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> OfKind<T>(this IEnumerable<MethodInfo> src, Vec256Kind<T> vk)
+            where T : unmanaged
+                => src.Where(m => m.IsKind(vk));
     }
 }

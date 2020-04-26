@@ -13,26 +13,52 @@ namespace Z0
 
     public readonly struct MemberJit : IMemberJit
     {
-        public static IMemberJit Service => default(MemberJit);
+        public static MemberJit Service => default(MemberJit);
+
+        [MethodImpl(Inline)]
+        public IntPtr Jit(MethodInfo src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
+        }
+
+        [MethodImpl(Inline)]
+        public IntPtr Jit(Delegate src)
+        {   
+            RuntimeHelpers.PrepareDelegate(src);
+            return src.Method.MethodHandle.GetFunctionPointer();
+        }    
+
+        [MethodImpl(Inline)]
+        public DynamicPointer Jit(DynamicDelegate src)
+        {   
+            RuntimeHelpers.PrepareDelegate(src.DynamicOp);
+            return DynamicPointer.From(src);
+        }        
+
+        [MethodImpl(Inline)]
+        public DynamicPointer Jit<D>(DynamicDelegate<D> src)
+            where D : Delegate
+                => Jit(src.Untyped);
     }
     
     public interface IMemberJit : IService
     {
         [MethodImpl(Inline)]
         IntPtr Jit(MethodInfo src)
-            => DynamicOps.jit(src);
+            => MemberJit.Service.Jit(src);
 
         [MethodImpl(Inline)]
         IntPtr Jit(Delegate src)
-            => DynamicOps.jit(src);           
+            => MemberJit.Service.Jit(src);
 
         [MethodImpl(Inline)]
         DynamicPointer Jit(DynamicDelegate src)
-            => DynamicOps.jit(src);
+            => MemberJit.Service.Jit(src);
 
         [MethodImpl(Inline)]
-        DynamicPointer Jit<D>(DynamicDelegate<D> d)            
+        DynamicPointer Jit<D>(DynamicDelegate<D> src)            
             where D : Delegate
-                => DynamicOps.jit(d);        
+                => MemberJit.Service.Jit(src);
     }
 }

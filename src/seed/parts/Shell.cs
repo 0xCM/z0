@@ -40,7 +40,7 @@ namespace Z0
         protected static PartIndex KnownParts => LazyParts.Value;
 
         static Lazy<PartIndex> LazyParts {get;} 
-            = new Lazy<PartIndex>(PartIndex.Build);        
+            = Control.defer(PartIndex.Build);        
 
         protected static void Launch(params string[] args)
         {

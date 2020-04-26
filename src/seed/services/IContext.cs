@@ -11,12 +11,14 @@ namespace Z0
     /// </summary>
     public interface IContext
     {
-        static IContext Default => default(DefaultContext);
+        static IContext Default => DefaultContext.Default;
+
+        IServiceFactory Services => DefaultServiceFactory.Default;
     }
 
     readonly struct DefaultContext : IContext
     {
-
+        public static IContext Default => default(DefaultContext);
     }
 
     /// <summary>
@@ -32,7 +34,8 @@ namespace Z0
     /// </summary>
     /// <typeparam name="C">The context type</typeparam>
     public interface IContext<C> : IContext, IContextual<C>
+        where C : IContext
     {
-
+        
     }
 }

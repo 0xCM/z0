@@ -14,14 +14,14 @@ namespace Z0.Asm
     {
         public readonly struct HostCodeSaved : IAppEvent<E>
         {
-            public static E Empty => new E(ApiHostUri.Empty, new ApiBits[]{}, FilePath.Empty);
+            public static E Empty => new E(ApiHostUri.Empty, new OperationBits[]{}, FilePath.Empty);
 
             [MethodImpl(Inline)]
-            public static E Define(ApiHostUri host, ApiBits[] code, FilePath dst)
+            public static E Define(ApiHostUri host, OperationBits[] code, FilePath dst)
                 => new E(host,code,dst);
             
             [MethodImpl(Inline)]
-            HostCodeSaved(ApiHostUri host, ApiBits[] code, FilePath dst)
+            HostCodeSaved(ApiHostUri host, OperationBits[] code, FilePath dst)
             {
                 this.Host = host;
                 this.Payload = code;
@@ -30,7 +30,7 @@ namespace Z0.Asm
             
             public ApiHostUri Host {get;}
             
-            public ApiBits[] Payload {get;}
+            public OperationBits[] Payload {get;}
 
             public FilePath Target {get;}
 

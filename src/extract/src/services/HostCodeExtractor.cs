@@ -36,16 +36,16 @@ namespace Z0
         /// Extracts encoded content that defines executable code for a located member
         /// </summary>
         /// <param name="src">The source member</param>
-        public ApiMemberExtract Extract(in ApiMember src)
+        public MemberExtract Extract(in ApiMember src)
         {
             Span<byte> buffer = stackalloc byte[BufferLength];
             var reader = Context.MemoryReader();
             return Extract(src, reader, buffer);
         }
 
-        public ApiMemberExtract[] Extract(ApiMember[] members)
+        public MemberExtract[] Extract(ApiMember[] members)
         {
-            var dst = new ApiMemberExtract[members.Length];
+            var dst = new MemberExtract[members.Length];
             Span<byte> buffer = stackalloc byte[BufferLength];            
             var reader = Context.MemoryReader();
             for(var i=0; i<members.Length; i++)
@@ -57,7 +57,7 @@ namespace Z0
         /// Extracts encoded content for all operations defined by a host
         /// </summary>
         /// <param name="src">The source member</param>
-        public ApiMemberExtract[] Extract(IApiHost src)
+        public MemberExtract[] Extract(IApiHost src)
         {
             var locator = Context.MemberLocator();
             var members = locator.Located(src).ToArray();
@@ -65,12 +65,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        ApiMemberExtract Extract(in ApiMember src, IMemoryReader reader, Span<byte> buffer)
+        MemberExtract Extract(in ApiMember src, IMemoryReader reader, Span<byte> buffer)
         {
             buffer.Clear();                
             var length = reader.Read(src.Address, buffer);
             var data = Addressable.Define(src.Address, buffer.Slice(0,length).ToArray());
-            return ApiMemberExtract.Define(src, data);
+            return MemberExtract.Define(src, data);
         }
     }
 }

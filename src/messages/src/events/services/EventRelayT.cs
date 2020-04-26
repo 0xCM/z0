@@ -12,18 +12,19 @@ namespace Z0
     /// <summary>
     /// Defines a sink that forwards deposits to a receiver
     /// </summary>
-    public readonly struct EventRelay : IAppEventSink<IAppEvent>
+    public readonly struct EventRelay<E> : IAppEventSink<E>
+        where E : IAppEvent
     {
-        readonly Action<IAppEvent> Receiver;
+        readonly Action<E> Receiver;
 
         [MethodImpl(Inline)]
-        internal EventRelay(Action<IAppEvent> receiver)
+        internal EventRelay(Action<E> receiver)
         {
             this.Receiver = receiver;
         }
         
         [MethodImpl(Inline)]
-        public void Deposit(IAppEvent e)
+        public void Deposit(E e)
             => Receiver(e);
     }
 }

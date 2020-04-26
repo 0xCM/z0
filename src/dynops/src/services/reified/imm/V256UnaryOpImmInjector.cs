@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]            
-        public DynamicDelegate CreateOp(MethodInfo src, byte imm)
+        public DynamicDelegate EmbedImmediate(MethodInfo src, byte imm)
             => DynamicImmediate.EmbedV256UnaryOpImm(src,imm,Context.Identify(src));
     }
 

@@ -105,6 +105,12 @@ namespace Z0
         FilePath AsmPath(FileName filename)
             => AsmDir + filename;
 
+        FilePath AsmPath<T>()
+            => AsmPath(FileName.Define(typeof(T).Name, AsmExt));
+
+        FilePath HexPath<T>()
+            => HexPath(FileName.Define(typeof(T).Name, HexExt));
+
         FolderPath DataSubDir(RelativeLocation location) => DataRoot +  location;
 
         FilePath HexPath(PartId origin, ApiHostUri host, OpIdentity id)

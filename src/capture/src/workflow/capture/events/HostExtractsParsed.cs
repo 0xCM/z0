@@ -14,14 +14,14 @@ namespace Z0.Asm
     {
         public readonly struct HostExtractsParsed : IAppEvent<E>
         {
-            public static E Empty => new E(ApiHostUri.Empty, new ParsedExtract[]{});
+            public static E Empty => new E(ApiHostUri.Empty, new ParsedMemberExtract[]{});
 
             [MethodImpl(Inline)]
-            public static E Define(ApiHostUri host, ParsedExtract[] extracts)
+            public static E Define(ApiHostUri host, ParsedMemberExtract[] extracts)
                 => new E(host,extracts);
             
             [MethodImpl(Inline)]
-            public HostExtractsParsed(ApiHostUri host, ParsedExtract[] functions)
+            public HostExtractsParsed(ApiHostUri host, ParsedMemberExtract[] functions)
             {
                 this.Host = host;
                 this.Payload = functions;
@@ -29,7 +29,7 @@ namespace Z0.Asm
             
             public ApiHostUri Host {get;}
             
-            public ParsedExtract[] Payload {get;}
+            public ParsedMemberExtract[] Payload {get;}
 
             public string Description
                 => $"{Payload.Length} {Host} members parsed";

@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="api">The api member</param>
         /// <param name="src">The source pairs over which to evaluate the operator</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public ref readonly Triples<T> Eval<T>(in ApiMemberCode api, K.BinaryOpClass op, in Pairs<T> src, in Triples<T> dst)
+        public ref readonly Triples<T> Eval<T>(in MemberCode api, K.BinaryOpClass op, in Pairs<T> src, in Triples<T> dst)
             where T : unmanaged
         {
             var count = src.Count;
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="api">The api member</param>
         /// <param name="src">The source pairs over which to evaluate the operator</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public Triples<T> Eval<T>(in ApiMemberCode api, K.BinaryOpClass op, in Pairs<T> src)
+        public Triples<T> Eval<T>(in MemberCode api, K.BinaryOpClass op, in Pairs<T> src)
             where T : unmanaged
                 => Eval(api,op, src, Tuples.triples<T>(src.Count));
 
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="api">The api member</param>
         /// <param name="src">The source pairs over which to evaluate the operator</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public Triples<F> EvalFixed<F>(in ApiMemberCode api, K.BinaryOpClass op, in Pairs<F> src)
+        public Triples<F> EvalFixed<F>(in MemberCode api, K.BinaryOpClass op, in Pairs<F> src)
             where F : unmanaged, IFixed
         {
             var count = src.Count;

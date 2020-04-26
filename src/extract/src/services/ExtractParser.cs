@@ -39,12 +39,12 @@ namespace Z0
             PatternBuffer = buffer;
         }
 
-        public Option<ParsedExtract> Parse(in ApiMemberExtract src, int seq = 0)
+        public Option<ParsedMemberExtract> Parse(in MemberExtract src, int seq = 0)
             => Parse(src, seq, Parser());
 
-        public ParsedExtract[] Parse(ApiMemberExtract[] extracts)
+        public ParsedMemberExtract[] Parse(MemberExtract[] extracts)
         {
-            var dst = list<ParsedExtract>(extracts.Length);
+            var dst = list<ParsedMemberExtract>(extracts.Length);
             var parser = Parser();
             for(var i=0; i< extracts.Length; i++)
             {
@@ -58,18 +58,18 @@ namespace Z0
 
         ByteParser Parser() => Context.PatternParser(PatternBuffer.Clear());
 
-        Option<ParsedExtract> Parse(in ApiMemberExtract src, int seq, ByteParser parser)
+        Option<ParsedMemberExtract> Parse(in MemberExtract src, int seq, ByteParser parser)
         {
             var status = parser.Parse(src.EncodedData);                
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success(); 
             var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
             return succeeded 
-                ? ParsedExtract.Define(src, seq, matched.ToTermCode(), Addressable.Define(src.EncodedData.Address, data))
-                : none<ParsedExtract>();
+                ? ParsedMemberExtract.Define(src, seq, matched.ToTermCode(), Addressable.Define(src.EncodedData.Address, data))
+                : none<ParsedMemberExtract>();
         }
 
-        public MemberParseReport Parse(IApiHost host, ApiExtractReport extracts)
+        public MemberParseReport Parse(IApiHost host, ExtractReport extracts)
         {
             var records = list<MemberParseRecord>(extracts.RecordCount);
             var parser = Context.PatternParser(PatternBuffer.Clear());            

@@ -14,9 +14,9 @@ namespace Z0
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    public readonly struct ApiMemberCapture
+    public readonly struct MemberCapture
     {        
-        public static ApiMemberCapture Empty => default;
+        public static MemberCapture Empty => default;
 
         public readonly OpUri Uri;
 
@@ -31,15 +31,15 @@ namespace Z0
         public readonly Addressable Parsed;
                 
         [MethodImpl(Inline)]
-        public static ApiMemberCapture Define(OpIdentity id, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
-            => new ApiMemberCapture(id, method, extracted, parsed, term);
+        public static MemberCapture Define(OpIdentity id, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
+            => new MemberCapture(id, method, extracted, parsed, term);
 
         [MethodImpl(Inline)]
-        public static ApiMemberCapture Define(OpIdentity id, Delegate src, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
-            => new ApiMemberCapture(id, src, method, extracted, parsed, term);
+        public static MemberCapture Define(OpIdentity id, Delegate src, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
+            => new MemberCapture(id, src, method, extracted, parsed, term);
 
         [MethodImpl(Inline)]
-        ApiMemberCapture(OpIdentity id, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
+        MemberCapture(OpIdentity id, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
         {
             OpId = id;        
             SourceMember = method;
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        ApiMemberCapture(OpIdentity id, Delegate src, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
+        MemberCapture(OpIdentity id, Delegate src, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
         {
             Extracted = extracted; 
             Parsed = parsed;
@@ -60,8 +60,8 @@ namespace Z0
             TermCode = term;
         }
 
-        public ApiBits Code 
-            => ApiBits.Define(OpId, Parsed);
+        public OperationBits Code 
+            => OperationBits.Define(OpId, Parsed);
 
         public readonly MemoryRange AddressRange    
             => Code.Location;        

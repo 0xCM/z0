@@ -11,8 +11,16 @@ namespace Z0
 
     using Svc = Z0;
 
-    public static class ServiceFactory
+    public static class IdentityServices
     {
+        [MethodImpl(Inline)]
+        public static IMultiDiviner MultiDiviner(this IServiceFactory context)
+            => default(MultiDiviner);
+
+        [MethodImpl(Inline)]
+        public static IMemberLocator MemberLocator(this IServiceFactory factory, IMultiDiviner diviner = null)
+            => Svc.MemberLocator.Create(factory.Context, diviner ?? factory.MultiDiviner());
+
         [MethodImpl(Inline)]
         public static IMultiDiviner MultiDiviner(this IContext context)
             => default(MultiDiviner);

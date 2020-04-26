@@ -20,11 +20,11 @@ namespace Z0.Asm
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
         [MethodImpl(Inline)]
-        public static AsmInstructionBlock Define(ApiBits encoded, Instruction[] decoded, ExtractTermCode term)
+        public static AsmInstructionBlock Define(OperationBits encoded, Instruction[] decoded, ExtractTermCode term)
             => new AsmInstructionBlock(encoded, decoded, term);
 
         [MethodImpl(Inline)]
-        AsmInstructionBlock(ApiBits encoded, Instruction[] decoded, ExtractTermCode term)
+        AsmInstructionBlock(OperationBits encoded, Instruction[] decoded, ExtractTermCode term)
         {
             this.NativeCode = encoded;
             this.Decoded = decoded;
@@ -34,7 +34,7 @@ namespace Z0.Asm
         /// <summary>
         /// Encoded assembly
         /// </summary>
-        public readonly ApiBits NativeCode;
+        public readonly OperationBits NativeCode;
 
         /// <summary>
         /// The decoded instructions

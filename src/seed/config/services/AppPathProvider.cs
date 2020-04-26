@@ -32,5 +32,4 @@ namespace Z0
         public FolderPath Root {get;}
     }
 
- 
 }

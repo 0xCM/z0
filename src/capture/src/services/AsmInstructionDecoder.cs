@@ -31,7 +31,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The code source</param>
         [MethodImpl(Inline)]
-        public Option<AsmInstructionList> DecodeInstructions(in ApiBits src)
+        public Option<AsmInstructionList> DecodeInstructions(in OperationBits src)
             => DecodeInstructions(src.Encoded);
 
         /// <summary>

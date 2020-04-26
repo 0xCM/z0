@@ -13,9 +13,9 @@ namespace Z0
     /// <summary>
     /// Identifies a member defined by executable code (derived from the method implementation)
     /// </summary>    
-    public readonly struct ApiMemberCode 
+    public readonly struct MemberCode 
     {
-        public static ApiMemberCode Empty => Define(ApiMember.Empty, BinaryCode.Empty);
+        public static MemberCode Empty => Define(ApiMember.Empty, BinaryCode.Empty);
 
         public readonly ApiMember Member;
 
@@ -24,8 +24,8 @@ namespace Z0
         public OpKindId? KindId {get;}
 
         [MethodImpl(Inline)]
-        public static ApiMemberCode Define(ApiMember member, BinaryCode code)
-            => new ApiMemberCode(member, code);
+        public static MemberCode Define(ApiMember member, BinaryCode code)
+            => new MemberCode(member, code);
 
         public IdentifiedCode ApiCode
         {
@@ -42,25 +42,25 @@ namespace Z0
         public MethodInfo Method => Member.Method;
 
         [MethodImpl(Inline)]
-        public static implicit operator IdentifiedCode(ApiMemberCode src)
+        public static implicit operator IdentifiedCode(MemberCode src)
             => src.ApiCode;
 
         [MethodImpl(Inline)]
-        ApiMemberCode(ApiMember member, BinaryCode code)
+        MemberCode(ApiMember member, BinaryCode code)
         {
             this.Member = member;
             this.Encoded = code;       
             this.KindId = member.KindId;     
         }
 
-        public bool Equals(ApiMemberCode other)
+        public bool Equals(MemberCode other)
             => Encoded.Equals(other.Encoded);
 
         public override int GetHashCode()
             => Uri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is ApiMemberCode m && Equals(m);        
+            => src is MemberCode m && Equals(m);        
 
         public string Format(int uripad)
             => text.concat(Member.OpUri.Format().PadRight(uripad), Encoded.Format());

@@ -5,27 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
     
     using static Seed;
 
-    using F = ApiExtractField;
-    using R = ApiExtractRecord;
-    using Report = ApiExtractReport;
+    using F = ExtractField;
+    using R = ExtractRecord;
+    using Report = ExtractReport;
 
-    public class ApiExtractReport : Report<Report,F,R>
+    public class ExtractReport : Report<Report,F,R>
     {        
         /// <summary>
         /// Loads a saved extract report
         /// </summary>
         /// <param name="src">The report path</param>
-        public static ApiExtractReport Load(FilePath src)
+        public static ExtractReport Load(FilePath src)
         {
             var lines = src.ReadLines().Skip(1). Select(R.Parse).ToArray();
             if(lines.Length != 0)
-                return new ApiExtractReport(lines[0].Uri.HostPath, lines);
+                return new ExtractReport(lines[0].Uri.HostPath, lines);
             else
                 return Empty;
         }        
@@ -34,13 +32,13 @@ namespace Z0
 
         public override string ReportName => $"Extract report for {ApiHost.Format()}";
 
-        public static Report Create(ApiHostUri host, ApiMemberExtract[] extracts)
+        public static Report Create(ApiHostUri host, MemberExtract[] extracts)
         {
-            var records = new ApiExtractRecord[extracts.Length];
+            var records = new ExtractRecord[extracts.Length];
             for(var i=0; i< extracts.Length; i++)
             {
                 var op = extracts[i];
-                records[i] = new ApiExtractRecord(                
+                records[i] = new ExtractRecord(                
                     Sequence : i,
                     Address : op.Member.Address,
                     Length : op.EncodedData.Length,
@@ -54,9 +52,9 @@ namespace Z0
             return new Report(host, records);
         }
         
-        public ApiExtractReport(){}
+        public ExtractReport(){}
 
-        ApiExtractReport(ApiHostUri host, R[] records)
+        ExtractReport(ApiHostUri host, R[] records)
             : base(records)
         {
             this.ApiHost = host;

@@ -36,8 +36,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]            
-        public DynamicDelegate CreateOp(MethodInfo src, byte imm)
-            => DynamicImmediate.EmbedV128BinaryOpImm(src,imm, Context.Identify(src));
+        public DynamicDelegate EmbedImmediate(MethodInfo src, byte imm)
+            => DynamicImmediate.EmbedVBinaryOpImm(w128, src,imm, Context.Identify(src)).Require();
     }
 
     readonly struct V128BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector128<T>>>

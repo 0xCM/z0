@@ -106,12 +106,9 @@ namespace Z0
         DynamicDelegate<BinaryOp<Vector256<T>>> BinaryOp<T>(MethodInfo src, W256 w, byte imm)        
             where T : unmanaged;
 
-        Option<DynamicDelegate> EmbedUnaryImm(MethodInfo src, byte imm8, OpIdentity id);
+        Option<DynamicDelegate> EmbedUnaryImm(TypeWidth w, MethodInfo src, byte imm8);
 
-        Option<DynamicDelegate> EmbedUnaryImm(MethodInfo src, byte imm8);
+        Option<DynamicDelegate> EmbedBinaryImm(TypeWidth w, MethodInfo src, byte imm8);
 
-        Option<DynamicDelegate> EmbedBinaryImm(MethodInfo src, byte imm8, OpIdentity id);
-
-        Option<DynamicDelegate> EmbedBinaryImm(MethodInfo src, byte imm8);
     }   
 }

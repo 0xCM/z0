@@ -78,14 +78,14 @@ namespace Z0.Asm
             => TargetBuffer.Slice(start, length);
 
         [MethodImpl(Inline)]
-        public ref readonly ApiMemberCapture CaptureComplete(in ApiExtractState state, in ApiMemberCapture captured)
+        public ref readonly MemberCapture CaptureComplete(in ExtractState state, in MemberCapture captured)
         {
             Junction.OnCaptureComplete(this, state, captured);
             return ref captured;
         }
 
         [MethodImpl(Inline)]
-        public ref readonly ApiExtractState CaptureStep(in ApiExtractState state)
+        public ref readonly ExtractState CaptureStep(in ExtractState state)
         {
             Junction.OnCaptureStep(this, state);
             return ref state;

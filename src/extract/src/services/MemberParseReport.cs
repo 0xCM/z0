@@ -21,7 +21,7 @@ namespace Z0
         public static Report Create(ApiHostUri host, params R[] records)
             => new Report(records);
 
-        public static Report Create(ApiHostUri host, ParsedExtract[] extracts)
+        public static Report Create(ApiHostUri host, ParsedMemberExtract[] extracts)
         {
             var records = new MemberParseRecord[extracts.Length];
             for(var i=0; i< records.Length; i++)

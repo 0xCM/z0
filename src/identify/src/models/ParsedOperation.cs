@@ -9,20 +9,20 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct ParsedBuffer
+    public readonly struct ParsedOperation
     {        
         public readonly OpIdentity Id;
 
-        public readonly ApiExtractResult Outcome;
+        public readonly CaptureOutcome Outcome;
 
         public readonly byte[] Content;
 
         [MethodImpl(Inline)]
-        public static ParsedBuffer Define(OpIdentity id, ApiExtractResult outcome, byte[] content)
-            => new ParsedBuffer(id,outcome,content);
+        public static ParsedOperation Define(OpIdentity id, CaptureOutcome outcome, byte[] content)
+            => new ParsedOperation(id,outcome,content);
 
         [MethodImpl(Inline)]
-        ParsedBuffer(OpIdentity id, ApiExtractResult info, byte[] content)
+        ParsedOperation(OpIdentity id, CaptureOutcome info, byte[] content)
         {
             this.Id = id;
             this.Outcome = info;

@@ -8,10 +8,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using F = BinaryResourceField;
-    using R = BinaryResourceRecord;
+    using F = ResourceField;
+    using R = ResourceRecord;
 
-    public enum BinaryResourceField : ulong
+    public enum ResourceField : ulong
     {
         Offset = 0 | (8 << 32),
 
@@ -25,12 +25,12 @@ namespace Z0
     /// <summary>
     /// Describes an assembly code emission
     /// </summary>
-    public class BinaryResourceRecord : IRecord<F,R>
+    public class ResourceRecord : IRecord<F,R>
     {    
-        public static BinaryResourceRecord Create(ushort offset, ulong location, int length, string id)
-            => new BinaryResourceRecord(offset, location, length, id);
+        public static ResourceRecord Create(ushort offset, ulong location, int length, string id)
+            => new ResourceRecord(offset, location, length, id);
 
-        BinaryResourceRecord(ushort Offset, ulong location, int length, string id)
+        ResourceRecord(ushort Offset, ulong location, int length, string id)
         {
             this.Offset =Offset;
             this.Location = location;
@@ -61,27 +61,27 @@ namespace Z0
         }
     }
 
-    public readonly struct BinaryResourceReport : IReport<BinaryResourceRecord>
+    public readonly struct ResourceReport : IReport<ResourceRecord>
     {        
         public readonly PartId Id;
 
-        public BinaryResourceRecord[] Records {get;}
+        public ResourceRecord[] Records {get;}
         
         readonly BinaryResources Index;        
 
-        public static BinaryResourceReport Create(PartId id, BinaryResources resources)
-            => new BinaryResourceReport(id, resources);
+        public static ResourceReport Create(PartId id, BinaryResources resources)
+            => new ResourceReport(id, resources);
 
-        BinaryResourceReport(PartId id, BinaryResources index)
+        ResourceReport(PartId id, BinaryResources index)
         {
             Id = id;
             Index = index;
             Records = CreateRecords(id,index);
         }
 
-        static BinaryResourceRecord[] CreateRecords(PartId id, BinaryResources index)
+        static ResourceRecord[] CreateRecords(PartId id, BinaryResources index)
         {
-            var records = new List<BinaryResourceRecord>();
+            var records = new List<ResourceRecord>();
             var start = 0ul;
 
             foreach(var r in index.Indexed.OrderBy(x => x.Location))
@@ -90,7 +90,7 @@ namespace Z0
                     start = r.Location;
                 var offset = r.Location - start;
 
-                records.Add(BinaryResourceRecord.Create((ushort)offset, r.Location, r.Length, r.Id));
+                records.Add(ResourceRecord.Create((ushort)offset, r.Location, r.Length, r.Id));
             }
             return records.ToArray();
         }

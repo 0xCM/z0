@@ -12,16 +12,16 @@ namespace Z0
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    public readonly struct ApiMemberExtract
+    public readonly struct MemberExtract
     {        
-        public static ApiMemberExtract Empty => Define(ApiMember.Empty, Addressable.Empty);
+        public static MemberExtract Empty => Define(ApiMember.Empty, Addressable.Empty);
         
         [MethodImpl(Inline)]
-        public static ApiMemberExtract Define(ApiMember member, Addressable encoded)
-            => new ApiMemberExtract(member.Id, member.OpUri, member, encoded);
+        public static MemberExtract Define(ApiMember member, Addressable encoded)
+            => new MemberExtract(member.Id, member.OpUri, member, encoded);
          
         [MethodImpl(Inline)]
-        ApiMemberExtract(OpIdentity id, OpUri uri, ApiMember member, Addressable encoded)
+        MemberExtract(OpIdentity id, OpUri uri, ApiMember member, Addressable encoded)
         {
             this.Id = id;
             this.Uri = uri;

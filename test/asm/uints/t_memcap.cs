@@ -14,7 +14,7 @@ namespace Z0
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {    
-        bool MemcapCheck(IMemoryCapture memcap, ApiBits src)
+        bool MemcapCheck(IMemoryCapture memcap, OperationBits src)
         {
             var section = new string('-',120);
             var captured = memcap.Capture(src.BaseAddress);

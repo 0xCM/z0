@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Seed;
 
@@ -19,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         DynamicPointer Pointer(DynamicDelegate src)
             => Delegates.pointer(src);
-        
+
         [MethodImpl(Inline)]
         DynamicPointer Pointer<D>(DynamicDelegate<D> src)
             where D : Delegate

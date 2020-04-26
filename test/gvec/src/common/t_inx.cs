@@ -25,7 +25,7 @@ namespace Z0
     {
         protected t_inx()
         {
-            CheckSVF  =   Context.CheckSVF();  //CheckVectorServices.Create(Context, Context.CheckSVF());
+            CheckSVF  =   Context.CheckSVF();
         }
         
         protected readonly ICheckSVF CheckSVF;        

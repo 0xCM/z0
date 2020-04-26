@@ -18,10 +18,12 @@ namespace Z0
         /// <typeparam name="C">The value type</typeparam>
         [MethodImpl(Inline)]
         public static IContext<C> from<C>(C src)
-            =>  new Context<C>(src);
+            where C : IContext
+                =>  new Context<C>(src);
     }
 
     readonly struct Context<C> : IContext<C>
+        where C : IContext
     {
         readonly C context;
                 

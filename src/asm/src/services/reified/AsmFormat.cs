@@ -82,7 +82,7 @@ namespace Z0.Asm
         /// Formats source bits on a single line intended for emission in the function header
         /// </summary>
         /// <param name="src">The source bits</param>
-        public static string header(ApiBits src)
+        public static string header(OperationBits src)
             => comment(ByteSpanProperty.Define(src.Id.ToLegal(), src.Encoded).Format());
 
         public static string render(in AsmFunctionList src)

@@ -4,13 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
+    /// <summary>
+    /// Characterizes host-centric capture service operations
+    /// </summary>
     public interface IHostCaptureService : IAppMsgContext
     {
-        ApiMemberExtract[] Extract(ApiHostUri host, bool save);        
+        MemberExtract[] Extract(ApiHostUri host, bool save);        
 
-        ParsedExtract[] Parse(ApiHostUri host, ApiMemberExtract[] src, bool save);        
+        ParsedMemberExtract[] Parse(ApiHostUri host, MemberExtract[] src, bool save);        
 
-        AsmFunction[] Decode(ApiHostUri host, ParsedExtract[] parsed, bool save);      
+        AsmFunction[] Decode(ApiHostUri host, ParsedMemberExtract[] parsed, bool save);      
 
         ApiHostCapture CaptureHost(ApiHostUri host, bool save);        
     }

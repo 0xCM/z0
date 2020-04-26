@@ -7,14 +7,29 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.Intrinsics;
+    using System.Linq;
+    using System.IO;
+
+    using Z0.Asm;
 
     using static Seed;
+    using static Kinds;
     using static Memories;
+
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public abstract class t_dynamic<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_dynamic<U>,new()
     {
+        protected t_dynamic()
+        {
+            AsmCheck = AsmTester.Create(AsmContext.Create(AppSettings.Empty, Queue, Api));
+        }
 
+        protected readonly IAsmTester AsmCheck;
+
+        protected StreamWriter AsmCaseWriter([Caller] string caller = null)
+            => CaseFileWriter(FileExtensions.Asm,caller);
     }
 
     public class t_embed_imm8 : t_dynamic<t_embed_imm8>
@@ -22,22 +37,37 @@ namespace Z0
         protected override bool TraceDetailEnabled
             => false;
 
+        public t_embed_imm8()
+        {
+
+        }
+
         IDynamicOps Dynamic => Context.Dynamic();
 
         VMethodSearch Search
             => VMethods.Search;
 
         public void unary_shift_v128_embed_imm8()
-            => iter(VImmTestCases.V128UnaryShifts, m =>  check_unary_shift(m, w128));
+        {
+            var w = w128;
+            using var dst = AsmCaseWriter();
+            iter(VImmTestCases.V128UnaryShifts, m =>  check_unary_shift(m, w, dst));
+            check_vbsll_imm(w,dst);
+        }
 
         public void unary_shift_v256_embed_imm8()
-            => iter(VImmTestCases.V256UnaryShifts, m => check_unary_shift(m, w256));
+        {
+            var w = w256;
+            using var dst = AsmCaseWriter();
+            iter(VImmTestCases.V256UnaryShifts, m => check_unary_shift(m, w, dst));
+            check_vbsll_imm(w,dst);
+        }
 
         byte[] Immediates => new byte[]{1,2,3,4};
 
         BoxedNumber one(Type t) => BoxedNumber.Define(1).Convert(t);
 
-        void check_unary_shift(MethodInfo src, W128 w)
+        void check_unary_shift(MethodInfo src, W128 w, StreamWriter dst)
         {
             Claim.require(src.IsVectorized(w));
             Claim.require(src.AcceptsVector(0,w));
@@ -46,10 +76,10 @@ namespace Z0
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);
-            check_imm_embedding(src,w,tVector);
+            check_imm(src, w, tVector, dst);
         }
 
-        void check_imm_embedding(MethodInfo src, W128 w, Type tVector)
+        void check_imm(MethodInfo src, W128 w, Type tVector, StreamWriter dst)
         {            
             var kVector = VectorType.kind(tVector);
             var tCell = kVector.CellType();
@@ -58,12 +88,46 @@ namespace Z0
 
             foreach(var imm in Immediates)
             {
-                var method = Dynamic.EmbedUnaryImm(src,imm).Require();
+                var method = Dynamic.EmbedUnaryImm(w, src, imm).Require();
                 var vOutput = method.Invoke(vones);
+                var id = src.Identify().WithImm8(imm);
+                var capture = AsmCheck.Capture(id, method).Require();
+                AsmCheck.WriteAsm(capture,dst);
             }
         }
 
-        void check_unary_shift(MethodInfo src, W256 w)
+        void check_vbsll_imm(W128 w, StreamWriter dst)
+        {   const byte imm8 = 9;
+
+            var dynamics = MemberDynamic.Service;
+            var name = nameof(gvec.vbsll);
+            var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(v128).Single();
+            var id = Identity.identify(src);
+            var f = Dynop.EmbedVUnaryOpImm(vk128<uint>(), id, src, imm8);
+            var method = dynamics.Method(dynamics.Handle(f.Target));
+            Claim.eq(method.Name, name);
+
+            var capture = AsmCheck.Capture(id, f).Require();
+            AsmCheck.WriteAsm(capture,dst);
+        }
+
+        void check_vbsll_imm(W256 w, StreamWriter dst)
+        {   const byte imm8 = 4;
+
+            var dynamics = MemberDynamic.Service;
+            var name = nameof(dvec.vbsll);
+            var vKind = vk256<uint>();
+            var src = typeof(dvec).DeclaredMethods().WithName(name).OfKind(vKind).Single();
+            var id = Identity.identify(src);
+            var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
+            var method = dynamics.Method(dynamics.Handle(f.Target));
+            Claim.eq(method.Name, name);
+
+            var capture = AsmCheck.Capture(id, f).Require();
+            AsmCheck.WriteAsm(capture,dst);
+        }
+
+        void check_unary_shift(MethodInfo src, W256 w, StreamWriter dst)
         {
             Claim.require(src.IsVectorized(w));
             Claim.require(src.AcceptsVector(0,w));
@@ -72,21 +136,23 @@ namespace Z0
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);
-            check_imm_embedding(src,w,tVector);
+            check_imm(src,w,tVector, dst);
         }
 
-        void check_imm_embedding(MethodInfo src, W256 w, Type tVector)
+        void check_imm(MethodInfo src, W256 w, Type tVector, StreamWriter dst)
         {
             var kVector = VectorType.kind(tVector);
             var tCell = kVector.CellType();
             var vbroadcast = Search.vbroadcast(tCell,w);
-            var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});            
+            var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});
 
             foreach(var imm in Immediates)
             {
-                var method = Dynamic.EmbedUnaryImm(src,imm).Require();
+                var method = Dynamic.EmbedUnaryImm(w, src, imm).Require();
                 var vOutput = method.Invoke(vones);
-                trace(vOutput.ToString());
+                var id = src.Identify().WithImm8(imm);
+                var capture = AsmCheck.Capture(id, method).Require();
+                AsmCheck.WriteAsm(capture,dst);
             }            
         }
 

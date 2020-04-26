@@ -41,14 +41,14 @@ namespace Z0
         {
             var count = src.Length;
             var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
-            var final = ApiExtractState.Define(src.Uri.OpId, count, range.End, src.Data.LastByte);
-            var outcome = ApiExtractResult.Define(final, range, src.TermCode);
+            var final = ExtractState.Define(src.Uri.OpId, count, range.End, src.Data.LastByte);
+            var outcome = CaptureOutcome.Define(final, range, src.TermCode);
             return ParsedMember.Define(src.Uri, src.OpSig, outcome.TermCode, src.Data);
         }        
         
         public static MemberParseRecord Empty => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, Addressable.Empty);
         
-        public static R From(in ParsedExtract extract, int seq)
+        public static R From(in ParsedMemberExtract extract, int seq)
             => MemberParseRecord.Define
                 (
                     Sequence : seq,

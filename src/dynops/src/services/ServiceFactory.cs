@@ -13,11 +13,15 @@ namespace Z0
     [ServiceFactory]
     public static class ServiceFactory
     {
-        internal static DynamicOpsSvc InnerDynamic(this IContext context)
-            => DynamicOpsSvc.Create(context.DivinationContext(context.MultiDiviner()));
+        internal static DynamicOps InnerDynamic(this IServiceFactory factory)
+            => DynamicOps.Create(factory.DivinationContext(factory.MultiDiviner()));
 
         [MethodImpl(Inline)]
         public static IDynamicOps Dynamic(this IContext context)
-            => context.InnerDynamic();
+            => context.Services.InnerDynamic();
+
+        [MethodImpl(Inline)]
+        public static IDynamicOps Dynamic(this IServiceFactory factory)
+            => factory.InnerDynamic();
     }
 }

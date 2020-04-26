@@ -18,14 +18,21 @@ namespace Z0.Asm
 
     public static class AsmCoreServices
     {                       
+        public static IHostCodeExtractor HostExtractor(this IServiceFactory factory, int? bufferlen = null)
+            => HostCodeExtractor.Create(factory.Context, bufferlen ?? Pow2.T14);
+
+        [MethodImpl(Inline)]
+        public static ICaptureService Capture(this IServiceFactory factory)
+            => CaptureService.Create(DivinationContext.Create(factory.Context, factory.MultiDiviner()));
+
+        [MethodImpl(Inline)]
+        public static IMemoryExtractor MemoryExtractor(this IServiceFactory factory, byte[] buffer)
+            => Z0.MemoryExtractor.Create(factory.Context, buffer);
 
         [MethodImpl(Inline)]
         public static IHostCodeExtractor HostExtractor(this IContext context, int? bufferlen = null)
             => HostCodeExtractor.Create(context, bufferlen ?? Pow2.T14);
 
-        [MethodImpl(Inline)]
-        public static IMemoryExtractor MemoryExtractor(this IContext context, byte[] buffer)
-            => Z0.MemoryExtractor.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static IMemoryExtractParser MemoryExtractParser(this IContext context, byte[] buffer)

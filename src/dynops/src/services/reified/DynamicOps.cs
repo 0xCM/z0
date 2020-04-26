@@ -22,16 +22,16 @@ namespace Z0
     using B = Kinds.BinaryOpClass;
     using T = Kinds.TernaryOpClass;
 
-    readonly struct DynamicOpsSvc : IInnerContext, IDynamicOps
+    public readonly struct DynamicOps : IInnerContext, IDynamicOps
     {
         readonly IMultiDiviner Diviner;      
 
         [MethodImpl(Inline)]
-        public static DynamicOpsSvc Create(IDivinationContext context)
-            => new DynamicOpsSvc(context);
+        public static DynamicOps Create(IDivinationContext context)
+            => new DynamicOps(context);
     
         [MethodImpl(Inline)]
-        DynamicOpsSvc(IDivinationContext context)
+        DynamicOps(IDivinationContext context)
         {
             Diviner = context.Diviner;
         }            
@@ -59,9 +59,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.UnaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmediateInjector.Create(this, v128, K.UnaryOp);
+                return ImmInjector.Create(this, v128, K.UnaryOp);
             else if(typeof(W) == typeof(W256))
-                return ImmediateInjector.Create(this, v256, K.UnaryOp);
+                return ImmInjector.Create(this, v256, K.UnaryOp);
             else 
                 throw Unsupported.define<W>();
         }            
@@ -69,9 +69,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.BinaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmediateInjector.Create(this, v128, K.BinaryOp);
+                return ImmInjector.Create(this, v128, K.BinaryOp);
             else if(typeof(W) == typeof(W256))
-                return ImmediateInjector.Create(this, v256, K.BinaryOp);
+                return ImmInjector.Create(this, v256, K.BinaryOp);
             else 
                 throw Unsupported.define<W>();
         }
@@ -108,21 +108,25 @@ namespace Z0
         ITernaryOpFactory<T> IDynamicFactories.Factory<T>(K.TernaryOpClass<T> k)        
             => FactorySource.Factory(k);
 
-        [MethodImpl(Inline)]
-        Option<DynamicDelegate> IDynamicImmediate.EmbedUnaryImm(MethodInfo src, byte imm8, OpIdentity id)
-            => DynamicImmediate.EmbedVUnaryOpImm(src,imm8, id);
+        Option<DynamicDelegate> IDynamicImmediate.EmbedUnaryImm(TypeWidth w, MethodInfo src, byte imm8)
+        {
+            if(w == TypeWidth.W128)
+                return DynamicImmediate.EmbedVUnaryOpImm(w128, src,imm8, Identify(src));
+            else if(w == TypeWidth.W256)
+                return DynamicImmediate.EmbedVUnaryOpImm(w256, src,imm8, Identify(src));
+            else
+                return none<DynamicDelegate>();
+        }
 
-        [MethodImpl(Inline)]
-        Option<DynamicDelegate> IDynamicImmediate.EmbedUnaryImm(MethodInfo src, byte imm8)
-            => DynamicImmediate.EmbedVUnaryOpImm(src,imm8, Identify(src));
-
-        [MethodImpl(Inline)]
-        Option<DynamicDelegate> IDynamicImmediate.EmbedBinaryImm(MethodInfo src, byte imm8, OpIdentity id)
-            => DynamicImmediate.EmbedVBinaryOpImm(src,imm8, id);
-
-        [MethodImpl(Inline)]
-        Option<DynamicDelegate> IDynamicImmediate.EmbedBinaryImm(MethodInfo src, byte imm8)
-            => DynamicImmediate.EmbedVBinaryOpImm(src,imm8, Identify(src));
+        Option<DynamicDelegate> IDynamicImmediate.EmbedBinaryImm(TypeWidth w, MethodInfo src, byte imm8)
+        {
+            if(w == TypeWidth.W128)
+                return DynamicImmediate.EmbedVBinaryOpImm(w128, src,imm8, Identify(src));
+            else if(w == TypeWidth.W256)
+                return DynamicImmediate.EmbedVBinaryOpImm(w256, src,imm8, Identify(src));
+            else
+                return none<DynamicDelegate>();
+        }
 
         /// <summary>
         /// Creates a 128-bit T-parametric unary immediate injector
@@ -133,7 +137,7 @@ namespace Z0
         [MethodImpl(Inline)]            
         public IImmInjector<UnaryOp<Vector128<T>>> UnaryInjector<T>(W128 w)
             where T : unmanaged                   
-                => ImmediateInjector.FromFactory(this, I.V128UnaryOpImmInjector.Create<T>(this));
+                => ImmInjector.FromFactory(this, I.V128UnaryOpImmInjector.Create<T>(this));
 
         /// <summary>
         /// Creates a 256-bit T-parametric unary immediate injector
@@ -144,7 +148,7 @@ namespace Z0
         [MethodImpl(Inline)]            
         public IImmInjector<UnaryOp<Vector256<T>>> UnaryInjector<T>(W256 w)
             where T : unmanaged                   
-                => ImmediateInjector.FromFactory(this, I.V256UnaryOpImmInjector.Create<T>(this));
+                => ImmInjector.FromFactory(this, I.V256UnaryOpImmInjector.Create<T>(this));
 
         /// <summary>
         /// Creates a 128-bit T-parametric binary immediate injector
@@ -155,7 +159,7 @@ namespace Z0
         [MethodImpl(Inline)]            
         public IImmInjector<BinaryOp<Vector128<T>>> BinaryInjector<T>(W128 w)
             where T : unmanaged                   
-                => ImmediateInjector.FromFactory(this, I.V128BinaryOpImmInjector.Create<T>(this));
+                => ImmInjector.FromFactory(this, I.V128BinaryOpImmInjector.Create<T>(this));
 
         /// <summary>
         /// Creates a 256-bit T-parametric binary immediate injector
@@ -166,7 +170,7 @@ namespace Z0
         [MethodImpl(Inline)]            
         public IImmInjector<BinaryOp<Vector256<T>>> BinaryInjector<T>(W256 w)
             where T : unmanaged                   
-                => ImmediateInjector.FromFactory(this, I.V256BinaryOpImmInjector.Create<T>(this));
+                => ImmInjector.FromFactory(this, I.V256BinaryOpImmInjector.Create<T>(this));
 
         [MethodImpl(Inline)]
         FixedUnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(IBufferToken dst, in IdentifiedCode src)

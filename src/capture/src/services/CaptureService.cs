@@ -16,17 +16,19 @@ namespace Z0.Asm
     {        
         readonly IMultiDiviner Diviner;
 
-        [MethodImpl(Inline)]
-        static ApiMemberCapture DefineMember(OpIdentity id, MethodInfo src, ParsedMemoryExtract bits, ExtractTermCode term)
-            => ApiMemberCapture.Define(id, null, src, bits.Source, bits.Parsed, term);
+        readonly MemberJit Jitter;
 
         [MethodImpl(Inline)]
-        static ApiMemberCapture DefineMember(OpIdentity id, Delegate src, ParsedMemoryExtract bits, ExtractTermCode term)
-            => ApiMemberCapture.Define(id, src, src.Method, bits.Source, bits.Parsed, term);
+        static MemberCapture DefineMember(OpIdentity id, MethodInfo src, ParsedMemoryExtract bits, ExtractTermCode term)
+            => MemberCapture.Define(id, null, src, bits.Source, bits.Parsed, term);
 
         [MethodImpl(Inline)]
-        static ApiMemberCapture DefineMember(OpIdentity id, Delegate src, Addressable extracted, Addressable parsed, ExtractTermCode term)
-            => ApiMemberCapture.Define(id, src, src.Method, extracted, parsed, term);
+        static MemberCapture DefineMember(OpIdentity id, Delegate src, ParsedMemoryExtract bits, ExtractTermCode term)
+            => MemberCapture.Define(id, src, src.Method, bits.Source, bits.Parsed, term);
+
+        [MethodImpl(Inline)]
+        static MemberCapture DefineMember(OpIdentity id, Delegate src, Addressable extracted, Addressable parsed, ExtractTermCode term)
+            => MemberCapture.Define(id, src, src.Method, extracted, parsed, term);
 
         [MethodImpl(Inline)]
         public static CaptureService Create(IDivinationContext context)
@@ -36,120 +38,120 @@ namespace Z0.Asm
         CaptureService(IDivinationContext context)
         {
             this.Diviner = context.Diviner;
+            Jitter = MemberJit.Service;
         }
 
-        public Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
+        public Option<ParsedOperation> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
             {
-                var parsed = ParseBuffer(exchange, id, ref head(src));
+                var parsed = capture(exchange, id, ref head(src));
                 var outcome = parsed.Outcome;            
                 var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
-                return ParsedBuffer.Define(id, outcome, bytes);
+                return ParsedOperation.Define(id, outcome, bytes);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<ParsedBuffer>();
+                return none<ParsedOperation>();
             }
         }
 
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
+        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
         {
             try
             {
-                var pSrc = DynamicOps.jit(src);
-                var summary = Parse(exchange, id, pSrc);
+                var pSrc = Jitter.Jit(src);
+                var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
-                var captured = DefineMember(id, src, summary.Bits, outcome.TermCode);                
+                var captured = DefineMember(id, src, summary.Data, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiMemberCapture>();
+                return none<MemberCapture>();
             }
         }
 
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
+        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
         {
             try
             {
-                var pSrc = DynamicOps.jit(src).Handle;
-                var summary = Parse(exchange, id, pSrc);
+                var pSrc = Jitter.Jit(src).Handle;
+                var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
-                var captured = ApiMemberCapture.Define(id, src.DynamicOp, src.SourceMethod, summary.Bits.Source, summary.Bits.Parsed, outcome.TermCode);                
+                var captured = MemberCapture.Define(id, src.DynamicOp, src.SourceMethod, summary.Data.Source, summary.Data.Parsed, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
                 term.error($"Capture service failure");
                 term.error(e);
-                return none<ApiMemberCapture>();
+                return none<MemberCapture>();
             }
         }
 
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
+        public Option<OperationCapture> Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
         {
             try
             {
-                var pSrc = DynamicOps.jit(src);
-                var summary = Parse(exchange, id, pSrc);
+                return capture(exchange, id, src);
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return none<OperationCapture>();
+            }
+        }
+
+        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
+        {
+            try
+            {
+                var pSrc = Jitter.Jit(src);
+                var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.Bits, outcome.TermCode);  
+                var captured = DefineMember(id, src, summary.Data, outcome.TermCode);  
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiMemberCapture>();
+                return none<MemberCapture>();
             }
         }
 
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
+        public Option<MemberCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
         {
             if(src.IsOpenGeneric())
             {
                 var target = src.Reify(args);
                 var id = Diviner.DivineIdentity(target);
                 return Capture(exchange, id, target);
-                //return Capture(exchange, target.Identify(), target);
             }
             else
                 return Capture(exchange, src.Identify(), src);                
         }
 
-        [MethodImpl(Inline)]
-        static ApiExtractResult Complete(in ApiExtractState state, ExtractTermCode tc, long start, long end, int delta)
-            => ApiExtractResult.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
-        static MemoryParseResult SummarizeParse(in CaptureExchange exchange, in ApiExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
-        {
-            var outcome = Complete(state, tc, start, end, delta);
-            var raw = exchange.Target(0, (int)(end - start)).ToArray();
-            var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
-            var bits = ParsedMemoryExtract.Define((MemoryAddress)start, raw, trimmed);
-            return MemoryParseResult.Define(outcome, bits);
-        }
-
-        [MethodImpl(Inline)]
-        MemoryParseResult ParseBuffer(in CaptureExchange exchange, OpIdentity id, ref byte src)
+        OperationCapture capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
             => capture(exchange, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
-        MemoryParseResult Parse(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
+        OperationCapture capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
             => capture(exchange, id, src.ToPointer<byte>());
 
         [MethodImpl(Inline)]
-        MemoryParseResult capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
+        OperationCapture capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
         {
             var limit = exchange.BufferLength - 1;
             var start = (long)pSrc;
             var offset = 0;            
             int? ret_offset = null;
             var end = (long)pSrc;
-            var state = default(ApiExtractState);
+            var state = default(ExtractState);
 
             while(offset < limit)
             {
@@ -167,12 +169,26 @@ namespace Z0.Asm
         }                    
 
         [MethodImpl(Inline)]
-        static ApiExtractState Step(in CaptureExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
+        static ExtractState Step(in CaptureExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
         {
             var code = Unsafe.Read<byte>(pSrc++);
             exchange.Target(offset++) = code;
             location = (long)pSrc;
-            return ApiExtractState.Define(id, offset, location, code);
+            return ExtractState.Define(id, offset, location, code);
+        }
+
+        [MethodImpl(Inline)]
+        static CaptureOutcome Complete(in ExtractState state, ExtractTermCode tc, long start, long end, int delta)
+            => CaptureOutcome.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
+
+        [MethodImpl(Inline)]
+        static OperationCapture SummarizeParse(in CaptureExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        {
+            var outcome = Complete(state, tc, start, end, delta);
+            var raw = exchange.Target(0, (int)(end - start)).ToArray();
+            var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
+            var bits = ParsedMemoryExtract.Define((MemoryAddress)start, raw, trimmed);
+            return OperationCapture.Define(id, outcome, bits);
         }
 
         static ExtractTermCode? CalcTerm(in CaptureExchange exchange, int offset, int? ret_offset, out int delta)

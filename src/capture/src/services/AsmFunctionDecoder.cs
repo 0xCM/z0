@@ -26,18 +26,18 @@ namespace Z0.Asm
 
         static IAsmFunctionBuilder Builder => AsmFunctionBuilder.Default;
 
-        public Option<AsmFunction> Decode(ApiMemberCapture src)
+        public Option<AsmFunction> Decode(MemberCapture src)
             => DecodeCaptured(Decoder, src);
 
         public Option<AsmFunction> Decode(ParsedMember parsed)
-            =>  from i in Decoder.DecodeInstructions(ApiBits.Define(parsed.MemberUri.OpId, parsed.Content))
+            =>  from i in Decoder.DecodeInstructions(OperationBits.Define(parsed.MemberUri.OpId, parsed.Content))
                 select AsmFunction.Define(parsed, i);
 
-        public Option<AsmFunction> Decode(ParsedExtract src)
-            =>  from i in Decoder.DecodeInstructions(ApiBits.Define(src.Id, src.ParsedContent))
+        public Option<AsmFunction> Decode(ParsedMemberExtract src)
+            =>  from i in Decoder.DecodeInstructions(OperationBits.Define(src.Id, src.ParsedContent))
                 select AsmFunction.Define(src,i);
 
-        static Option<AsmFunction> DecodeCaptured(IAsmInstructionDecoder decoder, ApiMemberCapture src)
+        static Option<AsmFunction> DecodeCaptured(IAsmInstructionDecoder decoder, MemberCapture src)
             => from i in decoder.DecodeInstructions(src.Code)
                 let block = Asm.AsmInstructionBlock.Define(src.Code, i, src.TermCode)
                 select Builder.BuildFunction(src.Uri, src.OpSig.Format(), block);

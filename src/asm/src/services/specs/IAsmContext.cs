@@ -49,6 +49,11 @@ namespace Z0.Asm
         IDynamicOps Dynamic {get;}
 
         /// <summary>
+        /// Provides access to immeditate specialization services
+        /// </summary>
+        IImmSpecializer ImmServices {get;}
+
+        /// <summary>
         /// The capture archive root
         /// </summary>
         FolderPath RootCapturePath => Env.Current.LogDir;

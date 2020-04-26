@@ -33,7 +33,7 @@ namespace Z0.Asm
                     .OnSome(f => context.Raise(ExtractReportSaved.Define(src.ApiHost, src.GetType(), src.RecordCount, f)));
             }
 
-            public MemberParseReport CreateReport(ApiHostUri host, ParsedExtract[] src)
+            public MemberParseReport CreateReport(ApiHostUri host, ParsedMemberExtract[] src)
             {
                 var report = MemberParseReport.Create(host, src);                    
                 Context.Raise(ParseReportCreated.Define(report));

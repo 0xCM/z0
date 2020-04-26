@@ -97,24 +97,17 @@ namespace Z0
             }
         }
 
-        public static Option<DynamicDelegate> EmbedVBinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
-        {
-            try
-            {
-                var width = VectorType.width(src.ReturnType);
-                return width switch{
-                    TypeWidth.W128 => EmbedV128BinaryOpImm(src, imm8, id),
-                    TypeWidth.W256 => EmbedV256BinaryOpImm(src, imm8, id),
-                    _ => none<DynamicDelegate>()
-                };
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return none<DynamicDelegate>();
-            }
-        }
+        public static Option<DynamicDelegate> EmbedVUnaryOpImm(W128 w, MethodInfo src, byte imm8, OpIdentity id)
+            => Option.Try(() => EmbedV128UnaryOpImm(src, imm8, id));
 
+        public static Option<DynamicDelegate> EmbedVUnaryOpImm(W256 w, MethodInfo src, byte imm8, OpIdentity id)
+            => Option.Try(() => EmbedV256UnaryOpImm(src, imm8, id));
+
+        public static Option<DynamicDelegate> EmbedVBinaryOpImm(W128 w, MethodInfo src, byte imm8, OpIdentity id)
+            => Option.Try(() => EmbedV128BinaryOpImm(src, imm8, id));
+
+        public static Option<DynamicDelegate> EmbedVBinaryOpImm(W256 w, MethodInfo src, byte imm8, OpIdentity id)
+            => Option.Try(() => EmbedV256BinaryOpImm(src, imm8, id));
 
         public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedVUnaryOpImm<T>(Vec128Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
@@ -147,17 +140,6 @@ namespace Z0
             var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
             target.GetILGenerator().EmitImmBinaryCall(wrapped,imm8);
             return Delegates.dynop<BinaryOp<Vector128<T>>>(idTarget, wrapped, target);
-        }
-
-        public static DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmVBinaryOpImm<T>(Vec256Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
-            where T : unmanaged
-        {
-            var wrapped = src.Reify(typeof(T));
-            var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector256<T>);  
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
-            target.GetILGenerator().EmitImmBinaryCall(wrapped,imm8);
-            return Delegates.dynop<BinaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }
 
         public static DynamicDelegate<UnaryBlockedOp128<T>> EmbedBlockedUnaryOpImm<T>(W128 w, OpIdentity id, MethodInfo src, byte imm8)

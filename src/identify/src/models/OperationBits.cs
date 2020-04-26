@@ -13,20 +13,20 @@ namespace Z0
     /// <summary>
     /// Encapsulates a block of encoded assembly
     /// </summary>
-    public readonly struct ApiBits : IFormattable<ApiBits>, IByteSpanProvider<ApiBits>
+    public readonly struct OperationBits : IFormattable<OperationBits>, IByteSpanProvider<OperationBits>
     {
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
         /// </summary>
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
-        public static ApiBits Parse(OpIdentity id, string data)
+        public static OperationBits Parse(OpIdentity id, string data)
             => Define(id, Addressable.Define(HexParsers.Bytes.ParseBytes(data).ToArray()));
 
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static ApiBits Empty => Define(OpIdentity.Empty, Addressable.Empty);
+        public static OperationBits Empty => Define(OpIdentity.Empty, Addressable.Empty);
 
         /// <summary>
         /// The source member identity
@@ -52,8 +52,8 @@ namespace Z0
         /// <param name="id">The operation identifier</param>
         /// <param name="data">The encoded data</param>
         [MethodImpl(Inline)]
-        public static ApiBits Define(OpIdentity id, Addressable data)
-            => new ApiBits(id, data);
+        public static OperationBits Define(OpIdentity id, Addressable data)
+            => new OperationBits(id, data);
 
         /// <summary>
         /// Defines a code block for an identified operation
@@ -62,15 +62,15 @@ namespace Z0
         /// <param name="base">The base address</param>
         /// <param name="data">The encoded bytes</param>
         [MethodImpl(Inline)]
-        public static ApiBits Define(OpIdentity id, MemoryAddress @base, byte[] data)
+        public static OperationBits Define(OpIdentity id, MemoryAddress @base, byte[] data)
             => Define(id, Addressable.Define(@base,data));
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(in ApiBits src)
+        public static implicit operator BinaryCode(in OperationBits src)
             => BinaryCode.Define(src.Encoded.Bytes);
 
         [MethodImpl(Inline)]
-        public static implicit operator IdentifiedCode(in ApiBits src)
+        public static implicit operator IdentifiedCode(in OperationBits src)
             => IdentifiedCode.Define(src.Id, src.Encoded);
 
         public ReadOnlySpan<byte> Bytes
@@ -101,11 +101,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(ApiBits code)
+        public static implicit operator ReadOnlySpan<byte>(OperationBits code)
             => code.Bytes;
 
         [MethodImpl(Inline)]
-        ApiBits(OpIdentity id, Addressable encoded)
+        OperationBits(OpIdentity id, Addressable encoded)
         {
             this.Id = id;
             this.Location = encoded.AddressRange;

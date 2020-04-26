@@ -10,11 +10,11 @@ namespace Z0
 
     using static Seed;
 
-    using F = ApiExtractField;
-    using R = ApiExtractRecord;
-    using Report = ApiExtractReport;
+    using F = ExtractField;
+    using R = ExtractRecord;
+    using Report = ExtractReport;
 
-    public enum ApiExtractField : ulong
+    public enum ExtractField : ulong
     {
         Sequence = 0 | 10ul << 32,
 
@@ -29,7 +29,7 @@ namespace Z0
         Data = 5 | 1ul << 32
     }
    
-    public readonly struct ApiExtractRecord : IRecord<F, R>
+    public readonly struct ExtractRecord : IRecord<F, R>
     {
         public const int FieldCount = 6;
 
@@ -51,7 +51,7 @@ namespace Z0
             var extract = Addressable.Define(data);
             return new R(seq,address,len,uri,sig,extract);
         }
-        public ApiExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, Addressable Data)
+        public ExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, Addressable Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;

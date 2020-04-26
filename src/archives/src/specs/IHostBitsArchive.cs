@@ -27,29 +27,29 @@ namespace Z0
         /// <summary>
         /// Reads all files in the archive
         /// </summary>
-        IEnumerable<ApiBits> Read();
+        IEnumerable<OperationBits> Read();
 
         /// <summary>
         /// Reads all files in the archive that satisfy a supplied predicate
         /// </summary>
-        IEnumerable<ApiBits> Read(Func<FileName,bool> predicate);
+        IEnumerable<OperationBits> Read(Func<FileName,bool> predicate);
 
         /// <summary>
         /// Reads the content of a hexline default-formatted file
         /// </summary>
         /// <param name="src">The source path</param>
-        IEnumerable<ApiBits> Read(OpIdentity src); 
+        IEnumerable<OperationBits> Read(OpIdentity src); 
 
         /// <summary>
         /// Reads the content of a hexline default-formatted file
         /// </summary>
         /// <param name="src">The source path</param>
-        IEnumerable<ApiBits> Read(FilePath src); 
+        IEnumerable<OperationBits> Read(FilePath src); 
 
         /// <summary>
         /// Reads the content of hexline default-formatted file with a specified name
         /// </summary>
         /// <param name="src">The source path</param>
-        IEnumerable<ApiBits> Read(string name); 
+        IEnumerable<OperationBits> Read(string name); 
     }    
 }

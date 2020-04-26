@@ -10,19 +10,18 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-
     public readonly ref struct EvalContext
     {
         public readonly BufferSeq Buffers;        
 
-        public readonly ApiMemberCode ApiCode;
+        public readonly MemberCode ApiCode;
 
         [MethodImpl(Inline)]
-        public static EvalContext Define(in BufferSeq buffers, in ApiMemberCode code)
+        public static EvalContext Define(in BufferSeq buffers, in MemberCode code)
             => new EvalContext(buffers,code);
 
         [MethodImpl(Inline)]
-        EvalContext(in BufferSeq buffers, in ApiMemberCode code)
+        EvalContext(in BufferSeq buffers, in MemberCode code)
         {
             this.Buffers = buffers;
             this.ApiCode = code;

@@ -12,12 +12,17 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a native capture operation
     /// </summary>
-    public readonly struct ApiExtractResult
+    public readonly struct CaptureOutcome
     {
+        /// <summary>
+        /// The identity of the capture subject
+        /// </summary>
+        public readonly OpIdentity Id;
+
         /// <summary>
         /// The final state in the capture process
         /// </summary>
-        public readonly ApiExtractState State;
+        public readonly ExtractState State;
 
         /// <summary>
         /// The origin of the captured data
@@ -29,22 +34,23 @@ namespace Z0
         /// </summary>
         public readonly ExtractTermCode TermCode;
 
-        public static ApiExtractResult Empty => Define(ApiExtractState.Empty, 0,0, ExtractTermCode.None);
+        public static CaptureOutcome Empty => Define(ExtractState.Empty, 0,0, ExtractTermCode.None);
 
         [MethodImpl(Inline)]
-        public static ApiExtractResult Define(in ApiExtractState state, ulong start, ulong end, ExtractTermCode cc)
-            => new ApiExtractResult(state, (start, end), cc);
+        public static CaptureOutcome Define(in ExtractState state, ulong start, ulong end, ExtractTermCode cc)
+            => new CaptureOutcome(state, (start, end), cc);
 
         [MethodImpl(Inline)]
-        public static ApiExtractResult Define(in ApiExtractState state, MemoryRange source, ExtractTermCode cc)
-            => new ApiExtractResult(state, source, cc);
+        public static CaptureOutcome Define(in ExtractState state, MemoryRange source, ExtractTermCode cc)
+            => new CaptureOutcome(state, source, cc);
 
         [MethodImpl(Inline)]
-        ApiExtractResult(in ApiExtractState state, MemoryRange range, ExtractTermCode cc)
+        CaptureOutcome(in ExtractState state, MemoryRange range, ExtractTermCode cc)
         {   
-            this.State = state;
-            this.Range = range;
-            this.TermCode = cc;
+            Id = state.Id;
+            State = state;
+            Range = range;
+            TermCode = cc;
         }         
 
         public ulong Start

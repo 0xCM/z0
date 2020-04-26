@@ -39,13 +39,14 @@ namespace Z0.Asm
         ImmSpecializer(IContext context, IAsmFunctionDecoder decoder)
         {            
             this.Decoder = decoder;
-            this.Capture = context.Capture();
+            this.Capture = context.Services.Capture();
             this.Dynamic = context.Dynamic();
         }
 
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm)
         {
-            var f = Dynamic.EmbedUnaryImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var width = VectorType.width(src.ReturnType);
+            var f = Dynamic.EmbedUnaryImm(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
@@ -57,7 +58,8 @@ namespace Z0.Asm
 
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
-            var f = Dynamic.EmbedUnaryImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var width = VectorType.width(src.ReturnType);
+            var f = Dynamic.EmbedUnaryImm(width, src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
@@ -78,7 +80,8 @@ namespace Z0.Asm
 
         public Option<AsmFunction> BinaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
-            var f = Dynamic.EmbedBinaryImm(src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var width = VectorType.width(src.ReturnType);
+            var f = Dynamic.EmbedBinaryImm(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)

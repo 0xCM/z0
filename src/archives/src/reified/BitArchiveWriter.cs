@@ -28,7 +28,7 @@ namespace Z0
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        public void WriteCode(in ApiBits src, int? idpad = null)
+        public void WriteCode(in OperationBits src, int? idpad = null)
         {
             StreamOut.WriteLine(src.Format(idpad ?? 0));
         }
@@ -38,7 +38,7 @@ namespace Z0
             StreamOut.WriteLine(src.Format(idpad ?? 0));
         }
 
-        public void Write(ApiBits[] src)
+        public void Write(OperationBits[] src)
         {
             var idpad = src.Max(x => x.Id.Identifier.Length) + 1;
             for(var i=0; i< src.Length; i++)

@@ -11,13 +11,6 @@ namespace Z0
 
     using static Seed;
 
-    public class EventBroker<F,E> : EventBroker
-        where F : EventBroker<F,E>, E, new()
-        where E : IEventBroker
-    {        
-        public static E New => new F();
-    }
-
     public class EventBroker : IEventBroker
     {
         readonly Dictionary<Type, ISink> Subscriptions;

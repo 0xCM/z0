@@ -14,7 +14,7 @@ namespace Z0.Asm
     using static Memories;
     using static AsmEvents;
 
-    public class ImmEmissionWorkflow : IAsmWorkflow<IImmEmissionBroker>, IImmEmissionWorkflow
+    public class ImmEmissionWorkflow : IImmEmissionWorkflow
     {                        
         public static IImmEmissionWorkflow Create(IAsmContext context, IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
             => new ImmEmissionWorkflow(context, sink, formatter, decoder, api, dst);
@@ -40,7 +40,7 @@ namespace Z0.Asm
 
         bool Append = true;
 
-        IAsmWorkflow<IImmEmissionBroker> Flow => this;
+        IWorkflow<IImmEmissionBroker> Flow => this;
         
         readonly IApiSet ApiSet;
 

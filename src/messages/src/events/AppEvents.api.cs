@@ -62,7 +62,6 @@ namespace Z0
         public static Outcome subscribe<E>(E model, IEventBroker broker, Action<E> receiver)
             where E : IAppEvent
                 => broker.Subscribe(receiver);        
-
         
         [MethodImpl(Inline)]
         public static Outcome subscribe(IAppEvent model, IEventBroker broker, Action<IAppEvent> receiver)

@@ -14,7 +14,18 @@ namespace Z0
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public abstract class TestContext<U> : ITestContext<U>
+    public abstract class TestContext
+    {
+        protected IApiComposition Api => _Api.Value;
+
+        static IApiComposition ComposeApi()
+            => ApiComposition.Assemble(PartIndex.Build());
+        
+        static Lazy<IApiComposition> _Api {get;}
+            = Control.defer(ComposeApi);
+    }
+    
+    public abstract class TestContext<U> : TestContext, ITestContext<U>
         where U : TestContext<U>
     {
         public ITestContext Context {get;}
@@ -43,6 +54,7 @@ namespace Z0
             this.Queue.Next += Relay;
         }
 
+            
         protected string caller([Caller] string caller = null)
             => caller;
 

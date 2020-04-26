@@ -6,16 +6,23 @@ namespace Z0.Asm
 {        
     using System;
 
+    /// <summary>
+    /// Characterizes function-centric asm decoding operations
+    /// </summary>
     public interface IAsmFunctionDecoder : IService
     {        
         /// <summary>
         /// Decodes a function from the parsed encoding package
         /// </summary>
-        /// <param name="parsed">The parsed data</param>
-        Option<AsmFunction> Decode(ParsedMember parsed);
+        /// <param name="src">The source data</param>
+        Option<AsmFunction> Decode(ParsedMember src);
 
-        Option<AsmFunction> Decode(ApiMemberCapture src);       
+        /// <summary>
+        /// Decodes a function from member capture data
+        /// </summary>
+        /// <param name="src">The source data</param>
+        Option<AsmFunction> Decode(MemberCapture src);       
 
-        Option<AsmFunction> Decode(ParsedExtract src);
+        Option<AsmFunction> Decode(ParsedMemberExtract src);
     }
 }

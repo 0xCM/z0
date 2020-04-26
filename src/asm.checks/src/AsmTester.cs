@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
     
     using static Seed;
@@ -14,9 +15,24 @@ namespace Z0.Asm
     {        
         IAsmFunctionDecoder Decoder => Context.Decoder; 
 
+        IAsmFormatter Formatter => Context.Formatter;
+
         IPolyrand IPolyrandProvider.Random  => Context.Random;
 
         ICaptureService ICaptureServiceProxy.CaptureService => Context.CaptureService;        
+
+        ICaptureArchive CaptureArchive => Context.RootCaptureArchive;        
+
+        FilePath AsmFilePath<T>() => CaptureArchive.AsmPath<T>();
+
+        FilePath HexFilePath<T>() => CaptureArchive.HexPath<T>();
+
+        void WriteAsm(MemberCapture capture, StreamWriter dst)
+        {
+            var asm = Decoder.Decode(capture).Require();
+            var formatted = Formatter.FormatFunction(asm);
+            dst.WriteLine(formatted);            
+        }
     }
     
     public readonly struct AsmTester : IAsmTester

@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Collections.Generic;
         
     using static Seed;
     using static Kinds;
@@ -34,8 +31,8 @@ namespace Z0
             var name = nameof(gvec.vbsll);
             var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(v128).Single();
             var op = Dynop.EmbedVUnaryOpImm(vk128<uint>(), Identity.identify(src), src,imm8);
-            var handle = MemberDynamic.Service.handle(op.Target);
-            var dst = MemberDynamic.Service.method(handle);
+            var handle = MemberDynamic.Service.Handle(op.Target);
+            var dst = MemberDynamic.Service.Method(handle);
             Claim.eq(dst.Name, name);
         }
          

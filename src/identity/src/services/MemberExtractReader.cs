@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    using Record = ApiExtractRecord;
+    using Record = ExtractRecord;
 
     public readonly struct MemberExtractReader : IMemberExtractReader
     {
@@ -45,9 +45,9 @@ namespace Z0
             }
         }        
 
-        public ApiMemberExtract[] ReadExtracts(FilePath src)
+        public MemberExtract[] ReadExtracts(FilePath src)
         {
-            var report = ApiExtractReport.Load(src);
+            var report = ExtractReport.Load(src);
             
             if(report.IsNonEmpty)     
             {                               
@@ -64,17 +64,17 @@ namespace Z0
         ApiIndex MemberIndex(IApiHost host)
             =>  ApiIndex.Create(Locator.Hosted(host));
 
-        ApiMemberExtract[] MemberExtracts(IApiHost host, ApiExtractRecord[] records)
+        MemberExtract[] MemberExtracts(IApiHost host, ExtractRecord[] records)
         {
-            var data = new ApiMemberExtract[records.Length];
+            var data = new MemberExtract[records.Length];
             var index = MemberIndex(host);
-            Span<ApiMemberExtract> extracts = data;
+            Span<MemberExtract> extracts = data;
             for(var i = 0; i<records.Length; i++)
             {
                 ref readonly var record = ref skip(extracts,i);
                 ref readonly var encoded = ref record.EncodedData;
                 var member = index.Lookup(record.Id);
-                seek(extracts,i) = member ? ApiMemberExtract.Define(member.Value, encoded) : ApiMemberExtract.Empty;
+                seek(extracts,i) = member ? MemberExtract.Define(member.Value, encoded) : MemberExtract.Empty;
             }
             return data;
         }

@@ -6,8 +6,13 @@ namespace Z0
 {
     using System;
 
-    public interface IDynamicOps : IDynamicImmediate, IDynamicFactories, IFixedDynamic, IDynamicNumeric
+    public interface IDynamicOps : 
+        IDynamicImmediate, 
+        IDynamicFactories, 
+        IFixedDynamic, 
+        IDynamicNumeric
     {
         
     }
+
 }

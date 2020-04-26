@@ -15,14 +15,14 @@ namespace Z0.Asm
     {
         public readonly struct AnalyzingExtracts : IAppEvent<E>
         {        
-            public static E Empty => Define(new ApiMemberExtract[]{});
+            public static E Empty => Define(new MemberExtract[]{});
             
             [MethodImpl(Inline)]
-            public static E Define(ApiMemberExtract[] extracts)
+            public static E Define(MemberExtract[] extracts)
                 => new E(extracts);
 
             [MethodImpl(Inline)]
-            AnalyzingExtracts(ApiMemberExtract[] extracts)
+            AnalyzingExtracts(MemberExtract[] extracts)
             {
                 Extracts = extracts;
             }
@@ -30,7 +30,7 @@ namespace Z0.Asm
             public string Description 
                 => $"Analyzing extract report {Extracts.Length} member extracts";
 
-            public ApiMemberExtract[] Extracts {get;}
+            public MemberExtract[] Extracts {get;}
 
             public AnalyzingExtracts Zero => Empty;        
         }

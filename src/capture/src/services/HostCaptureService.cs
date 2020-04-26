@@ -41,10 +41,10 @@ namespace Z0.Asm
             Parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
 
-        public ApiMemberExtract[] Extract(ApiHostUri host, bool save)
+        public MemberExtract[] Extract(ApiHostUri host, bool save)
             => Extract(FindHost(host),save);
 
-        public ParsedExtract[] Parse(ApiHostUri host, ApiMemberExtract[] src, bool save)
+        public ParsedMemberExtract[] Parse(ApiHostUri host, MemberExtract[] src, bool save)
         {
             var parsed = Parser.Parse(src);
             if(parsed.Length != 0 && save)
@@ -53,7 +53,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmFunction[] Decode(ApiHostUri host, ParsedExtract[] parsed, bool save)
+        public AsmFunction[] Decode(ApiHostUri host, ParsedMemberExtract[] parsed, bool save)
             => Decode(FindHost(host), parsed, save);
 
         public ApiHostCapture CaptureHost(ApiHostUri host, bool save )
@@ -64,7 +64,7 @@ namespace Z0.Asm
             return ApiHostCapture.Define(host, extracts,parsed,decoded);
         }
 
-        void Save(ApiHostUri host, ParsedExtract[] src)
+        void Save(ApiHostUri host, ParsedMemberExtract[] src)
         {
             var hostArchive = CodeArchive.HostArchive(host);
             var report = MemberParseReport.Create(host,src);
@@ -75,10 +75,10 @@ namespace Z0.Asm
             writer.Write(data);
         }
 
-        void Save(ApiHostUri host, ApiMemberExtract[] extracts)
+        void Save(ApiHostUri host, MemberExtract[] extracts)
         {
             var hostArchive = CodeArchive.HostArchive(host);
-            var report = ApiExtractReport.Create(host, extracts);            
+            var report = ExtractReport.Create(host, extracts);            
             Extracted(host, extracts, report.Save(hostArchive.ExtractPath));
         }
 
@@ -90,7 +90,7 @@ namespace Z0.Asm
                 writer.Write(decoded[i]);
         }
 
-        AsmFunction[] Decode(Option<IApiHost> mayhaps, ParsedExtract[] parsed, bool save)
+        AsmFunction[] Decode(Option<IApiHost> mayhaps, ParsedMemberExtract[] parsed, bool save)
         {
             if(mayhaps)
             {
@@ -108,7 +108,7 @@ namespace Z0.Asm
                 return Arrays.empty<AsmFunction>();
         }
 
-        ApiMemberExtract[] Extract(Option<IApiHost> mayhaps, bool save)
+        MemberExtract[] Extract(Option<IApiHost> mayhaps, bool save)
         {            
             if(mayhaps)
             {
@@ -119,10 +119,10 @@ namespace Z0.Asm
                 return extract;
             }
             else
-                return Arrays.empty<ApiMemberExtract>();
+                return Arrays.empty<MemberExtract>();
         }
 
-        ApiMemberExtract[] Extracted(ApiHostUri host, ApiMemberExtract[] extracts, Option<FilePath> dst)
+        MemberExtract[] Extracted(ApiHostUri host, MemberExtract[] extracts, Option<FilePath> dst)
         {
             if(dst)
                 this.ExtractionSuccess(host,dst.Value);

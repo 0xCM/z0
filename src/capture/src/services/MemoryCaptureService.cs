@@ -31,7 +31,7 @@ namespace Z0.Asm
             this.Context = context;
             this.ExtractBuffer = new byte[bufferlen];
             this.ParseBuffer = new byte[bufferlen];
-            this.Extractor = context.MemoryExtractor(ExtractBuffer);
+            this.Extractor = context.Services.MemoryExtractor(ExtractBuffer);
             this.Decoder = decoder;
         }
 

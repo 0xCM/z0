@@ -25,33 +25,37 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
+        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
             => Service.Capture(exchange, id, src);
 
         [MethodImpl(Inline)]
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
+        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
             => Service.Capture(exchange, id,src);
 
         [MethodImpl(Inline)]
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
+        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
             => Service.Capture(exchange, id, src);                                    
 
         [MethodImpl(Inline)]
-        public Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
+        public Option<ParsedOperation> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
             => Service.ParseBuffer(exchange, id, src);
 
         [MethodImpl(Inline)]
-        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
+        public Option<MemberCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
             => Service.Capture(exchange, src, args);
 
         [MethodImpl(Inline)]
-        void ICaptureJunction.OnCaptureStep(in CaptureExchange exchange, in ApiExtractState state)
+        public Option<OperationCapture> Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
+            => Service.Capture(exchange, id, src);
+
+        [MethodImpl(Inline)]
+        void ICaptureJunction.OnCaptureStep(in CaptureExchange exchange, in ExtractState state)
         {
 
         }
 
         [MethodImpl(Inline)]
-        void ICaptureJunction.OnCaptureComplete(in CaptureExchange exchange, in ApiExtractState state, in ApiMemberCapture captured)
+        void ICaptureJunction.OnCaptureComplete(in CaptureExchange exchange, in ExtractState state, in MemberCapture captured)
         {}
     }
 }

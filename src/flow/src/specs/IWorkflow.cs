@@ -6,16 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Seed;
 
-
-    /// <summary>
-    /// Defines service contract to support reading text-formatted encoded x86 asm data
-    /// </summary>
-    public interface IMemberExtractReader : IService
+    public interface IWorkflow : IAppMsgReceiver, IBrokerClient
     {
-        MemberExtract[] ReadExtracts(FilePath src);       
+        
     }
 
+    public interface IWorkflow<E> : IWorkflow, IBrokerClient<E>
+        where E : IEventBroker
+    {
+
+    }
+
+    public interface IWorkflow<F,E> : IWorkflow<E>
+        where F : IWorkflow<F,E>
+        where E : IEventBroker
+    {
+
+    }
 }

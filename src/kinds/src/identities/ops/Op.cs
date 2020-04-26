@@ -11,10 +11,23 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Seed;
-    using static UriDelimiters;
 
     partial class Identify
     {
+        public static string vName(OpKindId kind)
+            => $"v{kind.Format()}";
+
+        public static string name(OpKindId kind)
+            => kind.Format();
+
+        public static IdentifiedMethod vIdentify<T>(MethodInfo src, OpKindId kind, W128 w)
+            where T : unmanaged
+                =>  (Identify.Op(vName(kind), TypeWidth.W128, typeof(T).NumericKind(), true), src);
+
+        public static IdentifiedMethod vIdentify<T>(MethodInfo src, OpKindId kind, W256 w)
+            where T : unmanaged
+                =>  (Identify.Op(vName(kind), TypeWidth.W256, typeof(T).NumericKind(), true), src);
+
         public static OpIdentity Op(string src)
         {
             var id = src ?? 0.ToString();

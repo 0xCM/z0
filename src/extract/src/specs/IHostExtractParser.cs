@@ -8,9 +8,9 @@ namespace Z0
 
     public interface IHostExtractParser : IService
     {
-        ParsedExtract[] ParseExtracts(ApiHostUri host, ApiMemberExtract[] extracts);
+        ParsedMemberExtract[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts);
 
-        void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst);
+        void SaveHex(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst);
 
     }
 }

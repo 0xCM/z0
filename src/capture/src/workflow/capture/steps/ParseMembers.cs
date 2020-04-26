@@ -29,14 +29,14 @@ namespace Z0.Asm
                 this.Parser = context.ExtractParser();
             }
 
-            public ParsedExtract[] ParseExtracts(ApiHostUri host, ApiMemberExtract[] extracts)
+            public ParsedMemberExtract[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
             {
                 var parsed = Parser.Parse(extracts);                
                 Context.Raise(HostExtractsParsed.Define(host, parsed));
                 return parsed;
             }
 
-            public void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
+            public void SaveHex(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
                 => Context.Raise(HostAsmHexSaved.Define(host, UriBitsWriter.Save(host, src, dst), dst));
         }
     }

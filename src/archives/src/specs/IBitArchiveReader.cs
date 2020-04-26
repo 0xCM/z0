@@ -15,6 +15,6 @@ namespace Z0
         /// Reads the content of a source file
         /// </summary>
         /// <param name="src">The source file path</param>
-        IEnumerable<ApiBits> Read(FilePath src);
+        IEnumerable<OperationBits> Read(FilePath src);
     }
 }

@@ -33,8 +33,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]            
-        public DynamicDelegate CreateOp(MethodInfo src, byte imm)
-            => DynamicImmediate.EmbedV256BinaryOpImm(src,imm, Context.Identify(src));
+        public DynamicDelegate EmbedImmediate(MethodInfo src, byte imm)        
+            => DynamicImmediate.EmbedVBinaryOpImm(w256, src,imm, Context.Identify(src)).Require();
     }
 
     readonly struct V256BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector256<T>>>
@@ -50,6 +50,13 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmediate(MethodInfo src, byte imm)
-            => DynamicImmediate.EmbedImmVBinaryOpImm(vk256<T>(), Context.Identify(src), src, imm);
+        {
+            var constructed = src.Reify(typeof(T));
+            var id = Context.Identify(src).WithImm8(imm);
+            var tOperand = typeof(Vector256<T>);  
+            var dst = DynamicImmediate.DynamicSignature(constructed.Name, constructed.DeclaringType, tOperand, tOperand, tOperand);            
+            dst.GetILGenerator().EmitImmBinaryCall(constructed,imm);
+            return Delegates.dynop<BinaryOp<Vector256<T>>>(id, constructed, dst);
+        }            
     }
 }
