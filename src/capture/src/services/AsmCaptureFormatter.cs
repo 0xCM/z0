@@ -23,12 +23,12 @@ namespace Z0.Asm
 
     readonly struct AsmCaptureFormatter : IAsmCaptureFormatter
     {
-        readonly AsmFormatConfig Config;
+        readonly AsmFormatSpec Config;
 
         readonly Iced.MasmFormatter MasmFormatter;
 
         [MethodImpl(Inline)]
-        public static IAsmCaptureFormatter Create(AsmFormatConfig config)
+        public static IAsmCaptureFormatter Create(in AsmFormatSpec config)
             => new AsmCaptureFormatter(config);
 
         static Iced.MasmFormatterOptions DefaultOptions => new Iced.MasmFormatterOptions
@@ -45,9 +45,9 @@ namespace Z0.Asm
             };
 
         [MethodImpl(Inline)]
-        AsmCaptureFormatter(AsmFormatConfig config)
+        AsmCaptureFormatter(in AsmFormatSpec config)
         {
-            Config = config ?? AsmFormatConfig.New;
+            Config = config;
             MasmFormatter = new Iced.MasmFormatter(DefaultOptions);                           
         }
 

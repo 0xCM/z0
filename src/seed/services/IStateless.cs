@@ -17,13 +17,19 @@ namespace Z0
 
     }
     
-    public interface IStateless<I> : IStateless
-        where I : class, IStateless<I>
+    public interface IStateless<F> : IStateless
+        where F : IStateless<F>
     {
         [MethodImpl(Inline)]
-        I Create<S>()                
-            where S : unmanaged, I
+        F Create<S>()                
+            where S : unmanaged, F
                 => default(S);
+    }
+
+    public interface IStatelessFactory<F> : IServiceFactory
+        where F : unmanaged, IStatelessFactory<F>
+    {
+        
     }
 
     /// <summary>
@@ -33,7 +39,7 @@ namespace Z0
     /// <typeparam name="I">The service contract</typeparam>
     public interface IStateless<S,I> : IStateless<I>
         where S : unmanaged, I
-        where I : class, IStateless<S,I>
+        where I : IStateless<S,I>
     {
         I Create()
             => Stateless<I>.Empty.Create<S>();
@@ -44,7 +50,7 @@ namespace Z0
     }
 
     readonly struct Stateless<I> : IStateless<I>
-        where I : class, IStateless<I>
+        where I : IStateless<I>
     {
         public static IStateless<I> Empty => default(Stateless<I>);
     }

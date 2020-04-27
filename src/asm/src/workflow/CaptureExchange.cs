@@ -33,6 +33,19 @@ namespace Z0.Asm
         /// </summary>
         readonly ICaptureJunction Junction;
 
+        /// <summary>
+        /// Allocatates buffers and creates an exchange over the allocation
+        /// </summary>
+        /// <param name="context">The source context</param>
+        public static CaptureExchange Create(IAsmContext context)
+        {
+            var size = context.DefaultBufferLength;                                    
+            var control = context.CaptureControl;            
+            var cBuffer = new byte[size];
+            var sBuffer = new byte[size];
+            return Create(control, cBuffer, sBuffer);
+        }        
+
         [MethodImpl(Inline)]
         public static CaptureExchange Create(ICaptureControl control, Span<byte> capture, Span<byte> state)
             => new CaptureExchange(control,capture,state);

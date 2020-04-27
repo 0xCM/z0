@@ -11,63 +11,65 @@ namespace Z0
 
     using Svc = Z0;
 
-    public static class IdentityServices
+    public readonly struct StatelessIdentity : IStatelessIdentity
     {
-        [MethodImpl(Inline)]
-        public static IMultiDiviner MultiDiviner(this IServiceFactory context)
-            => default(MultiDiviner);
+        public static IStatelessIdentity Factory => default(StatelessIdentity);
+    }
+
+    public interface IStatelessIdentity : IStatelessFactory<StatelessIdentity>
+    {
+        IMultiDiviner Diviner => default(MultiDiviner);
 
         [MethodImpl(Inline)]
-        public static IMemberLocator MemberLocator(this IServiceFactory factory, IMultiDiviner diviner = null)
-            => Svc.MemberLocator.Create(factory.Context, diviner ?? factory.MultiDiviner());
+        IMemberLocator MemberLocator(IMultiDiviner diviner = null)
+            => Svc.MemberLocator.Create(diviner ?? Diviner);
 
         [MethodImpl(Inline)]
-        public static IMultiDiviner MultiDiviner(this IContext context)
-            => default(MultiDiviner);
+        IApiCollector ApiCollector(IMultiDiviner diviner = null)
+            => Svc.ApiCollector.Create(diviner ?? Diviner);
 
         [MethodImpl(Inline)]
-        public static IMemberLocator MemberLocator(this IContext context, IMultiDiviner diviner = null)
-            => Svc.MemberLocator.Create(context, diviner ?? context.MultiDiviner());
+        IApiMemberQuery QueryHosted(IApiHost host)
+            => ApiMemberQuery.Create(MemberLocator().Hosted(host));
 
         [MethodImpl(Inline)]
-        public static IApiCollector ApiCollector(this IContext context, IMultiDiviner diviner = null)
-            => Svc.ApiCollector.Create(context, diviner ?? context.MultiDiviner());
+        IApiMemberQuery QueryLocated(IApiHost host)
+            => ApiMemberQuery.Create(MemberLocator().Located(host));
 
         [MethodImpl(Inline)]
-        public static IApiMemberQuery QueryHosted(this IContext context, IApiHost host)
-            => ApiMemberQuery.Create(context.MemberLocator().Hosted(host));
-
-        [MethodImpl(Inline)]
-        public static IApiMemberQuery QueryLocated(this IContext context, IApiHost host)
-            => ApiMemberQuery.Create(context.MemberLocator().Located(host));
+        IMemberExtractReader ExtractReader(IApiSet api)
+            => MemberExtractReader.Create(MemberLocator(), api);
 
         /// <summary>
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public static ApiMembers HostedMembers(this IContext context, IApiHost host)
-            => context.MemberLocator().Hosted(host);
+        [MethodImpl(Inline)]
+        ApiMembers HostedMembers(IApiHost host)
+            => MemberLocator().Hosted(host);
 
         /// <summary>
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public static ApiMembers LocatedMembers(this IContext context, IApiHost host)
-            => context.MemberLocator().Located(host);
+        [MethodImpl(Inline)]
+        ApiMembers LocatedMembers(IApiHost host)
+            => MemberLocator().Located(host);
 
         /// <summary>
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public static ApiMembers HostedMembers(this IContext context, IApiSet api, in ApiHostUri host)
-            => api.FindHost(host).MapRequired(host => context.HostedMembers(host));
+        [MethodImpl(Inline)]
+        ApiMembers HostedMembers(IApiSet api, ApiHostUri host)
+            => api.FindHost(host).MapRequired(host => HostedMembers(host));
 
         /// <summary>
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public static ApiMembers LocatedMembers(this IContext context, IApiSet api, in ApiHostUri host)
-            => api.FindHost(host).MapRequired(host => context.LocatedMembers(host));
-
+        [MethodImpl(Inline)]
+        ApiMembers LocatedMembers(IApiSet api, ApiHostUri host)
+            => api.FindHost(host).MapRequired(host => LocatedMembers(host));        
     }
 }

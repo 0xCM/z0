@@ -17,9 +17,8 @@ namespace Z0.Asm
         readonly IAsmFormatter Formatter;
 
         public FilePath TargetPath {get;}
-
-        [MethodImpl(Inline)]
-        public static AsmWriterFactory Factory()
+        
+        public static AsmWriterFactory Factory
             => (dst,formatter) => new AsmFunctionWriter(dst,formatter);
 
         [MethodImpl(Inline)]

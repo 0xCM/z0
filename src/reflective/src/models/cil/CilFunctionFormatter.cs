@@ -10,12 +10,12 @@ namespace Z0
 
     using static Seed;
 
-    readonly struct CilFunctionFormatter : ICilFunctionFormatter
+    public readonly struct CilFunctionFormatter : ICilFunctionFormatter
     {
         readonly CilFormatConfig config;
 
         [MethodImpl(Inline)]
-        public static ICilFunctionFormatter Create(IContext context, CilFormatConfig config = null)
+        public static ICilFunctionFormatter Create(CilFormatConfig config = null)
             => new CilFunctionFormatter(config ?? CilFormatConfig.Default);
         
         [MethodImpl(Inline)]

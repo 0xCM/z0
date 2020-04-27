@@ -14,14 +14,14 @@ namespace Z0.Asm
 
     readonly struct AsmInstructionDecoder : IAsmInstructionDecoder
     {
-        readonly AsmFormatConfig AsmFormat;
+        readonly AsmFormatSpec AsmFormat;
 
         [MethodImpl(Inline)]
-        public static AsmInstructionDecoder Create(AsmFormatConfig format)
+        public static AsmInstructionDecoder Create(in AsmFormatSpec format)
             => new AsmInstructionDecoder(format);
 
         [MethodImpl(Inline)]
-        AsmInstructionDecoder(in AsmFormatConfig format)
+        AsmInstructionDecoder(in AsmFormatSpec format)
         {
             this.AsmFormat = format;
         }

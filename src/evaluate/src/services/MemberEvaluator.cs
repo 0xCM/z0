@@ -28,7 +28,7 @@ namespace Z0
             this.buffers = buffers;
         }
 
-        IDynamicOps Dynamic => IContext.Default.Dynamic();
+        IDynexus Dynamic => Dynops.Services.Nexus;
 
         /// <summary>
         /// Evaluates a binary operator over a pair index and deposits the result into a caller-supplied triple index

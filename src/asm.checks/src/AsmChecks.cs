@@ -63,8 +63,8 @@ namespace Z0.Asm
         protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
         {
             var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
-            var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return AsmServices.AsmWriter(dst,format);
+            var format = AsmFormatSpec.WithFunctionTimestamp;
+            return AsmStateless.Factory.AsmWriter(dst,format);
         }
 
         static K.UnaryOpClass Unary => default;

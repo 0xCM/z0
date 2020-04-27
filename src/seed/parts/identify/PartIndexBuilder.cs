@@ -14,12 +14,12 @@ namespace Z0
     using static Seed;
     using static PartId;
 
-    readonly struct PartIndexBuilder : IPartIndexBuilder
+    public readonly struct PartIndexBuilder : IPartIndexBuilder
     {
         /// <summary>
         /// Creates the builkder, not the index
         /// </summary>
-        public static IPartIndexBuilder Create()
+        public static IPartIndexBuilder Service
             => default(PartIndexBuilder);
 
         /// <summary>

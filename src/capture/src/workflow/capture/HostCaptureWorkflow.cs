@@ -36,8 +36,17 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         HostCaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory)
         {
+            var factory = context.Factory;
             this.EventBroker = HostCaptureBroker.Create();
-            this.Context = new CaptureWorkflowContext(context,context.ApiSet, decoder, formatter, writerfactory, context.HostExtractor(), context.ExtractParser(), EventBroker);
+            this.Context = new CaptureWorkflowContext(
+                context, 
+                context.ApiSet, 
+                decoder, 
+                formatter, 
+                writerfactory, 
+                AsmStatelessCore.Factory.HostExtractor(),
+                StatelessExtract.Factory.ExtractParser(), 
+                EventBroker);
         }
  
         public void Run(AsmWorkflowConfig config) 

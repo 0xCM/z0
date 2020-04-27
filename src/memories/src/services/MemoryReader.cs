@@ -14,9 +14,7 @@ namespace Z0
     {
         const int MaxZeroCount = 10;
         
-        [MethodImpl(Inline)]
-        public static MemoryReader Create(IContext context)
-            => default(MemoryReader);
+        public static IMemoryReader Service => default(MemoryReader);
 
         [MethodImpl(Inline)]
         public unsafe int Read(MemoryAddress src, Span<byte> dst)

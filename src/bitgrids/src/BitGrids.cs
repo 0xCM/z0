@@ -8,10 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
 
-    [ApiHost]
+    [ApiHost("api")]
     public partial class BitGrid : IApiHost<BitGrid>
     {
                     
+    }
+
+    [ApiHost("allocating")]
+    public partial class BitGridA : IApiHost<BitGridA>
+    {
+
     }
 
     [ApiHost("patterns")]

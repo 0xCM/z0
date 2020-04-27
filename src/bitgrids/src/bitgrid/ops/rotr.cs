@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> rotr<T>(BitGrid16<T> g, byte offset)
             where T : unmanaged
-                => init16<T>(g.RowCount, g.ColCount, Bits.rotr(g, offset));
+                => init16<T>(Bits.rotr(g, offset));
 
         [MethodImpl(Inline)]
         public static BitGrid32<T> rotr<T>(BitGrid32<T> g, byte offset)

@@ -16,41 +16,41 @@ namespace Z0
 
     readonly struct V128UnaryOpImmInjector : IImmInjector
     {
-        public IInnerContext Context {get;}
+        public IMultiDiviner Diviner {get;}
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context)
-            => new V128UnaryOpImmInjector(context);
+        public static IImmInjector Create(IMultiDiviner diviner)
+            => new V128UnaryOpImmInjector(diviner);
 
         [MethodImpl(Inline)]
-        public static V128UnaryOpImmInjector<T> Create<T>(IInnerContext context)
+        public static V128UnaryOpImmInjector<T> Create<T>(IMultiDiviner diviner)
             where T : unmanaged
-                => new V128UnaryOpImmInjector<T>(context);
+                => new V128UnaryOpImmInjector<T>(diviner);
 
         [MethodImpl(Inline)]
-        V128UnaryOpImmInjector(IInnerContext context)
+        V128UnaryOpImmInjector(IMultiDiviner diviner)
         {
-            this.Context = context;
+            this.Diviner = diviner;
         }
 
         [MethodImpl(Inline)]            
         public DynamicDelegate EmbedImmediate(MethodInfo src, byte imm)
-            => DynamicImmediate.EmbedV128UnaryOpImm(src,imm,Context.Identify(src));
+            => DynamicImmediate.EmbedV128UnaryOpImm(src,imm,Diviner.Identify(src));
     }
 
     readonly struct V128UnaryOpImmInjector<T> : IImmInjector<UnaryOp<Vector128<T>>>
         where T : unmanaged
     {
-        public IInnerContext Context {get;}
+        public IMultiDiviner Diviner {get;}
 
         [MethodImpl(Inline)]
-        public V128UnaryOpImmInjector(IInnerContext context)
+        public V128UnaryOpImmInjector(IMultiDiviner diviner)
         {
-            this.Context = context;
+            this.Diviner = diviner;
         }
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<UnaryOp<Vector128<T>>> EmbedImmediate(MethodInfo src, byte imm)
-            => DynamicImmediate.EmbedVUnaryOpImm(vk128<T>(), Context.Identify(src), src, imm);
+            => DynamicImmediate.EmbedVUnaryOpImm(vk128<T>(), Diviner.Identify(src), src, imm);
     }
 }

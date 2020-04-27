@@ -34,8 +34,8 @@ namespace Z0.Asm
             Context = context;
             Area = area;
             Subject = subject;
-            Extractor = Context.HostExtractor();
-            Parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
+            Extractor = AsmStatelessCore.Factory.HostExtractor();
+            Parser = StatelessExtract.Factory.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
 
         public MemberExtract[] Extract(ApiHostUri host, bool save)

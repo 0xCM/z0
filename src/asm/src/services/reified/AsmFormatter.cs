@@ -11,14 +11,14 @@ namespace Z0.Asm
         
     readonly struct AsmFormatter : IAsmFormatter
     {        
-        public AsmFormatConfig Config {get;}
+        public AsmFormatSpec Config {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmFormatter Create(in AsmFormatConfig config)
+        public static IAsmFormatter Create(in AsmFormatSpec config)
             => new AsmFormatter(config);
 
         [MethodImpl(Inline)]
-        AsmFormatter(AsmFormatConfig config)
+        AsmFormatter(AsmFormatSpec config)
         {
             this.Config = config;
         }

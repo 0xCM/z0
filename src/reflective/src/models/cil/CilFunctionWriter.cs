@@ -10,22 +10,19 @@ namespace Z0
     
     using static Seed;
 
-    readonly struct CilFunctionWriter : ICilFunctionWriter
-    {
-        readonly IContext Context;
-        
+    public readonly struct CilFunctionWriter : ICilFunctionWriter
+    {        
         public FilePath Target {get;}
 
         readonly CilFormatConfig Config;
         
         [MethodImpl(Inline)]
-        public static CilFunctionWriter Create(IContext context, FilePath dst, CilFormatConfig config = null)
-            => new CilFunctionWriter(context,dst, config ?? CilFormatConfig.Default);
+        public static CilFunctionWriter Create(FilePath dst, CilFormatConfig config = null)
+            => new CilFunctionWriter(dst, config ?? CilFormatConfig.Default);
         
         [MethodImpl(Inline)]
-        CilFunctionWriter(IContext context, FilePath dst, CilFormatConfig config)            
+        CilFunctionWriter(FilePath dst, CilFormatConfig config)            
         {
-            this.Context = context;
             this.Target = dst;
             this.Config = config;
         }
@@ -33,7 +30,7 @@ namespace Z0
         ICilFunctionFormatter Formatter
         {
             [MethodImpl(Inline)]
-            get => CilFunctionFormatter.Create(Context);
+            get =>  CilFunctionFormatter.Create();
         }
 
         public void Write(CilFunction[] src)

@@ -4,19 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System.Reflection;
-
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
     public interface IAsmContext : IAppMsgQueue, IPolyrandProvider, IAppMsgContext
     {
+        /// <summary>
+        /// The api collection known to the context
+        /// </summary>
         IApiSet ApiSet {get;}
         
         /// <summary>
         /// The default asm formatting configuration
         /// </summary>
-        AsmFormatConfig AsmFormat {get;}
+        AsmFormatSpec AsmFormat {get;}
 
         /// <summary>
         /// The context formatter
@@ -46,12 +47,17 @@ namespace Z0.Asm
         /// <summary>
         /// Provides access to dynamic operator production facilities
         /// </summary>
-        IDynamicOps Dynamic {get;}
+        IDynexus Dynamic {get;}
 
         /// <summary>
         /// Provides access to immeditate specialization services
         /// </summary>
         IImmSpecializer ImmServices {get;}
+
+        /// <summary>
+        /// Reveals the context-predicated service factory
+        /// </summary>
+        IAsmServiceFactory Factory => AsmServiceFactory.Create(this);        
 
         /// <summary>
         /// The capture archive root

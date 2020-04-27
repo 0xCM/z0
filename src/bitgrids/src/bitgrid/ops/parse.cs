@@ -16,13 +16,13 @@ namespace Z0
         /// Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
         /// </summary>
         /// <param name="bs">The source bitstring</param>
-        /// <param name="n">The number of bitstring bits to parse</param>
+        /// <param name="w">The number of bitstring bits to parse</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<T> parse<T>(BitString bs, N16 n, int rows, int cols, T t = default)
+        public static BitGrid16<T> parse<T>(BitString bs, W16 w)
             where T : unmanaged
-                => init16<T>(rows, cols, bs.TakeUInt16());
+                => init16<T>(bs.TakeUInt16());
 
         /// <summary>
         /// Hydrates a fixed-width 32-bit dimensionless grid from a bitstring

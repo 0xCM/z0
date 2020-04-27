@@ -14,18 +14,15 @@ namespace Z0
 
       class MemberLocator : IMemberLocator
       {
-            public IContext Context {get;}
-
             public IMultiDiviner Diviner {get;}
 
             [MethodImpl(Inline)]
-            public static MemberLocator Create(IContext context, IMultiDiviner diviner)
-                  => new MemberLocator(context,diviner);
+            public static MemberLocator Create(IMultiDiviner diviner)
+                  => new MemberLocator(diviner);
 
             [MethodImpl(Inline)]
-            MemberLocator(IContext context, IMultiDiviner diviner)
+            MemberLocator(IMultiDiviner diviner)
             {
-                  Context = context;
                   Diviner = diviner;
             }
 

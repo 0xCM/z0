@@ -42,7 +42,7 @@ namespace Z0.Asm
             this.DefiningPart = host.Owner;
             this.ApiHost = host;
             this.AsmFormatter = formatter;
-            this.CilFormatter = context.CilFormatter();
+            this.CilFormatter =  AsmStateless.Factory.CilFormatter();
         }
         
         HostAsmArchiver(IContext context, PartId part, string hostname, IAsmFormatter formatter)
@@ -52,7 +52,7 @@ namespace Z0.Asm
             this.DefiningPart = part;
             this.ApiHost = ApiHostUri.Define(part, hostname);
             this.AsmFormatter = formatter;
-            this.CilFormatter = context.CilFormatter();
+            this.CilFormatter =  AsmStateless.Factory.CilFormatter();
         }
 
         public void Save(AsmFunctionGroup src, bool append)

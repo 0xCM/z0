@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> xnor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(gx.RowCount, gx.ColCount, math.xnor(gx,gy));
+                => init16<T>(math.xnor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise XNOR between generic bitgrids

@@ -12,33 +12,30 @@ namespace Z0
 
     public readonly struct MemoryExtractParser : IMemoryExtractParser
     {
-        readonly IContext Context;
-
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        public static MemoryExtractParser New(IContext context, int bufferlen)
-            => new MemoryExtractParser(context, bufferlen);
+        public static MemoryExtractParser Create(int bufferlen)
+            => new MemoryExtractParser(bufferlen);
 
         [MethodImpl(Inline)]
-        public static MemoryExtractParser Create(IContext context, byte[] buffer)
-            => new MemoryExtractParser(context, buffer);
+        public static MemoryExtractParser Create(byte[] buffer)
+            => new MemoryExtractParser(buffer);
 
         [MethodImpl(Inline)]
-        MemoryExtractParser(IContext context, byte[] buffer)
+        MemoryExtractParser(byte[] buffer)
         {
-            this.Context = context;
             this.Buffer = buffer;
         }
 
         [MethodImpl(Inline)]
-        MemoryExtractParser(IContext context, int bufferlen)
-            : this(context, new byte[bufferlen])
+        MemoryExtractParser(int bufferlen)
+            : this(new byte[bufferlen])
         {}
 
         public Option<LocatedCode> Parse(LocatedCode src)
         {
-            var parser = Context.PatternParser(Buffer.Clear());
+            var parser = StatelessExtract.Factory.PatternParser(Buffer.Clear());
             var status = parser.Parse(src);            
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();

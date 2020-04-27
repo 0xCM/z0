@@ -16,13 +16,7 @@ namespace Z0
     
     readonly struct BinaryOpFactory<T> : IBinaryOpFactory<T>
     {
-        public IInnerContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public BinaryOpFactory(IInnerContext context)
-        {
-            this.Context = context;
-        }
+        public static IBinaryOpFactory<T> Service => default(BinaryOpFactory<T>);
 
         public Func<T,T,T> Manufacture(MethodInfo method, object instance)
         {

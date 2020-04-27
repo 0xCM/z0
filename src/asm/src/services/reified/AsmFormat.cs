@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    public static class AsmFormat
+    public readonly struct AsmFormat
     {
         const char blank = Chars.Space;
 
@@ -19,7 +19,7 @@ namespace Z0.Asm
         public static string comment(string text)
             =>  $"; {text}";
 
-        public static string render(AsmInstructionCode src, AsmFormatConfig fmt)
+        public static string render(AsmInstructionCode src, in AsmFormatSpec fmt)
             => $"{src.Definition}{fmt.FieldDelimiter}{src.OpCode}";
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0.Asm
         public static string label(ulong src)
             => text.concat(src.FormatSmallHex(), HexSpecs.PostSpec, blank);
 
-        public static string render(in MemoryAddress @base, in AsmInstructionInfo src, AsmFormatConfig config)
+        public static string render(in MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatSpec config)
         {
             var description = text.build();
             var absolute = @base + (MemoryAddress)src.Offset;  
@@ -41,19 +41,19 @@ namespace Z0.Asm
         }
 
         public static string render(in MemoryAddress @base, in AsmInstructionInfo src)
-            => render(@base, src, AsmFormatConfig.New);
+            => render(@base, src, AsmFormatSpec.Default);
 
         /// <summary>
         /// Formats the instructions in a function
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="config">An optional format configuration</param>
-        public static ReadOnlySpan<string> lines(in AsmFunction src, AsmFormatConfig cfg = null)
+        public static ReadOnlySpan<string> lines(in AsmFunction src, in AsmFormatSpec? cfg = null)
         {
             var descriptions = AsmInstruction.describe(src);
             var count = descriptions.Length;
             var lines = Spans.alloc<string>(count);
-            var config = cfg ?? AsmFormatConfig.New;
+            var config = cfg ?? AsmFormatSpec.Default;
             for(var i = 0; i< count; i++)
                 lines[i]= render(src.BaseAddress, descriptions[i], config);
             return lines;
@@ -64,12 +64,12 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The instruction source</param>
         /// <param name="config">An optional format configuration</param>
-        public static ReadOnlySpan<string> lines(in AsmInstructionList src, AsmFormatConfig cfg = null)
+        public static ReadOnlySpan<string> lines(in AsmInstructionList src, in AsmFormatSpec? cfg = null)
         {
             if(src.Length == 0)
                 return default;
 
-            var config = cfg ?? AsmFormatConfig.New;
+            var config = cfg ?? AsmFormatSpec.Default;
             var descriptions =  AsmInstruction.describe(src);
             var lines = Spans.alloc<string>(src.Length);
             var @base = src[0].IP;
@@ -101,16 +101,16 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="fmt">The format configuration</param>
-        public static string render(AsmFunction src, AsmFormatConfig cfg = null)
+        public static string render(AsmFunction src, in AsmFormatSpec? cfg = null)
         {            
-            var config = cfg ?? AsmFormatConfig.New;
+            var config = cfg ?? AsmFormatSpec.Default;
             var dst = text.factory.Builder();
 
             if(config.EmitSectionDelimiter)
                 dst.AppendLine(config.SectionDelimiter);
             
             if(config.EmitFunctionHeader)        
-                foreach(var line in header(src,config))
+                foreach(var line in header(src, config))
                     dst.AppendLine(line);            
 
             dst.AppendLine(lines(src, config).Concat(Chars.Eol));            
@@ -136,9 +136,9 @@ namespace Z0.Asm
         /// Formats the function header
         /// </summary>
         /// <param name="src">The source function</param>
-        public static ReadOnlySpan<string> header(AsmFunction src, AsmFormatConfig cfg = null)
+        public static ReadOnlySpan<string> header(AsmFunction src, in AsmFormatSpec? cfg = null)
         {            
-            var config = cfg ?? AsmFormatConfig.New;
+            var config = cfg ?? AsmFormatSpec.Default;
 
             var lines = new List<string>();
             lines.Add(comment($"{src.OpSig}, {src.Uri}")); 
@@ -170,6 +170,5 @@ namespace Z0.Asm
         public static string label(string text, ulong baseaddress)
             => HexParsers.Numeric.Parse(text).ToOption().Map(address => (address - baseaddress).FormatSmallHex(true),  
                     () => $"{text}?");
-
     }
 }

@@ -13,36 +13,26 @@ namespace Z0
 
     readonly struct DynamicFactories : IDynamicFactories
     {
-        public IInnerContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public static DynamicFactories Create(IInnerContext context)
-            => new DynamicFactories(context);
-
-        [MethodImpl(Inline)]
-        DynamicFactories(IInnerContext context)
-        {
-            this.Context = context;
-        }    
+        public static IDynamicFactories Service => default(DynamicFactories);
 
         [MethodImpl(Inline)]
         public IEmitterOpFactory<T> Factory<T>(K.EmitterOpClass<T> op)        
             where T :  unmanaged
-                => new EmitterOpFactory<T>(Context);
+                => EmitterOpFactory<T>.Service;
 
         [MethodImpl(Inline)]
         public IUnaryOpFactory<T> Factory<T>(K.UnaryOpClass<T> op)        
             where T :  unmanaged
-            => new UnaryOpFactory<T>(Context);
+            => UnaryOpFactory<T>.Service;
 
         [MethodImpl(Inline)]
         public IBinaryOpFactory<T> Factory<T>(K.BinaryOpClass<T> op)        
             where T :  unmanaged
-            => new BinaryOpFactory<T>(Context);
+            => BinaryOpFactory<T>.Service;
 
         [MethodImpl(Inline)]
         public ITernaryOpFactory<T> Factory<T>(K.TernaryOpClass<T> op)        
             where T :  unmanaged
-                => new TernaryOpFactory<T>(Context);
+                => TernaryOpFactory<T>.Service;
     }
 }

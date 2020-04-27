@@ -9,17 +9,15 @@ namespace Z0
 
     using static Seed;
     using static BufferSeqId;
-    using static EvalPackages;    
 
     readonly struct BinaryOpEvalService<T> : IBinaryOpEvalService<T>
         where T : unmanaged
     {
-        IDynamicOps Dynamic => IContext.Default.Dynamic();
+        IDynexus Dynamic => Dynops.Services.Nexus;
 
         public ref readonly BinaryEval<T> Evaluate(in BinaryOpEval<T> package)
         {
             var f = package.ApiCode.Member.Method.CreateDelegate<BinaryOp<T>>();
-            //var g = package.Buffers[Left].EmitBinaryOp<T>(package.ApiCode);
             var g = Dynamic.EmitBinaryOp<T>(package.Buffers[Left], package.ApiCode);
 
             for(var i=0; i<package.SrcCount; i++)

@@ -15,23 +15,19 @@ namespace Z0
 
     readonly struct ExtractParser : IExtractParser
     {
-        readonly IContext Context;
-
         byte[] PatternBuffer {get;}
 
         [MethodImpl(Inline)]
-        public static IExtractParser Create(IContext context, byte[] buffer)
-            => new ExtractParser(context,buffer);
+        public static IExtractParser Create(byte[] buffer)
+            => new ExtractParser(buffer);
 
         [MethodImpl(Inline)]
-        public static IExtractParser Create(IContext context, int? bufferlen = null)
-            => new ExtractParser(context, new byte[bufferlen ?? Pow2.T14]);
+        public static IExtractParser Create(int? bufferlen = null)
+            => new ExtractParser(new byte[bufferlen ?? Pow2.T14]);
 
         [MethodImpl(Inline)]
-        ExtractParser(IContext context, byte[] buffer)
+        ExtractParser(byte[] buffer)
         {
-            //MsgSink = context;
-            Context = context;
             PatternBuffer = buffer;
         }
 
@@ -52,7 +48,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        ByteParser Parser() => Context.PatternParser(PatternBuffer.Clear());
+        ByteParser Parser() => StatelessExtract.Factory.PatternParser(PatternBuffer.Clear());//   Context.PatternParser(PatternBuffer.Clear());
 
         Option<ParsedMemberExtract> Parse(in MemberExtract src, int seq, ByteParser parser)
         {
@@ -68,8 +64,8 @@ namespace Z0
         public MemberParseReport Parse(IApiHost host, ExtractReport extracts)
         {
             var records = list<MemberParseRecord>(extracts.RecordCount);
-            var parser = Context.PatternParser(PatternBuffer.Clear());            
-            //MsgSink.Notify($"Parsing {extracts.Records.Length} {host} records");
+            //var parser = Context.PatternParser(PatternBuffer.Clear());            
+            var parser = StatelessExtract.Factory.PatternParser(PatternBuffer.Clear());
             
             var seq = 0;
             for(var i=0; i< extracts.RecordCount; i++)

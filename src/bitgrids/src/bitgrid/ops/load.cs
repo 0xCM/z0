@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid16<N1,N16,T> load<T>(in Block16<T> src, N1 m = default, N16 n = default)
             where T : unmanaged            
                 => src;
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid16<N16,N1,T> load<T>(in Block16<T> src, N16 m = default, N1 n = default)
             where T : unmanaged            
                 => src;
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid16<N8,N2,T> load<T>(in Block16<T> src, N2 m = default, N8 n = default)
             where T : unmanaged            
                 => src;
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid16<N8,N2,T> load<T>(in Block16<T> src, N8 m = default, N2 n = default)
             where T : unmanaged            
                 => src;
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid16<N4,N4,T> load<T>(in Block16<T> src, N4 m = default, N4 n = default)
             where T : unmanaged            
                 => src;
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid32<N1,N32,T> load<T>(in Block32<T> src, N1 m = default, N32 n = default)
             where T : unmanaged            
                 => src;
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid32<N32,N1,T> load<T>(in Block32<T> src, N32 m = default, N1 n = default)
             where T : unmanaged            
                 => src;
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid32<N2,N16,T> load<T>(in Block32<T> src, N2 m = default, N16 n = default)
             where T : unmanaged            
                 => src;
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid32<N16,N2,T> load<T>(in Block32<T> src, N16 m = default, N2 n = default)
             where T : unmanaged            
                 => src;
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid32<N4,N8,T> load<T>(in Block32<T> src, N4 m = default, N8 n = default)
             where T : unmanaged            
                 => src;
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid32<N8,N4,T> load<T>(in Block32<T> src, N8 m = default, N4 n = default)
             where T : unmanaged            
                 => src;
@@ -151,7 +151,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid64<N1,N64,T> load<T>(in Block64<T> src, N1 m = default, N64 n = default)
             where T : unmanaged            
                 => src;
@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid64<N64,N1,T> load<T>(in Block64<T> src, N64 m = default, N1 n = default)
             where T : unmanaged            
                 => src;
@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid64<N2,N32,T> load<T>(in Block64<T> src, N2 m = default, N32 n = default)
             where T : unmanaged            
                 => src;
@@ -187,7 +187,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid64<N32,N2,T> load<T>(in Block64<T> src, N32 m = default, N2 n = default)
             where T : unmanaged            
                 => src;
@@ -199,7 +199,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid64<N4,N16,T> load<T>(in Block64<T> src, N4 m = default, N16 n = default)
             where T : unmanaged            
                 => src;
@@ -211,7 +211,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid64<N16,N4,T> load<T>(in Block64<T> src, N16 m = default, N4 n = default)
             where T : unmanaged            
                 => src;
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid64<N8,N8,T> load<T>(in Block64<T> src, N8 m = default, N8 n = default)
             where T : unmanaged            
                 => src;
@@ -235,7 +235,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid128<N1,N128,T> load<T>(Vector128<T> src, N1 m = default, N128 n = default)
             where T : unmanaged            
                 => src;
@@ -247,7 +247,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid128<N128,N1,T> load<T>(Vector128<T> src,  N128 m = default, N1 n = default)
             where T : unmanaged            
                 => src;
@@ -259,7 +259,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid128<N2,N64,T> load<T>(Vector128<T> src, N2 m = default, N64 n = default)
             where T : unmanaged            
                 => src;
@@ -271,7 +271,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid128<N64,N2,T> load<T>(Vector128<T> src, N64 m = default, N2 n = default)
             where T : unmanaged            
                 => src;
@@ -283,7 +283,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid128<N4,N32,T> load<T>(Vector128<T> src, N4 m = default, N32 n = default)
             where T : unmanaged            
                 => src;
@@ -295,7 +295,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid128<N32,N4,T> load<T>(Vector128<T> src, N32 m = default, N4 n = default)
             where T : unmanaged            
                 => src;
@@ -307,7 +307,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid128<N8,N16,T> load<T>(Vector128<T> src, N8 m = default, N16 n = default)
             where T : unmanaged            
                 => src;
@@ -319,7 +319,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid128<N16,N8,T> load<T>(Vector128<T> src, N16 m = default, N8 n = default)
             where T : unmanaged            
                 => src;
@@ -331,7 +331,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N1,N256,T> load<T>(Vector256<T> src, N1 m = default, N256 n = default)
             where T : unmanaged            
                 => src;
@@ -343,7 +343,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N256,N1,T> load<T>(Vector256<T> src, N256 m = default, N1 n = default)
             where T : unmanaged            
                 => src;
@@ -355,7 +355,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N2,N128,T> load<T>(Vector256<T> src, N2 m = default, N128 n = default)
             where T : unmanaged            
                 => src;
@@ -367,7 +367,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N128,N2,T> load<T>(Vector256<T> src, N128 m = default, N2 n = default)
             where T : unmanaged            
                 => src;
@@ -379,7 +379,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N4,N64,T> load<T>(Vector256<T> src, N4 m = default, N64 n = default)
             where T : unmanaged            
                 => src;
@@ -391,7 +391,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N64,N4,T> load<T>(Vector256<T> src, N64 m = default, N4 n = default)
             where T : unmanaged            
                 => src;
@@ -403,7 +403,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N8,N32,T> load<T>(Vector256<T> src, N8 m = default, N32 n = default)
             where T : unmanaged            
                 => src;
@@ -415,7 +415,7 @@ namespace Z0
         /// <param name="m">The row count</param>
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid256<N32,N8,T> load<T>(Vector256<T> src, N32 m = default, N8 n = default)
             where T : unmanaged            
                 => src;
@@ -438,7 +438,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="map">The grid map</param>
         /// <typeparam name="T">The segment type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitGrid<T> load<T>(in Block256<T> src, ushort rows, ushort cols)
             where T : unmanaged
                 => new BitGrid<T>(src, rows, cols);

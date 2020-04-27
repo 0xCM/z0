@@ -16,11 +16,11 @@ namespace Z0
     /// A grid of natural dimensions M and N such that M*N <= W := 256
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
-    [IdentityProvider(typeof(BitGridIdentity))]    
+    [IdentityProvider(typeof(BitGridIdentityProvider))]    
     public readonly ref struct SubGrid256<M,N,T>
-        where T : unmanaged
-        where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
+        where T : unmanaged
     {                
         /// <summary>
         /// The grid state

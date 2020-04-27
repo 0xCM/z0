@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> negate<T>(BitGrid16<T> x)
             where T : unmanaged
-                => init16<T>(x.RowCount, x.ColCount, math.negate(x));
+                => init16<T>(math.negate(x));
 
         /// <summary>
         /// Computes the two's complement negation of source grid

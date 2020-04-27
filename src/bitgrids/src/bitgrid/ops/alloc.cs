@@ -12,19 +12,15 @@ namespace Z0
 
     partial class BitGrid
     {
-
         /// <summary>
-        /// Creates a zero-filled 16-bit grid of soft dimensions
+        /// Creates a zero-filled 16-bit grid of fixed order 4
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        /// <param name="m">The number of grid rows</param>
-        /// <param name="n">The number of grid columns</param>
-        /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<T> alloc<T>(N16 w, int m, int n, T t = default)
+        public static BitGrid16<T> alloc<T>(N16 w)
             where T : unmanaged
-                => new BitGrid16<T>(z16, m, n);
+                => new BitGrid16<T>(z16);
 
         /// <summary>
         /// Creates a zero-filled 32-bit grid of soft dimensions

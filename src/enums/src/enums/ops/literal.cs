@@ -12,7 +12,7 @@ namespace Z0
 
     using static Seed;
 
-    public static partial class Enums
+    partial class Enums
     {
         /// <summary>
         /// Reads a generic enum member from a generic value

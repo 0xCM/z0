@@ -12,6 +12,11 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+    public static partial class XTend
+    {
+
+    }
+
     class App : AppShell<App,IAppContext>
     {        
         static IAppContext CreateApiContext()
@@ -55,7 +60,7 @@ namespace Z0
             Control.iter(archive.ImmHexFiles, file => Print(file));  
         }
 
-        void RunCapture()
+        void RunCapture(params PartId[] parts)
         {
             using var host = CreateCaptureHost();
             host.Execute();
@@ -73,9 +78,12 @@ namespace Z0
             iter(Context.Settings, setting => Print(setting));
         }
 
+        static PartId[] ParseParts(params string[] args)
+            => args.Map(arg => Enums.parse<PartId>(arg).ValueOrDefault()).WhereSome();
+        
         public override void RunShell(params string[] args)
         {
-            RunCapture();   
+            RunCapture(ParseParts(args));   
             //DescribeControl();         
         }
 

@@ -24,9 +24,9 @@ namespace Z0
         /// <param name="w">The grid bit width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<T> BitGrid<T>(this IPolyrand random, N16 w, int rows, int cols, T t = default)
+        public static BitGrid16<T> BitGrid<T>(this IPolyrand random, N16 w, T t = default)
             where T : unmanaged
-                => BG.define<T>(w,rows,cols,random.Next<ushort>());
+                => BG.define<T>(w,random.Next<ushort>());
 
         /// <summary>
         /// Creates a 32-bit generic bitgrid

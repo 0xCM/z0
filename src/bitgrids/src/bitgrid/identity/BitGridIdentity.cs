@@ -6,7 +6,12 @@ namespace Z0
     using System;    
     using System.Runtime.CompilerServices;
     
-    readonly struct BitGridIdentity : ITypeIdentityProvider
+    public readonly struct BitGridIdentity<M,N,T>
+    {
+        
+    }
+
+    readonly struct BitGridIdentityProvider : ITypeIdentityProvider
     {        
         public TypeIdentity Identify(Type src)
         {
@@ -22,16 +27,16 @@ namespace Z0
                 return TypeIdentity.Empty;
             
             var segsep = IDI.SegSep.ToString();
-            var count = closures.NonEmptyCount();
+            var args = closures.NonEmptyCount();
 
-            if(count == 1)
+            if(args == 1)
                 return TypeIdentity.Define(text.concat(kind.Indicator(), closures.Third.Format()));
-            else if(count == 3)
+            else if(args == 3)
                 return TypeIdentity.Define(text.concat(
                         kind.Indicator(), segsep, 
                         kind.Width().Format(), segsep, 
-                        closures.First.Format(), segsep,
-                        closures.Second.Format(), segsep,
+                        closures.First.ToString(), segsep,
+                        closures.Second.ToString(), segsep,
                         closures.Third.Format()
                         ));
             else 

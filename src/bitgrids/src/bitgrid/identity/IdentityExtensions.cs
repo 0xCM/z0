@@ -8,7 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
     using static GridKind;
 
     public static class BitGridIdentityX
@@ -47,26 +48,25 @@ namespace Z0
              : (k & Z0.GridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural 
              :  k.ToString();
             
-
         
-        public static Tripled<FixedWidth,FixedWidth,NumericKind> GridClosures(this Type src )
+        public static Tripled<ulong,ulong,NumericKind> GridClosures(this Type src )
         {
             var args = src.GridKind().MapValueOrDefault(k => src.SuppliedTypeArgs().ToArray(), array<Type>());
             if(args.Length == 1)
-                return (FixedWidth.None, FixedWidth.None, args[0].NumericKind());
+                return (0, 0, args[0].NumericKind());
             else if(args.Length == 3)
-                return ((FixedWidth)args[0].NatValue().ValueOrDefault(), (FixedWidth)args[0].NatValue().ValueOrDefault(), args[0].NumericKind());
+                return (args[0].TypeNatural().NatValue, args[1].TypeNatural().NatValue, args[2].NumericKind());
             else
-                return (FixedWidth.None, FixedWidth.None, NumericKind.None);            
+                return (0, 0, NumericKind.None);            
         }
 
         [MethodImpl(Inline)]
-        public static bool IsSome(this Tripled<FixedWidth,FixedWidth,NumericKind> src)
-            => src.First.IsSome() || src.Second.IsSome() || src.Third.IsSome();
+        public static bool IsSome(this Tripled<ulong,ulong,NumericKind> src)
+            => src.First != 0 || src.Second != 0 || src.Third.IsSome();
 
         [MethodImpl(Inline)]
-        public static int NonEmptyCount(this Tripled<FixedWidth,FixedWidth,NumericKind> src)
-            => (src.First.IsSome() ? 1 : 0) + (src.Second.IsSome() ? 1 : 0)  + (src.Third.IsSome() ? 1 : 0);
+        public static int NonEmptyCount(this Tripled<ulong,ulong,NumericKind> src)
+            => (src.First != 0 ? 1 : 0) + (src.Second != 0 ? 1 : 0)  + (src.Third.IsSome() ? 1 : 0);
 
         public static Option<GridKind> GridKind(this Type src)
         {

@@ -13,15 +13,15 @@ namespace Z0
     partial class BitGrid
     {        
         /// <summary>
-        /// Retuns a one-filled bitgrid
+        /// Retuns a one-filled 16-bit bitgrid
         /// </summary>
         /// <param name="n">The width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<T> ones<T>(N16 n, int rows, int cols, T t = default)
+        public static BitGrid16<T> ones<T>(W16 w)
             where T : unmanaged
-                => init16<T>(rows,cols, ushort.MaxValue);
+                => init16<T>(ushort.MaxValue);
 
         /// <summary>
         /// Retuns a one-filled bitgrid

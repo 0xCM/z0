@@ -15,11 +15,11 @@ namespace Z0.Asm
         readonly ICaptureService Service;
         
         [MethodImpl(Inline)]
-        public static ICaptureControl Create(IContext context, ICaptureService capture)
-            => new MemberCaptureControl(context, capture);
+        public static ICaptureControl Create(ICaptureService capture)
+            => new MemberCaptureControl(capture);
                     
         [MethodImpl(Inline)]
-        MemberCaptureControl(IContext context, ICaptureService capture)
+        MemberCaptureControl(ICaptureService capture)
         {
             this.Service = capture;
         }

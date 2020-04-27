@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
 
-    interface IInnerContext : IContext
+    public interface IDynexus : 
+        IDynamicImmediate, 
+        IDynamicFactories, 
+        IFixedDynamic, 
+        IDynamicNumeric
     {
-        OpIdentity Identify(MethodInfo src);
+        
+    }    
 
-        TypeIdentity Identify(Type src);
-
-        OpIdentity Identify(Delegate src);
-    }
 }

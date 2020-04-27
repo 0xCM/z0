@@ -26,7 +26,7 @@ namespace Z0.Asm
             ParseMembers(CaptureWorkflowContext context)
             {
                 this.Context = context;
-                this.Parser = context.ExtractParser();
+                this.Parser = StatelessExtract.Factory.ExtractParser();
             }
 
             public ParsedMemberExtract[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)

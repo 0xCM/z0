@@ -10,12 +10,11 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-
     public class AsmContext : IAsmContext 
     {            
         public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition,
-             FolderPath root = null, AsmFormatConfig format = null)
-                => new AsmContext(settings,queue, composition, root ?? Env.Current.LogDir, format ?? AsmFormatConfig.DefaultStreamFormat);
+             FolderPath root = null, in AsmFormatSpec? format = null)
+                => new AsmContext(settings,queue, composition, root ?? Env.Current.LogDir, format ?? AsmFormatSpec.DefaultStreamFormat);
 
         public event Action<IAppMsg> Next;
 
@@ -25,7 +24,7 @@ namespace Z0.Asm
         
         public IAppSettings Settings {get;}
 
-        public AsmFormatConfig AsmFormat {get;}
+        public AsmFormatSpec AsmFormat {get;}
 
         public FolderPath RootCapturePath {get;}
 
@@ -41,11 +40,11 @@ namespace Z0.Asm
 
         public ICaptureControl CaptureControl {get;}
         
-        public IDynamicOps Dynamic {get;}
+        public IDynexus Dynamic {get;}
 
         public IImmSpecializer ImmServices {get;}
 
-        AsmContext(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition, FolderPath root, AsmFormatConfig format)
+        AsmContext(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition, FolderPath root, in AsmFormatSpec format)
         {
             Next  = e => {};
             AppPaths = Z0.AppPaths.Default;
@@ -57,14 +56,17 @@ namespace Z0.Asm
             RootCapturePath = root;      
             AsmFormat = format;
 
-            var context = IContext.Default;
             Random = Polyrand.Pcg64(PolySeed64.Seed05);
-            Decoder = AsmDecoder.FunctionDecoder(AsmFormat);
-            Formatter  = AsmServices.AsmFormatter(AsmFormat);
-            WriterFactory = AsmServices.AsmWriterFactory;
-            CaptureService = context.Capture();
-            CaptureControl =  MemberCaptureControl.Create(context, CaptureService);
-            Dynamic = context.Dynamic();
+
+            var factory = AsmStatelessCore.Factory;
+
+            var context = IContext.Default;
+            Decoder = factory.FunctionDecoder(AsmFormat);
+            Formatter  = factory.AsmFormatter(AsmFormat);
+            WriterFactory = factory.AsmWriterFactory;
+            CaptureService =  factory.CaptureService();
+            CaptureControl =  factory.CaptureControl(CaptureService);
+            Dynamic = Dynops.Services.Nexus;
             ImmServices = ImmSpecializer.Create(context, Decoder);
         }
        

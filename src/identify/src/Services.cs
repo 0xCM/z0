@@ -13,16 +13,5 @@ namespace Z0
 
     using Api = Z0;
 
-    public static class ServiceFactory
-    {    
-        [MethodImpl(Inline)]
-        public static IDivinationContext DivinationContext(this IContext src, IMultiDiviner diviner)
-            => Z0.DivinationContext.Create(src,diviner);
-
-        [MethodImpl(Inline)]
-        public static IDivinationContext DivinationContext(this IServiceFactory factory, IMultiDiviner diviner)
-            => Z0.DivinationContext.Create(factory.Context, diviner);
-        
-    }
 
 }

@@ -22,6 +22,8 @@ namespace Z0
         /// </summary>
         protected static ITerminal Term => Terminal.Get();
 
+        protected static IStatelessSeed Stateless => StatelessSeed.Fatory;
+
         public void Dispose()
             => OnDispose();
 
@@ -39,7 +41,7 @@ namespace Z0
         protected static PartIndex KnownParts => LazyParts.Value;
 
         static Lazy<PartIndex> LazyParts {get;} 
-            = Control.defer(PartIndex.Build);        
+            = Control.defer(Stateless.PartIndexBuilder.Build);        
 
         protected static void Launch(params string[] args)
         {

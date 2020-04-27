@@ -19,7 +19,7 @@ namespace Z0
         protected IApiComposition Api => _Api.Value;
 
         static IApiComposition ComposeApi()
-            => ApiComposition.Assemble(PartIndex.Build());
+            => ApiComposition.Assemble(StatelessSeed.Fatory.PartIndexBuilder.Build());
         
         static Lazy<IApiComposition> _Api {get;}
             = Control.defer(ComposeApi);

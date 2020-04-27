@@ -21,9 +21,9 @@ namespace Z0
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<T> init<T>(N16 w, int m, int n, T d = default)
+        public static BitGrid16<T> init<T>(N16 w, T d = default)
             where T : unmanaged
-                => new BitGrid16<T>(gvec.broadcast<T,ushort>(d), m, n);
+                => new BitGrid16<T>(gvec.broadcast<T,ushort>(d));
 
         /// <summary>
         /// Creates a populated 32-bit generic bitgrid 
@@ -534,7 +534,7 @@ namespace Z0
             var blocksize = n256;
             var blocks = Blocks.alloc<T>(blocksize, BitCalcs.tableblocks(blocksize, m,n,d));
             Blocks.broadcast(d, blocks);
-            return new BitGrid<M, N, T>(blocks);
+            return new BitGrid<M,N,T>(blocks);
         }
 
         /// <summary>
@@ -545,9 +545,9 @@ namespace Z0
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid16<T> init16<T>(int m, int n, ushort d)
+        static BitGrid16<T> init16<T>(ushort d)
             where T : unmanaged
-                => new BitGrid16<T>(d, m, n);
+                => new BitGrid16<T>(d);
 
         /// <summary>
         /// Initializes 32-bit grid of soft dimensions

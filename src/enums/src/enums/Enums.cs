@@ -13,7 +13,7 @@ namespace Z0
     using static Seed;
 
     [ApiHost]
-    public static partial class Enums
+    public partial class Enums
     {
         [MethodImpl(Inline)]
         public static E zero<E>()

@@ -11,6 +11,9 @@ namespace Z0
 
     partial class Enums
     {
+        public static PartId[] ParseParts(params string[] args)
+            => args.Map(arg => Enums.parse<PartId>(arg).ValueOrDefault()).WhereSome();
+
         /// <summary>
         /// Attempts to parses an enumeration literal, ignoring case, and returns a default value if parsing failed
         /// </summary>

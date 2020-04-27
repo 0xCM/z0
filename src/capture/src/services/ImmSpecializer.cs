@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         readonly ICaptureService Capture;
 
-        readonly IDynamicOps Dynamic;
+        readonly IDynexus Dynamic;
 
         /// <summary>
         /// Instantiates a contextual immediate capture service for a unary operator
@@ -39,8 +39,8 @@ namespace Z0.Asm
         ImmSpecializer(IContext context, IAsmFunctionDecoder decoder)
         {            
             this.Decoder = decoder;
-            this.Capture = context.Services.Capture();
-            this.Dynamic = context.Dynamic();
+            this.Capture = AsmStatelessCore.Factory.CaptureService();
+            this.Dynamic = Dynops.Services.Nexus;
         }
 
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm)

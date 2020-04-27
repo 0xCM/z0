@@ -15,7 +15,7 @@ namespace Z0
 
     readonly struct ImmInjector : IImmInjector
     {                
-        public IInnerContext Context {get;}
+        readonly IMultiDiviner Diviner;
 
         readonly IImmInjector Injective;
 
@@ -24,52 +24,52 @@ namespace Z0
             => Injective.EmbedImmediate(method,imm);
         
         [MethodImpl(Inline)]
-        public static ImmInjector<D> FromFactory<D>(IInnerContext context, IImmInjector<D> factory)
+        public static ImmInjector<D> FromFactory<D>(IMultiDiviner diviner, IImmInjector<D> factory)
             where D : Delegate
-                => new ImmInjector<D>(context, factory);
+                => new ImmInjector<D>(diviner, factory);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context, Vec128Type v, K.UnaryOpClass k)
-            => new ImmInjector(context, v, k);
+        public static IImmInjector Create(IMultiDiviner diviner, Vec128Type v, K.UnaryOpClass k)
+            => new ImmInjector(diviner, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context, Vec256Type v, K.UnaryOpClass k)
-            => new ImmInjector(context, v, k);
+        public static IImmInjector Create(IMultiDiviner diviner, Vec256Type v, K.UnaryOpClass k)
+            => new ImmInjector(diviner, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context, Vec128Type v, K.BinaryOpClass k)
-            => new ImmInjector(context, v, k);
+        public static IImmInjector Create(IMultiDiviner diviner, Vec128Type v, K.BinaryOpClass k)
+            => new ImmInjector(diviner, v, k);
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context, Vec256Type v, K.BinaryOpClass k)
-            => new ImmInjector(context, v, k);
+        public static IImmInjector Create(IMultiDiviner diviner, Vec256Type v, K.BinaryOpClass k)
+            => new ImmInjector(diviner, v, k);
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec128Type vk, K.UnaryOpClass opk)
+        ImmInjector(IMultiDiviner diviner, Vec128Type vk, K.UnaryOpClass opk)
         {
-            Injective = V128UnaryOpImmInjector.Create(context);
-            Context = context;
+            Injective = V128UnaryOpImmInjector.Create(diviner);
+            Diviner = diviner;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec256Type vk, K.UnaryOpClass opk)
+        ImmInjector(IMultiDiviner diviner, Vec256Type vk, K.UnaryOpClass opk)
         {
-            Injective = V256UnaryOpImmInjector.Create(context);
-            Context = context;
+            Injective = V256UnaryOpImmInjector.Create(diviner);
+            Diviner = diviner;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec128Type vk, K.BinaryOpClass opk)
+        ImmInjector(IMultiDiviner diviner, Vec128Type vk, K.BinaryOpClass opk)
         {
-            Injective = V128BinaryOpImmInjector.Create(context);
-            Context = context;
+            Injective = V128BinaryOpImmInjector.Create(diviner);
+            Diviner = diviner;
         }
 
         [MethodImpl(Inline)]
-        ImmInjector(IInnerContext context, Vec256Type vk, K.BinaryOpClass opk)
+        ImmInjector(IMultiDiviner diviner, Vec256Type vk, K.BinaryOpClass opk)
         {
-            Injective = V256BinaryOpImmInjector.Create(context);
-            Context = context;
+            Injective = V256BinaryOpImmInjector.Create(diviner);
+            Diviner = diviner;
         }
     }    
 
@@ -78,12 +78,12 @@ namespace Z0
     {
         readonly IImmInjector<D> Injective;
         
-        public IInnerContext Context {get;}
+        public IMultiDiviner Diviner {get;}
 
         [MethodImpl(Inline)]
-        public ImmInjector(IInnerContext context, IImmInjector<D> factory)
+        public ImmInjector(IMultiDiviner diviner, IImmInjector<D> factory)
         {
-            this.Context = context;
+            this.Diviner = diviner;
             this.Injective = factory;
         }
 

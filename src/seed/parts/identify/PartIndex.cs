@@ -13,10 +13,7 @@ namespace Z0
 
     public readonly struct PartIndex : IEnumerable<IPart>
     {
-        public static PartIndex Build()
-            => PartIndexBuilder.Create().Build();
-
-        readonly Dictionary<PartId, IPart> Parts;
+        readonly Dictionary<PartId,IPart> Parts;
 
         internal static PartIndex Define(IEnumerable<IPart> parts)        
             => new PartIndex(parts);

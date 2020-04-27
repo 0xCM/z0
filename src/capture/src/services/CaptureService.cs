@@ -14,6 +14,10 @@ namespace Z0.Asm
     
     unsafe readonly struct CaptureService : ICaptureService
     {        
+        [MethodImpl(Inline)]
+        public static CaptureService Create(IMultiDiviner diviner)
+            => new CaptureService(diviner);
+
         readonly IMultiDiviner Diviner;
 
         readonly MemberJit Jitter;
@@ -30,14 +34,11 @@ namespace Z0.Asm
         static MemberCapture DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
             => MemberCapture.Define(id, src, src.Method, extracted, parsed, term);
 
-        [MethodImpl(Inline)]
-        public static CaptureService Create(IDivinationContext context)
-            => new CaptureService(context);
 
         [MethodImpl(Inline)]
-        CaptureService(IDivinationContext context)
+        CaptureService(IMultiDiviner diviner)
         {
-            this.Diviner = context.Diviner;
+            Diviner = diviner;
             Jitter = MemberJit.Service;
         }
 

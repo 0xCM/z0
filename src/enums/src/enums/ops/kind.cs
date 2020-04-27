@@ -9,7 +9,7 @@ namespace Z0
     
     using static Seed;
 
-    public static partial class Enums
+    partial class Enums
     {
         /// <summary>
         /// Determines an enumeration's underlying kind

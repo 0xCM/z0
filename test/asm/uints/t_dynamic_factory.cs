@@ -38,7 +38,7 @@ namespace Z0.Asm
         static MethodInfo add3 
             => typeof(T).Method(nameof(Add3)).Require();
 
-        IDynamicOps Dynamic => Context.Dynamic();
+        IDynexus Dynamic => Dynops.Services.Nexus;
 
         
         public void create_emitter()

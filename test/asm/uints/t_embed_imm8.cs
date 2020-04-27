@@ -26,7 +26,7 @@ namespace Z0.Asm
 
         }
 
-        IDynamicOps Dynamic => Context.Dynamic();
+        IDynexus Dynamic => Dynops.Services.Nexus;
 
         VMethodSearch Search
             => VMethods.Search;

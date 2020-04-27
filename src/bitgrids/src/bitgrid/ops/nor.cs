@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> nor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(gx.RowCount, gx.ColCount, math.nor(gx,gy));
+                => init16<T>(math.nor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise NOR between fixed-width 32-bit generic bitgrids

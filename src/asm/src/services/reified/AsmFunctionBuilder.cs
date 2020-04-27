@@ -18,7 +18,7 @@ namespace Z0.Asm
 
     public readonly struct AsmFunctionBuilder : IAsmFunctionBuilder
     {        
-        public static IAsmFunctionBuilder Default => default(AsmFunctionBuilder);
+        public static IAsmFunctionBuilder Service => default(AsmFunctionBuilder);
         
         public bool RunChecks {get;}
 

@@ -15,44 +15,44 @@ namespace Z0
 
     readonly struct V256BinaryOpImmInjector : IImmInjector
     {
-        public IInnerContext Context {get;}
+        readonly IMultiDiviner Diviner;
 
         [MethodImpl(Inline)]
-        public static IImmInjector Create(IInnerContext context)
-            => new V256BinaryOpImmInjector(context);
+        public static IImmInjector Create(IMultiDiviner diviner)
+            => new V256BinaryOpImmInjector(diviner);
 
         [MethodImpl(Inline)]
-        public static V256BinaryOpImmInjector<T> Create<T>(IInnerContext context)
+        public static V256BinaryOpImmInjector<T> Create<T>(IMultiDiviner diviner)
             where T : unmanaged
-                => new V256BinaryOpImmInjector<T>(context);
+                => new V256BinaryOpImmInjector<T>(diviner);
 
         [MethodImpl(Inline)]
-        V256BinaryOpImmInjector(IInnerContext context)
+        V256BinaryOpImmInjector(IMultiDiviner diviner)
         {
-            Context = context;
+            Diviner = diviner;
         }
 
         [MethodImpl(Inline)]            
         public DynamicDelegate EmbedImmediate(MethodInfo src, byte imm)        
-            => DynamicImmediate.EmbedVBinaryOpImm(w256, src,imm, Context.Identify(src)).Require();
+            => DynamicImmediate.EmbedVBinaryOpImm(w256, src,imm, Diviner.Identify(src)).Require();
     }
 
     readonly struct V256BinaryOpImmInjector<T> : IImmInjector<BinaryOp<Vector256<T>>>
         where T : unmanaged
     { 
-        public IInnerContext Context {get;}
+        readonly IMultiDiviner Diviner;
 
         [MethodImpl(Inline)]
-        public V256BinaryOpImmInjector(IInnerContext context)
+        public V256BinaryOpImmInjector(IMultiDiviner diviner)
         {
-            Context = context;            
+            Diviner = diviner;            
         }
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmediate(MethodInfo src, byte imm)
         {
             var constructed = src.Reify(typeof(T));
-            var id = Context.Identify(src).WithImm8(imm);
+            var id = Diviner.Identify(src).WithImm8(imm);
             var tOperand = typeof(Vector256<T>);  
             var dst = DynamicImmediate.DynamicSignature(constructed.Name, constructed.DeclaringType, tOperand, tOperand, tOperand);            
             dst.GetILGenerator().EmitImmBinaryCall(constructed,imm);

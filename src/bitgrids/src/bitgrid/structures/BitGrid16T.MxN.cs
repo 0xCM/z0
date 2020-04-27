@@ -16,11 +16,11 @@ namespace Z0
     /// </summary>
     /// <remarks>Conforming dimensions include 1x16, 16x1, 2x8, 8x2, and 4x4</remarks>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
-    [IdentityProvider(typeof(BitGridIdentity))]
+    [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid16<M,N,T>
-        where T : unmanaged
-        where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
+        where T : unmanaged
     {                
         /// <summary>
         /// The grid state
@@ -52,7 +52,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static implicit operator BitGrid16<M,N,T>(in Block16<T> src)
-            => new BitGrid16<M, N, T>(src);
+            => new BitGrid16<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitGrid16<M,N,T> g1, BitGrid16<M,N,T> g2)

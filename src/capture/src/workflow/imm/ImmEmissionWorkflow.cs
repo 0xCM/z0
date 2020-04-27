@@ -34,7 +34,7 @@ namespace Z0.Asm
             ApiSet = api;
             CodeArchive = CaptureArchive.Create(root);
             CodeArchive.Clear();
-            ApiCollector = context.ApiCollector();
+            ApiCollector =  context.Factory.ApiCollector();
             ConnectReceivers(Broker);
         }
 

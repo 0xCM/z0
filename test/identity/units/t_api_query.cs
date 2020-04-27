@@ -18,7 +18,7 @@ namespace Z0
         void query_1()
         {
             var host = ApiHost.Create<math>();
-            var locator = Context.MemberLocator();
+            var locator = StatelessIdentity.Factory.MemberLocator();
             var members = locator.Hosted(host, BitLogicKind.And, GenericPartition.NonGeneric);
             iter(members, m => trace(m.OpUri));            
                 
@@ -27,7 +27,7 @@ namespace Z0
         void query_2()
         {
             var host = ApiHost.Create<math>();
-            var locator = Context.MemberLocator();
+            var locator = StatelessIdentity.Factory.MemberLocator();
             var located = locator.Located(host);
             iter(located, m => trace(m.OpUri));        
         }

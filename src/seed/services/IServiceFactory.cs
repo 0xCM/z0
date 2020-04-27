@@ -11,8 +11,6 @@ namespace Z0
 
     public interface IServiceFactory
     {
-        static IServiceFactory Default => DefaultServiceFactory.Default;
-
         IContext Context => DefaultContext.Default;
     }
 
@@ -23,6 +21,7 @@ namespace Z0
 
         IContext IServiceFactory.Context => Context;
     }
+
 
     readonly struct DefaultServiceFactory : IServiceFactory
     {

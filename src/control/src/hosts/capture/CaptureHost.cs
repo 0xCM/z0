@@ -44,13 +44,14 @@ namespace Z0
 
         readonly IUriBitsReader UriBitsReader;
 
-        readonly AsmFormatConfig FormatConfig;
+        readonly AsmFormatSpec FormatConfig;
         
         public static ICaptureHost Create(IAsmContext context, FolderPath root)    
             => new CaptureHost(context,root);
 
         CaptureHost(IAsmContext context, FolderPath root)
         {                    
+            var factory = context.Factory;
             Context = context;
             Sink = context;
             CaptureRoot = root;
@@ -60,12 +61,12 @@ namespace Z0
             LogPath = (root + FolderName.Define("logs")) + FileName.Define("host","log");
             Archive = CaptureArchive.Create(root);
             Archive.LogDir.Clear();
-            MemberLocator = context.MemberLocator();
-            FormatConfig = context.AsmFormat.WithSectionDelimiter();
+            MemberLocator = factory.MemberLocator();
+            FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Decoder = context.AsmFunctionDecoder(FormatConfig);            
-            Formatter = AsmServices.AsmFormatter(FormatConfig);
+            Formatter = factory.AsmFormatter(FormatConfig);
             UriBitsReader = Z0.UriBitsReader.Service;
-            PrimaryWorkflow = HostCaptureWorkflow.Create(context, Decoder, Formatter, AsmServices.AsmWriterFactory);
+            PrimaryWorkflow = HostCaptureWorkflow.Create(context, Decoder, Formatter, AsmStateless.Factory.AsmWriterFactory);
             ImmWorkflow = ImmEmissionWorkflow.Create(context,  context, ApiSet, Formatter, Decoder, root);
             
             ConnectReceivers(PrimaryWorkflow.EventBroker);

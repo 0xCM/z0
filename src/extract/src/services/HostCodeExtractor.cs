@@ -17,18 +17,15 @@ namespace Z0
     /// </summary>
     public readonly struct HostCodeExtractor : IHostCodeExtractor
     {
-        public IContext Context {get;}
-
         public int BufferLength {get;}
 
         [MethodImpl(Inline)]
-        public static IHostCodeExtractor Create(IContext context, int bufferlen)
-            => new HostCodeExtractor(context,bufferlen);
+        public static IHostCodeExtractor Create(int bufferlen)
+            => new HostCodeExtractor(bufferlen);
             
         [MethodImpl(Inline)]
-        HostCodeExtractor(IContext context, int bufferlen)            
+        HostCodeExtractor(int bufferlen)            
         {
-            this.Context = context;
             this.BufferLength = bufferlen;
         }
 
@@ -39,7 +36,7 @@ namespace Z0
         public MemberExtract Extract(in Member src)
         {
             Span<byte> buffer = stackalloc byte[BufferLength];
-            var reader = Context.MemoryReader();
+            var reader =  MemoryReader.Service;
             return Extract(src, reader, buffer);
         }
 
@@ -47,7 +44,7 @@ namespace Z0
         {
             var dst = new MemberExtract[members.Length];
             Span<byte> buffer = stackalloc byte[BufferLength];            
-            var reader = Context.MemoryReader();
+            var reader = MemoryReader.Service;
             for(var i=0; i<members.Length; i++)
                 dst[i] = Extract(members[i], reader, buffer);
             return dst;
@@ -59,7 +56,7 @@ namespace Z0
         /// <param name="src">The source member</param>
         public MemberExtract[] Extract(IApiHost src)
         {
-            var locator = Context.MemberLocator();
+            var locator = StatelessIdentity.Factory.MemberLocator();
             var members = locator.Located(src).ToArray();
             return Extract(members);
         }

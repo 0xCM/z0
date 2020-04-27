@@ -53,7 +53,7 @@ namespace Z0
         readonly IMultiDiviner Diviner;
 
         [MethodImpl(Inline)]
-        public static IApiCollector Create(IContext context, IMultiDiviner diviner)
+        public static IApiCollector Create(IMultiDiviner diviner)
             => new ApiCollector(diviner);
         
         [MethodImpl(Inline)]

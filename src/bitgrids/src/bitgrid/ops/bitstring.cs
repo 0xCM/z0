@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString bitstring<T>(BitGrid16<T> g)
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString bitstring<T>(BitGrid32<T> g)
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString bitstring<T>(BitGrid64<T> g)
             where T : unmanaged
-                => g.Content.ToBitString();
+                => g.Data.ToBitString();
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -51,7 +51,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -65,7 +65,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -79,7 +79,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -93,7 +93,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -107,7 +107,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
  
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -121,7 +121,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
  
          /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -130,6 +130,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString bitstring<T>(in BitGrid<T> g)
             where T : unmanaged
-                => g.Content.ToBitString(g.BitCount);
+                => g.Data.ToBitString(g.BitCount);
     }
 }

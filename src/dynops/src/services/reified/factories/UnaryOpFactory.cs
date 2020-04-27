@@ -15,14 +15,8 @@ namespace Z0
 
     readonly struct UnaryOpFactory<T> : IUnaryOpFactory<T>
     {
-        public IInnerContext Context {get;}
+        public static IUnaryOpFactory<T> Service => default(UnaryOpFactory<T>);
         
-        [MethodImpl(Inline)]
-        public UnaryOpFactory(IInnerContext context)
-        {
-            Context = context;
-        }
-
         public Func<T,T> Manufacture(MethodInfo method, object instance)
         {
             var args = seq(paramX<T>());

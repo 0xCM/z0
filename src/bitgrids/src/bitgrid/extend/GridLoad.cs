@@ -360,9 +360,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<T> ToBitGrid<T>(this BitString bs, N16 w, int rows, int cols, T t = default)
+        public static BitGrid16<T> ToBitGrid<T>(this BitString bs, W16 w)
             where T : unmanaged
-                => BitGrid.parse<T>(bs, w, rows, cols);
+                => BitGrid.parse<T>(bs, w);
 
         /// <summary>
         /// Hydrates a bitgrid from a bitstring

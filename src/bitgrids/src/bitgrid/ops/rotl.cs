@@ -18,10 +18,10 @@ namespace Z0
         /// <param name="g">The source grid</param>
         /// <param name="shift">The rotation amount</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Rotl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotl, Closures(Numeric8x16u)]
         public static BitGrid16<T> rotl<T>(BitGrid16<T> g, byte shift)
             where T : unmanaged
-                => init16<T>(g.RowCount, g.ColCount, Bits.rotl(g, shift));
+                => init16<T>(Bits.rotl(g, shift));
 
         /// <summary>
         /// Circulates grid content clockwise
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="g">The source grid</param>
         /// <param name="shift">The rotation amount</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline), Rotl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotl, Closures(Numeric8x16x32u)]
         public static BitGrid32<T> rotl<T>(BitGrid32<T> g, byte shift)
             where T : unmanaged
                 => init32<T>(g.RowCount, g.ColCount, Bits.rotl(g, shift));

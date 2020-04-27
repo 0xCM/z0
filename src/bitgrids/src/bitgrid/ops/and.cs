@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Numeric8x16u)]
         public static BitGrid16<T> and<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
+                => init16<T>(math.and(gx,gy));
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width 32-bit generic bitgrids
@@ -48,134 +48,102 @@ namespace Z0
         /// <summary>
         /// Computes the bitwise AND between generic bitgrids and stores the result to a caller-supplied target
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <param name="gz">The target grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
+        /// <param name="dst">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), And, Closures(UnsignedInts)]
-        public static ref readonly BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
+        public static ref readonly BitGrid<T> and<T>(in BitGrid<T> a, in BitGrid<T> b, in BitGrid<T> dst)
             where T : unmanaged
         {
-            var blocks = gz.BlockCount;
+            var blocks = dst.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vand(gx[i],gy[i]);
-            return ref gz;
-        }
-
-        /// <summary>
-        /// Computes the bitwise AND between generic bitgrids and returns the allocated result
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), And, Closures(UnsignedInts)]
-        public static BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy)
-            where T : unmanaged
-        {
-            var gz = alloc<T>(gx.RowCount, gx.ColCount);
-            and(gx,gy,gz);
-            return gz;
+                dst[i] = gvec.vand(a[i],b[i]);
+            return ref dst;
         }
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<M,N,T> and<M,N,T>(BitGrid16<M,N,T> gx, BitGrid16<M,N,T> gy)
+        public static BitGrid16<M,N,T> and<M,N,T>(BitGrid16<M,N,T> a, BitGrid16<M,N,T> b)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => math.and(gx,gy);
+                => math.and(a,b);
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid32<M,N,T> and<M,N,T>(BitGrid32<M,N,T> gx, BitGrid32<M,N,T> gy)
+        public static BitGrid32<M,N,T> and<M,N,T>(BitGrid32<M,N,T> a, BitGrid32<M,N,T> b)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => math.and(gx,gy);
+                => math.and(a,b);
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid64<M,N,T> and<M,N,T>(BitGrid64<M,N,T> gx, BitGrid64<M,N,T> gy)
+        public static BitGrid64<M,N,T> and<M,N,T>(BitGrid64<M,N,T> a, BitGrid64<M,N,T> b)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => math.and(gx,gy);
+                => math.and(a,b);
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> and<M,N,T>(in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+        public static BitGrid128<M,N,T> and<M,N,T>(in BitGrid128<M,N,T> a, in BitGrid128<M,N,T> b)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vand<T>(gx,gy);    
+                => gvec.vand<T>(a,b);    
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> and<M,N,T>(in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+        public static BitGrid256<M,N,T> and<M,N,T>(in BitGrid256<M,N,T> a, in BitGrid256<M,N,T> b)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vand<T>(gx,gy);    
+                => gvec.vand<T>(a,b);    
 
         /// <summary>
         /// Computes the bitwise AND between natural bitgrids and stores the result to a caller-supplied target
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <param name="gz">The target grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
+        /// <param name="dst">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly BitGrid<M,N,T> and<M,N,T>(in BitGrid<M,N,T> gx, in BitGrid<M,N,T> gy, in BitGrid<M,N,T> gz)
+        public static ref readonly BitGrid<M,N,T> and<M,N,T>(in BitGrid<M,N,T> a, in BitGrid<M,N,T> b, in BitGrid<M,N,T> dst)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var blocks = gz.BlockCount;
+            var blocks = dst.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vand(gx[i],gy[i]);
-            return ref gz;
-        }
-
-        /// <summary>
-        /// Computes the bitwise AND between generic bitgrids and returns the allocated result
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid<M,N,T> and<M,N,T>(in BitGrid<M,N,T> gx, in BitGrid<M,N,T> gy)
-            where T : unmanaged
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-        {
-            var gz = alloc<M,N,T>();    
-            and(gx,gy,gz);
-            return gz;
+                dst[i] = gvec.vand(a[i],b[i]);
+            return ref dst;
         }
     }
 }

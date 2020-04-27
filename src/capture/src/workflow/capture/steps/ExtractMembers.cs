@@ -30,7 +30,7 @@ namespace Z0.Asm
  
             public Member[] Members(IApiHost host)
             {
-                var locator = Context.MemberLocator();  
+                var locator = StatelessIdentity.Factory.MemberLocator();
                 var located = locator.Located(host).ToArray();
                 Context.Raise(HostMembersLocated.Define(host.UriPath, located));              
                 return located;
@@ -39,7 +39,7 @@ namespace Z0.Asm
             public MemberExtract[] Extracts(IApiHost host)
             {
                 var members = Members(host);    
-                var extractor = Context.HostExtractor();
+                var extractor = AsmStatelessCore.Factory.HostExtractor();
                 return extractor.Extract(members);
             }
         }

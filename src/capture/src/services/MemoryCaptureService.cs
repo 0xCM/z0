@@ -26,12 +26,21 @@ namespace Z0.Asm
             => new MemoryCaptureService(context, decoder, bufferlen);
 
         [MethodImpl(Inline)]
+        static IMemoryExtractParser ExtractParser(byte[] buffer) 
+            => AsmStatelessCore.Factory.MemoryExtractParser(buffer);
+
+        [MethodImpl(Inline)]
+        static IMemoryExtractor MemoryExtractor(byte[] buffer) 
+            => AsmStatelessCore.Factory.MemoryExtractor(buffer);
+
+
+        [MethodImpl(Inline)]
         MemoryCaptureService(IContext context, IAsmInstructionDecoder decoder, int bufferlen)
         {
             this.Context = context;
             this.ExtractBuffer = new byte[bufferlen];
             this.ParseBuffer = new byte[bufferlen];
-            this.Extractor = context.Services.MemoryExtractor(ExtractBuffer);
+            this.Extractor = MemoryExtractor(ExtractBuffer);
             this.Decoder = decoder;
         }
 
@@ -48,9 +57,9 @@ namespace Z0.Asm
             => Extractor.Extract(src);
 
         public Option<LocatedCode> Parse(LocatedCode src)
-            => from parsed in Context.MemoryExtractParser(ParseBuffer.Clear()).Parse(src)
-                let encoded = LocatedCode.Define(src.Address, parsed)
-                select encoded;
+            => from parsed in  ExtractParser(ParseBuffer.Clear()).Parse(src)
+               let encoded = LocatedCode.Define(src.Address, parsed)
+               select encoded;
 
         [MethodImpl(Inline)]
         public Option<AsmInstructionList> Decode(LocatedCode src)

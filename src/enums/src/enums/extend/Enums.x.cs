@@ -23,6 +23,24 @@ namespace Z0
             where E : unmanaged, Enum            
                 => !Enums.zero<E>().Equals(src);
 
+        /// <summary>
+        /// Filters zero-valued elements from the source stream
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        /// <typeparam name="E">The enumeration type</typeparam>
+        public static IEnumerable<E> WhereSome<E>(this IEnumerable<E> src)
+            where E : unmanaged, Enum
+                => src.Where(x => x.IsSome());
+
+        /// <summary>
+        /// Filters zero-valued elements from the source array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="E">The enumeration type</typeparam>
+        public static E[] WhereSome<E>(this E[] src)
+            where E : unmanaged, Enum
+                => src.Where(x => x.IsSome()).ToArray();
+
         [MethodImpl(Inline)]
         public static bool IsNone<E>(this E src)        
             where E : unmanaged, Enum            

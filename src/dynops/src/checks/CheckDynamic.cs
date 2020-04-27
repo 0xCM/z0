@@ -16,6 +16,6 @@ namespace Z0
 
     public interface ICheckDynamic : IValidator
     {
-        IDynamicOps Dynamic => IContext.Default.Dynamic();
+        IDynexus Dynamic => Dynops.Services.Nexus;
     }
 }

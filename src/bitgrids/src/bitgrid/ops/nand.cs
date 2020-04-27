@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> nand<T>(BitGrid16<T> x, BitGrid16<T> y)
             where T : unmanaged
-                => init16<T>(x.RowCount, x.ColCount, math.nand(x,y));
+                => init16<T>(math.nand(x,y));
 
         /// <summary>
         /// Computes the bitwise nand between generic bitgrids

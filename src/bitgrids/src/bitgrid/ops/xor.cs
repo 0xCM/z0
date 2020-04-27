@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> xor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(gx.RowCount, gx.ColCount, math.xor(gx,gy));
+                => init16<T>(math.xor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise xor between generic bitgrids

@@ -6,13 +6,9 @@ namespace Z0
 {
     using System;
 
-    public interface IDynamicOps : 
-        IDynamicImmediate, 
-        IDynamicFactories, 
-        IFixedDynamic, 
-        IDynamicNumeric
+    public interface IPartParser<P> : IArrayParser<P,PartId>
+        where P : IParser<PartId>
     {
-        
+        PartId[] ParseValid(params string[] args);
     }
-
 }

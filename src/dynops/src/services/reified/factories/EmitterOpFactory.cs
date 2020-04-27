@@ -15,13 +15,7 @@ namespace Z0
 
     readonly struct EmitterOpFactory<T> : IEmitterOpFactory<T>
     {
-        public IInnerContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public EmitterOpFactory(IInnerContext context)
-        {
-            this.Context = context;
-        }
+        public static IEmitterOpFactory<T> Service => default(EmitterOpFactory<T>);
 
         public Func<T> Manufacture(MethodInfo method, object instance)
         {

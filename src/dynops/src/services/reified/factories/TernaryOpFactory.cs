@@ -15,13 +15,7 @@ namespace Z0
 
     readonly struct TernaryOpFactory<T> : ITernaryOpFactory<T>
     {          
-        public IInnerContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public TernaryOpFactory(IInnerContext context)
-        {
-            this.Context = context;
-        }
+        public static ITernaryOpFactory<T> Service => default(TernaryOpFactory<T>);
 
         public Func<T,T,T,T> Manufacture(MethodInfo method, object instance)
         {

@@ -17,8 +17,8 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionDecoder FunctionDecoder(AsmFormatConfig format = null)
-            => AsmFunctionDecoder.Create(format ?? AsmFormatConfig.New);
+        public static IAsmFunctionDecoder FunctionDecoder(in AsmFormatSpec? format = null)
+            => AsmFunctionDecoder.Create(format ?? AsmFormatSpec.Default);
 
         /// <summary>
         /// Creates an instruction decoder
@@ -26,7 +26,7 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
         [MethodImpl(Inline)]
-        public static IAsmInstructionDecoder InstructionDecoder(AsmFormatConfig format = null)
-            => AsmInstructionDecoder.Create(format ?? AsmFormatConfig.New);
+        public static IAsmInstructionDecoder InstructionDecoder(in AsmFormatSpec? format = null)
+            => AsmInstructionDecoder.Create(format ?? AsmFormatSpec.Default);
     }
 }

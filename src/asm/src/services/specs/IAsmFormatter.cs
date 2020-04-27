@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// The configuration used when rendering the formatted text
         /// </summary>
-        AsmFormatConfig Config {get;}        
+        AsmFormatSpec Config {get;}        
         
         /// <summary>
         /// Creates a detailed presentation of decoded x86 asm data per the accompanying configuration spec

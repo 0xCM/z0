@@ -16,6 +16,7 @@ namespace Z0
 
     public static class Part
     {
+
         public static PartIndex Index => DeferredIndex.Value;        
 
         /// <summary>
