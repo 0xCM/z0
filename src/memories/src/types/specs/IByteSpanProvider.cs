@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
 
-    using static Seed;
+    public interface IByteSpanProvider
+    {
+        ReadOnlySpan<byte> Bytes {get;}
+    }
 
-    public interface IApiIndex : IOpIndex<Member>
+    public interface IByteSpanProvider<T> : IByteSpanProvider
+        where T : IByteSpanProvider<T>
     {
 
     }
-
 }

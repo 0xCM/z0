@@ -16,7 +16,7 @@ namespace Z0
         public static UriBits[] Save(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
         {
             using var writer = new UriBitsWriter(dst);
-            var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Bytes));
+            var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Content));
             writer.Write(data);
             return data;
         }

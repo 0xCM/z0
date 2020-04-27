@@ -112,7 +112,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator BitSize(ByteSize src)
-            => src.Bytes * 8;
+            => src.Count * 8;
         
         [MethodImpl(Inline)]
         public static bool operator ==(BitSize lhs, BitSize rhs)

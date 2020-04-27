@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Collections.Generic;
+    using System.Reflection;
     
     using static Seed;
     using static Memories;
@@ -34,7 +35,8 @@ namespace Z0
         
         static bool Initialized = false;
 
-        
+        const PartId SourcePart = PartId.VData;
+
         public static IEnumerable<BinaryResource> Resources
         {
             get 
@@ -64,6 +66,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void Register(int index, string name, ReadOnlySpan<byte> src)
-            => Described[index] = BinaryResource.Define(name, src); 
+            => Described[index] = BinaryResource.Define(SourcePart, name, src); 
     }
 }

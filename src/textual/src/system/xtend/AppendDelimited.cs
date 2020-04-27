@@ -22,15 +22,6 @@ namespace Z0
             sb.Append($"{content}".PadRight(EnumFormatter.numeric<T,int>(pad)));
         }
 
-
-        public static void AppendDelimited<F,T>(this StringBuilder sb, F content, T pad, char delimiter)
-            where F : ICustomFormattable
-            where T : unmanaged, Enum
-        {
-            sb.Append(text.rspace(delimiter));            
-            sb.Append($"{content?.Format()}".PadRight(EnumFormatter.numeric<T,int>(pad)));
-        }
-
         public static void AppendDelimited(this StringBuilder sb, object content, int pad, char delimiter)
         {
             sb.Append(text.rspace(delimiter));            

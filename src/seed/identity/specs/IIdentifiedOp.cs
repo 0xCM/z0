@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
 
-    using static Seed;
-
-    public interface IIdentfiedOp : IIdentifiedTarget
+    public interface IIdentfiedOp : IIdentification
     {
-        IdentityTargetKind IIdentifiedTarget.TargetKind => IdentityTargetKind.Method;
+        IdentityTargetKind IIdentification.TargetKind => IdentityTargetKind.Method;
     }
     
-    public interface IIdentifedOp<T> : IIdentfiedOp, IIdentifiedTarget<T>
+    public interface IIdentifedOp<T> : IIdentfiedOp, IIdentification<T>
         where T : IIdentifedOp<T>, new()    
     {
         Func<string,T> Factory  => s => new T();

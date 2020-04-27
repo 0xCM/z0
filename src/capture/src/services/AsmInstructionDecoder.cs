@@ -38,13 +38,13 @@ namespace Z0.Asm
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        public Option<AsmInstructionList> DecodeInstructions(in Addressable src)        
+        public Option<AsmInstructionList> DecodeInstructions(in LocatedCode src)        
         {
             try
             {   
                 require(src.IsNonEmpty);
                 var decoded = new Iced.InstructionList();
-                var reader = new Iced.ByteArrayCodeReader(src.Bytes);
+                var reader = new Iced.ByteArrayCodeReader(src.Content);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
                 decoder.IP = src.AddressRange.Start;
                 while (reader.CanReadByte) 
@@ -67,13 +67,12 @@ namespace Z0.Asm
             }
         }
 
-        public void DecodeInstructions(in Addressable src, Func<Asm.Instruction,bool> f)        
+        public void DecodeInstructions(in LocatedCode src, Func<Asm.Instruction,bool> f)        
         {
             try
             {
                 var decoded = new Iced.InstructionList();
-                var reader = new Iced.ByteArrayCodeReader(src.Bytes);
-                //var formatter = AsmFormatter.Internal(AsmFormat);
+                var reader = new Iced.ByteArrayCodeReader(src.Content);
                 var formatter = AsmCaptureFormatter.Create(AsmFormat);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
                 decoder.IP = src.AddressRange.Start;

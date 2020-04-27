@@ -12,20 +12,20 @@ namespace Z0
 
     public readonly struct ParsedMemoryExtract
     {
-        public readonly Addressable Source;
+        public readonly LocatedCode Source;
 
-        public readonly Addressable Parsed;
+        public readonly LocatedCode Parsed;
 
         [MethodImpl(Inline)]
         public static ParsedMemoryExtract Define(MemoryAddress src, byte[] raw, byte[] parsed)
             => new ParsedMemoryExtract(src, raw, parsed);
 
         [MethodImpl(Inline)]
-        public static ParsedMemoryExtract Define(MemoryAddress src, Addressable raw, Addressable parsed)
+        public static ParsedMemoryExtract Define(MemoryAddress src, LocatedCode raw, LocatedCode parsed)
             => new ParsedMemoryExtract(src, raw,parsed);
 
         [MethodImpl(Inline)]
-        ParsedMemoryExtract(MemoryAddress src, Addressable raw, Addressable parsed)
+        ParsedMemoryExtract(MemoryAddress src, LocatedCode raw, LocatedCode parsed)
         {
             require(src.Equals(raw.Address));
             require(src.Equals(parsed.Address));
@@ -37,8 +37,8 @@ namespace Z0
         [MethodImpl(Inline)]
         ParsedMemoryExtract(MemoryAddress src, byte[] raw, byte[] parsed)
         {
-            this.Source = Addressable.Define(src, raw);
-            this.Parsed = Addressable.Define(src, parsed);
+            this.Source = LocatedCode.Define(src, raw);
+            this.Parsed = LocatedCode.Define(src, parsed);
         }
     }
 }

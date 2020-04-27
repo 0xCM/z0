@@ -11,12 +11,9 @@ namespace Z0
 
     partial class XTend
     {
-        [MethodImpl(Inline)]
-        public static NumericKind ToNumericKind(this NumericClass k)            
-            => NumericClasses.classified(k).NumericKind();
 
         [MethodImpl(Inline)]
         public static NumericKind ToNumericKind(this NumericWidth width, NumericIndicator indicator) 
-            => NumericKinds.kind(width,indicator);            
+            => NumericKinds.kind(width, indicator);            
     }
 }

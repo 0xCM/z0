@@ -13,9 +13,9 @@ namespace Z0
         object Dst {get;}
     }
 
-    public interface IArrow<A,S,T> : IArrow, IIdentifiedTarget<A>
-        where S : IIdentifiedTarget<S>, new()
-        where T : IIdentifiedTarget<T>, new()
+    public interface IArrow<A,S,T> : IArrow, IIdentification<A>
+        where S : IIdentification<S>, new()
+        where T : IIdentification<T>, new()
         where A : IArrow<A,S,T>, new()
     {
         new S Src {get;}

@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    public interface IApiHost : IIdentifiedTarget
+    public interface IApiHost : IIdentification
     {
         Type HostingType {get;}        
 
@@ -24,7 +24,6 @@ namespace Z0
         PartId Owner => HostingType.Assembly.Id();
     
         IEnumerable<MethodInfo> HostedMethods => HostingType.DeclaredMethods(false);
-
 
     }
 

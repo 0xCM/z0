@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a block of encoded assembly
     /// </summary>
-    public readonly struct OperationBits : IFormattable<OperationBits>, IByteSpanProvider<OperationBits>
+    public readonly struct OperationBits : ILocatedCode<OperationBits,LocatedCode>
     {
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
@@ -21,17 +21,17 @@ namespace Z0
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
         public static OperationBits Parse(OpIdentity id, string data)
-            => Define(id, Addressable.Define(HexParsers.Bytes.ParseBytes(data).ToArray()));
+            => Define(id, LocatedCode.Define(HexParsers.Bytes.ParseBytes(data).ToArray()));
 
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static OperationBits Empty => Define(OpIdentity.Empty, Addressable.Empty);
+        public static OperationBits Empty => Define(OpIdentity.Empty, LocatedCode.Empty);
 
         /// <summary>
         /// The source member identity
         /// </summary>
-        public readonly OpIdentity Id;
+        public OpIdentity Id {get;}
 
         /// <summary>
         /// The memory location from which the data originiated
@@ -41,9 +41,15 @@ namespace Z0
         /// <summary>
         /// The data, encoded
         /// </summary>
-        public readonly Addressable Encoded;
-        
-        public MemoryAddress BaseAddress 
+        public readonly LocatedCode Encoded;
+
+        public LocatedCode Content
+        {
+            [MethodImpl(Inline)]
+            get => Encoded;
+        }        
+
+        public MemoryAddress Address 
             => Location.Start;
 
         /// <summary>
@@ -52,7 +58,7 @@ namespace Z0
         /// <param name="id">The operation identifier</param>
         /// <param name="data">The encoded data</param>
         [MethodImpl(Inline)]
-        public static OperationBits Define(OpIdentity id, Addressable data)
+        public static OperationBits Define(OpIdentity id, LocatedCode data)
             => new OperationBits(id, data);
 
         /// <summary>
@@ -63,20 +69,20 @@ namespace Z0
         /// <param name="data">The encoded bytes</param>
         [MethodImpl(Inline)]
         public static OperationBits Define(OpIdentity id, MemoryAddress @base, byte[] data)
-            => Define(id, Addressable.Define(@base,data));
+            => Define(id, LocatedCode.Define(@base,data));
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(in OperationBits src)
-            => BinaryCode.Define(src.Encoded.Bytes);
+            => BinaryCode.Define(src.Encoded.Content);
 
         [MethodImpl(Inline)]
-        public static implicit operator IdentifiedCode(in OperationBits src)
-            => IdentifiedCode.Define(src.Id, src.Encoded);
+        public static implicit operator OperationCode(in OperationBits src)
+            => OperationCode.Define(src.Id, src.Encoded);
 
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Encoded.Bytes;
+            get => Encoded.Content;
         }
 
         public int Length
@@ -105,7 +111,7 @@ namespace Z0
             => code.Bytes;
 
         [MethodImpl(Inline)]
-        OperationBits(OpIdentity id, Addressable encoded)
+        OperationBits(OpIdentity id, LocatedCode encoded)
         {
             this.Id = id;
             this.Location = encoded.AddressRange;
@@ -113,12 +119,15 @@ namespace Z0
         }
 
         public string Format(int idpad)
-            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, HexFormat.data(Encoded.Bytes));
+            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Encoded.Format());
 
         public string Format()
             => Format(0);
 
         public override string ToString()
             => Format();         
+
+        public bool Equals(OperationBits src)
+            => Encoded.Equals(src.Encoded);
     }
 }

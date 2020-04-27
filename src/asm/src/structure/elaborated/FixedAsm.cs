@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The encoded asm bytes
         /// </summary>
-        public Addressable Encoded
+        public LocatedCode Encoded
         {
             [MethodImpl(Inline)]
             get => Code.Encoded;

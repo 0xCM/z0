@@ -214,7 +214,7 @@ namespace Z0
             Sink.MatchedEmissions(host, memSrc.Length, dst);
         }
 
-        void Analyze(ApiHostUri host, ReadOnlySpan<ApiMember> src)
+        void Analyze(ApiHostUri host, ReadOnlySpan<Member> src)
         {
             var index = src.ToOpIndex();
             foreach(var key in index.DuplicateKeys)

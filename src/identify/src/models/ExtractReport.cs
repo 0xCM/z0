@@ -41,10 +41,10 @@ namespace Z0
                 records[i] = new ExtractRecord(                
                     Sequence : i,
                     Address : op.Member.Address,
-                    Length : op.EncodedData.Length,
+                    Length : op.Content.Length,
                     Uri : op.Uri,
                     OpSig : op.Member.Method.Signature().Format(),
-                    Data : op.EncodedData
+                    Data : op.Content
                     );
 
             }

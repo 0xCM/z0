@@ -28,7 +28,7 @@ namespace Z0.Asm
                 this.Context = context;
             }
  
-            public ApiMember[] Members(IApiHost host)
+            public Member[] Members(IApiHost host)
             {
                 var locator = Context.MemberLocator();  
                 var located = locator.Located(host).ToArray();

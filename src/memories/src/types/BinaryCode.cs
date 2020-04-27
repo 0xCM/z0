@@ -9,11 +9,12 @@ namespace Z0
     using System.Linq;
 
     using static Seed;
-
+    using static Memories;
+    
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
     /// </summary>
-    public readonly struct BinaryCode : IEquatable<BinaryCode>
+    public readonly struct BinaryCode : IEncoded<BinaryCode,byte[]>
     {
         /// <summary>
         /// The canonical zero
@@ -23,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The encoded bytes
         /// </summary>
-        readonly byte[] Data;
+        public byte[] Content {get;}
 
         /// <summary>
         /// Defines a block of encoded data based at a specifed address
@@ -35,7 +36,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static implicit operator byte[](BinaryCode src)
-            => src.Data;
+            => src.Content;
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(byte[] src)
@@ -43,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(BinaryCode src)
-            => src.Data;
+            => src.Content;
 
         [MethodImpl(Inline)]
         public static bool operator==(BinaryCode a, BinaryCode b)
@@ -56,13 +57,19 @@ namespace Z0
         [MethodImpl(Inline)]
         BinaryCode(byte[] bytes)
         {
-            this.Data = bytes;
+            this.Content = require(bytes);
         }
         
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Content.Length;
+        }
+
+        public ByteSize Size
+        {
+            [MethodImpl(Inline)]
+            get => Length;
         }
 
         /// <summary>
@@ -71,7 +78,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Length == 0 ) || (Length == 1 && Data[0] == 0);
+            get => (Length == 0 ) || (Length == 1 && Content[0] == 0);
         }
 
         public bool IsNonEmpty
@@ -83,23 +90,36 @@ namespace Z0
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Content;
         }
 
-        public byte this[int i] { [MethodImpl(Inline)] get=> Data[i]; }
+        public byte LastByte
+        {
+            [MethodImpl(Inline)]
+            get => Content.LastOrDefault();
+        }
+
+        public byte this[int i] 
+        { 
+            [MethodImpl(Inline)] 
+            get=> Content[i]; 
+        }
 
         public bool Equals(BinaryCode rhs)
         {
             if(this.IsNonEmpty && rhs.IsNonEmpty)
-                return Data.SequenceEqual(rhs.Data);
+                return Content.SequenceEqual(rhs.Content);
             else
                 return false;
         }
 
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Content.GetHashCode();
         
         public override bool Equals(object src)
             => src is BinaryCode c && Equals(c);
+
+        public string Format()
+            => Content.FormatHexBytes();
     }
 }

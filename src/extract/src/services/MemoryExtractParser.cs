@@ -9,7 +9,6 @@ namespace Z0
     
     using static Seed;
     using static Memories;
-    using Asm;
 
     public readonly struct MemoryExtractParser : IMemoryExtractParser
     {
@@ -37,15 +36,15 @@ namespace Z0
             : this(context, new byte[bufferlen])
         {}
 
-        public Option<Addressable> Parse(Addressable src)
+        public Option<LocatedCode> Parse(LocatedCode src)
         {
             var parser = Context.PatternParser(Buffer.Clear());
             var status = parser.Parse(src);            
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
             return succeeded 
-                ? Addressable.Define(src.Address, parser.Parsed.ToArray()) 
-                : none<Addressable>();
+                ? LocatedCode.Define(src.Address, parser.Parsed.ToArray()) 
+                : none<LocatedCode>();
         }               
     }
 }

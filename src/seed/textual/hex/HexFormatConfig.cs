@@ -53,7 +53,7 @@ namespace Z0
         /// Specifies the default configuration for hex data emission
         /// </summary>
         public static HexFormatConfig HexData => Define(true, false, false, false, Chars.Space);
-
+        
         /// <summary>
         /// The default configuration for array initialization content
         /// </summary>

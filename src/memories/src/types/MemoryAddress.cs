@@ -9,15 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    /// <summary>
-    /// Characterizes an address-identified target
-    /// </summary>
-    public interface IAddressable
-    {
-        MemoryAddress Address {get;}
-    }        
-
-    public readonly struct MemoryAddress : IAddressable, IIdentifiedTarget<MemoryAddress>
+    public readonly struct MemoryAddress : IAddressable, IIdentification<MemoryAddress>
     {
         public static MemoryAddress Zero => default;
 
@@ -124,6 +116,9 @@ namespace Z0
 
         public string Format()
             => Identifier;
+
+        public string Format(int digits)
+            => Location.ToString($"x{digits}") + "h";
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryAddress other)

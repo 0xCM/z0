@@ -45,13 +45,5 @@ namespace Z0
             }
         }
 
-        public void check_numeric_class()
-        {
-            
-            Claim.eq(NumericClass.Int16u.Width(), 16);
-            Claim.eq(NumericClass.Int32i.Width(), 32);
-            Claim.eq(NumericClass.All.Width(), null);
-
-        }
     }
 }

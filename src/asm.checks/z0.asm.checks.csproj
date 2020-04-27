@@ -7,18 +7,17 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Extract)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Asm)" />
+
     <ProjectReference Include="$(DVec)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(VData)" />
-
-    <ProjectReference Include="$(Validate)" />
     <ProjectReference Include="$(VCheck)" />
 
   </ItemGroup>

@@ -26,20 +26,20 @@ namespace Z0
         
         public readonly ExtractTermCode TermCode;
 
-        public readonly Addressable Extracted;
+        public readonly LocatedCode Extracted;
 
-        public readonly Addressable Parsed;
+        public readonly LocatedCode Parsed;
                 
         [MethodImpl(Inline)]
-        public static MemberCapture Define(OpIdentity id, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
+        public static MemberCapture Define(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
             => new MemberCapture(id, method, extracted, parsed, term);
 
         [MethodImpl(Inline)]
-        public static MemberCapture Define(OpIdentity id, Delegate src, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
+        public static MemberCapture Define(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
             => new MemberCapture(id, src, method, extracted, parsed, term);
 
         [MethodImpl(Inline)]
-        MemberCapture(OpIdentity id, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
+        MemberCapture(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
         {
             OpId = id;        
             SourceMember = method;
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        MemberCapture(OpIdentity id, Delegate src, MethodInfo method, Addressable extracted, Addressable parsed, ExtractTermCode term)
+        MemberCapture(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
         {
             Extracted = extracted; 
             Parsed = parsed;

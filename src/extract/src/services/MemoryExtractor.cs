@@ -28,18 +28,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Option<Addressable> Extract(MemoryAddress src)
+        public Option<LocatedCode> Extract(MemoryAddress src)
         {
             try
             {
                 Span<byte> buffer = Buffer.Clear();
                 var length = Reader.Read(src, buffer);            
-                return Addressable.Define(src, buffer.Slice(0,length).ToArray());
+                return LocatedCode.Define(src, buffer.Slice(0,length).ToArray());
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<Addressable>();
+                return none<LocatedCode>();
             }
         }
     }

@@ -13,48 +13,48 @@ namespace Z0
     /// <summary>
     /// Identifies a member defined by executable code (derived from the method implementation)
     /// </summary>    
-    public readonly struct MemberCode 
+    public readonly struct MemberCode : IEncoded<MemberCode,OperationCode>, IOperational
     {
-        public static MemberCode Empty => Define(ApiMember.Empty, BinaryCode.Empty);
+        public static MemberCode Empty => Define(Member.Empty, BinaryCode.Empty);
 
-        public readonly ApiMember Member;
+        public Member Member {get;}
 
-        public readonly BinaryCode Encoded;
+        public OperationCode Content {get;}
 
         public OpKindId? KindId {get;}
-
-        [MethodImpl(Inline)]
-        public static MemberCode Define(ApiMember member, BinaryCode code)
-            => new MemberCode(member, code);
-
-        public IdentifiedCode ApiCode
-        {
-            [MethodImpl(Inline)]
-            get => IdentifiedCode.Define(Id,Encoded);
-        }
-
-        public ApiHostUri HostUri => Member.HostUri;
 
         public OpIdentity Id => Member.Id;
 
         public OpUri Uri => Member.OpUri;
 
+        public ApiHostUri Host => Uri.HostPath;
+
         public MethodInfo Method => Member.Method;
 
         [MethodImpl(Inline)]
-        public static implicit operator IdentifiedCode(MemberCode src)
-            => src.ApiCode;
+        public static MemberCode Define(Member member, BinaryCode code)
+            => new MemberCode(member, code);
 
         [MethodImpl(Inline)]
-        MemberCode(ApiMember member, BinaryCode code)
+        public static implicit operator OperationCode(MemberCode src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        MemberCode(Member member, BinaryCode code)
         {
-            this.Member = member;
-            this.Encoded = code;       
-            this.KindId = member.KindId;     
+            Member = member;
+            KindId = member.KindId;  
+            Content = OperationCode.Define(member.Id, code);   
+        }
+
+        public ReadOnlySpan<byte> Bytes 
+        {
+            [MethodImpl(Inline)]
+            get => Content.Bytes;
         }
 
         public bool Equals(MemberCode other)
-            => Encoded.Equals(other.Encoded);
+            => Content.Equals(other.Content);
 
         public override int GetHashCode()
             => Uri.GetHashCode();
@@ -63,7 +63,7 @@ namespace Z0
             => src is MemberCode m && Equals(m);        
 
         public string Format(int uripad)
-            => text.concat(Member.OpUri.Format().PadRight(uripad), Encoded.Format());
+            => text.concat(Member.OpUri.Format().PadRight(uripad), Content.Format());
 
         public string Format()
             => Format(20);

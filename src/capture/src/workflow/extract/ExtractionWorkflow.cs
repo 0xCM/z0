@@ -150,7 +150,7 @@ namespace Z0.Asm
         Option<FilePath> SaveReport(ExtractReport src, FilePath dst)
             => src.Save(dst).OnSome(f => Raise(ExtractReportSaved.Define(src.ApiHost, src.GetType(), src.RecordCount, f)));
 
-        ApiMember[] LocateMembers(IApiHost host)
+        Member[] LocateMembers(IApiHost host)
         {
             var located = MemberLocator.Located(host).ToArray();
             Raise(HostMembersLocated.Define(host.UriPath, located));

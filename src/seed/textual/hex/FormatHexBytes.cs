@@ -12,10 +12,16 @@ namespace Z0
 
     partial class XTend
     {        
+        public static string FormatHexBytes(this byte[] src, HexFormatConfig? config = null)
+        {
+            var c = config ?? HexFormatConfig.HexData;
+            return src.FormatHexBytes(c.Delimiter, c.ZPad, c.Specifier);
+        }
+        
         public static string FormatHexBytes(this byte[] src, char sep, bool zpad = true, bool specifier = true)
             => src.ToReadOnlySpan().FormatHexBytes(sep, zpad, specifier, false, true, null);
 
-        public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = Chars.Comma, bool zpad = true, bool specifier = true, 
+        public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
             var builder = string.Empty.Build();
@@ -42,6 +48,7 @@ namespace Z0
                     counter = 0;
                 }                
             }
+            
             return builder.ToString();
         }
     }

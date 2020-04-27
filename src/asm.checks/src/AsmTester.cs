@@ -33,6 +33,10 @@ namespace Z0.Asm
             var formatted = Formatter.FormatFunction(asm);
             dst.WriteLine(formatted);            
         }
+
+        void WriteAsm(AsmFunction f, StreamWriter dst)
+            => dst.WriteLine(Formatter.FormatFunction(f));
+
     }
     
     public readonly struct AsmTester : IAsmTester

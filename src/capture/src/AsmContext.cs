@@ -47,7 +47,7 @@ namespace Z0.Asm
         AsmContext(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition, FolderPath root, AsmFormatConfig format)
         {
             Next  = e => {};
-            AppPaths = IAppPaths.Default;
+            AppPaths = Z0.AppPaths.Default;
 
             Settings = settings;
             Queue = queue;

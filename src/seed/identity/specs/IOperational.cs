@@ -5,15 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
 
-    using static Seed;
 
-    public interface IApiIndex : IOpIndex<Member>
+    public interface IOperational
     {
-
+        OpIdentity Id {get;}
     }
 
 }

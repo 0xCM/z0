@@ -14,70 +14,76 @@ namespace Z0
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
     /// </summary>
-    public readonly struct Addressable : IAddressable
+    public readonly struct LocatedCode : ILocatedCode<LocatedCode,BinaryCode>
     {
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static Addressable Empty => new Addressable(MemoryAddress.Zero, new byte[]{0});
+        public static LocatedCode Empty => new LocatedCode(MemoryAddress.Zero, new byte[]{0});
 
         /// <summary>
-        /// The nead of the memory location from which the data originated
+        /// The head of the memory location from which the data originated
         /// </summary>
         public MemoryAddress Address {get;}
          
         /// <summary>
-        /// The encoded bytes
+        /// The encoded content
         /// </summary>
-        public readonly byte[] Bytes;
+        public BinaryCode Content {get;}
 
         /// <summary>
         /// Defines a block of encoded data based at a specifed address
         /// </summary>
         /// <param name="data">The source data</param>
         [MethodImpl(Inline)]
-        public static Addressable Define(MemoryAddress src, byte[] data)
-            => new Addressable(src, require(data));
+        public static LocatedCode Define(MemoryAddress src, byte[] data)
+            => new LocatedCode(src, data);
         
         /// <summary>
         /// Defines a 0-based block of encoded data
         /// </summary>
         /// <param name="data">The source data</param>
         [MethodImpl(Inline)]
-        public static Addressable Define(byte[] data)
-            => new Addressable(MemoryAddress.Zero, require(data));
+        public static LocatedCode Define(byte[] data)
+            => new LocatedCode(MemoryAddress.Zero, data);
         
         [MethodImpl(Inline)]
-        public static implicit operator byte[](Addressable src)
-            => src.Bytes;
+        public static implicit operator byte[](LocatedCode src)
+            => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(Addressable src)
-            => src.Bytes;
+        public static implicit operator ReadOnlySpan<byte>(LocatedCode src)
+            => src.Content;
 
         [MethodImpl(Inline)]
-        Addressable(MemoryAddress src, byte[] bytes)
+        LocatedCode(MemoryAddress src, byte[] bytes)
         {
             this.Address = src;
-            this.Bytes = bytes;
+            this.Content = BinaryCode.Define(require(bytes));
         }
         
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Bytes.Length;
+            get => Content.Length;
+        }
+
+        public ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => Content.Bytes;
         }
 
         public byte LastByte
         {
             [MethodImpl(Inline)]
-            get => Bytes.LastOrDefault();
+            get => Content.LastByte;
         }
 
         public MemoryRange AddressRange
         {
             [MethodImpl(Inline)]
-            get => (Address, Address + (MemoryAddress)Bytes.Length);
+            get => (Address, Address + (MemoryAddress)Content.Length);
         }
 
         /// <summary>
@@ -86,13 +92,19 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Bytes == null || (Length == 0 ) || (Length == 1 && Bytes[0] == 0);
+            get => Content.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => ! IsEmpty;
+            get => Content.IsNonEmpty;
         }
+
+        public string Format()
+            => Content.Format();
+
+        public bool Equals(LocatedCode src)
+            => Content.Equals(src.Content);
     }
 }

@@ -15,20 +15,30 @@ namespace Z0
     /// </summary>
     public readonly struct AppPaths : IAppPaths
     {
-        public static IAppPaths Service => default(AppPaths);
+        public PartId AppId {get;}
+
+        public FolderPath Root {get;}
+
+        [MethodImpl(Inline)]
+        public static IAppPaths Create(PartId id, FolderPath root = null)
+            => new AppPaths(id, root ?? Env.Current.LogDir);
+
+        public static IAppPaths Default => Create(ExecutingApp);
+
+        [MethodImpl(Inline)]
+        AppPaths(PartId id, FolderPath root)
+        {
+            this.AppId = id;
+            this.Root = root;
+        }
     }
 
     public interface IAppPaths : ICustomFormattable
     {
         /// <summary>
-        /// The default implementation
+        /// The application part identifier
         /// </summary>
-        static IAppPaths Default => AppPathProvider.Create(Assembly.GetEntryAssembly().Id(), Env.Current.LogDir);  
-
-        /// <summary>
-        /// The default application configuration file filename
-        /// </summary>
-        FileName ConfigFileName => FileName.Define("config.json");
+        PartId AppId => ExecutingApp;
 
         /// <summary>
         /// The application-wide root output directory
@@ -36,9 +46,9 @@ namespace Z0
         FolderPath Root => Env.Current.LogDir;
 
         /// <summary>
-        /// The application part identifier
+        /// The default application configuration file filename
         /// </summary>
-        PartId AppId => Assembly.GetEntryAssembly().Id();
+        FileName ConfigFileName => FileName.Define("config.json");
 
         /// <summary>
         /// The application name
@@ -160,7 +170,6 @@ namespace Z0
         /// </summary>
         FolderPath AppSrcPath => DevRoot + RelativeLocation.Define($"src/{AppName}");
 
-
         /// <summary>
         /// The application-relative configuration path
         /// </summary>
@@ -180,7 +189,16 @@ namespace Z0
         /// The application-relative capture directory
         /// </summary>
         FolderPath AppCapturePath => AppDataPath + CaptureFolder;
-        
+
+        /// <summary>
+        /// Creates a provider rooted at the current root directory for another application
+        /// </summary>
+        /// <param name="dst">The target app id</param>
+
+        [MethodImpl(Inline)]
+        IAppPaths ForApp(PartId dst)
+            => AppPaths.Create(dst, Root);
+
         string ICustomFormattable.Format() => AppName;
     }
 }

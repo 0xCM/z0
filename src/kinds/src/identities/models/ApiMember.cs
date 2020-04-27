@@ -14,16 +14,16 @@ namespace Z0
     /// <summary>
     /// Describes a reified api member wich may be of hosted or located state
     /// </summary>
-    public readonly struct ApiMember : IApiMember
+    public readonly struct Member : IApiMember, IEquatable<Member>
     {
-        public static ApiMember Empty => Define(OpUri.Empty, null, OpKindId.None, null);
+        public static Member Empty => Define(OpUri.Empty, null, OpKindId.None, null);
 
         [MethodImpl(Inline)]
-        public static ApiMember Define(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress? address = null)
-            => new ApiMember(uri,method, kindId, address ?? MemoryAddress.Zero);
+        public static Member Define(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress? address = null)
+            => new Member(uri,method, kindId, address ?? MemoryAddress.Zero);
 
         [MethodImpl(Inline)]
-        ApiMember(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
+        Member(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
         {
             this.Id = uri.OpId;
             this.OpUri = uri;
@@ -44,5 +44,16 @@ namespace Z0
         public MemoryAddress Address {get;}
 
         public ApiHostUri HostUri {get;}   
+
+        public bool Equals(Member src)
+        {
+            var result = Id.Equals(src.Id);
+            result &= OpUri.Equals(src.OpUri);
+            result &= Method.Equals(src.Method);
+            result &= KindId.Equals(src.KindId);
+            result &= Address.Equals(src.Address);
+            result &= HostUri.Equals(src.HostUri);
+            return result;
+        }
     }        
 }

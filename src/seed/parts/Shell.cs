@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Seed;    
     
@@ -16,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The default application path collection
         /// </summary>
-        protected static IAppPaths AppPaths => AppPathProvider.FromApp<S>();
+        protected static IAppPaths AppPaths => Z0.AppPaths.Default;
 
         /// <summary>
         /// The shell terminal

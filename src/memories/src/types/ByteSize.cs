@@ -17,35 +17,35 @@ namespace Z0
         /// <summary>
         /// Specifies a number of bytes
         /// </summary>
-        public readonly int Bytes;
+        public readonly int Count;
 
         [MethodImpl(Inline)]
         public static bool operator ==(ByteSize lhs, ByteSize rhs)
-            => lhs.Bytes == rhs.Bytes;
+            => lhs.Count == rhs.Count;
 
         [MethodImpl(Inline)]
         public static bool operator !=(ByteSize lhs, ByteSize rhs)
-            => lhs.Bytes != rhs.Bytes;
+            => lhs.Count != rhs.Count;
 
         [MethodImpl(Inline)]
         public static ByteSize operator +(ByteSize lhs, ByteSize rhs)
-            => lhs.Bytes + rhs.Bytes;
+            => lhs.Count + rhs.Count;
 
         [MethodImpl(Inline)]
         public static ByteSize operator -(ByteSize lhs, ByteSize rhs)
-            => lhs.Bytes - rhs.Bytes;
+            => lhs.Count - rhs.Count;
 
         [MethodImpl(Inline)]
         public static ByteSize operator *(ByteSize lhs, ByteSize rhs)
-            => lhs.Bytes * rhs.Bytes;
+            => lhs.Count * rhs.Count;
 
         [MethodImpl(Inline)]
         public static ByteSize operator /(ByteSize lhs, ByteSize rhs)
-            => lhs.Bytes / rhs.Bytes;
+            => lhs.Count / rhs.Count;
 
         [MethodImpl(Inline)]
         public static ByteSize operator %(ByteSize lhs, ByteSize rhs)
-            => lhs.Bytes % rhs.Bytes;
+            => lhs.Count % rhs.Count;
 
         [MethodImpl(Inline)]
         public static ByteSize Define(int bytes)
@@ -53,11 +53,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator int(ByteSize src)
-            => src.Bytes;
+            => src.Count;
 
         [MethodImpl(Inline)]
         public static implicit operator uint(ByteSize src)
-            => (uint)src.Bytes;
+            => (uint)src.Count;
 
         [MethodImpl(Inline)]
         public static implicit operator ByteSize(int src)
@@ -69,20 +69,20 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ByteSize(int Bytes)
-            => this.Bytes = Bytes;
+            => this.Count = Bytes;
 
         [MethodImpl(Inline)]
         public ulong ToBits()
-            => (ulong)Bytes * 8ul;
+            => (ulong)Count * 8ul;
 
         public override string ToString()
-            => Bytes.ToString();
+            => Count.ToString();
 
         public override int GetHashCode()
-            => Bytes.GetHashCode();
+            => Count.GetHashCode();
 
         public bool Equals(ByteSize rhs)
-            => Bytes == rhs.Bytes;
+            => Count == rhs.Count;
     
         public override bool Equals(object obj)
             => obj is ByteSize ? Equals((ByteSize)obj) : false;

@@ -77,7 +77,7 @@ namespace Z0.Asm
                 
         IAsmFunctionDecoder Decoder => Context.Decoder;
 
-        protected IdentifiedCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
+        protected OperationCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
             => Context.HostBits(id,host).Read(m).Single().ToApiCode();
 
 
@@ -160,28 +160,6 @@ namespace Z0.Asm
             asmout.Write(Decoder.Decode(gCaptured).Require());
         }
                 
-        void binary_imm(in BufferSeq buffers, MethodInfo method)
-        {
-            var w = w256;
-            var name = nameof(dvec.vblend8x16);
-            var imm = (byte)Blend8x16.LRLRLRLR;
-
-            var injector = Me.Dynamic.BinaryInjector<ushort>(w);
-            var x = Me.Random.CpuVector<ushort>(w);
-            var y = Me.Random.CpuVector<ushort>(w);
-            
-            //var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
-
-            var f = injector.EmbedImmediate(method,imm);
-            var v1 = f.DynamicOp.Invoke(x,y);
-            var captured = Me.Capture(f.Id, f).Require();
-            var asm = Decoder.Decode(captured).Require();        
-            
-
-            var g = buffers[Main].EmitFixedBinaryOp<Fixed256>(asm.Code);
-            var v2 = g(x,y).ToVector<ushort>();
-            Claim.veq(v1,v2);
-        }
 
         // void CheckImm(in BufferSeq buffers, in CaptureExchange exchange)
         // {
@@ -217,32 +195,6 @@ namespace Z0.Asm
             return dst;
         }
 
-
-        void datares_check(in BufferSeq buffers)
-        {
-            //Verifies that the "GetBytes" function doesn't return
-            //a copy of the data but rather a refererence to the
-            //data that exists in memory as a resource
-            foreach(var d in Data.Resources)
-                Claim.eq(d.Location, ptr(d.GetBytes()));
-        }
-
- 
-        [MethodImpl(Inline)]
-        static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
-            => v => Avx2.ShiftLeftLogical(v,imm);
-
-        void capture_shifter(in BufferSeq buffers)
-        {
-            var src = shifter(4);
-
-            using var hexout = HexWriter();
-            using var asmout = AsmWriter();            
-
-            var captured = Me.Capture(src.Identify(), src);
-            var decoded = captured.OnSome(c => Decoder.Decode(c));                    
-        }
-
         static int activations;
         
         static void OnMnemonid(Instruction i)
@@ -258,9 +210,6 @@ namespace Z0.Asm
             return src;
         }
 
-        [MethodImpl(Inline)]
-        static unsafe ulong ptr(ReadOnlySpan<byte> src)
-            => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
 
         void RunPipe()
         {

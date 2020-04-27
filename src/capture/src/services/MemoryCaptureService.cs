@@ -44,16 +44,16 @@ namespace Z0.Asm
                 select ApiMemoryCapture.Define(src, bits, instructions, string.Empty);
 
         [MethodImpl(Inline)]
-        public Option<Addressable> Extract(MemoryAddress src)
+        public Option<LocatedCode> Extract(MemoryAddress src)
             => Extractor.Extract(src);
 
-        public Option<Addressable> Parse(Addressable src)
+        public Option<LocatedCode> Parse(LocatedCode src)
             => from parsed in Context.MemoryExtractParser(ParseBuffer.Clear()).Parse(src)
-                let encoded = Addressable.Define(src.Address, parsed)
+                let encoded = LocatedCode.Define(src.Address, parsed)
                 select encoded;
 
         [MethodImpl(Inline)]
-        public Option<AsmInstructionList> Decode(Addressable src)
+        public Option<AsmInstructionList> Decode(LocatedCode src)
             => Decoder.DecodeInstructions(src);
     }
 }

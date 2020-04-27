@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Memories;
     using static BufferSeqId;
 
     public interface ITestCapture : IAsmTester
@@ -19,7 +18,7 @@ namespace Z0.Asm
                 from asm in Decoder.Decode(capture)
                 select asm;        
 
-        TestCaseRecord TestMatch<T>(BinaryOp<T> f, IdentifiedCode src)
+        TestCaseRecord TestMatch<T>(BinaryOp<T> f, OperationCode src)
             where T : unmanaged
         {                                  
             var g = Dynamic.EmitBinaryOp<T>(this[Main],src);

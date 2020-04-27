@@ -10,16 +10,12 @@ namespace Z0
     
     using static Seed;
     using static Memories;
-
-    using Asm;
     
     using ByteParser = ByteParser<EncodingPatternKind>;
 
     readonly struct ExtractParser : IExtractParser
     {
         readonly IContext Context;
-
-        //readonly IAppMsgSink MsgSink;
 
         byte[] PatternBuffer {get;}
 
@@ -60,12 +56,12 @@ namespace Z0
 
         Option<ParsedMemberExtract> Parse(in MemberExtract src, int seq, ByteParser parser)
         {
-            var status = parser.Parse(src.EncodedData);                
+            var status = parser.Parse(src.Content);                
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success(); 
             var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
             return succeeded 
-                ? ParsedMemberExtract.Define(src, seq, matched.ToTermCode(), Addressable.Define(src.EncodedData.Address, data))
+                ? ParsedMemberExtract.Define(src, seq, matched.ToTermCode(), LocatedCode.Define(src.Content.Address, data))
                 : none<ParsedMemberExtract>();
         }
 
@@ -85,7 +81,7 @@ namespace Z0
                 {
                     var bytes = parser.Parsed.ToArray();
                     var uri = OpUri.hex(host.UriPath, extract.Uri.GroupName, extract.Uri.OpId);
-                    var data = Addressable.Define(extract.Address, bytes);
+                    var data = LocatedCode.Define(extract.Address, bytes);
                     var record = MemberParseRecord.Define
                     (
                         Sequence: seq++,

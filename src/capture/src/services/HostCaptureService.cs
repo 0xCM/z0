@@ -6,12 +6,9 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
 
     using static Seed;
     using static Memories;
-    using Z0;
 
     readonly struct HostCaptureService : IHostCaptureService
     {
@@ -71,7 +68,7 @@ namespace Z0.Asm
             report.Save(hostArchive.ParsedPath);
 
             using var writer = Context.UriBitsWriter(hostArchive.HexPath);
-            var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Bytes));
+            var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Content));
             writer.Write(data);
         }
 

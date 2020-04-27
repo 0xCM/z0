@@ -50,8 +50,8 @@ namespace Z0
         /// <summary>
         /// Enumerates the files in the archive
         /// </summary>
-        IEnumerable<FilePath> Files 
-            => RootFolder.Files(FileExtensions.Hex,true);
+        public IEnumerable<FilePath> Files 
+            => RootFolder.Files(FileExtensions.Hex, true);
                     
         public IEnumerable<OperationBits> Read(string name)
             => Read(fn => fn.NoExtension == name);

@@ -8,12 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Dynamic)" />   
-    <ProjectReference Include="$(DVec)" />   
-    <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(AsmChecks)" />
-    <ProjectReference Include="$(VSvc)" />
-    <ProjectReference Include="$(Blocked)" />
   </ItemGroup>
 
 </Project>

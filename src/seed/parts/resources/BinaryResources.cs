@@ -49,8 +49,8 @@ namespace Z0
 
         void Add(BinaryResource r)        
         {
-            if(!Index.TryAdd(r.Location, r))
-                throw new Exception($"Duplicated resource id = {r.Id}, location = {r.Location}");
+            if(!Index.TryAdd(r.Address, r))
+                throw new Exception($"Duplicated resource id = {r.Id}, location = {r.Address}");
         }
 
         public void Merge(BinaryResources src)

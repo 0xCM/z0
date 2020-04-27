@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
 
     partial class XTend
     {
         [MethodImpl(Inline)]
-        public static IdentifiedCode ToApiCode(this OperationBits src)
-            => IdentifiedCode.Define(src.Id, src.Encoded.Bytes);
+        public static OperationCode ToApiCode(this OperationBits src)
+            => OperationCode.Define(src.Id, src.Encoded.Content);
     }
 }

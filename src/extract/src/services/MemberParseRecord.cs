@@ -46,7 +46,7 @@ namespace Z0
             return ParsedMember.Define(src.Uri, src.OpSig, outcome.TermCode, src.Data);
         }        
         
-        public static MemberParseRecord Empty => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, Addressable.Empty);
+        public static MemberParseRecord Empty => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, LocatedCode.Empty);
         
         public static R From(in ParsedMemberExtract extract, int seq)
             => MemberParseRecord.Define
@@ -61,10 +61,10 @@ namespace Z0
                     Data : extract.ParsedContent
                 );
 
-        public static MemberParseRecord Define(int Sequence, int SourceSequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, Addressable Data)
+        public static MemberParseRecord Define(int Sequence, int SourceSequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, LocatedCode Data)
             => new MemberParseRecord(Sequence, SourceSequence, Address, Length, TermCode, Uri,OpSig,Data);
         
-        MemberParseRecord(int Sequence, int SourceSequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, Addressable Data)
+        MemberParseRecord(int Sequence, int SourceSequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, LocatedCode Data)
         {
             this.Seq = Sequence;
             this.SourceSeq = SourceSequence;                
@@ -98,7 +98,7 @@ namespace Z0
         public string OpSig {get; }
 
         [ReportField(F.Data)]
-        public Addressable Data {get; }
+        public LocatedCode Data {get; }
 
         public dynamic this[F f]
         {
@@ -125,7 +125,7 @@ namespace Z0
             dst.DelimitField(F.TermCode, TermCode, sep);
             dst.DelimitField(F.Uri, Uri, sep);
             dst.DelimitField(F.OpSig, OpSig, sep);
-            dst.DelimitField(F.Data, HexFormat.data(Data.Bytes), sep);
+            dst.DelimitField(F.Data, Data.Format(), sep);
             return dst.Format();            
         }
 

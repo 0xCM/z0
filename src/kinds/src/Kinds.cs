@@ -25,10 +25,6 @@ namespace Z0
 
     }
 
-    public partial class NumericType
-    {
-       
-    }
 
     [ApiHost]
     public partial class BlockedKinds : IApiHost<BlockedKinds>

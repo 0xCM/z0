@@ -35,5 +35,15 @@ namespace Z0.Asm
         }
 
         protected readonly IAsmTester AsmCheck;
+
+        protected StreamWriter AsmCaseWriter([Caller] string caller = null)
+            => CaseFileWriter(FileExtensions.Asm,caller);
+
+        protected BufferSeqId Main => BufferSeqId.Main;
+
+        protected BufferSeqId Left => BufferSeqId.Left;
+
+        protected BufferSeqId Right => BufferSeqId.Right;
+
     }
 }

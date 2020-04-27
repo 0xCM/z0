@@ -23,7 +23,7 @@ namespace Z0
 
         public readonly OpIdentity Id;
 
-        public readonly Addressable Encoded;
+        public readonly LocatedCode Encoded;
 
         /// <summary>
         /// Parses a row of identified hex text
@@ -36,7 +36,7 @@ namespace Z0
                 var parser = HexParsers.Bytes;
                 var id = Identify.Op(formatted.TakeBefore(Chars.Space).Trim());
                 var bytes = formatted.TakeAfter(Chars.Space).Split(HexSpecs.DataDelimiter, StringSplitOptions.RemoveEmptyEntries).Select(parser.ParseByte).ToArray();
-                var encoded = Addressable.Define(bytes);
+                var encoded = LocatedCode.Define(bytes);
                 return EncodedHexLine.Define(id, encoded);                
             }
             catch(Exception e)
@@ -47,32 +47,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static EncodedHexLine Define(OpIdentity id, Addressable encoded)
+        public static EncodedHexLine Define(OpIdentity id, LocatedCode encoded)
             => new EncodedHexLine(id, encoded);
 
         [MethodImpl(Inline)]
         public static EncodedHexLine Define(OpIdentity id, byte[] encoded)
-            => new EncodedHexLine(id, Addressable.Define(encoded));
+            => new EncodedHexLine(id, LocatedCode.Define(encoded));
         
         [MethodImpl(Inline)]
-        EncodedHexLine(OpIdentity id, Addressable encoded)
+        EncodedHexLine(OpIdentity id, LocatedCode encoded)
         {
             this.Id = id;
             this.Encoded = encoded;
         }
         
         [MethodImpl(Inline)]
-        public void Deconstruct(out OpIdentity id, out Addressable data)
+        public void Deconstruct(out OpIdentity id, out LocatedCode data)
         {
             id = Id;
             data = Encoded;
         }
 
         public string Format()
-            => string.Concat(Id.Identifier.PadRight(0), CharText.Space,  HexFormat.data(Encoded.Bytes)); 
+            => string.Concat(Id.Identifier.PadRight(0), CharText.Space,  Encoded.Format()); 
 
         public string Format(int idpad)
-            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, HexFormat.data(Encoded.Bytes));
+            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Encoded.Format());
 
         public override string ToString()
             => Format();

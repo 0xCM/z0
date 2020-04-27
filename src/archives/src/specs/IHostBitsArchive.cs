@@ -25,6 +25,12 @@ namespace Z0
         ApiHostUri ApiHost {get;}        
 
         /// <summary>
+        /// Enumerates the archived files
+        /// </summary>
+        /// <value></value>
+        IEnumerable<FilePath> Files {get;}
+
+        /// <summary>
         /// Reads all files in the archive
         /// </summary>
         IEnumerable<OperationBits> Read();
@@ -51,5 +57,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source path</param>
         IEnumerable<OperationBits> Read(string name); 
+
     }    
 }

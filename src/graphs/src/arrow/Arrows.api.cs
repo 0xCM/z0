@@ -14,8 +14,8 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static ArrowPath<S,T> connect<S,T>(S src, T dst)
-            where S : IIdentifiedTarget<S>, new()
-            where T : IIdentifiedTarget<T>, new()
+            where S : IIdentification<S>, new()
+            where T : IIdentification<T>, new()
                 => new ArrowPath<S,T>(src,dst);
 
         internal static string format<S,T>(S src, T dst)            

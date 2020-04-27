@@ -9,6 +9,6 @@ namespace Z0
     /// </summary>
     public interface IMemoryExtractor : IService
     {
-        Option<Addressable> Extract(MemoryAddress src);        
+        Option<LocatedCode> Extract(MemoryAddress src);        
     }    
 }

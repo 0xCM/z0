@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
 
     using static Seed;
 
@@ -16,7 +14,7 @@ namespace Z0
     {
         ApiMembers Members {get;}
 
-        IEnumerable<ApiMember> Located => Members.Where(m => m.Address.NonZero);
+        IEnumerable<Member> Located => Members.Where(m => m.Address.NonZero);
 
         ApiMembers OfKind<K>(K kind)
             where K : unmanaged, Enum

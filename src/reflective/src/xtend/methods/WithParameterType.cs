@@ -20,6 +20,14 @@ namespace Z0
             => src.Where(m => m.GetParameters().Any(p => p.ParameterType == t));
 
         /// <summary>
+        ///  Selects methods from a stream that declare a parameter that has a specifid type
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        /// <typeparam name="T">The parameter type to match</param>
+        public static IEnumerable<MethodInfo> WithParameterType<T>(this IEnumerable<MethodInfo> src)
+            => src.Where(m => m.GetParameters().Any(p => p.ParameterType == typeof(T)));
+
+        /// <summary>
         ///  Selects methods from a stream that have specified parameter types
         /// </summary>
         /// <param name="src">The methods to examine</param>

@@ -15,6 +15,5 @@ namespace Z0
                : src.IsClosedGeneric(false) ? GS.Closed 
                : src.IsGenericTypeDefinition ? GS.Definition 
                : 0;
-
     }
 }

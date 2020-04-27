@@ -20,7 +20,7 @@ namespace Z0
     public interface IAppEnv : IContext
     {
         IAppPaths AppPaths             
-            => IAppPaths.Default;
+            => Z0.AppPaths.Default;
 
         IAppSettings Settings 
             => AppSettings.Empty;

@@ -2,22 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Z0.Asm;
-
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {    
         bool MemcapCheck(IMemoryCapture memcap, OperationBits src)
         {
             var section = new string('-',120);
-            var captured = memcap.Capture(src.BaseAddress);
+            var captured = memcap.Capture(src.Address);
             if(!captured)
                 return false;
 

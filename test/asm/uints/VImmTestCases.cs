@@ -15,8 +15,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     
     using static Seed;
-    using Z0.Parts;
-    using static Memories;
     
     public static class VMethods
     {

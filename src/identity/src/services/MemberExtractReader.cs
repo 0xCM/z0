@@ -72,7 +72,7 @@ namespace Z0
             for(var i = 0; i<records.Length; i++)
             {
                 ref readonly var record = ref skip(extracts,i);
-                ref readonly var encoded = ref record.EncodedData;
+                ref readonly var encoded = ref record.Code;
                 var member = index.Lookup(record.Id);
                 seek(extracts,i) = member ? MemberExtract.Define(member.Value, encoded) : MemberExtract.Empty;
             }

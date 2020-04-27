@@ -29,7 +29,7 @@ namespace Z0
 
     public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic
     {
-        void CheckFixedMatch<F>(in BufferSeq dst, K k, IdentifiedCode a, IdentifiedCode b)
+        void CheckFixedMatch<F>(in BufferSeq dst, K k, OperationCode a, OperationCode b)
             where F : unmanaged, IFixed
         {                        
             var f = Dynamic.EmitFixedUnary<F>(dst[Left], a);

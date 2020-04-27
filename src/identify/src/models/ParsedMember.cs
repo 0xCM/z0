@@ -15,16 +15,16 @@ namespace Z0
 
         public readonly string MemberSig;
         
-        public readonly Addressable Content;   
+        public readonly LocatedCode Content;   
         
         public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
-        public static ParsedMember Define(OpUri uri, string sig, ExtractTermCode term, Addressable extract)
+        public static ParsedMember Define(OpUri uri, string sig, ExtractTermCode term, LocatedCode extract)
             => new ParsedMember(uri, sig, term, extract);
 
         [MethodImpl(Inline)]
-        ParsedMember(OpUri uri, string sig, ExtractTermCode term, Addressable parsed)
+        ParsedMember(OpUri uri, string sig, ExtractTermCode term, LocatedCode parsed)
         {
             this.MemberUri = uri;
             this.MemberSig = sig;

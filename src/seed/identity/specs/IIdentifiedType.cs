@@ -8,12 +8,12 @@ namespace Z0
 
     using static Seed;
 
-    public interface IIdentifiedType : IIdentifiedTarget
+    public interface IIdentifiedType : IIdentification
     {
-        IdentityTargetKind IIdentifiedTarget.TargetKind => IdentityTargetKind.Type;
+        IdentityTargetKind IIdentification.TargetKind => IdentityTargetKind.Type;
     }
 
-   public interface IIdentifiedType<T> : IIdentifiedType, IIdentifiedTarget<T>
+   public interface IIdentifiedType<T> : IIdentifiedType, IIdentification<T>
         where T : IIdentifiedType<T>, new()    
     {
         Func<string,T> Factory  => s => new T();

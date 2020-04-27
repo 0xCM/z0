@@ -28,8 +28,7 @@ namespace Z0
         Method = 4,
     }
 
-
-    public interface IIdentifiedTarget : IIdentified, ICustomFormattable, IComparable
+    public interface IIdentification : IIdentified, ICustomFormattable, IComparable
     {
         IdentityTargetKind TargetKind  
             => IdentityTargetKind.Type;
@@ -41,7 +40,7 @@ namespace Z0
             => DenullifiedIdentity.GetHashCode();
 
         bool Same(object src) 
-            => src is IIdentifiedTarget t 
+            => src is IIdentification t 
             && string.Equals(DenullifiedIdentity, t.DenullifiedIdentity, 
                     StringComparison.InvariantCultureIgnoreCase);
     
@@ -55,8 +54,8 @@ namespace Z0
     /// <summary>
     /// Specifies what it means to be a reified identifier
     /// </summary>
-    public interface IIdentifiedTarget<T> :  IIdentifiedTarget, IEquatable<T>, IComparable<T>
-        where T : IIdentifiedTarget<T>, new()
+    public interface IIdentification<T> :  IIdentification, IEquatable<T>, IComparable<T>
+        where T : IIdentification<T>, new()
     {
         [MethodImpl(Inline)]
         bool IEquatable<T>.Equals(T src)

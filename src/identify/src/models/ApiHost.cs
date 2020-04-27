@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Identifies/describes a type that declares a formalized api set
     /// </summary>
-    public readonly struct ApiHost : IIdentifiedTarget<ApiHost>, IApiHost
+    public readonly struct ApiHost : IIdentification<ApiHost>, IApiHost
     {        
         /// <summary>
         /// Selects the host-attributed types from an assembly

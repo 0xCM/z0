@@ -27,7 +27,7 @@ namespace Z0.Asm
             => MemberCapture.Define(id, src, src.Method, bits.Source, bits.Parsed, term);
 
         [MethodImpl(Inline)]
-        static MemberCapture DefineMember(OpIdentity id, Delegate src, Addressable extracted, Addressable parsed, ExtractTermCode term)
+        static MemberCapture DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
             => MemberCapture.Define(id, src, src.Method, extracted, parsed, term);
 
         [MethodImpl(Inline)]

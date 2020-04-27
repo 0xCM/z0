@@ -5,16 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IByteSpanProvider
+    using static Seed;
+
+    /// <summary>
+    /// Characterizes an address-identified target
+    /// </summary>
+    public interface IAddressable : ICustomFormattable
     {
-        ReadOnlySpan<byte> Bytes {get;}
-    }
-
-    public interface IByteSpanProvider<T> : IByteSpanProvider
-        where T : IByteSpanProvider<T>
-    {
-
-    }
-
+        MemoryAddress Address {get;}
+    }            
 }

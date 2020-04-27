@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Text;
+    using System.Runtime.CompilerServices;
 
     using static Seed;
 
@@ -15,6 +16,7 @@ namespace Z0
         /// Appends a space to the source content
         /// </summary>
         /// <param name="content">The source content</param>
+        [MethodImpl(Inline)]
         static string rspace(object content)
             => $"{content} ";
 
@@ -31,5 +33,22 @@ namespace Z0
             bool header = true, FileWriteMode mode = FileWriteMode.Overwrite)
                 where R : IRecord
                     => Reports.save(records, dst, delimiter, header, mode);
+
+        public static void AppendDelimited<C,F>(this StringBuilder sb, C content, F field, char delimiter)
+            where C : ICustomFormattable
+            where F : unmanaged, Enum
+        {
+            var pad = Reports.width(field);
+            sb.Append(rspace(delimiter));            
+            sb.Append($"{content?.Format()}".PadRight(pad));
+        }
+
+        public static void AppendField<C,F>(this StringBuilder sb, C content, F field)
+            where C : ICustomFormattable
+            where F : unmanaged, Enum
+        {            
+            var pad = Reports.width(field);
+            sb.Append($"{content?.Format()}".PadRight(pad));
+        }
     }
 }

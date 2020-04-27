@@ -5,9 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
 
     using W = FixedWidth;  
-    using NC = NumericClass;  
 
     /// <summary>
     /// Clasifies concrete storage linear memory segments of total width w over segments of numeric width
@@ -276,98 +278,141 @@ namespace Z0
         Seg512x64f = W512 | Float64,         
 
         /// <summary>
-        /// Redeclaration of <see cref="W.W8"/>
+        /// Redeclaration
         /// </summary>
         W8 = W.W8,
 
         /// <summary>
-        /// Redeclaration of <see cref="W.W16"/>
+        /// Redeclaration
         /// </summary>
         W16 = W.W16,
 
         /// <summary>
-        /// Redeclaration of <see cref="W.W32"/>
+        /// Redeclaration
         /// </summary>
         W32 = W.W32,
 
         /// <summary>
-        /// Redeclaration of <see cref="W.W64"/>
+        /// Redeclaration
         /// </summary>
         W64 = W.W64,
 
         /// <summary>
-        /// Redeclaration of <see cref="W.W128"/>
+        /// Redeclaration
         /// </summary>
         W128 = W.W128,
 
         /// <summary>
-        /// Redeclaration of <see cref="W.W256"/>
+        /// Redeclaration
         /// </summary>
         W256 = W.W256,
 
         /// <summary>
-        /// Redeclaration of <see cref="W.W512"/>
+        /// Redeclaration
         /// </summary>
         W512 = W.W512,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Signed"/>
+        /// Classifies numeric 1-bit types that don't exist
         /// </summary>
-        Signed = NC.Signed,
+        W1 = 1,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Float"/>
+        /// Classifies the conceptually useful, but practically non-extant, 1-bit unsigned integer type
         /// </summary>
-        Floating = NC.Float,
+        Bit = W1,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Int8u"/>
+        /// Classifies signed integral types; if sign bit is not enabled and float bit 
+        /// is not enabled, the number is considered unsigned
         /// </summary>
-        Int8u = NC.Int8u,       
+        Signed = 2,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Int16u"/>
+        /// Classifies floating-point types
         /// </summary>
-        Int16u = NC.Int16u,       
+        Float = 4,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Int32u"/>
+        /// Classifies the 8-bit unsigned integer type
         /// </summary>
-        Int32u = NC.Int32u,
+        Int8u = W8,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Int64u"/>
+        /// Classifies the 16-bit unsigned integer type
         /// </summary>
-        Int64u = NC.Int64u,
+        Int16u = W16,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Int8i"/>
+        /// Classifies the 32-bit unsigned integer type
         /// </summary>
-        Int8i = NC.Int8i,       
+        Int32u = W32,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Int16i"/>
+        /// Classifies the 64-bit unsigned integer type
         /// </summary>
-        Int16i = NC.Int16i,       
+        Int64u = W64,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Int32i"/>
+        /// Tracks the last pure classifier
         /// </summary>
-        Int32i = NC.Int32i,       
+        LastClass = Int64u,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Int64i"/>
+        /// Classifies the 8-bit signed integer type
         /// </summary>
-        Int64i = NC.Int64i,       
+        Int8i = Signed | W8,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Float32"/>
+        /// Classifies the 16-bit signed integer type
         /// </summary>
-        Float32 = NC.Float32,
+        Int16i = Signed | W16,
 
         /// <summary>
-        /// Redeclaration of <see cref="NC.Float64"/>
+        /// Classifies the 32-bit signed integer type
         /// </summary>
-        Float64 = NC.Float64,
+        Int32i = Signed | W32,
+
+        /// <summary>
+        /// Classifies the 64-bit signed integer type
+        /// </summary>
+        Int64i = Signed | W64,
+
+        /// <summary>
+        /// Classifies the 32-bit floating-point type type
+        /// </summary>
+        Float32 = Float | W32,
+
+        /// <summary>
+        /// Classifies the 64-bit floating-point type type
+        /// </summary>
+        Float64 = Float | W64,
+
+        /// <summary>
+        /// Classifies all numeric type widths
+        /// </summary>
+        Widths = W8 | W16 | W32 | W64,
+
+        /// <summary>
+        /// Classifies signed integral types
+        /// </summary>
+        SignedInts = Int8i | Int16i | Int32i | Int64i,
+
+        /// <summary>
+        /// Classifies unsigned integral types
+        /// </summary>
+        UnsignedInts = Int8u | Int16u | Int32u | Int64u,
+
+        /// <summary>
+        /// Classifies floating-point types
+        /// </summary>
+        Floats = Float32 | Float64,
+
+        /// <summary>
+        /// Classifies integral types
+        /// </summary>
+        Integers = SignedInts | UnsignedInts,
+
     }
+
 }

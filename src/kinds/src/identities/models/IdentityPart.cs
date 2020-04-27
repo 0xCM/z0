@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static IdentityShare;
 
-    public readonly struct IdentityPart : IIdentifiedTarget<IdentityPart>
+    public readonly struct IdentityPart : IIdentification<IdentityPart>
     {        
         public readonly byte PartIndex;
 

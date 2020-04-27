@@ -33,7 +33,7 @@ namespace Z0
     {
         public const int FieldCount = 6;
 
-        public static R Empty => new R(0, MemoryAddress.Zero, 0, OpUri.Empty, text.blank, Addressable.Empty);
+        public static R Empty => new R(0, MemoryAddress.Zero, 0, OpUri.Empty, text.blank, LocatedCode.Empty);
 
         public static R Parse(string src)
         {
@@ -48,10 +48,10 @@ namespace Z0
             var uri = OpUri.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
             var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.ParseByte).ToArray();
-            var extract = Addressable.Define(data);
+            var extract = LocatedCode.Define(data);
             return new R(seq,address,len,uri,sig,extract);
         }
-        public ExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, Addressable Data)
+        public ExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, LocatedCode Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -77,7 +77,7 @@ namespace Z0
         public readonly string OpSig;
 
         [ReportField(F.Data)]
-        public readonly Addressable Data;
+        public readonly LocatedCode Data;
 
         public string DelimitedText(char sep)
         {
@@ -87,7 +87,7 @@ namespace Z0
             dst.DelimitField(F.Length, Length, sep);
             dst.DelimitField(F.Uri, Uri, sep);
             dst.DelimitField(F.OpSig, OpSig, sep);
-            dst.DelimitField(F.Data, HexFormat.data(Data.Bytes), sep);
+            dst.DelimitField(F.Data, Data, sep);
             return dst.Format();            
         }
 

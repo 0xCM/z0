@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct RecordFormatter<F,R> : IFormattable<RecordFormatter<F,R>>
         where F : unmanaged, Enum
-        where R : IRecord<F, R>
+        where R : IRecord<F,R>
     {        
         readonly StringBuilder Builder;
 

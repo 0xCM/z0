@@ -95,6 +95,8 @@ namespace Z0
 
         protected IAppPaths Paths => Context.AppPaths;
 
+        protected ITestCaseIdentity CaseIdentity => Context;
+
         protected BenchmarkRecord Benchmark(long opcount, Duration time, [Caller] string label = null)
             => Context.Benchmark(opcount, time, label);
         
@@ -138,11 +140,14 @@ namespace Z0
         static int CasePadding
             => Reports.width(TestCaseField.Case);
 
+        static string TracePrefix(object title, string caller)
+            => string.Concat(ExecutingApp.Format(), Chars.FSlash, caller, Chars.LBrace, title, Chars.RBrace).PadRight(CasePadding);
+
         static IAppMsg TraceMsg(object title, object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
-            => AppMsg.Colorize(string.Concat(string.Concat(caller, Chars.Space, title, Chars.Colon).PadRight(CasePadding), "| ", msg), color);
+            => AppMsg.Colorize(string.Concat(TracePrefix(title,caller), Chars.Pipe, Chars.Space, msg), color);
 
         static IAppMsg TraceMsg(object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
-            => AppMsg.Colorize(String.Concat(String.Concat(caller).PadRight(CasePadding), "| ", msg), color);
+            => TraceMsg(string.Empty, msg, caller, color);
 
         void trace(IAppMsg msg)
             => NotifyConsole(msg);
@@ -156,7 +161,7 @@ namespace Z0
         protected void trace(string title, object msg, AppMsgColor color, [Caller] string caller = null)
             => trace(TraceMsg(title, msg, caller, color));
 
-        protected void trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null, [Caller] string caller = null)
+        protected void trace(string title, string msg, [Caller] string caller = null)
             => trace(TraceMsg(title, msg, caller));        
 
         public void Deposit(TestCaseRecord result)

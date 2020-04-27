@@ -18,8 +18,8 @@ namespace Z0.Asm
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        Option<AsmInstructionList> DecodeInstructions(in Addressable src);  
+        Option<AsmInstructionList> DecodeInstructions(in LocatedCode src);  
 
-        void DecodeInstructions(in Addressable src, Func<Instruction,bool> f);                      
+        void DecodeInstructions(in LocatedCode src, Func<Instruction,bool> f);                      
     }
 }

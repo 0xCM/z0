@@ -11,13 +11,6 @@ namespace Z0
 
     partial class XTend
     {
-        /// <summary>
-        /// Determines the width of the represented kind in bits
-        /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline)]
-        public static int? Width(this NumericClass k)
-            => NumericClasses.width(k);
 
         /// <summary>
         /// Produces a canonical text representation of the source kind

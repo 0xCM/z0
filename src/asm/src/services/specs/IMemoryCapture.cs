@@ -6,12 +6,12 @@ namespace Z0.Asm
 {
     public interface IMemoryCapture : IService
     {
-        Option<Addressable> Extract(MemoryAddress src);        
+        Option<LocatedCode> Extract(MemoryAddress src);        
 
         Option<ApiMemoryCapture> Capture(MemoryAddress src);        
 
-        Option<Addressable> Parse(Addressable src);
+        Option<LocatedCode> Parse(LocatedCode src);
 
-        Option<AsmInstructionList> Decode(Addressable src);                    
+        Option<AsmInstructionList> Decode(LocatedCode src);                    
     }
 }

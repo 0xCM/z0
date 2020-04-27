@@ -37,7 +37,7 @@ namespace Z0
         IApiHost FindHost(in ApiHostUri uri)
             => ApiSet.FindHost(uri).Require();
 
-        IEnumerable<ApiMember> FindHostedMembers(in ApiHostUri host)
+        IEnumerable<Member> FindHostedMembers(in ApiHostUri host)
             => HostedMembers(FindHost(host));
 
         /// <summary>

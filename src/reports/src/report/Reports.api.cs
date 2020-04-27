@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
+    using System.Text;
 
     using static Seed;
 

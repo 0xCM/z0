@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Reflection;
@@ -10,29 +10,13 @@ namespace Z0
     using System.Linq;
     using System.IO;
 
-    using Z0.Asm;
 
     using static Seed;
-    using static Kinds;
     using static Memories;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using K = Kinds;
 
-    public abstract class t_dynamic<U> : UnitTest<U,CheckVectors,ICheckVectors>
-        where U : t_dynamic<U>,new()
-    {
-        protected t_dynamic()
-        {
-            AsmCheck = AsmTester.Create(AsmContext.Create(AppSettings.Empty, Queue, Api));
-        }
-
-        protected readonly IAsmTester AsmCheck;
-
-        protected StreamWriter AsmCaseWriter([Caller] string caller = null)
-            => CaseFileWriter(FileExtensions.Asm,caller);
-    }
-
-    public class t_embed_imm8 : t_dynamic<t_embed_imm8>
+    public class t_embed_imm8 : t_asm<t_embed_imm8>
     {    
         protected override bool TraceDetailEnabled
             => false;
@@ -61,6 +45,14 @@ namespace Z0
             using var dst = AsmCaseWriter();
             iter(VImmTestCases.V256UnaryShifts, m => check_unary_shift(m, w, dst));
             check_vbsll_imm(w,dst);
+        }
+
+        public void check_blend_imm()
+        {
+            using var dst = AsmCaseWriter();
+
+            check_blend_imm(dst);            
+
         }
 
         byte[] Immediates => new byte[]{1,2,3,4};
@@ -101,9 +93,9 @@ namespace Z0
 
             var dynamics = MemberDynamic.Service;
             var name = nameof(gvec.vbsll);
-            var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(v128).Single();
-            var id = Identity.identify(src);
-            var f = Dynop.EmbedVUnaryOpImm(vk128<uint>(), id, src, imm8);
+            var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(K.v128).Single();
+            var id = Z0.Identity.identify(src);
+            var f = Dynop.EmbedVUnaryOpImm(K.vk128<uint>(), id, src, imm8);
             var method = dynamics.Method(dynamics.Handle(f.Target));
             Claim.eq(method.Name, name);
 
@@ -116,9 +108,9 @@ namespace Z0
 
             var dynamics = MemberDynamic.Service;
             var name = nameof(dvec.vbsll);
-            var vKind = vk256<uint>();
+            var vKind = K.vk256<uint>();
             var src = typeof(dvec).DeclaredMethods().WithName(name).OfKind(vKind).Single();
-            var id = Identity.identify(src);
+            var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
             var method = dynamics.Method(dynamics.Handle(f.Target));
             Claim.eq(method.Name, name);
@@ -154,6 +146,29 @@ namespace Z0
                 var capture = AsmCheck.Capture(id, method).Require();
                 AsmCheck.WriteAsm(capture,dst);
             }            
+        }
+
+        void check_blend_imm(StreamWriter dst)
+        {
+            var w = w256;
+            var name = nameof(dvec.vblend8x16);
+            var imm = (byte)Blend8x16.LRLRLRLR;
+            var vKind = K.vk256<ushort>();
+            var src = typeof(dvec).DeclaredMethods().WithName(name).OfKind(vKind).WithParameterType<byte>().Single();
+
+            var injector = AsmCheck.Dynamic.BinaryInjector<ushort>(w);
+            var x = Random.CpuVector<ushort>(w);
+            var y = Random.CpuVector<ushort>(w);            
+            var f = injector.EmbedImmediate(src,imm);
+            var v1 = f.DynamicOp.Invoke(x,y);
+            var captured = AsmCheck.Capture(f.Id, f).Require();
+            var asm = AsmCheck.Decoder.Decode(captured).Require();    
+            AsmCheck.WriteAsm(asm,dst);            
+            
+            var g = Dynamic.EmitFixedBinary<Fixed256>(AsmCheck[Main], asm.Code);
+            
+            var v2 = g(x,y).ToVector<ushort>();
+            Claim.veq(v1,v2);
         }
 
         void check_cell_type(Type tVector, W128 w)

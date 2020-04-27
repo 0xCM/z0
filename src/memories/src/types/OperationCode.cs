@@ -8,47 +8,54 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-
+    
     /// <summary>
     /// Assocates an operation api identifier with executable code
     /// </summary>
-    public readonly struct IdentifiedCode : IByteSpanProvider<IdentifiedCode>
+    public readonly struct OperationCode : IEncoded<OperationCode,BinaryCode>, IOperational
     {
-        public readonly BinaryCode BinaryCode;
+        public OpIdentity Id {get;}
 
-        public readonly OpIdentity Id;
+        public BinaryCode Content {get;}
 
-        public static IdentifiedCode Empty => new IdentifiedCode(OpIdentity.Empty, BinaryCode.Empty);
+        public static OperationCode Empty => new OperationCode(OpIdentity.Empty, BinaryCode.Empty);
         
         /// <summary>
         /// Defines a block of encoded data based at a specifed address
         /// </summary>
         /// <param name="data">The source data</param>
         [MethodImpl(Inline)]
-        public static IdentifiedCode Define(OpIdentity id, byte[] data)
-            => new IdentifiedCode(id,data);        
+        public static OperationCode Define(OpIdentity id, byte[] data)
+            => new OperationCode(id,data);        
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(IdentifiedCode src)
-            => src.BinaryCode;
+        public static implicit operator BinaryCode(OperationCode src)
+            => src.Content;
 
         [MethodImpl(Inline)]
-        public IdentifiedCode(OpIdentity id, in BinaryCode data)
+        public OperationCode(OpIdentity id, in BinaryCode data)
         {
             this.Id = id;
-            this.BinaryCode = data;
+            this.Content = data;
         }
 
         public ReadOnlySpan<byte> Bytes 
         {
             [MethodImpl(Inline)]
-            get => BinaryCode.Bytes;
+            get => Content.Bytes;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => BinaryCode.IsEmpty && Id.IsEmpty;
+            get => Content.IsEmpty && Id.IsEmpty;
         }
+
+        public string Format()
+            => Content.Format();         
+
+        
+        public bool Equals(OperationCode src)
+            => Content.Equals(src.Content);
     }
 }

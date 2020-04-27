@@ -5,13 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Runtime.CompilerServices;
  
-    partial class XTend
-    {    
-        public static string Format(this BinaryCode src)
-            => HexFormat.data(src.Bytes);
+    using static Seed;
+
+    public interface IMemoryRange<F> : IEquatable<F>, IComparable<F>, IFormattable<F>
+        where F : unmanaged, IMemoryRange<F>
+    {
+
     }
+
 }

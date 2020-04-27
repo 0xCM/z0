@@ -17,39 +17,55 @@ namespace Z0
     {
         public readonly string Id;
 
+        public readonly PartId Owner;
+
         public readonly int Length;
 
-        public readonly ulong Location;
+        public readonly ulong Address;
 
-        public bool IsEmpty => Location == 0;
+        public ReadOnlySpan<byte> Data => Bytes;
 
+        public ulong RuntimeAddress => ptr(Bytes);
+
+        public bool IsEmpty => Address == 0;
+
+        public string Uri 
+            => string.Concat("res", Chars.Colon, Chars.FSlash, Chars.FSlash, Owner.Format(), Chars.FSlash, Id);
+            
         /// <summary>
         /// Describes a data resource
         /// </summary>
         /// <param name="id">The resource id</param>
         /// <param name="src">The resource data</param>
         [MethodImpl(Inline)]
-        public static BinaryResource Define(string id, ReadOnlySpan<byte> src)
-            => new BinaryResource(id, src.Length, location(src));
+        public static BinaryResource Define(PartId owner, string id, ReadOnlySpan<byte> src)
+            => new BinaryResource(owner, id, src.Length, location(src));
 
         [MethodImpl(Inline)]
-        public static BinaryResource Define(string id, int Length, ulong location)
-            => new BinaryResource(id,Length,location);
+        public static BinaryResource Define(PartId owner, string id, int Length, ulong address)
+            => new BinaryResource(owner,id,Length,address);
 
         [MethodImpl(Inline)]
-        internal BinaryResource(string Id, int Length, ulong Location)
+        internal BinaryResource(PartId part, string Id, int Length, ulong address)
         {
+            this.Owner = part;
             this.Id = Id;
             this.Length = Length;
-            this.Location = Location;
+            this.Address = address;
         }
          
         [MethodImpl(Inline)]
-        public unsafe ReadOnlySpan<byte> GetBytes()
-            => new ReadOnlySpan<byte>((void*)Location, Length);       
+        static unsafe ulong ptr(ReadOnlySpan<byte> src)
+            => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
+
+        unsafe ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => new ReadOnlySpan<byte>((void*)Address, Length);       
+        }
     
         [MethodImpl(Inline)]
-        public static ref readonly T head<T>(ReadOnlySpan<T> src)
+        static ref readonly T head<T>(ReadOnlySpan<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
 
         [MethodImpl(Inline)]

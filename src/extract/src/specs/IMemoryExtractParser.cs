@@ -8,6 +8,6 @@ namespace Z0
     
     public interface IMemoryExtractParser : IService
     {
-        Option<Addressable> Parse(Addressable src);        
+        Option<LocatedCode> Parse(LocatedCode src);        
     }
 }

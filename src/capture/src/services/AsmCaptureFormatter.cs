@@ -47,7 +47,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         AsmCaptureFormatter(AsmFormatConfig config)
         {
-            Config = config;
+            Config = config ?? AsmFormatConfig.New;
             MasmFormatter = new Iced.MasmFormatter(DefaultOptions);                           
         }
 

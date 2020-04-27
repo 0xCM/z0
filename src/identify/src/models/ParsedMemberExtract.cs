@@ -14,11 +14,11 @@ namespace Z0
     public readonly struct ParsedMemberExtract
     {
         [MethodImpl(Inline)]
-        public static ParsedMemberExtract Define(MemberExtract src, int seq, ExtractTermCode term, Addressable parsed)
+        public static ParsedMemberExtract Define(MemberExtract src, int seq, ExtractTermCode term, LocatedCode parsed)
             => new ParsedMemberExtract(src, seq, term,parsed);
 
         [MethodImpl(Inline)]
-        ParsedMemberExtract(MemberExtract src, int seq, ExtractTermCode term, Addressable parsed)
+        ParsedMemberExtract(MemberExtract src, int seq, ExtractTermCode term, LocatedCode parsed)
         {
             this.Source = src;
             this.SourceSequence = seq;
@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The parsed extract
         /// </summary>
-        public readonly Addressable ParsedContent;   
+        public readonly LocatedCode ParsedContent;   
 
         /// <summary>
         /// The host-relative operation identifier
@@ -61,8 +61,8 @@ namespace Z0
         /// <summary>
         /// The extract data
         /// </summary>
-        public Addressable SourceContent 
-            => Source.EncodedData;
+        public LocatedCode SourceContent 
+            => Source.Content;
 
         /// <summary>
         /// The operation memory address

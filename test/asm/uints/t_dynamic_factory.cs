@@ -2,23 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Reflection;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.Reflection.Emit;
-    using System.Linq;
 
-    using static Kinds;
+    using static Seed;
 
-
-    using T = t_dynamic_op_factories;
+    using T = t_dynamic_factory;
     using K = Kinds;
 
-    public class t_dynamic_op_factories : t_dynamic<t_dynamic_op_factories>
-    {    
+    public class t_dynamic_factory : t_asm<t_dynamic_factory>
+    {
         public static uint Suprise() 
             => 17;
 
@@ -45,17 +40,8 @@ namespace Z0
 
         IDynamicOps Dynamic => Context.Dynamic();
 
-        public void create_dynamic_ops()
-        {
-            using var dst = AsmCaseWriter();
-            create_emitter(dst);
-            create_unary_op(dst);
-            create_binary_op(dst);
-            create_ternary_op(dst);
-
-        }
         
-        void create_emitter(StreamWriter dst)
+        public void create_emitter()
         {
             var n = n0;
             var t = z32;
@@ -67,7 +53,7 @@ namespace Z0
             Claim.eq(f(), Suprise());        
         }
 
-        void create_unary_op(StreamWriter dst)
+        public void create_unary_op()
         {
             var n = n1;
             var t = z32;
@@ -79,7 +65,7 @@ namespace Z0
             Claim.eq(f(3), Square(3));        
         }
 
-        void create_binary_op(StreamWriter dst)
+        public void create_binary_op()
         {
             var n = n2;
             var t = z32;
@@ -91,7 +77,7 @@ namespace Z0
             Claim.eq(f(10,5), Add2(10,5));        
         }
 
-        void create_ternary_op(StreamWriter dst)
+        public void create_ternary_op()
         {
             var n = n3;
             var t = z32;
@@ -118,7 +104,6 @@ namespace Z0
             }
         }
             
-
         public unsafe void vbsll_128x32u()
         {
             const byte imm8 = 9;
@@ -134,5 +119,6 @@ namespace Z0
                 Claim.veq(z,y);
             }
         }
+
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    public abstract class PathComponent<T> : IIdentifiedTarget<T>
+    public abstract class PathComponent<T> : IIdentification<T>
         where T : PathComponent<T>, new()
     {
         public const char PathSeparator = '/';

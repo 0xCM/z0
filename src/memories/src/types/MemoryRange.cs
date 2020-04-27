@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines an inclusive address range
     /// </summary>
-    public readonly struct MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>, IFormattable<MemoryRange>
+    public readonly struct MemoryRange : IMemoryRange<MemoryRange>
     {
         public static MemoryRange Empty => default;
         
