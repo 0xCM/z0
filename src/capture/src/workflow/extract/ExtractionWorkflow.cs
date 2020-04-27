@@ -27,14 +27,17 @@ namespace Z0.Asm
             Sink = context;
             Extractor = context.HostExtractor();
             MemberLocator = context.MemberLocator();            
-            Decoder = context.AsmFunctionDecoder();
-            Formatter = context.AsmFormatter(context.AsmFormat.WithSectionDelimiter());            
+            FormatConfig = context.AsmFormat.WithSectionDelimiter();
+            Decoder =  AsmFunctionDecoder.Create(FormatConfig);
+            Formatter = AsmServices.AsmFormatter(FormatConfig);
             CodeArchive = CaptureArchive.Create(ArchiveRoot);
             CodeArchive.Clear();
             Broker = ConnectBroker(this);          
         }
 
         readonly IExtractionBroker Broker;
+
+        readonly AsmFormatConfig FormatConfig;
 
         readonly IHostCodeExtractor Extractor;
 
@@ -173,7 +176,7 @@ namespace Z0.Asm
                 if(members.Length !=0)
                 {
                     var report = CreateReport(host,members);
-                    var paths = CodeArchive.HostArchive(host.UriPath);                
+                    var paths = CodeArchive.CaptureArchive(host.UriPath);                
                     SaveReport(report, paths.ExtractPath).OnSome(AnalyzeExtracts);
                 }
             }

@@ -15,13 +15,13 @@ namespace Z0.Asm
         readonly IAsmInstructionDecoder Decoder;
 
         [MethodImpl(Inline)]
-        public static AsmFunctionDecoder Create(IContext context, AsmFormatConfig format)
-            => new AsmFunctionDecoder(context, format);
+        public static AsmFunctionDecoder Create(in AsmFormatConfig format)
+            => new AsmFunctionDecoder(format);
         
         [MethodImpl(Inline)]
-        AsmFunctionDecoder(IContext context, AsmFormatConfig format)
+        AsmFunctionDecoder(in AsmFormatConfig format)
         {
-            Decoder = context.AsmInstructionDecoder(format);
+            Decoder = AsmInstructionDecoder.Create(format);
         }
 
         static IAsmFunctionBuilder Builder => AsmFunctionBuilder.Default;

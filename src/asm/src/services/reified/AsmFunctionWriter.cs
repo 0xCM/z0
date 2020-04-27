@@ -19,11 +19,15 @@ namespace Z0.Asm
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter Create(IContext context, FilePath dst, IAsmFormatter formatter)
-            => new AsmFunctionWriter(context, dst, formatter);
+        public static AsmWriterFactory Factory()
+            => (dst,formatter) => new AsmFunctionWriter(dst,formatter);
 
         [MethodImpl(Inline)]
-        AsmFunctionWriter(IContext context, FilePath path, IAsmFormatter formatter)
+        public static IAsmFunctionWriter Create(FilePath dst, IAsmFormatter formatter)
+            => new AsmFunctionWriter(dst, formatter);
+
+        [MethodImpl(Inline)]
+        AsmFunctionWriter(FilePath path, IAsmFormatter formatter)
         {
             this.TargetPath = path;
             this.Formatter = formatter;

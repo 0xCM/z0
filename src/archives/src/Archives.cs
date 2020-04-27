@@ -18,7 +18,7 @@ namespace Z0
             var members = locator.Hosted(api.FindHost(host).Require());
             var apiIndex = ApiIndex.Create(members);
             var archive =  CaptureArchive.Create(root);
-            var paths = archive.HostArchive(host);
+            var paths = archive.CaptureArchive(host);
             var reader = UriBitsReader.Service;
             var code = reader.Read(paths.HexPath);
             var opIndex = code.ToOpIndex(); 

@@ -11,15 +11,14 @@ namespace Z0
 
     using Z0.Asm;
 
-    public static class ServiceFactory    
+    public class AsmServices
     {
-        /// <summary>
-        /// Instantiates a contextual asm formatter service
-        /// </summary>
-        /// <param name="context">The source context</param>
+        public static AsmWriterFactory AsmWriterFactory
+            => AsmFunctionWriter.Factory();
+
         [MethodImpl(Inline)]
-        public static IAsmFormatter AsmFormatter(this IContext context, AsmFormatConfig config)
-            => Asm.AsmFormatter.Create(context,config);
+        public static IAsmFormatter AsmFormatter(AsmFormatConfig config = null)
+            => Asm.AsmFormatter.Create(config ?? AsmFormatConfig.New);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer with a customized format configuration
@@ -28,8 +27,8 @@ namespace Z0
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter AsmWriter(this IContext context, FilePath dst, IAsmFormatter formatter)
-            => AsmFunctionWriter.Create(context, dst, formatter);
+        public static IAsmFunctionWriter AsmWriter(FilePath dst, IAsmFormatter formatter)
+            => AsmFunctionWriter.Create(dst, formatter);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer with a customized format configuration
@@ -38,12 +37,7 @@ namespace Z0
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter AsmWriter(this IContext context, FilePath dst, AsmFormatConfig config)
-            => AsmFunctionWriter.Create(context, dst, context.AsmFormatter(config));
-
-        [MethodImpl(Inline)]
-        public static AsmWriterFactory AsmWriterFactory(this IContext context)
-            => (dst,formatter) => context.AsmWriter(dst,formatter);
-
+        public static IAsmFunctionWriter AsmWriter(FilePath dst, AsmFormatConfig config = null)
+            => AsmFunctionWriter.Create(dst, AsmServices.AsmFormatter(config));
     }
 }

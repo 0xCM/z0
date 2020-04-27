@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    readonly struct UriBitsReader : IUriBitsReader
+    public readonly struct UriBitsReader : IUriBitsReader
     {
         public static IUriBitsReader Service => default(UriBitsReader);
         

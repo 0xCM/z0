@@ -33,7 +33,6 @@ namespace Z0.Asm
         public static IHostCodeExtractor HostExtractor(this IContext context, int? bufferlen = null)
             => HostCodeExtractor.Create(context, bufferlen ?? Pow2.T14);
 
-
         [MethodImpl(Inline)]
         public static IMemoryExtractParser MemoryExtractParser(this IContext context, byte[] buffer)
             => Z0.MemoryExtractParser.Create(context, buffer);
@@ -45,16 +44,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static ICaptureService Capture(this IContext context)
             => CaptureService.Create(DivinationContext.Create(context, context.MultiDiviner()));
-
-        /// <summary>
-        /// Creates a flow over an instruction source
-        /// </summary>
-        /// <param name="context">The context within which the flow will be created</param>
-        /// <param name="source">The instruction source</param>
-        /// <param name="triggers">The triggers that fire when instructions satisfy criterea of interest</param>
-        [MethodImpl(Inline)]
-        public static IAsmInstructionFlow InstructionFlow(this IContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
-            => AsmInstructionFlow.Create(context, source, triggers);
 
         public static CaptureExchange CaptureExchange(this IAsmContext context)
         {
@@ -83,17 +72,13 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static IAsmFunctionDecoder AsmFunctionDecoder(this IContext context, AsmFormatConfig format = null)
-            => AsmDecoder.function(context, format);
-
-        [MethodImpl(Inline)]
-        public static IAsmInstructionDecoder AsmInstructionDecoder(this IContext context, AsmFormatConfig format)
-            => AsmDecoder.instruction(context,format);
+            => AsmDecoder.FunctionDecoder(format);
 
         public static IAsmInstructionSource ToInstructionSource(this IHostBitsArchive archive, IContext context, AsmFormatConfig format = null)
         {
             IEnumerable<AsmInstructionList> Enumerate()
             {            
-                var decoder = AsmDecoder.instruction(context, format ?? AsmFormatConfig.New);
+                var decoder = AsmDecoder.InstructionDecoder(format ?? AsmFormatConfig.New);
                 foreach(var codeblock in archive.Read())
                 {                    
                     var decoded = decoder.DecodeInstructions(codeblock);
@@ -103,6 +88,6 @@ namespace Z0.Asm
             }
         
             return AsmInstructionSource.From(Enumerate);
-        }
+        }        
     }
 }

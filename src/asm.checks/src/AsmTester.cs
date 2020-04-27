@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Linq;
     
     using static Seed;
     using static BufferSeqId;
@@ -21,11 +22,20 @@ namespace Z0.Asm
 
         ICaptureService ICaptureServiceProxy.CaptureService => Context.CaptureService;        
 
-        ICaptureArchive CaptureArchive => Context.RootCaptureArchive;        
+        ICaptureArchive CaptureArchive(PartId part)
+            => Z0.CaptureArchive.Create(
+                (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
+                FolderName.Define("capture"));
 
-        FilePath AsmFilePath<T>() => CaptureArchive.AsmPath<T>();
+        FilePath AsmFilePath<T>(PartId part) => CaptureArchive(part).AsmPath<T>();
 
-        FilePath HexFilePath<T>() => CaptureArchive.HexPath<T>();
+        FilePath HexFilePath<T>(PartId part) => CaptureArchive(part).HexPath<T>();
+
+        IHostBitsArchive HostBits(PartId part, ApiHostUri host, FolderPath root = null)
+            => HostBitsArchive.Create(part, host, root);
+
+        OperationCode ReadHostAsm(PartId part, ApiHostUri host, OpIdentity id)
+            => HostBits(part,host).Read(id).Single().ToApiCode();        
 
         void WriteAsm(MemberCapture capture, StreamWriter dst)
         {

@@ -55,10 +55,22 @@ namespace Z0
                 ? Recurse(ext) 
                 : from f in Directory.GetFiles(FullPath, $"*.{ext}") 
                   select FilePath.Define(f);
-        
+
+
         IEnumerable<FilePath> Recurse(FileExtension ext)        
             => from d in (new string[]{FullPath}).Union(Directory.EnumerateDirectories(FullPath))
                from f in Directory.GetFiles(d,$"*.{ext}")
+                  select FilePath.Define(f);
+
+        public IEnumerable<FilePath> Files(PartId owner, FileExtension ext, bool recursive = false)
+            => recursive 
+                ? Recurse(owner, ext) 
+                : from f in Directory.GetFiles(FullPath, $"{owner.Format()}*.{ext}") 
+                  select FilePath.Define(f);
+
+        IEnumerable<FilePath> Recurse(PartId owner, FileExtension ext)        
+            => from d in (new string[]{FullPath}).Union(Directory.EnumerateDirectories(FullPath))
+               from f in Directory.GetFiles(d,$"{owner.Format()}*.{ext}")
                   select FilePath.Define(f);
 
         /// <summary>

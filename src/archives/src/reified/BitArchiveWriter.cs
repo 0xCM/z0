@@ -11,14 +11,14 @@ namespace Z0
 
     using static Seed;
 
-    readonly struct BitArchiveWriter : IBitArchiveWriter
+    public readonly struct BitArchiveWriter : IBitArchiveWriter
     {        
         readonly StreamWriter StreamOut;
 
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IBitArchiveWriter Create(IContext context, FilePath dst)
+        public static IBitArchiveWriter Create(FilePath dst)
             => new BitArchiveWriter(dst);
 
         [MethodImpl(Inline)]

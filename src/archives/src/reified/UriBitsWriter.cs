@@ -13,6 +13,10 @@ namespace Z0
 
     public readonly struct UriBitsWriter : IUriBitsWriter
     {        
+        [MethodImpl(Inline)]
+        public static UriBitsWriterFactory Factory(IContext context)
+            => dst => Create(dst);
+
         public static UriBits[] Save(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
         {
             using var writer = new UriBitsWriter(dst);
@@ -26,7 +30,7 @@ namespace Z0
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IUriBitsWriter Create(IContext context, FilePath dst)
+        public static IUriBitsWriter Create(FilePath dst)
             => new UriBitsWriter(dst);
 
         [MethodImpl(Inline)]

@@ -63,25 +63,25 @@ namespace Z0.Asm
 
         void Save(ApiHostUri host, ParsedMemberExtract[] src)
         {
-            var hostArchive = CodeArchive.HostArchive(host);
+            var hostArchive = CodeArchive.CaptureArchive(host);
             var report = MemberParseReport.Create(host,src);
             report.Save(hostArchive.ParsedPath);
 
-            using var writer = Context.UriBitsWriter(hostArchive.HexPath);
+            using var writer = UriBitsWriter.Create(hostArchive.HexPath);
             var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Content));
             writer.Write(data);
         }
 
         void Save(ApiHostUri host, MemberExtract[] extracts)
         {
-            var hostArchive = CodeArchive.HostArchive(host);
+            var hostArchive = CodeArchive.CaptureArchive(host);
             var report = ExtractReport.Create(host, extracts);            
             Extracted(host, extracts, report.Save(hostArchive.ExtractPath));
         }
 
         void Save(ApiHostUri host, AsmFunction[] decoded)
         {
-            var hostArchive = CodeArchive.HostArchive(host);
+            var hostArchive = CodeArchive.CaptureArchive(host);
             using var writer = Context.Writer(hostArchive.AsmPath);
             for(var i=0 ;i<decoded.Length; i++)          
                 writer.Write(decoded[i]);

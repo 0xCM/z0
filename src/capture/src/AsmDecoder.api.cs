@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Seed;
 
-    using Svc = Z0.Asm;
-
     public static class AsmDecoder
     {
         /// <summary>
@@ -19,8 +17,8 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionDecoder function(IContext context, AsmFormatConfig format = null)
-            => Svc.AsmFunctionDecoder.Create(context, format ?? AsmFormatConfig.New);
+        public static IAsmFunctionDecoder FunctionDecoder(AsmFormatConfig format = null)
+            => AsmFunctionDecoder.Create(format ?? AsmFormatConfig.New);
 
         /// <summary>
         /// Creates an instruction decoder
@@ -28,7 +26,7 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
         [MethodImpl(Inline)]
-        public static IAsmInstructionDecoder instruction(IContext context, AsmFormatConfig format = null)
-            => Svc.AsmInstructionDecoder.Create(context,format ?? AsmFormatConfig.New);
+        public static IAsmInstructionDecoder InstructionDecoder(AsmFormatConfig format = null)
+            => AsmInstructionDecoder.Create(format ?? AsmFormatConfig.New);
     }
 }

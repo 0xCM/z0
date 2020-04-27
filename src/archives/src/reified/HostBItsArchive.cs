@@ -14,54 +14,58 @@ namespace Z0
 
     public readonly struct HostBitsArchive : IHostBitsArchive
     {
-        public FolderPath RootFolder {get;}
+        public PartId Part {get;}
 
-        readonly IBitArchiveReader ArchiveReader;
-        
-        public PartId DefiningPart {get;}
+        public ApiHostUri Host {get;}
 
-        public ApiHostUri ApiHost {get;}
-        
-        [MethodImpl(Inline)]
-        public static IHostBitsArchive Create(IContext context, PartId catalog, FolderPath root)
-            => new HostBitsArchive(context, catalog, root);
+        public FolderPath ArchiveRoot {get;}            
 
         [MethodImpl(Inline)]
-        public static IHostBitsArchive Create(IContext context, PartId catalog, ApiHostUri host, FolderPath root)
-            => new HostBitsArchive(context, catalog, host, root);
+        public static IHostBitsArchive Create(PartId part, FolderPath root = null)
+            => new HostBitsArchive(part, root);
 
         [MethodImpl(Inline)]
-        HostBitsArchive(IContext context, PartId catalog, ApiHostUri host, FolderPath root)
+        public static IHostBitsArchive Create(PartId part, ApiHostUri host, FolderPath root = null)
+            => new HostBitsArchive(part, host, root);
+
+        [MethodImpl(Inline)]
+        HostBitsArchive(PartId part, ApiHostUri host, FolderPath root)
         {
-            this.DefiningPart = catalog;
-            this.ApiHost = host;
-            this.RootFolder = root;
-            this.ArchiveReader = context.BitArchiveReader();
+            this.Part = part;
+            this.Host = host;
+            this.ArchiveRoot = root ?? CaptureArchive.Default.RootDir;
         }
 
-        HostBitsArchive(IContext context, PartId catalog, FolderPath root)
+        HostBitsArchive(PartId catalog, FolderPath root)
         {
-            this.DefiningPart = catalog;
-            this.ApiHost = ApiHostUri.Empty;
-            this.RootFolder = root;
-            this.ArchiveReader = context.BitArchiveReader();
+            this.Part = catalog;
+            this.Host = ApiHostUri.Empty;
+            this.ArchiveRoot = root ?? CaptureArchive.Default.RootDir;
         }
 
-        /// <summary>
-        /// Enumerates the files in the archive
-        /// </summary>
-        public IEnumerable<FilePath> Files 
-            => RootFolder.Files(FileExtensions.Hex, true);
-                    
+        public IEnumerable<FilePath> Files() 
+            => ArchiveRoot.Files(FileExtensions.Hex, true);
+
+        public IEnumerable<FilePath> Files(PartId owner) 
+            => ArchiveRoot.Files(owner, FileExtensions.Hex, true);
+
         public IEnumerable<OperationBits> Read(string name)
             => Read(fn => fn.NoExtension == name);
         
         public IEnumerable<OperationBits> Read()
             => Read(_ => true);
 
+        public IEnumerable<OperationBits> Read(PartId owner)
+        {
+            foreach(var file in Files(owner))
+            foreach(var item in Read(file))
+                if(item.IsNonEmpty)
+                    yield return item;
+        }
+
         public IEnumerable<OperationBits> Read(Func<FileName,bool> predicate)
         {
-            foreach(var file in Files.Where(f => predicate(f.FileName)))
+            foreach(var file in Files().Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
             {
                 if(item.IsNonEmpty)
@@ -76,13 +80,13 @@ namespace Z0
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
         public IEnumerable<OperationBits> Read(FilePath src)
-            => ArchiveReader.Read(src);
+            => BitArchiveReader.Service.Read(src);
 
         /// <summary>
         /// Reads a moniker-identified, default-formatted hex-line file
         /// </summary>
         /// <param name="id">The identifying moniker</param>
         public IEnumerable<OperationBits> Read(OpIdentity id)
-            => Read(RootFolder + FileName.Define(id, EncodedHexLine.FileExt));        
+            => Read(ArchiveRoot + FileName.Define(id, EncodedHexLine.FileExt));        
     }
 }

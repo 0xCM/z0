@@ -6,21 +6,38 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Seed;
 
     public class t_asm_pipe : t_asm<t_asm_pipe>
     {
-        static int activations;
+        ulong[] Activations;
+
+        public t_asm_pipe()
+        {
+            Activations = new ulong[(int)Mnemonic.LAST + 1];
+        }
         
-        static void OnMnemonic(Instruction i)
+        void OnVinserti128(Instruction i)
         {            
-            activations++;
+            Activations[(int)i.Mnemonic]++;
         }
 
-        static int listcount = 0;
+        void OnVmovupd(Instruction i)
+        {
+            Activations[(int)i.Mnemonic]++;
+        }
+
+        void OnCall(Instruction i)
+        {
+            Activations[(int)i.Mnemonic]++;
+        }
+
+        int listcount = 0;
         
-        static AsmInstructionList Pipe(AsmInstructionList src)
+        AsmInstructionList Pipe(AsmInstructionList src)
         {        
             listcount++;
             return src;
@@ -29,30 +46,31 @@ namespace Z0.Asm
         public void check_archive()
         {            
             var paths = Paths.ForApp(PartId.Control);
-            trace("Capture Path", $"{paths.AppCapturePath}");
+            var capture = CaptureArchive.Create(paths.AppCapturePath);
+            var bits = HostBitsArchive.Create(PartId.Control, capture.HexDir);
+            var data = bits.Read(PartId.GVec);
+            check_asm_pipe(data);
         }
 
-        void check_asm_pipe()
+        void check_asm_pipe(IEnumerable<OperationBits> src)
         {
-            var archive =  Context.HostBits(PartId.GVec);
-            var source = archive.ToInstructionSource(Context);
-            var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonic);
-            var triggers = AsmTriggerSet.Define(trigger);
-            var flow =  Context.InstructionFlow(source, triggers);
+            var decoder = OperationBitDecoder.Service;
+            var source = AsmInstructionSource.From(() => decoder.Decode(src));
+            var t1 = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnVinserti128);
+            var t2 = AsmMnemonicTrigger.Define(Mnemonic.Vmovupd, OnVmovupd);
+            var t3 = AsmCallTrigger.Define(OnCall);
+            var triggers = AsmTriggerSet.Define(t1,t2,t3);
+            var flow = AsmInstructionFlow.Create(source, triggers);
             var pipe = AsmInstructionPipe.From(Pipe); 
             var results = flow.Flow(pipe).Force();
 
-            var count = 0;
-            foreach(var result in results)
-            {
-                foreach(var i in result)
-                {
-                    if(trigger.CanFire(i))
-                        count++;
-                }
-            }    
 
-            trace($"Trigger fired {count} times");        
+            for(var i =0; i<(int)Mnemonic.LAST; i++)
+            {
+                var count = Activations[i];
+                if(count != 0)                
+                    trace($"Logged {count} {(Mnemonic)i} activations");        
+            }
         }
     }
 }

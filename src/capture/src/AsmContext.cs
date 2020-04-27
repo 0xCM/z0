@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
+
     public class AsmContext : IAsmContext 
     {            
         public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition,
@@ -58,9 +59,9 @@ namespace Z0.Asm
 
             var context = IContext.Default;
             Random = Polyrand.Pcg64(PolySeed64.Seed05);
-            Decoder = AsmDecoder.function(context, AsmFormat);
-            Formatter  = context.AsmFormatter(AsmFormat);
-            WriterFactory = context.AsmWriterFactory();
+            Decoder = AsmDecoder.FunctionDecoder(AsmFormat);
+            Formatter  = AsmServices.AsmFormatter(AsmFormat);
+            WriterFactory = AsmServices.AsmWriterFactory;
             CaptureService = context.Capture();
             CaptureControl =  MemberCaptureControl.Create(context, CaptureService);
             Dynamic = context.Dynamic();

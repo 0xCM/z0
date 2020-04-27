@@ -14,7 +14,7 @@ namespace Z0.Asm
         public AsmFormatConfig Config {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmFormatter Create(IContext context, AsmFormatConfig config)
+        public static IAsmFormatter Create(in AsmFormatConfig config)
             => new AsmFormatter(config);
 
         [MethodImpl(Inline)]

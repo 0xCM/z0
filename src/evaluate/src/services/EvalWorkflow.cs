@@ -40,7 +40,7 @@ namespace Z0.Asm
                 
         void ExecuteHost(in BufferSeq buffers, IApiHost host)
         {
-            var dst = CodeArchive.HostArchive(host.UriPath);
+            var dst = CodeArchive.CaptureArchive(host.UriPath);
             if(dst.HexPath.Exists())
             {
                 var code = Archives.code(Context.MemberLocator(), ApiSet, host.UriPath, CodeArchive.RootDir);

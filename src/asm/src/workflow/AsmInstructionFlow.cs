@@ -18,7 +18,7 @@ namespace Z0.Asm
         readonly AsmTriggerSet Triggers;
 
         [MethodImpl(Inline)]
-        public static IAsmInstructionFlow Create(IContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
+        public static IAsmInstructionFlow Create(IAsmInstructionSource source, AsmTriggerSet triggers)
             => new AsmInstructionFlow(source, triggers);
 
         [MethodImpl(Inline)]

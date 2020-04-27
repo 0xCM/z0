@@ -23,8 +23,11 @@ namespace Z0
         ICaptureArchive Narrow(FolderName area, FolderName subject);
 
         [MethodImpl(Inline)]
-        IHostCaptureArchive HostArchive(ApiHostUri host)
+        IHostCaptureArchive CaptureArchive(ApiHostUri host)
             => HostCaptureArchive.Define(this, host);        
+
+        // IHostBitsArchive HostBits(ApiHostUri host)
+        //     => HostBitsArchive.Create()
 
         FolderName AreaName => FolderName.Empty;
 

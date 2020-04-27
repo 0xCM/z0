@@ -51,24 +51,20 @@ namespace Z0.Asm
 
         ITestAsm Me => this;
 
-        ICaptureArchive CodeArchive 
-            => Context.CaptureArchive(
-                Env.Current.LogDir + FolderName.Define("test"), 
-                FolderName.Define("data"), 
-                FolderName.Define(GetType().Name)
-                );
+        ICaptureArchive CodeArchive => Me.CaptureArchive(ExecutingApp);
+
 
         protected IBitArchiveWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return Context.BitArchiveWriter(dstPath);
+            return BitArchiveWriter.Create(dstPath);
         }
 
         protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
         {
             var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return Context.AsmWriter(dst,format);
+            return AsmServices.AsmWriter(dst,format);
         }
 
         static K.UnaryOpClass Unary => default;
@@ -77,8 +73,10 @@ namespace Z0.Asm
                 
         IAsmFunctionDecoder Decoder => Context.Decoder;
 
-        protected OperationCode ReadAsm(PartId id, ApiHostUri host, OpIdentity m)
-            => Context.HostBits(id,host).Read(m).Single().ToApiCode();
+
+        [MethodImpl(Inline)]
+        public static IHostBitsArchive HostBits(PartId assembly, ApiHostUri host, FolderPath root = null)
+            => HostBitsArchive.Create(assembly, host, root);
 
 
         // IEnumerable<string> PrimalBitLogicOps
@@ -97,7 +95,7 @@ namespace Z0.Asm
         // }
 
         IHostBitsArchive HostBits(ApiHostUri host)
-            => Context.HostBits(host.Owner, host);
+            => HostBits(host.Owner, host);
 
         // TestCaseRecord TestPrimalMatch(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         // {
@@ -119,7 +117,7 @@ namespace Z0.Asm
 
         void capture_constants()
         {
-            var src = typeof(gmath).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
+            var src = typeof(BitMask).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
 
             var exchange = Me.CaptureExchange.Context;
             var capture = Me.CaptureService;       
@@ -175,8 +173,8 @@ namespace Z0.Asm
             var idD = Identify.Op(name, w, kind, false);
             var idG = Identify.Op(name, w, kind, true);
 
-            var d = Context.HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
-            var g = Context.HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
+            var d = HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
+            var g = HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
 
             return Me.Match(buffers, Binary, w,d,g);
         }
@@ -211,26 +209,26 @@ namespace Z0.Asm
         }
 
 
-        void RunPipe()
-        {
-            var archive =  Context.HostBits(PartId.GVec);
-            var source = archive.ToInstructionSource(Context);
-            var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
-            var triggers = AsmTriggerSet.Define(trigger);
-            var flow =  Context.InstructionFlow(source, triggers);
-            var pipe = AsmInstructionPipe.From(Pipe); 
-            var results = flow.Flow(pipe).Force();
+        // void RunPipe()
+        // {
+        //     var archive =  HostBitsArchive.Create(PartId.GVec);
+        //     var source = archive.ToInstructionSource(Context);
+        //     var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
+        //     var triggers = AsmTriggerSet.Define(trigger);
+        //     var flow =  Context.InstructionFlow(source, triggers);
+        //     var pipe = AsmInstructionPipe.From(Pipe); 
+        //     var results = flow.Flow(pipe).Force();
 
-            var count = 0;
-            foreach(var result in results)
-            {
-                foreach(var i in result)
-                {
-                    if(trigger.CanFire(i))
-                        count++;
-                }
-            }            
-        }
+        //     var count = 0;
+        //     foreach(var result in results)
+        //     {
+        //         foreach(var i in result)
+        //         {
+        //             if(trigger.CanFire(i))
+        //                 count++;
+        //         }
+        //     }            
+        // }
 
         void Run50(in BufferSeq buffers)
         {
@@ -238,8 +236,8 @@ namespace Z0.Asm
             var gSrc = ApiHostUri.FromHost(typeof(gmath));
 
             var id = PartId.GMath;
-            var direct = Context.HostBits(id, dSrc);
-            var generic = Context.HostBits(id, gSrc);
+            var direct = HostBits(id, dSrc);
+            var generic = HostBits(id, gSrc);
 
             foreach(var a in direct.Read().WithParameterCount(1))
             {                
@@ -551,7 +549,6 @@ namespace Z0.Asm
             megacheck(buffers, name, math.xnor, gmath.xnor, u64);            
             megacheck(buffers, name, math.xnor, gmath.xnor, i64);            
         }
-
 
     #endif
     }

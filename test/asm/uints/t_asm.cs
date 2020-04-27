@@ -17,7 +17,7 @@ namespace Z0.Asm
         where U : t_asm<U>
     {     
         protected ICaptureArchive CodeArchive 
-            => Context.CaptureArchive(
+            => CaptureArchive.Create(
                 Env.Current.LogDir + FolderName.Define("test"), 
                 FolderName.Define("data"), 
                 FolderName.Define(typeof(U).Name)

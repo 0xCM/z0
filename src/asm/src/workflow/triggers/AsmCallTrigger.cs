@@ -9,37 +9,32 @@ namespace Z0.Asm
 
     using static Seed;
 
-    /// <summary>
-    /// Fires when an instruction mnemonic matches a specified mnemonic
-    /// </summary>
-    public readonly struct AsmMnemonicTrigger : IAsmInstructionTrigger
+    public readonly struct AsmCallTrigger : IAsmInstructionTrigger
     {
         public int Id {get;}
+
+        readonly Action<Instruction> Handler;
+ 
+        [MethodImpl(Inline)]
+        public static AsmCallTrigger Define(Action<Instruction> handler)
+            => new AsmCallTrigger(handler);
         
-        public Mnemonic Mnemonic {get;}
-
-        Action<Instruction> Handler {get;}
-
-        public static AsmMnemonicTrigger Define(Mnemonic mnemonic, Action<Instruction> handler)
-            => new AsmMnemonicTrigger(mnemonic, handler);
-
-        AsmMnemonicTrigger(Mnemonic mnemonic, Action<Instruction> handler)
+        [MethodImpl(Inline)]
+        AsmCallTrigger(Action<Instruction> handler)
         {
             this.Id = AsmTriggers.NextId();
-            this.Mnemonic = mnemonic;
             this.Handler = handler;
         }
 
-                
         [MethodImpl(Inline)]
         public bool CanFire(Instruction src)
-            => src.Mnemonic == this.Mnemonic;
+            => src.Mnemonic == Mnemonic.Call;
 
         [MethodImpl(Inline)]
         public void FireOnMatch(Instruction src)
         {
             if(CanFire(src))
                 Handler(src);
-        }
+        } 
     }
 }
