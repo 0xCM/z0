@@ -42,8 +42,7 @@ namespace Z0.Asm
 
         public IImmSpecializer ImmServices {get;}        
 
-
-        static IAsmCoreStateless Stateless => AsmWorkflows.Stateless;
+        static ICaptureServices Stateless => AsmWorkflows.Stateless;
 
         AsmContext(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition, FolderPath root, in AsmFormatSpec format)
         {
@@ -53,13 +52,11 @@ namespace Z0.Asm
             Settings = settings;
             Queue = queue;
             Queue.Next += Relay;      
-            ApiSet = composition.ApiSet();
+            ApiSet = composition.ApiSet;
             RootCapturePath = root;      
             AsmFormat = format;
-
             Random = Polyrand.Pcg64(PolySeed64.Seed05);
-            Dynamic = Dynops.Services.Nexus;
-            
+            Dynamic = Stateless.Dynexus;            
             Decoder = Stateless.FunctionDecoder(AsmFormat);
             Formatter  = Stateless.AsmFormatter(AsmFormat);
             WriterFactory = Stateless.AsmWriterFactory;
@@ -69,7 +66,7 @@ namespace Z0.Asm
        
         AsmWriterFactory WriterFactory {get;}
 
-        public IAsmCore Factory  => AsmWorkflows.Contextual(this);
+        public IAsmContextual Contextual  => AsmWorkflows.Contextual(this);
 
         public IAsmFunctionWriter Writer(FilePath dst)
             => WriterFactory(dst, Formatter);

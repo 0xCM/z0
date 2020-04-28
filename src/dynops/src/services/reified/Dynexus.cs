@@ -27,11 +27,7 @@ namespace Z0
         readonly IMultiDiviner Diviner;      
 
         [MethodImpl(Inline)]
-        public static Dynexus Create(IMultiDiviner diviner)
-            => new Dynexus(diviner);
-
-        [MethodImpl(Inline)]
-        Dynexus(IMultiDiviner diviner)
+        internal Dynexus(IMultiDiviner diviner)
         {
             Diviner = diviner;
         }            

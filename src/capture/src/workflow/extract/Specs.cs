@@ -8,6 +8,8 @@ namespace Z0.Asm
 
     public interface IExtractionWorkflow : IService
     {
-        void Run();        
+        void Run();  
+
+              
     }
 }

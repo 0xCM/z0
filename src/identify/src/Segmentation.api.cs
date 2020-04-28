@@ -10,6 +10,7 @@ namespace Z0
 
     using static Seed;
 
+
     public static class Segmentation
     {
         /// <summary>

@@ -24,22 +24,22 @@ namespace Z0
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        public void WriteCode(in OperationBits src, int? idpad = null)
+        public void WriteHex(in OperationBits src, int? idpad = null)
         {
             StreamOut.WriteLine(src.Format(idpad ?? 0));
         }
         
-        public void WriteCode(in EncodedHexLine src, int? idpad = null)
+        public void WriteHex(in EncodedHexLine src, int? idpad = null)
         {
             StreamOut.WriteLine(src.Format(idpad ?? 0));
         }
 
-        public void Write(OperationBits[] src)
+        public void WriteHex(OperationBits[] src)
         {
             var idpad = src.Max(x => x.Id.Identifier.Length) + 1;
             for(var i=0; i< src.Length; i++)
             {
-                WriteCode(src[i], idpad);
+                WriteHex(src[i], idpad);
             }
         
             StreamOut.Flush();

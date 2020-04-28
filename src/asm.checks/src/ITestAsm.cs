@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     public interface ITestAsm : ITestCapture, ITestImmCapture, ITestDynamicVectors
     {
+        
 
     }
 }

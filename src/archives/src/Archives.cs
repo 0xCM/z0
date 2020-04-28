@@ -17,7 +17,10 @@ namespace Z0
     public interface IArchives : IStatelessFactory<Archives>
     {        
         IUriBitsReader UriBitsReader => new UriBitsReader();
-        
+
+        UriBitsWriterFactory UriBitsWriterFactory
+            => dst => UriBitsWriter(dst);        
+
         [MethodImpl(Inline)]
         ICaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
             => new CaptureArchive(root ?? Env.Current.LogDir, area ?? FolderName.Empty, subject ?? FolderName.Empty);
@@ -33,10 +36,13 @@ namespace Z0
         [MethodImpl(Inline)]
         IUriBitsWriter UriBitsWriter(FilePath dst)
             => new UriBitsWriter(dst);
+        
+        [MethodImpl(Inline)]
+        IHostBitsArchive HostBits(PartId part, FolderPath root = null)
+            =>new HostBitsArchive(part, root);
 
-        UriBitsWriterFactory UriBitsWriterFactory
-            => dst => UriBitsWriter(dst);
+        [MethodImpl(Inline)]
+        IHostBitsArchive HostBits(PartId part, ApiHostUri host, FolderPath root = null)
+            => new HostBitsArchive(part, host, root);
     }
-    
-
 }

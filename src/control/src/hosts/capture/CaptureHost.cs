@@ -52,10 +52,10 @@ namespace Z0
         static IAsmWorkflows Services(IAsmContext context)
             => AsmWorkflows.Contextual(context);
 
-        static IAsmCore Core(IAsmContext context)
-            => context.Factory;
+        static IAsmContextual Core(IAsmContext context)
+            => context.Contextual;
 
-        static IAsmCoreStateless Stateless
+        static ICaptureServices Stateless
             => AsmWorkflows.Stateless;
 
         CaptureHost(IAsmContext context, FolderPath root)
@@ -74,12 +74,8 @@ namespace Z0
             Decoder = Stateless.FunctionDecoder(FormatConfig);
             Formatter = Core(context).AsmFormatter(FormatConfig);            
             UriBitsReader = Stateless.UriBitsReader;
-            //PrimaryWorkflow = HostCaptureWorkflow.Create(context, Decoder, Formatter, AsmStateless.Services.AsmWriterFactory);            
             PrimaryWorkflow = Services(context).HostCaptureWorkflow(Decoder, Formatter, Stateless.AsmWriterFactory);
             ImmWorkflow = Services(context).ImmEmissionWorkflow(Sink, ApiSet, Formatter, Decoder, root);
-
-            //ImmWorkflow = ImmEmissionWorkflow.Create(context, context, ApiSet, Formatter, Decoder, root);
-            
             ConnectReceivers(PrimaryWorkflow.EventBroker);
         }
 
@@ -96,7 +92,7 @@ namespace Z0
             term.print($"Commpleted capture workflow");
         }
         
-        public void Execute(params string[] args)
+        public void Execute(params PartId[] parts)
         {
             if(Settings.EmitImmArtifacts)
                 EmitImm();
@@ -231,7 +227,7 @@ namespace Z0
 
         void Analyze(ApiHostUri host, ReadOnlySpan<Member> src)
         {
-            var index = src.ToOpIndex();
+            var index = Operational.Service.CreateIndex(src);
             foreach(var key in index.DuplicateKeys)
                 Sink.DuplicateWarning(host,key);
         }

@@ -11,20 +11,16 @@ namespace Z0
 
     using static Seed;
 
-    readonly struct ApiIndexBuilder : ICodeIndexBuilder
+    readonly struct ApiIndexBuilder
     {
         readonly IApiSet ApiSet;
 
         readonly IUriBitsReader BitsReader;
 
         readonly IMemberLocator MemberLocator;
-        
+                
         [MethodImpl(Inline)]
-        public static ICodeIndexBuilder Create(IApiSet api, IMemberLocator locator)
-            =>  new ApiIndexBuilder(api, locator);
-        
-        [MethodImpl(Inline)]
-        ApiIndexBuilder(IApiSet api, IMemberLocator locator)
+        internal ApiIndexBuilder(IApiSet api, IMemberLocator locator)
         {
             this.ApiSet = api;
             this.MemberLocator = locator;
@@ -50,11 +46,9 @@ namespace Z0
         public ApiCodeIndex CreateIndex(ApiHostUri host, FilePath src)
         {
             var loaded = LoadCode(src);
-            var hosted = FindHostedMembers(host).ToArray();
-            
-            var code = loaded.ToEnumerable().ToOpIndex();
+            var hosted = FindHostedMembers(host).ToArray();            
+            var code =  Operational.Service.CreateIndex(loaded.ToEnumerable());
             var members = ApiIndex.Create(hosted);
-
             return CreateIndex(members, code);
         }
 

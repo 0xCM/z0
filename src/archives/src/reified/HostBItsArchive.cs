@@ -23,22 +23,14 @@ namespace Z0
         static FolderPath DefaultArchivRoot => Archives.Services.CaptureArchive().RootDir;
 
         [MethodImpl(Inline)]
-        public static IHostBitsArchive Create(PartId part, FolderPath root = null)
-            => new HostBitsArchive(part, root);
-
-        [MethodImpl(Inline)]
-        public static IHostBitsArchive Create(PartId part, ApiHostUri host, FolderPath root = null)
-            => new HostBitsArchive(part, host, root);
-
-        [MethodImpl(Inline)]
-        HostBitsArchive(PartId part, ApiHostUri host, FolderPath root)
+        internal HostBitsArchive(PartId part, ApiHostUri host, FolderPath root)
         {
             this.Part = part;
             this.Host = host;
             this.ArchiveRoot = root ?? DefaultArchivRoot;
         }
 
-        HostBitsArchive(PartId catalog, FolderPath root)
+        internal HostBitsArchive(PartId catalog, FolderPath root)
         {
             this.Part = catalog;
             this.Host = ApiHostUri.Empty;

@@ -29,16 +29,31 @@ namespace Z0
 
         public ICaptureArchive Narrow(FolderName area, FolderName subject) => new CaptureArchive(RootDir, area, subject);
 
-        ICaptureArchive Me => this;
+        ICaptureArchive Archive => this;
         
-        public FolderPath[] Clear()
+        public FolderPath[] Clear(params PartId[] parts)
         {
-            var dst = list<FolderPath>();
-            dst.Add(Me.ExtractDir.Clear());
-            dst.Add(Me.ParsedDir.Clear());
-            dst.Add(Me.AsmDir.Clear());
-            dst.Add(Me.HexDir.Clear());
-            return dst.ToArray();
+            if(parts.Length == 0)
+            {
+                var dst = list<FolderPath>();
+                dst.Add(Archive.ExtractDir.Clear());
+                dst.Add(Archive.ParsedDir.Clear());
+                dst.Add(Archive.AsmDir.Clear());
+                dst.Add(Archive.HexDir.Clear());
+                return dst.ToArray();
+            }
+            else
+            {
+                for(var i=0; i<parts.Length; i++)
+                {
+                    var part = parts[i];
+                    Control.iter(Archive.ExtractDir.Files(part, Archive.ExtractExt), f => f.Delete());
+                    Control.iter(Archive.ParsedDir.Files(part, Archive.ParsedExt), f => f.Delete());
+                    Control.iter(Archive.AsmDir.Files(part, Archive.AsmExt), f => f.Delete());
+                    Control.iter(Archive.HexDir.Files(part, Archive.HexExt), f => f.Delete());
+                }
+                return new FolderPath[0] {};
+            }
         }        
     }
 }

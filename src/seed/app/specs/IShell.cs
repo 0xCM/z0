@@ -33,7 +33,7 @@ namespace Z0
             term.WriteLine($"{content}", color ?? AppMsgColor.Green);
         }
         
-        void IExecutable.Execute(params string[] args)
+        void IExecutable<string>.Execute(params string[] args)
         {
             try   
             {

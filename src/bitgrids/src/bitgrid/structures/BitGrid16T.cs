@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
 
     /// <summary>
-    /// Defines a 16-bit grid of fixed order 4
+    /// Defines a 16-bit grid of caller-interpreted dimension
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=2)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
@@ -23,16 +23,6 @@ namespace Z0
         /// Grid storage
         /// </summary>
         internal readonly ushort Data;
-
-        /// <summary>
-        /// The grid row count := 4
-        /// </summary>
-        public int RowCount => 4;
-
-        /// <summary>
-        /// The grid col count := 4
-        /// </summary>
-        public int ColCount => 4;
 
         /// <summary>
         /// The number of covered bits := 16

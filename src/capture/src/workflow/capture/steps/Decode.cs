@@ -32,7 +32,7 @@ namespace Z0.Asm
             public void SaveDecoded(AsmFunction[] src, FilePath dst)
             {
                 using var writer = Context.WriterFactory(dst,Context.Formatter);                
-                writer.Write(src);
+                writer.WriteAsm(src);
             }
 
             public AsmFunction[] DecodeExtracts(params ParsedMemberExtract[] src)

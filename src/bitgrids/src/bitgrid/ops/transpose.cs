@@ -67,6 +67,10 @@ namespace Z0
                 (ulong)A.Col(3) << 48
                 );
 
+        [MethodImpl(Inline)]
+        static Vector256<T> gcell<T>(in Vector256<T> g, int index, T data)
+            where T : unmanaged
+                => g.WithElement(index, data);
 
         [MethodImpl(Inline)]
         static Vector256<T> vT16x16step<T>(in Vector256<T> src, in Vector256<T> g0, int i, int j)

@@ -14,23 +14,28 @@ namespace Z0
     /// <summary>
     /// Defines a 32-bit grid
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size=8)]
+    [StructLayout(LayoutKind.Sequential, Size=4)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid32<T>
         where T : unmanaged
     {                
         internal readonly uint Data;       
 
-        readonly byte rows;
-
-        readonly byte cols; 
-
-        readonly ushort align;
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int BitCount => 32;
 
         /// <summary>
-        /// The number of bytes covered by the grid
+        /// The number of grid cells := {1 | 2 | 4}
         /// </summary>
-        public const int ByteCount = 4;
+        public int CellCount { [MethodImpl(Inline)] get => 4/size<T>(); }
+
+        public uint Content { [MethodImpl(Inline)] get => Data; }
+
+        public Span<T> Cells { [MethodImpl(Inline)] get => Data.AsBytes().As<T>(); }
+
+        public ref T Head { [MethodImpl(Inline)] get => ref head(Cells); }
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitGrid32<T> src)
@@ -45,67 +50,8 @@ namespace Z0
             => gx.Data != gy.Data;
 
         [MethodImpl(Inline)]
-        internal BitGrid32(uint data, GridDim dim)
-        {
-            this.Data = data;
-            this.rows = (byte)dim.RowCount;
-            this.cols = (byte)dim.ColCount;
-            this.align = 0;
-        }
-
-        [MethodImpl(Inline)]
-        internal BitGrid32(uint data, int rows, int cols)
-        {
-            this.Data = data;
-            this.rows = (byte)rows;
-            this.cols = (byte)cols;
-            this.align = 0;
-        }
-
-        public uint Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public int RowCount
-        {
-            [MethodImpl(Inline)]
-            get => rows;
-        }
-
-        public int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => cols;
-        }
-
-        public int CellCount
-        {
-            [MethodImpl(Inline)]
-            get => ByteCount/size<T>();
-        }
-
-        /// <summary>
-        /// The number of covered bits
-        /// </summary>
-        public int BitCount
-        {
-            [MethodImpl(Inline)]
-            get => RowCount * ColCount;
-        }
-
-        public Span<T> Cells
-        {
-            [MethodImpl(Inline)]
-            get => Data.AsBytes().As<T>();
-        }
-
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref head(Cells);
-        }
+        internal BitGrid32(uint data)
+            => Data = data;
 
         /// <summary>
         /// Reads/writes an index-identified cell
@@ -120,13 +66,13 @@ namespace Z0
         public BitVector<T> this[byte start, byte count]
         {
             [MethodImpl(Inline)]
-            get => BitGrid.slice(this,start,count);
+            get => BitGrid.slice(this, start, count);
         }
 
         [MethodImpl(Inline)]
         public BitGrid32<U> As<U>()
             where U : unmanaged
-                => new BitGrid32<U>(Data,rows,cols);
+                => new BitGrid32<U>(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid32<T> rhs)
@@ -137,6 +83,5 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
- 
     }
 }

@@ -33,7 +33,7 @@ namespace Z0.Asm
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
     
-        public void Write(params AsmFunction[] src)
+        public void WriteAsm(params AsmFunction[] src)
         {
             foreach(var f in src)
                 StreamOut.Write(Formatter.FormatFunction(f));

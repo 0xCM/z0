@@ -28,7 +28,7 @@ namespace Z0
             this.buffers = buffers;
         }
 
-        IDynexus Dynamic => Dynops.Services.Nexus;
+        IDynexus Dynamic => Dynops.Services.Dynexus;
 
         /// <summary>
         /// Evaluates a binary operator over a pair index and deposits the result into a caller-supplied triple index

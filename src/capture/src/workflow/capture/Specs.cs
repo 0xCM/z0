@@ -23,7 +23,7 @@ namespace Z0.Asm
     {
         IHostCaptureBroker EventBroker {get;}
 
-        void Run(AsmWorkflowConfig config);         
+        void Run(AsmWorkflowConfig config, params PartId[] parts);         
     }
 
 
@@ -69,9 +69,9 @@ namespace Z0.Asm
 
     public interface ICaptureCatalogStep
     {
-        void CaptureCatalogs(AsmWorkflowConfig config);
+        void CaptureCatalogs(AsmWorkflowConfig config, params PartId[] parts);
         
-        void CaptureCatalogs(ICaptureArchive dst);
+        void CaptureCatalogs(ICaptureArchive dst, params PartId[] parts);
 
         void CaptureHost(ICaptureHostStep step, IApiHost host, ICaptureArchive dst);
 

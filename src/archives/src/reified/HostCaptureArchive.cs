@@ -17,11 +17,7 @@ namespace Z0
                 
         public ApiHostUri HostUri {get;}
 
-        [MethodImpl(Inline)]
-        public static IHostCaptureArchive Create(ICaptureArchive root, ApiHostUri host)
-            => new HostCaptureArchive(root,host);
-
-        public FolderPath[] Clear()
+        public FolderPath[] Clear(params PartId[] parts)
         {
             return Arrays.empty<FolderPath>();
         }

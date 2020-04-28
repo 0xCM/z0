@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    public readonly struct MemberExtract : IOperational, ILocatedCode<MemberExtract,LocatedCode>
+    public readonly struct MemberExtract : IOperationalIdentity, ILocatedCode<MemberExtract,LocatedCode>
     {        
         public static MemberExtract Empty => Define(Member.Empty, LocatedCode.Empty);
 

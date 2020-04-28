@@ -81,7 +81,6 @@ namespace Z0
             get => BitCalcs.tablesize<M,N>();
         }
 
-
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate
         /// </summary>

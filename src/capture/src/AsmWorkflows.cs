@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        public static IAsmCoreStateless Stateless => default(AsmWorkflows);
+        public static ICaptureServices Stateless => default(AsmWorkflows);
 
         [MethodImpl(Inline)]
         public static IAsmWorkflows Contextual(IAsmContext context) => new AsmWorkflows(context);
@@ -24,18 +24,18 @@ namespace Z0.Asm
         internal AsmWorkflows(IAsmContext context) => Context = context;
     }
     
-    public interface IAsmWorkflows : IAsmCore
+    public interface IAsmWorkflows : IAsmContextual
     {
         [MethodImpl(Inline)]
-        IMemoryCapture IAsmCoreStateless.MemoryCapture(IAsmInstructionDecoder decoder, int bufferlen)
+        IMemoryCapture ICaptureServices.MemoryCapture(IAsmInstructionDecoder decoder, int bufferlen)
             => new MemoryCaptureService(decoder, bufferlen);    
 
         [MethodImpl(Inline)]
-        IMemoryExtractor IAsmCoreStateless.MemoryExtractor(byte[] buffer)
+        IMemoryExtractor ICaptureServices.MemoryExtractor(byte[] buffer)
             => Svc.MemoryExtractor.Create(buffer);
 
         [MethodImpl(Inline)]
-        IImmSpecializer IAsmCoreStateless.ImmSpecializer(IAsmFunctionDecoder decoder)
+        IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
             => new ImmSpecializer(decoder);        
 
         /// <summary>
@@ -44,11 +44,11 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
         [MethodImpl(Inline)]
-        IAsmFunctionDecoder IAsmCoreStateless.FunctionDecoder(in AsmFormatSpec? format)
+        IAsmFunctionDecoder ICaptureServices.FunctionDecoder(in AsmFormatSpec? format)
             => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
 
         [MethodImpl(Inline)]
-        IHostAsmArchiver IAsmCoreStateless.ImmFunctionArchive(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+        IHostAsmArchiver ICaptureServices.ImmFunctionArchive(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
             => ImmArchive(host, formatter, dst);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="diviner">A divination service, or not</param>
         [MethodImpl(Inline)]
-        ICaptureService IAsmCoreStateless.CaptureService(IMultiDiviner diviner)
+        ICaptureService ICaptureServices.CaptureService(IMultiDiviner diviner)
             => new CaptureService(diviner ?? Diviner);        
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
         [MethodImpl(Inline)]
-        IAsmInstructionDecoder IAsmCoreStateless.InstructionDecoder(in AsmFormatSpec? format)
+        IAsmInstructionDecoder ICaptureServices.InstructionDecoder(in AsmFormatSpec? format)
             => new AsmInstructionDecoder(format ?? AsmFormatSpec.Default);
 
         [MethodImpl(Inline)]
-        IMemoryExtractParser IAsmCoreStateless.MemoryExtractParser(byte[] buffer)
+        IMemoryExtractParser ICaptureServices.MemoryExtractParser(byte[] buffer)
             => Svc.MemoryExtractParser.Create(buffer);
 
         /// <summary>
@@ -77,12 +77,16 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="bufferlen">The desired buffer length</param>
         [MethodImpl(Inline)]
-        IHostCodeExtractor IAsmCoreStateless.HostExtractor(int? bufferlen)
+        IHostCodeExtractor ICaptureServices.HostExtractor(int? bufferlen)
             => HostCodeExtractor.Create(bufferlen ?? Pow2.T14);
 
         [MethodImpl(Inline)]
-        IHostCaptureService IAsmCore.HostCaptureService(FolderName area, FolderName subject)
+        IHostCaptureService IAsmContextual.HostCaptureService(FolderName area, FolderName subject)
             => new HostCaptureService(Context, area ?? FolderName.Empty, subject ?? FolderName.Empty);
+
+        [MethodImpl(Inline)]
+        IHostCaptureService IAsmContextual.HostCaptureService(FolderPath root)
+            => new HostCaptureService(Context, root);
 
         [MethodImpl(Inline)]
         IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        

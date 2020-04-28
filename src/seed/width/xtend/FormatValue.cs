@@ -7,20 +7,28 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
+
     partial class XTend 
     {
+        
+        [MethodImpl(Inline)]
         public static string FormatValue(this TypeWidth w)
             => ((uint)w).ToString();
 
+        [MethodImpl(Inline)]
         public static string FormatValue(this DataWidth w)
             => ((uint)w).ToString();
 
+        [MethodImpl(Inline)]
         public static string FormatValue(this NumericWidth w)
             => ((uint)w).ToString();
 
+        [MethodImpl(Inline)]
         public static string FormatValue(this FixedWidth w)
             => ((uint)w).ToString();
 
+        [MethodImpl(Inline)]
         public static string FormatValue(this VectorWidth w)
             => ((uint)w).ToString();
 

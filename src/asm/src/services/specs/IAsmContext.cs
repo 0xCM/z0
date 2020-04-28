@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    public interface IAsmCore : IServiceFactory<IAsmContext>, IAsmStateless, IAsmCoreStateless 
-    {
-        IHostCaptureService HostCaptureService(FolderName area, FolderName subject = null);            
-    }
-
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
@@ -57,24 +52,35 @@ namespace Z0.Asm
         /// <summary>
         /// Reveals the context-predicated service factory
         /// </summary>
-        IAsmCore Factory {get;}
+        IAsmContextual Contextual {get;}
 
         /// <summary>
         /// The capture archive root
         /// </summary>
         FolderPath RootCapturePath => Env.Current.LogDir;
 
-        ICaptureArchive RootCaptureArchive 
-            => Archives.Services.CaptureArchive(RootCapturePath);
-
-        ICaptureArchive CaptureArchive(FolderName area, FolderName subject) 
-            => RootCaptureArchive.Narrow(area,subject);
-
+        /// <summary>
+        /// The hosts known to the context
+        /// </summary>
         IApiHost[] Hosts => ApiSet.Hosts;
 
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
         /// </summary>
         int DefaultBufferLength => Pow2.T14;
+
+        /// <summary>
+        /// The primary capture archive, predicated on the context-specified root path
+        /// </summary>
+        ICaptureArchive RootCaptureArchive 
+            => Archives.Services.CaptureArchive(RootCapturePath);
+
+        /// <summary>
+        /// A root archive descendant narrowed by area/subject
+        /// </summary>
+        /// <param name="area">Root stratification</param>
+        /// <param name="subject">Area stratification</param>
+        ICaptureArchive CaptureArchive(FolderName area, FolderName subject) 
+            => RootCaptureArchive.Narrow(area,subject);
     }   
 }

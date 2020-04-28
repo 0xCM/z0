@@ -12,28 +12,15 @@ namespace Z0
     using static BufferSeqId;
     using static Memories;
 
-    using K = Kinds.UnaryOpClass;
+    using K = Kinds;
 
-    public readonly struct CheckFixedDynamic : ICheckFixedDynamic
-    {   
-        [MethodImpl(Inline)]
-        public static ITestDynamic Create(IPolyrand random)        
-            => new TestDynamic(random);
-
-        public IPolyrand Random {get;}
-                
-        [MethodImpl(Inline)]
-        public CheckFixedDynamic(IPolyrand random)
-            => Random = random;
-    }
-
-    public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic
+    public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic, IBufferedChecker
     {
-        void CheckFixedMatch<F>(in BufferSeq dst, K k, OperationCode a, OperationCode b)
+        void CheckFixedMatch<F>(K.UnaryOpClass k, OperationCode a, OperationCode b)
             where F : unmanaged, IFixed
         {                        
-            var f = Dynamic.EmitFixedUnary<F>(dst[Left], a);
-            var g = Dynamic.EmitFixedUnary<F>(dst[Left], b);
+            var f = Dynamic.EmitFixedUnary<F>(Buffers[(int)Left], a);
+            var g = Dynamic.EmitFixedUnary<F>(Buffers[(int)Right], b);
             
             var stream = Random.FixedStream<F>();
             notnull(stream);

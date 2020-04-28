@@ -20,7 +20,7 @@ namespace Z0.Asm
             Decoder =  AsmWorkflows.Stateless.InstructionDecoder(format);
         }
 
-        static IAsmFunctionBuilder Builder => AsmStateless.Services.FunctionBuilder;
+        static IAsmFunctionBuilder Builder => AsmCore.Services.FunctionBuilder;
 
         public Option<AsmFunction> Decode(MemberCapture src)
             => DecodeCaptured(Decoder, src);

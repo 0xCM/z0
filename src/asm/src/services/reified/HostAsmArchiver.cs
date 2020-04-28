@@ -33,7 +33,7 @@ namespace Z0.Asm
             Owner = host.Owner;
             AsmFormatter = formatter;
             HostArchive = CreateHostArchive(ApiHost,dst);
-            CilFormatter =  AsmStateless.Services.CilFormatter();
+            CilFormatter =  AsmCore.Services.CilFormatter();
         }
         
         internal HostAsmArchiver(PartId part, string hostname, IAsmFormatter formatter)
@@ -43,7 +43,7 @@ namespace Z0.Asm
             AsmFormatter = formatter;
             ApiHost = ApiHostUri.Define(part, hostname);
             HostArchive = CreateHostArchive(ApiHost);
-            CilFormatter =  AsmStateless.Services.CilFormatter();
+            CilFormatter =  AsmCore.Services.CilFormatter();
         }
 
         static IHostCaptureArchive CreateHostArchive(ApiHostUri host, FolderPath dst = null)

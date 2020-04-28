@@ -15,13 +15,6 @@ namespace Z0
     /// </summary>
     public readonly struct ApiCatalogProvider : IApiCatalogProvider
     {      
-        /// <summary>
-        /// Creates a (possibly empy) api catalog for the source part
-        /// </summary>
-        /// <param name="src">The part to catalog</param>
-        public static IApiCatalog Catalog(IPart src)
-            => Define(src.Id, src.Owner, new ApiCatalog(src.Owner, src.Id, src.ResourceProvider));
-
         public PartId PartId {get;}
 
         public Assembly Part {get;}           
@@ -29,11 +22,7 @@ namespace Z0
         public IApiCatalog Operations {get;}
 
         [MethodImpl(Inline)]
-        public static IApiCatalogProvider Define(PartId id, Assembly src, IApiCatalog catalog)
-            => new ApiCatalogProvider(id,src,catalog);
-
-        [MethodImpl(Inline)]
-        ApiCatalogProvider(PartId id, Assembly src, IApiCatalog catalog)
+        internal ApiCatalogProvider(PartId id, Assembly src, IApiCatalog catalog)
         {
             this.PartId = id;
             this.Part = src;

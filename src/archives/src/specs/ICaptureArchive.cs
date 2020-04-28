@@ -18,16 +18,13 @@ namespace Z0
         /// <summary>
         /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
         /// </summary>
-        FolderPath[] Clear();
+        FolderPath[] Clear(params PartId[] parts);
         
         ICaptureArchive Narrow(FolderName area, FolderName subject);
 
         [MethodImpl(Inline)]
         IHostCaptureArchive CaptureArchive(ApiHostUri host)
             => Archives.Services.HostCaptureArchive(this, host);        
-
-        // IHostBitsArchive HostBits(ApiHostUri host)
-        //     => HostBitsArchive.Create()
 
         FolderName AreaName => FolderName.Empty;
 

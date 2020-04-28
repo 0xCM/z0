@@ -21,18 +21,17 @@ namespace Z0.Asm
                 this.Context = context;
             }
 
-            public void CaptureCatalogs(AsmWorkflowConfig config)
+            public void CaptureCatalogs(AsmWorkflowConfig config, params PartId[] parts)
             {
                 var root = Archives.Services.CaptureArchive(config.EmissionRoot);
-                CaptureCatalogs(root);
+                CaptureCatalogs(root, parts);
             }
 
-            public void CaptureCatalogs(ICaptureArchive dst)
+            public void CaptureCatalogs(ICaptureArchive dst, params PartId[] parts)
             {                
-                dst.Clear();
-                var catalogs = Context.ApiSet.Composition.Catalogs;
-
-                foreach(var catalog in catalogs)   
+                dst.Clear(parts);                
+                
+                foreach(var catalog in Context.ApiSet.MatchingCatalogs(parts))   
                 {
                     if(catalog.ApiHostCount != 0)                    
                         CaptureCatalog(catalog, dst);

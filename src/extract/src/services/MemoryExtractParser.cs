@@ -35,7 +35,7 @@ namespace Z0
 
         public Option<LocatedCode> Parse(LocatedCode src)
         {
-            var parser = StatelessExtract.Factory.PatternParser(Buffer.Clear());
+            var parser = Extract.Services.PatternParser(Buffer.Clear());
             var status = parser.Parse(src);            
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();

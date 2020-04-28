@@ -31,20 +31,10 @@ namespace Z0
         /// The number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 2;
-
-        /// <summary>
-        /// The grid width
-        /// </summary>
-        public static N16 W => default;
-
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dimension => default;        
         
         [MethodImpl(Inline)]
         public static implicit operator BitGrid16<M,N,T>(ushort src)
-            => new BitGrid16<M, N, T>(src);
+            => new BitGrid16<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ushort(BitGrid16<M,N,T> src)

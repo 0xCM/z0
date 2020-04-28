@@ -27,7 +27,7 @@ namespace Z0
 
         public PartId[] PartIdentities {get;}
                 
-        ApiSet(IApiComposition api)
+        internal ApiSet(IApiComposition api)
         {
             Composition = api;
             Catalogs = api.Catalogs.ToArray();    

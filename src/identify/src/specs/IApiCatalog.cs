@@ -78,6 +78,13 @@ namespace Z0
         /// </summary>
         string CatalogName
             => PartId.Format();        
+
+        /// <summary>
+        /// Defines a query service over the catalog
+        /// </summary>
+        ApiQuery Query
+            => ApiQuery.Over(this);
+
     }
     
     /// <summary>

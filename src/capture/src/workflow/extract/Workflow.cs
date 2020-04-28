@@ -26,10 +26,10 @@ namespace Z0.Asm
             ApiSet = context.ApiSet;
             Sink = context;
             Extractor =  AsmWorkflows.Stateless.HostExtractor();
-            MemberLocator = StatelessIdentity.Factory.MemberLocator();
+            MemberLocator = AsmWorkflows.Stateless.MemberLocator();
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Decoder =   AsmWorkflows.Stateless.FunctionDecoder(FormatConfig);
-            Formatter = AsmStateless.Services.AsmFormatter(FormatConfig);
+            Formatter = AsmWorkflows.Stateless.AsmFormatter(FormatConfig);
             CodeArchive = Archives.Services.CaptureArchive(ArchiveRoot);
             CodeArchive.Clear();
             Broker = ConnectBroker(this);          
@@ -125,7 +125,7 @@ namespace Z0.Asm
         void AnalyzeExtracts(FilePath src)
         {
             Raise(AnalyzingExtractReport.Define(src));
-            var reader =  StatelessIdentity.Factory.ExtractReader(ApiSet);
+            var reader =  StatelessIdentity.Services.ExtractReader(ApiSet);
             var extracts = reader.ReadExtracts(src);
             Report($"Loaded {extracts.Length} member extracts from {src}");
         }

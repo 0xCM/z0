@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Assocates an operation api identifier with executable code
     /// </summary>
-    public readonly struct OperationCode : IEncoded<OperationCode,BinaryCode>, IOperational
+    public readonly struct OperationCode : IEncoded<OperationCode,BinaryCode>, IOperationalIdentity
     {
         public OpIdentity Id {get;}
 

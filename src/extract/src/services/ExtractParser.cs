@@ -48,7 +48,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        ByteParser Parser() => StatelessExtract.Factory.PatternParser(PatternBuffer.Clear());//   Context.PatternParser(PatternBuffer.Clear());
+        ByteParser Parser() => Extract.Services.PatternParser(PatternBuffer.Clear());//   Context.PatternParser(PatternBuffer.Clear());
 
         Option<ParsedMemberExtract> Parse(in MemberExtract src, int seq, ByteParser parser)
         {
@@ -65,7 +65,7 @@ namespace Z0
         {
             var records = list<MemberParseRecord>(extracts.RecordCount);
             //var parser = Context.PatternParser(PatternBuffer.Clear());            
-            var parser = StatelessExtract.Factory.PatternParser(PatternBuffer.Clear());
+            var parser = Extract.Services.PatternParser(PatternBuffer.Clear());
             
             var seq = 0;
             for(var i=0; i< extracts.RecordCount; i++)

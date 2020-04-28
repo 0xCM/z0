@@ -10,27 +10,32 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public readonly struct ArchiveOps
+    public readonly struct ArchiveOps : IArchiveOps
     {
-        public static UriBits[] SaveUriBits(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
+        public static IArchiveOps Service => default(ArchiveOps);
+    }
+
+    public interface IArchiveOps
+    {
+        UriBits[] SaveUriBits(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
         {
             using var writer = Archives.Services.UriBitsWriter(dst);
             var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Content));
             writer.Write(data);
             return data;
         }
-
-        public static ApiCodeIndex CreateCodeIndex(IMemberLocator locator, IApiSet api, ApiHostUri host, FolderPath root)
+        
+        ApiCodeIndex CreateCodeIndex(IMemberLocator locator, IApiSet api, ApiHostUri host, FolderPath root)
         {
-            var indexer =  ApiIndexBuilder.Create(api, locator);
+            var indexer =  new ApiIndexBuilder(api, locator);
             var members = locator.Hosted(api.FindHost(host).Require());
             var apiIndex = ApiIndex.Create(members);
             var archive =  Archives.Services.CaptureArchive(root);
             var paths = archive.CaptureArchive(host);
             var reader = UriBitsReader.Service;
             var code = reader.Read(paths.HexPath);
-            var opIndex = code.ToOpIndex(); 
+            var opIndex =  Operational.Service.CreateIndex(code);
             return indexer.CreateIndex(apiIndex, opIndex);            
-        }
+        }        
     }
 }

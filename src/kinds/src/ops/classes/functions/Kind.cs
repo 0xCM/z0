@@ -11,7 +11,6 @@ namespace Z0
     public enum FunctionKind : ulong
     {
         None = 0,
-
-        Broadcast = Id.Broadcast,
+        
     }
 }

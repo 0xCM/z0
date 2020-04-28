@@ -11,28 +11,18 @@ namespace Z0
 
     public interface IServiceFactory
     {
-        IContext Context => DefaultContext.Default;
+        
     }
 
     public interface IServiceFactory<C> : IServiceFactory   
         where C : IContext
     {
-        new C Context {get;}
-
-        IContext IServiceFactory.Context => Context;
+        C Context {get;}
+        
     }
-
 
     readonly struct DefaultServiceFactory : IServiceFactory
     {
-        public static IServiceFactory Default => new DefaultServiceFactory(default(DefaultContext));
-
-        [MethodImpl(Inline)]
-        DefaultServiceFactory(IContext context)
-        {
-            this.Context = context;
-        }
-
-        public IContext Context {get;}
+        public static IServiceFactory Default => default(DefaultServiceFactory);
     }
 }

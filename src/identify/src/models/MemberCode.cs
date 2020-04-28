@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Identifies a member defined by executable code (derived from the method implementation)
     /// </summary>    
-    public readonly struct MemberCode : IEncoded<MemberCode,OperationCode>, IOperational
+    public readonly struct MemberCode : IEncoded<MemberCode,OperationCode>, IOperationalIdentity
     {
         public static MemberCode Empty => Define(Member.Empty, BinaryCode.Empty);
 

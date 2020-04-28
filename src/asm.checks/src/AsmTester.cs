@@ -18,24 +18,41 @@ namespace Z0.Asm
 
         IAsmFormatter Formatter => Context.Formatter;
 
+        IOperational Operational => Z0.Operational.Service;
+
+        IArchives Archives => Z0.Archives.Services;
+
         IPolyrand IPolyrandProvider.Random  => Context.Random;
 
         ICaptureService ICaptureServiceProxy.CaptureService => Context.CaptureService;        
 
+        [MethodImpl(Inline)]
         ICaptureArchive CaptureArchive(PartId part)
-            => Archives.Services.CaptureArchive(
+            => Archives.CaptureArchive(
                 (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
                 FolderName.Define("capture"));
 
+        [MethodImpl(Inline)]
+        ICaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
+            => Archives.CaptureArchive(root,area, subject);
+
+        [MethodImpl(Inline)]
         FilePath AsmFilePath<T>(PartId part) => CaptureArchive(part).AsmPath<T>();
 
+        [MethodImpl(Inline)]
         FilePath HexFilePath<T>(PartId part) => CaptureArchive(part).HexPath<T>();
 
+        [MethodImpl(Inline)]
         IHostBitsArchive HostBits(PartId part, ApiHostUri host, FolderPath root = null)
-            => HostBitsArchive.Create(part, host, root);
+            => Archives.HostBits(part, host, root);
 
+        [MethodImpl(Inline)]
+        IHostBitsArchive HostBits(PartId part, FolderPath root = null)
+            => Archives.HostBits(part, root);
+
+        [MethodImpl(Inline)]
         OperationCode ReadHostAsm(PartId part, ApiHostUri host, OpIdentity id)
-            => HostBits(part,host).Read(id).Single().ToApiCode();        
+            => Operational.ToApiCode(HostBits(part,host).Read(id).Single());
 
         void WriteAsm(MemberCapture capture, StreamWriter dst)
         {
@@ -46,7 +63,6 @@ namespace Z0.Asm
 
         void WriteAsm(AsmFunction f, StreamWriter dst)
             => dst.WriteLine(Formatter.FormatFunction(f));
-
     }
     
     public readonly struct AsmTester : IAsmTester
@@ -76,7 +92,7 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => Buffers[(int)id];
         }
-
+        
         public void Dispose()
         {
             BufferAlloc.Dispose();

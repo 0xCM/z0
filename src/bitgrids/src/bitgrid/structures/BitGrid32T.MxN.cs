@@ -31,16 +31,6 @@ namespace Z0
         /// The number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 4;
-
-        /// <summary>
-        /// The grid width
-        /// </summary>
-        public static N32 W => default;
-
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dimension => default;        
         
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(uint src)
@@ -52,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<T>(BitGrid32<M,N,T> src)
-            => new BitGrid32<T>(src.Data, val8u<M>(), val8u<N>());
+            => new BitGrid32<T>(src.Data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(in Block32<T> src)
@@ -60,7 +50,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(BitGrid32<T> src)
-            => new BitGrid32<M,N,T>(src.Content);
+            => new BitGrid32<M,N,T>(src.Data);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitGrid32<M,N,T> g1, BitGrid32<M,N,T> g2)

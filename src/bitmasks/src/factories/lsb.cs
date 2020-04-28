@@ -21,11 +21,11 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
-        /// <typeparam name="W">The width type</typeparam>
+        /// <typeparam name="N">The width type</typeparam>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
-        public static T lsb<W,T>(W w, N2 f, N1 d, T t = default)
-            where W : unmanaged, ITypeNat
+        [MethodImpl(Inline), NumericClosures(UnsignedInts), Naturals(4,6,8,10,12,14,16,18,32,64)]
+        public static T lsb<N,T>(N w, N2 f, N1 d, T t = default)
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => convert<ulong,T>(lsb(w,f,d));
 
@@ -37,11 +37,11 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
-        /// <typeparam name="W">The width type</typeparam>
+        /// <typeparam name="N">The width type</typeparam>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<W,T>(W w, N3 f, N1 d, T t = default)
-            where W : unmanaged, ITypeNat
+        public static T lsb<N,T>(N w, N3 f, N1 d, T t = default)
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => convert<ulong,T>(lsb_3x1_a(w,f,d));
 

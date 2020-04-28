@@ -63,28 +63,34 @@ namespace Z0
         void RunCapture(params PartId[] parts)
         {
             using var host = CreateCaptureHost();
-            host.Execute();
+            host.Execute(parts);
         }
 
-        void DescribeControl()
+        void DescribeControl(params string[] args)
         {
-            Print("I assemble parts:");
-            iter(Context.Parts, part => Print(part));
+            var parts = ParseParts(args);    
+            iter(parts, part => Print($"The {part} part was supplied via command-line"));        
 
-            Print("I know parts:");
-            iter(KnownParts, part => Print(part));
+            void Detail()
+            {
+                Print("I assemble parts:");
+                iter(Context.Parts, part => Print(part));
 
-            Print("I am configured with:");
-            iter(Context.Settings, setting => Print(setting));
+                Print("I know parts:");
+                iter(KnownParts, part => Print(part));
+
+                Print("I am configured with:");                
+                iter(Context.Settings, setting => Print(setting));
+            }
         }
 
         static PartId[] ParseParts(params string[] args)
             => args.Map(arg => Enums.parse<PartId>(arg).ValueOrDefault()).WhereSome();
         
         public override void RunShell(params string[] args)
-        {
-            RunCapture(ParseParts(args));   
-            //DescribeControl();         
+        {            
+            var parts = PartParser.Service.ParseValid(args);
+            RunCapture(parts);   
         }
 
         public static void Main(params string[] args)

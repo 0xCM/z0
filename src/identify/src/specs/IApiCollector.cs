@@ -21,5 +21,4 @@ namespace Z0
 
         IEnumerable<GenericApiOp> ImmGeneric(IApiHost host, ImmRefinementKind refinment); 
     } 
-
 }

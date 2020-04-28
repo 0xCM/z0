@@ -62,11 +62,13 @@ namespace Z0
             this.Diviner = diviner;
         }
 
+        IOperational Ops => Operational.Service;
+
         public IEnumerable<DirectApiGroup> CollectDirect(Assembly src)
-            => src.ApiHosts().SelectMany(CollectDirect);
+            => Ops.ApiHosts(src).SelectMany(CollectDirect);
 
         public IEnumerable<GenericApiOp> CollectGeneric(Assembly src)
-            => src.ApiHosts().SelectMany(CollectGeneric);
+            => Ops.ApiHosts(src).SelectMany(CollectGeneric);
 
         public IEnumerable<DirectApiGroup> CollectDirect(IApiHost src)        
             => from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)

@@ -24,9 +24,9 @@ namespace Z0
             => new HostCodeExtractor(bufferlen);
             
         [MethodImpl(Inline)]
-        HostCodeExtractor(int bufferlen)            
+        internal HostCodeExtractor(int bufferlen)            
         {
-            this.BufferLength = bufferlen;
+            BufferLength = bufferlen;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="src">The source member</param>
         public MemberExtract[] Extract(IApiHost src)
         {
-            var locator = StatelessIdentity.Factory.MemberLocator();
+            var locator = StatelessIdentity.Services.MemberLocator();
             var members = locator.Located(src).ToArray();
             return Extract(members);
         }

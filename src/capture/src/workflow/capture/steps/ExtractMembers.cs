@@ -26,7 +26,7 @@ namespace Z0.Asm
  
             public Member[] LocateMembers(IApiHost host)
             {
-                var locator = StatelessIdentity.Factory.MemberLocator();
+                var locator = StatelessIdentity.Services.MemberLocator();
                 var located = locator.Located(host).ToArray();
                 Context.Raise(HostMembersLocated.Define(host.UriPath, located));              
                 return located;

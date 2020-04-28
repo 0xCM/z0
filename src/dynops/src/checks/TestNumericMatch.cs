@@ -9,19 +9,6 @@ namespace Z0
 
     using static Seed;        
 
-    public readonly struct TestNumericMatch : ITestNumericMatch
-    {
-        [MethodImpl(Inline)]
-        public static ITestNumericMatch Create(IPolyrand random)        
-            => new TestDynamic(random);
-
-        public IPolyrand Random {get;}        
-        
-        [MethodImpl(Inline)]
-        public TestNumericMatch(IPolyrand random)
-            => Random = random;
-    }
-
     public interface ITestNumericMatch : ITestAction, ICheckNumeric, ITestRandom
     {
         /// <summary>

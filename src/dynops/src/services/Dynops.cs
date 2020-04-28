@@ -9,8 +9,6 @@ namespace Z0
 
     using static Seed;
 
-    using Svc = Z0;
-
     public readonly struct Dynops : IDynops
     {
         public static IDynops Services => default(Dynops);
@@ -18,6 +16,6 @@ namespace Z0
 
     public interface IDynops : IStatelessFactory<Dynops>
     {
-        IDynexus Nexus => Dynexus.Create(StatelessIdentity.Factory.Diviner);
+        IDynexus Dynexus => new Dynexus(StatelessIdentity.Services.Diviner);
     }
 }

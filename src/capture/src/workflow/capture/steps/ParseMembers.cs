@@ -22,7 +22,7 @@ namespace Z0.Asm
             internal ParseMembersStep(CaptureWorkflowContext context)
             {
                 this.Context = context;
-                this.Parser = StatelessExtract.Factory.ExtractParser();
+                this.Parser = Extract.Services.ExtractParser();
             }
 
             public ParsedMemberExtract[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
@@ -33,7 +33,7 @@ namespace Z0.Asm
             }
 
             public void SaveHex(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
-                => Context.Raise(HostAsmHexSaved.Define(host,  ArchiveOps.SaveUriBits(host, src, dst), dst));
+                => Context.Raise(HostAsmHexSaved.Define(host,  ArchiveOps.Service.SaveUriBits(host, src, dst), dst));
         }
     }
 }

@@ -18,11 +18,22 @@ namespace Z0.Asm
 
         readonly FolderName Subject;
 
+        readonly FolderPath Root;
+
         readonly IHostCodeExtractor Extractor;
 
         readonly IExtractParser Parser;
 
-        ICaptureArchive CodeArchive => Context.CaptureArchive(Area, Subject);
+        ICaptureArchive CodeArchive 
+        {
+            get             
+            {
+                if(Area.IsNonEmpty || Subject.IsNonEmpty)
+                    return Context.CaptureArchive(Area, Subject);
+                else
+                    return Archives.Services.CaptureArchive(Root);
+            }
+        }
 
         [MethodImpl(Inline)]
         internal HostCaptureService(IAsmContext context, FolderName area, FolderName subject)
@@ -30,8 +41,20 @@ namespace Z0.Asm
             Context = context;
             Area = area;
             Subject = subject;
+            Root = (context.RootCaptureArchive.RootDir + area) + subject;
             Extractor = AsmWorkflows.Stateless.HostExtractor();
-            Parser = StatelessExtract.Factory.ExtractParser(new byte[Context.DefaultBufferLength]);
+            Parser = Z0.Extract.Services.ExtractParser(new byte[Context.DefaultBufferLength]);
+        }
+
+        [MethodImpl(Inline)]
+        internal HostCaptureService(IAsmContext context, FolderPath root)
+        {
+            Context = context;
+            Area = FolderName.Empty;
+            Subject = FolderName.Empty;
+            Root = root;
+            Extractor = AsmWorkflows.Stateless.HostExtractor();
+            Parser = Z0.Extract.Services.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
 
         public MemberExtract[] Extract(ApiHostUri host, bool save)
@@ -49,7 +72,7 @@ namespace Z0.Asm
         public AsmFunction[] Decode(ApiHostUri host, ParsedMemberExtract[] parsed, bool save)
             => Decode(FindHost(host), parsed, save);
 
-        public HostCapture CaptureHost(ApiHostUri host, bool save )
+        public HostCapture CaptureHost(ApiHostUri host, bool save)
         {
             var extracts = Extract(host, save);
             var parsed = Parse(host,extracts, save);
@@ -80,7 +103,7 @@ namespace Z0.Asm
             var hostArchive = CodeArchive.CaptureArchive(host);
             using var writer = Context.Writer(hostArchive.AsmPath);
             for(var i=0 ;i<decoded.Length; i++)          
-                writer.Write(decoded[i]);
+                writer.WriteAsm(decoded[i]);
         }
 
         AsmFunction[] Decode(Option<IApiHost> mayhaps, ParsedMemberExtract[] parsed, bool save)

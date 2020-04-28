@@ -5,6 +5,8 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     
     using K = Kinds;
     
@@ -43,7 +45,7 @@ namespace Z0.Asm
             var dst = CodeArchive.CaptureArchive(host.UriPath);
             if(dst.HexPath.Exists())
             {
-                var code = ArchiveOps.CreateCodeIndex(StatelessIdentity.Factory.MemberLocator(), ApiSet, host.UriPath, CodeArchive.RootDir);
+                var code = ArchiveOps.Service.CreateCodeIndex(StatelessIdentity.Services.MemberLocator(), ApiSet, host.UriPath, CodeArchive.RootDir);
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.BinaryOperators)
@@ -67,13 +69,13 @@ namespace Z0.Asm
             }
         }
         
-        public void Execute(params string[] args)
+        public void Execute(params PartId[] parts)
         {
             using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
+            //Context.Notify($"{BufferCount} buffers of length {BufferSize} successfully allocated");
 
-            Context.Notify($"{BufferCount} buffers of length {BufferSize} successfully allocated");
-            var catalogs = ApiSet.Composition.Catalogs;
-            iter(catalogs,ExecuteCatalog);
+            //var catalogs = ApiSet.Composition.Catalogs;
+            iter(ApiSet.MatchingCatalogs(parts), ExecuteCatalog);
         }
     }
 }

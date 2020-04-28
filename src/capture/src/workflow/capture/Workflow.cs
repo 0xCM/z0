@@ -27,14 +27,14 @@ namespace Z0.Asm
                 formatter, 
                 writerfactory, 
                 AsmWorkflows.Stateless.HostExtractor(),
-                StatelessExtract.Factory.ExtractParser(), 
+                Extract.Services.ExtractParser(), 
                 EventBroker);
         }
  
-        public void Run(AsmWorkflowConfig config) 
+        public void Run(AsmWorkflowConfig config, params PartId[] parts) 
         {
             var step = new CaptureCatalogStep(Context);
-            step.CaptureCatalogs(config);
+            step.CaptureCatalogs(config, parts);
         }
     }
 }

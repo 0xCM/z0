@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    public interface ICaptureHost : IExecutable, IDisposable
+    public interface ICaptureHost : IExecutable<PartId>, IDisposable
     {
-
+        
     }
 
 }

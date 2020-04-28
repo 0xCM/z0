@@ -55,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<T>(SubGrid64<M,N,T> src)
-            => new BitGrid64<T>(src.Data, val8u<M>(), val8u<N>());
+            => new BitGrid64<T>(src.Data);
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid64<M,N,T>(BitGrid64<T> src)

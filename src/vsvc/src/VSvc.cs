@@ -23,7 +23,7 @@ namespace Z0
 
     }
 
-    [ApiHost]
+    [ApiHost("checks")]
     public class VSvcChecks : IApiHost<VSvcChecks>
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

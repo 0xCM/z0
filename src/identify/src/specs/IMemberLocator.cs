@@ -22,6 +22,5 @@ namespace Z0
         IEnumerable<Member> HostedNaturalNumeric(IApiHost src);         
 
         IEnumerable<Member> LocatedNaturalNumeric(IApiHost src);   
-
     }
 }

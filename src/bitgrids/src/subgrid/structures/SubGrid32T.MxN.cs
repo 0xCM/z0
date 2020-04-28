@@ -30,24 +30,14 @@ namespace Z0
         /// The number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 4;
-
-        /// <summary>
-        /// The maximum grid width
-        /// </summary>
-        public static N32 W => default;
-
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dim => default;
         
         [MethodImpl(Inline)]
         public static implicit operator SubGrid32<M,N,T>(in Block32<T> src)
-            => new SubGrid32<M, N, T>(src);
+            => new SubGrid32<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid32<M,N,T>(uint src)
-            => new SubGrid32<M, N, T>(src);
+            => new SubGrid32<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator uint(SubGrid32<M,N,T> src)
@@ -55,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<T>(SubGrid32<M,N,T> src)
-            => new BitGrid32<T>(src.Data, val8u<M>(), val8u<N>());
+            => new BitGrid32<T>(src.Data);
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid32<M,N,T>(BitGrid32<T> src)

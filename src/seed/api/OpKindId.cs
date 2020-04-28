@@ -338,6 +338,9 @@ namespace Z0
         /// </summary>
         Test,
 
+        Ones,
+
+        Zeroes,
 
     }    
 }

@@ -53,7 +53,6 @@ namespace Z0.Asm
 
         ICaptureArchive CodeArchive => Me.CaptureArchive(ExecutingApp);
 
-
         protected IBitArchiveWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
@@ -64,71 +63,13 @@ namespace Z0.Asm
         {
             var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             var format = AsmFormatSpec.WithFunctionTimestamp;
-            return AsmStateless.Services.AsmWriter(dst,format);
+            return AsmCore.Services.AsmWriter(dst,format);
         }
-
-        static K.UnaryOpClass Unary => default;
 
         static K.BinaryOpClass Binary => default;
                 
         IAsmFunctionDecoder Decoder => Context.Decoder;
 
-
-        [MethodImpl(Inline)]
-        public static IHostBitsArchive HostBits(PartId assembly, ApiHostUri host, FolderPath root = null)
-            => HostBitsArchive.Create(assembly, host, root);
-
-
-        // IEnumerable<string> PrimalBitLogicOps
-        //     => seq("and", "or", "xor", "nand", "nor", "xnor",
-        //         "impl","nonimpl", "cimpl", "cnonimpl");
-
-        // void bitlogic_match(in BufferSeq buffers)
-        // {
-        //     var names = PrimalBitLogicOps;
-        //     var kinds = NumericKind.Integers.DistinctKinds();
-        //     var widths = array(TypeWidth.W8, TypeWidth.W16, TypeWidth.W32, TypeWidth.W64);
-        //     foreach(var n in names)
-        //     foreach(var w in widths)
-        //     foreach(var k in kinds)
-        //         TestPrimalMatch(buffers, n, w, k);                        
-        // }
-
-        IHostBitsArchive HostBits(ApiHostUri host)
-            => HostBits(host.Owner, host);
-
-        // TestCaseRecord TestPrimalMatch(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
-        // {
-        //     var catalog = PartId.GMath;
-        //     var dSrc = ApiHostUri.FromHost(typeof(math));
-        //     var gSrc = ApiHostUri.FromHost(typeof(gmath));
-
-        //     var dId = Identify.Op(name, kind, false);
-        //     var gId = Identify.Op(name, kind, true);
-
-        //     var dArchive = Context.HostBits(catalog, dSrc);
-        //     var gArchive = Context.HostBits(catalog, gSrc);
-
-        //     var d = dArchive.Read(dId).Single().ToApiCode();
-        //     var g = gArchive.Read(gId).Single().ToApiCode();
-
-        //     return TestMatch(buffers, Binary, w,d,g);
-        // }
-
-        void capture_constants()
-        {
-            var src = typeof(BitMask).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
-
-            var exchange = Me.CaptureExchange.Context;
-            var capture = Me.CaptureService;       
-            var captured = capture.Capture(exchange, src.Identify(), src).Require();
-                    
-            using var hexout = HexWriter();
-            using var asmout = AsmWriter();            
-            
-            hexout.WriteCode(captured.Code);
-            asmout.Write(Decoder.Decode(captured).Require());
-        }
 
         [MethodImpl(Inline)]
         static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
@@ -150,12 +91,12 @@ namespace Z0.Asm
             //var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
 
             var fCaptured = Me.Capture(f.Identify(), f).Require();
-            hexout.WriteCode(fCaptured.Code);
-            asmout.Write(Decoder.Decode(fCaptured).Require());
+            hexout.WriteHex(fCaptured.Code);
+            asmout.WriteAsm(Decoder.Decode(fCaptured).Require());
 
             var gCaptured = Me.Capture(g.Identify(), g).Require();
-            hexout.WriteCode(gCaptured.Code);
-            asmout.Write(Decoder.Decode(gCaptured).Require());
+            hexout.WriteHex(gCaptured.Code);
+            asmout.WriteAsm(Decoder.Decode(gCaptured).Require());
         }
                 
 
@@ -173,8 +114,8 @@ namespace Z0.Asm
             var idD = Identify.Op(name, w, kind, false);
             var idG = Identify.Op(name, w, kind, true);
 
-            var d = HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
-            var g = HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
+            var d = Me.HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
+            var g = Me.HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
 
             return Me.Match(buffers, Binary, w,d,g);
         }
@@ -193,65 +134,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        static int activations;
-        
-        static void OnMnemonid(Instruction i)
-        {            
-            activations++;
-        }
 
-        static int listcount = 0;
-        
-        static AsmInstructionList Pipe(AsmInstructionList src)
-        {        
-            listcount++;
-            return src;
-        }
-
-
-        // void RunPipe()
-        // {
-        //     var archive =  HostBitsArchive.Create(PartId.GVec);
-        //     var source = archive.ToInstructionSource(Context);
-        //     var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
-        //     var triggers = AsmTriggerSet.Define(trigger);
-        //     var flow =  Context.InstructionFlow(source, triggers);
-        //     var pipe = AsmInstructionPipe.From(Pipe); 
-        //     var results = flow.Flow(pipe).Force();
-
-        //     var count = 0;
-        //     foreach(var result in results)
-        //     {
-        //         foreach(var i in result)
-        //         {
-        //             if(trigger.CanFire(i))
-        //                 count++;
-        //         }
-        //     }            
-        // }
-
-        void Run50(in BufferSeq buffers)
-        {
-            var dSrc = ApiHostUri.FromHost(typeof(math));
-            var gSrc = ApiHostUri.FromHost(typeof(gmath));
-
-            var id = PartId.GMath;
-            var direct = HostBits(id, dSrc);
-            var generic = HostBits(id, gSrc);
-
-            foreach(var a in direct.Read().WithParameterCount(1))
-            {                
-                var code = a.ToApiCode();
-                if(a.AcceptsParameter(NumericKind.U8))
-                    Me.CheckFixedMatch<Fixed8>(buffers, Unary, code, code);
-                else if(a.AcceptsParameter(NumericKind.U16))
-                    Me.CheckFixedMatch<Fixed16>(buffers, Unary, code,code);
-                else if(a.AcceptsParameter(NumericKind.U32))
-                    Me.CheckFixedMatch<Fixed32>(buffers, Unary, code, code);
-                else if(a.AcceptsParameter(NumericKind.U64))
-                    Me.CheckFixedMatch<Fixed64>(buffers, Unary, code, code);
-            }
-        }
 
 
     #if Megacheck

@@ -48,4 +48,13 @@ namespace Z0
 
     public sealed class TestAttribute : A { public TestAttribute() : base(K.Test) {} }
 
+    public sealed class BroadcastAttribute : A { public BroadcastAttribute(object group = null) : base(K.Broadcast, group) {} }    
+
+    public sealed class ZeroesAttribute : A { public ZeroesAttribute() : base(K.Zeroes) {} }
+
+    public sealed class OnesAttribute : A { public OnesAttribute() : base(K.Ones) {} }
+
+
+    
+
 }

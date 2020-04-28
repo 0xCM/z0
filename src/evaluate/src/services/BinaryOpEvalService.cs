@@ -13,7 +13,7 @@ namespace Z0
     readonly struct BinaryOpEvalService<T> : IBinaryOpEvalService<T>
         where T : unmanaged
     {
-        IDynexus Dynamic => Dynops.Services.Nexus;
+        IDynexus Dynamic => Dynops.Services.Dynexus;
 
         public ref readonly BinaryEval<T> Evaluate(in BinaryOpEval<T> package)
         {

@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="w">The grid bit width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<T> BitGrid<T>(this IPolyrand random, N16 w, T t = default)
+        public static BitGrid16<T> BitGrid<T>(this IPolyrand random, N16 w)
             where T : unmanaged
                 => BG.define<T>(w,random.Next<ushort>());
 
@@ -35,9 +35,9 @@ namespace Z0
         /// <param name="w">The grid bit width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid32<T> BitGrid<T>(this IPolyrand random, N32 w, int rows, int cols, T t = default)
+        public static BitGrid32<T> BitGrid<T>(this IPolyrand random, N32 w)
             where T : unmanaged
-                => BG.define<T>(w,rows,cols,random.Next<uint>());
+                => BG.define<T>(w,random.Next<uint>());
 
         /// <summary>
         /// Creates a 64-bit generic bitgrid
@@ -46,9 +46,9 @@ namespace Z0
         /// <param name="w">The grid bit width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid64<T> BitGrid<T>(this IPolyrand random, N64 w, int rows, int cols, T t = default)
+        public static BitGrid64<T> BitGrid<T>(this IPolyrand random, N64 w)
             where T : unmanaged
-                => BG.define<T>(w,rows,cols,random.Next<ulong>());
+                => BG.define<T>(w,random.Next<ulong>());
 
         /// <summary>
         /// Allocates and populates a naturally-sized bitgrid from a random source

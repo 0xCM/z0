@@ -44,7 +44,6 @@ namespace Z0
         /// </summary>
         IEnumerable<OperationBits> Read(PartId owner);
 
-
         /// <summary>
         /// Reads all files in the archive that satisfy a supplied predicate
         /// </summary>
@@ -67,6 +66,5 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source path</param>
         IEnumerable<OperationBits> Read(string name); 
-
     }    
 }

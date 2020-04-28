@@ -35,7 +35,7 @@ namespace Z0.Asm
             ApiSet = api;
             CodeArchive = Archives.Services.CaptureArchive(root);
             CodeArchive.Clear();
-            ApiCollector =  context.Factory.ApiCollector();
+            ApiCollector =  context.Contextual.ApiCollector();
             ConnectReceivers(Broker);
         }
 
@@ -159,7 +159,7 @@ namespace Z0.Asm
         IEnumerable<IApiHost> ApiHosts => ApiSet.Hosts;
 
         IHostAsmArchiver Archive(IApiHost host)
-            => AsmStateless.Services.ImmArchive(host.UriPath, Formatter, CodeArchive.RootDir);
+            => AsmCore.Services.ImmArchive(host.UriPath, Formatter, CodeArchive.RootDir);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8Value[] imm8)
         {

@@ -8,6 +8,6 @@ namespace Z0.Asm
 
     public interface IAsmFunctionWriter : IFileStreamWriter
     {
-        void Write(params AsmFunction[] src);
+        void WriteAsm(params AsmFunction[] src);
     }
 }

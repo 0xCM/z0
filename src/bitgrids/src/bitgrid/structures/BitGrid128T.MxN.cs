@@ -33,16 +33,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 16;
 
-        /// <summary>
-        /// The grid width
-        /// </summary>
-        public static W128 W => default;
-
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dim => default;
-
         [MethodImpl(Inline)]
         public static implicit operator Vector128<T>(in BitGrid128<M,N,T> src)
             => src.Data;

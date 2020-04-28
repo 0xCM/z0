@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using static Seed;
@@ -27,5 +28,15 @@ namespace Z0
 
         Option<IApiHost> FindHost(ApiHostUri uri)
             => option(Hosts.Where(h => h.UriPath == uri).FirstOrDefault());
+        
+        IEnumerable<IApiCatalog> MatchingCatalogs(params PartId[] parts)
+        {
+            if(parts.Length == 0)
+                return Catalogs;
+            else
+                return  from c in Catalogs
+                        where parts.Contains(c.PartId)
+                        select c;
+        }
     }
 }

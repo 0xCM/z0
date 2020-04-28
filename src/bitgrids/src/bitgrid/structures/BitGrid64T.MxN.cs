@@ -31,16 +31,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 8;
 
-        /// <summary>
-        /// The grid width
-        /// </summary>
-        public static N64 W => default;
-
-        /// <summary>
-        /// The grid dimension
-        /// </summary>
-        public static GridDim<M,N,T> Dim => default;
-
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<M,N,T>(in Block64<T> src)
             => new BitGrid64<M,N,T>(src);
@@ -55,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<T>(BitGrid64<M,N,T> src)
-            => new BitGrid64<T>(src.Data, val8u<M>(), val8u<N>());
+            => new BitGrid64<T>(src.Data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<M,N,T>(BitGrid64<T> src)

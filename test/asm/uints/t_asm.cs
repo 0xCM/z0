@@ -17,11 +17,7 @@ namespace Z0.Asm
         where U : t_asm<U>
     {     
         protected ICaptureArchive CodeArchive 
-            => Archives.Services.CaptureArchive(
-                Env.Current.LogDir + FolderName.Define("test"), 
-                FolderName.Define("data"), 
-                FolderName.Define(typeof(U).Name)
-                );
+            => Archives.Services.CaptureArchive(DataDir);
         
         protected StreamWriter FileStreamWriter([Caller] string caller = null)
             => CodeArchive.HexPath(FileName.Define(caller)).Writer();
@@ -45,5 +41,16 @@ namespace Z0.Asm
 
         protected BufferSeqId Right => BufferSeqId.Right;
 
+        protected IBitArchiveWriter HexWriter([Caller] string caller = null)
+        {            
+            var dstPath = CodeArchive.HexPath(FileName.Define(caller, FileExtensions.Hex));
+            return Archives.Services.BitArchiveWriter(dstPath);
+        }
+
+        protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
+        {
+            var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
+            return AsmCore.Services.AsmWriter(dst, AsmFormatSpec.WithSectionDelimiter);
+        }
     }
 }
