@@ -6,23 +6,37 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+    
     using static Seed;
-    using static Memories;
-
-    public class Archives
+    
+    public readonly struct Archives : IArchives
     {
-        public static ApiCodeIndex code(IMemberLocator locator, IApiSet api, ApiHostUri host, FolderPath root)
-        {
-            var indexer =  ApiIndexBuilder.Create(api, locator);
-            var members = locator.Hosted(api.FindHost(host).Require());
-            var apiIndex = ApiIndex.Create(members);
-            var archive =  CaptureArchive.Create(root);
-            var paths = archive.CaptureArchive(host);
-            var reader = UriBitsReader.Service;
-            var code = reader.Read(paths.HexPath);
-            var opIndex = code.ToOpIndex(); 
-            return indexer.CreateIndex(apiIndex, opIndex);            
-        }
+        public static IArchives Services => default(Archives);
     }
+    
+    public interface IArchives : IStatelessFactory<Archives>
+    {        
+        IUriBitsReader UriBitsReader => new UriBitsReader();
+        
+        [MethodImpl(Inline)]
+        ICaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
+            => new CaptureArchive(root ?? Env.Current.LogDir, area ?? FolderName.Empty, subject ?? FolderName.Empty);
+        
+        [MethodImpl(Inline)]
+        IHostCaptureArchive HostCaptureArchive(ICaptureArchive root, ApiHostUri host) 
+            => new HostCaptureArchive(root,host);
+
+        [MethodImpl(Inline)]
+        IBitArchiveWriter BitArchiveWriter(FilePath dst)
+            => new BitArchiveWriter(dst);
+        
+        [MethodImpl(Inline)]
+        IUriBitsWriter UriBitsWriter(FilePath dst)
+            => new UriBitsWriter(dst);
+
+        UriBitsWriterFactory UriBitsWriterFactory
+            => dst => UriBitsWriter(dst);
+    }
+    
+
 }

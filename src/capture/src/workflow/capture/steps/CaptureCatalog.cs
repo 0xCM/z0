@@ -8,31 +8,26 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AsmEvents;
 
     partial class HostCaptureSteps
     {
-        public readonly struct DriveCatalogCapture
+        public readonly struct CaptureCatalogStep : ICaptureCatalogStep
         {
             readonly CaptureWorkflowContext Context;
-
-            [MethodImpl(Inline)]
-            internal static DriveCatalogCapture Create(CaptureWorkflowContext context)
-                => new DriveCatalogCapture(context);
             
             [MethodImpl(Inline)]
-            DriveCatalogCapture(CaptureWorkflowContext context)
+            internal CaptureCatalogStep(CaptureWorkflowContext context)
             {
                 this.Context = context;
             }
 
             public void CaptureCatalogs(AsmWorkflowConfig config)
             {
-                var root = CaptureArchive.Create(config.EmissionRoot);
+                var root = Archives.Services.CaptureArchive(config.EmissionRoot);
                 CaptureCatalogs(root);
             }
 
-            void CaptureCatalogs(ICaptureArchive dst)
+            public void CaptureCatalogs(ICaptureArchive dst)
             {                
                 dst.Clear();
                 var catalogs = Context.ApiSet.Composition.Catalogs;
@@ -44,18 +39,18 @@ namespace Z0.Asm
                 }
             }
 
-            void CaptureHost(DriveHostCapture step, IApiHost host, ICaptureArchive dst)
+            public void CaptureHost(ICaptureHostStep step, IApiHost host, ICaptureArchive dst)
             {                
                 step.Execute(host, dst);
             }
 
-            void CaptureCatalog(IApiCatalog src, ICaptureArchive dst)
+            public void CaptureCatalog(IApiCatalog src, ICaptureArchive dst)
             {
                 if(src.HasApiHostContent)
                 {
                     var start = Context.Raise(StepEvents.Started(src, Context.Correlate()));
 
-                    var step = DriveHostCapture.Create(Context);             
+                    var step = new CaptureHostStep(Context);             
                     foreach(var host in src.ApiHosts)
                         CaptureHost(step, host, dst);
 

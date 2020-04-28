@@ -23,7 +23,7 @@ namespace Z0.Asm
         ICaptureService ICaptureServiceProxy.CaptureService => Context.CaptureService;        
 
         ICaptureArchive CaptureArchive(PartId part)
-            => Z0.CaptureArchive.Create(
+            => Archives.Services.CaptureArchive(
                 (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
                 FolderName.Define("capture"));
 
@@ -60,7 +60,7 @@ namespace Z0.Asm
         {
             Context = context;
             Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();  
-            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureControl, Buffers[(int)Aux3], Buffers[(int)Aux4]);
+            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[(int)Aux3], Buffers[(int)Aux4]);
         }
         
         public IAsmContext Context {get;}

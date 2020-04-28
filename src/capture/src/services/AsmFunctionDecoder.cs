@@ -13,18 +13,14 @@ namespace Z0.Asm
     readonly struct AsmFunctionDecoder : IAsmFunctionDecoder
     {
         readonly IAsmInstructionDecoder Decoder;
-
-        [MethodImpl(Inline)]
-        public static AsmFunctionDecoder Create(in AsmFormatSpec format)
-            => new AsmFunctionDecoder(format);
         
         [MethodImpl(Inline)]
-        AsmFunctionDecoder(in AsmFormatSpec format)
+        internal AsmFunctionDecoder(in AsmFormatSpec format)
         {
-            Decoder = AsmInstructionDecoder.Create(format);
+            Decoder =  AsmWorkflows.Stateless.InstructionDecoder(format);
         }
 
-        static IAsmFunctionBuilder Builder => AsmStateless.Factory.FunctionBuilder;
+        static IAsmFunctionBuilder Builder => AsmStateless.Services.FunctionBuilder;
 
         public Option<AsmFunction> Decode(MemberCapture src)
             => DecodeCaptured(Decoder, src);

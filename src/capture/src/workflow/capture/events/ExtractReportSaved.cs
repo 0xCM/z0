@@ -9,9 +9,9 @@ namespace Z0.Asm
 
     using static Seed;
 
-    using E = AsmEvents.ExtractReportSaved;
+    using E = CaptureWorkflowEvents.ExtractReportSaved;
 
-    partial class AsmEvents
+    partial class CaptureWorkflowEvents
     {
         public readonly struct ExtractReportSaved : IAppEvent<E>
         {        

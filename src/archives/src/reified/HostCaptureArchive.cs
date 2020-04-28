@@ -18,7 +18,7 @@ namespace Z0
         public ApiHostUri HostUri {get;}
 
         [MethodImpl(Inline)]
-        public static IHostCaptureArchive Define(ICaptureArchive root, in ApiHostUri host)
+        public static IHostCaptureArchive Create(ICaptureArchive root, ApiHostUri host)
             => new HostCaptureArchive(root,host);
 
         public FolderPath[] Clear()
@@ -30,7 +30,7 @@ namespace Z0
             => Parent.Narrow(area, subject);
 
         [MethodImpl(Inline)]
-        HostCaptureArchive(ICaptureArchive root, in ApiHostUri host)
+        internal HostCaptureArchive(ICaptureArchive root, ApiHostUri host)
         {
             this.HostUri = host;
             this.Parent = root;

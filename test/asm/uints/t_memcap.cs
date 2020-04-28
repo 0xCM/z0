@@ -16,7 +16,7 @@ namespace Z0.Asm
             if(!captured)
                 return false;
 
-            var data = captured.Value.ExtractedData.Parsed;
+            var data = captured.Value.Parsed.Parsed;
             if(data.Length != src.Length)
                 return false;
             return true;

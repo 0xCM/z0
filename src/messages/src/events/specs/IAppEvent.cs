@@ -6,6 +6,12 @@ namespace Z0
 {
     using System;
 
+    partial class XTend
+    {
+        public static void Deposit(this IAppMsgSink dst, IAppEvent src)      
+            => dst.NotifyConsole(src.Message);
+    }
+
     /// <summary>
     /// Characterizes a correlated message, accompanied by arbitrary content, that describes something that occurred
     /// within the system

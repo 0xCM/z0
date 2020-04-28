@@ -10,9 +10,9 @@ namespace Z0.Asm
     using static Seed;
 
     using R = ExtractReport;
-    using E = AsmEvents.ExtractReportCreated;
+    using E = CaptureWorkflowEvents.ExtractReportCreated;
 
-    partial class AsmEvents
+    partial class CaptureWorkflowEvents
     {
         /// <summary>
         /// Creates a <see cref="E" /> event

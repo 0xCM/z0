@@ -11,14 +11,13 @@ namespace Z0.Asm
 
     public readonly struct AsmStateless : IAsmStateless
     {
-        public static IAsmStateless Factory => default(AsmStateless);
+        public static IAsmStateless Services => default(AsmStateless);
     }
 
     /// <summary>
-    /// Defines factory methods that produce context-free services that require 
-    /// no *unsupplied* state to operate
+    /// Defines factory methods that produce context-free services that require no *unsupplied* state to operate 
     /// </summary>
-    public interface IAsmStateless : IStatelessFactory<AsmStateless>, IStatelessIdentity
+    public interface IAsmStateless : IStatelessFactory<AsmStateless>, IStatelessIdentity, IArchives
     {
         AsmWriterFactory AsmWriterFactory
             => AsmFunctionWriter.Factory;
@@ -51,7 +50,7 @@ namespace Z0.Asm
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
         IAsmFunctionWriter AsmWriter(FilePath dst, in AsmFormatSpec? config = null)
-            => AsmFunctionWriter.Create(dst, AsmStateless.Factory.AsmFormatter(config));  
+            => AsmFunctionWriter.Create(dst, AsmStateless.Services.AsmFormatter(config));  
 
         /// <summary>
         /// Initializes a cil function formatter with an optionally-specified configuration
@@ -60,5 +59,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         ICilFunctionFormatter CilFormatter(CilFormatConfig config = null)          
             => CilFunctionFormatter.Create(config);
+
+        [MethodImpl(Inline)]
+        IHostAsmArchiver ImmArchive(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+            => new HostAsmArchiver(host, true, formatter, dst);
+
+        [MethodImpl(Inline)]
+        IHostAsmArchiver HostArchive(PartId catalog, string host, IAsmFormatter formatter)
+            => new HostAsmArchiver(catalog, host, formatter);
     }
 }

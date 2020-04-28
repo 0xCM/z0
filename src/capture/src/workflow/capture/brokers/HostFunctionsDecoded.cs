@@ -6,11 +6,10 @@ namespace Z0.Asm
 {
     using System;
     
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
 
-    public interface IHostFunctionsDecodedBroker : IEventBroker<HostFunctionsDecoded>
+    public interface IHostFunctionsDecodedBroker : IEventBroker
     {
         HostFunctionsDecoded FunctionsDecoded => HostFunctionsDecoded.Empty;
     }
-
 }

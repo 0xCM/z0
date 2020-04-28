@@ -9,9 +9,9 @@ namespace Z0.Asm
     using System.Reflection;
 
     using static Seed;
-    using E = AsmEvents.ImmInjectionFailed;
+    using E = ImmEmissionEvents.ImmInjectionFailed;
 
-    partial class AsmEvents
+    partial class ImmEmissionEvents
     {
         public readonly struct ImmInjectionFailed : IAppError<E>
         {

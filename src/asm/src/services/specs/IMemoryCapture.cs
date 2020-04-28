@@ -8,9 +8,9 @@ namespace Z0.Asm
     {
         Option<LocatedCode> Extract(MemoryAddress src);        
 
-        Option<ApiMemoryCapture> Capture(MemoryAddress src);        
-
         Option<LocatedCode> Parse(LocatedCode src);
+
+        Option<MemoryCapture> Capture(MemoryAddress src);        
 
         Option<AsmInstructionList> Decode(LocatedCode src);                    
     }

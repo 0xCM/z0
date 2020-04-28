@@ -8,22 +8,18 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
 
     partial class HostCaptureSteps
     {
-        public readonly struct ParseMembers : IHostExtractParser
+        public readonly struct ParseMembersStep :  IParseMembersStep
         {
             readonly CaptureWorkflowContext Context;
             
             readonly IExtractParser Parser;
-
-            [MethodImpl(Inline)]
-            internal static ParseMembers Create(CaptureWorkflowContext context)
-                => new ParseMembers(context);
             
             [MethodImpl(Inline)]
-            ParseMembers(CaptureWorkflowContext context)
+            internal ParseMembersStep(CaptureWorkflowContext context)
             {
                 this.Context = context;
                 this.Parser = StatelessExtract.Factory.ExtractParser();
@@ -37,7 +33,7 @@ namespace Z0.Asm
             }
 
             public void SaveHex(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
-                => Context.Raise(HostAsmHexSaved.Define(host, UriBitsWriter.Save(host, src, dst), dst));
+                => Context.Raise(HostAsmHexSaved.Define(host,  ArchiveOps.SaveUriBits(host, src, dst), dst));
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Z0.Asm
     using static Seed;
 
     using R = MemberParseReport;
-    using E = AsmEvents.ParseReportCreated;
+    using E = CaptureWorkflowEvents.ParseReportCreated;
 
-    partial class AsmEvents
+    partial class CaptureWorkflowEvents
     {
         /// <summary>
         /// Creates a <see cref="E" /> event

@@ -34,7 +34,7 @@ namespace Z0.Asm
             this.Dispatcher = EvalDispatcher.Create(random, context);
             this.BufferSize = 1024;
             this.BufferCount = 3;
-            this.CodeArchive = CaptureArchive.Create(root);
+            this.CodeArchive = Archives.Services.CaptureArchive(root);
             this.ApiSet = context;
         }
                 
@@ -43,7 +43,7 @@ namespace Z0.Asm
             var dst = CodeArchive.CaptureArchive(host.UriPath);
             if(dst.HexPath.Exists())
             {
-                var code = Archives.code(StatelessIdentity.Factory.MemberLocator(), ApiSet, host.UriPath, CodeArchive.RootDir);
+                var code = ArchiveOps.CreateCodeIndex(StatelessIdentity.Factory.MemberLocator(), ApiSet, host.UriPath, CodeArchive.RootDir);
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.BinaryOperators)

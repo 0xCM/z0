@@ -8,20 +8,16 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
 
     partial class HostCaptureSteps
     {
-        public readonly struct DecodeMembers
+        public readonly struct DecodeStep : IDecodeStep
         {
             readonly CaptureWorkflowContext Context;
-
-            [MethodImpl(Inline)]
-            internal static DecodeMembers Create(CaptureWorkflowContext context)
-                => new DecodeMembers(context);
             
             [MethodImpl(Inline)]
-            DecodeMembers(CaptureWorkflowContext context)
+            internal DecodeStep(CaptureWorkflowContext context)
             {
                 this.Context = context;
             }
@@ -39,7 +35,7 @@ namespace Z0.Asm
                 writer.Write(src);
             }
 
-            AsmFunction[] DecodeExtracts(params ParsedMemberExtract[] src)
+            public AsmFunction[] DecodeExtracts(params ParsedMemberExtract[] src)
             {
                 var dst = new AsmFunction[src.Length];
                 for(var i=0; i<src.Length; i++)
@@ -50,7 +46,6 @@ namespace Z0.Asm
                 }
                 return dst;
             }
-
         }
     }
 }

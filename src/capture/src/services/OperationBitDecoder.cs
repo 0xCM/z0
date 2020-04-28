@@ -10,18 +10,11 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    public interface IOperationBitDecoder : IService
-    {
-        Option<AsmInstructionList> Decode(OperationBits src);
-
-        IEnumerable<AsmInstructionList> Decode(IEnumerable<OperationBits> operations);
-    }
-
     public readonly struct OperationBitDecoder : IOperationBitDecoder
     {        
         public static IOperationBitDecoder Service => default(OperationBitDecoder);
 
-        IAsmInstructionDecoder InstructionDecoder => AsmDecoder.InstructionDecoder();
+        IAsmInstructionDecoder InstructionDecoder => AsmWorkflows.Stateless.InstructionDecoder();
         
         public Option<AsmInstructionList> Decode(OperationBits src)
             => InstructionDecoder.DecodeInstructions(src);

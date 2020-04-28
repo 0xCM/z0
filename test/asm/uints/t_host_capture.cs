@@ -12,7 +12,7 @@ namespace Z0.Asm
 
         public void capture_1()
         {
-            var service =  Context.HostCaptureService(FolderName.Define("test"), FolderName.Define(GetType().Name));
+            var service =  AsmWorkflows.Contextual(Context).HostCaptureService(FolderName.Define("test"), FolderName.Define(GetType().Name));
 
             var uri = ApiHostUri.FromHost<math>();
             var capture = service.CaptureHost(uri,true);

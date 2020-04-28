@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    partial class AsmEvents
+    partial class ImmEmissionEvents
     {        
         public readonly struct EmittedEmbeddedImm : IAppEvent<EmittedEmbeddedImm>
         {

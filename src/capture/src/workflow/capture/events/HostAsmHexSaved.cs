@@ -9,9 +9,9 @@ namespace Z0.Asm
 
     using static Seed;
 
-    using E = AsmEvents.HostAsmHexSaved;
+    using E = CaptureWorkflowEvents.HostAsmHexSaved;
 
-    partial class AsmEvents
+    partial class CaptureWorkflowEvents
     {
         public readonly struct HostAsmHexSaved : IAppEvent<E>
         {

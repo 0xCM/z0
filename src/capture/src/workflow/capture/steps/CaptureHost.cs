@@ -8,20 +8,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AsmEvents;
 
     partial class HostCaptureSteps
     {
-        public readonly struct DriveHostCapture
+        public readonly struct CaptureHostStep : ICaptureHostStep
         {
             readonly CaptureWorkflowContext Context;
-
-            [MethodImpl(Inline)]
-            internal static DriveHostCapture Create(CaptureWorkflowContext context)
-                => new DriveHostCapture(context);
             
             [MethodImpl(Inline)]
-            DriveHostCapture(CaptureWorkflowContext context)
+            internal CaptureHostStep(CaptureWorkflowContext context)
             {
                 this.Context = context;
             }
@@ -30,20 +25,20 @@ namespace Z0.Asm
             AppErrorEvent Error(Exception e)
                 => e;
 
-            ManageExtractReport ExtractReportManager
-                => ManageExtractReport.Create(Context);
+            ReportExtractsStep ExtractReportManager
+                => new ReportExtractsStep(Context);
 
-            ManageParseReport ParseReportManager
-                => ManageParseReport.Create(Context);
+            ReportParsedStep ParseReportManager
+                => new ReportParsedStep(Context);
 
-            ExtractMembers MemberExtract
-                => ExtractMembers.Create(Context);
+            ExtractMembersStep MemberExtract
+                => new ExtractMembersStep(Context);
 
-            DecodeMembers MemberDecode
-                => DecodeMembers.Create(Context);
+            DecodeStep MemberDecode
+                => new DecodeStep(Context);
 
-            ParseMembers MemberParse
-                => ParseMembers.Create(Context);
+            ParseMembersStep MemberParse
+                => new ParseMembersStep(Context);
 
             public void Execute(IApiHost host, ICaptureArchive dst)
             {
@@ -55,17 +50,17 @@ namespace Z0.Asm
                     if(host.Owner.IsNone())
                         return;
 
-                    var extracts = MemberExtract.Extracts(host);
+                    var extracts = MemberExtract.ExtractMembers(host);
 
                     if(extracts.Length == 0)
                         return;
                                     
-                    ExtractReportManager.SaveReport(ExtractReportManager.CreateReport(host.UriPath, extracts), paths.ExtractPath);
+                    ExtractReportManager.SaveExtractReport(ExtractReportManager.CreateExtractReport(host.UriPath, extracts), paths.ExtractPath);
 
                     var parsed = MemberParse.ParseExtracts(host.UriPath, extracts);
                     if(parsed.Length != 0)
                     {
-                        ParseReportManager.SaveReport(ParseReportManager.CreateReport(host.UriPath, parsed), paths.ParsedPath);                                                
+                        ParseReportManager.SaveParseReport(ParseReportManager.CreateParseReport(host.UriPath, parsed), paths.ParsedPath);                                                
                         MemberParse.SaveHex(host.UriPath, parsed, paths.HexPath);
 
                         var decoded = MemberDecode.DecodeParsed(host.UriPath, parsed);

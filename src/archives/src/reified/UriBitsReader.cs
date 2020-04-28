@@ -16,10 +16,6 @@ namespace Z0
     {
         public static IUriBitsReader Service => default(UriBitsReader);
         
-        [MethodImpl(Inline)]
-        public static IUriBitsReader Create(IContext context)
-            => default(UriBitsReader);
-
         /// <summary>
         /// Parses a row of identified hex text
         /// </summary>

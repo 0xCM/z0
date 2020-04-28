@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-
     public readonly ref struct CaptureExchange
     {
         /// <summary>
@@ -29,34 +28,36 @@ namespace Z0.Asm
         public readonly ICaptureService Service;
 
         /// <summary>
-        /// The junction to which events will be relayed
+        /// Allocatates buffers and creates an exchange over the allocation
         /// </summary>
-        readonly ICaptureJunction Junction;
-
+        /// <param name="context">The source context</param>
+        public static CaptureExchange Create(IAsmContext context)    
+            => Create(context.CaptureService, 
+                new byte[context.DefaultBufferLength], 
+                new byte[context.DefaultBufferLength]
+                );
+                
         /// <summary>
         /// Allocatates buffers and creates an exchange over the allocation
         /// </summary>
         /// <param name="context">The source context</param>
-        public static CaptureExchange Create(IAsmContext context)
+        public static CaptureExchange Create(ICaptureService service, int size = Pow2.T14)
         {
-            var size = context.DefaultBufferLength;                                    
-            var control = context.CaptureControl;            
             var cBuffer = new byte[size];
             var sBuffer = new byte[size];
-            return Create(control, cBuffer, sBuffer);
+            return Create(service, cBuffer, sBuffer);
         }        
 
         [MethodImpl(Inline)]
-        public static CaptureExchange Create(ICaptureControl control, Span<byte> capture, Span<byte> state)
-            => new CaptureExchange(control,capture,state);
+        public static CaptureExchange Create(ICaptureService service, Span<byte> capture, Span<byte> state)
+            => new CaptureExchange(service, capture, state);
 
-        CaptureExchange(ICaptureControl control, Span<byte> capture, Span<byte> state)            
+        CaptureExchange(ICaptureService service, Span<byte> capture, Span<byte> state)            
         {
             require(capture.Length == state.Length);
             this.TargetBuffer = capture;
             this.StateBuffer = state;
-            this.Junction = control as ICaptureJunction;
-            this.Service = control;
+            this.Service = service;
         }
 
         public void ClearBuffers()
@@ -93,14 +94,14 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public ref readonly MemberCapture CaptureComplete(in ExtractState state, in MemberCapture captured)
         {
-            Junction.OnCaptureComplete(this, state, captured);
+            //Junction.OnCaptureComplete(this, state, captured);
             return ref captured;
         }
 
         [MethodImpl(Inline)]
         public ref readonly ExtractState CaptureStep(in ExtractState state)
         {
-            Junction.OnCaptureStep(this, state);
+            //Junction.OnCaptureStep(this, state);
             return ref state;
         }
 

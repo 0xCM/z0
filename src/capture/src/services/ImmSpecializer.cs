@@ -19,16 +19,6 @@ namespace Z0.Asm
 
         readonly IDynexus Dynamic;
 
-        /// <summary>
-        /// Instantiates a contextual immediate capture service for a unary operator
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="src">A unary operator that requires an immediate value</param>
-        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
-        [MethodImpl(Inline)]
-        public static IImmSpecializer Create(IContext context, IAsmFunctionDecoder decoder)
-            => new ImmSpecializer(context, decoder);
-
         static void OnCaptureFailed(OpIdentity id)
             => term.error($"Capture failure for {id}");
 
@@ -36,10 +26,10 @@ namespace Z0.Asm
             => term.error($"Embedding failure for {src.Name}");
 
         [MethodImpl(Inline)]
-        ImmSpecializer(IContext context, IAsmFunctionDecoder decoder)
+        internal ImmSpecializer(IAsmFunctionDecoder decoder)
         {            
             this.Decoder = decoder;
-            this.Capture = AsmStatelessCore.Factory.CaptureService();
+            this.Capture = AsmWorkflows.Stateless.CaptureService();
             this.Dynamic = Dynops.Services.Nexus;
         }
 

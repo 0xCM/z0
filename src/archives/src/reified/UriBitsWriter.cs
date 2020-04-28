@@ -13,28 +13,12 @@ namespace Z0
 
     public readonly struct UriBitsWriter : IUriBitsWriter
     {        
-        [MethodImpl(Inline)]
-        public static UriBitsWriterFactory Factory(IContext context)
-            => dst => Create(dst);
-
-        public static UriBits[] Save(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
-        {
-            using var writer = new UriBitsWriter(dst);
-            var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Content));
-            writer.Write(data);
-            return data;
-        }
-
         readonly StreamWriter StreamOut;
 
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IUriBitsWriter Create(FilePath dst)
-            => new UriBitsWriter(dst);
-
-        [MethodImpl(Inline)]
-        UriBitsWriter(FilePath path)
+        internal UriBitsWriter(FilePath path)
         {
             this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);

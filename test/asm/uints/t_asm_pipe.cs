@@ -46,7 +46,7 @@ namespace Z0.Asm
         public void check_archive()
         {            
             var paths = Paths.ForApp(PartId.Control);
-            var capture = CaptureArchive.Create(paths.AppCapturePath);
+            var capture = Archives.Services.CaptureArchive(paths.AppCapturePath);
             var bits = HostBitsArchive.Create(PartId.Control, capture.HexDir);
             var data = bits.Read(PartId.GVec);
             check_asm_pipe(data);

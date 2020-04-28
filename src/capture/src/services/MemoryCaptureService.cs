@@ -11,8 +11,6 @@ namespace Z0.Asm
 
     class MemoryCaptureService : IMemoryCapture
     {
-        readonly IContext Context;
-
         readonly byte[] ExtractBuffer;
 
         readonly byte[] ParseBuffer;
@@ -22,35 +20,29 @@ namespace Z0.Asm
         readonly IAsmInstructionDecoder Decoder;
 
         [MethodImpl(Inline)]
-        public static IMemoryCapture Create(IContext context, IAsmInstructionDecoder decoder, int bufferlen)
-            => new MemoryCaptureService(context, decoder, bufferlen);
-
-        [MethodImpl(Inline)]
         static IMemoryExtractParser ExtractParser(byte[] buffer) 
-            => AsmStatelessCore.Factory.MemoryExtractParser(buffer);
+            => AsmWorkflows.Stateless.MemoryExtractParser(buffer);
 
         [MethodImpl(Inline)]
         static IMemoryExtractor MemoryExtractor(byte[] buffer) 
-            => AsmStatelessCore.Factory.MemoryExtractor(buffer);
-
+            => AsmWorkflows.Stateless.MemoryExtractor(buffer);
 
         [MethodImpl(Inline)]
-        MemoryCaptureService(IContext context, IAsmInstructionDecoder decoder, int bufferlen)
+        internal MemoryCaptureService(IAsmInstructionDecoder decoder, int bufferlen)
         {
-            this.Context = context;
             this.ExtractBuffer = new byte[bufferlen];
             this.ParseBuffer = new byte[bufferlen];
             this.Extractor = MemoryExtractor(ExtractBuffer);
             this.Decoder = decoder;
         }
 
-        public Option<ApiMemoryCapture> Capture(MemoryAddress src)        
+        public Option<MemoryCapture> Capture(MemoryAddress src)        
             => from raw in Extract(src)
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
                 from instructions in Decoder.DecodeInstructions(parsed)
                 let bits = ParsedMemoryExtract.Define(src, raw, parsed)
-                select ApiMemoryCapture.Define(src, bits, instructions, string.Empty);
+                select MemoryCapture.Define(src, bits, instructions, string.Empty);
 
         [MethodImpl(Inline)]
         public Option<LocatedCode> Extract(MemoryAddress src)

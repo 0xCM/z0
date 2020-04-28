@@ -80,7 +80,7 @@ namespace Z0.Asm
 
         public void read_library()
         {
-            var exchange = Context.CaptureExchange();
+            var exchange = AsmWorkflows.Contextual(Context).CaptureExchange;
             var ops  = exchange.Service;
 
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();

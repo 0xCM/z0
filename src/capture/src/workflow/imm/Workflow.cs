@@ -12,7 +12,8 @@ namespace Z0.Asm
 
     using static Seed;
     using static Memories;
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
+    using static ImmEmissionEvents;
 
     public class ImmEmissionWorkflow : IImmEmissionWorkflow
     {                        
@@ -23,16 +24,16 @@ namespace Z0.Asm
 
         public IAppMsgSink Sink {get;}
 
-        ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
+        internal ImmEmissionWorkflow(IAsmContext context, IAppMsgSink sink, IAsmFormatter formatter, IAsmFunctionDecoder decoder, IApiSet api, FolderPath root)
         {
             Broker = ImmEmissionBroker.New;
             Context = context;
             Sink = sink;
             Formatter = formatter;
             Decoder = decoder;
-            ImmSpecializer = context.ImmSpecializer(decoder);
+            ImmSpecializer = AsmWorkflows.Stateless.ImmSpecializer(decoder);
             ApiSet = api;
-            CodeArchive = CaptureArchive.Create(root);
+            CodeArchive = Archives.Services.CaptureArchive(root);
             CodeArchive.Clear();
             ApiCollector =  context.Factory.ApiCollector();
             ConnectReceivers(Broker);
@@ -87,14 +88,14 @@ namespace Z0.Asm
         {
             if(imm8.Length != 0)
             {
-                var exchange = Context.CaptureExchange();
+                var exchange =  AsmWorkflows.Contextual(Context).CaptureExchange;
                 EmitUnrefined(exchange, imm8.ToImm8Values(ImmSourceKind.Literal));
             }
         }
 
         public void EmitRefined()
         {
-            var exchange = Context.CaptureExchange();
+            var exchange = AsmWorkflows.Contextual(Context).CaptureExchange;
             EmitRefined(exchange);
         }
 
@@ -158,7 +159,7 @@ namespace Z0.Asm
         IEnumerable<IApiHost> ApiHosts => ApiSet.Hosts;
 
         IHostAsmArchiver Archive(IApiHost host)
-            => Context.ImmFunctionArchive(host.UriPath, Formatter, CodeArchive.RootDir);
+            => AsmStateless.Services.ImmArchive(host.UriPath, Formatter, CodeArchive.RootDir);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8Value[] imm8)
         {

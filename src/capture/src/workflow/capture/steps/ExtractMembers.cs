@@ -10,25 +10,21 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Seed;
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
 
     partial class HostCaptureSteps
     {
-        public readonly struct ExtractMembers
+        public readonly struct ExtractMembersStep : IExtractMembersStep
         {
             readonly CaptureWorkflowContext Context;
 
             [MethodImpl(Inline)]
-            internal static ExtractMembers Create(CaptureWorkflowContext context)
-                => new ExtractMembers(context);
-            
-            [MethodImpl(Inline)]
-            ExtractMembers(CaptureWorkflowContext context)
+            internal ExtractMembersStep(CaptureWorkflowContext context)
             {
                 this.Context = context;
             }
  
-            public Member[] Members(IApiHost host)
+            public Member[] LocateMembers(IApiHost host)
             {
                 var locator = StatelessIdentity.Factory.MemberLocator();
                 var located = locator.Located(host).ToArray();
@@ -36,10 +32,10 @@ namespace Z0.Asm
                 return located;
             }
 
-            public MemberExtract[] Extracts(IApiHost host)
+            public MemberExtract[] ExtractMembers(IApiHost host)
             {
-                var members = Members(host);    
-                var extractor = AsmStatelessCore.Factory.HostExtractor();
+                var members = LocateMembers(host);    
+                var extractor = AsmWorkflows.Stateless.HostExtractor();
                 return extractor.Extract(members);
             }
         }

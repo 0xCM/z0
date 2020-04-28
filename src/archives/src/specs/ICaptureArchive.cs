@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         IHostCaptureArchive CaptureArchive(ApiHostUri host)
-            => HostCaptureArchive.Define(this, host);        
+            => Archives.Services.HostCaptureArchive(this, host);        
 
         // IHostBitsArchive HostBits(ApiHostUri host)
         //     => HostBitsArchive.Create()

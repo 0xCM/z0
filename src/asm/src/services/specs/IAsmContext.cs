@@ -4,6 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
+    public interface IAsmCore : IServiceFactory<IAsmContext>, IAsmStateless, IAsmCoreStateless 
+    {
+        IHostCaptureService HostCaptureService(FolderName area, FolderName subject = null);            
+    }
+
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
@@ -40,11 +45,6 @@ namespace Z0.Asm
         ICaptureService CaptureService {get;}       
 
         /// <summary>
-        /// The capture control service
-        /// </summary>
-        ICaptureControl CaptureControl {get;}
-
-        /// <summary>
         /// Provides access to dynamic operator production facilities
         /// </summary>
         IDynexus Dynamic {get;}
@@ -57,7 +57,7 @@ namespace Z0.Asm
         /// <summary>
         /// Reveals the context-predicated service factory
         /// </summary>
-        IAsmServiceFactory Factory => AsmServiceFactory.Create(this);        
+        IAsmCore Factory {get;}
 
         /// <summary>
         /// The capture archive root
@@ -65,7 +65,7 @@ namespace Z0.Asm
         FolderPath RootCapturePath => Env.Current.LogDir;
 
         ICaptureArchive RootCaptureArchive 
-            => Z0.CaptureArchive.Create(RootCapturePath);
+            => Archives.Services.CaptureArchive(RootCapturePath);
 
         ICaptureArchive CaptureArchive(FolderName area, FolderName subject) 
             => RootCaptureArchive.Narrow(area,subject);

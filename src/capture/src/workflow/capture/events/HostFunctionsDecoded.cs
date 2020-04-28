@@ -8,9 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using E = AsmEvents.HostFunctionsDecoded;
+    using E = CaptureWorkflowEvents.HostFunctionsDecoded;
 
-    partial class AsmEvents
+    partial class CaptureWorkflowEvents
     {
         public readonly struct HostFunctionsDecoded : IAppEvent<E>
         {

@@ -31,28 +31,28 @@ namespace Z0.Asm
         /// Selects a (non-distinct) sequence of the far addresses targeted by functions in an extract
         /// </summary>
         /// <param name="src">The source extract</param>
-        public static IEnumerable<MemoryAddress> FarCalls(this ApiHostCapture src)
+        public static IEnumerable<MemoryAddress> FarCalls(this HostCapture src)
             => src.Decoded.SelectMany(FarCalls);
 
         /// <summary>
         /// Selects a (non-distinct) sequence of the far addresses targeted by functions in an extract
         /// </summary>
         /// <param name="src">The source extract</param>
-        public static IEnumerable<MemoryAddress> FarCalls(this IEnumerable<ApiHostCapture> src)
+        public static IEnumerable<MemoryAddress> FarCalls(this IEnumerable<HostCapture> src)
             => src.SelectMany(FarCalls);
 
         /// <summary>
         /// Selects base addresses of functions in an extract
         /// </summary>
         /// <param name="src">The source extract</param>
-        public static IEnumerable<MemoryAddress> BaseAddresses(this ApiHostCapture src)
+        public static IEnumerable<MemoryAddress> BaseAddresses(this HostCapture src)
             => src.Decoded.Select(f => f.BaseAddress);
 
         /// <summary>
         /// Selects function base addresss from an extract stream
         /// </summary>
         /// <param name="src">The source extract</param>
-        public static IEnumerable<MemoryAddress> BaseAddresses(this IEnumerable<ApiHostCapture> src)
+        public static IEnumerable<MemoryAddress> BaseAddresses(this IEnumerable<HostCapture> src)
             => src.SelectMany(BaseAddresses);
     }
 }

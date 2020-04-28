@@ -17,11 +17,7 @@ namespace Z0.Asm
         readonly AsmFormatSpec AsmFormat;
 
         [MethodImpl(Inline)]
-        public static AsmInstructionDecoder Create(in AsmFormatSpec format)
-            => new AsmInstructionDecoder(format);
-
-        [MethodImpl(Inline)]
-        AsmInstructionDecoder(in AsmFormatSpec format)
+        internal AsmInstructionDecoder(in AsmFormatSpec format)
         {
             this.AsmFormat = format;
         }

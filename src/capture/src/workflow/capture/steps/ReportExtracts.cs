@@ -8,32 +8,28 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
 
     partial class HostCaptureSteps
     {
-        public readonly struct ManageExtractReport
+        public readonly struct ReportExtractsStep : IReportExtractsStep
         {
             readonly CaptureWorkflowContext Context;
             
             [MethodImpl(Inline)]
-            internal static ManageExtractReport Create(CaptureWorkflowContext context)
-                => new ManageExtractReport(context);
-
-            [MethodImpl(Inline)]
-            ManageExtractReport(CaptureWorkflowContext context)
+            internal ReportExtractsStep(CaptureWorkflowContext context)
             {
                 this.Context = context;
             }
             
-            public ExtractReport CreateReport(ApiHostUri host, MemberExtract[] src)
+            public ExtractReport CreateExtractReport(ApiHostUri host, MemberExtract[] src)
             {
                 var report = ExtractReport.Create(host, src); 
                 Context.Raise(ExtractReportCreated.Define(report));                
                 return report;
             }
 
-            public void SaveReport(ExtractReport src, FilePath dst)
+            public void SaveExtractReport(ExtractReport src, FilePath dst)
             {
                 var context = Context;
                 src.Save(dst)

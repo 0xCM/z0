@@ -10,7 +10,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Seed;
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
     using static ExtractionEvents;
 
     class ExtractionWorkflow : IExtractionWorkflow
@@ -25,12 +25,12 @@ namespace Z0.Asm
             Context = context;
             ApiSet = context.ApiSet;
             Sink = context;
-            Extractor =  AsmStatelessCore.Factory.HostExtractor();
+            Extractor =  AsmWorkflows.Stateless.HostExtractor();
             MemberLocator = StatelessIdentity.Factory.MemberLocator();
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Decoder =  AsmFunctionDecoder.Create(FormatConfig);
-            Formatter = AsmStateless.Factory.AsmFormatter(FormatConfig);
-            CodeArchive = CaptureArchive.Create(ArchiveRoot);
+            Decoder =   AsmWorkflows.Stateless.FunctionDecoder(FormatConfig);
+            Formatter = AsmStateless.Services.AsmFormatter(FormatConfig);
+            CodeArchive = Archives.Services.CaptureArchive(ArchiveRoot);
             CodeArchive.Clear();
             Broker = ConnectBroker(this);          
         }

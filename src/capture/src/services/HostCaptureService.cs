@@ -25,16 +25,12 @@ namespace Z0.Asm
         ICaptureArchive CodeArchive => Context.CaptureArchive(Area, Subject);
 
         [MethodImpl(Inline)]
-        public static HostCaptureService Create(IAsmContext context, FolderName area, FolderName subject = null)
-            => new HostCaptureService(context, area ?? FolderName.Empty, subject ?? FolderName.Empty);
-
-        [MethodImpl(Inline)]
-        HostCaptureService(IAsmContext context, FolderName area, FolderName subject)
+        internal HostCaptureService(IAsmContext context, FolderName area, FolderName subject)
         {
             Context = context;
             Area = area;
             Subject = subject;
-            Extractor = AsmStatelessCore.Factory.HostExtractor();
+            Extractor = AsmWorkflows.Stateless.HostExtractor();
             Parser = StatelessExtract.Factory.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
 
@@ -53,12 +49,12 @@ namespace Z0.Asm
         public AsmFunction[] Decode(ApiHostUri host, ParsedMemberExtract[] parsed, bool save)
             => Decode(FindHost(host), parsed, save);
 
-        public ApiHostCapture CaptureHost(ApiHostUri host, bool save )
+        public HostCapture CaptureHost(ApiHostUri host, bool save )
         {
             var extracts = Extract(host, save);
             var parsed = Parse(host,extracts, save);
             var decoded = Decode(host,parsed,save);
-            return ApiHostCapture.Define(host, extracts,parsed,decoded);
+            return HostCapture.Define(host, extracts,parsed,decoded);
         }
 
         void Save(ApiHostUri host, ParsedMemberExtract[] src)
@@ -67,7 +63,7 @@ namespace Z0.Asm
             var report = MemberParseReport.Create(host,src);
             report.Save(hostArchive.ParsedPath);
 
-            using var writer = UriBitsWriter.Create(hostArchive.HexPath);
+            using var writer = Archives.Services.UriBitsWriter(hostArchive.HexPath);
             var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Content));
             writer.Write(data);
         }

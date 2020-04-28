@@ -7,10 +7,10 @@ namespace Z0.Asm
     using System;
 
     using static Seed;
-    using static AsmEvents;
 
-    public interface IExtractionWorkflow : IService
+    public partial class CaptureWorkflowEvents
     {
-        void Run();        
+
+        
     }
 }

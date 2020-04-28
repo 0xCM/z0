@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-    using static Asm.AsmEvents;
+    using static Asm.CaptureWorkflowEvents;
 
     public class CaptureHost : ICaptureHost
     {               
@@ -49,9 +49,17 @@ namespace Z0
         public static ICaptureHost Create(IAsmContext context, FolderPath root)    
             => new CaptureHost(context,root);
 
+        static IAsmWorkflows Services(IAsmContext context)
+            => AsmWorkflows.Contextual(context);
+
+        static IAsmCore Core(IAsmContext context)
+            => context.Factory;
+
+        static IAsmCoreStateless Stateless
+            => AsmWorkflows.Stateless;
+
         CaptureHost(IAsmContext context, FolderPath root)
         {                    
-            var factory = context.Factory;
             Context = context;
             Sink = context;
             CaptureRoot = root;
@@ -59,15 +67,18 @@ namespace Z0
             WorkflowConfig = AsmWorkflowConfig.Define(root);
             Settings = CaptureConfig.From(context.Settings);            
             LogPath = (root + FolderName.Define("logs")) + FileName.Define("host","log");
-            Archive = CaptureArchive.Create(root);
+            Archive = Stateless.CaptureArchive(root);
             Archive.LogDir.Clear();
-            MemberLocator = factory.MemberLocator();
+            MemberLocator = Core(context).MemberLocator();
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Decoder = context.AsmFunctionDecoder(FormatConfig);            
-            Formatter = factory.AsmFormatter(FormatConfig);
-            UriBitsReader = Z0.UriBitsReader.Service;
-            PrimaryWorkflow = HostCaptureWorkflow.Create(context, Decoder, Formatter, AsmStateless.Factory.AsmWriterFactory);
-            ImmWorkflow = ImmEmissionWorkflow.Create(context,  context, ApiSet, Formatter, Decoder, root);
+            Decoder = Stateless.FunctionDecoder(FormatConfig);
+            Formatter = Core(context).AsmFormatter(FormatConfig);            
+            UriBitsReader = Stateless.UriBitsReader;
+            //PrimaryWorkflow = HostCaptureWorkflow.Create(context, Decoder, Formatter, AsmStateless.Services.AsmWriterFactory);            
+            PrimaryWorkflow = Services(context).HostCaptureWorkflow(Decoder, Formatter, Stateless.AsmWriterFactory);
+            ImmWorkflow = Services(context).ImmEmissionWorkflow(Sink, ApiSet, Formatter, Decoder, root);
+
+            //ImmWorkflow = ImmEmissionWorkflow.Create(context, context, ApiSet, Formatter, Decoder, root);
             
             ConnectReceivers(PrimaryWorkflow.EventBroker);
         }

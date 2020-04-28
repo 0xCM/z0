@@ -6,10 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface IHostCaptureWorkflow : IService
+    public interface IExtractionWorkflow : IService
     {
-        IHostCaptureBroker EventBroker {get;}
-
-        void Run(AsmWorkflowConfig config);         
+        void Run();        
     }
 }

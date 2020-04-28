@@ -20,6 +20,8 @@ namespace Z0
 
         public FolderPath ArchiveRoot {get;}            
 
+        static FolderPath DefaultArchivRoot => Archives.Services.CaptureArchive().RootDir;
+
         [MethodImpl(Inline)]
         public static IHostBitsArchive Create(PartId part, FolderPath root = null)
             => new HostBitsArchive(part, root);
@@ -33,14 +35,14 @@ namespace Z0
         {
             this.Part = part;
             this.Host = host;
-            this.ArchiveRoot = root ?? CaptureArchive.Default.RootDir;
+            this.ArchiveRoot = root ?? DefaultArchivRoot;
         }
 
         HostBitsArchive(PartId catalog, FolderPath root)
         {
             this.Part = catalog;
             this.Host = ApiHostUri.Empty;
-            this.ArchiveRoot = root ?? CaptureArchive.Default.RootDir;
+            this.ArchiveRoot = root ?? DefaultArchivRoot;
         }
 
         public IEnumerable<FilePath> Files() 

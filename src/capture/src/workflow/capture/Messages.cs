@@ -10,10 +10,10 @@ namespace Z0.Asm
 
     static class HostCaptureMessages
     {        
-        public static void ExtractionSuccess(this IHostCaptureService service, ApiHostUri host, FilePath dst)
-            => service.Notify(AppMsg.Info($"Emitted extracted {host} operations to {dst}"));
+        public static void ExtractionSuccess(this IAppMsgSink sink, ApiHostUri host, FilePath dst)
+            => sink.NotifyConsole(AppMsg.Info($"Emitted extracted {host} operations to {dst}"));
 
-        public static void ExtractionFailure(this IHostCaptureService service, ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => service.Notify(AppMsg.Error($"Error extracting {host} operations", caller, file, line));
+        public static void ExtractionFailure(this IAppMsgSink sink, ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => sink.NotifyConsole(AppMsg.Error($"Error extracting {host} operations", caller, file, line));
     }
 }

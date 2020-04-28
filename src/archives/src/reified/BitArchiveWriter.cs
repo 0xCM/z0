@@ -18,11 +18,7 @@ namespace Z0
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IBitArchiveWriter Create(FilePath dst)
-            => new BitArchiveWriter(dst);
-
-        [MethodImpl(Inline)]
-        BitArchiveWriter(FilePath path)
+        internal BitArchiveWriter(FilePath path)
         {
             this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);

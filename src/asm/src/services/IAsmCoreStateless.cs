@@ -12,11 +12,15 @@ namespace Z0.Asm
     /// <summary>
     /// Defines factories for ams core stateless services
     /// </summary>
-    public interface IAsmStatelessCore : IAsmStateless
+    public interface IAsmCoreStateless : IAsmStateless
     {
+        IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder);        
+        
+        IHostAsmArchiver ImmFunctionArchive(ApiHostUri host, IAsmFormatter formatter, FolderPath dst);        
+
         IMemoryExtractor MemoryExtractor(byte[] buffer);
 
-        ICaptureControl CaptureControl(ICaptureService capture);
+        IMemoryCapture MemoryCapture(IAsmInstructionDecoder decoder, int bufferlen);
 
         /// <summary>
         /// Creates a capture serivce predicated, or not, on an optionally-specified divination service

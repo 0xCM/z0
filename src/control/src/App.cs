@@ -48,7 +48,7 @@ namespace Z0
 
         void SurveyArchive()
         {
-            var archive = CaptureArchive.Create(CaptureRoot);
+            var archive = Archives.Services.CaptureArchive(CaptureRoot);
 
             Print($"Examining capture archive rooted at {archive.RootDir}");
 

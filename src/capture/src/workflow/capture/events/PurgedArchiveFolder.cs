@@ -9,9 +9,9 @@ namespace Z0.Asm
 
     using static Seed;
     
-    using E = AsmEvents.PurgedArchiveFolder;
+    using E = CaptureWorkflowEvents.PurgedArchiveFolder;
 
-    partial class AsmEvents
+    partial class CaptureWorkflowEvents
     {
         public readonly struct PurgedArchiveFolder : IAppEvent<E>
         {

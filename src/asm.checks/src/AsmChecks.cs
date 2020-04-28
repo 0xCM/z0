@@ -39,7 +39,7 @@ namespace Z0.Asm
         {
             Context = context;
             Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
-            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureControl, Buffers[(int)Aux3], Buffers[(int)Aux4]);
+            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[(int)Aux3], Buffers[(int)Aux4]);
         }                
 
         public void Dispose()
@@ -57,14 +57,14 @@ namespace Z0.Asm
         protected IBitArchiveWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return BitArchiveWriter.Create(dstPath);
+            return Archives.Services.BitArchiveWriter(dstPath);
         }
 
         protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
         {
             var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             var format = AsmFormatSpec.WithFunctionTimestamp;
-            return AsmStateless.Factory.AsmWriter(dst,format);
+            return AsmStateless.Services.AsmWriter(dst,format);
         }
 
         static K.UnaryOpClass Unary => default;

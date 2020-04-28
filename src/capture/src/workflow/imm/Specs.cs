@@ -5,16 +5,11 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Seed;
     using static Memories;
-    using static AsmEvents;
-
-    public sealed class ImmEmissionBroker : EventBroker<ImmEmissionBroker,IImmEmissionBroker>, IImmEmissionBroker
-    {        
-    
-    }    
+    using static ImmEmissionEvents;
+    using static CaptureWorkflowEvents;
 
     public interface IImmEmissionBroker : IEventBroker
     {
@@ -23,5 +18,14 @@ namespace Z0.Asm
         HostFileEmissionFailed HostFileEmissionFailed => HostFileEmissionFailed.Empty;
 
         ImmInjectionFailed ImmInjectionFailed => ImmInjectionFailed.Empty;
+    }
+
+    public interface IImmEmissionWorkflow : IWorkflow<IImmEmissionBroker>
+    {
+        void EmitLiteral(params byte[] imm8);
+
+        void EmitRefined();
+
+        void ClearArchive();        
     }
 }

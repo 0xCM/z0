@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Aggregates artifacts obtained via host capture workflow execution
     /// </summary>
-    public readonly struct ApiHostCapture
+    public readonly struct HostCapture
     {
         public readonly ApiHostUri Host;
 
@@ -25,11 +25,11 @@ namespace Z0
         public readonly AsmFunction[] Decoded;
 
         [MethodImpl(Inline)]
-        public static ApiHostCapture Define(ApiHostUri host, MemberExtract[] extracts, ParsedMemberExtract[] parsed, AsmFunction[] decoded)
-            => new ApiHostCapture(host, extracts, parsed, decoded);
+        public static HostCapture Define(ApiHostUri host, MemberExtract[] extracts, ParsedMemberExtract[] parsed, AsmFunction[] decoded)
+            => new HostCapture(host, extracts, parsed, decoded);
         
         [MethodImpl(Inline)]
-        ApiHostCapture(ApiHostUri host, MemberExtract[] extracts, ParsedMemberExtract[] parsed, AsmFunction[] decoded)
+        HostCapture(ApiHostUri host, MemberExtract[] extracts, ParsedMemberExtract[] parsed, AsmFunction[] decoded)
         {
             this.Host = host;
             this.Extracts = extracts;

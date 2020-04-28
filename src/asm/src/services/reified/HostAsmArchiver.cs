@@ -10,12 +10,11 @@ namespace Z0.Asm
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Z0.Seed;
-    using Z0;
+    using static Seed;
 
-    public class HostAsmArchiver : IHostAsmArchiver
+    public readonly struct HostAsmArchiver : IHostAsmArchiver
     {                
-        public PartId DefiningPart {get;}
+        public PartId Owner {get;}
 
         public ApiHostUri ApiHost {get;}
     
@@ -27,33 +26,28 @@ namespace Z0.Asm
 
         readonly bool Imm;
 
-        [MethodImpl(Inline)]
-        public static IHostAsmArchiver ImmArchive(IContext context, ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => new HostAsmArchiver(context, host, true, formatter, dst);
-
-        [MethodImpl(Inline)]
-        public static IHostAsmArchiver Create(IContext context, PartId catalog, string host, IAsmFormatter formatter)
-            => new HostAsmArchiver(context, catalog, host, formatter);
-
-        HostAsmArchiver(IContext context, ApiHostUri host, bool imm, IAsmFormatter formatter, FolderPath dst)
+        internal HostAsmArchiver(ApiHostUri host, bool imm, IAsmFormatter formatter, FolderPath dst)
         {
-            this.Imm = true;
-            this.HostArchive = HostCaptureArchive.Define(CaptureArchive.Create(dst), host);
-            this.DefiningPart = host.Owner;
-            this.ApiHost = host;
-            this.AsmFormatter = formatter;
-            this.CilFormatter =  AsmStateless.Factory.CilFormatter();
+            Imm = true;
+            ApiHost = host;
+            Owner = host.Owner;
+            AsmFormatter = formatter;
+            HostArchive = CreateHostArchive(ApiHost,dst);
+            CilFormatter =  AsmStateless.Services.CilFormatter();
         }
         
-        HostAsmArchiver(IContext context, PartId part, string hostname, IAsmFormatter formatter)
+        internal HostAsmArchiver(PartId part, string hostname, IAsmFormatter formatter)
         {
-            this.Imm = false;
-            this.HostArchive = HostCaptureArchive.Define(CaptureArchive.Create(), ApiHostUri.Define(part, hostname));
-            this.DefiningPart = part;
-            this.ApiHost = ApiHostUri.Define(part, hostname);
-            this.AsmFormatter = formatter;
-            this.CilFormatter =  AsmStateless.Factory.CilFormatter();
+            Imm = false;
+            Owner = part;
+            AsmFormatter = formatter;
+            ApiHost = ApiHostUri.Define(part, hostname);
+            HostArchive = CreateHostArchive(ApiHost);
+            CilFormatter =  AsmStateless.Services.CilFormatter();
         }
+
+        static IHostCaptureArchive CreateHostArchive(ApiHostUri host, FolderPath dst = null)
+            => Archives.Services.HostCaptureArchive(Archives.Services.CaptureArchive(dst), host);
 
         public void Save(AsmFunctionGroup src, bool append)
         {            

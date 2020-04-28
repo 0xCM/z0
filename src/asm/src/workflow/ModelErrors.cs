@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
 
     static class ModelErrors
     {
@@ -26,5 +24,4 @@ namespace Z0.Asm
                     $"origin = {origin}, block length = {reported}, reported length = {reported}"),
                         caller, file, line);
     }
-
 }

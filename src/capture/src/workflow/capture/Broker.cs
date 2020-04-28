@@ -5,13 +5,12 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IImmEmissionWorkflow : IWorkflow<IImmEmissionBroker>
+    using static Seed;
+
+    sealed class HostCaptureBroker : EventBroker, IHostCaptureBroker
     {
-        void EmitLiteral(params byte[] imm8);
-
-        void EmitRefined();
-
-        void ClearArchive();        
+        public static IHostCaptureBroker New => new HostCaptureBroker();           
     }
 }

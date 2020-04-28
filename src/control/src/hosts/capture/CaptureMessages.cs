@@ -14,8 +14,5 @@ namespace Z0
 
         public static void DuplicateWarning(this IAppMsgSink dst,  ApiHostUri host, OpIdentity id)
             => dst.NotifyConsole(AppMsg.Warn($"The host {host} defines operations with a duplicated identifer: {id}"));  
-
-        public static void Deposit(this IAppMsgSink dst, IAppEvent src)      
-            => dst.NotifyConsole(src.Message);
     }
 }

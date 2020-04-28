@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
     
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
 
     public interface ICatalogCaptureBroker : IStepBroker
     {

@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AsmEvents;
+    using static CaptureWorkflowEvents;
     using static ExtractionEvents;
 
     public interface IExtractionBrokerClient : IBrokerClient<IExtractionBroker>

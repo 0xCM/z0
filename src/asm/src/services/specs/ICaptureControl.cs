@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Joins a capture service with a junction
     /// </summary>
-    public interface ICaptureControl : ICaptureService, ICaptureJunction
+    public interface ICaptureControl : ICaptureService
     {
 
     }

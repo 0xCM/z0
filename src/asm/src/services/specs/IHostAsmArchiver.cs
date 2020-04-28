@@ -12,7 +12,7 @@ namespace Z0.Asm
         /// <summary>
         /// The .net assembly from which deposited asm originates
         /// </summary>
-        PartId DefiningPart {get;}
+        PartId Owner {get;}
 
         /// <summary>
         /// The api host
@@ -45,7 +45,6 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source functions</param>
         /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FilePath> SaveHex(OpIdentity id, AsmFunction[] src, bool append);
-        
+        Option<FilePath> SaveHex(OpIdentity id, AsmFunction[] src, bool append);       
     }    
 }

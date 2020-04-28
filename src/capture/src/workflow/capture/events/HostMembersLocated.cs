@@ -9,9 +9,9 @@ namespace Z0.Asm
 
     using static Seed;
 
-    using E = AsmEvents.HostMembersLocated;
+    using E = CaptureWorkflowEvents.HostMembersLocated;
 
-    partial class AsmEvents
+    partial class CaptureWorkflowEvents
     {
         public readonly struct HostMembersLocated : IAppEvent<E>
         {

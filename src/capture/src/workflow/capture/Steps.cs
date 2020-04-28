@@ -5,11 +5,15 @@
 namespace Z0.Asm
 {
     using System;
-    
-    using static CaptureWorkflowEvents;
+    using System.Runtime.CompilerServices;
 
-    public interface IHostHexSavedBroker : IEventBroker
+    using static Seed;
+    using static HostCaptureSteps;
+
+    partial class HostCaptureSteps
     {
-        HostAsmHexSaved HexSaved => HostAsmHexSaved.Empty;        
-    }
+
+
+    }    
+
 }
