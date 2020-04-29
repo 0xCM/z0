@@ -20,7 +20,7 @@ namespace Z0
         public static ICheckVectors Checker => default(CheckVectors);
     }
 
-    public interface ICheckVectors : ICheckPrimalSeq, ICheckNumeric, ICheckSets
+    public interface ICheckVectors : IChecker, ICheckPrimalSeq, ICheckNumeric, ICheckSets
     {
         /// <summary>
         /// Asserts the equality of two vectors

@@ -83,7 +83,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source bits</param>
         public static string header(OperationBits src)
-            => comment(ByteSpanProperty.Define(src.Id.ToLegal(), src.Encoded).Format());
+            => comment(ByteSpanProperty.Define(src.Uri.OpId.ToLegal(), src.Encoded).Format());
 
         public static string render(in AsmFunctionList src)
         {
@@ -146,7 +146,7 @@ namespace Z0.Asm
             if(config.EmitFunctionHeaderEncoding)
                 lines.Add(AsmFormat.header(src.Code));
             else
-                lines.Add(comment(src.Code.Id));
+                lines.Add(comment(src.Code.Uri.OpId));
 
             if(config.EmitLocation)
                 lines.Add(comment(text.concat(nameof(src.Code.Location), text.spaced(Chars.Eq), src.Code.Location.Format())));

@@ -36,7 +36,7 @@ namespace Z0
 
         public void WriteHex(OperationBits[] src)
         {
-            var idpad = src.Max(x => x.Id.Identifier.Length) + 1;
+            var idpad = src.Max(x => x.Uri.Identifier.Length) + 1;
             for(var i=0; i< src.Length; i++)
             {
                 WriteHex(src[i], idpad);

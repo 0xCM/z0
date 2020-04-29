@@ -52,6 +52,11 @@ namespace Z0
                 => new H();
 
         [MethodImpl(Inline)]
+        public static ApiHostUri Uri<H>()
+            where H : IApiHost<H>, new()
+                => new H().UriPath;
+
+        [MethodImpl(Inline)]
         public static ApiHost Define(PartId owner, Type src)
             => new ApiHost(owner, src);
 

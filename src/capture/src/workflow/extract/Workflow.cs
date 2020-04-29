@@ -28,7 +28,7 @@ namespace Z0.Asm
             Extractor =  AsmWorkflows.Stateless.HostExtractor();
             MemberLocator = AsmWorkflows.Stateless.MemberLocator();
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Decoder =   AsmWorkflows.Stateless.FunctionDecoder(FormatConfig);
+            Decoder =   AsmWorkflows.Stateless.AsmDecoder(FormatConfig);
             Formatter = AsmWorkflows.Stateless.AsmFormatter(FormatConfig);
             CodeArchive = Archives.Services.CaptureArchive(ArchiveRoot);
             Broker = ConnectBroker(this);          

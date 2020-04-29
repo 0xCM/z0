@@ -57,7 +57,7 @@ namespace Z0.Asm
             AsmFormat = format;
             Random = Polyrand.Pcg64(PolySeed64.Seed05);
             Dynamic = Stateless.Dynexus;            
-            Decoder = Stateless.FunctionDecoder(AsmFormat);
+            Decoder = Stateless.AsmDecoder(AsmFormat);
             Formatter  = Stateless.AsmFormatter(AsmFormat);
             WriterFactory = Stateless.AsmWriterFactory;
             CaptureService =  Stateless.CaptureService();

@@ -12,12 +12,6 @@ namespace Z0.Asm
     public interface IAsmFunctionDecoder : IAsmInstructionDecoder
     {        
         /// <summary>
-        /// Decodes a function from the parsed encoding package
-        /// </summary>
-        /// <param name="src">The source data</param>
-        Option<AsmFunction> Decode(ParsedMember src);
-
-        /// <summary>
         /// Decodes a function from member capture data
         /// </summary>
         /// <param name="src">The source data</param>
@@ -27,6 +21,21 @@ namespace Z0.Asm
         /// Decodes a fucntion for a parsed extract
         /// </summary>
         /// <param name="src">The source data</param>
-        Option<AsmFunction> Decode(ParsedMemberExtract src);
+        Option<AsmFunction> Decode(ParsedMember src);
+
+        /// <summary>
+        /// Decodes an instruction list
+        /// </summary>
+        /// <param name="src">The code source</param>
+        Option<AsmInstructionList> DecodeInstructions(in OperationBits src);        
+
+        /// <summary>
+        /// Decodes an instruction list
+        /// </summary>
+        /// <param name="src">The code source</param>
+        Option<AsmInstructionList> DecodeInstructions(in LocatedCode src);  
+
+        void DecodeInstructions(in LocatedCode src, Action<Instruction> f);                      
+
     }
 }

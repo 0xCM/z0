@@ -17,18 +17,18 @@ namespace Z0.Asm
 
         readonly IMemoryExtractor Extractor;
 
-        readonly IAsmInstructionDecoder Decoder;
+        readonly IAsmFunctionDecoder Decoder;
 
         [MethodImpl(Inline)]
-        static IMemoryExtractParser ExtractParser(byte[] buffer) 
-            => AsmWorkflows.Stateless.MemoryExtractParser(buffer);
+        static ILocatedParser ExtractParser(byte[] buffer) 
+            =>  Z0.Extract.Services.LocatedParser(buffer);
 
         [MethodImpl(Inline)]
         static IMemoryExtractor MemoryExtractor(byte[] buffer) 
             => AsmWorkflows.Stateless.MemoryExtractor(buffer);
 
         [MethodImpl(Inline)]
-        internal MemoryCaptureService(IAsmInstructionDecoder decoder, int bufferlen)
+        internal MemoryCaptureService(IAsmFunctionDecoder decoder, int bufferlen)
         {
             this.ExtractBuffer = new byte[bufferlen];
             this.ParseBuffer = new byte[bufferlen];

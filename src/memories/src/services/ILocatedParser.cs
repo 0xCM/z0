@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public interface IMemoryExtractParser : IService
+    public interface ILocatedParser : IService
     {
         Option<LocatedCode> Parse(LocatedCode src);        
     }

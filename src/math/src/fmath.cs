@@ -10,10 +10,9 @@ namespace Z0
     /// <summary>
     /// Defines floating-point operations
     /// </summary>
-    [ApiHost(ApiHostKind.Direct)]
-    public static partial class fmath
+    [ApiHost]
+    public partial class fmath : IApiHost<fmath>
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
     }
 }

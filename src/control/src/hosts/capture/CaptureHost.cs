@@ -70,7 +70,7 @@ namespace Z0
             Archive = Stateless.CaptureArchive(root);
             MemberLocator = Core(context).MemberLocator();
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Decoder = Stateless.FunctionDecoder(FormatConfig);
+            Decoder = Stateless.AsmDecoder(FormatConfig);
             Formatter = Core(context).AsmFormatter(FormatConfig);            
             UriBitsReader = Stateless.UriBitsReader;
             PrimaryWorkflow = Services(context).HostCaptureWorkflow(Decoder, Formatter, Stateless.AsmWriterFactory);
@@ -202,10 +202,11 @@ namespace Z0
             static int CountInstructions(in AsmFunction f)
                 => f.InstructionCount;
 
-            var analyzer = SpanAnalyzer.Create<AsmFunction,int>(CountInstructions);
-            var counts = analyzer.Analyze(functions);
-            var total = gspan.sum(counts.AsUInt64());
-            Sink.CountedInstructions(host, total);                   
+            var count = 0ul;
+            for(var i = 0; i<functions.Length; i++)
+                count += (ulong)skip(functions,i).InstructionCount;
+            
+            Sink.CountedInstructions(host, count);                   
         }
             
         void CheckEmission(ApiHostUri host, ReadOnlySpan<UriBits> memSrc, FilePath dst)

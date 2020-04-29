@@ -16,18 +16,22 @@ namespace Z0.Asm
     {           
         public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, OperationBits.Empty, 0, AsmInstructionList.Empty);
 
+        // public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList instructions)
+        // {         
+        //     var code = OperationBits.Define(encoding.MemberUri, encoding.Content);
+        //     return new AsmFunction(encoding.MemberUri, encoding.MemberSig, code, encoding.TermCode, instructions);
+        // }
+
         public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList instructions)
         {         
-            var code = OperationBits.Define(encoding.MemberUri.OpId, encoding.Content);
-            return new AsmFunction(encoding.MemberUri, encoding.MemberSig, code, encoding.TermCode, instructions);
-        }
-
-        public static AsmFunction Define(ParsedMemberExtract encoding,  AsmInstructionList instructions)
-        {         
-            var code = OperationBits.Define(encoding.Id, encoding.ParsedContent);  
+            var code = OperationBits.Define(encoding.Uri, encoding.ParsedContent);  
             var sig = encoding.SourceMember.Signature().Format();          
             return new AsmFunction(encoding.Uri, sig, code, encoding.TermCode, instructions);
         }
+
+        [MethodImpl(Inline)]
+        public static AsmFunction Define(OpUri uri, string sig, OperationBits code, ExtractTermCode term, AsmInstructionList instructions)
+            => new AsmFunction(uri,sig,code,term,instructions);
 
         AsmFunction(OpUri uri, string sig, OperationBits code, ExtractTermCode term, AsmInstructionList instructions)
         {
@@ -68,15 +72,6 @@ namespace Z0.Asm
         /// Specifies the reason for capture termination
         /// </summary>
         public ExtractTermCode TermCode {get;}
-
-        /// <summary>
-        /// The memory segment from which the function was extracted
-        /// </summary>
-        public MemoryRange AddressRange
-        {
-            [MethodImpl(Inline)]
-            get => Code.Location;    
-        }
 
         /// <summary>
         /// The head of the address range

@@ -25,19 +25,19 @@ namespace Z0.Asm
         static IAsmFunctionBuilder Builder => AsmCore.Services.FunctionBuilder;
 
         public Option<AsmFunction> Decode(MemberCapture src)
-            => DecodeCaptured(this, src);
+            => DecodeCaptured(src);
 
-        public Option<AsmFunction> Decode(ParsedMember parsed)
-            =>  from i in DecodeInstructions(OperationBits.Define(parsed.MemberUri.OpId, parsed.Content))
-                select AsmFunction.Define(parsed, i);
+        // public Option<AsmFunction> Decode(ParsedMember parsed)
+        //     =>  from i in DecodeInstructions(OperationBits.Define(parsed.MemberUri, parsed.Content))
+        //         select AsmFunction.Define(parsed, i);
 
-        public Option<AsmFunction> Decode(ParsedMemberExtract src)
-            =>  from i in DecodeInstructions(OperationBits.Define(src.Id, src.ParsedContent))
+        public Option<AsmFunction> Decode(ParsedMember src)
+            =>  from i in DecodeInstructions(OperationBits.Define(src.Uri, src.ParsedContent))
                 select AsmFunction.Define(src,i);
 
-        static Option<AsmFunction> DecodeCaptured(IAsmInstructionDecoder decoder, MemberCapture src)
-            => from i in decoder.DecodeInstructions(src.Code)
-                let block = Asm.AsmInstructionBlock.Define(src.Code, i, src.TermCode)
+        Option<AsmFunction> DecodeCaptured(MemberCapture src)
+            => from i in DecodeInstructions(src.Code)
+                let block = AsmInstructionBlock.Define(src.Code, i, src.TermCode)
                 select Builder.BuildFunction(src.Uri, src.OpSig.Format(), block);
 
         public Option<AsmInstructionList> DecodeInstructions(in OperationBits src)
@@ -72,7 +72,7 @@ namespace Z0.Asm
             }
         }
 
-        public void DecodeInstructions(in LocatedCode src, Func<Asm.Instruction,bool> f)        
+        public void DecodeInstructions(in LocatedCode src, Action<Asm.Instruction> f)        
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Z0.Asm
                     ref var instruction = ref decoded.AllocUninitializedElement();
                     decoder.Decode(out instruction); 
                     var format = formatter.FormatInstruction(instruction,src.Address);
-                    stop = !f(instruction.ToInstruction(format));
+                    f(instruction.ToInstruction(format));
                 }
 
             }

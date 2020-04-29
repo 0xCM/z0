@@ -37,6 +37,20 @@ namespace Z0
             this.ArchiveRoot = root ?? DefaultArchivRoot;
         }
 
+        public IEnumerable<OperationBits> ReadBits(ApiHostUri host)
+        {
+            var hfn = FileName.Define($"{host.Owner.Format()}.{host.Name}", FileExtensions.Hex);
+            var path = Files(host.Owner).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
+            if(path.Exists())
+            {
+                foreach(var item in Read(path))   
+                {
+                    if(item.IsNonEmpty)
+                        yield return item;
+                }
+            }
+        }
+
         public IEnumerable<FilePath> Files() 
             => ArchiveRoot.Files(FileExtensions.Hex, true);
 

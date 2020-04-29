@@ -10,28 +10,15 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public readonly struct MemoryExtractParser : IMemoryExtractParser
+    public readonly struct LocatedParser : ILocatedParser
     {
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        public static MemoryExtractParser Create(int bufferlen)
-            => new MemoryExtractParser(bufferlen);
-
-        [MethodImpl(Inline)]
-        public static MemoryExtractParser Create(byte[] buffer)
-            => new MemoryExtractParser(buffer);
-
-        [MethodImpl(Inline)]
-        MemoryExtractParser(byte[] buffer)
+        internal LocatedParser(byte[] buffer)
         {
-            this.Buffer = buffer;
+            Buffer = buffer;
         }
-
-        [MethodImpl(Inline)]
-        MemoryExtractParser(int bufferlen)
-            : this(new byte[bufferlen])
-        {}
 
         public Option<LocatedCode> Parse(LocatedCode src)
         {

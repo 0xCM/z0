@@ -27,10 +27,6 @@ namespace Z0.Asm
     public interface IAsmWorkflows : IAsmContextual
     {
         [MethodImpl(Inline)]
-        IMemoryCapture ICaptureServices.MemoryCapture(IAsmInstructionDecoder decoder, int bufferlen)
-            => new MemoryCaptureService(decoder, bufferlen);    
-
-        [MethodImpl(Inline)]
         IMemoryExtractor ICaptureServices.MemoryExtractor(byte[] buffer)
             => Svc.MemoryExtractor.Create(buffer);
 
@@ -44,7 +40,7 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
         [MethodImpl(Inline)]
-        IAsmFunctionDecoder ICaptureServices.FunctionDecoder(in AsmFormatSpec? format)
+        IAsmFunctionDecoder ICaptureServices.AsmDecoder(in AsmFormatSpec? format)
             => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
 
         [MethodImpl(Inline)]
@@ -58,19 +54,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         ICaptureService ICaptureServices.CaptureService(IMultiDiviner diviner)
             => new CaptureService(diviner ?? Diviner);        
-
-        /// <summary>
-        /// Creates an instruction decoder
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="format">The format configuration</param>
-        [MethodImpl(Inline)]
-        IAsmInstructionDecoder ICaptureServices.InstructionDecoder(in AsmFormatSpec? format)
-            => new AsmInstructionDecoder(format ?? AsmFormatSpec.Default);
-
-        [MethodImpl(Inline)]
-        IMemoryExtractParser ICaptureServices.MemoryExtractParser(byte[] buffer)
-            => Svc.MemoryExtractParser.Create(buffer);
 
         /// <summary>
         /// Creates a code extractor with an optionally-specified buffer length

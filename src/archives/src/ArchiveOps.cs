@@ -17,7 +17,7 @@ namespace Z0
 
     public interface IArchiveOps
     {
-        UriBits[] SaveUriBits(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
+        UriBits[] SaveUriBits(ApiHostUri host, ParsedMember[] src, FilePath dst)
         {
             using var writer = Archives.Services.UriBitsWriter(dst);
             var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Content));

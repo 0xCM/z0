@@ -10,9 +10,18 @@ namespace Z0.Asm
     using static Seed;
     using static CaptureWorkflowEvents;
 
+    public interface IParseMemberStep : IService
+    {
+        ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts);
+
+        void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst);
+
+    }
+
+
     partial class HostCaptureSteps
     {
-        public readonly struct ParseMembersStep :  IParseMembersStep
+        public readonly struct ParseMembersStep :  IParseMemberStep
         {
             readonly CaptureWorkflowContext Context;
             
@@ -25,14 +34,14 @@ namespace Z0.Asm
                 this.Parser = Extract.Services.ExtractParser();
             }
 
-            public ParsedMemberExtract[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
+            public ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
             {
                 var parsed = Parser.Parse(extracts);                
                 Context.Raise(HostExtractsParsed.Define(host, parsed));
                 return parsed;
             }
 
-            public void SaveHex(ApiHostUri host, ParsedMemberExtract[] src, FilePath dst)
+            public void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
                 => Context.Raise(HostAsmHexSaved.Define(host,  ArchiveOps.Service.SaveUriBits(host, src, dst), dst));
         }
     }

@@ -31,24 +31,20 @@ namespace Z0
         Data = 6 | 1ul << 32
     }    
 
-    public readonly struct MemberParseRecord : IRecord<F, R>
+    public readonly struct MemberParseRecord : IRecord<F,R>
     {                        
-        /// <summary>
-        /// Gets the parsed encoding described by the source record
-        /// </summary>
-        /// <param name="src">The source record</param>
-        public static ParsedMember ToParsedEncoding(MemberParseRecord src)
-        {
-            var count = src.Length;
-            var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
-            var final = ExtractState.Define(src.Uri.OpId, count, range.End, src.Data.LastByte);
-            var outcome = CaptureOutcome.Define(final, range, src.TermCode);
-            return ParsedMember.Define(src.Uri, src.OpSig, outcome.TermCode, src.Data);
-        }        
+        // public static ParsedMember ToParsedEncoding(MemberParseRecord src)
+        // {
+        //     var count = src.Length;
+        //     var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
+        //     var final = ExtractState.Define(src.Uri.OpId, count, range.End, src.Data.LastByte);
+        //     var outcome = CaptureOutcome.Define(final, range, src.TermCode);
+        //     return ParsedMember.Define(src.Uri, src.OpSig, outcome.TermCode, src.Data);
+        // }        
         
         public static MemberParseRecord Empty => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, LocatedCode.Empty);
         
-        public static R From(in ParsedMemberExtract extract, int seq)
+        public static R From(in ParsedMember extract, int seq)
             => MemberParseRecord.Define
                 (
                     Sequence : seq,

@@ -5,10 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     using static Seed;
 
@@ -21,9 +17,9 @@ namespace Z0.Asm
             var uri = ApiHostUri.FromHost<math>();
             var capture = service.CaptureHost(uri,true);
 
-            NotifyConsole($"Extracted {capture.Extracts.Length} {uri} members");
-            NotifyConsole($"Parsed {capture.Parsed.Length} {uri} members");
-            NotifyConsole($"Decoded {capture.Decoded.Length} {uri} members");            
+            trace($"Extracted {capture.Extracts.Length} {uri} members");
+            trace($"Parsed {capture.Parsed.Length} {uri} members");
+            trace($"Decoded {capture.Decoded.Length} {uri} members");            
         }
     }
 }

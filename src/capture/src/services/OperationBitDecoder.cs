@@ -14,14 +14,14 @@ namespace Z0.Asm
     {        
         public static IOperationBitDecoder Service => default(OperationBitDecoder);
 
-        IAsmInstructionDecoder InstructionDecoder => AsmWorkflows.Stateless.InstructionDecoder();
+        IAsmFunctionDecoder Decoder => AsmWorkflows.Stateless.AsmDecoder();
         
         public Option<AsmInstructionList> Decode(OperationBits src)
-            => InstructionDecoder.DecodeInstructions(src);
+            => Decoder.DecodeInstructions(src);
             
         public IEnumerable<AsmInstructionList> Decode(IEnumerable<OperationBits> operations)
         {
-            var decoder = InstructionDecoder;
+            var decoder = Decoder;
             foreach(var op in operations)
             {
                 var decoded = decoder.DecodeInstructions(op);

@@ -20,6 +20,10 @@ namespace Z0
 
         IBitArchiveReader BitArchiveReader => new BitArchiveReader();
 
+        [MethodImpl(Inline)]
+        IOperationalArchive Operational(FolderPath root) 
+            => new OperationalArchive(root);
+
         UriBitsWriterFactory UriBitsWriterFactory
             => dst => UriBitsWriter(dst);        
 

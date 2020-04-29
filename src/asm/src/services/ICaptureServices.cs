@@ -17,8 +17,6 @@ namespace Z0.Asm
 
         IMemoryExtractor MemoryExtractor(byte[] buffer);
 
-        IMemoryCapture MemoryCapture(IAsmInstructionDecoder decoder, int bufferlen);
-
         /// <summary>
         /// Creates a capture serivce predicated, or not, on an optionally-specified divination service
         /// </summary>
@@ -30,25 +28,12 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
-        IAsmFunctionDecoder FunctionDecoder(in AsmFormatSpec? format = null);
-
-        /// <summary>
-        /// Creates an instruction decoder
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="format">The format configuration</param>
-        IAsmInstructionDecoder InstructionDecoder(in AsmFormatSpec? format = null);
+        IAsmFunctionDecoder AsmDecoder(in AsmFormatSpec? format = null);
 
         /// <summary>
         /// Creates a code extractor with an optionally-specified buffer length
         /// </summary>
         /// <param name="bufferlen">The desired buffer length</param>
         IHostCodeExtractor HostExtractor(int? bufferlen = null);
-
-        /// <summary>
-        /// Creates a memory extraction parser over a caller-supplied work buffer
-        /// </summary>
-        /// <param name="buffer">The working buffer</param>
-        IMemoryExtractParser MemoryExtractParser(byte[] buffer);
     }
 }

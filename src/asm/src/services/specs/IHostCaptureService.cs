@@ -11,9 +11,9 @@ namespace Z0.Asm
     {
         MemberExtract[] Extract(ApiHostUri host, bool save);        
 
-        ParsedMemberExtract[] Parse(ApiHostUri host, MemberExtract[] src, bool save);        
+        ParsedMember[] Parse(ApiHostUri host, MemberExtract[] src, bool save);        
 
-        AsmFunction[] Decode(ApiHostUri host, ParsedMemberExtract[] parsed, bool save);      
+        AsmFunction[] Decode(ApiHostUri host, ParsedMember[] parsed, bool save);      
 
         HostCapture CaptureHost(ApiHostUri host, bool save);        
     }

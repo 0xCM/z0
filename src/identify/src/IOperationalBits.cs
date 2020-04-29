@@ -15,11 +15,11 @@ namespace Z0
     public interface IOperationalBits
     {
         bool AcceptsParameter(OperationBits src, NumericKind kind)
-            => Identify.numeric(src.Id.TextComponents.Skip(1)).Contains(kind);
+            => Identify.numeric(src.Uri.OpId.TextComponents.Skip(1)).Contains(kind);
 
         IEnumerable<OperationBits> AcceptsParameters(IEnumerable<OperationBits> src, NumericKind k1, NumericKind k2)
             => from code in src
-                let kinds = Identify.numeric(code.Id.TextComponents.Skip(1))
+                let kinds = Identify.numeric(code.Uri.OpId.TextComponents.Skip(1))
                 where kinds.Contains(k1) && kinds.Contains(k2)
                 select code;
 
@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         int ParameterCount(OperationBits src)
-            => src.Id.TextComponents.Count() - 1;
+            => src.Uri.OpId.TextComponents.Count() - 1;
                     
         IEnumerable<OperationBits> WithParameterCount(IEnumerable<OperationBits> src, int count)
             => from code in src
@@ -39,6 +39,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         OperationCode ToApiCode(OperationBits src)
-            => OperationCode.Define(src.Id, src.Encoded.Content);
+            => OperationCode.Define(src.Uri.OpId, src.Encoded.Content);
     }
 }

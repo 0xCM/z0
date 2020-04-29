@@ -21,21 +21,28 @@ namespace Z0
         [MethodImpl(Inline)]
         IHostCodeExtractor HostExtractor(int? bufferlen)
             => new HostCodeExtractor(bufferlen ?? Pow2.T14);
-
     }
 
     public interface IExtract : IStatelessFactory<Extract>
     {
+        [MethodImpl(Inline)]
+        ILocatedParser LocatedParser(byte[] buffer) 
+            => new LocatedParser(buffer);
+
+        [MethodImpl(Inline)]
+        ILocatedParser LocatedParser() 
+            => new LocatedParser(new byte[Pow2.T14]);
+
         [MethodImpl(Inline)]
         ByteParser<EncodingPatternKind> PatternParser(byte[] buffer)
             => ByteParser<EncodingPatternKind>.Create(EncodingPatterns.Default,  buffer);
 
         [MethodImpl(Inline)]
         IExtractParser ExtractParser(byte[] buffer)
-            => Z0.ExtractParser.Create(buffer);
+            => new ExtractParser(buffer);
 
         [MethodImpl(Inline)]
         IExtractParser ExtractParser(int? bufferlen = null)
-            => Z0.ExtractParser.Create(bufferlen);        
+            => new ExtractParser(new byte[bufferlen ?? Pow2.T14]);
     }
 }

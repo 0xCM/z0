@@ -31,26 +31,11 @@ namespace Z0
         public readonly LocatedCode Parsed;
                 
         [MethodImpl(Inline)]
-        public static MemberCapture Define(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-            => new MemberCapture(id, method, extracted, parsed, term);
-
-        [MethodImpl(Inline)]
         public static MemberCapture Define(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
             => new MemberCapture(id, src, method, extracted, parsed, term);
 
         [MethodImpl(Inline)]
-        MemberCapture(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-        {
-            OpId = id;        
-            SourceMember = method;
-            Extracted = extracted;            
-            Parsed = parsed;
-            Uri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
-            TermCode = term;
-        }
-
-        [MethodImpl(Inline)]
-        MemberCapture(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
+        internal MemberCapture(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
         {
             Extracted = extracted; 
             Parsed = parsed;
@@ -61,10 +46,7 @@ namespace Z0
         }
 
         public OperationBits Code 
-            => OperationBits.Define(OpId, Parsed);
-
-        public readonly MemoryRange AddressRange    
-            => Code.Location;        
+            => OperationBits.Define(Uri, Parsed);
 
         public MethodSig OpSig
             => SourceMember.Signature();

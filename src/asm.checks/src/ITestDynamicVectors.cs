@@ -17,14 +17,14 @@ namespace Z0
             where T : unmanaged
         {
             var g = Dynamic.EmitFixedBinary(this[Main], w128, bits);
-            return Match<T>(f, g, bits.Id);
+            return Match<T>(f, g, bits.Uri.OpId);
         }
 
         TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, OperationBits bits)
             where T : unmanaged                    
         {
             var g = Dynamic.EmitFixedBinary(this[Main], w256, bits);
-            return Match<T>(f, g, bits.Id);
+            return Match<T>(f, g, bits.Uri.OpId);
         }
 
         /// <summary>

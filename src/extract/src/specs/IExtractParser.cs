@@ -18,13 +18,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source extract</param>
         /// <param name="seq">The sequence number to confer upon the result</param>
-        Option<ParsedMemberExtract> Parse(in MemberExtract src, int seq = 0);
+        Option<ParsedMember> Parse(in MemberExtract src, int seq = 0);
 
         /// <summary>
         /// Parses an extract sequence
         /// </summary>
         /// <param name="src">The source extracts</param>
-        ParsedMemberExtract[] Parse(MemberExtract[] src);
+        ParsedMember[] Parse(MemberExtract[] src);
     }
 
 }

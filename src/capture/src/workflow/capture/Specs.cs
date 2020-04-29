@@ -27,11 +27,6 @@ namespace Z0.Asm
     }
 
 
-    public interface IParseMembersStep : IHostExtractParser
-    {
-        
-    }
-
     public interface IReportExtractsStep
     {
         ExtractReport CreateExtractReport(ApiHostUri host, MemberExtract[] src);
@@ -41,7 +36,7 @@ namespace Z0.Asm
 
     public interface IReportParsedStep
     {
-        MemberParseReport CreateParseReport(ApiHostUri host, ParsedMemberExtract[] src);        
+        MemberParseReport CreateParseReport(ApiHostUri host, ParsedMember[] src);        
 
         void SaveParseReport(MemberParseReport src, FilePath dst);
     }
@@ -55,9 +50,9 @@ namespace Z0.Asm
 
     public interface IDecodeStep
     {
-        AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMemberExtract[] parsed);
+        AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMember[] parsed);
 
-        AsmFunction[] DecodeExtracts(params ParsedMemberExtract[] src);
+        AsmFunction[] DecodeExtracts(params ParsedMember[] src);
 
         void SaveDecoded(AsmFunction[] src, FilePath dst);
     }

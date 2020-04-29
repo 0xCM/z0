@@ -20,8 +20,8 @@ namespace Z0
             foreach(var line in src.ReadLines())
             {
                 var hex = EncodedHexLine.Parse(line);
-                if(hex.OnNone(() => term.error($"Could not parse the line {line} from {src}")))
-                    yield return hex.MapRequired(h => OperationBits.Define(h.Id, h.Encoded));
+                if(hex)
+                    yield return hex.MapRequired(h => OperationBits.Define(h.Uri, h.Encoded));
             }
         }        
     }

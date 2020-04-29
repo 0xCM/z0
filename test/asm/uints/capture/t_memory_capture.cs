@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class t_memory_capture : t_asm<t_memory_capture>
     {    
@@ -30,20 +32,47 @@ namespace Z0.Asm
                 Claim.Fail();
         }
 
-        public void check_memory_capture()
-        {
-            var host = ApiHost.Create<math>();
-            var src = AsmCheck.CaptureArchive(host.Owner).HexPath(host.UriPath);
-            var reader = Archives.Services.BitArchiveReader;
-            var workflows = AsmWorkflows.Contextual(AsmCheck.Context);
-            var decoder = AsmCheck.Decoder;
-            var capture = workflows.MemoryCapture(decoder, Pow2.T14);
-            
-            foreach(var f in reader.Read(src)) 
-            {
+        public IEnumerable<OperationBits> ReadHostBits(ApiHostUri host)
+        {            
+            var paths = Paths.ForApp(PartId.Control);
+            var root = paths.AppCapturePath;
+            var reader = Archives.Services.Operational(root);
+            return reader.ReadHex(host);
+        }
 
+        void check_decoder(IEnumerable<ApiHostUri> hosts)
+        {
+            var decoder = AsmCheck.Decoder;
+
+            var totalCount = 0ul;
+            var hostCount = 0ul;
+
+            void Decoded(Instruction i)
+            {
+                hostCount++;
+                totalCount++;                
             }
-            
+
+            foreach(var host in hosts)
+            {
+                hostCount = 0;
+                var bits = ReadHostBits(host).ToArray();
+                trace($"Loaded host bits", $"{bits.Length} | {host.Format()}");
+                foreach(var f in bits) 
+                {            
+                    decoder.DecodeInstructions(f.Encoded, Decoded);
+                }
+                
+                trace($"Decoded host instructions", $"{hostCount} | {totalCount} | {host.Format()}");
+            }
+
+        }
+
+        public void check_decoder()
+        {
+            check_decoder(Context.ApiSet.Hosts.Select(h => h.UriPath));
+
+                       
         }
 
         static ReadOnlySpan<byte> AsChar_Span8u_Input 

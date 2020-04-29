@@ -137,32 +137,17 @@ namespace Z0
         protected void Notify(string msg, AppMsgKind? severity = null)
             => Queue.Notify(msg, severity);
 
-        static int CasePadding
-            => Reports.width(TestCaseField.Case);
-
-        static string TracePrefix(object title, string caller)
-            => string.Concat(ExecutingApp.Format(), Chars.FSlash, caller, Chars.LBrace, title, Chars.RBrace).PadRight(CasePadding);
-
-        static IAppMsg TraceMsg(object title, object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
-            => AppMsg.Colorize(string.Concat(TracePrefix(title,caller), Chars.Pipe, Chars.Space, msg), color);
-
-        static IAppMsg TraceMsg(object msg, string caller, AppMsgColor color = AppMsgColor.Magenta)
-            => TraceMsg(string.Empty, msg, caller, color);
-
-        void trace(IAppMsg msg)
-            => NotifyConsole(msg);
-
         protected void error(object msg)
-            => trace(AppMsg.Error(msg));
+            => Queue.Error(msg); //Queue.Trace(AppMsg.Error(msg));
 
         protected void trace(object msg, [Caller] string caller = null)
-            => trace(TraceMsg(msg, caller));
+            => Queue.Trace(msg,caller); //Queue.Trace(Tracing.TraceMsg(msg, caller));
         
         protected void trace(string title, object msg, AppMsgColor color, [Caller] string caller = null)
-            => trace(TraceMsg(title, msg, caller, color));
+            => Queue.Trace(title, msg, color, caller);  //Queue.Trace(Tracing.TraceMsg(title, msg, caller, color));
 
         protected void trace(string title, string msg, [Caller] string caller = null)
-            => trace(TraceMsg(title, msg, caller));        
+            => Queue.Trace(title, msg, caller);    //Queue.Trace(Tracing.TraceMsg(title, msg, caller));        
 
         public void Deposit(TestCaseRecord result)
             => TestResults.Enqueue(result);

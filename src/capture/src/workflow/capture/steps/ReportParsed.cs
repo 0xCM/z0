@@ -26,7 +26,7 @@ namespace Z0.Asm
                 this.Context = context;
             }
 
-            public MemberParseReport CreateParseReport(ApiHostUri host, ParsedMemberExtract[] src)
+            public MemberParseReport CreateParseReport(ApiHostUri host, ParsedMember[] src)
             {
                 var report = MemberParseReport.Create(host, src);                    
                 Context.Raise(ParseReportCreated.Define(report));

@@ -60,7 +60,7 @@ namespace Z0.Asm
         public MemberExtract[] Extract(ApiHostUri host, bool save)
             => Extract(FindHost(host),save);
 
-        public ParsedMemberExtract[] Parse(ApiHostUri host, MemberExtract[] src, bool save)
+        public ParsedMember[] Parse(ApiHostUri host, MemberExtract[] src, bool save)
         {
             var parsed = Parser.Parse(src);
             if(parsed.Length != 0 && save)
@@ -69,7 +69,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmFunction[] Decode(ApiHostUri host, ParsedMemberExtract[] parsed, bool save)
+        public AsmFunction[] Decode(ApiHostUri host, ParsedMember[] parsed, bool save)
             => Decode(FindHost(host), parsed, save);
 
         public HostCapture CaptureHost(ApiHostUri host, bool save)
@@ -80,7 +80,7 @@ namespace Z0.Asm
             return HostCapture.Define(host, extracts,parsed,decoded);
         }
 
-        void Save(ApiHostUri host, ParsedMemberExtract[] src)
+        void Save(ApiHostUri host, ParsedMember[] src)
         {
             var hostArchive = CodeArchive.CaptureArchive(host);
             var report = MemberParseReport.Create(host,src);
@@ -106,7 +106,7 @@ namespace Z0.Asm
                 writer.WriteAsm(decoded[i]);
         }
 
-        AsmFunction[] Decode(Option<IApiHost> mayhaps, ParsedMemberExtract[] parsed, bool save)
+        AsmFunction[] Decode(Option<IApiHost> mayhaps, ParsedMember[] parsed, bool save)
         {
             if(mayhaps)
             {

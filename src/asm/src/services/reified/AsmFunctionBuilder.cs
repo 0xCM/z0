@@ -40,9 +40,13 @@ namespace Z0.Asm
             if(RunChecks)
                 CheckBlockLength(src);
 
-            var parsed = ParsedMember.Define(uri,sig, src.TermCode, src.NativeCode.Encoded);
+            //var parsed = ParsedMember.Define(uri,sig, src.TermCode, src.NativeCode.Encoded);
+            
             var instructions = AsmInstructionList.Create(src.Decoded, src.NativeCode.Encoded);
-            return AsmFunction.Define(parsed, instructions);
+
+            var function = AsmFunction.Define(uri, sig, src.NativeCode, src.TermCode, instructions);
+            return function;
+            //return AsmFunction.Define(parsed, instructions);
         }
     }
 

@@ -15,13 +15,9 @@ namespace Z0
     /// </summary>
     public readonly struct EncodedHexLine : IFormattable<EncodedHexLine>
     {
-        public const char DefaultIdSep = Chars.Space;
-
-        public const char DefaultByteSep = Chars.Space;
-
         public static FileExtension FileExt => FileExtensions.Hex;
 
-        public readonly OpIdentity Id;
+        public readonly OpUri Uri;
 
         public readonly LocatedCode Encoded;
 
@@ -34,10 +30,13 @@ namespace Z0
             try
             {
                 var parser = HexParsers.Bytes;
-                var id = Identify.Op(formatted.TakeBefore(Chars.Space).Trim());
-                var bytes = formatted.TakeAfter(Chars.Space).Split(HexSpecs.DataDelimiter, StringSplitOptions.RemoveEmptyEntries).Select(parser.ParseByte).ToArray();
-                var encoded = LocatedCode.Define(bytes);
-                return EncodedHexLine.Define(id, encoded);                
+                var uri = OpUri.Parse(formatted.TakeBefore(Chars.Space).Trim()).ToOption().Require();
+                var bytes = formatted.TakeAfter(Chars.Space)
+                                     .Split(HexSpecs.DataDelimiter, StringSplitOptions.RemoveEmptyEntries)
+                                     .Select(parser.ParseByte)
+                                     .ToArray();
+
+                return new EncodedHexLine(uri, LocatedCode.Define(bytes));                
             }
             catch(Exception e)
             {
@@ -45,34 +44,19 @@ namespace Z0
                 return default;
             }
         }
-
-        [MethodImpl(Inline)]
-        public static EncodedHexLine Define(OpIdentity id, LocatedCode encoded)
-            => new EncodedHexLine(id, encoded);
-
-        [MethodImpl(Inline)]
-        public static EncodedHexLine Define(OpIdentity id, byte[] encoded)
-            => new EncodedHexLine(id, LocatedCode.Define(encoded));
         
         [MethodImpl(Inline)]
-        EncodedHexLine(OpIdentity id, LocatedCode encoded)
+        internal EncodedHexLine(OpUri uri, LocatedCode encoded)
         {
-            this.Id = id;
+            this.Uri = uri;
             this.Encoded = encoded;
         }
         
-        [MethodImpl(Inline)]
-        public void Deconstruct(out OpIdentity id, out LocatedCode data)
-        {
-            id = Id;
-            data = Encoded;
-        }
-
         public string Format()
-            => string.Concat(Id.Identifier.PadRight(0), CharText.Space,  Encoded.Format()); 
+            => string.Concat(Uri.Identifier.PadRight(0), CharText.Space,  Encoded.Format()); 
 
         public string Format(int idpad)
-            => string.Concat(Id.Identifier.PadRight(idpad), CharText.Space, Encoded.Format());
+            => string.Concat(Uri.Identifier.PadRight(idpad), CharText.Space, Encoded.Format());
 
         public override string ToString()
             => Format();
