@@ -22,5 +22,4 @@ namespace Z0
     {
         void Invoke(int count, int step, in T src, ref T dst);
     }    
-
 }

@@ -12,12 +12,11 @@ namespace Z0
     /// <summary>
     /// Generic vectorized intrinsics
     /// </summary>
-    [ApiHost("api")]
-    public static class Circuits
+    public class Circuits 
     {
         [MethodImpl(Inline)]
-        public static ref readonly HalfAdder<T> halfadder<T>()
+        public static HalfAdder<T> half<T>()
             where T : unmanaged 
-                => ref HalfAdder<T>.Circuit;            
+                => default(HalfAdder<T>);
     }
 }

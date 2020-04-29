@@ -61,8 +61,9 @@ namespace Z0.Asm
 
         void check_unary_shift(MethodInfo src, W128 w, StreamWriter dst)
         {
+            var svc = ReflectiveClass.Service;
             Claim.require(src.IsVectorized(w));
-            Claim.require(src.AcceptsVector(0,w));
+            Claim.require(svc.AcceptsVector(src,0,w));
             Claim.require(src.AcceptsImmediate(1, ImmRefinementKind.Unrefined));
             Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ImmRefinementKind.Unrefined));
 
@@ -121,8 +122,9 @@ namespace Z0.Asm
 
         void check_unary_shift(MethodInfo src, W256 w, StreamWriter dst)
         {
+            var svc = ReflectiveClass.Service;
             Claim.require(src.IsVectorized(w));
-            Claim.require(src.AcceptsVector(0,w));
+            Claim.require(svc.AcceptsVector(src,0,w));
             Claim.require(src.AcceptsImmediate(1,ImmRefinementKind.Unrefined));
             Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ImmRefinementKind.Unrefined));
 

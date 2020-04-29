@@ -25,7 +25,7 @@ namespace Z0
                 Args: method.GetParameters().Select(p => new MethodParameter(TypeSig.FromParameter(p), p.ReferenceKind(), p.Name, p.Position)).ToArray(),
                 TypeParams: TypeParameters(method));
         
-        MethodSig(int MethodId, string DefiningAssembly, string DefiningModule,
+        internal MethodSig(int MethodId, string DefiningAssembly, string DefiningModule,
             TypeSig DeclaringType, string MethodName, TypeSig ReturnType, 
             MethodParameters Args, TypeParameters TypeParams)
         {
@@ -73,6 +73,6 @@ namespace Z0
         /// </summary>
         /// <param name="method">The method to examine</param>
         static TypeParameter[] TypeParameters(MethodInfo method)
-            => method.GenericParameters(false).Mapi((i,t) => TypeParameter.Define(t.DisplayName(), i, t.IsGenericType));
+            => method.GenericParameters(false).Mapi((i,t) => new TypeParameter(t.DisplayName(), i));
     }
 }

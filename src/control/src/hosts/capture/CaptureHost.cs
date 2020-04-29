@@ -64,11 +64,10 @@ namespace Z0
             Sink = context;
             CaptureRoot = root;
             ApiSet = context.ApiSet;
-            WorkflowConfig = AsmWorkflowConfig.Define(root);
+            WorkflowConfig = new AsmWorkflowConfig(root);
             Settings = CaptureConfig.From(context.Settings);            
             LogPath = (root + FolderName.Define("logs")) + FileName.Define("host","log");
             Archive = Stateless.CaptureArchive(root);
-            Archive.LogDir.Clear();
             MemberLocator = Core(context).MemberLocator();
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Decoder = Stateless.FunctionDecoder(FormatConfig);
@@ -95,31 +94,31 @@ namespace Z0
         public void Execute(params PartId[] parts)
         {
             if(Settings.EmitImmArtifacts)
-                EmitImm();
+                EmitImm(parts);
 
             if(Settings.EmitPrimaryArtifacts)
-                EmitPrimary();
+                EmitPrimary(parts);
 
             if(Settings.CheckExecution)
-                Exec();
+                Exec(parts);
         }
 
-        void EmitImm()
+        void EmitImm(params PartId[] parts)
         {
             ImmWorkflow.ClearArchive();
             ImmWorkflow.EmitRefined();
         }
 
-        void EmitPrimary()
+        void EmitPrimary(params PartId[] parts)
         {
-            PrimaryWorkflow.Run(WorkflowConfig);
+            PrimaryWorkflow.Run(WorkflowConfig, parts);
         }
 
-        void Exec()
+        void Exec(params PartId[] parts)
         {
             var api = Z0.AppContext.Create(ApiSet.Composition, Context.Random, Context.Settings, AppMsgExchange.Create(Context));
             var workflow = EvalWorkflow.Create(api, Context.Random, CaptureRoot);
-            workflow.Execute();
+            workflow.Execute(parts);
         }
 
         void OnEvent(HostMembersLocated e)

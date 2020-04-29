@@ -20,15 +20,8 @@ namespace Z0.Asm
         internal HostCaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory)
         {
             EventBroker = HostCaptureBroker.New;
-            Context = new CaptureWorkflowContext(
-                context, 
-                context.ApiSet, 
-                decoder, 
-                formatter, 
-                writerfactory, 
-                AsmWorkflows.Stateless.HostExtractor(),
-                Extract.Services.ExtractParser(), 
-                EventBroker);
+            Context = new CaptureWorkflowContext(context, context.ApiSet, decoder, formatter, writerfactory, 
+                AsmWorkflows.Stateless.HostExtractor(), Extract.Services.ExtractParser(), EventBroker);
         }
  
         public void Run(AsmWorkflowConfig config, params PartId[] parts) 

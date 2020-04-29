@@ -11,7 +11,6 @@ namespace Z0.Asm
     {    
         bool MemcapCheck(IMemoryCapture memcap, OperationBits src)
         {
-            var section = new string('-',120);
             var captured = memcap.Capture(src.Address);
             if(!captured)
                 return false;
@@ -29,6 +28,12 @@ namespace Z0.Asm
                 Claim.eq(AsChar_Span8u_Output,selected);
             else
                 Claim.Fail();
+        }
+
+        public void check_memory_capture()
+        {
+            var host = ApiHost.Create<math>();
+            var src = AsmCheck.CaptureArchive(host.Owner).HexPath(host.UriPath);
         }
 
         static ReadOnlySpan<byte> AsChar_Span8u_Input 

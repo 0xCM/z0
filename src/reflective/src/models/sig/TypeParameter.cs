@@ -5,35 +5,33 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static Reflective;
+    using static Seed;
     
     /// <summary>
     /// Represents a type parameter in a generic artifact definition
     /// </summary>
-    public class TypeParameter : SigArtifact
-    {
-        public static TypeParameter Define(string name, int pos, bool open)
-            => new TypeParameter(name,pos,open);
-        
-        TypeParameter(string Name, int Position, bool IsOpen)
-            : base(Name, 0)
-        {
-            this.Position = Position;
-            this.IsOpen = IsOpen;
-            this.IsClosed = !IsOpen;
-        }
+    public readonly struct TypeParameter : IFormattable<TypeParameter>
+    {    
+        public string Name {get;}
 
         public int Position {get;}
 
-        public bool IsOpen {get;}
-
-        public bool IsClosed {get;}
+        [MethodImpl(Inline)]
+        internal TypeParameter(string Name, int Position)
+        {
+            this.Name = Name;
+            this.Position = Position;
+        }
 
         public string Format(bool fence)
-            => fence ? angled(Name) : Name;
+            => fence ? Reflective.angled(Name) : Name;
 
-        public override string Format()
+        public string Format()
             => Format(false);
+
+        public override string ToString()
+            => Format();
     }
 }

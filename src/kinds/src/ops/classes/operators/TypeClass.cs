@@ -33,7 +33,7 @@ namespace Z0
         public static OperatorTypeClass Define(Type type, OperatorClass @class)
             => new OperatorTypeClass(type, @class);
 
-        OperatorTypeClass(Type type, OperatorClass @class)
+        internal OperatorTypeClass(Type type, OperatorClass @class)
         {
             this.OperatorClass = @class;
             this.OperandType = type;

@@ -19,7 +19,7 @@ namespace Z0
             => new CilFunctionFormatter(config ?? CilFormatConfig.Default);
         
         [MethodImpl(Inline)]
-        CilFunctionFormatter(CilFormatConfig config)
+        internal CilFunctionFormatter(CilFormatConfig config)
         {
             this.config = config;
         }

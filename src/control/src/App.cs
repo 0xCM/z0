@@ -90,6 +90,12 @@ namespace Z0
         public override void RunShell(params string[] args)
         {            
             var parts = PartParser.Service.ParseValid(args);
+            if(parts.Length != 0)
+            {
+                var describe = parts.Map(p => p.Format()).Concat(Chars.Comma);
+                Context.NotifyConsole($"Constraining capture workflow to: {describe}");
+            }
+            
             RunCapture(parts);   
         }
 

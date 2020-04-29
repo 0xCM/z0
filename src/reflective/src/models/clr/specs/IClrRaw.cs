@@ -5,19 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static Reflective;
+    using static Seed;
 
     /// <summary>
     /// Characterizes a model of an unmanaged type
     /// </summary>
     public interface IClrRaw : IClrType
     {
-        ClrTypeKind IClrType.Kind => ClrTypeKind.Struct;
-        
+        ClrTypeKind IClrType.Kind => ClrTypeKind.Struct;        
     }
 
     /// <summary>

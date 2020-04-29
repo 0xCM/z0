@@ -7,17 +7,26 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
-    public class TypeParameters  : IFormattable<TypeParameters>
+    using static Seed;
+
+    /// <summary>
+    /// Represents the open type parameters defined by a method
+    /// </summary>
+    public readonly struct TypeParameters  : IFormattable<TypeParameters>
     {
         public TypeParameter[] Items {get;}
 
+        [MethodImpl(Inline)]
         public static implicit operator TypeParameters(TypeParameter[] src)
             => new TypeParameters(src);
                 
+        [MethodImpl(Inline)]
         public TypeParameters(TypeParameter[] reps)
             => this.Items = reps;
 
+        [MethodImpl(Inline)]
         public TypeParameters(IEnumerable<TypeParameter> reps)
             => this.Items = reps.ToArray();
 

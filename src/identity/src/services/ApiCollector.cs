@@ -27,11 +27,6 @@ namespace Z0
         public IEnumerable<GenericApiOp> ImmGeneric(IApiHost host, ImmRefinementKind refinment) 
             => CollectGeneric(host).Where(op => op.Method.AcceptsImmediate(refinment));
 
-        public static IEnumerable<NaturalNumericClosure> NaturalNumericClosures(MethodInfo src)  
-                => from natural in NaturalClosures(src)
-                from numeric in NumericClosures(src)
-                    select NaturalNumericClosure.Define(src,natural,numeric);
-
         public static NumericKind[] NumericClosureKinds(MethodInfo m)
                 => (from tag in m.Tag<ClosuresAttribute>()
                 where tag.Kind == TypeClosureKind.Numeric

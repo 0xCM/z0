@@ -61,11 +61,7 @@ namespace Z0.Asm
             => CilFunctionFormatter.Create(config);
 
         [MethodImpl(Inline)]
-        IHostAsmArchiver ImmArchive(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => new HostAsmArchiver(host, true, formatter, dst);
-
-        [MethodImpl(Inline)]
-        IHostAsmArchiver HostArchive(PartId catalog, string host, IAsmFormatter formatter)
-            => new HostAsmArchiver(catalog, host, formatter);
+        IHostAsmArchiver AsmArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+            => new HostAsmArchiver(host, formatter, dst);
     }
 }

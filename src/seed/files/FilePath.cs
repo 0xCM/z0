@@ -25,6 +25,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FilePath Define(string name) => new FilePath(name);
 
+        [MethodImpl(Inline)]
+        public static FileName GetFileName(string path)
+            => FileName.Define(Path.GetFileName(path));
+
         public static FilePath operator + (FilePath a, FileName b)
             => new FilePath(Path.Join(a.Name, b.Name));
 
@@ -54,11 +58,11 @@ namespace Z0
         public FolderName FolderName
             => FolderName.Define(Directory.GetParent(FolderPath.Name).Name);
 
+        public Option<FileExtension> Ext
+            => FileName.Extension;
+
         public string FullPath
             => Name;
-
-        public Option<FileExtension> Extension
-            => FileName.Extension;
         
         public bool Rooted
             => Path.IsPathRooted(Name);
@@ -66,6 +70,13 @@ namespace Z0
         public FilePath RenameFile(FileName src)
             => FolderPath + src;
     
+        /// <summary>
+        /// Dtermines whether the filename is of the form {owner}{.}{*}
+        /// </summary>
+        /// <param name="owner">The owner to test</param>
+        public bool OwnedBy(PartId owner)
+            => FileName.OwnedBy(owner);
+
         public FilePath WithExtension(FileExtension ext)
             => FolderPath + FileName.Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));                
     }

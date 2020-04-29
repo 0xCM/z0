@@ -9,23 +9,25 @@ namespace Z0
     /// <summary>
     /// Represents a method (value, not type) parameter 
     /// </summary>
-    public class MethodParameter : SigArtifact
+    public readonly struct MethodParameter : IFormattable<MethodParameter>
     {        
-        public MethodParameter(TypeSig Type, ParamRefKind Variance, string ParamName, int Position)
-            : base(ParamName)            
-        {
-            this.Type = Type;
-            this.Variance = Variance;
-            this.Position = Position;
-        }
+        public string Name {get;}
+
+        public int Position {get;}
 
         public TypeSig Type {get;}
 
         public ParamRefKind Variance {get;}
-        
-        public int Position {get;}
 
-        public override string Format()
+        public MethodParameter(TypeSig Type, ParamRefKind Variance, string ParamName, int Position)
+        {
+            this.Name = ParamName;
+            this.Position = Position;
+            this.Type = Type;
+            this.Variance = Variance;
+        }
+        
+        public string Format()
             => $"{Type} {Name}";
 
         public override string ToString()

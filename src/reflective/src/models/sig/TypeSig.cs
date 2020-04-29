@@ -16,14 +16,14 @@ namespace Z0
             => new TypeSig(
                 src.DisplayName(), 
                 src.IsConstructedGenericType,  
-                src.IsGenericType && 
-                !src.IsConstructedGenericType, 
+                src.IsGenericType && !src.IsConstructedGenericType, 
                 src.IsByRef, 
+                false,
+                false,
                 src.IsPointer);
 
         public static TypeSig FromParameter(ParameterInfo src)
-        {            
-            
+        {                        
             var type = src.ParameterType;
             var name = type.EffectiveType().DisplayName();            
             return new TypeSig(name, 
@@ -35,7 +35,7 @@ namespace Z0
                 type.IsPointer);
         }
 
-        TypeSig(string DisplayName, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn = false, bool IsOut = false, bool IsPointer = false)
+        TypeSig(string DisplayName, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn, bool IsOut, bool IsPointer)
         {
             this.DisplayName = DisplayName;
             this.IsOpenGeneric = IsOpenGeneric;

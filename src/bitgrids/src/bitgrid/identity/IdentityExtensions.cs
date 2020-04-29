@@ -48,7 +48,7 @@ namespace Z0
              : (k & Z0.GridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural 
              :  k.ToString();
                     
-        public static GridIdentity GridClosures(this Type src )
+        public static NatNumericIdentity GridClosures(this Type src )
         {
             var args = src.GridKind().MapValueOrDefault(k => src.SuppliedTypeArgs().ToArray(), array<Type>());
             if(args.Length == 1)
@@ -60,11 +60,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool IsSome(this GridIdentity src)
+        public static bool IsSome(this NatNumericIdentity src)
             => !src.IsEmpty;
 
         [MethodImpl(Inline)]
-        public static int NonEmptyCount(this GridIdentity src)
+        public static int NonEmptyCount(this NatNumericIdentity src)
             => (src.M != 0 ? 1 : 0) + (src.N != 0 ? 1 : 0)  + (src.T.IsSome() ? 1 : 0);
 
         public static Option<GridKind> GridKind(this Type src)

@@ -24,11 +24,9 @@ namespace Z0.Asm
 
         readonly IHostCaptureArchive HostArchive;
 
-        readonly bool Imm;
 
-        internal HostAsmArchiver(ApiHostUri host, bool imm, IAsmFormatter formatter, FolderPath dst)
+        internal HostAsmArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
         {
-            Imm = true;
             ApiHost = host;
             Owner = host.Owner;
             AsmFormatter = formatter;
@@ -38,7 +36,6 @@ namespace Z0.Asm
         
         internal HostAsmArchiver(PartId part, string hostname, IAsmFormatter formatter)
         {
-            Imm = false;
             Owner = part;
             AsmFormatter = formatter;
             ApiHost = ApiHostUri.Define(part, hostname);
@@ -48,17 +45,6 @@ namespace Z0.Asm
 
         static IHostCaptureArchive CreateHostArchive(ApiHostUri host, FolderPath dst = null)
             => Archives.Services.HostCaptureArchive(Archives.Services.CaptureArchive(dst), host);
-
-        public void Save(AsmFunctionGroup src, bool append)
-        {            
-            SaveHex(src, append);
-            SaveAsm(src, append);
-        }
-
-        public void Clear()
-        {
-            
-        }
 
         public Option<FilePath> SaveHex(AsmFunction[] src, bool append)    
         {
@@ -104,16 +90,10 @@ namespace Z0.Asm
             }
         }
 
-        Option<FilePath> SaveHex(AsmFunctionGroup src, bool append)
-            => SaveHex(src.Id, src.Members,append);
-
-        Option<FilePath> SaveAsm(AsmFunctionGroup src, bool append)
-            => SaveAsm(src.Id, src.Members, append);
-
-        public Option<FilePath> SaveAsm(OpIdentity id, AsmFunction[] src, bool append)
+        public Option<FilePath> SaveInjectedImmAsm(OpIdentity id, AsmFunction[] src, bool append)
         {
             var idpad = src.Select(f => f.OpId.Identifier.Length).Max() + 1;
-            var dst = Imm ? HostArchive.AsmImmPath(ApiHost.Owner, ApiHost, id) : HostArchive.AsmPath;
+            var dst = HostArchive.AsmImmPath(ApiHost.Owner, ApiHost, id);
             using var writer = dst.Writer();
             for(var i=0; i<src.Length; i++)
             {
@@ -124,10 +104,10 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<FilePath> SaveHex(OpIdentity id, AsmFunction[] src, bool append)
+        public Option<FilePath> SaveInjectedImmHex(OpIdentity id, AsmFunction[] src, bool append)
         {
             var idpad = src.Select(f => f.OpId.Identifier.Length).Max() + 1;
-            var dst = Imm ? HostArchive.HexImmPath(ApiHost.Owner, ApiHost, id) : HostArchive.HexPath;
+            var dst = HostArchive.HexImmPath(ApiHost.Owner, ApiHost, id);
             using var writer = dst.Writer();
             for(var i=0; i<src.Length; i++)
             {

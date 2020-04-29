@@ -5,29 +5,28 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections;
+    using System.Runtime.CompilerServices;
 
-    public class TypeArguments : IReadOnlyList<TypeArgument>
+    using static Seed;
+
+    public readonly struct TypeArguments
     {
+        [MethodImpl(Inline)]
         public static TypeArguments Define(params TypeArgument[] args)
             => new TypeArguments(args);
 
-        TypeArguments(TypeArgument[] args)
+        [MethodImpl(Inline)]
+        internal TypeArguments(TypeArgument[] args)
         {
             Arguments = args;
         }
 
-        TypeArgument[] Arguments {get;}
+        public TypeArgument[] Arguments {get;}
 
         public TypeArgument this[int index] 
             => Arguments[index];
+        
         public int Count 
             => Arguments.Length;
-
-        public IEnumerator<TypeArgument> GetEnumerator()
-            => ((IReadOnlyList<TypeArgument>)Arguments).GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
     }
 }

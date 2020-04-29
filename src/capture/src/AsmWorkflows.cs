@@ -49,7 +49,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         IHostAsmArchiver ICaptureServices.ImmFunctionArchive(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => ImmArchive(host, formatter, dst);
+            => AsmArchiver(host, formatter, dst);
 
         /// <summary>
         /// Creates a capture serivce predicated, or not, on an optionally-specified divination service

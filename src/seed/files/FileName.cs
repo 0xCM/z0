@@ -75,7 +75,14 @@ namespace Z0
         public string NoExtension 
             => Path.GetFileNameWithoutExtension(Name);
         
-        public FileName Rename(string newName)
+        /// <summary>
+        /// Dtermines whether the name of a file is of the form {owner}{.}{*}
+        /// </summary>
+        /// <param name="owner">The owner to test</param>
+        public bool OwnedBy(PartId owner)
+            => Name.StartsWith(string.Concat(owner.Format(), Chars.Dot));
+
+        FileName Rename(string newName)
         {
             var ext = Extension.MapValueOrElse(x =>  x.Name, () => string.Empty);
             var renamed = FileName.Define($"{newName}{ext}");
@@ -84,5 +91,11 @@ namespace Z0
 
         public FileName WithExtension(FileExtension ext)
             => Define(NoExtension,ext);
+
+        public FileName WithOwner(PartId part)
+            => new FileName(
+                    string.Concat(part.Format(), Chars.Dot, NoExtension), 
+                    Extension.MapValueOrElse(x => x.Name, () => string.Empty)
+                    );
     }
 }

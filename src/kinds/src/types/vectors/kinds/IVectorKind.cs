@@ -5,9 +5,14 @@
 namespace Z0
 {
     using System;
- 
-    public interface IVectorKind : IVectorType, IVectorWidth
+
+    public interface IVectorKind : IVectorWidth
     {
+        /// <summary>
+        /// The vector's generic type definition
+        /// </summary>
+        Type TypeDefinition {get;}
+
         /// <summary>
         /// The vector numeric cell kind
         /// </summary>
@@ -24,9 +29,20 @@ namespace Z0
         Type Reified => TypeDefinition.MakeGenericType(CellKind.SystemType());            
     }    
 
-    public interface IVectorKind<F,W,T> : IVectorType<W>, IVectorKind
+    /// <summary>
+    /// Characterizes an F-bound polymorphic reification that identifies an intrinsic vector generic type definition
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    public interface IVectorType<F,W> :  IVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>
+        where F : struct, IVectorType<F,W>
+        where W : unmanaged, ITypeWidth
+    {
+        
+    }
+
+    public interface IVectorKind<F,W,T> : IVectorType<F,W>, IVectorKind
         where F : struct, IVectorKind<F,W,T>
-        where W : struct, IVectorWidth<W>
+        where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
         NumericKind IVectorKind.CellKind => NumericKinds.kind<T>();

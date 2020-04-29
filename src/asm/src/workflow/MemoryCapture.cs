@@ -26,7 +26,7 @@ namespace Z0
             => new MemoryCapture(address, data, instructions,formatted);
         
         [MethodImpl(Inline)]
-        MemoryCapture(MemoryAddress address, ParsedMemoryExtract data, AsmInstructionList instructions, string formatted)
+        internal MemoryCapture(MemoryAddress address, ParsedMemoryExtract data, AsmInstructionList instructions, string formatted)
         {
             this.Address = address;
             this.Parsed = data;

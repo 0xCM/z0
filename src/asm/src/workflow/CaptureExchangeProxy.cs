@@ -31,7 +31,7 @@ namespace Z0.Asm
             => new CaptureExchangeProxy(service,capture,state);
         
         [MethodImpl(Inline)]
-        CaptureExchangeProxy(ICaptureService service, IBufferToken target, IBufferToken state)            
+        internal CaptureExchangeProxy(ICaptureService service, IBufferToken target, IBufferToken state)            
         {
             this.TargetBuffer = target;
             this.StateBuffer = state;

@@ -43,21 +43,6 @@ namespace Z0
                   where K : unmanaged, Enum
                   => HostedGeneric(src,kind).Concat(HostedDirect(src,kind)).OrderBy(x => x.Method.MetadataToken);
 
-            public IEnumerable<Member> HostedNaturalNumeric(IApiHost src)  
-                  => from m in src.HostingType.DeclaredMethods().NaturalNumeric()  
-                  let kid = m.KindId()
-                  from c in ApiCollector.NaturalNumericClosures(m) 
-                  let reified = c.ClosedMethod
-                  let id = Diviner.Identify(reified)
-                  let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
-                  select Member.Define(uri, reified, kid);
-
-            public IEnumerable<Member> LocatedNaturalNumeric(IApiHost src)  
-                  => from m in HostedNaturalNumeric(src)
-                  let address = MemoryAddress.Define(Jit(m.Method))
-                  let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Method.Name, m.Id)
-                  select Member.Define(uri, m.Method, m.KindId ?? OpKindId.None, address);
-
             public IEnumerable<Member> Hosted<K>(IApiHost src, K kind, GenericPartition g)
                   where K : unmanaged, Enum
                   => g.IsGeneric() ? HostedGeneric(src,kind) : HostedDirect(src, kind);

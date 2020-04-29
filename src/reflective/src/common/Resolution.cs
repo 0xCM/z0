@@ -6,10 +6,11 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using static ReflectionFlags;
+
+    using static Seed;    
     
     partial class Reflective
     {
-
         /// <summary>
         /// Attempts to retrieves the value of a static or instance property
         /// </summary>

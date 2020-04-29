@@ -14,22 +14,20 @@ namespace Z0
      public readonly struct NandGate<T> : IBinaryGate<T>, IBinaryGate<Vector128<T>>, IBinaryGate<Vector256<T>>
         where T : unmanaged
     {
-        internal static readonly NandGate<T> Gate = default;
-
         [MethodImpl(Inline)]
-        public bit Send(bit x, bit y)
+        public bit Invoke(bit x, bit y)
             => !(x & y);
 
         [MethodImpl(Inline)]
-        public T Send(T x, T y)
+        public T Invoke(T x, T y)
             => gmath.not(gmath.and(x,y));
 
         [MethodImpl(Inline)]
-        public Vector128<T> Send(Vector128<T> x, Vector128<T> y)
+        public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
             => gvec.vnot(gvec.vand(x, y));
 
         [MethodImpl(Inline)]
-        public Vector256<T> Send(Vector256<T> x, Vector256<T> y)
+        public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
             => gvec.vnot(gvec.vand(x, y));
     }
 }

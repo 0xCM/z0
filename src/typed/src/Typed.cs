@@ -10,7 +10,17 @@ namespace Z0
 
     public static partial class Typed
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representativev</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static ulong value<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => TypeNats.value(n);
 
     }
 

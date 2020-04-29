@@ -19,8 +19,5 @@ namespace Z0
         IEnumerable<Member> Located<K>(IApiHost src, K kind, GenericPartition g)
                 where K : unmanaged, Enum;
 
-        IEnumerable<Member> HostedNaturalNumeric(IApiHost src);         
-
-        IEnumerable<Member> LocatedNaturalNumeric(IApiHost src);   
     }
 }

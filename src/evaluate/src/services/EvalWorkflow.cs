@@ -30,7 +30,7 @@ namespace Z0.Asm
         public static EvalWorkflow Create(IAppContext context, IPolyrand random, FolderPath root)
             => new EvalWorkflow(context, random, root);
 
-        EvalWorkflow(IAppContext context, IPolyrand random, FolderPath root)
+        internal EvalWorkflow(IAppContext context, IPolyrand random, FolderPath root)
         {                    
             this.Context = context;
             this.Dispatcher = EvalDispatcher.Create(random, context);
@@ -72,9 +72,6 @@ namespace Z0.Asm
         public void Execute(params PartId[] parts)
         {
             using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
-            //Context.Notify($"{BufferCount} buffers of length {BufferSize} successfully allocated");
-
-            //var catalogs = ApiSet.Composition.Catalogs;
             iter(ApiSet.MatchingCatalogs(parts), ExecuteCatalog);
         }
     }

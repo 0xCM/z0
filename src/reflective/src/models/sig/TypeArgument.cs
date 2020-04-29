@@ -6,26 +6,27 @@ namespace Z0
 {
     using System;
     
-    public class TypeArgument : SigArtifact
+    public readonly struct TypeArgument : IFormattable<TypeArgument>
     {
-        public static TypeArgument Define(Type target, TypeParameter param, Type arg)
-            => new TypeArgument(target, param, arg);
-
-        TypeArgument(Type target, TypeParameter parameter, Type arg)
-            : base(arg.Name)
-        {
-            this.Target = target;
-            this.Parameter = parameter;
-            this.Argument = arg;
-        }
-
+        public string Name {get;}
         public Type Target {get;}
 
         public TypeParameter Parameter {get;}
 
         public Type Argument {get;}
 
-        public override string ToString() 
+        internal TypeArgument(Type target, TypeParameter parameter, Type arg)
+        {
+            this.Name = arg.Name;
+            this.Target = target;
+            this.Parameter = parameter;
+            this.Argument = arg;
+        }
+        
+        public string Format()
             => Argument.DisplayName();
+
+        public override string ToString() 
+            => Format();
     }
 }

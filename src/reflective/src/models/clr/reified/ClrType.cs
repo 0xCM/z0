@@ -8,7 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using static Z0.Seed;
+    
+    using static Seed;
 
     public readonly struct ClrType : IClrType<ClrType>
     {

@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Reflective;
+    using static Seed;
 
     public interface IClrMethod : IClrArtifact
     {
@@ -39,7 +39,7 @@ namespace Z0
         /// Models of the types nested within the subject, if any
         /// </summary>
         IEnumerable<IClrType> NestedTypes 
-            => seq<IClrType>();
+            => Control.seq<IClrType>();
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         ClrType Generalized {get;}
         
         new IEnumerable<M> NestedTypes
-            => seq<M>();
+            => Control.seq<M>();
 
         IEnumerable<IClrType> IClrType.NestedTypes
             => NestedTypes.Cast<IClrType>();

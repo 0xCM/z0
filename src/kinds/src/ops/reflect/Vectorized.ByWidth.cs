@@ -59,7 +59,6 @@ namespace Z0
         public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W512 w)
             => src.OpenGeneric().Where(m => m.IsVectorized(w));
 
-
         /// <summary>
         /// Selcts vectorized methods from a source stream
         /// </summary>

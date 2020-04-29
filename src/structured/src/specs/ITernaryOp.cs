@@ -18,6 +18,12 @@ namespace Z0
         new TernaryOp<A> Operation => (this as IFunc<A,A,A,A>).Operation.ToTernaryOp();
     } 
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface ITernaryOpIn<A> : IFuncIn<A,A,A,A>
+    {
+
+    }
+
     /// <summary>
     /// Characterizes a vectorized 128-bit ternary operator
     /// </summary>

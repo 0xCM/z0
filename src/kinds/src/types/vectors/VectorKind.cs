@@ -8,7 +8,6 @@ namespace Z0
 
     using W = FixedWidth;
     using NK = NumericKind;
-    using NW = NumericWidth;
 
     /// <summary>
     /// Clasifies concrete intrinsic vectors of total width w over components of width t and sign indicator s where:

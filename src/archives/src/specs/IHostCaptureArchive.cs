@@ -21,7 +21,7 @@ namespace Z0
 
         FileName ExtractFileName => BaseFileName + ExtractExt;
 
-        FilePath ExtractPath => ExtractDir + ExtractFileName;
+        new FilePath ExtractPath => ExtractDir + ExtractFileName;
 
         FileName ParsedFileName => BaseFileName + ParsedExt;
 

@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static BufferSeqId;
 
-    readonly struct BinaryOpEvalService<T> : IBinaryOpEvalService<T>
+    readonly struct BinaryOpEvaluator<T> : IBinaryOpEvaluator<T>
         where T : unmanaged
     {
         IDynexus Dynamic => Dynops.Services.Dynexus;

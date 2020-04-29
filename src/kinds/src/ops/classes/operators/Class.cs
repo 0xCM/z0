@@ -19,6 +19,9 @@ namespace Z0
         /// </summary>
         None = 0,
 
+        /// <summary>
+        /// Classifies an emitter as an operator
+        /// </summary>        
         Emitter = OC.Emitter,
 
         /// <summary>

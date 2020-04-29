@@ -18,6 +18,12 @@ namespace Z0
         new UnaryOp<A> Operation => (this as IFunc<A,A>).Operation.ToUnaryOp();
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface IUnaryOpIn<A> : IFuncIn<A,A>
+    {
+
+    }
+
     /// <summary>
     /// Characterizes a vectorized unary operator over 128-bit operands
     /// </summary>

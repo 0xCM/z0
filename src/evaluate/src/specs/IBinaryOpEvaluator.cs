@@ -8,7 +8,7 @@ namespace Z0
 
     using static EvalPackages;
 
-    public interface IBinaryOpEvalService<T> : IService
+    public interface IBinaryOpEvaluator<T> : IService
         where T : unmanaged
     {
         ref readonly BinaryEval<T> Evaluate(in BinaryOpEval<T> package);

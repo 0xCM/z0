@@ -21,12 +21,6 @@ namespace Z0
         OpIdentity Id => OpIdentity.Set(Name);        
     }
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface IFuncT<T> : IFunc
-    {
-
-    }
-
     /// <summary>
     /// Characterizes a structural function that is width-parametric
     /// </summary>
@@ -37,7 +31,6 @@ namespace Z0
     {
         TypeWidth TypeWidth => default(W).TypeWidth;
     }
-
 
     /// <summary>
     /// Characterizes a width-parametric and T-parameteric structural function

@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
     /// <summary>
     /// Represents one (or more) logic gates, which is intended to represent
     /// a physical component that receives one or more bits of input and emits a single bit of output; 
@@ -21,7 +24,7 @@ namespace Z0
     /// </summary>
     public interface IUnaryLogicGate : ILogicGate
     {
-        bit Send(bit a);
+        bit Invoke(bit a);
     }
 
     /// <summary>
@@ -29,7 +32,7 @@ namespace Z0
     /// </summary>
     public interface IBinaryLogicGate : ILogicGate
     {
-        bit Send(bit a, bit b);
+        bit Invoke(bit a, bit b);
     }
 
     /// <summary>
@@ -37,47 +40,97 @@ namespace Z0
     /// </summary>
     public interface ITernaryLogicGate : ILogicGate
     {
-        bit Send(bit a, bit b, bit c);
-    }
-
-    /// <summary>
-    /// Characterizes a sequence of logic gates predicated on a parametric type
-    /// </summary>
-    public interface ITypedLogicGate<T> : ILogicGate
-        where T : unmanaged
-    {
-
+        bit Invoke(bit a, bit b, bit c);
+        
     }
 
     /// <summary>
     /// Characterizes a set of logic gates where each member accepts 1 bit of input
     /// </summary>
     /// <typeparam name="T">A type that defines a finite sequence of bits</typeparam>
-    public interface IUnaryGate<T> : IUnaryLogicGate, ITypedLogicGate<T>
+    public interface IUnaryGate<T> : IUnaryLogicGate, IUnaryOp<T>
         where T : unmanaged
     {
-        T Send(T a);
+        
     }
 
     /// <summary>
     /// Characterizes a set of logic gates where each member accepts 2 bits of input 
     /// </summary>
     /// <typeparam name="T">A type that defines a finite sequence of bits</typeparam>
-    public interface IBinaryGate<T> : IBinaryLogicGate, ITypedLogicGate<T>
+    public interface IBinaryGate<T> : IBinaryLogicGate, IBinaryOp<T>
         where T : unmanaged
     {
-        T Send(T a, T b);
+        
+    }
+
+    public interface IBinaryGateIn<T> : IBinaryOpIn<T>
+        where T : unmanaged
+    {
+
     }
 
     /// <summary>
     /// Characterizes a set of logic gates where each member accepts 3 bits of input 
     /// </summary>
     /// <typeparam name="T">A type that defines a finite sequence of bits</typeparam>
-    public interface ITernaryGate<T> : ITernaryLogicGate, ITypedLogicGate<T>
+    public interface ITernaryGate<T> : ITernaryLogicGate, ITernaryOp<T>
         where T : unmanaged
     {
-        T Send(T a, T b, T c);
+        
+    }
+
+    public interface IVUnaryGate128<T> : IUnaryGate<Vector128<T>>
+        where T : unmanaged
+    {
+
+    }    
+    
+    public interface IVUnaryGate256<T> : IUnaryGate<Vector256<T>>
+        where T : unmanaged
+    {
 
     }
 
+    public interface IVUnaryGate512<T> : IUnaryGate<Vector512<T>>
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IBinaryGate128<T> : IBinaryGate<Vector128<T>>
+        where T : unmanaged
+    {
+
+    }    
+    
+    public interface IBinaryGate256<T> : IBinaryGate<Vector256<T>>
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IBinaryGate512<T> : IBinaryGateIn<Vector512<T>>
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IVTernaryGate128<T> : ITernaryGate<Vector128<T>>
+        where T : unmanaged
+    {
+
+    }    
+    
+    public interface IVTernaryGate256<T> : ITernaryGate<Vector256<T>>
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IVTernaryGate512<T> : ITernaryGate<Vector512<T>>
+        where T : unmanaged
+    {
+
+    }
 }

@@ -7,6 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
+    public interface IPathComponent
+    {
+        const char Separator = '/';
+
+    }
+
+    public interface IPathComponent<T> : IPathComponent, IIdentification<T>
+        where T : IPathComponent<T>, new()
+    {
+        string  Name {get;} 
+        
+        static T Empty => new T();        
+
+        string IIdentified.Identifier => Name;
+
+    }
+
     public abstract class PathComponent<T> : IIdentification<T>
         where T : PathComponent<T>, new()
     {

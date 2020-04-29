@@ -1,0 +1,16 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    
+    partial class Reflective
+    {
+        [MethodImpl(Inline), Op]
+        public static bool IsRefStruct(this Type src)
+            => src.IsByRefLike;
+    }
+}

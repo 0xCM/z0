@@ -61,7 +61,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit parse(string src, out double dst)
             => double.TryParse(src, out dst);            
-
     }
 
     [ApiHost("parser")]

@@ -9,18 +9,20 @@ namespace Z0.Asm
 
     using static Seed;
 
+    /// <summary>
+    /// Defines common asm workfow configuration settings
+    /// </summary>
     public readonly struct AsmWorkflowConfig
     {
-        [MethodImpl(Inline)]
-        public static AsmWorkflowConfig Define(FolderPath root)
-            => new AsmWorkflowConfig(root);
-
         [MethodImpl(Inline)]
         public AsmWorkflowConfig(FolderPath root)
         {
             this.EmissionRoot = root;
         }
 
+        /// <summary>
+        /// Specifies the root emisson folder, bwlow which all data will be written
+        /// </summary>
         public FolderPath EmissionRoot {get;}
     }
 }

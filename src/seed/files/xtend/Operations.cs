@@ -41,19 +41,12 @@ namespace Z0
         public static void Delete(this FilePath src)
             => FileSystem.delete(src);
 
-        /// <summary>
-        /// Creates a folder if it doesn't exist
-        /// </summary>
-        /// <param name="dst">The target path</param>
-        public static FolderPath CreateIfMissing(this FolderPath dst)
-            => FileSystem.reify(dst);
-
-        /// <summary>
-        /// Deletes all files in a specified directory, but neither does it recurse nor delete folders
-        /// </summary>
-        /// <param name="dst">The target path</param>
-        public static FolderPath Clear(this FolderPath dst)
-            => FileSystem.clear(dst);
+        // public static FolderPath CreateIfMissing(this FolderPath dst)
+        // {   
+        //     if(!Directory.Exists(dst.Name)) 
+        //         Directory.CreateDirectory(dst.Name);
+        //     return dst;
+        // }
 
         public static FilePath CreateParentIfMissing(this FilePath src)
             => FileSystem.reifyParent(src);

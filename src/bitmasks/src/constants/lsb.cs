@@ -404,16 +404,19 @@ namespace Z0
         /// <summary>
         /// [00000111 00000111]
         /// </summary>
+        [BinaryLiteral("[00000111 00000111]")]
         public const ushort Lsb16x8x3 = (ushort) Lsb8x8x3 | (ushort)Lsb8x8x3 << 8;
 
         /// <summary>
         /// [00000111 00000111 00000111 00000111]
         /// </summary>
+        [BinaryLiteral("[00000111 00000111 00000111 00000111]")]
         public const uint Lsb32x8x3 = (uint)Lsb16x8x3 | (uint)Lsb16x8x3 << 16;
 
         /// <summary>
         /// [00000111 00000111 00000111 00000111 00000111 00000111 00000111 00000111]
         /// </summary>
+        [BinaryLiteral("[00000111 00000111 00000111 00000111 00000111 00000111 00000111 00000111]")]
         public const ulong Lsb64x8x3 = (ulong)Lsb32x8x3 | (ulong)Lsb32x8x3 << 32;
 
         // ~ 8x4: The least 4 bits of each 8-bit segment are enabled

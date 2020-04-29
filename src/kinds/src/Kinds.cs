@@ -13,7 +13,7 @@ namespace Z0
 
 
     }
-
+    
     public partial class Kinded
     {
 
@@ -25,13 +25,12 @@ namespace Z0
 
     }
 
-
     [ApiHost]
     public partial class BlockedKinds : IApiHost<BlockedKinds>
     {
     
     }
-
+   
     public static partial class XTend
     {
 

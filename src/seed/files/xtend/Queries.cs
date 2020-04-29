@@ -28,10 +28,10 @@ namespace Z0
             => FileSystem.extant(src);
 
        public static IEnumerable<FilePath> WithExtension(this IEnumerable<FilePath> src, FileExtension ext)
-            => src.Where(path => path.Extension == ext);
+            => src.Where(path => path.Ext == ext);
 
         public static IEnumerable<FilePath> WithExtensions(this IEnumerable<FilePath> src, params FileExtension[] extensions)
-            => src.Where(path => extensions.Any(e => e == path.Extension));
+            => src.Where(path => extensions.Any(e => e == path.Ext));
 
         public static bool Matches(this FilePath src, params string[] substrings)
             => substrings.Any(s => src.FullPath.Contains(s,StringComparison.InvariantCultureIgnoreCase));

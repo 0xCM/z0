@@ -7,16 +7,25 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
-    public class MethodParameters : IFormattable<MethodParameters>
+    using static Seed;
+
+    public readonly struct MethodParameters : IFormattable<MethodParameters>
     {
         public MethodParameter[] Index {get;}
 
+        [MethodImpl(Inline)]
         public static implicit operator MethodParameters(MethodParameter[] src)
             => new MethodParameters(src);
 
+        [MethodImpl(Inline)]
         public MethodParameters(IEnumerable<MethodParameter> refs)
             => this.Index = refs.ToArray();
+
+        [MethodImpl(Inline)]
+        public MethodParameters(params MethodParameter[] src)
+            => this.Index = src;
 
         public string Format(bool fence)
         {

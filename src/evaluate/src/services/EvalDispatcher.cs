@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
     using System.Linq;
-        
+    using System.Runtime.CompilerServices;
+
     using static Seed;
     using static Memories;
+
 
     using K = Kinds;
 
@@ -18,10 +20,13 @@ namespace Z0
 
         readonly IAppMsgSink Sink;
                                 
+        [MethodImpl(Inline)]
         public static IEvalDispatcher Create(IPolyrand random, IAppMsgSink sink)
             => new EvalDispatcher(random, sink);
 
-        EvalDispatcher(IPolyrand random, IAppMsgSink sink)
+    
+        [MethodImpl(Inline)]
+        internal EvalDispatcher(IPolyrand random, IAppMsgSink sink)
         {
             this.Random = random;
             this.Sink = sink;
@@ -43,7 +48,7 @@ namespace Z0
             var target =  Evaluations.pairs(("method", "asm"), Tuples.index(dst));
             var content = Evaluations.binary(source, target);
             var package = new BinaryOpEval<T>(EvalContext.Define(execBuffers, code), content);
-            var evaluator = new BinaryOpEvalService<T>();
+            var evaluator = new BinaryOpEvaluator<T>();
             return evaluator.Evaluate(package);
         }
 

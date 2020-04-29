@@ -94,14 +94,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public ref readonly MemberCapture CaptureComplete(in ExtractState state, in MemberCapture captured)
         {
-            //Junction.OnCaptureComplete(this, state, captured);
             return ref captured;
         }
 
         [MethodImpl(Inline)]
         public ref readonly ExtractState CaptureStep(in ExtractState state)
         {
-            //Junction.OnCaptureStep(this, state);
+
             return ref state;
         }
 

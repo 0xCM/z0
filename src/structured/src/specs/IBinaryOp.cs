@@ -17,6 +17,12 @@ namespace Z0
         new BinaryOp<A> Operation => (this as IFunc<A,A,A>).Operation.ToBinaryOp();    
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface IBinaryOpIn<A> : IFuncIn<A,A,A>
+    {
+
+    }
+
     /// <summary>
     /// Characterizes a vectorized binary operator over 128-bit operands
     /// </summary>

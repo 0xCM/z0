@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using W = FixedWidth;
-    using NK = NumericKind;
     using NW = NumericWidth;
 
     [Flags]

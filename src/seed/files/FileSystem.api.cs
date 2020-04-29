@@ -26,7 +26,8 @@ namespace Z0
             => Directory.Exists(src.Name);
 
         public static FolderPath reify(FolderPath dst)
-        {   if(!extant(dst)) 
+        {   
+            if(!Directory.Exists(dst.Name)) 
                 Directory.CreateDirectory(dst.Name);
             return dst;
         }
@@ -58,19 +59,15 @@ namespace Z0
         public static string[] lines(FilePath src)
             => extant(src) ? File.ReadAllLines(src.FullPath) : new string[]{};
 
-        /// <summary>
-        /// Deletes all files in a specified directory, but neither does it recurse nor delete folders
-        /// </summary>
-        /// <param name="dst">The target path</param>
-        public static FolderPath clear(FolderPath dst)
-        {   
-            if(extant(dst)) 
-            {
-                foreach(var f in Directory.EnumerateFiles(dst.Name))
-                    File.Delete(f);
-            }
-            return dst;
-        }
+        // public static FolderPath clear(FolderPath dst)
+        // {   
+        //     if(extant(dst)) 
+        //     {
+        //         foreach(var f in Directory.EnumerateFiles(dst.Name))
+        //             File.Delete(f);
+        //     }
+        //     return dst;
+        // }
 
         public static void append(FilePath dst, IEnumerable<string> src)
         {

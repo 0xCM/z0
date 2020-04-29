@@ -8,6 +8,7 @@ namespace Z0
     using System.Security;
     using System.Runtime.Intrinsics;
 
+
     [SuppressUnmanagedCodeSecurity]
     public interface IAction<A> : IFunc
     {

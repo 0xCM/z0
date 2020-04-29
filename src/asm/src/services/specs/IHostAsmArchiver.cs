@@ -24,27 +24,13 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source functions</param>
         /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FilePath> SaveAsm(AsmFunction[] src, bool append);
+        Option<FilePath> SaveInjectedImmAsm(OpIdentity id, AsmFunction[] src, bool append);
 
         /// <summary>
         /// Saves an array of functions, rendered as lines of hex text, to the archive
         /// </summary>
         /// <param name="src">The source functions</param>
         /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FilePath> SaveHex(AsmFunction[] src, bool append);
-
-        /// <summary>
-        /// Saves an array of functions, rendered as formatted asm code, to the archive
-        /// </summary>
-        /// <param name="src">The source functions</param>
-        /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FilePath> SaveAsm(OpIdentity id, AsmFunction[] src, bool append);
-
-        /// <summary>
-        /// Saves an array of functions, rendered as lines of hex text, to the archive
-        /// </summary>
-        /// <param name="src">The source functions</param>
-        /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FilePath> SaveHex(OpIdentity id, AsmFunction[] src, bool append);       
+        Option<FilePath> SaveInjectedImmHex(OpIdentity id, AsmFunction[] src, bool append);       
     }    
 }

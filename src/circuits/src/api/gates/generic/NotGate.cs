@@ -13,25 +13,21 @@ namespace Z0
 
     public readonly struct NotGate<T> : IUnaryGate<T>, IUnaryGate<Vector128<T>>, IUnaryGate<Vector256<T>>        
         where T : unmanaged
-    {
-        internal static readonly NotGate<T> Gate = default;
-        
+    {        
         [MethodImpl(Inline)]
-        public bit Send(bit input)
+        public bit Invoke(bit input)
             => !input;    
 
         [MethodImpl(Inline)]
-        public T Send(T x)
+        public T Invoke(T x)
             => gmath.not(x);
 
         [MethodImpl(Inline)]
-        public Vector128<T> Send(Vector128<T> x)
+        public Vector128<T> Invoke(Vector128<T> x)
             => gvec.vnot(x);
 
         [MethodImpl(Inline)]
-        public Vector256<T> Send(Vector256<T> x)
+        public Vector256<T> Invoke(Vector256<T> x)
             => gvec.vnot(x);
- 
-
     }
 }

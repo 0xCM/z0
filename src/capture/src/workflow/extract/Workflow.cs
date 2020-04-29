@@ -31,7 +31,6 @@ namespace Z0.Asm
             Decoder =   AsmWorkflows.Stateless.FunctionDecoder(FormatConfig);
             Formatter = AsmWorkflows.Stateless.AsmFormatter(FormatConfig);
             CodeArchive = Archives.Services.CaptureArchive(ArchiveRoot);
-            CodeArchive.Clear();
             Broker = ConnectBroker(this);          
         }
 
@@ -167,9 +166,10 @@ namespace Z0.Asm
             return extracted;
         }
 
-        public void Run()
+        public void Run(params PartId[] parts)
         {
-            foreach(var host in Hosts)
+            var hosts = parts.Length == 0 ? Hosts : Hosts.Where(h => parts.Contains(h.Owner));            
+            foreach(var host in hosts)
             {
                 var members = ExtractMembers(host);
                 if(members.Length !=0)

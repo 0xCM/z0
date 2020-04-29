@@ -16,15 +16,9 @@ namespace Z0
     public interface ICaptureArchive : IService
     {
         /// <summary>
-        /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
+        /// The folder to which all path calculation is relative
         /// </summary>
-        FolderPath[] Clear(params PartId[] parts);
-        
-        ICaptureArchive Narrow(FolderName area, FolderName subject);
-
-        [MethodImpl(Inline)]
-        IHostCaptureArchive CaptureArchive(ApiHostUri host)
-            => Archives.Services.HostCaptureArchive(this, host);        
+        FolderPath RootDir {get;}
 
         FolderName AreaName => FolderName.Empty;
 
@@ -48,9 +42,6 @@ namespace Z0
         FolderName LogFolder
             => FolderName.Define("logs");
 
-        FolderName ReportFolder 
-            => FolderName.Define($"reports");  
-
         FolderName ImmRootFolder 
             => FolderName.Define("imm");
 
@@ -64,7 +55,7 @@ namespace Z0
 
         FileExtension CilExt => FileExtensions.Il;
 
-        FolderPath RootDir {get;}
+        FileExtension LogExt => FileExtensions.Log;
 
         FolderPath DataRoot => reify(RootDir + RootFolder);
 
@@ -84,11 +75,14 @@ namespace Z0
 
         FolderPath ImmSubDir(RelativeLocation location) => reify(ImmRootDir +  location);
 
-        FileName HexFileName(OpIdentity m) => FileName.Define(m, HexExt);
+        FileName HexFileName(OpIdentity m) 
+            => FileName.Define(m, HexExt);
 
-        FileName CilFileName(OpIdentity m) => FileName.Define(m, CilExt);
+        FileName CilFileName(OpIdentity m) 
+            => FileName.Define(m, CilExt);
 
-        FileName AsmFileName(OpIdentity m) => FileName.Define(m, AsmExt);
+        FileName AsmFileName(OpIdentity m) 
+            => FileName.Define(m, AsmExt);
 
         FileName AsmFileName(ApiHostUri host)
             => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), AsmExt);
@@ -111,24 +105,20 @@ namespace Z0
         FilePath HexPath<T>()
             => HexPath(FileName.Define(typeof(T).Name, HexExt));
 
-        FolderPath DataSubDir(RelativeLocation location) => DataRoot +  location;
+        FilePath HexPath(ApiHostUri host)
+            => HexDir + FileName.Define(host.Name, HexExt);
 
-        FilePath HexPath(PartId origin, ApiHostUri host, OpIdentity id)
-            => DataSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + HexFileName(id);
+        FilePath AsmPath(ApiHostUri host)
+            => AsmDir + FileName.Define(host.Name, AsmExt);
 
-        FilePath AsmPath(PartId origin, ApiHostUri host, OpIdentity id)
-            => DataSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + AsmFileName(id);
+        FilePath ExtractPath(ApiHostUri host)
+            => ExtractDir + FileName.Define(host.Name, ExtractExt);
 
-        FilePath CilPath(PartId catalog, ApiHostUri host, OpIdentity id)
-            => DataSubDir(RelativeLocation.Define(catalog.Format(), host.Name)) + CilFileName(id);
+        FilePath ParsePath(ApiHostUri host)
+            => ParsedDir + FileName.Define(host.Name, ParsedExt);
 
-        FilePath OpArchivePath(ArchiveFileKind kind, PartId origin, ApiHostUri host, OpIdentity id, bool imm)
-            => kind switch {
-                ArchiveFileKind.Hex  => imm ? HexImmPath(origin,host,id) : HexPath(origin, host, id),
-                ArchiveFileKind.Asm  =>  imm ? AsmImmPath(origin,host,id) : AsmPath(origin, host, id),
-                ArchiveFileKind.Cil  => CilPath(origin, host, id),
-                _  => FilePath.Empty,
-            };
+        FilePath LogPath(ApiHostUri host)
+            => LogDir + FileName.Define(host.Name, LogExt);
 
         IEnumerable<FilePath> AsmFiles => AsmDir.Files(AsmExt);  
 
@@ -145,5 +135,17 @@ namespace Z0
         IEnumerable<FilePath> ImmAsmFiles => ImmAsmDir.Files(AsmExt);
 
         IEnumerable<FilePath> ImmHexFiles => ImmHexDir.Files(HexExt);
+
+        /// <summary>
+        /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
+        /// </summary>
+        FolderPath[] Clear(params PartId[] parts);
+        
+        ICaptureArchive Narrow(FolderName area, FolderName subject);
+
+        [MethodImpl(Inline)]
+        IHostCaptureArchive CaptureArchive(ApiHostUri host)
+            => Archives.Services.HostCaptureArchive(this, host);        
+
     }
 }

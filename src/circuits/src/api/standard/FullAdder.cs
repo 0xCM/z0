@@ -11,9 +11,10 @@ namespace Z0
     
     using static Seed;
 
-    public static class FullAdder
+    [ApiHost]
+    public class FullAdder : IApiHost<FullAdder>
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void Compute(bit x, bit y, bit cin, out bit sum, out bit cout)
         {
             var a = x ^ y;
@@ -23,7 +24,7 @@ namespace Z0
             cout = b | c;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static OutPair<bit> Compute(bit x, bit y, bit cin)
         {
             var a = x ^ y;
@@ -34,18 +35,7 @@ namespace Z0
             return(sum, cout);
         }
 
-        [MethodImpl(Inline)]
-        public static void Compute<T>(T x, T y, T cin, out T sum, out T cout)
-            where T : unmanaged
-        {
-            var a = gmath.xor(x, y);
-            var b = gmath.and(a, cin);
-            var c = gmath.and(x, y);
-            sum = gmath.xor(a, cin);
-            cout = gmath.or(b, c);
-        }
-        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector64 Compute(BitVector32 x, BitVector32 y, BitVector32 cin)
         {
             var a = x ^ y;
@@ -56,7 +46,18 @@ namespace Z0
             return BitVector.concat(sum,cout);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        public static void Compute<T>(T x, T y, T cin, out T sum, out T cout)
+            where T : unmanaged
+        {
+            var a = gmath.xor(x, y);
+            var b = gmath.and(a, cin);
+            var c = gmath.and(x, y);
+            sum = gmath.xor(a, cin);
+            cout = gmath.or(b, c);
+        }
+        
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
         public static void Compute<T>(Vector256<T> x, Vector256<T> y, Vector256<T> cin, out Vector256<T> sum, out Vector256<T> cout)
             where T : unmanaged
         {
@@ -67,7 +68,7 @@ namespace Z0
             cout = gvec.vor(b, c);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
         public static OutPair<Vector256<T>> Compute<T>(Vector256<T> x, Vector256<T> y, Vector256<T> cin)
             where T : unmanaged
         {
@@ -75,7 +76,7 @@ namespace Z0
             return(sum,cout);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
         public static void Compute<T>(Vector128<T> x, Vector128<T> y, Vector128<T> cin, out Vector128<T> sum, out Vector128<T> cout)
             where T : unmanaged
         {
@@ -86,7 +87,7 @@ namespace Z0
             cout = gvec.vor(b, c);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
         public static OutPair<Vector128<T>> Compute<T>(Vector128<T> x, Vector128<T> y, Vector128<T> cin)
             where T : unmanaged
         {

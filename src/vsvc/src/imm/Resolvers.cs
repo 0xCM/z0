@@ -14,7 +14,6 @@ namespace Z0
 
     using K = Kinds;
 
-
     public readonly struct VImm8UnaryResolver128<T> :  IImm8UnaryResolver128<T>
         where T : unmanaged
     {

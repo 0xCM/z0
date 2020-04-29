@@ -13,10 +13,10 @@ namespace Z0
     {
         void test1()
         {
-            ref readonly var circuit = ref Circuits.halfadder<byte>();
+            var circuit = Circuits.half<byte>();
             BitVector8 a = 0b11010110;
             BitVector8 b = 0b10101001;
-            (BitVector8 s, BitVector8 c) = circuit.Send(a, b);
+            (BitVector8 s, BitVector8 c) = circuit.Invoke(a, b);
         }
     }
 }
