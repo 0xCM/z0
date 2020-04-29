@@ -18,7 +18,7 @@ namespace Z0.Logix
     {
         public void check_compositions()
         {
-            var ops = NumericBits.BinaryLogicKinds.ToArray();
+            var ops = NumericLogixHost.BinaryLogicKinds.ToArray();
             var pairs = from op1 in ops
                         from op2 in ops
                         select (op1, op2);            
@@ -28,7 +28,7 @@ namespace Z0.Logix
 
         public void check_binop_vars()
         {
-            NumericBits.BinaryLogicKinds.ToArray().Iter(check_binop_vars);
+            NumericLogixHost.BinaryLogicKinds.ToArray().Iter(check_binop_vars);
         }
 
         public void check_solution()
@@ -112,12 +112,12 @@ namespace Z0.Logix
             var v2_name = v2.Format(false);
             var v3_name = v3.Format(false);
             var method = MethodInfo.GetCurrentMethod().DisplayName<T>();
-            var msg = AppMsg.Babble($"{method}");
-            Deposit(msg);
+            // var msg = AppMsg.Babble($"{method}");
+            // Deposit(msg);
                         
             var expr = binary(k1, binary(k0, v0,v1), binary(k0, v2,v3));            
-            var op0 = NumericBits.lookup<T>(k0);
-            var op1 = NumericBits.lookup<T>(k1);
+            var op0 = NumericLogixHost.lookup<T>(k0);
+            var op1 = NumericLogixHost.lookup<T>(k1);
 
             for(var i=0; i< RepCount; i++)
             {
@@ -146,7 +146,7 @@ namespace Z0.Logix
             var v0 = variable<T>(0);
             var v1 = variable<T>(1);
 
-            var op = NumericBits.lookup<T>(kind);
+            var op = NumericLogixHost.lookup<T>(kind);
             var expr = binary(kind,v0,v1);
             for(var i=0; i< RepCount; i++)
             {

@@ -11,22 +11,3 @@ namespace Z0.Parts
         
     }
 }
-
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
-//-----------------------------------------------------------------------------
-namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Concurrent;
-
-
-    public static partial class BitField
-    {
-
-
-    }
-
-}

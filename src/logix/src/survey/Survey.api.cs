@@ -6,6 +6,7 @@ namespace Z0.Logix
 {        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Seed;
     using static Memories;
@@ -119,19 +120,19 @@ namespace Z0.Logix
             where T : unmanaged
                 => new Survey<T>(id,name, questions);
 
-        public static QuestionResponse<T> Respond<T>(Question<T> question, IPolyrand random)
+        public static QuestionResponse<T> Respond<T>(in Question<T> question, IPolyrand random)
             where T : unmanaged
         {
-            var count = question.Choices.Count;
+            var count = question.Choices.Length;
             var index = random.Next(0,count);
             var chosen = question.Choices[index];
             return Response(question.Id, chosen);
         }
 
-        public static SurveyResponse<T> Respond<T>(Survey<T> survey, IPolyrand random)
+        public static SurveyResponse<T> Respond<T>(in Survey<T> survey, IPolyrand random)
             where T : unmanaged
         {
-            var answered = new QuestionResponse<T>[survey.Questions.Count];
+            var answered = new QuestionResponse<T>[survey.Questions.Length];
             for(var i=0; i<answered.Length; i++)
                 answered[i] = Respond(survey.Questions[i], random);
             return new SurveyResponse<T>(survey.Id, answered);
@@ -142,7 +143,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="src">The question upon which the bitvector will be predicated</param>
         /// <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
-        public static BitVector<T> Vector<T>(Question<T> src)
+        public static BitVector<T> Vector<T>(in Question<T> src)
             where T : unmanaged
         {
             var data = default(T);
@@ -156,7 +157,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="src">The response upon which the bitvector will be predicated</param>
         /// <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
-        public static BitVector<T> Vector<T>(QuestionResponse<T> src)
+        public static BitVector<T> Vector<T>(in QuestionResponse<T> src)
             where T : unmanaged
         {
             var data = default(T);
@@ -170,7 +171,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="src">The survey upon which the matrix will be predicated</param>
         /// <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
-        public static BitMatrix<T> Matrix<T>(SurveyResponse<T> src)
+        public static BitMatrix<T> Matrix<T>(in SurveyResponse<T> src)
             where T : unmanaged
         {
             var rowcount = src.Answered.Length;
@@ -189,10 +190,10 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="src">The survey upon which the matrix will be predicated</param>
         /// <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
-        public static BitMatrix<T> Matrix<T>(Survey<T> src)
+        public static BitMatrix<T> Matrix<T>(in Survey<T> src)
             where T : unmanaged
         {
-            var rowcount = src.Questions.Count;
+            var rowcount = src.Questions.Length;
             var maxrows = bitsize<T>();
             if(rowcount > maxrows)
                 throw new Exception($"Too many rows for a primal bitmatrix");
@@ -203,17 +204,17 @@ namespace Z0.Logix
             return dst;                
         }
 
-        public static RowBits<T> Rows<T>(Survey<T> src)
+        public static RowBits<T> Rows<T>(in Survey<T> src)
             where T : unmanaged
         {
-            var rowcount = src.Questions.Count;
+            var rowcount = src.Questions.Length;
             var dst = RowBits.alloc<T>(rowcount);
             for(var i=0; i< rowcount; i++)
                 dst[i] = Vector(src.Questions[i]);
             return dst;
         }
 
-        public static RowBits<T> Rows<T>(SurveyResponse<T> src)
+        public static RowBits<T> Rows<T>(in SurveyResponse<T> src)
             where T : unmanaged
         {
             var rowcount = src.Answered.Length;
@@ -221,6 +222,47 @@ namespace Z0.Logix
             for(var i=0; i< rowcount; i++)
                 dst[i] = Vector(src.Answered[i]);
             return dst;
+        }
+
+        public static string Format<T>(in SurveyResponse<T> src)
+            where T : unmanaged
+        {
+            var sb = text.build();
+            
+            for(var i=0; i<src.Answered.Length; i++)
+            {
+                sb.Append(src.Answered[i].QuestionId);
+                sb.Append(Chars.Colon);
+                sb.Append(Chars.Space);
+                sb.Append(src.Answered[i].Format());
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
+        }
+
+        public static string Format<T>(in Question<T> src)
+            where T : unmanaged
+        {
+            var format = text.build();
+            format.Append(src.Label.PadRight(12));
+            format.Append(Chars.Colon);
+            format.Append(Chars.Space);
+            format.Append(Chars.LBracket);
+            format.Append(string.Join(src.MultipleChoice ? Chars.Pipe : Chars.Caret, src.Choices.Select(c => c.Format())));
+            format.Append(Chars.RBracket);
+            return format.ToString();
+        }
+
+        public static string Format<T>(in Survey<T> src)
+            where T : unmanaged
+        {
+            var format = text.factory.Builder();
+            format.AppendLine(src.Name);
+            format.AppendLine(new string(Chars.Dash,80));
+            for(var i=0; i<src.Questions.Length; i++)
+                format.AppendLine(Format(src.Questions[i]));            
+                    return format.ToString();
         }
 
         static string ChoiceLabel(uint index)

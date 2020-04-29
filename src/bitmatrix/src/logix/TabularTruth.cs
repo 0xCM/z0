@@ -125,65 +125,69 @@ namespace Z0
             return tt;
         }
 
-        public static void WriteTruth(TextWriter dst, ReadOnlySpan<UnaryLogicKind> kinds)
+        public static void WriteTruth(StreamWriter dst, ReadOnlySpan<UnaryLogicKind> kinds)
         {
+            var writer = BitMatrixWriter.Share(dst);
             for(var i=0; i<kinds.Length; i++)
-                WriteTruth(kinds[i],dst);
+                WriteTruth(kinds[i],writer);
         }
 
-        public static void WriteTruth(TextWriter dst, ReadOnlySpan<BinaryLogicKind> kinds)
+        public static void WriteTruth(StreamWriter dst, ReadOnlySpan<BinaryLogicKind> kinds)
         {
+            var writer = BitMatrixWriter.Share(dst);
             for(var i=0; i<kinds.Length; i++)
-                WriteTruth(kinds[i],dst);
+                WriteTruth(kinds[i],writer);
         }
 
-        public static void WriteTruth(TextWriter dst, ReadOnlySpan<TernaryLogicKind> kinds)
+        public static void WriteTruth(StreamWriter dst, ReadOnlySpan<TernaryLogicKind> kinds)
         {
+            var writer = BitMatrixWriter.Share(dst);
             for(var i=0; i<kinds.Length; i++)
-                WriteTruth(kinds[i],dst);
+                WriteTruth(kinds[i],writer);
         }
 
-        public static void WriteTruth(TextWriter dst, ArityValue arity)
+        public static void WriteTruth(StreamWriter dst, ArityValue arity)
         {
+            var writer = BitMatrixWriter.Share(dst);
             switch(arity)
             {
 
                 case ArityValue.Unary: 
-                    WriteUnaryTruth(dst); 
+                    WriteUnaryTruth(writer); 
                     break;
                 case ArityValue.Binary: 
-                    WriteBinaryTruth(dst); 
+                    WriteBinaryTruth(writer); 
                     break;
                 case ArityValue.Ternary: 
-                    WriteTernaryTruth(dst); 
+                    WriteTernaryTruth(writer); 
                     break;
                 default: 
                     throw Unsupported.value(arity);
             }
         }
 
-        static BitMatrix<N2,N2,byte> WriteTruth(UnaryLogicKind kind, TextWriter dst)
+        static BitMatrix<N2,N2,byte> WriteTruth(UnaryLogicKind kind, IBitMatrixWriter dst)
         {
             var table = BuildTruth(kind);
-            table.emit(kind,dst);
+            dst.Write(table,kind);
             return table;
         }
 
-        static BitMatrix<N4,N3,byte> WriteTruth(BinaryLogicKind kind, TextWriter dst)
+        static BitMatrix<N4,N3,byte> WriteTruth(BinaryLogicKind kind, IBitMatrixWriter dst)
         {
             var table = BuildTruth(kind);
-            table.emit(kind,dst);
+            dst.Write(table,kind);
             return table;
         }
 
-        static BitMatrix<N8,N4,byte> WriteTruth(TernaryLogicKind kind, TextWriter dst)
+        static BitMatrix<N8,N4,byte> WriteTruth(TernaryLogicKind kind, IBitMatrixWriter dst)
         {
             var table = BuildTruth(kind);
-            table.emit(kind,dst);
+            dst.Write(table,kind);
             return table;
         }
 
-        static void WriteUnaryTruth(TextWriter dst)
+        static void WriteUnaryTruth(IBitMatrixWriter dst)
         {
             var ops = bitlogix.UnaryOpKinds.ToArray();
             for(var i=0; i< ops.Length; i++)
@@ -192,11 +196,11 @@ namespace Z0
                 var table = BitMatrix.alloc<N2,N2,byte>();
                 table[0] = BitBlocks.single<N2,byte>((byte)Bits.pack(result[0], off));
                 table[1] = BitBlocks.single<N2,byte>((byte)Bits.pack(result[1], on));
-                table.emit(dst);                
+                dst.Write(table);
             }
         }
 
-        static void WriteBinaryTruth(TextWriter dst)
+        static void WriteBinaryTruth(IBitMatrixWriter dst)
         {
             for(var i=0; i< 16; i++)
             {
@@ -209,11 +213,11 @@ namespace Z0
                 table[2] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[2], on, off));
                 table[3] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[3], on, on));
                 require(table.GetCol(2) == bbResult);                
-                table.emit(dst);
+                dst.Write(table);
             }
         }
 
-        static void WriteTernaryTruth(TextWriter dst)
+        static void WriteTernaryTruth(IBitMatrixWriter dst)
         {
             for(var i=0; i< 256; i++)
             {
@@ -230,7 +234,7 @@ namespace Z0
                 table[6] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[6], on, on, off));
                 table[7] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[7], on, on, on));
                 require(table.GetCol(3) == bbResult);                
-                table.emit(dst);
+                dst.Write(table);
             }
         }
 

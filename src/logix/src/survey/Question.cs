@@ -15,18 +15,9 @@ namespace Z0.Logix
     /// Defines a question in the context of a survey
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public class Question<T>
+    public readonly struct Question<T> : IFormattable<Question<T>>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public Question(uint Id, string statement, int? MaxSelect, params QuestionChoice<T>[] choices)
-        {
-            this.Id = Id;
-            this.Label = statement;
-            this.MaxSelect = MaxSelect ?? choices.Length;
-            this.Choices = choices;
-        }
-
         /// <summary>
         /// Uniquely identifies a question relative to a survey
         /// </summary>
@@ -45,7 +36,16 @@ namespace Z0.Logix
         /// <summary>
         /// The potiential choices/answers 
         /// </summary>
-        public IReadOnlyList<QuestionChoice<T>> Choices {get;}
+        public QuestionChoice<T>[] Choices {get;}
+
+        [MethodImpl(Inline)]
+        public Question(uint Id, string statement, int? MaxSelect, params QuestionChoice<T>[] choices)
+        {
+            this.Id = Id;
+            this.Label = statement;
+            this.MaxSelect = MaxSelect ?? choices.Length;
+            this.Choices = choices;
+        }
 
         public bool MultipleChoice 
             => MaxSelect > 1;
@@ -54,19 +54,9 @@ namespace Z0.Logix
             => $"{Id} - {Label}";
 
         public string Format()
-        {
-            var format = text.build();
-            format.Append(Label.PadRight(12));
-            format.Append(Chars.Colon);
-            format.Append(Chars.Space);
-            format.Append(Chars.LBracket);
-            format.Append(string.Join(MultipleChoice ? Chars.Pipe : Chars.Caret, Choices.Select(c => c.Format())));
-            format.Append(Chars.RBracket);
-            return format.ToString();
-        }
+            => Survey.Format(this);
 
         public override string ToString()
             => Title;
     }
-
 }

@@ -11,42 +11,26 @@ namespace Z0.Logix
     /// Defines a response to a survey
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public class SurveyResponse<T>
+    public readonly ref struct SurveyResponse<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// The survey identifier
+        /// </summary>
+        public readonly uint SurveyId;
+
+        /// <summary>
+        /// The answered survey questions
+        /// </summary>
+        public readonly Span<QuestionResponse<T>> Answered;
+
         public SurveyResponse(uint id, params QuestionResponse<T>[] answered)
         {
             this.SurveyId = id;
             this.Answered = answered;
         }
         
-        /// <summary>
-        /// The survey identifier
-        /// </summary>
-        public uint SurveyId {get;}
-
-        /// <summary>
-        /// The answered survey questions
-        /// </summary>
-        public QuestionResponse<T>[] Answered {get;}
-
-        public string Format()
-        {
-            var sb = text.build();
-            
-            for(var i=0; i<Answered.Length; i++)
-            {
-                sb.Append(Answered[i].QuestionId);
-                sb.Append(Chars.Colon);
-                sb.Append(Chars.Space);
-                sb.Append(Answered[i].Format());
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
-        }
-
         public override string ToString()
-            => Format();
+            => Survey.Format(this);
     }
 }

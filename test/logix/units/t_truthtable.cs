@@ -140,10 +140,10 @@ namespace Z0.Logix
             const byte off = 0;
 
             var dst = BitVector.alloc(n4);
-            dst[0] = (byte)(NumericBits.eval(op, off,off) & on) == on;
-            dst[1] = (byte)(NumericBits.eval(op, on,off) & on) == on;
-            dst[2] = (byte)(NumericBits.eval(op, off,on) & on) == on;
-            dst[3] = (byte)(NumericBits.eval(op, on,on) & on) == on;
+            dst[0] = (byte)(NumericLogixHost.eval(op, off,off) & on) == on;
+            dst[1] = (byte)(NumericLogixHost.eval(op, on,off) & on) == on;
+            dst[2] = (byte)(NumericLogixHost.eval(op, off,on) & on) == on;
+            dst[3] = (byte)(NumericLogixHost.eval(op, on,on) & on) == on;
             var sig = TabularTruth.Vector(op);
             Claim.eq(sig,dst);
         }

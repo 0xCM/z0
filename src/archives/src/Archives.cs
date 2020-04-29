@@ -18,8 +18,18 @@ namespace Z0
     {        
         IUriBitsReader UriBitsReader => new UriBitsReader();
 
+        IBitArchiveReader BitArchiveReader => new BitArchiveReader();
+
         UriBitsWriterFactory UriBitsWriterFactory
             => dst => UriBitsWriter(dst);        
+
+        [MethodImpl(Inline)]
+        IBitArchiveWriter BitArchiveWriter(FilePath dst)
+            => new BitArchiveWriter(dst);        
+
+        [MethodImpl(Inline)]
+        IUriBitsWriter UriBitsWriter(FilePath dst)
+            => new UriBitsWriter(dst);
 
         [MethodImpl(Inline)]
         ICaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
@@ -28,14 +38,6 @@ namespace Z0
         [MethodImpl(Inline)]
         IHostCaptureArchive HostCaptureArchive(ICaptureArchive root, ApiHostUri host) 
             => new HostCaptureArchive(root,host);
-
-        [MethodImpl(Inline)]
-        IBitArchiveWriter BitArchiveWriter(FilePath dst)
-            => new BitArchiveWriter(dst);
-        
-        [MethodImpl(Inline)]
-        IUriBitsWriter UriBitsWriter(FilePath dst)
-            => new UriBitsWriter(dst);
         
         [MethodImpl(Inline)]
         IHostBitsArchive HostBits(PartId part, FolderPath root = null)

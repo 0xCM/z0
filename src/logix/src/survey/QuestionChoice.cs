@@ -13,17 +13,9 @@ namespace Z0.Logix
     /// Defines a choice in the context of a survey question
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public class QuestionChoice<T> 
+    public readonly struct QuestionChoice<T> : IFormattable<QuestionChoice<T>>
         where T : unmanaged
-    {
-        
-        [MethodImpl(Inline)]
-        public QuestionChoice(T Id, string Label)
-        {
-            this.Id = Id;
-            this.Label = Label;
-        }
-        
+    {        
         /// <summary>
         /// Uniquely identifies a choice relative to a question
         /// </summary>
@@ -34,13 +26,21 @@ namespace Z0.Logix
         /// </summary>
         public string Label {get;}
 
-        public string Title
-            => $"{gmath.log2(Id)}: {Label}";
-         
-        public string Format()
-            => text.parenthetical($"{gmath.log2(Id)}, {Label}");
+        public string Title {get;}
 
+        [MethodImpl(Inline)]
+        public QuestionChoice(T Id, string Label, string title = null)
+        {
+            this.Id = Id;
+            this.Label = Label;
+            this.Title = title ?? $"{gmath.log2(Id)}: {Label}";
+        }
+                 
+        public string Format()
+            => text.parenthetical(Title);
+
+        
         public override string ToString()
-            => Title;
+            => Format();
     }
 }

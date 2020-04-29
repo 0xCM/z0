@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public class Greek
     {
         public const char alpha = 'α';

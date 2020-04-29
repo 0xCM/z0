@@ -101,26 +101,26 @@ namespace Z0.Logix
         [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<T> inc<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => NumericBits.inc(eval(a).Value);
+                => NumericLogix.inc(eval(a).Value);
 
         [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<T> dec<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => NumericBits.dec(eval(a).Value);
+                => NumericLogix.dec(eval(a).Value);
 
         [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<T> negate<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => NumericBits.negate(eval(a).Value);
+                => NumericLogix.negate(eval(a).Value);
     
         [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<T> add<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
-                => NumericBits.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericLogix.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<T> sub<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
-                => NumericBits.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericLogix.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
     }
 }

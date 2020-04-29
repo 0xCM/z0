@@ -270,7 +270,6 @@ namespace Z0
         /// The '↦' character
         /// </summary>
         public const char MapsTo = '↦';
-
         
     }
 }

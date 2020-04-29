@@ -41,8 +41,14 @@ namespace Z0
         /// </summary>
         public const char f = 'f';
         
+        /// <summary>
+        /// The 'g' character
+        /// </summary>
         public const char g = 'g';
         
+        /// <summary>
+        /// The 'h' character
+        /// </summary>
         public const char h = 'h';
         
         public const char i = 'i';
@@ -153,8 +159,14 @@ namespace Z0
 
         public const char X = 'X';
 
+        /// <summary>
+        /// The 'Y' character
+        /// </summary>
         public const char Y = 'Y';
 
+        /// <summary>
+        /// The 'Z' character
+        /// </summary>
         public const char Z = 'Z';
  
     }

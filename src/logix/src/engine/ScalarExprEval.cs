@@ -34,18 +34,18 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryBitwiseOpExpr<T> x:
-                    return NumericBits.eval(x.OpKind, eval(x.Arg).Value);
+                    return NumericLogixHost.eval(x.OpKind, eval(x.Arg).Value);
 
                 case IBinaryBitwiseOpExpr<T> x:
-                    return NumericBits.eval(x.OpKind, 
+                    return NumericLogixHost.eval(x.OpKind, 
                         eval(x.LeftArg).Value, eval(x.RightArg).Value);
 
                 case IShiftOpExpr<T> x:
-                    return NumericBits.eval(x.OpKind, 
+                    return NumericLogixHost.eval(x.OpKind, 
                         eval(x.Subject).Value, eval(x.Offset).Value);
 
                 case ITernaryBitwiseOpExpr<T> x:
-                    return NumericBits.eval(x.OpKind, 
+                    return NumericLogixHost.eval(x.OpKind, 
                         eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.SecondArg).Value);
                         
                 default: throw new NotSupportedException(expr.GetType().Name);

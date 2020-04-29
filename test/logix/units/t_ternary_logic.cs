@@ -16,7 +16,7 @@ namespace Z0.Logix
         BitLogix bitlogix => BitLogix.Service;
 
         ReadOnlySpan<TernaryLogicKind> TernaryKinds
-            => NumericBits.TernaryLogicKinds;
+            => NumericLogixHost.TernaryLogicKinds;
         
         public void op_identities()
         {                         
@@ -66,7 +66,7 @@ namespace Z0.Logix
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
-                BitVector<T> x = NumericBits.select(a.Scalar, b.Scalar, c.Scalar);
+                BitVector<T> x = NumericLogix.select(a.Scalar, b.Scalar, c.Scalar);
                 for(var j=0; j<x.Width; j++)
                     Claim.eq(x[j], BitLogix.select(a[j],b[j],c[j]));
             }
@@ -89,7 +89,7 @@ namespace Z0.Logix
                 var sx = x.ToSpan();
 
                 for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], NumericBits.select(sa[j], sb[j], sc[j]));
+                    Claim.eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
             }
 
         }
@@ -111,7 +111,7 @@ namespace Z0.Logix
                 var sx = x.ToSpan();
 
                 for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], NumericBits.select(sa[j], sb[j], sc[j]));
+                    Claim.eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
             }
 
         }
@@ -123,7 +123,7 @@ namespace Z0.Logix
             var b = convert<T>(0b1100_1100);
             var c = convert<T>(0b1010_1010);
             var d = convert<T>(0b1111_1111);
-            var f = NumericBits.lookup<T>(id);
+            var f = NumericLogixHost.lookup<T>(id);
             var actual = convert<T,byte>(gmath.and(f(a,b,c), d));
             var expect = (byte)id;
             Claim.eq(expect.FormatHex(), actual.FormatHex());
@@ -144,7 +144,7 @@ namespace Z0.Logix
                     u[j] = bitlogix.Evaluate(kind, a[j], b[j], c[j]);
                 
                 
-                BitVector<T> v = NumericBits.eval(kind, a.Scalar, b.Scalar, c.Scalar);
+                BitVector<T> v = NumericLogixHost.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
                     Notify($"Equivalence failed for ternary op {kind}:{Identify.numeric<T>()}");

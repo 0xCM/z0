@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     using static VLogix;
     
-    using S = NumericBits;
+    using S = NumericLogix;
 
     public class t_comparison_ops : TypedLogixTest<t_comparison_ops>
     {

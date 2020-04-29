@@ -11,19 +11,19 @@ namespace Z0.Logix
     /// Defines a response to a survey question
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public class QuestionResponse<T>
+    public readonly struct QuestionResponse<T>
         where T : unmanaged
     {
+        public uint QuestionId {get;}
+
+        public QuestionChoice<T>[] Chosen {get;}
+
         public QuestionResponse(uint questionId, params QuestionChoice<T>[] chosen)
         {
             this.QuestionId = questionId;
             this.Chosen = chosen;
         }
         
-        public uint QuestionId {get;}
-
-        public QuestionChoice<T>[] Chosen {get;}
-
         public string Format(bool bracket = false, char sep = Chars.Comma)
         {
             var sb = text.build();
@@ -50,6 +50,5 @@ namespace Z0.Logix
 
         public override string ToString()
             => Format();
-
     }
 }

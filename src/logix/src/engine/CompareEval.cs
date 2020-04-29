@@ -22,7 +22,7 @@ namespace Z0.Logix
         [Op("eval_cmp_pred"), Closures(Integers & ~NumericKind.U64)]
         public static bit eval<T>(IComparisonPredExpr<T> expr)
             where T : unmanaged
-                => NumericBits.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericLogixHost.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op("eval_vcmp_expr128"), Closures(Integers & ~NumericKind.U64)]
         public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)

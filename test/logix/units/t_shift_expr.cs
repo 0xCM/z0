@@ -149,7 +149,7 @@ namespace Z0.Logix
                 var a = Random.Next<T>();
                 v1.Set(a);   
                 T actual = LogicEngine.eval(expr);
-                T expect = NumericBits.eval(op,a,offset);
+                T expect = NumericLogixHost.eval(op,a,offset);
                 Claim.eq(actual,expect);                            
             }
         }

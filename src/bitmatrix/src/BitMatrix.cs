@@ -33,9 +33,19 @@ namespace Z0
 
     }
 
+    public interface IBitMatrixServices
+    {
+        IBitMatrixWriter Writer(FilePath dst) => new BitMatrixWriter(dst);
+    }
+
+    public readonly struct BitMatrixServices : IBitMatrixServices
+    {
+        public static IBitMatrixServices Factory => default(BitMatrixServices);
+
+    }
+
     public static partial class XTend
     {   
 
     }
 }
-

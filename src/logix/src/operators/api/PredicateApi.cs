@@ -14,6 +14,7 @@ namespace Z0.Logix
     using BCK = BinaryComparisonKind;
 
 
+
     public static class PredicateApi
     {
         [Op, NumericClosures(Integers)]
@@ -22,12 +23,12 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BCK.Eq: return NumericBits.equals(a,b);
-                case BCK.Neq: return NumericBits.neq(a,b);
-                case BCK.Lt: return NumericBits.lt(a,b);
-                case BCK.LtEq: return NumericBits.lteq(a,b);
-                case BCK.Gt: return NumericBits.gt(a,b);
-                case BCK.GtEq: return NumericBits.gteq(a,b);
+                case BCK.Eq: return NumericLogix.equals(a,b);
+                case BCK.Neq: return NumericLogix.neq(a,b);
+                case BCK.Lt: return NumericLogix.lt(a,b);
+                case BCK.LtEq: return NumericLogix.lteq(a,b);
+                case BCK.Gt: return NumericLogix.gt(a,b);
+                case BCK.GtEq: return NumericLogix.gteq(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -38,12 +39,12 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BCK.Eq: return NumericBits.equals;
-                case BCK.Neq: return NumericBits.neq;
-                case BCK.Lt: return NumericBits.lt;
-                case BCK.LtEq: return NumericBits.lteq;
-                case BCK.Gt: return NumericBits.gt;
-                case BCK.GtEq: return NumericBits.gteq;
+                case BCK.Eq: return NumericLogix.equals;
+                case BCK.Neq: return NumericLogix.neq;
+                case BCK.Lt: return NumericLogix.lt;
+                case BCK.LtEq: return NumericLogix.lteq;
+                case BCK.Gt: return NumericLogix.gt;
+                case BCK.GtEq: return NumericLogix.gteq;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
