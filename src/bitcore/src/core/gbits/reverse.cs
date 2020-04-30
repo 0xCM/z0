@@ -16,7 +16,8 @@ namespace Z0
         /// Reverses the bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Reverse, Closures(UnsignedInts)]
+        /// <remarks>BAD</remarks>
+        [MethodImpl(Inline)]
         public static T reverse<T>(T src)
             where T : unmanaged
         {

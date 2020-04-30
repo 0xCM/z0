@@ -48,14 +48,11 @@ namespace Z0.Asm
                 var code = ArchiveOps.Service.CreateCodeIndex(StatelessIdentity.Services.MemberLocator(), ApiSet, host.UriPath, CodeArchive.RootDir);
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
+                foreach(var api in code.UnaryOperators)
+                    Dispatcher.Dispatch(buffers, api, K.UnaryOp);
+
                 foreach(var api in code.BinaryOperators)
-                {
-                    var uri = api.Uri;
-                    var oc = OperatorTypeClass.Infer(api.Method).Format();
-                    var kind = api.Method.KindId().Format();
-                    var ok = default(K.BinaryOpClass);
-                    Dispatcher.Dispatch(buffers, api, ok);
-                }
+                    Dispatcher.Dispatch(buffers, api, K.BinaryOp);
             }
         }
 

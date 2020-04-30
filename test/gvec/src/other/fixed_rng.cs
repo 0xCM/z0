@@ -31,8 +31,8 @@ namespace Z0
 
             if(!succeeded)
             {
-                trace($"expect := {expect}");
-                trace($"actual := {actual}");
+                Trace($"expect := {expect}");
+                Trace($"actual := {actual}");
             }
 
             Claim.require(succeeded);            

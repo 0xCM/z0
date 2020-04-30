@@ -20,7 +20,7 @@ namespace Z0
             var host = ApiHost.Create<math>();
             var locator = StatelessIdentity.Services.MemberLocator();
             var members = locator.Hosted(host, BitLogicKind.And, GenericPartition.NonGeneric);
-            iter(members, m => trace(m.OpUri));            
+            iter(members, m => Trace(m.OpUri));            
                 
         }
 
@@ -29,7 +29,7 @@ namespace Z0
             var host = ApiHost.Create<math>();
             var locator = StatelessIdentity.Services.MemberLocator();
             var located = locator.Located(host);
-            iter(located, m => trace(m.OpUri));        
+            iter(located, m => Trace(m.OpUri));        
         }
 
         // public void query_3()

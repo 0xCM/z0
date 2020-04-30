@@ -6,30 +6,81 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.Intrinsics;
-    using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
+    using Storage = System.Runtime.Intrinsics.Vector256<byte>;    
 
     partial class Banks
     {
-        [StructLayout(LayoutKind.Sequential, Size=1024)]
-        public readonly struct Bank512x2<T> : IBank512<Bank512x2<T>,N2>
-            where T : unmanaged
-        {            
-            readonly Vector512<T> lo;
+        public readonly ref struct Bank512
+        {
+            readonly Span<Fixed512> State;
 
-            readonly Vector512<T> hi;
+            [MethodImpl(Inline)]
+            internal Bank512(Span<Fixed512> state)
+            {
+                State = state;
+            }
         }
 
-        [StructLayout(LayoutKind.Sequential, Size=2048)]
-        public readonly struct Bank512x4<T> : IBank512<Bank512x4<T>,N4>
-            where T : unmanaged
+        /// <summary>
+        /// Defines storage for 2 512-bit registers
+        /// </summary>
+        public readonly struct Bank512x2 : IBank<Bank512x2,W512,N2>
         {            
-            readonly Vector512<T> a;
+            readonly Storage SegA;
 
-            readonly Vector512<T> b;
+            readonly Storage SegB;
 
-            readonly Vector512<T> c;
+            readonly Storage SegC;
 
-            readonly Vector512<T> d;
+            readonly Storage SegD;
+ 
+            [MethodImpl(Inline)]
+            internal Bank512x2(Storage a, Storage b, Storage c, Storage d)
+            {
+                SegA = a;
+                SegB = b;
+                SegC = c;
+                SegD = d;
+            }
+        }
+
+        /// <summary>
+        /// Defines storage for 4 512-bit registers
+        /// </summary>
+        public readonly struct Bank512x4 : IBank<Bank512x4,W512,N4>
+        {            
+            readonly Storage SegA;
+
+            readonly Storage SegB;
+
+            readonly Storage SegC;
+
+            readonly Storage SegD;
+
+            readonly Storage SegE;
+
+            readonly Storage SegF;
+
+            readonly Storage SegG;
+
+            readonly Storage SegH;
+
+            [MethodImpl(Inline)]
+            internal Bank512x4(Storage a, Storage b, Storage c, Storage d, Storage e, Storage f, Storage g, Storage h)
+            {
+                SegA = a;
+                SegB = b;
+                SegC = c;
+                SegD = d;
+                SegE = e;
+                SegF = f;
+                SegG = g;
+                SegH = h;
+            }
         }        
     }
 }

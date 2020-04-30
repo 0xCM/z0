@@ -140,9 +140,7 @@ namespace Z0.Asm
 
         MemberExtract[] Extracted(ApiHostUri host, MemberExtract[] extracts, Option<FilePath> dst)
         {
-            if(dst)
-                this.ExtractionSuccess(host,dst.Value);
-            else
+            if(!dst)
                 this.ExtractionFailure(host);
             return extracts;
         }    

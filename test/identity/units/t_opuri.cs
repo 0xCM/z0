@@ -29,7 +29,7 @@ namespace Z0
             Claim.eq("vgeneric", opid.Name);
             var parts  = Identify.Parts(opid).ToArray();
             foreach(var p in parts)
-                trace(p.PartKind, p);                            
+                Trace(p.PartKind, p);                            
         }
     }
 }

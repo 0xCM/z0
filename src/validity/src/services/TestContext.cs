@@ -54,7 +54,9 @@ namespace Z0
             this.Queue.Next += Relay;
         }
 
-            
+        void ISink<IAppMsg>.Deposit(IAppMsg msg)
+            => Queue.Deposit(msg);
+
         protected string caller([Caller] string caller = null)
             => caller;
 
@@ -137,17 +139,20 @@ namespace Z0
         protected void Notify(string msg, AppMsgKind? severity = null)
             => Queue.Notify(msg, severity);
 
-        protected void error(object msg)
-            => Queue.Error(msg); //Queue.Trace(AppMsg.Error(msg));
+        protected void Error(object msg, [Caller] string caller = null)
+            => Queue.Error(msg, GetType(), caller); 
 
-        protected void trace(object msg, [Caller] string caller = null)
-            => Queue.Trace(msg,caller); //Queue.Trace(Tracing.TraceMsg(msg, caller));
+        protected void Trace(object msg, [Caller] string caller = null)
+            => Queue.Trace(msg, GetType(), caller);
         
-        protected void trace(string title, object msg, AppMsgColor color, [Caller] string caller = null)
-            => Queue.Trace(title, msg, color, caller);  //Queue.Trace(Tracing.TraceMsg(title, msg, caller, color));
+        protected void Trace(string title, object msg, AppMsgColor color, [Caller] string caller = null)
+            => Queue.Trace(title, msg, color, GetType(), caller);
 
-        protected void trace(string title, string msg, [Caller] string caller = null)
-            => Queue.Trace(title, msg, caller);    //Queue.Trace(Tracing.TraceMsg(title, msg, caller));        
+        protected void Trace(string title, string msg, [Caller] string caller = null)
+            => Queue.Trace(title, msg, GetType(), caller);
+
+        protected void Trace(IAppMsg msg)
+            => Queue.Trace(msg);
 
         public void Deposit(TestCaseRecord result)
             => TestResults.Enqueue(result);
@@ -179,10 +184,7 @@ namespace Z0
         public void Emit(FilePath dst) 
             => Queue.Emit(dst);        
         
-        public void Deposit(IAppMsg msg)
-            => Queue.Deposit(msg);
-
-        public void NotifyConsole(IAppMsg msg)            
+        void IAppMsgSink.NotifyConsole(IAppMsg msg)            
             => Queue.NotifyConsole(msg);
 
         public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)

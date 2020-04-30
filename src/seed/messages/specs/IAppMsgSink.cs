@@ -21,15 +21,15 @@ namespace Z0
         void Displayed(IAppMsg msg)
             => Deposit(msg.AsDisplayed());
 
-        void NotifyConsole(IAppMsg msg, AppMsgColor color)
-        {
-            if(msg.Kind == AppMsgKind.Error)
-                term.print(msg);
-            else
-                term.print(msg,color);
+        // void NotifyConsole(IAppMsg msg, AppMsgColor color)
+        // {
+        //     if(msg.Kind == AppMsgKind.Error)
+        //         term.print(msg);
+        //     else
+        //         term.print(msg,color);
             
-            Displayed(msg);
-        }
+        //     Displayed(msg);
+        // }
 
         void NotifyConsole(IAppMsg msg)
         {

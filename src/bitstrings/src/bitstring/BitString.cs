@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Represents a sequence of bits
     /// </summary>
-    public partial struct BitString : IWord<BitString, BinaryAlphabet>
+    public partial struct BitString : IWord<BitString, BinaryAlphabet>, IEquatable<BitString>
     {
         byte[] data;
 
@@ -424,7 +424,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The bitstring with which the comparison will be made</param>
         [MethodImpl(Inline)]
-        public bool Equals(BitString rhs, Action<string> trace = null)
+        public bool EqualsTrace(BitString rhs, Action<string> trace = null)
         {                                                            
             var x = Truncate(this.Length - this.Nlz());
             var y = rhs.Truncate(rhs.Length - rhs.Nlz());
@@ -438,6 +438,29 @@ namespace Z0
                 if(x.data[i] != y.data[i])
                 {
                     trace?.Invoke($"x[{i}] = {x.data[i]} != {y.data[i]} = y[{i}]");
+                    return false;            
+                }
+            return true;
+        }
+
+        /// <summary>
+        /// Determines whether this bitstring represents the same value as another, ignoring
+        /// leading zeroes
+        /// </summary>
+        /// <param name="rhs">The bitstring with which the comparison will be made</param>
+        [MethodImpl(Inline)]
+        public bool Equals(BitString rhs)
+        {                                                            
+            var x = Truncate(this.Length - this.Nlz());
+            var y = rhs.Truncate(rhs.Length - rhs.Nlz());
+            if(x.Length != y.Length)
+            {
+                return false;
+            }
+                
+            for(var i=0; i< x.Length; i++)            
+                if(x.data[i] != y.data[i])
+                {
                     return false;            
                 }
             return true;

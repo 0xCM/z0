@@ -6,27 +6,63 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.Intrinsics;
-    using System.Runtime.InteropServices;
-    
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
+    using Storage = System.Runtime.Intrinsics.Vector256<uint>;
+
     partial class Banks
     {
-        public readonly struct Bank32x16 : IBank32<Bank32x16,N16>
-        {            
-            readonly Vector256<uint> lo;
+        public readonly ref struct Bank32
+        {
+            readonly Span<uint> State;
 
-
-            readonly Vector256<uint> hi;
+            [MethodImpl(Inline)]
+            internal Bank32(Span<uint> state)
+            {
+                State = state;
+            }
         }
 
-        public readonly struct Bank32x32 : IBank32<Bank32x32,N32>
+        /// <summary>
+        /// Defines storage for 16 32-bit registers
+        /// </summary>
+        public readonly struct Bank32x16 : IBank<Bank32x16,W32,N16>
+        {                        
+            readonly Storage SegA;
+
+            readonly Storage SegB;
+
+            [MethodImpl(Inline)]
+            internal Bank32x16(Storage a, Storage b)
+            {
+                SegA = a;
+                SegB = b;
+            }
+        }
+
+        /// <summary>
+        /// Defines storage for 32 32-bit registers
+        /// </summary>
+        public readonly struct Bank32x32 : IBank<Bank32x32,W32,N32>
         {            
-            readonly Vector256<uint> a;
+            readonly Storage SegA;
 
-            readonly Vector256<uint> b;
+            readonly Storage SegB;
 
-            readonly Vector256<uint> c;
+            readonly Storage SegC;
 
-            readonly Vector256<uint> d;
+            readonly Storage SegD;
+
+            [MethodImpl(Inline)]
+            internal Bank32x32(Storage a, Storage b, Storage c, Storage d)
+            {
+                SegA = a;
+                SegB = b;
+                SegC = c;
+                SegD = d;
+            }
         }
     }
 }

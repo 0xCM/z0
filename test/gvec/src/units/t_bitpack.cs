@@ -23,8 +23,8 @@ namespace Z0
                 Claim.eq(bitseq.CellCount,n4);
 
                 var packed = BitPack.pack(bitseq,mod);
-                trace("bitstring", bs, AppMsgColor.Magenta);
-                trace("bitseq", bitseq.Format(), AppMsgColor.Magenta);
+                Trace("bitstring", bs, AppMsgColor.Magenta);
+                Trace("bitseq", bitseq.Format(), AppMsgColor.Magenta);
 
                 Claim.eq(bs.TakeScalar<byte>(), packed);
             }
@@ -82,12 +82,12 @@ namespace Z0
             var block1 = Blocks.alloc<ushort>(w16,1);
             block1[0] = ushort.MaxValue;
             var val1 = block1.BlockRef(0);
-            trace(val1.ToBitString());
+            Trace(val1.ToBitString());
 
             var block2 = Blocks.alloc<uint>(w32,1);
             block2[0] = uint.MaxValue;
             var val2 = block2.BlockRef(0);
-            trace(val2.ToBitString());
+            Trace(val2.ToBitString());
 
         }
 

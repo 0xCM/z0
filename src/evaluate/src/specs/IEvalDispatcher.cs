@@ -18,6 +18,8 @@ namespace Z0
 
         void Dispatch(in BufferSeq buffers, in MemberCode api, K.BinaryOpClass k);    
 
+        void Dispatch(in BufferSeq buffers, in MemberCode api, K.UnaryOpClass k);    
+
         bit EvalFixedOperator(in BufferSeq buffers, in MemberCode api);
     }
 }

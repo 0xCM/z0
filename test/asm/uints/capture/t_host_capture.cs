@@ -17,9 +17,8 @@ namespace Z0.Asm
             var uri = ApiHostUri.FromHost<math>();
             var capture = service.CaptureHost(uri,true);
 
-            trace($"Extracted {capture.Extracts.Length} {uri} members");
-            trace($"Parsed {capture.Parsed.Length} {uri} members");
-            trace($"Decoded {capture.Decoded.Length} {uri} members");            
+            Claim.eq(capture.Extracts.Length, capture.Parsed.Length);
+            Claim.eq(capture.Extracts.Length, capture.Decoded.Length);
         }
     }
 }

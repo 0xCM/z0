@@ -232,7 +232,7 @@ namespace Z0
             var tmp = memory.span<ulong>(spec.FieldCount);
             var positions = spec.Segments.Map(s => s.StartPos);
 
-            trace(spec);
+            Trace(spec);
 
             for(var rep=0; rep < RepCount; rep++)
             {
@@ -255,9 +255,9 @@ namespace Z0
                 
                 if(expect != result1)
                 {
-                    trace(src.FormatBits());
+                    Trace(src.FormatBits());
                     for(var i=0; i<dst.Length; i++)
-                        trace(dst[i].FormatBits(BitFormatConfig.Tlz));
+                        Trace(dst[i].FormatBits(BitFormatConfig.Tlz));
                 }
 
 
@@ -277,7 +277,7 @@ namespace Z0
             var bf = BitFields.create<BFD_I,byte,BFD_W>(64);
 
             bf[3] = byte.MaxValue;
-            trace(bf.FormatBits(32));
+            Trace(bf.FormatBits(32));
         }
     }
 }

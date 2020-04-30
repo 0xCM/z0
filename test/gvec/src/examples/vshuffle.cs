@@ -209,9 +209,9 @@ namespace Z0
 
                 if(trace)
                 {
-                    base.trace("v1", v1.FormatHex());                
-                    base.trace("p", p.Format());
-                    base.trace("perm(v1,p)", v2.FormatHex());
+                    base.Trace("v1", v1.FormatHex());                
+                    base.Trace("p", p.Format());
+                    base.Trace("perm(v1,p)", v2.FormatHex());
                 }                                
             }
         }

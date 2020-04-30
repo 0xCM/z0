@@ -7,6 +7,9 @@ namespace Z0.Asm
     using System;
 
     using W = RegisterWidth;
+    using I = RegisterIndex;
+    using R = RegisterRole;
+    using RW = RegisterRoleWidth;
 
     /// <summary>
     /// Defines a register classification scheme
@@ -55,224 +58,214 @@ namespace Z0.Asm
         W512 = W.W512,
                 
         /// <summary>
-        /// The maximum supported register width
-        ///</summary>
-        WMax = W512,
-
-        /// <summary>
         /// Classifies a register that has been assigned index slot 0
         ///</summary>
-        IX0 = WMax << 1,
+        IX0 = I.IX0,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 1
         ///</summary>
-        IX1 = IX0 << 1,
+        IX1 = I.IX1,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 2
         ///</summary>
-        IX2 = IX0 << 2,
+        IX2 = I.IX2,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 3
         ///</summary>
-        IX3 = IX0 << 3,
+        IX3 = I.IX3,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 4
         ///</summary>
-        IX4 = IX0 << 4,
+        IX4 = I.IX4,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 5
         ///</summary>
-        IX5 = IX0 << 5,
+        IX5 = I.IX5,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 6
         ///</summary>
-        IX6 = IX0 << 6,
+        IX6 = I.IX6,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 7
         ///</summary>
-        IX7 = IX0 << 7,
+        IX7 = I.IX7,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 8
         ///</summary>
-        IX8 = IX0 << 8,
+        IX8 = I.IX8,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 9
         ///</summary>
-        IX9 = IX0 << 9,
+        IX9 = I.IX9,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 10
         ///</summary>
-        IX10 = IX0 << 10,
+        IX10 = I.IX10,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 11
         ///</summary>
-        IX11 = IX0 << 11,
+        IX11 = I.IX11,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 12
         ///</summary>
-        IX12 = IX0 << 12,
+        IX12 = I.IX12,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 13
         ///</summary>
-        IX13 = IX0 << 13,
+        IX13 = I.IX13,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 14
         ///</summary>
-        IX14 = IX0 << 14,
+        IX14 = I.IX14,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 15
         ///</summary>
-        IX15 = IX0 << 15,
+        IX15 = I.IX15,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 16
         ///</summary>
-        IX16 = IX0 << 16,
+        IX16 = I.IX16,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 17
         ///</summary>
-        IX17 = IX0 << 17,
+        IX17 = I.IX17,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 18
         ///</summary>
-        IX18 = IX0 << 18,
+        IX18 = I.IX18,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 19
         ///</summary>
-        IX19 = IX0 << 19,
+        IX19 = I.IX19,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 20
         ///</summary>
-        IX20 = IX0 << 20,
+        IX20 = I.IX20,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 21
         ///</summary>
-        IX21 = IX0 << 21,
+        IX21 = I.IX21,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 22
         ///</summary>
-        IX22 = IX0 << 22,
+        IX22 = I.IX22,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 23
         ///</summary>
-        IX23 = IX0 << 23,
+        IX23 = I.IX23,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 24
         ///</summary>
-        IX24 = IX0 << 24,
+        IX24 = I.IX24,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 25
         ///</summary>
-        IX25 = IX0 << 25,
+        IX25 = I.IX25,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 26
         ///</summary>
-        IX26 = IX0 << 26,
+        IX26 = I.IX26,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 27
         ///</summary>
-        IX27 = IX0 << 27,
+        IX27 = I.IX27,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 28
         ///</summary>
-        IX28 = IX0 << 28,
+        IX28 = I.IX28,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 29
         ///</summary>
-        IX29 = IX0 << 29,
+        IX29 = I.IX29,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 30
         ///</summary>
-        IX30 = IX0 << 31,
+        IX30 = I.IX30,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 31
         ///</summary>
-        IX31 = IX0 << 31,
+        IX31 = I.IX31,
+        
+        /// <summary>
+        /// Classifies a general-purpose register
+        ///</summary>
+        GP = R.GP,
 
         /// <summary>
-        /// The first register category
+        /// Classifies a segment register
         ///</summary>
-        FirstCategory = IX31 << 1,
+        Seg = R.Seg,
 
         /// <summary>
-        /// A general-purpose register
+        /// Classifies a vector register
         ///</summary>
-        GP = FirstCategory,
-
-        /// <summary>
-        /// A segment register
-        ///</summary>
-        Seg = FirstCategory << 1,
-
-        /// <summary>
-        /// A vector register
-        ///</summary>
-        Vector  = FirstCategory << 2,
+        Vec = R.Vec,
 
         /// <summary>
         /// An 8-bit general-purpose register
         ///</summary>
-        GP8 = GP | W8,
+        GP8 = RW.GP8,
 
         /// <summary>
         /// A 16-bit general-purpose register
         ///</summary>
-        GP16 = GP | W16,
+        GP16 = RW.GP16,
 
         /// <summary>
         /// A 32-bit general-purpose register
         ///</summary>
-        GP32 = GP | W32,
+        GP32 = RW.GP32,
 
         /// <summary>
         /// A 64-bit general-purpose register
         ///</summary>
-        GP64 = GP | W64,
+        GP64 = RW.GP64,
 
         /// <summary>
         /// A 128-bit vector register
         ///</summary>
-        Xmm = Vector | W128,
+        Xmm = RW.Xmm,
 
         /// <summary>
         /// A 256-bit vector register
         ///</summary>
-        Ymm = Vector | W256,
+        Ymm = RW.Ymm,
 
         /// <summary>
         /// A 512-bit vector register
         ///</summary>
-        Zmm = Vector | W512,
+        Zmm = RW.Zmm,
 
         /// <summary>
         /// The 8-bit AL general-purpose register
@@ -439,34 +432,79 @@ namespace Z0.Asm
         ///</summary>
         EAX = IX0 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit ECX general-purpose register
+        ///</summary>
         ECX = IX1 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit EDX general-purpose register
+        ///</summary>
         EDX = IX2 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit EBX general-purpose register
+        ///</summary>
         EBX = IX3 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit ESI general-purpose register
+        ///</summary>
         ESI = IX4 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit EDI general-purpose register
+        ///</summary>
         EDI = IX5 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit ESP general-purpose register
+        ///</summary>
         ESP = IX6 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit EBP general-purpose register
+        ///</summary>
         EBP = IX7 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit R8D general-purpose register
+        ///</summary>
         R8D = IX8 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit R9D general-purpose register
+        ///</summary>
         R9D = IX9 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit R10D general-purpose register
+        ///</summary>
         R10D = IX10 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit R11D general-purpose register
+        ///</summary>
         R11D = IX11 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit R11D general-purpose register
+        ///</summary>
         R12D = IX12 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit R13D general-purpose register
+        ///</summary>
         R13D = IX13 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit R14D general-purpose register
+        ///</summary>
         R14D = IX14 | GP | W32,
 
+        /// <summary>
+        /// The 32-bit R15D general-purpose register
+        ///</summary>
         R15D = IX15 | GP | W32,
 
         /// <summary>
@@ -479,22 +517,49 @@ namespace Z0.Asm
         ///</summary>
         RCX = IX1 | GP | W64,
 
+        /// <summary>
+        /// The 64-bit RDX general-purpose register
+        ///</summary>
         RDX = IX2 | GP | W64, 
 
+        /// <summary>
+        /// The 64-bit RBX general-purpose register
+        ///</summary>
         RBX = IX3 | GP | W64, 
 
+        /// <summary>
+        /// The 64-bit RSI general-purpose register
+        ///</summary>
         RSI = IX4 | GP | W64, 
 
+        /// <summary>
+        /// The 64-bit RDI general-purpose register
+        ///</summary>
         RDI = IX5 | GP | W64, 
 
+        /// <summary>
+        /// The 64-bit RSP general-purpose register
+        ///</summary>
         RSP = IX6 | GP | W64, 
 
+        /// <summary>
+        /// The 64-bit RBP general-purpose register
+        ///</summary>
         RBP = IX7 | GP | W64, 
 
+        /// <summary>
+        /// The 64-bit R8 general-purpose register
+        ///</summary>
         R8 = IX8 | GP | W64, 
 
+        /// <summary>
+        /// The 64-bit R9 general-purpose register
+        ///</summary>
         R9 = IX9 | GP | W64, 
 
+        /// <summary>
+        /// The 64-bit R10 general-purpose register
+        ///</summary>
         R10 = IX10 | GP | W64, 
 
         /// <summary>
@@ -525,481 +590,486 @@ namespace Z0.Asm
         /// <summary>
         /// The 128-bit XMM[0] vectorized register
         ///</summary>
-        XMM0 = IX0 | Vector | W128,
+        XMM0 = IX0 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[1] vectorized register
         ///</summary>
-        XMM1 = IX1 | Vector | W128,
+        XMM1 = IX1 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[2] vectorized register
         ///</summary>
-        XMM2 = IX2 | Vector | W128,
+        XMM2 = IX2 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[3] vectorized register
         ///</summary>
-        XMM3 = IX3 | Vector | W128,
+        XMM3 = IX3 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[4] vectorized register
         ///</summary>
-        XMM4 = IX4 | Vector | W128,
+        XMM4 = IX4 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[5] vectorized register
         ///</summary>
-        XMM5 = IX5 | Vector | W128,
+        XMM5 = IX5 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[6] vectorized register
         ///</summary>
-        XMM6 = IX6 | Vector | W128,
+        XMM6 = IX6 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[7] vectorized register
         ///</summary>
-        XMM7 = IX7 | Vector | W128,
+        XMM7 = IX7 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[8] vectorized register
         ///</summary>
-        XMM8 = IX8 | Vector | W128,
+        XMM8 = IX8 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[9] vectorized register
         ///</summary>
-        XMM9 = IX9 | Vector | W128,
+        XMM9 = IX9 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[10] vectorized register
         ///</summary>
-        XMM10 = IX10 | Vector | W128,
+        XMM10 = IX10 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[11] vectorized register
         ///</summary>
-        XMM11 = IX11 | Vector | W128,
+        XMM11 = IX11 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[12] vectorized register
         ///</summary>
-        XMM12 = IX12 | Vector | W128,
+        XMM12 = IX12 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[13] vectorized register
         ///</summary>
-        XMM13 = IX13 | Vector | W128,
+        XMM13 = IX13 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[14] vectorized register
         ///</summary>
-        XMM14 = IX14 | Vector | W128,
+        XMM14 = IX14 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[15] vectorized register
         ///</summary>
-        XMM15 = IX15 | Vector | W128,
+        XMM15 = IX15 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[16] vectorized register
         ///</summary>
-        XMM16 = IX16 | Vector | W128,
+        XMM16 = IX16 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[17] vectorized register
         ///</summary>
-        XMM17 = IX17 | Vector | W128,
+        XMM17 = IX17 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[18] vectorized register
         ///</summary>
-        XMM18 = IX18 | Vector | W128,
+        XMM18 = IX18 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[19] vectorized register
         ///</summary>
-        XMM19 = IX19 | Vector | W128,
+        XMM19 = IX19 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[20] vectorized register
         ///</summary>
-        XMM20 = IX20 | Vector | W128,
+        XMM20 = IX20 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[21] vectorized register
         ///</summary>
-        XMM21 = IX21 | Vector | W128,
+        XMM21 = IX21 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[22] vectorized register
         ///</summary>
-        XMM22 = IX22 | Vector | W128,
+        XMM22 = IX22 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[23] vectorized register
         ///</summary>
-        XMM23 = IX23 | Vector | W128,
+        XMM23 = IX23 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[24] vectorized register
         ///</summary>
-        XMM24 = IX24 | Vector | W128,
+        XMM24 = IX24 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[25] vectorized register
         ///</summary>
-        XMM25 = IX25 | Vector | W128,
+        XMM25 = IX25 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[26] vectorized register
         ///</summary>
-        XMM26 = IX26 | Vector | W128,
+        XMM26 = IX26 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[27] vectorized register
         ///</summary>
-        XMM27 = IX27 | Vector | W128,
+        XMM27 = IX27 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[28] vectorized register
         ///</summary>
-        XMM28 = IX28 | Vector | W128,
+        XMM28 = IX28 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[29] vectorized register
         ///</summary>
-        XMM29 = IX29 | Vector | W128,
+        XMM29 = IX29 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[30] vectorized register
         ///</summary>
-        XMM30 = IX30 | Vector | W128,
+        XMM30 = IX30 | Vec | W128,
 
         /// <summary>
         /// The 128-bit XMM[31] vectorized register
         ///</summary>
-        XMM31 = IX31 | Vector | W128,
+        XMM31 = IX31 | Vec | W128,
 
         /// <summary>
         /// The 256-bit YMM[0] vectorized register
         ///</summary>
-        YMM0 = IX0 | Vector | W256,
+        YMM0 = IX0 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[1] vectorized register
         ///</summary>
-        YMM1 = IX1 | Vector | W256,
+        YMM1 = IX1 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[2] vectorized register
         ///</summary>
-        YMM2 = IX2 | Vector | W256,
+        YMM2 = IX2 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[3] vectorized register
         ///</summary>
-        YMM3 = IX3 | Vector | W256,
+        YMM3 = IX3 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[4] vectorized register
         ///</summary>
-        YMM4 = IX4 | Vector | W256,
+        YMM4 = IX4 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[5] vectorized register
         ///</summary>
-        YMM5 = IX5 | Vector | W256,
+        YMM5 = IX5 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[6] vectorized register
         ///</summary>
-        YMM6 = IX6 | Vector | W256,
+        YMM6 = IX6 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[7] vectorized register
         ///</summary>
-        YMM7 = IX7 | Vector | W256,
+        YMM7 = IX7 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[8] vectorized register
         ///</summary>
-        YMM8 = IX8 | Vector | W256,
+        YMM8 = IX8 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[9] vectorized register
         ///</summary>
-        YMM9 = IX9 | Vector | W256,
+        YMM9 = IX9 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[10] vectorized register
         ///</summary>
-        YMM10 = IX10 | Vector | W256,
+        YMM10 = IX10 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[11] vectorized register
         ///</summary>
-        YMM11 = IX11 | Vector | W256,
+        YMM11 = IX11 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[12] vectorized register
         ///</summary>
-        YMM12 = IX12 | Vector | W256,
+        YMM12 = IX12 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[13] vectorized register
         ///</summary>
-        YMM13 = IX13 | Vector | W256,
+        YMM13 = IX13 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[14] vectorized register
         ///</summary>
-        YMM14 = IX14 | Vector | W256,
+        YMM14 = IX14 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[15] vectorized register
         ///</summary>
-        YMM15 = IX15 | Vector | W256,
+        YMM15 = IX15 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[16] vectorized register
         ///</summary>
-        YMM16 = IX16 | Vector | W256,
+        YMM16 = IX16 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[17] vectorized register
         ///</summary>
-        YMM17 = IX17 | Vector | W256,
+        YMM17 = IX17 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[18] vectorized register
         ///</summary>
-        YMM18 = IX18 | Vector | W256,
+        YMM18 = IX18 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[19] vectorized register
         ///</summary>
-        YMM19 = IX19 | Vector | W256,
+        YMM19 = IX19 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[20] vectorized register
         ///</summary>
-        YMM20 = IX20 | Vector | W256,
+        YMM20 = IX20 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[21] vectorized register
         ///</summary>
-        YMM21 = IX21 | Vector | W256,
+        YMM21 = IX21 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[22] vectorized register
         ///</summary>
-        YMM22 = IX22 | Vector | W256,
+        YMM22 = IX22 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[23] vectorized register
         ///</summary>
-        YMM23 = IX23 | Vector | W256,
+        YMM23 = IX23 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[24] vectorized register
         ///</summary>
-        YMM24 = IX24 | Vector | W256,
+        YMM24 = IX24 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[25] vectorized register
         ///</summary>
-        YMM25 = IX25 | Vector | W256,
+        YMM25 = IX25 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[26] vectorized register
         ///</summary>
-        YMM26 = IX26 | Vector | W256,
+        YMM26 = IX26 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[27] vectorized register
         ///</summary>
-        YMM27 = IX27 | Vector | W256,
+        YMM27 = IX27 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[28] vectorized register
         ///</summary>
-        YMM28 = IX28 | Vector | W256,
+        YMM28 = IX28 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[29] vectorized register
         ///</summary>
-        YMM29 = IX29 | Vector | W256,
+        YMM29 = IX29 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[30] vectorized register
         ///</summary>
-        YMM30 = IX30 | Vector | W256,
+        YMM30 = IX30 | Vec | W256,
 
         /// <summary>
         /// The 256-bit YMM[31] vectorized register
         ///</summary>
-        YMM31 = IX31 | Vector | W256,
+        YMM31 = IX31 | Vec | W256,
 
         /// <summary>
         /// The 512-bit YMM[0] vectorized register
         ///</summary>
-        ZMM0 = IX0 | Vector | W512,
+        ZMM0 = IX0 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[1] vectorized register
         ///</summary>
-        ZMM1 = IX1 | Vector | W512,
+        ZMM1 = IX1 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[2] vectorized register
         ///</summary>
-        ZMM2 = IX2 | Vector | W512,
+        ZMM2 = IX2 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[3] vectorized register
         ///</summary>
-        ZMM3 = IX3 | Vector | W512,
+        ZMM3 = IX3 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[4] vectorized register
         ///</summary>
-        ZMM4 = IX4 | Vector | W512,
+        ZMM4 = IX4 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[5] vectorized register
         ///</summary>
-        ZMM5 = IX5 | Vector | W512,
+        ZMM5 = IX5 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[6] vectorized register
         ///</summary>
-        ZMM6 = IX6 | Vector | W512,
+        ZMM6 = IX6 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[7] vectorized register
         ///</summary>
-        ZMM7 = IX7 | Vector | W512,
+        ZMM7 = IX7 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[8] vectorized register
         ///</summary>
-        ZMM8 = IX8 | Vector | W512,
+        ZMM8 = IX8 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[9] vectorized register
         ///</summary>
-        ZMM9 = IX9 | Vector | W512,
+        ZMM9 = IX9 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[10] vectorized register
         ///</summary>
-        ZMM10 = IX10 | Vector | W512,
+        ZMM10 = IX10 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[11] vectorized register
         ///</summary>
-        ZMM11 = IX11 | Vector | W512,
+        ZMM11 = IX11 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[12] vectorized register
         ///</summary>
-        ZMM12 = IX12 | Vector | W512,
+        ZMM12 = IX12 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[13] vectorized register
         ///</summary>
-        ZMM13 = IX13 | Vector | W512,
+        ZMM13 = IX13 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[14] vectorized register
         ///</summary>
-        ZMM14 = IX14 | Vector | W512,
+        ZMM14 = IX14 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[15] vectorized register
         ///</summary>
-        ZMM15 = IX15 | Vector | W512,
+        ZMM15 = IX15 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[16] vectorized register
         ///</summary>
-        ZMM16 = IX16 | Vector | W512,
+        ZMM16 = IX16 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[17] vectorized register
         ///</summary>
-        ZMM17 = IX17 | Vector | W512,
+        ZMM17 = IX17 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[18] vectorized register
         ///</summary>
-        ZMM18 = IX18 | Vector | W512,
+        ZMM18 = IX18 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[19] vectorized register
         ///</summary>
-        ZMM19 = IX19 | Vector | W512,
+        ZMM19 = IX19 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[20] vectorized register
         ///</summary>
-        ZMM20 = IX20 | Vector | W512,
+        ZMM20 = IX20 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[21] vectorized register
         ///</summary>
-        ZMM21 = IX21 | Vector | W512,
+        ZMM21 = IX21 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[22] vectorized register
         ///</summary>
-        ZMM22 = IX22 | Vector | W512,
+        ZMM22 = IX22 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[23] vectorized register
         ///</summary>
-        ZMM23 = IX23 | Vector | W512,
+        ZMM23 = IX23 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[24] vectorized register
         ///</summary>
-        ZMM24 = IX24 | Vector | W512,
+        ZMM24 = IX24 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[25] vectorized register
         ///</summary>
-        ZMM25 = IX25 | Vector | W512,
+        ZMM25 = IX25 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[26] vectorized register
         ///</summary>
-        ZMM26 = IX26 | Vector | W512,
+        ZMM26 = IX26 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[27] vectorized register
         ///</summary>
-        ZMM27 = IX27 | Vector | W512,
+        ZMM27 = IX27 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[28] vectorized register
         ///</summary>
-        ZMM28 = IX28 | Vector | W512,
+        ZMM28 = IX28 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[29] vectorized register
         ///</summary>
-        ZMM29 = IX29 | Vector | W512,
+        ZMM29 = IX29 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[30] vectorized register
         ///</summary>
-        ZMM30 = IX30 | Vector | W512,
+        ZMM30 = IX30 | Vec | W512,
 
         /// <summary>
         /// The 512-bit ZMM[31] vectorized register
         ///</summary>
-        ZMM31 = IX31 | Vector | W512,
+        ZMM31 = IX31 | Vec | W512,
+
+        /// <summary>
+        /// The maximum register classifier value
+        ///</summary>
+        Max = ZMM31,
     }
 }

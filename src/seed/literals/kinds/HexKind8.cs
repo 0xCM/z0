@@ -7,10 +7,9 @@ namespace Z0
     using System;
     
     /// <summary>
-    /// Classifies each byte value
+    /// Defines identifiers corresponding to each value that can be represented with an 8-bit unsigned integer
     /// </summary>
-    [Flags]
-    public enum HexByteKind : byte
+    public enum HexKind8 : byte
     {
         /// <summary> 
         /// Identifies the hex value 0x00 := 0
@@ -1291,6 +1290,5 @@ namespace Z0
         /// Identifies the hex value 0xFF := 255
         /// </summary> 
         XFF = 0xFF,
-
     }
 }

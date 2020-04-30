@@ -5,13 +5,11 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
 
+    [ApiHost]
+    public partial class Banks : IApiHost<Banks>
+    {        
 
-    public static partial class Banks
-    {
-        
     }
-
 }

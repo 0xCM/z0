@@ -9,6 +9,7 @@ namespace Z0
 
     using static Seed;
     using static AppErrorMsg;
+    using static CheckClose;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -17,6 +18,12 @@ namespace Z0
     public readonly struct CheckClose : ICheckClose
     {
         public static ICheckClose Checker => default(CheckClose);
+
+        internal const double Tolerance = .1;
+
+        internal const float Res32 = .0000001f;
+        
+        internal const double Res64 = .0000001;
     }
 
     public interface ICheckClose : ICheckLengths
@@ -24,6 +31,10 @@ namespace Z0
         [MethodImpl(Inline)]   
         bool almost(float lhs, float rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
+            var dist = fmath.dist(lhs,rhs);
+            if(dist.IsNaN() || dist.Infinite() || dist < Res32)    
+                return true;
+                
             var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;            
             return err < tolerance ? true : throw Failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
@@ -32,9 +43,25 @@ namespace Z0
         [MethodImpl(Inline)]   
         bool almost(double lhs, double rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            var err = fmath.relerr(lhs,rhs);
+            var dist = fmath.dist(lhs,rhs);
+            if(dist.IsNaN() || dist.Infinite() || dist < Res64)    
+                return true;
+
+            var err = fmath.relerr(lhs,rhs);            
             var tolerance = .1f;            
             return err < tolerance ? true : throw Failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
+        }
+
+        [MethodImpl(Inline)]   
+        void close<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                almost(As.float32(lhs), As.float32(rhs), caller, file,line);
+            else if(typeof(T) == typeof(double))
+                almost(As.float64(lhs), As.float64(rhs), caller, file,line);
+            else
+                throw Unsupported.define<T>();
         }
 
         /// <summary>

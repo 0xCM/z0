@@ -18,17 +18,17 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Ntz, Closures(UnsignedInts)]
-        public static int ntz<T>(T src)
+        public static T ntz<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return Bits.ntz(uint8(src));
+                 return generic<T>(Bits.ntz(uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                 return Bits.ntz(uint16(src));
+                 return generic<T>(Bits.ntz(uint16(src)));
             else if(typeof(T) == typeof(uint))
-                 return Bits.ntz(uint32(src));
+                 return generic<T>(Bits.ntz(uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                 return Bits.ntz(uint64(src));
+                 return generic<T>(Bits.ntz(uint64(src)));
             else 
                 throw Unsupported.define<T>();
         }

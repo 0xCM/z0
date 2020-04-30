@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Seed;
-   
+    using static Memories;
+
     partial class Bits
     {                
         /// <summary>
@@ -138,5 +139,45 @@ namespace Z0
             var xOy = xO | yO;
             return xOy;
         }
+
+        /// <summary>
+        /// Blends alternating operand bits 
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        /// <param name="parity">The parity selector</param>
+        [MethodImpl(Inline), Mix]
+        public static byte mix(byte x, byte y, byte parity)
+            => parity == 0 ? mix(n0, x, y) : mix(n1, x, y);
+
+        /// <summary>
+        /// Blends alternating operand bits 
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        /// <param name="parity">The parity selector</param>
+        [MethodImpl(Inline), Mix]
+        public static ushort mix(ushort x, ushort y, ushort parity)
+            => parity == 0 ? mix(n0, x, y) : mix(n1, x, y);
+
+        /// <summary>
+        /// Blends alternating operand bits 
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        /// <param name="parity">The parity selector</param>
+        [MethodImpl(Inline), Mix]
+        public static uint mix(uint x, uint y, uint parity)
+            => parity == 0 ? mix(n0, x, y) : mix(n1, x, y);
+
+        /// <summary>
+        /// Blends alternating operand bits 
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        /// <param name="parity">The parity selector</param>
+        [MethodImpl(Inline), Mix]
+        public ulong mix(ulong x, ulong y, ulong parity)
+            => parity == 0 ? mix(n0, x, y) : mix(n1, x, y);
     }
 }

@@ -69,7 +69,6 @@ namespace Z0.Asm
         public string Name {get;}
 
         public int Position {get;}
-
     }
 
     public readonly struct Reg256 : ymm<Fixed256>

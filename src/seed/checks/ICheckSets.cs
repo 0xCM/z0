@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static AppErrorMsg;
 
@@ -41,6 +42,18 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T"></typeparam>
         bool contains<T>(ISet<T> set, T item, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => set.Contains(item) ? true : throw  Failed(ClaimKind.NotIn, AppMsg.Error($"Item {item} not in set"));
+            => set.Contains(item) ? true : throw  Failed(ClaimKind.NotIn, AppMsg.Error($"Item {item} not in set", caller, file, line));
+
+        /// <summary>
+        /// Asserts that a set contains a specified element
+        /// </summary>
+        /// <param name="set">The set</param>
+        /// <param name="item">The test element</param>
+        /// <param name="caller">The caller member name</param>
+        /// <param name="file">The source file of the calling function</param>
+        /// <param name="line">The source file line number where invocation ocurred</param>
+        /// <typeparam name="T"></typeparam>
+        bool contains<T>(ISet<T> set, params T[] items)
+            => items.Where(x => set.Contains(x)).Count() == items.Length ?  true : throw  Failed(ClaimKind.NotIn, AppMsg.Error($"Not all items in set"));
     }
 }

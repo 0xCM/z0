@@ -14,8 +14,8 @@ namespace Z0.Asm
             bits[EFLAG.ZF] = 1;
             
             var index = bits.ComponentIndex(EFLAG.ZF);
-            trace(index.ToString());
-            trace(bits.Format());
+            Trace(index.ToString());
+            Trace(bits.Format());
         }
     }
 }

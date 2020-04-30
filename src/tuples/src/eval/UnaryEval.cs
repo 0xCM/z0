@@ -14,21 +14,22 @@ namespace Z0
     {
         public readonly Span<T> Source;
 
-        public readonly string LeftLabel;
-
-        public readonly string RightLabel;
-
-        public readonly Pairs<T> Target;        
+        public readonly PairEval<T> Target;        
         
         [MethodImpl(Inline)]
-        public UnaryEval(Span<T> src, string leftLabel, string rightLabel, in Pairs<T> dst)
+        public UnaryEval(Span<T> src, in PairEval<T> dst)
         {
             this.Source = src;
-            this.LeftLabel = leftLabel;
-            this.RightLabel = rightLabel;
             this.Target = dst;
         }        
 
-        public int Count => Source.Length;
+        public string LeftLabel 
+            => Target.LeftLabel;
+
+        public string RightLabel 
+            => Target.RightLabel;
+
+        public int Count 
+            => Source.Length;
     }
 }

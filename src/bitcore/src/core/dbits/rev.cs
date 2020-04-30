@@ -26,9 +26,17 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Reverse]
         public static ushort reverse(ushort src)
-            => concat(reverse(hi(src)),reverse(lo(src)));
+            => concat(
+                reverse((byte)hi(src)), 
+                reverse((byte)lo(src))
+                );
 
-        [MethodImpl(Inline), Reverse]
+        /// <summary>
+        /// Reverses the bits in the source
+        /// </summary>
+        /// <param name="x"></param>
+        /// <remarks>BAD</remarks>
+        [MethodImpl(Inline)]
         public static uint reverse(uint x)
         {
             x = (((x & 0xaaaaaaaa) >> 1) | ((x & 0x55555555) << 1));
@@ -42,8 +50,12 @@ namespace Z0
         /// Reverses the bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline), Reverse]
+        /// <remarks>BAD</remarks>
+        [MethodImpl(Inline)]
         public static ulong reverse(ulong src)
-            => concat(reverse(hi(src)),reverse(lo(src)));
+            => concat(
+                reverse((uint)hi(src)), 
+                reverse((uint)lo(src))
+                );
     }
 }

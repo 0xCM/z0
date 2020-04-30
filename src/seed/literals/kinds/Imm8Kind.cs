@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Classifies each byte value
+    /// Defines identifiers corresponding to each value that can be represented with an 8-bit unsigned integer
     /// </summary>
     public enum Imm8Kind : byte
     {
@@ -1290,6 +1290,5 @@ namespace Z0
         /// Identifies the decimal value 255 := 0xFF 
         /// </summary> 
         Imm255 = 255,
-
     }
 }

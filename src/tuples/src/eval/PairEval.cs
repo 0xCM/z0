@@ -19,7 +19,6 @@ namespace Z0
         
         public readonly Pairs<T> Target;     
            
-
         [MethodImpl(Inline)]
         public PairEval(Pair<string> labels, in Pairs<T> target)
         {

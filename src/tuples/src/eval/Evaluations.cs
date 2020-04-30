@@ -12,7 +12,12 @@ namespace Z0
     public static class Evaluations
     {
         [MethodImpl(Inline)]
-        public static BinaryEval<T> binary<T>(in Pairs<T> src, PairEval<T> dst)
+        public static UnaryEval<T> unary<T>(in Span<T> src, in PairEval<T> dst)
+            where T : unmanaged
+                => new UnaryEval<T>(src, dst);
+
+        [MethodImpl(Inline)]
+        public static BinaryEval<T> binary<T>(in Pairs<T> src, in PairEval<T> dst)
             where T : unmanaged
                 => new BinaryEval<T>(src,  dst);
 
@@ -20,5 +25,6 @@ namespace Z0
         public static PairEval<T> pairs<T>(Pair<string> labels, in Pairs<T> dst)
             where T : unmanaged
                 => new PairEval<T>(labels, dst);                
+
     }
 }

@@ -23,10 +23,13 @@ namespace Z0
             this.Target = dst;
         }        
 
-        public int Count => Source.Count;
+        public int Count 
+            => Source.Count;
 
-        public string LeftLabel => Target.LeftLabel;
+        public string LeftLabel 
+            => Target.LeftLabel;
 
-        public string RightLabel => Target.RightLabel;
+        public string RightLabel 
+            => Target.RightLabel;
     }
 }

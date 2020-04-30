@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Seed;
     using static Memories;
@@ -37,16 +38,27 @@ namespace Z0
 
         ICheckNumeric Numeric => CheckNumeric.Checker;
 
+        const int EvalCount = 100;
+        
+        UnaryEval<T> eval<T>(in BufferSeq execBuffers, in MemberCode code,  K.UnaryOpClass<T> k)
+            where T : unmanaged
+        {
+            var src = Random.Array<T>(EvalCount);
+            var target =  Evaluations.pairs(("method", "asm"), Tuples.index(new Pair<T>[EvalCount]));
+            var count = src.Length;
+            var content = Evaluations.unary(src, target);
+            var package = new UnaryOpEval<T>(EvalContext.Define(execBuffers, code), content);
+            var evaluator = new UnaryOpEvaluator<T>();
+            return evaluator.Evaluate(package);
+        }
 
         BinaryEval<T> eval<T>(in BufferSeq execBuffers, in MemberCode code,  K.BinaryOpClass<T> k)
             where T : unmanaged
         {
-            var src = new Pair<T>[100];
-            var dst = new Pair<T>[100];
-            var count = src.Length;
-            var source = Random.Pairs<T>(src);
-            var target =  Evaluations.pairs(("method", "asm"), Tuples.index(dst));
-            var content = Evaluations.binary(source, target);
+            var src = Random.Pairs<T>(EvalCount);
+            var count = src.Count;
+            var target =  Evaluations.pairs(("method", "asm"), Tuples.index(new Pair<T>[EvalCount]));
+            var content = Evaluations.binary(src, target);
             var package = new BinaryOpEval<T>(EvalContext.Define(execBuffers, code), content);
             var evaluator = new BinaryOpEvaluator<T>();
             return evaluator.Evaluate(package);
@@ -124,13 +136,51 @@ namespace Z0
                     return 0;
             }
         }
-        
-       void Analyze<T>(in MemberCode api, in BinaryEval<T> eval)
+
+        HashSet<OpKindId> EvalSkip {get;}
+            = new HashSet<OpKindId>(seq(OpKindId.Inc));
+
+        void Analyze<T>(in MemberCode api, in UnaryEval<T> eval)
             where T : unmanaged
         {
+            if(api.KindId != null && EvalSkip.Contains(api.KindId.Value))
+                return;
+
             var name = api.Member.Id.Name;
             var sample = 0;
             var sampleMax = 10;
+            var fp = typeof(T).IsFloatingPoint();
+
+            Sink.AnalyzingEvaluation(api);
+
+            var xLabel = eval.LeftLabel;                
+            var yLabel = eval.RightLabel;
+
+            for(var i=0; i<eval.Count; i++, sample++)
+            {
+                ref readonly var input = ref eval.Source[i];
+                ref readonly var result = ref eval.Target;
+                
+                var x = result.Target[i].Left;
+                var y = result.Target[i].Right;                
+                
+                if(fp)
+                    Numeric.close(x,y);
+                else
+                    Numeric.eq(x,y);
+            }
+        }
+
+       void Analyze<T>(in MemberCode api, in BinaryEval<T> eval)
+            where T : unmanaged
+        {
+            if(api.KindId != null && EvalSkip.Contains(api.KindId.Value))
+                return;
+
+            var name = api.Member.Id.Name;
+            var sample = 0;
+            var sampleMax = 10;
+            var fp = typeof(T).IsFloatingPoint();
 
             Sink.AnalyzingEvaluation(api);
 
@@ -143,8 +193,64 @@ namespace Z0
                 ref readonly var result = ref eval.Target;
                 var x = result.Target[i].Left;
                 var y = result.Target[i].Right;
-                Numeric.eq(x,y);
+                if(fp)
+                    Numeric.close(x,y);
+                else
+                    Numeric.eq(x,y);
             }
+        }
+
+        public void Dispatch(in BufferSeq buffers, in MemberCode api, K.UnaryOpClass k)
+        {
+            var kid = api.Member.KindId;
+            int count = 128;
+            if(kid == null || kid == 0 || kid == OpKindId.Div || kid == OpKindId.Mod)
+                return;
+
+            var nk = api.Method.ReturnType.NumericKind();
+            try
+            {
+                switch(nk)
+                {
+                    case NumericKind.U8:
+                        Analyze(api, eval(buffers, api, k.As<byte>()));
+                        break;
+                    case NumericKind.I8:
+                        Analyze(api, eval(buffers, api, k.As<sbyte>()));
+                        break;
+                    case NumericKind.I16:
+                        Analyze(api, eval(buffers, api, k.As<short>()));
+                        break;
+                    case NumericKind.U16:
+                        Analyze(api, eval(buffers, api, k.As<ushort>()));
+                        break;
+                    case NumericKind.I32:
+                        Analyze(api, eval(buffers, api, k.As<int>()));
+                        break;
+                    case NumericKind.U32:
+                        Analyze(api, eval(buffers, api, k.As<uint>()));
+                        break;
+                    case NumericKind.I64:
+                        Analyze(api, eval(buffers, api, k.As<long>()));
+                        break;
+                    case NumericKind.U64:
+                        Analyze(api, eval(buffers, api, k.As<ulong>()));
+                        break;
+                    case NumericKind.F32:
+                        Analyze(api, eval(buffers, api, k.As<float>()));
+                        break;
+                    case NumericKind.F64:
+                        Analyze(api, eval(buffers, api, k.As<double>()));
+                        break;
+                    default:
+                        break;
+                } 
+            }
+            catch(Exception e)
+            {
+                Notify(AppMsg.Error($"Failure evaluating operation {api.Id} of kind {kid}"));
+                Notify(AppMsg.Error(e));
+            }           
         }
 
         public void Dispatch(in BufferSeq buffers, in MemberCode api, K.BinaryOpClass k)
@@ -182,6 +288,12 @@ namespace Z0
                         break;
                     case NumericKind.U64:
                         Analyze(api, eval(buffers, api, k.As<ulong>()));
+                        break;
+                    case NumericKind.F32:
+                        Analyze(api, eval(buffers, api, k.As<float>()));
+                        break;
+                    case NumericKind.F64:
+                        Analyze(api, eval(buffers, api, k.As<double>()));
                         break;
                     default:
                         break;

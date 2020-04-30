@@ -93,9 +93,9 @@ namespace Z0
 
             void report()
             {
-                trace("input", x.Format());            
-                trace("mask", mask.FormatBits());
-                trace("stored", stored.Format());
+                Trace("input", x.Format());            
+                Trace("mask", mask.FormatBits());
+                Trace("stored", stored.Format());
             }
 
         }

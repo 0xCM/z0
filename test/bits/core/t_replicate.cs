@@ -54,8 +54,8 @@ namespace Z0
 
             void report()
             {
-                trace("expect", text.bracket(expect.Format(6)));
-                trace("actual", actual.FormatBlocked(6));
+                Trace("expect", text.bracket(expect.Format(6)));
+                Trace("actual", actual.FormatBlocked(6));
             }
         }
     }

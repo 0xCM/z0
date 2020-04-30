@@ -291,13 +291,13 @@ namespace Z0
         public BitVector16 Lo
         {
             [MethodImpl(Inline)]
-            get => Bits.lo(Data);
+            get => (ushort)Bits.lo(Data);
         }
 
         public BitVector16 Hi
         {
             [MethodImpl(Inline)]
-            get => Bits.hi(Data);
+            get => (ushort)Bits.hi(Data);
         }
         
         /// <summary>

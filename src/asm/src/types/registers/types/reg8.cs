@@ -10,9 +10,7 @@ namespace Z0.Asm
 
     using S = Fixed8;
     using K = RegisterKind;
-    
-    
-    
+        
     partial class Registers
     {        
         public readonly struct al : reg8<al,N0>

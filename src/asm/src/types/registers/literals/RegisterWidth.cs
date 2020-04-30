@@ -10,7 +10,7 @@ namespace Z0.Asm
     /// Defines literals that correspond to x86 registger widths
     /// </summary>
     [Flags]
-    public enum RegisterWidth : uint
+    public enum RegisterWidth : ushort
     {        
         /// <summary>
         /// Specifies the register with a 0-bit register
@@ -55,6 +55,11 @@ namespace Z0.Asm
         /// <summary>
         /// Specifies the width of a 512-bit register
         ///</summary>
-        W512 = 512
+        W512 = 512,
+
+        /// <summary>
+        /// Joins all width classifiers
+        ///</summary>
+        All = W8 | W16 | W32 | W64 | W128 | W256 | W512,
     }
 }

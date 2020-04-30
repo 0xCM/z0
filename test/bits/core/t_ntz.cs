@@ -10,10 +10,10 @@ namespace Z0
     {        
         public void ntz_outline()
         {
-            Claim.eq(3, gbits.ntz((byte)0b111000));
-            Claim.eq(2, gbits.ntz(0b0001011000100u));
-            Claim.eq(5, gbits.ntz(0b000101100000u));
-            Claim.eq(3, gbits.ntz(Pow2.pow(3)));            
+            Claim.eq((byte)3, gbits.ntz((byte)0b111000));
+            Claim.eq(2u, gbits.ntz(0b0001011000100u));
+            Claim.eq(5u, gbits.ntz(0b000101100000u));
+            Claim.eq(3ul, gbits.ntz(Pow2.pow(3)));            
         }
 
         public void ntz_8()
@@ -36,12 +36,12 @@ namespace Z0
                 var x = Random.Next<T>();
                 var ntzX = gbits.ntz(x);
                 var y = BitString.scalar(x);
-                var ntzY = y.Ntz();
+                var ntzY = As.generic<T>(y.Ntz());
 
-                if(ntzX != ntzY)
+                if(gmath.neq(ntzX, ntzY))
                 {
-                    trace("scalar", x.ToString());
-                    trace("bitstring", y.Format());
+                    Trace("scalar", x.ToString());
+                    Trace("bitstring", y.Format());
                 }
 
                 Claim.eq(ntzX, ntzY);

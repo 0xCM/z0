@@ -6,32 +6,64 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.Intrinsics;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+
+    using static Seed;
+
+    using Storage = System.Runtime.Intrinsics.Vector256<byte>;    
     
     partial class Banks
     {
-        [StructLayout(LayoutKind.Sequential, Size=512)]
-        public readonly struct Bank256x2<T> : IBank256<Bank256x2<T>,N2>
-            where T : unmanaged
-        {            
-            readonly Vector256<T> lo;
+        public readonly ref struct Bank256
+        {
+            readonly Span<Fixed256> State;
 
-            readonly Vector256<T> hi;
-
+            [MethodImpl(Inline)]
+            internal Bank256(Span<Fixed256> state)
+            {
+                State = state;
+            }
         }
 
-        [StructLayout(LayoutKind.Sequential, Size=1024)]
-        public readonly struct Bank256x4<T> : IBank256<Bank256x4<T>,N4>
-            where T : unmanaged
+        /// <summary>
+        /// Defines storage for 2 256-bit registers
+        /// </summary>
+        public readonly struct Bank256x2 : IBank<Bank256x2,W256,N2>
         {            
-            readonly Vector256<T> a;
+            readonly Storage SegA;
 
-            readonly Vector256<T> b;
+            readonly Storage SegB;
 
-            readonly Vector256<T> c;
-
-            readonly Vector256<T> d;
-
+            [MethodImpl(Inline)]
+            internal Bank256x2(Storage a, Storage b)
+            {
+                SegA = a;
+                SegB = b;
+            }
         }
+
+        /// <summary>
+        /// Defines storage for 4 256-bit registers
+        /// </summary>
+        public readonly struct Bank256x4 : IBank<Bank256x4,W256,N4>
+        {            
+            readonly Storage SegA;
+
+            readonly Storage SegB;
+            
+            readonly Storage SegC;
+
+            readonly Storage SegD;        
+
+            [MethodImpl(Inline)]
+            internal Bank256x4(Storage a, Storage b, Storage c, Storage d)
+            {
+                SegA = a;
+                SegB = b;
+                SegC = c;
+                SegD = d;
+            }
+       }
     }
 }

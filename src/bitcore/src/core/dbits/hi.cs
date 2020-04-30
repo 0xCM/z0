@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Hi]
-        public static byte hi(ushort src)
+        public static ushort hi(ushort src)
             => (byte)(src >> 8);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Hi]
-        public static ushort hi(uint src)
+        public static uint hi(uint src)
             => (ushort)(src >> 16); 
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Hi]
-        public static uint hi(ulong src)
+        public static ulong hi(ulong src)
             => (uint)(src >> 32);
     }
 }

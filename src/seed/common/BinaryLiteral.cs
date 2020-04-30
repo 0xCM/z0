@@ -9,6 +9,19 @@ namespace Z0
 
     using static Seed;
 
+    /// <summary>
+    /// Attaches an anonymous binary literal value to a target
+    /// </summary>
+    public class BinaryLiteralAttribute : Attribute
+    {
+        public BinaryLiteralAttribute(string value)
+        {
+            this.Text = (string)value;
+        }
+
+        public string Text {get;}            
+    }
+    
     public readonly struct BinaryLiteral
     {                                            
         [MethodImpl(Inline)]

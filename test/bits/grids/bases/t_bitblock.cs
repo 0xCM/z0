@@ -105,8 +105,8 @@ namespace Z0
                 {                
                     if(bc[j] != bs[j])
                     {
-                        trace("bs", bs.Format());
-                        trace("bc", bc.Format());
+                        Trace("bs", bs.Format());
+                        Trace("bc", bc.Format());
                     }
                     Claim.eq(bc[j],bs[j]);
                 }

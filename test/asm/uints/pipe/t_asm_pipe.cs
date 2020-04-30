@@ -70,7 +70,7 @@ namespace Z0.Asm
             {
                 var count = Activations[i];
                 if(count != 0)                
-                    trace($"Logged {count} {(Mnemonic)i} activations");        
+                    Trace($"Logged {count} {(Mnemonic)i} activations");        
             }
         }
 

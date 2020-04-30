@@ -57,13 +57,13 @@ namespace Z0.Asm
             {
                 hostCount = 0;
                 var bits = ReadHostBits(host).ToArray();
-                trace($"Loaded host bits", $"{bits.Length} | {host.Format()}");
+                //Trace($"Loaded host bits", $"{bits.Length} | {host.Format()}");
                 foreach(var f in bits) 
                 {            
                     decoder.DecodeInstructions(f.Encoded, Decoded);
                 }
                 
-                trace($"Decoded host instructions", $"{hostCount} | {totalCount} | {host.Format()}");
+                //Trace($"Decoded host instructions", $"{hostCount} | {totalCount} | {host.Format()}");
             }
 
         }

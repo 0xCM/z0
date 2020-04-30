@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Inc]
         public static float inc(float src)
-            => src + 1;
+            => ++src;
 
         /// <summary>
         /// Increments the operand
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Inc]
         public static double inc(double src)
-            => src + 1;
+            => ++src;
 
         /// <summary>
         /// Negates the operand
@@ -248,8 +248,17 @@ namespace Z0
         /// <param name="a">The first number</param>
         /// <param name="b">The second number</param>
         [MethodImpl(Inline), Dist]
-        public static ulong dist(double a, double b)
-            => a >= b ? (ulong)(a - b) : (ulong)(b - a);
+        public static float dist(float a, float b)
+            => a >= b ? a - b : b - a;
+
+        /// <summary>
+        /// Computes the nonnegative distance between two values
+        /// </summary>
+        /// <param name="a">The first number</param>
+        /// <param name="b">The second number</param>
+        [MethodImpl(Inline), Dist]
+        public static double dist(double a, double b)
+            => a >= b ? a - b : b - a;
 
         [MethodImpl(Inline), Divides]
         public static bit divides(float a, float b)

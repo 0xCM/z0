@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     partial class Registers
     {
-
         public readonly struct ax : reg16<ax,N0>
         {
             public const uint Width = reg16.Width;

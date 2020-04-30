@@ -6,31 +6,55 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.Intrinsics;
-    using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
 
+    using static Seed;
     
+    using Storage = System.Runtime.Intrinsics.Vector256<byte>; 
+
     partial class Banks
     {
-        [StructLayout(LayoutKind.Sequential, Size=256)]
-        public readonly struct Bank128x2<T> : IBank128<Bank128x2<T>,N2>
-            where T : unmanaged
-        {            
-            readonly Vector128<T> lo;
+        public readonly ref struct Bank128
+        {
+            readonly Span<Fixed128> State;
 
-            readonly Vector128<T> hi;
+            [MethodImpl(Inline)]
+            internal Bank128(Span<Fixed128> state)
+            {
+                State = state;
+            }
         }
 
-        [StructLayout(LayoutKind.Sequential, Size=512)]
-        public readonly struct Bank128x4<T> : IBank128<Bank128x4<T>,N4>
-            where T : unmanaged
+        /// <summary>
+        /// Defines storage for 2 128-bit registers
+        /// </summary>
+        public readonly struct Bank128x2 : IBank<Bank128x2,W128,N2>
         {            
-            readonly Vector128<T> a;
+            readonly Storage SegA;
+  
+            [MethodImpl(Inline)]
+            internal Bank128x2(Storage a)
+            {
+                SegA = a;
+            }
+        }
 
-            readonly Vector128<T> b;
+        /// <summary>
+        /// Defines storage for 4 128-bit registers
+        /// </summary>
+        public readonly struct Bank128x4 : IBank<Bank128x4,W128,N4>
+        {            
+            readonly Storage SegA;
 
-            readonly Vector128<T> c;
+            readonly Storage SegB;
+            
 
-            readonly Vector128<T> d;
+            [MethodImpl(Inline)]
+            internal Bank128x4(Storage a, Storage b)
+            {
+                SegA = a;
+                SegB = b;
+            }
         }
     }
 }

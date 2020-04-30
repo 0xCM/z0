@@ -20,8 +20,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Ntz]
-        public static int ntz(sbyte src)
-           => src == 0 ? 8 : (int)TrailingZeroCount((uint)src);
+        public static sbyte ntz(sbyte src)
+           => src == 0 ? (sbyte)8 : (sbyte)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
@@ -38,8 +38,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Ntz]
-        public static int ntz(short src)
-           => src == 0 ? 16 : (int)TrailingZeroCount((uint)src);
+        public static short ntz(short src)
+           => src == 0 ? (short)16 : (short)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
@@ -47,8 +47,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Ntz]
-        public static int ntz(ushort src)
-            => src == 0 ? 16 : (int)TrailingZeroCount((uint)src);
+        public static ushort ntz(ushort src)
+            => src == 0 ? (ushort)16 : (ushort)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
@@ -65,16 +65,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Ntz]
-        public static int ntz(uint src)
-            => (int)TrailingZeroCount(src);
+        public static uint ntz(uint src)
+            => TrailingZeroCount(src);
 
         /// <summary>
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
          [MethodImpl(Inline), Ntz]
-         public static int ntz(long src)
-            => (int)TrailingZeroCount((ulong)src);
+         public static long ntz(long src)
+            => (long)TrailingZeroCount((ulong)src);
 
         /// <summary>
         /// __int64 _mm_tzcnt_64 (unsigned __int64 a) TZCNT reg, reg/m64
@@ -82,7 +82,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Ntz]
-        public static int ntz(ulong src)
-            => (int) TrailingZeroCount(src);
+        public static ulong ntz(ulong src)
+            => TrailingZeroCount(src);
     }
 }

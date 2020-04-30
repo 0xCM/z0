@@ -52,18 +52,6 @@ namespace Z0
             else if(typeof(T) == typeof(long))    
                 return math.dist(int64(a), int64(b));
             else 
-                return dist_f(a,b);
-        }
-
-        [MethodImpl(Inline)]
-        static ulong dist_f<T>(T a, T b)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return fmath.dist(float32(a), float32(b));
-            else if(typeof(T) == typeof(double))    
-                return fmath.dist(float64(a), float64(b));
-            else
                 throw Unsupported.define<T>();
         }
     }

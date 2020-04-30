@@ -14,7 +14,7 @@ namespace Z0
         where T : unmanaged
     {            
         [MethodImpl(Inline)]
-        internal UnaryOpEval(in EvalContext context, in BinaryEval<T> content)
+        internal UnaryOpEval(in EvalContext context, in UnaryEval<T> content)
         {
             this.Context = context;
             this.Content = content;
@@ -22,9 +22,9 @@ namespace Z0
 
         public readonly EvalContext Context;
 
-        public readonly BinaryEval<T> Content;
+        public readonly UnaryEval<T> Content;
 
-        public Pairs<T> Src 
+        public Span<T> Src 
         {
             [MethodImpl(Inline)]
             get => Content.Source;
@@ -37,7 +37,7 @@ namespace Z0
         }
 
         public int SrcCount
-            => Content.Source.Count;
+            => Content.Source.Length;
         
         public BufferSeq Buffers
             => Context.Buffers;
