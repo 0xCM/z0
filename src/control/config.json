@@ -2,10 +2,10 @@
     "EmitPrimaryArtifacts": "True",
     "CheckExecution": "True",
     "EmitImmArtifacts" : "True",
-    "HandleMembersLocated": "True",
+    "DuplicateCheck": "True",
     "HandleExtractsParsed": "True",
-    "HandleFunctionsDecoded": "True",
-    "HandleParsedExtractSaved": "True",
+    "CollectAsmStats": "True",
+    "MatchEmissions": "True",
     "HandleHostReportSaved": "False",
     "HandleExtractReportCreated": "False",
     "HandleParseReportCreated": "False"

@@ -9,39 +9,37 @@ namespace Z0
 
     using static Seed;
     
-
     public interface IReport
     {
-        string[] HeaderNames {get;}
+        string[] HeaderLabels {get;}
 
         string ReportName {get;}
 
         int RecordCount {get;}
 
-        IRecord[] Records {get;}
+        ITabular[] Records {get;}
     }
         
     public readonly struct EmptyReport : IReport
     {
-        public string[] HeaderNames => new string[]{};
+        public string[] HeaderLabels => new string[]{};
 
         public string ReportName => string.Empty;
 
         public int RecordCount => 0;
 
-        public IRecord[] Records => new IRecord[]{};
-
+        public ITabular[] Records => new ITabular[]{};
     }
 
     public interface IReport<R> : IReport
-        where R : IRecord<R>
+        where R : ITabular<R>
     {
         new R[] Records {get;}
 
-        IRecord[] IReport.Records => Records.Map(r => (IRecord)r);
+        ITabular[] IReport.Records => Records.Map(r => (ITabular)r);
 
-        string[] IReport.HeaderNames 
-            =>  Reports.headers<R>();
+        string[] IReport.HeaderLabels 
+            =>  TabularFormats.headers<R>();
 
         string IReport.ReportName 
             => GetType().Name;
@@ -53,11 +51,11 @@ namespace Z0
             => Records.Length;
 
         Option<FilePath> Save(FilePath dst)
-            => Records.Save(dst);         
+            => TableLog.Service.Save(Records,dst);         
     }
 
     public interface IReport<F,R> : IReport<R>
-        where R : IRecord<F,R>
+        where R : ITabular<F,R>
         where F : unmanaged, Enum
     {
 

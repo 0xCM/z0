@@ -27,6 +27,13 @@ namespace Z0.Asm
     }
 
 
+    public interface IParseMemberStep : IService
+    {
+        ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts, ICaptureArchive dst);
+
+        void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst);
+    }
+
     public interface IReportExtractsStep
     {
         ExtractReport CreateExtractReport(ApiHostUri host, MemberExtract[] src);

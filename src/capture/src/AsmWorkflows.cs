@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
    
     using static Seed;
+    using static Memories;
 
     using Svc = Z0;
 
@@ -18,10 +19,12 @@ namespace Z0.Asm
         public static ICaptureServices Stateless => default(AsmWorkflows);
 
         [MethodImpl(Inline)]
-        public static IAsmWorkflows Contextual(IAsmContext context) => new AsmWorkflows(context);
+        public static IAsmWorkflows Contextual(IAsmContext context) 
+            => new AsmWorkflows(context);
 
         [MethodImpl(Inline)]
         internal AsmWorkflows(IAsmContext context) => Context = context;
+
     }
     
     public interface IAsmWorkflows : IAsmContextual

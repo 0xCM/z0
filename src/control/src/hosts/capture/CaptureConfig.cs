@@ -16,13 +16,13 @@ namespace Z0
 
         public bool CheckExecution {get; set;} = true;
 
-        public bool HandleMembersLocated {get; set;} = true;
+        public bool DuplicateCheck {get; set;} = true;
 
         public bool HandleExtractsParsed {get; set;} = true;
 
-        public bool HandleFunctionsDecoded {get; set;} = true;
+        public bool CollectAsmStats {get; set;} = true;
 
-        public bool HandleParsedExtractSaved {get; set;} = true;
+        public bool MatchEmissions {get; set;} = true;
 
         public bool HandleExtractReportSaved {get; set;} = true;
 

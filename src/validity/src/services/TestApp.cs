@@ -372,7 +372,7 @@ namespace Z0
             => GetType().Assembly.GetSimpleName();
 
         static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
-            where R : IRecord
+            where R : ITabular
         {
             if(records.Length == 0)
                 return FilePath.Empty;
@@ -381,7 +381,7 @@ namespace Z0
         }
 
         static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = Chars.Pipe)
-            where R : IRecord
+            where R : ITabular
         {
             if(records.Length == 0)
                 return FilePath.Empty;
@@ -390,7 +390,7 @@ namespace Z0
         }
 
         FilePath LogTestResults2<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
-            where R : IRecord
+            where R : ITabular
                 => LogTestResults(Paths.TestResultFolder, basename, records, mode, header, delimiter);
 
         void EmitLogs()

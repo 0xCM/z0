@@ -38,7 +38,7 @@ namespace Z0
             => new ParsedMember(src, seq, term,parsed);
 
         [MethodImpl(Inline)]
-        internal ParsedMember(MemberExtract src, int seq, ExtractTermCode term, LocatedCode parsed)
+        public ParsedMember(MemberExtract src, int seq, ExtractTermCode term, LocatedCode parsed)
         {
             this.Source = src;
             this.SourceSequence = seq;

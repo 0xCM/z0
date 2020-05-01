@@ -12,6 +12,6 @@ namespace Z0
     public interface IReportSink : ISink<IReport>
     {
         void Deposit<R>(IReport<R> src)
-            where R : IRecord<R>;
+            where R : ITabular<R>;
     }
 }

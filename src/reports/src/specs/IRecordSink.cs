@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     
     public interface IRecordSink<R> : IService, ISink<R>
-        where R : IRecord
+        where R : ITabular
     {
 
         

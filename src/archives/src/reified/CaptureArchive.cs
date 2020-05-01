@@ -40,6 +40,7 @@ namespace Z0
                 dst.Add(Archive.ParsedDir.Clear());
                 dst.Add(Archive.AsmDir.Clear());
                 dst.Add(Archive.HexDir.Clear());
+                dst.Add(Archive.UnparsedDir.Clear());
                 return dst.ToArray();
             }
             else
@@ -51,8 +52,9 @@ namespace Z0
                     Control.iter(Archive.ParsedDir.Files(part, Archive.ParsedExt), f => f.Delete());
                     Control.iter(Archive.AsmDir.Files(part, Archive.AsmExt), f => f.Delete());
                     Control.iter(Archive.HexDir.Files(part, Archive.HexExt), f => f.Delete());
+                    Control.iter(Archive.UnparsedDir.Files(part, Archive.UnparsedExt), f => f.Delete());
                 }
-                return new FolderPath[0] {};
+                return Control.array<FolderPath>();
             }
         }        
     }

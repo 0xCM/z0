@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    
-    public interface ILocatedParser : IService
-    {
-        Option<LocatedCode> Parse(LocatedCode src);        
-    }
+        
+
 }

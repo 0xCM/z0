@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T odd<T>(N2 f, N1 d, T t = default)
+        public static T odd<T>(N2 f, N1 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -82,6 +82,7 @@ namespace Z0
                 throw Unsupported.define<T>();
         }
 
+
         /// <summary>
         /// [11001100]    
         /// </summary>
@@ -90,7 +91,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T odd<T>(N2 f, N2 d, T t = default)
+        public static T odd<T>(N2 f, N2 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -121,7 +122,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(in ParityMask<N2,N1,T> spec, N1 o)
             where T : unmanaged
-                => odd(spec. f,spec.d, spec.t);
+                => odd<T>(spec. f,spec.d);
 
         /// <summary>
         /// [00110011]    
@@ -139,6 +140,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T mask<T>(in ParityMask<N2,N2,T> spec, N1 o)
             where T : unmanaged
-                => odd(spec.f, spec.d, spec.t);
+                => odd<T>(spec.f, spec.d);
     }
 }

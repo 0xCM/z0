@@ -34,7 +34,7 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public class EvalResult : IRecord<F,R>
+    public class EvalResult : ITabular<F,R>
     {        
         public static EvalResult Define<T>(int seq, in T id, Duration duration, Exception error)
             => new EvalResult(seq, $"{id}", false, duration, error != null? AppMsg.Error(error) : AppMsg.Empty);
@@ -55,22 +55,22 @@ namespace Z0
             this.Message = message;
         }
         
-        [ReportField(F.Sequence)]
+        [TabularField(F.Sequence)]
         public int Sequence {get;}
 
-        [ReportField(F.CaseName)]
+        [TabularField(F.CaseName)]
         public string CaseName {get;}
 
-        [ReportField(F.Status)]
+        [TabularField(F.Status)]
         public EvalStatus Status {get;}
 
-        [ReportField(F.Duration)]
+        [TabularField(F.Duration)]
         public readonly Duration Duration;
 
-        [ReportField(F.Timestamp)]
+        [TabularField(F.Timestamp)]
         public DateTime Timestamp {get;}
 
-        [ReportField(F.Message)]
+        [TabularField(F.Message)]
         public AppMsg Message {get;}
 
         public string DelimitedText(char delimiter)

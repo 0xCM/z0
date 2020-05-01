@@ -16,6 +16,10 @@ namespace Z0
 
     public static partial class text
     {
+        public const string PageBreak = "--------------------------------------------------------------------------------------------------------------";
+
+        public const string Assignment = ":=";
+
         public static ITextFactory factory
         {
             [MethodImpl(Inline)]
@@ -36,8 +40,22 @@ namespace Z0
             [MethodImpl(Inline)]
             get => string.Empty;
         }
+        
+        /// <summary>
+        /// Creates a string of the form "lhs := rhs"
+        /// </summary>
+        /// <param name="lhs">The left</param>
+        /// <param name="rhs">The right</param>
+        public static string assign(object lhs, object rhs)
+            => concat(lhs, Chars.Space, Assignment, Chars.Space, rhs);
 
-        public const string pagebreak = "--------------------------------------------------------------------------------------------------------------";
+        /// <summary>
+        /// Creates a string of the form "name: content"
+        /// </summary>
+        /// <param name="name">The label name</param>
+        /// <param name="content">The labeled content</param>
+        public static string label(object name, object content)
+            => concat(name, Chars.Colon, Chars.Space, content);
 
         /// <summary>
         /// Tests whether the source string is nonempty

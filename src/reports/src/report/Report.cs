@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
 
     public class Report<R> : IReport<R>
-        where R : IRecord<R>
+        where R : ITabular<R>
     {             
         public static Report<R> Empty => new Report<R>();
 
@@ -18,12 +18,12 @@ namespace Z0
 
         public R[] Records {get;}
 
-        public ReportInfo Description {get;}
+        public TabularFormat Format {get;}
 
         public Report()
         {
             this.Records = new R[0]{};
-            this.Description = Reports.describe<R>();
+            this.Format = TabularFormats.derive<R>();
         }
 
         public Report(R[] records)
@@ -32,44 +32,45 @@ namespace Z0
             Records = records;
         }
         
-        public string[] HeaderNames { [MethodImpl(Inline)] get => Description.HeaderNames; }
+        public string[] HeaderLabels { [MethodImpl(Inline)] get => Format.Headers; }
     
-        public int FieldCount { [MethodImpl(Inline)] get => Description.FieldCount; }
+        public int FieldCount { [MethodImpl(Inline)] get => Format.FieldCount; }
 
         public R this[int index] { [MethodImpl(Inline)] get => Records[index]; }
 
         public int RecordCount { [MethodImpl(Inline)] get => Records.Length; }        
 
         [MethodImpl(Inline)]
-        public Option<FilePath> Save(FilePath dst) => Records.Save(dst);   
+        public Option<FilePath> Save(FilePath dst) 
+            => TableLog.Service.Save(Records, dst); 
 
-        public virtual string ReportName  => GetType().DisplayName();
+        public virtual string ReportName
+            => GetType().DisplayName();
     }
     
     public class Report<F,R> : Report<R>
         where F : unmanaged, Enum
-        where R : IRecord<F, R>
+        where R : ITabular<F,R>
     {             
         public static readonly new Report<F,R> Empty = new Report<F,R>();
 
         public Report(R[] records)
             : base(records)
         {
-            Formatter = Reports.formatter<F,R>();
+            Formatter = FieldFormat.formatter<F>();
         }
 
         public Report()
         {
-            Formatter = Reports.formatter<F,R>();
+            Formatter = FieldFormat.formatter<F>();
         }
 
-        public readonly RecordFormatter<F,R> Formatter;
-
+        public readonly FieldFormatter<F> Formatter;
     }
 
    public class Report<B,F,R> : Report<R>, INullary<B>
         where F : unmanaged, Enum
-        where R : IRecord<F,R>
+        where R : ITabular<F,R>
         where B : Report<B,F,R>, new()
     {             
         public static new B Empty => new B();
@@ -77,16 +78,16 @@ namespace Z0
         public Report(R[] records)
             : base(records)
         {
-            Formatter = Reports.formatter<F,R>();
+            Formatter = FieldFormat.formatter<F>();
         }
 
         public Report()
             : base(new R[]{})
         {
-            Formatter = Reports.formatter<F,R>();
+            Formatter = FieldFormat.formatter<F>();
         }
 
-        public readonly RecordFormatter<F,R> Formatter;
+        public readonly FieldFormatter<F> Formatter;
 
         public bool IsEmpty => RecordCount == 0;
 

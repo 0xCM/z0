@@ -9,11 +9,11 @@ namespace Z0
     
     using static Seed;
 
-    using F = ExtractField;
-    using R = ExtractRecord;
-    using Report = ExtractReport;
+    using F = ParseFailureField;
+    using R = ParseFailureRecord;
+    using Report = ParseFailureReport;
 
-    public enum ExtractField : ulong
+    public enum ParseFailureField : ulong
     {
         Sequence = 0 | 10ul << 32,
 
@@ -21,18 +21,18 @@ namespace Z0
 
         Length = 2 | 8ul << 32,
 
-        Uri = 3 | 110ul << 32,
+        TermCode = 3 | 20ul << 32,
 
-        OpSig = 4 | 110ul << 32,
+        Uri = 4 | 110ul << 32,
 
         Data = 5 | 1ul << 32
     }
 
-    public readonly struct ExtractRecord : ITabular<F,R>
+    public readonly struct ParseFailureRecord : ITabular<F,R>
     {
         public const int FieldCount = 6;
 
-        public static R Empty => new R(0, MemoryAddress.Zero, 0, OpUri.Empty, text.blank, LocatedCode.Empty);
+        public static R Empty => new R(0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, LocatedCode.Empty);
 
         public static R Parse(string src)
         {
@@ -44,20 +44,20 @@ namespace Z0
             var seq = parser.Parse(fields[0]).ValueOrDefault();            
             var address = MemoryAddress.Define(HexParsers.Numeric.Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();            
-            var uri = OpUri.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
-            var sig = fields[4];
+            var term = Enums.parse<ExtractTermCode>(fields[3]).ValueOrDefault();
+            var uri = OpUri.Parse(fields[4]).ValueOrDefault(OpUri.Empty);
             var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.ParseByte).ToArray();
             var extract = LocatedCode.Define(data);
-            return new R(seq,address,len,uri,sig,extract);
+            return new R(seq,address,len,term,uri,extract);
         }
 
-        public ExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, LocatedCode Data)
+        public ParseFailureRecord(int Sequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, LocatedCode Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
             this.Length = Length; 
             this.Uri = Uri;
-            this.OpSig = OpSig;
+            this.TermCode = TermCode;
             this.Data = Data;
         }
         
@@ -70,72 +70,71 @@ namespace Z0
         [TabularField(F.Length)]
         public readonly int Length;
 
+        [TabularField(F.TermCode)]
+        public readonly ExtractTermCode TermCode;
+
         [TabularField(F.Uri)]
-        public readonly OpUri Uri;
-        
-        [TabularField(F.OpSig)]
-        public readonly string OpSig;
+        public readonly OpUri Uri;        
 
         [TabularField(F.Data)]
         public readonly LocatedCode Data;
 
         public string DelimitedText(char sep)
         {
-            var dst = Model.Formatter.Reset();                   
+            var dst = Model.Formatter.Reset().WithDelimiter(sep);
             dst.AppendField(F.Sequence, Sequence);
-            dst.DelimitField(F.Address, Address, sep);
-            dst.DelimitField(F.Length, Length, sep);
-            dst.DelimitField(F.Uri, Uri, sep);
-            dst.DelimitField(F.OpSig, OpSig, sep);
-            dst.DelimitField(F.Data, Data, sep);
+            dst.DelimitField(F.Address, Address);
+            dst.DelimitField(F.Length, Length);
+            dst.DelimitField(F.TermCode, TermCode);
+            dst.DelimitField(F.Uri, Uri);
+            dst.DelimitField(F.Data, Data);
             return dst.Format();            
         }
 
         static Report<F,R> Model => Report<F,R>.Empty;
     }
 
-    public class ExtractReport : Report<Report,F,R>
+    public class ParseFailureReport : Report<Report,F,R>
     {        
         /// <summary>
-        /// Loads a saved extract report
+        /// Loads a saved failure report
         /// </summary>
         /// <param name="src">The report path</param>
-        public static ExtractReport Load(FilePath src)
+        public static ParseFailureReport Load(FilePath src)
         {
             var lines = src.ReadLines().Skip(1). Select(R.Parse).ToArray();
             if(lines.Length != 0)
-                return new ExtractReport(lines[0].Uri.HostPath, lines);
+                return new ParseFailureReport(lines[0].Uri.HostPath, lines);
             else
                 return Empty;
         }        
 
         public ApiHostUri ApiHost {get;}
 
-        public override string ReportName => $"Extract report for {ApiHost.Format()}";
+        public override string ReportName => $"ParseFailure report for {ApiHost.Format()}";
 
-        public static Report Create(ApiHostUri host, MemberExtract[] extracts)
+        public static Report Create(ApiHostUri host, ExtractParseFailure[] failures)
         {
-            var records = new ExtractRecord[extracts.Length];
-            for(var i=0; i< extracts.Length; i++)
+            var records = new ParseFailureRecord[failures.Length];
+            for(var i=0; i< failures.Length; i++)
             {
-                var op = extracts[i];
-                records[i] = new ExtractRecord(                
-                    Sequence : i,
-                    Address : op.Member.Address,
-                    Length : op.Content.Length,
-                    Uri : op.Uri,
-                    OpSig : op.Member.Method.Signature().Format(),
-                    Data : op.Content
+                var failure = failures[i];
+                records[i] = new ParseFailureRecord(                
+                    Sequence : failure.Sequence,
+                    Address : failure.Data.Address,
+                    Length : failure.Data.Content.Length,
+                    TermCode: failure.TermCode,
+                    Uri : failure.OpUri,
+                    Data : failure.Data.Code
                     );
-
             }
 
             return new Report(host, records);
         }
         
-        public ExtractReport(){}
+        public ParseFailureReport(){}
 
-        ExtractReport(ApiHostUri host, R[] records)
+        ParseFailureReport(ApiHostUri host, R[] records)
             : base(records)
         {
             this.ApiHost = host;

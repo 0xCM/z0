@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IRecord
+    public interface ITabular
     {
         /// <summary>
         /// Returns a line of text represents the record value
@@ -16,16 +16,16 @@ namespace Z0
         string[] HeaderNames {get;}        
     }
 
-    public interface IRecord<R> : IRecord
-        where R : IRecord
+    public interface ITabular<R> : ITabular
+        where R : ITabular
     {
-        string[] IRecord.HeaderNames
-            => Reports.headers<R>();
+        string[] ITabular.HeaderNames
+            => TabularFormats.headers<R>();
     }
 
-    public interface IRecord<F,R> : IRecord<R>
-        where F : unmanaged, Enum
-        where R : IRecord
+    public interface ITabular<E,R> : ITabular<R>
+        where E : unmanaged, Enum
+        where R : ITabular
     {
         
     }   

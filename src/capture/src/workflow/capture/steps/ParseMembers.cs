@@ -9,14 +9,7 @@ namespace Z0.Asm
 
     using static Seed;
     using static CaptureWorkflowEvents;
-
-    public interface IParseMemberStep : IService
-    {
-        ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts);
-
-        void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst);
-
-    }
+    using static ExtractEvents;
 
 
     partial class HostCaptureSteps
@@ -34,11 +27,18 @@ namespace Z0.Asm
                 this.Parser = Extract.Services.ExtractParser();
             }
 
-            public ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
+            public ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts, ICaptureArchive dst)
             {
-                var parsed = Parser.Parse(extracts);                
-                Context.Raise(HostExtractsParsed.Define(host, parsed));
-                return parsed;
+                var result = Parser.Parse(extracts);
+                
+                for(var i = 0; i<result.Failed.Length; i++)
+                    Context.Raise(ExtractParseFailed.Define(result.Failed[i]));
+
+                var report = ParseFailureReport.Create(host, result.Failed);
+                report.Save(dst.UnparsedPath(host));
+
+                Context.Raise(HostExtractsParsed.Define(host, result.Parsed));
+                return result.Parsed;
             }
 
             public void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst)

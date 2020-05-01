@@ -30,7 +30,7 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public class TestCaseRecord : IRecord<F,R>
+    public class TestCaseRecord : ITabular<F,R>
     {        
         public static TestCaseRecord Define(string name, bool succeeded, Duration duration)
             => new TestCaseRecord(name, succeeded, duration);
@@ -43,17 +43,20 @@ namespace Z0
             this.Executed = DateTime.Now;
         }
 
-        [ReportField(F.Case)]
+        [TabularField(F.Case)]
         public string Case {get;}
 
-        [ReportField(F.Status)]
+        [TabularField(F.Status)]
         public TestCaseStatus Status {get;}
 
-        [ReportField(F.Duration)]
+        [TabularField(F.Duration)]
         public readonly Duration Duration;
 
-        [ReportField(F.Executed)]
+        [TabularField(F.Executed)]
         public DateTime Executed {get;}
+
+        string[] ITabular.HeaderNames
+            => TabularFormats.headers<R>();
 
         public string DelimitedText(char delimiter)
         {

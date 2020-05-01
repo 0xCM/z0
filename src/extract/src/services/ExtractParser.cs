@@ -15,87 +15,41 @@ namespace Z0
 
     readonly struct ExtractParser : IExtractParser
     {
-        byte[] PatternBuffer {get;}
+        readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
         internal ExtractParser(byte[] buffer)
         {
-            PatternBuffer = buffer;
-        }
-
-        public Option<ParsedMember> Parse(in MemberExtract src, int seq = 0)
-            => Parse(src, seq, Parser());
-
-        public ParsedMember[] Parse(MemberExtract[] extracts)
-        {
-            var dst = list<ParsedMember>(extracts.Length);
-            var parser = Parser();
-            for(var i=0; i< extracts.Length; i++)
-            {
-                ref readonly var extract = ref extracts[i];                
-                var parsed = Parse(extract, i, parser);
-                parsed.OnSome(x => dst.Add(x));
-            }
-
-            return dst.ToArray();
+            Buffer = buffer;
         }
 
         BP Parser() 
-            => Extract.Services.PatternParser(PatternBuffer.Clear());
+            => Extract.Services.PatternParser(Buffer.Clear());
 
-        Option<ParsedMember> Parse(in MemberExtract src, int seq, BP parser)
+        public ExtractParseResult Parse(in MemberExtract src, int seq)
         {
+            var parser = Parser();
+            var address = src.Content.Address;
             var status = parser.Parse(src.Content);                
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success(); 
-            var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-            return succeeded 
-                ? ParsedMember.Define(src, seq, matched.ToTermCode(), LocatedCode.Define(src.Content.Address, data))
-                : none<ParsedMember>();
+            var term = matched.ToTermCode();
+
+            if(succeeded)
+                return new ParsedMember(src, seq, term, LocatedCode.Define(address, parser.Parsed));
+            else
+                return new ExtractParseFailure(src, seq, term);
         }
 
-        public MemberParseReport Parse(IApiHost host, ExtractReport extracts)
+        public ExtractParseResults Parse(MemberExtract[] src)
         {
-            var records = list<MemberParseRecord>(extracts.RecordCount);
-            var parser = Extract.Services.PatternParser(PatternBuffer.Clear());
-            
-            var seq = 0;
-            for(var i=0; i< extracts.RecordCount; i++)
-            {
-                ref readonly var extract = ref extracts.Records[i];                
-                var status = parser.Parse(extract.Data);                
-                var matched = parser.Result;
-                if(matched.IsSome() && status.Success())
-                {
-                    var bytes = parser.Parsed.ToArray();
-                    var uri = OpUri.hex(host.UriPath, extract.Uri.GroupName, extract.Uri.OpId);
-                    var data = LocatedCode.Define(extract.Address, bytes);
-                    var record = MemberParseRecord.Define
-                    (
-                        Sequence: seq++,
-                        SourceSequence: extract.Sequence,
-                        Address: extract.Address,
-                        Length: bytes.Length,
-                        TermCode: matched.ToTermCode(),
-                        Uri: uri,
-                        OpSig: extract.OpSig,
-                        Data: data
-                    );
-                    records.Add(record);               
-                }
-            }
-
-            ReportDuplicates(Identify.duplicates(records.Select(x => x.Uri.OpId)));
-            return MemberParseReport.Create(host.UriPath, records.ToArray());
+            var parsed = list<ParsedMember>(src.Length);
+            var failed = list<ExtractParseFailure>();
+            var parser = Parser();
+            for(var i=0; i< src.Length; i++)
+                Parse(src[i], i).OnResult(f => failed.Add(f), p => parsed.Add(p));
+            return (failed.ToArray(), parsed.ToArray());            
         }
 
-        void ReportDuplicates(OpIdentity[] duplicated)
-        {
-            if(duplicated.Length != 0)
-            {
-                var format = string.Join(text.comma(), duplicated);
-                //MsgSink.Notify($"Identifier duplicates: {format}", AppMsgKind.Warning);           
-            }
-        }
     }
 }

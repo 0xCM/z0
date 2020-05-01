@@ -2,15 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-
-    /// <summary>
-    /// Joins a capture service with a junction
-    /// </summary>
-    public interface ICaptureControl : ICaptureService
+    public interface ILocatedParser : IService
     {
-
+        Option<LocatedCode> Parse(LocatedCode src);        
     }
+
 }

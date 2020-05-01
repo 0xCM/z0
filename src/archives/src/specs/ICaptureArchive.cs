@@ -29,7 +29,10 @@ namespace Z0
 
         FolderName ExtractFolder 
             => FolderName.Define("extracted");
-        
+
+        FolderName UnparsedFolder
+            => FolderName.Define("unparsed");
+
         FolderName HexFolder 
             => FolderName.Define("code");
 
@@ -49,6 +52,8 @@ namespace Z0
 
         FileExtension ParsedExt => FileExtension.Define($"p.{FileExtensions.Csv}");
 
+        FileExtension UnparsedExt => FileExtension.Define($"u.{FileExtensions.Csv}");
+
         FileExtension HexExt => FileExtensions.Hex;
 
         FileExtension AsmExt => FileExtensions.Asm;
@@ -60,6 +65,8 @@ namespace Z0
         FolderPath DataRoot => reify(RootDir + RootFolder);
 
         FolderPath ExtractDir => reify(RootDir + ExtractFolder);
+
+        FolderPath UnparsedDir => reify(RootDir + UnparsedFolder);
 
         FolderPath ParsedDir => reify(RootDir + ParsedFolder);
         
@@ -114,6 +121,9 @@ namespace Z0
         FilePath ExtractPath(ApiHostUri host)
             => ExtractDir + FileName.Define(host.Name, ExtractExt);
 
+        FilePath UnparsedPath(ApiHostUri host)
+            => UnparsedDir + FileName.Define($"{host.Owner.Format()}.{host.Name}", UnparsedExt);
+
         FilePath ParsePath(ApiHostUri host)
             => ParsedDir + FileName.Define(host.Name, ParsedExt);
 
@@ -146,6 +156,5 @@ namespace Z0
         [MethodImpl(Inline)]
         IHostCaptureArchive CaptureArchive(ApiHostUri host)
             => Archives.Services.HostCaptureArchive(this, host);        
-
     }
 }

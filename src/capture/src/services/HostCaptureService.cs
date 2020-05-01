@@ -62,10 +62,10 @@ namespace Z0.Asm
 
         public ParsedMember[] Parse(ApiHostUri host, MemberExtract[] src, bool save)
         {
-            var parsed = Parser.Parse(src);
-            if(parsed.Length != 0 && save)
-                Save(host, parsed);            
-            return parsed;
+            var outcome = Parser.Parse(src);
+            if(outcome.Parsed.Length != 0 && save)
+                Save(host,outcome.Parsed);
+            return outcome.Parsed;
         }
 
         [MethodImpl(Inline)]

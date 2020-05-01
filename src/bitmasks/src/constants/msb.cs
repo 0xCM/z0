@@ -42,16 +42,19 @@ namespace Z0
         /// <summary>
         /// [10000000 00000000]
         /// </summary>
+        [BinaryLiteral("[10000000 00000000]")]
         public const ushort Msb16x16x1 = 1 << 15;
 
         /// <summary>
         /// [10000000 00000000 10000000 00000000]
         /// </summary>
+        [BinaryLiteral("[10000000 00000000 10000000 00000000]")]
         public const uint Msb32x16x1 = (uint)Msb16x16x1 | (uint)Msb16x16x1 << 16;
 
         /// <summary>
         /// [10000000 00000000 10000000 00000000 10000000 00000000 10000000 00000000]
         /// </summary>
+        [BinaryLiteral("[10000000 00000000 10000000 00000000 10000000 00000000 10000000 00000000]")]
         public const ulong Msb64x16x1 = (ulong)Msb32x16x1 | (ulong)Msb32x16x1 << 32;
 
 
@@ -61,16 +64,19 @@ namespace Z0
         /// <summary>
         /// [1010]
         /// </summary>
+        [BinaryLiteral("[1010]")]
         public const byte Msb4x2x1 = 0b1010;
 
         /// <summary>
         /// [010101]
         /// </summary>
+        [BinaryLiteral("[010101]")]
         public const byte Msb6x2x1 = Msb4x2x1 | 1 << 4;
 
         /// <summary>
         /// [10101010]
         /// </summary>
+        [BinaryLiteral("[10101010]")]
         public const byte Msb8x2x1 = Lsb8x2x1 << 1;
 
         /// <summary>

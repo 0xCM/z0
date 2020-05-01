@@ -12,8 +12,6 @@ namespace Z0
     using F = ResourceField;
     using R = ResourceRecord;
 
-    using static Reports;
-
     public enum ResourceField : ulong
     {
         Offset = 0 | (8ul << 32),
@@ -30,7 +28,7 @@ namespace Z0
     /// <summary>
     /// Describes an assembly code emission
     /// </summary>
-    public class ResourceRecord : IRecord<F,R>
+    public class ResourceRecord : ITabular<F,R>
     {    
         public static ResourceRecord Create(MemoryOffset offset, MemoryAddress location, int size, string uri, byte[] data)
             => new ResourceRecord(offset, location, size, uri, data);
@@ -44,19 +42,19 @@ namespace Z0
             this.Data = data;
         }
 
-        [ReportField(F.Offset)]
+        [TabularField(F.Offset)]
         public MemoryOffset Offset {get; set;}
 
-        [ReportField(F.Address)]
+        [TabularField(F.Address)]
         public MemoryAddress Address {get; set;}
 
-        [ReportField(F.Size)]
+        [TabularField(F.Size)]
         public int Size {get; set;}
 
-        [ReportField(F.Uri)]
+        [TabularField(F.Uri)]
         public string Uri {get; set;}
 
-        [ReportField(F.Data)]
+        [TabularField(F.Data)]
         public byte[] Data {get;set;}
 
         public string DelimitedText(char delimiter)
@@ -64,8 +62,8 @@ namespace Z0
             var dst = text.factory.Builder();
             dst.AppendField(Offset, F.Offset);
             dst.AppendDelimited(Address, F.Address, delimiter); 
-            dst.AppendDelimited(Size.FormatAsmHex(4), width(F.Size), delimiter); 
-            dst.AppendDelimited(Uri, width(F.Uri), delimiter);                        
+            dst.AppendDelimited(Size.FormatAsmHex(4), FieldFormat.width(F.Size), delimiter); 
+            dst.AppendDelimited(Uri, FieldFormat.width(F.Uri), delimiter);                        
             dst.AppendDelimited(Data.FormatHexBytes(), delimiter);                        
             return dst.ToString();
         }

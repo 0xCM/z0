@@ -91,7 +91,7 @@ namespace Z0.Asm
             for(var i=0; i<src.Content.Length; i++)
             {
                 dst.Append(lines(src.Content[i]).Concat());
-                dst.AppendLine(text.pagebreak);
+                dst.AppendLine(text.PageBreak);
             }
             return dst.ToString();
         }

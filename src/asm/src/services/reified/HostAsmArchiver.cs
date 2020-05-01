@@ -24,7 +24,6 @@ namespace Z0.Asm
 
         readonly IHostCaptureArchive HostArchive;
 
-
         internal HostAsmArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
         {
             ApiHost = host;

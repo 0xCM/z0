@@ -10,6 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+    
     public readonly struct LocatedParser : ILocatedParser
     {
         readonly byte[] Buffer;
@@ -27,7 +28,7 @@ namespace Z0
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
             return succeeded 
-                ? LocatedCode.Define(src.Address, parser.Parsed.ToArray()) 
+                ? LocatedCode.Define(src.Address, parser.Parsed) 
                 : none<LocatedCode>();
         }               
     }

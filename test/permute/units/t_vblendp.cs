@@ -284,7 +284,7 @@ namespace Z0
 
         static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.odd(n2,n2,z64), enabled(t), Blocks.alloc<T>(w)).LoadVector();
+                => gvec.broadcast(BitMask.odd<ulong>(n2,n2), enabled(t), Blocks.alloc<T>(w)).LoadVector();
 
         static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged

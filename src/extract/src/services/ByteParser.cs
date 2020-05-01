@@ -33,8 +33,13 @@ namespace Z0
 
         readonly IBytePatternSet<T> Patterns;
         
-        public ReadOnlySpan<byte> Parsed
-            =>  (Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : new byte[]{};
+        public byte[] Parsed
+            => ParsedSlice.ToArray();
+
+        ReadOnlySpan<byte> ParsedSlice
+            =>  (Offset + Delta - 1) > 0 
+              ? Buffer.Slice(0, Offset + Delta - 1) 
+              : Control.array<byte>();
 
         public static ByteParser<T> Create(IBytePatternSet<T> patterns, int bufferlen)
             => new ByteParser<T>(patterns, bufferlen);

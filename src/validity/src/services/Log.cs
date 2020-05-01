@@ -132,7 +132,7 @@ namespace Z0
             }
 
             void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
-                where R : IRecord
+                where R : ITabular
             {                
                 if(records.Count == 0)
                     return;
@@ -149,7 +149,7 @@ namespace Z0
                     : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext) : Paths.LogPath(Area, subdir, basename, ext)) ;
 
             public FilePath Write<R>(IEnumerable<R> src, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FileExtension ext = null)
-                where R : IRecord
+                where R : ITabular
             {
                 var records = src.ToArray();
                 if(records.Length == 0)
@@ -213,7 +213,7 @@ namespace Z0
     /// <summary>
     /// Defines a benchmark measure for an operator
     /// </summary>
-    public readonly struct BenchmarkRecord : IRecord<BenchmarkRecord>, IComparable<BenchmarkRecord>, IComparable
+    public readonly struct BenchmarkRecord : ITabular<BenchmarkRecord>, IComparable<BenchmarkRecord>, IComparable
     {
         public static BenchmarkRecord Empty => new BenchmarkRecord(0, Duration.Zero,string.Empty);
 
@@ -271,7 +271,7 @@ namespace Z0
         public string Format(int? labelPad = null)
             => $"{OpId}".PadRight(labelPad ?? OpNamePad) + $" | Ops = {OpCount} " + $"| Time = {Timing}";
         
-        string IRecord.DelimitedText(char delimiter)
+        string ITabular.DelimitedText(char delimiter)
             => text.concat(
                 $"{Formattable.format(OpId).PadRight(OpNamePad)}{delimiter}{Chars.Space}",  
                  OpCount.ToString("#,#").PadRight(OpCountPad),  $"{delimiter}{Chars.Space}",

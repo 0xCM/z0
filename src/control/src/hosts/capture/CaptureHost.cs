@@ -13,6 +13,7 @@ namespace Z0
     using static Memories;
     
     using static Asm.CaptureWorkflowEvents;
+    using static ExtractEvents;
 
     public class CaptureHost : ICaptureHost
     {               
@@ -32,11 +33,7 @@ namespace Z0
 
         readonly IAsmFunctionDecoder Decoder;
 
-        readonly IMemberLocator MemberLocator;
-
         readonly FolderPath CaptureRoot;
-
-        readonly FilePath LogPath;
             
         readonly IHostCaptureWorkflow PrimaryWorkflow;
 
@@ -66,9 +63,7 @@ namespace Z0
             ApiSet = context.ApiSet;
             WorkflowConfig = new AsmWorkflowConfig(root);
             Settings = CaptureConfig.From(context.Settings);            
-            LogPath = (root + FolderName.Define("logs")) + FileName.Define("host","log");
             Archive = Stateless.CaptureArchive(root);
-            MemberLocator = Core(context).MemberLocator();
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Decoder = Stateless.AsmDecoder(FormatConfig);
             Formatter = Core(context).AsmFormatter(FormatConfig);            
@@ -78,13 +73,12 @@ namespace Z0
             ConnectReceivers(PrimaryWorkflow.EventBroker);
         }
 
-
         IChecks Claim => Checks.Checker;
 
         ICheckEquatable Equatable => CheckEquatable.Checker;
 
-        IApiHost Host(ApiHostUri uri)
-            => ApiSet.FindHost(uri).Require();
+        IAppContext AppContext => Z0.AppContext.Create(ApiSet, 
+                Context.Random, Context.Settings, AppMsgExchange.Create(Context));
 
         public void Dispose()
         {
@@ -100,7 +94,7 @@ namespace Z0
                 EmitPrimary(parts);
 
             if(Settings.CheckExecution)
-                Exec(parts);
+                CheckExec(parts);
         }
 
         void EmitImm(params PartId[] parts)
@@ -114,17 +108,34 @@ namespace Z0
             PrimaryWorkflow.Run(WorkflowConfig, parts);
         }
 
-        void Exec(params PartId[] parts)
-        {
-            var api = Z0.AppContext.Create(ApiSet.Composition, Context.Random, Context.Settings, AppMsgExchange.Create(Context));
-            var workflow = EvalWorkflow.Create(api, Context.Random, CaptureRoot);
+        void CheckExec(params PartId[] parts)
+        {            
+            var workflow = EvalWorkflow.Create(AppContext, Context.Random, CaptureRoot);
             workflow.Execute(parts);
+        }
+
+        void OnEvent(HostFunctionsDecoded e)
+        {
+            Sink.Deposit(e);
+
+            if(Settings.CollectAsmStats)
+                CollectAsmStats(e.Host, e.Payload);
+        }
+
+        void OnEvent(HostAsmHexSaved e)
+        {
+            Sink.Deposit(e);
+
+            if(Settings.MatchEmissions)
+                MatchEmissions(e.Host, e.Payload, e.Target);
         }
 
         void OnEvent(HostMembersLocated e)
         {
             Sink.Deposit(e);
-            Analyze(e.Host, e.Members);
+
+            if(Settings.DuplicateCheck)
+                CheckDuplicates(e.Host, e.Members);
         }
 
         void OnEvent(ExtractReportCreated e)
@@ -137,18 +148,16 @@ namespace Z0
             Sink.Deposit(e);
         }
 
-        void OnEvent(HostFunctionsDecoded e)
+        void OnEvent(ExtractParseFailed e)
         {
             Sink.Deposit(e);
-            Analyze(e.Host, e.Payload);
         }
-
-        void OnEvent(HostAsmHexSaved e)
+    
+        void OnEvent(HostExtractsParsed e)
         {
             Sink.Deposit(e);
-            CheckEmission(e.Host, e.Payload, e.Target);
         }
-
+    
         void OnEvent(ParseReportCreated e)
         {
             Sink.Deposit(e);
@@ -172,36 +181,21 @@ namespace Z0
         IHostCaptureBroker ConnectReceivers(IHostCaptureBroker broker)
         {
             broker.Error.Subscribe(broker, OnEvent);
-
-            if(Settings.HandleMembersLocated)
-                broker.MembersLocated.Subscribe(broker, OnEvent);
-
-            if(Settings.HandleExtractReportCreated)
-                broker.ExtractReportCreated.Subscribe(broker, OnEvent);
-
-            if(Settings.HandleExtractReportSaved)
-                broker.ExtractReportSaved.Subscribe(broker, OnEvent);
-
-            if(Settings.HandleParseReportCreated)
-                broker.ParseReportCreated.Subscribe(broker, OnEvent);
-
-            if(Settings.HandleFunctionsDecoded)
-                broker.FunctionsDecoded.Subscribe(broker, OnEvent);
-
-            if(Settings.HandleParsedExtractSaved)            
-                broker.HexSaved.Subscribe(broker, OnEvent);            
-            
+            broker.MembersLocated.Subscribe(broker, OnEvent);
+            broker.ExtractReportCreated.Subscribe(broker, OnEvent);
+            broker.ExtractReportSaved.Subscribe(broker, OnEvent);
+            broker.ParseReportCreated.Subscribe(broker, OnEvent);
+            broker.FunctionsDecoded.Subscribe(broker, OnEvent);
+            broker.HexSaved.Subscribe(broker, OnEvent);            
+            broker.ExtractsParsed.Subscribe(broker, OnEvent);
+            broker.ExtractParseFailed.Subscribe(broker, OnEvent);            
             broker.CaptureCatalogStart.Subscribe(broker, OnEvent);            
             broker.CaptureCatalogEnd.Subscribe(broker, OnEvent);
-
             return broker;
         }
         
-        void Analyze(ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
+        void CollectAsmStats(ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
         {
-            static int CountInstructions(in AsmFunction f)
-                => f.InstructionCount;
-
             var count = 0ul;
             for(var i = 0; i<functions.Length; i++)
                 count += (ulong)skip(functions,i).InstructionCount;
@@ -209,7 +203,7 @@ namespace Z0
             Sink.CountedInstructions(host, count);                   
         }
             
-        void CheckEmission(ApiHostUri host, ReadOnlySpan<UriBits> memSrc, FilePath dst)
+        void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriBits> memSrc, FilePath dst)
         {
             var fileSrc = UriBitsReader.Read(dst).ToArray().ToSpan();                        
 
@@ -225,7 +219,7 @@ namespace Z0
             Sink.MatchedEmissions(host, memSrc.Length, dst);
         }
 
-        void Analyze(ApiHostUri host, ReadOnlySpan<Member> src)
+        void CheckDuplicates(ApiHostUri host, ReadOnlySpan<Member> src)
         {
             var index = Operational.Service.CreateIndex(src);
             foreach(var key in index.DuplicateKeys)

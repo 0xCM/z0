@@ -12,20 +12,6 @@ namespace Z0
 
     public class AppContext : IAppContext             
     {
-        [MethodImpl(Inline)]
-        public static IAppContext Create(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
-            => new AppContext(composition, random, settings ?? AppSettings.Empty, queue);
-        
-        [MethodImpl(Inline)]
-        AppContext(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
-        {
-            Next = msg => {};
-            Random = random;
-            Settings = settings;
-            Messaging = queue;
-            Api = ApiSet.Create(composition);
-        }
-
         readonly IApiSet Api;
 
         public IAppSettings Settings {get;}
@@ -36,14 +22,47 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        public IApiComposition Composition => Api.Composition;
+        [MethodImpl(Inline)]
+        public static IAppContext Create(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+            => new AppContext(composition, random, settings ?? AppSettings.Empty, queue);
 
-        public IApiHost[] Hosts  => Api.Hosts;
+        [MethodImpl(Inline)]
+        public static IAppContext Create(IApiSet api, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+            => new AppContext(api, random, settings ?? AppSettings.Empty, queue);
 
-        public IApiCatalog[] Catalogs => Api.Catalogs;
+        [MethodImpl(Inline)]
+        AppContext(IApiComposition composition, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        {
+            Next = msg => {};
+            Random = random;
+            Settings = settings;
+            Messaging = queue;
+            Api = ApiSet.Create(composition);
+        }
 
-        public IPart[] Parts => Api.Parts;
+        [MethodImpl(Inline)]
+        AppContext(IApiSet api, IPolyrand random, IAppSettings settings, IAppMsgQueue queue)
+        {
+            Next = msg => {};
+            Random = random;
+            Settings = settings;
+            Messaging = queue;
+            Api = api;
+        }
 
-        public PartId[] PartIdentities => Api.PartIdentities;
+        public IApiComposition Composition 
+            => Api.Composition;
+
+        public IApiHost[] Hosts  
+            => Api.Hosts;
+
+        public IApiCatalog[] Catalogs 
+            => Api.Catalogs;
+
+        public IPart[] Parts 
+            => Api.Parts;
+
+        public PartId[] PartIdentities 
+            => Api.PartIdentities;
     }
 }

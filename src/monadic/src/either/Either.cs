@@ -112,61 +112,61 @@ namespace Z0
         /// </summary>
         /// <param name="left">The action to invoke when the altenative is left-valued</param>
         /// <param name="right">The action to invoke when the altenative is right-valued</param>
-        public void OnValue(Action<L> left, Action<R> right)
+        public void OnEither(Action<L> left, Action<R> right)
             => OnLeft(left).OnRight(right);
 
         /// <summary>
         /// Applies exactly one of two transformations
         /// </summary>
         /// <typeparam name="Y">The type of the output value</typeparam>
-        /// <param name="ifLeft">The transformation to invoke when the alternative is left-valued</param>
-        /// <param name="ifRight">The transformation to invoke when the alternative is right-valued</param>
-        public Y Apply<Y>(Func<L,Y> ifLeft, Func<R,Y> ifRight)
-            => IsLeft ? ifLeft(Left) : ifRight(Right);
+        /// <param name="left">The transformation to invoke when the alternative is left-valued</param>
+        /// <param name="right">The transformation to invoke when the alternative is right-valued</param>
+        public Y Map<Y>(Func<L,Y> left, Func<R,Y> right)
+            => IsLeft ? left(Left) : right(Right);
 
         /// <summary>
         /// Defines a right-biased Linq-monad projector
         /// </summary>
-        /// <param name="selector">A function that projects a right value, if extant, onto a target value</param>
+        /// <param name="f">A function that projects a right value, if extant, onto a target value</param>
         /// <typeparam name="Y">The target value type</typeparam>
-        public Either<L,Y> Select<Y>(Func<R,Y> selector)
-            => IsRight  ? selector(Right) : new Either<L,Y>(Left);
+        public Either<L,Y> Select<Y>(Func<R,Y> f)
+            => IsRight  ? f(Right) : new Either<L,Y>(Left);
 
         /// <summary>
         /// Defines a right-biased Linq-modad join
         /// </summary>
-        /// <param name="selector">A function that lifts a right value, if extant, into monadic space</param>
-        /// <param name="projector">A function that projects a right monadic source value onto a target-parametric target monadic value</param>
+        /// <param name="f">A function that lifts a right value, if extant, into monadic space</param>
+        /// <param name="g">A function that projects a right monadic source value onto a target-parametric target monadic value</param>
         /// <typeparam name="Y">The join type</typeparam>
         /// <typeparam name="Z">The target type</typeparam>
-        public Either<L,Z> SelectMany<Y,Z>(Func<R, Either<L,Y>> selector, Func<R,Y,Z> projector)
+        public Either<L,Z> SelectMany<Y,Z>(Func<R, Either<L,Y>> f, Func<R,Y,Z> g)
         {
             if (IsLeft)
                 return new Either<L,Z>(Left);
 
-            var selected = selector(Right);
+            var selected = f(Right);
             if (selected.IsLeft)
                 return new Either<L,Z>(selected.Left);
             else
-                return new Either<L,Z>(projector(Right, selected.Right));
+                return new Either<L,Z>(g(Right, selected.Right));
         }
 
         /// <summary>
         /// Determines structural equality
         /// </summary>
-        /// <param name="other">The other either</param>
-        public bool Equals(Either<L,R> other)
+        /// <param name="src">The other either</param>
+        public bool Equals(Either<L,R> src)
         {
-            if (IsLeft && other.IsLeft)
-                return Equals(Left, other.Left);
-            else if (IsRight && other.IsRight)
-                return Equals(Right, other.Right);
+            if (IsLeft && src.IsLeft)
+                return Equals(Left, src.Left);
+            else if (IsRight && src.IsRight)
+                return Equals(Right, src.Right);
             else
                 return false;
         }
 
         public override string ToString()
-            => Apply(left => $"Left({left})",
+            => Map(left => $"Left({left})",
                         right => $"Right({right})");
 
         public override int GetHashCode()
@@ -174,7 +174,7 @@ namespace Z0
                 : Right.GetHashCode();
 
         public override bool Equals(object obj)
-            => obj is Either<L, R> 
-            ? Equals((Either<L, R>)obj) : false;
+            => obj is Either<L,R> 
+            ? Equals((Either<L,R>)obj) : false;
     }
 }

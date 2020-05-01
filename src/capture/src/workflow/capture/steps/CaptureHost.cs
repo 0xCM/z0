@@ -57,7 +57,7 @@ namespace Z0.Asm
                                     
                     ExtractReportManager.SaveExtractReport(ExtractReportManager.CreateExtractReport(host.UriPath, extracts), paths.ExtractPath);
 
-                    var parsed = MemberParse.ParseExtracts(host.UriPath, extracts);
+                    var parsed = MemberParse.ParseExtracts(host.UriPath, extracts, dst);
                     if(parsed.Length != 0)
                     {
                         ParseReportManager.SaveParseReport(ParseReportManager.CreateParseReport(host.UriPath, parsed), paths.ParsedPath);                                                

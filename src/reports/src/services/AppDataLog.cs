@@ -30,11 +30,11 @@ namespace Z0
             this.Header = header;
         }
 
-        void Write(IRecord src, StreamWriter dst)
+        void Write(ITabular src, StreamWriter dst)
             => dst.WriteLine(src.DelimitedText(Delimiter));
 
         public void Deposit<R>(IReport<R> src)
-            where R : IRecord<R>
+            where R : ITabular<R>
         {                
             if(src.RecordCount == 0)
                 return;
@@ -42,7 +42,7 @@ namespace Z0
             using var writer = Target.Writer();
 
             if(Header)
-                writer.WriteLine(string.Join(Delimiter, src.HeaderNames));
+                writer.WriteLine(string.Join(Delimiter, src.HeaderLabels));
             
             Control.iter(src.Records, r => Write(r,writer));
         }
@@ -55,7 +55,7 @@ namespace Z0
             using var writer = Target.Writer();
 
             if(Header)
-                writer.WriteLine(string.Join(Delimiter, src.HeaderNames));
+                writer.WriteLine(string.Join(Delimiter, src.HeaderLabels));
             
             Control.iter(src.Records, r => Write(r,writer));
         }

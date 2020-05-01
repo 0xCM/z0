@@ -11,12 +11,21 @@ namespace Z0
 
     using static Seed;
 
+    public enum LogWriteMode
+    {
+        Create,
+        
+        Overwrite,
+        
+        Append
+    }
+
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
     public interface ITestLogger : IService
     {        
-        FilePath Write<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
-            where R : IRecord;                
+        FilePath Write<R>(IEnumerable<R> data, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
+            where R : ITabular;                
     }
 }

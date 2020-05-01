@@ -9,10 +9,17 @@ namespace Z0
 
     using static Seed;
 
+    /// <summary>
+    /// Defines extraction-related events
+    /// </summary>
+    public partial class ExtractEvents
+    {
+
+    }
+
     public readonly struct Extract : IExtract
     {
         public static IExtract Services => default(Extract);
-
 
         /// <summary>
         /// Creates a code extractor with an optionally-specified buffer length

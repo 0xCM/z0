@@ -11,6 +11,7 @@ namespace Z0
 
     using F = MemberParseField;
     using R = MemberParseRecord;
+    using Report = MemberParseReport;
 
     public enum MemberParseField : ulong
     {
@@ -31,17 +32,8 @@ namespace Z0
         Data = 6 | 1ul << 32
     }    
 
-    public readonly struct MemberParseRecord : IRecord<F,R>
-    {                        
-        // public static ParsedMember ToParsedEncoding(MemberParseRecord src)
-        // {
-        //     var count = src.Length;
-        //     var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
-        //     var final = ExtractState.Define(src.Uri.OpId, count, range.End, src.Data.LastByte);
-        //     var outcome = CaptureOutcome.Define(final, range, src.TermCode);
-        //     return ParsedMember.Define(src.Uri, src.OpSig, outcome.TermCode, src.Data);
-        // }        
-        
+    public readonly struct MemberParseRecord : ITabular<F,R>
+    {                                
         public static MemberParseRecord Empty => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, LocatedCode.Empty);
         
         public static R From(in ParsedMember extract, int seq)
@@ -72,28 +64,28 @@ namespace Z0
             this.Data = Data;
         }
         
-        [ReportField(F.Seq)]
+        [TabularField(F.Seq)]
         public int Seq {get;}
 
-        [ReportField(F.SourceSeq)]
+        [TabularField(F.SourceSeq)]
         public int SourceSeq {get;}
 
-        [ReportField(F.Address)]
+        [TabularField(F.Address)]
         public MemoryAddress Address {get; }
 
-        [ReportField(F.Length)]
+        [TabularField(F.Length)]
         public int Length {get; }
 
-        [ReportField(F.TermCode)]
+        [TabularField(F.TermCode)]
         public ExtractTermCode TermCode {get; }
 
-        [ReportField(F.Uri)]
+        [TabularField(F.Uri)]
         public OpUri Uri {get;}
 
-        [ReportField(F.OpSig)]
+        [TabularField(F.OpSig)]
         public string OpSig {get; }
 
-        [ReportField(F.Data)]
+        [TabularField(F.Data)]
         public LocatedCode Data {get; }
 
         public dynamic this[F f]
@@ -127,4 +119,34 @@ namespace Z0
 
         static Report<F,R> Model => Report<F,R>.Empty;
     }
+
+    public class MemberParseReport : Report<Report,F,R>
+    {             
+        public ApiHostUri ApiHost {get;}
+
+        [MethodImpl(Inline)]
+        public static Report Create(ApiHostUri host, params R[] records)
+            => new Report(records);
+
+        public static Report Create(ApiHostUri host, ParsedMember[] extracts)
+        {
+            var records = new MemberParseRecord[extracts.Length];
+            for(var i=0; i< records.Length; i++)
+            {
+                ref readonly var extract = ref extracts[i];
+                records[i] = R.From(extract, i);
+                
+            }
+            return new Report(records);
+        }
+
+        public MemberParseReport(){}
+        
+        [MethodImpl(Inline)]
+        MemberParseReport(params R[] records)
+            : base(records)
+        {
+
+        }
+    }    
 }

@@ -16,15 +16,16 @@ namespace Z0
         /// <summary>
         /// Parses a single extract
         /// </summary>
-        /// <param name="src">The source extract</param>
-        /// <param name="seq">The sequence number to confer upon the result</param>
-        Option<ParsedMember> Parse(in MemberExtract src, int seq = 0);
+        /// <param name="src"></param>
+        /// <param name="seq"></param>
+        ExtractParseResult Parse(in MemberExtract src, int seq);
+
 
         /// <summary>
-        /// Parses an extract sequence
+        /// Parses an extract sequence, returning a comprehensive result set that includes
+        /// outcomes of successful parse operations and any unfortunate failures
         /// </summary>
         /// <param name="src">The source extracts</param>
-        ParsedMember[] Parse(MemberExtract[] src);
+        ExtractParseResults Parse(MemberExtract[] src);
     }
-
 }

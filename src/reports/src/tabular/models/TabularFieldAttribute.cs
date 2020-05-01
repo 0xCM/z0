@@ -23,15 +23,15 @@ namespace Z0
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-    public class ReportFieldAttribute : Attribute
+    public class TabularFieldAttribute : Attribute
     {
         public string Name {get;}
 
-        public int? Index {get;}
+        public int Index {get;}
         
-        public int? Width {get;}
+        public int Width {get;}
 
-        public ReportFieldAttribute(object id)
+        public TabularFieldAttribute(object id)
         {
             var evalue = (Enum)id;
             var ivalue = EnumReader.numeric<ulong>(evalue);

@@ -53,7 +53,6 @@ namespace Z0
             }
         }
 
-        [Op, Closures(UnsignedInts)]
         public static BitMatrixBinaryOp<T> lookup<T>(BLK kind)
             where T : unmanaged
         {
