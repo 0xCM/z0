@@ -27,17 +27,17 @@ namespace Z0.Asm
 
         readonly IApiSet ApiSet;
                 
-        public static EvalWorkflow Create(IAppContext context, IPolyrand random, FolderPath root)
+        public static IEvalWorkflow Create(IAppContext context, IPolyrand random, FolderPath root)
             => new EvalWorkflow(context, random, root);
 
         internal EvalWorkflow(IAppContext context, IPolyrand random, FolderPath root)
         {                    
-            this.Context = context;
-            this.Dispatcher = EvalDispatcher.Create(random, context);
-            this.BufferSize = 1024;
-            this.BufferCount = 3;
-            this.CodeArchive = Archives.Services.CaptureArchive(root);
-            this.ApiSet = context;
+            Context = context;
+            Dispatcher = EvalDispatcher.Create(random, context);
+            BufferSize = 1024;
+            BufferCount = 3;
+            CodeArchive = Archives.Services.CaptureArchive(root);
+            ApiSet = context;
         }
                 
         void ExecuteHost(BufferTokens buffers, IApiHost host)

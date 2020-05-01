@@ -76,12 +76,12 @@ namespace Z0.Asm
             Report(AppMsg.Error(e.Payload));    
         }
 
-        public void OnEvent(HostMembersLocated e)
+        public void OnEvent(MembersLocated e)
         {
             Report(AppMsg.Colorize(Format(e), AppMsgColor.Blue));
         }
 
-        public void OnEvent(HostMembersExtracted e)
+        public void OnEvent(MembersExtracted e)
         {
             Report(AppMsg.Colorize(Format(e), AppMsgColor.Blue));
         }
@@ -154,7 +154,7 @@ namespace Z0.Asm
         Member[] LocateMembers(IApiHost host)
         {
             var located = MemberLocator.Located(host).ToArray();
-            Raise(HostMembersLocated.Define(host.UriPath, located));
+            Raise(MembersLocated.Define(host.UriPath, located));
             return located;
         }
 
@@ -162,7 +162,7 @@ namespace Z0.Asm
         {
             var members = LocateMembers(host);            
             var extracted = Extractor.Extract(members);
-            Raise(HostMembersExtracted.Define(host.UriPath, extracted));            
+            Raise(MembersExtracted.Define(host.UriPath, extracted));            
             return extracted;
         }
 

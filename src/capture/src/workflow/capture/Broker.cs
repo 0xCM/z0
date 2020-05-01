@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     using static Seed;
 
-    sealed class HostCaptureBroker : EventBroker, IHostCaptureBroker
+    sealed class HostCaptureBroker : EventBroker, ICaptureBroker
     {
-        public static IHostCaptureBroker New => new HostCaptureBroker();           
+        public static ICaptureBroker New => new HostCaptureBroker();           
     }
 }

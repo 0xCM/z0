@@ -14,10 +14,6 @@ namespace Z0.Asm
 
     partial class CaptureWorkflowEvents
     {
-        /// <summary>
-        /// Creates a <see cref="E" /> event
-        /// </summary>
-        /// <param name="src">The event payload</param>
         [MethodImpl(Inline)]
         public static E Define(R src)
             => E.Define(src);

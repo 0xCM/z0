@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         EmittedEmbeddedImm EmittedEmbeddedImm => EmittedEmbeddedImm.Empty;
 
-        HostFileEmissionFailed HostFileEmissionFailed => HostFileEmissionFailed.Empty;
+        FileEmissionFailed HostFileEmissionFailed => FileEmissionFailed.Empty;
 
         ImmInjectionFailed ImmInjectionFailed => ImmInjectionFailed.Empty;
     }

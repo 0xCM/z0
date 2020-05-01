@@ -10,22 +10,21 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    public class CaptureWorkflowContext : IContext
+    public class CaptureWorkflowContext : ICaptureContext
     {
-        public CaptureWorkflowContext(IAsmContext context, IApiSet api, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
-            IHostCodeExtractor extractor, IExtractParser parser,  IHostCaptureBroker broker)
+        public CaptureWorkflowContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
+            ICaptureBroker broker, ICaptureArchive archive)
         {
-            this.RootContext = context;
-            this.ApiSet = api;
-            this.Extractor = extractor;
-            this.Parser = parser;
+            this.ApiSet = context.ApiSet;
+            this.Extractor = AsmWorkflows.Stateless.HostExtractor();
+            this.Parser = Extract.Services.ExtractParser();
             this.Decoder = decoder;
             this.Formatter = formatter;
             this.WriterFactory = wf;
             this.Broker = broker;
+            this.Archive = archive;
+            this.MsgSink = context;
         }
-
-        public IContext RootContext {get;}
 
         public IApiSet ApiSet {get;}
 
@@ -39,7 +38,11 @@ namespace Z0.Asm
 
         public AsmWriterFactory WriterFactory {get;}
 
-        public IHostCaptureBroker Broker {get;}
+        public ICaptureBroker Broker {get;}
+
+        public ICaptureArchive Archive {get;}
+
+        public IAppMsgSink MsgSink {get;}
 
         int step;
 

@@ -8,33 +8,34 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using E = CaptureWorkflowEvents.HostExtractsParsed;
+    
+    using E = CaptureWorkflowEvents.MembersExtracted;
 
     partial class CaptureWorkflowEvents
     {
-        public readonly struct HostExtractsParsed : IAppEvent<E>
+        public readonly struct MembersExtracted : IAppEvent<E>
         {
-            public static E Empty => new E(ApiHostUri.Empty, new ParsedMember[]{});
+            public static E Empty => new E(ApiHostUri.Empty, new MemberExtract[]{});
 
             [MethodImpl(Inline)]
-            public static E Define(ApiHostUri host, ParsedMember[] extracts)
-                => new E(host,extracts);
-            
+            public static E Define(ApiHostUri host, MemberExtract[] members)
+                => new E(host, members);
+
             [MethodImpl(Inline)]
-            public HostExtractsParsed(ApiHostUri host, ParsedMember[] functions)
+            MembersExtracted(ApiHostUri host, MemberExtract[] extracted)
             {
                 this.Host = host;
-                this.Payload = functions;
+                this.Extracts = extracted;
             }
             
             public ApiHostUri Host {get;}
             
-            public ParsedMember[] Payload {get;}
+            public MemberExtract[] Extracts {get;}
 
             public string Description
-                => $"{Payload.Length} {Host} members parsed";
-            
-            public E Zero => Empty;
+                => $"{Extracts.Length} {Host} members extracted";
+
+            public E Zero => Empty; 
         }    
     }
 }

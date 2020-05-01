@@ -8,8 +8,15 @@ namespace Z0.Asm
     
     using static CaptureWorkflowEvents;
 
-    public interface IHostHexSavedBroker : IEventBroker
+    public interface IHexSavedBroker : IEventBroker
     {
-        HostAsmHexSaved HexSaved => HostAsmHexSaved.Empty;        
+        HexSaved HexSaved => HexSaved.Empty;        
+    }
+
+    public interface IHexSavedClient<C> : IBrokerClient<C>
+        where C : IHexSavedBroker
+    {
+        void OnEvent(HexSaved e) 
+            => Sink.Deposit(e);
     }
 }

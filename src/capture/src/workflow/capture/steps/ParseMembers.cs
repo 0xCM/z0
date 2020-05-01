@@ -11,23 +11,24 @@ namespace Z0.Asm
     using static CaptureWorkflowEvents;
     using static ExtractEvents;
 
-
     partial class HostCaptureSteps
     {
-        public readonly struct ParseMembersStep :  IParseMemberStep
+        public readonly struct ParseMembersStep :  IParseMembersStep
         {
-            readonly CaptureWorkflowContext Context;
+            public ICaptureWorkflow Workflow {get;}
+
+            public ICaptureContext Context => Workflow.Context;
             
             readonly IExtractParser Parser;
             
             [MethodImpl(Inline)]
-            internal ParseMembersStep(CaptureWorkflowContext context)
+            internal ParseMembersStep(ICaptureWorkflow workflow)
             {
-                this.Context = context;
+                Workflow = workflow;
                 this.Parser = Extract.Services.ExtractParser();
             }
 
-            public ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts, ICaptureArchive dst)
+            public ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
             {
                 var result = Parser.Parse(extracts);
                 
@@ -35,14 +36,14 @@ namespace Z0.Asm
                     Context.Raise(ExtractParseFailed.Define(result.Failed[i]));
 
                 var report = ParseFailureReport.Create(host, result.Failed);
-                report.Save(dst.UnparsedPath(host));
+                report.Save(Context.Archive.UnparsedPath(host));
 
-                Context.Raise(HostExtractsParsed.Define(host, result.Parsed));
+                Context.Raise(ExtractsParsed.Define(host, result.Parsed));
                 return result.Parsed;
             }
 
             public void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
-                => Context.Raise(HostAsmHexSaved.Define(host,  ArchiveOps.Service.SaveUriBits(host, src, dst), dst));
+                => Context.Raise(HexSaved.Define(host,  ArchiveOps.Service.SaveUriBits(host, src, dst), dst));
         }
     }
 }

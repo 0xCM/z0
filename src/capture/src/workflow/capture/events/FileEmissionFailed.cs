@@ -8,11 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using E = CaptureWorkflowEvents.HostFileEmissionFailed;
+    using E = CaptureWorkflowEvents.FileEmissionFailed;
 
     partial class CaptureWorkflowEvents
     {
-        public readonly struct HostFileEmissionFailed : IAppEvent<E>
+        public readonly struct FileEmissionFailed : IAppEvent<E>
         {
             public static E Empty => new E(ApiHostUri.Empty,false, FilePath.Empty);
 
@@ -27,7 +27,7 @@ namespace Z0.Asm
                 => new E(host,generic, dst);
 
             [MethodImpl(Inline)]
-            HostFileEmissionFailed(ApiHostUri uri, bool generic, FilePath dst)
+            FileEmissionFailed(ApiHostUri uri, bool generic, FilePath dst)
             {
                 this.Host = uri;
                 this.Generic = generic;
@@ -37,7 +37,7 @@ namespace Z0.Asm
             public string Description
                 => $"{Host} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;
             
-            public HostFileEmissionFailed Zero => Empty;
+            public FileEmissionFailed Zero => Empty;
 
         }            
     }

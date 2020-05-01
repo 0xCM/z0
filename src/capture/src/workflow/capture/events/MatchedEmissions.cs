@@ -1,0 +1,43 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Asm
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+    using E = CaptureWorkflowEvents.MatchedEmissions;
+
+    partial class CaptureWorkflowEvents
+    {
+        public readonly struct MatchedEmissions : IAppEvent<E>
+        {
+            public static E Empty => Define(ApiHostUri.Empty, 0, FilePath.Empty);
+
+            [MethodImpl(Inline)]
+            public static E Define(ApiHostUri host, int count, FilePath path)
+                => new E(host,count,path);
+            
+            [MethodImpl(Inline)]
+            MatchedEmissions(ApiHostUri host, int count, FilePath path)
+            {
+                Host = host;
+                Count = count;
+                TargetPath = path;              
+            }
+            
+            public ApiHostUri Host {get;}
+            
+            public int Count {get;}
+
+            public FilePath TargetPath {get;}
+
+            public string Description
+                => $"{Count} {Host} members in memory were matched with emissions written to {TargetPath}";
+            
+            public E Zero => Empty;
+        }    
+    }
+}

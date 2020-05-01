@@ -34,7 +34,6 @@ namespace Z0.Asm
             ImmSpecializer = AsmWorkflows.Stateless.ImmSpecializer(decoder);
             ApiSet = api;
             CodeArchive = Archives.Services.CaptureArchive(root);
-            CodeArchive.Clear();
             ApiCollector =  context.Contextual.ApiCollector();
             ConnectReceivers(Broker);
         }
@@ -69,7 +68,7 @@ namespace Z0.Asm
             Flow.Report(e);
         }
 
-        void OnEvent(HostFileEmissionFailed e)
+        void OnEvent(FileEmissionFailed e)
         {
             Flow.Report(e);
         }

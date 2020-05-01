@@ -13,7 +13,6 @@ namespace Z0.Asm
     {
         IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder);        
         
-        IHostAsmArchiver ImmFunctionArchive(ApiHostUri host, IAsmFormatter formatter, FolderPath dst);        
 
         IMemoryExtractor MemoryExtractor(byte[] buffer);
 

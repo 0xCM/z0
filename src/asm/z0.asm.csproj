@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Evaluate)" />
   </ItemGroup>
 
   <ItemGroup>

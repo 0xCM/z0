@@ -28,6 +28,7 @@ namespace Z0.Asm
         IMemoryReader MemoryReader
             => Z0.MemoryReader.Service;
 
+
         [MethodImpl(Inline)]
         IAsmFormatter AsmFormatter(in AsmFormatSpec? config = null)
             => Asm.AsmFormatter.Create(config ?? AsmFormatSpec.Default);

@@ -11,14 +11,16 @@ namespace Z0.Asm
 
     partial class HostCaptureSteps
     {
-        public readonly struct CaptureCatalogStep : ICaptureCatalogStep
+        public readonly struct ManageCaptureStep : IManageCaptureStep
         {
-            readonly CaptureWorkflowContext Context;
-            
+            public ICaptureWorkflow Workflow {get;}
+
+            public ICaptureContext Context => Workflow.Context;
+
             [MethodImpl(Inline)]
-            internal CaptureCatalogStep(CaptureWorkflowContext context)
+            internal ManageCaptureStep(ICaptureWorkflow workflow)
             {
-                this.Context = context;
+                Workflow = workflow;
             }
 
             public void CaptureCatalogs(AsmWorkflowConfig config, params PartId[] parts)
@@ -49,7 +51,7 @@ namespace Z0.Asm
                 {
                     var start = Context.Raise(StepEvents.Started(src, Context.Correlate()));
 
-                    var step = new CaptureHostStep(Context);             
+                    var step = new CaptureHostStep(Workflow);             
                     foreach(var host in src.ApiHosts)
                         CaptureHost(step, host, dst);
 

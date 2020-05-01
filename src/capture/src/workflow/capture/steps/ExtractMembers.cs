@@ -16,19 +16,21 @@ namespace Z0.Asm
     {
         public readonly struct ExtractMembersStep : IExtractMembersStep
         {
-            readonly CaptureWorkflowContext Context;
+            public ICaptureWorkflow Workflow {get;}
+
+            public ICaptureContext Context => Workflow.Context;
 
             [MethodImpl(Inline)]
-            internal ExtractMembersStep(CaptureWorkflowContext context)
+            internal ExtractMembersStep(ICaptureWorkflow workflow)
             {
-                this.Context = context;
+                Workflow = workflow;
             }
  
             public Member[] LocateMembers(IApiHost host)
             {
                 var locator = StatelessIdentity.Services.MemberLocator();
                 var located = locator.Located(host).ToArray();
-                Context.Raise(HostMembersLocated.Define(host.UriPath, located));              
+                Context.Raise(MembersLocated.Define(host.UriPath, located));              
                 return located;
             }
 

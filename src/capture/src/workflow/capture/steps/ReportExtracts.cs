@@ -14,12 +14,14 @@ namespace Z0.Asm
     {
         public readonly struct ReportExtractsStep : IReportExtractsStep
         {
-            readonly CaptureWorkflowContext Context;
+            public ICaptureWorkflow Workflow {get;}
+
+            public ICaptureContext Context => Workflow.Context;
             
             [MethodImpl(Inline)]
-            internal ReportExtractsStep(CaptureWorkflowContext context)
+            internal ReportExtractsStep(ICaptureWorkflow workflow)
             {
-                this.Context = context;
+                Workflow = workflow;
             }
             
             public ExtractReport CreateExtractReport(ApiHostUri host, MemberExtract[] src)

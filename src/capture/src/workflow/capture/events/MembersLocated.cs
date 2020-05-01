@@ -9,11 +9,11 @@ namespace Z0.Asm
 
     using static Seed;
 
-    using E = CaptureWorkflowEvents.HostMembersLocated;
+    using E = CaptureWorkflowEvents.MembersLocated;
 
     partial class CaptureWorkflowEvents
     {
-        public readonly struct HostMembersLocated : IAppEvent<E>
+        public readonly struct MembersLocated : IAppEvent<E>
         {
             public static E Empty => new E(ApiHostUri.Empty, new Member[]{});
 
@@ -22,7 +22,7 @@ namespace Z0.Asm
                 => new E(host, members);
 
             [MethodImpl(Inline)]
-            HostMembersLocated(ApiHostUri host, Member[] functions)
+            MembersLocated(ApiHostUri host, Member[] functions)
             {
                 this.Host = host;
                 this.Members = functions;

@@ -8,15 +8,15 @@ namespace Z0.Asm
     
     using static CaptureWorkflowEvents;
 
-    public interface IMembersLocatedBroker : IEventBroker
+    public interface IFunctionsDecodedBroker : IEventBroker
     {
-        MembersLocated MembersLocated => MembersLocated.Empty;
+        FunctionsDecoded FunctionsDecoded => FunctionsDecoded.Empty;
     }
 
-    public interface IMembersLocatedClient<C> : IBrokerClient<C>
-        where C : IMembersLocatedBroker
+    public interface IFunctionsDecodedClient<C> : IBrokerClient<C>
+        where C : IFunctionsDecodedBroker
     {
-        void OnEvent(MembersLocated e) 
+        void OnEvent(FunctionsDecoded e) 
             => Sink.Deposit(e);
     }
 }

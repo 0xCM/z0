@@ -12,6 +12,8 @@ namespace Z0
     public interface IBrokerClient
     {
         IEventBroker Broker {get;}
+
+        IAppMsgSink Sink {get;}
     }
 
     public interface IBrokerClient<E> : IBrokerClient
@@ -26,15 +28,18 @@ namespace Z0
         where E : IEventBroker
     {
         [MethodImpl(Inline)]
-        public static IBrokerClient<E> Create(E broker)
-            => new BrokerClient<E>(broker);
+        public static IBrokerClient<E> Create(E broker, IAppMsgSink sink)
+            => new BrokerClient<E>(broker,sink);
 
         [MethodImpl(Inline)]
-        public BrokerClient(E broker)
+        public BrokerClient(E broker, IAppMsgSink sink)
         {
             this.Broker = broker;
+            Sink = sink;
         }
         
         public E Broker {get;}
+
+        public IAppMsgSink Sink {get;}
     }
 }

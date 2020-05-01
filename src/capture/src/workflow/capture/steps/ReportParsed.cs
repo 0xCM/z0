@@ -14,16 +14,14 @@ namespace Z0.Asm
     {
         public readonly struct ReportParsedStep : IReportParsedStep
         {
-            readonly CaptureWorkflowContext Context;
+            public ICaptureWorkflow Workflow {get;}
+
+            public ICaptureContext Context => Workflow.Context;
 
             [MethodImpl(Inline)]
-            internal static ReportParsedStep Create(CaptureWorkflowContext context)
-                => new ReportParsedStep(context);
-
-            [MethodImpl(Inline)]
-            internal ReportParsedStep(CaptureWorkflowContext context)
+            internal ReportParsedStep(ICaptureWorkflow workflow)
             {
-                this.Context = context;
+                Workflow = workflow;
             }
 
             public MemberParseReport CreateParseReport(ApiHostUri host, ParsedMember[] src)

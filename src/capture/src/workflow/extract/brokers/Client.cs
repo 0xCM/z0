@@ -15,9 +15,9 @@ namespace Z0.Asm
     {
         void OnEvent(AppErrorEvent e) { }
 
-        void OnEvent(HostMembersLocated e) { }
+        void OnEvent(MembersLocated e) { }
 
-        void OnEvent(HostMembersExtracted e) { }
+        void OnEvent(MembersExtracted e) { }
 
         void OnEvent(ExtractReportCreated e) { }
 
@@ -39,15 +39,18 @@ namespace Z0.Asm
     public readonly struct ExtractionBrokerClient : IExtractionBrokerClient
     {
         [MethodImpl(Inline)]
-        public static IExtractionBrokerClient Create(IExtractionBroker broker, bool connect = true)
-            => new ExtractionBrokerClient(broker, connect);
+        public static IExtractionBrokerClient Create(IExtractionBroker broker, IAppMsgSink sink, bool connect = true)
+            => new ExtractionBrokerClient(broker, sink,connect);
 
         public IExtractionBroker Broker {get;}
 
+        public IAppMsgSink Sink {get;}
+
         [MethodImpl(Inline)]
-        public ExtractionBrokerClient(IExtractionBroker broker, bool connect)
+        public ExtractionBrokerClient(IExtractionBroker broker, IAppMsgSink sink, bool connect)
         {
             Broker = broker;
+            Sink = sink;
             if(connect)
                 (this as IExtractionBrokerClient).Connect();
         }

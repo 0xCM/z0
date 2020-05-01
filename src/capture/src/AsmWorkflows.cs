@@ -25,10 +25,17 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal AsmWorkflows(IAsmContext context) => Context = context;
 
+        [MethodImpl(Inline)]
+        IHostCaptureService HostCaptureService(FolderName area, FolderName subject)
+            => new HostCaptureService(Context, area ?? FolderName.Empty, subject ?? FolderName.Empty);
+
     }
     
     public interface IAsmWorkflows : IAsmContextual
     {
+        CaptureExchange CaptureExchange
+            => Asm.CaptureExchange.Create(Context);        
+            
         [MethodImpl(Inline)]
         IMemoryExtractor ICaptureServices.MemoryExtractor(byte[] buffer)
             => Svc.MemoryExtractor.Create(buffer);
@@ -37,38 +44,17 @@ namespace Z0.Asm
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
             => new ImmSpecializer(decoder);        
 
-        /// <summary>
-        /// Creates a function decoder
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="format">The format configuration</param>
         [MethodImpl(Inline)]
         IAsmFunctionDecoder ICaptureServices.AsmDecoder(in AsmFormatSpec? format)
             => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
 
         [MethodImpl(Inline)]
-        IHostAsmArchiver ICaptureServices.ImmFunctionArchive(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => AsmArchiver(host, formatter, dst);
-
-        /// <summary>
-        /// Creates a capture serivce predicated, or not, on an optionally-specified divination service
-        /// </summary>
-        /// <param name="diviner">A divination service, or not</param>
-        [MethodImpl(Inline)]
         ICaptureService ICaptureServices.CaptureService(IMultiDiviner diviner)
             => new CaptureService(diviner ?? Diviner);        
 
-        /// <summary>
-        /// Creates a code extractor with an optionally-specified buffer length
-        /// </summary>
-        /// <param name="bufferlen">The desired buffer length</param>
         [MethodImpl(Inline)]
         IHostCodeExtractor ICaptureServices.HostExtractor(int? bufferlen)
             => HostCodeExtractor.Create(bufferlen ?? Pow2.T14);
-
-        [MethodImpl(Inline)]
-        IHostCaptureService IAsmContextual.HostCaptureService(FolderName area, FolderName subject)
-            => new HostCaptureService(Context, area ?? FolderName.Empty, subject ?? FolderName.Empty);
 
         [MethodImpl(Inline)]
         IHostCaptureService IAsmContextual.HostCaptureService(FolderPath root)
@@ -79,10 +65,7 @@ namespace Z0.Asm
             => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, dst);
 
         [MethodImpl(Inline)]
-        IHostCaptureWorkflow HostCaptureWorkflow(IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory)
-            => new HostCaptureWorkflow(Context, decoder, formatter, writerfactory);      
-
-        CaptureExchange CaptureExchange
-            => Asm.CaptureExchange.Create(Context);
+        ICaptureWorkflow CaptureWorkflow(IAsmFunctionDecoder decoder, IAsmFormatter formatter, ICaptureArchive archive)
+            => new CaptureWorkflow(Context, decoder, formatter, AsmWorkflows.Stateless.AsmWriterFactory, archive);
     }
 }

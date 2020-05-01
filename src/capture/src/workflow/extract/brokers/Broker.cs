@@ -13,14 +13,14 @@ namespace Z0.Asm
 
     sealed class ExtractionBroker : EventBroker<ExtractionBroker,IExtractionBroker>, IExtractionBroker
     {
-        IExtractionBrokerClient Client => ExtractionBrokerClient.Create(this);
+        //IExtractionBrokerClient Client => ExtractionBrokerClient.Create(this);
     }
 
     public interface IExtractionBroker : IStepBroker
     {
-        HostMembersLocated MembersLocated => HostMembersLocated.Empty;
+        MembersLocated MembersLocated => MembersLocated.Empty;
 
-        HostMembersExtracted MembersExtracted => HostMembersExtracted.Empty;
+        MembersExtracted MembersExtracted => MembersExtracted.Empty;
 
         ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
 

@@ -9,11 +9,11 @@ namespace Z0.Asm
 
     using static Seed;
 
-    using E = CaptureWorkflowEvents.HostAsmHexSaved;
+    using E = CaptureWorkflowEvents.HexSaved;
 
     partial class CaptureWorkflowEvents
     {
-        public readonly struct HostAsmHexSaved : IAppEvent<E>
+        public readonly struct HexSaved : IAppEvent<E>
         {
             public static E Empty => new E(ApiHostUri.Empty, new UriBits[]{}, FilePath.Empty);
 
@@ -22,7 +22,7 @@ namespace Z0.Asm
                 => new E(host,code,dst);
             
             [MethodImpl(Inline)]
-            HostAsmHexSaved(ApiHostUri host, UriBits[] code, FilePath dst)
+            HexSaved(ApiHostUri host, UriBits[] code, FilePath dst)
             {
                 this.Host = host;
                 this.Payload = code;

@@ -14,4 +14,5 @@ namespace Z0
 
         AppErrorEvent Error => AppErrorEvent.Empty;
     }
+    
 }

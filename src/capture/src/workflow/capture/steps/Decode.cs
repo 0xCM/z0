@@ -13,19 +13,21 @@ namespace Z0.Asm
     partial class HostCaptureSteps
     {
         public readonly struct DecodeStep : IDecodeStep
-        {
-            readonly CaptureWorkflowContext Context;
+        {            
+            public ICaptureWorkflow Workflow {get;}
+
+            public ICaptureContext Context => Workflow.Context;
             
             [MethodImpl(Inline)]
-            internal DecodeStep(CaptureWorkflowContext context)
+            internal DecodeStep(ICaptureWorkflow workfow)
             {
-                this.Context = context;
+                Workflow = workfow;
             }
 
             public AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMember[] parsed)
             {                
                 var functions = DecodeExtracts(parsed);
-                Context.Raise(HostFunctionsDecoded.Define(host, functions));
+                Context.Raise(FunctionsDecoded.Define(host, functions));
                 return functions;
             }
 
