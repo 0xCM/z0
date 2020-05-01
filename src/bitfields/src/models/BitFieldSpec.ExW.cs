@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;    
     using static Memories;
 
-   public readonly struct BitFieldSpec<E,W> : IFormattable<BitFieldSpec<E,W>>
+   public readonly struct BitFieldSpec<E,W> : ITextual<BitFieldSpec<E,W>>
         where E : unmanaged, Enum
         where W : unmanaged, Enum
     {

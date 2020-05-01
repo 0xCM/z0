@@ -33,7 +33,7 @@ namespace Z0
         }
     }
 
-    public interface IAppPaths : ICustomFormattable
+    public interface IAppPaths : ITextual
     {
         /// <summary>
         /// The application part identifier
@@ -199,6 +199,6 @@ namespace Z0
         IAppPaths ForApp(PartId dst)
             => AppPaths.Create(dst, Root);
 
-        string ICustomFormattable.Format() => AppName;
+        string ITextual.Format() => AppName;
     }
 }

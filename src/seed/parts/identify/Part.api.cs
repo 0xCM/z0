@@ -16,7 +16,6 @@ namespace Z0
 
     public static class Part
     {
-
         public static PartIndex Index => DeferredIndex.Value;        
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace Z0
         /// Attempts to resolve a part resolution type
         /// </summary>
         static Option<Type> resolve(Assembly src)
-            => src.GetTypes().Where(t => t.Realizes<IPart>() && !t.IsAbstract).FirstOrDefault();
+            => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).FirstOrDefault();
 
         /// <summary>
         /// Attempts to resolve a part resolution property

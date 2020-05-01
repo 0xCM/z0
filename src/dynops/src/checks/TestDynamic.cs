@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;        
 
-    public interface ITestDynamic :  ITestDynamicBinary, ITestDynamicUnary, ITestDynamicNumeric, ICheckFixedDynamic
+    public interface ITestDynamic :  ITestDynamicBinaryOp, ITestDynamicUnary, ITestDynamicNumeric, ICheckFixedDynamic
     {       
         
     }

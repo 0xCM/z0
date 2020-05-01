@@ -16,7 +16,7 @@ namespace Z0
     /// Characterizes a correlated message, accompanied by arbitrary content, that describes something that occurred
     /// within the system
     /// </summary>
-    public interface IAppEvent : ICorrelated, ICustomFormattable
+    public interface IAppEvent : ICorrelated, ITextual
     {
         /// <summary>
         /// The data associated with the event
@@ -29,7 +29,7 @@ namespace Z0
 
         AppMsgColor Flair => AppMsgColor.Blue;
 
-        string ICustomFormattable.Format()        
+        string ITextual.Format()        
             => Description;
 
         IAppMsg Message => AppMsg.Colorize(Format(), Flair);

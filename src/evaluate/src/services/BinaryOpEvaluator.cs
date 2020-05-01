@@ -15,20 +15,20 @@ namespace Z0
     {
         IDynexus Dynamic => Dynops.Services.Dynexus;
 
-        public ref readonly BinaryEval<T> Evaluate(in BinaryOpEval<T> package)
+        public ref readonly BinaryEval<T> Evaluate(in BinaryOpEval<T> exchange)
         {
-            var f = package.ApiCode.Member.Method.CreateDelegate<BinaryOp<T>>();
-            var g = Dynamic.EmitBinaryOp<T>(package.Buffers[Left], package.ApiCode);
+            var f = exchange.ApiCode.Member.Method.CreateDelegate<BinaryOp<T>>();
+            var g = Dynamic.EmitBinaryOp<T>(exchange.Buffers[Left], exchange.ApiCode);
 
-            for(var i=0; i<package.SrcCount; i++)
+            for(var i=0; i<exchange.SrcCount; i++)
             {
-                ref readonly var pair = ref package.Src[i];
+                ref readonly var pair = ref exchange.Src[i];
                 ref readonly var x = ref pair.Left;
                 ref readonly var y = ref pair.Right;
                 
-                package.Dst.Target[i] = (f(x,y), g(x, y));
+                exchange.Dst.Target[i] = (f(x,y), g(x, y));
             }   
-            return ref package.Content;         
+            return ref exchange.Content;         
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Z0.Logix
     /// Defines a question in the context of a survey
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public readonly struct Question<T> : IFormattable<Question<T>>
+    public readonly struct Question<T> : ITextual<Question<T>>
         where T : unmanaged
     {
         /// <summary>

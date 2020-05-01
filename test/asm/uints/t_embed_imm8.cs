@@ -81,7 +81,7 @@ namespace Z0.Asm
 
             foreach(var imm in Immediates)
             {
-                var method = Dynamic.EmbedUnaryImm(w, src, imm).Require();
+                var method = Dynamic.CreateUnaryOp(w, src, imm).Require();
                 var vOutput = method.Invoke(vones);
                 var id = src.Identify().WithImm8(imm);
                 var capture = AsmCheck.Capture(id, method).Require();
@@ -142,7 +142,7 @@ namespace Z0.Asm
 
             foreach(var imm in Immediates)
             {
-                var method = Dynamic.EmbedUnaryImm(w, src, imm).Require();
+                var method = Dynamic.CreateUnaryOp(w, src, imm).Require();
                 var vOutput = method.Invoke(vones);
                 var id = src.Identify().WithImm8(imm);
                 var capture = AsmCheck.Capture(id, method).Require();

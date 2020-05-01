@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct ReportFieldInfo : IFormattable<ReportFieldInfo>
+    public readonly struct ReportFieldInfo : ITextual<ReportFieldInfo>
     {
         public readonly string Name;
 

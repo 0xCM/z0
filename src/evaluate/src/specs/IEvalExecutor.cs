@@ -11,6 +11,5 @@ namespace Z0
         EvalResult ExecAction(Action action, OpUri f);   
 
         EvalResult ExecAction(Action action, OpUri f, OpUri g);
-    }
-    
+    }    
 }

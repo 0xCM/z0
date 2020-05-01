@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a nonparametric kvp application setting
     /// </summary>
-    public readonly struct AppSetting : IFormattable<AppSetting, AppSettingFormat>, IAppSetting
+    public readonly struct AppSetting : ITextual<AppSetting, AppSettingFormat>, IAppSetting
     {
         /// <summary>
         /// The setting name

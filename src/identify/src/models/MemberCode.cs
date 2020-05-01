@@ -44,7 +44,7 @@ namespace Z0
         {
             Member = member;
             KindId = member.KindId;  
-            Content = OperationCode.Define(member.Id, code);   
+            Content = OperationCode.Define(member.OpUri, code);   
         }
 
         public ReadOnlySpan<byte> Bytes 

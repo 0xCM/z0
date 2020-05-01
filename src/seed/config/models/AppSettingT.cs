@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a value-parametric application setting
     /// </summary>
-    public readonly struct AppSetting<T> : IAppSetting<T>, IFormattable<AppSetting<T>, AppSettingFormat> 
+    public readonly struct AppSetting<T> : IAppSetting<T>, ITextual<AppSetting<T>, AppSettingFormat> 
     {        
         /// <summary>
         /// The setting name

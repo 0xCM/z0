@@ -20,7 +20,7 @@ namespace Z0
 
         static NativeNaturals()
         {
-            var types = typeof(N0).Assembly.GetTypes().Where(t => t.Realizes<INativeNatural>()).ToArray();
+            var types = typeof(N0).Assembly.GetTypes().Where(t => t.Reifies<INativeNatural>()).ToArray();
             for(var i=0; i<types.Length; i++)
             {
                 var t = types[i];

@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an application settings provider that supports settings persistence
     /// </summary>
-    public interface IAppSettingsProvider : ICustomFormattable
+    public interface IAppSettingsProvider : ITextual
     {
         /// <summary>
         /// The provided settings
@@ -28,7 +28,7 @@ namespace Z0
     /// Characterizes an F-bound polymorphic app setting set reification
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IAppSettingsProvider<F> : IAppSettingsProvider, IFormattable<F>
+    public interface IAppSettingsProvider<F> : IAppSettingsProvider, ITextual<F>
         where F : IAppSettingsProvider<F>, new()
     {
         

@@ -47,7 +47,7 @@ namespace Z0
             => CellWidth < DataWidth;        
     }
 
-    public interface IVariant<V>  : IVariant, IEquatable<V>, IFormattable<V>
+    public interface IVariant<V>  : IVariant, IEquatable<V>, ITextual<V>
         where V : unmanaged, IVariant<V>
     {
 

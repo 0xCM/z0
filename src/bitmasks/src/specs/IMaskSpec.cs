@@ -9,7 +9,7 @@ namespace Z0
 
     using static Memories;
 
-    public interface IMaskSpec : ICustomFormattable
+    public interface IMaskSpec : ITextual
     {        
         MaskKind M {get;}
 
@@ -29,7 +29,7 @@ namespace Z0
     {
         T t => default;
 
-        string ICustomFormattable.Format()
+        string ITextual.Format()
             => $"lsb(f:{value<F>()}, d:{value<D>()}, t:{typeof(T).NumericKind().Format()})";        
     }
 

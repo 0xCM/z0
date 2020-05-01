@@ -36,7 +36,7 @@ namespace Z0.Asm
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm)
         {
             var width = VectorType.width(src.ReturnType);
-            var f = Dynamic.EmbedUnaryImm(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var f = Dynamic.CreateUnaryOp(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
@@ -49,7 +49,7 @@ namespace Z0.Asm
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
             var width = VectorType.width(src.ReturnType);
-            var f = Dynamic.EmbedUnaryImm(width, src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var f = Dynamic.CreateUnaryOp(width, src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
@@ -71,7 +71,7 @@ namespace Z0.Asm
         public Option<AsmFunction> BinaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
             var width = VectorType.width(src.ReturnType);
-            var f = Dynamic.EmbedBinaryImm(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var f = Dynamic.CreateBinaryOp(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return     
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)

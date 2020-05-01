@@ -116,6 +116,7 @@ namespace Z0
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);  
         }
 
+
         /// <summary>
         /// Verifies that two 32-bit binary operators agree over a random set of points
         /// </summary>

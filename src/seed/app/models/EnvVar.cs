@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a nonparametric environment variable
     /// </summary>
-    public readonly struct EnvVar : IFormattable<EnvVar>
+    public readonly struct EnvVar : ITextual<EnvVar>
     {
         /// <summary>
         /// The environment variable name

@@ -14,12 +14,12 @@ namespace Z0
 
     interface IEvalDispatcher : IService
     {
-        bit EvalFixedOperators(in BufferSeq buffers, MemberCode[] api);
+        bit EvalFixedOperators(BufferTokens buffers, MemberCode[] api);
 
-        void Dispatch(in BufferSeq buffers, in MemberCode api, K.BinaryOpClass k);    
+        void Dispatch(BufferTokens buffers, in MemberCode api, K.BinaryOpClass k);    
 
-        void Dispatch(in BufferSeq buffers, in MemberCode api, K.UnaryOpClass k);    
+        void Dispatch(BufferTokens buffers, in MemberCode api, K.UnaryOpClass k);    
 
-        bit EvalFixedOperator(in BufferSeq buffers, in MemberCode api);
+        bit EvalFixedOperator(BufferTokens buffers, in MemberCode api);
     }
 }

@@ -26,13 +26,13 @@ namespace Z0
         void WriteMessages(IEnumerable<IAppMsg> messages);
 
         void WriteLines<F>(params F[] src)
-            where F : ICustomFormattable;        
+            where F : ITextual;        
 
         void WriteLine<F>(F src, AppMsgColor color)
-            where F : ICustomFormattable;
+            where F : ITextual;
 
         void WriteLines<F>(AppMsgColor color, params F[] src)
-            where F : ICustomFormattable;
+            where F : ITextual;
 
         string ReadLine(IAppMsg msg = null);
 

@@ -25,7 +25,6 @@ namespace Z0
         /// </summary>
         public int Size {get;}
 
-
         /// <summary>
         /// Creates an array of tokens that identify a squence of buffers
         /// </summary>

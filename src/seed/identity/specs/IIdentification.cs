@@ -28,7 +28,7 @@ namespace Z0
         Method = 4,
     }
 
-    public interface IIdentification : IIdentified, ICustomFormattable, IComparable
+    public interface IIdentification : IIdentified, ITextual, IComparable
     {
         IdentityTargetKind TargetKind  
             => IdentityTargetKind.Type;
@@ -45,7 +45,7 @@ namespace Z0
                     StringComparison.InvariantCultureIgnoreCase);
     
         [MethodImpl(Inline)]
-        string ICustomFormattable.Format() => DenullifiedIdentity;
+        string ITextual.Format() => DenullifiedIdentity;
 
         int IComparable.CompareTo(object src)
             => DenullifiedIdentity.CompareTo((src as IIdentified)?.Identifier);

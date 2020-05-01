@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Along with the associated kind, partitions numberic types into three parts: signed, unsigned and float
     /// </summary>
-    public readonly struct TypeIndicator : IFormattable<TypeIndicator>
+    public readonly struct TypeIndicator : ITextual<TypeIndicator>
     {
         public static TypeIndicator Empty = Define(null);
 

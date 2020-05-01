@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Characterizes, in dependency injection vernacular, composition roots
     /// </summary>
-    public interface IApiComposition : ICustomFormattable
+    public interface IApiComposition : ITextual
     {
         /// <summary>
         /// The resolved assemblies that comprise the composition

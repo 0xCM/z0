@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T one<T>()
             where T : unmanaged
                 => Literals.one<T>();

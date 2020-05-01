@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IAppMsg : ICustomFormattable
+    public interface IAppMsg : ITextual
     {
         /// <summary>
         /// The message body

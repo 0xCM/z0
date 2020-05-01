@@ -23,7 +23,7 @@ namespace Z0
             => new Member(uri,method, kindId, address ?? MemoryAddress.Zero);
 
         [MethodImpl(Inline)]
-        Member(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
+        internal Member(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
         {
             this.Id = uri.OpId;
             this.OpUri = uri;

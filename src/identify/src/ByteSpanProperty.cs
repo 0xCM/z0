@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct ByteSpanProperty : IFormattable<ByteSpanProperty>
+    public readonly struct ByteSpanProperty : ITextual<ByteSpanProperty>
     {
         [MethodImpl(Inline)]
         public static ByteSpanProperty Define(string name, byte[] data, bool isStatic = true, ClrAccessKind access = ClrAccessKind.Public)

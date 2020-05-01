@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="sep">A character that denotes the end of a label and indicate that what follows is content</param>
         /// <param name="content">The content to append</param>
         public static void AppendLabeled<T>(this StringBuilder sb, string label, char sep, T content)
-            where T : ICustomFormattable
+            where T : ITextual
         {
             sb.AppendLabel(label,sep);
             sb.Append(content.Format());

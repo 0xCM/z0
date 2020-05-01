@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// The bits found at the end of a uri
     /// </summary>
-    public readonly struct UriBits : IFormattable<UriBits>
+    public readonly struct UriBits : ITextual<UriBits>
     {
         public string Identifier {get;}
 

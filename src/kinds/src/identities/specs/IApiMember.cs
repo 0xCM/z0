@@ -15,7 +15,7 @@ namespace Z0
     
     }        
 
-    public interface IApiMember<T> : IApiMember, IEquatable<T>, IFormattable<T>, INullary<T>
+    public interface IApiMember<T> : IApiMember, IEquatable<T>, ITextual<T>, INullary<T>
         where T : struct, IApiMember<T>
     {
 

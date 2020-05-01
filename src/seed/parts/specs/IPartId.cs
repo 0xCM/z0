@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    public interface IPartId : ICustomFormattable
+    public interface IPartId : ITextual
     {
         /// <summary>
         /// The part identifier literal value

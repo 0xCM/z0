@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         /// <param name="flags">The reflection query flags</param>
-        public static IEnumerable<MethodInfo> SpecialMethods(this Type src, BindingFlags flags)
+        public static MethodInfo[] SpecialMethods(this Type src, BindingFlags flags)
             => src.FlaggedMethods(flags).Where(m =>  m.IsNonSpecial());
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         /// <param name="flags">The reflection query flags</param>
-        public static IEnumerable<MethodInfo> NonSpecialMethods(this Type src, BindingFlags flags)
+        public static MethodInfo[] NonSpecialMethods(this Type src, BindingFlags flags)
             => src.FlaggedMethods(flags).Where(IsNonSpecial);
     }
 }

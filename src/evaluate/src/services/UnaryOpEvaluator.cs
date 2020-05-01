@@ -15,18 +15,18 @@ namespace Z0
     {
         IDynexus Dynamic => Dynops.Services.Dynexus;
 
-        public ref readonly UnaryEval<T> Evaluate(in UnaryOpEval<T> package)
+        public ref readonly UnaryEval<T> Evaluate(in UnaryOpEval<T> exchange)
         {
-            var f = package.ApiCode.Member.Method.CreateDelegate<UnaryOp<T>>();
-            var g = Dynamic.EmitUnaryOp<T>(package.Buffers[Left], package.ApiCode);
+            var f = exchange.ApiCode.Member.Method.CreateDelegate<UnaryOp<T>>();
+            var g = Dynamic.EmitUnaryOp<T>(exchange.Buffers[Left], exchange.ApiCode);
 
-            for(var i=0; i<package.SrcCount; i++)
+            for(var i=0; i<exchange.SrcCount; i++)
             {
-                ref readonly var x = ref package.Src[i];
-                package.Dst.Target[i] = (f(x), g(x));
+                ref readonly var x = ref exchange.Src[i];
+                exchange.Dst.Target[i] = (f(x), g(x));
             }   
             
-            return ref package.Content;         
+            return ref exchange.Content;         
         }
     }
 }

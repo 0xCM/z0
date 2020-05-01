@@ -19,8 +19,8 @@ namespace Z0
         void CheckFixedMatch<F>(K.UnaryOpClass k, OperationCode a, OperationCode b)
             where F : unmanaged, IFixed
         {                        
-            var f = Dynamic.EmitFixedUnary<F>(Buffers[(int)Left], a);
-            var g = Dynamic.EmitFixedUnary<F>(Buffers[(int)Right], b);
+            var f = Dynamic.EmitFixedUnary<F>(Buffers[Left], a);
+            var g = Dynamic.EmitFixedUnary<F>(Buffers[Right], b);
             
             var stream = Random.FixedStream<F>();
             notnull(stream);

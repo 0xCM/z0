@@ -10,7 +10,7 @@ namespace Z0
     
     using static Seed;
 
-    public readonly struct IdentifiedMethod : IFormattable<IdentifiedMethod>
+    public readonly struct IdentifiedMethod : ITextual<IdentifiedMethod>
     {
         [MethodImpl(Inline)]
         public static IdentifiedMethod Define(OpIdentity id, MethodInfo method)

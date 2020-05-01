@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes a block of memory the context of an asm instruction operand
     /// </summary>
-    public struct AsmMemInfo : IFormattable<AsmMemInfo>
+    public struct AsmMemInfo : ITextual<AsmMemInfo>
     {      
         [MethodImpl(Inline)]
         public static AsmMemInfo Init(MemorySize size, string sizefmt)

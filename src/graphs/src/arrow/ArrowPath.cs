@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Graphs;
 
-    public readonly struct ArrowPath<A,B> : IMixedPath<A,B>, IFormattable<ArrowPath<A,B>>, IEquatable<ArrowPath<A,B>>
+    public readonly struct ArrowPath<A,B> : IMixedPath<A,B>, ITextual<ArrowPath<A,B>>, IEquatable<ArrowPath<A,B>>
     {
         public A Src {get;}
 
@@ -42,7 +42,7 @@ namespace Z0
             => Format();
     }
 
-    public readonly struct MixedPath<A,B,C> : IMixedPath<A,B,C>, IFormattable<MixedPath<A,B,C>>, IEquatable<MixedPath<A,B,C>>
+    public readonly struct MixedPath<A,B,C> : IMixedPath<A,B,C>, ITextual<MixedPath<A,B,C>>, IEquatable<MixedPath<A,B,C>>
     {
         public A Src {get;}
 
@@ -77,7 +77,7 @@ namespace Z0
             => Format();        
     }
 
-    public readonly struct MixedPath<A,B,C,D> : IPath<A,B,C,D>, IFormattable<MixedPath<A,B,C,D>>, IEquatable<MixedPath<A,B,C,D>>
+    public readonly struct MixedPath<A,B,C,D> : IPath<A,B,C,D>, ITextual<MixedPath<A,B,C,D>>, IEquatable<MixedPath<A,B,C,D>>
     {
         public A Src {get;}
 

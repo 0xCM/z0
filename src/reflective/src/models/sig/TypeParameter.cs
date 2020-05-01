@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Represents a type parameter in a generic artifact definition
     /// </summary>
-    public readonly struct TypeParameter : IFormattable<TypeParameter>
+    public readonly struct TypeParameter : ITextual<TypeParameter>
     {    
         public string Name {get;}
 

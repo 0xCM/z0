@@ -10,7 +10,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct RecordFormatter<F,R> : IFormattable<RecordFormatter<F,R>>
+    public readonly struct RecordFormatter<F,R> : ITextual<RecordFormatter<F,R>>
         where F : unmanaged, Enum
         where R : IRecord<F,R>
     {        
@@ -44,13 +44,13 @@ namespace Z0
         }
 
         public void AppendField<T>(F f, T content)
-            where T : ICustomFormattable
+            where T : ITextual
         {
             Builder.Append($"{content?.Format()}".PadRight(Reports.width(f)));
         }
 
         public void DelimitField<T>(F f, T content, char delimiter)
-            where T : ICustomFormattable
+            where T : ITextual
         {
             Builder.Append(rspace(delimiter));            
             Builder.Append($"{content?.Format()}".PadRight(Reports.width(f)));

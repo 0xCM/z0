@@ -19,6 +19,14 @@ namespace Z0
                 throw new Exception($"Application invaraiant failed");
         }
 
+        public static T require<T>(T src)
+            where T : class
+        {
+            if(src == null)
+                throw new NullReferenceException($"Application nullity invaraiant failed for {typeof(T)}");
+            return src;
+        }
+
         public static void require(bool invariant, string msg)
         {
             if(!invariant)

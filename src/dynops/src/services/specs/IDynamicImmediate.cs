@@ -11,10 +11,24 @@ namespace Z0
 
     using static Seed;
 
-    using K = Kinds;
-
     public interface IDynamicImmediate
     {
+        /// <summary>
+        /// Creates a unary operator with an immedded immediate value
+        /// </summary>
+        /// <param name="w">The operand width</param>
+        /// <param name="src">The defining method that requires an immediate value</param>
+        /// <param name="imm">The immediate value to embed</param>
+        Option<DynamicDelegate> CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm);
+
+        /// <summary>
+        /// Creates a binary operator with an immedded immediate value
+        /// </summary>
+        /// <param name="w">The operand width</param>
+        /// <param name="src">The defining method that requires an immediate value</param>
+        /// <param name="imm">The immediate value to embed</param>
+        Option<DynamicDelegate> CreateBinaryOp(TypeWidth w, MethodInfo src, byte imm);
+
         /// <summary>
         /// Creates an immediate injector for unary operators with non-immediate operands of parametric width
         /// </summary>
@@ -76,7 +90,7 @@ namespace Z0
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]            
-        DynamicDelegate<UnaryOp<Vector128<T>>> UnaryOp<T>(MethodInfo src, W128 w, byte imm)
+        DynamicDelegate<UnaryOp<Vector128<T>>> CreateUnaryOp<T>(MethodInfo src, W128 w, byte imm)
             where T : unmanaged;
 
         /// <summary>
@@ -85,7 +99,7 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        DynamicDelegate<BinaryOp<Vector128<T>>> BinaryOp<T>(MethodInfo src, W128 w, byte imm)
+        DynamicDelegate<BinaryOp<Vector128<T>>> CreateBinaryOp<T>(MethodInfo src, W128 w, byte imm)
             where T : unmanaged;
 
         /// <summary>
@@ -94,7 +108,7 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        DynamicDelegate<UnaryOp<Vector256<T>>> UnaryOp<T>(MethodInfo src, W256 w, byte imm)        
+        DynamicDelegate<UnaryOp<Vector256<T>>> CreateUnaryOp<T>(MethodInfo src, W256 w, byte imm)        
             where T : unmanaged;
 
         /// <summary>
@@ -103,12 +117,7 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        DynamicDelegate<BinaryOp<Vector256<T>>> BinaryOp<T>(MethodInfo src, W256 w, byte imm)        
+        DynamicDelegate<BinaryOp<Vector256<T>>> CreateBinaryOp<T>(MethodInfo src, W256 w, byte imm)        
             where T : unmanaged;
-
-        Option<DynamicDelegate> EmbedUnaryImm(TypeWidth w, MethodInfo src, byte imm8);
-
-        Option<DynamicDelegate> EmbedBinaryImm(TypeWidth w, MethodInfo src, byte imm8);
-
     }   
 }

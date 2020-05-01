@@ -16,7 +16,7 @@ namespace Z0
         /// Selects all instance/static and public/non-public fields declared by a type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static IEnumerable<FieldInfo> DeclaredFields(this Type src)
+        public static FieldInfo[] DeclaredFields(this Type src)
             => src.GetFields(BF_Declared);
     }
 }

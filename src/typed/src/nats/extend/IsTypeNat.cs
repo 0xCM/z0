@@ -9,6 +9,6 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to test</param>
         public static bool IsTypeNat(this Type t)
-            => t.Realizes<ITypeNat>();
+            => t.Reifies<ITypeNat>();
     }
 }

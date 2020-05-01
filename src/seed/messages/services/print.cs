@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="content">The content to print</param>    
         public static void print<F>(F src, AppMsgColor color)
-            where F : ICustomFormattable
+            where F : ITextual
                 => T.WriteLine(src, color);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="content">The content to print</param>    
         public static void print<F>(F src)
-            where F : ICustomFormattable
+            where F : ITextual
                 => T.WriteLine(src, AppMsgColor.Green);
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="content">The content to print</param>    
         public static void print<F>(params F[] src)
-            where F : ICustomFormattable
+            where F : ITextual
                 => T.WriteLines(src);
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="color">The message foreground color</param>    
         /// <param name="content">The content to print</param>    
         public static void print<F>(AppMsgColor color, params F[] content)
-            where F : ICustomFormattable
+            where F : ITextual
                 => T.WriteLines(color,content);
 
         /// <summary>

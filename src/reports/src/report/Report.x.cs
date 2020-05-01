@@ -35,7 +35,7 @@ namespace Z0
                     => Reports.save(records, dst, delimiter, header, mode);
 
         public static void AppendDelimited<C,F>(this StringBuilder sb, C content, F field, char delimiter)
-            where C : ICustomFormattable
+            where C : ITextual
             where F : unmanaged, Enum
         {
             var pad = Reports.width(field);
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         public static void AppendField<C,F>(this StringBuilder sb, C content, F field)
-            where C : ICustomFormattable
+            where C : ITextual
             where F : unmanaged, Enum
         {            
             var pad = Reports.width(field);

@@ -18,7 +18,7 @@ namespace Z0
     /// Common parametric tuple contract
     /// </summary>
     /// <typeparam name="K">The reifying type</typeparam>
-    public interface ITuple<K> : ITuple, IEquatable<K>, IFormattable<K>
+    public interface ITuple<K> : ITuple, IEquatable<K>, ITextual<K>
         where K : ITuple<K>
     {
 

@@ -25,7 +25,7 @@ namespace Z0
         }
 
         public static void AppendLines<F>(this StringBuilder src, IEnumerable<F> items)
-            where F : ICustomFormattable
+            where F : ITextual
                 => src.AppendLines(Formattable.items(items));
     }
 }

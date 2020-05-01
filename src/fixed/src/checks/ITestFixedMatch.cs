@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
         
-    public interface ITestFixedMatch : ITestBinaryFixedMatch, ITestUnaryFixedMatch
+    public interface ITestFixedMatch : ITestFixedBinaryOp, ITestUnaryFixedMatch
     {        
 
     }

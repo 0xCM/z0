@@ -20,5 +20,6 @@ namespace Z0
                 let m = p.GetGetMethod() ?? p.GetSetMethod()                
                 where m != null && !m.IsStatic
                 select p;            
+
     }
 }

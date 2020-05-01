@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Represents a method (value, not type) parameter 
     /// </summary>
-    public readonly struct MethodParameter : IFormattable<MethodParameter>
+    public readonly struct MethodParameter : ITextual<MethodParameter>
     {        
         public string Name {get;}
 

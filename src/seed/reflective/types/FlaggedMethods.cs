@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         /// <param name="flags">The reflection query flags</param>
-        public static IEnumerable<MethodInfo> FlaggedMethods(this Type src, BindingFlags flags)
+        public static MethodInfo[] FlaggedMethods(this Type src, BindingFlags flags)
             => src.GetMethods(flags);
     }
 }

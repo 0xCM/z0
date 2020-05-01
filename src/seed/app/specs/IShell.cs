@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Characterizes console-controlled, perhaps user-initiated, thread of execution
     /// </summary>
-    public interface IShell : IExecutable, IServiceAllocation, ICustomFormattable
+    public interface IShell : IExecutable, IServiceAllocation, ITextual
     {        
         void OnFatalError(Exception e);
 
@@ -25,7 +25,7 @@ namespace Z0
 
         void RunShell(params string[] args);
 
-        string ICustomFormattable.Format() => AppId.Format();
+        string ITextual.Format() => AppId.Format();
 
         void Print(object content, AppMsgColor? color = null)
         {

@@ -13,70 +13,70 @@ namespace Z0
 
     public interface ITestDynamicUnary : ITester, ITestOperatorMatch, ICheckDynamic
     {
-        TestCaseRecord Match(in BufferSeq buffers, K k, TypeWidth w, OperationCode a, OperationCode b)
+        TestCaseRecord Match(K k, TypeWidth w, OperationCode a, OperationCode b, BufferTokens dst)
         {
             switch(w)
             {
                 case TypeWidth.W8:
-                    return Match(buffers, k, w8, a, b);
+                    return Match(k, w8, a, b, dst);
 
                 case TypeWidth.W16:
-                    return Match(buffers, k, w16, a, b);
+                    return Match(k, w16, a, b, dst);
 
                 case TypeWidth.W32:
-                    return Match(buffers, k, w32, a, b);
+                    return Match(k, w32, a, b, dst);
 
                 case TypeWidth.W64:
-                    return Match(buffers, k, w64, a, b);
+                    return Match(k, w64, a, b, dst);
 
                 case TypeWidth.W128:
-                    return Match(buffers, k, w128, a, b);
+                    return Match(k, w128, a, b, dst);
 
                 case TypeWidth.W256:
-                    return Match(buffers, k, w256, a, b);
+                    return Match(k, w256, a, b, dst);
             }
             throw Unsupported.define(w.GetType());
         }
         
-        TestCaseRecord Match(in BufferSeq buffers, K k, W8 w, OperationCode a, OperationCode b)
+        TestCaseRecord Match(K k, W8 w, OperationCode a, OperationCode b, BufferTokens dst)
         {
-            var f = Dynamic.EmitFixedUnary(buffers[Left], w, a);
-            var g = Dynamic.EmitFixedUnary(buffers[Right], w, b);
+            var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
+            var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord Match(in BufferSeq buffers, K k, W16 w, OperationCode a, OperationCode b)
+        TestCaseRecord Match(K k, W16 w, OperationCode a, OperationCode b, BufferTokens dst)
         {
-            var f = Dynamic.EmitFixedUnary(buffers[Left], w, a);
-            var g = Dynamic.EmitFixedUnary(buffers[Right], w, b);
+            var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
+            var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord Match(in BufferSeq buffers, K k, W32 w, OperationCode a, OperationCode b)
+        TestCaseRecord Match(K k, W32 w, OperationCode a, OperationCode b, BufferTokens dst)
         {
-            var f = Dynamic.EmitFixedUnary(buffers[Left], w, a);
-            var g = Dynamic.EmitFixedUnary(buffers[Right], w, b);
+            var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
+            var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord Match(in BufferSeq buffers, K k, W64 w, OperationCode a, OperationCode b)
+        TestCaseRecord Match(K k, W64 w, OperationCode a, OperationCode b, BufferTokens dst)
         {
-            var f = Dynamic.EmitFixedUnary(buffers[Left], w, a);
-            var g = Dynamic.EmitFixedUnary(buffers[Right], w, b);
+            var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
+            var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord Match(in BufferSeq buffers, K k,  W128 w, OperationCode a, OperationCode b)
+        TestCaseRecord Match(K k,  W128 w, OperationCode a, OperationCode b, BufferTokens dst)
         {
-            var f = Dynamic.EmitFixedUnary(buffers[Left], w, a);
-            var g = Dynamic.EmitFixedUnary(buffers[Right], w, b);
+            var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
+            var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        TestCaseRecord Match(in BufferSeq buffers, K k, W256 w, OperationCode a, OperationCode b)
+        TestCaseRecord Match(K k, W256 w, OperationCode a, OperationCode b, BufferTokens dst)
         {
-            var f = Dynamic.EmitFixedUnary(buffers[Left], w, a);
-            var g = Dynamic.EmitFixedUnary(buffers[Right], w, b);
+            var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
+            var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
     }

@@ -21,16 +21,16 @@ namespace Z0
         /// <typeparam name="T">The formattable value type</typeparam>
         [MethodImpl(Inline)]
         public static string format<T>(T src)
-            where T : ICustomFormattable
+            where T : ITextual
                 => src.Format();
 
         [MethodImpl(Inline)]
         public static string format<T>(ReadOnlySpan<T> src, string delimiter = null)
-            where T : ICustomFormattable
+            where T : ITextual
                 => span<T>(delimiter).Format(src);
 
         public static IEnumerable<string> items<F>(IEnumerable<F> items)
-            where F : ICustomFormattable
+            where F : ITextual
                 => items.Select(m => m.Format());                
 
         [MethodImpl(Inline)]
@@ -52,7 +52,7 @@ namespace Z0
         /// <typeparam name="T">A formattable type</typeparam>
         [MethodImpl(Inline)]        
         public static string list<T>(ReadOnlySpan<T> src, char sep = Chars.Comma, int offset = 0)
-            where T : ICustomFormattable
+            where T : ITextual
         {
             if(src.Length == 0)
                 return string.Empty;
@@ -80,12 +80,12 @@ namespace Z0
         /// <typeparam name="T">A formattable type</typeparam>
         [MethodImpl(Inline)]        
         public static string list<T>(IEnumerable<T> src, char? delimiter = null, int offset = 0)
-            where T : ICustomFormattable
+            where T : ITextual
                 => string.Join(delimiter ?? Chars.Comma, src.Skip(0).Select(x => x.Format()));                
 
         [MethodImpl(Inline)]
         static SpanFormatter<T> span<T>(string delimiter = null)
-            where T : ICustomFormattable
+            where T : ITextual
                 => new SpanFormatter<T>(SeqFormatConfig.Define(delimiter ?? DefaultSeqFormatConfig.Default.Delimiter));
     }
 }

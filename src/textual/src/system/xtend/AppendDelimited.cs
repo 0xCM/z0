@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="pad">The right-padded content width</param>
         /// <param name="delimiter">The content delimiter</param>
         public static void AppendDelimited<T>(this StringBuilder sb, string label, char sep, T content, int pad, char delimiter)
-            where T : ICustomFormattable
+            where T : ITextual
         {
             sb.Append(Chars.Space);
             sb.Append(delimiter);

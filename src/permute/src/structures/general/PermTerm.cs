@@ -14,7 +14,7 @@ namespace Z0
     /// Describes an indivual term of a permutation p, i.e. the point 
     /// of evaluation i and its image p(i)
     /// </summary>
-    public readonly struct PermTerm : IFormattable<PermTerm>
+    public readonly struct PermTerm : ITextual<PermTerm>
     {
         /// <summary>
         /// The point at which the permuation is evaluated

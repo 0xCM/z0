@@ -10,7 +10,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct ReportInfo : IFormattable<ReportInfo>
+    public readonly struct ReportInfo : ITextual<ReportInfo>
     {
         public readonly string[] HeaderNames;
 
@@ -49,7 +49,7 @@ namespace Z0
 
     }
 
-    public readonly struct ReportInfo<F> : IFormattable<ReportInfo<F>>
+    public readonly struct ReportInfo<F> : ITextual<ReportInfo<F>>
         where F : unmanaged, Enum
     {
         readonly ReportInfo Description;

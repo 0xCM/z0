@@ -39,7 +39,7 @@ namespace Z0
         public int SrcCount
             => Content.Source.Count;
         
-        public BufferSeq Buffers
+        public BufferTokens Buffers
             => Context.Buffers;
         
         public MemberCode ApiCode

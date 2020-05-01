@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an address-identified target
     /// </summary>
-    public interface IAddressable : ICustomFormattable
+    public interface IAddressable : ITextual
     {
         MemoryAddress Address {get;}
     }            

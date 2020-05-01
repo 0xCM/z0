@@ -29,7 +29,7 @@ namespace Z0.Asm
 
         public IAsmContext Context {get;}
 
-        public IBufferToken[] Buffers {get;}
+        public BufferTokens Buffers {get;}
 
         readonly BufferAllocation BufferAlloc;
 
@@ -39,7 +39,7 @@ namespace Z0.Asm
         {
             Context = context;
             Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
-            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[(int)Aux3], Buffers[(int)Aux4]);
+            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[Aux3], Buffers[Aux4]);
         }                
 
         public void Dispose()
@@ -70,7 +70,6 @@ namespace Z0.Asm
                 
         IAsmFunctionDecoder Decoder => Context.Decoder;
 
-
         [MethodImpl(Inline)]
         static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
             where T : unmanaged
@@ -80,7 +79,7 @@ namespace Z0.Asm
         static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
             => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
 
-        void capture_shuffler(in BufferSeq buffers)
+        void capture_shuffler()
         {
             var f = shuffler<uint>(n2);
             var g = shuffler(n3);
@@ -88,8 +87,6 @@ namespace Z0.Asm
             using var hexout = HexWriter();
             using var asmout = AsmWriter();         
     
-            //var exchange = CaptureExchange.Create(CaptureControl, buffers[Left], buffers[Right]);
-
             var fCaptured = Me.Capture(f.Identify(), f).Require();
             hexout.WriteHex(fCaptured.Code);
             asmout.WriteAsm(Decoder.Decode(fCaptured).Require());
@@ -99,15 +96,7 @@ namespace Z0.Asm
             asmout.WriteAsm(Decoder.Decode(gCaptured).Require());
         }
                 
-
-        // void CheckImm(in BufferSeq buffers, in CaptureExchange exchange)
-        // {
-        //     CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend4x32), (byte)Blend4x32.LRLR);    
-        //     CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
-        //     CheckUnaryImm<ushort>(buffers, exchange, w256, nameof(dvec.vbsll), 3);        
-        // }
-
-        TestCaseRecord TestVectorMatch(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
+        TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
             var catalog = PartId.GVec;
             
@@ -117,10 +106,10 @@ namespace Z0.Asm
             var d = Me.HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
             var g = Me.HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
 
-            return Me.Match(buffers, Binary, w,d,g);
+            return Me.Match(Binary, w,d,g, dst);
         }
 
-        public TestCaseRecord[] vector_bitlogic_match(in BufferSeq buffers)
+        public TestCaseRecord[] vector_bitlogic_match(BufferTokens buffers)
         {
             var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
             var kinds = NumericKind.Integers.DistinctKinds();
@@ -133,8 +122,6 @@ namespace Z0.Asm
                 dst[i++] =TestVectorMatch(buffers, n, w, k);                        
             return dst;
         }
-
-
 
 
     #if Megacheck

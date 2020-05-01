@@ -23,11 +23,11 @@ namespace Z0
     public delegate bit UnaryPredicate64(Fixed64 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit UnaryPredicate128V(Fixed128 a);
+    public delegate bit UnaryPredicate128(Fixed128 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit UnaryPredicate256V(Fixed256 a);
+    public delegate bit UnaryPredicate256(Fixed256 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit UnaryPredicate512V(Fixed512 a);
+    public delegate bit UnaryPredicate512(Fixed512 a);
 }

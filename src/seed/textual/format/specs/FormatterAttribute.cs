@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     /// <summary>
     /// Applied to a type to specify a non-default formatter
     /// </summary>

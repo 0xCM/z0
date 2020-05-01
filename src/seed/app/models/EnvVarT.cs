@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a value-parametric environment variable
     /// </summary>
-    public readonly struct EnvVar<T> : IFormattable<EnvVar<T>>
+    public readonly struct EnvVar<T> : ITextual<EnvVar<T>>
     {
         public static EnvVar<T> Define(string name, T value)
             => new EnvVar<T>(name,value);

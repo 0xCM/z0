@@ -16,7 +16,7 @@ namespace Z0
         ConversionProvider(typeof(DurationConverter)),
         UserType(UserTypeId.DurationId)
     ]
-    public readonly struct Duration : IFormattable<Duration>, IEquatable<Duration>, IComparable<Duration>
+    public readonly struct Duration : ITextual<Duration>, IEquatable<Duration>, IComparable<Duration>
     {
         /// <summary>
         /// The number of elapsed timer ticks that determines the period length

@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Graphs;
 
-    public interface IArrow<A> : ICustomFormattable, ILengthwise
+    public interface IArrow<A> : ITextual, ILengthwise
         where A : IEquatable<A>
     {
         Span<A> Nodes {get;}

@@ -9,7 +9,7 @@ namespace Z0
  
     using static Seed;
 
-    public interface IMemoryRange<F> : IEquatable<F>, IComparable<F>, IFormattable<F>
+    public interface IMemoryRange<F> : IEquatable<F>, IComparable<F>, ITextual<F>
         where F : unmanaged, IMemoryRange<F>
     {
 

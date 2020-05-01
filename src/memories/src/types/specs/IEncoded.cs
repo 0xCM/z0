@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IEncoded<F> : IByteSpanProvider<F>, IEquatable<F>, IFormattable<F>
+    public interface IEncoded<F> : IByteSpanProvider<F>, IEquatable<F>, ITextual<F>
         where F : struct, IEncoded<F>
     {
         

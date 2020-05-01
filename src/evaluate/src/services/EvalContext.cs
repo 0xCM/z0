@@ -12,16 +12,16 @@ namespace Z0
 
     public readonly ref struct EvalContext
     {
-        public readonly BufferSeq Buffers;        
+        public readonly BufferTokens Buffers;        
 
         public readonly MemberCode ApiCode;
 
         [MethodImpl(Inline)]
-        public static EvalContext Define(in BufferSeq buffers, in MemberCode code)
+        public static EvalContext Define(BufferTokens buffers, in MemberCode code)
             => new EvalContext(buffers,code);
 
         [MethodImpl(Inline)]
-        EvalContext(in BufferSeq buffers, in MemberCode code)
+        EvalContext(BufferTokens buffers, in MemberCode code)
         {
             this.Buffers = buffers;
             this.ApiCode = code;

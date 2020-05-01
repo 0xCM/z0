@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public interface IDataWidth : IBitWidth, ITypedLiteral<DataWidth,uint>, ICustomFormattable
+    public interface IDataWidth : IBitWidth, ITypedLiteral<DataWidth,uint>, ITextual
     {
         DataWidth DataWidth {get;}   
 
@@ -21,7 +21,7 @@ namespace Z0
 
         string ITypedLiteral<DataWidth>.Name => DataWidth.FormatName();
 
-        string ICustomFormattable.Format() => DataWidth.FormatValue();
+        string ITextual.Format() => DataWidth.FormatValue();
     }
 
     public interface IDataWidth<F> : IDataWidth, ITypedLiteral<F,DataWidth,uint>, IEquatable<F>

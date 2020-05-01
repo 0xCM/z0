@@ -11,15 +11,35 @@ namespace Z0
 
     using static Seed;
 
-    public static class Formatting
-    {             
+    [ApiHost]
+    public partial class Formatters : IApiHost<Formatters>
+    {
+        /// <summary>
+        /// Creates a formatter from a rendering function render:T -> string
+        /// </summary>
+        /// <param name="render">A function that produces text from an element value</param>
+        /// <typeparam name="T">The type of element to format</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static IFormatter<T> create<T>(FormatRender<T> render)
+            => new Formatter<T>(render);        
+
+        /// <summary>
+        /// Creates a formatter from a rendering function render:T -> string
+        /// </summary>
+        /// <param name="render">A function that produces text from an element value</param>
+        /// <typeparam name="T">The type of element to format</typeparam>
+        [MethodImpl(Inline)]
+        public static IFormatter<C,T> create<C,T>(FormatRender<C,T> render)
+            where C : struct
+                => new Formatter<C,T>(render);
+
         /// <summary>
         /// Formats any object, using a custom formatter if it exists or invoking ToString() if not
         /// </summary>
         /// <param name="src">The object to format</param>
         [MethodImpl(Inline)]
         public static string format(object src)
-            => src.GetFormatter().Format(src);
+            => GetFormatter(src).Format(src);
 
         [MethodImpl(Inline)]
         static IFormatter CreateFormatter(Type realization)
@@ -35,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static IFormatter GetFormatter(this object src)
+        static IFormatter GetFormatter(object src)
         {
             var attrib = src?.GetType()?.GetCustomAttribute<FormatterAttribute>();
             if(attrib != null)

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines the state of the routine capture workflow at a given step
     /// </summary>
-    public readonly struct ExtractState : IFormattable<ExtractState>
+    public readonly struct ExtractState : ITextual<ExtractState>
     {
         /// <summary>
         /// The empty state

@@ -12,7 +12,7 @@ namespace Z0.Asm
     using RFI = RexFieldIndex;   
     using RFW = RexFieldWidth;
 
-    public struct RexPrefix : IScalarField<byte>, IFormattable<RexPrefix>
+    public struct RexPrefix : IScalarField<byte>, ITextual<RexPrefix>
     {                    
         public byte Content;
 

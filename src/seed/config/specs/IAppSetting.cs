@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a nonparametric application setting
     /// </summary>
-    public interface IAppSetting : ICustomFormattable
+    public interface IAppSetting : ITextual
     {
         /// <summary>
         /// The setting name

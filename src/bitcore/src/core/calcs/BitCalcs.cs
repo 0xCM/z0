@@ -10,14 +10,14 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public partial class BitCalcs
+    partial class BitCalcs
     {
         /// <summary>
         /// Computes the number of bytes covered by a specified number of cells of a given width
         /// </summary>
         /// <param name="cells">The number of allocated cells</param>
         /// <param name="cw">The bit-width of a cell</param>
-        [MethodImpl(Inline),Op]
+        [MethodImpl(Inline), Op]
         public static int bytecount(int cells, int cw)
             => cells * (cw/8);
 
@@ -139,13 +139,14 @@ namespace Z0
         /// </summary>
         /// <param name="rows">The number of grid rows</param>
         /// <param name="cols">The number of grid columns</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T tablesize<T>(T rows, T cols)
             where T : unmanaged
         {
             var points = gmath.mul(rows,cols);
             var mod = gmath.mod(points, convert<T>(8));
-            return gmath.add(gmath.srl(points, 3), gmath.nonz(mod) ? one<T>() : zero<T>());
+            var rem = gmath.nonz(mod) ? one<T>() : zero<T>();
+            return gmath.add(gmath.srl(points, 3), rem);
         }
 
         /// <summary>

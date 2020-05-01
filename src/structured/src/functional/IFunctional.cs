@@ -48,7 +48,7 @@ namespace Z0
 
         IEnumerable<MethodInfo> IFunctional.FactoryMethods 
             => from m in typeof(F).DeclaredStaticMethods()
-               where m.ReturnType.Realizes(typeof(IFunc)) 
+               where m.ReturnType.Reifies(typeof(IFunc)) 
                select m;
     }
 
@@ -65,7 +65,7 @@ namespace Z0
 
         IEnumerable<MethodInfo> IFunctional.FactoryMethods 
             => from m in typeof(F).DeclaredStaticMethods()
-               where m.ReturnType.Realizes(typeof(IFunc)) 
+               where m.ReturnType.Reifies(typeof(IFunc)) 
                select m;
     }
 }

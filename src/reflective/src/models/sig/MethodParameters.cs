@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct MethodParameters : IFormattable<MethodParameters>
+    public readonly struct MethodParameters : ITextual<MethodParameters>
     {
         public MethodParameter[] Index {get;}
 

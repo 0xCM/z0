@@ -128,7 +128,7 @@ namespace Z0
         {
             if(NatSpan.test(src))
             {
-                var typeargs = src.SuppliedTypeArgs().ToArray();                    
+                var typeargs = src.SuppliedTypeArgs();
                 var text = IDI.NSpan;
                 text += typeargs[0].NatValue();
                 text += IDI.SegSep;
@@ -147,7 +147,7 @@ namespace Z0
             var provider = none<ITypeIdentityProvider>();   
             if(t.Tagged<IdentityProviderAttribute>())
                 provider = AttributedProvider(t);
-            else if(t.Realizes<ITypeIdentityProvider>())
+            else if(t.Reifies<ITypeIdentityProvider>())
                 provider = HostedProvider(t);
             return provider.ValueOrElse(() => DefaultProvider);
         }

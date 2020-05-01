@@ -90,7 +90,7 @@ namespace Z0
             this.HostEnclosure = enclosure;
             this.HostTypes = enclosure.GetNestedTypes().Realize<IFunc>().ToArray();
             this.FactoryMethods = (from m in factory.DeclaredStaticMethods()
-               where m.ReturnType.Realizes(typeof(IFunc)) 
+               where m.ReturnType.Reifies(typeof(IFunc)) 
                select m).ToArray();
         }
 

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a partition over a contiguous sequence of bits
     /// </summary>
-    public readonly struct BitFieldSpec :  IFormattable<BitFieldSpec>
+    public readonly struct BitFieldSpec :  ITextual<BitFieldSpec>
     {        
         readonly FieldSegment[] segments;
 

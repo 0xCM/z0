@@ -37,7 +37,7 @@ namespace Z0
     }
 
 
-    public interface IFixed<F,W> : IFixed<W>, IFormattable<F>
+    public interface IFixed<F,W> : IFixed<W>, ITextual<F>
         where F : unmanaged, IFixed<F,W>
         where W : unmanaged, ITypeWidth  
     {

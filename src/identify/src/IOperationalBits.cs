@@ -39,6 +39,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         OperationCode ToApiCode(OperationBits src)
-            => OperationCode.Define(src.Uri.OpId, src.Encoded.Content);
+            => OperationCode.Define(src.Uri, src.Encoded.Content);
     }
 }

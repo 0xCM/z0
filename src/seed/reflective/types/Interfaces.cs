@@ -14,7 +14,7 @@ namespace Z0
         /// supertypes
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static IEnumerable<Type> Interfaces(this Type src)
-            => src.GetInterfaces() ?? new Type[]{};
+        public static Type[] Interfaces(this Type src)
+            => src.GetInterfaces() ?? Control.array<Type>();
     }
 }

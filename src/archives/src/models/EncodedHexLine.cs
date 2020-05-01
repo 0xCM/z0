@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a memory extract that is sourced from an identified operation
     /// </summary>
-    public readonly struct EncodedHexLine : IFormattable<EncodedHexLine>
+    public readonly struct EncodedHexLine : ITextual<EncodedHexLine>
     {
         public static FileExtension FileExt => FileExtensions.Hex;
 

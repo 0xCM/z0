@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct AsmStats : IFormattable<AsmStats>
+    public readonly struct AsmStats : ITextual<AsmStats>
     {
         public readonly int FunctionCount;
         

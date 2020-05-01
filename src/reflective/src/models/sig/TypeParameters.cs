@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Represents the open type parameters defined by a method
     /// </summary>
-    public readonly struct TypeParameters  : IFormattable<TypeParameters>
+    public readonly struct TypeParameters  : ITextual<TypeParameters>
     {
         public TypeParameter[] Items {get;}
 

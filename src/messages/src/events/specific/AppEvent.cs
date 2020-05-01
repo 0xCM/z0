@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct AppEvent : IFormattable<AppEvent>, IAppEvent<AppEvent>
+    public readonly struct AppEvent : ITextual<AppEvent>, IAppEvent<AppEvent>
     {
         public static AppEvent Empty => Create(string.Empty, default(EmptyPayload));
         
@@ -53,7 +53,7 @@ namespace Z0
         public AppEvent<T> As<T>()
             => Create<T>(Description, (T)Content, Correlation);
 
-        readonly struct EmptyPayload : IFormattable<EmptyPayload>, IEmptyPayload
+        readonly struct EmptyPayload : ITextual<EmptyPayload>, IEmptyPayload
         {            
             public string Format() => string.Empty;
 
@@ -63,7 +63,7 @@ namespace Z0
         interface IEmptyPayload {}
     }
 
-    public readonly struct AppEvent<T> : IFormattable<AppEvent<T>>, IAppEvent<AppEvent<T>>
+    public readonly struct AppEvent<T> : ITextual<AppEvent<T>>, IAppEvent<AppEvent<T>>
     {
         public static AppEvent<T> Empty => new AppEvent<T>(string.Empty, default(T));
         

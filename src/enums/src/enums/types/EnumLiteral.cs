@@ -22,7 +22,7 @@ namespace Z0
     /// Thus, enum value duplication isn't an issue since all data are preserved, the api end-user can decide what
     /// value duplication means in a given context
     /// </remarks>
-    public readonly struct EnumLiteral<E> : IFormattable<EnumLiteral<E>>
+    public readonly struct EnumLiteral<E> : ITextual<EnumLiteral<E>>
         where E : unmanaged, Enum        
     {
         public readonly int Index;

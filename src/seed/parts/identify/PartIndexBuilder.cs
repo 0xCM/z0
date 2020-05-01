@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// External dependencies that don' participate in the componentization framework
         /// </summary>
-        static IEnumerable<ExternId> External
+        static ExternId[] External
             => type<ExternId>().LiteralValues<ExternId>().Where(x => x != 0);
 
         static IEnumerable<IPart> Known
@@ -53,7 +53,7 @@ namespace Z0
         /// Attempts to resolve a part resolution type
         /// </summary>
         static Option<Type> resolve(Assembly src)
-            => src.GetTypes().Where(t => t.Realizes<IPart>() && !t.IsAbstract).FirstOrDefault();
+            => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).FirstOrDefault();
 
         /// <summary>
         /// Attempts to resolve a part resolution property

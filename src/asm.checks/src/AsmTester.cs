@@ -76,21 +76,21 @@ namespace Z0.Asm
         {
             Context = context;
             Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();  
-            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[(int)Aux3], Buffers[(int)Aux4]);
+            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[Aux3], Buffers[Aux4]);
         }
         
         public IAsmContext Context {get;}
 
         readonly BufferAllocation BufferAlloc;
 
-        public IBufferToken[] Buffers {get;}
+        public BufferTokens Buffers {get;}
 
         public ICaptureExchange CaptureExchange {get;}
         
         public IBufferToken this[BufferSeqId id]
         {
             [MethodImpl(Inline)]
-            get => Buffers[(int)id];
+            get => Buffers[id];
         }
         
         public void Dispose()

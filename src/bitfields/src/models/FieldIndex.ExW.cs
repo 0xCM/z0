@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;    
     using static Memories;
 
-    public readonly struct FieldIndex<E,W> : IFieldIndex<FieldIndexEntry<E,W>>, IFormattable<FieldIndex<E,W>>
+    public readonly struct FieldIndex<E,W> : IFieldIndex<FieldIndexEntry<E,W>>, ITextual<FieldIndex<E,W>>
         where E : unmanaged, Enum
         where W : unmanaged, Enum
     {

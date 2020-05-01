@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct RegisterModel : IFormattable<RegisterModel>
+    public readonly struct RegisterModel : ITextual<RegisterModel>
     {
         public readonly int Id;
         public readonly RegisterSymbol Symbol;

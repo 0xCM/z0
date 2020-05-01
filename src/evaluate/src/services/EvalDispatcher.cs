@@ -25,7 +25,6 @@ namespace Z0
         public static IEvalDispatcher Create(IPolyrand random, IAppMsgSink sink)
             => new EvalDispatcher(random, sink);
 
-    
         [MethodImpl(Inline)]
         internal EvalDispatcher(IPolyrand random, IAppMsgSink sink)
         {
@@ -33,38 +32,38 @@ namespace Z0
             this.Sink = sink;
         }
 
-        MemberEvaluator Evaluator(in BufferSeq buffers)
+        MemberEvaluator Evaluator(BufferTokens buffers)
             => MemberEvaluator.Create(buffers);
 
         ICheckNumeric Numeric => CheckNumeric.Checker;
 
         const int EvalCount = 100;
         
-        UnaryEval<T> eval<T>(in BufferSeq execBuffers, in MemberCode code,  K.UnaryOpClass<T> k)
+        UnaryEval<T> eval<T>(BufferTokens buffers, in MemberCode code,  K.UnaryOpClass<T> k)
             where T : unmanaged
         {
             var src = Random.Array<T>(EvalCount);
             var target =  Evaluations.pairs(("method", "asm"), Tuples.index(new Pair<T>[EvalCount]));
             var count = src.Length;
             var content = Evaluations.unary(src, target);
-            var package = new UnaryOpEval<T>(EvalContext.Define(execBuffers, code), content);
+            var package = new UnaryOpEval<T>(EvalContext.Define(buffers, code), content);
             var evaluator = new UnaryOpEvaluator<T>();
             return evaluator.Evaluate(package);
         }
 
-        BinaryEval<T> eval<T>(in BufferSeq execBuffers, in MemberCode code,  K.BinaryOpClass<T> k)
+        BinaryEval<T> eval<T>(BufferTokens buffers, in MemberCode code,  K.BinaryOpClass<T> k)
             where T : unmanaged
         {
             var src = Random.Pairs<T>(EvalCount);
             var count = src.Count;
             var target =  Evaluations.pairs(("method", "asm"), Tuples.index(new Pair<T>[EvalCount]));
             var content = Evaluations.binary(src, target);
-            var package = new BinaryOpEval<T>(EvalContext.Define(execBuffers, code), content);
+            var package = new BinaryOpEval<T>(EvalContext.Define(buffers, code), content);
             var evaluator = new BinaryOpEvaluator<T>();
             return evaluator.Evaluate(package);
         }
 
-        MemberEvaluator Evaluator<E,T>(in BufferSeq buffers, IOpClass<E,T> k)
+        MemberEvaluator Evaluator<E,T>(BufferTokens buffers, IOpClass<E,T> k)
             where T : unmanaged
             where E : unmanaged, Enum
                 => Evaluator(buffers);
@@ -72,10 +71,7 @@ namespace Z0
         public void Notify(AppMsg msg)
             => Sink.NotifyConsole(msg);
 
-        public void Notify(object content, AppMsgColor color = AppMsgColor.Green)
-            => Sink.NotifyConsole(content, color);
-
-        public bit EvalFixedOperators(in BufferSeq buffers, MemberCode[] api)
+        public bit EvalFixedOperators(BufferTokens buffers, MemberCode[] api)
         {
             for(var i=0; i<api.Length; i++)
                 EvalFixedOperator(buffers, api[i]);
@@ -96,7 +92,7 @@ namespace Z0
             return s1.Zip(s2).Select(a =>  Tuples.pair(a.First, a.Second)).ToArray();
         }
 
-        public bit EvalFixedOperator(in BufferSeq buffers, in MemberCode api)
+        public bit EvalFixedOperator(BufferTokens buffers, in MemberCode api)
         {
             var nk = api.Method.ReturnType.NumericKind();
             var kid = api.Member.KindId;
@@ -113,19 +109,15 @@ namespace Z0
                 switch(nk)
                 {
                     case NumericKind.U8:
-                        return Dispatch(buffers, FixedPairs<Fixed8>(count), api);                    
                     case NumericKind.I8:
-                        return 0;                            
+                        return Dispatch(buffers, FixedPairs<Fixed8>(count), api);                    
                     case NumericKind.I16:
-                        return 0;                            
                     case NumericKind.U16:
-                        return 0;                            
+                        return Dispatch(buffers, FixedPairs<Fixed16>(count), api);                    
                     case NumericKind.I32:
-                        return 0;
                     case NumericKind.U32:
                         return 0;
                     case NumericKind.I64:
-                        return 0;
                     case NumericKind.U64:
                         return 0;
                     default:
@@ -200,7 +192,7 @@ namespace Z0
             }
         }
 
-        public void Dispatch(in BufferSeq buffers, in MemberCode api, K.UnaryOpClass k)
+        public void Dispatch(BufferTokens buffers, in MemberCode api, K.UnaryOpClass k)
         {
             var kid = api.Member.KindId;
             int count = 128;
@@ -253,7 +245,7 @@ namespace Z0
             }           
         }
 
-        public void Dispatch(in BufferSeq buffers, in MemberCode api, K.BinaryOpClass k)
+        public void Dispatch(BufferTokens buffers, in MemberCode api, K.BinaryOpClass k)
         {
             var kid = api.Member.KindId;
             int count = 128;
@@ -314,7 +306,7 @@ namespace Z0
         /// <param name="index">The index of the target buffer</param>
         /// <param name="src">The executable source that conforms to a fixed binary operator</param>
         /// <typeparam name="F">The operand type</typeparam>
-        FixedBinaryOp<F> LoadFixedinaryOp<F>(in BufferSeq buffers, int index, MemberCode src)
+        FixedBinaryOp<F> LoadFixedinaryOp<F>(BufferTokens buffers, BufferSeqId index, MemberCode src)
             where F : unmanaged, IFixed
                 => buffers[index].EmitFixedBinaryOp<F>(src);
 
@@ -327,7 +319,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <typeparam name="F">The operand type</typeparam>
-        F ExecBinaryOp<F>(in BufferSeq buffers, int index, MemberCode src, F x, F y)
+        F ExecBinaryOp<F>(BufferTokens buffers, BufferSeqId index, MemberCode src, F x, F y)
             where F : unmanaged, IFixed
                 => LoadFixedinaryOp<F>(buffers, index, src)(x,y);
 
@@ -343,7 +335,7 @@ namespace Z0
             }
         }
 
-        bit Dispatch(in BufferSeq buffers, in Pairs<byte> src, in MemberCode api)
+        bit Dispatch(BufferTokens buffers, in Pairs<byte> src, in MemberCode api)
         {
 
             var dst = Evaluator(buffers).Eval(api, K.BinaryOp, src);
@@ -363,7 +355,15 @@ namespace Z0
             }
         }
 
-        bit Dispatch(in BufferSeq buffers, in Pairs<Fixed8> src, in MemberCode api)
+        bit Dispatch(BufferTokens buffers, in Pairs<Fixed8> src, in MemberCode api)
+        {
+
+            var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
+            Analyze(src, dst, api);
+            return 1;
+        }
+
+        bit Dispatch(BufferTokens buffers, in Pairs<Fixed16> src, in MemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
@@ -378,7 +378,7 @@ namespace Z0
 
         }
 
-        Triples<T> Dispatch<E,T>(in BufferSeq buffers, in MemberCode api, IOpClass<E,T> k, in Pairs<T> src)
+        Triples<T> Dispatch<E,T>(BufferTokens buffers, in MemberCode api, IOpClass<E,T> k, in Pairs<T> src)
             where E : unmanaged, Enum
             where T : unmanaged
         {        

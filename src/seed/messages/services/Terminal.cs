@@ -75,7 +75,7 @@ namespace Z0
         }
 
         public void WriteLines<F>(params F[] src)
-            where F : ICustomFormattable
+            where F : ITextual
         {
             lock(locker)            
             {
@@ -85,7 +85,7 @@ namespace Z0
         }
 
         public void WriteLine<F>(F src, AppMsgColor color)
-            where F : ICustomFormattable
+            where F : ITextual
         {
             lock(locker)            
             {
@@ -97,7 +97,7 @@ namespace Z0
         }
 
         public void WriteLines<F>(AppMsgColor color, params F[] src)
-            where F : ICustomFormattable
+            where F : ITextual
         {
             lock(locker)            
             {

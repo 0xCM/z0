@@ -61,7 +61,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator OperationCode(in OperationBits src)
-            => OperationCode.Define(src.Uri.OpId, src.Encoded);
+            => OperationCode.Define(src.Uri, src.Encoded);
 
         [MethodImpl(Inline)]
         internal OperationBits(OpUri uri, LocatedCode encoded)

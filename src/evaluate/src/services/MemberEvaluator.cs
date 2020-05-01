@@ -16,14 +16,14 @@ namespace Z0
 
     public readonly ref struct MemberEvaluator
     {
-        readonly BufferSeq buffers;
+        readonly BufferTokens buffers;
 
         [MethodImpl(Inline)]        
-        public static MemberEvaluator Create(in BufferSeq buffers)
+        public static MemberEvaluator Create(BufferTokens buffers)
             => new MemberEvaluator(buffers);
 
         [MethodImpl(Inline)]        
-        MemberEvaluator(in BufferSeq buffers)
+        MemberEvaluator(BufferTokens buffers)
         {
             this.buffers = buffers;
         }
@@ -70,7 +70,6 @@ namespace Z0
             where F : unmanaged, IFixed
         {
             var count = src.Count;
-            //var f = buffers[Left].EmitBinaryOp<F>(api);
             var f = Dynamic.EmitBinaryOp<F>(buffers[Left], api);
             var dst = Tuples.triples<F>(src.Count);
             for(var i=0; i<count; i++)

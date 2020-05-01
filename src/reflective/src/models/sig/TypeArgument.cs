@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public readonly struct TypeArgument : IFormattable<TypeArgument>
+    public readonly struct TypeArgument : ITextual<TypeArgument>
     {
         public string Name {get;}
         public Type Target {get;}

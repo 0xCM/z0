@@ -78,7 +78,7 @@ namespace Z0
         }
     } 
 
-    public interface IInterval<S,T> : IInterval<T>, IFormattable<S>, IPair<S,T>
+    public interface IInterval<S,T> : IInterval<T>, ITextual<S>, IPair<S,T>
         where S : struct, IInterval<S,T>
         where T : unmanaged
     {

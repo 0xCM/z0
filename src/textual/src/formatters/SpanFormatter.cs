@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
 
     public readonly struct SpanFormatter<T> : ISpanFormatter<T>
-        where T : ICustomFormattable
+        where T : ITextual
     {
         readonly SeqFormatConfig Config;
 

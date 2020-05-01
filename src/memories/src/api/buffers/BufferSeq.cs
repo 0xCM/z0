@@ -125,7 +125,7 @@ namespace Z0
                 => Token(index).Fill(src);
 
         [MethodImpl(Inline)]
-        public IBufferToken[] Tokenize() 
+        public BufferTokens Tokenize() 
             => Tokens.ToArray().Map(t => t as IBufferToken);
 
         public void Dispose()

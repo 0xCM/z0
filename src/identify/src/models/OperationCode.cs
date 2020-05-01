@@ -14,28 +14,30 @@ namespace Z0
     /// </summary>
     public readonly struct OperationCode : IEncoded<OperationCode,BinaryCode>, IOperationalIdentity
     {
-        public OpIdentity Id {get;}
+        public OpUri Uri {get;}
+
+        public OpIdentity Id => Uri.OpId;
 
         public BinaryCode Content {get;}
 
-        public static OperationCode Empty => new OperationCode(OpIdentity.Empty, BinaryCode.Empty);
+        public static OperationCode Empty => new OperationCode(OpUri.Empty, BinaryCode.Empty);
         
         /// <summary>
         /// Defines a block of encoded data based at a specifed address
         /// </summary>
         /// <param name="data">The source data</param>
         [MethodImpl(Inline)]
-        public static OperationCode Define(OpIdentity id, byte[] data)
-            => new OperationCode(id,data);        
+        public static OperationCode Define(OpUri uri, byte[] data)
+            => new OperationCode(uri, data);        
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(OperationCode src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public OperationCode(OpIdentity id, in BinaryCode data)
+        public OperationCode(OpUri uri, in BinaryCode data)
         {
-            this.Id = id;
+            this.Uri = uri;
             this.Content = data;
         }
 
@@ -48,7 +50,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty && Id.IsEmpty;
+            get => Content.IsEmpty && Uri.IsEmpty;
         }
 
         public string Format()

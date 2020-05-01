@@ -145,7 +145,7 @@ namespace Z0
         /// <param name="src">The source element</param>
         /// <typeparam name="T">The element type</typeparam>
         public static string format<T>(T src)
-            where T : ICustomFormattable
+            where T : ITextual
                 => denullify(src?.Format());
 
         /// <summary>
@@ -154,11 +154,11 @@ namespace Z0
         /// <param name="src">The source element</param>
         /// <typeparam name="T">The element type</typeparam>
         public static IEnumerable<string> format<T>(IEnumerable<T> src)
-            where T : ICustomFormattable
+            where T : ITextual
                 => src.Select(x => x.Format());
 
         public static string format<T>(IEnumerable<T> src, string delimiter = null)
-            where T : ICustomFormattable
+            where T : ITextual
         {
             var dst = factory.Builder();
             var count = 0;

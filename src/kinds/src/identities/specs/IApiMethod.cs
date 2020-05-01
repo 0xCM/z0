@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public interface IApiMethod : ICustomFormattable
+    public interface IApiMethod : ITextual
     {
         /// <summary>
         /// The globally-unique host uri
@@ -29,7 +29,7 @@ namespace Z0
         OpUri Uri
             => OpUri.hex(HostUri, Method.Name, Id);        
 
-        string ICustomFormattable.Format()
+        string ITextual.Format()
             => Uri.Format();    
     }
 }

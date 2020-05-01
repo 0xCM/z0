@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Identifies a value partition element
     /// </summary>
-    public interface IFieldSegment : ICustomFormattable
+    public interface IFieldSegment : ITextual
     {
         /// <summary>
         /// A unique name that identifies the segment

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Captures name-corellated literals values
     /// </summary>
-    public readonly struct LiteralCorrelation<E1,E2> : IFormattable<LiteralCorrelation<E1,E2>>
+    public readonly struct LiteralCorrelation<E1,E2> : ITextual<LiteralCorrelation<E1,E2>>
         where E1: unmanaged, Enum
         where E2: unmanaged, Enum
     {

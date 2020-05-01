@@ -10,7 +10,7 @@ namespace Z0
     using static Seed; 
     using static Memories;
     
-    public interface IBitVector : ICustomFormattable<BitFormatConfig>
+    public interface IBitVector : ITextual<IBitVector,BitFormatConfig>
     {
         /// <summary>
         /// Presents bitvector content as a bytespan

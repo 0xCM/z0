@@ -40,7 +40,7 @@ namespace Z0.Asm
             this.ApiSet = context;
         }
                 
-        void ExecuteHost(in BufferSeq buffers, IApiHost host)
+        void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
             var dst = CodeArchive.CaptureArchive(host.UriPath);
             if(dst.HexPath.Exists())
@@ -62,7 +62,7 @@ namespace Z0.Asm
             
             foreach(var host in catalog.ApiHosts)
             {
-                ExecuteHost(buffers, host);
+                ExecuteHost(buffers.Tokenize(), host);
             }
         }
         

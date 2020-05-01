@@ -17,7 +17,9 @@ namespace Z0
         /// compiler-generated artifacts are excluded
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static IEnumerable<MethodInfo> DeclaredMethods(this Type src, bool nonspecial = true)
-            => nonspecial ? src.NonSpecialMethods(BF_Declared) : src.GetMethods(BF_Declared);
+        public static MethodInfo[] DeclaredMethods(this Type src, bool nonspecial = true)
+            => nonspecial 
+            ? src.NonSpecialMethods(BF_Declared) 
+            : src.GetMethods(BF_Declared);
     }
 }

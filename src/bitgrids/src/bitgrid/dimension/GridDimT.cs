@@ -10,7 +10,7 @@ namespace Z0
     using static Seed; 
     using static Memories;
 
-    public readonly struct GridDim<T> : IGridDim<T>, IFormattable<GridDim<T>>
+    public readonly struct GridDim<T> : IGridDim<T>, ITextual<GridDim<T>>
         where T : unmanaged
     {
         public GridDim(int rows, int cols, int? blockwidth = null)

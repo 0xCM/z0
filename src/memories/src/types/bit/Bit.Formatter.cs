@@ -13,7 +13,7 @@ namespace Z0
     public static class BitFormatter
     {
         [MethodImpl(Inline)]
-        public static IFormatter<T,BitFormatConfig> Define<T>()
+        public static IFormatter<BitFormatConfig,T> Define<T>()
             where T : struct
                 =>  default(BitFormatter<T>);
     }
@@ -21,7 +21,7 @@ namespace Z0
     /// <summary>
     /// Configurable bit data type formatter
     /// </summary>
-    public readonly struct BitFormatter<T> : IFormatter<T,BitFormatConfig>
+    public readonly struct BitFormatter<T> : IFormatter<BitFormatConfig,T>
         where T : struct
     {            
         public string Format(T src, in BitFormatConfig config)

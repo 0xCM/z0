@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// An homogenous immutable 4-tuple
     /// </summary>
-    public readonly struct ConstQuad<T> : ITupled<ConstQuad<T>,T,T,T,T>, IFormattable<ConstQuad<T>>
+    public readonly struct ConstQuad<T> : ITupled<ConstQuad<T>,T,T,T,T>, ITextual<ConstQuad<T>>
     {
         /// <summary>
         /// The first member
