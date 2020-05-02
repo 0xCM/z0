@@ -9,22 +9,25 @@ namespace Z0
 
     using static Seed;
 
-    public interface IKindServices : IStatelessFactory<KindsApi>
-    {
-        IdentityProducer IdentityProducer => new IdentityProducer();
-        
-        IReflectiveClass ReflectiveClass => new ReflectiveClass();
-    }
- 
-    public interface IKindOps 
-    {
-
-    }
-
     public readonly struct KindsApi : IKindOps, IKindServices
     {
-        public static IKindOps Ops => default(KindsApi);
+        public static IKindOps Ops => IKindOps.Service();
 
-        public static IKindServices Services => default(KindsApi);
+        public static IKindServices Services => IKindServices.Service();
     }
+
+    public interface IKindOps : IStateless<KindsApi,IKindOps>
+    {
+
+    }
+    public interface IKindServices : IStatelessFactory<KindsApi,IKindServices>
+    {
+        IIdentityProducer IdentityProducer => IIdentityProducer.Service();
+        
+        IIdentityReflector IdentityReflector => IIdentityReflector.Service();
+
+        IIdentityParser IdentityParser => IIdentityParser.Service();
+    }
+
+    
 }

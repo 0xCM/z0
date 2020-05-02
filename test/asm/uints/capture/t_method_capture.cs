@@ -9,6 +9,8 @@ namespace Z0.Asm
 
     public sealed class t_method_catpure : t_asm<t_method_catpure>
     {
+        public override bool Enabled => false;
+
         public void parse_address_segment()
         {
             var parser = HexParsers.MemoryRange;

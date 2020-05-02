@@ -19,6 +19,10 @@ namespace Z0
             => Render = render;
 
         [MethodImpl(Inline)]
+        public Formatter(IFormatter<T> render)
+            => Render = x => render.Format(x);
+
+        [MethodImpl(Inline)]
         public string Format(T src)
             => Render(src);
     }

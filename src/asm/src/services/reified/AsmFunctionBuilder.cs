@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         public AsmFunction BuildFunction(OpUri uri, string sig, AsmInstructionBlock src)
         {
-            var info = new AsmInstructionInfo[src.InstructionCount];
+            var info = new AsmInstructionSummary[src.InstructionCount];
             var offset = (ushort)0;
 
             for(var i=0; i<info.Length; i++)
@@ -33,20 +33,15 @@ namespace Z0.Asm
                 if(RunChecks)
                     CheckInstructionSize(instruction, offset, src);
 
-                info[i] = AsmInstruction.describe(instruction,src.NativeCode.Encoded, instruction.FormattedInstruction, offset, src.Origin.Start);
+                info[i] = AsmSemantic.Service.Summarize(instruction,src.NativeCode.Encoded, instruction.FormattedInstruction, offset, src.Origin.Start);
                 offset += (ushort)instruction.ByteLength;
             }
 
             if(RunChecks)
                 CheckBlockLength(src);
 
-            //var parsed = ParsedMember.Define(uri,sig, src.TermCode, src.NativeCode.Encoded);
-            
             var instructions = AsmInstructionList.Create(src.Decoded, src.NativeCode.Encoded);
-
-            var function = AsmFunction.Define(uri, sig, src.NativeCode, src.TermCode, instructions);
-            return function;
-            //return AsmFunction.Define(parsed, instructions);
+            return AsmFunction.Define(uri, sig, src.NativeCode, src.TermCode, instructions);            
         }
     }
 

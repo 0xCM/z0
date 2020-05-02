@@ -29,7 +29,7 @@ namespace Z0.Asm
         public static string label(ulong src)
             => text.concat(src.FormatSmallHex(), HexSpecs.PostSpec, blank);
 
-        public static string render(in MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatSpec config)
+        public static string render(in MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatSpec config)
         {
             var description = text.build();
             var absolute = @base + (MemoryAddress)src.Offset;  
@@ -40,7 +40,7 @@ namespace Z0.Asm
             return description.ToString();
         }
 
-        public static string render(in MemoryAddress @base, in AsmInstructionInfo src)
+        public static string render(in MemoryAddress @base, in AsmInstructionSummary src)
             => render(@base, src, AsmFormatSpec.Default);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0.Asm
         /// <param name="config">An optional format configuration</param>
         public static ReadOnlySpan<string> lines(in AsmFunction src, in AsmFormatSpec? cfg = null)
         {
-            var descriptions = AsmInstruction.describe(src);
+            var descriptions = AsmSemantic.Service.Summarize(src);
             var count = descriptions.Length;
             var lines = Spans.alloc<string>(count);
             var config = cfg ?? AsmFormatSpec.Default;
@@ -70,7 +70,7 @@ namespace Z0.Asm
                 return default;
 
             var config = cfg ?? AsmFormatSpec.Default;
-            var descriptions =  AsmInstruction.describe(src);
+            var descriptions =  AsmSemantic.Service.Summarize(src);
             var lines = Spans.alloc<string>(src.Length);
             var @base = src[0].IP;
             for(var i=0; i< src.Length; i++)

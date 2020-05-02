@@ -10,6 +10,7 @@ namespace Z0
 
     using static Seed;
 
+
     readonly struct Formatter<C,T> : IFormatter<C,T>
         where C : struct
     {

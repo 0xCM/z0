@@ -12,8 +12,10 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
-    public readonly struct AsmImmInfo
+    public readonly struct AsmImmInfo : ITextual
     {
+        public static AsmImmInfo Empty => default(AsmImmInfo);
+
         public readonly int Size;
 
         public readonly ulong Value;
@@ -49,5 +51,19 @@ namespace Z0.Asm
         /// </summary>
         public string Label
             => $"imm{Size}";
+        
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Size == 0 && Value == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }        
+        public string Format()
+            => IsEmpty ? string.Empty : text.concat(Label, Value.FormatHex());
     }
 }

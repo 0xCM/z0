@@ -8,8 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-
-    public static class AsmQuery
+    
+    partial class XTend
     {
         /// <summary>
         /// Selects a (non-distinct) sequence of far addresses that are target by call instructions in the source function

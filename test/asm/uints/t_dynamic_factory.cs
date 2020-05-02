@@ -14,6 +14,9 @@ namespace Z0.Asm
 
     public class t_dynamic_factory : t_asm<t_dynamic_factory>
     {
+        public override bool Enabled => false;
+
+        
         public static uint Suprise() 
             => 17;
 

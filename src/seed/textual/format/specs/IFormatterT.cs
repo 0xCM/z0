@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a type-parametric formatter
     /// </summary>
-    public interface IFormatter<T> : IFormatter, IFormatProvider<T>
+    public interface IFormatter<T> : IFormatter
     {
         /// <summary>
         /// Renders an object as text
@@ -26,8 +26,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         string IFormatter.Format(object src)
-            => Format((T)src);
-
-        IFormatter<T> IFormatProvider<T>.Formatter => this;
+            => Format((T)src);        
     } 
 }

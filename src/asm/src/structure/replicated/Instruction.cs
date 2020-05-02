@@ -19,6 +19,23 @@ namespace Z0.Asm
         /// Captures the formatted view of the instruction
         /// </summary>
         public string FormattedInstruction {get;set;}
+
+        /// <summary>
+        /// Retrieves the used memory array as specified by the InstructionInfo type
+        /// </summary>
+        public Func<UsedMemory[]> UsedMemory {get;set;}
+
+        /// <summary>
+        /// Captures the used register array as specified by the InstructionInfo type
+        /// </summary>
+        public Func<UsedRegister[]> UsedRegisters {get; set;}
+
+        /// <summary>
+        /// Captures the op access array as specified by the InstructionInfo type
+        /// </summary>
+        public Func<OpAccess[]> Access {get;set;}
+
+        public Func<AsmFlowInfo> FlowInfo {get;set;}
         
         //
         // Summary:

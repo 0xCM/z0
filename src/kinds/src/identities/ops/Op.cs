@@ -14,18 +14,20 @@ namespace Z0
 
     partial class Identify
     {
-
+        [MethodImpl(Inline)]
         public static OpIdentity Op(string src)
-        {
-            var id = src ?? 0.ToString();
-            var name = id.TakeBefore(IDI.PartSep);
-            var suffixed = id.Contains(IDI.SuffixSep);
-            var suffix = suffixed ? id.TakeAfter(IDI.SuffixSep) : string.Empty;
-            var generic = id.TakeAfter(IDI.PartSep)[0] == IDI.Generic;
-            var imm = suffix.Contains(IDI.Imm);
-            var components = id.Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
-            return OpIdentity.Define(id, name, suffix, generic, imm, components);
-        }
+            => OpIdentityParser.Service.Parse(src);
+
+        // {
+        //     var id = src ?? 0.ToString();
+        //     var name = id.TakeBefore(IDI.PartSep);
+        //     var suffixed = id.Contains(IDI.SuffixSep);
+        //     var suffix = suffixed ? id.TakeAfter(IDI.SuffixSep) : string.Empty;
+        //     var generic = id.TakeAfter(IDI.PartSep)[0] == IDI.Generic;
+        //     var imm = suffix.Contains(IDI.Imm);
+        //     var components = id.Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
+        //     return OpIdentity.Define(id, name, suffix, generic, imm, components);
+        // }
 
         public static OpIdentity Op(params IdentityPart[] parts)
             => Op(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
@@ -83,5 +85,9 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity Op(string opname, NumericKind k, bool generic)
             => Op(opname, TypeWidth.None, k, generic);
+
+        [MethodImpl(Inline)]   
+        public static OpIdentity Op(OpKindId k, NumericKind nk, bool generic)
+            => Op(k.Format(), nk, generic);
     }
 }

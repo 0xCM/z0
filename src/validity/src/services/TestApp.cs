@@ -73,29 +73,13 @@ namespace Z0
         }
 
 
-        /// <summary>
-        /// Executes the tests defined by a host type
-        /// </summary>
-        /// <param name="host">The host type</param>
-        /// <param name="filters">Filters the host's test if nonempty</param>
-        public void Run(Type host, string[] filters)
-        {        
-            if(!HasAny(host,filters))
-                return;            
-
-            var hosturi = OpUriBuilder.HostUri(host);
-
+        void Run(Type host, IUnitTest unit)
+        {
             var results = new List<TestCaseRecord>();
-
             try
             {
                 var execTime = Duration.Zero;
-                var clock = counter(false);
-
-                using var unit = host.Instantiate<IUnitTest>();
-             
-                clock.Start();
-                
+                var clock = counter(true);                    
                 var tsStart = time.now();
 
                 if(unit is IExplicitTest et)  
@@ -104,10 +88,13 @@ namespace Z0
                 {                    
                     Control.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));   
                     PostBenchResult(unit.TakeBenchmarks().ToArray());
-                }                
-                clock.Stop();
+                }
 
-                term.print(PostUnit(hosturi, clock.Time, tsStart, time.now()));                
+                clock.Stop();
+                
+                var hosturi = OpUriBuilder.HostUri(host);
+                term.print(PostUnit(hosturi, clock.Time, tsStart, time.now())); 
+
             }
             catch(Exception e)
             {
@@ -117,9 +104,56 @@ namespace Z0
             {
                 PostTestResults(results);
             }
+
         }
 
-        //IAppPaths Paths => Context.AppPaths;
+        public void Run(Type host, string[] filters)
+        {        
+            if(!HasAny(host,filters))
+                return;            
+
+            using var unit = host.Instantiate<IUnitTest>();
+            if(unit.Enabled)
+                Run(host, unit);
+                
+            // var results = new List<TestCaseRecord>();
+            // var enabled = true;
+
+            // try
+            // {
+            //     using var unit = host.Instantiate<IUnitTest>();
+            //     enabled = unit.Enabled;
+                
+            //     if(enabled)             
+            //     {
+            //         var execTime = Duration.Zero;
+            //         var clock = counter(true);                    
+            //         var tsStart = time.now();
+
+            //         if(unit is IExplicitTest et)  
+            //             ExecExplicit(et, host.Name,results);
+            //         else
+            //         {                    
+            //             Control.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));   
+            //             PostBenchResult(unit.TakeBenchmarks().ToArray());
+            //         }
+
+            //         clock.Stop();
+                    
+            //         var hosturi = OpUriBuilder.HostUri(host);
+            //         term.print(PostUnit(hosturi, clock.Time, tsStart, time.now())); 
+            //     }               
+            // }
+            // catch(Exception e)
+            // {
+            //     term.error($"Harness execution failed: {e}");
+            // }  
+            // finally
+            // {
+            //     if(enabled)
+            //         PostTestResults(results);
+            // }
+        }
 
         const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
         

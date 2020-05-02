@@ -18,9 +18,9 @@ namespace Z0
         /// Creates a formatter from a rendering function render:T -> string
         /// </summary>
         /// <param name="render">A function that produces text from an element value</param>
-        /// <typeparam name="T">The type of element to format</typeparam>
+        /// <typeparam name="T">The type of element to render</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static IFormatter<T> create<T>(FormatRender<T> render)
+        public static IFormatter<T> content<T>(FormatRender<T> render)
             => new Formatter<T>(render);        
 
         /// <summary>
@@ -29,9 +29,39 @@ namespace Z0
         /// <param name="render">A function that produces text from an element value</param>
         /// <typeparam name="T">The type of element to format</typeparam>
         [MethodImpl(Inline)]
-        public static IFormatter<C,T> create<C,T>(FormatRender<C,T> render)
+        public static IFormatter<C,T> content<C,T>(FormatRender<C,T> render)
             where C : struct
                 => new Formatter<C,T>(render);
+
+        /// <summary>
+        /// Creates a title formatter from a rendering function render:T -> string
+        /// </summary>
+        /// <param name="render">A function that produces text from an element value</param>
+        /// <typeparam name="T">The type of element to render</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ITitleFormatter<T> title<T>(TitleRender<T> render)
+            => new TitleFormatter<T>(render);        
+
+        /// <summary>
+        /// Creates an entitled formatter that provides formatting, entitling and entitled formatting
+        /// </summary>
+        /// <param name="fContent">The content formatter to use</param>
+        /// <param name="fTitle">The title formatter to use</param>
+        /// <typeparam name="T">The type of element to render</typeparam>
+        [MethodImpl(Inline)]
+        public static IEntitled<T> entitled<T>(ITitleFormatter<T> fTitle, IFormatter<T> fContent)
+            => new Entitled<T>(fTitle, fContent);
+
+        /// <summary>
+        /// Creates an entitled formatter that provides formatting, entitling and entitled formatting
+        /// from a format/title render function pair
+        /// </summary>
+        /// <param name="renderF">The format render function</param>
+        /// <param name="renderT">The title render function</param>
+        /// <typeparam name="T">The type of element to render</typeparam>
+        [MethodImpl(Inline)]
+        public static IEntitled<T> entitled<T>(TitleRender<T> renderT, FormatRender<T> renderF)
+            => new Entitled<T>(title(renderT), content(renderF));
 
         /// <summary>
         /// Formats any object, using a custom formatter if it exists or invoking ToString() if not

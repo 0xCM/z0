@@ -12,11 +12,13 @@ namespace Z0.Asm
     /// <summary>
     /// Describes a branching instruction operand
     /// </summary>
-    public readonly struct AsmBranchInfo
+    public readonly struct AsmBranchInfo : ITextual
     {
-        public readonly ulong BaseAddress;
+        public static AsmBranchInfo Empty => default(AsmBranchInfo);
 
-        public readonly ulong TargetAddress;
+        public readonly MemoryAddress Base;
+
+        public readonly MemoryAddress Target;
 
         public readonly int Size;
 
@@ -25,20 +27,35 @@ namespace Z0.Asm
         public ulong LocalAddress 
         {
             [MethodImpl(Inline)]
-            get => Near ? TargetAddress - BaseAddress : TargetAddress;
+            get => Near ? Target - Base : Target;
         }
 
         [MethodImpl(Inline)]
-        public static AsmBranchInfo Define(ulong @base, ulong target, int size, bool near)
-            => new AsmBranchInfo(size, target,near, @base);
+        public static AsmBranchInfo Define(MemoryAddress @base, MemoryAddress target, int size, bool near)
+            => new AsmBranchInfo(@base, target, size, near);
 
         [MethodImpl(Inline)]
-        AsmBranchInfo(int size, ulong target, bool near, ulong @base)
+        AsmBranchInfo(MemoryAddress @base, MemoryAddress target, int size, bool near)
         {
             this.Size = size;
             this.Near = near;
-            this.TargetAddress = target;
-            this.BaseAddress = @base;
+            this.Target = target;
+            this.Base = @base;
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Base == 0 && Target == 0 && Size == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
+        public string Format()
+            => IsEmpty ? string.Empty : text.concat(Base, " -> ", Target);
     }
 }

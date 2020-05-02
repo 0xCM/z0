@@ -1,0 +1,56 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Asm
+{        
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
+    /// <summary>
+    /// Describes an assembly instruction
+    /// </summary>
+    public readonly struct AsmInstructionSummary
+    {
+        [MethodImpl(Inline)]
+        public static AsmInstructionSummary Define(ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
+            => new AsmInstructionSummary(offset, content, spec, operands, encoded);
+        
+        [MethodImpl(Inline)]
+        AsmInstructionSummary(ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
+        {
+            this.Offset = offset;
+            this.AsmContent = content;
+            this.Operands = operands;
+            this.Encoded = encoded;
+            this.Spec = spec;
+        }
+        
+        /// <summary>
+        /// The zero-based offset of the function, relative to the function address
+        /// </summary>
+        public ushort Offset {get;}
+
+        /// <summary>
+        /// The instruction content, suitable for display
+        /// </summary>
+        public string AsmContent {get;}
+        
+        /// <summary>
+        /// The instruction string paired with the op code
+        /// </summary>
+        public AsmInstructionCode Spec {get;}
+
+        /// <summary>
+        /// Describes the instruction operands
+        /// </summary>
+        public AsmOperandInfo[] Operands {get;}
+
+        /// <summary>
+        /// The encoded bytes
+        /// </summary>
+        public byte[] Encoded {get;}
+    }
+}

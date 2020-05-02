@@ -32,21 +32,28 @@ namespace Z0
         
     }
 
+    public interface IStatelessFactory<F,I> : IStateless<F,I>, IServiceFactory
+        where F : unmanaged, I
+        where I : IStateless<F,I>
+    {
+        
+    }
+
     /// <summary>
-    /// Characterizes a stateless service specification
+    /// Characterizes an F-bound polymorphick stateless reification
     /// </summary>
-    /// <typeparam name="S">The reification type</typeparam>
+    /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="I">The service contract</typeparam>
-    public interface IStateless<S,I> : IStateless<I>
-        where S : unmanaged, I
-        where I : IStateless<S,I>
+    public interface IStateless<F,I> : IStateless<I>
+        where F : unmanaged, I
+        where I : IStateless<F,I>
     {
         I Create()
-            => Stateless<I>.Empty.Create<S>();
+            => Stateless<I>.Empty.Create<F>();
         
         [MethodImpl(Inline)]
         static I Service()
-            => Stateless<I>.Empty.Create<S>();
+            => Stateless<I>.Empty.Create<F>();
     }
 
     readonly struct Stateless<I> : IStateless<I>

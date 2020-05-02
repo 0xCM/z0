@@ -22,6 +22,22 @@ namespace Z0
             => Parse(text);
     }
 
+    /// <summary>
+    /// Characterizes a parser that cannot fail (in theory)
+    /// </summary>
+    /// <typeparam name="T">The parsed type</typeparam>
+    /// <remarks>For this scheme to work, it is incumbent upon the reifying type to return a monoidal zero if malformed text is encountered</remarks>
+    public interface ISuccessfulParser<T> : IParser<T>, INullary<T>        
+    {
+        new T Parse(string text);
+
+        ParseResult IParser.Parse(string text)
+            => ParseResult.Success(text, Parse(text));
+
+        ParseResult<T> IParser<T>.Parse(string text)
+            => ParseResult.Success(text, Parse(text));
+    }
+
     public interface IStreamParser<P,T> : IParser<T>
         where P : IParser<T>
     {
@@ -42,4 +58,10 @@ namespace Z0
         
     }
 
+    public class ParserAttribute : Attribute
+    {
+
+        
+
+    }
 }

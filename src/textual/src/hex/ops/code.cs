@@ -20,6 +20,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte code(byte value)
             => skip(in head(Uppercase), value & 0xf);
-
     }
 }

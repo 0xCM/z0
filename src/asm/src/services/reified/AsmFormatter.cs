@@ -32,7 +32,7 @@ namespace Z0.Asm
             => AsmFormat.render(src, Config);
 
         [MethodImpl(Inline)]        
-        public string FormatInstruction(in MemoryAddress @base, in AsmInstructionInfo src)
+        public string FormatInstruction(in MemoryAddress @base, in AsmInstructionSummary src)
             => AsmFormat.render(@base, src, Config);
 
         [MethodImpl(Inline)]        

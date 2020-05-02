@@ -35,7 +35,7 @@ namespace Z0
         /// If the parse attempt failed, the reason for the failure, if available
         /// </summary>
         public Option<object> Reason {get;}
-
+            
         [MethodImpl(Inline)]
         public static ParseResult<T> Success<T>(string source, T value)
             => ParseResult<T>.Success(source, value);
@@ -116,6 +116,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ParseResult<T> Fail(string source, object reason = null)
             => new ParseResult<T>(source, default, reason);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult<T>((string source, T value) src)
+            => Success(src.source, src.value);
 
         [MethodImpl(Inline)]
         public static implicit operator ParseResult(ParseResult<T> src)

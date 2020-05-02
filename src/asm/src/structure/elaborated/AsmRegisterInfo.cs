@@ -6,12 +6,18 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
+    
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Describes a register in the context of an asm instruction operand
     /// </summary>
-    public class AsmRegisterInfo
+    public readonly struct AsmRegisterInfo : ITextual
     {
+        public static AsmRegisterInfo Empty => new AsmRegisterInfo(Register.None);
+
+        [MethodImpl(Inline)]
         public AsmRegisterInfo(Register name)
         {
             this.Name = name;
@@ -19,7 +25,10 @@ namespace Z0.Asm
         
         public Register Name {get;}
 
+        public string Format() 
+            => $"{Name}";
+
         public override string ToString()
-            => Name.ToString();
+            => Format();
     }
 }

@@ -27,10 +27,6 @@ namespace Z0.Asm
         public Option<AsmFunction> Decode(MemberCapture src)
             => DecodeCaptured(src);
 
-        // public Option<AsmFunction> Decode(ParsedMember parsed)
-        //     =>  from i in DecodeInstructions(OperationBits.Define(parsed.MemberUri, parsed.Content))
-        //         select AsmFunction.Define(parsed, i);
-
         public Option<AsmFunction> Decode(ParsedMember src)
             =>  from i in DecodeInstructions(OperationBits.Define(src.Uri, src.ParsedContent))
                 select AsmFunction.Define(src,i);
@@ -62,7 +58,7 @@ namespace Z0.Asm
                 var instructions = new Asm.Instruction[decoded.Count];
                 var formatted = formatter.FormatInstructions(decoded, src.Address);
                 for(var i=0; i<instructions.Length; i++)
-                    instructions[i] = decoded[i].ToInstruction(formatted[i]);
+                    instructions[i] = decoded[i].ToZAsm(formatted[i]);
                 return AsmInstructionList.Create(instructions,src);
             }
             catch(Exception e)
@@ -87,7 +83,7 @@ namespace Z0.Asm
                     ref var instruction = ref decoded.AllocUninitializedElement();
                     decoder.Decode(out instruction); 
                     var format = formatter.FormatInstruction(instruction,src.Address);
-                    f(instruction.ToInstruction(format));
+                    f(instruction.ToZAsm(format));
                 }
 
             }

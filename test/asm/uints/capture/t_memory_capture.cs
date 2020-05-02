@@ -11,6 +11,8 @@ namespace Z0.Asm
 
     public class t_memory_capture : t_asm<t_memory_capture>
     {    
+        public override bool Enabled => false;
+
         bool MemcapCheck(IMemoryCapture memcap, OperationBits src)
         {
             var captured = memcap.Capture(src.Address);

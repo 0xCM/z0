@@ -9,17 +9,17 @@ namespace Z0.Asm
     /// <summary>
     /// A register used by an instruction
     /// </summary>
-    public struct UsedRegister 
+    public readonly struct UsedRegister 
     {
         /// <summary>
         /// Register
         /// </summary>
-        public Register Register {get;set;}
+        public Register Register {get;}
 
         /// <summary>
         /// Register access
         /// </summary>
-        public OpAccess Access {get;set;}
+        public OpAccess Access {get;}
 
         /// <summary>
         /// Constructor

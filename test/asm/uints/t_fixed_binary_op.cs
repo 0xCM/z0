@@ -15,15 +15,12 @@ namespace Z0.Asm
     public class t_fixed_binary_op : t_asm<t_fixed_binary_op>
     {
         ITestFixedBinaryOp Checker => CheckFixed.BinaryOp(Random);
-
         
-        public void check_fixed_lists()
+        void check_fixed_lists()
         {
 
             var kinds = FixedOpKinds.Known.ToArray();
             Control.iter(kinds, k => Trace(k));
         }
-
-
     }
 }

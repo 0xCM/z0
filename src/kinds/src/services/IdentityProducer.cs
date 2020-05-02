@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public interface IIdentityProducer : IStateless<IdentityProducer>
+    public interface IIdentityProducer : IStateless<IdentityProducer,IIdentityProducer>
     {
         [MethodImpl(Inline)]
         NatNumericIdentity NaturalNumeric(ulong n, NumericKind t)   

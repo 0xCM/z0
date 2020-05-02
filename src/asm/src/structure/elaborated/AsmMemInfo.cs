@@ -14,6 +14,8 @@ namespace Z0.Asm
     /// </summary>
     public struct AsmMemInfo : ITextual<AsmMemInfo>
     {      
+        public static AsmMemInfo Empty => default(AsmMemInfo);
+
         [MethodImpl(Inline)]
         public static AsmMemInfo Init(MemorySize size, string sizefmt)
         {
@@ -41,6 +43,11 @@ namespace Z0.Asm
 
         public string SizeFormat {get;set;}
 
+        public bool IsEmpty
+        {
+            get => Size == 0 && text.empty(SizeFormat) && SegmentRegister == 0 && SegmentPrefix == 0;
+        }
+
         public string Format()
         {
             var formatted = string.Empty;
@@ -51,7 +58,6 @@ namespace Z0.Asm
             if(SizeFormat.IsNotBlank())
                 formatted += text.lspace(SizeFormat);
             return formatted;
-
         }
 
         public override string ToString()

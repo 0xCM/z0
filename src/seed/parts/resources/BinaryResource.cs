@@ -5,8 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
+
 
     using static Seed;
 
@@ -15,6 +20,24 @@ namespace Z0
     /// </summary>
     public readonly struct BinaryResource
     {
+        /// <summary>
+        /// Returns the properties declared by a type that define binary resource content
+        /// </summary>
+        /// <typeparam name="T">The defining type</typeparam>
+        public static PropertyInfo[] Providers<T>() 
+            => typeof(T)
+                .StaticProperties()
+                .Where(p => p.PropertyType == typeof(ReadOnlySpan<byte>))
+                .ToArray();
+
+        /// <summary>
+        /// Computes the address of resource content
+        /// </summary>
+        /// <param name="src">The resource provider value</param>
+        [MethodImpl(Inline)]
+        public static unsafe ulong Location(ReadOnlySpan<byte> src)
+            => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
+
         public readonly string Id;
 
         public readonly PartId Owner;
@@ -23,9 +46,11 @@ namespace Z0
 
         public readonly ulong Address;
 
-        public ReadOnlySpan<byte> Data => Bytes;
+        public ReadOnlySpan<byte> Data 
+            => Bytes;
 
-        public ulong RuntimeAddress => ptr(Bytes);
+        public ulong RuntimeAddress 
+            => ptr(Bytes);
 
         public bool IsEmpty => Address == 0;
 
@@ -39,7 +64,7 @@ namespace Z0
         /// <param name="src">The resource data</param>
         [MethodImpl(Inline)]
         public static BinaryResource Define(PartId owner, string id, ReadOnlySpan<byte> src)
-            => new BinaryResource(owner, id, src.Length, location(src));
+            => new BinaryResource(owner, id, src.Length, Location(src));
 
         [MethodImpl(Inline)]
         public static BinaryResource Define(PartId owner, string id, int Length, ulong address)
@@ -68,8 +93,5 @@ namespace Z0
         static ref readonly T head<T>(ReadOnlySpan<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
 
-        [MethodImpl(Inline)]
-        static unsafe ulong location(ReadOnlySpan<byte> src)
-            => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
     }
 }
