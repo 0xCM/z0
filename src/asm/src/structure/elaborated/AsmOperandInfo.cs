@@ -17,12 +17,12 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline)]
         public static AsmOperandInfo Define(int index, OpKind kind, in AsmImmInfo imminfo, in AsmMemInfo memory, 
-            in Register register, in AsmBranchInfo branch)
+            in Register register, IAsmBranch branch)
                 => new AsmOperandInfo(index, kind, imminfo, memory, register, branch);
                 
         [MethodImpl(Inline)]
         public AsmOperandInfo(int index, OpKind kind, in AsmImmInfo imminfo, in AsmMemInfo memory, 
-            in Register register, in AsmBranchInfo branch)
+            in Register register, IAsmBranch branch)
         {
             this.Index = (byte)index;
             this.Kind = kind;
@@ -60,6 +60,6 @@ namespace Z0.Asm
         /// <summary>
         /// Instruction branching info, if applicable
         /// </summary>
-        public AsmBranchInfo Branch {get;}
+        public IAsmBranch Branch {get;}
     }
 }

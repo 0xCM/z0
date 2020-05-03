@@ -15,21 +15,28 @@ namespace Z0.Asm
     public readonly struct AsmInstructionSummary
     {
         [MethodImpl(Inline)]
-        public static AsmInstructionSummary Define(ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
-            => new AsmInstructionSummary(offset, content, spec, operands, encoded);
+        public static AsmInstructionSummary Define(MemoryAddress @base, ushort offset, string content, 
+            AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
+                => new AsmInstructionSummary(@base, offset, content, spec, operands, encoded);
         
         [MethodImpl(Inline)]
-        AsmInstructionSummary(ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
+        AsmInstructionSummary(MemoryAddress @base, ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
         {
-            this.Offset = offset;
-            this.AsmContent = content;
-            this.Operands = operands;
-            this.Encoded = encoded;
-            this.Spec = spec;
+            Base = @base;
+            Offset = offset;
+            AsmContent = content;
+            Operands = operands;
+            Encoded = encoded;
+            Spec = spec;
         }
         
         /// <summary>
-        /// The zero-based offset of the function, relative to the function address
+        /// The base address
+        /// </summary>
+        public MemoryAddress Base {get;}
+        
+        /// <summary>
+        /// The zero-based offset of the function, relative to the base address
         /// </summary>
         public ushort Offset {get;}
 

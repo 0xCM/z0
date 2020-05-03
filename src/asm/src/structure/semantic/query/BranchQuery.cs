@@ -41,7 +41,7 @@ namespace Z0.Asm
         public bool IsBranch(OpKind src)
             => IsNearBranch(src) || IsFarBranch(src);
 
-        public AsmBranchInfo BranchInfo(Instruction src, int index, ulong baseaddress)
+        public IAsmBranch BranchInfo(MemoryAddress @base, Instruction src, int index)
         {
             var k = OperandKind(src,index);
             if(IsBranch(k))
@@ -49,19 +49,19 @@ namespace Z0.Asm
                 switch(k)
                 {
                     case NearBranch16:
-                        return AsmBranchInfo.Define(baseaddress, src.NearBranch16, 16, true);
+                        return new AsmNearBranch(@base, src.IP, src.NearBranch16, 16);
                     case NearBranch32:
-                        return AsmBranchInfo.Define(baseaddress, src.NearBranch32, 32, true);
+                        return new AsmNearBranch(@base, src.IP, src.NearBranch32, 32);
                     case NearBranch64:
-                        return AsmBranchInfo.Define(baseaddress, src.NearBranch64, 64, true);
+                        return new AsmNearBranch(@base, src.IP, src.NearBranch64, 64);
                     case FarBranch16:
-                        return AsmBranchInfo.Define(baseaddress, src.FarBranch16, 16,  false);
+                        return new AsmFarBranch(@base, src.IP, src.FarBranch16, 16);
                     case FarBranch32:
-                        return AsmBranchInfo.Define(baseaddress, src.FarBranch32, 32, false);
+                        return new AsmFarBranch(@base, src.IP, src.FarBranch32, 32);
                 }
             }
 
-            return AsmBranchInfo.Empty;
+            return AsmFarBranch.Empty;
         }
     }  
 }

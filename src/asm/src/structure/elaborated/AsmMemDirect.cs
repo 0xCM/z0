@@ -11,20 +11,24 @@ namespace Z0.Asm
 
     public readonly struct AsmMemDirect
     {
-        public AsmMemDirect(Register register, uint dx, int dxSize, int scale)
+        [MethodImpl(Inline)]
+        public static AsmMemDirect From(Instruction src)
+            => new AsmMemDirect(src.MemoryBase, 
+                    src.MemoryIndexScale,
+                        AsmMemDx.From(src.MemoryDisplacement, src.MemoryDisplSize));
+
+        [MethodImpl(Inline)]
+        AsmMemDirect(Register register, AsmMemScale scale, AsmMemDx dx)
         {
-            this.BaseRegister = register;
-            this.Displacement = dx;
-            this.DisplacementSize = dxSize;
-            this.IndexScale = scale;
+            this.Base = register;
+            this.Dx = dx;
+            this.Scale = scale;
         }
         
-        public Register BaseRegister {get;}
-        
-        public uint Displacement {get;}
-                
-        public int DisplacementSize {get;}
+        public Register Base {get;}
 
-        public int IndexScale {get;}        
+        public AsmMemScale Scale {get;}        
+
+        public AsmMemDx Dx {get;}               
     }
 }

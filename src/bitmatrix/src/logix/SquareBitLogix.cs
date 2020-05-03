@@ -78,122 +78,122 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Not, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> not<T>(in BitMatrix<T> a, in BitMatrix<T> dst)
             where T : unmanaged
                 => ref BitMatrix.not(a, dst);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), IdentityFunction, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> identity<T>(in BitMatrix<T> a)
             where T : unmanaged
                 => ref BitMatrix.identity(a);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), IdentityFunction, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> identity<T>(in BitMatrix<T> A, in BitMatrix<T> dst)
             where T : unmanaged
                 => ref BitMatrix.identity(A, dst);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), False, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> @false<T>(in BitMatrix<T> a, in BitMatrix<T> b, in BitMatrix<T> dst)
             where T:unmanaged
                 => ref BitMatrix.@false(a, b, dst);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), True, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> @true<T>(in BitMatrix<T> a, in BitMatrix<T> b, in BitMatrix<T> dst)
             where T:unmanaged
                 => ref BitMatrix.@true(a, b, dst);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), And, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> dst)
             where T : unmanaged
                 => ref BitMatrix.and(A, B, dst);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Nand, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> dst)
             where T : unmanaged
                 => ref BitMatrixA.nand(A, B, dst);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Or, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> dst)
             where T : unmanaged
                 => ref BitMatrix.or(A, B, dst);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> dst)
             where T : unmanaged
                 => ref BitMatrixA.nor(A,B, dst);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> xor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.xor(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.xnor(A,B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Left, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> left<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => ref BitMatrix.left(A,B);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Left, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> left<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.left(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Right, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> right<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => ref BitMatrix.right(A, B);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Right, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> right<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.right(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), LNot, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> lnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.lnot(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), RNot, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.rnot(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Impl, Closures(UnsignedInts)]
         public static BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.impl(A,B);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Impl, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.impl(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> nonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.nonimpl(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), CImpl, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> cimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.cimpl(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), CNonImpl, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> cnonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.cnonimpl(A,B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), XorNot, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> xornot<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
                 => ref BitMatrix.xornot(A, B, Z);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Select, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> select<T>(in BitMatrix<T> a, in BitMatrix<T> b, in BitMatrix<T> c, in BitMatrix<T> dst)
             where T : unmanaged
                 => ref BitMatrix.select(a, b, c, dst);

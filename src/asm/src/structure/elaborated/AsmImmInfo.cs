@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static NumericWidth;
 
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
@@ -16,53 +17,74 @@ namespace Z0.Asm
     {
         public static AsmImmInfo Empty => default(AsmImmInfo);
 
-        public readonly int Size;
+        public readonly NumericWidth Width;
 
         public readonly ulong Value;
 
         public readonly bool Signed;
 
-        [MethodImpl(Inline)]
-        public static AsmImmInfo Define(int size, long value, bool signed = true)
-            => new AsmImmInfo(size, value, signed);
+        public readonly bool Direct;
+
+        public readonly SignExensionKind SignExension;
 
         [MethodImpl(Inline)]
-        public static AsmImmInfo Define(int size, ulong value, bool signed = false)
-            => new AsmImmInfo(size, value, signed);
+        public static AsmImmInfo Define(byte value, bool direct, SignExensionKind? sek = null)
+            => new AsmImmInfo(W8, value, direct, sek);
 
         [MethodImpl(Inline)]
-        AsmImmInfo(int size, ulong value, bool signed = false)
+        public static AsmImmInfo Define(short value, bool direct, SignExensionKind? sek = null)
+            => new AsmImmInfo(W16, value, direct, sek);
+
+        [MethodImpl(Inline)]
+        public static AsmImmInfo Define(ushort value, bool direct, SignExensionKind? sek = null)
+            => new AsmImmInfo(W16, value, direct, sek);
+
+        [MethodImpl(Inline)]
+        public static AsmImmInfo Define(int value, bool direct, SignExensionKind? sek = null)
+            => new AsmImmInfo(W32, value, direct, sek);
+
+        [MethodImpl(Inline)]
+        public static AsmImmInfo Define(uint value, bool direct, SignExensionKind? sek = null)
+            => new AsmImmInfo(W32, value, direct, sek);
+
+        [MethodImpl(Inline)]
+        public static AsmImmInfo Define(long value, bool direct, SignExensionKind? sek = null)
+            => new AsmImmInfo(W64, value, direct, sek);
+
+        [MethodImpl(Inline)]
+        public static AsmImmInfo Define(ulong value, bool direct, SignExensionKind? sek = null)
+            => new AsmImmInfo(W64, value, direct, sek);
+
+        [MethodImpl(Inline)]
+        AsmImmInfo(NumericWidth size, ulong value, bool direct, SignExensionKind? sek = null)
         {
-            this.Size = size;
+            this.Width = size;
             this.Value = value;
-            this.Signed = signed;
+            this.Signed = false;
+            this.Direct = direct;
+            this.SignExension = sek ?? SignExensionKind.None;
         }
 
         [MethodImpl(Inline)]
-        AsmImmInfo(int size, long value, bool signed = true)
+        AsmImmInfo(NumericWidth size, long value, bool direct, SignExensionKind? sek = null)
         {
-            this.Size = size;
+            this.Width = size;
             this.Value = (ulong)value;
-            this.Signed = signed;
+            this.Signed = true;
+            this.Direct = direct;
+            this.SignExension = sek ?? SignExensionKind.None;
         }
-
-        /// <summary>
-        /// Specifies a label for the immedate that has the form imm{BitWidth}
-        /// </summary>
-        public string Label
-            => $"imm{Size}";
         
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Size == 0 && Value == 0;
+            get => Width == 0 && Value == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
             get => !IsEmpty;
-        }        
-        
+        }                
     }
 }

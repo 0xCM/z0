@@ -48,6 +48,15 @@ namespace Z0.Asm
         string HorizontalSep {get;}
             = " | ";
 
+        string FlowTitle {get;}
+            = "flow";
+
+        string FlagsWrittenTitle {get;}
+            = "flags-written";
+
+        int SubTitlePad {get;}
+            = 4;
+
         public FormatCanonical(IAsmContext context, Type host, FolderPath root)
         {
             Context = context;
@@ -80,12 +89,11 @@ namespace Z0.Asm
             Descriptions.Clear();
         }
 
-        public void Format()
+        public void Format(ApiHostUri host)        
         {
+            var part = host.Owner;
             var service = AsmWorkflows.Contextual(Context).HostCaptureService(CaptureRoot);
-            var part = PartId.Canonical;
-            var uri = ApiHostUri.Define(part, "microexpression");
-            var capture = service.CaptureHost(uri,true);
+            var capture = service.CaptureHost(host,true);
             var parsed = capture.Parsed;
             var decoder = Context.Decoder;
             var memberCount = parsed.Length;
@@ -107,12 +115,25 @@ namespace Z0.Asm
                 }
                 Reset();
             }
+
+        }
+        public void Format()
+        {
+            Format(ApiHostUri.Define(PartId.Canonical, "microexpression"));
                         
         }
 
+        int InstructionKindPad {get;}
+            = 16;
+
+        int OperandIndexPad {get;}
+            = 2;
 
         void Describe(ParsedMember member, Instruction src)
         {
+            var @base = member.Address;
+            require((@base + FunctionSize) == src.IP);                           
+
 
             if(InstructionCount == 0)
             {
@@ -120,13 +141,13 @@ namespace Z0.Asm
                 Descriptions.Add(FunctionSep);
             }
 
-            var id = text.concat(member.Reflected.Name, Chars.FSlash, member.KindId.Format()).PadRight(IdPad);
+            var id = text.concat(member.Reflected.Name, Chars.FSlash, member.KindId.Format(), Chars.Space, Chars.Space, src.IP.FormatHex(zpad:false)).PadRight(IdPad);
             var counted = InstructionCount.FormatCount(InstructionCountPad);
             var title = id + counted + FunctionSize.FormatSmallHex(true);
             var description = text.concat(src.FormattedInstruction, Chars.Space, OpCodeDelimiter, Chars.Space, src.InstructionCode);
             Descriptions.Add(text.concat(title, HorizontalSep, description));
 
-            var operands = asm.Operands(src); 
+            var operands = asm.Operands(@base, src); 
             var summaries = new string[operands.Length];
             for(var i =0; i<operands.Length; i++)               
             {
@@ -134,43 +155,42 @@ namespace Z0.Asm
 
                 var kind = a.Kind; 
 
-                var summary = kind.ToString().ToLower();
+                var index = i.ToString().PadLeft(OperandIndexPad,'0');
+                var kindLabel = kind.ToString().ToLower().PadRight(InstructionKindPad);
+                var summary = text.concat(index, Chars.Space, Chars.Pipe, Chars.Space, kindLabel, Chars.Pipe, Chars.Space);
+
                 if(kind == OpKind.Register)
-                    summary += $"/{asm.Format(a.Register)}";
+                    summary += asm.Format(a.Register);
                 else if(kind == OpKind.Memory)
                     summary += asm.Format(a.Memory);
                 else if (a.Branch.IsNonEmpty)
-                    summary += a.Branch.Format();
+                    summary += asm.Format(a.Branch);
                 else if(a.ImmInfo.IsNonEmpty)
+                {
+                    var immlabel = asm.ForamtKind(a.ImmInfo).PadRight(InstructionKindPad);
+                    summary = text.concat(index, Chars.Space, Chars.Pipe, Chars.Space, immlabel, Chars.Pipe, Chars.Space);
                     summary += asm.Format(a.ImmInfo);
+                }
                 else 
                     summary += "???";
-                // switch(kind)
-                // {
-                //     case OpKind.Register:
-                //         summary += $"/{asm.Format(a.Register)}";
-                //     break;
-                //     case OpKind.Memory:
-                //         summary += asm.Format(a.Memory);
-                //         break;
-                // }
                 summaries[i] = summary;                
             }
             
-            Control.iteri(summaries, (i,s) => 
-                Descriptions.Add(text.concat(title, HorizontalSep, $"Operand {i}: {s}")));
+            Control.iter(summaries, s => 
+                Descriptions.Add(text.concat(title, HorizontalSep, $"{s}")));
 
 
-            if(src.Mnemonic == Mnemonic.Cmp)
-            {
-                Descriptions.Add(string.Concat(title, HorizontalSep, $"written: {FormatCmp(src)}"));
-            }
+            // if(src.Mnemonic == Mnemonic.Cmp)
+            // {
+            //     Descriptions.Add(string.Concat(title, HorizontalSep,  FlagsWrittenTitle.PadRight(SubTitlePad), Chars.Colon, Chars.Space, FormatCmp(src)));
+            // }
 
-            Descriptions.Add(text.concat(title, HorizontalSep, asm.FormatEntitled(src.FlowControl)));  
+            Descriptions.Add(text.concat(title, HorizontalSep, FlowTitle.PadRight(SubTitlePad), Chars.Colon, Chars.Space, asm.Format(src.FlowControl)));  
             Descriptions.Add(text.concat(title, HorizontalSep, SectionSep));  
 
             InstructionCount++;
-            FunctionSize += (ushort)src.ByteLength;                                 
+            FunctionSize += (ushort)src.ByteLength;      
+
         }
     }
 
@@ -187,7 +207,9 @@ namespace Z0.Asm
         {
 
             var formatter = new FormatCanonical(Context, GetType(), DataDir);
-            formatter.Format();
+            //var host = ApiHost.Create<SquareBitLogix>().UriPath;            
+            var host = ApiHost.Create<MicroExpression>().UriPath;
+            formatter.Format(host);
         }
 
 

@@ -26,6 +26,7 @@ namespace Z0.Asm
         {
             var info = new AsmInstructionSummary[src.InstructionCount];
             var offset = (ushort)0;
+            var @base = src.Origin.Start;
 
             for(var i=0; i<info.Length; i++)
             {
@@ -33,7 +34,7 @@ namespace Z0.Asm
                 if(RunChecks)
                     CheckInstructionSize(instruction, offset, src);
 
-                info[i] = AsmSemantic.Service.Summarize(instruction,src.NativeCode.Encoded, instruction.FormattedInstruction, offset, src.Origin.Start);
+                info[i] = AsmSemantic.Service.Summarize(@base, instruction,src.NativeCode.Encoded, instruction.FormattedInstruction, offset);
                 offset += (ushort)instruction.ByteLength;
             }
 

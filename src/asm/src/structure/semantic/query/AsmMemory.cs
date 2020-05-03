@@ -49,7 +49,7 @@ namespace Z0.Asm
                 info.Size = src.MemorySize;
 
                 if(IsMemDirect(k))
-                    info.Direct = new AsmMemDirect(src.MemoryBase, src.MemoryDisplacement, src.MemoryDisplSize, src.MemoryIndexScale);
+                    info.Direct = AsmMemDirect.From(src);
 
                 if(IsMemDirect(k) || IsSegBase(k))
                 {

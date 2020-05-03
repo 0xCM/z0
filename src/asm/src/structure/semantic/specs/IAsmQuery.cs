@@ -12,9 +12,21 @@ namespace Z0.Asm
 
     public interface IAsmQuery
     {
+        IAsmBranch BranchInfo(MemoryAddress @base, Instruction src, int index)
+            => Service.BranchInfo(@base, src,index);        
+
         [MethodImpl(Inline)]
         InstructionInfo Details(Instruction src)        
             => Service.Details(src);
+
+        /// <summary>
+        /// Extracts immediate information, if applicable, from an instruction operand
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
+        [MethodImpl(Inline)]
+        AsmImmInfo DescribeImm(Instruction src, int index)
+            => Service.DescribeImm(src,index);
 
         /// <summary>
         /// Extracts operand instruction data
@@ -22,12 +34,12 @@ namespace Z0.Asm
         /// <param name="src">The source instruction</param>
         /// <param name="@base">The base address</param>
         [MethodImpl(Inline)]
-        AsmOperandInfo[] Operands(Instruction src, MemoryAddress @base = default)
-            => Service.Operands(src, @base);
+        AsmOperandInfo[] Operands(MemoryAddress @base, Instruction src)
+            => Service.Operands(@base, src);
 
         [MethodImpl(Inline)]
-        AsmOperandInfo Operand(Instruction src, int index, MemoryAddress @base = default)
-            => Service.Operand(src,index,@base);            
+        AsmOperandInfo Operand(MemoryAddress @base, Instruction src, int index)
+            => Service.Operand(@base,src,index);            
 
  		/// <summary>
 		/// Gets an operand's kind if it exists
@@ -38,8 +50,8 @@ namespace Z0.Asm
             => Service.OperandKind(src,operand);
 
         [MethodImpl(Inline)]
-        AsmInstructionSummary Summarize(Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset, ulong @base)
-                => Service.Summarize(src,encoded, content,offset, @base);            
+        AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
+                => Service.Summarize(@base, src,encoded, content,offset);            
 
         /// <summary>
         /// Describes the instructions that comprise an instruction list
@@ -64,10 +76,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         bool IsSegBase(OpKind src)
             => Service.IsSegBase(src);        
-
-        [MethodImpl(Inline)]
-        AsmBranchInfo BranchInfo(Instruction src, int index, ulong @base)
-            => Service.BranchInfo(src, index, @base);
 
         /// <summary>
         /// Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch
@@ -100,8 +108,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
-        int ImmSize(OpKind src)
-            => Service.ImmSize(src);
+        NumericWidth ImmWidth(OpKind src)
+            => Service.ImmWidth(src);
 
 		/// <summary>
 		/// Extracts an immediate operand from an instruction
@@ -152,13 +160,13 @@ namespace Z0.Asm
         bool IsImmOperand(OpKind src)
             => Service.IsImmOperand(src);
 
-        /// <summary>
-        /// Extracts immediate information, if applicable, from an instruction operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="index">The operand index</param>
-        AsmImmInfo ImmInfo(Instruction src, int index)
-            => Service.ImmInfo(src,index);
+        // /// <summary>
+        // /// Extracts immediate information, if applicable, from an instruction operand
+        // /// </summary>
+        // /// <param name="src">The source instruction</param>
+        // /// <param name="index">The operand index</param>
+        // AsmImmInfo ImmInfo(Instruction src, int index)
+        //     => Service.ImmInfo(src,index);
 
         /// <summary>
         /// Tests whether the the source operand kind is a register kind

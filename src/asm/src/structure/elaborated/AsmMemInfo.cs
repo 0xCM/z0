@@ -30,5 +30,10 @@ namespace Z0.Asm
         {
             get => Size == 0 && Direct == null && SegmentRegister == 0 && SegmentPrefix == 0;
         }
+
+        public bool HasKnownSize
+        {
+            get => Size != 0;
+        }
     }
 }

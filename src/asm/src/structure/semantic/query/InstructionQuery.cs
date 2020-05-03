@@ -36,30 +36,31 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmOperandInfo[] Operands(Instruction src, MemoryAddress @base = default)
+        public AsmOperandInfo[] Operands(MemoryAddress @base, Instruction src)
         {
             var args = new AsmOperandInfo[src.OpCount];
             for(byte j=0; j< src.OpCount; j++)
-                args[j] = Operand(src, j, @base);
+                args[j] = Operand(@base, src, j);
             return args;
         }
 
         [MethodImpl(Inline)]
-        public AsmOperandInfo Operand(Instruction src, int index, MemoryAddress @base = default)
+        public AsmOperandInfo Operand(MemoryAddress @base, Instruction src, int index)
             => AsmOperandInfo.Define(index, 
                 OperandKind(src,index),
-                ImmInfo(src,index),
+                DescribeImm(src,index),
                 MemInfo(src,index),
                 OperandRegister(src,index),
-                BranchInfo(src,index,@base));
+                BranchInfo(@base, src,index));
  
         [MethodImpl(Inline)]
-        public AsmInstructionSummary Summarize(Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset, ulong @base)
+        public AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
             => AsmInstructionSummary.Define(
+                    @base,
                     (ushort)offset, 
                     content, 
                     src.InstructionCode,
-                    Operands(src,@base), 
+                    Operands(@base, src), 
                     encoded.Slice(offset, src.ByteLength).ToArray()
                     );
 
@@ -84,11 +85,12 @@ namespace Z0.Asm
         {
             var dst = new AsmInstructionSummary[src.Length];
             var offset = (ushort)0;
+            var @base = src.EncodedBytes.Address;
 
             for(var i=0; i<dst.Length; i++)
             {
                 var instruction = src[i];                            
-                dst[i] =   Summarize(instruction, src.EncodedBytes, instruction.FormattedInstruction, offset, src.EncodedBytes.AddressRange.Start);
+                dst[i] =   Summarize(@base, instruction, src.EncodedBytes, instruction.FormattedInstruction, offset );
                 offset += (ushort)instruction.ByteLength;
             }
             return dst;
@@ -102,6 +104,7 @@ namespace Z0.Asm
         {
             var dst = new AsmInstructionSummary[src.InstructionCount];
             var offset = (ushort)0;
+            var @base = src.BaseAddress;
 
             for(var i=0; i<dst.Length; i++)
             {
@@ -110,7 +113,7 @@ namespace Z0.Asm
                 if(src.Code.Length < offset + instruction.ByteLength)
                     throw AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
             
-                dst[i] = Summarize(instruction, src.Code.Encoded, instruction.FormattedInstruction, offset, src.Code.Location.Start);
+                dst[i] = Summarize(@base, instruction, src.Code.Encoded, instruction.FormattedInstruction, offset);
                 offset += (ushort)instruction.ByteLength;
             }
             return dst;

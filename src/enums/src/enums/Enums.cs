@@ -54,6 +54,22 @@ namespace Z0
                 => Enum.IsDefined(typeof(E), v);
 
         /// <summary>
+        /// Determines whether an enum value is valid
+        /// </summary>
+        /// <param name="v">The test value</param>
+        /// <typeparam name="E">The enum source type</typeparam>
+        /// <typeparam name="V">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool defined<E>(E e)
+            where E : unmanaged, Enum
+                => Enum.IsDefined(typeof(E), e);
+
+        [MethodImpl(Inline)]
+        public static E definedOrElse<E>(E e, E alt)
+            where E : unmanaged, Enum
+                => defined<E>(e) ? e : alt;
+
+        /// <summary>
         /// Determines whether an enum defines a name-identified literal
         /// </summary>
         /// <param name="name">The test name</param>
