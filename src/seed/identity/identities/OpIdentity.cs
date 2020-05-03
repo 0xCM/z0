@@ -29,6 +29,9 @@ namespace Z0
         internal static OpIdentity Set(string src)
             => new OpIdentity(src);
 
+        public static OpIdentity Define(string text, string name, string suffix, bool generic, bool imm, string[] components)
+            => new OpIdentity(text, name, suffix, generic, imm, components);
+
         [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)
             => src.Identifier;
@@ -41,12 +44,13 @@ namespace Z0
         public static bool operator!=(OpIdentity a, OpIdentity b)
             => !a.Equals(b);
 
-        public static OpIdentity Define(string text, string name, string suffix, bool generic, bool imm, string[] components)
-            => new OpIdentity(text, name, suffix, generic, imm, components);
+
+        static string Safe(string src)
+            => src.Replace(Chars.Lt, IDI.TypeArgsOpen).Replace(Chars.Gt, IDI.TypeArgsClose);
 
         OpIdentity(string text, string name, string suffix, bool generic, bool imm, string[] components)
         {
-            this.Identifier = text;
+            this.Identifier = Safe(text);
             this.Name = name; 
             this.Suffix = suffix;
             this.IsGeneric = generic;
@@ -57,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         OpIdentity(string text)
         {
-            this.Identifier = text;
+            this.Identifier = Safe(text);
             this.Name = string.Empty;
             this.Suffix = string.Empty;
             this.IsGeneric = false;
@@ -107,36 +111,41 @@ namespace Z0
         public override string ToString()
             => Identified.Format();
 
-        public string ToLegal()
-        {
-            var length = Identifier.Length;
-            Span<char> dst = stackalloc char[length];
-            for(var i=0; i< length; i++)
-            {
-                var c = Identifier[i];
-                switch(c)
-                {
-                    case IDI.TypeArgsOpen:
-                        dst[i] = IDI.TypeArgsOpenAlt;
-                    break;
-                    case IDI.TypeArgsClose:
-                        dst[i] = IDI.TypeArgsCloseAlt;
-                    break;
-                    case IDI.ArgsOpen:
-                        dst[i] = IDI.ArgsOpenAlt;
-                    break;
-                    case IDI.ArgsClose:
-                        dst[i] = IDI.ArgsCloseAlt;
-                    break;
-                    case IDI.ArgSep:
-                        dst[i] = IDI.ArgSepAlt;
-                    break;
-                    default:
-                        dst[i] = c;
-                    break;
-                }
-            }
-            return new string(dst);
-        }
+        public string ToLegalIdentifier()
+            => CodeIdMachine.Service.Manufacture(this);
+
+        public FileName ToLegalFileName(FileExtension ext)
+            => FileName.Define(FileIdMachine.Service.Manufacture(this), ext);
+
+        // {
+        //     var length = Identifier.Length;
+        //     Span<char> dst = stackalloc char[length];
+        //     for(var i=0; i< length; i++)
+        //     {
+        //         var c = Identifier[i];
+        //         switch(c)
+        //         {
+        //             case IDI.TypeArgsOpen:
+        //                 dst[i] = IDI.TypeArgsOpenAlt;
+        //             break;
+        //             case IDI.TypeArgsClose:
+        //                 dst[i] = IDI.TypeArgsCloseAlt;
+        //             break;
+        //             case IDI.ArgsOpen:
+        //                 dst[i] = IDI.ArgsOpenAlt;
+        //             break;
+        //             case IDI.ArgsClose:
+        //                 dst[i] = IDI.ArgsCloseAlt;
+        //             break;
+        //             case IDI.ArgSep:
+        //                 dst[i] = IDI.ArgSepAlt;
+        //             break;
+        //             default:
+        //                 dst[i] = c;
+        //             break;
+        //         }
+        //     }
+        //     return new string(dst);
+        // }
     }
 }

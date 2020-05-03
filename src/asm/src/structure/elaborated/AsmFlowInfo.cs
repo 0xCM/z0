@@ -7,6 +7,10 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Reflection;
+    using System.Collections.Generic;
+
+    using static Memories;
 
     public struct AsmFlowInfo
     {
@@ -43,5 +47,10 @@ namespace Z0.Asm
         public bool IsCallNearIndirect {get; set;}
         
         public bool IsCallFarIndirect {get; set;}
+
+        // public string Format()
+        // {
+        //     var props = type<AsmFlowInfo>().Properties().WithPropertyType<bool>().Values();
+        // }
     }
 }

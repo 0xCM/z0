@@ -175,7 +175,7 @@ namespace Z0.Asm
                 if(members.Length !=0)
                 {
                     var report = CreateReport(host,members);
-                    var paths = CodeArchive.CaptureArchive(host.UriPath);                
+                    var paths = CodeArchive.HostArchive(host.UriPath);                
                     SaveReport(report, paths.ExtractPath).OnSome(AnalyzeExtracts);
                 }
             }

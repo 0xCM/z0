@@ -22,7 +22,7 @@ namespace Z0
         public static ITypeIdentityProvider provider(Type src, Func<Type,ITypeIdentityProvider> fallback)
             => TypeIdentityProviders.GetOrAdd(src.EffectiveType(), fallback);
 
-       /// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="basename">The base name of the resource</param>

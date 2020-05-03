@@ -10,6 +10,7 @@ namespace Z0
 
     using static Seed;
     
+    [IdentityProvider]
     public readonly struct EnumIdentityProvider : ITypeIdentityProvider<EnumIdentityProvider,EnumIdentity>
     {                
         public EnumIdentity Identify(Type src)

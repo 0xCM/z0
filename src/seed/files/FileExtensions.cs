@@ -16,6 +16,8 @@ namespace Z0
 
         public static FileExtension Exe =>  FileExtension.Define("exe");
 
+        public static FileExtension Txt =>  FileExtension.Define("txt");
+
         public static FileExtension Il =>  FileExtension.Define("il");
 
         public static FileExtension Hex =>  FileExtension.Define("hex");

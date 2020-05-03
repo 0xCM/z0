@@ -42,7 +42,7 @@ namespace Z0.Asm
                 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = CodeArchive.CaptureArchive(host.UriPath);
+            var dst = CodeArchive.HostArchive(host.UriPath);
             if(dst.HexPath.Exists())
             {
                 var code = ArchiveOps.Service.CreateCodeIndex(StatelessIdentity.Services.MemberLocator(), ApiSet, host.UriPath, CodeArchive.RootDir);

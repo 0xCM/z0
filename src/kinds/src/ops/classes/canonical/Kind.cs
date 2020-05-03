@@ -72,5 +72,10 @@ namespace Z0
         /// </summary>
         Zeroes = Id.Zeroes,
 
+        /// <summary>
+        /// Classifies an operation that reifies a swich expression
+        /// </summary>
+        Switch = Id.Switch,
+
     }   
 }

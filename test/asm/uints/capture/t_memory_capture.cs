@@ -62,7 +62,7 @@ namespace Z0.Asm
                 //Trace($"Loaded host bits", $"{bits.Length} | {host.Format()}");
                 foreach(var f in bits) 
                 {            
-                    decoder.DecodeInstructions(f.Encoded, Decoded);
+                    decoder.Decode(f.Encoded, Decoded);
                 }
                 
                 //Trace($"Decoded host instructions", $"{hostCount} | {totalCount} | {host.Format()}");

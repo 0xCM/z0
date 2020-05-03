@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Kinds)" />
   </ItemGroup>
 
 </Project>

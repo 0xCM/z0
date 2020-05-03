@@ -54,6 +54,7 @@ namespace Z0
 
     public sealed class OnesAttribute : A { public OnesAttribute() : base(K.Ones) {} }
 
+    public sealed class SwitchAttribute : A { public SwitchAttribute() : base(K.Switch) {} }
 
     
 

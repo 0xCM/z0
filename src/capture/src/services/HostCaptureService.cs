@@ -82,7 +82,7 @@ namespace Z0.Asm
 
         void Save(ApiHostUri host, ParsedMember[] src)
         {
-            var hostArchive = CodeArchive.CaptureArchive(host);
+            var hostArchive = CodeArchive.HostArchive(host);
             var report = MemberParseReport.Create(host,src);
             report.Save(hostArchive.ParsedPath);
 
@@ -93,14 +93,14 @@ namespace Z0.Asm
 
         void Save(ApiHostUri host, MemberExtract[] extracts)
         {
-            var hostArchive = CodeArchive.CaptureArchive(host);
+            var hostArchive = CodeArchive.HostArchive(host);
             var report = ExtractReport.Create(host, extracts);            
             Extracted(host, extracts, report.Save(hostArchive.ExtractPath));
         }
 
         void Save(ApiHostUri host, AsmFunction[] decoded)
         {
-            var hostArchive = CodeArchive.CaptureArchive(host);
+            var hostArchive = CodeArchive.HostArchive(host);
             using var writer = Context.Writer(hostArchive.AsmPath);
             for(var i=0 ;i<decoded.Length; i++)          
                 writer.WriteAsm(decoded[i]);

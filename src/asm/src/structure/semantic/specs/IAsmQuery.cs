@@ -169,12 +169,51 @@ namespace Z0.Asm
             => Service.IsRegisterOperand(src);
 
         /// <summary>
-        /// Extracts register information, if applicable, from an instruction operand
+        /// Extracts memory information, if applicable, from an instruction operand
         /// </summary>
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
         [MethodImpl(Inline)]
-        AsmRegisterInfo RegisterInfo(Instruction src, int index)
-            => Service.RegisterInfo(src,index);
+        AsmMemInfo MemInfo(Instruction src, int index)            
+            => Service.MemInfo(src,index);
+
+        /// <summary>
+        /// Determines whether the classified operand is some sort of memory
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        [MethodImpl(Inline)]
+        bool IsMem(OpKind src)            
+            => Service.IsMem(src);
+
+        /// <summary>
+        /// Determines whether the classified operand is an ES ("extra") memory segment.
+        /// Possible choices include es:[di], es:[edi], es:[rdi]
+        /// Relevant instruction attributes inlude: MemorySize
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        [MethodImpl(Inline)]
+        bool IsMemEs(OpKind src)            
+            => Service.IsMemEs(src);
+
+        /// <summary>
+        /// Determines whether the classified operand is a 64-bit memory offset. 
+        /// Relevant instruction attributes include:
+        /// MemoryAddress64, MemorySegment, SegmentPrefix, MemorySize
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        [MethodImpl(Inline)]
+        bool IsMem64(OpKind src)
+            => Service.IsMem64(src);
+
+        /// <summary>
+        /// Determines whether the classified operand is direct memory.
+        /// Relevant instruction attributes include: 
+        /// MemoryDisplSize, MemorySize, MemoryIndexScale, MemoryDisplacement, MemoryBase, 
+        /// MemoryIndex, MemorySegment, SegmentPrefix
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        [MethodImpl(Inline)]
+        bool IsMemDirect(OpKind src)
+            => Service.IsMemDirect(src);
     }
 }

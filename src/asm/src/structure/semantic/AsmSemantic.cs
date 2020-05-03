@@ -14,7 +14,7 @@ namespace Z0.Asm
         public static IAsmQuery Service => default(AsmQuery);   
     }
     
-    public interface IAsmSemantic : IFlowControl, IAsmQuery
+    public interface IAsmSemantic : ISemanticFormat, IAsmQuery
     {
     }
     

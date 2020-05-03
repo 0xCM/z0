@@ -11,10 +11,6 @@ namespace Z0
     /// </summary>
     public interface IFormatter
     {
-        /// <summary>
-        /// Renders an object as text
-        /// </summary>
-        /// <param name="src">The source object</param>
-        string Format(object src);
+
     }
 }

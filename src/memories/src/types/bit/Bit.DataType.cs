@@ -22,7 +22,7 @@ namespace Z0
     /// a constant barrage of shifts, movements, etc. from not being 32-bit aligned.
     /// </remarks>    
     [
-        IdentityProvider,
+        IdentityProvider(typeof(bit)),
         UserType(UserTypeId.BitId), 
         Width(TypeWidth.W1),
         ConversionProvider(typeof(BitDataTypeConverter))

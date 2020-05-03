@@ -9,7 +9,8 @@ namespace Z0
     public class IdentityProviderAttribute : Attribute
     {
         /// <summary>
-        /// Use of this constructor implies that the attribution target is the provider
+        /// Use of this constructor implies that the attribution target provides identies
+        /// for what are likely unattributable types, such as framework-defined types, for example
         /// </summary>
         public IdentityProviderAttribute()
         {

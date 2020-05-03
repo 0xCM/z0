@@ -83,7 +83,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source bits</param>
         public static string header(OperationBits src)
-            => comment(ByteSpanProperty.Define(src.Uri.OpId.ToLegal(), src.Encoded).Format());
+            => comment(ByteSpanProperty.Define(src.Uri.OpId.ToLegalIdentifier(), src.Encoded).Format());
 
         public static string render(in AsmFunctionList src)
         {
@@ -117,19 +117,6 @@ namespace Z0.Asm
             
             return dst.ToString();
         }
-
-        public static string render(MemorySize src)
-            => src switch {
-                MemorySize.Int8 => "8i",
-                MemorySize.Int16 => "16i",
-                MemorySize.Int32 => "32i",
-                MemorySize.Int64 => "64i",
-                MemorySize.UInt8 => "8u",
-                MemorySize.UInt16 => "16u",
-                MemorySize.UInt32 => "32u",
-                MemorySize.UInt64 => "64u",
-                _   => src.ToString()
-            };
 
 
         /// <summary>

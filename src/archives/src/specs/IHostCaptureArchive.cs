@@ -9,33 +9,61 @@ namespace Z0
 
     using static Seed;
 
+    /// <summary>
+    /// A host-specific capture archive
+    /// </summary>
+    public readonly struct HostCaptureArchive : IHostCaptureArchive
+    {                                        
+        [MethodImpl(Inline)]
+        public static IHostCaptureArchive Create(FolderPath root, ApiHostUri host)
+            => new HostCaptureArchive(root,host);
+
+        public ApiHostUri Host {get;}
+
+        public FolderPath RootDir {get;}
+
+        public FolderPath[] Clear(params PartId[] parts)
+        {
+            return Arrays.empty<FolderPath>();
+        }
+
+        [MethodImpl(Inline)]
+        internal HostCaptureArchive(FolderPath root, ApiHostUri host)
+        {
+            Host = host;
+            RootDir = root;
+        }    
+    }
+    
     public interface IHostCaptureArchive : ICaptureArchive
     {
-        ICaptureArchive Parent {get;}        
+        ApiHostUri Host {get;}
 
-        ApiHostUri HostUri {get;}
+        FileName ExtractFileName 
+            => HostFileName(Host, ExtractExt);
 
-        FolderPath ICaptureArchive.RootDir => Parent.RootDir;
+        new FilePath ExtractPath 
+            => ExtractDir + ExtractFileName;
 
-        FileName BaseFileName => FileName.Define(text.concat(HostUri.Owner.Format(), text.dot(),  HostUri.Name));
+        FileName ParsedFileName 
+            => HostFileName(Host, ParsedExt);
 
-        FileName ExtractFileName => BaseFileName + ExtractExt;
+        FilePath ParsedPath 
+            => ParsedDir + ParsedFileName;
 
-        new FilePath ExtractPath => ExtractDir + ExtractFileName;
+        new FileName HexFileName 
+            => HostFileName(Host, HexExt);
 
-        FileName ParsedFileName => BaseFileName + ParsedExt;
+        new FilePath HexPath 
+            => HexDir + HexFileName;
 
-        new FileName HexFileName => BaseFileName + HexExt;
+        FileName AmsFileName 
+            => HostFileName(Host, AsmExt);
 
-        FilePath ParsedPath => Parent.ParsedDir + ParsedFileName;
-
-        new FilePath HexPath => Parent.HexDir + HexFileName;
-
-        FileName AmsFileName => BaseFileName + AsmExt;
-
-        new FilePath AsmPath => Parent.AsmDir + AmsFileName;         
+        new FilePath AsmPath 
+            => AsmDir + AmsFileName;         
 
         new FileName CilFileName
-            => FileName.Define(text.concat(HostUri.Owner.Format(), text.dot(), HostUri.Name), CilExt);
+            => HostFileName(Host, CilExt);
     }
 }

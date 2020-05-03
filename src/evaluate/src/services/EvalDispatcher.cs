@@ -135,7 +135,7 @@ namespace Z0
         void Analyze<T>(in MemberCode api, in UnaryEval<T> eval)
             where T : unmanaged
         {
-            if(api.KindId != null && EvalSkip.Contains(api.KindId.Value))
+            if(EvalSkip.Contains(api.KindId))
                 return;
 
             var name = api.Member.Id.Name;
@@ -166,7 +166,7 @@ namespace Z0
        void Analyze<T>(in MemberCode api, in BinaryEval<T> eval)
             where T : unmanaged
         {
-            if(api.KindId != null && EvalSkip.Contains(api.KindId.Value))
+            if(EvalSkip.Contains(api.KindId))
                 return;
 
             var name = api.Member.Id.Name;
@@ -196,7 +196,7 @@ namespace Z0
         {
             var kid = api.Member.KindId;
             int count = 128;
-            if(kid == null || kid == 0 || kid == OpKindId.Div || kid == OpKindId.Mod)
+            if(kid == 0 || kid == OpKindId.Div || kid == OpKindId.Mod)
                 return;
 
             var nk = api.Method.ReturnType.NumericKind();
@@ -249,7 +249,7 @@ namespace Z0
         {
             var kid = api.Member.KindId;
             int count = 128;
-            if(kid == null || kid == 0 || kid == OpKindId.Div || kid == OpKindId.Mod)
+            if(kid == 0 || kid == OpKindId.Div || kid == OpKindId.Mod)
                 return;
 
             var nk = api.Method.ReturnType.NumericKind();

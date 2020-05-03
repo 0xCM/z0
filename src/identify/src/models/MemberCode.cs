@@ -21,7 +21,7 @@ namespace Z0
 
         public OperationCode Content {get;}
 
-        public OpKindId? KindId {get;}
+        public OpKindId KindId {get;}
 
         public OpIdentity Id => Member.Id;
 

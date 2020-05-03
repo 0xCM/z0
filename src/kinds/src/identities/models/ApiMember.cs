@@ -39,7 +39,7 @@ namespace Z0
 
         public MethodInfo Method {get;}
 
-        public OpKindId? KindId {get;}
+        public OpKindId KindId {get;}
 
         public MemoryAddress Address {get;}
 

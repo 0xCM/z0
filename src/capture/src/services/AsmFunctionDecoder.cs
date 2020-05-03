@@ -28,18 +28,18 @@ namespace Z0.Asm
             => DecodeCaptured(src);
 
         public Option<AsmFunction> Decode(ParsedMember src)
-            =>  from i in DecodeInstructions(OperationBits.Define(src.Uri, src.ParsedContent))
+            =>  from i in Decode(OperationBits.Define(src.Uri, src.ParsedContent))
                 select AsmFunction.Define(src,i);
 
         Option<AsmFunction> DecodeCaptured(MemberCapture src)
-            => from i in DecodeInstructions(src.Code)
+            => from i in Decode(src.Code)
                 let block = AsmInstructionBlock.Define(src.Code, i, src.TermCode)
                 select Builder.BuildFunction(src.Uri, src.OpSig.Format(), block);
 
-        public Option<AsmInstructionList> DecodeInstructions(in OperationBits src)
-            => DecodeInstructions(src.Encoded);
+        public Option<AsmInstructionList> Decode(in OperationBits src)
+            => Decode(src.Encoded);
 
-        public Option<AsmInstructionList> DecodeInstructions(in LocatedCode src)        
+        public Option<AsmInstructionList> Decode(in LocatedCode src)        
         {
             try
             {   
@@ -68,7 +68,29 @@ namespace Z0.Asm
             }
         }
 
-        public void DecodeInstructions(in LocatedCode src, Action<Asm.Instruction> f)        
+        public Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f)
+        {
+            try
+            {
+                var decoded = list<Asm.Instruction>();                
+                void OnDecoded(Asm.Instruction src)
+                {
+                    decoded.Add(src);
+                    f(src);
+                }
+                
+                Decode(src.ParsedContent, OnDecoded);
+                var list = AsmInstructionList.Create(decoded.ToArray(), src.ParsedContent);
+                return AsmFunction.Define(src,list);
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return Option.none<AsmFunction>();
+            }
+        }
+
+        public void Decode(in LocatedCode src, Action<Asm.Instruction> f)        
         {
             try
             {

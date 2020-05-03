@@ -20,12 +20,5 @@ namespace Z0
         /// <param name="src">The source value</param>
         string Format(T src);
 
-        /// <summary>
-        /// Default untyped implemntation predicated on a typed implementation
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        string IFormatter.Format(object src)
-            => Format((T)src);        
     } 
 }

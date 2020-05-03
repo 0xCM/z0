@@ -18,18 +18,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public bool IsRegisterOperand(OpKind src)
             => src == OpKind.Register;  
-
-        /// <summary>
-        /// Extracts register information, if applicable, from an instruction operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="index">The operand index</param>
-        [MethodImpl(Inline)]
-        public AsmRegisterInfo RegisterInfo(Instruction src, int index)
-            => IsRegisterOperand(OperandKind(src,index)) 
-              ? new AsmRegisterInfo(OperandRegister(src,index)) 
-              : AsmRegisterInfo.Empty;
-
+            
     	/// <summary>
 		/// Gets the operand's register value. Use this property if the operand has kind <see cref="OpKind.Register"/>
 		/// </summary>

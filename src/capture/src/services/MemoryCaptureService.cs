@@ -40,7 +40,7 @@ namespace Z0.Asm
             => from raw in Extract(src)
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
-                from instructions in Decoder.DecodeInstructions(parsed)
+                from instructions in Decoder.Decode(parsed)
                 let bits = ParsedMemoryExtract.Define(src, raw, parsed)
                 select MemoryCapture.Define(src, bits, instructions, string.Empty);
 
@@ -55,6 +55,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public Option<AsmInstructionList> Decode(LocatedCode src)
-            => Decoder.DecodeInstructions(src);
+            => Decoder.Decode(src);
     }
 }

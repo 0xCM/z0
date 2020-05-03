@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public interface ITitleFormatter
     {
-        string FormtTitle(object src);
+
     }
 
     /// <summary>
@@ -24,7 +24,5 @@ namespace Z0
     {
         string FormatTitle(T src);        
 
-        string ITitleFormatter.FormtTitle(object src)
-            => FormatTitle((T)src);
     }
 }

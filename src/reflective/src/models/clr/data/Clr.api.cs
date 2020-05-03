@@ -37,6 +37,9 @@ namespace Z0
         public static IEnumerable<TypeData<T>> data<T>(IEnumerable<TypeInfo> src)
             => src.Select(p => data<T>(p));
  
+        public static PropertyData<T>[] data<T>(PropertyInfo[] src)
+            => src.Select(p => data<T>(p));
+    
         public static IEnumerable<PropertyData<T>> data<T>(IEnumerable<PropertyInfo> src)
             => src.Select(p => data<T>(p));
     }

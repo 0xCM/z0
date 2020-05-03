@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
-    public readonly struct AsmImmInfo : ITextual
+    public readonly struct AsmImmInfo
     {
         public static AsmImmInfo Empty => default(AsmImmInfo);
 
@@ -63,7 +63,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => !IsEmpty;
         }        
-        public string Format()
-            => IsEmpty ? string.Empty : text.concat(Label, Value.FormatHex());
+        
     }
 }

@@ -43,7 +43,7 @@ namespace Z0.Asm
         }
 
         static IHostCaptureArchive CreateHostArchive(ApiHostUri host, FolderPath dst = null)
-            => Archives.Services.HostCaptureArchive(Archives.Services.CaptureArchive(dst), host);
+            => Archives.Services.HostCapture(dst, host);
 
         public Option<FilePath> SaveHex(AsmFunction[] src, bool append)    
         {

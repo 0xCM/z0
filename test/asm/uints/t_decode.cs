@@ -10,6 +10,7 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static Seed;
+    using static Memories;
 
     public class t_decode : t_asm<t_decode>
     {
@@ -34,58 +35,60 @@ namespace Z0.Asm
             return modified.ToString();
         }
 
-        void check_decode(OpKindId id, params NumericKind[] kinds)
-        {               
-            var count = z8;
-            var size = z16;
-            var label = LocalAddress.Empty;
-            const string MapsTo = "==>";
+    
+
+        // void check_decode(OpKindId id, params NumericKind[] kinds)
+        // {               
+        //     var count = z8;
+        //     var size = z16;
+        //     var label = LocalAddress.Empty;
+        //     const string MapsTo = "==>";
 
 
-            void OnDecoded(Instruction src)
-            {
-                var counted = count.FormatCount(2);                
-                var title = id.Format() + counted + label;
-                var description = text.concat(src.InstructionCode, Chars.Space, MapsTo, Chars.Space, src.FormattedInstruction);
-                Trace(title, description);
+        //     void OnDecoded(Instruction src)
+        //     {
+        //         var counted = count.FormatCount(2);                
+        //         var title = id.Format() + counted + label;
+        //         var description = text.concat(src.InstructionCode, Chars.Space, MapsTo, Chars.Space, src.FormattedInstruction);
+        //         Trace(title, description);
 
-                var operands = asm.Operands(src); 
-                var summaries = new string[operands.Length];
-                for(var i =0; i<operands.Length; i++)               
-                {
-                    var a = operands[i];
+        //         var operands = asm.Operands(src); 
+        //         var summaries = new string[operands.Length];
+        //         for(var i =0; i<operands.Length; i++)               
+        //         {
+        //             var a = operands[i];
 
-                    var kind = a.Kind; 
+        //             var kind = a.Kind; 
 
-                    var summary = kind.ToString().ToLower();
-                    switch(kind)
-                    {
-                        case OpKind.Register:
-                            summary += $"/{a.Register.Format()}";
-                            break;
-                    }
-                    summaries[i] = summary;                
-                }
+        //             var summary = kind.ToString().ToLower();
+        //             switch(kind)
+        //             {
+        //                 case OpKind.Register:
+        //                     summary += $"/{a.Register.Format()}";
+        //                     break;
+        //             }
+        //             summaries[i] = summary;                
+        //         }
                 
-                Control.iteri(summaries, (i,s) => Trace(title, $"Operand {i}: {s}"));
+        //         Control.iteri(summaries, (i,s) => Trace(title, $"Operand {i}: {s}"));
 
 
-                if(src.Mnemonic == Mnemonic.Cmp)
-                {
-                    Trace(title, $"written: {FormatCmp(src)}");
-                }
+        //         if(src.Mnemonic == Mnemonic.Cmp)
+        //         {
+        //             Trace(title, $"written: {FormatCmp(src)}");
+        //         }
 
 
-                Trace(title, asm.FormatEntitled(src.FlowControl));  
-                Trace(title, SectionSep);           
+        //         Trace(title, asm.FormatEntitled(src.FlowControl));  
+        //         Trace(title, SectionSep);           
 
-                count++;
-                label += src.ByteLength;
-                size += (ushort)src.ByteLength;
-            }
+        //         count++;
+        //         label += src.ByteLength;
+        //         size += (ushort)src.ByteLength;
+        //     }
 
-            AsmCheck.Decoder.DecodeInstructions(TestCases.Case(id,kinds), OnDecoded);
-        }
+        //     AsmCheck.Decoder.Decode(TestCases.Case(id,kinds), OnDecoded);
+        // }
 
 
         void DescribeResources()
@@ -103,11 +106,11 @@ namespace Z0.Asm
             Control.iter(TestCases, DescribeResource);         
         }
 
-        public void check_cases()
+        void check_cases()
         {
 
-            check_decode(OpKindId.Or, NumericKind.U8, NumericKind.U8);
-            check_decode(OpKindId.Within, NumericKind.U8, NumericKind.U8, NumericKind.U8);
+            //check_decode(OpKindId.Or, NumericKind.U8, NumericKind.U8);
+            //check_decode(OpKindId.Within, NumericKind.U8, NumericKind.U8, NumericKind.U8);
         }
 
     }

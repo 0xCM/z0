@@ -48,7 +48,7 @@ namespace Z0.Asm
 
                 try
                 {
-                    var paths = dst.CaptureArchive(host.UriPath);
+                    var paths = dst.HostArchive(host.UriPath);
                     if(host.Owner.IsNone())
                         return;
 

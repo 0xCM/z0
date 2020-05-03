@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Characterizes an address-identified target
@@ -15,5 +16,12 @@ namespace Z0
     public interface IAddressable : ITextual
     {
         MemoryAddress Address {get;}
-    }            
+    }     
+
+    public interface IAddressable<W,T> : IAddressable
+        where W : unmanaged, ITypeWidth
+        where T : unmanaged
+    {
+        
+    }       
 }

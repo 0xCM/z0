@@ -63,13 +63,6 @@ namespace Z0
         public static IEntitled<T> entitled<T>(TitleRender<T> renderT, FormatRender<T> renderF)
             => new Entitled<T>(title(renderT), content(renderF));
 
-        /// <summary>
-        /// Formats any object, using a custom formatter if it exists or invoking ToString() if not
-        /// </summary>
-        /// <param name="src">The object to format</param>
-        [MethodImpl(Inline)]
-        public static string format(object src)
-            => GetFormatter(src).Format(src);
 
         [MethodImpl(Inline)]
         static IFormatter CreateFormatter(Type realization)

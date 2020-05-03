@@ -63,7 +63,7 @@ namespace Z0
                   => from m in HostedDirect(src,kind)                        
                   let address = MemoryAddress.Define(Jit(m.Method))
                   let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Method.Name, m.Id)
-                  select Member.Define(uri, m.Method, m.KindId ?? OpKindId.None, address);
+                  select Member.Define(uri, m.Method, m.KindId, address);
 
             public IEnumerable<Member> LocatedGeneric<K>(IApiHost src, K kind)
                   where K : unmanaged, Enum

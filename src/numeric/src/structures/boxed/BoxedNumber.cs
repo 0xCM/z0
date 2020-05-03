@@ -13,7 +13,7 @@ namespace Z0
     /// A numbered box
     /// </summary>
     [
-        IdentityProvider,
+        IdentityProvider(typeof(BoxedNumber)),
         UserType(UserTypeId.BoxedNumberId), 
         ConversionProvider(typeof(BoxedNumberConverter))
     ]

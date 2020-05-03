@@ -20,21 +20,19 @@ namespace Z0
 
         public FolderPath ArchiveRoot {get;}            
 
-        static FolderPath DefaultArchivRoot => Archives.Services.CaptureArchive().RootDir;
-
         [MethodImpl(Inline)]
         internal HostBitsArchive(PartId part, ApiHostUri host, FolderPath root)
         {
             this.Part = part;
             this.Host = host;
-            this.ArchiveRoot = root ?? DefaultArchivRoot;
+            this.ArchiveRoot = root;
         }
 
         internal HostBitsArchive(PartId catalog, FolderPath root)
         {
             this.Part = catalog;
             this.Host = ApiHostUri.Empty;
-            this.ArchiveRoot = root ?? DefaultArchivRoot;
+            this.ArchiveRoot = root;
         }
 
         public IEnumerable<OperationBits> ReadBits(ApiHostUri host)

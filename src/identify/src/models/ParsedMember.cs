@@ -34,10 +34,6 @@ namespace Z0
         public readonly LocatedCode ParsedContent;   
 
         [MethodImpl(Inline)]
-        public static ParsedMember Define(MemberExtract src, int seq, ExtractTermCode term, LocatedCode parsed)
-            => new ParsedMember(src, seq, term,parsed);
-
-        [MethodImpl(Inline)]
         public ParsedMember(MemberExtract src, int seq, ExtractTermCode term, LocatedCode parsed)
         {
             this.Source = src;
@@ -49,25 +45,43 @@ namespace Z0
         /// <summary>
         /// The host-relative operation identifier
         /// </summary>
-        public OpIdentity Id  => Source.Id;
+        public OpIdentity Id
+            => Source.Id;
 
         /// <summary>
         /// The globally-unique operation uri 
         /// </summary>
-        public OpUri Uri => Source.Uri;
+        public OpUri Uri 
+            => Source.Uri;
+
+        /// <summary>
+        /// The member kind, if known
+        /// </summary>
+        public OpKindId KindId
+            => Source.Member.KindId;
+
+        /// <summary>
+        /// Specifies whether the parsed member is of known kind
+        /// </summary>
+        public bool IsKinded
+            => KindId != 0;
 
         /// <summary>
         /// The extract data
         /// </summary>
-        public LocatedCode SourceContent => Source.Content;
+        public LocatedCode SourceContent 
+            => Source.Content;
 
         /// <summary>
         /// The operation memory address
         /// </summary>
-        public MemoryAddress Address => SourceContent.Address;
+        public MemoryAddress Address 
+            => SourceContent.Address;
 
-        public MethodInfo SourceMember => Source.Member.Method;
+        public MethodInfo Reflected 
+            => Source.Member.Method;
         
-        public OperationBits ParsedBits => OperationBits.Define(Uri, ParsedContent);
+        public OperationBits ParsedBits 
+            => OperationBits.Define(Uri, ParsedContent);
     }
 }

@@ -45,7 +45,8 @@ namespace Z0
                     StringComparison.InvariantCultureIgnoreCase);
     
         [MethodImpl(Inline)]
-        string ITextual.Format() => DenullifiedIdentity;
+        string ITextual.Format() 
+            => DenullifiedIdentity;
 
         int IComparable.CompareTo(object src)
             => DenullifiedIdentity.CompareTo((src as IIdentified)?.Identifier);

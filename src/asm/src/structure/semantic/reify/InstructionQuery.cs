@@ -49,8 +49,8 @@ namespace Z0.Asm
             => AsmOperandInfo.Define(index, 
                 OperandKind(src,index),
                 ImmInfo(src,index),
-                AsmMemory.MemInfo(src,index),
-                RegisterInfo(src,index),
+                MemInfo(src,index),
+                OperandRegister(src,index),
                 BranchInfo(src,index,@base));
  
         [MethodImpl(Inline)]
@@ -115,14 +115,5 @@ namespace Z0.Asm
             }
             return dst;
         }
-
-        [MethodImpl(Inline)]
-        public bool IsSegBase(OpKind src)
-            => src == OpKind.MemorySegDI
-            || src == OpKind.MemorySegEDI
-            || src == OpKind.MemorySegESI
-            || src == OpKind.MemorySegRDI
-            || src == OpKind.MemorySegRSI
-            || src == OpKind.MemorySegSI;
     }
 }

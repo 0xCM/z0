@@ -139,6 +139,8 @@ namespace Z0
                 return none<TypeIdentity>();
         }
 
+        
+
         static readonly ITypeIdentityProvider DefaultProvider
             = new FunctionalProvider(DoDivination);
 
@@ -154,7 +156,7 @@ namespace Z0
 
         readonly struct FunctionalProvider : ITypeIdentityProvider
         {     
-            readonly Func<Type, TypeIdentity> f;
+            readonly Func<Type,TypeIdentity> f;
             
             [MethodImpl(Inline)]
             public FunctionalProvider(Func<Type, TypeIdentity> f)

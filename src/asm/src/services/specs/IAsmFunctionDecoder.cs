@@ -27,15 +27,17 @@ namespace Z0.Asm
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        Option<AsmInstructionList> DecodeInstructions(in OperationBits src);        
+        Option<AsmInstructionList> Decode(in OperationBits src);        
 
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        Option<AsmInstructionList> DecodeInstructions(in LocatedCode src);  
+        Option<AsmInstructionList> Decode(in LocatedCode src);  
 
-        void DecodeInstructions(in LocatedCode src, Action<Instruction> f);                      
+        Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f);
+        
+        void Decode(in LocatedCode src, Action<Instruction> f);                      
 
     }
 }

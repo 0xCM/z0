@@ -25,7 +25,7 @@ namespace Z0.Asm
         public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList instructions)
         {         
             var code = OperationBits.Define(encoding.Uri, encoding.ParsedContent);  
-            var sig = encoding.SourceMember.Signature().Format();          
+            var sig = encoding.Reflected.Signature().Format();          
             return new AsmFunction(encoding.Uri, sig, code, encoding.TermCode, instructions);
         }
 

@@ -11,7 +11,7 @@ namespace Z0
     
     public readonly struct Archives : IArchives
     {
-        public static IArchives Services => default(Archives);
+        public static IArchives Services => default(Archives);    
     }
     
     public interface IArchives : IStatelessFactory<Archives>
@@ -19,6 +19,10 @@ namespace Z0
         IUriBitsReader UriBitsReader => new UriBitsReader();
 
         IBitArchiveReader BitArchiveReader => new BitArchiveReader();
+
+        ISemanticArchive Semantic => SemanticArchive.Service;
+
+        FolderPath DefaultRootDir => Env.Current.LogDir;
 
         [MethodImpl(Inline)]
         IOperationalArchive Operational(FolderPath root) 
@@ -34,21 +38,21 @@ namespace Z0
         [MethodImpl(Inline)]
         IUriBitsWriter UriBitsWriter(FilePath dst)
             => new UriBitsWriter(dst);
-
-        [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
-            => new CaptureArchive(root ?? Env.Current.LogDir, area ?? FolderName.Empty, subject ?? FolderName.Empty);
         
         [MethodImpl(Inline)]
-        IHostCaptureArchive HostCaptureArchive(ICaptureArchive root, ApiHostUri host) 
-            => new HostCaptureArchive(root,host);
+        ICaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
+            => new CaptureArchive(root ?? DefaultRootDir, area ?? FolderName.Empty, subject ?? FolderName.Empty);
+        
+        [MethodImpl(Inline)]
+        IHostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
+            => new HostCaptureArchive(root ?? DefaultRootDir, host);
         
         [MethodImpl(Inline)]
         IHostBitsArchive HostBits(PartId part, FolderPath root = null)
-            =>new HostBitsArchive(part, root);
+            => new HostBitsArchive(part, root ?? DefaultRootDir);
 
         [MethodImpl(Inline)]
         IHostBitsArchive HostBits(PartId part, ApiHostUri host, FolderPath root = null)
-            => new HostBitsArchive(part, host, root);
+            => new HostBitsArchive(part, host, root ?? DefaultRootDir);
     }
 }

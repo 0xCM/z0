@@ -11,6 +11,7 @@ namespace Z0
 
     using static Seed;
 
+
     readonly struct MultiDiviner : IMultiDiviner
     {
         [MethodImpl(Inline)]
@@ -22,7 +23,7 @@ namespace Z0
             => Identity.identify(src);
 
         public OpIdentity DivineIdentity(Delegate src)
-            => Identity.identify(src);
+            => DelegateIdentityDiviner.Service.DivineIdentity(src);
 
         [MethodImpl(Inline)]
         public GenericOpIdentity GenericIdentity(MethodInfo src)

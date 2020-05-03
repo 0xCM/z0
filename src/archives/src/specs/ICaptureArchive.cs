@@ -10,19 +10,54 @@ namespace Z0
     using System.Linq;
 
     using static Seed;
+    using static Memories;
 
     using static FileSystem;
 
-    public interface ICaptureArchive : IService
+    public interface ICaptureArchive : IArchive
     {
+        ICaptureArchive Narrow(FolderName area, FolderName subject)
+            => new CaptureArchive(RootDir, area, subject);        
+
         /// <summary>
-        /// The folder to which all path calculation is relative
+        /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
         /// </summary>
-        FolderPath RootDir {get;}
+        FolderPath[] Clear(params PartId[] parts)
+        {
+            if(parts.Length == 0)
+            {
+                var dst = list<FolderPath>();
+                dst.Add(ExtractDir.Clear());
+                dst.Add(ParsedDir.Clear());
+                dst.Add(AsmDir.Clear());
+                dst.Add(HexDir.Clear());
+                dst.Add(UnparsedDir.Clear());
+                return dst.ToArray();
+            }
+            else
+            {
+                for(var i=0; i<parts.Length; i++)
+                {
+                    var part = parts[i];
+                    Control.iter(ExtractDir.Files(part, ExtractExt), f => f.Delete());
+                    Control.iter(ParsedDir.Files(part, ParsedExt), f => f.Delete());
+                    Control.iter(AsmDir.Files(part, AsmExt), f => f.Delete());
+                    Control.iter(HexDir.Files(part, HexExt), f => f.Delete());
+                    Control.iter(UnparsedDir.Files(part, UnparsedExt), f => f.Delete());
+                }
+                return Control.array<FolderPath>();
+            }
+        }                
+        
+        [MethodImpl(Inline)]
+        IHostCaptureArchive HostArchive(ApiHostUri host)
+            => new HostCaptureArchive(RootDir, host);
 
-        FolderName AreaName => FolderName.Empty;
+        FolderName AreaName 
+            => FolderName.Empty;
 
-        FolderName SubjectName => FolderName.Empty;
+        FolderName SubjectName 
+            => FolderName.Empty;
 
         FolderName RootFolder 
             => FolderName.Define("emissions");
@@ -48,63 +83,68 @@ namespace Z0
         FolderName ImmRootFolder 
             => FolderName.Define("imm");
 
-        FileExtension ExtractExt => FileExtension.Define($"x.{FileExtensions.Csv}");
+        FileExtension ExtractExt 
+            => FileExtension.Define($"x.{FileExtensions.Csv}");
 
-        FileExtension ParsedExt => FileExtension.Define($"p.{FileExtensions.Csv}");
+        FileExtension ParsedExt 
+            => FileExtension.Define($"p.{FileExtensions.Csv}");
 
-        FileExtension UnparsedExt => FileExtension.Define($"u.{FileExtensions.Csv}");
+        FileExtension UnparsedExt 
+            => FileExtension.Define($"u.{FileExtensions.Csv}");
 
-        FileExtension HexExt => FileExtensions.Hex;
+        FolderPath DataRoot 
+            => reify(RootDir + RootFolder);
 
-        FileExtension AsmExt => FileExtensions.Asm;
+        FolderPath ExtractDir 
+            => reify(RootDir + ExtractFolder);
 
-        FileExtension CilExt => FileExtensions.Il;
+        FolderPath UnparsedDir 
+            => reify(RootDir + UnparsedFolder);
 
-        FileExtension LogExt => FileExtensions.Log;
-
-        FolderPath DataRoot => reify(RootDir + RootFolder);
-
-        FolderPath ExtractDir => reify(RootDir + ExtractFolder);
-
-        FolderPath UnparsedDir => reify(RootDir + UnparsedFolder);
-
-        FolderPath ParsedDir => reify(RootDir + ParsedFolder);
+        FolderPath ParsedDir 
+            => reify(RootDir + ParsedFolder);
         
-        FolderPath HexDir => reify(RootDir + HexFolder);
+        FolderPath HexDir 
+            => reify(RootDir + HexFolder);
     
-        FolderPath AsmDir => reify(RootDir + AsmFolder);
+        FolderPath AsmDir 
+            => reify(RootDir + AsmFolder);
 
-        FolderPath LogDir => reify(RootDir + LogFolder);
+        FolderPath LogDir 
+            => reify(RootDir + LogFolder);
 
-        FolderPath ImmRootDir => reify(RootDir + ImmRootFolder);
+        FolderPath ImmRootDir 
+            => reify(RootDir + ImmRootFolder);
 
-        FolderPath ImmSubDir(FolderName folder) => reify(ImmRootDir + folder);         
+        FolderPath ImmSubDir(FolderName folder) 
+            => reify(ImmRootDir + folder);         
 
-        FolderPath ImmSubDir(RelativeLocation location) => reify(ImmRootDir +  location);
+        FolderPath ImmSubDir(RelativeLocation location) 
+            => reify(ImmRootDir +  location);
 
-        FileName HexFileName(OpIdentity m) 
-            => FileName.Define(m, HexExt);
+        FileName HexFileName(OpIdentity id) 
+            => FileName.Define(id, HexExt);
 
-        FileName CilFileName(OpIdentity m) 
-            => FileName.Define(m, CilExt);
+        FileName CilFileName(OpIdentity id) 
+            => FileName.Define(id, CilExt);
 
-        FileName AsmFileName(OpIdentity m) 
-            => FileName.Define(m, AsmExt);
+        FileName AsmFileName(OpIdentity id) 
+            => FileName.Define(id, AsmExt);
 
         FileName AsmFileName(ApiHostUri host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), AsmExt);
+            => HostFileName(host,AsmExt);
 
-        FilePath HexImmPath(PartId origin, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + HexFileName(id);
+        FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
+            => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + HexFileName(id);
 
-        FilePath AsmImmPath(PartId origin, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(RelativeLocation.Define(origin.Format(), host.Name)) + AsmFileName(id);
+        FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id)
+            => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + AsmFileName(id);
 
-        FilePath HexPath(FileName filename)
-            => HexDir + filename;
+        FilePath HexPath(FileName fn)
+            => HexDir + fn;
 
-        FilePath AsmPath(FileName filename)
-            => AsmDir + filename;
+        FilePath AsmPath(FileName fn)
+            => AsmDir + fn;
 
         FilePath AsmPath<T>()
             => AsmPath(FileName.Define(typeof(T).Name, AsmExt));
@@ -130,31 +170,28 @@ namespace Z0
         FilePath LogPath(ApiHostUri host)
             => LogDir + FileName.Define(host.Name, LogExt);
 
-        IEnumerable<FilePath> AsmFiles => AsmDir.Files(AsmExt);  
+        IEnumerable<FilePath> AsmFiles 
+            => AsmDir.Files(AsmExt);  
 
-        IEnumerable<FilePath> HexFiles => HexDir.Files(HexExt);     
+        IEnumerable<FilePath> HexFiles 
+            => HexDir.Files(HexExt);     
 
-        IEnumerable<FilePath> ExtractFiles => ExtractDir.Files(ExtractExt);     
+        IEnumerable<FilePath> ExtractFiles 
+            => ExtractDir.Files(ExtractExt);     
 
-        IEnumerable<FilePath> ParseFiles => ParsedDir.Files(ParsedExt);    
+        IEnumerable<FilePath> ParseFiles 
+            => ParsedDir.Files(ParsedExt);    
 
-        FolderPath ImmAsmDir => ImmSubDir(AsmFolder);
+        FolderPath ImmAsmDir 
+            => ImmSubDir(AsmFolder);
 
-        FolderPath ImmHexDir => ImmSubDir(HexFolder);
+        FolderPath ImmHexDir 
+            => ImmSubDir(HexFolder);
 
-        IEnumerable<FilePath> ImmAsmFiles => ImmAsmDir.Files(AsmExt);
+        IEnumerable<FilePath> ImmAsmFiles 
+            => ImmAsmDir.Files(AsmExt);
 
-        IEnumerable<FilePath> ImmHexFiles => ImmHexDir.Files(HexExt);
-
-        /// <summary>
-        /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
-        /// </summary>
-        FolderPath[] Clear(params PartId[] parts);
-        
-        ICaptureArchive Narrow(FolderName area, FolderName subject);
-
-        [MethodImpl(Inline)]
-        IHostCaptureArchive CaptureArchive(ApiHostUri host)
-            => Archives.Services.HostCaptureArchive(this, host);        
+        IEnumerable<FilePath> ImmHexFiles 
+            => ImmHexDir.Files(HexExt);
     }
 }

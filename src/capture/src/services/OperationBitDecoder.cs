@@ -17,14 +17,14 @@ namespace Z0.Asm
         IAsmFunctionDecoder Decoder => AsmWorkflows.Stateless.AsmDecoder();
         
         public Option<AsmInstructionList> Decode(OperationBits src)
-            => Decoder.DecodeInstructions(src);
+            => Decoder.Decode(src);
             
         public IEnumerable<AsmInstructionList> Decode(IEnumerable<OperationBits> operations)
         {
             var decoder = Decoder;
             foreach(var op in operations)
             {
-                var decoded = decoder.DecodeInstructions(op);
+                var decoded = decoder.Decode(op);
                 if(decoded)
                     yield return decoded.Value;
             }            

@@ -45,7 +45,7 @@ namespace Z0
                     Length : extract.ParsedContent.Length,
                     TermCode: extract.TermCode,
                     Uri : extract.Uri,
-                    OpSig : extract.SourceMember.Signature().Format(),
+                    OpSig : extract.Reflected.Signature().Format(),
                     Data : extract.ParsedContent
                 );
 
