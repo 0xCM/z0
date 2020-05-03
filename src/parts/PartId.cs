@@ -102,6 +102,8 @@ public enum PartId : ulong
     Matrix = 160, MatrixTest = Matrix | Test,
 
     Machines = 180, MachinesTest = Machines | Test,
+
+    Machine = 185,
     
     MklApi = 220, MklApiTest = MklApi | Test,
 
