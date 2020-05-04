@@ -308,7 +308,7 @@ namespace Z0
         /// <typeparam name="F">The operand type</typeparam>
         FixedBinaryOp<F> LoadFixedinaryOp<F>(BufferTokens buffers, BufferSeqId index, MemberCode src)
             where F : unmanaged, IFixed
-                => buffers[index].EmitFixedBinaryOp<F>(src);
+                => buffers[index].EmitFixedBinaryOp<F>(src.Encoded);
 
         /// <summary>
         /// Loads and invokes a fixed binary operator

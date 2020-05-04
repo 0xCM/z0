@@ -26,7 +26,7 @@ namespace Z0.Asm
         }
 
         public Option<AsmFunction> Decode(CapturedCode src)
-            => from i in Decode(src.HostedBits.Encoded)
+            => from i in Decode(src.Encoded)
                 let block = AsmInstructionBlock.Define(src.HostedBits, i, src.TermCode)
                 select Services.FunctionBuilder.BuildFunction(src.Uri, src.Method.Signature().Format(), block);
 

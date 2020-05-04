@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct MemberExtractData : IIndex<ExtractRecord>
+    public readonly struct MemberExtractData
     {
         readonly ExtractRecord[] Data;
 
@@ -52,7 +52,7 @@ namespace Z0
 
         public int Length => Data.Length;
 
-        public ref ExtractRecord this[int index] { [MethodImpl(Inline)] get =>  ref Data[index]; }
+        public ref readonly ExtractRecord this[int index] { [MethodImpl(Inline)] get =>  ref Data[index]; }
 
     }
 }

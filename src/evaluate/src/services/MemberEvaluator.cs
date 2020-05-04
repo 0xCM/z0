@@ -41,7 +41,7 @@ namespace Z0
         {
             var count = src.Count;
             //var f = buffers[Left].EmitBinaryOp<T>(api);
-            var f = Dynamic.EmitBinaryOp<T>(buffers[Left], api);
+            var f = Dynamic.EmitBinaryOp<T>(buffers[Left], api.Encoded);
             for(var i=0; i<count; i++)
             {
                 ref readonly var pair = ref src[i];
@@ -70,7 +70,7 @@ namespace Z0
             where F : unmanaged, IFixed
         {
             var count = src.Count;
-            var f = Dynamic.EmitBinaryOp<F>(buffers[Left], api);
+            var f = Dynamic.EmitBinaryOp<F>(buffers[Left], api.Encoded);
             var dst = Tuples.triples<F>(src.Count);
             for(var i=0; i<count; i++)
             {

@@ -24,7 +24,6 @@ namespace Z0
         PartId Owner => HostingType.Assembly.Id();
     
         IEnumerable<MethodInfo> HostedMethods => HostingType.DeclaredMethods(false);
-
     }
 
     public interface IApiHost<H> : IApiHost

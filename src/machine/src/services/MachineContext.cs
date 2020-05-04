@@ -20,7 +20,7 @@ namespace Z0
 
         FolderPath CodeRoot {get;}
 
-        IHostBitsArchive CodeArchive {get;}
+        //IHostBitsArchive CodeArchive {get;}
 
         Paired<ApiHostUri,FilePath>[] CodeFiles {get;}
     }
@@ -55,7 +55,7 @@ namespace Z0
 
         public FolderPath CodeRoot {get;}
 
-        public IHostBitsArchive CodeArchive {get;}
+        //public IHostBitsArchive CodeArchive {get;}
 
         public Paired<ApiHostUri,FilePath>[] CodeFiles {get;}
     }

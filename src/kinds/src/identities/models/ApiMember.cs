@@ -59,7 +59,8 @@ namespace Z0
             OpUri = uri;
             KindId = kindId;
             Method = insist(method);
-            Address = insist(address, a => a.NonZero);
+            //Address = insist(address, a => a.NonZero);
+            Address = address;
             HostUri = OpUri.HostPath;
         }        
 

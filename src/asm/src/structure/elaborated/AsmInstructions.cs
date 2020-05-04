@@ -17,7 +17,6 @@ namespace Z0.Asm
     /// </summary>         
     public readonly struct AsmInstructions : 
         IEnumerable<Instruction>, 
-        IIndex<Instruction>, 
         IEncoded<AsmInstructions,BinaryCode>, 
         IEquatable<AsmInstructions>
     {
@@ -36,13 +35,13 @@ namespace Z0.Asm
             Encoded = data;
         }
 
-        public ref Instruction this[int index]  { [MethodImpl(Inline)] get => ref Inxs[index]; }
+        public ref readonly Instruction this[int index]  { [MethodImpl(Inline)] get => ref Inxs[index]; }
         
-        public int Count { [MethodImpl(Inline)] get => Inxs.Length; }
-
         public int Length { [MethodImpl(Inline)] get => Inxs.Length; }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => Inxs == null || Inxs.Length == 0; }
+        public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
+
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
 
         public static implicit operator Instruction[](AsmInstructions src)
             => src.Inxs;

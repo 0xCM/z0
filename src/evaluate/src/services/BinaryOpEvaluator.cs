@@ -18,7 +18,7 @@ namespace Z0
         public ref readonly BinaryEval<T> Evaluate(in BinaryOpEval<T> exchange)
         {
             var f = exchange.ApiCode.Member.Method.CreateDelegate<BinaryOp<T>>();
-            var g = Dynamic.EmitBinaryOp<T>(exchange.Buffers[Left], exchange.ApiCode);
+            var g = Dynamic.EmitBinaryOp<T>(exchange.Buffers[Left], exchange.ApiCode.Encoded);
 
             for(var i=0; i<exchange.SrcCount; i++)
             {
