@@ -19,7 +19,7 @@ namespace Z0.Asm
             if(!captured)
                 return false;
 
-            var data = captured.Value.Parsed.Encoded;
+            var data = captured.Value.Encoded.Encoded;
             if(data.Length != src.Length)
                 return false;
             return true;

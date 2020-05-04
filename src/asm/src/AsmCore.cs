@@ -19,7 +19,7 @@ namespace Z0.Asm
     /// Defines factory methods that produce context-free services that require no *unsupplied* state to operate 
     /// </summary>
     public interface IAsmCore : IStatelessFactory<AsmCore>, IIdentities, IArchives, IDynops
-    {
+    {        
         AsmWriterFactory AsmWriterFactory
             => AsmFunctionWriter.Factory;
 
@@ -63,6 +63,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         IHostArchiver HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => new HostArchiver(host, formatter,  insist(dst));
+            => new HostArchiver(host, formatter, insist(dst));
+
     }
 }

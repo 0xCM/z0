@@ -33,13 +33,13 @@ namespace Z0
         /// Extracts encoded content that defines executable code for a located member
         /// </summary>
         /// <param name="src">The source member</param>
-        public ExtractedMember Extract(Member src)
+        public ExtractedMember Extract(ApiMember src)
         {
             Span<byte> buffer = stackalloc byte[BufferLength];
             return Extract(src, MemoryReader.Service, buffer);
         }
 
-        public ExtractedMember[] Extract(Member[] members)
+        public ExtractedMember[] Extract(ApiMember[] members)
         {
             var dst = new ExtractedMember[members.Length];
             Span<byte> buffer = stackalloc byte[BufferLength];            
@@ -57,7 +57,7 @@ namespace Z0
             => Extract(Identities.Services.ApiLocator.Located(src));
 
         [MethodImpl(Inline)]
-        ExtractedMember Extract(Member src, IMemoryReader reader, Span<byte> buffer)
+        ExtractedMember Extract(ApiMember src, IMemoryReader reader, Span<byte> buffer)
         {
             buffer.Clear();      
             var address = src.Address;          

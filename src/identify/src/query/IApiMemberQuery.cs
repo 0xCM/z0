@@ -14,7 +14,7 @@ namespace Z0
     {
         ApiMembers Members {get;}
 
-        IEnumerable<Member> Located => Members.Where(m => m.Address.NonZero);
+        IEnumerable<ApiMember> Located => Members.Where(m => m.Address.NonZero);
 
         ApiMembers OfKind<K>(K kind)
             where K : unmanaged, Enum

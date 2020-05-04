@@ -10,11 +10,6 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    public interface IExtractReportParser
-    {
-        MemberParseReport Parse(ApiHostUri host, ExtractReport report);
-    }
-
     public readonly struct ExtractReportParser : IExtractReportParser
     {
         [MethodImpl(Inline)]

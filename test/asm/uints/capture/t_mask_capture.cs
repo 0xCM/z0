@@ -14,7 +14,6 @@ namespace Z0.Asm
 
     public sealed class t_mask_capture : t_asm<t_mask_capture>
     {    
-
         public void capture_natural_masks()
         {
             using var hexout = HexWriter();

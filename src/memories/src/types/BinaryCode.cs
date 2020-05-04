@@ -60,8 +60,6 @@ namespace Z0
             Encoded = insist(bytes);
         }
         
-  
-
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded; }
         
         public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
@@ -74,21 +72,24 @@ namespace Z0
         
         public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref refs.skip(Head, index); }
         
-        public bool Equals(BinaryCode rhs)
+        public bool Equals(BinaryCode src)
         {
-            if(this.IsNonEmpty && rhs.IsNonEmpty)
-                return Encoded.SequenceEqual(rhs.Encoded);
+            if(IsNonEmpty && src.IsNonEmpty)
+                return Encoded.SequenceEqual(src.Encoded);
             else
                 return false;
         }
+        
+        public string Format()
+            => Encoded.FormatHexBytes();
 
         public override int GetHashCode()
             => Encoded.GetHashCode();
         
         public override bool Equals(object src)
-            => src is BinaryCode c && Equals(c);
-
-        public string Format()
-            => Encoded.FormatHexBytes();
+            => src is BinaryCode encoded && Equals(encoded);
+        
+        public override string ToString() 
+            => Format();
     }
 }

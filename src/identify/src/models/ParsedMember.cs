@@ -47,11 +47,6 @@ namespace Z0
         public OpIdentity Id => Uri.OpId;
 
         /// <summary>
-        /// The operation memory address
-        /// </summary>
-        public MemoryAddress Address => Encoded.Address;
-
-        /// <summary>
         /// The member operation, reflected
         /// </summary>
         public MethodInfo Method => Extracted.Member.Method;            
@@ -61,13 +56,19 @@ namespace Z0
         /// </summary>
         public OpKindId KindId => Extracted.Member.KindId;
 
-        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
-
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => !Address.NonZero; }
+        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Address.NonZero; }
+        public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
+
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
+
+        public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
+
+        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
+
+        public MemoryAddress Address { [MethodImpl(Inline)] get => Encoded.Address; }
 
         public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment; }
 

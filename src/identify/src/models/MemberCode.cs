@@ -15,17 +15,17 @@ namespace Z0
     /// </summary>    
     public readonly struct MemberCode : IIdentifiedCode<MemberCode,UriBits>
     {
-        public static MemberCode Empty => Define(Member.Empty, BinaryCode.Empty);
+        public static MemberCode Empty => Define(ApiMember.Empty, BinaryCode.Empty);
 
         [MethodImpl(Inline)]
-        public static MemberCode Define(Member member, BinaryCode code)
+        public static MemberCode Define(ApiMember member, BinaryCode code)
             => new MemberCode(member, code);
 
         [MethodImpl(Inline)]
-        public static MemberCode Define(Member member, UriBits code)
+        public static MemberCode Define(ApiMember member, UriBits code)
             => new MemberCode(member, code);
 
-        public Member Member {get;}
+        public ApiMember Member {get;}
 
         public UriBits Encoded {get;}
         
@@ -41,19 +41,25 @@ namespace Z0
 
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
+        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
+
+        public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
+
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
+
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(MemberCode src)
             => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
-        internal MemberCode(Member member, UriBits code)
+        internal MemberCode(ApiMember member, UriBits code)
         {
             Member = member;
             Encoded = code;
         }
 
         [MethodImpl(Inline)]
-        internal MemberCode(Member member, BinaryCode code)
+        internal MemberCode(ApiMember member, BinaryCode code)
         {
             Member = member;
             Encoded = new UriBits(member.OpUri, code);

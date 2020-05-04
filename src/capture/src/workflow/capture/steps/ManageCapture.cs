@@ -23,9 +23,9 @@ namespace Z0.Asm
                 Workflow = workflow;
             }
 
-            public void CaptureCatalogs(AsmWorkflowConfig config, params PartId[] parts)
+            public void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts)
             {
-                var root = Archives.Services.CaptureArchive(config.EmissionRoot);
+                var root = Archives.Services.CaptureArchive(config.ArchiveRoot);
                 CaptureCatalogs(root, parts);
             }
 

@@ -24,10 +24,26 @@ namespace Z0.Asm
             => Context = context;
     }
     
-    public interface IAsmWorkflows : IAsmContextual
+    public interface IAsmWorkflows : IAsmContextual, IAsmCore
     {
         CaptureExchange CaptureExchange
             => Asm.CaptureExchange.Create(Context);        
+
+        [MethodImpl(Inline)]
+        IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
+            => new ImmSpecializer(decoder);        
+
+        [MethodImpl(Inline)]
+        IMemoryExtractor ICaptureServices.MemoryExtractor(byte[] buffer)
+            => Svc.MemoryExtractor.Create(buffer);
+
+        [MethodImpl(Inline)]
+        IAsmFunctionDecoder ICaptureServices.AsmDecoder(in AsmFormatSpec? format)
+            => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
+
+        [MethodImpl(Inline)]
+        IMemberExtractor ICaptureServices.HostExtractor(int? bufferlen)
+            => MemberExtractor.Create(bufferlen ?? Pow2.T14);
 
         /// <summary>
         /// Creates a default capture worklfow
@@ -61,21 +77,6 @@ namespace Z0.Asm
         IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
             => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, dst);
 
-        [MethodImpl(Inline)]
-        IMemoryExtractor ICaptureServices.MemoryExtractor(byte[] buffer)
-            => Svc.MemoryExtractor.Create(buffer);
-
-        [MethodImpl(Inline)]
-        IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
-            => new ImmSpecializer(decoder);        
-
-        [MethodImpl(Inline)]
-        IAsmFunctionDecoder ICaptureServices.AsmDecoder(in AsmFormatSpec? format)
-            => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
-
-        [MethodImpl(Inline)]
-        IMemberExtractor ICaptureServices.HostExtractor(int? bufferlen)
-            => MemberExtractor.Create(bufferlen ?? Pow2.T14);
 
         [MethodImpl(Inline)]
         IHostCaptureService IAsmContextual.HostCaptureService(FolderPath root)

@@ -12,17 +12,17 @@ namespace Z0.Asm
     /// <summary>
     /// Defines common asm workfow configuration settings
     /// </summary>
-    public readonly struct AsmWorkflowConfig
+    public readonly struct AsmArchiveConfig
     {
         [MethodImpl(Inline)]
-        public AsmWorkflowConfig(FolderPath root)
+        public AsmArchiveConfig(FolderPath root)
         {
-            this.EmissionRoot = root;
+            ArchiveRoot = root;
         }
 
         /// <summary>
         /// Specifies the root emisson folder, bwlow which all data will be written
         /// </summary>
-        public FolderPath EmissionRoot {get;}
+        public FolderPath ArchiveRoot {get;}
     }
 }

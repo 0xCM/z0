@@ -25,7 +25,7 @@ namespace Z0
         
         public BufferTokens Buffers => Context.Buffers;
         
-        public Member Member => Context.Member;
+        public ApiMember Member => Context.Member;
 
         public UriBits ApiBits => Context.ApiBits;
 

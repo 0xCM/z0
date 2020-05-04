@@ -24,12 +24,12 @@ namespace Z0
         public static MemberParseRecord CreateParseRecord(CapturedCode src)
             => MemberParseRecord.Define
                 (
-                    Sequence : 0,
+                    Sequence: 0,
                     SourceSequence: 0,
-                    Address : src.Address,
-                    Length : src.Encoded.Length,
+                    Address: src.Address,
+                    Length: src.Length,
                     TermCode: src.TermCode,
-                    Uri : src.Uri,
+                    Uri: src.Uri,
                     OpSig : src.Method.Signature().Format(),
                     Data : src.Encoded
                 );
@@ -46,13 +46,9 @@ namespace Z0
 
         public OpIdentity Id => Uri.OpId;
         
-        public MemoryAddress Address { [MethodImpl(Inline)] get => Encoded.Address;}
-
-        public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment;}
-
         public HostedBits HostedBits  { [MethodImpl(Inline)] get => new HostedBits(Uri, Encoded); }
 
-        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Encoded; }
+        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
         public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
 
@@ -60,6 +56,13 @@ namespace Z0
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
 
+        public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
+
+        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
+
+        public MemoryAddress Address { [MethodImpl(Inline)] get => Encoded.Address; }
+
+        public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment; }
 
         [MethodImpl(Inline)]
         public static CapturedCode Define(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)

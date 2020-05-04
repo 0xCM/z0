@@ -13,8 +13,6 @@ namespace Z0
 
     public class t_api_query : t_identity<t_api_query>
     {
-
-
         void query_1()
         {
             var host = ApiHost.Create<math>();
@@ -29,15 +27,5 @@ namespace Z0
             var located = Identities.Services.ApiLocator.Located(host);
             iter(located, m => Trace(m.OpUri));        
         }
-
-        // public void query_3()
-        // {
-        //     var host = ApiHost.Create<dvec>();
-        //     var query = Context.QueryLocated(host);
-        //     var unary = query.UnaryOps();
-        //     iter(unary, m => trace(m.OpUri));
-
-        // }
-
     }
 }

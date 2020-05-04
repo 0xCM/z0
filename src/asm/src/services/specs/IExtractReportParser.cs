@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    
+    using System.Runtime.CompilerServices;
+   
     using static Seed;
+    using static Memories;
 
-    /// <summary>
-    /// Defines service contract to support reading text-formatted encoded x86 asm data
-    /// </summary>
-    public interface IMemberExtractReader : IService
+    public interface IExtractReportParser
     {
-        ExtractedMember[] Read(FilePath src);       
+        MemberParseReport Parse(ApiHostUri host, ExtractReport report);
     }
 }

@@ -12,9 +12,9 @@ namespace Z0
     using static Seed;
 
     /// <summary>
-    /// Aggregates artifacts obtained via host capture workflow execution
+    /// Aggregates artifacts from a host capture workflow
     /// </summary>
-    public readonly struct HostCapture
+    public readonly struct CapturedHost
     {
         public readonly ApiHostUri Host;
 
@@ -25,11 +25,11 @@ namespace Z0
         public readonly AsmFunction[] Decoded;
 
         [MethodImpl(Inline)]
-        public static HostCapture Define(ApiHostUri host, ExtractedMember[] extracts, ParsedMember[] parsed, AsmFunction[] decoded)
-            => new HostCapture(host, extracts, parsed, decoded);
+        public static CapturedHost Define(ApiHostUri host, ExtractedMember[] extracts, ParsedMember[] parsed, AsmFunction[] decoded)
+            => new CapturedHost(host, extracts, parsed, decoded);
         
         [MethodImpl(Inline)]
-        HostCapture(ApiHostUri host, ExtractedMember[] extracts, ParsedMember[] parsed, AsmFunction[] decoded)
+        CapturedHost(ApiHostUri host, ExtractedMember[] extracts, ParsedMember[] parsed, AsmFunction[] decoded)
         {
             this.Host = host;
             this.Extracts = extracts;

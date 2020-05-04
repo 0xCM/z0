@@ -14,16 +14,16 @@ namespace Z0.Asm
     {
         public ICaptureContext Context {get;}
 
-        public ICaptureBroker EventBroker {get;}
+        public ICaptureBroker Broker {get;}
         
         [MethodImpl(Inline)]
         internal CaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, ICaptureArchive archive)
         {
-            EventBroker = HostCaptureBroker.New;
-            Context = new CaptureWorkflowContext(context, decoder, formatter, writerfactory, EventBroker, archive);
+            Broker = HostCaptureBroker.New;
+            Context = new CaptureWorkflowContext(context, decoder, formatter, writerfactory, Broker, archive);
         }
  
-        public void Run(AsmWorkflowConfig config, params PartId[] parts) 
+        public void Run(AsmArchiveConfig config, params PartId[] parts) 
         {
             Manage.CaptureCatalogs(config, parts);
         }

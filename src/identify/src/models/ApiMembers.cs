@@ -14,24 +14,24 @@ namespace Z0
     /// <summary>
     /// A simple api member sequence adapter
     /// </summary>
-    public readonly struct ApiMembers : IIndexContainer<Member>
+    public readonly struct ApiMembers : IIndexContainer<ApiMember>
     {
-        public Member[] Content {get;}
+        public ApiMember[] Content {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiMembers(Member[] src)
+        public static implicit operator ApiMembers(ApiMember[] src)
             => Define(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Member[](ApiMembers src)
+        public static implicit operator ApiMember[](ApiMembers src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static ApiMembers Define(params Member[] src)
+        public static ApiMembers Define(params ApiMember[] src)
             => new ApiMembers(src);
 
         [MethodImpl(Inline)]
-        public ApiMembers(params Member[] src)
+        public ApiMembers(params ApiMember[] src)
         {
             this.Content = src;
         }
@@ -42,13 +42,13 @@ namespace Z0
             get => Content.Length;
         }
     
-        public ref Member this[int index] 
+        public ref ApiMember this[int index] 
         {
             [MethodImpl(Inline)]
             get => ref Content[index];
         }
 
-        public ApiMembers Where(Func<Member,bool> predicate)
+        public ApiMembers Where(Func<ApiMember,bool> predicate)
             => Content.Where(predicate).ToArray();
     }
 }

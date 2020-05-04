@@ -24,7 +24,7 @@ namespace Z0
 
         readonly CaptureConfig Settings;
 
-        readonly AsmWorkflowConfig WorkflowConfig;
+        readonly AsmArchiveConfig WorkflowConfig;
 
         readonly IAsmFormatter Formatter;
 
@@ -45,7 +45,7 @@ namespace Z0
         {                    
             Context = context;
             Sink = context;
-            WorkflowConfig = new AsmWorkflowConfig(root);
+            WorkflowConfig = new AsmArchiveConfig(root);
             Settings = CaptureConfig.From(context.Settings);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = context.Contextual.AsmFormatter(FormatConfig);            
@@ -54,7 +54,7 @@ namespace Z0
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.UriBitsReader;
             CaptureWorkflow = wfc.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));
-            Broker = CaptureWorkflow.EventBroker;
+            Broker = CaptureWorkflow.Broker;
             ImmWorkflow = wfc.ImmEmissionWorkflow(Sink, context.ApiSet, Formatter, Decoder, root);
             
             (this as ICaptureClient).Connect();            
@@ -131,7 +131,7 @@ namespace Z0
             Sink.CountedInstructions(host, count);                   
         }
              
-        void CheckDuplicates(ApiHostUri host, ReadOnlySpan<Member> src)
+        void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)
         {
             var index = ApiMemberOps.Service.CreateIndex(src);
             foreach(var key in index.DuplicateKeys)

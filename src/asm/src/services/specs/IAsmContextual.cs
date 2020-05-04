@@ -8,11 +8,11 @@ namespace Z0.Asm
     {
         IHostCaptureService HostCaptureService(FolderPath root);
 
-        IEvalWorkflow CreateEvalWorkflow(AsmWorkflowConfig config)
+        IEvalWorkflow CreateEvalWorkflow(AsmArchiveConfig config)
         {
             var mx = AppMsgExchange.Create(Context);
             var ac = Z0.AppContext.Create(Context.ApiSet, Context.Random, Context.Settings, mx);
-            return EvalWorkflow.Create(ac, ac.Random, config.EmissionRoot);
+            return EvalWorkflow.Create(ac, ac.Random, config.ArchiveRoot);
         }
     }
 }

@@ -17,8 +17,10 @@ namespace Z0.Asm
 
     public class ImmEmissionWorkflow : IImmEmissionWorkflow
     {                        
-        public static IImmEmissionWorkflow Create(IAsmContext context, IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
-            => new ImmEmissionWorkflow(context, sink, formatter, decoder, api, dst);
+        [MethodImpl(Inline)]
+        public static IImmEmissionWorkflow Create(IAsmContext context, IAppMsgSink sink, IApiSet api, 
+            IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
+                => new ImmEmissionWorkflow(context, sink, formatter, decoder, api, dst);
 
         public IImmEmissionBroker Broker {get;} 
 

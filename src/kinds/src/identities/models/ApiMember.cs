@@ -15,9 +15,9 @@ namespace Z0
     /// <summary>
     /// Describes a reified api member wich may be of hosted or located state
     /// </summary>
-    public readonly struct Member : IApiMember<Member>
+    public readonly struct ApiMember : IApiMember<ApiMember>
     {
-        public static Member Empty => new Member(OpUri.Empty, typeof(object).Methods().First(), OpKindId.None, MemoryAddress.Zero);
+        public static ApiMember Empty => new ApiMember(OpUri.Empty, typeof(object).Methods().First(), OpKindId.None, MemoryAddress.Zero);
 
         public OpIdentity Id {get;}
         
@@ -31,18 +31,18 @@ namespace Z0
 
         public ApiHostUri HostUri {get;}   
 
-        public Member Zero => Empty;
+        public ApiMember Zero => Empty;
 
         [MethodImpl(Inline)]
-        public static Member Define(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
-            => new Member(uri,method, kindId, address);
+        public static ApiMember Define(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
+            => new ApiMember(uri,method, kindId, address);
 
         [MethodImpl(Inline)]
-        public static Member Define(OpUri uri, MethodInfo method, OpKindId kindId)
-            => new Member(uri,method, kindId);
+        public static ApiMember Define(OpUri uri, MethodInfo method, OpKindId kindId)
+            => new ApiMember(uri,method, kindId);
 
         [MethodImpl(Inline)]
-        internal Member(OpUri uri, MethodInfo method, OpKindId kindId)
+        internal ApiMember(OpUri uri, MethodInfo method, OpKindId kindId)
         {
             Id = uri.OpId;
             OpUri = uri;
@@ -53,7 +53,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal Member(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
+        internal ApiMember(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
         {
             Id = uri.OpId;
             OpUri = uri;
@@ -63,7 +63,7 @@ namespace Z0
             HostUri = OpUri.HostPath;
         }        
 
-        public bool Equals(Member src)
+        public bool Equals(ApiMember src)
         {
             var result = Id.Equals(src.Id);
             result &= OpUri.Equals(src.OpUri);

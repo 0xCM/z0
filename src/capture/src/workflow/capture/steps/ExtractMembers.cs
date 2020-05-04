@@ -26,7 +26,7 @@ namespace Z0.Asm
                 Workflow = workflow;
             }
  
-            public Member[] LocateMembers(IApiHost host)
+            public ApiMember[] LocateMembers(IApiHost host)
             {
                 var locator = Identities.Services.ApiLocator;
                 var located = locator.Located(host).ToArray();

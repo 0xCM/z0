@@ -9,6 +9,8 @@ namespace Z0.Asm
    
     using static Seed;
 
+    using Svc = Z0;
+
     public readonly struct Capture
     {
         public static ICaptureServices Services 
@@ -16,5 +18,31 @@ namespace Z0.Asm
 
         public static ICaptureService Service 
             => new CaptureService();                     
+
+        ILocatedCodeParser LocatedParser
+            => LocatedCodeParser.Create(new byte[Pow2.T14]);
+
+        IExtractReportParser ExtractReportParser            
+            => new ExtractReportParser(LocatedParser);
+
+        [MethodImpl(Inline)]
+        IMemoryCapture MemoryCapture(IAsmFunctionDecoder decoder, int? bufferlen = null)
+            => MemoryCaptureService.Create(decoder, bufferlen);
+
+        [MethodImpl(Inline)]
+        IMemoryExtractor MemoryExtractor(byte[] buffer)
+            => Svc.MemoryExtractor.Create(buffer);
+
+        [MethodImpl(Inline)]
+        IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder)
+            => new ImmSpecializer(decoder);        
+
+        [MethodImpl(Inline)]
+        IAsmFunctionDecoder AsmDecoder(in AsmFormatSpec? format)
+            => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
+
+        [MethodImpl(Inline)]
+        IMemberExtractor HostExtractor(int? bufferlen)
+            => MemberExtractor.Create(bufferlen ?? Pow2.T14);
     }
 }

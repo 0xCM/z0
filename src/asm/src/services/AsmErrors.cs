@@ -8,7 +8,7 @@ namespace Z0.Asm
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    static class ModelErrors
+    static class AsmErrors
     {
         public static AppMsg InstructionSizeMismatch(MemoryAddress location, int offset, int actual, int reported,
             [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

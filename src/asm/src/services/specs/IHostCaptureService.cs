@@ -15,6 +15,6 @@ namespace Z0.Asm
 
         AsmFunction[] Decode(ApiHostUri host, ParsedMember[] parsed, bool save);      
 
-        HostCapture CaptureHost(ApiHostUri host, bool save);        
+        CapturedHost CaptureHost(ApiHostUri host, bool save);        
     }
 }

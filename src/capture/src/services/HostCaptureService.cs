@@ -72,12 +72,12 @@ namespace Z0.Asm
         public AsmFunction[] Decode(ApiHostUri host, ParsedMember[] parsed, bool save)
             => Decode(FindHost(host), parsed, save);
 
-        public HostCapture CaptureHost(ApiHostUri host, bool save)
+        public CapturedHost CaptureHost(ApiHostUri host, bool save)
         {
             var extracts = Extract(host, save);
             var parsed = Parse(host,extracts, save);
             var decoded = Decode(host,parsed,save);
-            return HostCapture.Define(host, extracts,parsed,decoded);
+            return CapturedHost.Define(host, extracts,parsed,decoded);
         }
 
         void Save(ApiHostUri host, ParsedMember[] src)

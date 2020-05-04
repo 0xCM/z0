@@ -105,14 +105,13 @@ namespace Z0.Asm
         IReportParsedStep ReportParsed {get;}        
 
         IReportExtractsStep ReportExtracts {get;}
-
     }
 
     public interface ICaptureWorkflow : ICaptureSteps
     {
-        ICaptureBroker EventBroker {get;}
+        ICaptureBroker Broker {get;}
 
-        void Run(AsmWorkflowConfig config, params PartId[] parts);         
+        void Run(AsmArchiveConfig config, params PartId[] parts);         
     }
 
     public interface ICaptureHost : IExecutable<PartId>, IDisposable, ICaptureClient
@@ -143,7 +142,7 @@ namespace Z0.Asm
 
     public interface IExtractMembersStep : ICaptureStep
     {
-        Member[] LocateMembers(IApiHost host);
+        ApiMember[] LocateMembers(IApiHost host);
 
         ExtractedMember[] ExtractMembers(IApiHost host);
     }
@@ -170,7 +169,7 @@ namespace Z0.Asm
 
     public interface IManageCaptureStep : ICaptureStep
     {
-        void CaptureCatalogs(AsmWorkflowConfig config, params PartId[] parts);
+        void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts);
         
         void CaptureCatalogs(ICaptureArchive dst, params PartId[] parts);
 

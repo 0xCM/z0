@@ -10,7 +10,7 @@ namespace Z0.Asm
 
         Option<LocatedCode> Parse(LocatedCode src);
 
-        Option<MemoryCapture> Capture(MemoryAddress src);        
+        Option<CapturedMemory> Capture(MemoryAddress src);        
 
         Option<AsmInstructionList> Decode(LocatedCode src);                    
     }

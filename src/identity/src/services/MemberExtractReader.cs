@@ -16,7 +16,6 @@ namespace Z0
     {
         readonly IApiSet ApiSet;
 
-
         [MethodImpl(Inline)]
         public static IMemberExtractReader Create(IApiSet api)
             => new MemberExtractReader(api);

@@ -13,11 +13,10 @@ namespace Z0
 
         ApiMembers Located(IApiHost host);        
 
-        IEnumerable<Member> Hosted<K>(IApiHost src, K kind, GenericPartition g)
+        IEnumerable<ApiMember> Hosted<K>(IApiHost src, K kind, GenericPartition g)
             where K : unmanaged, Enum;
 
-        IEnumerable<Member> Located<K>(IApiHost src, K kind, GenericPartition g)
+        IEnumerable<ApiMember> Located<K>(IApiHost src, K kind, GenericPartition g)
             where K : unmanaged, Enum;
-
     }
 }

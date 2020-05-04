@@ -12,15 +12,12 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics.X86;
     using System.Reflection;
     
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Z0.Asm;
-
     using static Seed;
     using static Z0.Memories;
     using static Z0.BufferSeqId;
 
     using K = Kinds;
-    using Z0;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public class AsmChecks : ITestAsm
     {
@@ -65,8 +62,6 @@ namespace Z0.Asm
             var format = AsmFormatSpec.WithFunctionTimestamp;
             return AsmCore.Services.AsmWriter(dst,format);
         }
-
-        static K.BinaryOpClass Binary => default;
                 
         IAsmFunctionDecoder Decoder => Context.Decoder;
 
@@ -95,7 +90,9 @@ namespace Z0.Asm
             hexout.Write(gCaptured.HostedBits);
             asmout.WriteAsm(Decoder.Decode(gCaptured).Require());
         }
-                
+
+        static K.BinaryOpClass Binary => default;
+
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
             var dId = Identify.Op(name, w, kind, false);

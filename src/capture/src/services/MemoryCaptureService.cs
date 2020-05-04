@@ -9,8 +9,12 @@ namespace Z0.Asm
 
     using static Seed;
 
-    class MemoryCaptureService : IMemoryCapture
+    public class MemoryCaptureService : IMemoryCapture
     {
+        [MethodImpl(Inline)]
+        public static IMemoryCapture Create(IAsmFunctionDecoder decoder, int? bufferlen = null)
+            => new MemoryCaptureService(decoder, bufferlen ?? Pow2.T14);
+        
         readonly byte[] ExtractBuffer;
 
         readonly byte[] ParseBuffer;
@@ -36,13 +40,13 @@ namespace Z0.Asm
             this.Decoder = decoder;
         }
 
-        public Option<MemoryCapture> Capture(MemoryAddress src)        
+        public Option<CapturedMemory> Capture(MemoryAddress src)        
             => from raw in Extract(src)
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
                 from instructions in Decoder.Decode(parsed)
                 let bits = ParsedCode.Define(src, raw, parsed)
-                select MemoryCapture.Define(src, bits, instructions, string.Empty);
+                select CapturedMemory.Define(src, bits, instructions, string.Empty);
 
         [MethodImpl(Inline)]
         public Option<LocatedCode> Extract(MemoryAddress src)

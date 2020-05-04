@@ -18,7 +18,7 @@ namespace Z0
 
         public UriBits ApiBits { [MethodImpl(Inline)] get => ApiCode.Encoded;}
 
-        public Member Member { [MethodImpl(Inline)] get =>  ApiCode.Member;}
+        public ApiMember Member { [MethodImpl(Inline)] get =>  ApiCode.Member;}
 
         [MethodImpl(Inline)]
         public static EvalContext Define(BufferTokens buffers, MemberCode code)

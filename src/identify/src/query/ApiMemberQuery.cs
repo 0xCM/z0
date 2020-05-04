@@ -31,7 +31,7 @@ namespace Z0
         public static IApiMemberQuery Query(this ApiMembers src)        
             => ApiMemberQuery.Create(src);
 
-        public static IApiMemberQuery Query(this IEnumerable<Member> src)
+        public static IApiMemberQuery Query(this IEnumerable<ApiMember> src)
             => ApiMemberQuery.Create(src.ToArray());
     }
 }

@@ -14,6 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct UriBits : IUriCode<UriBits,BinaryCode>
     {
+        [MethodImpl(Inline)]
+        public static UriBits Define(OpUri uri, BinaryCode src)
+            => new UriBits(uri,src);
+
         /// <summary>
         /// No code, no identity, no life
         /// </summary>
@@ -39,15 +43,14 @@ namespace Z0
         /// </summary>
         public OpIdentity Id { [MethodImpl(Inline)] get  => Uri.OpId; }
 
+        public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
+
+        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
+
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
 
         public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
 
-        public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
-
-        [MethodImpl(Inline)]
-        public static UriBits Define(OpUri uri, BinaryCode src)
-            => new UriBits(uri,src);
 
         /// <summary>
         /// Defines uri bits with a potentially bad uri (for diagnostic purposes)

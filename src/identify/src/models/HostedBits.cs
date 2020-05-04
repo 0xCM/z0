@@ -36,10 +36,6 @@ namespace Z0
         /// </summary>
         public LocatedCode Encoded {get;}
 
-        public MemoryAddress Address  { [MethodImpl(Inline)] get => Encoded.Address; }
-
-        public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment;}
-
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Encoded; }
 
         public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
@@ -48,6 +44,13 @@ namespace Z0
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
 
+        public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
+
+        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
+
+        public MemoryAddress Address  { [MethodImpl(Inline)] get => Encoded.Address; }
+
+        public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment;}
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(HostedBits code)

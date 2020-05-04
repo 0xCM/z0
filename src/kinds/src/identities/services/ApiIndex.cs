@@ -7,33 +7,37 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     using static Seed;
 
     public readonly struct ApiIndex : IApiIndex
     {
-        public static ApiIndex Create(IEnumerable<Member> src)
+        readonly Dictionary<OpIdentity, ApiMember> Data;
+
+        readonly OpIdentity[] Duplicates;
+
+        public static ApiIndex Create(IEnumerable<ApiMember> src)
         {
             var pairs = src.Select(h => (h.Id, h));
             var opindex = Identify.index(pairs,true);
             return new ApiIndex(opindex.HashTable, opindex.Duplicates);                
-        }
-            
-        readonly Dictionary<OpIdentity, Member> Data;
+        }            
 
-        readonly OpIdentity[] Duplicates;
-
-        internal ApiIndex(Dictionary<OpIdentity, Member> index, OpIdentity[] duplicates)
+        [MethodImpl(Inline)]
+        internal ApiIndex(Dictionary<OpIdentity, ApiMember> index, OpIdentity[] duplicates)
         {
             this.Data = index;
             this.Duplicates = duplicates;
         }
     
-        public Option<Member> Lookup(OpIdentity id)
+        [MethodImpl(Inline)]
+        public Option<ApiMember> Lookup(OpIdentity id)
             => Data.TryFind(id);
 
-        public Member this[OpIdentity id]
+        public ApiMember this[OpIdentity id]
         {
+            [MethodImpl(Inline)]
             get 
             {
                 if(Data.TryGetValue(id, out var value))
@@ -46,7 +50,7 @@ namespace Z0
         public int EntryCount 
             => Data.Count;
 
-        public IEnumerable<(OpIdentity, Member)> Enumerated 
+        public IEnumerable<(OpIdentity, ApiMember)> Enumerated 
             => Data.Select(kvp => (kvp.Key, kvp.Value));
 
         public IEnumerable<OpIdentity> Keys 
@@ -55,10 +59,10 @@ namespace Z0
         public IReadOnlyList<OpIdentity> DuplicateKeys
             => Duplicates;
 
-        IEnumerable<KeyedValue<OpIdentity,Member>> KeyedValues
+        IEnumerable<KeyedValue<OpIdentity,ApiMember>> KeyedValues
             => Data.Select(x => KeyedValue.Define(x.Key, x.Value));
 
-        public IEnumerator<KeyedValue<OpIdentity, Member>> GetEnumerator()
+        public IEnumerator<KeyedValue<OpIdentity, ApiMember>> GetEnumerator()
             => KeyedValues.GetEnumerator();
     }
 }

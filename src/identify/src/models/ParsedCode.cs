@@ -18,11 +18,17 @@ namespace Z0
 
         public LocatedCode Encoded {get;}
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
+        public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
+
+        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
 
         public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
 
-        public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
+
+        public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
+
+        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
 
         public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment;}
 

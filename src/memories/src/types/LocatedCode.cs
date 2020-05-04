@@ -17,6 +17,14 @@ namespace Z0
     public readonly struct LocatedCode : ILocatedCode<LocatedCode,BinaryCode>
     {
         /// <summary>
+        /// Defines a block of encoded data based at a specifed address
+        /// </summary>
+        /// <param name="data">The source data</param>
+        [MethodImpl(Inline)]
+        public static LocatedCode Define(MemoryAddress src, byte[] data)
+            => new LocatedCode(src, data);        
+        
+        /// <summary>
         /// The canonical zero
         /// </summary>
         public static LocatedCode Empty => new LocatedCode(0);
@@ -39,30 +47,42 @@ namespace Z0
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Address.NonZero; }
 
-        /// <summary>
-        /// The memory segment occupied by the encoded data := addess + length
-        /// </summary>
+        public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
+        
+        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
+
         public MemoryRange MemorySegment
         {
             [MethodImpl(Inline)]
             get => (Address, Address + (MemoryAddress)Encoded.Length);
         }
 
-        /// <summary>
-        /// Defines a block of encoded data based at a specifed address
-        /// </summary>
-        /// <param name="data">The source data</param>
-        [MethodImpl(Inline)]
-        public static LocatedCode Define(MemoryAddress src, byte[] data)
-            => new LocatedCode(src, data);        
-        
         [MethodImpl(Inline)]
         public static implicit operator byte[](LocatedCode src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(LocatedCode src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(LocatedCode src)
             => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(LocatedCode a, LocatedCode b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(LocatedCode a, LocatedCode b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public bool Equals(LocatedCode src)
+            => Encoded.Equals(src.Encoded); 
+
+        public string Format()
+            => Encoded.Format(); 
 
         [MethodImpl(Inline)]
         public LocatedCode(MemoryAddress src, byte[] data)
@@ -71,17 +91,17 @@ namespace Z0
             this.Encoded = BinaryCode.Define(insist(data));
         }
 
+        public override int GetHashCode()
+            => Encoded.GetHashCode();
+        
+        public override bool Equals(object src)
+            => src is BinaryCode encoded && Equals(encoded);
+
         [MethodImpl(Inline)]
         LocatedCode(ulong zero)
         {
             Address = zero;
             Encoded = Control.array<byte>();
         }
-
-        public bool Equals(LocatedCode src)
-            => Encoded.Equals(src.Encoded);
-
-        public string Format()
-            => Encoded.Format();
     }
 }

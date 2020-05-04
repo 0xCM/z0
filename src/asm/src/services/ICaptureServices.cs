@@ -12,7 +12,7 @@ namespace Z0.Asm
     public interface ICaptureServices : IAsmCore
     {
         IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder);        
-        
+
         /// <summary>
         /// Creates a service that extracts data that lives in memory using a caller-suppled working buffer
         /// </summary>

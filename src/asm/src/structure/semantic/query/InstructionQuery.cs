@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static ModelErrors;
+    using static AsmErrors;
 
     partial struct AsmQuery
     {
