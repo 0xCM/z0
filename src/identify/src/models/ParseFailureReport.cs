@@ -47,7 +47,7 @@ namespace Z0
             var term = Enums.parse<ExtractTermCode>(fields[3]).ValueOrDefault();
             var uri = OpUri.Parse(fields[4]).ValueOrDefault(OpUri.Empty);
             var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.ParseByte).ToArray();
-            var extract = LocatedCode.Define(data);
+            var extract = LocatedCode.Define(address,data);
             return new R(seq,address,len,term,uri,extract);
         }
 
@@ -122,10 +122,10 @@ namespace Z0
                 records[i] = new ParseFailureRecord(                
                     Sequence : failure.Sequence,
                     Address : failure.Data.Address,
-                    Length : failure.Data.Content.Length,
+                    Length : failure.Data.Encoded.Length,
                     TermCode: failure.TermCode,
                     Uri : failure.OpUri,
-                    Data : failure.Data.Code
+                    Data : failure.Data.Encoded
                     );
             }
 

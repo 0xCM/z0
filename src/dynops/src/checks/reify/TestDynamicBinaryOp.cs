@@ -34,7 +34,7 @@ namespace Z0
 
         IDynexus Dynamic => CheckDynamic.Checker.Dynamic;
 
-        public TestCaseRecord Match(K k, TypeWidth w, OperationCode a, OperationCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, TypeWidth w, UriBits a, UriBits b, BufferTokens dst)
         {
             switch(w)
             {
@@ -60,42 +60,42 @@ namespace Z0
             throw Unsupported.define(w.GetType());
         }
 
-        public TestCaseRecord Match(K k, W8 w, OperationCode a, OperationCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W8 w, UriBits a, UriBits b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        public TestCaseRecord Match(K k, W16 w, OperationCode a, OperationCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W16 w, UriBits a, UriBits b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        public TestCaseRecord Match(K k, W32 w, OperationCode a, OperationCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W32 w, UriBits a, UriBits b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        public TestCaseRecord Match(K k, W64 w, OperationCode a, OperationCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W64 w, UriBits a, UriBits b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        public TestCaseRecord Match(K k,  W128 w, OperationCode a, OperationCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k,  W128 w, UriBits a, UriBits b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        public TestCaseRecord Match(K k, W256 w, OperationCode a, OperationCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W256 w, UriBits a, UriBits b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);

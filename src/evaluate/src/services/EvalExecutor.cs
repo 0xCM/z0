@@ -76,43 +76,43 @@ namespace Z0
 
         EvalResult MatchBinaryOps(in BufferSeq buffers, N8 w, in ConstPair<MemberCode> pair)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left);
-            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);  
         }
 
         EvalResult MatchBinaryOps(in BufferSeq buffers, N16 w, in ConstPair<MemberCode> pair)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left);
-            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);  
         }
 
         EvalResult MatchBinaryOps(in BufferSeq buffers, N32 w, in ConstPair<MemberCode> pair)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left);
-            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);  
         }
 
         EvalResult MatchBinaryOps(in BufferSeq buffers, N64 w, in ConstPair<MemberCode> pair)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left);
-            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);  
         }
 
         EvalResult MatchBinaryOps(in BufferSeq buffers, N128 w, in ConstPair<MemberCode> pair)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left);
-            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);  
         }
 
         EvalResult MatchBinaryOps(in BufferSeq buffers, N256 w, in ConstPair<MemberCode> pair)
         {
-            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left);
-            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);  
         }
 

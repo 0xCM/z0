@@ -47,7 +47,7 @@ namespace Z0
                     ? identify(p.ParameterType) 
                     : identify(p.ParameterType.EffectiveType());
                 if(!id.IsEmpty)
-                    return text.concat(id.Identifier, p.ReferenceKind().Format());                
+                    return text.concat(id.IdentityText, p.ReferenceKind().Format());                
             }
             return string.Empty;                        
         }

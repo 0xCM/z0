@@ -19,12 +19,12 @@ namespace Z0
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static BinaryCode Empty => new BinaryCode(new byte[]{0});
+        public static BinaryCode Empty => new BinaryCode(Control.array<byte>());
          
         /// <summary>
         /// The encoded bytes
         /// </summary>
-        public byte[] Content {get;}
+        public byte[] Encoded {get;}
 
         /// <summary>
         /// Defines a block of encoded data based at a specifed address
@@ -36,7 +36,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static implicit operator byte[](BinaryCode src)
-            => src.Content;
+            => src.Encoded;
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(byte[] src)
@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(BinaryCode src)
-            => src.Content;
+            => src.Encoded;
 
         [MethodImpl(Inline)]
         public static bool operator==(BinaryCode a, BinaryCode b)
@@ -57,69 +57,38 @@ namespace Z0
         [MethodImpl(Inline)]
         BinaryCode(byte[] bytes)
         {
-            this.Content = require(bytes);
+            Encoded = insist(bytes);
         }
         
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Content.Length;
-        }
+  
 
-        public ByteSize Size
-        {
-            [MethodImpl(Inline)]
-            get => Length;
-        }
+        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded; }
+        
+        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
 
-        /// <summary>
-        /// Specifies whether to block is emtpy
-        /// </summary>
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => (Length == 0 ) || (Length == 1 && Content[0] == 0);
-        }
+        public bool IsEmpty { [MethodImpl(Inline)] get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0); }
 
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !IsEmpty;
-        }
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => !IsEmpty; }
 
-        public ReadOnlySpan<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => Content;
-        }
-
-        public byte LastByte
-        {
-            [MethodImpl(Inline)]
-            get => Content.LastOrDefault();
-        }
-
-        public byte this[int i] 
-        { 
-            [MethodImpl(Inline)] 
-            get=> Content[i]; 
-        }
-
+        public ref readonly byte Head { [MethodImpl(Inline)] get => ref refs.head(Bytes);}
+        
+        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref refs.skip(Head, index); }
+        
         public bool Equals(BinaryCode rhs)
         {
             if(this.IsNonEmpty && rhs.IsNonEmpty)
-                return Content.SequenceEqual(rhs.Content);
+                return Encoded.SequenceEqual(rhs.Encoded);
             else
                 return false;
         }
 
         public override int GetHashCode()
-            => Content.GetHashCode();
+            => Encoded.GetHashCode();
         
         public override bool Equals(object src)
             => src is BinaryCode c && Equals(c);
 
         public string Format()
-            => Content.FormatHexBytes();
+            => Encoded.FormatHexBytes();
     }
 }

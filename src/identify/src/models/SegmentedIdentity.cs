@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="part">The source part</param>
         public static Option<SegmentedIdentity> Identify(IdentityPart part)
         {
-            if(part.IsSegment && Segmentation.TryParse(part.Identifier, out var seg))
+            if(part.IsSegment && Segmentation.TryParse(part.IdentityText, out var seg))
                 return seg;
             else
                 return Option.none<SegmentedIdentity>();
@@ -43,11 +43,11 @@ namespace Z0
 
         public readonly NumericKind SegKind;  
 
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator string(SegmentedIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeIdentity(SegmentedIdentity src)
@@ -70,14 +70,14 @@ namespace Z0
             this.Indicator = indicator;
             this.TypeWidth = typewidth;
             this.SegKind = segkind;
-            this.Identifier 
+            this.IdentityText 
                 = (TypeWidth == 0 && segkind == 0) 
                 ? string.Empty 
                 : $"{indicator}{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
         }
 
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.Define(Identifier);
+            => TypeIdentity.Define(IdentityText);
 
         [MethodImpl(Inline)]
         public bool Equals(SegmentedIdentity src)
@@ -93,6 +93,6 @@ namespace Z0
             => equals(this, src);
 
         public override string ToString()
-            => Identifier;
+            => IdentityText;
     }
 }

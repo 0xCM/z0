@@ -13,14 +13,11 @@ namespace Z0.Asm
     {
         IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder);        
         
-
-        IMemoryExtractor MemoryExtractor(byte[] buffer);
-
         /// <summary>
-        /// Creates a capture serivce predicated, or not, on an optionally-specified divination service
+        /// Creates a service that extracts data that lives in memory using a caller-suppled working buffer
         /// </summary>
-        /// <param name="diviner">A divination service, or not</param>
-        ICaptureService CaptureService(IMultiDiviner diviner = null);
+        /// <param name="buffer">The working buffer</param>
+        IMemoryExtractor MemoryExtractor(byte[] buffer);
 
         /// <summary>
         /// Creates a function decoder
@@ -33,6 +30,6 @@ namespace Z0.Asm
         /// Creates a code extractor with an optionally-specified buffer length
         /// </summary>
         /// <param name="bufferlen">The desired buffer length</param>
-        IHostCodeExtractor HostExtractor(int? bufferlen = null);
+        IMemberExtractor HostExtractor(int? bufferlen = null);
     }
 }

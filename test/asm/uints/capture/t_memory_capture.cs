@@ -13,13 +13,13 @@ namespace Z0.Asm
     {    
         public override bool Enabled => false;
 
-        bool MemcapCheck(IMemoryCapture memcap, OperationBits src)
+        bool MemcapCheck(IMemoryCapture memcap, HostedBits src)
         {
             var captured = memcap.Capture(src.Address);
             if(!captured)
                 return false;
 
-            var data = captured.Value.Parsed.Parsed;
+            var data = captured.Value.Parsed.Encoded;
             if(data.Length != src.Length)
                 return false;
             return true;
@@ -34,12 +34,12 @@ namespace Z0.Asm
                 Claim.Fail();
         }
 
-        public IEnumerable<OperationBits> ReadHostBits(ApiHostUri host)
+        public IEnumerable<HostedBits> ReadHostBits(ApiHostUri host)
         {            
             var paths = Paths.ForApp(PartId.Control);
             var root = paths.AppCapturePath;
-            var reader = Archives.Services.Operational(root);
-            return reader.ReadHex(host);
+            var capture = Archives.Services.CaptureArchive(root);
+            return HostBitsReader.Service.Read(capture.HexPath(host));
         }
 
         void check_decoder(IEnumerable<ApiHostUri> hosts)
@@ -59,13 +59,10 @@ namespace Z0.Asm
             {
                 hostCount = 0;
                 var bits = ReadHostBits(host).ToArray();
-                //Trace($"Loaded host bits", $"{bits.Length} | {host.Format()}");
                 foreach(var f in bits) 
                 {            
                     decoder.Decode(f.Encoded, Decoded);
-                }
-                
-                //Trace($"Decoded host instructions", $"{hostCount} | {totalCount} | {host.Format()}");
+                }                
             }
 
         }
@@ -73,7 +70,6 @@ namespace Z0.Asm
         public void check_decoder()
         {
             check_decoder(Context.ApiSet.Hosts.Select(h => h.UriPath));
-
                        
         }
 

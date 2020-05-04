@@ -30,7 +30,7 @@ namespace Z0
         // }
 
         public static OpIdentity Op(params IdentityPart[] parts)
-            => Op(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
+            => Op(string.Join(IDI.PartSep, parts.Select(x =>x.IdentityText)));
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]

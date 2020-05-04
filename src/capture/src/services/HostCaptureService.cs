@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         readonly FolderPath Root;
 
-        readonly IHostCodeExtractor Extractor;
+        readonly IMemberExtractor Extractor;
 
         readonly IExtractParser Parser;
 
@@ -42,7 +42,7 @@ namespace Z0.Asm
             Area = area;
             Subject = subject;
             Root = (context.RootCaptureArchive.RootDir + area) + subject;
-            Extractor = AsmWorkflows.Stateless.HostExtractor();
+            Extractor = Capture.Services.HostExtractor();
             Parser = Z0.Extract.Services.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
 
@@ -53,14 +53,14 @@ namespace Z0.Asm
             Area = FolderName.Empty;
             Subject = FolderName.Empty;
             Root = root;
-            Extractor = AsmWorkflows.Stateless.HostExtractor();
+            Extractor = Capture.Services.HostExtractor();
             Parser = Z0.Extract.Services.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
 
-        public MemberExtract[] Extract(ApiHostUri host, bool save)
+        public ExtractedMember[] Extract(ApiHostUri host, bool save)
             => Extract(FindHost(host),save);
 
-        public ParsedMember[] Parse(ApiHostUri host, MemberExtract[] src, bool save)
+        public ParsedMember[] Parse(ApiHostUri host, ExtractedMember[] src, bool save)
         {
             var outcome = Parser.Parse(src);
             if(outcome.Parsed.Length != 0 && save)
@@ -87,11 +87,11 @@ namespace Z0.Asm
             report.Save(hostArchive.ParsedPath);
 
             using var writer = Archives.Services.UriBitsWriter(hostArchive.HexPath);
-            var data = src.Map(x => UriBits.Define(x.Uri, x.ParsedContent.Content));
+            var data = src.Map(x => UriBits.Define(x.Uri, x.Encoded.Encoded));
             writer.Write(data);
         }
 
-        void Save(ApiHostUri host, MemberExtract[] extracts)
+        void Save(ApiHostUri host, ExtractedMember[] extracts)
         {
             var hostArchive = CodeArchive.HostArchive(host);
             var report = ExtractReport.Create(host, extracts);            
@@ -113,7 +113,7 @@ namespace Z0.Asm
                 var host = mayhaps.Value;
                 var decoded = new AsmFunction[parsed.Length];
                 for(var i=0; i<parsed.Length; i++)
-                    decoded[i] = require(Context.Decoder.Decode(parsed[i]));
+                    decoded[i] = insist(Context.Decoder.Decode(parsed[i]));
 
                 if(save)
                     Save(host.UriPath, decoded);
@@ -124,7 +124,7 @@ namespace Z0.Asm
                 return Arrays.empty<AsmFunction>();
         }
 
-        MemberExtract[] Extract(Option<IApiHost> mayhaps, bool save)
+        ExtractedMember[] Extract(Option<IApiHost> mayhaps, bool save)
         {            
             if(mayhaps)
             {
@@ -135,10 +135,10 @@ namespace Z0.Asm
                 return extract;
             }
             else
-                return Arrays.empty<MemberExtract>();
+                return Arrays.empty<ExtractedMember>();
         }
 
-        MemberExtract[] Extracted(ApiHostUri host, MemberExtract[] extracts, Option<FilePath> dst)
+        ExtractedMember[] Extracted(ApiHostUri host, ExtractedMember[] extracts, Option<FilePath> dst)
         {
             if(!dst)
                 this.ExtractionFailure(host);

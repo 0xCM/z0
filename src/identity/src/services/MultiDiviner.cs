@@ -11,9 +11,10 @@ namespace Z0
 
     using static Seed;
 
-
-    readonly struct MultiDiviner : IMultiDiviner
+    public readonly struct MultiDiviner : IMultiDiviner
     {
+        public static IMultiDiviner Service => default(MultiDiviner);
+
         [MethodImpl(Inline)]
         public TypeIdentity DivineIdentity(Type src)
             => Identity.identify(src);
@@ -30,4 +31,3 @@ namespace Z0
             => Identity.generic(src);
     }
 }
-

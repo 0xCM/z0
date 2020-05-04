@@ -198,7 +198,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Polynomial(params Monomial<M,T>[] terms)
         {
-            require(terms[0].Exp == Degree);
+            insist(terms[0].Exp == Degree);
             this.Terms = terms;
         }
 

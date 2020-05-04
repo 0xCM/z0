@@ -55,7 +55,7 @@ namespace Z0
         /// <summary>
         /// The global data resource index
         /// </summary>
-        BinaryResources Resources {get;}
+        ResourceIndex Resources {get;}
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identifid assembly
@@ -84,21 +84,9 @@ namespace Z0
         /// </summary>
         ApiQuery Query
             => ApiQuery.Over(this);
-
     }
     
-    /// <summary>
-    /// Characterizes a type that provides access to an operation catalog
-    /// </summary>
-    public interface IApiCatalogProvider : IApiCatalog
-    {
-        /// <summary>
-        /// The provided catalog
-        /// </summary>
-        IApiCatalog Operations {get;}
-    }
-
-    public sealed class EmptyCatalog : IApiCatalog
+    public readonly struct EmptyCatalog : IApiCatalog
     {    
         public PartId PartId => PartId.None;
 
@@ -110,7 +98,7 @@ namespace Z0
 
         public ApiHost[] DirectApiHosts => new ApiHost[]{};
 
-        public BinaryResources Resources => BinaryResources.Empty;
+        public ResourceIndex Resources => ResourceIndex.Empty;
 
         public Type[] FunFactories => new Type[]{};
     }

@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatGt(K1 k1, K2 k2)
         {
-            require(NatCalc.gt(k1,k2));
+            insist(NatCalc.gt(k1,k2));
         }
                 
         public override string ToString()

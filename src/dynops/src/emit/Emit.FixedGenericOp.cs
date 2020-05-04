@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedUnaryOp<F> EmitFixedUnaryOp<F>(this IBufferToken dst, in OperationCode src)
+        public static FixedUnaryOp<F> EmitFixedUnaryOp<F>(this IBufferToken dst, UriBits src)
             => (FixedUnaryOp<F>)dst.Handle.EmitFixed(src.Id,  typeof(FixedUnaryOp<F>), typeof(F), typeof(F));
 
         /// <summary>
@@ -24,8 +24,8 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedBinaryOp<F> EmitFixedBinaryOp<F>(this IBufferToken buffer, in OperationCode src)
-            => (FixedBinaryOp<F>)buffer.Load(src.Content).EmitFixedBinaryOp(src.Id, typeof(FixedBinaryOp<F>), typeof(F));
+        public static FixedBinaryOp<F> EmitFixedBinaryOp<F>(this IBufferToken buffer, UriBits src)
+            => (FixedBinaryOp<F>)buffer.Load(src.Encoded).EmitFixedBinaryOp(src.Id, typeof(FixedBinaryOp<F>), typeof(F));
 
         /// <summary>
         /// Loads executable source into an identified buffer and creates a fixed unary operator over the buffer
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedTernaryOp<F> EmitFixedTernaryOp<F>(this IBufferToken dst, in OperationCode src)
+        public static FixedTernaryOp<F> EmitFixedTernaryOp<F>(this IBufferToken dst, UriBits src)
             => (FixedTernaryOp<F>)dst.Handle.EmitFixed(src.Id, typeof(FixedTernaryOp<F>), typeof(F), typeof(F), typeof(F), typeof(F));
     }
 }

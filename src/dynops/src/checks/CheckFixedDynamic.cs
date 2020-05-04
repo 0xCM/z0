@@ -16,7 +16,7 @@ namespace Z0
 
     public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic, IBufferedChecker
     {
-        void CheckFixedMatch<F>(K.UnaryOpClass k, OperationCode a, OperationCode b)
+        void CheckFixedMatch<F>(K.UnaryOpClass k, UriBits a, UriBits b)
             where F : unmanaged, IFixed
         {                        
             var f = Dynamic.EmitFixedUnary<F>(Buffers[Left], a);

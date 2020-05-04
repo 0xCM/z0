@@ -25,7 +25,7 @@ namespace Z0
             get => Offset != 0;
         }
 
-        public string Identifier 
+        public string IdentityText 
             => Offset.ToString("x4") + "h";
 
         [MethodImpl(Inline)]
@@ -67,7 +67,7 @@ namespace Z0
         }
         
         public string Format()
-            => Identifier;
+            => IdentityText;
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryOffset other)

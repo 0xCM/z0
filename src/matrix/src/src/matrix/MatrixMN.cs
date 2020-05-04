@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            require(src.Length >= Cells);
+            insist(src.Length >= Cells);
             data = src;
         }
 

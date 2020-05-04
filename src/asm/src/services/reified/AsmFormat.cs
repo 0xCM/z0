@@ -82,8 +82,8 @@ namespace Z0.Asm
         /// Formats source bits on a single line intended for emission in the function header
         /// </summary>
         /// <param name="src">The source bits</param>
-        public static string header(OperationBits src)
-            => comment(ByteSpanProperty.Define(src.Uri.OpId.ToLegalIdentifier(), src.Encoded).Format());
+        public static string header(LocatedCode src, OpIdentity id)
+            => comment(ByteSpanProperty.Define(id.ToLegalIdentifier(), src).Format());
 
         public static string render(in AsmFunctionList src)
         {
@@ -131,12 +131,12 @@ namespace Z0.Asm
             lines.Add(comment($"{src.OpSig}, {src.Uri}")); 
             
             if(config.EmitFunctionHeaderEncoding)
-                lines.Add(AsmFormat.header(src.Code));
+                lines.Add(AsmFormat.header(src.Code.Encoded, src.OpId));
             else
                 lines.Add(comment(src.Code.Uri.OpId));
 
             if(config.EmitLocation)
-                lines.Add(comment(text.concat(nameof(src.Code.Location), text.spaced(Chars.Eq), src.Code.Location.Format())));
+                lines.Add(comment(text.concat("Base", text.spaced(Chars.Eq), src.Code.Address)));
                 
             if(config.EmitCaptureTermCode)
             {

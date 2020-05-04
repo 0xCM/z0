@@ -17,8 +17,8 @@ namespace Z0
 
         public ref readonly UnaryEval<T> Evaluate(in UnaryOpEval<T> exchange)
         {
-            var f = exchange.ApiCode.Member.Method.CreateDelegate<UnaryOp<T>>();
-            var g = Dynamic.EmitUnaryOp<T>(exchange.Buffers[Left], exchange.ApiCode);
+            var f = exchange.Member.Method.CreateDelegate<UnaryOp<T>>();
+            var g = Dynamic.EmitUnaryOp<T>(exchange.Buffers[Left], exchange.ApiBits);
 
             for(var i=0; i<exchange.SrcCount; i++)
             {

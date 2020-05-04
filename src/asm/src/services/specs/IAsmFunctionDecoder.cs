@@ -15,7 +15,7 @@ namespace Z0.Asm
         /// Decodes a function from member capture data
         /// </summary>
         /// <param name="src">The source data</param>
-        Option<AsmFunction> Decode(MemberCapture src);       
+        Option<AsmFunction> Decode(CapturedCode src);       
 
         /// <summary>
         /// Decodes a fucntion for a parsed extract
@@ -27,17 +27,13 @@ namespace Z0.Asm
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        Option<AsmInstructionList> Decode(in OperationBits src);        
-
-        /// <summary>
-        /// Decodes an instruction list
-        /// </summary>
-        /// <param name="src">The code source</param>
-        Option<AsmInstructionList> Decode(in LocatedCode src);  
+        Option<AsmInstructionList> Decode(LocatedCode src);      
 
         Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f);
         
-        void Decode(in LocatedCode src, Action<Instruction> f);                      
+        Option<AsmInstructionList> Decode(LocatedCode src, Action<Instruction> f);                      
+
+        Option<AsmInstructions> Decode(UriBits src);
 
     }
 }

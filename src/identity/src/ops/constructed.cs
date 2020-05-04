@@ -32,7 +32,7 @@ namespace Z0
                 => FormatArgs(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, args(src));
 
             static IEnumerable<string> TypeArgIdentities(MethodInfo src)
-                => src.GenericArguments().Select(targ => Identity.identify(targ).Identifier);
+                => src.GenericArguments().Select(targ => Identity.identify(targ).IdentityText);
 
             static string TypeArgIdentity(MethodInfo src)
                 => FormatArgs(IDI.TypeArgsOpen, IDI.TypeArgsClose, IDI.ArgSep, TypeArgIdentities(src));

@@ -10,15 +10,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Memories;
 
-    public interface IOperationalArchive
+    public interface IOperationalArchive : IRootedArchive
     {
-        /// <summary>
-        /// The archive root to which all uri's and locations are relative
-        /// </summary>
-        FolderPath ArchiveRoot {get;}
-
         /// <summary>
         /// Enumerates the archived files that are owned by a specified part
         /// </summary>
@@ -29,13 +23,12 @@ namespace Z0
         /// Reads a hex data file
         /// </summary>
         /// <param name="src">The source file path</param>
-        IEnumerable<OperationBits> ReadHex(FilePath src);
+        IEnumerable<HostedBits> ReadHex(FilePath src);
 
         /// <summary>        
         /// Reads a hex data file
         /// </summary>
         /// <param name="src">The defining host</param>
-        IEnumerable<OperationBits> ReadHex(ApiHostUri host);
+        IEnumerable<HostedBits> ReadHex(ApiHostUri host);
     }   
-
 }

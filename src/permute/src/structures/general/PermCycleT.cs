@@ -20,7 +20,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len > 1)
-                require(gmath.eq(src[0].Source, src[len - 1].Target));
+                insist(gmath.eq(src[0].Source, src[len - 1].Target));
             
             this.Terms = src;
         }

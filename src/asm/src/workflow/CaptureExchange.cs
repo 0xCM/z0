@@ -54,7 +54,7 @@ namespace Z0.Asm
 
         CaptureExchange(ICaptureService service, Span<byte> capture, Span<byte> state)            
         {
-            require(capture.Length == state.Length);
+            insist(capture.Length == state.Length);
             this.TargetBuffer = capture;
             this.StateBuffer = state;
             this.Service = service;
@@ -92,7 +92,7 @@ namespace Z0.Asm
             => TargetBuffer.Slice(start, length);
 
         [MethodImpl(Inline)]
-        public ref readonly MemberCapture CaptureComplete(in ExtractState state, in MemberCapture captured)
+        public ref readonly CapturedCode CaptureComplete(in ExtractState state, in CapturedCode captured)
         {
             return ref captured;
         }

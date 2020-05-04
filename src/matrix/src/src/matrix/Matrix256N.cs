@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256(Block256<T> src)
         {
-            require(src.CellCount >= CellCount);
+            insist(src.CellCount >= CellCount);
             data = src;
         }
         

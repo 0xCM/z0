@@ -50,13 +50,12 @@ namespace Z0
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = context.Contextual.AsmFormatter(FormatConfig);            
 
-            var wfStateless = AsmWorkflows.Stateless;
-            var wfContextual = AsmWorkflows.Contextual(context);            
-            Decoder = wfStateless.AsmDecoder(FormatConfig);
-            UriBitsReader = wfStateless.UriBitsReader;
-            CaptureWorkflow = wfContextual.CaptureWorkflow(Decoder, Formatter, wfStateless.CaptureArchive(root));
+            var wfc = AsmWorkflows.Create(context);            
+            Decoder = Capture.Services.AsmDecoder(FormatConfig);
+            UriBitsReader = Capture.Services.UriBitsReader;
+            CaptureWorkflow = wfc.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));
             Broker = CaptureWorkflow.EventBroker;
-            ImmWorkflow = wfContextual.ImmEmissionWorkflow(Sink, context.ApiSet, Formatter, Decoder, root);
+            ImmWorkflow = wfc.ImmEmissionWorkflow(Sink, context.ApiSet, Formatter, Decoder, root);
             
             (this as ICaptureClient).Connect();            
         }
@@ -134,7 +133,7 @@ namespace Z0
              
         void CheckDuplicates(ApiHostUri host, ReadOnlySpan<Member> src)
         {
-            var index = Operational.Service.CreateIndex(src);
+            var index = ApiMemberOps.Service.CreateIndex(src);
             foreach(var key in index.DuplicateKeys)
                 Sink.DuplicateWarning(host,key);
         }

@@ -37,7 +37,7 @@ namespace Z0
             return TypeIdentity.Define($"{prefix}{width}{indicator}");
         }
 
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         public static TypeIdentity Empty => Define(string.Empty);
 
@@ -57,7 +57,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(TypeIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static bool operator==(TypeIdentity a, TypeIdentity b)
@@ -69,14 +69,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         TypeIdentity(string id)
-            => Identifier = id;
+            => IdentityText = id;
         
         IIdentifiedType<TypeIdentity> Identified => this;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
+            get => string.IsNullOrWhiteSpace(IdentityText);
         }
         
         public override int GetHashCode()

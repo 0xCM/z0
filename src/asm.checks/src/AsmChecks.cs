@@ -41,7 +41,7 @@ namespace Z0.Asm
             Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
             CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[Aux3], Buffers[Aux4]);
         }                
-
+        
         public void Dispose()
         {
             BufferAlloc.Dispose();            
@@ -53,7 +53,7 @@ namespace Z0.Asm
 
         ICaptureArchive CodeArchive => Me.CaptureArchive(ExecutingApp);
 
-        protected IBitArchiveWriter HexWriter([Caller] string caller = null)
+        protected IHostBitsWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
             return Archives.Services.BitArchiveWriter(dstPath);
@@ -88,25 +88,22 @@ namespace Z0.Asm
             using var asmout = AsmWriter();         
     
             var fCaptured = Me.Capture(f.Identify(), f).Require();
-            hexout.WriteHex(fCaptured.Code);
+            hexout.Write(fCaptured.HostedBits);
             asmout.WriteAsm(Decoder.Decode(fCaptured).Require());
 
             var gCaptured = Me.Capture(g.Identify(), g).Require();
-            hexout.WriteHex(gCaptured.Code);
+            hexout.Write(gCaptured.HostedBits);
             asmout.WriteAsm(Decoder.Decode(gCaptured).Require());
         }
                 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
-            var catalog = PartId.GVec;
-            
-            var idD = Identify.Op(name, w, kind, false);
-            var idG = Identify.Op(name, w, kind, true);
-
-            var d = Me.HostBits(catalog, ApiHost.Create<dvec>().UriPath).Read(idD).Single();
-            var g = Me.HostBits(catalog, ApiHost.Create<gvec>().UriPath).Read(idG).Single();
-
-            return Me.Match(Binary, w,d,g, dst);
+            var dId = Identify.Op(name, w, kind, false);
+            var gId = Identify.Op(name, w, kind, true);            
+            var archive = UriBitsArchive.Create(CodeArchive.HexDir);
+            var dBits = archive.Read(ApiHost.Create<dvec>().UriPath).Where(x => x.Id == dId).Single();
+            var gBits = archive.Read(ApiHost.Create<gvec>().UriPath).Where(x => x.Id == gId).Single();
+            return Me.Match(Binary, w, dBits, gBits, dst);
         }
 
         public TestCaseRecord[] vector_bitlogic_match(BufferTokens buffers)
@@ -122,7 +119,6 @@ namespace Z0.Asm
                 dst[i++] =TestVectorMatch(buffers, n, w, k);                        
             return dst;
         }
-
 
     #if Megacheck
 

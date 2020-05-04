@@ -9,9 +9,9 @@ namespace Z0.Asm
     /// </summary>
     public interface IHostCaptureService : IAppMsgContext
     {
-        MemberExtract[] Extract(ApiHostUri host, bool save);        
+        ExtractedMember[] Extract(ApiHostUri host, bool save);        
 
-        ParsedMember[] Parse(ApiHostUri host, MemberExtract[] src, bool save);        
+        ParsedMember[] Parse(ApiHostUri host, ExtractedMember[] src, bool save);        
 
         AsmFunction[] Decode(ApiHostUri host, ParsedMember[] parsed, bool save);      
 

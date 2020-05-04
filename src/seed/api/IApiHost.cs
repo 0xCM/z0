@@ -17,7 +17,7 @@ namespace Z0
 
         ApiHostUri UriPath => ApiHostUri.FromHost(HostingType);
 
-        string IIdentified.Identifier => UriPath.Format();        
+        string IIdentified.IdentityText => UriPath.Format();        
 
         ApiHostKind HostKind  => ApiHostKind.DirectAndGeneric;
 

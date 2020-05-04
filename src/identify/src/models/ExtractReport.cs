@@ -47,8 +47,8 @@ namespace Z0
             var uri = OpUri.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
             var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.ParseByte).ToArray();
-            var extract = LocatedCode.Define(data);
-            return new R(seq,address,len,uri,sig,extract);
+            var extract = LocatedCode.Define(address, data);
+            return new R(seq, address, len, uri, sig, extract);
         }
 
         public ExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, LocatedCode Data)
@@ -113,7 +113,7 @@ namespace Z0
 
         public override string ReportName => $"Extract report for {ApiHost.Format()}";
 
-        public static Report Create(ApiHostUri host, MemberExtract[] extracts)
+        public static Report Create(ApiHostUri host, ExtractedMember[] extracts)
         {
             var records = new ExtractRecord[extracts.Length];
             for(var i=0; i< extracts.Length; i++)
@@ -122,12 +122,11 @@ namespace Z0
                 records[i] = new ExtractRecord(                
                     Sequence : i,
                     Address : op.Member.Address,
-                    Length : op.Content.Length,
+                    Length : op.Encoded.Length,
                     Uri : op.Uri,
                     OpSig : op.Member.Method.Signature().Format(),
-                    Data : op.Content
+                    Data : op.Encoded
                     );
-
             }
 
             return new Report(host, records);
@@ -135,7 +134,7 @@ namespace Z0
         
         public ExtractReport(){}
 
-        ExtractReport(ApiHostUri host, R[] records)
+        internal ExtractReport(ApiHostUri host, R[] records)
             : base(records)
         {
             this.ApiHost = host;

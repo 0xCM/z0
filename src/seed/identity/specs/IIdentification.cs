@@ -34,7 +34,7 @@ namespace Z0
             => IdentityTargetKind.Type;
 
         protected string DenullifiedIdentity 
-            => Identifier ?? string.Empty;
+            => IdentityText ?? string.Empty;
 
         int HashCode 
             => DenullifiedIdentity.GetHashCode();
@@ -49,7 +49,7 @@ namespace Z0
             => DenullifiedIdentity;
 
         int IComparable.CompareTo(object src)
-            => DenullifiedIdentity.CompareTo((src as IIdentified)?.Identifier);
+            => DenullifiedIdentity.CompareTo((src as IIdentified)?.IdentityText);
     }
 
     /// <summary>

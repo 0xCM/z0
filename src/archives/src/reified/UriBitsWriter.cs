@@ -24,18 +24,19 @@ namespace Z0
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        public void Write(in UriBits src, int? uripad = null)
-        {
-            StreamOut.WriteLine(src.Format(uripad ?? 5));
-        }
+        [MethodImpl(Inline)]
+        public void Write(UriBits src, int idpad)
+            => StreamOut.WriteLine(src.Format(idpad));
+
+        [MethodImpl(Inline)]
+        public void Write(UriBits src)
+            => StreamOut.WriteLine(src.Format(0));
 
         public void Write(UriBits[] src)
         {
-            var uripad = src.Max(x => x.Op.Identifier.Length) + 1;
+            var uripad = src.Max(x => x.Uri.IdentityText.Length) + 1;
             for(var i=0; i< src.Length; i++)
-            {
                 Write(src[i], uripad);
-            }
             StreamOut.Flush();
         }        
         public void Dispose()

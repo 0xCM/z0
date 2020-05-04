@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The key that identifies the value
         /// </summary>
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         [MethodImpl(Inline)]
         public static CorrelationToken From(string value)
@@ -45,10 +45,10 @@ namespace Z0
         [MethodImpl(Inline)]
         CorrelationToken(string value)
         {
-            this.Identifier = value;
+            this.IdentityText = value;
         }
 
-        public bool IsEmpty => string.IsNullOrWhiteSpace(Identifier);
+        public bool IsEmpty => string.IsNullOrWhiteSpace(IdentityText);
          
         [MethodImpl(Inline)]
         public bool Equals(CorrelationToken src)
@@ -59,7 +59,7 @@ namespace Z0
             => compare(this, other);        
 
         public override string ToString()
-            => Identifier;
+            => IdentityText;
  
         public override int GetHashCode()
             => hash(this);

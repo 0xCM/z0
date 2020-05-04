@@ -18,13 +18,13 @@ namespace Z0.Asm
     public readonly struct ExtractReportParser : IExtractReportParser
     {
         [MethodImpl(Inline)]
-        public static IExtractReportParser Create(ILocatedParser located)
+        public static IExtractReportParser Create(ILocatedCodeParser located)
             => new ExtractReportParser(located);
 
-        readonly ILocatedParser LocatedParser;
+        readonly ILocatedCodeParser LocatedParser;
         
         [MethodImpl(Inline)]
-        internal ExtractReportParser(ILocatedParser located)
+        internal ExtractReportParser(ILocatedCodeParser located)
         {
             this.LocatedParser = located;
         }
@@ -42,7 +42,7 @@ namespace Z0.Asm
                 if(result)
                 {
                     var uri = OpUri.hex(host, extract.Uri.GroupName, extract.Uri.OpId);
-                    var data = LocatedCode.Define(extract.Address, result.Value.Content);
+                    var data = LocatedCode.Define(extract.Address, result.Value.Encoded);
                     var record = MemberParseRecord.Define
                     (
                         Sequence: seq++,

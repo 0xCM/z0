@@ -23,11 +23,11 @@ namespace Z0
 
         string Manufacture(OpIdentity src)
         {
-            var length = src.Identifier.Length;
+            var length = src.IdentityText.Length;
             Span<char> dst = stackalloc char[length];
             for(var i=0; i< length; i++)
             {
-                var c = src.Identifier[i];
+                var c = src.IdentityText[i];
                 switch(c)
                 {
                     case IDI.TypeArgsOpen:

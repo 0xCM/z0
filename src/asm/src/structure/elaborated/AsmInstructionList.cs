@@ -11,17 +11,17 @@ namespace Z0.Asm
     using System.Linq;
     
     using static Seed;
-                 
+
     /// <summary>
-    /// Defines a contiguous instruction sequence
+    /// Defines a contiguous *based* instruction sequence
     /// </summary>
     public readonly struct AsmInstructionList : IReadOnlyList<Instruction>
     {        
+        public static AsmInstructionList Empty = new AsmInstructionList(Control.array<Instruction>(), LocatedCode.Empty);
+
         readonly Instruction[] Instructions;
 
-        public readonly LocatedCode EncodedBytes;
-
-        public static AsmInstructionList Empty = new AsmInstructionList(new Instruction[0]{}, LocatedCode.Empty);
+        public LocatedCode Encoded {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator Instruction[](AsmInstructionList src)
@@ -35,27 +35,16 @@ namespace Z0.Asm
         AsmInstructionList(Instruction[] instructions, LocatedCode data)
         {
             this.Instructions = instructions;
-            this.EncodedBytes = data;
+            this.Encoded = data;
         }
 
-        public Instruction this[int index] 
-        {
-            [MethodImpl(Inline)]
-            get => Instructions[index];
-        }
-        public int Count 
-        {
-            [MethodImpl(Inline)]
-            get => Instructions.Length;
-        }
+        public Instruction this[int index]  { [MethodImpl(Inline)] get => Instructions[index]; }
+        
+        public int Count { [MethodImpl(Inline)] get => Instructions.Length; }
 
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Instructions.Length;
-        }
+        public int Length { [MethodImpl(Inline)] get => Instructions.Length; }
 
-        public bool IsEmpty => Instructions == null || Instructions.Length == 0;
+        public bool IsEmpty { [MethodImpl(Inline)] get => Instructions == null || Instructions.Length == 0; }
 
         public IEnumerator<Instruction> GetEnumerator()
             => ((IReadOnlyList<Instruction>)Instructions).GetEnumerator();

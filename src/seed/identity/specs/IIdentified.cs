@@ -15,12 +15,12 @@ namespace Z0
     /// </summary>
     public interface IIdentified
     {        
-        string Identifier {get;}
+        string IdentityText {get;}
 
         bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
+            get => string.IsNullOrWhiteSpace(IdentityText);
         }               
 
         bool IsNonEmpty
@@ -28,5 +28,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => !IsEmpty;
         }
+    }
+
+    public interface IIdentified<T> : IIdentified
+        where T : IIdentification
+    {
+        T Id {get;}
+
+        string IIdentified.IdentityText => Id.IdentityText;
     }
 }

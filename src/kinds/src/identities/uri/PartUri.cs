@@ -22,12 +22,12 @@ namespace Z0
         /// </summary>
         public readonly PartId Id;
         
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Id == PartId.None || string.IsNullOrWhiteSpace(Identifier);
+            get => Id == PartId.None || string.IsNullOrWhiteSpace(IdentityText);
         }
 
         PartUri INullary<PartUri>.Zero => Empty;        
@@ -41,7 +41,7 @@ namespace Z0
         PartUri(PartId id)
         {
             this.Id = id;
-            this.Identifier = id != 0 ? id.Format() : text.blank;
+            this.IdentityText = id != 0 ? id.Format() : text.blank;
         }
 
         [MethodImpl(Inline)]
@@ -59,6 +59,6 @@ namespace Z0
             => equals(this, obj);
 
         public override string ToString()
-            => Identifier;        
+            => IdentityText;        
     }
 }

@@ -280,7 +280,7 @@ namespace Z0
         /// <param name="start">The domain point at which evaluation will begin</param>
         public PermCycle Cycle(int start)
         {
-            require(start >= 0 && start < Length);
+            insist(start >= 0 && start < Length);
             Span<PermTerm> cterms = stackalloc PermTerm[Length];
             var traversed = new HashSet<int>(Length);
             var index = start;

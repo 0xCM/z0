@@ -21,7 +21,7 @@ namespace Z0
             get => Location != 0;
         }
 
-        public string Identifier 
+        public string IdentityText 
             => Location.ToString("x") + "h";
 
         MemoryAddress IAddressable.Address 
@@ -115,7 +115,7 @@ namespace Z0
             => this.Location = absolute;
 
         public string Format()
-            => Identifier;
+            => IdentityText;
 
         public string Format(int digits)
             => Location.ToString($"x{digits}") + "h";

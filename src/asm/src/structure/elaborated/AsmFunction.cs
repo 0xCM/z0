@@ -14,31 +14,25 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, OperationBits.Empty, 0, AsmInstructionList.Empty);
+        public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, HostedBits.Empty, 0, AsmInstructionList.Empty);
 
-        // public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList instructions)
-        // {         
-        //     var code = OperationBits.Define(encoding.MemberUri, encoding.Content);
-        //     return new AsmFunction(encoding.MemberUri, encoding.MemberSig, code, encoding.TermCode, instructions);
-        // }
-
-        public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList instructions)
+        public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList inxs)
         {         
-            var code = OperationBits.Define(encoding.Uri, encoding.ParsedContent);  
-            var sig = encoding.Reflected.Signature().Format();          
-            return new AsmFunction(encoding.Uri, sig, code, encoding.TermCode, instructions);
+            var code = HostedBits.Define(encoding.Uri, encoding.Encoded);  
+            var sig = encoding.Method.Signature().Format();          
+            return new AsmFunction(encoding.Uri, sig, code, encoding.TermCode, inxs);
         }
 
         [MethodImpl(Inline)]
-        public static AsmFunction Define(OpUri uri, string sig, OperationBits code, ExtractTermCode term, AsmInstructionList instructions)
-            => new AsmFunction(uri,sig,code,term,instructions);
+        public static AsmFunction Define(OpUri uri, string sig, HostedBits code, ExtractTermCode term, AsmInstructionList inxs)
+            => new AsmFunction(uri,sig,code,term,inxs);
 
-        AsmFunction(OpUri uri, string sig, OperationBits code, ExtractTermCode term, AsmInstructionList instructions)
+        AsmFunction(OpUri uri, string sig, HostedBits code, ExtractTermCode term, AsmInstructionList instructions)
         {
             this.Uri = uri;
             this.OpId = uri.OpId;
             this.OpSig = sig;
-            this.Instructions = instructions;
+            this.Inxs = instructions;
             this.Code = code;            
             this.TermCode =term;
         }
@@ -61,12 +55,12 @@ namespace Z0.Asm
         /// <summary>
         /// The function encoding
         /// </summary>
-        public OperationBits Code {get;}
+        public HostedBits Code {get;}
 
         /// <summary>
         /// The encoded instructions
         /// </summary>
-        public AsmInstructionList Instructions {get;}            
+        public AsmInstructionList Inxs {get;}            
 
         /// <summary>
         /// Specifies the reason for capture termination
@@ -79,7 +73,7 @@ namespace Z0.Asm
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Code.Location.Start;
+            get => Code.Address;
         }
 
         /// <summary>
@@ -88,7 +82,7 @@ namespace Z0.Asm
         public int InstructionCount
         {
             [MethodImpl(Inline)]
-            get => Instructions.Length;            
+            get => Inxs.Length;            
         }
 
         public bool IsEmpty => InstructionCount == 0;

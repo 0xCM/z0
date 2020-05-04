@@ -11,45 +11,27 @@ namespace Z0
 
     using static Seed;
 
-    readonly struct ApiIndexBuilder
+    readonly struct ApiIndexBuilder : IApiIndexBuilder
     {
         readonly IApiSet ApiSet;
 
-        readonly IUriBitsReader BitsReader;
-
-        readonly IMemberLocator MemberLocator;
+        readonly IMemberLocator Locator;
                 
         [MethodImpl(Inline)]
         internal ApiIndexBuilder(IApiSet api, IMemberLocator locator)
         {
             this.ApiSet = api;
-            this.MemberLocator = locator;
-            this.BitsReader = UriBitsReader.Service;
+            this.Locator = locator;
         }
         
-        ApiMembers HostedMembers(IApiHost host)
-            => MemberLocator.Hosted(host);
-
-        IApiHost FindHost(in ApiHostUri uri)
-            => ApiSet.FindHost(uri).Require();
-
-        IEnumerable<Member> FindHostedMembers(in ApiHostUri host)
-            => HostedMembers(FindHost(host));
-
-        /// <summary>
-        /// Reads code from a hex file
-        /// </summary>
-        /// <param name="src">The source path</param>
-        public ReadOnlySpan<UriBits> LoadCode(FilePath src)
-            => BitsReader.Read(src).ToArray();
-
-        public ApiCodeIndex CreateIndex(ApiHostUri host, FilePath src)
+        public ApiCodeIndex CreateIndex(ApiHostUri uri, FilePath src)
         {
-            var loaded = LoadCode(src);
-            var hosted = FindHostedMembers(host).ToArray();            
-            var code =  Operational.Service.CreateIndex(loaded.ToEnumerable());
-            var members = ApiIndex.Create(hosted);
-            return CreateIndex(members, code);
+            var code = UriBitsReader.Service.Read(src).ToArray();
+            var host = ApiSet.FindHost(uri).Require();
+            var members = Locator.Hosted(host);
+            var codeIndex =  UriBitsQuery.Service.CreateIndex(code);
+            var memberIndex = ApiIndex.Create(members);
+            return CreateIndex(memberIndex, codeIndex);
         }
 
         public ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<UriBits> code)
@@ -57,7 +39,7 @@ namespace Z0
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
-                          select MemberCode.Define(r.left, r.right.Bits);                                      
+                          select MemberCode.Define(r.left, r.right);                                      
             return ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
         }
     }

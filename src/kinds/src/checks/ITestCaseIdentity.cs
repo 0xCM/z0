@@ -110,6 +110,6 @@ namespace Z0
         /// <param name="f">The left operation</param>
         /// <param name="g">The right operation</param>
         string MatchCaseName(OpIdentity f, OpIdentity g)
-            => CaseName($"{f.Identifier}_vs_{g.Identifier}");
+            => CaseName($"{f.IdentityText}_vs_{g.IdentityText}");
     }
 }

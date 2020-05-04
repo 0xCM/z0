@@ -47,7 +47,7 @@ namespace Z0
         new T Identify(Type src);
 
         TypeIdentity IIdentityProvider<Type,TypeIdentity>.Identify(Type src)
-            => TypeIdentity.Define(Identify(src).Identifier);
+            => TypeIdentity.Define(Identify(src).IdentityText);
     }
 
     public interface ITypeIdentityProviders : IService

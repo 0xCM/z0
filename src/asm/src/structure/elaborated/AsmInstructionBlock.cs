@@ -15,26 +15,9 @@ namespace Z0.Asm
     public readonly struct AsmInstructionBlock 
     {
         /// <summary>
-        /// Defines an instruction sequence, in both encoded and decoded form
-        /// </summary>
-        /// <param name="encoded">The encoded instructions</param>
-        /// <param name="decoded">The decoded instructions</param>
-        [MethodImpl(Inline)]
-        public static AsmInstructionBlock Define(OperationBits encoded, Instruction[] decoded, ExtractTermCode term)
-            => new AsmInstructionBlock(encoded, decoded, term);
-
-        [MethodImpl(Inline)]
-        AsmInstructionBlock(OperationBits encoded, Instruction[] decoded, ExtractTermCode term)
-        {
-            this.NativeCode = encoded;
-            this.Decoded = decoded;
-            this.TermCode = term;
-        }
-
-        /// <summary>
         /// Encoded assembly
         /// </summary>
-        public readonly OperationBits NativeCode;
+        public readonly HostedBits Encoded;
 
         /// <summary>
         /// The decoded instructions
@@ -45,6 +28,29 @@ namespace Z0.Asm
         /// The reason capture was terminated
         /// </summary>
         public readonly ExtractTermCode TermCode;
+
+        /// <summary>
+        /// Defines an instruction sequence, in both encoded and decoded form
+        /// </summary>
+        /// <param name="encoded">The encoded instructions</param>
+        /// <param name="decoded">The decoded instructions</param>
+        [MethodImpl(Inline)]
+        public static AsmInstructionBlock Define(HostedBits encoded, Instruction[] decoded, ExtractTermCode term)
+            => new AsmInstructionBlock(encoded, decoded, term);
+
+        [MethodImpl(Inline)]
+        AsmInstructionBlock(HostedBits encoded, Instruction[] decoded, ExtractTermCode term)
+        {
+            this.Encoded = encoded;
+            this.Decoded = decoded;
+            this.TermCode = term;
+        }
+
+        public MemoryAddress BaseAddress 
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Address;
+        }
         
         /// <summary>
         /// Queries/Manipulates an index-identified instruction
@@ -54,8 +60,5 @@ namespace Z0.Asm
 
         public int InstructionCount
             => Decoded.Length;     
-
-        public MemoryRange Origin
-            => NativeCode.Location;    
     }
 }

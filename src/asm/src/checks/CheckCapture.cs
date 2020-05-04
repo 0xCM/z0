@@ -10,6 +10,11 @@ namespace Z0.Asm
     
     using static Seed;
 
+    public interface ICheckCapture : ICaptureServiceProxy
+    {
+
+    }
+
     public readonly struct CheckCapture : ICheckCapture
     {
         [MethodImpl(Inline)]
@@ -26,10 +31,5 @@ namespace Z0.Asm
         public ICaptureExchange CaptureExchange {get;}
 
         public ICaptureService CaptureService {get;}
-    }
-
-    public interface ICheckCapture : ICaptureServiceProxy
-    {
-
     }
 }

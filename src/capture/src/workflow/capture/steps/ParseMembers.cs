@@ -28,7 +28,7 @@ namespace Z0.Asm
                 this.Parser = Extract.Services.ExtractParser();
             }
 
-            public ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts)
+            public ParsedMember[] ParseExtracts(ApiHostUri host, ExtractedMember[] extracts)
             {
                 var result = Parser.Parse(extracts);
                 

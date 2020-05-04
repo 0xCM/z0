@@ -225,7 +225,6 @@ namespace Z0
 
     }    
 
-
     /// <summary>
     /// Characterizes an individual that can be uniquely associatd with an integer in the range 0..n-1 
     /// within the context of a container with a capacity of n items
@@ -251,7 +250,6 @@ namespace Z0
         ulong ITypeNat.NatValue => default(N).NatValue;
 
     }
-
 
     /// <summary>
     /// Characterizes a container I with immutable content such that: 

@@ -13,7 +13,7 @@ namespace Z0
     {
         public static PrimalIdentity Empty => new PrimalIdentity(string.Empty);
 
-        public string Identifier {get;}            
+        public string IdentityText {get;}            
 
         public string Keyword {get;}
 
@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(PrimalIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeIdentity(PrimalIdentity src)
@@ -45,20 +45,20 @@ namespace Z0
         [MethodImpl(Inline)]
         PrimalIdentity(NumericKind kind, string keyword)
         {
-            this.Identifier = NumericIdentity.Define(kind);
+            this.IdentityText = NumericIdentity.Define(kind);
             this.Keyword = keyword;
         }
 
         [MethodImpl(Inline)]
         PrimalIdentity(string keyword)
         {
-            this.Identifier = keyword;
+            this.IdentityText = keyword;
             this.Keyword = keyword;
         }
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.Define(Identifier);
+            => TypeIdentity.Define(IdentityText);
 
         IIdentifiedType<PrimalIdentity> Identified => this;
  

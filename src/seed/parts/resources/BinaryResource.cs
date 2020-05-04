@@ -12,7 +12,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
-
     using static Seed;
 
     /// <summary>

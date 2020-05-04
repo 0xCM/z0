@@ -21,7 +21,7 @@ namespace Z0
                 return src;
             else
                return Identify.Op(
-                   text.concat(src.Identifier.LeftOf(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOf(IDI.PartSep)));
+                   text.concat(src.IdentityText.LeftOf(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.IdentityText.RightOf(IDI.PartSep)));
         }        
     }
 }

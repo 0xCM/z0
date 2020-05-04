@@ -10,78 +10,78 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Seed;    
+    using static Memories;
 
-    public readonly struct ParsedMember
+    public readonly struct ParsedMember : 
+        IMemberCode<ParsedMember,LocatedCode>, 
+        IUriCode<ParsedMember,LocatedCode>
     {
         /// <summary>
-        /// The extracted member,
+        /// The extracted code
         /// </summary>
-        public readonly MemberExtract Source;
-
-        /// <summary>
-        /// The extracted member sequence
-        /// </summary>
-        public readonly int SourceSequence;
-
-        /// <summary>
-        /// The reason for extract completion
-        /// </summary>
-        public readonly ExtractTermCode TermCode;
+        readonly ExtractedMember Extracted;
 
         /// <summary>
         /// The parsed code
         /// </summary>
-        public readonly LocatedCode ParsedContent;   
-
-        [MethodImpl(Inline)]
-        public ParsedMember(MemberExtract src, int seq, ExtractTermCode term, LocatedCode parsed)
-        {
-            this.Source = src;
-            this.SourceSequence = seq;
-            this.TermCode = term;
-            this.ParsedContent = parsed;
-        }        
+        public LocatedCode Encoded {get;}
 
         /// <summary>
-        /// The host-relative operation identifier
+        /// The extracted member sequence
         /// </summary>
-        public OpIdentity Id
-            => Source.Id;
+        public int Sequence {get;}
 
         /// <summary>
-        /// The globally-unique operation uri 
+        /// The reason for extract completion
         /// </summary>
-        public OpUri Uri 
-            => Source.Uri;
+        public ExtractTermCode TermCode {get;}
 
         /// <summary>
-        /// The member kind, if known
+        /// The operation uri 
         /// </summary>
-        public OpKindId KindId
-            => Source.Member.KindId;
+        public OpUri Uri => Extracted.Uri;
 
         /// <summary>
-        /// Specifies whether the parsed member is of known kind
+        /// The operation identifier
         /// </summary>
-        public bool IsKinded
-            => KindId != 0;
-
-        /// <summary>
-        /// The extract data
-        /// </summary>
-        public LocatedCode SourceContent 
-            => Source.Content;
+        public OpIdentity Id => Uri.OpId;
 
         /// <summary>
         /// The operation memory address
         /// </summary>
-        public MemoryAddress Address 
-            => SourceContent.Address;
+        public MemoryAddress Address => Encoded.Address;
 
-        public MethodInfo Reflected 
-            => Source.Member.Method;
-        
-        public OperationBits ParsedBits 
-            => OperationBits.Define(Uri, ParsedContent);
+        /// <summary>
+        /// The member operation, reflected
+        /// </summary>
+        public MethodInfo Method => Extracted.Member.Method;            
+
+        /// <summary>
+        /// The member kind, if known
+        /// </summary>
+        public OpKindId KindId => Extracted.Member.KindId;
+
+        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
+
+        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
+
+        public bool IsEmpty { [MethodImpl(Inline)] get => !Address.NonZero; }
+
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => Address.NonZero; }
+
+        public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment; }
+
+        public bool Equals(ParsedMember src)
+            => Encoded.Equals(src.Encoded);
+
+        [MethodImpl(Inline)]
+        public ParsedMember(ExtractedMember extracted, int seq, ExtractTermCode term, LocatedCode parsed)
+        {
+            insist(extracted.Address,parsed.Address);           
+            Extracted = extracted;
+            Sequence = seq;
+            TermCode = term;
+            Encoded = parsed;
+        }        
     }
 }

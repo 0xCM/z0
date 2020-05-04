@@ -36,7 +36,7 @@ namespace Z0
     
         public string HostName {get;}
 
-        public string Identifier {get;}            
+        public string IdentityText {get;}            
 
         public ApiHostKind HostKind {get;}
 
@@ -81,7 +81,7 @@ namespace Z0
             this.HostKind = attrib?.HostKind ?? ApiHostKind.DirectAndGeneric;
             this.HostName = text.ifempty(attrib?.HostName, t.Name).ToLower();
             this.UriPath = ApiHostUri.Define(Owner, HostName);
-            this.Identifier = UriPath.Format();
+            this.IdentityText = UriPath.Format();
         }
                                   
         public IEnumerable<MethodInfo> HostedMethods
@@ -91,7 +91,7 @@ namespace Z0
             => Owner == PartId.None && HostingType == typeof(void);
 
         public string Format()
-            => Identifier;
+            => IdentityText;
 
         public override string ToString() 
             => Format();

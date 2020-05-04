@@ -66,7 +66,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            require(src.Length >= (int)value<N>());
+            insist(src.Length >= (int)value<N>());
             return new NatSpan<N, T>(src);
         }
 

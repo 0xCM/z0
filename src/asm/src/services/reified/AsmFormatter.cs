@@ -9,13 +9,13 @@ namespace Z0.Asm
 
     using static Seed;
         
-    readonly struct AsmFormatter : IAsmFormatter
-    {        
-        public AsmFormatSpec Config {get;}
-
+    public readonly struct AsmFormatter : IAsmFormatter
+    {      
         [MethodImpl(Inline)]
-        public static IAsmFormatter Create(in AsmFormatSpec config)
+        public static IAsmFormatter Create(AsmFormatSpec config)
             => new AsmFormatter(config);
+
+        public AsmFormatSpec Config {get;}
 
         [MethodImpl(Inline)]
         AsmFormatter(AsmFormatSpec config)

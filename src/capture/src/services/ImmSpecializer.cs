@@ -28,9 +28,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal ImmSpecializer(IAsmFunctionDecoder decoder)
         {            
-            this.Decoder = decoder;
-            this.Capture = AsmWorkflows.Stateless.CaptureService();
-            this.Dynamic = Dynops.Services.Dynexus;
+            Decoder = decoder;
+            Capture = CaptureService.Service;
+            Dynamic = Dynops.Services.Dynexus;
         }
 
         public Option<AsmFunction> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm)

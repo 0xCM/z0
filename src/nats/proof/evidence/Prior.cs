@@ -37,7 +37,7 @@ namespace Z0
 
         public NatNext(K1 n1, K2 n2)
         {
-            require(n1.NatValue + 1 == n2.NatValue);
+            insist(n1.NatValue + 1 == n2.NatValue);
             this.valid = true;
         }
 
@@ -65,7 +65,7 @@ namespace Z0
         public NatPrior(K1 n1, K2 n2)
         {
             valid = true; 
-            require(n1.NatValue - 1 == n2.NatValue);
+            insist(n1.NatValue - 1 == n2.NatValue);
         }
 
         public bool valid {get;}

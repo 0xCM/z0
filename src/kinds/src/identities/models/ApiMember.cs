@@ -10,29 +10,15 @@ namespace Z0
     using System.Linq;
 
     using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Describes a reified api member wich may be of hosted or located state
     /// </summary>
-    public readonly struct Member : IApiMember, IEquatable<Member>
+    public readonly struct Member : IApiMember<Member>
     {
-        public static Member Empty => Define(OpUri.Empty, null, OpKindId.None, null);
+        public static Member Empty => new Member(OpUri.Empty, typeof(object).Methods().First(), OpKindId.None, MemoryAddress.Zero);
 
-        [MethodImpl(Inline)]
-        public static Member Define(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress? address = null)
-            => new Member(uri,method, kindId, address ?? MemoryAddress.Zero);
-
-        [MethodImpl(Inline)]
-        internal Member(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
-        {
-            this.Id = uri.OpId;
-            this.OpUri = uri;
-            this.KindId = kindId;
-            this.Method = method ?? typeof(object).Methods().First();
-            this.Address = address;
-            this.HostUri = OpUri.HostPath;
-        }
-        
         public OpIdentity Id {get;}
         
         public OpUri OpUri {get;}
@@ -44,6 +30,38 @@ namespace Z0
         public MemoryAddress Address {get;}
 
         public ApiHostUri HostUri {get;}   
+
+        public Member Zero => Empty;
+
+        [MethodImpl(Inline)]
+        public static Member Define(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
+            => new Member(uri,method, kindId, address);
+
+        [MethodImpl(Inline)]
+        public static Member Define(OpUri uri, MethodInfo method, OpKindId kindId)
+            => new Member(uri,method, kindId);
+
+        [MethodImpl(Inline)]
+        internal Member(OpUri uri, MethodInfo method, OpKindId kindId)
+        {
+            Id = uri.OpId;
+            OpUri = uri;
+            KindId = kindId;
+            Method = insist(method);
+            Address = MemoryAddress.Zero;
+            HostUri = OpUri.HostPath;
+        }
+
+        [MethodImpl(Inline)]
+        internal Member(OpUri uri, MethodInfo method, OpKindId kindId, MemoryAddress address)
+        {
+            Id = uri.OpId;
+            OpUri = uri;
+            KindId = kindId;
+            Method = insist(method);
+            Address = insist(address, a => a.NonZero);
+            HostUri = OpUri.HostPath;
+        }        
 
         public bool Equals(Member src)
         {

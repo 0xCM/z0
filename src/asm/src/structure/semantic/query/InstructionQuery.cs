@@ -85,12 +85,12 @@ namespace Z0.Asm
         {
             var dst = new AsmInstructionSummary[src.Length];
             var offset = (ushort)0;
-            var @base = src.EncodedBytes.Address;
+            var @base = src.Encoded.Address;
 
             for(var i=0; i<dst.Length; i++)
             {
                 var instruction = src[i];                            
-                dst[i] =   Summarize(@base, instruction, src.EncodedBytes, instruction.FormattedInstruction, offset );
+                dst[i] =   Summarize(@base, instruction, src.Encoded, instruction.FormattedInstruction, offset );
                 offset += (ushort)instruction.ByteLength;
             }
             return dst;
@@ -108,7 +108,7 @@ namespace Z0.Asm
 
             for(var i=0; i<dst.Length; i++)
             {
-                var instruction = src.Instructions[i];
+                var instruction = src.Inxs[i];
                 
                 if(src.Code.Length < offset + instruction.ByteLength)
                     throw AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                

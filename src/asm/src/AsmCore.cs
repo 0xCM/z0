@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
     public readonly struct AsmCore : IAsmCore
     {
@@ -27,7 +28,6 @@ namespace Z0.Asm
 
         IMemoryReader MemoryReader
             => Z0.MemoryReader.Service;
-
 
         [MethodImpl(Inline)]
         IAsmFormatter AsmFormatter(in AsmFormatSpec? config = null)
@@ -62,7 +62,7 @@ namespace Z0.Asm
             => CilFunctionFormatter.Create(config);
 
         [MethodImpl(Inline)]
-        IHostAsmArchiver AsmArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => new HostAsmArchiver(host, formatter, dst);
+        IHostArchiver HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+            => new HostArchiver(host, formatter,  insist(dst));
     }
 }

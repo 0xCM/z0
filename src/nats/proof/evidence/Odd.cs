@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatOdd(K k)
         {
-            require(NatCalc.odd(k));
+            insist(NatCalc.odd(k));
         }
         
         public ulong NatValue 

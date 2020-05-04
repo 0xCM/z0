@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     using static Seed;
 
-
     public sealed class t_mask_capture : t_asm<t_mask_capture>
     {    
 
@@ -25,7 +24,7 @@ namespace Z0.Asm
             foreach(var src in MaskCases.NaturalClosures)
             {
                 var captured = AsmCheck.Capture(src.Identify(), src).Require();                                
-                hexout.WriteHex(captured.Code);
+                hexout.Write(captured.HostedBits);
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
             }    
         }
@@ -43,7 +42,7 @@ namespace Z0.Asm
             foreach(var src in methods)
             {
                 var captured = AsmCheck.Capture(src.Identify(), src).Require();                                
-                hexout.WriteHex(captured.Code);
+                hexout.Write(captured.HostedBits);
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
             }    
         }

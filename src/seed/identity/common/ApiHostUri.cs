@@ -18,7 +18,7 @@ namespace Z0
 
         public readonly string Name;        
 
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         public FolderName HostFolder 
             => FolderName.Define(Name);
@@ -75,11 +75,11 @@ namespace Z0
         {
             this.Owner = owner;
             this.Name = name;
-            this.Identifier = owner != 0 ? $"{Owner.Format()}{UriDelimiters.PathSep}{Name}" : name;
+            this.IdentityText = owner != 0 ? $"{Owner.Format()}{UriDelimiters.PathSep}{Name}" : name;
         }
  
         public string Format()
-            => Identifier;
+            => IdentityText;
 
         [MethodImpl(Inline)]
         public bool Equals(ApiHostUri src)
@@ -96,6 +96,6 @@ namespace Z0
             => equals(this, obj);
 
         public override string ToString()
-            => Identifier;        
+            => IdentityText;        
     }
 }

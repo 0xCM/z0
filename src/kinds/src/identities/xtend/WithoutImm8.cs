@@ -19,7 +19,7 @@ namespace Z0
             var perhaps = src.ExtractImm8();
             if(!perhaps)   
                 return src;
-            return Identify.Op(src.Identifier.Remove(Identify.Imm8(perhaps.Value)));
+            return Identify.Op(src.IdentityText.Remove(Identify.Imm8(perhaps.Value)));
         }        
     }
 }

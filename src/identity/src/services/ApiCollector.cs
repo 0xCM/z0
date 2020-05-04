@@ -14,6 +14,10 @@ namespace Z0
 
     class ApiCollector : IApiCollector
     {        
+        public static IApiCollector Service => new ApiCollector();
+
+        IMultiDiviner Diviner => MultiDiviner.Service;
+
         DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g, ImmRefinementKind refinment)
             => DirectApiGroup.Define(host, g.GroupId, 
                 g.Members.Where(m => m.Method.AcceptsImmediate(refinment) && m.Method.ReturnsVector()));
@@ -45,25 +49,12 @@ namespace Z0
                 let spec = (NatClosureKind)tag.Spec
                 select NativeNaturals.FindTypes(spec).ToArray()).ValueOrElse(() => Arrays.empty<Type>());   
 
-        readonly IMultiDiviner Diviner;
-
-        [MethodImpl(Inline)]
-        public static IApiCollector Create(IMultiDiviner diviner)
-            => new ApiCollector(diviner);
-        
-        [MethodImpl(Inline)]
-        ApiCollector(IMultiDiviner diviner)
-        {
-            this.Diviner = diviner;
-        }
-
-        IOperational Ops => Operational.Service;
 
         public IEnumerable<DirectApiGroup> CollectDirect(Assembly src)
-            => Ops.ApiHosts(src).SelectMany(CollectDirect);
+            => ApiReflected.Service.ApiHosts(src).SelectMany(CollectDirect);
 
         public IEnumerable<GenericApiOp> CollectGeneric(Assembly src)
-            => Ops.ApiHosts(src).SelectMany(CollectGeneric);
+            => ApiReflected.Service.ApiHosts(src).SelectMany(CollectGeneric);
 
         public IEnumerable<DirectApiGroup> CollectDirect(IApiHost src)        
             => from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)

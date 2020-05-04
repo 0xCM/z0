@@ -15,7 +15,7 @@ namespace Z0
             => $"{scheme.Format()}{EOS}{catalog.Format()}{PathSep}{host}{QueryMarker}{group}";
 
         public static string FullUriText(OpUriScheme scheme, PartId catalog, string host, string group, OpIdentity opid)
-            => $"{scheme.Format()}{EOS}{catalog.Format()}{PathSep}{host}{QueryMarker}{group}{Fragment}{opid.Identifier}";
+            => $"{scheme.Format()}{EOS}{catalog.Format()}{PathSep}{host}{QueryMarker}{group}{Fragment}{opid.IdentityText}";
 
         public static string PathText(string scheme, PartId catalog, string host)
             => $"{scheme}{EOS}{catalog.Format()}{PathSep}{host}";

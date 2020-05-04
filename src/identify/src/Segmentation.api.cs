@@ -10,7 +10,6 @@ namespace Z0
 
     using static Seed;
 
-
     public static class Segmentation
     {
         /// <summary>
@@ -19,7 +18,7 @@ namespace Z0
         /// <param name="part">The source part</param>
         public static Option<SegmentedIdentity> identify(IdentityPart part)
         {
-            if(part.IsSegment && Segmentation.TryParse(part.Identifier, out var seg))
+            if(part.IsSegment && Segmentation.TryParse(part.IdentityText, out var seg))
                 return seg;
             else
                 return Option.none<SegmentedIdentity>();

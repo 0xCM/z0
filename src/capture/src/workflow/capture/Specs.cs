@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         IApiSet ApiSet {get;}
 
-        IHostCodeExtractor Extractor {get;}
+        IMemberExtractor Extractor {get;}
 
         IExtractParser Parser {get;}
 
@@ -122,14 +122,14 @@ namespace Z0.Asm
 
     public interface IParseMembersStep : ICaptureStep
     {
-        ParsedMember[] ParseExtracts(ApiHostUri host, MemberExtract[] extracts);
+        ParsedMember[] ParseExtracts(ApiHostUri host, ExtractedMember[] extracts);
 
         void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst);
     }
 
     public interface IReportExtractsStep : ICaptureStep
     {
-        ExtractReport CreateExtractReport(ApiHostUri host, MemberExtract[] src);
+        ExtractReport CreateExtractReport(ApiHostUri host, ExtractedMember[] src);
         
         void SaveExtractReport(ExtractReport src, FilePath dst);
     }
@@ -145,7 +145,7 @@ namespace Z0.Asm
     {
         Member[] LocateMembers(IApiHost host);
 
-        MemberExtract[] ExtractMembers(IApiHost host);
+        ExtractedMember[] ExtractMembers(IApiHost host);
     }
 
     public interface IDecodeStep : ICaptureStep

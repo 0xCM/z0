@@ -18,7 +18,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static AsmFunctionGroup Define(OpIdentity id, AsmFunction[] members)
         {            
-            require(members.Length != 0, $"{id}: Empty groups are disallowed");            
+            insist(members.Length != 0, $"{id}: Empty groups are disallowed");            
             return new AsmFunctionGroup(id, members);
         }
         

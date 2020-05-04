@@ -15,18 +15,18 @@ namespace Z0
     {
         public readonly MemoryAddress Address;
 
-        public readonly ParsedMemoryExtract Parsed;
+        public readonly ParsedCode Parsed;
 
         public readonly AsmInstructionList Decoded;
 
         public readonly string FormattedAsm;        
 
         [MethodImpl(Inline)]
-        public static MemoryCapture Define(MemoryAddress address, ParsedMemoryExtract data, AsmInstructionList instructions, string formatted)
+        public static MemoryCapture Define(MemoryAddress address, ParsedCode data, AsmInstructionList instructions, string formatted)
             => new MemoryCapture(address, data, instructions,formatted);
         
         [MethodImpl(Inline)]
-        internal MemoryCapture(MemoryAddress address, ParsedMemoryExtract data, AsmInstructionList instructions, string formatted)
+        internal MemoryCapture(MemoryAddress address, ParsedCode data, AsmInstructionList instructions, string formatted)
         {
             this.Address = address;
             this.Parsed = data;

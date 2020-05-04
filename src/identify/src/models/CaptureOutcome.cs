@@ -12,12 +12,14 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a native capture operation
     /// </summary>
-    public readonly struct CaptureOutcome
+    public readonly struct CaptureOutcome : IIdentified<OpIdentity>
     {
+        public static CaptureOutcome Empty => Define(ExtractState.Empty, 0,0, ExtractTermCode.None);
+
         /// <summary>
         /// The identity of the capture subject
         /// </summary>
-        public readonly OpIdentity Id;
+        public OpIdentity Id {get;}
 
         /// <summary>
         /// The final state in the capture process
@@ -33,8 +35,6 @@ namespace Z0
         /// The capture termination code indicating why the capture process reached end-state
         /// </summary>
         public readonly ExtractTermCode TermCode;
-
-        public static CaptureOutcome Empty => Define(ExtractState.Empty, 0,0, ExtractTermCode.None);
 
         [MethodImpl(Inline)]
         public static CaptureOutcome Define(in ExtractState state, ulong start, ulong end, ExtractTermCode cc)

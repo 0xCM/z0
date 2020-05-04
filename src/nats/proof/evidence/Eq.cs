@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatEq(K1 k1, K2 k2)
         {
-            require(NatCalc.eq(k1,k2));
+            insist(NatCalc.eq(k1,k2));
         }
         
         public override string ToString()
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatNEq(K1 n1, K2 n2)
         {
-            require(n1.NatValue != n2.NatValue);
+            insist(n1.NatValue != n2.NatValue);
         }
                 
         public override string ToString()

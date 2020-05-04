@@ -75,6 +75,8 @@ namespace Z0
         public string NoExtension 
             => Path.GetFileNameWithoutExtension(Name);
         
+        public FileName WithoutExtension => FileName.Define(NoExtension);
+        
         /// <summary>
         /// Dtermines whether the name of a file is of the form {owner}{.}{*}
         /// </summary>

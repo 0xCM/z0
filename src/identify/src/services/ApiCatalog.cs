@@ -6,11 +6,18 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
 
-    public class ApiCatalog : IApiCatalog
+    using static Seed;
+
+    public readonly struct ApiCatalog : IApiCatalog
     {
+        [MethodImpl(Inline)]
+        public static IApiCatalog Create(IPart src)
+            => new ApiCatalog(src);
+
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
         /// </summary>
@@ -26,7 +33,7 @@ namespace Z0
         /// </summary>
         public ApiHost[] ApiHosts {get;}
 
-        public BinaryResources Resources  {get;}
+        public ResourceIndex Resources  {get;}
 
         public Type[] FunFactories {get;}
 
@@ -34,28 +41,23 @@ namespace Z0
 
         public ApiHost[] DirectApiHosts {get;}
 
-        public ApiCatalog(Assembly source, PartId id)
+        [MethodImpl(Inline)]
+        ApiCatalog(IPart src)
+            : this(src.Owner, src.Id)
+        {
+            
+        }                            
+
+        ApiCatalog(Assembly source, PartId id)
         {
             PartId = id;
             Part = source;
-            ApiHosts = ApiHost.HostTypes(Part).Select(t => ApiHost.Define(PartId, t)).ToArray();
-            Resources = BinaryResources.Empty;
+            ApiHosts = ApiHost.HostTypes(Part).Select(t => ApiHost.Define(id, t)).ToArray();
+            Resources = ResourceIndex.Empty;
             DirectApiHosts = ApiHosts.Where(h => h.HostKind.DefinesDirectOps()).ToArray();
             GenericApiHosts = ApiHosts.Where(h => h.HostKind.DefinesGenericOps()).ToArray();
             FunFactories = FactoryTypes(Part).ToArray();            
         }
-        
-        public ApiCatalog(Assembly source, PartId id, BinaryResources resources)
-            : this(source,id)
-        {
-            Resources = resources ?? BinaryResources.Empty;
-        }                            
-
-        public ApiCatalog(Assembly source, PartId id, IPartData provider)
-            : this(source,id)
-        {
-            Resources = BinaryResources.Create(provider);
-        }                            
 
         /// <summary>
         /// Searches an assembly for types that are attributed with the provider attribute
@@ -63,25 +65,5 @@ namespace Z0
         /// <param name="src">The assembly to search</param>
         static IEnumerable<Type> FactoryTypes(Assembly src)
             => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
-
-    }
-
-    /// <summary>
-    /// Catalogs resource, operations and services provied by an assembly
-    /// </summary>
-    /// <typeparam name="C">The reifying type</typeparam>
-    public abstract class ApiCatalog<C> : ApiCatalog
-        where C : ApiCatalog<C>
-    {
-        protected ApiCatalog(PartId id)
-            : base(typeof(C).Assembly, id)
-        {
-        }
-        
-        protected ApiCatalog(PartId id, BinaryResources resources)
-            : base(typeof(C).Assembly, id, resources)
-        {
-
-        }                    
     }
 }

@@ -15,10 +15,10 @@ namespace Z0
         /// </summary>
         public static OpIdentity WithAsm(this OpIdentity src)
         {
-            if(src.Identifier.Contains(IDI.AsmLocator))
+            if(src.IdentityText.Contains(IDI.AsmLocator))
                 return src;
             else
-                return Identify.Op(src.Identifier + IDI.AsmLocator);
+                return Identify.Op(src.IdentityText + IDI.AsmLocator);
         }            
     }
 }

@@ -20,7 +20,7 @@ namespace Z0
         
         static T Empty => new T();        
 
-        string IIdentified.Identifier => Name;
+        string IIdentified.IdentityText => Name;
 
     }
 
@@ -54,7 +54,7 @@ namespace Z0
         public bool IsEmpty
             => string.IsNullOrWhiteSpace(Name);
 
-        string IIdentified.Identifier => Name;
+        string IIdentified.IdentityText => Name;
 
         public bool Equals(T src)
             => src != null && string.Compare(src.Name, this.Name, true) == 0;

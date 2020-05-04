@@ -12,30 +12,21 @@ namespace Z0.Asm
     using static Memories;
     using static ExtractTermCode;
     
-    unsafe readonly struct CaptureService : ICaptureService
-    {        
-        readonly IMultiDiviner Diviner;
-
-        readonly MemberJit Jitter;
+    public unsafe readonly struct CaptureService : ICaptureService
+    {      
+        public static ICaptureService Service => default(CaptureService);  
 
         [MethodImpl(Inline)]
-        static MemberCapture DefineMember(OpIdentity id, MethodInfo src, ParsedMemoryExtract bits, ExtractTermCode term)
-            => MemberCapture.Define(id, null, src, bits.Source, bits.Parsed, term);
+        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, ParsedCode bits, ExtractTermCode term)
+            => CapturedCode.Define(id, null, src, bits.Unparsed, bits.Encoded, term);
 
         [MethodImpl(Inline)]
-        static MemberCapture DefineMember(OpIdentity id, Delegate src, ParsedMemoryExtract bits, ExtractTermCode term)
-            => MemberCapture.Define(id, src, src.Method, bits.Source, bits.Parsed, term);
+        static CapturedCode DefineMember(OpIdentity id, Delegate src, ParsedCode bits, ExtractTermCode term)
+            => CapturedCode.Define(id, src, src.Method, bits.Unparsed, bits.Encoded, term);
 
         [MethodImpl(Inline)]
-        static MemberCapture DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-            => MemberCapture.Define(id, src, src.Method, extracted, parsed, term);
-
-        [MethodImpl(Inline)]
-        internal CaptureService(IMultiDiviner diviner)
-        {
-            Diviner = diviner;
-            Jitter = MemberJit.Service;
-        }
+        static CapturedCode DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
+            => CapturedCode.Define(id, src, src.Method, extracted, parsed, term);
 
         public Option<ParsedOperation> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
@@ -53,11 +44,11 @@ namespace Z0.Asm
             }
         }
 
-        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
+        public Option<CapturedCode> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
         {
             try
             {
-                var pSrc = Jitter.Jit(src);
+                var pSrc = MemberJit.Service.Jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
                 var captured = DefineMember(id, src, summary.Data, outcome.TermCode);                
@@ -66,25 +57,25 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<MemberCapture>();
+                return none<CapturedCode>();
             }
         }
 
-        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
+        public Option<CapturedCode> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
         {
             try
             {
-                var pSrc = Jitter.Jit(src).Handle;
+                var pSrc = MemberJit.Service.Jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
-                var captured = MemberCapture.Define(id, src.DynamicOp, src.SourceMethod, summary.Data.Source, summary.Data.Parsed, outcome.TermCode);                
+                var captured = CapturedCode.Define(id, src.DynamicOp, src.SourceMethod, summary.Data.Unparsed, summary.Data.Encoded, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
                 term.error($"Capture service failure");
                 term.error(e);
-                return none<MemberCapture>();
+                return none<CapturedCode>();
             }
         }
 
@@ -101,11 +92,11 @@ namespace Z0.Asm
             }
         }
 
-        public Option<MemberCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
+        public Option<CapturedCode> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
         {
             try
             {
-                var pSrc = Jitter.Jit(src);
+                var pSrc = MemberJit.Service.Jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.Data, outcome.TermCode);  
@@ -114,22 +105,21 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<MemberCapture>();
+                return none<CapturedCode>();
             }
         }
 
-        public Option<MemberCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
+        public Option<CapturedCode> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
         {
             if(src.IsOpenGeneric())
             {
-                var target = src.Reify(args);
-                var id = Diviner.DivineIdentity(target);
+                var target = src.Reify(args);                
+                var id = Identities.Services.Diviner.DivineIdentity(target);
                 return Capture(exchange, id, target);
             }
             else
                 return Capture(exchange, src.Identify(), src);                
         }
-
 
         [MethodImpl(Inline)]
         OperationCapture capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
@@ -154,7 +144,7 @@ namespace Z0.Asm
                 state = Step(exchange, id, ref offset, ref end, ref pSrc);                                
                 exchange.CaptureStep(state);                
 
-                if(ret_offset == null && state.Extracted == RET)
+                if(ret_offset == null && state.Captured == RET)
                     ret_offset = offset;                 
 
                 var tc = CalcTerm(exchange, offset, ret_offset, out var delta);
@@ -183,7 +173,7 @@ namespace Z0.Asm
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
-            var bits = ParsedMemoryExtract.Define((MemoryAddress)start, raw, trimmed);
+            var bits = ParsedCode.Define((MemoryAddress)start, raw, trimmed);
             return OperationCapture.Define(id, outcome, bits);
         }
 
@@ -312,30 +302,5 @@ namespace Z0.Asm
             && c.x == c.y 
             && d.x == d.y
             && e.x == e.y;
-
-        // /// <summary>
-        // /// Jits the methd and returns a pointer to the resulting method
-        // /// </summary>
-        // /// <param name="src">The soruce method</param>
-        // [MethodImpl(Inline)]
-        // static IntPtr jit(MethodInfo src)
-        // {
-        //     RuntimeHelpers.PrepareMethod(src.MethodHandle);
-        //     return src.MethodHandle.GetFunctionPointer();
-        // }
-
-        // [MethodImpl(Inline)]
-        // static IntPtr jit(Delegate d)
-        // {   
-        //     RuntimeHelpers.PrepareDelegate(d);
-        //     return d.Method.MethodHandle.GetFunctionPointer();
-        // }    
-
-        // [MethodImpl(Inline)]
-        // static DynamicPointer jit(DynamicDelegate d)
-        // {   
-        //     RuntimeHelpers.PrepareDelegate(d.DynamicOp);
-        //     return DynamicOps.pointer(d);
-        // }        
     }
 }

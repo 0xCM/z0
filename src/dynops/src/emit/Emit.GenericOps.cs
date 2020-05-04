@@ -15,9 +15,9 @@ namespace Z0
         /// <param name="buffer">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static UnaryOp<T> EmitUnaryOp<T>(this IBufferToken buffer, in OperationCode src)
+        public static UnaryOp<T> EmitUnaryOp<T>(this IBufferToken buffer, UriBits src)
             where T : unmanaged
-                => buffer.Load(src.Content).EmitUnaryOp<T>(src.Id);
+                => buffer.Load(src.Encoded).EmitUnaryOp<T>(src.Id);
 
         /// <summary>
         /// Loads executable code into a token-identified buffer and covers it with a parametric binary operator
@@ -25,9 +25,9 @@ namespace Z0
         /// <param name="buffer">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, in OperationCode src)
+        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, UriBits src)
             where T : unmanaged
-                => buffer.Load(src.Content).EmitBinaryOp<T>(src.Id);
+                => buffer.Load(src.Encoded).EmitBinaryOp<T>(src.Id);
 
         /// <summary>
         /// Loads executable code into a token-identified buffer and covers it with a parametric ternary operator
@@ -35,8 +35,8 @@ namespace Z0
         /// <param name="dst">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static TernaryOp<T> EmitTernaryOp<T>(this IBufferToken dst, in OperationCode src)
+        public static TernaryOp<T> EmitTernaryOp<T>(this IBufferToken dst, UriBits src)
             where T : unmanaged
-                => dst.Load(src.Content).EmitTernaryOp<T>(src.Id);
+                => dst.Load(src.Encoded).EmitTernaryOp<T>(src.Id);
     }
 }

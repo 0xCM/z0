@@ -5,15 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
-    using static Memories;
 
     /// <summary>
     /// Characterizes an address-identified target
     /// </summary>
-    public interface IAddressable : ITextual
+    public interface IAddressable
     {
         MemoryAddress Address {get;}
     }     

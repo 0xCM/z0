@@ -23,25 +23,15 @@ namespace Z0
 
         public void Run()
         {
-            // Create machine parts
-            term.print("I do nothing...yet");
+            Describe();
 
         }
 
-        void Describe(FolderPath src, PartId[] code)
+        void Describe()
         {
-            //Control.iter(code, part => Control.iter(src.Files(part), file => Print(file)));            
+            Control.iter(Context.CodeFiles, file => term.print($"{file.Left}: {file.Right}"));
         }
         
-        void Describe(PartId[] code)
-        {
-            // var archive = Archives.Services.CaptureArchive(Context.CaptureRoot);
-
-            // term.print($"Creating a machine over a code selection from {archive.RootDir}");
-            // Describe(archive.HexDir, code);
-
-        }
-
         public void Dispose()
         {
 

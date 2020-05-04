@@ -12,19 +12,11 @@ namespace Z0
 
       using static Seed;
 
-      class MemberLocator : IMemberLocator
+      public class MemberLocator : IMemberLocator
       {
-            public IMultiDiviner Diviner {get;}
+            IMultiDiviner Diviner  => MultiDiviner.Service;
 
-            [MethodImpl(Inline)]
-            public static MemberLocator Create(IMultiDiviner diviner)
-                  => new MemberLocator(diviner);
-
-            [MethodImpl(Inline)]
-            MemberLocator(IMultiDiviner diviner)
-            {
-                  Diviner = diviner;
-            }
+            public static IMemberLocator Service => new MemberLocator();
 
             [MethodImpl(Inline)]
             static IntPtr Jit(MethodInfo src)
@@ -49,7 +41,7 @@ namespace Z0
 
             public IEnumerable<Member> Located<K>(IApiHost src, K kind, GenericPartition g)
                   where K : unmanaged, Enum
-                  => g.IsGeneric() ? LocatedGeneric(src,kind) : LocatedDirect(src, kind);
+                        => g.IsGeneric() ? LocatedGeneric(src,kind) : LocatedDirect(src, kind);
 
             public IEnumerable<Member> HostedDirect<K>(IApiHost src, K kind)
                   where K : unmanaged, Enum
@@ -58,58 +50,54 @@ namespace Z0
                         let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
                         select Member.Define(uri, m, m.KindId());
 
+            public IEnumerable<Member> HostedGeneric<K>(IApiHost src, K kind)
+                  where K : unmanaged, Enum
+                        => from m in GenericMethods(src,kind)
+                        from closure in ApiCollector.NumericClosures(m)
+                        let reified = m.MakeGenericMethod(closure)
+                        let id = Diviner.Identify(reified)
+                        let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
+                        select Member.Define(uri, reified, m.KindId());
+
+            public IEnumerable<Member> HostedDirect(IApiHost src)
+                  => from m in DirectMethods(src)
+                  let id = Diviner.Identify(m)
+                  let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
+                  select Member.Define(uri, m, m.KindId());
+
+            public IEnumerable<Member> HostedGeneric(IApiHost src)
+                  => from m in GenericMethods(src)
+                  from closure in ApiCollector.NumericClosures(m)
+                  let reified = m.MakeGenericMethod(closure)
+                  let id = Diviner.Identify(reified)
+                  let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
+                  select Member.Define(uri, reified, m.KindId());
+
             public IEnumerable<Member> LocatedDirect<K>(IApiHost src, K kind)
                   where K : unmanaged, Enum
-                  => from m in HostedDirect(src,kind)                        
-                  let address = MemoryAddress.Define(Jit(m.Method))
-                  let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Method.Name, m.Id)
-                  select Member.Define(uri, m.Method, m.KindId, address);
+                        => from m in HostedDirect(src, kind)                        
+                        let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Method.Name, m.Id)
+                        let address = MemoryAddress.Define(Jit(m.Method))
+                        select Member.Define(uri, m.Method, m.KindId, address);
 
             public IEnumerable<Member> LocatedGeneric<K>(IApiHost src, K kind)
                   where K : unmanaged, Enum
                   => from m in GenericMethods(src,kind)
-                  let kid = m.KindId()
                   from t in ApiCollector.NumericClosures(m)
                   let reified = m.MakeGenericMethod(t)
-                  let address = MemoryAddress.Define(Jit(reified))
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Name, id)
-                  select Member.Define(uri, reified, kid, address);
-
-            public IEnumerable<Member> HostedGeneric<K>(IApiHost src, K kind)
-                  where K : unmanaged, Enum
-                        => from m in GenericMethods(src,kind)
-                        let kid = m.KindId()
-                        from t in ApiCollector.NumericClosures(m)
-                        let reified = m.MakeGenericMethod(t)
-                        let id = Diviner.Identify(reified)
-                        let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
-                        select Member.Define(uri, reified, kid);
-
-            public IEnumerable<Member> HostedDirect(IApiHost src)
-                  => from m in DirectMethods(src)
-                  let kid = m.KindId()
-                  let id = Diviner.Identify(m)
-                  let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
-                  select Member.Define(uri, m, kid);
+                  let address = MemoryAddress.Define(Jit(reified))
+                  select Member.Define(uri, reified, m.KindId(), address);
 
             public IEnumerable<Member> LocatedDirect(IApiHost src)
                   => from m in DirectMethods(src)
                   let kid = m.KindId()
-                  let address = MemoryAddress.Define(Jit(m))
                   let id = Diviner.Identify(m)
                   let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Name, id)
+                  let address = MemoryAddress.Define(Jit(m))
                   select Member.Define(uri, m, kid, address);
                         
-            public IEnumerable<Member> HostedGeneric(IApiHost src)
-                  => from m in GenericMethods(src)
-                  let kid = m.KindId()
-                  from t in ApiCollector.NumericClosures(m)
-                  let reified = m.MakeGenericMethod(t)
-                  let id = Diviner.Identify(reified)
-                  let uri = OpUri.Define(OpUriScheme.Type, src.UriPath, m.Name, id)
-                  select Member.Define(uri, reified, kid);
-
             public IEnumerable<Member> LocatedGeneric(IApiHost src)
                   => from m in GenericMethods(src)
                   let kid = m.KindId()
@@ -122,8 +110,10 @@ namespace Z0
 
             IEnumerable<MethodInfo> GenericMethods(IApiHost src)
                   => from m in src.HostingType.DeclaredMethods().OpenGeneric(1)
-                  where m.Tagged<OpAttribute>() && m.Tagged<ClosuresAttribute>() && !m.AcceptsImmediate()
-                  select m;
+                        where m.Tagged<OpAttribute>() 
+                        && m.Tagged<ClosuresAttribute>() 
+                        && !m.AcceptsImmediate()
+                        select m;
       
             IEnumerable<MethodInfo> DirectMethods(IApiHost src)
                   => from m in src.HostingType.DeclaredMethods().NonGeneric()
@@ -146,6 +136,5 @@ namespace Z0
                         && !m.AcceptsImmediate() 
                         && m.KindId().ToString() == kind.ToString()                  
                   select m;
-
       }
 }

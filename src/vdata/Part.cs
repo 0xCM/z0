@@ -9,14 +9,9 @@ namespace Z0.Parts
     using System;
     using System.Collections.Generic;
 
-    public sealed class VData : Part<VData>
+    public sealed class VData : Part<VData>, IResourceProvider
     {        
-        public override IPartData ResourceProvider => default(ProvidedResources);   
-        
-    }
-
-    readonly struct ProvidedResources : IPartData
-    {
-        public IEnumerable<BinaryResource> Resources => Data.Resources;
+        public IEnumerable<BinaryResource> Resources 
+            => Data.Resources;
     }
 }

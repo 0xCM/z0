@@ -20,6 +20,7 @@ namespace Z0.Asm
         public t_asm_pipe()
         {
             Activations = new ulong[(int)Mnemonic.LAST + 1];
+            FakeBase = 1;
         }
         
         void OnVinserti128(Instruction i)
@@ -49,20 +50,22 @@ namespace Z0.Asm
         {            
             var paths = Paths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCapturePath);
-            var bits = AsmCheck.HostBits(PartId.Control, capture.HexDir);
+            var bits = AsmCheck.UriBitsArchive(capture.HexDir);
             var data = bits.Read(PartId.GVec);
             check_asm_pipe(data);
         }
 
-        void check_asm_pipe(IEnumerable<OperationBits> src)
+        MemoryAddress FakeBase;
+
+        void check_asm_pipe(IEnumerable<UriBits> src)
         {
-            var decoder = OperationBitDecoder.Service;
-            var source = AsmInstructionSource.From(() => decoder.Decode(src));
+            var decoder = UriBitsDecoder.Service;
             var t1 = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnVinserti128);
             var t2 = AsmMnemonicTrigger.Define(Mnemonic.Vmovupd, OnVmovupd);
             var t3 = AsmCallTrigger.Define(OnCall);
             var triggers = AsmTriggerSet.Define(t1,t2,t3);
-            var flow = AsmInstructionFlow.Create(source, triggers);
+            var decoded = decoder.Decode(src).Map(x => AsmInstructionList.Create(x, LocatedCode.Define(FakeBase,x.Encoded)));
+            var flow = AsmInstructionFlow.Create(decoded, triggers);
             var pipe = AsmInstructionPipe.From(Pipe); 
             var results = flow.Flow(pipe).Force();
 
@@ -74,28 +77,36 @@ namespace Z0.Asm
             }
         }
 
-        void Run50()
+        void check_unary_ops(UriBits[] src)
+        {
+            var query = AsmCheck.UriBitQuery;
+            foreach(var code in query.WithParameterCount(src, 1))
+            {                
+                if(query.AcceptsParameter(code, NumericKind.U8))
+                    AsmCheck.CheckFixedMatch<Fixed8>(K.UnaryOp, code, code);
+                else if(query.AcceptsParameter(code, NumericKind.U16))
+                    AsmCheck.CheckFixedMatch<Fixed16>(K.UnaryOp, code, code);
+                else if(query.AcceptsParameter(code, NumericKind.U32))
+                    AsmCheck.CheckFixedMatch<Fixed32>(K.UnaryOp, code, code);
+                else if(query.AcceptsParameter(code, NumericKind.U64))
+                    AsmCheck.CheckFixedMatch<Fixed64>(K.UnaryOp, code, code);
+            }
+
+        }
+
+        void check_math()
         {
             var dSrc = ApiHostUri.FromHost(typeof(math));
             var gSrc = ApiHostUri.FromHost(typeof(gmath));
             var id = PartId.GMath;   
-            var direct = AsmCheck.HostBits(id, dSrc);
-            var generic = AsmCheck.HostBits(id, gSrc);
-            var operational = AsmCheck.Operational;
-
-            foreach(var a in operational.WithParameterCount(direct.Read(), 1))
-            {                
-                var code =  operational.ToApiCode(a);
-                if(operational.AcceptsParameter(a,NumericKind.U8))
-                    AsmCheck.CheckFixedMatch<Fixed8>(K.UnaryOp, code, code);
-                else if(operational.AcceptsParameter(a,NumericKind.U16))
-                    AsmCheck.CheckFixedMatch<Fixed16>(K.UnaryOp, code,code);
-                else if(operational.AcceptsParameter(a,NumericKind.U32))
-                    AsmCheck.CheckFixedMatch<Fixed32>(K.UnaryOp, code, code);
-                else if(operational.AcceptsParameter(a,NumericKind.U64))
-                    AsmCheck.CheckFixedMatch<Fixed64>(K.UnaryOp, code, code);
-            }
+            var paths = Paths.ForApp(PartId.Control);
+            var capture = AsmCheck.CaptureArchive(paths.AppCapturePath);
+            var archive = Archives.Services.UriBitsArchive(capture.HexDir);
+            var direct = archive.Read(dSrc).ToArray();
+            var generic = archive.Read(gSrc).ToArray();
+            var builder = Archives.Services.IndexBuilder(Api.ApiSet, Identities.Services.ApiLocator);            
+            check_unary_ops(direct);        
+            check_unary_ops(generic);        
         }
-
     }
 }

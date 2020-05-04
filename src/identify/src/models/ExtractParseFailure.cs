@@ -16,12 +16,12 @@ namespace Z0
     /// </summary>
     public readonly struct ExtractParseFailure
     {
-        public static ExtractParseFailure Empty => new ExtractParseFailure(MemberExtract.Empty, 0, ExtractTermCode.None);
+        public static ExtractParseFailure Empty => new ExtractParseFailure(ExtractedMember.Empty, 0, ExtractTermCode.None);
         
         /// <summary>
         /// The data over which the parse failure occurrred
         /// </summary>
-        public readonly MemberExtract Data;   
+        public readonly ExtractedMember Data;   
 
         /// <summary>
         /// The extracted member sequence
@@ -34,7 +34,7 @@ namespace Z0
         public readonly ExtractTermCode TermCode;
         
         [MethodImpl(Inline)]
-        public ExtractParseFailure(MemberExtract data, int seq, ExtractTermCode term)
+        public ExtractParseFailure(ExtractedMember data, int seq, ExtractTermCode term)
         {
             Data = data;
             Sequence = seq;

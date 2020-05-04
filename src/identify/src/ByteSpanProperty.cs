@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct ByteSpanProperty : ITextual<ByteSpanProperty>
+    public readonly struct ByteSpanProperty : ITextual
     {
         [MethodImpl(Inline)]
         public static ByteSpanProperty Define(string name, byte[] data, bool isStatic = true, ClrAccessKind access = ClrAccessKind.Public)
@@ -34,7 +34,7 @@ namespace Z0
 
         const string PropDataType = "ReadOnlySpan<byte>";
         
-        const string PropLambda = "=>";
+        const string PropLambda = " => ";
 
         public string Format()
         {
@@ -45,8 +45,8 @@ namespace Z0
             dst.Append(PropDataType);
             dst.Append(Chars.Space);
             dst.Append(Name);
-            dst.Append(text.spaced(PropLambda));
-            dst.Append(text.concat("new byte", text.bracket(Data.Length), text.embrace(HexFormat.array(Data))));
+            dst.Append(PropLambda);
+            dst.Append(string.Concat("new byte", text.bracket(Data.Length), text.embrace(HexFormat.array(Data))));
             dst.Append(Chars.Semicolon);
             return dst.ToString();
         }

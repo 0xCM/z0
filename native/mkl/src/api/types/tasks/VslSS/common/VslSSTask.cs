@@ -64,7 +64,7 @@ namespace Z0.Mkl
             this.Weights = Weights;
             this.Indices = Indices;
 
-            require(Weights.Length == SampleCount);
+            insist(Weights.Length == SampleCount);
         }
 
         public abstract VslSSStatus Allocate();

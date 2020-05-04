@@ -13,28 +13,28 @@ namespace Z0.Asm
 
     public readonly struct AsmInstructionFlow : IAsmInstructionFlow
     {        
-        readonly IAsmInstructionSource Source;
+        readonly AsmInstructionList[] Inxs;
 
         readonly AsmTriggerSet Triggers;
 
         [MethodImpl(Inline)]
-        public static IAsmInstructionFlow Create(IAsmInstructionSource source, AsmTriggerSet triggers)
-            => new AsmInstructionFlow(source, triggers);
+        public static IAsmInstructionFlow Create(AsmInstructionList[] inxs, AsmTriggerSet triggers)
+            => new AsmInstructionFlow(inxs, triggers);
 
         [MethodImpl(Inline)]
-        AsmInstructionFlow(IAsmInstructionSource source, AsmTriggerSet triggers)
+        AsmInstructionFlow(AsmInstructionList[] inxs, AsmTriggerSet triggers)
         {
-            this.Source  = source;
+            this.Inxs  = inxs;
             this.Triggers = triggers;
         }
 
         public IEnumerable<AsmInstructionList> Flow(IAsmInstructionPipe pipe)
         {
-            foreach(var i in Source.Instructions)
+            for(var i=0; i<Inxs.Length; i++)
             {
-                Triggers.FireOnMatch(i);
-                yield return pipe.Flow(i);
-            }            
+                Triggers.FireOnMatch(Inxs[i]);
+                yield return pipe.Flow(Inxs[i]);
+            }
         }        
     }
 }

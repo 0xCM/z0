@@ -28,16 +28,16 @@ namespace Z0.Asm
  
             public Member[] LocateMembers(IApiHost host)
             {
-                var locator = StatelessIdentity.Services.MemberLocator();
+                var locator = Identities.Services.ApiLocator;
                 var located = locator.Located(host).ToArray();
                 Context.Raise(MembersLocated.Define(host.UriPath, located));              
                 return located;
             }
 
-            public MemberExtract[] ExtractMembers(IApiHost host)
+            public ExtractedMember[] ExtractMembers(IApiHost host)
             {
                 var members = LocateMembers(host);    
-                var extractor = AsmWorkflows.Stateless.HostExtractor();
+                var extractor = Capture.Services.HostExtractor();
                 return extractor.Extract(members);
             }
         }

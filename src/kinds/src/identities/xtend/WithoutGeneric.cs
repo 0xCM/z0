@@ -21,10 +21,10 @@ namespace Z0
             if(parts.Length < 2)
                 return src;
             
-            if(parts[1].Identifier[0] != IDI.Generic)
+            if(parts[1].IdentityText[0] != IDI.Generic)
                 return src;
 
-            parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
+            parts[1] = parts[1].WithText(parts[1].IdentityText.Substring(1));
             return Identify.Op(parts);
         }        
     }

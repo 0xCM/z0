@@ -16,6 +16,6 @@ namespace Z0
 
     public interface IDynops : IStatelessFactory<Dynops>
     {
-        IDynexus Dynexus => new Dynexus(StatelessIdentity.Services.Diviner);
+        IDynexus Dynexus => new Dynexus(Identities.Services.Diviner);
     }
 }

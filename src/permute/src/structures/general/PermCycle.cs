@@ -19,7 +19,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len > 1)
-                require(src[0].Source == src[len - 1].Target);
+                insist(src[0].Source == src[len - 1].Target);
             
             this.Terms = src;
         }

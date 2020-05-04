@@ -25,11 +25,11 @@ namespace Z0.Asm
             Context = context;
             ApiSet = context.ApiSet;
             Sink = context;
-            Extractor =  AsmWorkflows.Stateless.HostExtractor();
-            MemberLocator = AsmWorkflows.Stateless.MemberLocator();
+            Extractor =  Capture.Services.HostExtractor();
+            MemberLocator = Identities.Services.ApiLocator;
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Decoder =   AsmWorkflows.Stateless.AsmDecoder(FormatConfig);
-            Formatter = AsmWorkflows.Stateless.AsmFormatter(FormatConfig);
+            Decoder =   Capture.Services.AsmDecoder(FormatConfig);
+            Formatter = Capture.Services.AsmFormatter(FormatConfig);
             CodeArchive = Archives.Services.CaptureArchive(ArchiveRoot);
             Broker = ConnectBroker(this);          
         }
@@ -38,7 +38,7 @@ namespace Z0.Asm
 
         readonly AsmFormatSpec FormatConfig;
 
-        readonly IHostCodeExtractor Extractor;
+        readonly IMemberExtractor Extractor;
 
         readonly IMemberLocator MemberLocator;
 
@@ -124,12 +124,12 @@ namespace Z0.Asm
         void AnalyzeExtracts(FilePath src)
         {
             Raise(AnalyzingExtractReport.Define(src));
-            var reader =  StatelessIdentity.Services.ExtractReader(ApiSet);
-            var extracts = reader.ReadExtracts(src);
+            var reader =  Identities.Services.ExtractReader(ApiSet);
+            var extracts = reader.Read(src);
             Report($"Loaded {extracts.Length} member extracts from {src}");
         }
 
-        void AnalyzeExtracts(MemberExtract[] src)
+        void AnalyzeExtracts(ExtractedMember[] src)
         {
             Raise(AnalyzingExtracts.Define(src));
 
@@ -141,7 +141,7 @@ namespace Z0.Asm
         Option<IApiHost> Host(ApiHostUri uri)
             => ApiSet.FindHost(uri).TryMap(x => x as IApiHost);        
 
-        ExtractReport CreateReport(IApiHost host, MemberExtract[] src)
+        ExtractReport CreateReport(IApiHost host, ExtractedMember[] src)
         {
             var report = ExtractReport.Create(host.UriPath, src); 
             Raise(ExtractReportCreated.Define(report));
@@ -158,7 +158,7 @@ namespace Z0.Asm
             return located;
         }
 
-        MemberExtract[] ExtractMembers(IApiHost host)
+        ExtractedMember[] ExtractMembers(IApiHost host)
         {
             var members = LocateMembers(host);            
             var extracted = Extractor.Extract(members);

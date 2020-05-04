@@ -16,12 +16,16 @@ namespace Z0
 
         public readonly MemberCode ApiCode;
 
+        public UriBits ApiBits { [MethodImpl(Inline)] get => ApiCode.Encoded;}
+
+        public Member Member { [MethodImpl(Inline)] get =>  ApiCode.Member;}
+
         [MethodImpl(Inline)]
-        public static EvalContext Define(BufferTokens buffers, in MemberCode code)
+        public static EvalContext Define(BufferTokens buffers, MemberCode code)
             => new EvalContext(buffers,code);
 
         [MethodImpl(Inline)]
-        EvalContext(BufferTokens buffers, in MemberCode code)
+        internal EvalContext(BufferTokens buffers, MemberCode code)
         {
             this.Buffers = buffers;
             this.ApiCode = code;

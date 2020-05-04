@@ -6,9 +6,12 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-     
+    using System.Collections.Generic;
+    using System.Linq;
+
     using static Seed;
     using static Memories;
+    using static AsmCore;
 
     using Iced = Iced.Intel;
 
@@ -22,32 +25,65 @@ namespace Z0.Asm
             AsmFormat = format;
         }
 
-        static IAsmFunctionBuilder Builder => AsmCore.Services.FunctionBuilder;
-
-        public Option<AsmFunction> Decode(MemberCapture src)
-            => DecodeCaptured(src);
+        public Option<AsmFunction> Decode(CapturedCode src)
+            => from i in Decode(src.HostedBits.Encoded)
+                let block = AsmInstructionBlock.Define(src.HostedBits, i, src.TermCode)
+                select Services.FunctionBuilder.BuildFunction(src.Uri, src.Method.Signature().Format(), block);
 
         public Option<AsmFunction> Decode(ParsedMember src)
-            =>  from i in Decode(OperationBits.Define(src.Uri, src.ParsedContent))
+            =>  from i in Decode(src.Encoded)
                 select AsmFunction.Define(src,i);
 
-        Option<AsmFunction> DecodeCaptured(MemberCapture src)
-            => from i in Decode(src.Code)
-                let block = AsmInstructionBlock.Define(src.Code, i, src.TermCode)
-                select Builder.BuildFunction(src.Uri, src.OpSig.Format(), block);
+        public Option<AsmInstructionList> Decode(LocatedCode src)        
+            => Decode(src.Encoded, src.Address).TryMap(x => AsmInstructionList.Create(x, src));
 
-        public Option<AsmInstructionList> Decode(in OperationBits src)
-            => Decode(src.Encoded);
+        public Option<AsmInstructions> Decode(UriBits src)        
+            => Decode(src.Encoded, MemoryAddress.Zero);
 
-        public Option<AsmInstructionList> Decode(in LocatedCode src)        
+        public Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f)
+            => Decode(src.Encoded,f).TryMap(x => AsmFunction.Define(src,x));
+
+        public Option<AsmInstructionList> Decode(LocatedCode src, Action<Asm.Instruction> f)        
+        {
+            try
+            {
+                var decoded = new Iced.InstructionList();
+                var reader = new Iced.ByteArrayCodeReader(src.Encoded);
+                var formatter = AsmCaptureFormatter.Create(AsmFormat);
+                var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
+                var @base = src.Address;
+                decoder.IP = @base;
+                var stop = false;
+                var dst = new List<Asm.Instruction>(decoded.Count);
+
+                while (reader.CanReadByte && !stop) 
+                {
+                    ref var iced = ref decoded.AllocUninitializedElement();
+                    decoder.Decode(out iced); 
+                    var format = formatter.FormatInstruction(iced, @base);
+                    var z = iced.ToZAsm(format);
+                    dst.Add(z);
+                    f(z);
+                }
+                return AsmInstructionList.Create(dst.ToArray(),src);
+
+            }
+            catch(Exception e)
+            {
+                term.error(e);     
+                return Option.none<AsmInstructionList>();           
+            }
+        }
+
+        Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base)        
         {
             try
             {   
-                require(src.IsNonEmpty);
+                insist(code.IsNonEmpty);
                 var decoded = new Iced.InstructionList();
-                var reader = new Iced.ByteArrayCodeReader(src.Content);
+                var reader = new Iced.ByteArrayCodeReader(code.Encoded);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
-                decoder.IP = src.AddressRange.Start;
+                decoder.IP = @base;
                 while (reader.CanReadByte) 
                 {
                     ref var instruction = ref decoded.AllocUninitializedElement();
@@ -56,62 +92,17 @@ namespace Z0.Asm
 
                 var formatter = AsmCaptureFormatter.Create(AsmFormat);
                 var instructions = new Asm.Instruction[decoded.Count];
-                var formatted = formatter.FormatInstructions(decoded, src.Address);
+                var formatted = formatter.FormatInstructions(decoded, @base);
                 for(var i=0; i<instructions.Length; i++)
                     instructions[i] = decoded[i].ToZAsm(formatted[i]);
-                return AsmInstructionList.Create(instructions,src);
+                return AsmInstructions.Create(instructions, code);
+
             }
+
             catch(Exception e)
             {
                 term.error(e);
-                return Option.none<AsmInstructionList>();
-            }
-        }
-
-        public Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f)
-        {
-            try
-            {
-                var decoded = list<Asm.Instruction>();                
-                void OnDecoded(Asm.Instruction src)
-                {
-                    decoded.Add(src);
-                    f(src);
-                }
-                
-                Decode(src.ParsedContent, OnDecoded);
-                var list = AsmInstructionList.Create(decoded.ToArray(), src.ParsedContent);
-                return AsmFunction.Define(src,list);
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return Option.none<AsmFunction>();
-            }
-        }
-
-        public void Decode(in LocatedCode src, Action<Asm.Instruction> f)        
-        {
-            try
-            {
-                var decoded = new Iced.InstructionList();
-                var reader = new Iced.ByteArrayCodeReader(src.Content);
-                var formatter = AsmCaptureFormatter.Create(AsmFormat);
-                var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
-                decoder.IP = src.AddressRange.Start;
-                var stop = false;
-                while (reader.CanReadByte && !stop) 
-                {
-                    ref var instruction = ref decoded.AllocUninitializedElement();
-                    decoder.Decode(out instruction); 
-                    var format = formatter.FormatInstruction(instruction,src.Address);
-                    f(instruction.ToZAsm(format));
-                }
-
-            }
-            catch(Exception e)
-            {
-                term.error(e);                
+                return Option.none<AsmInstructions>();
             }
         }
     }

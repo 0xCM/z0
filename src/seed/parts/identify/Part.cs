@@ -12,6 +12,11 @@ namespace Z0
 
     using static Seed;
 
+    readonly struct ProvidedResources : IResourceProvider
+    {
+        public IEnumerable<BinaryResource> Resources => new BinaryResource[]{};
+    }
+
     public sealed class EmptyPart : PartId<EmptyPart> { public override PartId Id => PartId.None; }    
     
     public abstract class Part<P> : IPart<P> 
@@ -29,7 +34,7 @@ namespace Z0
 
         public PartId Id {get;}
 
-        public virtual IPartData ResourceProvider => default(ProvidedResources);
+        public virtual IResourceProvider ResourceProvider => default(ProvidedResources);
 
         protected Part()
         {
@@ -64,9 +69,5 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        readonly struct ProvidedResources : IPartData
-        {
-            public IEnumerable<BinaryResource> Resources => new BinaryResource[]{};
-        }
     }
 }

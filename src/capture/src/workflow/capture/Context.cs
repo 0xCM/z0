@@ -16,7 +16,7 @@ namespace Z0.Asm
             ICaptureBroker broker, ICaptureArchive archive)
         {
             this.ApiSet = context.ApiSet;
-            this.Extractor = AsmWorkflows.Stateless.HostExtractor();
+            this.Extractor = Capture.Services.HostExtractor();
             this.Parser = Extract.Services.ExtractParser();
             this.Decoder = decoder;
             this.Formatter = formatter;
@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         public IApiSet ApiSet {get;}
 
-        public IHostCodeExtractor Extractor {get;}
+        public IMemberExtractor Extractor {get;}
 
         public IExtractParser Parser {get;}
 

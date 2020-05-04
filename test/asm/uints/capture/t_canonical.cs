@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-
     public class FormatCanonical
     {
         public IAsmContext Context {get;}
@@ -92,7 +91,7 @@ namespace Z0.Asm
         public void Format(ApiHostUri host)        
         {
             var part = host.Owner;
-            var service = AsmWorkflows.Contextual(Context).HostCaptureService(CaptureRoot);
+            var service = AsmWorkflows.Create(Context).HostCaptureService(CaptureRoot);
             var capture = service.CaptureHost(host,true);
             var parsed = capture.Parsed;
             var decoder = Context.Decoder;
@@ -132,7 +131,7 @@ namespace Z0.Asm
         void Describe(ParsedMember member, Instruction src)
         {
             var @base = member.Address;
-            require((@base + FunctionSize) == src.IP);                           
+            insist((@base + FunctionSize) == src.IP);                           
 
 
             if(InstructionCount == 0)
@@ -141,7 +140,7 @@ namespace Z0.Asm
                 Descriptions.Add(FunctionSep);
             }
 
-            var id = text.concat(member.Reflected.Name, Chars.FSlash, member.KindId.Format(), Chars.Space, Chars.Space, src.IP.FormatHex(zpad:false)).PadRight(IdPad);
+            var id = text.concat(member.Method.Name, Chars.FSlash, member.KindId.Format(), Chars.Space, Chars.Space, src.IP.FormatHex(zpad:false)).PadRight(IdPad);
             var counted = InstructionCount.FormatCount(InstructionCountPad);
             var title = id + counted + FunctionSize.FormatSmallHex(true);
             var description = text.concat(src.FormattedInstruction, Chars.Space, OpCodeDelimiter, Chars.Space, src.InstructionCode);

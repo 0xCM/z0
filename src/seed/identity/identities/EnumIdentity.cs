@@ -13,7 +13,7 @@ namespace Z0
     {
         public static EnumIdentity Empty = Define(string.Empty, NumericKind.None);
 
-        public string Identifier {get;}            
+        public string IdentityText {get;}            
 
         public string Name {get;}
         
@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(EnumIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeIdentity(EnumIdentity src)
@@ -48,7 +48,7 @@ namespace Z0
         {
             this.Name = name;
             this.BaseType = basetype;
-            this.Identifier = basetype != 0 ? $"{Name}{IDI.ModSep}{basetype.Format()}" : string.Empty;
+            this.IdentityText = basetype != 0 ? $"{Name}{IDI.ModSep}{basetype.Format()}" : string.Empty;
         }
      
         IIdentifiedType<EnumIdentity> Identified => this;
@@ -64,6 +64,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.Define(Identifier); 
+            => TypeIdentity.Define(IdentityText); 
     }
 }

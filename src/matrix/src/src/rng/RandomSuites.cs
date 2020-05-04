@@ -74,13 +74,13 @@ namespace Z0
         public RngSuite256(IPolyrand[] members)
         {
             this.members = members.ToArray();
-            require(this.members.Length == n);
+            insist(this.members.Length == n);
         }
 
         public RngSuite256(IEnumerable<IPolyrand> members)
         {
             this.members = members.ToArray();
-            require(this.members.Length == n);
+            insist(this.members.Length == n);
         }
 
         public Block256<N, T> Next<T>() 

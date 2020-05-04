@@ -35,7 +35,7 @@ namespace Z0
             get => Location64 != 0;
         }
 
-        public string Identifier 
+        public string IdentityText 
             => Cast.to<T,ulong>(Location).ToString("x") + "h";
 
         MemoryAddress IAddressable.Address 
@@ -105,7 +105,7 @@ namespace Z0
             => this.Location = Cast.to<ulong,T>(absolute);
 
         public string Format()
-            => Identifier;
+            => IdentityText;
 
         public string Format(int digits)
             => Location64.ToString($"x{digits}") + "h";

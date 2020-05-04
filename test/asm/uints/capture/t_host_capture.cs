@@ -13,7 +13,7 @@ namespace Z0.Asm
     {    
         public void capture_math()
         {
-            var service = AsmWorkflows.Contextual(Context).HostCaptureService(DataDir);
+            var service = AsmWorkflows.Create(Context).HostCaptureService(DataDir);
             var uri = ApiHostUri.FromHost<math>();
             var capture = service.CaptureHost(uri,true);
 

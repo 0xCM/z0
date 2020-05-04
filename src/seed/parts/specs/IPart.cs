@@ -19,8 +19,10 @@ namespace Z0
         /// </summary>
         string Name {get;}        
 
-        IPartData ResourceProvider {get;}
-
+        /// <summary>
+        /// The resource provider defined by the part
+        /// </summary>
+        IResourceProvider ResourceProvider {get;}
     }
 
     public interface IPart<P> : IPart, IEquatable<P>

@@ -16,7 +16,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source functions</param>
         public static IEnumerable<MemoryAddress> FarCalls(this AsmFunction src)
-            => from i in src.Instructions
+            => from i in src.Inxs
                 where i.FlowControl == FlowControl.Call
                     select (MemoryAddress)i.MemoryAddress64;
         

@@ -11,12 +11,18 @@ namespace Z0
     using static Seed;
     using static IdentityShare;
     
+
     public readonly struct OpUri : IUri<OpUri>, INullary<OpUri>
     {   
         /// <summary>
         /// Emptiness of nothing
         /// </summary>
         public static OpUri Empty => new OpUri(OpUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
+
+        /// <summary>
+        /// The full uri in the form {Scheme}://{HostPath}/{OpId}
+        /// </summary>
+        public readonly string UriText;
         
         /// <summary>
         /// The uri scheme, constrained to the defining enumeration
@@ -41,10 +47,10 @@ namespace Z0
         public readonly OpIdentity OpId;
 
         /// <summary>
-        /// The full uri in the form {Scheme}://{HostPath}/{OpId}
+        /// The uri as an identifier
         /// </summary>
-        public string Identifier {get;}
-
+        public string IdentityText => UriText;
+        
         public bool IsEmpty
         {
             [MethodImpl(Inline)]            
@@ -58,15 +64,16 @@ namespace Z0
         }
 
         public OpUri GroupUri
-            => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
-
+        {
+            [MethodImpl(Inline)]
+            get => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
+        }
 
         [MethodImpl(Inline)]
         public static ParseResult<OpUri> Parse(string text)
             => OpUriParser.The.Parse(text);            
 
         OpUri INullary<OpUri>.Zero => Empty;
-    
             
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
@@ -111,7 +118,7 @@ namespace Z0
             this.HostPath = host;
             this.OpId = opid;
             this.GroupName = group;
-            this.Identifier = 
+            UriText = 
                 opid.IsEmpty 
                 ? OpUriBuilder.QueryText(scheme, host.Owner, host.Name, group) 
                 : OpUriBuilder.FullUriText(scheme, host.Owner, host.Name, GroupName, opid);

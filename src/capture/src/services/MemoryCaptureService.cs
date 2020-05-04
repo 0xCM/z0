@@ -20,12 +20,12 @@ namespace Z0.Asm
         readonly IAsmFunctionDecoder Decoder;
 
         [MethodImpl(Inline)]
-        static ILocatedParser ExtractParser(byte[] buffer) 
-            =>  Z0.Extract.Services.LocatedParser(buffer);
+        static ILocatedCodeParser ExtractParser(byte[] buffer) 
+            => Z0.Extract.Services.LocatedParser(buffer);
 
         [MethodImpl(Inline)]
         static IMemoryExtractor MemoryExtractor(byte[] buffer) 
-            => AsmWorkflows.Stateless.MemoryExtractor(buffer);
+            => Z0.Asm.Capture.Services.MemoryExtractor(buffer);
 
         [MethodImpl(Inline)]
         internal MemoryCaptureService(IAsmFunctionDecoder decoder, int bufferlen)
@@ -41,7 +41,7 @@ namespace Z0.Asm
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
                 from instructions in Decoder.Decode(parsed)
-                let bits = ParsedMemoryExtract.Define(src, raw, parsed)
+                let bits = ParsedCode.Define(src, raw, parsed)
                 select MemoryCapture.Define(src, bits, instructions, string.Empty);
 
         [MethodImpl(Inline)]

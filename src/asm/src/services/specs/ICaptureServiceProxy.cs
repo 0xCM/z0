@@ -31,7 +31,7 @@ namespace Z0.Asm
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The source method</param>
         [MethodImpl(Inline)]
-        Option<MemberCapture> Capture(OpIdentity id, MethodInfo src)
+        Option<CapturedCode> Capture(OpIdentity id, MethodInfo src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0.Asm
         /// If the method is nongeneric or closed-generic, the method is captured as-is
         /// </remarks>
         [MethodImpl(Inline)]
-        Option<MemberCapture> Capture(MethodInfo src, params Type[] args)
+        Option<CapturedCode> Capture(MethodInfo src, params Type[] args)
             => CaptureService.Capture(CaptureExchange.Context, src, args);
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0.Asm
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
         [MethodImpl(Inline)]
-        Option<MemberCapture> Capture(OpIdentity id, in DynamicDelegate src)
+        Option<CapturedCode> Capture(OpIdentity id, in DynamicDelegate src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0.Asm
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The delegate to capture</param>
         [MethodImpl(Inline)]
-        Option<MemberCapture> Capture(OpIdentity id, Delegate src)
+        Option<CapturedCode> Capture(OpIdentity id, Delegate src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
@@ -73,15 +73,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         Option<ParsedOperation> ParseBuffer(OpIdentity id, Span<byte> src)
             => CaptureService.ParseBuffer(CaptureExchange.Context, id, src);         
-
-        /// <summary>
-        /// Captures handle-identified operation data
-        /// </summary>
-        /// <param name="exchange">The selected exchange</param>
-        /// <param name="id">The operation identity to confer</param>
-        /// <param name="src">The source method handle</param>
-        Option<OperationCapture> Capture(OpIdentity id, IntPtr src)
-            => CaptureService.Capture(CaptureExchange.Context, id,src);
  
         /// <summary>
         /// Captures jitted x86 encoded assembly for a dynamic delegate
@@ -89,7 +80,7 @@ namespace Z0.Asm
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
         [MethodImpl(Inline)]
-        Option<MemberCapture> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
+        Option<CapturedCode> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
             where D : Delegate => Capture(id, src.Untyped);            
     }
 }

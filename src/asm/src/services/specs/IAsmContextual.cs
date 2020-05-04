@@ -6,7 +6,6 @@ namespace Z0.Asm
 {        
     public interface IAsmContextual : IServiceFactory<IAsmContext>, ICaptureServices 
     {
-
         IHostCaptureService HostCaptureService(FolderPath root);
 
         IEvalWorkflow CreateEvalWorkflow(AsmWorkflowConfig config)

@@ -8,11 +8,6 @@ namespace Z0
 
     public interface IApiMember : IApiMethod
     {
-        /// <summary>
-        /// The method's kind identifier if it exists
-        /// </summary>
-        OpKindId KindId  => OpKindId.None;
-    
     }        
 
     public interface IApiMember<T> : IApiMember, IEquatable<T>, ITextual<T>, INullary<T>

@@ -24,7 +24,7 @@ namespace Z0.Asm
                 Workflow = workflow;
             }
             
-            public ExtractReport CreateExtractReport(ApiHostUri host, MemberExtract[] src)
+            public ExtractReport CreateExtractReport(ApiHostUri host, ExtractedMember[] src)
             {
                 var report = ExtractReport.Create(host, src); 
                 Context.Raise(ExtractReportCreated.Define(report));                

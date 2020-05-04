@@ -31,8 +31,8 @@ namespace Z0
 
         public void Deposit(IEnumerable<IAppMsg> src)
         {
-            require(src !=  null, $"Null enumerables are bad");
-            require(!src.Any(m => m == null),"Null messages are bad");
+            insist(src !=  null, $"Null enumerables are bad");
+            insist(!src.Any(m => m == null),"Null messages are bad");
 
             var errors = (from m in src
                             where m.IsError

@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct NumericIdentity : IIdentifiedType<NumericIdentity>
     {
-        public string Identifier {get;}            
+        public string IdentityText {get;}            
 
         public NumericKind NumericKind {get;}           
 
@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(NumericIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeIdentity(NumericIdentity src)
@@ -39,12 +39,12 @@ namespace Z0
         NumericIdentity(NumericKind kind)
         {
             this.NumericKind = kind;
-            this.Identifier = $"{kind.TypeWidth().FormatValue()}{NumericKind.Indicator().Format()}";
+            this.IdentityText = $"{kind.TypeWidth().FormatValue()}{NumericKind.Indicator().Format()}";
         }
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.Define(Identifier);
+            => TypeIdentity.Define(IdentityText);
 
         IIdentifiedType<NumericIdentity> Identified => this;
  
