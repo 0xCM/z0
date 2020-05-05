@@ -29,11 +29,11 @@ namespace Z0.Asm
         /// <param name="src">The code source</param>
         Option<AsmInstructionList> Decode(LocatedCode src);      
 
-        Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f);
+        Option<AsmInstructions> Decode(UriHex src);
+
+        Option<AsmFunction> Decode(ParsedMember src, Action<Instruction> f);
         
         Option<AsmInstructionList> Decode(LocatedCode src, Action<Instruction> f);                      
-
-        Option<AsmInstructions> Decode(UriHex src);
 
     }
 }

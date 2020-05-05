@@ -11,6 +11,21 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
+    partial class XTend
+    {
+        public static string FormatCount(this byte src, int zpad = 3)
+            => src.ToString().PadLeft(zpad, '0').PadLeft(zpad + 1, Chars.Space) + Chars.Space;
+
+        public static string FormatCount(this ushort src, int zpad = 5)
+            => src.ToString().PadLeft(zpad, '0').PadLeft(zpad + 1, Chars.Space) + Chars.Space;
+
+        public static string Format(this FlowControl src)
+            => src.ToString();
+
+        public static string FormatLabeled(this FlowControl src)
+            => $"flow/{src.Format()}";
+    }
+
     public readonly struct AsmFormat
     {
         const char blank = Chars.Space;

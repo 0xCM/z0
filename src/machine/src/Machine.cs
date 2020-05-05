@@ -8,6 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
+    using Asm;
+
     using static Seed;
     using static Memories;
     using static MachineEvents;
@@ -20,61 +22,92 @@ namespace Z0
 
         public IAppMsgSink Sink {get;}
 
+        IMachineFiles Files {get;}
+
+        UriCodeIndex CodeIndex {get;}
+            = UriCodeIndex.Empty;
+
         ICaptureArchive Archive => Context.Archive;
+
+        IAsmFunctionDecoder Decoder => Context.Decoder;
 
         Machine(IMachineContext context)
         {
             Sink = context.AppMsgSink;
             Context = context;
             Broker = MachineBroker.New;
+            Files = new MachineFiles(context);
             (this as IMachineClient).Connect();            
         }
 
         public void Run()
         {
-            var parser = ApiServices.ParseReportParser;
-            var files = Context.ParseFiles;
-            foreach(var file in files)
-            {
-                var attempt = parser.Parse(file);
-                if(!attempt.Succeeded)
-                    term.error(attempt.Reason);
-                
-                var report = attempt.Value;
-                Broker.Raise(new LoadedParseReport(report, file));                
-            }    
+            ParseReports();
+        }
+
+        void ParseReports()
+        {
+            Control.iter(Files.ParseFiles, ParseReport);
+            Broker.Raise(IndexedCode.Create(CodeIndex));
+        }
+        void ParseReport(FilePath src)
+        {
+            ApiServices.ParseReportParser.Parse(src)
+                    .OnFailure(fail => term.error(fail.Reason))
+                    .OnSuccess(value => Broker.Raise(LoadedParseReport.Create(value, src)));
         }
 
         public void OnEvent(LoadedParseReport e)
         {
-            Sink.Deposit(e);
-            Index(e.Report);
+            Index(Sink.Deposit(e).Report);
         }
         
-        void Index(MemberParseReport report)
+        public void OnEvent(IndexedCode e)
         {
-            for(var i=0; i<report.RecordCount; i++)
-            {
-                var record = report[i];
-                var code = new UriCode(record.Uri, record.Data);
-            }
+
+            Decode(Sink.Deposit(e).Index.IndexedCode);            
         }
 
-        void DescribeImm()
+        void Decode(ICollection<UriCode> src)
         {
-            term.print($"Imm | {Archive.ImmRootDir}");                        
-            var immParts = Archive.ImmDirs(Context.CodeParts);
-            Control.iter(immParts, term.print);
+            var count = 0;
 
-            var immHosts = Archive.ImmHostDirs(Context.CodeParts);
-            Control.iter(immHosts, term.print);
+            foreach(var code in src)
+                count += Decode(code);
+
+            term.cyan($"Decoded {count} instructions");
+        }
+
+        int Decode(UriCode src)
+        {
+            var count = 0;
+            void OnDecoded(Instruction inxs)
+            {
+                count++;
+            }
+            
+            Decoder.Decode(src.Encoded, OnDecoded);
+
+            return count;
+        }
+
+        void Index(MemberParseReport report)
+        {
+            Control.iter(report.Records, Index);            
+        }
+
+        void Index(MemberParseRecord record)
+        {
+            CodeIndex.Include(UriCode.Define(record.Uri, record.Data));
         }
 
         void Describe()
         {            
-            Control.iter(Context.ParseFiles, term.print);
-            Control.iter(Context.AsmFiles,term.print);
-            Control.iter(Context.CodeFiles,term.print);
+            Control.iter(Files.ParseFiles, term.print);
+            Control.iter(Files.AsmFiles,term.print);
+            Control.iter(Files.CodeFiles,term.print);
+            Control.iter(Archive.ImmDirs(Context.Parts), term.print);
+            Control.iter(Archive.ImmHostDirs(Context.Parts), term.print);
         }
         
         public void Dispose()
@@ -95,5 +128,4 @@ namespace Z0
             }
         }
     }
-
 }

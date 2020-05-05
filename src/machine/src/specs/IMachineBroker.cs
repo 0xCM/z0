@@ -10,33 +10,14 @@ namespace Z0
     using static Seed;
     using static MachineEvents;
 
-    public interface IMachineBroker : ILoadedReport
+    public interface IMachineBroker : IEventBroker
     {
         AppErrorEvent Error => AppErrorEvent.Empty;   
-    }
 
-    public interface IMachineClient : IBrokerClient
-    {
-        void OnEvent(LoadedReport e) 
-            => Sink.Deposit(e);
+        LoadedReport LoadedReport => LoadedReport.Empty;
 
-        void OnEvent(LoadedParseReport e) 
-            => Sink.Deposit(e);
+        LoadedParseReport LoadedParseReport => LoadedParseReport.Empty;
 
-        void OnEvent(AppErrorEvent e) 
-            => Sink.Deposit(e);
-
-        void Connect();
-    }
-
-    public interface IMachineClient<C> : IMachineClient, IBrokerClient<C>
-        where C : IMachineBroker
-    {
-        void IMachineClient.Connect()
-        {
-            Broker.Error.Subscribe(Broker,OnEvent);            
-            Broker.LoadedReport.Subscribe(Broker,OnEvent);
-            Broker.LoadedParseReport.Subscribe(Broker,OnEvent);
-        }        
+        IndexedCode IndexedCode => IndexedCode.Empty;
     }
 }

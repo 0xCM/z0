@@ -5,17 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Seed;
 
-    public interface IResourceProvider
+    public interface IReflector
     {
-        IEnumerable<BinaryResource> Resources {get;}
+        [MethodImpl(Inline)]
+        ITypeReflector<T> Reflect<T>()
+            => TypeReflector<T>.Service;
 
         [MethodImpl(Inline)]
-        ResourceIndex CreateIndex()
-            => ResourceIndex.Create(this);        
+        ITypeReflector Reflect(Type t)
+            => new TypeReflector(t);
     }
 }

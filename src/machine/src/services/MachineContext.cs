@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using Z0.Asm;
 
@@ -16,22 +17,29 @@ namespace Z0
     {
         readonly IAsmContext AsmContext;
 
-        public PartId[] CodeParts {get;}
-        
-        public ICaptureArchive Archive {get;}
-
-        public IAppMsgSink AppMsgSink => AsmContext;
-
         [MethodImpl(Inline)]
         public static IMachineContext Create(IAsmContext src, PartId[] code)
             => new MachineContext(src,code);
+
+        public PartId[] Parts {get;}
         
-        internal MachineContext(IAsmContext src, PartId[] code)
+        public ICaptureArchive Archive {get;}
+
+        public IAppMsgSink AppMsgSink 
+            => AsmContext;
+
+        public IAsmFunctionDecoder Decoder 
+            => AsmContext.Decoder;
+
+        public IAsmFormatter Formatter 
+            => AsmContext.Formatter;
+        
+        internal MachineContext(IAsmContext src, PartId[] parts)
         {                        
-            CodeParts = code.Length == 0 ? Enums.literals<PartId>().Map(x => x.Value) : code;
             AsmContext = src;
+            Parts = parts.Length == 0 ? Enums.literals<PartId>().Where(x => x.Value != PartId.None).Map(x => x.Value) : parts;
             var archiveRoot = src.AppPaths.ForApp(PartId.Control).AppCapturePath;
-            Archive = Archives.Services.CaptureArchive(archiveRoot);
+            Archive = Archives.Services.CaptureArchive(archiveRoot);            
         }
     }
 }

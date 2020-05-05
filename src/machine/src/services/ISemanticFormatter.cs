@@ -2,16 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static Seed;
+    using static Memories;
     
-    using static MachineEvents;
-
-    public interface ILoadedReport : IEventBroker
+    public interface ISemanticFormatter : IService<IAsmContext>
     {
-        LoadedReport LoadedReport => LoadedReport.Empty;
 
-        LoadedParseReport LoadedParseReport => LoadedParseReport.Empty;
     }
 }

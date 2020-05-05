@@ -17,6 +17,10 @@ namespace Z0
             public static E Empty => new E(MemberParseReport.Empty, FilePath.Empty);
 
             [MethodImpl(Inline)]
+            public static LoadedParseReport Create(MemberParseReport report, FilePath src)
+                => new LoadedParseReport(report,src);
+
+            [MethodImpl(Inline)]
             public LoadedParseReport(MemberParseReport report, FilePath src)
             {
                 Report = report;

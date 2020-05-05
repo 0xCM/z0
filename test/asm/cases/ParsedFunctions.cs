@@ -9,115 +9,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
-    using System.Collections;
     using System.Collections.Generic;
 
     using static Seed;
-    using static Memories;
 
-    using Z0.Asm;
-
-    public static class FormatX53
-    {
-        public static string FormatCount(this byte src, int zpad = 3)
-            => src.ToString().PadLeft(zpad, '0').PadLeft(zpad + 1, Chars.Space) + Chars.Space;
-
-        public static string FormatCount(this ushort src, int zpad = 5)
-            => src.ToString().PadLeft(zpad, '0').PadLeft(zpad + 1, Chars.Space) + Chars.Space;
-
-        public static string Format(this FlowControl src)
-            => src.ToString();
-
-        public static string FormatLabeled(this FlowControl src)
-            => $"flow/{src.Format()}";
-    }
-
-    public interface IReflector
-    {
-        PropertyInfo[] StaticProperties {get;}
-    }
-
-    public interface IReflector<F> : IReflector
-    {
-        PropertyInfo[] IReflector.StaticProperties => typeof(F).StaticProperties();
-    }
-
-    public readonly struct Reflector<F> : IReflector<F>
-    {
-
-    }
-
-    public interface IEnumerableArray<T> : IEnumerable<T>
-    {
-        T[] Data {get;}
-
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => Data.AsEnumerable().GetEnumerator();
-        
-        IEnumerator IEnumerable.GetEnumerator() 
-            => Data.GetEnumerator();
-
-    }
-
-    public interface IBinaryResourceSource : IEnumerableArray<BinaryResource>
-    {        
-        BinaryResource Find(string id)
-            => Data.First(r => r.Id == id);
-
-        Option<BinaryResource> TryFind(string id)
-        {
-            for(var i=0; i< Data.Length; i++)   
-            {
-                var res = Data[i];
-                if(res.Id == id)
-                    return res;
-            }
-            return none<BinaryResource>();
-        }
-    }
-
-
-    public interface IBinaryResourceHost<F> : IBinaryResourceSource
-        where F : IBinaryResourceHost<F>, new()
-    {
-    }
-
-    static class CaseIdBuilder
-    {
-        public static OpIdentity Op(OpKindId id, params NumericKind[] kinds)
-            => Op(id,false,kinds);
-        
-        public static OpIdentity Op(OpKindId id, bool generic, params NumericKind[] kinds)
-        {
-            var result = text.build();
-            result.Append(id.Format());
-            for(var i=0; i<kinds.Length; i++)
-            {
-                if(i == 0)
-                {
-                    result.Append(IDI.PartSep);
-                    if(generic)
-                        result.Append(IDI.Generic);
-                    result.Append(IDI.ArgsOpen);
-                }
-                else
-                {
-                    result.Append(IDI.ArgSep);
-                }
-                
-                result.Append(kinds[i].Format());
-            }
-            result.Append(IDI.ArgsClose);
-
-            return Identify.Op(result.ToString());
-        }
-    }
-
-    public interface IAsmFunctionCases : IBinaryResourceSource
+    public interface IAsmFunctionCases : IBinaryResources
     {
         LocatedCode Case(OpKindId k, params NumericKind[] kinds)
         {
-            var id = CaseIdBuilder.Op(k, kinds).ToLegalIdentifier();
+            var id = Identify.NumericOp(k, kinds).ToLegalIdentifier();
             var resource = TryFind(id);
             if(!resource)
                 throw new KeyNotFoundException(id);

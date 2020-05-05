@@ -5,33 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    using static Seed;
-    using static Memories;
+    using Asm;
 
     public interface IMachineContext : IContext
     {
         IAppMsgSink AppMsgSink {get;}        
         
-        PartId[] CodeParts {get;}
+        PartId[] Parts {get;}
 
         ICaptureArchive Archive {get;}
 
-        FilePath[] ExtractFiles
-            => Archive.Files(Archive.ExtractDir, CodeParts);
+        IAsmFunctionDecoder Decoder {get;}
 
-        FilePath[] ParseFiles 
-            => Archive.Files(Archive.ParsedDir, CodeParts);
-
-        FilePath[] AsmFiles 
-            => Archive.Files(Archive.AsmDir, CodeParts);
-
-        FilePath[] CodeFiles 
-            => Archive.Files(Archive.CodeDir, CodeParts);
-
-        FilePath[] UnparsedFiles
-            => Archive.Files(Archive.UnparsedDir, CodeParts);
+        IAsmFormatter Formatter {get;}
     }
 }

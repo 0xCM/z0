@@ -109,5 +109,44 @@ namespace Z0
         public static OpIdentity NumericOp<T>(string opname, bool generic = true)
             where T : unmanaged
                 => Op(opname, TypeWidth.None, nkind<T>(), generic);
+
+        /// <summary>
+        /// Defines kinded identifiers for numeric functions
+        /// </summary>
+        /// <param name="id">The operation kind id</param>
+        /// <param name="generic">Whether the operation should include a generic marker</param>
+        /// <param name="kinds">The numeric argument kinds</param>
+        public static OpIdentity NumericOp(OpKindId id, bool generic, params NumericKind[] kinds)
+        {
+            var result = text.build();
+            result.Append(id.Format());
+            for(var i=0; i<kinds.Length; i++)
+            {
+                if(i == 0)
+                {
+                    result.Append(IDI.PartSep);
+                    if(generic)
+                        result.Append(IDI.Generic);
+                    result.Append(IDI.ArgsOpen);
+                }
+                else
+                {
+                    result.Append(IDI.ArgSep);
+                }
+                
+                result.Append(kinds[i].Format());
+            }
+            result.Append(IDI.ArgsClose);
+
+            return Identify.Op(result.ToString());
+        }
+
+        /// <summary>
+        /// Defines kinded identifiers for nongeneric numeric functions
+        /// </summary>
+        /// <param name="id">The operation kind id</param>
+        /// <param name="kinds">The numeric argument kinds</param>
+        public static OpIdentity NumericOp(OpKindId id, params NumericKind[] kinds)
+            => Identify.NumericOp(id,false,kinds);
     }
 }

@@ -55,7 +55,6 @@ namespace Z0.Asm
             => AsmFormatServices.Format(src);            
     }
 
-
     readonly partial struct AsmFormatServices : ISemanticFormat
     { 
         public static string Format(Register src)

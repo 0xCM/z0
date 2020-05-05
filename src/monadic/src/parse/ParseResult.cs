@@ -158,6 +158,18 @@ namespace Z0
         }
 
         /// <summary>
+        /// Invokes an action if the value doesn't exist
+        /// </summary>
+        /// <param name="f">The action to invoke</param>
+        [MethodImpl(Inline)]
+        public ParseResult<T> OnFailure(Action<ParseResult> f)
+        {
+            if (!Succeeded)
+                f(this);
+            return this;
+        }
+
+        /// <summary>
         /// Maps the parsed value upon success and the source text upon failure
         /// </summary>
         /// <param name="success">The success projector</param>

@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Seed;
 
-    public interface IResourceProvider
+    public readonly struct Reflector : IReflector
     {
-        IEnumerable<BinaryResource> Resources {get;}
-
-        [MethodImpl(Inline)]
-        ResourceIndex CreateIndex()
-            => ResourceIndex.Create(this);        
+        public static IReflector Service => default(Reflector);
     }
 }

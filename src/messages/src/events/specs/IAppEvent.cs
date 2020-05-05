@@ -8,8 +8,12 @@ namespace Z0
 
     partial class XTend
     {
-        public static void Deposit(this IAppMsgSink dst, IAppEvent src)      
-            => dst.NotifyConsole(src.Message);
+        public static ref readonly E Deposit<E>(this IAppMsgSink dst, in E src)      
+            where E : IAppEvent
+        {
+            dst.NotifyConsole(src.Message);
+            return ref src;
+        }
     }
 
     /// <summary>

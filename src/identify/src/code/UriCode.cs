@@ -60,9 +60,10 @@ namespace Z0
         public static implicit operator BinaryCode(UriCode src)
             => src.Encoded.Encoded;
 
+
         [MethodImpl(Inline)]
         public static implicit operator UriHex(UriCode src)
-            => new UriHex(src.Uri, src.Encoded.Encoded);
+            => new UriHex(src.Uri, src.Encoded);
 
         [MethodImpl(Inline)]
         public UriCode(OpUri uri, LocatedCode code)

@@ -12,73 +12,32 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    public class FormatCanonical
+    using static FormatConstants;
+
+    public class SemanticFormatter : ISemanticFormatter
     {
         public IAsmContext Context {get;}
         
         readonly IAsmSemantic asm;
 
-        string SectionSep {get;}
+        readonly Type HostType;
 
-        string FunctionSep {get;}
+        readonly FolderPath CaptureRoot;
 
         ushort InstructionCount;
 
-        ushort FunctionSize;
-
         List<string> Descriptions;
 
-        FolderPath CaptureRoot;
+        ushort FunctionSize;
 
-        Type HostType;
-
-        int IdPad {get;}
-            = 30;
-
-        int InstructionCountPad {get;}
-            = 3;
-
-        int InstructionHeaderLength {get;}
-            = 80;
-
-        string OpCodeDelimiter {get;} 
-            = "<==";       
-
-        string HorizontalSep {get;}
-            = " | ";
-
-        string FlowTitle {get;}
-            = "flow";
-
-        string FlagsWrittenTitle {get;}
-            = "flags-written";
-
-        int SubTitlePad {get;}
-            = 4;
-
-        public FormatCanonical(IAsmContext context, Type host, FolderPath root)
+        public SemanticFormatter(IAsmContext context, Type host, FolderPath root)
         {
             Context = context;
             asm = AsmSemantic.Service;
             CaptureRoot = root;
-            HostType = host;
-
-            var counter = 4;
-            var size = 5;
-            var counterPad = 1;
-
-            var funlen = IdPad + InstructionHeaderLength + counter + size + counterPad + HorizontalSep.Length;
-
-            SectionSep = new string(Chars.Dash,InstructionHeaderLength);  
-            FunctionSep = new string(Chars.Dash,funlen);  
             Descriptions = list<string>();
-        }
-
-        string FormatCmp(Instruction src)
-        {
-            var details = asm.Details(src);
-            var modified = details.RflagsWritten;
-            return modified.ToString();
+            HostType = host;
+            FunctionSize = 0;
         }
 
         void Reset()
@@ -87,6 +46,8 @@ namespace Z0.Asm
             FunctionSize = 0;
             Descriptions.Clear();
         }
+
+        const string FlowTitle = "flow";
 
         public void Format(ApiHostUri host)        
         {
@@ -114,25 +75,12 @@ namespace Z0.Asm
                 }
                 Reset();
             }
-
         }
-        public void Format()
-        {
-            Format(ApiHostUri.Define(PartId.Canonical, "microexpression"));
-                        
-        }
-
-        int InstructionKindPad {get;}
-            = 16;
-
-        int OperandIndexPad {get;}
-            = 2;
 
         void Describe(ParsedMember member, Instruction src)
         {
             var @base = member.Address;
             insist((@base + FunctionSize) == src.IP);                           
-
 
             if(InstructionCount == 0)
             {
@@ -179,37 +127,11 @@ namespace Z0.Asm
                 Descriptions.Add(text.concat(title, HorizontalSep, $"{s}")));
 
 
-            // if(src.Mnemonic == Mnemonic.Cmp)
-            // {
-            //     Descriptions.Add(string.Concat(title, HorizontalSep,  FlagsWrittenTitle.PadRight(SubTitlePad), Chars.Colon, Chars.Space, FormatCmp(src)));
-            // }
-
             Descriptions.Add(text.concat(title, HorizontalSep, FlowTitle.PadRight(SubTitlePad), Chars.Colon, Chars.Space, asm.Format(src.FlowControl)));  
             Descriptions.Add(text.concat(title, HorizontalSep, SectionSep));  
 
             InstructionCount++;
             FunctionSize += (ushort)src.ByteLength;      
         }
-    }
-
-
-    public class t_canonical : t_asm<t_canonical>
-    {
-
-        public t_canonical()
-        {
-
-        }
-
-        public void format_canonical()
-        {
-
-            var formatter = new FormatCanonical(Context, GetType(), DataDir);
-            var host = ApiHost.Create<SquareBitLogix>().UriPath;            
-            //var host = ApiHost.Create<MicroExpression>().UriPath;
-            formatter.Format(host);
-        }
-
-
     }
 }

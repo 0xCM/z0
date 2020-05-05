@@ -5,29 +5,24 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Seed;
     using static Memories;
 
-    public interface IMachinePart : IMachineService
-    {
-        
-    }
-
-    readonly struct MachinePart : IMachinePart
-    {
+    public readonly struct MachineFiles : IMachineFiles
+    {            
         [MethodImpl(Inline)]
-        public static IMachinePart Create(IMachineContext context)
-            => new MachinePart(context);
-
-        [MethodImpl(Inline)]
-        MachinePart(IMachineContext context)
+        public MachineFiles(IMachineContext context)
         {
-            Context = context;
+            this.Context = context;
+            this.Archive = context.Archive;
         }
 
         public IMachineContext Context {get;}
+        
+        public ICaptureArchive Archive {get;}
     }
-
 }
