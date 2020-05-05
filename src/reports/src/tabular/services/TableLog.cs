@@ -24,9 +24,9 @@ namespace Z0
 
             try
             {
-                dst.FolderPath.CreateIfMissing();                            
+                dst.FolderPath.Create();                            
                 var overwrite = mode == FileWriteMode.Overwrite;
-                var emitHeader = format.EmitHeader && (overwrite || !dst.Exists());                
+                var emitHeader = format.EmitHeader && (overwrite || !dst.Exists);                
                 
                 using var writer = dst.Writer(mode);
 
@@ -42,6 +42,5 @@ namespace Z0
                 return Option.none<FilePath>();
             }
         }
-
     }
 }

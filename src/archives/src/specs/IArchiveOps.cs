@@ -15,10 +15,10 @@ namespace Z0
     {
         IArchives Services => Archives.Services;
 
-        UriBits[] SaveUriBits(ApiHostUri host, ParsedMember[] src, FilePath dst)
+        UriHex[] SaveUriHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
         {
-            using var writer = Services.UriBitsWriter(dst);
-            var data = src.Map(x => UriBits.Define(x.Uri, x.Encoded.Encoded));
+            using var writer = Services.UriHexWriter(dst);
+            var data = src.Map(x => UriHex.Define(x.Uri, x.Encoded.Encoded));
             writer.Write(data);
             return data;
         }
@@ -30,9 +30,9 @@ namespace Z0
             var apiIndex = ApiIndex.Create(members);
             var archive =  Services.CaptureArchive(root);
             var paths = archive.HostArchive(host);
-            var code = UriBitsReader.Service.Read(paths.HexPath);
+            var code = UriHexReader.Service.Read(paths.HexPath);
 
-            var opIndex =  UriBitsQuery.Service.CreateIndex(code);
+            var opIndex =  UriHexQuery.Service.CreateIndex(code);
             return indexer.CreateIndex(apiIndex, opIndex);            
         }        
     }

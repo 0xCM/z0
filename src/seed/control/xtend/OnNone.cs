@@ -19,6 +19,14 @@ namespace Z0
                 f();
         }
 
+        [MethodImpl(Inline)]
+        public static T IfSome<T>(this bool x, Func<T> f, T @default)
+        {
+            if(x)
+                return f();
+            else
+                return @default;            
+        }
 
         public static void OnNone<T>(this T? x, Action f)
             where T : struct

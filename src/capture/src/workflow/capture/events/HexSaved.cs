@@ -15,14 +15,14 @@ namespace Z0.Asm
     {
         public readonly struct HexSaved : IAppEvent<E>
         {
-            public static E Empty => new E(ApiHostUri.Empty, new UriBits[]{}, FilePath.Empty);
+            public static E Empty => new E(ApiHostUri.Empty, new UriHex[]{}, FilePath.Empty);
 
             [MethodImpl(Inline)]
-            public static E Define(ApiHostUri host, UriBits[] code, FilePath dst)
+            public static E Define(ApiHostUri host, UriHex[] code, FilePath dst)
                 => new E(host,code,dst);
             
             [MethodImpl(Inline)]
-            HexSaved(ApiHostUri host, UriBits[] code, FilePath dst)
+            HexSaved(ApiHostUri host, UriHex[] code, FilePath dst)
             {
                 this.Host = host;
                 this.Payload = code;
@@ -31,7 +31,7 @@ namespace Z0.Asm
             
             public ApiHostUri Host {get;}
             
-            public UriBits[] Payload {get;}
+            public UriHex[] Payload {get;}
 
             public FilePath Target {get;}
 

@@ -43,9 +43,9 @@ namespace Z0.Asm
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
             var dst = CodeArchive.HostArchive(host.UriPath);
-            if(dst.HexPath.Exists())
+            if(dst.HexPath.Exists)
             {
-                var code = ArchiveOps.Service.CreateCodeIndex(Identities.Services.ApiLocator, ApiSet, host.UriPath, CodeArchive.RootDir);
+                var code = ArchiveOps.Service.CreateCodeIndex(Identities.Services.ApiLocator, ApiSet, host.UriPath, CodeArchive.ArchiveRoot);
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)

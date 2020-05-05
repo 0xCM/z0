@@ -206,8 +206,8 @@ namespace Z0.Asm
         {
 
             var formatter = new FormatCanonical(Context, GetType(), DataDir);
-            //var host = ApiHost.Create<SquareBitLogix>().UriPath;            
-            var host = ApiHost.Create<MicroExpression>().UriPath;
+            var host = ApiHost.Create<SquareBitLogix>().UriPath;            
+            //var host = ApiHost.Create<MicroExpression>().UriPath;
             formatter.Format(host);
         }
 

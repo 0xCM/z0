@@ -25,22 +25,18 @@ namespace Z0
 
         FolderPath DefaultRootDir => Env.Current.LogDir;
 
-        IUriBitsReader UriBitsReader => new UriBitsReader();
+        IUriHexReader UriHexReader => new UriHexReader();
+
+        [MethodImpl(Inline)]
+        IUriHexWriter UriHexWriter(FilePath dst)
+            => new UriHexWriter(dst);
+
+        UriHexWriterFactory UriHexWriterFactory
+            => dst => UriHexWriter(dst);        
 
         [MethodImpl(Inline)]
         IUriCodeWriter UriCodeWriter(FilePath dst)
-            => new UriCodeWriter(dst);
-
-        [MethodImpl(Inline)]
-        IUriBitsWriter UriBitsWriter(FilePath dst)
-            => new UriBitsWriter(dst);
-
-        UriBitsWriterFactory UriBitsWriterFactory
-            => dst => UriBitsWriter(dst);        
-
-        [MethodImpl(Inline)]
-        IHostBitsWriter BitArchiveWriter(FilePath dst)
-            => new HostBitsWriter(dst);        
+            => new UriCodeWriter(dst);        
 
         [MethodImpl(Inline)]
         IApiIndexBuilder IndexBuilder(IApiSet api, IMemberLocator locator)
@@ -55,7 +51,7 @@ namespace Z0
             => new HostCaptureArchive(root ?? DefaultRootDir, host);
         
         [MethodImpl(Inline)]
-        IUriBitsArchive UriBitsArchive(FolderPath root = null)
-            => new UriBitsArchive(root ?? DefaultRootDir);
+        IUriHexArchive UriBitsArchive(FolderPath root = null)
+            => new UriHexArchive(root ?? DefaultRootDir);
     }
 }

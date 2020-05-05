@@ -20,7 +20,7 @@ namespace Z0
 
         public ApiHostUri Host {get;}
 
-        public FolderPath RootDir {get;}
+        public FolderPath ArchiveRoot {get;}
 
         public FolderPath[] Clear(params PartId[] parts)
         {
@@ -31,7 +31,7 @@ namespace Z0
         internal HostCaptureArchive(FolderPath root, ApiHostUri host)
         {
             Host = host;
-            RootDir = root;
+            ArchiveRoot = root;
         }    
     }
     
@@ -40,30 +40,30 @@ namespace Z0
         ApiHostUri Host {get;}
 
         FileName ExtractFileName 
-            => HostFileName(Host, ExtractExt);
+            => LegalFileName(Host, Extract);
 
         new FilePath ExtractPath 
             => ExtractDir + ExtractFileName;
 
         FileName ParsedFileName 
-            => HostFileName(Host, ParsedExt);
+            => LegalFileName(Host, Parsed);
 
         FilePath ParsedPath 
             => ParsedDir + ParsedFileName;
 
         new FileName HexFileName 
-            => HostFileName(Host, HexExt);
+            => LegalFileName(Host, Hex);
 
         new FilePath HexPath 
-            => HexDir + HexFileName;
+            => CodeDir + HexFileName;
 
         FileName AmsFileName 
-            => HostFileName(Host, AsmExt);
+            => LegalFileName(Host, Asm);
 
         new FilePath AsmPath 
             => AsmDir + AmsFileName;         
 
         new FileName CilFileName
-            => HostFileName(Host, CilExt);
+            => LegalFileName(Host, Il);
     }
 }

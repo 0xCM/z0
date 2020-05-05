@@ -6,12 +6,12 @@ namespace Z0
 {        
     using System.Collections.Generic;
 
-    public interface IUriBitsReader : IService
+    public interface IUriHexReader : IService
     {
         /// <summary>
         /// Reads the content of a source file
         /// </summary>
         /// <param name="src">The source file path</param>
-        IEnumerable<UriBits> Read(FilePath src);        
+        IEnumerable<UriHex> Read(FilePath src);        
     }
 }

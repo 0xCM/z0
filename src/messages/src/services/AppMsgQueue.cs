@@ -30,12 +30,13 @@ namespace Z0
         [MethodImpl(Inline)]
         AppMsgQueue()
         {
-            this.Messages = new List<IAppMsg>();
-            this.Next = x => {};
+            Messages = new List<IAppMsg>();
+            Next = x => {};
         }
 
         [MethodImpl(Inline)]
-        void Relay(IAppMsg msg) => Next(msg);
+        void Relay(IAppMsg msg) 
+            => Next(msg);
 
         public IReadOnlyList<IAppMsg> Dequeue()
         {
@@ -65,13 +66,21 @@ namespace Z0
             }
         }
 
-        public void Emit(FilePath dst)
-        {
-            using var writer = dst.Writer();
-            Control.iter(Dequeue(), msg => writer.WriteLine(msg.Format()));
-        }
-
         public void Notify(string msg, AppMsgKind? severity = null)
             => Deposit(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
+
+        public void Emit(FilePath dst)
+        {
+            try
+            {
+                using var writer = dst.Writer();
+                Control.iter(Dequeue(), msg => writer.WriteLine(msg.Format()));
+            }
+            catch(Exception)
+            {
+                term.red($"Error writing to {dst}");                
+                throw;
+            }
+        }
     }
 }

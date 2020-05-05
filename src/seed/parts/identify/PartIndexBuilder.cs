@@ -17,14 +17,14 @@ namespace Z0
     public readonly struct PartIndexBuilder : IPartIndexBuilder
     {
         /// <summary>
-        /// Creates the builkder, not the index
+        /// Creates the builder, not the index
         /// </summary>
-        public static IPartIndexBuilder Service
-            => default(PartIndexBuilder);
+        public static IPartIndexBuilder Service => default(PartIndexBuilder);
 
         /// <summary>
         /// Creates an index over the known parts
         /// </summary>
+        [MethodImpl(Inline)]
         public PartIndex Build()
             => PartIndex.Define(Known);
  

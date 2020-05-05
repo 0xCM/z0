@@ -10,33 +10,16 @@ namespace Z0
     
     using static Seed;
 
-    public static class HexParsers
+    public class HexParsers
     {
-        /// <summary>
-        /// The default hex byte parser service
-        /// </summary>
-        public static HexByteParser Bytes
-        {
-            [MethodImpl(Inline)]
-            get => default(HexByteParser);
-        }
+        public static HexByteParser Bytes => HexByteParser.Service;
 
-        /// <summary>
-        /// The default hex numeric parser service
-        /// </summary>
-        public static HexNumericParser Numeric
-        {
-            [MethodImpl(Inline)]
-            get => default(HexNumericParser);
-        }
+        public static IParametricParser Numeric => HexNumericParser.Service;
 
-        /// <summary>
-        /// The default memory range parser service
-        /// </summary>
-        public static IParser<MemoryRange> MemoryRange
-        {
-            [MethodImpl(Inline)]
-            get => default(MemoryRangeParser);
-        }
+        public static IParser<MemoryAddress> MemoryAddress => MemoryAddressParser.Service;
+
+        public static HexScalarParser Scalar => HexScalarParser.Service;
+
+        public static IParser<MemoryRange> MemoryRange => MemoryRangeParser.Service;
     }
 }

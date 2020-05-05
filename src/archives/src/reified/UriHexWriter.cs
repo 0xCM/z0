@@ -11,28 +11,28 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct UriBitsWriter : IUriBitsWriter
+    public readonly struct UriHexWriter : IUriHexWriter
     {        
         readonly StreamWriter StreamOut;
 
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        internal UriBitsWriter(FilePath path)
+        internal UriHexWriter(FilePath path)
         {
             this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
         [MethodImpl(Inline)]
-        public void Write(UriBits src, int idpad)
+        public void Write(UriHex src, int idpad)
             => StreamOut.WriteLine(src.Format(idpad));
 
         [MethodImpl(Inline)]
-        public void Write(UriBits src)
+        public void Write(UriHex src)
             => StreamOut.WriteLine(src.Format(0));
 
-        public void Write(UriBits[] src)
+        public void Write(UriHex[] src)
         {
             var uripad = src.Max(x => x.Uri.IdentityText.Length) + 1;
             for(var i=0; i< src.Length; i++)

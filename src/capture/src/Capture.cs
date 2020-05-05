@@ -22,9 +22,6 @@ namespace Z0.Asm
         ILocatedCodeParser LocatedParser
             => LocatedCodeParser.Create(new byte[Pow2.T14]);
 
-        IExtractReportParser ExtractReportParser            
-            => new ExtractReportParser(LocatedParser);
-
         [MethodImpl(Inline)]
         IMemoryCapture MemoryCapture(IAsmFunctionDecoder decoder, int? bufferlen = null)
             => MemoryCaptureService.Create(decoder, bufferlen);

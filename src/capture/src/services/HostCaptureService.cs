@@ -41,7 +41,7 @@ namespace Z0.Asm
             Context = context;
             Area = area;
             Subject = subject;
-            Root = (context.RootCaptureArchive.RootDir + area) + subject;
+            Root = (context.RootCaptureArchive.ArchiveRoot + area) + subject;
             Extractor = Capture.Services.HostExtractor();
             Parser = Z0.Extract.Services.ExtractParser(new byte[Context.DefaultBufferLength]);
         }
@@ -86,8 +86,8 @@ namespace Z0.Asm
             var report = MemberParseReport.Create(host,src);
             report.Save(hostArchive.ParsedPath);
 
-            using var writer = Archives.Services.UriBitsWriter(hostArchive.HexPath);
-            var data = src.Map(x => UriBits.Define(x.Uri, x.Encoded.Encoded));
+            using var writer = Archives.Services.UriHexWriter(hostArchive.HexPath);
+            var data = src.Map(x => UriHex.Define(x.Uri, x.Encoded.Encoded));
             writer.Write(data);
         }
 

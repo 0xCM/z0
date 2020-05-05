@@ -13,21 +13,21 @@ namespace Z0
     /// <summary>
     /// Identifies a member defined by executable code (derived from the method implementation)
     /// </summary>    
-    public readonly struct MemberCode : IIdentifiedCode<MemberCode,UriBits>
+    public readonly struct ApiMemberCode : IIdentifiedCode<ApiMemberCode,UriHex>
     {
-        public static MemberCode Empty => Define(ApiMember.Empty, BinaryCode.Empty);
+        public static ApiMemberCode Empty => Define(ApiMember.Empty, BinaryCode.Empty);
 
         [MethodImpl(Inline)]
-        public static MemberCode Define(ApiMember member, BinaryCode code)
-            => new MemberCode(member, code);
+        public static ApiMemberCode Define(ApiMember member, BinaryCode code)
+            => new ApiMemberCode(member, code);
 
         [MethodImpl(Inline)]
-        public static MemberCode Define(ApiMember member, UriBits code)
-            => new MemberCode(member, code);
+        public static ApiMemberCode Define(ApiMember member, UriHex code)
+            => new ApiMemberCode(member, code);
 
         public ApiMember Member {get;}
 
-        public UriBits Encoded {get;}
+        public UriHex Encoded {get;}
         
         public OpKindId KindId  => Member.KindId;
 
@@ -48,31 +48,31 @@ namespace Z0
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(MemberCode src)
+        public static implicit operator BinaryCode(ApiMemberCode src)
             => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
-        internal MemberCode(ApiMember member, UriBits code)
+        internal ApiMemberCode(ApiMember member, UriHex code)
         {
             Member = member;
             Encoded = code;
         }
 
         [MethodImpl(Inline)]
-        internal MemberCode(ApiMember member, BinaryCode code)
+        internal ApiMemberCode(ApiMember member, BinaryCode code)
         {
             Member = member;
-            Encoded = new UriBits(member.OpUri, code);
+            Encoded = new UriHex(member.OpUri, code);
         }
 
-        public bool Equals(MemberCode src)
+        public bool Equals(ApiMemberCode src)
             => Encoded.Equals(src.Encoded);
 
         public override int GetHashCode()
             => Uri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is MemberCode m && Equals(m);        
+            => src is ApiMemberCode m && Equals(m);        
 
         public string Format(int uripad)
             => text.concat(Member.OpUri.Format().PadRight(uripad), Encoded.Format());

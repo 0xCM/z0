@@ -89,7 +89,6 @@ namespace Z0
              => Format();
     }
 
-
     public readonly struct ParseResult<T> : IParseResult<T>
     {
         /// <summary>
@@ -210,7 +209,7 @@ namespace Z0
         /// <param name="apply">The application projector</param>
         /// <typeparam name="Y">The application range</typeparam>
         [MethodImpl(Inline)]
-        public ParseResult<Y> Select<Y>(Func<T, Y> apply)
+        public ParseResult<Y> Select<Y>(Func<T,Y> apply)
             => TryMap(_x => apply(_x));
 
         /// <summary>
@@ -221,7 +220,7 @@ namespace Z0
         /// <typeparam name="Y">The evaluator range type</typeparam>
         /// <typeparam name="Z">The projector range type</typeparam>
         [MethodImpl(Inline)]
-        public ParseResult<Z> SelectMany<Y, Z>(Func<T, ParseResult<Y>> eval, Func<T, Y, Z> project)
+        public ParseResult<Z> SelectMany<Y,Z>(Func<T, ParseResult<Y>> eval, Func<T,Y,Z> project)
         {
             var src = Source;
             if (Succeeded)
@@ -238,6 +237,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Option<T> ToOption()
             => Succeeded ? Option.some(Value) : Option.none<T>();
+
+        [MethodImpl(Inline)]
+        public ParseResult<X> As<X>()
+            => new ParseResult<X>(Source, (X)(object)Value, Reason);
 
         public string Format()
             => ParseResult.Format(this);

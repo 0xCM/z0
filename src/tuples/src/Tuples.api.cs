@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Tuples;
+    using static Seed;
+
 
     public static partial class Tuples
     {        

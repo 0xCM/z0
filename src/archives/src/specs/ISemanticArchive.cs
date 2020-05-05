@@ -6,12 +6,8 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
-
-    using static FileSystem;
 
     public readonly struct SemanticArchive : ISemanticArchive
     {
@@ -24,19 +20,18 @@ namespace Z0
             => FolderName.Define("semantic");
 
         FolderPath SemanticDir(Type t)
-            => AppDataDir(t) + SemanticFolder;
+            => DataDir(t) + SemanticFolder;
         
         FileName SemanticFileName(ApiHostUri host, FileExtension ext) 
-            => HostFileName(host,ext);
+            => LegalFileName(host,ext);
 
         FilePath SemanticPath(Type t, ApiHostUri host, FileExtension ext = null) 
             => SemanticDir(t) + SemanticFileName(host,ext ?? FileExtensions.Txt);
 
         FilePath SemanticPath(Type t, PartId part, OpIdentity id, FileExtension ext = null) 
-            => SemanticDir(t) + OpFileName(part, id, ext ?? FileExtensions.Txt);
+            => SemanticDir(t) + LegalFileName(part, id, ext ?? FileExtensions.Txt);
 
         FilePath SemanticPath(Type t, ApiHostUri host, OpIdentity id, FileExtension ext = null) 
-            => SemanticDir(t) + OpFileName(host, id, ext ?? FileExtensions.Txt);
-
+            => SemanticDir(t) + LegalFileName(host, id, ext ?? FileExtensions.Txt);
     }
 }

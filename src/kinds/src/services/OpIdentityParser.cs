@@ -10,10 +10,10 @@ namespace Z0
     using static Seed;
     using static IDI;
     
-    public interface IIdentityParser : ISuccessfulParser<OpIdentity>, IStateless<OpIdentityParser,IIdentityParser>
+    public interface IIdentityParser : IInfallibleParser<OpIdentity>, IStateless<OpIdentityParser,IIdentityParser>
     {
         [MethodImpl(Inline)]
-        OpIdentity ISuccessfulParser<OpIdentity>.Parse(string text)
+        OpIdentity IInfallibleParser<OpIdentity>.Parse(string text)
             => OpIdentityParser.Service.Parse(text);
         
         OpIdentity INullary<OpIdentity>.Zero => OpIdentity.Empty;

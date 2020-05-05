@@ -34,7 +34,7 @@ namespace Z0
 
         readonly IImmEmissionWorkflow ImmWorkflow;
 
-        readonly IUriBitsReader UriBitsReader;
+        readonly IUriHexReader UriBitsReader;
 
         readonly AsmFormatSpec FormatConfig;
         
@@ -52,7 +52,7 @@ namespace Z0
 
             var wfc = AsmWorkflows.Create(context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
-            UriBitsReader = Capture.Services.UriBitsReader;
+            UriBitsReader = Capture.Services.UriHexReader;
             CaptureWorkflow = wfc.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));
             Broker = CaptureWorkflow.Broker;
             ImmWorkflow = wfc.ImmEmissionWorkflow(Sink, context.ApiSet, Formatter, Decoder, root);

@@ -56,5 +56,15 @@ namespace Z0
         /// <param name="caller">The calling member</param>
         public static void cyan(string title, object content)
             => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Cyan));
+
+
+        /// <summary>
+        /// Emits an information-level message with a red foreground, typically used to emit error messages 
+        /// at the point of occurrence, not at the point at which they are handled
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void red(object content)
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
     }
 }

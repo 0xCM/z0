@@ -33,7 +33,7 @@ namespace Z0.Asm
         
         Option<AsmInstructionList> Decode(LocatedCode src, Action<Instruction> f);                      
 
-        Option<AsmInstructions> Decode(UriBits src);
+        Option<AsmInstructions> Decode(UriHex src);
 
     }
 }

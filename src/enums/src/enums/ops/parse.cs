@@ -12,7 +12,7 @@ namespace Z0
     partial class Enums
     {
         public static PartId[] ParseParts(params string[] args)
-            => args.Map(arg => Enums.parse<PartId>(arg).ValueOrDefault()).WhereSome();
+            => args.Map(arg => Enums.Parse<PartId>(arg).ValueOrDefault()).WhereSome();
 
         /// <summary>
         /// Attempts to parses an enumeration literal, ignoring case, and returns a default value if parsing failed
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="name">The literal name</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static E parse<E>(string name, E @default)
+        public static E Parse<E>(string name, E @default)
             where E : unmanaged, Enum
                 => Option.Try(() => Enum.Parse<E>(name, true)).ValueOrDefault(@default);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="name">The literal name</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static ParseResult<E> parse<E>(string name)
+        public static ParseResult<E> Parse<E>(string name)
             where E : unmanaged, Enum
         {
             try

@@ -50,10 +50,10 @@ namespace Z0.Asm
 
         ICaptureArchive CodeArchive => Me.CaptureArchive(ExecutingApp);
 
-        protected IHostBitsWriter HexWriter([Caller] string caller = null)
+        protected IUriCodeWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
-            return Archives.Services.BitArchiveWriter(dstPath);
+            return Archives.Services.UriCodeWriter(dstPath);
         }
 
         protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
@@ -97,7 +97,7 @@ namespace Z0.Asm
         {
             var dId = Identify.Op(name, w, kind, false);
             var gId = Identify.Op(name, w, kind, true);            
-            var archive = UriBitsArchive.Create(CodeArchive.HexDir);
+            var archive = UriHexArchive.Create(CodeArchive.CodeDir);
             var dBits = archive.Read(ApiHost.Create<dvec>().UriPath).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiHost.Create<gvec>().UriPath).Where(x => x.Id == gId).Single();
             return Me.Match(Binary, w, dBits, gBits, dst);

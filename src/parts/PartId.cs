@@ -13,12 +13,6 @@ public enum PartId : ulong
 
     Control = 5010,
 
-    Blank01 = 5020,
-
-    Blank02 = 5030,
-
-    Blank03 = 5040,
-
     Evaluate = 5100,
 
     Archives = 5110,

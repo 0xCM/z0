@@ -10,11 +10,11 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    public readonly struct UriBitsDecoder : IUriBitsDecoder
+    public readonly struct UriHexDecoder : IUriHexDecoder
     {        
-        public static IUriBitsDecoder Service => default(UriBitsDecoder);
+        public static IUriHexDecoder Service => default(UriHexDecoder);
                     
-        public IEnumerable<AsmInstructions> Decode(IEnumerable<UriBits> bits)
+        public IEnumerable<AsmInstructions> Decode(IEnumerable<UriHex> bits)
         {
             var decoder = Capture.Services.AsmDecoder();
             foreach(var op in bits)

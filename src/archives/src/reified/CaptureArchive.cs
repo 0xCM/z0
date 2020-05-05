@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static FileSystem;
 
     public readonly struct CaptureArchive : ICaptureArchive
     {        
-        public FolderPath RootDir {get;}
+        public FolderPath ArchiveRoot {get;}
 
         public FolderName AreaName {get;}
 
@@ -21,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal CaptureArchive(FolderPath root, FolderName area, FolderName subject)
         {
-            RootDir = reify(root);
+            ArchiveRoot = root.Create();
             AreaName = area;
             SubjectName = subject;
         }

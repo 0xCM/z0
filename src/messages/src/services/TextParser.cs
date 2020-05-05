@@ -102,7 +102,7 @@ namespace Z0
 
         public static Option<TextDoc> ReadTextDoc(this FilePath src, TextFormat? format = null)
         {
-            if(!src.Exists())
+            if(!src.Exists)
                 return default;
             using var reader = new StreamReader(src.ToString());
             return src.ReadTextDoc(format);

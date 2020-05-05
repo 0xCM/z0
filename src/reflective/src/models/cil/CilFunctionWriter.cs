@@ -39,7 +39,7 @@ namespace Z0
             {
                 if(src.Length != 0)
                 {
-                    Target.FolderPath.CreateIfMissing();
+                    Target.FolderPath.Create();
                     using var writer = new StreamWriter(Target.FullPath, false);
                     
                     if(Config.EmitFileHeader)                        

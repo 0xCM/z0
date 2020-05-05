@@ -33,7 +33,10 @@ namespace Z0
             => term.warn($"Dispose handler not implemented");
 
         public virtual void OnFatalError(Exception e)
-            => term.error(e);
+        {
+            term.red("Shell was fatally wounded");
+            term.error(e);
+        }
 
         /// <summary>
         /// The parts that are not unknown
@@ -45,16 +48,23 @@ namespace Z0
 
         protected static void Launch(params string[] args)
         {
+            var created = false;
             try
             {
-                term.inform($"Launching shell");
-                using var shell = new S() as IShell;            
+                term.inform($"Creating shell");
+                using var shell = new S() as IShell;                            
+
+                created = true;
+
+                term.inform($"Executing shell");
                 shell.Execute(args);
             }
             catch(Exception e)
             {
-                term.error("Unable to launch host");
-                term.error(e);
+                if(created)
+                    term.errlabel(e, $"Shell abended upon disposal!");
+                else
+                    term.errlabel(e, $"Shell abended upon creation!");
             }
         }
     }    

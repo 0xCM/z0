@@ -34,7 +34,6 @@ namespace Z0
         {
         }
 
-
         IApiComposition Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
 
@@ -50,14 +49,14 @@ namespace Z0
         {
             var archive = Archives.Services.CaptureArchive(CaptureRoot);
 
-            Print($"Examining capture archive rooted at {archive.RootDir}");
+            Print($"Examining capture archive rooted at {archive.ArchiveRoot}");
 
             Control.iter(archive.AsmFiles, file => Print(file));            
             Control.iter(archive.HexFiles, file => Print(file));  
             Control.iter(archive.ExtractFiles, file => Print(file));  
             Control.iter(archive.ParseFiles, file => Print(file));              
-            Control.iter(archive.ImmAsmFiles, file => Print(file));  
-            Control.iter(archive.ImmHexFiles, file => Print(file));  
+            // Control.iter(archive.AsmImmFiles, file => Print(file));  
+            // Control.iter(archive.HexImmFiles, file => Print(file));  
         }
 
         void RunCapture(params PartId[] parts)
@@ -85,7 +84,7 @@ namespace Z0
         }
 
         static PartId[] ParseParts(params string[] args)
-            => args.Map(arg => Enums.parse<PartId>(arg).ValueOrDefault()).WhereSome();
+            => args.Map(arg => Enums.Parse<PartId>(arg).ValueOrDefault()).WhereSome();
         
         public override void RunShell(params string[] args)
         {            

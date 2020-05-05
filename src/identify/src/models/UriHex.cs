@@ -10,18 +10,18 @@ namespace Z0
     using static Seed;
 
     /// <summary>
-    /// The bits found at the end of a uri
+    /// The hex bits found at the end of a uri
     /// </summary>
-    public readonly struct UriBits : IUriCode<UriBits,BinaryCode>
+    public readonly struct UriHex : IUriCode<UriHex,BinaryCode>
     {
         [MethodImpl(Inline)]
-        public static UriBits Define(OpUri uri, BinaryCode src)
-            => new UriBits(uri,src);
+        public static UriHex Define(OpUri uri, BinaryCode src)
+            => new UriHex(uri,src);
 
         /// <summary>
         /// No code, no identity, no life
         /// </summary>
-        public static UriBits Empty => new UriBits(OpUri.Empty, BinaryCode.Empty);
+        public static UriHex Empty => new UriHex(OpUri.Empty, BinaryCode.Empty);
 
         /// <summary>
         /// The encoded operation data
@@ -43,6 +43,8 @@ namespace Z0
         /// </summary>
         public OpIdentity Id { [MethodImpl(Inline)] get  => Uri.OpId; }
 
+        public ApiHostUri Host { [MethodImpl(Inline)] get => Uri.HostPath; }
+
         public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
         public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
@@ -51,6 +53,9 @@ namespace Z0
 
         public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
 
+        public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
+        
+        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
 
         /// <summary>
         /// Defines uri bits with a potentially bad uri (for diagnostic purposes)
@@ -58,14 +63,14 @@ namespace Z0
         /// <param name="perhaps">The uri, perhaps</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static UriBits Define(ParseResult<OpUri> perhaps, BinaryCode src)
+        public static UriHex Define(ParseResult<OpUri> perhaps, BinaryCode src)
             => perhaps.MapValueOrSource(
-                    uri => new UriBits(uri,src), 
-                    baduri => new UriBits(baduri, src)
+                    uri => new UriHex(uri,src), 
+                    baduri => new UriHex(baduri, src)
                     );
 
         [MethodImpl(Inline)]
-        public UriBits(OpUri uri, BinaryCode src)
+        public UriHex(OpUri uri, BinaryCode src)
         {
             this.Uri = uri;
             this.Encoded = src;
@@ -73,7 +78,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        UriBits(string baduri, BinaryCode src)
+        UriHex(string baduri, BinaryCode src)
         {
             Identifier = baduri;
             Uri = OpUri.Empty;
@@ -81,7 +86,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(UriBits src)
+        public bool Equals(UriHex src)
             => Encoded.Equals(src.Encoded);
 
         public string Format()

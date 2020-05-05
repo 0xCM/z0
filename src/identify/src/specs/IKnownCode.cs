@@ -14,7 +14,7 @@ namespace Z0
     public interface IKnownCode<F,C> : 
         IUriCode<F,C>, 
         ICapturedCode<F,C>,
-        IMemberCode<F,C>
+        IReflectedCode<F,C>
             where F : struct, IEncoded<F,C>
     {
         

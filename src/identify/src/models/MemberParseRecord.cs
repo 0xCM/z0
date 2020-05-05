@@ -6,19 +6,82 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Seed;
 
     using F = MemberParseField;
     using R = MemberParseRecord;
 
+    public enum MemberParseField : ulong
+    {
+        Seq = 0 | 12ul << 32,
+
+        SourceSeq = 1 | 12ul << 32,
+
+        Address = 2 | 16ul << 32,
+
+        Length = 3 | 8ul << 32,
+
+        TermCode = 4 | 20ul << 32,
+
+        Uri = 5 | 110ul << 32,
+
+        OpSig = 6 | 110ul << 32,
+
+        Data = 7 | 1ul << 32
+    }    
+
     public readonly struct MemberParseRecord : ITabular<F,R>
     {                                
-        public static MemberParseRecord Empty 
-            => Define(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, LocatedCode.Empty);
-        
+        public const int FieldCount = 8;
+
+        public static R Empty 
+            => new R(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, LocatedCode.Empty);
+
+        public static ParseResult<MemberParseRecord> Parse(string src)
+        {
+            try
+            {
+                var fields = src.SplitClean(MemberParseReport.DefaultDelimiter);
+                if(fields.Length != FieldCount)
+                    return ParseResult.Fail<MemberParseRecord>(src,"No data");
+
+                var index = 0;
+
+                var numericParser = NumericParser.infallible<int>();
+                var addressParser = HexParsers.MemoryAddress;
+                var dataParser = HexParsers.Bytes;
+
+                var seq = numericParser.Parse(fields[index++]);
+                var srcSeq = numericParser.Parse(fields[index++]);
+                var address = addressParser.Parse(fields[index++], MemoryAddress.Zero);
+                var len = numericParser.Parse(fields[index++]);
+                var term = Enums.Parse(fields[index++], ExtractTermCode.None);
+                var uri = OpUri.ParseDefault(fields[index++]);
+                var sig = fields[index++];
+                var data = LocatedCode.Define(address, dataParser.ParseData(fields[index++], Control.array<byte>()));  
+                          
+                return ParseResult.Success(src, new R(
+                    Sequence: seq, 
+                    SourceSequence: srcSeq, 
+                    Address: address, 
+                    Length: len, 
+                    TermCode: default,
+                    Uri:uri, 
+                    OpSig:sig, 
+                    Data:data
+                    ));
+            }
+            catch(Exception e)
+            {   
+                return ParseResult.Fail<MemberParseRecord>(src, e);
+            }
+        }
+
         public static R From(in ParsedMember extract, int seq)
-            => MemberParseRecord.Define
+            => new R
                 (
                     Sequence : seq,
                     SourceSequence: extract.Sequence,
@@ -30,12 +93,16 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static MemberParseRecord Define(int Sequence, int SourceSequence, MemoryAddress Address, 
-            int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, LocatedCode Data)
-                => new MemberParseRecord(Sequence, SourceSequence, Address, Length, TermCode, Uri,OpSig,Data);
-        
-        internal MemberParseRecord(int Sequence, int SourceSequence, MemoryAddress Address, 
-            int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, LocatedCode Data)
+        public MemberParseRecord(
+            int Sequence, 
+            int SourceSequence, 
+            MemoryAddress Address, 
+            int Length, 
+            ExtractTermCode TermCode, 
+            OpUri Uri, 
+            string OpSig, 
+            LocatedCode Data
+            )
         {
             this.Seq = Sequence;
             this.SourceSeq = SourceSequence;                

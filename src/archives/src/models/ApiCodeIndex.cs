@@ -19,18 +19,18 @@ namespace Z0
     public readonly struct ApiCodeIndex 
     {
         [MethodImpl(Inline)]
-        public static ApiCodeIndex Create(in OpIndex<MemberCode> code)
+        public static ApiCodeIndex Create(in OpIndex<ApiMemberCode> code)
             => new ApiCodeIndex(code);
 
-        readonly IReadOnlyDictionary<OpIdentity,MemberCode> Hashtable;
+        readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;
 
         [MethodImpl(Inline)]
-        ApiCodeIndex(in OpIndex<MemberCode> code)
+        ApiCodeIndex(in OpIndex<ApiMemberCode> code)
         {
             this.Hashtable = code.Enumerated.ToDictionary(); 
         }
 
-        public MemberCode this[OpIdentity id]
+        public ApiMemberCode this[OpIdentity id]
         {
             [MethodImpl(Inline)]
             get => Hashtable[id];
@@ -42,51 +42,51 @@ namespace Z0
         public IEnumerable<OpIdentity> Keys
             => Hashtable.Keys;
         
-        IEnumerable<MemberCode> Values
+        IEnumerable<ApiMemberCode> Values
             => Hashtable.Values;
 
         public IEnumerable<MethodInfo> Methods
             => Values.Select(v => v.Member.Method);
 
-        public IEnumerable<MemberCode> Search(ArityClass arity)
+        public IEnumerable<ApiMemberCode> Search(ArityClass arity)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ArityValue() == (int)arity
                 select code;    
 
-        public IEnumerable<MemberCode> Search(OperatorClass @class)
+        public IEnumerable<ApiMemberCode> Search(OperatorClass @class)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ClassifyOperator() == @class
                 select code;    
 
-        public IEnumerable<MemberCode> Search(OpKindId id)
+        public IEnumerable<ApiMemberCode> Search(OpKindId id)
             => from code in  Values
                 let method = code.Member.Method
                 where method.KindId() == id
                 select code;    
 
-        public IEnumerable<MemberCode> Operators
+        public IEnumerable<ApiMemberCode> Operators
             => Values.Where(x => x.Member.Method.IsOperator());
 
-        public IEnumerable<MemberCode> UnaryOperators
+        public IEnumerable<ApiMemberCode> UnaryOperators
             => Search(OperatorClass.UnaryOp);
 
-        public IEnumerable<MemberCode> BinaryOperators
+        public IEnumerable<ApiMemberCode> BinaryOperators
             => Search(OperatorClass.BinaryOp);
 
-        public IEnumerable<MemberCode> TernaryOperators
+        public IEnumerable<ApiMemberCode> TernaryOperators
             => Search(OperatorClass.TernaryOp);
 
-        public IEnumerable<MemberCode> NumericOperators(int? arity = null)
+        public IEnumerable<ApiMemberCode> NumericOperators(int? arity = null)
             => Values.Where(x => x.Member.Method.IsNumericOperator(arity));
 
-        public IEnumerable<MemberCode> KindedOperators()
+        public IEnumerable<ApiMemberCode> KindedOperators()
             => from code in Values
                 where code.Method.IsKindedOperator()
                 select code;
 
-        public IEnumerable<MemberCode> KindedOperators(int arity)
+        public IEnumerable<ApiMemberCode> KindedOperators(int arity)
             => from code in Values
                 where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;

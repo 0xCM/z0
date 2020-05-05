@@ -13,9 +13,9 @@ namespace Z0
     public interface ICheckFileSystem : IValidator
     {
         void exists(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => path.Exists().OnNone(() => throw AppException.Define($"The file {path} does not exist", caller, file,line));
+            => path.Exists.OnNone(() => throw AppException.Define($"The file {path} does not exist", caller, file,line));
 
         void exists(FolderPath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => path.Exists().OnNone(() => throw AppException.Define($"The folder {path} does not exist", caller, file,line));
+            => path.Exists.OnNone(() => throw AppException.Define($"The folder {path} does not exist", caller, file,line));
     }
 }

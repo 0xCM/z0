@@ -14,20 +14,20 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, HostedBits.Empty, 0, AsmInstructionList.Empty);
+        public static AsmFunction Empty => new AsmFunction(OpUri.Empty, string.Empty, UriCode.Empty, 0, AsmInstructionList.Empty);
 
         public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList inxs)
         {         
-            var code = HostedBits.Define(encoding.Uri, encoding.Encoded);  
+            var code = UriCode.Define(encoding.Uri, encoding.Encoded);  
             var sig = encoding.Method.Signature().Format();          
             return new AsmFunction(encoding.Uri, sig, code, encoding.TermCode, inxs);
         }
 
         [MethodImpl(Inline)]
-        public static AsmFunction Define(OpUri uri, string sig, HostedBits code, ExtractTermCode term, AsmInstructionList inxs)
+        public static AsmFunction Define(OpUri uri, string sig, UriCode code, ExtractTermCode term, AsmInstructionList inxs)
             => new AsmFunction(uri,sig,code,term,inxs);
 
-        AsmFunction(OpUri uri, string sig, HostedBits code, ExtractTermCode term, AsmInstructionList instructions)
+        AsmFunction(OpUri uri, string sig, UriCode code, ExtractTermCode term, AsmInstructionList instructions)
         {
             this.Uri = uri;
             this.OpId = uri.OpId;
@@ -55,7 +55,7 @@ namespace Z0.Asm
         /// <summary>
         /// The function encoding
         /// </summary>
-        public HostedBits Code {get;}
+        public UriCode Code {get;}
 
         /// <summary>
         /// The encoded instructions

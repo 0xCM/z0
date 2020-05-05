@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
 
     public readonly struct UriCodeWriter : IUriCodeWriter
-    {
+    {        
         /// <summary>
         /// The writer's target path
         /// </summary>
@@ -21,10 +21,10 @@ namespace Z0
         readonly StreamWriter StreamOut;
 
         [MethodImpl(Inline)]
-        internal UriCodeWriter(FilePath dst)
+        internal UriCodeWriter(FilePath path)
         {
-            this.TargetPath = dst;
-            this.StreamOut = new StreamWriter(dst.CreateParentIfMissing().FullPath,false);
+            this.TargetPath = path;
+            this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
         [MethodImpl(Inline)]
@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Write(UriCode src)
-            => StreamOut.WriteLine(src.Format(0));
+            => Write(src,0);
 
         public void Write(UriCode[] src)
         {
@@ -42,11 +42,10 @@ namespace Z0
                 Write(src[i], idpad);                        
             StreamOut.Flush();
         }
-
         public void Dispose()
         {
             StreamOut.Flush();
             StreamOut.Dispose();
-        }        
+        }
     }
 }

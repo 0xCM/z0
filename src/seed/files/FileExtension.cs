@@ -14,16 +14,38 @@ namespace Z0
     /// </summary>
     public class FileExtension : PathComponent<FileExtension>
     {
+        /// <summary>
+        /// Describes the sort of file identified by the extension
+        /// </summary>
+        public string Description {get;}
+        
+        public string SearchPattern => IsEmpty ? "*.*" : $"*{Name}";
+        
         [MethodImpl(Inline)]
         public static FileExtension Define(string name)
             => new FileExtension(name);
 
-        public FileExtension(){}
+        [MethodImpl(Inline)]
+        public static FileExtension Define(string name, string description)
+            => new FileExtension(name, description);
 
+        public FileExtension()
+        {
+            Description = string.Empty;
+        }
+
+        [MethodImpl(Inline)]
         public FileExtension(string name)
             : base(name)
         {
+            Description = string.Empty;
+        }
 
+        [MethodImpl(Inline)]
+        public FileExtension(string name, string description)
+            : base(name)
+        {
+            Description = description;
         }
     }
 }

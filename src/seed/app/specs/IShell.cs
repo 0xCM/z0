@@ -15,17 +15,20 @@ namespace Z0
     /// </summary>
     public interface IShell : IExecutable, IServiceAllocation, ITextual
     {        
-        void OnFatalError(Exception e);
-
-        FolderPath AppLogDir => Env.Current.LogDir + FolderName.Define("apps");
-
-        FilePath AppLogPath {get;}
-
         PartId AppId {get;}
+
+        void OnFatalError(Exception e);
 
         void RunShell(params string[] args);
 
-        string ITextual.Format() => AppId.Format();
+        FolderPath AppLogDir 
+            => Env.Current.LogDir + FolderName.Define("apps");
+
+        FilePath AppLogPath 
+            => AppLogDir + FileName.Define(AppId.Format(), FileExtensions.Log);
+
+        string ITextual.Format() 
+            => AppId.Format();
 
         void Print(object content, AppMsgColor? color = null)
         {
@@ -54,7 +57,6 @@ namespace Z0
     {
         PartId IShell.AppId => typeof(S).Assembly.Id();
 
-        FilePath IShell.AppLogPath => AppLogDir + FileName.Define(AppId.Format(), FileExtensions.Log);
     }
 
     /// <summary>

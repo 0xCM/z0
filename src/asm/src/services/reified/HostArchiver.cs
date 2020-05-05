@@ -46,7 +46,7 @@ namespace Z0.Asm
             {
                 var idpad = src.Select(f => f.OpId.IdentityText.Length).Max() + 1;
                 var dst = HostArchive.HexPath;
-                using var writer = Archives.Services.UriBitsWriter(dst);
+                using var writer = Archives.Services.UriHexWriter(dst);
                 for(var i=0; i<src.Length; i++)
                 {
                     ref readonly var f = ref src[i];
@@ -84,7 +84,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<FilePath> SaveImmInjectedAsm(OpIdentity id, AsmFunction[] src, bool append)
+        public Option<FilePath> SaveAsmImm(OpIdentity id, AsmFunction[] src, bool append)
         {
             var idpad = src.Select(f => f.OpId.IdentityText.Length).Max() + 1;
             var dst = HostArchive.AsmImmPath(Host.Owner, Host, id);
@@ -98,7 +98,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<FilePath> SaveImmInjectedHex(OpIdentity id, AsmFunction[] src, bool append)
+        public Option<FilePath> SaveHexImm(OpIdentity id, AsmFunction[] src, bool append)
         {
             var idpad = src.Select(f => f.OpId.IdentityText.Length).Max() + 1;
             var dst = HostArchive.HexImmPath(Host.Owner, Host, id);

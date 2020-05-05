@@ -2,16 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    
-    using static Seed;
-    using static Memories;
+    using System.Runtime.CompilerServices;
 
-    public interface IUriBitsDecoder : IService
+    using static Seed;
+
+    public interface IMachineEvent<F> : IAppEvent<F>
+        where F : struct, IMachineEvent<F>
     {
-        IEnumerable<AsmInstructions> Decode(IEnumerable<UriBits> bits);
+        AppMsgColor IAppEvent.Flair => AppMsgColor.Magenta;
     }
 }

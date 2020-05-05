@@ -26,20 +26,20 @@ namespace Z0
         
         public ApiCodeIndex CreateIndex(ApiHostUri uri, FilePath src)
         {
-            var code = UriBitsReader.Service.Read(src).ToArray();
+            var code = UriHexReader.Service.Read(src).ToArray();
             var host = ApiSet.FindHost(uri).Require();
             var members = Locator.Hosted(host);
-            var codeIndex =  UriBitsQuery.Service.CreateIndex(code);
+            var codeIndex =  UriHexQuery.Service.CreateIndex(code);
             var memberIndex = ApiIndex.Create(members);
             return CreateIndex(memberIndex, codeIndex);
         }
 
-        public ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<UriBits> code)
+        public ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<UriHex> code)
         {
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
-                          select MemberCode.Define(r.left, r.right);                                      
+                          select ApiMemberCode.Define(r.left, r.right);                                      
             return ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
         }
     }

@@ -13,8 +13,10 @@ namespace Z0
     using static Seed;
     using static HexSpecs;
 
-    public readonly struct HexByteParser : IParser<byte>
+    public readonly struct HexByteParser : IDataParser<byte>
     {    
+        public static HexByteParser Service => default(HexByteParser);
+        
         public ParseResult<byte> Parse(string src) 
         {
             try
@@ -35,12 +37,25 @@ namespace Z0
             => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
 
         /// <summary>
-        /// Parses a delimited sequence of hex bytes
+        /// Parses a space-delimited sequence of hex text
         /// </summary>
-        /// <param name="src">The delimited hex</param>
-        /// <param name="sep">The delimiter</param>
-        public IEnumerable<byte> ParseBytes(string src, char sep = Chars.Comma)
-            => src.Split(sep).Select(ParseByte); 
+        /// <param name="src">The space-delimited hex</param>
+        public ParseResult<byte[]> ParseData(string src)
+        {
+            try
+            {
+                return ParseResult.Success(src, 
+                    src.SplitClean(Chars.Space)
+                       .Select(x => byte.Parse(x, NumberStyles.HexNumber)));
+            }
+            catch(Exception e)
+            {
+                return ParseResult.Fail<byte[]>(src,e);
+            }
+        }
+
+        public byte[] ParseData(string text, byte[] @default)
+            => ParseData(text).ValueOrDefault(@default);
 
         /// <summary>
         /// Parses the Hex digit if possible; otherwise raises an error

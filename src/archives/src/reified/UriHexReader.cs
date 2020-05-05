@@ -12,9 +12,9 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public readonly struct UriBitsReader : IUriBitsReader
+    public readonly struct UriHexReader : IUriHexReader
     {
-        public static IUriBitsReader Service => default(UriBitsReader);
+        public static IUriHexReader Service => default(UriHexReader);
         
         /// <summary>
         /// Parses a row of identified hex text
@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="formatted">The formatted text</param>
         /// <param name="idsep">A character that partitions the identifier and the code</param>
         /// <param name="bytesep">A character that partitions the code bytes</param>
-        Option<UriBits> Parse(string formatted)
+        Option<UriHex> Parse(string formatted)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Z0
                 var uritext = formatted.TakeBefore(Chars.Space).Trim();
                 var uri = OpUri.Parse(uritext);
                 var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexSpecs.DataDelimiter).Select(parser.ParseByte).ToArray();
-                return UriBits.Define(uri, bytes);                
+                return UriHex.Define(uri, bytes);                
             }
             catch(Exception e)
             {
@@ -39,7 +39,7 @@ namespace Z0
             }
         }
 
-        public IEnumerable<UriBits> Read(FilePath src)
+        public IEnumerable<UriHex> Read(FilePath src)
             => from line in src.ReadLines().Select(Parse)
                 where line.IsSome()
                 select line.Value;

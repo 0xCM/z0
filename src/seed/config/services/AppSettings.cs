@@ -24,7 +24,7 @@ namespace Z0
         {
             var settings = new Dictionary<string,string>();
             var ignore = new char[]{Chars.Quote, Chars.Comma};
-            if(src.Exists())
+            if(src.Exists)
             {
                 var lines = src.ReadLines().Select(l => l.Trim().RemoveAny(ignore));
                 foreach(var line in lines)

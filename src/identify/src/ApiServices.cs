@@ -6,12 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-   
-    using static Seed;
-    using static Memories;
 
-    public interface IExtractReportParser
+    using static Seed;
+
+    public readonly struct ApiServices
     {
-        MemberParseReport Parse(ApiHostUri host, ExtractReport report);
+        public static IParseReportParser ParseReportParser 
+            => new ParseReportParser();
+
+        public static IApiReflected ApiReflected 
+            => new ApiReflected();
+
+        public static IUriHexQuery UriHexQuery 
+            => new UriHexQuery();       
     }
 }

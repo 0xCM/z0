@@ -50,16 +50,16 @@ namespace Z0.Asm
         {            
             var paths = Paths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCapturePath);
-            var bits = AsmCheck.UriBitsArchive(capture.HexDir);
+            var bits = AsmCheck.UriBitsArchive(capture.CodeDir);
             var data = bits.Read(PartId.GVec);
             check_asm_pipe(data);
         }
 
         MemoryAddress FakeBase;
 
-        void check_asm_pipe(IEnumerable<UriBits> src)
+        void check_asm_pipe(IEnumerable<UriHex> src)
         {
-            var decoder = UriBitsDecoder.Service;
+            var decoder = UriHexDecoder.Service;
             var t1 = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnVinserti128);
             var t2 = AsmMnemonicTrigger.Define(Mnemonic.Vmovupd, OnVmovupd);
             var t3 = AsmCallTrigger.Define(OnCall);
@@ -77,7 +77,7 @@ namespace Z0.Asm
             }
         }
 
-        void check_unary_ops(UriBits[] src)
+        void check_unary_ops(UriHex[] src)
         {
             var query = AsmCheck.UriBitQuery;
             foreach(var code in query.WithParameterCount(src, 1))
@@ -101,7 +101,7 @@ namespace Z0.Asm
             var id = PartId.GMath;   
             var paths = Paths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCapturePath);
-            var archive = Archives.Services.UriBitsArchive(capture.HexDir);
+            var archive = Archives.Services.UriBitsArchive(capture.CodeDir);
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
             var builder = Archives.Services.IndexBuilder(Api.ApiSet, Identities.Services.ApiLocator);            

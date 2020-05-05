@@ -29,10 +29,10 @@ namespace Z0.Asm
 
             ICheckEquatable Claim => CheckEquatable.Checker;
 
-            public void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriBits> srcA, FilePath srcB)
+            public void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriHex> srcA, FilePath srcB)
             {                
                 var wfStateless = Capture.Services;
-                var reader = wfStateless.UriBitsReader;
+                var reader = wfStateless.UriHexReader;
                 var fileSrc = reader.Read(srcB).ToArray().ToSpan();                        
 
                 Claim.eq(fileSrc.Length, srcA.Length);            

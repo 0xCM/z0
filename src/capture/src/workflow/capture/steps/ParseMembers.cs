@@ -43,7 +43,7 @@ namespace Z0.Asm
             }
 
             public void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
-                => Context.Raise(HexSaved.Define(host,  ArchiveOps.Service.SaveUriBits(host, src, dst), dst));
+                => Context.Raise(HexSaved.Define(host,  ArchiveOps.Service.SaveUriHex(host, src, dst), dst));
         }
     }
 }

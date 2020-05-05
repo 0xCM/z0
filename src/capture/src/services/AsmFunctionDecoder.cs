@@ -31,13 +31,12 @@ namespace Z0.Asm
                 select Services.FunctionBuilder.BuildFunction(src.Uri, src.Method.Signature().Format(), block);
 
         public Option<AsmFunction> Decode(ParsedMember src)
-            =>  from i in Decode(src.Encoded)
-                select AsmFunction.Define(src,i);
+            =>  from i in Decode(src.Encoded) select AsmFunction.Define(src,i);
 
         public Option<AsmInstructionList> Decode(LocatedCode src)        
             => Decode(src.Encoded, src.Address).TryMap(x => AsmInstructionList.Create(x, src));
 
-        public Option<AsmInstructions> Decode(UriBits src)        
+        public Option<AsmInstructions> Decode(UriHex src)        
             => Decode(src.Encoded, MemoryAddress.Zero);
 
         public Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f)
@@ -96,9 +95,7 @@ namespace Z0.Asm
                 for(var i=0; i<instructions.Length; i++)
                     instructions[i] = decoded[i].ToZAsm(formatted[i]);
                 return AsmInstructions.Create(instructions, code);
-
             }
-
             catch(Exception e)
             {
                 term.error(e);

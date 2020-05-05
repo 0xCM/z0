@@ -13,9 +13,14 @@ namespace Z0
     public partial class Seed : IApiHost<Seed>
     {
         /// <summary>
-        /// Gets the part identifier of the entry assembly
+        /// The part identifier of the entry assembly
         /// </summary>
-        public static PartId ExecutingApp => Assembly.GetEntryAssembly().Id();            
+        public static PartId ExecutingApp => Assembly.GetEntryAssembly().Id();     
+
+        /// <summary>
+        /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
+        /// </summary>
+        public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;
     }
 
     [ApiHost]

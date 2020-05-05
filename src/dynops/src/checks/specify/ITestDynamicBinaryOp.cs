@@ -15,31 +15,31 @@ namespace Z0
     public interface ITestDynamicBinaryOp : ITestOperatorMatch, ICheckDynamic
     {        
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, TypeWidth w, UriBits a, UriBits b, BufferTokens dst)
+        TestCaseRecord Match(K k, TypeWidth w, UriHex a, UriHex b, BufferTokens dst)
             => Test.Check((ITestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W8 w, UriBits a, UriBits b, BufferTokens dst)
+        TestCaseRecord Match(K k, W8 w, UriHex a, UriHex b, BufferTokens dst)
             => Test.Check((ITestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W16 w, UriBits a, UriBits b, BufferTokens dst)
+        TestCaseRecord Match(K k, W16 w, UriHex a, UriHex b, BufferTokens dst)
             => Test.Check((ITestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W32 w, UriBits a, UriBits b, BufferTokens dst)
+        TestCaseRecord Match(K k, W32 w, UriHex a, UriHex b, BufferTokens dst)
             => Test.Check((ITestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W64 w, UriBits a, UriBits b, BufferTokens dst)
+        TestCaseRecord Match(K k, W64 w, UriHex a, UriHex b, BufferTokens dst)
             => Test.Check((ITestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k,  W128 w, UriBits a, UriBits b, BufferTokens dst)
+        TestCaseRecord Match(K k,  W128 w, UriHex a, UriHex b, BufferTokens dst)
             => Test.Check((ITestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W256 w, UriBits a, UriBits b, BufferTokens dst)
+        TestCaseRecord Match(K k, W256 w, UriHex a, UriHex b, BufferTokens dst)
             => Test.Check((ITestFixedBinaryOp)this).Match(k,w,a,b,dst);
     }
 }

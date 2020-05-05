@@ -15,6 +15,6 @@ namespace Z0
     {
         ApiCodeIndex CreateIndex(ApiHostUri uri, FilePath src);
 
-        ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<UriBits> code);
+        ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<UriHex> code);
     }
 }

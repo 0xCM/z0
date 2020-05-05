@@ -10,20 +10,20 @@ namespace Z0
     /// <summary>
     /// Defines service contract to support reading text-formatted encoded x86 asm data
     /// </summary>
-    public interface IHostBitsReader : IService
+    public interface IUriCodeReader : IService
     {
         /// <summary>
         /// Reads the content of a source file
         /// </summary>
         /// <param name="src">The source file path</param>
-        IEnumerable<HostedBits> Read(FilePath src);
+        IEnumerable<UriCode> Read(FilePath src);
     }
 
-    public readonly struct HostBitsReader : IHostBitsReader
+    public readonly struct UriCodeReader : IUriCodeReader
     {
-        public static IHostBitsReader Service => default(HostBitsReader);
+        public static IUriCodeReader Service => default(UriCodeReader);
 
-        public IEnumerable<HostedBits> Read(FilePath src)
+        public IEnumerable<UriCode> Read(FilePath src)
             => throw new NotImplementedException();
     }
 }

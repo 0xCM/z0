@@ -20,6 +20,16 @@ namespace Z0
             => NumericParser.parse<T>(src);
     }
 
+    public readonly struct NumericParserInfallible<T> : IInfallibleParser<T>
+        where T : unmanaged
+    {
+        [MethodImpl(Inline)]
+        public T Parse(string src)
+            => NumericParser.parse<T>(src).ValueOrDefault();
+        
+        public T Zero => default;
+    }
+
     public class ScalarParser
     {
         [MethodImpl(Inline)]
@@ -74,6 +84,15 @@ namespace Z0
         public static NumericParser<T> create<T>()
             where T : unmanaged
                 => default(NumericParser<T>);
+
+        /// <summary>
+        /// Creates an infallible numeric parser
+        /// </summary>
+        /// <typeparam name="T">The numeric type to parse</typeparam>
+        [MethodImpl(Inline)]
+        public static NumericParserInfallible<T> infallible<T>()
+            where T : unmanaged
+                => default(NumericParserInfallible<T>);
 
         [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
         static bit parse<T>(string src, out T dst)

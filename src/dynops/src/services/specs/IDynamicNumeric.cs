@@ -9,13 +9,13 @@ namespace Z0
 
     public interface IDynamicNumeric : IService
     {
-        UnaryOp<T> EmitUnaryOp<T>(IBufferToken dst, UriBits src)
+        UnaryOp<T> EmitUnaryOp<T>(IBufferToken dst, UriHex src)
             where T : unmanaged;
 
-        BinaryOp<T> EmitBinaryOp<T>(IBufferToken dst, UriBits src)
+        BinaryOp<T> EmitBinaryOp<T>(IBufferToken dst, UriHex src)
             where T : unmanaged;            
 
-        TernaryOp<T> EmitTernaryOp<T>(IBufferToken dst, UriBits src)
+        TernaryOp<T> EmitTernaryOp<T>(IBufferToken dst, UriHex src)
             where T : unmanaged;            
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// (LInQ Hijack) Defines an array map synonym invoked in lieu of the system-defined Select operator
+        /// Defines an array-specific select operator
         /// </summary>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
@@ -22,6 +22,10 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         [MethodImpl(Inline)]
         public static T[] Select<S,T>(this S[] src, Func<S,T> f)
-            => Control.map(src,f);        
+            => Control.map(src,f);   
+
+        [MethodImpl(Inline)]
+        public static T[] Skip<T>(this T[] src, int count)
+            => Enumerable.Skip(src, count).ToArray();
     }
 }

@@ -13,7 +13,7 @@ namespace Z0.Asm
     {    
         public override bool Enabled => false;
 
-        bool MemcapCheck(IMemoryCapture memcap, HostedBits src)
+        bool MemcapCheck(IMemoryCapture memcap, UriCode src)
         {
             var captured = memcap.Capture(src.Address);
             if(!captured)
@@ -34,12 +34,12 @@ namespace Z0.Asm
                 Claim.Fail();
         }
 
-        public IEnumerable<HostedBits> ReadHostBits(ApiHostUri host)
+        public IEnumerable<UriCode> ReadHostBits(ApiHostUri host)
         {            
             var paths = Paths.ForApp(PartId.Control);
             var root = paths.AppCapturePath;
             var capture = Archives.Services.CaptureArchive(root);
-            return HostBitsReader.Service.Read(capture.HexPath(host));
+            return UriCodeReader.Service.Read(capture.HexPath(host));
         }
 
         void check_decoder(IEnumerable<ApiHostUri> hosts)

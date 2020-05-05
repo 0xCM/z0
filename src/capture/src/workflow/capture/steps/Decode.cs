@@ -39,7 +39,7 @@ namespace Z0.Asm
 
             public AsmFunction[] DecodeExtracts(params ParsedMember[] src)
             {
-                var dst = new AsmFunction[src.Length];
+                var dst = Control.alloc<AsmFunction>(src.Length);
                 for(var i=0; i<src.Length; i++)
                 {
                     var parsed = src[i];

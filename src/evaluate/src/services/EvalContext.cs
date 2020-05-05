@@ -14,18 +14,18 @@ namespace Z0
     {
         public readonly BufferTokens Buffers;        
 
-        public readonly MemberCode ApiCode;
+        public readonly ApiMemberCode ApiCode;
 
-        public UriBits ApiBits { [MethodImpl(Inline)] get => ApiCode.Encoded;}
+        public UriHex ApiBits { [MethodImpl(Inline)] get => ApiCode.Encoded;}
 
         public ApiMember Member { [MethodImpl(Inline)] get =>  ApiCode.Member;}
 
         [MethodImpl(Inline)]
-        public static EvalContext Define(BufferTokens buffers, MemberCode code)
+        public static EvalContext Define(BufferTokens buffers, ApiMemberCode code)
             => new EvalContext(buffers,code);
 
         [MethodImpl(Inline)]
-        internal EvalContext(BufferTokens buffers, MemberCode code)
+        internal EvalContext(BufferTokens buffers, ApiMemberCode code)
         {
             this.Buffers = buffers;
             this.ApiCode = code;

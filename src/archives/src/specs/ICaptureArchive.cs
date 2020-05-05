@@ -12,12 +12,69 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    using static FileSystem;
-
-    public interface ICaptureArchive : IArchive
+    public interface ICaptureArchive : IArchive, IImmArchive
     {
+        /// <summary>
+        /// Extract log extension
+        /// </summary>
+        FileExtension Extract 
+            => FileExtension.Define("x.csv", "Extract log");
+
+        /// <summary>
+        /// Parse log extension
+        /// </summary>
+        FileExtension Parsed 
+            => FileExtension.Define("p.csv", "Parse log");
+    
+        /// <summary>
+        /// Parse failure log extension
+        /// </summary>
+        FileExtension Unparsed 
+            => FileExtension.Define("u.csv","Parse failure log");
+
+        FolderName ExtractFolder 
+            => FolderName.Define("extracted", "Raw binary extracts");
+    
+        FolderName ParsedFolder 
+            => FolderName.Define("parsed", "Parsed binary extracts");
+
+        FolderName UnparsedFolder
+            => FolderName.Define("unparsed", "Extraction parse failures");
+
+        FolderName LogFolder
+            => FolderName.Define("logs", "Application logs");
+
+
+        FileName CilFileName(OpIdentity id) 
+            => LegalFileName(id, Il);
+
+
+        FileName ParseFileName(ApiHostUri host)
+            => LegalFileName(host, Parsed);
+
+        FolderPath RefDataDir
+            => (ArchiveRoot + DataPartition).Create();
+
+        FolderPath ExtractDir 
+            => (ArchiveRoot + ExtractFolder).Create();
+
+        FolderPath UnparsedDir 
+            => (ArchiveRoot + UnparsedFolder).Create();
+
+        FolderPath ParsedDir 
+            => (ArchiveRoot + ParsedFolder).Create();
+        
+        FolderPath CodeDir 
+            => (ArchiveRoot + CodeFolder).Create();
+    
+        FolderPath AsmDir 
+            => (ArchiveRoot + AsmFolder).Create();
+
+        FolderPath LogDir 
+            => (ArchiveRoot + LogFolder).Create();
+
         ICaptureArchive Narrow(FolderName area, FolderName subject)
-            => new CaptureArchive(RootDir, area, subject);        
+            => new CaptureArchive(ArchiveRoot, area, subject);        
 
         /// <summary>
         /// Obliterates all content in archive-owned directories, returning the obliteration subjects upon completion
@@ -30,7 +87,7 @@ namespace Z0
                 dst.Add(ExtractDir.Clear());
                 dst.Add(ParsedDir.Clear());
                 dst.Add(AsmDir.Clear());
-                dst.Add(HexDir.Clear());
+                dst.Add(CodeDir.Clear());
                 dst.Add(UnparsedDir.Clear());
                 return dst.ToArray();
             }
@@ -39,11 +96,11 @@ namespace Z0
                 for(var i=0; i<parts.Length; i++)
                 {
                     var part = parts[i];
-                    Control.iter(ExtractDir.Files(part, ExtractExt), f => f.Delete());
-                    Control.iter(ParsedDir.Files(part, ParsedExt), f => f.Delete());
-                    Control.iter(AsmDir.Files(part, AsmExt), f => f.Delete());
-                    Control.iter(HexDir.Files(part, HexExt), f => f.Delete());
-                    Control.iter(UnparsedDir.Files(part, UnparsedExt), f => f.Delete());
+                    Control.iter(ExtractDir.Files(part, Extract), f => f.Delete());
+                    Control.iter(ParsedDir.Files(part, Parsed), f => f.Delete());
+                    Control.iter(AsmDir.Files(part, Asm), f => f.Delete());
+                    Control.iter(CodeDir.Files(part, Hex), f => f.Delete());
+                    Control.iter(UnparsedDir.Files(part, Unparsed), f => f.Delete());
                 }
                 return Control.array<FolderPath>();
             }
@@ -51,7 +108,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         IHostCaptureArchive HostArchive(ApiHostUri host)
-            => new HostCaptureArchive(RootDir, host);
+            => new HostCaptureArchive(ArchiveRoot, host);
 
         FolderName AreaName 
             => FolderName.Empty;
@@ -59,139 +116,47 @@ namespace Z0
         FolderName SubjectName 
             => FolderName.Empty;
 
-        FolderName RootFolder 
-            => FolderName.Define("emissions");
+        FilePath HexPath(FileName name)
+            => CodeDir + name;
 
-        FolderName ExtractFolder 
-            => FolderName.Define("extracted");
-
-        FolderName UnparsedFolder
-            => FolderName.Define("unparsed");
-
-        FolderName HexFolder 
-            => FolderName.Define("code");
-
-        FolderName ParsedFolder 
-            => FolderName.Define("parsed");
-
-        FolderName AsmFolder 
-            => FolderName.Define("asm");
-
-        FolderName LogFolder
-            => FolderName.Define("logs");
-
-        FolderName ImmRootFolder 
-            => FolderName.Define("imm");
-
-        FileExtension ExtractExt 
-            => FileExtension.Define($"x.{FileExtensions.Csv}");
-
-        FileExtension ParsedExt 
-            => FileExtension.Define($"p.{FileExtensions.Csv}");
-
-        FileExtension UnparsedExt 
-            => FileExtension.Define($"u.{FileExtensions.Csv}");
-
-        FolderPath DataRoot 
-            => reify(RootDir + RootFolder);
-
-        FolderPath ExtractDir 
-            => reify(RootDir + ExtractFolder);
-
-        FolderPath UnparsedDir 
-            => reify(RootDir + UnparsedFolder);
-
-        FolderPath ParsedDir 
-            => reify(RootDir + ParsedFolder);
-        
-        FolderPath HexDir 
-            => reify(RootDir + HexFolder);
-    
-        FolderPath AsmDir 
-            => reify(RootDir + AsmFolder);
-
-        FolderPath LogDir 
-            => reify(RootDir + LogFolder);
-
-        FolderPath ImmRootDir 
-            => reify(RootDir + ImmRootFolder);
-
-        FolderPath ImmSubDir(FolderName folder) 
-            => reify(ImmRootDir + folder);         
-
-        FolderPath ImmSubDir(RelativeLocation location) 
-            => reify(ImmRootDir +  location);
-
-        FileName HexFileName(OpIdentity id) 
-            => FileName.Define(id, HexExt);
-
-        FileName CilFileName(OpIdentity id) 
-            => FileName.Define(id, CilExt);
-
-        FileName AsmFileName(OpIdentity id) 
-            => FileName.Define(id, AsmExt);
-
-        FileName AsmFileName(ApiHostUri host)
-            => HostFileName(host,AsmExt);
-
-        FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + HexFileName(id);
-
-        FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + AsmFileName(id);
-
-        FilePath HexPath(FileName fn)
-            => HexDir + fn;
-
-        FilePath AsmPath(FileName fn)
-            => AsmDir + fn;
+        FilePath AsmPath(FileName name)
+            => AsmDir + name;
 
         FilePath AsmPath<T>()
-            => AsmPath(FileName.Define(typeof(T).Name, AsmExt));
+            => AsmPath(FileName.Define(typeof(T).Name, Asm));
 
         FilePath HexPath<T>()
-            => HexPath(FileName.Define(typeof(T).Name, HexExt));
+            => HexPath(FileName.Define(typeof(T).Name, Hex));
 
         FilePath HexPath(ApiHostUri host)
-            => HexDir + FileName.Define(host.Name, HexExt);
+            => CodeDir + FileName.Define(host.Name, Hex);
 
         FilePath AsmPath(ApiHostUri host)
-            => AsmDir + FileName.Define(host.Name, AsmExt);
+            => AsmDir + FileName.Define(host.Name, Asm);
 
         FilePath ExtractPath(ApiHostUri host)
-            => ExtractDir + FileName.Define(host.Name, ExtractExt);
+            => ExtractDir + FileName.Define(host.Name, Extract);
 
         FilePath UnparsedPath(ApiHostUri host)
-            => UnparsedDir + FileName.Define($"{host.Owner.Format()}.{host.Name}", UnparsedExt);
+            => UnparsedDir + FileName.Define($"{host.Owner.Format()}.{host.Name}", Unparsed);
 
         FilePath ParsePath(ApiHostUri host)
-            => ParsedDir + FileName.Define(host.Name, ParsedExt);
+            => ParsedDir + FileName.Define(host.Name, Parsed);
 
         FilePath LogPath(ApiHostUri host)
-            => LogDir + FileName.Define(host.Name, LogExt);
+            => LogDir + FileName.Define(host.Name, Log);
 
         IEnumerable<FilePath> AsmFiles 
-            => AsmDir.Files(AsmExt);  
+            => AsmDir.Files(Asm);  
 
         IEnumerable<FilePath> HexFiles 
-            => HexDir.Files(HexExt);     
+            => CodeDir.Files(Hex);     
 
         IEnumerable<FilePath> ExtractFiles 
-            => ExtractDir.Files(ExtractExt);     
+            => ExtractDir.Files(Extract);     
 
         IEnumerable<FilePath> ParseFiles 
-            => ParsedDir.Files(ParsedExt);    
+            => ParsedDir.Files(Parsed);   
 
-        FolderPath ImmAsmDir 
-            => ImmSubDir(AsmFolder);
-
-        FolderPath ImmHexDir 
-            => ImmSubDir(HexFolder);
-
-        IEnumerable<FilePath> ImmAsmFiles 
-            => ImmAsmDir.Files(AsmExt);
-
-        IEnumerable<FilePath> ImmHexFiles 
-            => ImmHexDir.Files(HexExt);
     }
 }

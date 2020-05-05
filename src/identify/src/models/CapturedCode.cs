@@ -17,12 +17,12 @@ namespace Z0
     public readonly struct CapturedCode : 
         IUriCode<CapturedCode, LocatedCode>, 
         ICapturedCode<CapturedCode,LocatedCode>,
-        IMemberCode<CapturedCode,LocatedCode>
+        IReflectedCode<CapturedCode,LocatedCode>
     {        
         public static CapturedCode Empty => default;
 
         public static MemberParseRecord CreateParseRecord(CapturedCode src)
-            => MemberParseRecord.Define
+            => new MemberParseRecord
                 (
                     Sequence: 0,
                     SourceSequence: 0,
@@ -46,7 +46,7 @@ namespace Z0
 
         public OpIdentity Id => Uri.OpId;
         
-        public HostedBits HostedBits  { [MethodImpl(Inline)] get => new HostedBits(Uri, Encoded); }
+        public UriCode HostedBits  { [MethodImpl(Inline)] get => new UriCode(Uri, Encoded); }
 
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
 

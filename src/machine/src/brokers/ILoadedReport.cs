@@ -3,13 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
+    
+    using static MachineEvents;
 
-    public delegate IUriBitsWriter UriBitsWriterFactory(FilePath dst);
+    public interface ILoadedReport : IEventBroker
+    {
+        LoadedReport LoadedReport => LoadedReport.Empty;
 
-    public interface IUriBitsWriter : IFileStreamWriter<UriBits>
-    {        
-        void Write(UriBits src, int uripad);
+        LoadedParseReport LoadedParseReport => LoadedParseReport.Empty;
     }
 }

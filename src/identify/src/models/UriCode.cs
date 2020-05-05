@@ -13,18 +13,18 @@ namespace Z0
     /// <summary>
     /// Specifes a uri-identified located code block, similar to the content of a line in a parsed code report for an api host
     /// </summary>
-    public readonly struct HostedBits : 
-        ILocatedCode<HostedBits,LocatedCode>, 
-        IUriCode<HostedBits,LocatedCode>
+    public readonly struct UriCode : 
+        IMemberCode<UriCode,LocatedCode>, 
+        IUriCode<UriCode,LocatedCode>
     {
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static HostedBits Empty => Define(OpUri.Empty, LocatedCode.Empty);
+        public static UriCode Empty => Define(OpUri.Empty, LocatedCode.Empty);
 
         [MethodImpl(Inline)]
-        public static HostedBits Define(OpUri uri, LocatedCode data)
-            => new HostedBits(uri, data);
+        public static UriCode Define(OpUri uri, LocatedCode data)
+            => new UriCode(uri, data);
 
         /// <summary>
         /// The source member identity
@@ -53,19 +53,19 @@ namespace Z0
         public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment;}
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(HostedBits code)
+        public static implicit operator ReadOnlySpan<byte>(UriCode code)
             => code.Bytes;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(HostedBits src)
+        public static implicit operator BinaryCode(UriCode src)
             => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator UriBits(HostedBits src)
-            => new UriBits(src.Uri, src.Encoded.Encoded);
+        public static implicit operator UriHex(UriCode src)
+            => new UriHex(src.Uri, src.Encoded.Encoded);
 
         [MethodImpl(Inline)]
-        internal HostedBits(OpUri uri, LocatedCode code)
+        public UriCode(OpUri uri, LocatedCode code)
         {
             Uri = uri;
             Encoded = code;
@@ -81,13 +81,13 @@ namespace Z0
         public string Format()
             => Format(80);
 
-        public bool Equals(HostedBits src)
+        public bool Equals(UriCode src)
             => Encoded.Equals(src.Encoded);
 
         public override int GetHashCode()
             => Uri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is HostedBits x && Equals(x);        
+            => src is UriCode x && Equals(x);        
     }
 }

@@ -14,6 +14,20 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
+        /// Sequenteially condenses a sequence of arrays into a single array
+        /// </summary>
+        /// <param name="src">The many</param>
+        /// <typeparam name="T">The array element type</typeparam>
+        public static T[] Join<T>(this T[][] src)
+            => System.Linq.Enumerable.SelectMany(src,x => x).ToArray();
+
+        public static T[] Join<S,T>(this S[][] src, Func<S,T> f)
+            => src.Join().Select(f);
+
+        public static T[] SelectMany<S,T>(this S[][] src, Func<S,T> f)
+            => src.Join().Select(f);
+
+        /// <summary>
         /// Applies a function to an input sequence to yield a transformed output sequence
         /// </summary>
         /// <typeparam name="S">The source type</typeparam>

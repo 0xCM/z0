@@ -10,7 +10,7 @@ namespace Z0
  
     using static Seed;
 
-    public readonly struct ExtractedMember : IMemberCode<ExtractedMember,LocatedCode>
+    public readonly struct ExtractedMember : IReflectedCode<ExtractedMember,LocatedCode>
     {        
         public static ExtractedMember Empty => Define(ApiMember.Empty, LocatedCode.Empty);
 

@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Specifies archive service operations for hosted bits
     /// </summary>
-    public interface IUriBitsArchive : IRootedArchive
+    public interface IUriHexArchive : IRootedArchive
     {
         /// <summary>
         /// Enumerates the archived files
@@ -25,34 +25,34 @@ namespace Z0
         /// <summary>
         /// Reads all files in the archive
         /// </summary>
-        IEnumerable<UriBits> Read();
+        IEnumerable<UriHex> Read();
 
         /// <summary>
         /// Reads the archived files owned by a specified part
         /// </summary>
-        IEnumerable<UriBits> Read(PartId part);
+        IEnumerable<UriHex> Read(PartId part);
 
         /// <summary>
         /// Reads the archived files owned by a specified host
         /// </summary>
-        IEnumerable<UriBits> Read(ApiHostUri host);       
+        IEnumerable<UriHex> Read(ApiHostUri host);       
          
         /// <summary>
         /// Reads all files in the archive that satisfy a supplied predicate
         /// </summary>
-        IEnumerable<UriBits> Read(Func<FileName,bool> predicate);
+        IEnumerable<UriHex> Read(Func<FileName,bool> predicate);
 
         /// <summary>
         /// Reads the bits of an identified operation
         /// </summary>
         /// <param name="id">The source path</param>
-        IEnumerable<UriBits> Read(OpIdentity id); 
+        IEnumerable<UriHex> Read(OpIdentity id); 
 
         /// <summary>
         /// Reads ths bits that live at a specified path
         /// </summary>
         /// <param name="src">The source path</param>
-        IEnumerable<UriBits> Read(FilePath src); 
+        IEnumerable<UriHex> Read(FilePath src); 
 
     }    
 }

@@ -20,20 +20,13 @@ namespace Z0.Asm
         IEncoded<AsmInstructions,BinaryCode>, 
         IEquatable<AsmInstructions>
     {
+        [MethodImpl(Inline)]
+        public static AsmInstructions Create(Instruction[] src, BinaryCode data)
+            => new AsmInstructions(src, data);
+
         readonly Instruction[] Inxs;
         
         public BinaryCode Encoded {get;}
-
-        [MethodImpl(Inline)]
-        public static AsmInstructions Create(Instruction[] src, BinaryCode data)
-            => default;
-
-        [MethodImpl(Inline)]        
-        internal AsmInstructions(Instruction[] src, BinaryCode data)
-        {
-            Inxs = src;
-            Encoded = data;
-        }
 
         public ref readonly Instruction this[int index]  { [MethodImpl(Inline)] get => ref Inxs[index]; }
         
@@ -43,15 +36,21 @@ namespace Z0.Asm
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
 
+        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
+
         public static implicit operator Instruction[](AsmInstructions src)
             => src.Inxs;
 
-        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
+        [MethodImpl(Inline)]        
+        internal AsmInstructions(Instruction[] src, BinaryCode data)
+        {
+            Inxs = src;
+            Encoded = data;
+        }
 
         [MethodImpl(Inline)]
         public bool Equals(AsmInstructions src)
             => Encoded.Equals(src.Encoded);
-
         IEnumerator<Instruction> IEnumerable<Instruction>.GetEnumerator()
             => Inxs.AsEnumerable().GetEnumerator();        
         IEnumerator IEnumerable.GetEnumerator()

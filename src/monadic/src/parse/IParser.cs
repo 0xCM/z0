@@ -14,12 +14,49 @@ namespace Z0
         ParseResult Parse(string text);
     }    
 
+    /// <summary>
+    /// Characterizes a parser that yields values of a parametrically-identified type
+    /// </summary>
+    /// <typeparam name="T">The type of value that the parser can parse</typeparam>
     public interface IParser<T> : IParser
     {
         new ParseResult<T> Parse(string text);
-
+        
+        T Parse(string src, T @default)
+            => Parse(src).ValueOrDefault(@default);
+        
         ParseResult IParser.Parse(string text)
             => Parse(text);
+    }
+
+    public interface IDataParser<T> : IParser<T>
+    {
+        ParseResult<T[]> ParseData(string text);
+
+        T[] ParseData(string text, T[] @default)
+            => ParseData(text).ValueOrDefault(@default);
+    }
+
+    /// <summary>
+    /// Characterizes a non-parametric parser that defines a parametric parse function
+    /// </summary>
+    public interface IParametricParser
+    {
+        /// <summary>
+        /// Attemps to parse the source text as a parametrically-identified target type
+        /// </summary>
+        /// <param name="text">The source text</param>
+        /// <typeparam name="T">The target type</typeparam>
+        ParseResult<T> Parse<T>(string text);
+
+        /// <summary>
+        /// Returns a successfully parsed value, if possible; otherwise returns a caller-supplied default value
+        /// </summary>
+        /// <param name="src">The text to parse</param>
+        /// <param name="@default">The value returned if the parse function fails</param>
+        /// <typeparam name="T">The target type</typeparam>
+        T Parse<T>(string src, T @default)
+            => Parse<T>(src).ValueOrDefault(@default);
     }
 
     /// <summary>
@@ -27,7 +64,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The parsed type</typeparam>
     /// <remarks>For this scheme to work, it is incumbent upon the reifying type to return a monoidal zero if malformed text is encountered</remarks>
-    public interface ISuccessfulParser<T> : IParser<T>, INullary<T>        
+    public interface IInfallibleParser<T> : IParser<T>, INullary<T>        
     {
         new T Parse(string text);
 

@@ -69,9 +69,17 @@ namespace Z0
             get => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
         }
 
+        public OpUri Loc => WithScheme(OpUriScheme.Located);
+
+        public OpUri Hex => WithScheme(OpUriScheme.Hex);
+
         [MethodImpl(Inline)]
         public static ParseResult<OpUri> Parse(string text)
             => OpUriParser.The.Parse(text);            
+
+        [MethodImpl(Inline)]
+        public static OpUri ParseDefault(string text, OpUri failed = default)
+            => OpUriParser.The.Parse(text).ValueOrDefault(failed);            
 
         OpUri INullary<OpUri>.Zero => Empty;
             
@@ -130,6 +138,7 @@ namespace Z0
         public OpUri WithScheme(OpUriScheme scheme)
             => Define(scheme, HostPath, GroupName, OpId);
             
+
         [MethodImpl(Inline)]
         public int CompareTo(OpUri other)
             => compare(this, other);

@@ -25,8 +25,8 @@ namespace Z0.Asm
         IAsmFormatter Formatter 
             => Context.Formatter;
 
-        IUriBitsQuery UriBitQuery 
-            => Z0.UriBitsQuery.Service;
+        IUriHexQuery UriBitQuery 
+            => Z0.UriHexQuery.Service;
 
         IArchives Archives 
             => Z0.Archives.Services;
@@ -56,7 +56,7 @@ namespace Z0.Asm
             => CaptureArchive(part).HexPath<T>();
 
         [MethodImpl(Inline)]
-        IUriBitsArchive UriBitsArchive(FolderPath root)
+        IUriHexArchive UriBitsArchive(FolderPath root)
             => Archives.UriBitsArchive(root);
 
         void WriteAsm(CapturedCode capture, StreamWriter dst)

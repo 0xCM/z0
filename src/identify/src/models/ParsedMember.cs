@@ -13,7 +13,7 @@ namespace Z0
     using static Memories;
 
     public readonly struct ParsedMember : 
-        IMemberCode<ParsedMember,LocatedCode>, 
+        IReflectedCode<ParsedMember,LocatedCode>, 
         IUriCode<ParsedMember,LocatedCode>
     {
         /// <summary>

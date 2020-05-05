@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public interface IMachine : IServiceAllocation<IMachineContext>
+    public interface IMachine : IServiceAllocation<IMachineContext>, IMachineClient<IMachineBroker>
     {
         void Run();
     }

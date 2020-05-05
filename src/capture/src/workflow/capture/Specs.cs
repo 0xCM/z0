@@ -164,7 +164,7 @@ namespace Z0.Asm
 
     public interface IEmissionMatchStep : ICaptureStep
     {
-        void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriBits> srcA, FilePath srcB);
+        void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriHex> srcA, FilePath srcB);
     }
 
     public interface IManageCaptureStep : ICaptureStep

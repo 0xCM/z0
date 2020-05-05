@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Seed;
 
@@ -13,28 +14,28 @@ namespace Z0
     using R = MemberParseRecord;
     using Report = MemberParseReport;
 
-    public enum MemberParseField : ulong
-    {
-        Seq = 0 | 12ul << 32,
-
-        SourceSeq = 1 | 12ul << 32,
-
-        Address = 2 | 16ul << 32,
-
-        Length = 3 | 8ul << 32,
-
-        TermCode = 4 | 20ul << 32,
-
-        Uri = 5 | 110ul << 32,
-
-        OpSig = 6 | 110ul << 32,
-
-        Data = 6 | 1ul << 32
-    }    
-
-
     public class MemberParseReport : Report<Report,F,R>
     {             
+        /// <summary>
+        /// Loads a saved report
+        /// </summary>
+        /// <param name="src">The report path</param>
+        public static ParseResult<MemberParseReport> Load(FilePath src)
+        {
+            var attempts = src.ReadLines().Skip(1).Select(MemberParseRecord.Parse);
+            var failed = attempts.Where(r => !r.Succeeded);
+            var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
+            if(failed.Length != 0 && success.Length == 0)
+                return ParseResult.Fail<MemberParseReport>(src.Name, failed[0].Reason);            
+
+            if(failed.Length != 0)
+                term.warn($"Not all records from {src} parsed successfully");
+
+            var host = success[0].Uri.HostPath;
+            var report = MemberParseReport.Create(host,success);
+            return ParseResult.Success(src.Name, report);
+        }
+        
         public ApiHostUri ApiHost {get;}
 
         [MethodImpl(Inline)]

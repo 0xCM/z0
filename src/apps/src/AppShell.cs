@@ -31,7 +31,15 @@ namespace Z0
                     
         protected override void OnDispose()
         {
-            Messaging.Emit(Shelled.AppLogPath);
+            try
+            {
+                Messaging.Emit(Shelled.AppLogPath);
+            }
+            catch(Exception e)
+            {
+                term.red($"Error occurred during application log emission to {Shelled.AppLogPath}");
+                OnFatalError(e);
+            }
         }        
     }
 }

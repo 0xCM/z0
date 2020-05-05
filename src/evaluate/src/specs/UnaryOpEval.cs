@@ -27,7 +27,7 @@ namespace Z0
         
         public ApiMember Member => Context.Member;
 
-        public UriBits ApiBits => Context.ApiBits;
+        public UriHex ApiBits => Context.ApiBits;
 
         [MethodImpl(Inline)]
         internal UnaryOpEval(in EvalContext context, in UnaryEval<T> content)

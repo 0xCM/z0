@@ -12,42 +12,41 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct UriBitsQuery : IUriBitsQuery
+    public readonly struct UriHexQuery : IUriHexQuery
     {
-        public static IUriBitsQuery Service => default(UriBitsQuery);
+        public static IUriHexQuery Service => default(UriHexQuery);
     }
 
-    public interface IUriBitsQuery
+    public interface IUriHexQuery
     {
         /// <summary>
         /// Creates an operation index from a uri bitstream
         /// </summary>
         /// <param name="src">The source bits</param>
-        OpIndex<UriBits> CreateIndex(IEnumerable<UriBits> src)
+        OpIndex<UriHex> CreateIndex(IEnumerable<UriHex> src)
             => Identify.index(src.Select(x => (x.Uri.OpId, x)));
         
-        bool AcceptsParameter(UriBits src, NumericKind kind)
+        bool AcceptsParameter(UriHex src, NumericKind kind)
             => Identify.numeric(src.Id.TextComponents.Skip(1)).Contains(kind);
 
-        IEnumerable<UriBits> AcceptsParameters(IEnumerable<UriBits> src, NumericKind k1, NumericKind k2)
+        IEnumerable<UriHex> AcceptsParameters(IEnumerable<UriHex> src, NumericKind k1, NumericKind k2)
             => from code in src
                 let kinds = Identify.numeric(code.Uri.OpId.TextComponents.Skip(1))
                 where kinds.Contains(k1) && kinds.Contains(k2)
                 select code;
 
-        IEnumerable<UriBits> AcceptsParameter(IEnumerable<UriBits> src, NumericKind kind)
+        IEnumerable<UriHex> AcceptsParameter(IEnumerable<UriHex> src, NumericKind kind)
             => from code in src
                 where AcceptsParameter(code, kind)
                 select code;
 
         [MethodImpl(Inline)]
-        int ParameterCount(UriBits src)
+        int ParameterCount(UriHex src)
             => src.Uri.OpId.TextComponents.Count() - 1;
                     
-        IEnumerable<UriBits> WithParameterCount(IEnumerable<UriBits> src, int count)
+        IEnumerable<UriHex> WithParameterCount(IEnumerable<UriHex> src, int count)
             => from code in src
                 where ParameterCount(code) == count
                 select code;        
-
     }
 }

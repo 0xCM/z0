@@ -41,10 +41,10 @@ namespace Z0.Asm
 
         protected BufferSeqId Right => BufferSeqId.Right;
 
-        protected IHostBitsWriter HexWriter([Caller] string caller = null)
+        protected IUriCodeWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define(caller, FileExtensions.Hex));
-            return Archives.Services.BitArchiveWriter(dstPath);
+            return Archives.Services.UriCodeWriter(dstPath);
         }
 
         protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)

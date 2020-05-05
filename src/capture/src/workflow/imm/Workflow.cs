@@ -130,9 +130,9 @@ namespace Z0.Asm
                             var functions = ImmSpecializer.UnaryOps(exchange, member.Method, member.Id, imm8);
                             if(functions.Length != 0)
                             {
-                                dst.SaveImmInjectedHex(gid, functions, Append)
+                                dst.SaveHexImm(gid, functions, Append)
                                     .OnSome(path => Broker.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
-                                dst.SaveImmInjectedAsm(gid, functions, Append)
+                                dst.SaveAsmImm(gid, functions, Append)
                                     .OnSome(path => Broker.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
                             }
                         }
@@ -146,9 +146,9 @@ namespace Z0.Asm
                             var functions = ImmSpecializer.BinaryOps(exchange, member.Method, member.Id, imm8);
                             if(functions.Length != 0)
                             {
-                                dst.SaveImmInjectedHex(gid, functions, Append)
+                                dst.SaveHexImm(gid, functions, Append)
                                     .OnSome(path => Broker.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
-                                dst.SaveImmInjectedAsm(gid, functions, Append)
+                                dst.SaveAsmImm(gid, functions, Append)
                                     .OnSome(path => Broker.Raise(EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
                             }
                         }
@@ -160,7 +160,7 @@ namespace Z0.Asm
         IEnumerable<IApiHost> ApiHosts => ApiSet.Hosts;
 
         IHostArchiver Archive(IApiHost host)
-            => AsmCore.Services.HostArchiver(host.UriPath, Formatter, CodeArchive.RootDir);
+            => AsmCore.Services.HostArchiver(host.UriPath, Formatter, CodeArchive.ArchiveRoot);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8Value[] imm8)
         {
@@ -253,8 +253,8 @@ namespace Z0.Asm
                 var functions = ImmSpecializer.UnaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveImmInjectedHex(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Literal(host, generic, path));
-                    dst.SaveImmInjectedAsm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Literal(host, generic, path));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Literal(host, generic, path));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Literal(host, generic, path));
                 }
             }
         }
@@ -268,8 +268,8 @@ namespace Z0.Asm
                 var functions = ImmSpecializer.BinaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveImmInjectedHex(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Literal(host, generic, path));
-                    dst.SaveImmInjectedAsm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Literal(host, generic, path));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Literal(host, generic, path));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Literal(host, generic, path));
                 }
             }
         }
@@ -284,8 +284,8 @@ namespace Z0.Asm
                 var functions = ImmSpecializer.UnaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveImmInjectedHex(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Create(host, generic, path, refinement));
-                    dst.SaveImmInjectedAsm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Create(host, generic, path, refinement));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Create(host, generic, path, refinement));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Create(host, generic, path, refinement));
                 }
             }
         }
@@ -300,8 +300,8 @@ namespace Z0.Asm
                 var functions = ImmSpecializer.BinaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveImmInjectedHex(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Create(host, generic, path, refinement));
-                    dst.SaveImmInjectedAsm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Create(host, generic, path, refinement));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Create(host, generic, path, refinement));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => EmittedEmbeddedImm.Create(host, generic, path, refinement));
                 }
             }
         }
