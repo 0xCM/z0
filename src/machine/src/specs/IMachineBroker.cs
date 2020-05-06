@@ -12,14 +12,6 @@ namespace Z0
 
     public interface IMachineBroker : IEventBroker
     {
-        AppErrorEvent Error => AppErrorEvent.Empty;   
 
-        LoadedReport LoadedReport => LoadedReport.Empty;
-
-        LoadedParseReport LoadedParseReport => LoadedParseReport.Empty;
-
-        IndexedCode IndexedCode => IndexedCode.Empty;
-
-        DecodedEncoded DecodedEncoded => DecodedEncoded.Empty;
     }
 }

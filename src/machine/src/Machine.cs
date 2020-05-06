@@ -36,8 +36,9 @@ namespace Z0
             Sink = context.AppMsgSink;
             Context = context;
             Broker = MachineBroker.New;
-            Files = new MachineFiles(context);
-            (this as IMachineClient).Connect();            
+            Files = new MachineFiles(context);            
+            (this as IMachineEvents).Connect();                        
+            
         }
 
         public void Run()
@@ -66,33 +67,51 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            var decoded = Decode(e.Index);            
+            Decode(e.Index);            
+        }
 
-            Broker.Raise(DecodedEncoded.Create(e.Index, decoded));
+        void Decode(UriCodeIndex src)
+        {
+            var dst = list<HostCodeInstructions>();
+            foreach(var host in src.Hosts)
+            {
+                var code = src[host];
+                var decoded = Decode(host,code);
+                dst.Add(decoded);
+                Broker.Raise(DecodedHost.Create(decoded));
+            }
+
+            var result = dst.ToArray();
+            Broker.Raise(DecodedIndex.Create(src, result));
 
         }
 
-        UriCodeInstructions Decode(UriCodeIndex src)
-        {            
-            var inxs = list<UriCodeInstruction>();            
-            Control.iter(src.IndexedCode, code => Decode(code, inxs));                        
-            return inxs;            
-        }
-
-        public void OnEvent(DecodedEncoded e)
+        public void OnEvent(DecodedIndex e)
         {
             Sink.Deposit(e);
-
         }
 
-        void Decode(UriCode src, IList<UriCodeInstruction> dst)
+        public void OnEvent(DecodedHost e)
+        {
+            Sink.Deposit(e);
+        }
+
+        HostCodeInstructions Decode(ApiHostUri host, UriCode[] src)
+        {
+            var inxs = list<UriCodeInstructions>();            
+            Control.iter(src, code => inxs.Add(Decode(code)));
+            return HostCodeInstructions.Create(host, inxs.ToArray());
+        }
+
+        UriCodeInstructions Decode(UriCode src)
         {
             var seq = 0;
-
+            var dst =  list<UriCodeInstruction>();
             void OnDecoded(Instruction inxs)
                 => dst.Add((src, (seq++, inxs)));
             
             Decoder.Decode(src.Encoded, OnDecoded);
+            return UriCodeInstructions.Create(src, dst.ToArray());
         }
 
         void Index(MemberParseReport report)

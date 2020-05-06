@@ -6,24 +6,25 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using Z0.Asm;
 
     using static Seed;
-    using E = MachineEvents.DecodedEncoded;
+    using E = MachineEvents.DecodedIndex;
 
     public partial class MachineEvents
     {
-        public readonly struct DecodedEncoded : IMachineEvent<E>
+        public readonly struct DecodedIndex : IMachineEvent<E>
         {
-            public static E Empty => new E(UriCodeIndex.Empty, UriCodeInstructions.Empty);
+            public static E Empty => new E(UriCodeIndex.Empty, Control.array<HostCodeInstructions>());
 
             [MethodImpl(Inline)]
-            public static DecodedEncoded Create(UriCodeIndex index, UriCodeInstructions inxs)
-                => new DecodedEncoded(index, inxs);            
+            public static DecodedIndex Create(UriCodeIndex index, HostCodeInstructions[] inxs)
+                => new DecodedIndex(index, inxs);            
 
             [MethodImpl(Inline)]
-            public DecodedEncoded(UriCodeIndex index, UriCodeInstructions inxs)
+            public DecodedIndex(UriCodeIndex index, HostCodeInstructions[] inxs)
             {
                 Index = index;
                 Instructions = inxs;
@@ -31,14 +32,16 @@ namespace Z0
             
             public UriCodeIndex Index {get;}
 
-            public UriCodeInstructions Instructions {get;}
+            public HostCodeInstructions[] Instructions {get;}
 
             public AppMsgColor Flair => AppMsgColor.Cyan;
+            
+            public int TotalCount => Instructions.Sum(x => x.TotalCount);
             
             public E Zero => Empty; 
             
             public string Description
-                => $"{Instructions.Length} instructions decoded from {Index.EntryCount} functions";
+                => $"{TotalCount} instructions decoded from {Index.EntryCount} functions provided by {Index.Hosts.Length} hosts across {Index.Parts.Length} parts";
         }        
     }
 }

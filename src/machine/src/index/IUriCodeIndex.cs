@@ -10,18 +10,26 @@ namespace Z0
     {
         int EntryCount {get;}
 
-        MemoryAddress[] IndexedMemory  {get;}
+        MemoryAddress[] Addresses  {get;}
 
-        UriCode[] IndexedCode {get;}
+        UriCode[] Code {get;}
 
-        OpUri[] IncludedOps {get;}
+        ApiHostUri[] Hosts {get;}
+
+        OpUri[] Operations {get;}
+
+        PartId[] Parts {get;}
 
         UriCode CodeAt(MemoryAddress src);
 
         UriCode[] CodeFor(OpUri uri);
 
+        UriCode[] CodeFor(ApiHostUri uri);
+
         UriCode this[MemoryAddress address] {get;}
 
-        UriCode[] this[OpUri uri] {get;}        
+        UriCode[] this[OpUri uri] {get;}  
+
+        UriCode[] this[ApiHostUri uri] {get;}
     }
 }

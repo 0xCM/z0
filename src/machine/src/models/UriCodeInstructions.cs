@@ -13,41 +13,27 @@ namespace Z0.Asm
     using static Seed;
 
     /// <summary>
-    /// Defines an *unbased* sequence of instructions
+    /// Parirs a uri code block with instructions decoded from the block
     /// </summary>         
-    public readonly struct UriCodeInstructions : IIndex<UriCodeInstruction> 
+    public readonly struct UriCodeInstructions 
     {
-        public static UriCodeInstructions Empty => Create(Control.array<UriCodeInstruction>());
-        
-        readonly UriCodeInstruction[] Inxs;
+        public static UriCodeInstructions Empty => Create(UriCode.Empty, Control.array<UriCodeInstruction>());
+
+        public UriCode Code {get;}
+
+        public UriCodeInstruction[] Instructions {get;}
 
         [MethodImpl(Inline)]
-        public static UriCodeInstructions Create(UriCodeInstruction[] src)
-            => new UriCodeInstructions(src);
+        public static UriCodeInstructions Create(UriCode code, UriCodeInstruction[] src)
+            => new UriCodeInstructions(code,src);
         
-        public ref UriCodeInstruction this[int index]  { [MethodImpl(Inline)] get => ref Inxs[index]; }
-        
-        public int Length { [MethodImpl(Inline)] get => Inxs.Length; }
-
-        public bool IsEmpty { [MethodImpl(Inline)] get => Length == 0; }
-
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Length != 0; }
-
-        public static implicit operator UriCodeInstruction[](UriCodeInstructions src)
-            => src.Inxs;
+        public int TotalCount { [MethodImpl(Inline)] get => Instructions.Length; }
 
         [MethodImpl(Inline)]        
-        public static implicit operator UriCodeInstructions (UriCodeInstruction[] src)
-            => new UriCodeInstructions(src);
-
-        [MethodImpl(Inline)]        
-        public static implicit operator UriCodeInstructions (List<UriCodeInstruction> src)
-            => new UriCodeInstructions(src.ToArray());
-
-        [MethodImpl(Inline)]        
-        public UriCodeInstructions(UriCodeInstruction[] src)
+        public UriCodeInstructions(UriCode code, UriCodeInstruction[] inxs)
         {
-            Inxs = src;
+            Code = code;
+            Instructions = inxs;
         }
     }
 }
