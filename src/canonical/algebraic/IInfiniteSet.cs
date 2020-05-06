@@ -10,10 +10,10 @@ namespace Z0
     /// Characterizes a type that represents an infinite number of values
     /// </summary>
     /// <typeparam name="T">The member type</typeparam>
-    public interface IInfiniteSet<S> : IFormalSet
+    public interface IInfiniteSet<S> : ISetAspect
         where S : IInfiniteSet<S>, new()
     {
-        bool IFormalSet.IsFinite => false;
+        bool ISetAspect.IsFinite => false;
     }
 
     /// <summary>

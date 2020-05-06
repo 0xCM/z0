@@ -24,6 +24,9 @@ namespace Z0
         void OnEvent(IndexedCode e) 
             => Sink.Deposit(e);
 
+        void OnEvent(DecodedEncoded e) 
+            => Sink.Deposit(e);
+
         void Connect();
     }
 
@@ -36,6 +39,7 @@ namespace Z0
             Broker.LoadedReport.Subscribe(Broker,OnEvent);
             Broker.LoadedParseReport.Subscribe(Broker,OnEvent);
             Broker.IndexedCode.Subscribe(Broker,OnEvent);
+            Broker.DecodedEncoded.Subscribe(Broker,OnEvent);
         }        
     }
 }

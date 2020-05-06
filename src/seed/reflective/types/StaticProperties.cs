@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="this">The type to examine</param>
         /// <param name="get">Specifies whether to require selected properties to provide get accessors</param>
         public static PropertyInfo[] StaticProperties(this Type src, bool get)
-            => get ? src.StaticProperties().Where(p => p.HasGetter()) : src.StaticProperties();
+            => get ? src.StaticProperties().Where(p => p.HasPublicGetter()) : src.StaticProperties();
 
         /// <summary>
         /// Gets the static properties defined on a specified type that provided get/set accessors/manipulators 
@@ -38,11 +38,11 @@ namespace Z0
         public static PropertyInfo[] StaticProperties(this Type src, bool get, bool set)
         {
             if(get && set)
-                return src.StaticProperties().Where(p => p.HasGetter() && p.HasSetter());
+                return src.StaticProperties().Where(p => p.HasPublicGetter() && p.HasPublicSetter());
             else if(get && !set)
-                return src.StaticProperties().Where(p => p.HasGetter() && !p.HasSetter());
+                return src.StaticProperties().Where(p => p.HasPublicGetter() && !p.HasPublicSetter());
             else if(!get && set)
-                return src.StaticProperties().Where(p => !p.HasGetter() && p.HasSetter());
+                return src.StaticProperties().Where(p => !p.HasPublicGetter() && p.HasPublicSetter());
             else
                 return src.StaticProperties();
         }

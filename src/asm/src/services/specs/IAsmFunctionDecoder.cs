@@ -34,6 +34,5 @@ namespace Z0.Asm
         Option<AsmFunction> Decode(ParsedMember src, Action<Instruction> f);
         
         Option<AsmInstructionList> Decode(LocatedCode src, Action<Instruction> f);                      
-
     }
 }

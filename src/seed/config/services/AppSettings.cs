@@ -111,13 +111,13 @@ namespace Z0
 
         static IEnumerable<string> SettingNames<S>()
             => from p in typeof(S).DeclaredProperties()
-                where p.HasGetter() && p.HasSetter()
+                where p.HasPublicGetter() && p.HasPublicSetter()
                 select p.Name;
 
         public static IEnumerable<AppSetting> Get<S>(IAppSettingsProvider<S> src)
             where S : IAppSettingsProvider<S>, new()
                 => from p in typeof(S).DeclaredProperties()
-                    where p.HasGetter() && p.HasSetter()
+                    where p.HasPublicGetter() && p.HasPublicSetter()
                     let value = p.GetValue(src)?.ToString()
                     select new AppSetting(p.Name, value);
 

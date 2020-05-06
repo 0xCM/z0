@@ -8,7 +8,9 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     
-    partial class Reflective
+    using static Seed;
+    
+    partial class XTend
     {
         /// <summary>
         /// For a closed generic method, returns the supplied arguments; otherwise, returns an empty array

@@ -7,43 +7,57 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Characterizes operations over a nullary type
+    /// Characterizes a type which may or may not have/attain a zero-value
+    /// or an otherwise empty state.
     /// </summary>
-    /// <typeparam name="T">The unit type</typeparam>
-    /// <remarks>
-    /// It is tempting to subclass Additive here, but there are cases where
-    /// it makese sense for something have a zero element and yet not be
-    /// additive, e.g. a string can be empty, and they can be added (via concatentation)
-    /// but consider the set of singleton/atomic strings over some alphabet. In
-    /// this case, there can be no (closed) concatenation operation and yet
-    /// the concept of nothingness (the empty string) is still meaningful
-    /// </remarks>
-    public interface INullaryOps<T> 
+    public interface INullaryKnown
     {
-        T Zero {get;}
+        bool IsEmpty {get;}
     }
 
     /// <summary>
-    /// Characterizes an additve structure S for which there exists a
-    /// distinguished element 0:S such that for every s:S, s + 0 = s
+    /// Characterizes an additve structure S for which there exists a distinguished 
+    /// element 0:S such that for every s:S, s + 0 = s
     /// </summary>
-    /// <typeparam name="S">The reification type</typeparam>
-    /// <remarks>
-    /// It is tempting to subclass Additive here, but there are cases where
-    /// it makese sense for something have a zero element and yet not be
-    /// additive, e.g. a string can be empty, and they can be added (via concatentation)
-    /// but consider the set of singleton/atomic strings over some alphabet. In
-    /// this case, there can be no (closed) concatenation operation and yet
-    /// the concept of nothingness (the empty string) is still meaningful
-    /// </remarks>
+    /// <typeparam name="S">The zero value type</typeparam>
     public interface INullary<S>
-        //where S : INullary<S>, new()
     {
         /// <summary>
         /// Specifies the zero value
         /// </summary>
-        S Zero {get;}
-
-        bool IsEmpty => !IsEmpty;    
+        S Zero {get;}     
     }
+
+    public interface INullary<F,T> : INullary<F>, INullaryKnown
+        where F : INullary<F,T>, new()
+    {
+        F INullary<F>.Zero => new F();
+
+        bool INullaryKnown.IsEmpty => this.Equals(Zero);
+
+    }
+
+    /// <summary>
+    /// Characterizes a reification of the counterpoint to a nullary thing
+    /// </summary>
+    /// <typeparam name="F">The thing which cannot be empty</typeparam>
+    public interface INonEmpty<F> : INullaryKnown
+        where F : INonEmpty<F>, new()
+    {
+        bool INullaryKnown.IsEmpty 
+            => false;
+    }
+
+    /// <summary>
+    /// Characterizes a T-parametric nonempty thing that provides evidence of non-abscence
+    /// </summary>
+    /// <typeparam name="F">The thing which cannot be empty</typeparam>
+    public interface INonEmpty<F,T> : INonEmpty<F>
+        where F : INonEmpty<F,T>, new()
+    {
+        /// <summary>
+        /// Proof
+        /// </summary>
+        T Individual {get;}
+    }    
 }

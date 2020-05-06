@@ -37,7 +37,7 @@ namespace Z0
             public E Zero => Empty; 
             
             public string Description
-                => $"Hydrated {Report.ReportName} report with {RecordCount} records from {ReportPath}";
+                => $"{RecordCount} {Report.ReportName} records loaded from {ReportPath}";
         }        
     }
 }

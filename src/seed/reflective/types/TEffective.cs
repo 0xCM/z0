@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    partial class Reflective
+    using static Seed;
+    
+    partial class XTend
     {
         /// <summary>
         /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type

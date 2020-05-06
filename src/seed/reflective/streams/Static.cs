@@ -12,14 +12,10 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Selects the instance properties from a stream
+        /// Selects the static properties from an array
         /// </summary>
-        /// <param name="src">The source stream</param>
-        public static IEnumerable<PropertyInfo> Instance(this IEnumerable<PropertyInfo> src)    
-            =>  from p in src
-                let m = p.GetGetMethod() ?? p.GetSetMethod()                
-                where m != null && !m.IsStatic
-                select p;            
-
+        /// <param name="src">The source array</param>
+        public static PropertyInfo[] Static(this PropertyInfo[] src)    
+            => src.Where(p => p.IsStatic());
     }
 }

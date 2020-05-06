@@ -12,7 +12,7 @@ namespace Z0
         T Abs(T x);
     }
 
-    public interface Absolitive<S> : IConcrete<S>
+    public interface Absolitive<S> : IReified<S>
         where S : Absolitive<S>,new()
     {
         S Abs();

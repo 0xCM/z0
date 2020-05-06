@@ -36,7 +36,7 @@ namespace Z0
 
     }
 
-    public interface IFiniteAbelianGroup<S,T> : IDiscreteAbelianGroup<S,T>, IFiniteSet<S,T>
+    public interface IFiniteAbelianGroup<S,T> : IDiscreteAbelianGroup<S,T>, IElementSet<S,T>
         where S : IFiniteAbelianGroup<S,T>, new()
     {
 

@@ -44,7 +44,12 @@ namespace Z0
     
     }
     
-    public interface IFixed<F,W,T> : IFixed<F,W>, IEquatable<F>, IContented<W,T>
+    public interface IFixedContent<T> : IFixed
+    {
+        T Content {get;}
+    }
+
+    public interface IFixed<F,W,T> : IFixedContent<T>,  IFixed<F,W>, IEquatable<F>
         where F : unmanaged, IFixed<F,W,T>
         where W : unmanaged, ITypeWidth  
         where T : unmanaged      
@@ -52,10 +57,9 @@ namespace Z0
         
     }
 
-    public interface IFixedNumeric<F,T> : IFixed, IEquatable<F>, IContented<T>
+    public interface IFixedNumeric<F,T> : IFixedContent<T>, IEquatable<F>
         where F : unmanaged, IFixedNumeric<F,T>
     {
-
         int IFixed.BitWidth { [MethodImpl(Inline)] get => bitsize<T>(); }
 
         int IFixed.ByteCount { [MethodImpl(Inline)] get=> size<T>(); }
@@ -65,7 +69,7 @@ namespace Z0
         NumericWidth NumericWidth { [MethodImpl(Inline)] get => (NumericWidth)bitsize<T>(); }
     }
 
-    public interface IFixedNumeric<F,W,T> : IFixedNumeric<F,T>, IContented<W,T>
+    public interface IFixedNumeric<F,W,T> : IFixedNumeric<F,T>
         where F : unmanaged, IFixedNumeric<F,W,T>
         where W : unmanaged, ITypeWidth  
         where T : unmanaged        

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    public static class FiniteSet
+    public class FiniteSet
     {
         /// <summary>
         /// Constructs a finite set from supplied members
@@ -19,9 +19,9 @@ namespace Z0
         /// <param name="members">The defining members</param>
         /// <typeparam name="T">The member type</typeparam>
         [MethodImpl(Inline)]
-        public static FiniteSet<T> define<T>(params T[] members)
+        public static ReadOnlySet<T> define<T>(params T[] members)
             where T : ISemigroup<T>, new()
-                => new FiniteSet<T>(members);
+                => new ReadOnlySet<T>(members);
 
         /// <summary>
         /// Constructs a finite set from supplied sequence
@@ -29,73 +29,77 @@ namespace Z0
         /// <param name="members">The defining members</param>
         /// <typeparam name="T">The member type</typeparam>
         [MethodImpl(Inline)]
-        public static FiniteSet<T> define<T>(IEnumerable<T> members)
+        public static ReadOnlySet<T> define<T>(IEnumerable<T> members)
             where T : ISemigroup<T>, new()
-                => new FiniteSet<T>(members);
+                => new ReadOnlySet<T>(members);
     }    
 
     /// <summary>
     /// Contains a finite set of values
     /// </summary>
-    public readonly struct FiniteSet<T> : IFiniteSet<FiniteSet<T>,T>, IEquatable<FiniteSet<T>>
+    public readonly struct ReadOnlySet<T> : IElementSet<ReadOnlySet<T>,T>, IEquatable<ReadOnlySet<T>>
         where T : ISemigroup<T>, new()
     {
         readonly HashSet<T> data;
             
         [MethodImpl(Inline)]
-        public static implicit operator FiniteSet<T>(HashSet<T> src)
-            => new FiniteSet<T>(src);
+        public static implicit operator ReadOnlySet<T>(HashSet<T> src)
+            => new ReadOnlySet<T>(src);
 
         [MethodImpl(Inline)]
-        public static FiniteSet<T> operator +(FiniteSet<T> a, FiniteSet<T> b)
+        public static ReadOnlySet<T> operator +(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => a.Union(b);
 
         [MethodImpl(Inline)]
-        public static FiniteSet<T> operator -(FiniteSet<T> a, FiniteSet<T> b)
+        public static ReadOnlySet<T> operator -(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => a.Difference(b);
 
         [MethodImpl(Inline)]
-        public static FiniteSet<T> operator *(FiniteSet<T> a, FiniteSet<T> b)
+        public static ReadOnlySet<T> operator *(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => a.Intersect(b);
 
         [MethodImpl(Inline)]
-        public static bool operator <(FiniteSet<T> a, FiniteSet<T> b)
+        public static bool operator <(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => b.IsSuperset(a, true);
 
         [MethodImpl(Inline)]
-        public static bool operator >(FiniteSet<T> a, FiniteSet<T> b)
+        public static bool operator >(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => a.IsSuperset(b, true);
 
         [MethodImpl(Inline)]
-        public static bool operator <=(FiniteSet<T> a, FiniteSet<T> b)
+        public static bool operator <=(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => b.IsSuperset(a, false);
 
         [MethodImpl(Inline)]
-        public static bool operator >=(FiniteSet<T> a, FiniteSet<T> b)
+        public static bool operator >=(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => a.IsSuperset(b, false);
 
-        public static bool operator <(T a, FiniteSet<T> b)
+        public static bool operator <(T a, ReadOnlySet<T> b)
             => b.Contains(a);
 
         [MethodImpl(Inline)]
-        public static bool operator >(T a, FiniteSet<T> b)
+        public static bool operator >(T a, ReadOnlySet<T> b)
             => b.Contains(a) && b.Count == 1;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(FiniteSet<T> a, FiniteSet<T> b)
+        public static bool operator ==(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(FiniteSet<T> a, FiniteSet<T> b)
+        public static bool operator !=(ReadOnlySet<T> a, ReadOnlySet<T> b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]   
-        public FiniteSet(IEnumerable<T> members)
+        public ReadOnlySet(IEnumerable<T> members)
             => this.data = hashset(members);
 
         [MethodImpl(Inline)]   
-        public FiniteSet(HashSet<T> members)
+        public ReadOnlySet(HashSet<T> members)
             => this.data = members;
+
+        [MethodImpl(Inline)]   
+        public ReadOnlySet<T> WithContent(IEnumerable<T> src)
+            => new ReadOnlySet<T>(src);
 
         public int Count 
         {
@@ -138,7 +142,7 @@ namespace Z0
         /// <param name="rhs">The candidate superset</param>
         /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
         [MethodImpl(Inline)]   
-        public bool IsSubset(FiniteSet<T> rhs, bool proper = true)
+        public bool IsSubset(ReadOnlySet<T> rhs, bool proper = true)
             => proper ? data.IsProperSubsetOf(rhs.data) : data.IsSubsetOf(rhs.data);
 
         /// <summary>
@@ -147,7 +151,7 @@ namespace Z0
         /// <param name="rhs">The candidate subset</param>
         /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
         [MethodImpl(Inline)]   
-        public bool IsSuperset(FiniteSet<T> rhs, bool proper = true)
+        public bool IsSuperset(ReadOnlySet<T> rhs, bool proper = true)
             => proper ? data.IsProperSupersetOf(rhs.data) : data.IsSubsetOf(rhs.data);
 
         /// <summary>
@@ -155,7 +159,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The set with which to union/param>
         [MethodImpl(Inline)]   
-        public FiniteSet<T> Union(FiniteSet<T> rhs)
+        public ReadOnlySet<T> Union(ReadOnlySet<T> rhs)
         {
             var result = hashset(data);
             result.UnionWith(rhs.data);
@@ -168,7 +172,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The set with which to intersect</param>
         [MethodImpl(Inline)]   
-        public FiniteSet<T> Intersect(FiniteSet<T> rhs)
+        public ReadOnlySet<T> Intersect(ReadOnlySet<T> rhs)
         {
             var result = hashset(data);
             result.IntersectWith(rhs.data);
@@ -182,7 +186,7 @@ namespace Z0
         /// <param name="rhs">The set that should be differenced</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
         [MethodImpl(Inline)]   
-        public FiniteSet<T> Difference(FiniteSet<T> rhs, bool symmetric = false)
+        public ReadOnlySet<T> Difference(ReadOnlySet<T> rhs, bool symmetric = false)
         {
             var result = hashset(data);
             if(symmetric)
@@ -197,17 +201,17 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The set to compare</param>
         [MethodImpl(Inline)]   
-        public bool Intersects(FiniteSet<T> rhs)
+        public bool Intersects(ReadOnlySet<T> rhs)
             => data.Overlaps(rhs.data);
 
         static readonly IEqualityComparer<HashSet<T>> setcomparer = HashSet<T>.CreateSetComparer(); 
 
         [MethodImpl(Inline)]   
-        public bool Equals(FiniteSet<T> other)
+        public bool Equals(ReadOnlySet<T> other)
             => setcomparer.Equals(data, other.data);
 
         public override bool Equals(object obj)
-            => obj is FiniteSet<T> x && Equals(x);
+            => obj is ReadOnlySet<T> x && Equals(x);
 
         public override int GetHashCode()
             => data.GetHashCode();

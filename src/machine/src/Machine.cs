@@ -24,8 +24,8 @@ namespace Z0
 
         IMachineFiles Files {get;}
 
-        UriCodeIndex CodeIndex {get;}
-            = UriCodeIndex.Empty;
+        IUriCodeIndexer CodeIndexer {get;}
+            = UriCodeIndexer.Service;
 
         ICaptureArchive Archive => Context.Archive;
 
@@ -48,7 +48,7 @@ namespace Z0
         void ParseReports()
         {
             Control.iter(Files.ParseFiles, ParseReport);
-            Broker.Raise(IndexedCode.Create(CodeIndex));
+            Broker.Raise(IndexedCode.Create(CodeIndexer.Freeze()));
         }
         void ParseReport(FilePath src)
         {
@@ -64,31 +64,35 @@ namespace Z0
         
         public void OnEvent(IndexedCode e)
         {
+            Sink.Deposit(e);
 
-            Decode(Sink.Deposit(e).Index.IndexedCode);            
+            var decoded = Decode(e.Index);            
+
+            Broker.Raise(DecodedEncoded.Create(e.Index, decoded));
+
         }
 
-        void Decode(ICollection<UriCode> src)
-        {
-            var count = 0;
-
-            foreach(var code in src)
-                count += Decode(code);
-
-            term.cyan($"Decoded {count} instructions");
+        UriCodeInstructions Decode(UriCodeIndex src)
+        {            
+            var inxs = list<UriCodeInstruction>();            
+            Control.iter(src.IndexedCode, code => Decode(code, inxs));                        
+            return inxs;            
         }
 
-        int Decode(UriCode src)
+        public void OnEvent(DecodedEncoded e)
         {
-            var count = 0;
+            Sink.Deposit(e);
+
+        }
+
+        void Decode(UriCode src, IList<UriCodeInstruction> dst)
+        {
+            var seq = 0;
+
             void OnDecoded(Instruction inxs)
-            {
-                count++;
-            }
+                => dst.Add((src, (seq++, inxs)));
             
             Decoder.Decode(src.Encoded, OnDecoded);
-
-            return count;
         }
 
         void Index(MemberParseReport report)
@@ -98,7 +102,7 @@ namespace Z0
 
         void Index(MemberParseRecord record)
         {
-            CodeIndex.Include(UriCode.Define(record.Uri, record.Data));
+            CodeIndexer.Include(UriCode.Define(record.Uri, record.Data));
         }
 
         void Describe()

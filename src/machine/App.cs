@@ -14,11 +14,11 @@ namespace Z0
 
     using P = Z0.Parts;
     
-    readonly struct CommonParts : IIndexContainer<IPart>
+    readonly struct CommonParts : IIndexedElements<IPart>
     {
         public static CommonParts Selected => default(CommonParts);
         
-        IPart[] IContainer<IPart[]>.Content
+        IPart[] IContented<IPart[]>.Content
             => new IPart[]{
                 P.GMath.Resolved,  
                };

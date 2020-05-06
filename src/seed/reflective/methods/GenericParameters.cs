@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     
-    partial class Reflective
+    partial class XTend
     {
         /// <summary>
         /// If a method is non-generic, returns an emtpy list.

@@ -19,5 +19,7 @@ namespace Z0
         LoadedParseReport LoadedParseReport => LoadedParseReport.Empty;
 
         IndexedCode IndexedCode => IndexedCode.Empty;
+
+        DecodedEncoded DecodedEncoded => DecodedEncoded.Empty;
     }
 }

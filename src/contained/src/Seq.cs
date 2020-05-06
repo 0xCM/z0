@@ -17,7 +17,9 @@ namespace Z0
     /// </summary>
     public readonly struct Seq<T> : ISeq<Seq<T>,T>
     {
-        public static readonly Seq<T> Empty = default;
+        public static readonly Seq<T> Empty = new Seq<T>(Control.array<T>());
+
+        public IEnumerable<T> Content {get;}
 
         [MethodImpl(Inline)]   
         public static Seq<T> operator + (Seq<T> lhs, Seq<T> rhs)
@@ -30,42 +32,33 @@ namespace Z0
         public static implicit operator Seq<T>(T[] src)
             => new Seq<T>(src);
 
+        [MethodImpl(Inline)]   
         public Seq(IEnumerable<T> src)
         {
-            this.Source = src;
-            this.nonempty = true;
+            Content = src;
         }
 
-        readonly IEnumerable<T> Source;
-        
-        readonly bool nonempty;
-
-        public IEnumerable<T> Content 
-            => Source;
-
-        public bool empty()
-            => !nonempty;
-
-        public Seq<T> redefine(IEnumerable<T> src)
+        [MethodImpl(Inline)]
+        public Seq<T> WithContent(IEnumerable<T> src)
             => new Seq<T>(src);
 
         public Seq<T> Concat(Seq<T> rhs)
-            => new Seq<T>(Source.Concat(rhs.Source));
+            => new Seq<T>(Content.Concat(rhs.Content));
 
-        public Seq<Y> Select<Y>(Func<T, Y> selector)       
-             => define(from x in Source select selector(x));
+        public Seq<Y> Select<Y>(Func<T,Y> selector)       
+             => define(from x in Content select selector(x));
 
-        public Seq<Z> SelectMany<Y, Z>(Func<T, Seq<Y>> lift, Func<T, Y, Z> project)
-            => define(from x in Source
-                          from y in lift(x).Source
+        public Seq<Z> SelectMany<Y,Z>(Func<T,Seq<Y>> lift, Func<T,Y,Z> project)
+            => define(from x in Content
+                          from y in lift(x).Content
                           select project(x, y));
 
         public Seq<Y> SelectMany<Y>(Func<T, Seq<Y>> lift)
-            => define(from x in Source
-                          from y in lift(x).Source
+            => define(from x in Content
+                          from y in lift(x).Content
                           select y);
 
-        public Seq<T> Where(Func<T, bool> predicate)
-            => define(from x in Source where predicate(x) select x);
+        public Seq<T> Where(Func<T,bool> predicate)
+            => define(from x in Content where predicate(x) select x);
     }
 }

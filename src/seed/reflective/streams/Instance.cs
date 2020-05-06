@@ -7,16 +7,15 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     
-    partial class Reflective
+    partial class XTend
     {
-        public static Type[] SuppliedTypeArgs(this Type t)
-        {
-            var tE = t.TEffective();
-            if(tE.IsConstructedGenericType)
-                return tE.GetGenericArguments();
-            else
-                return Control.array<Type>();
-        }
+        /// <summary>
+        /// Selects the instance properties from an array
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        public static PropertyInfo[] Instance(this PropertyInfo[] src)    
+            => src.Where(p => !p.IsStatic());
     }
 }

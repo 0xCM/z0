@@ -15,7 +15,7 @@ namespace Z0
 
     readonly struct MachineContext : IMachineContext
     {
-        readonly IAsmContext AsmContext;
+        public IAsmContext AsmContext {get;}
 
         [MethodImpl(Inline)]
         public static IMachineContext Create(IAsmContext src, PartId[] code)

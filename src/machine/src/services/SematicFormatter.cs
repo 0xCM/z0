@@ -16,7 +16,7 @@ namespace Z0.Asm
 
     public class SemanticFormatter : ISemanticFormatter
     {
-        public IAsmContext Context {get;}
+        public IMachineContext Context {get;}
         
         readonly IAsmSemantic asm;
 
@@ -30,7 +30,7 @@ namespace Z0.Asm
 
         ushort FunctionSize;
 
-        public SemanticFormatter(IAsmContext context, Type host, FolderPath root)
+        public SemanticFormatter(IMachineContext context, Type host, FolderPath root)
         {
             Context = context;
             asm = AsmSemantic.Service;
@@ -52,7 +52,7 @@ namespace Z0.Asm
         public void Format(ApiHostUri host)        
         {
             var part = host.Owner;
-            var service = AsmWorkflows.Create(Context).HostCaptureService(CaptureRoot);
+            var service = AsmWorkflows.Create(Context.AsmContext).HostCaptureService(CaptureRoot);
             var capture = service.CaptureHost(host,true);
             var parsed = capture.Parsed;
             var decoder = Context.Decoder;

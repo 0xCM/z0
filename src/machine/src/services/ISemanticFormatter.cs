@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
     
-    public interface ISemanticFormatter : IService<IAsmContext>
+    public interface ISemanticFormatter : IMachineService
     {
 
     }

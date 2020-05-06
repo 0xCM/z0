@@ -10,6 +10,8 @@ namespace Z0
 
     public interface IMachineContext : IContext
     {
+        IAsmContext AsmContext {get;}
+        
         IAppMsgSink AppMsgSink {get;}        
         
         PartId[] Parts {get;}

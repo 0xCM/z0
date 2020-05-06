@@ -7,33 +7,38 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Seed;
-    using E = MachineEvents.IndexedCode;
+    using E = MachineEvents.DecodedEncoded;
 
     public partial class MachineEvents
     {
-        public readonly struct IndexedCode : IMachineEvent<E>
+        public readonly struct DecodedEncoded : IMachineEvent<E>
         {
-            public static E Empty => new E(UriCodeIndex.Empty);
+            public static E Empty => new E(UriCodeIndex.Empty, UriCodeInstructions.Empty);
 
             [MethodImpl(Inline)]
-            public static IndexedCode Create(UriCodeIndex index)
-                => new IndexedCode(index);            
+            public static DecodedEncoded Create(UriCodeIndex index, UriCodeInstructions inxs)
+                => new DecodedEncoded(index, inxs);            
 
             [MethodImpl(Inline)]
-            public IndexedCode(UriCodeIndex index)
+            public DecodedEncoded(UriCodeIndex index, UriCodeInstructions inxs)
             {
                 Index = index;
+                Instructions = inxs;
             }
             
             public UriCodeIndex Index {get;}
+
+            public UriCodeInstructions Instructions {get;}
 
             public AppMsgColor Flair => AppMsgColor.Cyan;
             
             public E Zero => Empty; 
             
             public string Description
-                => $"{Index.EntryCount} entries created in the code index";
+                => $"{Instructions.Length} instructions decoded from {Index.EntryCount} functions";
         }        
     }
 }

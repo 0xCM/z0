@@ -7,72 +7,74 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
 
     using static Seed;
 
-    public readonly struct UriCodeIndex
+    public readonly struct UriCodeIndex : IUriCodeIndex
     {
         public static UriCodeIndex Empty => new UriCodeIndex(0);
+        
+        readonly HashTable<MemoryAddress,UriCode> MemoryTable;
+        
+        readonly HashTable<MemoryAddress,OpUri> MemoryUri;              
 
-        readonly ConcurrentDictionary<MemoryAddress,UriCode> MemoryCode;
-
-        readonly ConcurrentDictionary<MemoryAddress,OpUri> MemoryUri;
-
-        readonly ConcurrentDictionary<OpUri,UriCode> UriCodes;
-
-        UriCodeIndex(int x)
-        {            
-            MemoryCode = new ConcurrentDictionary<MemoryAddress, UriCode>();
-            MemoryUri = new ConcurrentDictionary<MemoryAddress, OpUri>();
-            UriCodes = new ConcurrentDictionary<OpUri, UriCode>();
+        internal UriCodeIndex(
+            IReadOnlyDictionary<MemoryAddress,UriCode> mc, 
+            IReadOnlyDictionary<MemoryAddress,OpUri> muri)
+        {
+            MemoryTable = HashTable.Create(mc);
+            MemoryUri = HashTable.Create(muri);  
         }
 
         public int EntryCount 
-            => MemoryCode.Keys.Count;
-
-        public ICollection<MemoryAddress> Memories
-            => MemoryCode.Keys;
-
-        public ICollection<UriCode> IndexedCode 
-            => MemoryCode.Values;
-
-        public ICollection<OpUri> IndexedUri 
-            => MemoryUri.Values;
-
-        public UriCode GetCode(MemoryAddress address)    
-            => MemoryCode[address];
-
-        public UriCode GetCode(OpUri uri)    
-            => UriCodes[uri];
-
-        public OpUri GetUri(MemoryAddress address)    
-            => MemoryUri[address];
-
-        public Option<UriCode> FindCode(MemoryAddress address)    
         {
-            if(MemoryCode.TryGetValue(address, out var code))
-                return Option.some(code);                
-            else
-                return Option.none<UriCode>();
+            [MethodImpl(Inline)]
+            get => MemoryTable.Count;
+        }
+        
+        public MemoryAddress[] IndexedMemory 
+        {
+            [MethodImpl(Inline)]
+            get => MemoryTable.Keys;
         }
 
-        public int Include(params UriCode[] src)
+        public UriCode[] IndexedCode 
         {
-            var count = 0;
-            for(var i=0; i<src.Length; i++)
-            {
-                var code = src[i];
-                if(!MemoryCode.TryAdd(code.Address, code))
-                    term.yellow($"The address {code.Address} has already been asoociated with code");
-                else
-                    count++;
+            [MethodImpl(Inline)]
+            get => MemoryTable.Values;
+        }
 
-                MemoryUri.TryAdd(code.Address, code.Uri);
-                UriCodes.TryAdd(code.Uri, code);
-            }
-            return count;
+        public OpUri[] IncludedOps 
+        {
+            [MethodImpl(Inline)]
+            get => MemoryUri.Values;
+        }
+
+        [MethodImpl(Inline)]
+        public UriCode CodeAt(MemoryAddress location)
+            => MemoryTable[location];
+
+        [MethodImpl(Inline)]
+        public UriCode[] CodeFor(OpUri uri)
+            => MemoryUri[uri].Map(CodeAt);
+
+        public UriCode this[MemoryAddress location]
+        {
+            [MethodImpl(Inline)]
+            get => CodeAt(location);
+        }
+
+        public UriCode[] this[OpUri uri]
+        {
+            [MethodImpl(Inline)]
+            get => CodeFor(uri);
+        }
+
+        UriCodeIndex(int i)
+        {
+            MemoryTable = HashTable<MemoryAddress,UriCode>.Empty;
+            MemoryUri = HashTable<MemoryAddress,OpUri>.Empty;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct FiniteSeq<T> : IIndexedSeq<FiniteSeq<T>, T>
+    public readonly struct FiniteSeq<T> : IFiniteSeq<FiniteSeq<T>,T>, ICounted
     {
         public static readonly FiniteSeq<T> Empty = default;
 
@@ -43,14 +43,15 @@ namespace Z0
         public int Count 
             => Content.Length;
 
-        IEnumerable<T> IContainer<IEnumerable<T>>.Content 
+        [MethodImpl(Inline)]
+        int IFinite.Count() => Count;
+
+        [MethodImpl(Inline)]
+        public FiniteSeq<T> WithContent(IEnumerable<T> content)
+            => new FiniteSeq<T>(content);
+
+        IEnumerable<T> IContented<IEnumerable<T>>.Content 
             => Content;
-
-        public bool empty()
-            => !nonempty;
-
-        public T this[int i] 
-            => Content[i];
 
         [MethodImpl(Inline)]
         public bool Equals(FiniteSeq<T> rhs)
@@ -59,15 +60,15 @@ namespace Z0
         public FiniteSeq<T> Concat(FiniteSeq<T> rhs)
             => new FiniteSeq<T>(Content.Concat(rhs.Content));
 
-        public FiniteSeq<Y> Select<Y>(Func<T, Y> selector)       
+        public FiniteSeq<Y> Select<Y>(Func<T,Y> selector)       
              => Seq.finite(from x in Content select selector(x));
 
-        public FiniteSeq<Z> SelectMany<Y, Z>(Func<T, FiniteSeq<Y>> lift, Func<T, Y, Z> project)
+        public FiniteSeq<Z> SelectMany<Y,Z>(Func<T,FiniteSeq<Y>> lift, Func<T,Y,Z> project)
             => Seq.finite(from x in Content
                           from y in lift(x).Content
                           select project(x, y));
 
-        public FiniteSeq<Y> SelectMany<Y>(Func<T, FiniteSeq<Y>> lift)
+        public FiniteSeq<Y> SelectMany<Y>(Func<T,FiniteSeq<Y>> lift)
             => Seq.finite(from x in Content
                           from y in lift(x).Content
                           select y);
