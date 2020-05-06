@@ -87,7 +87,7 @@ namespace Z0.Asm
             report.Save(hostArchive.ParsedPath);
 
             using var writer = Archives.Services.UriHexWriter(hostArchive.HexPath);
-            var data = src.Map(x => UriHex.Define(x.Uri, x.Encoded.Encoded));
+            var data = src.Map(x => UriHex.Define(x.OpUri, x.Encoded.Encoded));
             writer.Write(data);
         }
 

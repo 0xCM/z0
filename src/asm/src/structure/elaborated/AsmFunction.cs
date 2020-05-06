@@ -18,9 +18,9 @@ namespace Z0.Asm
 
         public static AsmFunction Define(ParsedMember encoding,  AsmInstructionList inxs)
         {         
-            var code = UriCode.Define(encoding.Uri, encoding.Encoded);  
+            var code = UriCode.Define(encoding.OpUri, encoding.Encoded);  
             var sig = encoding.Method.Signature().Format();          
-            return new AsmFunction(encoding.Uri, sig, code, encoding.TermCode, inxs);
+            return new AsmFunction(encoding.OpUri, sig, code, encoding.TermCode, inxs);
         }
 
         [MethodImpl(Inline)]

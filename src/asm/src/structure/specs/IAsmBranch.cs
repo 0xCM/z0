@@ -2,15 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    
-    sealed class MachineBroker : EventBroker, IMachineBroker
+
+    public interface IAsmBranch : INullaryKnown
     {
-        public static IMachineBroker New => new MachineBroker();           
+        MemoryAddress Base {get;}
+
+        MemoryAddress IP {get;}
+
+        MemoryAddress Target {get;}
+
+        int Size {get;}
+
+        bool IsNear {get;}
     }
 }

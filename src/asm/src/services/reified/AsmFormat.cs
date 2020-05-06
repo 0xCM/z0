@@ -148,7 +148,7 @@ namespace Z0.Asm
             if(config.EmitFunctionHeaderEncoding)
                 lines.Add(AsmFormat.header(src.Code.Encoded, src.OpId));
             else
-                lines.Add(comment(src.Code.Uri.OpId));
+                lines.Add(comment(src.Code.OpUri.OpId));
 
             if(config.EmitLocation)
                 lines.Add(comment(text.concat("Base", text.spaced(Chars.Eq), src.Code.Address)));

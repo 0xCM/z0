@@ -30,6 +30,10 @@ namespace Z0
             
             public HostCodeInstructions Instructions {get;}
 
+            public ApiHostUri Host => Instructions.Host;
+
+            public PartId Part => Host.Owner;
+
             public AppMsgColor Flair => AppMsgColor.Cyan;
             
             public E Zero => Empty; 

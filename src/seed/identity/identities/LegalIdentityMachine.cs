@@ -50,7 +50,7 @@ namespace Z0
                     break;
                 }
             }
-            return new string(dst);
+            return new string(dst.Trim());
         }
     }
 }

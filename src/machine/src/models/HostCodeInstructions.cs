@@ -27,12 +27,12 @@ namespace Z0.Asm
         /// <summary>
         /// The decoded instructions for host-defined functions
         /// </summary>
-        public UriCodeInstructions[] Instructions {get;}
+        public UriCodeInstructions[] CodeInstructions {get;}
 
         /// <summary>
         /// The total instruction count
         /// </summary>
-        public int TotalCount => Instructions.Sum(i => i.TotalCount);
+        public int TotalCount => CodeInstructions.Sum(i => i.TotalCount);
 
         [MethodImpl(Inline)]
         public static HostCodeInstructions Create(UriCodeInstructions[] src)
@@ -46,7 +46,7 @@ namespace Z0.Asm
         public HostCodeInstructions(ApiHostUri host, UriCodeInstructions[] inxs)
         {
             Host = host;
-            Instructions = inxs;
+            CodeInstructions = inxs;
         }
     }
 }

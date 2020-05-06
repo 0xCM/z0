@@ -9,13 +9,12 @@ namespace Z0.Asm
 
     using static Seed;
 
-    partial struct AsmFormatServices
+    partial struct SemanticRender
     {
-
-       public static string Format(AsmImmInfo src)
+       public static string Render(AsmImmInfo src)
             => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
     
-        public static string FormatKind(AsmImmInfo src)
+        public static string RenderKind(AsmImmInfo src)
         {
             if(src.Signed)
                 return text.concat("imm", src.Width.FormatValue(), IDI.Signed);

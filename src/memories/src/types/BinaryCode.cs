@@ -17,6 +17,14 @@ namespace Z0
     public readonly struct BinaryCode : IEncoded<BinaryCode,byte[]>
     {
         /// <summary>
+        /// Defines a block of encoded data based at a specifed address
+        /// </summary>
+        /// <param name="data">The source data</param>
+        [MethodImpl(Inline)]
+        public static BinaryCode Define(byte[] data)
+            => new BinaryCode(data);        
+
+        /// <summary>
         /// The canonical zero
         /// </summary>
         public static BinaryCode Empty => new BinaryCode(Control.array<byte>());
@@ -26,13 +34,21 @@ namespace Z0
         /// </summary>
         public byte[] Encoded {get;}
 
-        /// <summary>
-        /// Defines a block of encoded data based at a specifed address
-        /// </summary>
-        /// <param name="data">The source data</param>
-        [MethodImpl(Inline)]
-        public static BinaryCode Define(byte[] data)
-            => new BinaryCode(data);        
+        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded; }
+        
+        public int ByteCount => Encoded.Length;        
+        
+        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
+
+        public bool IsEmpty { [MethodImpl(Inline)] get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0); }
+
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => !IsEmpty; }
+
+        public ref readonly byte Head { [MethodImpl(Inline)] get => ref refs.head(Bytes);}
+        
+        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref refs.skip(Head, index); }
+        
+
         
         [MethodImpl(Inline)]
         public static implicit operator byte[](BinaryCode src)
@@ -59,18 +75,6 @@ namespace Z0
         {
             Encoded = insist(bytes);
         }
-        
-        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded; }
-        
-        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
-
-        public bool IsEmpty { [MethodImpl(Inline)] get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0); }
-
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => !IsEmpty; }
-
-        public ref readonly byte Head { [MethodImpl(Inline)] get => ref refs.head(Bytes);}
-        
-        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref refs.skip(Head, index); }
         
         public bool Equals(BinaryCode src)
         {

@@ -13,6 +13,8 @@ namespace Z0
     public interface INullaryKnown
     {
         bool IsEmpty {get;}
+
+        bool IsNonEmpty => !IsEmpty;
     }
 
     /// <summary>

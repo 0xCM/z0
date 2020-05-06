@@ -29,7 +29,7 @@ namespace Z0
         {
             MemoryTable = HashTable.Create(mc);
             MemoryUri = HashTable.Create(muri);  
-            HostCode = MemoryTable.Values.Select(x => (x.Uri.HostPath, x))
+            HostCode = MemoryTable.Values.Select(x => (x.OpUri.HostPath, x))
                                          .GroupBy(g => g.HostPath)
                                          .Select(x => (x.Key, x.Select(y => y.x).ToArray()))
                                          .ToDictionary();

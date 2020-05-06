@@ -29,7 +29,7 @@ namespace Z0
                     Address: src.Address,
                     Length: src.Length,
                     TermCode: src.TermCode,
-                    Uri: src.Uri,
+                    Uri: src.OpUri,
                     OpSig : src.Method.Signature().Format(),
                     Data : src.Encoded
                 );
@@ -38,15 +38,15 @@ namespace Z0
 
         public LocatedCode Encoded {get;}
 
-        public OpUri Uri {get;}
+        public OpUri OpUri {get;}
 
         public MethodInfo Method {get;}
 
         public ExtractTermCode TermCode {get;}
 
-        public OpIdentity Id => Uri.OpId;
+        public OpIdentity Id => OpUri.OpId;
         
-        public UriCode HostedBits  { [MethodImpl(Inline)] get => new UriCode(Uri, Encoded); }
+        public UriCode HostedBits  { [MethodImpl(Inline)] get => new UriCode(OpUri, Encoded); }
 
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
@@ -74,7 +74,7 @@ namespace Z0
             Extracted = extracted; 
             Encoded = parsed;
             Method = method;
-            Uri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
+            OpUri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
             TermCode = term;
         }
 

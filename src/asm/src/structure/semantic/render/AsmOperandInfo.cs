@@ -9,14 +9,14 @@ namespace Z0.Asm
 
     using static OpKind;
 
-    partial struct AsmFormatServices 
+    partial struct SemanticRender 
     {
-        public static string Format(AsmOperandInfo src)
+        public static string Render(AsmOperandInfo src)
         {            
             switch(src.Kind)
             {
                 case OpKind.Register:
-                    return Format(src.Register);
+                    return Render(src.Register);
                 case MemorySegSI:
                 case MemorySegESI:
                 case MemorySegRSI:
@@ -28,13 +28,13 @@ namespace Z0.Asm
                 case MemoryESRDI:
                 case Memory64:
                 case OpKind.Memory:
-                    return Format(src.Memory);
+                    return Render(src.Memory);
                 case NearBranch16:
                 case NearBranch32:
                 case NearBranch64:
                 case FarBranch16:
                 case FarBranch32:
-                    return Format(src.Branch);
+                    return Render(src.Branch);
                 case Immediate8:
                 case Immediate8_2nd:
                 case Immediate16:
@@ -44,9 +44,9 @@ namespace Z0.Asm
                 case Immediate8to32:
                 case Immediate8to64:
                 case Immediate32to64:
-                    return Format(src.ImmInfo);
+                    return Render(src.ImmInfo);
                 default:
-                    return "missed?";
+                    return Unknown;
             }            
         }
     }

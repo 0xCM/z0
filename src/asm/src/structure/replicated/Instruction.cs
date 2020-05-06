@@ -35,6 +35,9 @@ namespace Z0.Asm
         /// </summary>
         public Func<OpAccess[]> Access {get;set;}
 
+        /// <summary>
+        /// Computes flow information upon request
+        /// </summary>
         public Func<AsmFlowInfo> FlowInfo {get;set;}
         
         //

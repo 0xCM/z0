@@ -29,12 +29,18 @@ namespace Z0
         /// <summary>
         /// The source member identity
         /// </summary>
-        public OpUri Uri {get;}
+        public OpUri OpUri {get;}
 
         /// <summary>
         /// The data, located
         /// </summary>
         public LocatedCode Encoded {get;}
+
+        public OpIdentity OpId => OpUri.OpId;
+
+        public ApiHostUri HostUri=> OpUri.HostPath;
+
+        public int ByteCount { [MethodImpl(Inline)] get => Encoded.ByteCount; }
 
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Encoded; }
 
@@ -63,19 +69,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator UriHex(UriCode src)
-            => new UriHex(src.Uri, src.Encoded);
+            => new UriHex(src.OpUri, src.Encoded);
 
         [MethodImpl(Inline)]
         public UriCode(OpUri uri, LocatedCode code)
         {
-            Uri = uri;
+            OpUri = uri;
             Encoded = code;
         }
         
         public string Format(int idpad)
         {
             var a = Encoded.Format();
-            var b = Uri.Format().PadRight(idpad);
+            var b = OpUri.Format().PadRight(idpad);
             return string.Concat(a,b);
         }
 
@@ -86,7 +92,7 @@ namespace Z0
             => Encoded.Equals(src.Encoded);
 
         public override int GetHashCode()
-            => Uri.GetHashCode();
+            => OpUri.GetHashCode();
 
         public override bool Equals(object src)
             => src is UriCode x && Equals(x);        

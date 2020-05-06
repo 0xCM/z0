@@ -3,28 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{
+{        
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Seed;
-    using static Memories;
+    readonly partial struct SemanticRender : ISemanticRender
+    { 
+        const string RightArrow = " -> ";
 
+        const string LeftArrow = " <- ";
 
-    public class t_canonical : t_asm<t_canonical>
-    {
+        const string Unknown = "???";
 
-        public t_canonical()
-        {
-
-        }
-
-        public void format_canonical()
-        {
-
-        }
-
+        public static string Render(Register src)
+            => src.ToString();
     }
 }

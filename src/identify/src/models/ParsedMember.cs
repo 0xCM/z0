@@ -39,12 +39,12 @@ namespace Z0
         /// <summary>
         /// The operation uri 
         /// </summary>
-        public OpUri Uri => Extracted.Uri;
+        public OpUri OpUri => Extracted.Uri;
 
         /// <summary>
         /// The operation identifier
         /// </summary>
-        public OpIdentity Id => Uri.OpId;
+        public OpIdentity Id => OpUri.OpId;
 
         /// <summary>
         /// The member operation, reflected

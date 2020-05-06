@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         public const char Generic = Letters.g;
  
-         /// <summary>
+        /// <summary>
         /// A type or value argument delimiter
         /// </summary>
         public const char ArgSep = Chars.Comma;

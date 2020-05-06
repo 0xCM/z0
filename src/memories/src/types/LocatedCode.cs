@@ -38,6 +38,8 @@ namespace Z0
         /// The encoded content
         /// </summary>
         public BinaryCode Encoded {get;}
+        
+        public int ByteCount { [MethodImpl(Inline)] get => Encoded.ByteCount; }
 
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
 

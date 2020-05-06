@@ -9,13 +9,13 @@ namespace Z0.Asm
 
     using static Seed;
 
-    partial struct AsmQuery : IAsmQuery
+    partial struct AsmQuery : ISemanticQuery
     {
         /// <summary>
         /// Tests whether the the source operand kind is a register kind
         /// </summary>
         /// <param name="src">The source operand kind</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public bool IsRegisterOperand(OpKind src)
             => src == OpKind.Register;  
             
@@ -23,6 +23,7 @@ namespace Z0.Asm
 		/// Gets the operand's register value. Use this property if the operand has kind <see cref="OpKind.Register"/>
 		/// </summary>
 		/// <param name="operand">Operand number, 0-4</param>
+        [Op]
 		public Register OperandRegister(Instruction src, int operand) 
         {
 			switch (operand) 

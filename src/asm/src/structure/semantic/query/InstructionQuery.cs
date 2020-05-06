@@ -12,6 +12,7 @@ namespace Z0.Asm
 
     partial struct AsmQuery
     {
+        [Op]
         public InstructionInfo Details(Instruction src)
         {
             return new InstructionInfo
@@ -35,7 +36,7 @@ namespace Z0.Asm
             };
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public AsmOperandInfo[] Operands(MemoryAddress @base, Instruction src)
         {
             var args = new AsmOperandInfo[src.OpCount];
@@ -44,7 +45,7 @@ namespace Z0.Asm
             return args;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public AsmOperandInfo Operand(MemoryAddress @base, Instruction src, int index)
             => AsmOperandInfo.Define(index, 
                 OperandKind(src,index),
@@ -53,7 +54,7 @@ namespace Z0.Asm
                 OperandRegister(src,index),
                 BranchInfo(@base, src,index));
  
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
             => AsmInstructionSummary.Define(
                     @base,
@@ -64,6 +65,7 @@ namespace Z0.Asm
                     encoded.Slice(offset, src.ByteLength).ToArray()
                     );
 
+        [Op]
 		public OpKind OperandKind(Instruction src, int operand) 
         {
 			switch (operand) {
@@ -81,6 +83,7 @@ namespace Z0.Asm
         /// Describes the instructions that comprise an instruction list
         /// </summary>
         /// <param name="src">The source instruction list</param>
+        [Op]
         public AsmInstructionSummary[] Summarize(AsmInstructionList src)
         {
             var dst = new AsmInstructionSummary[src.Length];
@@ -100,6 +103,7 @@ namespace Z0.Asm
         /// Describes the instructions that comprise a function
         /// </summary>
         /// <param name="src">The source function</param>
+        [Op]
         public AsmInstructionSummary[] Summarize(AsmFunction src)
         {
             var dst = new AsmInstructionSummary[src.InstructionCount];

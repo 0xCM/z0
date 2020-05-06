@@ -9,16 +9,12 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly partial struct AsmQuery : IAsmQuery
-    {
-        public static IAsmQuery Service => default(AsmQuery);   
-    }
-    
-    public interface IAsmSemantic : ISemanticFormat, IAsmQuery
+    public interface IAsmSemantic : ISemanticRender, ISemanticQuery
     {
     }
     
-    public readonly struct AsmSemantic : IAsmSemantic
+    [ApiHost("semantic")]
+    public readonly struct AsmSemantic : IAsmSemantic, IApiHost<AsmSemantic>
     {
         public static IAsmSemantic Service => default(AsmSemantic);
     }

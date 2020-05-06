@@ -116,36 +116,5 @@ namespace Z0
 
         public FileName ToLegalFileName(FileExtension ext)
             => FileName.Define(FileIdMachine.Service.Manufacture(this), ext);
-
-        // {
-        //     var length = Identifier.Length;
-        //     Span<char> dst = stackalloc char[length];
-        //     for(var i=0; i< length; i++)
-        //     {
-        //         var c = Identifier[i];
-        //         switch(c)
-        //         {
-        //             case IDI.TypeArgsOpen:
-        //                 dst[i] = IDI.TypeArgsOpenAlt;
-        //             break;
-        //             case IDI.TypeArgsClose:
-        //                 dst[i] = IDI.TypeArgsCloseAlt;
-        //             break;
-        //             case IDI.ArgsOpen:
-        //                 dst[i] = IDI.ArgsOpenAlt;
-        //             break;
-        //             case IDI.ArgsClose:
-        //                 dst[i] = IDI.ArgsCloseAlt;
-        //             break;
-        //             case IDI.ArgSep:
-        //                 dst[i] = IDI.ArgSepAlt;
-        //             break;
-        //             default:
-        //                 dst[i] = c;
-        //             break;
-        //         }
-        //     }
-        //     return new string(dst);
-        // }
     }
 }

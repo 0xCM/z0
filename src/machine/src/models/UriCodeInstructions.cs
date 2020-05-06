@@ -23,6 +23,16 @@ namespace Z0.Asm
 
         public UriCodeInstruction[] Instructions {get;}
 
+        public MemoryAddress BaseAddress => Code.Address;
+
+        public ApiHostUri HostUri => Code.HostUri;
+
+        public OpIdentity OpId => Code.OpId;
+
+        public OpUri OpUri => Code.OpUri;
+
+        public UriCodeInstruction this[int index] => Instructions[index];
+        
         [MethodImpl(Inline)]
         public static UriCodeInstructions Create(UriCode code, UriCodeInstruction[] src)
             => new UriCodeInstructions(code,src);

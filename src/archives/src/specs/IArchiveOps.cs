@@ -18,7 +18,7 @@ namespace Z0
         UriHex[] SaveUriHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
         {
             using var writer = Services.UriHexWriter(dst);
-            var data = src.Map(x => UriHex.Define(x.Uri, x.Encoded.Encoded));
+            var data = src.Map(x => UriHex.Define(x.OpUri, x.Encoded.Encoded));
             writer.Write(data);
             return data;
         }

@@ -16,13 +16,16 @@ namespace Z0.Asm
 
     public class SemanticFormatter : ISemanticFormatter
     {
+        public static ISemanticFormatter Create(IMachineContext context)
+            => new SemanticFormatter(context, context.TargetRoot);
+
         public IMachineContext Context {get;}
         
         readonly IAsmSemantic asm;
 
-        readonly Type HostType;
-
         readonly FolderPath CaptureRoot;
+
+        readonly FolderName TargetFolder;
 
         ushort InstructionCount;
 
@@ -30,14 +33,14 @@ namespace Z0.Asm
 
         ushort FunctionSize;
 
-        public SemanticFormatter(IMachineContext context, Type host, FolderPath root)
+        public SemanticFormatter(IMachineContext context, FolderPath root)
         {
             Context = context;
             asm = AsmSemantic.Service;
             CaptureRoot = root;
             Descriptions = list<string>();
-            HostType = host;
             FunctionSize = 0;
+            TargetFolder = FolderName.Define(ExecutingApp);
         }
 
         void Reset()
@@ -49,52 +52,60 @@ namespace Z0.Asm
 
         const string FlowTitle = "flow";
 
-        public void Format(ApiHostUri host)        
+        public void Format(HostCodeInstructions hcInxs)        
         {
+            var host = hcInxs.Host;
             var part = host.Owner;
-            var service = AsmWorkflows.Create(Context.AsmContext).HostCaptureService(CaptureRoot);
-            var capture = service.CaptureHost(host,true);
-            var parsed = capture.Parsed;
-            var decoder = Context.Decoder;
-            var memberCount = parsed.Length;
+
             var archive = Archives.Services.Semantic;  
+            archive.SemanticDir(host).Clear();                  
 
-            archive.SemanticDir(HostType).Clear();                  
-
-            for(ushort i=0; i<memberCount; i++)
+            for(var i=0; i<hcInxs.CodeInstructions.Length; i++)
             {
-                var member = parsed[i];                
-                var kind = member.KindId;
-
-                decoder.Decode(member, ix => Describe(member, ix));                                    
+                var funcInxs = hcInxs.CodeInstructions[i];
+                var id = funcInxs.OpId;
+                Format(funcInxs);
 
                 if(Descriptions.Count != 0)
                 {
-                    using var writer = archive.SemanticPath(HostType, part, member.Id).Writer();
+                    using var writer = archive.SemanticPath(host, id).Writer();
                     Control.iter(Descriptions, writer.WriteLine); 
                 }
+
                 Reset();
             }
         }
 
-        void Describe(ParsedMember member, Instruction src)
+        void Format(UriCodeInstructions funcInxs)
         {
-            var @base = member.Address;
-            insist((@base + FunctionSize) == src.IP);                           
+            for(var i=0; i<funcInxs.Instructions.Length; i++)
+            {
+                var inxs = funcInxs[i];
+                Describe(inxs);
+            }
+
+        }
+        
+        void Describe(UriCodeInstruction src)
+        {
+            var idOp = src.OpId;
+            var inxs = src.Instruction;
+            var @base = src.BaseAddress;
+            insist((@base + FunctionSize) == inxs.IP);      
 
             if(InstructionCount == 0)
             {
-                Descriptions.Add(member.Id);
-                Descriptions.Add(FunctionSep);
+                Descriptions.Add(idOp);
+                Descriptions.Add(SectionSep);
             }
 
-            var id = text.concat(member.Method.Name, Chars.FSlash, member.KindId.Format(), Chars.Space, Chars.Space, src.IP.FormatHex(zpad:false)).PadRight(IdPad);
+            var location = asm.RenderAddress(inxs,AddressPad);
             var counted = InstructionCount.FormatCount(InstructionCountPad);
-            var title = id + counted + FunctionSize.FormatSmallHex(true);
-            var description = text.concat(src.FormattedInstruction, Chars.Space, OpCodeDelimiter, Chars.Space, src.InstructionCode);
-            Descriptions.Add(text.concat(title, HorizontalSep, description));
+            var title = location + counted + FunctionSize.FormatSmallHex(true);
+            var description = text.concat(inxs.FormattedInstruction, Chars.Space, LeftImply, Chars.Space, inxs.InstructionCode);
+            Descriptions.Add(text.concat(title, ColSep, description));
 
-            var operands = asm.Operands(@base, src); 
+            var operands = asm.Operands(@base, inxs); 
             var summaries = new string[operands.Length];
             for(var i =0; i<operands.Length; i++)               
             {
@@ -102,36 +113,38 @@ namespace Z0.Asm
 
                 var kind = a.Kind; 
 
-                var index = i.ToString().PadLeft(OperandIndexPad,'0');
-                var kindLabel = kind.ToString().ToLower().PadRight(InstructionKindPad);
-                var summary = text.concat(index, Chars.Space, Chars.Pipe, Chars.Space, kindLabel, Chars.Pipe, Chars.Space);
+                var col01 = i.ToString().PadLeft(OperandIndexDigits,'0').PadRight(OperandIndexPad);
+                var col02 = asm.Render(kind).PadRight(InstructionKindPad);
+                var col03 = text.concat(col01, ColSep, col02, Chars.Pipe, Chars.Space);
 
                 if(kind == OpKind.Register)
-                    summary += asm.Format(a.Register);
+                    col03 += asm.Render(a.Register);
                 else if(kind == OpKind.Memory)
-                    summary += asm.Format(a.Memory);
+                    col03 += asm.Format(a.Memory);
                 else if (a.Branch.IsNonEmpty)
-                    summary += asm.Format(a.Branch);
+                    col03 += asm.Format(a.Branch);
                 else if(a.ImmInfo.IsNonEmpty)
                 {
-                    var immlabel = asm.ForamtKind(a.ImmInfo).PadRight(InstructionKindPad);
-                    summary = text.concat(index, Chars.Space, Chars.Pipe, Chars.Space, immlabel, Chars.Pipe, Chars.Space);
-                    summary += asm.Format(a.ImmInfo);
+                    var immlabel = asm.RenderKind(a.ImmInfo).PadRight(InstructionKindPad);
+                    col03 = text.concat(col01, ColSep, immlabel, Chars.Pipe, Chars.Space);
+                    col03 += asm.Format(a.ImmInfo);
                 }
                 else 
-                    summary += "???";
-                summaries[i] = summary;                
+                    col03 += "???";
+                summaries[i] = col03;                
             }
-            
+
             Control.iter(summaries, s => 
-                Descriptions.Add(text.concat(title, HorizontalSep, $"{s}")));
+                Descriptions.Add(text.concat(title, ColSep, $"{s}")));
 
 
-            Descriptions.Add(text.concat(title, HorizontalSep, FlowTitle.PadRight(SubTitlePad), Chars.Colon, Chars.Space, asm.Format(src.FlowControl)));  
-            Descriptions.Add(text.concat(title, HorizontalSep, SectionSep));  
+            Descriptions.Add(text.concat(title, ColSep, FlowTitle.PadRight(OperandIndexPad), ColSep, asm.Format(inxs.FlowControl)));  
+            Descriptions.Add(text.concat(title, ColSep, SubGridSep));  
 
             InstructionCount++;
-            FunctionSize += (ushort)src.ByteLength;      
+            FunctionSize += (ushort)inxs.ByteLength;
+
         }
+
     }
 }

@@ -8,32 +8,40 @@ namespace Z0.Asm
 
     class FormatConstants
     {
-        public const int Counter = 4;
+        public const string LeftImply = "<==";
 
-        public const int CounterPad = 1;
+        public const string RightImply = "==>";
 
-        public const int SizePad = 5;   
+        public const string ColSep = " | ";
 
-        public const int IdPad = 30;     
+        public const char LineSepSymbol = Chars.Dash;
+
+        public const byte ColSepWidth = 3;
+
+        public const byte Counter = 4;
+
+        public const byte CounterPad = 1;
+
+        public const byte SizePad = 5;   
+
+        public const byte AddressPad = 16;     
     
-        public const int InstructionCountPad = 3;
+        public const byte InstructionCountPad = 3;
 
-        public const int InstructionHeaderLength = 80;
+        public const byte SubGridWidth = 80;
 
-        public const int SubTitlePad = 4;     
+        public const byte InstructionKindPad  = 20;
 
-        public const string OpCodeDelimiter = "<==";
+        public const byte OperandIndexDigits = 2;
 
-        public const string HorizontalSep = " | ";
+        public const byte OperandIndexPad = 6;
 
-        public const int InstructionKindPad  = 16;
+        public const byte SectionWidth = AddressPad + SubGridWidth + Counter + SizePad + CounterPad + ColSepWidth;
 
-        public const int OperandIndexPad = 2;
-
-        // 80 chars
-        public static string SectionSep = new string(Chars.Dash, InstructionHeaderLength);
-
-        public static string FunctionSep 
-            = new string(Chars.Dash, IdPad + InstructionHeaderLength + Counter + SizePad + CounterPad + HorizontalSep.Length);   
+        public static string SubGridSep 
+            = new string(LineSepSymbol, SubGridWidth);
+        
+        public static string SectionSep 
+            = new string(LineSepSymbol, SectionWidth);   
     }
 }

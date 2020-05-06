@@ -18,20 +18,27 @@ namespace Z0
     {
         FolderName SemanticFolder 
             => FolderName.Define("semantic");
-
-        FolderPath SemanticDir(Type t)
-            => DataDir(t) + SemanticFolder;
         
+        FileExtension SemanticExt 
+            => FileExtensions.Txt;
+
+        FolderPath SemanticDir(FolderName folder)
+            => ExeSubDir(folder) + SemanticFolder;
+
+        FolderPath SemanticDir(ApiHostUri host)
+            => ExeSubDir(SemanticFolder) + HostPart(host);
+
         FileName SemanticFileName(ApiHostUri host, FileExtension ext) 
             => LegalFileName(host,ext);
 
-        FilePath SemanticPath(Type t, ApiHostUri host, FileExtension ext = null) 
-            => SemanticDir(t) + SemanticFileName(host,ext ?? FileExtensions.Txt);
+        FilePath SemanticPath(ApiHostUri host) 
+            => SemanticDir(host) + SemanticFileName(host, SemanticExt);
 
-        FilePath SemanticPath(Type t, PartId part, OpIdentity id, FileExtension ext = null) 
-            => SemanticDir(t) + LegalFileName(part, id, ext ?? FileExtensions.Txt);
+        FilePath SemanticPath(FolderName folder, PartId part, OpIdentity id) 
+            => SemanticDir(folder) + LegalFileName(part, id, SemanticExt);
 
-        FilePath SemanticPath(Type t, ApiHostUri host, OpIdentity id, FileExtension ext = null) 
-            => SemanticDir(t) + LegalFileName(host, id, ext ?? FileExtensions.Txt);
+        FilePath SemanticPath(ApiHostUri host, OpIdentity id) 
+            => SemanticDir(host) + LegalFileName(id, SemanticExt);
+
     }
 }

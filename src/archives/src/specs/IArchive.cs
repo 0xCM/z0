@@ -53,11 +53,33 @@ namespace Z0
         /// </summary>
         FolderName DataPartition => FolderName.Define("data", "Reference data");
 
+        /// <summary>
+        /// The folder name that corresponds to the entry process
+        /// </summary>
+        FolderName ExeFolder 
+            => FolderName.Define(ExecutingApp);
+
         FolderName CodeFolder 
             => FolderName.Define("code", "Hex formatted encoded x86 assembly");
 
         FolderName AsmFolder 
             => FolderName.Define("asm", "Formatted x86 assembly");
+
+        [MethodImpl(Inline)]
+        FileName LegalFileName(OpIdentity id, FileExtension ext)
+            => id.ToLegalFileName(ext);
+
+        [MethodImpl(Inline)]
+        FileName LegalFileName(PartId part, OpIdentity id, FileExtension ext)
+            => FileName.Define(text.concat(part.Format(), Chars.Dot, LegalFileName(id,ext)));
+
+        [MethodImpl(Inline)]
+        FileName LegalFileName(ApiHostUri host, OpIdentity id, FileExtension ext)
+            => FileName.Define(text.concat(host.Owner.Format(), Chars.Dot, host.Name, Chars.Dot, LegalFileName(id,ext)));
+
+        [MethodImpl(Inline)]
+        FileName LegalFileName(ApiHostUri host, FileExtension ext)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), ext);
 
         FileName AsmFileName(OpIdentity id) 
             => LegalFileName(id, Asm);
@@ -91,10 +113,16 @@ namespace Z0
             => ExecutingApp.IsTest() ? TestPartition : AppPartition;
 
         /// <summary>
-        /// The process-specific archive folder
+        /// The root directory for process-specific archive folders
         /// </summary>
-        FolderPath ProcessDir 
+        FolderPath ExeRoot 
             => ArchiveRoot + RootPartition;
+
+        /// <summary>
+        /// A process-specific directory beneath the exe root
+        /// </summary>
+        FolderPath ExeDir 
+            => ExeRoot + ExeFolder;
 
         /// <summary>
         /// Nonrecursively enumerates the files in a directory owned by one of a supplied list of parts
@@ -115,31 +143,23 @@ namespace Z0
             => FolderName.Define(host);
 
         [MethodImpl(Inline)]
-        FolderPath SubDir(FolderName name)
-            => ProcessDir + name;                
+        RelativeLocation HostPart(ApiHostUri host)
+            => RelativeLocation.Define(PartFolder(host.Owner), HostFolder(host));
 
         [MethodImpl(Inline)]
-        FolderPath SubDir(Type t)            
-            => SubDir(TypeFolder(t));
+        FolderPath HostPartDir(FolderPath parent, ApiHostUri host)
+            => parent + RelativeLocation.Define(PartFolder(host.Owner), HostFolder(host));
 
         [MethodImpl(Inline)]
-        FolderPath DataDir(Type t)            
-            => (ProcessDir + DataPartition) + TypeFolder(t);
+        FolderPath ExeSubDir(FolderName name)
+            => ExeDir + name;                
 
         [MethodImpl(Inline)]
-        FileName LegalFileName(OpIdentity id, FileExtension ext)
-            => id.ToLegalFileName(ext);
+        FolderPath ExeDataDir(FolderName folder)            
+            => (ExeDir + DataPartition) + folder;
 
         [MethodImpl(Inline)]
-        FileName LegalFileName(PartId part, OpIdentity id, FileExtension ext)
-            => FileName.Define(text.concat(part.Format(), Chars.Dot, LegalFileName(id,ext)));
-
-        [MethodImpl(Inline)]
-        FileName LegalFileName(ApiHostUri host, OpIdentity id, FileExtension ext)
-            => FileName.Define(text.concat(host.Owner.Format(), Chars.Dot, host.Name, Chars.Dot, LegalFileName(id,ext)));
-
-        [MethodImpl(Inline)]
-        FileName LegalFileName(ApiHostUri host, FileExtension ext)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), ext);
+        FolderPath ExeDataDir(Type t)            
+            => ExeDataDir(TypeFolder(t));
     }
 }

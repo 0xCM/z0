@@ -22,7 +22,7 @@ namespace Z0.Asm
         
         public AsmMemDirect? Direct {get;set;}
 
-        public ulong Address {get; set;}
+        public MemoryAddress Address {get; set;}
 
         public MemorySize Size {get; set;}
 

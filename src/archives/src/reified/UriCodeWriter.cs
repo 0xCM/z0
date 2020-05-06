@@ -37,7 +37,7 @@ namespace Z0
 
         public void Write(UriCode[] src)
         {
-            var idpad = src.Max(x => x.Uri.IdentityText.Length) + 1;
+            var idpad = src.Max(x => x.OpUri.IdentityText.Length) + 1;
             for(var i=0; i< src.Length; i++)
                 Write(src[i], idpad);                        
             StreamOut.Flush();

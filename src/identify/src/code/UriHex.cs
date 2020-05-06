@@ -36,14 +36,14 @@ namespace Z0
         /// <summary>
         /// The operation uri
         /// </summary>
-        public OpUri Uri {get;}
+        public OpUri OpUri {get;}
 
         /// <summary>
         /// The identifier of the defined operation
         /// </summary>
-        public OpIdentity Id { [MethodImpl(Inline)] get  => Uri.OpId; }
+        public OpIdentity Id { [MethodImpl(Inline)] get  => OpUri.OpId; }
 
-        public ApiHostUri Host { [MethodImpl(Inline)] get => Uri.HostPath; }
+        public ApiHostUri Host { [MethodImpl(Inline)] get => OpUri.HostPath; }
 
         public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public UriHex(OpUri uri, BinaryCode src)
         {
-            this.Uri = uri;
+            this.OpUri = uri;
             this.Encoded = src;
             this.Identifier = uri.IdentityText;
         }
@@ -81,7 +81,7 @@ namespace Z0
         UriHex(string baduri, BinaryCode src)
         {
             Identifier = baduri;
-            Uri = OpUri.Empty;
+            OpUri = OpUri.Empty;
             Encoded = src;
         }
 
@@ -90,9 +90,9 @@ namespace Z0
             => Encoded.Equals(src.Encoded);
 
         public string Format()
-            => text.concat(Uri.IdentityText, text.spaces(5), Encoded.Format());
+            => text.concat(OpUri.IdentityText, text.spaces(5), Encoded.Format());
 
         public string Format(int uripad)
-            => text.concat(Uri.IdentityText.PadRight(uripad), Encoded.Format());            
+            => text.concat(OpUri.IdentityText.PadRight(uripad), Encoded.Format());            
     }
 }

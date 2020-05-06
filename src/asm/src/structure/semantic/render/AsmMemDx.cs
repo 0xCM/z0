@@ -7,9 +7,9 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct AsmFormatServices
+    partial struct SemanticRender
     {
-        public static string RenderContent(AsmMemScale src)
+        public static string Render(AsmMemScale src)
         {
             if(src.IsNonEmpty)
                 return src.Value.ToString();
@@ -17,7 +17,7 @@ namespace Z0.Asm
                 return string.Empty;
         }
 
-        public static string Format(AsmMemDx src)
+        public static string Render(AsmMemDx src)
             => src.Size switch{
                 NumericSize.SZ1 => ((byte)src.Value).FormatAsmHex(),
                 NumericSize.SZ2 => ((ushort)src.Value).FormatAsmHex(),

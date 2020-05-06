@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Seed;
     using static AsmQuery;
 
-    public interface IAsmQuery
+    public interface ISemanticQuery
     {
         IAsmBranch BranchInfo(MemoryAddress @base, Instruction src, int index)
             => Service.BranchInfo(@base, src,index);        
@@ -18,6 +18,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         InstructionInfo Details(Instruction src)        
             => Service.Details(src);
+
+        [MethodImpl(Inline)]
+        SegmentedIdentity Identify(MemorySize src)        
+            => Service.Identify(src);
 
         /// <summary>
         /// Extracts immediate information, if applicable, from an instruction operand
@@ -200,8 +204,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
-        bool IsMemEs(OpKind src)            
-            => Service.IsMemEs(src);
+        bool IsSegEs(OpKind src)            
+            => Service.IsSegEs(src);
 
         /// <summary>
         /// Determines whether the classified operand is a 64-bit memory offset. 

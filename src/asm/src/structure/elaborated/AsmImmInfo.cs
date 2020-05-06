@@ -13,19 +13,19 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
-    public readonly struct AsmImmInfo
+    public readonly struct AsmImmInfo : INullaryKnown
     {
         public static AsmImmInfo Empty => default(AsmImmInfo);
 
-        public readonly NumericWidth Width;
+        public NumericWidth Width {get;}
 
-        public readonly ulong Value;
+        public ulong Value {get;}
 
-        public readonly bool Signed;
+        public bool Signed {get;}
 
-        public readonly bool Direct;
+        public bool Direct {get;}
 
-        public readonly SignExensionKind SignExension;
+        public SignExensionKind SignExension {get;}
 
         [MethodImpl(Inline)]
         public static AsmImmInfo Define(byte value, bool direct, SignExensionKind? sek = null)

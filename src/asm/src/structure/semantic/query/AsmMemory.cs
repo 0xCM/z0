@@ -10,9 +10,13 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    partial struct AsmQuery : IAsmQuery
+    using W = FixedWidth;
+    using NI = NumericIndicator;
+    using TI = TypeIndicator;
+
+    partial struct AsmQuery : ISemanticQuery
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public bool IsSegBase(OpKind src)
             => src == OpKind.MemorySegDI
             || src == OpKind.MemorySegEDI
@@ -21,24 +25,25 @@ namespace Z0.Asm
             || src == OpKind.MemorySegRSI
             || src == OpKind.MemorySegSI;
 
-        [MethodImpl(Inline)]
-        public bool IsMemEs(OpKind src)            
+        [MethodImpl(Inline), Op]
+        public bool IsSegEs(OpKind src)            
             => src == OpKind.MemoryESDI
             || src == OpKind.MemoryESEDI
             || src == OpKind.MemoryESRDI;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public bool IsMem64(OpKind src)
             => src == OpKind.Memory64;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public bool IsMemDirect(OpKind src)
             => src == OpKind.Memory;         
         
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public bool IsMem(OpKind src)            
-            => IsMemDirect(src) || IsMem64(src) || IsMemEs(src) || IsSegBase(src);
+            => IsMemDirect(src) || IsMem64(src) || IsSegEs(src) || IsSegBase(src);
 
+        [Op]
         public AsmMemInfo MemInfo(Instruction src, int index)
         {            
             var k = OperandKind(src,index);        
@@ -65,5 +70,36 @@ namespace Z0.Asm
 
             return AsmMemInfo.Empty;
         } 
+
+        /// <summary>
+        /// Specifies the segmented identity of a specified memory size
+        /// </summary>
+        /// <param name="src">The source value</param>
+        public SegmentedIdentity Identify(MemorySize src)
+            => src switch {
+                    MemorySize.Packed128_Int8 => (TI.Signed, W.W128, W.W8, NI.Signed),
+                    MemorySize.Packed128_UInt8 => (TI.Unsigned, W.W128, W.W8, NI.Unsigned),
+                    MemorySize.Packed128_Int16 => (TI.Signed, W.W128, W.W16, NI.Signed),
+                    MemorySize.Packed128_UInt16 => (TI.Unsigned, W.W128, W.W16, NI.Unsigned),
+                    MemorySize.Packed128_Int32 => (TI.Signed, W.W128, W.W32, NI.Signed),
+                    MemorySize.Packed128_UInt32 => (TI.Unsigned, W.W128, W.W32, NI.Unsigned),
+                    MemorySize.Packed128_Int64 => (TI.Signed, W.W128, W.W64, NI.Signed),
+                    MemorySize.Packed128_UInt64 => (TI.Unsigned, W.W128, W.W64, NI.Unsigned),
+                    MemorySize.Packed128_Float32 => (TI.Float, W.W128, W.W32, NI.Float),
+                    MemorySize.Packed128_Float64 => (TI.Float, W.W128, W.W64, NI.Float),
+                    MemorySize.Packed256_Int8 => (TI.Signed, W.W256, W.W8, NI.Signed),
+                    MemorySize.Packed256_UInt8 => (TI.Unsigned, W.W256, W.W8, NI.Unsigned),
+                    MemorySize.Packed256_Int16 => (TI.Signed, W.W256, W.W16, NI.Signed),
+                    MemorySize.Packed256_UInt16 => (TI.Unsigned, W.W256, W.W16, NI.Unsigned),
+                    MemorySize.Packed256_Int32 => (TI.Signed, W.W256, W.W32, NI.Signed),
+                    MemorySize.Packed256_UInt32 => (TI.Unsigned, W.W256, W.W32, NI.Unsigned),
+                    MemorySize.Packed256_Int64 => (TI.Signed, W.W256, W.W64, NI.Signed),
+                    MemorySize.Packed256_UInt64 => (TI.Unsigned, W.W256, W.W64, NI.Unsigned),
+                    MemorySize.Packed256_Float32 => (TI.Float, W.W256, W.W32, NI.Float),
+                    MemorySize.Packed256_Float64 => (TI.Float, W.W256, W.W64, NI.Float),
+                    MemorySize.Unknown => SegmentedIdentity.Empty,
+                    _ => SegmentedIdentity.Set(src.ToString())
+            };
+
     }
 }

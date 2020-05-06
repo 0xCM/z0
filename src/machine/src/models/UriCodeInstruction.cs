@@ -15,8 +15,20 @@ namespace Z0.Asm
     public readonly struct UriCodeInstruction
     {        
         public UriCode Code {get;}
-        
-        public SequencedInstruction Instruction {get;}
+            
+        public SequencedInstruction Sequenced {get;}
+
+        public int SequenceNumber => Sequenced.Sequence;
+
+        public Instruction Instruction => Sequenced.Instruction;
+
+        public MemoryAddress BaseAddress => Code.Address;        
+
+        public OpIdentity OpId => Code.OpId;
+
+        public OpUri OpUri => Code.OpUri;
+
+        public ApiHostUri HostUri => OpUri.HostPath;
 
         [MethodImpl(Inline)]
         public static implicit operator UriCodeInstruction((UriCode code, SequencedInstruction inxs) src)
@@ -26,14 +38,14 @@ namespace Z0.Asm
         public UriCodeInstruction(UriCode code, int seq, Instruction inxs)
         {
             Code = code;
-            Instruction = (seq, inxs);
+            Sequenced = (seq, inxs);
         }
 
         [MethodImpl(Inline)]
         public UriCodeInstruction(UriCode code, SequencedInstruction inxs)
         {
             Code = code;
-            Instruction = inxs;
+            Sequenced = inxs;
         }
     }
 }

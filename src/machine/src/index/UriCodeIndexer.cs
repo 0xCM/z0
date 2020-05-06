@@ -49,8 +49,8 @@ namespace Z0
                 else
                     count++;
 
-                MemoryUri.TryAdd(code.Address, code.Uri);
-                UriCodes.TryAdd(code.Uri, code);
+                MemoryUri.TryAdd(code.Address, code.OpUri);
+                UriCodes.TryAdd(code.OpUri, code);
             }
             return count;
         }

@@ -20,8 +20,8 @@ namespace Z0
         /// <summary>
         /// The identifying uri
         /// </summary>
-        OpUri Uri {get;}
+        OpUri OpUri {get;}
 
-        OpIdentity IIdentified<OpIdentity>.Id => Uri.OpId;
+        OpIdentity IIdentified<OpIdentity>.Id => OpUri.OpId;
     }
 }

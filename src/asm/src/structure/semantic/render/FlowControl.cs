@@ -9,21 +9,21 @@ namespace Z0.Asm
 
     using static FlowControl;
  
-    partial struct AsmFormatServices 
+    partial struct SemanticRender 
     {
-        public static string RenderContent(FlowControl src)
+        public static string Render(FlowControl src)
             => src switch{
                 Next => "next",
-                UnconditionalBranch => "uncoditional branch",
-                IndirectBranch => "indirect branch",
-                ConditionalBranch => "conditional branch",
+                UnconditionalBranch => "branch[unconditional]",
+                IndirectBranch => "branch[indirect]",
+                ConditionalBranch => "branch[conditional]",
                 Return => "ret",
+                Call => "call",
+                IndirectCall => "call[indirect]",
                 FlowControl.Exception => "exception",		
                 XbeginXabortXend => "XbeginXabortXend",
                 Interrupt => "hardstop",
-                IndirectCall => "indirect call",
-                Call => "call",
-                _ => "eh?"
+                _ => Unknown
             };
     }
 }

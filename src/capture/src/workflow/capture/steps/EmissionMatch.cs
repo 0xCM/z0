@@ -36,11 +36,11 @@ namespace Z0.Asm
                 var fileSrc = reader.Read(srcB).ToArray().ToSpan();                        
 
                 Claim.eq(fileSrc.Length, srcA.Length);            
-                Claim.eq(fileSrc.Count(s => s.Uri.IsEmpty), 0);
+                Claim.eq(fileSrc.Count(s => s.OpUri.IsEmpty), 0);
                 
                 for(var i=0; i<srcA.Length; i++)
                 {
-                    Claim.eq(skip(fileSrc,i).Uri, skip(srcA,i).Uri);  
+                    Claim.eq(skip(fileSrc,i).OpUri, skip(srcA,i).OpUri);  
                     Claim.eq(skip(fileSrc,i).Encoded.Length, skip(srcA, i).Encoded.Length);
                 }
 

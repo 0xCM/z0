@@ -13,6 +13,9 @@ namespace Z0
 
     public readonly struct SegmentedIdentity : IIdentifiedType<SegmentedIdentity>
     {        
+        public static SegmentedIdentity Set(string text)
+            => new SegmentedIdentity(text);
+            
         /// <summary>
         /// Extracts an index-identified segmented identity part from an operation identity
         /// </summary>
@@ -65,15 +68,27 @@ namespace Z0
             => new SegmentedIdentity(src.si, src.w, ((NumericWidth)src.t).ToNumericKind(src.i));
 
         [MethodImpl(Inline)]
+        internal SegmentedIdentity(string text)
+        {
+            IdentityText = text;
+            Indicator = TypeIndicator.Empty;
+            SegKind = NumericKind.None;
+            TypeWidth = FixedWidth.None;
+        }
+
+        [MethodImpl(Inline)]
         internal SegmentedIdentity(TypeIndicator indicator, FixedWidth typewidth, NumericKind segkind)
         {
-            this.Indicator = indicator;
-            this.TypeWidth = typewidth;
-            this.SegKind = segkind;
-            this.IdentityText 
-                = (TypeWidth == 0 && segkind == 0) 
-                ? string.Empty 
-                : $"{indicator}{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
+            Indicator = indicator;
+            TypeWidth = typewidth;
+            SegKind = segkind;
+            var numeric = (int)typewidth == segkind.Width();
+            if(TypeWidth == 0 && segkind == 0)
+                IdentityText = string.Empty;
+            else if((int)typewidth == segkind.Width())
+                IdentityText = segkind.Format();
+            else
+                IdentityText = $"{indicator}{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
         }
 
         public TypeIdentity AsTypeIdentity()
@@ -82,7 +97,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(SegmentedIdentity src)
             => equals(this, src);
- 
+    
+        public string Format()
+            => IdentityText;
+
         public int CompareTo(SegmentedIdentity src)
             => compare(this, src);
 

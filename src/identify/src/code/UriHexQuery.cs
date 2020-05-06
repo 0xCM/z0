@@ -24,14 +24,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         OpIndex<UriHex> CreateIndex(IEnumerable<UriHex> src)
-            => Identify.index(src.Select(x => (x.Uri.OpId, x)));
+            => Identify.index(src.Select(x => (x.OpUri.OpId, x)));
         
         bool AcceptsParameter(UriHex src, NumericKind kind)
             => Identify.numeric(src.Id.TextComponents.Skip(1)).Contains(kind);
 
         IEnumerable<UriHex> AcceptsParameters(IEnumerable<UriHex> src, NumericKind k1, NumericKind k2)
             => from code in src
-                let kinds = Identify.numeric(code.Uri.OpId.TextComponents.Skip(1))
+                let kinds = Identify.numeric(code.OpUri.OpId.TextComponents.Skip(1))
                 where kinds.Contains(k1) && kinds.Contains(k2)
                 select code;
 
@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         int ParameterCount(UriHex src)
-            => src.Uri.OpId.TextComponents.Count() - 1;
+            => src.OpUri.OpId.TextComponents.Count() - 1;
                     
         IEnumerable<UriHex> WithParameterCount(IEnumerable<UriHex> src, int count)
             => from code in src

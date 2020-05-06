@@ -88,7 +88,7 @@ namespace Z0
                     Address : extract.Address,
                     Length : extract.Encoded.Length,
                     TermCode: extract.TermCode,
-                    Uri : extract.Uri,
+                    Uri : extract.OpUri,
                     OpSig : extract.Method.Signature().Format(),
                     Data : extract.Encoded
                 );

@@ -18,7 +18,7 @@ namespace Z0
     {
         public IMachineContext Context {get;}
 
-        public IMachineBroker Broker {get;}
+        public IEventBroker Broker {get;}
 
         public IAppMsgSink Sink {get;}
 
@@ -35,10 +35,9 @@ namespace Z0
         {
             Sink = context.AppMsgSink;
             Context = context;
-            Broker = MachineBroker.New;
+            Broker = new EventBroker();
             Files = new MachineFiles(context);            
-            (this as IMachineEvents).Connect();                        
-            
+            (this as IMachineEvents).Connect();            
         }
 
         public void Run()
@@ -94,6 +93,11 @@ namespace Z0
         public void OnEvent(DecodedHost e)
         {
             Sink.Deposit(e);
+            if(e.Part == PartId.Cast)
+            {
+                var formatter = SemanticFormatter.Create(Context);
+                formatter.Format(e.Instructions);
+            }
         }
 
         HostCodeInstructions Decode(ApiHostUri host, UriCode[] src)
