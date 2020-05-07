@@ -12,45 +12,49 @@ namespace Z0.Asm
     /// <summary>
     /// Describes a branching instruction operand
     /// </summary>
-    public readonly struct AsmBranchInfo
+    public readonly struct AsmBranchInfo : INullaryKnown, INullary<AsmBranchInfo>, IRender
     {
-        public readonly MemoryAddress Base;
+        public static AsmBranchInfo Empty => new AsmBranchInfo(MemoryAddress.Empty, MemoryAddress.Empty, AsmBranchTarget.Empty);
+        
+        public MemoryAddress Base {get;}
 
-        public readonly MemoryAddress IP;
+        public MemoryAddress IP {get;}
 
-        public readonly MemoryAddress Local;
+        public AsmBranchTarget Target {get;}
 
-        public readonly LocalAddress Relative;
+        public MemoryAddress Source => IP - Base;
 
-        public readonly int Size;
+        public bool IsEmpty { [MethodImpl(Inline)] get => Base == 0 && IP == 0; }
 
-        public readonly bool Near;
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => !IsEmpty; }
+
+        public bool IsNear => Target.IsNear;
+
+        public AsmBranchInfo Zero => Empty;
 
         [MethodImpl(Inline)]
-        public static AsmBranchInfo Define(MemoryAddress @base, MemoryAddress target, MemoryAddress local, int size, bool near)
-            => new AsmBranchInfo(@base, target, local, size, near);
+        public static AsmBranchInfo Define(MemoryAddress @base, MemoryAddress ip, AsmBranchTarget target)
+            => new AsmBranchInfo(@base, ip, target);
 
         [MethodImpl(Inline)]
-        AsmBranchInfo(MemoryAddress @base, MemoryAddress target, MemoryAddress local,  int size, bool near)
-        {
+        AsmBranchInfo(MemoryAddress @base, MemoryAddress ip, AsmBranchTarget target)
+        {            
             Base = @base;
-            IP = target;
-            Local = local;
-            Relative = near ? LocalAddress.From((ushort)(local - @base)) : LocalAddress.Empty;
-            Size = size;
-            Near = near;
+            IP = ip;
+            Target = target;
         }
 
-        public bool IsEmpty
+        static string Arrow<S,T>(S src, T dst)
+            where T : ITextual
+            where S : ITextual
+            => text.concat(src.Format(), " -> ", dst.Format());
+
+        public string Render()
         {
-            [MethodImpl(Inline)]
-            get => Base == 0 && IP == 0 && Size == 0;
+            var dst = Target.Address > Base ? Target.Address - Base : Base - Target.Address;
+            var expr = (dst < ushort.MaxValue) ? Arrow(Source,dst) : Arrow(IP,Target);
+            return expr;        
         }
 
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !IsEmpty;
-        }
     }
 }

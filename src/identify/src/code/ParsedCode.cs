@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         ParsedCode(MemoryAddress src, LocatedCode raw, LocatedCode parsed)
         {
-            Address = insist(src, x => x.NonZero);
+            Address = insist(src, x => x.IsNonEmpty);
             insist(src.Equals(raw.Address));
             insist(src.Equals(parsed.Address));
             Unparsed = raw;
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         ParsedCode(MemoryAddress src, byte[] raw, byte[] parsed)
         {
-            Address = insist(src, x => x.NonZero);
+            Address = insist(src, x => x.IsNonEmpty);
             Unparsed = LocatedCode.Define(src, raw);
             Encoded = LocatedCode.Define(src, parsed);
         }

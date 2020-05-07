@@ -5,8 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
-    public interface IUriCodeIndex
+    using static Seed;
+
+    public interface IMachineIndexBuilder
+    {
+        int Include(params UriCode[] src);   
+
+        MachineIndex Freeze();
+    }
+
+    public interface IMachineIndex
     {
         int EntryCount {get;}
 

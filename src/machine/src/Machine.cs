@@ -24,12 +24,10 @@ namespace Z0
 
         IMachineFiles Files {get;}
 
-        IUriCodeIndexer CodeIndexer {get;}
-            = UriCodeIndexer.Service;
+        IMachineIndexBuilder IndexBuilder {get;}            
 
-        ICaptureArchive Archive => Context.Archive;
-
-        IAsmFunctionDecoder Decoder => Context.Decoder;
+        ICaptureArchive Archive 
+            => Context.Archive;
 
         Machine(IMachineContext context)
         {
@@ -37,9 +35,9 @@ namespace Z0
             Context = context;
             Broker = new EventBroker();
             Files = new MachineFiles(context);            
+            IndexBuilder = MachineIndex.Builder;
             (this as IMachineEvents).Connect();            
         }
-
 
         public void OnEvent(LoadedParseReport e)
         {
@@ -53,7 +51,7 @@ namespace Z0
             DecodeParts(e.Index);
         }
 
-        public void OnEvent(DecodedIndex e)
+        public void OnEvent(DecodedMachine e)
         {
             Sink.Deposit(e);
         }
@@ -74,7 +72,7 @@ namespace Z0
         void ParseReports()
         {
             Control.iter(Files.ParseFiles, ParseReport);
-            Broker.Raise(IndexedCode.Create(CodeIndexer.Freeze()));
+            Broker.Raise(IndexedCode.Create(IndexBuilder.Freeze()));
         }
         
         void ParseReport(FilePath src)
@@ -84,7 +82,7 @@ namespace Z0
                     .OnSuccess(value => Broker.Raise(LoadedParseReport.Create(value, src)));
         }
 
-        void DecodeParts(UriCodeIndex src)
+        void DecodeParts(MachineIndex src)
         {
             var dst = list<PartInstructions>();
             var parts = src.Parts;
@@ -96,7 +94,7 @@ namespace Z0
                 dst.Add(DecodePart(pcs));
             }
 
-            Broker.Raise(DecodedIndex.Create(src, dst.ToArray()));
+            Broker.Raise(DecodedMachine.Create(src, dst.ToArray()));
         }
 
         PartInstructions DecodePart(PartCode pcs)
@@ -130,7 +128,7 @@ namespace Z0
             void OnDecoded(Instruction inxs)
                 => dst.Add(OpInstruction.Define(src.Address, src.OpUri, seq++, inxs));
             
-            Decoder.Decode(src.Encoded, OnDecoded);
+            Context.Decoder.Decode(src.Encoded, OnDecoded);
             return OpInstructions.Create(src.OpUri, dst.ToArray());
         }
 
@@ -141,7 +139,7 @@ namespace Z0
 
         void Index(MemberParseRecord record)
         {
-            CodeIndexer.Include(UriCode.Define(record.Uri, record.Data));
+            IndexBuilder.Include(UriCode.Define(record.Uri, record.Data));
         }
 
         void Describe()

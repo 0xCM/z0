@@ -38,15 +38,23 @@ namespace Z0
                 return Option.none<SegmentedIdentity>();
         }
 
+        [MethodImpl(Inline)]
+        public static SegmentedIdentity Numeric(NumericKind src)
+            => new SegmentedIdentity(src);
+
         public static SegmentedIdentity Empty => new SegmentedIdentity(TypeIndicator.Empty, FixedWidth.None, NumericKind.None);
 
-        public readonly TypeIndicator Indicator;
+        public TypeIndicator Indicator {get;}
 
-        public readonly FixedWidth TypeWidth;
+        public FixedWidth TypeWidth {get;}
 
-        public readonly NumericKind SegKind;  
+        public NumericKind SegKind {get;}
 
         public string IdentityText {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator SegmentedIdentity(NumericKind src)
+            => Numeric(src);
 
         [MethodImpl(Inline)]
         public static implicit operator string(SegmentedIdentity src)
@@ -68,6 +76,15 @@ namespace Z0
             => new SegmentedIdentity(src.si, src.w, ((NumericWidth)src.t).ToNumericKind(src.i));
 
         [MethodImpl(Inline)]
+        internal SegmentedIdentity(NumericKind nk)
+        {
+            IdentityText = nk.KeywordNot();
+            Indicator = TypeIndicator.Empty;
+            SegKind = nk;
+            TypeWidth = (FixedWidth)nk.Width();
+        }
+
+        [MethodImpl(Inline)]
         internal SegmentedIdentity(string text)
         {
             IdentityText = text;
@@ -82,11 +99,8 @@ namespace Z0
             Indicator = indicator;
             TypeWidth = typewidth;
             SegKind = segkind;
-            var numeric = (int)typewidth == segkind.Width();
             if(TypeWidth == 0 && segkind == 0)
                 IdentityText = string.Empty;
-            else if((int)typewidth == segkind.Width())
-                IdentityText = segkind.Format();
             else
                 IdentityText = $"{indicator}{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
         }

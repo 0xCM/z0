@@ -19,23 +19,23 @@ namespace Z0.Asm
 
             var result = src switch{
 		    OpKind.Register => "register",
-            NearBranch16 => "branch[near:16]",
-		    NearBranch32 => "branch[near:32]",
-		    NearBranch64 => "branch[near:64]",
-            FarBranch16 => "branch[far:16]",
-            FarBranch32 => "branch[far:32]",
+            NearBranch16 => "branch16",
+		    NearBranch32 => "branch32",
+		    NearBranch64 => "branch64",
+            FarBranch16 => "farbranch16",
+            FarBranch32 => "farbranch32",
             Immediate8 => "imm8",
-            Immediate8_2nd => "imm8[2]",
+            Immediate8_2nd => "imm8x2",
             Immediate16 => "imm16",
             Immediate32 => "imm32",
             Immediate64 => "imm64",
-            Immediate8to16 => "imm8[16i]",
-            Immediate8to32 => "imm8[32i]",
-            Immediate8to64 => "imm8[64i]",
-            Immediate32to64 => "imm32[64i]",
+            Immediate8to16 => "imm16i",
+            Immediate8to32 => "imm32i",
+            Immediate8to64 => "imm64i",
+            Immediate32to64 => "imm32x64i",
             Memory64 => "mem64",
             Memory => "mem",
-                _ => ""
+                _ => src.ToString()
             };
 
             return result;

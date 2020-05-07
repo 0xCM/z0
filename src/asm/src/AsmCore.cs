@@ -10,6 +10,18 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
+    partial class XTend
+    {
+        public static T Map<S,T>(this S src, Func<S,T> f, T @default = default)
+            where S : INullaryKnown
+        {
+            if(src.IsNonEmpty)
+                return f(src);
+            else 
+                return default;
+        }
+    }
+    
     public readonly struct AsmCore : IAsmCore
     {
         public static IAsmCore Services => default(AsmCore);

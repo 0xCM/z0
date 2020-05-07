@@ -11,14 +11,15 @@ namespace Z0.Asm
     { 
         public static SemanticRender Service => default(SemanticRender);
 
-        
-        const string RightArrow = " -> ";
-
-        const string LeftArrow = " <- ";
-
+        public static string Render(AsmBranchInfo src)
+            => src.Render();
+    
         const string Unknown = "???";
+
+        const string PipeSep = " | ";
 
         public static string Render(Register src)
             => src.ToString();
+
     }
 }

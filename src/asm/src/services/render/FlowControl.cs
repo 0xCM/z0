@@ -14,9 +14,9 @@ namespace Z0.Asm
         public static string Render(FlowControl src)
             => src switch{
                 Next => "next",
-                UnconditionalBranch => "branch[unconditional]",
+                UnconditionalBranch => "branch[absolute]",
                 IndirectBranch => "branch[indirect]",
-                ConditionalBranch => "branch[conditional]",
+                ConditionalBranch => "branch[test]",
                 Return => "ret",
                 Call => "call",
                 IndirectCall => "call[indirect]",

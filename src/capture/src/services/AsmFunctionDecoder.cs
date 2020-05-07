@@ -37,7 +37,7 @@ namespace Z0.Asm
             => Decode(src.Encoded, src.Address).TryMap(x => AsmInstructionList.Create(x, src));
 
         public Option<AsmInstructions> Decode(UriHex src)        
-            => Decode(src.Encoded, MemoryAddress.Zero);
+            => Decode(src.Encoded, MemoryAddress.Empty);
 
         public Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f)
             => Decode(src.Encoded,f).TryMap(x => AsmFunction.Define(src,x));

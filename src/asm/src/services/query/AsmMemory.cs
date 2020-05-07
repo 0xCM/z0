@@ -9,6 +9,7 @@ namespace Z0.Asm
     
     using static Seed;
     using static Memories;
+    using static OpKind;
 
     using W = FixedWidth;
     using NI = NumericIndicator;
@@ -43,29 +44,32 @@ namespace Z0.Asm
         public bool IsMem(OpKind src)            
             => IsMemDirect(src) || IsMem64(src) || IsSegEs(src) || IsSegBase(src);
 
+
+        [MethodImpl(Inline), Op]
+        public AsmInxsMemory InxsMemory(Instruction src, int index)
+            => AsmInxsMemory.From(src,index);
+
+        [MethodImpl(Inline), Op]
+        public bool HasInxsMemory(Instruction src, int index)
+            => AsmInxsMemory.Has(src,index);
+
         [Op]
         public AsmMemInfo MemInfo(Instruction src, int index)
         {            
-            var k = OperandKind(src,index);        
+            var k = OperandKind(src, index);        
 
             if(IsMem(k))
             {
+                var isDirect = IsMemDirect(k);
+                var isSegBase = IsSegBase(k);
+
                 var info = new AsmMemInfo();
-                info.Size = src.MemorySize;
-
-                if(IsMemDirect(k))
-                    info.Direct = AsmMemDirect.From(src);
-
-                if(IsMemDirect(k) || IsSegBase(k))
-                {
-                    info.SegmentPrefix = src.SegmentPrefix;                    
-                    info.SegmentRegister = src.MemorySegment;
-                }
-
-                if(IsMem64(k))
-                    info.Address = src.MemoryAddress64;                
-
-                return info;
+                var sz = src.MemorySize;
+                var memdirect = IsMemDirect(k) ? AsmMemDirect.From(src) : AsmMemDirect.Empty;
+                var prefix = (isDirect || isSegBase) ? src.SegmentPrefix : Register.None;
+                var segreg = (isDirect || isSegBase) ? src.MemorySegment : Register.None;
+                var mem64 = IsMem64(k) ? src.MemoryAddress64 : 0;
+                return new AsmMemInfo(segreg, prefix, memdirect, mem64, sz);
             }
 
             return AsmMemInfo.Empty;
@@ -77,6 +81,16 @@ namespace Z0.Asm
         /// <param name="src">The source value</param>
         public SegmentedIdentity Identify(MemorySize src)
             => src switch {
+                    MemorySize.UInt8 => NumericKind.U8,
+                    MemorySize.UInt16 => NumericKind.U16,
+                    MemorySize.UInt32 => NumericKind.U32,
+                    MemorySize.UInt64 => NumericKind.U64,
+                    MemorySize.Int8 => NumericKind.I8,
+                    MemorySize.Int16 => NumericKind.I16,
+                    MemorySize.Int32 => NumericKind.I32,
+                    MemorySize.Int64 => NumericKind.I64,
+                    MemorySize.Float32 => NumericKind.F32,
+                    MemorySize.Float64 => NumericKind.F64,
                     MemorySize.Packed128_Int8 => (TI.Signed, W.W128, W.W8, NI.Signed),
                     MemorySize.Packed128_UInt8 => (TI.Unsigned, W.W128, W.W8, NI.Unsigned),
                     MemorySize.Packed128_Int16 => (TI.Signed, W.W128, W.W16, NI.Signed),

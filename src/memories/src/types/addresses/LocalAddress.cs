@@ -9,11 +9,17 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct LocalAddress : INullary<LocalAddress>, ITextual
+    public readonly struct LocalAddress : INullary<LocalAddress>, ITextual, INullaryKnown
     {
         readonly ushort Offset;
 
         public static LocalAddress Empty => new LocalAddress(0);
+
+        public bool IsEmpty { [MethodImpl(Inline)] get => Offset == 0; }
+
+        public bool IsNonEmpty  { [MethodImpl(Inline)] get => Offset != 0; }
+
+        public LocalAddress Zero { [MethodImpl(Inline)] get => Empty; }
 
         [MethodImpl(Inline)]
         public static LocalAddress From(ushort offset)
@@ -59,14 +65,6 @@ namespace Z0.Asm
             Offset = offset;
         }
 
-        public LocalAddress Zero 
-            => Empty;
-
-        public bool IsEmpty 
-        {
-            [MethodImpl(Inline)]
-            get => Offset == 0;
-        }
 
         [MethodImpl(Inline)]
         public string Format()

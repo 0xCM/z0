@@ -2,24 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
 
     using static Seed;
 
-    public interface IUriCodeIndexer
+    public enum BranchTargetSize : byte
     {
-        int Include(params UriCode[] src);   
+        None = 0,
 
-        int EntryCount {get;}
+        Branch16 = 16,
 
-        ICollection<UriCode> Included {get;}
+        Branch32 = 32,
 
-        UriCodeIndex Freeze();
+        Branch64 = 64,
     }
+
 }

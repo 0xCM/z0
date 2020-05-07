@@ -12,14 +12,6 @@ namespace Z0.Asm
     partial struct SemanticRender
     {
        public static string Render(AsmImmInfo src)
-            => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
-    
-        public static string RenderKind(AsmImmInfo src)
-        {
-            if(src.Signed)
-                return text.concat("imm", src.Width.FormatValue(), IDI.Signed);
-            else
-                return text.concat("imm", src.Width.FormatValue(), IDI.Unsigned);
-        }
+            => text.concat(src.Value.FormatHex(zpad:false, prespec:false));    
     }
 }

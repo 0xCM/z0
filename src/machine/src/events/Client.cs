@@ -36,9 +36,9 @@ namespace Z0
 
         void OnEvent(DecodedPart e) => Sink.Deposit(e);
 
-        DecodedIndex DecodedIndex => DecodedIndex.Empty;
+        DecodedMachine DecodedIndex => DecodedMachine.Empty;
 
-        void OnEvent(DecodedIndex e) => Sink.Deposit(e);
+        void OnEvent(DecodedMachine e) => Sink.Deposit(e);
 
         void Connect()
         {

@@ -16,7 +16,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source operand kind</param>
         [MethodImpl(Inline), Op]
-        public bool IsRegisterOperand(OpKind src)
+        public bool IsRegister(OpKind src)
             => src == OpKind.Register;  
             
     	/// <summary>
@@ -24,7 +24,7 @@ namespace Z0.Asm
 		/// </summary>
 		/// <param name="operand">Operand number, 0-4</param>
         [Op]
-		public Register OperandRegister(Instruction src, int operand) 
+		public Register RegisterInfo(Instruction src, int operand) 
         {
 			switch (operand) 
             {

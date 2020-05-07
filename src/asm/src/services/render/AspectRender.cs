@@ -15,6 +15,8 @@ namespace Z0.Asm
     partial struct SemanticRender 
     {
         const string AspectDelimiter = CharText.Space + CharText.Pipe + CharText.Space;
+    
+        const string Assign = CharText.Space + CharText.Colon + CharText.Eq + CharText.Space;
 
         public string RenderAspects<T>(object src)
         {
@@ -30,6 +32,10 @@ namespace Z0.Asm
                 if(count++ != 0)
                     dst.Append(AspectDelimiter);
 
+                dst.Append(props[i].Name);
+                dst.Append(Chars.FSlash);
+
+
                 if(val is ITextual t)
                     dst.Append(t.Format());
                 else
@@ -38,5 +44,6 @@ namespace Z0.Asm
 
             return dst.ToString();
         }
+
     }
 }

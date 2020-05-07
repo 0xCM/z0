@@ -6,17 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using NK = NumericKind;
 
     using static Seed;
 
-
     partial class NumericType
     {
-
         [MethodImpl(Inline), Op]
         public static Type int8i() => typeof(sbyte);
 

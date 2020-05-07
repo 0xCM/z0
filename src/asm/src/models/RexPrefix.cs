@@ -11,6 +11,8 @@ namespace Z0.Asm
 
     using RFI = RexFieldIndex;   
     using RFW = RexFieldWidth;
+    using RF = RexFieldIndex;   
+
 
     public struct RexPrefix : IScalarField<byte>
     {                    
@@ -101,5 +103,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)] get => (RexCode)gbits.slice(Scalar, 4, (byte)RFW.Code);
             [MethodImpl(Inline)] set => Update(gbits.bitcopy((byte)value, 4, (byte)RFW.Code, Scalar));
         }
+
+        public string Render()
+            => $"{RF.Code}:{Code} | {RF.W}:{W} | {RF.R}:{R} | {RF.X}:{X} | {RF.B}:{B}";
+
     }
 }

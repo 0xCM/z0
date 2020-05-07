@@ -32,7 +32,7 @@ namespace Z0
     {
         public const int FieldCount = 6;
 
-        public static R Empty => new R(0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, LocatedCode.Empty);
+        public static R Empty => new R(0, MemoryAddress.Empty, 0, ExtractTermCode.None, OpUri.Empty, LocatedCode.Empty);
 
         public static R Parse(string src)
         {

@@ -38,7 +38,7 @@ namespace Z0
         public const int FieldCount = 8;
 
         public static R Empty 
-            => new R(0, 0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, LocatedCode.Empty);
+            => new R(0, 0, MemoryAddress.Empty, 0, ExtractTermCode.None, OpUri.Empty, text.blank, LocatedCode.Empty);
 
         public static ParseResult<MemberParseRecord> Parse(string src)
         {
@@ -56,7 +56,7 @@ namespace Z0
 
                 var seq = numericParser.Parse(fields[index++]);
                 var srcSeq = numericParser.Parse(fields[index++]);
-                var address = addressParser.Parse(fields[index++], MemoryAddress.Zero);
+                var address = addressParser.Parse(fields[index++], MemoryAddress.Empty);
                 var len = numericParser.Parse(fields[index++]);
                 var term = Enums.Parse(fields[index++], ExtractTermCode.None);
                 var uri = OpUri.ParseDefault(fields[index++]);

@@ -12,27 +12,44 @@ namespace Z0.Asm
     /// <summary>
     /// Describes a block of memory the context of an asm instruction operand
     /// </summary>
-    public struct AsmMemInfo
+    public readonly struct AsmMemInfo : INullaryKnown
     {      
-        public static AsmMemInfo Empty => default(AsmMemInfo);
+        public static AsmMemInfo Empty => new AsmMemInfo(Register.None, Register.None, AsmMemDirect.Empty, MemoryAddress.Empty, MemorySize.Unknown);
                 
-        public Register SegmentRegister {get; set;}
+        public Register SegmentRegister {get;}
                 
-        public Register SegmentPrefix {get; set;}
+        public Register SegmentPrefix {get;}
         
-        public AsmMemDirect? Direct {get;set;}
+        public AsmMemDirect Direct {get;}
 
-        public MemoryAddress Address {get; set;}
+        public MemoryAddress Address {get;}
 
-        public MemorySize Size {get; set;}
+        public MemorySize Size {get;}
+
+        public AsmMemInfo(Register segreg, Register prefix, AsmMemDirect mem, MemoryAddress address, MemorySize size)        
+        {
+            SegmentRegister = segreg;
+            SegmentPrefix = prefix;
+            Direct = mem;
+            Address = address;
+            Size = size;
+        }
 
         public bool IsEmpty
         {
-            get => Size == 0 && Direct == null && SegmentRegister == 0 && SegmentPrefix == 0;
+            [MethodImpl(Inline)]
+            get => Size == 0 && Direct.IsEmpty && SegmentRegister == 0 && SegmentPrefix == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
         }
 
         public bool HasKnownSize
         {
+            [MethodImpl(Inline)]
             get => Size != 0;
         }
     }

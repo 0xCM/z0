@@ -27,21 +27,27 @@ namespace Z0.Asm
         {
             var builder = text.build();
 
-            var sep = text.concat(Chars.Space, Chars.Pipe, Chars.Space);
-            builder.Append(src.Direct.MapValueOrDefault(x => Render(x), string.Empty));
-            //builder.Append(Chars.Space);        
-            //builder.Append(src.SegmentRegister.IsSome() ? text.concat(sep, "seg/",Render(src.SegmentRegister)) : string.Empty);
-            builder.Append(Chars.Space);        
-            builder.Append(src.SegmentPrefix.IsSome() ? text.concat(sep, "prefix/", Render(src.SegmentPrefix)) : string.Empty);
-            builder.Append(Chars.Space);        
-            builder.Append(src.Address.NonZero ? src.Address.Format() : string.Empty);
-
-            if(src.HasKnownSize)
+            var nonempty = false;
+            if(!src.IsEmpty)
             {
-                var fmt = Render(src.Size);
-                
-                builder.Append(sep);
-                builder.Append(fmt);
+                var s = Render(src.Direct);
+                if(text.nonempty(s))
+                {
+                    builder.Append(s);
+                    nonempty = true;
+                }
+            }
+
+            if(src.Address.IsNonEmpty)
+            {
+                builder.Append(src.Address.Format());
+                nonempty = true;
+            }
+
+            if(src.HasKnownSize && nonempty)
+            {
+                builder.Append(Chars.Colon);
+                builder.Append(Render(src.Size));
             }
             
             return builder.ToString();

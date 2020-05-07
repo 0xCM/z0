@@ -9,13 +9,23 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct AsmMemScale : INullary<AsmMemScale>
+    public readonly struct AsmMemScale : INullary<AsmMemScale>, INullaryKnown
     {   
         public static AsmMemScale Empty => new AsmMemScale(MemScaleKind.None);
+        
+        public MemScaleKind Kind {get;}
+
+        public bool IsEmpty { [MethodImpl(Inline)] get => Kind == 0; }
+
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => Kind != 0; }
+
+        public bool NonUnital { [MethodImpl(Inline)] get => Kind != MemScaleKind.S1;}
+
+        public bool NonZero { [MethodImpl(Inline)] get =>  Kind != 0; }
+
+        public byte Value { [MethodImpl(Inline)] get => (byte) Kind; }
 
         public AsmMemScale Zero => Empty;
-        
-        public readonly MemScaleKind Kind; 
 
         [MethodImpl(Inline)]
         public static implicit operator AsmMemScale(int src)
@@ -41,31 +51,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal AsmMemScale(MemScaleKind kind)
         {
-            this.Kind = kind;
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Kind == 0;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Kind != 0;
-        }
-
-        public bool IsNonUnital
-        {
-            [MethodImpl(Inline)]
-            get => Kind != MemScaleKind.S1;
-        }
-
-        public byte Value
-        {
-            [MethodImpl(Inline)]
-            get => (byte) Kind;
+            Kind = kind;
         }
 
         public override string ToString() 

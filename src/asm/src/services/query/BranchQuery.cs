@@ -41,28 +41,27 @@ namespace Z0.Asm
         public bool IsBranch(OpKind src)
             => IsNearBranch(src) || IsFarBranch(src);
 
-        [Op]
-        public IAsmBranch BranchInfo(MemoryAddress @base, Instruction src, int index)
+        public AsmBranchTarget BranchTarget(Instruction src, int index)
         {
             var k = OperandKind(src,index);
-            if(IsBranch(k))
+            switch(k)
             {
-                switch(k)
-                {
-                    case NearBranch16:
-                        return AsmNearBranch.Define(@base, src.IP, src.NearBranch16, 16);
-                    case NearBranch32:
-                        return AsmNearBranch.Define(@base, src.IP, src.NearBranch32, 32);
-                    case NearBranch64:
-                        return AsmNearBranch.Define(@base, src.IP, src.NearBranch64, 64);
-                    case FarBranch16:
-                        return AsmFarBranch.Define(@base, src.IP, src.FarBranch16, 16);
-                    case FarBranch32:
-                        return AsmFarBranch.Define(@base, src.IP, src.FarBranch32, 32);
-                }
+                case NearBranch16:
+                    return new AsmBranchTarget(BranchTargetKind.Near, BranchTargetSize.Branch16, src.NearBranch16);
+                case NearBranch32:
+                    return new AsmBranchTarget(BranchTargetKind.Near, BranchTargetSize.Branch32, src.NearBranch32);
+                case NearBranch64:
+                    return new AsmBranchTarget(BranchTargetKind.Near, BranchTargetSize.Branch64, src.NearBranch64);
+                case FarBranch16:
+                    return new AsmBranchTarget(BranchTargetKind.Far, BranchTargetSize.Branch16, src.FarBranch16, src.FarBranchSelector);
+                case FarBranch32:
+                    return new AsmBranchTarget(BranchTargetKind.Far, BranchTargetSize.Branch32, src.FarBranch32, src.FarBranchSelector);
             }
-
-            return AsmFarBranch.Empty;
+            return AsmBranchTarget.Empty;
         }
+
+        public AsmBranchInfo BranchInfo(MemoryAddress @base, Instruction src, int index)
+            => AsmBranchInfo.Define(@base, src.IP, BranchTarget(src,index));        
+
     }  
 }

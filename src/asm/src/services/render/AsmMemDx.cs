@@ -18,12 +18,6 @@ namespace Z0.Asm
         }
 
         public static string Render(AsmMemDx src)
-            => src.Size switch{
-                NumericSize.SZ1 => ((byte)src.Value).FormatAsmHex(),
-                NumericSize.SZ2 => ((ushort)src.Value).FormatAsmHex(),
-                NumericSize.SZ4 => ((uint)src.Value).FormatAsmHex(),
-                NumericSize.SZ8 => (src.Value).FormatAsmHex(),
-                _ => "0"
-            };
+            => src.Render();
     }
 }

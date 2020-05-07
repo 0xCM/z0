@@ -9,21 +9,25 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct MemoryOffset : IIdentification<MemoryOffset>, IAddressable
+    public readonly struct MemoryOffset : 
+        IIdentification<MemoryOffset>, 
+        IAddressable, 
+        INullaryKnown, 
+        INullary<MemoryOffset>
     {
-        public static MemoryOffset Zero => default;
+        public readonly ushort Offset;
+
+        public static MemoryOffset Empty => new MemoryOffset(0);
 
         public readonly MemoryAddress Base;
 
-        public readonly ushort Offset;
-
         MemoryAddress IAddressable.Address => Base;
 
-        public bool NonZero
-        {
-            [MethodImpl(Inline)]
-            get => Offset != 0;
-        }
+        public MemoryOffset Zero  { [MethodImpl(Inline)] get => Empty; }
+
+        public bool IsEmpty { [MethodImpl(Inline)] get => Offset == 0; }
+
+        public bool IsNonEmpty  { [MethodImpl(Inline)] get => Offset != 0; }
 
         public string IdentityText 
             => Offset.ToString("x4") + "h";
@@ -55,15 +59,15 @@ namespace Z0
         [MethodImpl(Inline)]
         MemoryOffset(ushort offset)
         {
-            this.Base = 0ul;
-            this.Offset = offset;
+            Base = 0ul;
+            Offset = offset;
         }
 
         [MethodImpl(Inline)]
         MemoryOffset(MemoryAddress @base, ushort offset)
         {
-            this.Base = @base;
-            this.Offset = offset;
+            Base = @base;
+            Offset = offset;
         }
         
         public string Format()

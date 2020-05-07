@@ -12,16 +12,21 @@ namespace Z0.Asm
 
     public interface ISemanticQuery
     {
-        IAsmBranch BranchInfo(MemoryAddress @base, Instruction src, int index)
-            => Service.BranchInfo(@base, src,index);        
+        [MethodImpl(Inline)]
+        AsmInxsMemory InxsMemory(Instruction src, int index)            
+            => AsmInxsMemory.From(src,index);
 
         [MethodImpl(Inline)]
-        InstructionInfo Details(Instruction src)        
-            => Service.Details(src);
+        bool HasInxsMemory(Instruction src, int index)            
+            => AsmInxsMemory.Has(src,index);
 
         [MethodImpl(Inline)]
         SegmentedIdentity Identify(MemorySize src)        
-            => Service.Identify(src);
+            => Direct.Identify(src);
+
+        [MethodImpl(Inline)]
+        AsmBranchInfo BranchInfo(MemoryAddress @base, Instruction src, int index)
+            => Direct.BranchInfo(@base, src,index);        
 
         /// <summary>
         /// Extracts immediate information, if applicable, from an instruction operand
@@ -29,21 +34,8 @@ namespace Z0.Asm
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
         [MethodImpl(Inline)]
-        AsmImmInfo DescribeImm(Instruction src, int index)
-            => Service.DescribeImm(src,index);
-
-        /// <summary>
-        /// Extracts operand instruction data
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="@base">The base address</param>
-        [MethodImpl(Inline)]
-        AsmOperandInfo[] Operands(MemoryAddress @base, Instruction src)
-            => Service.Operands(@base, src);
-
-        [MethodImpl(Inline)]
-        AsmOperandInfo Operand(MemoryAddress @base, Instruction src, int index)
-            => Service.Operand(@base,src,index);            
+        AsmImmInfo ImmInfo(Instruction src, int index)
+            => Direct.ImmInfo(src,index);
 
  		/// <summary>
 		/// Gets an operand's kind if it exists
@@ -51,25 +43,34 @@ namespace Z0.Asm
 		/// <param name="operand">Operand number, 0-4</param>
         [MethodImpl(Inline)]
         OpKind OperandKind(Instruction src, int operand)
-            => Service.OperandKind(src,operand);
+            => Direct.OperandKind(src,operand);
 
+		/// <summary>
+		/// Extracts an immediate operand from an instruction
+		/// </summary>
+		/// <param name="src">The source instruction</param>
+		/// <param name="index">The operand index</param>
         [MethodImpl(Inline)]
-        AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
-                => Service.Summarize(@base, src,encoded, content,offset);            
+        ulong ExtractImm(Instruction src, int index) 
+            => Direct.ExtractImm(src,index);
 
         /// <summary>
-        /// Describes the instructions that comprise an instruction list
+        /// Extracts memory information, if applicable, from an instruction operand
         /// </summary>
-        /// <param name="src">The source instruction list</param>
-        AsmInstructionSummary[] Summarize(AsmInstructionList src)
-            => Service.Summarize(src);
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
+        [MethodImpl(Inline)]
+        AsmMemInfo MemInfo(Instruction src, int index)            
+            => Direct.MemInfo(src,index);
 
         /// <summary>
-        /// Describes the instructions that comprise a function
+        /// Extracts register information, should it exist, from an index-identified register operand
         /// </summary>
-        /// <param name="src">The source function</param>
-        AsmInstructionSummary[] Summarize(AsmFunction src)
-            => Service.Summarize(src); 
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
+        [MethodImpl(Inline)]
+        Register RegisterInfo(Instruction src, int index) 
+            => Direct.RegisterInfo(src, index);
                     
         /// <summary>
         /// Determines whether the classified operand is a segment of the form 
@@ -79,7 +80,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         bool IsSegBase(OpKind src)
-            => Service.IsSegBase(src);        
+            => Direct.IsSegBase(src);        
 
         /// <summary>
         /// Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch
@@ -88,7 +89,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classification</param>
         [MethodImpl(Inline)]
         bool IsNearBranch(OpKind src)        
-            => Service.IsNearBranch(src);
+            => Direct.IsNearBranch(src);
 
         /// <summary>
         /// Determines whether the classified operand is a 32-bit or 64-bit far branch
@@ -97,7 +98,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classification</param>
         [MethodImpl(Inline)]
         bool IsFarBranch(OpKind src)        
-            => Service.IsFarBranch(src);
+            => Direct.IsFarBranch(src);
        
         /// <summary>
         /// Determines whether a classified operand is associated with a branching instruction
@@ -105,7 +106,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classification</param>
         [MethodImpl(Inline)]
         bool IsBranch(OpKind src)
-            => Service.IsBranch(src);
+            => Direct.IsBranch(src);
 
         /// <summary>
         /// Determines the size of a classified immediate operand, if applicable; otherwise, returns 0
@@ -113,16 +114,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         NumericWidth ImmWidth(OpKind src)
-            => Service.ImmWidth(src);
-
-		/// <summary>
-		/// Extracts an immediate operand from an instruction
-		/// </summary>
-		/// <param name="src">The source instruction</param>
-		/// <param name="index">The operand index</param>
-        [MethodImpl(Inline)]
-        ulong ExtractImm(Instruction src, int index) 
-            => Service.ExtractImm(src,index);
+            => Direct.ImmWidth(src);
 
         /// <summary>
         /// Determines whether the classified operand a sign-extended immediate which may include:
@@ -134,7 +126,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         bool IsSignedImm(OpKind src)
-            => Service.IsSignedImm(src);
+            => Direct.IsSignedImm(src);
 
         /// <summary>
         /// Determines whether the classified operand is an 8-bit, 16-bit, 32-bit or 64-bit constant
@@ -144,7 +136,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         bool IsDirectImm(OpKind src)
-            => Service.IsDirectImm(src);
+            => Direct.IsDirectImm(src);
 
         /// <summary>
         /// Determines whether the classified operand is an 8-bit immediate
@@ -154,40 +146,24 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         bool IsSpecialImm(OpKind src)
-            => Service.IsSpecialImm(src);
+            => Direct.IsSpecialImm(src);
         
         /// <summary>
         /// Determines whether the classified operand is an immediate of some sort
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
-        bool IsImmOperand(OpKind src)
-            => Service.IsImmOperand(src);
-
-        // /// <summary>
-        // /// Extracts immediate information, if applicable, from an instruction operand
-        // /// </summary>
-        // /// <param name="src">The source instruction</param>
-        // /// <param name="index">The operand index</param>
-        // AsmImmInfo ImmInfo(Instruction src, int index)
-        //     => Service.ImmInfo(src,index);
+        bool IsImm(OpKind src)
+            => Direct.IsImm(src);
 
         /// <summary>
         /// Tests whether the the source operand kind is a register kind
         /// </summary>
         /// <param name="src">The source kind to test</param>
         [MethodImpl(Inline)]
-        bool IsRegisterOperand(OpKind src)
-            => Service.IsRegisterOperand(src);
+        bool IsRegister(OpKind src)
+            => Direct.IsRegister(src);
 
-        /// <summary>
-        /// Extracts memory information, if applicable, from an instruction operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="index">The operand index</param>
-        [MethodImpl(Inline)]
-        AsmMemInfo MemInfo(Instruction src, int index)            
-            => Service.MemInfo(src,index);
 
         /// <summary>
         /// Determines whether the classified operand is some sort of memory
@@ -195,7 +171,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         bool IsMem(OpKind src)            
-            => Service.IsMem(src);
+            => Direct.IsMem(src);
 
         /// <summary>
         /// Determines whether the classified operand is an ES ("extra") memory segment.
@@ -205,7 +181,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         bool IsSegEs(OpKind src)            
-            => Service.IsSegEs(src);
+            => Direct.IsSegEs(src);
 
         /// <summary>
         /// Determines whether the classified operand is a 64-bit memory offset. 
@@ -215,7 +191,7 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         bool IsMem64(OpKind src)
-            => Service.IsMem64(src);
+            => Direct.IsMem64(src);
 
         /// <summary>
         /// Determines whether the classified operand is direct memory.
@@ -226,6 +202,43 @@ namespace Z0.Asm
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline)]
         bool IsMemDirect(OpKind src)
-            => Service.IsMemDirect(src);
+            => Direct.IsMemDirect(src);
+
+
+        [MethodImpl(Inline)]
+        AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
+                => Direct.Summarize(@base, src,encoded, content,offset);            
+
+        /// <summary>
+        /// Describes the instructions that comprise an instruction list
+        /// </summary>
+        /// <param name="src">The source instruction list</param>
+        AsmInstructionSummary[] Summarize(AsmInstructionList src)
+            => Direct.Summarize(src);
+
+        /// <summary>
+        /// Describes the instructions that comprise a function
+        /// </summary>
+        /// <param name="src">The source function</param>
+        AsmInstructionSummary[] Summarize(AsmFunction src)
+            => Direct.Summarize(src); 
+
+        [MethodImpl(Inline)]
+        InstructionInfo Details(Instruction src)        
+            => Direct.Details(src);
+
+        /// <summary>
+        /// Extracts operand instruction data
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        /// <param name="@base">The base address</param>
+        [MethodImpl(Inline)]
+        AsmOperandInfo[] Operands(MemoryAddress @base, Instruction src)
+            => Direct.Operands(@base, src);
+
+        [MethodImpl(Inline)]
+        AsmOperandInfo Operand(MemoryAddress @base, Instruction src, int index)
+            => Direct.Operand(@base,src,index);            
+
     }
 }

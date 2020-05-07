@@ -9,13 +9,21 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct AsmMemDirect
+    public readonly struct AsmMemDirect : INullaryKnown
     {
+        public static AsmMemDirect Empty => new AsmMemDirect(Register.None, AsmMemScale.Empty, AsmMemDx.Empty);
+        
         public Register Base {get;}
 
         public AsmMemScale Scale {get;}        
 
         public AsmMemDx Dx {get;}               
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Base == 0 && Scale.IsEmpty && Dx.IsEmpty;
+        }
 
         [MethodImpl(Inline)]
         public static AsmMemDirect From(Instruction src)

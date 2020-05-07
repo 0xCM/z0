@@ -9,20 +9,23 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct MemoryAddress : IAddressable, IIdentification<MemoryAddress>
+    public readonly struct MemoryAddress : 
+        IAddressable, 
+        INullaryKnown, 
+        IIdentification<MemoryAddress>, 
+        INullary<MemoryAddress>
     {
-        public static MemoryAddress Zero => default;
-
         public readonly ulong Location;
 
-        public bool NonZero
-        {
-            [MethodImpl(Inline)]
-            get => Location != 0;
-        }
+        public static MemoryAddress Empty => new MemoryAddress(0);
+ 
+        public bool IsEmpty { [MethodImpl(Inline)] get => Location == 0; }
 
-        public string IdentityText 
-            => Location.ToString("x") + "h";
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => Location != 0; }
+
+        public MemoryAddress Zero => Empty;
+
+        public string IdentityText  => Location.ToString("x") + "h";
 
         MemoryAddress IAddressable.Address 
         {
@@ -110,12 +113,15 @@ namespace Z0
         public static MemoryAddress operator-(MemoryAddress a, MemoryAddress b)
             => new MemoryAddress(a.Location - b.Location);
 
+
         [MethodImpl(Inline)]
         MemoryAddress(ulong absolute)
             => this.Location = absolute;
 
         public string Format()
             => IdentityText;
+
+        
 
         public string Format(int digits)
             => Location.ToString($"x{digits}") + "h";

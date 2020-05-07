@@ -12,9 +12,9 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct UriCodeIndexer : IUriCodeIndexer
+    public readonly struct MachineIndexBuilder : IMachineIndexBuilder
     {
-        public static IUriCodeIndexer Service => new UriCodeIndexer(0);
+        public static IMachineIndexBuilder Service => new MachineIndexBuilder(0);
 
         readonly ConcurrentDictionary<MemoryAddress,UriCode> MemoryCode;
 
@@ -22,21 +22,15 @@ namespace Z0
 
         readonly ConcurrentDictionary<OpUri,UriCode> UriCodes;
 
-        UriCodeIndexer(int x)
+        MachineIndexBuilder(int x)
         {            
-            MemoryCode = new ConcurrentDictionary<MemoryAddress, UriCode>();
-            MemoryUri = new ConcurrentDictionary<MemoryAddress, OpUri>();
-            UriCodes = new ConcurrentDictionary<OpUri, UriCode>();
+            MemoryCode = new ConcurrentDictionary<MemoryAddress,UriCode>();
+            MemoryUri = new ConcurrentDictionary<MemoryAddress,OpUri>();
+            UriCodes = new ConcurrentDictionary<OpUri,UriCode>();
         }
 
-        public UriCodeIndex Freeze()
-            => new UriCodeIndex(MemoryCode, MemoryUri);
-
-        public int EntryCount 
-            => MemoryCode.Keys.Count;
-
-        public ICollection<UriCode> Included 
-            => MemoryCode.Values;
+        public MachineIndex Freeze()
+            => new MachineIndex(MemoryCode, MemoryUri);
 
         public int Include(params UriCode[] src)
         {

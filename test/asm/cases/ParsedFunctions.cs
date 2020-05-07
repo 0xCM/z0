@@ -22,7 +22,7 @@ namespace Z0
             if(!resource)
                 throw new KeyNotFoundException(id);
 
-            return LocatedCode.Define(MemoryAddress.Zero, resource.Require().Data.ToArray());
+            return LocatedCode.Define(MemoryAddress.Empty, resource.Require().Data.ToArray());
         }
     }
 

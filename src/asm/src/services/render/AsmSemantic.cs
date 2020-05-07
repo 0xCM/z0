@@ -11,6 +11,8 @@ namespace Z0.Asm
 
     public interface IAsmSemantic : ISemanticRender, ISemanticQuery
     {
+        string Render(AsmInxsMemory src)
+            => src.Render();
     }
     
     [ApiHost("semantic")]

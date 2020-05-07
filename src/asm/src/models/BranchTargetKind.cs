@@ -9,16 +9,12 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public interface IAsmBranch : INullaryKnown
+    public enum BranchTargetKind : byte
     {
-        MemoryAddress Base {get;}
+        None = 0,
 
-        MemoryAddress IP {get;}
+        Near = 1,
 
-        MemoryAddress Target {get;}
-
-        int Size {get;}
-
-        bool IsNear {get;}
+        Far = 2
     }
 }

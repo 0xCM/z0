@@ -11,9 +11,12 @@ namespace Z0
 
     using static Seed;
 
-    public class UriCodeIndex : IUriCodeIndex
+    public class MachineIndex : IMachineIndex
     {
-        public static UriCodeIndex Empty => new UriCodeIndex(0);
+        public static MachineIndex Empty => new MachineIndex(0);
+
+        public static IMachineIndexBuilder Builder 
+            => MachineIndexBuilder.Service;
         
         readonly HashTable<MemoryAddress,UriCode> MemoryTable;
         
@@ -23,7 +26,7 @@ namespace Z0
 
         public PartId[] Parts {get;}
 
-        internal UriCodeIndex(
+        internal MachineIndex(
             IReadOnlyDictionary<MemoryAddress,UriCode> mc, 
             IReadOnlyDictionary<MemoryAddress,OpUri> muri)
         {
@@ -110,7 +113,7 @@ namespace Z0
             get => CodeSet(id);
         }
 
-        UriCodeIndex(int i)
+        MachineIndex(int i)
         {
             MemoryTable = HashTable<MemoryAddress,UriCode>.Empty;
             MemoryUri = HashTable<MemoryAddress,OpUri>.Empty;

@@ -17,17 +17,15 @@ namespace Z0.Asm
             else
                 dst.Append("UNK");
                 
-            var scaled = false;    
-            if(src.Scale.IsNonUnital && src.Scale.IsNonEmpty)
+            if(src.Scale.NonUnital && src.Scale.NonZero)
             {
                 var scale = Render(src.Scale);
                 dst.Append(text.concat(Chars.Star, scale));
-                scaled = true;
             }
 
-            var dx = Render(src.Dx);
-            if(text.nonempty(dx))
-                dst.Append(text.concat(Chars.Space, Chars.Plus, Chars.Space, dx));
+            if(src.Dx.NonZero)
+                dst.Append(text.concat(Chars.Space, Chars.Plus, Chars.Space, Render(src.Dx)));
+
             return dst.ToString();
         }
     }

@@ -64,31 +64,31 @@ namespace Z0.Asm
             => src == OpKind.Immediate8_2nd;
 
         [MethodImpl(Inline), Op]
-        public bool IsImmOperand(OpKind src)
+        public bool IsImm(OpKind src)
             => IsSignedImm(src) || IsDirectImm(src) || IsSpecialImm(src);
 
-        public AsmImmInfo DescribeImm(Instruction src, int index) 
+        public AsmImmInfo ImmInfo(Instruction src, int index) 
         {                        
 			switch (OperandKind(src,index)) 
             {
                 case OpKind.Immediate8:			
                     return AsmImmInfo.Define((byte)src.Immediate8, true); 
                 case OpKind.Immediate8_2nd:		
-                    return AsmImmInfo.Define((byte)src.Immediate8, true); 
+                    return AsmImmInfo.Define((byte)src.Immediate8_2nd, true); 
                 case OpKind.Immediate16:		
-                    return AsmImmInfo.Define((ushort)src.Immediate8, true); 
+                    return AsmImmInfo.Define((ushort)src.Immediate16, true); 
                 case OpKind.Immediate32:		
-                    return AsmImmInfo.Define((uint)src.Immediate8, true); 
+                    return AsmImmInfo.Define((uint)src.Immediate32, true); 
                 case OpKind.Immediate64:		
-                    return AsmImmInfo.Define((ulong)src.Immediate8, true); 
+                    return AsmImmInfo.Define((ulong)src.Immediate64, true); 
                 case OpKind.Immediate8to16:		
-                    return AsmImmInfo.Define((short)src.Immediate8, false, (W.W8, W.W16)); 
+                    return AsmImmInfo.Define((short)src.Immediate8to16, false, (W.W8, W.W16)); 
                 case OpKind.Immediate8to32:		
-                    return AsmImmInfo.Define((int)src.Immediate8, false, (W.W8, W.W32)); 
+                    return AsmImmInfo.Define((int)src.Immediate8to32, false, (W.W8, W.W32)); 
                 case OpKind.Immediate8to64:		
-                    return AsmImmInfo.Define((long)src.Immediate8, false, (W.W8, W.W64)); 
+                    return AsmImmInfo.Define((long)src.Immediate8to64, false, (W.W8, W.W64)); 
                 case OpKind.Immediate32to64:	
-                    return AsmImmInfo.Define((int)src.Immediate8, false, (W.W32, W.W64)); 				
+                    return AsmImmInfo.Define((int)src.Immediate32to64, false, (W.W32, W.W64)); 				
 			}
             
             return AsmImmInfo.Empty;

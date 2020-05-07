@@ -39,8 +39,7 @@ namespace Z0.Asm
             var dst = RexPrefix.Empty;            
             RexPrefix.BitCopy(src,ref dst);
             
-            var svc = RexPrefixRender.Service;
-            Claim.eq(svc.Render(src), svc.Render(dst));
+            Claim.eq(src.Render(), dst.Render());
         }
     }
 }

@@ -45,9 +45,9 @@ namespace Z0
 
         public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => !Address.NonZero; }
+        public bool IsEmpty { [MethodImpl(Inline)] get => Address.IsEmpty; }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Address.NonZero; }
+        public bool IsNonEmpty { [MethodImpl(Inline)] get => Address.IsNonEmpty; }
 
         public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
         
@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public LocatedCode(MemoryAddress src, byte[] data)
         {
-            this.Address = insist(src, x => x.NonZero);
+            this.Address = insist(src, x => x.IsNonEmpty);
             this.Encoded = BinaryCode.Define(insist(data));
         }
 

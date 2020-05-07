@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public IMachineContext Context {get;}
         
-        readonly IAsmSemantic Semantic;
+        readonly IAsmSemantic asm;
 
         readonly FolderPath CaptureRoot;
 
@@ -36,11 +36,11 @@ namespace Z0.Asm
         public SemanticFormatter(IMachineContext context, FolderPath root)
         {
             Context = context;
-            Semantic = AsmSemantic.Service;
             CaptureRoot = root;
             Descriptions = list<string>();
             FunctionSize = 0;
             TargetFolder = FolderName.Define(ExecutingApp);
+            asm = AsmSemantic.Service;
         }
 
         void Reset()
@@ -100,7 +100,7 @@ namespace Z0.Asm
         
         string Title(Instruction src)
         {
-            var location = Semantic.RenderAddress(src, AddressPad);
+            var location = asm.RenderAddress(src, AddressPad);
             var counted = InstructionCount.FormatCount(InstructionCountPad);
             var title = location + counted + FunctionSize.FormatSmallHex(true);
             return title;
@@ -135,39 +135,36 @@ namespace Z0.Asm
             var title = Title(src);
             var header = Header(src);
             Descriptions.Add(header);
-
-            var operands = Semantic.Operands(@base, inxs); 
-            var summaries = new string[operands.Length];
-            for(var i =0; i<operands.Length; i++)               
+                            
+            var summaries = list<string>();
+            for(var i =0; i<inxs.OpCount; i++)               
             {
-                var a = operands[i];
-
-                var kind = a.Kind; 
+                var kind = asm.OperandKind(inxs, i);
 
                 var col01 = i.ToString().PadLeft(OperandIndexDigits,'0').PadRight(OperandIndexPad);
-                var col02 = Semantic.Render(kind).PadRight(InstructionKindPad);
+                var col02 = asm.Render(kind).PadRight(InstructionKindPad);
                 var col03 = text.concat(col01, ColSep, col02, Chars.Pipe, Chars.Space);
+                var desc = string.Empty;
 
-                if(kind == OpKind.Register)
-                    col03 += Semantic.Render(a.Register);
-                else if(kind == OpKind.Memory)
-                    col03 += Semantic.Format(a.Memory);
-                else if (a.Branch.IsNonEmpty)
-                    col03 += Semantic.Format(a.Branch);
-                else if(a.ImmInfo.IsNonEmpty)
-                {
-                    var immlabel = Semantic.RenderKind(a.ImmInfo).PadRight(InstructionKindPad);
-                    col03 = text.concat(col01, ColSep, immlabel, Chars.Pipe, Chars.Space);
-                    col03 += Semantic.Format(a.ImmInfo);
-                }
+
+                if(asm.IsRegister(kind))
+                    desc = asm.Render(asm.RegisterInfo(inxs,i));
+                else if(asm.IsMem(kind))
+                    desc = asm.Format(asm.MemInfo(inxs, i));
+                else if (asm.IsBranch(kind))
+                    desc = asm.Render(asm.BranchInfo(@base, inxs, i));
+                else if(asm.IsImm(kind))
+                    desc = asm.Render(asm.ImmInfo(inxs, i));                
                 else 
-                    col03 += "???";
-                summaries[i] = col03;                
+                    desc = $"???:{kind}";
+                
+                summaries.Add(col03 + desc);       
+                
+                // if(asm.HasInxsMemory(inxs,i))
+                //     summaries.Add(col03 +  asm.Render(asm.InxsMemory(inxs,i)));
             }
 
             Control.iter(summaries, s =>  Descriptions.Add(text.concat(title, ColSep, $"{s}")));
-
-            Descriptions.Add(text.concat(title, ColSep, FlowTitle.PadRight(OperandIndexPad), ColSep, Semantic.Format(inxs.FlowControl)));  
             Descriptions.Add(text.concat(title, ColSep, SubGridSep));  
 
             InstructionCount++;

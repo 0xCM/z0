@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public readonly struct ApiMember : IApiMember<ApiMember>
     {
-        public static ApiMember Empty => new ApiMember(OpUri.Empty, typeof(object).Methods().First(), OpKindId.None, MemoryAddress.Zero);
+        public static ApiMember Empty => new ApiMember(OpUri.Empty, typeof(object).Methods().First(), OpKindId.None, MemoryAddress.Empty);
 
         public OpIdentity Id {get;}
         
@@ -48,7 +48,7 @@ namespace Z0
             OpUri = uri;
             KindId = kindId;
             Method = insist(method);
-            Address = MemoryAddress.Zero;
+            Address = MemoryAddress.Empty;
             HostUri = OpUri.Host;
         }
 

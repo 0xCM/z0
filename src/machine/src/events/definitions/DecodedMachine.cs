@@ -11,26 +11,26 @@ namespace Z0
     using Z0.Asm;
 
     using static Seed;
-    using E = MachineEvents.DecodedIndex;
+    using E = MachineEvents.DecodedMachine;
 
     public partial class MachineEvents
     {
-        public readonly struct DecodedIndex : IMachineEvent<E>
+        public readonly struct DecodedMachine : IMachineEvent<E>
         {
-            public static E Empty => new E(UriCodeIndex.Empty, Control.array<PartInstructions>());
+            public static E Empty => new E(MachineIndex.Empty, Control.array<PartInstructions>());
 
             [MethodImpl(Inline)]
-            public static DecodedIndex Create(UriCodeIndex index, PartInstructions[] inxs)
-                => new DecodedIndex(index, inxs);            
+            public static DecodedMachine Create(MachineIndex index, PartInstructions[] inxs)
+                => new DecodedMachine(index, inxs);            
 
             [MethodImpl(Inline)]
-            public DecodedIndex(UriCodeIndex index, PartInstructions[] inxs)
+            public DecodedMachine(MachineIndex index, PartInstructions[] inxs)
             {
                 Index = index;
                 Instructions = inxs;
             }
             
-            public UriCodeIndex Index {get;}
+            public MachineIndex Index {get;}
 
             public PartInstructions[] Instructions {get;}
 
