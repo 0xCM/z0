@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(GVec)" />
   </ItemGroup>
 
 </Project>

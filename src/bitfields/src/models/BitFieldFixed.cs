@@ -15,40 +15,44 @@ namespace Z0
         where T : unmanaged
         where W : unmanaged, Enum
     {
-        readonly FixedData<T> data;
+        readonly FixedData<T> Data;
 
-        readonly BitFieldSpec<E,W> spec;
+        readonly BitFieldSpec<E,W> Spec;
 
         [MethodImpl(Inline)]
         internal BitFieldFixed(FixedData<T> data, BitFieldSpec<E,W> spec)
         {
-            this.data = data;
-            this.spec = spec;
+            this.Data = data;
+            this.Spec = spec;
         }
 
+        public FixedData<T> Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+        
         public ref T this[int cell]
         {
             [MethodImpl(Inline)]
-            get => ref data.Data[cell];
+            get => ref Data.Data[cell];
         }
 
         [MethodImpl(Inline)]
         public T BitSlice(byte start, byte length)
-            => data.BitSlice(start,length);
+            => Data.BitSlice(start,length);
 
         public bit this[ByteSize offset, byte pos]        
         {
             [MethodImpl(Inline)]
-            get => data[offset,pos];
+            get => Data[offset,pos];
             
             [MethodImpl(Inline)]
-            set => data[offset,pos] = value;
+            set => Data[offset,pos] = value;
         }
 
         public string Format()
-            => FieldSegments.format(spec.Segments);
+            => FieldSegments.format(Spec.Segments);
 
-        public string FormatBits(int? maxbits = null)
-            => data.Bytes.FormatBits(maxbits);
     }
 }

@@ -31,7 +31,7 @@ namespace Z0
             if(failed.Length != 0)
                 term.warn($"Not all records from {src} parsed successfully");
 
-            var host = success[0].Uri.HostPath;
+            var host = success[0].Uri.Host;
             var report = MemberParseReport.Create(host,success);
             return ParseResult.Success(src.Name, report);
         }

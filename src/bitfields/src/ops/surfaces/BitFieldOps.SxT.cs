@@ -37,7 +37,7 @@ namespace Z0
         public ref S Deposit(in FieldSegment segment, in S src, ref S dst)
         {
             var dstData = dst.Scalar;
-            dst.Scalar = gbits.bitcopy(src.Scalar, segment.StartPos, segment.Width, ref dstData);
+            dst.Update(gbits.bitcopy(src.Scalar, segment.StartPos, segment.Width, ref dstData));
             return ref dst;
         }
 

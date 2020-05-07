@@ -21,6 +21,10 @@ namespace Z0
         public static T[] Join<T>(this T[][] src)
             => System.Linq.Enumerable.SelectMany(src,x => x).ToArray();
 
+        public static T[] Join<S,T>(this S[] src, Func<S,T[]> f)
+            where S : IEnumerable<T>
+                => Enumerable.SelectMany(src, f).ToArray();
+
         public static T[] Join<S,T>(this S[][] src, Func<S,T> f)
             => src.Join().Select(f);
 

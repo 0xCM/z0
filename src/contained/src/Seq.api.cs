@@ -5,19 +5,29 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
-    public static class Seq
+    using static Seed;
+
+    public class Seq
     {
+        [MethodImpl(Inline)]
         public static Seq<T> define<T>(IEnumerable<T> src)
-                => new Seq<T>(src); 
-        public static FiniteSeq<T> finite<T>(IEnumerable<T> src)
-            => new FiniteSeq<T>(src); 
+            => new Seq<T>(src); 
 
-        public static FiniteSeq<T> finite<T>(params T[] src)
-            => new FiniteSeq<T>(src); 
-
+        [MethodImpl(Inline)]
         public static Seq<T> define<T>(params T[] src)
             => new Seq<T>(src); 
+
+        [MethodImpl(Inline)]
+        public static IndexedSeq<T> indexed<T>(IEnumerable<T> src)
+            => new IndexedSeq<T>(src); 
+
+        [MethodImpl(Inline)]
+        public static IndexedSeq<T> indexed<T>(params T[] src)
+            => new IndexedSeq<T>(src); 
+
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct UriCodeIndex : IUriCodeIndex
+    public class UriCodeIndex : IUriCodeIndex
     {
         public static UriCodeIndex Empty => new UriCodeIndex(0);
         
@@ -29,70 +29,85 @@ namespace Z0
         {
             MemoryTable = HashTable.Create(mc);
             MemoryUri = HashTable.Create(muri);  
-            HostCode = MemoryTable.Values.Select(x => (x.OpUri.HostPath, x))
-                                         .GroupBy(g => g.HostPath)
+            HostCode = MemoryTable.Values.Select(x => (x.OpUri.Host, x))
+                                         .GroupBy(g => g.Host)
                                          .Select(x => (x.Key, x.Select(y => y.x).ToArray()))
                                          .ToDictionary();
             Parts = HostCode.Keys.Select(x => x.Owner).Distinct().ToArray();
         }
 
+        /// <summary>
+        /// The number of indexed functions
+        /// </summary>
         public int EntryCount 
         {
             [MethodImpl(Inline)]
             get => MemoryTable.Count;
         }
         
-        public MemoryAddress[] Addresses 
+        /// <summary>
+        /// The base addresses that identify entries in the index
+        /// </summary>
+        public MemoryAddress[] LocationKeys 
         {
             [MethodImpl(Inline)]
             get => MemoryTable.Keys;
         }
 
-        public UriCode[] Code 
+        /// <summary>
+        /// All indexed code
+        /// </summary>
+        public UriCode[] IndexedCode 
         {
             [MethodImpl(Inline)]
             get => MemoryTable.Values;
         }
 
+        /// <summary>
+        /// Operation idenfiers, each of which are associated with one or more code blocks
+        /// </summary>
         public OpUri[] Operations 
         {
             [MethodImpl(Inline)]
             get => MemoryUri.Values;
         }
 
+        /// <summary>
+        /// Hosts with at least one archived code block
+        /// </summary>
         public ApiHostUri[] Hosts
         {
             get => HostCode.Keys.ToArray();
         }
 
         [MethodImpl(Inline)]
-        public UriCode CodeAt(MemoryAddress location)
+        public UriCode Code(MemoryAddress location)
             => MemoryTable[location];
 
         [MethodImpl(Inline)]
-        public UriCode[] CodeFor(OpUri uri)
-            => MemoryUri[uri].Map(CodeAt);
+        public HostCode CodeSet(ApiHostUri id)
+            => Z0.HostCode.Define(id, HostCode[id]);
 
         [MethodImpl(Inline)]
-        public UriCode[] CodeFor(ApiHostUri uri)
-            => HostCode[uri];
+        public PartCode CodeSet(PartId id)
+            => PartCode.Define(id, Hosts.Map(CodeSet));
 
         public UriCode this[MemoryAddress location]
         {
             [MethodImpl(Inline)]
-            get => CodeAt(location);
+            get => Code(location);
         }
 
-        public UriCode[] this[OpUri uri]
+        public HostCode this[ApiHostUri id]
         {
             [MethodImpl(Inline)]
-            get => CodeFor(uri);
+            get => CodeSet(id);
         }
 
-        public UriCode[] this[ApiHostUri uri]
+        public PartCode this[PartId id]
         {
             [MethodImpl(Inline)]
-            get => CodeFor(uri);
+            get => CodeSet(id);
         }
 
         UriCodeIndex(int i)

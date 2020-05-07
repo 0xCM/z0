@@ -151,7 +151,7 @@ namespace Z0
         public ref S Write(ReadOnlySpan<T> src, ref S dst)
         {   
             var data = dst.Scalar;
-            dst.Scalar = Ops.Deposit(Spec, src, ref data);
+            dst.Update(Ops.Deposit(Spec, src, ref data));
             return ref dst;
         }                 
 

@@ -32,6 +32,10 @@ namespace Z0
 
         void OnEvent(DecodedHost e) => Sink.Deposit(e);
 
+        DecodedPart DecodedPart => DecodedPart.Empty;
+
+        void OnEvent(DecodedPart e) => Sink.Deposit(e);
+
         DecodedIndex DecodedIndex => DecodedIndex.Empty;
 
         void OnEvent(DecodedIndex e) => Sink.Deposit(e);
@@ -43,6 +47,7 @@ namespace Z0
             LoadedParseReport.Subscribe(Broker,OnEvent);
             IndexedCode.Subscribe(Broker,OnEvent);
             DecodedHost.Subscribe(Broker,OnEvent);
+            DecodedPart.Subscribe(Broker,OnEvent);
             DecodedIndex.Subscribe(Broker,OnEvent);
         }        
     }

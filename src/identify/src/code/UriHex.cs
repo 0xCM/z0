@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         public OpIdentity Id { [MethodImpl(Inline)] get  => OpUri.OpId; }
 
-        public ApiHostUri Host { [MethodImpl(Inline)] get => OpUri.HostPath; }
+        public ApiHostUri Host { [MethodImpl(Inline)] get => OpUri.Host; }
 
         public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
 

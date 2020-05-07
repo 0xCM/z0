@@ -32,7 +32,7 @@ namespace Z0
         /// <summary>
         /// The host fragment, of the form {assmblyid}/{hostname}
         /// </summary>
-        public readonly ApiHostUri HostPath;
+        public readonly ApiHostUri Host;
         
         /// <summary>
         /// The name assigned to a group of methods; usually agrees with what is called a "method group" in clr-land
@@ -47,6 +47,11 @@ namespace Z0
         public readonly OpIdentity OpId;
 
         /// <summary>
+        /// The defining part
+        /// </summary>
+        public PartId Part => Host.Owner;
+
+        /// <summary>
         /// The uri as an identifier
         /// </summary>
         public string IdentityText => UriText;
@@ -54,19 +59,19 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]            
-            get => Scheme == 0 && HostPath.IsEmpty && text.empty(GroupName) && OpId.IsEmpty;
+            get => Scheme == 0 && Host.IsEmpty && text.empty(GroupName) && OpId.IsEmpty;
         }
         
         public bool IsComplete
         {
             [MethodImpl(Inline)]
-            get => Scheme != 0 && !HostPath.IsEmpty && text.nonempty(GroupName) && !OpId.IsEmpty;
+            get => Scheme != 0 && !Host.IsEmpty && text.nonempty(GroupName) && !OpId.IsEmpty;
         }
 
         public OpUri GroupUri
         {
             [MethodImpl(Inline)]
-            get => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
+            get => new OpUri(Scheme, Host, GroupName, OpIdentity.Empty);
         }
 
         public OpUri Loc => WithScheme(OpUriScheme.Located);
@@ -123,7 +128,7 @@ namespace Z0
         OpUri(OpUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
         {
             this.Scheme = scheme;
-            this.HostPath = host;
+            this.Host = host;
             this.OpId = opid;
             this.GroupName = group;
             UriText = 
@@ -136,7 +141,7 @@ namespace Z0
             => IdentityShare.format(this);
         
         public OpUri WithScheme(OpUriScheme scheme)
-            => Define(scheme, HostPath, GroupName, OpId);
+            => Define(scheme, Host, GroupName, OpId);
             
 
         [MethodImpl(Inline)]

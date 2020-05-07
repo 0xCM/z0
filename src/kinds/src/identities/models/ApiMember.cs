@@ -49,7 +49,7 @@ namespace Z0
             KindId = kindId;
             Method = insist(method);
             Address = MemoryAddress.Zero;
-            HostUri = OpUri.HostPath;
+            HostUri = OpUri.Host;
         }
 
         [MethodImpl(Inline)]
@@ -61,7 +61,7 @@ namespace Z0
             Method = insist(method);
             //Address = insist(address, a => a.NonZero);
             Address = address;
-            HostUri = OpUri.HostPath;
+            HostUri = OpUri.Host;
         }        
 
         public bool Equals(ApiMember src)

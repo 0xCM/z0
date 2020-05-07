@@ -40,22 +40,6 @@ namespace Z0
             (this as IMachineEvents).Connect();            
         }
 
-        public void Run()
-        {
-            ParseReports();
-        }
-
-        void ParseReports()
-        {
-            Control.iter(Files.ParseFiles, ParseReport);
-            Broker.Raise(IndexedCode.Create(CodeIndexer.Freeze()));
-        }
-        void ParseReport(FilePath src)
-        {
-            ApiServices.ParseReportParser.Parse(src)
-                    .OnFailure(fail => term.error(fail.Reason))
-                    .OnSuccess(value => Broker.Raise(LoadedParseReport.Create(value, src)));
-        }
 
         public void OnEvent(LoadedParseReport e)
         {
@@ -66,23 +50,7 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            Decode(e.Index);            
-        }
-
-        void Decode(UriCodeIndex src)
-        {
-            var dst = list<HostCodeInstructions>();
-            foreach(var host in src.Hosts)
-            {
-                var code = src[host];
-                var decoded = Decode(host,code);
-                dst.Add(decoded);
-                Broker.Raise(DecodedHost.Create(decoded));
-            }
-
-            var result = dst.ToArray();
-            Broker.Raise(DecodedIndex.Create(src, result));
-
+            DecodeParts(e.Index);
         }
 
         public void OnEvent(DecodedIndex e)
@@ -90,32 +58,80 @@ namespace Z0
             Sink.Deposit(e);
         }
 
-        public void OnEvent(DecodedHost e)
+        public void OnEvent(DecodedPart e)
         {
             Sink.Deposit(e);
-            if(e.Part == PartId.Cast)
-            {
-                var formatter = SemanticFormatter.Create(Context);
-                formatter.Format(e.Instructions);
-            }
+
+            var formatter = SemanticFormatter.Create(Context);
+            formatter.Render(e.Instructions);
         }
 
-        HostCodeInstructions Decode(ApiHostUri host, UriCode[] src)
+        public void Run()
         {
-            var inxs = list<UriCodeInstructions>();            
-            Control.iter(src, code => inxs.Add(Decode(code)));
-            return HostCodeInstructions.Create(host, inxs.ToArray());
+            ParseReports();
         }
 
-        UriCodeInstructions Decode(UriCode src)
+        void ParseReports()
+        {
+            Control.iter(Files.ParseFiles, ParseReport);
+            Broker.Raise(IndexedCode.Create(CodeIndexer.Freeze()));
+        }
+        
+        void ParseReport(FilePath src)
+        {
+            ApiServices.ParseReportParser.Parse(src)
+                    .OnFailure(fail => term.error(fail.Reason))
+                    .OnSuccess(value => Broker.Raise(LoadedParseReport.Create(value, src)));
+        }
+
+        void DecodeParts(UriCodeIndex src)
+        {
+            var dst = list<PartInstructions>();
+            var parts = src.Parts;
+            
+            for(var k=0; k<parts.Length; k++)
+            {
+                var part = parts[k];
+                var pcs = src.CodeSet(part);
+                dst.Add(DecodePart(pcs));
+            }
+
+            Broker.Raise(DecodedIndex.Create(src, dst.ToArray()));
+        }
+
+        PartInstructions DecodePart(PartCode pcs)
+        {
+            var dst = list<HostInstructions>();
+            var hcSets = pcs.Code;
+            for(var i=0; i<hcSets.Length; i++)
+            {
+                var hcs = hcSets[i];
+                var decoded = Decode(hcs);
+                dst.Add(decoded);
+                Broker.Raise(DecodedHost.Create(decoded));
+            }  
+
+            var inxs = PartInstructions.Create(pcs.Part, dst.ToArray());
+            Broker.Raise(DecodedPart.Create(inxs));
+            return inxs;                        
+        }
+
+        HostInstructions Decode(HostCode hcs)
+        {
+            var inxs = list<OpInstructions>();            
+            Control.iter(hcs.Code, code => inxs.Add(Decode(code)));
+            return HostInstructions.Create(hcs.Id, inxs.ToArray());
+        }
+
+        OpInstructions Decode(UriCode src)
         {
             var seq = 0;
-            var dst =  list<UriCodeInstruction>();
+            var dst =  list<OpInstruction>();
             void OnDecoded(Instruction inxs)
-                => dst.Add((src, (seq++, inxs)));
+                => dst.Add(OpInstruction.Define(src.Address, src.OpUri, seq++, inxs));
             
             Decoder.Decode(src.Encoded, OnDecoded);
-            return UriCodeInstructions.Create(src, dst.ToArray());
+            return OpInstructions.Create(src.OpUri, dst.ToArray());
         }
 
         void Index(MemberParseReport report)
@@ -135,8 +151,7 @@ namespace Z0
             Control.iter(Files.CodeFiles,term.print);
             Control.iter(Archive.ImmDirs(Context.Parts), term.print);
             Control.iter(Archive.ImmHostDirs(Context.Parts), term.print);
-        }
-        
+        }        
         public void Dispose()
         {
 

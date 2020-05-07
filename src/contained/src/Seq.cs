@@ -13,7 +13,7 @@ namespace Z0
     using static Seq;
 
     /// <summary>
-    /// Provides a layer of indirection for, and gives a concrete type to, an IEnumerable instance
+    /// Refies a canonical sequence container with content that need not be finite
     /// </summary>
     public readonly struct Seq<T> : ISeq<Seq<T>,T>
     {
@@ -53,7 +53,7 @@ namespace Z0
                           from y in lift(x).Content
                           select project(x, y));
 
-        public Seq<Y> SelectMany<Y>(Func<T, Seq<Y>> lift)
+        public Seq<Y> SelectMany<Y>(Func<T,Seq<Y>> lift)
             => define(from x in Content
                           from y in lift(x).Content
                           select y);

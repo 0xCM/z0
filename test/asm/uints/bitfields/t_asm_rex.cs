@@ -10,15 +10,6 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    using RFI = Z0.Asm.RexFieldIndex;
-
-    public static class RexBits
-    {
-        [MethodImpl(Inline)]
-        public static BitField<RexPrefix,RexFieldIndex,byte> Rex()
-            => BitFields.create<RexPrefix,RexFieldIndex,byte,RexFieldWidth>();
-    }
-
     public class t_asm_rex : t_asm<t_asm_rex>
     {
         public void rex_field_reader()
@@ -40,34 +31,16 @@ namespace Z0.Asm
             Claim.eq((byte)0x49,rw49.Scalar);
         }
 
-        public void rex_field_writer_1()
-        {
-            var bf = RexBits.Rex();
-            var src = RexPrefix.Define(b:0, x:0, r:0, w:1, RexCode.REX43h);
-            var dst = RexPrefix.Empty;
 
-            bf.Write(RFI.B, src, ref dst.Content);
-            bf.Write(RFI.X, src, ref dst.Content);
-            bf.Write(RFI.R, src, ref dst.Content);
-            bf.Write(RFI.W, src, ref dst.Content);
-            bf.Write(RFI.Code, src, ref dst.Content);
-            
-            Claim.eq(src.Format(), dst.Format());
-        }
-
-        public void rex_field_writer_2()
+        public void rex_field_writer()
         {
-            var bf = RexBits.Rex();
+            var bf = RexPrefix.BitField;
             var src = RexPrefix.Define(b:0, x:0, r:0, w:1, RexCode.REX43h);
             var dst = RexPrefix.Empty;            
+            RexPrefix.BitCopy(src,ref dst);
             
-            bf.Write(RFI.B, src, ref dst);
-            bf.Write(RFI.X, src, ref dst);
-            bf.Write(RFI.R, src, ref dst);
-            bf.Write(RFI.W, src, ref dst);
-            bf.Write(RFI.Code, src, ref dst);
-                        
-            Claim.eq(src.Format(), dst.Format());
+            var svc = RexPrefixRender.Service;
+            Claim.eq(svc.Render(src), svc.Render(dst));
         }
     }
 }

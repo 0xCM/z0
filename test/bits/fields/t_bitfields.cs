@@ -275,9 +275,11 @@ namespace Z0
         public void fixed_bits()
         {
             var bf = BitFields.create<BFD_I,byte,BFD_W>(64);
+            bf.Content.Bytes.FormatBits(32);
 
             bf[3] = byte.MaxValue;
-            Trace(bf.FormatBits(32));
+            
+            Trace(bf.Content.Bytes.FormatBits(32));
         }
     }
 }

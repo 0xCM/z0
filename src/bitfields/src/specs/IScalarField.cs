@@ -14,6 +14,12 @@ namespace Z0
     public interface IScalarField<T> 
         where T : unmanaged
     {
-        T Scalar {get;set;}        
+        T Scalar {get;}    
+
+        /// <summary>
+        /// Updates the underlying scalar value
+        /// </summary>
+        /// <param name="src">The source data</param>
+        ref readonly T Update(in T src); 
     }
 }

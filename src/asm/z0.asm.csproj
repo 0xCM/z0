@@ -11,6 +11,9 @@
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Evaluate)" />
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitFields)" />
+
   </ItemGroup>
 
   <ItemGroup>

@@ -35,7 +35,7 @@ namespace Z0
 
         public OpUri Uri  => Member.OpUri;
 
-        public ApiHostUri Host  => Uri.HostPath;
+        public ApiHostUri Host  => Uri.Host;
 
         public MethodInfo Method  => Member.Method;
 

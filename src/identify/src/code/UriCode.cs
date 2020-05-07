@@ -36,9 +36,11 @@ namespace Z0
         /// </summary>
         public LocatedCode Encoded {get;}
 
+        public PartId Part => OpUri.Part;
+        
         public OpIdentity OpId => OpUri.OpId;
 
-        public ApiHostUri HostUri=> OpUri.HostPath;
+        public ApiHostUri Host => OpUri.Host;
 
         public int ByteCount { [MethodImpl(Inline)] get => Encoded.ByteCount; }
 

@@ -25,6 +25,9 @@ namespace Z0
         FolderPath SemanticDir(FolderName folder)
             => ExeSubDir(folder) + SemanticFolder;
 
+        FolderPath SemanticDir(PartId part)
+            => PartDir(part);
+
         FolderPath SemanticDir(ApiHostUri host)
             => ExeSubDir(SemanticFolder) + HostPart(host);
 
@@ -32,13 +35,12 @@ namespace Z0
             => LegalFileName(host,ext);
 
         FilePath SemanticPath(ApiHostUri host) 
-            => SemanticDir(host) + SemanticFileName(host, SemanticExt);
+            => SemanticDir(host.Owner) + SemanticFileName(host, SemanticExt);
 
         FilePath SemanticPath(FolderName folder, PartId part, OpIdentity id) 
             => SemanticDir(folder) + LegalFileName(part, id, SemanticExt);
 
         FilePath SemanticPath(ApiHostUri host, OpIdentity id) 
             => SemanticDir(host) + LegalFileName(id, SemanticExt);
-
     }
 }

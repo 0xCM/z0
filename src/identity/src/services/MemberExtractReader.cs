@@ -31,7 +31,7 @@ namespace Z0
             var report = ExtractReport.Load(src);    
             if(report.IsNonEmpty)     
             {                               
-                var uri = report[0].Uri.HostPath;
+                var uri = report[0].Uri.Host;
                 var host = ApiSet.FindHost(uri).TryMap(x => x as IApiHost);
                 if(host)
                     CreateExtracts(host.Value, report.Records);

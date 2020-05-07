@@ -104,7 +104,7 @@ namespace Z0
         {
             var lines = src.ReadLines().Skip(1). Select(R.Parse).ToArray();
             if(lines.Length != 0)
-                return new ExtractReport(lines[0].Uri.HostPath, lines);
+                return new ExtractReport(lines[0].Uri.Host, lines);
             else
                 return Empty;
         }        

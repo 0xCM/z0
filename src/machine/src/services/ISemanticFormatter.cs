@@ -14,6 +14,8 @@ namespace Z0.Asm
     
     public interface ISemanticFormatter : IMachineService
     {
-        void Format(HostCodeInstructions hcInxs);        
+        void Render(HostInstructions src);        
+
+        void Render(PartInstructions src);        
     }
 }

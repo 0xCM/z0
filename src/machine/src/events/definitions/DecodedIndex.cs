@@ -17,14 +17,14 @@ namespace Z0
     {
         public readonly struct DecodedIndex : IMachineEvent<E>
         {
-            public static E Empty => new E(UriCodeIndex.Empty, Control.array<HostCodeInstructions>());
+            public static E Empty => new E(UriCodeIndex.Empty, Control.array<PartInstructions>());
 
             [MethodImpl(Inline)]
-            public static DecodedIndex Create(UriCodeIndex index, HostCodeInstructions[] inxs)
+            public static DecodedIndex Create(UriCodeIndex index, PartInstructions[] inxs)
                 => new DecodedIndex(index, inxs);            
 
             [MethodImpl(Inline)]
-            public DecodedIndex(UriCodeIndex index, HostCodeInstructions[] inxs)
+            public DecodedIndex(UriCodeIndex index, PartInstructions[] inxs)
             {
                 Index = index;
                 Instructions = inxs;
@@ -32,11 +32,11 @@ namespace Z0
             
             public UriCodeIndex Index {get;}
 
-            public HostCodeInstructions[] Instructions {get;}
+            public PartInstructions[] Instructions {get;}
 
             public AppMsgColor Flair => AppMsgColor.Cyan;
             
-            public int TotalCount => Instructions.Sum(x => x.TotalCount);
+            public int TotalCount => Instructions.Sum(x => x.InstructionCount);
             
             public E Zero => Empty; 
             

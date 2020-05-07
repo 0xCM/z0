@@ -16,19 +16,19 @@ namespace Z0
     {
         public readonly struct DecodedHost : IMachineEvent<E>
         {
-            public static E Empty => new E(HostCodeInstructions.Empty);
+            public static E Empty => new E(HostInstructions.Empty);
 
             [MethodImpl(Inline)]
-            public static DecodedHost Create(HostCodeInstructions inxs)
+            public static DecodedHost Create(HostInstructions inxs)
                 => new DecodedHost(inxs);            
 
             [MethodImpl(Inline)]
-            public DecodedHost(HostCodeInstructions inxs)
+            public DecodedHost(HostInstructions inxs)
             {
                 Instructions = inxs;
             }
             
-            public HostCodeInstructions Instructions {get;}
+            public HostInstructions Instructions {get;}
 
             public ApiHostUri Host => Instructions.Host;
 
@@ -39,7 +39,7 @@ namespace Z0
             public E Zero => Empty; 
             
             public string Description
-                => $"{Instructions.TotalCount}  {Instructions.Host} instructions decoded";
+                => $"{Instructions.InstructionCount}  {Instructions.Host} instructions decoded";
         }        
     }
 }

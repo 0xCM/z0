@@ -174,7 +174,7 @@ namespace Z0
     /// to reveal; in other words, the count function for counted things is free, as evinced by
     /// the default implementation
     /// </summary>
-    public interface ICounted : IFinite
+    public interface ICounted : IFinite, INullaryKnown
     {
         /// <summary>
         /// The count value
@@ -184,6 +184,12 @@ namespace Z0
         [MethodImpl(Inline)]
         int IFinite.Count() 
             => Count;
+
+        bool INullaryKnown.IsEmpty 
+        {
+            [MethodImpl(Inline)]
+            get => Count == 0;
+        }
     }
 
     /// <summary>
@@ -408,15 +414,25 @@ namespace Z0
 
     public interface IDataIndex<T> : ILengthwise
     {
-        T Lookup(int index);
+    
     }
 
-    public interface IIndex<T> : IDataIndex<T>
+    public interface IIndex<T> : ILengthwise
     {
         ref T this[int index] {get;}  
 
-        T IDataIndex<T>.Lookup(int index) => this[index];
+
+        ref T Lookup(int index) => ref this[index];
     }
+
+    public interface IReadOnlyIndex<T> : IDataIndex<T>
+    {
+        ref readonly T this[int index] {get;}  
+
+
+        ref readonly T Lookup(int index) => ref this[index];    
+    }
+
 
     public interface IIndex<F,T> : IIndex<T>, IReified<F>
         where F : IIndex<F,T>, new()
@@ -424,27 +440,12 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Characterizes a reified immutable T-data index
-    /// </summary>
-    public interface IReadOnlyIndex<T> : IDataIndex<T>
-    {
-        ref readonly T this[int index] {get;}
-
-        T IDataIndex<T>.Lookup(int index) => this[index];
-    }
-
-    public interface IReadOnlyIndex<F,T> : IReadOnlyIndex<T>, IReified<F>
-        where F : IReadOnlyIndex<F,T>, new()
-    {
-
-    }
 
     /// <summary>
     /// Characterizes a finite container over sequentially-indexed discrete content - an array
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface IIndexedElements<T> : IContented<T[]>, IEnumerable<T>, IDataIndex<T>
+    public interface IIndexedElements<T> : IContented<T[]>, IEnumerable<T>, ILengthwise
     {
         IEnumerator IEnumerable.GetEnumerator()
             => Content.GetEnumerator();
@@ -466,10 +467,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Content[index];
         }
-
-        T IDataIndex<T>.Lookup(int index) => this[index];        
     }
-
 
     public interface ISeq<T> : IElements<T>
     {        
@@ -499,20 +497,26 @@ namespace Z0
         int IFinite.Count() => Content.Count();
     }
 
-    public interface IFiniteSeq<F,T> :  IFiniteSeq<T>, ISeq<F,T>
+    /// <summary>
+    /// Characterizes a reifed finite  sequence
+    /// </summary>
+    /// <typeparam name="S">The reifying type</typeparam>
+    /// <typeparam name="T">The sequence element type</typeparam>
+    public interface IFiniteSeq<F,T> : IFiniteSeq<T>, ISeq<F,T>
         where F : IFiniteSeq<F,T>, new()         
     {        
     
     }
 
     /// <summary>
-    /// Characterizes a reifed indexed sequence
+    /// Characterizes a reifed finite indexed sequence
     /// </summary>
     /// <typeparam name="S">The reifying type</typeparam>
     /// <typeparam name="T">The sequence element type</typeparam>
-    public interface IIndexedSeq<S,T> : ISeq<S,T>, IIndex<S,T>
-        where S : IIndexedSeq<S,T>, new()
+    public interface IIndexedSeq<F,T> : IFiniteSeq<F,T>, IIndex<F,T>
+        where F : IIndexedSeq<F,T>, new()
     {
-        
+
     }
+
 }
