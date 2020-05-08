@@ -19,6 +19,18 @@ namespace Z0
             [MethodImpl(Inline)] get => Data;
         }
 
+        public Fixed8 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Data;
+        }
+
+        public Fixed8 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (byte)(Data >> 8);
+        }
+
         [MethodImpl(Inline)]
         public static Fixed16 From(ushort src)
             => new Fixed16(src);

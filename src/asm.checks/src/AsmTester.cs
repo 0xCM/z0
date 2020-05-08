@@ -34,7 +34,7 @@ namespace Z0.Asm
         IPolyrand IPolyrandProvider.Random 
             => Context.Random;
 
-        ICaptureService ICaptureServiceProxy.CaptureService 
+        ICaptureCore ICaptureServiceProxy.CaptureService 
             => Context.CaptureService;        
 
         [MethodImpl(Inline)]

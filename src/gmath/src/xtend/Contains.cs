@@ -11,6 +11,7 @@ namespace Z0
 
     partial class XTend
     {
+
         /// <summary>
         /// Determines whether an interval contains a specified point
         /// </summary>

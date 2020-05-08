@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// Pairs an instruction with useful context facets
     /// </summary>
     public readonly struct OpInstruction : IAsmInxs<Instruction>
-    {        
+    {                
         /// <summary>
         /// The uri of the defining operation
         /// </summary>
@@ -38,7 +38,7 @@ namespace Z0.Asm
         
         public ApiHostUri Host  => OpUri.Host;
 
-        public PartId Part => OpUri.Part;        
+        public PartId Part => OpUri.Part;                
 
         [MethodImpl(Inline)]
         public static OpInstruction Define(MemoryAddress @base, OpUri uri, int seq, Instruction inxs)

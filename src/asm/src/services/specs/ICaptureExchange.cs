@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// The capture service in use
         /// </summary>
-        ICaptureService Service {get;}
+        ICaptureCore Service {get;}
 
         /// <summary>
         /// The buffer that receives the captured data

@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(BitVectors)" />
 
   </ItemGroup>
 

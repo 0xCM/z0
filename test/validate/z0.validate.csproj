@@ -20,7 +20,6 @@
     <ProjectReference Include="$(MemoriesTest)" />
     <ProjectReference Include="$(NatsTest)" />
     <ProjectReference Include="$(NumericTest)" />
-    <ProjectReference Include="$(PermuteTest)" />
     <ProjectReference Include="$(SeedTest)" />
     <ProjectReference Include="$(TextualTest)" />
   </ItemGroup>

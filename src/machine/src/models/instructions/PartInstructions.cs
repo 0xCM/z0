@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {        
     using System;
-    using System.Collections;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
@@ -34,7 +33,7 @@ namespace Z0.Asm
         /// <summary>
         /// The total instruction count
         /// </summary>
-        public int InstructionCount => Instructions.Sum(i => i.InstructionCount);
+        public int Count => Instructions.Sum(i => i.Count);
 
         [MethodImpl(Inline)]
         public static PartInstructions Create(PartId part, HostInstructions[] src)

@@ -11,7 +11,23 @@ namespace Z0
     using static Seed; 
     using static Memories;
     using static AsIn;
-        
+
+    public static class XME
+    {
+        public static string FormatPerm2x128<T>(this Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
+            where T : unmanaged
+        {
+            var sfk = SequenceFormatKind.List;  
+            var sep = Chars.Comma;         
+            var pad = 2;         
+            var sym0 = p0.Symbols().ToString();
+            var sym1 = p1.Symbols().ToString();
+            var description = $"{src.Format()} |> {sym0}{sym1} = {gvec.vperm2x128(src, p0, p1).Format()}";
+            return description;             
+        }
+
+    }
+
     partial class gvec
     {
         [MethodImpl(Inline), Op, Closures(Integers)]

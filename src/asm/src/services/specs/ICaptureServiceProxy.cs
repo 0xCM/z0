@@ -23,7 +23,7 @@ namespace Z0.Asm
         /// <summary>
         /// The exchange service
         /// </summary>
-        ICaptureService CaptureService {get;}
+        ICaptureCore CaptureService {get;}
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for nongeneric methods

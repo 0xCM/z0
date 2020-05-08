@@ -24,6 +24,18 @@ namespace Z0
             get => (X0, X1);
         }
 
+        public Fixed256 Lo
+        {
+            [MethodImpl(Inline)]
+            get => X0;
+        }
+
+        public Fixed256 Hi
+        {
+            [MethodImpl(Inline)]
+            get => X1;
+        }
+
         public int BitWidth => 512;
 
         public int ByteCount => 64;
@@ -87,15 +99,15 @@ namespace Z0
         public override string ToString() 
             => Format();              
 
-        [MethodImpl(Inline)]
-        public Vector256<T> Lo<T>()
-            where T : unmanaged
-                => X0.ToVector<T>();
+        // [MethodImpl(Inline)]
+        // public Vector256<T> Lo<T>()
+        //     where T : unmanaged
+        //         => X0.ToVector<T>();
 
-        [MethodImpl(Inline)]
-        public Vector256<T> Hi<T>()
-            where T : unmanaged
-                => X1.ToVector<T>();
+        // [MethodImpl(Inline)]
+        // public Vector256<T> Hi<T>()
+        //     where T : unmanaged
+        //         => X1.ToVector<T>();
 
         [MethodImpl(Inline)]
         public static Vector512<T> ToVector<T>(in Fixed512 src)

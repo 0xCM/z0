@@ -15,7 +15,7 @@ namespace Z0.Asm
     {        
         readonly IAsmFunctionDecoder Decoder;
 
-        readonly ICaptureService Capture;
+        readonly ICaptureCore Capture;
 
         readonly IDynexus Dynamic;
 

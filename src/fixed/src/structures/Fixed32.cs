@@ -12,11 +12,23 @@ namespace Z0
     [Fixed(FixedWidth.W32)]
     public readonly struct Fixed32 : IFixedNumeric<Fixed32,W32,uint>
     {
-        readonly uint X0;
+        readonly uint Data;
 
         public uint Content
         {
-            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] get => Data;
+        }
+
+        public Fixed16 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Data;
+        }
+
+        public Fixed16 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)(Data >> 16);
         }
 
         [MethodImpl(Inline)]
@@ -34,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Fixed32(uint x0)
-            => X0 = x0;
+            => Data = x0;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed32(uint x0)
@@ -46,58 +58,58 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed32 x)
-            => (sbyte)x.X0;
+            => (sbyte)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator byte(Fixed32 x)
-            => (byte)x.X0;
+            => (byte)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator short(Fixed32 x)
-            => (short)x.X0;
+            => (short)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(Fixed32 x)
-            => (ushort)x.X0;
+            => (ushort)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator uint(Fixed32 x)
-            => x.X0;
+            => x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator int(Fixed32 x)
-            => (int)x.X0;
+            => (int)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator long(Fixed32 x)
-            => x.X0;
+            => x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(Fixed32 x)
-            => (ulong)x.X0;
+            => (ulong)x.Data;
 
  
         [MethodImpl(Inline)]
         public T As<T>()
             where T : unmanaged
-                => Cast.to<T>(X0);
+                => Cast.to<T>(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed32 src)
-            => X0 == src.X0;
+            => Data == src.Data;
 
         [MethodImpl(Inline)]
         public bool Equals(uint src)
-            => X0 == src;
+            => Data == src;
        
         public string Format()
-            => X0.ToString();
+            => Data.ToString();
 
         public override string ToString() 
             => Format();
  
         public override int GetHashCode()
-            => X0.GetHashCode();
+            => Data.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed32 x && Equals(x);

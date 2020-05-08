@@ -13,9 +13,9 @@ namespace Z0
     public static class BitFormatter
     {
         [MethodImpl(Inline)]
-        public static IFormatter<BitFormatConfig,T> Define<T>()
+        public static IFormatter<BitFormatConfig,T> Define<T>(BitFormatConfig config = default)
             where T : struct
-                =>  default(BitFormatter<T>);
+                => new BitFormatter<T>(config);
     }
 
     /// <summary>
@@ -24,6 +24,14 @@ namespace Z0
     public readonly struct BitFormatter<T> : IFormatter<BitFormatConfig,T>
         where T : struct
     {            
+        readonly BitFormatConfig DefaultConfig;
+        
+        [MethodImpl(Inline)]
+        internal BitFormatter(BitFormatConfig config)
+        {
+            DefaultConfig = config;
+        }
+
         public string Format(T src, in BitFormatConfig config)
         {
             var bytes = Bytes.from(ref src);
@@ -54,11 +62,6 @@ namespace Z0
         }
 
         public string Format(T src)
-            => Format(src,BitFormatConfig.Default);
-    }
-
-    partial class XTend
-    {
-
+            => Format(src, DefaultConfig);
     }
 }

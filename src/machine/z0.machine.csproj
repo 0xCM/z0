@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AssemblyName>z0</AssemblyName>
+    <AssemblyName>machine</AssemblyName>
   </PropertyGroup>
 
 

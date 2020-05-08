@@ -13,14 +13,14 @@ namespace Z0.Asm
     {
         public ICaptureExchange CaptureExchange {get;}
 
-        public ICaptureService CaptureService {get;}
+        public ICaptureCore CaptureService {get;}
 
         [MethodImpl(Inline)]
-        public static ICaptureServiceProxy Create(ICaptureService service, ICaptureExchange exchange)
+        public static ICaptureServiceProxy Create(ICaptureCore service, ICaptureExchange exchange)
             => new CaptureServiceProxy(service, exchange);
 
         [MethodImpl(Inline)]
-        public CaptureServiceProxy(ICaptureService service, ICaptureExchange exchange)
+        public CaptureServiceProxy(ICaptureCore service, ICaptureExchange exchange)
         {
             CaptureService = service;
             CaptureExchange = exchange;

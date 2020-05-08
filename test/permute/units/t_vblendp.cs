@@ -251,7 +251,7 @@ namespace Z0
             gvec.vlo(z).StoreTo(dst,0);
             gvec.vhi(z).StoreTo(dst,1);
 
-            var perm = Permute.define(dst.Data);            
+            var perm = Perm.Init(dst.Data);            
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = i == perm[i];
@@ -317,7 +317,7 @@ namespace Z0
             gvec.vlo(blend).StoreTo(dst,0);
             gvec.vhi(blend).StoreTo(dst,1);
 
-            var perm = Permute.define(dst.Data);            
+            var perm = Perm.Init(dst.Data);            
             var tc = 0;
             for(var i=0; i< perm.Length; i++)
             {
@@ -423,7 +423,7 @@ namespace Z0
             gvec.vlo(z).StoreTo(dst,0);            
             gvec.vhi(z).StoreTo(dst,1);            
 
-            var perm = Permute.define(dst.Data);
+            var perm = Perm.Init(dst.Data);
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = gmath.eq(convert<T>(i), perm[i]);
@@ -451,7 +451,7 @@ namespace Z0
             z.Lo.StoreTo(dst,0);
             z.Hi.StoreTo(dst,1);
 
-            var perm = Permute.define(dst.Data);
+            var perm = Perm.Init(dst.Data);
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = gmath.eq(convert<T>(i), perm[i]);

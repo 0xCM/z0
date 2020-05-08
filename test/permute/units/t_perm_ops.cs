@@ -15,19 +15,19 @@ namespace Z0
     {
         public void perm_inc()
         {
-            var p = Permute.identity(16);
+            var p = Perm.Identity(16);
             for(var i=0; i<16; i++)
                 p.Inc();
-            Claim.eq(p.Terms, Permute.identity(16).Terms);
+            Claim.eq(p.Terms, Perm.Identity(16).Terms);
         }
 
         public void perm_dec()
         {
-            var p = Permute.identity(16);
+            var p = Perm.Identity(16);
             for(var i=0; i<16; i++)
                 p.Dec();
 
-            Claim.eq(p.Terms, Permute.identity(16).Terms);
+            Claim.eq(p.Terms, Perm.Identity(16).Terms);
         }
 
         public void perm_invert()
@@ -71,7 +71,7 @@ namespace Z0
             var pbs_actual = BitString.scalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = Permute.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
+            var p_assembled = PermSymbolic.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
             Claim.eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();

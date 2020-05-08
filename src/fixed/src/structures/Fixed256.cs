@@ -25,9 +25,22 @@ namespace Z0
             get => Data;
         }
 
+        public Fixed128 Lo
+        {
+            [MethodImpl(Inline)]
+            get => Vector256.GetLower(Data);
+        }
+
+        public Fixed128 Hi
+        {
+            [MethodImpl(Inline)]
+            get => Vector256.GetUpper(Data);
+        }
+
         public int BitWidth => 256;
 
         public int ByteCount => 32;
+
 
         [MethodImpl(Inline)]
         public static Fixed256 From<T>(Vector256<T> src)

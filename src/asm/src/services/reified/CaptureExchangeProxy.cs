@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// The juncture-coincident operation set 
         /// </summary>
-        public ICaptureService Service {get;}
+        public ICaptureCore Service {get;}
 
         /// <summary>
         /// The buffer that receives the captured data
@@ -27,11 +27,11 @@ namespace Z0.Asm
         public IBufferToken StateBuffer {get;}
 
         [MethodImpl(Inline)]
-        public static ICaptureExchange Create(ICaptureService service, IBufferToken capture, IBufferToken state)
+        public static ICaptureExchange Create(ICaptureCore service, IBufferToken capture, IBufferToken state)
             => new CaptureExchangeProxy(service,capture,state);
         
         [MethodImpl(Inline)]
-        internal CaptureExchangeProxy(ICaptureService service, IBufferToken target, IBufferToken state)            
+        internal CaptureExchangeProxy(ICaptureCore service, IBufferToken target, IBufferToken state)            
         {
             this.TargetBuffer = target;
             this.StateBuffer = state;

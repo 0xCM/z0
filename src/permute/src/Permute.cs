@@ -6,9 +6,5 @@ namespace Z0
 {
     using System;    
 
-    [ApiHost("api")]
-    public partial class Permute : IApiHost<Permute>
-    {
 
-    }
 }

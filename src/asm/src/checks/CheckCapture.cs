@@ -18,11 +18,11 @@ namespace Z0.Asm
     public readonly struct CheckCapture : ICheckCapture
     {
         [MethodImpl(Inline)]
-        public static ICheckCapture Create(ICaptureService service, ICaptureExchange exchange)
+        public static ICheckCapture Create(ICaptureCore service, ICaptureExchange exchange)
             => new CheckCapture(service, exchange);
 
         [MethodImpl(Inline)]
-        public CheckCapture(ICaptureService service, ICaptureExchange exchange)
+        public CheckCapture(ICaptureCore service, ICaptureExchange exchange)
         {
             this.CaptureService = service;
             this.CaptureExchange = exchange;
@@ -30,6 +30,6 @@ namespace Z0.Asm
 
         public ICaptureExchange CaptureExchange {get;}
 
-        public ICaptureService CaptureService {get;}
+        public ICaptureCore CaptureService {get;}
     }
 }

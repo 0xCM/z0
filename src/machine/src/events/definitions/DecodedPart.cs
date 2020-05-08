@@ -37,7 +37,7 @@ namespace Z0
             public E Zero => Empty; 
             
             public string Description
-                => $"{Instructions.InstructionCount}  {Instructions.Part} instructions decoded";
+                => $"{Instructions.Count}  {Instructions.Part} instructions decoded";
         }        
     }
 }

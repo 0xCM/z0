@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EventBroker()
         {
-            this.Subscriptions = new Dictionary<Type, ISink>();
+            Subscriptions = new Dictionary<Type,ISink>();
         }
 
         Outcome Subscribe<S,E>(S sink, E model)
@@ -37,7 +37,7 @@ namespace Z0
                 => Subscribe(AppEvents.sink(receiver), model);
 
         [MethodImpl(Inline)]
-        Outcome IEventBroker.Subscribe<S, E>(S sink, E model)
+        Outcome IEventBroker.Subscribe<S,E>(S sink, E model)
             => Subscribe(sink,model);
 
         ref readonly E IEventBroker.Raise<E>(in E e)

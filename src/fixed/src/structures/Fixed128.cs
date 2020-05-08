@@ -22,6 +22,19 @@ namespace Z0
             get => Data;
         }
 
+
+        public ulong Lo
+        {
+            [MethodImpl(Inline)]
+            get => Data.GetElement(0);
+        }
+
+        public ulong Hi
+        {
+            [MethodImpl(Inline)]
+            get => Data.GetElement(1);
+        }
+
         [MethodImpl(Inline)]
         public static Fixed128 From<T>(Vector128<T> src)
             where T : unmanaged

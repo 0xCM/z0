@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(BitMasks)" />
-
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(Blocks)" />
   </ItemGroup>

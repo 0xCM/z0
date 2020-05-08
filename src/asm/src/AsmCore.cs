@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     partial class XTend
     {
-        public static T Map<S,T>(this S src, Func<S,T> f, T @default = default)
+        public static T Map<S,T>(this S src, Func<S,T> f, T @default)
             where S : INullaryKnown
         {
             if(src.IsNonEmpty)
@@ -20,6 +20,17 @@ namespace Z0.Asm
             else 
                 return default;
         }
+
+        public static T Map<S,T>(this S src, Func<S,T> f)
+            where S : INullaryKnown
+            where T : INullary<T>
+        {
+            if(src.IsNonEmpty)
+                return f(src);
+            else 
+                return default(T).Zero;
+        }
+
     }
     
     public readonly struct AsmCore : IAsmCore

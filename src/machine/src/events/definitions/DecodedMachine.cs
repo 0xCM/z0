@@ -36,7 +36,7 @@ namespace Z0
 
             public AppMsgColor Flair => AppMsgColor.Cyan;
             
-            public int TotalCount => Instructions.Sum(x => x.InstructionCount);
+            public int TotalCount => Instructions.Sum(x => x.Count);
             
             public E Zero => Empty; 
             

@@ -35,7 +35,7 @@ namespace Z0.Asm
         /// <summary>
         /// The total instruction count
         /// </summary>
-        public int InstructionCount => Instructions.Sum(i => i.TotalCount);
+        public int Count => Instructions.Sum(i => i.Count);
 
         [MethodImpl(Inline)]
         public static HostInstructions Create(ApiHostUri host, OpInstructions[] src)

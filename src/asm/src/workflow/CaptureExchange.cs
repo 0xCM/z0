@@ -25,7 +25,7 @@ namespace Z0.Asm
         /// <summary>
         /// The juncture-coincident operation set 
         /// </summary>
-        public readonly ICaptureService Service;
+        public readonly ICaptureCore Service;
 
         /// <summary>
         /// Allocatates buffers and creates an exchange over the allocation
@@ -41,7 +41,7 @@ namespace Z0.Asm
         /// Allocatates buffers and creates an exchange over the allocation
         /// </summary>
         /// <param name="context">The source context</param>
-        public static CaptureExchange Create(ICaptureService service, int size = Pow2.T14)
+        public static CaptureExchange Create(ICaptureCore service, int size = Pow2.T14)
         {
             var cBuffer = new byte[size];
             var sBuffer = new byte[size];
@@ -49,10 +49,10 @@ namespace Z0.Asm
         }        
 
         [MethodImpl(Inline)]
-        public static CaptureExchange Create(ICaptureService service, Span<byte> capture, Span<byte> state)
+        public static CaptureExchange Create(ICaptureCore service, Span<byte> capture, Span<byte> state)
             => new CaptureExchange(service, capture, state);
 
-        CaptureExchange(ICaptureService service, Span<byte> capture, Span<byte> state)            
+        CaptureExchange(ICaptureCore service, Span<byte> capture, Span<byte> state)            
         {
             insist(capture.Length == state.Length);
             this.TargetBuffer = capture;

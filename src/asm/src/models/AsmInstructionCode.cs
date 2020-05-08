@@ -13,26 +13,26 @@ namespace Z0.Asm
     /// Captures an asm opcode together with an instruction string
     /// </summary>
     public readonly struct AsmInstructionCode : ITextual
-    {
-        const string Sep = CharText.Space + CharText.Pipe + CharText.Pipe + CharText.Space;
-
-        public readonly string Definition;
-
+    {    
         public readonly string OpCode;
 
+        public readonly string Expression;
+        
         [MethodImpl(Inline)]
-        public static AsmInstructionCode Define(string def, string opcode)
-            => new AsmInstructionCode(def,opcode);
+        public static AsmInstructionCode Define(string opcode, string expr)
+            => new AsmInstructionCode(opcode,expr);
 
         [MethodImpl(Inline)]
-        AsmInstructionCode(string def, string opcode)
+        AsmInstructionCode(string opcode, string expr)
         {
-            this.Definition = def;
-            this.OpCode = opcode;
+            Expression = expr;
+            OpCode = opcode;
         }
 
+        const string Sep = CharText.Space + CharText.Pipe + CharText.Pipe + CharText.Space;
+
         public string Format()
-            => String.Concat(Definition, Sep, OpCode);
+            => String.Concat(Expression, Sep, OpCode);
         
         public override string ToString()
             => Format();

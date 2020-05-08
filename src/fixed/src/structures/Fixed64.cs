@@ -19,6 +19,18 @@ namespace Z0
             [MethodImpl(Inline)] get => Data;
         }
 
+        public Fixed32 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Data;
+        }
+
+        public Fixed32 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (uint)(Data >> 32);
+        }
+
         [MethodImpl(Inline)]
         public static Fixed64 From<T>(T src)
             where T : unmanaged
@@ -40,6 +52,7 @@ namespace Z0
         Fixed64(ulong x0)
             => Data = x0;
         
+
         [MethodImpl(Inline)]
         public static implicit operator Fixed64(int x0)
             => From(x0);

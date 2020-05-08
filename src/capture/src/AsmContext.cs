@@ -36,7 +36,7 @@ namespace Z0.Asm
         
         public IAsmFunctionDecoder Decoder {get;}
 
-        public ICaptureService CaptureService {get;}
+        public ICaptureCore CaptureService {get;}
 
         public IDynexus Dynamic {get;}
 

@@ -35,7 +35,7 @@ namespace Z0.Asm
             =>  $"; {text}";
 
         public static string render(AsmInstructionCode src, in AsmFormatSpec fmt)
-            => $"{src.Definition}{fmt.FieldDelimiter}{src.OpCode}";
+            => $"{src.Expression}{fmt.FieldDelimiter}{src.OpCode}";
 
         /// <summary>
         /// Formats a line label
