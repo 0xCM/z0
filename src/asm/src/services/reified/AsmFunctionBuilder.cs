@@ -16,6 +16,7 @@ namespace Z0.Asm
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+
     public readonly struct AsmFunctionBuilder : IAsmFunctionBuilder
     {        
         public static IAsmFunctionBuilder Service => default(AsmFunctionBuilder);
@@ -44,6 +45,8 @@ namespace Z0.Asm
             var instructions = AsmInstructionList.Create(src.Decoded, src.Encoded.Encoded);
             return AsmFunction.Define(uri, sig, src.Encoded, src.TermCode, instructions);            
         }
+
+
     }
 
     static class AsmFunctionChecks

@@ -5,6 +5,10 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Classifies Jmp instruction variations
@@ -107,7 +111,9 @@ namespace Z0.Asm
         JS = 2*JPO,
 
         /// <summary> Jump if Zero; ZF=1 </summary>
-        JZ = 2*JS        
+        JZ = 2*JS,
+
+        Max = JZ       
     }
 
 }

@@ -13,14 +13,14 @@ namespace Z0.Asm
     /// <summary>
     /// Collects a sequence of operation instuction sequences from host-defined members
     /// </summary>         
-    public readonly struct HostInstructions : IInstructions<HostInstructions, OpInstructions>
+    public readonly struct HostInstructions
     {
-        public static HostInstructions Empty => new HostInstructions(ApiHostUri.Empty, Control.array<OpInstructions>());
+        public static HostInstructions Empty => new HostInstructions(ApiHostUri.Empty, Control.array<MemberInstructions>());
 
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        public OpInstructions[] Instructions {get;}
+        public MemberInstructions[] Content {get;}
 
         /// <summary>
         /// The defining host
@@ -28,24 +28,34 @@ namespace Z0.Asm
         public ApiHostUri Host {get;}
 
         /// <summary>
+        /// The base address of the first member, where members are ordered by their individual base addresses
+        /// </summary>
+        public MemoryAddress BaseAddress {get;}
+
+        /// <summary>
         /// The number of host-defined operations
         /// </summary>
-        public int OpCount => Instructions.Length;
+        public int MemberCount => Content.Length;
 
         /// <summary>
         /// The total instruction count
         /// </summary>
-        public int Count => Instructions.Sum(i => i.Count);
+        public int TotalCount => Content.Sum(i => i.TotalCount);
 
         [MethodImpl(Inline)]
-        public static HostInstructions Create(ApiHostUri host, OpInstructions[] src)
+        public MemoryOffset Offset(MemoryAddress member)
+            => MemoryOffset.Derive(BaseAddress, member);
+
+        [MethodImpl(Inline)]
+        public static HostInstructions Create(ApiHostUri host, MemberInstructions[] src)
             => new HostInstructions(host, src);
     
         [MethodImpl(Inline)]        
-        public HostInstructions(ApiHostUri host, OpInstructions[] inxs)
+        public HostInstructions(ApiHostUri host, MemberInstructions[] inxs)
         {
             Host = host;
-            Instructions = inxs;
+            Content = inxs.OrderBy(x => x.BaseAddress).ToArray();
+            BaseAddress = Content.Length != 0 ? Content[0].BaseAddress : MemoryAddress.Empty;
         }
     }
 }

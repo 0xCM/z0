@@ -29,6 +29,13 @@ namespace Z0
             => T.WriteLine($"{content}", AppMsgColor.Green);
 
         /// <summary>
+        /// Announces a menthod invocation
+        /// </summary>
+        /// <param name="caller">The invoked method</param>
+        public static void announce([Caller] string caller = null)
+            => T.WriteMessage(AppMsg.Colorize(caller, AppMsgColor.Magenta));
+
+        /// <summary>
         /// Emits a warning-level message
         /// </summary>
         /// <param name="content">The message to emit</param>

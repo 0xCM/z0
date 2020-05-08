@@ -14,6 +14,8 @@ namespace Z0
 
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
+        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
+
         public const string Kernel32 = "kernel32.dll";
 
         public const NumericKind UnsignedInts = NumericKind.UnsignedInts;

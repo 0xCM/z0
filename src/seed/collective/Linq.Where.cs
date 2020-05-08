@@ -14,13 +14,23 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// (LInQ Hijack) Filters the source array with a specified predicate
+        /// Linq where operator specialized for arrays
         /// </summary>
-        /// <param name="src"></param>
+        /// <param name="src">The source array</param>
         /// <param name="f"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The array element type</typeparam>
         public static T[] Where<T>(this T[] src, Func<T,bool> f)
             => Control.filter(src,f);
+
+        /// <summary>
+        /// Linq orderby operator specialized for arrays
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <param name="f">The order criterion selector</param>
+        /// <typeparam name="T">The array element type</typeparam>
+        /// <typeparam name="K">The order criterion type</typeparam>
+        public static T[] OrderBy<T,K>(this T[] src, Func<T,K> f)
+            => Enumerable.OrderBy(src,f).ToArray();
 
         /// <summary>
         /// Result = Filter + Project

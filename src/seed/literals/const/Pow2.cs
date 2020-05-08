@@ -34,6 +34,15 @@ namespace Z0
         public static ulong pow(int i)
             =>  1ul << i; 
 
+        [MethodImpl(Inline)]
+        public static bool test(ulong src)
+        {
+            var x = src & (src-1);
+            var a = x != 0 ? true : false;
+            var b = src != 0 ? true : false;
+            return b && !a;            
+        }
+
         /// <summary>
         /// 2^0 = 1
         /// </summary>

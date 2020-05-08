@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
 
     /// <summary>
-    /// Pairs a uri host with owned code
+    /// Collects code derived from members declared by a specific operation host
     /// </summary>
     public readonly struct HostCode
     {
@@ -24,9 +24,16 @@ namespace Z0
         public ApiHostUri Id {get;}
 
         /// <summary>
-        /// The part-owned code
+        /// The host-owned code
         /// </summary>
         public UriCode[] Code {get;}       
+
+        public UriCode this[int index]  { [MethodImpl(Inline)] get => Code[index]; }
+
+        /// <summary>
+        /// The number of collected functions
+        /// </summary>
+        public int MemberCount { [MethodImpl(Inline)] get => Code.Length;}
 
         [MethodImpl(Inline)]
         public static HostCode Define(ApiHostUri host, UriCode[] code)
@@ -39,8 +46,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public HostCode(ApiHostUri id, UriCode[] code)
         {
-            this.Id = id;
-            this.Code = code;
+            Id = id;
+            Code = code.OrderBy(x => x.Address);
         }
     }
 }

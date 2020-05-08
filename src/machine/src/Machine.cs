@@ -60,8 +60,8 @@ namespace Z0
         {
             Sink.Deposit(e);
 
-            var formatter = SemanticFormatter.Create(Context);
-            formatter.Render(e.Instructions);
+            var formatter = MachineWorkflow.Create(Context);
+            formatter.Run(e.Instructions);
         }
 
         public void Run()
@@ -116,20 +116,29 @@ namespace Z0
 
         HostInstructions Decode(HostCode hcs)
         {
-            var inxs = list<OpInstructions>();            
-            Control.iter(hcs.Code, code => inxs.Add(Decode(code)));
-            return HostInstructions.Create(hcs.Id, inxs.ToArray());
-        }
-
-        OpInstructions Decode(UriCode src)
-        {
-            var seq = 0;
-            var dst =  list<OpInstruction>();
-            void OnDecoded(Instruction inxs)
-                => dst.Add(OpInstruction.Define(src.Address, src.OpUri, seq++, inxs));
+            var inxs = list<MemberInstructions>();    
             
-            Context.Decoder.Decode(src.Encoded, OnDecoded);
-            return OpInstructions.Create(src.OpUri, dst.ToArray());
+            var dst = list<Instruction>();
+            void OnDecoded(Instruction inxs)
+                => dst.Add(inxs);
+            
+            var hostaddr = MemoryAddress.Empty;
+            var decoder = Context.Decoder;        
+
+            for(var i=0; i<hcs.MemberCount; i++)
+            {
+                dst.Clear();
+                var uriCode = hcs[i];
+                decoder.Decode(uriCode, OnDecoded);
+                
+                if(i == 0)
+                    hostaddr = dst[0].IP;
+
+                var member = MemberInstructions.Create(hostaddr, uriCode, dst.ToArray());
+                inxs.Add(member);
+            }
+
+            return HostInstructions.Create(hcs.Id, inxs.ToArray());
         }
 
         void Index(MemberParseReport report)

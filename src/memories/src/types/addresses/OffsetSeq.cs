@@ -43,6 +43,10 @@ namespace Z0
         public OffsetSeq AccrueOffset(ushort dx)
             => new OffsetSeq((ushort)(Seq + 1), ((ushort) (Offset + dx)));
 
+        [MethodImpl(Inline)]
+        public OffsetSeq AccrueOffset(int dx)
+            => AccrueOffset((ushort)dx);
+
         public string Format(int seqpad)
             => String.Concat(
                 Seq.ToString().PadLeft(seqpad, Chars.D0), 

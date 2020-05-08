@@ -26,6 +26,10 @@ namespace Z0
         public static UriCode Define(OpUri uri, LocatedCode data)
             => new UriCode(uri, data);
 
+        [MethodImpl(Inline)]
+        public static UriCode Define(OpUri uri, MemoryAddress address, BinaryCode encoded)
+            => new UriCode(uri, LocatedCode.Define(address,encoded));
+
         /// <summary>
         /// The source member identity
         /// </summary>
@@ -67,6 +71,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(UriCode src)
             => src.Encoded.Encoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator LocatedCode(UriCode src)
+            => src.Encoded;
 
 
         [MethodImpl(Inline)]

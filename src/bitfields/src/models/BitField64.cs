@@ -70,6 +70,10 @@ namespace Z0
         public void Disable(byte index)
             => State = Bits.disable(State, index);
 
+        [MethodImpl(Inline)]
+        public byte Index(E src)
+            => (byte)math.log2(Enums.u64(src));
+
         public bit this[byte i]
         {
             [MethodImpl(Inline)]

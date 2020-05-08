@@ -14,7 +14,13 @@ namespace Z0.Asm
     {
         T Instruction {get;}
     }
-    
+
+    public interface IAsmInxsSeq<T>
+        where T : IAsmInxs
+    {
+        T[] Instructions {get;}
+    }
+
     public interface IAsmInxs : 
         IAsmInxsFlags,
         IAsmInxsFlow,

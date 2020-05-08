@@ -5,17 +5,12 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Seed;
     using static Memories;
     
-    public interface ISemanticFormatter : IMachineService
-    {
-        void Render(HostInstructions src);        
-
-        void Render(PartInstructions src);        
+    public interface IMachineWorkflow : IMachineService
+    {    
+        void Run(PartInstructions src);        
     }
 }

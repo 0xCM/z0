@@ -30,10 +30,10 @@ namespace Z0
     /// </summary>
     public class ResourceRecord : ITabular<F,R>
     {    
-        public static ResourceRecord Create(MemoryOffset offset, MemoryAddress location, int size, string uri, byte[] data)
+        public static ResourceRecord Create(LocalAddress offset, MemoryAddress location, int size, string uri, byte[] data)
             => new ResourceRecord(offset, location, size, uri, data);
 
-        ResourceRecord(MemoryOffset Offset, MemoryAddress @base, int length, string uri, byte[] data)
+        ResourceRecord(LocalAddress Offset, MemoryAddress @base, int length, string uri, byte[] data)
         {
             this.Offset =Offset;
             this.Address = @base;
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [TabularField(F.Offset)]
-        public MemoryOffset Offset {get; set;}
+        public LocalAddress Offset {get; set;}
 
         [TabularField(F.Address)]
         public MemoryAddress Address {get; set;}

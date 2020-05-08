@@ -164,7 +164,6 @@ namespace Z0.Asm
         bool IsRegister(OpKind src)
             => Direct.IsRegister(src);
 
-
         /// <summary>
         /// Determines whether the classified operand is some sort of memory
         /// </summary>
@@ -204,7 +203,6 @@ namespace Z0.Asm
         bool IsMemDirect(OpKind src)
             => Direct.IsMemDirect(src);
 
-
         [MethodImpl(Inline)]
         AsmInstructionSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset)
                 => Direct.Summarize(@base, src,encoded, content,offset);            
@@ -238,7 +236,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         AsmOperandInfo Operand(MemoryAddress @base, Instruction src, int index)
-            => Direct.Operand(@base,src,index);            
-
+            => Direct.Operand(@base,src,index);
     }
 }

@@ -113,18 +113,15 @@ namespace Z0
         public static MemoryAddress operator-(MemoryAddress a, MemoryAddress b)
             => new MemoryAddress(a.Location - b.Location);
 
-
         [MethodImpl(Inline)]
         MemoryAddress(ulong absolute)
-            => this.Location = absolute;
+            => Location = absolute;
 
         public string Format()
-            => IdentityText;
+            => IdentityText;        
 
-        
-
-        public string Format(int digits)
-            => Location.ToString($"x{digits}") + "h";
+        public string Format(HexFormatConfig config)
+            => Location.FormatHex(config);
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryAddress other)

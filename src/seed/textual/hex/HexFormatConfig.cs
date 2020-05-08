@@ -58,7 +58,9 @@ namespace Z0
         /// The default configuration for array initialization content
         /// </summary>
         public static HexFormatConfig ArrayContent => Define(true, true, false, true, Chars.Comma);
-        
+
+        public static HexFormatConfig HexMem => Define(zpad: false, specifier:true, uppercase:false, prespec:true);
+
         [MethodImpl(Inline)]
         public static HexFormatConfig Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
             => new HexFormatConfig(zpad,specifier,uppercase,prespec, delimiter ?? Chars.Comma);

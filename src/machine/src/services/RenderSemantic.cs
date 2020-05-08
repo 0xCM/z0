@@ -7,13 +7,14 @@ namespace Z0.Asm
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Seed;
     using static Memories;
 
     public interface IRenderSemantic
     {
-        string[] Render(OpAddress located, Instruction[] src);
+        
     }
 
     public readonly struct RenderSemantic : IRenderSemantic 
@@ -23,6 +24,8 @@ namespace Z0.Asm
         const byte SeqDigitPad = 2;
 
         const byte InstructionCountPad = 3;
+
+        const byte OffsetAddrPad = 12;
 
         const byte AddressPad = 16;     
 
@@ -38,7 +41,7 @@ namespace Z0.Asm
 
         public const byte ColSepWidth = 3;
 
-        public const byte SectionWidth = AddressPad + SubGridWidth + Counter + SizePad + CounterPad + ColSepWidth;
+        public const byte SectionWidth = AddressPad +  OffsetAddrPad + SubGridWidth + Counter + SizePad + CounterPad + ColSepWidth;
 
         public static string SubGridSep 
             = new string(LineSepSymbol, SubGridWidth);
@@ -48,7 +51,7 @@ namespace Z0.Asm
 
         public const char LineSepSymbol = Chars.Dash;
 
-        const string LeftImply = "<==";
+        const string LeftImply = " <== ";
 
         const string ColSep = " | ";
 
@@ -64,34 +67,48 @@ namespace Z0.Asm
             Descriptions = descriptions;
         }
 
-        string Title(Instruction src, OffsetSeq offseq)
-            => asm.RenderAddress(src, AddressPad) + offseq.Format(InstructionCountPad); 
-
-        string Header(Instruction src, OffsetSeq offseq)
+        public void Render(HostInstructions src, StreamWriter dst)
         {
-            var title = Title(src, offseq);
-            var description = text.concat(src.FormattedInstruction, Chars.Space, LeftImply, Chars.Space, src.InstructionCode);
-            return text.concat(title, ColSep, description);
+            var functions = src.Content;
+            var count = src.MemberCount;            
+
+            for(var i=0; i<count; i++)
+            {
+                RenderMember(functions[i],dst);                
+                
+                if(i != count - 1)
+                    dst.WriteLine();                
+            }    
         }
 
-        public string[] Render(OpAddress located, Instruction[] src)
+        void RenderMember(MemberInstructions src, StreamWriter dst)
         {
             Descriptions.Clear();
-            
-            var id = located.OpId;
-            var @base = located.Address;
+
+            var id = src.OpId;
+            var @base = src.BaseAddress;
+
             Descriptions.Add(id);
             Descriptions.Add(SectionSep);
-            
+
             var offseq = OffsetSeq.Zero;
-            for(ushort i=0; i<src.Length; i++)
+            var offaddr = src.OffsetAddress;
+
+            for(ushort i=0; i<src.TotalCount; i++)
             {
                 var inxs = src[i];
-                Render(located, offseq, inxs);
-                offseq = offseq.AccrueOffset((ushort)inxs.ByteLength);                
+                Render(inxs, offaddr, offseq);
+
+                var size = (ushort)inxs.ByteLength;
+                offaddr = offaddr.AccrueOffset(size);
+                offseq = offseq.AccrueOffset(size);
             }
-            return Descriptions.ToArray();
+            
+            var rendered = Descriptions.ToArray();
+            for(var j=0; j<rendered.Length; j++)
+                dst.WriteLine(rendered[j]);            
         }
+
 
         string RenderOperand(MemoryAddress @base, Instruction src, int i)
         {            
@@ -110,23 +127,25 @@ namespace Z0.Asm
             return desc;
         }
 
-        void Render(OpAddress located, OffsetSeq offseq, Instruction src)
+        void Render(LocatedInstruction src, MemoryOffset offaddr,  OffsetSeq offseq)
         {
-            var id = located.OpId;
-            var @base = located.Address;
-            var title = Title(src, offseq);
-            var header = Header(src, offseq);
+            var id = src.OpId;
+            var @base = src.BaseAddress;
+            var inxs = src.Instruction;
+            var title = Title(inxs, offaddr, offseq);
+            var header = Header(inxs, offaddr, offseq);
             Descriptions.Add(header);
                             
+            var opcount = src.Instruction.OpCount;
             var summaries = list<string>();
-            for(var i =0; i<src.OpCount; i++)               
+            for(var i =0; i<opcount; i++)               
             {
-                var kind = asm.OperandKind(src, i);
+                var kind = asm.OperandKind(inxs, i);
 
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(OperandIndexPad);
                 var col02 = asm.Render(kind).PadRight(OpKindPad);
                 var col03 = text.concat(col01, ColSep, col02, Chars.Pipe, Chars.Space);
-                var desc = RenderOperand(@base, src, i);
+                var desc = RenderOperand(@base, inxs, i);
                 
                 summaries.Add(col03 + desc);       
             }
@@ -135,6 +154,26 @@ namespace Z0.Asm
                 Descriptions.Add(text.concat(title, ColSep, $"{s}"));
 
             Descriptions.Add(text.concat(title, ColSep, SubGridSep));  
+        }
+
+        [MethodImpl(Inline)]
+        static ulong JmpDelta(ulong src, ulong dst, byte inxsSize)
+            => dst - (src + inxsSize);
+
+        string Title(Instruction src, MemoryOffset offaddr, OffsetSeq offseq)
+            => text.concat(
+                asm.RenderAddress(src, AddressPad), 
+                text.concat(
+                    text.spaced(offaddr.Offset.FormatAsmHex(6))
+                    ).PadRight(OffsetAddrPad),
+                offseq.Format(InstructionCountPad)
+                ); 
+
+        string Header(Instruction src, MemoryOffset offaddr, OffsetSeq offseq)
+        {
+            var title = Title(src, offaddr, offseq);
+            var description = text.concat(src.FormattedInstruction, LeftImply, src.InstructionCode);
+            return text.concat(title, ColSep, description);
         }
     }
 }

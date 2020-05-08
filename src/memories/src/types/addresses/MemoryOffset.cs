@@ -10,43 +10,59 @@ namespace Z0
     using static Seed;
 
     public readonly struct MemoryOffset : 
-        IIdentification<MemoryOffset>, 
         IAddressable, 
         INullaryKnown, 
         INullary<MemoryOffset>
     {
-        public readonly ushort Offset;
+        public MemoryAddress Base {get;}
 
-        public static MemoryOffset Empty => new MemoryOffset(0);
+        public ulong Offset {get;}
 
-        public readonly MemoryAddress Base;
+        public NumericWidth OffsetWidth {get;}
+
+        public static MemoryOffset Empty  => new MemoryOffset(0, 0, 0);
 
         MemoryAddress IAddressable.Address => Base;
 
         public MemoryOffset Zero  { [MethodImpl(Inline)] get => Empty; }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => Offset == 0; }
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Base == 0 && Offset == 0 && OffsetWidth == 0;
+        }
 
-        public bool IsNonEmpty  { [MethodImpl(Inline)] get => Offset != 0; }
+        public bool IsNonEmpty  { [MethodImpl(Inline)] get => !IsNonEmpty; }
 
-        public string IdentityText 
-            => Offset.ToString("x4") + "h";
+        [MethodImpl(Inline)]
+        public static MemoryOffset Define(MemoryAddress @base, byte offset)
+            => new MemoryOffset(@base, offset, NumericWidth.W8);
 
         [MethodImpl(Inline)]
         public static MemoryOffset Define(MemoryAddress @base, ushort offset)
-            => new MemoryOffset(@base, offset);
+            => new MemoryOffset(@base, offset, NumericWidth.W16);
 
         [MethodImpl(Inline)]
-        public static MemoryOffset Define(ushort offset)
-            => new MemoryOffset(offset);
+        public static MemoryOffset Define(MemoryAddress @base, uint offset)
+            => new MemoryOffset(@base, offset, NumericWidth.W32);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemoryOffset(ushort src)
-            => Define(src);
+        public static MemoryOffset Define(MemoryAddress @base, ulong offset)
+            => new MemoryOffset(@base, offset, NumericWidth.W64);
 
         [MethodImpl(Inline)]
-        public static implicit operator ushort(MemoryOffset src)
-            => src.Offset;
+        public static MemoryOffset Derive(MemoryAddress @base, MemoryAddress relative)
+        {
+            var offset = @base.Location - relative.Location;
+            if(offset <= byte.MaxValue)
+                return Define(@base, (byte)offset);
+            else if(offset <= ushort.MaxValue)
+                return Define(@base, (ushort)offset);
+            else if(offset <= uint.MaxValue)
+                return Define(@base, (uint)offset);
+            else
+                return Define(@base, offset);
+        }
 
         [MethodImpl(Inline)]
         public static bool operator==(MemoryOffset a, MemoryOffset b)
@@ -57,32 +73,42 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        MemoryOffset(ushort offset)
-        {
-            Base = 0ul;
-            Offset = offset;
-        }
-
-        [MethodImpl(Inline)]
-        MemoryOffset(MemoryAddress @base, ushort offset)
+        MemoryOffset(MemoryAddress @base, ulong offset, NumericWidth width)
         {
             Base = @base;
             Offset = offset;
+            OffsetWidth = width;
         }
         
-        public string Format()
-            => IdentityText;
+        public string Format(char delimiter)
+        {
+            var offset = OffsetWidth switch{
+                    NumericWidth.W8 => ((byte)Offset).FormatAsmHex(),
+                    NumericWidth.W16 => ((ushort)Offset).FormatAsmHex(),
+                    NumericWidth.W32 => ((uint)Offset).FormatAsmHex(),
+                    _ => Offset.FormatAsmHex(),
+            };
+            
+            return string.Concat(Base.Format(), delimiter, offset);
+        }
 
         [MethodImpl(Inline)]
-        public int CompareTo(MemoryOffset other)
-            => this == other ? 0 : Offset < other.Offset ? -1 : 1;
+        public MemoryOffset AccrueOffset(ulong dx)
+            => new MemoryOffset(Base, Offset + dx, OffsetWidth);
+
+        public string Format()
+            => Format(Chars.Space);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(MemoryOffset src)
+            => Base == src.Base ? (Offset.CompareTo(src.Offset)) : Base.CompareTo(src.Base);
 
         [MethodImpl(Inline)]
         public bool Equals(MemoryOffset src)
-            => Offset == src.Offset;
+            => Base == src.Base && Offset == src.Offset;
 
         public override int GetHashCode()
-            => Offset.GetHashCode();
+            => HashCode.Combine(Base,Offset);
 
         public override bool Equals(object obj)
             => obj is MemoryOffset a && Equals(a);                    
