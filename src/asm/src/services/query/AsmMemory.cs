@@ -46,12 +46,12 @@ namespace Z0.Asm
 
 
         [MethodImpl(Inline), Op]
-        public AsmInxsMemory InxsMemory(Instruction src, int index)
-            => AsmInxsMemory.From(src,index);
+        public InstructionMemory InxsMemory(Instruction src, int index)
+            => InstructionMemory.From(src,index);
 
         [MethodImpl(Inline), Op]
         public bool HasInxsMemory(Instruction src, int index)
-            => AsmInxsMemory.Has(src,index);
+            => InstructionMemory.Has(src,index);
 
         [Op]
         public AsmMemInfo MemInfo(Instruction src, int index)

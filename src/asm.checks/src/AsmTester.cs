@@ -35,7 +35,7 @@ namespace Z0.Asm
             => Context.Random;
 
         ICaptureCore ICaptureServiceProxy.CaptureService 
-            => Context.CaptureService;        
+            => Context.CaptureCore;        
 
         [MethodImpl(Inline)]
         ICaptureArchive CaptureArchive(PartId part)
@@ -89,7 +89,7 @@ namespace Z0.Asm
         {
             Context = context;
             Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();  
-            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[Aux3], Buffers[Aux4]);
+            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureCore, Buffers[Aux3], Buffers[Aux4]);
         }
                
         public IBufferToken this[BufferSeqId id]

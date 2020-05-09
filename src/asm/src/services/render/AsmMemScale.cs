@@ -7,17 +7,14 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-
-    public interface IAsmSemantic : ISemanticQuery
+    partial struct SemanticRender
     {
-
-            
-    }
-    
-    [ApiHost("semantic")]
-    public readonly struct AsmSemantic : IAsmSemantic, IApiHost<AsmSemantic>
-    {
-        public static IAsmSemantic Service => default(AsmSemantic);
+        public string Render(AsmMemScale src)
+        {
+            if(src.IsNonEmpty)
+                return src.Value.ToString();
+            else
+                return string.Empty;
+        }
     }
 }

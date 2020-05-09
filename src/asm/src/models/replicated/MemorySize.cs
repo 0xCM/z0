@@ -7,6 +7,7 @@ namespace Z0.Asm
 	/// <summary>
 	/// Size of a memory reference
 	/// </summary>
+	[Label(TypeLabels.Size)]
 	public enum MemorySize 
     {
 		/// <summary>

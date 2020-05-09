@@ -36,7 +36,7 @@ namespace Z0.Asm
         
         public IAsmFunctionDecoder Decoder {get;}
 
-        public ICaptureCore CaptureService {get;}
+        public ICaptureCore CaptureCore {get;}
 
         public IDynexus Dynamic {get;}
 
@@ -58,13 +58,13 @@ namespace Z0.Asm
             Decoder = Capture.Services.AsmDecoder(AsmFormat);
             Formatter  = Capture.Services.AsmFormatter(AsmFormat);
             WriterFactory = Capture.Services.AsmWriterFactory;
-            CaptureService =  Capture.Service;
+            CaptureCore =  Capture.Core;
             ImmServices = Capture.Services.ImmSpecializer(Decoder);
         }
        
         AsmWriterFactory WriterFactory {get;}
 
-        public IAsmContextual Contextual  => AsmWorkflows.Create(this);
+        public IAsmContextual Contextual => AsmWorkflows.Create(this);
 
         public IAsmFunctionWriter Writer(FilePath dst)
             => WriterFactory(dst, Formatter);

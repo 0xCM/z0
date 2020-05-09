@@ -8,19 +8,36 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static AspectLabels;
 
-    public interface IAsmInxsMemory
+    public interface IInstructionMemory
     {
+        //
+        // Summary:
+        //     Checks if the memory operand is RIP/EIP relative
+        [Ignore]
+        bool IsIPRelativeMemoryOperand {get;}
+
+        //
+        // Summary:
+        //     Gets the RIP/EIP releative address ((Iced.Intel.Instruction.NextIP or Iced.Intel.Instruction.NextIP32)
+        //     + Iced.Intel.Instruction.MemoryDisplacement). This property is only valid if
+        //     there's a memory operand with RIP/EIP relative addressing.
+        [Label(rel)]
+        MemoryAddress IPRelativeMemoryAddress {get;}        
+
         //
         // Summary:
         //     Gets the memory operand's base register or Iced.Intel.Register.None if none.
         //     Use this property if the operand has kind Iced.Intel.OpKind.Memory
+        [Label(@base)]
         Register MemoryBase {get;}
 
         //
         // Summary:
         //     Gets the memory operand's index register or Iced.Intel.Register.None if none.
         //     Use this property if the operand has kind Iced.Intel.OpKind.Memory
+        [Label(index)]
         Register MemoryIndex {get;}
         
         //
@@ -30,17 +47,20 @@ namespace Z0.Asm
         //     Iced.Intel.OpKind.Memory, Iced.Intel.OpKind.Memory64, Iced.Intel.OpKind.MemorySegSI,
         //     Iced.Intel.OpKind.MemorySegESI, Iced.Intel.OpKind.MemorySegRSI, Iced.Intel.OpKind.MemoryESDI,
         //     Iced.Intel.OpKind.MemoryESEDI, Iced.Intel.OpKind.MemoryESRDI
+        [Label(size)]
         MemorySize MemorySize {get;}
+
         //
         // Summary:
         //     Gets the index register scale value, valid values are *1, *2, *4, *8. Use this
         //     property if the operand has kind Iced.Intel.OpKind.Memory
+        [Label(scale)]
         AsmMemScale MemoryIndexScale {get;}
         //
         // Summary:
         //     Gets the memory operand's displacement. This should be sign extended to 64 bits
         //     if it's 64-bit addressing. Use this property if the operand has kind Iced.Intel.OpKind.Memory
-        uint MemoryDisplacement {get;}
+        //uint MemoryDisplacement {get;}
 
         //
         // Summary:
@@ -48,13 +68,18 @@ namespace Z0.Asm
         //     2 (16-bit), 4 (32-bit), 8 (64-bit). Note that the return value can be 1 and Iced.Intel.Instruction.MemoryDisplacement
         //     may still not fit in a signed byte if it's an EVEX encoded instruction. Use this
         //     property if the operand has kind Iced.Intel.OpKind.Memory
-        int MemoryDisplSize {get;}
+        //int MemoryDisplSize {get;}
+
+        [Label(dx)]
+        AsmMemDx MemDx {get;}
+
 
         //
         // Summary:
         //     Gets the effective segment register used to reference the memory location. Use
         //     this property if the operand has kind Iced.Intel.OpKind.Memory, Iced.Intel.OpKind.Memory64,
         //     Iced.Intel.OpKind.MemorySegSI, Iced.Intel.OpKind.MemorySegESI, Iced.Intel.OpKind.MemorySegRSI
+        [Label(seg)]
         Register MemorySegment {get;}
         //
         // Summary:
@@ -62,6 +87,7 @@ namespace Z0.Asm
         //     Iced.Intel.Instruction.MemorySegment. Use this property if the operand has kind
         //     Iced.Intel.OpKind.Memory, Iced.Intel.OpKind.Memory64, Iced.Intel.OpKind.MemorySegSI,
         //     Iced.Intel.OpKind.MemorySegESI, Iced.Intel.OpKind.MemorySegRSI
+        [Label(prefix)]
         Register SegmentPrefix {get;}
 
         //
@@ -78,16 +104,6 @@ namespace Z0.Asm
         //     0.
         int StackPointerIncrement {get;}
 
-        //
-        // Summary:
-        //     Checks if the memory operand is RIP/EIP relative
-        bool IsIPRelativeMemoryOperand {get;}
 
-        //
-        // Summary:
-        //     Gets the RIP/EIP releative address ((Iced.Intel.Instruction.NextIP or Iced.Intel.Instruction.NextIP32)
-        //     + Iced.Intel.Instruction.MemoryDisplacement). This property is only valid if
-        //     there's a memory operand with RIP/EIP relative addressing.
-        ulong IPRelativeMemoryAddress {get;}
     }
 }

@@ -9,15 +9,13 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public interface IAsmSemantic : ISemanticQuery
+    class TypeLabels
     {
+        public const string Size = nameof(Size);
 
-            
-    }
-    
-    [ApiHost("semantic")]
-    public readonly struct AsmSemantic : IAsmSemantic, IApiHost<AsmSemantic>
-    {
-        public static IAsmSemantic Service => default(AsmSemantic);
+        public const string Mem = nameof(Mem);
+
+        public const string Dx = nameof(Dx);
+
     }
 }

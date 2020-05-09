@@ -14,6 +14,7 @@ namespace Z0
     using static Memories;
     using static MachineEvents;
 
+
     public class Machine : IMachine
     {
         public IMachineContext Context {get;}
@@ -51,17 +52,65 @@ namespace Z0
             DecodeParts(e.Index);
         }
 
+        static string Delimit(string[] src, char delimiter)
+        {
+            var dst = text.build();
+            var last = src.Length - 1;
+            for(var i=0; i<src.Length; i++)
+            {
+                if(i != 0)
+                {
+                    dst.Append(Chars.Space);
+                    dst.Append(delimiter);
+                    dst.Append(Chars.Space);
+                }
+                
+                if(i != last)
+                    dst.Append(src[i].PadRight(16));
+                else
+                    dst.Append(src[i]);
+
+            }
+            return dst.ToString();
+        }
+
+        void AnalyzeCalls(InstructionIndex index)
+        {
+            var sep = Chars.Pipe;
+            var filename = FileName.Define("Calls", FileExtensions.Csv);
+            var path = Context.TargetRoot + filename;
+            using var writer = path.Writer();
+
+            var data = index.CallData.ToArray();
+            var delimited = data.Select(x => Delimit(x.Rows, sep));
+
+            var names = Delimit(CallInfo.AspectNames, sep);            
+
+            writer.WriteLine(names);
+            Control.iter(delimited,writer.WriteLine);
+
+        }
+
         public void OnEvent(DecodedMachine e)
         {
             Sink.Deposit(e);
+
+            var index = InstructionIndex.Create(e.Instructions.ToArray());
+            AnalyzeCalls(index);
+
         }
+
+        public bool SemanticFormatEnabled {get;}
+            = false;
 
         public void OnEvent(DecodedPart e)
         {
             Sink.Deposit(e);
-
-            var formatter = MachineWorkflow.Create(Context);
-            formatter.Run(e.Instructions);
+            if(SemanticFormatEnabled)
+            {
+                var formatter = MachineWorkflow.Create(Context);
+                formatter.Run(e.Instructions);
+            }
         }
 
         public void Run()
@@ -151,14 +200,6 @@ namespace Z0
             IndexBuilder.Include(UriCode.Define(record.Uri, record.Data));
         }
 
-        void Describe()
-        {            
-            Control.iter(Files.ParseFiles, term.print);
-            Control.iter(Files.AsmFiles,term.print);
-            Control.iter(Files.CodeFiles,term.print);
-            Control.iter(Archive.ImmDirs(Context.Parts), term.print);
-            Control.iter(Archive.ImmHostDirs(Context.Parts), term.print);
-        }        
         public void Dispose()
         {
 

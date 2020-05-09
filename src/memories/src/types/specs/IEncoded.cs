@@ -10,12 +10,12 @@ namespace Z0
 
     using static Seed;
 
-    public interface IEncoded<F> : IByteSpanProvider<F>, IEquatable<F>
+    public interface IEncoded<F> : IEquatable<F>, ILengthwise
         where F : struct, IEncoded<F>
     {
-        bool IsEmpty {get;}
+        // bool IsEmpty {get;}
 
-        bool IsNonEmpty {get;}
+        // bool IsNonEmpty {get;}
     }
 
     public interface IEncoded<F,C> : IEncoded<F>

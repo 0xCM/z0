@@ -15,6 +15,8 @@ namespace Z0
         IIdentification<MemoryAddress>, 
         INullary<MemoryAddress>
     {
+        
+        
         public readonly ulong Location;
 
         public static MemoryAddress Empty => new MemoryAddress(0);
@@ -25,7 +27,7 @@ namespace Z0
 
         public MemoryAddress Zero => Empty;
 
-        public string IdentityText  => Location.ToString("x") + "h";
+        public string IdentityText =>  Location.ToString("x") + HexSpecs.PostSpec;
 
         MemoryAddress IAddressable.Address 
         {
@@ -44,6 +46,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public static MemoryAddress Define(IntPtr location)
             => new MemoryAddress((ulong)location.ToInt64());
+
+        /// <summary>
+        /// Computes the bit-width of the smallest numeric type that can represent the address
+        /// </summary>
+        public NumericWidth MinWidth
+        {
+            [MethodImpl(Inline)]
+            get
+            {
+                if(Location <= byte.MaxValue)
+                    return NumericWidth.W8;
+                else if(Location <= ushort.MaxValue)
+                    return NumericWidth.W16;
+                else if(Location <= uint.MaxValue)
+                    return NumericWidth.W32;
+                else
+                    return NumericWidth.W64;
+            }
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(ulong src)
@@ -68,6 +89,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(ushort src)
             => Define(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator MemoryAddress(IntPtr src)
+            => Define((ulong)src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(short src)
@@ -119,6 +144,19 @@ namespace Z0
 
         public string Format()
             => IdentityText;        
+
+        public string Format(NumericWidth width)
+        {
+            return width switch{
+                    NumericWidth.W8 => ((byte)Location).FormatAsmHex(),
+                    NumericWidth.W16 => ((ushort)Location).FormatAsmHex(),
+                    NumericWidth.W32 => ((uint)Location).FormatAsmHex(),
+                    _ => Location.FormatAsmHex(),
+            };                        
+        }
+
+        public string FormatMinimal()
+            => Format(MinWidth);
 
         public string Format(HexFormatConfig config)
             => Location.FormatHex(config);

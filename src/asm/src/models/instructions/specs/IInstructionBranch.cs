@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines branch-related instruction aspects
     /// </summary>
-    public interface IAsmInxsBranch
+    public interface IInstructionBranch
     {
         //
         // Summary:

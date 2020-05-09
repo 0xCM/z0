@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Collections.Generic;
 
     using Z0.Asm;
 
@@ -27,16 +28,19 @@ namespace Z0
             public DecodedMachine(MachineIndex index, PartInstructions[] inxs)
             {
                 Index = index;
-                Instructions = inxs;
+                PartInstructions = inxs;
             }
             
             public MachineIndex Index {get;}
 
-            public PartInstructions[] Instructions {get;}
+            PartInstructions[] PartInstructions {get;}
 
             public AppMsgColor Flair => AppMsgColor.Cyan;
             
-            public int TotalCount => Instructions.Sum(x => x.TotalCount);
+            public IEnumerable<LocatedInstruction> Instructions 
+                => PartInstructions.SelectMany(x => x.Content).SelectMany(x => x.Content).SelectMany(x => x.Content).OrderBy(x => x.IP);
+
+            public int TotalCount => PartInstructions.Sum(x => x.TotalCount);
             
             public E Zero => Empty; 
             

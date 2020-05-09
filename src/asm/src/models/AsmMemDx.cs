@@ -9,7 +9,8 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct AsmMemDx : INullaryKnown, INullary<AsmMemDx>
+    [Label(TypeLabels.Dx)]
+    public readonly struct AsmMemDx : INullaryKnown, INullary<AsmMemDx>, ITextual
     {
         public static AsmMemDx Empty => new AsmMemDx(0, NumericSize.None);
         
@@ -36,6 +37,10 @@ namespace Z0.Asm
             => From(src.value, src.size);
 
         [MethodImpl(Inline)]
+        public static AsmMemDx Create(ulong value, NumericSize size)
+            => new AsmMemDx(value, size);
+        
+        [MethodImpl(Inline)]
         public static AsmMemDx From(ulong value, int size)
             => new AsmMemDx(value,  Enums.definedOrElse((NumericSize)size, NumericSize.None));
 
@@ -49,12 +54,15 @@ namespace Z0.Asm
 
         readonly HexFormatConfig HexSpec; 
 
-        public string Render()
+        public string Format()
             => (Size switch{
                 NumericSize.SZ1 => ((byte)Value).FormatHex(HexSpec),
                 NumericSize.SZ2 => ((ushort)Value).FormatHex(HexSpec),
                 NumericSize.SZ4 => ((uint)Value).FormatHex(HexSpec),
                 _ => (Value).FormatHex(HexSpec),
             }) + "dx";
+
+        public override string ToString()
+            => Format();
     }
 }

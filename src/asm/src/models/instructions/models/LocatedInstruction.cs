@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct LocatedInstruction : IAsmInxs<Instruction>
+    public readonly struct LocatedInstruction : IInstruction<Instruction>
     {
         public UriCode Encoded {get;}
 
@@ -21,12 +21,29 @@ namespace Z0.Asm
 
         public MemoryAddress BaseAddress {get;}
 
+        /// <summary>
+        /// The encoded content as byte array
+        /// </summary>
+        public byte[] Data { [MethodImpl(Inline)] get => Encoded.Data;}
+
         public OpUri OpUri  => Encoded.OpUri;
 
         public OpIdentity OpId => OpUri.OpId;
 
-        public OpAddress OpAddress => new OpAddress(OpUri, Encoded.Address);
+        public string FormattedInstruction => Instruction.FormattedInstruction;
 
+        public AsmInstructionCode InstructionCode => Instruction.InstructionCode;
+
+        public MemoryAddress IP => Instruction.IP;
+        public MemoryAddress NextIp => Instruction.NextIP;
+
+        public MemoryAddress NextIp16 => Instruction.NextIP16;
+
+        public MemoryAddress NextIp32 => Instruction.NextIP32;
+
+        /// <summary>
+        /// The encoded byte count
+        /// </summary>
         public int ByteLength => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
@@ -46,11 +63,10 @@ namespace Z0.Asm
                 var slice = code.Encoded.Bytes.Slice(offseq.Offset, inxs.ByteLength).ToArray();
                 var recoded = UriCode.Define(code.OpUri, inxs.IP, slice);  
                 dst[i] = One(@base, offseq, inxs, recoded);
-                offseq.AccrueOffset(inxs.ByteLength);
+                offseq = offseq.AccrueOffset(inxs.ByteLength);
             }
             return dst;
         }
-
 
         [MethodImpl(Inline)]
         public LocatedInstruction(MemoryAddress @base, OffsetSeq offseq, Instruction inxs, UriCode encoded)

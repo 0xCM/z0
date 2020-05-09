@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines flag-related instruction aspects
     /// </summary>
-    public interface IAsmInxsFlags
+    public interface IInstructionFlags
     {
         //
         // Summary:

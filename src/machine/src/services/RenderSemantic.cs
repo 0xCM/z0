@@ -18,7 +18,7 @@ namespace Z0.Asm
     }
 
     public readonly struct RenderSemantic : IRenderSemantic 
-    {
+    {     
         const byte OpKindPad  = 20;
 
         const byte SeqDigitPad = 2;
@@ -29,31 +29,35 @@ namespace Z0.Asm
 
         const byte AddressPad = 16;     
 
-        public const byte SizePad = 5;   
+        const byte SizePad = 5;   
 
-        public const byte SubGridWidth = 80;
+        const byte InxsWidth = 80;
 
-        public const byte OperandIndexPad = 6;
+        public static string InsxDelimiter 
+            = new string(Chars.Dash, InxsWidth);
 
-        public const byte Counter = 4;
+        const byte Col0Pad = 10;
 
-        public const byte CounterPad = 1;
+        const byte ColSepWidth = 3;
 
-        public const byte ColSepWidth = 3;
+        const byte Counter = 4;
 
-        public const byte SectionWidth = AddressPad +  OffsetAddrPad + SubGridWidth + Counter + SizePad + CounterPad + ColSepWidth;
+        const byte CounterPad = 1;
 
-        public static string SubGridSep 
-            = new string(LineSepSymbol, SubGridWidth);
+        const byte LocSepWidth = ColSepWidth;
+
+        const byte SectionWidth = AddressPad + OffsetAddrPad + InxsWidth + Counter + SizePad + CounterPad + ColSepWidth;
         
         public static string SectionSep 
-            = new string(LineSepSymbol, SectionWidth);   
-
-        public const char LineSepSymbol = Chars.Dash;
+            = new string(Chars.Dash, SectionWidth);   
 
         const string LeftImply = " <== ";
 
         const string ColSep = " | ";
+
+        const string HeaderSep = " || ";
+
+        const string Assign = " = ";
 
         public static RenderSemantic Create() 
             => new RenderSemantic(new List<string>());
@@ -62,9 +66,14 @@ namespace Z0.Asm
 
         IAsmSemantic asm => AsmSemantic.Service;
 
+        SemanticRender render => SemanticRender.Service;
+        
+        HexFormatConfig DataFormat {get;}
+
         RenderSemantic(List<string> descriptions)
         {
             Descriptions = descriptions;
+            DataFormat = HexFormatConfig.HexData;
         }
 
         public void Render(HostInstructions src, StreamWriter dst)
@@ -86,7 +95,6 @@ namespace Z0.Asm
             Descriptions.Clear();
 
             var id = src.OpId;
-            var @base = src.BaseAddress;
 
             Descriptions.Add(id);
             Descriptions.Add(SectionSep);
@@ -97,7 +105,7 @@ namespace Z0.Asm
             for(ushort i=0; i<src.TotalCount; i++)
             {
                 var inxs = src[i];
-                Render(inxs, offaddr, offseq);
+                RenderInstruction(inxs, offaddr, offseq);
 
                 var size = (ushort)inxs.ByteLength;
                 offaddr = offaddr.AccrueOffset(size);
@@ -110,70 +118,116 @@ namespace Z0.Asm
         }
 
 
+        string RenderMemoryOperand(MemoryAddress @base, Instruction src, int i)
+        {
+            var subject = asm.MemInfo(src, i);
+            var result = render.Render(subject);
+            //var diagnostic = render.RenderAspects<IInstructionMemory>(subject);
+
+            return result;
+        }
+
+        [MethodImpl(Inline)]
+        static string Format(OpKind src)
+            => src.ToString();
+
         string RenderOperand(MemoryAddress @base, Instruction src, int i)
         {            
             var kind = asm.OperandKind(src, i);
-            var desc = $"???:{kind}";
+            var desc = Format(kind);
 
             if(asm.IsRegister(kind))
-                desc = asm.Render(asm.RegisterInfo(src,i));
+                desc = render.Render(asm.RegisterInfo(src,i));
             else if(asm.IsMem(kind))
-                desc = asm.Format(asm.MemInfo(src, i));
+                desc = RenderMemoryOperand(@base, src, i);
             else if (asm.IsBranch(kind))
-                desc = asm.Render(asm.BranchInfo(@base, src, i));
+                desc = render.Render(asm.BranchInfo(@base, src, i));
             else if(asm.IsImm(kind))
-                desc = asm.Render(asm.ImmInfo(src, i));                
+                desc = render.Render(asm.ImmInfo(src, i));                
             
             return desc;
         }
 
-        void Render(LocatedInstruction src, MemoryOffset offaddr,  OffsetSeq offseq)
+        string FormatBytes(byte[] src)
+            => src.FormatHexBytes(DataFormat);
+
+        string Format(BinaryCode src)
+            => text.concat("encoded", text.bracket(src.Length), Assign, FormatBytes(src.Data));
+
+        string FooterContent(LocatedInstruction src)
+        {   
+            if(asm.IsCall(src.Instruction))
+            {
+                var bytes = src.Encoded.Bytes;
+                if(bytes.Length >= 5)
+                {
+                    var encoded = bytes.Slice(1,4);
+                    var offset = encoded.TakeUInt32();
+                    var target = src.NextIp + offset;
+                    var delta = target - src.IP;
+                    return text.concat(delta.FormatMinimal(), " | ", offset.FormatAsmHex(), " | ", target.Format());
+                }
+            }
+        
+            return string.Empty;
+        }
+        void RenderInstruction(LocatedInstruction src, MemoryOffset offaddr,  OffsetSeq offseq)
         {
             var id = src.OpId;
             var @base = src.BaseAddress;
             var inxs = src.Instruction;
-            var title = Title(inxs, offaddr, offseq);
-            var header = Header(inxs, offaddr, offseq);
+            var encoded = Format(src.Encoded);
+            var location = LineLocation(inxs, offaddr, offseq);
+            var header = InstructionHeader(src, offaddr, offseq);
             Descriptions.Add(header);
-                            
+
+            
             var opcount = src.Instruction.OpCount;
             var summaries = list<string>();
             for(var i =0; i<opcount; i++)               
             {
                 var kind = asm.OperandKind(inxs, i);
 
-                var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(OperandIndexPad);
-                var col02 = asm.Render(kind).PadRight(OpKindPad);
-                var col03 = text.concat(col01, ColSep, col02, Chars.Pipe, Chars.Space);
+                var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(Col0Pad);
+                var kindLabel = render.Render(kind).PadRight(OpKindPad);
+                var col03 = text.concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
                 var desc = RenderOperand(@base, inxs, i);
                 
                 summaries.Add(col03 + desc);       
             }
 
             foreach(var s in summaries)
-                Descriptions.Add(text.concat(title, ColSep, $"{s}"));
+                Descriptions.Add(text.concat(location, ColSep, $"{s}"));
 
-            Descriptions.Add(text.concat(title, ColSep, SubGridSep));  
+
+             var fc = FooterContent(src);
+             if(text.nonempty(fc))
+             {   
+                var footer = text.concat(location, ColSep, fc);
+                Descriptions.Add(footer);
+             }
+
+            Descriptions.Add(DelimitInstruction(location));
         }
 
         [MethodImpl(Inline)]
-        static ulong JmpDelta(ulong src, ulong dst, byte inxsSize)
-            => dst - (src + inxsSize);
+        string DelimitInstruction(string location)
+            => text.concat(location, ColSep, InsxDelimiter);
 
-        string Title(Instruction src, MemoryOffset offaddr, OffsetSeq offseq)
+        string LineLocation(Instruction src, MemoryOffset offaddr, OffsetSeq offseq)
             => text.concat(
-                asm.RenderAddress(src, AddressPad), 
+                render.RenderAddress(src, AddressPad), 
                 text.concat(
                     text.spaced(offaddr.Offset.FormatAsmHex(6))
                     ).PadRight(OffsetAddrPad),
                 offseq.Format(InstructionCountPad)
                 ); 
 
-        string Header(Instruction src, MemoryOffset offaddr, OffsetSeq offseq)
+        string InstructionHeader(LocatedInstruction src, MemoryOffset offaddr, OffsetSeq offseq)
         {
-            var title = Title(src, offaddr, offseq);
-            var description = text.concat(src.FormattedInstruction, LeftImply, src.InstructionCode);
-            return text.concat(title, ColSep, description);
+            var left = LineLocation(src.Instruction, offaddr, offseq);
+            var right = text.concat(src.FormattedInstruction, LeftImply, src.InstructionCode, HeaderSep, Format(src.Encoded));
+            return text.concat(left, ColSep, right);
         }
     }
 }

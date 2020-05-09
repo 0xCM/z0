@@ -22,6 +22,9 @@ namespace Z0
         FilePath[] ParseFiles 
             => Archive.Files(Archive.ParsedDir, Context.Parts);
 
+        FilePath[] ParseFileFilter(PartId part)
+            => Archive.Files(Archive.ParsedDir, Context.Parts.Where(p => p == part));
+
         FilePath[] AsmFiles 
             => Archive.Files(Archive.AsmDir, Context.Parts);
 

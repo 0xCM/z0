@@ -39,8 +39,19 @@ namespace Z0
         /// </summary>
         public BinaryCode Encoded {get;}
         
+        /// <summary>
+        /// The encoded content as byte array
+        /// </summary>
+        public byte[] Data { [MethodImpl(Inline)] get => Encoded.Data;}
+        
+        /// <summary>
+        /// The encoded byte count
+        /// </summary>
         public int ByteCount { [MethodImpl(Inline)] get => Encoded.ByteCount; }
 
+        /// <summary>
+        /// The encoded content as a span
+        /// </summary>
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
         public int Length { [MethodImpl(Inline)] get => Encoded.Length; }

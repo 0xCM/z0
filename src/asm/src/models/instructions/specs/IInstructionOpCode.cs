@@ -9,8 +9,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-
-    public interface IAsmInxsOpCode 
+    public interface IInstructionOpCode 
     {
         //
         // Summary:

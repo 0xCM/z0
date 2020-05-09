@@ -6,8 +6,10 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Seed;
+    using static Memories;
 
     partial class HostCaptureSteps
     {
@@ -42,6 +44,26 @@ namespace Z0.Asm
             IParseMembersStep Parse
                 => Workflow.Parse;
 
+            void MatchAddresses(ApiHostUri host, ExtractedMember[] extracted, AsmFunction[] decoded)
+            {
+                try
+                {
+                    var a = extracted.Select(x => x.Address).ToHashSet();
+                    insist(a.Count, extracted.Length);
+
+                    var b = decoded.Select(f => f.BaseAddress).ToHashSet();
+                    insist(b.Count, decoded.Length);
+                    
+                    b.IntersectWith(a);
+                    insist(b.Count, decoded.Length);                
+                    //term.inform($"Mached {host} decoded function addresses and extract addresses");
+                }
+                catch(Exception e)
+                {
+                    term.error(e,$"Addresses from {host} decoded functions do not match with the extract addresses");
+                }
+            }
+
             public void Execute(IApiHost host, ICaptureArchive dst)
             {
                 var step = Context.Raise(StepEvents.Started(host, Context.Correlate()));
@@ -67,6 +89,8 @@ namespace Z0.Asm
 
                         var decoded = Decode.DecodeParsed(host.UriPath, parsed);
                         Decode.SaveDecoded(decoded, paths.AsmPath);
+
+                        MatchAddresses(host.UriPath, extracts, decoded);
                     }
                 }
                 catch(Exception e)

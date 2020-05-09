@@ -21,19 +21,6 @@ namespace Z0
     {        
         public static CapturedCode Empty => default;
 
-        public static MemberParseRecord CreateParseRecord(CapturedCode src)
-            => new MemberParseRecord
-                (
-                    Sequence: 0,
-                    SourceSequence: 0,
-                    Address: src.Address,
-                    Length: src.Length,
-                    TermCode: src.TermCode,
-                    Uri: src.OpUri,
-                    OpSig : src.Method.Signature().Format(),
-                    Data : src.Encoded
-                );
-
         readonly LocatedCode Extracted;
 
         public LocatedCode Encoded {get;}

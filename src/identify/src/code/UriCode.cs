@@ -46,6 +46,14 @@ namespace Z0
 
         public ApiHostUri Host => OpUri.Host;
 
+        /// <summary>
+        /// The encoded content as byte array
+        /// </summary>
+        public byte[] Data { [MethodImpl(Inline)] get => Encoded.Data;}
+        
+        /// <summary>
+        /// The encoded byte count
+        /// </summary>
         public int ByteCount { [MethodImpl(Inline)] get => Encoded.ByteCount; }
 
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Encoded; }

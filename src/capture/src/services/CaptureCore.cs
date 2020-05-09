@@ -12,9 +12,9 @@ namespace Z0.Asm
     using static Memories;
     using static ExtractTermCode;
     
-    public unsafe readonly struct CaptureService : ICaptureCore
+    unsafe readonly struct CaptureCore : ICaptureCore
     {      
-        public static ICaptureCore Service => default(CaptureService);  
+        public static ICaptureCore Service => default(CaptureCore);  
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, MethodInfo src, ParsedCode bits, ExtractTermCode term)
@@ -51,7 +51,8 @@ namespace Z0.Asm
                 var pSrc = MemberJit.Service.Jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
-                var captured = DefineMember(id, src, summary.Data, outcome.TermCode);                
+                var captured = DefineMember(id, src, summary.Data, outcome.TermCode); 
+                insist((MemoryAddress)pSrc,captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -69,6 +70,7 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
                 var captured = CapturedCode.Define(id, src.DynamicOp, src.SourceMethod, summary.Data.Unparsed, summary.Data.Encoded, outcome.TermCode);                
+                insist((MemoryAddress)pSrc,captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -100,6 +102,7 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.Data, outcome.TermCode);  
+                insist((MemoryAddress)pSrc,captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)

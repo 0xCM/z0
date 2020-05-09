@@ -7,19 +7,23 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    readonly partial struct SemanticRender : ISemanticRender
+    public readonly partial struct SemanticRender
     { 
         public static SemanticRender Service => default(SemanticRender);
 
-        public static string Render(AsmBranchInfo src)
+        public string Render(AsmBranchInfo src)
             => src.Render();
     
         const string Unknown = "???";
 
         const string PipeSep = " | ";
 
-        public static string Render(Register src)
+        public string Render(Register src)
             => src.ToString();
 
+
+        const string Assign = CharText.Space + CharText.Colon + CharText.Eq + CharText.Space;
+
+        public const string AspectDelimiter = CharText.Space + CharText.Pipe + CharText.Space;
     }
 }

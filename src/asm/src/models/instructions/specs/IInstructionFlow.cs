@@ -12,9 +12,8 @@ namespace Z0.Asm
     /// <summary>
     /// Aggregates call/jmp/branching instruction aspects
     /// </summary>
-    public interface IAsmInxsFlow  : IAsmInxsJcc, IAsmInxsJmp, IAsmInxsCall, IAsmInxsBranch
+    public interface IInstructionFlow  : IJccInstruction, IJmpInstruction, ICalInstruction, IInstructionBranch
     {
         
     }
-
 }

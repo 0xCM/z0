@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines imm-related instruction aspects
     /// </summary>
-    public interface IAsmInxsImm
+    public interface IInstructionImm
     {
        //
         // Summary:

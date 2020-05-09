@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    public class Instruction : IAsmInxs
+    public class Instruction : IInstruction
     {
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
@@ -67,6 +67,17 @@ namespace Z0.Asm
         //     Gets the memory operand's displacement. This should be sign extended to 64 bits
         //     if it's 64-bit addressing. Use this property if the operand has kind Iced.Intel.OpKind.Memory
         public uint MemoryDisplacement {get; set;}
+
+        //
+        // Summary:
+        //     Gets the size of the memory displacement in bytes. Valid values are 0, 1 (16/32/64-bit),
+        //     2 (16-bit), 4 (32-bit), 8 (64-bit). Note that the return value can be 1 and Iced.Intel.Instruction.MemoryDisplacement
+        //     may still not fit in a signed byte if it's an EVEX encoded instruction. Use this
+        //     property if the operand has kind Iced.Intel.OpKind.Memory
+        public int MemoryDisplSize {get; set;}
+
+        public AsmMemDx MemDx => AsmMemDx.From(MemoryDisplacement, MemoryDisplSize);
+
         //
         // Summary:
         //     Gets the operand's immediate value. Use this property if the operand has kind
@@ -146,13 +157,7 @@ namespace Z0.Asm
         //     Gets the operand's branch target selector. Use this property if the operand has
         //     kind Iced.Intel.OpKind.FarBranch16 or Iced.Intel.OpKind.FarBranch32
         public ushort FarBranchSelector {get; set;}
-        //
-        // Summary:
-        //     Gets the size of the memory displacement in bytes. Valid values are 0, 1 (16/32/64-bit),
-        //     2 (16-bit), 4 (32-bit), 8 (64-bit). Note that the return value can be 1 and Iced.Intel.Instruction.MemoryDisplacement
-        //     may still not fit in a signed byte if it's an EVEX encoded instruction. Use this
-        //     property if the operand has kind Iced.Intel.OpKind.Memory
-        public int MemoryDisplSize {get; set;}
+
         //
         // Summary:
         //     Gets the effective segment register used to reference the memory location. Use
@@ -440,7 +445,7 @@ namespace Z0.Asm
         //     Gets the RIP/EIP releative address ((Iced.Intel.Instruction.NextIP or Iced.Intel.Instruction.NextIP32)
         //     + Iced.Intel.Instruction.MemoryDisplacement). This property is only valid if
         //     there's a memory operand with RIP/EIP relative addressing.
-        public ulong IPRelativeMemoryAddress {get; set;}
+        public MemoryAddress IPRelativeMemoryAddress {get; set;}
         //
         // Summary:
         //     Gets the Iced.Intel.OpCodeInfo

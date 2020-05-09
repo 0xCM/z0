@@ -11,7 +11,7 @@ namespace Z0.Asm
  
     partial struct SemanticRender 
     {
-        public static string Render(FlowControl src)
+        public string Render(FlowControl src)
             => src switch{
                 Next => "next",
                 UnconditionalBranch => "branch[absolute]",

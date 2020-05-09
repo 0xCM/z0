@@ -9,8 +9,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-
-    public interface IAsmInxsPrefix
+    public interface IInstructionPrefix
     {
         //
         // Summary:

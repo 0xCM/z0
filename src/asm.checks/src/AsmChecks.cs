@@ -36,7 +36,7 @@ namespace Z0.Asm
         {
             Context = context;
             Buffers = BufferSeq.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
-            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureService, Buffers[Aux3], Buffers[Aux4]);
+            CaptureExchange = CaptureExchangeProxy.Create(Context.CaptureCore, Buffers[Aux3], Buffers[Aux4]);
         }                
         
         public void Dispose()

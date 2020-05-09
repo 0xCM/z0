@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct SemanticRender
     {
-        public static string Render(OpKind src)
+        public string Render(OpKind src)
         {
             var si = SegIndicator.From(src);
             if(si.IsNonEmpty)

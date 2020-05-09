@@ -12,18 +12,21 @@ namespace Z0.Asm
 
     partial struct SemanticRender
     {
-        public static string RenderAddress(Instruction src, int pad = 16)
-            => text.concat(src.IP.FormatHex(zpad:false)).PadRight(pad);
+        public string Render(InstructionMemory src)
+            => src.AspectRender;
+        
+        public string RenderAddress(Instruction src, int pad = 16)
+            => text.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
 
         public string RenderSegIndicator(OpKind src)
             => SegIndicator.From(src).Format();
 
         static AsmQuery Q => AsmQuery.Direct;
 
-        public static string Render(MemorySize src)
+        public string Render(MemorySize src)
             => Q.Identify(src).Format();
 
-        public static string Render(AsmMemInfo src)        
+        public string Render(AsmMemInfo src)        
         {
             var builder = text.build();
 

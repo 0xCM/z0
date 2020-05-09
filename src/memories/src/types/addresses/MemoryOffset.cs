@@ -50,6 +50,8 @@ namespace Z0
         public static MemoryOffset Define(MemoryAddress @base, ulong offset)
             => new MemoryOffset(@base, offset, NumericWidth.W64);
 
+        
+
         [MethodImpl(Inline)]
         public static MemoryOffset Derive(MemoryAddress @base, MemoryAddress relative)
         {
@@ -82,14 +84,8 @@ namespace Z0
         
         public string Format(char delimiter)
         {
-            var offset = OffsetWidth switch{
-                    NumericWidth.W8 => ((byte)Offset).FormatAsmHex(),
-                    NumericWidth.W16 => ((ushort)Offset).FormatAsmHex(),
-                    NumericWidth.W32 => ((uint)Offset).FormatAsmHex(),
-                    _ => Offset.FormatAsmHex(),
-            };
-            
-            return string.Concat(Base.Format(), delimiter, offset);
+            MemoryAddress offset = Offset;            
+            return string.Concat(Base.Format(), delimiter, offset.Format(OffsetWidth));
         }
 
         [MethodImpl(Inline)]

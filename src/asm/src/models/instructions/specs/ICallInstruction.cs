@@ -8,19 +8,22 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static AspectLabels;
 
     /// <summary>
     /// Defines call-related instruction aspects
     /// </summary>
-    public interface IAsmInxsCall
+    public interface ICalInstruction
     {
         //
         // Summary:
         //     Checks if it's a call near instruction
+        [Label(near)]
         bool IsCallNear {get;}
         //
         // Summary:
         //     Checks if it's a call far instruction
+        [Label(far)]
         bool IsCallFar {get;}
 
         //

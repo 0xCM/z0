@@ -16,8 +16,8 @@ namespace Z0.Asm
         public static ICaptureServices Services 
             => default(AsmWorkflows);
 
-        public static ICaptureCore Service 
-            => new CaptureService();                     
+        public static ICaptureCore Core 
+            => CaptureCore.Service;
 
         ILocatedCodeParser LocatedParser
             => LocatedCodeParser.Create(new byte[Pow2.T14]);

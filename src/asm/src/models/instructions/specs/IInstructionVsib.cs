@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public interface IAsmInxsVsib
+    public interface IInstructionVsib
     {
        //
         // Summary:

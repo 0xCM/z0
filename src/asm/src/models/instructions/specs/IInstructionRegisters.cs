@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public interface IAsmInxsRegisters
+    public interface IInstructionRegisters
     {
         //
         // Summary:

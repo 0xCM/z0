@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct SemanticRender
     {
-       public static string Render(AsmImmInfo src)
+       public string Render(AsmImmInfo src)
             => text.concat(src.Value.FormatHex(zpad:false, prespec:false));    
     }
 }

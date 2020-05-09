@@ -32,7 +32,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="context">The source context</param>
         public static CaptureExchange Create(IAsmContext context)    
-            => Create(context.CaptureService, 
+            => Create(context.CaptureCore, 
                 new byte[context.DefaultBufferLength], 
                 new byte[context.DefaultBufferLength]
                 );

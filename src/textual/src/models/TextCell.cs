@@ -7,21 +7,21 @@ namespace Z0
     using System;
     
     /// <summary>
-    /// Defiens a text segment in the context of a line in a file
+    /// Defines a text segment in the context of a line in a file
     /// </summary>
-    public sealed class TextCell
+    public readonly struct TextCell
     {        
-        public TextCell(uint LineNumber, uint ColumnIndex, string CellValue)
-        {
-            this.LineNumber = LineNumber;
-            this.ColumnIndex = ColumnIndex;
-            this.CellValue = CellValue;
-        }
-        
         public uint LineNumber {get;}
 
         public uint ColumnIndex {get;}
 
         public string CellValue {get;}
+
+        public TextCell(uint LineNumber, uint ColumnIndex, string CellValue)
+        {
+            this.LineNumber = LineNumber;
+            this.ColumnIndex = ColumnIndex;
+            this.CellValue = CellValue;
+        }        
     }
 }

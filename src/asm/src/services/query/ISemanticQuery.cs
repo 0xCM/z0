@@ -13,12 +13,12 @@ namespace Z0.Asm
     public interface ISemanticQuery
     {
         [MethodImpl(Inline)]
-        AsmInxsMemory InxsMemory(Instruction src, int index)            
-            => AsmInxsMemory.From(src,index);
+        InstructionMemory InxsMemory(Instruction src, int index)            
+            => InstructionMemory.From(src,index);
 
         [MethodImpl(Inline)]
         bool HasInxsMemory(Instruction src, int index)            
-            => AsmInxsMemory.Has(src,index);
+            => InstructionMemory.Has(src,index);
 
         [MethodImpl(Inline)]
         SegmentedIdentity Identify(MemorySize src)        
@@ -60,8 +60,8 @@ namespace Z0.Asm
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
         [MethodImpl(Inline)]
-        AsmMemInfo MemInfo(Instruction src, int index)            
-            => Direct.MemInfo(src,index);
+        InstructionMemory MemInfo(Instruction src, int index)            
+            => InstructionMemory.From(src,index);
 
         /// <summary>
         /// Extracts register information, should it exist, from an index-identified register operand
@@ -237,5 +237,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         AsmOperandInfo Operand(MemoryAddress @base, Instruction src, int index)
             => Direct.Operand(@base,src,index);
+
+        [MethodImpl(Inline)]
+        bool IsCall(Instruction src)
+            => Direct.IsCall(src);
     }
 }

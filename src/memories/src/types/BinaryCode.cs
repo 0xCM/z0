@@ -34,6 +34,11 @@ namespace Z0
         /// </summary>
         public byte[] Encoded {get;}
 
+        /// <summary>
+        /// The encoded content as byte array
+        /// </summary>
+        public byte[] Data { [MethodImpl(Inline)] get => Encoded;}
+
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded; }
         
         public int ByteCount => Encoded.Length;        
@@ -47,9 +52,7 @@ namespace Z0
         public ref readonly byte Head { [MethodImpl(Inline)] get => ref refs.head(Bytes);}
         
         public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref refs.skip(Head, index); }
-        
-
-        
+                
         [MethodImpl(Inline)]
         public static implicit operator byte[](BinaryCode src)
             => src.Encoded;

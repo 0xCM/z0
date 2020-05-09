@@ -9,21 +9,22 @@ namespace Z0.Asm
 
     using static Seed;
     using static OpKind;
+    using static AspectLabels;
 
-    public struct AsmInxsMemory : IAsmInxsMemory
+    [Label(TypeLabels.Mem)]
+    public struct InstructionMemory : IInstructionMemory
     {
-        public string Render()
-            => SemanticRender.Service.RenderAspects<IAsmInxsMemory>(this);
+        public string AspectRender
+            => SemanticRender.Service.RenderAspects<IInstructionMemory>(this);
 
-        public static AsmInxsMemory From(Instruction src, int index)
+        public static InstructionMemory From(Instruction src, int index)
         {
-            var dst = default(AsmInxsMemory);
+            var dst = default(InstructionMemory);
             dst.MemoryBase = GetMemoryBase(src,index);
             dst.MemoryIndex = GetMemoryIndex(src,index);
             dst.MemorySize = GetMemorySize(src,index);
             dst.MemoryIndexScale = GetMemoryIndexScale(src,index);
-            dst.MemoryDisplacement = GetMemoryDisplacement(src,index);
-            dst.MemoryDisplSize = GetMemoryDisplSize(src,index);
+            dst.MemDx = AsmMemDx.From(GetMemoryDisplacement(src,index), GetMemoryDisplSize(src,index));
             dst.MemorySegment = GetMemorySegment(src,index);
             dst.SegmentPrefix = GetSegmentPrefix(src,index);
             dst.IsStackInstruction = src.IsStackInstruction;
@@ -59,9 +60,7 @@ namespace Z0.Asm
 
         public AsmMemScale MemoryIndexScale {get; private set;}
 
-        public uint MemoryDisplacement {get; private set;}
-
-        public int MemoryDisplSize {get; private set;}
+        public AsmMemDx MemDx {get; private set;}
 
         public Register MemorySegment {get; private set;}
 
@@ -73,7 +72,7 @@ namespace Z0.Asm
 
         public bool IsIPRelativeMemoryOperand {get; private set;}
 
-        public ulong IPRelativeMemoryAddress {get; private set;}
+        public MemoryAddress IPRelativeMemoryAddress {get; private set;}
 
         public bool IsEmpty => CalcEmpty();
 
@@ -84,8 +83,7 @@ namespace Z0.Asm
             empty &= (MemoryIndex == 0);
             empty &= (MemorySize == 0);
             empty &= (MemoryIndexScale.IsEmpty);
-            empty &= (MemoryDisplacement == 0);
-            empty &= (MemoryDisplSize == 0);
+            empty &= (MemDx.IsEmpty);
             empty &= (MemorySegment == 0);
             empty &= (SegmentPrefix == 0);
             empty &= (!IsStackInstruction);

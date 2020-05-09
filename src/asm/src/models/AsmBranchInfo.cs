@@ -14,17 +14,20 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmBranchInfo : INullaryKnown, INullary<AsmBranchInfo>, IRender
     {
-        public static AsmBranchInfo Empty => new AsmBranchInfo(MemoryAddress.Empty, MemoryAddress.Empty, AsmBranchTarget.Empty);
+        public static AsmBranchInfo Empty 
+            => new AsmBranchInfo(new Instruction(),MemoryAddress.Empty, 0, AsmBranchTarget.Empty, 0);
+        
+        public Instruction Instruction {get;}
         
         public MemoryAddress Base {get;}
 
-        public MemoryAddress IP {get;}
+        public MemoryAddress Source {get;}
 
         public AsmBranchTarget Target {get;}
 
-        public MemoryAddress Source => IP - Base;
-
-        public bool IsEmpty { [MethodImpl(Inline)] get => Base == 0 && IP == 0; }
+        public MemoryAddress TargetOffset {get;}
+        
+        public bool IsEmpty { [MethodImpl(Inline)] get => Base == 0 && Source == 0; }
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => !IsEmpty; }
 
@@ -33,28 +36,24 @@ namespace Z0.Asm
         public AsmBranchInfo Zero => Empty;
 
         [MethodImpl(Inline)]
-        public static AsmBranchInfo Define(MemoryAddress @base, MemoryAddress ip, AsmBranchTarget target)
-            => new AsmBranchInfo(@base, ip, target);
+        static uint Offset(MemoryAddress src, int inxsSize, MemoryAddress dst)
+            => (uint)(dst - (src + inxsSize));
 
         [MethodImpl(Inline)]
-        AsmBranchInfo(MemoryAddress @base, MemoryAddress ip, AsmBranchTarget target)
-        {            
-            Base = @base;
-            IP = ip;
-            Target = target;
-        }
+        public static AsmBranchInfo Define(MemoryAddress @base, Instruction inxs, AsmBranchTarget target)
+            => new AsmBranchInfo(inxs, @base, inxs.IP, target, Offset(inxs.IP, inxs.ByteLength, target.TargetAddress));
 
-        static string Arrow<S,T>(S src, T dst)
-            where T : ITextual
-            where S : ITextual
-            => text.concat(src.Format(), " -> ", dst.Format());
+        [MethodImpl(Inline)]
+        AsmBranchInfo(Instruction inxs, MemoryAddress @base, MemoryAddress src, AsmBranchTarget target, uint offset)
+        {            
+            Instruction = inxs;
+            Base = @base;
+            Source = src;
+            Target = target;
+            TargetOffset = offset;
+        }
 
         public string Render()
-        {
-            var dst = Target.Address > Base ? Target.Address - Base : Base - Target.Address;
-            var expr = (dst < ushort.MaxValue) ? Arrow(Source,dst) : Arrow(IP,Target);
-            return expr;        
-        }
-
+            => text.concat(Source.Format(), " + ",  TargetOffset.FormatMinimal(), " -> ",  (Source + TargetOffset).Format());
     }
 }

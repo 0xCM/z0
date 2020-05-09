@@ -9,31 +9,25 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public interface IAsmInxs<T>
-        where T : IAsmInxs
+    public interface IInstruction<T>
+        where T : IInstruction
     {
         T Instruction {get;}
     }
 
-    public interface IAsmInxsSeq<T>
-        where T : IAsmInxs
-    {
-        T[] Instructions {get;}
-    }
-
-    public interface IAsmInxs : 
-        IAsmInxsFlags,
-        IAsmInxsFlow,
-        IAsmInxsImm,
+    public interface IInstruction : 
+        IInstructionFlags,
+        IInstructionFlow,
+        IInstructionImm,
         IAsmInxsInfo,
         IAsmInxsIp,
         IAsmInxsMask,
-        IAsmInxsMemory,
-        IAsmInxsOpCode,
+        IInstructionMemory,
+        IInstructionOpCode,
         IAsmInxsOpKinds,        
-        IAsmInxsPrefix,
-        IAsmInxsRegisters,
-        IAsmInxsVsib        
+        IInstructionPrefix,
+        IInstructionRegisters,
+        IInstructionVsib        
     {
         //
         // Summary:
@@ -93,6 +87,5 @@ namespace Z0.Asm
         // Summary:
         //     true if the data is broadcasted (EVEX instructions only)
         bool IsBroadcast {get;}
-
     }
 }

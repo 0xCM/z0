@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     partial struct SemanticRender
     {
-        public static string Render(AsmMemDirect src)        
+        public string Render(AsmMemDirect src)        
         {
             var dst = text.build();
             if(src.Base.IsSome())
