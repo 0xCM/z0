@@ -29,6 +29,9 @@ namespace Z0
 
         public string NatText => Text;
 
+        [MethodImpl(Inline)]
+        public static implicit operator byte(N4 src) => (byte)Value;
+
         [MethodImpl(Inline)]        
         public static implicit operator int(N4 src) => (int)Value;
 

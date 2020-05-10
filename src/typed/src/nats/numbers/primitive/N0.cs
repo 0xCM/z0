@@ -29,6 +29,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(N0 src) => (int)Value;
         
+        [MethodImpl(Inline)]
+        public static implicit operator byte(N0 src) => (byte)Value;
+
         public override string ToString() => Text;
     }
 }

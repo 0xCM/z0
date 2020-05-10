@@ -33,6 +33,9 @@ namespace Z0
         public static implicit operator int(N1 src) => (int)Value;
 
         [MethodImpl(Inline)]
+        public static implicit operator byte(N1 src) => (byte)Value;
+
+        [MethodImpl(Inline)]
         public static implicit operator W1(N1 src) => default(W1);
 
         [MethodImpl(Inline)]

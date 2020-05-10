@@ -25,6 +25,9 @@ namespace Z0
         public const string Text = "6";
 
         [MethodImpl(Inline)]
+        public static implicit operator byte(N6 src) => (byte)Value;
+
+        [MethodImpl(Inline)]
         public static implicit operator int(N6 src) => 6;
 
         public ulong NatValue => 6;

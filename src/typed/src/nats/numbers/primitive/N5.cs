@@ -29,6 +29,9 @@ namespace Z0
         public string NatText => Text;
 
         [MethodImpl(Inline)]
+        public static implicit operator byte(N5 src) => (byte)Value;
+
+        [MethodImpl(Inline)]
         public static implicit operator int(N5 src) => (int)Value;
 
         public override string ToString() => Text;

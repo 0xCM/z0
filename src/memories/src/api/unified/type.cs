@@ -19,5 +19,4 @@ namespace Z0
         public static Type type<T>()
             => typeof(T);
     }
-
 }

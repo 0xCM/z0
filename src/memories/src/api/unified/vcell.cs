@@ -46,7 +46,6 @@ namespace Z0
             where T : unmanaged
                 => src.As<S,T>().GetElement(index);
 
-
         /// <summary>
         /// Sets an index-identified component to a specified value
         /// </summary>

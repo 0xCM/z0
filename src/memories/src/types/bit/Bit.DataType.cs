@@ -280,7 +280,7 @@ namespace Z0
             src ^= (c ^ src) & (1ul << pos);
             return src;
         }
- 
+         
         /// <summary>
         /// The identity function
         /// </summary>

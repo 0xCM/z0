@@ -34,6 +34,9 @@ namespace Z0
         public static implicit operator int(N8 src) => (int)Value;
 
         [MethodImpl(Inline)]
+        public static implicit operator byte(N8 src) => (byte)Value;
+
+        [MethodImpl(Inline)]
         public static implicit operator W8(N8 src) => default(W8);
 
         [MethodImpl(Inline)]
