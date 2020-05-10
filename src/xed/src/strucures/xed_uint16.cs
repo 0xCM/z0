@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
+// Copyright   : (c) 2019 Intel Corporation
+// Copyright   : (c) Chris Moore, 2020
+// License     : Apache
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
@@ -12,10 +13,6 @@ namespace Z0.Xed
     public struct xed_uint16_t
     {
         public ushort data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator any_enum_t(xed_uint16_t src)
-            => (any_enum_t)src;
 
         [MethodImpl(Inline)]
         public static implicit operator xed_iform_enum_t(xed_uint16_t src)
