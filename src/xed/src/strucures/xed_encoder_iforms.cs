@@ -8,7 +8,7 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
-    public struct xed_encoder_iforms
+    public struct xed_encoder_iforms_t
     {
         public xed_uint32_t x_SIBBASE_ENCODE;
         public xed_uint32_t x_SIBBASE_ENCODE_SIB1;

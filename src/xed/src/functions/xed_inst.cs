@@ -18,7 +18,7 @@ namespace Z0.Xed
     using static xed_operand_width_enum_t;
     using static xed_operand_enum_t;
 
-    public class xed_inst
+     public class xed_inst
      {
           [MethodImpl(Inline)]
           public static xed_operand_enum_t xed_operand_name(in xed_operand_t p)  

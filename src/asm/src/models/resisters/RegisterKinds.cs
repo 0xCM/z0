@@ -48,7 +48,6 @@ namespace Z0.Asm
         /// <param name="k">The register kind</param>        
         [MethodImpl(Inline), Op]
         public static RegisterSlot slot(K k)
-            => (RegisterSlot)(math.log2(order(k) + 1ul));
-        
+            => (RegisterSlot)(math.log2(order(k) + 1ul));       
     }
 }

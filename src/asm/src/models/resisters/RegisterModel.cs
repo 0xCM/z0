@@ -12,6 +12,7 @@ namespace Z0.Asm
     public readonly struct RegisterModel : ITextual<RegisterModel>
     {
         public readonly int Id;
+        
         public readonly RegisterSymbol Symbol;
 
         public readonly RegisterWidth Width;

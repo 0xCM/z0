@@ -9,7 +9,7 @@ namespace Z0.Xed
     using System.Runtime.CompilerServices;
 
     using static Seed;
-        
+                
     public struct xed_uint32_t
     {
         public uint data;

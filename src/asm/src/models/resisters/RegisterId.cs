@@ -49,6 +49,5 @@ namespace Z0.Asm
         ZMM_31_Pos = ((K.Max & I.All) >> 10) - 1,
 
         ZMM_31_Width = K.ZMM31 & W.All,
-
     }
 }

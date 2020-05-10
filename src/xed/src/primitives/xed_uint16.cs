@@ -16,23 +16,31 @@ namespace Z0.Xed
 
         [MethodImpl(Inline)]
         public static implicit operator xed_iform_enum_t(xed_uint16_t src)
-            => (xed_iform_enum_t)src;
+            => (xed_iform_enum_t)src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator xed_iclass_enum_t(xed_uint16_t src)
-            => (xed_iclass_enum_t)src;
+            => (xed_iclass_enum_t)src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator xed_category_enum_t(xed_uint16_t src)
-            => (xed_category_enum_t)src;
+            => (xed_category_enum_t)src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator xed_extension_enum_t(xed_uint16_t src)
-            => (xed_extension_enum_t)src;
+            => (xed_extension_enum_t)src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator xed_reg_enum_t(xed_uint16_t src)
+            => (xed_reg_enum_t)src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator xed_uint16_t(xed_reg_enum_t src)
+            => new xed_uint16_t((ushort)src);
 
         [MethodImpl(Inline)]
         public static implicit operator xed_isa_set_enum_t(xed_uint16_t src)
-            => (xed_isa_set_enum_t)src;
+            => (xed_isa_set_enum_t)src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator ushort(xed_uint16_t src)

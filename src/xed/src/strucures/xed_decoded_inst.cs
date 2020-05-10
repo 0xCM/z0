@@ -8,14 +8,18 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
     using static Xed;
 
     /// The main container for instructions. After decode, it holds an array of
     /// operands with derived information from decode and also valid
     /// #xed_inst_t pointer which describes the operand templates and the
     /// operand order.  See @ref DEC for API documentation.
-    public unsafe struct xed_decoded_inst_s
+    public struct xed_decoded_inst_t
     {
+        public static xed_decoded_inst_t init(byte? size = null)
+            => new xed_decoded_inst_t(size ?? XED_ENCODE_ORDER_MAX_OPERANDS);
+
         /// The _operands are storage for information discovered during
         /// decoding. They are also used by encode.  The accessors for these
         /// operands all have the form xed3_operand_{get,set}_*(). They should
@@ -24,10 +28,58 @@ namespace Z0.Xed
         /// xed_operand_values_*() functions when available.
         public xed_operand_storage_t _operands;
 
-        public fixed byte _operand_order[XED_ENCODE_ORDER_MAX_OPERANDS];
+        //public fixed byte _operand_order[XED_ENCODE_ORDER_MAX_OPERANDS];
+        readonly byte[] _operand_order;
 
         // Length of the _operand_order[] array.
         public xed_uint8_t _n_operand_order; 
 
+        // union {
+        //     xed_uint8_t* _enc;
+        //     const xed_uint8_t* _dec;
+        // } _byte_array; 
+
+        // public xed_uint8_t* _enc;
+        
+        // public xed_uint8_t* _dec;
+
+        readonly byte[] _enc_data;
+
+        readonly byte[] _dec_data;
+
+        public byte[] _enc
+        {
+            [MethodImpl(Inline)]
+            get => _enc_data;
+        }
+
+        public byte[] _dec
+        {
+            [MethodImpl(Inline)]
+            get => _dec_data;
+        }
+
+        public xed_uint8_t _decoded_length;
+
+        public xed_inst_t _inst;
+
+        /* user_data is available as a user data storage field after
+         * decoding. It does not live across re-encodes or re-decodes. */
+        public xed_uint64_t user_data; 
+
+        public xed_encoder_vars_t ev;
+        
+        xed_decoded_inst_t(xed_uint8_t size) 
+        {
+            _n_operand_order = size;
+            _operand_order = Control.alloc<byte>(_n_operand_order);
+            _enc_data = Control.array<byte>();
+            _dec_data = Control.array<byte>();
+            _decoded_length = default;
+            _inst = default;
+            ev = default;
+            user_data = default;
+            _operands = default;
+        }
     }
 }
