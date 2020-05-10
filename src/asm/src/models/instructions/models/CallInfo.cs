@@ -55,16 +55,19 @@ namespace Z0.Asm
             Instruction = src;
             Target = MemoryAddress.Empty;
             var bytes = src.Encoded.Bytes;            
-            var length = bytes.Length - 1; //op code takes up one byte
-            var dstlen = math.min(8, length);
+            var count = (byte)(bytes.Length - 1); //op code takes up one byte
+            var offset = ByteReader.Read(bytes.Slice(1));
+            Target = src.NextIp + offset;
+            
+            // var dstlen = math.min(8, length);
 
-            if(dstlen != 0)
-            {
-                var offset = 0ul;
-                for(var i=1; i<dstlen; i++)
-                    refs.seek8(ref offset, i - 1) = refs.skip(bytes,i);
-                Target = src.NextIp + offset;
-            }
+            // if(dstlen != 0)
+            // {
+            //     var offset = 0ul;
+            //     for(var i=1; i<dstlen; i++)
+            //         refs.seek8(ref offset, i - 1) = refs.skip(bytes,i);
+            //     Target = src.NextIp + offset;
+            // }            
         }        
     }
 }

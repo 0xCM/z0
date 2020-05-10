@@ -14,11 +14,21 @@ namespace Z0
     {
         const long F1_Base = 0x7ffd8f68c4f0;
 
+        // 140727009461568
+        const long F6_Base = 0x7ffd8f68c540;
+
+        const long F7_Base = 0x7ffd8f68c560;
+
+        const long F8_Base = 0x7ffd8f68c580;
+
         const long F1_Call_F6_Offset_Encoded = 0xf9c9f7;
 
         const long F1_Call_F6_Source = 0x7ffd8f68c4fc;
 
         const long F1_Call_F6_NextIp = F1_Call_F6_Source + 5;            
+
+        // 140727025831672
+        const long XXX = F1_Call_F6_NextIp +  F1_Call_F6_Offset_Encoded;
 
         const long F6_F1_NextIp_Delta = F6_Base - F1_Call_F6_NextIp;
 
@@ -40,12 +50,6 @@ namespace Z0
 
         const long F8_Base_F1_Base_Delta = F8_Base - F1_Base;
 
-        // 140727009461568
-        const long F6_Base = 0x7ffd8f68c540;
-
-        const long F7_Base = 0x7ffd8f68c560;
-
-        const long F8_Base = 0x7ffd8f68c580;
 
 
         [Op, MethodImpl(NotInline)]

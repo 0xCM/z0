@@ -87,7 +87,7 @@ namespace Z0
             var names = Delimit(CallInfo.AspectNames, sep);            
 
             writer.WriteLine(names);
-            Control.iter(delimited,writer.WriteLine);
+            Control.iter(delimited, writer.WriteLine);
 
         }
 
