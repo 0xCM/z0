@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
 
     [ApiHost]
-    public static class Bytes
+    public readonly struct Bytes : IApiHost<Bytes>
     {
         /// <summary>
         /// Reads/writes a byte from/to a reference
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> from<T>(ref T src)
             where T : struct
-                => MemoryMarshal.CreateSpan(ref refs.byterefR(ref src), size<T>()); 
+                => MemoryMarshal.CreateSpan(ref Edits.edit8(ref src), size<T>()); 
 
         /// <summary>
         /// Constructs a span from a parameter array
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> get<T>(in T src)
             where T : struct
                 => from(ref edit(in src));

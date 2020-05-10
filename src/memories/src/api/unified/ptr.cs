@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* ptr<T>(ref T src)
             where T : unmanaged
-                => Pointers.ptr(ref src);
+                => Pointed.ptr(ref src);
 
         /// <summary>
         /// Presents generic reference as a generic pointer displaced by an element offset
@@ -30,6 +30,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* ptr<T>(ref T src, int offset)
             where T : unmanaged
-                => Pointers.ptr(ref src, offset);
+                => Pointed.ptr(ref src, offset);
     }
 }

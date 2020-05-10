@@ -13,13 +13,42 @@ namespace Z0
     
     [ApiHost]
     public static class Arrays
-    {    
+    {            
         /// <summary>
         /// Returns an empty array
         /// </summary>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] empty<T>() => new T[]{};
+
+        /// <summary>
+        /// Returns a reference to the location of the first element
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe ref T head<T>(T[] src)
+            => ref Spans.head(src);
+
+        /// <summary>
+        /// Adds an offset to the head of an array, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref readonly T skip<T>(T[] src, int count)
+            => ref Skips.skip(in head<T>(src), count);
+
+        /// <summary>
+        /// Adds an offset to the head of an array, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref T seek<T>(T[] src, int count)
+            => ref Seeker.seek(ref head<T>(src), count);
 
         /// <summary>
         /// Tests whether an array is empty
