@@ -11,7 +11,7 @@ namespace Z0
     using static refs;
 
     [ApiHost]
-    public readonly struct ByteReader : IApiHost<ByteReader>
+    public readonly partial struct ByteReader : IApiHost<ByteReader>
     {
         /// <summary>
         /// Reads at most 8 bytes from the data source, as determined by source length

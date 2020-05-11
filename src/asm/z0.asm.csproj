@@ -14,13 +14,9 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Xed)" />
+    <ProjectReference Include="$(Cmd)" />
 
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="src/resources/RegisterLayout.GP.csv" LogicalName="RegisterLayout.GP.csv" /> 
-    <EmbeddedResource Include="src/resources/RegisterLayout.Vec.csv" LogicalName="RegisterLayout.Vec.csv" /> 
-  </ItemGroup>
 
 </Project>

@@ -179,6 +179,8 @@ public enum PartId : ulong
 
     Xed = 25000,
 
+    Cmd = Xed + 1,
+
     CoreTest = Core | Test,
 
     Svc = ushort.MaxValue + 1,

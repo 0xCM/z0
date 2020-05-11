@@ -33,10 +33,10 @@ namespace Z0
 
         public const char Star = 'ᛡ';
 
-        public const string StarText = "ᛡ";
-        
         public const char ᛡ = Star;
 
+        public const string StarText = "ᛡ";
+        
         public const char Up = 'ᛏ';    
         
         public const char ᛏ = Up;

@@ -1,0 +1,4 @@
+| Identifier | Symbol    | Description                                                                             |
+| VexBits    | Vex.vvvv  | The VEX bit field specifying a source or destination register (in 1’s complement form). |
+| RmField    | rm_field  | The ModR/M r/m field and any REX.B                                                      |
+| RegField   | reg_field | The ModR/M reg field and any REX.R                                                      |

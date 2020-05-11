@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Math)" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="res/RegisterLayout.GP.csv" LogicalName="RegisterLayout.GP.csv" /> 
+    <EmbeddedResource Include="res/RegisterLayout.Vec.csv" LogicalName="RegisterLayout.Vec.csv" /> 
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="specs/cmp.csv" LogicalName="cmp.csv" /> 
+    <EmbeddedResource Include="specs/jcc.csv" LogicalName="jcc.csv" /> 
+    <EmbeddedResource Include="specs/mov.csv" LogicalName="mov.csv" /> 
+  </ItemGroup>
+
+</Project>

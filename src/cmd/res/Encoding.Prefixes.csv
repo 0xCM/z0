@@ -1,0 +1,18 @@
+| Prefix   | Code | Group/Description                           |
+| LOCK     | F0   | Group 1                                     |
+| REPNE    | F2   | Group 1                                     |
+| REPNZ    | F2   | Group 1                                     |
+| REP      | F3   | Group 1                                     |
+| REPE     | F3   | Group 1                                     |
+| REPE     | F3   | Group 1                                     |
+| BND      | F2   | Group 1                                     |
+| CS       | 2E   | Group 2: Segment override prefixes          |
+| SS       | 36   | Group 2: Segment override prefixes          |
+| DS       | 3E   | Group 2: Segment override prefixes          |
+| ES       | 26   | Group 2: Segment override prefixes          |
+| FS       | 64   | Group 2: Segment override prefixes          |
+| GS       | 65   | Group 2: Segment override prefixes          |
+| JccB     | 2E   | Group 2: Branch hints; jcc branch taken     |
+| JccNB    | 3E   | Group 2: Branch hints; jcc branch not taken |
+| OpSize   | 66   | Group 3: Operand size override prefix       |
+| AddrSize | 67   | Group 4: Address size override prefix       |

@@ -56,9 +56,14 @@
     <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
   </PropertyGroup>
 
-  <PropertyGroup>    
-    <Asm>$(Src)asm/z0.asm.csproj</Asm>
+  <PropertyGroup>
     <AsmChecks>$(Src)asm.checks/z0.asm.checks.csproj</AsmChecks>
+    <Asm>$(Src)asm/z0.asm.csproj</Asm>
+    <Cmd>$(Src)cmd/z0.cmd.csproj</Cmd>
+    <Xed>$(Src)xed/z0.xed.csproj</Xed>
+  </PropertyGroup>
+
+  <PropertyGroup>    
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
     <Validity>$(Src)validity/z0.validity.csproj</Validity>

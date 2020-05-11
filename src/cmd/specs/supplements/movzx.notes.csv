@@ -1,0 +1,1 @@
+|  *                | In 64-bit mode,r/m8 cannot be encoded to access the following byte registers if the REX prefix is used:AH,BH,CH,DH.
