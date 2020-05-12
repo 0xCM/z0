@@ -15,6 +15,8 @@ namespace Z0
         public readonly struct Impl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
+            public const BitLogicKind OpKind = BitLogicKind.Impl;
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.impl(a,b);

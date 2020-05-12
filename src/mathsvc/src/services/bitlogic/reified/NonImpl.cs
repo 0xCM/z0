@@ -15,6 +15,8 @@ namespace Z0
         public readonly struct NonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
+            public const BitLogicKind OpKind = BitLogicKind.NonImpl;
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.nonimpl(a,b);

@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="specs/cmp.csv" LogicalName="cmp.csv" /> 
-    <EmbeddedResource Include="specs/jcc.csv" LogicalName="jcc.csv" /> 
-    <EmbeddedResource Include="specs/mov.csv" LogicalName="mov.csv" /> 
+    <EmbeddedResource Include="specs/instructions/cmp.csv" LogicalName="cmp.csv" /> 
+    <EmbeddedResource Include="specs/instructions/jcc.csv" LogicalName="jcc.csv" /> 
+    <EmbeddedResource Include="specs/instructions/mov.csv" LogicalName="mov.csv" /> 
   </ItemGroup>
 
 </Project>

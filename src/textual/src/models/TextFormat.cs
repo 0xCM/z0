@@ -8,39 +8,47 @@ namespace Z0
     
     public readonly struct TextFormat
     {        
-        public static readonly TextFormat Default = Define();
+        public static TextFormat Structured => Define();
 
-        public static TextFormat Define(bool HasHeader = true, char Delimiter = Chars.Pipe, char CommentPrefix = Chars.Hash, int? ColWidth = null)
-            => new TextFormat(HasHeader, Delimiter, CommentPrefix,ColWidth);
+        public static TextFormat Unstructured(char? commentprefix = null) 
+            => Define(delimited:false, CommentPrefix:commentprefix, HasHeader:false);
+
+        public static TextFormat Define(bool HasHeader = true, bool delimited = true, 
+            char Delimiter = Chars.Pipe, char? CommentPrefix = Chars.Hash, int? ColWidth = null)
+                => new TextFormat(HasHeader, delimited, Delimiter, CommentPrefix,ColWidth);
         
-        TextFormat(bool HasHeader, char Delimiter, char? CommentPrefix, int? ColWidth)
+        TextFormat(bool header, bool delimited, char sep, char? cp, int? colwidth)
         {
-            this.HasHeader = HasHeader;
-            this.Delimiter = Delimiter;
-            this.CommentPrefix = CommentPrefix;
-            this.ColWidth = ColWidth;
+            HasDataHeader = header;
+            IsDelimited = delimited;
+            Delimiter = sep;
+            CommentPrefix = cp;
+            ColWidth = colwidth;
         }
 
         /// <summary>
         /// Indicates whether the first line of the data is a header row
         /// </summary>
-        public readonly bool HasHeader;
-        
+        public readonly bool HasDataHeader;
+
         /// <summary>
-        /// The character used to delimit parts of a line
+        /// Specifes whether the file contains regular delimited contetn
+        /// </summary>
+        public readonly bool IsDelimited;
+
+        /// <summary>
+        /// The character used to delimit parts of a line, if delimited
         /// </summary>
         public readonly char Delimiter;
 
         /// <summary>
-        /// Indicates a character that begins a comment
+        /// If specified, indicates the character that begins a comment
         /// </summary>
         public readonly char? CommentPrefix;
 
         /// <summary>
-        /// If specified, indicates a uniform column width
+        /// If specified, defines a uniform column width
         /// </summary>
         public readonly int? ColWidth;
     }
-
-
 }

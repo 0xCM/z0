@@ -234,13 +234,13 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var options = fmt ?? TextFormat.Default;
+            var options = fmt ?? TextFormat.Structured;
             var width = fmt?.ColWidth ?? src.ColFormatWidth();
             var sep = options.Delimiter;
             var rows = (int)value<M>();
             var cols = (int)value<N>();
             dst.WriteLine($"{options.CommentPrefix} {typeof(T).Name}[{rows}x{cols}]");
-            if(options.HasHeader)
+            if(options.HasDataHeader)
             {
                 for(var i = 0; i<cols; i++)
                 {

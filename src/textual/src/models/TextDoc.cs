@@ -6,29 +6,29 @@ namespace Z0
 {
     using System;
     
-    public sealed class TextDoc
+    public readonly struct TextDoc
     {
-        TextRow[] LineData;        
-
-        public TextDoc(TextFormat format, Option<TextHeader> header,  uint TotalLineCount, params TextRow[] LineData)
-        {
-            this.LineData = LineData;
-            this.Header = header;
-            this.Format = format;
-            this.TotalLineCount = TotalLineCount;
-        }
+        public readonly TextRow[] RowData;        
 
         public TextFormat Format {get;}
 
         public Option<TextHeader> Header {get;}
         
+        public uint TotalLineCount {get;}
+
+        public TextDoc(TextFormat format, Option<TextHeader> header,  uint count, params TextRow[] rows)
+        {
+            this.RowData = rows;
+            this.Header = header;
+            this.Format = format;
+            this.TotalLineCount = count;
+        }
+
         public ReadOnlySpan<TextRow> Rows
-            => LineData;
+            => RowData;
         
         public ref readonly TextRow this[int index]
             => ref Rows[index];
-
-        public uint TotalLineCount {get;}
         
         public uint DataLineCount
             => (uint)Rows.Length;

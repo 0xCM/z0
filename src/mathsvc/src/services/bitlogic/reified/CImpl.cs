@@ -15,6 +15,8 @@ namespace Z0
         public readonly struct CImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
+            public const BitLogicKind OpKind = BitLogicKind.CImpl;
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.cimpl(a,b);

@@ -9,20 +9,20 @@ namespace Z0
     /// <summary>
     /// Defines header content in a text data file
     /// </summary>
-    public sealed class TextHeader
+    public readonly struct TextHeader
     {        
-        string[] Names;
+        public static TextHeader Empty => new TextHeader();
+        
+        public readonly string[] HeaderNames;
 
-        public TextHeader(params string[] Names)
+        public TextHeader(params string[] src)
         {
-            this.Names = Names;
+            HeaderNames = src;
         }
 
-        public ReadOnlySpan<string> HeaderNames
-            => Names;
 
         public string Format(char? sep = null)
-            => string.Join(sep ?? Chars.Pipe, Names);
+            => string.Join(sep ?? Chars.Pipe, HeaderNames);
 
         public override string ToString()
             => Format();

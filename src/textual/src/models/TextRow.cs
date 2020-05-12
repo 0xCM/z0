@@ -7,18 +7,38 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;    
+    using System.Runtime.CompilerServices;    
+
+    using static  Seed;
 
     /// <summary>
     /// Defines a row of text parttioned into a sequence of cells
     /// </summary>
-    public sealed class TextRow
+    public readonly struct TextRow
     {        
-        TextCell[] CellData;
+        public readonly TextCell[] CellData;
 
-        public TextRow(params TextCell[] CellData)
+        public TextRow(params TextCell[] cells)
         {
-            this.CellData = CellData;
+            CellData = cells;
         }
+
+        public readonly string[] TextCells
+        {
+            [MethodImpl(Inline)]
+            get => CellData.Map(x => x.CellValue);
+        }
+
+        public void Store(Span<string> dst)
+        {
+            var count = Math.Min(dst.Length, CellData.Length);
+            for(var i=0; i<count; i++)
+            {
+                refs.seek(dst,i) = CellData[i].CellValue;
+            }
+        }
+        
+        public string Text => text.concat(TextCells);
 
         /// <summary>
         /// The cells that comprise the row

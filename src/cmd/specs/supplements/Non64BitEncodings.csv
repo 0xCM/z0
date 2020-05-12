@@ -1,0 +1,28 @@
+# Instruction and Format Encoding
+-------------------------------------------------------------------------------
+| Mnemonc | Description                       | Encoding                    |                                          |
+| AAA     | ASCII Adjust after Addition       |                             | 0011 0111                                |
+| AAD     | ASCII Adjust AX before Division   |                             | 1101 0101 : 0000 1010                    |
+| AAM     | ASCII Adjust AX after Multiply    |                             | 1101 0100 : 0000 1010                    |
+| AAS     | ASCII Adjust AL after Subtraction |                             | 0011 1111                                |
+| ADC     | ADD with Carry                    | register1 to register2      | 0001 000w : 11 reg1 reg2                 |
+| ADC     | ADD with Carry                    | register2 to register1      | 0001 001w : 11 reg1 reg2                 |
+| ADC     | ADD with Carry                    | memory to register          | 0001 001w : mod reg r/m                  |
+| ADC     | ADD with Carry                    | register to memory          | 0001 000w : mod reg r/m                  |
+| ADC     | ADD with Carry                    | immediate to register       | 1000 00sw : 11 010 reg : immediate data  |
+| ADC     | ADD with Carry                    | immediate to AL, AX, or EAX | 0001 010w : immediate data               |
+| ADC     | ADD with Carry                    | immediate to memory         | 1000 00sw : mod 010 r/m : immediate data |
+| ADD     | Add                               | register1 to register2      | 0000 000w : 11 reg1 reg2                 |
+| ADD     | Add                               | register2 to register1      | 0000 001w : 11 reg1 reg2                 |
+| ADD     | Add                               | memory to register          | 0000 001w : mod reg r/m                  |
+| ADD     | Add                               | register to memory          | 0000 000w : mod reg r/m                  |
+| ADD     | Add                               | immediate to register       | 1000 00sw : 11 000 reg : immediate data  |
+| ADD     | Add                               | immediate to AL, AX, or EAX | 0000 010w : immediate data               |
+| ADD     | Add                               | immediate to memory         | 1000 00sw : mod 000 r/m : immediate data |
+| AND     | Logical AND                       | register1 to register2      | 0010 000w : 11 reg1 reg2                 |
+| AND     | Logical AND                       | register2 to register1      | 0010 001w : 11 reg1 reg2                 |
+| AND     | Logical AND                       | memory to register          | 0010 001w : mod reg r/m                  |
+| AND     | Logical AND                       | register to memory          | 0010 000w : mod reg r/m                  |
+| AND     | Logical AND                       | immediate to register       | 1000 00sw : 11 100 reg : immediate data  |
+| AND     | Logical AND                       | immediate to AL, AX, or EAX | 0010 010w : immediate data               |
+| AND     | Logical AND                       | immediate to memory         | 1000 00sw : mod 100 r/m : immediate data |

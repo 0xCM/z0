@@ -15,6 +15,8 @@ namespace Z0
         public readonly struct Select<T> : ITernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {    
+            public const BitLogicKind OpKind = BitLogicKind.Select;
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c) 
                 => gmath.select(a, b, c);

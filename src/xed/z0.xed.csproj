@@ -1,13 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>zxed</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Text)" />
+    <ProjectReference Include="$(Apps)" />
+
 
   </ItemGroup>  
 </Project>

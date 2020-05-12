@@ -15,6 +15,8 @@ namespace Z0
         public readonly struct Nand<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
+            public const BitLogicKind OpKind = BitLogicKind.Nand;
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.nand(a,b);

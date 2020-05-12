@@ -1,0 +1,26 @@
+ICLASS    : TZCNT
+CPL       : 3
+CATEGORY  : BMI1
+EXTENSION : BMI1
+FLAGS     : MUST [ of-u sf-u zf-mod af-u pf-u cf-mod ]
+PATTERN   : 0x0F 0xBC refining_f3  TZCNT=1 MOD[mm] MOD!=3 REG[rrr] RM[nnn] MODRM()
+OPERANDS  : REG0=GPRv_R():w MEM0:r:v
+PATTERN   : 0x0F 0xBC refining_f3 TZCNT=1 MOD[0b11] MOD=3 REG[rrr] RM[nnn]
+OPERANDS  : REG0=GPRv_R():w  REG1=GPRv_B():r
+------------------------------------------------------------------------------------
+ICLASS    : BSF
+VERSION   : 1
+COMMENT   : AMD reused 0FBC for TZCNT and made BSF not have a refining prefix.  This version replaces the normal version of BSF
+CPL       : 3
+CATEGORY  : BITBYTE
+EXTENSION : BASE
+ISA_SET   : I386
+FLAGS     : MUST [ of-u sf-u zf-mod af-u pf-u cf-u ]
+PATTERN   : 0x0F 0xBC not_refining_f3 MOD[mm] MOD!=3 REG[rrr] RM[nnn] MODRM()
+OPERANDS  : REG0=GPRv_R():cw MEM0:r:v
+PATTERN   : 0x0F 0xBC not_refining_f3 MOD[0b11] MOD=3 REG[rrr] RM[nnn]
+OPERANDS  : REG0=GPRv_R():cw REG1=GPRv_B():r
+PATTERN   : 0x0F 0xBC refining_f3 TZCNT=0 MOD[mm] MOD!=3 REG[rrr] RM[nnn] MODRM()
+OPERANDS  : REG0=GPRv_R():cw MEM0:r:v
+PATTERN   : 0x0F 0xBC refining_f3 TZCNT=0 MOD[0b11] MOD=3 REG[rrr] RM[nnn]
+OPERANDS  : REG0=GPRv_R():cw REG1=GPRv_B():r

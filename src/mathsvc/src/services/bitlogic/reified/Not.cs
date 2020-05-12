@@ -15,6 +15,8 @@ namespace Z0
         public readonly struct Not<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {            
+            public const BitLogicKind OpKind = BitLogicKind.Not;
+
             [MethodImpl(Inline)]
             public T Invoke(T a) 
                 => gmath.not(a);

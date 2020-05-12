@@ -10,6 +10,14 @@ namespace Z0.Xed
 
     partial class Xed
     {
+        public const byte XED_ILD_HASMODRM_FALSE = 0;
+
+        public const byte XED_ILD_HASMODRM_IGNORE_MOD = 2;
+
+        public const byte XED_ILD_HASMODRM_TRUE =1;
+
+        public const byte XED_ILD_HASMODRM_UNDEF  = 3;
+
         public const byte XED_ENCODE_ORDER_MAX_ENTRIES = 32;
         
         public const byte XED_ENCODE_ORDER_MAX_OPERANDS = 5;

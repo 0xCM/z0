@@ -14,22 +14,11 @@ namespace Z0
 
     using P = Z0.Parts;
     
-    readonly struct CommonParts : IIndexedElements<IPart>
-    {
-        public static CommonParts Selected => default(CommonParts);
-        
-        IPart[] IContented<IPart[]>.Content
-            => new IPart[]{
-                P.GMath.Resolved,  
-               };
-    }
-
     class App : AppShell<App,IAppContext>
-    {        
-        
+    {                
         static IAppContext CreateAppContext()
         {
-            var resolved = ApiComposition.Assemble(CommonParts.Selected);
+            var resolved = ApiComposition.Assemble(seq(P.GMath.Resolved));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();

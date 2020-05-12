@@ -20,39 +20,36 @@ namespace Z0
         /// <param name="src">The source document path</param>
         /// <param name="format">The document format</param>
         /// <param name="observer">An optional observer to witness intersting events</param>
-        public static Option<TextDoc> ParseDocument(this StreamReader reader, TextFormat? format = null, Action<AppMsg> observer = null)
+        public static Option<TextDoc> ParseDocument(this StreamReader reader, TextFormat? format = null)
         {            
             var rows = new List<TextRow>();
             var counter = 1u;
-            var fmt = format ?? TextFormat.Default;
+            var fmt = format ?? TextFormat.Structured;
             Option<TextHeader> header = default;
             
             try
             {
-                while(true)
+                while(!reader.EndOfStream)
                 {
-                    var text = reader.ParseLine(counter);
-                    if(!text)
-                        break;
-                    
+                    var text = new TextLine(counter, reader.ReadLine().Trim());                    
+
                     counter++;
                     
-                    if(text.IsComment(fmt))
+                    var isComment =  (!text.IsBlank && text.LineText[0] == fmt.CommentPrefix);
+                    
+                    if(isComment)
                         continue;
 
-                    if(fmt.HasHeader && header.IsNone() && rows.Count == 0)
-                        text.OnSome(line => line.ParseHeader(in fmt, observer)
-                                                .OnSome(h => header = h));
+                    if(fmt.HasDataHeader && header.IsNone() && rows.Count == 0)
+                        header = text.ParseHeader(fmt).ValueOrDefault(TextHeader.Empty);   
                     else
-                        text.OnSome(line => line.ParseRow(in fmt,observer)
-                                            .OnSome(row => rows.Add(row)));
+                        text.ParseRow(fmt).OnSome(row => rows.Add(row));
                 }
             }
             catch(Exception e)
             {
-                observer?.Invoke(AppMsg.Error(e));
+                term.error(e);
             }
-
 
             return new TextDoc(fmt, header, counter, rows.ToArray());
         }
@@ -63,7 +60,7 @@ namespace Z0
         /// <param name="src">The source line</param>
         /// <param name="spec">The text format</param>
         /// <param name="observer">An observer to witness interesting events</param>
-        public static Option<TextHeader> ParseHeader(this TextLine src, in TextFormat spec, Action<AppMsg> observer = null)
+        public static Option<TextHeader> ParseHeader(this TextLine src, in TextFormat spec)
             => new TextHeader(src.LineText.SplitLine(spec).Select(x => x.Trim()).Where(x => x != string.Empty).ToArray());
             
         public static TextLine[] ParseLines(string text)
@@ -86,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         /// <param name="spec">The text format spec</param>
-        public static Option<TextRow> ParseRow(this TextLine src, in TextFormat spec, Action<AppMsg> observer = null)
+        public static Option<TextRow> ParseRow(this TextLine src, in TextFormat spec)
         {            
             if(src.IsBlank || (spec.CommentPrefix != null && src[0] == spec.CommentPrefix))
                 return default;
@@ -100,16 +97,21 @@ namespace Z0
             }
         }
 
+        public static Option<TextDoc> ReadTextDoc(this StreamReader src, TextFormat? format = null)
+            => src.ParseDocument(format);
+
         public static Option<TextDoc> ReadTextDoc(this FilePath src, TextFormat? format = null)
         {
             if(!src.Exists)
-                return default;
-            using var reader = new StreamReader(src.ToString());
-            return src.ReadTextDoc(format);
+            {
+                term.error($"No such file {src}");
+                return Option.none<TextDoc>();
+            };
+
+            using var reader = src.Reader();
+            return reader.ReadTextDoc(format);
         }
 
-        public static Option<TextDoc> ReadTextDoc(this StreamReader src, TextFormat? format = null)
-            => src.ParseDocument(format, message => term.print(message));
 
         static Option<TextLine> ParseLine(this StreamReader reader, uint lineNumber)
         {

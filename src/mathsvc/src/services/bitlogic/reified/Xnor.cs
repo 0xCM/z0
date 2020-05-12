@@ -15,6 +15,8 @@ namespace Z0
         public readonly struct Xnor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
+            public const BitLogicKind OpKind = BitLogicKind.Xnor;
+            
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
                 => gmath.xnor(a, b);
