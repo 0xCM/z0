@@ -14,6 +14,10 @@ namespace Z0.Xed
     {
         public readonly struct TableFunction
         {
+            public TextRow Header {get;}
+
+            public TextRow[] Body {get;}
+
             public static TableFunction Define(TextRow header, TextRow[] body)
                 => new TableFunction(header, body);
             public TableFunction(TextRow header, TextRow[] body)
@@ -21,10 +25,6 @@ namespace Z0.Xed
                 Header = header;
                 Body = body;
             }
-            public TextRow Header {get;}
-
-            public TextRow[] Body {get;}
         }
-
     }
 }

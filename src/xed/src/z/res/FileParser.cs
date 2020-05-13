@@ -11,26 +11,6 @@ namespace Z0.Xed
     using static Memories;
 
     using static InstructionFileMarkers;
-    public class InstructionFileMarkers
-    {
-        /// <summary>
-        /// Whe encountered, signals a list  of  insruction specifications to follow,
-        /// where each specification covers multiple lines of text, bounded above by
-        /// a line containing a single left-brace and below by a line cotaining a
-        /// single right-brace
-        /// </summary>
-        public const string InstructionSeq = "INSTRUCTIONS()::";
-
-        /// <summary>
-        /// When encountered, signals a sequence of lines that describe an instruciton
-        /// </summary>
-        public const string LeftDelimiter = "{" ;
-
-        /// <summary>
-        /// When encountered, signals that a sequence of instruction description lines has concluded
-        /// </summary>
-        public const string RightDelimiter = "}" ;
-    }
 
     partial class Res
     {
@@ -77,7 +57,6 @@ namespace Z0.Xed
                 }
                 return new Instruction(rows.ToArray());
             }
-
 
             Instruction[] ParseSequence(FileData data, int idx)
             {

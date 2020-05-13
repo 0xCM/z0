@@ -31,7 +31,6 @@ namespace Z0
         {
         }
 
-
         void Parse(FilePath src)
         {
             var data = FileParser.Service.ReadResFile(src);
@@ -49,23 +48,40 @@ namespace Z0
             var dataroot = AppPaths.AppSrcPath + FolderName.Define("data"); 
             var rawroot = dataroot + FolderName.Define("raw");
             var parsedRoot = dataroot + FolderName.Define("parsed");
-            var rawArchive = RawArchive.Create(rawroot);
-            var parseArchive = ParsedArchive.Create(parsedRoot);
-            term.print($"There are {rawArchive.FileCount} files in the archive");
+            var src = RawArchive.Create(rawroot);
+            var dst = ParsedArchive.Create(parsedRoot);
+            term.print($"There are {src.FileCount} files in the archive");
             
-            var inxsFiles = rawArchive.InstructionFiles.ToArray();
-            term.print($"There are {inxsFiles.Length} instruction files in the archive");
+            var inxsFiles = src.InstructionFiles.ToArray();
+            term.print($"There are {inxsFiles.Length} instruction files in the source archive");
             
+            var patterns = list<PatternOps>();
             foreach(var f in inxsFiles)
             {
                 var parsed = parser.ParseInstructions(f);
-                term.print($"Parsed {parsed.Length} instructions from {f}");
+                var count = parsed.Sum(x => x.Patterns.Length);
+                Control.iter(parsed, p => patterns.AddRange(p.Patterns));
+                term.print($"Parsed {parsed.Length} instructions from {f} that define {count} instruction patterns");
 
-                parseArchive.Deposit(parsed, f.FileName);
-
+                dst.Deposit(parsed, f.FileName);
             }
-            //Control.iter(archive.Files, Parse);
-                        
+
+            const string delimit = " | ";
+            var sorted = patterns.OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).ToArray();
+            using var writer = (parsedRoot + FileName.Define("patterns", FileExtensions.Csv)).Writer();
+            for(var i=0; i<sorted.Length; i++)
+            {
+                var p = sorted[i];
+                var linear = text.concat(
+                    p.Class.PadRight(20), delimit, 
+                    p.Category.PadRight(14), delimit, 
+                    p.Extension.PadRight(14), delimit, 
+                    p.IsaSet.PadRight(14), delimit, 
+                    p.PatternText.PadRight(80), delimit, 
+                    p.OperandText);
+                writer.WriteLine(linear);                
+            }
+                                    
         }
 
         public static void Main(params string[] args)
