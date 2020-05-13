@@ -10,9 +10,60 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-
     partial class BitBlocks
     {
+        /// <summary>
+        /// Tests a bit value in a T-sequence predicated on a linear index
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
+        /// <typeparam name="T">The sequence type</typeparam>
+        [MethodImpl(Inline), TestBit, Closures(AllNumeric)]
+        public static bit testbit<T>(in Block256<T> src, int index)
+            where T : unmanaged
+        {
+            var loc = gbits.bitpos<T>(index);
+            return gbits.testbit(src[loc.CellIndex], (byte)loc.BitOffset);
+        }
+
+        /// <summary>
+        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="firstpos">The sequence-relative position of the first bit</param>
+        /// <param name="lastpos">The sequence-relative position of the last bit</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), BitSeg, Closures(UnsignedInts)]
+        public static T bitseg<T>(in Block256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
+            where T : unmanaged
+                => gbits.bitseg(src.Data, firstpos,lastpos);
+
+        /// <summary>
+        /// Sets a bit value in a T-sequence predicated on a linear index
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
+        /// <typeparam name="T">The sequence type</typeparam>
+        [MethodImpl(Inline), SetBit, Closures(AllNumeric)]
+        public static void setbit<T>(in Block256<T> src, int index, bit value)
+            where T : unmanaged
+        {
+            var loc = gbits.bitpos<T>(index);
+            src[loc.CellIndex] = gbits.setbit(src[loc.CellIndex], (byte)loc.BitOffset, value);
+        }
+
+        /// <summary>
+        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by 
+        /// an inclusive linear index range
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="firstidx">The sequence-relative index of the first bit</param>
+        /// <param name="lastidx">The sequence-relative index of the last bit</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), BitSeg, Closures(UnsignedInts)]
+        public static T bitseg<T>(in Block256<T> src, int firstidx, int lastidx)
+            where T : unmanaged
+                => gbits.bitseg(src.Data, gbits.bitpos<T>(firstidx), gbits.bitpos<T>(lastidx));         
         /// <summary>
         /// Reads a cell determined by a linear bit position
         /// </summary>
@@ -110,5 +161,7 @@ namespace Z0
             var q = Math.DivRem(bitcount, bitsize<T>(), out int r);            
             return r == 0 ? q : q + 1;
         }
+
+
    }
 }

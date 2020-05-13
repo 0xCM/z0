@@ -12,43 +12,35 @@ namespace Z0
 
     partial class AsmExpr
     {
-        const long F1_Base = 0x7ffd8f68c4f0;
+        const long F1_Base = 0x7ffd_8de9d180;
 
-        // 140727009461568
-        const long F6_Base = 0x7ffd8f68c540;
+        
+        const long F1_Call_F6_Offset = 0x27bdf7fe;
 
-        const long F7_Base = 0x7ffd8f68c560;
+        const long F1_Call_F6 = 0x7ffd_8ce18eb8;
 
-        const long F8_Base = 0x7ffd8f68c580;
+        const long F1_Call_F7 = 0x7ffd_8ce18ec0;
 
-        const long F1_Call_F6_Offset_Encoded = 0xf9c9f7;
+        const long F1_Call_F8 = 0x7ffd_8ce18ec8;
 
-        const long F1_Call_F6_Source = 0x7ffd8f68c4fc;
 
-        const long F1_Call_F6_NextIp = F1_Call_F6_Source + 5;            
+        const long F1_Call_F7_Offset = 0x25bdf7fe;
 
-        // 140727025831672
-        const long XXX = F1_Call_F6_NextIp +  F1_Call_F6_Offset_Encoded;
+        const long F1_Call_F8_Offset = 0x22bdf7fe;
 
-        const long F6_F1_NextIp_Delta = F6_Base - F1_Call_F6_NextIp;
 
-        const long F1_Call_F7_Source = 0x7ffd8f68c506;
+        const long F6_Base = 0x7ffd_8de9d1d0;
+    
 
-        const long F1_Call_F7_NextIp = F1_Call_F7_Source + 5;
+        const long F7_Base = 0x7ffd_8de9d1f0;
 
-        const long F1_Call_F7_Target = 0x7ffd8e628f00;
+        const long F8_Base = 0x7ffd_8de9d210;
 
-        const long F1_Call_F8_Source = 0x7ffd8f68c511;
+        // 17318680
+        const long X1 = F6_Base - F1_Call_F6;
 
-        const long F1_Call_F8_NextIp = F1_Call_F8_Source + 5;
-
-        const long F1_Call_F8_Target = 0x7ffd8e628f08;
-
-        const long F6_Base_F1_Base_Delta = F6_Base - F1_Base;
-
-        const long F7_Base_F1_Base_Delta = F7_Base - F1_Base;
-
-        const long F8_Base_F1_Base_Delta = F8_Base - F1_Base;
+        // 17318704
+        const long X2 = F7_Base - F1_Call_F7;
 
 
 

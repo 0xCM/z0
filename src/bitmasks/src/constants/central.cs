@@ -212,6 +212,5 @@ namespace Z0
         /// 0x0000FFFFFFFF0000
         /// </summary>
         public const ulong Central64x64x32 = 0x0000FFFFFFFF0000;
-
     }
 }

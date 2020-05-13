@@ -66,9 +66,5 @@ namespace Z0
         P8x4 = P8x3 + P8x1,
 
         P8x5 = P8x4 + P8x1,
-
     }
-
-
-
 }

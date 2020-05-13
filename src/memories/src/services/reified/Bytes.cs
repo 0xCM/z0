@@ -73,22 +73,8 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void to<T>(in T src, Span<byte> dst)
             where T : struct
-                => Unsafe.As<byte, T>(ref head(dst)) = src;
+                => Unsafe.As<byte,T>(ref head(dst)) = src;
 
-        /// <summary>
-        /// Reads an unmanaged generic value from a bytespan beginning at a specified offset and deposits the result in a caller-supplied target
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The source span offset</param>
-        /// <param name="dst">The target reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T to<T>(Span<byte> src, int offset, ref T dst)
-            where T : struct
-        {            
-            dst = Unsafe.ReadUnaligned<T>(ref seek(ref head(src), offset));
-            return ref dst;
-        }
 
         /// <summary>
         /// Writes an unmanaged source value to an array
@@ -114,68 +100,5 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Reads the bytes that define a numeric value
-        /// </summary>
-        /// <param name="src">The value to read</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> from(short src)
-            => new Span<byte>(constptr(in src), 2);
-
-        /// <summary>
-        /// Reads the bytes that define a numeric value
-        /// </summary>
-        /// <param name="src">The value to read</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> from(ushort src)
-            => new Span<byte>(constptr(in src), 2);
-
-        /// <summary>
-        /// Reads the bytes that define a numeric value
-        /// </summary>
-        /// <param name="src">The value to read</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> from(int src)
-            => new Span<byte>(constptr(in src), 4);
-
-        /// <summary>
-        /// Reads the bytes that define a numeric value
-        /// </summary>
-        /// <param name="src">The value to read</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> from(uint src)
-            => new Span<byte>(constptr(in src), 4);
-
-        /// <summary>
-        /// Reads the bytes that define a numeric value
-        /// </summary>
-        /// <param name="src">The value to read</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> from(long src)
-            => new Span<byte>(constptr(in src), 8);
-
-        /// <summary>
-        /// Reads the bytes that define a numeric value
-        /// </summary>
-        /// <param name="src">The value to read</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> from(ulong src)
-            => new Span<byte>(constptr(in src), 8);
-
-        /// <summary>
-        /// Reads the bytes that define a numeric value
-        /// </summary>
-        /// <param name="src">The value to read</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> from(float src)
-            => new Span<byte>(constptr(in src), 4);
-
-        /// <summary>
-        /// Reads the bytes that define a numeric value
-        /// </summary>
-        /// <param name="src">The value to read</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> from(double src)
-            => new Span<byte>(constptr(in src), 8);            
     }
 }

@@ -355,5 +355,4 @@ namespace Z0
         public const ushort Msb12x3x2 = (ushort)Msb8x2x2 | (ushort)Msb4x1x2 << 8;
 
     }
-
 }

@@ -87,5 +87,4 @@ namespace Z0
         [BinaryLiteral("[11100111 11100111 11100111 11100111 11100111 11100111 11100111 11100111]")]
         public const ulong Jsb64x8x3 = (ulong)Jsb32x8x3 | (ulong)Jsb32x8x3 << 32;
     }
-
 }

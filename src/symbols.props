@@ -29,7 +29,6 @@
 
     <Agency>$(Src)agency/z0.agency.csproj</Agency>
     <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>
-    <Spans>$(Src)spans/z0.spans.csproj</Spans>
 
     <Math>$(Src)math/z0.math.csproj</Math>
     
@@ -57,7 +56,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AsmChecks>$(Src)asm.checks/z0.asm.checks.csproj</AsmChecks>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
     <Cmd>$(Src)cmd/z0.cmd.csproj</Cmd>
     <Xed>$(Src)xed/z0.xed.csproj</Xed>

@@ -226,8 +226,5 @@ namespace Z0
         public const ulong Increment64 = 
             (ulong)Index8x8x0 << 0 | (ulong)Index8x8x1 << 8 | (ulong)Index8x8x2 << 16 | (ulong)Index8x8x3 << 24 |
             (ulong)Index8x8x4 << 32 | (ulong)Index8x8x5 << 40 | (ulong)Index8x8x6 << 48 | (ulong)Index8x8x7 << 56;
-
-
     }
-
 }

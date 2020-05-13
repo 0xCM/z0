@@ -589,7 +589,5 @@ namespace Z0
 
         [BinaryLiteral("[11111111 11111111]")]
         public const ulong Lsb64x16 = Lsb64x15 | Lsb64x1 << 15;
-
     }
-
 }

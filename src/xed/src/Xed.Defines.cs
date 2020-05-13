@@ -32,5 +32,11 @@ namespace Z0.Xed
         
         public const uint XED_ENC_GROUPS = 497;
 
+        public const uint XED_GRAMMAR_MODE_64 = 2;
+
+        public const uint XED_GRAMMAR_MODE_32 = 1;
+
+        public const uint XED_GRAMMAR_MODE_16 = 0;
+
     }
 }

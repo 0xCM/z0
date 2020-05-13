@@ -82,5 +82,4 @@ namespace Z0
         /// </summary>
         public const ulong CJsb64x8x4x1 = (ulong)CJsb32x8x4x1 | (ulong)CJsb32x8x2x1 << 32;
     }
-
 }

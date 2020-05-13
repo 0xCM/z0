@@ -12,6 +12,16 @@ namespace Z0
     partial class XTend
     {   
         /// <summary>
+        /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
+        /// </summary>
+        /// <param name="first">The linear index of the first bit</param>
+        /// <param name="last">The linear index of the last bit</param>
+        [MethodImpl(Inline)]
+        public static T BitSeg<T>(this Block256<T> src, int first, int last)
+            where T : unmanaged
+                => BitBlocks.bitseg(src,first,last);
+
+        /// <summary>
         /// Loads a generic bitmatrix from size-conformant sequence of row bits
         /// </summary>
         /// <param name="src">The source bits</param>

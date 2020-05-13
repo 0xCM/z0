@@ -34,15 +34,6 @@ namespace Z0.Xed
         // Length of the _operand_order[] array.
         public xed_uint8_t _n_operand_order; 
 
-        // union {
-        //     xed_uint8_t* _enc;
-        //     const xed_uint8_t* _dec;
-        // } _byte_array; 
-
-        // public xed_uint8_t* _enc;
-        
-        // public xed_uint8_t* _dec;
-
         readonly byte[] _enc_data;
 
         readonly byte[] _dec_data;
@@ -80,6 +71,29 @@ namespace Z0.Xed
             ev = default;
             user_data = default;
             _operands = default;
+        }
+
+        public xed_uint8_t HasModRm
+        {
+            [MethodImpl(Inline)]
+            get => _operands.has_modrm;
+        }
+
+        public xed_uint8_t Rm
+        {
+            [MethodImpl(Inline)]
+            get => _operands.rm;
+            [MethodImpl(Inline)]
+            set => _operands.rm = value;
+        }
+
+        public xed_chip_enum_t Chip
+        {
+            [MethodImpl(Inline)]
+            get => _operands.chip;
+
+            [MethodImpl(Inline)]
+            set => _operands.chip = value;
         }
     }
 }

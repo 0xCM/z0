@@ -67,18 +67,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="firstpos">The sequence-relative position of the first bit</param>
-        /// <param name="lastpos">The sequence-relative position of the last bit</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), BitSeg, Closures(UnsignedInts)]
-        public static T bitseg<T>(in Block256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
-            where T : unmanaged
-                => bitseg(src.Data, firstpos,lastpos);
-
-        /// <summary>
         /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by 
         /// an inclusive linear index range
         /// </summary>
@@ -90,19 +78,26 @@ namespace Z0
         public static T bitseg<T>(Span<T> src, int firstidx, int lastidx)
             where T : unmanaged
                 => bitseg(src, bitpos<T>(firstidx), bitpos<T>(lastidx)); 
+        
+        // [MethodImpl(Inline), BitSeg, Closures(UnsignedInts)]
+        // public static T bitseg<T>(in Block256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
+        //     where T : unmanaged
+        //         => bitseg(src.Data, firstpos,lastpos);
 
-        /// <summary>
-        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by 
-        /// an inclusive linear index range
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="firstidx">The sequence-relative index of the first bit</param>
-        /// <param name="lastidx">The sequence-relative index of the last bit</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), BitSeg, Closures(UnsignedInts)]
-        public static T bitseg<T>(in Block256<T> src, int firstidx, int lastidx)
-            where T : unmanaged
-                => bitseg(src.Data, bitpos<T>(firstidx), bitpos<T>(lastidx)); 
+
+        // /// <summary>
+        // /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by 
+        // /// an inclusive linear index range
+        // /// </summary>
+        // /// <param name="src">The bit source</param>
+        // /// <param name="firstidx">The sequence-relative index of the first bit</param>
+        // /// <param name="lastidx">The sequence-relative index of the last bit</param>
+        // /// <typeparam name="T">The cell type</typeparam>
+        // [MethodImpl(Inline), BitSeg, Closures(UnsignedInts)]
+        // public static T bitseg<T>(in Block256<T> src, int firstidx, int lastidx)
+        //     where T : unmanaged
+        //         => bitseg(src.Data, bitpos<T>(firstidx), bitpos<T>(lastidx)); 
+
         [MethodImpl(Inline)]
         static T bitseg_i<T>(T src, byte p0, byte p1)
             where T : unmanaged

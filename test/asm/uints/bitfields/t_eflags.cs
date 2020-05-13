@@ -10,15 +10,15 @@ namespace Z0.Asm
     {
         public void test_flag_bits()
         {
-            var bits = BitField32.Alloc<EFLAG>();
-            bits[EFLAG.ZF] = 1;
+            var bits = BitField32.Alloc<EFlagBits>();
+            bits[EFlagBits.ZF] = 1;
             
-            var index = bits.FieldIndex(EFLAG.ZF);
+            var index = bits.FieldIndex(EFlagBits.ZF);
             Claim.eq(6, index);
-            Claim.yea(bits[EFLAG.ZF]);
+            Claim.yea(bits[EFlagBits.ZF]);
 
-            bits[EFLAG.ZF] = 0;
-            Claim.nea(bits[EFLAG.ZF]);
+            bits[EFlagBits.ZF] = 0;
+            Claim.nea(bits[EFlagBits.ZF]);
         }
     }
 }

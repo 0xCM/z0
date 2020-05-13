@@ -27,6 +27,14 @@ namespace Z0.Xed
             => (xed_operand_type_enum_t)src.data;
 
         [MethodImpl(Inline)]
+        public static implicit operator xed_chip_enum_t(xed_uint8_t src)
+            => (xed_chip_enum_t)src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator xed_uint8_t(xed_chip_enum_t src)
+            => (byte)src;
+
+        [MethodImpl(Inline)]
         public static implicit operator xed_operand_visibility_enum_t(xed_uint8_t src)
             => (xed_operand_visibility_enum_t)src.data;
 
@@ -43,12 +51,33 @@ namespace Z0.Xed
             => (xed_nonterminal_enum_t)src.data;
 
         [MethodImpl(Inline)]
+        public static xed_uint8_t operator <<(xed_uint8_t src, int shift)
+            => (byte)(src.data << shift);
+        
+        [MethodImpl(Inline)]
+        public static xed_uint8_t operator >>(xed_uint8_t src, int shift)
+            => (byte)(src.data >> shift);
+
+        [MethodImpl(Inline)]
+        public static xed_uint8_t operator &(xed_uint8_t x, xed_uint8_t y)
+            => (byte)(x & y);
+
+        [MethodImpl(Inline)]
+        public static xed_uint8_t operator|(xed_uint8_t x, xed_uint8_t y)
+            => (byte)(x | y);
+
+
+        [MethodImpl(Inline)]
         public static implicit operator byte(xed_uint8_t src)
             => src.data;
                 
         [MethodImpl(Inline)]
         public static implicit operator bool(xed_uint8_t src)
             => src.data != 0;
+
+        [MethodImpl(Inline)]
+        public static implicit operator xed_uint32_t(xed_uint8_t src)
+            => new xed_uint32_t(src);
 
         [MethodImpl(Inline)]
         public static implicit operator xed_uint8_t(byte src)

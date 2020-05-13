@@ -13,20 +13,6 @@ namespace Z0
     partial class gbits
     {        
         /// <summary>
-        /// Tests a bit value in a T-sequence predicated on a linear index
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
-        /// <typeparam name="T">The sequence type</typeparam>
-        [MethodImpl(Inline), TestBit, Closures(AllNumeric)]
-        public static bit testbit<T>(in Block256<T> src, int index)
-            where T : unmanaged
-        {
-            var loc = bitpos<T>(index);
-            return testbit(src[loc.CellIndex], (byte)loc.BitOffset);
-        }
-
-        /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise
         /// </summary>
         /// <param name="src">The value to test</param>

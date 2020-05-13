@@ -70,8 +70,8 @@ namespace Z0
         public static ushort mix(N1 parity, ushort x, ushort y)
         {
             var mask = BitMasks.Odd16;
-            var xO = Bits.scatter(gather(x, mask), BitMasks.Even16);
-            var yO = Bits.scatter(gather(y, mask), BitMasks.Odd16);
+            var xO = scatter(gather(x, mask), BitMasks.Even16);
+            var yO = scatter(gather(y, mask), BitMasks.Odd16);
             var xOy = xO | yO;
             return (ushort)xOy;
         }
@@ -86,8 +86,8 @@ namespace Z0
         public static uint mix(N0 parity, uint x, uint y)
         {
             var mask = BitMasks.Even32;
-            var xE = Bits.scatter(gather(x,mask),  BitMasks.Even32);
-            var yE = Bits.scatter(gather(y,mask),  BitMasks.Odd32);
+            var xE = scatter(gather(x,mask),  BitMasks.Even32);
+            var yE = scatter(gather(y,mask),  BitMasks.Odd32);
             var xEy = xE | yE;
             return xEy;
         }

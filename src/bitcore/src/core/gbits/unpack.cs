@@ -51,18 +51,6 @@ namespace Z0
         public static Span<bit> unpack<T>(Span<T> src, bit[] dst)
             where T : unmanaged
                 => unpack(src, dst.AsSpan());
-        // {
-        //     var srcsize = bitsize<T>();
-        //     var bitcount = bitsize<T>()*src.Length;
-        //     require(dst.Length >= bitcount);
-
-        //     ref var target = ref refs.head(dst);
-        //     var k = 0;
-        //     for(var i=0; i < src.Length; i++)
-        //     for(byte j=0; j< srcsize; j++, k++)
-        //         seek(ref target, k) = testbit(src[i], j);
-        //     return dst;
-        // }
 
         /// <summary>
         /// Projects each bit from a source value into target span element at the corresponding index

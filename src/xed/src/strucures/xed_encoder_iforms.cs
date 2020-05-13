@@ -11,27 +11,49 @@ namespace Z0.Xed
     public struct xed_encoder_iforms_t
     {
         public xed_uint32_t x_SIBBASE_ENCODE;
+        
         public xed_uint32_t x_SIBBASE_ENCODE_SIB1;
+        
         public xed_uint32_t x_SIBINDEX_ENCODE;
+        
         public xed_uint32_t x_MODRM_MOD_ENCODE;
+        
         public xed_uint32_t x_MODRM_RM_ENCODE;
+        
         public xed_uint32_t x_MODRM_RM_ENCODE_EA16_SIB0;
+        
         public xed_uint32_t x_MODRM_RM_ENCODE_EA64_SIB0;
+        
         public xed_uint32_t x_MODRM_RM_ENCODE_EA32_SIB0;
+        
         public xed_uint32_t x_SIB_NT;
+        
         public xed_uint32_t x_DISP_NT;
+        
         public xed_uint32_t x_REMOVE_SEGMENT;
+        
         public xed_uint32_t x_REX_PREFIX_ENC;
+        
         public xed_uint32_t x_PREFIX_ENC;
+        
         public xed_uint32_t x_VEXED_REX;
+        
         public xed_uint32_t x_XOP_TYPE_ENC;
+        
         public xed_uint32_t x_XOP_MAP_ENC;
+        
         public xed_uint32_t x_XOP_REXXB_ENC;
+        
         public xed_uint32_t x_VEX_TYPE_ENC;
+        
         public xed_uint32_t x_VEX_REXR_ENC;
+        
         public xed_uint32_t x_VEX_REXXB_ENC;
+        
         public xed_uint32_t x_VEX_MAP_ENC;
+        
         public xed_uint32_t x_VEX_REG_ENC;
+        
         public xed_uint32_t x_VEX_ESCVL_ENC;
         public xed_uint32_t x_SE_IMM8;
         public xed_uint32_t x_VSIB_ENC_BASE;

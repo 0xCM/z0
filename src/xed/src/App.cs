@@ -11,6 +11,7 @@ namespace Z0
     
     using static Seed;
     using static Memories;
+    using static Xed.Res;
 
     using P = Z0.Parts;
     
@@ -33,7 +34,7 @@ namespace Z0
 
         void Parse(FilePath src)
         {
-            var data = ResFileParser.Service.ReadResFile(src);
+            var data = FileParser.Service.ReadResFile(src);
             if(data.IsNonEmpty)
                 term.print($"Parsed {data.Rows.Length} rows from {src}");
             else
@@ -44,14 +45,15 @@ namespace Z0
         {            
             var parts = PartParser.Service.ParseValid(args);  
 
-            var parser = ResFileParser.Service;
-            var resRoot = AppPaths.AppSrcPath + FolderName.Define("res");
-            var parsedRoot = AppPaths.AppSrcPath + FolderName.Define("parsed");
-            var resArchive = ResArchive.Create(resRoot);
-            var parseArchive = ParsedResArchive.Create(parsedRoot);
-            term.print($"There are {resArchive.FileCount} files in the archive");
+            var parser = FileParser.Service;
+            var dataroot = AppPaths.AppSrcPath + FolderName.Define("data"); 
+            var rawroot = dataroot + FolderName.Define("raw");
+            var parsedRoot = dataroot + FolderName.Define("parsed");
+            var rawArchive = RawArchive.Create(rawroot);
+            var parseArchive = ParsedArchive.Create(parsedRoot);
+            term.print($"There are {rawArchive.FileCount} files in the archive");
             
-            var inxsFiles = resArchive.InstructionFiles.ToArray();
+            var inxsFiles = rawArchive.InstructionFiles.ToArray();
             term.print($"There are {inxsFiles.Length} instruction files in the archive");
             
             foreach(var f in inxsFiles)

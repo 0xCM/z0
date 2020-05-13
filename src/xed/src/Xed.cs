@@ -14,4 +14,8 @@ namespace Z0.Xed
 
     }
 
+    partial class Res
+    {
+        
+    }
 }

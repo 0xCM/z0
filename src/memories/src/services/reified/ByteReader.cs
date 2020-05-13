@@ -14,6 +14,21 @@ namespace Z0
     public readonly partial struct ByteReader : IApiHost<ByteReader>
     {
         /// <summary>
+        /// Reads an unmanaged generic value from a bytespan beginning at a specified offset and deposits the result in a caller-supplied target
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The source span offset</param>
+        /// <param name="dst">The target reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref T Read<T>(Span<byte> src, int offset, ref T dst)
+            where T : struct
+        {            
+            dst = Unsafe.ReadUnaligned<T>(ref seek(ref head(src), offset));
+            return ref dst;
+        }
+
+        /// <summary>
         /// Reads at most 8 bytes from the data source, as determined by source length
         /// </summary>
         /// <param name="src">The data source</param>

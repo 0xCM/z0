@@ -123,10 +123,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(data,index);
+            get => BitBlocks.testbit(data,index);
             
             [MethodImpl(Inline)]
-            set => gbits.setbit(data, index,value);
+            set => BitBlocks.setbit(data, index,value);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Z0
         /// <param name="last">The linear index of the last bit</param>
         [MethodImpl(Inline)]
         public T TakeScalarBits(int first, int last)
-            => gbits.bitseg(data, first,last);
+            => BitBlocks.bitseg(data, first,last);
 
         /// <summary>
         /// Extracts the represented data as a bitstring

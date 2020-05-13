@@ -31,43 +31,62 @@ namespace Z0.Xed
         public xed_flag_set(xed_uint32_t src)    
             => state = src;        
 
-        public xed_uint32_t cf
+        public xed_uint32_t must_be_1
         {
             [MethodImpl(Inline)]
             get => BitReader.Read(n0, state);
+        }
+
+        public xed_uint32_t cf
+        {
+            [MethodImpl(Inline)]
+            get => BitReader.Read(n1, state);
 
             [MethodImpl(Inline)]
-            set => BitWriter.Write(n0, state, value);
+            set => BitWriter.Write(n1, state, value);
         }
 
         public xed_uint32_t pf
         {
             [MethodImpl(Inline)]
-            get => BitReader.Read(n1, state);
-
+            get => BitReader.Read(n2, state);
         }
 
         public xed_uint32_t zf
         {
             [MethodImpl(Inline)]
-            get => BitReader.Read(n2, state);
-
+            get => BitReader.Read(n3, state);
         }
 
         public xed_uint32_t sf
         {
             [MethodImpl(Inline)]
-            get => BitReader.Read(n3, state);
-
+            get => BitReader.Read(n4, state);
         }
 
         public xed_uint32_t tf
         {
             [MethodImpl(Inline)]
-            get => BitReader.Read(n4, state);
-
+            get => BitReader.Read(n5, state);
         }
 
+        public xed_uint32_t _if
+        {
+            [MethodImpl(Inline)]
+            get => BitReader.Read(n6, state);
+        }
+
+        public xed_uint32_t df
+        {
+            [MethodImpl(Inline)]
+            get => BitReader.Read(n7, state);
+        }
+
+        public xed_uint32_t of
+        {
+            [MethodImpl(Inline)]
+            get => BitReader.Read(n8, state);
+        }
         /*
 
             xed_uint32_t must_be_1:1;

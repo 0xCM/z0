@@ -120,7 +120,7 @@ namespace Z0
                 => src;
     }
 
-    public static partial class XTuple
+    public static partial class XTend
     {
     }
 }

@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             var n = n128;
-            var cellmask = BitMask.eraser<T>(start,count);
+            var cellmask = gbits.eraser<T>(start,count);
             var vmask = Vectors.vbroadcast(n, cellmask);
             return gvec.vand(vmask,src);
         }
@@ -42,7 +42,7 @@ namespace Z0
             where T : unmanaged
         {
             var n = n256;
-            var cellmask = BitMask.eraser<T>(start,count);
+            var cellmask = gbits.eraser<T>(start,count);
             var vmask = Vectors.vbroadcast(n, cellmask);
             return gvec.vand(vmask,src);
         }         
