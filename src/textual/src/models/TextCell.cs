@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using static Memories;
     
     /// <summary>
     /// Defines a text segment in the context of a line in a file
@@ -21,7 +22,7 @@ namespace Z0
         {
             this.LineNumber = LineNumber;
             this.ColumnIndex = ColumnIndex;
-            this.CellValue = CellValue;
+            this.CellValue = insist(CellValue);
         }        
     }
 }

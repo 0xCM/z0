@@ -29,7 +29,7 @@ namespace Z0
                 var parser = HexParsers.Bytes;
                 var uritext = formatted.TakeBefore(Chars.Space).Trim();
                 var uri = OpUri.Parse(uritext);
-                var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexSpecs.DataDelimiter).Select(parser.ParseByte).ToArray();
+                var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexSpecs.DataDelimiter).Select(parser.Succeed).ToArray();
                 return UriHex.Define(uri, bytes);                
             }
             catch(Exception e)

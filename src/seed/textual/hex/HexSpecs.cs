@@ -145,5 +145,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string ClearSpecs(string src)
             => src.Remove("0x").RemoveAny('h');
+
+        /// <summary>
+        /// Attempts to parse a hex digit
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline)]
+        public static ParseResult<byte> Parse(char c)
+        {
+            var u = Char.ToUpperInvariant(c);
+            if(IsScalar(c))
+                return ParseResult.Success(c, (byte)((byte)u - MinScalarCode));
+            else if(IsUpperChar(c))
+                return ParseResult.Success(c, (byte)((byte)u - MinCharCodeU + 0xA));
+            else
+                return ParseResult.Fail<byte>(c);
+        }
     }
 }

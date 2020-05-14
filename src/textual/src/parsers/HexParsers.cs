@@ -12,7 +12,7 @@ namespace Z0
 
     public class HexParsers
     {
-        public static HexByteParser Bytes => HexByteParser.Service;
+        public static IHexParser<byte> Bytes => HexByteParser.Service;
 
         public static IParametricParser Numeric => HexNumericParser.Service;
 

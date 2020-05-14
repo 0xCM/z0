@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [ApiHost]
-    public static partial class Hex
+    public partial class Hex : IApiHost<Hex>
     {
 
     }

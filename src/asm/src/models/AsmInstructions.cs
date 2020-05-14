@@ -51,6 +51,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public bool Equals(AsmInstructions src)
             => Encoded.Equals(src.Encoded);
+        public string Format()
+            => Encoded.Format();
+        
+        public override string ToString()
+            => Format();       
         IEnumerator<Instruction> IEnumerable<Instruction>.GetEnumerator()
             => Inxs.AsEnumerable().GetEnumerator();        
         IEnumerator IEnumerable.GetEnumerator()

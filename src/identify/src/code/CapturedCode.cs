@@ -21,6 +21,10 @@ namespace Z0
     {        
         public static CapturedCode Empty => default;
 
+        [MethodImpl(Inline)]
+        public static CapturedCode Define(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
+            => new CapturedCode(id, src, method, extracted, parsed, term);
+
         readonly LocatedCode Extracted;
 
         public LocatedCode Encoded {get;}
@@ -43,6 +47,8 @@ namespace Z0
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
 
+        public CapturedCode Zero => Empty;
+
         public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
 
         public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
@@ -51,9 +57,15 @@ namespace Z0
 
         public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment; }
 
-        [MethodImpl(Inline)]
-        public static CapturedCode Define(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-            => new CapturedCode(id, src, method, extracted, parsed, term);
+        public bool Equals(CapturedCode src)
+            => Encoded.Equals(src.Encoded);        
+
+        public string Format()
+            => Encoded.Format();
+        
+        public override string ToString()
+            => Format();
+
 
         [MethodImpl(Inline)]
         internal CapturedCode(OpIdentity id, Delegate src, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
@@ -64,8 +76,5 @@ namespace Z0
             OpUri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
             TermCode = term;
         }
-
-        public bool Equals(CapturedCode src)
-            => Encoded.Equals(src.Encoded);        
     }
 }

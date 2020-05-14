@@ -13,6 +13,7 @@ namespace Z0
 
     partial class Hex
     {
+        
         [MethodImpl(Inline), Op]
         public static char digit(byte value)
             => (char)skip(in head(Uppercase), 0xF & value);

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Seed;
 
-    public interface IEncoded<F> : IEquatable<F>, ILengthwise
+    public interface IEncoded<F> : IEquatable<F>, ILengthwise, ITextual
         where F : struct, IEncoded<F>
     {
         // bool IsEmpty {get;}

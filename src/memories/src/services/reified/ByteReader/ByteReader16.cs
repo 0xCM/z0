@@ -17,16 +17,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> ReadAll(short src)
-            => new Span<byte>(constptr(in src), 2);
+        public static unsafe Span<byte> ReadAll(in short src)
+            => new Span<byte>(constptr(src), 2);
 
         /// <summary>
         /// Reads the bytes that define a numeric value
         /// </summary>
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> ReadAll(ushort src)
-            => new Span<byte>(constptr(in src), 2);
+        public static unsafe Span<byte> ReadAll(in ushort src)
+            => new Span<byte>(constptr(src), 2);
 
         /// <summary>
         /// Reads a source byte, identified by natural index

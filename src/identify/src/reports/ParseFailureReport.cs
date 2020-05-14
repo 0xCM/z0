@@ -46,7 +46,7 @@ namespace Z0
             var len = parser.Parse(fields[2]).ValueOrDefault();            
             var term = Enums.Parse<ExtractTermCode>(fields[3]).ValueOrDefault();
             var uri = OpUri.Parse(fields[4]).ValueOrDefault(OpUri.Empty);
-            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.ParseByte).ToArray();
+            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.Succeed).ToArray();
             var extract = LocatedCode.Define(address,data);
             return new R(seq,address,len,term,uri,extract);
         }

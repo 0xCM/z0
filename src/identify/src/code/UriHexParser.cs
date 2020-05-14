@@ -26,7 +26,7 @@ namespace Z0
                 var uri = OpUri.Parse(src.TakeBefore(Chars.Space).Trim()).ToOption().Require();
                 var bytes = src.TakeAfter(Chars.Space)
                                      .Split(HexSpecs.DataDelimiter, StringSplitOptions.RemoveEmptyEntries)
-                                     .Select(parser.ParseByte)
+                                     .Select(parser.Succeed)
                                      .ToArray();
                 return ParseResult.Success(src, new UriHex(uri, BinaryCode.Define(bytes)));
             }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     
     using static Seed;
+    using static Tabular;
 
     using F = ExtractField;
     using R = ExtractRecord;
@@ -15,17 +16,17 @@ namespace Z0
 
     public enum ExtractField : ulong
     {
-        Sequence = 0 | 10ul << 32,
+        Sequence = 0 | 10ul << FieldWidthOffset,
 
-        Address = 1 | 16ul << 32,
+        Address = 1 | 16ul << FieldWidthOffset,
 
-        Length = 2 | 8ul << 32,
+        Length = 2 | 8ul << FieldWidthOffset,
 
-        Uri = 3 | 110ul << 32,
+        Uri = 3 | 110ul << FieldWidthOffset,
 
-        OpSig = 4 | 110ul << 32,
+        OpSig = 4 | 110ul << FieldWidthOffset,
 
-        Data = 5 | 1ul << 32
+        Data = 5 | 1ul << FieldWidthOffset
     }
 
     public readonly struct ExtractRecord : ITabular<F,R>
@@ -46,7 +47,7 @@ namespace Z0
             var len = parser.Parse(fields[2]).ValueOrDefault();            
             var uri = OpUri.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
-            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.ParseByte).ToArray();
+            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.Succeed).ToArray();
             var extract = LocatedCode.Define(address, data);
             return new R(seq, address, len, uri, sig, extract);
         }
@@ -81,7 +82,7 @@ namespace Z0
 
         public string DelimitedText(char sep)
         {
-            var dst = Model.Formatter.Reset();                   
+            var dst = formatter<F>();
             dst.AppendField(F.Sequence, Sequence);
             dst.DelimitField(F.Address, Address, sep);
             dst.DelimitField(F.Length, Length, sep);
@@ -90,8 +91,6 @@ namespace Z0
             dst.DelimitField(F.Data, Data, sep);
             return dst.Format();            
         }
-
-        static Report<F,R> Model => Report<F,R>.Empty;
     }
 
     public class ExtractReport : Report<Report,F,R>

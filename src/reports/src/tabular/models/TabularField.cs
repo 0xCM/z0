@@ -10,6 +10,7 @@ namespace Z0
 
     using static Seed;
 
+
     public readonly struct TabularField : ITextual
     {
         public readonly string Name;

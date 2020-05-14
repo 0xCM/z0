@@ -61,5 +61,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(ParsedCode src)
             => Encoded.Equals(src.Encoded);
+        
+        public string Format()
+            => Encoded.Format();
+        
+        public override string ToString()
+            => Format();
+
     }
 }

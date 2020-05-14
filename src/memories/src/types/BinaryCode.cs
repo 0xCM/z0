@@ -24,6 +24,10 @@ namespace Z0
         public static BinaryCode Define(byte[] data)
             => new BinaryCode(data);        
 
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(Span<byte> src)
+            => Define(src.ToArray());
+
         /// <summary>
         /// The canonical zero
         /// </summary>

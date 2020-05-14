@@ -19,10 +19,9 @@ namespace Z0
     {        
         const char Separator = IPathComponent.Separator;
 
-        /// <summary>
-        /// Lonely, so
-        /// </summary>
-        public static FolderPath[] None => Control.array<FolderPath>();
+        public static FolderPath Empty =>  Define(string.Empty);
+
+        //public static FolderPath[] None => Control.array<FolderPath>();
 
         /// <summary>
         /// Just the one

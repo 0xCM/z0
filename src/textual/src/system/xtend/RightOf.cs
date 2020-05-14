@@ -19,12 +19,23 @@ namespace Z0
             => s.RightOf(s.IndexOf(c));
 
         /// <summary>
+        /// Extracts content demarcated by left/right character boundaries
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="left">The left marker</param>
+        /// <param name="right">THe rigt marker</param>
+        public static string Unfence(this string src, char left, char right)
+            => src.RightOf(left).LeftOfLast(right);
+
+        /// <summary>
         /// Gets the string to the right of, but not including, a specified index
         /// </summary>
         /// <param name="src">The string to search</param>
         /// <param name="idx">The index</param>
         public static string RightOf(this string src, int idx)
-            => (idx >= src.Length - 1) ? String.Empty : src.Substring(idx + 1);
+            => (idx >= src.Length - 1) 
+             ? String.Empty 
+             : src.Substring(idx + 1) ?? string.Empty;
 
         /// <summary>
         /// Gets the string to the right of, but not including, a specified substring
@@ -54,6 +65,27 @@ namespace Z0
                 return string.Empty;
         }
  
+        public static string LeftOfLast(this string s, string match)
+        {
+            var idx = s.LastIndexOf(match);
+            if (idx != -1)
+                return s.Substring(0, idx);
+            else
+                return string.Empty;
+        }
 
+        /// <summary>
+        /// Retrieves the substring that precedes the last occurence of a marker
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        /// <param name="match">The substring to match</param>
+        public static string LeftOfLast(this string s, char match)
+        {
+            var idx = s.LastIndexOf(match);
+            if (idx != -1)
+                return s.Substring(0, idx);
+            else
+                return string.Empty;
+        }        
     }
 }

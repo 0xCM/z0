@@ -177,9 +177,9 @@ public enum PartId : ulong
 
     LSquare = 9831,
 
-    Xed = 25000,
+    ZXed = 25000,
 
-    Cmd = Xed + 1,
+    Cmd = ZXed + 1,
 
     CoreTest = Core | Test,
 

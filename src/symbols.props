@@ -58,7 +58,7 @@
   <PropertyGroup>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
     <Cmd>$(Src)cmd/z0.cmd.csproj</Cmd>
-    <Xed>$(Src)xed/z0.xed.csproj</Xed>
+    <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
   </PropertyGroup>
 
   <PropertyGroup>    

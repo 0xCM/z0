@@ -52,7 +52,7 @@ namespace Z0
 
         public void AppendField(E f, object content)
         {
-            State.Append($"{content}".PadRight(width(f)));
+            State.Append(RenderContent(content).PadRight(width(f)));
         }
 
         public void AppendField<T>(E f, T content)
@@ -62,9 +62,21 @@ namespace Z0
         }
 
         public void DelimitField(E f, object content, char delimiter)
-        {
+        {            
             State.Append(rspace(delimiter));            
-            State.Append($"{content}".PadRight(width(f)));
+            State.Append(RenderContent(content).PadRight(width(f)));
+        }
+
+        static string RenderContent(object content)
+        {
+            var rendered = string.Empty;
+            if(content is null)
+                rendered = Null.Value.Format();
+            else if(content is ITextual t)
+                rendered = t.Format();
+            else
+                rendered = content.ToString();
+            return rendered;
         }
 
         [MethodImpl(Inline)]
@@ -94,7 +106,7 @@ namespace Z0
             => State.ToString();
         
         public FieldFormatter<E> Reset()
-        {
+        {            
             State.Clear();
             return this;
         }

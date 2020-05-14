@@ -22,12 +22,12 @@ namespace Z0
             d1 = (char)skip(in codes, (value >> 4) & 0xF);
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static ReadOnlySpan<char> digits<T>(T value)
             where T : unmanaged
                 => digits_u(value);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void digits<T>(T value, Span<char> dst, int offset)
             where T : unmanaged
                 => digits_u(value, dst, offset);

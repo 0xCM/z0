@@ -23,13 +23,14 @@ namespace Z0.Asm
 
         public string FormattedAsm {get;}       
 
-        public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
         public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
 
         public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
+
+        public ReadOnlySpan<byte> Bytes  { [MethodImpl(Inline)] get => Encoded.Bytes; }
 
         public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
 
@@ -40,7 +41,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public bool Equals(CapturedMemory src)
             => Encoded.Equals(src.Encoded);
-
+        public string Format()
+            => Encoded.Format();
+        
+        public override string ToString()
+            => Format();       
         
         [MethodImpl(Inline)]
         internal CapturedMemory(MemoryAddress address, ParsedCode data, AsmInstructionList instructions, string formatted)

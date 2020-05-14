@@ -17,9 +17,6 @@
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(BitMatrix)" />
-    <ProjectReference Include="$(Xed)" />
-
-
   </ItemGroup>
 
 </Project>
