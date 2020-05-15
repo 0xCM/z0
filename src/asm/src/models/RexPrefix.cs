@@ -101,7 +101,7 @@ namespace Z0.Asm
         public RexCode Code
         {                
             [MethodImpl(Inline)] get => (RexCode)gbits.slice(Scalar, 4, (byte)RFW.Code);
-            [MethodImpl(Inline)] set => Update(gbits.bitcopy((byte)value, 4, (byte)RFW.Code, Scalar));
+            [MethodImpl(Inline)] set => Update(gbits.copy((byte)value, 4, (byte)RFW.Code, Scalar));
         }
 
         public string Render()

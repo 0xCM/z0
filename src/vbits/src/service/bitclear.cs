@@ -37,7 +37,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c) 
-                => gbits.bitclear(a, b, c);
+                => gbits.clear(a, b, c);
         }
 
         [Closures(Integers)]
@@ -50,7 +50,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c) 
-                => gbits.bitclear(a, b, c);
+                => gbits.clear(a, b, c);
         }
     }
 }

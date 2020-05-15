@@ -89,11 +89,16 @@ namespace Z0
                 return default;
             else
             {            
-                var parts = src.LineText.SplitLine(spec);
-                var data = new TextCell[parts.Length];
-                for(var i=0u; i<parts.Length; i++)
-                    data[i] = new TextCell(src.LineNumber, i, parts[i].Trim());
-                return new TextRow(data);
+                if(spec.HasDataHeader)
+                {
+                    var parts = src.LineText.SplitLine(spec);
+                    var data = new TextCell[parts.Length];
+                    for(var i=0u; i<parts.Length; i++)
+                        data[i] = new TextCell(src.LineNumber, i, parts[i].Trim());
+                    return new TextRow(data);
+                }
+                else
+                    return new TextRow(new TextCell(src.LineNumber, 0, src.LineText));
             }
         }
 

@@ -77,5 +77,7 @@ namespace Z0
         /// </summary>
         Switch = Id.Switch,
 
+        Copy = Id.Copy,
+
     }   
 }

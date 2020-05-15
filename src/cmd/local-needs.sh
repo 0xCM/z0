@@ -9,3 +9,6 @@ $Needs $NeededId
 
 export NeededId=tuples
 $Needs $NeededId
+
+export NeededId=bitcore
+$Needs $NeededId

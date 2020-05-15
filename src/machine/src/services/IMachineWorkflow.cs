@@ -11,6 +11,9 @@ namespace Z0.Asm
     
     public interface IMachineWorkflow : IMachineService
     {    
-        void Run(PartInstructions src);        
+
+        void Process(PartInstructions src);
+
+        void Render(PartInstructions src);
     }
 }

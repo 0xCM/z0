@@ -15,17 +15,6 @@ namespace Z0
     public readonly struct Bytes : IApiHost<Bytes>
     {
         /// <summary>
-        /// Reads/writes a byte from/to a reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="offset">The 0-based/byte-relative offset</param>
-        /// <typeparam name="T">The data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref byte one<T>(ref T src, int offset)
-            where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref src), offset);
-
-        /// <summary>
         /// Reads a single cell into a span of bytes
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -75,6 +64,16 @@ namespace Z0
             where T : struct
                 => Unsafe.As<byte,T>(ref head(dst)) = src;
 
+        /// <summary>
+        /// Reads/writes a byte from/to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="offset">The 0-based/byte-relative offset</param>
+        /// <typeparam name="T">The data type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref byte one<T>(ref T src, int offset)
+            where T : unmanaged
+                => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref src), offset);
 
         /// <summary>
         /// Writes an unmanaged source value to an array

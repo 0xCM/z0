@@ -1,0 +1,71 @@
+avx512-reg-table-mask.txt/MASK1()::xed_reg_enum_t
+--------------------------------------------------------------------------------------------------------
+MASK=0x0  | OUTREG=XED_REG_K0
+MASK=0x1  | OUTREG=XED_REG_K1
+MASK=0x2  | OUTREG=XED_REG_K2
+MASK=0x3  | OUTREG=XED_REG_K3
+MASK=0x4  | OUTREG=XED_REG_K4
+MASK=0x5  | OUTREG=XED_REG_K5
+MASK=0x6  | OUTREG=XED_REG_K6
+MASK=0x7  | OUTREG=XED_REG_K7
+
+avx512-reg-table-mask.txt/MASKNOT0()::xed_reg_enum_t
+--------------------------------------------------------------------------------------------------------
+MASK=0x0  | OUTREG=XED_REG_ERROR
+MASK=0x1  | OUTREG=XED_REG_K1
+MASK=0x2  | OUTREG=XED_REG_K2
+MASK=0x3  | OUTREG=XED_REG_K3
+MASK=0x4  | OUTREG=XED_REG_K4
+MASK=0x5  | OUTREG=XED_REG_K5
+MASK=0x6  | OUTREG=XED_REG_K6
+MASK=0x7  | OUTREG=XED_REG_K7
+
+avx512-reg-table-mask.txt/MASK_R()::xed_reg_enum_t
+--------------------------------------------------------------------------------------------------------
+REXRR=0 REXR=0 REG=0x0 | OUTREG=XED_REG_K0
+REXRR=0 REXR=0 REG=0x1 | OUTREG=XED_REG_K1
+REXRR=0 REXR=0 REG=0x2 | OUTREG=XED_REG_K2
+REXRR=0 REXR=0 REG=0x3 | OUTREG=XED_REG_K3
+REXRR=0 REXR=0 REG=0x4 | OUTREG=XED_REG_K4
+REXRR=0 REXR=0 REG=0x5 | OUTREG=XED_REG_K5
+REXRR=0 REXR=0 REG=0x6 | OUTREG=XED_REG_K6
+REXRR=0 REXR=0 REG=0x7 | OUTREG=XED_REG_K7
+
+avx512-reg-table-mask.txt/MASK_B()::xed_reg_enum_t
+--------------------------------------------------------------------------------------------------------
+RM=0x0 | OUTREG=XED_REG_K0
+RM=0x1 | OUTREG=XED_REG_K1
+RM=0x2 | OUTREG=XED_REG_K2
+RM=0x3 | OUTREG=XED_REG_K3
+RM=0x4 | OUTREG=XED_REG_K4
+RM=0x5 | OUTREG=XED_REG_K5
+RM=0x6 | OUTREG=XED_REG_K6
+RM=0x7 | OUTREG=XED_REG_K7
+
+avx512-reg-table-mask.txt/MASK_N()::xed_reg_enum_t
+--------------------------------------------------------------------------------------------------------
+mode64  | OUTREG=MASK_N64()
+mode32  | OUTREG=MASK_N32()
+mode16  | OUTREG=MASK_N32()
+
+avx512-reg-table-mask.txt/MASK_N64()::xed_reg_enum_t
+--------------------------------------------------------------------------------------------------------
+VEXDEST3=1 VEXDEST210=0x0 | OUTREG=XED_REG_K7
+VEXDEST3=1 VEXDEST210=0x1 | OUTREG=XED_REG_K6
+VEXDEST3=1 VEXDEST210=0x2 | OUTREG=XED_REG_K5
+VEXDEST3=1 VEXDEST210=0x3 | OUTREG=XED_REG_K4
+VEXDEST3=1 VEXDEST210=0x4 | OUTREG=XED_REG_K3
+VEXDEST3=1 VEXDEST210=0x5 | OUTREG=XED_REG_K2
+VEXDEST3=1 VEXDEST210=0x6 | OUTREG=XED_REG_K1
+VEXDEST3=1 VEXDEST210=0x7 | OUTREG=XED_REG_K0
+
+avx512-reg-table-mask.txt/MASK_N32()::xed_reg_enum_t
+--------------------------------------------------------------------------------------------------------
+VEXDEST210=0x0 | OUTREG=XED_REG_K7
+VEXDEST210=0x1 | OUTREG=XED_REG_K6
+VEXDEST210=0x2 | OUTREG=XED_REG_K5
+VEXDEST210=0x3 | OUTREG=XED_REG_K4
+VEXDEST210=0x4 | OUTREG=XED_REG_K3
+VEXDEST210=0x5 | OUTREG=XED_REG_K2
+VEXDEST210=0x6 | OUTREG=XED_REG_K1
+VEXDEST210=0x7 | OUTREG=XED_REG_K0

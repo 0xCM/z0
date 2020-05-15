@@ -1,0 +1,61 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{        
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
+    public interface IHexKindValue<T> : IHexCode
+        where T : unmanaged
+    {
+        T Value {get;}
+
+        byte[] Data => ByteReader.Read(Value).ToArray();
+    }
+
+    /// <summary>
+    /// Defines an association between an integer in the range [0,0xFF] and unmanaged data of parametric type
+    /// </summary>
+    public readonly struct HexKindValue<T> : IHexKindValue<T>
+        where T : unmanaged
+    {
+        public HexKind Kind {get;}
+
+        public T Value
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        readonly T Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator HexKindValue<T>((HexKind k, T value) src)
+            => new HexKindValue<T>(src.k, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator HexKindValue<T>((byte k, T value) src)
+            => new HexKindValue<T>((HexKind)src.k, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator HexKindValue<T>((int k, T value) src)
+            => new HexKindValue<T>((HexKind)src.k, src.value);
+
+        [MethodImpl(Inline)]
+        public HexKindValue(HexKind code, T value)
+        {
+            this.Kind = code;
+            this.Data = value;
+        }
+
+        public HexCode Untyped
+        {
+            [MethodImpl(Inline)]
+            get => (Kind, ByteReader.Read(Data).ToArray());
+        }
+    }
+}

@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// <summary>
     /// Collects a sequence of operation instuction sequences from host-defined members
     /// </summary>         
-    public readonly struct HostInstructions
+    public readonly struct HostInstructions : IIndex<MemberInstructions>
     {
         public static HostInstructions Empty => new HostInstructions(ApiHostUri.Empty, Control.array<MemberInstructions>());
 
@@ -36,6 +36,16 @@ namespace Z0.Asm
         /// The number of host-defined operations
         /// </summary>
         public int MemberCount => Content.Length;
+
+        /// <summary>
+        /// The member instruction content length
+        /// </summary>
+        public int Length { [MethodImpl(Inline)] get => Content.Length; }
+        
+        /// <summary>
+        /// Indexes into the member instruction content
+        /// </summary>
+        public ref MemberInstructions this[int index] { [MethodImpl(Inline)] get => ref Content[index];}
 
         /// <summary>
         /// The total instruction count

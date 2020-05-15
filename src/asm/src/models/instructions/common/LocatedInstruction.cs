@@ -41,6 +41,8 @@ namespace Z0.Asm
 
         public MemoryAddress NextIp32 => Instruction.NextIP32;
 
+        public Mnemonic Mnemonic => Instruction.Mnemonic;
+
         /// <summary>
         /// The encoded byte count
         /// </summary>

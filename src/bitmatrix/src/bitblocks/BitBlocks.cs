@@ -33,10 +33,10 @@ namespace Z0
         /// <param name="firstpos">The sequence-relative position of the first bit</param>
         /// <param name="lastpos">The sequence-relative position of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), BitSeg, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
         public static T bitseg<T>(in Block256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
             where T : unmanaged
-                => gbits.bitseg(src.Data, firstpos,lastpos);
+                => gbits.extract(src.Data, firstpos,lastpos);
 
         /// <summary>
         /// Sets a bit value in a T-sequence predicated on a linear index
@@ -60,10 +60,10 @@ namespace Z0
         /// <param name="firstidx">The sequence-relative index of the first bit</param>
         /// <param name="lastidx">The sequence-relative index of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), BitSeg, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
         public static T bitseg<T>(in Block256<T> src, int firstidx, int lastidx)
             where T : unmanaged
-                => gbits.bitseg(src.Data, gbits.bitpos<T>(firstidx), gbits.bitpos<T>(lastidx));         
+                => gbits.extract(src.Data, gbits.bitpos<T>(firstidx), gbits.bitpos<T>(lastidx));         
         /// <summary>
         /// Reads a cell determined by a linear bit position
         /// </summary>

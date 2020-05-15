@@ -14,8 +14,6 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Cmd)" />
-
   </ItemGroup>
 
 

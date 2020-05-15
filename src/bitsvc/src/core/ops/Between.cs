@@ -16,7 +16,7 @@ namespace Z0
             where T : unmanaged        
         {
             [MethodImpl(Inline)]
-            public T Invoke(T a, byte k1, byte k2) => gbits.bitseg(a,k1,k2);
+            public T Invoke(T a, byte k1, byte k2) => gbits.extract(a,k1,k2);
         }
     }
 }

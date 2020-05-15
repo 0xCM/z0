@@ -97,7 +97,6 @@ namespace Z0
 
             var index = InstructionIndex.Create(e.Instructions.ToArray());
             AnalyzeCalls(index);
-
         }
 
         public bool SemanticFormatEnabled {get;}
@@ -106,11 +105,11 @@ namespace Z0
         public void OnEvent(DecodedPart e)
         {
             Sink.Deposit(e);
+
+            var workflow = MachineWorkflow.Create(Context);
+            workflow.Process(e.Instructions);
             if(SemanticFormatEnabled)
-            {
-                var formatter = MachineWorkflow.Create(Context);
-                formatter.Run(e.Instructions);
-            }
+                workflow.Render(e.Instructions);
         }
 
         public void Run()

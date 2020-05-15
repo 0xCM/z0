@@ -56,6 +56,6 @@ namespace Z0
 
     public sealed class SwitchAttribute : A { public SwitchAttribute() : base(K.Switch) {} }
 
+    public sealed class CopyAttribute : A { public CopyAttribute() : base(K.Copy) {} }    
     
-
 }

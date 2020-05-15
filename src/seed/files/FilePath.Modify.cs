@@ -51,15 +51,17 @@ namespace Z0
 
         public static void Append(this FilePath dst, IEnumerable<string> src)
         {
-            var count = 0;
             using var writer = new StreamWriter(reifyParent(dst).Name, true);            
             foreach(var line in src)
-            {
                 writer.WriteLine(line);
-                count++;
-            }
         }
 
+        public static void Ovewrite(this FilePath dst, IEnumerable<string> src)
+        {
+            using var writer = new StreamWriter(reifyParent(dst).Name, false);            
+            foreach(var line in src)
+                writer.WriteLine(line);
+        }
         public static void Append(this FilePath dst, string src)
             => File.AppendAllText(dst.Name, src);
 

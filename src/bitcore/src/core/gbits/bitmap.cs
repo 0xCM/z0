@@ -23,7 +23,7 @@ namespace Z0
         public static T bitmap<T>(T src, T dst, byte count, byte index)
             where T : unmanaged
         {
-            var dstPrep = bitclear(dst,index,count);
+            var dstPrep = clear(dst,index,count);
             var srcPrep = gmath.sll(gmath.and(BitMask.lo<T>(count), src), index);
             return gmath.or(dstPrep, srcPrep);
         }                

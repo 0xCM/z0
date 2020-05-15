@@ -1,0 +1,25 @@
+wbnoinvd-isa.xed.txt/INSTRUCTIONS
+--------------------------------------------------------------------------------------------------------
+{
+ICLASS    : WBINVD
+CPL       : 0
+CATEGORY  : SYSTEM
+EXTENSION : BASE
+ISA_SET   : I486REAL
+ATTRIBUTES : RING0 NOTSX
+PATTERN   : 0x0F 0x09 WBNOINVD=0
+OPERANDS  :
+PATTERN   : 0x0F 0x09 WBNOINVD=1 REP!=3
+OPERANDS  :
+VERSION   : 2
+}
+{
+ICLASS    : WBNOINVD
+CPL       : 0
+CATEGORY  : SYSTEM
+EXTENSION : WBNOINVD
+ISA_SET   : WBNOINVD
+ATTRIBUTES : RING0 NOTSX
+PATTERN   : 0x0F 0x09 WBNOINVD=1 f3_refining_prefix
+OPERANDS  :
+}

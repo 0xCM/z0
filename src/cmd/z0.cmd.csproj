@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
@@ -9,6 +9,9 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Math)" />
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(Text)" />
+    <ProjectReference Include="$(Apps)" />
 
   </ItemGroup>
 

@@ -12,7 +12,7 @@ namespace Z0.Parts
     }
 }
 
-namespace Z0.Asm.Models
+namespace Z0.Asm.Logical
 {
 
     public static partial class XTend{}

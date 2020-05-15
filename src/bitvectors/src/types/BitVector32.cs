@@ -350,7 +350,7 @@ namespace Z0
         public BitVector32 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get =>  Bits.bitseg(Data, first, last);
+            get =>  Bits.extract(Data, first, last);
         }
 
         [MethodImpl(Inline)]

@@ -6,6 +6,7 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Seed;
     using static refs;
@@ -27,6 +28,16 @@ namespace Z0
             dst = Unsafe.ReadUnaligned<T>(ref seek(ref head(src), offset));
             return ref dst;
         }
+
+        /// <summary>
+        /// Reads a single cell into a span of bytes
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Span<byte> Read<T>(in T src)
+            where T : struct
+                => MemoryMarshal.CreateSpan(ref Edits.edit8(ref Edits.edit(src)), Unsafe.SizeOf<T>()); 
 
         /// <summary>
         /// Reads at most 8 bytes from the data source, as determined by source length

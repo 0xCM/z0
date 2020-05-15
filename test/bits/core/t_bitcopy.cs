@@ -34,8 +34,8 @@ namespace Z0
                 {
                     var range = Random.Interval(min, max);
                     var count = (byte)range.Width;
-                    var expect = gbits.bitfill(zed, range.Left, count);
-                    var actual = gbits.bitcopy(lit, range.Left, count, zed); 
+                    var expect = gbits.fill(zed, range.Left, count);
+                    var actual = gbits.copy(lit, range.Left, count, zed); 
                     if(gmath.neq(expect,actual))
                     {
                         Trace("expect", BitSpans.from(expect).Format());
@@ -45,7 +45,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, CaseName(Identify.NumericOp<T>(nameof(gbits.bitcopy))));
+            CheckAction(check, CaseName(Identify.NumericOp<T>(nameof(gbits.copy))));
         }
     }
 }

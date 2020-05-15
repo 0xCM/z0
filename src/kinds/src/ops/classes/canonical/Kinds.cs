@@ -30,5 +30,7 @@ namespace Z0
 
         public readonly struct Switch : I { K I.Kind => K.Switch; }
 
+        public readonly struct Copy : I { K I.Kind => K.Copy; }
+
     }
 }

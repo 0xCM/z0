@@ -19,16 +19,28 @@ namespace Z0.Asm
 
         public IMachineContext Context {get;}
         
-        readonly IDataProcessor<LocatedCode> Processor;
+        readonly IDataProcessor<LocatedInstruction> Processor;
 
         public MachineWorkflow(IMachineContext context, FolderPath root)
         {
             Context = context;
-            Processor = JmpProcessors.Create(context);            
+            Processor = JmpProcessor.Create(context);            
 
         }
 
+        public void Process(PartInstructions src)
+        {
+            var processor = PartProcessor.Create(Context);
+            processor.Process(src);
+        }
+
         public void Run(PartInstructions src)        
+        {            
+            Process(src);
+            
+        }
+
+        public void Render(PartInstructions src)
         {
             var part = src.Part;
             var inxs = src.Content;

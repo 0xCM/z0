@@ -14,7 +14,10 @@ namespace Z0.Asm
     /// <summary>
     /// Groups a sequence of located instructions
     /// </summary>         
-    public readonly struct MemberInstructions : INullaryKnown, INullary<MemberInstructions>
+    public readonly struct MemberInstructions : 
+        INullaryKnown, 
+        INullary<MemberInstructions>,
+        IIndex<LocatedInstruction>
     {
         public static MemberInstructions Empty => new MemberInstructions(MemoryAddress.Empty, Control.array<LocatedInstruction>());
         
@@ -30,7 +33,8 @@ namespace Z0.Asm
         
         public MemoryAddress HostAddress {get;}
 
-        public MemoryOffset OffsetAddress => MemoryOffset.Derive(BaseAddress, HostAddress);
+        public MemoryOffset OffsetAddress 
+            => MemoryOffset.Derive(BaseAddress, HostAddress);
 
         public OpIdentity OpId => OpUri.OpId;
 
@@ -40,6 +44,8 @@ namespace Z0.Asm
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => TotalCount != 0; }
 
+        public int Length { [MethodImpl(Inline)] get => Content.Length;}
+        
         public ref LocatedInstruction this[int i] { [MethodImpl(Inline)] get => ref Content[i];}
 
         public MemberInstructions Zero => Empty;

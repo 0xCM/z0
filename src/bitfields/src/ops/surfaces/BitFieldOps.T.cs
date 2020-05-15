@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T Deposit(in FieldSegment seg, in T src, ref T dst)
-            => ref gbits.bitcopy(src, seg.StartPos, seg.Width, ref dst);
+            => ref gbits.copy(src, seg.StartPos, seg.Width, ref dst);
 
         [MethodImpl(Inline)]
         public T Extract(in FieldSegment seg, T src, bool offset)

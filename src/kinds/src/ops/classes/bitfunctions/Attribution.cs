@@ -29,7 +29,7 @@ namespace Z0
 
     public sealed class RankAttribute : A { public RankAttribute() : base(K.Rank) {} }    
 
-    public sealed class BitSegAttribute : A { public BitSegAttribute() : base(K.BitSeg) {} }    
+    public sealed class ExtractAttribute : A { public ExtractAttribute() : base(K.Extract) {} }    
 
     public sealed class TestBitAttribute : A { public TestBitAttribute() : base(K.TestBit) {} }    
 
@@ -38,8 +38,6 @@ namespace Z0
     public sealed class TestBitsAttribute : A { public TestBitsAttribute() : base(K.TestBits) {} }    
 
     public sealed class StitchAttribute : A { public StitchAttribute() : base(K.Stitch) {} }    
-
-    public sealed class BitCopyAttribute : A { public BitCopyAttribute() : base(K.BitCopy) {} }    
 
     public sealed class BitCellAttribute : A { public BitCellAttribute() : base(K.BitCell) {} }    
 

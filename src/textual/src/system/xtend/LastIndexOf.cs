@@ -14,22 +14,23 @@ namespace Z0
         /// Searches for the last index of a specified character in a string
         /// </summary>
         /// <param name="s">The string to search</param>
-        /// <param name="c">The character to match</param>
-        public static int? LastIndexOf(this string s, char c)
+        /// <param name="match">The character to match</param>
+        public static Option<int> LastIndexOf(this string s, char match)
         {
-            var idx = s.LastIndexOf(c);
-            return idx != -1 ? idx : unvalued<int>();
+            var idx = s.LastIndexOf(match);
+            return idx != -1 ? idx : Option.none<int>();
         }
 
         /// <summary>
-        /// Searches a string for the first occurrence of a specified character
+        /// Searches for the last index of a specified character in a string
         /// </summary>
         /// <param name="s">The string to search</param>
-        /// <param name="c">The marking character</param>
-        public static int? FirstIndexOf(this string s, char c)
+        /// <param name="match">The substring to match</param>
+        public static Option<int> LastIndexOf(this string s, string match)
         {
-            var idx = s.IndexOf(c);
-            return idx != -1 ? idx : unvalued<int>();
+            var idx = s.LastIndexOf(match);
+            return idx != -1 ? idx : Option.none<int>();
         }
+
     }
 }

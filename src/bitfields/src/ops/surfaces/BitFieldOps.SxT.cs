@@ -31,13 +31,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T Deposit(in FieldSegment segment, in S src, ref T dst)
-            => ref gbits.bitcopy(src.Scalar, segment.StartPos, segment.Width, ref dst);
+            => ref gbits.copy(src.Scalar, segment.StartPos, segment.Width, ref dst);
 
         [MethodImpl(Inline)]
         public ref S Deposit(in FieldSegment segment, in S src, ref S dst)
         {
             var dstData = dst.Scalar;
-            dst.Update(gbits.bitcopy(src.Scalar, segment.StartPos, segment.Width, ref dstData));
+            dst.Update(gbits.copy(src.Scalar, segment.StartPos, segment.Width, ref dstData));
             return ref dst;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
             for(var i=0; i<spec.FieldCount; i++)
             {
                 ref readonly var segment = ref skip(spec.Segments,i);
-                gbits.bitcopy(skip(src,i), segment.StartPos, segment.Width, ref data);
+                gbits.copy(skip(src,i), segment.StartPos, segment.Width, ref data);
             }
             return ref data;
         }

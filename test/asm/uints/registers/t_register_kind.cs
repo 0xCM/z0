@@ -11,22 +11,22 @@ namespace Z0.Asm
 
     using static Seed;
 
-    using static RegisterKind;
+    //using static RegisterKind;
 
     public class t_register_kind : t_asm<t_register_kind>
     {
 
-        public void check_kind_widths()
-        {
-            var r8 = RegisterKinds.Gp8.ToHashSet();
-            Claim.eq(16, r8.Count);
+        // public void check_kind_widths()
+        // {
+        //     var r8 = RegisterKinds.Gp8.ToHashSet();
+        //     Claim.eq(16, r8.Count);
 
-            Claim.contains(r8, AL, BL, CL, DL);
+        //     Claim.contains(r8, AL, BL, CL, DL);
 
-            var r16 = RegisterKinds.Gp16.ToHashSet();
-            Claim.eq(16, r16.Count);
+        //     var r16 = RegisterKinds.Gp16.ToHashSet();
+        //     Claim.eq(16, r16.Count);
 
-        }
+        // }
 
     }
    

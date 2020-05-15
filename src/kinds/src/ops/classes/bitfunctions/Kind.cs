@@ -35,7 +35,7 @@ namespace Z0
 
         Rank = Id.Rank,
 
-        BitSeg = Id.BitSeg,
+        Extract = Id.Extract,
 
         TestBit = Id.TestBit,
 
@@ -44,8 +44,6 @@ namespace Z0
         TestBits = Id.TestBits,        
 
         Stitch = Id.Stitch,
-
-        BitCopy = Id.BitCopy,
 
         BitCell = Id.BitCell,
 

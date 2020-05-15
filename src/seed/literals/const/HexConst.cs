@@ -6,45 +6,26 @@ namespace Z0
 {
     using System;
     
-    using static HexKind8;
+    using static HexKind;
     using static HexKind4;
 
     public static class HexConst
     {
-        public const byte x1 = (byte)X1;
+        public const byte A = (byte)0xA;
 
-        public const byte x11 = (byte)X11;
+        public const byte B = (byte)0xB;
 
-        public const byte x2 = (byte)X2;
+        public const byte C = (byte)0xC;
 
-        public const byte x22 = (byte)X22;
+        public const byte CC = (byte)0xCC;
 
-        public const byte x5 = (byte)X5;
+        public const byte D = (byte)0xD;
 
-        public const byte x55 = (byte)X55;
+        public const byte E = (byte)0xE;
 
-        public const byte A = (byte)XA;
 
-        public const byte AA = (byte)XAA;
+        public const byte F = (byte)0xF;
 
-        public const byte B = (byte)XB;
-
-        public const byte BB = (byte)XBB;
-
-        public const byte C = (byte)XC;
-
-        public const byte CC = (byte)XCC;
-
-        public const byte D = (byte)XD;
-
-        public const byte DD = (byte)XDD;
-
-        public const byte E = (byte)XE;
-
-        public const byte EE = (byte)XEE;
-
-        public const byte F = (byte)XF;
-
-        public const byte FF = (byte)XFF;        
+        public const byte FF = (byte)0xFF;        
     }
 }

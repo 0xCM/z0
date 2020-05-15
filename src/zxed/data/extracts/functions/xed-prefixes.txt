@@ -1,0 +1,61 @@
+xed-prefixes.txt/REMOVE_SEGMENT()::
+--------------------------------------------------------------------------------------------------------
+mode16 | SEG0=XED_REG_INVALID
+mode32 | SEG0=XED_REG_INVALID
+mode64 | SEG0=XED_REG_INVALID
+
+xed-prefixes.txt/PREFIXES()::
+--------------------------------------------------------------------------------------------------------
+mode64  0b0100 wrxb  |  XED_RESET REX=1 REXW=w REXR=r REXX=x REXB=b
+mode64  0xf2 MODE_FIRST_PREFIX=0        |  XED_RESET reset_rex f2_prefix refining_f2
+mode64  0xf3 MODE_FIRST_PREFIX=0        |  XED_RESET reset_rex f3_prefix refining_f3
+mode64  0xf2 MODE_FIRST_PREFIX=1 REP=0  |  XED_RESET reset_rex f2_prefix refining_f2
+mode64  0xf3 MODE_FIRST_PREFIX=1 REP=0  |  XED_RESET reset_rex f3_prefix refining_f3
+mode64  0xf2 MODE_FIRST_PREFIX=1 REP!=0 |  XED_RESET reset_rex
+mode64  0xf3 MODE_FIRST_PREFIX=1 REP!=0 |  XED_RESET reset_rex
+mode64  0x66  |  XED_RESET 66_prefix   PREFIX66=1 reset_rex
+mode64  0x67  |  XED_RESET 67_prefix              reset_rex
+mode64  0xf0  |  XED_RESET lock_prefix            reset_rex
+mode64  0x2e  |  XED_RESET HINT=1  reset_rex
+mode64  0x3e  |  XED_RESET HINT=2  reset_rex
+mode64  0x26  |  XED_RESET                 reset_rex
+mode64  0x64  |  XED_RESET fs_prefix       reset_rex
+mode64  0x65  |  XED_RESET gs_prefix       reset_rex
+mode64  0x36  |  XED_RESET                 reset_rex
+mode32  0xf2 MODE_FIRST_PREFIX=0        |  XED_RESET  f2_prefix refining_f2
+mode32  0xf3 MODE_FIRST_PREFIX=0        |  XED_RESET  f3_prefix refining_f3
+mode32  0xf2 MODE_FIRST_PREFIX=1 REP=0  |  XED_RESET  f2_prefix refining_f2
+mode32  0xf3 MODE_FIRST_PREFIX=1 REP=0  |  XED_RESET  f3_prefix refining_f3
+mode32  0xf2 MODE_FIRST_PREFIX=1 REP!=0 |  XED_RESET
+mode32  0xf3 MODE_FIRST_PREFIX=1 REP!=0 |  XED_RESET
+mode32  0x66  |  XED_RESET 66_prefix PREFIX66=1
+mode32  0x67  |  XED_RESET 67_prefix
+mode32  0xf0  |  XED_RESET lock_prefix
+mode32  0x2e  |  XED_RESET cs_prefix HINT=1
+mode32  0x3e  |  XED_RESET ds_prefix HINT=2
+mode32  0x26  |  XED_RESET es_prefix
+mode32  0x64  |  XED_RESET fs_prefix
+mode32  0x65  |  XED_RESET gs_prefix
+mode32  0x36  |  XED_RESET ss_prefix
+mode16  0xf2 MODE_FIRST_PREFIX=0        |  XED_RESET  f2_prefix refining_f2
+mode16  0xf3 MODE_FIRST_PREFIX=0        |  XED_RESET  f3_prefix refining_f3
+mode16  0xf2 MODE_FIRST_PREFIX=1 REP=0  |  XED_RESET  f2_prefix refining_f2
+mode16  0xf3 MODE_FIRST_PREFIX=1 REP=0  |  XED_RESET  f3_prefix refining_f3
+mode16  0xf2 MODE_FIRST_PREFIX=1 REP!=0 |  XED_RESET
+mode16  0xf3 MODE_FIRST_PREFIX=1 REP!=0 |  XED_RESET
+mode16  0x66  |  XED_RESET 66_prefix   PREFIX66=1
+mode16  0x67  |  XED_RESET 67_prefix
+mode16  0xf0  |  XED_RESET lock_prefix
+mode16  0x2e  |  XED_RESET cs_prefix HINT=1
+mode16  0x3e  |  XED_RESET ds_prefix HINT=2
+mode16  0x26  |  XED_RESET es_prefix
+mode16  0x64  |  XED_RESET fs_prefix
+mode16  0x65  |  XED_RESET gs_prefix
+mode16  0x36  |  XED_RESET ss_prefix
+otherwise   |
+
+xed-prefixes.txt/BRANCH_HINT()::
+--------------------------------------------------------------------------------------------------------
+HINT=0    |
+HINT=1    | HINT=3
+HINT=2    | HINT=4

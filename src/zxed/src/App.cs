@@ -34,7 +34,7 @@ namespace Z0
 
         void Parse(FilePath src)
         {
-            var data = FileParser.Service.ReadResFile(src);
+            var data = SourceParser.Service.LoadSource(src);
             if(data.IsNonEmpty)
                 term.print($"Parsed {data.Rows.Length} rows from {src}");
             else
@@ -46,7 +46,7 @@ namespace Z0
             var parts = PartParser.Service.ParseValid(args);  
 
             
-            var etl = ArchiveEtl.Service(Context);
+            var etl = EtlWorkflow.Service(Context);
             etl.Run();
                                     
         }

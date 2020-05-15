@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
+// copyright   :  (c) chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -9,1286 +9,1286 @@ namespace Z0
     /// <summary>
     /// Defines identifiers corresponding to each value that can be represented with an 8-bit unsigned integer
     /// </summary>
-    public enum HexKind8 : byte
+    public enum HexKind : byte
     {
         /// <summary> 
-        /// Identifies the hex value 0x00 := 0
+        /// Defines 0x00 = 0
         /// </summary> 
-        X00 = 0x00,
+        x00 = 0x00,
 
         /// <summary> 
-        /// Identifies the hex value 0x01 := 1
+        /// Defines 0x01 = 1
         /// </summary> 
-        X01 = 0x01,
+        x01 = 0x01,
 
         /// <summary> 
-        /// Identifies the hex value 0x02 := 2
+        /// Defines 0x02 = 2
         /// </summary> 
-        X02 = 0x02,
+        x02 = 0x02,
 
         /// <summary> 
-        /// Identifies the hex value 0x03 := 3
+        /// Defines 0x03 = 3
         /// </summary> 
-        X03 = 0x03,
+        x03 = 0x03,
 
         /// <summary> 
-        /// Identifies the hex value 0x04 := 4
+        /// Defines 0x04 = 4
         /// </summary> 
-        X04 = 0x04,
+        x04 = 0x04,
 
         /// <summary> 
-        /// Identifies the hex value 0x05 := 5
+        /// Defines 0x05 = 5
         /// </summary> 
-        X05 = 0x05,
+        x05 = 0x05,
 
         /// <summary> 
-        /// Identifies the hex value 0x06 := 6
+        /// Defines 0x06 = 6
         /// </summary> 
-        X06 = 0x06,
+        x06 = 0x06,
 
         /// <summary> 
-        /// Identifies the hex value 0x07 := 7
+        /// Defines 0x07 = 7
         /// </summary> 
-        X07 = 0x07,
+        x07 = 0x07,
 
         /// <summary> 
-        /// Identifies the hex value 0x08 := 8
+        /// Defines 0x08 = 8
         /// </summary> 
-        X08 = 0x08,
+        x08 = 0x08,
 
         /// <summary> 
-        /// Identifies the hex value 0x09 := 9
+        /// Defines 0x09 = 9
         /// </summary> 
-        X09 = 0x09,
+        x09 = 0x09,
 
         /// <summary> 
-        /// Identifies the hex value 0x0A := 10
+        /// Defines 0x0a = 10
         /// </summary> 
-        X0A = 0x0A,
+        x0a = 0x0a,
 
         /// <summary> 
-        /// Identifies the hex value 0x0B := 11
+        /// Defines 0x0b = 11
         /// </summary> 
-        X0B = 0x0B,
+        x0b = 0x0b,
 
         /// <summary> 
-        /// Identifies the hex value 0x0C := 12
+        /// Defines 0x0c = 12
         /// </summary> 
-        X0C = 0x0C,
+        x0c = 0x0c,
 
         /// <summary> 
-        /// Identifies the hex value 0x0D := 13
+        /// Defines 0x0d = 13
         /// </summary> 
-        X0D = 0x0D,
+        x0d = 0x0D,
 
         /// <summary> 
-        /// Identifies the hex value 0x0E := 14
+        /// Defines 0x0e = 14
         /// </summary> 
-        X0E = 0x0E,
+        x0e = 0x0e,
 
         /// <summary> 
-        /// Identifies the hex value 0x0F := 15
+        /// Defines 0x0f = 15
         /// </summary> 
-        X0F = 0x0F,
+        x0f = 0x0f,
 
         /// <summary> 
-        /// Identifies the hex value 0x10 := 16
+        /// Defines 0x10 = 16
         /// </summary> 
-        X10 = 0x10,
+        x10 = 0x10,
 
         /// <summary> 
-        /// Identifies the hex value 0x11 := 17
+        /// Defines 0x11 = 17
         /// </summary> 
-        X11 = 0x11,
+        x11 = 0x11,
 
         /// <summary> 
-        /// Identifies the hex value 0x12 := 18
+        /// Defines 0x12 = 18
         /// </summary> 
-        X12 = 0x12,
+        x12 = 0x12,
 
         /// <summary> 
-        /// Identifies the hex value 0x13 := 19
+        /// Defines 0x13 = 19
         /// </summary> 
-        X13 = 0x13,
+        x13 = 0x13,
 
         /// <summary> 
-        /// Identifies the hex value 0x14 := 20
+        /// Defines 0x14 = 20
         /// </summary> 
-        X14 = 0x14,
+        x14 = 0x14,
 
         /// <summary> 
-        /// Identifies the hex value 0x15 := 21
+        /// Defines 0x15 = 21
         /// </summary> 
-        X15 = 0x15,
+        x15 = 0x15,
 
         /// <summary> 
-        /// Identifies the hex value 0x16 := 22
+        /// Defines 0x16 = 22
         /// </summary> 
-        X16 = 0x16,
+        x16 = 0x16,
 
         /// <summary> 
-        /// Identifies the hex value 0x17 := 23
+        /// Defines 0x17 = 23
         /// </summary> 
-        X17 = 0x17,
+        x17 = 0x17,
 
         /// <summary> 
-        /// Identifies the hex value 0x18 := 24
+        /// Defines 0x18 = 24
         /// </summary> 
-        X18 = 0x18,
+        x18 = 0x18,
 
         /// <summary> 
-        /// Identifies the hex value 0x19 := 25
+        /// Defines 0x19 = 25
         /// </summary> 
-        X19 = 0x19,
+        x19 = 0x19,
 
         /// <summary> 
-        /// Identifies the hex value 0x1A := 26
+        /// Defines 0x1a = 26
         /// </summary> 
-        X1A = 0x1A,
+        x1a = 0x1a,
 
         /// <summary> 
-        /// Identifies the hex value 0x1B := 27
+        /// Defines 0x1b = 27
         /// </summary> 
-        X1B = 0x1B,
+        x1b = 0x1b,
 
         /// <summary> 
-        /// Identifies the hex value 0x1C := 28
+        /// Defines 0x1c = 28
         /// </summary> 
-        X1C = 0x1C,
+        x1c = 0x1c,
 
         /// <summary> 
-        /// Identifies the hex value 0x1D := 29
+        /// Defines 0x1d = 29
         /// </summary> 
-        X1D = 0x1D,
+        x1d = 0x1D,
 
         /// <summary> 
-        /// Identifies the hex value 0x1E := 30
+        /// Defines 0x1e = 30
         /// </summary> 
-        X1E = 0x1E,
+        x1e = 0x1e,
 
         /// <summary> 
-        /// Identifies the hex value 0x1F := 31
+        /// Defines 0x1f = 31
         /// </summary> 
-        X1F = 0x1F,
+        x1f = 0x1f,
 
         /// <summary> 
-        /// Identifies the hex value 0x20 := 32
+        /// Defines 0x20 = 32
         /// </summary> 
-        X20 = 0x20,
+        x20 = 0x20,
 
         /// <summary> 
-        /// Identifies the hex value 0x21 := 33
+        /// Defines 0x21 = 33
         /// </summary> 
-        X21 = 0x21,
+        x21 = 0x21,
 
         /// <summary> 
-        /// Identifies the hex value 0x22 := 34
+        /// Defines 0x22 = 34
         /// </summary> 
-        X22 = 0x22,
+        x22 = 0x22,
 
         /// <summary> 
-        /// Identifies the hex value 0x23 := 35
+        /// Defines 0x23 = 35
         /// </summary> 
-        X23 = 0x23,
+        x23 = 0x23,
 
         /// <summary> 
-        /// Identifies the hex value 0x24 := 36
+        /// Defines 0x24 = 36
         /// </summary> 
-        X24 = 0x24,
+        x24 = 0x24,
 
         /// <summary> 
-        /// Identifies the hex value 0x25 := 37
+        /// Defines 0x25 = 37
         /// </summary> 
-        X25 = 0x25,
+        x25 = 0x25,
 
         /// <summary> 
-        /// Identifies the hex value 0x26 := 38
+        /// Defines 0x26 = 38
         /// </summary> 
-        X26 = 0x26,
+        x26 = 0x26,
 
         /// <summary> 
-        /// Identifies the hex value 0x27 := 39
+        /// Defines 0x27 = 39
         /// </summary> 
-        X27 = 0x27,
+        x27 = 0x27,
 
         /// <summary> 
-        /// Identifies the hex value 0x28 := 40
+        /// Defines 0x28 = 40
         /// </summary> 
-        X28 = 0x28,
+        x28 = 0x28,
 
         /// <summary> 
-        /// Identifies the hex value 0x29 := 41
+        /// Defines 0x29 = 41
         /// </summary> 
-        X29 = 0x29,
+        x29 = 0x29,
 
         /// <summary> 
-        /// Identifies the hex value 0x2A := 42
+        /// Defines 0x2a = 42
         /// </summary> 
-        X2A = 0x2A,
+        x2a = 0x2a,
 
         /// <summary> 
-        /// Identifies the hex value 0x2B := 43
+        /// Defines 0x2b = 43
         /// </summary> 
-        X2B = 0x2B,
+        x2b = 0x2b,
 
         /// <summary> 
-        /// Identifies the hex value 0x2C := 44
+        /// Defines 0x2c = 44
         /// </summary> 
-        X2C = 0x2C,
+        x2c = 0x2c,
 
         /// <summary> 
-        /// Identifies the hex value 0x2D := 45
+        /// Defines 0x2d = 45
         /// </summary> 
-        X2D = 0x2D,
+        x2d = 0x2D,
 
         /// <summary> 
-        /// Identifies the hex value 0x2E := 46
+        /// Defines 0x2e = 46
         /// </summary> 
-        X2E = 0x2E,
+        x2e = 0x2e,
 
         /// <summary> 
-        /// Identifies the hex value 0x2F := 47
+        /// Defines 0x2f = 47
         /// </summary> 
-        X2F = 0x2F,
+        x2f = 0x2f,
 
         /// <summary> 
-        /// Identifies the hex value 0x30 := 48
+        /// Defines 0x30 = 48
         /// </summary> 
-        X30 = 0x30,
+        x30 = 0x30,
 
         /// <summary> 
-        /// Identifies the hex value 0x31 := 49
+        /// Defines 0x31 = 49
         /// </summary> 
-        X31 = 0x31,
+        x31 = 0x31,
 
         /// <summary> 
-        /// Identifies the hex value 0x32 := 50
+        /// Defines 0x32 = 50
         /// </summary> 
-        X32 = 0x32,
+        x32 = 0x32,
 
         /// <summary> 
-        /// Identifies the hex value 0x33 := 51
+        /// Defines 0x33 = 51
         /// </summary> 
-        X33 = 0x33,
+        x33 = 0x33,
 
         /// <summary> 
-        /// Identifies the hex value 0x34 := 52
+        /// Defines 0x34 = 52
         /// </summary> 
-        X34 = 0x34,
+        x34 = 0x34,
 
         /// <summary> 
-        /// Identifies the hex value 0x35 := 53
+        /// Defines 0x35 = 53
         /// </summary> 
-        X35 = 0x35,
+        x35 = 0x35,
 
         /// <summary> 
-        /// Identifies the hex value 0x36 := 54
+        /// Defines 0x36 = 54
         /// </summary> 
-        X36 = 0x36,
+        x36 = 0x36,
 
         /// <summary> 
-        /// Identifies the hex value 0x37 := 55
+        /// Defines 0x37 = 55
         /// </summary> 
-        X37 = 0x37,
+        x37 = 0x37,
 
         /// <summary> 
-        /// Identifies the hex value 0x38 := 56
+        /// Defines 0x38 = 56
         /// </summary> 
-        X38 = 0x38,
+        x38 = 0x38,
 
         /// <summary> 
-        /// Identifies the hex value 0x39 := 57
+        /// Defines 0x39 = 57
         /// </summary> 
-        X39 = 0x39,
+        x39 = 0x39,
 
         /// <summary> 
-        /// Identifies the hex value 0x3A := 58
+        /// Defines 0x3a = 58
         /// </summary> 
-        X3A = 0x3A,
+        x3a = 0x3a,
 
         /// <summary> 
-        /// Identifies the hex value 0x3B := 59
+        /// Defines 0x3b = 59
         /// </summary> 
-        X3B = 0x3B,
+        x3b = 0x3b,
 
         /// <summary> 
-        /// Identifies the hex value 0x3C := 60
+        /// Defines 0x3c = 60
         /// </summary> 
-        X3C = 0x3C,
+        x3c = 0x3c,
 
         /// <summary> 
-        /// Identifies the hex value 0x3D := 61
+        /// Defines 0x3d = 61
         /// </summary> 
-        X3D = 0x3D,
+        x3d = 0x3D,
 
         /// <summary> 
-        /// Identifies the hex value 0x3E := 62
+        /// Defines 0x3e = 62
         /// </summary> 
-        X3E = 0x3E,
+        x3e = 0x3e,
 
         /// <summary> 
-        /// Identifies the hex value 0x3F := 63
+        /// Defines 0x3f = 63
         /// </summary> 
-        X3F = 0x3F,
+        x3f = 0x3f,
 
         /// <summary> 
-        /// Identifies the hex value 0x40 := 64
+        /// Defines 0x40 = 64
         /// </summary> 
-        X40 = 0x40,
+        x40 = 0x40,
 
         /// <summary> 
-        /// Identifies the hex value 0x41 := 65
+        /// Defines 0x41 = 65
         /// </summary> 
-        X41 = 0x41,
+        x41 = 0x41,
 
         /// <summary> 
-        /// Identifies the hex value 0x42 := 66
+        /// Defines 0x42 = 66
         /// </summary> 
-        X42 = 0x42,
+        x42 = 0x42,
 
         /// <summary> 
-        /// Identifies the hex value 0x43 := 67
+        /// Defines 0x43 = 67
         /// </summary> 
-        X43 = 0x43,
+        x43 = 0x43,
 
         /// <summary> 
-        /// Identifies the hex value 0x44 := 68
+        /// Defines 0x44 = 68
         /// </summary> 
-        X44 = 0x44,
+        x44 = 0x44,
 
         /// <summary> 
-        /// Identifies the hex value 0x45 := 69
+        /// Defines 0x45 = 69
         /// </summary> 
-        X45 = 0x45,
+        x45 = 0x45,
 
         /// <summary> 
-        /// Identifies the hex value 0x46 := 70
+        /// Defines 0x46 = 70
         /// </summary> 
-        X46 = 0x46,
+        x46 = 0x46,
 
         /// <summary> 
-        /// Identifies the hex value 0x47 := 71
+        /// Defines 0x47 = 71
         /// </summary> 
-        X47 = 0x47,
+        x47 = 0x47,
 
         /// <summary> 
-        /// Identifies the hex value 0x48 := 72
+        /// Defines 0x48 = 72
         /// </summary> 
-        X48 = 0x48,
+        x48 = 0x48,
 
         /// <summary> 
-        /// Identifies the hex value 0x49 := 73
+        /// Defines 0x49 = 73
         /// </summary> 
-        X49 = 0x49,
+        x49 = 0x49,
 
         /// <summary> 
-        /// Identifies the hex value 0x4A := 74
+        /// Defines 0x4a = 74
         /// </summary> 
-        X4A = 0x4A,
+        x4a = 0x4a,
 
         /// <summary> 
-        /// Identifies the hex value 0x4B := 75
+        /// Defines 0x4b = 75
         /// </summary> 
-        X4B = 0x4B,
+        x4b = 0x4b,
 
         /// <summary> 
-        /// Identifies the hex value 0x4C := 76
+        /// Defines 0x4c = 76
         /// </summary> 
-        X4C = 0x4C,
+        x4c = 0x4c,
 
         /// <summary> 
-        /// Identifies the hex value 0x4D := 77
+        /// Defines 0x4d = 77
         /// </summary> 
-        X4D = 0x4D,
+        x4d = 0x4D,
 
         /// <summary> 
-        /// Identifies the hex value 0x4E := 78
+        /// Defines 0x4e = 78
         /// </summary> 
-        X4E = 0x4E,
+        x4e = 0x4e,
 
         /// <summary> 
-        /// Identifies the hex value 0x4F := 79
+        /// Defines 0x4f = 79
         /// </summary> 
-        X4F = 0x4F,
+        x4f = 0x4f,
 
         /// <summary> 
-        /// Identifies the hex value 0x50 := 80
+        /// Defines 0x50 = 80
         /// </summary> 
-        X50 = 0x50,
+        x50 = 0x50,
 
         /// <summary> 
-        /// Identifies the hex value 0x51 := 81
+        /// Defines 0x51 = 81
         /// </summary> 
-        X51 = 0x51,
+        x51 = 0x51,
 
         /// <summary> 
-        /// Identifies the hex value 0x52 := 82
+        /// Defines 0x52 = 82
         /// </summary> 
-        X52 = 0x52,
+        x52 = 0x52,
 
         /// <summary> 
-        /// Identifies the hex value 0x53 := 83
+        /// Defines 0x53 = 83
         /// </summary> 
-        X53 = 0x53,
+        x53 = 0x53,
 
         /// <summary> 
-        /// Identifies the hex value 0x54 := 84
+        /// Defines 0x54 = 84
         /// </summary> 
-        X54 = 0x54,
+        x54 = 0x54,
 
         /// <summary> 
-        /// Identifies the hex value 0x55 := 85
+        /// Defines 0x55 = 85
         /// </summary> 
-        X55 = 0x55,
+        x55 = 0x55,
 
         /// <summary> 
-        /// Identifies the hex value 0x56 := 86
+        /// Defines 0x56 = 86
         /// </summary> 
-        X56 = 0x56,
+        x56 = 0x56,
 
         /// <summary> 
-        /// Identifies the hex value 0x57 := 87
+        /// Defines 0x57 = 87
         /// </summary> 
-        X57 = 0x57,
+        x57 = 0x57,
 
         /// <summary> 
-        /// Identifies the hex value 0x58 := 88
+        /// Defines 0x58 = 88
         /// </summary> 
-        X58 = 0x58,
+        x58 = 0x58,
 
         /// <summary> 
-        /// Identifies the hex value 0x59 := 89
+        /// Defines 0x59 = 89
         /// </summary> 
-        X59 = 0x59,
+        x59 = 0x59,
 
         /// <summary> 
-        /// Identifies the hex value 0x5A := 90
+        /// Defines 0x5a = 90
         /// </summary> 
-        X5A = 0x5A,
+        x5a = 0x5a,
 
         /// <summary> 
-        /// Identifies the hex value 0x5B := 91
+        /// Defines 0x5b = 91
         /// </summary> 
-        X5B = 0x5B,
+        x5b = 0x5b,
 
         /// <summary> 
-        /// Identifies the hex value 0x5C := 92
+        /// Defines 0x5c = 92
         /// </summary> 
-        X5C = 0x5C,
+        x5c = 0x5c,
 
         /// <summary> 
-        /// Identifies the hex value 0x5D := 93
+        /// Defines 0x5d = 93
         /// </summary> 
-        X5D = 0x5D,
+        x5d = 0x5D,
 
         /// <summary> 
-        /// Identifies the hex value 0x5E := 94
+        /// Defines 0x5e = 94
         /// </summary> 
-        X5E = 0x5E,
+        x5e = 0x5e,
 
         /// <summary> 
-        /// Identifies the hex value 0x5F := 95
+        /// Defines 0x5f = 95
         /// </summary> 
-        X5F = 0x5F,
+        x5f = 0x5f,
 
         /// <summary> 
-        /// Identifies the hex value 0x60 := 96
+        /// Defines 0x60 = 96
         /// </summary> 
-        X60 = 0x60,
+        x60 = 0x60,
 
         /// <summary> 
-        /// Identifies the hex value 0x61 := 97
+        /// Defines 0x61 = 97
         /// </summary> 
-        X61 = 0x61,
+        x61 = 0x61,
 
         /// <summary> 
-        /// Identifies the hex value 0x62 := 98
+        /// Defines 0x62 = 98
         /// </summary> 
-        X62 = 0x62,
+        x62 = 0x62,
 
         /// <summary> 
-        /// Identifies the hex value 0x63 := 99
+        /// Defines 0x63 = 99
         /// </summary> 
-        X63 = 0x63,
+        x63 = 0x63,
 
         /// <summary> 
-        /// Identifies the hex value 0x64 := 100
+        /// Defines 0x64 = 100
         /// </summary> 
-        X64 = 0x64,
+        x64 = 0x64,
 
         /// <summary> 
-        /// Identifies the hex value 0x65 := 101
+        /// Defines 0x65 = 101
         /// </summary> 
-        X65 = 0x65,
+        x65 = 0x65,
 
         /// <summary> 
-        /// Identifies the hex value 0x66 := 102
+        /// Defines 0x66 = 102
         /// </summary> 
-        X66 = 0x66,
+        x66 = 0x66,
 
         /// <summary> 
-        /// Identifies the hex value 0x67 := 103
+        /// Defines 0x67 = 103
         /// </summary> 
-        X67 = 0x67,
+        x67 = 0x67,
 
         /// <summary> 
-        /// Identifies the hex value 0x68 := 104
+        /// Defines 0x68 = 104
         /// </summary> 
-        X68 = 0x68,
+        x68 = 0x68,
 
         /// <summary> 
-        /// Identifies the hex value 0x69 := 105
+        /// Defines 0x69 = 105
         /// </summary> 
-        X69 = 0x69,
+        x69 = 0x69,
 
         /// <summary> 
-        /// Identifies the hex value 0x6A := 106
+        /// Defines 0x6a = 106
         /// </summary> 
-        X6A = 0x6A,
+        x6a = 0x6a,
 
         /// <summary> 
-        /// Identifies the hex value 0x6B := 107
+        /// Defines 0x6b = 107
         /// </summary> 
-        X6B = 0x6B,
+        x6b = 0x6b,
 
         /// <summary> 
-        /// Identifies the hex value 0x6C := 108
+        /// Defines 0x6c = 108
         /// </summary> 
-        X6C = 0x6C,
+        x6c = 0x6c,
 
         /// <summary> 
-        /// Identifies the hex value 0x6D := 109
+        /// Defines 0x6d = 109
         /// </summary> 
-        X6D = 0x6D,
+        x6d = 0x6D,
 
         /// <summary> 
-        /// Identifies the hex value 0x6E := 110
+        /// Defines 0x6e = 110
         /// </summary> 
-        X6E = 0x6E,
+        x6e = 0x6e,
 
         /// <summary> 
-        /// Identifies the hex value 0x6F := 111
+        /// Defines 0x6f = 111
         /// </summary> 
-        X6F = 0x6F,
+        x6f = 0x6f,
 
         /// <summary> 
-        /// Identifies the hex value 0x70 := 112
+        /// Defines 0x70 = 112
         /// </summary> 
-        X70 = 0x70,
+        x70 = 0x70,
 
         /// <summary> 
-        /// Identifies the hex value 0x71 := 113
+        /// Defines 0x71 = 113
         /// </summary> 
-        X71 = 0x71,
+        x71 = 0x71,
 
         /// <summary> 
-        /// Identifies the hex value 0x72 := 114
+        /// Defines 0x72 = 114
         /// </summary> 
-        X72 = 0x72,
+        x72 = 0x72,
 
         /// <summary> 
-        /// Identifies the hex value 0x73 := 115
+        /// Defines 0x73 = 115
         /// </summary> 
-        X73 = 0x73,
+        x73 = 0x73,
 
         /// <summary> 
-        /// Identifies the hex value 0x74 := 116
+        /// Defines 0x74 = 116
         /// </summary> 
-        X74 = 0x74,
+        x74 = 0x74,
 
         /// <summary> 
-        /// Identifies the hex value 0x75 := 117
+        /// Defines 0x75 = 117
         /// </summary> 
-        X75 = 0x75,
+        x75 = 0x75,
 
         /// <summary> 
-        /// Identifies the hex value 0x76 := 118
+        /// Defines 0x76 = 118
         /// </summary> 
-        X76 = 0x76,
+        x76 = 0x76,
 
         /// <summary> 
-        /// Identifies the hex value 0x77 := 119
+        /// Defines 0x77 = 119
         /// </summary> 
-        X77 = 0x77,
+        x77 = 0x77,
 
         /// <summary> 
-        /// Identifies the hex value 0x78 := 120
+        /// Defines 0x78 = 120
         /// </summary> 
-        X78 = 0x78,
+        x78 = 0x78,
 
         /// <summary> 
-        /// Identifies the hex value 0x79 := 121
+        /// Defines 0x79 = 121
         /// </summary> 
-        X79 = 0x79,
+        x79 = 0x79,
 
         /// <summary> 
-        /// Identifies the hex value 0x7A := 122
+        /// Defines 0x7a = 122
         /// </summary> 
-        X7A = 0x7A,
+        x7a = 0x7a,
 
         /// <summary> 
-        /// Identifies the hex value 0x7B := 123
+        /// Defines 0x7b = 123
         /// </summary> 
-        X7B = 0x7B,
+        x7b = 0x7b,
 
         /// <summary> 
-        /// Identifies the hex value 0x7C := 124
+        /// Defines 0x7c = 124
         /// </summary> 
-        X7C = 0x7C,
+        x7c = 0x7c,
 
         /// <summary> 
-        /// Identifies the hex value 0x7D := 125
+        /// Defines 0x7d = 125
         /// </summary> 
-        X7D = 0x7D,
+        x7d = 0x7D,
 
         /// <summary> 
-        /// Identifies the hex value 0x7E := 126
+        /// Defines 0x7e = 126
         /// </summary> 
-        X7E = 0x7E,
+        x7e = 0x7e,
 
         /// <summary> 
-        /// Identifies the hex value 0x7F := 127
+        /// Defines 0x7f = 127
         /// </summary> 
-        X7F = 0x7F,
+        x7f = 0x7f,
 
         /// <summary> 
-        /// Identifies the hex value 0x80 := 128
+        /// Defines 0x80 = 128
         /// </summary> 
-        X80 = 0x80,
+        x80 = 0x80,
 
         /// <summary> 
-        /// Identifies the hex value 0x81 := 129
+        /// Defines 0x81 = 129
         /// </summary> 
-        X81 = 0x81,
+        x81 = 0x81,
 
         /// <summary> 
-        /// Identifies the hex value 0x82 := 130
+        /// Defines 0x82 = 130
         /// </summary> 
-        X82 = 0x82,
+        x82 = 0x82,
 
         /// <summary> 
-        /// Identifies the hex value 0x83 := 131
+        /// Defines 0x83 = 131
         /// </summary> 
-        X83 = 0x83,
+        x83 = 0x83,
 
         /// <summary> 
-        /// Identifies the hex value 0x84 := 132
+        /// Defines 0x84 = 132
         /// </summary> 
-        X84 = 0x84,
+        x84 = 0x84,
 
         /// <summary> 
-        /// Identifies the hex value 0x85 := 133
+        /// Defines 0x85 = 133
         /// </summary> 
-        X85 = 0x85,
+        x85 = 0x85,
 
         /// <summary> 
-        /// Identifies the hex value 0x86 := 134
+        /// Defines 0x86 = 134
         /// </summary> 
-        X86 = 0x86,
+        x86 = 0x86,
 
         /// <summary> 
-        /// Identifies the hex value 0x87 := 135
+        /// Defines 0x87 = 135
         /// </summary> 
-        X87 = 0x87,
+        x87 = 0x87,
 
         /// <summary> 
-        /// Identifies the hex value 0x88 := 136
+        /// Defines 0x88 = 136
         /// </summary> 
-        X88 = 0x88,
+        x88 = 0x88,
 
         /// <summary> 
-        /// Identifies the hex value 0x89 := 137
+        /// Defines 0x89 = 137
         /// </summary> 
-        X89 = 0x89,
+        x89 = 0x89,
 
         /// <summary> 
-        /// Identifies the hex value 0x8A := 138
+        /// Defines 0x8a = 138
         /// </summary> 
-        X8A = 0x8A,
+        x8a = 0x8a,
 
         /// <summary> 
-        /// Identifies the hex value 0x8B := 139
+        /// Defines 0x8b = 139
         /// </summary> 
-        X8B = 0x8B,
+        x8b = 0x8b,
 
         /// <summary> 
-        /// Identifies the hex value 0x8C := 140
+        /// Defines 0x8c = 140
         /// </summary> 
-        X8C = 0x8C,
+        x8c = 0x8c,
 
         /// <summary> 
-        /// Identifies the hex value 0x8D := 141
+        /// Defines 0x8d = 141
         /// </summary> 
-        X8D = 0x8D,
+        x8d = 0x8D,
 
         /// <summary> 
-        /// Identifies the hex value 0x8E := 142
+        /// Defines 0x8e = 142
         /// </summary> 
-        X8E = 0x8E,
+        x8e = 0x8e,
 
         /// <summary> 
-        /// Identifies the hex value 0x8F := 143
+        /// Defines 0x8f = 143
         /// </summary> 
-        X8F = 0x8F,
+        x8f = 0x8f,
 
         /// <summary> 
-        /// Identifies the hex value 0x90 := 144
+        /// Defines 0x90 = 144
         /// </summary> 
-        X90 = 0x90,
+        x90 = 0x90,
 
         /// <summary> 
-        /// Identifies the hex value 0x91 := 145
+        /// Defines 0x91 = 145
         /// </summary> 
-        X91 = 0x91,
+        x91 = 0x91,
 
         /// <summary> 
-        /// Identifies the hex value 0x92 := 146
+        /// Defines 0x92 = 146
         /// </summary> 
-        X92 = 0x92,
+        x92 = 0x92,
 
         /// <summary> 
-        /// Identifies the hex value 0x93 := 147
+        /// Defines 0x93 = 147
         /// </summary> 
-        X93 = 0x93,
+        x93 = 0x93,
 
         /// <summary> 
-        /// Identifies the hex value 0x94 := 148
+        /// Defines 0x94 = 148
         /// </summary> 
-        X94 = 0x94,
+        x94 = 0x94,
 
         /// <summary> 
-        /// Identifies the hex value 0x95 := 149
+        /// Defines 0x95 = 149
         /// </summary> 
-        X95 = 0x95,
+        x95 = 0x95,
 
         /// <summary> 
-        /// Identifies the hex value 0x96 := 150
+        /// Defines 0x96 = 150
         /// </summary> 
-        X96 = 0x96,
+        x96 = 0x96,
 
         /// <summary> 
-        /// Identifies the hex value 0x97 := 151
+        /// Defines 0x97 = 151
         /// </summary> 
-        X97 = 0x97,
+        x97 = 0x97,
 
         /// <summary> 
-        /// Identifies the hex value 0x98 := 152
+        /// Defines 0x98 = 152
         /// </summary> 
-        X98 = 0x98,
+        x98 = 0x98,
 
         /// <summary> 
-        /// Identifies the hex value 0x99 := 153
+        /// Defines 0x99 = 153
         /// </summary> 
-        X99 = 0x99,
+        x99 = 0x99,
 
         /// <summary> 
-        /// Identifies the hex value 0x9A := 154
+        /// Defines 0x9a = 154
         /// </summary> 
-        X9A = 0x9A,
+        x9a = 0x9a,
 
         /// <summary> 
-        /// Identifies the hex value 0x9B := 155
+        /// Defines 0x9b = 155
         /// </summary> 
-        X9B = 0x9B,
+        x9b = 0x9b,
 
         /// <summary> 
-        /// Identifies the hex value 0x9C := 156
+        /// Defines 0x9c = 156
         /// </summary> 
-        X9C = 0x9C,
+        x9c = 0x9c,
 
         /// <summary> 
-        /// Identifies the hex value 0x9D := 157
+        /// Defines 0x9d = 157
         /// </summary> 
-        X9D = 0x9D,
+        x9d = 0x9D,
 
         /// <summary> 
-        /// Identifies the hex value 0x9E := 158
+        /// Defines 0x9e = 158
         /// </summary> 
-        X9E = 0x9E,
+        x9e = 0x9e,
 
         /// <summary> 
-        /// Identifies the hex value 0x9F := 159
+        /// Defines 0x9f = 159
         /// </summary> 
-        X9F = 0x9F,
+        x9f = 0x9f,
 
         /// <summary> 
-        /// Identifies the hex value 0xA0 := 160
+        /// Defines 0xa0 = 160
         /// </summary> 
-        XA0 = 0xA0,
+        xa0 = 0xa0,
 
         /// <summary> 
-        /// Identifies the hex value 0xA1 := 161
+        /// Defines 0xa1 = 161
         /// </summary> 
-        XA1 = 0xA1,
+        xa1 = 0xa1,
 
         /// <summary> 
-        /// Identifies the hex value 0xA2 := 162
+        /// Defines 0xa2 = 162
         /// </summary> 
-        XA2 = 0xA2,
+        xa2 = 0xa2,
 
         /// <summary> 
-        /// Identifies the hex value 0xA3 := 163
+        /// Defines 0xa3 = 163
         /// </summary> 
-        XA3 = 0xA3,
+        xa3 = 0xa3,
 
         /// <summary> 
-        /// Identifies the hex value 0xA4 := 164
+        /// Defines 0xa4 = 164
         /// </summary> 
-        XA4 = 0xA4,
+        xa4 = 0xa4,
 
         /// <summary> 
-        /// Identifies the hex value 0xA5 := 165
+        /// Defines 0xa5 = 165
         /// </summary> 
-        XA5 = 0xA5,
+        xa5 = 0xa5,
 
         /// <summary> 
-        /// Identifies the hex value 0xA6 := 166
+        /// Defines 0xa6 = 166
         /// </summary> 
-        XA6 = 0xA6,
+        xa6 = 0xa6,
 
         /// <summary> 
-        /// Identifies the hex value 0xA7 := 167
+        /// Defines 0xa7 = 167
         /// </summary> 
-        XA7 = 0xA7,
+        xa7 = 0xa7,
 
         /// <summary> 
-        /// Identifies the hex value 0xA8 := 168
+        /// Defines 0xa8 = 168
         /// </summary> 
-        XA8 = 0xA8,
+        xa8 = 0xa8,
 
         /// <summary> 
-        /// Identifies the hex value 0xA9 := 169
+        /// Defines 0xa9 = 169
         /// </summary> 
-        XA9 = 0xA9,
+        xa9 = 0xa9,
 
         /// <summary> 
-        /// Identifies the hex value 0xAA := 170
+        /// Defines 0xaa = 170
         /// </summary> 
-        XAA = 0xAA,
+        xaa = 0xaa,
 
         /// <summary> 
-        /// Identifies the hex value 0xAB := 171
+        /// Defines 0xab = 171
         /// </summary> 
-        XAB = 0xAB,
+        xab = 0xab,
 
         /// <summary> 
-        /// Identifies the hex value 0xAC := 172
+        /// Defines 0xac = 172
         /// </summary> 
-        XAC = 0xAC,
+        xac = 0xac,
 
         /// <summary> 
-        /// Identifies the hex value 0xAD := 173
+        /// Defines 0xad = 173
         /// </summary> 
-        XAD = 0xAD,
+        xad = 0xaD,
 
         /// <summary> 
-        /// Identifies the hex value 0xAE := 174
+        /// Defines 0xae = 174
         /// </summary> 
-        XAE = 0xAE,
+        xae = 0xae,
 
         /// <summary> 
-        /// Identifies the hex value 0xAF := 175
+        /// Defines 0xaf = 175
         /// </summary> 
-        XAF = 0xAF,
+        xaf = 0xaf,
 
         /// <summary> 
-        /// Identifies the hex value 0xB0 := 176
+        /// Defines 0xb0 = 176
         /// </summary> 
-        XB0 = 0xB0,
+        xb0 = 0xb0,
 
         /// <summary> 
-        /// Identifies the hex value 0xB1 := 177
+        /// Defines 0xb1 = 177
         /// </summary> 
-        XB1 = 0xB1,
+        xb1 = 0xb1,
 
         /// <summary> 
-        /// Identifies the hex value 0xB2 := 178
+        /// Defines 0xb2 = 178
         /// </summary> 
-        XB2 = 0xB2,
+        xb2 = 0xb2,
 
         /// <summary> 
-        /// Identifies the hex value 0xB3 := 179
+        /// Defines 0xb3 = 179
         /// </summary> 
-        XB3 = 0xB3,
+        xb3 = 0xb3,
 
         /// <summary> 
-        /// Identifies the hex value 0xB4 := 180
+        /// Defines 0xb4 = 180
         /// </summary> 
-        XB4 = 0xB4,
+        xb4 = 0xb4,
 
         /// <summary> 
-        /// Identifies the hex value 0xB5 := 181
+        /// Defines 0xb5 = 181
         /// </summary> 
-        XB5 = 0xB5,
+        xb5 = 0xb5,
 
         /// <summary> 
-        /// Identifies the hex value 0xB6 := 182
+        /// Defines 0xb6 = 182
         /// </summary> 
-        XB6 = 0xB6,
+        xb6 = 0xb6,
 
         /// <summary> 
-        /// Identifies the hex value 0xB7 := 183
+        /// Defines 0xb7 = 183
         /// </summary> 
-        XB7 = 0xB7,
+        xb7 = 0xb7,
 
         /// <summary> 
-        /// Identifies the hex value 0xB8 := 184
+        /// Defines 0xb8 = 184
         /// </summary> 
-        XB8 = 0xB8,
+        xb8 = 0xb8,
 
         /// <summary> 
-        /// Identifies the hex value 0xB9 := 185
+        /// Defines 0xb9 = 185
         /// </summary> 
-        XB9 = 0xB9,
+        xb9 = 0xb9,
 
         /// <summary> 
-        /// Identifies the hex value 0xBA := 186
+        /// Defines 0xba = 186
         /// </summary> 
-        XBA = 0xBA,
+        xba = 0xba,
 
         /// <summary> 
-        /// Identifies the hex value 0xBB := 187
+        /// Defines 0xbb = 187
         /// </summary> 
-        XBB = 0xBB,
+        xbb = 0xbb,
 
         /// <summary> 
-        /// Identifies the hex value 0xBC := 188
+        /// Defines 0xbc = 188
         /// </summary> 
-        XBC = 0xBC,
+        xbc = 0xbc,
 
         /// <summary> 
-        /// Identifies the hex value 0xBD := 189
+        /// Defines 0xbd = 189
         /// </summary> 
-        XBD = 0xBD,
+        xbd = 0xbD,
 
         /// <summary> 
-        /// Identifies the hex value 0xBE := 190
+        /// Defines 0xbe = 190
         /// </summary> 
-        XBE = 0xBE,
+        xbe = 0xbe,
 
         /// <summary> 
-        /// Identifies the hex value 0xBF := 191
+        /// Defines 0xbf = 191
         /// </summary> 
-        XBF = 0xBF,
+        xbf = 0xbf,
 
         /// <summary> 
-        /// Identifies the hex value 0xC0 := 192
+        /// Defines 0xc0 = 192
         /// </summary> 
-        XC0 = 0xC0,
+        xc0 = 0xc0,
 
         /// <summary> 
-        /// Identifies the hex value 0xC1 := 193
+        /// Defines 0xc1 = 193
         /// </summary> 
-        XC1 = 0xC1,
+        xc1 = 0xc1,
 
         /// <summary> 
-        /// Identifies the hex value 0xC2 := 194
+        /// Defines 0xc2 = 194
         /// </summary> 
-        XC2 = 0xC2,
+        xc2 = 0xc2,
 
         /// <summary> 
-        /// Identifies the hex value 0xC3 := 195
+        /// Defines 0xc3 = 195
         /// </summary> 
-        XC3 = 0xC3,
+        xc3 = 0xc3,
 
         /// <summary> 
-        /// Identifies the hex value 0xC4 := 196
+        /// Defines 0xc4 = 196
         /// </summary> 
-        XC4 = 0xC4,
+        xc4 = 0xc4,
 
         /// <summary> 
-        /// Identifies the hex value 0xC5 := 197
+        /// Defines 0xc5 = 197
         /// </summary> 
-        XC5 = 0xC5,
+        xc5 = 0xc5,
 
         /// <summary> 
-        /// Identifies the hex value 0xC6 := 198
+        /// Defines 0xc6 = 198
         /// </summary> 
-        XC6 = 0xC6,
+        xc6 = 0xc6,
 
         /// <summary> 
-        /// Identifies the hex value 0xC7 := 199
+        /// Defines 0xc7 = 199
         /// </summary> 
-        XC7 = 0xC7,
+        xc7 = 0xc7,
 
         /// <summary> 
-        /// Identifies the hex value 0xC8 := 200
+        /// Defines 0xc8 = 200
         /// </summary> 
-        XC8 = 0xC8,
+        xc8 = 0xc8,
 
         /// <summary> 
-        /// Identifies the hex value 0xC9 := 201
+        /// Defines 0xc9 = 201
         /// </summary> 
-        XC9 = 0xC9,
+        xc9 = 0xc9,
 
         /// <summary> 
-        /// Identifies the hex value 0xCA := 202
+        /// Defines 0xca = 202
         /// </summary> 
-        XCA = 0xCA,
+        xca = 0xca,
 
         /// <summary> 
-        /// Identifies the hex value 0xCB := 203
+        /// Defines 0xcb = 203
         /// </summary> 
-        XCB = 0xCB,
+        xcb = 0xcb,
 
         /// <summary> 
-        /// Identifies the hex value 0xCC := 204
+        /// Defines 0xcc = 204
         /// </summary> 
-        XCC = 0xCC,
+        xcc = 0xcc,
 
         /// <summary> 
-        /// Identifies the hex value 0xCD := 205
+        /// Defines 0xcd = 205
         /// </summary> 
-        XCD = 0xCD,
+        xcd = 0xcD,
 
         /// <summary> 
-        /// Identifies the hex value 0xCE := 206
+        /// Defines 0xce = 206
         /// </summary> 
-        XCE = 0xCE,
+        xce = 0xce,
 
         /// <summary> 
-        /// Identifies the hex value 0xCF := 207
+        /// Defines 0xcf = 207
         /// </summary> 
-        XCF = 0xCF,
+        xcf = 0xcf,
 
         /// <summary> 
-        /// Identifies the hex value 0xD0 := 208
+        /// Defines 0xD0 = 208
         /// </summary> 
-        XD0 = 0xD0,
+        xD0 = 0xD0,
 
         /// <summary> 
-        /// Identifies the hex value 0xD1 := 209
+        /// Defines 0xD1 = 209
         /// </summary> 
-        XD1 = 0xD1,
+        xD1 = 0xD1,
 
         /// <summary> 
-        /// Identifies the hex value 0xD2 := 210
+        /// Defines 0xD2 = 210
         /// </summary> 
-        XD2 = 0xD2,
+        xD2 = 0xD2,
 
         /// <summary> 
-        /// Identifies the hex value 0xD3 := 211
+        /// Defines 0xD3 = 211
         /// </summary> 
-        XD3 = 0xD3,
+        xD3 = 0xD3,
 
         /// <summary> 
-        /// Identifies the hex value 0xD4 := 212
+        /// Defines 0xD4 = 212
         /// </summary> 
-        XD4 = 0xD4,
+        xD4 = 0xD4,
 
         /// <summary> 
-        /// Identifies the hex value 0xD5 := 213
+        /// Defines 0xD5 = 213
         /// </summary> 
-        XD5 = 0xD5,
+        xD5 = 0xD5,
 
         /// <summary> 
-        /// Identifies the hex value 0xD6 := 214
+        /// Defines 0xD6 = 214
         /// </summary> 
-        XD6 = 0xD6,
+        xD6 = 0xD6,
 
         /// <summary> 
-        /// Identifies the hex value 0xD7 := 215
+        /// Defines 0xD7 = 215
         /// </summary> 
-        XD7 = 0xD7,
+        xD7 = 0xD7,
 
         /// <summary> 
-        /// Identifies the hex value 0xD8 := 216
+        /// Defines 0xD8 = 216
         /// </summary> 
-        XD8 = 0xD8,
+        xD8 = 0xD8,
 
         /// <summary> 
-        /// Identifies the hex value 0xD9 := 217
+        /// Defines 0xD9 = 217
         /// </summary> 
-        XD9 = 0xD9,
+        xD9 = 0xD9,
 
         /// <summary> 
-        /// Identifies the hex value 0xDA := 218
+        /// Defines 0xDa = 218
         /// </summary> 
-        XDA = 0xDA,
+        xDa = 0xDa,
 
         /// <summary> 
-        /// Identifies the hex value 0xDB := 219
+        /// Defines 0xDb = 219
         /// </summary> 
-        XDB = 0xDB,
+        xDb = 0xDb,
 
         /// <summary> 
-        /// Identifies the hex value 0xDC := 220
+        /// Defines 0xDc = 220
         /// </summary> 
-        XDC = 0xDC,
+        xDc = 0xDc,
 
         /// <summary> 
-        /// Identifies the hex value 0xDD := 221
+        /// Defines 0xDd = 221
         /// </summary> 
-        XDD = 0xDD,
+        xDd = 0xDD,
 
         /// <summary> 
-        /// Identifies the hex value 0xDE := 222
+        /// Defines 0xDe = 222
         /// </summary> 
-        XDE = 0xDE,
+        xDe = 0xDe,
 
         /// <summary> 
-        /// Identifies the hex value 0xDF := 223
+        /// Defines 0xDf = 223
         /// </summary> 
-        XDF = 0xDF,
+        xDf = 0xDf,
 
         /// <summary> 
-        /// Identifies the hex value 0xE0 := 224
+        /// Defines 0xe0 = 224
         /// </summary> 
-        XE0 = 0xE0,
+        xe0 = 0xe0,
 
         /// <summary> 
-        /// Identifies the hex value 0xE1 := 225
+        /// Defines 0xe1 = 225
         /// </summary> 
-        XE1 = 0xE1,
+        xe1 = 0xe1,
 
         /// <summary> 
-        /// Identifies the hex value 0xE2 := 226
+        /// Defines 0xe2 = 226
         /// </summary> 
-        XE2 = 0xE2,
+        xe2 = 0xe2,
 
         /// <summary> 
-        /// Identifies the hex value 0xE3 := 227
+        /// Defines 0xe3 = 227
         /// </summary> 
-        XE3 = 0xE3,
+        xe3 = 0xe3,
 
         /// <summary> 
-        /// Identifies the hex value 0xE4 := 228
+        /// Defines 0xe4 = 228
         /// </summary> 
-        XE4 = 0xE4,
+        xe4 = 0xe4,
 
         /// <summary> 
-        /// Identifies the hex value 0xE5 := 229
+        /// Defines 0xe5 = 229
         /// </summary> 
-        XE5 = 0xE5,
+        xe5 = 0xe5,
 
         /// <summary> 
-        /// Identifies the hex value 0xE6 := 230
+        /// Defines 0xe6 = 230
         /// </summary> 
-        XE6 = 0xE6,
+        xe6 = 0xe6,
 
         /// <summary> 
-        /// Identifies the hex value 0xE7 := 231
+        /// Defines 0xe7 = 231
         /// </summary> 
-        XE7 = 0xE7,
+        xe7 = 0xe7,
 
         /// <summary> 
-        /// Identifies the hex value 0xE8 := 232
+        /// Defines 0xe8 = 232
         /// </summary> 
-        XE8 = 0xE8,
+        xe8 = 0xe8,
 
         /// <summary> 
-        /// Identifies the hex value 0xE9 := 233
+        /// Defines 0xe9 = 233
         /// </summary> 
-        XE9 = 0xE9,
+        xe9 = 0xe9,
 
         /// <summary> 
-        /// Identifies the hex value 0xEA := 234
+        /// Defines 0xea = 234
         /// </summary> 
-        XEA = 0xEA,
+        xea = 0xea,
 
         /// <summary> 
-        /// Identifies the hex value 0xEB := 235
+        /// Defines 0xeb = 235
         /// </summary> 
-        XEB = 0xEB,
+        xeb = 0xeb,
 
         /// <summary> 
-        /// Identifies the hex value 0xEC := 236
+        /// Defines 0xec = 236
         /// </summary> 
-        XEC = 0xEC,
+        xec = 0xec,
 
         /// <summary> 
-        /// Identifies the hex value 0xED := 237
+        /// Defines 0xed = 237
         /// </summary> 
-        XED = 0xED,
+        xed = 0xeD,
 
         /// <summary> 
-        /// Identifies the hex value 0xEE := 238
+        /// Defines 0xee = 238
         /// </summary> 
-        XEE = 0xEE,
+        xee = 0xee,
 
         /// <summary> 
-        /// Identifies the hex value 0xEF := 239
+        /// Defines 0xef = 239
         /// </summary> 
-        XEF = 0xEF,
+        xef = 0xef,
 
         /// <summary> 
-        /// Identifies the hex value 0xF0 := 240
+        /// Defines 0xf0 = 240
         /// </summary> 
-        XF0 = 0xF0,
+        xf0 = 0xf0,
 
         /// <summary> 
-        /// Identifies the hex value 0xF1 := 241
+        /// Defines 0xf1 = 241
         /// </summary> 
-        XF1 = 0xF1,
+        xf1 = 0xf1,
 
         /// <summary> 
-        /// Identifies the hex value 0xF2 := 242
+        /// Defines 0xf2 = 242
         /// </summary> 
-        XF2 = 0xF2,
+        xf2 = 0xf2,
 
         /// <summary> 
-        /// Identifies the hex value 0xF3 := 243
+        /// Defines 0xf3 = 243
         /// </summary> 
-        XF3 = 0xF3,
+        xf3 = 0xf3,
 
         /// <summary> 
-        /// Identifies the hex value 0xF4 := 244
+        /// Defines 0xf4 = 244
         /// </summary> 
-        XF4 = 0xF4,
+        xf4 = 0xf4,
 
         /// <summary> 
-        /// Identifies the hex value 0xF5 := 245
+        /// Defines 0xf5 = 245
         /// </summary> 
-        XF5 = 0xF5,
+        xf5 = 0xf5,
 
         /// <summary> 
-        /// Identifies the hex value 0xF6 := 246
+        /// Defines 0xf6 = 246
         /// </summary> 
-        XF6 = 0xF6,
+        xf6 = 0xf6,
 
         /// <summary> 
-        /// Identifies the hex value 0xF7 := 247
+        /// Defines 0xf7 = 247
         /// </summary> 
-        XF7 = 0xF7,
+        xf7 = 0xf7,
 
         /// <summary> 
-        /// Identifies the hex value 0xF8 := 248
+        /// Defines 0xf8 = 248
         /// </summary> 
-        XF8 = 0xF8,
+        xf8 = 0xf8,
 
         /// <summary> 
-        /// Identifies the hex value 0xF9 := 249
+        /// Defines 0xf9 = 249
         /// </summary> 
-        XF9 = 0xF9,
+        xf9 = 0xf9,
 
         /// <summary> 
-        /// Identifies the hex value 0xFA := 250
+        /// Defines 0xfa = 250
         /// </summary> 
-        XFA = 0xFA,
+        xfa = 0xfa,
 
         /// <summary> 
-        /// Identifies the hex value 0xFB := 251
+        /// Defines 0xfb = 251
         /// </summary> 
-        XFB = 0xFB,
+        xfb = 0xfb,
 
         /// <summary> 
-        /// Identifies the hex value 0xFC := 252
+        /// Defines 0xfc = 252
         /// </summary> 
-        XFC = 0xFC,
+        xfc = 0xfc,
 
         /// <summary> 
-        /// Identifies the hex value 0xFD := 253
+        /// Defines 0xfd = 253
         /// </summary> 
-        XFD = 0xFD,
+        xfd = 0xfD,
 
         /// <summary> 
-        /// Identifies the hex value 0xFE := 254
+        /// Defines 0xfe = 254
         /// </summary> 
-        XFE = 0xFE,
+        xfe = 0xfe,
 
         /// <summary> 
-        /// Identifies the hex value 0xFF := 255
+        /// Defines 0xff = 255
         /// </summary> 
-        XFF = 0xFF,
+        xff = 0xff,
     }
 }

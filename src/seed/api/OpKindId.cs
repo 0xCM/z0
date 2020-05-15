@@ -257,7 +257,7 @@ namespace Z0
 
         Srlx,
 
-        BitSeg,
+        Extract,
 
         TestBit,
 
@@ -269,7 +269,6 @@ namespace Z0
 
         Slice,
 
-        BitCopy,
 
         BitCell,
 
@@ -347,6 +346,7 @@ namespace Z0
         /// </summary>
         Switch,
 
+        Copy,
 
     }    
 }

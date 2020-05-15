@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var n = bitsize<T>();
-            var dst = gbits.bitclear(maxval<T>(), first, count);           
+            var dst = gbits.clear(maxval<T>(), first, count);           
             var bs = BitString.scalar(dst);
             Claim.eq(bs.Length, n);
             for(var i=0; i<bs.Length; i++)

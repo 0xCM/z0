@@ -14,7 +14,7 @@ namespace Z0.Asm
     /// <summary>
     /// Collects sequences instructions from part-defined api hosts
     /// </summary>         
-    public readonly struct PartInstructions
+    public readonly struct PartInstructions: IIndex<HostInstructions>
     {
         public static PartInstructions Empty => new PartInstructions(PartId.None, Control.array<HostInstructions>());
 
@@ -28,7 +28,9 @@ namespace Z0.Asm
         /// </summary>
         public PartId Part {get;}
 
-        public int HostCount => Content.Length;
+        public ref HostInstructions this[int index] => ref Content[index];
+
+        public int Length { [MethodImpl(Inline)] get => Content.Length;}
 
         /// <summary>
         /// The total instruction count
