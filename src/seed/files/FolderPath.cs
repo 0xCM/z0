@@ -107,7 +107,9 @@ namespace Z0
         /// Nonrecursively enumerates the folder's subfolders
         /// </summary>
         public FolderPath[] SubDirs
-            => Directory.EnumerateDirectories(Name).Map(FolderPath.Define);
+            => Directory.Exists(Name) 
+            ? Directory.EnumerateDirectories(Name).Map(FolderPath.Define) 
+            : Control.array<FolderPath>();
 
         /// <summary>
         /// Nonrecursively enumerates all files in the folder

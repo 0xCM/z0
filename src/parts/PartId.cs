@@ -179,7 +179,7 @@ public enum PartId : ulong
 
     ZXed = 25000,
 
-    Cmd = ZXed + 1,
+    Commands = ZXed + 1,
 
     CoreTest = Core | Test,
 

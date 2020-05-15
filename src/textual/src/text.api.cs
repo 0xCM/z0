@@ -132,8 +132,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The character to replicate</param>
         /// <param name="count">The replication count</param>
-        public static IEnumerable<char> replicate(char src, int count)
-            => new string(src,count);
+        public static ReadOnlySpan<char> replicate(char src, int count)
+            => new string(src,count);        
 
         /// <summary>
         /// Repeats a string a specified number of times
@@ -241,6 +241,7 @@ namespace Z0
                 builder.AppendLine(item);
             return builder.ToString();
         }
+
 
         /// <summary>
         /// Creates a new string by weaving a specified character between each character in the source

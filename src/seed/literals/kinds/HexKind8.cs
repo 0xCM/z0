@@ -6,6 +6,12 @@ namespace Z0
 {
     using System;
     
+    partial class XTend
+    {
+        public static string Format(this HexKind src)
+            => ((byte)src).FormatHex(true,false);
+    }
+
     /// <summary>
     /// Defines identifiers corresponding to each value that can be represented with an 8-bit unsigned integer
     /// </summary>
@@ -1052,84 +1058,84 @@ namespace Z0
         xcf = 0xcf,
 
         /// <summary> 
-        /// Defines 0xD0 = 208
+        /// Defines 0xd0 = 208
         /// </summary> 
-        xD0 = 0xD0,
+        xd0 = 0xd0,
 
         /// <summary> 
-        /// Defines 0xD1 = 209
+        /// Defines 0xd1 = 209
         /// </summary> 
-        xD1 = 0xD1,
+        xd1 = 0xd1,
 
         /// <summary> 
-        /// Defines 0xD2 = 210
+        /// Defines 0xd2 = 210
         /// </summary> 
-        xD2 = 0xD2,
+        xd2 = 0xd2,
 
         /// <summary> 
-        /// Defines 0xD3 = 211
+        /// Defines 0xd3 = 211
         /// </summary> 
-        xD3 = 0xD3,
+        xd3 = 0xd3,
 
         /// <summary> 
-        /// Defines 0xD4 = 212
+        /// Defines 0xd4 = 212
         /// </summary> 
-        xD4 = 0xD4,
+        xd4 = 0xd4,
 
         /// <summary> 
-        /// Defines 0xD5 = 213
+        /// Defines 0xd5 = 213
         /// </summary> 
-        xD5 = 0xD5,
+        xd5 = 0xd5,
 
         /// <summary> 
-        /// Defines 0xD6 = 214
+        /// Defines 0xd6 = 214
         /// </summary> 
-        xD6 = 0xD6,
+        xd6 = 0xd6,
 
         /// <summary> 
-        /// Defines 0xD7 = 215
+        /// Defines 0xd7 = 215
         /// </summary> 
-        xD7 = 0xD7,
+        xd7 = 0xd7,
 
         /// <summary> 
-        /// Defines 0xD8 = 216
+        /// Defines 0xd8 = 216
         /// </summary> 
-        xD8 = 0xD8,
+        xd8 = 0xd8,
 
         /// <summary> 
-        /// Defines 0xD9 = 217
+        /// Defines 0xd9 = 217
         /// </summary> 
-        xD9 = 0xD9,
+        xd9 = 0xd9,
 
         /// <summary> 
-        /// Defines 0xDa = 218
+        /// Defines 0xda = 218
         /// </summary> 
-        xDa = 0xDa,
+        xda = 0xda,
 
         /// <summary> 
-        /// Defines 0xDb = 219
+        /// Defines 0xdb = 219
         /// </summary> 
-        xDb = 0xDb,
+        xdb = 0xdb,
 
         /// <summary> 
-        /// Defines 0xDc = 220
+        /// Defines 0xdc = 220
         /// </summary> 
-        xDc = 0xDc,
+        xdc = 0xdc,
 
         /// <summary> 
-        /// Defines 0xDd = 221
+        /// Defines 0xdd = 221
         /// </summary> 
-        xDd = 0xDD,
+        xdd = 0xdD,
 
         /// <summary> 
-        /// Defines 0xDe = 222
+        /// Defines 0xde = 222
         /// </summary> 
-        xDe = 0xDe,
+        xde = 0xde,
 
         /// <summary> 
-        /// Defines 0xDf = 223
+        /// Defines 0xdf = 223
         /// </summary> 
-        xDf = 0xDf,
+        xdf = 0xdf,
 
         /// <summary> 
         /// Defines 0xe0 = 224
