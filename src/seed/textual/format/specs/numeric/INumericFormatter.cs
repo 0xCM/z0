@@ -13,11 +13,11 @@ namespace Z0
     public interface INumericFormatter<T> : INumericFormatter, IFormatter<T>
         where T : unmanaged
     {
-        string Format(T src, NumericBase @base);
+        string Format(T src, NumericBaseKind @base);
 
 
         string IFormatter<T>.Format(T src)
-            => Format(src, NumericBase.Decimal);        
+            => Format(src, NumericBaseKind.D);        
     }
 
     public interface INumericFormatter<F,T> : INumericFormatter<T>

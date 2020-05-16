@@ -17,52 +17,36 @@ namespace Z0.Asm
     /// </summary>
     public enum RegisterSymbol : ulong
     {
-        [Literal("The 8-bit AL general-purpose register")]
         AL = K.AL,
         
-        [Literal("The 8-bit CL general-purpose register")]        
         CL = K.CL,
         
-        [Literal("The 8-bit DL general-purpose register")]
         DL = K.DL,        
         
-        [Literal("The 8-bit BL general-purpose register")]        
         BL = K.BL,
 
-        [Literal("The 8-bit SIL general-purpose register")]
         SIL = K.SIL,
 
-        [Literal("The 8-bit DIL general-purpose register")]
         DIL = K.DIL,
 
-        [Literal("The 8-bit SPL general-purpose register")]
         SPL = K.SPL,
 
-        [Literal("The 8-bit BPL general-purpose register")]
         BPL = K.BPL,
 
-        [Literal("The 8-bit R8B general-purpose register")]
         R8B = K.R8B,
 
-        [Literal("The 8-bit R9B general-purpose register")]
         R9B = K.R9B,
         
-        [Literal("The 8-bit R10B general-purpose register")]        
         R10B = K.R10B,
 
-        [Literal("The 8-bit R11B general-purpose register")]        
         R11B = IX11 | GP | W8,
         
-        [Literal("The 8-bit R12B general-purpose register")]        
         R12B = IX12 | GP | W8,
         
-        [Literal("The 8-bit R13B general-purpose register")]        
         R13B = IX13 | GP | W8,
         
-        [Literal("The 8-bit R14B general-purpose register")]        
         R14B = IX14 | GP | W8,
         
-        [Literal("The 8-bit R15B general-purpose register")]        
         R15B = IX15 | GP | W8,
         
         [Literal("The 16-bit AX general-purpose register")]        
@@ -110,36 +94,24 @@ namespace Z0.Asm
         [Literal("The 16-bit R14W general-purpose register")]        
         R14W = IX14 | GP | W16,
         
-        [Literal("The 16-bit R15W general-purpose register")]        
         R15W = IX15 | GP | W16,
         
-        [Literal("The 32-bit EAX general-purpose register")]        
         EAX = IX0 | GP | W32,
         
-        [Literal("The 32-bit ECX general-purpose register")]        
         ECX = IX1 | GP | W32,
         
-        [Literal("The 32-bit EDX general-purpose register")]        
         EDX = IX2 | GP | W32,
         
-        [Literal("The 32-bit EBX general-purpose register")]        
         EBX = IX3 | GP | W32,
         
-        [Literal("The 32-bit ESI general-purpose register")]        
         ESI = IX4 | GP | W32,
         
-        [Literal("The 32-bit EDI general-purpose register")]        
         EDI = IX5 | GP | W32,
-
         
-        [Literal("The 32-bit ESP general-purpose register")]        
         ESP = IX6 | GP | W32,
 
-        
-        [Literal("The 32-bit EBP general-purpose register")]        
         EBP = IX7 | GP | W32,
         
-        [Literal("The 32-bit R8D general-purpose register")]        
         R8D = IX8 | GP | W32,
         
         [Literal("The 32-bit R9D general-purpose register")]        
@@ -160,38 +132,26 @@ namespace Z0.Asm
         [Literal("The 32-bit R14D general-purpose register")]        
         R14D = IX14 | GP | W32,
         
-        [Literal("The 32-bit R15D general-purpose register")]        
         R15D = IX15 | GP | W32,
         
-        [Literal("The 64-bit RAX general-purpose register")]        
         RAX = IX0 | GP | W64,
         
-        [Literal("The 64-bit RCX general-purpose register")]        
         RCX = IX1 | GP | W64,
         
-        [Literal("The 64-bit RDX general-purpose register")]        
         RDX = IX2 | GP | W64, 
         
-        [Literal("The 64-bit RBX general-purpose register")]        
         RBX = IX3 | GP | W64, 
         
-        [Literal("The 64-bit RSI general-purpose register")]        
         RSI = IX4 | GP | W64, 
         
-        [Literal("The 64-bit RDI general-purpose register")]        
         RDI = IX5 | GP | W64, 
         
-        [Literal("The 64-bit RSP general-purpose register")]        
         RSP = IX6 | GP | W64, 
         
-        [Literal("The 64-bit RBP general-purpose register")]        
         RBP = IX7 | GP | W64, 
         
-        [Literal("The 64-bit R8 general-purpose register")]        
         R8 = IX8 | GP | W64, 
-
         
-        [Literal("The 64-bit R9 general-purpose register")]        
         R9 = IX9 | GP | W64, 
         
         [Literal("The 64-bit R10 general-purpose register")]        
@@ -616,33 +576,20 @@ namespace Z0.Asm
         
         [Literal("The 512-bit ZMM[24] vectorized register")]        
         ZMM24 = IX24 | Vec | W512,
-
-        
-        [Literal("The 512-bit ZMM[25] vectorized register")]
         
         ZMM25 = IX25 | Vec | W512,
         
-        [Literal("The 512-bit ZMM[26] vectorized register")]
-        
         ZMM26 = IX26 | Vec | W512,
-        
-        [Literal("The 512-bit ZMM[27] vectorized register")]
-        
+
         ZMM27 = IX27 | Vec | W512,
-        
-        [Literal("The 512-bit ZMM[28] vectorized register")]
         
         ZMM28 = IX28 | Vec | W512,
         
-        [Literal("The 512-bit ZMM[29] vectorized register")]
-        
         ZMM29 = IX29 | Vec | W512,
         
-        [Literal("The 512-bit ZMM[30] vectorized register")]
-        
+       
         ZMM30 = IX30 | Vec | W512,
         
-        [Literal("The 512-bit ZMM[31] vectorized register")]
         ZMM31 = IX31 | Vec | W512,
     }
 }

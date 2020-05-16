@@ -55,9 +55,9 @@ namespace Z0
         public static implicit operator ushort(analog src)
             => src.data;
 
-        [MethodImpl(Inline)]
-        public static explicit operator uint4_t(analog src)
-            => uint4_t.From(src.data);
+        // [MethodImpl(Inline)]
+        // public static explicit operator uint4_t(analog src)
+        //     => uint4_t.From(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator uint16_t(analog src)

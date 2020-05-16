@@ -13,9 +13,14 @@ namespace Z0
     public static class BitFormatter
     {
         [MethodImpl(Inline)]
-        public static IFormatter<BitFormatConfig,T> Define<T>(BitFormatConfig config = default)
+        public static string format<T>(T src)
             where T : struct
-                => new BitFormatter<T>(config);
+                => create<T>().Format(src);
+
+        [MethodImpl(Inline)]
+        public static BitFormatter<T> create<T>()
+            where T : struct
+                => new BitFormatter<T>();
     }
 
     /// <summary>
@@ -24,19 +29,13 @@ namespace Z0
     public readonly struct BitFormatter<T> : IFormatter<BitFormatConfig,T>
         where T : struct
     {            
-        readonly BitFormatConfig DefaultConfig;
-        
-        [MethodImpl(Inline)]
-        internal BitFormatter(BitFormatConfig config)
-        {
-            DefaultConfig = config;
-        }
-
         public string Format(T src, in BitFormatConfig config)
         {
             var bytes = Bytes.from(ref src);
-            Span<char> dst = new char[bytes.Length*8];
+            var bits = bytes.Length*8;
+            Span<char> dst = stackalloc char[bits];
             dst.Fill(bit.Zero);
+
             var k=0;
             for(var i=0; i<bytes.Length; i++)
             {
@@ -45,16 +44,22 @@ namespace Z0
                     if(k>=config.MaxBitCount)
                         break;
 
-                    seek(dst,k) = bit.test(skip(bytes, i),j).ToChar();            
+                    seek(dst, k) = bit.test(skip(bytes, i), j).ToChar();            
                 }
                 if(k >= config.MaxBitCount)
                     break;
             }
             
             dst.Reverse();
+            
             var bs =new string(dst);                
+            
             if(config.TrimLeadingZeros)
                 bs = bs.TrimStart(bit.Zero);
+            
+            if(config.ZPad != 0)
+                bs = bs.PadLeft(config.ZPad, bit.Zero);
+            
             if(config.BlockWidth != 0)
                 bs = string.Join(config.BlockSep, bs.Partition(config.BlockWidth));
             
@@ -62,6 +67,6 @@ namespace Z0
         }
 
         public string Format(T src)
-            => Format(src, DefaultConfig);
+            => Format(src, BitFormatConfig.Default);
     }
 }

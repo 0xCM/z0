@@ -1,4 +1,0 @@
-|  *                | The moffs8, moffs16, moffs32 and moffs64 operands specify a simple offset relative to the segment base,
-|  *                | where 8, 16, 32 and 64 refer to the size of the data. The address-size attribute of the instruction determines the size of the offset,
-|  *                | either 16, 32 or 64 bits.
-| ***               | In 64-bit mode, r/m8 can not be encoded to access the following byte registers if a REX prefix is used: AH, BH, CH, DH.

@@ -1,5 +1,0 @@
-| Op/En | Operand 1         | Operand 2     | Operand 3 | Operand 4 |
-| RM    | ModRM:reg (r)     | ModRM:r/m (r) | NA        | NA        |
-| MR    | ModRM:r/m (r)     | ModRM:reg (r) | NA        | NA        |
-| MI    | ModRM:r/m (r)     | imm8/16/32    | NA        | NA        |
-| I     | AL/AX/EAX/RAX (r) | imm8/16/32    | NA        | NA        |

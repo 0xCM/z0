@@ -1,2 +1,3 @@
 export ProjectId=zxed
-export ScriptDir=$ZDev/src/.scripts
+export AreaId=commands
+export ScriptDir=$ZDev/src/$AreaId/.scripts

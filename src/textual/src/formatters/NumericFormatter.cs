@@ -12,12 +12,12 @@ namespace Z0
     public static class NumericFormatter
     {
         [MethodImpl(Inline)]
-        public static INumericFormatter<T> Define<T>(Func<T,string> f, Func<T,NumericBase,string> g)
+        public static INumericFormatter<T> Define<T>(Func<T,string> f, Func<T,NumericBaseKind,string> g)
             where T : unmanaged
                 => new FunctionalNumericFormatter<T>(f,g);
 
         [MethodImpl(Inline)]
-        public static INumericFormatter<T> Define<T>(Func<T,NumericBase,string> g)
+        public static INumericFormatter<T> Define<T>(Func<T,NumericBaseKind,string> g)
             where T : unmanaged
                 => new FunctionalNumericFormatter<T>(g);
     }
@@ -32,7 +32,7 @@ namespace Z0
             => Formatter = formatter;
 
         [MethodImpl(Inline)]
-        public string Format(T src, NumericBase @base)
+        public string Format(T src, NumericBaseKind @base)
             => Formatter.Format(src, @base);
         
         [MethodImpl(Inline)]
@@ -56,7 +56,7 @@ namespace Z0
             => Formatter = formatter;
 
         [MethodImpl(Inline)]
-        public string Format(T src, NumericBase @base)
+        public string Format(T src, NumericBaseKind @base)
             => Formatter.Format(src, @base);
 
         [MethodImpl(Inline)]
@@ -74,24 +74,24 @@ namespace Z0
     {
         readonly Func<T,string> F;        
 
-        readonly Func<T,NumericBase,string> G;        
+        readonly Func<T,NumericBaseKind,string> G;        
 
         [MethodImpl(Inline)]
-        internal FunctionalNumericFormatter(Func<T,string> f, Func<T,NumericBase,string> g)
+        internal FunctionalNumericFormatter(Func<T,string> f, Func<T,NumericBaseKind,string> g)
         {
             this.F = f;
             this.G = g;
         }
 
         [MethodImpl(Inline)]
-        internal FunctionalNumericFormatter(Func<T,NumericBase,string> g)
+        internal FunctionalNumericFormatter(Func<T,NumericBaseKind,string> g)
         {
-            this.F = (t => g(t,NumericBase.Decimal));
+            this.F = (t => g(t,NumericBaseKind.D));
             this.G = g;
         }
 
         [MethodImpl(Inline)]
-        public string Format(T src, NumericBase @base)
+        public string Format(T src, NumericBaseKind @base)
             => G(src, @base);
 
         [MethodImpl(Inline)]

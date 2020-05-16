@@ -117,10 +117,10 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public string Format(byte src, NumericBase @base)
+            public string Format(byte src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => src.FormatBits(),
-                    NumericBase.Hex => src.FormatHex(),                
+                    NumericBaseKind.B => src.FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -133,10 +133,10 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public string Format(sbyte src, NumericBase @base)
+            public string Format(sbyte src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => src.FormatBits(),
-                    NumericBase.Hex => src.FormatHex(),                
+                    NumericBaseKind.B => src.FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(),                
                     _ => src.ToString()
                 };
             
@@ -150,10 +150,10 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public string Format(ushort src, NumericBase @base)
+            public string Format(ushort src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => src.FormatBits(),
-                    NumericBase.Hex => src.FormatHex(),                
+                    NumericBaseKind.B => src.FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -165,10 +165,10 @@ namespace Z0
         readonly struct I16Formatter : INumericFormatter<I16Formatter, short>
         {
             [MethodImpl(Inline)]
-            public string Format(short src, NumericBase @base)
+            public string Format(short src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => src.FormatBits(),
-                    NumericBase.Hex => src.FormatHex(),                
+                    NumericBaseKind.B => src.FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -180,10 +180,10 @@ namespace Z0
         readonly struct I32Formatter : INumericFormatter<I32Formatter, int>
         {
             [MethodImpl(Inline)]
-            public string Format(int src, NumericBase @base)
+            public string Format(int src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => src.FormatBits(),
-                    NumericBase.Hex => src.FormatHex(),                
+                    NumericBaseKind.B => src.FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -195,10 +195,10 @@ namespace Z0
         readonly struct U32Formatter : INumericFormatter<U32Formatter, uint>
         {
             [MethodImpl(Inline)]
-            public string Format(uint src, NumericBase @base)
+            public string Format(uint src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => src.FormatBits(),
-                    NumericBase.Hex => src.FormatHex(),                
+                    NumericBaseKind.B => src.FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -210,10 +210,10 @@ namespace Z0
         readonly struct U64Formatter : INumericFormatter<U64Formatter, ulong>
         {
             [MethodImpl(Inline)]
-            public string Format(ulong src, NumericBase @base)
+            public string Format(ulong src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => src.FormatBits(),
-                    NumericBase.Hex => src.FormatHex(),                
+                    NumericBaseKind.B => src.FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -225,10 +225,10 @@ namespace Z0
         readonly struct I64Formatter : INumericFormatter<I64Formatter, long>
         {
             [MethodImpl(Inline)]
-            public string Format(long src, NumericBase @base)
+            public string Format(long src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => src.FormatBits(),
-                    NumericBase.Hex => src.FormatHex(),                
+                    NumericBaseKind.B => src.FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -240,10 +240,10 @@ namespace Z0
         readonly struct F32Formatter : INumericFormatter<F32Formatter, float>
         {
             [MethodImpl(Inline)]
-            public string Format(float src, NumericBase @base)
+            public string Format(float src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => BitConvert.ToUInt64(src).FormatBits(),
-                    NumericBase.Hex => src.FormatHex(false),
+                    NumericBaseKind.B => BitConvert.ToUInt64(src).FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(false),
                     _ => src.ToString()
                 };
 
@@ -255,10 +255,10 @@ namespace Z0
         readonly struct F64Formatter : INumericFormatter<F64Formatter, double>
         {
             [MethodImpl(Inline)]
-            public string Format(double src, NumericBase @base)
+            public string Format(double src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBase.Binary => BitConvert.ToUInt64(src).FormatBits(),
-                    NumericBase.Hex => src.FormatHex(false),
+                    NumericBaseKind.B => BitConvert.ToUInt64(src).FormatBits(),
+                    NumericBaseKind.X => src.FormatHex(false),
                     _ => src.ToString()
                 };
 

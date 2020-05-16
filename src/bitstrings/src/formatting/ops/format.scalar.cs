@@ -33,31 +33,31 @@ namespace Z0
         public static string format(ulong src, BitFormatConfig config)
             => format(src. ToBitString(config.MaxBitCount), config);
 
-        public static string format(byte src, NumericBase @base)
+        public static string format(byte src, NumericBaseKind @base)
             => @base switch{
-                NumericBase.Binary => src.FormatBits(),
-                NumericBase.Hex => src.FormatHex(),
+                NumericBaseKind.B => src.FormatBits(),
+                NumericBaseKind.X => src.FormatHex(),
                 _=> src.ToString(),
             };                    
 
-        public static string format(ushort src, NumericBase @base)
+        public static string format(ushort src, NumericBaseKind @base)
             => @base switch{
-                NumericBase.Binary => src.FormatBits(),
-                NumericBase.Hex => src.FormatHex(),
+                NumericBaseKind.B => src.FormatBits(),
+                NumericBaseKind.X => src.FormatHex(),
                 _=> src.ToString(),
             };                    
 
-        public static string format(uint src, NumericBase @base)
+        public static string format(uint src, NumericBaseKind @base)
             => @base switch{
-                NumericBase.Binary => src.FormatBits(),
-                NumericBase.Hex => src.FormatHex(),
+                NumericBaseKind.B => src.FormatBits(),
+                NumericBaseKind.X => src.FormatHex(),
                 _=> src.ToString(),
             };                    
 
-        public static string format(ulong src, NumericBase @base)
+        public static string format(ulong src, NumericBaseKind @base)
             => @base switch{
-                NumericBase.Binary => src.FormatBits(),
-                NumericBase.Hex => src.FormatHex(),
+                NumericBaseKind.B => src.FormatBits(),
+                NumericBaseKind.X => src.FormatHex(),
                 _=> src.ToString(),
             };      
     }

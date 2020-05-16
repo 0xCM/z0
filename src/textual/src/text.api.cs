@@ -35,11 +35,7 @@ namespace Z0
         /// <summary>
         /// The non-null empty string
         /// </summary>
-        public static string blank
-        {
-            [MethodImpl(Inline)]
-            get => string.Empty;
-        }
+        public const string blank = "";
         
         /// <summary>
         /// Creates a string of the form "lhs := rhs"

@@ -39,7 +39,7 @@ namespace Z0
                 => src.Formatter.Format(src);
 
         [MethodImpl(Inline)]
-        public static string numeric<F>(F src, NumericBase @base)
+        public static string numeric<F>(F src, NumericBaseKind @base)
             where F : unmanaged, INumericFormatProvider<F>
                 => src.Formatter.Format(src, @base);
 

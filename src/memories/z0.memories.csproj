@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Typed)" />
     <ProjectReference Include="$(Enums)" />
+    <ProjectReference Include="$(Symbolic)" />
   </ItemGroup>
 
 </Project>

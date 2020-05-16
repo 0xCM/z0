@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static Seed;
-    using static HexKind;
 
     public interface IHexHandler
     {

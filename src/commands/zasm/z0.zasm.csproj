@@ -15,7 +15,7 @@
 
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <EmbeddedResource Include="res/RegisterLayout.GP.csv" LogicalName="RegisterLayout.GP.csv" /> 
     <EmbeddedResource Include="res/RegisterLayout.Vec.csv" LogicalName="RegisterLayout.Vec.csv" /> 
   </ItemGroup>
@@ -24,6 +24,6 @@
     <EmbeddedResource Include="specs/instructions/cmp.csv" LogicalName="cmp.csv" /> 
     <EmbeddedResource Include="specs/instructions/jcc.csv" LogicalName="jcc.csv" /> 
     <EmbeddedResource Include="specs/instructions/mov.csv" LogicalName="mov.csv" /> 
-  </ItemGroup>
+  </ItemGroup> -->
 
 </Project>

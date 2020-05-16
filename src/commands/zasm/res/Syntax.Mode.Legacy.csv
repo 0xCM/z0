@@ -1,4 +1,0 @@
-| Identifier | Symbol | Description                                                              |
-| Yea        | V      | Supported.                                                               |
-| Nea        | I      | Not supported.                                                           |
-| NE         | N.E.   | Indicates an Intel 64 instruction mnemonics/syntax that is not encodable |
