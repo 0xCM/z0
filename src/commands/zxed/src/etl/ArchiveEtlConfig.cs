@@ -11,7 +11,7 @@ namespace Z0.Xed
     using xed_ext = xed_extension_enum_t;
     using xed_cat = xed_category_enum_t;
 
-    public readonly struct ArchiveEtlConfig
+    readonly struct AsmArchiveConfig
     {
         public FolderName RootFolder 
             => FolderName.Define("data");

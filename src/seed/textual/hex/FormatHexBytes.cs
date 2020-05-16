@@ -11,7 +11,13 @@ namespace Z0
     using static HexSpecs;
 
     partial class XTend
-    {        
+    {                
+        public static string FormatHexBytes(this uint src, HexFormatConfig? config = null)
+            => BitConverter.GetBytes(src).FormatHexBytes(config);            
+
+        public static string FormatHexBytes(this ulong src, HexFormatConfig? config = null)
+            => BitConverter.GetBytes(src).FormatHexBytes(config);            
+
         public static string FormatHexBytes(this byte[] src, HexFormatConfig? config = null)
         {
             var c = config ?? HexFormatConfig.HexData;

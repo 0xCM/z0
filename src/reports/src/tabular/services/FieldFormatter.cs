@@ -83,6 +83,17 @@ namespace Z0
         public void DelimitField(E f, object content)
             => DelimitField(f, content, FieldSep);        
 
+        /// <summary>
+        /// Appends a field with an enum value if nonzero; othewise, appends the empty string
+        /// </summary>
+        /// <param name="f">The field</param>
+        /// <param name="content">The field content</param>
+        /// <typeparam name="T">The enum content type</typeparam>
+        [MethodImpl(Inline)]
+        public void DelimitSome<T>(E f, T content)
+            where T : unmanaged, Enum
+                => DelimitField(f, content.IsSome() ? content.ToString() : string.Empty, FieldSep);        
+
         public void DelimitField<T>(E f, T content, char delimiter)
             where T : ITextual
         {

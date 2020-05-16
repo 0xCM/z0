@@ -104,24 +104,6 @@ namespace Z0.Xed
             dst.DelimitField(F.Operands, src.Operands);
             return dst.Format();                             
         }      
-
-        public static void Save<R>(this R[] src, FilePath dst, char delimiter = Chars.Pipe)  
-            where R : ITabular
-        {
-            var formatted = new string[src.Length];            
-            for(var i=0; i<src.Length; i++)
-                formatted[i] = src[i].DelimitedText(delimiter);
-
-            using var writer = dst.Writer();
-            
-            writer.WriteLine(Tabular.header<F>(delimiter)); 
-            writer.WriteLine(new string(Chars.Dash, formatted.Max(x => x.Length)));
-            for(var i=0; i< formatted.Length; i++)
-                writer.WriteLine(formatted[i]);            
-        }
-
-        public static void Save(this PatternSummary[] src, FolderPath dst, char delimiter = Chars.Pipe)  
-            => src.Save(dst + FileName.Define("patterns", FileExtensions.Csv));
     }
 
 }

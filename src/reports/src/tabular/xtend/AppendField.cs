@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Text;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Seed;
@@ -28,5 +29,11 @@ namespace Z0
             var pad = FieldFormat.width(field);
             sb.Append($"{content?.Format()}".PadRight(pad));
         }
+
+        // public static void Save<F,R>(this ITabular<F,R>[] src, FilePath dst, char delimiter = Chars.Pipe)  
+        //     where F : unmanaged, Enum
+        //     where R : ITabular
+        //         => TabularArchive.Save(src,dst,delimiter);
+
     }
 }

@@ -68,4 +68,5 @@ namespace Z0.Xed
         public string DelimitedText(char sep)
             => this.FormatRow(sep);
     }
+    
 }

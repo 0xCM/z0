@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
 
-    using Z0.Asm.Data;
     using Z0.Xed;
+    using Z0.Asm;
+    using Z0.Asm.Data;
     using Z0.Asm.Encoding;
 
     using static Seed;
@@ -22,7 +24,7 @@ namespace Z0
     }
 
     class App : AppShell<App,IAppContext>
-    {                
+    {                        
         static IAppContext CreateAppContext()
         {
             var resolved = ApiComposition.Assemble(seq(P.GMath.Resolved));
@@ -50,23 +52,55 @@ namespace Z0
             term.print(mrm.Format());
         }
 
+        FilePath PublishOpCodeDetails(IAsmArchives archives)
+        {
+            archives.PublishOpCodeDetails(out var dst);
+            term.print($"Published opcodes data set to {dst}");
+            return dst;
+        }
+
+        FilePath PublishInstructionData(IAsmArchives archives)
+        {
+            var inxsdata = archives.InstructionsData();
+            //Control.iter(inxsdata, i => term.print(i.Code.RawName));
+            return default;
+        }
+
+        IEnumerable<DecoderTestCase> DecoderCases(int bitness, FilePath src)
+            => DecoderTestParser.ReadFile(bitness,src);
+
+        void ParseDecoderTests(IAsmArchives src)
+        {
+            var bits = Control.array(16,32,64);
+            var count = 0;
+            foreach(var file in src.IcedDecoderTests)
+            {
+                term.print($"Loading {file}");
+                
+                foreach(var b in bits)
+                {
+                    if(file.Contains(b.ToString()))
+                    {
+                        foreach(var test in DecoderCases(b,file))
+                        {
+                            count++;
+                        }
+                    }
+                }
+            }
+            term.print($"Loaded {count} test cases");
+        }
+
         public override void RunShell(params string[] args)
         {            
             var parts = PartParser.Service.ParseValid(args);  
+            var archives = AsmArchives.Service;
 
-            var codes = new OpCodes();
-            codes.ReadLegacy();
+            // var opcodes = PublishOpCodeDetails(archives);
+            // var instructions = PublishInstructionData(archives);            
 
-            // var selected = Control.array(3u,7u,15u);
-            // foreach(var s in selected)
-            // {
-            //     var g = BinaryKindGenerator.Create(s);
-            //     var code = g.Generate();
-            //     term.print(code);
+            ParseDecoderTests(archives);
 
-            // }
-
-            //Control.iter(HexCodeGenerator.Gen(), term.print);
                                     
         }
 

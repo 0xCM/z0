@@ -184,16 +184,22 @@ namespace Z0
                  dst.Append(item.Format());   
             }
 
-            return dst.ToString();
-            
+            return dst.ToString();            
         }
 
         /// <summary>
-        /// Concatenates a sequence of strings intersprsed by a character delimiter
+        /// Concatenates a sequence of strings intersprsed by a character delimiter with a space on either side
+        /// </summary>
+        /// <param name="src">The characters to concatenate</param>
+        public static string join(char sep, params object[] src)
+            => string.Join(spaced(sep), src);
+
+        /// <summary>
+        /// Concatenates a sequence of strings intersprsed by a character delimiter with a space on either side
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
         public static string concat(char sep, IEnumerable<object> src)
-            => string.Join(sep,src);
+            => string.Join(spaced(sep), src);
 
         /// <summary>
         /// Joins the string representation of a sequence of items interspersed by a separator

@@ -26,7 +26,7 @@ namespace Z0.Xed
 
         public FolderPath ArchiveRoot {get;}
 
-        readonly ArchiveEtlConfig Config;
+        readonly AsmArchiveConfig Config;
 
         readonly IContext Context;
         
@@ -39,7 +39,7 @@ namespace Z0.Xed
         public EtlWorkflow(IAppContext context)
         {
             Context = context;
-            Config = default(ArchiveEtlConfig);
+            Config = default(AsmArchiveConfig);
             //ArchiveRoot = context.AppPaths.AppSrcPath + Config.RootFolder;
             ArchiveRoot =  FolderPath.Define(@"J:\dev\projects\z0\src\commands\data");
             Src = SourceArchive.Create(ArchiveRoot + Config.SourceFolder);
