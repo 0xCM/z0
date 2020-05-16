@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using Z0.Asm.Encoding;    
+    using Z0.Asm.Data;
+    using Z0.Xed;
+    using Z0.Asm.Encoding;
+
     using static Seed;
     using static Memories;
 
     using P = Z0.Parts;
-    using Asm;
     
     public static partial class zasm
     {
@@ -54,6 +56,7 @@ namespace Z0
 
             var codes = new OpCodes();
             codes.ReadLegacy();
+
             // var selected = Control.array(3u,7u,15u);
             // foreach(var s in selected)
             // {

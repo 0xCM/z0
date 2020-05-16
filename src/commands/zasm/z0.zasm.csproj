@@ -12,6 +12,8 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Src)commands/zice/z0.zice.csproj" />
+    <ProjectReference Include="$(Src)commands/zxed/z0.zxed.csproj" />
 
   </ItemGroup>
 
