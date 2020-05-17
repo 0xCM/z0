@@ -10,12 +10,17 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-    public static class BitFormatter
+    public class BitFormatter
     {
         [MethodImpl(Inline)]
         public static string format<T>(T src)
             where T : struct
                 => create<T>().Format(src);
+
+        [MethodImpl(Inline)]
+        public static string format<T>(T src, BitFormatConfig config)
+            where T : struct
+                => create<T>().Format(src, config);
 
         [MethodImpl(Inline)]
         public static BitFormatter<T> create<T>()
@@ -29,6 +34,7 @@ namespace Z0
     public readonly struct BitFormatter<T> : IFormatter<BitFormatConfig,T>
         where T : struct
     {            
+        
         public string Format(T src, in BitFormatConfig config)
         {
             var bytes = Bytes.from(ref src);

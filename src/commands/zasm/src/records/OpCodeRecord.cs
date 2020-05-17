@@ -2,47 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Encoding
+namespace Z0.Data
 {        
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-
-    using Z0.Asm.Data;
 
     using static Seed;
     using static Tabular;
 
     using R = OpCodeRecord;
     using F = OpCodeField;
-
-    public enum OpCodeField : ulong
-    {
-        Id = 0 | 50ul << FieldWidthOffset,
-
-        CodeBytes = (0xFF & Id + 1) | 16ul << FieldWidthOffset,
-
-        Prefix = (0xFF & CodeBytes + 1) | 8ul << FieldWidthOffset,
-
-        Table = (0xFF & Prefix + 1) | 8ul << FieldWidthOffset,
-
-        Group = (0xFF & Table + 1) | 8ul << FieldWidthOffset,
-
-        Op1 = (0xFF & Group + 1) | 20ul << FieldWidthOffset,
-
-        Op2 = (0xFF & Op1 + 1) | 20ul << FieldWidthOffset,
-
-        Op3 = (0xFF & Op2 + 1) | 20ul << FieldWidthOffset,
-
-        Op4 = (0xFF & Op3 + 1) | 20ul << FieldWidthOffset,
-
-        OpSize = (0xFF & Op4 + 1) | 10ul << FieldWidthOffset,
-
-        AddressSize = (0xFF & OpSize + 1) | 14ul << FieldWidthOffset,
-
-        Flags = (0xFF & Op4 + 1),
-
-    }
+    using Asm = Asm.Data;
 
     public readonly struct OpCodeRecord : ITabular<F,R>
     {
@@ -55,36 +24,36 @@ namespace Z0.Asm.Encoding
 
         public readonly BinaryCode CodeBytes;
 
-        public readonly MandatoryPrefix Prefix;
+        public readonly Asm.MandatoryPrefix Prefix;
         
-        public readonly OpCodeTableKind Table;
+        public readonly Asm.OpCodeTableKind Table;
 
         public readonly int Group;
 		
-        public readonly OpCodeOperandKind Op1;
+        public readonly Asm.OpCodeOperandKind Op1;
 
-        public readonly OpCodeOperandKind Op2;
+        public readonly Asm.OpCodeOperandKind Op2;
 
-        public readonly OpCodeOperandKind Op3;
+        public readonly Asm.OpCodeOperandKind Op3;
 
-        public readonly OpCodeOperandKind Op4;
+        public readonly Asm.OpCodeOperandKind Op4;
 
-        public readonly OperandSize OpSize;
+        public readonly Asm.OperandSize OpSize;
 
-        public readonly AddressSize AddressSize;
+        public readonly Asm.AddressSize AddressSize;
 
-        public readonly OpCodeFlags Flags;
+        public readonly Asm.OpCodeFlags Flags;
 
         public OpCodeRecord(
             string Id, 
             BinaryCode CodeBytes, 
-            MandatoryPrefix MandatoryPrefix,
-            OpCodeTableKind TableKind,
+            Asm.MandatoryPrefix MandatoryPrefix,
+            Asm.OpCodeTableKind TableKind,
             int GroupIndex,
-            OpCodeFlags Flags,
-            OperandSize OpSize,
-            AddressSize AddressSize,
-            params OpCodeOperandKind[] Operands
+            Asm.OpCodeFlags Flags,
+            Asm.OperandSize OpSize,
+            Asm.AddressSize AddressSize,
+            params Asm.OpCodeOperandKind[] Operands
             )
         {
             this.Id = Id;
@@ -151,5 +120,4 @@ namespace Z0.Asm.Encoding
             return dst.Format();                             
         }      
     }
-
 }

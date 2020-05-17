@@ -31,7 +31,7 @@ namespace Z0
                 using var writer = dst.Writer(mode);
 
                 if(emitHeader)
-                    writer.WriteLine(string.Join(format.Delimiter, data[0].HeaderNames));            
+                    writer.WriteLine(format.FormatHeader());
 
                 Control.iter(data, r => writer.WriteLine(r.DelimitedText(format.Delimiter)));   
                 return dst;                             

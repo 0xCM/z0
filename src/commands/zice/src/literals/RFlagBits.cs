@@ -11,7 +11,8 @@ namespace Z0.Asm.Data
 	using System.Linq;
 
 	[Flags]
-	public enum RflagsBits {
+	public enum RflagsBits 
+	{
 		None	= 0,
 		OF		= 0x00000001,
 		SF		= 0x00000002,

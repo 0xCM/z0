@@ -10,9 +10,17 @@ namespace Z0
 
     using static Seed;
 
-
     public readonly struct TabularField : ITextual
     {
+        [MethodImpl(Inline)]
+        public static TabularField<F> From<F>(F field)
+            where F : unmanaged, Enum
+                => Tabular.field(field);
+        
+        [MethodImpl(Inline)]
+        public static TabularField Define(string name, int index, int width)
+            => new TabularField(name,index, width);
+
         public readonly string Name;
 
         public readonly int Index;

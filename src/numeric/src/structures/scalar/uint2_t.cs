@@ -11,6 +11,7 @@ namespace Z0
     using static Analogs;
 
     using analog = uint2_t;
+    using BK = BinaryKind2;
 
     public struct uint2_t : IEquatable<analog>
     {
@@ -31,6 +32,14 @@ namespace Z0
         internal const int BitWidth = 3;        
 
         internal const byte Base = (byte)MaxVal + 1;
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(BK src)
+            => new analog(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BK(analog src)
+            => (BK)src.data;
 
         /// <summary>
         /// Converts a 3-bit integer to an unsigned 8-bit integer
@@ -214,6 +223,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint2_t(uint src, bool safe)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2_t(BK src)
             => data = (byte)src;
 
         /// <summary>

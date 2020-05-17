@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Reflection;
 
-    [Flags]
+    [Flags, NumericBase(16)]
     public enum OpCodeFlags : uint 
     {
         None					= 0,

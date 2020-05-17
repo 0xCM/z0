@@ -33,7 +33,7 @@ namespace Z0
         public static TabularField field(MemberInfo src)
             => src.Tag<TabularFieldAttribute>()
                   .MapRequired(attrib => new TabularField(attrib.Name, attrib.Index, attrib.Width));
-
+        
         public static TabularFormat derive(Type src)
         {
             var props = from p in src.DeclaredProperties().Instance()

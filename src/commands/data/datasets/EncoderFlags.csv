@@ -1,0 +1,19 @@
+| TypeName                        | Index   | Name            | Value   | Description
+| EncoderFlags:uint32             | 0       | None            | 0       | None
+| EncoderFlags:uint32             | 1       | B               | 7188125608105213953| B
+| EncoderFlags:uint32             | 2       | X               | 7188125608105213954| X
+| EncoderFlags:uint32             | 3       | R               | 7188125608105213956| R
+| EncoderFlags:uint32             | 4       | W               | 7188125608105213960| W
+| EncoderFlags:uint32             | 5       | ModRM           | 7188125608105213968| ModRM
+| EncoderFlags:uint32             | 6       | Sib             | 7188125608105213984| Sib
+| EncoderFlags:uint32             | 7       | REX             | 7188125608105214016| REX
+| EncoderFlags:uint32             | 8       | P66             | 7188125608105214080| P66
+| EncoderFlags:uint32             | 9       | P67             | 7188125608105214208| P67
+| EncoderFlags:uint32             | 10      | R2              | 7188125608105214464| R2
+| EncoderFlags:uint32             | 11      | Broadcast       | 7188125608105214976| Broadcast
+| EncoderFlags:uint32             | 12      | HighLegacy8BitRegs| 7188125608105216000| HighLegacy8BitRegs
+| EncoderFlags:uint32             | 13      | Displ           | 7188125608105218048| Displ
+| EncoderFlags:uint32             | 14      | PF0             | 7188125608105222144| PF0
+| EncoderFlags:uint32             | 15      | RegIsMemory     | 7188125608105230336| RegIsMemory
+| EncoderFlags:uint32             | 16      | VvvvvShift      | 7188125608105213979| VvvvvShift
+| EncoderFlags:uint32             | 17      | VvvvvMask       | 7188125608105213983| VvvvvMask

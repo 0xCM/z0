@@ -1,0 +1,106 @@
+| TypeName                        | Index   | Name            | Value   | Description
+| OpCodeOperandKind:int32         | 0       | None            | 0       | No operand
+| OpCodeOperandKind:int32         | 1       | farbr2_2        | 1       | Far branch 16-bit offset, 16-bit segment/selector
+| OpCodeOperandKind:int32         | 2       | farbr4_2        | 2       | Far branch 32-bit offset, 16-bit segment/selector
+| OpCodeOperandKind:int32         | 3       | mem_offs        | 3       | Memory offset without a modrm byte (eg. #(c:MOV AL,[offset])#)
+| OpCodeOperandKind:int32         | 4       | mem             | 4       | Memory (modrm)
+| OpCodeOperandKind:int32         | 5       | mem_mpx         | 5       | Memory (modrm), MPX:#(p:)#16/32-bit mode: must be 32-bit addressing#(p:)#64-bit mode: 64-bit addressing is forced
+| OpCodeOperandKind:int32         | 6       | mem_mib         | 6       | Memory (modrm), MPX:#(p:)#16/32-bit mode: must be 32-bit addressing#(p:)#64-bit mode: 64-bit addressing is forced and must not be RIP relative
+| OpCodeOperandKind:int32         | 7       | mem_vsib32x     | 7       | Memory (modrm), vsib32, xmm registers
+| OpCodeOperandKind:int32         | 8       | mem_vsib64x     | 8       | Memory (modrm), vsib64, xmm registers
+| OpCodeOperandKind:int32         | 9       | mem_vsib32y     | 9       | Memory (modrm), vsib32, ymm registers
+| OpCodeOperandKind:int32         | 10      | mem_vsib64y     | 10      | Memory (modrm), vsib64, ymm registers
+| OpCodeOperandKind:int32         | 11      | mem_vsib32z     | 11      | Memory (modrm), vsib32, zmm registers
+| OpCodeOperandKind:int32         | 12      | mem_vsib64z     | 12      | Memory (modrm), vsib64, zmm registers
+| OpCodeOperandKind:int32         | 13      | r8_or_mem       | 13      | 8-bit GPR or memory
+| OpCodeOperandKind:int32         | 14      | r16_or_mem      | 14      | 16-bit GPR or memory
+| OpCodeOperandKind:int32         | 15      | r32_or_mem      | 15      | 32-bit GPR or memory
+| OpCodeOperandKind:int32         | 16      | r32_or_mem_mpx  | 16      | 32-bit GPR or memory, MPX: 16/32-bit mode: must be 32-bit addressing, 64-bit mode: 64-bit addressing is forced
+| OpCodeOperandKind:int32         | 17      | r64_or_mem      | 17      | 64-bit GPR or memory
+| OpCodeOperandKind:int32         | 18      | r64_or_mem_mpx  | 18      | 64-bit GPR or memory, MPX: 16/32-bit mode: must be 32-bit addressing, 64-bit mode: 64-bit addressing is forced
+| OpCodeOperandKind:int32         | 19      | mm_or_mem       | 19      | MM register or memory
+| OpCodeOperandKind:int32         | 20      | xmm_or_mem      | 20      | XMM register or memory
+| OpCodeOperandKind:int32         | 21      | ymm_or_mem      | 21      | YMM register or memory
+| OpCodeOperandKind:int32         | 22      | zmm_or_mem      | 22      | ZMM register or memory
+| OpCodeOperandKind:int32         | 23      | bnd_or_mem_mpx  | 23      | BND register or memory, MPX: 16/32-bit mode: must be 32-bit addressing, 64-bit mode: 64-bit addressing is forced
+| OpCodeOperandKind:int32         | 24      | k_or_mem        | 24      | K register or memory
+| OpCodeOperandKind:int32         | 25      | r8_reg          | 25      | 8-bit GPR encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 26      | r8_opcode       | 26      | 8-bit GPR encoded in the low 3 bits of the opcode
+| OpCodeOperandKind:int32         | 27      | r16_reg         | 27      | 16-bit GPR encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 28      | r16_reg_mem     | 28      | 16-bit GPR encoded in the #(c:reg)# field of the modrm byte. This is a memory operand and it uses the address size prefix (#(c:67h)#) not the operand size prefix (#(c:66h)#).
+| OpCodeOperandKind:int32         | 29      | r16_rm          | 29      | 16-bit GPR encoded in the #(c:mod + r/m)# fields of the modrm byte
+| OpCodeOperandKind:int32         | 30      | r16_opcode      | 30      | 16-bit GPR encoded in the low 3 bits of the opcode
+| OpCodeOperandKind:int32         | 31      | r32_reg         | 31      | 32-bit GPR encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 32      | r32_reg_mem     | 32      | 32-bit GPR encoded in the #(c:reg)# field of the modrm byte. This is a memory operand and it uses the address size prefix (#(c:67h)#) not the operand size prefix (#(c:66h)#).
+| OpCodeOperandKind:int32         | 33      | r32_rm          | 33      | 32-bit GPR encoded in the #(c:mod + r/m)# fields of the modrm byte
+| OpCodeOperandKind:int32         | 34      | r32_opcode      | 34      | 32-bit GPR encoded in the low 3 bits of the opcode
+| OpCodeOperandKind:int32         | 35      | r32_vvvv        | 35      | 32-bit GPR encoded in the the #(c:V'vvvv)# field (VEX/EVEX/XOP)
+| OpCodeOperandKind:int32         | 36      | r64_reg         | 36      | 64-bit GPR encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 37      | r64_reg_mem     | 37      | 64-bit GPR encoded in the #(c:reg)# field of the modrm byte. This is a memory operand and it uses the address size prefix (#(c:67h)#) not the operand size prefix (#(c:66h)#).
+| OpCodeOperandKind:int32         | 38      | r64_rm          | 38      | 64-bit GPR encoded in the #(c:mod + r/m)# fields of the modrm byte
+| OpCodeOperandKind:int32         | 39      | r64_opcode      | 39      | 64-bit GPR encoded in the low 3 bits of the opcode
+| OpCodeOperandKind:int32         | 40      | r64_vvvv        | 40      | 64-bit GPR encoded in the the #(c:V'vvvv)# field (VEX/EVEX/XOP)
+| OpCodeOperandKind:int32         | 41      | seg_reg         | 41      | Segment register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 42      | k_reg           | 42      | K register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 43      | kp1_reg         | 43      | K register (+1) encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 44      | k_rm            | 44      | K register encoded in the #(c:mod + r/m)# fields of the modrm byte
+| OpCodeOperandKind:int32         | 45      | k_vvvv          | 45      | K register encoded in the the #(c:V'vvvv)# field (VEX/EVEX/XOP)
+| OpCodeOperandKind:int32         | 46      | mm_reg          | 46      | MM register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 47      | mm_rm           | 47      | MM register encoded in the #(c:mod + r/m)# fields of the modrm byte
+| OpCodeOperandKind:int32         | 48      | xmm_reg         | 48      | XMM register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 49      | xmm_rm          | 49      | XMM register encoded in the #(c:mod + r/m)# fields of the modrm byte
+| OpCodeOperandKind:int32         | 50      | xmm_vvvv        | 50      | XMM register encoded in the the #(c:V'vvvv)# field (VEX/EVEX/XOP)
+| OpCodeOperandKind:int32         | 51      | xmmp3_vvvv      | 51      | XMM register (+3) encoded in the the #(c:V'vvvv)# field (VEX/EVEX/XOP)
+| OpCodeOperandKind:int32         | 52      | xmm_is4         | 52      | XMM register encoded in the the high 4 bits of the last 8-bit immediate (VEX/XOP only so only XMM0-XMM15)
+| OpCodeOperandKind:int32         | 53      | xmm_is5         | 53      | XMM register encoded in the the high 4 bits of the last 8-bit immediate (VEX/XOP only so only XMM0-XMM15)
+| OpCodeOperandKind:int32         | 54      | ymm_reg         | 54      | YMM register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 55      | ymm_rm          | 55      | YMM register encoded in the #(c:mod + r/m)# fields of the modrm byte
+| OpCodeOperandKind:int32         | 56      | ymm_vvvv        | 56      | YMM register encoded in the the #(c:V'vvvv)# field (VEX/EVEX/XOP)
+| OpCodeOperandKind:int32         | 57      | ymm_is4         | 57      | YMM register encoded in the the high 4 bits of the last 8-bit immediate (VEX/XOP only so only YMM0-YMM15)
+| OpCodeOperandKind:int32         | 58      | ymm_is5         | 58      | YMM register encoded in the the high 4 bits of the last 8-bit immediate (VEX/XOP only so only YMM0-YMM15)
+| OpCodeOperandKind:int32         | 59      | zmm_reg         | 59      | ZMM register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 60      | zmm_rm          | 60      | ZMM register encoded in the #(c:mod + r/m)# fields of the modrm byte
+| OpCodeOperandKind:int32         | 61      | zmm_vvvv        | 61      | ZMM register encoded in the the #(c:V'vvvv)# field (VEX/EVEX/XOP)
+| OpCodeOperandKind:int32         | 62      | zmmp3_vvvv      | 62      | ZMM register (+3) encoded in the the #(c:V'vvvv)# field (VEX/EVEX/XOP)
+| OpCodeOperandKind:int32         | 63      | cr_reg          | 63      | CR register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 64      | dr_reg          | 64      | DR register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 65      | tr_reg          | 65      | TR register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 66      | bnd_reg         | 66      | BND register encoded in the #(c:reg)# field of the modrm byte
+| OpCodeOperandKind:int32         | 67      | es              | 67      | ES register
+| OpCodeOperandKind:int32         | 68      | cs              | 68      | CS register
+| OpCodeOperandKind:int32         | 69      | ss              | 69      | SS register
+| OpCodeOperandKind:int32         | 70      | ds              | 70      | DS register
+| OpCodeOperandKind:int32         | 71      | fs              | 71      | FS register
+| OpCodeOperandKind:int32         | 72      | gs              | 72      | GS register
+| OpCodeOperandKind:int32         | 73      | al              | 73      | AL register
+| OpCodeOperandKind:int32         | 74      | cl              | 74      | CL register
+| OpCodeOperandKind:int32         | 75      | ax              | 75      | AX register
+| OpCodeOperandKind:int32         | 76      | dx              | 76      | DX register
+| OpCodeOperandKind:int32         | 77      | eax             | 77      | EAX register
+| OpCodeOperandKind:int32         | 78      | rax             | 78      | RAX register
+| OpCodeOperandKind:int32         | 79      | st0             | 79      | ST0 register
+| OpCodeOperandKind:int32         | 80      | sti_opcode      | 80      | ST(i) register encoded in the low 3 bits of the opcode
+| OpCodeOperandKind:int32         | 81      | imm2_m2z        | 81      | 2-bit immediate (m2z field, low 2 bits of the /is5 immediate, eg. #(c:VPERMIL2PS)#)
+| OpCodeOperandKind:int32         | 82      | imm8            | 82      | 8-bit immediate
+| OpCodeOperandKind:int32         | 83      | imm8_const_1    | 83      | Constant 1 (8-bit immediate)
+| OpCodeOperandKind:int32         | 84      | imm8sex16       | 84      | 8-bit immediate sign extended to 16 bits
+| OpCodeOperandKind:int32         | 85      | imm8sex32       | 85      | 8-bit immediate sign extended to 32 bits
+| OpCodeOperandKind:int32         | 86      | imm8sex64       | 86      | 8-bit immediate sign extended to 64 bits
+| OpCodeOperandKind:int32         | 87      | imm16           | 87      | 16-bit immediate
+| OpCodeOperandKind:int32         | 88      | imm32           | 88      | 32-bit immediate
+| OpCodeOperandKind:int32         | 89      | imm32sex64      | 89      | 32-bit immediate sign extended to 64 bits
+| OpCodeOperandKind:int32         | 90      | imm64           | 90      | 64-bit immediate
+| OpCodeOperandKind:int32         | 91      | seg_rSI         | 91      | #(c:seg:[rSI])# memory operand (string instructions)
+| OpCodeOperandKind:int32         | 92      | es_rDI          | 92      | #(c:es:[rDI])# memory operand (string instructions)
+| OpCodeOperandKind:int32         | 93      | seg_rDI         | 93      | #(c:seg:[rDI])# memory operand (#(c:(V)MASKMOVQ)# instructions)
+| OpCodeOperandKind:int32         | 94      | seg_rBX_al      | 94      | #(c:seg:[rBX+al])# memory operand (#(c:XLATB)# instruction)
+| OpCodeOperandKind:int32         | 95      | br16_1          | 95      | 16-bit branch, 1-byte signed relative offset
+| OpCodeOperandKind:int32         | 96      | br32_1          | 96      | 32-bit branch, 1-byte signed relative offset
+| OpCodeOperandKind:int32         | 97      | br64_1          | 97      | 64-bit branch, 1-byte signed relative offset
+| OpCodeOperandKind:int32         | 98      | br16_2          | 98      | 16-bit branch, 2-byte signed relative offset
+| OpCodeOperandKind:int32         | 99      | br32_4          | 99      | 32-bit branch, 4-byte signed relative offset
+| OpCodeOperandKind:int32         | 100     | br64_4          | 100     | 64-bit branch, 4-byte signed relative offset
+| OpCodeOperandKind:int32         | 101     | xbegin_2        | 101     | #(c:XBEGIN)#, 2-byte signed relative offset
+| OpCodeOperandKind:int32         | 102     | xbegin_4        | 102     | #(c:XBEGIN)#, 4-byte signed relative offset
+| OpCodeOperandKind:int32         | 103     | brdisp_2        | 103     | 2-byte branch offset (#(c:JMPE)# instruction)
+| OpCodeOperandKind:int32         | 104     | brdisp_4        | 104     | 4-byte branch offset (#(c:JMPE)# instruction)

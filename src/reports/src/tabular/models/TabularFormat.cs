@@ -32,16 +32,17 @@ namespace Z0
         /// </summary>
         public readonly bool EmitHeader;
 
+        public readonly int FieldCount;
+
         [MethodImpl(Inline)]
         internal TabularFormat(TabularField[] fields, string[] headers, char delimiter = Chars.Pipe, bool header = true)
-        {
+        {            
             Fields = fields;
             Headers = headers;
             Delimiter = delimiter;
             EmitHeader = header;
+            FieldCount = fields.Length;
         }
-
-        public int FieldCount => Fields.Length;
                 
         public ref readonly TabularField this[int i]
         {
@@ -49,11 +50,27 @@ namespace Z0
             get => ref Fields[i];
         }        
 
+        /// <summary>
+        /// Formats the format specification, not the object being specified
+        /// </summary>
         public string Format()
         {
             var dst = new StringBuilder();
             for(var i=0; i< Fields.Length; i++)
                 dst.AppendLine(this[i].Format());
+            return dst.ToString();
+        }
+
+        public string FormatHeader(char delimiter = Chars.Pipe)
+        {
+            var dst = new StringBuilder();
+            for(var i=0; i<FieldCount; i++)
+            {
+                dst.Append(delimiter);
+                dst.Append(Chars.Space);
+                var field = Fields[i];
+                dst.Append(field.Name.PadRight(field.Width));
+            }
             return dst.ToString();
         }
 

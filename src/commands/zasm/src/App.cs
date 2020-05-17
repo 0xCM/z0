@@ -91,16 +91,41 @@ namespace Z0
             term.print($"Loaded {count} test cases");
         }
 
+        void OnPublished(FilePath path)
+        {
+            term.print(path);
+        }
+        public void PublishLiterals()
+        {
+            var archives = AsmArchives.Service;
+            archives.PublishLiterals<OpCodeOperandKind>().OnSome(OnPublished);
+            archives.PublishLiterals<CpuidFeature>().OnSome(OnPublished);
+            archives.PublishLiterals<EncoderFlags>().OnSome(OnPublished);
+            archives.PublishLiterals<EncodingKind>().OnSome(OnPublished);
+            archives.PublishLiterals<FlowControl>().OnSome(OnPublished);
+
+            archives.PublishLiterals<LegacyFlags>().OnSome(OnPublished);
+            archives.PublishLiterals<LegacyFlags3>().OnSome(OnPublished);
+
+            archives.PublishLiterals<LegacyOpCodeTable>().OnSome(OnPublished);
+            archives.PublishLiterals<LegacyOpKind>().OnSome(OnPublished);
+
+            archives.PublishLiterals<MandatoryPrefix>().OnSome(OnPublished);
+            archives.PublishLiterals<MemorySize>().OnSome(OnPublished);
+            archives.PublishLiterals<OpCodeFlags>().OnSome(OnPublished);
+
+            archives.PublishLiterals<OpCodeHandlerKind>().OnSome(OnPublished);
+
+        }
         public override void RunShell(params string[] args)
         {            
             var parts = PartParser.Service.ParseValid(args);  
             var archives = AsmArchives.Service;
 
-            // var opcodes = PublishOpCodeDetails(archives);
-            // var instructions = PublishInstructionData(archives);            
-
-            ParseDecoderTests(archives);
-
+            term.print(ModRmByte.Example.Format());
+            //var opcodes = PublishOpCodeDetails(archives);
+            //ParseDecoderTests(archives);
+            //PublishLiterals();
                                     
         }
 

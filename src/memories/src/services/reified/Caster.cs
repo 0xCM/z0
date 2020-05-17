@@ -12,6 +12,7 @@ namespace Z0
 
     public readonly struct Caster
     {
+
         [MethodImpl(Inline)]
         public static ref T cast<S,T>(ref S src)
             => ref Unsafe.As<S,T>(ref src);

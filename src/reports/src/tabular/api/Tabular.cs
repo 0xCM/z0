@@ -11,7 +11,39 @@ namespace Z0
 
     public class Tabular
     {
-        public const int FieldWidthOffset = 32;
+        /// <summary>
+        /// Defines a tabular format specifiecation predicated on a parametric enum type
+        /// </summary>
+        /// <typeparam name="F">The field specifier</typeparam>
+        public static TabularFormat<F> format<F>()
+            where F : unmanaged, Enum
+        {
+            var specs = Enums.valarray<F>();
+            var dst = new TabularField<F>[specs.Length];
+            for(var i=0; i<dst.Length; i++)
+                dst[i] = new TabularField<F>(specs[i]);
+            return new TabularFormat<F>(dst);            
+        }
+
+        /// <summary>
+        /// Defines a tabular field specification predicated on an enumeration literal
+        /// </summary>
+        /// <param name="field"></param>
+        /// <typeparam name="F"></typeparam>
+        [MethodImpl(Inline)]
+        public static TabularField<F> field<F>(F field)
+            where F : unmanaged, Enum
+                => new TabularField<F>(field);        
+
+        /// <summary>
+        /// Defines the bit position where the field width specification begins
+        /// </summary>
+        public const int WidthOffset = 32;
+
+        /// <summary>
+        /// Defines a mask that, when applied, reveals the field position
+        /// </summary>
+        public const ushort PosMask = 0xFFFF;
 
         [MethodImpl(Inline)]
         public static F[] fields<F>()

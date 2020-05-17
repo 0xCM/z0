@@ -5,10 +5,6 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Text;
-    using System.Collections.Generic;
-    using System.IO;
-	using System.Linq;
 	public enum TupleType 
     {
 		[Comment("#(c:N = 1)#")]

@@ -1,0 +1,25 @@
+| TypeName                        | Index   | Name            | Value   | Description
+| OpCodeFlags:uint32              | 0       | None            | 0       | None
+| OpCodeFlags:uint32              | 1       | Mode16          | 7193814653066018817| Mode16
+| OpCodeFlags:uint32              | 2       | Mode32          | 7193814653066018818| Mode32
+| OpCodeFlags:uint32              | 3       | Mode64          | 7193814653066018820| Mode64
+| OpCodeFlags:uint32              | 4       | Fwait           | 7193814653066018824| Fwait
+| OpCodeFlags:uint32              | 5       | LIG             | 7193814653066018832| LIG
+| OpCodeFlags:uint32              | 6       | WIG             | 7193814653066018848| WIG
+| OpCodeFlags:uint32              | 7       | WIG32           | 7193814653066018880| WIG32
+| OpCodeFlags:uint32              | 8       | W               | 7193814653066018944| W
+| OpCodeFlags:uint32              | 9       | Broadcast       | 7193814653066019072| Broadcast
+| OpCodeFlags:uint32              | 10      | RoundingControl | 7193814653066019328| RoundingControl
+| OpCodeFlags:uint32              | 11      | SuppressAllExceptions| 7193814653066019840| SuppressAllExceptions
+| OpCodeFlags:uint32              | 12      | OpMaskRegister  | 7193814653066020864| OpMaskRegister
+| OpCodeFlags:uint32              | 13      | ZeroingMasking  | 7193814653066022912| ZeroingMasking
+| OpCodeFlags:uint32              | 14      | LockPrefix      | 7193814653066027008| LockPrefix
+| OpCodeFlags:uint32              | 15      | XacquirePrefix  | 7193814653066035200| XacquirePrefix
+| OpCodeFlags:uint32              | 16      | XreleasePrefix  | 7193814653066051584| XreleasePrefix
+| OpCodeFlags:uint32              | 17      | RepPrefix       | 7193814653066084352| RepPrefix
+| OpCodeFlags:uint32              | 18      | RepnePrefix     | 7193814653066149888| RepnePrefix
+| OpCodeFlags:uint32              | 19      | BndPrefix       | 7193814653066280960| BndPrefix
+| OpCodeFlags:uint32              | 20      | HintTakenPrefix | 7193814653066543104| HintTakenPrefix
+| OpCodeFlags:uint32              | 21      | NotrackPrefix   | 7193814653067067392| NotrackPrefix
+| OpCodeFlags:uint32              | 22      | NoInstruction   | 7193814653068115968| NoInstruction
+| OpCodeFlags:uint32              | 23      | NonZeroOpMaskRegister| 7193814653070213120| NonZeroOpMaskRegister

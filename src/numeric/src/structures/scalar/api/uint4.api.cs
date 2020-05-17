@@ -88,19 +88,18 @@ namespace Z0
         public static analog uint4(bit x0, bit x1 = default, bit x2 = default, bit x3 = default)
              => analog.Wrap(((uint)x0 << 0) | ((uint)x1 << 1) | ((uint)x2 << 2) | ((uint)x3 << 3));
 
-
         [MethodImpl(Inline), Op]
         public static analog add(analog x, analog y)
         {
-            const int modulus = 16;
-            var sum = x.data + y.data;
-            return analog.Wrap((sum >= modulus) ? sum - modulus: sum);
+            const byte modulus = 16;
+            var sum = (byte)(x.data + y.data);
+            return analog.Wrap((sum >= modulus) ? (byte)(sum - modulus): sum);
         }
 
         [MethodImpl(Inline), Op]
         public static analog sub(analog x, analog y)
         {
-            const int modulus = 16;
+            const byte modulus = 16;
             var diff = (int)x - (int)y;
             return analog.Wrap(diff < 0 ? (uint)(diff + modulus) : (uint)diff);
         }
@@ -161,13 +160,20 @@ namespace Z0
         public static bool eq(analog x, analog y)
             => x.data == y.data;
 
+        [MethodImpl(Inline), Op]
+        internal static byte reduce4(uint x) 
+            => (byte)(x % analog.Base);
 
         [MethodImpl(Inline), Op]
-        internal static uint reduce4(uint x) 
-            => x % analog.Base;
+        internal static byte reduce4(int x) 
+            => (byte)((uint)x % analog.Base);
 
         [MethodImpl(Inline)]
         internal static analog wrap4(uint src) 
             => new analog(src,false);
+
+        [MethodImpl(Inline)]
+        internal static analog wrap4(int src) 
+            => new analog((byte)src,false);
     }
 }

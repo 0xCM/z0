@@ -1,0 +1,17 @@
+| TypeName                        | Index   | Name            | Value   | Description
+| LegacyFlags:uint32              | 0       | MandatoryPrefixByteMask| 3       | MandatoryPrefixByteMask
+| LegacyFlags:uint32              | 1       | MandatoryPrefixByteShift| 7188870114916171776| MandatoryPrefixByteShift
+| LegacyFlags:uint32              | 2       | LegacyOpCodeTableMask| 7188870114916171779| MandatoryPrefixByteMask
+| LegacyFlags:uint32              | 3       | LegacyOpCodeTableShift| 7188870114916171778| LegacyOpCodeTableShift
+| LegacyFlags:uint32              | 4       | EncodableMask   | 7188870114916171779| MandatoryPrefixByteMask
+| LegacyFlags:uint32              | 5       | EncodableShift  | 7188870114916171780| EncodableShift
+| LegacyFlags:uint32              | 6       | HasGroupIndex   | 7188870114916171840| HasGroupIndex
+| LegacyFlags:uint32              | 7       | GroupShift      | 7188870114916171783| GroupShift
+| LegacyFlags:uint32              | 8       | AllowedPrefixesMask| 7188870114916171791| AllowedPrefixesMask
+| LegacyFlags:uint32              | 9       | AllowedPrefixesShift| 7188870114916171786| AllowedPrefixesShift
+| LegacyFlags:uint32              | 10      | Fwait           | 7188870114916188160| Fwait
+| LegacyFlags:uint32              | 11      | HasMandatoryPrefix| 7188870114916204544| HasMandatoryPrefix
+| LegacyFlags:uint32              | 12      | OperandSizeMask | 7188870114916171779| MandatoryPrefixByteMask
+| LegacyFlags:uint32              | 13      | OperandSizeShift| 7188870114916171792| OperandSizeShift
+| LegacyFlags:uint32              | 14      | AddressSizeMask | 7188870114916171779| MandatoryPrefixByteMask
+| LegacyFlags:uint32              | 15      | AddressSizeShift| 7188870114916171794| AddressSizeShift

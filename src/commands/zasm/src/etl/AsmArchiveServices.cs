@@ -7,14 +7,16 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using Z0.Xed;
     using Z0.Asm;
     using Z0.Asm.Data;
-    using Z0.Asm.Encoding;
+    using Z0.Data;
 
     public interface IAsmArchives : IAsmArchiveConfig
     {
         InstrInfo[] InstructionsData();   
+
+        Option<FilePath> PublishLiterals<E>()
+            where E : unmanaged, Enum;
 
         OpCodeRecord[] PublishOpCodeDetails(out FilePath dst);
     }
@@ -22,6 +24,21 @@ namespace Z0
     public readonly struct AsmArchives  : IAsmArchives
     {
         public static IAsmArchives Service => default(AsmArchives);
+
+        static string Describe<E>(E literal)
+            where E : unmanaged, Enum
+        {            
+            var info = CommentAttribute.GetDocumentation(typeof(E).Field(literal.ToString()).Require());
+            return info ?? string.Empty;
+        }
+        public Option<FilePath> PublishLiterals<E>()
+            where E : unmanaged, Enum
+        {
+            var config = this as IAsmArchiveConfig;
+            var dst = config.DatasetPath(typeof(E).Name);            
+            var report = LiteralTable.Report<E>(Describe);
+            return report.Save(dst);
+        }
 
         OpCodeOperandKind[] Operands(OpCodeInfo src)
         {
@@ -35,7 +52,7 @@ namespace Z0
         public OpCodeRecord Record(OpCodeInfo src)
             => new OpCodeRecord(
                     Id: src.Code.RawName, 
-                    CodeBytes: src.Code.Value.ToByteArray(),
+                    CodeBytes: src.OpCode.ToByteArray(),
                     MandatoryPrefix: src.MandatoryPrefix,
                     TableKind: src.Table,
                     GroupIndex: src.GroupIndex,

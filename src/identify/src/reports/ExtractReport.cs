@@ -16,17 +16,17 @@ namespace Z0
 
     public enum ExtractField : ulong
     {
-        Sequence = 0 | 10ul << FieldWidthOffset,
+        Sequence = 0 | 10ul << WidthOffset,
 
-        Address = 1 | 16ul << FieldWidthOffset,
+        Address = 1 | 16ul << WidthOffset,
 
-        Length = 2 | 8ul << FieldWidthOffset,
+        Length = 2 | 8ul << WidthOffset,
 
-        Uri = 3 | 110ul << FieldWidthOffset,
+        Uri = 3 | 110ul << WidthOffset,
 
-        OpSig = 4 | 110ul << FieldWidthOffset,
+        OpSig = 4 | 110ul << WidthOffset,
 
-        Data = 5 | 1ul << FieldWidthOffset
+        Data = 5 | 1ul << WidthOffset
     }
 
     public readonly struct ExtractRecord : ITabular<F,R>

@@ -8,7 +8,8 @@ namespace Z0.Asm.Data
     using System;
     using System.Reflection;
 
-	public enum XopOpKind : byte {
+	public enum XopOpKind : byte 
+	{
 		None,
 		Ed,
 		Eq,

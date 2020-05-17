@@ -10,7 +10,9 @@ namespace Z0.Asm.Data
 	public enum OpCodeHandlerFlags : uint 
 	{
 		None = 0x00000000,
+		
 		Fwait = 0x00000001,
+		
 		DeclareData = 0x00000002,
 	}
 }

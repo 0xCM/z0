@@ -31,6 +31,21 @@ namespace Z0
 
         public readonly E Value;
 
+        public Type BaseType 
+        {
+            [MethodImpl(Inline)]
+            get => typeof(E).GetEnumUnderlyingType();
+        }
+
+        /// <summary>
+        /// The literal's numeric value
+        /// </summary>
+        /// <typeparam name="T">The underlying, or desired, numeric type</typeparam>
+        [MethodImpl(Inline)]
+        public T NumericValue<T>()
+            where T : unmanaged
+                => Enums.numeric<E,T>(Value);
+
         [MethodImpl(Inline)]
         public static implicit operator EnumLiteral<E>((int index, string name, E value) src)
             => new EnumLiteral<E>(src.index, src.name, src.value);

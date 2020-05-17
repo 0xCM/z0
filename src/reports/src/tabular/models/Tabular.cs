@@ -38,9 +38,7 @@ namespace Z0
                 var field = fields[i];
                 var name = field.ToString();
                 if(props.TryGetValue(name, out var prop))
-                {                    
                     values.Add(new FieldValue<F>(field, Null.Banish(prop.GetValue(data))));
-                }
             }
             
             FieldValues = values.ToArray();

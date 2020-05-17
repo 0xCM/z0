@@ -19,21 +19,60 @@ namespace Z0
         /// Selects all instance/static and public/non-public fields declared or inherited by a type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static IEnumerable<FieldInfo> Fields(this Type src)
+        public static FieldInfo[] Fields(this Type src)
             => src.GetFields(BF_All);
+
+        /// <summary>
+        /// Selects all public fields from a source
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static FieldInfo[] Public(this FieldInfo[] src)
+            => src.Where(x => x.IsPublic);
+
+        /// <summary>
+        /// Selects all instance fields (non-static and non-literal) from the source
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static FieldInfo[] Instance(this FieldInfo[] src)
+            => src.Where(x => !x.IsStatic && !x.IsLiteral);
+
+        /// <summary>
+        /// Selects all literal fields from the source
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static FieldInfo[] Literal(this FieldInfo[] src)
+            => src.Where(x => x.IsLiteral);
+
+        /// <summary>
+        /// Selects all static fields from the source
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static FieldInfo[] Static(this FieldInfo[] src)
+            => src.Where(x => x.IsStatic);
+
+        /// <summary>
+        /// Selects all public static/instance fields from the source
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static FieldInfo[] PublicFields(this Type src)
+            => src.GetFields(BF_AllPublicStatic | BF_AllPublicInstance);
+
+        /// <summary>
+        /// Selects all public instance fields from the source
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static FieldInfo[] PublicInstanceFields(this Type src)
+            => src.GetFields(BF_AllPublicInstance);
+
+        public static FieldInfo[] PublicStaticFields(this Type src)
+            => src.GetFields(BF_AllPublicStatic);
 
         /// <summary>
         /// Retrieves the public instance Fields declared by a supertype
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static IEnumerable<FieldInfo> InheritedPublicFields(this Type src)
+        public static FieldInfo[] InheritedPublicFields(this Type src)
             => src.BaseType?.GetFields(BF_AllPublicInstance) ?? new FieldInfo[] { };
 
-        /// <summary>
-        /// Retrieves all public instance Fields declared or inherited by a type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static IEnumerable<FieldInfo> PublicFields(this Type t)
-            => t.InheritedPublicFields().Union(t.GetFields());
     }
 }

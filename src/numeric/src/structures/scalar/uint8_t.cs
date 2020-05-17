@@ -10,6 +10,7 @@ namespace Z0
     using static Seed;
 
     using analog = uint8_t;
+    using BK = BinaryKind;
 
     public struct uint8_t : IEquatable<analog>
     {
@@ -19,9 +20,21 @@ namespace Z0
 
         public static analog one => 1;
 
+        [MethodImpl(Inline)]
+        public static implicit operator analog(BK src)
+            => new analog(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BK(analog src)
+            => (BK)src.data;
+
         [MethodImpl(Inline)]    
         public uint8_t(byte x)
             => data =x;
+
+        [MethodImpl(Inline)]    
+        public uint8_t(BK x)
+            => data =(byte)x;
 
         [MethodImpl(Inline)]    
         public static analog @bool(bool x)

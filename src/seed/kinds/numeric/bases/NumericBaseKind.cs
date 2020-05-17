@@ -33,6 +33,4 @@ namespace Z0
         /// </summary>
         X = 16,
     }
-
-
 }

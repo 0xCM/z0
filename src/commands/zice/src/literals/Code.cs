@@ -12,15 +12,10 @@ namespace Z0.Asm.Data
 
     public enum Code 
 	{
-		[Comment("It's an invalid instruction, eg. it's a new unknown instruction, garbage or there's not enough bytes to decode the instruction etc.")]
 		INVALID,
-		[Comment("A #(c:db)#/#(c:.byte)# asm directive that can store 1-16 bytes")]
 		DeclareByte,
-		[Comment("A #(c:dw)#/#(c:.word)# asm directive that can store 1-8 words")]
 		DeclareWord,
-		[Comment("A #(c:dd)#/#(c:.int)# asm directive that can store 1-4 dwords")]
 		DeclareDword,
-		[Comment("A #(c:dq)#/#(c:.quad)# asm directive that can store 1-2 qwords")]
 		DeclareQword,
 		Add_rm8_r8,
 		Add_rm16_r16,
@@ -4340,28 +4335,5 @@ namespace Z0.Asm.Data
 				CpuidFeature.SSE4_2 => "SSE4.2",
 				_ => c.RawName,
 			};
-	}
-
-	[Flags]
-	enum RegisterFlags {
-		None				= 0,
-		SegmentRegister		= 1,
-		GPR					= 2,
-		GPR8				= 4,
-		GPR16				= 8,
-		GPR32				= 0x10,
-		GPR64				= 0x20,
-		XMM					= 0x40,
-		YMM					= 0x80,
-		ZMM					= 0x100,
-		VectorRegister		= 0x200,
-		IP					= 0x400,
-		K					= 0x800,
-		BND					= 0x1000,
-		CR					= 0x2000,
-		DR					= 0x4000,
-		TR					= 0x8000,
-		ST					= 0x10000,
-		MM					= 0x20000,
 	}
 }

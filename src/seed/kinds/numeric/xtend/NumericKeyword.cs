@@ -15,5 +15,13 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         public static string NumericKeyword(this Type src)
             => src.NumericKind().Keyword();
+
+        /// <summary>
+        /// Specifies the keyword not used in C# to designate a primal numeric type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static string NumericKeywordNot(this Type src)
+            => src.NumericKind().KeywordNot();
+
     }
 }

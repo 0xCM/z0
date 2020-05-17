@@ -9,13 +9,21 @@ namespace Z0.Asm.Data
 	public enum AllowedPrefixes 
 	{
 		None,
+		
 		Bnd,
+		
 		BndNotrack,
+		
 		HintTakenBnd,
+		
 		Lock,
+		
 		Rep,
+		
 		RepRepne,
+		
 		XacquireXreleaseLock,
+		
 		Xrelease,
 	}
 

@@ -1,0 +1,5 @@
+| TypeName                        | Index   | Name            | Value   | Description
+| LegacyOpCodeTable:int32         | 0       | Normal          | 0       | 
+| LegacyOpCodeTable:int32         | 1       | Table0F         | 1       | 
+| LegacyOpCodeTable:int32         | 2       | Table0F38       | 2       | 
+| LegacyOpCodeTable:int32         | 3       | Table0F3A       | 3       | 

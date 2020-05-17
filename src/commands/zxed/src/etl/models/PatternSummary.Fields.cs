@@ -11,22 +11,22 @@ namespace Z0.Xed
 
     public enum PatternField : ulong
     {
-        Class = 0 | 20ul << FieldWidthOffset,
+        Class = 0 | 20ul << WidthOffset,
 
-        Category = 1 | 14ul << FieldWidthOffset,
+        Category = 1 | 14ul << WidthOffset,
 
-        Extension = 2 | 14ul << FieldWidthOffset,
+        Extension = 2 | 14ul << WidthOffset,
 
-        IsaSet = 3 | 14ul << FieldWidthOffset,
+        IsaSet = 3 | 14ul << WidthOffset,
 
-        BaseCode = 4 | 12ul << FieldWidthOffset,
+        BaseCode = 4 | 12ul << WidthOffset,
         
-        Mod = 5 | 10ul << FieldWidthOffset,
+        Mod = 5 | 10ul << WidthOffset,
         
-        Reg = 6 | 10ul << FieldWidthOffset,
+        Reg = 6 | 10ul << WidthOffset,
 
-        Pattern = 7 | 100ul << FieldWidthOffset,
+        Pattern = 7 | 100ul << WidthOffset,
 
-        Operands = 9 | 0ul << FieldWidthOffset,        
+        Operands = 9 | 0ul << WidthOffset,        
     }
 }
