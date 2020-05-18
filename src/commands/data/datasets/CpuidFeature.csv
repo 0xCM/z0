@@ -1,134 +1,134 @@
-| TypeName                        | Index   | Name            | Value   | Description
-| CpuidFeature:int32              | 0       | INTEL8086       | 0       | 8086 or later
-| CpuidFeature:int32              | 1       | INTEL8086_ONLY  | 1       | 8086 only
-| CpuidFeature:int32              | 2       | INTEL186        | 2       | 80186 or later
-| CpuidFeature:int32              | 3       | INTEL286        | 3       | 80286 or later
-| CpuidFeature:int32              | 4       | INTEL286_ONLY   | 4       | 80286 only
-| CpuidFeature:int32              | 5       | INTEL386        | 5       | 80386 or later
-| CpuidFeature:int32              | 6       | INTEL386_ONLY   | 6       | 80386 only
-| CpuidFeature:int32              | 7       | INTEL386_A0_ONLY| 7       | 80386 A0-B0 stepping only (#(c:XBTS)#, #(c:IBTS)# instructions)
-| CpuidFeature:int32              | 8       | INTEL486        | 8       | Intel486 or later
-| CpuidFeature:int32              | 9       | INTEL486_A_ONLY | 9       | Intel486 A stepping only (#(c:CMPXCHG)#)
-| CpuidFeature:int32              | 10      | INTEL386_486_ONLY| 10      | 80386 and Intel486 only
-| CpuidFeature:int32              | 11      | IA64            | 11      | IA-64
-| CpuidFeature:int32              | 12      | X64             | 12      | CPUID.80000001H:EDX.LM[bit 29]
-| CpuidFeature:int32              | 13      | ADX             | 13      | CPUID.(EAX=07H, ECX=0H):EBX.ADX[bit 19]
-| CpuidFeature:int32              | 14      | AES             | 14      | CPUID.01H:ECX.AES[bit 25]
-| CpuidFeature:int32              | 15      | AVX             | 15      | CPUID.01H:ECX.AVX[bit 28]
-| CpuidFeature:int32              | 16      | AVX2            | 16      | CPUID.(EAX=07H, ECX=0H):EBX.AVX2[bit 5]
-| CpuidFeature:int32              | 17      | AVX512_4FMAPS   | 17      | CPUID.(EAX=07H, ECX=0H):EDX.AVX512_4FMAPS[bit 3]
-| CpuidFeature:int32              | 18      | AVX512_4VNNIW   | 18      | CPUID.(EAX=07H, ECX=0H):EDX.AVX512_4VNNIW[bit 2]
-| CpuidFeature:int32              | 19      | AVX512_BF16     | 19      | CPUID.(EAX=07H, ECX=1H):EAX[bit 5]
-| CpuidFeature:int32              | 20      | AVX512_BITALG   | 20      | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_BITALG[bit 12]
-| CpuidFeature:int32              | 21      | AVX512_IFMA     | 21      | CPUID.(EAX=07H, ECX=0H):EBX.AVX512_IFMA[bit 21]
-| CpuidFeature:int32              | 22      | AVX512_VBMI     | 22      | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_VBMI[bit 1]
-| CpuidFeature:int32              | 23      | AVX512_VBMI2    | 23      | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_VBMI2[bit 6]
-| CpuidFeature:int32              | 24      | AVX512_VNNI     | 24      | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_VNNI[bit 11]
-| CpuidFeature:int32              | 25      | AVX512_VP2INTERSECT| 25      | CPUID.(EAX=07H, ECX=0H):EDX[bit 08]
-| CpuidFeature:int32              | 26      | AVX512_VPOPCNTDQ| 26      | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_VPOPCNTDQ[bit 14]
-| CpuidFeature:int32              | 27      | AVX512BW        | 27      | CPUID.(EAX=07H, ECX=0H):EBX.AVX512BW[bit 30]
-| CpuidFeature:int32              | 28      | AVX512CD        | 28      | CPUID.(EAX=07H, ECX=0H):EBX.AVX512CD[bit 28]
-| CpuidFeature:int32              | 29      | AVX512DQ        | 29      | CPUID.(EAX=07H, ECX=0H):EBX.AVX512DQ[bit 17]
-| CpuidFeature:int32              | 30      | AVX512ER        | 30      | CPUID.(EAX=07H, ECX=0H):EBX.AVX512ER[bit 27]
-| CpuidFeature:int32              | 31      | AVX512F         | 31      | CPUID.(EAX=07H, ECX=0H):EBX.AVX512F[bit 16]
-| CpuidFeature:int32              | 32      | AVX512PF        | 32      | CPUID.(EAX=07H, ECX=0H):EBX.AVX512PF[bit 26]
-| CpuidFeature:int32              | 33      | AVX512VL        | 33      | CPUID.(EAX=07H, ECX=0H):EBX.AVX512VL[bit 31]
-| CpuidFeature:int32              | 34      | BMI1            | 34      | CPUID.(EAX=07H, ECX=0H):EBX.BMI1[bit 3]
-| CpuidFeature:int32              | 35      | BMI2            | 35      | CPUID.(EAX=07H, ECX=0H):EBX.BMI2[bit 8]
-| CpuidFeature:int32              | 36      | CET_IBT         | 36      | CPUID.(EAX=07H, ECX=0H):EDX.CET_IBT[bit 20]
-| CpuidFeature:int32              | 37      | CET_SS          | 37      | CPUID.(EAX=07H, ECX=0H):ECX.CET_SS[bit 7]
-| CpuidFeature:int32              | 38      | CL1INVMB        | 38      | #(c:CL1INVMB)# instruction (Intel SCC = Single-Chip Computer)
-| CpuidFeature:int32              | 39      | CLDEMOTE        | 39      | CPUID.(EAX=07H, ECX=0H):ECX.CLDEMOTE[bit 25]
-| CpuidFeature:int32              | 40      | CLFLUSHOPT      | 40      | CPUID.(EAX=07H, ECX=0H):EBX.CLFLUSHOPT[bit 23]
-| CpuidFeature:int32              | 41      | CLFSH           | 41      | CPUID.01H:EDX.CLFSH[bit 19]
-| CpuidFeature:int32              | 42      | CLWB            | 42      | CPUID.(EAX=07H, ECX=0H):EBX.CLWB[bit 24]
-| CpuidFeature:int32              | 43      | CLZERO          | 43      | CPUID.80000008H:EBX.CLZERO[bit 0]
-| CpuidFeature:int32              | 44      | CMOV            | 44      | CPUID.01H:EDX.CMOV[bit 15]
-| CpuidFeature:int32              | 45      | CMPXCHG16B      | 45      | CPUID.01H:ECX.CMPXCHG16B[bit 13]
-| CpuidFeature:int32              | 46      | CPUID           | 46      | #(c:RFLAGS.ID)# can be toggled
-| CpuidFeature:int32              | 47      | CX8             | 47      | CPUID.01H:EDX.CX8[bit 8]
-| CpuidFeature:int32              | 48      | D3NOW           | 48      | CPUID.80000001H:EDX.3DNOW[bit 31]
-| CpuidFeature:int32              | 49      | D3NOWEXT        | 49      | CPUID.80000001H:EDX.3DNOWEXT[bit 30]
-| CpuidFeature:int32              | 50      | ENCLV           | 50      | CPUID.(EAX=12H, ECX=0H):EAX.OSS[bit 5]
-| CpuidFeature:int32              | 51      | ENQCMD          | 51      | CPUID.(EAX=07H, ECX=0H):ECX[bit 29]
-| CpuidFeature:int32              | 52      | F16C            | 52      | CPUID.01H:ECX.F16C[bit 29]
-| CpuidFeature:int32              | 53      | FMA             | 53      | CPUID.01H:ECX.FMA[bit 12]
-| CpuidFeature:int32              | 54      | FMA4            | 54      | CPUID.80000001H:ECX.FMA4[bit 16]
-| CpuidFeature:int32              | 55      | FPU             | 55      | 8087 or later (CPUID.01H:EDX.FPU[bit 0])
-| CpuidFeature:int32              | 56      | FPU287          | 56      | 80287 or later
-| CpuidFeature:int32              | 57      | FPU287XL_ONLY   | 57      | 80287XL only
-| CpuidFeature:int32              | 58      | FPU387          | 58      | 80387 or later
-| CpuidFeature:int32              | 59      | FPU387SL_ONLY   | 59      | 80387SL only
-| CpuidFeature:int32              | 60      | FSGSBASE        | 60      | CPUID.(EAX=07H, ECX=0H):EBX.FSGSBASE[bit 0]
-| CpuidFeature:int32              | 61      | FXSR            | 61      | CPUID.01H:EDX.FXSR[bit 24]
-| CpuidFeature:int32              | 62      | GEODE           | 62      | AMD Geode LX/GX CPU
-| CpuidFeature:int32              | 63      | GFNI            | 63      | CPUID.(EAX=07H, ECX=0H):ECX.GFNI[bit 8]
-| CpuidFeature:int32              | 64      | HLE             | 64      | CPUID.(EAX=07H, ECX=0H):EBX.HLE[bit 4]
-| CpuidFeature:int32              | 65      | HLE_or_RTM      | 65      | #(e:HLE)# or #(e:RTM)#
-| CpuidFeature:int32              | 66      | INVEPT          | 66      | #(e:VMX)# and IA32_VMX_EPT_VPID_CAP[bit 20]
-| CpuidFeature:int32              | 67      | INVPCID         | 67      | CPUID.(EAX=07H, ECX=0H):EBX.INVPCID[bit 10]
-| CpuidFeature:int32              | 68      | INVVPID         | 68      | #(e:VMX)# and IA32_VMX_EPT_VPID_CAP[bit 32]
-| CpuidFeature:int32              | 69      | LWP             | 69      | CPUID.80000001H:ECX.LWP[bit 15]
-| CpuidFeature:int32              | 70      | LZCNT           | 70      | CPUID.80000001H:ECX.LZCNT[bit 5]
-| CpuidFeature:int32              | 71      | MCOMMIT         | 71      | CPUID.80000008H:EBX.MCOMMIT[bit 8]
-| CpuidFeature:int32              | 72      | MMX             | 72      | CPUID.01H:EDX.MMX[bit 23]
-| CpuidFeature:int32              | 73      | MONITOR         | 73      | CPUID.01H:ECX.MONITOR[bit 3]
-| CpuidFeature:int32              | 74      | MONITORX        | 74      | CPUID.80000001H:ECX.MONITORX[bit 29]
-| CpuidFeature:int32              | 75      | MOVBE           | 75      | CPUID.01H:ECX.MOVBE[bit 22]
-| CpuidFeature:int32              | 76      | MOVDIR64B       | 76      | CPUID.(EAX=07H, ECX=0H):ECX.MOVDIR64B[bit 28]
-| CpuidFeature:int32              | 77      | MOVDIRI         | 77      | CPUID.(EAX=07H, ECX=0H):ECX.MOVDIRI[bit 27]
-| CpuidFeature:int32              | 78      | MPX             | 78      | CPUID.(EAX=07H, ECX=0H):EBX.MPX[bit 14]
-| CpuidFeature:int32              | 79      | MSR             | 79      | CPUID.01H:EDX.MSR[bit 5]
-| CpuidFeature:int32              | 80      | MULTIBYTENOP    | 80      | Multi-byte nops (#(c:0F1F /0)#): CPUID.01H.EAX[Bits 11:8] = 0110B or 1111B
-| CpuidFeature:int32              | 81      | PADLOCK_ACE     | 81      | CPUID.0C0000000H:EAX >= 0C0000001H AND CPUID.0C0000001H:EDX.ACE[Bits 7:6] = 11B ([6] = exists, [7] = enabled)
-| CpuidFeature:int32              | 82      | PADLOCK_PHE     | 82      | CPUID.0C0000000H:EAX >= 0C0000001H AND CPUID.0C0000001H:EDX.PHE[Bits 11:10] = 11B ([10] = exists, [11] = enabled)
-| CpuidFeature:int32              | 83      | PADLOCK_PMM     | 83      | CPUID.0C0000000H:EAX >= 0C0000001H AND CPUID.0C0000001H:EDX.PMM[Bits 13:12] = 11B ([12] = exists, [13] = enabled)
-| CpuidFeature:int32              | 84      | PADLOCK_RNG     | 84      | CPUID.0C0000000H:EAX >= 0C0000001H AND CPUID.0C0000001H:EDX.RNG[Bits 3:2] = 11B ([2] = exists, [3] = enabled)
-| CpuidFeature:int32              | 85      | PAUSE           | 85      | #(c:PAUSE)# instruction (Pentium 4 or later)
-| CpuidFeature:int32              | 86      | PCLMULQDQ       | 86      | CPUID.01H:ECX.PCLMULQDQ[bit 1]
-| CpuidFeature:int32              | 87      | PCOMMIT         | 87      | CPUID.(EAX=07H, ECX=0H):EBX.PCOMMIT[bit 22]
-| CpuidFeature:int32              | 88      | PCONFIG         | 88      | CPUID.(EAX=07H, ECX=0H):EDX.PCONFIG[bit 18]
-| CpuidFeature:int32              | 89      | PKU             | 89      | CPUID.(EAX=07H, ECX=0H):ECX.PKU[bit 3]
-| CpuidFeature:int32              | 90      | POPCNT          | 90      | CPUID.01H:ECX.POPCNT[bit 23]
-| CpuidFeature:int32              | 91      | PREFETCHW       | 91      | CPUID.80000001H:ECX.PREFETCHW[bit 8]
-| CpuidFeature:int32              | 92      | PREFETCHWT1     | 92      | CPUID.(EAX=07H, ECX=0H):ECX.PREFETCHWT1[bit 0]
-| CpuidFeature:int32              | 93      | PTWRITE         | 93      | CPUID.(EAX=14H, ECX=0H):EBX.PTWRITE[bit 4]
-| CpuidFeature:int32              | 94      | RDPID           | 94      | CPUID.(EAX=07H, ECX=0H):ECX.RDPID[bit 22]
-| CpuidFeature:int32              | 95      | RDPMC           | 95      | #(c:RDPMC)# instruction (Pentium MMX or later, or Pentium Pro or later)
-| CpuidFeature:int32              | 96      | RDPRU           | 96      | CPUID.80000008H:EBX.RDPRU[bit 4]
-| CpuidFeature:int32              | 97      | RDRAND          | 97      | CPUID.01H:ECX.RDRAND[bit 30]
-| CpuidFeature:int32              | 98      | RDSEED          | 98      | CPUID.(EAX=07H, ECX=0H):EBX.RDSEED[bit 18]
-| CpuidFeature:int32              | 99      | RDTSCP          | 99      | CPUID.80000001H:EDX.RDTSCP[bit 27]
-| CpuidFeature:int32              | 100     | RTM             | 100     | CPUID.(EAX=07H, ECX=0H):EBX.RTM[bit 11]
-| CpuidFeature:int32              | 101     | SEP             | 101     | CPUID.01H:EDX.SEP[bit 11]
-| CpuidFeature:int32              | 102     | SGX1            | 102     | CPUID.(EAX=12H, ECX=0H):EAX.SGX1[bit 0]
-| CpuidFeature:int32              | 103     | SHA             | 103     | CPUID.(EAX=07H, ECX=0H):EBX.SHA[bit 29]
-| CpuidFeature:int32              | 104     | SKINIT          | 104     | CPUID.80000001H:ECX.SKINIT[bit 12]
-| CpuidFeature:int32              | 105     | SKINIT_or_SVML  | 105     | #(e:SKINIT)# or #(e:SVML)#
-| CpuidFeature:int32              | 106     | SMAP            | 106     | CPUID.(EAX=07H, ECX=0H):EBX.SMAP[bit 20]
-| CpuidFeature:int32              | 107     | SMX             | 107     | CPUID.01H:ECX.SMX[bit 6]
-| CpuidFeature:int32              | 108     | SSE             | 108     | CPUID.01H:EDX.SSE[bit 25]
-| CpuidFeature:int32              | 109     | SSE2            | 109     | CPUID.01H:EDX.SSE2[bit 26]
-| CpuidFeature:int32              | 110     | SSE3            | 110     | CPUID.01H:ECX.SSE3[bit 0]
-| CpuidFeature:int32              | 111     | SSE4_1          | 111     | CPUID.01H:ECX.SSE4_1[bit 19]
-| CpuidFeature:int32              | 112     | SSE4_2          | 112     | CPUID.01H:ECX.SSE4_2[bit 20]
-| CpuidFeature:int32              | 113     | SSE4A           | 113     | CPUID.80000001H:ECX.SSE4A[bit 6]
-| CpuidFeature:int32              | 114     | SSSE3           | 114     | CPUID.01H:ECX.SSSE3[bit 9]
-| CpuidFeature:int32              | 115     | SVM             | 115     | CPUID.80000001H:ECX.SVM[bit 2]
-| CpuidFeature:int32              | 116     | SVML            | 116     | CPUID.8000000AH:EDX.SVML[bit 2]
-| CpuidFeature:int32              | 117     | SYSCALL         | 117     | CPUID.80000001H:EDX.SYSCALL[bit 11]
-| CpuidFeature:int32              | 118     | TBM             | 118     | CPUID.80000001H:ECX.TBM[bit 21]
-| CpuidFeature:int32              | 119     | TSC             | 119     | CPUID.01H:EDX.TSC[bit 4]
-| CpuidFeature:int32              | 120     | VAES            | 120     | CPUID.(EAX=07H, ECX=0H):ECX.VAES[bit 9]
-| CpuidFeature:int32              | 121     | VMX             | 121     | CPUID.01H:ECX.VMX[bit 5]
-| CpuidFeature:int32              | 122     | VPCLMULQDQ      | 122     | CPUID.(EAX=07H, ECX=0H):ECX.VPCLMULQDQ[bit 10]
-| CpuidFeature:int32              | 123     | WAITPKG         | 123     | CPUID.(EAX=07H, ECX=0H):ECX.WAITPKG[bit 5]
-| CpuidFeature:int32              | 124     | WBNOINVD        | 124     | CPUID.(EAX=80000008H, ECX=0H):EBX.WBNOINVD[bit 9]
-| CpuidFeature:int32              | 125     | XOP             | 125     | CPUID.80000001H:ECX.XOP[bit 11]
-| CpuidFeature:int32              | 126     | XSAVE           | 126     | CPUID.01H:ECX.XSAVE[bit 26]
-| CpuidFeature:int32              | 127     | XSAVEC          | 127     | CPUID.(EAX=0DH, ECX=1H):EAX.XSAVEC[bit 1]
-| CpuidFeature:int32              | 128     | XSAVEOPT        | 128     | CPUID.(EAX=0DH, ECX=1H):EAX.XSAVEOPT[bit 0]
-| CpuidFeature:int32              | 129     | XSAVES          | 129     | CPUID.(EAX=0DH, ECX=1H):EAX.XSAVES[bit 3]
-| CpuidFeature:int32              | 130     | SNP             | 130     | CPUID.8000001FH:EAX.SNP[bit 4]
-| CpuidFeature:int32              | 131     | SERIALIZE       | 131     | CPUID.(EAX=07H, ECX=0H):EDX.SERIALIZE[bit 14]
-| CpuidFeature:int32              | 132     | TSXLDTRK        | 132     | CPUID.(EAX=07H, ECX=0H):EDX.TSXLDTRK[bit 16]
+| TypeName                        | Index   | Name                            | Hex       | BitString                       | Description
+| CpuidFeature                    | 0       | INTEL8086                       | 0         |                                 | 8086 or later
+| CpuidFeature                    | 1       | INTEL8086_ONLY                  | 1         |                                 | 8086 only
+| CpuidFeature                    | 2       | INTEL186                        | 2         |                                 | 80186 or later
+| CpuidFeature                    | 3       | INTEL286                        | 3         |                                 | 80286 or later
+| CpuidFeature                    | 4       | INTEL286_ONLY                   | 4         |                                 | 80286 only
+| CpuidFeature                    | 5       | INTEL386                        | 5         |                                 | 80386 or later
+| CpuidFeature                    | 6       | INTEL386_ONLY                   | 6         |                                 | 80386 only
+| CpuidFeature                    | 7       | INTEL386_A0_ONLY                | 7         |                                 | 80386 A0-B0 stepping only (#(c:XBTS)#, #(c:IBTS)# instructions)
+| CpuidFeature                    | 8       | INTEL486                        | 8         |                                 | Intel486 or later
+| CpuidFeature                    | 9       | INTEL486_A_ONLY                 | 9         |                                 | Intel486 A stepping only (#(c:CMPXCHG)#)
+| CpuidFeature                    | 10      | INTEL386_486_ONLY               | a         |                                 | 80386 and Intel486 only
+| CpuidFeature                    | 11      | IA64                            | b         |                                 | IA-64
+| CpuidFeature                    | 12      | X64                             | c         |                                 | CPUID.80000001H:EDX.LM[bit 29]
+| CpuidFeature                    | 13      | ADX                             | d         |                                 | CPUID.(EAX=07H, ECX=0H):EBX.ADX[bit 19]
+| CpuidFeature                    | 14      | AES                             | e         |                                 | CPUID.01H:ECX.AES[bit 25]
+| CpuidFeature                    | 15      | AVX                             | f         |                                 | CPUID.01H:ECX.AVX[bit 28]
+| CpuidFeature                    | 16      | AVX2                            | 10        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX2[bit 5]
+| CpuidFeature                    | 17      | AVX512_4FMAPS                   | 11        |                                 | CPUID.(EAX=07H, ECX=0H):EDX.AVX512_4FMAPS[bit 3]
+| CpuidFeature                    | 18      | AVX512_4VNNIW                   | 12        |                                 | CPUID.(EAX=07H, ECX=0H):EDX.AVX512_4VNNIW[bit 2]
+| CpuidFeature                    | 19      | AVX512_BF16                     | 13        |                                 | CPUID.(EAX=07H, ECX=1H):EAX[bit 5]
+| CpuidFeature                    | 20      | AVX512_BITALG                   | 14        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_BITALG[bit 12]
+| CpuidFeature                    | 21      | AVX512_IFMA                     | 15        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX512_IFMA[bit 21]
+| CpuidFeature                    | 22      | AVX512_VBMI                     | 16        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_VBMI[bit 1]
+| CpuidFeature                    | 23      | AVX512_VBMI2                    | 17        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_VBMI2[bit 6]
+| CpuidFeature                    | 24      | AVX512_VNNI                     | 18        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_VNNI[bit 11]
+| CpuidFeature                    | 25      | AVX512_VP2INTERSECT             | 19        |                                 | CPUID.(EAX=07H, ECX=0H):EDX[bit 08]
+| CpuidFeature                    | 26      | AVX512_VPOPCNTDQ                | 1a        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.AVX512_VPOPCNTDQ[bit 14]
+| CpuidFeature                    | 27      | AVX512BW                        | 1b        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX512BW[bit 30]
+| CpuidFeature                    | 28      | AVX512CD                        | 1c        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX512CD[bit 28]
+| CpuidFeature                    | 29      | AVX512DQ                        | 1d        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX512DQ[bit 17]
+| CpuidFeature                    | 30      | AVX512ER                        | 1e        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX512ER[bit 27]
+| CpuidFeature                    | 31      | AVX512F                         | 1f        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX512F[bit 16]
+| CpuidFeature                    | 32      | AVX512PF                        | 20        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX512PF[bit 26]
+| CpuidFeature                    | 33      | AVX512VL                        | 21        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.AVX512VL[bit 31]
+| CpuidFeature                    | 34      | BMI1                            | 22        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.BMI1[bit 3]
+| CpuidFeature                    | 35      | BMI2                            | 23        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.BMI2[bit 8]
+| CpuidFeature                    | 36      | CET_IBT                         | 24        |                                 | CPUID.(EAX=07H, ECX=0H):EDX.CET_IBT[bit 20]
+| CpuidFeature                    | 37      | CET_SS                          | 25        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.CET_SS[bit 7]
+| CpuidFeature                    | 38      | CL1INVMB                        | 26        |                                 | #(c:CL1INVMB)# instruction (Intel SCC = Single-Chip Computer)
+| CpuidFeature                    | 39      | CLDEMOTE                        | 27        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.CLDEMOTE[bit 25]
+| CpuidFeature                    | 40      | CLFLUSHOPT                      | 28        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.CLFLUSHOPT[bit 23]
+| CpuidFeature                    | 41      | CLFSH                           | 29        |                                 | CPUID.01H:EDX.CLFSH[bit 19]
+| CpuidFeature                    | 42      | CLWB                            | 2a        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.CLWB[bit 24]
+| CpuidFeature                    | 43      | CLZERO                          | 2b        |                                 | CPUID.80000008H:EBX.CLZERO[bit 0]
+| CpuidFeature                    | 44      | CMOV                            | 2c        |                                 | CPUID.01H:EDX.CMOV[bit 15]
+| CpuidFeature                    | 45      | CMPXCHG16B                      | 2d        |                                 | CPUID.01H:ECX.CMPXCHG16B[bit 13]
+| CpuidFeature                    | 46      | CPUID                           | 2e        |                                 | #(c:RFLAGS.ID)# can be toggled
+| CpuidFeature                    | 47      | CX8                             | 2f        |                                 | CPUID.01H:EDX.CX8[bit 8]
+| CpuidFeature                    | 48      | D3NOW                           | 30        |                                 | CPUID.80000001H:EDX.3DNOW[bit 31]
+| CpuidFeature                    | 49      | D3NOWEXT                        | 31        |                                 | CPUID.80000001H:EDX.3DNOWEXT[bit 30]
+| CpuidFeature                    | 50      | ENCLV                           | 32        |                                 | CPUID.(EAX=12H, ECX=0H):EAX.OSS[bit 5]
+| CpuidFeature                    | 51      | ENQCMD                          | 33        |                                 | CPUID.(EAX=07H, ECX=0H):ECX[bit 29]
+| CpuidFeature                    | 52      | F16C                            | 34        |                                 | CPUID.01H:ECX.F16C[bit 29]
+| CpuidFeature                    | 53      | FMA                             | 35        |                                 | CPUID.01H:ECX.FMA[bit 12]
+| CpuidFeature                    | 54      | FMA4                            | 36        |                                 | CPUID.80000001H:ECX.FMA4[bit 16]
+| CpuidFeature                    | 55      | FPU                             | 37        |                                 | 8087 or later (CPUID.01H:EDX.FPU[bit 0])
+| CpuidFeature                    | 56      | FPU287                          | 38        |                                 | 80287 or later
+| CpuidFeature                    | 57      | FPU287XL_ONLY                   | 39        |                                 | 80287XL only
+| CpuidFeature                    | 58      | FPU387                          | 3a        |                                 | 80387 or later
+| CpuidFeature                    | 59      | FPU387SL_ONLY                   | 3b        |                                 | 80387SL only
+| CpuidFeature                    | 60      | FSGSBASE                        | 3c        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.FSGSBASE[bit 0]
+| CpuidFeature                    | 61      | FXSR                            | 3d        |                                 | CPUID.01H:EDX.FXSR[bit 24]
+| CpuidFeature                    | 62      | GEODE                           | 3e        |                                 | AMD Geode LX/GX CPU
+| CpuidFeature                    | 63      | GFNI                            | 3f        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.GFNI[bit 8]
+| CpuidFeature                    | 64      | HLE                             | 40        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.HLE[bit 4]
+| CpuidFeature                    | 65      | HLE_or_RTM                      | 41        |                                 | #(e:HLE)# or #(e:RTM)#
+| CpuidFeature                    | 66      | INVEPT                          | 42        |                                 | #(e:VMX)# and IA32_VMX_EPT_VPID_CAP[bit 20]
+| CpuidFeature                    | 67      | INVPCID                         | 43        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.INVPCID[bit 10]
+| CpuidFeature                    | 68      | INVVPID                         | 44        |                                 | #(e:VMX)# and IA32_VMX_EPT_VPID_CAP[bit 32]
+| CpuidFeature                    | 69      | LWP                             | 45        |                                 | CPUID.80000001H:ECX.LWP[bit 15]
+| CpuidFeature                    | 70      | LZCNT                           | 46        |                                 | CPUID.80000001H:ECX.LZCNT[bit 5]
+| CpuidFeature                    | 71      | MCOMMIT                         | 47        |                                 | CPUID.80000008H:EBX.MCOMMIT[bit 8]
+| CpuidFeature                    | 72      | MMX                             | 48        |                                 | CPUID.01H:EDX.MMX[bit 23]
+| CpuidFeature                    | 73      | MONITOR                         | 49        |                                 | CPUID.01H:ECX.MONITOR[bit 3]
+| CpuidFeature                    | 74      | MONITORX                        | 4a        |                                 | CPUID.80000001H:ECX.MONITORX[bit 29]
+| CpuidFeature                    | 75      | MOVBE                           | 4b        |                                 | CPUID.01H:ECX.MOVBE[bit 22]
+| CpuidFeature                    | 76      | MOVDIR64B                       | 4c        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.MOVDIR64B[bit 28]
+| CpuidFeature                    | 77      | MOVDIRI                         | 4d        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.MOVDIRI[bit 27]
+| CpuidFeature                    | 78      | MPX                             | 4e        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.MPX[bit 14]
+| CpuidFeature                    | 79      | MSR                             | 4f        |                                 | CPUID.01H:EDX.MSR[bit 5]
+| CpuidFeature                    | 80      | MULTIBYTENOP                    | 50        |                                 | Multi-byte nops (#(c:0F1F /0)#): CPUID.01H.EAX[Bits 11:8] = 0110B or 1111B
+| CpuidFeature                    | 81      | PADLOCK_ACE                     | 51        |                                 | CPUID.0C0000000H:EAX >= 0C0000001H AND CPUID.0C0000001H:EDX.ACE[Bits 7:6] = 11B ([6] = exists, [7] = enabled)
+| CpuidFeature                    | 82      | PADLOCK_PHE                     | 52        |                                 | CPUID.0C0000000H:EAX >= 0C0000001H AND CPUID.0C0000001H:EDX.PHE[Bits 11:10] = 11B ([10] = exists, [11] = enabled)
+| CpuidFeature                    | 83      | PADLOCK_PMM                     | 53        |                                 | CPUID.0C0000000H:EAX >= 0C0000001H AND CPUID.0C0000001H:EDX.PMM[Bits 13:12] = 11B ([12] = exists, [13] = enabled)
+| CpuidFeature                    | 84      | PADLOCK_RNG                     | 54        |                                 | CPUID.0C0000000H:EAX >= 0C0000001H AND CPUID.0C0000001H:EDX.RNG[Bits 3:2] = 11B ([2] = exists, [3] = enabled)
+| CpuidFeature                    | 85      | PAUSE                           | 55        |                                 | #(c:PAUSE)# instruction (Pentium 4 or later)
+| CpuidFeature                    | 86      | PCLMULQDQ                       | 56        |                                 | CPUID.01H:ECX.PCLMULQDQ[bit 1]
+| CpuidFeature                    | 87      | PCOMMIT                         | 57        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.PCOMMIT[bit 22]
+| CpuidFeature                    | 88      | PCONFIG                         | 58        |                                 | CPUID.(EAX=07H, ECX=0H):EDX.PCONFIG[bit 18]
+| CpuidFeature                    | 89      | PKU                             | 59        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.PKU[bit 3]
+| CpuidFeature                    | 90      | POPCNT                          | 5a        |                                 | CPUID.01H:ECX.POPCNT[bit 23]
+| CpuidFeature                    | 91      | PREFETCHW                       | 5b        |                                 | CPUID.80000001H:ECX.PREFETCHW[bit 8]
+| CpuidFeature                    | 92      | PREFETCHWT1                     | 5c        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.PREFETCHWT1[bit 0]
+| CpuidFeature                    | 93      | PTWRITE                         | 5d        |                                 | CPUID.(EAX=14H, ECX=0H):EBX.PTWRITE[bit 4]
+| CpuidFeature                    | 94      | RDPID                           | 5e        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.RDPID[bit 22]
+| CpuidFeature                    | 95      | RDPMC                           | 5f        |                                 | #(c:RDPMC)# instruction (Pentium MMX or later, or Pentium Pro or later)
+| CpuidFeature                    | 96      | RDPRU                           | 60        |                                 | CPUID.80000008H:EBX.RDPRU[bit 4]
+| CpuidFeature                    | 97      | RDRAND                          | 61        |                                 | CPUID.01H:ECX.RDRAND[bit 30]
+| CpuidFeature                    | 98      | RDSEED                          | 62        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.RDSEED[bit 18]
+| CpuidFeature                    | 99      | RDTSCP                          | 63        |                                 | CPUID.80000001H:EDX.RDTSCP[bit 27]
+| CpuidFeature                    | 100     | RTM                             | 64        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.RTM[bit 11]
+| CpuidFeature                    | 101     | SEP                             | 65        |                                 | CPUID.01H:EDX.SEP[bit 11]
+| CpuidFeature                    | 102     | SGX1                            | 66        |                                 | CPUID.(EAX=12H, ECX=0H):EAX.SGX1[bit 0]
+| CpuidFeature                    | 103     | SHA                             | 67        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.SHA[bit 29]
+| CpuidFeature                    | 104     | SKINIT                          | 68        |                                 | CPUID.80000001H:ECX.SKINIT[bit 12]
+| CpuidFeature                    | 105     | SKINIT_or_SVML                  | 69        |                                 | #(e:SKINIT)# or #(e:SVML)#
+| CpuidFeature                    | 106     | SMAP                            | 6a        |                                 | CPUID.(EAX=07H, ECX=0H):EBX.SMAP[bit 20]
+| CpuidFeature                    | 107     | SMX                             | 6b        |                                 | CPUID.01H:ECX.SMX[bit 6]
+| CpuidFeature                    | 108     | SSE                             | 6c        |                                 | CPUID.01H:EDX.SSE[bit 25]
+| CpuidFeature                    | 109     | SSE2                            | 6d        |                                 | CPUID.01H:EDX.SSE2[bit 26]
+| CpuidFeature                    | 110     | SSE3                            | 6e        |                                 | CPUID.01H:ECX.SSE3[bit 0]
+| CpuidFeature                    | 111     | SSE4_1                          | 6f        |                                 | CPUID.01H:ECX.SSE4_1[bit 19]
+| CpuidFeature                    | 112     | SSE4_2                          | 70        |                                 | CPUID.01H:ECX.SSE4_2[bit 20]
+| CpuidFeature                    | 113     | SSE4A                           | 71        |                                 | CPUID.80000001H:ECX.SSE4A[bit 6]
+| CpuidFeature                    | 114     | SSSE3                           | 72        |                                 | CPUID.01H:ECX.SSSE3[bit 9]
+| CpuidFeature                    | 115     | SVM                             | 73        |                                 | CPUID.80000001H:ECX.SVM[bit 2]
+| CpuidFeature                    | 116     | SVML                            | 74        |                                 | CPUID.8000000AH:EDX.SVML[bit 2]
+| CpuidFeature                    | 117     | SYSCALL                         | 75        |                                 | CPUID.80000001H:EDX.SYSCALL[bit 11]
+| CpuidFeature                    | 118     | TBM                             | 76        |                                 | CPUID.80000001H:ECX.TBM[bit 21]
+| CpuidFeature                    | 119     | TSC                             | 77        |                                 | CPUID.01H:EDX.TSC[bit 4]
+| CpuidFeature                    | 120     | VAES                            | 78        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.VAES[bit 9]
+| CpuidFeature                    | 121     | VMX                             | 79        |                                 | CPUID.01H:ECX.VMX[bit 5]
+| CpuidFeature                    | 122     | VPCLMULQDQ                      | 7a        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.VPCLMULQDQ[bit 10]
+| CpuidFeature                    | 123     | WAITPKG                         | 7b        |                                 | CPUID.(EAX=07H, ECX=0H):ECX.WAITPKG[bit 5]
+| CpuidFeature                    | 124     | WBNOINVD                        | 7c        |                                 | CPUID.(EAX=80000008H, ECX=0H):EBX.WBNOINVD[bit 9]
+| CpuidFeature                    | 125     | XOP                             | 7d        |                                 | CPUID.80000001H:ECX.XOP[bit 11]
+| CpuidFeature                    | 126     | XSAVE                           | 7e        |                                 | CPUID.01H:ECX.XSAVE[bit 26]
+| CpuidFeature                    | 127     | XSAVEC                          | 7f        |                                 | CPUID.(EAX=0DH, ECX=1H):EAX.XSAVEC[bit 1]
+| CpuidFeature                    | 128     | XSAVEOPT                        | 80        |                                 | CPUID.(EAX=0DH, ECX=1H):EAX.XSAVEOPT[bit 0]
+| CpuidFeature                    | 129     | XSAVES                          | 81        |                                 | CPUID.(EAX=0DH, ECX=1H):EAX.XSAVES[bit 3]
+| CpuidFeature                    | 130     | SNP                             | 82        |                                 | CPUID.8000001FH:EAX.SNP[bit 4]
+| CpuidFeature                    | 131     | SERIALIZE                       | 83        |                                 | CPUID.(EAX=07H, ECX=0H):EDX.SERIALIZE[bit 14]
+| CpuidFeature                    | 132     | TSXLDTRK                        | 84        |                                 | CPUID.(EAX=07H, ECX=0H):EDX.TSXLDTRK[bit 16]

@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data 
 {
-    using System.Linq;
     using System;
-    using System.Reflection;
 
 	[Flags]
 	public enum InstrInfoFlags : uint 
@@ -20,5 +18,4 @@ namespace Z0.Asm.Data
 		AVX2_Check				= 0x00000020,
 		OpMaskRegReadWrite		= 0x00000040,
 	}
-
 }

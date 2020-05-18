@@ -6,7 +6,6 @@ namespace Z0.Asm.Data
 {
     using System;
 
-
 	public enum DecoratorKind 
 	{
 		[Comment("Broadcast decorator, eg. #(c:{1to4})#")]

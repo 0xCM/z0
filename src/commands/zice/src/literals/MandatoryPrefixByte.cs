@@ -5,7 +5,7 @@
 namespace Z0.Asm.Data
 {
     using System;
-
+	
 	public enum MandatoryPrefixByte : uint 
     {
 		None,
@@ -13,5 +13,4 @@ namespace Z0.Asm.Data
 		PF3,
 		PF2,
 	}
-
 }

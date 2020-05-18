@@ -12,17 +12,17 @@ namespace Z0
     using F = ResourceField;
     using R = ResourceRecord;
 
-    public enum ResourceField : ulong
+    public enum ResourceField : int
     {
-        Offset = 0 | (8ul << 32),
+        Offset = 0 | (8 << 16),
 
-        Address = 1 | (16ul << 32),
+        Address = 1 | (16 << 16),
 
-        Size = 2 | (10ul << 32),
+        Size = 2 | (10 << 16),
 
-        Uri = 3 | (40ul << 32),
+        Uri = 3 | (40 << 16),
 
-        Data = 4 | 1ul << 32,
+        Data = 4 | 1 << 16,
     }
 
     /// <summary>
@@ -60,13 +60,26 @@ namespace Z0
         public string DelimitedText(char delimiter)
         {
             var dst = text.factory.Builder();
-            dst.AppendField(Offset, F.Offset);
-            dst.AppendDelimited(Address, F.Address, delimiter); 
+            dst.AppendField(F.Offset, Offset);
+            dst.AppendDelimitedHere(Address, F.Address, delimiter); 
             dst.AppendDelimited(Size.FormatAsmHex(4), FieldFormat.width(F.Size), delimiter); 
             dst.AppendDelimited(Uri, FieldFormat.width(F.Uri), delimiter);                        
             dst.AppendDelimited(Data.FormatHexBytes(), delimiter);                        
             return dst.ToString();
         }
+    }
+
+    partial class XTend
+    {
+        internal static void AppendDelimitedHere<C,F>(this StringBuilder sb, C content, F field, char delimiter)
+            where C : ITextual
+            where F : unmanaged, Enum
+        {
+            var pad = FieldFormat.width(field);
+            sb.Append($"{delimiter} ");            
+            sb.Append($"{content?.Format()}".PadRight(pad));
+        }
+
     }
 
     public class ResourceReport : Report<ResourceReport,F,R>

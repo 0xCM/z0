@@ -13,5 +13,4 @@ namespace Z0.Asm.Data
 		Table0F38,
 		Table0F3A,
 	}
-
 }

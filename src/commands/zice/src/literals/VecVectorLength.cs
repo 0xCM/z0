@@ -5,8 +5,6 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Reflection;
-	using System.Linq;
 
 	public enum VexVectorLength 
 	{
@@ -16,15 +14,6 @@ namespace Z0.Asm.Data
 		L128,
 		L256,
 		LIG,
-	}
-
-	static class VexVectorLengthEnum {
-		const string documentation = null;
-
-		static IceEnumValue[] GetValues() =>
-			typeof(VexVectorLength).GetFields().Where(a => a.IsLiteral).Select(a => new IceEnumValue((uint)(VexVectorLength)a.GetValue(null)!, a.Name, CommentAttribute.GetDocumentation(a))).ToArray();
-
-		public static readonly EnumType Instance = new EnumType(TypeIds.VexVectorLength, documentation, GetValues(), EnumTypeFlags.None);
 	}
 
 }

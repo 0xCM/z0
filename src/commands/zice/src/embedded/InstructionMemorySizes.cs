@@ -10,7 +10,7 @@ namespace Z0.Asm.Data
 	{
 		// 0 = memory size
 		// 1 = broadcast memory size
-		internal static System.ReadOnlySpan<byte> Sizes => new byte[IcedConstants.NumberOfCodeValues * 2] {
+		public static ReadOnlySpan<byte> Sizes => new byte[IcedConstants.NumberOfCodeValues * 2] {
 			0,// INVALID
 			0,// DeclareByte
 			0,// DeclareWord

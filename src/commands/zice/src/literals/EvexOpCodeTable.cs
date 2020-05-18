@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data 
 {
-    using System.Linq;
-    using System;
-    using System.Reflection;
-
-	public enum EvexOpCodeTable 
+ 	public enum EvexOpCodeTable 
     {
 		Table0F					= 1,
 		Table0F38				= 2,

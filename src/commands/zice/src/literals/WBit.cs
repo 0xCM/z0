@@ -13,5 +13,4 @@ namespace Z0.Asm.Data
 		WIG,
 		WIG32,
 	}
-
 }

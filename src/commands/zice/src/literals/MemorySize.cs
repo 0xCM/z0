@@ -7,9 +7,6 @@ namespace Z0.Asm.Data
     using System;
     using System.Linq;
 
-    using static Seed;
-    using static Memories;
-
 	public enum MemorySize 
 	{
 		[Comment("Unknown size or the instruction doesn't reference any memory (eg. #(c:LEA)#)")]
@@ -284,16 +281,5 @@ namespace Z0.Asm.Data
 		Broadcast256_2xBFloat16,
 		[Comment("Broadcast 2 x #(t:bf16)# to 512 bits")]
 		Broadcast512_2xBFloat16,
-	}
-
-
-	static class MemorySizeEnum {
-		const string documentation = "Size of a memory reference";
-		public const int NumValues = 136;
-
-		static IceEnumValue[] GetValues() =>
-			typeof(MemorySize).GetFields().Where(a => a.IsLiteral).Select(a => new IceEnumValue((uint)(MemorySize)a.GetValue(null)!, a.Name, CommentAttribute.GetDocumentation(a))).ToArray();
-
-		public static readonly EnumType Instance = new EnumType(TypeIds.MemorySize, documentation, GetValues(), EnumTypeFlags.Public);
 	}
 }

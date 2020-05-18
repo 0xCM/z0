@@ -6,7 +6,7 @@ namespace Z0.Asm.Data
 {
 	using System;
 
-	[Flags]
+	[Flags,NumericBase(2,16)]
 	public enum LegacyFlags : uint 
 	{
 		MandatoryPrefixByteMask = 0x00000003,
@@ -41,5 +41,4 @@ namespace Z0.Asm.Data
 	
 		AddressSizeShift = 0x00000012,
 	}
-
 }

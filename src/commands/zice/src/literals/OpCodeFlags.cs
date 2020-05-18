@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data 
 {
-    using System.Linq;
     using System;
-    using System.Reflection;
 
     [Flags, NumericBase(16)]
     public enum OpCodeFlags : uint 
@@ -36,5 +34,4 @@ namespace Z0.Asm.Data
         NoInstruction			= 0x00200000,
         NonZeroOpMaskRegister	= 0x00400000,
     }
-
 }

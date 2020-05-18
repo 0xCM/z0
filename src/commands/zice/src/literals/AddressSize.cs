@@ -16,5 +16,4 @@ namespace Z0.Asm.Data
 		
 		Size64,
 	}
-
 }

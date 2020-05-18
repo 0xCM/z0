@@ -5,9 +5,6 @@
 namespace Z0.Asm.Data 
 {
     using System.Linq;
-    using System;
-    using System.Reflection;
-
 
 	public enum CpuidFeature 
 	{
@@ -279,13 +276,5 @@ namespace Z0.Asm.Data
 		TSXLDTRK,
 	}
 
-	static class CpuidFeatureEnum {
-		const string documentation = "#(c:CPUID)# feature flags";
-
-		static IceEnumValue[] GetValues() =>
-			typeof(CpuidFeature).GetFields().Where(a => a.IsLiteral).Select(a => new IceEnumValue((uint)(CpuidFeature)a.GetValue(null)!, a.Name, CommentAttribute.GetDocumentation(a))).ToArray();
-
-		public static readonly EnumType Instance = new EnumType(TypeIds.CpuidFeature, documentation, GetValues(), EnumTypeFlags.Public);
-	}    
 
 }

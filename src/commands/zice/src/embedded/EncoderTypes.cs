@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
     using System.Collections.Generic;
     using System.Linq;
 
-	sealed class EncoderTypes 
+	public class EncoderTypes 
     {
 		public static (IceEnumValue value, uint size)[] ImmSizes { get; }
 		public static Type EncFlags1 { get; }
@@ -24,6 +24,7 @@ namespace Z0.Asm.Data
 		public static Type XopFlags { get; }
 		public static Type EvexFlags { get; }
 		public static Type D3nowFlags { get; }
+
 		public static (IceEnumValue opCodeOperandKind, IceEnumValue legacyOpKind, OpHandlerKind opHandlerKind, object[] args)[] LegacyOpHandlers { get; } 
             = new (IceEnumValue opCodeOperandKind, IceEnumValue legacyOpKind, OpHandlerKind opHandlerKind, object[] args)[] {
 			(OpCodeOperandKindEnum.Instance[nameof(OpCodeOperandKind.None)], LegacyOpKindEnum.Instance[nameof(LegacyOpKind.None)], OpHandlerKind.None, new object[] { }),
@@ -212,6 +213,7 @@ namespace Z0.Asm.Data
 			(OpCodeOperandKindEnum.Instance[nameof(OpCodeOperandKind.xmm_or_mem)], XopOpKindEnum.Instance[nameof(XopOpKind.WX)], OpHandlerKind.OpModRM_rm, new object[] { RegisterEnum.Instance[nameof(Register.XMM0)], RegisterEnum.Instance[nameof(Register.XMM15)] }),
 			(OpCodeOperandKindEnum.Instance[nameof(OpCodeOperandKind.ymm_or_mem)], XopOpKindEnum.Instance[nameof(XopOpKind.WY)], OpHandlerKind.OpModRM_rm, new object[] { RegisterEnum.Instance[nameof(Register.YMM0)], RegisterEnum.Instance[nameof(Register.YMM15)] }),
 		};
+
 		public static (IceEnumValue opCodeOperandKind, IceEnumValue evexOpKind, OpHandlerKind opHandlerKind, object[] args)[] EvexOpHandlers { get; } 
             = new (IceEnumValue opCodeOperandKind, IceEnumValue evexOpKind, OpHandlerKind opHandlerKind, object[] args)[] {
 			(OpCodeOperandKindEnum.Instance[nameof(OpCodeOperandKind.None)], EvexOpKindEnum.Instance[nameof(EvexOpKind.None)], OpHandlerKind.None, new object[] { }),

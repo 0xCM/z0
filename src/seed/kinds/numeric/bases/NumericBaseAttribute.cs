@@ -16,11 +16,19 @@ namespace Z0
             this.Base = (NumericBaseKind)@base;
         }
 
+        public NumericBaseAttribute(int @base, int dmax)
+        {
+            this.Base = (NumericBaseKind)@base;
+            this.MaxDigits = dmax;
+        }
+
         public NumericBaseAttribute(NumericBaseKind @base)
         {
             this.Base = @base;
         }
         
         public NumericBaseKind Base {get;}
+
+        public int? MaxDigits {get;}
     }
 }

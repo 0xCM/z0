@@ -25,6 +25,4 @@ namespace Z0.Asm.Data
 		WriteForce,
 		WriteMem_ReadWriteReg,
 	}
-
-
 }

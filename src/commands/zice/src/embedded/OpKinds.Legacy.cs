@@ -8,9 +8,9 @@ namespace Z0.Asm.Data
     using System.Reflection;
 	using System.Linq;
 
-	partial class OpCodeOperandKinds 
+	partial class EmbeddedData 
 	{
-		public static System.ReadOnlySpan<byte> LegacyOpKinds => new byte[121] 
+		public static ReadOnlySpan<byte> LegacyOpKinds => new byte[121] 
 		{
 			(byte)OpCodeOperandKind.None,// None
 			(byte)OpCodeOperandKind.farbr2_2,// Aww

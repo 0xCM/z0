@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
     using System.Reflection;
 	using System.Linq;
 
-	partial class OpCodeOperandKinds 
+	partial class EmbeddedData 
 	{
 		public static System.ReadOnlySpan<byte> XopOpKinds => new byte[19] {
 			(byte)OpCodeOperandKind.None,// None

@@ -21,5 +21,4 @@ namespace Z0.Asm.Data
 		/// <summary>Round toward zero (truncate)</summary>
 		RoundTowardZero = 4,
 	}
-
 }

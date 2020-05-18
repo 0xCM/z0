@@ -6,7 +6,7 @@ namespace Z0.Asm.Data
 {
 	using System;
 
-	[Flags]
+	[Flags, NumericBase(2, 16)]
 	public enum EncoderFlags : uint 
 	{
 		None = 0x00000000,
@@ -29,6 +29,4 @@ namespace Z0.Asm.Data
 		VvvvvShift = 0x0000001B,
 		VvvvvMask = 0x0000001F,
 	}
-
-
 }

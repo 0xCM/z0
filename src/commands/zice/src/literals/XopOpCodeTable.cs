@@ -5,7 +5,7 @@
 namespace Z0.Asm.Data
 {
     using System;
-
+	
 	public enum XopOpCodeTable 
 	{
 		XOP8,

@@ -6,8 +6,8 @@ namespace Z0.Asm.Data
 {
     using System;
 
-	[Flags]
-	enum RegisterFlags 
+	[Flags, NumericBase(2,20)]
+	public enum RegisterFlags 
     {
 		None				= 0,
 		SegmentRegister		= 1,

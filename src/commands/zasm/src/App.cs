@@ -12,6 +12,7 @@ namespace Z0
     using Z0.Asm;
     using Z0.Asm.Data;
     using Z0.Asm.Encoding;
+    using Z0.Data;
 
     using static Seed;
     using static Memories;
@@ -52,80 +53,21 @@ namespace Z0
             term.print(mrm.Format());
         }
 
-        FilePath PublishOpCodeDetails(IAsmArchives archives)
-        {
-            archives.PublishOpCodeDetails(out var dst);
-            term.print($"Published opcodes data set to {dst}");
-            return dst;
-        }
-
-        FilePath PublishInstructionData(IAsmArchives archives)
-        {
-            var inxsdata = archives.InstructionsData();
-            //Control.iter(inxsdata, i => term.print(i.Code.RawName));
-            return default;
-        }
-
         IEnumerable<DecoderTestCase> DecoderCases(int bitness, FilePath src)
             => DecoderTestParser.ReadFile(bitness,src);
 
-        void ParseDecoderTests(IAsmArchives src)
-        {
-            var bits = Control.array(16,32,64);
-            var count = 0;
-            foreach(var file in src.IcedDecoderTests)
-            {
-                term.print($"Loading {file}");
-                
-                foreach(var b in bits)
-                {
-                    if(file.Contains(b.ToString()))
-                    {
-                        foreach(var test in DecoderCases(b,file))
-                        {
-                            count++;
-                        }
-                    }
-                }
-            }
-            term.print($"Loaded {count} test cases");
-        }
-
-        void OnPublished(FilePath path)
-        {
-            term.print(path);
-        }
-        public void PublishLiterals()
-        {
-            var archives = AsmArchives.Service;
-            archives.PublishLiterals<OpCodeOperandKind>().OnSome(OnPublished);
-            archives.PublishLiterals<CpuidFeature>().OnSome(OnPublished);
-            archives.PublishLiterals<EncoderFlags>().OnSome(OnPublished);
-            archives.PublishLiterals<EncodingKind>().OnSome(OnPublished);
-            archives.PublishLiterals<FlowControl>().OnSome(OnPublished);
-
-            archives.PublishLiterals<LegacyFlags>().OnSome(OnPublished);
-            archives.PublishLiterals<LegacyFlags3>().OnSome(OnPublished);
-
-            archives.PublishLiterals<LegacyOpCodeTable>().OnSome(OnPublished);
-            archives.PublishLiterals<LegacyOpKind>().OnSome(OnPublished);
-
-            archives.PublishLiterals<MandatoryPrefix>().OnSome(OnPublished);
-            archives.PublishLiterals<MemorySize>().OnSome(OnPublished);
-            archives.PublishLiterals<OpCodeFlags>().OnSome(OnPublished);
-
-            archives.PublishLiterals<OpCodeHandlerKind>().OnSome(OnPublished);
-
-        }
         public override void RunShell(params string[] args)
         {            
             var parts = PartParser.Service.ParseValid(args);  
-            var archives = AsmArchives.Service;
 
-            term.print(ModRmByte.Example.Format());
-            //var opcodes = PublishOpCodeDetails(archives);
-            //ParseDecoderTests(archives);
-            //PublishLiterals();
+            var etl = AsmEtl.Service;
+            //etl.PublishOpCodeInfo();
+            //etl.PublishLists();
+            //etl.PublishLiterals();
+            etl.PublishDecoderTests();
+            // etl.Publish(AsmEtl.Instructions);
+            // etl.Publish(AsmEtl.OpCodes);
+
                                     
         }
 

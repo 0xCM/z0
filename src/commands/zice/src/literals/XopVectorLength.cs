@@ -5,8 +5,6 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Reflection;
-	using System.Linq;
 
 	public enum XopVectorLength 
     {
@@ -16,13 +14,5 @@ namespace Z0.Asm.Data
 		L1,
 	}
 
-	static class XopVectorLengthEnum {
-		const string documentation = null;
-
-		static IceEnumValue[] GetValues() =>
-			typeof(XopVectorLength).GetFields().Where(a => a.IsLiteral).Select(a => new IceEnumValue((uint)(XopVectorLength)a.GetValue(null)!, a.Name, CommentAttribute.GetDocumentation(a))).ToArray();
-
-		public static readonly EnumType Instance = new EnumType(TypeIds.XopVectorLength, documentation, GetValues(), EnumTypeFlags.None);
-	}
 
 }

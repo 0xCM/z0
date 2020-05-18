@@ -15,5 +15,4 @@ namespace Z0.Asm.Data
 		Op2Shift = 0x0000000E,
 		Op3Shift = 0x00000015,
 	}
-
 }

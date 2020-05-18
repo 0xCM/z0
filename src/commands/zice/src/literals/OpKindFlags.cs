@@ -37,8 +37,7 @@ namespace Z0.Asm.Data
 		
         CodeSizeShift			= 30,
 
-		// Bits ignored by Equals()
-		EqualsIgnoreMask		= CodeSizeMask << (int)CodeSizeShift,
+		
+		EqualsIgnoreMask		= CodeSizeMask << (int)CodeSizeShift, // Bits ignored by Equals()
 	}
-
 }

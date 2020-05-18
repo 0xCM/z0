@@ -30,5 +30,4 @@ namespace Z0.Asm.Data
 		WX,
 		WY,
 	}
-
 }

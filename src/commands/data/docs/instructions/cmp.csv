@@ -2,9 +2,9 @@
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                        |
 | 38 / r           | CMP r/m8, r8      | MR    | Valid       | Valid           | Compare r8 with r/m8.                              |
-| REX + 38 / r     | CMP r/m8 * , r8 * | MR    | Valid       | N.E.            | Compare r8 with r/m8.                              |
 | 39 / r           | CMP r/m16, r16    | MR    | Valid       | Valid           | Compare r16 with r/m16.                            |
 | 39 / r           | CMP r/m32, r32    | MR    | Valid       | Valid           | Compare r32 with r/m32.                            |
+| REX + 38 / r     | CMP r/m8 * , r8 * | MR    | Valid       | N.E.            | Compare r8 with r/m8.                              |
 | REX.W + 39 / r   | CMP r/m64,r64     | MR    | Valid       | N.E.            | Compare r64 with r/m64.                            |
 | 3A / r           | CMP r8, r/m8      | RM    | Valid       | Valid           | Compare r/m8 with r8.                              |
 | REX + 3A / r     | CMP r8 * , r/m8 * | RM    | Valid       | N.E.            | Compare r/m8 with r8.                              |

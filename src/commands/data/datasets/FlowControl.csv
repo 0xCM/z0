@@ -1,11 +1,11 @@
-| TypeName                        | Index   | Name            | Value   | Description
-| FlowControl:int32               | 0       | Next            | 0       | The next instruction that will be executed is the next instruction in the instruction stream
-| FlowControl:int32               | 1       | UnconditionalBranch| 1       | It's an unconditional branch instruction: #(c:JMP NEAR)#, #(c:JMP FAR)#
-| FlowControl:int32               | 2       | IndirectBranch  | 2       | It's an unconditional indirect branch: #(c:JMP NEAR reg)#, #(c:JMP NEAR [mem])#, #(c:JMP FAR [mem])#
-| FlowControl:int32               | 3       | ConditionalBranch| 3       | It's a conditional branch instruction: #(c:Jcc SHORT)#, #(c:Jcc NEAR)#, #(c:LOOP)#, #(c:LOOPcc)#, #(c:JRCXZ)#
-| FlowControl:int32               | 4       | Return          | 4       | It's a return instruction: #(c:RET NEAR)#, #(c:RET FAR)#, #(c:IRET)#, #(c:SYSRET)#, #(c:SYSEXIT)#, #(c:RSM)#, #(c:VMLAUNCH)#, #(c:VMRESUME)#, #(c:VMRUN)#, #(c:SKINIT)#
-| FlowControl:int32               | 5       | Call            | 5       | It's a call instruction: #(c:CALL NEAR)#, #(c:CALL FAR)#, #(c:SYSCALL)#, #(c:SYSENTER)#, #(c:VMCALL)#, #(c:VMMCALL)#
-| FlowControl:int32               | 6       | IndirectCall    | 6       | It's an indirect call instruction: #(c:CALL NEAR reg)#, #(c:CALL NEAR [mem])#, #(c:CALL FAR [mem])#
-| FlowControl:int32               | 7       | Interrupt       | 7       | It's an interrupt instruction: #(c:INT n)#, #(c:INT3)#, #(c:INT1)#, #(c:INTO)#
-| FlowControl:int32               | 8       | XbeginXabortXend| 8       | It's #(c:XBEGIN)#, #(c:XABORT)#, #(c:XEND)#, #(c:XSUSLDTRK)#, #(c:XRESLDTRK)#
-| FlowControl:int32               | 9       | Exception       | 9       | It's an invalid instruction, eg. #(e:Code.INVALID)#, #(c:UD0)#, #(c:UD1)#, #(c:UD2)#
+| TypeName                        | Index   | Name                            | Hex       | BitString                       | Description
+| FlowControl                     | 0       | Next                            | 0         |                                 | The next instruction that will be executed is the next instruction in the instruction stream
+| FlowControl                     | 1       | UnconditionalBranch             | 1         |                                 | It's an unconditional branch instruction: #(c:JMP NEAR)#, #(c:JMP FAR)#
+| FlowControl                     | 2       | IndirectBranch                  | 2         |                                 | It's an unconditional indirect branch: #(c:JMP NEAR reg)#, #(c:JMP NEAR [mem])#, #(c:JMP FAR [mem])#
+| FlowControl                     | 3       | ConditionalBranch               | 3         |                                 | It's a conditional branch instruction: #(c:Jcc SHORT)#, #(c:Jcc NEAR)#, #(c:LOOP)#, #(c:LOOPcc)#, #(c:JRCXZ)#
+| FlowControl                     | 4       | Return                          | 4         |                                 | It's a return instruction: #(c:RET NEAR)#, #(c:RET FAR)#, #(c:IRET)#, #(c:SYSRET)#, #(c:SYSEXIT)#, #(c:RSM)#, #(c:VMLAUNCH)#, #(c:VMRESUME)#, #(c:VMRUN)#, #(c:SKINIT)#
+| FlowControl                     | 5       | Call                            | 5         |                                 | It's a call instruction: #(c:CALL NEAR)#, #(c:CALL FAR)#, #(c:SYSCALL)#, #(c:SYSENTER)#, #(c:VMCALL)#, #(c:VMMCALL)#
+| FlowControl                     | 6       | IndirectCall                    | 6         |                                 | It's an indirect call instruction: #(c:CALL NEAR reg)#, #(c:CALL NEAR [mem])#, #(c:CALL FAR [mem])#
+| FlowControl                     | 7       | Interrupt                       | 7         |                                 | It's an interrupt instruction: #(c:INT n)#, #(c:INT3)#, #(c:INT1)#, #(c:INTO)#
+| FlowControl                     | 8       | XbeginXabortXend                | 8         |                                 | It's #(c:XBEGIN)#, #(c:XABORT)#, #(c:XEND)#, #(c:XSUSLDTRK)#, #(c:XRESLDTRK)#
+| FlowControl                     | 9       | Exception                       | 9         |                                 | It's an invalid instruction, eg. #(e:Code.INVALID)#, #(c:UD0)#, #(c:UD1)#, #(c:UD2)#

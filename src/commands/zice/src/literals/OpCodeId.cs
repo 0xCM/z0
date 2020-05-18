@@ -5,13 +5,10 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Linq;
-
-    using static Seed;
-    using static Memories;
 
 	/// <summary>x86 instruction code</summary>
-	public enum OpCodeId {
+	public enum OpCodeId 
+	{
 		/// <summary>It&apos;s an invalid instruction, eg. it&apos;s a new unknown instruction, garbage or there&apos;s not enough bytes to decode the instruction etc.</summary>
 		INVALID = 0,
 		/// <summary>A <c>db</c>/<c>.byte</c> asm directive that can store 1-16 bytes</summary>

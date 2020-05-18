@@ -5,10 +5,7 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
 
-    using static Seed;
 	public enum VexOpCodeHandlerKind : byte 
     {
 		Invalid,

@@ -32,5 +32,4 @@ namespace Z0.Asm.Data
 		SizeIbReg,
 		Size1OpCode,
 	}
-
 }

@@ -1,6 +1,6 @@
-| TypeName                        | Index   | Name            | Value   | Description
-| EncodingKind:int32              | 0       | Legacy          | 0       | Legacy encoding
-| EncodingKind:int32              | 1       | VEX             | 1       | VEX encoding
-| EncodingKind:int32              | 2       | EVEX            | 2       | EVEX encoding
-| EncodingKind:int32              | 3       | XOP             | 3       | XOP encoding
-| EncodingKind:int32              | 4       | D3NOW           | 4       | 3DNow! encoding
+| TypeName                        | Index   | Name                            | Hex       | BitString                       | Description
+| EncodingKind                    | 0       | Legacy                          | 0         |                                 | Legacy encoding
+| EncodingKind                    | 1       | VEX                             | 1         |                                 | VEX encoding
+| EncodingKind                    | 2       | EVEX                            | 2         |                                 | EVEX encoding
+| EncodingKind                    | 3       | XOP                             | 3         |                                 | XOP encoding
+| EncodingKind                    | 4       | D3NOW                           | 4         |                                 | 3DNow! encoding

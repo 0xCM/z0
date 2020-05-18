@@ -16,5 +16,4 @@ namespace Z0.Asm.Data
 		RipRelSize4_Target32,
 		RipRelSize4_Target64,
 	}
-
 }

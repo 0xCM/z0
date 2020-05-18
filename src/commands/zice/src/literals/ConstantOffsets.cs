@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data 
 {
-    using System.Linq;
-    using System;
-    using System.Reflection;
-
 	/// <summary>
 	/// Contains the offsets of the displacement and immediate. Call the decoder's GetConstantOffsets() method
 	/// to get the offsets of the constants after the instruction has been decoded. The encoder has a similar method.

@@ -53,8 +53,7 @@ namespace Z0.Asm.Data
 		RepnePrefix				= 0x40000000,
 		
 		LockPrefix				= 0x80000000,
-
-		// Bits ignored by Equals()
-		EqualsIgnoreMask		= InstrLengthMask << (int)InstrLengthShift,
+		
+		EqualsIgnoreMask		= InstrLengthMask << (int)InstrLengthShift, // Bits ignored by Equals()
 	}
 }

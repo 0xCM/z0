@@ -22,6 +22,4 @@ namespace Z0.Asm.Data
 		WBitMask = 0x00000003,
 		WBitShift = 0x0000000D,
 	}
-
-
 }

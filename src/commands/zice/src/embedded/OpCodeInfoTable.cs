@@ -8,6 +8,7 @@ namespace Z0.Asm.Data
     using System.Reflection;
 	using System.Linq;
 	using System.Collections.Generic;
+
 	public static class OpCodeInfoTable 
 	{
 		public static readonly OpCodeInfo[] Data = GetData();
@@ -4254,5 +4255,4 @@ namespace Z0.Asm.Data
 			return data.OrderBy(a => a.Code.Value).ToArray();
 		}
 	}
-
 }

@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data 
 {
-    using System.Linq;
     using System;
-    using System.Reflection;
-
 	public enum FlowControl 
 	{
 		[Comment("The next instruction that will be executed is the next instruction in the instruction stream")]
@@ -31,15 +28,4 @@ namespace Z0.Asm.Data
 		[Comment("It's an invalid instruction, eg. #(e:Code.INVALID)#, #(c:UD0)#, #(c:UD1)#, #(c:UD2)#")]
 		Exception,
 	}
-
-	static class FlowControlEnum {
-		const string documentation = "Flow control";
-
-		static IceEnumValue[] GetValues() =>
-			typeof(FlowControl).GetFields().Where(a => a.IsLiteral).Select(a => new IceEnumValue((uint)(FlowControl)a.GetValue(null)!, a.Name, CommentAttribute.GetDocumentation(a))).ToArray();
-
-		public static readonly EnumType Instance = new EnumType(TypeIds.FlowControl, documentation, GetValues(), EnumTypeFlags.Public);
-	}
-
-
 }

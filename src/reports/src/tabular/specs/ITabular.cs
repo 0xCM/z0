@@ -15,9 +15,14 @@ namespace Z0
         /// <summary>
         /// Returns a line of text represents the record value
         /// </summary>
-        string DelimitedText(char delimiter);
+        string DelimitedText(char delimiter) => string.Empty;
 
         string[] HeaderNames {get;}        
+    }
+
+    public interface IRecord : ITabular, ISequential
+    {
+
     }
 
     public interface ITabular<R> : ITabular
@@ -26,6 +31,14 @@ namespace Z0
         string[] ITabular.HeaderNames
             => TabularFormats.headers<R>();
     }
+
+    public interface IRecord<R> : IRecord, ITabular<R>
+        where R : IRecord
+    {
+
+
+    }
+
 
     public interface ITabular<F,T> : ITabular<T>
         where F : unmanaged, Enum
@@ -38,13 +51,20 @@ namespace Z0
                 formatted[i] = src[i].DelimitedText(delimiter);
 
             using var writer = dst.Writer();
-            
             writer.WriteLine(Tabular.header<F>(delimiter)); 
             writer.WriteLine(new string(Chars.Dash, formatted.Max(x => x.Length)));
             for(var i=0; i< formatted.Length; i++)
                 writer.WriteLine(formatted[i]);            
         }            
     }   
+
+    public interface IRecord<F,R> : IRecord<R>, ITabular<F,R>
+        where F : unmanaged, Enum
+        where R : IRecord
+    {
+
+        
+    }
 
     public interface ITabularArchive<F,T> : ILocalArchive
         where F : unmanaged, Enum
@@ -67,6 +87,21 @@ namespace Z0
 
     public class TabularArchive
     {
+        public static void Save<F,R>(R[] src, FilePath dst, Func<R,string> formatter, char delimiter = Chars.Pipe)
+            where F : unmanaged, Enum
+            where R : ITabular
+        {
+            var formatted = new string[src.Length];            
+            for(var i=0; i<src.Length; i++)
+                formatted[i] = formatter(src[i]);
+
+            using var writer = dst.Writer();            
+            writer.WriteLine(Tabular.header<F>(delimiter)); 
+            
+            for(var i=0; i< formatted.Length; i++)
+                writer.WriteLine(formatted[i]);            
+        }            
+
         public static void Save<F,R>(R[] src, FilePath dst, char sep = Chars.Pipe)  
             where F : unmanaged, Enum
             where R : ITabular

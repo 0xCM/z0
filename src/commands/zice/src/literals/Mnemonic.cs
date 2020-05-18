@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
-	/// <summary>Mnemonic</summary>
-	public enum Mnemonic {
+	public enum Mnemonic 
+	{
 		INVALID = 0,
 		Aaa = 1,
 		Aad = 2,

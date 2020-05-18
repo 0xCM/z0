@@ -6,7 +6,6 @@ namespace Z0.Asm.Data
 {
     using System;
 		
-
 	[Flags]
 	public enum D3nowFlags : uint 
 	{

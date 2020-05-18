@@ -8,7 +8,8 @@ namespace Z0.Asm.Data
     using System.Reflection;
 	using System.Linq;
 
-	public enum Register {
+	public enum Register 
+	{
 		None,
 		AL,
 		CL,
@@ -252,16 +253,4 @@ namespace Z0.Asm.Data
 		TR7,
 	}
 
-
-	static class RegisterEnum 
-	{
-		const string documentation = "A register";
-
-		public const int NumValues = 241;
-
-		static IceEnumValue[] GetValues() =>
-			typeof(Register).GetFields().Where(a => a.IsLiteral).Select(a => new IceEnumValue((uint)(Register)a.GetValue(null)!, a.Name, CommentAttribute.GetDocumentation(a))).ToArray();
-
-		public static readonly EnumType Instance = new EnumType(TypeIds.Register, documentation, GetValues(), EnumTypeFlags.Public);
-	}
 }

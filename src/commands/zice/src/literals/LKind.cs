@@ -5,14 +5,9 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Seed;
-    using static Memories;
-
-	public enum LKind : byte {
+	public enum LKind : byte 
+	{
 		None,
 		/// <summary>.128, .256, .512</summary>
 		L128,

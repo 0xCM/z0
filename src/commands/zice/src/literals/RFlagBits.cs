@@ -5,12 +5,8 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Text;
-    using System.Collections.Generic;
-    using System.IO;
-	using System.Linq;
 
-	[Flags]
+	[Flags,NumericBase(2,12)]
 	public enum RflagsBits 
 	{
 		None	= 0,

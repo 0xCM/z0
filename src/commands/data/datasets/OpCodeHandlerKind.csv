@@ -1,200 +1,200 @@
-| TypeName                        | Index   | Name            | Value   | Description
-| OpCodeHandlerKind:uint8         | 0       | Bitness         | 0       | 
-| OpCodeHandlerKind:uint8         | 1       | Bitness_DontReadModRM| 7194448899476553729| 
-| OpCodeHandlerKind:uint8         | 2       | Invalid         | 7194448899476553730| 
-| OpCodeHandlerKind:uint8         | 3       | Invalid_NoModRM | 7194448899476553731| 
-| OpCodeHandlerKind:uint8         | 4       | Invalid2        | 7194448899476553732| 
-| OpCodeHandlerKind:uint8         | 5       | Dup             | 7194448899476553733| 
-| OpCodeHandlerKind:uint8         | 6       | Null            | 7194448899476553734| 
-| OpCodeHandlerKind:uint8         | 7       | HandlerReference| 7194448899476553735| 
-| OpCodeHandlerKind:uint8         | 8       | ArrayReference  | 7194448899476553736| 
-| OpCodeHandlerKind:uint8         | 9       | RM              | 7194448899476553737| 
-| OpCodeHandlerKind:uint8         | 10      | Options3        | 7194448899476553738| 
-| OpCodeHandlerKind:uint8         | 11      | Options5        | 7194448899476553739| 
-| OpCodeHandlerKind:uint8         | 12      | Options_DontReadModRM| 7194448899476553740| 
-| OpCodeHandlerKind:uint8         | 13      | AnotherTable    | 7194448899476553741| 
-| OpCodeHandlerKind:uint8         | 14      | Group           | 7194448899476553742| 
-| OpCodeHandlerKind:uint8         | 15      | Group8x64       | 7194448899476553743| 
-| OpCodeHandlerKind:uint8         | 16      | Group8x8        | 7194448899476553744| 
-| OpCodeHandlerKind:uint8         | 17      | MandatoryPrefix | 7194448899476553745| 
-| OpCodeHandlerKind:uint8         | 18      | MandatoryPrefix_F3_F2| 7194448899476553746| 
-| OpCodeHandlerKind:uint8         | 19      | LegacyMandatoryPrefix_F3_F2| 7194448899476553747| 
-| OpCodeHandlerKind:uint8         | 20      | MandatoryPrefix_NoModRM| 7194448899476553748| 
-| OpCodeHandlerKind:uint8         | 21      | MandatoryPrefix3| 7194448899476553749| 
-| OpCodeHandlerKind:uint8         | 22      | D3NOW           | 7194448899476553750| 
-| OpCodeHandlerKind:uint8         | 23      | EVEX            | 7194448899476553751| 
-| OpCodeHandlerKind:uint8         | 24      | VEX2            | 7194448899476553752| 
-| OpCodeHandlerKind:uint8         | 25      | VEX3            | 7194448899476553753| 
-| OpCodeHandlerKind:uint8         | 26      | XOP             | 7194448899476553754| 
-| OpCodeHandlerKind:uint8         | 27      | AL_DX           | 7194448899476553755| 
-| OpCodeHandlerKind:uint8         | 28      | Ap              | 7194448899476553756| 
-| OpCodeHandlerKind:uint8         | 29      | B_BM            | 7194448899476553757| 
-| OpCodeHandlerKind:uint8         | 30      | B_Ev            | 7194448899476553758| 
-| OpCodeHandlerKind:uint8         | 31      | B_MIB           | 7194448899476553759| 
-| OpCodeHandlerKind:uint8         | 32      | BM_B            | 7194448899476553760| 
-| OpCodeHandlerKind:uint8         | 33      | BranchIw        | 7194448899476553761| 
-| OpCodeHandlerKind:uint8         | 34      | BranchSimple    | 7194448899476553762| 
-| OpCodeHandlerKind:uint8         | 35      | C_R_3a          | 7194448899476553763| 
-| OpCodeHandlerKind:uint8         | 36      | C_R_3b          | 7194448899476553764| 
-| OpCodeHandlerKind:uint8         | 37      | DX_AL           | 7194448899476553765| 
-| OpCodeHandlerKind:uint8         | 38      | DX_eAX          | 7194448899476553766| 
-| OpCodeHandlerKind:uint8         | 39      | eAX_DX          | 7194448899476553767| 
-| OpCodeHandlerKind:uint8         | 40      | Eb_1            | 7194448899476553768| 
-| OpCodeHandlerKind:uint8         | 41      | Eb_2            | 7194448899476553769| 
-| OpCodeHandlerKind:uint8         | 42      | Eb_CL           | 7194448899476553770| 
-| OpCodeHandlerKind:uint8         | 43      | Eb_Gb_1         | 7194448899476553771| 
-| OpCodeHandlerKind:uint8         | 44      | Eb_Gb_2         | 7194448899476553772| 
-| OpCodeHandlerKind:uint8         | 45      | Eb_Ib_1         | 7194448899476553773| 
-| OpCodeHandlerKind:uint8         | 46      | Eb_Ib_2         | 7194448899476553774| 
-| OpCodeHandlerKind:uint8         | 47      | Eb1             | 7194448899476553775| 
-| OpCodeHandlerKind:uint8         | 48      | Ed_V_Ib         | 7194448899476553776| 
-| OpCodeHandlerKind:uint8         | 49      | Ep              | 7194448899476553777| 
-| OpCodeHandlerKind:uint8         | 50      | Ev_3a           | 7194448899476553778| 
-| OpCodeHandlerKind:uint8         | 51      | Ev_3b           | 7194448899476553779| 
-| OpCodeHandlerKind:uint8         | 52      | Ev_4            | 7194448899476553780| 
-| OpCodeHandlerKind:uint8         | 53      | Ev_CL           | 7194448899476553781| 
-| OpCodeHandlerKind:uint8         | 54      | Ev_Gv_32_64     | 7194448899476553782| 
-| OpCodeHandlerKind:uint8         | 55      | Ev_Gv_3a        | 7194448899476553783| 
-| OpCodeHandlerKind:uint8         | 56      | Ev_Gv_3b        | 7194448899476553784| 
-| OpCodeHandlerKind:uint8         | 57      | Ev_Gv_4         | 7194448899476553785| 
-| OpCodeHandlerKind:uint8         | 58      | Ev_Gv_CL        | 7194448899476553786| 
-| OpCodeHandlerKind:uint8         | 59      | Ev_Gv_Ib        | 7194448899476553787| 
-| OpCodeHandlerKind:uint8         | 60      | Ev_Gv_REX       | 7194448899476553788| 
-| OpCodeHandlerKind:uint8         | 61      | Ev_Ib_3         | 7194448899476553789| 
-| OpCodeHandlerKind:uint8         | 62      | Ev_Ib_4         | 7194448899476553790| 
-| OpCodeHandlerKind:uint8         | 63      | Ev_Ib2_3        | 7194448899476553791| 
-| OpCodeHandlerKind:uint8         | 64      | Ev_Ib2_4        | 7194448899476553792| 
-| OpCodeHandlerKind:uint8         | 65      | Ev_Iz_3         | 7194448899476553793| 
-| OpCodeHandlerKind:uint8         | 66      | Ev_Iz_4         | 7194448899476553794| 
-| OpCodeHandlerKind:uint8         | 67      | Ev_P            | 7194448899476553795| 
-| OpCodeHandlerKind:uint8         | 68      | Ev_REXW         | 7194448899476553796| 
-| OpCodeHandlerKind:uint8         | 69      | Ev_Sw           | 7194448899476553797| 
-| OpCodeHandlerKind:uint8         | 70      | Ev_VX           | 7194448899476553798| 
-| OpCodeHandlerKind:uint8         | 71      | Ev1             | 7194448899476553799| 
-| OpCodeHandlerKind:uint8         | 72      | Evj             | 7194448899476553800| 
-| OpCodeHandlerKind:uint8         | 73      | Evw             | 7194448899476553801| 
-| OpCodeHandlerKind:uint8         | 74      | Ew              | 7194448899476553802| 
-| OpCodeHandlerKind:uint8         | 75      | Gb_Eb           | 7194448899476553803| 
-| OpCodeHandlerKind:uint8         | 76      | Gdq_Ev          | 7194448899476553804| 
-| OpCodeHandlerKind:uint8         | 77      | Gv_Eb           | 7194448899476553805| 
-| OpCodeHandlerKind:uint8         | 78      | Gv_Eb_REX       | 7194448899476553806| 
-| OpCodeHandlerKind:uint8         | 79      | Gv_Ev_32_64     | 7194448899476553807| 
-| OpCodeHandlerKind:uint8         | 80      | Gv_Ev_3a        | 7194448899476553808| 
-| OpCodeHandlerKind:uint8         | 81      | Gv_Ev_3b        | 7194448899476553809| 
-| OpCodeHandlerKind:uint8         | 82      | Gv_Ev_Ib        | 7194448899476553810| 
-| OpCodeHandlerKind:uint8         | 83      | Gv_Ev_Ib_REX    | 7194448899476553811| 
-| OpCodeHandlerKind:uint8         | 84      | Gv_Ev_Iz        | 7194448899476553812| 
-| OpCodeHandlerKind:uint8         | 85      | Gv_Ev_REX       | 7194448899476553813| 
-| OpCodeHandlerKind:uint8         | 86      | Gv_Ev2          | 7194448899476553814| 
-| OpCodeHandlerKind:uint8         | 87      | Gv_Ev3          | 7194448899476553815| 
-| OpCodeHandlerKind:uint8         | 88      | Gv_Ew           | 7194448899476553816| 
-| OpCodeHandlerKind:uint8         | 89      | Gv_M            | 7194448899476553817| 
-| OpCodeHandlerKind:uint8         | 90      | Gv_M_as         | 7194448899476553818| 
-| OpCodeHandlerKind:uint8         | 91      | Gv_Ma           | 7194448899476553819| 
-| OpCodeHandlerKind:uint8         | 92      | Gv_Mp_2         | 7194448899476553820| 
-| OpCodeHandlerKind:uint8         | 93      | Gv_Mp_3         | 7194448899476553821| 
-| OpCodeHandlerKind:uint8         | 94      | Gv_Mv           | 7194448899476553822| 
-| OpCodeHandlerKind:uint8         | 95      | Gv_N            | 7194448899476553823| 
-| OpCodeHandlerKind:uint8         | 96      | Gv_N_Ib_REX     | 7194448899476553824| 
-| OpCodeHandlerKind:uint8         | 97      | Gv_RX           | 7194448899476553825| 
-| OpCodeHandlerKind:uint8         | 98      | Gv_W            | 7194448899476553826| 
-| OpCodeHandlerKind:uint8         | 99      | GvM_VX_Ib       | 7194448899476553827| 
-| OpCodeHandlerKind:uint8         | 100     | Ib              | 7194448899476553828| 
-| OpCodeHandlerKind:uint8         | 101     | Ib3             | 7194448899476553829| 
-| OpCodeHandlerKind:uint8         | 102     | IbReg           | 7194448899476553830| 
-| OpCodeHandlerKind:uint8         | 103     | IbReg2          | 7194448899476553831| 
-| OpCodeHandlerKind:uint8         | 104     | Iw_Ib           | 7194448899476553832| 
-| OpCodeHandlerKind:uint8         | 105     | Jb              | 7194448899476553833| 
-| OpCodeHandlerKind:uint8         | 106     | Jb2             | 7194448899476553834| 
-| OpCodeHandlerKind:uint8         | 107     | Jdisp           | 7194448899476553835| 
-| OpCodeHandlerKind:uint8         | 108     | Jx              | 7194448899476553836| 
-| OpCodeHandlerKind:uint8         | 109     | Jz              | 7194448899476553837| 
-| OpCodeHandlerKind:uint8         | 110     | M_1             | 7194448899476553838| 
-| OpCodeHandlerKind:uint8         | 111     | M_2             | 7194448899476553839| 
-| OpCodeHandlerKind:uint8         | 112     | M_REXW_2        | 7194448899476553840| 
-| OpCodeHandlerKind:uint8         | 113     | M_REXW_4        | 7194448899476553841| 
-| OpCodeHandlerKind:uint8         | 114     | MemBx           | 7194448899476553842| 
-| OpCodeHandlerKind:uint8         | 115     | Mf_1            | 7194448899476553843| 
-| OpCodeHandlerKind:uint8         | 116     | Mf_2a           | 7194448899476553844| 
-| OpCodeHandlerKind:uint8         | 117     | Mf_2b           | 7194448899476553845| 
-| OpCodeHandlerKind:uint8         | 118     | MIB_B           | 7194448899476553846| 
-| OpCodeHandlerKind:uint8         | 119     | MP              | 7194448899476553847| 
-| OpCodeHandlerKind:uint8         | 120     | Ms              | 7194448899476553848| 
-| OpCodeHandlerKind:uint8         | 121     | MV              | 7194448899476553849| 
-| OpCodeHandlerKind:uint8         | 122     | Mv_Gv           | 7194448899476553850| 
-| OpCodeHandlerKind:uint8         | 123     | Mv_Gv_REXW      | 7194448899476553851| 
-| OpCodeHandlerKind:uint8         | 124     | NIb             | 7194448899476553852| 
-| OpCodeHandlerKind:uint8         | 125     | Ob_Reg          | 7194448899476553853| 
-| OpCodeHandlerKind:uint8         | 126     | Ov_Reg          | 7194448899476553854| 
-| OpCodeHandlerKind:uint8         | 127     | P_Ev            | 7194448899476553855| 
-| OpCodeHandlerKind:uint8         | 128     | P_Ev_Ib         | 7194448899476553856| 
-| OpCodeHandlerKind:uint8         | 129     | P_Q             | 7194448899476553857| 
-| OpCodeHandlerKind:uint8         | 130     | P_Q_Ib          | 7194448899476553858| 
-| OpCodeHandlerKind:uint8         | 131     | P_R             | 7194448899476553859| 
-| OpCodeHandlerKind:uint8         | 132     | P_W             | 7194448899476553860| 
-| OpCodeHandlerKind:uint8         | 133     | PushEv          | 7194448899476553861| 
-| OpCodeHandlerKind:uint8         | 134     | PushIb2         | 7194448899476553862| 
-| OpCodeHandlerKind:uint8         | 135     | PushIz          | 7194448899476553863| 
-| OpCodeHandlerKind:uint8         | 136     | PushOpSizeReg_4a| 7194448899476553864| 
-| OpCodeHandlerKind:uint8         | 137     | PushOpSizeReg_4b| 7194448899476553865| 
-| OpCodeHandlerKind:uint8         | 138     | PushSimple2     | 7194448899476553866| 
-| OpCodeHandlerKind:uint8         | 139     | PushSimpleReg   | 7194448899476553867| 
-| OpCodeHandlerKind:uint8         | 140     | Q_P             | 7194448899476553868| 
-| OpCodeHandlerKind:uint8         | 141     | R_C_3a          | 7194448899476553869| 
-| OpCodeHandlerKind:uint8         | 142     | R_C_3b          | 7194448899476553870| 
-| OpCodeHandlerKind:uint8         | 143     | rDI_P_N         | 7194448899476553871| 
-| OpCodeHandlerKind:uint8         | 144     | rDI_VX_RX       | 7194448899476553872| 
-| OpCodeHandlerKind:uint8         | 145     | Reg             | 7194448899476553873| 
-| OpCodeHandlerKind:uint8         | 146     | Reg_Ib2         | 7194448899476553874| 
-| OpCodeHandlerKind:uint8         | 147     | Reg_Iz          | 7194448899476553875| 
-| OpCodeHandlerKind:uint8         | 148     | Reg_Ob          | 7194448899476553876| 
-| OpCodeHandlerKind:uint8         | 149     | Reg_Ov          | 7194448899476553877| 
-| OpCodeHandlerKind:uint8         | 150     | Reg_Xb          | 7194448899476553878| 
-| OpCodeHandlerKind:uint8         | 151     | Reg_Xv          | 7194448899476553879| 
-| OpCodeHandlerKind:uint8         | 152     | Reg_Xv2         | 7194448899476553880| 
-| OpCodeHandlerKind:uint8         | 153     | Reg_Yb          | 7194448899476553881| 
-| OpCodeHandlerKind:uint8         | 154     | Reg_Yv          | 7194448899476553882| 
-| OpCodeHandlerKind:uint8         | 155     | RegIb           | 7194448899476553883| 
-| OpCodeHandlerKind:uint8         | 156     | RegIb3          | 7194448899476553884| 
-| OpCodeHandlerKind:uint8         | 157     | RegIz2          | 7194448899476553885| 
-| OpCodeHandlerKind:uint8         | 158     | ReservedNop     | 7194448899476553886| 
-| OpCodeHandlerKind:uint8         | 159     | RIb             | 7194448899476553887| 
-| OpCodeHandlerKind:uint8         | 160     | RIbIb           | 7194448899476553888| 
-| OpCodeHandlerKind:uint8         | 161     | Rv              | 7194448899476553889| 
-| OpCodeHandlerKind:uint8         | 162     | Rv_32_64        | 7194448899476553890| 
-| OpCodeHandlerKind:uint8         | 163     | RvMw_Gw         | 7194448899476553891| 
-| OpCodeHandlerKind:uint8         | 164     | Simple          | 7194448899476553892| 
-| OpCodeHandlerKind:uint8         | 165     | Simple_ModRM    | 7194448899476553893| 
-| OpCodeHandlerKind:uint8         | 166     | Simple2_3a      | 7194448899476553894| 
-| OpCodeHandlerKind:uint8         | 167     | Simple2_3b      | 7194448899476553895| 
-| OpCodeHandlerKind:uint8         | 168     | Simple2Iw       | 7194448899476553896| 
-| OpCodeHandlerKind:uint8         | 169     | Simple3         | 7194448899476553897| 
-| OpCodeHandlerKind:uint8         | 170     | Simple4         | 7194448899476553898| 
-| OpCodeHandlerKind:uint8         | 171     | Simple5         | 7194448899476553899| 
-| OpCodeHandlerKind:uint8         | 172     | Simple5_ModRM_as| 7194448899476553900| 
-| OpCodeHandlerKind:uint8         | 173     | SimpleReg       | 7194448899476553901| 
-| OpCodeHandlerKind:uint8         | 174     | ST_STi          | 7194448899476553902| 
-| OpCodeHandlerKind:uint8         | 175     | STi             | 7194448899476553903| 
-| OpCodeHandlerKind:uint8         | 176     | STi_ST          | 7194448899476553904| 
-| OpCodeHandlerKind:uint8         | 177     | Sw_Ev           | 7194448899476553905| 
-| OpCodeHandlerKind:uint8         | 178     | V_Ev            | 7194448899476553906| 
-| OpCodeHandlerKind:uint8         | 179     | VM              | 7194448899476553907| 
-| OpCodeHandlerKind:uint8         | 180     | VN              | 7194448899476553908| 
-| OpCodeHandlerKind:uint8         | 181     | VQ              | 7194448899476553909| 
-| OpCodeHandlerKind:uint8         | 182     | VRIbIb          | 7194448899476553910| 
-| OpCodeHandlerKind:uint8         | 183     | VW_2            | 7194448899476553911| 
-| OpCodeHandlerKind:uint8         | 184     | VW_3            | 7194448899476553912| 
-| OpCodeHandlerKind:uint8         | 185     | VWIb_2          | 7194448899476553913| 
-| OpCodeHandlerKind:uint8         | 186     | VWIb_3          | 7194448899476553914| 
-| OpCodeHandlerKind:uint8         | 187     | VX_E_Ib         | 7194448899476553915| 
-| OpCodeHandlerKind:uint8         | 188     | VX_Ev           | 7194448899476553916| 
-| OpCodeHandlerKind:uint8         | 189     | Wbinvd          | 7194448899476553917| 
-| OpCodeHandlerKind:uint8         | 190     | WV              | 7194448899476553918| 
-| OpCodeHandlerKind:uint8         | 191     | Xb_Yb           | 7194448899476553919| 
-| OpCodeHandlerKind:uint8         | 192     | Xchg_Reg_rAX    | 7194448899476553920| 
-| OpCodeHandlerKind:uint8         | 193     | Xv_Yv           | 7194448899476553921| 
-| OpCodeHandlerKind:uint8         | 194     | Yb_Reg          | 7194448899476553922| 
-| OpCodeHandlerKind:uint8         | 195     | Yb_Xb           | 7194448899476553923| 
-| OpCodeHandlerKind:uint8         | 196     | Yv_Reg          | 7194448899476553924| 
-| OpCodeHandlerKind:uint8         | 197     | Yv_Reg2         | 7194448899476553925| 
-| OpCodeHandlerKind:uint8         | 198     | Yv_Xv           | 7194448899476553926| 
+| TypeName                        | Index   | Name                            | Hex       | BitString                       | Description
+| OpCodeHandlerKind               | 0       | Bitness                         | 0         |                                 | 
+| OpCodeHandlerKind               | 1       | Bitness_DontReadModRM           | 1         |                                 | 
+| OpCodeHandlerKind               | 2       | Invalid                         | 2         |                                 | 
+| OpCodeHandlerKind               | 3       | Invalid_NoModRM                 | 3         |                                 | 
+| OpCodeHandlerKind               | 4       | Invalid2                        | 4         |                                 | 
+| OpCodeHandlerKind               | 5       | Dup                             | 5         |                                 | 
+| OpCodeHandlerKind               | 6       | Null                            | 6         |                                 | 
+| OpCodeHandlerKind               | 7       | HandlerReference                | 7         |                                 | 
+| OpCodeHandlerKind               | 8       | ArrayReference                  | 8         |                                 | 
+| OpCodeHandlerKind               | 9       | RM                              | 9         |                                 | 
+| OpCodeHandlerKind               | 10      | Options3                        | a         |                                 | 
+| OpCodeHandlerKind               | 11      | Options5                        | b         |                                 | 
+| OpCodeHandlerKind               | 12      | Options_DontReadModRM           | c         |                                 | 
+| OpCodeHandlerKind               | 13      | AnotherTable                    | d         |                                 | 
+| OpCodeHandlerKind               | 14      | Group                           | e         |                                 | 
+| OpCodeHandlerKind               | 15      | Group8x64                       | f         |                                 | 
+| OpCodeHandlerKind               | 16      | Group8x8                        | 10        |                                 | 
+| OpCodeHandlerKind               | 17      | MandatoryPrefix                 | 11        |                                 | 
+| OpCodeHandlerKind               | 18      | MandatoryPrefix_F3_F2           | 12        |                                 | 
+| OpCodeHandlerKind               | 19      | LegacyMandatoryPrefix_F3_F2     | 13        |                                 | 
+| OpCodeHandlerKind               | 20      | MandatoryPrefix_NoModRM         | 14        |                                 | 
+| OpCodeHandlerKind               | 21      | MandatoryPrefix3                | 15        |                                 | 
+| OpCodeHandlerKind               | 22      | D3NOW                           | 16        |                                 | 
+| OpCodeHandlerKind               | 23      | EVEX                            | 17        |                                 | 
+| OpCodeHandlerKind               | 24      | VEX2                            | 18        |                                 | 
+| OpCodeHandlerKind               | 25      | VEX3                            | 19        |                                 | 
+| OpCodeHandlerKind               | 26      | XOP                             | 1a        |                                 | 
+| OpCodeHandlerKind               | 27      | AL_DX                           | 1b        |                                 | 
+| OpCodeHandlerKind               | 28      | Ap                              | 1c        |                                 | 
+| OpCodeHandlerKind               | 29      | B_BM                            | 1d        |                                 | 
+| OpCodeHandlerKind               | 30      | B_Ev                            | 1e        |                                 | 
+| OpCodeHandlerKind               | 31      | B_MIB                           | 1f        |                                 | 
+| OpCodeHandlerKind               | 32      | BM_B                            | 20        |                                 | 
+| OpCodeHandlerKind               | 33      | BranchIw                        | 21        |                                 | 
+| OpCodeHandlerKind               | 34      | BranchSimple                    | 22        |                                 | 
+| OpCodeHandlerKind               | 35      | C_R_3a                          | 23        |                                 | 
+| OpCodeHandlerKind               | 36      | C_R_3b                          | 24        |                                 | 
+| OpCodeHandlerKind               | 37      | DX_AL                           | 25        |                                 | 
+| OpCodeHandlerKind               | 38      | DX_eAX                          | 26        |                                 | 
+| OpCodeHandlerKind               | 39      | eAX_DX                          | 27        |                                 | 
+| OpCodeHandlerKind               | 40      | Eb_1                            | 28        |                                 | 
+| OpCodeHandlerKind               | 41      | Eb_2                            | 29        |                                 | 
+| OpCodeHandlerKind               | 42      | Eb_CL                           | 2a        |                                 | 
+| OpCodeHandlerKind               | 43      | Eb_Gb_1                         | 2b        |                                 | 
+| OpCodeHandlerKind               | 44      | Eb_Gb_2                         | 2c        |                                 | 
+| OpCodeHandlerKind               | 45      | Eb_Ib_1                         | 2d        |                                 | 
+| OpCodeHandlerKind               | 46      | Eb_Ib_2                         | 2e        |                                 | 
+| OpCodeHandlerKind               | 47      | Eb1                             | 2f        |                                 | 
+| OpCodeHandlerKind               | 48      | Ed_V_Ib                         | 30        |                                 | 
+| OpCodeHandlerKind               | 49      | Ep                              | 31        |                                 | 
+| OpCodeHandlerKind               | 50      | Ev_3a                           | 32        |                                 | 
+| OpCodeHandlerKind               | 51      | Ev_3b                           | 33        |                                 | 
+| OpCodeHandlerKind               | 52      | Ev_4                            | 34        |                                 | 
+| OpCodeHandlerKind               | 53      | Ev_CL                           | 35        |                                 | 
+| OpCodeHandlerKind               | 54      | Ev_Gv_32_64                     | 36        |                                 | 
+| OpCodeHandlerKind               | 55      | Ev_Gv_3a                        | 37        |                                 | 
+| OpCodeHandlerKind               | 56      | Ev_Gv_3b                        | 38        |                                 | 
+| OpCodeHandlerKind               | 57      | Ev_Gv_4                         | 39        |                                 | 
+| OpCodeHandlerKind               | 58      | Ev_Gv_CL                        | 3a        |                                 | 
+| OpCodeHandlerKind               | 59      | Ev_Gv_Ib                        | 3b        |                                 | 
+| OpCodeHandlerKind               | 60      | Ev_Gv_REX                       | 3c        |                                 | 
+| OpCodeHandlerKind               | 61      | Ev_Ib_3                         | 3d        |                                 | 
+| OpCodeHandlerKind               | 62      | Ev_Ib_4                         | 3e        |                                 | 
+| OpCodeHandlerKind               | 63      | Ev_Ib2_3                        | 3f        |                                 | 
+| OpCodeHandlerKind               | 64      | Ev_Ib2_4                        | 40        |                                 | 
+| OpCodeHandlerKind               | 65      | Ev_Iz_3                         | 41        |                                 | 
+| OpCodeHandlerKind               | 66      | Ev_Iz_4                         | 42        |                                 | 
+| OpCodeHandlerKind               | 67      | Ev_P                            | 43        |                                 | 
+| OpCodeHandlerKind               | 68      | Ev_REXW                         | 44        |                                 | 
+| OpCodeHandlerKind               | 69      | Ev_Sw                           | 45        |                                 | 
+| OpCodeHandlerKind               | 70      | Ev_VX                           | 46        |                                 | 
+| OpCodeHandlerKind               | 71      | Ev1                             | 47        |                                 | 
+| OpCodeHandlerKind               | 72      | Evj                             | 48        |                                 | 
+| OpCodeHandlerKind               | 73      | Evw                             | 49        |                                 | 
+| OpCodeHandlerKind               | 74      | Ew                              | 4a        |                                 | 
+| OpCodeHandlerKind               | 75      | Gb_Eb                           | 4b        |                                 | 
+| OpCodeHandlerKind               | 76      | Gdq_Ev                          | 4c        |                                 | 
+| OpCodeHandlerKind               | 77      | Gv_Eb                           | 4d        |                                 | 
+| OpCodeHandlerKind               | 78      | Gv_Eb_REX                       | 4e        |                                 | 
+| OpCodeHandlerKind               | 79      | Gv_Ev_32_64                     | 4f        |                                 | 
+| OpCodeHandlerKind               | 80      | Gv_Ev_3a                        | 50        |                                 | 
+| OpCodeHandlerKind               | 81      | Gv_Ev_3b                        | 51        |                                 | 
+| OpCodeHandlerKind               | 82      | Gv_Ev_Ib                        | 52        |                                 | 
+| OpCodeHandlerKind               | 83      | Gv_Ev_Ib_REX                    | 53        |                                 | 
+| OpCodeHandlerKind               | 84      | Gv_Ev_Iz                        | 54        |                                 | 
+| OpCodeHandlerKind               | 85      | Gv_Ev_REX                       | 55        |                                 | 
+| OpCodeHandlerKind               | 86      | Gv_Ev2                          | 56        |                                 | 
+| OpCodeHandlerKind               | 87      | Gv_Ev3                          | 57        |                                 | 
+| OpCodeHandlerKind               | 88      | Gv_Ew                           | 58        |                                 | 
+| OpCodeHandlerKind               | 89      | Gv_M                            | 59        |                                 | 
+| OpCodeHandlerKind               | 90      | Gv_M_as                         | 5a        |                                 | 
+| OpCodeHandlerKind               | 91      | Gv_Ma                           | 5b        |                                 | 
+| OpCodeHandlerKind               | 92      | Gv_Mp_2                         | 5c        |                                 | 
+| OpCodeHandlerKind               | 93      | Gv_Mp_3                         | 5d        |                                 | 
+| OpCodeHandlerKind               | 94      | Gv_Mv                           | 5e        |                                 | 
+| OpCodeHandlerKind               | 95      | Gv_N                            | 5f        |                                 | 
+| OpCodeHandlerKind               | 96      | Gv_N_Ib_REX                     | 60        |                                 | 
+| OpCodeHandlerKind               | 97      | Gv_RX                           | 61        |                                 | 
+| OpCodeHandlerKind               | 98      | Gv_W                            | 62        |                                 | 
+| OpCodeHandlerKind               | 99      | GvM_VX_Ib                       | 63        |                                 | 
+| OpCodeHandlerKind               | 100     | Ib                              | 64        |                                 | 
+| OpCodeHandlerKind               | 101     | Ib3                             | 65        |                                 | 
+| OpCodeHandlerKind               | 102     | IbReg                           | 66        |                                 | 
+| OpCodeHandlerKind               | 103     | IbReg2                          | 67        |                                 | 
+| OpCodeHandlerKind               | 104     | Iw_Ib                           | 68        |                                 | 
+| OpCodeHandlerKind               | 105     | Jb                              | 69        |                                 | 
+| OpCodeHandlerKind               | 106     | Jb2                             | 6a        |                                 | 
+| OpCodeHandlerKind               | 107     | Jdisp                           | 6b        |                                 | 
+| OpCodeHandlerKind               | 108     | Jx                              | 6c        |                                 | 
+| OpCodeHandlerKind               | 109     | Jz                              | 6d        |                                 | 
+| OpCodeHandlerKind               | 110     | M_1                             | 6e        |                                 | 
+| OpCodeHandlerKind               | 111     | M_2                             | 6f        |                                 | 
+| OpCodeHandlerKind               | 112     | M_REXW_2                        | 70        |                                 | 
+| OpCodeHandlerKind               | 113     | M_REXW_4                        | 71        |                                 | 
+| OpCodeHandlerKind               | 114     | MemBx                           | 72        |                                 | 
+| OpCodeHandlerKind               | 115     | Mf_1                            | 73        |                                 | 
+| OpCodeHandlerKind               | 116     | Mf_2a                           | 74        |                                 | 
+| OpCodeHandlerKind               | 117     | Mf_2b                           | 75        |                                 | 
+| OpCodeHandlerKind               | 118     | MIB_B                           | 76        |                                 | 
+| OpCodeHandlerKind               | 119     | MP                              | 77        |                                 | 
+| OpCodeHandlerKind               | 120     | Ms                              | 78        |                                 | 
+| OpCodeHandlerKind               | 121     | MV                              | 79        |                                 | 
+| OpCodeHandlerKind               | 122     | Mv_Gv                           | 7a        |                                 | 
+| OpCodeHandlerKind               | 123     | Mv_Gv_REXW                      | 7b        |                                 | 
+| OpCodeHandlerKind               | 124     | NIb                             | 7c        |                                 | 
+| OpCodeHandlerKind               | 125     | Ob_Reg                          | 7d        |                                 | 
+| OpCodeHandlerKind               | 126     | Ov_Reg                          | 7e        |                                 | 
+| OpCodeHandlerKind               | 127     | P_Ev                            | 7f        |                                 | 
+| OpCodeHandlerKind               | 128     | P_Ev_Ib                         | 80        |                                 | 
+| OpCodeHandlerKind               | 129     | P_Q                             | 81        |                                 | 
+| OpCodeHandlerKind               | 130     | P_Q_Ib                          | 82        |                                 | 
+| OpCodeHandlerKind               | 131     | P_R                             | 83        |                                 | 
+| OpCodeHandlerKind               | 132     | P_W                             | 84        |                                 | 
+| OpCodeHandlerKind               | 133     | PushEv                          | 85        |                                 | 
+| OpCodeHandlerKind               | 134     | PushIb2                         | 86        |                                 | 
+| OpCodeHandlerKind               | 135     | PushIz                          | 87        |                                 | 
+| OpCodeHandlerKind               | 136     | PushOpSizeReg_4a                | 88        |                                 | 
+| OpCodeHandlerKind               | 137     | PushOpSizeReg_4b                | 89        |                                 | 
+| OpCodeHandlerKind               | 138     | PushSimple2                     | 8a        |                                 | 
+| OpCodeHandlerKind               | 139     | PushSimpleReg                   | 8b        |                                 | 
+| OpCodeHandlerKind               | 140     | Q_P                             | 8c        |                                 | 
+| OpCodeHandlerKind               | 141     | R_C_3a                          | 8d        |                                 | 
+| OpCodeHandlerKind               | 142     | R_C_3b                          | 8e        |                                 | 
+| OpCodeHandlerKind               | 143     | rDI_P_N                         | 8f        |                                 | 
+| OpCodeHandlerKind               | 144     | rDI_VX_RX                       | 90        |                                 | 
+| OpCodeHandlerKind               | 145     | Reg                             | 91        |                                 | 
+| OpCodeHandlerKind               | 146     | Reg_Ib2                         | 92        |                                 | 
+| OpCodeHandlerKind               | 147     | Reg_Iz                          | 93        |                                 | 
+| OpCodeHandlerKind               | 148     | Reg_Ob                          | 94        |                                 | 
+| OpCodeHandlerKind               | 149     | Reg_Ov                          | 95        |                                 | 
+| OpCodeHandlerKind               | 150     | Reg_Xb                          | 96        |                                 | 
+| OpCodeHandlerKind               | 151     | Reg_Xv                          | 97        |                                 | 
+| OpCodeHandlerKind               | 152     | Reg_Xv2                         | 98        |                                 | 
+| OpCodeHandlerKind               | 153     | Reg_Yb                          | 99        |                                 | 
+| OpCodeHandlerKind               | 154     | Reg_Yv                          | 9a        |                                 | 
+| OpCodeHandlerKind               | 155     | RegIb                           | 9b        |                                 | 
+| OpCodeHandlerKind               | 156     | RegIb3                          | 9c        |                                 | 
+| OpCodeHandlerKind               | 157     | RegIz2                          | 9d        |                                 | 
+| OpCodeHandlerKind               | 158     | ReservedNop                     | 9e        |                                 | 
+| OpCodeHandlerKind               | 159     | RIb                             | 9f        |                                 | 
+| OpCodeHandlerKind               | 160     | RIbIb                           | a0        |                                 | 
+| OpCodeHandlerKind               | 161     | Rv                              | a1        |                                 | 
+| OpCodeHandlerKind               | 162     | Rv_32_64                        | a2        |                                 | 
+| OpCodeHandlerKind               | 163     | RvMw_Gw                         | a3        |                                 | 
+| OpCodeHandlerKind               | 164     | Simple                          | a4        |                                 | 
+| OpCodeHandlerKind               | 165     | Simple_ModRM                    | a5        |                                 | 
+| OpCodeHandlerKind               | 166     | Simple2_3a                      | a6        |                                 | 
+| OpCodeHandlerKind               | 167     | Simple2_3b                      | a7        |                                 | 
+| OpCodeHandlerKind               | 168     | Simple2Iw                       | a8        |                                 | 
+| OpCodeHandlerKind               | 169     | Simple3                         | a9        |                                 | 
+| OpCodeHandlerKind               | 170     | Simple4                         | aa        |                                 | 
+| OpCodeHandlerKind               | 171     | Simple5                         | ab        |                                 | 
+| OpCodeHandlerKind               | 172     | Simple5_ModRM_as                | ac        |                                 | 
+| OpCodeHandlerKind               | 173     | SimpleReg                       | ad        |                                 | 
+| OpCodeHandlerKind               | 174     | ST_STi                          | ae        |                                 | 
+| OpCodeHandlerKind               | 175     | STi                             | af        |                                 | 
+| OpCodeHandlerKind               | 176     | STi_ST                          | b0        |                                 | 
+| OpCodeHandlerKind               | 177     | Sw_Ev                           | b1        |                                 | 
+| OpCodeHandlerKind               | 178     | V_Ev                            | b2        |                                 | 
+| OpCodeHandlerKind               | 179     | VM                              | b3        |                                 | 
+| OpCodeHandlerKind               | 180     | VN                              | b4        |                                 | 
+| OpCodeHandlerKind               | 181     | VQ                              | b5        |                                 | 
+| OpCodeHandlerKind               | 182     | VRIbIb                          | b6        |                                 | 
+| OpCodeHandlerKind               | 183     | VW_2                            | b7        |                                 | 
+| OpCodeHandlerKind               | 184     | VW_3                            | b8        |                                 | 
+| OpCodeHandlerKind               | 185     | VWIb_2                          | b9        |                                 | 
+| OpCodeHandlerKind               | 186     | VWIb_3                          | ba        |                                 | 
+| OpCodeHandlerKind               | 187     | VX_E_Ib                         | bb        |                                 | 
+| OpCodeHandlerKind               | 188     | VX_Ev                           | bc        |                                 | 
+| OpCodeHandlerKind               | 189     | Wbinvd                          | bd        |                                 | 
+| OpCodeHandlerKind               | 190     | WV                              | be        |                                 | 
+| OpCodeHandlerKind               | 191     | Xb_Yb                           | bf        |                                 | 
+| OpCodeHandlerKind               | 192     | Xchg_Reg_rAX                    | c0        |                                 | 
+| OpCodeHandlerKind               | 193     | Xv_Yv                           | c1        |                                 | 
+| OpCodeHandlerKind               | 194     | Yb_Reg                          | c2        |                                 | 
+| OpCodeHandlerKind               | 195     | Yb_Xb                           | c3        |                                 | 
+| OpCodeHandlerKind               | 196     | Yv_Reg                          | c4        |                                 | 
+| OpCodeHandlerKind               | 197     | Yv_Reg2                         | c5        |                                 | 
+| OpCodeHandlerKind               | 198     | Yv_Xv                           | c6        |                                 | 

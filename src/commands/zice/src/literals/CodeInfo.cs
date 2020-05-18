@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data 
 {
-    using System.Linq;
-    using System;
-    using System.Reflection;
-
 	public enum CodeInfo 
 	{
 		None,

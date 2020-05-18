@@ -13,5 +13,4 @@ namespace Z0.Asm.Data
 		EncodingMask = 0x00000007,
 		OpCodeShift = 0x00000010,
 	}
-
 }

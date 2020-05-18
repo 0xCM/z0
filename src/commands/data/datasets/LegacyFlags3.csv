@@ -1,6 +1,6 @@
-| TypeName                        | Index   | Name            | Value   | Description
-| LegacyFlags3:uint32             | 0       | OpMask          | 127     | OpMask
-| LegacyFlags3:uint32             | 1       | Op0Shift        | 7189144889743900672| Op0Shift
-| LegacyFlags3:uint32             | 2       | Op1Shift        | 7189144889743900679| Op1Shift
-| LegacyFlags3:uint32             | 3       | Op2Shift        | 7189144889743900686| Op2Shift
-| LegacyFlags3:uint32             | 4       | Op3Shift        | 7189144889743900693| Op3Shift
+| TypeName                        | Index   | Name                            | Hex       | BitString                       | Description
+| LegacyFlags3                    | 0       | OpMask                          | 7f        |                                 | OpMask
+| LegacyFlags3                    | 1       | Op0Shift                        | 0         |                                 | Op0Shift
+| LegacyFlags3                    | 2       | Op1Shift                        | 7         |                                 | Op1Shift
+| LegacyFlags3                    | 3       | Op2Shift                        | e         |                                 | Op2Shift
+| LegacyFlags3                    | 4       | Op3Shift                        | 15        |                                 | Op3Shift

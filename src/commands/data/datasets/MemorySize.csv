@@ -1,137 +1,137 @@
-| TypeName                        | Index   | Name            | Value   | Description
-| MemorySize:int32                | 0       | Unknown         | 0       | Unknown size or the instruction doesn't reference any memory (eg. #(c:LEA)#)
-| MemorySize:int32                | 1       | UInt8           | 1       | Memory location contains a #(t:u8)#
-| MemorySize:int32                | 2       | UInt16          | 2       | Memory location contains a #(t:u16)#
-| MemorySize:int32                | 3       | UInt32          | 3       | Memory location contains a #(t:u32)#
-| MemorySize:int32                | 4       | UInt52          | 4       | Memory location contains a #(t:u52)#
-| MemorySize:int32                | 5       | UInt64          | 5       | Memory location contains a #(t:u64)#
-| MemorySize:int32                | 6       | UInt128         | 6       | Memory location contains a #(t:u128)#
-| MemorySize:int32                | 7       | UInt256         | 7       | Memory location contains a #(t:u256)#
-| MemorySize:int32                | 8       | UInt512         | 8       | Memory location contains a #(t:u512)#
-| MemorySize:int32                | 9       | Int8            | 9       | Memory location contains a #(t:i8)#
-| MemorySize:int32                | 10      | Int16           | 10      | Memory location contains a #(t:i16)#
-| MemorySize:int32                | 11      | Int32           | 11      | Memory location contains a #(t:i32)#
-| MemorySize:int32                | 12      | Int64           | 12      | Memory location contains a #(t:i64)#
-| MemorySize:int32                | 13      | Int128          | 13      | Memory location contains a #(t:i128)#
-| MemorySize:int32                | 14      | Int256          | 14      | Memory location contains a #(t:i256)#
-| MemorySize:int32                | 15      | Int512          | 15      | Memory location contains a #(t:i512)#
-| MemorySize:int32                | 16      | SegPtr16        | 16      | Memory location contains a seg:ptr pair, #(t:u16)# (offset) + #(t:u16)# (segment/selector)
-| MemorySize:int32                | 17      | SegPtr32        | 17      | Memory location contains a seg:ptr pair, #(t:u32)# (offset) + #(t:u16)# (segment/selector)
-| MemorySize:int32                | 18      | SegPtr64        | 18      | Memory location contains a seg:ptr pair, #(t:u64)# (offset) + #(t:u16)# (segment/selector)
-| MemorySize:int32                | 19      | WordOffset      | 19      | Memory location contains a 16-bit offset (#(c:JMP/CALL WORD PTR [mem])#)
-| MemorySize:int32                | 20      | DwordOffset     | 20      | Memory location contains a 32-bit offset (#(c:JMP/CALL DWORD PTR [mem])#)
-| MemorySize:int32                | 21      | QwordOffset     | 21      | Memory location contains a 64-bit offset (#(c:JMP/CALL QWORD PTR [mem])#)
-| MemorySize:int32                | 22      | Bound16_WordWord| 22      | Memory location contains two #(t:u16)#s (16-bit #(c:BOUND)#)
-| MemorySize:int32                | 23      | Bound32_DwordDword| 23      | Memory location contains two #(t:u32)#s (32-bit #(c:BOUND)#)
-| MemorySize:int32                | 24      | Bnd32           | 24      | 32-bit #(c:BNDMOV)#, 2 x #(t:u32)#
-| MemorySize:int32                | 25      | Bnd64           | 25      | 64-bit #(c:BNDMOV)#, 2 x #(t:u64)#
-| MemorySize:int32                | 26      | Fword6          | 26      | Memory location contains a 16-bit limit and a 32-bit address (eg. #(c:LGDTW)#, #(c:LGDTD)#)
-| MemorySize:int32                | 27      | Fword10         | 27      | Memory location contains a 16-bit limit and a 64-bit address (eg. #(c:LGDTQ)#)
-| MemorySize:int32                | 28      | Float16         | 28      | Memory location contains a #(t:f16)#
-| MemorySize:int32                | 29      | Float32         | 29      | Memory location contains a #(t:f32)#
-| MemorySize:int32                | 30      | Float64         | 30      | Memory location contains a #(t:f64)#
-| MemorySize:int32                | 31      | Float80         | 31      | Memory location contains a #(t:f80)#
-| MemorySize:int32                | 32      | Float128        | 32      | Memory location contains a #(t:f128)#
-| MemorySize:int32                | 33      | BFloat16        | 33      | Memory location contains a #(t:bf16)#
-| MemorySize:int32                | 34      | FpuEnv14        | 34      | Memory location contains a 14-byte FPU environment (16-bit #(c:FLDENV)#/#(c:FSTENV)#)
-| MemorySize:int32                | 35      | FpuEnv28        | 35      | Memory location contains a 28-byte FPU environment (32/64-bit #(c:FLDENV)#/#(c:FSTENV)#)
-| MemorySize:int32                | 36      | FpuState94      | 36      | Memory location contains a 94-byte FPU environment (16-bit #(c:FSAVE)#/#(c:FRSTOR)#)
-| MemorySize:int32                | 37      | FpuState108     | 37      | Memory location contains a 108-byte FPU environment (32/64-bit #(c:FSAVE)#/#(c:FRSTOR)#)
-| MemorySize:int32                | 38      | Fxsave_512Byte  | 38      | Memory location contains 512-bytes of #(c:FXSAVE)#/#(c:FXRSTOR)# data
-| MemorySize:int32                | 39      | Fxsave64_512Byte| 39      | Memory location contains 512-bytes of #(c:FXSAVE64)#/#(c:FXRSTOR64)# data
-| MemorySize:int32                | 40      | Xsave           | 40      | 32-bit #(c:XSAVE)# area
-| MemorySize:int32                | 41      | Xsave64         | 41      | 64-bit #(c:XSAVE)# area
-| MemorySize:int32                | 42      | Bcd             | 42      | Memory location contains a 10-byte #(t:bcd)# value (#(c:FBLD)#/#(c:FBSTP)#)
-| MemorySize:int32                | 43      | Packed16_UInt8  | 43      | 16 bit location: 2 x #(t:u8)#
-| MemorySize:int32                | 44      | Packed16_Int8   | 44      | 16 bit location: 2 x #(t:i8)#
-| MemorySize:int32                | 45      | Packed32_UInt8  | 45      | 32 bit location: 4 x #(t:u8)#
-| MemorySize:int32                | 46      | Packed32_Int8   | 46      | 32 bit location: 4 x #(t:i8)#
-| MemorySize:int32                | 47      | Packed32_UInt16 | 47      | 32 bit location: 2 x #(t:u16)#
-| MemorySize:int32                | 48      | Packed32_Int16  | 48      | 32 bit location: 2 x #(t:i16)#
-| MemorySize:int32                | 49      | Packed32_BFloat16| 49      | 32 bit location: 2 x #(t:bf16)#
-| MemorySize:int32                | 50      | Packed64_UInt8  | 50      | 64-bit location: 8 x #(t:u8)#
-| MemorySize:int32                | 51      | Packed64_Int8   | 51      | 64-bit location: 8 x #(t:i8)#
-| MemorySize:int32                | 52      | Packed64_UInt16 | 52      | 64-bit location: 4 x #(t:u16)#
-| MemorySize:int32                | 53      | Packed64_Int16  | 53      | 64-bit location: 4 x #(t:i16)#
-| MemorySize:int32                | 54      | Packed64_UInt32 | 54      | 64-bit location: 2 x #(t:u32)#
-| MemorySize:int32                | 55      | Packed64_Int32  | 55      | 64-bit location: 2 x #(t:i32)#
-| MemorySize:int32                | 56      | Packed64_Float16| 56      | 64-bit location: 4 x #(t:f16)#
-| MemorySize:int32                | 57      | Packed64_Float32| 57      | 64-bit location: 2 x #(t:f32)#
-| MemorySize:int32                | 58      | Packed128_UInt8 | 58      | 128 bit location: 16 x #(t:u8)#
-| MemorySize:int32                | 59      | Packed128_Int8  | 59      | 128 bit location: 16 x #(t:i8)#
-| MemorySize:int32                | 60      | Packed128_UInt16| 60      | 128 bit location: 8 x #(t:u16)#
-| MemorySize:int32                | 61      | Packed128_Int16 | 61      | 128 bit location: 8 x #(t:i16)#
-| MemorySize:int32                | 62      | Packed128_UInt32| 62      | 128 bit location: 4 x #(t:u32)#
-| MemorySize:int32                | 63      | Packed128_Int32 | 63      | 128 bit location: 4 x #(t:i32)#
-| MemorySize:int32                | 64      | Packed128_UInt52| 64      | 128 bit location: 2 x #(t:u52)#
-| MemorySize:int32                | 65      | Packed128_UInt64| 65      | 128 bit location: 2 x #(t:u64)#
-| MemorySize:int32                | 66      | Packed128_Int64 | 66      | 128 bit location: 2 x #(t:i64)#
-| MemorySize:int32                | 67      | Packed128_Float16| 67      | 128 bit location: 8 x #(t:f16)#
-| MemorySize:int32                | 68      | Packed128_Float32| 68      | 128 bit location: 4 x #(t:f32)#
-| MemorySize:int32                | 69      | Packed128_Float64| 69      | 128 bit location: 2 x #(t:f64)#
-| MemorySize:int32                | 70      | Packed128_2xBFloat16| 70      | 128 bit location: 4 x (2 x #(t:bf16)#)
-| MemorySize:int32                | 71      | Packed256_UInt8 | 71      | 256 bit location: 32 x #(t:u8)#
-| MemorySize:int32                | 72      | Packed256_Int8  | 72      | 256 bit location: 32 x #(t:i8)#
-| MemorySize:int32                | 73      | Packed256_UInt16| 73      | 256 bit location: 16 x #(t:u16)#
-| MemorySize:int32                | 74      | Packed256_Int16 | 74      | 256 bit location: 16 x #(t:i16)#
-| MemorySize:int32                | 75      | Packed256_UInt32| 75      | 256 bit location: 8 x #(t:u32)#
-| MemorySize:int32                | 76      | Packed256_Int32 | 76      | 256 bit location: 8 x #(t:i32)#
-| MemorySize:int32                | 77      | Packed256_UInt52| 77      | 256 bit location: 4 x #(t:u52)#
-| MemorySize:int32                | 78      | Packed256_UInt64| 78      | 256 bit location: 4 x #(t:u64)#
-| MemorySize:int32                | 79      | Packed256_Int64 | 79      | 256 bit location: 4 x #(t:i64)#
-| MemorySize:int32                | 80      | Packed256_UInt128| 80      | 256 bit location: 2 x #(t:u128)#
-| MemorySize:int32                | 81      | Packed256_Int128| 81      | 256 bit location: 2 x #(t:i128)#
-| MemorySize:int32                | 82      | Packed256_Float16| 82      | 256 bit location: 16 x #(t:f16)#
-| MemorySize:int32                | 83      | Packed256_Float32| 83      | 256 bit location: 8 x #(t:f32)#
-| MemorySize:int32                | 84      | Packed256_Float64| 84      | 256 bit location: 4 x #(t:f64)#
-| MemorySize:int32                | 85      | Packed256_Float128| 85      | 256 bit location: 2 x #(t:f128)#
-| MemorySize:int32                | 86      | Packed256_2xBFloat16| 86      | 256 bit location: 8 x (2 x #(t:bf16)#)
-| MemorySize:int32                | 87      | Packed512_UInt8 | 87      | 512 bit location: 64 x #(t:u8)#
-| MemorySize:int32                | 88      | Packed512_Int8  | 88      | 512 bit location: 64 x #(t:i8)#
-| MemorySize:int32                | 89      | Packed512_UInt16| 89      | 512 bit location: 32 x #(t:u16)#
-| MemorySize:int32                | 90      | Packed512_Int16 | 90      | 512 bit location: 32 x #(t:i16)#
-| MemorySize:int32                | 91      | Packed512_UInt32| 91      | 512 bit location: 16 x #(t:u32)#
-| MemorySize:int32                | 92      | Packed512_Int32 | 92      | 512 bit location: 16 x #(t:i32)#
-| MemorySize:int32                | 93      | Packed512_UInt52| 93      | 512 bit location: 8 x #(t:u52)#
-| MemorySize:int32                | 94      | Packed512_UInt64| 94      | 512 bit location: 8 x #(t:u64)#
-| MemorySize:int32                | 95      | Packed512_Int64 | 95      | 512 bit location: 8 x #(t:i64)#
-| MemorySize:int32                | 96      | Packed512_UInt128| 96      | 256 bit location: 4 x #(t:u128)#
-| MemorySize:int32                | 97      | Packed512_Float32| 97      | 512 bit location: 16 x #(t:f32)#
-| MemorySize:int32                | 98      | Packed512_Float64| 98      | 512 bit location: 8 x #(t:f64)#
-| MemorySize:int32                | 99      | Packed512_2xBFloat16| 99      | 512 bit location: 16 x (2 x #(t:bf16)#)
-| MemorySize:int32                | 100     | Broadcast64_UInt32| 100     | Broadcast #(t:u32)# to 64 bits
-| MemorySize:int32                | 101     | Broadcast64_Int32| 101     | Broadcast #(t:i32)# to 64 bits
-| MemorySize:int32                | 102     | Broadcast64_Float32| 102     | Broadcast #(t:f32)# to 64 bits
-| MemorySize:int32                | 103     | Broadcast128_UInt32| 103     | Broadcast #(t:u32)# to 128 bits
-| MemorySize:int32                | 104     | Broadcast128_Int32| 104     | Broadcast #(t:i32)# to 128 bits
-| MemorySize:int32                | 105     | Broadcast128_UInt52| 105     | Broadcast #(t:u52)# to 128 bits
-| MemorySize:int32                | 106     | Broadcast128_UInt64| 106     | Broadcast #(t:u64)# to 128 bits
-| MemorySize:int32                | 107     | Broadcast128_Int64| 107     | Broadcast #(t:i64)# to 128 bits
-| MemorySize:int32                | 108     | Broadcast128_Float32| 108     | Broadcast #(t:f32)# to 128 bits
-| MemorySize:int32                | 109     | Broadcast128_Float64| 109     | Broadcast #(t:f64)# to 128 bits
-| MemorySize:int32                | 110     | Broadcast256_UInt32| 110     | Broadcast #(t:u32)# to 256 bits
-| MemorySize:int32                | 111     | Broadcast256_Int32| 111     | Broadcast #(t:i32)# to 256 bits
-| MemorySize:int32                | 112     | Broadcast256_UInt52| 112     | Broadcast #(t:u52)# to 256 bits
-| MemorySize:int32                | 113     | Broadcast256_UInt64| 113     | Broadcast #(t:u64)# to 256 bits
-| MemorySize:int32                | 114     | Broadcast256_Int64| 114     | Broadcast #(t:i64)# to 256 bits
-| MemorySize:int32                | 115     | Broadcast256_Float32| 115     | Broadcast #(t:f32)# to 256 bits
-| MemorySize:int32                | 116     | Broadcast256_Float64| 116     | Broadcast #(t:f64)# to 256 bits
-| MemorySize:int32                | 117     | Broadcast512_UInt32| 117     | Broadcast #(t:u32)# to 512 bits
-| MemorySize:int32                | 118     | Broadcast512_Int32| 118     | Broadcast #(t:i32)# to 512 bits
-| MemorySize:int32                | 119     | Broadcast512_UInt52| 119     | Broadcast #(t:u52)# to 512 bits
-| MemorySize:int32                | 120     | Broadcast512_UInt64| 120     | Broadcast #(t:u64)# to 512 bits
-| MemorySize:int32                | 121     | Broadcast512_Int64| 121     | Broadcast #(t:i64)# to 512 bits
-| MemorySize:int32                | 122     | Broadcast512_Float32| 122     | Broadcast #(t:f32)# to 512 bits
-| MemorySize:int32                | 123     | Broadcast512_Float64| 123     | Broadcast #(t:f64)# to 512 bits
-| MemorySize:int32                | 124     | Broadcast128_2xInt16| 124     | Broadcast 2 x #(t:i16)# to 128 bits
-| MemorySize:int32                | 125     | Broadcast256_2xInt16| 125     | Broadcast 2 x #(t:i16)# to 256 bits
-| MemorySize:int32                | 126     | Broadcast512_2xInt16| 126     | Broadcast 2 x #(t:i16)# to 512 bits
-| MemorySize:int32                | 127     | Broadcast128_2xUInt32| 127     | Broadcast 2 x #(t:u32)# to 128 bits
-| MemorySize:int32                | 128     | Broadcast256_2xUInt32| 128     | Broadcast 2 x #(t:u32)# to 256 bits
-| MemorySize:int32                | 129     | Broadcast512_2xUInt32| 129     | Broadcast 2 x #(t:u32)# to 512 bits
-| MemorySize:int32                | 130     | Broadcast128_2xInt32| 130     | Broadcast 2 x #(t:i32)# to 128 bits
-| MemorySize:int32                | 131     | Broadcast256_2xInt32| 131     | Broadcast 2 x #(t:i32)# to 256 bits
-| MemorySize:int32                | 132     | Broadcast512_2xInt32| 132     | Broadcast 2 x #(t:i32)# to 512 bits
-| MemorySize:int32                | 133     | Broadcast128_2xBFloat16| 133     | Broadcast 2 x #(t:bf16)# to 128 bits
-| MemorySize:int32                | 134     | Broadcast256_2xBFloat16| 134     | Broadcast 2 x #(t:bf16)# to 256 bits
-| MemorySize:int32                | 135     | Broadcast512_2xBFloat16| 135     | Broadcast 2 x #(t:bf16)# to 512 bits
+| TypeName                        | Index   | Name                            | Hex       | BitString                       | Description
+| MemorySize                      | 0       | Unknown                         | 0         |                                 | Unknown size or the instruction doesn't reference any memory (eg. #(c:LEA)#)
+| MemorySize                      | 1       | UInt8                           | 1         |                                 | Memory location contains a #(t:u8)#
+| MemorySize                      | 2       | UInt16                          | 2         |                                 | Memory location contains a #(t:u16)#
+| MemorySize                      | 3       | UInt32                          | 3         |                                 | Memory location contains a #(t:u32)#
+| MemorySize                      | 4       | UInt52                          | 4         |                                 | Memory location contains a #(t:u52)#
+| MemorySize                      | 5       | UInt64                          | 5         |                                 | Memory location contains a #(t:u64)#
+| MemorySize                      | 6       | UInt128                         | 6         |                                 | Memory location contains a #(t:u128)#
+| MemorySize                      | 7       | UInt256                         | 7         |                                 | Memory location contains a #(t:u256)#
+| MemorySize                      | 8       | UInt512                         | 8         |                                 | Memory location contains a #(t:u512)#
+| MemorySize                      | 9       | Int8                            | 9         |                                 | Memory location contains a #(t:i8)#
+| MemorySize                      | 10      | Int16                           | a         |                                 | Memory location contains a #(t:i16)#
+| MemorySize                      | 11      | Int32                           | b         |                                 | Memory location contains a #(t:i32)#
+| MemorySize                      | 12      | Int64                           | c         |                                 | Memory location contains a #(t:i64)#
+| MemorySize                      | 13      | Int128                          | d         |                                 | Memory location contains a #(t:i128)#
+| MemorySize                      | 14      | Int256                          | e         |                                 | Memory location contains a #(t:i256)#
+| MemorySize                      | 15      | Int512                          | f         |                                 | Memory location contains a #(t:i512)#
+| MemorySize                      | 16      | SegPtr16                        | 10        |                                 | Memory location contains a seg:ptr pair, #(t:u16)# (offset) + #(t:u16)# (segment/selector)
+| MemorySize                      | 17      | SegPtr32                        | 11        |                                 | Memory location contains a seg:ptr pair, #(t:u32)# (offset) + #(t:u16)# (segment/selector)
+| MemorySize                      | 18      | SegPtr64                        | 12        |                                 | Memory location contains a seg:ptr pair, #(t:u64)# (offset) + #(t:u16)# (segment/selector)
+| MemorySize                      | 19      | WordOffset                      | 13        |                                 | Memory location contains a 16-bit offset (#(c:JMP/CALL WORD PTR [mem])#)
+| MemorySize                      | 20      | DwordOffset                     | 14        |                                 | Memory location contains a 32-bit offset (#(c:JMP/CALL DWORD PTR [mem])#)
+| MemorySize                      | 21      | QwordOffset                     | 15        |                                 | Memory location contains a 64-bit offset (#(c:JMP/CALL QWORD PTR [mem])#)
+| MemorySize                      | 22      | Bound16_WordWord                | 16        |                                 | Memory location contains two #(t:u16)#s (16-bit #(c:BOUND)#)
+| MemorySize                      | 23      | Bound32_DwordDword              | 17        |                                 | Memory location contains two #(t:u32)#s (32-bit #(c:BOUND)#)
+| MemorySize                      | 24      | Bnd32                           | 18        |                                 | 32-bit #(c:BNDMOV)#, 2 x #(t:u32)#
+| MemorySize                      | 25      | Bnd64                           | 19        |                                 | 64-bit #(c:BNDMOV)#, 2 x #(t:u64)#
+| MemorySize                      | 26      | Fword6                          | 1a        |                                 | Memory location contains a 16-bit limit and a 32-bit address (eg. #(c:LGDTW)#, #(c:LGDTD)#)
+| MemorySize                      | 27      | Fword10                         | 1b        |                                 | Memory location contains a 16-bit limit and a 64-bit address (eg. #(c:LGDTQ)#)
+| MemorySize                      | 28      | Float16                         | 1c        |                                 | Memory location contains a #(t:f16)#
+| MemorySize                      | 29      | Float32                         | 1d        |                                 | Memory location contains a #(t:f32)#
+| MemorySize                      | 30      | Float64                         | 1e        |                                 | Memory location contains a #(t:f64)#
+| MemorySize                      | 31      | Float80                         | 1f        |                                 | Memory location contains a #(t:f80)#
+| MemorySize                      | 32      | Float128                        | 20        |                                 | Memory location contains a #(t:f128)#
+| MemorySize                      | 33      | BFloat16                        | 21        |                                 | Memory location contains a #(t:bf16)#
+| MemorySize                      | 34      | FpuEnv14                        | 22        |                                 | Memory location contains a 14-byte FPU environment (16-bit #(c:FLDENV)#/#(c:FSTENV)#)
+| MemorySize                      | 35      | FpuEnv28                        | 23        |                                 | Memory location contains a 28-byte FPU environment (32/64-bit #(c:FLDENV)#/#(c:FSTENV)#)
+| MemorySize                      | 36      | FpuState94                      | 24        |                                 | Memory location contains a 94-byte FPU environment (16-bit #(c:FSAVE)#/#(c:FRSTOR)#)
+| MemorySize                      | 37      | FpuState108                     | 25        |                                 | Memory location contains a 108-byte FPU environment (32/64-bit #(c:FSAVE)#/#(c:FRSTOR)#)
+| MemorySize                      | 38      | Fxsave_512Byte                  | 26        |                                 | Memory location contains 512-bytes of #(c:FXSAVE)#/#(c:FXRSTOR)# data
+| MemorySize                      | 39      | Fxsave64_512Byte                | 27        |                                 | Memory location contains 512-bytes of #(c:FXSAVE64)#/#(c:FXRSTOR64)# data
+| MemorySize                      | 40      | Xsave                           | 28        |                                 | 32-bit #(c:XSAVE)# area
+| MemorySize                      | 41      | Xsave64                         | 29        |                                 | 64-bit #(c:XSAVE)# area
+| MemorySize                      | 42      | Bcd                             | 2a        |                                 | Memory location contains a 10-byte #(t:bcd)# value (#(c:FBLD)#/#(c:FBSTP)#)
+| MemorySize                      | 43      | Packed16_UInt8                  | 2b        |                                 | 16 bit location: 2 x #(t:u8)#
+| MemorySize                      | 44      | Packed16_Int8                   | 2c        |                                 | 16 bit location: 2 x #(t:i8)#
+| MemorySize                      | 45      | Packed32_UInt8                  | 2d        |                                 | 32 bit location: 4 x #(t:u8)#
+| MemorySize                      | 46      | Packed32_Int8                   | 2e        |                                 | 32 bit location: 4 x #(t:i8)#
+| MemorySize                      | 47      | Packed32_UInt16                 | 2f        |                                 | 32 bit location: 2 x #(t:u16)#
+| MemorySize                      | 48      | Packed32_Int16                  | 30        |                                 | 32 bit location: 2 x #(t:i16)#
+| MemorySize                      | 49      | Packed32_BFloat16               | 31        |                                 | 32 bit location: 2 x #(t:bf16)#
+| MemorySize                      | 50      | Packed64_UInt8                  | 32        |                                 | 64-bit location: 8 x #(t:u8)#
+| MemorySize                      | 51      | Packed64_Int8                   | 33        |                                 | 64-bit location: 8 x #(t:i8)#
+| MemorySize                      | 52      | Packed64_UInt16                 | 34        |                                 | 64-bit location: 4 x #(t:u16)#
+| MemorySize                      | 53      | Packed64_Int16                  | 35        |                                 | 64-bit location: 4 x #(t:i16)#
+| MemorySize                      | 54      | Packed64_UInt32                 | 36        |                                 | 64-bit location: 2 x #(t:u32)#
+| MemorySize                      | 55      | Packed64_Int32                  | 37        |                                 | 64-bit location: 2 x #(t:i32)#
+| MemorySize                      | 56      | Packed64_Float16                | 38        |                                 | 64-bit location: 4 x #(t:f16)#
+| MemorySize                      | 57      | Packed64_Float32                | 39        |                                 | 64-bit location: 2 x #(t:f32)#
+| MemorySize                      | 58      | Packed128_UInt8                 | 3a        |                                 | 128 bit location: 16 x #(t:u8)#
+| MemorySize                      | 59      | Packed128_Int8                  | 3b        |                                 | 128 bit location: 16 x #(t:i8)#
+| MemorySize                      | 60      | Packed128_UInt16                | 3c        |                                 | 128 bit location: 8 x #(t:u16)#
+| MemorySize                      | 61      | Packed128_Int16                 | 3d        |                                 | 128 bit location: 8 x #(t:i16)#
+| MemorySize                      | 62      | Packed128_UInt32                | 3e        |                                 | 128 bit location: 4 x #(t:u32)#
+| MemorySize                      | 63      | Packed128_Int32                 | 3f        |                                 | 128 bit location: 4 x #(t:i32)#
+| MemorySize                      | 64      | Packed128_UInt52                | 40        |                                 | 128 bit location: 2 x #(t:u52)#
+| MemorySize                      | 65      | Packed128_UInt64                | 41        |                                 | 128 bit location: 2 x #(t:u64)#
+| MemorySize                      | 66      | Packed128_Int64                 | 42        |                                 | 128 bit location: 2 x #(t:i64)#
+| MemorySize                      | 67      | Packed128_Float16               | 43        |                                 | 128 bit location: 8 x #(t:f16)#
+| MemorySize                      | 68      | Packed128_Float32               | 44        |                                 | 128 bit location: 4 x #(t:f32)#
+| MemorySize                      | 69      | Packed128_Float64               | 45        |                                 | 128 bit location: 2 x #(t:f64)#
+| MemorySize                      | 70      | Packed128_2xBFloat16            | 46        |                                 | 128 bit location: 4 x (2 x #(t:bf16)#)
+| MemorySize                      | 71      | Packed256_UInt8                 | 47        |                                 | 256 bit location: 32 x #(t:u8)#
+| MemorySize                      | 72      | Packed256_Int8                  | 48        |                                 | 256 bit location: 32 x #(t:i8)#
+| MemorySize                      | 73      | Packed256_UInt16                | 49        |                                 | 256 bit location: 16 x #(t:u16)#
+| MemorySize                      | 74      | Packed256_Int16                 | 4a        |                                 | 256 bit location: 16 x #(t:i16)#
+| MemorySize                      | 75      | Packed256_UInt32                | 4b        |                                 | 256 bit location: 8 x #(t:u32)#
+| MemorySize                      | 76      | Packed256_Int32                 | 4c        |                                 | 256 bit location: 8 x #(t:i32)#
+| MemorySize                      | 77      | Packed256_UInt52                | 4d        |                                 | 256 bit location: 4 x #(t:u52)#
+| MemorySize                      | 78      | Packed256_UInt64                | 4e        |                                 | 256 bit location: 4 x #(t:u64)#
+| MemorySize                      | 79      | Packed256_Int64                 | 4f        |                                 | 256 bit location: 4 x #(t:i64)#
+| MemorySize                      | 80      | Packed256_UInt128               | 50        |                                 | 256 bit location: 2 x #(t:u128)#
+| MemorySize                      | 81      | Packed256_Int128                | 51        |                                 | 256 bit location: 2 x #(t:i128)#
+| MemorySize                      | 82      | Packed256_Float16               | 52        |                                 | 256 bit location: 16 x #(t:f16)#
+| MemorySize                      | 83      | Packed256_Float32               | 53        |                                 | 256 bit location: 8 x #(t:f32)#
+| MemorySize                      | 84      | Packed256_Float64               | 54        |                                 | 256 bit location: 4 x #(t:f64)#
+| MemorySize                      | 85      | Packed256_Float128              | 55        |                                 | 256 bit location: 2 x #(t:f128)#
+| MemorySize                      | 86      | Packed256_2xBFloat16            | 56        |                                 | 256 bit location: 8 x (2 x #(t:bf16)#)
+| MemorySize                      | 87      | Packed512_UInt8                 | 57        |                                 | 512 bit location: 64 x #(t:u8)#
+| MemorySize                      | 88      | Packed512_Int8                  | 58        |                                 | 512 bit location: 64 x #(t:i8)#
+| MemorySize                      | 89      | Packed512_UInt16                | 59        |                                 | 512 bit location: 32 x #(t:u16)#
+| MemorySize                      | 90      | Packed512_Int16                 | 5a        |                                 | 512 bit location: 32 x #(t:i16)#
+| MemorySize                      | 91      | Packed512_UInt32                | 5b        |                                 | 512 bit location: 16 x #(t:u32)#
+| MemorySize                      | 92      | Packed512_Int32                 | 5c        |                                 | 512 bit location: 16 x #(t:i32)#
+| MemorySize                      | 93      | Packed512_UInt52                | 5d        |                                 | 512 bit location: 8 x #(t:u52)#
+| MemorySize                      | 94      | Packed512_UInt64                | 5e        |                                 | 512 bit location: 8 x #(t:u64)#
+| MemorySize                      | 95      | Packed512_Int64                 | 5f        |                                 | 512 bit location: 8 x #(t:i64)#
+| MemorySize                      | 96      | Packed512_UInt128               | 60        |                                 | 256 bit location: 4 x #(t:u128)#
+| MemorySize                      | 97      | Packed512_Float32               | 61        |                                 | 512 bit location: 16 x #(t:f32)#
+| MemorySize                      | 98      | Packed512_Float64               | 62        |                                 | 512 bit location: 8 x #(t:f64)#
+| MemorySize                      | 99      | Packed512_2xBFloat16            | 63        |                                 | 512 bit location: 16 x (2 x #(t:bf16)#)
+| MemorySize                      | 100     | Broadcast64_UInt32              | 64        |                                 | Broadcast #(t:u32)# to 64 bits
+| MemorySize                      | 101     | Broadcast64_Int32               | 65        |                                 | Broadcast #(t:i32)# to 64 bits
+| MemorySize                      | 102     | Broadcast64_Float32             | 66        |                                 | Broadcast #(t:f32)# to 64 bits
+| MemorySize                      | 103     | Broadcast128_UInt32             | 67        |                                 | Broadcast #(t:u32)# to 128 bits
+| MemorySize                      | 104     | Broadcast128_Int32              | 68        |                                 | Broadcast #(t:i32)# to 128 bits
+| MemorySize                      | 105     | Broadcast128_UInt52             | 69        |                                 | Broadcast #(t:u52)# to 128 bits
+| MemorySize                      | 106     | Broadcast128_UInt64             | 6a        |                                 | Broadcast #(t:u64)# to 128 bits
+| MemorySize                      | 107     | Broadcast128_Int64              | 6b        |                                 | Broadcast #(t:i64)# to 128 bits
+| MemorySize                      | 108     | Broadcast128_Float32            | 6c        |                                 | Broadcast #(t:f32)# to 128 bits
+| MemorySize                      | 109     | Broadcast128_Float64            | 6d        |                                 | Broadcast #(t:f64)# to 128 bits
+| MemorySize                      | 110     | Broadcast256_UInt32             | 6e        |                                 | Broadcast #(t:u32)# to 256 bits
+| MemorySize                      | 111     | Broadcast256_Int32              | 6f        |                                 | Broadcast #(t:i32)# to 256 bits
+| MemorySize                      | 112     | Broadcast256_UInt52             | 70        |                                 | Broadcast #(t:u52)# to 256 bits
+| MemorySize                      | 113     | Broadcast256_UInt64             | 71        |                                 | Broadcast #(t:u64)# to 256 bits
+| MemorySize                      | 114     | Broadcast256_Int64              | 72        |                                 | Broadcast #(t:i64)# to 256 bits
+| MemorySize                      | 115     | Broadcast256_Float32            | 73        |                                 | Broadcast #(t:f32)# to 256 bits
+| MemorySize                      | 116     | Broadcast256_Float64            | 74        |                                 | Broadcast #(t:f64)# to 256 bits
+| MemorySize                      | 117     | Broadcast512_UInt32             | 75        |                                 | Broadcast #(t:u32)# to 512 bits
+| MemorySize                      | 118     | Broadcast512_Int32              | 76        |                                 | Broadcast #(t:i32)# to 512 bits
+| MemorySize                      | 119     | Broadcast512_UInt52             | 77        |                                 | Broadcast #(t:u52)# to 512 bits
+| MemorySize                      | 120     | Broadcast512_UInt64             | 78        |                                 | Broadcast #(t:u64)# to 512 bits
+| MemorySize                      | 121     | Broadcast512_Int64              | 79        |                                 | Broadcast #(t:i64)# to 512 bits
+| MemorySize                      | 122     | Broadcast512_Float32            | 7a        |                                 | Broadcast #(t:f32)# to 512 bits
+| MemorySize                      | 123     | Broadcast512_Float64            | 7b        |                                 | Broadcast #(t:f64)# to 512 bits
+| MemorySize                      | 124     | Broadcast128_2xInt16            | 7c        |                                 | Broadcast 2 x #(t:i16)# to 128 bits
+| MemorySize                      | 125     | Broadcast256_2xInt16            | 7d        |                                 | Broadcast 2 x #(t:i16)# to 256 bits
+| MemorySize                      | 126     | Broadcast512_2xInt16            | 7e        |                                 | Broadcast 2 x #(t:i16)# to 512 bits
+| MemorySize                      | 127     | Broadcast128_2xUInt32           | 7f        |                                 | Broadcast 2 x #(t:u32)# to 128 bits
+| MemorySize                      | 128     | Broadcast256_2xUInt32           | 80        |                                 | Broadcast 2 x #(t:u32)# to 256 bits
+| MemorySize                      | 129     | Broadcast512_2xUInt32           | 81        |                                 | Broadcast 2 x #(t:u32)# to 512 bits
+| MemorySize                      | 130     | Broadcast128_2xInt32            | 82        |                                 | Broadcast 2 x #(t:i32)# to 128 bits
+| MemorySize                      | 131     | Broadcast256_2xInt32            | 83        |                                 | Broadcast 2 x #(t:i32)# to 256 bits
+| MemorySize                      | 132     | Broadcast512_2xInt32            | 84        |                                 | Broadcast 2 x #(t:i32)# to 512 bits
+| MemorySize                      | 133     | Broadcast128_2xBFloat16         | 85        |                                 | Broadcast 2 x #(t:bf16)# to 128 bits
+| MemorySize                      | 134     | Broadcast256_2xBFloat16         | 86        |                                 | Broadcast 2 x #(t:bf16)# to 256 bits
+| MemorySize                      | 135     | Broadcast512_2xBFloat16         | 87        |                                 | Broadcast 2 x #(t:bf16)# to 512 bits

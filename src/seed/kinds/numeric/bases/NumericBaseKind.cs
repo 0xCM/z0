@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// Identifies base 2, binary
         /// </summary>
-        B = 1,
+        B = 2,
 
         /// <summary>
         /// Identifies base 8, octal

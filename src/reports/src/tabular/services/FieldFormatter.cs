@@ -37,11 +37,12 @@ namespace Z0
         
         [MethodImpl(Inline)]
         internal static int width(E spec)
-            => (int)(Enums.numeric<E,ulong>(spec) >> 32);
+            => (int)(Enums.numeric<E,int>(spec) >> 16);
+
 
         [MethodImpl(Inline)]
         internal static int index(E spec)
-            => (int)Enums.numeric<E,ulong>(spec);
+            => Enums.numeric<E,short>(spec);
 
         [MethodImpl(Inline)]
         FieldFormatter(StringBuilder state, char sep = Chars.Pipe)

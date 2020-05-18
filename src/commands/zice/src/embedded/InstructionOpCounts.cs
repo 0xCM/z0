@@ -10,9 +10,9 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-	static class InstructionOpCounts 
+	public static class InstructionOpCounts 
     {
-		internal static System.ReadOnlySpan<byte> OpCount 
+		public static System.ReadOnlySpan<byte> OpCount 
             => new byte[IcedConstants.NumberOfCodeValues] {
 			0,// INVALID
 			0,// DeclareByte

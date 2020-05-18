@@ -17,5 +17,4 @@ namespace Z0.Asm.Data
 		[Comment("#(c:REPNE)# prefix")]
 		Repne,
 	}
-
 }
