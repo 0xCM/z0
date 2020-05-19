@@ -4,29 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Data
 {        
-    using System;
-
-    using static Tabular;
-
-    using ID = InstructionFieldId;
+    using I = InstructionFieldId;
     using W = InstructionFieldWidth;
-    using static InstructionFieldCommon;
-
-    class InstructionFieldCommon
-    {
-        public const int FlagWidth = 36;
-    }
+    using R = RecordFields;
 
     public enum InstructionFieldId : int
     {
 		Sequence, Id,  CodeInfo, Encoding, FlowControl, RflagsRead, RflagsUndefined,         
+
         RflagsWritten, RflagsCleared, RflagsSet, RflagsInfo, Cpuid,         
+
         Flags, OpInfo,
     }
 
     public enum InstructionFieldWidth : int
     {
-		Sequence = 10, Id = 50, CodeInfo = 30, Encoding = 12, FlowControl = 22, 
+        FlagWidth = 36, 
+
+		Sequence = R.SeqWidth, Id = R.IdWidth, CodeInfo = 30, Encoding = 12, FlowControl = 22, 
         
         RflagsRead = FlagWidth, RflagsUndefined = FlagWidth,  RflagsWritten = FlagWidth, 
         
@@ -34,38 +29,37 @@ namespace Z0.Data
         
         Cpuid = 20, Flags = 20, OpInfo = 10,
 
-        Offset = 16,      
     }
 
     public enum InstructionField: int
     {
-		Sequence = ID.Sequence | (W.Sequence << W.Offset),
+		Sequence = I.Sequence | (W.Sequence << R.Offset),
 
-		Id = ID.Id | (W.Id << W.Offset),
+		Id = I.Id | (W.Id << R.Offset),
 		
-        CodeInfo = ID.CodeInfo | (W.CodeInfo << W.Offset),
+        CodeInfo = I.CodeInfo | (W.CodeInfo << R.Offset),
 		
-        Encoding = ID.Encoding | (W.Encoding << W.Offset),
+        Encoding = I.Encoding | (W.Encoding << R.Offset),
 		
-		FlowControl = ID.FlowControl | (W.FlowControl << W.Offset),
+		FlowControl = I.FlowControl | (W.FlowControl << R.Offset),
 		
-		RflagsRead = ID.RflagsRead | (W.RflagsRead << W.Offset),
+		RflagsRead = I.RflagsRead | (W.RflagsRead << R.Offset),
 		
-		RflagsUndefined = ID.RflagsUndefined | (W.RflagsUndefined << W.Offset),
+		RflagsUndefined = I.RflagsUndefined | (W.RflagsUndefined << R.Offset),
 		
-		RflagsWritten = ID.RflagsWritten | (W.RflagsWritten << W.Offset),
+		RflagsWritten = I.RflagsWritten | (W.RflagsWritten << R.Offset),
 		
-		RflagsCleared = ID.RflagsCleared | (W.RflagsCleared << W.Offset),
+		RflagsCleared = I.RflagsCleared | (W.RflagsCleared << R.Offset),
 		
-		RflagsSet = ID.RflagsSet | (W.RflagsSet << W.Offset),
+		RflagsSet = I.RflagsSet | (W.RflagsSet << R.Offset),
 		
-		RflagsInfo = ID.RflagsInfo | (W.RflagsInfo << W.Offset),
+		RflagsInfo = I.RflagsInfo | (W.RflagsInfo << R.Offset),
 		
-		Cpuid = ID.Cpuid | (W.Cpuid << W.Offset),
+		Cpuid = I.Cpuid | (W.Cpuid << R.Offset),
 
-		Flags = ID.Flags | (W.Flags << W.Offset),
+		Flags = I.Flags | (W.Flags << R.Offset),
 
-		OpInfo = ID.OpInfo | (W.OpInfo << W.Offset),
+		OpInfo = I.OpInfo | (W.OpInfo << R.Offset),
 
     }
 

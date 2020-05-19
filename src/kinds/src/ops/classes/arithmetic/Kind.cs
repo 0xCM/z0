@@ -78,6 +78,8 @@ namespace Z0
 
         ModMul = Id.ModMul,
 
+        DivMod = Id.DivMod,
+
         Ceil = Id.Ceil,
 
         Floor = Id.Floor,

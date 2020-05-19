@@ -12,6 +12,8 @@ namespace Z0
     [Fixed(FixedWidth.W64)]
     public readonly struct Fixed64 : IFixedNumeric<Fixed64,W64,ulong>
     {
+        public static Fixed64 Empty => default(Fixed64);        
+
         internal readonly ulong Data;
 
         public ulong Content
@@ -29,6 +31,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => (uint)(Data >> 32);
+        }
+
+        public Fixed64 Zero 
+        {
+            [MethodImpl(Inline)]
+            get => Empty; 
         }
 
         [MethodImpl(Inline)]

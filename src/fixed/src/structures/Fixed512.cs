@@ -14,6 +14,8 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential), Fixed(FixedWidth.W512)]
     public readonly struct Fixed512  : IFixed<Fixed512,W512,Vector512<ulong>>
     {
+        public static Fixed512 Empty => default(Fixed512);        
+
         readonly Fixed256 X0;
 
         readonly Fixed256 X1;
@@ -40,18 +42,24 @@ namespace Z0
 
         public int ByteCount => 64;
 
+        public Fixed512 Zero 
+        {
+            [MethodImpl(Inline)]
+            get => Empty; 
+        }
+
         [MethodImpl(Inline)]
         Fixed512(Fixed256 x0, Fixed256 x1)
         {
-            this.X0 = x0;
-            this.X1 = x1;
+            X0 = x0;
+            X1 = x1;
         }
 
         [MethodImpl(Inline)]
         Fixed512(in Vector512<ulong> src)
         {
-            this.X0 = src.Lo;
-            this.X1 = src.Hi;
+            X0 = src.Lo;
+            X1 = src.Hi;
         }
 
         [MethodImpl(Inline)]

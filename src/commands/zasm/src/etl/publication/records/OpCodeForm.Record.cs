@@ -10,13 +10,17 @@ namespace Z0.Data
     using F = OpCodeFormField;
     using Asm = Asm.Data;
 
+    using Asm.Data;
+
     public readonly struct OpCodeFormRecord : IRecord<F,R>
     {
         public static OpCodeFormRecord Empty => default;
 
 		public int Sequence {get;}
 
-        public readonly string Id;
+        public readonly OpCodeId Id;
+
+        public string Mnemonic {get;}
 
         public readonly BinaryCode CodeBytes;
 
@@ -42,7 +46,8 @@ namespace Z0.Data
 
         public OpCodeFormRecord(            
             int Sequence,
-            string Id, 
+            OpCodeId Id, 
+            string Mnemonic,
             BinaryCode CodeBytes, 
             Asm.MandatoryPrefix MandatoryPrefix,
             Asm.OpCodeTableKind TableKind,
@@ -54,6 +59,7 @@ namespace Z0.Data
             )
         {
             this.Sequence = Sequence;
+            this.Mnemonic = Mnemonic;
             this.Id = Id;
             this.CodeBytes = CodeBytes;
             this.Prefix = MandatoryPrefix;

@@ -15,8 +15,8 @@ namespace Z0.Data
     {
         public static AsmEtl Service => new AsmEtl();
 
-        public static M.OpCodes OpCodes 
-            => M.OpCodes.Model;
+        public static M.OpCodeForms OpCodeForms 
+            => M.OpCodeForms.Model;
 
         public static M.Instructions Instructions 
             => M.Instructions.Model;

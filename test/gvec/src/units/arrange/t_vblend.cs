@@ -27,7 +27,7 @@ namespace Z0
         {
             var w = n256;
             var x = gvec.vinc(w, z8);
-            var y = gvec.vdec(w, u8max);
+            var y = gvec.vdec(w, Max8u);
             var spec = v8u(Vectors.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
             var z = gvec.vblend(x,y,spec);            
         }        
@@ -38,7 +38,7 @@ namespace Z0
             var alt = (uint)BitMasks.Msb16x8x1 << 16; 
             dvec.vcover(v16u(Vectors.vbroadcast(w,alt)), out Vector128<byte> spec);
             var x = gvec.vinc(w,z16);
-            var y = gvec.vdec(w,u16max);
+            var y = gvec.vdec(w,Max16u);
             var z = gvec.vblend(x,y,spec);
         }
 
@@ -49,7 +49,7 @@ namespace Z0
             var altEven = (uint)BitMasks.Msb16x8x1;
             dvec.vcover(v16u(Vectors.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
             var x = gvec.vinc(w,z16);
-            var y = gvec.vdec(w,u16max);
+            var y = gvec.vdec(w,Max16u);
             var z = gvec.vblend(x,y,spec);
         }
 

@@ -9,6 +9,7 @@ namespace Z0.Data
 
     using static Seed;
     using static Asm.Data.OpKind;
+
     using Asm.Data;
 
     public readonly struct SegIndicator : ITextual, INullaryKnown

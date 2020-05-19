@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
 
     using Z0.Asm;
+    using Z0.Machines;
 
     using static Seed;
     using static Memories;
@@ -30,6 +31,9 @@ namespace Z0
         {
         }
 
+        bool StartCpu {get;} 
+            = true;
+
         IApiComposition Api 
             => ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
 
@@ -39,11 +43,25 @@ namespace Z0
         IMachineContext CreateMachineContext(IAsmContext root, PartId[] code)
             => MachineContext.Create(root, code);
 
+
+        void RunCpu()
+        {
+            var cpu = Cpu.Create();
+            cpu.Run();
+        }
+
         public override void RunShell(params string[] args)
         {            
-            var parts = PartParser.Service.ParseValid(args);  
-            var context = CreateMachineContext(CreateAsmContext(), parts);  
-            Machine.Run(context);   
+            if(StartCpu)
+            {
+                RunCpu();
+            }
+            else
+            {
+                var parts = PartParser.Service.ParseValid(args);  
+                var context = CreateMachineContext(CreateAsmContext(), parts);  
+                Machine.Run(context);   
+            }
         }
 
         public static void Main(params string[] args)
@@ -54,5 +72,4 @@ namespace Z0
     {
 
     }
-
 }

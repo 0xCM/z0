@@ -12,6 +12,8 @@ namespace Z0
     [Fixed(FixedWidth.W32)]
     public readonly struct Fixed32 : IFixedNumeric<Fixed32,W32,uint>
     {
+        public static Fixed32 Empty => default(Fixed32);        
+
         readonly uint Data;
 
         public uint Content
@@ -29,6 +31,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => (ushort)(Data >> 16);
+        }
+
+        public Fixed32 Zero 
+        {
+            [MethodImpl(Inline)]
+            get => Empty; 
         }
 
         [MethodImpl(Inline)]

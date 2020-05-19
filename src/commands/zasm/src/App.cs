@@ -61,12 +61,7 @@ namespace Z0
             var parts = PartParser.Service.ParseValid(args);  
 
             var etl = AsmEtl.Service;
-            //etl.PublishOpCodeInfo();
-            //etl.PublishLists();
-            //etl.PublishLiterals();
-            etl.PublishDecoderTests();
-            // etl.Publish(AsmEtl.Instructions);
-            // etl.Publish(AsmEtl.OpCodes);
+            etl.Publish();
 
                                     
         }

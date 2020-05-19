@@ -6,13 +6,11 @@ namespace Z0.Data
 {        
     using System;
     using System.Linq;
-
     using System.Collections.Generic;
 
     using Z0.Asm.Data;
 
     using static Seed;
-    using static Memories;
     using static AsmDataModels;
 
     using F = InstructionField;

@@ -49,10 +49,14 @@ namespace Z0
         T Content {get;}
     }
 
-    public interface IFixed<F,W,T> : IFixedContent<T>,  IFixed<F,W>, IEquatable<F>
-        where F : unmanaged, IFixed<F,W,T>
-        where W : unmanaged, ITypeWidth  
-        where T : unmanaged      
+    public interface IFixed<F,W,T> : 
+        IFixedContent<T>,  
+        IFixed<F,W>, 
+        IEquatable<F>,
+        INullary<F>
+            where F : unmanaged, IFixed<F,W,T>
+            where W : unmanaged, ITypeWidth  
+            where T : unmanaged      
     {
         
     }

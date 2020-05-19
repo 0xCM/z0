@@ -9,37 +9,84 @@ namespace Z0
         
     partial class math
     {
-        [MethodImpl(Inline), Op]
-        public static bit within(sbyte a, sbyte b, sbyte tolerance)
-            => dist(a,b) <= (uint)tolerance;
+        /// <summary>
+        /// Defines the test within:bit := dist(a,b) <= delta
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <param name="delta">The delta</param>
+        [MethodImpl(Inline), Within]
+        public static bit within(sbyte a, sbyte b, sbyte delta)
+            => dist(a,b) <= (uint)delta;
 
-        [MethodImpl(Inline), Op]
-        public static bit within(byte a, byte b, byte tolerance)
-            => dist(a,b) <= tolerance;
+        /// <summary>
+        /// Defines the test within:bit := dist(a,b) <= delta
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <param name="delta">The delta</param>
+        [MethodImpl(Inline), Within]
+        public static bit within(byte a, byte b, byte delta)
+            => dist(a,b) <= delta;
 
-        [MethodImpl(Inline), Op]
-        public static bit within(short a, short b, short tolerance)
-            => dist(a,b) <= (uint)tolerance;
+        /// <summary>
+        /// Defines the test within:bit := dist(a,b) <= delta
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <param name="delta">The delta</param>
+        [MethodImpl(Inline), Within]
+        public static bit within(short a, short b, short delta)
+            => dist(a,b) <= (uint)delta;
 
-        [MethodImpl(Inline), Op]
-        public static bit within(ushort a, ushort b, ushort tolerance)
-            => dist(a,b) <= tolerance;
+        /// <summary>
+        /// Defines the test within:bit := dist(a,b) <= delta
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <param name="delta">The delta</param>
+        [MethodImpl(Inline), Within]
+        public static bit within(ushort a, ushort b, ushort delta)
+            => dist(a,b) <= delta;
 
-        [MethodImpl(Inline), Op]
-        public static bit within(int a, int b, int tolerance)
-            => dist(a,b) <= (uint)tolerance;
+        /// <summary>
+        /// Defines the test within:bit := dist(a,b) <= delta
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <param name="delta">The delta</param>
+        [MethodImpl(Inline), Within]
+        public static bit within(int a, int b, int delta)
+            => dist(a,b) <= (uint)delta;
 
-        [MethodImpl(Inline), Op]
-        public static bit within(uint a, uint b, uint tolerance)
-            => dist(a,b) <= tolerance;
+        /// <summary>
+        /// Defines the test within:bit := dist(a,b) <= delta
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <param name="delta">The delta</param>
+        [MethodImpl(Inline), Within]
+        public static bit within(uint a, uint b, uint delta)
+            => dist(a,b) <= delta;
 
-        [MethodImpl(Inline), Op]
-        public static bit within(long a, long b, long tolerance)
-            => dist(a,b) <= (ulong)tolerance;
+        /// <summary>
+        /// Defines the test within:bit := dist(a,b) <= delta
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <param name="delta">The delta</param>
+        [MethodImpl(Inline), Within]
+        public static bit within(long a, long b, long delta)
+            => dist(a,b) <= (ulong)delta;
 
-        [MethodImpl(Inline), Op]
-        public static bit within(ulong a, ulong b, ulong tolerance)
-            => dist(a,b) <= tolerance;
+        /// <summary>
+        /// Defines the test within:bit := dist(a,b) <= delta
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <param name="delta">The delta</param>
+        [MethodImpl(Inline), Within]
+        public static bit within(ulong a, ulong b, ulong delta)
+            => dist(a,b) <= delta;
     }
-
 }

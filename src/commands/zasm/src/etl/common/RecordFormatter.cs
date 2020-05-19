@@ -68,6 +68,11 @@ namespace Z0.Data
                  ? content.ToString() 
                  : string.Empty, FieldSep);        
 
+        [MethodImpl(Inline)]
+        public void DelimitSome<T>(F f, T content, char delimiter)
+            where T : unmanaged, Enum
+                => DelimitField(f, content.IsSome()  ? content.ToString()  : string.Empty, delimiter);        
+
         public void DelimitField<T>(F f, T content, char delimiter)
             where T : ITextual
         {

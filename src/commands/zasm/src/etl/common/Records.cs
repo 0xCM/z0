@@ -11,6 +11,37 @@ namespace Z0.Data
 
     using static Seed;
 
+    public enum RecordFieldWidths
+    {
+        Id = 50,
+
+        Sequence = 10,
+
+        Count = 8,
+
+        Mnemonic = 24,
+
+        Instruction = 60,
+        
+        Register = 14,        
+
+        Offset = 16,
+
+        OpCode = 30,
+
+        DataWidth = 26,
+
+    }
+    
+    public enum RecordFields
+    {
+        Offset = 16,
+
+        IdWidth = 50,
+
+        SeqWidth = 10,
+    }
+
     public class Records
     {
         [MethodImpl(Inline)]
@@ -103,6 +134,39 @@ namespace Z0.Data
 
             return src;         
         }            
+
+        public static Option<FilePath> Save<F,R>(R[] src, FilePath dst, FileWriteMode mode = FileWriteMode.Overwrite)
+            where R : IRecord
+            where F : unmanaged, Enum
+                => Save<F,R>(src, TabularFormats.derive<R>(), dst, mode);
+
+        public static Option<FilePath> Save<F,R>(R[] data, TabularFormat format, FilePath dst, FileWriteMode mode = FileWriteMode.Overwrite)
+            where R : IRecord
+            where F : unmanaged, Enum
+        {                
+            if(data == null || data.Length == 0)
+                return Option.none<FilePath>();
+
+            try
+            {
+                dst.FolderPath.Create();                            
+                var overwrite = mode == FileWriteMode.Overwrite;
+                var emitHeader = format.EmitHeader && (overwrite || !dst.Exists);                
+                
+                using var writer = dst.Writer(mode);
+
+                if(emitHeader)
+                    writer.WriteLine(Header<F>(format.Delimiter));
+
+                Control.iter(data, r => writer.WriteLine(r.DelimitedText(format.Delimiter)));   
+                return dst;                             
+            }
+            catch(Exception e)
+            {
+                term.error(e);                
+                return Option.none<FilePath>();
+            }
+        }
 
     }
 }

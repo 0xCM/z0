@@ -9,6 +9,26 @@ namespace Z0
 
     partial class Memories
     {
+        /// <summary>
+        /// The bit-width of an 8-bit unsigned integer
+        /// </summary>
+        public const byte Width8u = 8;
+
+        /// <summary>
+        /// The bit-width of a 16-bit unsigned integer
+        /// </summary>
+        public const byte Width16u = 16;
+
+        /// <summary>
+        /// The bit-width of a 32-bit unsigned integer
+        /// </summary>
+        public const byte Width32u = 32;
+
+        /// <summary>
+        /// The bit-width of a 32-bit unsigned integer
+        /// </summary>
+        public const byte Width64u = 64;
+
         public static W8 w8 => default(W8);
 
         public static W16 w16 => default(W16);

@@ -6,57 +6,57 @@ namespace Z0.Data
 {        
     using System;
 
-    using static Tabular;
-
-    using ID = OpCodeFormId;
+    using I = OpCodeFormId;
     using W = OpCodeFormWidth;
+    using R = RecordFields;
+    using RW = RecordFieldWidths;
 
     public enum OpCodeFormId : int
     {
-        Sequence, Id, CodeBytes, Prefix, Table, Group,  
+        Sequence, Mnemonic, CodeBytes, Prefix, Table, Group,  
 
         Op1,    Op2,    Op3,    Op4,    
         
-        OpSize, AddressSize,   Flags,        
+        OpSize, AddressSize, Id,  Flags,  
     }
 
     public enum OpCodeFormWidth : int
     {
-        Sequence = 10, Id = 50, CodeBytes = 16, Prefix = 8, Table = 8, Group = 8,    
+        Sequence = 10, Mnemonic = 16, CodeBytes = 16, Prefix = 8, Table = 8, Group = 8,    
         
         Op1 = 20, Op2 = 20, Op3 = 20, Op4 = 20,
         
-        OpSize = 10,  AddressSize = 14, Flags = 10,  
-
-        Offset = 16,        
+        OpSize = 10,  AddressSize = 14, Id = R.IdWidth,  Flags = 10,                  
     }
 
     public enum OpCodeFormField : int
     {
-        Sequence = ID.Sequence | W.Sequence << W.Offset,
+        Sequence = I.Sequence | RW.Sequence << RW.Offset,
 
-        Id = ID.Id | W.Id << W.Offset,
+        Mnemonic = I.Mnemonic | RW.Mnemonic << RW.Offset,
+        
+        CodeBytes = I.CodeBytes | W.CodeBytes << RW.Offset,
 
-        CodeBytes = ID.CodeBytes | W.CodeBytes << W.Offset,
+        Prefix = I.Prefix | W.Prefix << RW.Offset,
 
-        Prefix = ID.Prefix | W.Prefix << W.Offset,
+        Table = I.Table | W.Table << RW.Offset,
 
-        Table = ID.Table | W.Table << W.Offset,
+        Group = I.Group | W.Group << RW.Offset,
 
-        Group = ID.Group | W.Group << W.Offset,
+        Op1 = I.Op1 | W.Op1 << RW.Offset,
 
-        Op1 = ID.Op1 | W.Op1 << W.Offset,
+        Op2 = I.Op2 | W.Op2 << RW.Offset,
 
-        Op2 = ID.Op2 | W.Op2 << W.Offset,
+        Op3 = I.Op3 | W.Op3 << RW.Offset,
 
-        Op3 = ID.Op3 | W.Op3 << W.Offset,
+        Op4 = I.Op4 | W.Op4 << RW.Offset,
 
-        Op4 = ID.Op4 | W.Op4 << W.Offset,
+        OpSize = I.OpSize | W.OpSize << RW.Offset,
 
-        OpSize = ID.OpSize | W.OpSize << W.Offset,
+        AddressSize = I.AddressSize | W.AddressSize << RW.Offset,
 
-        AddressSize = ID.AddressSize | W.AddressSize << W.Offset,
-
-        Flags = ID.Flags | W.Flags << W.Offset,
+        Id = I.Id | RW.Id << RW.Offset,
+        
+        Flags = I.Flags | W.Flags << RW.Offset,        
     }
 }

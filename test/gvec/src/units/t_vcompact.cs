@@ -16,7 +16,7 @@ namespace Z0
         public void vcompact2_128x16x2_128x8_outline()
         {
             var w = n128;
-            var cellmax = u8max;
+            var cellmax = Max8u;
             
             var vsmax = vbroadcast(w, (ushort)cellmax);
             var vtmax = vbroadcast(w,cellmax);
@@ -32,7 +32,7 @@ namespace Z0
         public void vcompact2_256x16x2_256x8_outline()
         {
             var w = n256;
-            var cellmax = u8max;
+            var cellmax = Max8u;
             
             var vsmax = vbroadcast(w, (ushort)cellmax);
             var vtmax = vbroadcast(w,cellmax);
@@ -48,7 +48,7 @@ namespace Z0
         public void vcompact2_2x128x32u_128x16u_outline()
         {   
             var w = n128;
-            var cellmax = u16max;
+            var cellmax = Max16u;
             
             var vsmax = vbroadcast(w, (uint)cellmax);
             var vtmax = vbroadcast(w,cellmax);
@@ -64,7 +64,7 @@ namespace Z0
         public void vcompact2_2x256x32u_256x16u_outline()
         {   
             var w = n256;
-            var cellmax = u16max;
+            var cellmax = Max16u;
 
             var vsmax = vbroadcast<uint>(w, (uint)cellmax);
             var vtmax = vbroadcast(w,cellmax);

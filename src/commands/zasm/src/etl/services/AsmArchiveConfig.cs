@@ -17,14 +17,13 @@ namespace Z0.Data
     public interface IAsmArchiveConfig
     {
         FolderName RootFolder 
-            => FolderName.Define("data");
+            => FolderName.Define("asm");
 
         FolderPath ArchiveRoot
-            => FolderPath.Define(@"J:\dev\projects\z0\src\commands") + RootFolder;
+            => Env.Current.LogDir + RootFolder;
 
         FolderName SourcesFolder 
             => FolderName.Define("sources");
-
 
         FolderPath Sources 
             => ArchiveRoot + SourcesFolder;

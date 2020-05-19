@@ -1,2 +1,2 @@
-export ProjectId=$(dirname $0)
+export ProjectId=math
 export ScriptDir=$ZDev/src/.scripts

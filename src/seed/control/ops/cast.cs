@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Collections.Generic;
 
     using static Seed;
@@ -25,5 +26,10 @@ namespace Z0
                 dst[i] = cast<T>(src[i]);
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
+            where T : unmanaged
+                => MemoryMarshal.Cast<byte,T>(src);
     }
 }

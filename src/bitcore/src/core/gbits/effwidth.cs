@@ -11,24 +11,13 @@ namespace Z0
     using static Memories;
 
     partial class gbits
-    {
+    {                
         /// <summary>
-        /// Defines a mask that disables a sequence of bits
-        /// </summary>
-        /// <param name="start">The index at which to begin</param>
-        /// <param name="count">The number of bits to disable</param>
-        /// <typeparam name="T">The primal type over which the mask is defined</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T eraser<T>(byte start, byte count)
-            where T : unmanaged
-                => gmath.xor(Literals.maxval<T>(), gmath.sll(BitMask.lo<T>(count - 1), start));        
-                
-        /// <summary>
-        /// Computes the minimal number of bits required to represent the source value, the effective width
+        /// Computes the minimum number of bits required to represent the source value
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), EffWidth, Closures(UnsignedInts)]
         public static int effwidth<T>(T src)
             where T : unmanaged
         {

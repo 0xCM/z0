@@ -97,6 +97,14 @@ namespace Z0
         public static bit nonz(double src)
             => src != 0;
 
+        [MethodImpl(Inline), Op]
+        public static float nonz(float src, float alt)
+            => src != 0 ? alt : src;
+            
+        [MethodImpl(Inline), Op]
+        public static double nonz(double src, double alt)
+            => src != 0 ? alt : src;
+
         [MethodImpl(Inline), Max]
         public static float max(float a, float b)
             => a > b ? a : b;

@@ -9,33 +9,33 @@ namespace Z0
     using A = OpKindAttribute;
     using K = ComparisonKind;
 
-    public sealed class EqAttribute : A { public EqAttribute(object group = null) : base(K.Eq, group) {} }
+    public sealed class EqAttribute : A { public EqAttribute() : base(K.Eq) {} }
 
-    public sealed class EqzAttribute : A { public EqzAttribute(object group = null) : base(K.Eqz, group) {} }
+    public sealed class EqzAttribute : A { public EqzAttribute() : base(K.Eqz) {} }
 
-    public sealed class NeqAttribute : A { public NeqAttribute(object group = null) : base(K.Neq, group) {} }
+    public sealed class NeqAttribute : A { public NeqAttribute() : base(K.Neq) {} }
 
-    public sealed class LtAttribute : A { public LtAttribute(object group = null) : base(K.Lt, group) {} }
+    public sealed class LtAttribute : A { public LtAttribute() : base(K.Lt) {} }
 
-    public sealed class LtzAttribute : A { public LtzAttribute(object group = null) : base(K.Ltz, group) {} }
+    public sealed class LtzAttribute : A { public LtzAttribute() : base(K.Ltz) {} }
 
-    public sealed class LtEqAttribute : A { public LtEqAttribute(object group = null) : base(K.LtEq, group) {} }
+    public sealed class LtEqAttribute : A { public LtEqAttribute() : base(K.LtEq) {} }
 
-    public sealed class GtAttribute : A { public GtAttribute(object group = null) : base(K.Gt, group) {} }
+    public sealed class GtAttribute : A { public GtAttribute() : base(K.Gt) {} }
 
-    public sealed class GtzAttribute : A { public GtzAttribute(object group = null) : base(K.Gtz, group) {} }
+    public sealed class GtzAttribute : A { public GtzAttribute() : base(K.Gtz) {} }
 
-    public sealed class GtEqAttribute : A { public GtEqAttribute(object group = null) : base(K.GtEq, group) {} }
+    public sealed class GtEqAttribute : A { public GtEqAttribute() : base(K.GtEq) {} }
 
-    public sealed class DividesAttribute : A { public DividesAttribute(object group = null) : base(K.Divides, group) {} }
+    public sealed class DividesAttribute : A { public DividesAttribute() : base(K.Divides) {} }
 
-    public sealed class BetweenAttribute : A { public BetweenAttribute(object group = null) : base(K.Between, group) {} }
+    public sealed class BetweenAttribute : A { public BetweenAttribute() : base(K.Between) {} }
 
-    public sealed class WithinAttribute : A { public WithinAttribute(object group = null) : base(K.Within, group) {} }
+    public sealed class WithinAttribute : A { public WithinAttribute() : base(K.Within) {} }
 
-    public sealed class NegativeAttribute : A { public NegativeAttribute(object group = null) : base(K.Negative, group) {} }
+    public sealed class NegativeAttribute : A { public NegativeAttribute() : base(K.Negative) {} }
 
-    public sealed class PositiveAttribute : A { public PositiveAttribute(object group = null) : base(K.Positive, group) {} }
+    public sealed class PositiveAttribute : A { public PositiveAttribute () : base(K.Positive) {} }
 
-    public sealed class NonzAttribute : A { public NonzAttribute(object group = null) : base(K.Nonz, group) {} }        
+    public sealed class NonzAttribute : A { public NonzAttribute () : base(K.Nonz) {} }
 }

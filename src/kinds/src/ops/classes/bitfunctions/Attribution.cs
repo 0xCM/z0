@@ -61,5 +61,9 @@ namespace Z0
 
     public sealed class SameAttribute : A { public SameAttribute() : base(K.Same) {} }
 
-    
+    public sealed class EffWidthAttribute : A { public EffWidthAttribute() : base(K.EffWidth) {} }   
+
+    public sealed class EffSizeAttribute : A { public EffSizeAttribute() : base(K.EffSize) {} }   
+
+
 }

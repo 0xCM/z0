@@ -6,7 +6,8 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Linq;
-	
+	using Z0.Data;
+
 	public sealed class DecoderTestCase 
     {
 		public int LineNumber;
@@ -23,6 +24,8 @@ namespace Z0.Asm.Data
 
 		public string EncodedHexBytes;
 		public Code Code;
+		
+		public string Id => Code.ToString();
 		public Mnemonic Mnemonic;
 
 		public int OpCount;

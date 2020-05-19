@@ -22,16 +22,16 @@ namespace Z0.Data
     {        
         IAsmArchiveConfig Config => this;
 
-        public void PublishDecoderTests()
+        public void PublishDecoderTests(OpCodeSpecs codes)
         {
-            Publish(DecoderTests.Model,16);
-            Publish(DecoderTests.Model,32);
-            Publish(DecoderTests.Model,64);
+            Publish(DecoderTests.Model,codes,16);
+            Publish(DecoderTests.Model,codes,32);
+            Publish(DecoderTests.Model,codes,64);
         }
 
-        public AsmPublication<DecoderTestRecord> Publish(DecoderTests model, int bitness)
+        public AsmPublication<DecoderTestRecord> Publish(DecoderTests model, OpCodeSpecs codes, int bitness)
         {
-            var src = Publish(model, bitness, out var dst);
+            var src = Publish(model, codes, bitness,  out var dst);
             return AsmPublication.Flow(src, dst);            
         }
 
@@ -50,13 +50,13 @@ namespace Z0.Data
             }
         }
 
-        DecoderTestRecord[] Publish(DecoderTests model, int bitness, out FilePath dst)
+        DecoderTestRecord[] Publish(DecoderTests model, OpCodeSpecs codes, int bitness, out FilePath dst)
         {
-            var src = ParseDecoderTests(bitness).ToArray();
+            var src = ParseDecoderTests(bitness).OrderBy(x => x.Id).ToArray();
             var records = new DecoderTestRecord[src.Length];
             
             for(var i=0; i<src.Length; i++)
-                records[i] = Record(model, i, src[i]);
+                records[i] = Record(model, codes, i, src[i]);
 
             dst = Config.DatasetPath(model.Name + bitness.ToString());
             Save(records, dst);
@@ -163,15 +163,19 @@ namespace Z0.Data
 		string FormatRecord(DecoderTestRecord src)
 		{
             var dst = Records.Formatter<F>();
+
             dst.DelimitField(F.Sequence, src.Sequence);
             dst.DelimitField(F.Line, src.Line);
             dst.DelimitField(F.Mnemonic, src.Mnemonic);
-            dst.DelimitField(F.Code, src.Code);
+            
+            dst.DelimitField(F.OpCode, src.OpCode);
+            dst.DelimitField(F.HexInput, NormalizeHex(src.Input));
+            dst.DelimitField(F.HexEncoded, NormalizeHex(src.Encoded));
+
             dst.DelimitField(F.Bits, src.Bits);
             dst.DelimitField(F.CanEncode, src.CanEncode);
             dst.DelimitField(F.InvalidEOB, src.InvalidEOB);
-            dst.DelimitField(F.HexInput, NormalizeHex(src.Input));
-            dst.DelimitField(F.HexEncoded, NormalizeHex(src.Encoded));
+
             dst.DelimitField(F.OpMask, Render(src.OpMask));
             dst.DelimitField(F.Operands, src.OpCount);
 
@@ -205,20 +209,22 @@ namespace Z0.Data
             dst.DelimitField(F.MemDx, RenderHex32(src.MemDx));
             dst.DelimitField(F.MemDxSize, src.MemDxSize != 0 ? src.MemDxSize.ToString() : string.Empty);
 
+            dst.DelimitField(F.Id, src.Id);
 
             dst.DelimitField(F.DecoderOptions, src.DecoderOptions);
 			return dst.ToString();
 		}
         
-		DecoderTestRecord Record(DecoderTests model, int seq, DecoderTestCase src)
+		DecoderTestRecord Record(DecoderTests model, OpCodeSpecs codes,  int seq, DecoderTestCase src)
 			=> new DecoderTestRecord(
 				Sequence: seq,
                 Line : src.LineNumber,
 				Mnemonic : src.Mnemonic,
-				Code: src.Code,
+				Id: (OpCodeId)src.Code,
 				Bits: src.Bitness,
 				CanEncode: src.CanEncode,
 				InvalidEOB: src.InvalidNoMoreBytes,
+                OpCode: codes[(OpCodeId)src.Code].Expression,
 				HexBytes: src.HexBytes,
 				EncodedHexBytes: src.EncodedHexBytes,
                 OpMask: src.OpMask,

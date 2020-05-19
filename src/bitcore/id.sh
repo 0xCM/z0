@@ -1,2 +1,2 @@
-export ProjectId=$(dirname $0)
+export ProjectId=bitcore
 export ScriptDir=$ZDev/src/.scripts

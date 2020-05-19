@@ -20,13 +20,15 @@ namespace Z0.Data
 
         public readonly Mnemonic Mnemonic;
 
-        public readonly Code Code;
+        public readonly OpCodeId Id;
 
 		public readonly int Bits;
 
 		public readonly bool CanEncode;
 
 		public readonly bool InvalidEOB;
+
+		public readonly string OpCode;
 
 		public readonly string Input;
 
@@ -66,15 +68,15 @@ namespace Z0.Data
 
 		public readonly int MemDxSize;
 
-
         public DecoderTestRecord(
             int Sequence,
             int Line, 
             Mnemonic Mnemonic, 
-            Code Code, 
+            OpCodeId Id, 
             int Bits, 
             bool CanEncode, 
             bool InvalidEOB, 
+            string OpCode,
             string HexBytes, 
             string EncodedHexBytes, 
             Register OpMask,
@@ -109,11 +111,11 @@ namespace Z0.Data
             this.Line = Line;
             this.CanEncode = CanEncode;
             this.InvalidEOB = InvalidEOB;
-            this.DecoderOptions = DecoderOptions;
             this.Bits = Bits;
+            this.OpCode = OpCode;
             this.Input = HexBytes;
             this.Encoded = EncodedHexBytes;
-            this.Code = Code;
+            this.Id = Id;
             this.Mnemonic = Mnemonic;
             this.OpMask = OpMask;
             this.OpCount = OpCount;
@@ -139,6 +141,7 @@ namespace Z0.Data
             this.MemIndexScale = MemIndexScale;
             this.MemDx = MemDx;
             this.MemDxSize = MemDxSize;
+            this.DecoderOptions = DecoderOptions;
         }
     }
 }

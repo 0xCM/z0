@@ -348,5 +348,17 @@ namespace Z0
 
         Copy,
 
+        DivMod,
+
+        /// <summary>
+        /// Identifies an operation that computes the effective bit-width of a value
+        /// </summary>        
+        EffWidth,
+
+        /// <summary>
+        /// Identifies an operation that computes the effective byte-width of a value
+        /// </summary>        
+        EffSize,
+
     }    
 }

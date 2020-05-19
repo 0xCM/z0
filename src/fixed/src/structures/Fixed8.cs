@@ -12,6 +12,8 @@ namespace Z0
     [Fixed(FixedWidth.W8)]
     public readonly struct Fixed8 : IFixedNumeric<Fixed8,W8,byte>
     {        
+        public static Fixed8 Empty => default(Fixed8);        
+
         internal readonly byte Data;
 
         public byte Content
@@ -39,6 +41,12 @@ namespace Z0
         public static Fixed8 From<T>(T src)
             where T : unmanaged
                 => From(Cast.to<T,byte>(src));
+
+        public Fixed8 Zero 
+        {
+            [MethodImpl(Inline)]
+            get => Empty; 
+        }
 
         [MethodImpl(Inline)]
         Fixed8(byte x0)
@@ -68,6 +76,7 @@ namespace Z0
         public static explicit operator byte(Fixed8 x)
             => (byte)x.Data;
 
+        
         [MethodImpl(Inline)]
         public T As<T>()
             where T : unmanaged

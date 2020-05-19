@@ -66,5 +66,9 @@ namespace Z0
         TestZnC = Id.TestZnC,
 
         Same = Id.Same,
+
+        EffWidth = Id.EffWidth,
+
+        EffSize = Id.EffSize
     }
 }

@@ -193,6 +193,24 @@ namespace Z0
             => (a*b) % m;
 
         /// <summary>
+        /// Computes dst = (div(a,b), mod(a,b))
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        /// <param name="b">The divisor</param>
+        [MethodImpl(Inline), DivMod]
+        public static ConstPair<float> divmod(float a, float b)
+            => (div(a,b), mod(a,b));
+
+        /// <summary>
+        /// Computes dst = (div(a,b), mod(a,b))
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        /// <param name="b">The divisor</param>
+        [MethodImpl(Inline), DivMod]
+        public static ConstPair<double> divmod(double a, double b)
+            => (div(a,b), mod(a,b));
+
+        /// <summary>
         /// Computes the smallest integral value greater than or equal to the source value
         /// </summary>
         /// <param name="src">The source value</param>

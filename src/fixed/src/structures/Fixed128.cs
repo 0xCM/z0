@@ -10,10 +10,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed;
+    using static Memories;
 
-    [StructLayout(LayoutKind.Sequential),Fixed(FixedWidth.W128)]
+    [Fixed(FixedWidth.W128)]
     public readonly struct Fixed128 : IFixed<Fixed128,W128,Vector128<ulong>>
     {
+        public static Fixed128 Empty => default(Fixed128);
+        
         internal readonly Vector128<ulong> Data;
 
         public Vector128<ulong> Content
@@ -21,7 +24,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
-
 
         public ulong Lo
         {
@@ -35,10 +37,16 @@ namespace Z0
             get => Data.GetElement(1);
         }
 
+        public Fixed128 Zero 
+        {
+            [MethodImpl(Inline)]
+            get => Empty; 
+        }
+
         [MethodImpl(Inline)]
         public static Fixed128 From<T>(Vector128<T> src)
             where T : unmanaged
-            => new Fixed128(src.AsUInt64());
+                => new Fixed128(v64u(src));
 
         [MethodImpl(Inline)]
         public static Fixed128 From((ulong x0, ulong x1) x)

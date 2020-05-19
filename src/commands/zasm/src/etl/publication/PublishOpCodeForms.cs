@@ -10,7 +10,6 @@ namespace Z0.Data
 
     using static Seed;
     using static AsmDataModels;
-    using static Tabular;
 
     using F = OpCodeFormField;
     using R = OpCodeFormRecord;
@@ -21,22 +20,41 @@ namespace Z0.Data
         /// Publishes a model-identified dataset to the target archive
         /// </summary>
         /// <param name="model">The data model</param>
-        public AsmPublication<OpCodeFormRecord> Publish(OpCodes model)
+        public AsmPublication<OpCodeFormRecord> Publish(OpCodeForms model, OpCodeSpecs specs)
         {
-            var src = Publish(model, out var dst);
+            var src = Publish(model, specs, out var dst);
             return AsmPublication.Flow(src, dst);            
         }
         
         R[] Save(OpCodeFormRecord[] src, FilePath dst)
             => Records.Save<F,R>(src, dst, Format);
 
-        OpCodeFormRecord[] Publish(OpCodes model, out FilePath dst)
+        static OpCodeId ParseOpCodeId(string src)
+            => Enums.Parse(src, OpCodeId.INVALID);
+
+        OpCodeFormRecord[] Publish(OpCodeForms model, OpCodeSpecs specs, out FilePath dst)
         {
-            var table = OpCodeInfoTable.Data;
+            var table = OpCodeInfoTable.Data.OrderBy(x => x.Code.RawName);
             var records = new OpCodeFormRecord[table.Length];
             
             for(var i=0; i<table.Length; i++)
-                records[i] = Record(model,i,table[i]);
+            {
+                var info = table[i];                
+                var id = (OpCodeId)info.Code.Value;
+                records[i] = new OpCodeFormRecord(
+                    Sequence: i,
+                    Id: id, 
+                    Mnemonic: specs[id].Mnemonic,
+                    CodeBytes: info.OpCode.ToByteArray(),
+                    MandatoryPrefix: info.MandatoryPrefix,
+                    TableKind: info.Table,
+                    GroupIndex: info.GroupIndex,
+                    Flags: info.Flags,
+                    OpSize: info is LegacyOpCodeInfo l1 ? l1.OperandSize : OperandSize.None,
+                    AddressSize: info is LegacyOpCodeInfo l2 ? l2.AddressSize : AddressSize.None,
+                    Operands(model, info)
+                    );
+            }
 
             dst = Config.DatasetPath(model.Name);
             return Save(records, dst);
@@ -46,7 +64,7 @@ namespace Z0.Data
         {
             var dst = Records.Formatter<F>();
             dst.DelimitField(F.Sequence, src.Sequence);
-            dst.DelimitField(F.Id, src.Id);
+            dst.DelimitField(F.Mnemonic, src.Mnemonic);
             dst.DelimitField(F.CodeBytes, src.CodeBytes);
             dst.DelimitSome(F.Prefix, src.Prefix);
             dst.DelimitField(F.Table, src.Table);
@@ -57,11 +75,12 @@ namespace Z0.Data
             dst.DelimitSome(F.Op4, src.Op4);
             dst.DelimitSome(F.OpSize, src.OpSize);
             dst.DelimitSome(F.AddressSize, src.AddressSize);
+            dst.DelimitField(F.Id, src.Id);
             dst.DelimitField(F.Flags, src.Flags);
             return dst.Render();                             
         }      
 
-        OpCodeOperandKind[] Operands(OpCodes model, OpCodeInfo src)
+        OpCodeOperandKind[] Operands(OpCodeForms model, OpCodeInfo src)
         {
             var count = src.OpKindsLength;
             var dst = new OpCodeOperandKind[count];
@@ -69,22 +88,5 @@ namespace Z0.Data
                 dst[i] = src.OpKind(i);
             return dst;
         }
-
-        public OpCodeFormRecord Record(OpCodes model, int seq,  OpCodeInfo src)
-            => new OpCodeFormRecord(
-                    Sequence: seq,
-                    Id: src.Code.RawName, 
-                    CodeBytes: src.OpCode.ToByteArray(),
-                    MandatoryPrefix: src.MandatoryPrefix,
-                    TableKind: src.Table,
-                    GroupIndex: src.GroupIndex,
-                    Flags: src.Flags,
-                    OpSize: src is LegacyOpCodeInfo l1 ? l1.OperandSize : OperandSize.None,
-                    AddressSize: src is LegacyOpCodeInfo l2 ? l2.AddressSize : AddressSize.None,
-                    Operands(model, src)
-                    );
-
     }
-
 }
-

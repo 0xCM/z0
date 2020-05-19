@@ -15,6 +15,14 @@ namespace Z0
 
     public struct uint4_t : IEquatable<analog>
     {
+        [MethodImpl(Inline)]
+        public static analog FromUpper(byte src)
+            => new analog(src >> 4);
+
+        [MethodImpl(Inline)]
+        public static analog FromLower(byte src)
+            => new analog(src);
+
         internal byte data;
 
         public static analog MinValue => MinVal;

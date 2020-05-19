@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Defines the symbols that represent base-16 digits
+    /// Defines the symbols that represent both upper and lower-case base-16 digits
     /// </summary>
     public enum HexSymbol : ushort
     {

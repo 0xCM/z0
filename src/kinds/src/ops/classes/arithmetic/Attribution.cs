@@ -61,6 +61,8 @@ namespace Z0
 
     public sealed class ModMulAttribute : A { public ModMulAttribute() : base(K.ModMul) {} }
 
+    public sealed class DivModAttribute : A { public DivModAttribute() : base(K.DivMod) {} }
+
     public sealed class AvgzAttribute : A { public AvgzAttribute() : base(K.Avgz) {} }
 
     public sealed class AvgiAttribute : A { public AvgiAttribute() : base(K.Avgi) {} }
@@ -79,6 +81,5 @@ namespace Z0
 
     public sealed class Log2Attribute : A { public Log2Attribute() : base(K.Log2) {} }    
 
-
-    
+   
 }

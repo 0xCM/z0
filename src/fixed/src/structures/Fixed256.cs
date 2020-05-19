@@ -14,9 +14,11 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    [StructLayout(LayoutKind.Sequential), Fixed(FixedWidth.W256)]
+    [Fixed(FixedWidth.W256)]
     public readonly struct Fixed256 : IFixed<Fixed256,W256,Vector256<ulong>>
     {
+        public static Fixed256 Empty => default(Fixed256);        
+
         internal readonly Vector256<ulong> Data;
 
         public Vector256<ulong> Content
@@ -41,6 +43,11 @@ namespace Z0
 
         public int ByteCount => 32;
 
+        public Fixed256 Zero 
+        {
+            [MethodImpl(Inline)]
+            get => Empty; 
+        }    
 
         [MethodImpl(Inline)]
         public static Fixed256 From<T>(Vector256<T> src)

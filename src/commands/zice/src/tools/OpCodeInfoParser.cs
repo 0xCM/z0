@@ -10,7 +10,7 @@ namespace Z0.Asm.Data
     using System.IO;
 	using System.Linq;
 
-	public readonly struct OpCodeSpec
+	public readonly struct OpCodeInfoParsed
 	{
 		public static Code ParseId(string src)
 		{
@@ -19,12 +19,12 @@ namespace Z0.Asm.Data
 			return codeId;
 		}
 
-		public static OpCodeSpec Define(Code id, string instruction, string expression, string modes, string cpuid)
+		public static OpCodeInfoParsed Define(Code id, string instruction, string expression, string modes, string cpuid)
 		{
-			return new OpCodeSpec(id, instruction, expression, modes, cpuid);
+			return new OpCodeInfoParsed(id, instruction, expression, modes, cpuid);
 		}
 
-		public OpCodeSpec(Code id, string instruction, string expression, string modes, string cpuid)
+		public OpCodeInfoParsed(Code id, string instruction, string expression, string modes, string cpuid)
 		{
 			var idx = instruction.IndexOf(' ');
 			if(idx != -1)
@@ -76,9 +76,9 @@ namespace Z0.Asm.Data
                 return src;
         }
 
-		public static OpCodeSpec[] ParseOpCodeInfo(FilePath src)
+		public static OpCodeInfoParsed[] ParseOpCodeInfo(FilePath src)
 		{
-			var specs = new List<OpCodeSpec>();
+			var specs = new List<OpCodeInfoParsed>();
 			bool checkedIt = false;
 			const char sepChar = '|';
 			var toInstrInfo = InstrInfoTable.Data.ToDictionary(a => a.Code.RawName, a => a, StringComparer.Ordinal);
@@ -102,13 +102,13 @@ namespace Z0.Asm.Data
 				}
 				instructionStr = instructionStr.Replace(sepChar, ',');
 				
-				var id = OpCodeSpec.ParseId(name);
+				var id = OpCodeInfoParsed.ParseId(name);
 				if(id != 0)
 				{
 					var ocs = CleanOpCode(opCodeStr);
 					var modes = GetMode(toOpCodeInfo[name]);
 					var cpuid = GetCpuid(toInstrInfo[name]);
-					var spec = OpCodeSpec.Define(id, instructionStr, ocs, modes, cpuid);				
+					var spec = OpCodeInfoParsed.Define(id, instructionStr, ocs, modes, cpuid);				
 					specs.Add(spec);
 				}
 			}
