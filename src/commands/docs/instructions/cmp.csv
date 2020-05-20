@@ -1,4 +1,4 @@
-# Instructions
+# Op Codes
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                        |
 | 38 / r           | CMP r/m8, r8      | MR    | Valid       | Valid           | Compare r8 with r/m8.                              |
@@ -24,111 +24,15 @@
 | 83 /7 ib         | CMP r/m32, imm8   | MI    | Valid       | Valid           | Compare imm8 with r/m32.                           |
 | REX.W + 83 /7 ib | CMP r/m64, imm8   | MI    | Valid       | N.E.            | Compare imm8 with r/m64.                           |
 
-----------------------------------------------------------------------------------------------------------------------------------------
-| Id              | Mode1  | Mode2  | XX | OpCode         | Instruction      | Detail                                       |
-| Cmp_rm8_r8      | legacy | legacy | 38 | 38 /r          | CMP r/m8, r8     | 16b 32b 64b op=r8_or_mem; r8_reg             |
-| Cmp_rm16_r16    | legacy | legacy | 39 | o16 39 /r      | CMP r/m16, r16   | 16b 32b 64b o16 op=r16_or_mem; r16_reg       |
-| Cmp_rm32_r32    | legacy | legacy | 39 | o32 39 /r      | CMP r/m32, r32   | 16b 32b 64b o32 op=r32_or_mem; r32_reg       |
-| Cmp_rm64_r64    | legacy | legacy | 39 | REX.W 39 /r    | CMP r/m64, r64   | 64b o64 op=r64_or_mem; r64_reg               |
-| Cmp_r8_rm8      | legacy | legacy | 3A | 3A /r          | CMP r8, r/m8     | 16b 32b 64b op=r8_reg; r8_or_mem             |
-| Cmp_r16_rm16    | legacy | legacy | 3B | o16 3B /r      | CMP r16, r/m16   | 16b 32b 64b o16 op=r16_reg; r16_or_mem       |
-| Cmp_r32_rm32    | legacy | legacy | 3B | o32 3B /r      | CMP r32, r/m32   | 16b 32b 64b o32 op=r32_reg; r32_or_mem       |
-| Cmp_r64_rm64    | legacy | legacy | 3B | REX.W 3B /r    | CMP r64, r/m64   | 64b o64 op=r64_reg; r64_or_mem               |
-| Cmp_AL_imm8     | legacy | legacy | 3C | 3C ib          | CMP AL, imm8     | 16b 32b 64b op=al; imm8                      |
-| Cmp_AX_imm16    | legacy | legacy | 3D | o16 3D iw      | CMP AX, imm16    | 16b 32b 64b o16 op=ax; imm16                 |
-| Cmp_EAX_imm32   | legacy | legacy | 3D | o32 3D id      | CMP EAX, imm32   | 16b 32b 64b o32 op=eax; imm32                |
-| Cmp_RAX_imm32   | legacy | legacy | 3D | REX.W 3D id    | CMP RAX, imm32   | 64b o64 op=rax; imm32sex64                   |
-| Cmp_rm8_imm8    | legacy | legacy | 80 | 80 /7 ib       | CMP r/m8, imm8   | g=7 16b 32b 64b op=r8_or_mem; imm8           |
-| Cmp_rm16_imm16  | legacy | legacy | 81 | o16 81 /7 iw   | CMP r/m16, imm16 | g=7 16b 32b 64b o16 op=r16_or_mem; imm16     |
-| Cmp_rm32_imm32  | legacy | legacy | 81 | o32 81 /7 id   | CMP r/m32, imm32 | g=7 16b 32b 64b o32 op=r32_or_mem; imm32     |
-| Cmp_rm64_imm32  | legacy | legacy | 81 | REX.W 81 /7 id | CMP r/m64, imm32 | g=7 64b o64 op=r64_or_mem; imm32sex64        |
-| Cmp_rm8_imm8_82 | legacy | legacy | 82 | 82 /7 ib       | CMP r/m8, imm8   | g=7 16b 32b op=r8_or_mem; imm8               |
-| Cmp_rm16_imm8   | legacy | legacy | 83 | o16 83 /7 ib   | CMP r/m16, imm8  | g=7 16b 32b 64b o16 op=r16_or_mem; imm8sex16 |
-| Cmp_rm32_imm8   | legacy | legacy | 83 | o32 83 /7 ib   | CMP r/m32, imm8  | g=7 16b 32b 64b o32 op=r32_or_mem; imm8sex32 |
-| Cmp_rm64_imm8   | legacy | legacy | 83 | REX.W 83 /7 ib | CMP r/m64, imm8  | g=7 64b o64 op=r64_or_mem; imm8sex64         |
+# Encoding
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+| Op/En | Operand 1         | Operand 2     | Operand 3 | Operand 4 |
+| RM    | ModRM:reg (r)     | ModRM:r/m (r) | NA        | NA        |
+| MR    | ModRM:r/m (r)     | ModRM:reg (r) | NA        | NA        |
+| MI    | ModRM:r/m (r)     | imm8/16/32    | NA        | NA        |
+| I     | AL/AX/EAX/RAX (r) | imm8/16/32    | NA        | NA        |
 
-
---------------------------------------------------------------------------------------------------------------------------------
-| Data           | Id           | Mnemonic | Operand Count | Op0 Kind | Op0 Value            | Op1 Kind | Op1 Value | Encoded |
-| 38 CE          | Cmp_rm8_r8   | Cmp      | 2             | r        | dh                   | r        | cl        |         |
-| 40 38 D5       | Cmp_rm8_r8   | Cmp      | 2             | r        | bpl                  | r        | dl        |         |
-| 40 38 FA       | Cmp_rm8_r8   | Cmp      | 2             | r        | dl                   | r        | dil       |         |
-| 45 38 F0       | Cmp_rm8_r8   | Cmp      | 2             | r        | r8l                  | r        | r14l      |         |
-| 41 38 D9       | Cmp_rm8_r8   | Cmp      | 2             | r        | r9l                  | r        | bl        |         |
-| 44 38 EC       | Cmp_rm8_r8   | Cmp      | 2             | r        | spl                  | r        | r13l      |         |
-| 66 67 4E 38 EC | Cmp_rm8_r8   | Cmp      | 2             | r        | spl                  | r        | r13l      | 4438EC  |
-| 38 38          | Cmp_rm8_r8   | Cmp      | 2             | m        | ds;rax;;1;0;0;UInt8  | r        | bh        |         |
-| 66 39 CE       | Cmp_rm16_r16 | Cmp      | 2             | r        | si                   | r        | cx        |         |
-| 66 44 39 C5    | Cmp_rm16_r16 | Cmp      | 2             | r        | bp                   | r        | r8w       |         |
-| 66 41 39 D6    | Cmp_rm16_r16 | Cmp      | 2             | r        | r14w                 | r        | dx        |         |
-| 66 45 39 D0    | Cmp_rm16_r16 | Cmp      | 2             | r        | r8w                  | r        | r10w      |         |
-| 66 41 39 D9    | Cmp_rm16_r16 | Cmp      | 2             | r        | r9w                  | r        | bx        |         |
-| 66 44 39 EC    | Cmp_rm16_r16 | Cmp      | 2             | r        | sp                   | r        | r13w      |         |
-| 66 39 18       | Cmp_rm16_r16 | Cmp      | 2             | m        | ds;rax;;1;0;0;UInt16 | r        | bx        |         |
-| 66 42 39 CE    | Cmp_rm16_r16 | Cmp      | 2             | r        | si                   | r        | cx        | 6639CE  |
-
-39 CE, Cmp_rm32_r32, Cmp, 2, op0=r;esi op1=r;ecx
-44 39 C5, Cmp_rm32_r32, Cmp, 2, op0=r;ebp op1=r;r8d
-41 39 D6, Cmp_rm32_r32, Cmp, 2, op0=r;r14d op1=r;edx
-45 39 D0, Cmp_rm32_r32, Cmp, 2, op0=r;r8d op1=r;r10d
-41 39 D9, Cmp_rm32_r32, Cmp, 2, op0=r;r9d op1=r;ebx
-44 39 EC, Cmp_rm32_r32, Cmp, 2, op0=r;esp op1=r;r13d
-39 18, Cmp_rm32_r32, Cmp, 2, op0=m;ds;rax;;1;0;0;UInt32 op1=r;ebx
-42 39 CE, Cmp_rm32_r32, Cmp, 2, op0=r;esi op1=r;ecx enc=39CE
-
-48 39 CE, Cmp_rm64_r64, Cmp, 2, op0=r;rsi op1=r;rcx
-4C 39 C5, Cmp_rm64_r64, Cmp, 2, op0=r;rbp op1=r;r8
-49 39 D6, Cmp_rm64_r64, Cmp, 2, op0=r;r14 op1=r;rdx
-4D 39 D0, Cmp_rm64_r64, Cmp, 2, op0=r;r8 op1=r;r10
-49 39 D9, Cmp_rm64_r64, Cmp, 2, op0=r;r9 op1=r;rbx
-4C 39 EC, Cmp_rm64_r64, Cmp, 2, op0=r;rsp op1=r;r13
-48 39 18, Cmp_rm64_r64, Cmp, 2, op0=m;ds;rax;;1;0;0;UInt64 op1=r;rbx
-4A 39 CE, Cmp_rm64_r64, Cmp, 2, op0=r;rsi op1=r;rcx enc=4839CE
-
-3A CE, Cmp_r8_rm8, Cmp, 2, op0=r;cl op1=r;dh
-40 3A D5, Cmp_r8_rm8, Cmp, 2, op0=r;dl op1=r;bpl
-40 3A FA, Cmp_r8_rm8, Cmp, 2, op0=r;dil op1=r;dl
-45 3A F0, Cmp_r8_rm8, Cmp, 2, op0=r;r14l op1=r;r8l
-41 3A D9, Cmp_r8_rm8, Cmp, 2, op0=r;bl op1=r;r9l
-44 3A EC, Cmp_r8_rm8, Cmp, 2, op0=r;r13l op1=r;spl
-66 67 4E 3A EC, Cmp_r8_rm8, Cmp, 2, op0=r;r13l op1=r;spl enc=443AEC
-3A 38, Cmp_r8_rm8, Cmp, 2, op0=r;bh op1=m;ds;rax;;1;0;0;UInt8
-
-66 3B CE, Cmp_r16_rm16, Cmp, 2, op0=r;cx op1=r;si
-66 44 3B C5, Cmp_r16_rm16, Cmp, 2, op0=r;r8w op1=r;bp
-66 41 3B D6, Cmp_r16_rm16, Cmp, 2, op0=r;dx op1=r;r14w
-66 45 3B D0, Cmp_r16_rm16, Cmp, 2, op0=r;r10w op1=r;r8w
-66 41 3B D9, Cmp_r16_rm16, Cmp, 2, op0=r;bx op1=r;r9w
-66 44 3B EC, Cmp_r16_rm16, Cmp, 2, op0=r;r13w op1=r;sp
-66 3B 18, Cmp_r16_rm16, Cmp, 2, op0=r;bx op1=m;ds;rax;;1;0;0;UInt16
-66 42 3B CE, Cmp_r16_rm16, Cmp, 2, op0=r;cx op1=r;si enc=663BCE
-
-3B CE, Cmp_r32_rm32, Cmp, 2, op0=r;ecx op1=r;esi
-44 3B C5, Cmp_r32_rm32, Cmp, 2, op0=r;r8d op1=r;ebp
-41 3B D6, Cmp_r32_rm32, Cmp, 2, op0=r;edx op1=r;r14d
-45 3B D0, Cmp_r32_rm32, Cmp, 2, op0=r;r10d op1=r;r8d
-41 3B D9, Cmp_r32_rm32, Cmp, 2, op0=r;ebx op1=r;r9d
-44 3B EC, Cmp_r32_rm32, Cmp, 2, op0=r;r13d op1=r;esp
-3B 18, Cmp_r32_rm32, Cmp, 2, op0=r;ebx op1=m;ds;rax;;1;0;0;UInt32
-42 3B CE, Cmp_r32_rm32, Cmp, 2, op0=r;ecx op1=r;esi enc=3BCE
-
-48 3B CE, Cmp_r64_rm64, Cmp, 2, op0=r;rcx op1=r;rsi
-4C 3B C5, Cmp_r64_rm64, Cmp, 2, op0=r;r8 op1=r;rbp
-49 3B D6, Cmp_r64_rm64, Cmp, 2, op0=r;rdx op1=r;r14
-4D 3B D0, Cmp_r64_rm64, Cmp, 2, op0=r;r10 op1=r;r8
-49 3B D9, Cmp_r64_rm64, Cmp, 2, op0=r;rbx op1=r;r9
-4C 3B EC, Cmp_r64_rm64, Cmp, 2, op0=r;r13 op1=r;rsp
-48 3B 18, Cmp_r64_rm64, Cmp, 2, op0=r;rbx op1=m;ds;rax;;1;0;0;UInt64
-4A 3B CE, Cmp_r64_rm64, Cmp, 2, op0=r;rcx op1=r;rsi enc=483BCE
-
-3C A5, Cmp_AL_imm8, Cmp, 2, op0=r;al op1=i8;0xA5 co=1;1;0;0;0;0
-4F 3C A5, Cmp_AL_imm8, Cmp, 2, op0=r;al op1=i8;0xA5 co=2;1;0;0;0;0 enc=3CA5
-
-66 3D A55A, Cmp_AX_imm16, Cmp, 2, op0=r;ax op1=i16;0x5AA5 co=2;2;0;0;0;0
-66 47 3D A55A, Cmp_AX_imm16, Cmp, 2, op0=r;ax op1=i16;0x5AA5 co=3;2;0;0;0;0 enc=663DA55A
-
-3D A55A3412, Cmp_EAX_imm32, Cmp, 2, op0=r;eax op1=i32;0x12345AA5 co=1;4;0;0;0;0
-47 3D A55A3412, Cmp_EAX_imm32, Cmp, 2, op0=r;eax op1=i32;0x12345AA5 co=2;4;0;0;0;0 enc=3DA55A3412
-
-48 3D A55A34A2, Cmp_RAX_imm32, Cmp, 2, op0=r;rax op1=i32to64;0xFFFFFFFFA2345AA5 co=2;4;0;0;0;0
-4F 3D A55A34A2, Cmp_RAX_imm32, Cmp, 2, op0=r;rax op1=i32to64;0xFFFFFFFFA2345AA5 co=2;4;0;0;0;0 enc=483DA55A34A2
+# Operation
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+temp ← SRC1 − SignExtend(SRC2);
+ModifyStatusFlags;

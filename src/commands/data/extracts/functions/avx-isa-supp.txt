@@ -1,4 +1,0 @@
-avx-isa-supp.txt/AVX_SPLITTER()::
---------------------------------------------------------------------------------------------------------
-VEXVALID=0 INSTRUCTIONS()      |
-VEXVALID=1 AVX_INSTRUCTIONS() |

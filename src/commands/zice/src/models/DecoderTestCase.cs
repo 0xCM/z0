@@ -6,7 +6,6 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Linq;
-	using Z0.Data;
 
 	public sealed class DecoderTestCase 
     {

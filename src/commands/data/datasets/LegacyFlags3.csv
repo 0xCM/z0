@@ -1,6 +1,0 @@
-| TypeName                        | Index   | Name                            | Hex       | BitString                       | Description
-| LegacyFlags3                    | 0       | OpMask                          | 7f        |                                 | OpMask
-| LegacyFlags3                    | 1       | Op0Shift                        | 0         |                                 | Op0Shift
-| LegacyFlags3                    | 2       | Op1Shift                        | 7         |                                 | Op1Shift
-| LegacyFlags3                    | 3       | Op2Shift                        | e         |                                 | Op2Shift
-| LegacyFlags3                    | 4       | Op3Shift                        | 15        |                                 | Op3Shift

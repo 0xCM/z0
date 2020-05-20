@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0.Asm.Data
 {        
     using System;
     using System.Collections.Generic;
@@ -17,6 +17,7 @@ namespace Z0.Data
 
     using F = DecoderTestField;
     using R = DecoderTestRecord;
+    using RF = RecordFormatter;
 
     partial class AsmEtl
     {        
@@ -77,43 +78,43 @@ namespace Z0.Data
             
             dst.DelimitField(F.Ops, src.Ops);
 
-            dst.DelimitField(F.Op0K, R.Render(src.Op0K));
-            dst.DelimitField(F.Op0R, R.Render(src.Op0R));
+            dst.DelimitField(F.Op0K, RF.Render(src.Op0K));
+            dst.DelimitField(F.Op0R, RF.Render(src.Op0R));
 
-            dst.DelimitField(F.Op1K, R.Render(src.Op1K));
-            dst.DelimitField(F.Op1R, R.Render(src.Op1R));
+            dst.DelimitField(F.Op1K, RF.Render(src.Op1K));
+            dst.DelimitField(F.Op1R, RF.Render(src.Op1R));
             
-            dst.DelimitField(F.Op2K, R.Render(src.Op2K));
-            dst.DelimitField(F.Op2R, R.Render(src.Op2R));
+            dst.DelimitField(F.Op2K, RF.Render(src.Op2K));
+            dst.DelimitField(F.Op2R, RF.Render(src.Op2R));
             
-            dst.DelimitField(F.Op3K, R.Render(src.Op3K));
-            dst.DelimitField(F.Op3R, R.Render(src.Op3R));
+            dst.DelimitField(F.Op3K, RF.Render(src.Op3K));
+            dst.DelimitField(F.Op3R, RF.Render(src.Op3R));
             
-            dst.DelimitField(F.Op4K, R.Render(src.Op4K));
-            dst.DelimitField(F.Op4R, R.Render(src.Op4R));
+            dst.DelimitField(F.Op4K, RF.Render(src.Op4K));
+            dst.DelimitField(F.Op4R, RF.Render(src.Op4R));
 
-            dst.DelimitField(F.HexRef, R.RenderHex(src.HexRef));
-            dst.DelimitField(F.HexEnc, R.RenderHex(src.HexEnc));
+            dst.DelimitField(F.HexRef, RF.RenderHex(src.HexRef));
+            dst.DelimitField(F.HexEnc, RF.RenderHex(src.HexEnc));
 
             dst.DelimitField(F.BitMode, src.BitMode);
-            dst.DelimitField(F.CanEnc, R.Render(src.CanEnc));
-            dst.DelimitField(F.InvEob, R.Render(src.InvEob));
+            dst.DelimitField(F.CanEnc, RF.Render(src.CanEnc));
+            dst.DelimitField(F.InvEob, RF.Render(src.InvEob));
 
-            dst.DelimitField(F.OpMask, R.Render(src.OpMask));
-            dst.DelimitField(F.Address64, R.RenderHex64(src.Address64));
-            dst.DelimitField(F.NearBranch, R.RenderHex64(src.NearBranch));
+            dst.DelimitField(F.OpMask, RF.Render(src.OpMask));
+            dst.DelimitField(F.Address64, RF.RenderHex64(src.Address64));
+            dst.DelimitField(F.NearBranch, RF.RenderHex64(src.NearBranch));
             
-            dst.DelimitField(F.FarBranch, R.RenderHex32(src.FarBranch));
-            dst.DelimitField(F.FBSelector, R.RenderHex16(src.FBSelector));
+            dst.DelimitField(F.FarBranch, RF.RenderHex32(src.FarBranch));
+            dst.DelimitField(F.FBSelector, RF.RenderHex16(src.FBSelector));
 
-            dst.DelimitField(F.MemSize, R.Render(src.MemSize));
-            dst.DelimitField(F.MemSeg, R.Render(src.MemSeg));
-            dst.DelimitField(F.SegPrefix, R.Render(src.SegPrefix));
-            dst.DelimitField(F.MemBase, R.Render(src.MemBase));
-            dst.DelimitField(F.MemIndex, R.Render(src.MemIndex));
-            dst.DelimitField(F.MemIndexScale, R.RenderScale(src.MemIndexScale));
-            dst.DelimitField(F.MemDx, R.RenderHex32(src.MemDx));
-            dst.DelimitField(F.MemDxSize, R.RenderMemDxSize(src.MemDxSize));
+            dst.DelimitField(F.MemSize, RF.Render(src.MemSize));
+            dst.DelimitField(F.MemSeg, RF.Render(src.MemSeg));
+            dst.DelimitField(F.SegPrefix, RF.Render(src.SegPrefix));
+            dst.DelimitField(F.MemBase, RF.Render(src.MemBase));
+            dst.DelimitField(F.MemIndex, RF.Render(src.MemIndex));
+            dst.DelimitField(F.MemIndexScale, RF.RenderScale(src.MemIndexScale));
+            dst.DelimitField(F.MemDx, RF.RenderHex32(src.MemDx));
+            dst.DelimitField(F.MemDxSize, RF.RenderMemDxSize(src.MemDxSize));
 
             dst.DelimitField(F.Line, src.Line);
             dst.DelimitField(F.Id, src.Id);

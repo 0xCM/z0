@@ -2,17 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm.Data
 {
     using System;
     using System.Linq;
     using System.Collections.Generic;
-
-    using Z0.Xed;
-    using Z0.Asm;
-    using Z0.Asm.Data;
-    using Z0.Asm.Encoding;
-    using Z0.Data;
 
     using static Seed;
     using static Memories;
@@ -32,7 +26,7 @@ namespace Z0
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
-            return AppContext.Create(resolved, random, settings, exchange);
+            return Z0.AppContext.Create(resolved, random, settings, exchange);
         }
         
         public App()

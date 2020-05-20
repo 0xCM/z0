@@ -57,6 +57,7 @@
 
   <PropertyGroup>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
+    <AsmD>$(Src)asmd/z0.asmd.csproj</AsmD>
     <ZXed>$(Src)commands/zxed/z0.zxed.csproj</ZXed>
     <ZIce>$(Src)commands/zice/z0.zice.csproj</ZIce>
     <ZAsm>$(Src)commands/zasm/z0.zasm.csproj</ZAsm>

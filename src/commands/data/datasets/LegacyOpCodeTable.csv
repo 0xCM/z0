@@ -1,5 +1,0 @@
-| TypeName                        | Index   | Name                            | Hex       | BitString                       | Description
-| LegacyOpCodeTable               | 0       | Normal                          | 0         |                                 | 
-| LegacyOpCodeTable               | 1       | Table0F                         | 1         |                                 | 
-| LegacyOpCodeTable               | 2       | Table0F38                       | 2         |                                 | 
-| LegacyOpCodeTable               | 3       | Table0F3A                       | 3         |                                 | 

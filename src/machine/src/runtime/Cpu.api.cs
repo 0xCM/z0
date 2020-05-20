@@ -10,10 +10,6 @@ namespace Z0.Machines
     using static Seed;
     using static Memories;
 
-/*
-| Cmp         | Cmp_rm8_r8 | 64  | True | False   | 38 CE                     | 38 CE                     |             | 2           | reg           | DH            | reg           | CL            | reg           |               | reg           |               | reg           |               |                 |             |                 |             |                 |                 |                 |                 |                 |                 |                 |                 | None    
-*/
-
     readonly struct CoreState
     {
         public static CoreState Alloc(uint g = 16, uint v = 32)
