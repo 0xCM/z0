@@ -11,6 +11,7 @@ namespace Z0.Data
 
     using static Seed;
 
+
     readonly struct RecordFormatter<F> : IRecordFormatter<F>
         where F : unmanaged, Enum
     {        
@@ -22,7 +23,7 @@ namespace Z0.Data
             => new RecordFormatter<F>(new StringBuilder());        
         
         [MethodImpl(Inline)]
-        RecordFormatter(StringBuilder state, char sep = Chars.Pipe)
+        internal RecordFormatter(StringBuilder state, char sep = Chars.Pipe)
         {
             State = state;
             FieldSep = sep;

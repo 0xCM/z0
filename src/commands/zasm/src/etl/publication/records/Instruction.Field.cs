@@ -7,8 +7,9 @@ namespace Z0.Data
     using I = InstructionFieldId;
     using W = InstructionFieldWidth;
     using R = RecordFields;
+    using RW = RecordFieldWidths;
 
-    public enum InstructionFieldId : int
+    public enum InstructionFieldId
     {
 		Sequence, Id,  CodeInfo, Encoding, FlowControl, RflagsRead, RflagsUndefined,         
 
@@ -17,11 +18,11 @@ namespace Z0.Data
         Flags, OpInfo,
     }
 
-    public enum InstructionFieldWidth : int
+    public enum InstructionFieldWidth
     {
         FlagWidth = 36, 
 
-		Sequence = R.SeqWidth, Id = R.IdWidth, CodeInfo = 30, Encoding = 12, FlowControl = 22, 
+		CodeInfo = 30, Encoding = 12, FlowControl = 22, 
         
         RflagsRead = FlagWidth, RflagsUndefined = FlagWidth,  RflagsWritten = FlagWidth, 
         
@@ -31,37 +32,35 @@ namespace Z0.Data
 
     }
 
-    public enum InstructionField: int
+    public enum InstructionField
     {
-		Sequence = I.Sequence | (W.Sequence << R.Offset),
+		Sequence = I.Sequence | (RW.Sequence << RW.Offset),
 
-		Id = I.Id | (W.Id << R.Offset),
+		Id = I.Id | (RW.Id << RW.Offset),
 		
-        CodeInfo = I.CodeInfo | (W.CodeInfo << R.Offset),
+        CodeInfo = I.CodeInfo | (W.CodeInfo << RW.Offset),
 		
-        Encoding = I.Encoding | (W.Encoding << R.Offset),
+        Encoding = I.Encoding | (W.Encoding << RW.Offset),
 		
-		FlowControl = I.FlowControl | (W.FlowControl << R.Offset),
+		FlowControl = I.FlowControl | (W.FlowControl << RW.Offset),
 		
-		RflagsRead = I.RflagsRead | (W.RflagsRead << R.Offset),
+		RflagsRead = I.RflagsRead | (W.RflagsRead << RW.Offset),
 		
-		RflagsUndefined = I.RflagsUndefined | (W.RflagsUndefined << R.Offset),
+		RflagsUndefined = I.RflagsUndefined | (W.RflagsUndefined << RW.Offset),
 		
-		RflagsWritten = I.RflagsWritten | (W.RflagsWritten << R.Offset),
+		RflagsWritten = I.RflagsWritten | (W.RflagsWritten << RW.Offset),
 		
-		RflagsCleared = I.RflagsCleared | (W.RflagsCleared << R.Offset),
+		RflagsCleared = I.RflagsCleared | (W.RflagsCleared << RW.Offset),
 		
-		RflagsSet = I.RflagsSet | (W.RflagsSet << R.Offset),
+		RflagsSet = I.RflagsSet | (W.RflagsSet << RW.Offset),
 		
-		RflagsInfo = I.RflagsInfo | (W.RflagsInfo << R.Offset),
+		RflagsInfo = I.RflagsInfo | (W.RflagsInfo << RW.Offset),
 		
-		Cpuid = I.Cpuid | (W.Cpuid << R.Offset),
+		Cpuid = I.Cpuid | (W.Cpuid << RW.Offset),
 
-		Flags = I.Flags | (W.Flags << R.Offset),
+		Flags = I.Flags | (W.Flags << RW.Offset),
 
-		OpInfo = I.OpInfo | (W.OpInfo << R.Offset),
-
+		OpInfo = I.OpInfo | (W.OpInfo << RW.Offset),
     }
-
 }
 

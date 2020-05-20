@@ -9,13 +9,13 @@ namespace Z0.Asm.Encoding
 
     using static Seed;        
     using static Memories;
-    using static BinaryKind4;
+    using static Quartet;
 
     public class Prefixes
     {
         [MethodImpl(Inline)]
         public static bool IsRex(byte src)
-            => (uint4_t)(src >> 4) == b0100;
+            => (quartet)(src >> 4) == b0100;
             
         [MethodImpl(Inline)]
         public static ParseResult<RexPrefix> ParseRex(byte src)

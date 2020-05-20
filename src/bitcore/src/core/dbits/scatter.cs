@@ -11,6 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
     using static Seed;
+    using x64 = System.Runtime.Intrinsics.X86.Bmi2.X64;
     
     partial class Bits
     {                
@@ -50,6 +51,6 @@ namespace Z0
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline), Scatter]
         public static ulong scatter(ulong src, ulong mask)        
-            => X64.ParallelBitDeposit(src,mask);
+            => x64.ParallelBitDeposit(src,mask);
     }
 }

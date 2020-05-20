@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Analogs;
+    using static BitSet;
 
-    using analog = uint5_t;
-    using BK = BinaryKind5;
+    using analog = quintet;
+    using BK = Quintet;
 
-
-    public struct uint5_t : IEquatable<analog>
+    public struct quintet : IEquatable<analog>
     {
         internal byte data;
         
@@ -195,39 +194,39 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        internal uint5_t(byte src)
+        internal quintet(byte src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint5_t(sbyte src)
+        internal quintet(sbyte src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint5_t(short src)
+        internal quintet(short src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint5_t(ushort src)
+        internal quintet(ushort src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]    
-        internal uint5_t(int x)
+        internal quintet(int x)
             => data = (byte)((uint)x & MaxVal);
         
         [MethodImpl(Inline)]
-        internal uint5_t(uint src)
+        internal quintet(uint src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint5_t(long src)
+        internal quintet(long src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint5_t(uint src, bool safe)
+        internal quintet(uint src, bool safe)
             => data = (byte)src;
 
         [MethodImpl(Inline)]
-        internal uint5_t(BK src)
+        internal quintet(BK src)
             => data = (byte)src;
 
         /// <summary>
@@ -236,10 +235,10 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => Analogs.bit(this, pos);
+            get => BitSet.bit(this, pos);
             
             [MethodImpl(Inline)]
-            set => Analogs.bit(ref this, pos, value);
+            set => BitSet.bit(ref this, pos, value);
         }
 
         [MethodImpl(Inline)]

@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Analogs;
+    using static BitSet;
 
-    using analog = uint3_t;
-    using BK = BinaryKind3;
+    using analog = triad;
+    using BK = Triad;
 
-
-    public struct uint3_t : IEquatable<analog>
+    public struct triad : IEquatable<analog>
     {
         internal byte data;
         
@@ -195,39 +194,39 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        internal uint3_t(byte src)
+        internal triad(byte src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint3_t(sbyte src)
+        internal triad(sbyte src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint3_t(short src)
+        internal triad(short src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint3_t(ushort src)
+        internal triad(ushort src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]    
-        internal uint3_t(int x)
+        internal triad(int x)
             => data = (byte)((uint)x & MaxVal);
         
         [MethodImpl(Inline)]
-        internal uint3_t(uint src)
+        internal triad(uint src)
             => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint3_t(long src)
+        internal triad(long src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint3_t(uint src, bool safe)
+        internal triad(uint src, bool safe)
             => data = (byte)src;
 
         [MethodImpl(Inline)]
-        internal uint3_t(BK src)
+        internal triad(BK src)
             => data = (byte)src;
 
         /// <summary>
@@ -236,10 +235,10 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => Analogs.bit(this, pos);
+            get => BitSet.bit(this, pos);
             
             [MethodImpl(Inline)]
-            set => Analogs.bit(ref this, pos, value);
+            set => BitSet.bit(ref this, pos, value);
         }
 
         /// <summary>

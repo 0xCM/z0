@@ -10,6 +10,7 @@ namespace Z0.Data
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
     public enum RecordFieldWidths
     {
@@ -23,7 +24,7 @@ namespace Z0.Data
 
         Instruction = 60,
         
-        Register = 14,        
+        Register = 6,        
 
         Offset = 16,
 
@@ -31,23 +32,59 @@ namespace Z0.Data
 
         DataWidth = 26,
 
+        OpKind = 12,
+
+        Enc = 26,
+
+        /// <summary>
+        /// The width of a field containing an 8-bit decimal number
+        /// </summary>
+        Num8Dec = 8,
+
+        /// <summary>
+        /// The width of a field containing an 8-bit hex number
+        /// </summary>
+        Num8Hex = 8,
+
+        /// <summary>
+        /// The width of a field containing a boolean indicator [T/F, Y/N, 0/1, ..]
+        /// </summary>
+        Boolean = 8,
+
     }
     
-    public enum RecordFields
+    public enum RecordFields : uint
     {
-        Offset = 16,
+        Include = 0,
 
-        IdWidth = 50,
-
-        SeqWidth = 10,
+        Exclude = Pow2.T31
     }
 
     public class Records
     {
+        /// <summary>
+        /// Creates a record formatter predicated on a field definition set defined by an enum
+        /// </summary>
+        /// <param name="sep">The default field delimiter</param>
+        /// <typeparam name="F">The type of the defining enum</typeparam>
+        [MethodImpl(Inline)]
+        public static IRecordFormatter<F> Formatter<F>(char sep)
+            where F : unmanaged, Enum
+                => new RecordFormatter<F>(new StringBuilder(), sep);
+
+        /// <summary>
+        /// Creates a record formatter predicated on a field definition set defined by an enum
+        /// </summary>
+        /// <typeparam name="F">The type of the defining enum</typeparam>
+        [MethodImpl(Inline)]
+        public static IRecordFormatter<F> Formatter<F>()
+            where F : unmanaged, Enum
+                => new RecordFormatter<F>(new StringBuilder());
+
         [MethodImpl(Inline)]
         public static F[] Fields<F>()
             where F : unmanaged, Enum
-            => Enums.valarray<F>();
+                => Enums.valarray<F>();
 
         [MethodImpl(Inline)]
         public static string[] Headers<F>()
@@ -84,10 +121,20 @@ namespace Z0.Data
             return service.Render();
         }
 
+
         [MethodImpl(Inline)]
-        public static IRecordFormatter<F> Formatter<F>()
-            where F : unmanaged, Enum
-                => RecordFormatter<F>.Service;
+        public static ushort Width2<E>(E spec)
+            where E : unmanaged, Enum
+        {
+            var data = Enums.numeric<E,uint>(spec);
+            (var hi, var lo) = Bits.split(data,n2);
+            var seq = lo;
+            
+            var emit = !Bits.testbit(hi, 15);
+            var w = Bits.disable(hi, 15);
+            return w;
+                
+        }
 
         [MethodImpl(Inline)]
         public static short Width<E>(E spec)

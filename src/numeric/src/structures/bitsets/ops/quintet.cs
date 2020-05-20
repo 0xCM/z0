@@ -9,134 +9,130 @@ namespace Z0
 
     using static Seed;
 
-    using analog = uint3_t;
+    using analog = quintet;
 
-    partial class Analogs
+    partial class BitSet
     {
         /// <summary>
-        /// Creates a 4-bit usigned integer from the least 4 bits of the source
+        /// Creates a 5-bit usigned integer from the least 5 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(byte src)
+        public static analog uint5(byte src)
             => new analog(src);
 
         /// <summary>
-        /// Creates a 4-bit usigned integer from the least 4 bits of the source
+        /// Creates a 5-bit usigned integer from the least 5 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(sbyte src)
+        public static analog uint5(sbyte src)
             => new analog(src);
 
         /// <summary>
-        /// Creates a 4-bit usigned integer from the least 4 bits of the source
+        /// Creates a 5-bit usigned integer from the least 5 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(ushort src)
+        public static analog uint5(ushort src)
             => new analog(src);
 
         /// <summary>
-        /// Creates a 4-bit usigned integer from the least 4 bits of the source
+        /// Creates a 5-bit usigned integer from the least 5 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(short src)
+        public static analog uint5(short src)
             => new analog(src);
 
         /// <summary>
-        /// Creates a 4-bit usigned integer from the least 4 bits of the source
+        /// Creates a 5-bit usigned integer from the least 5 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint3(int src)
+        public static analog uint5(int src)
             => new analog(src);
 
         /// <summary>
-        /// Creates a 4-bit usigned integer from the least 4 bits of the source
+        /// Creates a 5-bit usigned integer from the least 5 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(uint src)
+        public static analog uint5(uint src)
             => new analog(src);
 
         /// <summary>
-        /// Creates a 4-bit usigned integer from the least 4 bits of the source
+        /// Creates a 5-bit usigned integer from the least 5 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]    
-        public static analog uint3(long src)
+        public static analog uint5(long src)
             => new analog(src);
 
         /// <summary>
-        /// Creates a 4-bit usigned integer from the least 4 bits of the source
+        /// Creates a 5-bit usigned integer from the least 5 bits of the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(ulong src)        
+        public static analog uint5(ulong src)        
             => new analog((byte)((byte)src & analog.MaxVal));
 
-        [MethodImpl(Inline), Op]    
-        public static analog uint3(bool x)
-            => x ? analog.One : analog.Zero;
-
         /// <summary>
-        /// Constructs a uint3 value from a sequence of bits ranging from low to high
+        /// Constructs a uint5 value from a sequence of bits ranging from low to high
         /// </summary>
         /// <param name="x0">The first/least bit value, if specified; otherwise, defaults to 0</param>
         /// <param name="x1">The second bit value, if specified; otherwise, defaults to 0</param>
         /// <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
         /// <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
         [MethodImpl(Inline), Op]
-        public static analog uint3(bit x0, bit x1 = default, bit x2 = default)
-             => wrap3(((uint)x0 << 0) | ((uint)x1 << 1) | ((uint)x2 << 2));
+        public static analog uint5(bit x0, bit x1 = default, bit x2 = default, bit x3 = default, bit x4 = default)
+             => wrap5(((uint)x0 << 0) | ((uint)x1 << 1) | ((uint)x2 << 2) | ((uint)x3 << 3) | ((uint)x4 << 4));
 
         [MethodImpl(Inline), Op]
         public static analog add(analog x, analog y)
         {
-            var sum = x.data + y.data;
-            return wrap3((sum >= analog.Base) ? sum - analog.Base: sum);
+            var sum = (byte)(x.data + y.data);
+            return wrap5((sum >= analog.Base) ? (byte)(sum - analog.Base): sum);
         }
 
         [MethodImpl(Inline), Op]
         public static analog sub(analog x, analog y)
         {
             var diff = (int)x - (int)y;
-            return wrap3(diff < 0 ? (byte)(diff + analog.Base) : (byte)diff);
+            return wrap5(diff < 0 ? (uint)(diff + analog.Base) : (uint)diff);
         }
 
         [MethodImpl(Inline), Op]
-        public static analog mul(analog lhs, analog rhs)
-            => reduce4((byte)(lhs.data * rhs.data));
-
-        [MethodImpl(Inline), Op]
         public static analog div (analog lhs, analog rhs) 
-            => wrap3((byte)(lhs.data / rhs.data));
+            => wrap5((byte)(lhs.data / rhs.data));
 
         [MethodImpl(Inline), Op]
         public static analog mod (analog lhs, analog rhs)
-            => wrap3((byte)(lhs.data % rhs.data));
+            => wrap5((byte)(lhs.data % rhs.data));
+
+        [MethodImpl(Inline), Op]
+        public static analog mul(analog lhs, analog rhs)
+            => reduce5(lhs.data * rhs.data);
 
         [MethodImpl(Inline), Op]
         public static analog or(analog lhs, analog rhs)
-            => wrap3((byte)(lhs.data | rhs.data));
+            => wrap5((byte)(lhs.data | rhs.data));
 
         [MethodImpl(Inline), Op]
         public static analog and(analog lhs, analog rhs)
-            => wrap3((byte)(lhs.data & rhs.data));
+            => wrap5((byte)(lhs.data & rhs.data));
 
         [MethodImpl(Inline), Op]
         public static analog xor(analog lhs, analog rhs)
-            => wrap3((byte)(lhs.data ^ rhs.data));
+            => wrap5((byte)(lhs.data ^ rhs.data));
 
         [MethodImpl(Inline), Op]
         public static analog srl(analog lhs, int rhs)
-            => uint3(lhs.data >> rhs);
+            => uint5(lhs.data >> rhs);
 
         [MethodImpl(Inline), Op]
         public static analog sll(analog lhs, int rhs)
-            => uint3(lhs.data << rhs);
+            => uint5(lhs.data << rhs);
 
         [MethodImpl(Inline), Op]
         public static analog inc(analog x)
@@ -156,6 +152,14 @@ namespace Z0
                 src.data = analog.MaxVal;
             return src;
         }
+
+        [MethodImpl(Inline), Op]
+        public static analog hi(analog src)
+            => wrap5(src.data >> 2 & 0b11);
+
+        [MethodImpl(Inline), Op]
+        public static analog lo(analog src)
+            => wrap5(src.data & 0b11);
 
         [MethodImpl(Inline), Op]
         public static bit bit(analog src, int pos)
@@ -178,24 +182,24 @@ namespace Z0
             return ref src;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bool eq(analog x, analog y)
             => x.data == y.data;
 
         [MethodImpl(Inline), Op]
-        internal static uint reduce3(uint x) 
-            => x % analog.Base;
-
-        [MethodImpl(Inline), Op]
-        internal static byte reduce3(byte x) 
+        internal static byte reduce5(uint x) 
             => (byte)(x % analog.Base);
 
-        [MethodImpl(Inline)]
-        internal static analog wrap3(uint src) 
-            => new analog((byte)src,false);
+        [MethodImpl(Inline), Op]
+        internal static byte reduce5(int x) 
+            => (byte)((uint)x % analog.Base);
 
         [MethodImpl(Inline)]
-        internal static analog wrap3(int src) 
+        internal static analog wrap5(uint src) 
+            => new analog(src,false);
+
+        [MethodImpl(Inline)]
+        internal static analog wrap5(int src) 
             => new analog((byte)src,false);
     }
 }

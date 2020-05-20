@@ -8,12 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Memories;
-    using static HexDigitCode;
 
     [ApiHost]
-    public partial class Analogs : IApiHost<Analogs>
-    {        
+    public partial class BitSet : IApiHost<BitSet>
+    {
 
     }
 }

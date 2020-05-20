@@ -6,7 +6,7 @@ namespace Z0.Asm.Encoding
 {        
     using System;
 
-    using static zasm;
+    using static BitSets;
 
     /// <summary>
     /// Defines the 16 possible jcc condition codes

@@ -42,7 +42,7 @@ namespace Z0.Data
         void AppendField(F f, object data, char delimiter)
             => DelimitField(f, data, delimiter);
 
-         void AppendField<T>(F f, T data, char delimiter)
+        void AppendField<T>(F f, T data, char delimiter)
             where T : ITextual
                 => DelimitField(f, data, delimiter);
 

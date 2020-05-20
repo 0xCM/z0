@@ -22,11 +22,11 @@ namespace Z0.Data
 
     public enum OpCodeFormWidth : int
     {
-        Sequence = 10, Mnemonic = 16, CodeBytes = 16, Prefix = 8, Table = 8, Group = 8,    
+        Mnemonic = 16, CodeBytes = 16, Prefix = 8, Table = 8, Group = 8,    
         
         Op1 = 20, Op2 = 20, Op3 = 20, Op4 = 20,
         
-        OpSize = 10,  AddressSize = 14, Id = R.IdWidth,  Flags = 10,                  
+        OpSize = 10,  AddressSize = 14, Flags = 10,                  
     }
 
     public enum OpCodeFormField : int

@@ -45,7 +45,7 @@ namespace Z0.Asm.Data
 			var tc = new DecoderTestCase();
 			tc.LineNumber = lineNumber;
 			tc.CanEncode = true;
-			tc.Bitness = bitness;
+			tc.BitMode = bitness;
 			tc.HexBytes = ToHexBytes(parts[0].Trim());
 			tc.EncodedHexBytes = tc.HexBytes;
 			tc.Code = ToCode(parts[1].Trim());

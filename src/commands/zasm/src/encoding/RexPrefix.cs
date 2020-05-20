@@ -9,10 +9,10 @@ namespace Z0.Asm.Encoding
 
     using static Seed;        
     using static Memories;
-    using static BinaryKind1;
-    using static BinaryKind4;
+    using static BitState;
+    using static Quartet;
 
-    using B1 = BinaryKind1;
+    using B1 = BitState;
 
     /// <summary>
     /// A prefix that occurrs at most once and is applicable to instructions 

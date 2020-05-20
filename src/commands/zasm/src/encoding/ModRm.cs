@@ -8,7 +8,7 @@ namespace Z0.Asm.Encoding
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Analogs;
+    using static BitSet;
 
 
     class ModRmByte
@@ -65,21 +65,21 @@ namespace Z0.Asm.Encoding
 
         public struct ModRM
         {
-            public static ModRM Define(R8 r0, R8 r1, BinaryKind2 mod = BinaryKind2.b11)
-                => new ModRM((BinaryKind3)r0, (BinaryKind3)r1, mod);
+            public static ModRM Define(R8 r0, R8 r1, Duet mod = Duet.b11)
+                => new ModRM((Triad)r0, (Triad)r1, mod);
 
-            public ModRM(BinaryKind3 rm, BinaryKind3 reg, BinaryKind2 mod = BinaryKind2.b11)
+            public ModRM(Triad rm, Triad reg, Duet mod = Duet.b11)
             {
                 this.rm = rm;
                 this.reg = reg;
                 this.mod = mod;
             }
 
-            public BinaryKind3 rm;
+            public Triad rm;
 
-            public BinaryKind3 reg;
+            public Triad reg;
 
-            public BinaryKind2 mod;
+            public Duet mod;
 
             public uint Encoded
             {
@@ -112,7 +112,7 @@ namespace Z0.Asm.Encoding
         /// Designates a register or, if joined with the mod field, it can
         /// encode an addressing mode
         /// </remarks>
-        public uint3_t rm;
+        public triad rm;
 
         /// <summary>
         /// Defines bits [5:3] of the modrm byte
@@ -121,7 +121,7 @@ namespace Z0.Asm.Encoding
         /// Designates either a register number or 3 more bits of opcode data; the
         /// primary opcode reveals the agenda of this field
         /// </remarks>
-        public uint3_t reg;
+        public triad reg;
 
         /// <summary>
         /// Defines bits [7:6] of the modrm byte
@@ -130,7 +130,7 @@ namespace Z0.Asm.Encoding
         /// When mod and rm fields are joined, it creates as surface for 32 possible values
         /// comprising 8 registers and 24 addressing modes
         /// </remarks>
-        public uint2_t mod;
+        public duet mod;
 
         [MethodImpl(Inline)]
         public static implicit operator ModRm(byte src)

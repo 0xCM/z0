@@ -17,6 +17,7 @@ namespace Z0.Data
 
     using LL = Asm.Data.LiteralLookups;
     using R = RecordFields;
+    using RW = RecordFieldWidths;
 
     partial class AsmEtl
     {       
@@ -44,7 +45,7 @@ namespace Z0.Data
         {
             var name = typeof(E).Name;
             var dst = Config.DatasetPath(name);
-            var header = text.concat("Sequence". PadRight((int)R.SeqWidth), SpacePipe, typeof(E).Name);
+            var header = text.concat("Sequence". PadRight((int)RW.Sequence), SpacePipe, typeof(E).Name);
             var literals = Enums.literals<E>();
 
             using var writer = dst.Writer();
@@ -91,7 +92,7 @@ namespace Z0.Data
         }
 
         string FormatSequential<E>(int seq, E value)
-            => text.concat(seq.ToString().PadRight((int)R.SeqWidth), SpacePipe, value.ToString());
+            => text.concat(seq.ToString().PadRight((int)RW.Sequence), SpacePipe, value.ToString());
 
         public void PublishLists()
         {

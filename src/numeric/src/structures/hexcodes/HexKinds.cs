@@ -7,9 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Seed;
+
     using H = HexKind4;
 
-    partial class zasm
+    public partial class HexKinds
     {
         public const H x0 = H.x0;
 

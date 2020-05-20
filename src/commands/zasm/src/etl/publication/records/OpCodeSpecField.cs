@@ -18,7 +18,7 @@ namespace Z0.Data
 
     public enum OpCodeSpecFieldWidth
     {
-        Sequence = R.SeqWidth, Mnemonic = 16, Expression = RW.OpCode, Instruction = 60, Modes = 16,  CpuId = 10,  Id = R.IdWidth, 
+        Expression = RW.OpCode, Modes = 16,  CpuId = 10, 
     }
 
     public enum OpCodeSpecField
@@ -35,7 +35,7 @@ namespace Z0.Data
         
         CpuId = I.CpuId | (W.CpuId << RW.Offset),                 
 
-        Id = I.Id | (W.Id << RW.Offset), 
+        Id = I.Id | (RW.Id << RW.Offset), 
         
     }
 }

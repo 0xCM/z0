@@ -8,21 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Analogs;
+    using static BitSet;
 
-    using analog = uint4_t;
-    using BK = BinaryKind4;
+    using analog = duet;
+    using BK = Duet;
 
-    public struct uint4_t : IEquatable<analog>
+    public struct duet : IEquatable<analog>
     {
-        [MethodImpl(Inline)]
-        public static analog FromUpper(byte src)
-            => new analog(src >> 4);
-
-        [MethodImpl(Inline)]
-        public static analog FromLower(byte src)
-            => new analog(src);
-
         internal byte data;
 
         public static analog MinValue => MinVal;
@@ -35,9 +27,9 @@ namespace Z0
 
         internal const byte MinVal = 0;
 
-        internal const byte MaxVal = 0xF;
+        internal const byte MaxVal = 7;
 
-        internal const int BitWidth = 4;        
+        internal const int BitWidth = 3;        
 
         internal const byte Base = (byte)MaxVal + 1;
 
@@ -50,7 +42,7 @@ namespace Z0
             => (BK)src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to an unsigned 8-bit integer
+        /// Converts a 3-bit integer to an unsigned 8-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -58,7 +50,7 @@ namespace Z0
             => (byte)src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to an unsigned 16-bit integer
+        /// Converts a 3-bit integer to an unsigned 16-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -66,7 +58,7 @@ namespace Z0
             => (ushort)src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to an unsigned 32-bit integer
+        /// Converts a 3-bit integer to an unsigned 32-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -74,7 +66,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to an unsigned 64-bit integer
+        /// Converts a 3-bit integer to an unsigned 63-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -82,7 +74,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 4-bit integer to a signed 32-bit integer
+        /// Converts a 3-bit integer to a signed 32-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -90,32 +82,32 @@ namespace Z0
             => (int)src.data;
 
         /// <summary>
-        /// Creates a 4-bit integer from the least four bits of the source operand
+        /// Creates a 3-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator analog(byte src)
-            => uint4(src);
+            => uint2(src);
 
         /// <summary>
-        /// Creates a 4-bit integer from the least four bits of the source operand
+        /// Creates a 3-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static implicit operator analog(uint src)
-            => uint4(src);
+            => uint2(src);
 
         /// <summary>
-        /// Creates a 4-bit integer from the least four bits of the source operand
+        /// Creates a 3-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static explicit operator analog(ulong src)
-            => uint4(src);
+            => uint2(src);
 
         [MethodImpl(Inline)]    
         public static analog @bool(bool x)
-            => x ? One : Zero;
+            => uint2(x);
 
         [MethodImpl(Inline)]    
         public static bool operator true(analog x)
@@ -135,39 +127,39 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator * (analog lhs, analog rhs)
-            => reduce((uint)lhs.data * (uint)rhs.data);
+            => mul(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static analog operator / (analog lhs, analog rhs) 
-            => wrap4((uint)lhs.data / (uint)rhs.data);
+            => div(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static analog operator % (analog lhs, analog rhs)
-            => wrap4((uint)lhs.data % (uint)rhs.data);
-
-        [MethodImpl(Inline)]
-        public static analog operator |(analog lhs, analog rhs)
-            => wrap4((uint)lhs.data | (uint)rhs.data);
+            => mod(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static analog operator &(analog lhs, analog rhs)
-            => wrap4((uint)lhs.data & (uint)rhs.data);
+            => and(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static analog operator |(analog lhs, analog rhs)
+            => or(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static analog operator ^(analog lhs, analog rhs)
-            => wrap4((uint)(lhs.data & rhs.data) & (uint)MaxVal);
+            => xor(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static analog operator >>(analog lhs, int rhs)
-            => uint4(lhs.data >> rhs);
+            => srl(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static analog operator <<(analog lhs, int rhs)
-            => uint4(lhs.data << rhs);
+            => sll(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static analog operator ~(analog src)
-            => wrap4((uint)(~src.data & MaxVal));
+            => wrap2(~src.data & MaxVal);
 
         [MethodImpl(Inline)]
         public static analog operator ++(analog x)
@@ -202,47 +194,39 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        static byte crop(int x) 
-            => (byte)(0xF & x);
+        internal duet(byte src)
+            => data = (byte)(src & MaxVal);
 
         [MethodImpl(Inline)]
-        static byte crop(uint x) 
-            => (byte)(0xF & x);
-
-        [MethodImpl(Inline)]
-        internal uint4_t(byte src)
-            => data = crop(src);
-
-        [MethodImpl(Inline)]
-        internal uint4_t(sbyte src)
-            => data = crop(src);
-
-        [MethodImpl(Inline)]
-        internal uint4_t(short src)
-            => data = crop(src);
-
-        [MethodImpl(Inline)]
-        internal uint4_t(ushort src)
-            => data = crop(src);
-
-        [MethodImpl(Inline)]    
-        internal uint4_t(int src)
-            => data = crop(src);
-        
-        [MethodImpl(Inline)]
-        internal uint4_t(uint src)
-            => data = crop(src);
-
-        [MethodImpl(Inline)]
-        internal uint4_t(long src)
+        internal duet(sbyte src)
             => data = (byte)((uint)src & MaxVal);
 
         [MethodImpl(Inline)]
-        internal uint4_t(uint src, bool safe)
+        internal duet(short src)
+            => data = (byte)((uint)src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal duet(ushort src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]    
+        internal duet(int x)
+            => data = (byte)((uint)x & MaxVal);
+        
+        [MethodImpl(Inline)]
+        internal duet(uint src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal duet(long src)
+            => data = (byte)((uint)src & MaxVal);
+
+        [MethodImpl(Inline)]
+        internal duet(uint src, bool safe)
             => data = (byte)src;
 
         [MethodImpl(Inline)]
-        internal uint4_t(BK src)
+        internal duet(BK src)
             => data = (byte)src;
 
         /// <summary>
@@ -251,44 +235,10 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => Analogs.bit(this, pos);
+            get => BitSet.bit(this, pos);
             
             [MethodImpl(Inline)]
-            set => Analogs.bit(ref this, pos, value);
-        }
-
-        /// <summary>
-        /// Queries and manipulates the lower two bits
-        /// </summary>
-        public analog Lo
-        {
-            [MethodImpl(Inline)]
-            get => lo(this);
-            
-            [MethodImpl(Inline)]
-            set 
-            {
-                var src = value.Lo;
-                Analogs.bit(ref this, 0, src[0]);
-                Analogs.bit(ref this, 1, src[1]);
-            }
-        }
-
-        /// <summary>
-        /// Queries and manipulates the upper two bits
-        /// </summary>
-        public analog Hi
-        {
-            [MethodImpl(Inline)]
-            get => Analogs.hi(this);
-
-            [MethodImpl(Inline)]
-            set
-            {
-                var src = value.Lo;
-                Analogs.bit(ref this, 2, src[0]);
-                Analogs.bit(ref this, 3, src[1]);
-            }
+            set => BitSet.bit(ref this, pos, value);
         }
 
         /// <summary>
@@ -308,17 +258,9 @@ namespace Z0
         public override int GetHashCode()
             => data.GetHashCode();
  
-        [MethodImpl(Inline)]
-        internal static uint reduce(uint x) 
-            => Analogs.reduce4(x);
-
-        [MethodImpl(Inline)]
-        internal static analog Wrap(uint src) 
-            => Analogs.wrap4(src);
-
         /// <summary>
-        /// Defines a mapping from possible UInt4 values to their hex code representations
+        /// Defines a mapping from possible values to their hex code representations
         /// </summary>
-        static char[] HexMap => new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        static char[] HexMap  => new char[]{'0', '1'};
     }
 }

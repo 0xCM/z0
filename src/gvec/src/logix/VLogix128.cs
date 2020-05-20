@@ -40,7 +40,7 @@ namespace Z0
         /// Advertises the supported ternary bitlogic opeators
         /// </summary>
         public static ReadOnlySpan<TLK> TernaryBitLogicKinds
-            => gmath.range((byte)1,(byte)X18).Cast<TLK>().ToArray();
+            => gmath.range((byte)1,(byte)TLK.X18).Cast<TLK>().ToArray();
 
         /// <summary>
         /// Specifies the supported comparison operators
@@ -307,33 +307,33 @@ namespace Z0
         {
             switch(kind)
             {
-                case X01: return f01;
-                case X02: return f02;
-                case X03: return f03;
-                case X04: return f04;
-                case X05: return f05;
-                case X06: return f06;
-                case X07: return f07;
-                case X08: return f08;
-                case X09: return f09;
-                case X0A: return f0a;
-                case X0B: return f0b;
-                case X0C: return f0c;
-                case X0D: return f0d;
-                case X0E: return f0e;
-                case X0F: return f0f;
-                case X10: return f10;
-                case X11: return f11;
-                case X12: return f12;
-                case X13: return f13;
-                case X14: return f14;
-                case X15: return f15;
-                case X16: return f16;
-                case X17: return f17;
-                case X18: return f18;
-                case X19: return f19;
-                case X1A: return f1a;
-                case X1B: return f1b;
+                case TLK.X01: return f01;
+                case TLK.X02: return f02;
+                case TLK.X03: return f03;
+                case TLK.X04: return f04;
+                case TLK.X05: return f05;
+                case TLK.X06: return f06;
+                case TLK.X07: return f07;
+                case TLK.X08: return f08;
+                case TLK.X09: return f09;
+                case TLK.X0A: return f0a;
+                case TLK.X0B: return f0b;
+                case TLK.X0C: return f0c;
+                case TLK.X0D: return f0d;
+                case TLK.X0E: return f0e;
+                case TLK.X0F: return f0f;
+                case TLK.X10: return f10;
+                case TLK.X11: return f11;
+                case TLK.X12: return f12;
+                case TLK.X13: return f13;
+                case TLK.X14: return f14;
+                case TLK.X15: return f15;
+                case TLK.X16: return f16;
+                case TLK.X17: return f17;
+                case TLK.X18: return f18;
+                case TLK.X19: return f19;
+                case TLK.X1A: return f1a;
+                case TLK.X1B: return f1b;
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }

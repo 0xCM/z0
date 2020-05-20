@@ -18,7 +18,7 @@ namespace Z0.Asm.Data
 
 		public DecoderOptions DecoderOptions;
 
-		public int Bitness;
+		public int BitMode;
 
 		public string HexBytes;
 

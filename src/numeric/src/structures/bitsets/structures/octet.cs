@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Seed;
+    using static BitSet;
 
-    using analog = uint8_t;
+    using analog = octet;
     using BK = Octet;
 
-    public struct uint8_t : IEquatable<analog>
+    public struct octet : IEquatable<analog>
     {
         byte data;
 
@@ -29,11 +30,11 @@ namespace Z0
             => (BK)src.data;
 
         [MethodImpl(Inline)]    
-        public uint8_t(byte x)
+        public octet(byte x)
             => data =x;
 
         [MethodImpl(Inline)]    
-        public uint8_t(BK x)
+        public octet(BK x)
             => data =(byte)x;
 
         [MethodImpl(Inline)]    
