@@ -18,10 +18,10 @@ namespace Z0.Asm.Data
 
     partial class AsmEtl
     {                        
-        public AsmPublication<InstructionRecord> Publish(Instructions model)
+        public Publication<InstructionRecord> Publish(Instructions model)
         {
             var src = Publish(model, out var dst);
-            return AsmPublication.Flow(src, dst);            
+            return Publication.Flow(src, dst);            
         }
 
         InstructionRecord[] Publish(Instructions model, out FilePath dst)
@@ -37,7 +37,7 @@ namespace Z0.Asm.Data
         }        
 
         R[] Save(InstructionRecord[] src, FilePath dst)
-            => Records.Save<F,R>(src, dst, Format);
+            => AsmRecords.Save<F,R>(src, dst, Format);
 
 		string Format(OpInfo[] src) 
             => string.Join(", ", src.Where(x => x != 0).Map(x => x.ToString()));
@@ -56,7 +56,7 @@ namespace Z0.Asm.Data
 
 		string Format(InstructionRecord src)
 		{
-            var dst = Records.Formatter<F>();
+            var dst = AsmRecords.Formatter<F>();
             dst.DelimitField(F.Sequence, src.Sequence);
             dst.DelimitField(F.Id, src.Id);
             dst.DelimitField(F.CodeInfo, Format(src.CodeInfo));

@@ -86,13 +86,7 @@ namespace Z0.Asm
         }
 
         public static Encoding Example 
-            => Encoding.encode(OpCodes.Cmp, ModRM.Define(R8.dh, R8.cl));
-
-
-        const uint CMP_ENCODED = 0xCE38;
-
-
-
+            => Encoding.encode(OpCodes.Cmp, ModRM.Define(R8.dh, R8.cl));        
     }
     
     /// <summary>

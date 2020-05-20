@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
     using I = DecoderTestFieldId;
     using W = DecoderTestFieldWidth;
     using R = RecordFields;
-    using RW = RecordFieldWidths;
+    using RW = AsmFieldWidths;
 
     public enum DecoderTestFieldEmit : uint
     {

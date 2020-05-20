@@ -20,14 +20,14 @@ namespace Z0.Asm.Data
         /// Publishes a model-identified dataset to the target archive
         /// </summary>
         /// <param name="model">The data model</param>
-        public AsmPublication<OpCodeFormRecord> Publish(OpCodeForms model, OpCodeSpecs specs)
+        public Publication<OpCodeFormRecord> Publish(OpCodeForms model, OpCodeSpecs specs)
         {
             var src = Publish(model, specs, out var dst);
-            return AsmPublication.Flow(src, dst);            
+            return Publication.Flow(src, dst);            
         }
         
         R[] Save(OpCodeFormRecord[] src, FilePath dst)
-            => Records.Save<F,R>(src, dst, Format);
+            => AsmRecords.Save<F,R>(src, dst, Format);
 
         static OpCodeId ParseOpCodeId(string src)
             => Enums.Parse(src, OpCodeId.INVALID);
@@ -62,7 +62,7 @@ namespace Z0.Asm.Data
 
         public string Format(OpCodeFormRecord src)
         {
-            var dst = Records.Formatter<F>();
+            var dst = AsmRecords.Formatter<F>();
             dst.DelimitField(F.Sequence, src.Sequence);
             dst.DelimitField(F.Mnemonic, src.Mnemonic);
             dst.DelimitField(F.CodeBytes, src.CodeBytes);

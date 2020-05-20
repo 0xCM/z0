@@ -63,7 +63,7 @@ namespace Z0.Asm.Data
         {            
             var dst = Config.DatasetPath(typeof(E).Name);            
             var report = LiteralReport<E>(typeof(E).Name, DescribeLiteral);            
-            return Records.Save<F,T>(report.Records, dst);
+            return AsmRecords.Save<F,T>(report.Records, dst);
         }
         
         public void PublishLiterals()

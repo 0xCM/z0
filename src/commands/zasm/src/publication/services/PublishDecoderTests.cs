@@ -30,10 +30,10 @@ namespace Z0.Asm.Data
             Publish(DecoderTests.Model,codes,64);
         }
 
-        public AsmPublication<DecoderTestRecord> Publish(DecoderTests model, OpCodeSpecs codes, int bitness)
+        public Publication<DecoderTestRecord> Publish(DecoderTests model, OpCodeSpecs codes, int bitness)
         {
             var src = Publish(model, codes, bitness,  out var dst);
-            return AsmPublication.Flow(src, dst);            
+            return Publication.Flow(src, dst);            
         }
 
         IEnumerable<DecoderTestCase> DecoderCases(int bitness, FilePath src)
@@ -66,11 +66,11 @@ namespace Z0.Asm.Data
         }        
 
         R[] Save(DecoderTestRecord[] src, FilePath dst)
-            => Records.Save<F,R>(src, dst, FormatRecord);
+            => AsmRecords.Save<F,R>(src, dst, FormatRecord);
 
 		string FormatRecord(DecoderTestRecord src)
 		{
-            var dst = Records.Formatter<F>();
+            var dst = AsmRecords.Formatter<F>();
 
             dst.DelimitField(F.Sequence, src.Sequence);
             dst.DelimitField(F.Mnemonic, src.Mnemonic);            

@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
     using I = OpCodeFormId;
     using W = OpCodeFormWidth;
     using R = RecordFields;
-    using RW = RecordFieldWidths;
+    using RW = AsmFieldWidths;
 
     public enum OpCodeFormId : int
     {

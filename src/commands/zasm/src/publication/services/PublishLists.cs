@@ -17,7 +17,7 @@ namespace Z0.Asm.Data
 
     using LL = Asm.Data.LiteralLookups;
     using R = RecordFields;
-    using RW = RecordFieldWidths;
+    using RW = AsmFieldWidths;
 
     partial class AsmEtl
     {       
@@ -64,7 +64,7 @@ namespace Z0.Asm.Data
             where F : unmanaged, Enum
         {
             var dst = Config.DatasetPath(model.Name);
-            var header = Records.Header<F>(delimiter);
+            var header = AsmRecords.Header<F>(delimiter);
             using var writer = dst.Writer();
             writer.WriteLine(header);
             for(var i=0; i<src.Length; i++)

@@ -11,7 +11,7 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
-    using W = RecordFieldWidths;
+    using W = AsmFieldWidths;
     using I = OperandCountId;
     using R = OperandCountRecord;
     using F = OperandCountField;

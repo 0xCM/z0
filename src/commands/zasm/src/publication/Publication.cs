@@ -9,15 +9,15 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
-    public readonly struct AsmPublication
+    public readonly struct Publication
     {
         [MethodImpl(Inline)]
-        public static AsmPublication<R> Flow<R>(R[] src, FilePath dst)
+        public static Publication<R> Flow<R>(R[] src, FilePath dst)
             where R : ITabular
-                => new AsmPublication<R>(src,dst);
+                => new Publication<R>(src,dst);
     }
     
-    public readonly struct AsmPublication<R> : IDataFlow<R[],FilePath>
+    public readonly struct Publication<R> : IDataFlow<R[],FilePath>
         where R : ITabular
     {
         public readonly R[] Source {get;}
@@ -25,7 +25,7 @@ namespace Z0.Asm.Data
         public FilePath Target {get;}
         
         [MethodImpl(Inline)]
-        public AsmPublication(R[] src, FilePath dst)
+        public Publication(R[] src, FilePath dst)
         {
             Source = src;
             Target = dst;

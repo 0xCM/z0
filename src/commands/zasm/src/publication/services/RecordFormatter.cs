@@ -103,19 +103,19 @@ namespace Z0.Asm.Data
 
         public void AppendField(F f, object content)
         {
-            State.Append(RenderContent(content).PadRight(Records.Width(f)));
+            State.Append(RenderContent(content).PadRight(AsmRecords.Width(f)));
         }
 
         public void AppendField<T>(F f, T content)
             where T : ITextual
         {
-            State.Append($"{content?.Format()}".PadRight(Records.Width(f)));
+            State.Append($"{content?.Format()}".PadRight(AsmRecords.Width(f)));
         }
 
         public void DelimitField(F f, object content, char delimiter)
         {            
             State.Append(rspace(delimiter));            
-            State.Append(RenderContent(content).PadRight(Records.Width(f)));
+            State.Append(RenderContent(content).PadRight(AsmRecords.Width(f)));
         }
 
         static string RenderContent(object content)
@@ -150,7 +150,7 @@ namespace Z0.Asm.Data
             where T : ITextual
         {
             State.Append(rspace(delimiter));            
-            State.Append($"{content?.Format()}".PadRight(Records.Width(f)));
+            State.Append($"{content?.Format()}".PadRight(AsmRecords.Width(f)));
         }
 
         [MethodImpl(Inline)]
