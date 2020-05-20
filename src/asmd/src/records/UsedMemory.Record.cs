@@ -1,28 +1,28 @@
 //-----------------------------------------------------------------------------
-// Taken from Iced:https://github.com/0xd4d/iced
-// License: See the accompanying license file
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
-{
+namespace Z0.Asm.Data
+{        
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
 
     /// <summary>
     /// A memory location used by an instruction
     /// </summary>
-    public struct UsedMemory 
+    public struct UsedMemoryRecord 
     {
-        public UsedMemory(
-            string Formatted, 
+        public UsedMemoryRecord(
             Register Segment, 
             Register Base, 
             Register Index, 
             int Scale, 
             ulong Displacement, 
             MemorySize MemorySize,
-            OpAccess Access
-            )
+            OpAccess Access)
         {
-            this.Formatted = Formatted;
             this.Segment = Segment;
             this.Base = Base;
             this.Index = Index;
@@ -31,12 +31,7 @@ namespace Z0.Asm
             this.MemorySize = MemorySize;
             this.Access = Access;
         }
-
-        /// <summary>
-        /// Captures the result of the ToString() method at the time of replication
-        /// </summary>
-        public readonly string Formatted;
-
+        
         /// <summary>
         /// Effective segment register
         /// </summary>
@@ -71,6 +66,5 @@ namespace Z0.Asm
         /// Memory access
         /// </summary>
         public readonly OpAccess Access;
-
     }
 }

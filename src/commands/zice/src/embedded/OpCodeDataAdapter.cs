@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// OpCode data Taken from Iced:https://github.com/0xd4d/iced
+// Taken from Iced:https://github.com/0xd4d/iced
 // License: Available in the project root
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
@@ -22,6 +22,7 @@ namespace Z0.Asm.Data
 			var ocs = new OpCodeFormatter(adapter, new StringBuilder(), src.lkind).Format();
 			return ocs;
 		}
+
 		readonly OpCodeDataBlock Src;
 
 		[MethodImpl(Inline)]
@@ -34,7 +35,6 @@ namespace Z0.Asm.Data
 			Src = src;			
 		}
 		
-
 		/// <summary>
 		/// Gets the code
 		/// </summary>
@@ -268,7 +268,5 @@ namespace Z0.Asm.Data
 				64 => Mode64,
 				_ => throw new ArgumentOutOfRangeException(nameof(bitness)),
 			};
-
-
 	}
 }

@@ -11,7 +11,6 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-
     static class XYZ
     {
 		/// <summary>
@@ -29,6 +28,11 @@ namespace Z0.Asm.Data
 		/// <param name="code">Code value</param>
 		/// <returns></returns>
 		public static Mnemonic Mnemonic(this Code code) 
+		{
+			insist((uint)code < (uint)MnemonicUtilsData.toMnemonic.Length);
+			return (Mnemonic)MnemonicUtilsData.toMnemonic[(int)code];
+		}
+		public static Mnemonic Mnemonic(this OpCodeId code) 
 		{
 			insist((uint)code < (uint)MnemonicUtilsData.toMnemonic.Length);
 			return (Mnemonic)MnemonicUtilsData.toMnemonic[(int)code];
@@ -80,7 +84,6 @@ namespace Z0.Asm.Data
 		/// <param name="memorySize">Memory size</param>
 		/// <returns></returns>
 		public static int GetSize(this MemorySize memorySize) => memorySize.GetInfo().Size;
-
 
 		internal static readonly MemorySizeInfo[] MemorySizeInfos = GetMemorySizeInfos();
 
@@ -277,7 +280,6 @@ namespace Z0.Asm.Data
     }
 
 
-
 	struct InstructionFormatter 
 	{
 		readonly OpCodeSummary opCode;
@@ -338,7 +340,8 @@ namespace Z0.Asm.Data
 			return vec_index;
 		}
 
-		public InstructionFormatter(OpCodeSummary opCode, StringBuilder sb) {
+		public InstructionFormatter(OpCodeSummary opCode, StringBuilder sb) 
+		{
 			this.opCode = opCode;
 			this.sb = sb;
 			noVecIndex = false;

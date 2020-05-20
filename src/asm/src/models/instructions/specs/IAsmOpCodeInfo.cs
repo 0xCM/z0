@@ -11,7 +11,6 @@ namespace Z0.Asm
 
     public interface IAsmOpCodeInfo
     {
-
         //
         // Summary:
         //     (EVEX) true if the instruction supports suppress all exceptions
@@ -214,7 +213,6 @@ namespace Z0.Asm
         // Summary:
         //     (Legacy encoding) Gets the required operand size (16,32,64) or 0 if no operand
         //     size prefix (66) or REX.W prefix is needed
-        int OperandSize {get;}
-         
+        int OperandSize {get;}        
     }
 }

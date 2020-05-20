@@ -5,10 +5,7 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Text;
-	using System.Runtime.Intrinsics;
 
     using static Seed;
     using static Memories;

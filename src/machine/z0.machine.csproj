@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(AsmD)" />
 
   </ItemGroup>
 

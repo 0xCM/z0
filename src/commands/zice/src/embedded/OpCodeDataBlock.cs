@@ -96,7 +96,7 @@ namespace Z0.Asm.Data
         public OpCodeDataBlock(Code code, uint dword3, uint dword2, uint dword1, StringBuilder sb) 
 			: this(code, dword3, dword2, dword1)
         {			
-			//OpCodeDataBlocker.Fill(ref this);
+			
 		}
 
 		public OpCodeDataAdapter Adapter 

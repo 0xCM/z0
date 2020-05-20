@@ -72,17 +72,16 @@ namespace Z0.Asm
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline)]
         public UsedMemory Thaw(Iced.UsedMemory src)
-            => new UsedMemory
-            {
-                Access = Thaw(src.Access),
-                Base  = Thaw(src.Base),
-                Displacement = src.Displacement,
-                Index = Thaw(src.Index),
-                MemorySize = Thaw(src.MemorySize),
-                Scale = src.Scale,
-                Segment = Thaw(src.Segment),
-                Formatted = src.ToString()
-            };
+            => new UsedMemory(        
+                Access : Thaw(src.Access),
+                Base  : Thaw(src.Base),
+                Displacement : src.Displacement,
+                Index : Thaw(src.Index),
+                MemorySize : Thaw(src.MemorySize),
+                Scale : src.Scale,
+                Segment : Thaw(src.Segment),
+                Formatted : src.ToString()
+            );
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure

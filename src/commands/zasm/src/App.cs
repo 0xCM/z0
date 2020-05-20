@@ -13,11 +13,6 @@ namespace Z0.Asm.Data
 
     using P = Z0.Parts;
     
-    public static partial class zasm
-    {
-
-    }
-
     class App : AppShell<App,IAppContext>
     {                        
         static IAppContext CreateAppContext()
@@ -34,6 +29,7 @@ namespace Z0.Asm.Data
         {
         }
 
+
         void ParseRex()
         {
             var input = (byte)RexPrefixCode.Rex48;
@@ -47,17 +43,13 @@ namespace Z0.Asm.Data
             term.print(mrm.Format());
         }
 
-        IEnumerable<DecoderTestCase> DecoderCases(int bitness, FilePath src)
-            => DecoderTestParser.ReadFile(bitness,src);
-
         public override void RunShell(params string[] args)
         {            
             var parts = PartParser.Service.ParseValid(args);  
 
+            //LoadDataBlocks();
             var etl = AsmEtl.Service;
-            etl.Publish();
-
-                                    
+            etl.Publish();                                    
         }
 
         public static void Main(params string[] args)

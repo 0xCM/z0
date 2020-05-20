@@ -11,7 +11,7 @@ namespace Z0.Machines
     using static Seed;
     using static Memories;
     
-    partial class Cmd
+    partial class Commands
     {        
         [MethodImpl(Inline), Op]
         internal static ReadOnlySpan<byte> bytes(in Vector128<byte> src)

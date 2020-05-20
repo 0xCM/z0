@@ -9,8 +9,6 @@ namespace Z0.Asm.Data
 
 	readonly struct OpCodeFormatter 
 	{
-		//readonly OpCodeSummary opCode;
-
 		readonly OpCodeDataAdapter adapter;
 
 		OpCodeDataAdapter data => adapter;
@@ -19,15 +17,15 @@ namespace Z0.Asm.Data
 		
 		readonly LKind lkind;
 
-		public OpCodeFormatter(OpCodeDataAdapter adapter, StringBuilder sb, LKind lkind) {
+		public OpCodeFormatter(OpCodeDataAdapter adapter, StringBuilder sb, LKind lkind) 
+		{
 			this.adapter = adapter;
-			//this.opCode = default;
 			this.sb = sb;
 			this.lkind = lkind;
 		}
 
-		public OpCodeFormatter(OpCodeSummary opCode, StringBuilder sb, LKind lkind) {
-			//this.opCode = opCode;
+		public OpCodeFormatter(OpCodeSummary opCode, StringBuilder sb, LKind lkind) 
+		{
 			this.adapter = default;
 			this.sb = sb;
 			this.lkind = lkind;

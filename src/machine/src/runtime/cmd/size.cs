@@ -11,7 +11,7 @@ namespace Z0.Machines
     using static Seed;
     using static Memories;
     
-    partial class Cmd
+    partial class Commands
     {
         [MethodImpl(Inline), Op]
         internal static byte size(in ReadOnlySpan<byte> src)
@@ -26,7 +26,6 @@ namespace Z0.Machines
             }
             return (byte)count;
         }
-
 
         /// <summary>
         /// Computes the minimum number of bytes required to cover the represented command
