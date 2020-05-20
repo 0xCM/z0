@@ -9,8 +9,11 @@ namespace Z0.Asm.Data
 	public enum WBit : uint 
 	{
 		W0,
+		
 		W1,
+		
 		WIG,
+		
 		WIG32,
 	}
 }

@@ -12,12 +12,16 @@ namespace Z0.Asm.Data
 	{
 		/// <summary>No rounding mode</summary>
 		None = 0,
+		
 		/// <summary>Round to nearest (even)</summary>
 		RoundToNearest = 1,
+		
 		/// <summary>Round down (toward -inf)</summary>
 		RoundDown = 2,
+		
 		/// <summary>Round up (toward +inf)</summary>
 		RoundUp = 3,
+		
 		/// <summary>Round toward zero (truncate)</summary>
 		RoundTowardZero = 4,
 	}

@@ -11,8 +11,11 @@ namespace Z0.Asm.Data
 	public enum OperandSize 
 	{
 		None,
+		
 		Size16,
+		
 		Size32,
+		
 		Size64,
 	}
 }

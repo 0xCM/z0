@@ -9,7 +9,9 @@ namespace Z0.Asm.Data
 	public enum XopOpCodeTable 
 	{
 		XOP8,
+		
 		XOP9,
+		
 		XOPA,
 	}
 }

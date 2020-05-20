@@ -9,8 +9,11 @@ namespace Z0.Asm.Data
 	public enum MandatoryPrefixByte : uint 
     {
 		None,
+		
 		P66,
+		
 		PF3,
+		
 		PF2,
 	}
 }

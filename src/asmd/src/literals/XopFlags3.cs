@@ -10,9 +10,13 @@ namespace Z0.Asm.Data
 	public enum XopFlags3 : uint 
 	{
 		OpMask = 0x0000001F,
+		
 		Op0Shift = 0x00000000,
+		
 		Op1Shift = 0x00000005,
+		
 		Op2Shift = 0x0000000A,
+		
 		Op3Shift = 0x0000000F,
 	}
 }

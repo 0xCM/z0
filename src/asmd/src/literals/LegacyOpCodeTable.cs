@@ -9,8 +9,11 @@ namespace Z0.Asm.Data
 	public enum LegacyOpCodeTable 
 	{
 		Normal,
+		
 		Table0F,
+		
 		Table0F38,
+		
 		Table0F3A,
 	}
 }

@@ -10,12 +10,16 @@ namespace Z0.Asm.Data
     {
 		[Comment("Legacy encoding")]
 		Legacy,
-		[Comment("VEX encoding")]
+		
+		[Comment("VEX encoding")]		
 		VEX,
+		
 		[Comment("EVEX encoding")]
 		EVEX,
+		
 		[Comment("XOP encoding")]
 		XOP,
+		
 		[Comment("3DNow! encoding")]
 		D3NOW,
 	}

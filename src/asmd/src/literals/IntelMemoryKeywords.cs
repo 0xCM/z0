@@ -4,14 +4,36 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data 
 {
+    using System;
 
-	public enum EvexVectorLength 
+	public enum IntelMemoryKeywords 
 	{
-		L128,
+		None,
 
-		L256,
+		byte_ptr,
 
-		L512,
+		dword_ptr,
+
+		fpuenv14_ptr,
+
+		fpuenv28_ptr,
+
+		fpustate108_ptr,
+
+		fpustate94_ptr,
+
+		fword_ptr,
+
+		qword_ptr,
+
+		tbyte_ptr,
+
+		word_ptr,
+
+		xmmword_ptr,
+
+		ymmword_ptr,
+
+		zmmword_ptr,
 	}
-
 }

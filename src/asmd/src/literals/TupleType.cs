@@ -9,22 +9,31 @@ namespace Z0.Asm.Data
     {
 		[Comment("#(c:N = 1)#")]
 		None,
+		
 		[Comment("#(c:N = b ? (W ? 8 : 4) : 16)#")]
 		Full_128,
+		
 		[Comment("#(c:N = b ? (W ? 8 : 4) : 32)#")]
 		Full_256,
+		
 		[Comment("#(c:N = b ? (W ? 8 : 4) : 64)#")]
 		Full_512,
+		
 		[Comment("#(c:N = b ? 4 : 8)#")]
 		Half_128,
+		
 		[Comment("#(c:N = b ? 4 : 16)#")]
 		Half_256,
+		
 		[Comment("#(c:N = b ? 4 : 32)#")]
 		Half_512,
+		
 		[Comment("#(c:N = 16)#")]
 		Full_Mem_128,
+		
 		[Comment("#(c:N = 32)#")]
 		Full_Mem_256,
+		
 		[Comment("#(c:N = 64)#")]
 		Full_Mem_512,
 		[Comment("#(c:N = W ? 8 : 4)#")]

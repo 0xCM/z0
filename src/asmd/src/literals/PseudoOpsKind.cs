@@ -6,27 +6,42 @@ namespace Z0.Asm.Data
 {
     using System;
 
-	[Flags,NumericBase(2,12)]
-	public enum RflagsBits 
+	public enum PseudoOpsKind 
 	{
-		None	= 0,
-
-		OF		= 0x00000001,
-
-		SF		= 0x00000002,
-
-		ZF		= 0x00000004,
-
-		AF		= 0x00000008,
-
-		CF		= 0x00000010,
-
-		PF		= 0x00000020,
-
-		DF		= 0x00000040,
-
-		IF		= 0x00000080,
-
-		AC		= 0x00000100,
+		cmpps,
+	
+		vcmpps,
+	
+		cmppd,
+	
+		vcmppd,
+	
+		cmpss,
+	
+		vcmpss,
+	
+		cmpsd,
+	
+		vcmpsd,
+	
+		pclmulqdq,
+	
+		vpclmulqdq,
+	
+		vpcomb,
+	
+		vpcomw,
+	
+		vpcomd,
+	
+		vpcomq,
+	
+		vpcomub,
+	
+		vpcomuw,
+	
+		vpcomud,
+	
+		vpcomuq,
 	}
 }

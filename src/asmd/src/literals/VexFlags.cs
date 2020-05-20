@@ -10,16 +10,27 @@ namespace Z0.Asm.Data
 	public enum VexFlags : uint 
 	{
 		MandatoryPrefixByteMask = 0x00000003,
+
 		MandatoryPrefixByteShift = 0x00000000,
+
 		VexOpCodeTableMask = 0x00000003,
+
 		VexOpCodeTableShift = 0x00000002,
+
 		EncodableMask = 0x00000003,
+
 		EncodableShift = 0x00000004,
+
 		HasGroupIndex = 0x00000040,
+
 		GroupShift = 0x00000007,
+
 		VexVectorLengthMask = 0x00000007,
+
 		VexVectorLengthShift = 0x0000000A,
+
 		WBitMask = 0x00000003,
+
 		WBitShift = 0x0000000D,
 	}
 }

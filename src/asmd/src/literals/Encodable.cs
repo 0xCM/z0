@@ -9,7 +9,9 @@ namespace Z0.Asm.Data
 	public enum Encodable 
 	{
 		Any,
+		
 		Only1632,
+		
 		Only64,
 	}
 }

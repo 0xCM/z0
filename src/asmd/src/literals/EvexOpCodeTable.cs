@@ -4,10 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data 
 {
+	using System;
+	
  	public enum EvexOpCodeTable 
     {
-		Table0F					= 1,
-		Table0F38				= 2,
-		Table0F3A				= 3,
+		Table0F	= 1,
+		
+		Table0F38 = 2,
+		
+		Table0F3A = 3,
 	}
 }

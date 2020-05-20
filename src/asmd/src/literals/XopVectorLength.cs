@@ -9,8 +9,11 @@ namespace Z0.Asm.Data
 	public enum XopVectorLength 
     {
 		L128,
+		
 		L256,
+		
 		L0,
+		
 		L1,
 	}
 

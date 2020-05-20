@@ -10,9 +10,13 @@ namespace Z0.Asm.Data
 	public enum LegacyFlags3 : uint 
 	{
 		OpMask = 0x0000007F,
+		
 		Op0Shift = 0x00000000,
+		
 		Op1Shift = 0x00000007,
+		
 		Op2Shift = 0x0000000E,
+		
 		Op3Shift = 0x00000015,
 	}
 }

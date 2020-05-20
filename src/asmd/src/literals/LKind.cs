@@ -9,11 +9,15 @@ namespace Z0.Asm.Data
 	public enum LKind : byte 
 	{
 		None,
-		/// <summary>.128, .256, .512</summary>
+
+		[Comment(".128, .256, .512")]
 		L128,
-		/// <summary>.L0, .L1</summary>
+
+		[Comment(".L0, .L1")]
 		L0,
-		/// <summary>.LZ</summary>
+		
+		[Comment(".LZ")]
 		LZ,
+
 	}
 }

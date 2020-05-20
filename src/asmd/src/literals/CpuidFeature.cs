@@ -10,44 +10,64 @@ namespace Z0.Asm.Data
 	{
 		[Comment("8086 or later")]
 		INTEL8086,
+		
 		[Comment("8086 only")]
 		INTEL8086_ONLY,
+		
 		[Comment("80186 or later")]
 		INTEL186,
+		
 		[Comment("80286 or later")]
 		INTEL286,
+		
 		[Comment("80286 only")]
 		INTEL286_ONLY,
+		
 		[Comment("80386 or later")]
 		INTEL386,
+		
 		[Comment("80386 only")]
 		INTEL386_ONLY,
+		
 		[Comment("80386 A0-B0 stepping only (#(c:XBTS)#, #(c:IBTS)# instructions)")]
 		INTEL386_A0_ONLY,
+		
 		[Comment("Intel486 or later")]
 		INTEL486,
+		
 		[Comment("Intel486 A stepping only (#(c:CMPXCHG)#)")]
 		INTEL486_A_ONLY,
+		
 		[Comment("80386 and Intel486 only")]
 		INTEL386_486_ONLY,
+		
 		[Comment("IA-64")]
 		IA64,
+		
 		[Comment("CPUID.80000001H:EDX.LM[bit 29]")]
 		X64,
+		
 		[Comment("CPUID.(EAX=07H, ECX=0H):EBX.ADX[bit 19]")]
 		ADX,
+		
 		[Comment("CPUID.01H:ECX.AES[bit 25]")]
 		AES,
+		
 		[Comment("CPUID.01H:ECX.AVX[bit 28]")]
 		AVX,
+		
 		[Comment("CPUID.(EAX=07H, ECX=0H):EBX.AVX2[bit 5]")]
 		AVX2,
+		
 		[Comment("CPUID.(EAX=07H, ECX=0H):EDX.AVX512_4FMAPS[bit 3]")]
 		AVX512_4FMAPS,
+		
 		[Comment("CPUID.(EAX=07H, ECX=0H):EDX.AVX512_4VNNIW[bit 2]")]
 		AVX512_4VNNIW,
+		
 		[Comment("CPUID.(EAX=07H, ECX=1H):EAX[bit 5]")]
 		AVX512_BF16,
+		
 		[Comment("CPUID.(EAX=07H, ECX=0H):ECX.AVX512_BITALG[bit 12]")]
 		AVX512_BITALG,
 		[Comment("CPUID.(EAX=07H, ECX=0H):EBX.AVX512_IFMA[bit 21]")]

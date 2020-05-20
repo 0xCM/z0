@@ -10,7 +10,9 @@ namespace Z0.Asm.Data
 	public enum EncFlags1 : uint 
 	{
 		EncodingShift = 0x00000000,
+		
 		EncodingMask = 0x00000007,
+		
 		OpCodeShift = 0x00000010,
 	}
 }

@@ -9,10 +9,15 @@ namespace Z0.Asm.Data
 	public enum VexVectorLength 
 	{
 		LZ,
+		
 		L0,
+		
 		L1,
+		
 		L128,
+		
 		L256,
+		
 		LIG,
 	}
 

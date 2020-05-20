@@ -9,7 +9,9 @@ namespace Z0.Asm.Data
 	public enum VexOpCodeTable 
 	{
 		Table0F = 1,
+		
 		Table0F38,
+		
 		Table0F3A,
 	}
 }

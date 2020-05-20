@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
+	using System;
+
 	public enum ConditionCode
     {
 		[Comment("The instruction doesn't have a condition code")]
