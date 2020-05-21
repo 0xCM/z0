@@ -24,6 +24,55 @@
 | 83 /7 ib         | CMP r/m32, imm8   | MI    | Valid       | Valid           | Compare imm8 with r/m32.                           |
 | REX.W + 83 /7 ib | CMP r/m64, imm8   | MI    | Valid       | N.E.            | Compare imm8 with r/m64.                           |
 
+# OpCodeSpecs.csv
+-----------------------------------------------------------------------------------------------------------------------------------
+| Expression     | Instruction      | M16 | M32 | M64 | CpuId | Id              |
+| 38 /r          | CMP r/m8, r8     | Y   | Y   | Y   | 8086+ | Cmp_rm8_r8      |
+| 39 /r          | CMP r/m16, r16   | Y   | Y   | Y   | 8086+ | Cmp_rm16_r16    |
+| 39 /r          | CMP r/m32, r32   | Y   | Y   | Y   | 386+  | Cmp_rm32_r32    |
+| REX.W 39 /r    | CMP r/m64, r64   | N   | N   | Y   | X64   | Cmp_rm64_r64    |
+| 3A /r          | CMP r8, r/m8     | Y   | Y   | Y   | 8086+ | Cmp_r8_rm8      |
+| 3B /r          | CMP r16, r/m16   | Y   | Y   | Y   | 8086+ | Cmp_r16_rm16    |
+| 3B /r          | CMP r32, r/m32   | Y   | Y   | Y   | 386+  | Cmp_r32_rm32    |
+| REX.W 3B /r    | CMP r64, r/m64   | N   | N   | Y   | X64   | Cmp_r64_rm64    |
+| 3C ib          | CMP AL, imm8     | Y   | Y   | Y   | 8086+ | Cmp_AL_imm8     |
+| 3D id          | CMP EAX, imm32   | Y   | Y   | Y   | 386+  | Cmp_EAX_imm32   |
+| REX.W 3D id    | CMP RAX, imm32   | N   | N   | Y   | X64   | Cmp_RAX_imm32   |
+| 3D iw          | CMP AX, imm16    | Y   | Y   | Y   | 8086+ | Cmp_AX_imm16    |
+| 80 /7 ib       | CMP r/m8, imm8   | Y   | Y   | Y   | 8086+ | Cmp_rm8_imm8    |
+| 81 /7 id       | CMP r/m32, imm32 | Y   | Y   | Y   | 386+  | Cmp_rm32_imm32  |
+| REX.W 81 /7 id | CMP r/m64, imm32 | N   | N   | Y   | X64   | Cmp_rm64_imm32  |
+| 81 /7 iw       | CMP r/m16, imm16 | Y   | Y   | Y   | 8086+ | Cmp_rm16_imm16  |
+| 82 /7 ib       | CMP r/m8, imm8   | Y   | Y   | N   | 8086+ | Cmp_rm8_imm8_82 |
+| 83 /7 ib       | CMP r/m16, imm8  | Y   | Y   | Y   | 8086+ | Cmp_rm16_imm8   |
+| 83 /7 ib       | CMP r/m32, imm8  | Y   | Y   | Y   | 386+  | Cmp_rm32_imm8   |
+| REX.W 83 /7 ib | CMP r/m64, imm8  | N   | N   | Y   | X64   | Cmp_rm64_imm8   |
+
+# OpCodeForms.csv
+-----------------------------------------------------------------------------------------------------------------------------------
+| Mnemonic | CodeBytes     | Prefix  | Table   | Group   | Op1         | Op2         | OpSize    | AddressSize   | Id               | Flags     
+| CMP      | 3c 00 00 00   |         | Normal  |         | al          | imm8        |           |               | Cmp_AL_imm8      | Mode16, Mode32, Mode64
+| CMP      | 3d 00 00 00   |         | Normal  |         | ax          | imm16       | Size16    |               | Cmp_AX_imm16     | Mode16, Mode32, Mode64
+| CMP      | 3d 00 00 00   |         | Normal  |         | eax         | imm32       | Size32    |               | Cmp_EAX_imm32    | Mode16, Mode32, Mode64
+| CMP      | 3b 00 00 00   |         | Normal  |         | r16_reg     | r16_or_mem  | Size16    |               | Cmp_r16_rm16     | Mode16, Mode32, Mode64
+| CMP      | 3b 00 00 00   |         | Normal  |         | r32_reg     | r32_or_mem  | Size32    |               | Cmp_r32_rm32     | Mode16, Mode32, Mode64
+| CMP      | 3b 00 00 00   |         | Normal  |         | r64_reg     | r64_or_mem  | Size64    |               | Cmp_r64_rm64     | Mode64    
+| CMP      | 3a 00 00 00   |         | Normal  |         | r8_reg      | r8_or_mem   |           |               | Cmp_r8_rm8       | Mode16, Mode32, Mode64
+| CMP      | 3d 00 00 00   |         | Normal  |         | rax         | imm32sex64  | Size64    |               | Cmp_RAX_imm32    | Mode64    
+| CMP      | 81 00 00 00   |         | Normal  | 7       | r16_or_mem  | imm16       | Size16    |               | Cmp_rm16_imm16   | Mode16, Mode32, Mode64
+| CMP      | 83 00 00 00   |         | Normal  | 7       | r16_or_mem  | imm8sex16   | Size16    |               | Cmp_rm16_imm8    | Mode16, Mode32, Mode64
+| CMP      | 39 00 00 00   |         | Normal  |         | r16_or_mem  | r16_reg     | Size16    |               | Cmp_rm16_r16     | Mode16, Mode32, Mode64
+| CMP      | 81 00 00 00   |         | Normal  | 7       | r32_or_mem  | imm32       | Size32    |               | Cmp_rm32_imm32   | Mode16, Mode32, Mode64
+| CMP      | 83 00 00 00   |         | Normal  | 7       | r32_or_mem  | imm8sex32   | Size32    |               | Cmp_rm32_imm8    | Mode16, Mode32, Mode64
+| CMP      | 39 00 00 00   |         | Normal  |         | r32_or_mem  | r32_reg     | Size32    |               | Cmp_rm32_r32     | Mode16, Mode32, Mode64
+| CMP      | 81 00 00 00   |         | Normal  | 7       | r64_or_mem  | imm32sex64  | Size64    |               | Cmp_rm64_imm32   | Mode64    
+| CMP      | 83 00 00 00   |         | Normal  | 7       | r64_or_mem  | imm8sex64   | Size64    |               | Cmp_rm64_imm8    | Mode64    
+| CMP      | 39 00 00 00   |         | Normal  |         | r64_or_mem  | r64_reg     | Size64    |               | Cmp_rm64_r64     | Mode64    
+| CMP      | 80 00 00 00   |         | Normal  | 7       | r8_or_mem   | imm8        |           |               | Cmp_rm8_imm8     | Mode16, Mode32, Mode64
+| CMP      | 82 00 00 00   |         | Normal  | 7       | r8_or_mem   | imm8        |           |               | Cmp_rm8_imm8_82  | Mode16, Mode32
+| CMP      | 38 00 00 00   |         | Normal  |         | r8_or_mem   | r8_reg      |           |               | Cmp_rm8_r8       | Mode16, Mode32, Mode64
+
+
 # Encoding
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Op/En | Operand 1         | Operand 2     | Operand 3 | Operand 4 |

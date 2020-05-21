@@ -12,11 +12,17 @@ namespace Z0
     public interface IHexCode
     {
         HexKind Kind {get;}        
+
+        Type Reified {get;}
     }
 
     public interface IHexCode<H> : IHexCode
         where H : unmanaged, IHexCode<H>
     {
-        
+        Type IHexCode.Reified 
+        {
+            [MethodImpl(Inline)]
+            get => typeof(H);   
+        }
     }
 }

@@ -8,11 +8,37 @@ namespace Z0.Asm.Data
     using System;
     using System.Collections.Generic;
     using System.IO;
+	using System.Linq;
     using SG = System.Globalization;
+
+	using static Memories;
 
 	static class MemoryDecoderTestParser 
     {
-		public static IEnumerable<DecoderMemoryTestCase> ReadFile(int bitness, string filename) {
+		public static DecoderMemoryTestCase[] Parse<N>(N n, FilePath src)
+			where N : unmanaged, ITypeNat
+		{
+			if(typeof(N) == typeof(N16))
+				return Parse(n16, src);
+			else if(typeof(N) == typeof(N32))
+				return Parse(n32, src);
+			else if(typeof(N) == typeof(N64))
+				return Parse(n64, src);
+			else
+				throw Unsupported.define<N>();
+		}
+
+		static DecoderMemoryTestCase[] Parse(N16 n, FilePath src) 
+			=> ReadFile(n,src.Name).ToArray();
+		
+		static DecoderMemoryTestCase[] Parse(N32 n, FilePath src) 
+			=> ReadFile(n,src.Name).ToArray();
+			
+		static DecoderMemoryTestCase[] Parse(N64 n, FilePath src) 
+			=> ReadFile(n,src.Name).ToArray();
+
+		public static IEnumerable<DecoderMemoryTestCase> ReadFile(int bitness, string filename) 
+		{
 			int lineNumber = 0;
 			foreach (var line in File.ReadLines(filename)) {
 				lineNumber++;

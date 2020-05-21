@@ -40,7 +40,7 @@ namespace Z0.Asm.Data
         public D Discriminator {get;}                
     }
 
-    public enum DecoderTestKind : byte
+    public enum TestCaseBits : byte
     {
         None = 0,
 
@@ -68,25 +68,46 @@ namespace Z0.Asm.Data
             public static OperandCounts Model => default(OperandCounts);
         }
 
-        public readonly struct DecoderTests16 : IAsmDataModel<DecoderTests16,DecoderTestKind>
+        public readonly struct DecoderTests16 : IAsmDataModel<DecoderTests16,TestCaseBits>
         {
-            public DecoderTestKind Discriminator => DecoderTestKind.Bit16;
+            public TestCaseBits Discriminator => TestCaseBits.Bit16;
 
             public static DecoderTests Model => default(DecoderTests);
         }
 
-        public readonly struct DecoderTests32 : IAsmDataModel<DecoderTests32,DecoderTestKind>
+        public readonly struct DecoderTests32 : IAsmDataModel<DecoderTests32,TestCaseBits>
         {
-            public DecoderTestKind Discriminator => DecoderTestKind.Bit32;
+            public TestCaseBits Discriminator => TestCaseBits.Bit32;
 
             public static DecoderTests Model => default(DecoderTests);
         }
 
-        public readonly struct DecoderTests64 : IAsmDataModel<DecoderTests64,DecoderTestKind>
+        public readonly struct DecoderTests64 : IAsmDataModel<DecoderTests64,TestCaseBits>
         {
-            public DecoderTestKind Discriminator => DecoderTestKind.Bit64;
+            public TestCaseBits Discriminator => TestCaseBits.Bit64;
 
             public static DecoderTests Model => default(DecoderTests);
+        }
+
+        public readonly struct MemoryTests16 : IAsmDataModel<MemoryTests16,TestCaseBits>
+        {
+            public TestCaseBits Discriminator => TestCaseBits.Bit16;
+
+            public static MemoryTests Model => default(MemoryTests);
+        }
+
+        public readonly struct MemoryTests32 : IAsmDataModel<MemoryTests32,TestCaseBits>
+        {
+            public TestCaseBits Discriminator => TestCaseBits.Bit32;
+
+            public static MemoryTests Model => default(MemoryTests);
+        }
+
+        public readonly struct MemoryTests64 : IAsmDataModel<MemoryTests64,TestCaseBits>
+        {
+            public TestCaseBits Discriminator => TestCaseBits.Bit64;
+
+            public static MemoryTests Model => default(MemoryTests);
         }
 
         public readonly struct DecoderTests : IAsmDataModel<DecoderTests>
@@ -100,6 +121,19 @@ namespace Z0.Asm.Data
             public static DecoderTests64 Model64 => default(DecoderTests64);
 
         }
+
+        public readonly struct MemoryTests : IAsmDataModel<MemoryTests>
+        {
+            public static MemoryTests Model => default(MemoryTests);            
+
+            public static MemoryTests16 Model16 => default(MemoryTests16);
+
+            public static MemoryTests32 Model32 => default(MemoryTests32);
+
+            public static MemoryTests64 Model64 => default(MemoryTests64);
+
+        }
+
 
         public readonly struct OpCodeSpecs : IAsmDataModel<OpCodeSpecs>
         {

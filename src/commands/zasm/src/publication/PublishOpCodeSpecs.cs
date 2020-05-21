@@ -18,9 +18,8 @@ namespace Z0.Asm.Data
         {
             var delimiter = Chars.Pipe;
             var specs = OpCodeInfoParser.ParseOpCodeInfo(Config.OpCodeInfoPath);
-            var sorted = (from item in specs
-                          let id = item.Id.ToString()
-                          orderby id
+            var sorted = (from item in specs                          
+                          orderby item.OrderBy
                           select item).ToArray();
             
             var dst = Control.alloc<OpCodeSpec>(sorted.Length);
@@ -33,7 +32,9 @@ namespace Z0.Asm.Data
                     Mnemonic: src.Mnemonic, 
                     Instruction: src.Instruction, 
                     Expression: src.Expression, 
-                    Modes: src.Modes, 
+                    M16: src.Mode16 ? YeaOrNea.Y : YeaOrNea.N,
+                    M32: src.Mode32 ? YeaOrNea.Y : YeaOrNea.N,
+                    M64: src.Mode64 ? YeaOrNea.Y : YeaOrNea.N,
                     CpuId: src.CpuId
                     );
             }
@@ -60,7 +61,9 @@ namespace Z0.Asm.Data
                 sb.AppendField(F.Mnemonic, spec.Mnemonic, delimiter);
                 sb.AppendField(F.Expression, spec.Expression, delimiter);
                 sb.AppendField(F.Instruction, spec.Instruction, delimiter);
-                sb.AppendField(F.Modes, spec.Modes, delimiter);
+                sb.AppendField(F.M16, spec.M16, delimiter);
+                sb.AppendField(F.M32, spec.M32, delimiter);
+                sb.AppendField(F.M64, spec.M64, delimiter);
                 sb.AppendField(F.CpuId,  spec.CpuId, delimiter);
                 sb.AppendField(F.Id, spec.Id, delimiter);
                 writer.WriteLine(sb.ToString());                

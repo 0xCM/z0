@@ -19,23 +19,25 @@ namespace Z0.Asm.Data
 			return codeId;
 		}
 
-		public static OpCodeInfoParsed Define(Code id, string instruction, string expression, string modes, string cpuid)
+		public static OpCodeInfoParsed Define(Code id, string instruction, string expression, byte[] modes, string cpuid)
 		{
 			return new OpCodeInfoParsed(id, instruction, expression, modes, cpuid);
 		}
 
-		public OpCodeInfoParsed(Code id, string instruction, string expression, string modes, string cpuid)
+		public OpCodeInfoParsed(Code id, string instruction, string expression,  byte[] modes, string cpuid)
 		{
 			var idx = instruction.IndexOf(' ');
 			if(idx != -1)
 				Mnemonic = instruction.Substring(0,idx);
 			else
 				Mnemonic = instruction;
-			this.Id = id;
-			this.Instruction = instruction;
-			this.Expression = expression;
-			this.Modes = modes;
-			this.CpuId = cpuid;
+			Id = id;
+			Instruction = instruction;
+			Expression = expression;
+			Mode16 = modes.Any(m => m == 16);
+			Mode32 = modes.Any(m => m == 32);
+			Mode64 = modes.Any(m => m == 64);
+			CpuId = cpuid;
 
 		}
 		
@@ -47,7 +49,37 @@ namespace Z0.Asm.Data
 
 		public readonly string Expression;
 
-		public readonly string Modes;
+        public static YeaOrNea yn(bool src) 
+            => src ? YeaOrNea.Y : YeaOrNea.N;
+
+        public YeaOrNea RexW => yn(Expression.Contains("REX.W"));
+
+        string NoRex => Expression.Replace("REX.W ",string.Empty);
+
+        public string OrderBy => $"{Mnemonic}{NoRex}{RexW}";
+
+		public string Modes 
+		{
+			get
+			{
+				var modes = new List<string>();
+				if(Mode16)
+					modes.Add("16");
+				if(Mode32)
+					modes.Add("32");
+				if(Mode64)
+					modes.Add("64");
+				var s = string.Join('/',modes);
+				s += "-bit";
+				return s;							
+			}
+		}
+
+		public readonly bool Mode16;
+
+		public readonly bool Mode32;
+
+		public readonly bool Mode64;
 
 		public readonly string CpuId;
 
@@ -106,7 +138,7 @@ namespace Z0.Asm.Data
 				if(id != 0)
 				{
 					var ocs = CleanOpCode(opCodeStr);
-					var modes = GetMode(toOpCodeInfo[name]);
+					var modes = OpCodeInfo.GetModes(toOpCodeInfo[name]);
 					var cpuid = GetCpuid(toInstrInfo[name]);
 					var spec = OpCodeInfoParsed.Define(id, instructionStr, ocs, modes, cpuid);				
 					specs.Add(spec);
@@ -155,6 +187,7 @@ namespace Z0.Asm.Data
 				CpuidFeature.SSE4_2 => "SSE4.2",
 				_ => c.RawName,
 			};
+
 
 		static string GetMode(OpCodeInfo opCode) 
 		{

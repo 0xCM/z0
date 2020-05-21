@@ -29,11 +29,19 @@ namespace Z0.Asm.Data
 
         OpCode = 30,
 
+        OpCodeBytes = 16,
+
+        Operand = 20,
+
         DataWidth = 26,
 
         OpKind = 12,
 
         Enc = 26,
+
+        Address64 = 16,
+
+        YeaOrNea = 8,
 
         /// <summary>
         /// The width of a field containing an 8-bit decimal number
@@ -54,5 +62,7 @@ namespace Z0.Asm.Data
         /// The width of a field containing a boolean indicator [T/F, Y/N, 0/1, ..] that has a large label
         /// </summary>
         BoolLarge = 14,
+
+        CpuId = 10,
     }
 }

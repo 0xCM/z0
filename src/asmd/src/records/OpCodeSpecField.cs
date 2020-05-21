@@ -7,17 +7,31 @@ namespace Z0.Asm.Data
     using System;
 
     using I = OpCodeSpecFieldId;
-    using W = OpCodeSpecFieldWidth;
     using RW = AsmFieldWidths;
+    using DF = AsmDataField;
 
     public enum OpCodeSpecFieldId
     {
-        Sequence, Mnemonic,  Expression, Instruction, Modes,  CpuId,  Id, 
-    }
+        [FieldSynonym(DF.Sequence)]
+        Sequence, 
+        
+        [FieldSynonym(DF.Mnemonic)]
+        Mnemonic,  
+        
+        Expression, 
+        
+        Instruction, 
+        
+        M16,
 
-    public enum OpCodeSpecFieldWidth
-    {
-        Expression = RW.OpCode, Modes = 16,  CpuId = 10, 
+        M32,
+
+        M64,
+        
+        CpuId,
+        
+        [FieldSynonym(DF.OpCodeId)]
+        Id,
     }
 
     public enum OpCodeSpecField
@@ -26,13 +40,17 @@ namespace Z0.Asm.Data
 
         Mnemonic = I.Mnemonic | (RW.Mnemonic << RW.Offset), 
         
-        Expression = I.Expression | (W.Expression << RW.Offset),  
+        Expression = I.Expression | (RW.OpCode << RW.Offset),  
         
         Instruction = I.Instruction | (RW.Instruction << RW.Offset), 
         
-        Modes = I.Modes | (W.Modes << RW.Offset),  
+        M16 = I.M16 | RW.YeaOrNea << RW.Offset,
         
-        CpuId = I.CpuId | (W.CpuId << RW.Offset),                 
+        M32 = I.M32 | RW.YeaOrNea << RW.Offset,
+        
+        M64 = I.M64 | RW.YeaOrNea << RW.Offset,
+
+        CpuId = I.CpuId | (RW.CpuId << RW.Offset),                 
 
         Id = I.Id | (RW.Id << RW.Offset), 
         

@@ -169,6 +169,19 @@ namespace Z0
         
         Between,
 
+        EqB,
+        
+        NeqB,
+
+        
+        LtB,
+
+        LtEqB,
+
+        GtB,
+
+        GtEqB,
+
         Within,
 
         Max,

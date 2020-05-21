@@ -52,9 +52,7 @@ namespace Z0.Asm.Data
             dp.PublishList(LL.MemorySizes, nameof(LL.MemorySizes));
             dp.PublishList(LL.Registers, nameof(LL.Registers));
 
-            Publish(OperandCounts.Model);
-
-                        
+            Publish(OperandCounts.Model);                        
             Publish(AsmEtl.Instructions);
         }
     }

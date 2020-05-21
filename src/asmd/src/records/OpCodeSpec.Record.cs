@@ -9,11 +9,19 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
-    public readonly struct OpCodeSpec
+    using F = OpCodeSpecField;
+    using R = OpCodeSpec;
+
+    public readonly struct OpCodeSpec : IRecord<F,R>
     {           
         public static OpCodeSpec Empty 
-            => new OpCodeSpec(0,OpCodeId.INVALID, nameof(OpCodeId.INVALID), string.Empty, string.Empty,string.Empty,string.Empty);
+            => new OpCodeSpec(0,OpCodeId.INVALID, nameof(OpCodeId.INVALID), string.Empty, string.Empty, 
+                YeaOrNea.N, YeaOrNea.N,YeaOrNea.N,string.Empty);
         
+        [MethodImpl(Inline)]
+        public static YeaOrNea yn(bool src) 
+            => src ? YeaOrNea.Y : YeaOrNea.N;
+
         public int Sequence {get;}
         
         public readonly OpCodeId Id;
@@ -24,19 +32,34 @@ namespace Z0.Asm.Data
 
 		public readonly string Expression;
 
-		public readonly string Modes;
+		public readonly YeaOrNea M16;
 
+		public readonly YeaOrNea M32;
+
+		public readonly YeaOrNea M64;
+        
 		public readonly string CpuId;
 
+        public YeaOrNea RexW => yn(Expression.Contains("REX.W"));
+
+        public YeaOrNea Vex => yn(Expression.StartsWith("VEX."));
+
+        public YeaOrNea Xop => yn(Expression.StartsWith("XOP."));
+
+        public YeaOrNea Evex => yn(Expression.StartsWith("EVEX."));
+
+
         [MethodImpl(Inline)]
-        public OpCodeSpec(int Sequence, OpCodeId Id, string Mnemonic, string Instruction, string Expression, string Modes, string CpuId)
+        public OpCodeSpec(int Sequence, OpCodeId Id, string Mnemonic, string Instruction, string Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, string CpuId)
         {
             this.Sequence = Sequence;
             this.Id = Id;
             this.Mnemonic = Mnemonic;
             this.Instruction = Instruction;
             this.Expression = Expression;
-            this.Modes = Modes;
+            this.M16 = M16;
+            this.M32 = M32;
+            this.M64 = M64;
             this.CpuId = CpuId;
         }
 

@@ -27,7 +27,7 @@ namespace Z0.Asm.Data
         [Comment("(EVEX) true if the instruction supports zeroing masking (if one of the opmask registers k1-k7 is used)")]
         CanUseZeroingMasking,
 
-        [Comment("Gets the opcode table")]
+        [Comment("The opcode table")]
         Table,
 
         [Comment("true if it's part of a group")]

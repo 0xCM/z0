@@ -22,9 +22,9 @@ namespace Z0.Asm.Data
 
         public IEnumerable<Publication<DecoderTestRecord>> Publish(M.DecoderTests model, OpCodeSpecs codes)
         {
-            yield return Publish(M.DecoderTests.Model16,codes);
-            yield return Publish(M.DecoderTests.Model32,codes);
-            yield return Publish(M.DecoderTests.Model64,codes);
+            yield return Publish(M.DecoderTests.Model16, codes);
+            yield return Publish(M.DecoderTests.Model32, codes);
+            yield return Publish(M.DecoderTests.Model64, codes);
         }
 
         Publication<DecoderTestRecord> Publish(M.DecoderTests16 model, OpCodeSpecs codes)
@@ -47,7 +47,7 @@ namespace Z0.Asm.Data
 
         IEnumerable<DecoderTestCase> ParseDecoderTests(int bitness)
         {
-            foreach(var file in Config.IcedDecoderTests)
+            foreach(var file in Config.DecoderTests)
             {                
                 if(file.Contains(bitness.ToString()))
                 {

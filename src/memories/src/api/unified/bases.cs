@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Seed;
 
     partial class Memories
     {
-
         /// <summary>
         /// Species the base2 singleton representative
         /// </summary>

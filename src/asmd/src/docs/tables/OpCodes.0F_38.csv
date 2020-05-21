@@ -1,0 +1,8 @@
+| Prefix | Opcode | x0h      | x1h        | x2h      | x3h      | x4h       | x5h      | x6h    | x7h     |
+| 0h     | 0xh    | PSHUFB   | PHADDW     | PHADDD   | PHADDSW  | PMADDUBSW | PHSUBW   | PHSUBD | PHSUBSW |
+| 66h    | 0xh    | PSHUFB   | PHADDW     | PHADDD   | PHADDSW  | PMADDUBSW | PHSUBW   | PHSUBD | PHSUBSW |
+| 66h    | 1xh    | PBLENDVB |            |          |          | BLENDVPS  | BLENDVPD |        | PTEST   |
+| 66h    | 2xh    | PMOVSXBW | PMOVSXBD   | PMOVSXBQ | PMOVSXWD | PMOVSXWQ  | PMOVSXDQ |        |         |
+| 66h    | 3xh    | PMOVZXBW | PMOVZXBD   | PMOVZXBQ | PMOVZXWD | PMOVZXWQ  | PMOVZXDQ |        | PCMPGTQ |
+| 66h    | 4xh    | PMULLD   | PHMINPOSUW |          |          |           |          |        |         |
+

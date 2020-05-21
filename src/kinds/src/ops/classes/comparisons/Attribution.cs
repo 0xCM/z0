@@ -38,4 +38,18 @@ namespace Z0
     public sealed class PositiveAttribute : A { public PositiveAttribute () : base(K.Positive) {} }
 
     public sealed class NonzAttribute : A { public NonzAttribute () : base(K.Nonz) {} }
+
+    public sealed class EqBAttribute : A { public EqBAttribute() : base(K.EqB) {} }
+
+    public sealed class NeqBAttribute : A { public NeqBAttribute() : base(K.NeqB) {} }
+
+    public sealed class LtBAttribute : A { public LtBAttribute() : base(K.LtB) {} }
+
+    public sealed class LtEqBAttribute : A { public LtEqBAttribute() : base(K.LtEqB) {} }
+
+    public sealed class GtBAttribute : A { public GtBAttribute() : base(K.GtB) {} }
+
+    public sealed class GtEqBAttribute : A { public GtEqBAttribute() : base(K.GtEqB) {} }
+
+
 }

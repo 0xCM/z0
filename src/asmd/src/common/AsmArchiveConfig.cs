@@ -42,8 +42,11 @@ namespace Z0.Asm.Data
         FolderPath IcedTestCaseDir
             => IcedSources + FolderName.Define("testcases");
 
-        IEnumerable<FilePath> IcedDecoderTests
-            =>  (IcedTestCaseDir + FolderName.Define("decoder")).Files(FileExtensions.Txt);
+        IEnumerable<FilePath> DecoderTests
+            =>  (IcedTestCaseDir + FolderName.Define("decoder")).Files(FileExtensions.Txt).Where(f => f.FileName.StartsWith("DecoderTest"));
+
+        IEnumerable<FilePath> MemoryTests
+            =>  (IcedTestCaseDir + FolderName.Define("decoder")).Files(FileExtensions.Txt).Where(f => f.FileName.StartsWith("MemoryTest"));
 
         FolderName StageFolder 
             => FolderName.Define("extracts");

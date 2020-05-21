@@ -25,6 +25,8 @@ namespace Z0
 
         readonly T Data;
 
+        public Type Reified => typeof(T);
+
         [MethodImpl(Inline)]
         public static implicit operator HexKindValue<T>((HexKind k, T value) src)
             => new HexKindValue<T>(src.k, src.value);

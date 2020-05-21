@@ -8,7 +8,6 @@ namespace Z0.Asm.Data
 
     using R = OpCodeFormRecord;
     using F = OpCodeFormField;
-    using Asm = Asm.Data;
 
     using Asm.Data;
 
@@ -24,38 +23,38 @@ namespace Z0.Asm.Data
 
         public readonly BinaryCode CodeBytes;
 
-        public readonly Asm.MandatoryPrefix Prefix;
+        public readonly MandatoryPrefix Prefix;
         
-        public readonly Asm.OpCodeTableKind Table;
+        public readonly OpCodeTableKind Table;
 
         public readonly int Group;
-		
-        public readonly Asm.OpCodeOperandKind Op1;
+		        
+        public readonly OpCodeOperandKind Op1;
 
-        public readonly Asm.OpCodeOperandKind Op2;
+        public readonly OpCodeOperandKind Op2;
 
-        public readonly Asm.OpCodeOperandKind Op3;
+        public readonly OpCodeOperandKind Op3;
 
-        public readonly Asm.OpCodeOperandKind Op4;
+        public readonly OpCodeOperandKind Op4;
 
-        public readonly Asm.OperandSize OpSize;
+        public readonly OperandSize OpSize;
 
-        public readonly Asm.AddressSize AddressSize;
+        public readonly AddressSize AddressSize;
 
-        public readonly Asm.OpCodeFlags Flags;
+        public readonly OpCodeFlags Flags;
 
         public OpCodeFormRecord(            
             int Sequence,
             OpCodeId Id, 
             string Mnemonic,
             BinaryCode CodeBytes, 
-            Asm.MandatoryPrefix MandatoryPrefix,
-            Asm.OpCodeTableKind TableKind,
+            MandatoryPrefix MandatoryPrefix,
+            OpCodeTableKind TableKind,
             int GroupIndex,
-            Asm.OpCodeFlags Flags,
-            Asm.OperandSize OpSize,
-            Asm.AddressSize AddressSize,
-            params Asm.OpCodeOperandKind[] Operands
+            OpCodeFlags Flags,
+            OperandSize OpSize,
+            AddressSize AddressSize,
+            params OpCodeOperandKind[] Operands
             )
         {
             this.Sequence = Sequence;

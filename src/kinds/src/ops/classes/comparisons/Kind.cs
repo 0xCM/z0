@@ -65,5 +65,17 @@ namespace Z0
         Positive = Id.Positive,
 
         Nonz = Id.Nonz,        
+
+        EqB = Id.EqB,
+
+        NeqB = Id.NeqB,
+
+        LtB = Id.LtB,
+
+        LtEqB = Id.LtEqB,
+
+        GtB = Id.GtB,
+
+        GtEqB = Id.GtEqB,
     }    
 }

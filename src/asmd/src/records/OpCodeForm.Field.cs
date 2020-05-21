@@ -9,23 +9,62 @@ namespace Z0.Asm.Data
     using I = OpCodeFormId;
     using W = OpCodeFormWidth;
     using RW = AsmFieldWidths;
+    using DF = AsmDataField;
 
+    /*
+        GroupIndex = (sbyte)((dword2 & (uint)LegacyFlags.HasGroupIndex) == 0 ? -1 : (int)((dword2 >> (int)LegacyFlags.GroupShift) & 7));
+        Flags: 
+            HasGroupIndex = 0x00000040,
+		    GroupShift = 0x00000007
+	
+    */
     public enum OpCodeFormId : int
     {
-        Sequence, Mnemonic, CodeBytes, Prefix, Table, Group,  
-
-        Op1,    Op2,    Op3,    Op4,    
+        Sequence, 
         
-        OpSize, AddressSize, Id,  Flags,  
+        Mnemonic, 
+        
+        [Comment("")]
+        CodeBytes, 
+        
+        [Comment("")]
+        Prefix, 
+        
+        [Comment("Gets the opcode table")]
+        Table, 
+        
+        [Comment("Group index (0-7) or -1. If it's 0-7, it's stored in the reg field of the modrm byte.")]
+        Group,  
+
+        [Comment("")]
+        Op1, 
+
+        [Comment("")]
+        Op2,    
+
+        [Comment("")]
+        Op3,  
+
+        [Comment("")]
+        Op4,    
+        
+        [Comment("")]
+        OpSize, 
+        
+        [Comment("")]
+        AddressSize, 
+        
+        Id,  
+        
+        [Comment("")]
+        Flags,  
     }
 
     public enum OpCodeFormWidth : int
     {
-        Mnemonic = 16, CodeBytes = 16, Prefix = 8, Table = 8, Group = 8,    
+        Prefix = 8, Table = 8, Group = 8,            
         
-        Op1 = 20, Op2 = 20, Op3 = 20, Op4 = 20,
-        
-        OpSize = 10,  AddressSize = 14, Flags = 10,                  
+        OpSize = 10,  Flags = 10,                  
     }
 
     public enum OpCodeFormField : int
@@ -34,7 +73,7 @@ namespace Z0.Asm.Data
 
         Mnemonic = I.Mnemonic | RW.Mnemonic << RW.Offset,
         
-        CodeBytes = I.CodeBytes | W.CodeBytes << RW.Offset,
+        CodeBytes = I.CodeBytes | RW.OpCodeBytes << RW.Offset,
 
         Prefix = I.Prefix | W.Prefix << RW.Offset,
 
@@ -42,17 +81,17 @@ namespace Z0.Asm.Data
 
         Group = I.Group | W.Group << RW.Offset,
 
-        Op1 = I.Op1 | W.Op1 << RW.Offset,
+        Op1 = I.Op1 | RW.Operand << RW.Offset,
 
-        Op2 = I.Op2 | W.Op2 << RW.Offset,
+        Op2 = I.Op2 | RW.Operand << RW.Offset,
 
-        Op3 = I.Op3 | W.Op3 << RW.Offset,
+        Op3 = I.Op3 | RW.Operand << RW.Offset,
 
-        Op4 = I.Op4 | W.Op4 << RW.Offset,
+        Op4 = I.Op4 | RW.Operand << RW.Offset,
 
         OpSize = I.OpSize | W.OpSize << RW.Offset,
 
-        AddressSize = I.AddressSize | W.AddressSize << RW.Offset,
+        AddressSize = I.AddressSize | RW.Address64 << RW.Offset,
 
         Id = I.Id | RW.Id << RW.Offset,
         

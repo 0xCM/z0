@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
-    using static ConditionCodeBits;
+    using static JccCode;
     using static HexKind;
 
     public enum JCC : byte

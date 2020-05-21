@@ -1,0 +1,28 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{        
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
+    /// <summary>
+    /// A binary choice, symbolically
+    /// </summary>
+    public enum YeaOrNea : ushort
+    {
+        /// <summary>
+        /// Aye
+        /// </summary>
+        Y = Letters.Y,
+
+        /// <summary>
+        /// ~Aye
+        /// </summary>
+        N = Letters.N,
+    }
+
+}
