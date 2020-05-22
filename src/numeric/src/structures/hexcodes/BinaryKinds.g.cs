@@ -64,7 +64,7 @@ namespace Z0
             }
         }
 
-        protected override string Apply()
+        public override string Generate()
         {
             var dst = text.build();
             dst.Append(FileHeader);

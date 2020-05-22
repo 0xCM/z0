@@ -12,6 +12,7 @@ namespace Z0.Asm
     using static Memories;
     using static HexCodes;
 
+    [ApiHost]
     public struct HexMachine0F
     {
         Vector128<byte> State;

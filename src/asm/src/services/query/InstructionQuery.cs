@@ -82,7 +82,7 @@ namespace Z0.Asm
 
         [Op]
 		public OpKind OperandKind<T>(T src, int operand) 
-            where T : IInstruction
+            where T : IInstructionInfo
         {
 			switch (operand) {
 			case 0: return src.Op0Kind;
@@ -96,7 +96,7 @@ namespace Z0.Asm
 		}   
 
         public OpKind[] OperandKinds<T>(T src)
-            where T : IInstruction
+            where T : IInstructionInfo
         {
             var count = src.OpCount;
             var dst = new OpKind[src.OpCount];

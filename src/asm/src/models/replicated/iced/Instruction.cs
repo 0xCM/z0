@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    public class Instruction : IInstruction
+    public class Instruction : IInstructionInfo
     {
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()

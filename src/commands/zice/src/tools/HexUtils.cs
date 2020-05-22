@@ -5,9 +5,11 @@
 namespace Z0.Asm.Data 
 {
     using System;
-
+	using System.Runtime.CompilerServices;
+	
     public static class HexUtils 
     {
+
 		public static byte[] ToByteArray(string hexData) {
 			if (hexData is null)
 				throw new ArgumentNullException(nameof(hexData));

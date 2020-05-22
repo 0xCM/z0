@@ -10,6 +10,8 @@ namespace Z0
     {
         public static FileExtension Csv => FileExtension.Define("csv", "Structured text");
 
+        public static FileExtension Cs => FileExtension.Define("cs", "CSharp source text");
+
         public static FileExtension Asm =>  FileExtension.Define("asm", "Formatted x86 assembly");
 
         public static FileExtension Dll =>  FileExtension.Define("dll", "Application library");

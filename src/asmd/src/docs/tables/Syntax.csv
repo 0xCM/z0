@@ -217,4 +217,13 @@
 | tttn   | 4         | For conditional instructions, specifies a condition asserted or negated (see Table B-12)   |
 | d      | 1         | Specifies direction of data operation (see Table B-11)1                                    |
 
-
+# EFLAGS X-REF Ledger | Table A-2 Intel Vol1
+-------------------------------------------------------------------------------------
+| Symbol | Meaning                                                                  |
+| T      | Instruction tests flag.                                                  |
+| M      | Instruction modifies flag (either sets or resets depending on operands). |
+| 0      | Instruction resets flag.                                                 |
+| 1      | Instruction sets flag.                                                   |
+| _      | Instruction's effect on flag is undefined.                               |
+| R      | Instruction restores prior value of flag.                                |
+| Blank  | Instruction does not affect flag.                                        |

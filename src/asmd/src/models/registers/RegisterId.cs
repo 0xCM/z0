@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
 
     using K = RegisterKind;
     using W = RegisterWidth;
-    using I = RegisterIndex;
+    using I = RegisterSlot;
 
     enum RegisterId : ulong
     {        

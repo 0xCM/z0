@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct LocatedInstruction : IInstruction<Instruction>
+    public readonly struct LocatedInstruction : IInstructionInfo<Instruction>
     {
         public UriCode Encoded {get;}
 

@@ -25,7 +25,7 @@ namespace Z0
     {
         readonly T[] Data;
 
-        public static readonly IndexedSeq<T> Empty = default;
+        public static IndexedSeq<T> Empty => new IndexedSeq<T>(Control.array<T>());
 
         /// <summary>
         /// Implicitly constructs a sequence from an array

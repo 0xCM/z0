@@ -2,172 +2,201 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
 
-    using static Pow2Kind32;
+    using static Pow2Kind;
 
-    public enum RegisterSlot : byte
+    [Flags]
+    public enum RegisterSlot : ulong
     {
         /// <summary>
-        /// Slot 0
+        /// Classifies no register index, nor anything else
         ///</summary>
-        S00 = (byte)(Max1 & ~Max1),
+        None = 0,
 
         /// <summary>
-        /// Slot 1
+        /// Classifies a register that has been assigned index slot 0
         ///</summary>
-        S01 = (byte)Max1,
+        IX0 = T10 << 0,
 
         /// <summary>
-        /// Slot 2
+        /// Classifies a register that has been assigned index slot 1
         ///</summary>
-        S02 = (byte)(Max2 & ~S01),
+        IX1 = IX0 << 1,
 
         /// <summary>
-        /// Slot 3
+        /// Classifies a register that has been assigned index slot 2
         ///</summary>
-        S03 = (byte)Max2,
+        IX2 = IX0 << 2,
 
         /// <summary>
-        /// Slot 4
+        /// Classifies a register that has been assigned index slot 3
         ///</summary>
-        S04 = (byte)(Max3 & ~S03),
+        IX3 = IX0 << 3,
 
         /// <summary>
-        /// Slot 5
+        /// Classifies a register that has been assigned index slot 4
         ///</summary>
-        S05 = (byte)(Max3 & ~S02),
+        IX4 = IX0 << 4,
 
         /// <summary>
-        /// Slot 6
+        /// Classifies a register that has been assigned index slot 5
         ///</summary>
-        S06 = (byte)(Max3 & ~S01),
-        
-        /// <summary>
-        /// Slot 7
-        ///</summary>
-        S07 = (byte)Max3,
+        IX5 = IX0 << 5,
 
         /// <summary>
-        /// Slot 8
+        /// Classifies a register that has been assigned index slot 6
         ///</summary>
-        S08 = (byte)(Max4 & ~S07),
+        IX6 = IX0 << 6,
 
         /// <summary>
-        /// Slot 9
+        /// Classifies a register that has been assigned index slot 7
         ///</summary>
-        S09 = (byte)(Max4 & ~S06),
+        IX7 = IX0 << 7,
 
         /// <summary>
-        /// Slot 10
+        /// Classifies a register that has been assigned index slot 8
         ///</summary>
-        S10 = (byte)(Max4 & ~S05),
+        IX8 = IX0 << 8,
 
         /// <summary>
-        /// Slot 11
+        /// Classifies a register that has been assigned index slot 9
         ///</summary>
-        S11 = (byte)(Max4 & ~S04),
+        IX9 = IX0 << 9,
 
         /// <summary>
-        /// Slot 12
+        /// Classifies a register that has been assigned index slot 10
         ///</summary>
-        S12 = (byte)(Max4 & ~S03),
+        IX10 = IX0 << 10,
 
         /// <summary>
-        /// Slot 13
+        /// Classifies a register that has been assigned index slot 11
         ///</summary>
-        S13 = (byte)(Max4 & ~S02),
+        IX11 = IX0 << 11,
 
         /// <summary>
-        /// Slot 14
+        /// Classifies a register that has been assigned index slot 12
         ///</summary>
-        S14 = (byte)(Max4 & ~S01),
+        IX12 = IX0 << 12,
 
         /// <summary>
-        /// Slot 15
+        /// Classifies a register that has been assigned index slot 13
         ///</summary>
-        S15 = (byte)Max4,
+        IX13 = IX0 << 13,
 
         /// <summary>
-        /// Slot 16
+        /// Classifies a register that has been assigned index slot 14
         ///</summary>
-        S16 = (byte)(Max5 & ~S15),
+        IX14 = IX0 << 14,
 
         /// <summary>
-        /// Slot 17
+        /// Classifies a register that has been assigned index slot 15
         ///</summary>
-        S17 = (byte)(Max5 & ~S14),
+        IX15 = IX0 << 15,
 
         /// <summary>
-        /// Slot 18
+        /// Classifies a register that has been assigned index slot 16
         ///</summary>
-        S18 = (byte)(Max5 & ~S13),
+        IX16 = IX0 << 16,
 
         /// <summary>
-        /// Slot 19
+        /// Classifies a register that has been assigned index slot 17
         ///</summary>
-        S19 = (byte)(Max5 & ~S12),
+        IX17 = IX0 << 17,
 
         /// <summary>
-        /// Slot 20
+        /// Classifies a register that has been assigned index slot 18
         ///</summary>
-        S20 = (byte)(Max5 & ~S11),
+        IX18 = IX0 << 18,
 
         /// <summary>
-        /// Slot 21
+        /// Classifies a register that has been assigned index slot 19
         ///</summary>
-        S21 = (byte)(Max5 & ~S10),
+        IX19 = IX0 << 19,
 
         /// <summary>
-        /// Slot 22
+        /// Classifies a register that has been assigned index slot 20
         ///</summary>
-        S22 = (byte)(Max5 & ~S09),
+        IX20 = IX0 << 20,
 
         /// <summary>
-        /// Slot 23
+        /// Classifies a register that has been assigned index slot 21
         ///</summary>
-        S23 = (byte)(Max5 & ~S08),
+        IX21 = IX0 << 21,
 
         /// <summary>
-        /// Slot 24
+        /// Classifies a register that has been assigned index slot 22
         ///</summary>
-        S24 = (byte)(Max5 & ~S07),
+        IX22 = IX0 << 22,
 
         /// <summary>
-        /// Slot 25
+        /// Classifies a register that has been assigned index slot 23
         ///</summary>
-        S25 = (byte)(Max5 & ~S06),
+        IX23 = IX0 << 23,
 
         /// <summary>
-        /// Slot 26
+        /// Classifies a register that has been assigned index slot 24
         ///</summary>
-        S26 = (byte)(Max5 & ~S05),
+        IX24 = IX0 << 24,
 
         /// <summary>
-        /// Slot 27
+        /// Classifies a register that has been assigned index slot 25
         ///</summary>
-        S27 = (byte)(Max5 & ~S04),
+        IX25 = IX0 << 25,
 
         /// <summary>
-        /// Slot 28
+        /// Classifies a register that has been assigned index slot 26
         ///</summary>
-        S28 = (byte)(Max5 & ~S03),
+        IX26 = IX0 << 26,
 
         /// <summary>
-        /// Slot 29
+        /// Classifies a register that has been assigned index slot 27
         ///</summary>
-        S29 = (byte)(Max5 & ~S02),
+        IX27 = IX0 << 27,
 
         /// <summary>
-        /// Slot 30
+        /// Classifies a register that has been assigned index slot 28
         ///</summary>
-        S30 = (byte)(Max5 & ~S01),
+        IX28 = IX0 << 28,
 
         /// <summary>
-        /// Slot 31
+        /// Classifies a register that has been assigned index slot 29
         ///</summary>
-        S31 = (byte)(Max5 & ~S00),       
+        IX29 = IX0 << 29,
+
+        /// <summary>
+        /// Classifies a register that has been assigned index slot 30
+        ///</summary>
+        IX30 = IX0 << 30,
+
+        /// <summary>
+        /// Classifies a register that has been assigned index slot 31
+        ///</summary>
+        IX31 = IX0 << 31,
+
+        /// <summary>
+        /// The minimum power of two employed to define an index classifier
+        ///</summary>
+        MinPower = 10,
+
+        /// <summary>
+        /// The minimum index classifier value
+        ///</summary>
+        Min = IX0,
+
+        /// <summary>
+        /// The maximum index classifier value
+        ///</summary>
+        Max = IX31,
+
+        /// <summary>
+        /// The join of all index classifiers
+        ///</summary>
+        All = IX0 | IX1 | IX2 | IX3 | IX4 | IX5 | IX6 | IX7 | IX8 | IX9 |
+            IX10 | IX11 | IX12 | IX13 | IX14 | IX15 | IX16 | IX17 | IX18 | IX19 |
+            IX20 | IX21 | IX22 | IX23 | IX24 | IX25 | IX26 | IX27 | IX28 | IX29 |
+            IX30 | IX31,
     }
 }

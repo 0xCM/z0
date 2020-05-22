@@ -171,6 +171,11 @@ namespace Z0
         FolderPath AppSrcPath => DevRoot + RelativeLocation.Define($"src/{AppName}");
 
         /// <summary>
+        /// The appliction-relative source file generation target directory
+        /// </summary>
+        FolderPath GenSrcDir => AppSrcPath + FolderName.Define("generated");
+
+        /// <summary>
         /// The application-relative configuration path
         /// </summary>
         FilePath AppConfigPath => AppSrcPath + ConfigFileName;

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -47,7 +47,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="k">The register kind</param>        
         [MethodImpl(Inline), Op]
-        public static RegisterSlot slot(K k)
-            => (RegisterSlot)(math.log2(order(k) + 1ul));       
+        public static RegisterSlotIndex slot(K k)
+            => (RegisterSlotIndex)(math.log2(order(k) + 1ul));       
     }
 }

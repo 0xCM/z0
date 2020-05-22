@@ -106,6 +106,5 @@ namespace Z0.Asm
 
         public string Render()
             => $"{RF.Code}:{Code} | {RF.W}:{W} | {RF.R}:{R} | {RF.X}:{X} | {RF.B}:{B}";
-
     }
 }

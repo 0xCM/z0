@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
 
     using K = RegisterKind;
 
     using static RegisterWidth;
-    using static RegisterIndex;
+    using static RegisterSlot;
     using static RegisterRole;
 
     /// <summary>
@@ -187,33 +187,27 @@ namespace Z0.Asm
         [Literal("The 128-bit XMM[4] vectorized register")]        
         XMM4 = IX4 | Vec | W128,
         
-        [Literal("The 128-bit XMM[5] vectorized register")]
-        
+        [Literal("The 128-bit XMM[5] vectorized register")]        
         XMM5 = IX5 | Vec | W128,
 
         
-        [Literal("The 128-bit XMM[6] vectorized register")]
-        
+        [Literal("The 128-bit XMM[6] vectorized register")]        
         XMM6 = IX6 | Vec | W128,
 
         
-        [Literal("The 128-bit XMM[7] vectorized register")]
-        
+        [Literal("The 128-bit XMM[7] vectorized register")]        
         XMM7 = IX7 | Vec | W128,
 
         
-        [Literal("The 128-bit XMM[8] vectorized register")]
-        
+        [Literal("The 128-bit XMM[8] vectorized register")]        
         XMM8 = IX8 | Vec | W128,
 
         
-        [Literal("The 128-bit XMM[9] vectorized register")]
-        
+        [Literal("The 128-bit XMM[9] vectorized register")]        
         XMM9 = IX9 | Vec | W128,
 
         
-        [Literal("The 128-bit XMM[10] vectorized register")]
-        
+        [Literal("The 128-bit XMM[10] vectorized register")]        
         XMM10 = IX10 | Vec | W128,
 
         
@@ -311,8 +305,7 @@ namespace Z0.Asm
         YMM2 = IX2 | Vec | W256,
 
         
-        [Literal("The 256-bit YMM[3] vectorized register")]
-        
+        [Literal("The 256-bit YMM[3] vectorized register")]        
         YMM3 = IX3 | Vec | W256,
 
         
@@ -326,28 +319,23 @@ namespace Z0.Asm
         YMM5 = IX5 | Vec | W256,
 
         
-        [Literal("The 256-bit YMM[6] vectorized register")]
-        
+        [Literal("The 256-bit YMM[6] vectorized register")]        
         YMM6 = IX6 | Vec | W256,
 
         
-        [Literal("The 256-bit YMM[7] vectorized register")]
-        
+        [Literal("The 256-bit YMM[7] vectorized register")]        
         YMM7 = IX7 | Vec | W256,
 
         
-        [Literal("The 256-bit YMM[8] vectorized register")]
-        
+        [Literal("The 256-bit YMM[8] vectorized register")]        
         YMM8 = IX8 | Vec | W256,
 
         
-        [Literal("The 256-bit YMM[9] vectorized register")]
-        
+        [Literal("The 256-bit YMM[9] vectorized register")]        
         YMM9 = IX9 | Vec | W256,
 
         
-        [Literal("The 256-bit YMM[10] vectorized register")]
-        
+        [Literal("The 256-bit YMM[10] vectorized register")]        
         YMM10 = IX10 | Vec | W256,
 
         

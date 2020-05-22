@@ -44,6 +44,13 @@ namespace Z0
             => MachineContext.Create(root, code);
 
 
+        void RunGenerators()
+        {
+            var hxm = new HexMachineGen();
+            hxm.Generate(0,0xF,AppPaths.GenSrcDir);
+            
+        }
+
         void RunCpu()
         {
             var cpu = Cpu.Create();
@@ -52,6 +59,7 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {            
+            
             if(StartCpu)
             {
                 RunCpu();

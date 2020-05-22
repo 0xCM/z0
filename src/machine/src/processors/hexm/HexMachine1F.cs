@@ -12,27 +12,23 @@ namespace Z0.Asm
     using static Memories;
     using static HexCodes;
 
+    [ApiHost]
     public struct HexMachine1F
     {
+        [MethodImpl(Inline), Op]
+        public static HexMachine1F Create(Vector128<byte> state)
+            => new HexMachine1F(state);
+
         Vector128<byte> State;
 
         bit Processed;
         
         [MethodImpl(Inline), Op]
-        public void Process(in ReadOnlySpan<byte> data)
+        public void Process(ReadOnlySpan<byte> src, Span<byte> dst)
         {
-            var count = 0;
-            for(var i=0; i<data.Length; i++)
-            {
 
-                if(Process(skip(data, i)))
-                    count++;
-            }
         }
 
-        [MethodImpl(Inline), Op]
-        public static HexMachine1F Create(Vector128<byte> state)
-            => new HexMachine1F(state);
                     
         [MethodImpl(Inline)]
         HexMachine1F(Vector128<byte> state)
@@ -42,161 +38,166 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public bit Process(byte code)
+        public bit Process(byte code, Span<byte> dst)
         {
             Processed = false;
-            Process(x10, code);
+
+            if(code <= x15)
+                Process(x10,dst);
+            else if(code <= x0b)
+                Process(x16,dst);
+            else
+                Process(x1c,dst);            
             return Processed;
         }
 
         [MethodImpl(Inline)]
-        void Process(X10 a, byte code)
+        void Process(X10 a, byte code, Span<byte> dst)
         {
-            if(code == x10)
-                Process(x10);
-            else if(code == x11)
-                Process(x11);
-            else if(code== x12)
-                Process(x12);
-            else if(code == x13)
-                Process(x13);
-            else if(code == x14)
-                Process(x14);
-            else if(code == x15)
-                Process(x15);
+            if(code == 0x10)
+                Process(x10, dst);
+            else if(code == 0x11)
+                Process(x11, dst);
+            else if(code== 0x12)
+                Process(x12, dst);
+            else if(code == 0x13)
+                Process(x13, dst);
+            else if(code == 0x14)
+                Process(x14, dst);
+            else if(code == 0x15)
+                Process(x15, dst);
             else
-                Process(x16,code);
+                Process(x16,code,dst);
         }
 
         [MethodImpl(Inline)]
-        void Process(X16 a, byte code)
+        void Process(X16 a, byte code, Span<byte> dst)
         {
-            if(code == x16)
-                Process(x16);
-            else if(code == x17)
-                Process(x17);
-            else if(code == x18)
-                Process(x18);
-            else if(code == x19)
-                Process(x19);
-            else if(code == x1a)
-                Process(x1a);
-            else if(code == x1b)
-                Process(x1b);
+            if(code == 0x16)
+                Process(x16, dst);
+            else if(code == 0x17)
+                Process(x17, dst);
+            else if(code == 0x18)
+                Process(x18, dst);
+            else if(code == 0x19)
+                Process(x19, dst);
+            else if(code == 0x1a)
+                Process(x1a, dst);
+            else if(code == 0x1b)
+                Process(x1b, dst);
             else
-                Process(x1c,code);
+                Process(x1c,code,dst);
 
         }
 
         [MethodImpl(Inline)]
-        void Process(X1C a, byte code)
+        void Process(X1C a, byte code, Span<byte> dst)
         {
-            if(code == x1c)
-                Process(x1c);
-            else if(code == x1d)
-                Process(x1d);
-            else if(code == x1e)
-                Process(x1e);
-            else if(code == x1f)
-                Process(x1f);
+            if(code == 0x1c)
+                Process(x1c, dst);
+            else if(code == 0x1d)
+                Process(x1d, dst);
+            else if(code == 0x1e)
+                Process(x1e, dst);
+            else if(code == 0x1f)
+                Process(x1f, dst);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X10 x)
+        public void Process(X10 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                            
+            seek(dst,x) = skip(dst, x >> 1);
+                                        
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X11 x)
+        public void Process(X11 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                        
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X12 x)
+        public void Process(X12 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                            
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X13 x)
+        public void Process(X13 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                                
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X14 x)
+        public void Process(X14 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                           
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X15 x)
+        public void Process(X15 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);           
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X16 x)
+        public void Process(X16 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);           
-        }
-
-
-        [MethodImpl(Inline), Op]
-        public void Process(X17 x)
-        {
-            State = State.WithElement(x, x);           
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X18 x)
+        public void Process(X17 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);           
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X19 x)
+        public void Process(X18 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);           
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X1A x)
+        public void Process(X19 x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);           
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X1B x)
+        public void Process(X1A x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                            
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X1C x)
+        public void Process(X1B x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                                
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X1D x)
+        public void Process(X1C x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                                
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X1E x)
+        public void Process(X1D x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);                       
-         
+            seek(dst,x) = skip(dst, x >> 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(X1F x)
+        public void Process(X1E x, Span<byte> dst)
         {
-            State = State.WithElement(x, x);           
-        }   
+            seek(dst,x) = skip(dst, x >> 1);
+        }
+
+        [MethodImpl(Inline), Op]
+        public void Process(X1F x, Span<byte> dst)
+        {
+            seek(dst,x) = skip(dst, x >> 1);
+        }           
     }
 }

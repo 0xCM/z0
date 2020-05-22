@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
  
+ 
     using static AsmSpecs;
 
     partial class AsmTypes

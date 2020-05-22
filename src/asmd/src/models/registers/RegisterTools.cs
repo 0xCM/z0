@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using I = RegisterIndex;
+    using I = RegisterSlot;
     using W = RegisterWidth;
 
     class RegisterTools
@@ -24,7 +24,7 @@ namespace Z0.Asm
             => (ulong)src;
 
         [MethodImpl(Inline)]
-        public static RegisterSlot slot(ulong src)
-            => (RegisterSlot)src;
+        public static RegisterSlotIndex slot(ulong src)
+            => (RegisterSlotIndex)src;
     }
 }

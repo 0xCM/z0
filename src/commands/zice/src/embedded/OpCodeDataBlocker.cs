@@ -45,6 +45,10 @@ namespace Z0.Asm.Data
 				case EncodingKind.XOP:
 					FillXopBlock(ref dst);
 					break;
+				case EncodingKind.D3NOW:
+					FillD3NowBlock(ref dst);
+					break;
+
 			}
 		}
 
@@ -340,6 +344,33 @@ namespace Z0.Asm.Data
 			}
 
 			return dst;
+		}
+		static OpCodeDataBlock FillD3NowBlock(ref OpCodeDataBlock dst)
+		{
+
+			var dword3 = dst.DWord3;
+			var dword2 = dst.DWord2;
+			var dword1 = dst.DWord1;
+			dst.op0Kind = (byte)OpCodeOperandKind.mm_reg;
+			dst.op1Kind = (byte)OpCodeOperandKind.mm_or_mem;
+			dst.mandatoryPrefix = (byte)MandatoryPrefix.None;
+			dst.table = (byte)OpCodeTableKind.T0F;
+			dst.groupIndex = -1;
+			dst.tupleType = (byte)TupleType.None;
+
+			dst.Flags |= (Encodable)((dword2 >> (int)D3nowFlags.EncodableShift) & (uint)D3nowFlags.EncodableMask) switch {
+				Encodable.Any => Flags.Mode16 | Flags.Mode32 | Flags.Mode64,
+				Encodable.Only1632 => Flags.Mode16 | Flags.Mode32,
+				Encodable.Only64 => Flags.Mode64,
+				_ => throw new InvalidOperationException(),
+			};
+			dst.operandSize = 0;
+			dst.addressSize = 0;
+			dst.l = 0;
+			dst.lkind = LKind.None;
+		
+			return dst;
+
 		}
 
 		static OpCodeDataBlock FillXopBlock(ref OpCodeDataBlock dst)
