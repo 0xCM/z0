@@ -41,5 +41,7 @@ namespace Z0
         /// Identifies the partial pattern e8 ?? ?? ?? ?? cc
         /// </summary>
         CTC_CALL32_INTR = 2*16,
+
+        Fail = byte.MaxValue,
     }
 }

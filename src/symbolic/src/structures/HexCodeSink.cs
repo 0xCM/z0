@@ -12,14 +12,6 @@ namespace Z0
     public delegate void HexReceiver<H>(H h)
         where H :unmanaged, IHexCode;
 
-    public class HexCodeSink
-    {
-        [MethodImpl(Inline)]
-        public static HexCodeSink<H> Create<H>(HexReceiver<H> receiver)
-            where H :unmanaged, IHexCode
-                => new HexCodeSink<H>(receiver);
-    }
-
     public readonly struct HexCodeSink<H> : IHexHandler<H>, IHexHandler
         where H :unmanaged, IHexCode
     {

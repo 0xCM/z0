@@ -56,12 +56,38 @@ namespace Z0.Asm
                     
                     b.IntersectWith(a);
                     insist(b.Count, decoded.Length);                
-                    //term.inform($"Mached {host} decoded function addresses and extract addresses");
                 }
                 catch(Exception e)
                 {
                     term.error(e,$"Addresses from {host} decoded functions do not match with the extract addresses");
                 }
+            }
+
+            Option<MemberParseReport> CreateParsedReport(IApiHost host, ParsedMember[] parsed)
+            {
+                try
+                {
+                    return ReportParsed.CreateParseReport(host.UriPath, parsed);                    
+                }
+                catch(Exception e)
+                {
+                    term.errlabel(e,$"{host.UriPath} parse report creation failure");
+                    return none<MemberParseReport>();
+                }
+            }
+
+            Option<AsmFunction[]> DecodeParsed(IApiHost host, ParsedMember[] parsed)
+            {
+                try
+                {
+                    return Decode.DecodeParsed(host.UriPath, parsed);
+                }
+                catch(Exception e)
+                {
+                    term.errlabel(e,$"{host.UriPath} decoding failed");
+                    return none<AsmFunction[]>();
+                }
+
             }
 
             public void Execute(IApiHost host, ICaptureArchive dst)
@@ -79,18 +105,27 @@ namespace Z0.Asm
                     if(extracts.Length == 0)
                         return;
                                     
-                    ReportExtracts.SaveExtractReport(ReportExtracts.CreateExtractReport(host.UriPath, extracts), paths.ExtractPath);
+                    var extractRpt = ReportExtracts.CreateExtractReport(host.UriPath, extracts);
+                    ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
 
                     var parsed = Parse.ParseExtracts(host.UriPath, extracts);
+                    if(parsed.Length == 0)
+                        term.warn($"No {host.UriPath} members were parsed");
+                        
                     if(parsed.Length != 0)
-                    {
-                        ReportParsed.SaveParseReport(ReportParsed.CreateParseReport(host.UriPath, parsed), paths.ParsedPath);                                                
+                    {                        
+
+                        var parsedRpt = CreateParsedReport(host, parsed);
+                        if(parsedRpt)
+                            ReportParsed.SaveParseReport(parsedRpt.Value, paths.ParsedPath);
+
                         Parse.SaveHex(host.UriPath, parsed, paths.HexPath);
 
-                        var decoded = Decode.DecodeParsed(host.UriPath, parsed);
-                        Decode.SaveDecoded(decoded, paths.AsmPath);
+                        var decoded = DecodeParsed(host, parsed);
+                        if(decoded)
+                            Decode.SaveDecoded(decoded.Value, paths.AsmPath);
 
-                        MatchAddresses(host.UriPath, extracts, decoded);
+                        MatchAddresses(host.UriPath, extracts, decoded.Value);
                     }
                 }
                 catch(Exception e)

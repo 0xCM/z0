@@ -30,9 +30,5 @@ namespace Z0
             => (uint)src <= (uint)HexDigit.x9 
                 ? (HexDigitSymbolLo)((uint)src + (uint)HexDigit.x0) 
                 : (HexDigitSymbolLo)((uint)src + (uint)HexDigit.A);
-
-
-
     }
-
 }

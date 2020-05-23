@@ -19,31 +19,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static HexIndex<T> Define(params HexKindValue<T>[] src)
-            => new HexIndex<T>(src);        
+            => Symbolic.index(src);
 
         [MethodImpl(Inline)]
-        internal HexIndex(Func<T,HexKind> f, T[] src)
+        internal HexIndex(T[] index)
         {
-            Index = new T[256];
-            for(var i=0; i<src.Length; i++)
-                Index[(int)f(src[i])] = src[i];
+            this.Index = index;
         }
 
         [MethodImpl(Inline)]
-        HexIndex(HexKindValue<T>[] src)
-        {
-            Index = new T[256];
-            for(var i=0; i<src.Length; i++)
-                Index[(int)src[i].Kind] = src[i].Value;
-        }
-
         public ref readonly T Lookup(HexKind key)
             => ref Index[(int)key];
 
         public ref readonly T this[HexKind index]
         {
             [MethodImpl(Inline)]
-            get => ref Index[(int)index];
+            get => ref Lookup(index);
         }
     }
 }

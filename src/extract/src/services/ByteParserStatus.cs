@@ -20,6 +20,11 @@ namespace Z0
             => state == ByteParserState.Accepting;
 
         [MethodImpl(Inline)]
+        public static bool HasFailed(this ByteParserState state)
+            => state == ByteParserState.Failed;
+    
+
+        [MethodImpl(Inline)]
         public static bool IsSome(this ByteParserState state)
             => state != 0;
 
@@ -37,6 +42,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ExtractTermCode ToTermCode(this EncodingPatternKind src)
-            => (ExtractTermCode)src;
+        {
+            if(src != 0)
+                return (ExtractTermCode)src;
+            else
+                return ExtractTermCode.Fail;
+        }
     }    
 }

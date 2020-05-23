@@ -90,5 +90,52 @@ namespace Z0
         /// Specifies 15 base 16, asci code 70
         /// </summary>
         F = 'F',
+
+        /// <summary>
+        /// The 'x0' code
+        /// </summary>
+        FirstNumeral = x0,
+
+        /// <summary>
+        /// The 'x9' code
+        /// </summary>
+        LastNumeral = x9,
+
+        /// <summary>
+        /// The 'A' code
+        /// </summary>
+        FirstLetter = A,
+
+        /// <summary>
+        /// The 'F' code
+        /// </summary>
+        LastLetter = F,       
+
+        /// <summary>
+        /// The value to subtract from a symbolic digit [A..F] to compute an index in the range [0..15]
+        /// </summary>
+        LetterOffset = FirstLetter - LastNumeral + FirstNumeral - 1,
+
+        /// <summary>
+        /// The value to subtract from a symbolic digit [0..9] to compute an index in the range [0..15]
+        /// </summary>
+        NumeralOffset = FirstNumeral,
+
+        /// <summary>
+        /// The numeral declaration count
+        /// </summary>
+        NumeralCount = LastNumeral - FirstNumeral + 1,
+
+        /// <summary>
+        /// The lettr declaration count
+        /// </summary>
+        LetterCount = LastLetter - FirstLetter + 1,
+
+        /// <summary>
+        /// The code declaration count
+        /// </summary>
+        Count = NumeralCount +  LetterCount,
+
+
     }    
 }

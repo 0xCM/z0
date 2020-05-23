@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Ltz, Closures(AllNumeric)]
+        [MethodImpl(Inline), Ltz, Closures(Integers)]
         public static T ltz<T>(T a, T b)
             where T : unmanaged
                 => gmath.mul(convert<T>((uint)gmath.lt(a,b)), ones<T>());
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Gtz, Closures(AllNumeric)]
+        [MethodImpl(Inline), Gtz, Closures(Integers)]
         public static T gtz<T>(T a, T b)
             where T : unmanaged
                 => gmath.mul(convert<T>((uint)gt(a,b)), ones<T>());

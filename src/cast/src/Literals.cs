@@ -370,7 +370,20 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return Cast.to<T>(Ones64i);
             else
+                 return ones_f<T>();
+       }
+
+        [MethodImpl(Inline)]
+        static T ones_f<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return Cast.to<T>((float)Ones32u);
+            else if(typeof(T) == typeof(double))
+                return Cast.to<T>((double)Ones64u);
+            else
                  throw Unsupported.define<T>();
        }
+
     }
 }

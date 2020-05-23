@@ -13,6 +13,14 @@ namespace Z0
 
     public readonly struct ExtractParseResult
     {
+        [MethodImpl(Inline)]
+        public static ExtractParseResult FromFailure(ExtractParseFailure fail)
+            => new ExtractParseResult(fail);
+
+        [MethodImpl(Inline)]
+        public static ExtractParseResult FromSuccess(ParsedMember parsed)
+            => new ExtractParseResult(parsed);
+        
         readonly Either<ExtractParseFailure,ParsedMember> Outcome;
 
         [MethodImpl(Inline)]

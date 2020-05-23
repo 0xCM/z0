@@ -25,25 +25,47 @@ namespace Z0.Asm
             internal ParseMembersStep(ICaptureWorkflow workflow)
             {
                 Workflow = workflow;
-                this.Parser = Extract.Services.ExtractParser();
+                Parser = Extract.Services.ExtractParser();
             }
 
             public ParsedMember[] ParseExtracts(ApiHostUri host, ExtractedMember[] extracts)
             {
-                var result = Parser.Parse(extracts);
-                
-                for(var i = 0; i<result.Failed.Length; i++)
-                    Context.Raise(ExtractParseFailed.Define(result.Failed[i]));
+                try
+                {
+                    var result = Parser.Parse(extracts);
+                    
+                    for(var i = 0; i<result.Failed.Length; i++)
+                        Context.Raise(ExtractParseFailed.Define(result.Failed[i]));
 
-                var report = ParseFailureReport.Create(host, result.Failed);
-                report.Save(Context.Archive.UnparsedPath(host));
+                    var report = ParseFailureReport.Create(host, result.Failed);
+                    report.Save(Context.Archive.UnparsedPath(host));
 
-                Context.Raise(ExtractsParsed.Define(host, result.Parsed));
-                return result.Parsed;
+                    Context.Raise(ExtractsParsed.Define(host, result.Parsed));
+                    return result.Parsed;
+                }
+                catch(Exception e)
+                {
+                    var msg = AppMsg.Colorize($"{host} extract parse FAIL: {e}", AppMsgColor.Yellow);
+                    term.print(msg);
+                    term.errlabel(e, $"{host} extract parse FAIL");  
+                    return Control.array<ParsedMember>();
+                }
+
             }
 
             public void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
-                => Context.Raise(HexSaved.Define(host,  ArchiveOps.Service.SaveUriHex(host, src, dst), dst));
+            {
+                try
+                {
+                    var hex = ArchiveOps.Service.SaveUriHex(host, src, dst);
+                    var saved = HexSaved.Define(host,  hex, dst);
+                    Context.Raise(saved);
+                }
+                catch(Exception e)
+                {
+                    term.errlabel(e, $"{host} hex data could not be saved");
+                }
+            }
         }
     }
 }

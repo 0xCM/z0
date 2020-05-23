@@ -5,32 +5,29 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
 
     using F = MemberParseField;
     using R = MemberParseRecord;
 
-    public enum MemberParseField : ulong
+    public enum MemberParseField : int
     {
-        Seq = 0 | 12ul << 32,
+        Seq = 0 | 12 << 16,
 
-        SourceSeq = 1 | 12ul << 32,
+        SourceSeq = 1 | 12 << 16,
 
-        Address = 2 | 16ul << 32,
+        Address = 2 | 16 << 16,
 
-        Length = 3 | 8ul << 32,
+        Length = 3 | 8 << 16,
 
-        TermCode = 4 | 20ul << 32,
+        TermCode = 4 | 20 << 16,
 
-        Uri = 5 | 110ul << 32,
+        Uri = 5 | 110 << 16,
 
-        OpSig = 6 | 110ul << 32,
+        OpSig = 6 | 110 << 16,
 
-        Data = 7 | 1ul << 32
+        Data = 7 | 1 << 16
     }    
 
     public readonly struct MemberParseRecord : ITabular<F,R>

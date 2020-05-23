@@ -14,19 +14,19 @@ namespace Z0
     using R = ExtractRecord;
     using Report = ExtractReport;
 
-    public enum ExtractField : ulong
+    public enum ExtractField : int
     {
-        Sequence = 0 | 10ul << WidthOffset,
+        Sequence = 0 | 10 << 16,
 
-        Address = 1 | 16ul << WidthOffset,
+        Address = 1 | 16 << 16,
 
-        Length = 2 | 8ul << WidthOffset,
+        Length = 2 | 8 << 16,
 
-        Uri = 3 | 110ul << WidthOffset,
+        Uri = 3 | 110 << 16,
 
-        OpSig = 4 | 110ul << WidthOffset,
+        OpSig = 4 | 110 << 16,
 
-        Data = 5 | 1ul << WidthOffset
+        Data = 5 | 1 << 16
     }
 
     public readonly struct ExtractRecord : ITabular<F,R>

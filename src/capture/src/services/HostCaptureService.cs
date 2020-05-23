@@ -81,14 +81,22 @@ namespace Z0.Asm
         }
 
         void Save(ApiHostUri host, ParsedMember[] src)
-        {
-            var hostArchive = CodeArchive.HostArchive(host);
-            var report = MemberParseReport.Create(host,src);
-            report.Save(hostArchive.ParsedPath);
+        {         
+            try
+            {
+                var hostArchive = CodeArchive.HostArchive(host);
+                var report = MemberParseReport.Create(host,src);
+                report.Save(hostArchive.ParsedPath);
 
-            using var writer = Archives.Services.UriHexWriter(hostArchive.HexPath);
-            var data = src.Map(x => UriHex.Define(x.OpUri, x.Encoded.Encoded));
-            writer.Write(data);
+                using var writer = Archives.Services.UriHexWriter(hostArchive.HexPath);
+                var data = src.Map(x => UriHex.Define(x.OpUri, x.Encoded.Encoded));
+                writer.Write(data);
+            }
+            catch(Exception e)
+            {
+                term.errlabel(e, $"Failure saving parse report for {host}");
+                throw;
+            }
         }
 
         void Save(ApiHostUri host, ExtractedMember[] extracts)

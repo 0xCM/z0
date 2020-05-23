@@ -64,7 +64,7 @@ namespace Z0.Machines
             Run(data);
             var steps = RunBuffer.Slice(0, _RunIndex);
             var buffer = LogBuffer();
-            var count = HexDigits.render(steps, buffer);
+            var count = Symbolic.render(steps, buffer);
             var hexline = buffer.Slice(0,count).ToString();
             term.print(hexline);
         }
@@ -84,7 +84,7 @@ namespace Z0.Machines
         public void Execute(in ReadOnlySpan<byte> src)
         {
             var buffer = StepBuffer();
-            var count = HexDigits.codes(src, buffer);
+            var count = Symbolic.codes(src, buffer);
             var ran = buffer.Slice(0, count);
             ran.CopyTo(RunBuffer, _RunIndex);
             _RunIndex += count;
