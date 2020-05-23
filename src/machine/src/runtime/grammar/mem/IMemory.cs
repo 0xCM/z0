@@ -12,7 +12,7 @@ namespace Z0.Machines
 
     public interface IMemory : IOperand
     {
-        OperandKind IOperand.ArgKind 
+        OperandKind IOperand.Kind 
             => OperandKind.Memory;
     }
 

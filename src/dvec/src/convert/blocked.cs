@@ -15,6 +15,7 @@ namespace Z0
     using static Seed; 
     using static Memories;
 
+    
     partial class dvec
     {                
         // ~ 8i -> X

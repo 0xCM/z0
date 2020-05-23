@@ -15,7 +15,7 @@ namespace Z0.Machines
     /// Tracks the state of a process stream and the commands that effected the state
     /// </summary>
     public struct ProcessState<C,S> : IProcessState<C,S>
-        where C : unmanaged, ICommand
+        where C : unmanaged, ICmd
     {
         internal S Current;
 
@@ -47,6 +47,6 @@ namespace Z0.Machines
             => Commands.Add(cmd);
         
         public ProcessState Generalized
-            => new ProcessState(Current, from c in Processed select c as ICommand);
+            => new ProcessState(Current, from c in Processed select c as ICmd);
     }
 }

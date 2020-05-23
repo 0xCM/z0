@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, NumericClosures(NumericKind.All)]
+        [Op, NumericClosures(AllNumeric)]
         public static Span<T> span<T>(Vector128<T> src)
             where T : unmanaged            
         {
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, NumericClosures(NumericKind.All)]
+        [Op, NumericClosures(AllNumeric)]
         public static Span<T> span<T>(Vector256<T> src)
             where T : unmanaged            
         {
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, NumericClosures(NumericKind.All)]
+        [Op, NumericClosures(AllNumeric)]
         public static Span<T> span<T>(Vector512<T> src)
             where T : unmanaged            
         {

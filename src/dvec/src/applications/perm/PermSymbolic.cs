@@ -110,7 +110,7 @@ namespace Z0
             var first = (byte)(index * segwidth);
             var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm4L)gbits.extract((byte)src, first, last);
+            dst = (Perm4L)BitOps.extract((byte)src, first, last);
             return dst.IsSymbol();
         }
 
@@ -128,7 +128,7 @@ namespace Z0
             var first = (byte)(index * segwidth);
             var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm8L)gbits.extract((uint)src, first, last);
+            dst = (Perm8L)BitOps.extract((uint)src, first, last);
             return dst.IsSymbol();
         }
 
@@ -146,7 +146,7 @@ namespace Z0
             var first = (byte)(index * segwidth);
             var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm16L)gbits.extract((ulong)src, first, last);
+            dst = (Perm16L)BitOps.extract((ulong)src, first, last);
             return dst.IsSymbol();
         }
 
@@ -193,10 +193,10 @@ namespace Z0
         public static Span<byte> digits(Perm4L src, Span<byte> dst)
         {
             var scalar = (byte)src;
-            seek(dst,0) = gbits.extract(scalar, 0, 1);
-            seek(dst,1) = gbits.extract(scalar, 2, 3);
-            seek(dst,2) = gbits.extract(scalar, 4, 5);
-            seek(dst,3) = gbits.extract(scalar, 6, 7);
+            seek(dst,0) = BitOps.extract(scalar, 0, 1);
+            seek(dst,1) = BitOps.extract(scalar, 2, 3);
+            seek(dst,2) = BitOps.extract(scalar, 4, 5);
+            seek(dst,3) = BitOps.extract(scalar, 6, 7);
             return dst;
         }
 
@@ -213,14 +213,14 @@ namespace Z0
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
             var scalar = (uint)src;
-            seek(dst,0) = (OctalDigit)gbits.extract(scalar, 0, 2);
-            seek(dst,1) = (OctalDigit)gbits.extract(scalar, 3, 5);
-            seek(dst,2) = (OctalDigit)gbits.extract(scalar, 6, 8);
-            seek(dst,3) = (OctalDigit)gbits.extract(scalar, 9, 11);
-            seek(dst,4) = (OctalDigit)gbits.extract(scalar, 12, 14);
-            seek(dst,5) = (OctalDigit)gbits.extract(scalar, 15, 17);
-            seek(dst,6) = (OctalDigit)gbits.extract(scalar, 18, 20);
-            seek(dst,7) = (OctalDigit)gbits.extract(scalar, 21, 23);
+            seek(dst,0) = (OctalDigit)BitOps.extract(scalar, 0, 2);
+            seek(dst,1) = (OctalDigit)BitOps.extract(scalar, 3, 5);
+            seek(dst,2) = (OctalDigit)BitOps.extract(scalar, 6, 8);
+            seek(dst,3) = (OctalDigit)BitOps.extract(scalar, 9, 11);
+            seek(dst,4) = (OctalDigit)BitOps.extract(scalar, 12, 14);
+            seek(dst,5) = (OctalDigit)BitOps.extract(scalar, 15, 17);
+            seek(dst,6) = (OctalDigit)BitOps.extract(scalar, 18, 20);
+            seek(dst,7) = (OctalDigit)BitOps.extract(scalar, 21, 23);
             return dst;
         }
 
@@ -236,22 +236,22 @@ namespace Z0
         public static Span<HexDigit> digits(Perm16L src, Span<HexDigit> dst)
         {
             var scalar = (ulong)src;
-            seek(dst,0) = (HexDigit)gbits.extract(scalar, 0, 3);
-            seek(dst,1) = (HexDigit)gbits.extract(scalar, 4, 7);
-            seek(dst,2) = (HexDigit)gbits.extract(scalar, 8, 11);
-            seek(dst,3) = (HexDigit)gbits.extract(scalar, 12, 15);
-            seek(dst,4) = (HexDigit)gbits.extract(scalar, 16, 19);
-            seek(dst,5) = (HexDigit)gbits.extract(scalar, 20, 23);
-            seek(dst,6) = (HexDigit)gbits.extract(scalar, 24, 27);
-            seek(dst,7) = (HexDigit)gbits.extract(scalar, 28, 31);
-            seek(dst,8) = (HexDigit)gbits.extract(scalar, 32, 35);
-            seek(dst,9) = (HexDigit)gbits.extract(scalar, 36, 39);
-            seek(dst,10) = (HexDigit)gbits.extract(scalar, 40, 43);
-            seek(dst,11) = (HexDigit)gbits.extract(scalar, 44, 47);
-            seek(dst,12) = (HexDigit)gbits.extract(scalar, 48, 53);
-            seek(dst,13) = (HexDigit)gbits.extract(scalar, 52, 55);
-            seek(dst,14) = (HexDigit)gbits.extract(scalar, 56, 59);
-            seek(dst,15) = (HexDigit)gbits.extract(scalar, 60, 63);
+            seek(dst,0) = (HexDigit)BitOps.extract(scalar, 0, 3);
+            seek(dst,1) = (HexDigit)BitOps.extract(scalar, 4, 7);
+            seek(dst,2) = (HexDigit)BitOps.extract(scalar, 8, 11);
+            seek(dst,3) = (HexDigit)BitOps.extract(scalar, 12, 15);
+            seek(dst,4) = (HexDigit)BitOps.extract(scalar, 16, 19);
+            seek(dst,5) = (HexDigit)BitOps.extract(scalar, 20, 23);
+            seek(dst,6) = (HexDigit)BitOps.extract(scalar, 24, 27);
+            seek(dst,7) = (HexDigit)BitOps.extract(scalar, 28, 31);
+            seek(dst,8) = (HexDigit)BitOps.extract(scalar, 32, 35);
+            seek(dst,9) = (HexDigit)BitOps.extract(scalar, 36, 39);
+            seek(dst,10) = (HexDigit)BitOps.extract(scalar, 40, 43);
+            seek(dst,11) = (HexDigit)BitOps.extract(scalar, 44, 47);
+            seek(dst,12) = (HexDigit)BitOps.extract(scalar, 48, 53);
+            seek(dst,13) = (HexDigit)BitOps.extract(scalar, 52, 55);
+            seek(dst,14) = (HexDigit)BitOps.extract(scalar, 56, 59);
+            seek(dst,15) = (HexDigit)BitOps.extract(scalar, 60, 63);
             return dst;
         }
         

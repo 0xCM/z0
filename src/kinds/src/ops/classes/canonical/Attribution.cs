@@ -57,5 +57,14 @@ namespace Z0
     public sealed class SwitchAttribute : A { public SwitchAttribute() : base(K.Switch) {} }
 
     public sealed class CopyAttribute : A { public CopyAttribute() : base(K.Copy) {} }    
-    
+
+    public sealed class ZipAttribute : A { public ZipAttribute() : base(K.Zip) {} }    
+
+    public sealed class MapAttribute : A { public MapAttribute() : base(K.Map) {} }    
+
+    public sealed class VZipAttribute : A { public VZipAttribute() : base(K.VZip) {} }    
+
+    public sealed class VMapAttribute : A { public VMapAttribute() : base(K.VMap) {} }    
+
+
 }

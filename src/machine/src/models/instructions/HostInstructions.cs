@@ -53,10 +53,6 @@ namespace Z0.Asm
         public int TotalCount => Content.Sum(i => i.TotalCount);
 
         [MethodImpl(Inline)]
-        public MemoryOffset Offset(MemoryAddress member)
-            => MemoryOffset.Derive(BaseAddress, member);
-
-        [MethodImpl(Inline)]
         public static HostInstructions Create(ApiHostUri host, MemberInstructions[] src)
             => new HostInstructions(host, src);
     

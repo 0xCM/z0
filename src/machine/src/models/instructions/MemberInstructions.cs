@@ -34,7 +34,7 @@ namespace Z0.Asm
         public MemoryAddress HostAddress {get;}
 
         public MemoryOffset OffsetAddress 
-            => MemoryOffset.Derive(BaseAddress, HostAddress);
+            => MemoryOffsets.legacy(BaseAddress, HostAddress);
 
         public OpIdentity OpId => OpUri.OpId;
 

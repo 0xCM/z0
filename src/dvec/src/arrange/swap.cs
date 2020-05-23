@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class dvec
     {
@@ -19,7 +19,7 @@ namespace Z0
         // 2 <-> 3
         // [15_14 13_12 11_10 09_08 05_04 07_06 03_02 01_00 ]
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline), Op]        
         public static Vector128<byte> vswap(Vector128<byte> src, int i, int j)
         {
             var perm = Data.vincrements<byte>(n128);
@@ -28,18 +28,15 @@ namespace Z0
             return vshuf16x8(src,perm);            
         }
         
+        [MethodImpl(Inline), Op]        
         public static Vector128<ushort> vswap(Vector128<ushort> src, int i, int j)
         {
             var perm = Data.vincrements<byte>(n128);
 
-            static byte index8x16(int i, bit parity)
-                => uint8(i*2 + (int)parity);
-
-            var i0 = index8x16(i,bit.Off);
-            var i1 = index8x16(i,bit.On);
-
-            var j0 = index8x16(j,bit.Off);
-            var j1 = index8x16(j,bit.On);
+            var i0 = Bits.pindex(i, bit.Off);
+            var i1 = Bits.pindex(i, bit.On);
+            var j0 = Bits.pindex(j, bit.Off);
+            var j1 = Bits.pindex(j, bit.On);
 
             perm = vcell(i0, j0, perm);
             perm = vcell(i1, j1, perm);

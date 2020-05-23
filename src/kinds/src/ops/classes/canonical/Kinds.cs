@@ -32,5 +32,7 @@ namespace Z0
 
         public readonly struct Copy : I { K I.Kind => K.Copy; }
 
+        public readonly struct Zip : I { K I.Kind => K.Zip; }
+
     }
 }

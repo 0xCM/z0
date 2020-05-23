@@ -10,18 +10,40 @@ namespace Z0
     
     using static Seed;
 
-    public class LUT
+    [ApiHost]
+    public class LUT : IApiHost<LUT>
     {        
-        [MethodImpl(Inline)]
-        public static Lut16 define(Vector128<byte> src) => Lut16.Define(src);
+        [MethodImpl(Inline), Init]
+        public static Lut16 init(Vector128<byte> src) 
+            => Lut16.Define(src);
 
-        [MethodImpl(Inline)]
-        public static Lut16 define(in Block128<byte> src) => Lut16.Define(src);
+        [MethodImpl(Inline), Init]
+        public static Lut16 init(ReadOnlySpan<byte> src, N16 n) 
+            => Lut16.Define(src);
 
-        [MethodImpl(Inline)]
-        public static Lut32 define(Vector256<byte> src) => Lut32.define(src);
+        [MethodImpl(Inline), Init]
+        public static Lut16 init(in Block128<byte> src) 
+            => Lut16.Define(src);
 
-        [MethodImpl(Inline)]
-        public static Lut32 define(in Block256<byte> src) => Lut32.define(src);
+        [MethodImpl(Inline), Init]
+        public static Lut32 init(Vector256<byte> src) 
+            => Lut32.Define(src);
+
+        [MethodImpl(Inline), Init]
+        public static Lut32 init(ReadOnlySpan<byte> src, N32 n) 
+            => Lut32.Define(src);
+
+        [MethodImpl(Inline), Init]
+        public static Lut32 init(in Block256<byte> src) 
+            => Lut32.Define(src);
+
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> select(in Lut16 lut, Vector128<byte> items) 
+            => lut.Select(items);
+
+        [MethodImpl(Inline), Op]
+        public static Vector256<byte> select(in Lut32 lut, Vector256<byte> items) 
+            => lut.Select(items);
+
     }
 }

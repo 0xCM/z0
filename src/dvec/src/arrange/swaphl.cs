@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class dvec
     {        
@@ -140,7 +141,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vswaphl(Vector256<ulong> x)
             => vperm2x128(x,x, Perm2x4.DA);
-
-
     }
 }

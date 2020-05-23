@@ -83,7 +83,7 @@ namespace Z0
             };
 
         public bool IsSuccessPattern(EncodingPatternKind kind)
-            => kind != 0 && kind != EncodingPatternKind.Zx7;
+            => kind != 0; // && kind != EncodingPatternKind.Zx7;
 
         public ReadOnlySpan<byte?> PartialPattern(EncodingPatternKind kind)
             => kind switch {

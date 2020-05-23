@@ -11,7 +11,7 @@ namespace Z0.Machines
 
     public interface IImm : IOperand
     {
-        OperandKind IOperand.ArgKind => OperandKind.Imm;
+        OperandKind IOperand.Kind => OperandKind.Imm;
     }
 
     public interface IImm<T> : IImm, IOperand<T>

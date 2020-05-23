@@ -42,7 +42,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var description = text.factory.Builder();
+            var description = text.build();
             var indent = "/// ";
             var bits = BitString.scalar(sample).Format(specifier:true);
             var header = $"{indent}512x{bitsize(default(T))}, {maskspec}, {bits}"; 

@@ -88,7 +88,7 @@ namespace Z0
             for(var i=0; i<bs.Length; i++)
                 if(bs[i]) terms.Add($"{variable ?? 'x'}^{i}");
             
-            var sb = text.factory.Builder();
+            var sb = text.build();
             terms.Reverse();
             return string.Join($" + ", terms);            
         }

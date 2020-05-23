@@ -14,6 +14,12 @@ namespace Z0
         MemoryAddress Address {get;}
     }     
 
+    public interface IAddressable<F> : IAddressable, INullaryKnown, INullary<F>
+        where F : unmanaged, IAddressable<F>
+    {
+
+    }
+
     public interface IAddressable<W,T> : IAddressable
         where W : unmanaged, ITypeWidth
         where T : unmanaged

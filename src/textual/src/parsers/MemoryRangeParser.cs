@@ -25,10 +25,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         static Option<MemoryRange> ParseOption(string src)    
-             => from i0 in src.FirstIndexOf(text.lbracket())
-                from i1 in src.FirstIndexOf(text.rbracket())
+             => from i0 in src.FirstIndexOf(Chars.LBracket)
+                from i1 in src.FirstIndexOf(Chars.RBracket)
                 let inner = src.Substring(i0 + 1, i1 - i0 - 1)
-                let parts = inner.Split(text.comma()).Trim()
+                let parts = inner.Split(Chars.Comma).Trim()
                 where parts.Length == 2
                 from start in HexParsers.Scalar.Parse(parts[0]).ToOption()
                 from end in HexParsers.Scalar.Parse(parts[1]).ToOption()

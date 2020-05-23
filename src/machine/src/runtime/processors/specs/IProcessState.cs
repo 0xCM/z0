@@ -20,12 +20,12 @@ namespace Z0.Machines
         /// <summary>
         /// Invoked by the processor to signal that a command has been processed
         /// </summary>
-        void Handled(ICommand cmd);
+        void Handled(ICmd cmd);
 
         /// <summary>
         /// The commands that effected the current state
         /// </summary>
-        Seq<ICommand> Processed {get;}
+        Seq<ICmd> Processed {get;}
     }
 
     public interface IProcessState<S> : IProcessState
@@ -40,7 +40,7 @@ namespace Z0.Machines
     }
 
     public interface IProcessState<C,S> : IProcessState<S>
-        where C : unmanaged, ICommand
+        where C : unmanaged, ICmd
     {
         /// <summary>
         /// Invoked by the processor to signal that a command has been processed
@@ -52,10 +52,10 @@ namespace Z0.Machines
         /// </summary>
         new Seq<C> Processed {get;}
 
-        Seq<ICommand> IProcessState.Processed 
-            => from c in Processed select c as ICommand;
+        Seq<ICmd> IProcessState.Processed 
+            => from c in Processed select c as ICmd;
 
-        void IProcessState.Handled(ICommand cmd) 
+        void IProcessState.Handled(ICmd cmd) 
             => Handled((C)cmd);
     }
 }

@@ -16,6 +16,8 @@ namespace Z0
     using static Seed; 
     using static Memories;
 
+    using X = BitSets;
+
     partial class dvec
     {
         [MethodImpl(Inline), Op]

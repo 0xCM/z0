@@ -26,5 +26,7 @@ namespace Z0
 
         public readonly struct Test<T> : ICanonicalKind<Test,T> {}
 
+        public readonly struct Zip<T> : ICanonicalKind<Zip,T> {}
+
     }
 }

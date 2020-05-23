@@ -217,7 +217,7 @@ namespace Z0
             var dim = $"{TypeNats.value<M>()}x{TypeNats.value<N>()}";
             var kind = typeof(T).NumericKind().Format();
             var @base = $"mat_{kind}[{dim}]";
-            var suffix  = index.MapValueOrDefault(i => text.dot() + index.ToString().PadLeft(3,'0'), string.Empty);
+            var suffix  = index.MapValueOrDefault(i => text.dot + index.ToString().PadLeft(3,'0'), string.Empty);
             return FileName.Define($"{@base}{suffix}",FileExtensions.Csv);                
         }
         

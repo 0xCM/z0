@@ -14,8 +14,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
 
-    using static Seed; using static Memories;
-    using static Gone2;
+    using static Seed; 
+    using static Memories;
 
     partial class dvec 
     {
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="row1">The second row</param>
         /// <param name="row2">The third row</param>
         /// <param name="row3">The fourth row</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void vtranspose(ref Vector128<uint> row0, ref Vector128<uint> row1, ref Vector128<uint> row2, ref Vector128<uint> row3)
         {
             var tmp0 = Shuffle(v32f(row0),v32f(row1), 0x44);
@@ -38,12 +38,10 @@ namespace Z0
             row2 = v32u(Shuffle(tmp2,tmp3, 0x88));
             row3 = v32u(Shuffle(tmp2, tmp3, 0xDD));
         }    
-
         
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<uint> vtranspose(Vector512<uint> src)
-        {
-            
+        {            
             var x = Shuffle(v32f(src.Lo), v32f(src.Hi), 0x44);
             var y = Shuffle(v32f(src.Lo), v32f(src.Hi), 0xEE);
             return(v32u(Shuffle(x,y, 0x88)), v32u(Shuffle(x,y, 0xDD)));

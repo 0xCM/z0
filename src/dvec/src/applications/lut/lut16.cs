@@ -18,31 +18,43 @@ namespace Z0
     {
         readonly Vector128<byte> Mask;
 
-        public int IndexSize => 16;
-
         [MethodImpl(Inline)]
         public Vector128<byte> Select(Vector128<byte> items) 
             => dvec.vshuf16x8(items, Mask);    
 
-        public Vector128<byte> Data { [MethodImpl(Inline)] get => Mask; }
+        [MethodImpl(Inline)]
+        public static Lut16 Define(Vector128<byte> src) 
+            => new Lut16(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<byte>(in Lut16 src) => src.Mask;
+        public static Lut16 Define(ReadOnlySpan<byte> src) 
+            => new Lut16(src);
 
         [MethodImpl(Inline)]
-        public static Lut16 Define(Vector128<byte> src) => new Lut16(src);
+        public static Lut16 Define(in Block128<byte> src) 
+            => new Lut16(src);
 
         [MethodImpl(Inline)]
-        public static Lut16 Define(in Block128<byte> src) => new Lut16(src);
+        public static implicit operator Vector128<byte>(in Lut16 src) 
+            => src.Mask;
 
-        public byte this[int i] { [MethodImpl(Inline)] get => vcell(Mask,i); }
+        public byte this[int i] 
+        {
+             [MethodImpl(Inline)] 
+             get => vcell(Mask,i); 
+        }
 
         [MethodImpl(Inline)]
         Lut16(Vector128<byte> src) => Mask = src;
 
         [MethodImpl(Inline)]
-        Lut16(in Block128<byte> src) => Mask = Vectors.vload(src);
-    
+        Lut16(in Block128<byte> src) 
+            => Mask = Vectors.vload(src);
+
+        [MethodImpl(Inline)]
+        Lut16(ReadOnlySpan<byte> src) 
+            => Mask = Vectors.vload(w128,src);
+
     }
 
 }

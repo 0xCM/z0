@@ -100,10 +100,10 @@ namespace Z0
             get =>  BitConvert.GetBytes(Data);
         }
 
-        public BitView<ushort> Content
+        public BitEdit<ushort> Content
         {
             [MethodImpl(Inline)]
-            get => BitView.Over(ref Data);
+            get => BitEdit.Over(ref Data);
         }
 
         /// <summary>

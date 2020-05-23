@@ -9,7 +9,6 @@ namespace Z0
 
     using static Seed;
     using static Memories;
-    using static HexDigitCode;
 
     [ApiHost]
     public partial class Analogs : IApiHost<Analogs>

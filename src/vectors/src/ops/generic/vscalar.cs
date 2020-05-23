@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The width of the target vector</param>
         /// <param name="a">The scalar to load</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vscalar<T>(W128 w, T src)
             where T : unmanaged
         {
@@ -40,7 +40,7 @@ namespace Z0
         /// Loads a scalar into the first component of a 256-bit vector
         /// </summary>
         /// <param name="a">The scalar to load</param>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vscalar<T>(W256 w, T src)
             where T : unmanaged
         {

@@ -373,5 +373,18 @@ namespace Z0
         /// </summary>        
         EffSize,
 
+        /// <summary>
+        /// Identifies a function that accepts two homogenous componentized values, and perhaps other ingredients, and produces
+        /// an componentized output value where each target component represents a join, via some means, of corresponding operand components
+        /// </summary>        
+        
+        Zip,
+
+        Map,
+
+        VZip,
+
+        VMap,
+
     }    
 }

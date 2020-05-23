@@ -20,7 +20,6 @@ namespace Z0
         public static int increment(ref int src)
             => Interlocked.Increment(ref src);
 
-
         /// <summary>
         /// Atomically increments a value in-place
         /// </summary>
@@ -28,7 +27,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static long increment(ref long src)
             => Interlocked.Increment(ref src);
-
-
     }
 }

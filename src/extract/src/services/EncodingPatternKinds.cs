@@ -37,20 +37,4 @@ namespace Z0
         /// </summary>
         CALL32_INTR = 2*16
     }
-    
-    public static class EncodingPatternKindOps
-    {
-        [MethodImpl(Inline)]
-        public static bool IsSome(this EncodingPatternKind code)
-            => code != 0;
-
-        [MethodImpl(Inline)]
-        public static bool IsPartial(this EncodingPatternKind code)
-            => (uint)code >= 2*16;
-
-        [MethodImpl(Inline)]
-        public static ExtractTermCode ToTermCode(this EncodingPatternKind src)
-            => (ExtractTermCode)src;
-    }    
-
 }

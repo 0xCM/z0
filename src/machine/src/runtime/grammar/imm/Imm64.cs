@@ -11,7 +11,7 @@ namespace Z0.Machines
 
     public readonly struct Imm64 : IImm64<Imm64>
     {
-        public ulong Value {get;}
+        public ulong Data {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator Imm64(ulong src)
@@ -20,7 +20,7 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Imm64(ulong value)
         {
-            Value = value;
+            Data = value;
         }
         
         public DataWidth Width => DataWidth.W64;

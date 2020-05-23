@@ -27,7 +27,7 @@ namespace Z0
             where T : unmanaged
         {
             var src = maxval<T>();
-            var view = BitView.Over(ref src);
+            var view = BitEdit.Over(ref src);
             var bytecount = size<T>();
 
             for(var i=0; i<bytecount; i++)

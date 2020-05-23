@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Seed;
     using static Memories;
@@ -17,9 +18,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The generic type</typeparam>
-        public static BitView<T> Over<T>(ref T src)
+        public static BitView<T> Over<T>(in T src)
             where T : unmanaged
-                => new BitView<T>(ref src);
+                => new BitView<T>(in src);
     }
 
     /// <summary>
@@ -31,7 +32,7 @@ namespace Z0
         /// <summary>
         /// The data over which the view is constructed
         /// </summary>
-        public readonly Span<byte> Bytes;
+        public readonly ReadOnlySpan<byte> Bytes;
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitView<T> lhs, BitView<T> rhs)
@@ -42,9 +43,9 @@ namespace Z0
             => !(lhs == rhs);
 
         [MethodImpl(Inline)]
-        public BitView(ref T src)
+        public BitView(in T src)
         {
-            Bytes = new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<T>());
+            Bytes = MemoryMarshal.CreateReadOnlySpan(ref refs.edit(in src), 1).AsBytes();
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace Z0
         /// <summary>
         /// Selects an offset-identified byte
         /// </summary>
-        public ref byte this[ByteSize offset]
+        public ref readonly byte this[ByteSize offset]
         {
             [MethodImpl(Inline)]
             get => ref Bytes[offset];
@@ -81,9 +82,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => bit.test(Bytes[offset], pos);
-            
-            [MethodImpl(Inline)]
-            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);                
         }
 
         [MethodImpl(Inline)]

@@ -18,7 +18,7 @@ namespace Z0.Machines
         {
             var count = 0;
             ref readonly var current = ref skip(src, 0);
-            for(var i=0; i<CommandM.PhysicalSize; i++)
+            for(var i=0; i<Command.PhysicalSize; i++)
             {
                 ref readonly var src8 = ref skip(current, i);
                 if(src8 != 0)
@@ -32,7 +32,7 @@ namespace Z0.Machines
         /// </summary>
         /// <param name="src">The command</param>
         [MethodImpl(Inline), Op]
-        public static byte size(in CommandM src)
+        public static byte size(in Command src)
             => size(src.Encoded);
     }
 }

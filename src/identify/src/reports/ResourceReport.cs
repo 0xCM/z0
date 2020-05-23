@@ -59,7 +59,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = text.factory.Builder();
+            var dst = text.build();
             dst.AppendField(F.Offset, Offset);
             dst.AppendDelimitedHere(Address, F.Address, delimiter); 
             dst.AppendDelimited(Size.FormatAsmHex(4), FieldFormat.width(F.Size), delimiter); 

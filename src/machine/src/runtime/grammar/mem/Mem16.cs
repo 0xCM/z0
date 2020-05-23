@@ -14,10 +14,10 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Mem16(ushort src)
         {
-            Value = src;
+            Data = src;
         }
 
-        public ushort Value {get;}
+        public ushort Data {get;}
 
         public DataWidth Width => DataWidth.W16;
     }

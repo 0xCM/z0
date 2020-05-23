@@ -90,6 +90,10 @@ namespace Z0
 
         ᛏ = Up,
 
+        ᚾ = 'ᚾ',
+
+        ᛃ = 'ᛃ',
+
         Down = 'ᛎ',
 
         ᛎ = Down,
@@ -98,6 +102,8 @@ namespace Z0
 
         ॽ = Q,
         
+        ᛜ = 'ᛜ' ,
+
         Three = 'З',
 
         З = Three,

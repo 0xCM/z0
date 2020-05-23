@@ -12,29 +12,29 @@ namespace Z0.Machines
 
     public interface IProcessor
     {
-        void Process(ICommand cmd, IProcessState state) {}
+        void Process(ICmd cmd, IProcessState state) {}
     }
 
     public interface IProcessor<C>: IProcessor
-        where C : ICommand
+        where C : ICmd
     {
         
     }
 
     public interface IProcessor<C,S> : IProcessor<C>
-        where C : unmanaged, ICommand
+        where C : unmanaged, ICmd
         where S : IProcessState
     {
         void Process(in C cmd, ref S state);      
 
         [MethodImpl(Inline)]
-        void Process(ICommand cmd, ref S state)
+        void Process(ICmd cmd, ref S state)
             => Process((C)cmd, ref state);
     }
             
     public interface IProcessor<P,C,S> : IProcessor<C>
         where P : unmanaged, IProcessor<P,C,S>
-        where C : unmanaged, ICommand
+        where C : unmanaged, ICmd
         where S : IProcessState
     {
         void Process(in C cmd, ref S state);    

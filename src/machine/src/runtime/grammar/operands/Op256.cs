@@ -15,15 +15,15 @@ namespace Z0.Machines
     /// </summary>
     public readonly struct Op256: IOperand<Op256,W256,Vector256<byte>>
     {
-        public Vector256<byte> Value {get;}
+        public Vector256<byte> Data {get;}
 
-        public OperandKind ArgKind {get;}
+        public OperandKind Kind {get;}
 
         [MethodImpl(Inline)]
         public Op256(Vector256<byte> value, OperandKind kind)
         {
-            Value = value;
-            ArgKind = kind;
+            Data = value;
+            Kind = kind;
         }
 
         public DataWidth Width => DataWidth.W256;

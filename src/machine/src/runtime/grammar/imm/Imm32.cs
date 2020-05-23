@@ -11,7 +11,7 @@ namespace Z0.Machines
 
     public readonly struct Imm32 : IImm32<Imm32>
     {
-        public uint Value {get;}
+        public uint Data {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator Imm32(uint src)
@@ -20,7 +20,7 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Imm32(uint value)
         {
-            Value = value;
+            Data = value;
         }
 
         public DataWidth Width => DataWidth.W32;

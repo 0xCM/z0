@@ -22,7 +22,6 @@ namespace Z0
         public static Perm16 Init(Vector128<byte> data)
             => new Perm16(dvec.vand(data, Vectors.vbroadcast(w, BitMasks.Msb8x8x3)));
                 
-
         /// <summary>
         /// Creates a fixed 16-bit permutation over a generic permutation over 16 elements
         /// </summary>
@@ -30,7 +29,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Perm16 Init(Perm<byte> spec)
             => new Perm16(Vectors.vload(w, spec.Terms));
-
 
         /// <summary>
         /// Creates the identity permutation

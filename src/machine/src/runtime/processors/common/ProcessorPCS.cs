@@ -12,7 +12,7 @@ namespace Z0.Machines
 
     public readonly struct Processor<P,C,S> : IProcessor<Processor<P,C,S>, C, S>
         where P : unmanaged, IProcessor
-        where C : unmanaged, ICommand
+        where C : unmanaged, ICmd
         where S : IProcessState<C,S>
     {
         [MethodImpl(Inline)]
@@ -24,7 +24,7 @@ namespace Z0.Machines
             => Generalized.Process(cmd,ref state);
 
         [MethodImpl(Inline)]
-        public void Process(ICommand cmd, ref S state)
+        public void Process(ICmd cmd, ref S state)
             => Generalized.Process(cmd, ref state);
 
         Processor<C,S> Generalized

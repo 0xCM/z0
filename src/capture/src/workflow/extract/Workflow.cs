@@ -132,7 +132,6 @@ namespace Z0.Asm
         void AnalyzeExtracts(ExtractedMember[] src)
         {
             Raise(AnalyzingExtracts.Define(src));
-
         }
 
         ApiIndex MemberIndex(IApiHost host)

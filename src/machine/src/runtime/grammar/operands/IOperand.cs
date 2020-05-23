@@ -30,14 +30,9 @@ namespace Z0.Machines
         DataWidth Width {get;}
 
         /// <summary>
-        /// The operand value, in bytes
-        /// </summary>
-        ReadOnlySpan<byte> Data {get;}            
-
-        /// <summary>
         /// The operand sort
         /// </summary>
-        OperandKind ArgKind {get;}
+        OperandKind Kind {get;}
     }
 
     public interface IOperand<T> : IOperand
@@ -46,10 +41,7 @@ namespace Z0.Machines
         /// <summary>
         /// The operand value
         /// </summary>
-        T Value {get;}   
-
-        ReadOnlySpan<byte> IOperand.Data
-            => Spans.view8<T>(Value);
+        T Data {get;}   
 
         DataWidth IOperand.Width => (DataWidth)bitsize<T>();
     }

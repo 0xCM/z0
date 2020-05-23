@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
     
     /// <summary>
     /// Defines the potential byte parser states
@@ -24,18 +27,5 @@ namespace Z0
         Completed = Failed | Succeeded
     }
 
-    public static class ByteParserStateOps
-    {
-        public static bool Finished(this ByteParserState state)
-            => (state & ByteParserState.Completed) != 0;
 
-        public static bool IsAccepting(this ByteParserState state)
-            => state == ByteParserState.Accepting;
-
-        public static bool IsSome(this ByteParserState state)
-            => state != 0;
-
-        public static bool Success(this ByteParserState state)
-            => state == ByteParserState.Succeeded;
-    }    
 }

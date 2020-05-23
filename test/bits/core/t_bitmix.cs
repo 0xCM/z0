@@ -97,7 +97,7 @@ namespace Z0
             var yO = Bits.scatter(Bits.gather(y,BitMasks.Odd32), BitMasks.Odd32);
             var xEy = xE | yE;
             var xOy = xO | yO;
-            var t = text.factory.Builder();
+            var t = text.build();
             var sep = Chars.Colon;
             t.AppendLabeled("x", sep, x.FormatBits(1));
             t.AppendLabeled("x", sep, x.FormatBits(1));

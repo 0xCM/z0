@@ -11,7 +11,7 @@ namespace Z0.Machines
 
     public readonly struct Imm8 : IImm8<Imm8>
     {
-        public byte Value {get;}
+        public byte Data {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator Imm8(byte src)
@@ -20,7 +20,7 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Imm8(byte value)
         {
-            Value = value;
+            Data = value;
         }
 
         public DataWidth Width 

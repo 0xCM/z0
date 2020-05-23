@@ -43,7 +43,7 @@ namespace Z0
         }
         public string Format()
         {
-            var sb = text.factory.Builder();
+            var sb = text.build();
             sb.Append(Chars.LParen);
             for(var i=0; i< Terms.Length; i++)            
             {

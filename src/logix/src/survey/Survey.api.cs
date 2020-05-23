@@ -257,7 +257,7 @@ namespace Z0.Logix
         public static string Format<T>(in Survey<T> src)
             where T : unmanaged
         {
-            var format = text.factory.Builder();
+            var format = text.build();
             format.AppendLine(src.Name);
             format.AppendLine(new string(Chars.Dash,80));
             for(var i=0; i<src.Questions.Length; i++)

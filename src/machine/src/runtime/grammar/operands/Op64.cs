@@ -14,15 +14,15 @@ namespace Z0.Machines
     /// </summary>
     public readonly struct Op64 : IOperand<Op64,W64,ulong>
     {
-        public ulong Value {get;}
+        public ulong Data {get;}
 
-        public OperandKind ArgKind {get;}
+        public OperandKind Kind {get;}
 
         [MethodImpl(Inline)]
         public Op64(ulong value, OperandKind kind)
         {
-            Value = value;
-            ArgKind = kind;
+            Data = value;
+            Kind = kind;
         }
 
         public DataWidth Width => DataWidth.W64;

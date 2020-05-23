@@ -11,7 +11,7 @@ namespace Z0.Machines
     using static Memories;
 
     public readonly struct Processor<C,S> : IProcessor<C,S>
-        where C : unmanaged, ICommand
+        where C : unmanaged, ICmd
         where S : IProcessState<C,S>
     {
         [MethodImpl(Inline)]
@@ -21,7 +21,7 @@ namespace Z0.Machines
         }
 
         [MethodImpl(Inline)]
-        public void Process(ICommand cmd, ref S state)
+        public void Process(ICmd cmd, ref S state)
             => Process((C)cmd, ref state);
     }
 }

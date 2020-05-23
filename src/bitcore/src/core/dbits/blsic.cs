@@ -8,9 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Seed;
+    using static Memories;
 
     partial class Bits
     {                
+        /// <summary>
+        /// Defines a parity index j from a source integer i and a parity bit p, j := i*2 + p
+        /// </summary>
+        /// <param name="i">The source integer</param>
+        /// <param name="p">The parity bit</param>
+        [MethodImpl(Inline)]        
+        public static byte pindex(int i, bit p)
+            => uint8(i*2 + (int)p);
+
         /// <summary>
         /// Isolate least set bit and complement, computed by dst := ~src | (src - 1),
         /// where all bits in the target are set except for the least set bit in the source

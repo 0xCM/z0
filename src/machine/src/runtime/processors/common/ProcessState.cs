@@ -16,12 +16,12 @@ namespace Z0.Machines
     {
         internal object Current;
         
-        List<ICommand> Commands;
+        List<ICmd> Commands;
 
         public object State => Current;
 
         [MethodImpl(Inline)]
-        internal ProcessState(object state, Seq<ICommand> commands)
+        internal ProcessState(object state, Seq<ICmd> commands)
         {
             Current = state;
             Commands = commands.ToList();
@@ -31,10 +31,10 @@ namespace Z0.Machines
         internal ProcessState(object state)
         {
             Current = state;
-            Commands = new List<ICommand>();
+            Commands = new List<ICmd>();
         }
 
-        public void Handled(ICommand cmd)
+        public void Handled(ICmd cmd)
             => Commands.Add(cmd);        
     }
 }

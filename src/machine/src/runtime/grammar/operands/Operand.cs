@@ -9,27 +9,32 @@ namespace Z0.Machines
 
     using static Seed;
 
-    public readonly struct Operand : IOperand
+    public readonly struct Operand<T> : IOperand<T>
+        where T : unmanaged
     {
-        readonly byte[] Cells;
-
         public DataWidth Width {get;}
 
-        public OperandKind ArgKind {get;}
+        public OperandKind Kind {get;}
+
+        public T Data {get;}
 
         [MethodImpl(Inline)]
-        public Operand(byte[] data, OperandKind kind)
+        public Operand(OperandKind kind, DataWidth width, T data)
         {
-            Cells = data;
-            Width = (DataWidth)(data.Length * 8);
-            ArgKind = kind;
-        }
+            Width =  width;
+            Kind = kind;
+            Data = data;
 
-        public ReadOnlySpan<byte> Data
-        {
-            [MethodImpl(Inline)]
-            get => Cells;
-        }        
-    }
+        }
  
+    }
+    
+    public readonly struct Operand : IOperand
+    {
+        public DataWidth Width {get;}
+
+        public OperandKind Kind {get;}
+
+    }
+
 }

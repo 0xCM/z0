@@ -9,9 +9,58 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed;
+    using static Memories;
     
     partial class Vectors
     {
+        /// <summary>
+        /// Allocates and deposits vector content to a data block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [Op, Closures(AllNumeric)]
+        public static Block128<T> block<T>(Vector128<T> src)
+            where T : unmanaged            
+        {
+            var w = w128;
+            var stack = Stacks.alloc(w);
+            ref var dst = ref Stacks.head<T>(ref stack);
+            vstore(src,ref dst);
+            return Blocks.load(w, ref dst);            
+        }                       
+
+        /// <summary>
+        /// Allocates and deposits vector content to a data block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [Op, Closures(AllNumeric)]
+        public static Block256<T> block<T>(Vector256<T> src)
+            where T : unmanaged            
+        {
+            var w = w256;
+            var stack = Stacks.alloc(w);
+            ref var dst = ref Stacks.head<T>(ref stack);
+            vstore(src,ref dst);
+            return Blocks.load(w, ref dst);            
+        }            
+
+        /// <summary>
+        /// Allocates and deposits vector content to a data block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [Op, Closures(AllNumeric)]
+        public static Block512<T> block<T>(Vector512<T> src)
+            where T : unmanaged            
+        {
+            var w = w512;
+            var stack = Stacks.alloc(w);
+            ref var dst = ref Stacks.head<T>(ref stack);
+            vstore(src,ref dst);
+            return Blocks.load(w, ref dst);            
+        }                  
+
         /// <summary>
         /// Stores the source vector to the head of a blocked container
         /// </summary>

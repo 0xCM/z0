@@ -13,7 +13,7 @@ namespace Z0
 
     partial class Vectors
     {
-       /// <summary>
+        /// <summary>
         /// Creates a 128-bit vector with all bits enabled
         /// </summary>
         /// <param name="n">The vector width selector</param>
@@ -43,14 +43,5 @@ namespace Z0
             where T : unmanaged
                 => Vectors.veq(default(Vector512<T>), default(Vector512<T>));
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> vones<T>(Vec128Kind<T> kind)
-            where T : unmanaged
-                => vones<T>(w128);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vones<T>(Vec256Kind<T> kind)
-            where T : unmanaged
-                => vones<T>(w256);
     }
 }

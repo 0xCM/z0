@@ -102,7 +102,7 @@ namespace Z0.Asm
 
         public static string render(in AsmFunctionList src)
         {
-            var dst = text.factory.Builder();
+            var dst = text.build();
             for(var i=0; i<src.Content.Length; i++)
             {
                 dst.Append(lines(src.Content[i]).Concat());
@@ -119,7 +119,7 @@ namespace Z0.Asm
         public static string render(AsmFunction src, in AsmFormatSpec? cfg = null)
         {            
             var config = cfg ?? AsmFormatSpec.Default;
-            var dst = text.factory.Builder();
+            var dst = text.build();
 
             if(config.EmitSectionDelimiter)
                 dst.AppendLine(config.SectionDelimiter);

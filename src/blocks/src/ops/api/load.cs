@@ -6,8 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.InteropServices;    
 
     using static Seed;        
+    using static Memories;
 
     partial class Blocks
     {
@@ -96,6 +98,7 @@ namespace Z0
             return unsafeload(w, offset == 0 ? src : src.Slice(offset));
         }
 
+ 
         /// <summary>
         /// Loads 256-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>

@@ -63,8 +63,8 @@ namespace Z0
         /// <typeparam name="T">The term type</typeparam>
         public static string FormatAsPerm<T>(this ReadOnlySpan<T> terms,  int? colwidth = null)
         {
-            var line1 = text.factory.Builder();
-            var line2 = text.factory.Builder();
+            var line1 = text.build();
+            var line2 = text.build();
             var pad = colwidth ?? 3;
             var leftBoundary = $"{Chars.Pipe}";
             var rightBoundary = $"{Chars.Pipe}".PadLeft(2);
@@ -79,7 +79,7 @@ namespace Z0
             line1.Append(rightBoundary);
             line2.Append(rightBoundary);
             
-            return line1.ToString() + text.eol() + line2.ToString();
+            return line1.ToString() + text.eol + line2.ToString();
         }
 
         /// <summary>

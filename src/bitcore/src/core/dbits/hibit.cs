@@ -16,63 +16,63 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static BitState msb(byte src)
-            => (BitState)(byte)testbit(src,7);
+        public static BitKind msb(byte src)
+            => (BitKind)(byte)testbit(src,7);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static BitState msb(sbyte src)
-            => (BitState)(byte)testbit(src,7);
+        public static BitKind msb(sbyte src)
+            => (BitKind)(byte)testbit(src,7);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static BitState msb(ushort src)
-            => (BitState)(byte)testbit(src,15);
+        public static BitKind msb(ushort src)
+            => (BitKind)(byte)testbit(src,15);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static BitState msb(short src)
-            => (BitState)(byte)testbit(src,15);
+        public static BitKind msb(short src)
+            => (BitKind)(byte)testbit(src,15);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static BitState msb(uint src)
-            => (BitState)(byte)testbit(src,31);
+        public static BitKind msb(uint src)
+            => (BitKind)(byte)testbit(src,31);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static BitState msb(int src)
-            => (BitState)(byte)testbit(src,31);
+        public static BitKind msb(int src)
+            => (BitKind)(byte)testbit(src,31);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static BitState msb(ulong src)
-            => (BitState)(byte)testbit(src,63);
+        public static BitKind msb(ulong src)
+            => (BitKind)(byte)testbit(src,63);
 
         /// <summary>
         /// Returns the state of the most significant bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static BitState msb(long src)
-            => (BitState)(byte)testbit(src,63);
+        public static BitKind msb(long src)
+            => (BitKind)(byte)testbit(src,63);
     }
 }

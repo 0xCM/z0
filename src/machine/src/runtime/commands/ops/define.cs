@@ -22,8 +22,8 @@ namespace Z0.Machines
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static CommandM define(Vector128<byte> src)
-            => new CommandM(src);
+        public static Command define(Vector128<byte> src)
+            => new Command(src);
 
         [MethodImpl(Inline), Op]
         internal static ulong write(byte count, ulong dst)
@@ -35,24 +35,24 @@ namespace Z0.Machines
         /// <param name="lo">The lo bytes</param>
         /// <param name="hi">The hi bytes</param>
         [MethodImpl(Inline), Op]
-        public static CommandM define(ulong lo, ulong hi)
-            => new CommandM(v8u(Vector128.Create(lo,hi)));    
+        public static Command define(ulong lo, ulong hi)
+            => new Command(v8u(Vector128.Create(lo,hi)));    
 
         /// <summary>
         /// Creates a command from data supplied in a 64-bit unsigned integer
         /// </summary>
         /// <param name="data">The data source</param>
         [MethodImpl(Inline), Op]
-        public static CommandM define(ulong data)
-            => new CommandM(v8u(Vector128.Create(data, write(Bits.effsize(data),0ul))));
+        public static Command define(ulong data)
+            => new Command(v8u(Vector128.Create(data, write(Bits.effsize(data),0ul))));
 
         /// <summary>
         /// Creates a command from the data supplied in a 64-bit unsigned integer
         /// </summary>
         /// <param name="data">The data source</param>
         [MethodImpl(Inline), Op]
-        public static CommandM define(uint data)
-            => new CommandM(v8u(Vector128.Create((ulong)data, write(Bits.effsize(data),0ul))));
+        public static Command define(uint data)
+            => new Command(v8u(Vector128.Create((ulong)data, write(Bits.effsize(data),0ul))));
 
     }
 }

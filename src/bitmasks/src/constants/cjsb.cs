@@ -42,21 +42,25 @@ namespace Z0
         /// <summary>
         /// [0b11011011]
         /// </summary>
+        [BinaryLiteral("[11011011]")]
         public const byte CJsb8x8x2x2 = Central8x8x2 | Jsb8x8x2;
 
         /// <summary>
         /// [0b11011011_11011011]
         /// </summary>
+        [BinaryLiteral("[11011011 11011011]")]
         public const ushort CJsb16x8x2x2 = (ushort)CJsb8x8x2x2 | (ushort)CJsb8x8x2x2 << 8;
 
         /// <summary>
-        /// [0b11011011_11011011_11011011_11011011]
+        /// [11011011 11011011 11011011 11011011]
         /// </summary>
+        [BinaryLiteral("[11011011 11011011 11011011 11011011]")]
         public const uint CJsb32x8x2x2 = (uint)CJsb16x8x2x2 | (uint)CJsb16x8x2x2 << 16;
 
         /// <summary>
         /// [0b11011011_11011011_11011011_11011011_11011011_11011011_11011011_11011011]
         /// </summary>
+        [BinaryLiteral("[11011011 11011011 11011011 11011011 11011011 11011011 11011011 11011011]")]
         public const ulong CJsb64x8x2x2 = (ulong)CJsb32x8x2x2 | (ulong)CJsb32x8x2x2 << 32;
 
         // ~ CJsb8x4 [10111101]

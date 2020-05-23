@@ -14,10 +14,10 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Mem512(Vector512<byte> src)
         {
-            Value = src;
+            Data = src;
         }
 
-        public Vector512<byte> Value {get;}
+        public Vector512<byte> Data {get;}
 
         public DataWidth Width => DataWidth.W512;
     }

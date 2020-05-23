@@ -13,7 +13,7 @@ namespace Z0.Machines
     public readonly struct Processor : IProcessor
     {
         [MethodImpl(Inline)]
-        public void Process(ICommand cmd, IProcessState state)
+        public void Process(ICmd cmd, IProcessState state)
         {
             state.Handled(cmd);
         }

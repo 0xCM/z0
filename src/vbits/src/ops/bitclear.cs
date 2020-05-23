@@ -45,9 +45,6 @@ namespace Z0
             var cellmask = gbits.eraser<T>(start,count);
             var vmask = Vectors.vbroadcast(n, cellmask);
             return gvec.vand(vmask,src);
-        }         
-         
+        }                  
     }
-
-
 }

@@ -14,10 +14,10 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Mem8(byte src)
         {
-            Value = src;
+            Data = src;
         }
         
-        public byte Value {get;}
+        public byte Data {get;}
 
         public DataWidth Width => DataWidth.W8;
     }

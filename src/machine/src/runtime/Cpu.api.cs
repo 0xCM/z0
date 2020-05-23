@@ -18,9 +18,9 @@ namespace Z0.Machines
 
         const int BufferSize = ByteBuffer.BufferSize;
 
-        ByteBuffer<HexCodeUpper> _StepBuffer;
+        ByteBuffer<HexDigitCodeUp> _StepBuffer;
 
-        ByteBuffer<HexCodeUpper> _RunBuffer;
+        ByteBuffer<HexDigitCodeUp> _RunBuffer;
 
         char[] _LogBuffer;
 
@@ -29,13 +29,13 @@ namespace Z0.Machines
         public Cpu()
         {
             _LogBuffer = Control.alloc<char>(BufferSize);
-            _StepBuffer = ByteBuffer.Init(Control.alloc<HexCodeUpper>(BufferSize));
-            _RunBuffer = ByteBuffer.Init(Control.alloc<HexCodeUpper>(BufferSize));            
+            _StepBuffer = ByteBuffer.Init(Control.alloc<HexDigitCodeUp>(BufferSize));
+            _RunBuffer = ByteBuffer.Init(Control.alloc<HexDigitCodeUp>(BufferSize));            
             _RunIndex = 0;
         }
 
         [MethodImpl(Inline), Op]
-        Span<HexCodeUpper> StepBuffer()
+        Span<HexDigitCodeUp> StepBuffer()
         {            
             _StepBuffer.Clear(w128);
             return _StepBuffer.Content;
@@ -49,7 +49,7 @@ namespace Z0.Machines
             return buffer;                
         }
 
-        Span<HexCodeUpper> RunBuffer
+        Span<HexDigitCodeUp> RunBuffer
         {
             [MethodImpl(Inline)]
             get => _RunBuffer.Content;
@@ -58,6 +58,8 @@ namespace Z0.Machines
         [Op]
         public void Run()
         {
+            Commands.Extract();
+            
             var data = 0xCE_38ul;
             Run(data);
             var steps = RunBuffer.Slice(0, _RunIndex);
@@ -72,7 +74,7 @@ namespace Z0.Machines
             => Dispatch(Commands.define(data));
 
         [Op, MethodImpl(Inline)]
-        public void Dispatch(in CommandM src)
+        public void Dispatch(in Command src)
         {
             var bytes = src.Encoded.Slice(0,src.Size);
             Execute(bytes);

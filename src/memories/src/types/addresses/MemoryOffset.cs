@@ -9,61 +9,54 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct MemoryOffset : 
-        IAddressable, 
-        INullaryKnown, 
-        INullary<MemoryOffset>
+    public readonly struct MemoryOffset : IAddressable<MemoryOffset>
     {
+        public static MemoryOffset Empty 
+            => new MemoryOffset(MemoryAddress.Empty, 0, NumericWidth.None);
+
         public MemoryAddress Base {get;}
 
         public ulong Offset {get;}
 
         public NumericWidth OffsetWidth {get;}
 
-        public static MemoryOffset Empty  => new MemoryOffset(0, 0, 0);
+        /// <summary>
+        /// The offset magnitude presented as an address
+        /// </summary>
+        public MemoryAddress OffsetAddress
+        {
+            [MethodImpl(Inline)] 
+            get => Offset;
+        }
 
-        MemoryAddress IAddressable.Address => Base;
+        /// <summary>
+        /// The absolute address
+        /// </summary>
+        public MemoryAddress Absolute
+        {
+            [MethodImpl(Inline)] 
+            get => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
+        }
 
-        public MemoryOffset Zero  { [MethodImpl(Inline)] get => Empty; }
+        MemoryAddress IAddressable.Address 
+            => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
+
+        public MemoryOffset Zero  
+        { 
+            [MethodImpl(Inline)] 
+            get => Empty; 
+        }
 
         public bool IsEmpty 
         { 
             [MethodImpl(Inline)] 
-            get => Base == 0 && Offset == 0 && OffsetWidth == 0;
+            get => Base.Location == 0 && Offset == 0;
         }
 
-        public bool IsNonEmpty  { [MethodImpl(Inline)] get => !IsNonEmpty; }
-
-        [MethodImpl(Inline)]
-        public static MemoryOffset Define(MemoryAddress @base, byte offset)
-            => new MemoryOffset(@base, offset, NumericWidth.W8);
-
-        [MethodImpl(Inline)]
-        public static MemoryOffset Define(MemoryAddress @base, ushort offset)
-            => new MemoryOffset(@base, offset, NumericWidth.W16);
-
-        [MethodImpl(Inline)]
-        public static MemoryOffset Define(MemoryAddress @base, uint offset)
-            => new MemoryOffset(@base, offset, NumericWidth.W32);
-
-        [MethodImpl(Inline)]
-        public static MemoryOffset Define(MemoryAddress @base, ulong offset)
-            => new MemoryOffset(@base, offset, NumericWidth.W64);
-
-        
-
-        [MethodImpl(Inline)]
-        public static MemoryOffset Derive(MemoryAddress @base, MemoryAddress relative)
-        {
-            var offset = @base.Location - relative.Location;
-            if(offset <= byte.MaxValue)
-                return Define(@base, (byte)offset);
-            else if(offset <= ushort.MaxValue)
-                return Define(@base, (ushort)offset);
-            else if(offset <= uint.MaxValue)
-                return Define(@base, (uint)offset);
-            else
-                return Define(@base, offset);
+        public bool IsNonEmpty  
+        { 
+            [MethodImpl(Inline)] 
+            get => !IsNonEmpty; 
         }
 
         [MethodImpl(Inline)]
@@ -75,7 +68,7 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        MemoryOffset(MemoryAddress @base, ulong offset, NumericWidth width)
+        internal MemoryOffset(MemoryAddress @base, ulong offset, NumericWidth width)
         {
             Base = @base;
             Offset = offset;

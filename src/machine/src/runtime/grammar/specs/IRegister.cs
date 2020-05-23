@@ -14,7 +14,7 @@ namespace Z0.Machines
 
     public interface IRegister : IOperand
     {
-        OperandKind IOperand.ArgKind 
+        OperandKind IOperand.Kind 
             => OperandKind.Register;
 
         RegisterKind RegisterKind {get;}

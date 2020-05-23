@@ -15,10 +15,10 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Mem128(Vector128<byte> src)
         {
-            Value = src;
+            Data = src;
         }
 
-        public Vector128<byte> Value {get;}
+        public Vector128<byte> Data {get;}
 
         public DataWidth Width => DataWidth.W128;
     }

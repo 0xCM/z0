@@ -79,5 +79,13 @@ namespace Z0
 
         Copy = Id.Copy,
 
+        Zip = Id.Zip,
+
+        Map = Id.Map,
+
+        VZip = Id.VZip,
+
+        VMap = Id.VMap,
+
     }   
 }

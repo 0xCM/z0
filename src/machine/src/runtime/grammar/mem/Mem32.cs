@@ -14,10 +14,10 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Mem32(uint src)
         {
-            Value = src;
+            Data = src;
         }
 
-        public uint Value {get;}
+        public uint Data {get;}
 
         public DataWidth Width => DataWidth.W32;
     }

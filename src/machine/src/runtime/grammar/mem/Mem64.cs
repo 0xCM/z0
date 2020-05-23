@@ -14,10 +14,10 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Mem64(ulong src)
         {
-            Value = src;
+            Data = src;
         }
 
-        public ulong Value {get;}
+        public ulong Data {get;}
 
         public DataWidth Width => DataWidth.W64;
     }

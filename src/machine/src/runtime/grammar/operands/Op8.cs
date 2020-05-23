@@ -14,15 +14,15 @@ namespace Z0.Machines
     /// </summary>
     public readonly struct Op8 : IOperand<Op8,W8,byte>
     {
-        public byte Value {get;}
+        public byte Data {get;}
 
-        public OperandKind ArgKind {get;}
+        public OperandKind Kind {get;}
 
         [MethodImpl(Inline)]
         public Op8(byte value, OperandKind kind)
         {
-            Value = value;
-            ArgKind = kind;
+            Data = value;
+            Kind = kind;
         }
 
         public DataWidth Width => DataWidth.W8;

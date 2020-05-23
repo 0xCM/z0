@@ -15,10 +15,10 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public Mem256(Vector256<byte> src)
         {
-            Value = src;
+            Data = src;
         }
 
-        public Vector256<byte> Value {get;}
+        public Vector256<byte> Data {get;}
 
         public DataWidth Width => DataWidth.W256;
     }

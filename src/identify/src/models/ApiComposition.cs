@@ -41,13 +41,13 @@ namespace Z0
 
         public string Format()
         {
-            var dst = text.factory.Builder();
+            var dst = text.build();
             for(var i=0; i < Resolved.Length; i++)
             {
                 dst.Append(Resolved[i].Format());
                 if(i != Resolved.Length - 1)
                 {
-                    dst.Append(text.comma());
+                    dst.Append(text.comma);
                     dst.Append(text.space());
                 }
             }
