@@ -23,7 +23,6 @@ namespace Z0.Asm.Data
             where R : IRecord
             where M : IAsmDataModel
             where D : unmanaged, Enum;
-
     }
     
     public readonly struct AsmDataReader : IAsmDataReader, IAsmArchiveConfig

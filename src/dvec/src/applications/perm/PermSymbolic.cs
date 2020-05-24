@@ -27,7 +27,7 @@ namespace Z0
 
             var dst = new Perm4L[length];
             for(var i=0; i < length; i++)
-                if(!PermSymbolic.literal(src,i, out dst[i]))
+                if(!literal(src,i, out dst[i]))
                     return Span<Perm4L>.Empty;
 
             return dst;
@@ -44,7 +44,7 @@ namespace Z0
             const int length = 8;
 
             for(var i=0; i< length; i++)
-                if(!PermSymbolic.literal(src, i, out dst[i]))
+                if(!literal(src, i, out dst[i]))
                     return false;
             
             return true;
@@ -77,7 +77,7 @@ namespace Z0
             const int length = 16;
 
             for(var i=0; i< length; i++)
-                if(!PermSymbolic.literal(src, i, out dst[i]))
+                if(!literal(src, i, out dst[i]))
                     return false;
             
             return true;
@@ -185,94 +185,22 @@ namespace Z0
                     orderby maps.perm descending
                     select maps;
 
-        /// <summary>
-        /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
-        /// </summary>
-        /// <param name="src">The perm spec</param>
-        [MethodImpl(Inline), Op]
-        public static Span<byte> digits(Perm4L src, Span<byte> dst)
-        {
-            var scalar = (byte)src;
-            seek(dst,0) = BitOps.extract(scalar, 0, 1);
-            seek(dst,1) = BitOps.extract(scalar, 2, 3);
-            seek(dst,2) = BitOps.extract(scalar, 4, 5);
-            seek(dst,3) = BitOps.extract(scalar, 6, 7);
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static Span<byte> digits(Perm4L src)
-            => digits(src,new byte[4]);
 
         /// <summary>
-        /// Computes the digits corresponding to each 3-bit segment of the permutation spec
+        /// Computes the minimum number of cells required to store a specified number of bits
         /// </summary>
-        /// <param name="src">The perm spec</param>
+        /// <param name="w">The cell width</param>
+        /// <param name="n">The bit count/number of matrix columns</param>
         [MethodImpl(Inline), Op]
-        public static Span<OctalDigit> digits(Perm8L src, Span<OctalDigit> dst)
+        static int mincells(ulong w, ulong n)
         {
-            //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
-            var scalar = (uint)src;
-            seek(dst,0) = (OctalDigit)BitOps.extract(scalar, 0, 2);
-            seek(dst,1) = (OctalDigit)BitOps.extract(scalar, 3, 5);
-            seek(dst,2) = (OctalDigit)BitOps.extract(scalar, 6, 8);
-            seek(dst,3) = (OctalDigit)BitOps.extract(scalar, 9, 11);
-            seek(dst,4) = (OctalDigit)BitOps.extract(scalar, 12, 14);
-            seek(dst,5) = (OctalDigit)BitOps.extract(scalar, 15, 17);
-            seek(dst,6) = (OctalDigit)BitOps.extract(scalar, 18, 20);
-            seek(dst,7) = (OctalDigit)BitOps.extract(scalar, 21, 23);
-            return dst;
-        }
+            // if a single cell covers a column then there's no need for computation
+            if(w >= n)
+                return 1;
 
-        [MethodImpl(Inline), Op]
-        public static Span<OctalDigit> digits(Perm8L src)
-            => digits(src, new OctalDigit[8]);
-
-        /// <summary>
-        /// Computes the digits corresponding to each 4-bit segment of the permutation spec
-        /// </summary>
-        /// <param name="src">The perm spec</param>
-        [MethodImpl(Inline), Op]
-        public static Span<HexDigit> digits(Perm16L src, Span<HexDigit> dst)
-        {
-            var scalar = (ulong)src;
-            seek(dst,0) = (HexDigit)BitOps.extract(scalar, 0, 3);
-            seek(dst,1) = (HexDigit)BitOps.extract(scalar, 4, 7);
-            seek(dst,2) = (HexDigit)BitOps.extract(scalar, 8, 11);
-            seek(dst,3) = (HexDigit)BitOps.extract(scalar, 12, 15);
-            seek(dst,4) = (HexDigit)BitOps.extract(scalar, 16, 19);
-            seek(dst,5) = (HexDigit)BitOps.extract(scalar, 20, 23);
-            seek(dst,6) = (HexDigit)BitOps.extract(scalar, 24, 27);
-            seek(dst,7) = (HexDigit)BitOps.extract(scalar, 28, 31);
-            seek(dst,8) = (HexDigit)BitOps.extract(scalar, 32, 35);
-            seek(dst,9) = (HexDigit)BitOps.extract(scalar, 36, 39);
-            seek(dst,10) = (HexDigit)BitOps.extract(scalar, 40, 43);
-            seek(dst,11) = (HexDigit)BitOps.extract(scalar, 44, 47);
-            seek(dst,12) = (HexDigit)BitOps.extract(scalar, 48, 53);
-            seek(dst,13) = (HexDigit)BitOps.extract(scalar, 52, 55);
-            seek(dst,14) = (HexDigit)BitOps.extract(scalar, 56, 59);
-            seek(dst,15) = (HexDigit)BitOps.extract(scalar, 60, 63);
-            return dst;
-        }
-        
-        [MethodImpl(Inline), Op]
-        public static Span<HexDigit> digits(Perm16L src)        
-            => digits(src, new HexDigit[16]);
-
-        /// <summary>
-        /// Creates value-to-symbol index
-        /// </summary>
-        /// <typeparam name="E">The enumeration type that defines the symbols</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        public static IDictionary<T,char> index<E,T>()
-            where E : unmanaged, Enum
-            where T : unmanaged
-        {
-            var values = Enums.dictionary<E,T>();
-            var index = new Dictionary<T,char>();
-            foreach(var kvp in values)
-                index[kvp.Key] = kvp.Value.ToString().Last();
-            return index;
+            var q = n / w;
+            var r = n % w;
+            return (int)(r == 0 ? q : q + 1);
         }
 
         /// <summary>
@@ -290,9 +218,9 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var index = index<E,T>();
-            var bitcount = maxbits ?? bitsize<T>();
-            var count = BitCalcs.mincells(segwidth, bitcount);
+            var index = Symbolic.index<E,T>();
+            var bitcount = maxbits ?? Control.bitsize<T>();
+            var count = mincells((ulong)segwidth, (ulong)bitcount);
             Span<char> symbols = new char[count];
             for(int i=0, bitpos = 0; i<count; i++, bitpos += segwidth)
             {
@@ -337,139 +265,6 @@ namespace Z0
         public static ReadOnlySpan<char> symbols(Perm2x4 src)
             => symbols<Perm4Sym,byte>((byte)src,4);
 
-        /// <summary>
-        /// Determines whether a permutation literal is a symbol
-        /// </summary>
-        /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(Perm4L src)
-            => (byte)src <= 3;
-
-        /// <summary>
-        /// Determines whether a permutation literal is a symbol
-        /// </summary>
-        /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(Perm8L src)
-            => (uint)src <= 7;
-
-        /// <summary>
-        /// Determines whether a permutation literal is a symbol
-        /// </summary>
-        /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(Perm16L src)
-            => (ulong)src <= 15;
- 
-        [MethodImpl(Inline)]
-        static uint assemble4(uint x0, uint x1, uint x2, uint x3)
-            => x0 | x1 << 2 | x2 << 4 | x3 << 6;
-
-        [MethodImpl(Inline)]
-        static ulong assemble16(
-            ulong x0, ulong x1, ulong x2, ulong x3, 
-            ulong x4, ulong x5, ulong x6, ulong x7, 
-            ulong x8, ulong x9, ulong xA, ulong xB, 
-            ulong xC, ulong xD, ulong xE, ulong xF) 
-              => x0 | x1 << 4  | x2 << 8  | x3 << 12 
-                    | x4 << 16 | x5 << 20 | x6 << 24 | x7 << 28 
-                    | x8 << 32 | x9 << 36 | xA << 40 | xB << 44 
-                    | xC << 48 | xD << 52 | xE << 56 | xF << 60;                   
-
-        /// <summary>
-        /// Constructs a permutation of length four from four ordered symbols
-        /// </summary>
-        [MethodImpl(Inline),Op]
-        public static Perm4L assemble(Perm4L x0, Perm4L x1, Perm4L x2, Perm4L x3)
-            => (Perm4L)assemble4((uint)x0, (uint)x1, (uint)x2, (uint)x3);
-
-        /// <summary>
-        /// Constructs a permutation of length 8 from 8 ordered symbols
-        /// </summary>
-        [MethodImpl(Inline),Op]
-        public static Perm8L assemble(
-            Perm8L x0, Perm8L x1, Perm8L x2, Perm8L x3, 
-            Perm8L x4, Perm8L x5, Perm8L x6, Perm8L x7)
-        {               
-            var dst = (uint)x0       | (uint)x1 << 3  | (uint)x2 << 6  | (uint)x3 << 9 
-                    | (uint)x4 << 12 | (uint)x5 << 15 | (uint)x6 << 18 | (uint)x7 << 21; 
-            return (Perm8L)dst;
-        }
-
-        /// <summary>
-        /// Constructs a permutation of length 16 from 16 ordered symbols
-        /// </summary>
-        [MethodImpl(Inline),Op]
-        public static Perm16L assemble(
-            Perm16L x0, Perm16L x1, Perm16L x2, Perm16L x3, 
-            Perm16L x4, Perm16L x5, Perm16L x6, Perm16L x7, 
-            Perm16L x8, Perm16L x9, Perm16L xA, Perm16L xB, 
-            Perm16L xC, Perm16L xD, Perm16L xE, Perm16L xF) 
-                => (Perm16L)assemble16(
-                        (ulong)x0,(ulong)x1,(ulong)x2,(ulong)x3,
-                        (ulong)x4,(ulong)x5,(ulong)x6,(ulong)x7,
-                        (ulong)x8,(ulong)x9,(ulong)xA,(ulong)xB,
-                        (ulong)xC,(ulong)xD,(ulong)xE,(ulong)xF
-                        );
-
-        /// <summary>
-        /// Defines the canonical literal representation of the reversal of the identity permutation on 4 symbols
-        /// </summary>
-        /// <param name="n">The symbol count selector</param>
-        [MethodImpl(Inline), Op]
-        public static Perm4L reversed(N4 n)
-            => Perm4L.DCBA;
-
-        /// <summary>
-        /// Defines the canonical literal representation of the reversal of the identity permutation on 8 symbols
-        /// </summary>
-        /// <param name="n">The symbol count selector</param>
-        [MethodImpl(Inline), Op]
-        public static Perm8L reversed(N8 n)
-            => assemble(
-                Perm8L.H, Perm8L.G, Perm8L.F, Perm8L.E,
-                Perm8L.D, Perm8L.C, Perm8L.B, Perm8L.A);
-
-        /// <summary>
-        /// Returns the canonical literal representation of the reversal of the identity permutation on 16 symbols
-        /// </summary>
-        /// <param name="n">The symbol count selector</param>
-        [MethodImpl(Inline), Op]
-        public static Perm16L reversed(N16 n)
-            => assemble(
-                Perm16L.XF,Perm16L.XE,Perm16L.XD,Perm16L.XC,
-                Perm16L.XB,Perm16L.XA,Perm16L.X9,Perm16L.X8,
-                Perm16L.X7,Perm16L.X6,Perm16L.X5,Perm16L.X4,
-                Perm16L.X3,Perm16L.X2,Perm16L.X1,Perm16L.X0);
-
-        /// <summary>
-        /// Defines the identity permutation on 4 symbols
-        /// </summary>
-        /// <param name="n">The symbol count selector</param>
-        [MethodImpl(Inline), Op]
-        public static Perm4L identity(N4 n)
-            => Perm4L.ABCD;
-
-        /// <summary>
-        /// Defines the identity permutation on 8 symbols
-        /// </summary>
-        /// <param name="n">The symbol count selector</param>
-        [MethodImpl(Inline), Op]
-        public static Perm8L identity(N8 n)
-            => assemble(
-                Perm8L.A, Perm8L.B, Perm8L.C, Perm8L.D,
-                Perm8L.E, Perm8L.F, Perm8L.G, Perm8L.H);
-
-        /// <summary>
-        /// Defines the identity permutation on 16 symbols
-        /// </summary>
-        /// <param name="n">The symbol count selector</param>
-        [MethodImpl(Inline), Op]
-        public static Perm16L identity(N16 n)
-            => assemble(
-                Perm16L.X0, Perm16L.X1, Perm16L.X2, Perm16L.X3,
-                Perm16L.X4, Perm16L.X5, Perm16L.X6, Perm16L.X7,
-                Perm16L.X8, Perm16L.X9, Perm16L.XA, Perm16L.XB,
-                Perm16L.XC, Perm16L.XD, Perm16L.XE, Perm16L.XF);
+    
     }
 }

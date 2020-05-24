@@ -53,7 +53,7 @@ namespace Z0
                 var N = BufferSize/size<T>();
                 var d = bounds(N,t);
                 
-                var data = gmath.increments(Spans.alloc(N,t));
+                var data = gmath.increments(Spans.alloc<T>(N));
                 ref readonly var src = ref head(data);
 
                 for(var rep = 0; rep < RepCount; rep++)
@@ -75,7 +75,7 @@ namespace Z0
                 var N = BufferSize/size<T>();
                 var d = bounds(N,t);
                 
-                var data = gmath.increments(Spans.alloc(N,t));
+                var data = gmath.increments(Spans.alloc<T>(N));
                 ref readonly var src = ref head(data);
 
                 for(var rep = 0; rep < RepCount; rep++)

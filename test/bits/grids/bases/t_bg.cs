@@ -202,7 +202,7 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));            
+            Claim.eq(gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));            
             Claim.eq(gz.CellCount, BitCalcs.tablecells<T>(m,n));
             
             BitGrid.and(gx,gy,gz);
@@ -219,7 +219,7 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));            
+            Claim.eq(gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));            
             Claim.eq(gz.CellCount, BitCalcs.tablecells<T>(m,n));
             
             BitGrid.xor(gx,gy,gz);

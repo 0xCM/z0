@@ -52,7 +52,7 @@ namespace Z0
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static NatSpan<N16, HexDigit> digits(Perm16L src)
+        public static NatSpan<N16,HexDigit> digits(Perm16L src)
         {
             var scalar = (ulong)src;
             var dst = NatSpan.alloc<N16,HexDigit>();

@@ -13,7 +13,6 @@ namespace Z0.Asm.Data
         [Comment("The ice opcode identifer")]
         OpCodeId,
 
-
         [Comment("A term of a monotonic integral sequence that identifies a record within some logical subset")]
         Sequence, 
 

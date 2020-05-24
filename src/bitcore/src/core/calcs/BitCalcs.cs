@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static int bytecount<T>(int cells)
             where T : unmanaged
-                => cells * size<T>();
+                => cells * Control.size<T>();
 
         /// <summary>
         /// Computes the minimum numbet of bytes required to hold a specified number of bits
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="w">The cell width</param>
         /// <param name="n">The bit count/number of matrix columns</param>
         [MethodImpl(Inline), Op]
-        public static int mincells(int w, int n)
+        public static int mincells(ulong w, ulong n)
         {
             // if a single cell covers a column then there's no need for computation
             if(w >= n)
@@ -53,7 +53,7 @@ namespace Z0
 
             var q = n / w;
             var r = n % w;
-            return r == 0 ? q : q + 1;
+            return (int)(r == 0 ? q : q + 1);
         }
 
         /// <summary>
@@ -62,14 +62,14 @@ namespace Z0
         /// <param name="bc">The number of bits for which storage is required</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int mincells<T>(int bc)
+        public static int mincells<T>(ulong bc)
             where T : unmanaged
         {
-            if(bitsize<T>() >= bc)
+            if(Control.bitsize<T>() >= (int)bc)
                 return 1;
 
-            var q = bc / bitsize<T>();
-            var r = bc % bitsize<T>();
+            var q = (int)bc / Control.bitsize<T>();
+            var r = (int)bc % Control.bitsize<T>();
             return q + (r != 0 ? 1 : 0);
         }
 
@@ -93,9 +93,9 @@ namespace Z0
         /// <param name="cols">The grid col count</param>
         /// <param name="cw">The storage cell width</param>
         [MethodImpl(Inline), Op]
-        public static int tablecells(int rows, int cols, int cw)
+        public static int tablecells(ulong rows, ulong cols, int cw)
         {
-            var bytes = tablesize(rows, cols);
+            var bytes = (int)tablesize(rows, cols);
             var segbytes = cw / 8;
             var segs = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
             return segs;
@@ -120,7 +120,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int bitindex<N>(int row, int col, N n = default)
             where N : unmanaged, ITypeNat
-                => row * nati<N>() + col;
+                => row * (int)TypeNats.value<N>() + col;
 
         /// <summary>
         /// Computes the number of bytes required to cover a grid, predicated on row/col counts
@@ -131,6 +131,18 @@ namespace Z0
         public static int tablesize(int rows, int cols)
         {
             var points = rows*cols;
+            return (points >> 3) + (points % 8 != 0 ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Computes the number of bytes required to cover a grid, predicated on row/col counts
+        /// </summary>
+        /// <param name="rows">The number of grid rows</param>
+        /// <param name="cols">The number of grid columns</param>
+        [MethodImpl(Inline), Op]
+        public static int tablesize(ulong rows, ulong cols)
+        {
+            var points = (int)(rows*cols);
             return (points >> 3) + (points % 8 != 0 ? 1 : 0);
         }
 
@@ -159,7 +171,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static int tablecells<T>(int rows, int cols)
             where T : unmanaged
-                => tablecells(rows,  cols, bitsize<T>());
+                => tablecells((ulong)rows, (ulong)cols, Control.bitsize<T>());
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static int tablecells<T>(ulong rows, ulong cols)
+            where T : unmanaged
+                => tablecells(rows,  cols, Control.bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
@@ -169,9 +186,9 @@ namespace Z0
         /// <param name="cols">The col count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int tableblocks<T>(N256 w, int rows, int cols, T t = default)
+        public static int tableblocks<T>(N256 w, int rows, int cols)
             where T : unmanaged
-                => Blocks.cellcover<T>(w, tablecells<T>(rows,cols));
+                => Blocks.cellcover<T>(w, tablecells<T>((ulong)rows,(ulong)cols));
 
         /// <summary>
         /// Computes the number of bytes required to cover a rectangular area, predicated on natural row/col counts
@@ -214,7 +231,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => tablecells(nati(m), nati(n), bitsize<T>());
+                => tablecells(value(m), value(n), bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
@@ -231,6 +248,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.cellcover<T>(w, tablecells<T>(nati(m), nati(n)));        
+                => Blocks.cellcover<T>(w, tablecells<T>(value(m), value(n)));        
     }
 }

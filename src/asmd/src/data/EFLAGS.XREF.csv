@@ -65,4 +65,15 @@
 | SHL count   | —  | M  | M  | —  | M  | M  |    |    |    |    |    |
 | SHR count   | —  | M  | M  | —  | M  | M  |    |    |    |    |    |
 
+# Notation
+-------------------------------------------------------------------------------------
+| Symbol | Meaning                                                                  |
+| T      | Instruction tests flag.                                                  |
+| M      | Instruction modifies flag (either sets or resets depending on operands). |
+| 0      | Instruction resets flag.                                                 |
+| 1      | Instruction sets flag.                                                   |
+| —      | Instruction's effect on flag is undefined.                               |
+| R      | Instruction restores prior value of flag.                                |
+| Blank  | Instruction does not affect flag.                                        |
+
 

@@ -21,7 +21,7 @@ namespace Z0
             var lut = LUT.init(src);
 
             var content = gvec.vinc<byte>(w, 64);
-            var selected =  lut.Select(content); //dvec.vshuf16x8(items, table);
+            var selected =  LUT.select(lut,content); //dvec.vshuf16x8(items, table);
             Claim.veq(content, selected);
         }
 
@@ -33,7 +33,7 @@ namespace Z0
             var lut = LUT.init(src);
 
             var content = gvec.vinc<byte>(w, 64);
-            var selected =  lut.Select(content); //dvec.vshuf32x8(items, table);
+            var selected =  LUT.select(lut,content); //dvec.vshuf32x8(items, table);
             Claim.veq(content, selected);
 
         }

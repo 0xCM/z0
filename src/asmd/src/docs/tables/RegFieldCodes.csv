@@ -9,7 +9,6 @@ Example:
 
 The instruction CMP(r/m8, r8) has op code {38 /r}
 
-Consider the byte CE:
 
 
 # Encoding with and without the ModRM w field in non-64 bit mode  *WE = w field is present
@@ -47,9 +46,6 @@ Consider the byte CE:
 | 101 | 32   | N      | N  | EBP   |       |
 | 110 | 32   | N      | N  | ESI   |       |
 | 111 | 32   | N      | N  | EDI   |       |
-
-
-
 
 
 # Encoding of reg Field When Mod/RM w Field is Not Present in Instruction; non 64-bit modes

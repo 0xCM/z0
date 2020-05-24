@@ -21,9 +21,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static GridSpec specify(ushort rows, ushort cols, ushort segwidth)    
         {
-            var bytes = BitCalcs.tablesize((int)rows, (int)cols);
+            var bytes = BitCalcs.tablesize(rows, cols);
             var bits = bytes*8;
-            var segs = BitCalcs.tablecells((int)rows, (int)cols, (int)segwidth);            
+            var segs = BitCalcs.tablecells((ulong)rows, (ulong)cols, (int)segwidth);            
             return GridSpec.Define(rows, cols, segwidth, bytes, bits, segs);        
         }
 

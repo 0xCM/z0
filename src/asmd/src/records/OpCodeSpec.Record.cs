@@ -12,8 +12,8 @@ namespace Z0.Asm.Data
     using F = OpCodeSpecField;
     using R = OpCodeSpec;
 
-    public readonly struct OpCodeSpec : IRecord<F,R>
-    {           
+    public struct OpCodeSpec : IRecord<F,R>
+    {                   
         public static OpCodeSpec Empty 
             => new OpCodeSpec(0,OpCodeId.INVALID, nameof(OpCodeId.INVALID), string.Empty, string.Empty, 
                 YeaOrNea.N, YeaOrNea.N,YeaOrNea.N,string.Empty);
@@ -22,37 +22,42 @@ namespace Z0.Asm.Data
         public static YeaOrNea yn(bool src) 
             => src ? YeaOrNea.Y : YeaOrNea.N;
 
-        public int Sequence {get;}
+        public int Seq;
+
+        public int Sequence => Seq;
         
-        public readonly OpCodeId Id;
+        public OpCodeId Id;
 		
-		public readonly string Mnemonic;
+		public string Mnemonic;
 		
-		public readonly string Instruction;
+		public string Instruction;
 
-		public readonly string Expression;
+		public string Expression;
 
-		public readonly YeaOrNea M16;
+		public YeaOrNea M16;
 
-		public readonly YeaOrNea M32;
+		public YeaOrNea M32;
 
-		public readonly YeaOrNea M64;
+		public YeaOrNea M64;
         
-		public readonly string CpuId;
+		public string CpuId;
 
-        public YeaOrNea RexW => yn(Expression.Contains("REX.W"));
+        public YeaOrNea RexW 
+            => yn(Expression.Contains("REX.W"));
 
-        public YeaOrNea Vex => yn(Expression.StartsWith("VEX."));
+        public YeaOrNea Vex 
+            => yn(Expression.StartsWith("VEX."));
 
-        public YeaOrNea Xop => yn(Expression.StartsWith("XOP."));
+        public YeaOrNea Xop 
+            => yn(Expression.StartsWith("XOP."));
 
-        public YeaOrNea Evex => yn(Expression.StartsWith("EVEX."));
-
+        public YeaOrNea Evex 
+            => yn(Expression.StartsWith("EVEX."));
 
         [MethodImpl(Inline)]
-        public OpCodeSpec(int Sequence, OpCodeId Id, string Mnemonic, string Instruction, string Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, string CpuId)
+        public OpCodeSpec(int Seq, OpCodeId Id, string Mnemonic, string Instruction, string Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, string CpuId)
         {
-            this.Sequence = Sequence;
+            this.Seq = Seq;
             this.Id = Id;
             this.Mnemonic = Mnemonic;
             this.Instruction = Instruction;

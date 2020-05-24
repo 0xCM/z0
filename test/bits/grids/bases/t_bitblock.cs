@@ -119,7 +119,7 @@ namespace Z0
         {
             int n = nati<N>();
             var rep = default(N);
-            var segcount = BitCalcs.mincells<T>(n);
+            var segcount = BitCalcs.mincells<T>(value<N>());
             Claim.eq(BitBlock<N,T>.CellCount, segcount);
             var totalcap = BitBlock<N,T>.BitCapacity;
             var segcap = bitsize<T>();
@@ -143,7 +143,7 @@ namespace Z0
         protected void bb_create_check<T>(int bitcount)
             where T : unmanaged
         {
-            var segcount = BitCalcs.mincells<T>(bitcount);
+            var segcount = BitCalcs.mincells<T>((ulong)bitcount);
             var src = Random.Span<T>(RepCount);
             for(var i=0; i<RepCount; i += segcount)
             {

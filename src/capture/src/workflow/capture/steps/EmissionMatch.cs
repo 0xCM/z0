@@ -35,9 +35,8 @@ namespace Z0.Asm
                 var reader = wfStateless.UriHexReader;
                 var fileSrc = reader.Read(srcB).ToArray().ToSpan();                        
 
-                Claim.eq(fileSrc.Length, srcA.Length);            
-                Claim.eq(fileSrc.Count(s => s.OpUri.IsEmpty), 0);
-                
+                Claim.eq(fileSrc.Length, srcA.Length);  
+                Claim.eq(Spans.count<UriHex>(fileSrc, s => s.OpUri.IsEmpty),0);                          
                 for(var i=0; i<srcA.Length; i++)
                 {
                     Claim.eq(skip(fileSrc,i).OpUri, skip(srcA,i).OpUri);  

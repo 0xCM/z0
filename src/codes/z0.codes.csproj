@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>codes</AssemblyName>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Archives)" />
+    <ProjectReference Include="$(AsmD)" />
+    <ProjectReference Include="$(Capture)" />
+  </ItemGroup>
+
+   <ItemGroup>
+    <EmbeddedResource Include="data/OpCodeSpecs.csv" LogicalName="OpCodeSpecs.csv" /> 
+  </ItemGroup>
+
+</Project>

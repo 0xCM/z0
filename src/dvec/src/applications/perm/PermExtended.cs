@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline)]
         public static bit IsSymbol(this Perm4L src)
-            => PermSymbolic.test(src);
+            => Symbolic.test(src);
 
         /// <summary>
         /// Determines whether a permutation literal is a symbol
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline)]
         public static bit IsSymbol(this Perm8L src)
-            => PermSymbolic.test(src);
+            => Symbolic.test(src);
 
         /// <summary>
         /// Determines whether a permutation literal is a symbol
@@ -111,9 +111,8 @@ namespace Z0
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline)]
         public static bit IsSymbol(this Perm16L src)
-            => PermSymbolic.test(src);        
-
-
+            => Symbolic.test(src);        
+            
         /// <summary>
         /// Applies a sequence of transpositions to a blocked container
         /// </summary>

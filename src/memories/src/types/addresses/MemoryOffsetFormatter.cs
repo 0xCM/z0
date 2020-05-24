@@ -10,27 +10,35 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-    public readonly struct AddressFormatter
+    [ApiHost]
+    public readonly struct AddressFormatter : IApiHost<AddressFormatter>
     {        
+        [Op, MethodImpl(Inline)]
         public static string Format(in MemoryOffset moffs)
-        {
-            var w = moffs.OffsetWidth;
-            var offset = ((ushort)moffs.Offset).FormatAsmHex();
-            var dst = text.concat(offset, Chars.Space, moffs.Absolute);
-            return dst;
-        }
+            => text.concat(((ushort)moffs.Offset).FormatAsmHex(), Chars.Space, moffs.Absolute);
 
-        public static void Format(in MemoryOffsets offsets)
+        [Op]
+        public static void Format(in MemoryOffsets offsets, Span<string> dst)        
         {
             var empty = MemoryOffset.Empty;
             for(var k=0; k<offsets.Count; k++)
             {
                 ref readonly var prior = ref (k == 0 ? ref empty : ref offsets[k-1]);
                 ref readonly var current = ref offsets[k];
-                term.print(Format(prior, current));
+                seek(dst,k) = Format(prior, current);                
             }
         }
 
+        [Op]
+        public static Span<string> Format(in MemoryOffsets offsets)
+        {
+            var empty = MemoryOffset.Empty;
+            var dst = Spans.alloc<string>(offsets.Count);
+            Format(offsets,dst);
+            return dst;
+        }
+
+        [Op]
         public static string Format(in MemoryOffset prior, in MemoryOffset moffs)
         {
             const char Sep = Chars.Space;

@@ -37,7 +37,7 @@ namespace Z0
         public static int CellCount 
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.tablecells(nati<N>(), nati<N1>(), (int)bitsize<T>());
+            get => BitCalcs.tablecells(value<N>(), value<N1>(), (int)bitsize<T>());
         }
         
         /// <summary>

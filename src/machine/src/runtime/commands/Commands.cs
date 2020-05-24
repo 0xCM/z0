@@ -10,6 +10,8 @@ namespace Z0.Machines
     [ApiHost]
     public partial class Commands : IApiHost<Commands>
     {
-
+        public static unsafe void Extract()
+        {                    
+        }
     }
 }

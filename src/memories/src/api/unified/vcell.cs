@@ -54,18 +54,6 @@ namespace Z0
         /// <param name="value">The new component value</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vcell<T>(Vector128<T> src, int index, T value)
-            where T : unmanaged
-                => src.WithElement(index,value);
-
-        /// <summary>
-        /// Sets an index-identified component to a specified value
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The index of the component to extract</param>
-        /// <param name="value">The new component value</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
         public static Vector128<T> vcell<T>(T src, int index, Vector128<T> dst)
             where T : unmanaged
                 => dst.WithElement(index, src);

@@ -65,7 +65,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.tablecells<T>(RowCount, ColCount);
+            get => BitCalcs.tablecells<T>((ulong)RowCount, (ulong)ColCount);
         }
 
         /// <summary>

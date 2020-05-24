@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="f">The transformation</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        public static Span<T> Map<S,T>(this ReadOnlySpan<S> src, Func<S, T> f)
+        public static Span<T> Map<S,T>(this ReadOnlySpan<S> src, Func<S,T> f)
         {
             Span<T> dst = new T[src.Length];
 
@@ -30,6 +30,14 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline)]
+        public static void Iteri<T>(this Span<T> src, Action<int,T> f)
+            => Spans.iteri(src,f);
+
+        [MethodImpl(Inline)]
+        public static void Iter<T>(this Span<T> src, Action<T> f)
+            => Spans.iter(src,f);
+
         /// <summary>
         /// Projects a source span to target span
         /// </summary>
@@ -38,9 +46,8 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<T> Map<S,T>(this Span<S> src, Func<S, T> f)
+        public static Span<T> Map<S,T>(this Span<S> src, Func<S,T> f)
             => src.ReadOnly().Map(f);
-
 
         /// <summary>
         /// Projects a range of elements from a source span to a target span

@@ -14,6 +14,14 @@ namespace Z0
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
     {        
+        /// <summary>
+        /// Determines whether a type is a natural span
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsNatSpan(Type t)
+            => t.GenericDefinition2() == typeof(NatSpan<,>) && t.IsClosedGeneric();
+
+
         public TypeIdentity DivineIdentity(Type arg)
             => TryDivine(arg).ValueOrElse(() => TypeIdentity.Define(arg.DisplayName()));
 
@@ -33,7 +41,7 @@ namespace Z0
                 return ArrayId(arg);
             else if(SpanTypes.IsSystemSpan(arg))
                 return SystemSpanId(arg);
-            else if(NatSpan.test(arg))
+            else if(IsNatSpan(arg))
                 return NatSpanId(arg);  
             else           
                 return none<TypeIdentity>();
@@ -126,7 +134,7 @@ namespace Z0
         /// <param name="src">The type to examin</param>
         static Option<TypeIdentity> NatSpanId(Type src)
         {
-            if(NatSpan.test(src))
+            if(IsNatSpan(src))
             {
                 var typeargs = src.SuppliedTypeArgs();
                 var text = IDI.NSpan;

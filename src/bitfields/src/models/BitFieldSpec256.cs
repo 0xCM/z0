@@ -11,6 +11,37 @@ namespace Z0
     using static Seed;    
     using static Memories;
 
+    public struct BitField256<F,T>
+        where T : unmanaged
+        where F : unmanaged, Enum
+    {
+        internal Vector256<T> State;
+
+        internal readonly BitFieldSpec256<F> Spec;
+
+        [MethodImpl(Inline)]
+        internal BitField256(BitFieldSpec256<F> spec, Vector256<T> state)
+        {
+            this.Spec = spec;
+            this.State = state;
+        }
+
+        [MethodImpl(Inline)]
+        internal BitField256(BitFieldSpec256<F> spec)
+        {
+            this.Spec = spec;
+            this.State = default;
+        }
+
+
+        
+        public T this[F index]
+        {
+            [MethodImpl(Inline)]
+            get => BitFields.read(this,index);
+        }
+    }
+
     /// <summary>
     /// Defines a segmented bitfield indexed by enum values
     /// </summary>
@@ -21,19 +52,26 @@ namespace Z0
     /// create an enum where the first literal has the value 0, the second literal has the value 1 and so
     /// on as needed up to the maximum of 32 literals/values
     /// </remarks>
-    public struct BitFieldSpec256<E>
-        where E : unmanaged, Enum
+    public struct BitFieldSpec256<F>
+        where F : unmanaged, Enum
     {        
-        internal Vector256<byte> widths;
+        Vector256<byte> Widths;
             
         [MethodImpl(Inline)]
         internal BitFieldSpec256(Vector256<byte> widths)
         {
-            this.widths = widths;
+            Widths = widths;
         }
 
         [MethodImpl(Inline)]
-        public byte SegWidth(E id)
-            => vcell(widths, Enums.numeric<E,int>(id));
+        public byte SegWidth(F index)
+            => vcell(Widths, Enums.numeric<F,byte>(index));
+
+        public byte this[F index]
+        {
+            [MethodImpl(Inline)]
+            get => SegWidth(index);
+        }
+
     }
 }

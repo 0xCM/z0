@@ -47,7 +47,7 @@ namespace Z0
         public static int RowCellCount
         {
             [MethodImpl(Inline)]
-            get =>  BitCalcs.mincells(bitsize<T>(),nati<N>()); 
+            get =>  BitCalcs.mincells((ulong)bitsize<T>(),value<N>()); 
         }
 
         public static int TotalCellCount

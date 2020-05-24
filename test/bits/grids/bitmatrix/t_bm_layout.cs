@@ -43,7 +43,7 @@ namespace Z0
             Claim.eq(order, m.Order);
             Claim.eq(order, m.Order);
             Claim.eq(cellcount, BitMatrix<N16,byte>.RowCellCount);
-            Claim.eq(cellcount, BitCalcs.mincells(bitsize(t),order));
+            Claim.eq(cellcount, BitCalcs.mincells((ulong)bitsize(t),(ulong)order));
 
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)

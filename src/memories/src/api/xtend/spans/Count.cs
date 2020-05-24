@@ -8,24 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
     partial class XTend
-    {
+    {    
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="f">The predicate to evaluate over each element</param>
         /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
         public static int Count<T>(this ReadOnlySpan<T> src, Func<T,bool> f)
-             where T : unmanaged
-        {
-            int count = 0;
-            for(var i=0; i< src.Length; i++)
-                if(f(src[i]))
-                    count++;
-            return count;
-        }
+            => Spans.count(src,f);
 
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate

@@ -13,14 +13,11 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static int bitsize<T>()            
-            => Unsafe.SizeOf<T>()*8;
+            => Control.bitsize<T>();
 
         [MethodImpl(Inline)]
         public static int bitsize<T>(T rep)            
-            => Unsafe.SizeOf<T>()*8;        
+            => Control.bitsize<T>(rep);
 
-        [MethodImpl(Inline)]
-        public static ulong ubits<T>()
-            => (ulong)Unsafe.SizeOf<T>()*8;        
     }
 }

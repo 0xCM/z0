@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
+    using System.Runtime.Intrinsics;
 
     using static Seed;    
     using static Memories;
@@ -14,9 +15,53 @@ namespace Z0
     [ApiHost("api")]
     public partial class BitFields : IApiHost<BitFields>
     {
+        [MethodImpl(Inline)]
+        public static T read<F,T>(in BitField256<F,T> src, F index)
+            where T : unmanaged
+            where F : unmanaged, Enum
+                => gmath.and(vcell(src.State, Enums.numeric<byte>(index)), Mask(src,index));
+
+        [MethodImpl(Inline)]
+        public static ref BitField256<F,T>  write<F,T>(T src, ref BitField256<F,T> dst, F index)
+            where T : unmanaged
+            where F : unmanaged, Enum
+        {
+            var mask = Mask(dst,index);
+            var conformed = gmath.and(src,mask);
+            var i  = Enums.numeric<byte>(index);    
+            dst.State = vcell(conformed, i, dst.State);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitFieldSpec256<F> specify<F>(W256 w)
+            where F : unmanaged, Enum
+        {
+            Span<F> values = Enums.valarray<F>();
+            var widths = values.AsBytes();
+            var count = math.min(widths.Length, 32);
+            var data = default(Vector256<byte>);
+            for(var i=0; i<count; i++)
+                data = data.WithElement(i,skip(widths,i));  
+            return new BitFieldSpec256<F>(data);              
+        }
+
+        [MethodImpl(Inline)]
+        public static BitField256<F,T> crate<F,T>(BitFieldSpec256<F> spec, Vector256<T> state)
+            where F : unmanaged, Enum
+            where T : unmanaged
+                => new BitField256<F,T>(spec, state);
+
         static FixedData<T> fixedalloc<T>(int bitcount)
             where T : unmanaged
                 => new FixedData<T>(Blocks.alloc<T>(n64, Blocks.bitcover<T>(bitcount)), bitcount);             
+
+
+        [MethodImpl(Inline)]
+        static T Mask<F,T>(BitField256<F,T> src, F index)
+            where T : unmanaged
+            where F : unmanaged, Enum
+                => BitMask.lo<T>(src.Spec[index]);
 
         /// <summary>
         /// Defines a bitfield segment
