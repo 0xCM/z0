@@ -10,15 +10,15 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
     
-    public readonly struct OpCodeExpression : IAsmExpression<OpCodeExpression,string>
+    public readonly struct InstructionExpression : IAsmExpression<InstructionExpression,string>
     {
         readonly string Source;
 
-        public static OpCodeExpression Empty 
-            => new OpCodeExpression(string.Empty);
+        public static InstructionExpression Empty 
+            => new InstructionExpression(string.Empty);
 
         [MethodImpl(Inline)]
-        public OpCodeExpression(string src)
+        public InstructionExpression(string src)
         {
             Source = src;
         }        
@@ -35,7 +35,7 @@ namespace Z0.Asm.Data
             get => Source;
         }
 
-        public OpCodeExpression Zero 
+        public InstructionExpression Zero 
             => Empty;
 
         public bool IsEmpty 
@@ -51,11 +51,11 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(OpCodeExpression src)
+        public bool Equals(InstructionExpression src)
             => string.Equals(Content, src.Content, NoCase);
         
         public override bool Equals(object src)
-            => src is OpCodeExpression x && Equals(x);
+            => src is InstructionExpression x && Equals(x);
         
         public override int GetHashCode()
             => Content.GetHashCode();

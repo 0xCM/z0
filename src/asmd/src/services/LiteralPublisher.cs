@@ -27,7 +27,6 @@ namespace Z0.Asm.Data
             publisher.PublishLiterals<MandatoryPrefix>().OnSome(OnPublished);
             publisher.PublishLiterals<MemorySize>().OnSome(OnPublished);
             publisher.PublishLiterals<OpCodeFlags>().OnSome(OnPublished);
-            publisher.PublishLiterals<OpCodeHandlerKind>().OnSome(OnPublished);
             publisher.PublishLiterals<RegisterFlags>().OnSome(OnPublished);
             publisher.PublishLiterals<RflagsBits>().OnSome(OnPublished);
         }

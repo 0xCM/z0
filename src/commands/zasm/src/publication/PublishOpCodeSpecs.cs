@@ -10,11 +10,11 @@ namespace Z0.Asm.Data
     using static Seed;
     
     using M = AsmDataModels;
-    using F = OpCodeSpecField;
+    using F = OpCodeField;
 
     partial class AsmEtl
     {                
-        public OpCodeSpec[] GatherOpCodeSpecs()
+        public OpCodeRecord[] GatherOpCodeSpecs()
         {
             var delimiter = Chars.Pipe;
             var specs = OpCodeInfoParser.ParseOpCodeInfo(Config.OpCodeInfoPath);
@@ -22,12 +22,12 @@ namespace Z0.Asm.Data
                           orderby item.OrderBy
                           select item).ToArray();
             
-            var dst = Control.alloc<OpCodeSpec>(sorted.Length);
+            var dst = Control.alloc<OpCodeRecord>(sorted.Length);
             for(var i=0; i<sorted.Length; i++)
             {
                 var src = sorted[i];
-                dst[i] = new OpCodeSpec(
-                    Sequence: i, 
+                dst[i] = new OpCodeRecord(
+                    Seq: i, 
                     Id: (OpCodeId)src.Id, 
                     Mnemonic: src.Mnemonic, 
                     Instruction: src.Instruction, 
@@ -41,7 +41,7 @@ namespace Z0.Asm.Data
             return dst;
         }
 
-        public OpCodeSpec[] Publish(M.OpCodeSpecs model)
+        public OpCodeRecord[] Publish(M.OpCodeSpecs model)
         {
             var delimiter = Chars.Pipe;
             var specs = GatherOpCodeSpecs();

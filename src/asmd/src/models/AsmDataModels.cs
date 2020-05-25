@@ -131,7 +131,6 @@ namespace Z0.Asm.Data
             public static MemoryTests32 Model32 => default(MemoryTests32);
 
             public static MemoryTests64 Model64 => default(MemoryTests64);
-
         }
 
 

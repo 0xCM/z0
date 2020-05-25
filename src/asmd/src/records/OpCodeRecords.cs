@@ -11,32 +11,33 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-    public readonly struct OpCodeSpecs
+    public readonly struct OpCodeRecords
     {        
-        public static OpCodeSpecs From(OpCodeSpec[] src)
+        readonly IReadOnlyDictionary<OpCodeId, OpCodeRecord> Index;
+
+        public static OpCodeRecords From(OpCodeRecord[] src)
         {
-            var dst = new Dictionary<OpCodeId, OpCodeSpec>(src.Length);
+            var dst = new Dictionary<OpCodeId, OpCodeRecord>(src.Length);
             for(var i=0; i<src.Length; i++)
             {
                 var spec = src[i];
                 dst.TryAdd(spec.Id, spec);
             }
-            return new OpCodeSpecs(dst);
+            return new OpCodeRecords(dst);
         }
 
-        readonly IReadOnlyDictionary<OpCodeId, OpCodeSpec> Index;
 
         [MethodImpl(Inline)]
-        public OpCodeSpecs(IReadOnlyDictionary<OpCodeId, OpCodeSpec> index)
+        public OpCodeRecords(IReadOnlyDictionary<OpCodeId, OpCodeRecord> index)
         {
             this.Index = index;
         }
 
         [MethodImpl(Inline)]
-        public OpCodeSpec FindSpec(OpCodeId id)
-            => Index.TryGetValue(id, out var spec) ? spec : OpCodeSpec.Empty;
+        public OpCodeRecord FindSpec(OpCodeId id)
+            => Index.TryGetValue(id, out var spec) ? spec : OpCodeRecord.Empty;
 
-        public OpCodeSpec this[OpCodeId id]
+        public OpCodeRecord this[OpCodeId id]
         {
             [MethodImpl(Inline)]
             get => FindSpec(id);

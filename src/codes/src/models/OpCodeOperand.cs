@@ -6,38 +6,37 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Seed;
  
-    public readonly struct OpCodeOperand : IOpCodeComponent<OpCodeOperand,ushort>
+    public readonly struct OpCodeOperand : IAsmExpression<OpCodeOperand,ushort>
     {
-        internal readonly ushort Data;        
+        readonly ushort Source;        
 
         public static OpCodeOperand Empty => new OpCodeOperand(0);
                 
         [MethodImpl(Inline)]
         public OpCodeOperand(ushort data)
         {
-            this.Data = data;
+            this.Source = data;
         }       
 
         public ushort Content
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Source;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data == 0;
+            get => Source == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Data != 0;
+            get => Source != 0;
         }
 
         public OpCodeOperand Zero
@@ -48,10 +47,10 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeOperand src)
-            => Data == src.Data;
+            => Source == src.Source;
 
         public string Format()
-            =>  Data.ToString();
+            =>  Source.ToString();
 
         public override string ToString()
             => Format();

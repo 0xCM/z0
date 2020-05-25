@@ -9,11 +9,11 @@ namespace Z0.Asm.Data
 
     using static Seed;
     using static Memories;
-    using F = OpCodeSpecFieldId;
+    using F = OpCodeFieldId;
 
     partial struct AsmRecordParser
     {
-        public ref readonly OpCodeSpec Parse(string src, ref OpCodeSpec dst)
+        public ref readonly OpCodeRecord Parse(string src, ref OpCodeRecord dst)
         {            
             ReadOnlySpan<string> fields = src.SplitClean(Chars.Pipe);
 

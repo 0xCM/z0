@@ -13,6 +13,34 @@ namespace Z0
     using HCL = HexDigitCodeLo;
     using HCU = HexDigitCodeUp;
 
+    public class HexCode
+    {
+        /// <summary>
+        /// Determines whether a character corresponds to one of the lower hex codes
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline)]
+        public static bool IsScalar(char c)
+            => (HCL)c >= HCL.FirstNumeral && (HCL)c <= HCL.LastNumeral;
+
+        /// <summary>
+        /// Determines whether a character corresponds to one of the uppercase hex code characters
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline)]
+        public static bool IsUpperChar(char c)
+            => (HCU)c >= HCU.FirstLetter && (HCU)c <= HCU.LastLetter;        
+
+        /// <summary>
+        /// Determines whether a character corresponds to one of the lowercase hex code characters
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline)]
+        public static bool IsLowerChar(char c)
+            => (HCL)c >= HCL.FirstLetter && (HCL)c <= HCL.LastLetter;        
+
+    }
+
     partial class SymbolicData
     {        
         /// <summary>

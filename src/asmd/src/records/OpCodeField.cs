@@ -6,11 +6,11 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    using I = OpCodeSpecFieldId;
+    using I = OpCodeFieldId;
     using RW = AsmFieldWidths;
     using DF = AsmDataField;
 
-    public enum OpCodeSpecFieldId
+    public enum OpCodeFieldId
     {
         [FieldSynonym(DF.Sequence)]
         Sequence, 
@@ -34,7 +34,7 @@ namespace Z0.Asm.Data
         Id,
     }
 
-    public enum OpCodeSpecField
+    public enum OpCodeField
     {
         Sequence = I.Sequence | (RW.Sequence << RW.Offset),
 

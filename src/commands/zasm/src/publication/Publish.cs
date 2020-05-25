@@ -40,7 +40,7 @@ namespace Z0.Asm.Data
         public void Publish()
         {
             var specs = Publish(M.OpCodeSpecs.Model);
-            var index = OpCodeSpecs.From(specs);
+            var index = OpCodeRecords.From(specs);
             var tests =Publish(M.DecoderTests.Model, index).Force();        
             var forms = Publish(AsmEtl.OpCodeForms, index);
 

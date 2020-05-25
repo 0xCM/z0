@@ -18,7 +18,7 @@ namespace Z0.Asm.Data
         /// Publishes a model-identified dataset to the target archive
         /// </summary>
         /// <param name="model">The data model</param>
-        public Publication<OpCodeFormRecord> Publish(M.OpCodeForms model, OpCodeSpecs specs)
+        public Publication<OpCodeFormRecord> Publish(M.OpCodeForms model, OpCodeRecords specs)
         {
             var src = Publish(model, specs, out var dst);
             return Publication.Flow(src, dst);            
@@ -30,7 +30,7 @@ namespace Z0.Asm.Data
         static OpCodeId ParseOpCodeId(string src)
             => Enums.Parse(src, OpCodeId.INVALID);
 
-        OpCodeFormRecord[] Publish(M.OpCodeForms model, OpCodeSpecs specs, out FilePath dst)
+        OpCodeFormRecord[] Publish(M.OpCodeForms model, OpCodeRecords specs, out FilePath dst)
         {
             var table = OpCodeInfoTable.Data.OrderBy(x => x.Code.RawName);
             var records = new OpCodeFormRecord[table.Length];

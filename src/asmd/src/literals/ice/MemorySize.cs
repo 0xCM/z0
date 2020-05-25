@@ -308,22 +308,31 @@ namespace Z0.Asm.Data
 
 		[Comment("512 bit location: 16 x (2 x #(t:bf16)#)")]
 		Packed512_2xBFloat16,
+		
 		[Comment("Broadcast #(t:u32)# to 64 bits")]
 		Broadcast64_UInt32,
+		
 		[Comment("Broadcast #(t:i32)# to 64 bits")]
 		Broadcast64_Int32,
+		
 		[Comment("Broadcast #(t:f32)# to 64 bits")]
 		Broadcast64_Float32,
+		
 		[Comment("Broadcast #(t:u32)# to 128 bits")]
 		Broadcast128_UInt32,
+		
 		[Comment("Broadcast #(t:i32)# to 128 bits")]
 		Broadcast128_Int32,
+		
 		[Comment("Broadcast #(t:u52)# to 128 bits")]
 		Broadcast128_UInt52,
+		
 		[Comment("Broadcast #(t:u64)# to 128 bits")]
 		Broadcast128_UInt64,
+		
 		[Comment("Broadcast #(t:i64)# to 128 bits")]
 		Broadcast128_Int64,
+		
 		[Comment("Broadcast #(t:f32)# to 128 bits")]
 		Broadcast128_Float32,
 		[Comment("Broadcast #(t:f64)# to 128 bits")]

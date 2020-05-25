@@ -15,6 +15,7 @@
     <ProjectReference Include="$(AsmD)" />
 
     <ProjectReference Include="$(Src)commands/zice/z0.zice.csproj" />
+    <ProjectReference Include="$(Src)commands/zdata/z0.zdata.csproj" />
     <ProjectReference Include="$(Src)commands/zxed/z0.zxed.csproj" />
 
   </ItemGroup>

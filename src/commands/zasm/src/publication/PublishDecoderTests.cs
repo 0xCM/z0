@@ -20,23 +20,23 @@ namespace Z0.Asm.Data
     {        
         IAsmArchiveConfig Config => this;
 
-        public IEnumerable<Publication<DecoderTestRecord>> Publish(M.DecoderTests model, OpCodeSpecs codes)
+        public IEnumerable<Publication<DecoderTestRecord>> Publish(M.DecoderTests model, OpCodeRecords codes)
         {
             yield return Publish(M.DecoderTests.Model16, codes);
             yield return Publish(M.DecoderTests.Model32, codes);
             yield return Publish(M.DecoderTests.Model64, codes);
         }
 
-        Publication<DecoderTestRecord> Publish(M.DecoderTests16 model, OpCodeSpecs codes)
+        Publication<DecoderTestRecord> Publish(M.DecoderTests16 model, OpCodeRecords codes)
             => Publish(model, codes, 16);
 
-        Publication<DecoderTestRecord> Publish(M.DecoderTests32 model, OpCodeSpecs codes)
+        Publication<DecoderTestRecord> Publish(M.DecoderTests32 model, OpCodeRecords codes)
             => Publish(model, codes, 32);
 
-        Publication<DecoderTestRecord> Publish(M.DecoderTests64 model, OpCodeSpecs codes)
+        Publication<DecoderTestRecord> Publish(M.DecoderTests64 model, OpCodeRecords codes)
             => Publish(model, codes, 64);
 
-        Publication<DecoderTestRecord> Publish(IAsmDataModel model, OpCodeSpecs codes, int bitness)
+        Publication<DecoderTestRecord> Publish(IAsmDataModel model, OpCodeRecords codes, int bitness)
         {
             var src = Publish(model, codes, bitness,  out var dst);
             return Publication.Flow(src, dst);            
@@ -57,7 +57,7 @@ namespace Z0.Asm.Data
             }
         }
 
-        DecoderTestRecord[] Publish(IAsmDataModel model, OpCodeSpecs codes, int bitness, out FilePath dst)
+        DecoderTestRecord[] Publish(IAsmDataModel model, OpCodeRecords codes, int bitness, out FilePath dst)
         {
             var src = ParseDecoderTests(bitness).OrderBy(x => x.Id).ToArray();
             var records = new DecoderTestRecord[src.Length];
@@ -128,7 +128,7 @@ namespace Z0.Asm.Data
 			return dst.ToString();
 		}
         
-		DecoderTestRecord Record(OpCodeSpecs codes,  int seq, DecoderTestCase src)
+		DecoderTestRecord Record(OpCodeRecords codes,  int seq, DecoderTestCase src)
 			=> new DecoderTestRecord(
 				Sequence: seq,
                 Line : src.LineNumber,

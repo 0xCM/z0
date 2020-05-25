@@ -9,13 +9,13 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
-    using F = OpCodeSpecField;
-    using R = OpCodeSpec;
+    using F = OpCodeField;
+    using R = OpCodeRecord;
 
-    public struct OpCodeSpec : IRecord<F,R>
+    public struct OpCodeRecord : IRecord<F,R>
     {                   
-        public static OpCodeSpec Empty 
-            => new OpCodeSpec(0,OpCodeId.INVALID, nameof(OpCodeId.INVALID), string.Empty, string.Empty, 
+        public static OpCodeRecord Empty 
+            => new OpCodeRecord(0,OpCodeId.INVALID, nameof(OpCodeId.INVALID), string.Empty, string.Empty, 
                 YeaOrNea.N, YeaOrNea.N,YeaOrNea.N,string.Empty);
         
         [MethodImpl(Inline)]
@@ -42,20 +42,9 @@ namespace Z0.Asm.Data
         
 		public string CpuId;
 
-        public YeaOrNea RexW 
-            => yn(Expression.Contains("REX.W"));
-
-        public YeaOrNea Vex 
-            => yn(Expression.StartsWith("VEX."));
-
-        public YeaOrNea Xop 
-            => yn(Expression.StartsWith("XOP."));
-
-        public YeaOrNea Evex 
-            => yn(Expression.StartsWith("EVEX."));
 
         [MethodImpl(Inline)]
-        public OpCodeSpec(int Seq, OpCodeId Id, string Mnemonic, string Instruction, string Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, string CpuId)
+        public OpCodeRecord(int Seq, OpCodeId Id, string Mnemonic, string Instruction, string Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, string CpuId)
         {
             this.Seq = Seq;
             this.Id = Id;

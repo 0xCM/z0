@@ -12,33 +12,25 @@ namespace Z0.Asm.Data
 
     public readonly struct EncodedOpCode
     {        
-        public readonly byte[] Data;
-        
-        public readonly HexKind Primary;
+        public static EncodedOpCode Empty 
+            => new EncodedOpCode(OpCodeSpec.Empty, InstructionSpec.Empty, Control.array<byte>());
+            
+        readonly InstructionSpec Instruction;
 
-        readonly byte Options;
+        readonly OpCodeSpec Code;
 
-        public readonly OperatingMode Mode;
-
-        readonly byte Reserved;
-
-        readonly ulong Operands;
+        public readonly byte[] Encoding;
 
         [MethodImpl(Inline)]
-        public EncodedOpCode(byte[] data, HexKind primary, byte options, OperatingMode mode, ulong operands)
+        public EncodedOpCode(OpCodeSpec code, InstructionSpec instruction, byte[] encoding)
         {
-            this.Data = data;
-            this.Primary = primary;
-            this.Options = options;
-            this.Mode = mode;
-            this.Operands = operands;
-            this.Reserved = 0;
+            this.Code = code;
+            this.Instruction = instruction;
+            this.Encoding = encoding;
         }
 
-        public OpCodeOperand this[duet index]
-        {
-            [MethodImpl(Inline)]
-            get => OpCodes.operand(Operands, index);
-        }        
+        [MethodImpl(Inline)]
+        public EncodedOpCode Update(OpCodeSpec code, InstructionSpec instruction, byte[] encoding)
+            => new EncodedOpCode(code,instruction,encoding);
     }
 }
