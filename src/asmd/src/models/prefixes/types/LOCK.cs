@@ -18,8 +18,8 @@ namespace Z0.Asm.Data
         {
             public static LOCK Value => default;
             
-            public LegacyPrefixGroup Group 
-                => LegacyPrefixGroup.Lock;
+            public LegacyPrefixKind Group 
+                => LegacyPrefixKind.Lock;
         }
     }
 }

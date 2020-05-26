@@ -65,6 +65,8 @@ public enum PartId : ulong
 
     AsmD = 302,
 
+    AsmDTest = AsmD | Test,
+
     Codes = 303,
     
     Capture = 316,

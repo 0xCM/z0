@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
     
     partial class gfp
     {
@@ -16,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The soruce value</param>
         /// <typeparam name="T">The FP type</typeparam>
-        [MethodImpl(Inline), Abs, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Abs, Closures(Floats)]
         public static T abs<T>(T src)
             where T : unmanaged
         {

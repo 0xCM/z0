@@ -15,12 +15,12 @@ namespace Z0
         IIdentification<MemoryAddress>, 
         INullary<MemoryAddress>
     {
+        public readonly ulong Location;
         
         [MethodImpl(Inline)]
         public static unsafe MemoryAddress From<T>(in T src)
             where T : unmanaged
                 => (ulong)refs.constptr(src);
-        public readonly ulong Location;
 
         public static MemoryAddress Empty => new MemoryAddress(0);
  

@@ -14,18 +14,11 @@ namespace Z0.Asm.Data
 
     partial class RegisterKinds
     {
-        public static EnumLiterals<RegisterSymbol> Symbols
-            => Enums.literals<RegisterSymbol>();
+        public static EnumLiterals<RegisterData> Symbols
+            => Enums.literals<RegisterData>();
 
         public static RegisterKind[] SymbolKinds
             => Symbols.Convert<RegisterKind>();
-
-        public IEnumerable<RegisterModel> Models
-            => SymbolKinds.Select(k => new RegisterModel(
-                    api.identify(k), 
-                    (RegisterSymbol)k, 
-                    api.width(k), 
-                    api.slot(k)));
 
         public static IEnumerable<RegisterKind> Gp8 
             => SymbolKinds.Where(r => width(r) == W.W8);

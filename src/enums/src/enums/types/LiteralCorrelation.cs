@@ -40,7 +40,7 @@ namespace Z0
         }
 
         public string Format()
-            => $"{Name} ([{Enums.numeric<ulong>(First)}: {typeof(E1).Name}], [{Enums.numeric<ulong>(Second)}: {typeof(E2).Name}])";
+            => $"{Name} ([{Enums.numeric<E1,ulong>(First)}: {typeof(E1).Name}], [{Enums.numeric<E2,ulong>(Second)}: {typeof(E2).Name}])";
 
         public override string ToString()
             => Format();            

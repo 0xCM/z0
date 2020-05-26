@@ -108,9 +108,8 @@ namespace Z0
         [MethodImpl(Inline)]
         static string bracket(object content)
             => enclose($"{content}", Chars.LBracket, Chars.RBracket);
-
+        
         public string Format()
             => bracket(string.Concat(Start.Format(), Chars.Comma, Chars.Space, End.Format()));
-
     }
 }

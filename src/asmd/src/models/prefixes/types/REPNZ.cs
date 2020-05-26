@@ -19,8 +19,8 @@ namespace Z0.Asm.Data
         {
             public static REPNZ Value => default;
             
-            public LegacyPrefixGroup Group 
-                => LegacyPrefixGroup.Repeat;
+            public LegacyPrefixKind Group 
+                => LegacyPrefixKind.Repeat;
         }
     }
 }

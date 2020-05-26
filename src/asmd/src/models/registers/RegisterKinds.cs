@@ -6,8 +6,6 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
     using static RegisterTools;    
@@ -41,13 +39,5 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline), Op]
         public static uint order(K k)
             => (uint)(((u64(k) & IndexFilter) >> 10) - 1);
-
-        /// <summary>
-        /// Reveals the register's assigned slot
-        /// </summary>
-        /// <param name="k">The register kind</param>        
-        [MethodImpl(Inline), Op]
-        public static RegisterSlotIndex slot(K k)
-            => (RegisterSlotIndex)(math.log2(order(k) + 1ul));       
     }
 }

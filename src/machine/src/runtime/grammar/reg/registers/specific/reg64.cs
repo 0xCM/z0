@@ -22,9 +22,7 @@ namespace Z0.Machines
             public const uint Width = IReg64.Width;
 
             public const int Index = 1;
-
-            
-
+        
             public K Kind => K.RAX;
         }    
 

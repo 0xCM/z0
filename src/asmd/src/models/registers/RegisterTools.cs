@@ -23,8 +23,5 @@ namespace Z0.Asm.Data
         public static ulong u64(RegisterKind src)
             => (ulong)src;
 
-        [MethodImpl(Inline)]
-        public static RegisterSlotIndex slot(ulong src)
-            => (RegisterSlotIndex)src;
     }
 }

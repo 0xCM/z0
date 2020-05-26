@@ -19,7 +19,6 @@ namespace Z0.Asm.Data
         [Comment("An instruction mnemonic")]
         Mnemonic, 
 
-
         [Comment("The first instruction operand")]
         Op0, 
 

@@ -33,10 +33,6 @@ namespace Z0.Machines
             get => Cells;
         }        
 
-        public RegisterSymbol Symbol 
-        {
-            [MethodImpl(Inline)]
-            get => (RegisterSymbol)RegisterKind;
-        }
+
     }
 }

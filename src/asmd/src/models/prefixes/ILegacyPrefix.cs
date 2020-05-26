@@ -12,8 +12,7 @@ namespace Z0.Asm.Data
 
     public interface ILegacyPrefix
     {
-
-        LegacyPrefixGroup Group {get;}
+        LegacyPrefixKind Group {get;}
     }
 
     public interface ILegacyPrefix<H> : ILegacyPrefix

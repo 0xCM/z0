@@ -26,6 +26,14 @@ namespace Z0
             where V : unmanaged
                 => Unsafe.Read<E>((E*)&v);
 
+        public static IEnumerable<BinaryLiteral<T>> binlits<E,T>()
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => from f in typeof(E).LiteralFields().ToArray()
+                   where f.Tagged<BinaryLiteralAttribute>()
+                   let a = f.Tag<BinaryLiteralAttribute>().Require()
+                   select BinaryLiterals.define(f.Name, numeric<E,T>((E)f.GetValue(null)), a.Text);
+
         /// <summary>
         /// Gets the declaration-order indices for each named literal
         /// </summary>

@@ -30,10 +30,10 @@ namespace Z0
     /// </summary>
     public class ResourceRecord : ITabular<F,R>
     {    
-        public static ResourceRecord Create(LocalAddress offset, MemoryAddress location, int size, string uri, byte[] data)
+        public static ResourceRecord Create(ushort offset, MemoryAddress location, int size, string uri, byte[] data)
             => new ResourceRecord(offset, location, size, uri, data);
 
-        ResourceRecord(LocalAddress Offset, MemoryAddress @base, int length, string uri, byte[] data)
+        ResourceRecord(ushort Offset, MemoryAddress @base, int length, string uri, byte[] data)
         {
             this.Offset =Offset;
             this.Address = @base;
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [TabularField(F.Offset)]
-        public LocalAddress Offset {get; set;}
+        public ushort Offset {get; set;}
 
         [TabularField(F.Address)]
         public MemoryAddress Address {get; set;}
@@ -60,7 +60,7 @@ namespace Z0
         public string DelimitedText(char delimiter)
         {
             var dst = text.build();
-            dst.AppendField(F.Offset, Offset);
+            dst.AppendField(F.Offset, Offset.FormatSmallHex());
             dst.AppendDelimitedHere(Address, F.Address, delimiter); 
             dst.AppendDelimited(Size.FormatAsmHex(4), FieldFormat.width(F.Size), delimiter); 
             dst.AppendDelimited(Uri, FieldFormat.width(F.Uri), delimiter);                        

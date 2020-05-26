@@ -18,8 +18,8 @@ namespace Z0.Asm.Data
         {
             public static CSOV Value => default;
             
-            public LegacyPrefixGroup Group 
-                => LegacyPrefixGroup.SO;
+            public LegacyPrefixKind Group 
+                => LegacyPrefixKind.SO;
         }
     }
 }

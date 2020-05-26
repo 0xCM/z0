@@ -14,9 +14,7 @@ namespace Z0.Machines
             public const uint Width = IReg16.Width;
 
             public const int Index = 0;
-
-            
-
+        
             public K Kind => K.AX;
         }
 
@@ -25,9 +23,7 @@ namespace Z0.Machines
             public const uint Width = IReg16.Width;
 
             public const int Index = 1;
-
-            
-
+        
             public K Kind => K.CX;
         }    
 

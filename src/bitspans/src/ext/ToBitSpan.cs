@@ -4,10 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+   using System;
+   using System.Runtime.CompilerServices;
+   using System.Linq;
 
-    using static Seed;
+   using static Seed;
 
     partial class XTend
     {

@@ -19,7 +19,7 @@ namespace Z0
         public static T read<F,T>(in BitField256<F,T> src, F index)
             where T : unmanaged
             where F : unmanaged, Enum
-                => gmath.and(vcell(src.State, Enums.numeric<byte>(index)), Mask(src,index));
+                => gmath.and(vcell(src.State, Enums.numeric<F,byte>(index)), Mask(src,index));
 
         [MethodImpl(Inline)]
         public static ref BitField256<F,T>  write<F,T>(T src, ref BitField256<F,T> dst, F index)
@@ -28,7 +28,7 @@ namespace Z0
         {
             var mask = Mask(dst,index);
             var conformed = gmath.and(src,mask);
-            var i  = Enums.numeric<byte>(index);    
+            var i  = Enums.numeric<F,byte>(index);    
             dst.State = vcell(conformed, i, dst.State);
             return ref dst;
         }

@@ -1,23 +1,5 @@
 
 
-64-bit mode
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Identifier | Symbol | Description                                                                                                                                                                                                   |
-| Yea        | V      | Supported                                                                                                                                                                                                     |
-| Nea        | I      | Not supported.                                                                                                                                                                                                |
-| NE         | N.E.   | Indicates an instruction syntax is not encodable in 64-bit mode (it may represent part of a sequence of valid instructions in other modes).                                                                   |
-| NP         | N.P.   | Indicates the REX prefix does not affect the legacy instruction in 64-bit mode.                                                                                                                               |
-| NI         | N.I.   | Indicates the opcode is treated as a new instruction in 64-bit mode.                                                                                                                                          |
-| NS         | N.S.   | Indicates an instruction syntax that requires an address override prefix in 64-bit mode and is not supported. Using an address override prefix in 64-bit mode may result in model-specific execution behavior |
-
-# Legacy Mode
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Identifier | Symbol | Description                                                              |
-| Yea        | V      | Supported.                                                               |
-| Nea        | I      | Not supported.                                                           |
-| NE         | N.E.   | Indicates an Intel 64 instruction mnemonics/syntax that is not encodable |
-
-
 # Parametric
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Identifier    | Sort        | Symbol      | Description                                                                                                                                                                                                                                                                                                                                                     |
@@ -88,16 +70,6 @@
 | tttn   | 4         | For conditional instructions, specifies a condition asserted or negated (see Table B-12)   |
 | d      | 1         | Specifies direction of data operation (see Table B-11)1                                    |
 
-# EFLAGS X-REF Ledger | Table A-2 Intel Vol1
--------------------------------------------------------------------------------------
-| Symbol | Meaning                                                                  |
-| T      | Instruction tests flag.                                                  |
-| M      | Instruction modifies flag (either sets or resets depending on operands). |
-| 0      | Instruction resets flag.                                                 |
-| 1      | Instruction sets flag.                                                   |
-| _      | Instruction's effect on flag is undefined.                               |
-| R      | Instruction restores prior value of flag.                                |
-| Blank  | Instruction does not affect flag.                                        |
 
 
 # EFLAGS Condition Codes Encoding Notes

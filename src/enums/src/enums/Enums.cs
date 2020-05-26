@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="e">The enum value to reinterpret</param>
         /// <typeparam name="V">The numeric value type</typeparam>
         [MethodImpl(Inline)]
-        public static V numeric<V>(Enum e)
+        public static V numeric_slow<V>(Enum e)
             where V : unmanaged
                 => (V)Convert.ChangeType(e, e.GetTypeCode());
  

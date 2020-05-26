@@ -80,7 +80,6 @@ namespace Z0.Asm.Data
             return service.Render();
         }
 
-
         [MethodImpl(Inline)]
         public static ushort Width2<E>(E spec)
             where E : unmanaged, Enum
@@ -91,8 +90,7 @@ namespace Z0.Asm.Data
             
             var emit = !Bits.testbit(hi, 15);
             var w = Bits.disable(hi, 15);
-            return w;
-                
+            return w;                
         }
 
         [MethodImpl(Inline)]

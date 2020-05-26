@@ -14,8 +14,8 @@ namespace Z0.Asm.Data
         {
             public static AzO Value => default;
             
-            public LegacyPrefixGroup Group 
-                => LegacyPrefixGroup.AzO;
+            public LegacyPrefixKind Group 
+                => LegacyPrefixKind.AzO;
         }
 
     }

@@ -19,7 +19,6 @@ namespace Z0.Machines
 
         RegisterKind RegisterKind {get;}
 
-        RegisterSymbol Symbol { get => (RegisterSymbol)RegisterKind; }
     }
 
     public interface IRegister<T> : IRegister, IOperand<T>
