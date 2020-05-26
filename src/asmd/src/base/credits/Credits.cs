@@ -2,16 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Data
+namespace Z0
 {        
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Seed;
-
-    public partial struct AsmRecordParser
+    public partial class CreditTypes
     {
-        public static AsmRecordParser Service => default(AsmRecordParser);
+
+    }
+
+    /// <summary>
+    /// Defines document reference specification operations
+    /// </summary>
+    [ApiHost]
+    public partial class Credits : IApiHost<Credits>
+    {
 
     }
 }

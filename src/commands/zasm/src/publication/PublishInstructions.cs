@@ -18,7 +18,7 @@ namespace Z0.Asm.Data
         public Publication<InstructionRecord> Publish(M.Instructions model)
         {
             var src = Publish(model, out var dst);
-            return Publication.Flow(src, dst);            
+            return Publications.Flow(src, dst);            
         }
 
         InstructionRecord[] Publish(M.Instructions model, out FilePath dst)

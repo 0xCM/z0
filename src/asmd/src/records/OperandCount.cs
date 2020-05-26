@@ -50,7 +50,7 @@ namespace Z0.Asm.Data
 
         public string DelimitedText(char delimiter)
         {
-            var dst = RecordFormatter<F>.Service;
+            var dst = Records.Formatter<F>();
             dst.AppendField(F.Sequence, Sequence,delimiter);
             dst.AppendField(F.Count, Count, delimiter);
             dst.AppendField(F.Id, Id, delimiter);

@@ -11,6 +11,13 @@ namespace Z0.Asm.Data
     using R = RecordFields;
     using RW = AsmFieldWidths;
 
+    public enum RecordFields : uint
+    {
+        Include = 0,
+
+        Exclude = Pow2.T31
+    }
+
     public enum DecoderTestFieldEmit : uint
     {
         Sequence = R.Include,  Mnemonic = R.Include, OpCode = R.Include,  Ops = R.Include, 

@@ -2,16 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Data
+namespace Z0
 {        
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Seed;
 
-    public partial struct AsmRecordParser
+    public interface IDataEntity : ITextual, INullaryKnown
     {
-        public static AsmRecordParser Service => default(AsmRecordParser);
-
+        
     }
+
+    public interface IDataEntity<T> : IDataEntity, INullary<T>, IEquatable<T>
+        where T : struct
+    {
+        
+    }
+
 }

@@ -21,7 +21,7 @@ namespace Z0.Asm.Data
         public Publication<OpCodeFormRecord> Publish(M.OpCodeForms model, OpCodeRecords specs)
         {
             var src = Publish(model, specs, out var dst);
-            return Publication.Flow(src, dst);            
+            return Publications.Flow(src, dst);            
         }
         
         R[] Save(OpCodeFormRecord[] src, FilePath dst)

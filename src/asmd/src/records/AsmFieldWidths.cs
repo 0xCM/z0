@@ -8,6 +8,8 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
+    using C = CommonFieldWidths;
+
     /// <summary>
     /// Defines the widths of common asm record fields
     /// </summary>
@@ -15,9 +17,9 @@ namespace Z0.Asm.Data
     {
         Id = 50,
 
-        Sequence = 10,
+        Sequence = C.Sequence,
 
-        Count = 8,
+        Count = C.Count,
 
         Mnemonic = 24,
 
@@ -41,27 +43,27 @@ namespace Z0.Asm.Data
 
         Address64 = 16,
 
-        YeaOrNea = 8,
+        YeaOrNea = C.Bool,
 
         /// <summary>
         /// The width of a field containing an 8-bit decimal number
         /// </summary>
-        Num8Dec = 8,
+        Num8Dec = C.Num8Dec,
 
         /// <summary>
         /// The width of a field containing an 8-bit hex number
         /// </summary>
-        Num8Hex = 8,
+        Num8Hex = C.Num8Hex,
 
         /// <summary>
         /// The width of a field containing a boolean indicator [T/F, Y/N, 0/1, ..] that has a small label
         /// </summary>
-        BoolSmall = 8,
+        BoolSmall = C.Bool,
 
         /// <summary>
         /// The width of a field containing a boolean indicator [T/F, Y/N, 0/1, ..] that has a large label
         /// </summary>
-        BoolLarge = 14,
+        BoolLarge = C.BoolLarge,
 
         CpuId = 10,
     }

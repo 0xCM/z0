@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
 
     /// <summary>
     /// Describes an attributed literal
@@ -18,5 +19,8 @@ namespace Z0
         }
 
         public string Description {get;}        
+
+        public static string Describe(FieldInfo target)
+            => target.Tag<LiteralAttribute>().MapValueOrDefault(x => x.Description, string.Empty);
     }
 }

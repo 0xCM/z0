@@ -18,7 +18,7 @@ namespace Z0.Asm.Data
     {        
         OperandCountRecord[] Publish(OperandCounts model)
         {
-            var dp = DataPublisher.Service;
+            var dp = AsmRecordPublisher.Service;
             
             var counts = InstructionOpCounts.OpCount;
             var codes = Enums.literals<OpCodeId>();
@@ -33,7 +33,7 @@ namespace Z0.Asm.Data
                 dst[i] = new OperandCountRecord(i, counts[i], code.Value);
             }
 
-            dp.Save(model, OperandCountField.Sequence, dst, Chars.Pipe);
+            dp.Publish(model, OperandCountField.Sequence, dst, Chars.Pipe);
             return dst;
         }
 
@@ -44,9 +44,9 @@ namespace Z0.Asm.Data
             var tests =Publish(M.DecoderTests.Model, index).Force();        
             var forms = Publish(AsmEtl.OpCodeForms, index);
 
-            LiteralPublisher.Service.Publish();            
+            AsmLiteralPublisher.Service.Publish();            
 
-            var dp = DataPublisher.Service;
+            var dp = AsmRecordPublisher.Service;
             dp.PublishList<Mnemonic>();
             dp.PublishList(LL.Codes, nameof(LL.Codes));
             dp.PublishList(LL.MemorySizes, nameof(LL.MemorySizes));

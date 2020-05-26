@@ -14,7 +14,7 @@ namespace Z0.Asm.Data
     using M = AsmDataModels;
     using F = DecoderTestField;
     using R = DecoderTestRecord;
-    using RF = RecordFormatter;
+    using RF = AsmRecordFormatter;
 
     partial class AsmEtl
     {        
@@ -36,10 +36,10 @@ namespace Z0.Asm.Data
         Publication<DecoderTestRecord> Publish(M.DecoderTests64 model, OpCodeRecords codes)
             => Publish(model, codes, 64);
 
-        Publication<DecoderTestRecord> Publish(IAsmDataModel model, OpCodeRecords codes, int bitness)
+        Publication<DecoderTestRecord> Publish(IDataModel model, OpCodeRecords codes, int bitness)
         {
             var src = Publish(model, codes, bitness,  out var dst);
-            return Publication.Flow(src, dst);            
+            return Publications.Flow(src, dst);            
         }
 
         IEnumerable<DecoderTestCase> DecoderCases(int bitness, FilePath src)
@@ -57,7 +57,7 @@ namespace Z0.Asm.Data
             }
         }
 
-        DecoderTestRecord[] Publish(IAsmDataModel model, OpCodeRecords codes, int bitness, out FilePath dst)
+        DecoderTestRecord[] Publish(IDataModel model, OpCodeRecords codes, int bitness, out FilePath dst)
         {
             var src = ParseDecoderTests(bitness).OrderBy(x => x.Id).ToArray();
             var records = new DecoderTestRecord[src.Length];

@@ -7,8 +7,8 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct AsmDataModel<M> : IAsmDataModel<M>
-        where M : unmanaged, IAsmDataModel<M>
+    public readonly struct AsmDataModel<M> : IDataModel<M>
+        where M : unmanaged, IDataModel<M>
     {
         
     }
@@ -16,7 +16,7 @@ namespace Z0.Asm.Data
     public readonly struct AsmDataModel<F,R,M,D>
         where F : unmanaged, Enum
         where R : IRecord
-        where M : IAsmDataModel
+        where M : IDataModel
         where D : unmanaged, Enum
     {
         public D Discriminator {get;}                
@@ -35,64 +35,64 @@ namespace Z0.Asm.Data
 
     public class AsmDataModels
     {
-        public readonly struct OpCodeForms : IAsmDataModel<OpCodeForms>
+        public readonly struct OpCodeForms : IDataModel<OpCodeForms>
         {            
             public static OpCodeForms Model => default(OpCodeForms);            
         }
 
-        public readonly struct Instructions : IAsmDataModel<Instructions>
+        public readonly struct Instructions : IDataModel<Instructions>
         {
             public static Instructions Model => default(Instructions);
         }
 
-        public readonly struct OperandCounts : IAsmDataModel<OperandCounts>
+        public readonly struct OperandCounts : IDataModel<OperandCounts>
         {
             public static OperandCounts Model => default(OperandCounts);
         }
 
-        public readonly struct DecoderTests16 : IAsmDataModel<DecoderTests16,TestCaseBits>
+        public readonly struct DecoderTests16 : IDataModel<DecoderTests16,TestCaseBits>
         {
             public TestCaseBits Discriminator => TestCaseBits.Bit16;
 
             public static DecoderTests Model => default(DecoderTests);
         }
 
-        public readonly struct DecoderTests32 : IAsmDataModel<DecoderTests32,TestCaseBits>
+        public readonly struct DecoderTests32 : IDataModel<DecoderTests32,TestCaseBits>
         {
             public TestCaseBits Discriminator => TestCaseBits.Bit32;
 
             public static DecoderTests Model => default(DecoderTests);
         }
 
-        public readonly struct DecoderTests64 : IAsmDataModel<DecoderTests64,TestCaseBits>
+        public readonly struct DecoderTests64 : IDataModel<DecoderTests64,TestCaseBits>
         {
             public TestCaseBits Discriminator => TestCaseBits.Bit64;
 
             public static DecoderTests Model => default(DecoderTests);
         }
 
-        public readonly struct MemoryTests16 : IAsmDataModel<MemoryTests16,TestCaseBits>
+        public readonly struct MemoryTests16 : IDataModel<MemoryTests16,TestCaseBits>
         {
             public TestCaseBits Discriminator => TestCaseBits.Bit16;
 
             public static MemoryTests Model => default(MemoryTests);
         }
 
-        public readonly struct MemoryTests32 : IAsmDataModel<MemoryTests32,TestCaseBits>
+        public readonly struct MemoryTests32 : IDataModel<MemoryTests32,TestCaseBits>
         {
             public TestCaseBits Discriminator => TestCaseBits.Bit32;
 
             public static MemoryTests Model => default(MemoryTests);
         }
 
-        public readonly struct MemoryTests64 : IAsmDataModel<MemoryTests64,TestCaseBits>
+        public readonly struct MemoryTests64 : IDataModel<MemoryTests64,TestCaseBits>
         {
             public TestCaseBits Discriminator => TestCaseBits.Bit64;
 
             public static MemoryTests Model => default(MemoryTests);
         }
 
-        public readonly struct DecoderTests : IAsmDataModel<DecoderTests>
+        public readonly struct DecoderTests : IDataModel<DecoderTests>
         {
             public static DecoderTests Model => default(DecoderTests);            
 
@@ -104,7 +104,7 @@ namespace Z0.Asm.Data
 
         }
 
-        public readonly struct MemoryTests : IAsmDataModel<MemoryTests>
+        public readonly struct MemoryTests : IDataModel<MemoryTests>
         {
             public static MemoryTests Model => default(MemoryTests);            
 
@@ -115,8 +115,7 @@ namespace Z0.Asm.Data
             public static MemoryTests64 Model64 => default(MemoryTests64);
         }
 
-
-        public readonly struct OpCodeSpecs : IAsmDataModel<OpCodeSpecs>
+        public readonly struct OpCodeSpecs : IDataModel<OpCodeSpecs>
         {
             public static OpCodeSpecs Model => default(OpCodeSpecs);
         }        
