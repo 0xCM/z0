@@ -20,7 +20,7 @@ namespace Z0
         public static BitVector<N,T> alloc<N,T>(N n = default, T fill = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => new BitVector<N, T>(fill);
+                => new BitVector<N,T>(fill);
 
         /// <summary>
         /// Allocates a generic bitvector

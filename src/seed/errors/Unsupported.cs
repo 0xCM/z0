@@ -68,11 +68,20 @@ namespace Z0
             => throw define<T>();
 
         /// <summary>
+        /// Populates a <see cref="NotSupportedException"/> complaining that a  value is not supported
+        /// </summary>
+        /// <typeparam name="T">The value type</typeparam>
+        public static T raise<T>(T t)
+            => throw new NotSupportedException($"The value {t} is not supported in the current context");
+
+        /// <summary>
         /// Raises <see cref="NotSupportedException"/> populated with a custom message describing why a 
         /// parametrically-identified type is not supported
         /// </summary>
         /// <typeparam name="T">The unsupported type</typeparam>
         public static T raise<T>(string description)
             => throw define<T>();
+
+
     }
 }

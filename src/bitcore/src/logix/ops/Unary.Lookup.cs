@@ -11,7 +11,7 @@ namespace Z0
     using static LogicSig;
     using static BitLogix;
 
-    using ULK = UnaryLogicKind;
+    using ULK = UnaryBitLogic;
 
     partial class BitLogixOps
     {

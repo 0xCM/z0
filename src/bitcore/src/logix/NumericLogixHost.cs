@@ -15,8 +15,8 @@ namespace Z0
     using static NumericLogix;
 
     using BLK = BinaryLogicKind;
-    using TLK = TernaryLogicKind;
-    using ULK = UnaryLogicKind;
+    using TLK = TernaryBitLogic;
+    using ULK = UnaryBitLogic;
     using UAR = UnaryArithmeticKind;
     using BAR = BinaryArithmeticKind;
     using BCK = BinaryComparisonKind;

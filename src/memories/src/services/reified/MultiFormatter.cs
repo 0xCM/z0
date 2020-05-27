@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static NumericBaseKind;
     
-    using NK = EnumNumericKind;
+    using NK = EnumTypeCode;
 
     [ApiHost]
     public readonly struct MultiFormatter : IApiHost<MultiFormatter>
@@ -41,7 +41,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, N2 n, int? dmax = null)
             where E : unmanaged, Enum        
-                => Enums.kind<E>() switch {
+                => Enums.typecode<E>() switch {
                     NK.U8 => Format(Enums.u8(src), n, dmax),    
                     NK.I8 => Format(Enums.i8(src), n, dmax),    
                     NK.I16 => Format(Enums.i16(src), n, dmax),    
@@ -55,7 +55,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, N8 n, int? dmax = null)
             where E : unmanaged, Enum        
-                => Enums.kind<E>() switch {
+                => Enums.typecode<E>() switch {
                     NK.U8 => Format(Enums.u8(src), n, dmax),    
                     NK.I8 => Format(Enums.i8(src), n, dmax),    
                     NK.I16 => Format(Enums.i16(src), n, dmax),    
@@ -69,7 +69,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, N16 n, int? dmax = null)
             where E : unmanaged, Enum        
-                => Enums.kind<E>() switch {
+                => Enums.typecode<E>() switch {
                     NK.U8 => Format(Enums.u8(src), n, dmax),    
                     NK.I8 => Format(Enums.i8(src), n, dmax),    
                     NK.I16 => Format(Enums.i16(src), n, dmax),    
@@ -83,7 +83,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, N10 n, int? dmax = null)
             where E : unmanaged, Enum        
-                => Enums.kind<E>() switch {
+                => Enums.typecode<E>() switch {
                     NK.U8 => Format(Enums.u8(src), n, dmax),    
                     NK.I8 => Format(Enums.i8(src), n, dmax),    
                     NK.I16 => Format(Enums.i16(src), n, dmax),    
@@ -97,7 +97,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, NumericBaseKind @base, int? dmax = null)
             where E : unmanaged, Enum        
-                => Enums.kind<E>() switch {
+                => Enums.typecode<E>() switch {
                     NK.U8 => Format(Enums.u8(src), @base, dmax),    
                     NK.I8 => Format(Enums.i8(src), @base, dmax),    
                     NK.I16 => Format(Enums.i16(src), @base, dmax),    

@@ -9,11 +9,10 @@ namespace Z0
     using System.Linq;
 
     using static Seed;    
-    using static TernaryLogicKind;
 
     using BLK = BinaryLogicKind;
-    using TLK = TernaryLogicKind;
-    using ULK = UnaryLogicKind;
+    using TLK = TernaryBitLogic;
+    using ULK = UnaryBitLogic;
 
     using K = Kinds;
 
@@ -65,6 +64,14 @@ namespace Z0
             => BitLogixOps.lookup(kind);
 
         /// <summary>
+        /// Returns a kind-indentified unary operator
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        [MethodImpl(Inline)]
+        public BinaryOp<bit> Lookup(BinaryBitLogic kind)
+            => BitLogixOps.lookup((BLK)kind);
+
+        /// <summary>
         /// Returns a kind-indentified binary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
@@ -97,6 +104,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public bit Evaluate(BLK kind, bit a, bit b)
             => BitLogixOps.eval(kind, a, b);
+
+        /// <summary>
+        /// Evaluates a bianry operator over supplied operands
+        /// </summary>
+        /// <param name="kind">The operaor kind</param>
+        /// <param name="a">The operand</param>        
+        [MethodImpl(Inline)]
+        public bit Evaluate(BinaryBitLogic bbl, bit a, bit b)
+            => BitLogixOps.eval((BLK)bbl, a, b);
 
         /// <summary>
         /// Evaluates a ternary operator over supplied operands

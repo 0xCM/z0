@@ -207,7 +207,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.Service.Evaluate(UnaryLogicKind.Not, x[i]);
+                z[i] = BitLogix.Service.Evaluate(UnaryBitLogic.Not, x[i]);
             return z;
         }
 
@@ -223,7 +223,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.Service.Evaluate(UnaryLogicKind.Not, y[i]);
+                z[i] = BitLogix.Service.Evaluate(UnaryBitLogic.Not, y[i]);
             return z;
         }
 

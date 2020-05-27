@@ -73,7 +73,7 @@ namespace Z0
                 while(true)
                 {
                     Fixed16 next = random.Next<short>();
-                    yield return Unsafe.As<Fixed16, T>(ref next);
+                    yield return Unsafe.As<Fixed16,T>(ref next);
                 }
             }
         }
@@ -86,7 +86,7 @@ namespace Z0
                 while(true)
                 {
                     Fixed32 next = random.Next<uint>();
-                    yield return Unsafe.As<Fixed32, T>(ref next);
+                    yield return Unsafe.As<Fixed32,T>(ref next);
                 }
             }
             else
@@ -94,7 +94,7 @@ namespace Z0
                 while(true)
                 {
                     Fixed32 next = random.Next<int>();
-                    yield return Unsafe.As<Fixed32, T>(ref next);
+                    yield return Unsafe.As<Fixed32,T>(ref next);
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace Z0
                 while(true)
                 {
                     Fixed64 next = random.Next<ulong>();
-                    yield return Unsafe.As<Fixed64, T>(ref next);
+                    yield return Unsafe.As<Fixed64,T>(ref next);
                 }
             }
             else
@@ -115,7 +115,7 @@ namespace Z0
                 while(true)
                 {
                     Fixed64 next = random.Next<long>();
-                    yield return Unsafe.As<Fixed64, T>(ref next);
+                    yield return Unsafe.As<Fixed64,T>(ref next);
                 }
             }
         }
@@ -126,7 +126,7 @@ namespace Z0
             while(true)
             {
                 Fixed128 next = random.NextPair<ulong>();
-                yield return Unsafe.As<Fixed128, T>(ref next);
+                yield return Unsafe.As<Fixed128,T>(ref next);
             }
         }
 
@@ -136,7 +136,7 @@ namespace Z0
             while(true)
             {
                 Fixed256 next = (random.Fixed(w128), random.Fixed(w128));
-                yield return Unsafe.As<Fixed256, T>(ref next);
+                yield return Unsafe.As<Fixed256,T>(ref next);
             }
         }
 
@@ -146,7 +146,7 @@ namespace Z0
             while(true)
             {
                 Fixed512 next = (random.Fixed(w256), random.Fixed(w256));
-                yield return Unsafe.As<Fixed512, T>(ref next);
+                yield return Unsafe.As<Fixed512,T>(ref next);
             }
         }
     }

@@ -10,12 +10,12 @@ namespace Z0
 
     using static Seed;    
     using static Memories;
-    using static TernaryLogicKind;
+    using static TernaryBitLogic;
     using static LogicSig;
 
-    using ULK = UnaryLogicKind;
+    using ULK = UnaryBitLogic;
     using BLK = BinaryLogicKind;
-    using TLK = TernaryLogicKind;
+    using TLK = TernaryBitLogic;
     using BSK = BitShiftKind;
     using BCK = BinaryComparisonKind;
     using BAR = BinaryArithmeticKind;

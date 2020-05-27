@@ -15,7 +15,7 @@ namespace Z0.Logix
 
         BitLogix bitlogix => BitLogix.Service;
 
-        ReadOnlySpan<TernaryLogicKind> TernaryKinds
+        ReadOnlySpan<TernaryBitLogic> TernaryKinds
             => NumericLogixHost.TernaryLogicKinds;
         
         public void op_identities()
@@ -116,7 +116,7 @@ namespace Z0.Logix
 
         }
 
-        void check_op_identity<T>(TernaryLogicKind id)
+        void check_op_identity<T>(TernaryBitLogic id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -129,7 +129,7 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_op_equivalence<T>(TernaryLogicKind kind)
+        void check_op_equivalence<T>(TernaryBitLogic kind)
             where T: unmanaged
         {
             var width = bitsize<T>();

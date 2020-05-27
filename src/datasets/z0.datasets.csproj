@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>datasets</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Text)" />
+    <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitFields)" />
+  </ItemGroup>
+
+</Project>

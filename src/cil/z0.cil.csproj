@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Artifacts)" />
     <ProjectReference Include="$(Time)" />
   </ItemGroup>
 

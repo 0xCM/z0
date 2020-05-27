@@ -10,69 +10,49 @@ namespace Z0
     using static Seed;
 
     /// <summary>
-    /// Appropriately defines an enumeration literal as the triple (index,name,value)
+    /// Defines a boxed enumeration literal as the triple (index,identifier,value)
     /// </summary>
-    /// <remarks>
-    /// Here, index := declaration order of a declared literal, 
-    /// name := user-defiend literal identifer, and
-    /// value := the numeric content of the enum. 
-    /// Defining a literal this way attempts to overcome troublesome aspects in which C#/clr enums 
-    /// are implemented and preserves all enum information content. It is value-invariant in the sense 
-    /// that the numeric content of does of a member not impact the n index/name content. 
-    /// Thus, enum value duplication isn't an issue since all data are preserved, the api end-user can decide what
-    /// value duplication means in a given context
-    /// </remarks>
-    public readonly struct EnumLiteral<E> : ITextual<EnumLiteral<E>>
-        where E : unmanaged, Enum        
+    public readonly struct EnumLiteral : IEnumLiteral<EnumLiteral>
     {
-        public readonly int Index;
-
-        public readonly string Name;
-
-        public readonly E Value;
-
-        public Type BaseType 
-        {
-            [MethodImpl(Inline)]
-            get => typeof(E).GetEnumUnderlyingType();
-        }
+        /// <summary>
+        /// The literal declaration order, unique within the declaring enum
+        /// </summary>
+        public int Index {get;}
 
         /// <summary>
-        /// The literal's numeric value
+        /// The literal identifier, unique within the declaring enum
         /// </summary>
-        /// <typeparam name="T">The underlying, or desired, numeric type</typeparam>
-        [MethodImpl(Inline)]
-        public T NumericValue<T>()
-            where T : unmanaged
-                => Enums.numeric<E,T>(Value);
+        public string Identifier {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator EnumLiteral<E>((int index, string name, E value) src)
-            => new EnumLiteral<E>(src.index, src.name, src.value);
+        /// <summary>
+        /// The literal value
+        /// </summary>
+        public ulong LiteralValue {get;}
+
+        public NumericKind NumericKind {get;}
             
         [MethodImpl(Inline)]
-        internal EnumLiteral(int index, string identifier, E value)
+        internal EnumLiteral(int index, string identifier, NumericKind kind, ulong value)
         {
-            this.Name = identifier;
+            this.Identifier = identifier;
+            this.NumericKind = kind;
             this.Index = index;
-            this.Value = value;
+            this.LiteralValue = value;
         }           
 
         [MethodImpl(Inline)]
-        public void Deconstruct(out int index, out string name, out E value)
-        {
-            index = Index;
-            name = Name;
-            value = Value;
-        }
+        public bool Equals(EnumLiteral src)
+            => Index == src.Index 
+            && Identifier == src.Identifier 
+            && LiteralValue.Equals(src.LiteralValue);
+
+        public override bool Equals(object src)
+            => src is EnumLiteral x && Equals(x);
 
         public override int GetHashCode()
             => Index;
         
-        public string Format()
-            => $"{Index.ToString().PadLeft(2, '0')} {Value}:{Name}";
-
         public override string ToString()
-            => Format();            
+            => (this as IEnumLiteral).Format();            
     }
 }

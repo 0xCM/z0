@@ -12,11 +12,11 @@ namespace Z0
     public static partial class XTend
     {
         [MethodImpl(Inline)]
-        public static string Format(this UnaryLogicKind kind)
+        public static string Format(this UnaryBitLogic kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryLogicKind kind, T arg)
+        public static string Format<T>(this UnaryBitLogic kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]

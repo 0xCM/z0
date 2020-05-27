@@ -7,11 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed; using static Memories;
+    using static Seed; 
+    using static Memories;
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Sign signum<T>(T src)
             where T : unmanaged
         {

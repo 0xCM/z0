@@ -21,8 +21,6 @@ namespace Z0
 
         public static FolderPath Empty =>  Define(string.Empty);
 
-        //public static FolderPath[] None => Control.array<FolderPath>();
-
         /// <summary>
         /// Just the one
         /// </summary>

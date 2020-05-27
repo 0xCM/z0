@@ -140,7 +140,7 @@ namespace Z0.Asm.Data
 
         R15 = r7 | GPN << 4 | W64 << 8,
 
-        XMM0 = r0 | XMM << 4 | W64 << 8,
+        XMM0 = r0 | XMM << 4 | W128 << 8,
 
         XMM1 = r1 | XMM << 4 | W128 << 8,
 

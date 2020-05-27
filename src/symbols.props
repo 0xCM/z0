@@ -32,6 +32,9 @@
 
     <Math>$(Src)math/z0.math.csproj</Math>
     
+    <Datasets>$(Src)datasets/z0.datasets.csproj</Datasets>
+    <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>
+
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
 
     <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>

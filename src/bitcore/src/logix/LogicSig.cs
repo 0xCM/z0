@@ -10,32 +10,39 @@ namespace Z0
     using static Seed;    
     using static Memories;
 
-    using ULK = UnaryLogicKind;
+    using ULK = UnaryBitLogic;
     using BLK = BinaryLogicKind;
-    using TLK = TernaryLogicKind;
+    using TLK = TernaryBitLogic;
 
     public class LogicSig
     {
+        [MethodImpl(Inline)]
         static string keyword<T>()
             where T : unmanaged
                 => typeof(T).NumericKeyword();
 
+        [MethodImpl(Inline)]
         public static string sig(ULK kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
+        [MethodImpl(Inline)]
         public static string sig(BLK kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
+        [MethodImpl(Inline)]
         public static string sig(TLK kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
+        [MethodImpl(Inline)]
         public static string sig(BitLogicKind kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
+        [MethodImpl(Inline)]
         public static string sig<T>(ULK kind)
-            where T : unmanaged
+             where T : unmanaged
                 => text.concat(format(kind), Chars.Colon, keyword<T>());
 
+        [MethodImpl(Inline)]
         public static string sig<T>(BLK kind)
             where T : unmanaged
                 => text.concat(format(kind), Chars.Colon, keyword<T>());
@@ -74,7 +81,6 @@ namespace Z0
             => kind.ToString().ToLower();
 
         public static string format(BitLogicKind kind)                
-            => kind.Format();
-             
+            => kind.Format();             
     }
 }

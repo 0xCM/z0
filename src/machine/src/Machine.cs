@@ -14,7 +14,6 @@ namespace Z0
     using static Memories;
     using static MachineEvents;
 
-
     public class Machine : IMachine
     {
         public IMachineContext Context {get;}

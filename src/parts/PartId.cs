@@ -83,6 +83,12 @@ public enum PartId : ulong
     
     VData = 331, 
 
+    Datasets = 8999,
+
+    Generate = 8901,
+    
+    Artifacts = 8902,
+
     FVec = 334, 
 
     DVec = 332, 

@@ -52,7 +52,7 @@ namespace Z0
                 => kind.IsSome() ? ifSome(kind) : ifNone();
 
         [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this EnumNumericKind k)
+        public static NumericKind NumericKind(this EnumTypeCode k)
             => k.TypeCode().NumericKind();
 
         [MethodImpl(Inline)]
@@ -62,7 +62,7 @@ namespace Z0
                 => Enums.numeric<E,T>(src);
 
         [MethodImpl(Inline)]
-        public static TypeCode TypeCode(this EnumNumericKind k)
+        public static TypeCode TypeCode(this EnumTypeCode k)
             =>(System.TypeCode)k;
     
         public static EnumLiterals<E> ToIndex<E>(this IEnumerable<EnumLiteral<E>> src)

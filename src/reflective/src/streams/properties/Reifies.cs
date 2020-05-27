@@ -19,14 +19,5 @@ namespace Z0
         /// <param name="tInterface">The inteface type</param>
         public static IEnumerable<PropertyInfo> Reifies(this PropertyInfo[] src, Type tInterface)
             => src.Where(p => p.PropertyType.Reifies(tInterface));
-
-        /// <summary>
-        /// Selects the properties from a stream that reify a parametrically-specified interface
-        /// </summary>
-        /// <param name="src">The source stream</param>        
-        /// <typeparam name="T">The test type</typeparam>
-        public static IEnumerable<PropertyData<T>> Reifies<T>(this PropertyInfo[] src)
-            where T : class
-                => Clr.data<T>(src.Where(p => p.PropertyType.Reifies(typeof(T))));
     }
 }

@@ -10,9 +10,9 @@ namespace Z0
 
     using static Seed;    
 
-    using ULK = UnaryLogicKind;
+    using ULK = UnaryBitLogic;
     using BLK = BinaryLogicKind;
-    using TLK = TernaryLogicKind;
+    using TLK = TernaryBitLogic;
     using BAR = BinaryArithmeticKind;
     using BCK = BinaryComparisonKind;
     using BSK = BitShiftKind;

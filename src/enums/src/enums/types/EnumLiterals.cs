@@ -12,22 +12,26 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct EnumLiterals<E> : IEnumerable<EnumLiteral<E>>
-        where E : unmanaged, Enum        
+    /// <summary>
+    /// Defines an untyped literal index
+    /// </summary>
+    public readonly struct EnumLiterals : IReadOnlyIndex<EnumLiteral>
     {
-        readonly EnumLiteral<E>[] Data;
+        readonly EnumLiteral[] Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator EnumLiterals<E>(EnumLiteral<E>[] src)
-            => new EnumLiterals<E>(src);
+        public static implicit operator EnumLiterals(EnumLiteral[] src)
+            => new EnumLiterals(src);
         
         [MethodImpl(Inline)]
-        internal EnumLiterals(EnumLiteral<E>[] src) 
+        internal EnumLiterals(EnumLiteral[] src) 
             => Data = src;
 
-        [MethodImpl(Inline)]
-        public EnumLiteral<E>[] ToArray()
-            => Data;
+        public EnumLiteral[] Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public int Length
         {
@@ -35,13 +39,14 @@ namespace Z0
             get => Data.Length;
         }
         
-        public ref readonly EnumLiteral<E> this[int i]
+        public ref readonly EnumLiteral this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
         
-        public E[] Values => Data.Map(x => x.Value);
+        public ulong[] Values 
+            => Data.Map(x => x.LiteralValue);
 
         public F[] Convert<F>()
             where F : unmanaged, Enum
@@ -54,13 +59,7 @@ namespace Z0
             return dst;
         }
                 
-        public IEnumerable<NamedValue<E>> NamedValues
-            => from i in Data select NamedValue.define(i.Name, i.Value);
-
-        public IEnumerator<EnumLiteral<E>> GetEnumerator()
-            => ((IEnumerable<EnumLiteral<E>>)Data).GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator()
-            => Data.GetEnumerator();
+        public IEnumerable<NamedValue<ulong>> NamedValues
+            => from i in Data select NamedValue.define(i.Identifier, i.LiteralValue);
     }
 }

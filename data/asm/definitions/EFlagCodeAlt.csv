@@ -1,0 +1,19 @@
+# EFLAGS Condition Codes, Table B-1 Intel Vol1
+---------------------------------------------------
+| Identifier | Description               | Value |
+| O          | Overflow                  | 0000  |
+| NO         | No overflow               | 0001  |
+| NAE        | Neither above nor equal   | 0010  |
+| AE         | Above or equal            | 0011  |
+| Z          | Zero                      | 0100  |
+| NZ         | Not zero                  | 0101  |
+| BE         | Below or Equal            | 0110  |
+| NBE        | Neither Below nor Equal   | 0111  |
+| S          | Sign                      | 1000  |
+| NS         | No Sign                   | 1001  |
+| PE         | Parity Even               | 1010  |
+| PO         | Parity Odd                | 1011  |
+| NGE        | Neither greater nor equal | 1100  |
+| GE         | Greater or equal          | 1101  |
+| NG         | Not greater               | 1110  |
+| G          | Greater                   | 1111  |

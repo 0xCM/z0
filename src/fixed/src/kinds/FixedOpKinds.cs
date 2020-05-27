@@ -17,8 +17,8 @@ namespace Z0
     {
         public static IEnumerable<FixedOpKind> Known 
             => type<FixedOpKinds>().StaticProperties(true,false)
-                    .Reifies<IFixedOpKind>()
-                    .Select(p => p.Data.MemberValue<IFixedOpKind>(null))
+                    .Reifies(typeof(IFixedOpKind))
+                    .Select(p => p.MemberValue<IFixedOpKind>(null))
                     .Select(k => new FixedOpKind(k.OperandWidth, k.OperandType, k.OperatorType));
     }
 }

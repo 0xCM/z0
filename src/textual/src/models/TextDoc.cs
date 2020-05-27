@@ -27,6 +27,10 @@ namespace Z0
         public ReadOnlySpan<TextRow> Rows
             => RowData;
         
+        public string Content
+        {
+            get => RowData.Map(r => r.Format()).Concat(text.eol);
+        }
         public ref readonly TextRow this[int index]
             => ref Rows[index];
         

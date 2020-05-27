@@ -19,12 +19,18 @@ namespace Z0
         
         TextFormat(bool header, bool delimited, char sep, char? cp, int? colwidth)
         {
+            RowSeparator = "-------";
             HasDataHeader = header;
             IsDelimited = delimited;
             Delimiter = sep;
             CommentPrefix = cp;
             ColWidth = colwidth;
         }
+
+        /// <summary>
+        /// Specifies leading content that identifies a non-semantic row division marker
+        /// </summary>
+        public readonly string RowSeparator;
 
         /// <summary>
         /// Indicates whether the first line of the data is a header row

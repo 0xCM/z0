@@ -1,0 +1,19 @@
+# EFLAGS Condition Tests, Table B-1 Intel Vol1
+-------------------------------------------------------------------------------------
+| Mnemonic | OF | CF | ZF | SF | PF | CF OR ZF | SF XOR OF | (SF XOR OF) OR ZF |
+| NGE      |    |    |    |    |    |          | 1         |                   |
+| GE       |    |    |    |    |    |          | 0         |                   |
+| NG       |    |    |    |    |    |          |           | 1                 |
+| G        |    |    |    |    |    |          |           | 0                 |
+
+
+# EFLAGS Condition Tests, Table B-1 Intel Vol1
+-----------------------------------------------------------------------------------------------------------------
+| Identifier | OF | CF | ZF | SF | PF | CF OR ZF | SF XOR OF | (SF XOR OF) OR ZF |
+| BE         |    |    |    |    |    | 1        |           |                   |
+| NBE        |    |    |    |    |    | 0        |           |                   |
+| L          |    |    |    |    |    |          | 1         |                   |
+| NL         |    |    |    |    |    |          | 0         |                   |
+| LE         |    |    |    |    |    |          |           | 1                 |
+| NLE        |    |    |    |    |    |          |           | 0                 |
+

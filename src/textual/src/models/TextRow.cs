@@ -46,12 +46,15 @@ namespace Z0
         public ReadOnlySpan<TextCell> Cells
             => CellData;
 
+        static string ColSep(char? delimiter)
+            => text.concat(Chars.Space, delimiter ?? Chars.Pipe, Chars.Space);
+
         /// <summary>
         /// Joins the enclosed cells to produce a line of text
         /// </summary>
         /// <param name="delimiter">The separator to apply to delimit the cell data in the line </param>
         public string Format(char? delimiter = null)
-            => string.Join(delimiter ?? Chars.Pipe,CellData.Select(x => x.CellValue));
+            => string.Join(ColSep(delimiter),  CellData.Select(x => x.CellValue));
         
         public override string ToString()
             => Format();

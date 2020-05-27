@@ -18,7 +18,7 @@ namespace Z0.Asm.Data
 
     public interface IAsmArchiveConfig : IPublicationArchive
     {
-        FolderName IPublicationArchive.RootFolder 
+        FolderName IDatasetArchive.RootFolder 
             => FolderName.Define("asm");
 
         FolderName SourcesFolder 

@@ -13,7 +13,7 @@ namespace Z0
         /// ᙿ
         /// </summary>
         Eq = 'ᙿ',
-        
+                
         /// <summary>
         /// Eq
         /// </summary>
@@ -159,6 +159,9 @@ namespace Z0
         /// </summary>
         ㆍ = Dot,
 
+        /// <summary>
+        /// '
+        /// </summary>
         SQuote = 'ᑊ',
 
         /// <summary>
@@ -166,6 +169,9 @@ namespace Z0
         /// </summary>
         ᑊ = SQuote,
 
+        /// <summary>
+        /// ʺ
+        /// </summary>
         DQuote = 'ʺ',
 
         /// <summary>
@@ -191,10 +197,50 @@ namespace Z0
         /// <summary>
         /// HashExp
         /// </summary>
-        ᙾ = HashExp,
+        ᙾ = HashExp,        
 
         /// <summary>
-        /// ノ'
+        /// ᐃ
+        /// </summary>
+        Up = 'ᐃ',
+
+        /// <summary>
+        /// Up
+        /// </summary>
+        ᐃ = Up,
+
+        /// <summary>
+        /// ᐁ
+        /// </summary>
+        Down = 'ᐁ',
+        
+        /// <summary>
+        /// DeltaNot
+        /// </summary>
+        ᐁ = Down,
+
+        /// <summary>
+        /// ᐊ
+        /// </summary>
+        Left = 'ᐊ',
+
+        /// <summary>
+        /// Left
+        /// </summary>
+        ᐊ = Left,
+
+        /// <summary>
+        /// ᐅ
+        /// </summary>
+        Right = 'ᐅ',
+                
+        /// <summary>
+        /// Right
+        /// </summary>
+        ᐅ = 'ᐅ',
+
+        /// <summary>
+        /// ノ
         /// </summary>
         FSlash = 'ノ',
 
@@ -216,12 +262,12 @@ namespace Z0
         /// <summary>
         /// ᛏ
         /// </summary>
-        Up = 'ᛏ',
+        ArrowUp = 'ᛏ',
 
         /// <summary>
-        /// Up
+        /// ArrowUp
         /// </summary>
-        ᛏ = Up,
+        ᛏ = ArrowUp,
 
         /// <summary>
         /// ᚾ
@@ -233,17 +279,15 @@ namespace Z0
         /// </summary>
         ᚾ = PlusSlant,
 
-        ᛃ = 'ᛃ',
-
         /// <summary>
         /// ᛎ
         /// </summary>
-        Down = 'ᛎ',
+        ArrowDown = 'ᛎ',
 
         /// <summary>
-        /// Down
+        /// ArrowDown
         /// </summary>
-        ᛎ = Down,
+        ᛎ = ArrowDown,
 
         /// <summary>
         /// ॽ
@@ -292,7 +336,6 @@ namespace Z0
         /// </summary>
         ǀ = LeftPipe,
 
-
         /// <summary>
         /// ヨ
         /// </summary>
@@ -303,6 +346,9 @@ namespace Z0
         /// </summary>
         ヨ = Exists,        
 
+        /// <summary>
+        /// ロ
+        /// </summary>
         Box = 'ロ',
 
         /// <summary>
@@ -310,6 +356,9 @@ namespace Z0
         /// </summary>
         ロ = Box,
 
+        /// <summary>
+        /// コ
+        /// </summary>
         Contains = 'コ',
 
         /// <summary>
@@ -337,6 +386,9 @@ namespace Z0
         /// </summary>
         э,
 
+        /// <summary>
+        /// П
+        /// </summary>
         Cap = 'П',
 
         /// <summary>
@@ -371,10 +423,16 @@ namespace Z0
         /// </summary>
         β = Beta,  
 
+        /// <summary>
+        /// γ
+        /// </summary>
         Gamma = 'γ',
 
         γ = Gamma,
 
+        /// <summary>
+        /// Γ
+        /// </summary>
         GammaUpper = 'Γ',
 
         /// <summary>
@@ -382,6 +440,9 @@ namespace Z0
         /// </summary>
         Γ = GammaUpper,
 
+        /// <summary>
+        /// ε
+        /// </summary>
         Epsilon = 'ε',
 
         /// <summary>
@@ -389,13 +450,19 @@ namespace Z0
         /// </summary>
         ε = Epsilon,
 
+        /// <summary>
+        /// δ
+        /// </summary>
         DeltaEps = 'δ',
 
         /// <summary>
-        /// DeltaEps
+        /// The delta of epsilon fame
         /// </summary>
         δ = DeltaEps,
 
+        /// <summary>
+        /// Δ
+        /// </summary>
         Delta = 'Δ',
 
         /// <summary>
@@ -426,12 +493,12 @@ namespace Z0
         /// <summary>
         /// Ω
         /// </summary>
-        TheEnd = 'Ω',
+        Ohm = 'Ω',
 
         /// <summary>
-        /// TheEnd
+        /// Ohm
         /// </summary>
-        Ω = TheEnd,
+        Ω = Ohm,
 
         /// <summary>
         /// λ
@@ -443,6 +510,9 @@ namespace Z0
         /// </summary>
         λ = Lambda,
 
+        /// <summary>
+        /// π
+        /// </summary>
         Pi = 'π',
 
         /// <summary>
@@ -450,6 +520,9 @@ namespace Z0
         /// </summary>
         π = Pi,
 
+        /// <summary>
+        /// ℿ
+        /// </summary>
         BigPi = 'ℿ',
 
         /// <summary>
@@ -457,6 +530,9 @@ namespace Z0
         /// </summary>
         ℿ = BigPi,
 
+        /// <summary>
+        /// μ
+        /// </summary>
         Mu = 'μ',
 
         /// <summary>
@@ -465,7 +541,7 @@ namespace Z0
         μ = Mu,
 
         /// <summary>
-        /// 
+        /// ψ
         /// </summary>
         Psi = 'ψ',
 
@@ -474,6 +550,9 @@ namespace Z0
         /// </summary>
         ψ = Psi,
         
+        /// <summary>
+        /// ρ
+        /// </summary>
         Rho = 'ρ',
 
         /// <summary>
@@ -481,6 +560,9 @@ namespace Z0
         /// </summary>
         ρ = Rho,
 
+        /// <summary>
+        /// σ
+        /// </summary>
         Sigma = 'σ',
 
         /// <summary>
@@ -489,17 +571,17 @@ namespace Z0
         σ = Sigma,
 
         /// <summary>
-        /// Sum
+        /// Σ
         /// </summary>
         Sum = 'Σ',
 
         /// <summary>
-        /// 
+        /// Sum
         /// </summary>
         Σ = Sum,
 
         /// <summary>
-        /// 
+        /// τ
         /// </summary>
         Tau = 'τ',
 
@@ -509,7 +591,7 @@ namespace Z0
         τ = Tau,
 
         /// <summary>
-        /// 
+        /// χ
         /// </summary>
         Chi = 'χ',
 
@@ -519,7 +601,7 @@ namespace Z0
         χ = Chi,
     
         /// <summary>
-        /// 
+        /// ι
         /// </summary>
         Iota = 'ι',
 
@@ -529,14 +611,14 @@ namespace Z0
         ι = Iota,
 
         /// <summary>
-        /// 
+        /// Ο
         /// </summary>
-        OmicronUpper = 'Ο',
+        Oh = 'Ο',
 
         /// <summary>
-        /// OmicronUpper
+        /// Oh
         /// </summary>
-        Ο = OmicronUpper,
+        Ο = Oh,
 
         /// <summary>
         /// ν
@@ -588,6 +670,9 @@ namespace Z0
         /// </summary>
         ℚ = Rational,
 
+        /// <summary>
+        /// ℙ
+        /// </summary>
         Prime ='ℙ',
 
         /// <summary>
@@ -595,6 +680,9 @@ namespace Z0
         /// </summary>
         ℙ = Prime,
 
+        /// <summary>
+        /// ℂ
+        /// </summary>
         Complex = 'ℂ',
 
         /// <summary>
@@ -693,5 +781,28 @@ namespace Z0
         /// USmall
         /// </summary>
         υ = USmall,                                        
+
+        ᛃ = 'ᛃ',
+
+        /// <summary>
+        /// ᐞ
+        /// </summary>
+        Exp = 'ᐞ',
+
+        /// <summary>
+        /// Exp
+        /// </summary>
+        ᐞ = Exp,
+
+        /// <summary>
+        /// ᐜ
+        /// </summary>
+        ExpW = 'ᐜ',
+        
+        /// <summary>
+        /// ExpW
+        /// </summary>
+        ᐜ = ExpW,
+
     }
 }

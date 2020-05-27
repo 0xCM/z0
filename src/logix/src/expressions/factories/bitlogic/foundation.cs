@@ -67,7 +67,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
         public static UnaryLogicOpExpr identity(ILogicExpr a)
-            => unary(UnaryLogicKind.Identity, a);
+            => unary(UnaryBitLogic.Identity, a);
 
         /// <summary>
         /// Defines a typed logical identity expression
@@ -76,7 +76,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static UnaryLogicOpExpr<T> identity<T>(ILogicExpr<T> a)
             where T : unmanaged
-                => unary(UnaryLogicKind.Identity, a);
+                => unary(UnaryBitLogic.Identity, a);
 
         /// <summary>
         /// Defines a unary logic operator over an expression
@@ -85,7 +85,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOpExpr unary(UnaryLogicKind op, ILogicExpr a)
+        public static UnaryLogicOpExpr unary(UnaryBitLogic op, ILogicExpr a)
             => new UnaryLogicOpExpr(op,a);
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOpExpr<T> unary<T>(UnaryLogicKind op, ILogicExpr<T> a)
+        public static UnaryLogicOpExpr<T> unary<T>(UnaryBitLogic op, ILogicExpr<T> a)
             where T : unmanaged
                 => new UnaryLogicOpExpr<T>(op,a);
 
@@ -106,7 +106,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        static UnaryLogicOpExpr<T> unary<T>(UnaryLogicKind op, bit a)
+        static UnaryLogicOpExpr<T> unary<T>(UnaryBitLogic op, bit a)
             where T : unmanaged
                 => new UnaryLogicOpExpr<T>(op,literal<T>(a));
 
@@ -117,7 +117,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOpExpr unary(UnaryLogicKind kind, bit a)
+        public static UnaryLogicOpExpr unary(UnaryBitLogic kind, bit a)
             => new UnaryLogicOpExpr(kind,literal(a));
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOpExpr ternary(TernaryLogicKind kind, ILogicExpr a, ILogicExpr b, ILogicExpr c)
+        public static TernaryLogicOpExpr ternary(TernaryBitLogic kind, ILogicExpr a, ILogicExpr b, ILogicExpr c)
             => new TernaryLogicOpExpr(kind,a,b,c);
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOpExpr<T> ternary<T>(TernaryLogicKind kind, ILogicExpr<T> a, ILogicExpr<T> b, ILogicExpr<T> c)
+        public static TernaryLogicOpExpr<T> ternary<T>(TernaryBitLogic kind, ILogicExpr<T> a, ILogicExpr<T> b, ILogicExpr<T> c)
             where T : unmanaged
                 => new TernaryLogicOpExpr<T>(kind,a,b,c);
 
@@ -193,7 +193,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOpExpr ternary(TernaryLogicKind kind, bit a, bit b, bit c)
+        public static TernaryLogicOpExpr ternary(TernaryBitLogic kind, bit a, bit b, bit c)
             => new TernaryLogicOpExpr(kind,literal(a),literal(b),literal(c));
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        static TernaryLogicOpExpr<T> ternary<T>(TernaryLogicKind kind, bit a, bit b, bit c)
+        static TernaryLogicOpExpr<T> ternary<T>(TernaryBitLogic kind, bit a, bit b, bit c)
             where T : unmanaged
                 => new TernaryLogicOpExpr<T>(kind,literal<T>(a),literal<T>(b),literal<T>(c));
     }

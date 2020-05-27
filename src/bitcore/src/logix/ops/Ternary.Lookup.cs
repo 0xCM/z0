@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;    
-    using static TernaryLogicKind;
+    using static TernaryBitLogic;
     using static LogicSig;
     using static BitLogix;
 
-    using TLK = TernaryLogicKind;
+    using TLK = TernaryBitLogic;
 
     partial class BitLogixOps
     {

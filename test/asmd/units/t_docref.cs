@@ -78,7 +78,7 @@ namespace Z0.Asm.Data
         public void t_docref_bitfield()
         {
             var tField = typeof(DocField);
-            var literals = Enums.binlits<DocField,ulong>().ToArray();
+            var literals = Enums.BinaryLiterals<DocField,ulong>().ToArray();
             for(var i=0; i<literals.Length; i++)
             {
                 var literal = literals[i];

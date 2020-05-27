@@ -10,7 +10,8 @@ namespace Z0
     using static Seed;    
     using static Memories;
 
-    public static class TabularTruth
+    [ApiHost]
+    public readonly struct TabularTruth : IApiHost<TabularTruth>
     {
         static bit on => bit.On;
         
@@ -22,9 +23,10 @@ namespace Z0
         /// Computes a the signature, also referred to as the truth vector, for an identified unary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector4 Vector(UnaryLogicKind kind)
+        [Op]
+        public static BitVector4 vector(N4 n, UnaryBitLogic kind)
         {
-            var x = BitVector4.Zero;
+            var x = BitVector.alloc(n);
             x[0] = bitlogix.Evaluate(kind, off);
             x[1] = bitlogix.Evaluate(kind, on);
             return x;
@@ -34,31 +36,48 @@ namespace Z0
         /// Computes a the signature, also referred to as the truth vector, for an identified binary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector4 Vector(BinaryLogicKind kind)
+        [Op]
+        public static BitVector4 vector(N4 n, BinaryLogicKind kind)
         {
-            var x = BitVector.alloc(n4);
+            var x = BitVector.alloc(n);
             x[0] = bitlogix.Evaluate(kind, off, off);
             x[1] = bitlogix.Evaluate(kind, on, off);
             x[2] = bitlogix.Evaluate(kind, off, on);
             x[3] = bitlogix.Evaluate(kind, on, on);
             return x;
         }
-        
+
+        /// <summary>
+        /// Computes a the signature, also referred to as the truth vector, for an identified binary operator
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        [Op]
+        public static BitVector4 vector(N4 n, BinaryBitLogic kind)
+        {
+            var x = BitVector.alloc(n);
+            x[0] = bitlogix.Evaluate(kind, off, off);
+            x[1] = bitlogix.Evaluate(kind, on, off);
+            x[2] = bitlogix.Evaluate(kind, off, on);
+            x[3] = bitlogix.Evaluate(kind, on, on);
+            return x;
+        }
+
         /// <summary>
         /// Computes a the signature, also referred to as the truth vector, for an identified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector8 Vector(TernaryLogicKind kind)
+        [Op]
+        public static BitVector8 vector(N8 n, TernaryBitLogic kind)
         {
-            var x = BitVector8.Zero;
-            x[0] = bitlogix.Evaluate(kind, off,off,off);
-            x[1] = bitlogix.Evaluate(kind, off,off,on);
-            x[2] = bitlogix.Evaluate(kind, off,on,off);
-            x[3] = bitlogix.Evaluate(kind, off,on,on);
-            x[4] = bitlogix.Evaluate(kind, on,off,off);
-            x[5] = bitlogix.Evaluate(kind, on,off,on);
-            x[6] = bitlogix.Evaluate(kind, on,on, off);
-            x[7] = bitlogix.Evaluate(kind, on,on,on);
+            var x = BitVector.alloc(n);
+            x[0] = bitlogix.Evaluate(kind, off, off, off);
+            x[1] = bitlogix.Evaluate(kind, off, off, on);
+            x[2] = bitlogix.Evaluate(kind, off, on, off);
+            x[3] = bitlogix.Evaluate(kind, off, on, on);
+            x[4] = bitlogix.Evaluate(kind, on, off, off);
+            x[5] = bitlogix.Evaluate(kind, on, off, on);
+            x[6] = bitlogix.Evaluate(kind, on, on, off);
+            x[7] = bitlogix.Evaluate(kind, on, on, on);
             return x;
         }
 
@@ -66,10 +85,11 @@ namespace Z0
         /// Constructs a canonical vector that defines a kind-identified operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector16 Define(BinaryLogicKind kind)
+        [Op]
+        public static BitVector16 vector(N16 n, BinaryLogicKind kind)
         {
             var dst = BitVector.alloc(n16);
-            var s = ((byte)Vector(kind)).ToBitString().Truncate(4);            
+            var s = ((byte)vector(n4, kind)).ToBitString().Truncate(4);            
             var f = bitlogix.Lookup(kind);
             dst[0] = off;
             dst[1] = off;
@@ -90,7 +110,8 @@ namespace Z0
             return dst;
         }
 
-        public static BitMatrix<N2,N2,byte> BuildTruth(UnaryLogicKind kind)
+        [Op]
+        public static BitMatrix<N2,N2,byte> table(UnaryBitLogic kind)
         {
             var f = bitlogix.Lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
@@ -99,7 +120,9 @@ namespace Z0
             return table;            
         }
 
-        public static BitMatrix<N4,N3,byte> BuildTruth(BinaryLogicKind kind)
+
+        [Op]
+        public static BitMatrix<N4,N3,byte> table(BinaryLogicKind kind)
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = bitlogix.Lookup(kind);
@@ -110,7 +133,20 @@ namespace Z0
             return tt;
         }
 
-        public static BitMatrix<N8,N4,byte> BuildTruth(TernaryLogicKind kind)
+        [Op]
+        public static BitMatrix<N4,N3,byte> table(BinaryBitLogic kind)
+        {
+            var tt = BitMatrix.alloc<N4,N3,byte>();
+            var f = bitlogix.Lookup(kind);
+            tt[0] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(off, off), off, off));
+            tt[1] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(on, off), off, on));
+            tt[2] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(off, on), on, off));
+            tt[3] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(on, on),  on, on));
+            return tt;
+        }
+
+        [Op]
+        public static BitMatrix<N8,N4,byte> table(TernaryBitLogic kind)
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = bitlogix.Lookup(kind);
@@ -125,65 +161,59 @@ namespace Z0
             return tt;
         }
 
-        public static void WriteTruth(StreamWriter dst, ReadOnlySpan<UnaryLogicKind> kinds)
+        public static void save(ReadOnlySpan<UnaryBitLogic> src, StreamWriter dst)
         {
             var writer = BitMatrixWriter.Share(dst);
-            for(var i=0; i<kinds.Length; i++)
-                WriteTruth(kinds[i],writer);
+            for(var i=0; i<src.Length; i++)
+                save(src[i], writer);
         }
 
-        public static void WriteTruth(StreamWriter dst, ReadOnlySpan<BinaryLogicKind> kinds)
+        public static void save(ReadOnlySpan<BinaryLogicKind> src, StreamWriter dst)
         {
             var writer = BitMatrixWriter.Share(dst);
-            for(var i=0; i<kinds.Length; i++)
-                WriteTruth(kinds[i],writer);
+            for(var i=0; i<src.Length; i++)
+                save(src[i], writer);
         }
 
-        public static void WriteTruth(StreamWriter dst, ReadOnlySpan<TernaryLogicKind> kinds)
+        public static void save(ReadOnlySpan<BinaryBitLogic> src, StreamWriter dst)
         {
             var writer = BitMatrixWriter.Share(dst);
-            for(var i=0; i<kinds.Length; i++)
-                WriteTruth(kinds[i],writer);
+            for(var i=0; i<src.Length; i++)
+                save(src[i], writer);
         }
 
-        public static void WriteTruth(StreamWriter dst, ArityValue arity)
+        public static void save(ReadOnlySpan<TernaryBitLogic> src, StreamWriter dst)
         {
             var writer = BitMatrixWriter.Share(dst);
-            switch(arity)
-            {
-
-                case ArityValue.Unary: 
-                    WriteUnaryTruth(writer); 
-                    break;
-                case ArityValue.Binary: 
-                    WriteBinaryTruth(writer); 
-                    break;
-                case ArityValue.Ternary: 
-                    WriteTernaryTruth(writer); 
-                    break;
-                default: 
-                    throw Unsupported.value(arity);
-            }
+            for(var i=0; i<src.Length; i++)
+                save(src[i], writer);
         }
 
-        static BitMatrix<N2,N2,byte> WriteTruth(UnaryLogicKind kind, IBitMatrixWriter dst)
+        public static BitMatrix<N2,N2,byte> save(UnaryBitLogic spec, IBitMatrixWriter dst)
         {
-            var table = BuildTruth(kind);
-            dst.Write(table,kind);
+            var table = TabularTruth.table(spec);
+            dst.Write(table,spec);
             return table;
         }
 
-        static BitMatrix<N4,N3,byte> WriteTruth(BinaryLogicKind kind, IBitMatrixWriter dst)
+        public static BitMatrix<N4,N3,byte> save(BinaryLogicKind spec, IBitMatrixWriter dst)
         {
-            var table = BuildTruth(kind);
-            dst.Write(table,kind);
+            var table = TabularTruth.table(spec);
+            dst.Write(table,spec);
             return table;
         }
 
-        static BitMatrix<N8,N4,byte> WriteTruth(TernaryLogicKind kind, IBitMatrixWriter dst)
+        public static BitMatrix<N4,N3,byte> save(BinaryBitLogic spec, IBitMatrixWriter dst)
         {
-            var table = BuildTruth(kind);
-            dst.Write(table,kind);
+            var table = TabularTruth.table(spec);
+            dst.Write(table,spec);
+            return table;
+        }
+        
+        public static BitMatrix<N8,N4,byte> save(TernaryBitLogic spec, IBitMatrixWriter dst)
+        {
+            var table = TabularTruth.table(spec);
+            dst.Write(table,spec);
             return table;
         }
 
@@ -238,7 +268,7 @@ namespace Z0
             }
         }
 
-        static string header<M,N,T>(this BitMatrix<M,N,T> src, string label)
+        static string header<M,N,T>(BitMatrix<M,N,T> src, string label)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
@@ -252,7 +282,7 @@ namespace Z0
             return header;
         }
 
-        static string header<M,N,T,K>(this BitMatrix<M,N,T> src, K kind)
+        static string header<M,N,T,K>(BitMatrix<M,N,T> src, K kind)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
@@ -267,22 +297,22 @@ namespace Z0
             return header;
         }
 
-        static void emit<M,N,T>(this BitMatrix<M,N,T> src, TextWriter dst)
+        static void emit<M,N,T>(BitMatrix<M,N,T> src, TextWriter dst)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
         {
-            dst.Write(src.header("Table"));
+            dst.Write(header(src,"Table"));
             dst.WriteLine(src.Format());
         }
 
-        static void emit<M,N,T,K>(this BitMatrix<M,N,T> src, K kind, TextWriter dst)
+        static void emit<M,N,T,K>(BitMatrix<M,N,T> src, K kind, TextWriter dst)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
             where K: struct, Enum
         {
-            dst.Write(src.header(kind));
+            dst.Write(header(src,kind));
             dst.WriteLine(src.Format());
         }
     }

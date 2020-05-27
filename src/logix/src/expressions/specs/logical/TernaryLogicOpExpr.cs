@@ -17,7 +17,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public TernaryLogicKind OpKind {get;}
+        public TernaryBitLogic OpKind {get;}
 
         /// <summary>
         /// The first operand
@@ -35,7 +35,7 @@ namespace Z0.Logix
         public ILogicExpr ThirdArg {get;}
 
         [MethodImpl(Inline)]
-        public TernaryLogicOpExpr(TernaryLogicKind op, ILogicExpr arg1, ILogicExpr arg2, ILogicExpr arg3)
+        public TernaryLogicOpExpr(TernaryBitLogic op, ILogicExpr arg1, ILogicExpr arg2, ILogicExpr arg3)
         {
             this.OpKind = op;
             this.FirstArg = arg1;

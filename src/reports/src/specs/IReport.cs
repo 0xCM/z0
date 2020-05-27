@@ -68,7 +68,7 @@ namespace Z0
         EnumLiterals<F> FieldIndices
             => Enums.literals<F>();
 
-        EnumValues<F,int> FieldWidths
+        EnumLiterals<F,int> FieldWidths
             => Enums.values<F,int>();
     }
 }

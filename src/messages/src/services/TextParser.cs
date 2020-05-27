@@ -35,10 +35,17 @@ namespace Z0
 
                     counter++;
                     
-                    var isComment =  (!text.IsBlank && text.LineText[0] == fmt.CommentPrefix);
-                    
-                    if(isComment)
+                    if(text.IsBlank)
                         continue;
+
+                    // skip comments                    
+                    if(text.LineText[0] == fmt.CommentPrefix)
+                        continue;
+
+                    // skip row separators
+                    if(text.LineText.StartsWith(fmt.RowSeparator))
+                        continue;
+
 
                     if(fmt.HasDataHeader && header.IsNone() && rows.Count == 0)
                         header = text.ParseHeader(fmt).ValueOrDefault(TextHeader.Empty);   

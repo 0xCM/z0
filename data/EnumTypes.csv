@@ -1,0 +1,4 @@
+# Enum Data Sources
+---------------------------------------------------
+| DataSource    | DataType | TypeName  |
+| EFlagCode.csv | uint8    | EFlagCode |

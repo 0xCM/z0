@@ -10,20 +10,24 @@ namespace Z0
     using static Seed;    
     using static LogicSig;
 
-    using ULK = UnaryLogicKind;
+    using ULK = UnaryBitLogic;
 
     partial class BitLogixOps
     {
+        [MethodImpl(Inline)]
         public static bit eval(ULK kind, bit a)
         {        
-            switch(kind)
-            {
-                case ULK.False: return bit.Off;
-                case ULK.Not: return bit.not(a);
-                case ULK.Identity: return a;
-                case ULK.True: return bit.On;
-                default: throw Unsupported.value(sig(kind));
-            }
+            if(kind == ULK.False)
+                return bit.Off;
+            else if(kind == ULK.Not)
+                return bit.not(a);
+            else if(kind == ULK.Identity)
+                return a;
+            else if(kind == ULK.True)
+                return bit.On;
+            else 
+                return Unsupported.raise<bit>(kind.ToString());
+                //return Unsupported.raise<bit>(sig(kind));
         }    
     }
 }

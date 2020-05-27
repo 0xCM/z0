@@ -17,12 +17,12 @@ namespace Z0
         static BitDataTypeConverter BitConverter()
             => default(BitDataTypeConverter);
         
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline),Op, NumericClosures(UnsignedInts)]
         public static T convert<T>(bit src)
             where T : unmanaged
                 => BitConverter().Convert<T>(src);
 
-        [MethodImpl(Inline),Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline),Op, NumericClosures(UnsignedInts)]
         public static bit convert<T>(T src)
             where T : unmanaged
                 => BitConverter().Convert(src);                
@@ -30,16 +30,7 @@ namespace Z0
 
     public static class SignOps
     {
-        public static bit IsPositive(this Sign src)
-            => src == Sign.Pos;
-
         public static bit IsNonNegative(this Sign src)
-            => src != Sign.Neg;
-        
-        public static bit IsNegative(this Sign src)
-            => src == Sign.Neg;
-
-        public static bit IsUnspecified(this Sign src)
-            => src == 0;
+            => src != Sign.Neg;    
     }
 }

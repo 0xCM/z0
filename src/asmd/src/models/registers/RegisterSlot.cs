@@ -19,162 +19,162 @@ namespace Z0.Asm.Data
         /// <summary>
         /// Classifies a register that has been assigned index slot 0
         ///</summary>
-        IX0 = T10 << 0,
+        IX0 = P2ᐞ10,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 1
         ///</summary>
-        IX1 = IX0 << 1,
+        IX1 = P2ᐞ11,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 2
         ///</summary>
-        IX2 = IX0 << 2,
+        IX2 = P2ᐞ12,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 3
         ///</summary>
-        IX3 = IX0 << 3,
+        IX3 = P2ᐞ13,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 4
         ///</summary>
-        IX4 = IX0 << 4,
+        IX4 = P2ᐞ14,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 5
         ///</summary>
-        IX5 = IX0 << 5,
+        IX5 = P2ᐞ15,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 6
         ///</summary>
-        IX6 = IX0 << 6,
+        IX6 = P2ᐞ16,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 7
         ///</summary>
-        IX7 = IX0 << 7,
+        IX7 = P2ᐞ17,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 8
         ///</summary>
-        IX8 = IX0 << 8,
+        IX8 = P2ᐞ18,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 9
         ///</summary>
-        IX9 = IX0 << 9,
+        IX9 = P2ᐞ19,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 10
         ///</summary>
-        IX10 = IX0 << 10,
+        IX10 = P2ᐞ20,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 11
         ///</summary>
-        IX11 = IX0 << 11,
+        IX11 = P2ᐞ21,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 12
         ///</summary>
-        IX12 = IX0 << 12,
+        IX12 = P2ᐞ22,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 13
         ///</summary>
-        IX13 = IX0 << 13,
+        IX13 = P2ᐞ23,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 14
         ///</summary>
-        IX14 = IX0 << 14,
+        IX14 = P2ᐞ24,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 15
         ///</summary>
-        IX15 = IX0 << 15,
+        IX15 = P2ᐞ25,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 16
         ///</summary>
-        IX16 = IX0 << 16,
+        IX16 = P2ᐞ26,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 17
         ///</summary>
-        IX17 = IX0 << 17,
+        IX17 = P2ᐞ27,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 18
         ///</summary>
-        IX18 = IX0 << 18,
+        IX18 = P2ᐞ28,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 19
         ///</summary>
-        IX19 = IX0 << 19,
+        IX19 = P2ᐞ29,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 20
         ///</summary>
-        IX20 = IX0 << 20,
+        IX20 = P2ᐞ30,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 21
         ///</summary>
-        IX21 = IX0 << 21,
+        IX21 = P2ᐞ31,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 22
         ///</summary>
-        IX22 = IX0 << 22,
+        IX22 = P2ᐞ32,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 23
         ///</summary>
-        IX23 = IX0 << 23,
+        IX23 = P2ᐞ33,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 24
         ///</summary>
-        IX24 = IX0 << 24,
+        IX24 = P2ᐞ34,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 25
         ///</summary>
-        IX25 = IX0 << 25,
+        IX25 = P2ᐞ35,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 26
         ///</summary>
-        IX26 = IX0 << 26,
+        IX26 = P2ᐞ36,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 27
         ///</summary>
-        IX27 = IX0 << 27,
+        IX27 = P2ᐞ37,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 28
         ///</summary>
-        IX28 = IX0 << 28,
+        IX28 = P2ᐞ38,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 29
         ///</summary>
-        IX29 = IX0 << 29,
+        IX29 = P2ᐞ39,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 30
         ///</summary>
-        IX30 = IX0 << 30,
+        IX30 = P2ᐞ40,
 
         /// <summary>
         /// Classifies a register that has been assigned index slot 31
         ///</summary>
-        IX31 = IX0 << 31,
+        IX31 = P2ᐞ41,
 
         /// <summary>
         /// The minimum power of two employed to define an index classifier

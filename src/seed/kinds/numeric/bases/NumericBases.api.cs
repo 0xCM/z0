@@ -13,6 +13,8 @@ namespace Z0
     {
         public static Base2 B => default;
 
+        public static Base3 T => default;
+
         public static Base8 O => default;
 
         public static Base10 D => default;
@@ -25,6 +27,8 @@ namespace Z0
         {
             if(typeof(B) == typeof(Base2))
                 return NumericBaseKind.B;
+            else if(typeof(B) == typeof(Base3))
+                return NumericBaseKind.T;
             else if(typeof(B) == typeof(Base8))
                 return NumericBaseKind.O;
             else if(typeof(B) == typeof(Base10))

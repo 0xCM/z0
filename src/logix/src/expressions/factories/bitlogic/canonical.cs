@@ -9,7 +9,7 @@ namespace Z0.Logix
     
     using static Seed;
     using static BinaryLogicKind;
-    using static UnaryLogicKind;
+    using static UnaryBitLogic;
 
     public static partial class BitLogicSpec
     {
@@ -587,7 +587,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static TernaryLogicOpExpr select(ILogicExpr a, ILogicExpr b, ILogicExpr c)
-            => ternary(TernaryLogicKind.XCA, a, b, c);
+            => ternary(TernaryBitLogic.XCA, a, b, c);
 
         /// <summary>
         /// Defines a ternary select operator over bit literal operands
@@ -596,7 +596,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static TernaryLogicOpExpr select(bit a, bit b, bit c)
-            => ternary(TernaryLogicKind.XCA, a, b, c);
+            => ternary(TernaryBitLogic.XCA, a, b, c);
 
         /// <summary>
         /// Defines a ternary select operator over typed expression operands
@@ -606,6 +606,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static TernaryLogicOpExpr<T> select<T>(ILogicExpr<T> a, ILogicExpr<T> b, ILogicExpr<T> c)
             where T : unmanaged
-                => ternary(TernaryLogicKind.XCA, a, b, c);
+                => ternary(TernaryBitLogic.XCA, a, b, c);
     }
 }

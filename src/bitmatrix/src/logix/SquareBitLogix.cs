@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;    
     using static LogicSig;
 
-    using ULK = UnaryLogicKind;
+    using ULK = UnaryBitLogic;
     using BLK = BinaryLogicKind;
 
     partial class SquareBitLogix

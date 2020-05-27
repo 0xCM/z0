@@ -19,10 +19,10 @@ namespace Z0.Logix
 
         public void check_not_scalar_expr()  
         {      
-            check_scalar_expr<byte>(UnaryLogicKind.Not);
-            check_scalar_expr<ushort>(UnaryLogicKind.Not);
-            check_scalar_expr<uint>(UnaryLogicKind.Not);
-            check_scalar_expr<ulong>(UnaryLogicKind.Not);
+            check_scalar_expr<byte>(UnaryBitLogic.Not);
+            check_scalar_expr<ushort>(UnaryBitLogic.Not);
+            check_scalar_expr<uint>(UnaryBitLogic.Not);
+            check_scalar_expr<ulong>(UnaryBitLogic.Not);
         }
 
         public void check_and_scalar_expr()
@@ -88,7 +88,7 @@ namespace Z0.Logix
         public void check_not_128_expr()
         {            
             var n = n128;
-            var op = UnaryLogicKind.Not;
+            var op = UnaryBitLogic.Not;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -158,7 +158,7 @@ namespace Z0.Logix
         public void check_not_256_expr()
         {            
             var n = n128;
-            var op = UnaryLogicKind.Not;
+            var op = UnaryBitLogic.Not;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -231,7 +231,7 @@ namespace Z0.Logix
                 check_ternary_ops);
         }
 
-        void check_ternary_ops(TernaryLogicKind op)
+        void check_ternary_ops(TernaryBitLogic op)
         {
             check_ternary_ops<byte>(op);
             check_ternary_ops<ushort>(op);
@@ -239,7 +239,7 @@ namespace Z0.Logix
             check_ternary_ops<ulong>(op);
         }
 
-        void check_op_identity<T>(TernaryLogicKind id)
+        void check_op_identity<T>(TernaryBitLogic id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -252,7 +252,7 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_ternary_ops<T>(TernaryLogicKind id)
+        void check_ternary_ops<T>(TernaryBitLogic id)
             where T : unmanaged
         {
             var BL = bitlogix.Lookup(id);
@@ -293,7 +293,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_scalar_expr<T>(UnaryLogicKind kind)
+        void check_scalar_expr<T>(UnaryBitLogic kind)
             where T : unmanaged
         {
             var v1 = variable<T>(1);
@@ -331,7 +331,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_cpu_expr<T>(N128 n, UnaryLogicKind op)
+        void check_cpu_expr<T>(N128 n, UnaryBitLogic op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
@@ -347,7 +347,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_cpu_expr<T>(N256 n, UnaryLogicKind op)
+        void check_cpu_expr<T>(N256 n, UnaryBitLogic op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector256<T>));
