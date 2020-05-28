@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Control
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int size<T>()
             => Unsafe.SizeOf<T>();
     }

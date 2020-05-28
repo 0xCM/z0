@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> decrements<T>(N128 w)
             where T : unmanaged
         {
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> decrements<T>(N256 w)
             where T : unmanaged
         {            

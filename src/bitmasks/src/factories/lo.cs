@@ -11,7 +11,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
 
     using static Seed;
-    using static Memories;
+    using static CastNumeric;
+    using static As;
     
     partial class BitMask
     {           

@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Seed;
     using static Memories;
-    using static HexCodes;
+    using static HexLevel;
 
     [ApiHost]
     public struct HexMachine1F

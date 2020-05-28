@@ -6,7 +6,7 @@ namespace Z0
 {    
     using System;
 
-    using Sym = AsciLetterSymbolLo;
+    using Code = AsciLetterCode;
 
     /// <summary>
     /// Defines asci codes corresponding to the letters a,...z
@@ -21,132 +21,132 @@ namespace Z0
         /// <summary>
         /// The 'a' symbol code 97
         /// </summary>
-        a = (byte)Sym.a,
+        a = Code.a,
         
         /// <summary>
         /// The 'b' symbol code 98
         /// </summary>
-        b = (byte)Sym.b,
+        b = Code.b,
         
         /// <summary>
         /// The 'c' symbol code 99
         /// </summary>
-        c = (byte)Sym.c,
+        c = Code.c,
         
         /// <summary>
         /// The 'd' symbol code 100
         /// </summary>
-        d = (byte)Sym.d,
+        d = Code.d,
         
         /// <summary>
         /// The 'e' symbol code 101
         /// </summary>
-        e = (byte)Sym.e,
+        e = Code.e,
         
         /// <summary>
         /// The 'f' symbol code 102
         /// </summary>
-        f = (byte)Sym.f,
+        f = Code.f,
         
         /// <summary>
         /// The 'g' symbol code 103
         /// </summary>
-        g = (byte)Sym.g,
+        g = Code.g,
         
         /// <summary>
         /// The 'h' symbol code 104
         /// </summary>
-        h = (byte)Sym.h,
+        h = Code.h,
         
         /// <summary>
         /// The 'i' symbol code 105
         /// </summary>
-        i = (byte)Sym.i,
+        i = Code.i,
         
         /// <summary>
         /// The 'j' symbol code 106
         /// </summary>
-        j = (byte)Sym.j,
+        j = Code.j,
         
         /// <summary>
         /// The 'k' symbol code 107
         /// </summary>
-        k = (byte)Sym.k,
+        k = Code.k,
         
         /// <summary>
         /// The 'l' symbol code 108
         /// </summary>
-        l = (byte)Sym.l,
+        l = Code.l,
         
         /// <summary>
         /// The 'm' symbol code 109
         /// </summary>
-        m = (byte)Sym.m,
+        m = Code.m,
         
         /// <summary>
         /// The 'n' symbol code 110
         /// </summary>
-        n = (byte)Sym.n,
+        n = Code.n,
         
         /// <summary>
         /// The 'o' symbol code 111
         /// </summary>
-        o = (byte)Sym.o,
+        o = Code.o,
         
         /// <summary>
         /// The 'p' symbol code 112
         /// </summary>
-        p = (byte)Sym.p,
+        p = Code.p,
         
         /// <summary>
         /// The 'q' symbol code 113
         /// </summary>
-        q = (byte)Sym.q,
+        q = Code.q,
         
         /// <summary>
         /// The 'r' symbol code 114
         /// </summary>
-        r = (byte)Sym.r,
+        r = Code.r,
         
         /// <summary>
         /// The 's' symbol code 115
         /// </summary>
-        s = (byte)Sym.s,
+        s = Code.s,
         
         /// <summary>
         /// The 't' symbol code 116
         /// </summary>
-        t = (byte)Sym.t,
+        t = Code.t,
         
         /// <summary>
         /// The 'u' symbol code 117
         /// </summary>
-        u = (byte)Sym.u,
+        u = Code.u,
         
         /// <summary>
         /// The 'v' symbol code 118
         /// </summary>
-        v = (byte)Sym.v,
+        v = Code.v,
         
         /// <summary>
         /// The 'w' symbol code 119
         /// </summary>
-        w = (byte)Sym.w,
+        w = Code.w,
         
         /// <summary>
         /// The 'x' symbol code 120
         /// </summary>
-        x = (byte)Sym.x,
+        x = Code.x,
         
         /// <summary>
         /// The 'y' symbol code 121
         /// </summary>
-        y = (byte)Sym.y,
+        y = Code.y,
         
         /// <summary>
         /// The 'z' symbol code 122
         /// </summary>
-        z = (byte)Sym.z,
+        z = Code.z,
     
         /// <summary>
         /// The first declared code, 97

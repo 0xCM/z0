@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Memories;
+    using static CastNumeric;
     using static BitMasks;
 
     partial class BitMask
@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="N">The width type</typeparam>
         /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), NumericClosures(UnsignedInts), Naturals(4,6,8,10,12,14,16,18,32,64)]
+        [MethodImpl(Inline), Closures(UnsignedInts), Naturals(4,6,8,10,12,14,16,18,32,64)]
         public static T lsb<N,T>(N w, N2 f, N1 d, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged

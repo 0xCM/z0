@@ -34,6 +34,16 @@ namespace Z0.Logix
                 => new VariableExpr<T>(name.ToString(), value);
 
         /// <summary>
+        /// Defines a variable expression
+        /// </summary>
+        /// <param name="value">The initial value of the variable</param>
+        /// <typeparam name="T">The variable type</typeparam>
+        [MethodImpl(Inline)]
+        public static VariableExpr<T> variable<T>(AsciLetterLo name, IExpr<T> value)
+            where T : unmanaged
+                => new VariableExpr<T>(name.ToString(), value);
+
+        /// <summary>
         /// Defines a bit variable expression where the variable name is defined by an integer
         /// </summary>
         /// <param name="name">The variable's name</param>
@@ -60,6 +70,16 @@ namespace Z0.Logix
         /// <typeparam name="T">The variable type</typeparam>
         [MethodImpl(Inline)]
         public static VariableExpr<T> variable<T>(char name, T value = default)
+            where T : unmanaged
+                => new VariableExpr<T>(name.ToString(), literal(value));
+
+        /// <summary>
+        /// Defines a variable expression with an initial value specified by a literal
+        /// </summary>
+        /// <param name="value">The initial value of the variable</param>
+        /// <typeparam name="T">The variable type</typeparam>
+        [MethodImpl(Inline)]
+        public static VariableExpr<T> variable<T>(AsciLetterLo name, T value = default)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), literal(value));
 

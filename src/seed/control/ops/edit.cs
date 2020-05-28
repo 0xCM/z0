@@ -14,6 +14,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T edit<T>(in T src)
             => ref Unsafe.AsRef(in src);
-
     }
 }

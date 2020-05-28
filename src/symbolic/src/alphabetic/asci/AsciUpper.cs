@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using static Letters;
+    using static AsciLetterUp;
 
     public sealed class AsciUpper : SymbolSet<AsciUpper, AsciAlphabet>
     {        

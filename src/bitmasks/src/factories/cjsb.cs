@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Memories;
+    using static CastNumeric;
     using static BitMasks;
+    using static Typed;
 
     partial class BitMask
     {                
@@ -47,7 +48,7 @@ namespace Z0
         /// <param name="t">The mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>CJSB := jsb | csb (8x2x2)</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T cjsb<T>(N8 f, N2 cd, N2 jsbd, T t = default)
             where T : unmanaged
         {
@@ -71,7 +72,7 @@ namespace Z0
         /// <param name="t">The mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>CJSB := jsb | csb (8x4x1)</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T cjsb<T>(N8 f, N4 cd, N1 jsbd, T t = default)
             where T : unmanaged
         {

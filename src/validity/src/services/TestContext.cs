@@ -151,8 +151,6 @@ namespace Z0
 
         protected void Trace(string title, string msg, [Caller] string caller = null)
             => Queue.Trace(title, msg, GetType(), caller);
-        // protected void Trace<T>(Func<T,MemberExpression> f, object msg, AppMsgColor color = AppMsgColor.Magenta, [Caller] string caller = null)
-        //     =>  Queue.Trace(f(default(T)).Expression.GetAccessedProperty().Name, msg, color, GetType(), caller);
 
         protected void Trace(IAppMsg msg)
             => Queue.Trace(msg);

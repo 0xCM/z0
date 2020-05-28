@@ -15,26 +15,34 @@ namespace Z0
     public readonly struct HexIndex<T> : IHexIndex<T>
         where T : unmanaged
     {
-        readonly T[] Index;
+        readonly T[] Data;
 
         [MethodImpl(Inline)]
-        public static HexIndex<T> Define(params HexKindValue<T>[] src)
-            => Symbolic.index(src);
-
-        [MethodImpl(Inline)]
-        internal HexIndex(T[] index)
+        internal HexIndex(T[] src)
         {
-            this.Index = index;
+            Data = src;
         }
 
         [MethodImpl(Inline)]
         public ref readonly T Lookup(HexKind key)
-            => ref Index[(int)key];
+            => ref Data[(int)key];
 
         public ref readonly T this[HexKind index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
+        }
+
+        public ref readonly T this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Lookup((HexKind)index);
         }
     }
 }

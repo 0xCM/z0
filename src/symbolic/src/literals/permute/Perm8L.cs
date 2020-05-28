@@ -6,6 +6,10 @@ namespace Z0
 {
     using System;
 
+    using static Perm8L;
+
+    using Sym = Perm8Sym;
+
     /// <summary>
     /// Defines canonical literals for representing terms of permutations on 8 symbols
     /// </summary>
@@ -14,51 +18,54 @@ namespace Z0
         /// <summary>
         /// Identifies the first permutation symbol
         /// </summary>
-        A = Perm8Sym.A,
+        A = Sym.A,
 
         /// <summary>
         /// Identifies the second permutation symbol
         /// </summary>
-        B = Perm8Sym.B,
+        B = Sym.B,
 
         /// <summary>
         /// Identifies the third permutation symbol
         /// </summary>
-        C = Perm8Sym.C,
+        C = Sym.C,
 
         /// <summary>
         /// Identifies the fourth permutation symbol
         /// </summary>
-        D = Perm8Sym.D, 
+        D = Sym.D, 
 
         /// <summary>
         /// Identifies the fifth permutation symbol
         /// </summary>
-        E = Perm8Sym.E, 
+        E = Sym.E, 
 
         /// <summary>
         /// Identifies the sixth permutation symbol
         /// </summary>
-        F = Perm8Sym.F, 
+        F = Sym.F, 
 
         /// <summary>
         /// Identifies the seventh permutation symbol
         /// </summary>
-        G = Perm8Sym.G, 
+        G = Sym.G, 
 
         /// <summary>
         /// Identifies the eighth permutation symbol
         /// </summary>
-        H = Perm8Sym.H, 
+        H = Sym.H, 
+    }
 
-        /// <summary>
-        /// Represents the 8 symbol identity permutation
-        /// </summary>
-        Identity = A | B << 3 | C << 6 | D << 9 | E << 12 | F << 15 | G << 18 | H << 21,
+    partial class PermLits
+    {               
+        public const Perm8L Perm8Identity = (Perm8L)(
+            (uint)A       | (uint)B << 3  | (uint)C << 6  | (uint)D << 9 
+          | (uint)E << 12 | (uint)F << 15 | (uint)G << 18 | (uint)H << 21
+              );
 
-        /// <summary>
-        /// Represents the reversed 8 symbol identity permutation
-        /// </summary>
-        Reversed =  H | G << 3 | F << 6 | E << 9 | D << 12 | C << 15 | B << 18 | A << 21,
+        public const Perm8L Perm8Reversed = (Perm8L)(
+            (uint)H       | (uint)G << 3  | (uint)F << 6  | (uint)E << 9 
+          | (uint)D << 12 | (uint)C << 15 | (uint)B << 18 | (uint)A << 21
+            );
     }
 }

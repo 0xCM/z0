@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     partial class BitMasks
     {            
@@ -44,6 +43,5 @@ namespace Z0
         public const ulong Ones64u = ulong.MaxValue;
 
         public const long Ones64i = -1;
-
     }
 }

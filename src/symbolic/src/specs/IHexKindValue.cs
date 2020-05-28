@@ -14,7 +14,10 @@ namespace Z0
     {
         T Value {get;}
 
-        byte[] Data 
-            => default;//ByteReader.Read(Value).ToArray();
+        ReadOnlySpan<byte> Data {get;}
+
+        Type IHexCode.Reified 
+            => typeof(T);
+           
     }
 }

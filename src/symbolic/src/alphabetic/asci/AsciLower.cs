@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using static Letters;
+    using static AsciLetterLo;
 
     public class AsciLower : SymbolSet<AsciLower, AsciAlphabet>
     {

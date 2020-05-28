@@ -11,8 +11,8 @@ namespace Z0
     
     using static Control;
 
-    using HSU = HexDigitSymbolUp;
-    using HSL = HexDigitSymbolLo;
+    using HSU = HexSymbolUp;
+    using HSL = HexSymbolLo;
 
     partial class SymbolicData
     {
@@ -34,7 +34,7 @@ namespace Z0
             get => cast<HSL>(LowerHexSymbolData);
         }
 
-       public static ReadOnlySpan<byte> UpperHexSymbolData
+        public static ReadOnlySpan<byte> UpperHexSymbolData
             => new byte[]{
                 (byte)HSU.x0, 0, (byte)HSU.x1, 0, (byte)HSU.x2, 0, (byte)HSU.x3, 0,
                 (byte)HSU.x4, 0, (byte)HSU.x5, 0, (byte)HSU.x6, 0, (byte)HSU.x7, 0,

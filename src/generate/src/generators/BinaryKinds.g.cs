@@ -89,7 +89,7 @@ namespace Z0
         }
 
         string LiteralName(byte value)
-            => concat(Letters.b, Formatter.Format(value, BitFormatConfig.Limited(MaxBitCount,MaxBitCount)));
+            => concat(AsciLetterLo.b, Formatter.Format(value, BitFormatConfig.Limited(MaxBitCount,MaxBitCount)));
 
         string LiteralValue(byte value)
             => concat("0b", Formatter.Format(value, BitFormatConfig.Limited(MaxBitCount,MaxBitCount)));

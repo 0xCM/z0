@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static Seed;
 
     partial class Control
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T cast<T>(object src)
             => (T)src;
 
@@ -27,9 +25,21 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(src);
+
+        [MethodImpl(Inline)]        
+        public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
+            where S : unmanaged
+            where T : unmanaged
+                => MemoryMarshal.Cast<S,T>(src);
+
+        [MethodImpl(Inline)]        
+        public static Span<T> cast<S,T>(Span<S> src)                
+            where S : unmanaged
+            where T : unmanaged
+                => MemoryMarshal.Cast<S,T>(src);
     }
 }

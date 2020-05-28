@@ -9,12 +9,12 @@ namespace Z0
 
     using static Seed;
 
-    public interface IOctet : IBitCode
+    public interface IOctet : IBits
     {
 
     }
 
-    public interface IOctet<B> : IOctet, IBitCode<B>
+    public interface IOctet<B> : IOctet, IBits<B>
         where B : unmanaged, IOctet<B>
     {        
 

@@ -16,15 +16,24 @@ namespace Z0
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool numeral(HexDigitSymbolLo src)
-            => src <= HexDigitSymbolLo.LastNumeral;
+        public static bool numeral(HexSymbolLo src)
+            => src <= HexSymbolLo.LastNumeral;
+
+        /// <summary>
+        /// Tests whether a character symbol is one of '0'..'9'
+        /// </summary>
+        /// <param name="src">The symbol to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool numeral(char c)
+            => (DecimalSymbol)c >= DecimalSymbol.First
+            && (DecimalSymbol)c <= DecimalSymbol.Last; 
 
         /// <summary>
         /// Tests whether a uppercas hex symbol is a numeral
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool numeral(HexDigitSymbolUp src)
-            => src <= HexDigitSymbolUp.LastNumeral;
+        public static bool numeral(HexSymbolUp src)
+            => src <= HexSymbolUp.LastNumeral;
     }
 }

@@ -276,10 +276,10 @@ namespace Z0
             var m = (int)value<M>();
             var n = (int)value<N>();
 
-            if(m != doc.DataLineCount)
+            if(m != doc.RowCount)
                 return default;
 
-            if(n != doc.Rows[0].Cells.Length)
+            if(n != doc.Rows[0].CellCount)
                 return default;
 
             var parser = NumericParser.create<T>();
@@ -287,8 +287,8 @@ namespace Z0
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];
-                for(var j = 0; j<row.Cells.Length; j++)
-                    dst[i,j] = parser.Parse(row.Cells[j].CellValue).ValueOrDefault();
+                for(var j = 0; j<row.CellCount; j++)
+                    dst[i,j] = parser.Parse(row[j].Content).ValueOrDefault();
             }
 
             return dst;

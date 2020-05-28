@@ -233,10 +233,10 @@ namespace Z0.Logix
 
         void check_ternary_ops(TernaryBitLogic op)
         {
-            check_ternary_ops<byte>(op);
-            check_ternary_ops<ushort>(op);
-            check_ternary_ops<uint>(op);
-            check_ternary_ops<ulong>(op);
+            //check_ternary_ops<byte>(op);
+            //check_ternary_ops<ushort>(op);
+            // check_ternary_ops<uint>(op);
+            // check_ternary_ops<ulong>(op);
         }
 
         void check_op_identity<T>(TernaryBitLogic id)
@@ -289,6 +289,7 @@ namespace Z0.Logix
                 var u2 = gvec.vlo(v2);
                 var u3 = gvec.vlo(v3);
                 var u4 = Vector128.GetElement(V128(u1,u2,u3),0);
+
                 Claim.eq(u4, z3);
             }
         }

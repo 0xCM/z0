@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
 
-    public static partial class Control    
+    partial class Control    
     {
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each

@@ -8,7 +8,6 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static HexCodes;
     using static Seed;
     using static Memories;
  

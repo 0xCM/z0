@@ -13,42 +13,56 @@ namespace Z0
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        x0 = (byte)S.o0,
+        o0 = (byte)S.o0,
 
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        x1 = (byte)S.o1,
+        o1 = (byte)S.o1,
         
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        x2 = (byte)S.o2,
+        o2 = (byte)S.o2,
         
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        x3 = (byte)S.o3,
+        o3 = (byte)S.o3,
 
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        x4 = (byte)S.o4,
+        o4 = (byte)S.o4,
 
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        x5 = (byte)S.o5,
+        o5 = (byte)S.o5,
 
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        x6 = (byte)S.o6,
+        o6 = (byte)S.o6,
 
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        x7 = (byte)S.o7,
-        
+        o7 = (byte)S.o7,
+
+       /// <summary>
+        /// The first declared code
+        /// </summary>
+        First = o0,
+
+        /// <summary>
+        /// The last declared code
+        /// </summary>
+        Last = o7,
+
+        /// <summary>
+        /// The code declaration count
+        /// </summary>
+        Count = Last - First + 1                 
    }
 }

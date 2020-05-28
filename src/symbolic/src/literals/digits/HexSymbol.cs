@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using Lo = HexSymbolLo;
+    using Up = HexSymbolUp;
+
     /// <summary>
     /// Defines the symbols that represent both upper and lower-case base-16 digits
     /// </summary>
@@ -14,22 +17,22 @@ namespace Z0
         /// <summary>
         /// Specifies 0 base 16, asci code 48
         /// </summary>
-        x0 = '0',
+        x0 = Lo.x0,
 
         /// <summary>
         /// Specifies 1 base 16, asci code 49
         /// </summary>
-        x1 = '1',
+        x1 = Lo.x1,
         
         /// <summary>
         /// Specifies 2 base 16, asci code 50
         /// </summary>
-        x2 = '2',
+        x2 = Lo.x2,
         
         /// <summary>
         /// Specifies 3 base 16, asci code 51
         /// </summary>
-        x3 = '3',
+        x3 = Lo.x3,
 
         /// <summary>
         /// Specifies 4 base 16, asci code 52
@@ -64,61 +67,126 @@ namespace Z0
         /// <summary>
         /// Specifies 10 base 16, asci code 65
         /// </summary>
-        A = 'A',
+        A = Up.A,
 
         /// <summary>
         /// Specifies 11 base 16, asci code 66
         /// </summary>
-        B = 'B',
+        B = Up.B,
 
         /// <summary>
         /// Specifies 12 base 16, asci code 67
         /// </summary>
-        C = 'C',
+        C = Up.C,
 
         /// <summary>
         /// Specifies 13 base 16, asci code 68
         /// </summary>
-        D = 'D',
+        D = Up.D,
 
         /// <summary>
         /// Specifies 14 base 16, asci code 69
         /// </summary>
-        E = 'E',
+        E = Up.E,
 
         /// <summary>
         /// Specifies 15 base 16, asci code 70
         /// </summary>
-        F = 'F',
+        F = Up.F,
 
         /// <summary>
         /// Specifies 10 base 16, asci code 97
         /// </summary>
-        a = 'a',
+        a = Lo.a,
 
         /// <summary>
         /// Specifies 10 base 16, asci code 98
         /// </summary>
-        b = 'b',
+        b = Lo.b,
 
         /// <summary>
         /// Specifies 10 base 16, asci code 99
         /// </summary>
-        c = 'c',
+        c = Lo.c,
 
         /// <summary>
         /// Specifies 10 base 16, asci code 100
         /// </summary>
-        d = 'd',
+        d = Lo.d,
 
         /// <summary>
         /// Specifies 10 base 16, asci code 101
         /// </summary>
-        e = 'e',
+        e = Lo.e,
 
         /// <summary>
         /// Specifies 10 base 16, asci code 102
         /// </summary>
-        f = 'f',
+        f = Lo.f,
+
+        /// <summary>
+        /// The 'x0' code
+        /// </summary>
+        FirstNumeral = x0,
+
+        /// <summary>
+        /// The 'x9' code
+        /// </summary>
+        LastNumeral = x9,
+
+        /// <summary>
+        /// The value to subtract from a symbolic digit [0..9] to compute an index in the range [0..15]
+        /// </summary>
+        NumeralOffset = Lo.FirstNumeral,
+
+        /// <summary>
+        /// The numeral declaration count
+        /// </summary>
+        NumeralCount = Lo.NumeralCount,
+
+        /// <summary>
+        /// The 'a' code
+        /// </summary>
+        FirstLetterLo = Lo.FirstLetter,
+
+        /// <summary>
+        /// The 'f' code
+        /// </summary>
+        LastLetterLo = Lo.LastLetter,       
+
+        /// <summary>
+        /// The value to subtract from a symbolic digit [A..F] to compute an index in the range [0..15]
+        /// </summary>
+        LetterOffsetLo = Lo.LetterOffset,
+
+        /// <summary>
+        /// The lettr declaration count
+        /// </summary>
+        LetterCountLo = Lo.LetterCount,
+
+        /// <summary>
+        /// The code declaration count
+        /// </summary>
+        CountLo = NumeralCount +  LetterCountLo,
+
+        /// <summary>
+        /// The 'A' code
+        /// </summary>
+        FirstLetterUp = Up.FirstLetter,
+
+        /// <summary>
+        /// The 'F' code
+        /// </summary>
+        LastLetterUp = Up.LastLetter,       
+
+        /// <summary>
+        /// The lettr declaration count
+        /// </summary>
+        LetterCountUp = Up.LetterCount,
+
+        /// <summary>
+        /// The code declaration count
+        /// </summary>
+        CountUp = Up.Count
     }    
 }

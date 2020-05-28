@@ -11,30 +11,30 @@ namespace Z0
 
     public class NumericBases
     {
-        public static Base2 B => default;
+        public static Base2 Base2 => default;
 
-        public static Base3 T => default;
+        public static Base3 Base3 => default;
 
-        public static Base8 O => default;
+        public static Base8 Base8 => default;
 
-        public static Base10 D => default;
+        public static Base10 Base10 => default;
 
-        public static Base16 X => default;
+        public static Base16 Base16 => default;
 
         [MethodImpl(Inline)]
         public static NumericBaseKind kind<B>(B b = default)
             where B : unmanaged, INumericBase
         {
             if(typeof(B) == typeof(Base2))
-                return NumericBaseKind.B;
+                return NumericBaseKind.Base2;
             else if(typeof(B) == typeof(Base3))
-                return NumericBaseKind.T;
+                return NumericBaseKind.Base3;
             else if(typeof(B) == typeof(Base8))
-                return NumericBaseKind.O;
+                return NumericBaseKind.Base8;
             else if(typeof(B) == typeof(Base10))
-                return NumericBaseKind.D;
+                return NumericBaseKind.Base10;
             else if(typeof(B) == typeof(Base16))
-                return NumericBaseKind.X;
+                return NumericBaseKind.Base16;
             else
                 return NumericBaseKind.None;            
         }

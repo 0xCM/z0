@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Seed;
@@ -46,8 +45,7 @@ namespace Z0
         public static Y ifnone<X,Y>(X? x, Func<Y> @null, Func<X,Y> @else = null)
             where X : struct
             where Y : struct
-                => !x.HasValue ? @null() : @else?.Invoke(x.Value) ?? default(Y);
-        
+                => !x.HasValue ? @null() : @else?.Invoke(x.Value) ?? default(Y);        
     }
 }
 

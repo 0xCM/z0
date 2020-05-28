@@ -18,5 +18,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
             => ref skip(in head(src), count);
+
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(Span<T> src, int count)
+            => ref skip(in head(src), count);
+
     }
 }

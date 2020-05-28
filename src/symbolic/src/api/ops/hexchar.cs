@@ -13,11 +13,13 @@ namespace Z0
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]
-        public static char hexchar(UpperCased casing, int index)
-            => (char)hexsymbol(casing, index);
+        public static char hexchar(UpperCased @case, byte index)
+            => (char)symbol(@case, (HexDigit)index);
+
 
         [MethodImpl(Inline), Op]
-        public static char hexchar(LowerCased casing, int index)
-            => (char)hexsymbol(casing, index);
+        public static char hexchar(LowerCased @case, byte index)
+            => (char)symbol(@case, (HexDigit)index);
+
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void bitchars<T>(T src, Span<char> dst, int offset = 0)
             where T : unmanaged
                 => BitStore.bitchars(src,dst,offset);
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<char> bitchars<T>(in T src)
             where T : unmanaged
         {
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
             where T : unmanaged
         {
@@ -59,7 +59,7 @@ namespace Z0
             return maxlen != null && dst.Length >= maxlen ?  dst.Slice(0,maxlen.Value) :  dst;
         }
         
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<char> bitchars<T>(Span<T> src, int? maxlen = null)
             where T : unmanaged
                 => bitchars(src.ReadOnly(), maxlen);        
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static string normalize(string src)        
-            => src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, Letters.b);
+            => src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, (char)AsciLetter.b);
 
         /// <summary>
         /// Assembles a bistring given parts ordered from lo to hi

@@ -16,35 +16,43 @@ namespace Z0
     /// </summary>
     public readonly struct TextRow
     {        
-        public readonly TextCell[] CellData;
+        public readonly TextCell[] Cells;
 
         public TextRow(params TextCell[] cells)
         {
-            CellData = cells;
+            Cells = cells;
         }
 
-        public readonly string[] TextCells
+        public readonly string[] CellContent
         {
             [MethodImpl(Inline)]
-            get => CellData.Map(x => x.CellValue);
+            get => Cells.Map(x => x.Content);
         }
 
+        [MethodImpl(Inline)]
         public void Store(Span<string> dst)
         {
-            var count = Math.Min(dst.Length, CellData.Length);
+            var count = Math.Min(dst.Length, Cells.Length);
             for(var i=0; i<count; i++)
             {
-                refs.seek(dst,i) = CellData[i].CellValue;
+                refs.seek(dst,i) = Cells[i].Content;
             }
         }
         
-        public string Text => text.concat(TextCells);
+        public string Text 
+            => text.concat(CellContent);
 
-        /// <summary>
-        /// The cells that comprise the row
-        /// </summary>
-        public ReadOnlySpan<TextCell> Cells
-            => CellData;
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => Cells.Length;
+        }
+
+        public ref readonly TextCell this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cells[index];
+        }
 
         static string ColSep(char? delimiter)
             => text.concat(Chars.Space, delimiter ?? Chars.Pipe, Chars.Space);
@@ -54,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="delimiter">The separator to apply to delimit the cell data in the line </param>
         public string Format(char? delimiter = null)
-            => string.Join(ColSep(delimiter),  CellData.Select(x => x.CellValue));
+            => string.Join(ColSep(delimiter),  Cells.Select(x => x.Content));
         
         public override string ToString()
             => Format();

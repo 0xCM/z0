@@ -6,13 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Text;
     using System.IO;
 
     using static Seed;
     using static Memories;
-    using static HexCodes;
 
     public class HexMachineGen : CodeGenerator
     {
@@ -98,6 +95,4 @@ namespace Z0
             dst.WriteLine();
         }
     }
-
 }
-

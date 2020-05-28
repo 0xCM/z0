@@ -16,15 +16,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool letter(HexDigitSymbolLo src)
-            => src >= HexDigitSymbolLo.FirstLetter;
+        public static bool letter(HexSymbolLo src)
+            => src >= HexSymbolLo.FirstLetter;
 
         /// <summary>
         /// Tests whether an uppercase hex symbol is a letter
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool letter(HexDigitSymbolUp src)
-            => src >= HexDigitSymbolUp.FirstLetter;
+        public static bool letter(HexSymbolUp src)
+            => src >= HexSymbolUp.FirstLetter;
     }
 }

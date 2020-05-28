@@ -8,10 +8,8 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static HexCodes;
     using static Seed;
     using static Memories;
-
 
     struct OpCodeParser
     {
@@ -19,7 +17,7 @@ namespace Z0.Asm.Data
 
         ParseResult<HexDigit> ParseDigit(char c)
         {
-            var code = (HexDigitCodeUp)c;
+            var code = (HexCodeUp)c;
             return default;
         }
         void Parse(char c)

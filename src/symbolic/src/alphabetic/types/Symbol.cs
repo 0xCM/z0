@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct Symbol
     {
-        public static readonly Symbol Empty = new Symbol(string.Empty);
+        public static Symbol Empty => new Symbol(string.Empty);
 
         [MethodImpl(Inline)]
         public static Symbol Define(string text)
@@ -68,17 +68,28 @@ namespace Z0
         /// </summary>
         const char EmptyChar = '\0';
 
-        public static readonly Symbol<A> Empty = new Symbol<A>(string.Empty);
+        public static Symbol<A> Empty => new Symbol<A>(string.Empty);
         
+        [MethodImpl(Inline)]
         public static Symbol<A> Define(string text)
             => new Symbol<A>(text);
         
+        [MethodImpl(Inline)]
         public static Symbol<A> Define(char c0, char? c1 = null)
             => new Symbol<A>(c0, c1);
 
+        [MethodImpl(Inline)]
         public static implicit operator Symbol<A>(char c0)
             => Define(c0);
-                             
+
+        [MethodImpl(Inline)]
+        public static implicit operator Symbol<A>(AsciLetterLo c0)
+            => Define((char)c0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Symbol<A>(AsciLetterUp c0)
+            => Define((char)c0);
+
         /// <summary>
         /// Concatenates two symbols to form a word
         /// </summary>

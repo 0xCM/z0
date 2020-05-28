@@ -42,7 +42,9 @@ namespace Z0
 
         protected IChecks Claim => Checks.Checker;
 
-        protected ICheckPrimalSeq Primal => Claim;
+        protected ICheckPrimal Primal => Claim;
+
+        protected ICheckPrimalSeq PrimalSeq => Claim;
 
         protected ICheckNumeric Numeric => CheckNumeric.Checker;
 

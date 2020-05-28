@@ -20,6 +20,7 @@ namespace Z0
         /// <param name="max">The non-inclusive upper bound of the sequence
         /// over intergers over which iteration will occur</param>
         /// <param name="f">The action to be applied to each  value</param>
+        [MethodImpl(Inline), Op]
         public static void iteri(int min, int max, Action<int> f)
         {
             for(var i = min; i< max; i++) 
@@ -31,6 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The number of times the action will be invoked
         /// <param name="f">The action to be applied to each value</param>
+        [MethodImpl(Inline), Op]
         public static void iteri(int count, Action<int> f)
         {
             for(var i = 0; i< count; i++) 

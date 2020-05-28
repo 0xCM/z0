@@ -16,26 +16,26 @@ namespace Z0
         /// <summary>
         /// Identifies base 2, binary
         /// </summary>
-        B = 2,
+        Base2 = 2,
 
         /// <summary>
         /// Identifies base 3, ternary
         /// </summary>
-        T = 3,
+        Base3 = 3,
 
         /// <summary>
         /// Identifies base 8, octal
         /// </summary>
-        O = 8,
+        Base8 = 8,
 
         /// <summary>
         /// Identifies base 10, decimal
         /// </summary>
-        D = 10,
+        Base10 = 10,
 
         /// <summary>
         /// Identifies base 16, hex
         /// </summary>
-        X = 16,
+        Base16 = 16,
     }
 }

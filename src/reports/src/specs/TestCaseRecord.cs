@@ -9,15 +9,15 @@ namespace Z0
     using F = TestCaseField;
     using R = TestCaseRecord;
         
-    public enum TestCaseField : ulong
+    public enum TestCaseField : int
     {
-        Case = 0 | (60ul << 32),
+        Case = 0 | (60 << 16),
 
-        Status =  1 | (14ul << 32),
+        Status =  1 | (14 << 16),
 
-        Duration = 2  | (14ul << 32),
+        Duration = 2  | (14 << 16),
         
-        Executed =  3 | (26ul << 32)
+        Executed =  3 | (26 << 16)
     }
 
     public enum TestCaseStatus : byte

@@ -244,72 +244,72 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public string Format(sbyte src, NumericBaseKind @base, int? dmax = null)
            => @base switch{
-                B => Format(src, n2, dmax),
-                O => Format(src, n8, dmax),
-                X => Format(src, n16, dmax),
+               NumericBaseKind.Base2 => Format(src, n2, dmax),
+               NumericBaseKind.Base8 => Format(src, n8, dmax),
+               NumericBaseKind.Base16 => Format(src, n16, dmax),
                 _ => Format(src, n10, dmax),
             };
 
         [MethodImpl(Inline), Op]
         public string Format(byte src, NumericBaseKind @base, int? dmax = null)
            => @base switch{
-                B => Format(src, n2, dmax),
-                O => Format(src, n8, dmax),
-                X => Format(src, n16, dmax),
+               NumericBaseKind.Base2 => Format(src, n2, dmax),
+               NumericBaseKind.Base8 => Format(src, n8, dmax),
+               NumericBaseKind.Base16 => Format(src, n16, dmax),
                 _ => Format(src, n10, dmax),
             };
  
         [MethodImpl(Inline), Op]
         public string Format(short src, NumericBaseKind @base, int? dmax = null)
            => @base switch{
-                B => Format(src, n2, dmax),
-                O => Format(src, n8, dmax),
-                X => Format(src, n16, dmax),
+               NumericBaseKind.Base2 => Format(src, n2, dmax),
+               NumericBaseKind.Base8 => Format(src, n8, dmax),
+               NumericBaseKind.Base16 => Format(src, n16, dmax),
                 _ => Format(src, n10, dmax),
             };
 
         [MethodImpl(Inline), Op]
         public string Format(ushort src, NumericBaseKind @base, int? dmax = null)
            => @base switch{
-                B => Format(src, n2, dmax),
-                O => Format(src, n8, dmax),
-                X => Format(src, n16, dmax),
+               NumericBaseKind.Base2 => Format(src, n2, dmax),
+               NumericBaseKind.Base8 => Format(src, n8, dmax),
+               NumericBaseKind.Base16 => Format(src, n16, dmax),
                 _ => Format(src, n10, dmax),
             };
 
         [MethodImpl(Inline), Op]
         public string Format(int src, NumericBaseKind @base, int? dmax = null)
            => @base switch{
-                B => Format(src, n2, dmax),
-                O => Format(src, n8, dmax),
-                X => Format(src, n16, dmax),
+               NumericBaseKind.Base2 => Format(src, n2, dmax),
+               NumericBaseKind.Base8 => Format(src, n8, dmax),
+               NumericBaseKind.Base16 => Format(src, n16, dmax),
                 _ => Format(src, n10, dmax),
             };
 
         [MethodImpl(Inline), Op]
         public string Format(uint src, NumericBaseKind @base, int? dmax = null)
            => @base switch{
-                B => Format(src, n2, dmax),
-                O => Format(src, n8, dmax),
-                X => Format(src, n16, dmax),
+               NumericBaseKind.Base2 => Format(src, n2, dmax),
+               NumericBaseKind.Base8 => Format(src, n8, dmax),
+               NumericBaseKind.Base16 => Format(src, n16, dmax),
                 _ => Format(src, n10, dmax),
             };
 
         [MethodImpl(Inline), Op]
         public string Format(long src, NumericBaseKind @base, int? dmax = null)
            => @base switch{
-                B => Format(src, n2, dmax),
-                O => Format(src, n8, dmax),
-                X => Format(src, n16, dmax),
+               NumericBaseKind.Base2 => Format(src, n2, dmax),
+               NumericBaseKind.Base8 => Format(src, n8, dmax),
+               NumericBaseKind.Base16 => Format(src, n16, dmax),
                 _ => Format(src, n10, dmax),
             };
 
         [MethodImpl(Inline), Op]
         public string Format(ulong src, NumericBaseKind @base, int? dmax = null)
            => @base switch{
-                B => Format(src, n2, dmax),
-                O => Format(src, n8, dmax),
-                X => Format(src, n16, dmax),
+               NumericBaseKind.Base2 => Format(src, n2, dmax),
+               NumericBaseKind.Base8 => Format(src, n8, dmax),
+               NumericBaseKind.Base16 => Format(src, n16, dmax),
                 _ => Format(src, n10, dmax),
             };
 

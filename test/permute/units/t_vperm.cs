@@ -49,14 +49,13 @@ namespace Z0
             where T : unmanaged 
                 => Numeric.eq(lhs.Data, rhs.Data);
 
-
         public void perm_symbols()
         {            
             Claim.eq($"{Perm4L.ABDC}", Perm4L.ABDC.Format());
             Claim.eq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());           
-            Claim.eq($"ABCDEFGH", Perm8L.Identity.Format());   
-            Claim.eq($"HGFEDCBA", Perm8L.Reversed.Format());  
-            Claim.eq($"0123456789ABCDEF", Perm16L.Identity.Format());
+            Claim.eq($"ABCDEFGH", PermLits.Perm8Identity.Format());   
+            Claim.eq($"HGFEDCBA", PermLits.Perm8Reversed.Format());  
+            Claim.eq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());
                     
         }
 

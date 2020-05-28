@@ -10,6 +10,8 @@ namespace Z0.Logix
     using static Memories;
     using static TypedLogicSpec;
 
+    using L = AsciLetterLo;
+
     public abstract class TypedLogixTest<X> : LogixTest<X>
         where X : TypedLogixTest<X>
     {
@@ -19,7 +21,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_a<V>()
             where V : unmanaged
-                => variable<V>(Letters.a);
+                => variable<V>(L.a);
 
         /// <summary>
         /// Creates a typed variable named 'b'
@@ -27,7 +29,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_b<V>()
             where V : unmanaged
-                => variable<V>(Letters.b);
+                => variable<V>(L.b);
 
         /// <summary>
         /// Creates a typed variable named 'c'
@@ -35,7 +37,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_c<V>()
             where V : unmanaged
-                => variable<V>(Letters.c);
+                => variable<V>(L.c);
 
         /// <summary>
         /// Creates a typed variable named 'x'
@@ -43,7 +45,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_x<V>()
             where V : unmanaged
-                => variable<V>(Letters.a);
+                => variable<V>(L.a);
 
         /// <summary>
         /// Creates a typed variable named 'y'
@@ -51,7 +53,7 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_y<V>()
             where V : unmanaged
-                => variable<V>(Letters.b);
+                => variable<V>(L.y);
 
         /// <summary>
         /// Creates a typed variable named 'z'
@@ -59,6 +61,6 @@ namespace Z0.Logix
         /// <typeparam name="V">The variable's underlying type</typeparam>
         protected static VariableExpr<V> var_z<V>()
             where V : unmanaged
-                => variable<V>(Letters.c);
+                => variable<V>(L.z);
    }
 }

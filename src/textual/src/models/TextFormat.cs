@@ -5,7 +5,10 @@
 namespace Z0
 {
     using System;
-    
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+   
     public readonly struct TextFormat
     {        
         public static TextFormat Structured => Define();

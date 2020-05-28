@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
     using static Memories;
     
     /// <summary>
@@ -12,17 +15,22 @@ namespace Z0
     /// </summary>
     public readonly struct TextCell
     {        
-        public uint LineNumber {get;}
+        public uint Row {get;}
 
-        public uint ColumnIndex {get;}
+        public uint Col {get;}
 
-        public string CellValue {get;}
+        public string Content {get;}
 
-        public TextCell(uint LineNumber, uint ColumnIndex, string CellValue)
+        [MethodImpl(Inline)]
+        public static implicit operator string(TextCell src)
+            => src.Content;
+                
+        [MethodImpl(Inline)]
+        public TextCell(uint Row, uint Col, string Content)
         {
-            this.LineNumber = LineNumber;
-            this.ColumnIndex = ColumnIndex;
-            this.CellValue = insist(CellValue);
+            this.Row = Row;
+            this.Col = Col;
+            this.Content = insist(Content);
         }        
     }
 }

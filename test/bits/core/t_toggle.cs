@@ -92,13 +92,13 @@ namespace Z0
             var x1 = (sbyte)0;
             var y1 = Bits.enable(x1, 7);
             Claim.eq(SByte.MinValue, y1);
-            Primal.eq("10000000", y1.ToBitString());
+            PrimalSeq.eq("10000000", y1.ToBitString());
 
 
             var x2 = (byte)0;
             var y2 = Bits.enable(x2, 7);
             Claim.eq(SByte.MinValue, (sbyte)y1);
-            Primal.eq("10000000", y1.ToBitString());
+            PrimalSeq.eq("10000000", y1.ToBitString());
 
             var x3 = -1;
             Claim.eq(x3 >> 10, -1);            

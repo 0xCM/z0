@@ -9,10 +9,10 @@ namespace Z0.Asm.Data
 
     using static Seed;        
     using static Memories;
-    using static BitKind;
+    using static OneBit;
     using static Quartet;
 
-    using B1 = BitKind;
+    using B1 = OneBit;
 
     /// <summary>
     /// A prefix that occurrs at most once and is applicable to instructions 

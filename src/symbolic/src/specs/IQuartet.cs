@@ -10,17 +10,17 @@ namespace Z0
     using static Seed;
 
 
-    public interface IQuartet : IBitCode
+    public interface IQuartet : IBits
     {
 
     }
     
-    public interface IQuartet<B> : IQuartet, IBitCode<B>
+    public interface IQuartet<B> : IQuartet, IBits<B>
         where B : unmanaged, IQuartet<B>
     {
         new Quartet Kind {get;}
 
-        Octet IBitCode.Kind => (Octet)Kind;
+        Octet IBits.Kind => (Octet)Kind;
 
         string ITextual.Format() => Kind.ToString();
     }        

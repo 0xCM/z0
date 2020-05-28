@@ -94,16 +94,36 @@ namespace Z0
         /// <summary>
         /// The first declared digit
         /// </summary>
-        First = x0,
+        FirstNumeral = x0,
+
+        /// <summary>
+        /// The first declared numeral
+        /// </summary>
+        LastNumeral = x9,
+
+        /// <summary>
+        /// The first declared letter
+        /// </summary>
+        FirstLetter = A,
+
+        /// <summary>
+        /// The last declared letter
+        /// </summary>
+        LastLetter = F,
+        
+        /// <summary>
+        /// The first declared digit
+        /// </summary>
+        FirstDigit = x0,
 
         /// <summary>
         /// The last declared digit
         /// </summary>
-        Last = F,
+        LastDigit = F,
 
         /// <summary>
         /// The digit declaration count
         /// </summary>
-        Count = Last - First + 1                 
+        Count = LastDigit - FirstDigit + 1                 
     }
 }

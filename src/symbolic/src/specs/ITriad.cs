@@ -9,17 +9,17 @@ namespace Z0
 
     using static Seed;
 
-    public interface ITriad: IBitCode
+    public interface ITriad: IBits
     {
 
     }
 
-    public interface ITriad<B> : ITriad, IBitCode<B>
+    public interface ITriad<B> : ITriad, IBits<B>
         where B : unmanaged, ITriad<B>
     {
         new Triad Kind {get;}
 
-        Octet IBitCode.Kind => (Octet)Kind;
+        Octet IBits.Kind => (Octet)Kind;
 
         string ITextual.Format() => Kind.ToString();
     }    

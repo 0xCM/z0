@@ -497,8 +497,6 @@ namespace Z0
         /// <summary>
         /// The line-feed character
         /// </summary>
-        LineFeed = '\r',
- 
+        LineFeed = '\r', 
     }
-
 }

@@ -15,17 +15,21 @@ namespace Z0
     public readonly struct HexKindValue<T> : IHexKindValue<T>
         where T : unmanaged
     {
+        readonly T value;
+
         public HexKind Kind {get;}
 
         public T Value
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => value;
         }
 
-        readonly T Data;
-
-        public Type Reified => typeof(T);
+        public ReadOnlySpan<byte> Data 
+        {
+            [MethodImpl(Inline)]
+            get => Control.bytes(value);
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator HexKindValue<T>((HexKind k, T value) src)
@@ -43,7 +47,7 @@ namespace Z0
         public HexKindValue(HexKind code, T value)
         {
             this.Kind = code;
-            this.Data = value;
+            this.value = value;
         }
     }
 }

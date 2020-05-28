@@ -86,7 +86,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal FunctionalNumericFormatter(Func<T,NumericBaseKind,string> g)
         {
-            this.F = (t => g(t,NumericBaseKind.D));
+            this.F = (t => g(t,NumericBaseKind.Base10));
             this.G = g;
         }
 

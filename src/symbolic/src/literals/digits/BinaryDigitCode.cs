@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using S = BinaryDigitSymbol;
+    using S = BinarySymbol;
 
     public enum BinaryDigitCode : byte
     {

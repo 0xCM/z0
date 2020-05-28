@@ -36,9 +36,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Perm16L reversed(N16 n)
             => assemble(
-                Perm16L.XF,Perm16L.XE,Perm16L.XD,Perm16L.XC,
-                Perm16L.XB,Perm16L.XA,Perm16L.X9,Perm16L.X8,
-                Perm16L.X7,Perm16L.X6,Perm16L.X5,Perm16L.X4,
-                Perm16L.X3,Perm16L.X2,Perm16L.X1,Perm16L.X0);
+                Perm16L.XF, Perm16L.XE, Perm16L.XD, Perm16L.XC,
+                Perm16L.XB, Perm16L.XA, Perm16L.X9, Perm16L.X8,
+                Perm16L.X7, Perm16L.X6, Perm16L.X5, Perm16L.X4,
+                Perm16L.X3, Perm16L.X2, Perm16L.X1, Perm16L.X0);
     }
 }

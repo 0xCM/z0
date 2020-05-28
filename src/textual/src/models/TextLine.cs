@@ -47,7 +47,8 @@ namespace Z0
             get => charidx + 1 <= LineText.Length ? LineText[charidx] : (char?)null;
         }
 
-        public bool IsEmpty => (LineText?.Length ?? 0) == 0;
+        public bool IsEmpty 
+            => (LineText?.Length ?? 0) == 0;
 
         public bool IsBlank
             => string.IsNullOrWhiteSpace(LineText);

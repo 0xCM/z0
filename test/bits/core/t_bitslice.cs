@@ -15,7 +15,7 @@ namespace Z0
         {
             var src = 0b00001010110000101001_001_111_011_001u;
             var bsSrc = src.ToBitString().Format(true);
-            Primal.eq("1010110000101001001111011001", bsSrc);
+            PrimalSeq.eq("1010110000101001001111011001", bsSrc);
             
             var i=-3; 
 

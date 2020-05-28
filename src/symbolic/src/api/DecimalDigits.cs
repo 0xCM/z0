@@ -11,12 +11,13 @@ namespace Z0
 
     using static Seed;
 
-    public static class DecimalDigits
+    public class DecimalDigits
     {
         /// <summary>
         /// Parses the decimal digit if possible; oterwise, raises an error
         /// </summary>
         /// <param name="c">The source character</param>
+        [MethodImpl(Inline)]
         public static DecimalDigit digit(char c)
             => (DecimalDigit)((uint)c - (uint)'0');
 
@@ -33,28 +34,6 @@ namespace Z0
             return dst;            
         }
 
-        /// <summary>
-        /// Gets the sequence of decimal digits defined by a source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static DecimalDigit[] digits(Base10 @base, byte src)
-            => src.ToString().Select(DecimalDigits.digit).ToArray();
 
-        /// <summary>
-        /// Gets the sequence of decimal digits defined by a source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static DecimalDigit[] digits(Base10 @base, ushort src)
-            => src.ToString().Select(DecimalDigits.digit).ToArray();
-
-        /// <summary>
-        /// Gets the sequence of decimal digits defined by a source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static DecimalDigit[] digits(Base10 @base, uint src)
-            => src.ToString().Select(DecimalDigits.digit).ToArray();
     }
 }

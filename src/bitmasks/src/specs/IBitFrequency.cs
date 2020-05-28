@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
-
     public interface IBitFrequency
     {
         uint F {get;}
@@ -18,8 +16,5 @@ namespace Z0
         where F : unmanaged, ITypeNat
     {
         F f => default;
-
     }
-
-
 }

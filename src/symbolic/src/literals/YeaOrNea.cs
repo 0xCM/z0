@@ -17,12 +17,12 @@ namespace Z0
         /// <summary>
         /// Aye
         /// </summary>
-        Y = Letters.Y,
+        Y = AsciLetterUp.Y,
 
         /// <summary>
         /// ~Aye
         /// </summary>
-        N = Letters.N,
+        N = AsciLetterUp.N,
     }
 
 }

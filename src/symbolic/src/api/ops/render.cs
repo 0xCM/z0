@@ -13,7 +13,34 @@ namespace Z0
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]
-        public static int render(ReadOnlySpan<HexDigitCodeUp> src, Span<char> dst)
+        public static void render(Base2 @base, ReadOnlySpan<byte> src, Span<char> dst)
+        {
+            var j = 0;
+            for(int i = 0; i<src.Length; i++)
+            {
+                ref readonly var cell = ref skip(src,i);
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00000001 & cell) >> 0));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00000010 & cell) >> 1));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00000100 & cell) >> 2));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00001000 & cell) >> 3));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00010000 & cell) >> 4));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00100000 & cell) >> 5));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b01000000 & cell) >> 6));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b10000000 & cell) >> 7));
+            }            
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> render(Base2 @base, ReadOnlySpan<byte> src)
+        {
+            Span<char> dst = new char[src.Length*8];
+            render(@base, src,dst);
+            dst.Reverse();
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static int render(ReadOnlySpan<HexCode> src, Span<char> dst)
         {
             var j = 0;
             for(int i = 0; i<src.Length; i+=2, j+=3)
@@ -27,26 +54,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static int render(X16 @base, ReadOnlySpan<byte> src, Span<char> dst)
+        public static int render(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src, Span<char> dst)
         {
             var j = 0;
             for(int i = 0; i<src.Length; i++, j+=3)
             {
                 ref readonly var code = ref skip(src, i);
                 
-                seek(dst, j) = hexchar(UpperCased.Case, code >> 4);
-                seek(dst, j + 1) = hexchar(UpperCased.Case, 0xF & code);
+                seek(dst, j) = hexchar(@case, (byte)(code >> 4));
+                seek(dst, j + 1) = hexchar(@case, (byte)(0xF & code));
                 seek(dst, j + 2) = Chars.Space;
             }
             return j;
         }
 
+
         [Op]
-        public static string render(X16 @base, ReadOnlySpan<byte> src)
+        public static string render(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
         {
             Span<char> digits = stackalloc char[src.Length*3];
-            render(@base, src,digits);
+            render(@base, @case, src,digits);
             return digits.ToString();
         }
+        
     }
 }

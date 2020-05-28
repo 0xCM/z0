@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
-
     [Flags]
     public enum MaskKind : uint
     {
@@ -28,5 +26,4 @@ namespace Z0
 
         Index = 128,
     }
-
 }

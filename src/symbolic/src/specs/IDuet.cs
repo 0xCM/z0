@@ -9,20 +9,20 @@ namespace Z0
 
     using static Seed;
 
-    public interface IDuet : IBitCode
+    public interface IDuet : IBits
     {
 
     }
     
-    public interface IDuet<B> : IDuet, IBitCode<B>
+    public interface IDuet<B> : IDuet, IBits<B>
         where B : unmanaged, IDuet<B>
     {
         new Duet Kind {get;}
 
-        Octet IBitCode.Kind => (Octet)Kind;
-
-        string ITextual.Format() => Kind.ToString();
+        Octet IBits.Kind 
+            => (Octet)Kind;
+        
+        string ITextual.Format() 
+            => Kind.ToString();
     }
-
-
 }

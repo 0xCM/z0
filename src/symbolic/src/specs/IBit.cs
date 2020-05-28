@@ -9,20 +9,19 @@ namespace Z0
 
     using static Seed;
 
-    public interface IBit : IBitCode
+    public interface IBit : IBits
     {
 
     }
 
-    public interface IBit<B> : IBit, IBitCode<B>
+    public interface IBit<B> : IBit, IBits<B>
         where B : unmanaged, IBit<B>
     {
-        new BitKind Kind {get;}
+        new OneBit Kind {get;}
 
-        Octet IBitCode.Kind => (Octet)Kind;
+        Octet IBits.Kind 
+            => (Octet)Kind;
 
         string ITextual.Format() => Kind.ToString();
-
     }
-
 }

@@ -6,31 +6,40 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Seed;
 
     partial class Control
     {
+        [MethodImpl(Inline), Op]
         public static void require(bool invariant)
         {
             if(!invariant)
-                throw new Exception($"Application invaraiant failed");
+                ThrowInvariantFailure();
         }
+
+        [MethodImpl(Inline), Op]
+        public static void require(bool invariant, string msg)
+        {
+            if(!invariant)
+                ThrowInvariantFailure(msg);
+        }        
 
         public static T require<T>(T src)
             where T : class
         {
             if(src == null)
-                throw new NullReferenceException($"Application nullity invaraiant failed for {typeof(T)}");
+                ThrowNullRefError<T>();
             return src;
         }
 
-        public static void require(bool invariant, string msg)
-        {
-            if(!invariant)
-                throw new Exception($"Application invaraiant failed: {msg}");
-        }        
+        static void ThrowInvariantFailure(string msg)
+            => throw new Exception($"Application invaraiant failed: {msg}");
+
+        static void ThrowInvariantFailure()
+            => throw new Exception($"Application invaraiant failed");
+
+        static void ThrowNullRefError<T>()
+            => throw new NullReferenceException($"Application nullity invaraiant failed for {typeof(T)}");
     }
 }

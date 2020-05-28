@@ -133,7 +133,5 @@ namespace Z0
         [MethodImpl(Inline)]   
         bool eq(int? lhs, int? rhs, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw Failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
-
-
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]   
         public static char ToChar(this HexDigit src)
-            => (char)Symbolic.symbol(src, UpperCased.Case);
+            => (char)Symbolic.symbol(UpperCased.Case, src);
 
         public static Span<DecimalDigit> ToDeciDigits(this long src)
             => DecimalDigits.digits(src.ToString());

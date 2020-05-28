@@ -10,6 +10,7 @@ namespace Z0
     using System.Linq;
     
     using static Seed;
+    using static Control;
 
     partial class Symbolic
     {
@@ -29,35 +30,57 @@ namespace Z0
             return index;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        /// <summary>
+        /// Creates an index that correlates 8-bit unsigned integers [0..255] with aribitrary parametric values
+        /// </summary>
+        /// <param name="src">The values to correlate</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline)]
         public static HexIndex<T> index<T>(params HexKindValue<T>[] src)
             where T : unmanaged
-        {
-            var buffer = new T[256];
-            Span<T> index = buffer;
-            ReadOnlySpan<HexKindValue<T>> view = src;
+                => index(src, new T[256]);
 
-            for(var i=0; i<src.Length; i++)
+        /// <summary>
+        /// Creates an index that correlates up to 255 unsigned 8-bit integers with aribitrary parametric values
+        /// </summary>
+        /// <param name="src">The values to correlate</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static HexIndex<T> index<T>(HexKindValue<T>[] src, T[] dst)
+            where T : unmanaged
+        {
+            Span<T> index = dst;
+            ReadOnlySpan<HexKindValue<T>> view = src;
+            var count = Math.Min(src.Length, dst.Length);
+
+            for(var i=0; i<count; i++)
             {
-                ref readonly var x = ref Control.skip(view,i);
-                Control.seek(index,(int)x.Kind) = x.Value;
+                ref readonly var x = ref skip(view,i);
+                seek(index, (int)x.Kind) = skip(view,i).Value;
             }
-            return new HexIndex<T>(buffer);
+            return new HexIndex<T>(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static HexIndex<T> index<T>(Func<T,HexKind> f, params T[] src)
+        public static HexIndex<T> index<T>(Func<T,HexKind> f, T[] src, T[] dst)
             where T : unmanaged
         {
-            var buffer = new T[256];
-            Span<T> index = buffer;
+            Span<T> index = dst;
             ReadOnlySpan<T> view = src;
-            for(var i=0; i<src.Length; i++)
+            var count = Math.Min(src.Length, dst.Length);
+
+            for(var i=0; i<count; i++)
             {
-                var x = Control.skip(view,i);
-                Control.seek(index,(int)f(x)) = x;
+                ref readonly var x = ref skip(view,i);
+                seek(index, (int)f(x)) = x;
             }
-            return new HexIndex<T>(buffer);
+            
+            return new HexIndex<T>(dst);
         }                
+
+        [MethodImpl(Inline)]
+        public static HexIndex<T> index<T>(Func<T,HexKind> f, params T[] src)
+            where T : unmanaged
+                => index(f, src, new T[src.Length]);
     }
 }

@@ -33,7 +33,7 @@ namespace Z0.Logix
 
         public void check_solution()
         {
-            var x = variable<uint>(0);
+            var x = variable<uint>(0u);
             var y = literal(27u);
             var expr1 = varied(n1, and(x,y),x);
             var expr2 = y;
@@ -44,8 +44,8 @@ namespace Z0.Logix
 
         public void minimize()
         {
-            var v1 = variable<uint>(0);
-            var v2 = variable<uint>(1);
+            var v1 = variable<uint>(0u);
+            var v2 = variable<uint>(1u);
             var expr1 = varied(n2, or(v2, xor(v1,and(v1,nand(v2, not(v1))))),v1,v2);
             var expr2 = literal(32u);
             var result = solve(expr1, expr2, (1,0xFF));
@@ -100,10 +100,10 @@ namespace Z0.Logix
         void check_4x2<T>(BinaryLogicKind k0, BinaryLogicKind k1)
             where T : unmanaged
         {
-            var v0 = variable<T>(0);
-            var v1 = variable<T>(1);
-            var v2 = variable<T>(2);
-            var v3 = variable<T>(3);
+            var v0 = variable<T>(0u);
+            var v1 = variable<T>(1u);
+            var v2 = variable<T>(2u);
+            var v3 = variable<T>(3u);
 
             var op0_name = k0.Format();
             var op1_name = k1.Format();
@@ -143,8 +143,8 @@ namespace Z0.Logix
         void check_binop_vars<T>(BinaryLogicKind kind)
             where T : unmanaged
         {
-            var v0 = variable<T>(0);
-            var v1 = variable<T>(1);
+            var v0 = variable<T>(0u);
+            var v1 = variable<T>(1u);
 
             var op = NumericLogixHost.lookup<T>(kind);
             var expr = binary(kind,v0,v1);

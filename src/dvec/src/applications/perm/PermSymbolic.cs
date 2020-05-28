@@ -255,7 +255,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm16L src)
-            => symbols<Perm16Sym,ulong>((ulong)src,4);
+            => symbols<Perm16L,ulong>((ulong)src,4);
 
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation

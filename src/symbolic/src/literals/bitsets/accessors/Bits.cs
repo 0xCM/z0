@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using B = BitKind;
+    using B = OneBit;
 
     partial class BitSets
     {

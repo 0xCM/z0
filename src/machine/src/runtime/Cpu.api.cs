@@ -18,9 +18,9 @@ namespace Z0.Machines
 
         const int BufferSize = ByteBuffer.BufferSize;
 
-        ByteBuffer<HexDigitCodeUp> _StepBuffer;
+        ByteBuffer<HexCode> _StepBuffer;
 
-        ByteBuffer<HexDigitCodeUp> _RunBuffer;
+        ByteBuffer<HexCode> _RunBuffer;
 
         char[] _LogBuffer;
 
@@ -29,13 +29,13 @@ namespace Z0.Machines
         public Cpu()
         {
             _LogBuffer = Control.alloc<char>(BufferSize);
-            _StepBuffer = ByteBuffer.Init(Control.alloc<HexDigitCodeUp>(BufferSize));
-            _RunBuffer = ByteBuffer.Init(Control.alloc<HexDigitCodeUp>(BufferSize));            
+            _StepBuffer = ByteBuffer.Init(Control.alloc<HexCode>(BufferSize));
+            _RunBuffer = ByteBuffer.Init(Control.alloc<HexCode>(BufferSize));            
             _RunIndex = 0;
         }
 
         [MethodImpl(Inline), Op]
-        Span<HexDigitCodeUp> StepBuffer()
+        Span<HexCode> StepBuffer()
         {            
             _StepBuffer.Clear(w128);
             return _StepBuffer.Content;
@@ -49,7 +49,7 @@ namespace Z0.Machines
             return buffer;                
         }
 
-        Span<HexDigitCodeUp> RunBuffer
+        Span<HexCode> RunBuffer
         {
             [MethodImpl(Inline)]
             get => _RunBuffer.Content;
@@ -84,7 +84,7 @@ namespace Z0.Machines
         public void Execute(in ReadOnlySpan<byte> src)
         {
             var buffer = StepBuffer();
-            var count = Symbolic.codes(src, buffer);
+            var count = Symbolic.codes(src, UpperCased.Case, buffer);
             var ran = buffer.Slice(0, count);
             ran.CopyTo(RunBuffer, _RunIndex);
             _RunIndex += count;

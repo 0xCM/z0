@@ -12,10 +12,10 @@ namespace Z0
         protected string TypeDigits(int m, int n)
             => BitFormatter.format(n,BitFormatConfig.Limited(m,m));
         protected string TypeName(int m, byte n)
-            => text.concat(Letters.B, TypeDigits(m,n));
+            => text.concat(AsciLetterUp.B, TypeDigits(m,n));
 
         protected string ValueName(int m, byte n)
-            => text.concat(Letters.b, TypeDigits(m,n));
+            => text.concat(AsciLetterLo.b, TypeDigits(m,n));
 
 
         public string DeclareLiteral(string name, string value)
@@ -51,7 +51,7 @@ namespace Z0
         protected string KindName(int m)
         {
             var kName = m switch{
-                    1 => nameof(BitKind),
+                    1 => nameof(OneBit),
                     2 => nameof(Duet),
                     3 => nameof(Triad),
                     4 => nameof(Quartet),
@@ -63,7 +63,7 @@ namespace Z0
         }
 
         protected string KindValue(int m, byte n)
-            => text.concat(KindName(m), Chars.Dot, Letters.b, TypeDigits(m,n));
+            => text.concat(KindName(m), Chars.Dot, AsciLetterLo.b, TypeDigits(m,n));
 
         protected string DeclareKindProperty(int m, byte n)
             => text.concat($"public {KindName(m)} => {KindValue(m,n)};");

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
 
 
     using static Seed;
@@ -40,17 +41,10 @@ namespace Z0
             
         }
 
-        void Generate()
-        {
-            var archive = ReferenceArchive.Service;
-            var ds = archive.Dataset("EnumTypes");
-            ds.OnSome(doc => term.print(doc.Content));
-        }
-
         public override void RunShell(params string[] args)
         {                        
             var parts = PartParser.Service.ParseValid(args);  
-            Generate();
+            G.Service.Generate();
         }
 
         public static void Main(params string[] args)

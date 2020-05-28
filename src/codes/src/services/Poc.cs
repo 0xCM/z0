@@ -8,17 +8,13 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static HexCodes;
     using static Seed;
     using static Memories;
 
     using S = System.ReadOnlySpan<char>;
 
-    using SN = SymNotKind;
-
     class POC
     {
-
         public const string VEXᛁvvvv = "";
         
         static void Trace(S src)

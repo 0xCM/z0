@@ -26,7 +26,6 @@ namespace Z0
             var counter = 1u;
             var fmt = format ?? TextFormat.Structured;
             Option<TextHeader> header = default;
-            
             try
             {
                 while(!reader.EndOfStream)

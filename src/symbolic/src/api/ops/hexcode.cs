@@ -8,19 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Control;
-
-    using HCU = HexDigitCodeUp;
-    using HCL = HexDigitCodeLo;
 
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]
-        public static HCU hexcode(UpperCased casing, int index)
-            => (HCU)skip(SymbolicData.UpperHexCodes, index);
+        public static HexCode hexcode(UpperCased @case, byte index)
+            => SymbolicData.code(base16, @case, index);
 
         [MethodImpl(Inline), Op]
-        public static HCL hexcode(LowerCased casing, int index)
-            => (HCL)skip(SymbolicData.LowerHexCodes, index);
+        public static HexCode hexcode(LowerCased @case, byte index)
+            => SymbolicData.code(base16, @case, index);
     }
 }

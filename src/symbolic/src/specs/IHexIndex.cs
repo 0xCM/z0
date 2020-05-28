@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public interface IHexIndex<T>
+    public interface IHexIndex<T> : IReadOnlyIndex<T>
     {
         ref readonly T this[HexKind index] {get;}
 

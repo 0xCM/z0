@@ -52,12 +52,12 @@ namespace Z0
                 var a = Random.Next<T>();
                 BitString.bitchars(a,s0);
                 s1 = BitString.bitchars(a);
-                Primal.eq(s0, s1);
+                PrimalSeq.eq(s0, s1);
 
                 s0.Reverse();
                 var textA = s0.Concat();
                 var textB = BitString.scalar(a).Format();
-                Primal.eq(textA, textB);
+                PrimalSeq.eq(textA, textB);
             }
         } 
     }

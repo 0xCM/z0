@@ -23,14 +23,14 @@ namespace Z0
         /// <summary>
         /// Constructs a permutation of length four from four ordered symbols
         /// </summary>
-        [MethodImpl(Inline),Op]
+        [MethodImpl(Inline), Op]
         public static Perm4L assemble(Perm4L x0, Perm4L x1, Perm4L x2, Perm4L x3)
             => (Perm4L)assemble4((uint)x0, (uint)x1, (uint)x2, (uint)x3);
 
         /// <summary>
         /// Constructs a permutation of length 8 from 8 ordered symbols
         /// </summary>
-        [MethodImpl(Inline),Op]
+        [MethodImpl(Inline), Op]
         public static Perm8L assemble(
             Perm8L x0, Perm8L x1, Perm8L x2, Perm8L x3, 
             Perm8L x4, Perm8L x5, Perm8L x6, Perm8L x7)
@@ -43,7 +43,7 @@ namespace Z0
         /// <summary>
         /// Constructs a permutation of length 16 from 16 ordered symbols
         /// </summary>
-        [MethodImpl(Inline),Op]
+        [MethodImpl(Inline), Op]
         public static Perm16L assemble(
             Perm16L x0, Perm16L x1, Perm16L x2, Perm16L x3, 
             Perm16L x4, Perm16L x5, Perm16L x6, Perm16L x7, 

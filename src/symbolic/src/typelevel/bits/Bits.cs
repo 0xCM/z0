@@ -19,7 +19,7 @@ namespace Z0
         public static implicit operator byte(B0 src) => (byte)src.Kind;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitKind(B0 src) => src.Kind;
+        public static implicit operator OneBit(B0 src) => src.Kind;
 
         [MethodImpl(Inline)]
         public static implicit operator Duet(B0 src) => (Duet)src.Kind;
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Octet(B0 src) => (Octet)src.Kind;
 
-        public BitKind Kind => BitKind.b0;
+        public OneBit Kind => OneBit.b0;
 
         [MethodImpl(Inline)]
         public string Format() => ValueName;
@@ -54,7 +54,7 @@ namespace Z0
         public static implicit operator byte(B1 src) => (byte)src.Kind;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitKind(B1 src) => src.Kind;
+        public static implicit operator OneBit(B1 src) => src.Kind;
 
         [MethodImpl(Inline)]
         public static implicit operator Duet(B1 src) => (Duet)src.Kind;
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Octet(B1 src) => (Octet)src.Kind;
 
-        public BitKind Kind => BitKind.b1;
+        public OneBit Kind => OneBit.b1;
 
         [MethodImpl(Inline)]
         public string Format() => ValueName;

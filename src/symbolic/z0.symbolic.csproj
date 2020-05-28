@@ -8,7 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Typed)" />    
+    <ProjectReference Include="$(Cast)" />    
     <ProjectReference Include="$(Enums)" />
+    <ProjectReference Include="$(BitMasks)" />
+
   </ItemGroup>
 
 </Project>

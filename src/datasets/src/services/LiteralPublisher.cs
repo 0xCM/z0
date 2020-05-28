@@ -53,7 +53,7 @@ namespace Z0
             var primal = typeof(E).GetEnumUnderlyingType();
             var flags = typeof(E).Tagged<FlagsAttribute>();
             var baseTag =typeof(E).Tag<NumericBaseAttribute>(); 
-            var @base = baseTag.MapValueOrDefault(x => x.Base, NumericBaseKind.D);
+            var @base = baseTag.MapValueOrDefault(x => x.Base, NumericBaseKind.Base10);
             var bitmax = baseTag.MapValueOrDefault(x => x.MaxDigits, (int?)null);
             var hmax = bitmax != null ? bitmax.Value/4 : (int?)null;
 
@@ -65,7 +65,7 @@ namespace Z0
                 if(string.IsNullOrWhiteSpace(description) && flags)
                     description = literal.LiteralValue.ToString();
 
-                var bs = @base == NumericBaseKind.B ? MultiFormatter.Service.FormatEnum(literal.LiteralValue, n2, bitmax) : string.Empty;
+                var bs = @base == NumericBaseKind.Base2 ? MultiFormatter.Service.FormatEnum(literal.LiteralValue, n2, bitmax) : string.Empty;
                 var hex = MultiFormatter.Service.FormatEnum(literal.LiteralValue, n16, hmax);
                 dst[i] = new LiteralRecord(declarer, literal.Index, literal.Identifier, hex, bs, description);
             }

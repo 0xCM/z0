@@ -12,23 +12,31 @@ namespace Z0
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]   
-        public static BinaryDigitSymbol symbol(BinaryDigit src)
-            => (BinaryDigitSymbol)((uint)src + (uint)BinaryDigitSymbol.b0);
+        public static BinarySymbol symbol(BinaryDigit src)
+            => (BinarySymbol)((byte)src + (byte)BinarySymbol.First);
 
         [MethodImpl(Inline), Op]   
-        public static DecimalDigitSymbol symbol(DecimalDigit src)
-            => (DecimalDigitSymbol)((uint)src + (uint)DecimalDigitSymbol.d0);
+        public static BinarySymbol symbol(Base2 @base, byte src)
+            => (BinarySymbol)(src + (byte)BinarySymbol.First);
 
         [MethodImpl(Inline), Op]   
-        public static HexDigitSymbolUp symbol(HexDigit src, UpperCased c)
-            => (uint)src <= (uint)HexDigit.x9 
-                ? (HexDigitSymbolUp)((uint)src + (uint)HexDigit.x0) 
-                : (HexDigitSymbolUp)((uint)src + (uint)HexDigit.A);
+        public static DecimalSymbol symbol(OctalDigit src)
+            => (DecimalSymbol)((byte)src + (byte)OctalSymbol.First);
 
         [MethodImpl(Inline), Op]   
-        public static HexDigitSymbolLo symbol(HexDigit src, LowerCased c)
-            => (uint)src <= (uint)HexDigit.x9 
-                ? (HexDigitSymbolLo)((uint)src + (uint)HexDigit.x0) 
-                : (HexDigitSymbolLo)((uint)src + (uint)HexDigit.A);
+        public static DecimalSymbol symbol(DecimalDigit src)
+            => (DecimalSymbol)((byte)src + (byte)DecimalSymbol.First);
+
+        [MethodImpl(Inline), Op]   
+        public static HexSymbol symbol(UpperCased @case, HexDigit src)
+            => src <= HexDigit.x9 
+                ? (HexSymbol)((byte)src + (byte)HexSymbol.FirstNumeral) 
+                : (HexSymbol)((byte)src + (byte)HexSymbol.FirstLetterUp);
+
+        [MethodImpl(Inline), Op]   
+        public static HexSymbol symbol(LowerCased @case, HexDigit src)
+            => src <= HexDigit.x9 
+                ? (HexSymbol)((byte)src + (byte)HexSymbol.FirstNumeral) 
+                : (HexSymbol)((byte)src + (byte)HexSymbol.FirstLetterLo);
     }
 }

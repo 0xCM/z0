@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Seed;
 
     public interface IMaskSpec : ITextual
     {        
@@ -30,7 +30,7 @@ namespace Z0
         T t => default;
 
         string ITextual.Format()
-            => $"lsb(f:{value<F>()}, d:{value<D>()}, t:{typeof(T).NumericKind().Format()})";        
+            => $"lsb(f:{Typed.value<F>()}, d:{Typed.value<D>()}, t:{typeof(T).NumericKind().Format()})";        
     }
 
 }

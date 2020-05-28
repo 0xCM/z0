@@ -50,5 +50,20 @@ namespace Z0
         /// Specifies 7 base 8
         /// </summary>
         o7 = '7',    
+
+        /// <summary>
+        /// The first declared symbol
+        /// </summary>
+        First = o1,
+
+        /// <summary>
+        /// The last declared symbol
+        /// </summary>
+        Last = o7,
+
+        /// <summary>
+        /// The symbol declaration count
+        /// </summary>
+        Count = Last - First + 1                
     }    
 }

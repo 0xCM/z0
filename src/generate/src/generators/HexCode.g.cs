@@ -10,10 +10,10 @@ namespace Z0
     public class HexCodeGenerator : CodeGenerator
     {
         static string Name(byte value)
-            => text.concat(Letters.X, value.FormatHex(true,false,uppercase:true));
+            => text.concat(AsciLetterUp.X, value.FormatHex(true,false,uppercase:true));
 
         static string Kind(byte value)
-            => text.concat(Letters.x, value.FormatHex(true,false));
+            => text.concat(AsciLetterLo.x, value.FormatHex(true,false));
 
         public static IEnumerable<string> Gen()
         {

@@ -34,7 +34,7 @@ namespace Z0
 
             Claim.eq(p3.Degree,(byte)8);                        
             Claim.eq(p1.Scalar, p2.Scalar);
-            Primal.eq(p1.Format(),p2.Format());                
+            PrimalSeq.eq(p1.Format(),p2.Format());                
         }
 
         public void gfmul_8()

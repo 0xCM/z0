@@ -119,8 +119,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(byte src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => src.FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(),                
+                    NumericBaseKind.Base2 => src.FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -135,8 +135,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(sbyte src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => src.FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(),                
+                    NumericBaseKind.Base2 => src.FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(),                
                     _ => src.ToString()
                 };
             
@@ -152,8 +152,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(ushort src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => src.FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(),                
+                    NumericBaseKind.Base2 => src.FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -167,8 +167,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(short src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => src.FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(),                
+                    NumericBaseKind.Base2 => src.FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -182,8 +182,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(int src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => src.FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(),                
+                    NumericBaseKind.Base2 => src.FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -197,8 +197,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(uint src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => src.FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(),                
+                    NumericBaseKind.Base2 => src.FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -212,8 +212,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(ulong src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => src.FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(),                
+                    NumericBaseKind.Base2 => src.FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -227,8 +227,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(long src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => src.FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(),                
+                    NumericBaseKind.Base2 => src.FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(),                
                     _ => src.ToString()
                 };
 
@@ -242,8 +242,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(float src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => BitConvert.ToUInt64(src).FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(false),
+                    NumericBaseKind.Base2 => BitConvert.ToUInt64(src).FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(false),
                     _ => src.ToString()
                 };
 
@@ -257,8 +257,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(double src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.B => BitConvert.ToUInt64(src).FormatBits(),
-                    NumericBaseKind.X => src.FormatHex(false),
+                    NumericBaseKind.Base2 => BitConvert.ToUInt64(src).FormatBits(),
+                    NumericBaseKind.Base16 => src.FormatHex(false),
                     _ => src.ToString()
                 };
 

@@ -50,5 +50,20 @@ namespace Z0
         /// Specifies 7 base 8
         /// </summary>
         o7 = 0x7,        
+
+        /// <summary>
+        /// The first declared digit
+        /// </summary>
+        First = o0,
+
+        /// <summary>
+        /// The last declared digit
+        /// </summary>
+        Last = o7,
+
+        /// <summary>
+        /// The digit declaration count
+        /// </summary>
+        Count = Last - First + 1        
    }
 }

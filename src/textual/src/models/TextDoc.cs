@@ -5,7 +5,10 @@
 namespace Z0
 {
     using System;
-    
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
     public readonly struct TextDoc
     {
         public readonly TextRow[] RowData;        
@@ -16,6 +19,7 @@ namespace Z0
         
         public uint TotalLineCount {get;}
 
+        [MethodImpl(Inline)]
         public TextDoc(TextFormat format, Option<TextHeader> header,  uint count, params TextRow[] rows)
         {
             this.RowData = rows;
@@ -25,19 +29,32 @@ namespace Z0
         }
 
         public ReadOnlySpan<TextRow> Rows
-            => RowData;
+        {
+            [MethodImpl(Inline)]
+            get => RowData;
+        }
         
         public string Content
         {
             get => RowData.Map(r => r.Format()).Concat(text.eol);
         }
+
         public ref readonly TextRow this[int index]
-            => ref Rows[index];
+        {
+            [MethodImpl(Inline)]
+            get => ref Rows[index];
+        }
         
-        public uint DataLineCount
-            => (uint)Rows.Length;
+        public int RowCount
+        {
+            [MethodImpl(Inline)]
+            get => Rows.Length;
+        }
         
-        public uint HeaderLineCount
-            => Header.IsSome() ? 1u : 0u;
+        public bool HasHeader
+        {
+            [MethodImpl(Inline)]
+            get => Header.IsSome();
+        }
     }
 }

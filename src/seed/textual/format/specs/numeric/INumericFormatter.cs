@@ -17,7 +17,7 @@ namespace Z0
 
 
         string IFormatter<T>.Format(T src)
-            => Format(src, NumericBaseKind.D);        
+            => Format(src, NumericBaseKind.Base10);        
     }
 
     public interface INumericFormatter<F,T> : INumericFormatter<T>

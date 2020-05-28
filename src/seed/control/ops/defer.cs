@@ -12,6 +12,7 @@ namespace Z0
     partial class Control    
     {
         [MethodImpl(Inline)]
-        public static Lazy<T> defer<T>(Func<T> factory) => new Lazy<T>(factory);
+        public static Lazy<T> defer<T>(Func<T> factory) 
+            => new Lazy<T>(factory);
     }
 }

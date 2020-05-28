@@ -11,6 +11,8 @@ namespace Z0
 
     public readonly struct Base10 : INumericBase<Base10>
     {
+        public static Base10 Base => default;
+
         [MethodImpl(Inline)]
         public static implicit operator int(Base10 src)
             => (int)src.Modulus;
@@ -20,6 +22,6 @@ namespace Z0
             => src.Modulus;
 
         public NumericBaseKind Modulus 
-            => NumericBaseKind.D;        
+            => NumericBaseKind.Base10;        
     }    
 }
