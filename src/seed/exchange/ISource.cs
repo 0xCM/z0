@@ -32,6 +32,14 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
+    public interface ISingletonSource<T> : ISource<T>
+    {
+        T Value {get;}
+
+        T ISource<T>.Next() => Value;
+    }
+
+    [SuppressUnmanagedCodeSecurity]
     public interface IStreamSource<T> : ISource<IEnumerable<T>>
     {
      

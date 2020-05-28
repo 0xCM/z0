@@ -6,19 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+    
     using static Seed;
+    using static Control;
 
-    public interface INumericBase
+    public interface IBitFormatter : IFormatter
     {
-        NumericBaseKind Modulus {get;}
-
-        NumericBaseIndicator Indicator {get;}
+        void Format(ReadOnlySpan<byte> src, int maxbits, Span<char> dst);
     }
 
-    public interface INumericBase<F> : INumericBase
-        where F : unmanaged, INumericBase<F>
+    public interface IBitFormatter<T> : IFormatter<BitFormatConfig,T>
+        where T : struct
     {
-        
+
     }
 }

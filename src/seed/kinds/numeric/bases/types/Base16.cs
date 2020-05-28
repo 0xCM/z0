@@ -23,5 +23,8 @@ namespace Z0
 
         public NumericBaseKind Modulus 
             => NumericBaseKind.Base16;        
+        
+        public NumericBaseIndicator Indicator 
+            => NumericBaseIndicator.Base16;
     }    
 }

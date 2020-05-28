@@ -14,42 +14,58 @@ namespace Z0
         /// <summary>
         /// [00000001]
         /// </summary>
+        [MultiLiteral("[00000001 | 1h | 1d]")]
         public const byte Index8x8x0 = 0b00000001;
 
         /// <summary>
         /// [00000010]
         /// </summary>
+        [MultiLiteral("00000010 | 2h | 2d")]
         public const byte Index8x8x1 = Index8x8x0 << 1;
 
         /// <summary>
         /// [00000100]
         /// </summary>
+        [MultiLiteral("00000100 | 4h | 4d")]
         public const byte Index8x8x2 = Index8x8x1 << 1;
 
         /// <summary>
         /// [00001000]
         /// </summary>
+        [MultiLiteral("00001000 | 8h | 8d")]
         public const byte Index8x8x3 = Index8x8x2 << 1;
 
         /// <summary>
         /// [00010000]
         /// </summary>
+        [MultiLiteral("00010000 | 10h | 16d")]
         public const byte Index8x8x4 = Index8x8x3 << 1;
 
         /// <summary>
         /// [00100000]
         /// </summary>
+        [BinaryLiteral("00100000")]
         public const byte Index8x8x5 = Index8x8x4 << 1;
 
         /// <summary>
         /// [01000000]
         /// </summary>
+        [BinaryLiteral("01000000")]
         public const byte Index8x8x6 = Index8x8x5 << 1;
         
         /// <summary>
-        /// 0x80 = [10000000]
+        /// [10000000]
         /// </summary>
+        [BinaryLiteral("10000000")]
         public const byte Index8x8x7 = Index8x8x6 << 1;
+
+        /// <summary>
+        /// [00000000 00000001]
+        /// </summary>
+        [BinaryLiteral("00000000 00000001")]
+        public const ushort Index16x16x1 = Index8x8x7 << 1;
+
+
 
         // ~ Index16x8
         // ~ ------------------------------------------------------------------

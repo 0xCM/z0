@@ -22,7 +22,7 @@ namespace Z0
             };
 
         BitFormatter<byte> Formatter {get;}
-            = BitFormatter.create<byte>();
+            = Formatters.BitFormatter<byte>();
 
         public string Namespace {get;}
             = "Z0";

@@ -459,6 +459,58 @@ namespace Z0
         public static string bracket(object content)
             => enclose($"{content}", Chars.LBracket, Chars.RBracket);
 
+        /// <summary>
+        /// Determines whether the source text is of the form {left:char}{content:string}{right:char},
+        /// ignoring leading/trailing whitespace
+        /// </summary>
+        /// <param name="src">The text to analyze</param>
+        /// <param name="left">The left boundary</param>
+        /// <param name="right">The right boundary</param>
+        public static bool fenced(string src, char left, char right)
+        {
+            if(empty(src))
+                return false;
+            
+            var x = src.Trim();
+            var length = x.Length;
+            return 
+                x[0] == left 
+             && x[length - 1] == right;
+        }
+
+        /// <summary>
+        /// If fenced with specified left and right characters, extracts the enclosed content; 
+        /// otherwise, returns the content unmolested
+        /// </summary>
+        /// <param name="src">The putative fenced content</param>
+        public static string unfence(string src, char left, char right)
+        {
+            if(empty(src))
+                return string.Empty;
+
+            if(!fenced(src,left,right))
+                return src;
+                
+            var data = src.Trim();
+            var length = data.Length;
+            return data.Substring(1, length - 2);
+        }
+
+        /// <summary>
+        /// Determines whether the source text is of the form "[{content}]"
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Inline)]
+        public static bool bracketed(string src)    
+            => fenced(src,Chars.LBracket, Chars.RBracket);
+
+        /// <summary>
+        /// If bracketed, extracts the enclosed content; otherwise, returns the empty string
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Inline)]
+        public static string unbracket(string src)
+            => unfence(src,Chars.LBracket,Chars.RBracket);
 
         /// <summary>
         /// Trims leading characters when matched

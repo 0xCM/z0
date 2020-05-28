@@ -9,16 +9,14 @@ namespace Z0
 
     using static Seed;
 
-    /// <summary>
-    /// Attaches an anonymous binary literal value to a target
-    /// </summary>
-    public class BinaryLiteralAttribute : Attribute
+    public interface INumericLiteral : ILiteral
     {
-        public BinaryLiteralAttribute(string src)
-        {
-            Text = src;
-        }
+        bool ILiteral.MultiLiteral => false;
+    }
 
-        public string Text {get;}            
+    public interface INumericLiteral<F> : INumericLiteral, ILiteral<F>
+        where F : struct, INumericLiteral<F>
+    {
+        F Rename(string name);
     }
 }

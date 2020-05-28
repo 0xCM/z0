@@ -20,6 +20,19 @@ namespace Z0
 
         public string Description {get;}        
 
+        public static LiteralValue TargetValue(FieldInfo target)
+        {
+            var data = target.Tag<LiteralAttribute>().MapValueOrDefault(x => x.Description, string.Empty);
+            if(text.empty(data))
+                return LiteralValue.Empty;            
+            
+            return LiteralValue.Define(target.Name, 
+                target.GetRawConstantValue(), data, 
+                Type.GetTypeCode(target.FieldType), 
+                target.FieldType.IsEnum, 
+                false);
+        }
+        
         public static string Describe(FieldInfo target)
             => target.Tag<LiteralAttribute>().MapValueOrDefault(x => x.Description, string.Empty);
     }

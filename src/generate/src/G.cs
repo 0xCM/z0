@@ -19,7 +19,15 @@ namespace Z0
 
         public void Generate()
         {
-            GenerateEnums();
+            var literals = BitMask.NumericLiterals;
+            for(var i=0; i < literals.Length; i++)
+            {
+                ref readonly var literal = ref skip(literals,i);
+                var x = $"{literal.Name} = {literal.Text}";
+                term.print(x);
+            }
+
+            //GenerateEnums();
         }
 
         EnumLiteralRecord[] ParseEnumLiterals(TextDoc src)

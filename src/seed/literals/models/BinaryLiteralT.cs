@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    using API = BinaryLiterals;
+    using API = Literati;
 
     public readonly struct BinaryLiteral<T> : ITextual, INullaryKnown, INullary<BinaryLiteral<T>>
         where T : unmanaged

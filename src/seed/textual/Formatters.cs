@@ -14,6 +14,11 @@ namespace Z0
     [ApiHost]
     public partial class Formatters : IApiHost<Formatters>
     {
+        [MethodImpl(Inline)]
+        public static BitFormatter<T> BitFormatter<T>()
+            where T : struct    
+                => Z0.BitFormatter.create<T>();
+
         /// <summary>
         /// Creates a formatter from a rendering function render:T -> string
         /// </summary>

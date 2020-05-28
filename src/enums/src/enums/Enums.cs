@@ -189,7 +189,7 @@ namespace Z0
                 => from f in typeof(E).LiteralFields().ToArray()
                    where f.Tagged<BinaryLiteralAttribute>()
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
-                   select Z0.BinaryLiterals.define(f.Name, numeric<E,T>((E)f.GetValue(null)), a.Text);
+                   select Literati.define(base2, f.Name, numeric<E,T>((E)f.GetValue(null)), a.Text);
 
         /// <summary>
         /// Gets the declaration-order indices for each named literal

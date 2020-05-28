@@ -84,7 +84,7 @@ namespace Z0
         }
 
         public string Format()        
-             => BitFormatter.create<ulong>().Format(State);
+             => Formatters.BitFormatter<ulong>().Format(State);
         
         public override string ToString()
             => Format();
