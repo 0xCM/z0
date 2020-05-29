@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         public static bool IsSpace(char c)
-            => (ushort)ASCI.Space == (ushort)c;
+            => (ushort)AsciCharCode.Space == (ushort)c;
 
         /// <summary>
         /// Tests whether a character is a space
@@ -25,15 +25,15 @@ namespace Z0
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         public static bool IsTab(char c)
-            => (ushort)ASCI.Tab == (ushort)c;
+            => (ushort)AsciCharCode.Tab == (ushort)c;
 
         [MethodImpl(Inline), Op]
         public static bool IsNewLine(char c)
-            => (ushort)ASCI.NewLine == (ushort)c;
+            => (ushort)AsciCharCode.NewLine == (ushort)c;
 
         [MethodImpl(Inline), Op]
         public static bool IsLineFeed(char c)
-            => (ushort)ASCI.LineFeed == (ushort)c;
+            => (ushort)AsciCharCode.LineFeed == (ushort)c;
 
         [MethodImpl(Inline), Op]
         public static bool IsWhiteSpace(char c)

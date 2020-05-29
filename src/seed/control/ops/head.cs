@@ -19,5 +19,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T head<T>(Span<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
+
     }
 }

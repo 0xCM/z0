@@ -79,6 +79,7 @@ namespace Z0
         public static byte vmovelo(Vector128<byte> src, N8 w)   
             => (byte)ConvertToUInt32(v32u(src));
 
+
         /// <summary>
         /// src[0..15] -> r/m16[0..31]
         /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm

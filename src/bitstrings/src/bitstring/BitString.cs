@@ -13,7 +13,8 @@ namespace Z0
     /// <summary>
     /// Represents a sequence of bits
     /// </summary>
-    public partial struct BitString : IWord<BitString, BinaryAlphabet>, IEquatable<BitString>
+    ///IWord<BitString, BinaryAlphabet>
+    public partial struct BitString : IEquatable<BitString>
     {
         byte[] data;
 

@@ -9,8 +9,6 @@ namespace Z0
 
     using static Seed;
 
-    using API = Enums;
-
     /// <summary>
     /// Defines an enumeration literal as the triple (index,identifier,value)
     /// </summary>

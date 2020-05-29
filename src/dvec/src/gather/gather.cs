@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static System.Runtime.Intrinsics.X86.Sse2;
     
     using static Seed; 
     using static Memories;
@@ -16,6 +17,20 @@ namespace Z0
 
     partial class dvec
     {    
+        [MethodImpl(Inline), Op]
+        public static ushort vextract(Vector128<ushort> src, byte index)   
+        {
+            var x = ShiftRightLogical(src, index);
+            return (ushort)ConvertToUInt32(x.AsUInt32());
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ushort vextract(Vector256<ushort> src, byte index)   
+        {
+            var x = ShiftRightLogical(src, index);
+            return (ushort)ConvertToUInt32(x.AsUInt32());
+        }
+
         /// <summary>
         ///  __m128i _mm_i32gather_epi32 (int const* base_addr, __m128i vindex, const int scale) VPGATHERDD xmm, vm32x, xmm
         /// Loads a 128x32i vector from index-identified source cells

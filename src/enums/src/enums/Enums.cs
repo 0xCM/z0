@@ -11,7 +11,7 @@ namespace Z0
 
     using static Seed;
     using NK = NumericKind;
-    using BK = EnumRefinementKind;
+    using BK = EnumPrimalKind;
 
     [ApiHost]
     public partial class Enums
@@ -26,9 +26,9 @@ namespace Z0
         /// </summary>
         /// <param name="base">An integral type refined by an enum</param>
         [MethodImpl(Inline)]
-        public static TypeWidth width(EnumRefinementKind @base)
+        public static TypeWidth width(EnumPrimalKind @base)
         {
-            var exp = (byte)(@base & EnumRefinementKind.WidthMask);
+            var exp = (byte)(@base & EnumPrimalKind.WidthMask);
             return (TypeWidth)Pow2.pow(exp);
         }
 
@@ -37,15 +37,15 @@ namespace Z0
         /// </summary>
         /// <param name="base">An integral type refined by an enum</param>
         [MethodImpl(Inline)]
-        public static bool signed(EnumRefinementKind @base)
-            => (@base & EnumRefinementKind.SignMask) != 0;
+        public static bool signed(EnumPrimalKind @base)
+            => (@base & EnumPrimalKind.SignMask) != 0;
 
         /// <summary>
         /// Determines the integral type refined by a value-identified enum type
         /// </summary>
         /// <param name="value">The enum value</typeparam>
         [MethodImpl(Inline)]
-        public static EnumRefinementKind @base(Enum value)
+        public static EnumPrimalKind @base(Enum value)
             => @base(value.GetType().GetEnumUnderlyingType().NumericKind());
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumRefinementKind @base(Type et)
+        public static EnumPrimalKind @base(Type et)
             => @base(et.NumericKind());
         
         /// <summary>
@@ -61,11 +61,11 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumRefinementKind @base<E>()
+        public static EnumPrimalKind @base<E>()
             where E : unmanaged, Enum
              => @base(typeof(E).GetEnumUnderlyingType().NumericKind()); 
 
-        public static EnumRefinementKind @base(NumericKind src)
+        public static EnumPrimalKind @base(NumericKind src)
              => src switch{
                 NK.U8 => BK.U8,
                 NK.I8 => BK.I8,
@@ -75,7 +75,7 @@ namespace Z0
                 NK.I32 => BK.I32,
                 NK.I64 => BK.I64,
                 NK.U64 => BK.U64,                
-                _ => EnumRefinementKind.None,
+                _ => EnumPrimalKind.None,
             };
 
         public static unsafe ulong untype<E>(E src)

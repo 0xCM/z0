@@ -12,7 +12,7 @@ namespace Z0
     /// Restricts the numeric kind classifier to reflect the numeric kinds
     /// that an Enum type may refine
     /// </summary>
-    public enum EnumRefinementKind : byte
+    public enum EnumPrimalKind : byte
     {
         None = 0,
 

@@ -8,6 +8,8 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     
     using static Seed;
+    using static Memories;
+    using static AsciCharCode;
 
 
     /// <summary>    
@@ -49,6 +51,15 @@ namespace Z0.Asm.Data
                 return (ulong)(&x);
             }
         }
+
+        public static AsciCode4 RexㆍW_C4  
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.define(n4, RexWBytes);
+        }
+
+        static ReadOnlySpan<byte> RexWBytes 
+            => new byte[]{(byte)R, (byte)E, (byte)Dot, (byte)X};
 
         public const string NP = "NP";
         
@@ -105,6 +116,5 @@ namespace Z0.Asm.Data
         public const string NE = "N.E.";
 
         public const string ᕀi = "+i";
-
     }
 }

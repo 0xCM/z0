@@ -1,4 +1,4 @@
 # Enum Data Sources
 ---------------------------------------------------
-| DataSource    | DataType | TypeName  |
-| EFlagCode.csv | uint8    | EFlagCode |
+| File          | EnumName  | BaseType | Description
+| EFlagCode.csv | EFlagCode | U8       | EFlag code definitions

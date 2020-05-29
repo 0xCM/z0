@@ -185,22 +185,22 @@ namespace Z0
             }
         }
 
-        public void bs_wordgen()
-        {            
-            var wordLen = 8;
-            var wordCount = Pow2.pow(wordLen);
-            var words = BinaryLanguage.Get().Words(wordLen).ToArray();
-            Claim.almost(wordCount, words.Length);
+        // public void bs_wordgen()
+        // {            
+        //     var wordLen = 8;
+        //     var wordCount = Pow2.pow(wordLen);
+        //     var words = BinaryLanguage.Get().Words(wordLen).ToArray();
+        //     Claim.almost(wordCount, words.Length);
             
-            iter(words, w => Claim.eq(wordLen, w.Format().Length));
+        //     iter(words, w => Claim.eq(wordLen, w.Format().Length));
             
-            for(var i=0u; i<wordCount; i++)
-            {
-                var w = words[i];
-                var value = w.TakeScalar<byte>();
-                Numeric.eq(i, value);
-            }
-        }    
+        //     for(var i=0u; i<wordCount; i++)
+        //     {
+        //         var w = words[i];
+        //         var value = w.TakeScalar<byte>();
+        //         Numeric.eq(i, value);
+        //     }
+        // }    
 
         public void bs_partition()
         {

@@ -32,7 +32,7 @@ namespace Z0
         public NumericKind NumericKind {get;}
             
         [MethodImpl(Inline)]
-        internal EnumLiteral(int index, string identifier, NumericKind kind, ulong value)
+        public EnumLiteral(int index, string identifier, NumericKind kind, ulong value)
         {
             this.Identifier = identifier;
             this.NumericKind = kind;

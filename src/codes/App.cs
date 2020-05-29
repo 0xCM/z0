@@ -49,7 +49,6 @@ namespace Z0
             var res = ResExtractor.Service();
             Control.iter(res.ResourceNames, term.print);
             AppResources.OpCodeSpecs.OnSome(OpCodes.encode);
-
         }
 
         public override void RunShell(params string[] args)

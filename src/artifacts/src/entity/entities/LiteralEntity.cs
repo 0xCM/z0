@@ -15,16 +15,20 @@ namespace Z0
         
         public string Identifier {get;}
 
+        public int Index {get;}
+
         public LiteralFacets Facets {get;}
 
         public string Description {get;}
 
         public ulong LiteralValue {get;}
 
-        internal LiteralEntity(string Declarer, string Identifier, string Description, ulong LiteralValue)
+        [MethodImpl(Inline)]
+        internal LiteralEntity(string Declarer, string Identifier, int Index,  string Description, ulong LiteralValue)
         {
             this.Declarer = Declarer;
             this.Identifier =  Identifier;
+            this.Index = Index;
             this.Facets = default;
             this.Description = Description;
             this.LiteralValue = LiteralValue;

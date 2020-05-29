@@ -33,6 +33,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static EnumEntity Enum(string Namespace, string Declarer, string Identifier, EnumFacets Facets, string Description, LiteralEntity[] Members)
             => new EnumEntity(Namespace, Declarer, Identifier,Facets, Description, Members);
+        
+        [MethodImpl(Inline), Op]
+        public static LiteralEntity Literal(string Declarer, string Identifier, int Index, string Description, ulong LiteralValue)
+            => new LiteralEntity(Declarer, Identifier, Index, Description, LiteralValue);
     }
 
     public static partial class XTend

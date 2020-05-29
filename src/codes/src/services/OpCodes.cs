@@ -22,6 +22,9 @@ namespace Z0.Asm.Data
         public static ulong Lookup2(int index)
             => OpCodeTokens.First;
 
+        [Op, MethodImpl(Inline)]
+        public static AsciCode4 Lookup4()
+            => OpCodeTokens.RexㆍW_C4;
 
         [Op, MethodImpl(Inline)]
         public static OpCodeOperand operand(ulong src, duet index)
@@ -42,9 +45,10 @@ namespace Z0.Asm.Data
             var parsed = parse(specs);
             var encoded = encode(parsed);
 
-            term.print(Lookup2(0).FormatAsmHex());
+            var lu4 = Lookup4();
+            var fmt = AsciCodes.format(lu4);
+            term.print(fmt);
 
-            //POC.RevealLocations();
         }
 
         static AsmRecordParser Parser => AsmRecordParser.Service;

@@ -27,19 +27,19 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
-            where T : unmanaged
+            where T : struct
                 => MemoryMarshal.Cast<byte,T>(src);
 
         [MethodImpl(Inline)]        
         public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
-            where S : unmanaged
-            where T : unmanaged
+            where S : struct
+            where T : struct
                 => MemoryMarshal.Cast<S,T>(src);
 
         [MethodImpl(Inline)]        
         public static Span<T> cast<S,T>(Span<S> src)                
-            where S : unmanaged
-            where T : unmanaged
+            where S : struct
+            where T : struct
                 => MemoryMarshal.Cast<S,T>(src);
     }
 }

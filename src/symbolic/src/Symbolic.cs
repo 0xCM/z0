@@ -14,9 +14,12 @@ namespace Z0
         public static UpperCased UpperCase => default;
 
         public static LowerCased LowerCase => default;
+    }
 
+    [ApiHost]
+    public partial class SymTest : IApiHost<SymTest>
+    {
 
-        //public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 
     [ApiHost("data")]

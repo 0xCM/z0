@@ -52,7 +52,7 @@ namespace Z0.Asm.Data
             ref readonly var next = ref skip(current,1);
 
             var specs = list<EncodedOpCode>();
-            Span<ASCI> buffer = stackalloc ASCI[255];
+            Span<AsciCharCode> buffer = stackalloc AsciCharCode[255];
             var j = 0;
             
         }
@@ -88,15 +88,15 @@ namespace Z0.Asm.Data
 
         }
 
-        const ASCI CodeTerm = ASCI.Bang;
+        const AsciCharCode CodeTerm = AsciCharCode.Bang;
 
-        const ASCI PartSep = ASCI.Pipe;
+        const AsciCharCode PartSep = AsciCharCode.Pipe;
 
-        const ASCI Space = ASCI.Space;
+        const AsciCharCode Space = AsciCharCode.Space;
 
 
         [Op, MethodImpl(Inline)]
-        public static int NextOpCode(ReadOnlySpan<ASCI> src, Span<ASCI> dst, ref int i)
+        public static int NextOpCode(ReadOnlySpan<AsciCharCode> src, Span<AsciCharCode> dst, ref int i)
         {
             ref readonly var lead = ref skip(src, i);
             ref readonly var current = ref lead;
@@ -118,14 +118,14 @@ namespace Z0.Asm.Data
 
     public readonly struct OpCodeLiterals
     {            
-        public const ASCI CodeTerm = ASCI.Bang;
+        public const AsciCharCode CodeTerm = AsciCharCode.Bang;
 
-        public const ASCI PartSep = ASCI.Pipe;
+        public const AsciCharCode PartSep = AsciCharCode.Pipe;
 
-        public const ASCI Space = ASCI.Space;
+        public const AsciCharCode Space = AsciCharCode.Space;
         
-        public static ReadOnlySpan<ASCI> Resource
-            => Spans.cast<ASCI>(CharData.AsBytes());
+        public static ReadOnlySpan<AsciCharCode> Resource
+            => Spans.cast<AsciCharCode>(CharData.AsBytes());
 
         public static S CharData 
             => Cmp;
