@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(Base16 @base, LowerCased @case, HexSymbolLo src)
-            => numeral(src) 
+            => SymTest.IsNumeral(src)
             ? (HexDigit)(src - HexSymbolLo.NumeralOffset) 
             : (HexDigit)(src - HexSymbolLo.LetterOffset);
 
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(Base16 @base, UpperCased @case, HexSymbolUp src)
-            => numeral(src) 
+            => SymTest.IsNumeral(src)
             ? (HexDigit)(src - HexSymbolUp.NumeralOffset) 
             : (HexDigit)(src - HexSymbolUp.LetterOffset);
 
@@ -62,10 +62,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(Base16 @base, LowerCased @case, char c)
-            => numeral(c) 
-            ? (HexDigit)((HexLo)c - HexSymbolLo.NumeralOffset) 
-            : (HexDigit)((HexLo)c - HexSymbolLo.LetterOffset);
+        public static HexDigit digit(Base16 @base, LowerCased @case, char src)
+            => SymTest.IsNumeral(src)
+            ? (HexDigit)((HexLo)src - HexSymbolLo.NumeralOffset) 
+            : (HexDigit)((HexLo)src - HexSymbolLo.LetterOffset);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymbolLo src)
-            => numeral(src) 
+            => SymTest.IsNumeral(src)
             ? (HexDigit)(src - HexSymbolLo.NumeralOffset) 
             : (HexDigit)(src - HexSymbolLo.LetterOffset);
 
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymbolUp src)
-            => numeral(src) 
+            => SymTest.IsNumeral(src)
             ? (HexDigit)(src - HexSymbolUp.NumeralOffset) 
             : (HexDigit)(src - HexSymbolUp.LetterOffset);
     }

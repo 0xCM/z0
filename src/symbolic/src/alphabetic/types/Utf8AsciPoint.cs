@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Symbolic;
+    using static Seed;
     
     /// <summary>
     /// Represents the least 8 bits of a unicode code point which, by definition of the encoding,
@@ -19,9 +19,9 @@ namespace Z0
     {
         public readonly byte Code;
 
-        public static readonly Utf8AsciPoint MinValue = From(0);
+        public static Utf8AsciPoint MinValue => From(0);
 
-        public static readonly Utf8AsciPoint MaxValue = From(127);
+        public static Utf8AsciPoint MaxValue => From(127);
 
         public static IEnumerable<Utf8AsciPoint> All
         {

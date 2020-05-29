@@ -38,6 +38,6 @@
 |            |        | In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.                                               |
 |            |        | In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction                          |
 | ᕀro        | +ro    | For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction         |
-| NE         | N.E    | Not encodable                                                                                                                              |
+| NE         | N.E.    | Not encodable                                                                                                                              |
 | ᕀi         | +i     | A number used in floating-point instructions when one of the operands is ST(i) from the FPU register stack. The number i                   |
 |            |        | (which can range from 0 to 7) is added to the hexadecimal byte given at the left of the plus sign to form a single opcode byte.            |

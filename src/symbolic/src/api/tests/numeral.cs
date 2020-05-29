@@ -6,19 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+ 
     using static Seed;
-    using static Control;
 
-    partial class Symbolic
+    public partial class SymTest
     {
+        /// <summary>
+        /// Tests whether a character symbol is one of '0'..'9'
+        /// </summary>
+        /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static char hexchar(UpperCased @case, byte index)
-            => (char)symbol(@case, (HexDigit)index);
-
-
-        [MethodImpl(Inline), Op]
-        public static char hexchar(LowerCased @case, byte index)
-            => (char)symbol(@case, (HexDigit)index);
+        public static bool IsNumeral(char c)
+            => (DecimalSymbol)c >= DecimalSymbol.First
+            && (DecimalSymbol)c <= DecimalSymbol.Last; 
     }
 }

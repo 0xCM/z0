@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Symbolic;
+    using static Seed;
 
     /// <summary>
     /// Encodes a finite, ordered sequence of symbols over some alphabet A

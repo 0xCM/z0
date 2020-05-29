@@ -7,6 +7,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
+    using static Seed;
+
     /// <summary>
     /// Represents a collection of symbols from an alphabet
     /// </summary>

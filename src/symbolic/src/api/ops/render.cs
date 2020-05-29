@@ -12,6 +12,42 @@ namespace Z0
 
     partial class Symbolic
     {
+        /// <summary>
+        /// Formats a span of binary digits as a contiguous block
+        /// </summary>
+        /// <param name="src">The source digits</param>
+        [MethodImpl(Inline), Op]
+        public static void render(ReadOnlySpan<BinaryDigit> src, Span<char> dst)
+        {
+            for(var i = 0; i<src.Length; i++)
+                seek(dst,i) =  (char)symbol(skip(src,i));
+        }
+
+        /// <summary>
+        /// Formats a span of hex digits as a contiguous block
+        /// </summary>
+        /// <param name="src">The source digits</param>
+        [MethodImpl(Inline), Op]
+        public static void render(ReadOnlySpan<HexDigit> src, Span<char> dst)
+        {
+            for(var i = 0; i < src.Length; i++)
+                seek(dst,i) = (char)symbol(UpperCase, skip(src,i));
+        }
+
+        public static string render(ReadOnlySpan<HexDigit> src)
+        {
+            Span<char> dst = stackalloc char[src.Length];
+            render(src,dst);
+            return new string(dst);
+        }
+
+        public static string render(ReadOnlySpan<BinaryDigit> src)
+        {
+            Span<char> dst = stackalloc char[src.Length];
+            render(src,dst);
+            return new string(dst);
+        }
+
         [MethodImpl(Inline), Op]
         public static void render(Base2 @base, ReadOnlySpan<byte> src, Span<char> dst)
         {

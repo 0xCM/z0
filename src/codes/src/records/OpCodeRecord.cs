@@ -42,7 +42,6 @@ namespace Z0.Asm.Data
         
 		public string CpuId;
 
-
         [MethodImpl(Inline)]
         public OpCodeRecord(int Seq, OpCodeId Id, string Mnemonic, string Instruction, string Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, string CpuId)
         {

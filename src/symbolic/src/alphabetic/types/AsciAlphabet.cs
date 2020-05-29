@@ -11,6 +11,8 @@ namespace Z0
     
     using A = AsciAlphabet;
 
+    using static Seed;
+
     /// <summary>
     /// Encloses a finite and nontmpy sequence of symbols that comprise the Asci alphabet
     /// </summary>

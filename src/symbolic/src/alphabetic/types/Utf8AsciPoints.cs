@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Symbolic;
+    using static Seed;
 
     public static class Utf8AsciPoints
     {

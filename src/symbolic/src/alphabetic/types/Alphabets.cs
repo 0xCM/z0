@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using static Seed;
+
     public static class Alphabets
     {
         static readonly AsciAlphabet _Asci = AsciAlphabet.Get();

@@ -39,25 +39,7 @@ namespace Z0.Asm.Data
 
         ｰ = SN.HalfDash,
 
-
         ᛁ = SN.Pipe,
-
-
-    }
-
-    class OpCodeIdentifiers
-    {
-        public const string Cmpᐸ38ﾉrㆍw8ᐳ = "Cmpᐸrm8ㆍr8ᐳ";    
-
-        public const string Cmpᐸ39ﾉrㆍw16ᐳ = "Cmpᐸrm16ㆍr16ᐳ";    
-
-        public const string Cmpᐸ39ﾉrㆍw32ᐳ = "Cmpᐸrm16ㆍr16ᐳ";    
-
-        public const string CmpᐸRexᕀ38ﾉrㆍw32ᐳ = "Cmpᐸrm8ㆍr8ᐳ";    
-
-        public const string CmpᐸRexㆍWᕀ39ﾉrㆍw32ᐳ = "Cmpᐸrm64ㆍr64ᐳ";    
-
-        public const string Cmpᐸ3Aﾉrㆍw8ᐳ = "Cmpᐸr8ㆍrm8ᐳ";
 
     }
 }

@@ -23,5 +23,4 @@ namespace Z0
 
         public LetterCaseKind Kind => LetterCaseKind.Upper;
     }
-
 }

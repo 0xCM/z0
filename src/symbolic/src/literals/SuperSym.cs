@@ -4,12 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public interface IWord<W,A> : ISymbolic
-        where A : struct, IAlphabet<A>
-        where W : struct, IWord<W,A> 
+    public enum SuperSym : ushort
     {
+        Sup0 = '⁰',
 
+        Sup1 = '¹',
+
+        Sup2 = '²',
+
+        Sup3 = '³',
+
+        Sup4 = '⁴',
+
+        Sup5 = '⁵',
+
+        Sup6 = '⁶',
+
+        H = 'ᴴ',
+
+        T = 'ᵀ',
     }
 }

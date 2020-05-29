@@ -9,6 +9,8 @@ namespace Z0
 
     using static Symbolic;
 
+    using static Seed;
+
     /// <summary>
     /// Represents an atomic value
     /// </summary>

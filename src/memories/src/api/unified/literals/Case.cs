@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
 
-    public interface IWord<W,A> : ISymbolic
-        where A : struct, IAlphabet<A>
-        where W : struct, IWord<W,A> 
+    partial class Memories
     {
+        public static UpperCased UpperCase => default;
 
+        public static LowerCased LowerCase => default;
     }
 }

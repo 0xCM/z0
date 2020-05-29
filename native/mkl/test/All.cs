@@ -139,7 +139,6 @@ namespace Z0.Mkl
                 term.magenta(line2);
             }
             return line1 + text.eol + line2;
-
         }
 
 
@@ -153,9 +152,7 @@ namespace Z0.Mkl
         public static int EntryPadWidth<M,N>(this TableSpan<M,N,double> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => ((long)src.Reduce(Math.Max)).ToDeciDigits().Length;
-
-
+                => ((ulong)src.Reduce(Math.Max)).ToDeciDigits().Length;
     }
 
     public static class CBLASX

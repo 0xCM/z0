@@ -20,7 +20,6 @@ namespace Z0
                 seek(dst,i) = symbol(skip(src,i));            
         }
 
-
         [MethodImpl(Inline), Op]
         public static void symbols(ReadOnlySpan<DecimalDigit> src, Span<DecimalSymbol> dst)
         {

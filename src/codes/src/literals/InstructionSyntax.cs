@@ -6,25 +6,20 @@ namespace Z0.Asm.Data
 {
     using System;
 
-    partial class SyntaxAtoms
+    public enum InstructionSyntax : byte
     {
+        imm8,
+        
+        imm16,
+        
+        imm32,
+        
+        imm64,
 
-        public enum InstructionAtom : byte
-        {
+        m16ᙾ16,
 
-            imm8,
-            
-            imm16,
-            
-            imm32,
-            
-            imm64,
+        m16є16,
 
-            m16ᙾ16,
-
-            m16є16,
-
-            m16э16
-        }
+        m16э16
     }
 }

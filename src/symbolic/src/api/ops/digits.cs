@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Seed;
     using static Control;
@@ -14,8 +13,24 @@ namespace Z0
     using HSL = HexSymbolLo;
     using HSU = HexSymbolUp;
 
-    partial class Symbolic    
+    partial class Symbolic        
     {        
+        [MethodImpl(Inline), Op]
+        public static Span<DecimalDigit> digits(Base10 @base, ReadOnlySpan<char> src, Span<DecimalDigit> dst)
+        {
+            var len = src.Length;
+            for(var i = 0; i< len; i++)
+                dst[i] = Symbolic.digit(base10, src[i]);            
+            return dst;            
+        }
+
+        public static Span<DecimalDigit> digits(Base10 @base, ulong src)
+        {
+            var data = src.ToString();
+            var dst = new DecimalDigit[data.Length];
+            return digits(@base10, data, dst);
+        }
+
         [MethodImpl(Inline), Op]
         public static void digits(Base2 @base, byte src, Span<BinaryDigit> dst)
         {

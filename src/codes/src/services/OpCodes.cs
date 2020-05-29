@@ -15,6 +15,15 @@ namespace Z0.Asm.Data
     public class OpCodes : IApiHost<OpCodes>
     {
         [Op, MethodImpl(Inline)]
+        public static string Lookup1(int index)
+            => OpCodeTokens.cb;
+
+        [Op, MethodImpl(Inline)]
+        public static ulong Lookup2(int index)
+            => OpCodeTokens.First;
+
+
+        [Op, MethodImpl(Inline)]
         public static OpCodeOperand operand(ulong src, duet index)
             => new OpCodeOperand((ushort)Bits.slice(src, index*16, 16));
 
@@ -32,6 +41,8 @@ namespace Z0.Asm.Data
         {
             var parsed = parse(specs);
             var encoded = encode(parsed);
+
+            term.print(Lookup2(0).FormatAsmHex());
 
             //POC.RevealLocations();
         }
@@ -73,6 +84,7 @@ namespace Z0.Asm.Data
             var inxs = InstructionParser.Service.Parse(new InstructionExpression(src.Instruction));
             var opcode = OpCodeParser.Service.Parse(new OpCodeExpression(src.Expression));
             var encoding = Control.array<byte>();
+            
             dst = new EncodedOpCode(opcode, inxs,encoding);
             return ref dst;
         }
