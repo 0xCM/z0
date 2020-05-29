@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-
     class ResourceNames
     {
         public static FileName OpCodeSpecs 

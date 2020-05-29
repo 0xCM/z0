@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     public interface IAppResource
     {
         string Name {get;}
@@ -15,7 +14,6 @@ namespace Z0
 
     public interface IAppResource<T> : IAppResource
     {
-
         T Data {get;}
     }
 }

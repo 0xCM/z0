@@ -52,9 +52,25 @@ namespace Z0
         public static string Render(MemorySize src)
             => src != 0 ? src.ToString() : string.Empty;
 
+
+        public static SegIndicator SI(OpKind src)
+            => src switch {
+                MemorySegDI => SegIndicator.di,
+                MemorySegEDI => SegIndicator.edi,
+                MemorySegESI => SegIndicator.esi,
+                MemorySegRDI => SegIndicator.rdi,
+                MemorySegRSI => SegIndicator.rsi,
+                MemorySegSI => SegIndicator.si,
+                MemoryESDI => SegIndicator.esdi,
+                MemoryESEDI => SegIndicator.esedi,
+                MemoryESRDI => SegIndicator.esrdi,
+            _ => SegIndicator.Empty
+            };
+
+
         public static string Render(OpKind src)
         {
-            var si = SegIndicator.From(src);
+            var si = SI(src);
             if(si.IsNonEmpty)
                 return si.Format();
 

@@ -8,7 +8,6 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Asm.Data.OpKind;
 
     public readonly struct SegIndicator : ITextual, INullaryKnown
     {   
@@ -34,19 +33,19 @@ namespace Z0.Asm.Data
 
         public static SegIndicator esrdi => Define(nameof(esrdi));
 
-        public static SegIndicator From(OpKind src)
-            => src switch {
-                MemorySegDI => di,
-                MemorySegEDI => edi,
-                MemorySegESI => esi,
-                MemorySegRDI => rdi,
-                MemorySegRSI => rsi,
-                MemorySegSI => si,
-                MemoryESDI => esdi,
-                MemoryESEDI => esedi,
-                MemoryESRDI => esrdi,
-            _ => Empty
-            };
+        // public static SegIndicator From(OpKindId src)
+        //     => src switch {
+        //         MemorySegDI => di,
+        //         MemorySegEDI => edi,
+        //         MemorySegESI => esi,
+        //         MemorySegRDI => rdi,
+        //         MemorySegRSI => rsi,
+        //         MemorySegSI => si,
+        //         MemoryESDI => esdi,
+        //         MemoryESEDI => esedi,
+        //         MemoryESRDI => esrdi,
+        //     _ => Empty
+        //     };
 
         [MethodImpl(Inline)]
         static SegIndicator Define(string id)
