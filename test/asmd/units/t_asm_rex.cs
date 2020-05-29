@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Seed;
     using static Memories;
 
-    public class t_asm_rex : t_asm<t_asm_rex>
+    public class t_asm_rex : t_asmd<t_asm_rex>
     {
         public void rex_field_reader()
         {

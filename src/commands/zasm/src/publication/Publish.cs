@@ -16,26 +16,26 @@ namespace Z0.Asm.Data
 
     partial class AsmEtl
     {        
-        OperandCountRecord[] Publish(OperandCounts model)
-        {
-            var dp = AsmRecordPublisher.Service;
+        // OperandCountRecord[] Publish(OperandCounts model)
+        // {
+        //     var dp = AsmRecordPublisher.Service;
             
-            var counts = InstructionOpCounts.OpCount;
-            var codes = Enums.literals<OpCodeId>();
-            insist(counts.Length, codes.Length);
+        //     var counts = InstructionOpCounts.OpCount;
+        //     var codes = Enums.literals<OpCodeId>();
+        //     insist(counts.Length, codes.Length);
     
-            var dst = Control.alloc<OperandCountRecord>(counts.Length);
-            for(var i=0; i < counts.Length; i++)
-            {
-                var code = codes[i];
-                insist(code.Index, i);
+        //     var dst = Control.alloc<OperandCountRecord>(counts.Length);
+        //     for(var i=0; i < counts.Length; i++)
+        //     {
+        //         var code = codes[i];
+        //         insist(code.Index, i);
 
-                dst[i] = new OperandCountRecord(i, counts[i], code.Value);
-            }
+        //         dst[i] = new OperandCountRecord(i, counts[i], code.NumericValue);
+        //     }
 
-            dp.Publish(model, OperandCountField.Sequence, dst, Chars.Pipe);
-            return dst;
-        }
+        //     dp.Publish(model, OperandCountField.Sequence, dst, Chars.Pipe);
+        //     return dst;
+        // }
 
         public void Publish()
         {
@@ -52,7 +52,7 @@ namespace Z0.Asm.Data
             dp.PublishList(LL.MemorySizes, nameof(LL.MemorySizes));
             dp.PublishList(LL.Registers, nameof(LL.Registers));
 
-            Publish(OperandCounts.Model);                        
+            //Publish(OperandCounts.Model);                        
             Publish(AsmEtl.Instructions);
         }
     }

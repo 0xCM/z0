@@ -20,7 +20,7 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline)]
         public static ParseResult<RexPrefix> ParseRex(byte src)
              => IsRex(src) 
-             ? parsed(src.ToString(), new RexPrefix(src)) 
+             ? parsed(src.ToString(), RexPrefix.Define(src)) 
              : unparsed<RexPrefix>(src.ToString(), $"src >> 4 != b0100");
 
         [MethodImpl(Inline)]

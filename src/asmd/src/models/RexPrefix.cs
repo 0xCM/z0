@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {        
     using System;
     using System.Runtime.CompilerServices;
 
     using static Seed;         
     using static Quartet;
-    using static OneBit;
 
     using RFI = RexFieldIndex;   
     using RFW = RexFieldWidth;
@@ -24,7 +23,13 @@ namespace Z0.Asm
     /// </summary>
     public struct RexPrefix : IScalarField<byte>
     {                    
+        public static RexPrefix Empty => Define(0,0,0,0,0);
+
         byte Data;
+
+        [MethodImpl(Inline)]
+        public static RexPrefix Define(byte src)
+            => new RexPrefix(src);
 
         public static ref RexPrefix BitCopy(in RexPrefix src, ref RexPrefix dst)        
         {
@@ -44,6 +49,18 @@ namespace Z0.Asm
             var bx = math.slor((byte)b, 0, (byte)x, 1);
             var rw = math.slor((byte)r, 2, (byte)w, 3);            
             return math.or(bx,rw,rex);
+        }
+
+        [MethodImpl(Inline)]
+        public static RexPrefix Define(bit b, bit x, bit r, bit w, RexCode code)
+        {
+            var data = (byte)gmath.or(
+                gmath.sll(b, RFI.B),
+                gmath.sll(x, RFI.X),
+                gmath.sll(r, RFI.R),
+                gmath.sll(w, RFI.W),
+                gmath.sll((uint)code, RFI.Code));
+            return Define(data);
         }
 
         /// <summary>
@@ -67,25 +84,7 @@ namespace Z0.Asm
         {
             Data = src;
             return ref src;
-        }
-
-        public static RexPrefix Empty => Define(0,0,0,0,0);
-
-        [MethodImpl(Inline)]
-        public static RexPrefix Define(bit b, bit x, bit r, bit w, RexCode kind)
-        {
-            var data = (byte)gmath.or(
-                gmath.sll(b, RFI.B),
-                gmath.sll(x, RFI.X),
-                gmath.sll(r, RFI.R),
-                gmath.sll(w, RFI.W),
-                gmath.sll((uint)kind, RFI.Code));
-            return Define(data);
-        }
-            
-        [MethodImpl(Inline)]
-        public static RexPrefix Define(byte src)
-            => new RexPrefix(src);
+        }            
     
         [MethodImpl(Inline)]
         RexPrefix(byte src)

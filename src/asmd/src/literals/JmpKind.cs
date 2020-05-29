@@ -2,13 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
-    using static Memories;
 
     /// <summary>
     /// Classifies Jmp instruction variations
@@ -115,5 +111,4 @@ namespace Z0.Asm
 
         Max = JZ       
     }
-
 }

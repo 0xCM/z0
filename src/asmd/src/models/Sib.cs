@@ -9,8 +9,6 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
-    /// <summary>
-    /// </summary>
     public struct Sib
     {
         byte data;

@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static OpKind;
 
     /// <summary>
     /// Describes an operand in the context of an assembly instruction

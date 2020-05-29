@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static OpKind;
 
     partial struct SemanticRender
     {
@@ -17,9 +16,6 @@ namespace Z0.Asm
         
         public string RenderAddress(Instruction src, int pad = 16)
             => text.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
-
-        public string RenderSegIndicator(OpKind src)
-            => SegIndicator.From(src).Format();
 
         static AsmQuery Q => AsmQuery.Direct;
 

@@ -13,7 +13,6 @@ namespace Z0.Asm
     {
         public string RenderAspects<T>(object src)
             where T : class
-                => Aspects.From<T>(src).Format();        
-        
+                => Aspects.From<T>(src).Format();                
     }
 }

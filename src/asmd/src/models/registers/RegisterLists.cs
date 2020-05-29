@@ -10,7 +10,6 @@ namespace Z0.Asm.Data
     using System.Linq;
 
     using W = RegisterWidth;
-    using api = RegisterKinds;
 
     partial class RegisterKinds
     {

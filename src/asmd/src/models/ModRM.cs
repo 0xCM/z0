@@ -10,33 +10,6 @@ namespace Z0.Asm.Data
     using static Seed;
     using static BitSet;
         
-    public struct SimpleEncoding
-    {
-        public byte Code;
-
-        public ModRm ModRm;
-
-        public static SimpleEncoding Example 
-            => encode(0x38, ModRm.Define(RegisterCode.r6, RegisterCode.r1));        
-
-        public static SimpleEncoding encode(byte code, ModRm modRm)
-            => new SimpleEncoding(code,modRm);
-
-        public SimpleEncoding(byte code, ModRm modRm)
-        {
-            this.Code = code;
-            this.ModRm = modRm;
-        }
-        
-        public uint Encoded
-        {
-            get => ((uint)ModRm.Encoded << 8) |  (uint)Code;
-        }
-
-        public string Format()
-            => Encoded.FormatHex(false,true,true);            
-    }
-
     /// <summary>
     /// Defines a byte that follows an opcode that specifies either
     /// a) two register operands or,

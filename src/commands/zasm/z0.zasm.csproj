@@ -13,6 +13,8 @@
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(AsmD)" />
+    <ProjectReference Include="$(Codes)" />
+
 
     <ProjectReference Include="$(Src)commands/zice/z0.zice.csproj" />
     <ProjectReference Include="$(Src)commands/zdata/z0.zdata.csproj" />

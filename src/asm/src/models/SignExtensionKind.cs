@@ -8,9 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static OpKind;
-
-    using W = NumericWidth;
 
     /// <summary>
     /// Describes a zero exension operation
@@ -33,7 +30,6 @@ namespace Z0.Asm
             this.SourceWidth = src;
             this.TargetWidth = dst;
         }
-
     }
 
     /// <summary>

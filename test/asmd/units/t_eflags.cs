@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
 
-    public class t_eflags : UnitTest<t_eflags>
+    public class t_eflags : t_asmd<t_eflags>
     {
         public void test_flag_bits()
         {

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Data
 {
     using System;
 
@@ -13,8 +13,7 @@ namespace Z0.Asm
     /// </summary>
     [Flags]
     public enum VolatilityKind : uint
-    {
-        
+    {        
         /// <summary>
         /// Volatility is unknown
         /// </summary>

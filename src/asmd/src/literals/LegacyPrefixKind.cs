@@ -6,8 +6,6 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    using static Seed;
-
     /// <summary>
     /// Defines legacy prefix partitions related, but not identical to, the legacy
     /// prefix groups specified in Intel Vol2A 2.1.1

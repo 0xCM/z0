@@ -60,7 +60,7 @@ namespace Z0.Asm
 
         public bool IsEmpty => text.empty(Identifier);
 
-        public bool IsNonEmpty => !IsEmpty;
+        public bool IsNonEmpty => !IsEmpty;        
         
         public string Format()
             => IsEmpty ? string.Empty : text.concat("seg:", Chars.LBracket, Identifier, Chars.RBracket);

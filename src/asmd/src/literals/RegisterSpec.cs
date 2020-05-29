@@ -6,11 +6,11 @@ namespace Z0.Asm.Data
 {        
     using System;
 
+    using static RegisterCode;
     using static RegisterClass;
     using static RegisterWidth;
-    using static RegisterCode;
 
-    public enum RegisterSpec : ushort
+    public enum RegisterSpec : uint
     {
         AL = r0 | GP << 4 | W8 << 8,
 

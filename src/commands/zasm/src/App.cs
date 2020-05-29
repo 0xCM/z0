@@ -30,18 +30,6 @@ namespace Z0.Asm.Data
         }
 
 
-        void ParseRex()
-        {
-            var input = (byte)RexPrefixCode.Rex48;
-            var r1 = Prefixes.ParseRex(input);
-            insist(r1.Succeeded);
-            var output = r1.Value.Encoded;
-            insist(input,output);
-            term.print(r1.Value.Format());
-
-            var mrm = Prefixes.ParseModRM(0b110110);
-            term.print(mrm.Format());
-        }
 
         public override void RunShell(params string[] args)
         {            

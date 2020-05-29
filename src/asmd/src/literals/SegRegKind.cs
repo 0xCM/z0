@@ -3,24 +3,24 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
-{        
+{
     using System;
 
-    public enum RegisterClass : byte
+    public enum SegRegKind : byte
     {
-        GP = 1,
+        None = 0,
 
-        /// <summary>
-        /// General-purpose numbered?
-        /// </summary>
-        GPN = 2,
-        
-        SEG = 3,
+        CS = 1,
 
-        XMM = 10,
+        DS = 2,
 
-        YMM = 11,
+        SS = 3,
 
-        ZMM = 12
+        ES = 4,
+
+        FS = 5,
+
+        GS = 6
     }
+
 }
