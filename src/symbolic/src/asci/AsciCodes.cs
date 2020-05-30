@@ -16,7 +16,7 @@ namespace Z0
     
     [ApiHost]
     public partial class AsciCodes : IApiHost<AsciCodes>
-    {        
+    {                
         [MethodImpl(Inline)]
         static Vector256<short> vinflate(Vector128<byte> src)
             => ConvertToVector256Int16(src);
@@ -34,5 +34,5 @@ namespace Z0
             var x = ShiftRightLogical(src, index);
             return (ushort)ConvertToUInt32(x.AsUInt32());
         }
-    }
+    } 
 }

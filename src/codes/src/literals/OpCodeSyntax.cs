@@ -11,7 +11,6 @@ namespace Z0.Asm.Data
     using static Memories;
     using static AsciCharCode;
 
-
     /// <summary>    
     /// Defines symbols used to specify opcode syntax
     /// </summary>

@@ -52,7 +52,6 @@ namespace Z0.Asm.Data
 
         CpuId = I.CpuId | (RW.CpuId << RW.Offset),                 
 
-        Id = I.Id | (RW.Id << RW.Offset), 
-        
+        Id = I.Id | (RW.Id << RW.Offset),         
     }
 }

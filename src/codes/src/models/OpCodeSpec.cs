@@ -17,9 +17,12 @@ namespace Z0.Asm.Data
         readonly OpCodeExpression Source;
 
         [MethodImpl(Inline)]
-        public OpCodeSpec(OpCodeExpression src)
+        public OpCodeSpec(OpCodeExpression expression, params OpCodePart[] components)
         {
-            Source = src;
+            Source = expression;
+            Components = components;
         }
+
+        public OpCodePart[] Components {get;}
     }
 }

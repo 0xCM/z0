@@ -5,80 +5,78 @@
 namespace Z0
 {
     using System;
+    using S = AsciDigit;
 
     /// <summary>
     /// Defines the symbols that represent the base-10 digits
     /// </summary>
-    public enum DecimalSymbol : ushort
+    public enum AsciDigitCode : byte
     {
-        /// <summary>
-        /// The code with no substance
-        /// </summary>
-        Null = 0,
-
-        /// <summary>
-        /// Specifies 0 base 10, asci code 48
-        /// </summary>
-        d0 = '0',
-
-        /// <summary>
-        /// Specifies 1 base 10, asci code 49
-        /// </summary>
-        d1 = '1',
+        None = 0,
         
         /// <summary>
-        /// Specifies 2 base 10, asci code 50
+        /// Specifies the asci code for the digit '0'
         /// </summary>
-        d2 = '2',
+        d0 = (byte)S.d0,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '1'
+        /// </summary>
+        d1 = (byte)S.d1,
         
         /// <summary>
-        /// Specifies 3 base 10, asci code 51
+        /// Specifies the asci code for the digit '2'
         /// </summary>
-        d3 = '3',
-
-        /// <summary>
-        /// Specifies 4 base 10, asci code 52
-        /// </summary>
-        d4 = '4',
-
-        /// <summary>
-        /// Specifies 5 base 10, asci code 53
-        /// </summary>
-        d5 = '5',
-
-        /// <summary>
-        /// Specifies 6 base 10, asci code 54
-        /// </summary>
-        d6 = '6',
-
-        /// <summary>
-        /// Specifies 7 base 10, asci code 55
-        /// </summary>
-        d7 = '7',
+        d2 = (byte)S.d2,
         
         /// <summary>
-        /// Specifies 8 base 10, asci code 56
+        /// Specifies the asci code for the digit '3'
         /// </summary>
-        d8 = '8',
-        
-        /// <summary>
-        /// Specifies 9 base 10, asci code 57
-        /// </summary>
-        d9 = '9',        
+        d3 = (byte)S.d3,
 
         /// <summary>
-        /// The first declared symbol
+        /// Specifies the asci code for the digit '4'
+        /// </summary>
+        d4 = (byte)S.d4,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '5'
+        /// </summary>
+        d5 = (byte)S.d5,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '6'
+        /// </summary>
+        d6 = (byte)S.d6,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '7'
+        /// </summary>
+        d7 = (byte)S.d7,
+        
+        /// <summary>
+        /// Specifies the asci code for the digit '8'
+        /// </summary>
+        d8 = (byte)S.d8,
+        
+        /// <summary>
+        /// Specifies the asci code for the digit '9'
+        /// </summary>
+        d9 = (byte)S.d9,        
+
+        /// <summary>
+        /// The first declared code
         /// </summary>
         First = d0,
 
         /// <summary>
-        /// The last declared symbol
+        /// The last declared code
         /// </summary>
         Last = d9,
 
         /// <summary>
-        /// The symbol declaration count
+        /// The code declaration count
         /// </summary>
-        Count = Last - First + 1        
+        Count = Last - First + 1
     }
 }

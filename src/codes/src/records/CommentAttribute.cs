@@ -18,5 +18,4 @@ namespace Z0.Asm.Data
 		public static string GetDocumentation(MemberInfo member) =>
 			((CommentAttribute)member.GetCustomAttribute(typeof(CommentAttribute)))?.Comment;
 	}    
-
 }

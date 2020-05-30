@@ -35,7 +35,5 @@ namespace Z0.Asm.Data
         Op4,    
 
         CpuId,
-
     }
-
 }

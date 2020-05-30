@@ -10,14 +10,17 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-    struct OpCodeParser
-    {        
-        public static OpCodeParser Service => default(OpCodeParser);
+    public readonly struct OpCodePart
+    {
+        public readonly string Text;
 
-        public OpCodeSpec Parse(OpCodeExpression src)            
+        [MethodImpl(Inline)]
+        public OpCodePart(string src)
         {
-            var components = src.Content.SplitClean(Chars.Space).Map(c => new OpCodePart(c));
-            return new OpCodeSpec(src,components);            
+            Text = src;
         }
+
+        public string Format()
+            => Text;
     }
 }

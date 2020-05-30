@@ -3,17 +3,30 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Seed;
     using static Memories;
+
     using F = OpCodeFieldId;
 
-    partial struct AsmRecordParser
+    public readonly struct OpCodeRecordParser
     {
-        public ref readonly OpCodeRecord Parse(string src, ref OpCodeRecord dst)
+        public static OpCodeRecordParser Service => default;
+
+        [Op, MethodImpl(Inline)]
+        public Span<OpCodeRecord> Parse(AppResourceDoc specs)
+        {
+            var src = specs.DataRows;
+            var dst = Spans.alloc<OpCodeRecord>(src.Length);
+            for(var i=0; i<src.Length; i++)
+               Parse(skip(src,i), ref seek(dst,i));            
+            return dst;
+        }
+
+        ref readonly OpCodeRecord Parse(string src, ref OpCodeRecord dst)
         {            
             ReadOnlySpan<string> fields = src.SplitClean(Chars.Pipe);
 
@@ -54,6 +67,6 @@ namespace Z0.Asm.Data
             }
 
             return ref dst;
-        }            
+        } 
     }
 }

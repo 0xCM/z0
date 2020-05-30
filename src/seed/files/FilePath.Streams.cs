@@ -31,5 +31,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static StreamWriter Writer(this FilePath dst)
             => new StreamWriter(dst.CreateParentIfMissing().Name, false);
+
+        [MethodImpl(Inline)]
+        public static BinaryWriter BinaryWriter(this FilePath dst)
+            => new BinaryWriter(File.Open(dst.CreateParentIfMissing().Name, FileMode.Create));
     }
 }

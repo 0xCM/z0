@@ -10,7 +10,6 @@ namespace Z0
 
     using static Seed;
 
-    [AttributeUsage(AttributeTargets.Method)]
     public class ResourceProviderAttribute : Attribute
     {
 

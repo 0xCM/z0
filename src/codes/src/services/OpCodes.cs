@@ -42,55 +42,33 @@ namespace Z0.Asm.Data
         [Op, MethodImpl(Inline)]
         public static void encode(AppResourceDoc specs)
         {
-            var parsed = parse(specs);
+            var parser = OpCodeRecordParser.Service;
+            var parsed = parser.Parse(specs);
             var encoded = encode(parsed);
 
-            var lu4 = Lookup4();
-            var fmt = AsciCodes.format(lu4);
-            term.print(fmt);
-
+            var lookup = AsciDataLookup.Service;
+            var chars = lookup.chars((int)AsciDigitCode.First, (int)AsciDigitCode.Last);
+            term.print(chars.ToString());            
         }
-
-        static AsmRecordParser Parser => AsmRecordParser.Service;
-
-        
-        [Op, MethodImpl(Inline)]
-        public static Span<OpCodeRecord> parse(AppResourceDoc specs)
-        {
-            var src = specs.DataRows;
-            var dst = Spans.alloc<OpCodeRecord>(src.Length);
-            for(var i=0; i<src.Length; i++)
-                parse(skip(src,i), ref seek(dst,i));
-            
-            return dst;
-        }
-
-        [Op, MethodImpl(Inline)]
-        public static ref readonly OpCodeRecord parse(string src, ref OpCodeRecord dst)
-        {
-            Parser.Parse(src, ref dst);
-            return ref dst;
-        }
+ 
 
         [Op, MethodImpl(Inline)]
         public static Span<EncodedOpCode> encode(ReadOnlySpan<OpCodeRecord> src)
         {
             var dst = Spans.alloc<EncodedOpCode>(src.Length);
             for(var i=0; i<src.Length; i++)
-                encode(skip(src,i), out seek(dst,i));   
+                seek(dst,i) = encode(skip(src,i));   
 
             return dst;
         }
 
         [Op, MethodImpl(Inline)]
-        public static ref readonly EncodedOpCode encode(in OpCodeRecord src, out EncodedOpCode dst)
+        public static EncodedOpCode encode(in OpCodeRecord src)
         {          
             var inxs = InstructionParser.Service.Parse(new InstructionExpression(src.Instruction));
             var opcode = OpCodeParser.Service.Parse(new OpCodeExpression(src.Expression));
-            var encoding = Control.array<byte>();
-            
-            dst = new EncodedOpCode(opcode, inxs,encoding);
-            return ref dst;
-        }
-    }
+            var encoding = Control.array<byte>();            
+            return new EncodedOpCode(opcode, inxs,encoding);            
+        }   
+   }
 }
