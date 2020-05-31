@@ -11,7 +11,6 @@ namespace Z0
     using static Seed;
     using static Memories;
     
-
     readonly struct BoxedNumberConverter : IConversionProvider<BoxedNumberConverter,BoxedNumber>, IBiconverter<BoxedNumber>
     {
         static BoxedNumberConverter TheOnly => default;

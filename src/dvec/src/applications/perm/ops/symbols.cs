@@ -17,8 +17,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> symbols(Perm2x4 src)
+            => symbols<Perm4Sym,byte>((byte)src,4,bitsize<byte>());
+
+        /// <summary>
+        /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
+        /// </summary>
+        /// <param name="src">The perm literal</param>
+        [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm4L src)
-            => symbols<Perm4Sym,byte>((byte)src,2);
+            => symbols<Perm4Sym,byte>((byte)src,2,bitsize<byte>());
 
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
@@ -34,14 +42,6 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm16L src)
-            => symbols<Perm16L,ulong>((ulong)src,4);
-
-        /// <summary>
-        /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
-        /// </summary>
-        /// <param name="src">The perm literal</param>
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> symbols(Perm2x4 src)
-            => symbols<Perm4Sym,byte>((byte)src,4);
+            => symbols<Perm16L,ulong>((ulong)src,4,bitsize<ulong>());
     }
 }

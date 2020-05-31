@@ -43,11 +43,9 @@ namespace Z0
         IMachineContext CreateMachineContext(IAsmContext root, PartId[] code)
             => MachineContext.Create(root, code);
 
-
-
         void RunCpu()
         {
-            var cpu = Cpu.Create();
+            var cpu = Cpu.alloc();
             cpu.Run();
         }
 

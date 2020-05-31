@@ -20,5 +20,15 @@ namespace Z0.Asm.Data
             term.print(mrm.Format());
         }
 
+
+        void ExtractOpCodes()
+        {
+
+            var res = ResExtractor.Service();
+            Control.iter(res.ResourceNames, term.print);
+
+        }
+
+
     }
 }

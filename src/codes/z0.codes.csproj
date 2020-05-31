@@ -16,8 +16,5 @@
     <ProjectReference Include="$(Capture)" />
   </ItemGroup>
 
-   <ItemGroup>
-    <EmbeddedResource Include="data/OpCodeSpecs.csv" LogicalName="OpCodeSpecs.csv" /> 
-  </ItemGroup>
 
 </Project>

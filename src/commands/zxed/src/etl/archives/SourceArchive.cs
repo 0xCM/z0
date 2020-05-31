@@ -71,7 +71,6 @@ namespace Z0.Xed
 
             public IEnumerable<FilePath> EnumFiles
                 => Files.Where(f => f.FileName.EndsWith("enum"));
-
         }
     }
 }

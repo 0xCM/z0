@@ -133,23 +133,27 @@ namespace Z0
         /// <param name="maxbits">The maximum number bits to use if less than the bit width of the vector</param>
         /// <typeparam name="E">The enumeration type that defines the symbols</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static ReadOnlySpan<char> symbols<E,T>(T src, int segwidth, int? maxbits = null)
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> symbols<E,T>(T src, int segwidth, int maxbits)
             where E : unmanaged, Enum
             where T : unmanaged
         {
             var index = Symbolic.index<E,T>();
-            var bitcount = maxbits ?? Control.bitsize<T>();
-            var count = mincells((ulong)segwidth, (ulong)bitcount);
+            var count = mincells((ulong)segwidth, (ulong)maxbits);
             Span<char> symbols = new char[count];
             for(int i=0, bitpos = 0; i<count; i++, bitpos += segwidth)
             {
                 var key = gbits.extract(src, (byte)bitpos, (byte)(bitpos + segwidth - 1));                
                 if(index.TryGetValue(key, out var value))
-                    symbols[i] = value;
+                    seek(symbols,i) = value;
                 else
-                    throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");
+                    ThrowKeyNotFound(key);
             }
             return symbols;
-        }        
+        }     
+
+        static void ThrowKeyNotFound<T>(T key)   
+            where T : unmanaged
+                => throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");
     }
 }

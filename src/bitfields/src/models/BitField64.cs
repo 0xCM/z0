@@ -9,14 +9,6 @@ namespace Z0
 
     using static Seed;
 
-    public class BitField64
-    {
-        [MethodImpl(Inline)]
-        public static BitField64<E> init<E>(E state)
-            where E : unmanaged, Enum
-                => BitField64<E>.Define(state);
-    }
-
     public struct BitField64<E> : ITextual
         where E : unmanaged, Enum
     {

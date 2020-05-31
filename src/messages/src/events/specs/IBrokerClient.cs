@@ -23,23 +23,4 @@ namespace Z0
 
         IEventBroker IBrokerClient.Broker => Broker;
     }
-
-    public readonly struct BrokerClient<E> : IBrokerClient<E>
-        where E : IEventBroker
-    {
-        [MethodImpl(Inline)]
-        public static IBrokerClient<E> Create(E broker, IAppMsgSink sink)
-            => new BrokerClient<E>(broker,sink);
-
-        [MethodImpl(Inline)]
-        public BrokerClient(E broker, IAppMsgSink sink)
-        {
-            this.Broker = broker;
-            Sink = sink;
-        }
-        
-        public E Broker {get;}
-
-        public IAppMsgSink Sink {get;}
-    }
 }

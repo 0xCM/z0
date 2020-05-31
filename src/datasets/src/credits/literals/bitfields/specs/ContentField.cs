@@ -21,31 +21,31 @@ namespace Z0
             /// <summary>
             /// Defines the (uniform) bitfield segment width
             /// </summary>
-            [SegmentWidth("[1111]")]
+            [SegWidth("[1111]")]
             SegWidth = Max4,
 
             /// <summary>
             /// Defines the L0 bitfield segment
             /// </summary>
-            [FieldSegment("[00000000 00001111]")]
+            [FieldSeg("[00000000 00001111]")]
             L0 = SegWidth << L.L0,
 
             /// <summary>
             /// Defines the L1 bitfield segment
             /// </summary>
-            [FieldSegment("[00000000 11110000]")]
+            [FieldSeg("[00000000 11110000]")]
             L1 = SegWidth << L.L1,
 
             /// <summary>
             /// Defines the L2 bitfield segment
             /// </summary>
-            [FieldSegment("[00001111 00000000]")]
+            [FieldSeg("[00001111 00000000]")]
             L2 = SegWidth << L.L2,
 
             /// <summary>
             /// Defines the Type bitfield segment
             /// </summary>
-            [FieldSegment("[11110000 00000000]")]
+            [FieldSeg("[11110000 00000000]")]
             Type = SegWidth << L.Type,
         }
 

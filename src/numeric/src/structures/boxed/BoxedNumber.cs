@@ -19,16 +19,8 @@ namespace Z0
     ]
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
     {
-        /// <summary>
-        /// Puts an enum value into a (numeric) box
-        /// </summary>
-        /// <param name="e">The enumeration value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static BoxedNumber From<E>(E e)
-            where E : unmanaged, Enum
-                => BoxedNumber.Define(System.Convert.ChangeType(e, Enums.typecode<E>().TypeCode()), Enums.typecode<E>().NumericKind());
-
+        public static BoxedNumber Empty => new BoxedNumber(DBNull.Value, NumericKind.None);
+        
         /// <summary>
         /// In the box
         /// </summary>
@@ -37,17 +29,49 @@ namespace Z0
         /// <summary>
         /// Box discriminator for runtime efficiency
         /// </summary>
-        public readonly NumericKind Kind;
+        public readonly NumericKind Kind;    
+
+        [MethodImpl(Inline)]
+        public static BoxedNumber Define(object src, NumericKind kind)
+            => new BoxedNumber(src ?? new object(), kind);
 
         [MethodImpl(Inline)]
         public static BoxedNumber Define<T>(T src)
             where T : unmanaged
                 => new BoxedNumber(src, NumericKinds.kind<T>());
 
+        /// <summary>
+        /// Puts an enum value into a (numeric) box
+        /// </summary>
+        /// <param name="e">The enumeration value</param>
+        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static BoxedNumber Define(object src, NumericKind kind)
-            => new BoxedNumber(src ?? new object(), kind);
+        public static BoxedNumber From<E>(E e)
+            where E : unmanaged, Enum
+                => Define(System.Convert.ChangeType(e, Enums.typecode<E>().TypeCode()), Enums.typecode<E>().NumericKind());
+        
+        public static BoxedNumber From(Enum e)
+        {
+            var tc = Type.GetTypeCode(e.GetType().GetEnumUnderlyingType());   
+            var nk = tc.NumericKind();
+            var box = System.Convert.ChangeType(e,tc);
+            return Define(box,nk);
+        }
 
+        public static BoxedNumber From(object src)
+        {
+            if(src is null)
+                return Empty;
+            else if(src is Enum e)                
+                return From(e);
+
+            var nk = src.GetType().NumericKind();
+            if(nk != 0)
+                return Define(src,nk);                   
+
+            return Empty;            
+        }
+        
         [MethodImpl(Inline)]
         BoxedNumber(object src, NumericKind kind)
         {
@@ -102,6 +126,18 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Boxed as IConvertible;
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Boxed is null || Boxed is DBNull;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }        
 
         [MethodImpl(Inline)]
         public static bool operator==(BoxedNumber a, BoxedNumber b)

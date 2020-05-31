@@ -16,6 +16,11 @@ namespace Z0
     public partial class BitFields : IApiHost<BitFields>
     {
         [MethodImpl(Inline)]
+        public static BitField64<E> bf64<E>(E state)
+            where E : unmanaged, Enum
+                => BitField64<E>.Define(state);
+
+        [MethodImpl(Inline)]
         public static T read<F,T>(in BitField256<F,T> src, F index)
             where T : unmanaged
             where F : unmanaged, Enum

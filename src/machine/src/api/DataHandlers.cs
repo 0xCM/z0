@@ -1,0 +1,19 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Machines
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
+
+    [ApiHost]
+    public readonly struct DataHandlers : IApiHost<DataHandlers>
+    {
+        [MethodImpl(Inline)]
+        public static DataHandler<T> Create<T>(DataReceiver<T> receiver)
+            => new DataHandler<T>(receiver);        
+    }
+}

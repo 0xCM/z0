@@ -14,5 +14,9 @@
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(Datasets)" />
   </ItemGroup>  
-  
+
+   <ItemGroup>
+    <EmbeddedResource Include="res/OpCodeSpecs.csv" LogicalName="OpCodeSpecs.csv" /> 
+  </ItemGroup>
+
 </Project>

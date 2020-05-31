@@ -479,8 +479,16 @@ namespace Z0
         }
 
         /// <summary>
-        /// If fenced with specified left and right characters, extracts the enclosed content; 
-        /// otherwise, returns the content unmolested
+        /// Returns the index of the first occurrence of the first character and the first occurrence of the second character
+        /// </summary>
+        /// <param name="src">The source thext</param>
+        /// <param name="first">The first index match</param>
+        /// <param name="second">THe second index match</param>
+        public static (int first, int second) indices(string src, char first, char second)
+            => (src.IndexOf(first), src.IndexOf(second));
+
+        /// <summary>
+        /// If fenced with specified left and right characters, extracts the enclosed content; otherwise, returns the content unmolested
         /// </summary>
         /// <param name="src">The putative fenced content</param>
         public static string unfence(string src, char left, char right)
@@ -571,6 +579,15 @@ namespace Z0
             else
                 return string.Empty;
         }
+
+        /// <summary>
+        /// Returns a substring identified by inclusive indices
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="i0">The index of the first character in the substring</param>
+        /// <param name="i1">The index of the last character in the substring</param>
+        public static string segment(string src, int i0, int i1)
+            => src.Substring(i0, i1 - i0 + 1);
 
         /// <summary>
         /// Formats and concatenates an arbitrary number of elements

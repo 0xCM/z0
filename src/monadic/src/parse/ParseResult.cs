@@ -25,7 +25,13 @@ namespace Z0
         /// Specifies whether the parse attempt succeed, and thus the Value field is meaningful
         /// </summary>
         public bool Succeeded {get;}
-        
+
+        public bool Failed  
+        {
+            [MethodImpl(Inline)]
+            get => !Succeeded;
+        }
+
         /// <summary>
         /// The parsed value, if the parse operaion succeedeed; otherwise best not look there
         /// </summary>
@@ -65,6 +71,14 @@ namespace Z0
             => new ParseResult(source, target, succeeded, value, reason);
 
         [MethodImpl(Inline)]
+        public static bool operator true(ParseResult src)
+            => src.Succeeded;
+
+        [MethodImpl(Inline)]
+        public static bool operator false(ParseResult src)
+            => src.Failed;
+
+        [MethodImpl(Inline)]
         ParseResult(string source, Type type, bool succeeded, object value, object reason = null)
         {
             Source = source;
@@ -101,6 +115,12 @@ namespace Z0
         /// </summary>
         public bool Succeeded {get;}
 
+        public bool Failed 
+        {
+            [MethodImpl(Inline)]
+            get => !Succeeded;
+        }
+
         /// <summary>
         /// Upon successful parse attempt, holds the parsed value; otherwise it may or may not hold something else
         /// </summary>
@@ -124,6 +144,14 @@ namespace Z0
         public static implicit operator ParseResult(ParseResult<T> src)
             => ParseResult.Define(src.Source, typeof(T), src.Succeeded, src.Value);
         
+        [MethodImpl(Inline)]
+        public static bool operator true(ParseResult<T> src)
+            => src.Succeeded;
+
+        [MethodImpl(Inline)]
+        public static bool operator false(ParseResult<T> src)
+            => src.Failed;
+
         [MethodImpl(Inline)]
         ParseResult(string source, T value, object reason = null)
         {

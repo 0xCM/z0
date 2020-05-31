@@ -46,8 +46,6 @@ namespace Z0
 
         void RunApp(params PartId[] parts)
         {
-            var res = ResExtractor.Service();
-            Control.iter(res.ResourceNames, term.print);
             AppResources.OpCodeSpecs.OnSome(OpCodes.encode);
         }
 
