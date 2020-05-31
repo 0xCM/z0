@@ -23,6 +23,5 @@ namespace Z0
 
         ref T Deposit<T>(in BitField<T> field, ReadOnlySpan<T> src, ref T dst)
             where T : unmanaged;
-
     }
 }

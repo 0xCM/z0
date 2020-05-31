@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitField256<F,T> crate<F,T>(BitFieldSpec256<F> spec, Vector256<T> state)
+        public static BitField256<F,T> create<F,T>(BitFieldSpec256<F> spec, Vector256<T> state)
             where F : unmanaged, Enum
             where T : unmanaged
                 => new BitField256<F,T>(spec, state);
@@ -55,7 +55,6 @@ namespace Z0
         static FixedData<T> fixedalloc<T>(int bitcount)
             where T : unmanaged
                 => new FixedData<T>(Blocks.alloc<T>(n64, Blocks.bitcover<T>(bitcount)), bitcount);             
-
 
         [MethodImpl(Inline)]
         static T Mask<F,T>(BitField256<F,T> src, F index)

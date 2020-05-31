@@ -10,6 +10,7 @@ namespace Z0
     
     using static Seed; 
     using static Memories;
+    using static VMov;
     
     partial class gvec
     {
@@ -29,13 +30,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(dvec.vmovelo(v8u(x), n8));
+                 return generic<T>(vmove(v8u(x), n8));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(dvec.vmovelo(v16u(x), n16));
+                 return generic<T>(vmove(v16u(x), n16));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(dvec.vmovelo(v32u(x), n32));
+                 return generic<T>(vmove(v32u(x), n32));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(dvec.vmovelo(v64u(x), n64));
+                 return generic<T>(vmove(v64u(x), n64));
             else
                 return vmovelo_i(x);
         }
@@ -45,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dvec.vmovelo(v8i(x), n8));
+                 return generic<T>(vmove(v8i(x), n8));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dvec.vmovelo(v16i(x), n16));
+                 return generic<T>(vmove(v16i(x), n16));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dvec.vmovelo(v32i(x), n32));
+                 return generic<T>(vmove(v32i(x), n32));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(dvec.vmovelo(v64i(x), n64));
+                 return generic<T>(vmove(v64i(x), n64));
             else
                 throw Unsupported.define<T>();
         }

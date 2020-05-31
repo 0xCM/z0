@@ -245,14 +245,14 @@ namespace Z0
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
-                var symbols = PermSymbolic.literals(perm);
+                var symbols = Permute.literals(perm);
                 Claim.eq(4, symbols.Length);
             }
         }
 
         void perm4x64_mapformat()
         {
-            var pmaps = PermSymbolic.Exhaust(n4);
+            var pmaps = Permute.Exhaust(n4);
             Control.iter(pmaps, m => Trace(m.perm.ToString(), m.format));
         }
 
@@ -346,7 +346,7 @@ namespace Z0
             var symbol = default(Perm4L);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.require(PermSymbolic.literal(perm, i, out symbol));
+                Claim.require(Permute.literal(perm, i, out symbol));
                 Claim.eq(expect[i], symbol);
             }
 

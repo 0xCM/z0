@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     [ApiHost]
     public readonly struct Perm : IApiHost<Perm>
-    {
+    {        
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
         /// where n is the length of the array
@@ -149,7 +149,6 @@ namespace Z0
         public static Perm<T> Identity<T>(T n)
             where T : unmanaged
                 => new Perm<T>(gmath.range(default, gmath.dec(n)));
-
 
         [MethodImpl(Inline)]
         public static implicit operator Perm(Span<int> src)

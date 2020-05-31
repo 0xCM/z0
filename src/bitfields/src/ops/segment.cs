@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Concurrent;
 
     using static Seed;    
     using static Memories;
 
     partial class BitFields
-    {
+    {            
         /// <summary>
         /// Defines a bitfield segment
         /// </summary>

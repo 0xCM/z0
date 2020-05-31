@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<int> vconvert(Vector128<sbyte> src, N512 w, int t = default)
-            => (vmaplo(src,n256,t),vmaphi(src,n256,t));
+            => (vmaplo(src,n256,t),VHiMap.vmaphi(src,n256,t));
 
         // ~ 128x8u -> X
         // ~ ------------------------------------------------------------------        
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vconvert(Vector128<byte> src, N512 w, uint t = default)        
-            => (vmaplo(src, n256, t), vmaphi(src, n256, t));
+            => (vmaplo(src, n256, t), VHiMap.vmaphi(src, n256, t));
 
         // ~ 128x16i -> X
         // ~ ------------------------------------------------------------------        
@@ -263,9 +263,9 @@ namespace Z0
         {
             (var lo, var hi) = vconvert(src, n512, z16i); 
             var x0 = vmaplo(lo,n256,z32i);
-            var x1 = vmaphi(lo,n256,z32i);
+            var x1 = VHiMap.vmaphi(lo,n256,z32i);
             var x2 = vmaplo(hi,n256,z32i);
-            var x3 = vmaphi(hi,n256,z32i);            
+            var x3 = VHiMap.vmaphi(hi,n256,z32i);            
             return (x0,x1,x2,x3);
         }
 
@@ -275,7 +275,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ushort> vconvert(Vector256<byte> src, N512 w, ushort t = default)
-             => (vmaplo(src, n256, z16), vmaphi(src, n256, z16));
+             => (vmaplo(src, n256, z16), VHiMap.vmaphi(src, n256, z16));
 
         /// <summary>
         /// 32x8u -> (16x16i, 16x16i)
@@ -283,7 +283,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<short> vconvert(Vector256<byte> src, N512 w, short t = default)
-            => (vmaplo(src, n256, z16i),vmaphi(src, n256, z16i));
+            => (vmaplo(src, n256, z16i),VHiMap.vmaphi(src, n256, z16i));
 
         /// <summary>
         /// 32x8u -> (8x32u, 8x32u, 8x32u, 8x32u)
@@ -308,7 +308,7 @@ namespace Z0
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline), Op]
         public static Vector512<long> vconvert(Vector128<short> src, N512 w, long t = default)
-            => (vmaplo(src, n256, z64i), vmaphi(src, n256, z64i));
+            => (vmaplo(src, n256, z64i), VHiMap.vmaphi(src, n256, z64i));
         
         /// <summary>
         /// 8x16x -> (4x64u,4x64u)
@@ -318,7 +318,7 @@ namespace Z0
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ulong> vconvert(Vector128<ushort> src, N512 w, ulong t = default)
-            => (vmaplo(src, n256, z64),vmaphi(src, n256, z64));
+            => (vmaplo(src, n256, z64),VHiMap.vmaphi(src, n256, z64));
 
         /// <summary>
         /// 16x16u -> 16x64u
@@ -338,7 +338,7 @@ namespace Z0
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline), Op]
         public static Vector512<int> vconvert(Vector256<short> src, N512 w, int t = default)
-            => (vmaplo(src,n256,t), vmaphi(src,n256,t));
+            => (vmaplo(src,n256,t), VHiMap.vmaphi(src,n256,t));
 
         /// <summary>
         /// 16x16u -> 16x32u
@@ -346,7 +346,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vconvert(Vector256<ushort> src, N512 w, uint t = default)
-            => (vmaplo(src,n256,t),vmaphi(src,n256,t));
+            => (vmaplo(src,n256,t), VHiMap.vmaphi(src,n256,t));
 
         /// <summary>
         /// 8x32i -> (4x64i, 4x64i)
@@ -354,7 +354,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<long> vconvert(Vector256<int> src, N512 w, long t = default)
-            => (vmaplo(src, n256, t),vmaphi(src, n256, t));
+            => (vmaplo(src, n256, t),VHiMap.vmaphi(src, n256, t));
 
         /// <summary>
         /// 8x32u -> (4x64u, 4x64u)
@@ -362,7 +362,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ulong> vconvert(Vector256<uint> src, N512 w, ulong t = default)
-            => (vmaplo(src, n256, t),vmaphi(src, n256, t));
+            => (vmaplo(src, n256, t),VHiMap.vmaphi(src, n256, t));
 
         [MethodImpl(Inline), Op]
         public static Vector512<long> vconvert(Vector256<short> src, N512 w, long t = default)

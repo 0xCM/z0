@@ -24,5 +24,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T(NK<T> src)
             => default;
+        
+        public static implicit operator NK<T>(T src)
+            => default;
     }
 }

@@ -11,7 +11,6 @@ namespace Z0
         /// <summary>
         /// Defines document field parts
         /// </summary>
-        [FieldDelimiter(0,40)]
         public enum DocFieldDelimiter : byte
         {        
             /// <summary>
@@ -54,7 +53,5 @@ namespace Z0
             /// </summary>
             Content = 40
         }
-
     }
-
 }

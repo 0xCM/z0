@@ -6,6 +6,7 @@ namespace Z0
 {    
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Control;
     using static Seed;
@@ -19,6 +20,30 @@ namespace Z0
         public static AsciDataLookup Service => default;
 
         static AsciDataStrings ResData => default;
+
+        /// <summary>
+        /// Loads 16 asci symbols beginning at a specified index
+        /// </summary>
+        /// <param name="index">The index of the first code</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<ushort> vsymbols(int index)
+        {
+            ref readonly var src = ref head(ResData.Bytes(n0));
+         
+            return SymBits.vmove8x16(src);
+        }
+
+        /// <summary>
+        /// Loads 32 asci codes beginning at a specified index
+        /// </summary>
+        /// <param name="index">The index of the first code</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<byte> vcodes(int index)
+        {
+            ref readonly var src = ref head(ResData.Bytes(n0));
+         
+            return SymBits.vload(w256,src);
+        }
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<AsciCharCode> codes()

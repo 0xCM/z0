@@ -55,14 +55,6 @@ namespace Z0
         const int ByteResCount = 2;
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> Bytes(int index)
-            => API.resource<byte>(skip(ByteResources,index), skip(ByteResourcLength,index));
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<char> Text(int index)
-            => API.resource<char>(skip(TextResources,index),skip(TextResourcLength,index));
-
-        [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Bytes(N0 index)
             => B000;
 
@@ -126,5 +118,4 @@ namespace Z0
                     length: S001.Length),
                 };            
     }
-
 }

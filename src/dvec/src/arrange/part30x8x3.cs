@@ -35,7 +35,8 @@ namespace Z0
         const uint m4 = BitMasks.Lsb32x16x3 << 12;
 
         [MethodImpl(Inline)]
-        static Vector256<uint> vpart30x8x3Mask(uint src) => vparts(n256, m0, m1, m2, m3, m4,0,0,0);
+        static Vector256<uint> vpart30x8x3Mask(uint src) 
+            => vparts(n256, m0, m1, m2, m3, m4,0,0,0);
 
         // The components are now in the following order, from lo to hi:
         // 0, 5, 1, 6, 2, 7, 3, 8, 4, 9

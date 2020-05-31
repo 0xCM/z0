@@ -9,7 +9,8 @@ namespace Z0
     
     using static Seed;
 
-    public class t_bitfields : UnitTest<t_bitfields>
+
+    public class t_bitfields : t_bitcore<t_bitfields>
     {
         [MethodImpl(Inline)]
         public static FieldSegment segment<E>(E segid, byte startpos, byte endpos)
@@ -27,6 +28,13 @@ namespace Z0
             F08_3 = 3
         }
 
+
+        public void primal_kind()
+        {
+            var f = PrimalKinds.Service.Init(PrimalKind.I16);
+            var width = f.Width;
+            Claim.eq(width, PrimalWidthL2.w16);            
+        }
 
         public void bitfield_a()
         {

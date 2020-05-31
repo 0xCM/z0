@@ -18,10 +18,10 @@ namespace Z0
             var w = w128;
 
             var src = Data.vincrements<byte>(w);
-            var lut = LUT.init(src);
+            var lut = VLut.init(src);
 
             var content = gvec.vinc<byte>(w, 64);
-            var selected =  LUT.select(lut,content); //dvec.vshuf16x8(items, table);
+            var selected =  VLut.select(lut,content); //dvec.vshuf16x8(items, table);
             Claim.veq(content, selected);
         }
 
@@ -30,10 +30,10 @@ namespace Z0
             var w = w256;
 
             var src = Data.vincrements<byte>(w);
-            var lut = LUT.init(src);
+            var lut = VLut.init(src);
 
             var content = gvec.vinc<byte>(w, 64);
-            var selected =  LUT.select(lut,content); //dvec.vshuf32x8(items, table);
+            var selected =  VLut.select(lut,content); //dvec.vshuf32x8(items, table);
             Claim.veq(content, selected);
 
         }

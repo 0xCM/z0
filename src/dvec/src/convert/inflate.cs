@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate(Vector128<sbyte> src, N256 w, short t = default)
-            => Vectors.vconcat(vmaplo(src,n128,t), vmaphi(src,n128,t));
+            => Vectors.vconcat(vmaplo(src,n128,t), VHiMap.vmaphi(src,n128,t));
 
         /// <summary>
         /// 32x8w -> 32x16i

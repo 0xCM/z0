@@ -9,9 +9,29 @@ namespace Z0
         
     using static Seed;
     using static Memories;
+    using API = Swap;
 
     partial class XTend
     {
+        public static Swap[] Unsized<N>(this NatSwap<N>[] src)
+            where N : unmanaged, ITypeNat
+        {
+            var dst = new Swap[src.Length];
+            for(var i=0; i<src.Length; i++)
+                dst[i] = src[i];
+            return dst;
+        }
+
+        public static Swap<T>[] Unsized<N,T>(this NatSwap<N,T>[] src)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var dst = new Swap<T>[src.Length];
+            for(var i=0; i<src.Length; i++)
+                dst[i] = src[i];
+            return dst;
+        }                     
+
         /// <summary>
         /// Shuffles span content as determined by a permutation
         /// </summary>
@@ -44,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Swap<T>(this Span<T> src, params Swap[] swaps)           
             where T : unmanaged
-                => Z0.Swap.apply(src,swaps);
+                => API.apply(src,swaps);
 
         /// <summary>
         /// Formats the terms of a permutation
@@ -89,6 +109,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format(this Swap[] src)
             => string.Join(" -> ", src.Map(x => x.Format()));
-
     }
 }
