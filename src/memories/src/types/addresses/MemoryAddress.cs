@@ -10,12 +10,11 @@ namespace Z0
     using static Seed;
 
     public readonly struct MemoryAddress : 
+        IAddress<MemoryAddress,W64,ulong>, 
         IAddressable, 
-        INullaryKnown, 
-        IIdentification<MemoryAddress>, 
-        INullary<MemoryAddress>
+        IIdentification<MemoryAddress> 
     {
-        public readonly ulong Location;
+        public ulong Location {get;}
         
         [MethodImpl(Inline)]
         public static unsafe MemoryAddress From<T>(in T src)

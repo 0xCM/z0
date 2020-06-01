@@ -11,8 +11,7 @@ namespace Z0
     using static Control;
 
     partial class Symbolic    
-    {        
-        
+    {                
         [MethodImpl(Inline), Op]
         public static SuperSym supersym(int n)
             => n switch {

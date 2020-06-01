@@ -29,11 +29,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool IsNewLine(char c)
-            => (ushort)AsciCharCode.NewLine == (ushort)c;
+            => (ushort)AsciCharCode.NL == (ushort)c;
 
         [MethodImpl(Inline), Op]
         public static bool IsLineFeed(char c)
-            => (ushort)AsciCharCode.LineFeed == (ushort)c;
+            => (ushort)AsciCharCode.CR == (ushort)c;
 
         [MethodImpl(Inline), Op]
         public static bool IsWhiteSpace(char c)

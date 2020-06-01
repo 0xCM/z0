@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Text;
+    using System.IO;
 
     using static Seed;
     using static Chars;
@@ -613,5 +614,16 @@ namespace Z0
                 dst[i] = src[src.Length - len + i];
             return new string(dst);
         } 
+
+        /// <summary>
+        /// Allocates a stream over a string
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="encoding">The text encoding</param>
+        public static MemoryStream stream(string src, Encoding encoding = null)
+        {
+            var bytes = (encoding ?? Encoding.UTF8).GetBytes(src ?? string.Empty);            
+            return new MemoryStream(bytes);
+        }
     }
 }

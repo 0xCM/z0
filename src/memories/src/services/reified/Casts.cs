@@ -10,7 +10,7 @@ namespace Z0
         
     using static Seed;
 
-    public readonly struct Caster
+    public readonly struct Casts
     {
 
         [MethodImpl(Inline)]

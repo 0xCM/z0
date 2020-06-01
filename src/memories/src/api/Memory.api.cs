@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;    
     using System.Collections.Generic;
     using System.Buffers;
+    using System.IO;
 
     using static Seed;
     using static Memories;
@@ -16,6 +17,26 @@ namespace Z0
     [ApiHost]
     public static unsafe class memory
     {
+        /// <summary>
+        /// Allocates a caller-disposed read-only stream over a block of unmanaged memory
+        /// </summary>
+        /// <param name="pSrc">The address of the leading cell</param>
+        /// <param name="length">The number of available bytes</param>
+        /// <param name="capacity">The size of the working buffer</param>
+        [MethodImpl(Inline)]
+        public static UnmanagedMemoryStream reader(byte* pSrc, long length, long capacity = 1024)
+            => new UnmanagedMemoryStream(pSrc, length, capacity, FileAccess.Read);
+
+        /// <summary>
+        /// Allocates a caller-disposed read/write stream over a block of unmanaged memory
+        /// </summary>
+        /// <param name="pSrc">The address of the leading cell</param>
+        /// <param name="length">The number of available bytes</param>
+        /// <param name="capacity">The size of the working buffer</param>
+        [MethodImpl(Inline)]
+        public static UnmanagedMemoryStream writer(byte* pSrc, long length, long capacity = 1024)
+            => new UnmanagedMemoryStream(pSrc, length, capacity, FileAccess.ReadWrite);
+
         /// <summary>
         /// Allocates an array
         /// </summary>

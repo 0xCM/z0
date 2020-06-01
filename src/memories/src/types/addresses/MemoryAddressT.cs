@@ -15,7 +15,7 @@ namespace Z0
     {
         public static MemoryAddress<W,T> Zero => default;
 
-        public readonly T Location;
+        public T Location {get;}
 
         public NumericWidth Size
         {

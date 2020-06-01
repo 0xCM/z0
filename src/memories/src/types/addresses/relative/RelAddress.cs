@@ -15,7 +15,7 @@ namespace Z0
     {
         readonly uint Offset;
 
-        readonly NW Size;
+        readonly NumericWidth Size;
 
         public static RelAddress Empty => new RelAddress(0, NW.None);
 

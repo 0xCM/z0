@@ -27,19 +27,19 @@ namespace Z0
         Tab = '\t',
 
         /// <summary>
-        /// The new-line control symbol \n'
+        /// The new-line control symbol \n', asci code 10
         /// </summary>
-        LF = '\n',
+        NL = '\n',
 
         /// <summary>
-        /// The carriage return control symbol '\r'
-        /// </summary>
-        CR = '\r',
-
-        /// <summary>
-        /// The form-feed control symbol '\f'
+        /// The form-feed control symbol '\f', asci code 12
         /// </summary>
         FF  = '\f',
+
+        /// <summary>
+        /// The carriage return control symbol '\r', asci code 13
+        /// </summary>
+        CR = '\r',
 
         /// <summary>
         /// The delete control symbol

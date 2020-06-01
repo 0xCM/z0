@@ -333,12 +333,12 @@ namespace Z0
         /// <summary>
         /// The new-line character code 10
         /// </summary>
-        NewLine = (byte)ASym.LF,
+        NL = (byte)ASym.NL,
 
         /// <summary>
         /// The line-feed character code 13
         /// </summary>
-        LineFeed = (byte)ASym.CR,
+        CR = (byte)ASym.CR,
 
         /// <summary>
         /// The ' ' character code 32

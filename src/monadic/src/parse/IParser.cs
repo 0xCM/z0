@@ -20,13 +20,29 @@ namespace Z0
     /// <typeparam name="T">The type of value that the parser can parse</typeparam>
     public interface IParser<T> : IParser
     {
-        new ParseResult<T> Parse(string text);
+        new ParseResult<T> Parse(string src);
         
         T Parse(string src, T @default)
             => Parse(src).ValueOrDefault(@default);
         
-        ParseResult IParser.Parse(string text)
-            => Parse(text);
+        ParseResult IParser.Parse(string src)
+            => Parse(src);
+    }
+
+    /// <summary>
+    /// Characterizes a parser that yields values of a parametrically-identified type
+    /// </summary>
+    /// <typeparam name="T">The type of value that the parser can parse</typeparam>
+    public interface ISequentialParser<T> : IParser<T>
+        where T : ISequential
+    {
+        ParseResult<T> Parse(string src, ref int seq);
+        
+        ParseResult<T> IParser<T>.Parse(string src)
+        {
+            var seq = 0;
+            return Parse(src, ref seq);
+        }
     }
 
     public interface IDataParser<T> : IParser<T>
@@ -101,8 +117,6 @@ namespace Z0
 
     public class ParserAttribute : Attribute
     {
-
         
-
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {    
     using System;
 
-    using CSym = AsciControl;
+    using Sym = AsciControl;
 
     /// <summary>
     /// Defines asci control codes
@@ -18,26 +18,26 @@ namespace Z0
         /// <summary>
         /// The backspace control symbol code
         /// </summary>
-        Back = (byte)CSym.Back,        
+        Back = (byte)Sym.Back,        
 
         /// <summary>
-        /// The tab control symbol
+        /// The tab control symbol, asci code 9
         /// </summary>
-        Tab = (byte)CSym.Tab,
+        Tab = (byte)Sym.Tab,
         
         /// <summary>
-        /// The line-feed/new-line control symbol code 10
+        /// The line-feed/new-line control symbol, asci code 10
         /// </summary>
-        LF = (byte)CSym.LF,
+        NL = (byte)Sym.NL,
 
         /// <summary>
-        /// The form-feed control symbol code 12
+        /// The form-feed control symbol, asci code 12
         /// </summary>
-        FF  = (byte)CSym.FF,
+        FF  = (byte)Sym.FF,
 
         /// <summary>
-        /// The carriage return control symbol code 13
+        /// The carriage return control symbol, asci code 13
         /// </summary>
-        CR = (byte)CSym.CR,
+        CR = (byte)Sym.CR,
     }
 }

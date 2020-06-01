@@ -11,7 +11,7 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-    using API = AsmCommands;
+    using API = Commands;
 
     /// <summary>
     /// Defines an encoded instruction

@@ -82,7 +82,7 @@ namespace Z0.Machines
         public void Run()
         {            
             var data = 0xCE_38ul;
-            var command = AsmCommands.encode(data);
+            var command = Asm.Data.Commands.encode(data);
             Dispatch(command);
 
             var steps = RunBuffer.Slice(0, _RunIndex);
@@ -92,9 +92,9 @@ namespace Z0.Machines
             term.print(hexline);
 
             var seq = 0;
-            var parsed = AsmCommands.ParseAsmLine(AsmParseCases.Case01,ref seq);
+            var parsed = Asm.Data.AsmCommandParser.ParseAsmLine(AsmParseCases.Case01,ref seq);
             if(parsed)
-                term.print($"Parsed {parsed.Value.Body.ToString()}");
+                term.print($"{parsed.Value.Statement.ToString()}");
             else
                 term.print("Parse failed");
         }
@@ -107,7 +107,7 @@ namespace Z0.Machines
         [Op, MethodImpl(Inline)]
         public void Run(ulong data)
         {
-            Dispatch(AsmCommands.encode(data));
+            Dispatch(Asm.Data.Commands.encode(data));
         }
 
         [Op, MethodImpl(Inline)]

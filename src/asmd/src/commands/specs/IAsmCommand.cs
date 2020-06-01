@@ -6,13 +6,21 @@ namespace Z0.Asm.Data
 {
     using System;
 
-    public interface IAsmCommand : IEncodedCommand
+    public interface IAsmCommand : IEncodedCommand, ISequential
     {
-        ReadOnlySpan<char> Body {get;}
+        AsmStatement Statement {get;}
 
-        ReadOnlySpan<char> OpCode {get;}
+        AsmOpCode OpCode {get;}
 
-        ReadOnlySpan<char> Instruction {get;}
+        AsmInstructionCode Instruction {get;}
+
+        EncodedCommand Encoded {get;}
+
+        ReadOnlySpan<byte> IEncodedCommand.Encoding 
+            => Encoded.Encoding;
+
+        byte IEncodedCommand.EncodingSize 
+            => Encoded.EncodingSize;
     }
 
     public interface IAsmCommand<F> : IAsmCommand, IEncodedCommand<F>

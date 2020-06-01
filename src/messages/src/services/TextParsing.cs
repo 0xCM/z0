@@ -12,7 +12,7 @@ namespace Z0
 
     using static Seed;
     
-    public static class TextParser
+    public static class TextDocParsing
     {
         /// <summary>
         /// Attempts to parse a text document and returns the result if successful
@@ -69,21 +69,6 @@ namespace Z0
         public static Option<TextHeader> ParseHeader(this TextLine src, in TextFormat spec)
             => new TextHeader(src.LineText.SplitLine(spec).Select(x => x.Trim()).Where(x => x != string.Empty).ToArray());
             
-        public static TextLine[] ParseLines(string text)
-        {
-            var lines = new List<TextLine>();
-            var lineNumber = 0u;
-            using (var reader = new StringReader(text))
-            {
-                var next = reader.ReadLine();
-                while (next != null)
-                {
-                    lines.Add(new TextLine(++lineNumber, next));
-                }
-            }
-            return lines.ToArray();
-        }
-
         /// <summary>
         /// Parses a row from a line of text
         /// </summary>
@@ -122,7 +107,6 @@ namespace Z0
             using var reader = src.Reader();
             return reader.ReadTextDoc(format);
         }
-
 
         static Option<TextLine> ParseLine(this StreamReader reader, uint lineNumber)
         {

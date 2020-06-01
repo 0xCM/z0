@@ -9,66 +9,66 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct RelAddress32 : INullary<RelAddress32>, ITextual, INullaryKnown
+    public readonly struct Address8 : IAddress<Address8,W8,byte>
     {
-        readonly uint Offset;
+        public byte Location {get;}
 
-        public static RelAddress32 Empty => new RelAddress32(0);
+        public static Address8 Empty => new Address8(0);
 
         public bool IsEmpty 
         {
              [MethodImpl(Inline)] 
-             get => Offset == 0; 
+             get => Location == 0; 
         }
 
         public bool IsNonEmpty  
         {
              [MethodImpl(Inline)] 
-             get => Offset != 0; 
+             get => Location != 0; 
         }
 
-        public RelAddress32 Zero 
+        public Address8 Zero 
         {
              [MethodImpl(Inline)] 
              get => Empty; 
         }
 
         [MethodImpl(Inline)]
-        public static RelAddress32 From(uint offset)
-            => new RelAddress32(offset);
+        public static Address8 From(byte offset)
+            => new Address8(offset);
 
         [MethodImpl(Inline)]
-        public static RelAddress32 operator+(RelAddress32 x, uint y)
-            => From((uint)(x.Offset + y));
+        public static Address8 operator+(Address8 x, byte y)
+            => From((byte)(x.Location + y));
 
         [MethodImpl(Inline)]
-        public static bool operator==(RelAddress32 x, RelAddress32 y)
+        public static bool operator==(Address8 x, Address8 y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(RelAddress32 x, RelAddress32 y)
+        public static bool operator!=(Address8 x, Address8 y)
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        RelAddress32(uint offset)
+        internal Address8(byte offset)
         {
-            Offset = offset;
+            Location = offset;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Offset.FormatSmallHex(true);
+            => Location.FormatSmallHex(true);
         
-        public bool Equals(RelAddress32 src)        
-            => Offset == src.Offset;
+        public bool Equals(Address8 src)        
+            => Location == src.Location;
 
         public override string ToString()
             => Format();
         
         public override int GetHashCode()
-            => Offset.GetHashCode();
+            => Location.GetHashCode();
         
         public override bool Equals(object src)
-            => src is RelAddress32 l && Equals(l);
+            => src is Address8 l && Equals(l);
     }
 }

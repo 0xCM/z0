@@ -229,7 +229,7 @@ namespace Z0
         /// <summary>
         /// The new-line character
         /// </summary>
-        public const char NewLine = '\n';
+        public const char NL = '\n';
 
         /// <summary>
         /// The line-feed character
