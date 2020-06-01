@@ -12,7 +12,6 @@ namespace Z0.Asm.Data
     [ApiHost("api")]
     public class AsmD : IApiHost<AsmD>
     {
-
         void ParseRex()
         {
 
@@ -28,7 +27,10 @@ namespace Z0.Asm.Data
             Control.iter(res.ResourceNames, term.print);
 
         }
+    }
 
+    public static partial class XTend
+    {
 
     }
 }

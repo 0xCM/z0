@@ -20,12 +20,12 @@ namespace Z0
         /// <param name="startpos">The position of the first bit in the segment</param>
         /// <param name="endpos">The position of the last bit in the segment</param>
         [MethodImpl(Inline), Op]
-        public static FieldSegment segment(string name, byte index, byte startpos, byte endpos, byte width)
-            => new FieldSegment(name,index, startpos, endpos, width);
+        public static FieldSegment segment(string name, byte startpos, byte endpos, byte width)
+            => new FieldSegment(name,startpos, endpos, width);
 
         [MethodImpl(Inline)]
         public static FieldSegment segment<E>(E id, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => BitFields.segment(id.ToString(), Enums.numeric<E,byte>(id), startpos, endpos, (byte)(endpos - startpos + 1));
+                => BitFields.segment(id.ToString(), startpos, endpos, (byte)(endpos - startpos + 1));
     }
 }

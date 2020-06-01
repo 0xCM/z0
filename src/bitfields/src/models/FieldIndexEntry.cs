@@ -42,9 +42,9 @@ namespace Z0
             this.FieldName = name;
             this.FieldWidth = width;
         }
-
+        
         public string Format()
-            => this.FormatEntry();
+            => SegmentFormatter.entry(this);
 
         [MethodImpl(Inline)]
         public bool Equals(FieldIndexEntry other)

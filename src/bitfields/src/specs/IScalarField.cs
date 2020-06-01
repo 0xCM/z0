@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
     /// <summary>
     /// Characterizes a bitfield defined over a numeric value

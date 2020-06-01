@@ -6,7 +6,9 @@ namespace Z0.Machines
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using Z0.Asm.Data;
+
     using static Seed;
     using static Memories;
 
@@ -80,7 +82,7 @@ namespace Z0.Machines
         public void Run()
         {            
             var data = 0xCE_38ul;
-            var command = Commands.encode(data);
+            var command = AsmCommands.encode(data);
             Dispatch(command);
 
             var steps = RunBuffer.Slice(0, _RunIndex);
@@ -90,7 +92,7 @@ namespace Z0.Machines
             term.print(hexline);
 
             var seq = 0;
-            var parsed = Commands.ParseAsmLine(AsmParseCases.Case01,ref seq);
+            var parsed = AsmCommands.ParseAsmLine(AsmParseCases.Case01,ref seq);
             if(parsed)
                 term.print($"Parsed {parsed.Value.Body.ToString()}");
             else
@@ -105,7 +107,7 @@ namespace Z0.Machines
         [Op, MethodImpl(Inline)]
         public void Run(ulong data)
         {
-            Dispatch(Commands.encode(data));
+            Dispatch(AsmCommands.encode(data));
         }
 
         [Op, MethodImpl(Inline)]

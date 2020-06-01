@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using API = Enums;
 
+    using API = Enums;
     
     public interface IEnumLiteral : ITextual
     {

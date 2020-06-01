@@ -27,5 +27,12 @@ namespace Z0
                 foreach (var item in items)
                     action(item);
         }
+
+        [MethodImpl(Inline), Op]
+        public static void iter<T>(ReadOnlySpan<T> src, Action<T> action)
+        {
+            for(var i=0; i<src.Length; i++)
+                action(skip(src,i));
+        }
     }
 }

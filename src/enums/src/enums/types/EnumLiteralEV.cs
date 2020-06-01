@@ -9,8 +9,6 @@ namespace Z0
 
     using static Seed;
 
-    using API = Enums;
-
     /// <summary>
     /// Defines an E-V parametric enum value
     /// </summary>

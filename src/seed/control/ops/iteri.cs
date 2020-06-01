@@ -52,5 +52,12 @@ namespace Z0
             while(it.MoveNext())
                 action(index++, it.Current);
         }      
+
+        [MethodImpl(Inline), Op]
+        public static void iteri<T>(ReadOnlySpan<T> src, Action<int,T> action)
+        {
+            for(var i=0; i<src.Length; i++)
+                action(i,skip(src,i));
+        }
     }
 }

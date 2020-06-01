@@ -33,19 +33,6 @@ namespace Z0.Asm.Data
 
         public static SegIndicator esrdi => Define(nameof(esrdi));
 
-        // public static SegIndicator From(OpKindId src)
-        //     => src switch {
-        //         MemorySegDI => di,
-        //         MemorySegEDI => edi,
-        //         MemorySegESI => esi,
-        //         MemorySegRDI => rdi,
-        //         MemorySegRSI => rsi,
-        //         MemorySegSI => si,
-        //         MemoryESDI => esdi,
-        //         MemoryESEDI => esedi,
-        //         MemoryESRDI => esrdi,
-        //     _ => Empty
-        //     };
 
         [MethodImpl(Inline)]
         static SegIndicator Define(string id)

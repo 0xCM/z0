@@ -72,12 +72,12 @@ namespace Z0
         /// </summary>
         /// <param name="name">The segment name</param>
         /// <param name="index">The segment index</param>
-        /// <param name="startpos">The position of the first bit in the segment</param>
-        /// <param name="endpos">The position of the last bit in the segment</param>
+        /// <param name="i0">The position of the first bit in the segment</param>
+        /// <param name="i1">The position of the last bit in the segment</param>
         [MethodImpl(Inline)]
-        static FieldSegment<T> segment<T>(string name, T index, T startpos, T endpos, T width)
+        public static FieldSegment<T> segment<T>(string name, T i0, T i1, T width)
             where T : unmanaged
-                => new FieldSegment<T>(name, index, startpos, endpos, width);
+                => new FieldSegment<T>(name, i0, i1, width);
 
         static FieldSegment segment<I,W>(in FieldIndexEntry<I,W> entry, ref byte start)
             where I : unmanaged, Enum
@@ -86,7 +86,7 @@ namespace Z0
             var i = Enums.numeric<I,byte>(entry.FieldIndex);
             var width = Enums.numeric<W,byte>(entry.FieldWidth);
             var end = (byte)(start + width - 1);
-            var seg = BitFields.segment(entry.FieldName, i, start, end, width);
+            var seg = BitFields.segment(entry.FieldName, start, end, width);
             start = (byte)(end + 1);
             return seg;
         }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public interface IBitFieldOps<S,T> : IService
         where S : IScalarField<T>

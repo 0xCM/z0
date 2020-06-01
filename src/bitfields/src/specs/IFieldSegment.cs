@@ -25,11 +25,6 @@ namespace Z0
     public interface IFieldSegment<T> : IFieldSegment
     {
         /// <summary>
-        /// An alternate segment identifier
-        /// </summary>
-        T Index {get;}
-
-        /// <summary>
         /// The first index of the segment, relative to the source field
         /// </summary>
         T StartPos {get;}

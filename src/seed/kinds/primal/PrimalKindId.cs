@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    
     using TC = System.TypeCode;
 
     /// <summary>
@@ -64,5 +65,4 @@ namespace Z0
         // 18
         String = TC.String
     }
-
 }

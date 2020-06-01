@@ -7,8 +7,6 @@ namespace Z0.Machines
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm.Data;
-
     using static Seed;
 
     using Store8 = System.Runtime.Intrinsics.Vector256<byte>;

@@ -52,7 +52,6 @@ namespace Z0
         }
 
         public string Format()
-            => FieldSegments.format(Spec.Segments);
-
+            => SegmentFormatter.format(Spec.Segments);
     }
 }

@@ -11,37 +11,6 @@ namespace Z0
     using static Seed;    
     using static Memories;
 
-    public struct BitField256<F,T>
-        where T : unmanaged
-        where F : unmanaged, Enum
-    {
-        internal Vector256<T> State;
-
-        internal readonly BitFieldSpec256<F> Spec;
-
-        [MethodImpl(Inline)]
-        internal BitField256(BitFieldSpec256<F> spec, Vector256<T> state)
-        {
-            this.Spec = spec;
-            this.State = state;
-        }
-
-        [MethodImpl(Inline)]
-        internal BitField256(BitFieldSpec256<F> spec)
-        {
-            this.Spec = spec;
-            this.State = default;
-        }
-
-
-        
-        public T this[F index]
-        {
-            [MethodImpl(Inline)]
-            get => BitFields.read(this,index);
-        }
-    }
-
     /// <summary>
     /// Defines a segmented bitfield indexed by enum values
     /// </summary>
@@ -72,6 +41,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => SegWidth(index);
         }
-
     }
 }

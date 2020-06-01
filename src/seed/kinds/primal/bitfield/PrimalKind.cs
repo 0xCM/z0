@@ -85,6 +85,15 @@ namespace Z0
         F128 = w128 << I.Width | K.F128 <<  I.KindId,
 
         /// <summary>
+        /// Specifies System.Object
+        /// </summary>
+        Object = K.Object << I.KindId,
+
+        DBNull = K.DBNull << I.KindId,
+
+        DateTime = w64 << I.Width | K.DateTime << I.KindId,
+
+        /// <summary>
         /// Specifies a 16-bit unicode character
         /// </summary>
         Char16 = w16 << I.Width | K.Char16 << I.KindId,

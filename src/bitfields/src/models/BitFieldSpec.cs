@@ -55,7 +55,7 @@ namespace Z0
         }
 
         public string Format()
-            => FieldSegments.format(Segments);
+            => SegmentFormatter.format(Segments);
 
         public override string ToString()
             => Format();                

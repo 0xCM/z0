@@ -69,7 +69,5 @@ namespace Z0
                 dst[j] = i[j].LiteralValue;
             return dst;    
         }
-
-
     }
 }

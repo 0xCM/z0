@@ -6,12 +6,12 @@ namespace Z0
 {
     public interface ISized
     {
-        uint Size {get;}
+        DataWidth Width {get;}
     }
 
     public interface ISized<W> : ISized
         where W : unmanaged, IDataWidth
-    {
-        uint ISized.Size => (uint)Widths.data<W>();
+    {        
+        DataWidth ISized.Width => Widths.data<W>();
     }
 }

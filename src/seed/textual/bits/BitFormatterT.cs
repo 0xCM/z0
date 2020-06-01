@@ -18,6 +18,7 @@ namespace Z0
     {                                    
         public string Format(ReadOnlySpan<byte> src, in BitFormatConfig config)
         {
+            
             const char zero = Chars.D0;
 
             var bits = src.Length*8;
