@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
                 => maxval<T>();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T max<T>(NK<T> nk)
             where T : unmanaged
                 => maxval<T>();

@@ -16,7 +16,6 @@ namespace Z0
     [AttributeUsage(AttributeTargets.All)]
     public class LabelAttribute : Attribute
     {
-
         /// <summary>
         /// Returns the a target label, if attributed; otherwise, returns the target's system-defined name
         /// </summary>

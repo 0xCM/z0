@@ -23,7 +23,7 @@ namespace Z0
             public void Invoke(in T src, ref T dst)
             {
                 if(typeof(W) == typeof(W64))
-                    BL.not(in uint8(in src), ref uint8(ref dst));
+                    BL.not(in uint8(in src), ref As.uint8(ref dst));
                 else if(typeof(W) == typeof(W128))
                     LogicSquare.not(w128, src, ref dst);   
                 else if(typeof(W) == typeof(W256))

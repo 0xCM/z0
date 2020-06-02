@@ -1,2 +1,2 @@
-export ProjectId=$(dirname $0)
+export ProjectId=monadic
 export ScriptDir=$ZDev/src/.scripts

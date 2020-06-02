@@ -15,9 +15,6 @@ namespace Z0
         public static byte uint8<T>(T src)
             => As.uint8(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static ref byte uint8<T>(ref T src)
-            => ref As.uint8(ref src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static byte? uint8<T>(T? src)

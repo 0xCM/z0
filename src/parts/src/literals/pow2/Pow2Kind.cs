@@ -25,7 +25,6 @@ namespace Z0
         /// </summary> 
         P2ᐞ00m1 = K2.T00m1,
 
-
         /// <summary>
         /// 2^0 = 1
         /// </summary>

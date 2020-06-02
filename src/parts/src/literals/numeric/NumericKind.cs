@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
     using DW = DataWidth;
     using ID = NumericTypeId;
@@ -127,32 +126,4 @@ namespace Z0
         /// </summary>
         Width64 = U64 | I64 | F64
     }
-
-    /// <summary>
-    /// Defines numeric identifiers for primal numeric types
-    /// </summary>
-    public enum NumericTypeId : uint
-    {
-        None = 0,
-
-        U8 = (1u << 16),
-
-        I8 = (2u << 16),
-
-        U16 = 4u << 16,
-
-        I16 = 8u << 16,
-
-        U32 = 16u << 16,
-
-        I32 = 32u << 16,
-
-        U64 = 64u << 16,
-
-        I64 = 128u << 16,
-        
-        F32 = 512u << 16,
-
-        F64 = 1024u << 16,
-    }        
 }

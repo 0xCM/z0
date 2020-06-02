@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
         public static ref byte head8(ref MemStack8 src)
-            => ref uint8(ref src.X0);
+            => ref As.uint8(ref src.X0);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
         public static ref byte head8(ref MemStack16 src)
-            => ref uint8(ref src.X0);
+            => ref As.uint8(ref src.X0);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
         public static ref byte head8(ref MemStack32 src)
-            => ref uint8(ref src.X0);
+            => ref As.uint8(ref src.X0);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
         public static ref byte head8(ref MemStack64 src)
-            => ref uint8(ref src.X0);
+            => ref As.uint8(ref src.X0);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
         public static ref byte head8(ref MemStack128 src)
-            => ref uint8(ref src.X0);
+            => ref As.uint8(ref src.X0);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference

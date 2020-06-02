@@ -23,7 +23,7 @@ namespace Z0
             public void Invoke(in T a, in T b, ref T dst)
             {
                 if(typeof(W) == typeof(W64))
-                    BL.and(in uint8(in a), in uint8(in b), ref uint8(ref dst));
+                    BL.and(in uint8(in a), in uint8(in b), ref As.uint8(ref dst));
                 else if(typeof(W) == typeof(W128))
                     LogicSquare.and(w128, a, b, ref dst);
                 else if(typeof(W) == typeof(W256))

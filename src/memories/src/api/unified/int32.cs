@@ -16,10 +16,6 @@ namespace Z0
             => As.int32(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static ref int int32<T>(ref T src)
-            => ref As.int32(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static int? int32<T>(T? src)
             where T : unmanaged
                 => As.int32(src);

@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="nk">The kind classifier</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T minval<T>(NK<T> nk)
+        public static T min<T>(NK<T> nk)
             where T : unmanaged
                 => minval<T>();
     }

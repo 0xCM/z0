@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     
-    using static Seed;
+    using static PartIdentity;
 
     using K = Pow2Kind;
     

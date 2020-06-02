@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.not(in uint8(in src), ref uint8(ref dst));
+               BL.not(in uint8(in src), ref As.uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
                 not(w, in src, ref dst);
             else if(typeof(T) == typeof(uint))

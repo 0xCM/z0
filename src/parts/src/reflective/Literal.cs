@@ -8,7 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
+
+    using static PartIdentity;
+
     partial class XTend
     {
         /// <summary>
@@ -23,6 +25,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         public static FieldInfo[] Literal(this FieldInfo[] src)
-            => src.Where(x => x.IsLiteral);
+            => src.Where(x => x.IsLiteral).ToArray();
     }
 }

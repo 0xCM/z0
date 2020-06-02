@@ -9,8 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static ReflectionFlags;
-    
     partial class XTend
     {
         /// <summary>
@@ -20,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The target value type</typeparam>
         public static T[] LiteralValues<T>(this Type src)
             where T : unmanaged        
-                => src.LiteralFields().LiteralValues().Cast<T>();
+                => src.LiteralFields().LiteralValues().Cast<T>().ToArray();
 
         /// <summary>
         /// Enumerates the literals defined by a type indexed by declaration order and which have names that match a specified filter

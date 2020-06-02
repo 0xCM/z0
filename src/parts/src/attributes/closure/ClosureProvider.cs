@@ -5,13 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
 
-    /// <summary>
-    /// Identifies a type that defines context-predicated service factory methods
-    /// </summary>
-    public class ServiceFactoryAttribute : Attribute
+    public class ClosureProviderAttribute : Attribute
     {
-    
-    }
+        public ClosureProviderAttribute(Type provider)
+        {
+            this.ProviderType = provider;
+        }
 
+        public Type ProviderType {get;}
+    }
 }

@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.xnor(in uint8(in a), in uint8(in b), ref uint8(ref dst));
+               BL.xnor(in uint8(in a), in uint8(in b), ref As.uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
                 xnor(w, in a, in b, ref dst);
             else if(typeof(T) == typeof(uint))

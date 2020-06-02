@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.select(in uint8(in A), in uint8(in B), in uint8(in C), ref uint8(ref Z));
+               BL.select(in uint8(in A), in uint8(in B), in uint8(in C), ref As.uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
                 select(w, in A, in B, in C, ref Z);
             else if(typeof(T) == typeof(uint))

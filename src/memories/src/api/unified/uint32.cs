@@ -15,9 +15,6 @@ namespace Z0
         public static uint uint32<T>(T src)
             => As.uint32(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref uint uint32<T>(ref T src)
-            => ref As.uint32(ref src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint? uint32<T>(T? src)

@@ -9,8 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static ReflectionFlags;
-    
+    using static PartIdentity;
+
     partial class XTend
     {
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         public static object[] LiteralValues(this FieldInfo[] src)
-            => src.Literal().Select(f => f.GetRawConstantValue());
+            => src.Literal().Select(f => f.GetRawConstantValue()).ToArray();
 
         /// <summary>
         /// Queries literal fields for values of parametric type
@@ -34,13 +34,5 @@ namespace Z0
         public static IEnumerable<T> LiteralValues<T>(this IEnumerable<FieldInfo> src)
             where T : unmanaged        
                 => src.LiteralValues().Select(v => (T)v);
-
-        /// <summary>
-        /// Selects the literal fields defined by a type
-        /// </summary>
-        /// <param name="src">The source type</param>
-        /// <param name="declared">Whether a literal is rquired to be declared by the type</param>
-        public static FieldInfo[] LiteralFields(this Type src)
-            => src.DeclaredFields().Literal();
     }
 }

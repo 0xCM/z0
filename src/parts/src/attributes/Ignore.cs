@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static PartIdentity;
 
     /// <summary>
     /// Applies to an element to exclude it from metadata discovery processes

@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
 
     public class ClosuresAttribute : Attribute
     {
@@ -66,7 +68,7 @@ namespace Z0
         {
             this.Spec = (ulong)spec;
             this.Kind = TypeClosureKind.Width;
-            this.Values = values.Map(v => (ulong)v);
+            this.Values = values.Select(v => (ulong)v).ToArray();
         }
 
         public ClosuresAttribute(ImmClosureKind spec, params Imm8Kind[] values)
@@ -74,7 +76,7 @@ namespace Z0
         {
             this.Spec = (ulong)spec;
             this.Kind = TypeClosureKind.Imm8;
-            this.Values = values.Map(v => (ulong)v);
+            this.Values = values.Select(v => (ulong)v).ToArray();
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Z0
 
         public string Group {get;}
 
-        public override string Name => KindId.ToString().ToLower();
+        public override string Name 
+            => KindId.ToString().ToLower();
     }
 }

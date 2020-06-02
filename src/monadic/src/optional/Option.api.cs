@@ -10,6 +10,7 @@ namespace Z0
 
     using static Monadic;
 
+    [ApiHost]
     public static class Option
     {
         /// <summary>
@@ -29,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Option<T> from<T>(T? src)
             where T : struct
                 => src.HasValue ? some(src.Value) : none<T>();

@@ -16,10 +16,6 @@ namespace Z0
             => As.int8(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]   
-        public static ref sbyte int8<T>(ref T src)
-            => ref As.int8(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static sbyte? int8<T>(T? src)
             where T : unmanaged
                 => As.int8(src);

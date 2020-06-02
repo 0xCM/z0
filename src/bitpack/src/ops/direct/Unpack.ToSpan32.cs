@@ -22,7 +22,7 @@ namespace Z0
         public static void unpack(byte src, Span<uint> dst)
         {
             var buffer = z64;
-            ref var tmp = ref uint8(ref buffer);
+            ref var tmp = ref As.uint8(ref buffer);
             ref var lead = ref head(dst);
 
             unpack(src, ref tmp);             
@@ -39,7 +39,7 @@ namespace Z0
         public static void unpack(ushort src, Span<uint> dst)
         {
             var buffer = z64;
-            ref var tmp = ref uint8(ref buffer);
+            ref var tmp = ref As.uint8(ref buffer);
             ref var lead = ref head(dst);
 
             unpack((byte)src, ref tmp);             
@@ -58,7 +58,7 @@ namespace Z0
         public static void unpack(uint src, Span<uint> dst)
         {
             var buffer = z64;
-            ref var tmp = ref uint8(ref buffer);
+            ref var tmp = ref As.uint8(ref buffer);
             ref var lead = ref head(dst);
 
             unpack((byte)src, ref tmp);             
@@ -81,7 +81,7 @@ namespace Z0
         public static void unpack(ulong src, Span<uint> dst)
         {
             var buffer = z64;
-            ref var tmp = ref uint8(ref buffer);
+            ref var tmp = ref As.uint8(ref buffer);
             ref var lead = ref head(dst);
             
             unpack((byte)src, ref tmp);             

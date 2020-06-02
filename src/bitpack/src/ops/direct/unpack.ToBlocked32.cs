@@ -22,7 +22,7 @@ namespace Z0
         public static void unpack(in byte src, int blocks, in Block256<uint> dst)
         {
             var buffer = z64;
-            ref var tmp = ref uint8(ref buffer);
+            ref var tmp = ref As.uint8(ref buffer);
             
             for(var block=0; block < blocks; block++)
             {

@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
 
     /// <summary>
     /// Specifies closures over natural number types
@@ -30,7 +31,7 @@ namespace Z0
         }
 
         static (ulong m, ulong n)[] split(params ulong[] src)
-            => src.Map(x => ((ulong)(uint)x, x >> 32));
+            => src.Select(x => ((ulong)(uint)x, x >> 32)).ToArray();
 
         public NatPairsAttribute(params ulong[] pairs)
             :this(NatClosureKind.ExplicitPairs, split(pairs))

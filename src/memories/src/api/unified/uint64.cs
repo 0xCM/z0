@@ -15,9 +15,6 @@ namespace Z0
         public static ulong uint64<T>(T src)
             => As.uint64(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref ulong uint64<T>(ref T src)
-            => ref As.uint64(ref src);
      
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ulong? uint64<T>(T? src)
