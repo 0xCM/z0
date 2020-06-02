@@ -18,6 +18,5 @@ namespace Z0
     public interface IBitFormatter<T> : IFormatter<BitFormatConfig,T>
         where T : struct
     {
-
     }
 }

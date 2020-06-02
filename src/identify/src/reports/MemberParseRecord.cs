@@ -48,8 +48,8 @@ namespace Z0
                 var index = 0;
 
                 var numericParser = NumericParser.infallible<int>();
-                var addressParser = HexParsers.MemoryAddress;
-                var dataParser = HexParsers.Bytes;
+                var addressParser = Parsers.address();
+                var dataParser = Parsers.hex(true);
 
                 var seq = numericParser.Parse(fields[index++]);
                 var srcSeq = numericParser.Parse(fields[index++]);

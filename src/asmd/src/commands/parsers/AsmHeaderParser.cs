@@ -12,7 +12,7 @@ namespace Z0.Asm.Data
     using static Memories;
     using static AsmCommandParser;
 
-    public readonly struct AsmHeaderParser : IParser<AsmHeader>
+    public readonly struct AsmHeaderParser : ITextParser<AsmHeader>
     {
         public static AsmHeaderParser Service => default(AsmHeaderParser);
 

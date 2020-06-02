@@ -14,6 +14,10 @@ namespace Z0.Machines
         public static CpuEvent Empty => default;
 
         [MethodImpl(Inline)]
+        public static CpuEvent Create(string label, object content)
+            => new CpuEvent(label, content.ToString());
+
+        [MethodImpl(Inline)]
         public static implicit operator CpuEvent((string label, object content) src)
             => new CpuEvent(src.label, src.content?.ToString() ?? string.Empty);
 

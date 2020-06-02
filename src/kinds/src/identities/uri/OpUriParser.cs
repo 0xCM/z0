@@ -9,9 +9,9 @@ namespace Z0
 
     using static UriDelimiters;
 
-    public readonly struct OpUriParser : IParser<OpUriParser,OpUri>
+    public readonly struct OpUriParser : ITextParser<OpUri>
     {        
-        public static IParser<OpUri> The => default(OpUriParser);
+        public static ITextParser<OpUri> The => default(OpUriParser);
         
         static OpUriScheme ParseScheme(string text)        
             => Enum.TryParse(typeof(OpUriScheme), text, true, out var result) 

@@ -5,31 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
+    
     partial class Memories
     {
-        /// <summary>
-        /// The bit-width of an 8-bit unsigned integer
-        /// </summary>
-        public const byte Width8u = 8;
-
-        /// <summary>
-        /// The bit-width of a 16-bit unsigned integer
-        /// </summary>
-        public const byte Width16u = 16;
-
-        /// <summary>
-        /// The bit-width of a 32-bit unsigned integer
-        /// </summary>
-        public const byte Width32u = 32;
-
-        /// <summary>
-        /// The bit-width of a 32-bit unsigned integer
-        /// </summary>
-        public const byte Width64u = 64;
-
         public static W8 w8 => default(W8);
+
+        public static W2 w2 => default(W2);
+
+        public static W3 w3 => default(W3);
+
+        public static W4 w4 => default(W4);
+
+        public static W5 w5 => default(W5);
+
+        public static W6 w6 => default(W6);
+
+        public static W7 w7 => default(W7);
 
         public static W16 w16 => default(W16);
 

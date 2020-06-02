@@ -19,6 +19,10 @@ namespace Z0
     {
         byte data;
 
+        const byte LoMask = 0b0000_1111;
+
+        const byte HiMask = 0b1111_0000;
+
         public static analog zero => 0;
 
         public static analog one => 1;
@@ -70,10 +74,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(analog src)
             => src.data;
-
-        // [MethodImpl(Inline)]
-        // public static explicit operator uint4_t(analog src)
-        //     => uint4_t.From(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator uint16_t(analog src)

@@ -13,7 +13,7 @@ namespace Z0.Asm
 
         public void parse_address_segment()
         {
-            var parser = HexParsers.MemoryRange;
+            var parser = Parsers.address(true);
             for(var i=0; i<RepCount; i++)
             {
                 var start = Random.Next(0ul, uint.MaxValue);

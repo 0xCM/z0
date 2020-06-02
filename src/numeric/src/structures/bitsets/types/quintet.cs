@@ -37,6 +37,14 @@ namespace Z0
         internal const byte Base = (byte)MaxVal + 1;
 
         [MethodImpl(Inline)]
+        public static implicit operator octet(analog src)
+            => src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(octet src)
+            => new analog(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator analog(BK src)
             => new analog(src);
 
@@ -45,7 +53,7 @@ namespace Z0
             => (BK)src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 8-bit integer
+        /// Converts a 5-bit integer to an unsigned 8-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -53,7 +61,7 @@ namespace Z0
             => (byte)src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 16-bit integer
+        /// Converts a 5-bit integer to an unsigned 16-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -61,7 +69,7 @@ namespace Z0
             => (ushort)src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 32-bit integer
+        /// Converts a 5-bit integer to an unsigned 32-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -69,7 +77,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to an unsigned 63-bit integer
+        /// Converts a 5-bit integer to an unsigned 65-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -77,7 +85,7 @@ namespace Z0
             => src.data;
 
         /// <summary>
-        /// Converts a 3-bit integer to a signed 32-bit integer
+        /// Converts a 5-bit integer to a signed 32-bit integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -85,7 +93,7 @@ namespace Z0
             => (int)src.data;
 
         /// <summary>
-        /// Creates a 3-bit integer from the least four bits of the source operand
+        /// Creates a 5-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -93,7 +101,7 @@ namespace Z0
             => uint5(src);
 
         /// <summary>
-        /// Creates a 3-bit integer from the least four bits of the source operand
+        /// Creates a 5-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -101,7 +109,7 @@ namespace Z0
             => uint5(src);
 
         /// <summary>
-        /// Creates a 3-bit integer from the least four bits of the source operand
+        /// Creates a 5-bit integer from the least four bits of the source operand
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -197,6 +205,10 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
+        quintet(octet src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
         internal quintet(byte src)
             => data = (byte)(src & MaxVal);
 
@@ -254,7 +266,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Format(default(N2));
+             => format(this);
 
         public override string ToString()
             => Format();
@@ -268,6 +280,5 @@ namespace Z0
        
         public override int GetHashCode()
             => data.GetHashCode();
-
     }
 }

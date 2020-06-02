@@ -19,7 +19,6 @@ namespace Z0
         OpIdentity INullary<OpIdentity>.Zero => OpIdentity.Empty;
     }
 
-    [Parser]
     public readonly struct OpIdentityParser : IIdentityParser
     {
         public static IIdentityParser Service => default(OpIdentityParser);

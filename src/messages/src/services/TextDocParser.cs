@@ -23,11 +23,11 @@ namespace Z0
             => new TextDocParser<T>(f);
     }
     
-    public interface ITextDocParser<T> : IParser<T>
+    public interface ITextDocParser<T> : ITextParser<T>
     {
         ParseResult<T> Parse(TextDoc src);    
 
-        ParseResult<T> IParser<T>.Parse(string src)
+        ParseResult<T> ITextParser<T>.Parse(string src)
         {
             using var stream = text.stream(src);
             using var reader = new StreamReader(stream);

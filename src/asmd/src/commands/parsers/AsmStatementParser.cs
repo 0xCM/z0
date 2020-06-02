@@ -11,7 +11,7 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-    public readonly struct AsmStatementParser : IParser<AsmStatement>
+    public readonly struct AsmStatementParser : ITextParser<AsmStatement>
     {
         public static AsmStatementParser Service => default(AsmStatementParser);
 
@@ -27,7 +27,5 @@ namespace Z0.Asm.Data
 
             return ParseResult.Fail<AsmStatement>(src);            
         }
-
     }
-
 }

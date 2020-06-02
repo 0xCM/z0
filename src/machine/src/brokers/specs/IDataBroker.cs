@@ -14,15 +14,15 @@ namespace Z0.Machines
     
     }
 
-    public interface IDataBroker<E,T> : IDataBroker
-        where E : unmanaged, Enum
+    public interface IDataBroker<K,T> : IDataBroker
+        where K : unmanaged, Enum
     {
-        ref readonly DataHandler<T> Get(E kind);
+        ref readonly DataHandler<T> Get(K key);
 
-        ref DataHandler<T> Set(E kind, in DataHandler<T> handler);
+        ref DataHandler<T> Set(K key, in DataHandler<T> handler);
 
-        void Relay(E kind, T data);
+        void Relay(K key, T value);
 
-        ref DataHandler<T> this[E kind] {get;}
+        ref DataHandler<T> this[K key] {get;}
     }
 }

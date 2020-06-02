@@ -13,7 +13,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct TextLineParser : IParser<TextLine[]>
+    public readonly struct TextLineParser : ITextParser<TextLine[]>
     {
         public static TextLineParser Service => default;
 

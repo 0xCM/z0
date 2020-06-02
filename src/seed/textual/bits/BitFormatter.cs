@@ -34,6 +34,7 @@ namespace Z0
             where T : struct
                 => create<T>().Format(src);
 
+
         [MethodImpl(Inline)]
         public static string format<T>(T src, BitFormatConfig config)
             where T : struct

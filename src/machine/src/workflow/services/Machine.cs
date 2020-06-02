@@ -34,7 +34,7 @@ namespace Z0.Machines
             Sink = context.AppMsgSink;
             Context = context;
             Broker = new EventBroker();
-            Files = new MachineFiles(context);            
+            Files = MachineFiles.Service(context);            
             IndexBuilder = MachineIndex.Builder;
             (this as IMachineEventClient).Connect();            
         }

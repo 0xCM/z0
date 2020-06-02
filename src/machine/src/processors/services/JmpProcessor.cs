@@ -55,15 +55,13 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public void OnJAE(LocatedInstruction inxs)
         {
-            term.announce();
-            
+            term.announce();            
         }
 
         [MethodImpl(Inline)]
         public void OnJB(LocatedInstruction inxs)
         {
-            term.announce();
-            
+            term.announce();            
         }
 
         [MethodImpl(Inline)]

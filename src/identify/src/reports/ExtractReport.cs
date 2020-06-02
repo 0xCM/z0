@@ -43,11 +43,11 @@ namespace Z0
 
             var parser = NumericParser.create<int>();
             var seq = parser.Parse(fields[0]).ValueOrDefault();            
-            var address = MemoryAddress.Define(HexParsers.Scalar.Parse(fields[1]).ValueOrDefault());
+            var address = MemoryAddress.Define(Parsers.hex().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();            
             var uri = OpUri.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
-            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(HexParsers.Bytes.Succeed).ToArray();
+            var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
             var extract = LocatedCode.Define(address, data);
             return new R(seq, address, len, uri, sig, extract);
         }

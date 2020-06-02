@@ -13,6 +13,10 @@ namespace Z0.Machines
     public readonly struct MachineFiles : IMachineFiles
     {            
         [MethodImpl(Inline)]
+        public static MachineFiles Service(IMachineContext context)
+            => new MachineFiles(context);
+
+        [MethodImpl(Inline)]
         public MachineFiles(IMachineContext context)
         {
             this.Context = context;

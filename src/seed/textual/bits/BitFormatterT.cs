@@ -15,12 +15,11 @@ namespace Z0
     /// </summary>
     public readonly struct BitFormatter<T> : IBitFormatter<T>
         where T : struct
-    {                                    
-        public string Format(ReadOnlySpan<byte> src, in BitFormatConfig config)
-        {
-            
-            const char zero = Chars.D0;
+    {                                  
+        const char zero = Chars.D0;
 
+        public string Format(ReadOnlySpan<byte> src, in BitFormatConfig config)
+        {            
             var bits = src.Length*8;
             Span<char> dst = stackalloc char[bits];
             dst.Fill(zero);
@@ -45,7 +44,6 @@ namespace Z0
         
         public string Format(T src, in BitFormatConfig config)
         {
-            var zero = Chars.D0;
             var bytes = Control.bytes(src);
             return Format(bytes,config);
         }

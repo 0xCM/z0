@@ -10,9 +10,9 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct UriHexParser : IParser<UriHex>
+    public readonly struct UriHexParser : ITextParser<UriHex>
     {
-        public static IParser<UriHex> Service => default(UriHexParser);
+        public static ITextParser<UriHex> Service => default(UriHexParser);
         
         /// <summary>
         /// Parses a row of identified hex text
@@ -22,7 +22,7 @@ namespace Z0
         {
             try
             {
-                var parser = HexParsers.Bytes;
+                var parser = Parsers.hex(true);
                 var uri = OpUri.Parse(src.TakeBefore(Chars.Space).Trim()).ToOption().Require();
                 var bytes = src.TakeAfter(Chars.Space)
                                      .Split(HexSpecs.DataDelimiter, StringSplitOptions.RemoveEmptyEntries)

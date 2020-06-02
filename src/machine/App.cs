@@ -43,25 +43,18 @@ namespace Z0
         IMachineContext CreateMachineContext(IAsmContext root, PartId[] code)
             => MachineContext.Create(root, code);
 
-        void RunCpu()
-        {
-            var cpu = Cpu.alloc();
-            cpu.Run();
-        }
+        static void RunCpu(IMachineContext context)
+            => Cpu.alloc(context).Run();
 
         public override void RunShell(params string[] args)
         {            
+            var parts = PartParser.Service.ParseValid(args);  
+            var context = CreateMachineContext(CreateAsmContext(), parts);  
             
             if(StartCpu)
-            {
-                RunCpu();
-            }
+                RunCpu(context);
             else
-            {
-                var parts = PartParser.Service.ParseValid(args);  
-                var context = CreateMachineContext(CreateAsmContext(), parts);  
                 Machine.Run(context);   
-            }
         }
 
         public static void Main(params string[] args)

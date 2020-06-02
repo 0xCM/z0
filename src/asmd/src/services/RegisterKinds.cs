@@ -17,8 +17,8 @@ namespace Z0.Asm.Data
     public partial class RegisterKinds : IApiHost<RegisterKinds>
     {
         [MethodImpl(Inline), Op]
-        public static RegisterCode Code(RegisterKind src)
-            => (RegisterCode)Bits.slice((uint)src, (byte)FI.C, (byte)FW.C);
+        public static RegisterCode32 Code(RegisterKind src)
+            => (RegisterCode32)Bits.slice((uint)src, (byte)FI.C, (byte)FW.C);
 
         [MethodImpl(Inline), Op]
         public static RegisterClass Class(RegisterKind src)
@@ -29,7 +29,7 @@ namespace Z0.Asm.Data
             => (RegisterWidth)Bits.slice((uint)src, (byte)FI.W, (byte)FW.W);
 
         [MethodImpl(Inline), Op]
-        public static RegisterKind Code(RegisterCode src, RegisterKind dst)
+        public static RegisterKind Code(RegisterCode32 src, RegisterKind dst)
             => (RegisterKind)(Bits.copy((uint)src, (byte)FI.C, (byte)(FW.C), (uint)dst));
 
         [MethodImpl(Inline), Op] 

@@ -170,7 +170,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static string label(string text, ulong baseaddress)
-            => HexParsers.Scalar.Parse(text).ToOption().Map(address => (address - baseaddress).FormatSmallHex(true),  
+            => Parsers.hex().Parse(text).ToOption().Map(address => (address - baseaddress).FormatSmallHex(true),  
                     () => $"{text}?");
     }
 }

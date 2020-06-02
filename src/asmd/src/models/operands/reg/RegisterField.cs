@@ -16,13 +16,13 @@ namespace Z0.Asm.Data
     public readonly struct RegisterField : ITextual
     {
         [MethodImpl(Inline)]
-        public static RegisterKind join(RegisterCode c, RegisterClass k, RegisterWidth w)
+        public static RegisterKind join(RegisterCode32 c, RegisterClass k, RegisterWidth w)
             => (RegisterKind)((uint)c | (uint)k << FK | (uint)w << FW);
 
         [MethodImpl(Inline)]
-        public static void split(RegisterKind src, out RegisterCode c, out RegisterClass k, out RegisterWidth w)
+        public static void split(RegisterKind src, out RegisterCode32 c, out RegisterClass k, out RegisterWidth w)
         {
-            c = (RegisterCode)src;
+            c = (RegisterCode32)src;
             k = (RegisterClass)((uint)src >> FK);
             w = (RegisterWidth)((uint)src >> FW);
         }
@@ -45,7 +45,7 @@ namespace Z0.Asm.Data
         /// <summary>
         /// The width of the RegisterCode segment
         /// </summary>
-        public const RegisterCode CodeFW = RegisterCode.FieldWidth;
+        public const RegisterCode32 CodeFW = RegisterCode32.FieldWidth;
 
         /// <summary>
         /// The width of the RegisterClass segment
@@ -57,7 +57,7 @@ namespace Z0.Asm.Data
         /// </summary>
         public const RegisterWidth WidthFW = RegisterWidth.FieldWidth;
 
-        public readonly RegisterCode Code;
+        public readonly RegisterCode32 Code;
 
         public readonly RegisterClass Class;
 
@@ -68,7 +68,7 @@ namespace Z0.Asm.Data
             => new RegisterField(src);    
 
         [MethodImpl(Inline)]
-        public RegisterField(RegisterCode c, RegisterClass k, RegisterWidth w)
+        public RegisterField(RegisterCode32 c, RegisterClass k, RegisterWidth w)
         {
             Code = c;
             Class = k;
@@ -89,7 +89,7 @@ namespace Z0.Asm.Data
         {            
             const string Sep = " | ";
             
-            var seg0 = SegmentFormatter.format<RegisterCode,byte>(Code);
+            var seg0 = SegmentFormatter.format<RegisterCode32,byte>(Code);
             var seg1 = SegmentFormatter.format<RegisterClass,byte>(Class);
             var seg2 = SegmentFormatter.format<RegisterWidth,ushort>(Width);
             var dst = text.bracket(text.concat(seg2, Sep, seg1, Sep, seg0));

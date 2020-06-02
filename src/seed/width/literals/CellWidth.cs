@@ -15,7 +15,7 @@ namespace Z0
     public enum CellWidth : ushort
     {
         /// <summary>
-        /// Indicates a synthetic, but useful, bit-width of 1
+        /// Indicates a bit-width of 1
         /// </summary>
         W1 = (ushort)W.W1,
 

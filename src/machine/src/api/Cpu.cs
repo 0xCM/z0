@@ -6,6 +6,7 @@ namespace Z0.Machines
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using Z0.Asm.Data;
 
@@ -16,77 +17,67 @@ namespace Z0.Machines
     {
         public const string Case01 = "002ch vmovdqu xmmword ptr [rcx],xmm0          ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 01}";
 
+
     }
 
+
     [ApiHost]
-    public struct Cpu
+    public class Cpu
     {
-        readonly ByteBuffer<HexCode> _StepBuffer;
+        const int DefaultBufferSize = CpuBuffer.BufferSize;
 
-        readonly ByteBuffer<HexCode> _RunBuffer;
+        readonly IMachineContext Context;
 
-        readonly char[] _LogBuffer;
+        readonly CpuBuffers Buffers;
 
-        int _RunIndex;
+        readonly List<AsmDoc> AsmDocs;
+
+        int Count;
+
+        readonly MachineFiles Files;
 
         [MethodImpl(Inline), Op]
-        public static Cpu alloc()
-            => new Cpu(0);
-
-        [MethodImpl(Inline), Op]
-        public static Cpu init(char[] logBuffer, in ByteBuffer<HexCode> stepBuffer, in ByteBuffer<HexCode> runBuffer) 
-            => new Cpu(logBuffer,stepBuffer,runBuffer);
-
-        const int DefaultBufferSize = ByteBuffer.BufferSize;
+        public static Cpu alloc(IMachineContext context)
+            => new Cpu(context, 0);
 
         [MethodImpl(Inline)]
-        internal Cpu(char[] logBuffer, in ByteBuffer<HexCode> stepBuffer, in ByteBuffer<HexCode> runBuffer)
+        internal Cpu(IMachineContext context, int runidx)
         {
-            _LogBuffer = logBuffer;
-            _StepBuffer = stepBuffer;
-            _RunBuffer = runBuffer;
-            _RunIndex = 0;
+            AsmDocs = new List<AsmDoc>(100);
+            Context = context;
+            Files = MachineFiles.Service(context);
+            Buffers = CpuBuffers.Alloc(DefaultBufferSize);
+            Count = runidx;
         }
 
-        [MethodImpl(Inline)]
-        internal Cpu(int runidx)
+        void AddAsmDoc(FilePath src, TextDoc doc)
         {
-            _LogBuffer = Control.alloc<char>(DefaultBufferSize);
-            _StepBuffer = ByteBuffer.Init(Control.alloc<HexCode>(DefaultBufferSize));
-            _RunBuffer = ByteBuffer.Init(Control.alloc<HexCode>(DefaultBufferSize));            
-            _RunIndex = runidx;
+            AsmDocs.Add(new AsmDoc(src,doc));
         }
 
-        [MethodImpl(Inline), Op]
-        Span<HexCode> StepBuffer()
-        {            
-            _StepBuffer.Clear(w128);
-            return _StepBuffer.Content;
-        }
-
-        [MethodImpl(Inline), Op]
-        Span<char> LogBuffer()
+        void LoadAsmDoc(FilePath src)
         {
-            Span<char> buffer = _LogBuffer;
-            buffer.Clear();
-            return buffer;                
+            src.ReadTextDoc().OnSome(doc => AddAsmDoc(src,doc));
         }
-
-        Span<HexCode> RunBuffer
+        
+        void LoadAsmDocs()
         {
-            [MethodImpl(Inline)]
-            get => _RunBuffer.Content;
+            Control.iter(Files.Archive.AsmFiles,LoadAsmDoc);
+            Notify(CpuEvent.Create("Loaded asm docs", AsmDocs.Count));
         }
 
         [Op, MethodImpl(Inline)]
         public void Run()
         {            
+            LoadAsmDocs();
+
+            
             var data = 0xCE_38ul;
             var command = Asm.Data.Commands.encode(data);
             Dispatch(command);
 
-            var steps = RunBuffer.Slice(0, _RunIndex);
-            var buffer = LogBuffer();
+            var steps = Buffers.Run().Slice(0, Count);
+            var buffer = Buffers.Log();
             var count = Symbolic.render(steps, buffer);
             var hexline = buffer.Slice(0,count).ToString();
             term.print(hexline);
@@ -119,11 +110,11 @@ namespace Z0.Machines
         [Op, MethodImpl]
         public void Execute(in ReadOnlySpan<byte> src)
         {
-            var buffer = StepBuffer();
+            var buffer = Buffers.Step();
             var count = Symbolic.codes(src, UpperCased.Case, buffer);
             var ran = buffer.Slice(0, count);
-            ran.CopyTo(RunBuffer, _RunIndex);
-            _RunIndex += count;
+            ran.CopyTo(Buffers.Run(), Count);
+            Count += count;
         }
     }
 }

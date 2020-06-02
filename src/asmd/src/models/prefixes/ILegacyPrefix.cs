@@ -10,14 +10,11 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-    public interface ILegacyPrefix
-    {
-        LegacyPrefixKind Group {get;}
-    }
-
-    public interface ILegacyPrefix<H> : ILegacyPrefix
+    public interface ILegacyPrefix<H>
         where H : unmanaged, IHexCode
     {
+        LegacyPrefixKind Group {get;}
+
         H Code => default;
     }
 }

@@ -26,7 +26,7 @@ namespace Z0
         {
             try
             {
-                var parser = HexParsers.Bytes;
+                var parser = Parsers.hex(true);
                 var uritext = formatted.TakeBefore(Chars.Space).Trim();
                 var uri = OpUri.Parse(uritext);
                 var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexSpecs.DataDelimiter).Select(parser.Succeed).ToArray();

@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level duet and thus has domain {00,01,10,11}
     /// </summary>
-    public struct duet : IEquatable<analog>
+    public struct duet : IEquatable<analog>, ITextual
     {
         internal byte data;
 
@@ -35,6 +35,34 @@ namespace Z0
         internal const int BitWidth = 3;        
 
         internal const byte Base = (byte)MaxVal + 1;
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(octet src)
+            => new analog(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator triad(analog src)
+            => new triad(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator quartet(analog src)
+            => new quartet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator quintet(analog src)
+            => new quintet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator sextet(analog src)
+            => new sextet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator septet(analog src)
+            => new septet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator octet(analog src)
+            => new octet(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator analog(BK src)
@@ -197,6 +225,10 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
+        duet(octet src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
         internal duet(byte src)
             => data = (byte)(src & MaxVal);
 
@@ -249,7 +281,10 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public string Format()
-            => HexMap[data].ToString();
+             => format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(analog rhs)
@@ -259,11 +294,6 @@ namespace Z0
             => rhs is analog x && Equals(x);
        
         public override int GetHashCode()
-            => data.GetHashCode();
- 
-        /// <summary>
-        /// Defines a mapping from possible values to their hex code representations
-        /// </summary>
-        static char[] HexMap  => new char[]{'0', '1'};
+            => data.GetHashCode();      
     }
 }

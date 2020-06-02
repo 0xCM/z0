@@ -37,6 +37,26 @@ namespace Z0
         internal const byte Base = (byte)MaxVal + 1;
 
         [MethodImpl(Inline)]
+        public static implicit operator octet(analog src)
+            => src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator quintet(analog src)
+            => new quintet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator quartet(analog src)
+            => new quartet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator sextet(analog src)
+            => new sextet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(octet src)
+            => new analog(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator analog(BK src)
             => new analog(src);
 
@@ -197,6 +217,10 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
+        triad(octet src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
         internal triad(byte src)
             => data = (byte)(src & MaxVal);
 
@@ -249,7 +273,10 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public string Format()
-            => HexMap[data].ToString();
+             => format(this);
+ 
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(analog rhs)
@@ -259,11 +286,6 @@ namespace Z0
             => rhs is analog x && Equals(x);
        
         public override int GetHashCode()
-            => data.GetHashCode();
- 
-        /// <summary>
-        /// Defines a mapping from possible values to their hex code representations
-        /// </summary>
-        static char[] HexMap  => new char[]{'0', '1', '2', '3'};
+            => data.GetHashCode();  
     }
 }

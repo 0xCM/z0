@@ -27,9 +27,25 @@ namespace Z0
         W2 = 2,
 
         /// <summary>
+        /// Indicates a bit-width of 3
+        W3 = 3,
+
+        /// <summary>
         /// Indicates a bit-width of 4
         /// </summary>
         W4 = 4,
+
+        /// <summary>
+        /// Indicates a bit-width of 5
+        W5 = 5,
+
+        /// <summary>
+        /// Indicates a bit-width of 6
+        W6 = 6,
+
+        /// <summary>
+        /// Indicates a bit-width of 7
+        W7 = 7,
 
         /// <summary>
         /// Indicates a bit-width of 8
@@ -75,7 +91,5 @@ namespace Z0
         /// Indicates a bit-width of 1024
         /// </summary>
         W1024 = 1024,
-
     }
-
 }

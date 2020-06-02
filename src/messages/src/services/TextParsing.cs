@@ -12,6 +12,14 @@ namespace Z0
 
     using static Seed;
     
+    public readonly struct TextDocReader
+    {
+        public static Option<TextDoc> Read(FilePath src, TextFormat? format = null)
+        {
+            using var r = src.Reader();
+            return r.ParseDocument(format);
+        }
+    }
     public static class TextDocParsing
     {
         /// <summary>

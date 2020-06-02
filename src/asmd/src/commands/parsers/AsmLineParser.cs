@@ -81,7 +81,7 @@ namespace Z0.Asm.Data
             if(hexdata.Length != count)
                 return fail;
 
-            var hexparser = HexParsers.Bytes;
+            var hexparser = Parsers.hex(true);
             var bytesMaybe = hexparser.ParseData(hexdata);
             if(bytesMaybe.Failed)
                 return fail;

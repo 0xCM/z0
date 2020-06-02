@@ -6,7 +6,7 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    using static RegisterCode;
+    using static RegisterCode32;
     using static RegisterClass;
     using static RegisterWidth;
     using static RegisterField;

@@ -18,14 +18,6 @@ namespace Z0
     /// </summary>
     public struct quartet : IEquatable<analog>
     {
-        [MethodImpl(Inline)]
-        public static analog FromUpper(byte src)
-            => new analog(src >> 4);
-
-        [MethodImpl(Inline)]
-        public static analog FromLower(byte src)
-            => new analog(src);
-
         internal byte data;
 
         public static analog MinValue => MinVal;
@@ -43,6 +35,18 @@ namespace Z0
         internal const int BitWidth = 4;        
 
         internal const byte Base = (byte)MaxVal + 1;
+
+        [MethodImpl(Inline)]
+        public static implicit operator octet(analog src)
+            => new octet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator quintet(analog src)
+            => new quintet(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(octet src)
+            => new analog(src);
 
         [MethodImpl(Inline)]
         public static implicit operator analog(BK src)
@@ -213,6 +217,10 @@ namespace Z0
             => (byte)(0xF & x);
 
         [MethodImpl(Inline)]
+        quartet(octet src)
+            => data = (byte)(src & MaxVal);
+
+        [MethodImpl(Inline)]
         internal quartet(byte src)
             => data = crop(src);
 
@@ -299,7 +307,10 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public string Format()
-            => HexMap[data].ToString();
+             => format(this);
+
+         public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(analog rhs)
@@ -318,10 +329,5 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static analog Wrap(uint src) 
             => BitSet.wrap4(src);
-
-        /// <summary>
-        /// Defines a mapping from possible UInt4 values to their hex code representations
-        /// </summary>
-        static char[] HexMap => new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
     }
 }
