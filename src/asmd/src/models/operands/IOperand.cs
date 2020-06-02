@@ -26,7 +26,8 @@ namespace Z0.Asm.Data
         /// </summary>
         T Data {get;}   
 
-        DataWidth ISized.Width => (DataWidth)bitsize<T>();
+        DataWidth ISized.Width 
+            => (DataWidth)bitsize<T>();
     }
 
     public interface IOperand<W,T> : IOperand<T>

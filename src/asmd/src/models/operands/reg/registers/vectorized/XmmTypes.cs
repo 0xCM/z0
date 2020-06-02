@@ -46,7 +46,6 @@ namespace Z0.Asm.Data
 
         public readonly struct XMM6 : IXmmRegOp<XMM6,N6>
         {
-
             public K Kind => K.XMM6;
         }
 

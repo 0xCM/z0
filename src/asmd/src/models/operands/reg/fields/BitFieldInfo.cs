@@ -19,7 +19,6 @@ namespace Z0.Asm.Data
 
     public readonly struct FieldSegInfo
     {
-
         [MethodImpl(Inline)]
         public static FieldSegInfo<E,T> define<E,T>(byte left, byte width, string name = null)
             where E : unmanaged, Enum

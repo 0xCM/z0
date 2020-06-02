@@ -16,11 +16,14 @@ namespace Z0.Asm.Data
         
         public TextDoc Text {get;}
 
+        public AsmStatementBlock[] Blocks {get;}
+
         [MethodImpl(Inline)]
-        public AsmDoc(FilePath path, TextDoc src)
+        public AsmDoc(FilePath path, TextDoc src, AsmStatementBlock[] blocks)
         {
             Text = src;
             SourcePath = path;
+            Blocks = blocks;
         }
     }
 }

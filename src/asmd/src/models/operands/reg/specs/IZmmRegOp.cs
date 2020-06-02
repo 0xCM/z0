@@ -3,23 +3,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
-    public interface IYmmRegOp : IRegOp<W256>
+    using static Seed;
+    using static Memories;
+
+    public interface IZmmRegOp : IRegOp<W512>
     {
-
+        
     }
 
-    public interface IYmmRegOp<S> : IYmmRegOp, IRegOp<W256,S>
-        where S : unmanaged
-    {            
-    
-    }
-
-    public interface IYmmRegOp<F,N,S> : IYmmRegOp<S>,IRegOp<F,W256,S>
-        where F : struct, IYmmRegOp<F,N,S>
+    public interface IZmmRegOp<F,N,S> : IZmmRegOp, IRegOp<F,W512,S>
+        where F : struct, IZmmRegOp<F,N,S>
         where N : unmanaged, ITypeNat
         where S : unmanaged
     {
-
+        
     }
 
     /// <summary>
@@ -27,10 +24,10 @@ namespace Z0.Asm.Data
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="N">The index type</typeparam>
-    public interface IYmmRegOp<F,N> : IYmmRegOp<F,N,Fixed256>
-        where F : struct, IYmmRegOp<F,N>
+    public interface IZmmRegOp<F,N> : IZmmRegOp<F,N,Fixed512>
+        where F : struct, IZmmRegOp<F,N>
         where N : unmanaged, ITypeNat
     {
-        
+        byte IRegOp.RegisterIndex => (byte)value<N>();        
     }
 }

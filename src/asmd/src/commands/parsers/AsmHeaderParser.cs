@@ -6,7 +6,6 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Seed;
     using static Memories;
@@ -16,10 +15,10 @@ namespace Z0.Asm.Data
     {
         public static AsmHeaderParser Service => default(AsmHeaderParser);
 
-        public ParseResult<AsmHeader> Parse(string src)
+        public ParseResult<AsmHeader> Parse(string[] lines)
         {
-            var fail = ParseResult.Fail<AsmHeader>(src);
-            var lines = src.SplitClean(Chars.NL);
+            var fail = ParseResult.Fail<AsmHeader>(lines.Concat(Chars.NL));
+
             if(lines.Length < 4)
                 return fail;
 
@@ -40,7 +39,11 @@ namespace Z0.Asm.Data
             var tcText = l3Parts.Length == 2 ? l3Parts[1] : string.Empty;
             var tcVal = Enums.Parse(tcText, ExtractTermCode.None);
 
-            return ParseResult.Success(src, new AsmHeader(uri, sig, prop, @base, tcVal));
+            return ParseResult.Success(lines.Concat(Chars.NL), new AsmHeader(uri, sig, prop, @base, tcVal));
         }
+
+        public ParseResult<AsmHeader> Parse(string src)
+            => Parse(src.SplitClean(Chars.NL));
+
     }
 }

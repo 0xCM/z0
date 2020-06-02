@@ -8,9 +8,6 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Registers;
-
-    using K = RegisterKind;
 
     public readonly struct YmmReg : IYmmRegOp<Fixed256>
     {

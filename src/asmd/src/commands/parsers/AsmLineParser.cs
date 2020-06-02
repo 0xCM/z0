@@ -25,6 +25,7 @@ namespace Z0.Asm.Data
             Symbolic.encode(src,0,count,dst);
             return dst;
         }
+        
         public ParseResult<AsmCommand> Parse(string line, ref int seq)
         {
             var fail = ParseResult<AsmCommand>.Fail(line);
@@ -91,8 +92,6 @@ namespace Z0.Asm.Data
                 return fail;
             
             return ParseResult.Success(src, Commands.encode(bytes));
-        }
-
-        
+        }        
     }
 }

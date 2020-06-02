@@ -8,14 +8,11 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Registers;
-
-    using K = RegisterKind;
 
     public readonly struct ZmmReg : IYmmRegOp<Fixed512>
     {
         public RegisterKind Kind {get;}
-
+        
         [MethodImpl(Inline)]
         public ZmmReg(RegisterKind kind)
         {

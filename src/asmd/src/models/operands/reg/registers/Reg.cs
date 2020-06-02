@@ -15,6 +15,9 @@ namespace Z0.Asm.Data
 
         public RegisterKind Kind {get;}
 
+        public byte RegisterIndex 
+            => (byte)Kind;
+
         [MethodImpl(Inline)]
         public Reg(RegisterKind kind, DataWidth width)
         {

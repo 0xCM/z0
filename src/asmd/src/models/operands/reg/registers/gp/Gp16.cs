@@ -8,11 +8,15 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Memories;
-    using static Registers;
 
     public readonly struct GpReg16 : IRegOp16<Fixed16>
     {    
+        [MethodImpl(Inline)]
+        public GpReg16(RegisterKind kind)
+        {
+            this.Kind = kind;
+        }
+
         public RegisterKind Kind {get;}        
     }
 }

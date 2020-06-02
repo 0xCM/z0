@@ -20,7 +20,7 @@ namespace Z0.Asm.Data
 
         internal const char Assign = Chars.Eq;
 
-        internal const string SegSepMarker = "-----";
+        internal const string BlockSepMarker = "-----";
 
         internal const string DescriptorSep = "||";       
 
@@ -33,8 +33,8 @@ namespace Z0.Asm.Data
             => src.Trim().StartsWith(CommentMarker);
 
         [MethodImpl(Inline)]
-        internal static bool IsSegSepLine(string src)
-            => src.Trim().StartsWith(SegSepMarker);
+        internal static bool IsBlockSep(string src)
+            => src.Trim().StartsWith(BlockSepMarker);
 
         [MethodImpl(Inline)]
         internal static bool IsBlankLine(string src)

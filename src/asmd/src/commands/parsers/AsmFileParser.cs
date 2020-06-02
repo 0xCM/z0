@@ -30,7 +30,7 @@ namespace Z0.Asm.Data
             {                
                 var line = reader.ReadLine();
                                 
-                if(IsSegSepLine(line))
+                if(IsBlockSep(line))
                 {
                     AsmParsed(i++, commands.ToArray());
                     commands.Clear();

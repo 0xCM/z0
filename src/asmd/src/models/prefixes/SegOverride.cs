@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
 
     using static HexKind;
 
-    public enum SegOverrideCode : byte
+    public enum SegOverride : byte
     {
         None = 0,
 

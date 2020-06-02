@@ -52,7 +52,10 @@ namespace Z0.Machines
 
         void AddAsmDoc(FilePath src, TextDoc doc)
         {
-            AsmDocs.Add(new AsmDoc(src,doc));
+            var parser = AsmDocParser.Service;
+            var blocks = parser.Parse(doc);
+            if(blocks)
+                AsmDocs.Add(new AsmDoc(src,doc,blocks.Value));            
         }
 
         void LoadAsmDoc(FilePath src)

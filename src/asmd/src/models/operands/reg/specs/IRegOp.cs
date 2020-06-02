@@ -14,8 +14,11 @@ namespace Z0.Asm.Data
         /// </summary>
         RegisterKind Kind {get;}
 
-        OperandKind IOperand.OpKind => OperandKind.R;
+        byte RegisterIndex
+             => (byte)Kind;
 
+        OperandKind IOperand.OpKind 
+            => OperandKind.R;
     }
 
     /// <summary>
@@ -51,19 +54,5 @@ namespace Z0.Asm.Data
         where S : unmanaged
     {
         
-    }
-
-    /// <summary>
-    /// Characterizes a register reification parametric in index, width and state
-    /// </summary>
-    /// <typeparam name="F">The reifying type</typeparam>
-    /// <typeparam name="W">The register width</typeparam>
-    public interface IRegOp<F,N,W,S> : IRegOp<F,W,S>
-        where F : struct, IRegOp<F,N,W,S>
-        where W : unmanaged, IDataWidth
-        where S : unmanaged
-        where N : unmanaged, ITypeNat
-    {
-
     }
 }

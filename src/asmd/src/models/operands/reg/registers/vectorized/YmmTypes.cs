@@ -7,7 +7,6 @@ namespace Z0.Asm.Data
 
     using K = RegisterKind;
 
-
     partial class Registers
     {
         public readonly struct YMM0 : IYmmRegOp<YMM0,N0>

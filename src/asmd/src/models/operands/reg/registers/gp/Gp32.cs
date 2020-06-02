@@ -13,6 +13,7 @@ namespace Z0.Asm.Data
 
     public readonly struct GpReg32 : IRegOp32<Fixed32>
     {    
+        [MethodImpl(Inline)]
         public GpReg32(RegisterKind kind)
         {
             this.Kind = kind;

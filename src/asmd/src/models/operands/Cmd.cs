@@ -7,7 +7,6 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-
     using static Seed;
 
     /// <summary>
@@ -15,6 +14,10 @@ namespace Z0.Asm.Data
     /// </summary>
     public readonly struct Cmd : ICmdData
     {
+        public IOperand[] Args {get;}
+
+        public CmdOpCode Code {get;}
+ 
         [MethodImpl(Inline)]
         public Cmd(params IOperand[] args)
         {
@@ -27,10 +30,6 @@ namespace Z0.Asm.Data
         {
             Args = args;
             Code = code;
-        }
-        
-        public IOperand[] Args {get;}
-
-        public CmdOpCode Code {get;}
+        }       
     }
 }
