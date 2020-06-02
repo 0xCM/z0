@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* constptr<T>(in T src)
             where T : unmanaged
-                => ptr(ref edit(in src));
+                => (T*)pvoid(ref edit(in src));
     }
 }

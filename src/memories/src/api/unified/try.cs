@@ -17,6 +17,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The result type</typeparam>
         /// <param name="f">The function to evaluate</param>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Option<T> Try<T>(Func<T> f, Action<Exception> handler = null)
             => Option.Try(f,handler);
 
@@ -27,16 +28,9 @@ namespace Z0
         /// </summary>
         /// <param name="f">The action to invoke</param>
         /// <param name="onerror">The error handler to call, if specified</param>
+        [MethodImpl(Inline), Op]
         public static void Try(Action f, Action<Exception> handler = null)
             => Option.Try(f,handler);
 
-        /// <summary>
-        /// Casts a value to a parametric type, if possible, otherwise returns none
-        /// </summary>
-        /// <typeparam name="T">The target type</typeparam>
-        /// <param name="src">The object to cast</param>
-        [MethodImpl(Inline)]   
-        public static Option<T> TryCast<T>(object src)
-            => Option.TryCast<T>(src);
     }
 }

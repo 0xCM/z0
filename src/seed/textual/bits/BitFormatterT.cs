@@ -44,7 +44,7 @@ namespace Z0
         
         public string Format(T src, in BitFormatConfig config)
         {
-            var bytes = Control.bytes(src);
+            var bytes = Control.bytespan(src);
             return Format(bytes,config);
         }
 

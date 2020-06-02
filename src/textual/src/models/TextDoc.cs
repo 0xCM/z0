@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Seed;
-
-    public readonly struct TextDoc
+    
+    public readonly struct TextDoc  : IReadOnlyIndex<TextRow>
     {
         public readonly TextRow[] RowData;        
 
@@ -39,6 +41,17 @@ namespace Z0
             get => RowData.Map(r => r.Format()).Concat(text.eol);
         }
 
+        public Option<TextRow> Next(int index, Func<TextRow,bool> f)
+        {
+            for(var i=index; i<Rows.Length; i++)
+            {
+                var row = this[i];
+                if(f(row))
+                    return row;
+            }
+            return Option.none<TextRow>();
+        }
+        
         public ref readonly TextRow this[int index]
         {
             [MethodImpl(Inline)]
@@ -50,11 +63,33 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Rows.Length;
         }
-        
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Rows.Length;
+        }
+
         public bool HasHeader
         {
             [MethodImpl(Inline)]
             get => Header.IsSome();
+        }
+
+        public IEnumerable<TextRows> Partition(int offset, Func<TextRow,bool> f)
+        {
+            var part = new List<TextRow>();
+            for(var i=offset; i< RowCount; i++)
+            {
+                var row = this[i];
+                if(f(row))
+                {
+                    yield return new TextRows(part.ToArray());
+                    part.Clear();
+                }
+                else
+                    part.Add(row);
+            }
         }
     }
 }

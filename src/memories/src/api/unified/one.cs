@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T one<T>(T rep)
             where T : unmanaged
-                => Literals.one(rep);
+                => one<T>();
 
     }
 

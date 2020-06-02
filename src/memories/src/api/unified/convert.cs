@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(byte src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(sbyte src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(ushort src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -58,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(short src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(int src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -78,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(uint src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(long src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -98,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(ulong src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -108,7 +108,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(float src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);
@@ -118,7 +118,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
         public static T convert<T>(double src, T t = default)
             where T : unmanaged
                 => Cast.to<T>(src);

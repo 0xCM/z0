@@ -10,12 +10,12 @@ namespace Z0
     using static Seed;
 
     partial class Memories
-    {
+    {    
         /// <summary>
         /// Returns the minimum value supported by a parametrically-identified primal type
         /// </summary>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T minval<T>()
             where T : unmanaged
                 => Literals.minval<T>();
@@ -23,10 +23,10 @@ namespace Z0
         /// <summary>
         /// Returns the minimum value supported by a parametrically-identified primal type
         /// </summary>
-        /// <param name="rep"></param>
+        /// <param name="nk">The kind classifier</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static T minval<T>(T rep)
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static T minval<T>(NK<T> nk)
             where T : unmanaged
                 => minval<T>();
     }

@@ -17,29 +17,30 @@ namespace Z0.Asm.Data
 
         public ParseResult<TextDoc,AsmStatementBlock[]> Parse(TextDoc src)
         {
-            var headerRows = list<TextRow>(4);
-            var rc = src.RowCount;
-            for(var i=0; i<rc; i++)
+            var hParser = AsmHeaderParser.Service;
+            var sParser = AsmStatementParser.Service;
+            var blocks = src.Partition(0, r => IsBlockSep(r.Text)).ToReadOnlySpan();   
+            for(var i =0; i<blocks.Length; i++)
             {
-                var row = src[i];
-                if(IsBlockSep(row.Text))
+                ref readonly var rows = ref skip(blocks,i);
+                var k = 0;
+                for(var j = 0; j < rows.Length; j++)
                 {
-                    headerRows.Clear();
-                    while(++i < rc)
+                    if(IsCommentLine(rows[j].Text))
                     {
-                        row = src[i];
-                        if(IsCommentLine(row.Text))
-                            headerRows.Add(row);
-                        else 
-                            break;
+                        k++;
                     }
-                    var header = AsmHeaderParser.Service.Parse(headerRows.Map(x => x.Text));
+                    else
+                    {
+                        if(k != 0)
+                        {
+                            
+                        }
+                    }
                 }
             }
+
             return default;
-        }
-        
-
+        }        
     }
-
 }

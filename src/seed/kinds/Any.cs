@@ -11,16 +11,6 @@ namespace Z0
     using static Seed;
 
     /// <summary>
-    /// Characterizes any refiication
-    /// </summary>
-    /// <typeparam name="T">The ensconsed </typeparam>
-    public interface IAny<T> : IEquatable<T>
-        where T : IAny<T>
-    {
-        
-    }
-
-    /// <summary>
     /// A generic variant
     /// </summary>
     public readonly struct Any<T> : IAny<Any<T>>, IEquatable<Any<T>>

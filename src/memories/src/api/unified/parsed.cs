@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The parsed thing</param>
         /// <param name="value">The value that was successfully hydrated from the source/param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ParseResult<T> parsed<T>(object src, T value)
             => ParseResult.Success(src?.ToString() ?? string.Empty, value);
     }

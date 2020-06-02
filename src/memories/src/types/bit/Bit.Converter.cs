@@ -96,7 +96,7 @@ namespace Z0
                 if(typeof(T) == typeof(bool))
                     return (bit)boolean(src);
                 else if(typeof(T) == typeof(char))
-                    return  (bit)character(src);
+                    return  (bit)char16(src);
                 else 
                     return convert_b(src);
             }

@@ -29,6 +29,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T ones<T>(T rep)
             where T : unmanaged
-                => Literals.ones(rep);
+                => ones<T>();
     }
 }

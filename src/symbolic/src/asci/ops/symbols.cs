@@ -15,6 +15,6 @@ namespace Z0
     {        
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<Symbol<AsciChar,byte>> symbols(AsciCode16 src)
-            => cast<Symbol<AsciChar,byte>>(bytes(vinflate(src.Data)));
+            => cast<Symbol<AsciChar,byte>>(bytespan(vinflate(src.Data)));
     }
 }

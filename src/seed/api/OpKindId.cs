@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+
     /// <summary>
     /// Defines operand kind identifiers
     /// </summary>

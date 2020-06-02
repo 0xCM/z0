@@ -5,6 +5,7 @@
 namespace Z0
 {        
     using System;
+    using System.Runtime.CompilerServices;
     
     using static Seed;
 
@@ -12,15 +13,16 @@ namespace Z0
     {        
         public static FileArchive Empty => new FileArchive(FolderPath.Empty);
         
+        [MethodImpl(Inline)]
         public static IArchive Create(FolderPath root = null)
             => new FileArchive(root ?? Env.Current.LogDir);
 
+        [MethodImpl(Inline)]
         FileArchive(FolderPath root)
         {
             ArchiveRoot = root;
         }
 
         public FolderPath ArchiveRoot {get;}
-
     }
 }

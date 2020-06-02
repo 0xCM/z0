@@ -11,11 +11,11 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int size<T>()
             => Unsafe.SizeOf<T>();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int size<T>(T t)
             => Unsafe.SizeOf<T>();
     }

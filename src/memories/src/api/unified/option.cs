@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A source value, or null</param>
         /// <typeparam name="T">The enclosed type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Option<T> option<T>(T? src)
             where T : struct
                 => Option.from(src);

@@ -11,15 +11,15 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string ThisMember([CallerMemberName] string name = null)
             => name ?? string.Empty;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string ThisFile([CallerFilePath] string path = null)
             => path ?? string.Empty;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int ThisLine([CallerLineNumber] int? line = null)
             => line ?? 0;    
     }

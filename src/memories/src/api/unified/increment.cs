@@ -16,7 +16,7 @@ namespace Z0
         /// Atomically increments a value in-place
         /// </summary>
         /// <param name="src">The value to increment in-place</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int increment(ref int src)
             => Interlocked.Increment(ref src);
 
@@ -24,7 +24,7 @@ namespace Z0
         /// Atomically increments a value in-place
         /// </summary>
         /// <param name="src">The value to increment in-place</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long increment(ref long src)
             => Interlocked.Increment(ref src);
     }

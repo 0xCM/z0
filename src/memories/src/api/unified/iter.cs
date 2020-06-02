@@ -18,6 +18,7 @@ namespace Z0
         /// <param name="src">The source items</param>
         /// <param name="f">The receiver</param>
         /// <typeparam name="T">The item type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void iter<T>(IEnumerable<T> items, Action<T> action, bool pll = false)
             => Control.iter(items,action, pll);
     }

@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T cast<T>(object src) 
             => (T)src;    
     }

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Seed;
     
@@ -15,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Gets type typecode of a parametrically-identified type
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static TypeCode typecode<T>()
             => Type.GetTypeCode(typeof(T));
     }

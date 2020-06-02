@@ -58,7 +58,7 @@ namespace Z0
             else if(typeof(S) == typeof(double))
                 return to<T>(float64(src));
             else if(typeof(S) == typeof(char))
-                return to<T>(character(src));
+                return to<T>(char16(src));
             else            
                 return Unsupported.define<S,T>(src);
         }

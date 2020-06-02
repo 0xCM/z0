@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="capacity">The list capacity</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static List<T> list<T>(int capacity)
             => new List<T>(capacity);
 
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source items</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static List<T> list<T>(params T[] src)
             => src.ToList();
     }

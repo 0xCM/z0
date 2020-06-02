@@ -35,7 +35,6 @@ namespace Z0
         public void vblendp_perm16_g256x32u()
             => vblendp_check(n256, n16, BitMasks.Msb64x64x1, z32);
 
-
         static string describe<F,D,T,S>(IMaskSpec<F,D,T> maskspec, S sample, Vector512<T> source, Vector512<T> target)
             where F : unmanaged, ITypeNat
             where D : unmanaged, ITypeNat
@@ -67,7 +66,7 @@ namespace Z0
             var maskspec = MaskSpecs.msb(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), max(u64));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,0,5,2,7,4,1,6,3);
             Claim.require(gvec.vsame(expect,target));

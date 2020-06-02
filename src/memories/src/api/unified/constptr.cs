@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* constptr<T>(in T src)
             where T : unmanaged
                 => ptr(ref edit(in src));
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The number of elements to skip</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* constptr<T>(in T src, int offset)
             where T : unmanaged
                 => ptr(ref edit(in skip(in src, offset)));

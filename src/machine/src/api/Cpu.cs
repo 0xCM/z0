@@ -16,8 +16,6 @@ namespace Z0.Machines
     readonly struct AsmParseCases
     {
         public const string Case01 = "002ch vmovdqu xmmword ptr [rcx],xmm0          ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 01}";
-
-
     }
 
 

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T edit<T>(in T src)
             => ref Unsafe.AsRef(in src);
     }

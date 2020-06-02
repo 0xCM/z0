@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The value</param>
         /// <typeparam name="T">The type of the extant value</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Option<T> some<T>(T value)
             => Option<T>.Some(value);
     }

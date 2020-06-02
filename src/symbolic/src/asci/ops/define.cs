@@ -35,19 +35,19 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode define(N1 n, in byte src)
-            => ref to<byte,AsciCode>(src);
+            => ref view<byte,AsciCode>(src);
 
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode2 define(N2 n, in ushort src)
-            => ref to<ushort,AsciCode2>(src);
+            => ref view<ushort,AsciCode2>(src);
 
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode4 define(N4 n, in uint src)
-            => ref to<uint,AsciCode4>(src);
+            => ref view<uint,AsciCode4>(src);
 
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode8 define(N8 n, in ulong src)
-            => ref to<ulong,AsciCode8>(src);
+            => ref view<ulong,AsciCode8>(src);
 
         [MethodImpl(Inline), Op]
         public static AsciCode4 define(N4 n, string src)

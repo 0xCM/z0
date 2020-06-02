@@ -11,11 +11,11 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool nonempty(string src)
             => !string.IsNullOrWhiteSpace(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool empty(string src)
             => string.IsNullOrWhiteSpace(src);
 
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="test">The subject string</param>
         /// <param name="replace">The replacement value if blank</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string denullify(string test)
             => empty(test) ? string.Empty : test;
     }

@@ -15,7 +15,7 @@ namespace Z0
         /// Returns the maximum value supported by a parametrically-identified primal type
         /// </summary>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T maxval<T>()
             where T : unmanaged
                 => Literals.maxval<T>();
@@ -24,5 +24,11 @@ namespace Z0
         public static T maxval<T>(T rep)
             where T : unmanaged
                 => maxval<T>();
+
+        [MethodImpl(Inline)]
+        public static T max<T>(NK<T> nk)
+            where T : unmanaged
+                => maxval<T>();
+
     }
 }

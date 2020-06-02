@@ -20,6 +20,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ParseResult<T> unparsed<T>(object src, string reason = null)
             => ParseResult.Fail<T>(src?.ToString() ?? string.Empty, reason);
-
     }
 }

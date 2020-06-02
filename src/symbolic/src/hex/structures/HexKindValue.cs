@@ -28,7 +28,7 @@ namespace Z0
         public ReadOnlySpan<byte> Data 
         {
             [MethodImpl(Inline)]
-            get => Control.bytes(value);
+            get => Control.bytespan(value);
         }
 
         [MethodImpl(Inline)]

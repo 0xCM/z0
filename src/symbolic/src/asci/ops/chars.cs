@@ -46,6 +46,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(AsciCode16 src)
-            => cast<char>(bytes(vinflate(src.Data)));    
+            => cast<char>(bytespan(vinflate(src.Data)));    
     }
 }

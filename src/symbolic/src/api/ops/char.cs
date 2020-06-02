@@ -16,6 +16,6 @@ namespace Z0
         public static char @char<E,T>(Symbol<E,T> src)
             where E : unmanaged, Enum
             where T : unmanaged
-                => head(cast<char>(bytes(src.Data).Slice(0,2)));        
+                => head(cast<char>(bytespan(src.Data).Slice(0,2)));        
     }
 }

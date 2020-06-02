@@ -16,7 +16,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(bool src) 
             => src ? Y : N;
 
@@ -24,7 +24,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(bit src) 
             => src ? Y : N;
 
@@ -32,7 +32,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(byte src) 
             => src != 0 ? Y : N;
 
@@ -40,7 +40,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(sbyte src) 
             => src != 0 ? Y : N;
     
@@ -48,7 +48,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(short src) 
             => src != 0 ? Y : N;
 
@@ -56,7 +56,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(ushort src) 
             => src != 0 ? Y : N;
 
@@ -64,7 +64,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(int src) 
             => src != 0 ? Y : N;
 
@@ -72,7 +72,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(uint src) 
             => src != 0 ? Y : N;
 
@@ -80,7 +80,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(long src) 
             => src != 0 ? Y : N;
 
@@ -88,7 +88,7 @@ namespace Z0
         /// Yea or Nea?
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static YeaOrNea yn(ulong src) 
             => src != 0 ? Y : N;
 

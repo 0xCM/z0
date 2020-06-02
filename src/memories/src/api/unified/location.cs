@@ -17,11 +17,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The referent type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static MemoryAddress location<T>(in T src)
             where T : unmanaged
                 => MemoryAddress.From(src);
-
     }
-
 }

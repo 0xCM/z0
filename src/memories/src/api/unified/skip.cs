@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The number of elements to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T skip<T>(in T src, int count)
             => ref Unsafe.Add(ref edit(in src), count); 
 
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="bytes">The number of elements to advance</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T skip<T>(Span<T> src, int count)
             => ref seek(ref head(src), count);
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="count">The number of elements to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
             => ref skip(in head(src), count);
     }

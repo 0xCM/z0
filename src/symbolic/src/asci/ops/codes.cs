@@ -17,18 +17,18 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<C> codes(AsciCode2 src)
-            => cast<C>(bytes(src));
+            => cast<C>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<C> codes(AsciCode4 src)
-            => cast<C>(bytes(src));
+            => cast<C>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<C> codes(AsciCode8 src)
-            => cast<C>(bytes(src));
+            => cast<C>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<C> codes(AsciCode16 src)
-            => cast<C>(bytes(src)); 
+            => cast<C>(bytespan(src)); 
     }
 }

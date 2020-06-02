@@ -17,7 +17,7 @@ namespace Z0
             => Unsafe.As<T,bool>(ref src);        
 
         [MethodImpl(Inline),Op, NumericClosures(NumericKind.U16 | NumericKind.I16)]
-        public static char character<T>(T src)        
+        public static char char16<T>(T src)        
             => Unsafe.As<T,char>(ref src);
     }
 }

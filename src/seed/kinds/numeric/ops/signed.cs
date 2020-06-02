@@ -25,7 +25,7 @@ namespace Z0
         /// Returns true if a parametric type is of signed numeric type, false otherwise
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool signed<T>()
             where T : unmanaged
             => typeof(T) == typeof(sbyte) 
