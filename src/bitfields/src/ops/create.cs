@@ -6,12 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Seed;    
     using static Memories;
 
     partial class BitFields
     {
+        [MethodImpl(Inline)]
+        public static BitField256<F,T> create<F,T>(BitFieldSpec256<F> spec, Vector256<T> state)
+            where F : unmanaged, Enum
+            where T : unmanaged
+                => new BitField256<F,T>(spec, state);
+
         /// <summary>
         /// Creates a stateful bitfield api surface
         /// </summary>
@@ -34,7 +41,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
             where W : unmanaged, Enum
-                => new BitField<E,T>(specify<E,T,W>());
+                => new BitField<E,T>(BitFieldSpecs.specify<E,T,W>());
 
         /// <summary>
         /// Creates a stateful numeric bitfield api surface
@@ -50,6 +57,10 @@ namespace Z0
             where T : unmanaged
                 => new BitField<S,E,T>(spec);
 
+        internal static FixedFieldData<T> fixedalloc<T>(int bitcount)
+            where T : unmanaged
+                => new FixedFieldData<T>(Blocks.alloc<T>(n64, Blocks.bitcover<T>(bitcount)), bitcount);             
+
         /// <summary>
         /// Defines and creates a fixed-width bitfield
         /// </summary>
@@ -59,14 +70,14 @@ namespace Z0
         /// <typeparam name="W"></typeparam>
         /// <typeparam name="W">A width-defining enumeration</typeparam>
         [MethodImpl(Inline)]
-        public static BitFieldFixed<E,T,W> create<E,T,W>(int bitcount)
+        public static FixedField<E,T,W> create<E,T,W>(int bitcount)
             where E : unmanaged, Enum            
             where T : unmanaged
             where W : unmanaged, Enum
         {
             var data = fixedalloc<T>(bitcount);
-            var spec = new BitFieldSpec<E,W>(specify<E,T,W>(), bitcount);
-            return new BitFieldFixed<E,T,W>(data, spec);                
+            var spec = new BitFieldSpec<E,W>(BitFieldSpecs.specify<E,T,W>(), bitcount);
+            return new FixedField<E,T,W>(data, spec);                
         }
 
         /// <summary>
@@ -83,6 +94,6 @@ namespace Z0
             where E : unmanaged, Enum
             where W : unmanaged, Enum
             where T : unmanaged
-                => new BitField<S,E,T>(specify<E,T,W>());
+                => new BitField<S,E,T>(BitFieldSpecs.specify<E,T,W>());
     }
 }

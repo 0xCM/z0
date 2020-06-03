@@ -18,13 +18,13 @@ namespace Z0
         public static string unsigned(object src, TypeCode type)
         {
             if(type == TypeCode.Byte)
-                return Formatters.BitFormatter<byte>().Format((byte)src);
+                return Formatters.bits<byte>().Format((byte)src);
             else if(type == TypeCode.UInt16)
-                return Formatters.BitFormatter<ushort>().Format((ushort)src);
+                return Formatters.bits<ushort>().Format((ushort)src);
             else if(type == TypeCode.UInt32)
-                return Formatters.BitFormatter<uint>().Format((uint)src);
+                return Formatters.bits<uint>().Format((uint)src);
             else if(type == TypeCode.UInt64)
-                return Formatters.BitFormatter<ulong>().Format((ulong)src);
+                return Formatters.bits<ulong>().Format((ulong)src);
             else
                 return string.Empty;
         }

@@ -22,7 +22,7 @@ namespace Z0
         void check_singletons<T>()
             where T : unmanaged
         {
-            var formatter =  Formatters.BitFormatter<T>();
+            var formatter =  Formatters.bits<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Next<T>();

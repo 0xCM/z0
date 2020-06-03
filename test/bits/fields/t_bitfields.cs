@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FieldSegment segment<E>(E segid, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => BitFields.segment(segid, startpos, endpos); 
+                => BitFieldSpecs.segment(segid, startpos, endpos); 
                 
         enum BF_A : byte
         {
@@ -38,7 +38,7 @@ namespace Z0
 
         public void bitfield_a()
         {
-            var spec = BitFields.specify(
+            var spec = BitFieldSpecs.specify(
                 segment(BF_A.F08_0, 0, 1),
                 segment(BF_A.F08_1, 2, 3),
                 segment(BF_A.F08_2, 4, 5),
@@ -94,7 +94,7 @@ namespace Z0
 
         public void bitfield_b()
         {
-            var spec = BitFields.specify(
+            var spec = BitFieldSpecs.specify(
                 segment(BFB_I.BFB_0, 0, 3),
                 segment(BFB_I.BFB_1, 4, 7),
                 segment(BFB_I.BFB_2, 8, 9),
@@ -147,7 +147,7 @@ namespace Z0
 
         public void bitfield_c()
         {
-            var spec = BitFields.specify<BFC_I,BFC_W>();
+            var spec = BitFieldSpecs.specify<BFC_I,BFC_W>();
             var bf = BitFields.create<byte>(spec);
             var dst = memory.alloc<byte>(spec.FieldCount);
 
@@ -234,7 +234,7 @@ namespace Z0
 
         public void bitfield_d()
         {
-            var spec = BitFields.specify<BFD_I,BFD_W>();
+            var spec = BitFieldSpecs.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
             var dst = memory.span<ulong>(spec.FieldCount);
             var tmp = memory.span<ulong>(spec.FieldCount);
@@ -275,9 +275,8 @@ namespace Z0
 
         public void bitfield_IxW()
         {
-            var spec = BitFields.specify<BFD_I,BFD_W>();
+            var spec = BitFieldSpecs.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
-
         }
 
         public void fixed_bits()
@@ -288,6 +287,22 @@ namespace Z0
             bf[3] = byte.MaxValue;
             
             Trace(bf.Content.Bytes.FormatBits(32));
+        }
+
+        public void bitfield_model()
+        {
+            var m = BitFieldSpecs.model("BitsInField", new string[]{"Field1","Field2","Field3"}, new byte[]{4,8,3});
+            Claim.eq((byte)0, m.Position(0));
+            Claim.eq((byte)4, m.Position(1));
+            Claim.eq((byte)12, m.Position(2));
+            Claim.eq((byte)4, m.Width(0));
+            Claim.eq((byte)8, m.Width(1));
+            Claim.eq((byte)3, m.Width(2));
+            Claim.eq("Field1", m.Name(0));
+            Claim.eq("Field2", m.Name(1));
+            Claim.eq("Field3", m.Name(2));
+
+
         }
     }
 }

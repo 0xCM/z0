@@ -20,6 +20,22 @@ namespace Z0
 
     public class SymBits
     {
+        [MethodImpl(Inline)]
+        internal static unsafe Vector128<byte> vbroadcast(W128 w, byte src)
+            => BroadcastScalarToVector128(&src);
+
+        [MethodImpl(Inline)]
+        internal static unsafe Vector128<ushort> vbroadcast(W128 w, ushort src)
+            => BroadcastScalarToVector128(&src);
+
+        [MethodImpl(Inline)]
+        internal static unsafe Vector256<byte> vbroadcast(W256 w, byte src)
+            => BroadcastScalarToVector256(&src);
+
+        [MethodImpl(Inline)]
+        internal static unsafe Vector256<ushort> vbroadcast(W256 w, ushort src)
+            => BroadcastScalarToVector256(&src);
+
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
         /// </summary>

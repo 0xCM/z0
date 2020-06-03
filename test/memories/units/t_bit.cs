@@ -86,7 +86,7 @@ namespace Z0
         public void format_simple()
         {
             var x = 0b110011101111100u;
-            var f =  Formatters.BitFormatter<uint>();
+            var f =  Formatters.bits<uint>();
             var s1 = f.Format(x);
             
             //Trace(s1);

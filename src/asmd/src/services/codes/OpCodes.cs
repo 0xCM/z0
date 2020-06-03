@@ -7,6 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
     using static Seed;
     using static Memories;
@@ -15,16 +16,51 @@ namespace Z0.Asm.Data
     public class OpCodes : IApiHost<OpCodes>
     {
         [Op, MethodImpl(Inline)]
-        public static string Lookup1(int index)
-            => OpCodeTokens.cb;
+        public static Vector256<ulong> Lookup1()
+        {            
+            var x0 = (ulong)location(head(span(OpCodeTokens.NE)));
+            var x1 = (ulong)location(head(span(OpCodeTokens.NP)));
+            var x2 = (ulong)location(head(span(OpCodeTokens.NFx)));
+            var x3 = (ulong)location(head(span(OpCodeTokens.REXᕀW)));
+            return Vector256.Create(x0,x1,x2,x3);
+        }
 
-        [Op, MethodImpl(Inline)]
-        public static ulong Lookup2(int index)
-            => OpCodeTokens.First;
 
-        [Op, MethodImpl(Inline)]
-        public static AsciCode4 Lookup4()
-            => OpCodeTokens.RexㆍW_C4;
+        [MethodImpl(Inline)]
+        static MemoryAddress address(string src)
+            => location(head(span(src)));            
+        
+        [MethodImpl(Inline)]
+        static string token(MemoryAddress src)
+            => Spans.cast<char>(memory.read<byte>(src, 0xA)).ToString();
+            
+        static ArraySpan<LiteralToken<OpCodeToken>> OCT()
+        {
+            ArraySpan<MemoryAddress> locations = typeof(OpCodeTokens).LiteralFieldValues<string>().Map(address);
+            ArraySpan<LiteralToken<OpCodeToken>> dst = new LiteralToken<OpCodeToken>[locations.Length];
+            for(var i=0; i<locations.Length; i++)
+            {
+                var address = locations[i];
+                dst[i] = new LiteralToken<OpCodeToken>((OpCodeToken)(i + 1), address, token(address));            
+            }
+            return dst;
+        }
+
+        [Op]
+        public static unsafe ReadOnlySpan<char> Lookup2()
+        {            
+            var oct = OCT();
+            var dst = text.build();   
+
+            for(var i=0; i<oct.Length; i++)            
+            {
+                var t = oct[i];
+                dst.AppendLine($"{t.Location} | {t.Identifier} | {t.Value}");
+            }            
+
+            return dst.ToString();
+
+        }
 
         [Op, MethodImpl(Inline)]
         public static OpCodeOperand operand(ulong src, duet index)

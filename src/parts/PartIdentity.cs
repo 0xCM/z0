@@ -10,6 +10,6 @@ namespace Z0
 
     public class PartIdentity
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
     }
 }

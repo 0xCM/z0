@@ -34,12 +34,5 @@ namespace Z0.Machines
             term.announce();            
         }
 
-        // void IDataProcessor.Connect()
-        // {
-        //     Broker[JmpKind.JA] = DataHandlers.Create<LocatedInstruction>(OnJA);
-        //     Broker[JmpKind.JAE] = DataHandlers.Create<LocatedInstruction>(OnJAE);
-        //     Broker[JmpKind.JB] = DataHandlers.Create<LocatedInstruction>(OnJB);
-        //     Broker[JmpKind.JBE] = DataHandlers.Create<LocatedInstruction>(OnJBE);
-        // }
     }
 }

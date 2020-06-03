@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
-
+    
+    
     public interface IPartId : ITextual
     {
         /// <summary>

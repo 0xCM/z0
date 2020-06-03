@@ -95,17 +95,5 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static Type type<T>()
             => typeof(T);    
-
-        [MethodImpl(Inline)]
-        internal static unsafe E literal<E,V>(V v)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<E>((E*)&v);
-
-        [MethodImpl(Inline)]
-        internal static unsafe V numeric<E,V>(E e)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<V>((V*)(&e));
     }
 }

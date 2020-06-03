@@ -29,6 +29,12 @@ namespace Z0.Asm.Data
 
         }
 
+        public void op_code()
+        {
+            var data = OpCodes.Lookup2().ToString().Trim();
+            Trace(data);
+
+        }
 
     }
 }

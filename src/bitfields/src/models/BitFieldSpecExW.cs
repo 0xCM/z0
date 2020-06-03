@@ -35,7 +35,7 @@ namespace Z0
         }        
 
         public string Format()
-            => SegmentFormatter.format(Segments);
+            => BitFields.format(Segments);
 
         public override string ToString()
             => Format();                

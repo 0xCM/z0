@@ -45,7 +45,7 @@ namespace Z0
         public uint TotalWidth
         {
             [MethodImpl(Inline)]
-            get => BitFields.width(this);
+            get => BitFieldSpecs.width(this);
         }
 
         public ReadOnlySpan<FieldSegment> Segments 
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         public string Format()
-            => SegmentFormatter.format(Segments);
+            => BitFields.format(Segments);
 
         public override string ToString()
             => Format();                

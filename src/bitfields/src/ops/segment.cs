@@ -12,20 +12,9 @@ namespace Z0
 
     partial class BitFields
     {            
-        /// <summary>
-        /// Defines a bitfield segment
-        /// </summary>
-        /// <param name="name">The segment name</param>
-        /// <param name="index">The segment index</param>
-        /// <param name="startpos">The position of the first bit in the segment</param>
-        /// <param name="endpos">The position of the last bit in the segment</param>
-        [MethodImpl(Inline), Op]
-        public static FieldSegment segment(string name, byte startpos, byte endpos, byte width)
-            => new FieldSegment(name,startpos, endpos, width);
-
-        [MethodImpl(Inline)]
-        public static FieldSegment segment<E>(E id, byte startpos, byte endpos)
-            where E : unmanaged, Enum
-                => BitFields.segment(id.ToString(), startpos, endpos, (byte)(endpos - startpos + 1));
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public ref readonly FieldSegment segment<T>(in BitField<T> field, int index)
+            where T : unmanaged
+                => ref field.Segment(index);        
     }
 }

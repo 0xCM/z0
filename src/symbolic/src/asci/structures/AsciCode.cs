@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Control;
     
     using N = N1;
     using C = AsciCode;
@@ -23,6 +24,22 @@ namespace Z0
         public const int Length = 1;
         
         internal readonly AsciCharCode Code;
+        
+        [MethodImpl(Inline), Op]
+        public static ref readonly AsciCode define(in byte src)
+            => ref view<byte,AsciCode>(src);
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(AsciCode src)
+            => Symbolic.symbol<AsciChar,byte>(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format(AsciCode src)
+            => new string(new char[Length]{(char)src.Code});
+
+        [MethodImpl(Inline), Op]
+        public static char @char(AsciCode src)
+            => (char)src;
 
         public C Zero
         {
@@ -54,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => API.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();

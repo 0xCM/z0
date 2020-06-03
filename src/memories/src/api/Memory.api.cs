@@ -131,6 +131,11 @@ namespace Z0
         public static unsafe void copy(byte* pSrc, Span<byte> dst, int offset, uint srcCount)
             => copy(pSrc, (byte*)Unsafe.AsPointer(ref refs.seek(dst, offset)) , srcCount);
 
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<T> read<T>(MemoryAddress location, int length)
+            where T : unmanaged
+                => new ReadOnlySpan<T>(location.ToPointer<T>(),length);
+
         /// <summary>
         /// Copies a byte
         /// </summary>
@@ -303,7 +308,7 @@ namespace Z0
         /// <param name="f">The transformation</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        public static Span<T> map<S,T>(Memory<S> src, Func<S, T> f)
+        public static Span<T> map<S,T>(Memory<S> src, Func<S,T> f)
         {
             var dst = new T[src.Length];
             for(var i= 0; i<src.Length; i++)
@@ -318,7 +323,7 @@ namespace Z0
     }
 
     //https://stackoverflow.com/questions/54511330/how-can-i-cast-memoryt-to-another
-    public sealed class MemoryCast<S, T> : MemoryManager<T>
+    public sealed class MemoryCast<S,T> : MemoryManager<T>
         where S : unmanaged
         where T : unmanaged
     {
