@@ -12,7 +12,6 @@ namespace Z0
     
     using N = N1;
     using C = AsciCode;
-    using API = AsciCodes;
 
     /// <summary>
     /// Defines an asci code sequence of length 1

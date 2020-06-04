@@ -52,7 +52,7 @@ namespace Z0
         public static ref readonly AsciCode32 fill(ReadOnlySpan<char> src, out AsciCode32 dst)
         {
             dst = default;
-            API.literals(src, Control.span<AsciCode32,A>(ref dst));
+            Symbolic.literals(src, Control.span<AsciCode32,A>(ref dst));
             return ref dst;
         }
 
@@ -65,7 +65,7 @@ namespace Z0
         public static AsciCode32 fill(ReadOnlySpan<char> src)
         {
             var dst = Init();
-            API.literals(src, Control.span<AsciCode32,A>(ref dst));
+            Symbolic.literals(src, Control.span<AsciCode32,A>(ref dst));
             return dst;
         }
 

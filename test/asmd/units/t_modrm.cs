@@ -6,6 +6,7 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
  
     using static Seed;
     using static Memories;
@@ -23,18 +24,37 @@ namespace Z0.Asm.Data
             for(var i=0; i<count; i++)
             {
                 ref readonly var encoding = ref skip(dst,i);
-                Trace(encoding.Format());
+                //Trace(encoding.Format());
 
             }
 
         }
 
-        public void op_code()
+        public void op_codes()
         {
-            var data = OpCodes.Lookup2().ToString().Trim();
-            Trace(data);
 
+            var identifers = OpCodeApi.identifiers();
+            var sample = identifers.Slice(0,math.min(100, identifers.Length));
+            Control.iter(sample,s => Trace(s.Format()));
         }
+
+        public void meta_reader()
+        {
+            var assembly = Parts.AsmD.Resolved.Owner;
+            using var reader = MetaReader.Init(assembly.Location);
+            var data = reader.ReadUserStrings();
+            //Trace($"Read {data.Length} records");
+
+            
+            var sample = data.Slice(0,math.min(50, data.Length));
+            for(var i=0; i<sample.Length; i++)
+            {
+                ref readonly var field = ref Control.skip(sample,i);
+                var rendered = field.Format();
+                //Trace(rendered);
+            }
+        }
+
 
     }
 }

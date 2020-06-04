@@ -46,7 +46,7 @@ namespace Z0
 
         void RunApp(params PartId[] parts)
         {
-            AppResources.OpCodeSpecs.OnSome(OpCodes.encode);
+            
         }
 
         public override void RunShell(params string[] args)

@@ -17,7 +17,7 @@ namespace Z0
     public interface IBit<B> : IBit, IBits<B>
         where B : unmanaged, IBit<B>
     {
-        new OneBit Kind {get;}
+        new Singleton Kind {get;}
 
         Octet IBits.Kind 
             => (Octet)Kind;

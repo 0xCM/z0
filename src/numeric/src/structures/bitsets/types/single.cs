@@ -11,7 +11,7 @@ namespace Z0
     using static BitSet;
 
     using analog = single;
-    using BK = OneBit;
+    using BK = Singleton;
 
     /// <summary>
     /// Represents the value of a type-level single and thus has domain {0,1}

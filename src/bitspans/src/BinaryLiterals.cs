@@ -25,7 +25,7 @@ namespace Z0
                 var mask = literals[i];
                 var bits = BitSpans.parse(mask.Text);
                 var bitval = bits.Convert<T>();
-                insist(gmath.eq(bitval, mask.Value));
+                insist(gmath.eq(bitval, mask.Data));
             }
 
             return dst;            
@@ -45,7 +45,7 @@ namespace Z0
             Span<T> target = dst;
             
             for(var i=0; i< count; i++)        
-                seek(target,i) = skip(literals,i).Value;
+                seek(target,i) = skip(literals,i).Data;
             return dst;            
         }
     }

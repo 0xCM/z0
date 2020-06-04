@@ -11,6 +11,10 @@ namespace Z0
 
     public readonly struct AppResourceDoc : IAppResource<TextDoc>
     {
+        public string Name {get;}
+
+        public TextDoc Data {get;}        
+
         [MethodImpl(Inline)]
         public static implicit operator AppResource<TextDoc>(AppResourceDoc src)
             => new AppResource<TextDoc>(src.Name,src.Data);
@@ -22,14 +26,10 @@ namespace Z0
             this.Data = doc;
         }
 
-        public string Name {get;}
-
-        public TextDoc Data {get;}        
-
-        public ReadOnlySpan<string> DataRows
+        public ReadOnlySpan<TextRow> Rows
         {
             [MethodImpl(Inline)]
-            get => Data.RowData.Map(x => x.Text);
+            get => Data.RowData;
         }
         
         public string Format()

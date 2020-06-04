@@ -13,7 +13,7 @@ namespace Z0.Asm.Data
     {
         public void register_bitfield()
         {
-            term.print(Unsafe.SizeOf<XmmRegs>());            
+            //term.print(Unsafe.SizeOf<XmmRegs>());            
             var index = XmmRegs.Index;
             var locations = index.Locations;
             var data = index.Data;
@@ -27,7 +27,7 @@ namespace Z0.Asm.Data
                 var f = Control.skip(ops,i);
                 
 
-                term.print($"{current.FormatAsmHex()} | {offset} | {value} | {f.Kind}");
+                //term.print($"{current.FormatAsmHex()} | {offset} | {value} | {f.Kind}");
             }
             
         }

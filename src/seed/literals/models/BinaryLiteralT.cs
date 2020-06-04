@@ -11,30 +11,30 @@ namespace Z0
 
     using API = Literati;
 
-    public readonly struct BinaryLiteral<T> : ITextual, INullaryKnown, INullary<BinaryLiteral<T>>
+    public readonly struct BinaryLiteral<T> : ILiteral<BinaryLiteral<T>,T>
         where T : unmanaged
     {                
         public static BinaryLiteral<T> Empty 
             => new BinaryLiteral<T>(string.Empty,default, string.Empty);                 
         
-        public readonly string Name;
+        public string Name {get;}
         
-        public readonly T Value;
+        public T Data {get;}
 
-        public readonly string Text;
+        public string Text {get;}
         
         [MethodImpl(Inline)]
         public BinaryLiteral(string name, T value, string text)
         {
             this.Name = name;
-            this.Value = value;
+            this.Data = value;
             this.Text = text;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Name) && text.empty(Text) && Value.Equals(default);
+            get => text.empty(Name) && text.empty(Text) && Data.Equals(default);
         }
 
         public bool IsNonEmpty
@@ -55,5 +55,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+
+        [MethodImpl(Inline)]
+        public bool Equals(BinaryLiteral<T> src)
+            => string.Equals(Text,src.Text) 
+            && object.Equals(Data, src.Data) 
+            && string.Equals(Name, src.Name);
+
     }
 }

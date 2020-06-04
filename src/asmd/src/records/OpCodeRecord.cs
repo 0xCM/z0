@@ -16,15 +16,11 @@ namespace Z0.Asm.Data
     {                   
         public static OpCodeRecord Empty 
             => new OpCodeRecord(0,OpCodeId.INVALID, nameof(OpCodeId.INVALID), string.Empty, string.Empty, 
-                YeaOrNea.N, YeaOrNea.N,YeaOrNea.N,string.Empty);
+                YeaOrNea.N, YeaOrNea.N,YeaOrNea.N,string.Empty);        
         
-        [MethodImpl(Inline)]
-        public static YeaOrNea yn(bool src) 
-            => src ? YeaOrNea.Y : YeaOrNea.N;
-
-        public int Seq;
-
         public int Sequence => Seq;
+        
+        public int Seq;
         
         public OpCodeId Id;
 		
@@ -66,6 +62,22 @@ namespace Z0.Asm.Data
         {
             [MethodImpl(Inline)]
             get => !IsEmpty;
+        }
+
+        public string Format()
+        {
+            var formatter = Records.Formatter<F>();
+            formatter.DelimitField(F.Sequence, Seq);
+            formatter.DelimitField(F.Id, Id);
+            formatter.DelimitField(F.Mnemonic, Mnemonic);
+            formatter.DelimitField(F.Instruction, Instruction);
+            formatter.DelimitField(F.Expression, Expression);
+            formatter.DelimitField(F.M16, M16);
+            formatter.DelimitField(F.M32, M32);
+            formatter.DelimitField(F.M64, M64);
+            formatter.DelimitField(F.CpuId, CpuId);
+            return formatter.ToString();
+
         }
     }
 }

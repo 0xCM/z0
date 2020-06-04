@@ -14,8 +14,6 @@ namespace Z0
     using N = N8;
     using C = AsciCode;
     using A = AsciCharCode;
-    using API = AsciCodes;
-
 
     [ApiHost]
     public class AC8 : AsciCodeApi<N8,AC8>
@@ -37,7 +35,7 @@ namespace Z0
         public static ref readonly AsciCode8 fill(ReadOnlySpan<char> src, out AsciCode8 dst)
         {
             dst = default;
-            API.literals(src, Control.span<AsciCode8,A>(ref dst));
+            Symbolic.literals(src, Control.span<AsciCode8,A>(ref dst));
             return ref dst;
         }
 

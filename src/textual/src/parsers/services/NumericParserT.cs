@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static CastNumeric;
 
     public readonly struct NumericParser<T> : ITextParser<T>
         where T : unmanaged

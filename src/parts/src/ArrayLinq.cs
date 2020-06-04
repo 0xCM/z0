@@ -34,6 +34,7 @@ namespace Z0
         /// <param name="src">The source array</param>
         /// <param name="f"></param>
         /// <typeparam name="T">The array element type</typeparam>
+        [MethodImpl(Inline)]
         public static T[] Where<T>(this T[] src, Func<T,bool> f)
             => filter(src,f);
 
@@ -44,6 +45,7 @@ namespace Z0
         /// <param name="f">The order criterion selector</param>
         /// <typeparam name="T">The array element type</typeparam>
         /// <typeparam name="K">The order criterion type</typeparam>
+        [MethodImpl(Inline)]
         public static T[] OrderBy<T,K>(this T[] src, Func<T,K> f)
             => Enumerable.OrderBy(src,f).ToArray();
 

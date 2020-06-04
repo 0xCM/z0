@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ResExtractor Service(Assembly src = null)
-            => new ResExtractor(src ?? Assembly.GetCallingAssembly());
+            => new ResExtractor(src ?? Assembly.GetExecutingAssembly());
         
         readonly Assembly Source;
 

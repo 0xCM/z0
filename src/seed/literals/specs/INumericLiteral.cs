@@ -11,12 +11,18 @@ namespace Z0
 
     public interface INumericLiteral : ILiteral
     {
-        bool ILiteral.MultiLiteral => false;
+        
     }
 
     public interface INumericLiteral<F> : INumericLiteral, ILiteral<F>
         where F : struct, INumericLiteral<F>
     {
-        F Rename(string name);
     }
+
+    public interface INumericLiteral<F,T> : INumericLiteral<F>, ILiteral<F,T>
+        where F : struct, INumericLiteral<F,T>
+        where T : unmanaged
+    {
+
+    }    
 }

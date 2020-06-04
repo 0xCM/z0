@@ -13,10 +13,15 @@ namespace Z0
     [ApiHost("api")]
     public partial class Symbolic : IApiHost<Symbolic>
     {
-
         public static UpperCased UpperCase => default;
 
         public static LowerCased LowerCase => default;
+
+        public static Number Number => default;
+
+        public static Letter Letter => default;
+
+        public static ASCI ASCI => default;
 
         [MethodImpl(Inline)]
         public static ref readonly ushort read(in char src)        
@@ -37,8 +42,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref byte write(ref AsciCharCode src)
             => ref Unsafe.As<AsciCharCode,byte>(ref edit(src));
-
-
     }
 
     [ApiHost]

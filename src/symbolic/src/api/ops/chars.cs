@@ -9,9 +9,18 @@ namespace Z0
 
     using static Seed;
     using static Control;
+    using static Typed;
 
     partial class Symbolic    
-    {                
+    {           
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<char> chars(ASCI asci)
+            => AsciStrings.Text(n0);
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<char> chars(ASCI asci, int i0, int i1)
+            => ResourceTools.segment(AsciStrings.Text(n0),i0,i1);
+
         [MethodImpl(Inline), Op]
         public static SuperSym supersym(int n)
             => n switch {

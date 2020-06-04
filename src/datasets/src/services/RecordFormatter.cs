@@ -11,6 +11,15 @@ namespace Z0
 
     using static Seed;
 
+    public readonly struct RecordFormatter  
+    {
+        [MethodImpl(Inline)]
+        public static RecordFormatter<F> Create<F>()
+            where F : unmanaged, Enum
+                =>  new RecordFormatter<F>(new StringBuilder());
+
+    }
+
     public readonly struct RecordFormatter<F> : IRecordFormatter<F>
         where F : unmanaged, Enum
     {        

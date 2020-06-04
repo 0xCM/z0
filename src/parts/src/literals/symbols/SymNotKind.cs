@@ -70,6 +70,16 @@ namespace Z0
         V = Or,
 
         /// <summary>
+        /// ᐯ
+        /// </summary>
+        OrAlt = 'ᐯ',
+            
+        /// <summary>
+        /// OrAlt
+        /// </summary>
+        ᐯ = OrAlt,
+
+        /// <summary>
         /// ተ
         /// </summary>
         Dagger = 'ተ',
@@ -158,6 +168,16 @@ namespace Z0
         /// Dot
         /// </summary>
         ㆍ = Dot,
+
+        /// <summary>
+        /// ᐧ
+        /// </summary>
+        TinyDot = 'ᐧ',
+        
+        /// <summary>
+        /// TinyDot
+        /// </summary>
+        ᐧ = TinyDot,
 
         /// <summary>
         /// '
@@ -310,6 +330,17 @@ namespace Z0
         ᛜ = 'ᛜ' ,
         
         /// <summary>
+        /// ᒿ
+        /// </summary>
+        Two = 'ᒿ',
+        
+        /// <summary>
+        /// Tow
+        /// </summary>
+        ᒿ = Two,
+
+
+        /// <summary>
         /// З
         /// </summary>
         Three = 'З',
@@ -337,14 +368,24 @@ namespace Z0
         ǀ = LeftPipe,
 
         /// <summary>
-        /// ヨ
+        /// ᗄ
         /// </summary>
-        Exists = 'ヨ',
+        ForAll = 'ᗄ',
 
         /// <summary>
-        /// Exists
+        /// ForAll
         /// </summary>
-        ヨ = Exists,        
+        ᗄ = ForAll,
+
+        /// <summary>
+        /// ヨ
+        /// </summary>
+        ForSome = 'ヨ',
+
+        /// <summary>
+        /// ForSome
+        /// </summary>
+        ヨ = ForSome,        
 
         /// <summary>
         /// ロ
@@ -355,16 +396,36 @@ namespace Z0
         /// Box
         /// </summary>
         ロ = Box,
+        
+        /// <summary>
+        /// ᑕ
+        /// </summary>
+        Subset = 'ᑕ',
 
         /// <summary>
-        /// コ
+        /// Subset
         /// </summary>
-        Contains = 'コ',
+        ᑕ =  Subset,
 
         /// <summary>
-        /// Contains
+        /// ᑐ
         /// </summary>
-        コ = Contains,
+        Superset = 'ᑐ',
+
+        /// <summary>
+        /// Superset
+        /// </summary>
+        ᑐ = Superset,
+
+        /// <summary>
+        /// UpperSuperset
+        /// </summary>
+        UpperSuperset = 'ᐣ',
+        
+        /// <summary>
+        /// UpperSuperset
+        /// </summary>
+        ᐣ = UpperSuperset,
 
         /// <summary>
         /// є
@@ -389,12 +450,12 @@ namespace Z0
         /// <summary>
         /// П
         /// </summary>
-        Cap = 'П',
+        CapX = 'П',
 
         /// <summary>
         /// Cap
         /// </summary>
-        П = Cap,
+        П = CapX,
 
         /// <summary>
         /// Π
@@ -782,17 +843,15 @@ namespace Z0
         /// </summary>
         υ = USmall,                                        
 
-        ᛃ = 'ᛃ',
-
         /// <summary>
         /// ᐞ
         /// </summary>
-        Exp = 'ᐞ',
+        ExpDelta = 'ᐞ',
 
         /// <summary>
-        /// Exp
+        /// ExpDelta
         /// </summary>
-        ᐞ = Exp,
+        ᐞ = ExpDelta,
 
         /// <summary>
         /// ᐜ
@@ -803,6 +862,199 @@ namespace Z0
         /// ExpW
         /// </summary>
         ᐜ = ExpW,
+
+        /// <summary>
+        /// ᐩ
+        /// </summary>
+        ExpPlus = 'ᐩ',
+        
+        /// <summary>
+        /// ExpPlus
+        /// </summary>
+        ᐩ = ExpPlus,
+
+        /// <summary>
+        /// ᐪ
+        /// </summary>
+        ExpT = 'ᐪ',
+        
+        /// <summary>
+        /// ExpT
+        /// </summary>
+        ᐪ = ExpT,
+
+        /// <summary>
+        /// ᑌ
+        /// </summary>
+        Cup = 'ᑌ',
+        
+        /// <summary>
+        /// Cup
+        /// </summary>
+        ᑌ = Cup,
+
+        /// <summary>
+        /// ᑎ
+        /// </summary>
+        Cap = 'ᑎ',
+        
+        /// <summary>
+        /// Cap
+        /// </summary>
+        ᑎ = Cap,
+
+        /// <summary>
+        /// ᐡ
+        /// </summary>
+        ExpCup = 'ᐡ',
+        
+        /// <summary>
+        /// ExpCup
+        /// </summary>
+        ᐡ = ExpCup,
+
+        ExpCap = 'ᐢ',
+        
+        /// <summary>
+        /// ExpCap
+        /// </summary>
+        ᐢ = ExpCap,
+
+        ExpH = 'ᑋ',
+        
+        ᑋ = ExpH,
+        
+        /// <summary>
+        /// ᒾ
+        /// </summary>
+        Exp2 = 'ᒾ',
+        
+        ᒾ = Exp2,
+        
+        ExpX = 'ᕽ',
+        
+        ᕽ = ExpX,
+
+        /// <summary>
+        /// ᙆ
+        /// </summary>
+        ExpZ = 'ᙆ',
+
+        ᙆ = ExpZ,
+
+        /// <summary>
+        /// ᙚ
+        /// </summary>
+        ExpS = 'ᙚ',
+        
+        ᙚ = ExpS,
+
+        ExpV = 'ᘁ',
+        
+        ᘁ = ExpV,
+
+        ExpL = 'ᒻ',
+        
+        ᒻ = ExpL,
+        
+        ᗅ,
+
+        ᗷ,
+
+        ᗺ,
+
+        ᗞ,
+
+        ᗡ,
+
+        ᗴ,
+
+        ᗱ,
+        
+        ᖴ,
+
+        ᖷ,
+
+        ᖵ,
+
+        ᖶ,
+        
+        ᕼ,
+
+        ᖆ,
+
+        ᖇ,
+
+        ᖈ,
+
+        ᖉ,
+
+        ᔓ,
+
+        ᔕ,
+
+        ᔐ,
+
+        ᔑ,
+
+        ᓀ,
+
+        ᓇ,
+
+        ᒣ,
+
+        ᒥ,
+
+        ᒧ,
+
+        ᒪ,
+
+        ᗯ,
+
+        ᗰ,
+
+        ᘮ,
+
+        ᘯ,
+
+        ᘰ,
+
+        ᘳ,
+
+        ᙀ,
+
+        ᙁ,
+
+        ᙂ,
+
+        ᙅ,
+
+        ᙎ,
+
+        
+        ᙏ,
+
+        ᙐ,
+
+        ᙓ,
+
+        ᙖ,
+
+        ᙙ,
+
+        ᗒ,       
+
+        ᗕ,
+
+        ᘂ,
+
+        ᘃ,
+
+        ᘄ,
+
+        ᘇ,
+
+
 
     }
 }

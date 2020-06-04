@@ -13,6 +13,16 @@ namespace Z0
     public readonly struct ArraySpan : IApiHost<ArraySpan>
     {
         /// <summary>
+        /// Allocates an array|span of a specified length
+        /// </summary>
+        /// <param name="length">The cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ArraySpan<T> alloc<T>(int length)
+            where T : struct
+                =>  new ArraySpan<T>(new T[length]);
+
+        /// <summary>
         /// Creates an array|span from an array
         /// </summary>
         /// <param name="src">The data source</param>

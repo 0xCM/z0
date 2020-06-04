@@ -8,8 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    
     using NBK = NumericBaseKind;
     
+    /// <summary>
+    /// Defines a (boxed) numeric literal relative to a specified base
+    /// </summary>
     public readonly struct NumericLiteral : INumericLiteral<NumericLiteral>
     {
         public static NumericLiteral Empty 
@@ -99,8 +103,12 @@ namespace Z0
         public bool Equals(NumericLiteral src)            
             => object.Equals(Data, src.Data);
         
-        [MethodImpl(Inline)]
-        public NumericLiteral Rename(string name)
-            => new NumericLiteral(name, Data, Text, Base);
+        /// <summary>
+        /// The 8'th Mersene prime and the largest 32-bit prime
+        /// </summary>
+        /// <remarks>
+        /// See https://en.wikipedia.org/wiki/2,147,483,647
+        /// <remarks>
+        const uint Mersene8 = 2147483647u;
     }
 }

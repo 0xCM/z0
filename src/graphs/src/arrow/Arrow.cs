@@ -36,11 +36,10 @@ namespace Z0
 
         public int Length => Head.Length + Tail.Length;
         
-
         [MethodImpl(Inline)]
         public static implicit operator Arrow<A>(A[] src)
             => Arrow.Define(src);
-
+        
         internal Arrow(Arrow<A> head, Arrow<A> tail)
         {
             this.Head = head.Nodes.ToArray();

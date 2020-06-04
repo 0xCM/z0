@@ -19,8 +19,7 @@ namespace Z0.Asm.Data
                 this.Data = src;
             }
             
-            public readonly AsciCharCode[] Data;
-            
+            public readonly AsciCharCode[] Data;            
         }    
     }
 }

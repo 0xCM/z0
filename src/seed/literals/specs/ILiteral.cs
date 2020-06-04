@@ -17,13 +17,18 @@ namespace Z0
 
         string Text {get;}
 
-        TypeCode TypeCode {get;}
+        bool MultiLiteral
+             => false;
 
-        Type SystemType {get;}
+        Type SystemType  
+            => Data.GetType();
 
-        bool IsEnum {get;}
+        TypeCode TypeCode 
+            => Type.GetTypeCode(SystemType);
 
-        bool MultiLiteral {get;}
+        bool IsEnum  
+            => SystemType.IsEnum;
+
 
         string ITextual.Format() 
             => Text;
@@ -38,9 +43,11 @@ namespace Z0
         
     }
 
-    public interface ILiteralSource<F>
-        where F : ILiteral
+    public interface ILiteral<F,T> : ILiteral<F> 
+        where F : struct, ILiteral<F,T>
     {
-        
+        new T Data {get;}
+
+        object ILiteral.Data => Data;
     }
 }

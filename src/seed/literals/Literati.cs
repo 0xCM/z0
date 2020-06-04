@@ -34,7 +34,7 @@ namespace Z0
             => from f in src.LiteralFields()
                where f.Tagged<BinaryLiteralAttribute>()
                let a = f.Tag<BinaryLiteralAttribute>().Require()
-               select define(@base, f.Name, f.GetValue(null), a.Text);
+               select define(@base, f.Name, f.GetRawConstantValue(), a.Text);
 
         /// <summary>
         /// Selects the binary literals declared by a type that are of a specified parametric primal type
@@ -46,7 +46,7 @@ namespace Z0
                 => from f in src.LiteralFields()
                    where f.FieldType == typeof(T) && f.Tagged<BinaryLiteralAttribute>()
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
-                   select define(@base, f.Name, (T)f.GetValue(null), a.Text);
+                   select define(@base, f.Name, (T)f.GetRawConstantValue(), a.Text);
 
         /// <summary>
         /// Discerns the numeric kind of a specified binary literal
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The source literal</param>
         [MethodImpl(Inline)]
         public static NumericKind kind(BinaryLiteral src)
-            => src.Value?.GetType()?.NumericKind() ?? NumericKind.None;
+            => src.Data?.GetType()?.NumericKind() ?? NumericKind.None;
 
         public static T[] values<T>(Base2 @base, Type declarer)
             where T : unmanaged
@@ -75,17 +75,17 @@ namespace Z0
             Span<T> target = dst;
             
             for(var i=0; i< count; i++)        
-                Control.seek(target,i) = Control.skip(literals,i).Value;
+                Control.seek(target,i) = Control.skip(literals,i).Data;
             return dst;            
         }
 
         public static string format(BinaryLiteral src) 
-            => $"{src.Name}({src.Value}:{kind(src).Keyword()}) := " + text.enquote(src.Text);
+            => $"{src.Name}({src.Data}:{kind(src).Keyword()}) := " + text.enquote(src.Text);
 
         public static string format<T>(BinaryLiteral<T> src) 
             where T : unmanaged
-                => $"{src.Name}({src.Value}:{kind(src).Keyword()}) := " + text.enquote(src.Text);
-        public static NumericLiteral[] numeric(LiteralValue src, object value = null)
+                => $"{src.Name}({src.Data}:{kind(src).Keyword()}) := " + text.enquote(src.Text);
+        public static NumericLiteral[] numeric(LiteralInfo src, object value = null)
         {
             if(src.MultiLiteral)
             {
@@ -105,20 +105,20 @@ namespace Z0
 
                             if(indicator != 0)
                                 dst[i] = NumericLiteral.Define(
-                                    Name: src.Name,
-                                    Value: value,
-                                    Text: component.Substring(1),
-                                    NumericBase: NumericBases.kind(indicator) 
+                                    src.Name,
+                                    value,
+                                    component.Substring(1),
+                                    NumericBases.kind(indicator) 
                                     );
                             else
                             {
                                 indicator = NumericBases.indicator(component[length - 1]);
                                 indicator = indicator != 0 ? indicator : NBI.Base2;
                                 dst[i] = NumericLiteral.Define(
-                                    Name: src.Name,
-                                    Value: value,
-                                    Text: component.Substring(0, length - 1),
-                                    NumericBase: NumericBases.kind(indicator)                                    
+                                    src.Name,
+                                    value,
+                                    component.Substring(0, length - 1),
+                                    NumericBases.kind(indicator)                                    
                                     );
                             }                            
                         }

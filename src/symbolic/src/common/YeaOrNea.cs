@@ -23,6 +23,8 @@ namespace Z0
         /// ~Aye
         /// </summary>
         N = AsciLetterUp.N,
+
+        
     }
 
 }

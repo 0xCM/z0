@@ -17,7 +17,7 @@ namespace Z0.Asm.Data
         where B : struct, IOperand
         where C : struct, IOperand
     {
-        public CmdOpCode Code {get;}
+        public CmdOpCodeModel Code {get;}
 
         public A Arg0 {get;}
 
@@ -30,7 +30,7 @@ namespace Z0.Asm.Data
             => src.Untyped;
 
         [MethodImpl(Inline)]
-        public Cmd(CmdOpCode code, A arg0, B arg1, C arg3)
+        public Cmd(CmdOpCodeModel code, A arg0, B arg1, C arg3)
         {
             Arg0 = arg0;
             Arg1 = arg1;

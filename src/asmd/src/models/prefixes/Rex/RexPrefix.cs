@@ -43,7 +43,7 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline)]
-        public static byte Encode(OneBit b, OneBit x, OneBit r, OneBit w)
+        public static byte Encode(Singleton b, Singleton x, Singleton r, Singleton w)
         {
             var rex = math.sll((byte)b0100, 4);
             var bx = math.slor((byte)b, 0, (byte)x, 1);

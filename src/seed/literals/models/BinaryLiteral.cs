@@ -11,22 +11,35 @@ namespace Z0
 
     using API = Literati;
 
-    public readonly struct BinaryLiteral : ITextual, INullaryKnown, INullary<BinaryLiteral>
+    /// <summary>
+    /// Defines a base2 literal via text and a boxed value; for the literal to be valid,
+    /// the text, when parsed, must yield a value equivalent to the boxed value
+    /// </summary>
+    public readonly struct BinaryLiteral : ILiteral<BinaryLiteral>
     {                                   
         public static BinaryLiteral Empty   
             => new BinaryLiteral(string.Empty, 0, string.Empty);         
         
-        public readonly string Name;
-
-        public readonly object Value;
+        /// <summary>
+        /// The literal name
+        /// </summary>
+        public string Name {get;}
         
-        public readonly string Text;
+        /// <summary>
+        /// The literal value
+        /// </summary>
+        public object Data {get;}
+        
+        /// <summary>
+        /// Text that represents the boxed value
+        /// </summary>
+        public string Text {get;}
 
         [MethodImpl(Inline)]
         public BinaryLiteral(string name, object value, string text)
         {
             this.Name = name;
-            this.Value = value;
+            this.Data = value;
             this.Text = text;
         }
 
@@ -39,7 +52,7 @@ namespace Z0
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !text.empty(Name) && !text.empty(Text) && Value != null;
+            get => !text.empty(Name) && !text.empty(Text) && Data != null;
         }
 
         public BinaryLiteral Zero
@@ -54,5 +67,11 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public bool Equals(BinaryLiteral src)
+            => string.Equals(Text,src.Text) 
+            && object.Equals(Data, src.Data) 
+            && string.Equals(Name, src.Name);
     }
 }

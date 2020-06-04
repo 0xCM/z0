@@ -12,24 +12,44 @@ namespace Z0
     partial class Control
     {
         /// <summary>
-        /// The 8'th Mersene prime and the largest 32-bit prime
-        /// </summary>
-        /// <remarks>
-        /// See https://en.wikipedia.org/wiki/2,147,483,647
-        /// <remarks>
-        const uint Mersene8 = 2147483647u;
-
-        /// <summary>
-        /// Completely untested hash function that may or may not be suitable for GetHashCode() implementations; it should, however, be fast
+        /// Computes the FNV-1a hash of the source sequence
+        /// See http://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
         /// </summary>
         /// <param name="src">The data source</param>
-        [MethodImpl(Inline)]
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
         public static int hash(ReadOnlySpan<byte> src)
         {
-            var code = Mersene8;
-            for(int i=0; i<src.Length; i++)
-                code ^= ~(uint)skip(src,i);
-            return (int)code;
+            int hashCode = FnvOffsetBias;
+            for (int i = 0; i < src.Length; i++)
+                hashCode = unchecked((hashCode ^ skip(src,i)) * FnvPrime);
+            return hashCode;
         }
+
+        /// <summary>
+        /// Creates a combined hash from a pair of integers
+        /// </summary>
+        /// <param name="x">The left source</param>
+        /// <param name="y">The right source</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static int hash(int x, int y)
+            => unchecked((y * (int)K) + x);
+
+        /// <summary>
+        /// Creates a combined hash from a pair of unsigned integers
+        /// </summary>
+        /// <param name="x">The left source</param>
+        /// <param name="y">The right source</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static int hash(uint x, uint y)
+            => unchecked(((int)y * (int)K) + (int)x);
+
+        const uint K = 0xA5555529;
+        
+        const int FnvOffsetBias = unchecked((int)2166136261);
+
+        const int FnvPrime = 16777619;
     }
 }

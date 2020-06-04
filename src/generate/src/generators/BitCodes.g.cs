@@ -51,7 +51,7 @@ namespace Z0
         protected string KindName(int m)
         {
             var kName = m switch{
-                    1 => nameof(OneBit),
+                    1 => nameof(Singleton),
                     2 => nameof(Duet),
                     3 => nameof(Triad),
                     4 => nameof(Quartet),
