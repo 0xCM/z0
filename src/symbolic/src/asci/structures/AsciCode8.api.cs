@@ -57,20 +57,7 @@ namespace Z0
             seek(dst,7) = skip(data,7);
             return 8;
         } 
-
-        /// <summary>
-        /// Populates an 8-code asci block from a character span
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="dst">The target block</param>
-        [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode8 encode(ReadOnlySpan<char> src, out AsciCode8 dst)
-        {
-            dst = default;
-            Symbolic.literals(src, Control.span<AsciCode8,AsciCharCode>(ref dst));
-            return ref dst;
-        }
-
+        
         [MethodImpl(Inline), Op]
         public static Symbol<AsciChar,byte> symbol(AsciCode8 src, byte index)
             => Symbolic.symbol<AsciChar,byte>(cover(src,index));

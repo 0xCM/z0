@@ -10,6 +10,7 @@ namespace Z0
     using static Seed;
     using static Control;
     using static AsciDataStrings;
+    using static Symbolics;
 
     partial class Symbolic
     {
@@ -20,9 +21,7 @@ namespace Z0
         /// <param name="src">The source character</param>
         [MethodImpl(Inline), Op]
         public static char uppercase(char src)
-             => SymTest.IsLetter(LowerCase, src) 
-              ? uppercase((AsciLetterLoCode)src) 
-              : src;
+             => SymTest.IsLetter(LowerCase, src)  ? uppercase((AsciLetterLoCode)src) : src;
 
         [MethodImpl(Inline), Op]
         public static char uppercase(AsciLetterLoCode src)

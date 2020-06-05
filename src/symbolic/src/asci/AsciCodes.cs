@@ -8,44 +8,58 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static System.Runtime.Intrinsics.X86.Avx2;
-    using static System.Runtime.Intrinsics.X86.Sse2;
-
     using static Seed;
+    using static Typed;
     using static Control;
 
     [ApiHost]
     public partial class AsciCodes : IApiHost<AsciCodes>
     {                
         [MethodImpl(Inline), Op]
-        public void Encode(string[] values, N16 w, Span<byte> dst)
+        public static int first(ReadOnlySpan<char> src, char c)
         {
-            var count = values.Length;
-            ReadOnlySpan<string> src = values;
-            for(int i=0, j=0; i< count; i++, j+=w)
+            for(var i=0; i<src.Length; i++)
+                if(skip(src,i) == c)
+                    return i;
+            return -1;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static int encode(ReadOnlySpan<char> src, Span<byte> dst)
+        {
+            const int W = 16;
+            const char Z = (char)0;
+
+            var @null = first(src, Z);                                
+            var count = @null == -1 ? src.Length : 0;
+            if(count == 0)
+                return 0;
+
+            var j = 0;
+            var r = count;
+            for(int i=0; i<count; i++)
             {
-                ReadOnlySpan<char> value = skip(src,i);
-                AC16.encode(value, out var encoded);
-                encoded.CopyTo(dst.Slice(j,w));                            
+                if(r<0) 
+                    break;                
+                
+                var seglen = r >= W ? W : r;
+                var segSrc = src.Slice(j, seglen);            
+                var segDst = dst.Slice(j, seglen);
+                AC16.encode(segSrc, out var encoded).CopyTo(segDst);
+                
+                j += seglen;
+                r -= seglen;
             }
+            return j;
         }
 
-        [MethodImpl(Inline)]
-        internal static Vector256<ushort> vinflate(Vector128<byte> src)
-            => ConvertToVector256Int16(src).AsUInt16();
-
-        [MethodImpl(Inline)]
-        static ushort vextract(Vector128<ushort> src, byte index)   
+        [MethodImpl(Inline), Op]
+        public static int encode(ReadOnlySpan<string> src, Span<byte> dst)
         {
-            var x = ShiftRightLogical(src, index);
-            return (ushort)ConvertToUInt32(x.AsUInt32());
-        }
-
-        [MethodImpl(Inline)]
-        static ushort vextract(Vector256<ushort> src, byte index)   
-        {
-            var x = ShiftRightLogical(src, index);
-            return (ushort)ConvertToUInt32(x.AsUInt32());
+            var j = 0;
+            for(int i=0; i<src.Length; i++)
+                j += encode(skip(src, i), dst.Slice(j));
+            return j + 1;
         }
     } 
 }

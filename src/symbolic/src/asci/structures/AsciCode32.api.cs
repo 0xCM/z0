@@ -13,7 +13,6 @@ namespace Z0
     using static Control;
     
     using N = N32;
-    using API = AsciCodes;
     
     [ApiHost]
     public class AC32 : AsciCodeApi<N32,AC32>
@@ -38,23 +37,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in AsciCode32 src)
         {            
-            var lo = API.vinflate(Vector256.GetLower(src.Data));
-            var hi = API.vinflate(Vector256.GetUpper(src.Data));
+            var lo = SymBits.vinflate(Vector256.GetLower(src.Data));
+            var hi = SymBits.vinflate(Vector256.GetUpper(src.Data));
             var data = new Seg512(lo,hi);
             return cast<char>(Control.bytespan(data));
-        }
-
-        /// <summary>
-        /// Populates a 32-code asci block from a character span
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="dst">The target block</param>
-        [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode32 encode(ReadOnlySpan<char> src, out AsciCode32 dst)
-        {
-            dst = default;
-            Symbolic.literals(src, Control.span<AsciCode32,AsciCharCode>(ref dst));
-            return ref dst;
         }
 
         /// <summary>

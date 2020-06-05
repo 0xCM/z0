@@ -53,7 +53,7 @@ namespace Z0
                 if(k>=maxbits)
                     break;
 
-                seek(dst, k) = character(testbit(src, j));
+                seek(dst, k) = @char(testbit(src, j));
             }
         }
 

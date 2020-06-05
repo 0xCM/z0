@@ -17,7 +17,6 @@ namespace Z0
     using static Control;
 
     using N = N16;
-    using API = AsciCodes;
 
     [ApiHost]
     public class AC16 : AsciCodeApi<N8,AC16>
@@ -93,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int decode(in AsciCode16 src, Span<char> dst)
         {
-            var data = API.vinflate(src.Data);
+            var data = SymBits.vinflate(src.Data);
             var bytes = bytespan(data);
             var chars = cast<char>(bytes);
             var count = 0;    
@@ -111,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in AsciCode16 src)
         {
-            var data = API.vinflate(src.Data);
+            var data = SymBits.vinflate(src.Data);
             var bytes = bytespan(data);
             var chars = cast<char>(bytes);    
             var len = chars.Length;
@@ -133,7 +132,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<Symbol<AsciChar,byte>> symbols(in AsciCode16 src)
-            => cast<Symbol<AsciChar,byte>>(bytespan(API.vinflate(src.Data)));
+            => cast<Symbol<AsciChar,byte>>(bytespan(SymBits.vinflate(src.Data)));
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode16 src)

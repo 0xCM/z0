@@ -9,9 +9,14 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct ASCI
+    partial class Control
     {
-        
+        /// <summary>
+        /// Reimagines a boolean value as a character value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static char @char(bool src)
+            => (char)(numeric(src) + 48);
     }
-
 }

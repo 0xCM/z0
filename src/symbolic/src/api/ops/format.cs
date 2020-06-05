@@ -14,11 +14,11 @@ namespace Z0
     {        
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode2 src)
-            => AC2.format(src);        
+            => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode4 src)
-            => AC4.format(src);        
+            => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode5 src)

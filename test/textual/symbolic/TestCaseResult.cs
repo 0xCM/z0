@@ -8,21 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
-    public readonly struct LetterCase
+    public readonly struct TestCaseResult<C>
     {
-        public bool IsUpper {get;}    
-
-        public bool IsLower {get;}    
-
-        public LetterCaseKind Kind {get;}        
-        
         [MethodImpl(Inline)]
-        internal LetterCase(bool upper, bool lower, LetterCaseKind kind)
+        public TestCaseResult(C tc, bit success, string description)
         {
-            IsUpper = upper;
-            IsLower = lower;
-            Kind = kind;
-        }         
+            Case = tc;
+            Success = success;
+            Description = description;
+        }
+        
+        public readonly C Case;
+
+        public readonly bit Success;
+
+        public readonly string Description;
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
     
     using static Seed;
     using static Control;
+    using static Symbolics;
 
     partial class Symbolic
     {
@@ -104,14 +105,12 @@ namespace Z0
             return j;
         }
 
-
         [Op]
         public static string render(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
         {
             Span<char> digits = stackalloc char[src.Length*3];
             render(@base, @case, src,digits);
             return digits.ToString();
-        }
-        
+        }       
     }
 }

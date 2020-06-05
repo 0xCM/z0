@@ -50,13 +50,6 @@ namespace Z0
             return define(dst);
         }
 
-        [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode5 encode(ReadOnlySpan<char> src, out AsciCode5 dst)
-        {
-            dst = default;
-            Symbolic.literals(src, Control.span<AsciCode5,AsciCharCode>(ref dst));
-            return ref dst;
-        }
 
         [MethodImpl(Inline), Op]
         public static void decode(AsciCode5 src, Span<char> dst)

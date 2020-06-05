@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Seed;
-    using static Symbolic;
+    using static Symbolics;
 
     using UP = AsciLetterUp;
     using LO = AsciLetterLo;

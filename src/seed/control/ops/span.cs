@@ -7,15 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    
+    using static System.Runtime.InteropServices.MemoryMarshal;
 
     using static Seed;
 
     partial class Control
     {
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> span(string src)
-            => src;
-
         /// <summary>
         /// Creates a T-span from a supplied reference
         /// </summary>
@@ -24,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<T> span<T>(ref T src, int count)
-            => MemoryMarshal.CreateSpan(ref src, count);
+            => CreateSpan(ref src, count);
 
         /// <summary>
         /// Creates a single-cell T-span from a supplied reference
@@ -33,7 +31,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<T> span<T>(ref T src)
-            => MemoryMarshal.CreateSpan(ref src, 1);
+            => CreateSpan(ref src, 1);
 
         /// <summary>
         /// Creates a T-span from an S-reference
@@ -46,7 +44,7 @@ namespace Z0
         public static Span<T> span<S,T>(ref S src, int count)
             where T : struct
             where S : struct
-                => MemoryMarshal.Cast<S,T>(MemoryMarshal.CreateSpan(ref src, count));
+                => Cast<S,T>(CreateSpan(ref src, count));
 
         /// <summary>
         /// Creates a T-span from a single S-reference
@@ -58,6 +56,64 @@ namespace Z0
         public static Span<T> span<S,T>(ref S src)
             where T : struct
             where S : struct
-                => MemoryMarshal.Cast<S,T>(MemoryMarshal.CreateSpan(ref src, 1));
+                => Cast<S,T>(CreateSpan(ref src, 1));
+
+        /// <summary>
+        /// Creates a readonly character span from a string
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> span(string src)
+            => src;
+
+        /// <summary>
+        /// Creates a bytespan from a T-cell reference
+        /// </summary>
+        /// <param name="src">The reference cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Span<byte> span8u<T>(ref T src)
+            where T : struct
+                => AsBytes(CreateSpan(ref src, 1));
+
+        /// <summary>
+        /// Creates a u16 span from a T-cell reference
+        /// </summary>
+        /// <param name="src">The reference cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Span<ushort> span16u<T>(ref T src)
+            where T : struct
+                => cast<ushort>(AsBytes(CreateSpan(ref src, 1)));
+
+        /// <summary>
+        /// Creates a u32 span from a T-cell reference
+        /// </summary>
+        /// <param name="src">The reference cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Span<uint> span32u<T>(ref T src)
+            where T : struct
+                => cast<uint>(AsBytes(CreateSpan(ref src, 1)));
+
+        /// <summary>
+        /// Creates a u64 span from a T-cell reference
+        /// </summary>
+        /// <param name="src">The reference cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Span<ulong> span64u<T>(ref T src)
+            where T : struct            
+                => cast<ulong>(AsBytes(CreateSpan(ref src, 1)));
+
+        /// <summary>
+        /// Creates a u16 span from a T-cell reference
+        /// </summary>
+        /// <param name="src">The reference cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Span<char> span16c<T>(ref T src)
+            where T : struct
+                => cast<char>(AsBytes(CreateSpan(ref src, 1)));
     }
 }

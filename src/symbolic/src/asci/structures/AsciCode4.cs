@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Control;
-    using static AC4;
 
+    using API = AsciCodes;
     using N = N4;    
 
     /// <summary>
@@ -18,6 +17,8 @@ namespace Z0
     /// </summary>
     public readonly struct AsciCode4 : IAsciSequence<AsciCode4,N>
     {        
+        public static AsciCode4 Empty => new AsciCode4(0);
+
         internal readonly uint Data;
 
         [MethodImpl(Inline)]
@@ -55,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(this);
+            => API.format(this);
  
         public override string ToString()
             => Format(); 

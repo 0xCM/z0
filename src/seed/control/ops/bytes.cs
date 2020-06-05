@@ -20,14 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<byte> bytes<T>(Span<T> src)
             where T : struct
-                => MemoryMarshal.AsBytes(src);
-             
-        /// <summary>
-        /// Reimagines a boolean value as a character value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static char character(bool src)
-            => (char)(numeric(src) + 48);
+                => MemoryMarshal.AsBytes(src);             
     }
 }

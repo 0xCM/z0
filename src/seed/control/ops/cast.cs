@@ -17,6 +17,10 @@ namespace Z0
             => (T)src;
 
         [MethodImpl(Inline)]
+        public static ref T cast<S,T>(in S src)
+            => ref Unsafe.As<S,T>(ref edit(src));
+            
+        [MethodImpl(Inline)]
         public static T[] cast<T>(object[] src)
         {
             var dst = Control.alloc<T>(src.Length);
@@ -24,6 +28,11 @@ namespace Z0
                 dst[i] = cast<T>(src[i]);
             return dst;
         }
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Span<T> cast<T>(Span<byte> src)
+            where T : struct
+                => MemoryMarshal.Cast<byte,T>(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
