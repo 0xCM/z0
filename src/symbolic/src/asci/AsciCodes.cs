@@ -29,7 +29,7 @@ namespace Z0
                 encoded.CopyTo(dst.Slice(j,w));                            
             }
         }
-\
+
         [MethodImpl(Inline)]
         internal static Vector256<ushort> vinflate(Vector128<byte> src)
             => ConvertToVector256Int16(src).AsUInt16();
