@@ -22,6 +22,10 @@ namespace Z0
         public ReadOnlySpan<AsciChar> symbols(ASCI asci, int i0, int i1)
             => cast<char,AsciChar>(ResourceTools.segment(AsciStrings.Text(n0),i0,i1));
 
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<Symbol<AsciChar,byte>> symbols(in AsciCode16 src)
+            => AC16.symbols(src);
+
         /// <summary>
         /// Loads 16 asci symbols beginning at a specified index
         /// </summary>

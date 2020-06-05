@@ -12,21 +12,30 @@ namespace Z0.Asm.Data
 
     using F = OpCodeFieldId;
 
-    public readonly struct OpCodeRecordParser
+    [ApiHost]
+    public readonly struct OpCodeRecordParser : IApiHost<OpCodeRecordParser>
     {
         public static OpCodeRecordParser Service => default;
 
         [Op, MethodImpl(Inline)]
+        public void Parse(in AppResourceDoc specs, Span<OpCodeRecord> dst)
+        {
+            var src = specs.Rows.ToReadOnlySpan();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+               Parse(skip(src,i), ref seek(dst,i));            
+        }
+
         public Span<OpCodeRecord> Parse(in AppResourceDoc specs)
         {
             var src = specs.Rows;
             var count = src.Length;
             var dst = Spans.alloc<OpCodeRecord>(count);
-            for(var i=0; i<count; i++)
-               Parse(skip(src,i), ref seek(dst,i));            
+            Parse(specs,dst);
             return dst;
         }
 
+        [Op]
         ref readonly OpCodeRecord Parse(in TextRow src, ref OpCodeRecord dst)
         {                        
             ReadOnlySpan<string> cells = src.CellContent;

@@ -35,9 +35,9 @@ namespace Z0.Asm.Data
         public void op_codes()
         {
 
-            var identifers = OpCodeServices.identifiers();
-            var sample = identifers.Slice(0,math.min(100, identifers.Length));
-            Control.iter(sample,s => Trace(s.Format()));
+            // var identifers = OpCodeServices.identifiers();
+            // var sample = identifers.Slice(0,math.min(100, identifers.Length));
+            // Control.iter(sample,s => Trace(s.Format()));
         }
 
 

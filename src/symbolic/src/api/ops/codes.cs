@@ -13,7 +13,7 @@ namespace Z0
     using static Typed;
 
     partial class Symbolic
-    {
+    {        
         static AsciDataStrings AsciStrings => default;
 
         [MethodImpl(Inline), Op]
@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void codes(ReadOnlySpan<char> src, Span<AsciCode> dst)
+        public static void codes(ReadOnlySpan<char> src, Span<AsciCodeCover> dst)
         {
             var count = Math.Min(src.Length, dst.Length);
             for(var i=0; i<count; i++)

@@ -20,7 +20,5 @@ namespace Z0.Asm.Data
             var size = src.EncodingSize;
             return text.concat($"data", text.bracket(size), Chars.Colon, text.embrace(data.FormatHex()));
         }
-
-
     }
 }

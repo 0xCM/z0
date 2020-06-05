@@ -6,12 +6,12 @@ namespace Z0.Asm.Data
 {
     using System;
 
-    using static InstructionTokens;
+    using static InstructionTokenValue;
 
     partial class InstructionTokenData
     {
-        public static Token[] Tokens
-            => new Token[TokenCount]{ 
+        public static string[] Values
+            => new string[TokenCount]{ 
                 None, 
                 bnd, 
                 DST,
@@ -87,6 +87,7 @@ namespace Z0.Asm.Data
                 zmmノm512ノm32bcst,
                 zmmノm512ノm64bcst,
                 ᐸZMM0ᐳ,
-            };
+            };        
+
     }
 }

@@ -11,33 +11,33 @@ namespace Z0
     using static Control;
     
     using N = N1;
-    using C = AsciCode;
+    using C = AsciCodeCover;
 
     /// <summary>
-    /// Defines an asci code sequence of length 1
+    /// Covers an asci code sequence of length 1
     /// </summary>
-    public readonly struct AsciCode : IAsciSequence<C,N>
+    public readonly struct AsciCodeCover : IAsciSequence<C,N>
     {
         public static C Empty => new C(AsciCharCode.Null);
         
         public const int Length = 1;
         
-        internal readonly AsciCharCode Code;
+        internal readonly AsciCharCode Covered;
         
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode define(in byte src)
-            => ref view<byte,AsciCode>(src);
+        public static ref readonly AsciCodeCover define(in byte src)
+            => ref view<byte,AsciCodeCover>(src);
 
         [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(AsciCode src)
+        public static Symbol<AsciChar,byte> symbol(AsciCodeCover src)
             => Symbolic.symbol<AsciChar,byte>(src);
 
         [MethodImpl(Inline), Op]
-        public static string format(AsciCode src)
-            => new string(new char[Length]{(char)src.Code});
+        public static string format(AsciCodeCover src)
+            => new string(new char[Length]{(char)src.Covered});
 
         [MethodImpl(Inline), Op]
-        public static char @char(AsciCode src)
+        public static char @char(AsciCodeCover src)
             => (char)src;
 
         public C Zero
@@ -49,21 +49,21 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Code == AsciCharCode.Null;
+            get => Covered == AsciCharCode.Null;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Code != AsciCharCode.Null;
+            get => Covered != AsciCharCode.Null;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(C src)
-            => Code == src.Code;
+            => Covered == src.Covered;
 
         public override int GetHashCode()
-            => Code.GetHashCode();
+            => Covered.GetHashCode();
 
         public override bool Equals(object src)
             => src is C c && Equals(c);
@@ -77,52 +77,52 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator C(AsciCharCode src)
-            => new AsciCode(src);
+            => new AsciCodeCover(src);
 
         [MethodImpl(Inline)]
         public static implicit operator AsciCharCode(C src)
-            => src.Code;
+            => src.Covered;
 
         [MethodImpl(Inline)]
         public static implicit operator C(char src)
-            => new AsciCode((AsciCharCode)src);
+            => new AsciCodeCover((AsciCharCode)src);
 
         [MethodImpl(Inline)]
         public static implicit operator char(C src)
-            => (char)src.Code;
+            => (char)src.Covered;
 
         [MethodImpl(Inline)]
         public static implicit operator C(AsciChar src)
-            => new AsciCode((AsciCharCode)src);
+            => new AsciCodeCover((AsciCharCode)src);
 
         [MethodImpl(Inline)]
         public static implicit operator AsciChar(C src)
-            => (AsciChar)src.Code;
+            => (AsciChar)src.Covered;
 
         [MethodImpl(Inline)]
         public static implicit operator C(byte src)
-            => new AsciCode((AsciCharCode)src);
+            => new AsciCodeCover((AsciCharCode)src);
 
         [MethodImpl(Inline)]
         public static implicit operator byte(C src)
-            => (byte)src.Code;
+            => (byte)src.Covered;
 
         [MethodImpl(Inline)]
         public static explicit operator uint(C src)
-            => (uint)src.Code;
+            => (uint)src.Covered;
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(C src)
-            => (ushort)src.Code;
+            => (ushort)src.Covered;
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(C src)
-            => (ulong)src.Code;
+            => (ulong)src.Covered;
 
         [MethodImpl(Inline)]
-        public AsciCode(AsciCharCode code)
+        public AsciCodeCover(AsciCharCode code)
         {
-            this.Code = code;
+            this.Covered = code;
         }
     }
 }

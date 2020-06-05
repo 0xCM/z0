@@ -12,6 +12,30 @@ namespace Z0
 
     partial class Symbolic    
     {        
+        [MethodImpl(Inline), Op]
+        public static string format(in AsciCode2 src)
+            => AC2.format(src);        
+
+        [MethodImpl(Inline), Op]
+        public static string format(in AsciCode4 src)
+            => AC4.format(src);        
+
+        [MethodImpl(Inline), Op]
+        public static string format(in AsciCode5 src)
+            => AC5.format(src);        
+
+        [MethodImpl(Inline), Op]
+        public static string format(in AsciCode8 src)
+            => AC8.format(src);        
+
+        [MethodImpl(Inline), Op]
+        public static string format(in AsciCode16 src)
+            => AC16.format(src);        
+
+        [MethodImpl(Inline), Op]
+        public static string format(in AsciCode32 src)
+            => AC32.format(src);        
+
         /// <summary>
         /// Formats a span of decimal digits as a contiguous block
         /// </summary>

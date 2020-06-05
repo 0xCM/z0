@@ -8,131 +8,85 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
+    using System.Linq;
 
     using static Seed;
     using static Memories;
  
     [ApiHost("opcodes")]
-    public class OpCodeServices : IApiHost<OpCodeServices>
+    public readonly partial struct OpCodeServices : IApiHost<OpCodeServices>
     {                
+        [MethodImpl(Inline)]
+        public static OpCodeServices Service(in OpCodeDataset data)
+            => new OpCodeServices(data);        
+
+        [MethodImpl(Inline)]
+        public static OpCodeServices Service()
+            => new OpCodeServices(OpCodeDataset.Create());
+        
         [MethodImpl(Inline), Op]
         public ref readonly Token token(InstructionToken id)
-            => ref skip(InstructionTokenData.Tokens, (int)id);
+            => ref ITokens[(int)id];
+
+        [MethodImpl(Inline), Op]
+        public AsmCommandGroup group(string name)
+            => new AsmCommandGroup(name);
+
+        [MethodImpl(Inline), Op]
+        public AsmCommandGroup group(in AsciCode16 name)
+            => new AsmCommandGroup(name);
+
+        public ReadOnlySpan<AsmCommandGroup> groups()
+            => Records.Select(r => r.Mnemonic).Distinct().Map(group);
+
+
+        [MethodImpl(Inline), Op]
+        public void EncodeTokenValues(Span<byte> dst)
+        {
+            var count = ITokenValues.Length;
+            ReadOnlySpan<string> src = ITokenValues;
+            for(int i=0, j=0; i< count; i++, j+=16)
+            {
+                ReadOnlySpan<char> value = skip(src,i);
+                AC16.encode(value, out var encoded);
+                encoded.CopyTo(dst.Slice(j,16));                            
+            }
+        }
 
         [MethodImpl(Inline), Op]
         public string identifier(InstructionToken id)
-            => skip(InstructionTokenData.Identifiers, (int)id);
+            => ITokenIdentity[(int)id];
+
+        [MethodImpl(Inline), Op]
+        public OpCodeIdentifier opcode(int index)
+            => OpCodeIdentifiers[index];
 
         [MethodImpl(Inline), Op]
         public string value(InstructionToken id)
-            => InstructionTokenValue.m16int;
+            => ITokenValues[(int)id];
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<char> description(InstructionToken id)
-            => InstructionTokenData.Description(id);
+        public string purpose(InstructionToken id)
+            => ITokenPurpose[(int)id];
         
-        public static Option<AppResourceDoc> resource()
-        {
-            var extractor = ResExtractor.Service(typeof(OpCodeServices).Assembly);            
-            var name = FileName.Define("OpCodeSpecs", FileExtensions.Csv);
-            return extractor.ExtractDocument(name);
-        }
-
-        public static ReadOnlySpan<OpCodeRecord> records()
-        {
-            var specs = resource().Require();
-            var parser = OpCodeRecordParser.Service;
-            return parser.Parse(specs);
-        }
-
-        [Op]
-        public static ReadOnlySpan<OpCodeIdentifier> identifiers()
-        {
-            var src = records();
-            var count = src.Length;
-            var dst =  Spans.alloc<OpCodeIdentifier>(count);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = identify(skip(src,i));
-            return dst;
-        }
+        [MethodImpl(Inline), Op]
+        public OpCodeOperand operand(ulong src, duet index)
+            => new OpCodeOperand((ushort)Bits.slice(src, index*16, 16));
 
         [MethodImpl(Inline), Op]
-        static string render(Span<char> src)
-            => new string(src);
+        public ReadOnlySpan<byte> encode(in EncodedOpCode src)
+            => MemoryMarshal.CreateReadOnlySpan(ref refs.edit(in src),1).AsBytes();                     
 
-        [MethodImpl(Inline), Op]
-        public static string mnemonic(in OpCodeRecord record)
-        {
-            var length = record.Mnemonic.Length;
-            ReadOnlySpan<char> src = record.Mnemonic;
-            Span<char> dst = stackalloc char[length];
-            head(dst) = head(src);
-            for(var i=1; i<length; i++)
-                seek(dst,i) = Symbolic.lowercase(skip(src,i));
-            return render(dst);
-        }
-        
-        /// <summary>
-        /// Defines, in a predictable and hopefully meaningful way, a programmatic identifier that designates an op code
-        /// </summary>
-        /// <param name="src">The source record</param>
-        [MethodImpl(Inline), Op]
-        public static OpCodeIdentifier identify(in OpCodeRecord src)
-        {
-            var part1 = mnemonic(src);
-
-            return new OpCodeIdentifier(part1);
-        }
-
-        [Op, MethodImpl(Inline)]
-        public static OpCodeSpec parse(OpCodeExpression src)            
+        [MethodImpl(Inline)]
+        public OpCodeSpec Parse(OpCodeExpression src)            
             => new OpCodeSpec(src, src.Data.SplitClean(Chars.Space).Map(c => new OpCodePart(c)));
 
-        [Op, MethodImpl(Inline)]
-        public static InstructionSpec parse(InstructionExpression src)     
+        [MethodImpl(Inline)]
+        public InstructionSpec Parse(InstructionExpression src)     
         {       
             var mnemonic = src.Data.LeftOf(Chars.Space);
             var operands = src.Data.RightOf(Chars.Space).SplitClean(Chars.Comma);
             return new InstructionSpec(src,mnemonic,operands);
-        }
-
-        [Op, MethodImpl(Inline)]
-        public static void generate(AppResourceDoc specs)
-        {
-            var parser = OpCodeRecordParser.Service;
-            var parsed = parser.Parse(specs);
-            var count = parsed.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(parsed,i);
-                var opcode = parse(new OpCodeExpression(record.Expression));                
-                var inxs = parse(new InstructionExpression(record.Instruction));
-            }            
-        }
-
-        // [MethodImpl(Inline)]
-        // static MemoryAddress address(string src)
-        //     => MemoryAddress.From(head(span(src)));            
-        
-        // static ArraySpan<TextResource<OpCodeToken>> OCT()
-        // {
-        //     ArraySpan<MemoryAddress> locations = typeof(OpCodeTokenValue).LiteralFieldValues<string>().Map(address);
-        //     ArraySpan<TextResource<OpCodeToken>> dst = new TextResource<OpCodeToken>[locations.Length];
-        //     for(var i=0; i<locations.Length; i++)
-        //     {
-        //         var address = locations[i];
-        //         var value = Spans.cast<char>(memory.read<byte>(address, 0xA)).ToString();
-        //         dst[i] = new TextResource<OpCodeToken>((OpCodeToken)(i + 1), address, value);            
-        //     }
-        //     return dst;
-        // }
-
-        [Op, MethodImpl(Inline)]
-        public static OpCodeOperand operand(ulong src, duet index)
-            => new OpCodeOperand((ushort)Bits.slice(src, index*16, 16));
-
-        [Op, MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> encode(in EncodedOpCode src)
-            => MemoryMarshal.CreateReadOnlySpan(ref refs.edit(in src),1).AsBytes();                     
+        }       
    }
 }

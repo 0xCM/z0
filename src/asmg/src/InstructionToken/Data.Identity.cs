@@ -5,20 +5,12 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Seed;
 
-    using static InstructionTokenValue;
+    using static InstructionTokenId;
 
     public partial class InstructionTokenData
     {
-    
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> Description(InstructionToken token)
-            => Control.skip(Descriptions, (int)token);
-        
-        public static ReadOnlySpan<string> Descriptions
+        public static string[] Identity
             => new string[TokenCount]{ 
                 None, 
                 bnd, 

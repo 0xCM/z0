@@ -10,10 +10,10 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-    public readonly struct AsmHeader
+    public readonly struct AsmFunctionHeader
     {
         [MethodImpl(Inline)]
-        public AsmHeader(OpUri uri, string sig, string prop, MemoryAddress @base, ExtractTermCode term)
+        public AsmFunctionHeader(OpUri uri, string sig, string prop, MemoryAddress @base, ExtractTermCode term)
         {
             this.Uri = uri;
             this.OpSig = sig;

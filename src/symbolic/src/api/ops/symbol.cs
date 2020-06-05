@@ -38,5 +38,34 @@ namespace Z0
             => src <= HexDigit.x9 
                 ? (HexSymbol)((byte)src + (byte)HexSymbol.FirstNumeral) 
                 : (HexSymbol)((byte)src + (byte)HexSymbol.FirstLetterLo);
+
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(in AsciCodeCover src)
+            => AsciCodeCover.symbol(src);
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(in AsciCode2 src, byte index)
+            => AC2.symbol(src, index);
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(in AsciCode4 src, byte index)
+            => AC4.symbol(src, index);
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(in AsciCode5 src, byte index)
+            => AC5.symbol(src, index);
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(in AsciCode8 src, byte index)
+            => AC8.symbol(src, index);
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(in AsciCode16 src, byte index)
+            => AC16.symbol(src, index);
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(in AsciCode32 src, byte index)
+            => AC32.symbol(src, index);
     }
 }

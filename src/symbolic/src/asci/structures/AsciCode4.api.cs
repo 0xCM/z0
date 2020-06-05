@@ -11,8 +11,6 @@ namespace Z0
     using static Control;
 
     using N = N4;    
-    using A = AsciCharCode;
-    using C = AsciCode;
 
     [ApiHost]
     public class AC4 : AsciCodeApi<N4,AC4>
@@ -21,18 +19,28 @@ namespace Z0
 
         public static AsciCode4 Empty => new AsciCode4(0);
 
- 
         [MethodImpl(Inline), Op]
-        public static C code(AsciCode4 src, byte index)
+        public static AsciCode4 define(ReadOnlySpan<byte> src)
+            => define(head(cast<byte,uint>(src)));
+
+        [MethodImpl(Inline), Op]
+        public static AsciCodeCover cover(AsciCode4 src, byte index)
             => (byte)(src.Data >> index);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<C> codes(AsciCode4 src)
-            => cast<C>(bytespan(src));
-
+        public static ReadOnlySpan<AsciCodeCover> cover(AsciCode4 src)
+            => cast<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
-        public static AsciCode4 define(C a, C b, C c, C d)
+        public static AsciCharCode code(AsciCode4 src, byte index)
+            => (AsciCharCode)(src.Data >> index);
+
+        [MethodImpl(Inline), Op]
+        public static char decode(AsciCode4 src, byte index)
+            => (char)code(src,index);
+
+        [MethodImpl(Inline), Op]
+        public static AsciCode4 define(AsciCodeCover a, AsciCodeCover b, AsciCodeCover c, AsciCodeCover d)
         {
             var x0 = (uint)a;
             var x1 = (uint)((uint)b << 8);
@@ -46,7 +54,18 @@ namespace Z0
             => ref view<uint,AsciCode4>(src);
 
         [MethodImpl(Inline), Op]
-        public static AsciCode4 define(string src)
+        public static int decode(AsciCode4 src, Span<char> dst)
+        {
+            var data = cover(src);
+            seek(dst,0) = skip(data,0);
+            seek(dst,1) = skip(data,1);
+            seek(dst,2) = skip(data,2);
+            seek(dst,3) = skip(data,3);
+            return 4;
+        } 
+
+        [MethodImpl(Inline), Op]
+        public static AsciCode4 encode(string src)
         {
             var dst = 0u;
             var data = span(src);
@@ -59,55 +78,28 @@ namespace Z0
             return define(dst);
         }
 
-        [MethodImpl(Inline), Op]
-        public static AsciCode4 define(ReadOnlySpan<byte> src)
-            => define(head(cast<byte,uint>(src)));
-        
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<C> kinds(AsciCode4 src)
-            => cast<C>(bytespan(src));
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(AsciCode4 src, byte index)
-            => Symbolic.symbol<AsciChar,byte>(code(src,index));
-
-        [MethodImpl(Inline), Op]
-        public static A kind(AsciCode4 src, byte index)
-            => (A)(src.Data >> index);
-
-        [MethodImpl(Inline), Op]
-        public static char @char(AsciCode4 src, byte index)
-            => (char)kind(src,index);
-
-
-        [MethodImpl(Inline), Op]
-        public static void chars(AsciCode4 src, Span<char> dst)
-        {
-            var data = codes(src);
-            seek(dst,0) = skip(data,0);
-            seek(dst,1) = skip(data,1);
-            seek(dst,2) = skip(data,2);
-            seek(dst,3) = skip(data,3);
-        } 
-
         /// <summary>
         /// Populates a 4-code asci block from a character span
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode4 fill(ReadOnlySpan<char> src, out AsciCode4 dst)
+        public static ref readonly AsciCode4 encode(ReadOnlySpan<char> src, out AsciCode4 dst)
         {
             dst = default;
-            Symbolic.literals(src, Control.span<AsciCode4,A>(ref dst));
+            Symbolic.literals(src, Control.span<AsciCode4,AsciCharCode>(ref dst));
             return ref dst;
         }
+        
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(AsciCode4 src, byte index)
+            => Symbolic.symbol<AsciChar,byte>(cover(src,index));
 
         [MethodImpl(Inline), Op]
         public static string format(AsciCode4 src)
         {
             Span<char> dst = stackalloc char[Length];
-            chars(src,dst);
+            decode(src,dst);
             return new string(dst);
         }
     }

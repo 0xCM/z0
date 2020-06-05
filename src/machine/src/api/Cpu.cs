@@ -28,7 +28,7 @@ namespace Z0.Machines
 
         readonly CpuBuffers Buffers;
 
-        readonly List<AsmDoc> AsmDocs;
+        readonly List<AsmSourceDoc> AsmDocs;
 
         int Count;
 
@@ -41,7 +41,7 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         internal Cpu(IMachineContext context, int runidx)
         {
-            AsmDocs = new List<AsmDoc>(100);
+            AsmDocs = new List<AsmSourceDoc>(100);
             Context = context;
             Files = MachineFiles.Service(context);
             Buffers = CpuBuffers.Alloc(DefaultBufferSize);
@@ -53,7 +53,7 @@ namespace Z0.Machines
             var parser = AsmDocParser.Service;
             var blocks = parser.Parse(doc);
             if(blocks)
-                AsmDocs.Add(new AsmDoc(src,doc,blocks.Value));            
+                AsmDocs.Add(new AsmSourceDoc(src,doc,blocks.Value));            
         }
 
         void LoadAsmDoc(FilePath src)

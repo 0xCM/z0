@@ -13,12 +13,12 @@ namespace Z0.Asm.Data
 
     public readonly struct AsmStatementBlock
     {
-        public AsmHeader Header {get;}
+        public AsmFunctionHeader Header {get;}
         
         public readonly AsmStatement[] Statements;
 
         [MethodImpl(Inline)]
-        public AsmStatementBlock(AsmHeader header, AsmStatement[] src)
+        public AsmStatementBlock(AsmFunctionHeader header, AsmStatement[] src)
         {
             this.Header = header;
             this.Statements = src;

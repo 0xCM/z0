@@ -16,7 +16,6 @@ namespace Z0.Machines
     {
         public IMachineContext Context {get;}
 
-
-        public IDataBroker<AsmCommandKind,AsmCommand> Broker {get;}
+        //public IDataBroker<AsmCommandGroup,AsmCommand> Broker {get;}
     }
 }

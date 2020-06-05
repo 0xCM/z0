@@ -47,7 +47,5 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline), Op]
         public static EncodedCommand encode(uint lo32)
             => encode((ulong)lo32);
-
-
     }
 }

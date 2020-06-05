@@ -12,7 +12,7 @@ namespace Z0
 
     using N = N2;
     using A = AsciCharCode;
-    using C = AsciCode;
+    using C = AsciCodeCover;
 
     [ApiHost]
     public class AC2 : AsciCodeApi<N2,AC2>
@@ -22,7 +22,19 @@ namespace Z0
         public const int Length = (int)N.Value;        
 
         [MethodImpl(Inline), Op]
-        public static AsciCode2 define(C a, C b)
+        public static AsciCode2 define(ReadOnlySpan<byte> src)
+            => define(head(cast<byte,ushort>(src)));
+
+        [MethodImpl(Inline), Op]
+        public static AsciCharCode code(AsciCode2 src, byte index)
+            => (AsciCharCode)(src.Data >> index);
+
+        [MethodImpl(Inline), Op]
+        public static char decode(AsciCode2 src, byte index)
+            => (char)code(src,index);
+
+        [MethodImpl(Inline), Op]
+        public static AsciCode2 define(AsciCodeCover a, AsciCodeCover b)
         {
             var x0 = (ushort)a;
             var x1 = (ushort)((ushort)b << 8);
@@ -30,36 +42,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static AsciCode2 define(ReadOnlySpan<byte> src)
-            => define(head(cast<byte,ushort>(src)));
-
-        [MethodImpl(Inline), Op]
         public static ref readonly AsciCode2 define(in ushort src)
             => ref view<ushort,AsciCode2>(src);
-
-        [MethodImpl(Inline), Op]
-        public static A kind(AsciCode2 src, byte index)
-            => (A)(src.Data >> index);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<C> kinds(AsciCode2 src)
-            => cast<C>(bytespan(src));
-
-        [MethodImpl(Inline), Op]
-        public static C code(AsciCode2 src, byte index)
-            => (byte)(src.Data >> index);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<C> codes(AsciCode2 src)
-            => cast<C>(bytespan(src));
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(AsciCode2 src, byte index)
-            => Symbolic.symbol<AsciChar,byte>(code(src,index));
-
-        [MethodImpl(Inline), Op]
-        public static char @char(AsciCode2 src, byte index)
-            => (char)kind(src,index);
 
         /// <summary>
         /// Populates a 4-code asci block from a character span
@@ -67,7 +51,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode2 fill(ReadOnlySpan<char> src, out AsciCode2 dst)
+        public static ref readonly AsciCode2 encode(ReadOnlySpan<char> src, out AsciCode2 dst)
         {
             dst = default;
             Symbolic.literals(src, Control.span<AsciCode2,A>(ref dst));
@@ -75,18 +59,30 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void chars(AsciCode2 src, Span<char> dst)
+        public static void decode(AsciCode2 src, Span<char> dst)
         {
-            var data = codes(src);
+            var data = cover(src);
             seek(dst,0) = skip(data,0);
             seek(dst,1) = skip(data,1);
         } 
 
         [MethodImpl(Inline), Op]
+        public static AsciCodeCover cover(AsciCode2 src, byte index)
+            => (byte)(src.Data >> index);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<AsciCodeCover> cover(AsciCode2 src)
+            => cast<C>(bytespan(src));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(AsciCode2 src, byte index)
+            => Symbolic.symbol<AsciChar,byte>(cover(src,index));
+
+        [MethodImpl(Inline), Op]
         public static string format(AsciCode2 src)
         {
             Span<char> dst = stackalloc char[Length];
-            chars(src,dst);
+            decode(src,dst);
             return new string(dst);
         }
     }

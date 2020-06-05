@@ -15,7 +15,7 @@ namespace Z0.Asm.Data
     public readonly struct OpCodeIdentifier : IIdentification<OpCodeIdentifier>
     {        
         public static OpCodeIdentifier Empty => new OpCodeIdentifier(string.Empty);
-
+        
         public string IdentityText {get;}
         
         string Denullified
@@ -25,20 +25,20 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline)]
-        public static bool operator ==(OpCodeIdentifier d1, OpCodeIdentifier d2)
-            => d1.Equals(d2);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(OpCodeIdentifier d1, OpCodeIdentifier d2)
-            => !d1.Equals(d2);
+        public static implicit operator string(OpCodeIdentifier src)
+            => src.Denullified;
 
         [MethodImpl(Inline)]
         public static implicit operator OpCodeIdentifier(string src)
             => new OpCodeIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(OpCodeIdentifier src)
-            => src.IdentityText;
+        public static bool operator ==(OpCodeIdentifier d1, OpCodeIdentifier d2)
+            => d1.Equals(d2);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(OpCodeIdentifier d1, OpCodeIdentifier d2)
+            => !d1.Equals(d2);
 
         [MethodImpl(Inline)]
         public OpCodeIdentifier(string src)

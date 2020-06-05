@@ -36,11 +36,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ParseResult<T> Success(string source, T value)
-            => new ParseResult<T>(source, value);
+            => new ParseResult<T>(source, value, null);
 
         [MethodImpl(Inline)]
-        public static ParseResult<T> Fail(string source, object reason = null)
+        public static ParseResult<T> Fail(string source, object reason)
             => new ParseResult<T>(source, default, reason);
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Fail(string source)
+            => new ParseResult<T>(source, default, null);
 
         [MethodImpl(Inline)]
         public static implicit operator ParseResult<T>((string source, T value) src)
@@ -59,12 +63,12 @@ namespace Z0
             => src.Failed;
 
         [MethodImpl(Inline)]
-        ParseResult(string source, T value, object reason = null)
+        ParseResult(string source, T value, object reason)
         {
             this.Source = source;
             this.Succeeded = true;
             this.Value = value;
-            this.Reason = reason != null ? Option.some(reason) : Option.none<object>();
+            this.Reason = reason;
         }        
 
         /// <summary>

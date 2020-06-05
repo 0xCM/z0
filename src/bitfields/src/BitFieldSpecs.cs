@@ -108,18 +108,18 @@ namespace Z0
             insist(names.Length, widths.Length);
             var fieldCount = (byte)names.Length;
             var fieldWidths = widths;
-            var fieldNames = AC16.Alloc(fieldCount);            
+            var fieldNames = AC16.alloc(fieldCount);            
 
             ArraySpan<byte> fieldPositions = new byte[fieldCount];
 
             byte width = 0;            
             for(var i=0; i< fieldCount; i++)
             {
-                AC16.fill(names[i], out fieldNames[i]);
+                AC16.encode(names[i], out fieldNames[i]);
                 fieldPositions[i] = width;
                 width += fieldWidths[i];                
             }
-            return new BitFieldModel(AC16.fill(name), fieldCount, width, fieldNames, fieldWidths, fieldPositions);
+            return new BitFieldModel(AC16.encode(name), fieldCount, width, fieldNames, fieldWidths, fieldPositions);
         }
 
         /// <summary>

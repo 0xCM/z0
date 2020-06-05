@@ -26,12 +26,18 @@ namespace Z0
             this.Data = doc;
         }
 
-        public ReadOnlySpan<TextRow> Rows
+        public TextRow[] Rows
         {
             [MethodImpl(Inline)]
             get => Data.RowData;
         }
         
+        public int RowCount
+        {
+            [MethodImpl(Inline)]
+            get => Data.RowCount;
+        }
+
         public string Format()
         {
             var dst = text.build();

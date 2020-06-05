@@ -11,8 +11,6 @@ namespace Z0
     using static Control;
 
     using N = N5;    
-    using A = AsciCharCode;
-    using C = AsciCode;
 
     [ApiHost]
     public class AC5 : AsciCodeApi<N5,AC5>
@@ -22,30 +20,23 @@ namespace Z0
         public static AsciCode5 Empty => new AsciCode5(0);
 
         [MethodImpl(Inline), Op]
-        public static C code(AsciCode5 src, byte index)
-            => (byte)(src.Data >> index);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<C> codes(AsciCode5 src)
-            => cast<C>(bytespan(src));
-
-        [MethodImpl(Inline), Op]
-        public static void chars(AsciCode5 src, Span<char> dst)
-        {
-            var data = codes(src);
-            seek(dst,0) = skip(data,0);
-            seek(dst,1) = skip(data,1);
-            seek(dst,2) = skip(data,2);
-            seek(dst,3) = skip(data,3);
-            seek(dst,4) = skip(data,4);
-        } 
+        public static AsciCode5 define(ReadOnlySpan<byte> src)
+            => define(head(cast<byte,ulong>(src)));
 
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode5 define(in ulong src)
             => ref view<ulong,AsciCode5>(src);
 
         [MethodImpl(Inline), Op]
-        public static AsciCode5 define(string src)
+        public static AsciCodeCover cover(AsciCode5 src, byte index)
+            => (byte)(src.Data >> index);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<AsciCodeCover> cover(AsciCode5 src)
+            => cast<AsciCodeCover>(bytespan(src));
+
+        [MethodImpl(Inline), Op]
+        public static AsciCode5 encode(string src)
         {
             var dst = 0ul;
             var data = span(src);
@@ -60,22 +51,33 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static AsciCode5 define(ReadOnlySpan<byte> src)
-            => define(head(cast<byte,ulong>(src)));
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode5 fill(ReadOnlySpan<char> src, out AsciCode5 dst)
+        public static ref readonly AsciCode5 encode(ReadOnlySpan<char> src, out AsciCode5 dst)
         {
             dst = default;
-            Symbolic.literals(src, Control.span<AsciCode5,A>(ref dst));
+            Symbolic.literals(src, Control.span<AsciCode5,AsciCharCode>(ref dst));
             return ref dst;
         }
+
+        [MethodImpl(Inline), Op]
+        public static void decode(AsciCode5 src, Span<char> dst)
+        {
+            var data = cover(src);
+            seek(dst,0) = skip(data,0);
+            seek(dst,1) = skip(data,1);
+            seek(dst,2) = skip(data,2);
+            seek(dst,3) = skip(data,3);
+            seek(dst,4) = skip(data,4);
+        } 
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(AsciCode5 src, byte index)
+            => Symbolic.symbol<AsciChar,byte>(cover(src,index));
 
         [MethodImpl(Inline), Op]
         public static string format(AsciCode5 src)
         {
             Span<char> dst = stackalloc char[Length];
-            chars(src,dst);
+            decode(src,dst);
             return new string(dst);
         }
     }

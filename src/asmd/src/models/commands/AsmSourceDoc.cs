@@ -10,7 +10,7 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
 
-    public readonly struct AsmDoc
+    public readonly struct AsmSourceDoc
     {
         public FilePath SourcePath {get;}
         
@@ -19,7 +19,7 @@ namespace Z0.Asm.Data
         public AsmStatementBlock[] Blocks {get;}
 
         [MethodImpl(Inline)]
-        public AsmDoc(FilePath path, TextDoc src, AsmStatementBlock[] blocks)
+        public AsmSourceDoc(FilePath path, TextDoc src, AsmStatementBlock[] blocks)
         {
             Text = src;
             SourcePath = path;

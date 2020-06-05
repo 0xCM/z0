@@ -17,6 +17,19 @@ namespace Z0
     [ApiHost]
     public partial class AsciCodes : IApiHost<AsciCodes>
     {                
+        [MethodImpl(Inline), Op]
+        public void Encode(string[] values, N16 w, Span<byte> dst)
+        {
+            var count = values.Length;
+            ReadOnlySpan<string> src = values;
+            for(int i=0, j=0; i< count; i++, j+=w)
+            {
+                ReadOnlySpan<char> value = skip(src,i);
+                AC16.encode(value, out var encoded);
+                encoded.CopyTo(dst.Slice(j,w));                            
+            }
+        }
+\
         [MethodImpl(Inline)]
         internal static Vector256<ushort> vinflate(Vector128<byte> src)
             => ConvertToVector256Int16(src).AsUInt16();

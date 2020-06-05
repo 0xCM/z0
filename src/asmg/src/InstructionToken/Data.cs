@@ -20,6 +20,5 @@ namespace Z0.Asm.Data
             => MemoryAddress.From(Control.head(span(src)));            
 
         public const int TokenCount = (int)InstructionToken.TokenCount;
-
     }
 }

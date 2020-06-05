@@ -15,7 +15,7 @@ namespace Z0.Asm.Data
 
     public readonly struct AsmFileParser
     {
-        public static void ParseAsmFile(FilePath src, Action<int,AsmCommand[]> AsmParsed, Action<AsmHeader> HeaderParsed = null)
+        public static void ParseAsmFile(FilePath src, Action<int,AsmCommand[]> AsmParsed, Action<AsmFunctionHeader> HeaderParsed = null)
         {
             var commands = list<AsmCommand>(100);            
             var comments = list<string>(8);

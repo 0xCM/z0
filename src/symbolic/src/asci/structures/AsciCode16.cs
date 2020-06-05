@@ -21,10 +21,15 @@ namespace Z0
         internal readonly Vector128<byte> Data;        
 
         [MethodImpl(Inline)]
+        public static implicit operator AsciCode16(string src)
+            => encode(src);
+
+        [MethodImpl(Inline)]
         public AsciCode16(Vector128<byte> src)
         {
             Data = src;
         }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -46,6 +51,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(AsciCode16 src)
             => Data.Equals(src.Data);
+ 
+        [MethodImpl(Inline)]
+        public void CopyTo(Span<byte> dst)
+            => copy(this,dst);
  
          public override int GetHashCode()
             => Data.GetHashCode();

@@ -66,7 +66,7 @@ namespace Z0.Asm.Data
         static ParseResult<T> success<T>(string src, T value)
             => ParseResult<T>.Success(src, value);
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         static ParseResult<T> fail<T>(string src, Exception e, T rep = default)
             => ParseResult<T>.Fail(src, e);            
     }
