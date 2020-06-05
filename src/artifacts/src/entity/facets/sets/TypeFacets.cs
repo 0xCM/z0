@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct TypeFacets  : IFacetSet<TypeFacets, TypeEntity>
+    public readonly struct TypeFacets  : IFacetSet<TypeFacets, TypeArtifact>
     {
         [MethodImpl(Inline)]
         public TypeFacets(AccessFacetKind Access)

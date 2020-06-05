@@ -20,6 +20,8 @@ namespace Z0
 
         public const string Assignment = ":=";
 
+        public const string Empty = "";
+
         public const char lparen = Chars.LParen;
 
         public const char rparen = Chars.RParen;

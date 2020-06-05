@@ -11,7 +11,6 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-
     public readonly struct EnumGenerator
     {
         public static EnumGenerator Service => default;
@@ -23,11 +22,10 @@ namespace Z0
             ds.OnSome(GenerateEnums);
         }
 
-
         public void GenerateEnum(TextDoc spec)
         {
             var records = ParseEnumLiterals(spec).ToReadOnlySpan();
-            var formatter = Records.Formatter<EnumLiteralField>();
+            var formatter = Records.Formatter<EnumLiteralRecordField>();
             for(var i=0; i<records.Length; i++)
             {
                 ref readonly var record = ref skip(records, i);
@@ -48,7 +46,6 @@ namespace Z0
             }
         }
 
-
         EnumLiteralRecord[] ParseEnumLiterals(TextDoc src)
         {
             var dst = Control.alloc<EnumLiteralRecord>(src.RowCount);
@@ -58,7 +55,7 @@ namespace Z0
                 if(row.CellCount >= 3)
                 {
                     var value = BitSpans.parse(row[2]).Convert<byte>();
-                    dst[i] = new EnumLiteralRecord(i, row[0], row[1], value);
+                    dst[i] = new EnumLiteralRecord(i, row[0], row[1], EnumPrimalKind.None, value);
                 }
                 else
                     dst[i] = EnumLiteralRecord.Empty;
@@ -79,24 +76,21 @@ namespace Z0
 
             }
 
-
             return dst;
-
         }
 
-
-        LiteralEntity CreateLiteralEntity(string declarer, in EnumLiteralRecord src)
-            => Artifacts.Literal(declarer, src.Identifier, src.Sequence, src.Description, src.Value);
-
+        EnumLiteralField CreateLiteralEntity(string declarer, in EnumLiteralRecord src)
+            => Artifacts.EnumLiteral(declarer, src.Identifier, src.Sequence, src.Description, src.DataType, src.Value);
 
         void Display(EnumLiteralRecord record)
         {
-            var formatter = Records.Formatter<EnumLiteralField>();
+            var formatter = Records.Formatter<EnumLiteralRecordField>();
             formatter.Reset();
-            formatter.DelimitField(EnumLiteralField.Sequence, record.Sequence);
-            formatter.DelimitField(EnumLiteralField.Identifier, record.Identifier);
-            formatter.DelimitField(EnumLiteralField.Description, record.Description);
-            formatter.DelimitField(EnumLiteralField.Value, record.Value);                
+            formatter.DelimitField(EnumLiteralRecordField.Sequence, record.Sequence);
+            formatter.DelimitField(EnumLiteralRecordField.Identifier, record.Identifier);
+            formatter.DelimitField(EnumLiteralRecordField.Description, record.Description);
+            formatter.DelimitField(EnumLiteralRecordField.DataType, record.DataType);                
+            formatter.DelimitField(EnumLiteralRecordField.Value, record.Value);                
             term.print(formatter.Render());
         }
     }

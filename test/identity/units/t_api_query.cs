@@ -25,7 +25,8 @@ namespace Z0
         {
             var host = ApiHost.Create<math>();
             var located = Identities.Services.ApiLocator.Located(host);
-            iter(located, m => Trace(m.OpUri));        
+            iter(located, m => Trace(m.OpUri));      
         }
+
     }
 }

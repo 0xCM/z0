@@ -10,6 +10,7 @@ namespace Z0
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     using static Seed;
     
@@ -69,6 +70,36 @@ namespace Z0
 
         }
                 
+        protected PartId TestedPart
+        {
+            [MethodImpl(Inline)]
+            get => (PartId)((ulong)Assembly.GetEntryAssembly().Id() & 0xFFFFul);
+        }
+
+        protected FolderPath TestDataRoot
+        {
+             [MethodImpl(Inline)]
+             get => Context.AppPaths.TestDataRoot + FolderName.Define(TestedPart.Format());
+        }
+
+        protected FolderPath UnitDataRoot
+        {
+             [MethodImpl(Inline)]
+             get => TestDataRoot + FolderName.Define(GetType().Name);
+        }
+
+        [MethodImpl(Inline)]
+        protected FilePath UnitDataPath(FileName name)    
+            => UnitDataRoot + name;
+
+        [MethodImpl(Inline)]
+        protected FilePath CasePathDefault([CallerMemberName] string caller = null)    
+            => UnitDataPath(FileName.Define(caller,FileExtensions.Txt));
+
+        [MethodImpl(Inline)]
+        protected FilePath CasePath(string filename, FileExtension ext = null)    
+            => UnitDataPath(FileName.Define(filename, ext ?? FileExtensions.Csv));
+
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct FieldFacets  : IFacetSet<FieldFacets, FieldEntity>
+    public readonly struct FieldFacets  : IFacetSet<FieldFacets, FieldArtifact>
     {
         public readonly AccessFacetKind Access;
 

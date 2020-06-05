@@ -13,8 +13,8 @@ namespace Z0
     public class Artifacts : IApiHost<Artifacts>
     {   
         [MethodImpl(Inline), Op]
-        public static FieldEntity ConstField(string Declarer, string Name, string Description, string FieldType, object FieldValue)
-            => new FieldEntity(
+        public static FieldArtifact ConstField(string Declarer, string Name, string Description, string FieldType, object FieldValue)
+            => new FieldArtifact(
                 Declarer: Declarer, 
                 Name: Name, 
                 Facets: new FieldFacets(AccessFacetKind.Public, ModifierFacetKind.Const), 
@@ -23,20 +23,20 @@ namespace Z0
                 FieldValue: FieldValue);
 
         [MethodImpl(Inline), Op]
-        public static ClassEntity Class(string ns, string name, ClassFacets facets, string Description, MemberEntity[] members)
-            => new ClassEntity(ns, name, facets, Description, members);
+        public static ClassArtifact Class(string ns, string name, ClassFacets facets, string Description, MemberArtifact[] members)
+            => new ClassArtifact(ns, name, facets, Description, members);
 
         [MethodImpl(Inline), Op]
-        public static StructEntity Struct(string ns, string name, StructFacets facets, string Description, MemberEntity[] members)
-            => new StructEntity(ns, name, facets, Description, members);
+        public static StructArtifact Struct(string ns, string name, StructFacets facets, string Description, MemberArtifact[] members)
+            => new StructArtifact(ns, name, facets, Description, members);
 
         [MethodImpl(Inline), Op]
-        public static EnumEntity Enum(string Namespace, string Declarer, string Identifier, EnumFacets Facets, string Description, LiteralEntity[] Members)
-            => new EnumEntity(Namespace, Declarer, Identifier,Facets, Description, Members);
+        public static EnumArtifact Enum(string Namespace, string Declarer, string Identifier, EnumPrimalKind DataType, TypeFacets Facets, string Description, EnumLiteralField[] Members)
+            => new EnumArtifact(Namespace, Declarer, Identifier, DataType, Facets, Description, Members);
         
         [MethodImpl(Inline), Op]
-        public static LiteralEntity Literal(string Declarer, string Identifier, int Index, string Description, ulong LiteralValue)
-            => new LiteralEntity(Declarer, Identifier, Index, Description, LiteralValue);
+        public static EnumLiteralField EnumLiteral(string Declarer, string Identifier, int Index, string Description, EnumPrimalKind DataType, ulong LiteralValue)
+            => new EnumLiteralField(Declarer, Identifier, Index, Description, DataType, LiteralValue);
     }
 
     public static partial class XTend

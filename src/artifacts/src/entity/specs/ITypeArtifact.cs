@@ -11,7 +11,7 @@ namespace Z0
         where A : ITypeArtifact<A,F>, new()
         where F : unmanaged, IFacetSet
     {
-        MemberEntity[] Members {get;}
+        MemberArtifact[] Members {get;}
     }
 
     public interface ITypeArtifact<A,M,F> : IArtifactModel<A,F>

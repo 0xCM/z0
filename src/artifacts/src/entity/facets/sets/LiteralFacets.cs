@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct LiteralFacets : IFacetSet<LiteralFacets, LiteralEntity>
+    public readonly struct LiteralFacets : IFacetSet<LiteralFacets, EnumLiteralField>
     {
 
         

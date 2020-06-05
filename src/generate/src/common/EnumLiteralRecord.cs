@@ -11,7 +11,7 @@ namespace Z0
 
     using FW = CommonFieldWidths;
 
-    public enum EnumLiteralField 
+    public enum EnumLiteralRecordField 
     {
         Sequence = 0 | FW.Sequence << FW.Offset,
 
@@ -19,12 +19,14 @@ namespace Z0
 
         Description = 2 | FW.Identifier << FW.Offset,
 
-        Value = 3 | FW.Num16Hex << FW.Offset
+        DataType = 3 | FW.Identifier << FW.Offset,
+
+        Value = 4 | FW.Num16Hex << FW.Offset,
     }
 
-    public readonly struct EnumLiteralRecord : IRecord<EnumLiteralField, EnumLiteralRecord>
+    public readonly struct EnumLiteralRecord : IRecord<EnumLiteralRecordField, EnumLiteralRecord>
     {
-        public static EnumLiteralRecord Empty = new EnumLiteralRecord(0,string.Empty, string.Empty, 0);
+        public static EnumLiteralRecord Empty = new EnumLiteralRecord(0,string.Empty, string.Empty, EnumPrimalKind.None, 0);
         
         public int Sequence {get;}
 
@@ -32,15 +34,18 @@ namespace Z0
 
         public string Description {get;}
 
+        public EnumPrimalKind DataType {get;}
+
         public ulong Value {get;}
 
         [MethodImpl(Inline)]
-        public EnumLiteralRecord(int Sequence, string Identifier, string Description, ulong Value)
+        public EnumLiteralRecord(int Sequence, string Identifier, string Description, EnumPrimalKind DataType, ulong Value)
         {
             this.Sequence = Sequence;
             this.Identifier = Identifier;
             this.Description = Description;
             this.Value = Value;
+            this.DataType = DataType;
         }
 
         public bool IsEmpty

@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
-    
+    using System.Runtime.CompilerServices;
+
+    using static Seed;
     partial class XTend
     {
         /// <summary>
@@ -16,6 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="A">The attribute type</typeparam>
         /// <param name="m">The member</param>
+        [MethodImpl(Inline)]
         public static Option<A> Tag<A>(this MemberInfo m) 
             where A : Attribute
                 => m.GetCustomAttribute<A>();

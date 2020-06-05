@@ -13,7 +13,9 @@ namespace Z0
     using static Seed;
     
     public readonly struct ClrProperty<T>
-    {                
+    {   
+        public PropertyInfo Data {get;}
+
         [MethodImpl(Inline)]
         public static bool operator ==(ClrProperty<T> lhs, ClrProperty<T> rhs)
             => lhs.Equals(rhs);
@@ -30,8 +32,6 @@ namespace Z0
         public ClrProperty(PropertyInfo data)
             => Data = data;
         
-        public PropertyInfo Data {get;}
-
         public string Format()
             => Data.ToString();
         

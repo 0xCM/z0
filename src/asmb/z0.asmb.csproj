@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Textual)" />
+    <ProjectReference Include="$(ResV)" />
+  </ItemGroup>  
+
+
+</Project>

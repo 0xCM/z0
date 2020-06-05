@@ -10,190 +10,269 @@ using System;
 public enum PartId : ulong
 {
     None = 0,
-
-    Control = 5010,
-
-    Evaluate = 5100,
-
-    Archives = 5110,
-
-    Extract = 5120,
-
-    Nats = 225, NatsTest = Nats | Test,
-
-    Math = 45,     
     
-    GMath = 50, 
+    // ~ 100
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    MathSvc = 51, 
+    BitVectors = 100, 
+    
+    VBits = 101, 
+    
+    BitSpan = 102, 
+    
+    BitString = 103, 
+    
+    BitGrids = 104, 
+    
+    BitPack = 105,
+
+    BitSvc = 106,
+
+    BitMasks = 107,
+
+    BitFields = 108, 
+
+    BitSuite = 109, 
+    
+    BitCore = 110, 
+
+    BitMatrix = 111,
+
+    Math = 112,     
+    
+    GMath = 113, 
+
+    MathSvc = 114, 
+
+    Logix = 115, 
+    
+    LibM = 116, 
+    
+    Matrix = 117, 
+    
+    Machines = 118, 
+
+    Polyrand = 119,
+
+    Identity = 120, 
+    
+    LSquare = 121,
+
+    Datasets = 122,
+
+    Generate = 123,
+    
+    Artifacts = 124,
+
+    Blocked = 125,
+
+    MetaReader = 126,
+
+    IdentityTest = Identity | Test,
+
+    LogixTest = Logix | Test, 
+
+    LibMTest = LibM | Test,
+
+    MatrixTest = Matrix | Test,
+
+    MachinesTest = Machines | Test,
 
     MathTest = Math | Test, 
-
-    Structured = 999,
-    
-    BitSuite = 500, 
-    
-    BitCore = 80, 
-
-    BitMatrix = 833,
     
     BitsTest = BitSuite | Test,
 
-    BitFields = 90, 
-    
-    BitVectors = 100, 
-    
-    VBits = 110, 
-    
-    BitSpan = 170, 
-    
-    BitString = 230, 
-    
-    BitGrids = 700, 
-    
-    BitPack = 710,
-
-    BitSvc = 81,
-
-    BitMasks = 903,
-
     BitSvcTest = BitSvc | Test,
-    
-    Logix = 120, LogixTest = Logix | Test, 
-    
-    Asm = 300,  AsmTest = Asm | Test,
 
+    // ~ 200
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    Nats = 200, 
+
+    MklApi = 201, 
+    
+    Stats = 202, 
+    
+    Blocks = 203, 
+    
+    Agency = 204, 
+            
+    Dynamic = 205, 
+    
+    Fixed = 206,  
+    
+    FixedTest = Fixed | Test,
+
+    MklApiTest = MklApi | Test,
+
+    StatsTest = Stats | Test,
+
+    BlocksTest = Blocks | Test,
+
+    DynopsTest = Dynamic | Test,
+
+    NatsTest = Nats | Test,
+
+    // ~ 300
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    Asm = 300,  
+
+    AsmB = 301,
+    
     AsmD = 302,
+
+    AsmG = 303,
+
+    AsmChecks = 304,
+
+    Codes = 305,
+
+    AsmDecoder = 306,
+
+    Machine = 320,
+
+    Capture = 321,
+
+    Cil = 322, 
+
+    AsmTest = Asm | Test,
 
     AsmDTest = AsmD | Test,
 
-    Codes = 303,
+    CaptureApp = Capture | App,
     
-    Capture = 316,
-
     CaptureTest = Capture | Test, 
         
-    AsmDecoder = 314,
-        
-    AsmApp = Capture | App,
-
-    AsmChecks = 3333,
-
-    Vectors = 858, VectorsTest = Vectors | Test,
-    
-    VData = 331, 
-
-    Datasets = 8999,
-
-    Generate = 8901,
-    
-    Artifacts = 8902,
-
-    FVec = 334, 
-
-    DVec = 332, 
-    
-    GVec = 333, GVecTest = GVec | Test, 
-    
-    VSvc = 75, 
-    
-    VSvcTest = VSvc | Test,
-    
-    Circuits = 720,
-
-    Blocked = 8399,
-        
-    LibM = 150, LibMTest = LibM | Test,
-
-    Matrix = 160, MatrixTest = Matrix | Test,
-
-    Machines = 180, MachinesTest = Machines | Test,
-
-    Machine = 185,
-    
-    MklApi = 220, MklApiTest = MklApi | Test,
-
-    Stats = 240, StatsTest = Stats | Test,
-
-    Blocks = 260, BlocksTest = Blocks | Test,
-
-    Agency = 270, 
-            
-    Dynamic = 290, DynopsTest = Dynamic | Test,
-    
-    Identity = 360, IdentityTest = Identity | Test,
-
-    Cil = 390, CilTest = Cil | Test,
-
-    Permute = 400, PermuteTest = Permute | Test,
-
-    Fixed = 250,  FixedTest = Fixed | Test,
-    
-    Polyrand = 420,
-
-    Monadic = 769,
-
-    Configure = 771,
-
-    Seed = 802, 
-    
+    CilTest = Cil | Test,
 
     SeedTest = Seed | Test,
+
+    // ~ 500
+    // ~ -------------------------------------------------------------------------------
+
+    Control = 500,
+
+    Evaluate = 501,
+
+    Archives = 502,
+
+    Extract = 503,
+
+
+    // ~ 700
+    // ~ -------------------------------------------------------------------------------
+
+    VData = 700, 
+
+    FVec = 701, 
+
+    DVec = 702, 
     
-    Typed = 846, 
+    GVec = 703, 
     
-    Time = 350, 
+    VSvc = 704, 
     
-    Graphs = 370,
+    Circuits = 705,
+
+    Vectors = 706, 
+
+    Permute = 707, 
+
+    Structured = 708,
+
+    PermuteTest = Permute | Test,
+
+    VectorsTest = Vectors | Test,
+
+    GVecTest = GVec | Test,     
+
+    VSvcTest = VSvc | Test,
+
+
+
+    // ~ 2000
+    // ~ -------------------------------------------------------------------------------
+
+    Time = 2001, 
     
-    Symbolic = 410, 
+    Graphs = 2002,
     
-    Textual = 810, TextualTest = Textual | Test,
+    Symbolic = 2003, 
     
-    Collective = 804, 
+    Textual = 2004,     
     
-    Reflective = 808, 
+    Collective = 2005, 
     
-    Canonical = 812, 
+    Reflective = 2006, 
     
-    Cast = 842, 
+    Canonical = 2007, 
     
-    Memories = 814,  MemoriesTest = Memories | Test,
+    Cast = 2008, 
     
-    Identify = 820, Kinds = 822, 
+    Memories = 2009,  
+    
+    Identify = 2010, 
+    
+    Kinds = 2011, 
+               
+    Messages = 2012, 
+    
+    Apps = 2013,     
+
+    Tuples = 2014,    
+    
+    Numeric = 2015,  
+
+    Flow = 2016, 
+    
+    Enums = 2017, 
+    
+    Reports = 2018,
+    
+    Core = 2019,
+
+    Checks = 2020,
             
-    
-    Messages = 840, 
-    
-    Apps = 828, AppsTest = Apps | Test,
+    Contained = 2021,
 
-    Tuples = 826,
-    
-    Numeric = 830,  NumericTest = Numeric | Test,
+    Spans = 2022,
 
-    Flow = 850, Enums = 852, Reports = 832,
-    
-    Core = 836,
+    Validate = 2023,
 
-    Checks = 848,
-            
-    Contained = 854,
+    Validity = 2024,
 
-    Spans = 5005,
+    VCheck = 2025,
 
-    Validate = 10000,
+    Typed = 2026, 
 
-    Validity = 432,
+    Seed = 2027,     
 
-    VCheck = 436,
+    Configure = 2028,
 
-    LSquare = 9831,
+    Monadic = 2029,
 
-    ZXed = 25000,
-
-    Commands = ZXed + 1,
+    ResV = 2030,
 
     CoreTest = Core | Test,
+
+    TextualTest = Textual | Test,
+
+    MemoriesTest = Memories | Test,
+
+    AppsTest = Apps | Test,
+
+    NumericTest = Numeric | Test,
+
+    // ~ 9000
+    // ~ -------------------------------------------------------------------------------
+
+    ZXed = 9001,
+
+    Commands = 9002,
+
+    // ~ Classifiers
+    // ~ -------------------------------------------------------------------------------
 
     Svc = ushort.MaxValue + 1,
 

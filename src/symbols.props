@@ -7,6 +7,7 @@
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
     <Monadic>$(Src)monadic/z0.monadic.csproj</Monadic>
     <Configure>$(Src)configure/z0.configure.csproj</Configure>
+    <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
 
 
     <Collective>$(Src)collective/z0.collective.csproj</Collective>
@@ -17,6 +18,8 @@
     <Cast>$(Src)cast/z0.cast.csproj</Cast>
     <Contained>$(Src)contained/z0.contained.csproj</Contained>
     
+    <ResV>$(Src)resv/z0.resv.csproj</ResV>
+
     <Time>$(Src)time/z0.time.csproj</Time>
     <Memories>$(Src)memories/z0.memories.csproj</Memories>
 
@@ -60,12 +63,17 @@
 
   <PropertyGroup>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
+    <AsmB>$(Src)asmb/z0.asmb.csproj</AsmB>
     <AsmD>$(Src)asmd/z0.asmd.csproj</AsmD>
+    <AsmG>$(Src)asmg/z0.asmg.csproj</AsmG>
+    
     <Codes>$(Src)codes/z0.codes.csproj</Codes>
 
     <ZXed>$(Src)commands/zxed/z0.zxed.csproj</ZXed>
     <ZIce>$(Src)commands/zice/z0.zice.csproj</ZIce>
     <ZAsm>$(Src)commands/zasm/z0.zasm.csproj</ZAsm>
+
+
   </PropertyGroup>
 
   <PropertyGroup>    
