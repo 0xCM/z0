@@ -29,24 +29,21 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source digits</param>
         [MethodImpl(Inline), Op]
+        public static void render(ReadOnlySpan<DecimalDigit> src, Span<char> dst)
+        {
+            for(var i = 0; i< src.Length; i++)
+                seek(dst,i) = (char)symbol(skip(src,i));            
+        }
+
+        /// <summary>
+        /// Formats a span of hex digits as a contiguous block
+        /// </summary>
+        /// <param name="src">The source digits</param>
+        [MethodImpl(Inline), Op]
         public static void render(ReadOnlySpan<HexDigit> src, Span<char> dst)
         {
             for(var i = 0; i < src.Length; i++)
                 seek(dst,i) = (char)symbol(UpperCase, skip(src,i));
-        }
-
-        public static string render(ReadOnlySpan<HexDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length];
-            render(src,dst);
-            return new string(dst);
-        }
-
-        public static string render(ReadOnlySpan<BinaryDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length];
-            render(src,dst);
-            return new string(dst);
         }
 
         [MethodImpl(Inline), Op]
@@ -104,13 +101,5 @@ namespace Z0
             }
             return j;
         }
-
-        [Op]
-        public static string render(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
-        {
-            Span<char> digits = stackalloc char[src.Length*3];
-            render(@base, @case, src,digits);
-            return digits.ToString();
-        }       
     }
 }

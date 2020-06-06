@@ -18,5 +18,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Symbol<AsciChar,byte> symbol(AsciCode4 src, byte index)
             => Symbolic.symbol<AsciChar,byte>(cover(src, index));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(AsciCode5 src, byte index)
+            => Symbolic.symbol<AsciChar,byte>(cover(src,index));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<AsciChar,byte> symbol(AsciCode8 src, byte index)
+            => Symbolic.symbol<AsciChar,byte>(cover(src,index));
+
     }
 }

@@ -15,19 +15,19 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static AsciCode4 encode(ReadOnlySpan<char> src, ASCI asci, N4 n)        
-            => AsciCodes.encode(src,n);            
+            => AsciCodes.encode(n,src);            
 
         [MethodImpl(Inline), Op]
         public static AsciCode8 encode(ReadOnlySpan<char> src, ASCI asci, N8 n)        
-            => AsciCodes.encode(src,n);            
+            => AsciCodes.encode(n,src);            
 
         [MethodImpl(Inline), Op]
         public static AsciCode16 encode(ReadOnlySpan<char> src, ASCI asci, N16 n)        
-            => AsciCodes.encode(src, n);            
+            => AsciCodes.encode(n, src);            
 
         [MethodImpl(Inline), Op]
         public static AsciCode32 encode(ReadOnlySpan<char> src, ASCI asci, N32 n)        
-            => AsciCodes.encode(src, n);            
+            => AsciCodes.encode(n,src);            
 
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode16 encode(ReadOnlySpan<char> src, out AsciCode16 dst)        

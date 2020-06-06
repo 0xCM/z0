@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct TextLine 
     {            
-        public static TextLine Empty => new TextLine(0,string.Empty);
+        public static TextLine Empty => new TextLine(0, string.Empty);
 
         /// <summary>
         /// The line number of the data source from which the line was extracted
@@ -38,20 +38,41 @@ namespace Z0
         public TextLine(uint number, string text)
         {
             LineNumber = number;
-            LineText = text;
+            LineText = text ?? string.Empty;
         }
         
-        public char? this[int charidx]
+        public char this[int charidx]
         {
             [MethodImpl(Inline)]
-            get => charidx + 1 <= LineText.Length ? LineText[charidx] : (char?)null;
+            get => LineText[charidx];
+        }
+
+        public bool StartsWith(char c)
+            => IsNonEmpty && LineText[c] == c;
+
+        public bool IsNonEmpty 
+        {
+            [MethodImpl(Inline)]
+            get => !text.empty(LineText);
         }
 
         public bool IsEmpty 
-            => (LineText?.Length ?? 0) == 0;
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(LineText);
+        }
 
-        public bool IsBlank
-            => string.IsNullOrWhiteSpace(LineText);
+        public bool IsBlank 
+        {
+            [MethodImpl(Inline)]
+            get => LineText.Length != 0 && IsEmpty;
+        }
+
+        [MethodImpl(Inline)]
+        public string[] Split(in TextFormat spec)
+            => StartsWith(spec.Delimiter)  
+            ? LineText.Substring(1).SplitClean(spec.Delimiter)  
+            : LineText.SplitClean(spec.Delimiter);
 
         public override string ToString() 
             =>  $"{LineNumber.ToString().PadLeft(10, '0')}:{LineText}";

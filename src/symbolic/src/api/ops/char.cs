@@ -13,6 +13,14 @@ namespace Z0
     partial class Symbolic    
     {        
         [MethodImpl(Inline), Op]
+        public static char @char(Base16 @base, UpperCased @case, byte index)
+            => (char)code(@base,@case,index);
+
+        [MethodImpl(Inline), Op]
+        public static char @char(Base16 @base, LowerCased @case, byte index)
+            => (char)code(@base,@case,index);
+
+        [MethodImpl(Inline), Op]
         public static char @char<E,T>(Symbol<E,T> src)
             where E : unmanaged, Enum
             where T : unmanaged

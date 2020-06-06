@@ -8,11 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Control;
     using static Seed;
     
     public readonly struct ResourceMember : ITextual
     {
+        public readonly MemberInfo Member;
+
+        public readonly ulong Location;
+
+        public readonly uint CellCount;
+        
+        public readonly uint ByteCount;    
+
         [MethodImpl(Inline)]
         public static ResourceMember Define(MemberInfo member, ulong location, uint cells, uint bytes)
             => new ResourceMember(member,location,cells,bytes);
@@ -25,14 +32,6 @@ namespace Z0
             CellCount = cells;
             ByteCount = bytes;
         }
-
-        public readonly MemberInfo Member;
-
-        public readonly ulong Location;
-
-        public readonly uint CellCount;
-        
-        public readonly uint ByteCount;    
 
         public uint CellWidth => (ByteCount/CellCount)*8;  
 

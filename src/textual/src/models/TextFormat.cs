@@ -13,14 +13,13 @@ namespace Z0
     {        
         public static TextFormat Structured => Define();
 
-        public static TextFormat Unstructured(char? commentprefix = null) 
-            => Define(delimited:false, CommentPrefix:commentprefix, HasHeader:false);
-
+        [MethodImpl(Inline)]
         public static TextFormat Define(bool HasHeader = true, bool delimited = true, 
-            char Delimiter = Chars.Pipe, char? CommentPrefix = Chars.Hash, int? ColWidth = null)
+            char Delimiter = Chars.Pipe, char CommentPrefix = Chars.Hash, int? ColWidth = null)
                 => new TextFormat(HasHeader, delimited, Delimiter, CommentPrefix,ColWidth);
         
-        TextFormat(bool header, bool delimited, char sep, char? cp, int? colwidth)
+        [MethodImpl(Inline)]
+        TextFormat(bool header, bool delimited, char sep, char cp, int? colwidth)
         {
             RowSeparator = "-------";
             HasDataHeader = header;
@@ -53,7 +52,7 @@ namespace Z0
         /// <summary>
         /// If specified, indicates the character that begins a comment
         /// </summary>
-        public readonly char? CommentPrefix;
+        public readonly char CommentPrefix;
 
         /// <summary>
         /// If specified, defines a uniform column width

@@ -18,11 +18,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<AsciCharCode> codes(ASCI asci)
-            => cast<AsciCharCode>(AsciStrings.Bytes(n0));
+            => cast<AsciCharCode>(AsciStrings.bytes(n0));
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<AsciCharCode> codes(ASCI asci, int i0, int i1)
-            => cast<AsciCharCode>(ResourceTools.segment(AsciStrings.Bytes(n0),i0,i1));
+            => cast<AsciCharCode>(Symbolic.segment(AsciStrings.bytes(n0),i0,i1));
 
         /// <summary>
         /// Loads 32 asci codes beginning at a specified index
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vcodes(ASCI asci, int index)
         {
-            ref readonly var src = ref head(AsciStrings.Bytes(n0));         
+            ref readonly var src = ref head(AsciStrings.bytes(n0));         
             return SymBits.vload(w256,src);
         }
 

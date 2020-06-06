@@ -32,10 +32,39 @@ namespace Z0
             get => Data.RowData;
         }
         
+        public ref readonly TextRow this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data.RowData[index];
+        }
+
         public int RowCount
         {
             [MethodImpl(Inline)]
             get => Data.RowCount;
+        }
+
+        public int CharCount(char exclude)        
+        {
+            var count = 0;
+            for(var i=0; i<RowCount; i++)
+            {
+                ref readonly var row = ref this[i];
+                for(var j = 0; j< row.CellCount; j++)
+                {
+                    ref readonly var cell = ref row[j];
+                    ReadOnlySpan<char> data = cell.Content;
+
+                    for(var k=0; k<data.Length; k++)
+                    {
+                        ref readonly var c = ref Control.skip(data,k);
+                        if(!Char.IsWhiteSpace(c))
+                            count++;
+                    }
+                }
+            }
+
+            return count;
         }
 
         public string Format()

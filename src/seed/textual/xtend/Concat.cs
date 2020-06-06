@@ -71,6 +71,14 @@ namespace Z0
             => new string(src.ToArray());
 
         /// <summary>
+        /// Forms a string from a character array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        [MethodImpl(Inline)]   
+        public static string Concat(this char[] src)
+            => new string(src);
+
+        /// <summary>
         /// Forms a string by source character justapostion
         /// </summary>
         /// <param name="src">The source span</param>

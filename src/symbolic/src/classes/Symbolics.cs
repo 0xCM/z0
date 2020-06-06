@@ -25,7 +25,7 @@ namespace Z0
     
     public readonly struct Symbolics
     {
-        public ASCI ASCI => default;
+        public static ASCI ASCI => default;
 
         public static LowerCased LowerCase => LowerCased.Case;
 

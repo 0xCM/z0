@@ -39,11 +39,12 @@ namespace Z0
             {
                 while(!reader.EndOfStream)
                 {
-                    var text = new TextLine(counter, reader.ReadLine().Trim());                    
+                    var line = reader.ReadLine().Trim(Chars.Space);
+                    var text = new TextLine(counter, line);                    
 
                     counter++;
                     
-                    if(text.IsBlank)
+                    if(text.IsEmpty)
                         continue;
 
                     // skip comments                    
@@ -76,7 +77,7 @@ namespace Z0
         /// <param name="spec">The text format</param>
         /// <param name="observer">An observer to witness interesting events</param>
         public static Option<TextHeader> ParseHeader(this TextLine src, in TextFormat spec)
-            => new TextHeader(src.LineText.SplitLine(spec).Select(x => x.Trim()).Where(x => x != string.Empty).ToArray());
+            => new TextHeader(src.Split(spec).Select(x => x.Trim()).Where(x => x != string.Empty).ToArray());
             
         /// <summary>
         /// Parses a row from a line of text
@@ -85,16 +86,16 @@ namespace Z0
         /// <param name="spec">The text format spec</param>
         public static Option<TextRow> ParseRow(this TextLine src, in TextFormat spec)
         {            
-            if(src.IsBlank || (spec.CommentPrefix != null && src[0] == spec.CommentPrefix))
+            if(src.IsEmpty ||  src[0] == spec.CommentPrefix)
                 return default;
             else
             {            
                 if(spec.HasDataHeader)
                 {
-                    var parts = src.LineText.SplitLine(spec);
+                    var parts = src.Split(spec);
                     var data = new TextCell[parts.Length];
                     for(var i=0u; i<parts.Length; i++)
-                        data[i] = new TextCell(src.LineNumber, i, parts[i].Trim());
+                        data[i] = new TextCell(src.LineNumber, i, parts[i].Trim(Chars.Space));
                     return new TextRow(data);
                 }
                 else
@@ -116,20 +117,5 @@ namespace Z0
             using var reader = src.Reader();
             return reader.ReadTextDoc(format);
         }
-
-        static Option<TextLine> ParseLine(this StreamReader reader, uint lineNumber)
-        {
-            var result = reader.ReadLine();
-            return result == null ? default : new TextLine(lineNumber, result.Trim());            
-        }
-
-        static bool IsComment(this Option<TextLine> line, TextFormat format)
-            =>  line.Map(src => !src.IsBlank && src.LineText[0] == format.CommentPrefix, () => false);
-    
-        [MethodImpl(Inline)]
-        static string[] SplitLine(this string src, in TextFormat spec)
-            => src[0]  == spec.Delimiter 
-                    ? src.Substring(1).Split(spec.Delimiter) 
-                    : src.Split(spec.Delimiter);
     }
 }

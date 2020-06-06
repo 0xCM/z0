@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.ComponentModel;
 
     /// <summary>
     /// Characterizes something with a label

@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<char> chars(ASCI asci, int i0, int i1)
-            => ResourceTools.segment(AsciStrings.Text(n0),i0,i1);
+            => Symbolic.segment(AsciStrings.Text(n0),i0,i1);
 
         [MethodImpl(Inline), Op]
         public static SuperSym supersym(int n)

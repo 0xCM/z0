@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static AC8;
 
     using N = N8;
     
@@ -17,6 +16,8 @@ namespace Z0
     /// </summary>
     public readonly struct AsciCode8 : IAsciSequence<AsciCode8,N>
     {        
+        public static AsciCode8 Empty => new AsciCode8(0);        
+
         internal readonly ulong Data;
 
         [MethodImpl(Inline)]
@@ -55,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(this);
+            => AsciCodes.format(this);
  
         public override string ToString()
             => Format(); 

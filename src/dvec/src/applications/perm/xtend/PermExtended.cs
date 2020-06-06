@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The canonical literal representation of a 4-symbol permutation</param>
         [MethodImpl(Inline)]
         public static Span<Perm4L> Literals(this Perm4L src)
-            => API.literals(src);
+            => Symbolic.literals(src);
 
         /// <summary>
         /// Constructs the sequence of permutation symbols corresponding to the canonical literal representation
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The canonical literal representation of a 8-symbol permutation</param>
         [MethodImpl(Inline)]
         public static Span<Perm8L> Literals(this Perm8L src)
-            => API.literals(src);
+            => Symbolic.literals(src);
 
         /// <summary>
         /// Constructs the sequence of permutation symbols corresponding to the canonical literal representation

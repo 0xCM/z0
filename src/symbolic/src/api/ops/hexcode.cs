@@ -8,15 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-
+    
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]
         public static HexCode hexcode(UpperCased @case, byte index)
-            => SymbolicData.code(base16, @case, index);
+            => code(base16, @case, index);
 
         [MethodImpl(Inline), Op]
         public static HexCode hexcode(LowerCased @case, byte index)
-            => SymbolicData.code(base16, @case, index);
+            => code(base16, @case, index);
     }
 }

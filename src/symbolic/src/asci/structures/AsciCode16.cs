@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed;
-    using static AC16;
+    using static Typed;
 
     using N = N16;
 
@@ -18,11 +18,19 @@ namespace Z0
     /// </summary>
     public readonly struct AsciCode16 : IAsciSequence<AsciCode16,N>
     {
+        public static AsciCode16 Blank => init(AsciCharCode.Space);
+        
+        public static AsciCode16 Null => new AsciCode16(Vector128<byte>.Zero);
+
+        [MethodImpl(Inline)]
+        public static AsciCode16 init(AsciCharCode fill = AsciCharCode.Space)
+            => new AsciCode16(SymBits.vbroadcast(w128, (byte)fill));
+
         internal readonly Vector128<byte> Data;        
 
         [MethodImpl(Inline)]
         public static implicit operator AsciCode16(string src)
-            => encode(src);
+            => AsciCodes.encode(n16,src);
 
         [MethodImpl(Inline)]
         public AsciCode16(Vector128<byte> src)
@@ -45,8 +53,15 @@ namespace Z0
         public AsciCode16 Zero
         {
             [MethodImpl(Inline)]
-            get => AC16.Null;
+            get => Null;
         }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.length(this);
+        }
+
 
         [MethodImpl(Inline)]
         public bool Equals(AsciCode16 src)
@@ -54,7 +69,7 @@ namespace Z0
  
         [MethodImpl(Inline)]
         public void CopyTo(Span<byte> dst)
-            => copy(this,dst);
+            => AsciCodes.copy(this,dst);
  
          public override int GetHashCode()
             => Data.GetHashCode();
@@ -64,7 +79,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(this);
+            => AsciCodes.format(this);
  
         public override string ToString()
             => Format(); 

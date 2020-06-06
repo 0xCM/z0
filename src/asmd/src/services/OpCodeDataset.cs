@@ -6,45 +6,47 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Seed;
     using static Memories;
-
+    
     public readonly struct OpCodeDataset
     {
         [MethodImpl(Inline)]
         public static OpCodeDataset Create()
             => new OpCodeDataset(0);
         
-        public readonly Token[] ITokens;
-
-        public readonly string[] ITokenPurpose;
-
-        public readonly string[] ITokenIdentity;
-
-        public readonly string[] ITokenValues;
-
         public readonly int OpCodeCount;
         
-        public readonly OpCodeRecord[] Records;
+        public readonly OpCodeRecord[] OpCodeRecords;
 
         public readonly AppResourceDoc ResourceDoc;
 
         public readonly OpCodeIdentifier[] OpCodeIdentifiers;
 
+        public const byte EncodingDelimiter = 0xFF;
+
+        public AsmCommandGroup[] CommandGroups
+            => OpCodeRecords.Select(r => r.Mnemonic).Distinct().Map(group);
+
+        [MethodImpl(Inline), Op]
+        public OpCodeIdentifier opcode(int index)
+            => OpCodeIdentifiers[index];
+
+        [MethodImpl(Inline), Op]
+        static AsmCommandGroup group(string name)
+            => new AsmCommandGroup(name);
+
         [MethodImpl(Inline)]
         OpCodeDataset(int i)
         {
-            ITokens = InstructionTokenData.Tokens;
-            ITokenPurpose = InstructionTokenData.Purposes;
-            ITokenIdentity = InstructionTokenData.Identity;
-            ITokenValues = InstructionTokenData.Values;
-            ResourceDoc = OpCodeServices.LoadResource().Require();
+            ResourceDoc = AsmD.Service.OpCodeSpecDoc;
             OpCodeCount = ResourceDoc.RowCount;
-            Records = new OpCodeRecord[OpCodeCount];
-            OpCodeRecordParser.Service.Parse(ResourceDoc,Records);
+            OpCodeRecords = new OpCodeRecord[OpCodeCount];
+            OpCodeRecordParser.Service.Parse(ResourceDoc,OpCodeRecords);
             OpCodeIdentifiers = new OpCodeIdentifier[OpCodeCount];
-            OpCodeIdentity.Service.Compute(Records,OpCodeIdentifiers);
+            OpCodeIdentity.Service.Compute(OpCodeRecords,OpCodeIdentifiers);
         }
     }
 }

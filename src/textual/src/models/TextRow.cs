@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;    
     using System.Runtime.CompilerServices;    
 
     using static  Seed;
@@ -18,6 +16,7 @@ namespace Z0
     {        
         public readonly TextCell[] Cells;
 
+        [MethodImpl(Inline)]
         public TextRow(params TextCell[] cells)
         {
             Cells = cells;

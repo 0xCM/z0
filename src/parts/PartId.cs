@@ -264,6 +264,8 @@ public enum PartId : ulong
 
     NumericTest = Numeric | Test,
 
+    SymbolicTest = Symbolic | Test,
+
     // ~ 9000
     // ~ -------------------------------------------------------------------------------
 

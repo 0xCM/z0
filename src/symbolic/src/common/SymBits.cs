@@ -17,9 +17,10 @@ namespace Z0
 
     using static Seed;
     using static Control;
+    using static Typed;
 
     public class SymBits
-    {
+    {        
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
         /// </summary>
@@ -37,7 +38,7 @@ namespace Z0
         /// <param name="k0">The bit position within the source where extraction should begin</param>
         /// <param name="k1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static byte extract(byte src, byte k0, byte k1)        
+        internal static byte extract(byte src, byte k0, byte k1)        
             => (byte)Bmi1.BitFieldExtract((uint)src, k0, (byte)(k1 - k0 + 1));
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Z0
         /// <param name="k0">The bit position within the source where extraction should begin</param>
         /// <param name="k1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static uint extract(uint src, byte k0, byte k1)        
+        internal static uint extract(uint src, byte k0, byte k1)        
             => Bmi1.BitFieldExtract(src, k0, (byte)(k1 - k0 + 1));
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace Z0
         /// <param name="k0">The bit position within the source where extraction should begin</param>
         /// <param name="k1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static int extract(int src, byte k0, byte k1)        
+        internal static int extract(int src, byte k0, byte k1)        
             => (int)Bmi1.BitFieldExtract((uint)src, k0, (byte)(k1 - k0 + 1));
 
         /// <summary>
@@ -184,16 +185,84 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static unsafe Vector256<ushort> vbroadcast(W256 w, ushort src)
-
             => BroadcastScalarToVector256(&src);
+
+        [MethodImpl(Inline)]
+        internal static unsafe Vector512<byte> vbroadcast(W512 w, byte src)
+            => (BroadcastScalarToVector256(&src),BroadcastScalarToVector256(&src));
+
+        [MethodImpl(Inline)]
+        internal static unsafe Vector512<ushort> vbroadcast(W512 w, ushort src)
+            => (BroadcastScalarToVector256(&src),BroadcastScalarToVector256(&src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<sbyte> vload(W128 w, in sbyte src)
+            => LoadDquVector128((sbyte*)src);            
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<byte> vload(W128 w, in byte src)
             => LoadDquVector128((byte*)src);            
 
         [MethodImpl(Inline)]
+        public static unsafe Vector128<short> vload(W128 w, in short src)
+            => LoadDquVector128((short*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ushort> vload(W128 w, in ushort src)
+            => LoadDquVector128((ushort*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<int> vload(W128 w, in int src)
+            => LoadDquVector128((int*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<uint> vload(W128 w, in uint src)
+            => LoadDquVector128((uint*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<long> vload(W128 w, in long src)
+            => LoadDquVector128((long*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ulong> vload(W128 w, in ulong src)
+            => LoadDquVector128((ulong*)src);            
+
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<sbyte> vload(W256 w, in sbyte src)
+            => LoadDquVector256((sbyte*)src);            
+
+        [MethodImpl(Inline)]
         public static unsafe Vector256<byte> vload(W256 w, in byte src)
             => LoadDquVector256((byte*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<short> vload(W256 w, in short src)
+            => LoadDquVector256((short*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ushort> vload(W256 w, in ushort src)
+            => LoadDquVector256((ushort*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<int> vload(W256 w, in int src)
+            => LoadDquVector256((int*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vload(W256 w, in uint src)
+            => LoadDquVector256((uint*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vload(W256 w, in long src)
+            => LoadDquVector256((long*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ulong> vload(W256 w, in ulong src)
+            => LoadDquVector256((ulong*)src);            
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector512<byte> vload(W512 w, in byte src)
+            => (vload(n256, in src), vload(n256, Unsafe.Add(ref edit(src), 32)));
 
         [MethodImpl(Inline), Op]
         internal static unsafe void vstore(Vector128<byte> src, ref byte dst)
@@ -202,6 +271,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         internal static unsafe void vstore(Vector256<byte> src, ref byte dst)
             => Store(ptr(ref dst), src);            
+
+        [MethodImpl(Inline), Op]
+        internal static unsafe void vstore(Vector512<byte> src, ref byte dst)
+        {
+            vstore(src.Lo, ref dst);
+            vstore(src.Hi, ref Unsafe.Add(ref dst, 32));   
+        }
 
         [MethodImpl(Inline), Op]
         internal static unsafe void vstore(Vector128<byte> src, Span<byte> dst)

@@ -11,7 +11,7 @@ namespace Z0
     using static Seed;
     using static Typed;
 
-    using API = ResourceTools;
+    using API = SymbolicData;
 
     readonly struct AsciDataStrings
     {
@@ -68,11 +68,11 @@ namespace Z0
         const int ByteResCount = 2;
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> Bytes(N0 index)
+        public ReadOnlySpan<byte> bytes(N0 index)
             => B000;
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> Bytes(N1 index)
+        public ReadOnlySpan<byte> bytes(N1 index)
             => B001;
 
         [MethodImpl(Inline)]

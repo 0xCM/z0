@@ -15,22 +15,28 @@ namespace Z0
     /// </summary>
     public readonly struct TextCell
     {        
-        public uint Row {get;}
+        public readonly uint Row;
 
-        public uint Col {get;}
+        public readonly uint Col;
 
-        public string Content {get;}
+        public readonly string Content;
 
         [MethodImpl(Inline)]
         public static implicit operator string(TextCell src)
             => src.Content;
                 
         [MethodImpl(Inline)]
-        public TextCell(uint Row, uint Col, string Content)
+        internal TextCell(uint Row, uint Col, string Content)
         {
             this.Row = Row;
             this.Col = Col;
-            this.Content = insist(Content);
-        }        
+            this.Content = Content;
+        }    
+
+        public char this[int index]    
+        {
+            [MethodImpl(Inline)]
+            get => Content[index];
+        }
     }
 }

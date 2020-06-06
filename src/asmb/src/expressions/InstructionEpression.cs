@@ -40,10 +40,13 @@ namespace Z0.Asm.Data
         public InstructionExpression(string src)
             => Data = src;
 
-        public ReadOnlySpan<char> Symbols
+        /// <summary>
+        /// The expression length
+        /// </summary>
+        public int Length
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Length;
         }
 
         public InstructionExpression Zero 

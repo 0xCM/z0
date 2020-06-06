@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;    
 
-    public interface ILegacyAlphabet<A> : ISymbolic
+    public interface ILegacyAlphabet<A> : ILegacySymbol
         where A : struct, ILegacyAlphabet<A>
     {
         /// <summary>

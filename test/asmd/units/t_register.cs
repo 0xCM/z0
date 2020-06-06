@@ -11,7 +11,7 @@ namespace Z0.Asm.Data
     
     public class t_regiser : t_asmd<t_regiser>
     {
-        public void register_bitfield()
+        void register_bitfield()
         {
             //term.print(Unsafe.SizeOf<XmmRegs>());            
             var index = XmmRegs.Index;

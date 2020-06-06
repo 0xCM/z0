@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static Seed;
 
@@ -18,6 +19,14 @@ namespace Z0
         [MethodImpl(Inline), Op]   
         public static BinarySymbol symbol(Base2 @base, byte src)
             => (BinarySymbol)(src + (byte)BinarySymbol.First);
+
+        [MethodImpl(Inline), Op]
+        public static HexSymbol symbol(Base16 @base, UpperCased @case, byte index)
+            => (HexSymbol)code(@base, @case, index);
+
+        [MethodImpl(Inline), Op]
+        public static HexSymbol symbol(Base16 @base, LowerCased @case, byte index)
+            => (HexSymbol)code(@base, @case, index);
 
         [MethodImpl(Inline), Op]   
         public static DecimalSymbol symbol(OctalDigit src)
@@ -53,18 +62,18 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Symbol<AsciChar,byte> symbol(in AsciCode5 src, byte index)
-            => AC5.symbol(src, index);
+            => AsciCodes.symbol(src, index);
 
         [MethodImpl(Inline), Op]
         public static Symbol<AsciChar,byte> symbol(in AsciCode8 src, byte index)
-            => AC8.symbol(src, index);
+            => AsciCodes.symbol(src, index);
 
         [MethodImpl(Inline), Op]
         public static Symbol<AsciChar,byte> symbol(in AsciCode16 src, byte index)
-            => AC16.symbol(src, index);
+            => Symbolic.symbol<AsciChar,byte>(src.Data.GetElement(index));
 
         [MethodImpl(Inline), Op]
         public static Symbol<AsciChar,byte> symbol(in AsciCode32 src, byte index)
-            => AC32.symbol(src, index);
-    }
+             => Symbolic.symbol<AsciChar,byte>(src.Data.GetElement(index));
+   }
 }

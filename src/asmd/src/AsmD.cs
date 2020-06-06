@@ -4,33 +4,38 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
+    using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Seed;
     using static Memories;
 
     [ApiHost("api")]
-    public class AsmD : IApiHost<AsmD>
-    {
-        void ParseRex()
-        {
+    public readonly struct AsmD : IApiHost<AsmD>
+    {              
+        public static AsmD Service => default;
+        
+        public IEnumerable<FileName> ResourceNames
+            => Extractor.ResourceNames.Select(x => FileName.Define(x));   
 
-            var mrm = Prefixes.ParseModRM(0b110110);
-            term.print(mrm.Format());
-        }
+        public Option<AppResourceDoc> ResDoc(FileName name)     
+            => Extractor.ExtractDocument(name);
 
+        public Option<string[]> ResText(string name)     
+            => Extractor.ExtractTextLines(name);
+        
+        public string[] OpCodeSpecText
+            => ResText(OpCodeSpecName.Name).Require();
 
-        void ExtractOpCodes()
-        {
+        public AppResourceDoc OpCodeSpecDoc
+            => ResDoc(OpCodeSpecName).Require();
+    
+        static ResExtractor Extractor 
+            => ResExtractor.Service();    
 
-            var res = ResExtractor.Service();
-            Control.iter(res.ResourceNames, term.print);
-
-        }
-    }
-
-    public static partial class XTend
-    {
-
+        static FileName OpCodeSpecName 
+            => FileName.Define("OpCodeSpecs", FileExtensions.Csv);
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface ILegacyWord<W,A> : ISymbolic
+    public interface ILegacyWord<W,A> : ILegacySymbol
         where A : struct, ILegacyAlphabet<A>
         where W : struct, ILegacyWord<W,A> 
     {

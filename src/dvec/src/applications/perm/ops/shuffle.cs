@@ -6,12 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Seed;
     using static Memories;
 
     partial class Permute
     {
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> shuffles(NatPerm<N16> src)
+            => Vectors.vload(n128, refs.head(src.Terms.To<byte>()));
+
         /// <summary>
         /// Shuffles the permutation in-place using a provided random source.
         /// </summary>

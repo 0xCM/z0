@@ -12,13 +12,13 @@ namespace Z0
 
     using N = N5;    
 
-    using static AC5;    
-
     /// <summary>
     /// Defines an asci code sequence of length 5
     /// </summary>
     public readonly struct AsciCode5 : IAsciSequence<AsciCode5,N>
     {
+        public static AsciCode5 Empty => new AsciCode5(0);        
+
         internal readonly ulong Data;
 
         [MethodImpl(Inline)]
@@ -57,7 +57,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(this);
+            => AsciCodes.format(this);
  
         public override string ToString()
             => Format(); 

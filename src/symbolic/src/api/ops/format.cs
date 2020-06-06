@@ -22,30 +22,50 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode5 src)
-            => AC5.format(src);        
+            => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode8 src)
-            => AC8.format(src);        
+            => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode16 src)
-            => AC16.format(src);        
+            => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode32 src)
-            => AC32.format(src);        
+            => AsciCodes.format(src);        
 
-        /// <summary>
-        /// Formats a span of decimal digits as a contiguous block
-        /// </summary>
-        /// <param name="src">The source digits</param>
+        [Op]
+        public static string format(ReadOnlySpan<BinaryDigit> src)
+        {
+            Span<char> dst = stackalloc char[src.Length];
+            render(src,dst);
+            return new string(dst);
+        }
+
+        [Op]
         public static string format(ReadOnlySpan<DecimalDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length]; 
-            for(var i = 0; i< src.Length; i++)
-                seek(dst,i) = (char) Symbolic.symbol(skip(src,i));            
+            render(src,dst);
             return new string(dst);
         }
+
+        [Op]
+        public static string format(ReadOnlySpan<HexDigit> src)
+        {
+            Span<char> dst = stackalloc char[src.Length];
+            render(src,dst);
+            return new string(dst);
+        }
+
+        [Op]
+        public static string format(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
+        {
+            Span<char> digits = stackalloc char[src.Length*3];
+            render(@base, @case, src,digits);
+            return digits.ToString();
+        }       
     }
 }

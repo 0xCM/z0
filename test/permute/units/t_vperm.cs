@@ -14,7 +14,6 @@ namespace Z0
     using static Vectors;
     using static Typed;
 
-
     public class t_vperm : t_permute<t_vperm>
     {
         /// <summary>
@@ -245,7 +244,7 @@ namespace Z0
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
-                var symbols = Permute.literals(perm);
+                var symbols = Symbolic.literals(perm);
                 Claim.eq(4, symbols.Length);
             }
         }
@@ -346,7 +345,7 @@ namespace Z0
             var symbol = default(Perm4L);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.require(Permute.literal(perm, i, out symbol));
+                Claim.require(Symbolic.literal(perm, i, out symbol));
                 Claim.eq(expect[i], symbol);
             }
 

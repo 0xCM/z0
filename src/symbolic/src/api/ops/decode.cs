@@ -18,10 +18,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static int decode(in AsciCode8 src, Span<char> dst)
-            => AC8.decode(src,dst);
+            => AsciCodes.decode(src,dst);
 
         [MethodImpl(Inline), Op]
         public static int decode(in AsciCode16 src, Span<char> dst)
-            => AC16.decode(src,dst);
+            => AsciCodes.decode(src,dst);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Seed;
-    using static AC32;
+    using static Typed;
 
     using N = N32;
     
@@ -18,6 +18,14 @@ namespace Z0
     /// </summary>
     public readonly struct AsciCode32 : IAsciSequence<AsciCode32,N>
     {
+        public static AsciCode32 Blank => init(AsciCharCode.Space);
+
+        public static AsciCode32 Null => new AsciCode32(Vector256<byte>.Zero);
+        
+        [MethodImpl(Inline)]
+        public static AsciCode32 init(AsciCharCode fill = AsciCharCode.Space)
+            => new AsciCode32(SymBits.vbroadcast(w256, (byte)fill));
+
         internal readonly Vector256<byte> Data;        
 
         [MethodImpl(Inline)]
@@ -41,7 +49,7 @@ namespace Z0
         public AsciCode32 Zero
         {
             [MethodImpl(Inline)]
-            get => AC32.Null;
+            get => Null;
         }
 
         [MethodImpl(Inline)]
@@ -56,7 +64,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(this);
+            => AsciCodes.format(this);
  
         public override string ToString()
             => Format(); 

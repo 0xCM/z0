@@ -227,5 +227,29 @@ namespace Z0
         public static ref Vector256<T> vgeneric<T>(in Vector256<ulong> src)
             where T : unmanaged        
                 => ref Unsafe.As<Vector256<ulong>,Vector256<T>>(ref edit(in src));
+
+        /// <summary>
+        /// Reinterprets the source vector as a vector over parametric T-cells
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The target type</typeparam>
+        /// <remarks>This operation should be dissolved when the method is closed over a concrete type
+        /// and should not impact instruction generation</remarks>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref Vector256<T> vgeneric<T>(in Vector256<float> src)
+            where T : unmanaged        
+                => ref Unsafe.As<Vector256<float>,Vector256<T>>(ref edit(in src));
+
+        /// <summary>
+        /// Reinterprets the source vector as a vector over parametric T-cells
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The target type</typeparam>
+        /// <remarks>This operation should be dissolved when the method is closed over a concrete type
+        /// and should not impact instruction generation</remarks>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref Vector256<T> vgeneric<T>(in Vector256<double> src)
+            where T : unmanaged        
+                => ref Unsafe.As<Vector256<double>,Vector256<T>>(ref edit(in src));
     }
 }
