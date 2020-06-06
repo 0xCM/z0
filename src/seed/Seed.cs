@@ -12,6 +12,9 @@ namespace Z0
     [ApiHost("api")]
     public partial class Seed : IApiHost<Seed>
     {
+        public static void ThrowEmptySpanError()
+            => throw new Exception($"The span is empty");
+
         /// <summary>
         /// The part identifier of the entry assembly
         /// </summary>

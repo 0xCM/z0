@@ -6,18 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Seed;
-
-    partial class Control
+    
+    partial class XTend
     {
-        [MethodImpl(Inline)]
-        public static ref readonly T head<T>(ReadOnlySpan<T> src)
-            => ref MemoryMarshal.GetReference<T>(src);
+       [MethodImpl(Inline)]
+        public static void Iteri<T>(this Span<T> src, Action<int,T> f)
+            => Spans.iteri(src,f);
 
         [MethodImpl(Inline)]
-        public static ref T head<T>(Span<T> src)
-            => ref MemoryMarshal.GetReference<T>(src);
+        public static void Iter<T>(this Span<T> src, Action<T> f)
+            => Spans.iter(src,f); 
     }
 }

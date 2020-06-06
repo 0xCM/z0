@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;    
 
+    using static Seed;
+    
     public static partial class Typed
-    {
-        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
+    {        
         /// <summary>
         /// Returns the numeric value represented by a natural type
         /// </summary>
@@ -21,12 +20,10 @@ namespace Z0
         public static ulong value<N>(N n = default)
             where N : unmanaged, ITypeNat
                 => TypeNats.value(n);
-
     }
 
     public static partial class XTend
     {
 
     }
-
 }

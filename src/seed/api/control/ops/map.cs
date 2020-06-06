@@ -48,5 +48,21 @@ namespace Z0
         public static T map<S,T>(S? src, Func<S,T> some, Func<T> none)
             where S : struct
                 => src != null ? some(src.Value) : none();
+
+
+        /// Projects a source span to target span via a supplied transformation
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="f">The transformation</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        
+        [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
+        public static void map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
+        {
+            var count = Control.length(src,dst);
+            for(var i= 0; i<count; i++)
+                seek(dst,i) = f(skip(src,i));
+        }
     }
 }

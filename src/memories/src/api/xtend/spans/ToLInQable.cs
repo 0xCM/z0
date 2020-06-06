@@ -48,7 +48,6 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().ToSet(b);
 
-
         /// <summary>
         /// Lifts the content of a span into a LINQ enumerable
         /// </summary>

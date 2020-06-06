@@ -9,6 +9,11 @@ namespace Z0
     partial class Seed
     {
         /// <summary>
+        /// The empty type
+        /// </summary>
+        public static Type TEmpty => typeof(void);
+
+        /// <summary>
         /// Species the base2 singleton representative
         /// </summary>
         public static Base2 base2 => default;
