@@ -43,7 +43,7 @@ namespace Z0
         /// <summary>
         /// For scalar data this bit will always be off; otherwise, it will be on
         /// </summary>
-        bit Segmented 
+        bool Segmented 
             => CellWidth < DataWidth;        
     }
 
@@ -116,13 +116,6 @@ namespace Z0
             where T : unmanaged
                 => cell<T>(0);
 
-        // [MethodImpl(Inline)]
-        // public BoxedNumber Extract()
-        //     => BoxedNumber.Define(Low64, CellKind);
-
-        // [MethodImpl(Inline)]
-        // public BoxedNumber Extract(NumericKind dst)
-        //     => BoxedNumber.Define(Low64, dst);
 
         public variant Convert(NumericKind dst)
         {

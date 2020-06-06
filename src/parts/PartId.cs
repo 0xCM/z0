@@ -181,6 +181,8 @@ public enum PartId : ulong
 
     Structured = 708,
 
+    VRoot = 709,
+
     PermuteTest = Permute | Test,
 
     VectorsTest = Vectors | Test,

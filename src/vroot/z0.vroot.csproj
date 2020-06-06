@@ -8,8 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(BitMasks)" />
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(VRoot)"/>
+
   </ItemGroup>
 
 </Project>

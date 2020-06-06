@@ -15,6 +15,19 @@ namespace Z0
     using static Seed;
     using static Memories;
 
+    [ApiHost("api")]
+    public partial class Vectors : IApiHost<Vectors>
+    {
+        
+    }
+
+    [ApiHost]
+    public static partial class Store
+    {
+
+    }
+
+
     partial class Store
     {
         /// <summary>

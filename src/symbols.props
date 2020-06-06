@@ -77,6 +77,7 @@
   </PropertyGroup>
 
   <PropertyGroup>    
+    <VRoot>$(Src)vroot/z0.vroot.csproj</VRoot>
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
     <Validity>$(Src)validity/z0.validity.csproj</Validity>

@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(Structured)" />
     <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 

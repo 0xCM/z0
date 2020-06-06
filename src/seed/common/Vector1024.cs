@@ -51,13 +51,13 @@ namespace Z0
         public static implicit operator Vector1024<T>(in (Vector256<T> a, Vector256<T> b, Vector256<T> c, Vector256<T> d) src)
             => new Vector1024<T>(src.a, src.b, src.c, src.d);
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vector1024<T>(in ConstQuad<Vector256<T>> src)
-            => new Vector1024<T>(src.First, src.Second, src.Third, src.Fourth);
+        // [MethodImpl(Inline)]
+        // public static implicit operator Vector1024<T>(in ConstQuad<Vector256<T>> src)
+        //     => new Vector1024<T>(src.First, src.Second, src.Third, src.Fourth);
          
-        [MethodImpl(Inline)]
-        public static implicit operator ConstQuad<Vector256<T>>(in Vector1024<T> src)
-            => (src.A, src.B, src.C, src.D);
+        // [MethodImpl(Inline)]
+        // public static implicit operator ConstQuad<Vector256<T>>(in Vector1024<T> src)
+        //     => (src.A, src.B, src.C, src.D);
          
         [MethodImpl(Inline)]
         public static bool operator ==(in Vector1024<T> a, in Vector1024<T> b)        
