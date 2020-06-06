@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static MetaRecordKinds;
+    
+    using S = MetadataRecords.ResourceSpec;
+    using R = MetadataRecords.ResourceRecord;
     
     partial class MetadataRecords
     {
-        public readonly struct ManifestResource : IMetadataRecord<ManifestResource,ManifestResourceRecord>
+        public readonly struct ResourceRecord : IMetadataRecord<R,S>
         {
-            public const MetaRecordKind RecordKind = MetaRecordKind.ManifestResource;
-
             public long Offset {get;}
 
             public string Name {get;}
@@ -24,10 +24,10 @@ namespace Z0
 
             public string Implementation {get;}
 
-            public MetaRecordKind Kind => RecordKind;
+            public S Kind => default;
 
             [MethodImpl(Inline)]
-            internal ManifestResource(string Name, string Attribute, long Offset, string Implementation)
+            internal ResourceRecord(string Name, string Attribute, long Offset, string Implementation)
             {
                 this.Name = Name;
                 this.Attribute = Attribute;
@@ -35,6 +35,9 @@ namespace Z0
                 this.Implementation = Implementation;
             }            
             public string Format()
+                => Format(FieldDelimiter);
+            
+            public string Format(char delimiter)
             {
                 var dst = text.build();
                 dst.Append(Offset.FormatHex(zpad:true, specifier:false).PadRight(6));
@@ -45,8 +48,19 @@ namespace Z0
                 dst.Append(Delimiter);
                 dst.Append(Implementation.PadRight(20));
                 return dst.ToString();
-            }        
+            }
         }                    
 
+        public readonly struct ResourceSpec : IMetadataRecordSpec<ResourceSpec>
+        {
+            [MethodImpl(Inline)]
+            public static implicit operator MetadataRecordKind(ResourceSpec src)
+                => src.RecordType;
+
+            public MetadataRecordKind RecordType => MetadataRecordKind.ManifestResource;  
+
+            public override string ToString()
+                => (this as ITextual).Format();
+        }
     }
 }

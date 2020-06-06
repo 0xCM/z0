@@ -12,10 +12,10 @@ namespace Z0
     using static MetadataRecords;
     using static MetadataRecords.StringValueField;
     
-    partial class MetaFormat
+    partial class MetadataFormat
     {       
         [Op]
-        public static string format(in StringValue src)
+        public static string format(in StringValueRecord src, char delimiter)
         {            
             var widths = FieldWidths(src.Kind);
             var count = FieldCount(src.Kind);
@@ -25,7 +25,7 @@ namespace Z0
             seek(dst, Length) = Render(src.Length, width(widths, Length));
             seek(dst, Offset) = RenderHex(src.Offset, width(widths, Offset));
             seek(dst, Value) = src.Value;
-            return Delimit(dst);
+            return Delimit(dst,delimiter);
         }        
     }
 }

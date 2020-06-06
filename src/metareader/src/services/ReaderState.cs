@@ -13,7 +13,7 @@ namespace Z0
     using System.IO;
     using System.Linq;
 
-    readonly struct MetaReaderState : IDisposable
+    readonly struct ReaderState : IDisposable
     {                
         readonly PEReader PEReader;
 
@@ -27,7 +27,7 @@ namespace Z0
 
         readonly ImmutableArray<ImmutableArray<EntityHandle>> Maps;
 
-        internal MetaReaderState(FileStream stream, PEReader peReader)
+        internal ReaderState(FileStream stream, PEReader peReader)
         {
             Stream = stream;
             PEReader = peReader;

@@ -12,6 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
@@ -286,5 +287,30 @@ namespace Z0
         [MethodImpl(Inline), Op]
         internal static unsafe void vstore(Vector256<byte> src, Span<byte> dst)
             => vstore(src, ref head(dst));
+
+        [MethodImpl(Inline)]
+        public static byte vextract(Vector128<byte> src, byte index)
+            => Extract(src,index);
+
+
+        [MethodImpl(Inline)]
+        public static byte vextract(Vector128<byte> src, N0 index)
+            => Extract(src, 0);
+
+        [MethodImpl(Inline)]
+        public static byte vextract(Vector128<byte> src, N1 index)
+            => Extract(src, 1);
+
+        [MethodImpl(Inline)]
+        public static byte vextract(Vector128<byte> src, N2 index)
+            => Extract(src, 2);
+
+        [MethodImpl(Inline)]
+        public static byte vextract(Vector128<byte> src, N3 index)
+            => Extract(src, 3);
+
+        [MethodImpl(Inline)]
+        public static byte vextract(Vector128<byte> src, N4 index)
+            => Extract(src, 4);
     }
 }

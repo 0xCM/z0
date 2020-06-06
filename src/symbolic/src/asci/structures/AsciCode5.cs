@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Control;
+    using static Typed;
 
     using N = N5;    
 
@@ -18,6 +18,8 @@ namespace Z0
     public readonly struct AsciCode5 : IAsciSequence<AsciCode5,N>
     {
         public static AsciCode5 Empty => new AsciCode5(0);        
+
+        public const int Size = 5;
 
         internal readonly ulong Data;
 
@@ -43,6 +45,13 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Empty;
+        }
+
+
+        public int MaxLength
+        {
+            [MethodImpl(Inline)]
+            get => Size;
         }
 
         [MethodImpl(Inline)]

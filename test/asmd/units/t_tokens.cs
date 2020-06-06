@@ -14,6 +14,20 @@ namespace Z0.Asm.Data
 
     public class t_tokens : t_asmd<t_tokens>
     {
+
+        void emit(ReadOnlySpan<OpCodeIdentifier> src)
+        {
+            var dstPath = CasePath($"OpCodeIdentifiers");
+            using var writer = dstPath.Writer();
+            writer.WriteLine("Identifier");
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var id = ref skip(src,i);
+                writer.WriteLine(id.Format().PadRight(id.Encoded.MaxLength));
+            }
+
+        }
+
         public void opcode_tokens()
         {
             var data = OpCodeDataset.Create();
@@ -23,16 +37,26 @@ namespace Z0.Asm.Data
             Claim.eq(count, records.Length);
             Claim.eq(count, identifers.Length);
 
+            emit(identifers);
+
             var processor = OpCodeProcessor.Create();
             var handler = OpCodeHandler.Create(count);
             processor.Process(records,handler);
 
             var groups = handler.CommandGroups;
 
-            Trace($"Processed {handler.ProcessedCount} records");
-            Trace($"Distilled {groups.Length} mnemonics");
+            var dstPath = CasePath($"CommandGroups");
+            using var writer = dstPath.Writer();
+            writer.WriteLine("Mnemonic");
+            for(var i=0; i<groups.Length; i++)
+            {
+                ref readonly var g = ref skip(groups,i);
+                var name = g.Name;
+                writer.WriteLine(name.Format().PadRight(name.MaxLength));
+            }
 
-            
+            // Trace($"Processed {handler.ProcessedCount} records");
+            // Trace($"Distilled {groups.Length} mnemonics");            
         }
         
         void instruction_tokens()

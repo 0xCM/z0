@@ -13,21 +13,21 @@ namespace Z0
     using static Seed;    
     using static MetadataRecords;
     
-    partial class MetaRead
+    partial class MetadataRead
     {        
-        internal static ReadOnlySpan<StringValue> strings(in MetaReaderState state)
+        internal static ReadOnlySpan<StringValueRecord> strings(in ReaderState state)
         {
             var reader = state.Reader;
             int size = reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
-                return MetaFormat.empty<StringValue>();
+                return MetadataFormat.empty<StringValueRecord>();
 
-            var values = new List<StringValue>();
+            var values = new List<StringValueRecord>();
             var handle = MetadataTokens.StringHandle(0);
             var i=0;
             do
             {
-                values.Add(new StringValue(
+                values.Add(new StringValueRecord(
                     Sequence: i++,
                     HeapSize:size, 
                     Offset: reader.GetHeapOffset(handle), 
@@ -41,19 +41,19 @@ namespace Z0
             return values.ToArray();            
         }
 
-        internal static ReadOnlySpan<StringValue> ustrings(in MetaReaderState state)
+        internal static ReadOnlySpan<StringValueRecord> ustrings(in ReaderState state)
         {
             var reader = state.Reader;
             int size = reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
-                return MetaFormat.empty<StringValue>();
+                return MetadataFormat.empty<StringValueRecord>();
 
-            var values = new List<StringValue>();
+            var values = new List<StringValueRecord>();
             var handle = MetadataTokens.UserStringHandle(0);
             var i=0;
             do
             {                
-                values.Add(new StringValue(
+                values.Add(new StringValueRecord(
                     Sequence: i++,
                     HeapSize: size, 
                     Offset: reader.GetHeapOffset(handle), 

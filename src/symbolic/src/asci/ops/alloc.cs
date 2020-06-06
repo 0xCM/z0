@@ -39,6 +39,5 @@ namespace Z0
             dst.Fill(init(n));
             return buffer;
         }
-
     }
 }

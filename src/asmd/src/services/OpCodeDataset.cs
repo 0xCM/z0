@@ -35,7 +35,7 @@ namespace Z0.Asm.Data
             => OpCodeIdentifiers[index];
 
         [MethodImpl(Inline), Op]
-        static AsmCommandGroup group(string name)
+        static AsmCommandGroup group(AsciCode16 name)
             => new AsmCommandGroup(name);
 
         [MethodImpl(Inline)]

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Typed;
 
     using API = AsciCodes;
     using N = N2;
@@ -19,12 +20,22 @@ namespace Z0
     {
         public static AsciCode2 Empty => new AsciCode2(0);
 
-        internal readonly ushort Data;
+        public const int Size = 2;
+
+        internal readonly ushort Storage;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(AsciCode2 src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(AsciCode2 src)
+            => src.Decoded;
 
         [MethodImpl(Inline)]
         public AsciCode2(ushort src)
         {
-            Data = src;
+            Storage = src;
         }
         
         public bool IsEmpty
@@ -38,22 +49,39 @@ namespace Z0
             [MethodImpl(Inline)]
             get => !Empty.Equals(this);
         }
-
         public AsciCode2 Zero
         {
             [MethodImpl(Inline)]
             get => Empty;
         }
-        
+
+        public int MaxLength
+        {
+            [MethodImpl(Inline)]
+            get => Size;
+        }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(this);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.decode(this);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(AsciCode2 src)
-            => Data == src.Data;
+            => Storage == src.Storage;
 
         public override bool Equals(object src)
             => src is AsciCode2 x && Equals(x);
 
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Storage.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()
@@ -72,6 +100,6 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static implicit operator ushort(AsciCode2 src)
-            => src.Data;    
+            => src.Storage;    
     }
 }

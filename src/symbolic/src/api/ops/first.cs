@@ -9,26 +9,9 @@ namespace Z0
     
     using static Seed;
     using static Control;
-    using static Typed;
 
     partial class Symbolic
     {
-        [MethodImpl(Inline), Op]
-        public static int length(in AsciCode16 src)
-        {
-            var i = first(src, 0);
-            return i != -1 ? i+1 : 16;
-
-        }
-
-        [MethodImpl(Inline), Op]
-        public static int first(in AsciCode16 src, byte match)
-        {                        
-            var dst = ByteBlocks.u8s(ByteBlocks.alloc(n16));
-            SymBits.vstore(src.Data, ref head(dst));
-            return first(dst, match);
-        }
-
         [MethodImpl(Inline), Op]
         public static int first(ReadOnlySpan<byte> src, byte match)
         {

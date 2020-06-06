@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode16 encode(ReadOnlySpan<char> src, out AsciCode16 dst)        
         {
-            dst = default;
+            dst = AsciCode16.Blank;
             Symbolic.literals(src, span<AsciCode16,AsciCharCode>(ref dst));
             return ref dst;
         }
@@ -87,7 +87,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode32 encode(ReadOnlySpan<char> src, out AsciCode32 dst)        
         {
-            dst = default;
+            dst = AsciCode32.Blank;
             Symbolic.literals(src, span<AsciCode32,AsciCharCode>(ref dst));
             return ref dst;
         }
@@ -100,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly AsciCode64 encode(ReadOnlySpan<char> src, out AsciCode64 dst)        
         {
-            dst = default;
+            dst = AsciCode64.Blank;
             Symbolic.literals(src, span<AsciCode64,AsciCharCode>(ref dst));
             return ref dst;
         }

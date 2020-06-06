@@ -21,8 +21,8 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline), Op]
         public OpCodeIdentifier Compute(in OpCodeRecord src)
         {
-            var part1 = MnemonicPart(src);
-            return new OpCodeIdentifier(part1);
+            //var part1 = MnemonicPart(src);
+            return new OpCodeIdentifier(src.Expression);
         }
 
         [MethodImpl(Inline), Op]

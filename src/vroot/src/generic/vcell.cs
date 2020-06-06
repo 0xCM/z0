@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the component to extract</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T vcell<T>(Vector128<T> src, int index)
             where T : unmanaged
                 => src.GetElement(index);
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T vhead<T>(Vector128<T> src)
             where T : unmanaged
                 => vcell(src,0);
@@ -39,12 +39,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the component to extract</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T vcell<S,T>(Vector128<S> src, int index)
             where S : unmanaged
             where T : unmanaged
                 => src.As<S,T>().GetElement(index);
-
 
         /// <summary>
         /// Sets an index-identified component to a specified value
@@ -53,7 +52,7 @@ namespace Z0
         /// <param name="index">The index of the component to extract</param>
         /// <param name="value">The new component value</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vcell<T>(Vector128<T> src, int index, T value)
             where T : unmanaged
                 => src.WithElement(index,value);
@@ -65,7 +64,7 @@ namespace Z0
         /// <param name="index">The index of the component to extract</param>
         /// <param name="value">The new component value</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vcell<T>(T src, int index, Vector128<T> dst)
             where T : unmanaged
                 => dst.WithElement(index, src);
@@ -76,7 +75,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the component to extract</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T vcell<T>(Vector256<T> src, int index)
             where T : unmanaged
                 => src.GetElement(index);
@@ -88,7 +87,7 @@ namespace Z0
         /// <param name="index">The index of the component to extract</param>
         /// <param name="value">The new component value</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vcell<T>(T src, int index, Vector256<T> dst)
             where T : unmanaged
                 => dst.WithElement(index, src);
@@ -98,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static sbyte vcell8i<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v8i(x).GetElement(index);
@@ -108,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static byte vcell8<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v8u(x).GetElement(index);
@@ -118,7 +117,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static short vcell16i<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v16i(x).GetElement(index);
@@ -128,7 +127,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ushort vcell16<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v16u(x).GetElement(index);
@@ -138,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int vcell32i<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v32i(x).GetElement(index);
@@ -148,7 +147,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint vcell32<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v32u(x).GetElement(index);
@@ -158,7 +157,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static long vcell64i<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v64i(x).GetElement(index);
@@ -168,7 +167,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ulong vcell64<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v64u(x).GetElement(index);
@@ -178,7 +177,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static float vcell32f<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v32f(x).GetElement(index);
@@ -188,7 +187,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static double vcell64f<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v64f(x).GetElement(index);
@@ -198,7 +197,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static sbyte vcell8i<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v8i(x).GetElement(index);
@@ -208,7 +207,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static byte vcell8<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v8u(x).GetElement(index);
@@ -218,7 +217,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static short vcell16i<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v16i(x).GetElement(index);
@@ -228,7 +227,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ushort vcell16<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v16u(x).GetElement(index);
@@ -238,7 +237,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int vcell32i<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v32i(x).GetElement(index);
@@ -248,7 +247,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint vcell32<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v32u(x).GetElement(index);
@@ -258,7 +257,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ulong vcell64<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v64u(x).GetElement(index);
@@ -268,7 +267,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static long vcell64i<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v64i(x).GetElement(index);
@@ -278,7 +277,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static float vcell32f<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v32f(x).GetElement(index);
@@ -288,7 +287,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static double vcell64f<T>(Vector256<T> x, int index)
             where T : unmanaged
                 => v64f(x).GetElement(index);

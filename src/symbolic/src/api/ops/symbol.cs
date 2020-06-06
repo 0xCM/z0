@@ -70,10 +70,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Symbol<AsciChar,byte> symbol(in AsciCode16 src, byte index)
-            => Symbolic.symbol<AsciChar,byte>(src.Data.GetElement(index));
+            => Symbolic.symbol<AsciChar,byte>(src.Storage.GetElement(index));
 
         [MethodImpl(Inline), Op]
         public static Symbol<AsciChar,byte> symbol(in AsciCode32 src, byte index)
-             => Symbolic.symbol<AsciChar,byte>(src.Data.GetElement(index));
+             => Symbolic.symbol<AsciChar,byte>(src.Storage.GetElement(index));
    }
 }

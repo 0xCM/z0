@@ -15,11 +15,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static AsciCodeCover cover(AsciCode2 src, byte index)
-            => (byte)(src.Data >> index);
+            => (byte)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
         public static AsciCodeCover cover(AsciCode4 src, byte index)
-            => (byte)(src.Data >> index);
+            => (byte)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
         public static AsciCodeCover cover(AsciCode5 src, byte index)
@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AsciCodeCover cover(in AsciCode16 src, byte index)
-            => (AsciCodeCover)src.Data.GetElement(index);
+            => (AsciCodeCover)src.Storage.GetElement(index);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(AsciCode2 src)
@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AsciCodeCover cover(AsciCode8 src, byte index)
-            => (byte)(src.Data >> index);
+            => (byte)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(AsciCode8 src)

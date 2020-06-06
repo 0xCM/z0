@@ -8,7 +8,7 @@ namespace Z0
 
     public interface IMetadataRecord : ITextual
     {
-        
+        string Format(char delimiter);   
     }
     
     public interface IMetadataRecord<F> : IMetadataRecord
@@ -19,7 +19,7 @@ namespace Z0
     
     public interface IMetadataRecord<F,K> : IMetadataRecord<F>
         where F : struct, IMetadataRecord<F,K>
-        where K : unmanaged, IMetaRecordKind
+        where K : unmanaged, IMetadataRecordSpec
     {
         K Kind  => default;
     }
@@ -27,7 +27,7 @@ namespace Z0
     public interface IMetadataRecord<F,K,I> : IMetadataRecord<F,K>
         where F : struct, IMetadataRecord<F,K,I>
         where I : unmanaged, Enum
-        where K : unmanaged, IMetaRecordKind
+        where K : unmanaged, IMetadataRecordSpec
     {
         
     }    

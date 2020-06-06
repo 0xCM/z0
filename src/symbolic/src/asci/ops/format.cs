@@ -15,20 +15,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(AsciCode2 src)
         {
-
             var dst = CharBlocks.c16s(CharBlocks.alloc(n2));
             decode(src,dst);
             return new string(dst);
         }       
                  
-
         [MethodImpl(Inline), Op]
-        public static string format(AsciCode4 src)
-        {
-            var dst = CharBlocks.c16s(CharBlocks.alloc(n4));
-            decode(src,dst);
-            return new string(dst);
-        }
+        public static string format(in AsciCode4 src)
+            => new string(decode(src));
         
         [MethodImpl(Inline), Op]
         public static string format(AsciCode5 src)
@@ -48,10 +42,14 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode16 src)
-            => new string(AsciCodes.decode(src));
+            => new string(decode(src));
 
         [MethodImpl(Inline), Op]
-        public static string format(AsciCode32 src)
+        public static string format(in AsciCode32 src)
+            => new string(decode(src));
+
+        [MethodImpl(Inline), Op]
+        public static string format(in AsciCode64 src)
             => new string(decode(src));
     }
 }

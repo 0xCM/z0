@@ -10,21 +10,21 @@ namespace Z0
     using static Seed;
 
     [ApiHost("format")]
-    public partial class MetaFormat : IApiHost<MetaFormat>
+    public partial class MetadataFormat : IApiHost<MetadataFormat>
     {
         [MethodImpl(Inline)]
         public static ReadOnlySpan<string> HeaderFields<K>(K k) 
-            where K : unmanaged, IMetaRecordKind
+            where K : unmanaged, IMetadataRecordSpec
                 => k.HeaderFields;
 
         [MethodImpl(Inline)]
         public static byte FieldCount<K>(K k) 
-            where K : unmanaged, IMetaRecordKind
+            where K : unmanaged, IMetadataRecordSpec
                 => k.FieldCount;
 
         [MethodImpl(Inline)]
         public static string HeaderText<K>(K k) 
-            where K : unmanaged, IMetaRecordKind
+            where K : unmanaged, IMetadataRecordSpec
                 => k.HeaderText;
 
         [MethodImpl(Inline)]
@@ -57,29 +57,33 @@ namespace Z0
             => new T[count];
 
         [MethodImpl(Inline)]
-        internal static string RenderHex(int src, int width = 0)
+        internal static string RenderHex(int src, int width)
             => src.FormatHex(zpad:true, specifier:true, prespec:false).PadRight(width);
 
         [MethodImpl(Inline)]
-        internal static string Render(int src, int width = 0)
+        internal static string Render(int src, int width)
             => src.ToString().PadRight(width);
 
         [MethodImpl(Inline)]
-        internal static string Render<T>(T src, int width = 0)
+        internal static string Render<T>(T src, int width)
             where T : ITextual
                 => src.Format().PadRight(width);
 
         [MethodImpl(Inline)]
-        internal static string Render(object src, int width = 0)
+        internal static string Render(byte[] src, int width)
+            => src.FormatHexBytes().PadRight(width);
+
+        [MethodImpl(Inline)]
+        internal static string Render(object src, int width)
             => src.ToString().PadRight(width);
 
         [MethodImpl(Inline)]
-        internal static string Render(string src, int width = 0)
+        internal static string Render(string src, int width)
             => src.PadRight(width);
 
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<byte> FieldWidths<K>(K k) 
-            where K : unmanaged, IMetaRecordKind
+            where K : unmanaged, IMetadataRecordSpec
                 => k.FieldWidths;
 
         public static string FormatHeader(ReadOnlySpan<string> fields, ReadOnlySpan<byte> widths, char delimiter = Chars.Pipe)

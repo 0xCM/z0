@@ -9,35 +9,41 @@ namespace Z0
     using System.Runtime.Intrinsics;
      
     using static Seed;
-    using static Control;
+    using static SymBits;
 
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(AsciCode2 src, byte index)
-            => (AsciCharCode)(src.Data >> index);
-
+        public static AsciCharCode code(in AsciCode2 src, byte index)
+            => (AsciCharCode)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(AsciCode4 src, byte index)
-            => (AsciCharCode)(src.Data >> index);
-
+        public static AsciCharCode code(in AsciCode4 src, byte index)
+            => (AsciCharCode)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
         public static AsciCharCode code(in AsciCode8 src, byte index)
-            => (AsciCharCode)(src.Data >> index);
+            => (AsciCharCode)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
-        public static char decode(in AsciCode8 src, byte index)
-            => (char)code(src,index);
+        public static AsciCharCode code(in AsciCode16 src, byte index)
+            => (AsciCharCode)src.Storage.GetElement(index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(AsciCode16 src, byte index)
-            => (AsciCharCode)src.Data.GetElement(index);
+        public static AsciCharCode code(in AsciCode16 src, N0 index)
+            => (AsciCharCode)vextract(src.Storage,index);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCharCode> codes(in AsciCode16 src)
-            => cast<AsciCharCode>(bytespan(src)); 
+        public static AsciCharCode code(in AsciCode16 src, N1 index)
+            => (AsciCharCode)vextract(src.Storage,index);
+
+        [MethodImpl(Inline), Op]
+        public static AsciCharCode code(in AsciCode16 src, N2 index)
+            => (AsciCharCode)vextract(src.Storage,index);
+
+        [MethodImpl(Inline), Op]
+        public static AsciCharCode code(in AsciCode16 src, N3 index)
+            => (AsciCharCode)vextract(src.Storage,index);
 
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
-    public readonly struct OpCodeModel : IIdentified<OpCodeIdentifier>
+    public readonly struct OpCodeModel
     {
         public OpCodeIdentifier Id {get;}
         

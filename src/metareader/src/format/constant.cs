@@ -12,10 +12,10 @@ namespace Z0
     using static MetadataRecords;
     using static MetadataRecords.ConstantField;
     
-    partial class MetaFormat
+    partial class MetadataFormat
     {       
         [Op]
-        public static string format(in ConstantValue src)
+        public static string format(in ConstantRecord src, char delimiter)
         {            
             var widths = FieldWidths(src.Kind);
             var count = FieldCount(src.Kind);
@@ -24,7 +24,7 @@ namespace Z0
             seek(dst, Parent) = Render(src.Parent, width(widths, Parent));
             seek(dst, DataType) = Render(src.DataType, width(widths, DataType));
             seek(dst, Value) = Render(src.Value, width(widths, Value));
-            return Delimit(dst);
+            return Delimit(dst, delimiter);
         }        
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.Text;
 
-    class MetaTableEmitter
+    class MetadataEmitter
     {
         public static void Emit(params string[] paths)
         {
@@ -31,7 +31,7 @@ namespace Z0
                     using (var peFile = new PEReader(stream))
                     {
                         var metadataReader = peFile.GetMetadataReader();
-                        var emitter = new MetaTableEmitter(metadataReader, Console.Out);
+                        var emitter = new MetadataEmitter(metadataReader, Console.Out);
                         emitter.Emit();
                     }
                 }
@@ -55,7 +55,7 @@ namespace Z0
         
         readonly List<string[]> pendingRows = new List<string[]>();
 
-        MetaTableEmitter(TextWriter writer, IReadOnlyList<MetadataReader> readers)
+        MetadataEmitter(TextWriter writer, IReadOnlyList<MetadataReader> readers)
         {
             this.writer = writer;
             this.readers = readers;
@@ -69,13 +69,13 @@ namespace Z0
             }
         }
 
-        public MetaTableEmitter(MetadataReader reader, TextWriter writer)
+        public MetadataEmitter(MetadataReader reader, TextWriter writer)
             : this(writer, new[] { reader })
         {
             this.reader = reader;
         }
 
-        public MetaTableEmitter(IReadOnlyList<MetadataReader> readers, TextWriter writer)
+        public MetadataEmitter(IReadOnlyList<MetadataReader> readers, TextWriter writer)
             : this(writer, readers)
         {
         }

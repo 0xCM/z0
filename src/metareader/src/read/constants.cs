@@ -13,22 +13,22 @@ namespace Z0
     using static MetadataRecords;
     using static Control;
         
-    partial class MetaRead
+    partial class MetadataRead
     {                
-        internal static ReadOnlySpan<ConstantValue> constants(in MetaReaderState state)
+        internal static ReadOnlySpan<ConstantRecord> constants(in ReaderState state)
         {
             var reader = state.Reader;
             var count = ConstantCount(state);
-            var dst = alloc<ConstantValue>(count);
+            var dst = alloc<ConstantRecord>(count);
 
             for (int i = 1; i <= count; i++)
             {
                 var entry = reader.GetConstant(ConstantHandle(i));
-                seek(dst,i-1) = new ConstantValue(
+                seek(dst,i-1) = new ConstantRecord(
                     Sequence: i,
                     Parent: Token(state, entry.Parent),
                     Type: entry.TypeCode,
-                    Value: LiteralValue(state, entry.Value)
+                    Value: LiteralValue(state, entry.Value,i)
                 );
             }
 

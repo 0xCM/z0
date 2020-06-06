@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public interface IAsciSequence : INullaryKnown
+    public interface IAsciSequence : INullaryKnown, ITextual
     {
         int Length {get;}
     }

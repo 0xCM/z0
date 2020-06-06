@@ -13,7 +13,6 @@ namespace Z0
 
     partial class AsciCodes
     {
-
         [MethodImpl(Inline), Op]
         public static AsciCode16 init(N16 n, AsciCharCode fill = AsciCharCode.Space)
             => new AsciCode16(SymBits.vbroadcast(w128, (byte)fill));
@@ -25,6 +24,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AsciCode64 init(N64 n, AsciCharCode fill = AsciCharCode.Space)
             => new AsciCode64(SymBits.vbroadcast(w512, (byte)fill));
-
     }
 }

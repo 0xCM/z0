@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
 
     [ApiHost]
-    public partial class MetaRead : IApiHost<MetaRead>
+    public partial class MetadataRead : IApiHost<MetadataRead>
     {
         
     }

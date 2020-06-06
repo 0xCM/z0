@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Typed;
 
     using N = N8;
     
@@ -18,24 +19,46 @@ namespace Z0
     {        
         public static AsciCode8 Empty => new AsciCode8(0);        
 
-        internal readonly ulong Data;
+        public const int Size = 8;
+
+        static N n => default;
+        
+        internal readonly ulong Storage;
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsciCode8(string src)
+            => new AsciCode8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(AsciCode8 src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(AsciCode8 src)
+            => src.Decoded;
 
         [MethodImpl(Inline)]
         public AsciCode8(ulong src)
         {
-            Data = src;
+            Storage = src;
         }
       
+        [MethodImpl(Inline)]
+        public AsciCode8(string src)
+        {
+            Storage = AsciCodes.encode(n,src).Storage;
+        }
+        
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data == 0;
+            get => Storage == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Data != 0;
+            get => Storage != 0;
         }
 
         public AsciCode8 Zero
@@ -44,15 +67,33 @@ namespace Z0
             get => Empty;
         }
 
+        public int MaxLength
+        {
+            [MethodImpl(Inline)]
+            get => Size;
+        }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(this);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.decode(this);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(AsciCode8 src)
-            => Data == src.Data;
+            => Storage == src.Storage;
 
         public override bool Equals(object src)
             => src is AsciCode8 x && Equals(x);
 
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Storage.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()

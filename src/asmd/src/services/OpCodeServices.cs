@@ -50,13 +50,13 @@ namespace Z0.Asm.Data
         // public OpCodeSpec Parse(OpCodeExpression src)            
         //     => new OpCodeSpec(src, src.Data.SplitClean(Chars.Space).Map(c => new OpCodePart(c)));
 
-        [MethodImpl(Inline)]
-        public InstructionSpec Parse(InstructionExpression src)     
-        {       
-            var mnemonic = src.Data.LeftOf(Chars.Space);
-            var operands = src.Data.RightOf(Chars.Space).SplitClean(Chars.Comma);
-            return new InstructionSpec(src, mnemonic, operands);
-        }       
+        // [MethodImpl(Inline)]
+        // public InstructionSpec Parse(InstructionExpression src)     
+        // {       
+        //     var mnemonic = src.Data.LeftOf(Chars.Space);
+        //     var operands = src.Data.RightOf(Chars.Space).SplitClean(Chars.Comma);
+        //     return new InstructionSpec(src, mnemonic, operands);
+        // }       
 
         // [MethodImpl(Inline)]
         // public void GenCode(in OpCodeDataset src)

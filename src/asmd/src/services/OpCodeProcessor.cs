@@ -102,18 +102,18 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         static MnemonicExpression Mnemonic(in OpCodeRecord src)
-            => src.Mnemonic;
+            => new MnemonicExpression(src.Mnemonic);
 
         [MethodImpl(Inline)]
         static CpuidExpression Cpuid(in OpCodeRecord src)
-            => src.CpuId;
+            => new CpuidExpression(src.CpuId);
 
         [MethodImpl(Inline)]
         static OpCodeExpression OpCode(in OpCodeRecord src)
-            => src.Expression;
+            => new OpCodeExpression(src.Expression);
 
         [MethodImpl(Inline)]
         static InstructionExpression Instruction(in OpCodeRecord src)
-            => src.Instruction;
+            => new InstructionExpression(src.Instruction);
     }
 }

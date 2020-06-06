@@ -26,6 +26,10 @@ namespace Z0.Asm.Data
             => new MnemonicExpression(src);
 
         [MethodImpl(Inline)]
+        public MnemonicExpression(AsciCode16 src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
         public MnemonicExpression(string src)
             => Data = Symbolic.encode(src, ASCI, n16);
 

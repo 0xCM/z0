@@ -15,8 +15,8 @@ namespace Z0.Asm.Data
     public struct OpCodeRecord : IRecord<F,R>
     {                   
         public static OpCodeRecord Empty 
-            => new OpCodeRecord(0,OpCodeId.INVALID, nameof(OpCodeId.INVALID), string.Empty, string.Empty, 
-                YeaOrNea.N, YeaOrNea.N,YeaOrNea.N,string.Empty);        
+            => new OpCodeRecord(0, OpCodeId.INVALID, AsciCode16.Null, AsciCode64.Null, AsciCode32.Null, 
+                YeaOrNea.N, YeaOrNea.N, YeaOrNea.N, AsciCode16.Null);        
         
         public int Sequence => Seq;
         
@@ -24,11 +24,11 @@ namespace Z0.Asm.Data
         
         public OpCodeId Id;
 		
-		public string Mnemonic;
+		public AsciCode16 Mnemonic;
 		
-		public string Instruction;
+		public AsciCode64 Instruction;
 
-		public string Expression;
+		public AsciCode32 Expression;
 
 		public YeaOrNea M16;
 
@@ -36,10 +36,10 @@ namespace Z0.Asm.Data
 
 		public YeaOrNea M64;
         
-		public string CpuId;
+		public AsciCode16 CpuId;
 
         [MethodImpl(Inline)]
-        public OpCodeRecord(int Seq, OpCodeId Id, string Mnemonic, string Instruction, string Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, string CpuId)
+        public OpCodeRecord(int Seq, OpCodeId Id, AsciCode16 Mnemonic, AsciCode64 Instruction, AsciCode32 Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, AsciCode16 CpuId)
         {
             this.Seq = Seq;
             this.Id = Id;
@@ -77,7 +77,6 @@ namespace Z0.Asm.Data
             formatter.DelimitField(F.M64, M64);
             formatter.DelimitField(F.CpuId, CpuId);
             return formatter.ToString();
-
         }
     }
 }

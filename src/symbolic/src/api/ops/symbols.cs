@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<Symbol<AsciChar,byte>> symbols(in AsciCode16 src)
-            => cast<Symbol<AsciChar,byte>>(bytespan(SymBits.vinflate(src.Data)));
+            => cast<Symbol<AsciChar,byte>>(bytespan(SymBits.vinflate(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static void symbols(ReadOnlySpan<BinaryDigit> src, Span<BinarySymbol> dst)

@@ -5,9 +5,27 @@
 namespace Z0.Asm.Data
 {
     using System;
-
+    using static Control;
+    
     public class t_eflags : t_asmd<t_eflags>
     {
+        public void modrm_encode()
+        {
+            var encoder = PrefixEncoders.ModRm;
+            Span<ModRmEncoding> dst = new ModRmEncoding[1024];
+            var count = encoder.table(dst);
+            Claim.eq(256,count);
+            
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var encoding = ref skip(dst,i);
+                //Trace(encoding.Format());
+
+            }
+
+
+        }
+
         public void test_flag_bits()
         {
             var bits = BitField32.Alloc<EFlagBits>();

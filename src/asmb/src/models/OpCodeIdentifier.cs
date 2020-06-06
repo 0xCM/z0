@@ -8,28 +8,31 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
     /// <summary>
     /// Represents an opcode identifier
     /// </summary>
-    public readonly struct OpCodeIdentifier : IIdentification<OpCodeIdentifier>
+    public readonly struct OpCodeIdentifier
     {        
-        public static OpCodeIdentifier Empty => new OpCodeIdentifier(string.Empty);
+        public static OpCodeIdentifier Empty => new OpCodeIdentifier(AsciCode32.Null);
         
-        public string IdentityText {get;}
-        
-        string Denullified
-        {
-            [MethodImpl(Inline)]
-            get => IdentityText;
-        }
+        public AsciCode32 Encoded {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpCodeIdentifier src)
-            => src.Denullified;
+            => src.Format();
 
         [MethodImpl(Inline)]
         public static implicit operator OpCodeIdentifier(string src)
+            => new OpCodeIdentifier(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsciCode32(OpCodeIdentifier src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator OpCodeIdentifier(AsciCode32 src)
             => new OpCodeIdentifier(src);
 
         [MethodImpl(Inline)]
@@ -41,32 +44,48 @@ namespace Z0.Asm.Data
             => !d1.Equals(d2);
 
         [MethodImpl(Inline)]
+        public OpCodeIdentifier(AsciCode32 src)
+        {
+            Encoded = src;
+        }
+
+        [MethodImpl(Inline)]
         public OpCodeIdentifier(string src)
         {
-            IdentityText = src ?? string.Empty;
+            Encoded = AsciCodes.encode(n32,src ?? string.Empty);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(IdentityText);
+            get => Encoded.IsEmpty;
         }
 
-        /// <summary>
-        /// Formats the dimension in canonical form
-        /// </summary>
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.decode(Encoded);
+        }
+        
+        public ReadOnlySpan<byte> Data
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(Encoded);
+        }
+        
+        [MethodImpl(Inline)]
         public string Format()
-            => Denullified;
+            => AsciCodes.format(Encoded);
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeIdentifier src)
-            => string.Equals(IdentityText, src.IdentityText, NoCase);
+            => Encoded.Equals(src.Encoded);
         
         public override string ToString()
             => Format();
         
         public override int GetHashCode()
-            => Denullified.GetHashCode();
+            => Encoded.GetHashCode();
         
         public override bool Equals(object src)
             => src is OpCodeIdentifier id && Equals(id);

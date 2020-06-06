@@ -26,6 +26,10 @@ namespace Z0.Asm.Data
             => new CpuidExpression(src);
 
         [MethodImpl(Inline)]
+        public CpuidExpression(AsciCode16 src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
         public CpuidExpression(string src)
             => Data = Symbolic.encode(src, ASCI, n16);
 

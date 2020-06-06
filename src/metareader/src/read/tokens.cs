@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    partial class MetaRead
+    partial class MetadataRead
     {        
         internal static int HeapCount => MetadataTokens.HeapCount;
         
@@ -21,7 +21,7 @@ namespace Z0
         internal static int GetHeapOffset(StringHandle handle) 
             => MetadataTokens.GetHeapOffset(handle);
 
-        internal static int GetHeapOffset(in MetaReaderState state, Handle handle) 
+        internal static int GetHeapOffset(in ReaderState state, Handle handle) 
             => MetadataTokens.GetHeapOffset(state.Reader, handle);
 
         internal static UserStringHandle UserStringHandle(int offset) 
@@ -53,13 +53,13 @@ namespace Z0
         internal static EntityHandle EntityHandle(TableIndex tableIndex, int rowNumber) 
             => MetadataTokens.EntityHandle(tableIndex,rowNumber);
 
-        internal static int GetRowNumber(in MetaReaderState state, EntityHandle handle) 
+        internal static int GetRowNumber(in ReaderState state, EntityHandle handle) 
             => MetadataTokens.GetRowNumber(state.Reader,handle);
         
-        internal static int GetToken(in MetaReaderState state, Handle handle) 
+        internal static int GetToken(in ReaderState state, Handle handle) 
             => MetadataTokens.GetToken(state.Reader, handle);
         
-        internal static int GetToken(in MetaReaderState state, EntityHandle handle) 
+        internal static int GetToken(in ReaderState state, EntityHandle handle) 
             => MetadataTokens.GetToken(state.Reader, handle);
         
         internal static int GetToken(Handle handle) 

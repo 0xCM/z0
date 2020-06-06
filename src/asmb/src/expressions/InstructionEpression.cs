@@ -21,16 +21,15 @@ namespace Z0.Asm.Data
     /// 3 operands: {Mnemonic}{ }{op1}{,}{op2},{op3}
     /// Example: PCMPISTRI xmm1, xmm2/m128, imm8  
     /// <remarks>
-    public readonly struct InstructionExpression : ITextExpression<InstructionExpression>
+    public readonly struct InstructionExpression  : ISymbolic<InstructionExpression,AsciCode64>
     {
-        public string Data {get;}
+        public AsciCode64 Data {get;}
 
-        public static InstructionExpression Empty 
-            => new InstructionExpression(string.Empty);
+        public static InstructionExpression Empty  => new InstructionExpression(AsciCode64.Null);
 
         [MethodImpl(Inline)]
         public static implicit operator TextExpression(InstructionExpression src)
-            => new TextExpression(src.Data);
+            => new TextExpression(src.Data.Format());
 
         [MethodImpl(Inline)]
         public static implicit operator InstructionExpression(string src)
@@ -38,6 +37,10 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public InstructionExpression(string src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
+        public InstructionExpression(AsciCode64 src)
             => Data = src;
 
         /// <summary>
@@ -49,25 +52,25 @@ namespace Z0.Asm.Data
             get => Data.Length;
         }
 
-        public InstructionExpression Zero 
-            => Empty;
-        
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => text.empty(Data);
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => !text.empty(Data);
+            get => Data.IsNonEmpty;
         }
 
+        public InstructionExpression Zero 
+            => Empty;
+        
         [MethodImpl(Inline)]
         public bool Equals(InstructionExpression src)
-            => string.Equals(Data, src.Data, NoCase);
-        
+             => src.Data.Equals(Data);
+       
         public override bool Equals(object src)
             => src is InstructionExpression x && Equals(x);
         
@@ -75,7 +78,7 @@ namespace Z0.Asm.Data
             => Data.GetHashCode();
         
         public string Format()
-            => Data;
+            => Data.Format();
         
         public override string ToString()
             => Format();

@@ -15,26 +15,62 @@ namespace Z0
 
     public readonly struct AsciCode64 : IAsciSequence<AsciCode64,N>
     {
+        public static AsciCode64 Blank => AsciCodes.init(n);
+
         public static AsciCode64 Null => new AsciCode64(Vector512<byte>.Zero);
 
-        internal readonly Vector512<byte> Data;        
+        public const int Size = 64;
+
+        static N n => default;
+
+        internal readonly Vector512<byte> Storage;        
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsciCode64(string src)
+            => new AsciCode64(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(AsciCode64 src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(AsciCode64 src)
+            => src.Decoded;
 
         [MethodImpl(Inline)]
         public AsciCode64(Vector512<byte> src)
         {
-            Data = src;
+            Storage = src;
+        }
+
+        [MethodImpl(Inline)]
+        public AsciCode64(string src)
+        {
+            Storage = AsciCodes.encode(n,src).Storage;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.Equals(default);
+            get => Storage.Equals(default);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !Data.Equals(default);
+            get => !Storage.Equals(default);
+        }
+
+        public int MaxLength
+        {
+            [MethodImpl(Inline)]
+            get => Size;
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.length(this);
         }
 
         public AsciCode64 Zero
@@ -43,15 +79,43 @@ namespace Z0
             get => default;
         }
 
+        public AsciCode32 Lo
+        {
+            [MethodImpl(Inline)]
+            get => new AsciCode32(Storage.Lo);
+        }
+
+        public AsciCode32 Hi
+        {
+            [MethodImpl(Inline)]
+            get => new AsciCode32(Storage.Hi);
+        }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(this);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.decode(this);
+        }
+
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => AsciCodes.format(this);
+
         [MethodImpl(Inline)]
         public bool Equals(AsciCode64 src)
-            => Data.Equals(src.Data);
+            => Storage.Equals(src.Storage);
  
          public override int GetHashCode()
-            => Data.GetHashCode();
+            => Storage.GetHashCode();
 
         public override bool Equals(object src)
             => src is AsciCode64 j && Equals(j);
     }
-
 }

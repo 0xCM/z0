@@ -6,23 +6,20 @@ namespace Z0
 {
     using System;
     
-    using MT = MetadataRecords;
+    using static MetadataRecords;
 
     public interface IMetadataReader : IServiceAllocation
-    {
-        ReadOnlySpan<R> Read<R>(R r = default)
-            where R : unmanaged, IMetaRecordKind;        
-        
-        ReadOnlySpan<MT.StringValue> ReadStrings();
+    {        
+        ReadOnlySpan<StringValueRecord> ReadStrings();
 
-        ReadOnlySpan<MT.StringValue> ReadUserStrings();
+        ReadOnlySpan<StringValueRecord> ReadUserStrings();
 
-        ReadOnlySpan<MT.BlobValue> ReadBlobs();
+        ReadOnlySpan<BlobRecord> ReadBlobs();
 
-        ReadOnlySpan<MT.ConstantValue> ReadConstants();
+        ReadOnlySpan<ConstantRecord> ReadConstants();
 
-        ReadOnlySpan<MT.MemberField> ReadFields();
+        ReadOnlySpan<FieldRecord> ReadFields();
 
-        ReadOnlySpan<MT.ManifestResource> ReadManifestResources();
+        ReadOnlySpan<ResourceRecord> ReadManifestResources();
     }
 }

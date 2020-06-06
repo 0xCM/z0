@@ -20,7 +20,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in AsciCode16 src, ref byte dst)
-            => Store(ptr(ref dst), src.Data);            
+            => Store(ptr(ref dst), src.Storage);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in AsciCode16 src, Span<byte> dst)

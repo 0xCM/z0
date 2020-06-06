@@ -14,35 +14,37 @@ namespace Z0
     using static MetadataRecords;
     using static Control;
     
-    partial class MetaRead
+    partial class MetadataRead
     {        
-        internal static string Literal(in MetaReaderState state, NamespaceDefinitionHandle handle)
-            => Literal(state, handle, (r, h) => "'" + r.GetString((NamespaceDefinitionHandle)h) + "'");
+        internal static string Literal(in ReaderState state, NamespaceDefinitionHandle handle, int seq)
+            => Literal(state, handle, seq, (r, h) => "'" + r.GetString((NamespaceDefinitionHandle)h) + "'");
 
-        internal static string Literal(in MetaReaderState state, GuidHandle handle)
-            => Literal(state, handle, (r, h) => "{" + r.GetGuid((GuidHandle)h) + "}");
+        internal static string Literal(in ReaderState state, GuidHandle handle, int seq)
+            => Literal(state, handle,seq, (r, h) => "{" + r.GetGuid((GuidHandle)h) + "}");
 
-        internal static string Literal(in MetaReaderState state, StringHandle handle)
-            => Literal(state, handle, (r, h) => "'" + r.GetString((StringHandle)h) + "'");
+        internal static string Literal(in ReaderState state, StringHandle handle, int seq)
+            => Literal(state, handle,seq, (r, h) => "'" + r.GetString((StringHandle)h) + "'");
 
-        internal static string Literal(in MetaReaderState state, BlobHandle handle)
-            => Literal(state, handle, (r, h) => BitConverter.ToString(r.GetBlobBytes((BlobHandle)h)));
+        internal static string Literal(in ReaderState state, BlobHandle handle, int seq)
+            => Literal(state, handle, seq, (r, h) => BitConverter.ToString(r.GetBlobBytes((BlobHandle)h)));
         
-        internal static LiteralValue LiteralValue(in MetaReaderState state, StringHandle handle)
+        internal static LiteralRecord LiteralValue(in ReaderState state, StringHandle handle, int seq)
         {
             var value = state.Reader.GetString(handle);
             var offset = state.Reader.GetHeapOffset(handle);
-            return new LiteralValue(offset, value);                    
+            var size = state.Reader.GetHeapSize(HeapIndex.String);
+            return new LiteralRecord(seq, size, offset, value);                    
         }
 
-        internal static BlobValue LiteralValue(in MetaReaderState state, BlobHandle handle)
+        internal static BlobRecord LiteralValue(in ReaderState state, BlobHandle handle, int seq)
         {
-            var offset = state.Reader.GetHeapOffset(handle);
+            var offset = state.Reader.GetHeapOffset(handle);            
             var value = state.Reader.GetBlobBytes(handle) ?? Control.array<byte>();
-            return new BlobValue(0,offset,value);                    
+            var size = state.Reader.GetHeapSize(HeapIndex.Blob);
+            return new BlobRecord(seq, size,offset,value);                    
         }
 
-        internal static string Literal(in MetaReaderState state, Handle handle, Func<MetadataReader, Handle, string> getValue)
+        internal static string Literal(in ReaderState state, Handle handle, int seq, Func<MetadataReader, Handle, string> getValue)
         {
             if (handle.IsNil)
                 return "null";
@@ -60,7 +62,7 @@ namespace Z0
             return $"{offsetFmt} | {value}";            
         }
 
-        internal static string Literal(in MetaReaderState state, Handle handle, MetadataAggregator aggregator, Func<MetadataReader, Handle, string> getValue)
+        internal static string Literal(in ReaderState state, Handle handle, MetadataAggregator aggregator, Func<MetadataReader, Handle, string> getValue)
         {        
             int generation;
             Handle generationHandle = aggregator.GetGenerationHandle(handle, out generation);

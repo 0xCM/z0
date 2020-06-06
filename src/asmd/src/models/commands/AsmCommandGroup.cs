@@ -8,7 +8,6 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Memories;
 
     public readonly struct AsmCommandGroup : ITextual
     {
@@ -30,5 +29,4 @@ namespace Z0.Asm.Data
         public string Format()
             => Name.Format();
     }
-
 }

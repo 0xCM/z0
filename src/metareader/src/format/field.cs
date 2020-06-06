@@ -10,12 +10,12 @@ namespace Z0
     using static Seed;
     
     using static MetadataRecords;
-    using static MetadataRecords.MemberFieldField;
+    using static MetadataRecords.FieldRecordField;
     
-    partial class MetaFormat
+    partial class MetadataFormat
     {       
         [Op]
-        public static string format(in MemberField src)
+        public static string format(in FieldRecord src, char delimiter)
         {            
             var widths = FieldWidths(src.Kind);
             var count = FieldCount(src.Kind);
@@ -27,7 +27,7 @@ namespace Z0
             seek(dst, Signature) = Render(src.Signature, width(widths, Signature));
             seek(dst, Attributes) = Render(src.Attributes, width(widths, Attributes));
             seek(dst, Marshalling) = Render(src.Marshalling, width(widths, Marshalling));
-            return Delimit(dst);
+            return Delimit(dst,delimiter);
         }        
     }
 }

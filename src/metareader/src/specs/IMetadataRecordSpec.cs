@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    public interface IMetaRecordKind : ITextual
+    public interface IMetadataRecordSpec : ITextual
     {
-        MetaRecordKind RecordType {get;}   
+        MetadataRecordKind RecordType {get;}   
 
         byte FieldCount => 0;
 
@@ -23,26 +23,9 @@ namespace Z0
         string ITextual.Format() => RecordType.ToString();
     }
 
-    public interface IMetaRecordKind<R> : IMetaRecordKind
-        where R : unmanaged, IMetaRecordKind<R>
+    public interface IMetadataRecordSpec<R> : IMetadataRecordSpec
+        where R : unmanaged, IMetadataRecordSpec<R>
     {
         
-    }
-    
-    public enum MetaRecordKind : byte
-    {
-        None = 0,
-
-        String = 1,
-
-        Blob = 2,
-
-        Constant = 3,
-
-        Field = 4,
-
-        ManifestResource = 5,
-
-        Literal = 6
     }
 }

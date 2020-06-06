@@ -20,6 +20,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<byte> bytes<T>(Span<T> src)
             where T : struct
-                => MemoryMarshal.AsBytes(src);             
+                => MemoryMarshal.AsBytes(src);        
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Span<byte> bytes<T>(in T src)
+            where T : struct
+                => MemoryMarshal.AsBytes(MemoryMarshal.CreateSpan(ref edit(src), 1));
     }
 }

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Control;
 
     partial class Symbolic    
     {        
@@ -34,38 +33,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(in AsciCode32 src)
-            => AsciCodes.format(src);        
+            => AsciCodes.format(src);
 
-        [Op]
-        public static string format(ReadOnlySpan<BinaryDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length];
-            render(src,dst);
-            return new string(dst);
-        }
-
-        [Op]
-        public static string format(ReadOnlySpan<DecimalDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length]; 
-            render(src,dst);
-            return new string(dst);
-        }
-
-        [Op]
-        public static string format(ReadOnlySpan<HexDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length];
-            render(src,dst);
-            return new string(dst);
-        }
-
-        [Op]
-        public static string format(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
-        {
-            Span<char> digits = stackalloc char[src.Length*3];
-            render(@base, @case, src,digits);
-            return digits.ToString();
-        }       
+        [MethodImpl(Inline), Op]
+        public static string format(in AsciCode64 src)
+            => AsciCodes.format(src);
     }
 }

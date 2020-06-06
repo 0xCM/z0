@@ -30,6 +30,10 @@ namespace Z0.Asm.Data
             => Data = Symbolic.encode(src, ASCI, n32);
 
         [MethodImpl(Inline)]
+        public OpCodeExpression(AsciCode32 src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
         public OpCodeExpression(char[] src)
             => Data = Symbolic.encode(src, ASCI, n32);
 

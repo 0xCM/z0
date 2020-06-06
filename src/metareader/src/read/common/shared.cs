@@ -14,7 +14,7 @@ namespace Z0
     using static MetadataRecords;
     using static Control;
     
-    partial class MetaRead
+    partial class MetadataRead
     {        
         [MethodImpl(Inline)]
         internal static Span<T> alloc<T>(int count)
@@ -37,7 +37,7 @@ namespace Z0
                 return null;
         }
 
-        internal static string Token(in MetaReaderState state, Handle handle, bool displayTable = true)
+        internal static string Token(in ReaderState state, Handle handle, bool displayTable = true)
         {
             if (handle.IsNil)
                 return "null";
