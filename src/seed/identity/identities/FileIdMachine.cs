@@ -14,7 +14,11 @@ namespace Z0
     /// </summary>
     readonly struct FileIdMachine : ILegalIdentityMachine
     {
-        public static ILegalIdentityMachine Service => default(FileIdMachine);
+        public static FileIdMachine Service => default(FileIdMachine);
+
+        [MethodImpl(Inline)]
+        public string Manufacture(OpIdentity src)
+            => LegalIdentityMachine.Service(this).Manufacture(src);
 
         public char TypeArgsOpen => Chars.LBracket;
 

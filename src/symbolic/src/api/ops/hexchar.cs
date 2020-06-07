@@ -16,7 +16,6 @@ namespace Z0
         public static char hexchar(UpperCased @case, byte index)
             => (char)symbol(@case, (HexDigit)index);
 
-
         [MethodImpl(Inline), Op]
         public static char hexchar(LowerCased @case, byte index)
             => (char)symbol(@case, (HexDigit)index);

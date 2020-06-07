@@ -21,15 +21,15 @@ namespace Z0.Asm.Data
     /// 3 operands: {Mnemonic}{ }{op1}{,}{op2},{op3}
     /// Example: PCMPISTRI xmm1, xmm2/m128, imm8  
     /// <remarks>
-    public readonly struct InstructionExpression  : ISymbolic<InstructionExpression,AsciCode64>
+    public readonly struct InstructionExpression  : ISymbolic<InstructionExpression,asci64>
     {
-        public AsciCode64 Data {get;}
+        public asci64 Body {get;}
 
-        public static InstructionExpression Empty  => new InstructionExpression(AsciCode64.Null);
+        public static InstructionExpression Empty => new InstructionExpression(asci64.Null);
 
         [MethodImpl(Inline)]
         public static implicit operator TextExpression(InstructionExpression src)
-            => new TextExpression(src.Data.Format());
+            => new TextExpression(src.Body.Format());
 
         [MethodImpl(Inline)]
         public static implicit operator InstructionExpression(string src)
@@ -37,11 +37,11 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public InstructionExpression(string src)
-            => Data = src;
+            => Body = src;
 
         [MethodImpl(Inline)]
-        public InstructionExpression(AsciCode64 src)
-            => Data = src;
+        public InstructionExpression(asci64 src)
+            => Body = src;
 
         /// <summary>
         /// The expression length
@@ -49,19 +49,31 @@ namespace Z0.Asm.Data
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Body.Length;
         }
 
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => Data.IsEmpty;
+            get => Body.IsEmpty;
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
+            get => Body.IsNonEmpty;
+        }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(Body);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.decode(Body);
         }
 
         public InstructionExpression Zero 
@@ -69,16 +81,16 @@ namespace Z0.Asm.Data
         
         [MethodImpl(Inline)]
         public bool Equals(InstructionExpression src)
-             => src.Data.Equals(Data);
+             => src.Body.Equals(Body);
        
         public override bool Equals(object src)
             => src is InstructionExpression x && Equals(x);
         
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Body.GetHashCode();
         
         public string Format()
-            => Data.Format();
+            => Body.Format();
         
         public override string ToString()
             => Format();

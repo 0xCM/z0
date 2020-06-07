@@ -15,7 +15,7 @@ namespace Z0
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in AsciCode2 src)
+        public static ReadOnlySpan<char> decode(in asci2 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n2));
             decode(src,dst);
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in AsciCode4 src)
+        public static ReadOnlySpan<char> decode(in asci4 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n4));
             decode(src,dst);
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in AsciCode8 src)
+        public static ReadOnlySpan<char> decode(in asci8 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n8));
             decode(src,dst);
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in AsciCode16 src)
+        public static ReadOnlySpan<char> decode(in asci16 src)
         {
             var data = SymBits.vinflate(src.Storage);
             var bytes = bytespan(data);
@@ -104,7 +104,7 @@ namespace Z0
             => vinflate(Vector256.GetUpper(src));
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in AsciCode32 src)
+        public static ReadOnlySpan<char> decode(in asci32 src)
         {            
             var lo = vinflate(src.Storage, n0);
             var hi = vinflate(src.Storage, n1);
@@ -115,7 +115,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in AsciCode64 src)
+        public static ReadOnlySpan<char> decode(in asci64 src)
         {            
             var x = src.Storage;
             var x0 = vinflate(x.Lo,n0);

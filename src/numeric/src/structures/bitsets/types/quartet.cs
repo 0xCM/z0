@@ -12,6 +12,7 @@ namespace Z0
 
     using analog = quartet;
     using BK = Quartet;
+    using N = N4;
 
     /// <summary>
     /// Represents the value of a type-level quartet and thus is an integer in the range [0,15]
@@ -23,6 +24,10 @@ namespace Z0
         public static analog MinValue => MinVal;
 
         public static analog MaxValue => MaxVal;
+
+        public static N N => default;
+
+        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
 
         public static analog Zero => 0;
 

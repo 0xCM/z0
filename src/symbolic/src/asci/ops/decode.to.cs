@@ -14,7 +14,7 @@ namespace Z0
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static int decode(in AsciCode2 src, Span<char> dst)
+        public static int decode(in asci2 src, Span<char> dst)
         {
             var data = cover(src);
             seek(dst,0) = skip(data,0);
@@ -23,7 +23,7 @@ namespace Z0
         } 
 
         [MethodImpl(Inline), Op]
-        public static int decode(in AsciCode4 src, Span<char> dst)
+        public static int decode(in asci4 src, Span<char> dst)
         {
             var data = cover(src);
             seek(dst,0) = skip(data,0);
@@ -34,7 +34,7 @@ namespace Z0
         } 
 
         [MethodImpl(Inline), Op]
-        public static int decode(in AsciCode5 src, Span<char> dst)
+        public static int decode(in asci5 src, Span<char> dst)
         {
             var data = cover(src);
             seek(dst,0) = skip(data,0);
@@ -46,7 +46,7 @@ namespace Z0
         } 
 
         [MethodImpl(Inline), Op]
-        public static int decode(in AsciCode8 src, Span<char> dst)
+        public static int decode(in asci8 src, Span<char> dst)
         {
             var data = cover(src);
             seek(dst,0) = skip(data,0);
@@ -61,7 +61,7 @@ namespace Z0
         } 
 
         [MethodImpl(Inline), Op]
-        public static int decode(in AsciCode16 src, Span<char> dst)
+        public static int decode(in asci16 src, Span<char> dst)
         {
             var data = SymBits.vinflate(src.Storage);
             var bytes = bytespan(data);

@@ -14,7 +14,7 @@ namespace Z0
 
     public readonly struct BitFieldModel
     {                
-        readonly AsciCode16 FieldName;
+        readonly asci16 FieldName;
         
         public readonly byte FieldCount;
 
@@ -22,12 +22,12 @@ namespace Z0
 
         readonly ArraySpan<byte> Widths;
 
-        readonly ArraySpan<AsciCode16> Names;
+        readonly ArraySpan<asci16> Names;
 
         readonly ArraySpan<byte> Positions;
 
         [MethodImpl(Inline)]
-        internal BitFieldModel(AsciCode16 name, byte count, byte width, ArraySpan<AsciCode16> names,  ArraySpan<byte> widths, ArraySpan<byte> positions)
+        internal BitFieldModel(asci16 name, byte count, byte width, ArraySpan<asci16> names,  ArraySpan<byte> widths, ArraySpan<byte> positions)
         {
             FieldName = name;
             FieldCount = count;

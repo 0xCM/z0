@@ -8,25 +8,43 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Memories;
 
-    public readonly struct AsmCommandGroup : ITextual
+    public readonly struct AsmCommandGroup : ISymbolic<AsmCommandGroup,asci16>
     {
-        public readonly AsciCode16 Name;
+        public static AsmCommandGroup Empty => new AsmCommandGroup(asci16.Null);
+        
+        public asci16 Body {get;}
 
         [MethodImpl(Inline)]
         public AsmCommandGroup(string name)
         {
-            Symbolic.encode(name, out Name);
+            Body = Symbolic.encode(name, ASCI, n16);
         }
 
         [MethodImpl(Inline)]
-        public AsmCommandGroup(AsciCode16 name)
+        public AsmCommandGroup(asci16 name)
         {
-            Name = name;
+            Body = name;
         }
+    
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Body.IsEmpty;
+        }
+        
+        public AsmCommandGroup Zero
+        {
+            [MethodImpl(Inline)]
+            get => Empty;
+        }
+        
+        public bool Equals(AsmCommandGroup src)
+            => Body.Equals(src.Body);
         
         [MethodImpl(Inline)]
         public string Format()
-            => Name.Format();
+            => Body.Format();
     }
 }

@@ -12,27 +12,27 @@ namespace Z0
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]
-        public static int first(in AsciCode4 src, byte match)
+        public static int first(in asci4 src, byte match)
             => first(bytes(src), match);
 
         [MethodImpl(Inline), Op]
-        public static int first(in AsciCode5 src, byte match)
+        public static int first(in asci5 src, byte match)
             => first(bytes(src), match);
 
         [MethodImpl(Inline), Op]
-        public static int first(in AsciCode8 src, byte match)
+        public static int first(in asci8 src, byte match)
             => first(bytes(src), match);
 
         [MethodImpl(Inline), Op]
-        public static int first(in AsciCode16 src, byte match)
+        public static int first(in asci16 src, byte match)
             => first(bytes(src), match);
 
         [MethodImpl(Inline), Op]
-        public static int first(in AsciCode32 src, byte match)
+        public static int first(in asci32 src, byte match)
             => first(bytes(src), match);
 
         [MethodImpl(Inline), Op]
-        public static int first(in AsciCode64 src, byte match)
+        public static int first(in asci64 src, byte match)
             => first(bytes(src), match); 
     }
 }

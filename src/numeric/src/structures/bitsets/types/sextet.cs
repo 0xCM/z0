@@ -12,6 +12,7 @@ namespace Z0
 
     using analog = sextet;
     using BK = Sextet;
+    using N = N6;
 
     /// <summary>
     /// Represents the value of a type-level sextet and thus is an integer in the range [0,31]
@@ -31,6 +32,10 @@ namespace Z0
         public static analog MinValue => MinVal;
 
         public static analog MaxValue => MaxVal;
+
+        public static N N => default;
+
+        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
 
         public static analog Zero => 0;
 

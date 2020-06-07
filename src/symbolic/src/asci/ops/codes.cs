@@ -13,7 +13,7 @@ namespace Z0
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCharCode> codes(in AsciCode16 src)
+        public static ReadOnlySpan<AsciCharCode> codes(in asci16 src)
             => cast<AsciCharCode>(bytespan(src)); 
     }
 }

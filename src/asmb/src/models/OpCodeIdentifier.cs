@@ -15,9 +15,9 @@ namespace Z0.Asm.Data
     /// </summary>
     public readonly struct OpCodeIdentifier
     {        
-        public static OpCodeIdentifier Empty => new OpCodeIdentifier(AsciCode32.Null);
+        public static OpCodeIdentifier Empty => new OpCodeIdentifier(asci32.Null);
         
-        public AsciCode32 Encoded {get;}
+        public asci32 Body {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpCodeIdentifier src)
@@ -28,11 +28,11 @@ namespace Z0.Asm.Data
             => new OpCodeIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsciCode32(OpCodeIdentifier src)
-            => src.Encoded;
+        public static implicit operator asci32(OpCodeIdentifier src)
+            => src.Body;
 
         [MethodImpl(Inline)]
-        public static implicit operator OpCodeIdentifier(AsciCode32 src)
+        public static implicit operator OpCodeIdentifier(asci32 src)
             => new OpCodeIdentifier(src);
 
         [MethodImpl(Inline)]
@@ -44,48 +44,52 @@ namespace Z0.Asm.Data
             => !d1.Equals(d2);
 
         [MethodImpl(Inline)]
-        public OpCodeIdentifier(AsciCode32 src)
+        public OpCodeIdentifier(asci32 src)
         {
-            Encoded = src;
+            Body = src;
         }
 
         [MethodImpl(Inline)]
         public OpCodeIdentifier(string src)
         {
-            Encoded = AsciCodes.encode(n32,src ?? string.Empty);
+            Body = AsciCodes.encode(n32,src ?? string.Empty);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Encoded.IsEmpty;
+            get => Body.IsEmpty;
+        }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(Body);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(Encoded);
+            get => AsciCodes.decode(Body);
         }
-        
-        public ReadOnlySpan<byte> Data
-        {
-            [MethodImpl(Inline)]
-            get => Symbolic.bytes(Encoded);
-        }
+
+        public OpCodeIdentifier Zero 
+            => Empty;
+
         
         [MethodImpl(Inline)]
         public string Format()
-            => AsciCodes.format(Encoded);
+            => AsciCodes.format(Body);
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeIdentifier src)
-            => Encoded.Equals(src.Encoded);
+            => Body.Equals(src.Body);
         
         public override string ToString()
             => Format();
         
         public override int GetHashCode()
-            => Encoded.GetHashCode();
+            => Body.GetHashCode();
         
         public override bool Equals(object src)
             => src is OpCodeIdentifier id && Equals(id);

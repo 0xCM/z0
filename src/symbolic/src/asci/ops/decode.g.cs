@@ -25,34 +25,5 @@ namespace Z0
             for(var i=0; i<count; i++)            
                 seek(dst,i) = @char(skip(src,i));
         }
-
-        [MethodImpl(Inline)]
-        public static void decode(ReadOnlySpan<ushort> src, Span<char> dst)
-        {
-            for(var i=0; i<src.Length; i++)            
-            {
-                
-            }
-            
-        }
-
-        public static void decode(ReadOnlySpan<uint> src, Span<char> dst)
-        {
-            for(var i=0; i<src.Length; i++)            
-            {
-                
-            }
-            
-        }
-
-        public static void decode(ReadOnlySpan<ulong> src, Span<char> dst)
-        {
-            for(var i=0; i<src.Length; i++)            
-            {
-                
-            }
-            
-        }
-
     }
 }

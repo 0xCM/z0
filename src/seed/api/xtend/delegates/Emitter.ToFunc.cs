@@ -13,12 +13,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static System.Func<T> ToFunc<T>(this Emitter<T> f)
-            => new System.Func<T>(f);
+            => Extend.func(f);
 
         [MethodImpl(Inline)]
         public static System.Func<T> ToFunc<T,C>(this Emitter<T,C> f)
             where T : unmanaged
             where C : unmanaged
-                => new System.Func<T>(f);
+                => Extend.func(f);
     }
 }

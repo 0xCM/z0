@@ -12,31 +12,31 @@ namespace Z0
     partial class Symbolic    
     {        
         [MethodImpl(Inline), Op]
-        public static string format(in AsciCode2 src)
+        public static string format(in asci2 src)
             => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
-        public static string format(in AsciCode4 src)
+        public static string format(in asci4 src)
             => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
-        public static string format(in AsciCode5 src)
+        public static string format(in asci5 src)
             => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
-        public static string format(in AsciCode8 src)
+        public static string format(in asci8 src)
             => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
-        public static string format(in AsciCode16 src)
+        public static string format(in asci16 src)
             => AsciCodes.format(src);        
 
         [MethodImpl(Inline), Op]
-        public static string format(in AsciCode32 src)
+        public static string format(in asci32 src)
             => AsciCodes.format(src);
 
         [MethodImpl(Inline), Op]
-        public static string format(in AsciCode64 src)
+        public static string format(in asci64 src)
             => AsciCodes.format(src);
     }
 }

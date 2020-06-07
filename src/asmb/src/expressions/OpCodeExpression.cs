@@ -10,60 +10,66 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
     
-    public readonly struct OpCodeExpression : ISymbolic<OpCodeExpression,AsciCode32>
+    public readonly struct OpCodeExpression : ISymbolic<OpCodeExpression,asci32>
     {
-        public AsciCode32 Data {get;}
+        public asci32 Body {get;}
 
-        public static OpCodeExpression Empty 
-            => new OpCodeExpression(new char[0]{});
+        public static OpCodeExpression Empty => new OpCodeExpression(asci32.Null);
 
         [MethodImpl(Inline)]
         public static implicit operator OpCodeExpression(string src)
             => new OpCodeExpression(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator OpCodeExpression(char[] src)
-            => new OpCodeExpression(src);
-
-        [MethodImpl(Inline)]
         public OpCodeExpression(string src)
-            => Data = Symbolic.encode(src, ASCI, n32);
+            => Body = Symbolic.encode(src, ASCI, n32);
 
         [MethodImpl(Inline)]
-        public OpCodeExpression(AsciCode32 src)
-            => Data = src;
+        public OpCodeExpression(asci32 src)
+            => Body = src;
 
         [MethodImpl(Inline)]
         public OpCodeExpression(char[] src)
-            => Data = Symbolic.encode(src, ASCI, n32);
+            => Body = Symbolic.encode(src, ASCI, n32);
 
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(Body);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.decode(Body);
+        }
+        
         public OpCodeExpression Zero 
             => Empty;
-
 
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => Data.IsEmpty;
+            get => Body.IsEmpty;
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
+            get => Body.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeExpression src)
-            => src.Data.Equals(Data);
+            => src.Body.Equals(Body);
         
         public override bool Equals(object src)
             => src is OpCodeExpression x && Equals(x);
         
         public override int GetHashCode()
-            => Data.GetHashCode();        
+            => Body.GetHashCode();        
         public string Format()
-            => Data.Format();
+            => Body.Format();
         
         public override string ToString()
             => Format();

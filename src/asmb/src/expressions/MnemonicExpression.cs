@@ -10,32 +10,27 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
     
-    public readonly struct MnemonicExpression : ISymbolic<MnemonicExpression,AsciCode16>
+    public readonly struct MnemonicExpression : ISymbolic<MnemonicExpression,asci16>
     {
-        public AsciCode16 Data {get;}
+        public asci16 Body {get;}
 
-        public static MnemonicExpression Empty 
-            => new MnemonicExpression(new char[0]{});
+        public static MnemonicExpression Empty => new MnemonicExpression(asci16.Null);
 
         [MethodImpl(Inline)]
         public static implicit operator MnemonicExpression(string src)
             => new MnemonicExpression(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MnemonicExpression(char[] src)
-            => new MnemonicExpression(src);
-
-        [MethodImpl(Inline)]
-        public MnemonicExpression(AsciCode16 src)
-            => Data = src;
+        public MnemonicExpression(asci16 src)
+            => Body = src;
 
         [MethodImpl(Inline)]
         public MnemonicExpression(string src)
-            => Data = Symbolic.encode(src, ASCI, n16);
+            => Body = Symbolic.encode(src, ASCI, n16);
 
         [MethodImpl(Inline)]
         public MnemonicExpression(char[] src)
-            => Data = Symbolic.encode(src, ASCI, n16);
+            => Body = Symbolic.encode(src, ASCI, n16);
 
         public MnemonicExpression Zero 
             => Empty;
@@ -46,32 +41,44 @@ namespace Z0.Asm.Data
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Body.Length;
         }
 
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => Data.IsEmpty;
+            get => Body.IsEmpty;
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
+            get => Body.IsNonEmpty;
+        }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(Body);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.decode(Body);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(MnemonicExpression src)
-            => src.Data.Equals(Data);
+            => src.Body.Equals(Body);
         
         public override bool Equals(object src)
             => src is MnemonicExpression x && Equals(x);
         
         public override int GetHashCode()
-            => Data.GetHashCode();        
+            => Body.GetHashCode();        
         public string Format()
-            => Data.Format();
+            => Body.Format();
         
         public override string ToString()
             => Format();

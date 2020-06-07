@@ -12,6 +12,7 @@ namespace Z0
 
     using analog = triad;
     using BK = Triad;
+    using N = N3;
 
     /// <summary>
     /// Represents the value of a type-level triad and thus has domain {000,001,010,011,100,101,110,111}
@@ -27,6 +28,10 @@ namespace Z0
         public static analog Zero => 0;
 
         public static analog One => 1;
+
+        public static N N => default;
+
+        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
 
         internal const byte MinVal = 0;
 

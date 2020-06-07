@@ -35,7 +35,7 @@ namespace Z0
                 var seglen = r >= W ? W : r;
                 var segSrc = src.Slice(j, seglen);            
                 var segDst = dst.Slice(j, seglen);
-                encode(segSrc, out AsciCode16 encoded).CopyTo(segDst);
+                encode(segSrc, out asci16 encoded).CopyTo(segDst);
                 
                 j += seglen;
                 r -= seglen;

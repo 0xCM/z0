@@ -28,9 +28,9 @@ namespace Z0
         public static ref readonly AsciCodeCover define(in byte src)
             => ref view<byte,AsciCodeCover>(src);
 
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(AsciCodeCover src)
-            => Symbolic.symbol<AsciChar,byte>(src);
+        // [MethodImpl(Inline), Op]
+        // public static Symbol<AsciChar,byte> symbol(AsciCodeCover src)
+        //     => Symbolic.symbol<AsciChar,byte>(src);
 
         [MethodImpl(Inline), Op]
         public static string format(AsciCodeCover src)

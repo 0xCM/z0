@@ -14,7 +14,7 @@ namespace Z0
         public static TextExpression Empty 
             => new TextExpression(string.Empty);
 
-        public string Data {get;}
+        public string Body {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator TextExpression(string src)
@@ -22,12 +22,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TextExpression(string src)
-            => Data = src;
+            => Body = src;
 
         public ReadOnlySpan<char> Symbols
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Body;
         }
 
         public TextExpression Zero 
@@ -36,27 +36,27 @@ namespace Z0
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => text.empty(Data);
+            get => text.empty(Body);
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => !text.empty(Data);
+            get => !text.empty(Body);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(TextExpression src)
-            => string.Equals(Data, src.Data, NoCase);
+            => string.Equals(Body, src.Body, NoCase);
         
         public override bool Equals(object src)
             => src is TextExpression x && Equals(x);
         
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Body.GetHashCode();
         
         public string Format()
-            => Data;
+            => Body;
         
         public override string ToString()
             => Format();

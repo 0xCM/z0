@@ -11,17 +11,17 @@ namespace Z0
     using static Seed;
 
     partial class Symbolic     
-    {
+    {         
         [MethodImpl(Inline), Op]
-        public static int decode(in AsciCode4 src, Span<char> dst)
+        public static int decode(in asci4 src, Span<char> dst)
             => AsciCodes.decode(src,dst);
 
         [MethodImpl(Inline), Op]
-        public static int decode(in AsciCode8 src, Span<char> dst)
+        public static int decode(in asci8 src, Span<char> dst)
             => AsciCodes.decode(src,dst);
 
         [MethodImpl(Inline), Op]
-        public static int decode(in AsciCode16 src, Span<char> dst)
+        public static int decode(in asci16 src, Span<char> dst)
             => AsciCodes.decode(src,dst);
     }
 }

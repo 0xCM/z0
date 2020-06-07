@@ -6,17 +6,17 @@ namespace Z0
 {
     using System;
 
-    public interface IExpressional
+    public interface IExpressional : INullaryKnown, ITextual
     {
 
     }
     
     public interface IExpressional<T> : IExpressional
     {
-        T Data {get;}       
+        T Body {get;}       
     }
 
-    public interface IExpressional<F,T> :  IExpressional<T>, ITextual, INullary<F>, INullaryKnown, IEquatable<F>
+    public interface IExpressional<F,T> :  IExpressional<T>, INullary<F>, IEquatable<F>
         where F : struct, IExpressional<F,T>
     {
 

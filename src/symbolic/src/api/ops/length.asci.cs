@@ -12,27 +12,27 @@ namespace Z0
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]
-        public static int length(in AsciCode4 src)
+        public static int length(in asci4 src)
             => IndexLength(first(src, AsciNull), src.MaxLength);
 
         [MethodImpl(Inline), Op]
-        public static int length(in AsciCode5 src)
+        public static int length(in asci5 src)
             => IndexLength(first(src, AsciNull), src.MaxLength);
 
         [MethodImpl(Inline), Op]
-        public static int length(in AsciCode8 src)
+        public static int length(in asci8 src)
             => IndexLength(first(src, AsciNull), src.MaxLength);
 
         [MethodImpl(Inline), Op]
-        public static int length(in AsciCode16 src)
+        public static int length(in asci16 src)
             => IndexLength(first(src, AsciNull), src.MaxLength);
 
         [MethodImpl(Inline), Op]
-        public static int length(in AsciCode32 src)
+        public static int length(in asci32 src)
             => IndexLength(first(src, AsciNull), src.MaxLength);
 
         [MethodImpl(Inline), Op]
-        public static int length(in AsciCode64 src)
+        public static int length(in asci64 src)
             => IndexLength(first(src, AsciNull), src.MaxLength);        
     
         internal const byte AsciNull = (byte)AsciCharCode.Null;

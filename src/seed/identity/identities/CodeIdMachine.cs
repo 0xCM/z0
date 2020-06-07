@@ -14,8 +14,13 @@ namespace Z0
     /// </summary>
     readonly struct CodeIdMachine : ILegalIdentityMachine
     {
-        public static ILegalIdentityMachine Service => default(CodeIdMachine);
-
+        public static CodeIdMachine Service 
+            => default(CodeIdMachine);
+                
+        [MethodImpl(Inline)]
+        public string Manufacture(OpIdentity src)
+            => LegalIdentityMachine.Service(this).Manufacture(src);
+        
         public char TypeArgsOpen => SymNot.Lt;
 
         public char TypeArgsClose => SymNot.Gt;
@@ -26,5 +31,4 @@ namespace Z0
 
         public char ArgSep => SymNot.Dot;
     }
-
 }

@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static BinaryOp<T> ToBinaryOp<T>(this System.Func<T,T,T> f)
-            => new BinaryOp<T>(f);
+            => Extend.@operator(f);
     }
 }

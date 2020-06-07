@@ -14,23 +14,23 @@ namespace Z0
     partial class Symbolic     
     {
         [MethodImpl(Inline), Op]
-        public static AsciCode4 encode(ReadOnlySpan<char> src, ASCI asci, N4 n)        
+        public static asci4 encode(ReadOnlySpan<char> src, ASCI asci, N4 n)        
             => AsciCodes.encode(n,src);            
 
         [MethodImpl(Inline), Op]
-        public static AsciCode8 encode(ReadOnlySpan<char> src, ASCI asci, N8 n)        
+        public static asci8 encode(ReadOnlySpan<char> src, ASCI asci, N8 n)        
             => AsciCodes.encode(n,src);            
 
         [MethodImpl(Inline), Op]
-        public static AsciCode16 encode(ReadOnlySpan<char> src, ASCI asci, N16 n)        
+        public static asci16 encode(ReadOnlySpan<char> src, ASCI asci, N16 n)        
             => AsciCodes.encode(n, src);            
 
         [MethodImpl(Inline), Op]
-        public static AsciCode32 encode(ReadOnlySpan<char> src, ASCI asci, N32 n)        
+        public static asci32 encode(ReadOnlySpan<char> src, ASCI asci, N32 n)        
             => AsciCodes.encode(n,src);            
 
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode16 encode(ReadOnlySpan<char> src, out AsciCode16 dst)        
+        public static ref readonly asci16 encode(ReadOnlySpan<char> src, out asci16 dst)        
             => ref AsciCodes.encode(src, out dst);
 
         /// <summary>

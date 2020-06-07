@@ -9,19 +9,33 @@ namespace Z0
     
     using static Seed;
 
-    public interface ILegalIdentityMachine
+    public readonly struct LegalIdentityMachine : ILegalIdentityMachine
     {
-        char TypeArgsOpen {get;}
+        [MethodImpl(Inline)]
+        public static LegalIdentityMachine Service(ILegalIdentityOption options) 
+            => new LegalIdentityMachine(options.TypeArgsOpen, options.TypeArgsClose, options.ArgsOpen, options.ArgsClose, options.ArgSep);
+        
+        [MethodImpl(Inline)]
+        public LegalIdentityMachine(char TypeArgsOpen, char TypeArgsClose, char ArgsOpen, char ArgsClose, char ArgSep)
+        {
+            this.TypeArgsOpen = TypeArgsOpen;
+            this.TypeArgsClose = TypeArgsClose;
+            this.ArgsOpen = ArgsOpen;
+            this.ArgsClose = ArgsClose;
+            this.ArgSep = ArgSep;
+        }
+        
+        public char TypeArgsOpen {get;}
 
-        char TypeArgsClose {get;}
+        public char TypeArgsClose {get;}
 
-        char ArgsOpen {get;}
+        public char ArgsOpen {get;}
 
-        char ArgsClose {get;}
+        public char ArgsClose {get;}
 
-        char ArgSep {get;}
+        public char ArgSep {get;}
 
-        string Manufacture(OpIdentity src)
+        public string Manufacture(OpIdentity src)
         {
             var length = src.IdentityText.Length;
             Span<char> dst = stackalloc char[length];
@@ -51,6 +65,6 @@ namespace Z0
                 }
             }
             return new string(dst.Trim());
-        }
+        }    
     }
 }

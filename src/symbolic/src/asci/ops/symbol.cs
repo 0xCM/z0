@@ -11,21 +11,21 @@ namespace Z0
 
     partial class AsciCodes
     {
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(AsciCode2 src, byte index)
-            => Symbolic.symbol<AsciChar,byte>(cover(src,index));
+        // [MethodImpl(Inline), Op]
+        // public static Symbol<AsciChar,byte> symbol(asci2 src, byte index)
+        //     => Symbolic.symbol<AsciChar,byte>(cover(src,index));
 
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(AsciCode4 src, byte index)
-            => Symbolic.symbol<AsciChar,byte>(cover(src, index));
+        // [MethodImpl(Inline), Op]
+        // public static Symbol<AsciChar,byte> symbol(asci4 src, byte index)
+        //     => Symbolic.symbol<AsciChar,byte>(cover(src, index));
 
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(AsciCode5 src, byte index)
-            => Symbolic.symbol<AsciChar,byte>(cover(src,index));
+        // [MethodImpl(Inline), Op]
+        // public static Symbol<AsciChar,byte> symbol(asci5 src, byte index)
+        //     => Symbolic.symbol<AsciChar,byte>(cover(src,index));
 
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(AsciCode8 src, byte index)
-            => Symbolic.symbol<AsciChar,byte>(cover(src,index));
+        // [MethodImpl(Inline), Op]
+        // public static Symbol<AsciChar,byte> symbol(asci8 src, byte index)
+        //     => Symbolic.symbol<AsciChar,byte>(cover(src,index));
 
     }
 }

@@ -20,10 +20,22 @@ namespace Z0
         public static char @char(Base16 @base, LowerCased @case, byte index)
             => (char)code(@base,@case,index);
 
-        [MethodImpl(Inline), Op]
-        public static char @char<E,T>(Symbol<E,T> src)
-            where E : unmanaged, Enum
+        [MethodImpl(Inline)]
+        public static char @char<S,T,N>(Symbol<S,T,N> src)
+            where S : unmanaged
             where T : unmanaged
-                => head(cast<char>(bytespan(src.Data).Slice(0,2)));        
+            where N : unmanaged, ITypeNat         
+                => Unsafe.As<S,char>(ref edit(src.Value));
+
+        [MethodImpl(Inline)]
+        public static char @char<S,T>(Symbol<S,T> src)
+            where S : unmanaged
+            where T : unmanaged
+                => Unsafe.As<S,char>(ref edit(src.Value));
+
+        [MethodImpl(Inline)]
+        public static char @char<S>(Symbol<S> src)
+            where S : unmanaged
+                => Unsafe.As<S,char>(ref edit(src.Value));
     }
 }

@@ -19,19 +19,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsciCode2 encode(N2 n, ReadOnlySpan<char> src)
-            => encode(src, out AsciCode2 dst);
+        public static asci2 encode(N2 n, ReadOnlySpan<char> src)
+            => encode(src, out asci2 dst);
 
         /// <summary>
         /// Populates a 4-code asci block from the leading cells of a character span
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsciCode4 encode(N4 n, ReadOnlySpan<char> src)
-            => encode(src, out AsciCode4 dst);
+        public static asci4 encode(N4 n, ReadOnlySpan<char> src)
+            => encode(src, out asci4 dst);
 
         [MethodImpl(Inline), Op]
-        public static AsciCode5 encode(N5 n, ReadOnlySpan<char> src)
+        public static asci5 encode(N5 n, ReadOnlySpan<char> src)
         {
             var dst = 0ul;
             ref readonly var src16 = ref head(src);
@@ -49,31 +49,31 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsciCode8 encode(N8 n, ReadOnlySpan<char> src)
-            => encode(src, out AsciCode8 dst);
+        public static asci8 encode(N8 n, ReadOnlySpan<char> src)
+            => encode(src, out asci8 dst);
 
         /// <summary>
         /// Populates a 16-code asci block from the leading cells of a character span
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsciCode16 encode(N16 n, ReadOnlySpan<char> src)
-            => encode(src, out AsciCode16 dst);
+        public static asci16 encode(N16 n, ReadOnlySpan<char> src)
+            => encode(src, out asci16 dst);
 
         /// <summary>
         /// Populates a 32-code asci block from the leading cells of a character span
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsciCode32 encode(N32 n, ReadOnlySpan<char> src)
-            => encode(src, out AsciCode32 dst);
+        public static asci32 encode(N32 n, ReadOnlySpan<char> src)
+            => encode(src, out asci32 dst);
 
         /// <summary>
         /// Populates a 32-code asci block from the leading cells of a character span
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsciCode64 encode(N64 n, ReadOnlySpan<char> src)
-            => encode(src, out AsciCode64 dst);
+        public static asci64 encode(N64 n, ReadOnlySpan<char> src)
+            => encode(src, out asci64 dst);
     }
 }

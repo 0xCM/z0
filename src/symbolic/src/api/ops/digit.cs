@@ -44,8 +44,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(Base16 @base, LowerCased @case, HexSymbolLo src)
             => SymTest.IsNumeral(src)
-            ? (HexDigit)(src - HexSymbolLo.NumeralOffset) 
-            : (HexDigit)(src - HexSymbolLo.LetterOffset);
+            ? (HexDigit)(src - (HexSymbolLo)HexSymbolLoFacet.NumeralOffset) 
+            : (HexDigit)(src - (HexSymbolLo)HexSymbolLoFacet.LetterOffset);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..f] identified by a lowercase hex symbol
@@ -64,8 +64,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(Base16 @base, LowerCased @case, char src)
             => SymTest.IsNumeral(src)
-            ? (HexDigit)((HexLo)src - HexSymbolLo.NumeralOffset) 
-            : (HexDigit)((HexLo)src - HexSymbolLo.LetterOffset);
+            ? (HexDigit)((HexLo)src - (HexSymbolLo)HexSymbolLoFacet.NumeralOffset) 
+            : (HexDigit)((HexLo)src - (HexSymbolLo)HexSymbolLoFacet.LetterOffset);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -74,8 +74,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymbolLo src)
             => SymTest.IsNumeral(src)
-            ? (HexDigit)(src - HexSymbolLo.NumeralOffset) 
-            : (HexDigit)(src - HexSymbolLo.LetterOffset);
+            ? (HexDigit)(src - (HexSymbolLo)HexSymbolLoFacet.NumeralOffset) 
+            : (HexDigit)(src - (HexSymbolLo)HexSymbolLoFacet.LetterOffset);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by an uppercase hex symbol

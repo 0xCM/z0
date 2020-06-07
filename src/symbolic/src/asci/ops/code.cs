@@ -14,35 +14,35 @@ namespace Z0
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(in AsciCode2 src, byte index)
+        public static AsciCharCode code(in asci2 src, byte index)
             => (AsciCharCode)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(in AsciCode4 src, byte index)
+        public static AsciCharCode code(in asci4 src, byte index)
             => (AsciCharCode)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(in AsciCode8 src, byte index)
+        public static AsciCharCode code(in asci8 src, byte index)
             => (AsciCharCode)(src.Storage >> index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(in AsciCode16 src, byte index)
+        public static AsciCharCode code(in asci16 src, byte index)
             => (AsciCharCode)src.Storage.GetElement(index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(in AsciCode16 src, N0 index)
+        public static AsciCharCode code(in asci16 src, N0 index)
             => (AsciCharCode)vextract(src.Storage,index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(in AsciCode16 src, N1 index)
+        public static AsciCharCode code(in asci16 src, N1 index)
             => (AsciCharCode)vextract(src.Storage,index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(in AsciCode16 src, N2 index)
+        public static AsciCharCode code(in asci16 src, N2 index)
             => (AsciCharCode)vextract(src.Storage,index);
 
         [MethodImpl(Inline), Op]
-        public static AsciCharCode code(in AsciCode16 src, N3 index)
+        public static AsciCharCode code(in asci16 src, N3 index)
             => (AsciCharCode)vextract(src.Storage,index);
 
     }

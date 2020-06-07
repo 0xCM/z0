@@ -14,15 +14,15 @@ namespace Z0.Asm.Data
         public static AsmFieldParser Service => default;
 
         [MethodImpl(Inline)]
-        public AsciCode16 Parse(string src, out AsciCode16 result)     
+        public asci16 Parse(string src, out asci16 result)     
             => result = src;
 
         [MethodImpl(Inline)]
-        public AsciCode32 Parse(string src, out AsciCode32 result)     
+        public asci32 Parse(string src, out asci32 result)     
             => result = src;
 
         [MethodImpl(Inline)]
-        public AsciCode64 Parse(string src, out AsciCode64 result)     
+        public asci64 Parse(string src, out asci64 result)     
             => result = src;
 
         [MethodImpl(Inline)]

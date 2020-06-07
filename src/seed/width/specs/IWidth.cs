@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
-
     /// <summary>
     /// A trait that attaches a width to a realization
     /// </summary>

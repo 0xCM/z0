@@ -9,6 +9,6 @@ namespace Z0
     public interface ITextExpression<F> : IExpressional<F,string>
         where F : struct, ITextExpression<F>
     {
-        string Text => Data;
+        string Text => Body;
     }
 }

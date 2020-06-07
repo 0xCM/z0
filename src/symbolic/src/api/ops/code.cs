@@ -13,9 +13,7 @@ namespace Z0
     using static Typed;
 
     partial class Symbolic
-    {        
-
-                    
+    {                         
         [MethodImpl(Inline), Op]
         public static HexCode code(Base16 @base, UpperCased @case, byte index)
             => (HexCode)skip(SymbolicData.UpperHexCodes, index);

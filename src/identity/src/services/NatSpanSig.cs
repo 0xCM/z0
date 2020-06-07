@@ -37,7 +37,7 @@ namespace Z0
                     var digits = string.Empty;
                     foreach(var c in part2)
                     {
-                        if(c.IsDecimalDigit())
+                        if(Char.IsDigit(c))
                             digits += c;
                         else
                         {

@@ -6,12 +6,9 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static Seed;
     using static Memories;
-
 
     [ApiHost]
     public struct OpCodeProcessor
@@ -62,7 +59,7 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline), Op]
         void Process(OperatingMode src, in OpCodeHandler handler)
         {
-            handler.Handle(seq, src);        
+            handler.Handle(this, src);        
         }
 
         [MethodImpl(Inline), Op]
@@ -79,25 +76,25 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline), Op]
         void Process(in InstructionExpression src, in OpCodeHandler handler)
         {
-            handler.Handle(seq, src);
+            handler.Handle(this, src);
         }
 
         [MethodImpl(Inline), Op]
         void Process(in OpCodeExpression src, in OpCodeHandler handler)
         {
-            handler.Handle(seq, src);            
+            handler.Handle(this, src);            
         }
 
         [MethodImpl(Inline), Op]
         void Process(in MnemonicExpression src, in OpCodeHandler handler)
         {
-            handler.Handle(seq, src);            
+            handler.Handle(this, src);            
         }
 
         [MethodImpl(Inline), Op]
         void Process(in CpuidExpression src, in OpCodeHandler handler)
         {
-            handler.Handle(seq, src);            
+            handler.Handle(this, src);            
         }
 
         [MethodImpl(Inline)]

@@ -58,15 +58,6 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Promotes a duet to a quintet
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static septet extend(duet src, W7 w)
-            => src;
-
-        /// <summary>
         /// Promotes a duet to an octet
         /// </summary>
         /// <param name="src">The source value</param>

@@ -35,7 +35,7 @@ namespace Z0.Asm.Data
         }
         
         [MethodImpl(Inline), Op]
-        public AsmCommandGroup group(in AsciCode16 name)
+        public AsmCommandGroup group(in asci16 name)
             => new AsmCommandGroup(name);
     
         [MethodImpl(Inline), Op]

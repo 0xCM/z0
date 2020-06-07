@@ -13,19 +13,19 @@ namespace Z0
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static char decode(in AsciCode2 src, byte index)
+        public static char decode(in asci2 src, byte index)
             => (char)code(src,index);
 
         [MethodImpl(Inline), Op]
-        public static char decode(in AsciCode4 src, byte index)
+        public static char decode(in asci4 src, byte index)
             => (char)code(src,index);
 
         [MethodImpl(Inline), Op]
-        public static char decode(in AsciCode8 src, byte index)
+        public static char decode(in asci8 src, byte index)
             => (char)code(src,index);
 
         [MethodImpl(Inline), Op]
-        public static char decode(in AsciCode16 src, byte index)
+        public static char decode(in asci16 src, byte index)
             => (char)code(src,index);
     }
 }

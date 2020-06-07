@@ -21,7 +21,7 @@ namespace Z0.Asm.Data
             this.Source = data;
         }       
 
-        public ushort Data
+        public ushort Body
         {
             [MethodImpl(Inline)]
             get => Source;

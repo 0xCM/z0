@@ -15,8 +15,8 @@ namespace Z0.Asm.Data
     public struct OpCodeRecord : IRecord<F,R>
     {                   
         public static OpCodeRecord Empty 
-            => new OpCodeRecord(0, OpCodeId.INVALID, AsciCode16.Null, AsciCode64.Null, AsciCode32.Null, 
-                YeaOrNea.N, YeaOrNea.N, YeaOrNea.N, AsciCode16.Null);        
+            => new OpCodeRecord(0, OpCodeId.INVALID, asci16.Null, asci64.Null, asci32.Null, 
+                YeaOrNea.N, YeaOrNea.N, YeaOrNea.N, asci16.Null);        
         
         public int Sequence => Seq;
         
@@ -24,11 +24,11 @@ namespace Z0.Asm.Data
         
         public OpCodeId Id;
 		
-		public AsciCode16 Mnemonic;
+		public asci16 Mnemonic;
 		
-		public AsciCode64 Instruction;
+		public asci64 Instruction;
 
-		public AsciCode32 Expression;
+		public asci32 Expression;
 
 		public YeaOrNea M16;
 
@@ -36,10 +36,10 @@ namespace Z0.Asm.Data
 
 		public YeaOrNea M64;
         
-		public AsciCode16 CpuId;
+		public asci16 CpuId;
 
         [MethodImpl(Inline)]
-        public OpCodeRecord(int Seq, OpCodeId Id, AsciCode16 Mnemonic, AsciCode64 Instruction, AsciCode32 Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, AsciCode16 CpuId)
+        public OpCodeRecord(int Seq, OpCodeId Id, asci16 Mnemonic, asci64 Instruction, asci32 Expression, YeaOrNea M16, YeaOrNea M32, YeaOrNea M64, asci16 CpuId)
         {
             this.Seq = Seq;
             this.Id = Id;

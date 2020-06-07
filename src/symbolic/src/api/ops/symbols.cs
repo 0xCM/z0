@@ -23,10 +23,6 @@ namespace Z0
             => cast<char,AsciChar>(Symbolic.segment(AsciStrings.Text(n0),i0,i1));
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<AsciChar,byte>> symbols(in AsciCode16 src)
-            => cast<Symbol<AsciChar,byte>>(bytespan(SymBits.vinflate(src.Storage)));
-
-        [MethodImpl(Inline), Op]
         public static void symbols(ReadOnlySpan<BinaryDigit> src, Span<BinarySymbol> dst)
         {
             var len = src.Length;

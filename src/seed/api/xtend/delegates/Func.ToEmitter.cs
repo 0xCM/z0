@@ -13,12 +13,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Emitter<T> ToEmitter<T>(this System.Func<T> f)
-            => new Emitter<T>(f);
+            => Extend.emitter(f);
 
         [MethodImpl(Inline)]
         public static Emitter<T,C> ToEmitter<T,C>(this System.Func<T> f)
             where T : unmanaged
             where C : unmanaged
-                => new Emitter<T,C>(f);
+                => Extend.emitter<T,C>(f);
     }
 }

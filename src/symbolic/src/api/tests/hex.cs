@@ -12,6 +12,7 @@ namespace Z0
     using HCL = HexCodeLo;
     using HCU = HexCodeUp;
     using HSL = HexSymbolLo;
+    using HSLF = HexSymbolLoFacet;
     using HSU = HexSymbolUp;
 
     public partial class SymTest
@@ -22,7 +23,7 @@ namespace Z0
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         public static bool IsNumeral(HSL src)
-            => src <= HSL.LastNumeral;
+            => src <= (HSL)HSLF.LastNumeral;
 
         /// <summary>
         /// Tests whether a uppercas hex symbol is a numeral
@@ -38,7 +39,7 @@ namespace Z0
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         public static bool IsLetter(HSL src)
-            => src >= HexSymbolLo.FirstLetter;
+            => src >= (HSL)HSLF.FirstLetter;
 
         /// <summary>
         /// Tests whether an uppercase hex symbol is a letter
@@ -47,6 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool IsLetter(HSU src)
             => src >= HexSymbolUp.FirstLetter;
+            
         /// <summary>
         /// Determines whether a character is an upper-cased hex digit
         /// </summary>

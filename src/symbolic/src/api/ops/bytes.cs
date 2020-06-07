@@ -14,23 +14,23 @@ namespace Z0
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(in AsciCode2 src)
+        public static Span<byte> bytes(in asci2 src)
             => Control.bytes(src);
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(in AsciCode4 src)
+        public static Span<byte> bytes(in asci4 src)
             => Control.bytes(src);
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(in AsciCode5 src)
+        public static Span<byte> bytes(in asci5 src)
             => Control.bytes(src).Slice(0,5);
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(in AsciCode8 src)
+        public static Span<byte> bytes(in asci8 src)
             => Control.bytes(src);
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(in AsciCode16 src)
+        public static Span<byte> bytes(in asci16 src)
         {                        
             var dst = ByteBlocks.u8s(ByteBlocks.alloc(n16));
             SymBits.vstore(src.Storage, ref head(dst));
@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(in AsciCode32 src)
+        public static Span<byte> bytes(in asci32 src)
         {                        
             var dst = ByteBlocks.u8s(ByteBlocks.alloc(n32));
             SymBits.vstore(src.Storage, ref head(dst));
@@ -46,7 +46,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(in AsciCode64 src)
+        public static Span<byte> bytes(in asci64 src)
         {                        
             var dst = ByteBlocks.u8s(ByteBlocks.alloc(n64));
             SymBits.vstore(src.Storage, ref head(dst));

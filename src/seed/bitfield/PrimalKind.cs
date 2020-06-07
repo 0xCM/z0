@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
-
     using static PrimalWidthL2;
     using static Sign8;
 

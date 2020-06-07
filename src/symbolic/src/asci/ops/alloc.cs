@@ -14,28 +14,28 @@ namespace Z0
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static AsciCode16[] alloc(N16 n, int count)
+        public static asci16[] alloc(N16 n, int count)
         {
-            var buffer =  new AsciCode16[count];
-            Span<AsciCode16> dst = buffer;
+            var buffer =  new asci16[count];
+            Span<asci16> dst = buffer;
             dst.Fill(init(n));
             return buffer;
         }
 
         [MethodImpl(Inline), Op]
-        public static AsciCode32[] alloc(N32 n, int count)
+        public static asci32[] alloc(N32 n, int count)
         {
-            var buffer =  new AsciCode32[count];
-            Span<AsciCode32> dst = buffer;
+            var buffer =  new asci32[count];
+            Span<asci32> dst = buffer;
             dst.Fill(init(n));
             return buffer;
         }
 
         [MethodImpl(Inline), Op]
-        public static AsciCode64[] alloc(N64 n, int count)
+        public static asci64[] alloc(N64 n, int count)
         {
-            var buffer =  new AsciCode64[count];
-            Span<AsciCode64> dst = buffer;
+            var buffer =  new asci64[count];
+            Span<asci64> dst = buffer;
             dst.Fill(init(n));
             return buffer;
         }

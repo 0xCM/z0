@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static System.Func<T,T,T,T> ToFunc<T>(this Z0.TernaryOp<T> f)
-            => new System.Func<T,T,T,T>(f);
+            => Extend.func(f);
     }
 }

@@ -14,6 +14,17 @@ namespace Z0.Asm.Data
 
     public class t_tokens : t_asmd<t_tokens>
     {
+        void emit(ReadOnlySpan<InstructionExpression> src)
+        {
+            var dstPath = CasePath($"InstructionExpression");
+            using var writer = dstPath.Writer();
+            writer.WriteLine("Instruction");
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var id = ref skip(src,i);
+                writer.WriteLine(id.Format().PadRight(id.Body.MaxLength));
+            }
+        }
 
         void emit(ReadOnlySpan<OpCodeIdentifier> src)
         {
@@ -23,7 +34,46 @@ namespace Z0.Asm.Data
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Encoded.MaxLength));
+                writer.WriteLine(id.Format().PadRight(id.Body.MaxLength));
+            }
+
+        }
+
+        void emit(ReadOnlySpan<AsmCommandGroup> src)
+        {
+            var dstPath = CasePath($"AsmCommandGroup");
+            using var writer = dstPath.Writer();
+            writer.WriteLine("Mnemonic");
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var id = ref skip(src,i);
+                writer.WriteLine(id.Format().PadRight(id.Body.MaxLength));
+            }
+
+        }
+
+        void emit(ReadOnlySpan<OpCodeExpression> src)
+        {
+            var dstPath = CasePath($"OpCodes");
+            using var writer = dstPath.Writer();
+            writer.WriteLine("OpCode");
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var id = ref skip(src,i);
+                writer.WriteLine(id.Format().PadRight(id.Body.MaxLength));
+            }
+
+        }
+
+        void emit(ReadOnlySpan<MnemonicExpression> src)
+        {
+            var dstPath = CasePath($"Mnemonics");
+            using var writer = dstPath.Writer();
+            writer.WriteLine("Mnemonic");
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var id = ref skip(src,i);
+                writer.WriteLine(id.Format().PadRight(id.Body.MaxLength));
             }
 
         }
@@ -37,60 +87,18 @@ namespace Z0.Asm.Data
             Claim.eq(count, records.Length);
             Claim.eq(count, identifers.Length);
 
-            emit(identifers);
 
             var processor = OpCodeProcessor.Create();
             var handler = OpCodeHandler.Create(count);
             processor.Process(records,handler);
 
-            var groups = handler.CommandGroups;
 
-            var dstPath = CasePath($"CommandGroups");
-            using var writer = dstPath.Writer();
-            writer.WriteLine("Mnemonic");
-            for(var i=0; i<groups.Length; i++)
-            {
-                ref readonly var g = ref skip(groups,i);
-                var name = g.Name;
-                writer.WriteLine(name.Format().PadRight(name.MaxLength));
-            }
+            emit(handler.Instructions);
+            emit(handler.OpCodes);
+            emit(handler.Mnemonics);
 
-            // Trace($"Processed {handler.ProcessedCount} records");
-            // Trace($"Distilled {groups.Length} mnemonics");            
         }
         
-        void instruction_tokens()
-        {
-            const byte Delimiter = InstructionTokenDataset.EncodingDelimiter;
-            const int BufferLength = 32;
-
-            var data = InstructionTokenDataset.Create();
-            ReadOnlySpan<byte> src = data.ValueEncoding;
-            var count = src.Length;
-            var dst = list<TokenValue>(data.TokenCount);
-            
-            Span<byte> buffer = stackalloc byte[BufferLength];
-            buffer.Clear();
-            
-            for(int i=0, j=0; i<count && j < BufferLength; i++, j++)
-            {                
-                ref readonly var cell = ref skip(src,i);                
-                if(cell == Delimiter)
-                {
-                    var cells = buffer.Slice(0,j).ToArray();
-                    dst.Add(TokenValue.Define(cells));
-                    
-                    buffer.Clear();
-                    j=0;
-                }
-                else
-                {
-                    buffer[j] = cell;
-                }
-            }
-            Trace($"Processed {dst.Count} tokens");
-        }
-
         public void opcode_resource_doc()
         {
             const char TextDelimiter = Chars.Pipe;
@@ -98,6 +106,24 @@ namespace Z0.Asm.Data
             var count1 = svc.OpCodeSpecDoc.CharCount(TextDelimiter);
             var count2 = Symbolic.count(svc.OpCodeSpecText, 1, TextDelimiter);
             Claim.eq(count1,count2);
+        }
+
+        string Format<S>(Symbol<S> symbol)
+            where S : unmanaged, Enum
+        {
+            return symbol.Value.ToString();
+        }
+        public void symbolic_digits()
+        {
+            var symbols = octet.Symbols;
+            var dstPath = CasePath($"octets");
+            using var writer = dstPath.Writer();
+            for(var i=0; i<symbols.Count; i++)
+            {
+                ref readonly var s = ref symbols[i];
+                writer.WriteLine(Format(s.Simplified));
+            }            
+           
         }
     }
 }

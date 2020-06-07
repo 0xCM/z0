@@ -16,19 +16,13 @@ namespace Z0
         /// Determines the variance of a parameter
         /// </summary>
         /// <param name="src">The source parameter</param>
+        [MethodImpl(Inline)]
         public static ParamRefKind ReferenceKind(this ParameterInfo src)        
-            => src.IsIn 
-            ? Z0.ParamRefKind.In  : src.IsOut 
-            ? Z0.ParamRefKind.Out : src.ParameterType.IsByRef 
-            ? Z0.ParamRefKind.Ref : Z0.ParamRefKind.None;
+            => Extend.refkind(src);
 
+        [MethodImpl(Inline)]
         public static string Keyword(this ParamRefKind src)        
-            => src switch{
-                ParamRefKind.In => "in",
-                ParamRefKind.Out => "out",
-                ParamRefKind.Ref => "ref",    
-                _ => string.Empty
-            };
+            => Extend.keyword(src);
 
         [MethodImpl(Inline)]
         public static string Format(this ParamRefKind src)

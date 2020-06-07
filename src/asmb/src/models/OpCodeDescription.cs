@@ -11,14 +11,14 @@ namespace Z0.Asm.Data
 
     public readonly struct OpCodeDescription : ITextExpression<OpCodeDescription>
     {
-        public string Data {get;}
+        public string Body {get;}
 
         public static OpCodeDescription Empty 
             => new OpCodeDescription(string.Empty);
 
         [MethodImpl(Inline)]
         public static implicit operator TextExpression(OpCodeDescription src)
-            => new TextExpression(src.Data);
+            => new TextExpression(src.Body);
 
         [MethodImpl(Inline)]
         public static implicit operator OpCodeDescription(string src)
@@ -26,12 +26,12 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public OpCodeDescription(string src)
-            => Data = src;
+            => Body = src;
 
         public ReadOnlySpan<char> Symbols
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Body;
         }
 
         public OpCodeDescription Zero 
@@ -40,27 +40,27 @@ namespace Z0.Asm.Data
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => text.empty(Data);
+            get => text.empty(Body);
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => !text.empty(Data);
+            get => !text.empty(Body);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeDescription src)
-            => string.Equals(Data, src.Data, NoCase);
+            => string.Equals(Body, src.Body, NoCase);
         
         public override bool Equals(object src)
             => src is OpCodeDescription x && Equals(x);
         
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Body.GetHashCode();
         
         public string Format()
-            => Data;
+            => Body;
         
         public override string ToString()
             => Format();

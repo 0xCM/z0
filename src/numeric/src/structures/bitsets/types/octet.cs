@@ -11,12 +11,15 @@ namespace Z0
 
     using analog = octet;
     using BK = Octet;
+    using N = N8;
 
     /// <summary>
     /// Represents the value of a type-level octet and thus is an integer in the range [0,255]
     /// </summary>
     public struct octet : IEquatable<analog>
     {
+        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
+
         byte data;
 
         const byte LoMask = 0b0000_1111;
@@ -26,6 +29,8 @@ namespace Z0
         public static analog zero => 0;
 
         public static analog one => 1;
+
+        public static N N => default;
 
         [MethodImpl(Inline)]
         public static implicit operator analog(BK src)

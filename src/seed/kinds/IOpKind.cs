@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public interface IOpKind : IKind
     {
@@ -25,5 +24,4 @@ namespace Z0
     {
         K Kind => default;     
     }
-
 }

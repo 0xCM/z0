@@ -12,6 +12,7 @@ namespace Z0
 
     using analog = single;
     using BK = Singleton;
+    using N = N1;
 
     /// <summary>
     /// Represents the value of a type-level single and thus has domain {0,1}
@@ -23,6 +24,10 @@ namespace Z0
         public static analog MinValue => MinVal;
 
         public static analog MaxValue => MaxVal;
+
+        public static N N => default;
+
+        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
 
         public static analog Zero => 0;
 
@@ -56,9 +61,6 @@ namespace Z0
         public static implicit operator sextet(analog src)
             => new sextet(src.data);
 
-        [MethodImpl(Inline)]
-        public static implicit operator septet(analog src)
-            => new septet(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator octet(analog src)

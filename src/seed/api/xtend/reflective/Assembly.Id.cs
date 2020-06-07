@@ -12,6 +12,10 @@ namespace Z0
 
     partial class XTend
     {
+        public static Z Zero<Z>(this Zed z)
+            where Z : INullary<Z>, new()
+                => new Z();                
+
         /// <summary>
         /// Gets the identified assembly attribute if present, otherwise NULL
         /// </summary>

@@ -14,15 +14,15 @@ namespace Z0
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static AsciCode16 init(N16 n, AsciCharCode fill = AsciCharCode.Space)
-            => new AsciCode16(SymBits.vbroadcast(w128, (byte)fill));
+        public static asci16 init(N16 n, AsciCharCode fill = AsciCharCode.Space)
+            => new asci16(SymBits.vbroadcast(w128, (byte)fill));
 
         [MethodImpl(Inline), Op]
-        public static AsciCode32 init(N32 n, AsciCharCode fill = AsciCharCode.Space)
-            => new AsciCode32(SymBits.vbroadcast(w256, (byte)fill));
+        public static asci32 init(N32 n, AsciCharCode fill = AsciCharCode.Space)
+            => new asci32(SymBits.vbroadcast(w256, (byte)fill));
 
         [MethodImpl(Inline), Op]
-        public static AsciCode64 init(N64 n, AsciCharCode fill = AsciCharCode.Space)
-            => new AsciCode64(SymBits.vbroadcast(w512, (byte)fill));
+        public static asci64 init(N64 n, AsciCharCode fill = AsciCharCode.Space)
+            => new asci64(SymBits.vbroadcast(w512, (byte)fill));
     }
 }

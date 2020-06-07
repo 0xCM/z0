@@ -8,6 +8,7 @@ namespace Z0
 
     using Lo = HexSymbolLo;
     using Up = HexSymbolUp;
+    using LoF = HexSymbolLoFacet;
 
     /// <summary>
     /// Defines the symbols that represent both upper and lower-case base-16 digits
@@ -137,32 +138,32 @@ namespace Z0
         /// <summary>
         /// The value to subtract from a symbolic digit [0..9] to compute an index in the range [0..15]
         /// </summary>
-        NumeralOffset = Lo.FirstNumeral,
+        NumeralOffset = LoF.FirstNumeral,
 
         /// <summary>
         /// The numeral declaration count
         /// </summary>
-        NumeralCount = Lo.NumeralCount,
+        NumeralCount = LoF.NumeralCount,
 
         /// <summary>
         /// The 'a' code
         /// </summary>
-        FirstLetterLo = Lo.FirstLetter,
+        FirstLetterLo = LoF.FirstLetter,
 
         /// <summary>
         /// The 'f' code
         /// </summary>
-        LastLetterLo = Lo.LastLetter,       
+        LastLetterLo = LoF.LastLetter,       
 
         /// <summary>
         /// The value to subtract from a symbolic digit [A..F] to compute an index in the range [0..15]
         /// </summary>
-        LetterOffsetLo = Lo.LetterOffset,
+        LetterOffsetLo = LoF.LetterOffset,
 
         /// <summary>
         /// The lettr declaration count
         /// </summary>
-        LetterCountLo = Lo.LetterCount,
+        LetterCountLo = LoF.LetterCount,
 
         /// <summary>
         /// The code declaration count

@@ -20,10 +20,10 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode2 encode(ReadOnlySpan<char> src, out AsciCode2 dst)        
+        public static ref readonly asci2 encode(ReadOnlySpan<char> src, out asci2 dst)        
         {
             dst = default;
-            Symbolic.literals(src, span<AsciCode2,AsciCharCode>(ref dst));
+            Symbolic.literals(src, span<asci2,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -33,10 +33,10 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode4 encode(ReadOnlySpan<char> src, out AsciCode4 dst)
+        public static ref readonly asci4 encode(ReadOnlySpan<char> src, out asci4 dst)
         {
             dst = default;
-            Symbolic.literals(src, span<AsciCode4,AsciCharCode>(ref dst));
+            Symbolic.literals(src, span<asci4,AsciCharCode>(ref dst));
             return ref dst;
         }        
 
@@ -46,10 +46,10 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode5 encode(ReadOnlySpan<char> src, out AsciCode5 dst)        
+        public static ref readonly asci5 encode(ReadOnlySpan<char> src, out asci5 dst)        
         {
             dst = default;
-            Symbolic.literals(src, span<AsciCode5,AsciCharCode>(ref dst));
+            Symbolic.literals(src, span<asci5,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -59,10 +59,10 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode8 encode(ReadOnlySpan<char> src, out AsciCode8 dst)        
+        public static ref readonly asci8 encode(ReadOnlySpan<char> src, out asci8 dst)        
         {
             dst = default;
-            Symbolic.literals(src, span<AsciCode8,AsciCharCode>(ref dst));
+            Symbolic.literals(src, span<asci8,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -72,10 +72,10 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode16 encode(ReadOnlySpan<char> src, out AsciCode16 dst)        
+        public static ref readonly asci16 encode(ReadOnlySpan<char> src, out asci16 dst)        
         {
-            dst = AsciCode16.Blank;
-            Symbolic.literals(src, span<AsciCode16,AsciCharCode>(ref dst));
+            dst = asci16.Blank;
+            Symbolic.literals(src, span<asci16,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -85,10 +85,10 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode32 encode(ReadOnlySpan<char> src, out AsciCode32 dst)        
+        public static ref readonly asci32 encode(ReadOnlySpan<char> src, out asci32 dst)        
         {
-            dst = AsciCode32.Blank;
-            Symbolic.literals(src, span<AsciCode32,AsciCharCode>(ref dst));
+            dst = asci32.Blank;
+            Symbolic.literals(src, span<asci32,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -98,10 +98,10 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly AsciCode64 encode(ReadOnlySpan<char> src, out AsciCode64 dst)        
+        public static ref readonly asci64 encode(ReadOnlySpan<char> src, out asci64 dst)        
         {
-            dst = AsciCode64.Blank;
-            Symbolic.literals(src, span<AsciCode64,AsciCharCode>(ref dst));
+            dst = asci64.Blank;
+            Symbolic.literals(src, span<asci64,AsciCharCode>(ref dst));
             return ref dst;
         }
     }

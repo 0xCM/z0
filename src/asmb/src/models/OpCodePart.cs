@@ -12,15 +12,15 @@ namespace Z0.Asm.Data
 
     public readonly struct OpCodePart
     {
-        public readonly string Text;
+        public readonly asci8 Content;
 
         [MethodImpl(Inline)]
-        public OpCodePart(string src)
+        public OpCodePart(asci8 src)
         {
-            Text = src;
+            Content = src;
         }
 
         public string Format()
-            => Text;
+            => Content.Format();
     }
 }

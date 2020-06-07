@@ -10,32 +10,39 @@ namespace Z0.Asm.Data
     using static Seed;
     using static Memories;
     
-    public readonly struct CpuidExpression : ISymbolic<CpuidExpression,AsciCode16>
+    public readonly struct CpuidExpression : ISymbolic<CpuidExpression,asci16>
     {
-        public AsciCode16 Data {get;}
+        public asci16 Body {get;}
 
-        public static CpuidExpression Empty 
-            => new CpuidExpression(new char[0]{});
+        public static CpuidExpression Empty => new CpuidExpression(asci16.Null);
 
         [MethodImpl(Inline)]
         public static implicit operator CpuidExpression(string src)
             => new CpuidExpression(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CpuidExpression(char[] src)
-            => new CpuidExpression(src);
-
-        [MethodImpl(Inline)]
-        public CpuidExpression(AsciCode16 src)
-            => Data = src;
+        public CpuidExpression(asci16 src)
+            => Body = src;
 
         [MethodImpl(Inline)]
         public CpuidExpression(string src)
-            => Data = Symbolic.encode(src, ASCI, n16);
+            => Body = Symbolic.encode(src, ASCI, n16);
 
         [MethodImpl(Inline)]
         public CpuidExpression(char[] src)
-            => Data = Symbolic.encode(src, ASCI, n16);
+            => Body = Symbolic.encode(src, ASCI, n16);
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.bytes(Body);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.decode(Body);
+        }
 
         public CpuidExpression Zero 
             => Empty;
@@ -46,32 +53,32 @@ namespace Z0.Asm.Data
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Body.Length;
         }
 
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => Data.IsEmpty;
+            get => Body.IsEmpty;
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
+            get => Body.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(CpuidExpression src)
-            => src.Data.Equals(Data);
+            => src.Body.Equals(Body);
         
         public override bool Equals(object src)
             => src is CpuidExpression x && Equals(x);
         
         public override int GetHashCode()
-            => Data.GetHashCode();        
+            => Body.GetHashCode();        
         public string Format()
-            => Data.Format();
+            => Body.Format();
         
         public override string ToString()
             => Format();

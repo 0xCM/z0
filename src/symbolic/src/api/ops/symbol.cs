@@ -12,68 +12,52 @@ namespace Z0
 
     partial class Symbolic
     {
-        [MethodImpl(Inline), Op]   
-        public static BinarySymbol symbol(BinaryDigit src)
-            => (BinarySymbol)((byte)src + (byte)BinarySymbol.First);
-
-        [MethodImpl(Inline), Op]   
-        public static BinarySymbol symbol(Base2 @base, byte src)
-            => (BinarySymbol)(src + (byte)BinarySymbol.First);
+        [MethodImpl(Inline), Op]
+        public static Symbol<OctalDigit,byte,N3> symbol(in OctalDigit value)
+            => symbol<OctalDigit,byte,N3>(value);
 
         [MethodImpl(Inline), Op]
-        public static HexSymbol symbol(Base16 @base, UpperCased @case, byte index)
-            => (HexSymbol)code(@base, @case, index);
+        public static Symbol<AsciChar,byte,N8> symbol(in AsciChar value)
+            => symbol<AsciChar,byte,N8>(value);
+
+        [MethodImpl(Inline), Op]   
+        public static Symbol<BinarySymbol,byte,N1> symbol(BinaryDigit src)
+            => symbol<BinarySymbol,byte,N1>((BinarySymbol)((byte)src + (byte)BinarySymbol.First));
+
+        [MethodImpl(Inline), Op]   
+        public static Symbol<BinarySymbol,byte,N1> symbol(Base2 @base, byte src)
+            => symbol<BinarySymbol,byte,N1>((BinarySymbol)(src + (byte)BinarySymbol.First));
 
         [MethodImpl(Inline), Op]
-        public static HexSymbol symbol(Base16 @base, LowerCased @case, byte index)
-            => (HexSymbol)code(@base, @case, index);
+        public static Symbol<HexSymbol,byte,N4> symbol(Base16 @base, UpperCased @case, byte index)
+            => symbol<HexSymbol,byte,N4>(((HexSymbol)code(@base, @case, index)));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<HexSymbol,byte,N4> symbol(Base16 @base, LowerCased @case, byte index)
+            => symbol<HexSymbol,byte,N4>(((HexSymbol)code(@base, @case, index)));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<DecimalSymbol,byte,N4> symbol(DecimalDigit src)
+            => symbol<DecimalSymbol,byte,N4>((DecimalSymbol)((byte)src + (byte)DecimalSymbol.First));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<HexSymbol,byte,N4> symbol(UpperCased @case, HexDigit src)
+            => symbol<HexSymbol,byte,N4>(hex(@case,src));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<HexSymbol,byte,N4> symbol(LowerCased @case, HexDigit src)
+            => symbol<HexSymbol,byte,N4>(hex(@case,src));
 
         [MethodImpl(Inline), Op]   
-        public static DecimalSymbol symbol(OctalDigit src)
-            => (DecimalSymbol)((byte)src + (byte)OctalSymbol.First);
-
-        [MethodImpl(Inline), Op]   
-        public static DecimalSymbol symbol(DecimalDigit src)
-            => (DecimalSymbol)((byte)src + (byte)DecimalSymbol.First);
-
-        [MethodImpl(Inline), Op]   
-        public static HexSymbol symbol(UpperCased @case, HexDigit src)
+        static HexSymbol hex(UpperCased @case, HexDigit src)
             => src <= HexDigit.x9 
                 ? (HexSymbol)((byte)src + (byte)HexSymbol.FirstNumeral) 
                 : (HexSymbol)((byte)src + (byte)HexSymbol.FirstLetterUp);
 
         [MethodImpl(Inline), Op]   
-        public static HexSymbol symbol(LowerCased @case, HexDigit src)
+        static HexSymbol hex(LowerCased @case, HexDigit src)
             => src <= HexDigit.x9 
                 ? (HexSymbol)((byte)src + (byte)HexSymbol.FirstNumeral) 
                 : (HexSymbol)((byte)src + (byte)HexSymbol.FirstLetterLo);
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(in AsciCodeCover src)
-            => AsciCodeCover.symbol(src);
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(in AsciCode2 src, byte index)
-            => AsciCodes.symbol(src, index);
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(in AsciCode4 src, byte index)
-            => AsciCodes.symbol(src, index);
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(in AsciCode5 src, byte index)
-            => AsciCodes.symbol(src, index);
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(in AsciCode8 src, byte index)
-            => AsciCodes.symbol(src, index);
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(in AsciCode16 src, byte index)
-            => Symbolic.symbol<AsciChar,byte>(src.Storage.GetElement(index));
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<AsciChar,byte> symbol(in AsciCode32 src, byte index)
-             => Symbolic.symbol<AsciChar,byte>(src.Storage.GetElement(index));
    }
 }

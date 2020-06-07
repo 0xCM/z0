@@ -90,40 +90,5 @@ namespace Z0
         /// Specifies 15 base 16
         /// </summary>
         F = 0xF,
-
-        /// <summary>
-        /// The first declared digit
-        /// </summary>
-        FirstNumeral = x0,
-
-        /// <summary>
-        /// The first declared numeral
-        /// </summary>
-        LastNumeral = x9,
-
-        /// <summary>
-        /// The first declared letter
-        /// </summary>
-        FirstLetter = A,
-
-        /// <summary>
-        /// The last declared letter
-        /// </summary>
-        LastLetter = F,
-        
-        /// <summary>
-        /// The first declared digit
-        /// </summary>
-        FirstDigit = x0,
-
-        /// <summary>
-        /// The last declared digit
-        /// </summary>
-        LastDigit = F,
-
-        /// <summary>
-        /// The digit declaration count
-        /// </summary>
-        Count = LastDigit - FirstDigit + 1                 
     }
 }

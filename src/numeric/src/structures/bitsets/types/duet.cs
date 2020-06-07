@@ -8,16 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+
     using static BitSet;
 
     using analog = duet;
     using BK = Duet;
+    using N = N2;
 
     /// <summary>
     /// Represents the value of a type-level duet and thus has domain {00,01,10,11}
     /// </summary>
     public struct duet : IEquatable<analog>, ITextual
     {
+        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
+    
         internal byte data;
 
         public static analog MinValue => MinVal;
@@ -35,6 +39,8 @@ namespace Z0
         internal const int BitWidth = 3;        
 
         internal const byte Base = (byte)MaxVal + 1;
+
+        public static N N => default;
 
         [MethodImpl(Inline)]
         public static implicit operator analog(octet src)
@@ -55,10 +61,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator sextet(analog src)
             => new sextet(src.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator septet(analog src)
-            => new septet(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator octet(analog src)
