@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Monadic;
+    using static Konst;
 
     public readonly struct ParseResult<T> : IParseResult<T>
     {
@@ -140,7 +140,7 @@ namespace Z0
         /// <typeparam name="S">The output type</typeparam>
         /// <param name="f">The function to apply when value exists</param>
         [MethodImpl(Inline)]
-        public ParseResult<S> TryMap<S>(Func<T, S> f)
+        public ParseResult<S> TryMap<S>(Func<T,S> f)
             => Succeeded ? ParseResult<S>.Success(Source, f(Value)) : ParseResult<S>.Fail(Source);
 
         /// <summary>

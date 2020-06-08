@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
 
     public interface IInterval<S,T> : IInterval<T>, ITextual<S>, IPair<S,T>
         where S : struct, IInterval<S,T>

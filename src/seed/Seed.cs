@@ -26,17 +26,6 @@ namespace Z0
         public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;
     }
 
-    [ApiHost]
-    public partial class NumericKinds : IApiHost<NumericKinds>
-    {            
-
-    }
-
-    [ApiHost]
-    public partial class NumericType : IApiHost<NumericType>
-    {
-       
-    }
 
     [ApiHost]
     public partial class AsIn : IApiHost<AsIn>

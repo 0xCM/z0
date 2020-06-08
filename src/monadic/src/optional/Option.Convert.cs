@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Monadic;
+    using static Konst;
     using static Option;
 
     partial class XTend

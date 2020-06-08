@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Seed;
 
@@ -20,6 +21,25 @@ namespace Z0
         public static unsafe MemoryAddress From<T>(in T src)
             where T : unmanaged
                 => (ulong)refs.constptr(src);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe Span<T> edit<T>(MemoryAddress src, int size)
+            where T : unmanaged
+                => new Span<T>(src.ToPointer<T>(), size);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<byte> edit(MemoryAddress src, int size)
+            => new Span<byte>(src.ToPointer<byte>(), size);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe ReadOnlySpan<byte> read(MemoryAddress src, int length)
+            => MemoryMarshal.CreateReadOnlySpan(ref src.ToRef<byte>(), length);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe ReadOnlySpan<T> read<T>(MemoryAddress src, int length)
+            => MemoryMarshal.CreateReadOnlySpan(ref src.ToRef<T>(), length);
+
+
 
         [MethodImpl(Inline)]
         public unsafe static implicit operator MemoryAddress(void* p)

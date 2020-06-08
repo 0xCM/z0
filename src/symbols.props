@@ -19,6 +19,8 @@
     <Contained>$(Src)contained/z0.contained.csproj</Contained>
     
     <ResV>$(Src)resv/z0.resv.csproj</ResV>
+    <Stores>$(Src)stores/z0.stores.csproj</Stores>
+    <Spans>$(Src)spans/z0.spans.csproj</Spans>
 
     <Time>$(Src)time/z0.time.csproj</Time>
     <Memories>$(Src)memories/z0.memories.csproj</Memories>

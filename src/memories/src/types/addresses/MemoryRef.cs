@@ -81,11 +81,11 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
-            => Spans.read(Address, Length);
+            => MemoryAddress.read(Address, Length);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
-            => Spans.read<T>(Address, Length);
+            => MemoryAddress.read<T>(Address, Length);
        
         [MethodImpl(Inline)]
         public uint Hash()

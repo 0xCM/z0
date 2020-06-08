@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Monadic;
+    using static Konst;
 
     /// <summary>
     /// A value that realizes exactly one of two alternatives

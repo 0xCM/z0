@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Characterizes a non-parametric text parser that defines a parametric parse function

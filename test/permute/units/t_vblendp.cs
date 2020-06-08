@@ -9,7 +9,6 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Seed;
     using static Memories;
 
     public class t_vblendp : t_permute<t_vblendp>
@@ -66,7 +65,7 @@ namespace Z0
             var maskspec = MaskSpecs.msb(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), max(u64));
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), max(default(NK<ulong>)));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,0,5,2,7,4,1,6,3);
             Claim.require(gvec.vsame(expect,target));

@@ -68,6 +68,11 @@ public enum PartId : ulong
 
     MetaReader = 126,
 
+    Stores = 127,
+
+    Spans = 2022,
+    
+
     IdentityTest = Identity | Test,
 
     LogixTest = Logix | Test, 
@@ -238,7 +243,6 @@ public enum PartId : ulong
             
     Contained = 2021,
 
-    Spans = 2022,
 
     Validate = 2023,
 

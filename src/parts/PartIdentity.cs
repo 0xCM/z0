@@ -10,6 +10,11 @@ namespace Z0
 
     public class PartIdentity
     {
+
+        [MethodImpl(Inline)]
+        public static IEnumerable<T> seq<T>(params T[] src)
+            => src;
+
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
     }
 }

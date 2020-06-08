@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Monadic;
-
     public delegate ParseResult Parse(string text);
 
     /// <summary>

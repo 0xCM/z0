@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
 
     public interface IArrayParser<P,T> : IStreamParser<P,T>
@@ -28,5 +26,4 @@ namespace Z0
     {
 
     }
-
 }

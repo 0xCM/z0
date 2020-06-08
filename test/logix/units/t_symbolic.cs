@@ -9,8 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     public class t_symbolic : UnitTest<t_symbolic>
     {
