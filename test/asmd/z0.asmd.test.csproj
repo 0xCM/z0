@@ -17,6 +17,7 @@
     <ProjectReference Include="$(BitSpans)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(AsmD)" />
+    <ProjectReference Include="$(Canonical)" />
 
   </ItemGroup>
 

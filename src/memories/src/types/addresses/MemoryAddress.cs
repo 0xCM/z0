@@ -21,6 +21,10 @@ namespace Z0
             where T : unmanaged
                 => (ulong)refs.constptr(src);
 
+        [MethodImpl(Inline)]
+        public unsafe static implicit operator MemoryAddress(void* p)
+            => Define((ulong)p);
+        
         public static MemoryAddress Empty => new MemoryAddress(0);
  
         public bool IsEmpty { [MethodImpl(Inline)] get => Location == 0; }
