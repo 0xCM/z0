@@ -27,5 +27,7 @@ namespace Z0
         
         public static implicit operator NK<T>(T src)
             => default;
+        
+        public T Kind => default;
     }
 }

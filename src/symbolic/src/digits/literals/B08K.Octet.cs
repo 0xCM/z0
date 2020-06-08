@@ -522,15 +522,5 @@ namespace Z0
         b11111110 = 0b11111110,
 
         b11111111 = 0b11111111,
-
-        /// <summary>
-        /// The maximum octet value
-        /// </summary>       
-        Max8 = b11111111,
-
-       /// <summary>
-       /// The bit width of an octet
-       /// </summary>       
-        W8 = 8,
     }
 }

@@ -74,15 +74,5 @@ namespace Z0
         b11110 = 0b11110,
 
         b11111 = 0b11111,
-
-       /// <summary>
-       /// The maximum quintet value
-       /// </summary>       
-        Max5 = b11111,
-        
-       /// <summary>
-       /// The bit width of a quintent
-       /// </summary>       
-        W5 = 5,
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     using N = N6;
 
     /// <summary>
-    /// Represents the value of a type-level sextet and thus is an integer in the range [0,31]
+    /// Represents the value of a type-level sextet and thus is an integer in the range [0,63]
     /// </summary>
     public struct sextet : IEquatable<analog>
     {

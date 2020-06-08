@@ -136,14 +136,5 @@ namespace Z0
 
         b111111 = 0b111111,
 
-       /// <summary>
-       /// The maximum sextet value
-       /// </summary>       
-        Max6 = b111111,
-        
-       /// <summary>
-       /// The bit width of a sextet
-       /// </summary>       
-        W6 = 6,
     }
 }

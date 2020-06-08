@@ -18,15 +18,5 @@ namespace Z0
         b10 = 0b10,
 
         b11 = 0b11,
-
-       /// <summary>
-       /// The maximum duet value
-       /// </summary>       
-        Max2 = b11,
-
-       /// <summary>
-       /// The bit width of a duet
-       /// </summary>       
-        W2 = 2,
     }
 }

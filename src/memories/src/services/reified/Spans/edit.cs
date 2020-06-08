@@ -30,5 +30,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<T> edit<T>(ref T src, int count)
             => MemoryMarshal.CreateSpan(ref src, count);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe Span<T> edit<T>(MemoryAddress src, int size)
+            where T : unmanaged
+                => new Span<T>(src.ToPointer<T>(), size);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<byte> edit(MemoryAddress src, int size)
+            => new Span<byte>(src.ToPointer<byte>(), size);
     }
 }

@@ -22,6 +22,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ref byte write(ref AsciCharCode src)
-            => ref SymBits.write(ref src);
+            => ref Unsafe.As<AsciCharCode,byte>(ref edit(src));
     }
 }

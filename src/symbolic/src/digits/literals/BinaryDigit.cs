@@ -21,19 +21,5 @@ namespace Z0
         /// </summary>
         b1 = 1,
 
-        /// <summary>
-        /// The first declared digit
-        /// </summary>
-        First = b0,
-
-        /// <summary>
-        /// The last declared digit
-        /// </summary>
-        Last = b1,
-
-        /// <summary>
-        /// The digit declaration count
-        /// </summary>
-        Count = Last - First + 1         
     }
 }

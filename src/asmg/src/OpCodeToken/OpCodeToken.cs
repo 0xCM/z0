@@ -174,6 +174,6 @@ namespace Z0.Asm.Data
         
         Max = ᕀi,
 
-        Width = Quintet.W5,
+        Width = 5,
     }
 }

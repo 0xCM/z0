@@ -17,6 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator byte(X00 src) => 0x00;
         
+
         public HexKind Kind => HexKind.x00;
 
         public string Format() => Kind.Format();

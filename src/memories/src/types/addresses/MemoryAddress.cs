@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct MemoryAddress : 
         IAddress<MemoryAddress,W64,ulong>, 
         IAddressable, 
-        IIdentification<MemoryAddress> 
+        IIdentification<MemoryAddress>
     {
         public ulong Location {get;}
         
@@ -27,9 +27,11 @@ namespace Z0
 
         public bool IsNonEmpty { [MethodImpl(Inline)] get => Location != 0; }
 
-        public MemoryAddress Zero => Empty;
+        public MemoryAddress Zero 
+            => Empty;
 
-        public string IdentityText =>  Location.ToString("x") + HexSpecs.PostSpec;
+        public string IdentityText 
+            => Location.ToString("x") + HexSpecs.PostSpec;
 
         MemoryAddress IAddressable.Address 
         {
@@ -171,8 +173,12 @@ namespace Z0
         public bool Equals(MemoryAddress src)
             => Location == src.Location;
 
+        [MethodImpl(Inline)]
+        public uint Hash()
+            => Control.hash(Location);
+
         public override int GetHashCode()
-            => Location.GetHashCode();
+            => (int)Hash();
 
         public override bool Equals(object obj)
             => obj is MemoryAddress a && Equals(a);                    
@@ -180,6 +186,10 @@ namespace Z0
         public override string ToString() 
             => Format();
 
+        [MethodImpl(Inline)]
+        public unsafe ref T ToRef<T>()
+            => ref Unsafe.AsRef<T>((void*)Location);
+        
         [MethodImpl(Inline)]
         public unsafe T* ToPointer<T>()
             where T : unmanaged

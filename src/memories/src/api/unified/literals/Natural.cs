@@ -74,16 +74,21 @@ namespace Z0
 
         public static N32 n32 => default;
 
+        public static N63 n63 => default;
+
         public static N64 n64 => default;
 
+        public static N127 n127 => default;
+
         public static N128 n128 => default;
+
+        public static N255 n255 => default;
 
         public static N256 n256 => default;
 
         public static N512 n512 => default;
 
         public static N1024 n1024 => default;
-
         
         public static N33 n33 => default;
 
@@ -145,7 +150,6 @@ namespace Z0
 
         public static N62 n62 => default;
 
-        public static N63 n63 => default;
 
 
     }

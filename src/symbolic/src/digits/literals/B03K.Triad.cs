@@ -27,14 +27,5 @@ namespace Z0
 
         b111 = 0b111,
 
-       /// <summary>
-       /// The maximum triad value
-       /// </summary>       
-        Max3 = b111,
-        
-       /// <summary>
-       /// The bit width of a triad
-       /// </summary>       
-        W3 = 3,
     }        
 }

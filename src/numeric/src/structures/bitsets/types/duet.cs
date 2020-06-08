@@ -74,6 +74,21 @@ namespace Z0
         public static implicit operator BK(analog src)
             => (BK)src.data;
 
+        [MethodImpl(Inline)]
+        public static implicit operator analog(HexKind2 src) => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(X00 src) => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(X01 src) => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(X02 src) => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(X03 src) => (byte)src;
+
         /// <summary>
         /// Converts a 3-bit integer to an unsigned 8-bit integer
         /// </summary>

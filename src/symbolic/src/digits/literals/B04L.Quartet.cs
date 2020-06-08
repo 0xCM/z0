@@ -10,9 +10,9 @@ namespace Z0
 
     public partial class BitSets
     {
-        public const B Max4 = B.Max4;
+        public const B Max4 = B.b1111;
 
-        public const B W4 = B.W4;                
+        public const B W4 = B.b0100;                
         
         public const B b0000 = B.b0000;        
                 

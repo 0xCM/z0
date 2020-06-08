@@ -94,6 +94,12 @@ namespace Z0
         public static implicit operator byte(analog src)
             => (byte)src.data;
 
+        [MethodImpl(Inline)]
+        public static implicit operator analog(X00 src) => (byte)src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator analog(X01 src) => (byte)src;
+
         /// <summary>
         /// Converts a 1-bit integer to an unsigned 16-bit integer
         /// </summary>

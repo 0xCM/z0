@@ -35,6 +35,6 @@ namespace Z0
         public static implicit operator ulong(N15 src) => Value;
 
 
-        public override string ToString() => Text;
+        public override string ToString() => Text;        
     }
 }

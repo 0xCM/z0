@@ -22,7 +22,7 @@ namespace Z0
             /// Defines the (uniform) bitfield segment width
             /// </summary>
             [SegWidth("[1111]")]
-            SegWidth = Max4,
+            SegWidth = b1111,
 
             /// <summary>
             /// Defines the L0 bitfield segment

@@ -42,15 +42,5 @@ namespace Z0
         b1110 = 0b1110,
 
         b1111 = 0b1111,
-
-       /// <summary>
-       /// The maximum quartet value
-       /// </summary>       
-        Max4 = b1111,
-
-       /// <summary>
-       /// The bit-width of a quartet
-       /// </summary>       
-        W4 = 4,
     }
 }

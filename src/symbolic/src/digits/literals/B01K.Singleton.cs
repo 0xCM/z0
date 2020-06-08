@@ -20,15 +20,5 @@ namespace Z0
         /// Enabled
         /// </summary>
         b1 = 0b1,
-
-       /// <summary>
-       /// The maximum singleton value
-       /// </summary>       
-        Max1 = b1,
-        
-       /// <summary>
-       /// The bit width of a singleton
-       /// </summary>       
-        W1 = 1,        
     }
 }
