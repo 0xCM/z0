@@ -26,7 +26,7 @@ namespace Z0
 
     public readonly struct EnumLiteralRecord : IRecord<EnumLiteralRecordField, EnumLiteralRecord>
     {
-        public static EnumLiteralRecord Empty = new EnumLiteralRecord(0,string.Empty, string.Empty, EnumPrimalKind.None, 0);
+        public static EnumLiteralRecord Empty = new EnumLiteralRecord(0,string.Empty, string.Empty, EnumScalarKind.None, 0);
         
         public int Sequence {get;}
 
@@ -34,12 +34,12 @@ namespace Z0
 
         public string Description {get;}
 
-        public EnumPrimalKind DataType {get;}
+        public EnumScalarKind DataType {get;}
 
         public ulong Value {get;}
 
         [MethodImpl(Inline)]
-        public EnumLiteralRecord(int Sequence, string Identifier, string Description, EnumPrimalKind DataType, ulong Value)
+        public EnumLiteralRecord(int Sequence, string Identifier, string Description, EnumScalarKind DataType, ulong Value)
         {
             this.Sequence = Sequence;
             this.Identifier = Identifier;

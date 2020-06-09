@@ -12,7 +12,7 @@ namespace Z0
     using F = ResourceField;
     using R = ResourceRecord;
 
-    public enum ResourceField : int
+    public enum ResourceField : uint
     {
         Offset = 0 | (8 << 16),
 
@@ -60,11 +60,11 @@ namespace Z0
         public string DelimitedText(char delimiter)
         {
             var dst = text.build();
-            dst.AppendField(F.Offset, Offset.FormatSmallHex());
-            dst.AppendDelimitedHere(Address, F.Address, delimiter); 
-            dst.AppendDelimited(Size.FormatAsmHex(4), FieldFormat.width(F.Size), delimiter); 
-            dst.AppendDelimited(Uri, FieldFormat.width(F.Uri), delimiter);                        
-            dst.AppendDelimited(Data.FormatHexBytes(), delimiter);                        
+            dst.Append(F.Offset, Offset.FormatSmallHex());
+            dst.Delimit(F.Address, Address, delimiter); 
+            dst.Delimit(F.Size, Size.FormatAsmHex(4), delimiter); 
+            dst.Delimit(F.Uri, Uri, delimiter);                        
+            dst.Delimit(F.Data, Data.FormatHexBytes(), delimiter);                        
             return dst.ToString();
         }
     }

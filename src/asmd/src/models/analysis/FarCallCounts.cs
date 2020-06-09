@@ -46,16 +46,16 @@ namespace Z0.Asm.Data
 
         const char eol = Chars.Colon;
 
-        const int pad = 10;
+        const Padding pad = Padding.R10;
 
         const char sep = Chars.Pipe;
 
         public string Format()
         {            
             var dst = text.build();
-            dst.AppendLabeled(nameof(TargetsFar), eol, TargetsFar);
-            dst.AppendDelimited(nameof(HostedReceivers), eol, HostedReceivers, pad, sep);
-            dst.AppendDelimited(nameof(UnhostedReceivers), eol, UnhostedReceivers, pad, sep);
+            dst.Label(nameof(TargetsFar), eol, TargetsFar);
+            dst.DelimitLabel(nameof(HostedReceivers), eol, HostedReceivers, pad, sep);
+            dst.DelimitLabel(nameof(UnhostedReceivers), eol, UnhostedReceivers, pad, sep);
             return dst.ToString();
         }
     }

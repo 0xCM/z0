@@ -5,17 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
 
     public interface IEncoded<F> : IEquatable<F>, ILengthwise, ITextual
         where F : struct, IEncoded<F>
     {
-        // bool IsEmpty {get;}
 
-        // bool IsNonEmpty {get;}
     }
 
     public interface IEncoded<F,C> : IEncoded<F>

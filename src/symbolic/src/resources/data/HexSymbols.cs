@@ -6,16 +6,24 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    using static Seed;
-    
+
+    using static Seed;    
     using static Control;
+    using static Symbolic;
 
     using HSU = HexSymbolUp;
     using HSL = HexSymbolLo;
 
     partial class SymbolicData
     {
+        public static IEnumerable<MemoryRef> Refs
+            => seq(memref(UpperHexSymbolData),
+                memref(LowerHexSymbolData), 
+                memref(UpperHexCodes), 
+                memref(LowerHexCodes));
+
         /// <summary>
         /// Defines a 16-element sequence with terms that correspond to the uppercase hex symbolic literals
         /// </summary>

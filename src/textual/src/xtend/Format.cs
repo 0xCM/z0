@@ -8,8 +8,6 @@ namespace Z0
     using System.Text;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-
     partial class XTend
     {
         public static string Format<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma, int offset = 0, int pad = 0, bool bracketed = true)

@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public interface ILocatedCode<F,C> : IEncoded<F,C>, IAddressable
         where F : struct, IEncoded<F,C>

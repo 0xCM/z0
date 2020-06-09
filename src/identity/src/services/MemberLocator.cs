@@ -77,7 +77,7 @@ namespace Z0
                   where K : unmanaged, Enum
                         => from m in HostedDirect(src, kind)                        
                         let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Method.Name, m.Id)
-                        let address = MemoryAddress.Define(Jit(m.Method))
+                        let address = MemoryAddress.define(Jit(m.Method))
                         select ApiMember.Define(uri, m.Method, m.KindId, address);
 
             public IEnumerable<ApiMember> LocatedGeneric<K>(IApiHost src, K kind)
@@ -87,7 +87,7 @@ namespace Z0
                   let reified = m.MakeGenericMethod(t)
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Name, id)
-                  let address = MemoryAddress.Define(Jit(reified))
+                  let address = MemoryAddress.define(Jit(reified))
                   select ApiMember.Define(uri, reified, m.KindId(), address);
 
             public IEnumerable<ApiMember> LocatedDirect(IApiHost src)
@@ -95,7 +95,7 @@ namespace Z0
                   let kid = m.KindId()
                   let id = Diviner.Identify(m)
                   let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Name, id)
-                  let address = MemoryAddress.Define(Jit(m))
+                  let address = MemoryAddress.define(Jit(m))
                   select ApiMember.Define(uri, m, kid, address);
                         
             public IEnumerable<ApiMember> LocatedGeneric(IApiHost src)
@@ -103,7 +103,7 @@ namespace Z0
                   let kid = m.KindId()
                   from t in ApiCollector.NumericClosures(m)
                   let reified = m.MakeGenericMethod(t)
-                  let address = MemoryAddress.Define(Jit(reified))
+                  let address = MemoryAddress.define(Jit(reified))
                   let id = Diviner.Identify(reified)
                   let uri = OpUri.Define(OpUriScheme.Located, src.UriPath, m.Name, id)
                   select ApiMember.Define(uri, reified, kid, address);

@@ -9,6 +9,7 @@ namespace Z0
 
     using static Seed;
     using static HexSpecs;
+    using NK = NumericKind;
 
     partial class XTend
     {                

@@ -18,6 +18,8 @@ namespace Z0
         public static MemoryStore Create()
             => MemoryStore.Service(Store.Data.provided());
 
+        
+
         [Op]
         static void UseCase(in MemoryStore store, Span<MemoryAddress> results)
         {
@@ -54,7 +56,5 @@ namespace Z0
             UseCase(store,results);
             return results;
         }
-
     }
-
 }

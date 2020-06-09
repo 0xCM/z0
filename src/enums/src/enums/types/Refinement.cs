@@ -21,7 +21,7 @@ namespace Z0
     public interface IRefinement<V> : ITextual
         where V : unmanaged, Enum
     {
-        EnumPrimalKind Kind => Enums.kind<V>();
+        EnumScalarKind Kind => Enums.kind<V>();
     }
     
     public interface IRefinement<V,T> : IRefinement<V>
@@ -75,7 +75,7 @@ namespace Z0
         {
             Value = value;
         }        
-        public EnumPrimalKind Kind 
+        public EnumScalarKind Kind 
         {
             [MethodImpl(Inline)]
             get => Enums.kind<V>();

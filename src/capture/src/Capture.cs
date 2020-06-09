@@ -23,6 +23,11 @@ namespace Z0.Asm
             => LocatedCodeParser.Create(new byte[Pow2.T14]);
 
         [MethodImpl(Inline)]
+        public IMemoryCapture Memory(IAsmContext context, int? bufferlen = null)
+            => MemoryCaptureService.Create(context.Decoder, bufferlen);
+
+
+        [MethodImpl(Inline)]
         IMemoryCapture MemoryCapture(IAsmFunctionDecoder decoder, int? bufferlen = null)
             => MemoryCaptureService.Create(decoder, bufferlen);
 

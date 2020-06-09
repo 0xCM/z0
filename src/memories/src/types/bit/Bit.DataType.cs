@@ -9,6 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
+    using static Konst;
+
     /// <summary>
     /// An anti-succinct representation of a bit 
     /// </summary>
@@ -667,10 +669,8 @@ namespace Z0
             => TypeIdentity.Define("1u");
     }
 
-    public static class BitTypeExtensions
+    partial class XTend
     {
-        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
         public static string Format(this IEnumerable<bit> src, bool reversed = true)
         {
             var chars = src.Select(x => x.ToChar()).ToArray();

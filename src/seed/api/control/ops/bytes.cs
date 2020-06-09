@@ -12,6 +12,16 @@ namespace Z0
 
     partial class Control
     {
+        /// <summary>
+        /// Converts the source value to a bytespan
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Span<byte> bytes2<T>(T src)
+            where T : struct
+                => MemoryMarshal.AsBytes(MemoryMarshal.CreateSpan(ref src, Unsafe.SizeOf<T>()));
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src)
             where T : struct

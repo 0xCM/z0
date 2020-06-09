@@ -42,7 +42,7 @@ namespace Z0
 
             var parser = NumericParser.create<int>();
             var seq = parser.Parse(fields[0]).ValueOrDefault();            
-            var address = MemoryAddress.Define(Parsers.hex().Parse(fields[1]).ValueOrDefault());
+            var address = MemoryAddress.define(Parsers.hex().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();            
             var term = Enums.Parse<ExtractTermCode>(fields[3]).ValueOrDefault();
             var uri = OpUri.Parse(fields[4]).ValueOrDefault(OpUri.Empty);

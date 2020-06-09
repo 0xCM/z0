@@ -14,11 +14,11 @@ namespace Z0
             where T : unmanaged
         {
             var dst = text.build();
-            dst.AppendLabeled("left", Chars.Colon, x.Format());
-            dst.AppendLabeled("right", Chars.Colon, y.Format());
-            dst.AppendLabeled("expect", Chars.Colon, expect.Format());
-            dst.AppendLabeled("actual", Chars.Colon, actual.Format());
-            dst.AppendLabeled("result", Chars.Colon, result.Format());
+            dst.Label("left", Chars.Colon, x.Format());
+            dst.Label("right", Chars.Colon, y.Format());
+            dst.Label("expect", Chars.Colon, expect.Format());
+            dst.Label("actual", Chars.Colon, actual.Format());
+            dst.Label("result", Chars.Colon, result.Format());
             return dst.ToString();
         }
 
@@ -26,11 +26,11 @@ namespace Z0
             where T : unmanaged
         {
             var dst = text.build();
-            dst.AppendLabeled("left", Chars.Colon, x.Format());
-            dst.AppendLabeled("right", Chars.Colon, y.Format());
-            dst.AppendLabeled("expect", Chars.Colon, expect.Format());
-            dst.AppendLabeled("actual", Chars.Colon, actual.Format());
-            dst.AppendLabeled("result", Chars.Colon, result.Format());
+            dst.Label("left", Chars.Colon, x.Format());
+            dst.Label("right", Chars.Colon, y.Format());
+            dst.Label("expect", Chars.Colon, expect.Format());
+            dst.Label("actual", Chars.Colon, actual.Format());
+            dst.Label("result", Chars.Colon, result.Format());
             return dst.ToString();
         }
     }

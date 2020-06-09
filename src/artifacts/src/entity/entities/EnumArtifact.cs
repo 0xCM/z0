@@ -17,7 +17,7 @@ namespace Z0
 
         public string Identifier {get;}
 
-        public EnumPrimalKind DataType {get;}
+        public EnumScalarKind DataType {get;}
 
         public TypeFacets Facets {get;}
 
@@ -26,7 +26,7 @@ namespace Z0
         public EnumLiteralField[] Members {get;}
 
         [MethodImpl(Inline)]
-        public EnumArtifact(string Namespace, string Declarer, string Identifier, EnumPrimalKind DataType, TypeFacets Facets, string Description, EnumLiteralField[] Members)
+        public EnumArtifact(string Namespace, string Declarer, string Identifier, EnumScalarKind DataType, TypeFacets Facets, string Description, EnumLiteralField[] Members)
         {
             this.Namespace = Namespace;
             this.Declarer = Declarer;

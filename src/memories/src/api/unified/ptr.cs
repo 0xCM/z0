@@ -21,10 +21,6 @@ namespace Z0
             where T : unmanaged
                 => Pointed.ptr(ref src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe T* gptr<T>(in T src)
-            where T : unmanaged
-                => (T*)Control.pvoid(ref edit(in src));
 
         /// <summary>
         /// Presents generic reference as a generic pointer displaced by an element offset

@@ -11,13 +11,6 @@ namespace Z0
 
     partial class Symbolic    
     {        
-        // public static IEnumerable<(Perm4L perm, string format)> Exhaust(N4 n)
-        //     => from perm in Enums.valarray<Perm4L>()
-        //             where !perm.IsSymbol()
-        //             let maps = (perm, format:perm.FormatMap())
-        //             orderby maps.perm descending
-        //             select maps;
-
         /// <summary>
         /// Constructs a permutation of length four from four ordered symbols
         /// </summary>

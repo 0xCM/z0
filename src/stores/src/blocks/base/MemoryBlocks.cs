@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Seed;
-    using static Spans;
+    using static Konst;
 
     [ApiHost]
     public readonly struct MemoryBlocks : IApiHost<MemoryBlocks>

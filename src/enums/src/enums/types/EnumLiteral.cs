@@ -6,14 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Defines a boxed enumeration literal as the triple (index,identifier,value)
     /// </summary>
     public readonly struct EnumLiteral : IEnumLiteral<EnumLiteral>
     {
+        /// <summary>
+        /// The compiler-emitted field that defines the literal
+        /// </summary>
+        public FieldInfo Field {get;}
+
         /// <summary>
         /// The literal declaration order, unique within the declaring enum
         /// </summary>
@@ -29,15 +35,28 @@ namespace Z0
         /// </summary>
         public ulong LiteralValue {get;}
 
-        public NumericKind NumericKind {get;}
-            
-        [MethodImpl(Inline)]
-        public EnumLiteral(int index, string identifier, NumericKind kind, ulong value)
+        /// <summary>
+        /// The enum's numeric data type
+        /// </summary>
+        public EnumScalarKind DataType {get;}
+
+        /// <summary>
+        /// The metadata token that identifies the backing field
+        /// </summary>
+        public MetadataToken Token 
         {
-            this.Identifier = identifier;
-            this.NumericKind = kind;
-            this.Index = index;
-            this.LiteralValue = value;
+            [MethodImpl(Inline)]
+            get => Field;
+        }
+
+        [MethodImpl(Inline)]
+        public EnumLiteral(FieldInfo field, int index, string identifier, EnumScalarKind type, ulong value)
+        {
+            Field = field;
+            Identifier = identifier;
+            DataType = type;
+            Index = index;
+            LiteralValue = value;
         }           
 
         [MethodImpl(Inline)]

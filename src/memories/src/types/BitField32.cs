@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Numerics;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Defines an extremely lo-tech 32-bit bitfield

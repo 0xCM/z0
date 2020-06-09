@@ -20,7 +20,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static PrimalKind primal(TypeCode src)
             => Control.skip(PrimalKinds,(int)src);
-        
+
+        [MethodImpl(Inline), Op]
+        public static PrimalKind primal(Type src)
+            => primal(Type.GetTypeCode(src));
+
+        [MethodImpl(Inline), Op]
+        public static PrimalKind primal<T>()
+            => primal(typeof(T));
+
         static ReadOnlySpan<PrimalKind> PrimalKinds
         {
             [MethodImpl(Inline)]

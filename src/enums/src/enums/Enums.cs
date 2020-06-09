@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     using NK = NumericKind;
-    using BK = EnumPrimalKind;
+    using BK = EnumScalarKind;
 
     [ApiHost]
     public partial class Enums
@@ -27,9 +27,9 @@ namespace Z0
         /// </summary>
         /// <param name="base">An integral type refined by an enum</param>
         [MethodImpl(Inline)]
-        public static TypeWidth width(EnumPrimalKind @base)
+        public static TypeWidth width(EnumScalarKind @base)
         {
-            var exp = (byte)(@base & EnumPrimalKind.WidthMask);
+            var exp = (byte)(@base & EnumScalarKind.WidthMask);
             return (TypeWidth)Pow2.pow(exp);
         }
 
@@ -38,15 +38,15 @@ namespace Z0
         /// </summary>
         /// <param name="base">An integral type refined by an enum</param>
         [MethodImpl(Inline)]
-        public static bool signed(EnumPrimalKind @base)
-            => (@base & EnumPrimalKind.SignMask) != 0;
+        public static bool signed(EnumScalarKind @base)
+            => (@base & EnumScalarKind.SignMask) != 0;
 
         /// <summary>
         /// Determines the integral type refined by a value-identified enum type
         /// </summary>
         /// <param name="value">The enum value</typeparam>
         [MethodImpl(Inline)]
-        public static EnumPrimalKind @base(Enum value)
+        public static EnumScalarKind @base(Enum value)
             => @base(value.GetType().GetEnumUnderlyingType().NumericKind());
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumPrimalKind @base(Type et)
+        public static EnumScalarKind @base(Type et)
             => @base(et.NumericKind());
         
         /// <summary>
@@ -62,11 +62,11 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumPrimalKind @base<E>()
+        public static EnumScalarKind @base<E>()
             where E : unmanaged, Enum
              => @base(typeof(E).GetEnumUnderlyingType().NumericKind()); 
 
-        public static EnumPrimalKind @base(NumericKind src)
+        public static EnumScalarKind @base(NumericKind src)
              => src switch{
                 NK.U8 => BK.U8,
                 NK.I8 => BK.I8,
@@ -76,7 +76,7 @@ namespace Z0
                 NK.I32 => BK.I32,
                 NK.I64 => BK.I64,
                 NK.U64 => BK.U64,                
-                _ => EnumPrimalKind.None,
+                _ => EnumScalarKind.None,
             };
 
         public static unsafe ulong untype<E>(E src)
@@ -145,8 +145,8 @@ namespace Z0
         public static EnumLiterals<E,V> values<E,V>(bool peek = false)
             where E : unmanaged, Enum
             where V : unmanaged
-                => peek ? CreateIndex<E,V>() 
-                : (EnumLiterals<E,V>)ValueCache.GetOrAdd(typeof(E), _ => CreateIndex<E,V>());
+                => peek ? LiteralSequence<E,V>() 
+                : (EnumLiterals<E,V>)ValueCache.GetOrAdd(typeof(E), _ => LiteralSequence<E,V>());
 
         /// <summary>
         /// Determines whether an enum has a specified integral value

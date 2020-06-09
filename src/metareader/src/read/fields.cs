@@ -30,13 +30,14 @@ namespace Z0
         {
             return LiteralValue(state, entry.Signature, seq);
         }
-        
+
         internal static ReadOnlySpan<FieldRecord> fields(in ReaderState state)
         {
             var reader = state.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
             var dst = alloc<FieldRecord>(count);
+            
 
             for(var i=0; i<count; i++)
             {

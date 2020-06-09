@@ -23,14 +23,14 @@ namespace Z0
 
             Span<MemoryRef> dst = buffer;
             var i=0;
-            seek(dst,i++) = @ref(Seg00);
-            seek(dst,i++) = @ref(Seg01);
-            seek(dst,i++) = @ref(Seg02);
-            seek(dst,i++) = @ref(Seg03);
-            seek(dst,i++) = @ref(Seg04);
-            seek(dst,i++) = @ref(Seg05);
-            seek(dst,i++) = @ref(Seg06);
-            seek(dst,i++) = @ref(Seg07);
+            seek(dst,i++) = memref(Seg00);
+            seek(dst,i++) = memref(Seg01);
+            seek(dst,i++) = memref(Seg02);
+            seek(dst,i++) = memref(Seg03);
+            seek(dst,i++) = memref(Seg04);
+            seek(dst,i++) = memref(Seg05);
+            seek(dst,i++) = memref(Seg06);
+            seek(dst,i++) = memref(Seg07);
             return buffer;
         }
 

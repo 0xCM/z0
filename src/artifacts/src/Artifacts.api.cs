@@ -31,11 +31,11 @@ namespace Z0
             => new StructArtifact(ns, name, facets, Description, members);
 
         [MethodImpl(Inline), Op]
-        public static EnumArtifact Enum(string Namespace, string Declarer, string Identifier, EnumPrimalKind DataType, TypeFacets Facets, string Description, EnumLiteralField[] Members)
+        public static EnumArtifact Enum(string Namespace, string Declarer, string Identifier, EnumScalarKind DataType, TypeFacets Facets, string Description, EnumLiteralField[] Members)
             => new EnumArtifact(Namespace, Declarer, Identifier, DataType, Facets, Description, Members);
         
         [MethodImpl(Inline), Op]
-        public static EnumLiteralField EnumLiteral(string Declarer, string Identifier, int Index, string Description, EnumPrimalKind DataType, ulong LiteralValue)
+        public static EnumLiteralField EnumLiteral(string Declarer, string Identifier, int Index, string Description, EnumScalarKind DataType, ulong LiteralValue)
             => new EnumLiteralField(Declarer, Identifier, Index, Description, DataType, LiteralValue);
     }
 

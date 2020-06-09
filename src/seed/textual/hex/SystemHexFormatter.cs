@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
+    using static Konst;
 
     public readonly struct SystemHexFormatter : ISystemFormatter
     {
@@ -44,6 +44,4 @@ namespace Z0
         public string Format(T src, string config = null)
             => F(src, config);
     }
-
-
 }

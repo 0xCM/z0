@@ -5,10 +5,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     partial class Control
     {
+
         [MethodImpl(Inline)]
         public static unsafe void* pvoid<T>(ref T src)
             => Unsafe.AsPointer(ref src); 

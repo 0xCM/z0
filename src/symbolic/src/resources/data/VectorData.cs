@@ -9,7 +9,7 @@ namespace Z0
     using static HexConst;
 
     public readonly struct VectorData
-    {
+    {        
         public static ReadOnlySpan<byte> Units128x8u
             => new byte[16]{
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1

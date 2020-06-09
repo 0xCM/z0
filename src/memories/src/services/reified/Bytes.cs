@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> get<T>(in T src)
             where T : struct
-                => from(ref edit(in src));
+                => from(ref edit(src));
 
         /// <summary>
         /// Reads a byte array from an unmanaged source value and stored the result in a caller-allocated target

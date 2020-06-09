@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Seed;
 
@@ -53,10 +54,34 @@ namespace Z0
         /// <summary>
         /// The numeric kind refined by the enum
         /// </summary>
-        public NumericKind NumericKind 
+        public EnumScalarKind DataType 
         {
             [MethodImpl(Inline)]
-            get => NumericKinds.kind<V>();
+            get => Enums.@base<E>();
+        }
+
+        public MetadataToken Token
+        {
+            [MethodImpl(Inline)]
+            get => Literal.Token;
+        }
+
+        public FieldInfo Field
+        {
+            [MethodImpl(Inline)]
+            get => Literal.Field;
+        }
+
+        public string Description
+        {
+            [MethodImpl(Inline)]
+            get => Literal.Description;
+        }
+
+        public UserMetadata UserData
+        {
+            [MethodImpl(Inline)]
+            get => Literal.UserData;
         }
 
         [MethodImpl(Inline)]

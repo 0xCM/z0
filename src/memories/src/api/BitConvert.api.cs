@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> GetBytes<T>(in T src)
             where T : struct
-                => Bytes.get(in src);
+                => Bytes.get(src);
 
         /// <summary>
         /// Converts a specified number of source elements to bytes

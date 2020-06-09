@@ -12,30 +12,26 @@ namespace Z0
     
     public readonly struct ResourceMember : ITextual
     {
-        public readonly MemberInfo Member;
+        public MemberInfo Member {get;}
 
-        public readonly ulong Location;
-
-        public readonly uint CellCount;
+        public MemoryRef Reference {get;}
         
-        public readonly uint ByteCount;    
+        public MemoryAddress Address => Reference.Address;
+
+        public ByteSize Size => Reference.Length;
 
         [MethodImpl(Inline)]
-        public static ResourceMember Define(MemberInfo member, ulong location, uint cells, uint bytes)
-            => new ResourceMember(member,location,cells,bytes);
+        public static ResourceMember Define(MemberInfo member, MemoryRef memref)
+            => new ResourceMember(member, memref);
 
         [MethodImpl(Inline)]
-        public ResourceMember(MemberInfo member, ulong location, uint cells, uint bytes)
+        public ResourceMember(MemberInfo member, MemoryRef memref)
         {
             Member = member;
-            Location = location;
-            CellCount = cells;
-            ByteCount = bytes;
+            Reference = memref;
         }
 
-        public uint CellWidth => (ByteCount/CellCount)*8;  
-
         public string Format()
-            => $"{Member.Name} {Location.FormatAsmHex()}[{CellCount}:{CellWidth}w]";
+            => $"{Member.Name} {Reference.Format()}";
     }
 }

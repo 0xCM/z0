@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    using static Seed;
+    using static Konst;
 
     [ApiHost]
     public readonly struct SpanReader : IApiHost<SpanReader>

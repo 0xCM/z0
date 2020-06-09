@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static Seed;
+    using System.Reflection;
+    
+    using static Konst;
 
     /// <summary>
     /// Defines an enumeration literal as the triple (index,identifier,value)
@@ -23,6 +24,11 @@ namespace Z0
         where E : unmanaged, Enum        
     {
         /// <summary>
+        /// The compiler-emitted field that defines the literal
+        /// </summary>
+        public FieldInfo Field {get;}
+        
+        /// <summary>
         /// The literal declaration order, unique within the declaring enum
         /// </summary>
         public int Index {get;}
@@ -37,21 +43,41 @@ namespace Z0
         /// </summary>
         public E LiteralValue  {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator EnumLiteral<E>((int index, string name, E value) src)
-            => new EnumLiteral<E>(src.index, src.name, src.value);
-            
-        [MethodImpl(Inline)]
-        internal EnumLiteral(int index, string identifier, E value)
+        /// <summary>
+        /// The enum's numeric data type
+        /// </summary>
+        public EnumScalarKind DataType {get;}
+
+        public string Description {get;}
+
+        public UserMetadata UserData {get;}
+
+        /// <summary>
+        /// The metadata token that identifies the backing field
+        /// </summary>
+        public MetadataToken Token 
         {
-            this.Identifier = identifier;
-            this.Index = index;
-            this.LiteralValue = value;
+            [MethodImpl(Inline)]
+            get => Field;
+        }
+
+
+        [MethodImpl(Inline)]
+        internal EnumLiteral(FieldInfo field, EnumScalarKind type, int index, string identifier, E value, string description, UserMetadata data)
+        {
+            Field = field;
+            DataType = type;
+            Identifier = identifier;
+            Index = index;
+            LiteralValue = value;
+            Description = description;
+            UserData = data;
         }           
 
         [MethodImpl(Inline)]
         public bool Equals(EnumLiteral<E> src)
-            => Index == src.Index 
+            => Token == src.Token
+            && Index == src.Index 
             && Identifier == src.Identifier 
             && LiteralValue.Equals(src.LiteralValue);
 

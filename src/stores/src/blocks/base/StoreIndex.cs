@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Seed;
+    using static Konst;
 
     public enum StoreKey : byte
     {
@@ -42,7 +42,6 @@ namespace Z0
         k0e = 0xE,
 
         k0f = 0xF,
-
     }
     
     public struct StoreIndex

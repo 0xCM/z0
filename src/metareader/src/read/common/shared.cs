@@ -9,13 +9,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
-
+        
     using static Seed;    
     using static MetadataRecords;
     using static Control;
     
+
+
     partial class MetadataRead
     {        
+        public static MetadataRootBuilder CreateBuilder()
+        {
+            var builder = new MetadataBuilder();
+            var root = new MetadataRootBuilder(builder);
+            return root;
+        }
+        
         [MethodImpl(Inline)]
         internal static Span<T> alloc<T>(int count)
             => new T[count];

@@ -13,6 +13,17 @@ namespace Z0
 
     partial class Symbolic     
     {
+        /// <summary>
+        /// Defines a useful representation of an enumeration literal
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="T">The scalar type refined by the enum</typeparam>
+        /// <typeparam name="A">The asci identifier type</typeparam>
+        [MethodImpl(Inline)]
+        public static @enum<E,T> @enum<E,T>(int index, string identifier, E literal, T scalar)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => new @enum<E,T>(index, identifier, literal, scalar);
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
@@ -51,15 +62,7 @@ namespace Z0
         {
             ReadOnlySpan<E> literals = Enums.valarray<E>();
             var count = literals.Length - crop;
-            return literals.Slice(0,count);
-
-            // ReadOnlySpan<FieldInfo> fields = typeof(E).DeclaredFields();
-            // var count = fields.Length - crop;
-            // Span<E> values = new E[count];
-
-            // for(var i=0; i<count; i++)
-            //     Control.seek(values,i) = (E)Control.skip(fields,i).GetRawConstantValue();
-            
+            return literals.Slice(0,count);            
         }
     }
 }

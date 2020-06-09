@@ -55,7 +55,7 @@ namespace Z0
                 if(row.CellCount >= 3)
                 {
                     var value = BitSpans.parse(row[2]).Convert<byte>();
-                    dst[i] = new EnumLiteralRecord(i, row[0], row[1], EnumPrimalKind.None, value);
+                    dst[i] = new EnumLiteralRecord(i, row[0], row[1], EnumScalarKind.None, value);
                 }
                 else
                     dst[i] = EnumLiteralRecord.Empty;

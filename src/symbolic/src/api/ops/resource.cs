@@ -17,23 +17,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static ResourceMember resource<T>(MemberInfo member, ReadOnlySpan<T> src)
             where T : unmanaged
-        {
-            ref readonly var rHead = ref head(src);
-            var pHead = Unsafe.AsPointer(ref edit(rHead));
-            var cellcount = (uint)src.Length;
-            var cellsize = (uint)Unsafe.SizeOf<T>();
-            return ResourceMember.Define(member, (ulong)pHead, cellcount, cellcount*cellsize);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ReadOnlySpan<T> resource<T>(ResourceMember<T> member, int i0, int i1)
-            where T : unmanaged
-                => segment((T*)member.Location, i0, i1);
+                => ResourceMember.Define(member, MemoryRef.From(cast<T,byte>(src)));
 
         [MethodImpl(Inline)]
         public static unsafe ReadOnlySpan<T> resource<T>(ResourceMember member, int i0, int i1)
             where T : unmanaged
-                => segment((T*)member.Location, i0, i1);
+                => segment(member.Address.ToPointer<T>(), i0, i1);
 
         [MethodImpl(Inline)]
         public unsafe static ReadOnlySpan<T> resource<T>(ulong location, int cells)

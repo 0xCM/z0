@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-
     public readonly struct HexLineFormatter : IHexLineFormatter
     {
         public static IHexLineFormatter Service => default(HexLineFormatter);

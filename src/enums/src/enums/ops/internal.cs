@@ -26,13 +26,14 @@ namespace Z0
         static EnumLiterals<E> CreateIndex<E>()
             where E : unmanaged, Enum
         {
+            var type = Enums.@base<E>();
             var fields = typeof(E).LiteralFields().ToArray();
             var indices = new List<EnumLiteral<E>>(fields.Length);
             for(var i=0; i< fields.Length; i++)
             {
                 var field = fields[i];
                 var value = (E)field.GetRawConstantValue();
-                indices.Add((i, field.Name, value));
+                indices.Add(new EnumLiteral<E>(field, type, i, field.Name, value, string.Empty, UserMetadata.Empty));
             }
             return indices.ToIndex();
         }
@@ -42,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
-        static EnumLiterals<E,T> CreateIndex<E,T>()
+        public static EnumLiterals<E,T> LiteralSequence<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
         {

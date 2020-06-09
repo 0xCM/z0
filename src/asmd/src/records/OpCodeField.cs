@@ -12,10 +12,8 @@ namespace Z0.Asm.Data
 
     public enum OpCodeFieldId
     {
-        [FieldSynonym(DF.Sequence)]
         Sequence, 
         
-        [FieldSynonym(DF.Mnemonic)]
         Mnemonic,  
         
         Expression, 
@@ -30,7 +28,6 @@ namespace Z0.Asm.Data
         
         CpuId,
         
-        [FieldSynonym(DF.OpCodeId)]
         Id,
     }
 

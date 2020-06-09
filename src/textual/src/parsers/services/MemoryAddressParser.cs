@@ -14,7 +14,7 @@ namespace Z0
         public static ITextParser<MemoryAddress> Service => default(MemoryAddressParser);
 
         public ParseResult<MemoryAddress> Parse(string src)
-            => Parsers.hex().Parse(src).TryMap(x => MemoryAddress.Define(x));
+            => Parsers.hex().Parse(src).TryMap(x => MemoryAddress.define(x));
 
         public MemoryAddress Parse(string src, MemoryAddress @default)
             => Parse(src).ValueOrDefault(@default);

@@ -14,35 +14,35 @@ namespace Z0
         /// Selects the concrete types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
-        public static IEnumerable<Type> Concrete(this IEnumerable<Type> src)
+        public static Type[] Concrete(this Type[] src)
             => src.Where(t => t.IsConcrete());
 
         /// <summary>
         /// Returns all source types which ar interfaces
         /// </summary>
         /// <param name="src">The source types</param>
-        public static IEnumerable<Type> Interfaces(this IEnumerable<Type> src)
+        public static Type[] Interfaces(this Type[] src)
             => src.Where(t => t.IsInterface);
 
         /// <summary>
         /// Returns all source types which are classes
         /// </summary>
         /// <param name="src">The source types</param>
-        public static IEnumerable<Type> Classes(this IEnumerable<Type> src)
+        public static Type[] Classes(this Type[] src)
             => src.Where(t => t.IsClass);
 
         /// <summary>
         /// Returns all source types which are structs
         /// </summary>
         /// <param name="src">The source types</param>
-        public static IEnumerable<Type> Structs(this IEnumerable<Type> src)
+        public static Type[] Structs(this Type[] src)
             => src.Where(t => t.IsStruct());
 
         /// <summary>
         /// Returns all source types which are delegates
         /// </summary>
         /// <param name="src">The source types</param>
-        public static IEnumerable<Type> Delegates(this IEnumerable<Type> src)
+        public static Type[] Delegates(this Type[] src)
             => src.Where(t => t.IsDelegate());
 
         /// <summary>
@@ -63,21 +63,21 @@ namespace Z0
         /// Selects the abstract types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
-        public static IEnumerable<Type> Abstract(this IEnumerable<Type> src)
+        public static Type[] Abstract(this Type[] src)
             => src.Where(t => t.IsAbstract);
 
         /// <summary>
         /// Selects the nested types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
-        public static IEnumerable<Type> Nested(this IEnumerable<Type> src)
+        public static Type[] Nested(this Type[] src)
             => src.Where(t => t.IsNested);
 
         /// <summary>
         /// Selects the static types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
-        public static IEnumerable<Type> Static(this IEnumerable<Type> src)
+        public static Type[] Static(this Type[] src)
             => src.Where(p => p.IsStatic());
 
         /// <summary>

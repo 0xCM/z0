@@ -273,7 +273,7 @@ namespace Z0
         
         string ITabular.DelimitedText(char delimiter)
             => text.concat(
-                $"{Formattable.format(OpId).PadRight(OpNamePad)}{delimiter}{Chars.Space}",  
+                $"{text.format(OpId).PadRight(OpNamePad)}{delimiter}{Chars.Space}",  
                  OpCount.ToString("#,#").PadRight(OpCountPad),  $"{delimiter}{Chars.Space}",
                 $"{Timing.Ms}");
 

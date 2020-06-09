@@ -21,12 +21,12 @@ namespace Z0
 
         public string Description {get;}
 
-        public EnumPrimalKind DataType {get;}
+        public EnumScalarKind DataType {get;}
 
         public ulong Value {get;}
 
         [MethodImpl(Inline)]
-        internal EnumLiteralField(string Declarer, string Identifier, int Index, string Description, EnumPrimalKind DataType, ulong Value)
+        internal EnumLiteralField(string Declarer, string Identifier, int Index, string Description, EnumScalarKind DataType, ulong Value)
         {
             this.Declarer = Declarer;
             this.Identifier =  Identifier;

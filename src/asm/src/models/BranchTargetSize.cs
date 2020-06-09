@@ -5,9 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
 
     public enum BranchTargetSize : byte
     {

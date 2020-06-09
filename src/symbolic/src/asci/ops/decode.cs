@@ -108,8 +108,6 @@ namespace Z0
         {            
             var lo = vinflate(src.Storage, n0);
             var hi = vinflate(src.Storage, n1);
-            // var lo = vinflate(Vector256.GetLower(src.Data));
-            // var hi = vinflate(Vector256.GetUpper(src.Data));
             var data = new Seg512(lo,hi);
             return cast<char>(Control.bytespan(data));
         }

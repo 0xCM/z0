@@ -17,7 +17,7 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         static MemoryAddress address(string src)
-            => MemoryAddress.From(Control.head(span(src)));            
+            => MemoryAddress.from(Control.head(span(src)));            
 
         public const int TokenCount = (int)InstructionToken.TokenCount;
     }

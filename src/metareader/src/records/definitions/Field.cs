@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static MetadataRecords.FieldRecordField;
 
     using K = MetadataRecords.FieldRecordSpec;
@@ -65,11 +65,23 @@ namespace Z0
                 this.Marshalling = Marshalling;
             }            
             
-            public string Format()
-                => MetadataFormat.format(this, FieldDelimiter);
-
             public string Format(char delimiter)
-                => MetadataFormat.format(this, delimiter);
+            {            
+                var widths = FieldWidths(Kind);
+                var count = FieldCount(Kind);
+                var dst = Alloc<string>(count);
+                Seek(dst, F.Sequence) = Render(Sequence, FieldWidth(widths, F.Sequence));
+                Seek(dst, F.Rva) = RenderHex(Rva, FieldWidth(widths, F.Rva));
+                Seek(dst, F.Offset) = RenderHex(Offset, FieldWidth(widths, F.Offset));
+                Seek(dst, F.Name) = Render(Name, FieldWidth(widths, F.Name));
+                Seek(dst, F.Signature) = Render(Signature, FieldWidth(widths, F.Signature));
+                Seek(dst, F.Attributes) = Render(Attributes, FieldWidth(widths, F.Attributes));
+                Seek(dst, F.Marshalling) = Render(Marshalling, FieldWidth(widths, F.Marshalling));
+                return Delimit(dst,delimiter);
+            }        
+
+            public string Format()
+                => Format(FieldDelimiter);
         }
 
         public readonly struct FieldRecordSpec  : IMetadataRecordSpec<FieldRecordSpec>

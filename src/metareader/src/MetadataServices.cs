@@ -1,7 +1,6 @@
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020 / Microsoft
 // License     :  MIT
-// Derived from sample code obtained from https://github.com/microsoft/dotnet-samples
 //-----------------------------------------------------------------------------
 namespace Z0
 {
