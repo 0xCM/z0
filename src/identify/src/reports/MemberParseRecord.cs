@@ -6,12 +6,15 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
-
     using F = MemberParseField;
     using R = MemberParseRecord;
 
-    public enum MemberParseField : int
+    public enum MemberParseRecordAspect : uint
+    {
+        FieldCount = 8,
+    }
+
+    public enum MemberParseField : uint
     {
         Seq = 0 | 12 << 16,
 
@@ -30,6 +33,7 @@ namespace Z0
         Data = 7 | 1 << 16
     }    
 
+
     public readonly struct MemberParseRecord : ITabular<F,R>
     {                                
         public const int FieldCount = 8;
@@ -42,7 +46,7 @@ namespace Z0
             try
             {
                 var fields = src.SplitClean(MemberParseReport.DefaultDelimiter);
-                if(fields.Length != FieldCount)
+                if(fields.Length !=  (uint)MemberParseRecordAspect.FieldCount)
                     return ParseResult.Fail<MemberParseRecord>(src,"No data");
 
                 var index = 0;
@@ -150,17 +154,17 @@ namespace Z0
             };
         }
 
-        public string DelimitedText(char sep)
+        public string DelimitedText(char delimiter)
         {
-            var dst = Model.Formatter.Reset();            
-            dst.AppendField(F.Seq, Seq);
-            dst.DelimitField(F.SourceSeq, SourceSeq, sep);
-            dst.DelimitField(F.Address, Address, sep);
-            dst.DelimitField(F.Length, Length, sep);
-            dst.DelimitField(F.TermCode, TermCode, sep);
-            dst.DelimitField(F.Uri, Uri, sep);
-            dst.DelimitField(F.OpSig, OpSig, sep);
-            dst.DelimitField(F.Data, Data.Format(), sep);
+            var dst = Model.Formatter.Reset(delimiter);            
+            dst.Append(F.Seq, Seq);
+            dst.Delimit(F.SourceSeq, SourceSeq);
+            dst.Delimit(F.Address, Address);
+            dst.Delimit(F.Length, Length);
+            dst.Delimit(F.TermCode, TermCode);
+            dst.Delimit(F.Uri, Uri);
+            dst.Delimit(F.OpSig, OpSig);
+            dst.Delimit(F.Data, Data.Format());
             return dst.Format();            
         }
 

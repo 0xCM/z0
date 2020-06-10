@@ -9,63 +9,58 @@ namespace Z0
     using System.Text;
 
     using static Seed;
+    using static FieldFormat;
 
     /// <summary>
     /// ~ The name of a field is determined by the enum literal identifier
-    /// ~ The position of a field, its index, is determined by the lower 32 bits of the enum value
-    /// ~ The width of a field is determined by the upper 32 bits of the enum 
+    /// ~ The position of a field, its index, is determined by the lower 16 bits of the enum value
+    /// ~ The width of a field is determined by the upper 16 bits of the enum 
     /// </summary>
-    enum SampleField : ulong
+    enum SampleField : uint
     {
-        Field0 = 0 | (60ul << 32),
+        Field0 = 0 | (60u << 32),
 
-        Field1 =  1 | (14ul << 32),
+        Field1 =  1 | (14u << 32),
 
-        Field2 = 2  | (14ul << 32),
+        Field2 = 2  | (14u << 32),
         
-        Feild3 =  3 | (26ul << 32)
+        Feild3 =  3 | (26u << 32)
     }
 
-    public readonly struct FieldFormatter<E> : ITextual
+    public struct FieldFormatter<E> : ITextual
         where E : unmanaged, Enum
     {        
-        readonly StringBuilder State;
+        const char DefaultDelimiter = Chars.Pipe;
+        
+        public static FieldFormatter<E> Default 
+            => new FieldFormatter<E>(new StringBuilder(), DefaultDelimiter);        
 
-        readonly char FieldSep;
+        public static FieldFormatter<E> Create(StringBuilder dst, char? delimiter = null)
+            => new FieldFormatter<E>(new StringBuilder(), delimiter ?? DefaultDelimiter);        
 
-        public static FieldFormatter<E> Service => new FieldFormatter<E>(new StringBuilder());        
+        public static FieldFormatter<E> Create(char? delimiter = null)
+            => new FieldFormatter<E>(new StringBuilder(), delimiter ?? DefaultDelimiter);        
+        
+        readonly StringBuilder Target;
+
+        char Delimiter;
         
         [MethodImpl(Inline)]
-        internal static int width(E spec)
-            => (int)(Enums.numeric<E,int>(spec) >> 16);
-
-
-        [MethodImpl(Inline)]
-        internal static int index(E spec)
-            => Enums.numeric<E,short>(spec);
-
-        [MethodImpl(Inline)]
-        FieldFormatter(StringBuilder state, char sep = Chars.Pipe)
+        FieldFormatter(StringBuilder dst, char delimiter)
         {
-            State = state;
-            FieldSep = sep;
+            Target = dst;
+            Delimiter = delimiter;
         }
 
-        public void AppendField(E f, object content)
+        public void Append(E f, object content)
         {
-            State.Append(RenderContent(content).PadRight(width(f)));
+            Target.Append(RenderContent(content).PadRight(width(f)));
         }
 
-        public void AppendField<T>(E f, T content)
+        public void Append<T>(E f, T content)
             where T : ITextual
         {
-            State.Append($"{content?.Format()}".PadRight(width(f)));
-        }
-
-        public void DelimitField(E f, object content, char delimiter)
-        {            
-            State.Append(rspace(delimiter));            
-            State.Append(RenderContent(content).PadRight(width(f)));
+            Target.Append($"{content?.Format()}".PadRight(width(f)));
         }
 
         static string RenderContent(object content)
@@ -80,9 +75,18 @@ namespace Z0
             return rendered;
         }
 
-        [MethodImpl(Inline)]
-        public void DelimitField(E f, object content)
-            => DelimitField(f, content, FieldSep);        
+        public void Delimit(E f, object content)
+        {            
+            Target.Append(text.spaced(Delimiter));            
+            Target.Append(RenderContent(content).PadRight(width(f)));
+        }
+
+        public void Delimit<T>(E f, T content)
+            where T : ITextual
+        {
+            Target.Append(text.spaced(Delimiter));            
+            Target.Append($"{content?.Format()}".PadRight(text.padding(f)));
+        }
 
         /// <summary>
         /// Appends a field with an enum value if nonzero; othewise, appends the empty string
@@ -90,41 +94,23 @@ namespace Z0
         /// <param name="f">The field</param>
         /// <param name="content">The field content</param>
         /// <typeparam name="T">The enum content type</typeparam>
-        [MethodImpl(Inline)]
         public void DelimitSome<T>(E f, T content)
             where T : unmanaged, Enum
-                => DelimitField(f, content.IsSome() ? content.ToString() : string.Empty, FieldSep);        
-
-        public void DelimitField<T>(E f, T content, char delimiter)
-            where T : ITextual
         {
-            State.Append(rspace(delimiter));            
-            State.Append($"{content?.Format()}".PadRight(width(f)));
+            var value = content.IsSome() ? content.ToString() : string.Empty;            
+            Target.Append(text.spaced(Delimiter));            
+            Target.Append(RenderContent(value).PadRight(width(f)));
         }
-
-        [MethodImpl(Inline)]
-        public void DelimitField<T>(E f, T content)
-            where T : ITextual
-                => DelimitField(f,content, FieldSep);
-
-        /// <summary>
-        /// Appends a space to the source content
-        /// </summary>
-        /// <param name="content">The source content</param>
-        static string rspace(object content)
-            => $"{content} ";
 
         public string Format()
-            => State.ToString();
+            => Target.ToString();
         
-        public FieldFormatter<E> Reset()
+        public FieldFormatter<E> Reset(char? delimiter = null)
         {            
-            State.Clear();
+            Target.Clear();
+            Delimiter = delimiter ?? DefaultDelimiter;
             return this;
         }
-
-        public FieldFormatter<E> WithDelimiter(char delimiter)
-            => new FieldFormatter<E>(State, delimiter);
 
 
         public override string ToString()

@@ -61,6 +61,7 @@ namespace Z0
             var xCil = xBody.GetILAsByteArray();
             Trace($"{xMethod.Name} {xRef} {xCil.FormatHexBytes()}");
 
+            
             var xPtr = MemberJit.Service.Jit(xMethod);
 
         }

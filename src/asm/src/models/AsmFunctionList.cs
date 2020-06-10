@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Seed;
 
-    public readonly struct AsmFunctionList :  IEquatable<AsmFunctionList>, IIndexedElements<AsmFunction>  //IFiniteSeq<AsmFunctionList, AsmFunction>
+    public readonly struct AsmFunctionList :  IEquatable<AsmFunctionList>, IIndexedElements<AsmFunction>
     {                
         public static AsmFunctionList Empty = new AsmFunctionList(new AsmFunction[]{});
         
@@ -26,6 +26,5 @@ namespace Z0.Asm
 
         bool IEquatable<AsmFunctionList>.Equals(AsmFunctionList src)
             => Enumerable.SequenceEqual(this, src);
-
     }
 }

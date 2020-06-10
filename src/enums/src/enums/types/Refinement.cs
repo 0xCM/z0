@@ -84,7 +84,7 @@ namespace Z0
         public T Data 
         {
             [MethodImpl(Inline)]
-            get => Enums.numeric<V,T>(Value);
+            get => Enums.scalar<V,T>(Value);
         }
         
         public bool Equals(Refinement<V,T> src)

@@ -58,8 +58,8 @@ namespace Z0
                 var vHi = gvec.vinsert(v128Src, dst, (byte)1);
                 var vHiSpan = vHi.ToSpan().Slice(vLo.Length()/2);
 
-                Numeric.eq(srcSpan, vLoSpan);
-                Numeric.eq(srcSpan, vHiSpan);
+                ClaimNumeric.eq(srcSpan, vLoSpan);
+                ClaimNumeric.eq(srcSpan, vHiSpan);
             }
         }
 

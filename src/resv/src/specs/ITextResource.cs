@@ -19,6 +19,6 @@ namespace Z0
         new E Identifier {get;}
 
         ulong ITextResource.Identifier 
-            => Enums.numeric<E,ulong>(Identifier);
+            => Enums.scalar<E,ulong>(Identifier);
     }
 }

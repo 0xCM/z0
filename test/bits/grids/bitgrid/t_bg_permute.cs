@@ -60,13 +60,13 @@ namespace Z0
             var v1 = BitVector24.FromEnum(p1);
             var p1F = p1.ToBitString(24).Format(3);            
             var v1F = v1.Format(3);
-            PrimalSeq.eq(p1F, v1F);
+            ClaimPrimalSeq.eq(p1F, v1F);
             
             var p2 = Symbolic.reversed(n8);
             var p2F = p2.ToBitString(24).Format(3);
             var v2 = BitVector24.FromEnum(p2);
             var v2F = v2.Format(3);
-            PrimalSeq.eq(p2F, v2F);
+            ClaimPrimalSeq.eq(p2F, v2F);
 
             Claim.require(v2.ToSubGrid(n8,n3) == p2.ToSubGrid());
         }       

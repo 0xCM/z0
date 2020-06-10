@@ -24,7 +24,7 @@ namespace Z0.Asm
         public void check_report()
         {
             var report = ResourceReport.Create(Z0.Data.Resources);
-            var path = CaseFilePath(FileExtensions.Csv);
+            var path = CasePath(FileExtensions.Csv);
             report.Save(path).Require();            
         }
 

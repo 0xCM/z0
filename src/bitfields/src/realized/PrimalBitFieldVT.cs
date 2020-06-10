@@ -22,7 +22,7 @@ namespace Z0
         public T FieldData 
         {
             [MethodImpl(Inline)]
-            get => Enums.numeric<V,T>(FieldValue);
+            get => Enums.scalar<V,T>(FieldValue);
         }
     }
 }

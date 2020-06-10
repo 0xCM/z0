@@ -15,10 +15,14 @@ namespace Z0
 
         IEnumerable<TestCaseRecord> TakeOutcomes();
 
-        void ReportBenchmark(string name, long opcount, TimeSpan duration)
-            => Deposit(BenchmarkRecord.Define(opcount, duration, name));
+        BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration)
+        {
+            var record = BenchmarkRecord.Define(opcount, duration, name);
+            Deposit(record);
+            return record;
+        }
 
-        void ReportBenchmark<W,T>(IFunc f, int ops, Duration time, W w = default, T t = default)
+        BenchmarkRecord ReportBenchmark<W,T>(IFunc f, int ops, Duration time, W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => ReportBenchmark(TestCaseIdentity.Service.CaseName<W,T>(f), ops, time);

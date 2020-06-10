@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitVector24 FromEnum<T>(T src)
             where T : unmanaged, Enum
-                => Enums.numeric<T,uint>(src);
+                => Enums.scalar<T,uint>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector24 src)

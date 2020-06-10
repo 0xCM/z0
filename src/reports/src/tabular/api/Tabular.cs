@@ -56,14 +56,14 @@ namespace Z0
                 => fields<F>().Select(f => f.ToString());
 
         [MethodImpl(Inline)]
-        public static string header<F>(char delimiter)
+        public static string header<F>(char delimiter = Chars.Pipe)
             where F : unmanaged, Enum
         {
-            var service = formatter<F>();
+            var service = formatter<F>(delimiter);
             var cols = fields<F>();
             var labels = headers<F>();
             for(var i=0; i<cols.Length; i++)
-                service.DelimitField(cols[i], labels[i], delimiter);
+                service.Delimit(cols[i], labels[i]);
             return service.Format();
         }
 
@@ -74,9 +74,9 @@ namespace Z0
                 => new Tabular<F,R>(src);
 
         [MethodImpl(Inline)]
-        public static FieldFormatter<F> formatter<F>() 
+        public static FieldFormatter<F> formatter<F>(char? delimiter = null) 
             where F : unmanaged, Enum
-                => FieldFormatter<F>.Service.Reset();
+                => FieldFormatter<F>.Default.Reset(delimiter);
     }
 
 }

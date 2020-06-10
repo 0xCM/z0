@@ -425,7 +425,7 @@ namespace Z0
 
         FilePath LogTestResults2<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
             where R : ITabular
-                => LogTestResults(Paths.TestResultFolder, basename, records, mode, header, delimiter);
+                => LogTestResults(AppPaths.TestResultFolder, basename, records, mode, header, delimiter);
 
         void EmitLogs()
         {

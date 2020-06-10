@@ -5,51 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-
-    using static Seed;
-
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {        
-        protected virtual bool TraceDetailEnabled
-            => false;
-
-        protected FolderPath DataDir => Paths.TestDataDir<U>();
-        
-        protected FilePath DataFilePath(FileName filename)
-            => DataDir + filename;
-
-        protected StreamWriter DataFileWriter(FileName filename)
-            => DataFilePath(filename).Writer();
-
-        /// <summary>
-        /// Creates a file path with a filename derived from the calling method
-        /// </summary>
-        /// <param name="ext">The file extension</param>
-        protected FilePath CaseFilePath(FileExtension ext, [Caller] string caller = null)
-            =>  DataFilePath(FileName.Define(caller, ext));
-
-        /// <summary>
-        /// Creates a stream writer with a filename derived from the calling method
-        /// </summary>
-        /// <param name="ext">The file extension</param>
-        /// <param name="caller">The calling method</param>
-        protected StreamWriter CaseFileWriter(FileExtension ext, [Caller] string caller = null)
-            => CaseFilePath(ext, caller).Writer();
-
-        protected IChecks Claim => Checks.Checker;
-
-        protected ICheckPrimal Primal => Claim;
-
-        protected ICheckPrimalSeq PrimalSeq => Claim;
-
-        protected ICheckNumeric Numeric => CheckNumeric.Checker;
-
-        protected ICheckEquatable Equatable => CheckEquatable.Checker;
-    
         public static N0 n0 => default;
 
         public static N1 n1 => default;
@@ -76,25 +35,17 @@ namespace Z0
 
         public static N13 n13 => default;
 
-        public static N15 n15 => default;
-
         public static N16 n16 => default;
 
         public static N21 n21 => default;
 
         public static N32 n32 => default;
 
-        public static N34 n34 => default;
-
-        public static N50 n51 => default;
-
         public static N64 n64 => default;
 
         public static N128 n128 => default;
 
         public static N256 n256 => default;
-
-        //public static N512 n512 => default;
 
         public static N1024 n1024 => default;
 

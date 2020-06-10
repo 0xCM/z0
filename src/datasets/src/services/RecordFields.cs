@@ -35,18 +35,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public short Width<F>(F f)
             where F : unmanaged, Enum
-                => (short)(Enums.numeric<F,int>(f) >> 16);
+                => (short)(Enums.scalar<F,int>(f) >> 16);
 
         [MethodImpl(Inline)]
         public short Index<F>(F f)
             where F : unmanaged, Enum
-                => (short)Enums.numeric<F,int>(f);
+                => (short)Enums.scalar<F,int>(f);
  
         [MethodImpl(Inline)]
         public bit Enabled<F>(F f)
             where F : unmanaged, Enum
         {
-            var hi = Bits.hi(Enums.numeric<F,uint>(f));                                    
+            var hi = Bits.hi(Enums.scalar<F,uint>(f));                                    
             return !Bits.testbit(hi, 15);
         }            
     }

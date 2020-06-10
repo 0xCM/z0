@@ -635,7 +635,7 @@ namespace Z0
         public static int padding<E>(E pad)
             where E : unmanaged, Enum
         {
-            var _pad = Control.numeric<E,uint>(pad) >> 16;
+            var _pad = Control.scalar<E,uint>(pad) >> 16;
             return (int)_pad;
         }
 

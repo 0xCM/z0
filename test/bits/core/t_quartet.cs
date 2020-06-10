@@ -114,10 +114,10 @@ namespace Z0
             var x1 = (quartet)1;
             var x2 = (quartet)2;
             var x3 = (quartet)3;
-            PrimalSeq.eq(x0.Format(), "0");
-            PrimalSeq.eq(x1.Format(), "1");
-            PrimalSeq.eq(x2.Format(), "2");
-            PrimalSeq.eq(x3.Format(), "3");
+            ClaimPrimalSeq.eq(x0.Format(), "0");
+            ClaimPrimalSeq.eq(x1.Format(), "1");
+            ClaimPrimalSeq.eq(x2.Format(), "2");
+            ClaimPrimalSeq.eq(x3.Format(), "3");
 
         }
 

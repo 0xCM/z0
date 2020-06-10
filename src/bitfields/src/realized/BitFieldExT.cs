@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
         public ref readonly FieldSegment Segment(E index)
-            => ref skip(Segs, Enums.numeric<E,byte>(index));
+            => ref skip(Segs, Enums.scalar<E,byte>(index));
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source value per the spegment specification

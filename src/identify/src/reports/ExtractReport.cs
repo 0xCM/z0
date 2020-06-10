@@ -14,7 +14,7 @@ namespace Z0
     using R = ExtractRecord;
     using Report = ExtractReport;
 
-    public enum ExtractField : int
+    public enum ExtractField : uint
     {
         Sequence = 0 | 10 << 16,
 
@@ -80,15 +80,15 @@ namespace Z0
         [TabularField(F.Data)]
         public readonly LocatedCode Data;
 
-        public string DelimitedText(char sep)
+        public string DelimitedText(char delimiter)
         {
-            var dst = formatter<F>();
-            dst.AppendField(F.Sequence, Sequence);
-            dst.DelimitField(F.Address, Address, sep);
-            dst.DelimitField(F.Length, Length, sep);
-            dst.DelimitField(F.Uri, Uri, sep);
-            dst.DelimitField(F.OpSig, OpSig, sep);
-            dst.DelimitField(F.Data, Data, sep);
+            var dst = formatter<F>(delimiter);
+            dst.Append(F.Sequence, Sequence);
+            dst.Delimit(F.Address, Address);
+            dst.Delimit(F.Length, Length);
+            dst.Delimit(F.Uri, Uri);
+            dst.Delimit(F.OpSig, OpSig);
+            dst.Delimit(F.Data, Data);
             return dst.Format();            
         }
     }

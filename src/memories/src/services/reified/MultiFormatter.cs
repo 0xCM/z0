@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
         
     using static Seed;
     using static Memories;
-    using static NumericBaseKind;
     
     using NK = EnumTypeCode;
 
@@ -42,70 +40,70 @@ namespace Z0
         public string FormatEnum<E>(E src, N2 n, int? dmax = null)
             where E : unmanaged, Enum        
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.u8(src), n, dmax),    
-                    NK.I8 => Format(Enums.i8(src), n, dmax),    
-                    NK.I16 => Format(Enums.i16(src), n, dmax),    
-                    NK.U16 => Format(Enums.u16(src), n, dmax),    
-                    NK.I32 => Format(Enums.i32(src), n, dmax),    
-                    NK.U32 => Format(Enums.u32(src), n, dmax),    
-                    NK.I64 => Format(Enums.i64(src), n, dmax),    
-                    NK.U64 => Format(Enums.u64(src), n, dmax),    
+                    NK.U8 => Format(Enums.e8u(src), n, dmax),    
+                    NK.I8 => Format(Enums.e8i(src), n, dmax),    
+                    NK.I16 => Format(Enums.e16i(src), n, dmax),    
+                    NK.U16 => Format(Enums.e16u(src), n, dmax),    
+                    NK.I32 => Format(Enums.e32i(src), n, dmax),    
+                    NK.U32 => Format(Enums.e32u(src), n, dmax),    
+                    NK.I64 => Format(Enums.e64i(src), n, dmax),    
+                    NK.U64 => Format(Enums.e64u(src), n, dmax),    
                     _ => src.ToString(),
                 };
 
         public string FormatEnum<E>(E src, N8 n, int? dmax = null)
             where E : unmanaged, Enum        
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.u8(src), n, dmax),    
-                    NK.I8 => Format(Enums.i8(src), n, dmax),    
-                    NK.I16 => Format(Enums.i16(src), n, dmax),    
-                    NK.U16 => Format(Enums.u16(src), n, dmax),    
-                    NK.I32 => Format(Enums.i32(src), n, dmax),    
-                    NK.U32 => Format(Enums.u32(src), n, dmax),    
-                    NK.I64 => Format(Enums.i64(src), n, dmax),    
-                    NK.U64 => Format(Enums.u64(src), n, dmax),    
+                    NK.U8 => Format(Enums.e8u(src), n, dmax),    
+                    NK.I8 => Format(Enums.e8i(src), n, dmax),    
+                    NK.I16 => Format(Enums.e16i(src), n, dmax),    
+                    NK.U16 => Format(Enums.e16u(src), n, dmax),    
+                    NK.I32 => Format(Enums.e32i(src), n, dmax),    
+                    NK.U32 => Format(Enums.e32u(src), n, dmax),    
+                    NK.I64 => Format(Enums.e64i(src), n, dmax),    
+                    NK.U64 => Format(Enums.e64u(src), n, dmax),    
                     _ => src.ToString(),
                 };
 
         public string FormatEnum<E>(E src, N16 n, int? dmax = null)
             where E : unmanaged, Enum        
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.u8(src), n, dmax),    
-                    NK.I8 => Format(Enums.i8(src), n, dmax),    
-                    NK.I16 => Format(Enums.i16(src), n, dmax),    
-                    NK.U16 => Format(Enums.u16(src), n, dmax),    
-                    NK.I32 => Format(Enums.i32(src), n, dmax),    
-                    NK.U32 => Format(Enums.u32(src), n, dmax),    
-                    NK.I64 => Format(Enums.i64(src), n, dmax),    
-                    NK.U64 => Format(Enums.u64(src), n, dmax),    
+                    NK.U8 => Format(Enums.e8u(src), n, dmax),    
+                    NK.I8 => Format(Enums.e8i(src), n, dmax),    
+                    NK.I16 => Format(Enums.e16i(src), n, dmax),    
+                    NK.U16 => Format(Enums.e16u(src), n, dmax),    
+                    NK.I32 => Format(Enums.e32i(src), n, dmax),    
+                    NK.U32 => Format(Enums.e32u(src), n, dmax),    
+                    NK.I64 => Format(Enums.e64i(src), n, dmax),    
+                    NK.U64 => Format(Enums.e64u(src), n, dmax),    
                     _ => src.ToString(),
                 };
 
         public string FormatEnum<E>(E src, N10 n, int? dmax = null)
             where E : unmanaged, Enum        
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.u8(src), n, dmax),    
-                    NK.I8 => Format(Enums.i8(src), n, dmax),    
-                    NK.I16 => Format(Enums.i16(src), n, dmax),    
-                    NK.U16 => Format(Enums.u16(src), n, dmax),    
-                    NK.I32 => Format(Enums.i32(src), n, dmax),    
-                    NK.U32 => Format(Enums.u32(src), n, dmax),    
-                    NK.I64 => Format(Enums.i64(src), n, dmax),    
-                    NK.U64 => Format(Enums.u64(src), n, dmax),    
+                    NK.U8 => Format(Enums.e8u(src), n, dmax),    
+                    NK.I8 => Format(Enums.e8i(src), n, dmax),    
+                    NK.I16 => Format(Enums.e16i(src), n, dmax),    
+                    NK.U16 => Format(Enums.e16u(src), n, dmax),    
+                    NK.I32 => Format(Enums.e32i(src), n, dmax),    
+                    NK.U32 => Format(Enums.e32u(src), n, dmax),    
+                    NK.I64 => Format(Enums.e64i(src), n, dmax),    
+                    NK.U64 => Format(Enums.e64u(src), n, dmax),    
                     _ => src.ToString(),
                 };
 
         public string FormatEnum<E>(E src, NumericBaseKind @base, int? dmax = null)
             where E : unmanaged, Enum        
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.u8(src), @base, dmax),    
-                    NK.I8 => Format(Enums.i8(src), @base, dmax),    
-                    NK.I16 => Format(Enums.i16(src), @base, dmax),    
-                    NK.U16 => Format(Enums.u16(src), @base, dmax),    
-                    NK.I32 => Format(Enums.i32(src), @base, dmax),    
-                    NK.U32 => Format(Enums.u32(src), @base, dmax),    
-                    NK.I64 => Format(Enums.i64(src), @base, dmax),    
-                    NK.U64 => Format(Enums.u64(src), @base, dmax),    
+                    NK.U8 => Format(Enums.e8u(src), @base, dmax),    
+                    NK.I8 => Format(Enums.e8i(src), @base, dmax),    
+                    NK.I16 => Format(Enums.e16i(src), @base, dmax),    
+                    NK.U16 => Format(Enums.e16u(src), @base, dmax),    
+                    NK.I32 => Format(Enums.e32i(src), @base, dmax),    
+                    NK.U32 => Format(Enums.e32u(src), @base, dmax),    
+                    NK.I64 => Format(Enums.e64i(src), @base, dmax),    
+                    NK.U64 => Format(Enums.e64u(src), @base, dmax),    
                     _ => src.ToString(),
                 };        
 

@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal TabularField(F spec)
         {
-            var numeric = Enums.u64(spec);
+            var numeric = Enums.e64u(spec);
             this.Specifier = spec;
             this.Name = spec.ToString();
             this.Index = (int)(Tabular.PosMask & numeric);

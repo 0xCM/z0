@@ -79,7 +79,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int FieldIndex(E id)
-            => (int)BitOperations.Log2(Enums.u32(id));
+            => (int)BitOperations.Log2(Enums.e32u(id));
 
         public bit this[E id]
         {

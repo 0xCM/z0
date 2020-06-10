@@ -46,9 +46,9 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var formatter = FieldFormatter<F>.Service;
+            var formatter = FieldFormatter<F>.Default;
             for(var i=0; i<FieldCount; i++)
-                formatter.DelimitField(Format[i].Specifier, Fields[i].GetValue(this));
+                formatter.Delimit(Format[i].Specifier, Fields[i].GetValue(this));
             return formatter.ToString();
         }
     }

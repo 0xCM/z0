@@ -59,7 +59,7 @@ namespace Z0
         public static T NumericValue<E,T>(this E src, T dst = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Enums.numeric<E,T>(src);
+                => Enums.scalar<E,T>(src);
 
         [MethodImpl(Inline)]
         public static TypeCode TypeCode(this EnumTypeCode k)
@@ -72,41 +72,41 @@ namespace Z0
         [MethodImpl(Inline)]
         public static sbyte ToInt8<E>(this E src)                
             where E : unmanaged, Enum
-                => Enums.i8(src);
+                => Enums.e8i(src);
 
         [MethodImpl(Inline)]
         public static byte ToUInt8<E>(this E src)                
             where E : unmanaged, Enum
-                => Enums.u8(src);
+                => Enums.e8u(src);
 
         [MethodImpl(Inline)]
         public static short ToInt16<E>(this E src)                
             where E : unmanaged, Enum
-                => Enums.i16(src);
+                => Enums.e16i(src);
 
         [MethodImpl(Inline)]
         public static ushort ToUInt16<E>(this E src)                
             where E : unmanaged, Enum
-                => Enums.u16(src);
+                => Enums.e16u(src);
 
         [MethodImpl(Inline)]
         public static int ToInt32<E>(this E src)                
             where E : unmanaged, Enum
-                => Enums.i32(src);
+                => Enums.e32i(src);
 
         [MethodImpl(Inline)]
         public static uint ToUInt32<E>(this E src)                
             where E : unmanaged, Enum
-                => Enums.u32(src);
+                => Enums.e32u(src);
 
         [MethodImpl(Inline)]
         public static long ToInt64<E>(this E src)                
             where E : unmanaged, Enum
-                => Enums.i64(src);
+                => Enums.e64i(src);
 
         [MethodImpl(Inline)]
         public static ulong ToUInt64<E>(this E src)                
             where E : unmanaged, Enum
-                => Enums.u64(src);
+                => Enums.e64u(src);
     }
 }

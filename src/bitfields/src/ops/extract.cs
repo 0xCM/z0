@@ -41,7 +41,7 @@ namespace Z0
             where T : unmanaged 
             where F : IPrimalBitField<T>
             where I : unmanaged, Enum
-                => extract<F,T>(f, Enums.u8(i0), Enums.u8(i1));
+                => extract<F,T>(f, Enums.e8u(i0), Enums.e8u(i1));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T extract<T>(in FieldSegment seg, T src)

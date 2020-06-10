@@ -15,10 +15,10 @@ namespace Z0
             var rundir = Env.Current.LogDir;
             var rundir_expect = EnvVar.Define(EnvVarNames.LogDir, FolderPath.Define(Environment.GetEnvironmentVariable(EnvVarNames.LogDir)));
             Claim.exists(rundir);
-            Equatable.eq(rundir_expect.Value, rundir);
+            ClaimEquatable.eq(rundir_expect.Value, rundir);
 
             var paths = Context.AppPaths;
-            Equatable.eq(rundir_expect, paths.Root);  
+            ClaimEquatable.eq(rundir_expect, paths.Root);  
                                   
         }
     }

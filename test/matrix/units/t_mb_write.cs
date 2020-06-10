@@ -14,7 +14,7 @@ namespace Z0.Test
     {
         public void write()
         {
-            DataDir.Clear();
+            UnitRoot.Clear();
             VerifyWriter<N12,N14,long>(Pow2.T03);        
             VerifyWriter<N19,N32,byte>(Pow2.T03);        
             VerifyWriter(Pow2.T03, n31, n31, 0u);                    
@@ -59,7 +59,7 @@ namespace Z0.Test
 
             for(var i=0; i< count; i++)
             {                                
-                var path = DataFilePath(Matrix.filename<M,N,T>(i));                
+                var path = UnitPath(Matrix.filename<M,N,T>(i));                
                 var A = Write(path);
                 var B = Read(path);                                    
                 Claim.require(A == B);

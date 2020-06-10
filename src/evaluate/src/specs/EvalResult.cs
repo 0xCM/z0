@@ -75,13 +75,13 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = Model.Formatter.Reset();
-            dst.AppendField(F.Sequence, Sequence);
-            dst.DelimitField(F.CaseName, CaseName, delimiter);
-            dst.DelimitField(F.Status, Status, delimiter);
-            dst.DelimitField(F.Duration, Duration, delimiter);            
-            dst.DelimitField(F.Timestamp, Timestamp, delimiter);
-            dst.DelimitField(F.Message, Message, delimiter);
+            var dst = Model.Formatter.Reset(delimiter);
+            dst.Append(F.Sequence, Sequence);
+            dst.Delimit(F.CaseName, CaseName);
+            dst.Delimit(F.Status, Status);
+            dst.Delimit(F.Duration, Duration);            
+            dst.Delimit(F.Timestamp, Timestamp);
+            dst.Delimit(F.Message, Message);
             return dst.ToString();
         }
 

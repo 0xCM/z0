@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public byte SegWidth(F index)
-            => vcell(Widths, Enums.numeric<F,byte>(index));
+            => vcell(Widths, Enums.scalar<F,byte>(index));
 
         public byte this[F index]
         {

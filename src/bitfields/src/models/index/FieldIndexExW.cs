@@ -45,7 +45,7 @@ namespace Z0
         public ref readonly FieldIndexEntry<E,W> this[E index]
         {
             [MethodImpl(Inline)]
-            get => ref entries[Enums.numeric<E,int>(index)];
+            get => ref entries[Enums.scalar<E,int>(index)];
         }
 
         public ref readonly FieldIndexEntry<E,W> this[int index]

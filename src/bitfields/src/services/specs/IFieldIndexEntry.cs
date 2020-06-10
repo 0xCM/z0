@@ -58,7 +58,7 @@ namespace Z0
         int IFieldIndexEntry.FieldIndex
         {
             [MethodImpl(Inline)]            
-            get => Enums.numeric<E,int>(FieldIndex);
+            get => Enums.scalar<E,int>(FieldIndex);
         }
 
         string IFieldIndexEntry.FieldName

@@ -82,14 +82,14 @@ namespace Z0
         public static unsafe ulong untype<E>(E src)
             where E : unmanaged, Enum
             => typeof(E).GetEnumUnderlyingType().NumericKind() switch {
-                NK.U8 => (ulong)u8(src),
-                NK.I8 => (ulong)i8(src),
-                NK.U16 => (ulong)u16(src),
-                NK.I16 => (ulong)i16(src),
-                NK.U32 => (ulong)u32(src),
-                NK.I32 => (ulong)i32(src),
-                NK.I64 => (ulong)i64(src),
-                NK.U64 => u64(src),
+                NK.U8 => (ulong)e8u(src),
+                NK.I8 => (ulong)e8i(src),
+                NK.U16 => (ulong)e16u(src),
+                NK.I16 => (ulong)e16i(src),
+                NK.U32 => (ulong)e32u(src),
+                NK.I32 => (ulong)e32i(src),
+                NK.I64 => (ulong)e64i(src),
+                NK.U64 => e64u(src),
                 _ => 0ul,               
             };
                    
@@ -109,10 +109,10 @@ namespace Z0
         /// <typeparam name="E">The enum source type</typeparam>
         /// <typeparam name="V">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe V numeric<E,V>(E e)
+        public static unsafe T scalar<E,T>(E e)
             where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<V>((V*)(&e));
+            where T : unmanaged
+                => Control.scalar<E,T>(e);
 
         /// <summary>
         /// Reads a generic enum member from a generic value
@@ -121,10 +121,10 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="V">The numeric value type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe E literal<E,V>(V v)
+        public static unsafe E literal<E,T>(T v)
             where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<E>((E*)&v);
+            where T : unmanaged
+                => Control.literal<E,T>(v);
 
         /// <summary>
         /// Reads a generic numeric value from a boxed enum
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="e">The enum value to reinterpret</param>
         /// <typeparam name="V">The numeric value type</typeparam>
         [MethodImpl(Inline)]
-        public static V numeric_slow<V>(Enum e)
+        public static V scalar_slow<V>(Enum e)
             where V : unmanaged
                 => (V)Convert.ChangeType(e, e.GetTypeCode());
  
@@ -190,7 +190,7 @@ namespace Z0
                 => from f in typeof(E).LiteralFields().ToArray()
                    where f.Tagged<BinaryLiteralAttribute>()
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
-                   select Literati.define(base2, f.Name, numeric<E,T>((E)f.GetValue(null)), a.Text);
+                   select Literati.define(base2, f.Name, scalar<E,T>((E)f.GetValue(null)), a.Text);
 
         /// <summary>
         /// Gets the declaration-order indices for each named literal

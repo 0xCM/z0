@@ -19,7 +19,7 @@ namespace Z0
         {
             var mask = Mask(dst,index);
             var conformed = gmath.and(src,mask);
-            var i  = Enums.numeric<F,byte>(index);    
+            var i  = Enums.scalar<F,byte>(index);    
             dst.State = vcell(conformed, i, dst.State);
             return ref dst;
         }

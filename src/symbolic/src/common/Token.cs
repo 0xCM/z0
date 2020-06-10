@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Token Define<T>(T index, string id, string value, string description)
             where T : unmanaged, Enum
-                => new Token(Enums.i32(index),id, value, description);        
+                => new Token(Enums.e32i(index),id, value, description);        
 
         [MethodImpl(Inline)]
         public static Token Define(int index, string id, string value, string description)

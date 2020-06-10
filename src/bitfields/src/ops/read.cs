@@ -22,6 +22,6 @@ namespace Z0
         public static T read<F,T>(in BitField256<F,T> src, F index)
             where T : unmanaged
             where F : unmanaged, Enum
-                => gmath.and(vcell(src.State, Enums.numeric<F,byte>(index)), Mask(src,index));
+                => gmath.and(vcell(src.State, Enums.scalar<F,byte>(index)), Mask(src,index));
     }
 }

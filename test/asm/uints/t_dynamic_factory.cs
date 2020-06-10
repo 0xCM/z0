@@ -11,84 +11,62 @@ namespace Z0.Asm
 
     using T = t_dynamic_factory;
     using K = Kinds;
+    using M = CaseMethods;
+    
 
     public class t_dynamic_factory : t_asm<t_dynamic_factory>
     {
-        public override bool Enabled => false;
+        public override bool Enabled => true;
 
-        
-        public static uint Suprise() 
-            => 17;
-
-        public static uint Square(uint x) 
-            => x*x;
-
-        public static uint Add2(uint x, uint y) 
-            => x + y;
-
-        public static uint Add3(uint x, uint y, uint z) 
-            => x + y + z;
-
-        static MethodInfo suprise 
-            => typeof(T).Method(nameof(Suprise)).Require();
-
-        static MethodInfo square 
-            => typeof(T).Method(nameof(Square)).Require();
-
-        static MethodInfo add2 
-            => typeof(T).Method(nameof(Add2)).Require();
-
-        static MethodInfo add3 
-            => typeof(T).Method(nameof(Add3)).Require();
-
+            
         IDynexus Dynamic => Dynops.Services.Dynexus;
         
         public void create_emitter()
         {
             var n = n0;
             var t = z32;
-            var m = suprise;
+            var m = M.K17_Method;
             var id = m.Identify();
             
             var factory = Dynamic.Factory(K.emitter(t));
             var f = factory.Manufacture(m);            
-            Claim.eq(f(), Suprise());        
+            Claim.eq(f(), M.K17());        
         }
 
         public void create_unary_op()
         {
             var n = n1;
             var t = z32;
-            var m = square;
+            var m = M.Square_Method;
             var id = m.Identify();
             
             var factory = Dynamic.Factory(K.unaryop(t));
             var f = factory.Manufacture(m);            
-            Claim.eq(f(3), Square(3));        
+            Claim.eq(f(3), M.Square(3));        
         }
 
         public void create_binary_op()
         {
             var n = n2;
             var t = z32;
-            var m = add2;
+            var m = M.BinaryAdd_Method;
             var id = m.Identify();
             
             var factory = Dynamic.Factory(K.binaryop(t));
             var f = factory.Manufacture(m);            
-            Claim.eq(f(10,5), Add2(10,5));        
+            Claim.eq(f(10,5), M.BinaryAdd(10,5));        
         }
 
         public void create_ternary_op()
         {
             var n = n3;
             var t = z32;
-            var m = add3;        
+            var m = M.TernaryAdd_Method;        
             var id = m.Identify();
             
             var factory = Dynamic.Factory(K.ternaryop(t));
             var f = factory.Manufacture(m);            
-            Claim.eq(f(10,5,5), Add3(10,5,5));        
+            Claim.eq(f(10,5,5), M.TernaryAdd(10,5,5));        
         }
 
 

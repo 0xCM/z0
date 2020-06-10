@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitField64(E state)
         {
-            State = Enums.u64(state);            
+            State = Enums.e64u(state);            
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public byte Index(E src)
-            => (byte)math.log2(Enums.u64(src));
+            => (byte)math.log2(Enums.e64u(src));
 
         public bit this[byte i]
         {

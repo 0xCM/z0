@@ -13,19 +13,19 @@ namespace Z0
     using R = ParseFailureRecord;
     using Report = ParseFailureReport;
 
-    public enum ParseFailureField : ulong
+    public enum ParseFailureField : uint
     {
-        Sequence = 0 | 10ul << 32,
+        Sequence = 0 | 10u << 32,
 
-        Address = 1 | 16ul << 32,
+        Address = 1 | 16u << 32,
 
-        Length = 2 | 8ul << 32,
+        Length = 2 | 8u << 32,
 
-        TermCode = 3 | 20ul << 32,
+        TermCode = 3 | 20u << 32,
 
-        Uri = 4 | 110ul << 32,
+        Uri = 4 | 110u << 32,
 
-        Data = 5 | 1ul << 32
+        Data = 5 | 1u << 32
     }
 
     public readonly struct ParseFailureRecord : ITabular<F,R>
@@ -79,15 +79,15 @@ namespace Z0
         [TabularField(F.Data)]
         public readonly LocatedCode Data;
 
-        public string DelimitedText(char sep)
+        public string DelimitedText(char delimiter)
         {
-            var dst = Model.Formatter.Reset().WithDelimiter(sep);
-            dst.AppendField(F.Sequence, Sequence);
-            dst.DelimitField(F.Address, Address);
-            dst.DelimitField(F.Length, Length);
-            dst.DelimitField(F.TermCode, TermCode);
-            dst.DelimitField(F.Uri, Uri);
-            dst.DelimitField(F.Data, Data);
+            var dst = Model.Formatter.Reset(delimiter);
+            dst.Append(F.Sequence, Sequence);
+            dst.Delimit(F.Address, Address);
+            dst.Delimit(F.Length, Length);
+            dst.Delimit(F.TermCode, TermCode);
+            dst.Delimit(F.Uri, Uri);
+            dst.Delimit(F.Data, Data);
             return dst.Format();            
         }
 

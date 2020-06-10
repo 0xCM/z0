@@ -18,26 +18,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FieldFormatter<E> formatter<E>()
             where E : unmanaged, Enum
-                => FieldFormatter<E>.Service;
+                => FieldFormatter<E>.Default;
 
         /// <summary>
-        /// Computes the field width from a specifier
+        /// Computes the field width from a field specifier
         /// </summary>
-        /// <param name="spec">The field specifier</param>
+        /// <param name="field">The field specifier</param>
         /// <typeparam name="F">The field specification type</typeparam>
         [MethodImpl(Inline)]
-        public static int width<E>(E spec)
+        public static int width<E>(E field)
             where E : unmanaged, Enum                
-                => FieldFormatter<E>.width(spec);
+                => text.padding(field);
 
         /// <summary>
-        /// Computes a field index from a specifier
+        /// Computes a field index from a field specifier
         /// </summary>
-        /// <param name="spec">The field specifier</param>
+        /// <param name="field">The field specifier</param>
         /// <typeparam name="F">The field specification type</typeparam>
         [MethodImpl(Inline)]
-        public static int index<E>(E spec)
+        public static int index<E>(E field)
             where E : unmanaged, Enum                
-                => FieldFormatter<E>.index(spec);
+                => (short)Enums.scalar<E,uint>(field);
     }
 }

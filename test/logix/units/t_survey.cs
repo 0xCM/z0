@@ -12,7 +12,7 @@ namespace Z0.Logix
 
         void emit_asci_table()
         {            
-            using var dst = CaseFileWriter(FileExtensions.Csv);
+            using var dst = CaseWriter(FileExtensions.Csv);
 
             var min = (int)'A';
             var max = (int)'Z';
@@ -45,7 +45,7 @@ namespace Z0.Logix
             var survey = Survey.Template<ushort>(1, "Survey 16u", 11, 5);
             var matrix = Survey.Matrix(survey);
 
-            using var dst = BitMatrixServices.Factory.Writer(CaseFilePath(FileExtension.Define("survey.table")));
+            using var dst = BitMatrixServices.Factory.Writer(CasePath(FileExtension.Define("survey.table")));
             dst.Write(matrix);
 
             var response = Survey.Respond(survey, Random);
@@ -63,7 +63,7 @@ namespace Z0.Logix
         {
             var survey = Survey.Template<ulong>(1, "Survey 64u", 60, 10);
             var matrix = Survey.Matrix(survey);
-            using var dst = BitMatrixServices.Factory.Writer(CaseFilePath(FileExtension.Define("table")));
+            using var dst = BitMatrixServices.Factory.Writer(CasePath(FileExtension.Define("table")));
             dst.Write(matrix);
             
         }

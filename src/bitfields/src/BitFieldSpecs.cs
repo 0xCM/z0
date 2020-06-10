@@ -35,8 +35,8 @@ namespace Z0
             where I : unmanaged, Enum
             where W : unmanaged, Enum
         {
-            var i = Enums.numeric<I,byte>(entry.FieldIndex);
-            var width = Enums.numeric<W,byte>(entry.FieldWidth);
+            var i = Enums.scalar<I,byte>(entry.FieldIndex);
+            var width = Enums.scalar<W,byte>(entry.FieldWidth);
             var end = (byte)(start + width - 1);
             var seg = BitFieldSpecs.segment(entry.FieldName, start, end, width);
             start = (byte)(end + 1);

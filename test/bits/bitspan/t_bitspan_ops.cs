@@ -231,12 +231,12 @@ namespace Z0
                 if(gmath.even(i))
                 {
                     Claim.require(bitspan[i]);
-                    PrimalSeq.eq(bit.One, format[j]);
+                    ClaimPrimalSeq.eq(bit.One, format[j]);
                 }
                 else
                 {
                     Claim.nea(bitspan[i]);
-                    PrimalSeq.eq(bit.Zero, format[j]);
+                    ClaimPrimalSeq.eq(bit.Zero, format[j]);
                 }
             }            
         }

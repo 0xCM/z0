@@ -9,7 +9,7 @@ namespace Z0
     using F = TestCaseField;
     using R = TestCaseRecord;
         
-    public enum TestCaseField : int
+    public enum TestCaseField : uint
     {
         Case = 0 | (60 << 16),
 
@@ -60,11 +60,11 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = Model.Formatter.Reset();
-            dst.AppendField(F.Case, Case);
-            dst.DelimitField(F.Status, Status, delimiter);
-            dst.DelimitField(F.Duration, Duration, delimiter);            
-            dst.DelimitField(F.Executed, Executed, delimiter);
+            var dst = Model.Formatter.Reset(delimiter);
+            dst.Append(F.Case, Case);
+            dst.Delimit(F.Status, Status);
+            dst.Delimit(F.Duration, Duration);            
+            dst.Delimit(F.Executed, Executed);
             return dst.ToString();
         }
 

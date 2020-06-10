@@ -30,7 +30,7 @@ namespace Z0
         {   const byte imm8 = 9;
             var name = nameof(gvec.vbsll);
             var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(v128).Single();
-            var op = Dynop.EmbedVUnaryOpImm(vk128<uint>(), Identity.identify(src), src,imm8);
+            var op = Dynop.EmbedVUnaryOpImm(vk128<uint>(), Z0.Identity.identify(src), src, imm8);
             var handle = MemberDynamic.Service.Handle(op.Target);
             var dst = MemberDynamic.Service.Method(handle);
             Claim.eq(dst.Name, name);

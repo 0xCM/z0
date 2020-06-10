@@ -34,7 +34,7 @@ namespace Z0
         internal PrimalBitField(V value)
         {
             FieldValue = value;
-            FieldData = Enums.numeric<V,T>(value);
+            FieldData = Enums.scalar<V,T>(value);
             Masks = Enums.literals<M>().Map(x => x.LiteralValue);
             Indices = Enums.literals<I>().Map(x => x.LiteralValue);
             Segments = Enums.literals<S>().Map(x => x.LiteralValue);
@@ -65,13 +65,13 @@ namespace Z0
             => Masks[u8(index)];
 
         [MethodImpl(Inline)]
-        static byte u8(I x) => Enums.u8(x);
+        static byte u8(I x) => Enums.e8u(x);
 
         [MethodImpl(Inline)]
-        static byte u8(S x) => Enums.u8(x);
+        static byte u8(S x) => Enums.e8u(x);
 
         [MethodImpl(Inline)]
-        static byte u8(W x) => Enums.u8(x);
+        static byte u8(W x) => Enums.e8u(x);
 
     }    
 }

@@ -16,7 +16,7 @@ namespace Z0.Asm.Data
     {
         public t_metadata_reader()
         {
-            UnitDataRoot.Clear();   
+            UnitRoot.Clear();   
             DataSources = Control.array<IPart>(Parts.AsmG.Resolved, Parts.AsmD.Resolved, Parts.Symbolic.Resolved);
         }
 

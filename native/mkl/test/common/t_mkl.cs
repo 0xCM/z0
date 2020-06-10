@@ -66,7 +66,7 @@ namespace Z0.Mkl
         /// <param name="msg">The message to submit</param>
         protected void TracePerf(string msg)
         {
-            NotifyConsole(AppMsg.NoCaller($"{msg}", AppMsgKind.Benchmark));
+            Trace(AppMsg.NoCaller($"{msg}", AppMsgKind.Benchmark));
         }
     }
 }

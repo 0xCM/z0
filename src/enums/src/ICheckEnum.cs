@@ -27,7 +27,7 @@ namespace Z0
         void eq<E>(E lhs, E rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where E : unmanaged, Enum
         {
-            if(!u64(lhs).Equals(u64(rhs)))
+            if(!e64u(lhs).Equals(e64u(rhs)))
                 throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }
     }

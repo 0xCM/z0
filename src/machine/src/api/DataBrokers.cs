@@ -26,6 +26,6 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public static DataBroker<K,T> broker<K,T>(int capacity, IndexFunction<K> @if = null)
             where K : unmanaged, Enum
-                => new DataBroker<K,T>(capacity, @if ?? Enums.i32);
+                => new DataBroker<K,T>(capacity, @if ?? Enums.e32i);
     }
 }

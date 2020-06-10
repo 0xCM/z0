@@ -20,23 +20,46 @@ namespace Z0.Asm
         IEncoded<AsmInstructions,BinaryCode>, 
         IEquatable<AsmInstructions>
     {
-        [MethodImpl(Inline)]
-        public static AsmInstructions Create(Instruction[] src, BinaryCode data)
-            => new AsmInstructions(src, data);
-
         readonly Instruction[] Inxs;
         
         public BinaryCode Encoded {get;}
 
-        public ref readonly Instruction this[int index]  { [MethodImpl(Inline)] get => ref Inxs[index]; }
+        public static AsmInstructions Empty 
+            => Create(Control.array<Instruction>(), BinaryCode.Empty);
         
-        public int Length { [MethodImpl(Inline)] get => Inxs.Length; }
+        [MethodImpl(Inline)]
+        public static AsmInstructions Create(Instruction[] src, BinaryCode data)
+            => new AsmInstructions(src, data);
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
+        public ref readonly Instruction this[int index]  
+        { 
+            [MethodImpl(Inline)] 
+            get => ref Inxs[index]; 
+        }
+        
+        public int Length 
+        { 
+            [MethodImpl(Inline)] 
+            get => Inxs.Length; 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.IsEmpty; 
+        }
 
-        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
+        public bool IsNonEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.IsNonEmpty; 
+        }
+
+        public ReadOnlySpan<byte> Bytes 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.Bytes; 
+        }
 
         public static implicit operator Instruction[](AsmInstructions src)
             => src.Inxs;

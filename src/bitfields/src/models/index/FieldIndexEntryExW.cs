@@ -42,8 +42,8 @@ namespace Z0
         public string Format()
         {
             var t = typeof(E).Name;
-            var i = Enums.numeric<E,byte>(FieldIndex);
-            var w = Enums.numeric<W,byte>(FieldWidth);
+            var i = Enums.scalar<E,byte>(FieldIndex);
+            var w = Enums.scalar<W,byte>(FieldWidth);
             return $"{t}[{i}:{w}] = {FieldName}";           
         }
         

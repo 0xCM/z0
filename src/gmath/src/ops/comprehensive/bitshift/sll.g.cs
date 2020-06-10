@@ -15,13 +15,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint sll<E>(bit x, E offset)
             where E : unmanaged, Enum
-                => sll((uint)x, Enums.numeric<E,byte>(offset));
+                => sll((uint)x, Enums.scalar<E,byte>(offset));
 
         [MethodImpl(Inline)]
         public static T sll<T,E>(T x, E offset)
             where T : unmanaged
             where E : unmanaged, Enum
-                => sll(x, Enums.numeric<E,byte>(offset));
+                => sll(x, Enums.scalar<E,byte>(offset));
 
         /// <summary>
         /// Applies a logical left-shift to an integral value

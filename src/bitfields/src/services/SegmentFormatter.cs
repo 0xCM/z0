@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var formatter = BitFormatter.create<T>();
-            var data = Enums.numeric<V,T>(value);
+            var data = Enums.scalar<V,T>(value);
             var limit = gbits.effwidth(data);
             var config = BitFormatConfig.Limited(limit);
             var name = typeof(V).Name;

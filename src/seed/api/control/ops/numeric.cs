@@ -13,18 +13,6 @@ namespace Z0
     partial class Control
     {                
         /// <summary>
-        /// Reads a generic numeric value from a generic enum. 
-        /// </summary>
-        /// <param name="e">The enum value to reinterpret</param>
-        /// <typeparam name="E">The enum source type</typeparam>
-        /// <typeparam name="V">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe V numeric<E,V>(E e)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<V>((V*)(&e));
-
-        /// <summary>
         /// Reimagines a boolean value as a numeric value
         /// </summary>
         /// <param name="src">The source value</param>

@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         FieldSegment segment(I index)
-            => skip(segments, Enums.numeric<I,byte>(index));
+            => skip(segments, Enums.scalar<I,byte>(index));
 
         public ulong this[I index]
         {

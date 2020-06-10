@@ -19,7 +19,7 @@ namespace Z0
             var src = Random.Bytes(8).ToSpan();
             var actual = Symbolic.render(base2, src).ToString();
             var expect = src.ToBitSpan().Format();
-            Primal.eq(expect,actual);
+            ClaimPrimal.eq(expect,actual);
 
         }
 

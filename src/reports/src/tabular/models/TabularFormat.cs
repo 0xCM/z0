@@ -66,8 +66,12 @@ namespace Z0
             var dst = new StringBuilder();
             for(var i=0; i<FieldCount; i++)
             {
-                dst.Append(delimiter);
-                dst.Append(Chars.Space);
+                if(i != 0)
+                {
+                    dst.Append(delimiter);
+                    dst.Append(Chars.Space);
+                }
+                
                 var field = Fields[i];
                 dst.Append(field.Name.PadRight(field.Width));
             }
