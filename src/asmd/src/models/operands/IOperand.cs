@@ -19,12 +19,11 @@ namespace Z0.Asm.Data
     }
 
     public interface IOperand<T> : IOperand
-        where T : unmanaged
     {
         /// <summary>
         /// The operand value
         /// </summary>
-        T Data {get;}   
+        T Value {get;}   
 
         DataWidth ISized.Width 
             => (DataWidth)bitsize<T>();
@@ -32,7 +31,6 @@ namespace Z0.Asm.Data
 
     public interface IOperand<W,T> : IOperand<T>
         where W : unmanaged, IDataWidth
-        where T : unmanaged
     {
         
     }
@@ -40,7 +38,7 @@ namespace Z0.Asm.Data
     public interface IOperand<F,W,T> : IOperand<T>
         where F : unmanaged, IOperand<F,W,T>
         where W : unmanaged, IDataWidth
-        where T : unmanaged
+        where T : unmanaged, IFixed
     {
         
     }            

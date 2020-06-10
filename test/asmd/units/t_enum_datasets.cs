@@ -92,7 +92,7 @@ namespace Z0
             emit<Octet,byte>();
             emit<HexKind,byte>();
             emit<RegisterKind,uint>();
-            emit<RegisterCode32,byte>();
+            emit<RegisterCode,byte>();
             emit<RegisterClass,byte>();
             emit<RegisterWidth,ushort>();
             emit<OperatingMode,byte>();

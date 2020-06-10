@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
     /// <summary>
     /// Defines literals that correspond to x86 registger widths
     /// </summary>
-    [FieldWidth(RegisterWidth.FieldWidth)]
+    [FieldWidth(16)]
     public enum RegisterWidth : ushort
     {        
         /// <summary>
@@ -55,13 +55,6 @@ namespace Z0.Asm.Data
         /// <summary>
         /// Specifies the width of a 512-bit register
         ///</summary>
-        W512 = 512,
-
-        /// <summary>
-        /// Joins all width classifiers
-        ///</summary>
-        All = W8 | W16 | W32 | W64 | W128 | W256 | W512,
-
-        FieldWidth = 16
+        W512 = 512, 
     }
 }

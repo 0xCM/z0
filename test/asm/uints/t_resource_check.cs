@@ -63,8 +63,8 @@ namespace Z0.Asm
         {
 
             var restype = typeof(ReadOnlySpan<byte>);
-            var methods = ResourceAccessors();
-
+            //var methods = ResourceAccessors();
+            var methods = AppResources.Service.ByteSpanAccessors(Api.Resolved.Select(x => x.Owner)).ToReadOnlySpan();
             
             using var writer = CaseWriter(FileExtensions.Asm);
             using var capture = QuickCapture.Alloc(Context);

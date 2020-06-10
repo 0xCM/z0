@@ -13,16 +13,16 @@ namespace Z0.Asm.Data
     /// <summary>
     /// Defines the content of a 512-bit argument
     /// </summary>
-    public readonly struct OpValue256: IOperand<OpValue256,W256,Vector256<byte>>
+    public readonly struct OpValue256: IOperand<OpValue256,W256,Fixed256>
     {
-        public Vector256<byte> Data {get;}
+        public Fixed256 Value {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public OpValue256(Vector256<byte> value, OperandKind kind)
+        public OpValue256(Fixed256 value, OperandKind kind)
         {
-            Data = value;
+            Value = value;
             OpKind = kind;
         }
 

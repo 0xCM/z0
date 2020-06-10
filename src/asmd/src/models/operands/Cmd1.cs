@@ -20,7 +20,7 @@ namespace Z0.Asm.Data
             => src.Untyped;
 
         [MethodImpl(Inline)]
-        public Cmd(CmdOpCodeModel code, A arg0)
+        public Cmd(CmdOpCode code, A arg0)
         {
             Code = code;
             Arg0 = arg0;
@@ -28,7 +28,7 @@ namespace Z0.Asm.Data
 
         public A Arg0 {get;}
 
-        public CmdOpCodeModel Code {get;}
+        public CmdOpCode Code {get;}
 
         public Cmd Untyped { [MethodImpl(Inline)] get => new Cmd(Arg0);}
     }

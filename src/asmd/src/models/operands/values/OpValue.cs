@@ -12,18 +12,18 @@ namespace Z0.Asm.Data
     public readonly struct OpValue<T> : IOperand<T>
         where T : unmanaged
     {
+        public T Value {get;}
+
         public DataWidth Width {get;}
 
         public OperandKind OpKind {get;}
 
-        public T Data {get;}
-
         [MethodImpl(Inline)]
-        public OpValue(OperandKind kind, DataWidth width, T data)
+        public OpValue(T value, OperandKind kind, DataWidth width)
         {
+            Value = value;
             Width =  width;
             OpKind = kind;
-            Data = data;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
         public static Fixed16 Empty => default(Fixed16);        
 
         internal readonly ushort Data;
-
+        
         public ushort Content
         {
             [MethodImpl(Inline)] get => Data;

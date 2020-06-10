@@ -6,7 +6,7 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    [FieldWidth(RegisterClass.FieldWidth)]
+    [FieldWidth(8)]
     public enum RegisterClass : byte
     {
         GP = 1,
@@ -23,7 +23,6 @@ namespace Z0.Asm.Data
         YMM = 11,
 
         ZMM = 12,
-
-        FieldWidth = 8,    
+        
     }
 }

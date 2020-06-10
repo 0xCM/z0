@@ -16,7 +16,7 @@ namespace Z0.Asm.Data
     {
         public IOperand[] Args {get;}
 
-        public CmdOpCodeModel Code {get;}
+        public CmdOpCode Code {get;}
  
         [MethodImpl(Inline)]
         public Cmd(params IOperand[] args)
@@ -26,7 +26,7 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline)]
-        public Cmd(CmdOpCodeModel code, params IOperand[] args)
+        public Cmd(CmdOpCode code, params IOperand[] args)
         {
             Args = args;
             Code = code;

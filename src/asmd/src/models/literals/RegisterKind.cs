@@ -6,334 +6,334 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    using static RegisterCode32;
+    using static RegisterCode;
     using static RegisterClass;
     using static RegisterWidth;
-    using static RegisterField;
+    using static RegisterFieldSpecs;
 
     /// <summary>
-    /// [RegisterField:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
+    /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
     /// </summary>
     public enum RegisterKind : uint
     {
-        AL = r0 | GP << FK | W8 << FW,
+        AL = r0 | GP << ClassIndex | W8 << WidthIndex,
 
-        CL = r1 | GP << FK | W8 << FW,
+        CL = r1 | GP << ClassIndex | W8 << WidthIndex,
 
-        DL = r2 | GP << FK | W8 << FW,
+        DL = r2 | GP << ClassIndex | W8 << WidthIndex,
 
-        BL = r3 | GP << FK | W8 << FW,
+        BL = r3 | GP << ClassIndex | W8 << WidthIndex,
 
-        SPL = r4 | GP << FK | W8 << FW,
+        SPL = r4 | GP << ClassIndex | W8 << WidthIndex,
 
-        BPL = r5 | GP << FK | W8 << FW,
+        BPL = r5 | GP << ClassIndex | W8 << WidthIndex,
 
-        SIL = r6 | GP << FK | W8 << FW,
+        SIL = r6 | GP << ClassIndex | W8 << WidthIndex,
 
-        DIL = r7 | GP << FK | W8 << FW,
+        DIL = r7 | GP << ClassIndex | W8 << WidthIndex,
 
-        AX = r0 | GP << FK | W16 << FW,
+        AX = r0 | GP << ClassIndex | W16 << WidthIndex,
 
-        CX = r1 | GP << FK | W16 << FW,
+        CX = r1 | GP << ClassIndex | W16 << WidthIndex,
 
-        DX = r2 | GP << FK | W16 << FW,
+        DX = r2 | GP << ClassIndex | W16 << WidthIndex,
 
-        BX = r3 | GP << FK | W16 << FW,
+        BX = r3 | GP << ClassIndex | W16 << WidthIndex,
 
-        SP = r4 | GP << FK | W16 << FW,
+        SP = r4 | GP << ClassIndex | W16 << WidthIndex,
 
-        BP = r5 | GP << FK | W16 << FW,
+        BP = r5 | GP << ClassIndex | W16 << WidthIndex,
 
-        SI = r6 | GP << FK | W16 << FW,
+        SI = r6 | GP << ClassIndex | W16 << WidthIndex,
 
-        DI = r7 | GP << FK | W16 << FW,
+        DI = r7 | GP << ClassIndex | W16 << WidthIndex,
 
-        EAX = r0 | GP << FK | W32 << FW,
+        EAX = r0 | GP << ClassIndex | W32 << WidthIndex,
 
-        ECX = r1 | GP << FK | W32 << FW,
+        ECX = r1 | GP << ClassIndex | W32 << WidthIndex,
 
-        EDX = r2 | GP << FK | W32 << FW,
+        EDX = r2 | GP << ClassIndex | W32 << WidthIndex,
 
-        EBX = r3 | GP << FK | W32 << FW,
+        EBX = r3 | GP << ClassIndex | W32 << WidthIndex,
 
-        ESP = r4 | GP << FK | W32 << FW,
+        ESP = r4 | GP << ClassIndex | W32 << WidthIndex,
 
-        EBP = r5 | GP << FK | W32 << FW,
+        EBP = r5 | GP << ClassIndex | W32 << WidthIndex,
 
-        ESI = r6 | GP << FK | W32 << FW,
+        ESI = r6 | GP << ClassIndex | W32 << WidthIndex,
 
-        EDI = r7 | GP << FK | W32 << FW,
+        EDI = r7 | GP << ClassIndex | W32 << WidthIndex,
 
-        RAX = r0 | GP << FK | W64 << FW,
+        RAX = r0 | GP << ClassIndex | W64 << WidthIndex,
 
-        RCX = r1 | GP << FK | W64 << FW,
+        RCX = r1 | GP << ClassIndex | W64 << WidthIndex,
 
-        RDX = r2 | GP << FK | W64 << FW,
+        RDX = r2 | GP << ClassIndex | W64 << WidthIndex,
 
-        RBX = r3 | GP << FK | W64 << FW,
+        RBX = r3 | GP << ClassIndex | W64 << WidthIndex,
 
-        RSP = r4 | GP << FK | W64 << FW,
+        RSP = r4 | GP << ClassIndex | W64 << WidthIndex,
 
-        RBP = r5 | GP << FK | W64 << FW,
+        RBP = r5 | GP << ClassIndex | W64 << WidthIndex,
 
-        RSI = r6 | GP << FK | W64 << FW,
+        RSI = r6 | GP << ClassIndex | W64 << WidthIndex,
 
-        RDI = r7 | GP << FK | W64 << FW,
+        RDI = r7 | GP << ClassIndex | W64 << WidthIndex,
 
-        R8L = r0 | GPN << FK | W8 << FW,
+        R8L = r0 | GPN << ClassIndex | W8 << WidthIndex,
 
-        R9L = r1 | GPN << FK | W8 << FW,
+        R9L = r1 | GPN << ClassIndex | W8 << WidthIndex,
 
-        R10L = r2 | GPN << FK | W8 << FW,
+        R10L = r2 | GPN << ClassIndex | W8 << WidthIndex,
 
-        R11L = r3 | GPN << FK | W8 << FW,
+        R11L = r3 | GPN << ClassIndex | W8 << WidthIndex,
 
-        R12L = r4 | GPN << FK | W8 << FW,
+        R12L = r4 | GPN << ClassIndex | W8 << WidthIndex,
 
-        R13L = r5 | GPN << FK | W8 << FW,
+        R13L = r5 | GPN << ClassIndex | W8 << WidthIndex,
 
-        R14L = r6 | GPN << FK | W8 << FW,
+        R14L = r6 | GPN << ClassIndex | W8 << WidthIndex,
 
-        R15L = r7 | GPN << FK | W8 << FW,
+        R15L = r7 | GPN << ClassIndex | W8 << WidthIndex,
 
-        R8W = r0 | GPN << FK | W16 << FW,
+        R8W = r0 | GPN << ClassIndex | W16 << WidthIndex,
 
-        R9W = r1 | GPN << FK | W16 << FW,
+        R9W = r1 | GPN << ClassIndex | W16 << WidthIndex,
 
-        R10W = r2 | GPN << FK | W16 << FW,
+        R10W = r2 | GPN << ClassIndex | W16 << WidthIndex,
 
-        R11W = r3 | GPN << FK | W16 << FW,
+        R11W = r3 | GPN << ClassIndex | W16 << WidthIndex,
 
-        R12W = r4 | GPN << FK | W16 << FW,
+        R12W = r4 | GPN << ClassIndex | W16 << WidthIndex,
 
-        R13W = r5 | GPN << FK | W16 << FW,
+        R13W = r5 | GPN << ClassIndex | W16 << WidthIndex,
 
-        R14W = r6 | GPN << FK | W16 << FW,
+        R14W = r6 | GPN << ClassIndex | W16 << WidthIndex,
 
-        R15W = r7 | GPN << FK | W16 << FW,
+        R15W = r7 | GPN << ClassIndex | W16 << WidthIndex,
 
-        R8D = r0 | GPN << FK | W32 << FW,
+        R8D = r0 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R9D = r1 | GPN << FK | W32 << FW,
+        R9D = r1 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R10D = r2 | GPN << FK | W32 << FW,
+        R10D = r2 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R11D = r3 | GPN << FK | W32 << FW,
+        R11D = r3 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R12D = r4 | GPN << FK | W32 << FW,
+        R12D = r4 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R13D = r5 | GPN << FK | W32 << FW,
+        R13D = r5 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R14D = r6 | GPN << FK | W32 << FW,
+        R14D = r6 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R15D = r7 | GPN << FK | W32 << FW,
+        R15D = r7 | GPN << ClassIndex | W32 << WidthIndex,
 
-        R8 = r0 | GPN << FK | W64 << FW,
+        R8q = r0 | GPN << ClassIndex | W64 << WidthIndex,
 
-        R9 = r1 | GPN << FK | W64 << FW,
+        R9q = r1 | GPN << ClassIndex | W64 << WidthIndex,
 
-        R10 = r2 | GPN << FK | W64 << FW,
+        R10q = r2 | GPN << ClassIndex | W64 << WidthIndex,
 
-        R11 = r3 | GPN << FK | W64 << FW,
+        R11q = r3 | GPN << ClassIndex | W64 << WidthIndex,
 
-        R12 = r4 | GPN << FK | W64 << FW,
+        R12q = r4 | GPN << ClassIndex | W64 << WidthIndex,
 
-        R13 = r5 | GPN << FK | W64 << FW,
+        R13q = r5 | GPN << ClassIndex | W64 << WidthIndex,
 
-        R14 = r6 | GPN << FK | W64 << FW,
+        R14q = r6 | GPN << ClassIndex | W64 << WidthIndex,
 
-        R15 = r7 | GPN << FK | W64 << FW,
+        R15q = r7 | GPN << ClassIndex | W64 << WidthIndex,
 
-        XMM0 = r0 | XMM << FK | W128 << FW,
+        XMM0 = r0 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM1 = r1 | XMM << FK | W128 << FW,
+        XMM1 = r1 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM2 = r2 | XMM << FK | W128 << FW,
+        XMM2 = r2 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM3 = r3 | XMM << FK | W128 << FW,
+        XMM3 = r3 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM4 = r4 | XMM << FK | W128 << FW,
+        XMM4 = r4 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM5 = r5 | XMM << FK | W128 << FW,
+        XMM5 = r5 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM6 = r6 | XMM << FK | W128 << FW,
+        XMM6 = r6 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM7 = r7 | XMM << FK | W128 << FW,
+        XMM7 = r7 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM8 = r8 | XMM << FK | W128 << FW,
+        XMM8 = RegisterCode.r8 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM9 = r9 | XMM << FK | W128 << FW,
+        XMM9 = r9 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM10 = r10 | XMM << FK | W128 << FW,
+        XMM10 = r10 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM11 = r11 | XMM << FK | W128 << FW,
+        XMM11 = r11 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM12 = r12 | XMM << FK | W128 << FW,
+        XMM12 = r12 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM13 = r13 | XMM << FK | W128 << FW,
+        XMM13 = r13 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM14 = r14 | XMM << FK | W128 << FW,
+        XMM14 = r14 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM15 = r15 | XMM << FK | W128 << FW,
+        XMM15 = r15 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM16 = r16 | XMM << FK | W128 << FW,
+        XMM16 = RegisterCode.r16 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM17 = r17 | XMM << FK | W128 << FW,
+        XMM17 = r17 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM18 = r18 | XMM << FK | W128 << FW,
+        XMM18 = r18 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM19 = r19 | XMM << FK | W128 << FW,
+        XMM19 = r19 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM20 = r20 | XMM << FK | W128 << FW,
+        XMM20 = r20 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM21 = r21 | XMM << FK | W128 << FW,
+        XMM21 = r21 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM22 = r22 | XMM << FK | W128 << FW,
+        XMM22 = r22 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM23 = r23 | XMM << FK | W128 << FW,
+        XMM23 = r23 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM24 = r24 | XMM << FK | W128 << FW,
+        XMM24 = r24 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM25 = r25 | XMM << FK | W128 << FW,
+        XMM25 = r25 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM26 = r26 | XMM << FK | W128 << FW,
+        XMM26 = r26 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM27 = r27 | XMM << FK | W128 << FW,
+        XMM27 = r27 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM28 = r28 | XMM << FK | W128 << FW,
+        XMM28 = r28 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM29 = r29 | XMM << FK | W128 << FW,
+        XMM29 = r29 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM30 = r30 | XMM << FK | W128 << FW,
+        XMM30 = r30 | XMM << ClassIndex | W128 << WidthIndex,
 
-        XMM31 = r31 | XMM << FK | W128 << FW,
+        XMM31 = r31 | XMM << ClassIndex | W128 << WidthIndex,
 
-        YMM0 = r0 | YMM << FK | W256 << FW,
+        YMM0 = r0 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM1 = r1 | YMM << FK | W256 << FW,
+        YMM1 = r1 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM2 = r2 | YMM << FK | W256 << FW,
+        YMM2 = r2 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM3 = r3 | YMM << FK | W256 << FW,
+        YMM3 = r3 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM4 = r4 | YMM << FK | W256 << FW,
+        YMM4 = r4 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM5 = r5 | YMM << FK | W256 << FW,
+        YMM5 = r5 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM6 = r6 | YMM << FK | W256 << FW,
+        YMM6 = r6 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM7 = r7 | YMM << FK | W256 << FW,
+        YMM7 = r7 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM8 = r8 | YMM << FK | W256 << FW,
+        YMM8 = RegisterCode.r8 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM9 = r9 | YMM << FK | W256 << FW,
+        YMM9 = r9 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM10 = r10 | YMM << FK | W256 << FW,
+        YMM10 = r10 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM11 = r11 | YMM << FK | W256 << FW,
+        YMM11 = r11 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM12 = r12 | YMM << FK | W256 << FW,
+        YMM12 = r12 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM13 = r13 | YMM << FK | W256 << FW,
+        YMM13 = r13 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM14 = r14 | YMM << FK | W256 << FW,
+        YMM14 = r14 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM15 = r15 | YMM << FK | W256 << FW,
+        YMM15 = r15 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM16 = r16 | YMM << FK | W256 << FW,
+        YMM16 = RegisterCode.r16 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM17 = r17 | YMM << FK | W256 << FW,
+        YMM17 = r17 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM18 = r18 | YMM << FK | W256 << FW,
+        YMM18 = r18 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM19 = r19 | YMM << FK | W256 << FW,
+        YMM19 = r19 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM20 = r20 | YMM << FK | W256 << FW,
+        YMM20 = r20 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM21 = r21 | YMM << FK | W256 << FW,
+        YMM21 = r21 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM22 = r22 | YMM << FK | W256 << FW,
+        YMM22 = r22 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM23 = r23 | YMM << FK | W256 << FW,
+        YMM23 = r23 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM24 = r24 | YMM << FK | W256 << FW,
+        YMM24 = r24 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM25 = r25 | YMM << FK | W256 << FW,
+        YMM25 = r25 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM26 = r26 | YMM << FK | W256 << FW,
+        YMM26 = r26 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM27 = r27 | YMM << FK | W256 << FW,
+        YMM27 = r27 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM28 = r28 | YMM << FK | W256 << FW,
+        YMM28 = r28 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM29 = r29 | YMM << FK | W256 << FW,
+        YMM29 = r29 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM30 = r30 | YMM << FK | W256 << FW,
+        YMM30 = r30 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM31 = r31 | YMM << FK | W256 << FW,
+        YMM31 = r31 | YMM << ClassIndex | W256 << WidthIndex,
 
-        ZMM0 = r0 | ZMM << FK | W512 << FW,
+        ZMM0 = r0 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM1 = r1 | ZMM << FK | W512 << FW,
+        ZMM1 = r1 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM2 = r2 | ZMM << FK | W512 << FW,
+        ZMM2 = r2 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM3 = r3 | ZMM << FK | W512 << FW,
+        ZMM3 = r3 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM4 = r4 | ZMM << FK | W512 << FW,
+        ZMM4 = r4 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM5 = r5 | ZMM << FK | W512 << FW,
+        ZMM5 = r5 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM6 = r6 | ZMM << FK | W512 << FW,
+        ZMM6 = r6 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM7 = r7 | ZMM << FK | W512 << FW,
+        ZMM7 = r7 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM8 = r8 | ZMM << FK | W512 << FW,
+        ZMM8 = RegisterCode.r8 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM9 = r9 | ZMM << FK | W512 << FW,
+        ZMM9 = r9 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM10 = r10 | ZMM << FK | W512 << FW,
+        ZMM10 = r10 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM11 = r11 | ZMM << FK | W512 << FW,
+        ZMM11 = r11 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM12 = r12 | ZMM << FK | W512 << FW,
+        ZMM12 = r12 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM13 = r13 | ZMM << FK | W512 << FW,
+        ZMM13 = r13 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM14 = r14 | ZMM << FK | W512 << FW,
+        ZMM14 = r14 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM15 = r15 | ZMM << FK | W512 << FW,
+        ZMM15 = r15 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM16 = r16 | ZMM << FK | W512 << FW,
+        ZMM16 = RegisterCode.r16 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM17 = r17 | ZMM << FK | W512 << FW,
+        ZMM17 = r17 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM18 = r18 | ZMM << FK | W512 << FW,
+        ZMM18 = r18 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM19 = r19 | ZMM << FK | W512 << FW,
+        ZMM19 = r19 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM20 = r20 | ZMM << FK | W512 << FW,
+        ZMM20 = r20 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM21 = r21 | ZMM << FK | W512 << FW,
+        ZMM21 = r21 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM22 = r22 | ZMM << FK | W512 << FW,
+        ZMM22 = r22 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM23 = r23 | ZMM << FK | W512 << FW,
+        ZMM23 = r23 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM24 = r24 | ZMM << FK | W512 << FW,
+        ZMM24 = r24 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM25 = r25 | ZMM << FK | W512 << FW,
+        ZMM25 = r25 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM26 = r26 | ZMM << FK | W512 << FW,
+        ZMM26 = r26 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM27 = r27 | ZMM << FK | W512 << FW,
+        ZMM27 = r27 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM28 = r28 | ZMM << FK | W512 << FW,
+        ZMM28 = r28 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM29 = r29 | ZMM << FK | W512 << FW,
+        ZMM29 = r29 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM30 = r30 | ZMM << FK | W512 << FW,
+        ZMM30 = r30 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM31 = r31 | ZMM << FK | W512 << FW,
+        ZMM31 = r31 | ZMM << ClassIndex | W512 << WidthIndex,
     }
 }

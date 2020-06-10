@@ -32,8 +32,6 @@ namespace Z0.Asm.Data
         /// <summary>
         /// Classifies an r/m operand
         /// </summary>
-        RM = R | M,
-
-        Width = 3,
+        RM = R | M,        
     }
 }

@@ -12,16 +12,16 @@ namespace Z0.Asm.Data
     /// <summary>
     /// Defines a 32-bit argument
     /// </summary>
-    public readonly struct OpValue32 : IOperand<OpValue32,W32,uint>
+    public readonly struct OpValue32 : IOperand<OpValue32,W32,Fixed32>
     {
-        public uint Data {get;}
+        public Fixed32 Value {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public OpValue32(uint value, OperandKind kind)
+        public OpValue32(Fixed32 value, OperandKind kind)
         {
-            Data = value;
+            Value = value;
             OpKind = kind;
         }
 

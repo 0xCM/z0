@@ -21,7 +21,7 @@ namespace Z0.Asm.Data
         /// <summary>
         /// The instruction op code
         /// </summary>
-        CmdOpCodeModel Code {get;}
+        CmdOpCode Code {get;}
 
         /// <summary>
         /// The number of arguments accepted by the operand

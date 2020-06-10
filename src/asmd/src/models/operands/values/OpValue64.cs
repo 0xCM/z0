@@ -12,16 +12,16 @@ namespace Z0.Asm.Data
     /// <summary>
     /// Defines the content of a 64-bit argument
     /// </summary>
-    public readonly struct OpValue64 : IOperand<OpValue64,W64,ulong>
+    public readonly struct OpValue64 : IOperand<OpValue64,W64,Fixed64>
     {
-        public ulong Data {get;}
+        public Fixed64 Value {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public OpValue64(ulong value, OperandKind kind)
+        public OpValue64(Fixed64 value, OperandKind kind)
         {
-            Data = value;
+            Value = value;
             OpKind = kind;
         }
 

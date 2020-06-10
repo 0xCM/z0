@@ -12,16 +12,16 @@ namespace Z0.Asm.Data
     /// <summary>
     /// Defines a 16-bit argument
     /// </summary>
-    public readonly struct OpValue16 : IOperand<OpValue16,W16,ushort>
+    public readonly struct OpValue16 : IOperand<OpValue16,W16,Fixed16>
     {
-        public ushort Data {get;}
+        public Fixed16 Value {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public OpValue16(ushort value, OperandKind kind)
+        public OpValue16(Fixed16 value, OperandKind kind)
         {
-            Data = value;
+            Value = value;
             OpKind = kind;
         }
 
