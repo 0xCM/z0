@@ -12,7 +12,7 @@ namespace Z0.Asm
 
         AsmOpCode OpCode {get;}
 
-        AsmInstructionCode Instruction {get;}
+        InstructionCodeData Instruction {get;}
 
         EncodedCommand Encoded {get;}
 

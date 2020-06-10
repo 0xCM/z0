@@ -10,7 +10,7 @@ namespace Z0.Asm.Dsl
     using static Konst;    
     using static Memories;
     
-    public readonly struct ImmOp<T> : IImmOp<T>
+    public readonly struct imm<T> : IImmOp<T>
         where T : unmanaged, IFixed
     {
         public T Value {get;}
@@ -18,7 +18,7 @@ namespace Z0.Asm.Dsl
         public DataWidth Width => (DataWidth)bitsize<T>();
 
         [MethodImpl(Inline)]
-        public ImmOp(T value)
+        public imm(T value)
         {
             Value = value;
         }

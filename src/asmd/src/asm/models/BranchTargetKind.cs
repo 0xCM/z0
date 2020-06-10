@@ -18,7 +18,7 @@ namespace Z0.Asm
         Far = 2
     }
 
-    partial class XTend
+    public static partial class XTend
     {
         [MethodImpl(Inline)]
         public static string Format(this BranchTargetSize src)

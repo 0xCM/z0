@@ -14,7 +14,7 @@
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(Datasets)" />
     <ProjectReference Include="$(MetaReader)" />
-    <ProjectReference Include="$(AsmB)" />
+    <ProjectReference Include="$(ResV)" />
 
   </ItemGroup>  
 

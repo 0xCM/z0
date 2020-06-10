@@ -22,7 +22,7 @@ namespace Z0.Asm
 
         public AsmOpCode OpCode {get;}
 
-        public AsmInstructionCode Instruction {get;}
+        public InstructionCodeData Instruction {get;}
 
         public EncodedCommand Encoded {get;}
 
@@ -32,7 +32,7 @@ namespace Z0.Asm
             this.Sequence = seq;
             this.Statement = statement;
             this.OpCode = new AsmOpCode(opcode);
-            this.Instruction = new AsmInstructionCode(instruction);
+            this.Instruction = new InstructionCodeData(instruction);
             this.Encoded = encoded;
         }
         

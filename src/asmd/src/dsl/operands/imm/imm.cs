@@ -9,35 +9,35 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
      
-    public readonly struct ImmOp : IImmOp        
+    public readonly struct imm : IImmOp        
     {
         readonly ulong Data;
 
         public DataWidth Width {get;}
 
         [MethodImpl(Inline)]
-        public ImmOp(byte data)
+        public imm(byte data)
         {
             Data = data;
             Width = DataWidth.W8;
         }
 
         [MethodImpl(Inline)]
-        public ImmOp(ushort data)
+        public imm(ushort data)
         {
             Data = data;
             Width = DataWidth.W16;
         }
 
         [MethodImpl(Inline)]
-        public ImmOp(uint data)
+        public imm(uint data)
         {
             Data = data;
             Width = DataWidth.W32;
         }
 
         [MethodImpl(Inline)]
-        public ImmOp(ulong data)
+        public imm(ulong data)
         {
             Data = data;
             Width = DataWidth.W64;

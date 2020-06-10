@@ -2,13 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using System;
-using System.Reflection;
+namespace Z0.Asm
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
-[assembly: AssemblyDescription("AsmGenerated")]
-[assembly: PartId(PartId.AsmG)]
+    public static partial class XTend
+    {
 
-namespace Z0.Parts
-{        
-    public sealed class AsmG : Part<AsmG> { }
+        
+    }
+
 }
