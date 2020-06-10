@@ -7,7 +7,6 @@ namespace Z0.Machines
     using System;
 
     using Z0.Asm;
-    using Z0.Asm.Data;
 
     public enum HostHandlerKind : byte
     {

@@ -18,7 +18,8 @@ namespace Z0
 
         public byte Content
         {
-            [MethodImpl(Inline)] get => Data;
+            [MethodImpl(Inline)] 
+            get => Data;
         }
 
         [MethodImpl(Inline)]
@@ -75,7 +76,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator byte(Fixed8 x)
             => (byte)x.Data;
-
         
         [MethodImpl(Inline)]
         public T As<T>()

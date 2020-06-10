@@ -8,7 +8,7 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using Z0.Asm.Data;
+    using Z0.Asm;
 
     using static Seed;
     using static Memories;

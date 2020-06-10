@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
 
     using K = FixedWidth;
 
@@ -40,6 +39,5 @@ namespace Z0
             else
                 return 0;
         }
-
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     {
         public static Fixed32 Empty => default(Fixed32);        
 
-        readonly uint Data;
+        internal readonly uint Data;
 
         public uint Content
         {

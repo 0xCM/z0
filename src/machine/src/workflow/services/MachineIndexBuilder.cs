@@ -8,8 +8,6 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using Z0.Asm;
-
     using static Seed;
 
     public readonly struct MachineIndexBuilder : IMachineIndexBuilder

@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
 
     /// <summary>
     /// Characterizes a type-parametric formatter
@@ -19,6 +16,5 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         string Format(T src);
-
     } 
 }

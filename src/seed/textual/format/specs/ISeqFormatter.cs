@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public interface ISeqFormatter
     {
@@ -22,8 +21,7 @@ namespace Z0
     {
 
     }
-        
-            
+                    
     public interface ISeqFormatter<T> : ISeqFormatter
     {
         string FormatItem(T src)

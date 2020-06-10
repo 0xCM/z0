@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct SeqFormatConfig : ISeqFormatConfig<SeqFormatConfig>
     {
@@ -18,11 +18,10 @@ namespace Z0
         [MethodImpl(Inline)]
         SeqFormatConfig(string delimiter)
         {
-            this.Delimiter = delimiter;
+            Delimiter = delimiter;
         }
 
         public string Delimiter {get;}
-
     }
 
     public readonly struct DefaultSeqFormatConfig : ISeqFormatConfig<DefaultSeqFormatConfig>

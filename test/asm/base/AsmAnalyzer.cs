@@ -6,15 +6,11 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.IO;
 
-    using Asm.Data;
+    using Dsl;
+
     using static Konst;
     using static Control;
-
-    using static Asm.Data.ImmOps;
 
     public readonly struct AsmAnalyzer
     {
@@ -32,5 +28,4 @@ namespace Z0.Asm
             return handler.Collected;
         }
     }
-
 }

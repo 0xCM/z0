@@ -5,8 +5,7 @@
 namespace Z0
 {
     using System;
-    
-    
+        
     public interface ISystemHexFormatter<T> : ISystemFormatter
         where T : struct
     {

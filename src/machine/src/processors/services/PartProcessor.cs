@@ -9,7 +9,7 @@ namespace Z0.Machines
 
     using Z0.Asm;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public readonly struct PartProcessor : IPartProcessor

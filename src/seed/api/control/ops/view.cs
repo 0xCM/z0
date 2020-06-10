@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     partial class Control
     {
         [MethodImpl(Inline)]
         public static ref readonly T view<S,T>(in S src)
             => ref Unsafe.As<S,T>(ref edit(src));        
-
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly byte view8u<T>(in T src)

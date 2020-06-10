@@ -9,7 +9,7 @@ namespace Z0.Machines
     using System.Collections.Generic;
     using System.Linq;
 
-    using Z0.Asm.Data;
+    using Z0.Asm;
 
     using static Seed;
     using static Memories;

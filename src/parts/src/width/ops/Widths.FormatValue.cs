@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static PartIdentity;
+    using static Konst;
 
     partial class XTend 
-    {
-        
+    {        
         [MethodImpl(Inline)]
         public static string FormatValue(this TypeWidth w)
             => ((uint)w).ToString();

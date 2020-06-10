@@ -6,8 +6,6 @@ namespace Z0.Machines
 {
     using System;
 
-    using static Seed;
-
     public interface IMachineIndex
     {
         int EntryCount {get;}

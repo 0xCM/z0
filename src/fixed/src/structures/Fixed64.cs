@@ -18,7 +18,8 @@ namespace Z0
 
         public ulong Content
         {
-            [MethodImpl(Inline)] get => Data;
+            [MethodImpl(Inline)] 
+            get => Data;
         }
 
         public Fixed32 Lo
@@ -60,7 +61,6 @@ namespace Z0
         Fixed64(ulong x0)
             => Data = x0;
         
-
         [MethodImpl(Inline)]
         public static implicit operator Fixed64(int x0)
             => From(x0);
@@ -117,11 +117,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(Fixed64 src)
             => Data == src.Data;     
+
         public string Format()
             => Data.ToString();
-
-        public string FormatHex(bool zpad = false, bool specifier = false)
-            => Data.FormatHex(zpad, specifier:false);
 
         public override string ToString() 
             => Format();

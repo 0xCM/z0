@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Data
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
+    using Dsl;
+
     using static Control;
-    using static ImmOps;
-    using static Regs;
     using static Konst;
 
     public readonly ref struct MovHandler 

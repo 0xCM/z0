@@ -9,8 +9,7 @@ namespace Z0.Machines
 
     using Z0.Asm;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     using API = Processors;
         

@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     using static HexSpecs;
-    using NK = NumericKind;
 
     partial class XTend
     {                

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static PartIdentity;
-    
+    using static Konst;
+
     using K = TypeWidth;
 
     partial class Widths

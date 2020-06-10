@@ -689,7 +689,6 @@ namespace Z0
             where F : unmanaged, INumericFormatProvider<F>
                 => src.Formatter.Format(src, @base);
 
-
         [MethodImpl(Inline)]
         public static string hex<T>(T src)
             where T : unmanaged

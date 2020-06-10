@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     public interface IDataWidth<F> : IDataWidth, ITypedLiteral<F,DataWidth,uint>, IEquatable<F>
         where F : struct, IDataWidth<F>
     {        

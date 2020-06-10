@@ -7,7 +7,7 @@ namespace Z0.Machines
     using System;
     using System.Runtime.CompilerServices;
 
-    using Asm;
+    using Z0.Asm;
 
     using static Seed;
     using static Memories;

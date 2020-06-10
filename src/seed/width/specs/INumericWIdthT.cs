@@ -12,5 +12,4 @@ namespace Z0
         NumericWidth INumericWidth.NumericWidth 
             => Widths.numeric<F>();               
     }
-
 }

@@ -9,7 +9,6 @@ namespace Z0
         
     }
 
-
     public interface INumericFormatter<T> : INumericFormatter, IFormatter<T>
         where T : unmanaged
     {

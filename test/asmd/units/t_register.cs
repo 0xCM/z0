@@ -7,6 +7,8 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
     
+    using Dsl;
+
     public class t_regiser : t_asmd<t_regiser>
     {
         public void xmm_register_list()

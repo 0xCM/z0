@@ -11,7 +11,6 @@ namespace Z0.Machines
     using static Memories;
 
     using Z0.Asm;
-    using Z0.Asm.Data;
 
     [ApiHost]
     public class Processors : IApiHost<Processors>

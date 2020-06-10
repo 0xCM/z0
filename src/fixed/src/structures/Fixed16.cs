@@ -18,7 +18,8 @@ namespace Z0
         
         public ushort Content
         {
-            [MethodImpl(Inline)] get => Data;
+            [MethodImpl(Inline)] 
+            get => Data;
         }
 
         public Fixed8 Lo

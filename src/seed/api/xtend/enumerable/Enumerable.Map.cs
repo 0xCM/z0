@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     
     partial class XTend
     {
@@ -20,6 +20,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         /// <param name="src">The source sequence</param>
         /// <param name="f">The mapping function</param>
+        [MethodImpl(Inline)]
         public static T[] Map<S,T>(this IEnumerable<S> src, Func<S,T> f)
             => Control.map(src,f);
     }

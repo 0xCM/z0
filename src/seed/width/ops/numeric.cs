@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     using K = NumericWidth;
 
@@ -95,6 +95,6 @@ namespace Z0
         public static int div<W,T>(W w = default, T t = default)
             where W : struct, ITypeWidth
             where T : unmanaged
-                => (int)type<W>() / bitsize<T>();
+                => (int)type<W>() / Control.bitsize<T>();
     }
 }

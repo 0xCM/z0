@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     public interface IFixedWidth<F> : IFixedWidth, ITypeWidth<F>, ITypedLiteral<F,FixedWidth,uint>
         where F : struct, IFixedWidth<F>
     {     

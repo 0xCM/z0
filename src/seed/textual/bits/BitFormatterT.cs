@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
-    using static Control;    
-
     /// <summary>
     /// Configurable bit data type formatter
     /// </summary>

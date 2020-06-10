@@ -52,14 +52,17 @@ namespace Z0
         /// <summary>
         /// Specifies the default configuration for hex data emission
         /// </summary>
-        public static HexFormatConfig HexData => Define(true, false, false, false, Chars.Space);
+        public static HexFormatConfig HexData 
+            => Define(true, false, false, false, Chars.Space);
         
         /// <summary>
         /// The default configuration for array initialization content
         /// </summary>
-        public static HexFormatConfig ArrayContent => Define(true, true, false, true, Chars.Comma);
+        public static HexFormatConfig ArrayContent 
+            => Define(true, true, false, true, Chars.Comma);
 
-        public static HexFormatConfig HexMem => Define(zpad: false, specifier:true, uppercase:false, prespec:true);
+        public static HexFormatConfig HexMem 
+            => Define(zpad: false, specifier:true, uppercase:false, prespec:true);
 
         [MethodImpl(Inline)]
         public static HexFormatConfig Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
@@ -72,12 +75,12 @@ namespace Z0
         [MethodImpl(Inline)]
         HexFormatConfig(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)
         {            
-            this.ZPad = zpad;
-            this.Specifier = specifier;
-            this.Uppercase = uppercase;
-            this.PreSpec = prespec;    
-            this.CaseFormatChar = HexSpecs.CaseSpec(uppercase);
-            this.Delimiter = delimiter;
+            ZPad = zpad;
+            Specifier = specifier;
+            Uppercase = uppercase;
+            PreSpec = prespec;    
+            CaseFormatChar = HexSpecs.CaseSpec(uppercase);
+            Delimiter = delimiter;
         }
     }
 }

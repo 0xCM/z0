@@ -8,16 +8,16 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
+    using Z0.Asm;
     using Z0.Asm.Data;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     readonly struct AsmParseCases
     {
         public const string Case01 = "002ch vmovdqu xmmword ptr [rcx],xmm0          ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 01}";
     }
-
 
     [ApiHost]
     public class Cpu
@@ -74,7 +74,7 @@ namespace Z0.Machines
 
             
             var data = 0xCE_38ul;
-            var command = Asm.Data.Commands.encode(data);
+            var command = Asm.Commands.encode(data);
             Dispatch(command);
 
             var steps = Buffers.Run().Slice(0, Count);
@@ -99,7 +99,7 @@ namespace Z0.Machines
         [Op, MethodImpl(Inline)]
         public void Run(ulong data)
         {
-            Dispatch(Asm.Data.Commands.encode(data));
+            Dispatch(Asm.Commands.encode(data));
         }
 
         [Op, MethodImpl(Inline)]

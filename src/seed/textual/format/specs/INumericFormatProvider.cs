@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public interface INumericFormatProvider<T> :  IFormatProvider<T>
         where T : unmanaged
@@ -14,7 +13,6 @@ namespace Z0
 
         IFormatter<T> IFormatProvider<T>.Formatter
             => Formatter;
-
     }
 
     public interface INumericFormatProvider<F,T> : INumericFormatProvider<T>

@@ -5,6 +5,7 @@
 namespace Z0.Machines
 {
     using System;
+    
     using Z0.Asm;
 
     public interface IAsmProcessor<T> : IMachineService, IDataProcessor<T>
