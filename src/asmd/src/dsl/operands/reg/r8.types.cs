@@ -28,6 +28,12 @@ namespace Z0.Asm.Dsl
     {        
         public Fixed8 Value {get;}
 
+        [MethodImpl(Inline)]
+        public cl(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.CL;
     }    
 
@@ -35,24 +41,51 @@ namespace Z0.Asm.Dsl
     {            
         public Fixed8 Value {get;}
 
+        [MethodImpl(Inline)]
+        public dl(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.DL;
     }    
 
     public readonly struct bl : IRegOp8<bl,N3>
     {        
+
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public bl(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.BL;
     }    
 
     public readonly struct sil : IRegOp8<sil,N4>
     {            
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public sil(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.SIL;
     }    
 
     public readonly struct dil : IRegOp8<dil,N5>
     {
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public dil(Fixed8 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.DIL;
     }        
@@ -61,6 +94,12 @@ namespace Z0.Asm.Dsl
     {
         public Fixed8 Value {get;}
 
+        [MethodImpl(Inline)]
+        public spl(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.SPL;
     }            
 
@@ -68,39 +107,76 @@ namespace Z0.Asm.Dsl
     {
         public Fixed8 Value {get;}
 
+        [MethodImpl(Inline)]
+        public bpl(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.BPL;
     }                
 
-    public readonly struct r8B : IRegOp8<r8B,N8>
+    public readonly struct r8b : IRegOp8<r8b,N8>
     {
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r8b(Fixed8 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R8L;
     }                    
 
-    public readonly struct r9B : IRegOp8<r9B,N9>
+    public readonly struct r9b : IRegOp8<r9b,N9>
     {
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r9b(Fixed8 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R9L;
     }                        
 
-    public readonly struct r10B : IRegOp8<r10B,N10>
+    public readonly struct r10b : IRegOp8<r10b,N10>
     {
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r10b(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.R10L;
     }                        
 
-    public readonly struct r11B : IRegOp8<r11B,N11>
+    public readonly struct r11b : IRegOp8<r11b,N11>
     {
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r11b(Fixed8 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R11L;
     }                        
 
-    public readonly struct r12B : IRegOp8<r12B,N12>
+    public readonly struct r12b : IRegOp8<r12b,N12>
     {
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r12b(Fixed8 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R12L;
     }                    
@@ -108,6 +184,13 @@ namespace Z0.Asm.Dsl
     public readonly struct r13b : IRegOp8<r13b,N13>
     {
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r13b(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.R13L;
     }                        
 
@@ -115,12 +198,24 @@ namespace Z0.Asm.Dsl
     {
         public Fixed8 Value {get;}
 
+        [MethodImpl(Inline)]
+        public r14b(Fixed8 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.R14L;
     }                        
 
     public readonly struct r15b : IRegOp8<r15b,N15>
     {
         public Fixed8 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r15b(Fixed8 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R15L;
     }

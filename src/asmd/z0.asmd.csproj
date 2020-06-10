@@ -15,7 +15,6 @@
     <ProjectReference Include="$(Datasets)" />
     <ProjectReference Include="$(MetaReader)" />
     <ProjectReference Include="$(AsmB)" />
-    <ProjectReference Include="$(AsmG)" />
 
   </ItemGroup>  
 

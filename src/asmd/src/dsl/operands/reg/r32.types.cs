@@ -107,12 +107,24 @@ namespace Z0.Asm.Dsl
     {
         public Fixed32 Value {get;}
 
+        [MethodImpl(Inline)]
+        public ebp(Fixed32 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.EBP;
     }                
 
     public readonly struct r8d : IRegOp32<r8d,N8>
     {
         public Fixed32 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r8d(Fixed32 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R8D;
     }                    
@@ -121,12 +133,24 @@ namespace Z0.Asm.Dsl
     {            
         public Fixed32 Value {get;}
 
+        [MethodImpl(Inline)]
+        public r9d(Fixed32 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.R9D;
     }                        
 
     public readonly struct r10d : IRegOp32<r10d,N10>
     {            
         public Fixed32 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r10d(Fixed32 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R10D;
 
@@ -136,12 +160,24 @@ namespace Z0.Asm.Dsl
     {
         public Fixed32 Value {get;}
 
+        [MethodImpl(Inline)]
+        public r11d(Fixed32 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.R11D;
     }                        
 
     public readonly struct r12d : IRegOp32<r12d,N12>
     {            
         public Fixed32 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r12d(Fixed32 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R12D;
     }                    
@@ -150,6 +186,12 @@ namespace Z0.Asm.Dsl
     {
         public Fixed32 Value {get;}
         
+        [MethodImpl(Inline)]
+        public r13d(Fixed32 value)
+        {
+            Value = value;
+        }
+        
         public K Kind => K.R13D;
     }                        
 
@@ -157,12 +199,25 @@ namespace Z0.Asm.Dsl
     {
         public Fixed32 Value {get;}
 
+
+        [MethodImpl(Inline)]
+        public r14d(Fixed32 value)
+        {
+            Value = value;
+        }
+
         public K Kind => K.R14D;
     }                        
 
     public readonly struct r15d : IRegOp32<r15d,N15>
     {            
         public Fixed32 Value {get;}
+
+        [MethodImpl(Inline)]
+        public r15d(Fixed32 value)
+        {
+            Value = value;
+        }
 
         public K Kind => K.R15D;
     } 

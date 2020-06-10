@@ -6,8 +6,6 @@ namespace Z0.Asm
 {        
     using System;
 
-    using Z0.Asm.Data;
-    
     using static Konst;
 
     public interface IImmOp : IOperand

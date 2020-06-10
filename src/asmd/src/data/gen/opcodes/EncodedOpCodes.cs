@@ -14,7 +14,7 @@ namespace Z0.Asm.Data
     using X = OpCodes.Expressions;
     using I = OpCodes.Instructions;
     
-    public partial class OpCodes
+    public class EncodedOpCodes
     {            
         const byte TW = (byte)T.Width;            
 

@@ -24,15 +24,15 @@ namespace Z0.Asm.Dsl
 
         public static R.bpl bpl => default;
 
-        public static R.r8B r8b => default;        
+        public static R.r8b r8b => default;        
 
-        public static R.r9B r9b => default;        
+        public static R.r9b r9b => default;        
 
-        public static R.r10B r10b => default;        
+        public static R.r10b r10b => default;        
 
-        public static R.r11B r11b => default;        
+        public static R.r11b r11b => default;        
 
-        public static R.r12B r12b => default;        
+        public static R.r12b r12b => default;        
 
         public static R.r13b r13b => default;        
 
@@ -60,7 +60,7 @@ namespace Z0.Asm.Dsl
 
         public static R.r9w r9w => default;        
 
-        public static R.R10w r10w => default;        
+        public static R.r10w r10w => default;        
 
         public static R.r11w r11w => default;        
 
@@ -120,21 +120,21 @@ namespace Z0.Asm.Dsl
 
         public static R.rbp rbp => default;        
 
-        public static R.R8q r8 => default;        
+        public static R.r8q r8 => default;        
 
-        public static R.R9q r9 => default;        
+        public static R.r9q r9 => default;        
 
-        public static R.R10q r10 => default;        
+        public static R.r10q r10 => default;        
 
-        public static R.R11q r11 => default;        
+        public static R.r11q r11 => default;        
 
-        public static R.R12q r12 => default;        
+        public static R.r12q r12 => default;        
 
-        public static R.R13q r13 => default;        
+        public static R.r13q r13 => default;        
 
-        public static R.R14q r14 => default;        
+        public static R.r14q r14 => default;        
 
-        public static R.R15q r15 => default;        
+        public static R.r15q r15 => default;        
 
         public static R.xmm0 xmm0 => default;
 

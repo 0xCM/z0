@@ -47,7 +47,7 @@ namespace Z0.Asm
         where W : unmanaged, IDataWidth
         where S : unmanaged
     {
-
+        S Value {get;}
     }
 
     /// <summary>

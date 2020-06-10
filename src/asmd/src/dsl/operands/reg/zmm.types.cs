@@ -11,12 +11,12 @@ namespace Z0.Asm.Dsl
 
     using K = RegisterKind;
 
-    public readonly struct ymm0 : IYmmRegOp<ymm0,N0>
+    public readonly struct zmm0 : IZmmRegOp<zmm0,N0>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm0(Fixed256 value)
+        public zmm0(Fixed512 value)
         {
             Value = value;
         }
@@ -24,13 +24,13 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM0;
     }
 
-    public readonly struct ymm1 : IYmmRegOp<ymm1,N1>
+    public readonly struct zmm1 : IZmmRegOp<zmm1,N1>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
 
         [MethodImpl(Inline)]
-        public ymm1(Fixed256 value)
+        public zmm1(Fixed512 value)
         {
             Value = value;
         }
@@ -38,12 +38,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM1;
     }
 
-    public readonly struct ymm2 : IYmmRegOp<ymm2,N2>
+    public readonly struct zmm2 : IZmmRegOp<zmm2,N2>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm2(Fixed256 value)
+        public zmm2(Fixed512 value)
         {
             Value = value;
         }
@@ -51,12 +51,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM2;
     }
 
-    public readonly struct ymm3 : IYmmRegOp<ymm3,N3>
+    public readonly struct zmm3 : IZmmRegOp<zmm3,N3>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm3(Fixed256 value)
+        public zmm3(Fixed512 value)
         {
             Value = value;
         }
@@ -64,13 +64,13 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM3;
     }
 
-    public readonly struct ymm4 : IYmmRegOp<ymm4,N4>
+    public readonly struct zmm4 : IZmmRegOp<zmm4,N4>
     {                        
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
 
         [MethodImpl(Inline)]
-        public ymm4(Fixed256 value)
+        public zmm4(Fixed512 value)
         {
             Value = value;
         }
@@ -78,12 +78,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM4;
     }
 
-    public readonly struct ymm5 : IYmmRegOp<ymm5,N5>
+    public readonly struct zmm5 : IZmmRegOp<zmm5,N5>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm5(Fixed256 value)
+        public zmm5(Fixed512 value)
         {
             Value = value;
         }
@@ -91,12 +91,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM5;
     }
 
-    public readonly struct ymm6 : IYmmRegOp<ymm6,N6>
+    public readonly struct zmm6 : IZmmRegOp<zmm6,N6>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm6(Fixed256 value)
+        public zmm6(Fixed512 value)
         {
             Value = value;
         }
@@ -104,12 +104,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM6;
     }
 
-    public readonly struct ymm7 : IYmmRegOp<ymm7,N7>
+    public readonly struct zmm7 : IZmmRegOp<zmm7,N7>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm7(Fixed256 value)
+        public zmm7(Fixed512 value)
         {
             Value = value;
         }
@@ -117,12 +117,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM7;
     }
 
-    public readonly struct ymm8 : IYmmRegOp<ymm8,N8>
+    public readonly struct zmm8 : IZmmRegOp<zmm8,N8>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm8(Fixed256 value)
+        public zmm8(Fixed512 value)
         {
             Value = value;
         }
@@ -130,12 +130,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM8;
     }
 
-    public readonly struct ymm9 : IYmmRegOp<ymm9,N9>
+    public readonly struct zmm9 : IZmmRegOp<zmm9,N9>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm9(Fixed256 value)
+        public zmm9(Fixed512 value)
         {
             Value = value;
         }
@@ -143,12 +143,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM9;
     }
 
-    public readonly struct ymm10 : IYmmRegOp<ymm10,N10>
+    public readonly struct zmm10 : IZmmRegOp<zmm10,N10>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm10(Fixed256 value)
+        public zmm10(Fixed512 value)
         {
             Value = value;
         }
@@ -156,12 +156,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM10;
     }
 
-    public readonly struct ymm11 : IYmmRegOp<ymm11,N11>
+    public readonly struct zmm11 : IZmmRegOp<zmm11,N11>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm11(Fixed256 value)
+        public zmm11(Fixed512 value)
         {
             Value = value;
         }
@@ -169,12 +169,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM11;
     }
 
-    public readonly struct ymm12 : IYmmRegOp<ymm12,N12>
+    public readonly struct zmm12 : IZmmRegOp<zmm12,N12>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm12(Fixed256 value)
+        public zmm12(Fixed512 value)
         {
             Value = value;
         }
@@ -182,12 +182,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM12;
     }
 
-    public readonly struct ymm13 : IYmmRegOp<ymm13,N13>
+    public readonly struct zmm13 : IZmmRegOp<zmm13,N13>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm13(Fixed256 value)
+        public zmm13(Fixed512 value)
         {
             Value = value;
         }
@@ -195,12 +195,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM13;
     }
 
-    public readonly struct ymm14 : IYmmRegOp<ymm14,N14>
+    public readonly struct zmm14 : IZmmRegOp<zmm14,N14>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
         
         [MethodImpl(Inline)]
-        public ymm14(Fixed256 value)
+        public zmm14(Fixed512 value)
         {
             Value = value;
         }
@@ -208,24 +208,24 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM14;
     }
 
-    public readonly struct ymm15 : IYmmRegOp<ymm15,N15>
+    public readonly struct zmm15 : IZmmRegOp<zmm15,N15>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm15(Fixed256 value)
+        public zmm15(Fixed512 value)
         {
             Value = value;
         }
         public K Kind => K.XMM15;
     }
 
-    public readonly struct ymm16 : IYmmRegOp<ymm16,N16>
+    public readonly struct zmm16 : IZmmRegOp<zmm16,N16>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm16(Fixed256 value)
+        public zmm16(Fixed512 value)
         {
             Value = value;
         }
@@ -234,12 +234,12 @@ namespace Z0.Asm.Dsl
 
     }
 
-    public readonly struct ymm17 : IYmmRegOp<ymm17,N17>
+    public readonly struct zmm17 : IZmmRegOp<zmm17,N17>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm17(Fixed256 value)
+        public zmm17(Fixed512 value)
         {
             Value = value;
         }
@@ -247,12 +247,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM17;
     }
 
-    public readonly struct ymm18 : IYmmRegOp<ymm18,N18>
+    public readonly struct zmm18 : IZmmRegOp<zmm18,N18>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm18(Fixed256 value)
+        public zmm18(Fixed512 value)
         {
             Value = value;
         }
@@ -260,12 +260,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM18;
     }
 
-    public readonly struct ymm19 : IYmmRegOp<ymm19,N19>
+    public readonly struct zmm19 : IZmmRegOp<zmm19,N19>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm19(Fixed256 value)
+        public zmm19(Fixed512 value)
         {
             Value = value;
         }
@@ -273,12 +273,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM19;
     }
 
-    public readonly struct ymm20 : IYmmRegOp<ymm20,N20>
+    public readonly struct zmm20 : IZmmRegOp<zmm20,N20>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm20(Fixed256 value)
+        public zmm20(Fixed512 value)
         {
             Value = value;
         }
@@ -286,12 +286,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM20;
     }
 
-    public readonly struct ymm21 : IYmmRegOp<ymm21,N21>
+    public readonly struct zmm21 : IZmmRegOp<zmm21,N21>
     {               
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm21(Fixed256 value)
+        public zmm21(Fixed512 value)
         {
             Value = value;
         }
@@ -299,12 +299,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM21;
     }
 
-    public readonly struct ymm22 : IYmmRegOp<ymm22,N22>
+    public readonly struct zmm22 : IZmmRegOp<zmm22,N22>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm22(Fixed256 value)
+        public zmm22(Fixed512 value)
         {
             Value = value;
         }
@@ -312,12 +312,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM22;
     }
 
-    public readonly struct ymm23 : IYmmRegOp<ymm23,N23>
+    public readonly struct zmm23 : IZmmRegOp<zmm23,N23>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm23(Fixed256 value)
+        public zmm23(Fixed512 value)
         {
             Value = value;
         }
@@ -325,13 +325,13 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM23;
     }
 
-    public readonly struct ymm24 : IYmmRegOp<ymm24,N24>
+    public readonly struct zmm24 : IZmmRegOp<zmm24,N24>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
 
         [MethodImpl(Inline)]
-        public ymm24(Fixed256 value)
+        public zmm24(Fixed512 value)
         {
             Value = value;
         }
@@ -339,12 +339,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM24;
     }
 
-    public readonly struct ymm25 : IYmmRegOp<ymm25,N25>
+    public readonly struct zmm25 : IZmmRegOp<zmm25,N25>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm25(Fixed256 value)
+        public zmm25(Fixed512 value)
         {
             Value = value;
         }
@@ -352,12 +352,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM25;
     }
 
-    public readonly struct ymm26 : IYmmRegOp<ymm26,N26>
+    public readonly struct zmm26 : IZmmRegOp<zmm26,N26>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm26(Fixed256 value)
+        public zmm26(Fixed512 value)
         {
             Value = value;
         }
@@ -365,12 +365,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM26;
     }
 
-    public readonly struct ymm27 : IYmmRegOp<ymm27,N27>
+    public readonly struct zmm27 : IZmmRegOp<zmm27,N27>
     {            
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm27(Fixed256 value)
+        public zmm27(Fixed512 value)
         {
             Value = value;
         }
@@ -378,12 +378,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM27;
     }
 
-    public readonly struct ymm28 : IYmmRegOp<ymm28,N28>
+    public readonly struct zmm28 : IZmmRegOp<zmm28,N28>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm28(Fixed256 value)
+        public zmm28(Fixed512 value)
         {
             Value = value;
         }
@@ -391,12 +391,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM28;
     }
 
-    public readonly struct ymm29 : IYmmRegOp<ymm29,N29>
+    public readonly struct zmm29 : IZmmRegOp<zmm29,N29>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm29(Fixed256 value)
+        public zmm29(Fixed512 value)
         {
             Value = value;
         }
@@ -404,12 +404,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM29;
     }
 
-    public readonly struct ymm30 : IYmmRegOp<ymm30,N30>
+    public readonly struct zmm30 : IZmmRegOp<zmm30,N30>
     {
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm30(Fixed256 value)
+        public zmm30(Fixed512 value)
         {
             Value = value;
         }
@@ -417,12 +417,12 @@ namespace Z0.Asm.Dsl
         public K Kind => K.XMM30;
     }
 
-    public readonly struct ymm31 : IYmmRegOp<ymm31,N31>
+    public readonly struct zmm31 : IZmmRegOp<zmm31,N31>
     {       
-        public Fixed256 Value {get;}
+        public Fixed512 Value {get;}
 
         [MethodImpl(Inline)]
-        public ymm31(Fixed256 value)
+        public zmm31(Fixed512 value)
         {
             Value = value;
         }

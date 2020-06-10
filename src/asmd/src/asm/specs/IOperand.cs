@@ -6,8 +6,6 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-
-    using Z0.Asm.Data;
     
     using static Konst;
     using static Memories;

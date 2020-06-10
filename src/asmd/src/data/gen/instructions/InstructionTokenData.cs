@@ -5,10 +5,12 @@
 namespace Z0.Asm.Data
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public partial class OpCodeTokenData
+    using static Seed;
+
+    public partial class InstructionTokenData
     {
-
-
+        public const int TokenCount = (int)InstructionToken.TokenCount;
     }
 }
