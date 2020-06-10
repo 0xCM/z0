@@ -40,32 +40,21 @@ namespace Z0.Asm
             dst.WriteLine(formatted);            
         }
 
-        static ReadOnlySpan<MethodInfo> ByteSpanResourceCases
-            => typeof(Z0.Data).DeclaredStaticProperties()
-                                         .Where(p => p.PropertyType == typeof(ReadOnlySpan<byte>))
-                                         .Select(p => p.GetGetMethod())
-                                         .Where(m => m != null)
-                                         .ToArray();
-
-
-
-
-        ReadOnlySpan<MethodInfo> ResourceAccessors()
+        Option<AsmFunctionCode> FunctionCode(CapturedCode capture)
         {
-            var assemblies = Api.Resolved.Select(x => x.Owner);
-            var types = assemblies.SelectMany(a => a.GetTypes());
-            var props = types.SelectMany(t => t.DeclaredStaticProperties()).Where(p => p.PropertyType == typeof(ReadOnlySpan<byte>));
-            var methods = props.Select(p => p.GetGetMethod()).Where(m  => m != null);
-            return methods.ToArray();
-        }                             
-        
+            var decoded = Context.Decoder.Decode(capture);
+            if(decoded)
+                return new AsmFunctionCode(decoded.Value, capture);
+            else
+                return Option.none<AsmFunctionCode>();
+        }
+
         public void resource_method_capture()
         {
 
             var restype = typeof(ReadOnlySpan<byte>);
-            //var methods = ResourceAccessors();
             var methods = AppResources.Service.ByteSpanAccessors(Api.Resolved.Select(x => x.Owner)).ToReadOnlySpan();
-            
+            var functions = new List<AsmFunctionCode>();
             using var writer = CaseWriter(FileExtensions.Asm);
             using var capture = QuickCapture.Alloc(Context);
             var dst = Spans.alloc<CapturedCode>(methods.Length);
@@ -79,9 +68,23 @@ namespace Z0.Asm
                 {
                     ref readonly var code = ref skip(dst,i);
                     WriteAsm(code, writer);
+
+                    var f = FunctionCode(code);
+                    if(f)
+                        functions.Add(f.Value);
                 }
             }
 
+            Span<AsmInstructionList> lists = new AsmInstructionList[functions.Count];
+            for(var i = 0; i<functions.Count; i++)
+                seek(lists,i) = functions[i].Function.Inxs;
+            
+            var results = AsmAnalyzer.Analyze(lists);
+            for(var i = 0; i<results.Length; i++)
+            {
+                var result = results[i];
+                Trace(result);
+            }
         }
 
     }

@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
 
     using static Seed;
 
-    partial class ImmOps
+    public partial class ImmOps
     {
         public readonly struct imm64 : IImmOp64<imm64>
         {
@@ -25,7 +25,15 @@ namespace Z0.Asm.Data
                 Value = value;
             }
             
-            public DataWidth Width => DataWidth.W64;
+            public DataWidth Width 
+                => DataWidth.W64;
+
+            public string Format()
+                => Value.FormatHex();
+
+            public override string ToString()
+                => Format();
         }
+
     }
 }

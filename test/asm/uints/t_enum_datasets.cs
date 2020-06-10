@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -15,26 +15,15 @@ namespace Z0
 
     using F = EnumDatasetEntryField;
     
-    public enum EnumDatasetEntryField : uint
-    {
-        Token = 0 | 16u << 16,
-
-        Index = 1 | 16u << 16,
-
-        Identifier = 2 | 24u << 16,
-
-        NumericValue = 3 | 10 << 16
-    }
-
-    public class t_enum_datasets : t_asmd<t_enum_datasets>
-    {
-        
+    public class t_enum_datasets : t_asm<t_enum_datasets>
+    {        
         public t_enum_datasets()
         {
             UnitRoot.Clear();   
 
         }
-        static string header<F>(char delimiter = Chars.Pipe)
+        
+        public string header<F>(char delimiter = Chars.Pipe)
             where F : unmanaged, Enum
         {
             var dst = text.build();
@@ -44,20 +33,20 @@ namespace Z0
             return dst.ToString();
         }
 
-        static string format<E,T>(in EnumDatasetEntry<E,T> src, char delimiter = Chars.Pipe)
+        public string format<E,T>(in @enum<E,T> src, char delimiter = Chars.Pipe)
             where E : unmanaged, Enum
             where T : unmanaged
         {
             var dst = text.build();
             dst.Delimit(F.Token, src.Token);
             dst.Delimit(F.Index, src.Index);
-            dst.Delimit(F.Identifier, src.Name);
-            dst.Delimit(F.NumericValue, src.Scalar);
+            dst.Delimit(F.Name, src.Name);
+            dst.Delimit(F.Scalar, src.Scalar);
 
             return dst.ToString();
         }
         
-        static void emit<E,T>(FilePath dst)
+        public void emit<E,T>(ReadOnlySpan<@enum<E,T>> src, FilePath dst)
             where E : unmanaged, Enum
             where T : unmanaged
         {
@@ -65,8 +54,10 @@ namespace Z0
             writer.WriteLine(header<F>());
             
             var dataset = Enums.dataset<E,T>();
-            for(var i=0; i<dataset.EntryCount; i++)
-                writer.WriteLine(format(dataset[i]));
+            for(var i=0; i<src.Length; i++)
+            {
+                writer.WriteLine(format(src[i]));
+            }
         }
         
         FilePath EnumDatasetPath<E>() 
@@ -82,12 +73,11 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            emit<E,T>(EnumDatasetPath<E>());
+            EnumDatasets.Service.emit<E,T>(EnumDatasetPath<E>());
         }
         
         public void ds_1()
-        {
-            
+        {            
             emit<AsciCharCode,byte>();
             emit<Octet,byte>();
             emit<HexKind,byte>();
@@ -100,31 +90,14 @@ namespace Z0
             emit<OpCodeToken,byte>();
         }
 
-        public void ds_2()
+        
+        public void enum_dataset_convert()
         {
-            var path = EnumIdentifiers<InstructionToken>();
-            using var dst = path.Writer();
-
+            var path = CasePath(FileExtensions.Csv);
             var dataset = Enums.dataset<InstructionToken,byte>();
-            var count = dataset.EntryCount;
-            for(var i=0; i<count; i++)
-            {
-                var entry = dataset[i];
-                var index = entry.Index;
-                var identifier = entry.Name;
-                var value = entry.Scalar;
-
-                
-                var e = Symbolic.@enum(entry.Index,entry.Name, entry.Literal, entry.Scalar);
-
-                
-            }
-
-
-
-                        
+            var enums = Symbolic.enums(dataset).ToReadOnlySpan();
+            emit(enums,path);
 
         }
-
     }
 }

@@ -208,7 +208,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         protected FilePath CasePath(FileExtension ext, [CallerMemberName] string caller = null)    
-            => UnitPath(FileName.Define(caller,FileExtensions.Txt));
+            => UnitPath(FileName.Define(caller,  ext));
 
         [MethodImpl(Inline)]
         protected FilePath CasePath(string CaseName, FileExtension ext = null)    

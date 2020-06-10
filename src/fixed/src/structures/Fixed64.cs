@@ -120,6 +120,9 @@ namespace Z0
         public string Format()
             => Data.ToString();
 
+        public string FormatHex(bool zpad = false, bool specifier = false)
+            => Data.FormatHex(zpad, specifier:false);
+
         public override string ToString() 
             => Format();
  

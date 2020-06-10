@@ -14,6 +14,8 @@ namespace Z0
         where E : unmanaged, Enum
         where T : unmanaged
     {
+        public MetadataToken Token {get;}
+        
         public int Index {get;}
         
         public string Name {get;}
@@ -23,8 +25,9 @@ namespace Z0
         public T Scalar {get;}
 
         [MethodImpl(Inline)]
-        public @enum(int index, string name, E literal, T scalar)
+        public @enum(MetadataToken token, int index, string name, E literal, T scalar)
         {
+            Token = token;
             Index = index;
             Name = name;
             Literal = literal;

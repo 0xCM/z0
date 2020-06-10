@@ -14,18 +14,6 @@ namespace Z0
     partial class Symbolic     
     {
         /// <summary>
-        /// Defines a useful representation of an enumeration literal
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type refined by the enum</typeparam>
-        /// <typeparam name="A">The asci identifier type</typeparam>
-        [MethodImpl(Inline)]
-        public static @enum<E,T> @enum<E,T>(int index, string identifier, E literal, T scalar)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => new @enum<E,T>(index, identifier, literal, scalar);
-
-        /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
         /// </summary>
         /// <typeparam name="E"></typeparam>

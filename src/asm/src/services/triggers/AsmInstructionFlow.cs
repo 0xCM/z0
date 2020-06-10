@@ -18,15 +18,18 @@ namespace Z0.Asm
 
         readonly AsmTriggerSet Triggers;
 
-        [MethodImpl(Inline)]
-        public static IAsmInstructionFlow Create(AsmInstructionList[] inxs, in AsmTriggerSet triggers)
-            => new AsmInstructionFlow(inxs, triggers);
+        readonly InstructionHandler[] Handlers;                
 
         [MethodImpl(Inline)]
-        AsmInstructionFlow(AsmInstructionList[] inxs, in AsmTriggerSet triggers)
+        public static IAsmInstructionFlow Create(AsmInstructionList[] inxs, in AsmTriggerSet triggers, params InstructionHandler[] handlers)
+            => new AsmInstructionFlow(inxs, triggers, handlers);
+
+        [MethodImpl(Inline)]
+        AsmInstructionFlow(AsmInstructionList[] inxs, in AsmTriggerSet triggers, params InstructionHandler[] handlers)
         {
             DataSource  = inxs;
             Triggers = triggers;
+            Handlers = handlers;
         }
 
         int SourceCount
@@ -56,6 +59,10 @@ namespace Z0.Asm
                 
                 Triggers.FireOnMatch(item);
                 seek(dst,i) = pipe.Flow(item);
+
+                for(var j = 0; j<item.Length; j++)
+                for(var h = 0; h<Handlers.Length; h++)
+                    Handlers[h](item[j]);
             }
             return buffer;
         }

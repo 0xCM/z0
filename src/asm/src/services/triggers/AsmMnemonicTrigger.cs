@@ -10,8 +10,6 @@ namespace Z0.Asm
 
     using static Konst;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate void InstructionHandler(in Instruction src);
 
     /// <summary>
     /// Fires when an instruction mnemonic matches a specified mnemonic
