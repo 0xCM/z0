@@ -9,20 +9,72 @@ namespace Z0
 
     using static Seed;
 
-    public interface IServiceFactory
-    {
-        
-    }
-
-    public interface IServiceFactory<C> : IServiceFactory   
+    public interface IContextReceiver<C>
         where C : IContext
     {
-        C Context {get;}
-        
+
+        void AcceptContext(C context);
+    }
+    
+    public interface IServiceFactory<C>
+        where C : IContext
+    {
+        C Context {get;}        
     }
 
-    readonly struct DefaultServiceFactory : IServiceFactory
+    public interface IServiceFactory<C,I> : IServiceFactory<C>
+        where C : IContext
+    {        
+    
+    }
+
+    public readonly struct ServiceFactory<I> 
     {
-        public static IServiceFactory Default => default(DefaultServiceFactory);
+        [MethodImpl(Inline)]
+        public I CreateService<H>(H host = default)
+            where H : I, new()
+                => host ?? new H();
+    }
+    
+    public readonly struct ServiceFactory<C,I> : IServiceFactory<C,I>
+        where C : IContext
+    {
+        public C Context {get;}
+
+        [MethodImpl(Inline)]
+        ServiceFactory(C context)
+        {
+            Context = context;
+        }
+
+        [MethodImpl(Inline)]
+        public I CreateService<H>(C context)
+            where H : I, IContextReceiver<C>,  new()
+        {
+            var host = new H();
+            host.AcceptContext(Context);
+            return host;
+        }
+    }
+
+    public readonly struct ServiceFactory<C,H,I> : IServiceFactory<C,I>
+        where C : IContext
+        where H : I, IContextReceiver<C>,  new()
+    {
+        public C Context {get;}
+        
+        [MethodImpl(Inline)]
+        ServiceFactory(C context)
+        {
+            Context = context;
+        }
+        
+        [MethodImpl(Inline)]
+        public I CreateService()
+        {
+            var host = new H();
+            host.AcceptContext(Context);
+            return host;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         public static IArchiveOps Service => default(ArchiveOps);
     }
 
-    public interface IArchives : IStatelessFactory<Archives>
+    public interface IArchives : IStateless<Archives>
     {        
         ISemanticArchive Semantic => SemanticArchive.Service;
 
@@ -27,6 +27,10 @@ namespace Z0
 
         IUriHexReader UriHexReader => new UriHexReader();
 
+        [MethodImpl(Inline)]
+        IUriHexArchive UriBitsArchive(FolderPath root = null)
+            => new UriHexArchive(root ?? DefaultRootDir);
+        
         [MethodImpl(Inline)]
         IUriHexWriter UriHexWriter(FilePath dst)
             => new UriHexWriter(dst);
@@ -50,8 +54,6 @@ namespace Z0
         IHostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
             => new HostCaptureArchive(root ?? DefaultRootDir, host);
         
-        [MethodImpl(Inline)]
-        IUriHexArchive UriBitsArchive(FolderPath root = null)
-            => new UriHexArchive(root ?? DefaultRootDir);
+
     }
 }

@@ -8,35 +8,46 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-
-    /// <summary>
-    /// Identifies a service that carries no state
-    /// </summary>
-    public interface IStateless : IService
-    {
-
-    }
     
-    public interface IStateless<F> : IStateless
-        where F : IStateless<F>
+    public interface IStateless<F>
     {
         [MethodImpl(Inline)]
         F Create<S>()                
-            where S : unmanaged, F
-                => default(S);
+            where S : F, new()
+                => new S();
     }
 
-    public interface IStatelessFactory<F> : IServiceFactory
-        where F : unmanaged, IStatelessFactory<F>
+    public readonly struct Stateless
     {
-        
+        [MethodImpl(Inline)]
+        public static Stateless<F> Create<F>()
+            => new Stateless<F>();
+            
+        [MethodImpl(Inline)]
+        public static Stateless<F,I> Create<F,I>()
+            where F : I, new()
+                => new Stateless<F,I>();
+
+        [MethodImpl(Inline)]
+        public static I Service<F,I>()
+            where F : I, new()
+                => Create<F,I>().Service();
     }
 
-    public interface IStatelessFactory<F,I> : IStateless<F,I>, IServiceFactory
-        where F : unmanaged, I
-        where I : IStateless<F,I>
+    public readonly struct Stateless<F> : IStateless<F>
     {
-        
+        [MethodImpl(Inline)]
+        public F Create<S>()
+            where S : F, new()
+                => new S();
+    }
+
+    public readonly struct Stateless<F,I> : IStateless<F,I>
+        where F : I, new()
+    {
+        [MethodImpl(Inline)]
+        public I Service()
+            => new F();        
     }
 
     /// <summary>
@@ -45,20 +56,13 @@ namespace Z0
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="I">The service contract</typeparam>
     public interface IStateless<F,I> : IStateless<I>
-        where F : unmanaged, I
-        where I : IStateless<F,I>
+        where F : I, new()
     {
         I Create()
-            => Stateless<I>.Empty.Create<F>();
+            => new F();
         
         [MethodImpl(Inline)]
         static I Service()
-            => Stateless<I>.Empty.Create<F>();
-    }
-
-    readonly struct Stateless<I> : IStateless<I>
-        where I : IStateless<I>
-    {
-        public static IStateless<I> Empty => default(Stateless<I>);
+            => new F();
     }
 }

@@ -56,7 +56,7 @@ namespace Z0.Asm
             Random = Polyrand.Pcg64(PolySeed64.Seed05);
             Dynamic = Capture.Services.Dynexus;            
             Decoder = Capture.Services.AsmDecoder(AsmFormat);
-            Formatter  = Capture.Services.AsmFormatter(AsmFormat);
+            Formatter  = Capture.Services.Formatter(AsmFormat);
             WriterFactory = Capture.Services.AsmWriterFactory;
             CaptureCore =  Capture.Core;
             ImmServices = Capture.Services.ImmSpecializer(Decoder);

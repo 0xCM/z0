@@ -51,7 +51,7 @@ namespace Z0.Asm
         /// <param name="archive">The archive to target</param>
         [MethodImpl(Inline)]
         ICaptureWorkflow CaptureWorkflow(ICaptureArchive archive)
-            => new CaptureWorkflow(Context, AsmDecoder(), AsmFormatter(), Capture.Services.AsmWriterFactory, archive);
+            => new CaptureWorkflow(Context, AsmDecoder(), Formatter(), Capture.Services.AsmWriterFactory, archive);
 
         /// <summary>
         /// Creates a capture workflow predicated on caller-supplied services
@@ -71,7 +71,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
         IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, FolderPath dst)        
-            => new ImmEmissionWorkflow(Context, sink, AsmFormatter(), AsmDecoder(), api, dst);
+            => new ImmEmissionWorkflow(Context, sink, Formatter(), AsmDecoder(), api, dst);
 
         [MethodImpl(Inline)]
         IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        

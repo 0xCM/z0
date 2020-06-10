@@ -16,10 +16,36 @@ namespace Z0
         /// </summary>
         public string IdentityText {get;}
 
+       /// <summary>
+        /// The unqualified operation name
+        /// </summary>
+        public string Name {get;}
+
+        /// <summary>
+        /// The identifier suffix, if any
+        /// </summary>
+        public string Suffix {get;}
+        
+        /// <summary>
+        /// Specifies whether the operation was reified from a generic definition 
+        /// </summary>
+        public bool IsGeneric {get;}
+        
+        /// <summary>
+        /// Specifies whether the operation is specialized for an immediate value
+        /// </summary>
+        public bool HasImm {get;}
+
+        /// <summary>
+        /// The moniker parts, as determined by part delimiters
+        /// </summary>
+        public string[] TextComponents {get;}                        
+ 
         /// <summary>
         /// The empty identifier
         /// </summary>
-        public static OpIdentity Empty => Set(string.Empty);
+        public static OpIdentity Empty 
+            => Set(string.Empty);
 
         /// <summary>
         /// Creates a moniker directly from source text
@@ -29,6 +55,7 @@ namespace Z0
         internal static OpIdentity Set(string src)
             => new OpIdentity(src);
 
+        [MethodImpl(Inline)]
         public static OpIdentity Define(string text, string name, string suffix, bool generic, bool imm, string[] components)
             => new OpIdentity(text, name, suffix, generic, imm, components);
 
@@ -43,7 +70,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(OpIdentity a, OpIdentity b)
             => !a.Equals(b);
-
 
         static string Safe(string src)
             => src.Replace(Chars.Lt, IDI.TypeArgsOpen).Replace(Chars.Gt, IDI.TypeArgsClose);
@@ -69,32 +95,8 @@ namespace Z0
             this.TextComponents = new string[]{};
         }
 
-        /// <summary>
-        /// The unqualified operation name
-        /// </summary>
-        public string Name {get;}
-
-        /// <summary>
-        /// The identifier suffix, if any
-        /// </summary>
-        public string Suffix {get;}
-        
-        /// <summary>
-        /// Specifies whether the operation was reified from a generic definition 
-        /// </summary>
-        public bool IsGeneric {get;}
-        
-        /// <summary>
-        /// Specifies whether the operation is specialized for an immediate value
-        /// </summary>
-        public bool HasImm {get;}
-
-        /// <summary>
-        /// The moniker parts, as determined by part delimiters
-        /// </summary>
-        public string[] TextComponents {get;}                        
- 
-        IIdentifedOp<OpIdentity> Identified => this;
+        IIdentifedOp<OpIdentity> Identified 
+            => this;
          
         public bool IsEmpty
         {

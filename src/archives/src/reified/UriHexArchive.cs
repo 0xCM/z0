@@ -21,9 +21,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         internal UriHexArchive(FolderPath root)
-        {
-            ArchiveRoot = root;
-        }
+            => ArchiveRoot = root;
 
         public IEnumerable<UriHex> Read(ApiHostUri host)
         {

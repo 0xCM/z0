@@ -16,7 +16,7 @@ namespace Z0
         public static IIdentities Services => default(Identities);
     }
 
-    public interface IIdentities : IStatelessFactory<Identities>
+    public interface IIdentities : IStateless<Identities>
     {
         IMultiDiviner Diviner => MultiDiviner.Service;
 

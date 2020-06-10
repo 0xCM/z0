@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Describes an embedded data resource

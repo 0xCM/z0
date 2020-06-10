@@ -17,6 +17,11 @@ namespace Z0
     public readonly struct BinaryCode : IEncoded<BinaryCode,byte[]>
     {
         /// <summary>
+        /// The encoded bytes
+        /// </summary>
+        public byte[] Encoded {get;}
+
+        /// <summary>
         /// Defines a block of encoded data based at a specifed address
         /// </summary>
         /// <param name="data">The source data</param>
@@ -24,39 +29,70 @@ namespace Z0
         public static BinaryCode Define(byte[] data)
             => new BinaryCode(data);        
 
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(Span<byte> src)
-            => Define(src.ToArray());
-
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static BinaryCode Empty => new BinaryCode(Control.array<byte>());
-         
-        /// <summary>
-        /// The encoded bytes
-        /// </summary>
-        public byte[] Encoded {get;}
+        public static BinaryCode Empty 
+            => new BinaryCode(Control.array<byte>());
+
+        [MethodImpl(Inline)]
+        public BinaryCode(byte[] bytes)
+        {
+            Encoded = insist(bytes);
+        }
 
         /// <summary>
         /// The encoded content as byte array
         /// </summary>
-        public byte[] Data { [MethodImpl(Inline)] get => Encoded;}
+        public byte[] Data 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded;
+        }
 
-        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded; }
+        public ReadOnlySpan<byte> Bytes 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded; 
+        }
         
-        public int ByteCount => Encoded.Length;        
+        public int ByteCount 
+            => Encoded.Length;        
         
-        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
+        public int Length 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.Length; 
+        }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0); }
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0); 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => !IsEmpty; }
+        public bool IsNonEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => !IsEmpty; 
+        }
 
-        public ref readonly byte Head { [MethodImpl(Inline)] get => ref refs.head(Bytes);}
+        public ref readonly byte Head 
+        {
+             [MethodImpl(Inline)] 
+             get => ref Encoded[0];
+        }
         
-        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref refs.skip(Head, index); }
-                
+        public ref readonly byte this[int index] 
+        { 
+            [MethodImpl(Inline)] 
+            get => ref Control.skip(Head, index); 
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(Span<byte> src)
+            => Define(src.ToArray());
+
         [MethodImpl(Inline)]
         public static implicit operator byte[](BinaryCode src)
             => src.Encoded;
@@ -77,11 +113,6 @@ namespace Z0
         public static bool operator!=(BinaryCode a, BinaryCode b)
             => !a.Equals(b);
 
-        [MethodImpl(Inline)]
-        BinaryCode(byte[] bytes)
-        {
-            Encoded = insist(bytes);
-        }
         
         public bool Equals(BinaryCode src)
         {

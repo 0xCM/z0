@@ -26,8 +26,6 @@ namespace Z0
         
         static Lazy<IApiComposition> _Api {get;}
             = Control.defer(ComposeApi);
-
-
     }
     
     public abstract class TestContext<U> : TestContext, ITestContext<U>
@@ -52,10 +50,10 @@ namespace Z0
         {
             void Relay(IAppMsg msg) => Next(msg);
 
-            this.Context = this;            
-            this.Next += x => {};
-            this.Queue = AppMsgExchange.Create();
-            this.Queue.Next += Relay;
+            Context = this;            
+            Next += x => {};
+            Queue = AppMsgExchange.Create();
+            Queue.Next += Relay;
         }
         
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
@@ -217,7 +215,7 @@ namespace Z0
             => UnitPath(FileName.Define(CaseName, ext ?? FileExtensions.Csv));
 
         protected StreamWriter CaseWriter(FileExtension ext, [Caller] string caller = null)
-            => CasePath(ext, caller).Writer();
+            => CasePath(caller, ext).Writer();
 
         protected StreamWriter CaseWriter(string CaseName, FileExtension ext = null)
             => CasePath(CaseName, ext).Writer();

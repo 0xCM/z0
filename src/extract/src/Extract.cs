@@ -17,7 +17,7 @@ namespace Z0
         internal const int DefaultBufferLength = Pow2.T14;
     }
 
-    public interface IExtract : IStatelessFactory<Extract>
+    public interface IExtract : IStateless<Extract>
     {
         IMemberExtractor MemberExtractor
             => new MemberExtractor(DefaultBufferLength);

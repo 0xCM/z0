@@ -17,7 +17,6 @@ namespace Z0.Asm
     public abstract class t_asm<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_asm<U>
     {     
-
         protected ICaptureArchive CodeArchive 
             => Archives.Services.CaptureArchive(UnitRoot);
         
@@ -30,6 +29,7 @@ namespace Z0.Asm
         {
             Context = AsmContext.Create(AppSettings.Empty, Queue, Api);
             AsmCheck = AsmTester.Create(Context);
+            UnitRoot.Clear();
         }
 
         protected readonly IAsmTester AsmCheck;
@@ -37,11 +37,14 @@ namespace Z0.Asm
         protected StreamWriter AsmCaseWriter([Caller] string caller = null)
             => CaseWriter(FileExtensions.Asm,caller);
 
-        protected BufferSeqId Main => BufferSeqId.Main;
+        protected BufferSeqId Main 
+            => BufferSeqId.Main;
 
-        protected BufferSeqId Left => BufferSeqId.Left;
+        protected BufferSeqId Left 
+            => BufferSeqId.Left;
 
-        protected BufferSeqId Right => BufferSeqId.Right;
+        protected BufferSeqId Right 
+            => BufferSeqId.Right;
 
         protected IUriCodeWriter HexWriter([Caller] string caller = null)
         {            

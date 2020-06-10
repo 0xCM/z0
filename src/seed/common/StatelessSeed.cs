@@ -11,15 +11,17 @@ namespace Z0
 
     using Svc = Z0;
 
-    public interface IStatelessSeed : IStatelessFactory<StatelessSeed>
-    {
-        IPartParser PartParser => Svc.PartParser.Service;   
-
-        IPartIndexBuilder PartIndexBuilder => Svc.PartIndexBuilder.Service;     
-    }
-
     public readonly struct StatelessSeed : IStatelessSeed
     {
         public static IStatelessSeed Fatory => default(StatelessSeed);
+    }
+
+    public interface IStatelessSeed : IStateless<StatelessSeed>
+    {
+        IPartParser PartParser 
+            => Svc.PartParser.Service;   
+
+        IPartIndexBuilder PartIndexBuilder 
+            => Svc.PartIndexBuilder.Service;     
     }
 }

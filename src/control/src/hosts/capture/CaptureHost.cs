@@ -48,7 +48,7 @@ namespace Z0
             WorkflowConfig = new AsmArchiveConfig(root);
             Settings = CaptureConfig.From(context.Settings);            
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
-            Formatter = context.Contextual.AsmFormatter(FormatConfig);            
+            Formatter = context.Contextual.Formatter(FormatConfig);            
 
             var wfc = AsmWorkflows.Create(context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);

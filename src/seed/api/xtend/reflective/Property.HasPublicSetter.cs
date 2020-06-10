@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Linq;
+    using System.Collections.Generic;
     
     partial class XTend
     {
@@ -15,5 +17,6 @@ namespace Z0
         /// <param name="p">The property to examine</param>
         public static bool HasPublicSetter(this PropertyInfo p)
             => p.GetSetMethod() != null;
+            
     }
 }

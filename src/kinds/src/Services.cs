@@ -7,27 +7,37 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct KindsApi : IKindOps, IKindServices
     {
-        public static IKindOps Ops => IKindOps.Service();
+        public static IKindOps Ops 
+        {
+            [MethodImpl(Inline)]
+            get => IKindOps.Service();
+        }
 
-        public static IKindServices Services => IKindServices.Service();
+        public static IKindServices Services 
+        {
+            [MethodImpl(Inline)]
+            get => IKindServices.Service();
+        }
     }
 
     public interface IKindOps : IStateless<KindsApi,IKindOps>
     {
 
     }
-    public interface IKindServices : IStatelessFactory<KindsApi,IKindServices>
+
+    public interface IKindServices : IStateless<KindsApi,IKindServices>
     {
-        IIdentityProducer IdentityProducer => IIdentityProducer.Service();
+        IIdentityProducer IdentityProducer 
+            => IIdentityProducer.Service();
         
-        IIdentityReflector IdentityReflector => IIdentityReflector.Service();
+        IIdentityReflector IdentityReflector 
+            => IIdentityReflector.Service();
 
-        IIdentityParser IdentityParser => IIdentityParser.Service();
-    }
-
-    
+        IIdentityParser IdentityParser 
+            => IIdentityParser.Service();
+    }   
 }

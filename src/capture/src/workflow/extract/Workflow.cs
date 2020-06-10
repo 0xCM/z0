@@ -29,7 +29,7 @@ namespace Z0.Asm
             MemberLocator = Identities.Services.ApiLocator;
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Decoder =   Capture.Services.AsmDecoder(FormatConfig);
-            Formatter = Capture.Services.AsmFormatter(FormatConfig);
+            Formatter = Capture.Services.Formatter(FormatConfig);
             CodeArchive = Archives.Services.CaptureArchive(ArchiveRoot);
             Broker = ConnectBroker(this);          
         }

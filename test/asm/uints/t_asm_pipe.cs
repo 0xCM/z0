@@ -20,26 +20,17 @@ namespace Z0.Asm
             FakeBase = 1;
         }
         
-        int listcount = 0;
-        
-        AsmInstructionList Pipe(AsmInstructionList src)
-        {        
-            listcount++;
-            return src;
-        }
 
         public void RunPipe()
         {            
-            Trace("Running pipe");
+            var parts = Control.array(PartId.DVec, PartId.GVec);
+            Trace($"Running pipe for parts {parts.Format()}");
             var runner = AsmPipeRunner.Create(AppPaths, AsmCheck.Archives, CasePath("AsmPipeLog"));
-            var handled = runner.RunPipe();
-
-            Trace($"Collected data for {handled.Count} instruction classes");
-            
+            var handled = runner.RunPipe(parts);
+            Trace($"Collected data for {handled.Count} instruction classes");            
         }
 
         MemoryAddress FakeBase;
-
 
         void check_unary_ops(UriHex[] src)
         {

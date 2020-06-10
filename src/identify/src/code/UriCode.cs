@@ -54,7 +54,7 @@ namespace Z0
         /// <summary>
         /// The encoded byte count
         /// </summary>
-        public int ByteCount { [MethodImpl(Inline)] get => Encoded.ByteCount; }
+        public int ByteCount { [MethodImpl(Inline)] get => Encoded.Length; }
 
         public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Encoded; }
 

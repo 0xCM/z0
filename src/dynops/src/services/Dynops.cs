@@ -14,7 +14,7 @@ namespace Z0
         public static IDynops Services => default(Dynops);
     }   
 
-    public interface IDynops : IStatelessFactory<Dynops>
+    public interface IDynops : IStateless<Dynops>
     {
         IDynexus Dynexus => new Dynexus(Identities.Services.Diviner);
     }

@@ -17,19 +17,6 @@ namespace Z0
     public readonly struct LocatedCode : ILocatedCode<LocatedCode,BinaryCode>
     {
         /// <summary>
-        /// Defines a block of encoded data based at a specifed address
-        /// </summary>
-        /// <param name="data">The source data</param>
-        [MethodImpl(Inline)]
-        public static LocatedCode Define(MemoryAddress src, byte[] data)
-            => new LocatedCode(src, data);        
-        
-        /// <summary>
-        /// The canonical zero
-        /// </summary>
-        public static LocatedCode Empty => new LocatedCode(0);
-
-        /// <summary>
         /// The head of the memory location from which the data originated
         /// </summary>
         public MemoryAddress Address {get;}
@@ -38,31 +25,74 @@ namespace Z0
         /// The encoded content
         /// </summary>
         public BinaryCode Encoded {get;}
+
+        /// <summary>
+        /// Defines a block of encoded data based at a specifed address
+        /// </summary>
+        /// <param name="data">The source data</param>
+        [MethodImpl(Inline)]
+        public static LocatedCode Define(MemoryAddress src, byte[] data)
+            => new LocatedCode(src, data);        
+
+        [MethodImpl(Inline)]
+        public LocatedCode(MemoryAddress src, byte[] data)
+        {
+            Address = insist(src, x => x.IsNonEmpty);
+            Encoded = BinaryCode.Define(insist(data));
+        }
+
+        /// <summary>
+        /// The canonical zero
+        /// </summary>
+        public static LocatedCode Empty => new LocatedCode(0);
         
         /// <summary>
         /// The encoded content as byte array
         /// </summary>
-        public byte[] Data { [MethodImpl(Inline)] get => Encoded.Data;}
+        public byte[] Data 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.Data;
+        }
         
         /// <summary>
-        /// The encoded byte count
+        /// The encoded content presented as a span
         /// </summary>
-        public int ByteCount { [MethodImpl(Inline)] get => Encoded.ByteCount; }
+        public ReadOnlySpan<byte> Bytes 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.Bytes; 
+        }
 
-        /// <summary>
-        /// The encoded content as a span
-        /// </summary>
-        public ReadOnlySpan<byte> Bytes { [MethodImpl(Inline)] get => Encoded.Bytes; }
+        public int Length 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.Length; 
+        }
 
-        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.IsEmpty; 
+        }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => Address.IsEmpty; }
+        public bool IsNonEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.IsNonEmpty; 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Address.IsNonEmpty; }
-
-        public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
+        public ref readonly byte Head 
+        { 
+            [MethodImpl(Inline)]
+            get => ref Encoded.Head;
+        }        
         
-        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
+        public ref readonly byte this[int index] 
+        { 
+            [MethodImpl(Inline)] 
+            get => ref Encoded[index]; 
+        }
 
         public MemoryRange MemorySegment
         {
@@ -93,16 +123,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(LocatedCode src)
             => Encoded.Equals(src.Encoded); 
-
+        
         public string Format()
             => Encoded.Format(); 
 
-        [MethodImpl(Inline)]
-        public LocatedCode(MemoryAddress src, byte[] data)
-        {
-            this.Address = insist(src, x => x.IsNonEmpty);
-            this.Encoded = BinaryCode.Define(insist(data));
-        }
 
         public override int GetHashCode()
             => Encoded.GetHashCode();

@@ -6,11 +6,13 @@ namespace Z0.Asm
 {
     using System;
     using System.Linq;        
+    using System.Reflection;
 
-    public sealed class t_method_catpure : t_asm<t_method_catpure>
+    public sealed class t_method_capture : t_asm<t_method_capture>
     {
-        public override bool Enabled => false;
+        public override bool Enabled => true;
 
+    
         public void parse_address_segment()
         {
             var parser = Parsers.address(true);
@@ -43,8 +45,20 @@ namespace Z0.Asm
             }
         }
 
+        public void capture_quick()
+        {
+            using var dst = CaseWriter(FileExtensions.Asm);
+            using var quick = QuickCapture.Alloc(Context);
+            foreach(var m in typeof(dvec).DeclaredMethods().Public().Static().NonGeneric())
+            {
+                var code = quick.Capture(m);
+                code.OnSome(c => AsmCheck.WriteAsm(c,dst));
+            }            
+        }
+        
         public void capture_direct()
         {
+            
             using var dst = CaseWriter(FileExtensions.Asm);
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
                 AsmCheck.Capture(m.Identify(), m).OnSome(capture => AsmCheck.WriteAsm(capture, dst));                

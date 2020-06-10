@@ -1,0 +1,59 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Linq;        
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static Memories;
+
+    using Z0.Asm;
+
+    public readonly struct QuickCapture : IDisposable
+    {
+        readonly IAsmContext Context;
+        
+        readonly BufferAllocation Buffer;
+
+        readonly BufferTokens Tokens;
+
+        readonly ICaptureServiceProxy Service;
+        
+        public static QuickCapture Alloc(IAsmContext context)
+        {            
+            var tokens = BufferSeq.alloc(context.DefaultBufferLength, 5, out var buffer).Tokenize();
+            var exchange = CaptureExchangeProxy.Create(context.CaptureCore, tokens[BufferSeqId.Aux3], tokens[BufferSeqId.Aux4]);
+            var service = CaptureServiceProxy.Create(context.CaptureCore, exchange);
+            return new QuickCapture(context, buffer, tokens, service);
+        }
+
+        [MethodImpl(Inline)]
+        QuickCapture(IAsmContext context, BufferAllocation buffer, BufferTokens tokens, ICaptureServiceProxy capture)
+        {
+            Context = context;
+            Tokens = tokens;
+            Service = capture;     
+            Buffer =  buffer;
+        }
+
+
+        [MethodImpl(Inline)]
+        public Option<CapturedCode> Capture(MethodInfo src)
+        {
+            var id = insist(src).Identify();
+            return Service.Capture(id,src);
+        }
+
+
+        public void Dispose()
+        {
+            Buffer.Dispose();
+        }
+
+    }
+}

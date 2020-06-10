@@ -44,18 +44,20 @@ namespace Z0.Asm
             ListCount = new int[]{0};
         }
 
-        public Dictionary<Mnemonic,Instruction[]> RunPipe()
+        public Dictionary<Mnemonic,Instruction[]> RunPipe(params PartId[] parts)
         {            
             using var log = LogPath.Writer();
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = CaptureArchive(paths.AppCapturePath);
-            var bits = UriBitsArchive(capture.CodeDir);
-            foreach(var path in bits.Files())
+            var archive = UriBitsArchive(capture.CodeDir);
+
+            for(var i=0; i<parts.Length; i++)
             {
-                var data = bits.Read(path).ToArray();
-                log.WriteLine($"Running {data.Length} instruction lists from {path} through the pipe");
+                var part = parts[i];
+                var data = archive.Read(part).ToArray();
+                log.WriteLine($"Running {part} instruction lists through the pipe");
                 RunPipe(data,log);
-            }     
+            }
 
             return Handlers.Handled;       
         }
@@ -91,7 +93,6 @@ namespace Z0.Asm
                     log.WriteLine($"Logged {count} {(Mnemonic)i} activations");        
             }
         }
-
 
         [MethodImpl(Inline)]
         ICaptureArchive CaptureArchive(PartId part)
