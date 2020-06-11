@@ -28,10 +28,5 @@ namespace Z0.Asm
         /// Classifies an immediate operand
         /// </summary>
         Imm = 0b100,
-
-        /// <summary>
-        /// Classifies an r/m operand
-        /// </summary>
-        RM = R | M,        
     }
 }

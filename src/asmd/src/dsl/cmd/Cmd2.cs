@@ -12,16 +12,16 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines an instruction that accepts two arguments
     /// </summary>
-    public readonly struct Cmd<A,B> : ICmdData<Cmd<A,B>,A,B>
+    public readonly struct cmd<A,B> : ICmd<cmd<A,B>,A,B>
         where A : struct, IOperand
         where B : struct, IOperand
     {
         [MethodImpl(Inline)]
-        public static implicit operator Cmd(Cmd<A,B> src)
+        public static implicit operator cmd(cmd<A,B> src)
             => src.Untyped;
 
         [MethodImpl(Inline)]
-        public Cmd(CmdOpCode code, A arg0, B arg1)
+        public cmd(CmdOpCode code, A arg0, B arg1)
         {
             Code = code;
             Arg0 = arg0;
@@ -34,6 +34,6 @@ namespace Z0.Asm.Dsl
 
         public B Arg1 {get;}
 
-        public Cmd Untyped { [MethodImpl(Inline)] get => new Cmd(Arg0, Arg1);}
+        public cmd Untyped { [MethodImpl(Inline)] get => new cmd(Arg0, Arg1);}
     }
 }

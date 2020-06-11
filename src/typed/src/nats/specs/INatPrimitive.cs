@@ -10,12 +10,12 @@ namespace Z0
     {
 
     }
-
+    
     /// <summary>
     /// Characterizes an atom of the type natural grammar
     /// </summary>
     /// <typeparam name="N">The reifying type</typeparam>
-    public interface INatPrimitive<N> : ITypeNatF<N>
+    public interface INatPrimitive<N> : INatNumber<N>
         where N : unmanaged, INatPrimitive<N>
     {
         

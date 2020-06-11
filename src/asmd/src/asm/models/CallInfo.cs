@@ -6,24 +6,8 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    using static Seed;
-    using static AspectLabels;
-
-    public interface ICallInfo
-    {                
-        MemoryAddress Source {get;}
-
-        MemoryAddress Target {get;}
-
-        byte InstructionSize {get;}
-
-        MemoryAddress TargetOffset {get;}
-
-        BinaryCode Encoded {get;}        
-    }
+    using static Konst;
 
     public readonly struct CallInfo : ICallInfo
     {
@@ -57,17 +41,7 @@ namespace Z0.Asm
             var bytes = src.Encoded.Bytes;            
             var count = (byte)(bytes.Length - 1); //op code takes up one byte
             var offset = ByteReader.Read(bytes.Slice(1));
-            Target = src.NextIp + offset;
-            
-            // var dstlen = math.min(8, length);
-
-            // if(dstlen != 0)
-            // {
-            //     var offset = 0ul;
-            //     for(var i=1; i<dstlen; i++)
-            //         refs.seek8(ref offset, i - 1) = refs.skip(bytes,i);
-            //     Target = src.NextIp + offset;
-            // }            
+            Target = src.NextIp + offset;            
         }        
     }
 }

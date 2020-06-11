@@ -12,21 +12,21 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Describes an instruction
     /// </summary>
-    public readonly struct Cmd : ICmdData
+    public readonly struct cmd : ICmd
     {
         public IOperand[] Args {get;}
 
         public CmdOpCode Code {get;}
  
         [MethodImpl(Inline)]
-        public Cmd(params IOperand[] args)
+        public cmd(params IOperand[] args)
         {
             Args = args;
             Code = default;
         }
 
         [MethodImpl(Inline)]
-        public Cmd(CmdOpCode code, params IOperand[] args)
+        public cmd(CmdOpCode code, params IOperand[] args)
         {
             Args = args;
             Code = code;

@@ -10,12 +10,12 @@ namespace Z0.Asm
     using static OpKind;
 
     partial struct SemanticRender
-    {
+    {                
         public string Render(OpKind src)
         {
-            var si = SegIndicator.From(src);
-            if(si.IsNonEmpty)
-                return si.Format();
+            var si = RenderSegKind(src);
+            if(text.nonempty(si))
+                return si;
 
             var result = src switch{
 		    OpKind.Register => "register",

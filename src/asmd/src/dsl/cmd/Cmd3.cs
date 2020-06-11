@@ -12,7 +12,7 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines an instruction that accepts three arguments
     /// </summary>
-    public readonly struct Cmd<A,B,C> : ICmdData<Cmd<A,B,C>,A,B,C>
+    public readonly struct cmd<A,B,C> : ICmd<cmd<A,B,C>,A,B,C>
         where A : struct, IOperand
         where B : struct, IOperand
         where C : struct, IOperand
@@ -26,11 +26,11 @@ namespace Z0.Asm.Dsl
         public C Arg2 {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator Cmd(Cmd<A,B,C> src)
+        public static implicit operator cmd(cmd<A,B,C> src)
             => src.Untyped;
 
         [MethodImpl(Inline)]
-        public Cmd(CmdOpCode code, A arg0, B arg1, C arg3)
+        public cmd(CmdOpCode code, A arg0, B arg1, C arg3)
         {
             Arg0 = arg0;
             Arg1 = arg1;
@@ -38,10 +38,10 @@ namespace Z0.Asm.Dsl
             Code = code;
         }
         
-        public Cmd Untyped 
+        public cmd Untyped 
         { 
             [MethodImpl(Inline)] 
-            get => new Cmd(Arg0, Arg1, Arg2);
+            get => new cmd(Arg0, Arg1, Arg2);
         }
     }
 }

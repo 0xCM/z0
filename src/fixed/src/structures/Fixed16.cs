@@ -45,6 +45,10 @@ namespace Z0
             => new Fixed16(src);
 
         [MethodImpl(Inline)]
+        public static Fixed16 From(Fixed8 src)
+            => new Fixed16(src.Data);
+
+        [MethodImpl(Inline)]
         public static Fixed16 From(short src)
             => new Fixed16((ushort)src);
 
@@ -55,11 +59,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Fixed16 From(uint src)
             => new Fixed16((ushort)src);
-
-        [MethodImpl(Inline)]
-        public static Fixed16 From<T>(T src)
-            where T : unmanaged
-                => From(Cast.to<T,ushort>(src));
 
         [MethodImpl(Inline)]
         Fixed16(ushort x)
@@ -75,6 +74,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(int x)
+            => From(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed16(byte x)
+            => From((ushort)x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed16(Fixed8 x)
             => From(x);
 
         [MethodImpl(Inline)]

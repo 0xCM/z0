@@ -9,10 +9,9 @@ namespace Z0
     
     using static Seed;
 
-
     public static partial class Tuples
     {        
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
 
         /// <summary>
         /// Allocates an homogenous pair store

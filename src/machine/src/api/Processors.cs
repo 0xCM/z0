@@ -66,7 +66,7 @@ namespace Z0.Machines
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
         public static ProcessState<C,S> state<C,S>(S initial, C cmd = default)
-            where C : unmanaged, ICmdData<C>
+            where C : unmanaged, ICmd<C>
                 => new ProcessState<C,S>(initial);
 
         /// <summary>
@@ -78,14 +78,14 @@ namespace Z0.Machines
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
         public static Processor<C,S> processor<C,S>(C cmd = default, S state = default)
-            where C : unmanaged, ICmdData<C>
+            where C : unmanaged, ICmd<C>
             where S : IProcessState<C,S>
                 => default;
 
         [MethodImpl(Inline)]
         public static Processor<P,C,S> processor<P,C,S>(P p = default, C cmd = default, S state = default)
             where P : unmanaged, IProcessor
-            where C : unmanaged, ICmdData<C>
+            where C : unmanaged, ICmd<C>
             where S : IProcessState<C,S>
                 => default;
     }

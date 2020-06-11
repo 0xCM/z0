@@ -16,6 +16,5 @@ namespace Z0.Asm
         public const string Mem = nameof(Mem);
 
         public const string Dx = nameof(Dx);
-
     }
 }

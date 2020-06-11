@@ -38,11 +38,6 @@ namespace Z0
         public static Fixed8 From(uint src)
             => new Fixed8((byte)src);
 
-        [MethodImpl(Inline)]
-        public static Fixed8 From<T>(T src)
-            where T : unmanaged
-                => From(Cast.to<T,byte>(src));
-
         public Fixed8 Zero 
         {
             [MethodImpl(Inline)]
@@ -62,11 +57,11 @@ namespace Z0
             => From(x0);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed8(int x)
+        public static explicit operator Fixed8(int x)
             => new Fixed8((byte)(sbyte)x);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed8(uint x)
+        public static explicit operator Fixed8(uint x)
             => new Fixed8((byte)x);
 
         [MethodImpl(Inline)]

@@ -41,17 +41,36 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Fixed64 From<T>(T src)
-            where T : unmanaged
-                => From(Cast.to<T,ulong>(src));
-
-        [MethodImpl(Inline)]
         public static Fixed64 From(int src)
             => new Fixed64((ulong)(long)src);
 
         [MethodImpl(Inline)]
+        public static Fixed64 From(byte src)
+            => new Fixed64(src);
+
+        [MethodImpl(Inline)]
+        public static Fixed64 From(ushort src)
+            => new Fixed64(src);
+
+        [MethodImpl(Inline)]
+        public static Fixed64 From(uint src)
+            => new Fixed64(src);
+
+        [MethodImpl(Inline)]
         public static Fixed64 From(ulong src)
             => new Fixed64(src);
+
+        [MethodImpl(Inline)]
+        public static Fixed64 From(Fixed8 src)
+            => new Fixed64(src.Data);
+
+        [MethodImpl(Inline)]
+        public static Fixed64 From(Fixed16 src)
+            => new Fixed64(src.Data);
+
+        [MethodImpl(Inline)]
+        public static Fixed64 From(Fixed32 src)
+            => new Fixed64(src.Data);
 
         [MethodImpl(Inline)]
         public static Fixed64 From(long src)
@@ -71,6 +90,30 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed64(ulong x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(byte x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(Fixed8 x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(ushort x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(Fixed16 x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(uint x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(Fixed32 x0)
             => From(x0);
 
         [MethodImpl(Inline)]

@@ -44,13 +44,25 @@ namespace Z0
             => new Fixed32(src);
 
         [MethodImpl(Inline)]
-        public static Fixed32 From(int src)
-            => new Fixed32((uint)src);
+        public static Fixed32 From(byte src)
+            => new Fixed32(src);
+
 
         [MethodImpl(Inline)]
-        public static Fixed32 From<T>(T src)
-            where T : unmanaged
-                => From(Cast.to<T,uint>(src));
+        public static Fixed32 From(ushort src)
+            => new Fixed32(src);
+
+        [MethodImpl(Inline)]
+        public static Fixed32 From(Fixed8 src)
+            => new Fixed32(src.Data);
+
+        [MethodImpl(Inline)]
+        public static Fixed32 From(Fixed16 src)
+            => new Fixed32(src.Data);
+
+        [MethodImpl(Inline)]
+        public static Fixed32 From(int src)
+            => new Fixed32((uint)src);
 
         [MethodImpl(Inline)]
         Fixed32(uint x0)
@@ -58,6 +70,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed32(uint x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed32(byte x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed32(Fixed8 x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed32(ushort x0)
+            => From(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed32(Fixed16 x0)
             => From(x0);
 
         [MethodImpl(Inline)]

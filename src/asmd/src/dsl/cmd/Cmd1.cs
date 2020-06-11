@@ -9,18 +9,19 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
+
     /// <summary>
     /// Defines an instruction that accepts one argument
     /// </summary>
-    public readonly struct Cmd<A> : ICmdData<Cmd<A>,A>
+    public readonly struct cmd<A> : ICmd<cmd<A>,A>
         where A : struct, IOperand
     {
         [MethodImpl(Inline)]
-        public static implicit operator Cmd(Cmd<A> src)
+        public static implicit operator cmd(cmd<A> src)
             => src.Untyped;
 
         [MethodImpl(Inline)]
-        public Cmd(CmdOpCode code, A arg0)
+        public cmd(CmdOpCode code, A arg0)
         {
             Code = code;
             Arg0 = arg0;
@@ -30,6 +31,6 @@ namespace Z0.Asm.Dsl
 
         public CmdOpCode Code {get;}
 
-        public Cmd Untyped { [MethodImpl(Inline)] get => new Cmd(Arg0);}
+        public cmd Untyped { [MethodImpl(Inline)] get => new cmd(Arg0);}
     }
 }
