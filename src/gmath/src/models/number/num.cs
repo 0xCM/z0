@@ -20,17 +20,17 @@ namespace Z0
         [MethodImpl(Inline), Const, Closures(AllNumeric)]
         public static num<T> zero<T>()
             where T : unmanaged
-                => new num<T>(Literals.zero<T>());
+                => new num<T>(NumericLiterals.zero<T>());
 
         [MethodImpl(Inline), Const, Closures(AllNumeric)]
         public static num<T> one<T>()
             where T : unmanaged
-                => new num<T>(Literals.one<T>());
+                => new num<T>(NumericLiterals.one<T>());
 
         [MethodImpl(Inline), Const, Closures(AllNumeric)]
         public static num<T> ones<T>()
             where T : unmanaged
-                => new num<T>(Literals.ones<T>());
+                => new num<T>(NumericLiterals.ones<T>());
 
         [MethodImpl(Inline), Add, Closures(AllNumeric)]
         public static num<T> add<T>(num<T> a, num<T> b)

@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source digits</param>
         [MethodImpl(Inline), Op]
-        public static void render(ReadOnlySpan<DecimalDigit> src, Span<char> dst)
+        public static void render(ReadOnlySpan<DeciDigit> src, Span<char> dst)
         {
             for(var i = 0; i< src.Length; i++)
                 seek(dst,i) = (char)symbol(skip(src,i));            

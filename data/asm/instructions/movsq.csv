@@ -1,0 +1,9 @@
+| Opcode     | Instruction    | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                                                                    |
+| A4         | MOVS m8 , m8   | ZO    | Valid       | Valid           | For legacy mode, Move byte from address DS:(E)SI to ES:(E)DI. For 64-bit mode move byte from address (R&#124;E)SI to (R/E)DI.  |
+| A5         | MOVS m16 , m16 | ZO    | Valid       | Valid           | For legacy mode, move word from address DS:(E)SI to ES:(E)DI. For 64-bit mode move word at address (R&#124;E)SI to (R/E)DI     |
+| A5         | MOVS m32 , m32 | ZO    | Valid       | Valid           | For legacy mode, move dword from address DS:(E)SI to ES:(E)DI. For 64-bit mode move dword from address (R&#124;E)SI to (R/E)DI |
+| REX.W + A5 | MOVS m64 , m64 | ZO    | Valid       | N.E.            | Move qword from address (R/E)SI to (R/E)DI                                                                                     |
+| A4         | MOVSB          | ZO    | Valid       | Valid           | For legacy mode, Move byte from address DS:(E)SI to ES:(E)DI. For 64-bit mode move byte from address (R/E)SI to (R/E)DI.       |
+| A5         | MOVSW          | ZO    | Valid       | Valid           | For legacy mode, move word from address DS:(E)SI to ES:(E)DI. For 64-bit mode move word at address (R/E)SI to (R/E)DI.         |
+| A5         | MOVSD          | ZO    | Valid       | Valid           | For legacy mode, move dword from address DS:(E)SI to ES:(E)DI. For 64-bit mode move dword from address (R/E)SI to (R/E)DI.     |
+| REX.W + A5 | MOVSQ          | ZO    | Valid       | N.E.            | Move qword from address (R/E)SI to (R/E)DI.                                                                                    |

@@ -19,7 +19,7 @@ namespace Z0.Asm.Data
         
         public readonly int OpCodeCount;
         
-        public readonly OpCodeRecord[] OpCodeRecords;
+        public readonly CommandInfo[] OpCodeRecords;
 
         public readonly AppResourceDoc ResourceDoc;
 
@@ -43,7 +43,7 @@ namespace Z0.Asm.Data
         {
             ResourceDoc = AsmD.Service.OpCodeSpecDoc;
             OpCodeCount = ResourceDoc.RowCount;
-            OpCodeRecords = new OpCodeRecord[OpCodeCount];
+            OpCodeRecords = new CommandInfo[OpCodeCount];
             OpCodeRecordParser.Service.Parse(ResourceDoc,OpCodeRecords);
             OpCodeIdentifiers = new OpCodeIdentifier[OpCodeCount];
             OpCodeIdentity.Service.Compute(OpCodeRecords,OpCodeIdentifiers);

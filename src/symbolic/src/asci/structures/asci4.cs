@@ -10,7 +10,6 @@ namespace Z0
     using static Seed;
     using static Typed;
 
-    using API = AsciCodes;
     using N = N4;    
 
     /// <summary>
@@ -29,6 +28,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator asci4(string src)
             => new asci4(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(asci4 src)
+            => src.Text;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(asci4 src)
@@ -86,6 +89,12 @@ namespace Z0
             get => AsciCodes.decode(this);
         }
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.format(this);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(asci4 src)
             => Storage == src.Storage;
@@ -98,10 +107,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => API.format(this);
+            => Text;
  
         public override string ToString()
-            => Format(); 
+            => Text;
 
         [MethodImpl(Inline)]
         public static bool operator ==(asci4 a, asci4 b)

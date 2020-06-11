@@ -6,26 +6,36 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Seed;
-    using static Memories;
 
     public readonly struct AsmStatement
     {        
-        public ushort Offset {get;}
+        public static AsmStatement Empty => new AsmStatement(Mnemonic.INVALID, Control.array<string>());
 
-        public string Expression {get;}
+        public Mnemonic Mnemonic {get;}
+
+        public string[] Operands {get;}
         
         [MethodImpl(Inline)]
-        public AsmStatement(ushort offset, string expression)
+        public AsmStatement(Mnemonic mnemonic, string[] operands)
         {
-            Offset = offset;
-            Expression = expression;
+            Mnemonic = mnemonic;
+            Operands = operands;
+        }
+        
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Mnemonic == 0 && (Operands is null || Operands.Length == 0);
         }
         
         public string Format()
-            => $"{Offset.FormatSmallHex(true)} {Expression}";
+        {
+            var operands =  Operands is null ? string.Empty : Operands.Length != 0 ?Operands.Concat(Chars.Comma) : string.Empty;
+            var mnemonic = Mnemonic.ToString().ToLower();
+            return text.concat(mnemonic, Chars.Space, operands);
+        }
 
         public override string ToString()
             => Format();

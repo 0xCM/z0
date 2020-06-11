@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static CastNumeric;
+    using static NumericCast;
 
     /// <summary>
     /// Defines a directed graph parameterized by the vertex index type

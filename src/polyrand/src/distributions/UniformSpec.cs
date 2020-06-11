@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static CastNumeric;
+    using static NumericCast;
     
     /// <summary>
     /// Defines operations specific to uniform distributions

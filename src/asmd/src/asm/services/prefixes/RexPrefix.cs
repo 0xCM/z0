@@ -15,11 +15,11 @@ namespace Z0.Asm
     using RF = RexFieldIndex;   
 
     /// <summary>
-    /// A prefix that occurrs at most once and is applicable to instructions 
-    /// in 64-bit mode, that facilitates specification of: 
-    /// a) gp and sse registers
+    /// A prefix that occurrs at most once and is applicable to instructions in 64-bit mode and which 
+    /// facilitates specifying
+    /// a) gp and sse register operands
     /// b) 64-bit operand size
-    /// c) extended control registers
+    /// c) extended control register operands
     /// </summary>
     public struct RexPrefix : IScalarField<byte>
     {                    
@@ -92,32 +92,47 @@ namespace Z0.Asm
 
         public bit B
         {            
-            [MethodImpl(Inline)] get => gbits.testbit(Scalar,(byte)RFI.B);
-            [MethodImpl(Inline)] set => Update(gbits.setbit(Scalar,(byte)RFI.B, value));
+            [MethodImpl(Inline)] 
+            get => gbits.testbit(Scalar,(byte)RFI.B);
+            
+            [MethodImpl(Inline)] 
+            set => Update(gbits.setbit(Scalar,(byte)RFI.B, value));
         }
 
         public bit X
         {                
-            [MethodImpl(Inline)] get => gbits.testbit(Scalar, (byte)RFI.X);
-            [MethodImpl(Inline)] set => Update(gbits.setbit(Scalar, (byte)RFI.X, value));
+            [MethodImpl(Inline)] 
+            get => gbits.testbit(Scalar, (byte)RFI.X);
+            
+            [MethodImpl(Inline)] 
+            set => Update(gbits.setbit(Scalar, (byte)RFI.X, value));
         }
 
         public bit R
         {                
-            [MethodImpl(Inline)] get => gbits.testbit(Scalar, (byte)RFI.R);
-            [MethodImpl(Inline)] set => Update(gbits.setbit(Scalar, (byte)RFI.R, value));
+            [MethodImpl(Inline)] 
+            get => gbits.testbit(Scalar, (byte)RFI.R);
+            
+            [MethodImpl(Inline)] 
+            set => Update(gbits.setbit(Scalar, (byte)RFI.R, value));
         }
 
         public bit W
         {                
-            [MethodImpl(Inline)] get => gbits.testbit(Scalar, (byte)RFI.W);
-            [MethodImpl(Inline)] set => Update(gbits.setbit(Scalar, (byte)RFI.W, value));
+            [MethodImpl(Inline)] 
+            get => gbits.testbit(Scalar, (byte)RFI.W);
+            
+            [MethodImpl(Inline)] 
+            set => Update(gbits.setbit(Scalar, (byte)RFI.W, value));
         }
 
         public RexCode Code
         {                
-            [MethodImpl(Inline)] get => (RexCode)gbits.slice(Scalar, 4, (byte)RFW.Code);
-            [MethodImpl(Inline)] set => Update(gbits.copy((byte)value, 4, (byte)RFW.Code, Scalar));
+            [MethodImpl(Inline)] 
+            get => (RexCode)gbits.slice(Scalar, 4, (byte)RFW.Code);
+            
+            [MethodImpl(Inline)] 
+            set => Update(gbits.copy((byte)value, 4, (byte)RFW.Code, Scalar));
         }
 
         public string Render()

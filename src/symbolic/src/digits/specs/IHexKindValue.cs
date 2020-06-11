@@ -5,9 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
 
     public interface IHexKindValue<T> : IHexCode
         where T : unmanaged
@@ -17,7 +14,6 @@ namespace Z0
         ReadOnlySpan<byte> Data {get;}
 
         Type IHexCode.Reified 
-            => typeof(T);
-           
+            => typeof(T);           
     }
 }

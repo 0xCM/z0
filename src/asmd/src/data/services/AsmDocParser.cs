@@ -18,7 +18,9 @@ namespace Z0.Asm.Data
         public ParseResult<TextDoc,AsmStatementBlock[]> Parse(TextDoc src)
         {
             var hParser = AsmHeaderParser.Service;
-            var sParser = AsmStatementParser.Service;
+            var sParser = AsmStatementParser.Default;
+            var hexp = HexScalarParser.Service;
+
             var blocks = src.Partition(0, r => IsBlockSep(r.Text)).ToReadOnlySpan();   
             for(var i =0; i<blocks.Length; i++)
             {
@@ -26,7 +28,8 @@ namespace Z0.Asm.Data
                 var k = 0;
                 for(var j = 0; j < rows.Length; j++)
                 {
-                    if(IsCommentLine(rows[j].Text))
+                    var row = rows[j].Text;
+                    if(IsCommentLine(row))
                     {
                         k++;
                     }
@@ -34,7 +37,8 @@ namespace Z0.Asm.Data
                     {
                         if(k != 0)
                         {
-                            
+                            var offset = hexp.Parse(row.LeftOf(Chars.Space));
+
                         }
                     }
                 }

@@ -29,6 +29,12 @@ namespace Z0.Asm
         CaptureExchange CaptureExchange
             => Asm.CaptureExchange.Create(Context);        
 
+        IAsmFunctionDecoder ICaptureServices.DefaultFunctionDecoder
+        {
+            [MethodImpl(Inline)]
+            get=> AsmFunctionDecoder.Default;
+        }
+
         [MethodImpl(Inline)]
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
             => new ImmSpecializer(decoder);        

@@ -35,11 +35,11 @@ namespace Z0
         };   
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(ReadOnlySpan<BinarySymbol> src)
-            => cast<BinarySymbol,char>(src);
+        public static ReadOnlySpan<char> chars(ReadOnlySpan<BinarySym> src)
+            => cast<BinarySym,char>(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(ReadOnlySpan<HexSymbol> src)
-            => cast<HexSymbol,char>(src);
+        public static ReadOnlySpan<char> chars(ReadOnlySpan<HexSym> src)
+            => cast<HexSym,char>(src);
     }
 }

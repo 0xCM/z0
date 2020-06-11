@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T one<T>()
             where T : unmanaged
-                => Literals.one<T>();
+                => NumericLiterals.one<T>();
 
         /// <summary>
         /// Returns generic 1 for a primal source type

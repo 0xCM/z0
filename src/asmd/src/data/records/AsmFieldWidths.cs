@@ -21,15 +21,15 @@ namespace Z0.Asm.Data
 
         Count = C.Count,
 
-        Mnemonic = 24,
+        Mnemonic = asci16.Size,
 
-        Instruction = 60,
-        
+        Instruction = asci32.Size,
+
+        OpCode = asci32.Size,
+
         Register = 6,        
 
         Offset = 16,
-
-        OpCode = 30,
 
         OpCodeBytes = 16,
 
@@ -42,6 +42,8 @@ namespace Z0.Asm.Data
         Enc = 26,
 
         Address64 = 16,
+
+        Address16 = 6,
 
         YeaOrNea = C.Bool,
 
@@ -65,6 +67,6 @@ namespace Z0.Asm.Data
         /// </summary>
         BoolLarge = C.BoolLarge,
 
-        CpuId = 10,
+        CpuId = asci16.Size,
     }
 }

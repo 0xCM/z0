@@ -169,7 +169,7 @@ namespace Z0
         public void Fill(bit value)
         {            
             if(value)
-                Content.Fill(Literals.maxval<T>());
+                Content.Fill(NumericLiterals.maxval<T>());
             else
                 Content.Fill(zero<T>());
         }

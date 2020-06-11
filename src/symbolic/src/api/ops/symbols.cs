@@ -23,7 +23,7 @@ namespace Z0
             => cast<char,AsciChar>(Symbolic.segment(AsciStrings.Text(n0),i0,i1));
 
         [MethodImpl(Inline), Op]
-        public static void symbols(ReadOnlySpan<BinaryDigit> src, Span<BinarySymbol> dst)
+        public static void symbols(ReadOnlySpan<BinaryDigit> src, Span<BinarySym> dst)
         {
             var len = src.Length;
             for(var i = 0; i<len; i++)
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void symbols(ReadOnlySpan<DecimalDigit> src, Span<DecimalSymbol> dst)
+        public static void symbols(ReadOnlySpan<DeciDigit> src, Span<DeciSym> dst)
         {
             var len = src.Length;
             for(var i = 0; i<len; i++)
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void symbols(UpperCased @case, ReadOnlySpan<HexDigit> src, Span<HexSymbol> dst)
+        public static void symbols(UpperCased @case, ReadOnlySpan<HexDigit> src, Span<HexSym> dst)
         {
             var len = src.Length;
             for(var i = 0; i<len; i++)

@@ -20,6 +20,5 @@ namespace Z0
         /// Specifies 1 base 2
         /// </summary>
         b1 = 1,
-
     }
 }

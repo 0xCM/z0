@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E Parse<E>(string name, E @default)
             where E : unmanaged, Enum
-                => Option.Try(() => Enum.Parse<E>(name, true)).ValueOrDefault(@default);
+                => Option.Try(() => Enum.Parse<E>(name, true), error => {}).ValueOrDefault(@default);
 
         /// <summary>
         /// Attempts o parse an enum literal, ignoring case, and returns a null value if parsing failed

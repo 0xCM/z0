@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Seed;
-    using static CastNumeric;    
+    using static NumericCast;    
 
     /// <summary>
     /// Defines a permanent/immutable seed store to support pseudorandom reproducibility

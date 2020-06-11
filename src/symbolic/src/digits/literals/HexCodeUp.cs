@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using S = HexSymbolUp;
+    using S = HexSymUp;
 
     /// <summary>
     /// Defines identifiers for the ASCI codes that correspond to the uppercase hex digits

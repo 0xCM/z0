@@ -31,8 +31,8 @@ namespace Z0
 
         public void primal_kind()
         {
-            var f = PrimalKinds.Service.Init(PrimalKind.I16);
-            var width = f.Width;
+            var f = PrimalKindBitFields.Init(PrimalKind.I16);
+            var width = f.FieldWidth;
             Claim.eq(width, PrimalWidthL2.w16);            
         }
 

@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T maxval<T>()
             where T : unmanaged
-                => Literals.maxval<T>();
+                => NumericLiterals.maxval<T>();
 
         [MethodImpl(Inline)]
         public static T maxval<T>(T rep)

@@ -32,26 +32,25 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(ReadOnlySpan<OpCodeRecord> src, in OpCodeHandler handler)
+        public void Process(ReadOnlySpan<CommandInfo> src, in OpCodeHandler handler)
         {
             for(var i=seq; i<src.Length; i++)
                 Next(skip(src,i), handler);
         }
 
         [MethodImpl(Inline), Op]
-        public void Next(in OpCodeRecord src, in OpCodeHandler handler)
+        public void Next(in CommandInfo src, in OpCodeHandler handler)
         {
             Process(src, handler);
             seq++;
         }
 
         [MethodImpl(Inline)]
-        void Process(in OpCodeRecord src, in OpCodeHandler handler)
+        void Process(in CommandInfo src, in OpCodeHandler handler)
         {
             Process(OpCode(src),handler);
             Process(Instruction(src),handler);
             Process(Mnemonic(src),handler);
-            Process(src.M16, src.M32, src.M64,handler);
             Process(Cpuid(src),handler);
         }
 
@@ -60,17 +59,6 @@ namespace Z0.Asm.Data
         void Process(OperatingMode src, in OpCodeHandler handler)
         {
             handler.Handle(this, src);        
-        }
-
-        [MethodImpl(Inline), Op]
-        void Process(YeaOrNea m16, YeaOrNea m32, YeaOrNea m64, in OpCodeHandler handler)
-        {
-            const OperatingMode none = OperatingMode.None;
-            var mode = none;
-            mode |= (m16 == YeaOrNea.Y ? OperatingMode.Mode16 : none);
-            mode |= (m32 == YeaOrNea.Y ? OperatingMode.Mode32 : none);
-            mode |= (m64 == YeaOrNea.Y ? OperatingMode.Mode64 : none);
-            Process(mode,handler);
         }
 
         [MethodImpl(Inline), Op]
@@ -98,19 +86,19 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline)]
-        static MnemonicExpression Mnemonic(in OpCodeRecord src)
+        static MnemonicExpression Mnemonic(in CommandInfo src)
             => new MnemonicExpression(src.Mnemonic);
 
         [MethodImpl(Inline)]
-        static CpuidExpression Cpuid(in OpCodeRecord src)
+        static CpuidExpression Cpuid(in CommandInfo src)
             => new CpuidExpression(src.CpuId);
 
         [MethodImpl(Inline)]
-        static OpCodeExpression OpCode(in OpCodeRecord src)
-            => new OpCodeExpression(src.Expression);
+        static OpCodeExpression OpCode(in CommandInfo src)
+            => new OpCodeExpression(src.OpCode);
 
         [MethodImpl(Inline)]
-        static InstructionExpression Instruction(in OpCodeRecord src)
-            => new InstructionExpression(src.Instruction);
+        static InstructionExpression Instruction(in CommandInfo src)
+            => new InstructionExpression(src.InstructionCode);
     }
 }

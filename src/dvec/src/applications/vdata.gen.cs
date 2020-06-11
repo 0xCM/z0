@@ -266,7 +266,7 @@ namespace Z0
             where T : unmanaged
         {
             var mask = Blocks.cellalloc<T>(n256,1);
-            var chop = Literals.maxval<T>();
+            var chop = NumericLiterals.maxval<T>();
             
             //For the first 128-bit lane
             var half = mask.CellCount/2;

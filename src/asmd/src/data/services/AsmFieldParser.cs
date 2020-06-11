@@ -30,6 +30,10 @@ namespace Z0.Asm.Data
             => result = @enum(src, out var _, YeaOrNea.N);
 
         [MethodImpl(Inline)]
+        public BinaryCode Parse(string src, out BinaryCode result)     
+            => result = HexByteParser.Service.ParseData(src).ValueOrDefault(BinaryCode.Empty);
+
+        [MethodImpl(Inline)]
         public OpCodeId Parse(string src, out OpCodeId result)     
             => result = @enum(src, out var _, OpCodeId.INVALID);
 
@@ -37,6 +41,10 @@ namespace Z0.Asm.Data
         public T Parse<T>(string src, out T result, T @default = default)     
             where T : unmanaged
                 => result = numeric<T>(src, out var _,  @default);
+
+        [MethodImpl(Inline)]
+        public Address16 Parse(string src, out Address16 result, Address16? @default = null)     
+            => result = Address16.From((ushort)HexScalarParser.Service.Parse(src).ValueOrDefault(0ul));
 
         [MethodImpl(Inline)]
         public string Parse(string src, out string result)

@@ -30,6 +30,10 @@ namespace Z0
             => AsciCodes.encode(n,src);            
 
         [MethodImpl(Inline), Op]
+        public static asci64 encode(ReadOnlySpan<char> src, ASCI asci, N64 n)        
+            => AsciCodes.encode(n,src);            
+
+        [MethodImpl(Inline), Op]
         public static ref readonly asci16 encode(ReadOnlySpan<char> src, out asci16 dst)        
             => ref AsciCodes.encode(src, out dst);
 

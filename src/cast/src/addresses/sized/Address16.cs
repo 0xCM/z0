@@ -9,11 +9,13 @@ namespace Z0
 
     using static Konst;
 
+
     public readonly struct Address16 : IAddress<Address16,W16,ushort>
     {
         public ushort Location {get;}
 
-        public static Address16 Empty => new Address16(0);
+        public static Address16 Empty 
+            => new Address16(0);
 
         public bool IsEmpty 
         {

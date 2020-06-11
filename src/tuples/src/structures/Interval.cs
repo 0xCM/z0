@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Literals;
+    using static NumericLiterals;
 
     /// <summary>
     /// Defines a contiguous segment of homogenous values that lie within left and right boundaries 

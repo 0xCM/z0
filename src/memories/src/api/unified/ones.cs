@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T ones<T>()
             where T : unmanaged
-                => Literals.ones<T>();
+                => NumericLiterals.ones<T>();
 
         /// <summary>
         /// Ones all bits each and every ... one

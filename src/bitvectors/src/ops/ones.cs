@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> ones<T>()
             where T : unmanaged
-                => Literals.ones<T>();           
+                => NumericLiterals.ones<T>();           
     }
 }

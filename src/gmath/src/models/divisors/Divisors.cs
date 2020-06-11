@@ -14,7 +14,7 @@ namespace Z0
     public readonly struct Divisors<T> 
         where T : unmanaged
     {            
-        static T One => Literals.one<T>();
+        static T One => NumericLiterals.one<T>();
 
         [MethodImpl(Inline)]
         public T[] divisors(T src)

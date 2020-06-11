@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Attaches a muliliteral to a target

@@ -11,9 +11,9 @@ namespace Z0
 
     using HCL = HexCodeLo;
     using HCU = HexCodeUp;
-    using HSL = HexSymbolLo;
-    using HSLF = HexSymbolLoFacet;
-    using HSU = HexSymbolUp;
+    using HSL = HexSymLo;
+    using HSLF = HexSymLoFacet;
+    using HSU = HexSymUp;
 
     public partial class SymTest
     {
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         public static bool IsLetter(HSU src)
-            => src >= HexSymbolUp.FirstLetter;
+            => src >= HexSymUp.FirstLetter;
             
         /// <summary>
         /// Determines whether a character is an upper-cased hex digit

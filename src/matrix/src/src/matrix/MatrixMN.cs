@@ -210,7 +210,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix<M,N,U> Convert<U>()
             where U : unmanaged
-               => new Matrix<M,N,U>(Cast.to<T,U>(data));
+               => new Matrix<M,N,U>(NumericArray.to<T,U>(data));
 
         /// <summary>
         /// Converts the entries of the matrix to a specified type and
@@ -221,7 +221,7 @@ namespace Z0
         public ref Matrix<M,N,U> Convert<U>(out Matrix<M,N,U> dst)
             where U : unmanaged
         {
-            dst = new Matrix<M,N,U>(Cast.to<T,U>(data));
+            dst = new Matrix<M,N,U>(NumericArray.to<T,U>(data));
             return ref dst;
         }
 

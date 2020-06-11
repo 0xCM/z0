@@ -21,43 +21,43 @@ namespace Z0
             => symbol<AsciChar,byte,N8>(value);
 
         [MethodImpl(Inline), Op]   
-        public static Symbol<BinarySymbol,byte,N1> symbol(BinaryDigit src)
-            => symbol<BinarySymbol,byte,N1>((BinarySymbol)((byte)src + (byte)BinarySymbol.First));
+        public static Symbol<BinarySym,byte,N1> symbol(BinaryDigit src)
+            => symbol<BinarySym,byte,N1>((BinarySym)((byte)src + (byte)BinarySym.First));
 
         [MethodImpl(Inline), Op]   
-        public static Symbol<BinarySymbol,byte,N1> symbol(Base2 @base, byte src)
-            => symbol<BinarySymbol,byte,N1>((BinarySymbol)(src + (byte)BinarySymbol.First));
+        public static Symbol<BinarySym,byte,N1> symbol(Base2 @base, byte src)
+            => symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BinarySym.First));
 
         [MethodImpl(Inline), Op]
-        public static Symbol<HexSymbol,byte,N4> symbol(Base16 @base, UpperCased @case, byte index)
-            => symbol<HexSymbol,byte,N4>(((HexSymbol)code(@base, @case, index)));
+        public static Symbol<HexSym,byte,N4> symbol(Base16 @base, UpperCased @case, byte index)
+            => symbol<HexSym,byte,N4>(((HexSym)code(@base, @case, index)));
 
         [MethodImpl(Inline), Op]
-        public static Symbol<HexSymbol,byte,N4> symbol(Base16 @base, LowerCased @case, byte index)
-            => symbol<HexSymbol,byte,N4>(((HexSymbol)code(@base, @case, index)));
+        public static Symbol<HexSym,byte,N4> symbol(Base16 @base, LowerCased @case, byte index)
+            => symbol<HexSym,byte,N4>(((HexSym)code(@base, @case, index)));
 
         [MethodImpl(Inline), Op]
-        public static Symbol<DecimalSymbol,byte,N4> symbol(DecimalDigit src)
-            => symbol<DecimalSymbol,byte,N4>((DecimalSymbol)((byte)src + (byte)DecimalSymbol.First));
+        public static Symbol<DeciSym,byte,N4> symbol(DeciDigit src)
+            => symbol<DeciSym,byte,N4>((DeciSym)((byte)src + (byte)DeciSym.First));
 
         [MethodImpl(Inline), Op]
-        public static Symbol<HexSymbol,byte,N4> symbol(UpperCased @case, HexDigit src)
-            => symbol<HexSymbol,byte,N4>(hex(@case,src));
+        public static Symbol<HexSym,byte,N4> symbol(UpperCased @case, HexDigit src)
+            => symbol<HexSym,byte,N4>(hex(@case,src));
 
         [MethodImpl(Inline), Op]
-        public static Symbol<HexSymbol,byte,N4> symbol(LowerCased @case, HexDigit src)
-            => symbol<HexSymbol,byte,N4>(hex(@case,src));
+        public static Symbol<HexSym,byte,N4> symbol(LowerCased @case, HexDigit src)
+            => symbol<HexSym,byte,N4>(hex(@case,src));
 
         [MethodImpl(Inline), Op]   
-        static HexSymbol hex(UpperCased @case, HexDigit src)
+        static HexSym hex(UpperCased @case, HexDigit src)
             => src <= HexDigit.x9 
-                ? (HexSymbol)((byte)src + (byte)HexSymbol.FirstNumeral) 
-                : (HexSymbol)((byte)src + (byte)HexSymbol.FirstLetterUp);
+                ? (HexSym)((byte)src + (byte)HexSym.FirstNumeral) 
+                : (HexSym)((byte)src + (byte)HexSym.FirstLetterUp);
 
         [MethodImpl(Inline), Op]   
-        static HexSymbol hex(LowerCased @case, HexDigit src)
+        static HexSym hex(LowerCased @case, HexDigit src)
             => src <= HexDigit.x9 
-                ? (HexSymbol)((byte)src + (byte)HexSymbol.FirstNumeral) 
-                : (HexSymbol)((byte)src + (byte)HexSymbol.FirstLetterLo);
+                ? (HexSym)((byte)src + (byte)HexSym.FirstNumeral) 
+                : (HexSym)((byte)src + (byte)HexSym.FirstLetterLo);
    }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
+    using static Konst;
 
     partial class XTend
     {
@@ -25,10 +25,8 @@ namespace Z0
             where A : Attribute
                 => (A)System.Attribute.GetCustomAttribute(a, typeof(A));
 
-
         [MethodImpl(Inline)]
         public static PartId Id(this Assembly src)
             =>  src.GetTag<PartIdAttribute>()?.Id ?? PartId.None;
-
     }
 }

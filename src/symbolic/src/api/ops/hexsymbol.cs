@@ -10,8 +10,8 @@ namespace Z0
     using static Seed;
     using static Control;
 
-    using HSU = HexSymbolUp;
-    using HSL = HexSymbolLo;
+    using HSU = HexSymUp;
+    using HSL = HexSymLo;
 
     partial class Symbolic
     {

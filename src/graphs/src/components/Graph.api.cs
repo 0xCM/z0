@@ -11,7 +11,7 @@ namespace Z0
     using System.Text;
 
     using static Seed;
-    using static CastNumeric;
+    using static NumericCast;
 
     /// <summary>
     /// Defines the primary API surface for manipulated graphs

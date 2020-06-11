@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using S = HexSymbolLo;
+    using S = HexSymLo;
 
     /// <summary>
     /// Defines identiiers for the ASCI codes that correspond to the lowercase hex digits

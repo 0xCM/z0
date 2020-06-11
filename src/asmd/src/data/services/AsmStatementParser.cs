@@ -7,24 +7,35 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
-
     public readonly struct AsmStatementParser : ITextParser<AsmStatement>
     {
-        public static AsmStatementParser Service => default(AsmStatementParser);
+        public static AsmStatementParser Default => Create();
+
+        public static AsmStatementParser Create(IParser<string,Mnemonic> parser = null)
+        {
+            if(parser != null)   
+                return new AsmStatementParser(src => parser.Parse(src).ValueOrDefault(Mnemonic.INVALID));
+            else
+                return new AsmStatementParser(src => Enums.Parse(src,Mnemonic.INVALID));
+        }
+
+        readonly Func<string,Mnemonic> MnemonicParse;
+        
+        public AsmStatementParser(Func<string,Mnemonic> parser)
+        {
+            MnemonicParse = parser;
+        }
 
         public ParseResult<AsmStatement> Parse(string src)
         {
-            var hp = HexScalarParser.Service;
-            var offset = hp.Parse(src.LeftOf(Chars.Space));
-            if(offset)            
+            var mnemonic = MnemonicParse(src.LeftOf(Chars.Space));
+            if(mnemonic != Mnemonic.INVALID)
             {
-                var expression = src.RightOf(Chars.Space);
-                return ParseResult.Success(src, new AsmStatement((ushort)offset.Value, expression));
+                var operands = src.RightOf(Chars.Space).SplitClean(Chars.Comma);
+                return ParseResult.Success(src, new AsmStatement(mnemonic, operands));
             }
-
-            return ParseResult.Fail<AsmStatement>(src);            
+            else
+                return ParseResult.Fail<AsmStatement>(src);            
         }
     }
 }

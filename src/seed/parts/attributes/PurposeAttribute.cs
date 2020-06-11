@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Seed; 
+    using static Konst; 
 
     /// <summary>
     /// Describes the reason for a thing to be
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Purpose(string description)
         {
-            Description = text.denullify(description);
+            Description = description ?? "";            
         }
         
         public bool None
@@ -56,6 +56,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.denullify(Description);
+            => Description ?? "";
     }
 }

@@ -11,5 +11,11 @@ namespace Z0.Asm
         AsmInstructions[] Decode(ReadOnlySpan<UriHex> src);
 
         int Decode(ReadOnlySpan<UriHex> src, Span<AsmInstructions> dst);        
+
+        Option<AsmInstructions> Decode(UriHex src); 
+
+        Option<AsmInstructionList> Decode(UriCode src);       
+
+        AsmInstructions[] Decode(params UriHex[] src);
     }
 }

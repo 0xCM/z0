@@ -10,7 +10,7 @@ namespace Z0
     using static Sign8;
 
     using K = PrimalKindId;
-    using I = PrimalKindSpecs.SegIndex;
+    using I = PrimalKindBitField.SegIndex;
 
     /// <summary>
     /// Defines a bitfield that identifies and describes system type primitives

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using Lo = HexSymbolLo;
-    using Up = HexSymbolUp;
+    using Lo = HexSymLo;
+    using Up = HexSymUp;
 
     /// <summary>
     /// Defines identifiers for the ASCI codes that correspond to both upper/lower-case hex digits

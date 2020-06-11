@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Runtime.InteropServices;
 
     using static Seed;
     using static Typed;
@@ -31,6 +32,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator asci32(string src)
             => new asci32(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(asci32 src)
+            => src.Text;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(asci32 src)
@@ -101,6 +106,11 @@ namespace Z0
             get => AsciCodes.decode(this);
         }
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.format(this);
+        }
 
         [MethodImpl(Inline)]
         public bool Equals(asci32 src)
@@ -114,10 +124,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => AsciCodes.format(this);
+            => Text;
  
         public override string ToString()
-            => Format(); 
+            => Text;
 
         [MethodImpl(Inline)]
         public static bool operator ==(asci32 a, asci32 b)

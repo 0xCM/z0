@@ -23,35 +23,3 @@
 | 83 /4 ib         | AND r/m16, imm8   | MI    | Valid       | Valid           | r/m16 AND imm8 (sign-extended).           |
 | 83 /4 ib         | AND r/m32, imm8   | MI    | Valid       | Valid           | r/m32 AND imm8 (sign-extended).           |
 | REX.W + 83 /4 ib | AND r/m64, imm8   | MI    | Valid       | N.E.            | r/m64 AND imm8 (sign-extended).           |
-
-# Encoding
-----------------------------------------------------------------------------------------------------------------------------------
-| Op/En | Operand 1        | Operand 2     | Operand 3 | Operand 4 |
-| RM    | ModRM:reg (r, w) | ModRM:r/m (r) | NA        | NA        |
-| MR    | ModRM:r/m (r, w) | ModRM:reg (r) | NA        | NA        |
-| MI    | ModRM:r/m (r, w) | imm8/16/32    | NA        | NA        |
-| I     | AL/AX/EAX/RAX    | imm8/16/32    | NA        | NA        |
-
-# Specs
-----------------------------------------------------------------------------------------------------------------------------------
-| 20 /r                          | AND r/m8, r8                                                 | 16/32/64-bit     | 8086+      | And_rm8_r8 
-| 21 /r                          | AND r/m32, r32                                               | 16/32/64-bit     | 386+       | And_rm32_r32                                      
-| 21 /r                          | AND r/m16, r16                                               | 16/32/64-bit     | 8086+      | And_rm16_r16                                      
-| REX.W 21 /r                    | AND r/m64, r64                                               | 64-bit           | X64        | And_rm64_r64                                      
-| 22 /r                          | AND r8, r/m8                                                 | 16/32/64-bit     | 8086+      | And_r8_rm8                                        
-| 23 /r                          | AND r16, r/m16                                               | 16/32/64-bit     | 8086+      | And_r16_rm16                                      
-| 23 /r                          | AND r32, r/m32                                               | 16/32/64-bit     | 386+       | And_r32_rm32                                      
-| REX.W 23 /r                    | AND r64, r/m64                                               | 64-bit           | X64        | And_r64_rm64                                      
-| 24 ib                          | AND AL, imm8                                                 | 16/32/64-bit     | 8086+      | And_AL_imm8                                       
-| 25 iw                          | AND AX, imm16                                                | 16/32/64-bit     | 8086+      | And_AX_imm16                                      
-| 25 id                          | AND EAX, imm32                                               | 16/32/64-bit     | 386+       | And_EAX_imm32                                     
-| 80 /4 ib                       | AND r/m8, imm8                                               | 16/32/64-bit     | 8086+      | And_rm8_imm8                                      
-| REX.W 25 id                    | AND RAX, imm32                                               | 64-bit           | X64        | And_RAX_imm32                                     
-| 81 /4 id                       | AND r/m32, imm32                                             | 16/32/64-bit     | 386+       | And_rm32_imm32                                    
-| 81 /4 iw                       | AND r/m16, imm16                                             | 16/32/64-bit     | 8086+      | And_rm16_imm16                                    
-| REX.W 81 /4 id                 | AND r/m64, imm32                                             | 64-bit           | X64        | And_rm64_imm32                                    
-| 82 /4 ib                       | AND r/m8, imm8                                               | 16/32-bit        | 8086+      | And_rm8_imm8_82                                   
-| 83 /4 ib                       | AND r/m16, imm8                                              | 16/32/64-bit     | 8086+      | And_rm16_imm8                                     
-| 83 /4 ib                       | AND r/m32, imm8                                              | 16/32/64-bit     | 386+       | And_rm32_imm8                                     
-| REX.W 83 /4 ib                 | AND r/m64, imm8                                              | 64-bit           | X64        | And_rm64_imm8                                     
-                                       

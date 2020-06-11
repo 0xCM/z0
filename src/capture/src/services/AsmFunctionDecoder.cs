@@ -19,6 +19,12 @@ namespace Z0.Asm
     {
         readonly AsmFormatSpec AsmFormat;
         
+        public static AsmFunctionDecoder Default
+        {
+            [MethodImpl(Inline)]         
+            get => new AsmFunctionDecoder(AsmFormatSpec.Default);
+        }
+
         [MethodImpl(Inline)]
         internal AsmFunctionDecoder(in AsmFormatSpec format)
         {

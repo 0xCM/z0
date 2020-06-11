@@ -10,13 +10,13 @@ namespace Z0
     using static Konst;
     using static Control;
 
-    using HSL = HexSymbolLo;
-    using HSU = HexSymbolUp;
+    using HSL = HexSymLo;
+    using HSU = HexSymUp;
 
     partial class Symbolic        
     {        
         [MethodImpl(Inline), Op]
-        public static Span<DecimalDigit> digits(Base10 @base, ReadOnlySpan<char> src, Span<DecimalDigit> dst)
+        public static Span<DeciDigit> digits(Base10 @base, ReadOnlySpan<char> src, Span<DeciDigit> dst)
         {
             var len = src.Length;
             for(var i = 0; i< len; i++)
@@ -24,10 +24,10 @@ namespace Z0
             return dst;            
         }
 
-        public static Span<DecimalDigit> digits(Base10 @base, ulong src)
+        public static Span<DeciDigit> digits(Base10 @base, ulong src)
         {
             var data = src.ToString();
-            var dst = new DecimalDigit[data.Length];
+            var dst = new DeciDigit[data.Length];
             return digits(@base10, data, dst);
         }
 
@@ -121,7 +121,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<BinarySymbol> src, Span<BinaryDigit> dst)
+        public static void digits(ReadOnlySpan<BinarySym> src, Span<BinaryDigit> dst)
         {
             var len = src.Length;
             for(var i = 0; i<len; i++)

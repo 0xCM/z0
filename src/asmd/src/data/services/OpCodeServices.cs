@@ -19,7 +19,7 @@ namespace Z0.Asm.Data
         public static OpCodeServices Service => default;
         
         [MethodImpl(Inline), Op]
-        public void Process(in OpCodeProcessor processor, in OpCodeHandler handler, ReadOnlySpan<OpCodeRecord> src)
+        public void Process(in OpCodeProcessor processor, in OpCodeHandler handler, ReadOnlySpan<CommandInfo> src)
             => processor.Process(src,handler);
 
         [Op]

@@ -6,8 +6,8 @@ namespace Z0
 
     using static Seed;
     using static As;
-    using static CastNumeric;
-    using static Literals;
+    using static NumericCast;
+    using static NumericLiterals;
 
     /// <summary>
     /// Produces pseudorandom numeric points and streams predicated on a supplied generator

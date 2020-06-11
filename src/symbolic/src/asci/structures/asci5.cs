@@ -28,7 +28,6 @@ namespace Z0
         {
             Data = src;
         }
-        
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -46,13 +45,22 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Empty;
         }
-
-
+        
         public int MaxLength
         {
             [MethodImpl(Inline)]
             get => Size;
         }
+
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.format(this);
+        }
+        
+        [MethodImpl(Inline)]
+        public static implicit operator string(asci5 src)
+            => src.Text;
 
         [MethodImpl(Inline)]
         public bool Equals(asci5 src)
@@ -66,10 +74,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => AsciCodes.format(this);
+            => Text;
  
         public override string ToString()
-            => Format(); 
+            => Text;
 
         [MethodImpl(Inline)]
         public static bool operator ==(asci5 a, asci5 b)

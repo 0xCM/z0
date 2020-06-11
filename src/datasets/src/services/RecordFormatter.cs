@@ -93,7 +93,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         short Width(F spec)
-            => (short)(Enums.scalar<F,int>(spec) >> 16);
+            => (short)(Enums.scalar<F,uint>(spec) >> 16);
 
         public string Render()
             => State.ToString();

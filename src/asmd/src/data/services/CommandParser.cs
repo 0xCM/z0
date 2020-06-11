@@ -6,15 +6,14 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public partial class AsmCommandParser
     {
         public static ParseResult<AsmCommand> ParseAsmLine(string line, ref int seq)
-            => AsmLineParser.Service.Parse(line, ref seq);
+            => AsmSourceLineParser.Service.Parse(line, ref seq);
 
         internal const string LocatedMarker = "located://";
 

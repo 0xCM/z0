@@ -146,7 +146,7 @@ namespace Z0
             if(src.Succeeded)
                 return src.Value?.ToString() ?? "Parse result indicates sucess but no value present!";
             else
-                return src.Reason.MapValueOrDefault(reason => reason.ToString(), "Reason for parse failure unspecified");
+                return src.Reason.MapValueOrDefault(reason => reason.ToString(), "FAIL");
         }
 
         public string Format()

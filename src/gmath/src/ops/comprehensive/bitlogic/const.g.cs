@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>()
             where T:unmanaged
-                => Literals.ones<T>();
+                => NumericLiterals.ones<T>();
 
         [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>(T a)

@@ -22,12 +22,26 @@ namespace Z0.Asm
             return count;
         }
 
-        public AsmInstructions[] Decode(ReadOnlySpan<UriHex> bits)
+        public AsmInstructions[] Decode(ReadOnlySpan<UriHex> src)
         {
-            var count = bits.Length;
+            var count = src.Length;
             var dst = Control.alloc<AsmInstructions>(count);
-            Decode(bits, dst);
+            Decode(src, dst);
             return dst;
         }
+
+        public AsmInstructions[] Decode(params UriHex[] src)
+        {
+            var count = src.Length;
+            var dst = Control.alloc<AsmInstructions>(count);
+            Decode(src, dst);
+            return dst;
+        }
+
+        public Option<AsmInstructions> Decode(UriHex src)
+            => Capture.Services.DefaultFunctionDecoder.Decode(src);
+
+        public Option<AsmInstructionList> Decode(UriCode src)
+            => Capture.Services.DefaultFunctionDecoder.Decode(src.Encoded);            
     }
 }

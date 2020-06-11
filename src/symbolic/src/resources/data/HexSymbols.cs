@@ -13,8 +13,8 @@ namespace Z0
     using static Control;
     using static Symbolic;
 
-    using HSU = HexSymbolUp;
-    using HSL = HexSymbolLo;
+    using HSU = HexSymUp;
+    using HSL = HexSymLo;
 
     partial class SymbolicData
     {

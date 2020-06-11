@@ -16,12 +16,12 @@ namespace Z0
             where T : unmanaged
         {
             var count = dataset.EntryCount;
-            var buffer = Control.alloc<@enum<E,T>>(count);
+            var buffer = new @enum<E,T>[count];
             var dst = buffer.ToSpan();
             for(var i=0; i<count; i++)
             {
                 var entry = dataset[i];
-                Control.seek(dst,i) = Symbolic.@enum(entry.Token, entry.Index, entry.Name, entry.Literal, entry.Scalar);
+                Control.seek(dst,i) = @enum.define(entry.Token, entry.Index, entry.Name, entry.Literal, entry.Scalar);
             }
             return buffer;
         }

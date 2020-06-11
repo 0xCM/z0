@@ -38,6 +38,10 @@ namespace Z0
             => new asci16(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator string(asci16 src)
+            => src.Text;
+
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(asci16 src)
             => src.Encoded;
 
@@ -97,6 +101,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => AsciCodes.decode(this);
+        } 
+        
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.format(this);
         }
 
         [MethodImpl(Inline)]
@@ -115,10 +125,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => AsciCodes.format(this);
+            => Text;
  
         public override string ToString()
-            => Format(); 
+            => Text;
 
         [MethodImpl(Inline)]
         public static bool operator ==(asci16 a, asci16 b)

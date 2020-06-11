@@ -31,5 +31,9 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="bufferlen">The desired buffer length</param>
         IMemberExtractor HostExtractor(int? bufferlen = null);
+
+
+        IAsmFunctionDecoder DefaultFunctionDecoder {get;}
+
     }
 }

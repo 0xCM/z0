@@ -51,7 +51,7 @@ namespace Z0
         {
             var bitcount = lastpos - firstpos;
             if(bitcount > bitsize<T>())
-                return Literals.maxval<T>();
+                return NumericLiterals.maxval<T>();
 
             var sameSeg = firstpos.CellIndex == lastpos.CellIndex;
             var firstCount = uint8(sameSeg ? bitcount : bitsize<T>() - firstpos.BitOffset);

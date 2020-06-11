@@ -19,14 +19,14 @@ namespace Z0.Asm.Data
         /// </summary>
         /// <param name="src">The source record</param>
         [MethodImpl(Inline), Op]
-        public OpCodeIdentifier Compute(in OpCodeRecord src)
+        public OpCodeIdentifier Compute(in CommandInfo src)
         {
             //var part1 = MnemonicPart(src);
-            return new OpCodeIdentifier(src.Expression);
+            return new OpCodeIdentifier(src.OpCode);
         }
 
         [MethodImpl(Inline), Op]
-        public void Compute(ReadOnlySpan<OpCodeRecord> src, Span<OpCodeIdentifier> dst)
+        public void Compute(ReadOnlySpan<CommandInfo> src, Span<OpCodeIdentifier> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -34,7 +34,7 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline), Op]
-        string MnemonicPart(in OpCodeRecord record)
+        string MnemonicPart(in CommandInfo record)
         {
             var length = record.Mnemonic.Length;
             ReadOnlySpan<char> src = record.Mnemonic;

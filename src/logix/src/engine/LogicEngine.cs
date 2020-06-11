@@ -136,7 +136,7 @@ namespace Z0.Logix
             where T :unmanaged
         {
             expr.SetVars(a,b);
-            return gmath.eq(LogicEngine.eval(expr).Value, Literals.maxval<T>());
+            return gmath.eq(LogicEngine.eval(expr).Value, NumericLiterals.maxval<T>());
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Z0.Logix
         {
             var sln = new List<T>();
             var level0 = domain.Increments(default(T));
-            var ones = Literals.maxval<T>();
+            var ones = NumericLiterals.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
                 expr.SetVar(varyix, level0[i]);
@@ -213,7 +213,7 @@ namespace Z0.Logix
             var sln = new List<T>();
             var level0 = domain.Increments(default(T));
             var level1 = domain.Increments(default(T));
-            var ones = Literals.maxval<T>();
+            var ones = NumericLiterals.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
                 expr.SetVar(0,level0[i]);

@@ -8,7 +8,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
+    
     partial class XTend
     {
         /// <summary>

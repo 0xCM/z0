@@ -49,8 +49,6 @@ namespace Z0.Asm
         public static Func<AsmFlowInfo> FlowInfoDefer(Iced.Code src)    
             => () => FlowInfo(src);
 
-
-
         public static AsmInstructionCode InstructionCode(Iced.Instruction src)
         {
             var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
@@ -252,6 +250,5 @@ namespace Z0.Asm
                 ZeroingMasking = src.ZeroingMasking,
            };             
         }
-
     }
 }

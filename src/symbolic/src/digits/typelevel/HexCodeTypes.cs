@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct X00 : IHexCode<X00>, ITextual
     {
@@ -15,9 +15,8 @@ namespace Z0
         public static implicit operator HexKind(X00 src) => HexKind.x00;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(X00 src) => 0x00;
+        public static implicit operator byte(X00 src) => 0x00;        
         
-
         public HexKind Kind => HexKind.x00;
 
         public string Format() => Kind.Format();
@@ -3849,6 +3848,4 @@ namespace Z0
 
         public override string ToString() => Format();
     }
-
-
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static CastNumeric;
+    using static NumericCast;
 
     using NW = NumericWidth;
 

@@ -30,6 +30,10 @@ namespace Z0
             => new asci64(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator string(asci64 src)
+            => src.Text;
+
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(asci64 src)
             => src.Encoded;
 
@@ -103,10 +107,18 @@ namespace Z0
             get => AsciCodes.decode(this);
         }
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.format(this);
+        }
 
         [MethodImpl(Inline)]
         public string Format()
-            => AsciCodes.format(this);
+            => Text;
+
+        public override string ToString()
+            => Text;
 
         [MethodImpl(Inline)]
         public bool Equals(asci64 src)

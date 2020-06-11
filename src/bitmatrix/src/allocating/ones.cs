@@ -39,7 +39,7 @@ namespace Z0
         {            
             var dst = zero<T>();
             var len = bitsize<T>();
-            var one = Literals.one<T>();
+            var one = NumericLiterals.one<T>();
             for(var i=0; i < len; i++)
                 dst[i] = gmath.sll(one,(byte)i);
             return dst;
@@ -72,7 +72,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitMatrix.init(Literals.maxval<T>(),m,n);
+                => BitMatrix.init(NumericLiterals.maxval<T>(),m,n);
 
         /// <summary>
         /// Allocates a 1-filled bitmatrix of natural order
@@ -84,6 +84,6 @@ namespace Z0
         public static BitMatrix<N,T> ones<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitMatrix.init(Literals.maxval<T>(),n);
+                => BitMatrix.init(NumericLiterals.maxval<T>(),n);
     }
 }

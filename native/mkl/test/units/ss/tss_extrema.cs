@@ -65,7 +65,7 @@ namespace Z0.Mkl
         {
             var src = Random.Span<long>(Pow2.T14, Interval.closed(-2000L, 2000L));
             var expect = gspan.avg(src);
-            var converted = Cast.to<long,double>(src);
+            var converted = NumericSpan.to<long,double>(src);
             var actual = (long)Dataset.Load(converted).Mean()[0];
             Claim.eq(expect,actual);
         }

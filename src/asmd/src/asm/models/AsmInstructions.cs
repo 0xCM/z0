@@ -43,6 +43,12 @@ namespace Z0.Asm
             get => Inxs.Length; 
         }
 
+        public int Count
+        {
+            [MethodImpl(Inline)] 
+            get => Inxs.Length;
+        }
+
         public bool IsEmpty 
         { 
             [MethodImpl(Inline)] 

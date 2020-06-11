@@ -26,6 +26,11 @@ namespace Z0.Asm
         public IMemoryCapture Memory(IAsmContext context, int? bufferlen = null)
             => MemoryCaptureService.Create(context.Decoder, bufferlen);
 
+        public IAsmFunctionDecoder DefaultFunctionDecoder
+        {
+            [MethodImpl(Inline)]
+            get => AsmFunctionDecoder.Default;
+        }
 
         [MethodImpl(Inline)]
         IMemoryCapture MemoryCapture(IAsmFunctionDecoder decoder, int? bufferlen = null)

@@ -121,13 +121,13 @@ namespace Z0.Logix
                 Claim.require(y0);
 
                 var y1 = S.equals(x,x);
-                Claim.eq(Literals.maxval<T>(), y1);
+                Claim.eq(NumericLiterals.maxval<T>(), y1);
 
                 var y2 = gmath.eq(x,y);
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);
-                Claim.eq(Literals.zero<T>(),y3);
+                Claim.eq(NumericLiterals.zero<T>(),y3);
 
             }
         }

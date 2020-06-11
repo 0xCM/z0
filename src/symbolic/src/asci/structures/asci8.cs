@@ -30,6 +30,10 @@ namespace Z0
             => new asci8(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator string(asci8 src)
+            => src.Text;
+
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(asci8 src)
             => src.Encoded;
 
@@ -85,6 +89,12 @@ namespace Z0
             get => AsciCodes.decode(this);
         }
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => AsciCodes.format(this);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(asci8 src)
             => Storage == src.Storage;
@@ -97,10 +107,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => AsciCodes.format(this);
+            => Text;
  
         public override string ToString()
-            => Format(); 
+            => Text;
 
         [MethodImpl(Inline)]
         public static bool operator ==(asci8 a, asci8 b)

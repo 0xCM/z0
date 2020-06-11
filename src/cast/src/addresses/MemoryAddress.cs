@@ -89,11 +89,20 @@ namespace Z0
         public unsafe static implicit operator MemoryAddress(void* p)
             => define((ulong)p);
         
-        public static MemoryAddress Empty => new MemoryAddress(0);
+        public static MemoryAddress Empty 
+            => new MemoryAddress(0);
  
-        public bool IsEmpty { [MethodImpl(Inline)] get => Location == 0; }
+        public bool IsEmpty 
+        {
+             [MethodImpl(Inline)] 
+             get => Location == 0; 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Location != 0; }
+        public bool IsNonEmpty 
+        {
+             [MethodImpl(Inline)] 
+             get => Location != 0; 
+        }
 
         public MemoryAddress Zero 
             => Empty;

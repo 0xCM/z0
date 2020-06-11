@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         public static bool IsNumeral(char c)
-            => (DecimalSymbol)c >= DecimalSymbol.First
-            && (DecimalSymbol)c <= DecimalSymbol.Last; 
+            => (DeciSym)c >= DeciSym.First
+            && (DeciSym)c <= DeciSym.Last; 
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T minval<T>()
             where T : unmanaged
-                => Literals.minval<T>();
+                => NumericLiterals.minval<T>();
 
         /// <summary>
         /// Returns the minimum value supported by a parametrically-identified primal type

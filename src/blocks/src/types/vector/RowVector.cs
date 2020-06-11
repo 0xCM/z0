@@ -126,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector<U> Convert<U>()
             where U : unmanaged
-               => new RowVector<U>(Cast.to<T,U>(data));
+               => new RowVector<U>(NumericArray.to<T,U>(data));
 
         [MethodImpl(Inline)]
         public RowVector<T> Replicate()
