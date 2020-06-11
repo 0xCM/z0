@@ -18,7 +18,7 @@ namespace Z0
     {
         public  void run_it()
         {
-            var results = MemoryStores.UseCase();
+            var results = ResMemStores.UseCase();
             for(var i=0; i<results.Length; i++)
             {
                 var result = results[i];
@@ -28,14 +28,14 @@ namespace Z0
         }
 
 
-        unsafe void Process(in MemoryRef src, in MemoryStore store)
+        unsafe void Process(in MemoryRef src, in MemStore store)
         {
             var reader = PointedReader.Create(src.Address.ToPointer<byte>(), src.Length);
             var dstA = Spans.alloc<byte>(src.Length);            
             var count = reader.ReadAll(dstA);            
             Claim.eq(count,src.Length);
 
-            var dstB = store.load(src);
+            var dstB = MemStores.Service.load(src);
             Claim.eq(count, dstB.Length);
 
             for(var i=0; i<count; i++)
@@ -73,7 +73,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = MemoryAddress.cover(r.Address, r.Length);
+                var data = Addresses.cover(r.Address, r.Length);
                 using var dst = CasePath($"Symbolic{i}").Writer();
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
 
@@ -83,7 +83,7 @@ namespace Z0
         }
         public void run_2()
         {
-            var store = MemoryStores.Create();
+            var store = ResMemStores.Create();
             var sources = store.Sources;
             for(var i=0; i<sources.Length; i++)
                 Process(skip(sources,i), store);

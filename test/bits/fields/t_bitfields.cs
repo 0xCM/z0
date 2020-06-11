@@ -33,7 +33,7 @@ namespace Z0
         {
             var f = PrimalKindBitFields.Init(PrimalKind.I16);
             var width = f.FieldWidth;
-            Claim.eq(width, PrimalWidthL2.w16);            
+            Claim.eq(width, Pow2Width.w16);            
         }
 
         public void bitfield_a()

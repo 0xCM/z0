@@ -242,34 +242,9 @@ namespace Z0
         public const string Eol = "\r\n";
 
         /// <summary>
-        /// The '⇝' character
-        /// </summary>
-        public const char RightSquiggle = '⇝';
-        
-        /// <summary>
-        /// The '⇜' character
-        /// </summary>
-        public const char LeftSquiggle = '⇜';
-
-        /// <summary>
-        /// The '⟶' character
-        /// </summary>
-        public const char LongRightArrow = '⟶';
-
-        /// <summary>
-        /// The '→' character
-        /// </summary>
-        public const char RightArrow = '→';
-
-        /// <summary>
-        /// The '←' character
-        /// </summary>
-        public const char LeftArrow = '←';
-
-        /// <summary>
         /// The '↦' character
         /// </summary>
-        public const char MapsTo = '↦';
+        public const char MapsTo = (char)ArrowSymbols.MapsTo;
         
     }
 }

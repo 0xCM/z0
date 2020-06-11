@@ -55,7 +55,7 @@ namespace Z0
         {
             this.Id = opid;
             this.Offset = offset - 1;
-            this.Address = MemoryAddress.define((ulong)location - 1ul);
+            this.Address = Addresses.address((ulong)location - 1ul);
             this.Captured = captured;
         }
 

@@ -33,7 +33,7 @@ namespace Z0
         public bool Equals(PrimalKindBitField src)
             => FieldValue == src.FieldValue;
 
-        public PrimalWidthL2 FieldWidth
+        public Pow2Width FieldWidth
         {
             [MethodImpl(Inline)]
             get => PrimalKindBitFields.Width(this);

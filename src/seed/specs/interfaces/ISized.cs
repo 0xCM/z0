@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+
+
+
     public interface ISized
     {
         DataWidth Width {get;}

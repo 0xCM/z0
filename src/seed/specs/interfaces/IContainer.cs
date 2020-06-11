@@ -13,6 +13,7 @@ namespace Z0
 
     using static Seed;
 
+
     /// <summary>
     /// Characterizes an F-bound polymorphic reifiable abstraction
     /// </summary>

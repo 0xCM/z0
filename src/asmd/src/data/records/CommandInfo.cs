@@ -17,21 +17,23 @@ namespace Z0.Asm.Data
     {
         Sequence = 0 | (W.Sequence << W.Offset),
 
-        Offset = 1 | (W.Address16 << W.Offset),
+        GlobalOffset = 1 | (W.Address32 << W.Offset),
 
-        Mnemonic = 2 | (W.Mnemonic << W.Offset), 
+        LocalOffset = 2 | (W.Address16 << W.Offset),
+
+        Mnemonic = 3 | (W.Mnemonic << W.Offset), 
         
-        OpCode = 3 | (W.OpCode << W.Offset),  
+        OpCode = 4 | (W.OpCode << W.Offset),  
         
-        Encoded = 4 | 32 << W.Offset,
+        Encoded = 5 | 32 << W.Offset,
 
-        InstructionFormat = 5 | (W.Instruction << W.Offset), 
+        InstructionFormat = 6 | (W.Instruction << W.Offset), 
 
-        InstructionCode = 6 | (W.Instruction << W.Offset), 
+        InstructionCode = 7 | (W.Instruction << W.Offset), 
         
-        CpuId = 7 | (W.CpuId << W.Offset),
+        CpuId = 8 | (W.CpuId << W.Offset),
 
-        CodeId = 8 | (20 << W.Offset),                          
+        CodeId = 9 | (20 << W.Offset),                          
     }
 
     public struct CommandInfo : IRecord<F,R>
@@ -40,14 +42,16 @@ namespace Z0.Asm.Data
             => Records.Header<F>().Render(delimiter);
         
         public static CommandInfo Empty 
-            => new CommandInfo(0,Address16.Empty, asci16.Null, asci32.Null, BinaryCode.Empty, asci32.Null, asci32.Null, asci16.Null, OpCodeId.INVALID);        
+            => new CommandInfo(0, Address32.Empty, Address16.Empty, asci16.Null, asci32.Null, BinaryCode.Empty, asci32.Null, asci32.Null, asci16.Null, OpCodeId.INVALID);        
         
         public int Sequence 
             => Seq;
         
         public int Seq;
 
-        public Address16 Offset;
+        public Address32 GlobalOfset;
+
+        public Address16 LocalOffset;
 
 		public asci16 Mnemonic;
 		
@@ -64,10 +68,11 @@ namespace Z0.Asm.Data
         public OpCodeId CodeId;
 
         [MethodImpl(Inline)]
-        public CommandInfo(int Seq, Address16 Offset, asci16 Mnemonic, asci32 OpCode, BinaryCode Encoded, asci32 InstructionFormat, asci32 InstructionCode, asci16 CpuId, OpCodeId Id)
+        public CommandInfo(int Seq, Address32 GlobalOffset, Address16 LocalOffset, asci16 Mnemonic, asci32 OpCode, BinaryCode Encoded, asci32 InstructionFormat, asci32 InstructionCode, asci16 CpuId, OpCodeId Id)
         {
             this.Seq = Seq;
-            this.Offset = Offset;
+            this.GlobalOfset = GlobalOffset;
+            this.LocalOffset = LocalOffset;
             this.Mnemonic = Mnemonic;
             this.OpCode = OpCode;
             this.Encoded = Encoded;
@@ -93,7 +98,8 @@ namespace Z0.Asm.Data
         {
             var formatter = Records.Formatter<F>();
             formatter.DelimitField(F.Sequence, Seq);
-            formatter.DelimitField(F.Offset, Offset);
+            formatter.DelimitField(F.GlobalOffset, GlobalOfset);
+            formatter.DelimitField(F.LocalOffset, LocalOffset);
             formatter.DelimitField(F.Mnemonic, Mnemonic);
             formatter.DelimitField(F.OpCode, OpCode);
             formatter.DelimitField(F.Encoded, Encoded);

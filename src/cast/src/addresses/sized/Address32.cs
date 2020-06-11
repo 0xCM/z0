@@ -38,6 +38,10 @@ namespace Z0
             => new Address32(offset);
 
         [MethodImpl(Inline)]
+        public static implicit operator Address32(uint src)
+            => new Address32(src);
+
+        [MethodImpl(Inline)]
         public static Address32 operator+(Address32 x, uint y)
             => From((uint)(x.Location + y));
 

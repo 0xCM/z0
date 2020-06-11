@@ -10,58 +10,23 @@ namespace Z0
     using static Konst;
 
 
-    [ApiHost]
-    public readonly struct MemoryOffsets : IApiHost<MemoryOffsets>, IReadOnlyIndex<MemoryOffset>
+    public readonly struct MemoryOffsets : IReadOnlyIndex<MemoryOffset>
     {
         readonly MemoryOffset[] Offsets;
         
-        [Op, MethodImpl(Inline)]
-        public static MemoryOffsets from(params MemoryOffset[] src)
-            => new MemoryOffsets(src);
-
-        [Op, MethodImpl(Inline)]
-        public static MemoryOffset define(MemoryAddress @base, byte offset)
-            => new MemoryOffset(@base, offset, NumericWidth.W8);
-
-        [Op, MethodImpl(Inline)]
-        public static MemoryOffset define(MemoryAddress @base, ushort offset)
-            => new MemoryOffset(@base, offset, NumericWidth.W16);
-
-        [Op, MethodImpl(Inline)]
-        public static MemoryOffset define(MemoryAddress @base, uint offset)
-            => new MemoryOffset(@base, offset, NumericWidth.W32);
-
-        [Op, MethodImpl(Inline)]
-        public static MemoryOffset define(MemoryAddress @base, ulong offset)
-            => new MemoryOffset(@base, offset, NumericWidth.W64);
-
-        [Op, MethodImpl(Inline)]
-        public static MemoryOffset from(MemoryAddress @base, MemoryAddress src)
-        {
-            var delta = src - @base;
-
-            if(delta <= byte.MaxValue)
-                return define(@base, (byte)delta);
-            else if(delta <= ushort.MaxValue)
-                return define(@base, (ushort)delta);
-            else if(delta <= uint.MaxValue)
-                return define(@base, (uint)delta);
-            else
-                return define(@base, delta);
-        }
 
         [MethodImpl(Inline)]
         public static MemoryOffset legacy(MemoryAddress @base, MemoryAddress relative)
         {
             var offset = @base.Location - relative.Location;
             if(offset <= byte.MaxValue)
-                return define(@base, (byte)offset);
+                return Addresses.offset(@base, (byte)offset);
             else if(offset <= ushort.MaxValue)
-                return define(@base, (ushort)offset);
+                return Addresses.offset(@base, (ushort)offset);
             else if(offset <= uint.MaxValue)
-                return define(@base, (uint)offset);
+                return Addresses.offset(@base, (uint)offset);
             else
-                return define(@base, offset);
+                return Addresses.offset(@base, (ulong)offset);
         }
 
         [MethodImpl(Inline)]
@@ -77,7 +42,7 @@ namespace Z0
             => new MemoryOffsets(src.ToArray());
 
         [MethodImpl(Inline)]
-        MemoryOffsets(MemoryOffset[] src)
+        internal MemoryOffsets(MemoryOffset[] src)
         {
             this.Offsets = src;
         }

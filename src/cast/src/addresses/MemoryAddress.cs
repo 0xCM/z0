@@ -11,83 +11,17 @@ namespace Z0
     using static Konst;
 
     
-    static class MUtil
-    {
-        [MethodImpl(Inline)]
-        static unsafe void* pvoid<T>(ref T src)
-            => Unsafe.AsPointer(ref src); 
-
-        [MethodImpl(Inline)]
-        static unsafe T* ptr<T>(ref T src)
-            where T : unmanaged
-                => (T*)pvoid(ref src);
-
-        [MethodImpl(Inline)]
-        static unsafe T* cptr<T>(in T src)
-            where T : unmanaged
-                => ptr(ref Control.edit(in src));
-
-        /// <summary>
-        /// Presents a readonly reference as a generic pointer which should intself be considered constant
-        /// but, as far as the author is aware, no facility within the language can encode that constraint
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe T* constptr<T>(in T src)
-            where T : unmanaged
-                => cptr(in src);
-
-    }
-    
-    [ApiHost]
-    public readonly struct MemoryAddress : 
-        IAddress<MemoryAddress,W64,ulong>, 
-        IAddressable, 
-        IIdentification<MemoryAddress>
+    public readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable, IIdentification<MemoryAddress>
     {
         public ulong Location {get;}
-        
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe ref T toRef<T>(MemoryAddress src)
-            => ref src.ToRef<T>();
-         
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe MemoryAddress from<T>(in T src)
-            where T : unmanaged
-                => Control.gptr<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe Span<T> edit<T>(MemoryAddress src, int length)
-            => MemoryMarshal.CreateSpan(ref src.ToRef<T>(), length);
-
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> edit(MemoryAddress src, int length)
-            => MemoryMarshal.CreateSpan(ref src.ToRef<byte>(), length);
-
-        [MethodImpl(Inline), Op]
-        public static unsafe ReadOnlySpan<byte> cover(MemoryAddress src, int length)
-            => MemoryMarshal.CreateReadOnlySpan(ref src.ToRef<byte>(), length);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe ReadOnlySpan<T> cover<T>(MemoryAddress src, int length)
-            => MemoryMarshal.CreateReadOnlySpan(ref src.ToRef<T>(), length);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress define(long location)
-            => new MemoryAddress((ulong)location);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress define(ulong location)
-            => new MemoryAddress(location);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress define(IntPtr location)
-            => new MemoryAddress((ulong)location.ToInt64());
+        [MethodImpl(Inline)]
+        public static unsafe MemoryAddress From(ulong src)
+            => Addresses.address(src);
         
         [MethodImpl(Inline)]
         public unsafe static implicit operator MemoryAddress(void* p)
-            => define((ulong)p);
+            => Addresses.address(p);
         
         public static MemoryAddress Empty 
             => new MemoryAddress(0);
@@ -137,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(ulong src)
-            => define(src);
+            => Addresses.address(src);
 
         [MethodImpl(Inline)]
         public static implicit operator long(MemoryAddress src)
@@ -149,23 +83,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(long src)
-            => define(src);
+            => Addresses.address(src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(int src)
-            => define(src);
+            => Addresses.address(src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(ushort src)
-            => define(src);
+            => Addresses.address(src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(IntPtr src)
-            => define((ulong)src);
+            => Addresses.address(src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(short src)
-            => define(src);
+            => Addresses.address(src);
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(MemoryAddress src)
@@ -208,7 +142,7 @@ namespace Z0
             => new MemoryAddress(a.Location - b.Location);
 
         [MethodImpl(Inline)]
-        MemoryAddress(ulong absolute)
+        internal MemoryAddress(ulong absolute)
             => Location = absolute;
 
         public string Format()

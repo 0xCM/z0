@@ -49,8 +49,11 @@ namespace Z0.Asm.Data
                     case F.Sequence:
                         parser.Parse(cell, out dst.Seq);
                         break;                    
-                    case F.Offset:
-                        parser.Parse(cell, out dst.Offset);
+                    case F.GlobalOffset:
+                        parser.Parse(cell, out dst.GlobalOfset);
+                        break;                    
+                    case F.LocalOffset:
+                        parser.Parse(cell, out dst.LocalOffset);
                         break;                    
                     case F.Mnemonic:
                         parser.Parse(cell, out dst.Mnemonic);

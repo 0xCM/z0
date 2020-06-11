@@ -32,6 +32,11 @@ namespace Z0
             return hashCode;
         }
 
+        [MethodImpl(Inline)]
+        public static Hashed<C> hash<C>(C content)
+            where C : struct
+                => new Hashed<C>(content);
+
         /// <summary>
         /// Creates a combined/unsigned hash code
         /// </summary>

@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Runtime.Intrinsics;
 
     using Z0.Asm.Data;
 
@@ -102,8 +102,23 @@ namespace Z0.Asm
         readonly struct CodeProcessorSink : IDataSink<UriCode>, IDataSink<UriHex>
         {
             readonly Dictionary<Mnemonic, ArrayBuilder<CommandInfo>> Index;
+            
+            readonly int[] Sequence;
 
-            readonly Dictionary<Mnemonic, int> Sequence;
+            readonly uint[] Offset;
+
+
+            int NextSequence
+            {
+                [MethodImpl(Inline)]
+                get => Sequence[0]++;
+            }
+            
+            Address32 NextOffset
+            {
+                [MethodImpl(Inline)]
+                get => Offset[0]++;
+            }
 
             readonly IAsmFunctionDecoder Decoder;
 
@@ -119,7 +134,9 @@ namespace Z0.Asm
             {
                 Decoder = decoder;
                 Index = new Dictionary<Mnemonic, ArrayBuilder<CommandInfo>>();
-                Sequence = new Dictionary<Mnemonic, int>();
+                
+                Sequence = new int[1];
+                Offset = new uint[1];
                 MnemonicParse = MnemonicParser.Create();
                 StatementParse = AsmStatementParser.Create(MnemonicParse);
             }
@@ -161,12 +178,11 @@ namespace Z0.Asm
                 ushort offset = 0;
                 for(var i=0; i<asm.Count; i++)   
                 { 
-                    var inxs = asm[i];
-                    var length = inxs.ByteLength;
-                    var encoded = bytes.Slice(offset, length);
-                    var address = Address16.From(offset);
-                    offset += (ushort)length;
-                    Process(address, encoded, asm[i]);
+                    var instruction = asm[i];
+                    var size = (ushort)instruction.ByteLength;
+                    var encoded = bytes.Slice(offset, size);
+                    Process(Address16.From(offset), encoded, asm[i]);
+                    offset += size;
                 }
             }
 
@@ -174,35 +190,20 @@ namespace Z0.Asm
             void Process(in LocatedCode code, in AsmInstructionList asm)
             {
                 var bytes = code.Bytes;
-                var offset = 0;
+
+                ushort offset = 0;
 
                 for(var i=0; i<asm.Count; i++)    
                 {
-                    var inxs = asm[i];
-                    var length = inxs.ByteLength;
-                    var encoded = bytes.Slice(offset, length);
-                    var address = Address16.From((ushort)offset);
-                    offset += length;
-                    Process(address ,encoded, asm[i]);
+                    var instruction = asm[i];
+                    var size = (ushort)instruction.ByteLength;
+                    var encoded = bytes.Slice(offset, size);
+                    Process(Address16.From(offset) ,encoded, asm[i]);
+                    offset += size;
                 }
             }
 
-            int NextSequence(Mnemonic mnemonic)                        
-            {
-                if(Sequence.TryGetValue(mnemonic, out var seq))
-                {
-                    var last = seq;
-                    Sequence[mnemonic] = ++last;
-                    return last;
-                }
-                else
-                {
-                    var last = -1;
-                    Sequence[mnemonic] = ++last;
-                    return last;
-                }
-            }
-            
+
             static BinaryCode ToBinaryCode(ReadOnlySpan<byte> src)
             {
                 var length = src.Length;
@@ -218,15 +219,35 @@ namespace Z0.Asm
             ParseResult<AsmStatement> ParseStatement(string src)
                 => StatementParse.Parse(src);
 
-            void Process(Address16 offset, ReadOnlySpan<byte> encoded, in Instruction asm)
+            [MethodImpl(Inline)]
+            static ReadOnlySpan<char> Render(CpuidFeature src)
+            {
+                
+                return src.ToString();
+            }
+
+            static asci16 Render(ReadOnlySpan<CpuidFeature> src)
+            {
+                var count = src.Length;
+                var dst = default(Vector128<byte>);
+                for(var i=0; i<count; i++)
+                {
+                    var item = Render(Control.skip(src,i));
+                    var length = item.Length;
+                }
+                
+                return new asci16(dst);
+            }
+            
+            void Process(Address16 localOffset, ReadOnlySpan<byte> encoded, in Instruction asm)
             {
                 var mnemonic = asm.Mnemonic;
                 if(mnemonic != 0)
                 {
-                    //var statement = ParseStatement(asm.FormattedInstruction).ValueOrDefault(AsmStatement.Empty);
                     var record = new CommandInfo(
-                        Seq: NextSequence(mnemonic), 
-                        Offset: offset,
+                        Seq: NextSequence,
+                        LocalOffset: localOffset,
+                        GlobalOffset: NextOffset,
                         Mnemonic: mnemonic.ToString().ToUpper(),
                         OpCode: asm.InstructionCode.OpCode.Replace("o32 ", string.Empty),
                         Encoded: ToBinaryCode(encoded),

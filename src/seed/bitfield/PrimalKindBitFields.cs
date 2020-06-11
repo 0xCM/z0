@@ -59,8 +59,8 @@ namespace Z0
             => (byte)(((byte)Mask(i) & (byte)f.FieldValue) >> (int)StartPos(i));
 
         [MethodImpl(Inline), Op]
-        public static PrimalWidthL2 Width(PrimalKindBitField f)
-            => (PrimalWidthL2)SegData(f, Field.Width);
+        public static Pow2Width Width(PrimalKindBitField f)
+            => (Pow2Width)SegData(f, Field.Width);
 
         [MethodImpl(Inline), Op]
         public static PrimalKindId KindId(PrimalKindBitField f)

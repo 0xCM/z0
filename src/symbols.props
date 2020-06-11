@@ -16,6 +16,7 @@
     <Enums>$(Src)enums/z0.enums.csproj</Enums>
     <Typed>$(Src)typed/z0.typed.csproj</Typed>
     <Cast>$(Src)cast/z0.cast.csproj</Cast>
+    <Stacks>$(Src)stacks/z0.stacks.csproj</Stacks>
     <Contained>$(Src)contained/z0.contained.csproj</Contained>
     
     <ResV>$(Src)resv/z0.resv.csproj</ResV>

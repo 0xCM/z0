@@ -12,6 +12,8 @@ namespace Z0
 
     public readonly struct MemoryRef : IAddressable<MemoryRef>, ITextual, IEquatable<MemoryRef>
     {
+        readonly Vector128<ulong> Data;        
+
         [MethodImpl(Inline)]
         public static MemoryRef define(MemoryAddress address, ByteSize size)
             => new MemoryRef(address,size);
@@ -34,16 +36,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe ReadOnlySpan<byte> cover(MemoryRef src)
-            => MemoryAddress.cover(src.Address, src.Length);        
+            => Addresses.cover(src.Address, src.Length);        
 
         [MethodImpl(Inline)]
         public unsafe static MemoryRef From(ReadOnlySpan<byte> src)
             => new MemoryRef(Control.gptr(Control.head(src)), src.Length);
 
         public static MemoryRef Empty => new MemoryRef(default(Vector128<ulong>));
-        
-        readonly Vector128<ulong> Data;        
-        
+                
         ulong Lo
         {
             [MethodImpl(Inline)]
@@ -109,11 +109,11 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
-            => MemoryAddress.cover(Address, Length);
+            => Addresses.cover(Address, Length);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
-            => MemoryAddress.cover<T>(Address, Length);
+            => Addresses.cover<T>(Address, Length);
        
         [MethodImpl(Inline)]
         public uint Hash()

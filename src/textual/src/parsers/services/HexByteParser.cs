@@ -29,12 +29,21 @@ namespace Z0
             }
         }
 
+        [MethodImpl(Inline)]
+        public bool HasPreSpec(string src) 
+            => src.TrimStart().StartsWith(HexSpecs.PreSpec);
+
+        [MethodImpl(Inline)]
+        public bool HasPostSpec(string src) 
+            => src.TrimEnd().EndsWith(HexSpecs.PostSpec);
+
         /// <summary>
-        /// Parses a hex byte
+        /// Parses the Hex digit if possible; otherwise raises an error
         /// </summary>
-        /// <param name="src">hex text</param>
-        public byte ParseByte(string src)    
-            => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline)]
+        public ParseResult<byte> Parse(char c)
+            => HexSpecs.Parse(c);
 
         /// <summary>
         /// Parses a space-delimited sequence of hex text
@@ -58,11 +67,10 @@ namespace Z0
             => ParseData(text).ValueOrDefault(@default);
 
         /// <summary>
-        /// Parses the Hex digit if possible; otherwise raises an error
+        /// Parses a hex byte
         /// </summary>
-        /// <param name="c">The source character</param>
-        [MethodImpl(Inline)]
-        public ParseResult<byte> Parse(char c)
-            => HexSpecs.Parse(c);
+        /// <param name="src">hex text</param>
+        public byte ParseByte(string src)    
+            => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
     }
 }    

@@ -70,9 +70,10 @@ public enum PartId : ulong
 
     Stores = 127,
 
+    Stacks = 128,
+
     Spans = 2022,
     
-
     IdentityTest = Identity | Test,
 
     LogixTest = Logix | Test, 

@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static MemoryAddress location<T>(in T src)
             where T : unmanaged
-                => MemoryAddress.from(src);
+                => Addresses.reference(src);
     }
 }

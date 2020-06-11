@@ -41,9 +41,12 @@ namespace Z0.Asm.Data
 
         Enc = 26,
 
+        Address16 = 6,
+
+        Address32 = 12,
+
         Address64 = 16,
 
-        Address16 = 6,
 
         YeaOrNea = C.Bool,
 

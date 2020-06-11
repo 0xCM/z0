@@ -78,10 +78,10 @@ namespace Z0.Asm.Data
             i = 0;
             var j=0;
             var @base = head(dst);
-            seek(offsets, j++) = MemoryOffsets.from(@base, skip(dst, i++));
-            seek(offsets, j++) = MemoryOffsets.from(@base, skip(dst, i++));
-            seek(offsets, j++) = MemoryOffsets.from(@base, skip(dst, i++));
-            seek(offsets, j++) = MemoryOffsets.from(@base, skip(dst, i++));
+            seek(offsets, j++) = Addresses.offset(@base, skip(dst, i++));
+            seek(offsets, j++) = Addresses.offset(@base, skip(dst, i++));
+            seek(offsets, j++) = Addresses.offset(@base, skip(dst, i++));
+            seek(offsets, j++) = Addresses.offset(@base, skip(dst, i++));
 
             var rendered = AddressFormatter.Format(offsets);
             rendered.Iter(term.print);

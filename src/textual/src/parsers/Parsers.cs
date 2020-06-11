@@ -37,7 +37,7 @@ namespace Z0
                 => NumericParser.infallible<T>();
 
         [MethodImpl(Inline)]
-        public static ITextParser<MemoryAddress> address()
+        public static MemoryAddressParser address()
             => MemoryAddressParser.Service;
 
         [MethodImpl(Inline)]

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static PrimalWidthL2;
+    using static Pow2Width;
     using static Sign8;
 
     using K = PrimalKindId;

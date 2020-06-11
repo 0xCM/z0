@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public interface IDataParser<T> : ITextParser<T>
         where T : unmanaged
     {
@@ -15,5 +14,5 @@ namespace Z0
 
         T[] ParseData(string text, T[] @default)
             => ParseData(text).ValueOrDefault(@default);
-    }
+    }    
 }
