@@ -20,5 +20,23 @@ namespace Z0
         public static Publication<R> Flow<R>(R[] src, FilePath dst)
             where R : ITabular
                 => new Publication<R>(src,dst);
+
+        public static ListPublisher ListPubliser
+        {
+            [MethodImpl(Inline)]
+            get => Z0.ListPublisher.Service;
+        }
+
+        public static LiteralPublisher LiteralPublisher
+        {
+            [MethodImpl(Inline)]
+            get => Z0.LiteralPublisher.Service;
+        }
+
+        public static RecordPublisher RecordPubliser
+        {
+            [MethodImpl(Inline)]
+            get => Z0.RecordPublisher.Service;
+        }
     }   
 }

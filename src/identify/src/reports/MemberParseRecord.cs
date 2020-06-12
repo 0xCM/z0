@@ -9,11 +9,6 @@ namespace Z0
     using F = MemberParseField;
     using R = MemberParseRecord;
 
-    public enum MemberParseRecordAspect : uint
-    {
-        FieldCount = 8,
-    }
-
     public enum MemberParseField : uint
     {
         Seq = 0 | 12 << 16,
@@ -33,7 +28,6 @@ namespace Z0
         Data = 7 | 1 << 16
     }    
 
-
     public readonly struct MemberParseRecord : ITabular<F,R>
     {                                
         public const int FieldCount = 8;
@@ -45,8 +39,8 @@ namespace Z0
         {
             try
             {
-                var fields = src.SplitClean(MemberParseReport.DefaultDelimiter);
-                if(fields.Length !=  (uint)MemberParseRecordAspect.FieldCount)
+                var fields = src.SplitClean(Tabular.DefaultDelimiter);
+                if(fields.Length !=  (uint)FieldCount)
                     return ParseResult.Fail<MemberParseRecord>(src,"No data");
 
                 var index = 0;
@@ -65,7 +59,7 @@ namespace Z0
                 var data = LocatedCode.Define(address, dataParser.ParseData(fields[index++], Control.array<byte>()));  
                           
                 return ParseResult.Success(src, new R(
-                    Sequence: seq, 
+                    Seq: seq, 
                     SourceSequence: srcSeq, 
                     Address: address, 
                     Length: len, 
@@ -84,7 +78,7 @@ namespace Z0
         public static R From(in ParsedMember extract, int seq)
             => new R
                 (
-                    Sequence : seq,
+                    Seq : seq,
                     SourceSequence: extract.Sequence,
                     Address : extract.Address,
                     Length : extract.Encoded.Length,
@@ -95,7 +89,7 @@ namespace Z0
                 );
 
         public MemberParseRecord(
-            int Sequence, 
+            int Seq, 
             int SourceSequence, 
             MemoryAddress Address, 
             int Length, 
@@ -105,7 +99,7 @@ namespace Z0
             LocatedCode Data
             )
         {
-            this.Seq = Sequence;
+            this.Seq = Seq;
             this.SourceSeq = SourceSequence;                
             this.Address = Address;
             this.Length = Length; 
@@ -156,7 +150,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = Model.Formatter.Reset(delimiter);            
+            var dst = Tabular.formatter<F>(delimiter);            
             dst.Append(F.Seq, Seq);
             dst.Delimit(F.SourceSeq, SourceSeq);
             dst.Delimit(F.Address, Address);
@@ -166,8 +160,6 @@ namespace Z0
             dst.Delimit(F.OpSig, OpSig);
             dst.Delimit(F.Data, Data.Format());
             return dst.Format();            
-        }
-
-        static Report<F,R> Model => Report<F,R>.Empty;
+        }        
     }
 }

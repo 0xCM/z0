@@ -21,11 +21,14 @@ namespace Z0
 
     public interface IArchives : IStateless<Archives>
     {        
-        ISemanticArchive Semantic => SemanticArchive.Service;
+        ISemanticArchive Semantic 
+            => SemanticArchive.Service;
 
-        FolderPath DefaultRootDir => Env.Current.LogDir;
+        FolderPath DefaultRootDir 
+            => Env.Current.LogDir;
 
-        IUriHexReader UriHexReader => new UriHexReader();
+        IUriHexReader UriHexReader 
+            => new UriHexReader();
 
         [MethodImpl(Inline)]
         IUriHexArchive UriBitsArchive(FolderPath root = null)
@@ -52,8 +55,6 @@ namespace Z0
         
         [MethodImpl(Inline)]
         IHostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
-            => new HostCaptureArchive(root ?? DefaultRootDir, host);
-        
-
+            => new HostCaptureArchive(root ?? DefaultRootDir, host);    
     }
 }

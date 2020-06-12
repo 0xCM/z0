@@ -632,11 +632,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static int padding<E>(E pad)
+        public static int width<E>(E field)
             where E : unmanaged, Enum
         {
-            var _pad = Control.scalar<E,uint>(pad) >> 16;
-            return (int)_pad;
+            var w = Control.scalar<E,uint>(field) >> 16;
+            return (int)w;
         }
 
         /// <summary>

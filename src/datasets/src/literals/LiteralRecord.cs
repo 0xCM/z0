@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     
     using F = LiteralTableField;
     using T = LiteralRecord;
@@ -37,19 +37,24 @@ namespace Z0
             this.BitString = BitString;
             this.Description = Description ?? string.Empty;
         }
-
-        static readonly TabularFormat<F> Format = Tabular.format<F>();
-        
-        static readonly FieldInfo[] Fields = typeof(LiteralRecord).Fields().Public().Instance();
-        
-        static int FieldCount => Math.Min(Format.FieldCount, Fields.Length);
-
+                    
         public string DelimitedText(char delimiter)
         {
-            var formatter = FieldFormatter<F>.Default;
-            for(var i=0; i<FieldCount; i++)
-                formatter.Delimit(Format[i].Specifier, Fields[i].GetValue(this));
+            var formatter = Tabular.formatter<F>(delimiter);
+            formatter.Append(F.TypeName, TypeName);
+            formatter.Delimit(F.Index, Index);
+            formatter.Delimit(F.Name, Name);
+            formatter.Delimit(F.Hex, Hex);
+            formatter.Delimit(F.BitString, BitString);
+            formatter.Delimit(F.Description, Description);
             return formatter.ToString();
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => DelimitedText(Tabular.DefaultDelimiter);
+
+        public override string ToString()
+            => Format();
     }
 }

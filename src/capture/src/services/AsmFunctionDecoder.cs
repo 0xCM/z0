@@ -70,7 +70,7 @@ namespace Z0.Asm
                     dst.Add(z);
                     f(z);
                 }
-                return AsmInstructionList.Create(dst.ToArray(),src);
+                return AsmInstructionList.Create(dst.ToArray(), src);
 
             }
             catch(Exception e)
@@ -99,7 +99,7 @@ namespace Z0.Asm
                 var instructions = new Asm.Instruction[decoded.Count];
                 var formatted = formatter.FormatInstructions(decoded, @base);
                 for(var i=0; i<instructions.Length; i++)
-                    instructions[i] = IceExtractors.Inxs(decoded[i],formatted[i]);
+                    instructions[i] = IceExtractors.Inxs(decoded[i], formatted[i]);
                 return AsmInstructions.Create(instructions, code);
             }
             catch(Exception e)

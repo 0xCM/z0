@@ -17,7 +17,9 @@ namespace Z0
     /// </summary>
     public readonly struct asci4 : IAsciSequence<asci4,N>
     {        
-        public static asci4 Empty => new asci4(0);
+        public static asci4 Blank => new asci4(0x20202020);
+
+        public static asci4 Null => new asci4(0);
 
         public const int Size = 4;
 
@@ -68,7 +70,7 @@ namespace Z0
         public asci4 Zero
         {
             [MethodImpl(Inline)]
-            get => Empty;
+            get => Null;
         }
 
         public int MaxLength

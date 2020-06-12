@@ -7,20 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-
-    static class EnumReader
-    {
-        /// <summary>
-        /// Reads a generic numeric value from a boxed enum
-        /// </summary>
-        /// <param name="e">The enum value to reinterpret</param>
-        /// <typeparam name="V">The numeric value type</typeparam>
-        [MethodImpl(Inline)]
-        public static V numeric<V>(Enum e)
-            where V : unmanaged
-                => (V)Convert.ChangeType(e, e.GetTypeCode());
-    }
+    using static Konst;
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class TabularFieldAttribute : Attribute
@@ -34,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static T read<T>(Enum value)
             where T : unmanaged 
-                => EnumReader.numeric<T>(value);
+                => (T)Convert.ChangeType(value, value.GetTypeCode());
              
         public TabularFieldAttribute(object id)
         {

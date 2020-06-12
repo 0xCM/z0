@@ -7,14 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public class Report<R> : IReport<R>
         where R : ITabular<R>
     {             
         public static Report<R> Empty => new Report<R>();
-
-        public const char DefaultDelimiter = Chars.Pipe;
 
         public R[] Records {get;}
 
@@ -22,8 +20,8 @@ namespace Z0
 
         public Report()
         {
-            this.Records = new R[0]{};
-            this.Format = TabularFormats.derive<R>();
+            Records = new R[0]{};
+            Format = TabularFormats.derive<R>();
         }
 
         public Report(R[] records)
@@ -32,13 +30,29 @@ namespace Z0
             Records = records;
         }
         
-        public string[] HeaderLabels { [MethodImpl(Inline)] get => Format.Headers; }
+        public string[] HeaderLabels 
+        { 
+            [MethodImpl(Inline)] 
+            get => Format.Headers; 
+        }
     
-        public int FieldCount { [MethodImpl(Inline)] get => Format.FieldCount; }
+        public int FieldCount 
+        {
+             [MethodImpl(Inline)] 
+             get => Format.FieldCount; 
+        }
 
-        public R this[int index] { [MethodImpl(Inline)] get => Records[index]; }
+        public R this[int index] 
+        { 
+            [MethodImpl(Inline)] 
+            get => Records[index]; 
+        }
 
-        public int RecordCount { [MethodImpl(Inline)] get => Records.Length; }        
+        public int RecordCount 
+        { 
+            [MethodImpl(Inline)] 
+            get => Records.Length; 
+        }
 
         [MethodImpl(Inline)]
         public Option<FilePath> Save(FilePath dst) 
@@ -57,12 +71,12 @@ namespace Z0
         public Report(R[] records)
             : base(records)
         {
-            Formatter = FieldFormat.formatter<F>();
+            Formatter = Tabular.formatter<F>();
         }
 
         public Report()
         {
-            Formatter = FieldFormat.formatter<F>();
+            Formatter = Tabular.formatter<F>();
         }
 
         public readonly FieldFormatter<F> Formatter;
@@ -78,13 +92,13 @@ namespace Z0
         public Report(R[] records)
             : base(records)
         {
-            Formatter = FieldFormat.formatter<F>();
+            Formatter = Tabular.formatter<F>();
         }
 
         public Report()
             : base(new R[]{})
         {
-            Formatter = FieldFormat.formatter<F>();
+            Formatter = Tabular.formatter<F>();
         }
 
         public readonly FieldFormatter<F> Formatter;

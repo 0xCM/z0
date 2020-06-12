@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
-
     public struct TableLog : ITableLog
     {
         public static ITableLog Service => default(TableLog);
 
-        public Option<FilePath> Save<R>(R[] src, FilePath dst, FileWriteMode mode = FileWriteMode.Overwrite)
+        public Option<FilePath> Save<R>(R[] src, FilePath dst)
             where R : ITabular
-                => Save(src, TabularFormats.derive<R>(), dst, mode);
+                => Save(src, TabularFormats.derive<R>(), dst, FileWriteMode.Overwrite);
 
         public Option<FilePath> Save<R>(R[] data, TabularFormat format, FilePath dst, FileWriteMode mode = FileWriteMode.Overwrite)
             where R : ITabular

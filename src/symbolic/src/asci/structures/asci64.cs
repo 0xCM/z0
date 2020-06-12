@@ -15,6 +15,8 @@ namespace Z0
 
     public readonly struct asci64 : IAsciSequence<asci64,N>
     {
+        internal readonly Vector512<byte> Storage;        
+
         public static asci64 Blank => AsciCodes.init(n);
 
         public static asci64 Null => new asci64(Vector512<byte>.Zero);
@@ -22,8 +24,6 @@ namespace Z0
         public const int Size = 64;
 
         static N n => default;
-
-        internal readonly Vector512<byte> Storage;        
 
         [MethodImpl(Inline)]
         public static implicit operator asci64(string src)

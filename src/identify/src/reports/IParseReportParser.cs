@@ -5,13 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-   
-    using static Seed;
-    using static Memories;
 
     public interface IParseReportParser
     {
         ParseResult<MemberParseReport> Parse(FilePath src);
+    }
+
+    public interface IReportParser<T>
+        where T : ITabular
+    {
+        ParseResult<T[]> ParseRecords(FilePath src);
     }
 }

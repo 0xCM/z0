@@ -18,6 +18,8 @@ namespace Z0
     /// </summary>
     public readonly struct asci16 : IAsciSequence<asci16,N>
     {
+        internal readonly Vector128<byte> Storage;        
+
         public const int Size = 16;
         
         public static asci16 Blank => AsciCodes.init(n);
@@ -26,12 +28,9 @@ namespace Z0
 
         static N n => default;
 
-
         [MethodImpl(Inline)]
         public static asci16 init(AsciCharCode fill = AsciCharCode.Space)
             => new asci16(SymBits.vbroadcast(w128, (byte)fill));
-
-        internal readonly Vector128<byte> Storage;        
 
         [MethodImpl(Inline)]
         public static implicit operator asci16(string src)
@@ -116,7 +115,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public void CopyTo(Span<byte> dst)
             => AsciCodes.copy(this,dst);
- 
+
+        [MethodImpl(Inline)]
+        public void CopyTo(ref byte dst)
+            => AsciCodes.copy(this, ref dst);
+
          public override int GetHashCode()
             => Storage.GetHashCode();
 

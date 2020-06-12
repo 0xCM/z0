@@ -7,7 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     using F = CommandInfoField;
     using R = CommandInfo;
@@ -17,37 +17,39 @@ namespace Z0.Asm.Data
     {
         Sequence = 0 | (W.Sequence << W.Offset),
 
-        GlobalOffset = 1 | (W.Address32 << W.Offset),
-
-        LocalOffset = 2 | (W.Address16 << W.Offset),
-
-        Mnemonic = 3 | (W.Mnemonic << W.Offset), 
+        Address = 1 | (W.Address64 << W.Offset),
         
-        OpCode = 4 | (W.OpCode << W.Offset),  
+        GlobalOffset = 2 | (16 << W.Offset),
+
+        LocalOffset = 3 | (16 << W.Offset),
+
+        Mnemonic = 4 | (W.Mnemonic << W.Offset), 
         
-        Encoded = 5 | 32 << W.Offset,
-
-        InstructionFormat = 6 | (W.Instruction << W.Offset), 
-
-        InstructionCode = 7 | (W.Instruction << W.Offset), 
+        OpCode = 5 | (W.OpCode << W.Offset),  
         
-        CpuId = 8 | (W.CpuId << W.Offset),
+        Encoded = 6 | 32 << W.Offset,
 
-        CodeId = 9 | (20 << W.Offset),                          
+        InstructionFormat = 7 | (W.Instruction << W.Offset), 
+
+        InstructionCode = 8 | (W.Instruction << W.Offset), 
+        
+        CpuId = 9 | (W.CpuId << W.Offset),
+
+        CodeId = 10 | (20 << W.Offset),
     }
 
     public struct CommandInfo : IRecord<F,R>
     {                   
-        public static string FormatHeader(char delimiter = Chars.Pipe)
+        public static string FormatHeader(char delimiter = Tabular.DefaultDelimiter)
             => Records.Header<F>().Render(delimiter);
         
         public static CommandInfo Empty 
-            => new CommandInfo(0, Address32.Empty, Address16.Empty, asci16.Null, asci32.Null, BinaryCode.Empty, asci32.Null, asci32.Null, asci16.Null, OpCodeId.INVALID);        
-        
-        public int Sequence 
-            => Seq;
-        
-        public int Seq;
+            => new CommandInfo(0, MemoryAddress.Empty, Address32.Empty, Address16.Empty, asci16.Null, 
+                    asci32.Null, BinaryCode.Empty, asci32.Null, asci32.Null, asci16.Null, OpCodeId.INVALID);        
+    
+        public int Sequence;
+
+        public MemoryAddress Address;
 
         public Address32 GlobalOfset;
 
@@ -68,9 +70,10 @@ namespace Z0.Asm.Data
         public OpCodeId CodeId;
 
         [MethodImpl(Inline)]
-        public CommandInfo(int Seq, Address32 GlobalOffset, Address16 LocalOffset, asci16 Mnemonic, asci32 OpCode, BinaryCode Encoded, asci32 InstructionFormat, asci32 InstructionCode, asci16 CpuId, OpCodeId Id)
+        public CommandInfo(int Sequence, MemoryAddress Address, Address32 GlobalOffset, Address16 LocalOffset, asci16 Mnemonic, asci32 OpCode, BinaryCode Encoded, asci32 InstructionFormat, asci32 InstructionCode, asci16 CpuId, OpCodeId Id)
         {
-            this.Seq = Seq;
+            this.Sequence = Sequence;
+            this.Address = Address;
             this.GlobalOfset = GlobalOffset;
             this.LocalOffset = LocalOffset;
             this.Mnemonic = Mnemonic;
@@ -97,17 +100,21 @@ namespace Z0.Asm.Data
         public string Format()
         {
             var formatter = Records.Formatter<F>();
-            formatter.DelimitField(F.Sequence, Seq);
-            formatter.DelimitField(F.GlobalOffset, GlobalOfset);
-            formatter.DelimitField(F.LocalOffset, LocalOffset);
-            formatter.DelimitField(F.Mnemonic, Mnemonic);
-            formatter.DelimitField(F.OpCode, OpCode);
-            formatter.DelimitField(F.Encoded, Encoded);
-            formatter.DelimitField(F.InstructionFormat, InstructionFormat);
-            formatter.DelimitField(F.InstructionCode, InstructionCode);
-            formatter.DelimitField(F.CpuId, CpuId);
-            formatter.DelimitField(F.CodeId, CodeId);
+            formatter.Delimit(F.Sequence, Sequence);
+            formatter.Delimit(F.Address, Address);
+            formatter.Delimit(F.GlobalOffset, GlobalOfset);
+            formatter.Delimit(F.LocalOffset, LocalOffset);
+            formatter.Delimit(F.Mnemonic, Mnemonic);
+            formatter.Delimit(F.OpCode, OpCode);
+            formatter.Delimit(F.Encoded, Encoded);
+            formatter.Delimit(F.InstructionFormat, InstructionFormat);
+            formatter.Delimit(F.InstructionCode, InstructionCode);
+            formatter.Delimit(F.CpuId, CpuId);
+            formatter.Delimit(F.CodeId, CodeId);
             return formatter.ToString();
         }
+
+        int ISequential.Sequence => 0;
+
     }
 }

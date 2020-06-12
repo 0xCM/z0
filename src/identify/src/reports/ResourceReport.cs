@@ -75,7 +75,7 @@ namespace Z0
             where C : ITextual
             where F : unmanaged, Enum
         {
-            var pad = FieldFormat.width(field);
+            var pad = Tabular.width(field);
             sb.Append($"{delimiter} ");            
             sb.Append($"{content?.Format()}".PadRight(pad));
         }

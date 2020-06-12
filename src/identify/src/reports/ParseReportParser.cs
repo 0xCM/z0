@@ -5,16 +5,48 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-   
-    using static Seed;
-    using static Memories;
 
-    public readonly struct ParseReportParser : IParseReportParser
+    public readonly struct ParseReportParser : IParseReportParser, IReportParser<MemberParseRecord>
     {
-        public static IParseReportParser Service => default(ParseReportParser);
+        public static ParseReportParser Service => default;
 
         public ParseResult<MemberParseReport> Parse(FilePath src)
-            => MemberParseReport.Load(src);
+        {
+            // var attempts = src.ReadLines().Skip(1).Select(MemberParseRecord.Parse);
+            // var failed = attempts.Where(r => !r.Succeeded);
+            // var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
+            // if(failed.Length != 0 && success.Length == 0)
+            //     return ParseResult.Fail<MemberParseReport>(src.Name, failed[0].Reason);            
+
+            // if(failed.Length != 0)
+            //     term.warn($"Not all records from {src} parsed successfully");
+
+            var result = ParseRecords(src);
+            if(result.Succeeded && (result.Value.Length != 0))
+            {
+                var records = result.Value;        
+                var host = records[0].Uri.Host;
+                var report = MemberParseReport.Create(host, records);
+                return ParseResult.Success(src.Name, report);
+            }
+            else
+            {
+                if(result.Succeeded)
+                    return ParseResult.Success(src.Name, MemberParseReport.Empty);
+                else
+                    return ParseResult.Fail<MemberParseReport>(src.Name);
+            }
+        }
+
+        public ParseResult<MemberParseRecord[]> ParseRecords(FilePath src)
+        {
+            var attempts = src.ReadLines().Skip(1).Select(MemberParseRecord.Parse);
+            var failed = attempts.Where(r => !r.Succeeded);
+            var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
+            if(failed.Length != 0 && success.Length == 0)
+                return ParseResult.Fail<MemberParseRecord[]>(src.Name, failed[0].Reason);            
+            else
+                return ParseResult.Success(src.Name, success);
+        }
     }    
 }

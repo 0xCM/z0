@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct TabularFormat : ITextual
     {    
@@ -32,6 +32,9 @@ namespace Z0
         /// </summary>
         public readonly bool EmitHeader;
 
+        /// <summary>
+        /// The number of fields accounted for
+        /// </summary>
         public readonly int FieldCount;
 
         [MethodImpl(Inline)]
@@ -55,31 +58,30 @@ namespace Z0
         /// </summary>
         public string Format()
         {
-            var dst = new StringBuilder();
-            for(var i=0; i< Fields.Length; i++)
+            var dst = text.build();
+            for(var i=0; i< FieldCount; i++)
                 dst.AppendLine(this[i].Format());
             return dst.ToString();
         }
 
-        public string FormatHeader(char delimiter = Chars.Pipe)
+        public string FormatHeader()
         {
-            var dst = new StringBuilder();
+            var dst = text.build();
             for(var i=0; i<FieldCount; i++)
             {
                 if(i != 0)
                 {
-                    dst.Append(delimiter);
+                    dst.Append(Delimiter);
                     dst.Append(Chars.Space);
                 }
                 
                 var field = Fields[i];
-                dst.Append(field.Name.PadRight(field.Width));
+                var label = field.Name; 
+                dst.Append(label.PadRight(field.Width));
             }
+            
             return dst.ToString();
         }
-
-        public TabularFormat WithDelimiter(char delimiter)
-            => new TabularFormat(Fields, Headers, delimiter, EmitHeader);
 
         public override string ToString()
             => Format();

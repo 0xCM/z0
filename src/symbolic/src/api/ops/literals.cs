@@ -61,19 +61,5 @@ namespace Z0
 
             return dst;
         }
-
-        [MethodImpl(Inline), Op]
-        public static void literals(in char src, int count, ref AsciCharCode dst)
-        {
-            for(var i=0; i<count; i++)
-                seek(ref dst,i) = (AsciCharCode)skip(src,i);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static void literals(ReadOnlySpan<char> src, Span<AsciCharCode> dst)
-        {
-            var count = Math.Min(src.Length, dst.Length);
-            literals(in head(src), count, ref head(dst));
-        }
     }
 }

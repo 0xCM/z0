@@ -13,7 +13,7 @@ namespace Z0
     static class Tracing
     {
         public static int CasePadding
-            => FieldFormat.width(TestCaseField.Case);
+            => Tabular.width(TestCaseField.Case);
 
         public static string TracePrefix(object title, Type host, string caller)
             => string.Concat(ExecutingApp.Format(), Chars.FSlash, host.Name, Chars.FSlash, caller, Chars.LBrace, title, Chars.RBrace).PadRight(CasePadding);

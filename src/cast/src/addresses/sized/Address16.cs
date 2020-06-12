@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-
     public readonly struct Address16 : IAddress<Address16,W16,ushort>
     {
         public ushort Location {get;}
@@ -38,6 +37,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Address16 From(ushort offset)
             => new Address16(offset);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Address16(ushort src)
+            => From(src);
 
         [MethodImpl(Inline)]
         public static Address16 operator+(Address16 x, ushort y)

@@ -6,8 +6,6 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    using static Seed;
-
     using C = CommonFieldWidths;
 
     /// <summary>

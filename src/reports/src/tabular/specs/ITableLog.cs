@@ -16,9 +16,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source data</param>
         /// <param name="dst">The target file</param>
-        /// <param name="mode">The file creation mode</param>
         /// <typeparam name="R">The source type</typeparam>
-        Option<FilePath> Save<R>(R[] src, FilePath dst, FileWriteMode mode = FileWriteMode.Overwrite)
+        Option<FilePath> Save<R>(R[] src, FilePath dst)
             where R : ITabular;
     }
 }

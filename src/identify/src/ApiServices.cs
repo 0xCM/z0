@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using API = Z0;
 
     public readonly struct ApiServices
     {
-        public static IParseReportParser ParseReportParser 
-            => new ParseReportParser();
+        public static ParseReportParser ParseReportParser 
+            => API.ParseReportParser.Service;
 
         public static IApiReflected ApiReflected 
             => new ApiReflected();

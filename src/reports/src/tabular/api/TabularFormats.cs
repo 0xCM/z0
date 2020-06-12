@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     using F = TabularField;
     using A = TabularFieldAttribute;
@@ -20,9 +20,11 @@ namespace Z0
         /// Derives format configuration data from a type
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
         public static TabularFormat derive<T>()
             => derive(typeof(T));        
 
+        [MethodImpl(Inline)]
         public static string[] headers<T>()
             => derive<T>().Headers;
 
@@ -30,11 +32,11 @@ namespace Z0
         /// Derives field information from a reflected member
         /// </summary>
         /// <param name="src">The source member</param>
-        public static TabularField field(MemberInfo src)
+        static TabularField field(MemberInfo src)
             => src.Tag<TabularFieldAttribute>()
                   .MapRequired(attrib => new TabularField(attrib.Name, attrib.Index, attrib.Width));
         
-        public static TabularFormat derive(Type src)
+        static TabularFormat derive(Type src)
         {
             var props = from p in src.DeclaredProperties().Instance()
                         where p.Tagged<A>()
@@ -48,7 +50,7 @@ namespace Z0
             return new TabularFormat(members, headers(members));
         }
 
-        public static string[] headers(F[] fields)
+        static string[] headers(F[] fields)
         {
             var count = fields.Length;
             var headers = new string[count];

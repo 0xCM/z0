@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Seed;
     using static Memories;
 
     public readonly struct EnumGenerator
@@ -30,7 +29,6 @@ namespace Z0
             {
                 ref readonly var record = ref skip(records, i);
                 var literal = CreateLiteralEntity("", record);
-
 
             }
         }
@@ -81,17 +79,5 @@ namespace Z0
 
         EnumLiteralField CreateLiteralEntity(string declarer, in EnumLiteralRecord src)
             => Artifacts.EnumLiteral(declarer, src.Identifier, src.Sequence, src.Description, src.DataType, src.Value);
-
-        void Display(EnumLiteralRecord record)
-        {
-            var formatter = Records.Formatter<EnumLiteralRecordField>();
-            formatter.Reset();
-            formatter.DelimitField(EnumLiteralRecordField.Sequence, record.Sequence);
-            formatter.DelimitField(EnumLiteralRecordField.Identifier, record.Identifier);
-            formatter.DelimitField(EnumLiteralRecordField.Description, record.Description);
-            formatter.DelimitField(EnumLiteralRecordField.DataType, record.DataType);                
-            formatter.DelimitField(EnumLiteralRecordField.Value, record.Value);                
-            term.print(formatter.Render());
-        }
     }
 }

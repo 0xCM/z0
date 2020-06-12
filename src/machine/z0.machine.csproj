@@ -11,11 +11,10 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(AsD)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(AsmD)" />
-    <ProjectReference Include="$(Codes)" />
-
+    <ProjectReference Include="$(Stores)" />
   </ItemGroup>
 
 </Project>

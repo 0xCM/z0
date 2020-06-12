@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
 
     using Z0.Asm;
-    using Z0.Machines;
+    using Z0.Machine;
 
     using static Seed;
     using static Memories;
@@ -53,8 +53,6 @@ namespace Z0
             
             if(StartCpu)
                 RunCpu(context);
-            else
-                Machine.Run(context);   
         }
 
         public static void Main(params string[] args)

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0.Machine
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,47 +12,47 @@ namespace Z0.Machines
 
     partial struct FunctionModels
     {
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(byte src)
             where T : unmanaged
                 => canonical<byte,T>(src);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(sbyte src)
             where T : unmanaged
                 => canonical<sbyte,T>(src);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(short src)
             where T : unmanaged
                 => canonical<short,T>(src);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(ushort src)
             where T : unmanaged
                 => canonical<ushort,T>(src);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(int src)
             where T : unmanaged
                 => canonical<int,T>(src);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(uint src)
             where T : unmanaged
                 => canonical<uint,T>(src);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(long src)
             where T : unmanaged
                 => canonical<long,T>(src);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(float src)
             where T : unmanaged
                 => canonical<float,T>(src);
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public T canonical<T>(double src)
             where T : unmanaged
                 => canonical<double,T>(src);

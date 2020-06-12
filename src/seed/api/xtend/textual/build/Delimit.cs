@@ -12,8 +12,6 @@ namespace Z0
 
     partial class XTend
     {
-
-
         public static void Delimit<T>(this StringBuilder sb, T content, Padding pad, char delimiter = Chars.Pipe)
             where T : ITextual             
         {
@@ -26,14 +24,14 @@ namespace Z0
             where T : ITextual             
         {
             sb.Append(text.rspace(delimiter));            
-            sb.Append($"{content.Format()}".PadRight(text.padding(field)));
+            sb.Append($"{content.Format()}".PadRight(text.width(field)));
         }
 
         public static void Delimit<F>(this StringBuilder sb, F field, object content, char delimiter = Chars.Pipe)
             where F : unmanaged, Enum
         {
             sb.Append(text.rspace(delimiter));            
-            sb.Append($"{content}".PadRight(text.padding(field)));
+            sb.Append($"{content}".PadRight(text.width(field)));
         }
         
         public static void Delimit(this StringBuilder sb, object content, Padding pad, char delimiter = Chars.Pipe)

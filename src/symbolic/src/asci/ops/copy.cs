@@ -23,7 +23,15 @@ namespace Z0
             => Store(ptr(ref dst), src.Storage);            
 
         [MethodImpl(Inline), Op]
+        public static unsafe void copy(in asci32 src, ref byte dst)
+            => Store(ptr(ref dst), src.Storage);            
+
+        [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, Span<byte> dst)
+            => copy(src, ref head(dst));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe void copy(in asci32 src, Span<byte> dst)
             => copy(src, ref head(dst));
     }
 }

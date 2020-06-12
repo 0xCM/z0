@@ -7,15 +7,15 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     using F = CommandInfoField;
 
     [ApiHost]
-    public readonly struct OpCodeRecordParser : IApiHost<OpCodeRecordParser>
+    public readonly struct CommandInfoParser : IApiHost<CommandInfoParser>
     {
-        public static OpCodeRecordParser Service => default;
+        public static CommandInfoParser Service => default;
 
         [Op, MethodImpl(Inline)]
         public void Parse(in AppResourceDoc specs, Span<CommandInfo> dst)
@@ -47,7 +47,7 @@ namespace Z0.Asm.Data
                 switch((F)(byte)i)
                 {
                     case F.Sequence:
-                        parser.Parse(cell, out dst.Seq);
+                        parser.Parse(cell, out dst.Sequence);
                         break;                    
                     case F.GlobalOffset:
                         parser.Parse(cell, out dst.GlobalOfset);

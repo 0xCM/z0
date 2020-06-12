@@ -9,18 +9,18 @@ namespace Z0.Asm.Data
 
     using static Konst;
 
-    public readonly struct OpCodeRecordSet<T>
+    public readonly struct CommandRecordSet<T>
     {        
         readonly CommandInfo[] Data;
     
         public T Key {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator CommandInfo[](OpCodeRecordSet<T> src)
+        public static implicit operator CommandInfo[](CommandRecordSet<T> src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public OpCodeRecordSet(T key, CommandInfo[] src)
+        public CommandRecordSet(T key, CommandInfo[] src)
         {
             Key = key;
             Data = src;
@@ -29,7 +29,7 @@ namespace Z0.Asm.Data
         public CommandInfo[] Sequenced
         {
             [MethodImpl(Inline)]
-            get => Data.OrderBy(x => x.Seq);
+            get => Data.OrderBy(x => x.Sequence);
         }
 
         public int Count

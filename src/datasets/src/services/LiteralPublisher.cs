@@ -5,16 +5,12 @@
 namespace Z0
 {        
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Seed;
     using static Memories;
 
     public readonly struct LiteralPublisher : ILiteralPublisher
     {
         public static LiteralPublisher Service => default(LiteralPublisher);
-
-        IPublicationArchive Archive => Publications.Archive;
 
         public Report<LiteralTableField,LiteralRecord> LiteralReport<E>(string declarer, Func<E,string> descriptor = null)
             where E : unmanaged, Enum
@@ -23,25 +19,32 @@ namespace Z0
         public Option<FilePath> PublishLiterals<E>()
             where E : unmanaged, Enum
         {            
-            var dst = Archive.DatasetPath(typeof(E).Name);            
-            var report = LiteralReport<E>(typeof(E).Name, DescribeLiteral);   
-            return Records.Writer.Save<LiteralTableField,LiteralRecord>(report.Records, dst);
+            try
+            {
+                PublishLiterals<E>(out var dst);
+                return dst;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return Option.none<FilePath>();
+            }
         }
 
         static string DescribeLiteral<E>(E literal)
             where E : unmanaged, Enum
-        {            
-            var field = typeof(E).Field(literal.ToString()).Require();
-            return LiteralAttribute.Describe(field);
-        }
+                => LiteralAttribute.Describe(typeof(E).Field(literal.ToString()).Require());
 
         public LiteralRecord[] PublishLiterals<E>(out FilePath dst)
             where E : unmanaged, Enum
         {            
-            dst = Archive.DatasetPath(typeof(E).Name);            
-            var report = LiteralReport<E>(typeof(E).Name, DescribeLiteral);            
-            Records.Writer.Save<LiteralTableField,LiteralRecord>(report.Records, dst);
-            return report.Records;
+            dst = Publications.Archive.DatasetPath(typeof(E).Name);            
+            var records = LiteralRecords<E>(typeof(E).Name, DescribeLiteral);
+            using var writer = dst.Writer();
+            writer.WriteLine(Tabular.header<E>());
+            for(var i=0; i<records.Length; i++)
+                writer.WriteLine(records[i].Format());
+            return records;
         }
 
         public LiteralRecord[] LiteralRecords<E>(string declarer, Func<E,string> descriptor = null)

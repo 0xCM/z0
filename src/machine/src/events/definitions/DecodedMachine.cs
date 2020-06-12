@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0.Machine
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -15,7 +15,7 @@ namespace Z0.Machines
 
     using E = MachineEvents.DecodedMachine;
 
-    partial class MachineEvents
+    public partial class MachineEvents
     {
         public readonly struct DecodedMachine : IMachineEvent<E>
         {

@@ -38,10 +38,16 @@ namespace Z0.Asm
             this.Encoded = data;
         }
 
-        public Instruction this[int index]  
+        Instruction IReadOnlyList<Instruction>.this[int index]  
         { 
             [MethodImpl(Inline)] 
             get => Source[index]; 
+        }
+        
+        public ref readonly Instruction this[int index]  
+        { 
+            [MethodImpl(Inline)] 
+            get => ref Source[index]; 
         }
         
         public Instruction[] Data

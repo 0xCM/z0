@@ -122,6 +122,5 @@ namespace Z0
         public static E literal<E>(ulong src, E rep = default) 
             where E : unmanaged, Enum
                 => literal<E,ulong>(src);
-
     }
 }

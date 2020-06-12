@@ -11,89 +11,70 @@ namespace Z0
 
     using static Seed;
 
-    public readonly struct RecordFormatter  
-    {
-        [MethodImpl(Inline)]
-        public static RecordFormatter<F> Create<F>()
-            where F : unmanaged, Enum
-                =>  new RecordFormatter<F>(new StringBuilder());
-
-    }
-
     public readonly struct RecordFormatter<F> : IRecordFormatter<F>
         where F : unmanaged, Enum
     {        
         readonly StringBuilder State;
 
-        readonly char FieldSep;
+        readonly char Delimiter;
         
         [MethodImpl(Inline)]
-        public RecordFormatter(StringBuilder state, char sep = Chars.Pipe)
+        public RecordFormatter(StringBuilder state, char delimiter = Tabular.DefaultDelimiter)
         {
             State = state;
-            FieldSep = sep;
+            Delimiter = delimiter;
         }
 
-        public void AppendField(F f, object content)
+        public void Append(F f, object content)
         {
-            State.Append(RenderContent(content).PadRight(Width(f)));
+            State.Append(Render(content).PadRight(Tabular.width(f)));
         }
 
-        public void AppendField<T>(F f, T content)
+        public void Append<T>(F f, T content)
             where T : ITextual
         {
-            State.Append($"{content?.Format()}".PadRight(Width(f)));
+            State.Append(Render(content).PadRight(Tabular.width(f)));
         }
 
-        public void DelimitField(F f, object content, char delimiter)
-        {            
-            State.Append(rspace(delimiter));            
-            State.Append(RenderContent(content).PadRight(Width(f)));
-        }
+        static string Render(ITextual src)
+            => src?.Format() ?? string.Empty;
 
-        static string RenderContent(object content)
+        static string Render(object content)
         {
             var rendered = string.Empty;
             if(content is null)
-                rendered = Null.Value.Format();
+                return Null.Value.Format();
             else if(content is ITextual t)
-                rendered = t.Format();
+                return Render(t);
             else
-                rendered = content.ToString();
-            return rendered;
+                return content.ToString();
         }
 
         [MethodImpl(Inline)]
-        public void DelimitField(F f, object content)
-            => DelimitField(f, content, FieldSep);        
+        public void Delimit(F field, object content)
+        {            
+            State.Append(rspace(Delimiter));            
+            State.Append(Render(content).PadRight(Tabular.width(field)));
+        }
 
         [MethodImpl(Inline)]
-        public void DelimitSome<T>(F f, T content)
+        public void DelimitSome<T>(F field, T src)
             where T : unmanaged, Enum
-                => DelimitField(f, content.IsSome() 
-                 ? content.ToString() 
-                 : string.Empty, FieldSep);        
+                => DelimitField(field, src.IsSome()  ? src.ToString() : text.Empty, Delimiter);        
 
         [MethodImpl(Inline)]
-        public void DelimitSome<T>(F f, T content, char delimiter)
-            where T : unmanaged, Enum
-                => DelimitField(f, content.IsSome()  ? content.ToString()  : string.Empty, delimiter);        
-
-        public void DelimitField<T>(F f, T content, char delimiter)
+        public void Delimit<T>(F field, T src)
             where T : ITextual
         {
-            State.Append(rspace(delimiter));            
-            State.Append($"{content?.Format()}".PadRight(Width(f)));
+            State.Append(rspace(Delimiter));            
+            State.Append(Render(src).PadRight(Tabular.width(field)));
         }
 
-        [MethodImpl(Inline)]
-        public void DelimitField<T>(F f, T content)
-            where T : ITextual
-                => DelimitField(f,content, FieldSep);
-
-        [MethodImpl(Inline)]
-        short Width(F spec)
-            => (short)(Enums.scalar<F,uint>(spec) >> 16);
+        void DelimitField(F f, object content, char delimiter)
+        {            
+            State.Append(rspace(delimiter));            
+            State.Append(Render(content).PadRight(Tabular.width(f)));
+        }
 
         public string Render()
             => State.ToString();
@@ -109,7 +90,6 @@ namespace Z0
         
         public override string ToString()
             => Format();
-
 
         [MethodImpl(Inline)]
         static string Render(bool src)
@@ -130,6 +110,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static string RenderHex64(ulong src)
             => src == 0 ? string.Empty : src.FormatHex(false,false);
-
     }
 }

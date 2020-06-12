@@ -15,6 +15,40 @@ namespace Z0
     partial class AsciCodes
     {
         [MethodImpl(Inline), Op]
+        public static int encode(ReadOnlySpan<char> src, ref byte dst)
+        {
+            const int W = 16;
+            const char Z = (char)0;
+
+            var @null = Symbolic.first(src, Z);
+            var count = @null == -1 ? src.Length : 0;
+            if(count == 0)
+                return 0;
+
+            var consumed = 0;
+            var remaining = count;
+            
+            for(int i=0; i<count; i++)
+            {
+                if(remaining<0) 
+                    break;                
+                
+                var take =  remaining >= W ? W : remaining;
+                encode(skip(src, consumed), (Hex4)take, out asci16 encoded);
+                
+                ref readonly var bytes = ref head(encoded.Encoded);                                
+                ref var target = ref Unsafe.Add(ref dst, consumed);
+                for(var k=0; k<take; k++)
+                    seek(ref target, k) = skip(bytes, k);
+                
+                consumed += take;
+                remaining -= take;
+            }
+            
+            return consumed;
+        }
+
+        [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, Span<byte> dst)
         {
             const int W = 16;
@@ -72,7 +106,6 @@ namespace Z0
                 j += encode(skip(src, i), dst.Slice(j));
                 seek(dst, ++j) = delimiter;
             }
-
             return j + 1;
         }        
     }

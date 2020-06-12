@@ -20,7 +20,5 @@ namespace Z0
 
         Report<LiteralTableField,LiteralRecord> LiteralReport<E>(string declarer, Func<E,string> descriptor = null)
             where E : unmanaged, Enum;
-
     }
-
 }

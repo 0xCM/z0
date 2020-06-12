@@ -15,6 +15,8 @@ namespace Z0
 
     public readonly struct RecordFields
     {
+        public const int WidthOffset = 16;
+        
         public static RecordFields Service => default(RecordFields);
 
         [MethodImpl(Inline)]

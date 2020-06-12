@@ -9,32 +9,32 @@ namespace Z0.Asm.Data
 
     using static Konst;
 
-    public readonly struct OpCodeRecords
+    public readonly struct CommandRecords
     {
         [MethodImpl(Inline)]
-        public static OpCodeRecordSet<T> Set<T>(T key, CommandInfo[] src)
-            => new OpCodeRecordSet<T>(key,src);
+        public static CommandRecordSet<T> Set<T>(T key, CommandInfo[] src)
+            => new CommandRecordSet<T>(key,src);
 
         [MethodImpl(Inline)]
-        public static OpCodeRecordSets<T> Sets<T>(OpCodeRecordSet<T>[] src)
-            => new OpCodeRecordSets<T>(src);
+        public static CommandRecordSets<T> Sets<T>(CommandRecordSet<T>[] src)
+            => new CommandRecordSets<T>(src);
 
         [MethodImpl(Inline)]
-        public static OpCodeRecords Records(CommandInfo[] src)
-            => new OpCodeRecords(src);
+        public static CommandRecords Records(CommandInfo[] src)
+            => new CommandRecords(src);
         
         readonly CommandInfo[] Data;
     
         [MethodImpl(Inline)]
-        public static implicit operator OpCodeRecords(CommandInfo[] src)
-            => new OpCodeRecords(src);
+        public static implicit operator CommandRecords(CommandInfo[] src)
+            => new CommandRecords(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CommandInfo[](OpCodeRecords src)
+        public static implicit operator CommandInfo[](CommandRecords src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public OpCodeRecords(CommandInfo[] src)
+        public CommandRecords(CommandInfo[] src)
         {
             Data = src;
         }

@@ -112,6 +112,7 @@ namespace Z0
             get => AsciCodes.format(this);
         }
 
+
         [MethodImpl(Inline)]
         public bool Equals(asci32 src)
             => Storage.Equals(src.Storage);

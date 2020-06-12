@@ -6,11 +6,47 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
-    public class Tabular
+    public readonly struct Tabular
     {
+        /// <summary>
+        /// Defines the bit position where the field width specification begins
+        /// </summary>
+        public const int WidthOffset = 16;
+
+        /// <summary>
+        /// Defines a mask that, when applied, reveals the field position
+        /// </summary>
+        public const ushort PosMask = 0xFFFF;
+
+        /// <summary>
+        /// The default field delimiter
+        /// </summary>
+        public const char DefaultDelimiter = Chars.Pipe;
+
+        /// <summary>
+        /// Computes the field index from a field specifier
+        /// </summary>
+        /// <param name="field">The field specifier</param>
+        /// <typeparam name="F">The field specifier type</typeparam>
+        [MethodImpl(Inline)]
+        public static int index<F>(F field)
+            where F : unmanaged, Enum
+                => (int)(Tabular.PosMask & Enums.e32u(field));
+
+        /// <summary>
+        /// Computes the field width from a field specifier
+        /// </summary>
+        /// <param name="field">The field specifier</param>
+        /// <typeparam name="F">The field specifier type</typeparam>
+        [MethodImpl(Inline)]
+        public static int width<F>(F field)
+            where F : unmanaged, Enum
+                => text.width(field);
+
         /// <summary>
         /// Defines a tabular format specifiecation predicated on a parametric enum type
         /// </summary>
@@ -25,25 +61,20 @@ namespace Z0
             return new TabularFormat<F>(dst);            
         }
 
+        [MethodImpl(Inline)]
+        public static FieldFormatter<F> formatter<F>(char? delimiter = null) 
+            where F : unmanaged, Enum
+                => FieldFormatter<F>.Default.Reset(delimiter);
+
         /// <summary>
         /// Defines a tabular field specification predicated on an enumeration literal
         /// </summary>
-        /// <param name="field"></param>
-        /// <typeparam name="F"></typeparam>
+        /// <param name="field">The field specifier</param>
+        /// <typeparam name="F">The field specifier type</typeparam>
         [MethodImpl(Inline)]
         public static TabularField<F> field<F>(F field)
             where F : unmanaged, Enum
                 => new TabularField<F>(field);        
-
-        /// <summary>
-        /// Defines the bit position where the field width specification begins
-        /// </summary>
-        public const int WidthOffset = 32;
-
-        /// <summary>
-        /// Defines a mask that, when applied, reveals the field position
-        /// </summary>
-        public const ushort PosMask = 0xFFFF;
 
         [MethodImpl(Inline)]
         public static F[] fields<F>()
@@ -56,7 +87,7 @@ namespace Z0
                 => fields<F>().Select(f => f.ToString());
 
         [MethodImpl(Inline)]
-        public static string header<F>(char delimiter = Chars.Pipe)
+        public static string header<F>(char delimiter = DefaultDelimiter)
             where F : unmanaged, Enum
         {
             var service = formatter<F>(delimiter);
@@ -67,16 +98,19 @@ namespace Z0
             return service.Format();
         }
 
-        [MethodImpl(Inline)]
-        public static Tabular<F,R> define<F,R>(R src)
+        public static void Save<F,T>(T[] src, FilePath dst, char delimiter = DefaultDelimiter)
             where F : unmanaged, Enum
-            where R : ITabular
-                => new Tabular<F,R>(src);
+            where T : ITabular
+        {
+            var formatted = new string[src.Length];            
+            for(var i=0; i<src.Length; i++)
+                formatted[i] = src[i].DelimitedText(delimiter);
 
-        [MethodImpl(Inline)]
-        public static FieldFormatter<F> formatter<F>(char? delimiter = null) 
-            where F : unmanaged, Enum
-                => FieldFormatter<F>.Default.Reset(delimiter);
+            using var writer = dst.Writer();
+            writer.WriteLine(Tabular.header<F>(delimiter)); 
+            writer.WriteLine(new string(Chars.Dash, formatted.Max(x => x.Length)));
+            for(var i=0; i< formatted.Length; i++)
+                writer.WriteLine(formatted[i]);            
+        }            
     }
-
 }

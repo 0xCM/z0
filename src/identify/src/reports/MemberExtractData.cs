@@ -50,9 +50,14 @@ namespace Z0
             Data = data;
         }
 
-        public int Length => Data.Length;
+        public int Length 
+            => Data.Length;
 
-        public ref readonly ExtractRecord this[int index] { [MethodImpl(Inline)] get =>  ref Data[index]; }
+        public ref readonly ExtractRecord this[int index] 
+        { 
+            [MethodImpl(Inline)] 
+            get =>  ref Data[index]; 
+        }
 
     }
 }

@@ -8,8 +8,7 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
     
     public readonly struct OpCodeDataset
     {
@@ -44,7 +43,7 @@ namespace Z0.Asm.Data
             ResourceDoc = AsmD.Service.OpCodeSpecDoc;
             OpCodeCount = ResourceDoc.RowCount;
             OpCodeRecords = new CommandInfo[OpCodeCount];
-            OpCodeRecordParser.Service.Parse(ResourceDoc,OpCodeRecords);
+            CommandInfoParser.Service.Parse(ResourceDoc,OpCodeRecords);
             OpCodeIdentifiers = new OpCodeIdentifier[OpCodeCount];
             OpCodeIdentity.Service.Compute(OpCodeRecords,OpCodeIdentifiers);
         }

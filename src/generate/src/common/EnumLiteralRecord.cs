@@ -7,21 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
-    using FW = CommonFieldWidths;
+    using W = CommonFieldWidths;
+    using F = EnumLiteralRecordField;
 
-    public enum EnumLiteralRecordField 
+    public enum EnumLiteralRecordField : uint
     {
-        Sequence = 0 | FW.Sequence << FW.Offset,
+        Sequence = 0 | W.Sequence << W.Offset,
 
-        Identifier = 1 | FW.Identifier << FW.Offset,
+        Identifier = 1 | W.Identifier << W.Offset,
 
-        Description = 2 | FW.Identifier << FW.Offset,
+        Description = 2 | W.Identifier << W.Offset,
 
-        DataType = 3 | FW.Identifier << FW.Offset,
+        DataType = 3 | W.Identifier << W.Offset,
 
-        Value = 4 | FW.Num16Hex << FW.Offset,
+        Value = 4 | W.Num16Hex << W.Offset,
     }
 
     public readonly struct EnumLiteralRecord : IRecord<EnumLiteralRecordField, EnumLiteralRecord>
@@ -53,5 +54,16 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Sequence == 0 && text.empty(Identifier) && Value == 0;
         }
+
+        public string Format()
+        {
+            var formatter = Tabular.formatter<F>();
+            formatter.Append(F.Sequence, Sequence);
+            formatter.Delimit(F.Identifier, Identifier);
+            formatter.Delimit(F.Description, Description);
+            formatter.Delimit(F.DataType, DataType);                
+            formatter.Delimit(F.Value, Value);                
+            return formatter.Format();
+        }        
     }
 }

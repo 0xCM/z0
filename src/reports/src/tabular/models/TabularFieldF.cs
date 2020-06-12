@@ -39,12 +39,12 @@ namespace Z0
               
         [MethodImpl(Inline)]
         internal TabularField(F spec)
-        {
-            var numeric = Enums.e64u(spec);
+        {            
+            var numeric = Enums.e32u(spec);
             this.Specifier = spec;
             this.Name = spec.ToString();
-            this.Index = (int)(Tabular.PosMask & numeric);
-            this.Width = (int)(numeric >> Tabular.WidthOffset);
+            this.Index = Tabular.index(spec);
+            this.Width = text.width(spec);
         }   
         
         public string Format()

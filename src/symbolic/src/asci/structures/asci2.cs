@@ -17,7 +17,9 @@ namespace Z0
     /// </summary>
     public readonly struct asci2 : IAsciSequence<asci2,N>
     {
-        public static asci2 Empty => new asci2(0);
+        public static asci2 Blank => new asci2(0x2020);
+
+        public static asci2 Null => new asci2(0);
 
         public const int Size = 2;
 
@@ -44,18 +46,18 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Empty.Equals(this);
+            get => Null.Equals(this);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !Empty.Equals(this);
+            get => !Null.Equals(this);
         }
         public asci2 Zero
         {
             [MethodImpl(Inline)]
-            get => Empty;
+            get => Null;
         }
 
         public int MaxLength
@@ -81,6 +83,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => AsciCodes.format(this);
         }
+
 
         [MethodImpl(Inline)]
         public bool Equals(asci2 src)

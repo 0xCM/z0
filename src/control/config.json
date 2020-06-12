@@ -1,7 +1,7 @@
 {
     "EmitPrimaryArtifacts": "True",
     "CheckExecution": "True",
-    "EmitImmArtifacts" : "True",
+    "EmitImmArtifacts" : "False",
     "DuplicateCheck": "True",
     "HandleExtractsParsed": "True",
     "CollectAsmStats": "True",

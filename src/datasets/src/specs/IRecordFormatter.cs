@@ -6,8 +6,6 @@ namespace Z0
 {        
     using System;
 
-    using static Seed;
-
     public interface IRecordFormatter
     {
         string Render();
@@ -18,36 +16,17 @@ namespace Z0
     public interface IRecordFormatter<F> : IRecordFormatter
         where F : unmanaged, Enum
     {
-        void AppendField(F f, object data);   
+        void Append(F f, object data);   
 
-        void AppendField<T>(F f, T data)
+        void Append<T>(F f, T data)
             where T : ITextual;
 
-        void DelimitField(F f, object data, char delimiter);
+        void Delimit(F f, object data);
 
-        void DelimitField(F f, object data);
+        void Delimit<T>(F f, T data)
+            where T : ITextual;     
 
-        void DelimitSome<T>(F f, T data)
-            where T : unmanaged, Enum;
-
-        void DelimitSome<T>(F f, T data, char delimiter)
-            where T : unmanaged, Enum;
-
-        void DelimitField<T>(F f, T data, char delimiter)
-            where T : ITextual;
-
-        void DelimitField<T>(F f, T data)
-            where T : ITextual;       
-
-        void AppendField(F f, object data, char delimiter)
-            => DelimitField(f, data, delimiter);
-
-        void AppendField<T>(F f, T data, char delimiter)
-            where T : ITextual
-                => DelimitField(f, data, delimiter);
-
-         void AppendSome<T>(F f, T data, char delimiter)
-            where T : unmanaged, Enum
-                => DelimitSome(f,data,delimiter);         
+        void DelimitSome<T>(F field, T src)
+            where T : unmanaged, Enum;              
     }
 }

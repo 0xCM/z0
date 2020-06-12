@@ -6,23 +6,20 @@ namespace Z0.Asm.Data
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using System.Linq;
 
     using static Konst;
 
-    public readonly struct OpCodeRecordSets<T>
+    public readonly struct CommandRecordSets<T>
     {
-        readonly OpCodeRecordSet<T>[] Data;
+        readonly CommandRecordSet<T>[] Data;
 
         [MethodImpl(Inline)]
-        public OpCodeRecordSets(params OpCodeRecordSet<T>[] src)
+        public CommandRecordSets(params CommandRecordSet<T>[] src)
         {
             Data = src;
         }
 
-        public OpCodeRecordSet<T>[] Content
+        public CommandRecordSet<T>[] Content
         {
             [MethodImpl(Inline)]
             get => Data;

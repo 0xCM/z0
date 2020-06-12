@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct TabularFormat<F> : ITextual
         where F : unmanaged, Enum
@@ -23,7 +22,8 @@ namespace Z0
         /// </summary>
         public readonly string[] Headers;
 
-        public int FieldCount => Fields.Length;
+        public int FieldCount 
+            => Fields.Length;
 
         public ref readonly TabularField<F> this[int i]
         {
@@ -43,8 +43,8 @@ namespace Z0
         /// </summary>
         public string Format()
         {
-            var dst = new StringBuilder();
-            for(var i=0; i< Fields.Length; i++)
+            var dst = text.build();
+            for(var i=0; i< FieldCount; i++)
                 dst.AppendLine(this[i].Format());
             return dst.ToString();
         }

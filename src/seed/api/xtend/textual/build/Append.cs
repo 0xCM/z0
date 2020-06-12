@@ -22,13 +22,13 @@ namespace Z0
             where F : unmanaged, Enum
             where T : ITextual             
         {            
-            sb.Append($"{content.Format()}".PadRight(text.padding(field)));
+            sb.Append($"{content.Format()}".PadRight(text.width(field)));
         }
 
         public static void Append<F>(this StringBuilder sb, F field, object content)
             where F : unmanaged, Enum
         {
-            sb.Append($"{content}".PadRight(text.padding(field)));
+            sb.Append($"{content}".PadRight(text.width(field)));
         }
     }
 }

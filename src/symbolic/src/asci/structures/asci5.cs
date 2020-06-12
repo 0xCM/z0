@@ -17,7 +17,9 @@ namespace Z0
     /// </summary>
     public readonly struct asci5 : IAsciSequence<asci5,N>
     {
-        public static asci5 Empty => new asci5(0);        
+        public static asci5 Blank => new asci5(0x2020202020);
+
+        public static asci5 Null => new asci5(0);        
 
         public const int Size = 5;
 
@@ -43,7 +45,7 @@ namespace Z0
         public asci5 Zero
         {
             [MethodImpl(Inline)]
-            get => Empty;
+            get => Null;
         }
         
         public int MaxLength

@@ -15,26 +15,6 @@ namespace Z0
 
     public class MemberParseReport : Report<Report,F,R>
     {             
-        /// <summary>
-        /// Loads a saved report
-        /// </summary>
-        /// <param name="src">The report path</param>
-        public static ParseResult<MemberParseReport> Load(FilePath src)
-        {
-            var attempts = src.ReadLines().Skip(1).Select(MemberParseRecord.Parse);
-            var failed = attempts.Where(r => !r.Succeeded);
-            var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
-            if(failed.Length != 0 && success.Length == 0)
-                return ParseResult.Fail<MemberParseReport>(src.Name, failed[0].Reason);            
-
-            if(failed.Length != 0)
-                term.warn($"Not all records from {src} parsed successfully");
-
-            var host = success[0].Uri.Host;
-            var report = MemberParseReport.Create(host,success);
-            return ParseResult.Success(src.Name, report);
-        }
-        
         public ApiHostUri ApiHost {get;}
 
         [MethodImpl(Inline)]

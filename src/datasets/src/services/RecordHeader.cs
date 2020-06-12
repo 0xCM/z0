@@ -38,11 +38,11 @@ namespace Z0
 
         public string Render(char delimiter)
         {
-            var service = Records.Formatter<F>();
+            var service = Records.Formatter<F>(delimiter);
             var cols = Fields;
             var labels = Labels;
             for(var i=0; i<cols.Length; i++)
-                service.DelimitField(cols[i], labels[i], delimiter);
+                service.Delimit(cols[i], labels[i]);
             return service.Render();
         }
 
@@ -54,11 +54,11 @@ namespace Z0
         /// <typeparam name="F">The field type</typeparam>
         public string Render(Func<int,F,string> label, char delimiter)
         {
-            var service = Records.Formatter<F>();
+            var service = Records.Formatter<F>(delimiter);
             var cols = Fields;
             var labels = Labels;
             for(var i=0; i<cols.Length; i++)
-                service.DelimitField(cols[i], label(i, cols[i]), delimiter);
+                service.Delimit(cols[i], label(i, cols[i]));
             return service.Render();
         }
     }

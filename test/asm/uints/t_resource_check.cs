@@ -51,31 +51,6 @@ namespace Z0.Asm
                 return Option.none<AsmFunctionCode>();
         }
 
-        public void op_code_index()
-        {
-            var processor = DataProcessors.Create(AsmCheck.Context);
-            var parts = Api.Resolved.Select(p => p.Id).ToArray();
-
-            var result = processor.ProcessOpCodes(parts); 
-            var sets = result.Content.ToReadOnlySpan();
-            var count = result.Count;
-            for(var i=0; i<count; i++)
-                Emit(skip(sets,i));                        
-        }
-
-        void Emit(in OpCodeRecordSet<Mnemonic> src)
-        {
-            var count = src.Count;
-            var records = src.Sequenced.ToReadOnlySpan();
-            using var writer = CaseWriter($"{src.Key}");
-            writer.WriteLine(CommandInfo.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(records,i);
-                writer.WriteLine(record.Format());
-            }            
-        }
-
         public void resource_method_capture()
         {
 
@@ -110,7 +85,7 @@ namespace Z0.Asm
             for(var i = 0; i<results.Length; i++)
             {
                 var result = results[i];
-                Trace(result);
+                //Trace(result);
             }
         }
 

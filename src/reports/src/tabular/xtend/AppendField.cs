@@ -9,15 +9,13 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-
     partial class XTend
     {
         public static void AppendField<C,F>(this StringBuilder sb, F field, C content, char delimiter)
             where C : ITextual
             where F : unmanaged, Enum
         {
-            var pad = FieldFormat.width(field);
+            var pad = Tabular.width(field);
             sb.Append($"{delimiter} ");            
             sb.Append($"{content?.Format()}".PadRight(pad));
         }
@@ -26,25 +24,25 @@ namespace Z0
             where C : ITextual
             where F : unmanaged, Enum
         {            
-            var pad = FieldFormat.width(field);
+            var pad = Tabular.width(field);
             sb.Append($"{content?.Format()}".PadRight(pad));
         }
 
         public static void AppendField<F>(this StringBuilder sb, F field, object content)
             where F : unmanaged, Enum
         {            
-            var pad = FieldFormat.width(field);
+            var pad = Tabular.width(field);
             sb.Append($"{content?.ToString()}".PadRight(pad));
         }
 
         public static void AppendHeader<F>(this StringBuilder sb, char delimiter)
             where F : unmanaged, Enum
         {            
-            var fields = Enums.valarray<F>();
+            var fields = Tabular.fields<F>();
             for(var i=0; i<fields.Length; i++)
             {
                 var field = fields[i];
-                var width = FieldFormat.width(field);
+                var width = Tabular.width(field);
                 if(i != 0)
                 {
                     sb.Append(Chars.Space);
@@ -59,7 +57,7 @@ namespace Z0
         public static void AppendField<F>(this StringBuilder sb, F field,  object content, char delimiter)
             where F : unmanaged, Enum
         {            
-            var pad = FieldFormat.width(field);
+            var pad = Tabular.width(field);
             sb.Append($" {delimiter} ");            
             sb.Append($"{content?.ToString()}".PadRight(pad));
         }
