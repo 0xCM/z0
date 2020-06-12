@@ -7,9 +7,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Enums)" />
     <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Time)" />
   </ItemGroup>
-
+  
 </Project>

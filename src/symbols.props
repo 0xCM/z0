@@ -1,42 +1,50 @@
 <Project>
 
   <PropertyGroup>
-    <Core>$(Src)Core/z0.core.csproj</Core>
-
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
-    <Seed>$(Src)seed/z0.seed.csproj</Seed>
+
     <Monadic>$(Src)monadic/z0.monadic.csproj</Monadic>
+
     <Configure>$(Src)configure/z0.configure.csproj</Configure>
+
+    <Seed>$(Src)seed/z0.seed.csproj</Seed>
+    
     <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
-
-
+    <Contained>$(Src)contained/z0.contained.csproj</Contained>
     <Collective>$(Src)collective/z0.collective.csproj</Collective>
-    <Reflective>$(Src)reflective/z0.reflective.csproj</Reflective>
-    <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
+    <Reflective>$(Src)reflective/z0.reflective.csproj</Reflective>    
     <Enums>$(Src)enums/z0.enums.csproj</Enums>
     <Typed>$(Src)typed/z0.typed.csproj</Typed>
     <Cast>$(Src)cast/z0.cast.csproj</Cast>
-    <Stacks>$(Src)stacks/z0.stacks.csproj</Stacks>
-    <Contained>$(Src)contained/z0.contained.csproj</Contained>
-    
-    <ResV>$(Src)resv/z0.resv.csproj</ResV>
-    <Stores>$(Src)stores/z0.stores.csproj</Stores>
     <Spans>$(Src)spans/z0.spans.csproj</Spans>
 
+    <Stacks>$(Src)stacks/z0.stacks.csproj</Stacks>
     <Time>$(Src)time/z0.time.csproj</Time>
+    <Reports>$(Src)reports/z0.reports.csproj</Reports>
+
+
+    <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
+
     <Memories>$(Src)memories/z0.memories.csproj</Memories>
 
-    <Flow>$(Src)flow/z0.flow.csproj</Flow>
-    <Reports>$(Src)reports/z0.reports.csproj</Reports>
+    <Stores>$(Src)stores/z0.stores.csproj</Stores>
+
     <Textual>$(Src)textual/z0.textual.csproj</Textual>
+
     <Tuples>$(Src)tuples/z0.tuples.csproj</Tuples>
 
-    <Messages>$(Src)messages/z0.messages.csproj</Messages>
-
-    <Agency>$(Src)agency/z0.agency.csproj</Agency>
     <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>
 
     <Math>$(Src)math/z0.math.csproj</Math>
+
+    <ResV>$(Src)resv/z0.resv.csproj</ResV>
+
+    <Messages>$(Src)messages/z0.messages.csproj</Messages>
+
+    <Flow>$(Src)flow/z0.flow.csproj</Flow>
+    
+    <Agency>$(Src)agency/z0.agency.csproj</Agency>
+
     
     <Datasets>$(Src)datasets/z0.datasets.csproj</Datasets>
     <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>
@@ -46,13 +54,20 @@
     <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>
     <Numeric>$(Src)numeric/z0.numeric.csproj</Numeric>
 
-    <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
+
+    <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Identify>$(Src)identify/z0.identify.csproj</Identify>
+
+    <Structured>$(Src)structured/z0.structured.csproj</Structured>
 
     <LSquare>$(Src)lsquare/z0.lsquare.csproj</LSquare>
 
-    <Structured>$(Src)structured/z0.structured.csproj</Structured>
+
+    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
+
+    <Core>$(Src)Core/z0.core.csproj</Core>
+
   </PropertyGroup>
 
   <PropertyGroup>
@@ -61,16 +76,12 @@
   </PropertyGroup>
 
   <PropertyGroup>    
-    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
   </PropertyGroup>
 
   <PropertyGroup>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
-    <AsmB>$(Src)asmb/z0.asmb.csproj</AsmB>
-    <AsmD>$(Src)asmd/z0.asmd.csproj</AsmD>
-    <AsmG>$(Src)asmg/z0.asmg.csproj</AsmG>
-    
-    <Codes>$(Src)codes/z0.codes.csproj</Codes>
+    <AsmD>$(Src)asmd/z0.asmd.csproj</AsmD>        
+    <Machine>$(Src)machine/z0.machine.csproj</Machine>
 
     <ZXed>$(Src)commands/zxed/z0.zxed.csproj</ZXed>
     <ZIce>$(Src)commands/zice/z0.zice.csproj</ZIce>
