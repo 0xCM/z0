@@ -7,7 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     public readonly struct OpCodeExpression : ISymbolic<OpCodeExpression,asci32>
@@ -22,7 +22,7 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public OpCodeExpression(string src)
-            => Body = Symbolic.asci(src, n32);
+            => Body = asci.encode(n32, src);
 
         [MethodImpl(Inline)]
         public OpCodeExpression(asci32 src)
@@ -30,7 +30,7 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public OpCodeExpression(char[] src)
-            => Body = Symbolic.asci(src, n32);
+            => Body = asci.encode(n32, src);
 
         public ReadOnlySpan<byte> Encoded
         {
@@ -41,7 +41,7 @@ namespace Z0.Asm.Data
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(Body);
+            get => asci.decode(Body);
         }
         
         public OpCodeExpression Zero 

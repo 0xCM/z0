@@ -7,7 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     public readonly struct CpuidExpression : ISymbolic<CpuidExpression,asci16>
@@ -26,11 +26,11 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public CpuidExpression(string src)
-            => Body = Symbolic.asci(src, n16);
+            => Body = asci.encode(n16, src);
 
         [MethodImpl(Inline)]
         public CpuidExpression(char[] src)
-            => Body = Symbolic.asci(src, n16);
+            => Body = asci.encode(n16, src);
 
         public ReadOnlySpan<byte> Encoded
         {
@@ -41,7 +41,7 @@ namespace Z0.Asm.Data
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(Body);
+            get => asci.decode(Body);
         }
 
         public CpuidExpression Zero 

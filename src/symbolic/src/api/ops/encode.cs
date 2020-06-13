@@ -13,41 +13,6 @@ namespace Z0
 
     partial class Symbolic     
     {
-        [MethodImpl(Inline), Op]
-        public static ref readonly asci4 encode(ReadOnlySpan<char> src, out asci4 dst)        
-        {
-            dst = asci(src, n4);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly asci8 encode(ReadOnlySpan<char> src, out asci8 dst)        
-        {
-            dst = asci(src, n8);
-            return ref dst;
-        }
-        
-        [MethodImpl(Inline), Op]
-        public static ref readonly asci16 encode(ReadOnlySpan<char> src, out asci16 dst)        
-        {
-            dst = asci(src, n16);
-            return ref dst;
-        }
-        
-        [MethodImpl(Inline), Op]
-        public static ref readonly asci32 encode(ReadOnlySpan<char> src, out asci32 dst)        
-        {
-            dst = asci(src, n32);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly asci64 encode(ReadOnlySpan<char> src, out asci64 dst)        
-        {
-            dst = asci(src, n64);
-            return ref dst;
-        }
-
         /// <summary>
         /// Fills a caller-supplied target span with asci codes corresponding to characters in a source span
         /// </summary>

@@ -67,7 +67,7 @@ namespace Z0.Asm.Data
         {
             ReadOnlySpan<string> src = ITokenValues;                        
             Span<byte> dst = buffer;
-            var length  = AsciCodes.encode(src, dst, EncodingDelimiter);   
+            var length  = asci.encode(src, dst, EncodingDelimiter);   
             return length;
         }
     }

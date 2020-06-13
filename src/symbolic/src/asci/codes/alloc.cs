@@ -17,7 +17,7 @@ namespace Z0
         {
             var buffer =  new asci16[count];
             Span<asci16> dst = buffer;
-            dst.Fill(init(n));
+            dst.Fill(asci.init(n));
             return buffer;
         }
 
@@ -26,7 +26,7 @@ namespace Z0
         {
             var buffer =  new asci32[count];
             Span<asci32> dst = buffer;
-            dst.Fill(init(n));
+            dst.Fill(asci.init(n));
             return buffer;
         }
 
@@ -35,7 +35,7 @@ namespace Z0
         {
             var buffer =  new asci64[count];
             Span<asci64> dst = buffer;
-            dst.Fill(init(n));
+            dst.Fill(asci.init(n));
             return buffer;
         }
     }

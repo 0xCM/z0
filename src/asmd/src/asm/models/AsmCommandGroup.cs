@@ -19,7 +19,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmCommandGroup(string name)
         {
-            Body = Symbolic.asci(name, n16);
+            Body = asci.encode(n16, name);
         }
 
         [MethodImpl(Inline)]

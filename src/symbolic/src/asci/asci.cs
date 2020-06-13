@@ -5,14 +5,11 @@
 namespace Z0
 {    
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    partial struct asci
+    [ApiHost]
+    public readonly partial struct asci
     {
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> bytes(ReadOnlySpan<AsciCharCode> src)
-            => Control.cast<AsciCharCode,byte>(src);        
+
+
     }
 }

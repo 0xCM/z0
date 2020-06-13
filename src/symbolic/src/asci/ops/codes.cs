@@ -6,25 +6,19 @@ namespace Z0
 {    
     using System;
     using System.Runtime.CompilerServices;
-     
+
     using static Konst;
     using static Control;
 
-    partial class AsciCodes
+    partial struct asci
     {
-        static AsciDataStrings AsciStrings => default;
-
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(in asci16 src)
-            => cast<AsciCharCode>(bytespan(src)); 
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCharCode> codes()
-            => cast<AsciCharCode>(AsciStrings.CharBytes);
+            => Control.cast<AsciCharCode>(bytespan(src)); 
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)        
-            => AsciStrings.codes(offset, count);
+            => AsciStrings.codes(offset, (sbyte)(count));
 
         [MethodImpl(Inline), Op]
         public static void codes(in char src, int count, ref AsciCharCode dst)

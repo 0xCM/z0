@@ -52,7 +52,7 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline)]
         public OpCodeIdentifier(string src)
         {
-            Body = AsciCodes.encode(n32,src ?? string.Empty);
+            Body = asci.encode(n32,src ?? string.Empty);
         }
 
         public bool IsEmpty
@@ -70,7 +70,7 @@ namespace Z0.Asm.Data
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(Body);
+            get => asci.decode(Body);
         }
 
         public OpCodeIdentifier Zero 
@@ -79,7 +79,7 @@ namespace Z0.Asm.Data
         
         [MethodImpl(Inline)]
         public string Format()
-            => Symbolic.format(Body);
+            => asci.format(Body);
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeIdentifier src)

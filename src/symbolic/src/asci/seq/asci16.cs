@@ -23,7 +23,7 @@ namespace Z0
 
         public const int Size = 16;
         
-        public static asci16 Blank => AsciCodes.init(n);
+        public static asci16 Blank => asci.init(n);
         
         public static asci16 Null => new asci16(Vector128<byte>.Zero);
 
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci16(string src)
         {
-            Storage = AsciCodes.encode(n16,src).Storage;
+            Storage = asci.encode(n16,src).Storage;
         }
 
         public bool IsEmpty
@@ -113,13 +113,13 @@ namespace Z0
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(this);
+            get => asci.decode(this);
         } 
         
         public string Text
         {
             [MethodImpl(Inline)]
-            get => Symbolic.format(this);
+            get => asci.format(this);
         }
 
         [MethodImpl(Inline)]

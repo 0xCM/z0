@@ -17,7 +17,7 @@ namespace Z0
     {
         internal readonly Vector512<byte> Storage;        
 
-        public static asci64 Blank => AsciCodes.init(n);
+        public static asci64 Blank => asci.init(n);
 
         public static asci64 Null => new asci64(Vector512<byte>.Zero);
 
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci64(string src)
         {
-            Storage = AsciCodes.encode(n,src).Storage;
+            Storage = asci.encode(n,src).Storage;
         }
 
         [MethodImpl(Inline)]
@@ -78,18 +78,17 @@ namespace Z0
             get => !Storage.Equals(default);
         }
 
-        public int MaxLength
-        {
-            [MethodImpl(Inline)]
-            get => Size;
-        }
-
         public int Length
         {
             [MethodImpl(Inline)]
             get => Symbolic.length(this);
         }
 
+        public int MaxLength
+        {
+            [MethodImpl(Inline)]
+            get => Size;
+        }
         public asci64 Zero
         {
             [MethodImpl(Inline)]
@@ -117,13 +116,13 @@ namespace Z0
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(this);
+            get => asci.decode(this);
         }
 
         public string Text
         {
             [MethodImpl(Inline)]
-            get => Symbolic.format(this);
+            get => asci.format(this);
         }
 
         [MethodImpl(Inline)]

@@ -48,6 +48,11 @@ namespace Z0
             get => Null;
         }
         
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.length(this);
+        }
         public int MaxLength
         {
             [MethodImpl(Inline)]
@@ -57,7 +62,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => Symbolic.format(this);
+            get => asci.format(this);
         }
         
         [MethodImpl(Inline)]

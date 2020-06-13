@@ -17,13 +17,12 @@ namespace Z0
         AsciTestCase02(sbyte c0)
         {
             C0 = (AsciCharCode)c0;
-            A2 = asci2.From(AsciCodes.codes(c0,1));
-            A4 = asci4.From(AsciCodes.codes(c0,3));
-            A8 = asci8.From(AsciCodes.codes(c0,7));
-            A16 = default;
-            //A16 = asci16.From(AsciCodes.codes(c0,15));
-            A32 = asci32.From(AsciCodes.codes(c0,31));
-            // A64 = asci64.From(AsciCodes.codes(c0,63));
+            A2 = asci2.From(asci.codes(c0,2));
+            A4 = asci4.From(asci.codes(c0,4));
+            A8 = asci8.From(asci.codes(c0,8));
+            A16 = asci16.From(asci.codes(c0,16));
+            A32 = asci32.From(asci.codes(c0,32));
+            A64 = asci64.From(asci.codes(c0,64));
         }
 
         public readonly AsciCharCode C0;
@@ -38,6 +37,6 @@ namespace Z0
 
         public readonly asci32 A32;
 
-        // public readonly asci64 A64;
+        public readonly asci64 A64;
     }
 }

@@ -7,8 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
     
     /// <summary>
     /// Represents an expression that identifies an instruction
@@ -73,7 +72,7 @@ namespace Z0.Asm.Data
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(Body);
+            get => asci.decode(Body);
         }
 
         public InstructionExpression Zero 

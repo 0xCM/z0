@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Runtime.Intrinsics;
 
-    using static Seed;    
+    using static Konst;    
     using static Memories;
 
     [ApiHost("specs")]
@@ -115,11 +115,11 @@ namespace Z0
             byte width = 0;            
             for(var i=0; i< fieldCount; i++)
             {
-                AsciCodes.encode(names[i], out fieldNames[i]);
+                asci.encode(names[i], out fieldNames[i]);
                 fieldPositions[i] = width;
                 width += fieldWidths[i];                
             }
-            return new BitFieldModel(AsciCodes.encode(n16,name), fieldCount, width, fieldNames, fieldWidths, fieldPositions);
+            return new BitFieldModel(asci.encode(n16,name), fieldCount, width, fieldNames, fieldWidths, fieldPositions);
         }
 
         /// <summary>

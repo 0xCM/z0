@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci8(string src)
         {
-            Storage = AsciCodes.encode(n,src).Storage;
+            Storage = asci.encode(n,src).Storage;
         }
         
         public bool IsEmpty
@@ -76,6 +76,11 @@ namespace Z0
             get => Blank;
         }
 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.length(this);
+        }
         public int MaxLength
         {
             [MethodImpl(Inline)]
@@ -91,13 +96,13 @@ namespace Z0
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(this);
+            get => asci.decode(this);
         }
 
         public string Text
         {
             [MethodImpl(Inline)]
-            get => Symbolic.format(this);
+            get => asci.format(this);
         }
 
         [MethodImpl(Inline)]

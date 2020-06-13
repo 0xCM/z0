@@ -6,11 +6,11 @@ namespace Z0
 {    
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
     using static Control;
 
-    partial class AsciCodes
+    partial struct asci
     {
         /// <summary>
         /// Populates a 2-code asci block from the leading cells of a character span
@@ -76,7 +76,6 @@ namespace Z0
             codes(src, span<asci16,AsciCharCode>(ref dst));
             return ref dst;
         }
-
 
         /// <summary>
         /// Populates a 32-code asci block from the leading cells of a character span

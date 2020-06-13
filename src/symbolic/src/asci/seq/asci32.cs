@@ -18,7 +18,7 @@ namespace Z0
     /// </summary>
     public readonly struct asci32 : IAsciSequence<asci32,N>
     {
-        public static asci32 Blank => AsciCodes.init(n);
+        public static asci32 Blank => asci.init(n);
 
         public static asci32 Null => new asci32(Vector256<byte>.Zero);
 
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci32(string src)
         {
-            Storage = AsciCodes.encode(n,src).Storage;
+            Storage = asci.encode(n,src).Storage;
         }
 
         public bool IsEmpty
@@ -81,6 +81,12 @@ namespace Z0
             get => !Storage.Equals(default);
         }
 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Symbolic.length(this);
+        }
+        
         public int MaxLength
         {
             [MethodImpl(Inline)]
@@ -114,13 +120,13 @@ namespace Z0
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.decode(this);
+            get => asci.decode(this);
         }
 
         public string Text
         {
             [MethodImpl(Inline)]
-            get => Symbolic.format(this);
+            get => asci.format(this);
         }
 
 

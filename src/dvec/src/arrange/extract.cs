@@ -8,14 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
-    using static System.Runtime.Intrinsics.X86.Sse42;
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Sse;
     
-    using static Seed;
+    using static Konst;
     using static Vectors;
 
     partial class dvec
@@ -73,5 +69,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int vextract(Vector128<int> src, [Imm] Hex2 index)
             => Extract(src,(byte)index);
+
+        [MethodImpl(Inline), Op]
+        public static ushort vextract(Vector256<byte> src, [Imm] Hex5 index)   
+            => src.GetElement((byte)index);
+
+        [MethodImpl(Inline), Op]
+        public static ushort vextract(Vector256<ushort> src, [Imm] Hex4 index)   
+            => src.GetElement((byte)index);
     }
 }

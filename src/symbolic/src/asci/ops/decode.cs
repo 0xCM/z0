@@ -7,14 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-     
-    using static Seed;
-    using static Control;
-    using static Typed;
-    using static SymBits;
 
-    partial class AsciCodes
+    using static Konst;
+    using static Control;
+    using static SymBits;
+    using static Typed;
+
+    partial struct asci
     {
+        [MethodImpl(Inline)]
+        public static void decode(ReadOnlySpan<byte> src, Span<char> dst)
+        {            
+            var count = length(src,dst);
+            for(var i=0; i<count; i++)            
+                seek(dst,i) = @char(skip(src,i));
+        }
+                
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci2 src)
         {
@@ -23,9 +31,6 @@ namespace Z0
             seek(ref dst, 0) = (char)(byte)(src.Storage >> 0);
             seek(ref dst, 1) = (char)(byte)(src.Storage >> 8);
             return Spans.cover(dst, 2);
-            // var dst = CharBlocks.c16s(CharBlocks.alloc(n2));
-            // decode(src,dst);
-            // return dst;
         }
 
         [MethodImpl(Inline), Op]
@@ -37,55 +42,117 @@ namespace Z0
             seek(ref dst, 1) = (char)(byte)(src.Storage >> 8);
             seek(ref dst, 2) = (char)(byte)(src.Storage >> 16);
             seek(ref dst, 3) = (char)(byte)(src.Storage >> 24);
-
-            return Spans.cover(dst, 2);
-
-            // var dst = CharBlocks.c16s(CharBlocks.alloc(n4));
-            // decode(src,dst);
-            // return dst;
+            return Spans.cover(dst, asci4.Size);
         }
-
-        // [MethodImpl(Inline), Op]
-        // public static ReadOnlySpan<char> decode(in asci8 src)
-        // {
-        //     var dst = CharBlocks.c16s(CharBlocks.alloc(n8));
-        //     decode(src,dst);
-        //     return dst;
-        // }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)
         {
-            var decoded = SymBits.vinflate(vbytes(w128, src.Storage));
-            return cast<char>(bytespan(vlo(decoded)));
-            
-            // var dst = CharBlocks.c16s(CharBlocks.alloc(n8));
-            // decode(src,dst);
-            // return dst;
+            var decoded = vinflate(vbytes(w128, src.Storage));
+            return Control.cast<char>(bytespan(vlo(decoded)));            
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => cast<char>(bytespan(SymBits.vinflate(src.Storage)));
+            => Control.cast<char>(bytespan(vinflate(src.Storage)));
 
-        // [MethodImpl(Inline), Op]
-        // public static ReadOnlySpan<char> decode(in asci16 src)
-        // {
-        //     var data = SymBits.vinflate(src.Storage);
-        //     var bytes = bytespan(data);
-        //     var chars = cast<char>(bytes);    
-        //     var len = chars.Length;
-        //     for(var i=0; i<len; i++)
-        //     {
-        //         if((AsciCharCode)skip(chars,i) == AsciCharCode.Null)
-        //         {
-        //             len = i;
-        //             break;
-        //         }
-        //     }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> decode(in asci32 src)
+        {            
+            var lo = vinflate(src.Storage, n0);
+            var hi = vinflate(src.Storage, n1);
+            var data = bytespan(new Seg512(lo,hi));            
+            return Control.cast<char>(data);
+        }
 
-        //     return chars.Slice(0, len);
-        // }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> decode(in asci64 src)
+        {            
+            var x = src.Storage;
+            var x0 = vinflate(x.Lo,n0);
+            var x1 = vinflate(x.Lo,n1);
+            var x2 = vinflate(x.Hi,n0);
+            var x3 = vinflate(x.Hi,n1);
+            var data = new Seg1024(x0,x1,x2,x3);
+            return Control.cast<char>(bytespan(data));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static int decode(in asci2 src, Span<char> dst)
+        {
+            var data = asci.cover(src);
+            seek(dst,0) = skip(data,0);
+            seek(dst,1) = skip(data,1);
+            return 2;
+        } 
+
+        [MethodImpl(Inline), Op]
+        public static int decode(in asci4 src, Span<char> dst)
+        {
+            var data = asci.cover(src);
+            seek(dst,0) = skip(data,0);
+            seek(dst,1) = skip(data,1);
+            seek(dst,2) = skip(data,2);
+            seek(dst,3) = skip(data,3);
+            return 4;
+        } 
+
+        [MethodImpl(Inline), Op]
+        public static int decode(in asci5 src, Span<char> dst)
+        {
+            var data = asci.cover(src);
+            seek(dst,0) = skip(data,0);
+            seek(dst,1) = skip(data,1);
+            seek(dst,2) = skip(data,2);
+            seek(dst,3) = skip(data,3);
+            seek(dst,4) = skip(data,4);
+            return 5;
+        } 
+
+        [MethodImpl(Inline), Op]
+        public static int decode(in asci8 src, Span<char> dst)
+        {
+            var data = asci.cover(src);
+            seek(dst,0) = skip(data,0);
+            seek(dst,1) = skip(data,1);
+            seek(dst,2) = skip(data,2);
+            seek(dst,3) = skip(data,3);
+            seek(dst,4) = skip(data,4);
+            seek(dst,5) = skip(data,5);
+            seek(dst,6) = skip(data,6);
+            seek(dst,7) = skip(data,7);
+            return 8;
+        } 
+
+        [MethodImpl(Inline), Op]
+        public static int decode(in asci16 src, Span<char> dst)
+            => decode(SymBits.vinflate(src.Storage), ref head(dst));
+
+        [MethodImpl(Inline), Op]
+        public static int decode(in asci32 src, Span<char> dst)
+        {
+            ref var c = ref head(dst);
+            var count = decode(SymBits.vinflate(vlo(src.Storage)), ref c);
+            count += decode(SymBits.vinflate(vhi(src.Storage)), ref add(ref c, count));
+            return count;
+        }
+
+        [MethodImpl(Inline)]
+        static int decode(Vector256<ushort> data, ref char dst)
+        {
+            var bytes = bytespan(data);
+            var chars = Control.cast<char>(bytes);
+            var count = 0;    
+            for(var i=0; i<chars.Length; i++, count++)
+            {
+                ref readonly var c = ref skip(chars,i);
+                if((AsciCharCode)c != AsciCharCode.Null)
+                    seek(ref dst,i) = c;
+                else
+                    break;
+            }
+            return count;
+        }
 
         readonly struct Seg512
         {
@@ -119,27 +186,6 @@ namespace Z0
                 X2 = x2;
                 X3 = x3;
             }
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in asci32 src)
-        {            
-            var lo = SymBits.vinflate(src.Storage, n0);
-            var hi = SymBits.vinflate(src.Storage, n1);
-            var data = bytespan(new Seg512(lo,hi));            
-            return cast<char>(data);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in asci64 src)
-        {            
-            var x = src.Storage;
-            var x0 = SymBits.vinflate(x.Lo,n0);
-            var x1 = SymBits.vinflate(x.Lo,n1);
-            var x2 = SymBits.vinflate(x.Hi,n0);
-            var x3 = SymBits.vinflate(x.Hi,n1);
-            var data = new Seg1024(x0,x1,x2,x3);
-            return cast<char>(Control.bytespan(data));
         }
     }
 }

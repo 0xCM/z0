@@ -54,7 +54,7 @@ namespace Z0.Asm
             
             ref var target = ref Unsafe.Add(ref dst, consumed);
             
-            AsciCodes.encode(source, ref target);
+            asci.encode(source, ref target);
             return take;
         }
     }

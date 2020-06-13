@@ -3,16 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
-
+    
     using static Konst;
 
-    partial struct asci
+    partial class Symbolic
     {
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> bytes(ReadOnlySpan<AsciCharCode> src)
-            => Control.cast<AsciCharCode,byte>(src);        
+       public const byte AsciNull = (byte)AsciCharCode.Null;
+
+       public const int NotFound = -1;
     }
 }

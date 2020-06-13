@@ -85,7 +85,7 @@ namespace Z0
             var count = min(chars.Length, n);
             ref readonly var src = ref head(chars);
             ref var dst = ref seek(resDst, j);
-            AsciCodes.bytes(src, count, ref dst);
+            asci.encode(src, count, ref dst);
         }
     }
 }
