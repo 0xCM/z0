@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Closures(UnsignedInts), Op]
         public static Span<T> alloc<T>(int length)
             => new Span<T>(new T[length]);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Closures(UnsignedInts), Op]
         public static Span<T> alloc<T>(ushort length)
             => new Span<T>(new T[length]);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Closures(UnsignedInts), Op]
         public static Span<T> alloc<T>(byte length)
             => new Span<T>(new T[length]);
     }

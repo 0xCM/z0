@@ -13,20 +13,24 @@ namespace Z0
     partial class Spans
     {
         /// <summary>
-        /// Covers a memory segment with a generic span
+        /// Covers a T-memory segment with a span
         /// </summary>
         /// <param name="pSrc">The memory source</param>
-        /// <param name="size">The number of bytes to cover</param>
+        /// <param name="count">The number of bytes to cover</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe Span<T> cover<T>(T* pSrc, int size)
+        public static unsafe Span<T> cover<T>(T* pSrc, int count)
             where T : unmanaged
-                => new Span<T>(pSrc, size);
+                => MemoryMarshal.CreateSpan(ref Unsafe.AsRef<T>(pSrc), count);
 
-
+        /// <summary>
+        /// Covers a T-memory segment with a readonly span
+        /// </summary>
+        /// <param name="src">A reference to the leading cell</param>
+        /// <param name="count">The number of T-cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> cover<T>(in T src, int length)
-            => MemoryMarshal.CreateReadOnlySpan(ref edit(src), length);
-
+        public static ReadOnlySpan<T> cover<T>(in T src, int count)
+            => MemoryMarshal.CreateReadOnlySpan(ref edit(src), count);
     }
 }

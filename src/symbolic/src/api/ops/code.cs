@@ -6,20 +6,30 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
     using static Control;
-    using static Typed;
 
     partial class Symbolic
-    {                         
+    {   
+        /// <summary>
+        /// Returns the upper-case hex code for a specified digit
+        /// </summary>
+        /// <param name="case">The case selector</param>
+        /// <param name="index">The digit value</param>
+        /// <remarks>movzx eax,dl -> movsxd rax,eax -> mov rdx,28b57e0aca9h -> movzx eax,byte ptr [rax+rdx] </remarks>
         [MethodImpl(Inline), Op]
-        public static HexCode code(Base16 @base, UpperCased @case, byte index)
-            => (HexCode)skip(SymbolicData.UpperHexCodes, index);
+        public static HexCode code(UpperCased @case, HexDigit digit)
+            => (HexCode)skip(SymbolicData.UpperHexCodes, (byte)digit);
 
+        /// <summary>
+        /// Returns the lower-case hex code for a specified digit
+        /// </summary>
+        /// <param name="case">The case selector</param>
+        /// <param name="index">The digit value</param>
+        /// <remarks>movzx eax,dl -> movsxd rax,eax -> mov rdx,28b57e0aed9h -> movzx eax,byte ptr [rax+rdx]</remarks>
         [MethodImpl(Inline), Op]
-        public static HexCode code(Base16 @base, LowerCased @case, byte index)
-            => (HexCode)skip(SymbolicData.LowerHexCodes, index);
+        public static HexCode code(LowerCased @case, HexDigit digit)
+            => (HexCode)skip(SymbolicData.LowerHexCodes, (byte)digit);
     }
 }

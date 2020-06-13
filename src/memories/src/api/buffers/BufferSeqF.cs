@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     public readonly ref struct BufferSeq<F>
         where F : unmanaged, IFixed    
@@ -20,13 +19,13 @@ namespace Z0
 
         readonly BufferAllocation Buffered;
 
-        readonly int BufferCount;
+        readonly byte BufferCount;
 
         readonly int BufferSize;
 
         readonly int TotalSize;
 
-        public unsafe BufferSeq(int count)
+        public unsafe BufferSeq(byte count)
         {
             this.BufferCount = count;
             this.BufferSize = default(F).ByteCount;
@@ -50,22 +49,22 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public ref F Buffer(int index)    
-            => ref seek(ref Head, index);
+        public ref F Buffer(byte index)    
+            => ref Control.seek(ref Head, index);
 
         /// <summary>
         /// Presents an index-identifed buffer as a span of bytes
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public unsafe Span<byte> Bytes(int index)
+        public unsafe Span<byte> Bytes(byte index)
             => new Span<byte>(Token(index).Handle.ToPointer(), BufferSize);
 
         /// <summary>
         /// Presents an index-identifed buffer as a span of bytes
         /// </summary>
         /// <param name="index">The buffer index</param>
-        public ref readonly BufferToken<F> this[int index]
+        public ref readonly BufferToken<F> this[byte index]
         {
             [MethodImpl(Inline)]
             get => ref Token(index);
@@ -76,14 +75,14 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public ref readonly BufferToken<F> Token(int index)
-            => ref skip(Tokens,index);
+        public ref readonly BufferToken<F> Token(byte index)
+            => ref Control.skip(Tokens, index);
 
         /// <summary>
         /// Zero-fills a token-identified buffer and returns the cleared memory content
         /// </summary>
         [MethodImpl(Inline)]
-        public Span<byte> Clear(int index)
+        public Span<byte> Clear(byte index)
         {
             Token(index).Clear();
             return Bytes(index);
@@ -94,9 +93,9 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public unsafe Span<T> Cells<T>(int index)
-            where T : unmanaged
-                => Spans.cover<T>(Token(index).Handle.ToPointer<T>(), BufferSize);
+        public unsafe Span<T> Cells<T>(byte index)
+            where T : unmanaged                
+                => Spans.cover(Token(index).Handle.ToPointer<byte>(), BufferSize).As<T>();
 
         /// <summary>
         /// Fills a token-identifed buffer with content from a source span and returns the covering span
@@ -105,7 +104,7 @@ namespace Z0
         /// <param name="src">The source content</param>
         /// <typeparam name="T">The content cell type</typeparam>
         [MethodImpl(Inline)]
-        public Span<T> Fill<T>(int index, ReadOnlySpan<T> src)
+        public Span<T> Fill<T>(byte index, ReadOnlySpan<T> src)
             where T : unmanaged
                 => Token(index).Fill(src);
 

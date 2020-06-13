@@ -36,11 +36,11 @@ namespace Z0
         public readonly BufferTokens Buffers {get;}
 
         [MethodImpl(Inline)]
-        public static IBufferedChecker Create(int length, int count)
+        public static IBufferedChecker Create(int length, byte count)
             => new BufferedChecker(length, count);
 
         [MethodImpl(Inline)]
-        public BufferedChecker(int length, int count)
+        public BufferedChecker(int length, byte count)
         {
             Buffers = BufferSeq.alloc(length, count, out BufferAlloc).Tokenize();            
         }

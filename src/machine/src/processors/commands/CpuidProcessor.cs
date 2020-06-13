@@ -50,7 +50,7 @@ namespace Z0.Asm
 
             var take = math.min(rendered.Length, remaining);                
             
-            var source = rendered.Slice(0, take);                
+            var source = SpanReader.Service.slice(rendered,0,take);
             
             ref var target = ref Unsafe.Add(ref dst, consumed);
             

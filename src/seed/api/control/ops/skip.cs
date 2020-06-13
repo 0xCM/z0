@@ -11,15 +11,27 @@ namespace Z0
 
     partial class Control
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref readonly T skip<T>(in T src, byte count)
+            => ref Unsafe.Add(ref edit(in src), count); 
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref readonly T skip<T>(ReadOnlySpan<T> src, byte count)
+            => ref skip(in head(src), count);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref readonly T skip<T>(Span<T> src, byte count)
+            => ref skip(in head(src), count);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T skip<T>(in T src, int count)
             => ref Unsafe.Add(ref edit(in src), count); 
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
             => ref skip(in head(src), count);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T skip<T>(Span<T> src, int count)
             => ref skip(in head(src), count);
     }

@@ -4,12 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     /// <summary>
     /// Characterizes a reification of the counterpoint to a nullary thing
     /// </summary>
     /// <typeparam name="F">The thing which cannot be empty</typeparam>
-    public interface INonEmpty<F> : INullaryKnown
+    public interface INonEmpty<F> : INullaryKnown, IReified<F>
         where F : INonEmpty<F>, new()
     {
         bool INullaryKnown.IsEmpty 

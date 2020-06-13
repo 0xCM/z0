@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
      
-    using static Seed;
+    using static Konst;
     using static Control;
-    using static Typed;
 
     partial class AsciCodes
     {
+
         [MethodImpl(Inline), Op]
         public static asci16[] alloc(N16 n, int count)
         {

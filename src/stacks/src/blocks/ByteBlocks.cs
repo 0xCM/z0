@@ -7,26 +7,26 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;    
+    using static Konst;    
     using static Control;
 
     [ApiHost]
     public readonly partial struct ByteBlocks : IApiHost<ByteBlocks>
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         static Span<byte> u8span<T>(in T src)
             where T : struct
                 => span8u(ref edit(src));
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         static ref byte u8ref<T>(in T src)
             => ref cast<T,byte>(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         static ref byte u8<T>(in T src, int offset)
             => ref Unsafe.Add(ref cast<T,byte>(src), offset);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         static ref byte u8ref<T>(in T src, int offset)
             => ref Unsafe.Add(ref cast<T,byte>(src), offset);
 

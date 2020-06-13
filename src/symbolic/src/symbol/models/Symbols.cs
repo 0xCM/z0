@@ -140,5 +140,4 @@ namespace Z0
             get => Data.Length;
         }
     }
-
 }

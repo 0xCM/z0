@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct PrimalKindBitField : IPrimalBitField<PrimalKind,byte>
+    public readonly struct PrimalKindBitField //: IBitField<PrimalKind,byte>
     {
         public const byte TotalFieldWidth = (byte)SegWidth.KindId + (byte)SegWidth.Width + (byte)SegWidth.Sign;
 
         public PrimalKind FieldValue {get;}
 
-        public byte FieldData
+        public byte Data
         {
             [MethodImpl(Inline)]
             get => (byte)FieldValue;

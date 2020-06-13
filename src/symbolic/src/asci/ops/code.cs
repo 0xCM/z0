@@ -44,6 +44,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AsciCharCode code(in asci16 src, N3 index)
             => (AsciCharCode)vextract(src.Storage,index);
-
     }
 }

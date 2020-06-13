@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    public enum BufferSeqId : int
+    public enum BufferSeqId : byte
     {
         Left = 0,
 

@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Cast)" />    
     <ProjectReference Include="$(Enums)" />
     <ProjectReference Include="$(BitMasks)" />
+    <ProjectReference Include="$(Spans)" />
 
   </ItemGroup>
 

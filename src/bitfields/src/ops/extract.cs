@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;    
-    using static Memories;
+    using static Konst;    
 
     partial class BitFields
     {            
@@ -32,14 +31,14 @@ namespace Z0
         /// <typeparam name="T">The segment type</typeparam>
         [MethodImpl(Inline)]
         public static T extract<F,T>(F src, byte i0, byte i1)
-            where F : IPrimalBitField<T>
+            where F : IBitField<T>
             where T : unmanaged 
-                => gbits.extract(src.FieldData,i0,i1);
+                => gbits.extract(src.Data,i0,i1);
 
         [MethodImpl(Inline)]
         public static T extract<F,I,T>(F f, I i0, I i1)
             where T : unmanaged 
-            where F : IPrimalBitField<T>
+            where F : IBitField<T>
             where I : unmanaged, Enum
                 => extract<F,T>(f, Enums.e8u(i0), Enums.e8u(i1));
 

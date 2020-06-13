@@ -31,7 +31,7 @@ namespace Z0
     /// Characterizes an F-bound polymorphic type nat reification
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface ITypeNatF<F> : ITypeNat<F>
+    public interface ITypeNatF<F> : ITypeNat<F>, IReified<F>
         where F : unmanaged, ITypeNatF<F>
     {
 

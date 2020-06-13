@@ -9,19 +9,43 @@ namespace Z0
     using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
+    using static Control;
 
-    [ApiHost,SuppressUnmanagedCodeSecurity]
+    [ApiHost, SuppressUnmanagedCodeSecurity]
     public static unsafe class Buffers
     {
         const string Kernel32 = "kernel32.dll";
 
         /// <summary>
+        /// Covers a token-identified buffer with a span
+        /// </summary>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe Span<T> content<T>(IBufferToken src)
+            where T : unmanaged
+                => Spans.cover((byte*)src.Handle.ToPointer(), src.Size).As<T>();
+
+        /// <summary>
+        /// Enables bytespan execution
+        /// </summary>
+        /// <param name="src">The executable code</param>
+        [MethodImpl(Inline), Op]
+        public static byte* Liberate(Span<byte> src)
+            => Liberate<byte>((byte*)ptr<byte>(ref head(src)), src.Length);
+
+        /// <summary>
+        /// Enables execution over a reference-identified memory segment of specified length
+        /// </summary>
+        /// <param name="src">The executable code</param>
+        [MethodImpl(Inline), Op]
+        public static byte* Liberate(ref byte src, int length)
+            => Liberate<byte>((byte*)ptr<byte>(ref src), length);
+
+        /// <summary>
         /// Allocates a native buffer
         /// </summary>
         /// <param name="length">The buffer length in bytes</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BufferAllocation native(int length)
             => BufferAllocation.Own((liberate(Marshal.AllocHGlobal(length), length), length));        
 
@@ -30,6 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="capacity">The T-cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static SpanStack<T> stack<T>(int capacity)
             where T : unmanaged
                 => new SpanStack<T>(new T[capacity]);
@@ -49,6 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="capacity">The T-cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static RingBuffer<T> ring<T>(int capacity)
             where T : unmanaged
                 => new RingBuffer<T>(new T[capacity]);
@@ -90,9 +116,47 @@ namespace Z0
         /// Deallocates a native allocation
         /// </summary>
         /// <param name="handle">The allocation handle</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void release(IntPtr handle)
             => Marshal.FreeHGlobal(handle);
+
+        /// <summary>
+        /// Reimagines a readonly span of generic values as a span of readonly bytes
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source span element type</typeparam>
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src)
+            where T : struct
+                => MemoryMarshal.AsBytes(src);
+
+        /// <summary>
+        /// Fills a token-identified buffer with data from a source span and returns the target memory to the caller as a span
+        /// </summary>
+        /// <param name="src">The source content</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe Span<T> fill<T>(ReadOnlySpan<T> src, IBufferToken dst)
+            where T : unmanaged
+        {
+            var srcBytes = bytes(src);
+            var dstBytes = content<byte>(dst);
+            if(srcBytes.Length <= dst.Size)
+            {
+                if(srcBytes.Length < dst.Size)
+                    dstBytes.Clear();
+
+                srcBytes.CopyTo(dstBytes);
+            }
+            else
+                srcBytes.Slice(dst.Size).CopyTo(dstBytes);  
+
+            return content<T>(dst);         
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void clear(IBufferToken src)
+            => content<byte>(src).Clear();
 
         /// <summary>
         /// Enables an executable memory segment
@@ -112,24 +176,21 @@ namespace Z0
         /// </summary>
         /// <param name="src">The leading cell reference</param>
         /// <param name="length">The length of the segment, in bytes</param>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The memory cell type</typeparam>
         [MethodImpl(Inline)]
         static IntPtr Liberate<T>(ref T src, int length)
             where T : unmanaged
         {
-            IntPtr buffer = (IntPtr)Unsafe.AsPointer(ref src);
+            var pSrc = Unsafe.AsPointer(ref src);
+            IntPtr buffer = (IntPtr)pSrc;
             if (!VirtualProtectEx(CurrentProcess.Handle, buffer, (UIntPtr)length, 0x40, out uint _))
                 ThrowLiberationError(buffer, length);
             return buffer;
         }
 
-        [MethodImpl(Inline)]
-        static IntPtr Liberate(ReadOnlySpan<byte> src)
-            => Liberate(ref edit(in head(src)), src.Length);
-
-        [MethodImpl(Inline)]
-        static IntPtr Liberate(Span<byte> src)
-            => Liberate(ref head(src), src.Length);
+        // [MethodImpl(Inline)]
+        // static IntPtr Liberate(ReadOnlySpan<byte> src)
+        //     => Liberate(ref edit(in head(src)), src.Length);
  
         static void ThrowLiberationError(IntPtr pCode, int Length)
         {

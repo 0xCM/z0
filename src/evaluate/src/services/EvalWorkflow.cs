@@ -21,7 +21,7 @@ namespace Z0.Asm
         
         readonly ByteSize BufferSize;
 
-        readonly int BufferCount;
+        readonly byte BufferCount;
 
         readonly ICaptureArchive CodeArchive;
 

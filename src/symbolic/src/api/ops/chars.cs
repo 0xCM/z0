@@ -35,11 +35,9 @@ namespace Z0
         };   
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(ReadOnlySpan<BinarySym> src)
-            => cast<BinarySym,char>(src);
+        public static ReadOnlySpan<char> chars<E>(ReadOnlySpan<E> src)
+            where E : unmanaged, Enum
+                => cast<E,char>(src);
 
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(ReadOnlySpan<HexSym> src)
-            => cast<HexSym,char>(src);
     }
 }

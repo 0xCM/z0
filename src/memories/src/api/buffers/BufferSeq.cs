@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly ref struct BufferSeq
     {
@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="size">The size of each buffer</param>
         /// <param name="count">The number of buffers to allocate</param>
-        public static BufferSeq alloc(int size, int count)
-            => new BufferSeq(size,count);
+        public static BufferSeq alloc(int size, byte count)
+            => new BufferSeq(size, count);
 
         /// <summary>
         /// Creates a caller-owed buffer sequence
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="size">The size of each buffer</param>
         /// <param name="count">The number of buffers to allocate</param>
         /// <param name="allocation">The allocation handle that defines ownership</param>
-        public static BufferSeq alloc(int size, int count, out BufferAllocation allocation)
+        public static BufferSeq alloc(int size, byte count, out BufferAllocation allocation)
         {            
             var buffers = new BufferSeq(size,count,false);
             allocation = buffers.Allocation;
@@ -39,7 +39,7 @@ namespace Z0
 
         readonly Span<BufferToken> Tokens;
 
-        readonly int BufferCount;
+        readonly byte BufferCount;
 
         readonly int BufferSize;
 
@@ -47,15 +47,15 @@ namespace Z0
 
         readonly bool OwnsBuffer;
 
-        unsafe BufferSeq(int size, int count, bool owns = true)
+        unsafe BufferSeq(int size, byte count, bool owns = true)
         {
-            this.OwnsBuffer = owns;
-            this.BufferCount = count;
-            this.BufferSize = size;
-            this.TotalSize = BufferCount*BufferSize;
-            this.Allocation = Buffers.native(TotalSize);
-            this.View = new Span<byte>(Allocation.Handle.ToPointer(), TotalSize);
-            this.Tokens = BufferToken.Tokenize(Allocation.Handle, BufferSize, BufferCount);
+            OwnsBuffer = owns;
+            BufferCount = count;
+            BufferSize = size;
+            TotalSize = BufferCount*BufferSize;
+            Allocation = Buffers.native(TotalSize);
+            View = new Span<byte>(Allocation.Handle.ToPointer(), TotalSize);
+            Tokens = BufferToken.Tokenize(Allocation.Handle, BufferSize, BufferCount);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public Span<byte> Buffer(int index)    
+        public Span<byte> Buffer(byte index)    
             => View.Slice(index*BufferSize, BufferSize);
 
         /// <summary>
@@ -71,14 +71,14 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public ref readonly BufferToken Token(int index)
+        public ref readonly BufferToken Token(byte index)
             => ref refs.skip(Tokens,index);
 
         /// <summary>
         /// Retrieves an index-identifed token
         /// </summary>
         /// <param name="index">The buffer index</param>
-        public ref readonly BufferToken this[int index]
+        public ref readonly BufferToken this[byte index]
         {
             [MethodImpl(Inline)]
             get => ref Token(index);
@@ -91,14 +91,14 @@ namespace Z0
         public ref readonly BufferToken this[BufferSeqId id]
         {
             [MethodImpl(Inline)]
-            get => ref Token((int)id);
+            get => ref Token((byte)id);
         }
 
         /// <summary>
         /// Zero-fills a token-identified buffer and returns the cleared memory content
         /// </summary>
         [MethodImpl(Inline)]
-        public Span<byte> Clear(int index)
+        public Span<byte> Clear(byte index)
         {
             Token(index).Clear();
             return Buffer(index);
@@ -109,7 +109,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public unsafe Span<T> Cells<T>(int index)
+        public unsafe Span<T> Cells<T>(byte index)
             where T : unmanaged
                 =>  Buffer(index).As<T>();
 
@@ -120,7 +120,7 @@ namespace Z0
         /// <param name="src">The source content</param>
         /// <typeparam name="T">The content cell type</typeparam>
         [MethodImpl(Inline)]
-        public Span<T> Fill<T>(int index, ReadOnlySpan<T> src)
+        public Span<T> Fill<T>(byte index, ReadOnlySpan<T> src)
             where T : unmanaged
                 => Token(index).Fill(src);
 

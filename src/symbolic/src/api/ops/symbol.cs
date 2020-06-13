@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
-    using static Seed;
+    using static Konst;
 
     partial class Symbolic
     {
@@ -29,24 +28,16 @@ namespace Z0
             => symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BinarySym.First));
 
         [MethodImpl(Inline), Op]
-        public static Symbol<HexSym,byte,N4> symbol(Base16 @base, UpperCased @case, byte index)
-            => symbol<HexSym,byte,N4>(((HexSym)code(@base, @case, index)));
-
-        [MethodImpl(Inline), Op]
-        public static Symbol<HexSym,byte,N4> symbol(Base16 @base, LowerCased @case, byte index)
-            => symbol<HexSym,byte,N4>(((HexSym)code(@base, @case, index)));
-
-        [MethodImpl(Inline), Op]
         public static Symbol<DeciSym,byte,N4> symbol(DeciDigit src)
             => symbol<DeciSym,byte,N4>((DeciSym)((byte)src + (byte)DeciSym.First));
 
         [MethodImpl(Inline), Op]
         public static Symbol<HexSym,byte,N4> symbol(UpperCased @case, HexDigit src)
-            => symbol<HexSym,byte,N4>(hex(@case,src));
+            => symbol<HexSym,byte,N4>(((HexSym)code(@case, src)));
 
         [MethodImpl(Inline), Op]
         public static Symbol<HexSym,byte,N4> symbol(LowerCased @case, HexDigit src)
-            => symbol<HexSym,byte,N4>(hex(@case,src));
+            => symbol<HexSym,byte,N4>(((HexSym)code(@case, src)));
 
         [MethodImpl(Inline), Op]   
         static HexSym hex(UpperCased @case, HexDigit src)

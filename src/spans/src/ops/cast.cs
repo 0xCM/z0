@@ -12,31 +12,7 @@ namespace Z0
 
     partial class Spans
     {
-        /// <summary>
-        /// Reimagines a readonly span of one element type as a readonly span of another element type
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="S">The source element type</typeparam>
-        /// <typeparam name="T">The target element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
-            where S : unmanaged
-            where T : unmanaged
-                => MemoryMarshal.Cast<S,T>(src);
-
-        /// <summary>
-        /// Reimagines a span of one element type as a span of another element type
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="S">The source element type</typeparam>
-        /// <typeparam name="T">The target element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> cast<S,T>(Span<S> src)                
-            where S : unmanaged
-            where T : unmanaged
-                => MemoryMarshal.Cast<S,T>(src);
-
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src, int offset, int length)
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));

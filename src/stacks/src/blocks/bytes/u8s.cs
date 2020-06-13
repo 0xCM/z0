@@ -78,6 +78,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<byte> u8s(in ByteBlock64 src)
             => u8span(src);
-
     }
 }

@@ -21,17 +21,7 @@ namespace Z0
         public static ReadOnlySpan<byte> segment(in ResIdentity<byte> res, int i0, int i1)
             => SymbolicData.resource<byte>(res.Location, (i1 - i0 + 1));
 
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> segment<S,T>(ReadOnlySpan<S> src, int i0, int i1)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            var count = i1 - i0 + 1;
-            ref readonly var first = ref skip(src, i0);
-            return cast<S,T>(MemoryMarshal.CreateReadOnlySpan(ref edit(first), count));      
-        }
-
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static ReadOnlySpan<T> segment<T>(T* pSrc, int i0, int i1)
             where T : unmanaged
         {
@@ -41,13 +31,23 @@ namespace Z0
             return MemoryMarshal.CreateReadOnlySpan<T>(ref first, count);      
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static ReadOnlySpan<T> segment<T>(ReadOnlySpan<T> src, int i0, int i1)
             where T : unmanaged
         {
             var count = i1 - i0 + 1;
             ref readonly var first = ref skip(src, i0);
             return MemoryMarshal.CreateReadOnlySpan(ref edit(first), count);      
+        }
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> segment<S,T>(ReadOnlySpan<S> src, int i0, int i1)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var count = i1 - i0 + 1;
+            ref readonly var first = ref skip(src, i0);
+            return cast<S,T>(MemoryMarshal.CreateReadOnlySpan(ref edit(first), count));      
         }
     }
 }

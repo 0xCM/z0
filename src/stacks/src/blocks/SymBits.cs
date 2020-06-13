@@ -16,12 +16,17 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Seed;
+    using static Konst;
     using static Control;
     using static Typed;
 
     public class SymBits
     {        
+        [MethodImpl(Inline)]
+        public static ref Vector256<ushort> v16u<T>(in Vector256<T> src)
+            where T : unmanaged        
+                => ref Unsafe.As<Vector256<T>,Vector256<ushort>>(ref edit(in src));
+
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
         /// </summary>
@@ -224,7 +229,6 @@ namespace Z0
         public static unsafe Vector128<ulong> vload(W128 w, in ulong src)
             => LoadDquVector128((ulong*)src);            
 
-
         [MethodImpl(Inline)]
         public static unsafe Vector256<sbyte> vload(W256 w, in sbyte src)
             => LoadDquVector256((sbyte*)src);            
@@ -261,6 +265,10 @@ namespace Z0
         public static unsafe Vector512<byte> vload(W512 w, in byte src)
             => (vload(n256, in src), vload(n256, Unsafe.Add(ref edit(src), 32)));
 
+        [MethodImpl(Inline)]
+        public static unsafe Vector512<ushort> vload(W512 w, in ushort src)
+            => (vload(n256, in src), vload(n256, Unsafe.Add(ref edit(src), 16)));
+
         [MethodImpl(Inline), Op]
         public static unsafe void vstore(Vector128<byte> src, ref byte dst)
             => Store(ptr(ref dst), src);            
@@ -287,7 +295,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte vextract(Vector128<byte> src, byte index)
             => Extract(src,index);
-
 
         [MethodImpl(Inline)]
         public static byte vextract(Vector128<byte> src, N0 index)

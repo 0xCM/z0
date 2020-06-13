@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public SymbolSpec(params S[] symbols)
         {
-            this.Symbols = symbols;
+            Symbols = symbols;
         }    
 
         /// <summary>

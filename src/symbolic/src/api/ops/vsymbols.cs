@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
     using static Control;
     using static Typed;
 
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vsymbols(ASCI asci, int index)
         {
-            ref readonly var src = ref head(AsciStrings.bytes(n0));         
+            ref readonly var src = ref head(AsciStrings.charbytes(n0));         
             return SymBits.vmove8x16(src);
         }
     }

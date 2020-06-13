@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     public class HexMachineGen : CodeGenerator
     {

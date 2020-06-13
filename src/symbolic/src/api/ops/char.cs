@@ -13,12 +13,12 @@ namespace Z0
     partial class Symbolic    
     {        
         [MethodImpl(Inline), Op]
-        public static char @char(Base16 @base, UpperCased @case, byte index)
-            => (char)code(@base,@case,index);
+        public static char @char(UpperCased @case, HexDigit digit)
+            => (char)code(@case, digit);
 
         [MethodImpl(Inline), Op]
-        public static char @char(Base16 @base, LowerCased @case, byte index)
-            => (char)code(@base,@case,index);
+        public static char @char(LowerCased @case, HexDigit digit)
+            => (char)code(@case, digit);
 
         [MethodImpl(Inline)]
         public static char @char<S,T,N>(Symbol<S,T,N> src)
