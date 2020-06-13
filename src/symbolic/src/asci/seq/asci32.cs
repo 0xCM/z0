@@ -11,6 +11,7 @@ namespace Z0
     using static Konst;
 
     using N = N32;
+    using W = W256;
     
     /// <summary>
     /// Defines an asci code sequence of length 32
@@ -24,6 +25,12 @@ namespace Z0
         public const int Size = 32;
 
         static N n => default;
+
+        static W w => default;
+
+        [MethodImpl(Inline)]
+        public static asci32 From(ReadOnlySpan<AsciCharCode> src)
+            => new asci32(Control.cast<AsciCharCode,byte>(src));
 
         internal readonly Vector256<byte> Storage;        
 
@@ -50,6 +57,12 @@ namespace Z0
             Storage = src;
         }
         
+        [MethodImpl(Inline)]
+        public asci32(ReadOnlySpan<byte> src)
+        {
+            Storage = SymBits.vload(w, Control.head(src));
+        }
+
         [MethodImpl(Inline)]
         public asci32(string src)
         {
@@ -107,7 +120,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.format(this);
+            get => Symbolic.format(this);
         }
 
 

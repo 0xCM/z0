@@ -11,7 +11,8 @@ namespace Z0
     {
         public static RecordWriter Service => default(RecordWriter);
         
-        static IPublicationArchive Archive => PublicationArchive.Default;
+        static IPublicationArchive Archive 
+            => PublicationArchive.Default;
 
         public static ParallelQuery<string> Render<R>(R[] src, Func<R,string> formatter)
             where R : IRecord

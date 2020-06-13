@@ -31,7 +31,5 @@ namespace Z0
             /// </summary>
             Type = 12
         }
-
     }
-
 }

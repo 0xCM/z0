@@ -12,18 +12,18 @@ namespace Z0
     public readonly struct AsciResource<A> : IAsciResource<A>
         where A : IAsciSequence
     {
-        public string Name {get;}
+        public asci32 Name {get;}
 
         public A Content {get;}
 
-        public string Description {get;}
+        public asci64 Description {get;}
 
         [MethodImpl(Inline)]
-        public AsciResource(string name, A content, string description = text.Empty)
+        public AsciResource(asci32 name, A content, asci64? description = null)
         {
             Name = name;
             Content = content;
-            Description = description;
+            Description = description ?? asci64.Null;
         }
     }
 }

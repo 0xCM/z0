@@ -26,11 +26,11 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public MnemonicExpression(string src)
-            => Body = Symbolic.encode(src, ASCI, n16);
+            => Body = Symbolic.asci(src, n16);
 
         [MethodImpl(Inline)]
         public MnemonicExpression(char[] src)
-            => Body = Symbolic.encode(src, ASCI, n16);
+            => Body = Symbolic.asci(src, n16);
 
         public MnemonicExpression Zero 
             => Empty;

@@ -25,7 +25,5 @@ namespace Z0
             /// </summary>
             Amd = 2
         }
-
     }
-
 }

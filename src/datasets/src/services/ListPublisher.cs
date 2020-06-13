@@ -8,8 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Seed;   
-    using static Memories;
+    using static Konst;   
 
     using FW = CommonFieldWidths;
     

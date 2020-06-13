@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-
-    public interface IAsciResource<A> : INamedContent<A>, IDescribedContent<A>
+    public interface IAsciResource<A> : IContented<A>
         where A : IAsciSequence
     {
-        
+        asci32 Name {get;}
+                
+        asci64 Description {get;}        
     }
 
 }

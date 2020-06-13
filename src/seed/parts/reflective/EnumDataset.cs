@@ -37,6 +37,17 @@ namespace Z0
 
         public UserMetadata[] EntryData {get;}
 
+        public EnumDatasetEntry<E,T> this[int i]
+        {
+            [MethodImpl(Inline)]
+            get => Entry(i);
+        }
+
+        [MethodImpl(Inline)]
+        public EnumDatasetEntry<E,T> Entry(int i)
+            => new EnumDatasetEntry<E,T>(Tokens[i], Token, 
+                    Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i], EntryData[i]);
+
         public EnumDataset(MetadataToken token, string description, UserMetadata data, EnumScalarKind type, EnumDatasetEntry<E,T>[] entries)
         {
             Token = token;
@@ -82,11 +93,5 @@ namespace Z0
             EntryData = entrydata;
         }
 
-        public EnumDatasetEntry<E,T> this[int i]
-        {
-            [MethodImpl(Inline)]
-            get => new EnumDatasetEntry<E,T>(Tokens[i], Token, 
-                Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i], EntryData[i]);
-        }
     }
 }

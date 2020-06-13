@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     public interface IRecordWriter
     {             
         R[] Save<F,R>(R[] src, FilePath dst, Func<R,string> formatter, char delimiter = Chars.Pipe)

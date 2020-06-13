@@ -12,6 +12,7 @@ namespace Z0
     using static Typed;
 
     using N = N16;
+    using W = W128;
 
     /// <summary>
     /// Defines an asci code sequence of length 16
@@ -28,9 +29,16 @@ namespace Z0
 
         static N n => default;
 
+        static W w => default;
+        
+
         [MethodImpl(Inline)]
-        public static asci16 init(AsciCharCode fill = AsciCharCode.Space)
-            => new asci16(SymBits.vbroadcast(w128, (byte)fill));
+        public static asci16 Init(AsciCharCode fill = AsciCharCode.Space)
+            => new asci16(SymBits.vbroadcast(w, (byte)fill));
+
+        [MethodImpl(Inline)]
+        public static asci16 From(ReadOnlySpan<AsciCharCode> src)
+            => new asci16(Control.cast<AsciCharCode,byte>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator asci16(string src)
@@ -47,6 +55,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<char>(asci16 src)
             => src.Decoded;
+
+        [MethodImpl(Inline)]
+        public asci16(ReadOnlySpan<byte> src)
+        {
+            Storage = SymBits.vload(w, Control.head(src));
+        }
 
         [MethodImpl(Inline)]
         public asci16(Vector128<byte> src)
@@ -105,7 +119,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.format(this);
+            get => Symbolic.format(this);
         }
 
         [MethodImpl(Inline)]
@@ -114,11 +128,11 @@ namespace Z0
  
         [MethodImpl(Inline)]
         public void CopyTo(Span<byte> dst)
-            => AsciCodes.copy(this,dst);
+            => Symbolic.copy(this,dst);
 
         [MethodImpl(Inline)]
         public void CopyTo(ref byte dst)
-            => AsciCodes.copy(this, ref dst);
+            => Symbolic.copy(this, ref dst);
 
          public override int GetHashCode()
             => Storage.GetHashCode();

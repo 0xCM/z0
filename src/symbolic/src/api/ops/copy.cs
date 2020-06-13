@@ -1,37 +1,39 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 4040
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx;
-
-    using static Seed;
-    using static Typed;
+    using static Konst;
     using static Control;
 
-    partial class AsciCodes
-    {
+    partial class Symbolic
+    {   
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, ref byte dst)
-            => Store(ptr(ref dst), src.Storage);            
+            => SymBits.vstore(src.Storage, ref dst);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci32 src, ref byte dst)
-            => Store(ptr(ref dst), src.Storage);            
+            => SymBits.vstore(src.Storage, ref dst);            
+
+        [MethodImpl(Inline), Op]
+        public static unsafe void copy(in asci64 src, ref byte dst)
+            => SymBits.vstore(src.Storage, ref dst);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, Span<byte> dst)
-            => copy(src, ref head(dst));
+            => SymBits.vstore(src.Storage, dst);            
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci32 src, Span<byte> dst)
-            => copy(src, ref head(dst));
+            => SymBits.vstore(src.Storage, dst);            
+
+        [MethodImpl(Inline), Op]
+        public static unsafe void copy(in asci64 src, Span<byte> dst)
+            => SymBits.vstore(src.Storage, dst);            
     }
 }

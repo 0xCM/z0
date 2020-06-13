@@ -22,7 +22,7 @@ namespace Z0
         {
             dst = asci2.Null;
             ref var codes = ref Unsafe.As<asci2,AsciCharCode>(ref dst);
-            literals(src, (byte)count, ref codes);
+            AsciCodes.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
         {
             dst = asci4.Null;
             ref var codes = ref Unsafe.As<asci4,AsciCharCode>(ref dst);
-            literals(src, (byte)count, ref codes);
+            AsciCodes.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
         {
             dst = asci8.Null;
             ref var codes = ref Unsafe.As<asci8,AsciCharCode>(ref dst);
-            literals(src, (byte)count, ref codes);
+            AsciCodes.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -67,7 +67,7 @@ namespace Z0
         {
             dst = asci16.Null;
             ref var codes = ref Unsafe.As<asci16,AsciCharCode>(ref dst);
-            literals(src, (byte)count, ref codes);
+            AsciCodes.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -82,7 +82,7 @@ namespace Z0
         {
             dst = asci32.Null;
             ref var codes = ref Unsafe.As<asci32,AsciCharCode>(ref dst);
-            literals(src, (byte)count, ref codes);
+            AsciCodes.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -97,7 +97,7 @@ namespace Z0
         {
             dst = asci64.Null;
             ref var codes = ref Unsafe.As<asci64,AsciCharCode>(ref dst);
-            literals(src, (byte)count, ref codes);
+            AsciCodes.codes(src, (byte)count, ref codes);
             return ref dst;
         }
     }

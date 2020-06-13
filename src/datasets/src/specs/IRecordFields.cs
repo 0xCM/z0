@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Seed;   
-    using static RecordFields;
-
     public interface IRecordFields
     {
         F[] Literals<F>()

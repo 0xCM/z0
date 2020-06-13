@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Seed;
+    using static Konst;
     using static Control;
 
     partial class AsciCodes
@@ -21,7 +21,7 @@ namespace Z0
         public static ref readonly asci2 encode(ReadOnlySpan<char> src, out asci2 dst)        
         {
             dst = default;
-            literals(src, span<asci2,AsciCharCode>(ref dst));
+            codes(src, span<asci2,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -34,7 +34,7 @@ namespace Z0
         public static ref readonly asci4 encode(ReadOnlySpan<char> src, out asci4 dst)
         {
             dst = default;
-            literals(src, span<asci4,AsciCharCode>(ref dst));
+            codes(src, span<asci4,AsciCharCode>(ref dst));
             return ref dst;
         }        
 
@@ -47,7 +47,7 @@ namespace Z0
         public static ref readonly asci5 encode(ReadOnlySpan<char> src, out asci5 dst)        
         {
             dst = default;
-            literals(src, span<asci5,AsciCharCode>(ref dst));
+            codes(src, span<asci5,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -60,7 +60,7 @@ namespace Z0
         public static ref readonly asci8 encode(ReadOnlySpan<char> src, out asci8 dst)        
         {
             dst = default;
-            literals(src, span<asci8,AsciCharCode>(ref dst));
+            codes(src, span<asci8,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -73,7 +73,7 @@ namespace Z0
         public static ref readonly asci16 encode(ReadOnlySpan<char> src, out asci16 dst)        
         {
             dst = asci16.Blank;
-            literals(src, span<asci16,AsciCharCode>(ref dst));
+            codes(src, span<asci16,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -87,7 +87,7 @@ namespace Z0
         public static ref readonly asci32 encode(ReadOnlySpan<char> src, out asci32 dst)        
         {
             dst = asci32.Blank;
-            literals(src, span<asci32,AsciCharCode>(ref dst));
+            codes(src, span<asci32,AsciCharCode>(ref dst));
             return ref dst;
         }
 
@@ -100,7 +100,7 @@ namespace Z0
         public static ref readonly asci64 encode(ReadOnlySpan<char> src, out asci64 dst)        
         {
             dst = asci64.Blank;
-            literals(src, span<asci64,AsciCharCode>(ref dst));
+            codes(src, span<asci64,AsciCharCode>(ref dst));
             return ref dst;
         }
     }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Control;
 
     partial class Symbolic     
     {
@@ -46,7 +47,7 @@ namespace Z0
         static ReadOnlySpan<E> literals<E>(int crop = 0)
             where E : unmanaged, Enum
         {
-            ReadOnlySpan<E> literals = Enums.valarray<E>();
+            var literals = @readonly(Enums.valarray<E>());
             var count = literals.Length - crop;
             return literals.Slice(0,count);            
         }

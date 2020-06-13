@@ -12,7 +12,6 @@ namespace Z0
 
     partial class AsciCodes
     {
-
         [MethodImpl(Inline), Op]
         public static asci16[] alloc(N16 n, int count)
         {

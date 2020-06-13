@@ -26,11 +26,11 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public CpuidExpression(string src)
-            => Body = Symbolic.encode(src, ASCI, n16);
+            => Body = Symbolic.asci(src, n16);
 
         [MethodImpl(Inline)]
         public CpuidExpression(char[] src)
-            => Body = Symbolic.encode(src, ASCI, n16);
+            => Body = Symbolic.asci(src, n16);
 
         public ReadOnlySpan<byte> Encoded
         {

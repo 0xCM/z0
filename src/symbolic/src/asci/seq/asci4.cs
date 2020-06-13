@@ -27,6 +27,10 @@ namespace Z0
         internal readonly uint Storage;
 
         [MethodImpl(Inline)]
+        public static asci4 From(ReadOnlySpan<AsciCharCode> src)
+            => new asci4(Control.head(Control.cast<AsciCharCode,uint>(src)));
+
+        [MethodImpl(Inline)]
         public static implicit operator asci4(string src)
             => new asci4(src);
 
@@ -93,7 +97,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.format(this);
+            get => Symbolic.format(this);
         }
 
         [MethodImpl(Inline)]

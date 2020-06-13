@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
     using static CreditTypes;
 
     using D = CreditTypes.DocFieldDelimiter;
@@ -25,7 +24,7 @@ namespace Z0
         /// <param name="c">The referenced chapter</param>
         /// <param name="s">The referenced section</param>
         /// <param name="t">The referenced topic</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity define(Vendor v, Volume vol, Chapter c, Section s, Topic t, ContentRef cr = default)
         {   
             var r = 0ul;
@@ -46,7 +45,7 @@ namespace Z0
         /// <param name="a">The referenced appendix</param>
         /// <param name="s">The referenced section</param>
         /// <param name="t">The referenced topic</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity define(Vendor v, Volume vol, Appendix a, Section s, Topic t, ContentRef cr = default)
         {   
             var r = 0ul;
@@ -67,7 +66,7 @@ namespace Z0
         /// <param name="d">The referenced chapter or appendix</param>
         /// <param name="s">The referenced section</param>
         /// <param name="t">The referenced topic</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity define(Vendor v, Volume vol, Division d, Section s, Topic t, ContentRef cr = default)
         {   
             var r = 0ul;
@@ -84,7 +83,7 @@ namespace Z0
         /// Extracts the Vendor segment value
         /// </summary>
         /// <param name="src">The bitfield source</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vendor vendor(Entity src)
             => (Vendor)(((ulong)F.Vendor & (ulong)src) >> (int)D.Vendor);
 
@@ -92,7 +91,7 @@ namespace Z0
         /// Initializes an empty bitfield with a Vendor segment value
         /// </summary>
         /// <param name="src">The source value</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity vendor(Vendor src)
             => (ulong)src << (byte)D.Vendor;
 
@@ -100,7 +99,7 @@ namespace Z0
         /// Extracts the Volume segment value
         /// </summary>
         /// <param name="src">The bitfield source</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Volume volume(Entity src)
             => (Volume)(((ulong)F.Volume & (ulong)src) >> (int)D.Volume);
 
@@ -108,7 +107,7 @@ namespace Z0
         /// Initializes an empty bitfield with a Volume segment value
         /// </summary>
         /// <param name="src">The source value</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity volume(Volume src)
             => (ulong)src << (byte)D.Volume;
 
@@ -116,7 +115,7 @@ namespace Z0
         /// Extracts the Division segment value
         /// </summary>
         /// <param name="src">The bitfield source</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Division division(Entity src)
             => (Division)(((ulong)F.Division & (ulong)src) >> (int)D.Division);
 
@@ -124,7 +123,7 @@ namespace Z0
         /// Initializes an empty bitfield with a Division segment value
         /// </summary>
         /// <param name="src">The source value</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity division(Division src)
             => (ulong)src << (byte)D.Division;
 
@@ -132,7 +131,7 @@ namespace Z0
         /// Extracts the Chapter segment value
         /// </summary>
         /// <param name="src">The bitfield source</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Chapter chapter(Entity src)
             => (Chapter)(((ulong)F.Chapter & (ulong)src) >> (int)D.Chapter);
 
@@ -140,7 +139,7 @@ namespace Z0
         /// Initializes an empty bitfield with a Chapter segment value
         /// </summary>
         /// <param name="src">The source value</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static DocRef chapter(Chapter src)
             => (ulong)src << (byte)D.Division;
 
@@ -148,7 +147,7 @@ namespace Z0
         /// Extracts the Appendix segment value
         /// </summary>
         /// <param name="src">The bitfield source</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Appendix appendix(Entity src)
             => (Appendix)(((ulong)F.Appendix & (ulong)src) >> (int)D.Appendix);
 
@@ -156,7 +155,7 @@ namespace Z0
         /// Initializes an empty bitfield with an Appendix segment value
         /// </summary>
         /// <param name="src">The source value</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity appendix(Appendix src)
             => (ulong)src << (byte)D.Division;
 
@@ -164,7 +163,7 @@ namespace Z0
         /// Extracts the Section segment value
         /// </summary>
         /// <param name="src">The bitfield source</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Section section(Entity src)
             => (Section)(((ulong)F.Section & (ulong)src) >> (int)D.Section);
 
@@ -172,7 +171,7 @@ namespace Z0
         /// Initializes an empty bitfield with a Section segment value
         /// </summary>
         /// <param name="src">The source value</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity section(Section src)
             => (ulong)src << (byte)D.Section;
 
@@ -180,7 +179,7 @@ namespace Z0
         /// Extracts the Topic segment value
         /// </summary>
         /// <param name="src">The bitfield source</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Topic topic(Entity src)
             => (Topic)(((ulong)F.Topic & (ulong)src) >> (int)D.Topic);
 
@@ -188,7 +187,7 @@ namespace Z0
         /// Initializes an empty bitfield with a Topic segment value
         /// </summary>
         /// <param name="src">The source value</param>
-        [Op, MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Entity topic(Topic src)
             => (ulong)src << (byte)D.Topic;
 

@@ -21,7 +21,5 @@ namespace Z0
             /// </summary>
             Table = 1,
         }
-
     }
-
 }

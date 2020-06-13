@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-
     using static Quartet;        
 
     using L = CreditTypes.ContentLevel;
@@ -48,7 +46,5 @@ namespace Z0
             [FieldSeg("[11110000 00000000]")]
             Type = SegWidth << L.Type,
         }
-
     }
-
 }

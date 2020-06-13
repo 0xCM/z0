@@ -28,5 +28,9 @@ namespace Z0
                 seek(ref dst,i) = (byte)skip(src,i);
             return count;
         }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> bytes(ReadOnlySpan<AsciCharCode> src)
+            => cast<AsciCharCode,byte>(src);
     }
 }

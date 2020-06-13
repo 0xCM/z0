@@ -57,7 +57,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.format(this);
+            get => Symbolic.format(this);
         }
         
         [MethodImpl(Inline)]

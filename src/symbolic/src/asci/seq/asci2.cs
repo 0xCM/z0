@@ -33,6 +33,10 @@ namespace Z0
             => src.Decoded;
 
         [MethodImpl(Inline)]
+        public static asci2 From(ReadOnlySpan<AsciCharCode> src)
+            => new asci2(Control.head(Control.cast<AsciCharCode,ushort>(src)));
+
+        [MethodImpl(Inline)]
         public static implicit operator string(asci2 src)
             => src.Text;
 
@@ -80,7 +84,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.format(this);
+            get => Symbolic.format(this);
         }
 
 

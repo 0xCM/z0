@@ -5,7 +5,6 @@
 namespace Z0
 {    
     using System;
-    using System.Collections.Generic;
     
     public interface IRecordSink<R> : IService, ISink<R>
         where R : ITabular

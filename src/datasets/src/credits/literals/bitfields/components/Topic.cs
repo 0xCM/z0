@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-
     partial class CreditTypes
     {
         /// <summary>
@@ -65,7 +63,5 @@ namespace Z0
             /// </summary>
             Topic10 = 10,
         }
-
     }
-
 }

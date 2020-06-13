@@ -6,9 +6,11 @@ namespace Z0
 {    
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
      
     using static Konst;
     using static Control;
+    using static SymBits;
 
     partial class AsciCodes
     {
@@ -61,8 +63,21 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static int decode(in asci16 src, Span<char> dst)
+            => decode(SymBits.vinflate(src.Storage), ref head(dst));
+
+
+        [MethodImpl(Inline), Op]
+        public static int decode(in asci32 src, Span<char> dst)
         {
-            var data = SymBits.vinflate(src.Storage);
+            ref var c = ref head(dst);
+            var count = decode(SymBits.vinflate(vlo(src.Storage)), ref c);
+            count += decode(SymBits.vinflate(vhi(src.Storage)), ref add(ref c, count));
+            return count;
+        }
+
+        [MethodImpl(Inline)]
+        static int decode(Vector256<ushort> data, ref char dst)
+        {
             var bytes = bytespan(data);
             var chars = cast<char>(bytes);
             var count = 0;    
@@ -70,7 +85,7 @@ namespace Z0
             {
                 ref readonly var c = ref skip(chars,i);
                 if((AsciCharCode)c != AsciCharCode.Null)
-                    seek(dst,i) = c;
+                    seek(ref dst,i) = c;
                 else
                     break;
             }

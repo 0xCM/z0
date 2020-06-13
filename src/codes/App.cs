@@ -13,7 +13,6 @@ namespace Z0
     using static Seed;
     using static Memories;
 
-
     using P = Z0.Parts;
     
     class App : AppShell<App,IAppContext>
@@ -35,8 +34,7 @@ namespace Z0
             var exchange = AppMsgExchange.Create();
             var api = ApiComposition.Assemble(KnownParts.Where(r => r.Id != 0));
             var appContext = AppContext.Create(resolved, random, settings, exchange);
-            var asmContext = AsmContext.Create(settings, appContext.Messaging, api, appContext.AppPaths.AppCapturePath);
-            return asmContext;
+            return AsmContext.Create(settings, appContext.Messaging, api, appContext.AppPaths.AppCapturePath);            
         }
 
         public App()
@@ -44,9 +42,10 @@ namespace Z0
         {
         }
 
-        void RunApp(params PartId[] parts)
+        void RunApp(params PartId[] src)
         {
-            
+
+            CodeRunner.Service(CreateAsmContext()).Run();
         }
 
         public override void RunShell(params string[] args)

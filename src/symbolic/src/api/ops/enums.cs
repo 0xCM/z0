@@ -7,18 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
+    using static Control;
 
     partial class Symbolic     
     {
-        public static @enum<E,T>[] enums<E,T>(EnumDataset<E,T> dataset)
+        public static @enum<E,T>[] enums<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var count = dataset.EntryCount;
-            var buffer = new @enum<E,T>[count];
-            var dst = buffer.ToSpan();
-            for(var i=0; i<count; i++)
+            var dataset = Enums.dataset<E,T>();
+            return enums<E,T>(dataset, new @enum<E,T>[dataset.EntryCount]);
+        }
+
+        public static @enum<E,T>[] enums<E,T>(EnumDataset<E,T> dataset, @enum<E,T>[] buffer)
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            var dst = span(buffer);
+            for(var i=0; i<dst.Length; i++)
             {
                 var entry = dataset[i];
                 Control.seek(dst,i) = @enum.define(entry.Token, entry.Index, entry.Name, entry.Literal, entry.Scalar);

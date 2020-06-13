@@ -19,11 +19,25 @@ namespace Z0
             => cast<AsciCharCode>(bytespan(src)); 
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<AsciCharCode> codes(ASCI asci)
+        public static ReadOnlySpan<AsciCharCode> codes()
             => cast<AsciCharCode>(AsciStrings.CharBytes);
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)
+        public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)        
             => AsciStrings.codes(offset, count);
+
+        [MethodImpl(Inline), Op]
+        public static void codes(in char src, int count, ref AsciCharCode dst)
+        {
+            for(var i=0; i<count; i++)
+                seek(ref dst,i) = (AsciCharCode)skip(src,i);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void codes(ReadOnlySpan<char> src, Span<AsciCharCode> dst)
+        {
+            var count = Math.Min(src.Length, dst.Length);
+            codes(in head(src), count, ref head(dst));
+        }   
     }
 }

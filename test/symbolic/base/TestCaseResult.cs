@@ -7,18 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     public readonly struct TestCaseResult : ITestCaseResult
     {
-        [MethodImpl(Inline)]
-        public TestCaseResult(string name, bit success, string description)
-        {
-            CaseName = name;
-            Success = success;
-            Description = description;
-        }
 
         public string CaseName {get;}
 
@@ -26,5 +18,12 @@ namespace Z0
 
         public string Description {get;}
 
+        [MethodImpl(Inline)]
+        public TestCaseResult(string name, bit success, string description)
+        {
+            CaseName = name;
+            Success = success;
+            Description = description;
+        }
     }
 }

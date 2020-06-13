@@ -160,6 +160,14 @@ namespace Z0
             => ConvertToVector256Int16(src).AsUInt16();
 
         [MethodImpl(Inline)]
+        public static Vector256<ushort> vinflate(Vector256<byte> src, N0 lo)
+            => vinflate(vlo(src));
+
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vinflate(Vector256<byte> src, N1 hi)
+            => vinflate(vhi(src));
+
+        [MethodImpl(Inline)]
         public static ushort vextract(Vector128<ushort> src, byte index)   
         {
             var x = ShiftRightLogical(src, index);
@@ -196,6 +204,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector512<ushort> vbroadcast(W512 w, ushort src)
             => (BroadcastScalarToVector256(&src),BroadcastScalarToVector256(&src));
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vbytes(W128 w, ulong lo)
+            => Vector128.CreateScalarUnsafe(lo).As<ulong,byte>();
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vbytes(W128 w, ulong lo, ulong hi)
+            => Vector128.Create(lo,hi).As<ulong,byte>();
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vbytes(W256 w, ulong x0, ulong x1, ulong x2, ulong x3)
+            => Vector256.Create(x0,x1,x2,x3).As<ulong,byte>();
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<sbyte> vload(W128 w, in sbyte src)
@@ -292,6 +312,10 @@ namespace Z0
         public static unsafe void vstore(Vector256<byte> src, Span<byte> dst)
             => vstore(src, ref head(dst));
 
+        [MethodImpl(Inline), Op]
+        public static unsafe void vstore(Vector512<byte> src, Span<byte> dst)
+            => vstore(src, ref head(dst));
+
         [MethodImpl(Inline)]
         public static byte vextract(Vector128<byte> src, byte index)
             => Extract(src,index);
@@ -315,5 +339,45 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte vextract(Vector128<byte> src, N4 index)
             => Extract(src, 4);
+
+        [MethodImpl(Inline)]
+        public static ulong vlo(Vector128<byte> src)
+            => src.AsUInt64().GetElement(0);
+
+        [MethodImpl(Inline)]
+        public static ulong vlo(Vector128<ushort> src)
+            => src.AsUInt64().GetElement(0);
+
+        [MethodImpl(Inline)]
+        public static ulong vhi(Vector128<byte> src)
+            => src.AsUInt64().GetElement(1);
+
+        [MethodImpl(Inline)]
+        public static ulong vhi(Vector128<ushort> src)
+            => src.AsUInt64().GetElement(1);
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vlo(Vector256<byte> src)
+            => Vector256.GetLower(src);
+
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vlo(Vector256<ushort> src)
+            => Vector256.GetLower(src);
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vhi(Vector256<byte> src)
+            => Vector256.GetUpper(src);
+
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vhi(Vector256<ushort> src)
+            => Vector256.GetUpper(src);
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vlo(Vector512<byte> src)
+            => src.Lo;
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vhi(Vector512<byte> src)
+            => src.Hi;
     }
 }

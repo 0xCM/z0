@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-
     using C = CreditTypes.Chapter;
     using A = CreditTypes.Appendix;
 

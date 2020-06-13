@@ -6,13 +6,11 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    
-    using static Seed;
-    using static Memories;
- 
+
     using Z0.Asm.Data;
 
+    using static Control;
+ 
     using F = EnumDatasetEntryField;
     
     public class t_enum_datasets : t_asm<t_enum_datasets>
@@ -94,10 +92,8 @@ namespace Z0.Asm
         public void enum_dataset_convert()
         {
             var path = CasePath(FileExtensions.Csv);
-            var dataset = Enums.dataset<InstructionToken,byte>();
-            var enums = Symbolic.enums(dataset).ToReadOnlySpan();
+            var enums = @readonly(Symbolic.enums<InstructionToken,byte>());
             emit(enums,path);
-
         }
     }
 }

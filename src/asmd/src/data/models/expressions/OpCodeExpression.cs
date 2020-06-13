@@ -22,7 +22,7 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public OpCodeExpression(string src)
-            => Body = Symbolic.encode(src, ASCI, n32);
+            => Body = Symbolic.asci(src, n32);
 
         [MethodImpl(Inline)]
         public OpCodeExpression(asci32 src)
@@ -30,7 +30,7 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public OpCodeExpression(char[] src)
-            => Body = Symbolic.encode(src, ASCI, n32);
+            => Body = Symbolic.asci(src, n32);
 
         public ReadOnlySpan<byte> Encoded
         {

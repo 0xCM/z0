@@ -113,9 +113,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline)]
         public ReadOnlySpan<char> chars(sbyte offset, sbyte count)
-        {
-            return Spans.cast<char>(CharBytes).Slice(offset, count);
-        }
+            => Spans.cast<char>(CharBytes).Slice(offset, count);
             
             //=> Control.cast<char>(CharBytes).Slice(offset, count);
 

@@ -9,24 +9,44 @@ namespace Z0
 
     using static Konst;
     using static Control;
+    using static Typed;
 
     partial class Symbolic     
     {
         [MethodImpl(Inline), Op]
-        public static asci16 encode(ReadOnlySpan<char> src, ASCI asci, N16 n)        
-            => AsciCodes.encode(n, src);            
+        public static ref readonly asci4 encode(ReadOnlySpan<char> src, out asci4 dst)        
+        {
+            dst = asci(src, n4);
+            return ref dst;
+        }
 
         [MethodImpl(Inline), Op]
-        public static asci32 encode(ReadOnlySpan<char> src, ASCI asci, N32 n)        
-            => AsciCodes.encode(n,src);            
-
-        [MethodImpl(Inline), Op]
-        public static asci64 encode(ReadOnlySpan<char> src, ASCI asci, N64 n)        
-            => AsciCodes.encode(n,src);            
-
+        public static ref readonly asci8 encode(ReadOnlySpan<char> src, out asci8 dst)        
+        {
+            dst = asci(src, n8);
+            return ref dst;
+        }
+        
         [MethodImpl(Inline), Op]
         public static ref readonly asci16 encode(ReadOnlySpan<char> src, out asci16 dst)        
-            => ref AsciCodes.encode(src, out dst);
+        {
+            dst = asci(src, n16);
+            return ref dst;
+        }
+        
+        [MethodImpl(Inline), Op]
+        public static ref readonly asci32 encode(ReadOnlySpan<char> src, out asci32 dst)        
+        {
+            dst = asci(src, n32);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly asci64 encode(ReadOnlySpan<char> src, out asci64 dst)        
+        {
+            dst = asci(src, n64);
+            return ref dst;
+        }
 
         /// <summary>
         /// Fills a caller-supplied target span with asci codes corresponding to characters in a source span

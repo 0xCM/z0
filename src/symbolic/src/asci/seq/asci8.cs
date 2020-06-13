@@ -27,6 +27,10 @@ namespace Z0
         internal readonly ulong Storage;
 
         [MethodImpl(Inline)]
+        public static asci8 From(ReadOnlySpan<AsciCharCode> src)
+            => new asci8(Control.head(Control.cast<AsciCharCode,ulong>(src)));
+
+        [MethodImpl(Inline)]
         public static implicit operator asci8(string src)
             => new asci8(src);
 
@@ -93,7 +97,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.format(this);
+            get => Symbolic.format(this);
         }
 
         [MethodImpl(Inline)]

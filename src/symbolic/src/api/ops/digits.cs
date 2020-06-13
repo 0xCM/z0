@@ -16,7 +16,7 @@ namespace Z0
     partial class Symbolic        
     {        
         [MethodImpl(Inline), Op]
-        public static Span<DeciDigit> digits(Base10 @base, ReadOnlySpan<char> src, Span<DeciDigit> dst)
+        public static Span<DeciDigit> digits(ReadOnlySpan<char> src, Span<DeciDigit> dst)
         {
             var len = src.Length;
             for(var i = 0; i< len; i++)
@@ -28,11 +28,11 @@ namespace Z0
         {
             var data = src.ToString();
             var dst = new DeciDigit[data.Length];
-            return digits(@base10, data, dst);
+            return digits(data, dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(Base2 @base, byte src, Span<BinaryDigit> dst)
+        public static void digits(byte src, Span<BinaryDigit> dst)
         {
             seek(dst,0) = (BinaryDigit)((0b00000001 & src) >> 0);
             seek(dst,1) = (BinaryDigit)((0b00000010 & src) >> 1);
@@ -45,24 +45,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(Base2 @base, ushort src, Span<BinaryDigit> dst)
+        public static void digits(ushort src, Span<BinaryDigit> dst)
         {
-            digits(@base, (byte)src, dst);
-            digits(@base, (byte)(src >> 8), dst.Slice(8));
+            digits((byte)src, dst);
+            digits((byte)(src >> 8), dst.Slice(8));
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(Base2 @base, uint src, Span<BinaryDigit> dst)
+        public static void digits(uint src, Span<BinaryDigit> dst)
         {
-            digits(@base, (ushort)src,dst);
-            digits(@base, (ushort)(src >> 16),dst.Slice(16));
+            digits((ushort)src,dst);
+            digits((ushort)(src >> 16),dst.Slice(16));
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(Base2 @base, ulong src, Span<BinaryDigit> dst)
+        public static void digits(ulong src, Span<BinaryDigit> dst)
         {
-            digits(@base, (uint)src,dst);
-            digits(@base, (uint)(src >> 32), dst.Slice(32));
+            digits((uint)src,dst);
+            digits((uint)(src >> 32), dst.Slice(32));
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly NatSpan<N8, OctalDigit> digits(Perm8L src, in NatSpan<N8, OctalDigit> dst)
+        public static ref readonly NatSpan<N8, OctalDigit> digits(Perm8L src, in NatSpan<N8,OctalDigit> dst)
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
             var scalar = (uint)src;
@@ -236,6 +236,5 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         public static NatSpan<N16,HexDigit> digits(Perm16L src)
             => digits(src, NatSpan.alloc<N16,HexDigit>());
-
     }
 }

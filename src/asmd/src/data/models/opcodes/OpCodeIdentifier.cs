@@ -79,7 +79,7 @@ namespace Z0.Asm.Data
         
         [MethodImpl(Inline)]
         public string Format()
-            => AsciCodes.format(Body);
+            => Symbolic.format(Body);
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeIdentifier src)

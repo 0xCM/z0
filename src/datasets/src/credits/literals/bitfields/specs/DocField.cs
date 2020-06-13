@@ -3,9 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using System;
- 
+{         
     using P = CreditTypes.DocFieldDelimiter;
 
     using static Octet;
@@ -75,7 +73,5 @@ namespace Z0
             [FieldSeg("[11111111 11111111 00000000 00000000 00000000 00000000 00000000]")]
             Content = ContentWidth << P.Content,
         }
-
     }
-
 }

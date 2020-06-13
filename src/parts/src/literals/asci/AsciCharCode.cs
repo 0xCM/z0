@@ -15,6 +15,156 @@ namespace Z0
         /// </summary>
         Null = 0,
 
+         /// <summary>
+        /// The tab character code 9
+        /// </summary>
+        Tab = (byte)ASym.Tab,
+
+        /// <summary>
+        /// The new-line character code 10
+        /// </summary>
+        NL = (byte)ASym.NL,
+
+        /// <summary>
+        /// The line-feed character code 13
+        /// </summary>
+        CR = (byte)ASym.CR,
+
+        /// <summary>
+        /// The ' ' character code 32
+        /// </summary>
+        Space = (byte)ASym.Space,
+
+        /// <summary>
+        /// The '!' character code 33
+        /// </summary>
+        Bang = (byte)ASym.Bang,
+
+        /// <summary>
+        /// The '"' character code 34
+        /// </summary>
+        Quote = (byte)ASym.Quote,
+
+        /// <summary>
+        /// The '#' character code 35
+        /// </summary>
+        Hash = (byte)ASym.Hash,
+
+        /// <summary>
+        /// The '$' character code 36
+        /// </summary>
+        Dollar = (byte)ASym.Dollar,
+
+        /// <summary>
+        /// The '%' character code 37
+        /// </summary>
+        Percent = (byte)ASym.Percent,
+
+        /// <summary>
+        /// The '&' character code 38
+        /// </summary>
+        Amp = (byte)ASym.Amp,
+
+        /// <summary>
+        /// The ''' character code 39
+        /// </summary>
+        SQuote = (byte)ASym.SQuote,
+
+        /// <summary>
+        /// The '(' character code 40
+        /// </summary>
+        LParen = (byte)ASym.LParen,        
+
+        /// <summary>
+        /// The ')' character code 41
+        /// </summary>
+        RParen = (byte)ASym.RParen,        
+
+        /// <summary>
+        /// The '}' character code 41
+        /// </summary>
+        RBrace = (byte)ASym.RParen,
+
+        /// <summary>
+        /// The '*' character code 42
+        /// </summary>
+        Star = (byte)ASym.MUL,
+
+        /// <summary>
+        /// The '+' character code 43
+        /// </summary>
+        Plus = (byte)ASym.Plus,
+
+        /// <summary>
+        /// The ,' character code 44
+        /// </summary>
+        Comma = (byte)ASym.Comma,
+
+        /// <summary>
+        /// The '-' character code 45
+        /// </summary>
+        Dash = (byte)ASym.Dash,
+
+        /// <summary>
+        /// The '.' character code 46
+        /// </summary>
+        Dot = (byte)ASym.Dot,
+
+        /// <summary>
+        /// The '/' character code 47
+        /// </summary>
+        FSlash = (byte)ASym.FSlash,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '0'
+        /// </summary>
+        d0 = (byte)ASym.d0,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '1'
+        /// </summary>
+        d1 = (byte)ASym.d1,
+        
+        /// <summary>
+        /// Specifies the asci code for the digit '2'
+        /// </summary>
+        d2 = (byte)ASym.d2,
+        
+        /// <summary>
+        /// Specifies the asci code for the digit '3'
+        /// </summary>
+        d3 = (byte)ASym.d3,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '4'
+        /// </summary>
+        d4 = (byte)ASym.d4,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '5'
+        /// </summary>
+        d5 = (byte)ASym.d5,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '6'
+        /// </summary>
+        d6 = (byte)ASym.d6,
+
+        /// <summary>
+        /// Specifies the asci code for the digit '7'
+        /// </summary>
+        d7 = (byte)ASym.d7,
+        
+        /// <summary>
+        /// Specifies the asci code for the digit '8'
+        /// </summary>
+        d8 = (byte)ASym.d8,
+        
+        /// <summary>
+        /// Specifies the asci code for the digit '9'
+        /// </summary>
+        d9 = (byte)ASym.d9,        
+
         /// <summary>
         /// The 'a' symbol code 97
         /// </summary>
@@ -274,156 +424,6 @@ namespace Z0
         /// The 'Z' symbol code 90
         /// </summary>
         Z = (byte)ASym.Z,
-
-        /// <summary>
-        /// Specifies the asci code for the digit '0'
-        /// </summary>
-        d0 = (byte)ASym.d0,
-
-        /// <summary>
-        /// Specifies the asci code for the digit '1'
-        /// </summary>
-        d1 = (byte)ASym.d1,
-        
-        /// <summary>
-        /// Specifies the asci code for the digit '2'
-        /// </summary>
-        d2 = (byte)ASym.d2,
-        
-        /// <summary>
-        /// Specifies the asci code for the digit '3'
-        /// </summary>
-        d3 = (byte)ASym.d3,
-
-        /// <summary>
-        /// Specifies the asci code for the digit '4'
-        /// </summary>
-        d4 = (byte)ASym.d4,
-
-        /// <summary>
-        /// Specifies the asci code for the digit '5'
-        /// </summary>
-        d5 = (byte)ASym.d5,
-
-        /// <summary>
-        /// Specifies the asci code for the digit '6'
-        /// </summary>
-        d6 = (byte)ASym.d6,
-
-        /// <summary>
-        /// Specifies the asci code for the digit '7'
-        /// </summary>
-        d7 = (byte)ASym.d7,
-        
-        /// <summary>
-        /// Specifies the asci code for the digit '8'
-        /// </summary>
-        d8 = (byte)ASym.d8,
-        
-        /// <summary>
-        /// Specifies the asci code for the digit '9'
-        /// </summary>
-        d9 = (byte)ASym.d9,        
-
-         /// <summary>
-        /// The tab character code 9
-        /// </summary>
-        Tab = (byte)ASym.Tab,
-
-        /// <summary>
-        /// The new-line character code 10
-        /// </summary>
-        NL = (byte)ASym.NL,
-
-        /// <summary>
-        /// The line-feed character code 13
-        /// </summary>
-        CR = (byte)ASym.CR,
-
-        /// <summary>
-        /// The ' ' character code 32
-        /// </summary>
-        Space = (byte)ASym.Space,
-
-        /// <summary>
-        /// The '!' character code 33
-        /// </summary>
-        Bang = (byte)ASym.Bang,
-
-        /// <summary>
-        /// The '"' character code 34
-        /// </summary>
-        Quote = (byte)ASym.Quote,
-
-        /// <summary>
-        /// The '#' character code 35
-        /// </summary>
-        Hash = (byte)ASym.Hash,
-
-        /// <summary>
-        /// The '$' character code 36
-        /// </summary>
-        Dollar = (byte)ASym.Dollar,
-
-        /// <summary>
-        /// The '%' character code 37
-        /// </summary>
-        Percent = (byte)ASym.Percent,
-
-        /// <summary>
-        /// The '&' character code 38
-        /// </summary>
-        Amp = (byte)ASym.Amp,
-
-        /// <summary>
-        /// The ''' character code 39
-        /// </summary>
-        SQuote = (byte)ASym.SQuote,
-
-        /// <summary>
-        /// The '(' character code 40
-        /// </summary>
-        LParen = (byte)ASym.LParen,        
-
-        /// <summary>
-        /// The ')' character code 41
-        /// </summary>
-        RParen = (byte)ASym.RParen,        
-
-        /// <summary>
-        /// The '}' character code 41
-        /// </summary>
-        RBrace = (byte)ASym.RParen,
-
-        /// <summary>
-        /// The '*' character code 42
-        /// </summary>
-        Star = (byte)ASym.MUL,
-
-        /// <summary>
-        /// The '+' character code 43
-        /// </summary>
-        Plus = (byte)ASym.Plus,
-
-        /// <summary>
-        /// The ,' character code 44
-        /// </summary>
-        Comma = (byte)ASym.Comma,
-
-        /// <summary>
-        /// The '-' character code 45
-        /// </summary>
-        Dash = (byte)ASym.Dash,
-
-        /// <summary>
-        /// The '.' character code 46
-        /// </summary>
-        Dot = (byte)ASym.Dot,
-
-        /// <summary>
-        /// The '/' character code 47
-        /// </summary>
-        FSlash = (byte)ASym.FSlash,
 
         /// <summary>
         /// The ':' character code 58

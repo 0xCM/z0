@@ -11,6 +11,7 @@ namespace Z0
     using static Konst;
 
     using N = N64;
+    using W = W512;
 
     public readonly struct asci64 : IAsciSequence<asci64,N>
     {
@@ -23,6 +24,13 @@ namespace Z0
         public const int Size = 64;
 
         static N n => default;
+
+        static W w => default;
+
+
+        [MethodImpl(Inline)]
+        public static asci64 From(ReadOnlySpan<AsciCharCode> src)
+            => new asci64(Control.cast<AsciCharCode,byte>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator asci64(string src)
@@ -50,6 +58,12 @@ namespace Z0
         public asci64(string src)
         {
             Storage = AsciCodes.encode(n,src).Storage;
+        }
+
+        [MethodImpl(Inline)]
+        public asci64(ReadOnlySpan<byte> src)
+        {
+            Storage = SymBits.vload(w, Control.head(src));
         }
 
         public bool IsEmpty
@@ -109,7 +123,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => AsciCodes.format(this);
+            get => Symbolic.format(this);
         }
 
         [MethodImpl(Inline)]

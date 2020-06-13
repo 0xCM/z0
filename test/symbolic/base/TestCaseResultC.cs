@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     public readonly struct TestCaseResult<C> : ITestCaseResult<C>
         where C : ITestCase
@@ -32,8 +31,6 @@ namespace Z0
             Case = tc;
             Success = success;
             Description = description;
-        }
-        
+        }       
     }
-
 }
