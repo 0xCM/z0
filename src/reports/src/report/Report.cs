@@ -9,10 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    public class Report<R> : IReport<R>
+    public class Report<R> : IReport
         where R : ITabular<R>
     {             
         public static Report<R> Empty => new Report<R>();
+
+        ITabular[] IReport.Records 
+            => Records.Map(r => (ITabular)r);
 
         public R[] Records {get;}
 

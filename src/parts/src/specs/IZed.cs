@@ -16,16 +16,4 @@ namespace Z0
     {
         
     }
-
-    public readonly struct Zed 
-    {
-        
-    }
-
-    public readonly struct Zed<Z> : IZed<Z>
-        where Z : INullary<Z>, new()
-    {
-        public Z Zero => new Z();
-
-    }
 }

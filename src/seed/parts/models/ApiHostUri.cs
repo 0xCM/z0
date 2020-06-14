@@ -57,7 +57,6 @@ namespace Z0
         public static ApiHostUri FromHost<H>()
             => FromHost(typeof(H));
 
-
         [MethodImpl(Inline)]
         public static ApiHostUri Define(PartId owner, string name)
             => new ApiHostUri(owner,name);

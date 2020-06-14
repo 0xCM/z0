@@ -8,11 +8,14 @@ namespace Z0
 
     public interface IAppError : IAppEvent
     {
-        AppMsgColor IAppEvent.Flair => AppMsgColor.Red;
+        AppMsgColor IAppEvent.Flair 
+            => AppMsgColor.Red;
 
-        bool IAppEvent.IsError => true;
+        bool IAppEvent.IsError 
+            => true;
 
-        IAppMsg IAppEvent.Message => AppMsg.NoCaller(Format(), AppMsgKind.Error);
+        IAppMsg IAppEvent.Message 
+            => AppMsg.NoCaller(Format(), AppMsgKind.Error);
     }
 
     public interface IAppError<F> : IAppError, IAppEvent<F>

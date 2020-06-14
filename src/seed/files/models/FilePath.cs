@@ -18,7 +18,8 @@ namespace Z0
         /// <summary>
         /// Lonely, so
         /// </summary>
-        public static FilePath[] None => Control.array<FilePath>();
+        public static FilePath[] None 
+            => Array.Empty<FilePath>();
 
         [MethodImpl(Inline)]
         public static FilePath Define(string name) 
@@ -48,12 +49,7 @@ namespace Z0
 
         }
 
-        /// <summary>
-        /// Just the one
-        /// </summary>
-        FilePath[] One => Control.array(this);
-
-        /// <summary>
+       /// <summary>
         /// Determines whether the modeled file exists on disk
         /// </summary>
         public bool Exists

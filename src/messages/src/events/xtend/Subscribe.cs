@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     partial class XTend
     {
@@ -22,5 +22,12 @@ namespace Z0
         public static Outcome Subscribe<E>(this E e, IEventBroker broker, Action<E> receiver)
             where E : IAppEvent
                 => AppEvents.subscribe(e, broker, receiver);
+
+        public static ref readonly E Deposit<E>(this IAppMsgSink dst, in E src)      
+            where E : IAppEvent
+        {
+            dst.NotifyConsole(src.Message);
+            return ref src;
+        }                
     }
 }

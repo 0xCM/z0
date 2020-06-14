@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     public class Konst
     {
@@ -168,5 +167,12 @@ namespace Z0
         /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
         /// </summary>
         public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;
+
+        /// <summary>
+        /// An abbreviation for the somewhat verbose "StringComparison.InvariantCulture"
+        /// </summary>
+        public const StringComparison Cased = StringComparison.InvariantCulture;
+
+        public const char FilePathSep = '/';
     }
 }

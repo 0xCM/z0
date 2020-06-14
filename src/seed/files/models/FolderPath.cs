@@ -17,24 +17,28 @@ namespace Z0
     /// </summary>
     public partial class FolderPath : IPathComponent<FolderPath>
     {        
-        const char Separator = IPathComponent.Separator;
-
-        public static FolderPath Empty =>  Define(string.Empty);
-
-        /// <summary>
-        /// Just the one
-        /// </summary>
-        FolderPath[] One => Control.array(this);
-
         /// <summary>
         /// The full path name
         /// </summary>
         public string Name {get;}
 
+        public static FolderPath Empty 
+            => Define(string.Empty);
+
+        /// <summary>
+        /// Just the one
+        /// </summary>
+        FolderPath[] One 
+            => new FolderPath[]{this};
+
         /// <summary>
         /// The name of the folder sans path
         /// </summary>
-        public FolderName FolderName => new FolderName(Directory.GetParent(Name).Name);
+        public FolderName FolderName 
+        {
+            [MethodImpl(Inline)]
+            get => new FolderName(Directory.GetParent(Name).Name);
+        }
         
         /// <summary>
         /// Creates a folder path directly from text, with no intervening manipulation
@@ -50,7 +54,7 @@ namespace Z0
         /// <param name="path">The source path</param>
         /// <param name="folder">The subfolder to append</param>
         public static FolderPath operator + (FolderPath path, FolderName folder)
-            => FolderPath.Define(string.Concat(path.WithoutSeparatorSuffix.Name, Separator, folder.Name));
+            => FolderPath.Define(string.Concat(path.WithoutSeparatorSuffix.Name, FilePathSep, folder.Name));
 
         /// <summary>
         /// Combines a folder path with a filename to form a file path
@@ -58,26 +62,26 @@ namespace Z0
         /// <param name="path">The source path</param>
         /// <param name="file">The file name</param>
         public static FilePath operator + (FolderPath path, FileName file)
-            => FilePath.Define(string.Concat(path.WithoutSeparatorSuffix.Name, Separator, file.Name));
+            => FilePath.Define(string.Concat(path.WithoutSeparatorSuffix.Name, FilePathSep, file.Name));
 
         public static FolderPath operator + (FolderPath path, RelativeLocation location)
-            => FolderPath.Define(string.Concat(path.WithoutSeparatorSuffix.Name, Separator, location.Name));
+            => FolderPath.Define(string.Concat(path.WithoutSeparatorSuffix.Name, FilePathSep, location.Name));
 
+        [MethodImpl(Inline)]
         public static bool operator ==(FolderPath x, FolderPath y)
             => x.Equals(y);
 
+        [MethodImpl(Inline)]
         public static bool operator !=(FolderPath x, FolderPath y)
             => !x.Equals(y);
 
+        [MethodImpl(Inline)]
         public FolderPath()
-        {
-            Name = string.Empty;
-        }
+            => Name = string.Empty;
 
+        [MethodImpl(Inline)]
         public FolderPath(string name)
-        {   
-            Name = name;
-        }
+            => Name = name;
 
         /// <summary>
         /// Specifies whether the represented directory actually exists within the file system

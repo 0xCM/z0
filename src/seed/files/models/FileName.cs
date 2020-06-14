@@ -34,12 +34,14 @@ namespace Z0
         /// <summary>
         /// Does the file have an extension?
         /// </summary>
-        public bool HasExtension => Path.HasExtension(Name);
+        public bool HasExtension 
+            => Path.HasExtension(Name);
 
         /// <summary>
         /// The name of the file sans extension
         /// </summary>
-        public FileName WithoutExtension => FileName.Define(Path.GetFileNameWithoutExtension(Name));
+        public FileName WithoutExtension 
+            => FileName.Define(Path.GetFileNameWithoutExtension(Name));
 
         /// <summary>
         /// The file's extension, if any

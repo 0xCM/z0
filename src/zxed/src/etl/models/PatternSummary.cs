@@ -12,6 +12,9 @@ namespace Z0.Xed
     using F = PatternField;
     using R = PatternSummary;
 
+
+
+
     public enum PatternField : uint
     {
         Class = 0 | 20u << WidthOffset,

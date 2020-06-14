@@ -18,8 +18,6 @@ namespace Z0
 
         public FilePath TargetPath {get;}
         
-
-
         [MethodImpl(Inline)]
         internal RecordWriter(FilePath path)
         {

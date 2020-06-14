@@ -5,16 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    public class PartIdentity
+    
+    public readonly struct PartIdentity
     {
-
-        [MethodImpl(Inline)]
-        public static IEnumerable<T> seq<T>(params T[] src)
-            => src;
-
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
     }
 }
