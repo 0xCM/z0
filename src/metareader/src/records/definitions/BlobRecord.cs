@@ -54,18 +54,19 @@ namespace Z0
 
             public string Format(char delimiter)
                 => MetadataFormat.format(this, delimiter);
-
         }
-
+        
         public readonly struct BlobSpec : IMetadataRecordSpec<S>
         {
             [MethodImpl(Inline)]
             public static implicit operator MetadataRecordKind(S src)
                 => src.RecordType;
 
-            public MetadataRecordKind RecordType => MetadataRecordKind.Blob;       
+            public MetadataRecordKind RecordType 
+                => MetadataRecordKind.Blob;       
 
-            public byte FieldCount => (byte)RecordFieldCount;
+            public byte FieldCount 
+                => (byte)RecordFieldCount;
 
             public ReadOnlySpan<string> HeaderFields 
                 => new string[(int)RecordFieldCount]{
@@ -74,7 +75,7 @@ namespace Z0
                     nameof(Offset), 
                     nameof(Value), 
                     };
-
+            
             public ReadOnlySpan<byte> FieldWidths 
                 => new byte[(int)RecordFieldCount]{12, 12, 12, 30};
 

@@ -11,8 +11,11 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
 
+    using Z0.Asm.Data;
     using static Seed;
     using static Control;
+
+
 
     public class t_resource_check : t_asm<t_resource_check>
     {
@@ -33,58 +36,45 @@ namespace Z0.Asm
             report.Save(path).Require();            
         }
 
-        void WriteAsm(CapturedCode capture, StreamWriter dst)
-        {
-            var asm = Context.Decoder.Decode(capture).Require();
-            var formatted = Context.Formatter.FormatFunction(asm);
-            dst.Write(formatted);            
-        }
-
-        Option<AsmFunctionCode> FunctionCode(CapturedCode capture)
-        {
-            var decoded = Context.Decoder.Decode(capture);
-            if(decoded)
-                return new AsmFunctionCode(decoded.Value, capture);
-            else
-                return Option.none<AsmFunctionCode>();
-        }
 
         public void resource_method_capture()
         {
-            var stores = ResStores.Service;
-            var restype = typeof(ReadOnlySpan<byte>);
-            var methods = span(stores.accessors(Api.Assemblies));
-            var functions = list<AsmFunctionCode>();
-            using var writer = CaseWriter(FileExtensions.Asm);
-            using var capture = QuickCapture.Alloc(Context);
-            var dst = span(alloc<CapturedCode>(methods.Length));
-
-            for(var i=0; i<methods.Length; i++)
+            var svc = AccessorCapture.Service(Context);
+            var accessors = span(svc.CaptureAccessors(CasePath(FileExtensions.Asm)));
+            using var addresses = CaseWriter(FileExtensions.Csv);
+            addresses.WriteLine(text.concat("Addresss".PadRight(16),  " | ", "Accessor"));
+            for(var i=0; i<accessors.Length; i++)
             {
-                ref readonly var m = ref skip(methods,i);
-                var result = capture.Capture(m);
-                seek(dst,i) = result.ValueOrDefault(CapturedCode.Empty);
-                if(result)
+                ref readonly var accessor = ref skip(accessors, i);
+                var f = accessor.Code.Function;
+                var moves = AsmAnalyzer.moves(f);
+                for(var j =0; j<moves.Length; j++)
                 {
-                    ref readonly var code = ref skip(dst,i);
-                    WriteAsm(code, writer);
+                    ref readonly var move = ref skip(moves,j);
+                    var description = text.concat(move.Src.ToAddress(), " | ", accessor.Code.Code.OpUri);
+                    addresses.WriteLine(description);
 
-                    var f = FunctionCode(code);
-                    if(f)
-                        functions.Add(f.Value);
                 }
-            }
+            }            
+        }
 
-            // Span<AsmInstructionList> lists = new AsmInstructionList[functions.Count];
-            // for(var i = 0; i<functions.Count; i++)
-            //     seek(lists,i) = functions[i].Function.Inxs;
-            
-            // var results = AsmAnalyzer.Analyze(lists);
-            // for(var i = 0; i<results.Length; i++)
-            // {
-            //     var result = results[i];
-            //     //Trace(result);
-            // }
+        public void string_literals()
+        {
+            var svc = FieldCapture.Service;
+            var fields = span(svc.StringLiterals(typeof(InstructionTokenPurpose)));
+            svc.Emit(fields, CasePath(FileExtensions.Csv));
+
+            for(var i=0; i<fields.Length; i++)
+            {
+                ref readonly var field = ref skip(fields,i);
+                var memref = field.Location;
+                var address = memref.Address;
+                var data = memref.Load();
+                var chars = span16c(data);
+                var cstr = chars.ToString();      
+                var expect = field.Field.GetRawConstantValue() as string;          
+                Claim.eq(expect, cstr);
+            }
         }
 
     }

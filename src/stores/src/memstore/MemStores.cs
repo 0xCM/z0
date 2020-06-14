@@ -15,16 +15,16 @@ namespace Z0
         public static MemStores Service => default;
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<byte> load(in MemoryRef src)
+        public ReadOnlySpan<byte> load(in MemRef src)
             => src.Load();
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public ReadOnlySpan<T> load<T>(in MemoryRef src)
+        public ReadOnlySpan<T> load<T>(in MemRef src)
             where T : struct
                 => src.Load<T>();
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<byte> load(ReadOnlySpan<MemoryRef> refs, MemStoreIndex n)
+        public ReadOnlySpan<byte> load(ReadOnlySpan<MemRef> refs, MemStoreIndex n)
             => load<byte>(memref(refs,n));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -32,32 +32,32 @@ namespace Z0
             => ref Reader.skip(src, offset);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public ref readonly T cell<T>(ReadOnlySpan<MemoryRef> refs, MemStoreIndex n, int offset)
+        public ref readonly T cell<T>(ReadOnlySpan<MemRef> refs, MemStoreIndex n, int offset)
              where T : struct
                 => ref cell<T>(load<T>(memref(refs,n)), offset);
 
         [MethodImpl(Inline), Op]
-        public ref readonly byte cell(ReadOnlySpan<MemoryRef> refs, MemStoreIndex n, int i)
+        public ref readonly byte cell(ReadOnlySpan<MemRef> refs, MemStoreIndex n, int i)
             => ref Reader.skip(load(memref(refs,n)),i);
 
         [MethodImpl(Inline), Op]
-        public ref readonly MemoryRef memref(ReadOnlySpan<MemoryRef> refs, MemStoreIndex n)
+        public ref readonly MemRef memref(ReadOnlySpan<MemRef> refs, MemStoreIndex n)
             => ref cell(refs, n);
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<byte> slice(ReadOnlySpan<MemoryRef> refs, MemStoreIndex n, int offset)
+        public ReadOnlySpan<byte> slice(ReadOnlySpan<MemRef> refs, MemStoreIndex n, int offset)
             => Reader.slice(load(refs, n),offset);
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<byte> slice(ReadOnlySpan<MemoryRef> refs, MemStoreIndex n, int offset, int length)
+        public ReadOnlySpan<byte> slice(ReadOnlySpan<MemRef> refs, MemStoreIndex n, int offset, int length)
             => Reader.slice(load(refs,n), offset, length);
 
         [MethodImpl(Inline)]
-        public ulong sib(in MemoryRef n, int i, byte scale, ushort offset)
+        public ulong sib(in MemRef n, int i, byte scale, ushort offset)
             => ((ulong)scale)*cell(n.Load(),i) + (ulong)offset;
 
         [MethodImpl(Inline)]
-        public ulong sib(ReadOnlySpan<MemoryRef> refs, in MemStoreIndex n, int i, byte scale, ushort offset)
+        public ulong sib(ReadOnlySpan<MemRef> refs, in MemStoreIndex n, int i, byte scale, ushort offset)
             => sib(memref(refs,n), i, scale,offset);
         
         static SpanReader Reader 

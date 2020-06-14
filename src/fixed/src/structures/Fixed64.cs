@@ -92,25 +92,6 @@ namespace Z0
         public static implicit operator Fixed64(ulong x0)
             => From(x0);
 
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed64(byte x0)
-            => From(x0);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed64(Fixed8 x0)
-            => From(x0);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed64(ushort x0)
-            => From(x0);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed64(Fixed16 x0)
-            => From(x0);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed64(uint x0)
-            => From(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed64(Fixed32 x0)
@@ -120,9 +101,6 @@ namespace Z0
         public static explicit operator sbyte(Fixed64 x)
             => (sbyte)x.Data;
 
-        [MethodImpl(Inline)]
-        public static explicit operator byte(Fixed64 x)
-            => (byte)x.Data;
 
         [MethodImpl(Inline)]
         public static explicit operator short(Fixed64 x)

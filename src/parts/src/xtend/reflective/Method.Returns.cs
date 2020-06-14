@@ -19,6 +19,13 @@ namespace Z0
             => src.Where(x => x.ReturnType == typeof(T));
 
         /// <summary>
+        /// Selects the methods from a stream that return a particular type of value
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static MethodInfo[] Returns<T>(this MethodInfo[] src)
+            => src.Where(x => x.ReturnType == typeof(T));
+
+        /// <summary>
         /// Selects methods from a stream that return a particular type of value
         /// </summary>
         /// <param name="src">The methods to examine</param>

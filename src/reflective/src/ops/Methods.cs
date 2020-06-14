@@ -45,12 +45,5 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> NonPublic(this IEnumerable<MethodInfo> src)
             => src.Where(t => !t.IsPublic);
-
-        /// <summary>
-        /// Selects the concrete (not abstract) methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Concrete(this IEnumerable<MethodInfo> src)
-            => src.Where(t => !t.IsAbstract);
     }
 }

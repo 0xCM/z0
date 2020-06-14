@@ -13,6 +13,7 @@ namespace Z0
 
     using API = SymbolicData;
 
+
     readonly struct AsciDataStrings
     {
         string S000

@@ -41,6 +41,10 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
+        [MethodImpl(Inline)]
+        public Address16 ToAddress()
+            => Addresses.address16((ushort)Value);
+
         public DataWidth Width 
             => DataWidth.W16;
     }

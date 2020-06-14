@@ -11,11 +11,7 @@ namespace Z0
     
     partial class XTend
     {
-        /// <summary>
-        /// Selects the static methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Static(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsStatic);
+        public static bool IsConcrete(this MethodInfo src)
+            => !src.IsAbstract && !src.ContainsGenericParameters;
     }
 }

@@ -25,7 +25,10 @@ namespace Z0
         
         public OpIdentity Parse(string text)
         {
-            var src = text ?? 0.ToString();
+            if(string.IsNullOrWhiteSpace(text))
+                return OpIdentity.Empty;
+            
+            var src = text;
             var name = src.TakeBefore(PartSep);
             var suffixed = src.Contains(SuffixSep);
             var suffix = suffixed ? src.TakeAfter(IDI.SuffixSep) : string.Empty;

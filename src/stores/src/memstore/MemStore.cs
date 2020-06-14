@@ -11,20 +11,42 @@ namespace Z0
     
     public readonly struct MemStore
     {        
-        readonly MemoryRef[] Refs;
+        readonly MemRef[] Refs;
 
         [MethodImpl(Inline)]
-        public static MemStore Service(MemoryRef[] src) 
+        public static MemStore Create(params MemRef[] src) 
             => new MemStore(src);                
-        
-        public ReadOnlySpan<MemoryRef> Sources 
+
+        [MethodImpl(Inline)]
+        public static MemStore Create(MemoryAddress src, ByteSize length) 
+            => Create(new MemRef(src,length));                
+
+        public ReadOnlySpan<MemRef> Sources 
         {
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             get => Refs;                
         }
+
+        public int Count
+        {
+            [MethodImpl(Inline)]
+            get => Refs.Length;
+        }
+
+        [MethodImpl(Inline)]
+        public ref readonly MemRef Source(int index)
+            => ref Refs[index];        
         
-        [MethodImpl(Inline), Op]
-        MemStore(MemoryRef[] src)
-            => Refs = src;
+        /// <summary>
+        /// Loads the data tracked by an index-identified memory reference
+        /// </summary>
+        /// <param name="index">The ref index</param>    
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<byte> Load(int index)
+            => Refs[index].Load();
+        
+        [MethodImpl(Inline)]
+        MemStore(MemRef[] src)
+            => Refs = src;        
     }
 }

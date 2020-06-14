@@ -6,14 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    using static Control;
+    using System.Reflection;
 
-    partial class Symbolic
+    using static Konst;
+
+    public readonly struct ResourceAccessor
     {
+        public readonly ResourceFormat Format;
+        
+        public readonly MethodInfo Member;
+
         [MethodImpl(Inline)]
-        public unsafe static MemRef memref(ReadOnlySpan<byte> src)
-            => new MemRef(gptr(head(src)), src.Length);
+        public ResourceAccessor(MethodInfo member, ResourceFormat format)
+        {
+            Member = member;
+            Format = format;;
+        }       
     }
 }

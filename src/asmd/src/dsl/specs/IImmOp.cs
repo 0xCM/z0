@@ -20,14 +20,14 @@ namespace Z0.Asm
         
     }
 
-    public interface IImmOp<W,T> : IImmOp<T>, IOperand<W,T>
+    public interface IImmOp<W,A> : IImmOp
         where W : unmanaged, IDataWidth
-        where T : unmanaged, IFixed
+        where A : unmanaged, IAddress<W>
     {
-        
+        A ToAddress();
     }
 
-    public interface IImmOp<F,W,T> : IImmOp<W,T>, IOperand<F,W,T>
+    public interface IImmOp<F,W,T> : IImmOp<T>, IOperand<F,W,T>
         where F : unmanaged, IImmOp<F,W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged, IFixed
@@ -35,27 +35,29 @@ namespace Z0.Asm
         
     }
 
-    public interface IImmOp8<F> : IImmOp<F,W8,Fixed8>
+    public interface IImmOp8<F> : IImmOp<F,W8,Fixed8>, IImmOp<W8,Address8>
         where F : unmanaged, IImmOp8<F>
     {
-
+        
     }
 
-    public interface IImmOp16<F> : IImmOp<F,W16,Fixed16>
+    public interface IImmOp16<F> : IImmOp<F,W16,Fixed16>, IImmOp<W16,Address16>
         where F : unmanaged, IImmOp16<F>
     {
+        
 
     }
 
-    public interface IImmOp32<F> : IImmOp<F,W32,Fixed32>
+    public interface IImmOp32<F> : IImmOp<F,W32,Fixed32>, IImmOp<W32,Address32>
         where F : unmanaged, IImmOp32<F>
     {
+        
 
     }
 
-    public interface IImmOp64<F> : IImmOp<F,W64,Fixed64>
+    public interface IImmOp64<F> : IImmOp<F,W64,Fixed64>, IImmOp<W64,Address64>
         where F : unmanaged, IImmOp64<F>
-    {
+    {        
 
     }
 }

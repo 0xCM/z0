@@ -41,8 +41,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Fixed16 From(byte src)
+            => new Fixed16(src);
+
+        [MethodImpl(Inline)]
         public static Fixed16 From(ushort src)
             => new Fixed16(src);
+
 
         [MethodImpl(Inline)]
         public static Fixed16 From(Fixed8 src)
@@ -65,27 +70,47 @@ namespace Z0
             => Data = x;
 
         [MethodImpl(Inline)]
+        public static implicit operator ushort(Fixed16 x)
+            => x.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(Fixed16 x)
+            => x.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(Fixed16 x)
+            => x.Data;
+
+        [MethodImpl(Inline)]
         public static implicit operator Fixed16(ushort x)
             => From(x);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed16(short x)
-            => From(x);
+        public static implicit operator Fixed16(Fixed8 x)
+            => From(x.Data);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed16(int x)
-            => From(x);
+        public static implicit operator Fixed32(Fixed16 x)
+            => Fixed32.From(x.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(Fixed16 x)
+            => Fixed64.From(x.Data);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(byte x)
             => From((ushort)x);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed16(Fixed8 x)
+        public static implicit operator Fixed16(short x)
             => From(x);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed16(uint x)
+        public static explicit operator Fixed16(int x)
+            => From(x);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Fixed16(uint x)
             => From(x);
 
         [MethodImpl(Inline)]
@@ -100,9 +125,6 @@ namespace Z0
         public static explicit operator short(Fixed16 x)
             => (short)x.Data;
 
-        [MethodImpl(Inline)]
-        public static explicit operator ushort(Fixed16 x)
-            => x.Data;
 
         [MethodImpl(Inline)]
         public T As<T>()

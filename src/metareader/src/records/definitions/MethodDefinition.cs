@@ -38,7 +38,8 @@ namespace Z0
             public static implicit operator MetadataRecordKind(S src)
                 => src.RecordType;
 
-            public MetadataRecordKind RecordType => MetadataRecordKind.MethodDefinition;            
+            public MetadataRecordKind RecordType 
+                => MetadataRecordKind.MethodDefinition;            
 
             public override string ToString()
                 => (this as ITextual).Format();

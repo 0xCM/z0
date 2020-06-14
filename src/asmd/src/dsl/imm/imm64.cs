@@ -42,6 +42,10 @@ namespace Z0.Asm.Dsl
         public DataWidth Width 
             => DataWidth.W64;
 
+        [MethodImpl(Inline)]
+        public Address64 ToAddress()
+            => Addresses.address64((ulong)Value);
+
         public string Format()
             => Value.FormatHex();
 

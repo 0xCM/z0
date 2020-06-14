@@ -32,7 +32,6 @@ namespace Z0
             Value = 4,
 
             FieldCount = 5,
-
         }
         
         public readonly struct LiteralRecord : IMetadataRecord<R,S,F>
@@ -74,7 +73,8 @@ namespace Z0
             public MetadataRecordKind RecordType
                 => MetadataRecordKind.Literal;       
 
-            public byte FieldCount => (byte)F.FieldCount;
+            public byte FieldCount
+                => (byte)F.FieldCount;
             
             public ReadOnlySpan<string> HeaderFields 
                 => new string[(int)F.FieldCount]{
@@ -86,7 +86,7 @@ namespace Z0
                     };
 
             public ReadOnlySpan<byte> FieldWidths 
-                => new byte[(int)F.FieldCount]{12, 12, 12, 12, 12};            
+                => new byte[(int)F.FieldCount]{12, 12, 12, 12, 12};
 
             public string HeaderText
             {

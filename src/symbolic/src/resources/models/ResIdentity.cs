@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct ResIdentity
     {
         [MethodImpl(Inline)]
-        public static ResIdentity Define(string name, MemoryRef memref, PrimalKind type)
+        public static ResIdentity Define(string name, MemRef memref, PrimalKind type)
             => new ResIdentity(name, memref, type);
 
         [MethodImpl(Inline)]
@@ -21,7 +21,7 @@ namespace Z0
                 => new ResIdentity<T>(name,location,length);
         
         [MethodImpl(Inline)]
-        public ResIdentity(string name, MemoryRef memref, PrimalKind type)
+        public ResIdentity(string name, MemRef memref, PrimalKind type)
         {
             Name = name;
             Reference = memref;
@@ -30,7 +30,7 @@ namespace Z0
 
         public string Name {get;}
 
-        public MemoryRef Reference {get;}
+        public MemRef Reference {get;}
         
         public PrimalKind DataType {get;}
         

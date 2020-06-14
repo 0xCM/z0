@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Seed;
-    using static Memories;
+    using static Konst;
+    using static Control;
+    using static Typed;
     
     [ApiHost]
     public unsafe readonly struct ResStoreModels 
@@ -18,7 +19,7 @@ namespace Z0
         internal static ResStoreModel Data 
             => ResStoreModel.Data;
         
-        public MemoryRef[] Refs 
+        public MemRef[] Refs 
         {
             [MethodImpl(Inline)]
             get => Data.provided();
@@ -26,7 +27,7 @@ namespace Z0
         
         [MethodImpl(Inline), Op]
         public MemStore store()
-            => MemStore.Service(Refs);
+            => MemStore.Create(Refs);
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> leads()
@@ -65,7 +66,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline), Op]
-        public MemoryRef memref(byte n)
+        public MemRef memref(byte n)
         {
             if(n == 0)
                 return memref(n0);
@@ -115,21 +116,21 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N0))
-                return Data.Seg00;
+                return ResStoreModel.Seg00;
             else if(typeof(N) == typeof(N1))
-                return Data.Seg01;
+                return ResStoreModel.Seg01;
             else if(typeof(N) == typeof(N2))
-                return Data.Seg02;
+                return ResStoreModel.Seg02;
             else if(typeof(N) == typeof(N3))
-                return Data.Seg03;
+                return ResStoreModel.Seg03;
             else if(typeof(N) == typeof(N4))
-                return Data.Seg04;
+                return ResStoreModel.Seg04;
             else if(typeof(N) == typeof(N5))
-                return Data.Seg05;
+                return ResStoreModel.Seg05;
             else if(typeof(N) == typeof(N6))
-                return Data.Seg06;
+                return ResStoreModel.Seg06;
             else if(typeof(N) == typeof(N7))
-                return Data.Seg07;
+                return ResStoreModel.Seg07;
             else
                 return Data.SegZ;
         }
@@ -145,12 +146,12 @@ namespace Z0
                 => ref skip(span(n),i);    
 
         [MethodImpl(Inline)]
-        public unsafe MemoryRef memref<N>(N n = default)
+        public unsafe MemRef memref<N>(N n = default)
             where N : unmanaged, ITypeNat
         {                
             var src = span<N>(n); 
             var pSrc = Control.constptr(head(src));
-            return new MemoryRef(pSrc, src.Length);
+            return new MemRef(pSrc, src.Length);
         }
 
         [Op]
@@ -170,7 +171,7 @@ namespace Z0
                         ref readonly var x = ref skip(data,j);
                         if(j == 0)
                         {
-                            var a = address(x);
+                            var a = MemoryAddress.From(x);
                             if(source.Address == a)
                                 seek(results,i) = a;
                         }

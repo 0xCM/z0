@@ -16,6 +16,11 @@ namespace Z0
         public ulong Location {get;}
 
         [MethodImpl(Inline)]
+        public static unsafe MemoryAddress From<T>(in T src)
+            where T : unmanaged
+                => (T*)Control.pvoid(ref Control.edit(in src));        
+
+        [MethodImpl(Inline)]
         public static unsafe MemoryAddress From(ulong src)
             => Addresses.address(src);
         
@@ -83,11 +88,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(long src)
-            => Addresses.address(src);
+            => Addresses.address((ulong)src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(int src)
-            => Addresses.address(src);
+            => Addresses.address((uint)src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(ushort src)
@@ -99,7 +104,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(short src)
-            => Addresses.address(src);
+            => Addresses.address((ushort)src);
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(MemoryAddress src)

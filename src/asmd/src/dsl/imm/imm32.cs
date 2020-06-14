@@ -34,6 +34,10 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
+        [MethodImpl(Inline)]
+        public Address32 ToAddress()
+            => Addresses.address32((uint)Value);
+
         public DataWidth Width 
             => DataWidth.W32;
     } 

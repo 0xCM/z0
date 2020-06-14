@@ -27,6 +27,10 @@ namespace Z0.Asm.Dsl
             Value = value;
         }
 
+        [MethodImpl(Inline)]
+        public Address8 ToAddress()
+            => Addresses.address8((byte)Value);
+
         public DataWidth Width 
             => DataWidth.W8;
     }

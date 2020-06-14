@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Seed;
+    using static Konst;
 
     [ApiHost]
     readonly struct ResModelQuery : IApiHost<ResModelQuery>
@@ -16,14 +16,14 @@ namespace Z0
         internal ResModelQuery(ResStoreModels models)
         {
             Refs = models.Refs;
-            Storage = MemStore.Service(Refs);
+            Storage = MemStore.Create(Refs);
             Stores = MemStores.Service;
             Models = models;
         }        
                 
         readonly ResStoreModels Models;
         
-        readonly MemoryRef[] Refs;                
+        readonly MemRef[] Refs;                
         
         readonly MemStore Storage;
 

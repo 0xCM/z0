@@ -24,6 +24,16 @@ namespace Z0
             => src;
 
         /// <summary>
+        /// Creates a T-span from a supplied reference
+        /// </summary>
+        /// <param name="src">A reference to the leading cell</param>
+        /// <param name="count">The source cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ReadOnlySpan<T> span<T>(in T src, int count)
+            => CreateReadOnlySpan(ref edit(src), count);
+
+        /// <summary>
         /// Creates a span from an array
         /// </summary>
         /// <param name="src">A reference to the leading cell</param>
@@ -34,16 +44,6 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Creates a T-span from a supplied reference
-        /// </summary>
-        /// <param name="src">A reference to the leading cell</param>
-        /// <param name="count">The source cell count</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> span<T>(ref T src, int count)
-            => CreateSpan(ref src, count);
-
-        /// <summary>
         /// Creates a single-cell T-span from a supplied reference
         /// </summary>
         /// <param name="src">A reference to the cell</param>
@@ -51,7 +51,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<T> span<T>(ref T src)
             => CreateSpan(ref src, 1);
-
 
         /// <summary>
         /// Creates a bytespan from a T-cell reference
@@ -106,5 +105,15 @@ namespace Z0
         [Op, Closures(UnsignedInts)]
         public static Span<T> span<T>(IEnumerable<T> src)
             => src.ToArray();
+
+        /// <summary>
+        /// Creates a u16 span from a T-cell reference
+        /// </summary>
+        /// <param name="src">The reference cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> span16c(ReadOnlySpan<byte> src)
+            => cast<char>(src);
+
     }
 }

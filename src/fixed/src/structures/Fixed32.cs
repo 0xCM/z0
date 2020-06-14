@@ -73,22 +73,6 @@ namespace Z0
             => From(x0);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed32(byte x0)
-            => From(x0);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed32(Fixed8 x0)
-            => From(x0);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed32(ushort x0)
-            => From(x0);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed32(Fixed16 x0)
-            => From(x0);
-
-        [MethodImpl(Inline)]
         public static implicit operator Fixed32(int x0)
             => From(x0);
 

@@ -10,16 +10,16 @@ namespace Z0
     
     using static Konst;
 
-    public readonly struct MemoryRef : IAddressable<MemoryRef>, ITextual, IEquatable<MemoryRef>
+    public readonly struct MemRef : IAddressable<MemRef>, ITextual, IEquatable<MemRef>
     {
         readonly Vector128<ulong> Data;        
 
         [MethodImpl(Inline)]
-        public static MemoryRef define(MemoryAddress address, ByteSize size)
-            => new MemoryRef(address,size);
+        public static MemRef define(MemoryAddress address, ByteSize size)
+            => new MemRef(address,size);
         
         [MethodImpl(Inline)]
-        public static unsafe Span<byte> read(MemoryRef src)
+        public static unsafe Span<byte> read(MemRef src)
         {
             var reader = PointedReader.Create(src.Address.ToPointer<byte>(), src.Length);
             Span<byte> dstA = new byte[src.Length];            
@@ -28,21 +28,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe int read(MemoryRef src, Span<byte> dst)
+        public static unsafe int read(MemRef src, Span<byte> dst)
         {
             var reader = PointedReader.Create(src.Address.ToPointer<byte>(), src.Length);
             return reader.ReadAll(dst);            
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ReadOnlySpan<byte> cover(MemoryRef src)
+        public static unsafe ReadOnlySpan<byte> cover(MemRef src)
             => Addresses.cover(src.Address, src.Length);        
 
         [MethodImpl(Inline)]
-        public unsafe static MemoryRef From(ReadOnlySpan<byte> src)
-            => new MemoryRef(Control.gptr(Control.head(src)), src.Length);
+        public unsafe static MemRef memref(ReadOnlySpan<byte> src)
+            => new MemRef(Control.gptr(Control.head(src)), src.Length);
 
-        public static MemoryRef Empty => new MemoryRef(default(Vector128<ulong>));
+        public static MemRef Empty => new MemRef(default(Vector128<ulong>));
                 
         ulong Lo
         {
@@ -68,19 +68,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal MemoryRef(Vector128<ulong> src)
+        internal MemRef(Vector128<ulong> src)
         {
             Data = src;
         }
 
         [MethodImpl(Inline)]
-        public unsafe MemoryRef(byte* src, int length)
+        public unsafe MemRef(byte* src, int length)
         {
             Data = Vector128.Create((ulong)src, (ulong)length);
         }
 
         [MethodImpl(Inline)]
-        public MemoryRef(MemoryAddress src, int length)
+        public MemRef(MemoryAddress src, int length)
         {
             Data = Vector128.Create((ulong)src, (ulong)length);
         }  
@@ -97,7 +97,7 @@ namespace Z0
             get => !Data.Equals(default);
         }      
 
-        public MemoryRef Zero
+        public MemRef Zero
         {
             [MethodImpl(Inline)]
             get => Empty;
@@ -120,7 +120,7 @@ namespace Z0
             => Control.hash(Lo, Hi);
         
         [MethodImpl(Inline)]
-        public bool Equals(MemoryRef src)
+        public bool Equals(MemRef src)
             => src.Data.Equals(Data);
         
         public override string ToString()

@@ -32,12 +32,14 @@ namespace Z0.Asm.Data
         public OpCodeExpression(char[] src)
             => Body = asci.encode(n32, src);
 
+        [Ignore]
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
             get => Symbolic.bytes(Body);
         }
 
+        [Ignore]
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]

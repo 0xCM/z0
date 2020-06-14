@@ -92,7 +92,6 @@ namespace Z0
 
             public MetadataRecordKind RecordType => MetadataRecordKind.Field;            
 
-
             public byte FieldCount => (byte)F.FieldCount;
             
             public ReadOnlySpan<string> HeaderFields 
@@ -105,7 +104,7 @@ namespace Z0
                     nameof(Attributes),
                     nameof(Marshalling),
                     };
-
+            
             public ReadOnlySpan<byte> FieldWidths 
                 => new byte[(int)F.FieldCount]{12, 12, 12, 30, 30, 10, 10,};
 

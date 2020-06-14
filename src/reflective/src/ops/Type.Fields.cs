@@ -35,13 +35,6 @@ namespace Z0
             => src.Where(x => !x.IsStatic && !x.IsLiteral);
 
         /// <summary>
-        /// Selects all literal fields from the source
-        /// </summary>
-        /// <param name="src">The source type</param>
-        public static FieldInfo[] Literal(this FieldInfo[] src)
-            => src.Where(x => x.IsLiteral);
-
-        /// <summary>
         /// Selects all static fields from the source
         /// </summary>
         /// <param name="src">The source type</param>

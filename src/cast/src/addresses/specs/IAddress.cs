@@ -6,23 +6,22 @@ namespace Z0
 {
     using System;    
 
-
     public interface IAddress : ITextual, INullaryKnown
     {
 
     }
     
-    public interface IAddress<T> : IAddress
-        where T : unmanaged
+    public interface IAddress<W> : IAddress, ISized<W>
+        where W : unmanaged, IDataWidth
     {
-        T Location {get;}
         
     }
 
-    public interface IAddress<W,T> : IAddress<T>, ISized<W>
+    public interface IAddress<W,T> : IAddress<W>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
+        T Location {get;}
     }
 
     public interface IAddress<F,W,T> : IAddress<W,T>, INullary<F>

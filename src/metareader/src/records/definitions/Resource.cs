@@ -57,7 +57,8 @@ namespace Z0
             public static implicit operator MetadataRecordKind(ResourceSpec src)
                 => src.RecordType;
 
-            public MetadataRecordKind RecordType => MetadataRecordKind.ManifestResource;  
+            public MetadataRecordKind RecordType 
+                => MetadataRecordKind.ManifestResource;  
 
             public override string ToString()
                 => (this as ITextual).Format();

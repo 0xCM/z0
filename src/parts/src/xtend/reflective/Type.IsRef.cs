@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     partial class XTend
     {
         /// <summary>
-        /// Determines whether a type is a reference to a generic type
+        /// Determines whether the type is a (memory) reference
         /// </summary>
-        /// <param name="t">The type to examine</param>
+        /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static bool IsGenericRef(this Type t)
-            => t.IsRef() && t.GetElementType().IsGenericType;
+        public static bool IsRef(this Type src)
+            => src.UnderlyingSystemType.IsByRef;
     }
 }

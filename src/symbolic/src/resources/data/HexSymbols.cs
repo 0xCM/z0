@@ -18,7 +18,7 @@ namespace Z0
 
     partial class SymbolicData
     {
-        public static IEnumerable<MemoryRef> Refs
+        public static IEnumerable<MemRef> Refs
             => seq(memref(UpperHexSymbolData),
                 memref(LowerHexSymbolData), 
                 memref(UpperHexCodes), 

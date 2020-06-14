@@ -6,17 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static Seed;
-
+    
+    using static Konst;
+    
     partial class XTend
     {
         /// <summary>
-        /// Determines whether a type is static
+        /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
         /// </summary>
-        /// <param name="t">The type to examine</param>
+        /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static bool IsStatic(this Type t)
-            => t.IsAbstract && t.IsSealed;
+        public static Type TEffective(this Type src)
+            => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
     }
 }

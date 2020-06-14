@@ -29,7 +29,7 @@ namespace Z0
             }
         }
 
-        unsafe void Process(in MemoryRef src, in MemStore store)
+        unsafe void Process(in MemRef src, in MemStore store)
         {
             var reader = PointedReader.Create(src.Address.ToPointer<byte>(), src.Length);
             var dstA = Spans.alloc<byte>(src.Length);            
@@ -56,7 +56,7 @@ namespace Z0
         {
             var src = typeof(SymbolicData).Assembly;
 
-            var xRef = memref(SymbolicData.UpperHexCodes);            
+            var xRef = MemRef.memref(SymbolicData.UpperHexCodes);            
 
             var xProp = src.Properties().WithName("UpperHexCodes").Single();
             

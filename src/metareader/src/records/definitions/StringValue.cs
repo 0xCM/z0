@@ -67,9 +67,11 @@ namespace Z0
             public static implicit operator MetadataRecordKind(S src)
                 => src.RecordType;
             
-            public MetadataRecordKind RecordType => MetadataRecordKind.String;
+            public MetadataRecordKind RecordType 
+                => MetadataRecordKind.String;
 
-            public byte FieldCount => (byte)F.FieldCount;
+            public byte FieldCount 
+                => (byte)F.FieldCount;
             
             public ReadOnlySpan<string> HeaderFields 
                 => new string[(int)F.FieldCount]{

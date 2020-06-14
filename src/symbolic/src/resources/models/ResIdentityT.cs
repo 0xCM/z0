@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static implicit operator ResIdentity(ResIdentity<T> src)
-            => new ResIdentity(src.Name, MemoryRef.define(src.Location, src.ByteCount), Control.primal<T>());
+            => new ResIdentity(src.Name, MemRef.define(src.Location, src.ByteCount), Control.primal<T>());
 
         [MethodImpl(Inline)]
         public ResIdentity(string name, ulong location, int cells)

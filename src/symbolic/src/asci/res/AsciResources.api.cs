@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static ResourceMember define<T>(MemberInfo member, ReadOnlySpan<T> src)
             where T : unmanaged
-                => ResourceMember.Define(member, MemoryRef.From(cast<T,byte>(src)));
+                => ResourceMember.Define(member, MemRef.memref(cast<T,byte>(src)));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ReadOnlySpan<T> define<T>(ResourceMember member, int i0, int i1)

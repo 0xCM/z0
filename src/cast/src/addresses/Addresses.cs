@@ -18,9 +18,9 @@ namespace Z0
             where T : unmanaged
                 => Control.gptr<T>(src);
 
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress address(long src)
-            => new MemoryAddress((ulong)src);
+        // [MethodImpl(Inline), Op]
+        // public static MemoryAddress address(long src)
+        //     => new MemoryAddress((ulong)src);
 
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(ulong src)
@@ -31,7 +31,7 @@ namespace Z0
             => new MemoryAddress((ulong)src.ToInt64());
 
         [MethodImpl(Inline), Op]
-        public static Address8 address16(byte src)
+        public static Address8 address8(byte src)
             => new Address8(src);
 
         [MethodImpl(Inline), Op]

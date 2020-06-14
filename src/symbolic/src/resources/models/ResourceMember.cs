@@ -14,18 +14,18 @@ namespace Z0
     {
         public MemberInfo Member {get;}
 
-        public MemoryRef Reference {get;}
+        public MemRef Reference {get;}
         
         public MemoryAddress Address => Reference.Address;
 
         public ByteSize Size => Reference.Length;
 
         [MethodImpl(Inline)]
-        public static ResourceMember Define(MemberInfo member, MemoryRef memref)
+        public static ResourceMember Define(MemberInfo member, MemRef memref)
             => new ResourceMember(member, memref);
 
         [MethodImpl(Inline)]
-        public ResourceMember(MemberInfo member, MemoryRef memref)
+        public ResourceMember(MemberInfo member, MemRef memref)
         {
             Member = member;
             Reference = memref;

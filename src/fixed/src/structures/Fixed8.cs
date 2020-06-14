@@ -49,12 +49,28 @@ namespace Z0
             => Data = x0;
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed8(byte x0)
-            => From(x0);
+        public static implicit operator byte(Fixed8 src)
+            => (byte)src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed8(byte src)
+            => From(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed8(sbyte x0)
             => From(x0);
+        
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed16(Fixed8 x)
+            => Fixed16.From(x.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed32(Fixed8 x)
+            => Fixed32.From(x.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(Fixed8 x)
+            => Fixed64.From(x.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator Fixed8(int x)
@@ -69,9 +85,21 @@ namespace Z0
             => (sbyte)x.Data;
 
         [MethodImpl(Inline)]
-        public static explicit operator byte(Fixed8 x)
-            => (byte)x.Data;
-        
+        public static explicit operator int(Fixed8 x)
+            => (int)x.Data;
+
+        [MethodImpl(Inline)]
+        public static explicit operator uint(Fixed8 x)
+            => (uint)x.Data;
+
+        [MethodImpl(Inline)]
+        public static explicit operator long(Fixed8 x)
+            => (long)x.Data;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ulong(Fixed8 x)
+            => (ulong)x.Data;
+
         [MethodImpl(Inline)]
         public T As<T>()
             where T : unmanaged
