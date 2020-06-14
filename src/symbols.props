@@ -22,6 +22,7 @@
     <Time>$(Src)time/z0.time.csproj</Time>
     <Reports>$(Src)reports/z0.reports.csproj</Reports>
 
+    <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
 
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
 
