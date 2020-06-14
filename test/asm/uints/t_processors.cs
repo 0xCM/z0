@@ -30,7 +30,7 @@ namespace Z0.Asm
         }
 
 
-        public void process_parsed()
+        void process_parsed()
         {
             var processor = AsmProcessors.Service.Parsed(Context);
             var parts = Api.Resolved.Select(p => p.Id).ToArray();

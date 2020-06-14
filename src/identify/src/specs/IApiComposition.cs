@@ -8,8 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
-
-    using static Seed;
+    using System.Reflection;
 
     /// <summary>
     /// Characterizes, in dependency injection vernacular, composition roots
@@ -17,9 +16,17 @@ namespace Z0
     public interface IApiComposition : IApiReflected
     {
         /// <summary>
+        /// The api composition aggregate
+        /// </summary>
+        IApiSet ApiSet => new ApiSet(this);
+
+        /// <summary>
         /// The resolved assemblies that comprise the composition
         /// </summary>
         IPart[] Resolved {get;}   
+
+        Assembly[] Assemblies
+            => Resolved.Select(x => x.Owner);
         
         /// <summary>
         /// The catalogs defined by the composed parts
@@ -29,11 +36,6 @@ namespace Z0
                 let c = Catalog(part)
                 where c.IsIdentified 
                 select c;
-
-        /// <summary>
-        /// The api composition aggregate
-        /// </summary>
-        IApiSet ApiSet => new ApiSet(this);
 
         /// <summary>
         /// Searches for a part-identified, and returns a valued option if found

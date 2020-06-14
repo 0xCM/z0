@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     partial class Control
-    {
+    {        
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 
         /// successful; otherwise, returns None and invokes an error handler if supplied

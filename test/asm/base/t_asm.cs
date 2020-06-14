@@ -73,7 +73,7 @@ namespace Z0.Asm
             var totalCount = 0ul;
             var hostCount = 0ul;
 
-            var dst = list<AsmInstructionList>();
+            var dst = Control.list<AsmInstructionList>();
 
             void Decoded(Instruction i)
             {

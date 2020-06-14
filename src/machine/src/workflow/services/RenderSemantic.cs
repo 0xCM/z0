@@ -185,7 +185,7 @@ namespace Z0.Machine
 
             
             var opcount = src.Instruction.OpCount;
-            var summaries = list<string>();
+            var summaries = Control.list<string>();
             for(var i =0; i<opcount; i++)               
             {
                 var kind = asm.OperandKind(inxs, i);

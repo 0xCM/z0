@@ -83,7 +83,7 @@ namespace Z0
         {
             if(parts.Length == 0)
             {
-                var dst = list<FolderPath>();
+                var dst = Control.list<FolderPath>();
                 dst.Add(ExtractDir.Clear());
                 dst.Add(ParsedDir.Clear());
                 dst.Add(AsmDir.Clear());

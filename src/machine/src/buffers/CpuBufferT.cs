@@ -8,7 +8,6 @@ namespace Z0.Machine
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static Memories;
 
     public readonly ref struct CpuBuffer<T>
     {

@@ -46,7 +46,7 @@ namespace Z0
         {
             try
             {
-                var dst = list<string>();
+                var dst = Control.list<string>();
                 using var stream = Source.GetManifestResourceStream(name);
                 using var reader = new StreamReader(stream);
                 while(!reader.EndOfStream)

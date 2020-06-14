@@ -11,8 +11,6 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
 
-    using Z0.Asm.Data;
-
     using static Seed;
     using static Control;
 
@@ -39,7 +37,7 @@ namespace Z0.Asm
         {
             var asm = Context.Decoder.Decode(capture).Require();
             var formatted = Context.Formatter.FormatFunction(asm);
-            dst.WriteLine(formatted);            
+            dst.Write(formatted);            
         }
 
         Option<AsmFunctionCode> FunctionCode(CapturedCode capture)
@@ -53,13 +51,13 @@ namespace Z0.Asm
 
         public void resource_method_capture()
         {
-
+            var stores = ResStores.Service;
             var restype = typeof(ReadOnlySpan<byte>);
-            var methods = AppResources.Service.ByteSpanAccessors(Api.Resolved.Select(x => x.Owner)).ToReadOnlySpan();
-            var functions = new List<AsmFunctionCode>();
+            var methods = span(stores.accessors(Api.Assemblies));
+            var functions = list<AsmFunctionCode>();
             using var writer = CaseWriter(FileExtensions.Asm);
             using var capture = QuickCapture.Alloc(Context);
-            var dst = Spans.alloc<CapturedCode>(methods.Length);
+            var dst = span(alloc<CapturedCode>(methods.Length));
 
             for(var i=0; i<methods.Length; i++)
             {
@@ -77,16 +75,16 @@ namespace Z0.Asm
                 }
             }
 
-            Span<AsmInstructionList> lists = new AsmInstructionList[functions.Count];
-            for(var i = 0; i<functions.Count; i++)
-                seek(lists,i) = functions[i].Function.Inxs;
+            // Span<AsmInstructionList> lists = new AsmInstructionList[functions.Count];
+            // for(var i = 0; i<functions.Count; i++)
+            //     seek(lists,i) = functions[i].Function.Inxs;
             
-            var results = AsmAnalyzer.Analyze(lists);
-            for(var i = 0; i<results.Length; i++)
-            {
-                var result = results[i];
-                //Trace(result);
-            }
+            // var results = AsmAnalyzer.Analyze(lists);
+            // for(var i = 0; i<results.Length; i++)
+            // {
+            //     var result = results[i];
+            //     //Trace(result);
+            // }
         }
 
     }

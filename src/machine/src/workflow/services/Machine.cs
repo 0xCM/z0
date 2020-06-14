@@ -131,7 +131,7 @@ namespace Z0.Machine
 
         void DecodeParts(MachineIndex src)
         {
-            var dst = list<PartInstructions>();
+            var dst = Control.list<PartInstructions>();
             var parts = src.Parts;
             
             for(var k=0; k<parts.Length; k++)
@@ -163,9 +163,9 @@ namespace Z0.Machine
 
         HostInstructions Decode(HostCode hcs)
         {
-            var inxs = list<MemberInstructions>();    
+            var inxs = Control.list<MemberInstructions>();    
             
-            var dst = list<Instruction>();
+            var dst = Control.list<Instruction>();
             void OnDecoded(Instruction inxs)
                 => dst.Add(inxs);
             

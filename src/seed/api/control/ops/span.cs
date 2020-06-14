@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+    using System.Collections.Generic;
+    using System.Linq;
+
     using static System.Runtime.InteropServices.MemoryMarshal;
 
     using static Konst;
@@ -100,5 +102,9 @@ namespace Z0
         public static Span<char> span16c<T>(ref T src)
             where T : struct
                 => cast<char>(AsBytes(CreateSpan(ref src, 1)));
+    
+        [Op, Closures(UnsignedInts)]
+        public static Span<T> span<T>(IEnumerable<T> src)
+            => src.ToArray();
     }
 }

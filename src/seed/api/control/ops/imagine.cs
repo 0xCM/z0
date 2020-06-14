@@ -11,7 +11,6 @@ namespace Z0
 
     partial class Control
     {
-
         [MethodImpl(Inline), Op]
         public static ref T imagine<S,T>(ref S src)
             => ref Unsafe.As<S,T>(ref edit(src));

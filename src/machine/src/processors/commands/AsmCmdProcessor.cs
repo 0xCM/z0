@@ -82,15 +82,8 @@ namespace Z0.Asm
 
         public CommandRecordSets<Mnemonic> Process(params PartId[] parts)
         {
-            var paths = Context.AppPaths.ForApp(PartId.Control);
-            var files = (from f in CaptureArchive(paths.AppCapturePath).ParseFiles
-                        let components = f.FileName.Name.SplitClean(Chars.Dot)
-                        where components.Length != 0
-                        let part = Enums.Parse(components[0], PartId.None)
-                        where part != PartId.None
-                        let pf = new PartFile(part, f)
-                        group pf by pf.Part).ToDictionary(x => x.Key, y => y.ToArray());
-            
+            var pfs = PartFiles.Service(Context);
+            var files = PartFiles.Service(Context).ParseFiles(parts);
             var parser = ParseReportParser.Service;
             var processor = this;
 

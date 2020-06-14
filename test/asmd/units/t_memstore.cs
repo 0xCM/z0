@@ -18,7 +18,9 @@ namespace Z0
     {
         public  void run_it()
         {
-            var results = ResMemStores.UseCase();
+            var svc = ResStoreModels.Service;
+            var store = svc.store();
+            var results = svc.locations(store);
             for(var i=0; i<results.Length; i++)
             {
                 var result = results[i];
@@ -26,7 +28,6 @@ namespace Z0
                 Trace(result);
             }
         }
-
 
         unsafe void Process(in MemoryRef src, in MemStore store)
         {
@@ -45,6 +46,11 @@ namespace Z0
                 Claim.eq(a,b);
             }
         }
+
+        // public static MemStore store<T>()
+        // {
+        //     typeof(T).Properties().
+        // }
 
         public void search()
         {
@@ -78,12 +84,12 @@ namespace Z0
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
 
             }
-
-
         }
+
         public void run_2()
         {
-            var store = ResMemStores.Create();
+            var svc = ResStoreModels.Service;
+            var store = svc.store();
             var sources = store.Sources;
             for(var i=0; i<sources.Length; i++)
                 Process(skip(sources,i), store);
