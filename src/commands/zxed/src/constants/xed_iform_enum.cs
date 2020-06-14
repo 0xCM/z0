@@ -6,8 +6,7 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
-
+    
     public enum xed_iform_enum_t
     {
         XED_IFORM_INVALID=0, 

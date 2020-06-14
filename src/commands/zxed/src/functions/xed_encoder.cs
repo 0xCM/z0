@@ -8,12 +8,10 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
+    using static Control;
 
-    using static xed_machine_mode_enum_t;
     using static xed_operand_mode;
-
 
     public struct xed_encoder
     {

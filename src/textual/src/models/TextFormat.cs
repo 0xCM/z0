@@ -13,6 +13,8 @@ namespace Z0
     {        
         public static TextFormat Structured => Define();
 
+        public static TextFormat Unstructured => Define(false, false);
+
         [MethodImpl(Inline)]
         public static TextFormat Define(bool HasHeader = true, bool delimited = true, 
             char Delimiter = Chars.Pipe, char CommentPrefix = Chars.Hash, int? ColWidth = null)
@@ -21,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         TextFormat(bool header, bool delimited, char sep, char cp, int? colwidth)
         {
-            RowSeparator = "-------";
+            RowSeparator = "-------------------------------------------------------";
             HasDataHeader = header;
             IsDelimited = delimited;
             Delimiter = sep;

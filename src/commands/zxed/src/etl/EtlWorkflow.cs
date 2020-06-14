@@ -10,21 +10,18 @@ namespace Z0.Xed
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Seed;
     using static Memories;
-
-    using static Archives;
-    using static Res;
 
     using xed_ext = xed_extension_enum_t;
     using xed_cat = xed_category_enum_t;
+
 
     public readonly struct EtlWorkflow
     {
         public static EtlWorkflow Service(IAppContext context)
             => new EtlWorkflow(context);
 
-        public FolderPath ArchiveRoot {get;}
+        public FolderPath SourceRoot {get;}
 
         readonly AsmArchiveConfig Config;
 
@@ -34,30 +31,47 @@ namespace Z0.Xed
 
         readonly StagingArchive Dst;
 
-        readonly IPublicArchive Pub;
+        readonly ITableArchive Pub;
 
+        readonly FolderPath TargetRoot;
+        
         public EtlWorkflow(IAppContext context)
         {
             Context = context;
             Config = default(AsmArchiveConfig);
-            //ArchiveRoot = context.AppPaths.AppSrcPath + Config.RootFolder;
-            ArchiveRoot =  FolderPath.Define(@"J:\dev\projects\z0\src\commands\data");
-            Src = SourceArchive.Create(ArchiveRoot + Config.SourceFolder);
-            Dst = StagingArchive.Create(ArchiveRoot + Config.StageFolder);
-            Pub = PublicArchive.Service(ArchiveRoot + Config.DatasetFolder);            
+            //SourceRoot =  FolderPath.Define(@"J:\dev\projects\z0\src\commands\data");            
+            SourceRoot = FolderPath.Define(@"K:\z0\archives\sources\xed");
+            TargetRoot = (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define("xed");
+            Src = SourceArchive.Create(SourceRoot);            
+            Dst = StagingArchive.Create(TargetRoot + Config.StageFolder);
+            Pub = TableArchive.Service(TargetRoot + Config.DatasetFolder);            
         }
 
         public InstructionPattern[] ExtractPatterns()
         {
             var patterns = list<InstructionPattern>();
             var parser = SourceParser.Service;
-
-            foreach(var f in Src.InstructionFiles)
+            var files = Src.InstructionFiles.ToSpan();
+            try
             {
-                var parsed = parser.ParseInstructions(f);
-                Control.iter(parsed, p => patterns.AddRange(p.Patterns));
-                Dst.Deposit(parsed, f.FileName);
+                for(var i=0; i< files.Length; i++)
+                {
+                    ref readonly var file = ref skip(files,i);
+                    term.magenta($"Parsing instructions", file);
+                    var parsed = span(parser.ParseInstructions(file));
+                    for(var j = 0; j< parsed.Length; j++)
+                    {
+                        ref readonly var p = ref skip(parsed,j);
+                        patterns.AddRange(p.Patterns);
+                        Dst.Deposit(parsed, file.FileName);
+                    }
+                }
             }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+
             return patterns.ToArray();
         }
 
@@ -108,7 +122,6 @@ namespace Z0.Xed
                     Config.CategoryFolder, 
                     FileName.Define(XedConst.Name(selected), Config.DataFileExt)
                     );
-
         }
 
         void SaveMnemonics(PatternSummary[] src)

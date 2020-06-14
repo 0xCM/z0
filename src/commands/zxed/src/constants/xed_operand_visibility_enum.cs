@@ -6,7 +6,6 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public enum xed_operand_visibility_enum_t
     {
@@ -15,7 +14,5 @@ namespace Z0.Xed
         XED_OPVIS_IMPLICIT, ///< Part of the opcode, but listed as an operand
         XED_OPVIS_SUPPRESSED, ///< Part of the opcode, but not typically listed as an operand
         XED_OPVIS_LAST
-
     }
-
 }

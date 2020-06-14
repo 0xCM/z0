@@ -6,7 +6,6 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public enum xed_category_enum_t
     {

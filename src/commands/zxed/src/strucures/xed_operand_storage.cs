@@ -6,7 +6,6 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public struct xed_operand_storage_t
     {

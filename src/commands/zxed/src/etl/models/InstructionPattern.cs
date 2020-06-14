@@ -7,10 +7,8 @@ namespace Z0.Xed
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static Seed;
-    using static SourceMarkers;
+    using static Konst;
 
     public readonly struct InstructionPattern
     {
@@ -43,5 +41,4 @@ namespace Z0.Xed
             Operands = OperandText.SplitClean(Chars.Space);
         }
     }   
-
 }

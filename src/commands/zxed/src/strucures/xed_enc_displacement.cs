@@ -6,12 +6,10 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public struct xed_enc_displacement_t
     {
         public xed_int64_t    displacement; 
         public xed_uint32_t   displacement_bits;
-
     }
 }

@@ -5,8 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Xed
 {
-    using System;
-
+ 
     /// <summary>
     /// Literals corresponds to the identifiers defined in xed-operand-types.txt
     /// </summary>

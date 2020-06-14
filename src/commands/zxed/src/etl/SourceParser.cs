@@ -8,15 +8,16 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Control;
     using static SourceMarkers;
 
     readonly struct SourceParser
     {
-        public static SourceParser Service => default(SourceParser);
+        public static SourceParser Service => default;
 
         public SourceFileData LoadSource(FilePath src)
-            => src.ReadTextDoc(TextFormat.Unstructured()).MapValueOrDefault(c => SourceFileData.Define(src, c.RowData), SourceFileData.Empty);
+            => src.ReadTextDoc(TextFormat.Unstructured)
+                   .MapValueOrDefault(c => SourceFileData.Define(src, c.RowData), SourceFileData.Empty);
 
         public InstructionData ParseInstruction(SourceFileData src, in int idxStart, ref int idxterm)
         {
@@ -147,5 +148,4 @@ namespace Z0.Xed
         bool Skip(TextRow src)
             => IsComment(src) || IsEmpty(src);
     }
- 
 }

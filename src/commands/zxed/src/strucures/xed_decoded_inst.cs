@@ -8,7 +8,7 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static Xed;
 
     /// The main container for instructions. After decode, it holds an array of

@@ -7,11 +7,8 @@ namespace Z0.Xed
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
     using static SourceMarkers;
 
     /// <summary>
@@ -19,23 +16,37 @@ namespace Z0.Xed
     /// </summary>
     public readonly struct InstructionData
     {
-        public static InstructionData Empty => new InstructionData(Control.array<TextRow>());
-        
         public readonly TextRow[] Rows {get;}
 
-        public int RowCount => Rows.Length;
-
-        public ref readonly TextRow this[int i] { [MethodImpl(Inline)] get => ref Rows[i];}
-
+        public static InstructionData Empty 
+            => new InstructionData(Array.Empty<TextRow>());
+        
         [MethodImpl(Inline)]
-        public InstructionData(params TextRow[] rows)
+        internal InstructionData(params TextRow[] rows)
         {
             Rows = rows;
         }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => (Rows?.Length ?? 0) == 0;}
+        public ref readonly TextRow this[int i] 
+        { 
+            [MethodImpl(Inline)] 
+            get => ref Rows[i];
+        }
 
-        public bool IsNonEmpty{ [MethodImpl(Inline)] get => !IsEmpty;}   
+        public bool IsEmpty 
+        { 
+            [MethodImpl(Inline)] 
+            get => (Rows?.Length ?? 0) == 0;
+        }
+
+        public bool IsNonEmpty
+        { 
+            [MethodImpl(Inline)] 
+            get => !IsEmpty;
+        }   
+
+        public int RowCount 
+            => Rows.Length;
 
         public string Class 
             => this.ExtractProp(ICLASS);
@@ -70,5 +81,4 @@ namespace Z0.Xed
         internal string ExtractProp(int index)
             => ExtractProp(this[index]);
     }
-
 }

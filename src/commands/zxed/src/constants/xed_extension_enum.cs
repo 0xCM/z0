@@ -6,8 +6,7 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
-
+ 
     public enum xed_extension_enum_t
     {
         XED_EXTENSION_INVALID,

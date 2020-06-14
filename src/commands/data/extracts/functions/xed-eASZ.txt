@@ -1,0 +1,8 @@
+xed-eASZ.txt/ASZ_NONTERM()::
+--------------------------------------------------------------------------------------------------------
+mode16 no67_prefix  | eamode16
+mode16   67_prefix  | eamode32
+mode32 no67_prefix  | eamode32
+mode32   67_prefix  | eamode16
+mode64 no67_prefix  | eamode64
+mode64   67_prefix  | eamode32

@@ -8,7 +8,7 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
         
     public struct xed_uint64_t
     {

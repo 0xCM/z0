@@ -39,27 +39,27 @@ namespace Z0
             {
                 while(!reader.EndOfStream)
                 {
-                    var line = reader.ReadLine().Trim(Chars.Space);
-                    var text = new TextLine(counter, line);                    
+                    var data = reader.ReadLine().Trim(Chars.Space);
+                    var line = new TextLine(counter, data);                    
 
                     counter++;
                     
-                    if(text.IsEmpty)
+                    if(text.empty(data))
                         continue;
-
+                                        
                     // skip comments                    
-                    if(text.LineText[0] == fmt.CommentPrefix)
+                    if(line[0] == fmt.CommentPrefix)
                         continue;
 
                     // skip row separators
-                    if(text.LineText.StartsWith(fmt.RowSeparator))
+                    if(line.LineText.StartsWith(fmt.RowSeparator))
                         continue;
 
 
                     if(fmt.HasDataHeader && header.IsNone() && rows.Count == 0)
-                        header = text.ParseHeader(fmt).ValueOrDefault(TextHeader.Empty);   
+                        header = line.ParseHeader(fmt).ValueOrDefault(TextHeader.Empty);   
                     else
-                        text.ParseRow(fmt).OnSome(row => rows.Add(row));
+                        line.ParseRow(fmt).OnSome(row => rows.Add(row));
                 }
             }
             catch(Exception e)

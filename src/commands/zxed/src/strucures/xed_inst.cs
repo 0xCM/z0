@@ -6,7 +6,6 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     /// @ingroup DEC
     /// constant information about a decoded instruction form, including

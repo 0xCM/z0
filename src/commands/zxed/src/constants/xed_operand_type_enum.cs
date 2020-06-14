@@ -6,7 +6,6 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public enum xed_operand_type_enum_t
     {
@@ -18,7 +17,5 @@ namespace Z0.Xed
         XED_OPERAND_TYPE_NT_LOOKUP_FN4,
         XED_OPERAND_TYPE_REG,
         XED_OPERAND_TYPE_LAST
-
     }
-
 }

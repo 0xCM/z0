@@ -9,11 +9,8 @@ namespace Z0
 
     using Z0.Xed;
     
-    using static Seed;
     using static Memories;
-    using static Xed.Res;
-    using static Xed.Archives;
-
+ 
     using P = Z0.Parts;
     
     class App : AppShell<App,IAppContext>
@@ -54,7 +51,4 @@ namespace Z0
         public static void Main(params string[] args)
             => Launch(args);
     }
-
-
-
 }

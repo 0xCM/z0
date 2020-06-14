@@ -8,8 +8,6 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
-
 
     public class XedConst
     {

@@ -64,12 +64,12 @@ namespace Z0.Xed
         {
             var dst = 0ul;
             var pos = 0;
-            var parser = HexParsers.Bytes;
+            var parser = HexByteParser.Service;
             for(var i=0; i<src.Parts.Length; i++)
             {
                 var part = src.Parts[i];
                 if(parser.HasPreSpec(part))
-                    Seeker.seek8(ref dst, pos++) = parser.Succeed(part);                    
+                    Seeker.seek8(ref dst, pos++) = parser.ParseByte(part);
             }
 
             return ByteReader.ReadAll(dst).Slice(0, pos);
@@ -93,15 +93,15 @@ namespace Z0.Xed
         public static string FormatRow(this PatternSummary src, char delimiter)
         {
             var dst = formatter<F>();
-            dst.DelimitField(F.Class, src.Class);
-            dst.DelimitField(F.Category, src.Category);
-            dst.DelimitField(F.Extension, src.Extension);
-            dst.DelimitField(F.IsaSet, src.IsaSet);
-            dst.DelimitField(F.BaseCode, src.BaseCode);
-            dst.DelimitField(F.Mod, src.Mod);
-            dst.DelimitField(F.Reg, src.Reg);
-            dst.DelimitField(F.Pattern, src.Pattern);
-            dst.DelimitField(F.Operands, src.Operands);
+            dst.Delimit(F.Class, src.Class);
+            dst.Delimit(F.Category, src.Category);
+            dst.Delimit(F.Extension, src.Extension);
+            dst.Delimit(F.IsaSet, src.IsaSet);
+            dst.Delimit(F.BaseCode, src.BaseCode);
+            dst.Delimit(F.Mod, src.Mod);
+            dst.Delimit(F.Reg, src.Reg);
+            dst.Delimit(F.Pattern, src.Pattern);
+            dst.Delimit(F.Operands, src.Operands);
             return dst.Format();                             
         }      
     }

@@ -6,10 +6,6 @@
 namespace Z0.Xed
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
-    using static Xed;
 
     partial class Xed
     {
@@ -28,6 +24,5 @@ namespace Z0.Xed
         public static xed_uint32_t bits2bytes(xed_uint32_t bits) { return bits>>3; }
 
         public static xed_uint32_t bytes2bits(xed_uint32_t bytes) { return bytes<<3; }
-
     }
 }

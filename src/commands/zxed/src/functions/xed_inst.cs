@@ -8,14 +8,10 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Xed;
+    using static Konst;
     using static xed_nonterminal_enum_t;
     using static xed_reg_enum_t;
     using static xed_operand_type_enum_t;
-    using static xed_operand_element_xtype_enum_t;
-    using static xed_operand_element_type_enum_t;
-    using static xed_operand_width_enum_t;
     using static xed_operand_enum_t;
 
      public class xed_inst
@@ -115,10 +111,6 @@ namespace Z0.Xed
 
           [MethodImpl(Inline)]
           public static xed_iform_enum_t xed_inst_iform_enum(in xed_inst_t p)
-               => p._iform_enum;
-
-
-          
-
+               => p._iform_enum;     
      }
 }

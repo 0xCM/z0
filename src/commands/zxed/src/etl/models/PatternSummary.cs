@@ -6,11 +6,32 @@
 namespace Z0.Xed
 {
     using System;
-
+    
     using static Tabular;
 
-    using R = PatternSummary;
     using F = PatternField;
+    using R = PatternSummary;
+
+    public enum PatternField : uint
+    {
+        Class = 0 | 20u << WidthOffset,
+
+        Category = 1 | 14u << WidthOffset,
+
+        Extension = 2 | 14u << WidthOffset,
+
+        IsaSet = 3 | 14u << WidthOffset,
+
+        BaseCode = 4 | 12u << WidthOffset,
+        
+        Mod = 5 | 10u << WidthOffset,
+        
+        Reg = 6 | 10u << WidthOffset,
+
+        Pattern = 7 | 100u << WidthOffset,
+
+        Operands = 9 | 0u << WidthOffset,        
+    }
 
     public readonly struct PatternSummary : ITabular<F,R>
     {        
@@ -19,10 +40,10 @@ namespace Z0.Xed
                     BinaryCode.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
         
         public static implicit operator Tabular<F,R>(PatternSummary src)
-            => define<F,R>(src);
+            => src.Generalized;
 
         public Tabular<F,R> Generalized 
-            => define<F,R>(this);
+            => new Tabular<F,R>();
 
         [TabularField(F.Class)]
         public readonly string Class;
@@ -38,7 +59,6 @@ namespace Z0.Xed
 
         [TabularField(F.BaseCode)]
         public readonly BinaryCode BaseCode;
-
 
         [TabularField(F.Mod)]
         public readonly string Mod;        
@@ -67,6 +87,5 @@ namespace Z0.Xed
         
         public string DelimitedText(char sep)
             => this.FormatRow(sep);
-    }
-    
+    }   
 }
