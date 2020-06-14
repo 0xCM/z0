@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    using static Seed;
+    using static Konst;
     using static Control;
 
     partial class BitMask

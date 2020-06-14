@@ -6,31 +6,27 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
-    public readonly struct FieldValue<F>
-        where F : unmanaged, Enum
+    public readonly struct EnumFieldValue<E>
+        where E : unmanaged, Enum
     {
-        public F Field {get;}
+        public readonly FieldInfo Field;
 
-        public object Value {get;}
+        public readonly E EnumValue;
 
         [MethodImpl(Inline)]
-        public FieldValue(F field, object value)
+        public EnumFieldValue(FieldInfo field, E value)
         {
             Field = field;
-            Value = value;
+            EnumValue = value;
         }
 
         public string Format()
         {
-            if(Value is null)
-                return Null.Value.Format();
-            else if(Value is ITextual t)
-                return t.Format();
-            else
-                return Value.ToString();
+            return EnumValue.ToString();
         }
 
         public override string ToString()

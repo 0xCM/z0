@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct RecordWriter<F,R> : IFileStreamWriter<R>
         where F : unmanaged, Enum

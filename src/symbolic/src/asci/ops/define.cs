@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;     
     using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
     using static Control;
-    using static Typed;
 
-    partial class AsciCodes
+    partial struct asci
     {
         [MethodImpl(Inline), Op]
         public static ref readonly asci2 define(N2 n, in ushort src)
@@ -49,6 +48,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static asci16 define(N16 n, ulong lo, ulong hi)
             => new asci16(Vector128.Create(lo,hi).AsByte());
-
     }
 }

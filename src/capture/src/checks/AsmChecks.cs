@@ -12,7 +12,7 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics.X86;
     using System.Reflection;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
     using static BufferSeqId;
 

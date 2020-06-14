@@ -17,7 +17,7 @@ namespace Z0.Asm
 
 
 
-    public class t_resource_check : t_asm<t_resource_check>
+    public class t_resource_capture : t_asm<t_resource_capture>
     {
         public void check_no_copy()
         {
@@ -37,6 +37,30 @@ namespace Z0.Asm
         }
 
 
+        public void bitmaskmask_capture()
+        {
+
+
+        }
+        
+        public void mask_capture()
+        {
+            using var hexout = HexWriter();
+            using var asmout = AsmWriter();
+
+            var methods = 
+                from def in MaskCases.NumericMethodDefs
+                from closure in def.MakeGenericMethods(MaskCases.NumericArgs)
+                select closure;
+
+            foreach(var src in methods)
+            {
+                var captured = AsmCheck.Capture(src.Identify(), src).Require();                                
+                hexout.Write(captured.HostedBits);
+                asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
+            }    
+        }
+
         public void resource_method_capture()
         {
             var svc = AccessorCapture.Service(Context);
@@ -53,11 +77,14 @@ namespace Z0.Asm
                     ref readonly var move = ref skip(moves,j);
                     var description = text.concat(move.Src.ToAddress(), " | ", accessor.Code.Code.OpUri);
                     addresses.WriteLine(description);
-
                 }
             }            
         }
 
+        public void numeric_literals()
+        {
+
+        }
         public void string_literals()
         {
             var svc = FieldCapture.Service;

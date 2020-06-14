@@ -22,7 +22,7 @@ namespace Z0
             var references = list<FieldRef>();
             for(var i=0; i<types.Length; i++)
             {
-                var fields = types[i].DeclaredFields().Literal().Where(f => f.FieldType == typeof(string)).ToArray();
+                var fields = types[i].DeclaredFields().Literals().Where(f => f.FieldType == typeof(string)).ToArray();
                 for(var j=0; j<fields.Length; j++)
                 {
                     var field = fields[j];
@@ -36,6 +36,19 @@ namespace Z0
             return references.ToArray();
         }
 
+        public FieldValues<T> NumericLiterals<T>(params Type[] types)
+            where T : unmanaged
+        {
+            var literals = list<FieldValue<T>>();
+
+            for(var i=0; i<types.Length; i++)
+            {
+                var values = types[i].LiteralFieldValues<T>().ToSpan();
+                for(var j=0; j<values.Length; j++)
+                    literals.Add(skip(values,j));
+            }
+            return literals.ToArray();
+        }
 
         public void Emit(ReadOnlySpan<FieldRef> src, FilePath dst)
         {            
@@ -53,8 +66,5 @@ namespace Z0
             }
 
         }
-
     }
-
-
 }

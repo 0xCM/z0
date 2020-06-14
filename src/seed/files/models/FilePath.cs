@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Represents a fully-qualified path to a file on the local machine

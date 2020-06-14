@@ -112,7 +112,7 @@ namespace Z0
         public static unsafe T scalar<E,T>(E e)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Control.scalar<E,T>(e);
+                => Control.tVal<E,T>(e);
 
         /// <summary>
         /// Reads a generic enum member from a generic value
@@ -124,7 +124,7 @@ namespace Z0
         public static unsafe E literal<E,T>(T v)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Control.literal<E,T>(v);
+                => Control.eVal<E,T>(v);
 
         /// <summary>
         /// Reads a generic numeric value from a boxed enum

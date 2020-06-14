@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static NumericCast;
     using static BitMasks;
-    using static Typed;
 
     partial class BitMask
     {                

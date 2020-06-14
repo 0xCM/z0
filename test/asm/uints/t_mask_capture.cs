@@ -28,22 +28,5 @@ namespace Z0.Asm
             }    
         }
 
-        public void capture_numeric_masks()
-        {
-            using var hexout = HexWriter();
-            using var asmout = AsmWriter();
-
-            var methods = 
-                from def in MaskCases.NumericMethodDefs
-                from closure in def.MakeGenericMethods(MaskCases.NumericArgs)
-                select closure;
-
-            foreach(var src in methods)
-            {
-                var captured = AsmCheck.Capture(src.Identify(), src).Require();                                
-                hexout.Write(captured.HostedBits);
-                asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
-            }    
-        }
     }
 }

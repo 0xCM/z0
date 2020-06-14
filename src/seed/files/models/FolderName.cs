@@ -8,7 +8,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Defines a folder name in isolation without ascribing additional path content

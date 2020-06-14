@@ -10,7 +10,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Represents a fully-qualified path to a folder on the local machine

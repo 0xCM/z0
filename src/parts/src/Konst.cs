@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     public class Konst
     {
@@ -157,5 +158,15 @@ namespace Z0
         /// Specifies the float64 kind
         /// </summary>
         public static NK<double> f64 => default;        
+
+        /// <summary>
+        /// The part identifier of the entry assembly
+        /// </summary>
+        public static PartId ExecutingApp => PartsPlaceholder.ExecutingPart;
+
+        /// <summary>
+        /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
+        /// </summary>
+        public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using System.Text;
     using System.IO;
 
-    using static Seed;
+    using static Konst;
     using static Chars;
 
     public static class text
@@ -635,7 +635,7 @@ namespace Z0
         public static int width<E>(E field)
             where E : unmanaged, Enum
         {
-            var w = Control.scalar<E,uint>(field) >> 16;
+            var w = Control.tVal<E,uint>(field) >> 16;
             return (int)w;
         }
 

@@ -108,7 +108,7 @@ namespace Z0
             insist(names.Length, widths.Length);
             var fieldCount = (byte)names.Length;
             var fieldWidths = widths;
-            var fieldNames = AsciCodes.alloc(n16,fieldCount);            
+            var fieldNames = asci.alloc(n16,fieldCount);            
 
             ArraySpan<byte> fieldPositions = new byte[fieldCount];
 
