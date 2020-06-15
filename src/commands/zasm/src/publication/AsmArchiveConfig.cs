@@ -9,8 +9,6 @@ namespace Z0.Asm.Data
 
     using System.Collections.Generic;
     
-    using static Memories;
-
     public readonly struct AsmArchiveConfig : IAsmArchiveConfig
     {
         public static IAsmArchiveConfig Default => default(AsmArchiveConfig);        

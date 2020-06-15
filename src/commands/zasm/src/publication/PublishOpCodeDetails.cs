@@ -7,14 +7,6 @@ namespace Z0.Asm.Data
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    
-
-    using static Seed;
-
-    using F = InstructionField;
-    using R = InstructionRecord;
-    using M = AsmDataModels;
-
     partial class AsmEtl
     {                        
         void LoadDataBlocks()

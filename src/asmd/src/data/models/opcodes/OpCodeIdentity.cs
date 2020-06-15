@@ -7,7 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public readonly struct OpCodeIdentity
@@ -20,10 +20,7 @@ namespace Z0.Asm.Data
         /// <param name="src">The source record</param>
         [MethodImpl(Inline), Op]
         public OpCodeIdentifier Compute(in CommandInfo src)
-        {
-            //var part1 = MnemonicPart(src);
-            return new OpCodeIdentifier(src.OpCode);
-        }
+            => new OpCodeIdentifier(src.OpCode);
 
         [MethodImpl(Inline), Op]
         public void Compute(ReadOnlySpan<CommandInfo> src, Span<OpCodeIdentifier> dst)

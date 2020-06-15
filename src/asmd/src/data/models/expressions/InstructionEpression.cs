@@ -63,14 +63,12 @@ namespace Z0.Asm.Data
             get => Body.IsNonEmpty;
         }
 
-        [Ignore]
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
             get => Symbolic.bytes(Body);
         }
 
-        [Ignore]
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]

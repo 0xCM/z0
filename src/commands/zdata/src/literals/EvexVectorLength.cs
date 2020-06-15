@@ -12,5 +12,4 @@ namespace Z0.Asm.Data
 
 		L512,
 	}
-
 }

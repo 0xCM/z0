@@ -9,8 +9,7 @@ namespace Z0.Asm.Data
     using System.Text;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
     
     public class AsmRecords
     {
@@ -62,12 +61,12 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline)]
         public static short Width<E>(E spec)
             where E : unmanaged, Enum
-                => (short)(Enums.numeric<E,int>(spec) >> 16);
+                => (short)(Control.tVal<E,int>(spec) >> 16);
 
         [MethodImpl(Inline)]
         public static short Index<E>(E spec)
             where E : unmanaged, Enum
-                => (short)Enums.numeric<E,int>(spec);
+                => (short)Control.tVal<E,int>(spec);
 
         public static R[] Save<F,R>(R[] src, FilePath dst, Func<R,string> formatter, char delimiter = Chars.Pipe)
             where F : unmanaged, Enum

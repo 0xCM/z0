@@ -9,8 +9,6 @@ namespace Z0.Asm.Data
     using R = OpCodeFormRecord;
     using F = OpCodeFormField;
 
-    using Asm.Data;
-
     public readonly struct OpCodeFormRecord : IRecord<F,R>
     {
         public static OpCodeFormRecord Empty => default;

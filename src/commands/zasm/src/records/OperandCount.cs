@@ -7,7 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     using W = AsmFieldWidths;
     using I = OperandCountId;
@@ -50,10 +50,10 @@ namespace Z0.Asm.Data
 
         public string DelimitedText(char delimiter)
         {
-            var dst = Records.Formatter<F>();
-            dst.AppendField(F.Sequence, Sequence,delimiter);
-            dst.AppendField(F.Count, Count, delimiter);
-            dst.AppendField(F.Id, Id, delimiter);
+            var dst = Records.Formatter<F>(delimiter);
+            dst.Delimit(F.Sequence, Sequence);
+            dst.Delimit(F.Count, Count);
+            dst.Delimit(F.Id, Id);
             return dst.ToString();
         }
     }

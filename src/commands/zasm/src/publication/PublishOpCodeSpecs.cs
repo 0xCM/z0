@@ -7,11 +7,11 @@ namespace Z0.Asm.Data
     using System;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     
     using M = AsmDataModels;
-    using F = OpCodeField;
-
+    using F = OpCodeRecordField;
+    
     partial class AsmEtl
     {                
         public OpCodeRecord[] GatherOpCodeSpecs()
@@ -27,7 +27,7 @@ namespace Z0.Asm.Data
             {
                 var src = sorted[i];
                 dst[i] = new OpCodeRecord(
-                    Seq: i, 
+                    Sequence: i, 
                     Id: (OpCodeId)src.Id, 
                     Mnemonic: src.Mnemonic, 
                     Instruction: src.Instruction, 

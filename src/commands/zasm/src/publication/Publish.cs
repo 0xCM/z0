@@ -10,10 +10,6 @@ namespace Z0.Asm.Data
     using LL = Asm.Data.LiteralLookups;
     using M = AsmDataModels;
 
-    using static Seed;
-    using static AsmDataModels;
-    using static Memories;
-
     partial class AsmEtl
     {        
         // OperandCountRecord[] Publish(OperandCounts model)

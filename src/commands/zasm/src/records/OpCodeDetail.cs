@@ -9,6 +9,7 @@ namespace Z0.Asm.Data
     using R = OpCodeDetail;
     using F = OpCodeDetailField;
 
+
     public struct OpCodeDetail  : IRecord<F,R>
     {
 		public int Sequence {get;}

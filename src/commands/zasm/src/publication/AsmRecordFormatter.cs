@@ -14,6 +14,22 @@ namespace Z0
     
     using Z0.Asm.Data;
 
+    public enum SegIndicator : byte
+    {
+        None = 0,
+        di,
+
+        edi,
+
+        esi,
+        rdi,
+        rsi,
+        si,
+        esdi,
+        esedi,
+        esrdi
+   }
+
     public class AsmRecordFormatter
     {
         [MethodImpl(Inline)]
@@ -64,15 +80,15 @@ namespace Z0
                 MemoryESDI => SegIndicator.esdi,
                 MemoryESEDI => SegIndicator.esedi,
                 MemoryESRDI => SegIndicator.esrdi,
-            _ => SegIndicator.Empty
+            _ => SegIndicator.None
             };
 
 
         public static string Render(OpKind src)
         {
             var si = SI(src);
-            if(si.IsNonEmpty)
-                return si.Format();
+            if(si != 0)
+                return $"{si}";
 
             var result = src switch{
                 OpKind.Register => "reg",

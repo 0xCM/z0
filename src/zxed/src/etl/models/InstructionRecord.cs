@@ -7,11 +7,13 @@ namespace Z0.Xed
 {
     using System;
     
-
     public enum InstructionField : uint
     {
         Sequence = 0,
+        
         Mnemonic = 1,
+
+        Extension = 2
     }
 
 

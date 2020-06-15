@@ -18,5 +18,4 @@ namespace Z0.Asm.Data
         Mode64,
 
     }
-
 }

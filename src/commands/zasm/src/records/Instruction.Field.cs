@@ -6,7 +6,6 @@ namespace Z0.Asm.Data
 {        
     using I = InstructionFieldId;
     using W = InstructionFieldWidth;
-    using R = RecordFields;
     using RW = AsmFieldWidths;
 
     public enum InstructionFieldId

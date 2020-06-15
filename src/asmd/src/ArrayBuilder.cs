@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Data
+namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
@@ -19,7 +19,6 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline)]
         public static ArrayBuilder<T> Create<T>(params T[] src)
             => new ArrayBuilder<T>(src);
-
     }
     
     public readonly struct ArrayBuilder<T>
@@ -52,5 +51,4 @@ namespace Z0.Asm.Data
             return dst;
         }
     }
-
 }

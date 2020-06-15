@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Konst;    
     
     public readonly struct OpCodeDataset
     {

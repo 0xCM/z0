@@ -5,7 +5,6 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public readonly struct AsmStatementParser : ITextParser<AsmStatement>
     {

@@ -6,6 +6,7 @@ namespace Z0.Asm.Data
 {        
     using System;
 
+
     public enum OpKindFieldId : uint
     {
         [Comment("Gets operand #0's opkind")]

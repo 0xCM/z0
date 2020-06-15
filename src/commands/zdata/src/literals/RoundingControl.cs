@@ -5,7 +5,6 @@
 namespace Z0.Asm.Data 
 {
     using System;
-    using System.Linq;
 
 	/// <summary>Rounding control</summary>
 	public enum RoundingControl 

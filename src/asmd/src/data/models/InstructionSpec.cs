@@ -7,9 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
-    
+    using static Konst;    
     public readonly struct InstructionSpec
     {        
         public static InstructionSpec Empty 

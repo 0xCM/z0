@@ -7,14 +7,9 @@ namespace Z0.Asm.Data
     using System;
     using System.Linq;
     using System.Collections.Generic;
-
-    using static Seed;   
-    using static Memories;
     
     using F = LiteralTableField;
     using T = LiteralRecord;
-
-    using RW = AsmFieldWidths;
 
     public readonly struct AsmRecordPublisher : IRecordPublisher, IAsmArchiveConfig
     {

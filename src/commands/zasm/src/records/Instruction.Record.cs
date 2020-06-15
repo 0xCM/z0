@@ -7,8 +7,6 @@ namespace Z0.Asm.Data
     using System;
     using System.Linq;
 
-    using Z0.Asm.Data;
-
     using R = InstructionRecord;
     using F = InstructionField;
 

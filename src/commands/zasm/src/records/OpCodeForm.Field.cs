@@ -9,7 +9,6 @@ namespace Z0.Asm.Data
     using I = OpCodeFormId;
     using W = OpCodeFormWidth;
     using RW = AsmFieldWidths;
-    using DF = AsmDataField;
 
     /*
         GroupIndex = (sbyte)((dword2 & (uint)LegacyFlags.HasGroupIndex) == 0 ? -1 : (int)((dword2 >> (int)LegacyFlags.GroupShift) & 7));

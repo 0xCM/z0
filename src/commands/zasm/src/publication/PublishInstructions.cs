@@ -54,20 +54,20 @@ namespace Z0.Asm.Data
 		string Format(InstructionRecord src)
 		{
             var dst = AsmRecords.Formatter<F>();
-            dst.DelimitField(F.Sequence, src.Sequence);
-            dst.DelimitField(F.Id, src.Id);
-            dst.DelimitField(F.CodeInfo, Format(src.CodeInfo));
-            dst.DelimitField(F.Encoding, src.Encoding);
-            dst.DelimitField(F.FlowControl, src.FlowControl);
-            dst.DelimitField(F.RflagsRead, Format(src.RflagsRead));
-            dst.DelimitField(F.RflagsUndefined, Format(src.RflagsUndefined));
-            dst.DelimitField(F.RflagsWritten, Format(src.RflagsWritten));
-            dst.DelimitField(F.RflagsCleared, Format(src.RflagsCleared));
-            dst.DelimitField(F.RflagsSet, Format(src.RflagsSet));
-            dst.DelimitField(F.RflagsInfo, Format(src.RflagsInfo));
-            dst.DelimitField(F.Cpuid, Format(src.Cpuid));
-            dst.DelimitField(F.Flags, Format(src.Flags));
-            dst.DelimitField(F.OpInfo, Format(src.OpInfo));
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Id, src.Id);
+            dst.Delimit(F.CodeInfo, Format(src.CodeInfo));
+            dst.Delimit(F.Encoding, src.Encoding);
+            dst.Delimit(F.FlowControl, src.FlowControl);
+            dst.Delimit(F.RflagsRead, Format(src.RflagsRead));
+            dst.Delimit(F.RflagsUndefined, Format(src.RflagsUndefined));
+            dst.Delimit(F.RflagsWritten, Format(src.RflagsWritten));
+            dst.Delimit(F.RflagsCleared, Format(src.RflagsCleared));
+            dst.Delimit(F.RflagsSet, Format(src.RflagsSet));
+            dst.Delimit(F.RflagsInfo, Format(src.RflagsInfo));
+            dst.Delimit(F.Cpuid, Format(src.Cpuid));
+            dst.Delimit(F.Flags, Format(src.Flags));
+            dst.Delimit(F.OpInfo, Format(src.OpInfo));
 			return dst.ToString();
 		}
 

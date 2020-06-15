@@ -20,5 +20,4 @@ namespace Z0.Asm.Data
 		[Comment("Zeroing masking: #(c:{z})#")]
 		ZeroingMasking,
 	}
-
 }

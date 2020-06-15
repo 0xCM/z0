@@ -44,7 +44,6 @@ namespace Z0.Asm.Data
         Mandatory,
     }
 
-
     public enum PrefixField : uint
     {
         Sequence = I.Sequence | W.Sequence << W.Offset,
@@ -66,7 +65,6 @@ namespace Z0.Asm.Data
 
         Notrack = I.Notrack | W.BoolLarge << W.Offset,
 
-        Mandatory = I.Mandatory | 12u << W.Offset,
-    
+        Mandatory = I.Mandatory | 12u << W.Offset,    
     }
 }

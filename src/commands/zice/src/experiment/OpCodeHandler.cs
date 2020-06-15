@@ -8,10 +8,9 @@ namespace Z0.Asm.Data
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
-    public interface IOpCodeHandler : INullaryKnown
+    public interface IIceOpCodeHandler : INullaryKnown
     {
         OpCodeId[] Codes {get;}
 
@@ -19,7 +18,7 @@ namespace Z0.Asm.Data
 
     }
 
-    readonly struct RexHandler : IOpCodeHandler
+    readonly struct RexHandler : IIceOpCodeHandler
     {
         [MethodImpl(Inline)]
         public static RexHandler Define(bool allowReg, bool allowMem, Register[] registers, params OpCodeId[] codes)
@@ -59,9 +58,9 @@ namespace Z0.Asm.Data
         }
     }
 
-    readonly struct OpCodeHandler : IOpCodeHandler
+    readonly struct IceOpCodeHandler : IIceOpCodeHandler
     {
-        public static OpCodeHandler Empty => new OpCodeHandler(Control.array<OpCodeId>());
+        public static IceOpCodeHandler Empty => new IceOpCodeHandler(Control.array<OpCodeId>());
 
         public OpCodeId[] Codes {get;}
 
@@ -70,19 +69,19 @@ namespace Z0.Asm.Data
         public readonly HandlerFlags Flags;
 
         [MethodImpl(Inline)]
-        public static OpCodeHandler Define(params OpCodeId[] codes)
-            => new OpCodeHandler(codes);
+        public static IceOpCodeHandler Define(params OpCodeId[] codes)
+            => new IceOpCodeHandler(codes);
 
         [MethodImpl(Inline)]
-        public static OpCodeHandler Define(HandlerFlags flags, params OpCodeId[] codes)
-            => new OpCodeHandler(codes, flags);
+        public static IceOpCodeHandler Define(HandlerFlags flags, params OpCodeId[] codes)
+            => new IceOpCodeHandler(codes, flags);
 
         [MethodImpl(Inline)]
-        public static OpCodeHandler Define(Register r, params OpCodeId[] codes)
-            => new OpCodeHandler(codes, Control.array(r));
+        public static IceOpCodeHandler Define(Register r, params OpCodeId[] codes)
+            => new IceOpCodeHandler(codes, Control.array(r));
 
         [MethodImpl(Inline)]
-        public OpCodeHandler(OpCodeId[] code, HandlerFlags flags = default)
+        public IceOpCodeHandler(OpCodeId[] code, HandlerFlags flags = default)
         {
             Codes = code;
             Registers = Control.array<Register>();
@@ -90,7 +89,7 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline)]
-        public OpCodeHandler(OpCodeId[] code, Register[] registers, HandlerFlags flags = default)
+        public IceOpCodeHandler(OpCodeId[] code, Register[] registers, HandlerFlags flags = default)
         {
             Codes = code;
             Registers = registers;
@@ -112,19 +111,19 @@ namespace Z0.Asm.Data
 
 	readonly struct HandlerInfo 
     {
-		public readonly IOpCodeHandler Handler;
+		public readonly IIceOpCodeHandler Handler;
 		
-        public readonly IOpCodeHandler[] Handlers;
+        public readonly IIceOpCodeHandler[] Handlers;
 
-		public HandlerInfo(IOpCodeHandler handler) 
+		public HandlerInfo(IIceOpCodeHandler handler) 
         {
 			Handler = handler;
-			Handlers = Control.array<IOpCodeHandler>();
+			Handlers = Control.array<IIceOpCodeHandler>();
 		}
 
-		public HandlerInfo(IOpCodeHandler[] handlers) 
+		public HandlerInfo(IIceOpCodeHandler[] handlers) 
         {
-			Handler = OpCodeHandler.Empty;
+			Handler = IceOpCodeHandler.Empty;
 			Handlers = handlers;
 		}
 	}

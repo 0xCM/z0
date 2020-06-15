@@ -6,7 +6,7 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    using static Seed;
+    using static Konst;
 
     using M = AsmDataModels;
     using F = OpCodeFormField;
@@ -61,20 +61,20 @@ namespace Z0.Asm.Data
         string Format(OpCodeFormRecord src)
         {
             var dst = AsmRecords.Formatter<F>();
-            dst.DelimitField(F.Sequence, src.Sequence);
-            dst.DelimitField(F.Mnemonic, src.Mnemonic);
-            dst.DelimitField(F.CodeBytes, src.CodeBytes);
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Mnemonic, src.Mnemonic);
+            dst.Delimit(F.CodeBytes, src.CodeBytes);
             dst.DelimitSome(F.Prefix, src.Prefix);
-            dst.DelimitField(F.Table, src.Table);
-            dst.DelimitField(F.Group, src.Group == - 1 ? string.Empty : src.Group.ToString());
+            dst.Delimit(F.Table, src.Table);
+            dst.Delimit(F.Group, src.Group == - 1 ? string.Empty : src.Group.ToString());
             dst.DelimitSome(F.Op1, src.Op1);
             dst.DelimitSome(F.Op2, src.Op2);
             dst.DelimitSome(F.Op3, src.Op3);
             dst.DelimitSome(F.Op4, src.Op4);
             dst.DelimitSome(F.OpSize, src.OpSize);
             dst.DelimitSome(F.AddressSize, src.AddressSize);
-            dst.DelimitField(F.Id, src.Id);
-            dst.DelimitField(F.Flags, src.Flags);
+            dst.Delimit(F.Id, src.Id);
+            dst.Delimit(F.Flags, src.Flags);
             return dst.Render();                             
         }      
 

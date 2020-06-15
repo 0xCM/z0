@@ -115,6 +115,5 @@ namespace Z0.Asm.Data
         }
 
         int ISequential.Sequence => 0;
-
     }
 }

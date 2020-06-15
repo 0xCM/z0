@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static Control;
 
     using F = CommandInfoField;
 

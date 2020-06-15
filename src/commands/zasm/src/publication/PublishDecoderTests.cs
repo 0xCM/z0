@@ -8,8 +8,7 @@ namespace Z0.Asm.Data
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
     
     using M = AsmDataModels;
     using F = DecoderTestField;
@@ -78,53 +77,53 @@ namespace Z0.Asm.Data
 		{
             var dst = AsmRecords.Formatter<F>();
 
-            dst.DelimitField(F.Sequence, src.Sequence);
-            dst.DelimitField(F.Mnemonic, src.Mnemonic);            
-            dst.DelimitField(F.OpCode, src.OpCode);
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Mnemonic, src.Mnemonic);            
+            dst.Delimit(F.OpCode, src.OpCode);
             
-            dst.DelimitField(F.Ops, src.Ops);
+            dst.Delimit(F.Ops, src.Ops);
 
-            dst.DelimitField(F.Op0K, RF.Render(src.Op0K));
-            dst.DelimitField(F.Op0R, RF.Render(src.Op0R));
+            dst.Delimit(F.Op0K, RF.Render(src.Op0K));
+            dst.Delimit(F.Op0R, RF.Render(src.Op0R));
 
-            dst.DelimitField(F.Op1K, RF.Render(src.Op1K));
-            dst.DelimitField(F.Op1R, RF.Render(src.Op1R));
+            dst.Delimit(F.Op1K, RF.Render(src.Op1K));
+            dst.Delimit(F.Op1R, RF.Render(src.Op1R));
             
-            dst.DelimitField(F.Op2K, RF.Render(src.Op2K));
-            dst.DelimitField(F.Op2R, RF.Render(src.Op2R));
+            dst.Delimit(F.Op2K, RF.Render(src.Op2K));
+            dst.Delimit(F.Op2R, RF.Render(src.Op2R));
             
-            dst.DelimitField(F.Op3K, RF.Render(src.Op3K));
-            dst.DelimitField(F.Op3R, RF.Render(src.Op3R));
+            dst.Delimit(F.Op3K, RF.Render(src.Op3K));
+            dst.Delimit(F.Op3R, RF.Render(src.Op3R));
             
-            dst.DelimitField(F.Op4K, RF.Render(src.Op4K));
-            dst.DelimitField(F.Op4R, RF.Render(src.Op4R));
+            dst.Delimit(F.Op4K, RF.Render(src.Op4K));
+            dst.Delimit(F.Op4R, RF.Render(src.Op4R));
 
-            dst.DelimitField(F.HexRef, RF.RenderHex(src.HexRef));
-            dst.DelimitField(F.HexEnc, RF.RenderHex(src.HexEnc));
+            dst.Delimit(F.HexRef, RF.RenderHex(src.HexRef));
+            dst.Delimit(F.HexEnc, RF.RenderHex(src.HexEnc));
 
-            dst.DelimitField(F.BitMode, src.BitMode);
-            dst.DelimitField(F.CanEnc, RF.Render(src.CanEnc));
-            dst.DelimitField(F.InvEob, RF.Render(src.InvEob));
+            dst.Delimit(F.BitMode, src.BitMode);
+            dst.Delimit(F.CanEnc, RF.Render(src.CanEnc));
+            dst.Delimit(F.InvEob, RF.Render(src.InvEob));
 
-            dst.DelimitField(F.OpMask, RF.Render(src.OpMask));
-            dst.DelimitField(F.Address64, RF.RenderHex64(src.Address64));
-            dst.DelimitField(F.NearBranch, RF.RenderHex64(src.NearBranch));
+            dst.Delimit(F.OpMask, RF.Render(src.OpMask));
+            dst.Delimit(F.Address64, RF.RenderHex64(src.Address64));
+            dst.Delimit(F.NearBranch, RF.RenderHex64(src.NearBranch));
             
-            dst.DelimitField(F.FarBranch, RF.RenderHex32(src.FarBranch));
-            dst.DelimitField(F.FBSelector, RF.RenderHex16(src.FBSelector));
+            dst.Delimit(F.FarBranch, RF.RenderHex32(src.FarBranch));
+            dst.Delimit(F.FBSelector, RF.RenderHex16(src.FBSelector));
 
-            dst.DelimitField(F.MemSize, RF.Render(src.MemSize));
-            dst.DelimitField(F.MemSeg, RF.Render(src.MemSeg));
-            dst.DelimitField(F.SegPrefix, RF.Render(src.SegPrefix));
-            dst.DelimitField(F.MemBase, RF.Render(src.MemBase));
-            dst.DelimitField(F.MemIndex, RF.Render(src.MemIndex));
-            dst.DelimitField(F.MemIndexScale, RF.RenderScale(src.MemIndexScale));
-            dst.DelimitField(F.MemDx, RF.RenderHex32(src.MemDx));
-            dst.DelimitField(F.MemDxSize, RF.RenderMemDxSize(src.MemDxSize));
+            dst.Delimit(F.MemSize, RF.Render(src.MemSize));
+            dst.Delimit(F.MemSeg, RF.Render(src.MemSeg));
+            dst.Delimit(F.SegPrefix, RF.Render(src.SegPrefix));
+            dst.Delimit(F.MemBase, RF.Render(src.MemBase));
+            dst.Delimit(F.MemIndex, RF.Render(src.MemIndex));
+            dst.Delimit(F.MemIndexScale, RF.RenderScale(src.MemIndexScale));
+            dst.Delimit(F.MemDx, RF.RenderHex32(src.MemDx));
+            dst.Delimit(F.MemDxSize, RF.RenderMemDxSize(src.MemDxSize));
 
-            dst.DelimitField(F.Line, src.Line);
-            dst.DelimitField(F.Id, src.Id);
-            dst.DelimitField(F.DecoderOptions, src.DecoderOptions);
+            dst.Delimit(F.Line, src.Line);
+            dst.Delimit(F.Id, src.Id);
+            dst.Delimit(F.DecoderOptions, src.DecoderOptions);
 			return dst.ToString();
 		}
         

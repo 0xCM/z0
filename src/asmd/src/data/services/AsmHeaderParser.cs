@@ -5,10 +5,6 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
-    using static Memories;
     using static AsmCommandParser;
 
     public readonly struct AsmHeaderParser : ITextParser<AsmFunctionHeader>
@@ -44,6 +40,5 @@ namespace Z0.Asm.Data
 
         public ParseResult<AsmFunctionHeader> Parse(string src)
             => Parse(src.SplitClean(Chars.NL));
-
     }
 }

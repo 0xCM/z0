@@ -8,7 +8,6 @@ namespace Z0.Asm.Data
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Seed;   
     using static AsmDataModels;
     
     public interface IAsmListPublisher
@@ -20,9 +19,11 @@ namespace Z0.Asm.Data
     {
         public static IAsmListPublisher Service => default(AsmListPublisher);
 
-        static IListPublisher LP => Publications.Publishers.ListPubliser;
+        static IListPublisher LP 
+            => Publications.Publishers.ListPubliser;
         
-        static RecordPublisher RP = Publications.Publishers.RecordPubliser;
+        static RecordPublisher RP 
+            => Publications.Publishers.RecordPubliser;
         
         public void Publish()
         {

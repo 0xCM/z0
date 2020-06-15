@@ -14,7 +14,7 @@ namespace Z0.Asm.Data
     
     public readonly struct AsmLiteralPublisher : IAsmLiteralPublisher, IAsmArchiveConfig
     {
-        public static IAsmLiteralPublisher Service => default(AsmLiteralPublisher);
+        public static IAsmLiteralPublisher Service => default;
                 
         public void Publish()
         {

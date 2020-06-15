@@ -5,9 +5,6 @@
 namespace Z0.Asm.Data
 {        
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
 
     using M = AsmDataModels;
 

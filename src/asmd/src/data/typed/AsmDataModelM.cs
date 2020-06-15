@@ -2,28 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
+namespace Z0.Asm.Data
+{        
     using System;
 
-    public interface IRecord : ITabular, ISequential
+    public readonly struct AsmDataModel<M> : IDataModel<M>
+        where M : unmanaged, IDataModel<M>
     {
-
+        
     }
 
-
-    public interface IRecord<R> : IRecord, ITabular<R>
-        where R : IRecord
-    {
-
-
-    }
-
-    public interface IRecord<F,R> : IRecord<R>, ITabular<F,R>, ITextual
+    public readonly struct AsmDataModel<F,R,M,D>
         where F : unmanaged, Enum
         where R : IRecord
+        where M : IDataModel
+        where D : unmanaged, Enum
     {
-        string ITextual.Format() => string.Empty;
-        
+        public D Discriminator {get;}                
     }
 }

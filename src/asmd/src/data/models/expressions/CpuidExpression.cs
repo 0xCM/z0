@@ -8,9 +8,8 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static Typed;
     
-
     public readonly struct CpuidExpression : ISymbolic<CpuidExpression,asci16>
     {
         public asci16 Body {get;}

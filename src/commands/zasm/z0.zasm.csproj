@@ -17,19 +17,8 @@
 
     <ProjectReference Include="$(Src)commands/zice/z0.zice.csproj" />
     <ProjectReference Include="$(Src)commands/zdata/z0.zdata.csproj" />
-    <ProjectReference Include="$(Src)commands/zxed/z0.zxed.csproj" />
+    <ProjectReference Include="$(ZXed)" />
 
   </ItemGroup>
-
-  <!-- <ItemGroup>
-    <EmbeddedResource Include="res/RegisterLayout.GP.csv" LogicalName="RegisterLayout.GP.csv" /> 
-    <EmbeddedResource Include="res/RegisterLayout.Vec.csv" LogicalName="RegisterLayout.Vec.csv" /> 
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="specs/instructions/cmp.csv" LogicalName="cmp.csv" /> 
-    <EmbeddedResource Include="specs/instructions/jcc.csv" LogicalName="jcc.csv" /> 
-    <EmbeddedResource Include="specs/instructions/mov.csv" LogicalName="mov.csv" /> 
-  </ItemGroup> -->
 
 </Project>

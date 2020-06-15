@@ -7,8 +7,7 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     public readonly struct EncodedOpCode
     {
@@ -20,7 +19,7 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline)]
         public EncodedOpCode(ulong data)
         {
-            this.Data = data;
+            Data = data;
         }        
     }
 }

@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
+    using static Konst;
 
     using R = DecoderTestRecord;
     using F = DecoderTestField;

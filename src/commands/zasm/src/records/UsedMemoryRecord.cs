@@ -7,8 +7,6 @@ namespace Z0.Asm.Data
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-
     /// <summary>
     /// A memory location used by an instruction
     /// </summary>

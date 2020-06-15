@@ -5,10 +5,8 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     using static AsmCommandParser;

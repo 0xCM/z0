@@ -5,22 +5,6 @@
 namespace Z0.Asm.Data
 {        
     using System;
-    using System.Runtime.CompilerServices;
-
-    public readonly struct AsmDataModel<M> : IDataModel<M>
-        where M : unmanaged, IDataModel<M>
-    {
-        
-    }
-
-    public readonly struct AsmDataModel<F,R,M,D>
-        where F : unmanaged, Enum
-        where R : IRecord
-        where M : IDataModel
-        where D : unmanaged, Enum
-    {
-        public D Discriminator {get;}                
-    }
 
     public enum TestCaseBits : byte
     {

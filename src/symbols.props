@@ -84,7 +84,7 @@
     <AsmD>$(Src)asmd/z0.asmd.csproj</AsmD>        
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
 
-    <ZXed>$(Src)commands/zxed/z0.zxed.csproj</ZXed>
+    <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
     <ZIce>$(Src)commands/zice/z0.zice.csproj</ZIce>
     <ZAsm>$(Src)commands/zasm/z0.zasm.csproj</ZAsm>
 

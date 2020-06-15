@@ -5,11 +5,6 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using static Seed;
-    using static Memories;
 
     using P = Z0.Parts;
     
@@ -17,7 +12,7 @@ namespace Z0.Asm.Data
     {                        
         static IAppContext CreateAppContext()
         {
-            var resolved = ApiComposition.Assemble(seq(P.GMath.Resolved));
+            var resolved = ApiComposition.Assemble(Control.seq(P.GMath.Resolved));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);                
             var settings = AppSettings.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
@@ -28,8 +23,6 @@ namespace Z0.Asm.Data
             : base(CreateAppContext())
         {
         }
-
-
 
         public override void RunShell(params string[] args)
         {            

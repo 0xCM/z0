@@ -7,10 +7,10 @@ namespace Z0.Asm.Data
     using System;
 
     using I = OpCodeDetailId;
-    using W = AsmFieldWidths;
     using P = PrefixFieldId;
     using M = ModeFieldId;
     using K = OpKindFieldId;
+
     public enum OpCodeDetailId : uint
     {
         Sequence,

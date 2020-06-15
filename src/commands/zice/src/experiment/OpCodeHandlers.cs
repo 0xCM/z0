@@ -45,9 +45,9 @@ namespace Z0.Asm.Data
             dst.Add(new HandlerInfo(Handlers(ref index, (int)count)));
         }
 
-        IOpCodeHandler[] Handlers(ref int index, int count)
+        IIceOpCodeHandler[] Handlers(ref int index, int count)
         {
-            var handlers = new IOpCodeHandler[count];
+            var handlers = new IIceOpCodeHandler[count];
 
             for(var i=0; i<count; i++)
             {
@@ -65,44 +65,44 @@ namespace Z0.Asm.Data
             return handlers;
         }
 
-        IOpCodeHandler Handler(OpCodeHandlerKind kind, ref int index)
+        IIceOpCodeHandler Handler(OpCodeHandlerKind kind, ref int index)
         {
             var code = OpCodeId.INVALID;
             switch(kind)
             {
 			    case OpCodeHandlerKind.Ap:
                     code = OpCode(ref index);
-                    return OpCodeHandler.Define(code, code + 1);
+                    return IceOpCodeHandler.Define(code, code + 1);
 			    
                 case OpCodeHandlerKind.C_R_3a:
                     code = OpCode(ref index);                    
-                    return OpCodeHandler.Define(Reg(ref index), code, code + 1);
+                    return IceOpCodeHandler.Define(Reg(ref index), code, code + 1);
 
 			    case OpCodeHandlerKind.Eb_1:
-                    return OpCodeHandler.Define(OpCode(ref index));
+                    return IceOpCodeHandler.Define(OpCode(ref index));
 			    
                 case OpCodeHandlerKind.Eb_2:
-                    return OpCodeHandler.Define(HandlerFlags(ref index), OpCode(ref index));
+                    return IceOpCodeHandler.Define(HandlerFlags(ref index), OpCode(ref index));
 
 			    case OpCodeHandlerKind.BranchSimple:
-                    return OpCodeHandler.Define(code, code + 1, code + 2);
+                    return IceOpCodeHandler.Define(code, code + 1, code + 2);
 			    
                 case OpCodeHandlerKind.Mf_1:
-                    return OpCodeHandler.Define(OpCode(ref index));
+                    return IceOpCodeHandler.Define(OpCode(ref index));
 
 			    case OpCodeHandlerKind.AL_DX:
-                    return OpCodeHandler.Define(OpCode(ref index));
+                    return IceOpCodeHandler.Define(OpCode(ref index));
 
 			    case OpCodeHandlerKind.Gv_Eb:
                     code = OpCode(ref index);
-                    return OpCodeHandler.Define(code, code + 1, code + 2);
+                    return IceOpCodeHandler.Define(code, code + 1, code + 2);
                 
                 case OpCodeHandlerKind.Gv_Ev_REX:
                     code = OpCode(ref index);
-                    return OpCodeHandler.Define(code, code + 1);
+                    return IceOpCodeHandler.Define(code, code + 1);
                 
                 case OpCodeHandlerKind.Ib:
-                    return OpCodeHandler.Define(OpCode(ref index));                
+                    return IceOpCodeHandler.Define(OpCode(ref index));                
 			    
 			    case OpCodeHandlerKind.Ev_REXW:
                     code = OpCode(ref index);
@@ -112,23 +112,23 @@ namespace Z0.Asm.Data
                 
                 case OpCodeHandlerKind.Jb:
                     code = OpCode(ref index);
-                    return OpCodeHandler.Define(code, code + 1, code + 2);
+                    return IceOpCodeHandler.Define(code, code + 1, code + 2);
 
                 case OpCodeHandlerKind.Jdisp:
                     code = OpCode(ref index);
-                    return OpCodeHandler.Define(code, code + 1);
+                    return IceOpCodeHandler.Define(code, code + 1);
 
 			    case OpCodeHandlerKind.Jx:
                     code = OpCode(ref index);
-                    return OpCodeHandler.Define(code, code + 1, OpCode(ref index));
+                    return IceOpCodeHandler.Define(code, code + 1, OpCode(ref index));
                 
                 case OpCodeHandlerKind.Jz:
                     code = OpCode(ref index);
-                    return OpCodeHandler.Define(code, code + 1, code + 2);
+                    return IceOpCodeHandler.Define(code, code + 1, code + 2);
                 
                 case OpCodeHandlerKind.Jb2:
                     {
-                        return OpCodeHandler.Define(
+                        return IceOpCodeHandler.Define(
                             OpCode(ref index), 
                             OpCode(ref index), 
                             OpCode(ref index), 
@@ -138,7 +138,7 @@ namespace Z0.Asm.Data
                             OpCode(ref index));
                     }
                 default:
-                    return OpCodeHandler.Empty;
+                    return IceOpCodeHandler.Empty;
             }
         }
 

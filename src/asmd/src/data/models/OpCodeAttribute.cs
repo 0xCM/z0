@@ -6,6 +6,7 @@ namespace Z0.Asm.Data
 {
     using System;
 
+
     public class OpCodeAttribute : Attribute
     {
         public string Expression {get;}
