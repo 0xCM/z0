@@ -15,33 +15,33 @@ namespace Z0.Asm.Data
 
     public enum CommandInfoField : uint
     {
-        Sequence = 0 | (W.Sequence << W.Offset),
+        Sequence = 0 | (W.Sequence << WidthOffset),
 
-        Address = 1 | (W.Address64 << W.Offset),
+        Address = 1 | (W.Address64 << WidthOffset),
         
-        GlobalOffset = 2 | (16 << W.Offset),
+        GlobalOffset = 2 | (16 << WidthOffset),
 
-        LocalOffset = 3 | (16 << W.Offset),
+        LocalOffset = 3 | (16 << WidthOffset),
 
-        Mnemonic = 4 | (W.Mnemonic << W.Offset), 
+        Mnemonic = 4 | (W.Mnemonic << WidthOffset), 
         
-        OpCode = 5 | (W.OpCode << W.Offset),  
+        OpCode = 5 | (W.OpCode << WidthOffset),  
         
-        Encoded = 6 | 32 << W.Offset,
+        Encoded = 6 | 32 << WidthOffset,
 
-        InstructionFormat = 7 | (W.Instruction << W.Offset), 
+        InstructionFormat = 7 | (W.Instruction << WidthOffset), 
 
-        InstructionCode = 8 | (W.Instruction << W.Offset), 
+        InstructionCode = 8 | (W.Instruction << WidthOffset), 
         
-        CpuId = 9 | (W.CpuId << W.Offset),
+        CpuId = 9 | (W.CpuId << WidthOffset),
 
-        CodeId = 10 | (20 << W.Offset),
+        CodeId = 10 | (20 << WidthOffset),
     }
 
     public struct CommandInfo : IRecord<F,R>
     {                   
-        public static string FormatHeader(char delimiter = Tabular.DefaultDelimiter)
-            => Records.Header<F>().Render(delimiter);
+        public static string FormatHeader(char delimiter = FieldDelimiter)
+            => RecordHeader.format<F>(delimiter);
         
         public static CommandInfo Empty 
             => new CommandInfo(0, MemoryAddress.Empty, Address32.Empty, Address16.Empty, asci16.Null, 
@@ -70,7 +70,18 @@ namespace Z0.Asm.Data
         public OpCodeId CodeId;
 
         [MethodImpl(Inline)]
-        public CommandInfo(int Sequence, MemoryAddress Address, Address32 GlobalOffset, Address16 LocalOffset, asci16 Mnemonic, asci32 OpCode, BinaryCode Encoded, asci32 InstructionFormat, asci32 InstructionCode, asci16 CpuId, OpCodeId Id)
+        public CommandInfo(
+            int Sequence, 
+            MemoryAddress Address, 
+            Address32 GlobalOffset, 
+            Address16 LocalOffset, 
+            asci16 Mnemonic, 
+            asci32 OpCode, 
+            BinaryCode Encoded, 
+            asci32 InstructionFormat, 
+            asci32 InstructionCode, 
+            asci16 CpuId, 
+            OpCodeId Id)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -97,9 +108,9 @@ namespace Z0.Asm.Data
             get => !IsEmpty;
         }
 
-        public string Format()
+        public string DelimitedText(char delimiter)
         {
-            var formatter = Records.Formatter<F>();
+            var formatter = Records.Formatter<F>(delimiter);
             formatter.Delimit(F.Sequence, Sequence);
             formatter.Delimit(F.Address, Address);
             formatter.Delimit(F.GlobalOffset, GlobalOfset);
@@ -114,6 +125,11 @@ namespace Z0.Asm.Data
             return formatter.ToString();
         }
 
+        public string Format()
+            => DelimitedText(FieldDelimiter);
+
+        public override string ToString()
+            => Format();
         int ISequential.Sequence => 0;
     }
 }

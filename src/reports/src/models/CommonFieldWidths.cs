@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-
-    public enum CommonFieldWidths
+    public enum TabularWidths
     {
         /// <summary>
         /// The width of a sequence number field
@@ -76,10 +75,5 @@ namespace Z0
         /// The width of a field containing an 8-bit hex number
         /// </summary>
         Num64Hex = 16,
-
-        /// <summary>
-        /// The index of the bit at which width specification begins 
-        /// </summary>
-        Offset = 16,
     }
 }

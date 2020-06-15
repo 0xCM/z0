@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    public interface IRecordFieldParser
+    public interface IFieldParser
     {        
         /// <summary>
         /// Parses a Y/N literal

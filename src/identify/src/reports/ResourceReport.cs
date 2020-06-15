@@ -9,27 +9,39 @@ namespace Z0
     using System.Linq;
     using System.Text;
 
+    using static Konst;
+
     using F = ResourceField;
     using R = ResourceRecord;
 
     public enum ResourceField : uint
     {
-        Offset = 0 | (8 << 16),
+        Offset = 0 | (8 << WidthOffset),
 
-        Address = 1 | (16 << 16),
+        Address = 1 | (16 << WidthOffset),
 
-        Size = 2 | (10 << 16),
+        Size = 2 | (10 << WidthOffset),
 
-        Uri = 3 | (40 << 16),
+        Uri = 3 | (40 << WidthOffset),
 
-        Data = 4 | 1 << 16,
+        Data = 4 | 1 << WidthOffset,
     }
 
     /// <summary>
     /// Describes an assembly code emission
     /// </summary>
-    public class ResourceRecord : ITabular<F,R>
+    public struct ResourceRecord : ITabular<F,R>
     {    
+        public ushort Offset;
+
+        public MemoryAddress Address;
+
+        public int Size;
+
+        public string Uri;
+
+        public byte[] Data;
+
         public static ResourceRecord Create(ushort offset, MemoryAddress location, int size, string uri, byte[] data)
             => new ResourceRecord(offset, location, size, uri, data);
 
@@ -41,21 +53,6 @@ namespace Z0
             this.Uri = uri;
             this.Data = data;
         }
-
-        [TabularField(F.Offset)]
-        public ushort Offset {get; set;}
-
-        [TabularField(F.Address)]
-        public MemoryAddress Address {get; set;}
-
-        [TabularField(F.Size)]
-        public int Size {get; set;}
-
-        [TabularField(F.Uri)]
-        public string Uri {get; set;}
-
-        [TabularField(F.Data)]
-        public byte[] Data {get;set;}
 
         public string DelimitedText(char delimiter)
         {
@@ -79,7 +76,6 @@ namespace Z0
             sb.Append($"{delimiter} ");            
             sb.Append($"{content?.Format()}".PadRight(pad));
         }
-
     }
 
     public class ResourceReport : Report<ResourceReport,F,R>

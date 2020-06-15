@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Seed;
-    using static Memories;
+    using static Typed;
 
     public class t_vmove : t_inx<t_vmove>
     {   

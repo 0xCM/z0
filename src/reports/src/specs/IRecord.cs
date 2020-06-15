@@ -23,7 +23,7 @@ namespace Z0
         where F : unmanaged, Enum
         where R : IRecord
     {
-        string ITextual.Format() => string.Empty;
+        
         
     }
 }

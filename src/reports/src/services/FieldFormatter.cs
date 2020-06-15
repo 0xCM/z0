@@ -8,33 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Seed;
-
-    /// <summary>
-    /// ~ The name of a field is determined by the enum literal identifier
-    /// ~ The position of a field, its index, is determined by the lower 16 bits of the enum value
-    /// ~ The width of a field is determined by the upper 16 bits of the enum 
-    /// </summary>
-    enum SampleField : uint
-    {
-        Field0 = 0 | (60u << 32),
-
-        Field1 =  1 | (14u << 32),
-
-        Field2 = 2  | (14u << 32),
-        
-        Feild3 =  3 | (26u << 32)
-    }
+    using static Konst;
 
     public struct FieldFormatter<E> : ITextual
         where E : unmanaged, Enum
     {        
-        char Delimiter;
 
         readonly StringBuilder Target;
         
+        char Delimiter;
+
         public static FieldFormatter<E> Default 
-            => new FieldFormatter<E>(new StringBuilder(), Tabular.DefaultDelimiter);        
+            => new FieldFormatter<E>(new StringBuilder(), FieldDelimiter);        
         
         [MethodImpl(Inline)]
         FieldFormatter(StringBuilder dst, char delimiter)
@@ -66,7 +51,7 @@ namespace Z0
         public FieldFormatter<E> Reset(char? delimiter = null)
         {            
             Target.Clear();
-            Delimiter = delimiter ?? Tabular.DefaultDelimiter;
+            Delimiter = delimiter ?? FieldDelimiter;
             return this;
         }
 
@@ -90,6 +75,6 @@ namespace Z0
 
         static string Render<T>(T content)
             where T : ITextual
-                => content?.Format() ?? text.Empty;
+                => content?.Format() ?? EmptyString;
     }
 }

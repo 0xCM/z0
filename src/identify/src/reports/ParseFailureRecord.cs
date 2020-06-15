@@ -7,33 +7,47 @@ namespace Z0
     using System;
     using System.Linq;
 
+    using static Konst;
+
     using F = ParseFailureField;
     using R = ParseFailureRecord;
 
     public enum ParseFailureField : uint
     {
-        Sequence = 0 | 10u << 32,
+        Sequence = 0 | 10u << WidthOffset,
 
-        Address = 1 | 16u << 32,
+        Address = 1 | 16u << WidthOffset,
 
-        Length = 2 | 8u << 32,
+        Length = 2 | 8u << WidthOffset,
 
-        TermCode = 3 | 20u << 32,
+        TermCode = 3 | 20u << WidthOffset,
 
-        Uri = 4 | 110u << 32,
+        Uri = 4 | 110u << WidthOffset,
 
-        Data = 5 | 1u << 32
+        Data = 5 | 1u << WidthOffset
     }
 
     public readonly struct ParseFailureRecord : ITabular<F,R>
     {
+        public readonly int Sequence;
+
+        public readonly MemoryAddress Address;
+
+        public readonly int Length;
+
+        public readonly ExtractTermCode TermCode;
+
+        public readonly OpUri Uri;        
+
+        public readonly LocatedCode Data;
+
         public const int FieldCount = 6;
 
         public static R Empty => new R(0, MemoryAddress.Empty, 0, ExtractTermCode.None, OpUri.Empty, LocatedCode.Empty);
 
         public static R Parse(string src)
         {
-            var fields = src.SplitClean(Tabular.DefaultDelimiter);
+            var fields = src.SplitClean(FieldDelimiter);
             if(fields.Length != FieldCount)
                 return Empty;
 
@@ -58,24 +72,6 @@ namespace Z0
             this.Data = Data;
         }
         
-        [TabularField(F.Sequence)]
-        public readonly int Sequence;
-
-        [TabularField(F.Address)]
-        public readonly MemoryAddress Address;
-
-        [TabularField(F.Length)]
-        public readonly int Length;
-
-        [TabularField(F.TermCode)]
-        public readonly ExtractTermCode TermCode;
-
-        [TabularField(F.Uri)]
-        public readonly OpUri Uri;        
-
-        [TabularField(F.Data)]
-        public readonly LocatedCode Data;
-
         public string DelimitedText(char delimiter)
         {
             var dst = Tabular.formatter<F>(delimiter);

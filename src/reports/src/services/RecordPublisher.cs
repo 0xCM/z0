@@ -20,7 +20,7 @@ namespace Z0
             where F : unmanaged, Enum
         {
             var dst = Archive.DatasetPath(model.Name);
-            var header = RecordHeader.Create<F>();
+            var header = RecordHeader.define<F>();
             using var writer = dst.Writer();
             writer.WriteLine(header.Render(delimiter));
             for(var i=0; i<src.Length; i++)

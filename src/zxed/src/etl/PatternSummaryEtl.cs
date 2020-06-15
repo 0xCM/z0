@@ -10,10 +10,8 @@ namespace Z0.Xed
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Seed;
-    using static Memories;
-    using static Tabular;
-    using static Res;
+    using static Konst;
+    using static Control;
     using static SourceMarkers;
 
     using R = PatternSummary;
@@ -60,7 +58,22 @@ namespace Z0.Xed
             return string.Empty;
         }
 
-        public static BinaryCode PatternBytes(this InstructionPattern src)
+        public static string BaseCodeText(this InstructionPattern src)
+        {
+            var dst = text.build();
+            var count = src.Parts.Length;
+            for(var i=0; i<count; i++)
+            {
+                var part = src.Parts[i];
+                dst.Append(part);
+                if(i != count - 1)
+                    dst.Append(Chars.Space);
+            }
+            
+            return dst.ToString();
+        }   
+
+        public static BinaryCode BaseCode(this InstructionPattern src)
         {
             var dst = 0ul;
             var pos = 0;
@@ -72,9 +85,19 @@ namespace Z0.Xed
                     Seeker.seek8(ref dst, pos++) = parser.ParseByte(part);
             }
 
-            return ByteReader.ReadAll(dst).Slice(0, pos);
-            
+            return ByteReader.ReadAll(dst).Slice(0, pos);            
         }
+
+        const char LeftFence = Chars.LBracket;
+
+        const char RightFence = Chars.RBracket;
+        
+        public static string Mod(this InstructionPattern src)
+            => src.Parts.TryFind(x => x.StartsWith(MOD)).MapValueOrDefault(x => x.Unfence(LeftFence, RightFence), string.Empty);
+
+        public static string Reg(this InstructionPattern src)
+            => src.Parts.TryFind(x => x.StartsWith(REG)).MapValueOrDefault(x => x.Unfence(LeftFence, RightFence), string.Empty);
+
         public static PatternSummary Summary(this InstructionPattern src)
         {
             var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOf(ASSIGN).Trim(), string.Empty);
@@ -83,16 +106,31 @@ namespace Z0.Xed
                 Category: src.Category, 
                 Extension: src.Extension, 
                 IsaSet: src.IsaSet, 
-                BaseCode: src.PatternBytes(),
-                Mod: src.Parts.TryFind(x => x.StartsWith(MOD)).MapValueOrDefault(x => x.Unfence(Chars.LBracket, Chars.RBracket), string.Empty), 
-                Reg: src.Parts.TryFind(x => x.StartsWith(REG)).MapValueOrDefault(x => x.Unfence(Chars.LBracket, Chars.RBracket), string.Empty), 
+                BaseCode: src.BaseCode(),
+                Mod: src.Mod(),
+                Reg: src.Reg(),
                 Pattern: src.PatternText, 
                 Operands: src.OperandText);
         }
 
+        public static string FormatPattern(this InstructionPattern src, char delimiter)
+        {
+            var dst = Reports.formatter<F>(delimiter);
+            dst.Delimit(F.Class, src.Class);
+            dst.Delimit(F.Category, src.Category);
+            dst.Delimit(F.Extension, src.Extension);
+            dst.Delimit(F.IsaSet, src.IsaSet);
+            dst.Delimit(F.BaseCode, src.BaseCode());
+            dst.Delimit(F.Mod, src.Mod());
+            dst.Delimit(F.Reg, src.Reg());
+            dst.Delimit(F.Pattern, src.PatternText);
+            dst.Delimit(F.Operands, src.Operands);
+            return dst.Format();
+        }
+
         public static string FormatRow(this PatternSummary src, char delimiter)
         {
-            var dst = formatter<F>();
+            var dst = Reports.formatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);
@@ -105,5 +143,4 @@ namespace Z0.Xed
             return dst.Format();                             
         }      
     }
-
 }

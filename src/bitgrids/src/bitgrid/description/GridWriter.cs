@@ -24,7 +24,7 @@ namespace Z0
         public void Save(int segwidth, int minsegs, int maxsegs, FilePath path)
         {
             using var dst = path.Writer();
-            dst.WriteLine(FormatHeader());
+            dst.WriteLine(GridHeader());
             var points = (
                 from row in gmath.range(minsegs,maxsegs)
                 from col in gmath.range(minsegs,maxsegs)
@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="colpad">The amount by which to pad each column</param>
         /// <param name="delimiter">The column separator</param>
-        static string FormatHeader(int? colpad = null, char? delimiter = null)
+        static string GridHeader(int? colpad = null, char? delimiter = null)
         {
             var pad = colpad ?? 10;
             var sep = delimiter ?? Chars.Pipe;

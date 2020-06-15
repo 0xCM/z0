@@ -6,28 +6,31 @@ namespace Z0
 {
     using System;
 
-    public interface ITabular
+    using static Konst;
+
+    public interface ITabular : ITextual
     {
         /// <summary>
         /// Returns a line of text represents the record value
         /// </summary>
-        string DelimitedText(char delimiter) 
-            => string.Empty;
+        string DelimitedText(char delimiter);
 
-        string[] HeaderNames {get;}        
+        string[] HeaderNames {get;}     
+
+        string ITextual.Format()
+            => DelimitedText(FieldDelimiter);   
     }
 
     public interface ITabular<R> : ITabular
         where R : ITabular
     {
-        string[] ITabular.HeaderNames
-            => TabularFormats.headers<R>();
     }
 
-    public interface ITabular<F,T> : ITabular<T>
+    public interface ITabular<F,R> : ITabular<R>
         where F : unmanaged, Enum
-        where T : ITabular
+        where R : ITabular
     {
-
+        string[] ITabular.HeaderNames 
+            => RecordFields.Service.Labels<F>();
     }
 }

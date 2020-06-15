@@ -39,12 +39,12 @@ namespace Z0
         public LiteralRecord[] PublishLiterals<E>(out FilePath dst)
             where E : unmanaged, Enum
         {            
-            dst = Publications.Archive.DatasetPath(typeof(E).Name);            
+            dst = Reports.Publications.DatasetPath(typeof(E).Name);            
             var records = LiteralRecords<E>(typeof(E).Name, DescribeLiteral);
             using var writer = dst.Writer();
             writer.WriteLine(Tabular.header<E>());
             for(var i=0; i<records.Length; i++)
-                writer.WriteLine(records[i].Format());
+                writer.WriteLine(records[i].DelimitedText(FieldDelimiter));
             return records;
         }
 

@@ -9,14 +9,6 @@ namespace Z0
 
     using static Konst;   
 
-    public readonly struct RecordHeader
-    {
-        [MethodImpl(Inline)]
-        public static RecordHeader<F> Create<F>()
-            where F : unmanaged, Enum
-                => default;
-    }
-
     /// <summary>
     /// Defines enum-predicated header content
     /// </summary>

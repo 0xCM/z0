@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
-
     /// <summary>
     /// Joines a sink and receiver to form a context
     /// </summary>

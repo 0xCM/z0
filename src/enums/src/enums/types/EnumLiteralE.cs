@@ -61,6 +61,8 @@ namespace Z0
             get => Field;
         }
 
+        ulong IEnumLiteral.LiteralValue 
+            => Enums.untype(LiteralValue);
 
         [MethodImpl(Inline)]
         internal EnumLiteral(FieldInfo field, EnumScalarKind type, int index, string identifier, E value, string description, UserMetadata data)

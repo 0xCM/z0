@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using static Konst;
+
     using F = MemberParseField;
     using R = MemberParseRecord;
 
@@ -28,18 +30,37 @@ namespace Z0
         Data = 7 | 1 << 16
     }    
 
-    public readonly struct MemberParseRecord : ITabular<F,R>
+    public readonly struct MemberParseRecord : ITabular<F,R>, ISequential
     {                                
+        public readonly int Seq;
+
+        public readonly int SourceSeq;
+
+        public readonly MemoryAddress Address;
+
+        public readonly int Length;
+
+        public readonly ExtractTermCode TermCode;
+
+        public readonly OpUri Uri;
+
+        public readonly string OpSig;
+
+        public readonly LocatedCode Data;
+
         public const int FieldCount = 8;
 
+        int ISequential.Sequence 
+            => Seq;
+
         public static R Empty 
-            => new R(0, 0, MemoryAddress.Empty, 0, ExtractTermCode.None, OpUri.Empty, text.blank, LocatedCode.Empty);
+            => new R(0, 0, 0, 0, 0, OpUri.Empty, EmptyString, LocatedCode.Empty);
 
         public static ParseResult<MemberParseRecord> Parse(string src)
         {
             try
             {
-                var fields = src.SplitClean(Tabular.DefaultDelimiter);
+                var fields = src.SplitClean(FieldDelimiter);
                 if(fields.Length !=  (uint)FieldCount)
                     return ParseResult.Fail<MemberParseRecord>(src,"No data");
 
@@ -109,29 +130,6 @@ namespace Z0
             this.Data = Data;
         }
         
-        [TabularField(F.Seq)]
-        public int Seq {get;}
-
-        [TabularField(F.SourceSeq)]
-        public int SourceSeq {get;}
-
-        [TabularField(F.Address)]
-        public MemoryAddress Address {get; }
-
-        [TabularField(F.Length)]
-        public int Length {get; }
-
-        [TabularField(F.TermCode)]
-        public ExtractTermCode TermCode {get; }
-
-        [TabularField(F.Uri)]
-        public OpUri Uri {get;}
-
-        [TabularField(F.OpSig)]
-        public string OpSig {get; }
-
-        [TabularField(F.Data)]
-        public LocatedCode Data {get; }
 
         public dynamic this[F f]
         {

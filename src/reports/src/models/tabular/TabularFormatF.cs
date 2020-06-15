@@ -25,27 +25,66 @@ namespace Z0
         public int FieldCount 
             => Fields.Length;
 
+        public bool EmitHeader 
+            => true;
+        
+        public char Delimiter 
+            => FieldDelimiter;
+        
         public ref readonly TabularField<F> this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Fields[i];
         }        
 
+        public static implicit operator TabularFormat(TabularFormat<F> src)
+            => src.Generalize();
+
         [MethodImpl(Inline)]
-        internal TabularFormat(TabularField<F>[] fields)
+        public TabularFormat(TabularField<F>[] fields)
         {
             Fields = fields;
             Headers = fields.Map(f => f.Name);
         }
                 
+        public TabularFormat Generalize()
+        {
+            var src = this;
+            var count = src.FieldCount;
+            var fields = Control.alloc<TabularField>(count);
+            var headers = Control.alloc<string>(count);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var x = ref src[i];
+                fields[i] = new TabularField(x.Name, x.Index, x.Width);
+                headers[i] = x.Name;
+            }
+            return new TabularFormat(fields, headers, src.Delimiter, src.EmitHeader);
+        }
+
         /// <summary>
         /// Formats the format specification, not the object being specified
         /// </summary>
         public string Format()
         {
             var dst = text.build();
-            for(var i=0; i< FieldCount; i++)
+            for(var i=0; i<FieldCount; i++)
                 dst.AppendLine(this[i].Format());
+            return dst.ToString();
+        }
+
+        public string FormatHeader()
+        {
+            var dst = text.build();
+            for(var i=0; i<FieldCount; i++)
+            {
+                ref readonly var field = ref this[i];
+                dst.Append(Space);
+                dst.Append(Delimiter);
+                dst.Append(Space);
+                dst.Append(field.Name.PadRight(field.Width));
+            }
+            
             return dst.ToString();
         }
 

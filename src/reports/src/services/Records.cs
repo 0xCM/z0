@@ -17,12 +17,6 @@ namespace Z0
             get => RecordWriter.Service;
         }
 
-        public static RecordFieldParser FieldParser
-        {
-            [MethodImpl(Inline)]
-            get => RecordFieldParser.Service;
-        }
-
         [MethodImpl(Inline)]
         public static RecordFields<F> Fields<F>()
             where F : unmanaged, Enum
@@ -31,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RecordHeader<F> Header<F>()
             where F : unmanaged, Enum
-                => RecordHeader.Create<F>();
+                => RecordHeader.define<F>();
 
         /// <summary>
         /// Creates a record formatter predicated on an enum that specifies the record fields

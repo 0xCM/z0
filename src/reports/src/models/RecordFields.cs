@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public string[] Labels<F>()
             where F : unmanaged, Enum
-            => Literals<F>().Map(f => f.ToString());
+                => Literals<F>().Map(f => f.ToString());
 
         [MethodImpl(Inline)]
         public short Width<F>(F f)
@@ -38,19 +38,6 @@ namespace Z0
         public short Index<F>(F f)
             where F : unmanaged, Enum
                 => (short)tVal<F,int>(f);
- 
 
-        // [MethodImpl(Inline), Hi]
-        // static uint hi(uint src)
-        //     => (ushort)(src >> 16); 
-
-        // [MethodImpl(Inline)]
-        // public bool Enabled<F>(F f)
-        //     where F : unmanaged, Enum
-        // {
-            
-        //     var upper = hi(tVal<F,uint>(f));                                    
-        //     return !Bits.testbit(upper, 15);
-        // }            
     }
 }

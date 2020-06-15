@@ -6,7 +6,7 @@ namespace Z0.Asm.Data
 {        
     using System;
 
-    using C = CommonFieldWidths;
+    using C = TabularWidths;
 
     /// <summary>
     /// Defines the widths of common asm record fields
@@ -44,7 +44,6 @@ namespace Z0.Asm.Data
         Address32 = 12,
 
         Address64 = 16,
-
 
         YeaOrNea = C.Bool,
 

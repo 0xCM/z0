@@ -6,16 +6,18 @@ namespace Z0
 {
     using System;
 
-    public struct TableLog : ITableLog
+    using static Konst;
+
+    public readonly struct TableLog<F,R>: ITableLog<F,R>
+        where F : unmanaged, Enum
+        where R : ITabular
     {
-        public static ITableLog Service => default(TableLog);
+        public static TableLog<F,R> Service => default;
 
-        public Option<FilePath> Save<R>(R[] src, FilePath dst)
-            where R : ITabular
-                => Save(src, TabularFormats.derive<R>(), dst, FileWriteMode.Overwrite);
+        public Option<FilePath> Save(R[] src, FilePath dst)
+            => Save(src, TabularFormats.derive<F>(), dst, Overwrite);
 
-        public Option<FilePath> Save<R>(R[] data, TabularFormat format, FilePath dst, FileWriteMode mode = FileWriteMode.Overwrite)
-            where R : ITabular
+        public Option<FilePath> Save(R[] data, TabularFormat<F> format, FilePath dst, FileWriteMode mode = Overwrite)
         {                
             if(data == null || data.Length == 0)
                 return Option.none<FilePath>();

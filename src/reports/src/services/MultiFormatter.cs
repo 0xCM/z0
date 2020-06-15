@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed;
-    using static Memories;
+    using static Konst;
+    using static As;
+    using static Typed;
     
     using NK = EnumTypeCode;
 
@@ -109,7 +110,9 @@ namespace Z0
 
         static string bitformat<T>(T src, int? dmax = null)
             where T : unmanaged
-                => BitFormatter.format(src, dmax != null ? BitFormatConfig.Limited(dmax.Value, dmax.Value) : BitFormatConfig.Default);
+                => BitFormatter.format(src, dmax != null 
+                    ? BitFormatConfig.Limited(dmax.Value, dmax.Value) 
+                    : BitFormatConfig.Default);
 
         [MethodImpl(Inline), Op]
         public string Format(sbyte src, N2 @base, int? dmax = null)

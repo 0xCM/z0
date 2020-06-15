@@ -7,9 +7,11 @@ namespace Z0
     using System;
     using System.Linq;
 
+    using static Konst;
+
     public readonly struct RecordWriter : IRecordWriter
     {
-        public static RecordWriter Service => default(RecordWriter);
+        public static RecordWriter Service => default;
         
         static IPublicationArchive Archive 
             => PublicationArchive.Default;
@@ -21,11 +23,11 @@ namespace Z0
                    orderby r.Sequence
                    select f;
 
-        public R[] Save<F,R>(R[] src, FilePath dst, Func<R,string> formatter, char delimiter = Chars.Pipe)
+        public R[] Save<F,R>(R[] src, FilePath dst, Func<R,string> formatter, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
             where R : IRecord
         {
-            var header = RecordHeader.Create<F>();
+            var header = RecordHeader.define<F>();
             using var writer = dst.Writer();            
             writer.WriteLine(header.Render(delimiter)); 
             
@@ -37,11 +39,11 @@ namespace Z0
             return src;         
         }            
 
-        public R[] Save<F,R>(R[] src, FilePath dst, Func<R,string> formatRecord, Func<int,F,string> formatLabel,  char delimiter = Chars.Pipe)
+        public R[] Save<F,R>(R[] src, FilePath dst, Func<R,string> formatRecord, Func<int,F,string> formatLabel, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
             where R : IRecord
         {
-            var header = RecordHeader.Create<F>();
+            var header = RecordHeader.define<F>();
             using var writer = dst.Writer();            
             writer.WriteLine(header.Render(formatLabel, delimiter)); 
             
@@ -52,12 +54,12 @@ namespace Z0
             return src;         
         }            
 
-        public Option<FilePath> Save<F,R>(R[] src, FilePath dst, FileWriteMode mode = FileWriteMode.Overwrite)
+        public Option<FilePath> Save<F,R>(R[] src, FilePath dst, FileWriteMode mode = Overwrite)
             where R : IRecord
             where F : unmanaged, Enum
-                => Save<F,R>(src, TabularFormats.derive<R>(), dst, mode);
+                => Save<F,R>(src, TabularFormats.derive<F>(), dst, mode);
 
-        public Option<FilePath> Save<F,R>(R[] data, TabularFormat format, FilePath dst, FileWriteMode mode = FileWriteMode.Overwrite)
+        public Option<FilePath> Save<F,R>(R[] data, TabularFormat format, FilePath dst, FileWriteMode mode = Overwrite)
             where R : IRecord
             where F : unmanaged, Enum
         {                
@@ -67,14 +69,14 @@ namespace Z0
             try
             {
                 dst.FolderPath.Create();                            
-                var overwrite = mode == FileWriteMode.Overwrite;
+                var overwrite = mode == Overwrite;
                 var emitHeader = format.EmitHeader && (overwrite || !dst.Exists);                
                 
                 using var writer = dst.Writer(mode);
 
                 if(emitHeader)
                 {
-                    var header = RecordHeader.Create<F>();
+                    var header = RecordHeader.define<F>();
                     writer.WriteLine(header.Render(format.Delimiter));
                 }
 

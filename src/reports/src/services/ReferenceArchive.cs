@@ -17,6 +17,6 @@ namespace Z0
 
     public readonly struct ReferenceArchive : IReferenceArchive
     {
-        public static IReferenceArchive Service => default(ReferenceArchive);        
+        public static IReferenceArchive Service => default;
     }
 }

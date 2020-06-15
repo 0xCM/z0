@@ -63,24 +63,6 @@ namespace Z0
             return dst.ToString();
         }
 
-        public string FormatHeader()
-        {
-            var dst = text.build();
-            for(var i=0; i<FieldCount; i++)
-            {
-                if(i != 0)
-                {
-                    dst.Append(Delimiter);
-                    dst.Append(Chars.Space);
-                }
-                
-                var field = Fields[i];
-                var label = field.Name; 
-                dst.Append(label.PadRight(field.Width));
-            }
-            
-            return dst.ToString();
-        }
 
         public override string ToString()
             => Format();

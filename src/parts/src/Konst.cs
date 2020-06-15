@@ -175,6 +175,28 @@ namespace Z0
 
         public const char FilePathSep = '/';
 
+        /// <summary>
+        /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field
+        /// </summary>
         public const int WidthOffset = 16;        
+
+        /// <summary>
+        /// The default delimiter to use when formatting structured text
+        /// </summary>
+        public const char FieldDelimiter = Chars.Pipe;
+
+        /// <summary>
+        /// What else could this be?
+        /// </summary>
+        public const string EmptyString = "";
+
+        /// <summary>
+        /// What else could this be?
+        /// </summary>
+        public const string Space = " ";
+
+        public const FileWriteMode Overwrite = FileWriteMode.Overwrite;
+
+        public const FileWriteMode Append = FileWriteMode.Append;
     }
 }

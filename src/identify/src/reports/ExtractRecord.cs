@@ -8,34 +8,47 @@ namespace Z0
     using System.Linq;
     
     using static Tabular;
+    using static Konst;
 
     using F = ExtractField;
     using R = ExtractRecord;
 
     public enum ExtractField : uint
     {
-        Sequence = 0 | 10 << 16,
+        Sequence = 0 | 10 << WidthOffset,
 
-        Address = 1 | 16 << 16,
+        Address = 1 | 16 << WidthOffset,
 
-        Length = 2 | 8 << 16,
+        Length = 2 | 8 << WidthOffset,
 
-        Uri = 3 | 110 << 16,
+        Uri = 3 | 110 << WidthOffset,
 
-        OpSig = 4 | 110 << 16,
+        OpSig = 4 | 110 << WidthOffset,
 
-        Data = 5 | 1 << 16
+        Data = 5 | 1 << WidthOffset
     }
 
     public readonly struct ExtractRecord : ITabular<F,R>
     {
-        public const int FieldCount = 6;
+        public readonly int Sequence;
+
+        public readonly MemoryAddress Address;
+
+        public readonly int Length;
+
+        public readonly OpUri Uri;
+        
+        public readonly string OpSig;
+
+        public readonly LocatedCode Data;
+
+        const int FieldCount = 6;
 
         public static R Empty => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, text.blank, LocatedCode.Empty);
 
         public static R Parse(string src)
         {
-            var fields = src.SplitClean(Tabular.DefaultDelimiter);
+            var fields = src.SplitClean(FieldDelimiter);
             if(fields.Length != FieldCount)
                 return Empty;
 
@@ -60,24 +73,6 @@ namespace Z0
             this.Data = Data;
         }
         
-        [TabularField(F.Sequence)]
-        public readonly int Sequence;
-
-        [TabularField(F.Address)]
-        public readonly MemoryAddress Address;
-
-        [TabularField(F.Length)]
-        public readonly int Length;
-
-        [TabularField(F.Uri)]
-        public readonly OpUri Uri;
-        
-        [TabularField(F.OpSig)]
-        public readonly string OpSig;
-
-        [TabularField(F.Data)]
-        public readonly LocatedCode Data;
-
         public string DelimitedText(char delimiter)
         {
             var dst = formatter<F>(delimiter);

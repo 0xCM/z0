@@ -9,6 +9,7 @@ namespace Z0
 
     using static HexConst;
     using static Vectors;
+    using static Typed;
 
     partial class vexamples
     {     

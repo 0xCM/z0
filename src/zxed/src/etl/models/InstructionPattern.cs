@@ -10,7 +10,10 @@ namespace Z0.Xed
 
     using static Konst;
 
-    public readonly struct InstructionPattern
+    using F = PatternField;
+    using R = InstructionPattern;
+        
+    public readonly struct InstructionPattern : ITabular<F,R>
     {
         public string Class {get;}
 
@@ -36,9 +39,12 @@ namespace Z0.Xed
             Extension = extension ?? string.Empty;
             IsaSet = isaset ?? string.Empty;
             PatternText = patternText ?? string.Empty;
-            Parts = PatternText.SplitClean(Chars.Space);
+            Parts = PatternText.SplitClean(Space);
             OperandText = operandText ?? string.Empty;
-            Operands = OperandText.SplitClean(Chars.Space);
+            Operands = OperandText.SplitClean(Space);
         }
+
+        public string DelimitedText(char delimiter)
+            => this.FormatPattern(delimiter);
     }   
 }

@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct RecordFieldParser : IRecordFieldParser
+    public readonly struct FieldParser : IFieldParser
     {
-        public static RecordFieldParser Service => default(RecordFieldParser);
+        public static FieldParser Service => default(FieldParser);
 
         [MethodImpl(Inline)]
         public YeaOrNea Parse(string src, out YeaOrNea result)     

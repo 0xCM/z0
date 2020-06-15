@@ -9,7 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
     using System.Collections.Concurrent;
-        
+
+    using static Konst;
+
     /// <summary>
     /// Base type for test applications
     /// </summary>
@@ -405,13 +407,12 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
-        static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
-            where R : ITabular
+        static FilePath LogTestResults(FolderName subdir, string basename,  TestCaseRecord[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
         {
             if(records.Length == 0)
                 return FilePath.Empty;
             
-            return Z0.Log.TestLog.Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
+            return TestLog.Create().Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
         static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = Chars.Pipe)
@@ -423,8 +424,7 @@ namespace Z0
             return Z0.Log.BenchLog.Write(records, FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
-        FilePath LogTestResults2<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
-            where R : ITabular
+        FilePath LogTestResults2(string basename, TestCaseRecord[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
                 => LogTestResults(AppPaths.TestResultFolder, basename, records, mode, header, delimiter);
 
         void EmitLogs()
@@ -461,7 +461,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                Flush(e, Z0.Log.TestMsgTarget);
+                Flush(e, TestLog.Create());
             }
         }
 

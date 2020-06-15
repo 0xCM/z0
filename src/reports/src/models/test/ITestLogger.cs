@@ -23,5 +23,10 @@ namespace Z0
     {        
         FilePath Write<R>(IEnumerable<R> data, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
             where R : ITabular;                
+
+        FilePath Write<R>(IEnumerable<R> data, FolderName subdir, string basename, FileWriteMode mode, char delimiter, bool header, FileExtension ext)
+            where R : ITabular
+                => Write(data,subdir, basename, mode == FileWriteMode.Append ? LogWriteMode.Create : LogWriteMode.Append, delimiter, header, ext);                
+
     }
 }

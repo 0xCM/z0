@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="F">The field specification type</typeparam>
         [MethodImpl(Inline)]
-        public static IRecordFormatter<F> Create<F>(char delimiter = Tabular.DefaultDelimiter)
+        public static RecordFormatter<F> Create<F>(char delimiter = FieldDelimiter)
             where F :unmanaged, Enum
                 => new RecordFormatter<F>(text.build());        
     }
@@ -31,7 +31,7 @@ namespace Z0
         readonly char Delimiter;
         
         [MethodImpl(Inline)]
-        public RecordFormatter(StringBuilder state, char delimiter = Tabular.DefaultDelimiter)
+        public RecordFormatter(StringBuilder state, char delimiter = FieldDelimiter)
         {
             State = state;
             Delimiter = delimiter;
@@ -109,7 +109,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         static string RenderHex(string src)
-            => src.RemoveBlanks().BlockPartition(2,Chars.Space);
+            => src.RemoveBlanks().BlockPartition(2, Space);
         
         [MethodImpl(Inline)]
         static string RenderHex16(ushort src)

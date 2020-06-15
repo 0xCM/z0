@@ -6,66 +6,38 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
 
     using static Konst;
+    using static Control;
 
-    using F = TabularField;
-    using A = TabularFieldAttribute;
-
-    public class TabularFormats
+    public readonly struct TabularFormats
     {    
         /// <summary>
         /// Derives format configuration data from a type
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static TabularFormat derive<T>()
-            => derive(typeof(T));        
-
-        [MethodImpl(Inline)]
-        public static string[] headers<T>()
-            => derive<T>().Headers;
-
-        /// <summary>
-        /// Derives field information from a reflected member
-        /// </summary>
-        /// <param name="src">The source member</param>
-        static TabularField field(MemberInfo src)
-            => src.Tag<TabularFieldAttribute>()
-                  .MapRequired(attrib => new TabularField(attrib.Name, attrib.Index, attrib.Width));
-        
-        static TabularFormat derive(Type src)
+        public static TabularFormat<F> derive<F>(char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
         {
-            var props = from p in src.DeclaredProperties().Instance()
-                        where p.Tagged<A>()
-                        select field(p);
-
-            var fields = from f in src.DeclaredFields().Instance()
-                        where f.Tagged<A>()
-                        select field(f);
-            
-            var members = props.Union(fields).OrderBy(x => x.Index).ToArray();
-            return new TabularFormat(members, headers(members));
-        }
-
-        static string[] headers(F[] fields)
-        {
-            var count = fields.Length;
-            var headers = new string[count];
+            var literals = @readonly(RecordFields.Service.Literals<F>());
+            var count = literals.Length;
+            var headBuffer = alloc<string>(count);
+            var fieldBuffer = alloc<TabularField<F>>(count);            
+            var fields = span(fieldBuffer);
 
             for(var i=0; i<count; i++)
             {
-                var field = fields[i];
-                if(i == 0)
-                    headers[i] = field.Name.PadRight(field.Width);
-                else if(i == count - 1)
-                    headers[i] = string.Concat(Chars.Space, field.Name);
-                else
-                    headers[i] = string.Concat(Chars.Space, field.Name.PadRight(field.Width));        
+                ref readonly var literal = ref skip(literals, i);                
+                seek(fields,i) = new TabularField<F>(literal, literal.ToString(), i, (short)(e32u(literal) >> WidthOffset));                
             }
-            return headers;
+            
+            return new TabularFormat<F>(fieldBuffer);
         }
+
+        [MethodImpl(Inline)]
+        public static string[] headers<F>()
+            where F : unmanaged, Enum
+                => RecordFields.Service.Labels<F>();        
     }
 }

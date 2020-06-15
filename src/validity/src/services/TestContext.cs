@@ -13,7 +13,7 @@ namespace Z0
     using System.Reflection;
     using System.IO;
 
-    using static Seed;
+    using static Konst;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 

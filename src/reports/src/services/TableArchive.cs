@@ -19,24 +19,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TableArchive(FolderPath root)
-        {
-            this.ArchiveRoot = root;
-        }
+            => ArchiveRoot = root;
 
-        public Option<FilePath> Deposit<R>(R[] src, FileName name)
+        public Option<FilePath> Deposit<F,R>(R[] src, FileName name)            
+            where F : unmanaged, Enum
             where R : ITabular
-        {
-            var format = TabularFormats.derive<R>();
-            var svc = TableLog.Service;
-            return svc.Save(src, format, ArchiveRoot + name);
-        }
+                => TableLog<F,R>.Service.Save(src, TabularFormats.derive<F>(), ArchiveRoot + name);
 
-        public Option<FilePath> Deposit<R>(R[] src, FolderName folder, FileName name)
+        public Option<FilePath> Deposit<F,R>(R[] src, FolderName folder, FileName name)
+            where F : unmanaged, Enum
             where R : ITabular
-        {
-            var format = TabularFormats.derive<R>();
-            var svc = TableLog.Service;
-            return svc.Save(src, format, (ArchiveRoot + folder) + name);
-        }
+                => TableLog<F,R>.Service.Save(src, TabularFormats.derive<F>(), (ArchiveRoot + folder) + name);
     }
 }

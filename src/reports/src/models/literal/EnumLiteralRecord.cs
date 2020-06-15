@@ -9,35 +9,34 @@ namespace Z0
 
     using static Konst;
 
-    using W = CommonFieldWidths;
+    using W = TabularWidths;
     using F = EnumLiteralRecordField;
 
     public enum EnumLiteralRecordField : uint
     {
-        Sequence = 0 | W.Sequence << W.Offset,
+        Sequence = 0 | W.Sequence << WidthOffset,
 
-        Identifier = 1 | W.Identifier << W.Offset,
+        Identifier = 1 | W.Identifier << WidthOffset,
 
-        Description = 2 | W.Identifier << W.Offset,
+        Description = 2 | W.Identifier << WidthOffset,
 
-        DataType = 3 | W.Identifier << W.Offset,
+        DataType = 3 | W.Identifier << WidthOffset,
 
-        Value = 4 | W.Num16Hex << W.Offset,
+        Value = 4 | W.Num16Hex << WidthOffset,
     }
 
     public readonly struct EnumLiteralRecord : IRecord<EnumLiteralRecordField, EnumLiteralRecord>
     {
-        public static EnumLiteralRecord Empty = new EnumLiteralRecord(0,string.Empty, string.Empty, EnumScalarKind.None, 0);
-        
-        public int Sequence {get;}
+        public readonly int Sequence;
 
-        public string Identifier {get;}
+        public readonly string Identifier;
 
-        public string Description {get;}
+        public readonly string Description;
 
-        public EnumScalarKind DataType {get;}
+        public readonly EnumScalarKind DataType;
 
-        public ulong Value {get;}
+        public readonly ulong Value;
+
 
         [MethodImpl(Inline)]
         public EnumLiteralRecord(int Sequence, string Identifier, string Description, EnumScalarKind DataType, ulong Value)
@@ -55,9 +54,9 @@ namespace Z0
             get => Sequence == 0 && text.empty(Identifier) && Value == 0;
         }
 
-        public string Format()
+        public string DelimitedText(char delimiter)
         {
-            var formatter = Tabular.formatter<F>();
+            var formatter = Reports.formatter<F>(delimiter);
             formatter.Append(F.Sequence, Sequence);
             formatter.Delimit(F.Identifier, Identifier);
             formatter.Delimit(F.Description, Description);
@@ -65,5 +64,11 @@ namespace Z0
             formatter.Delimit(F.Value, Value);                
             return formatter.Format();
         }        
+
+        int ISequential.Sequence 
+            => Sequence;
+
+        public static EnumLiteralRecord Empty 
+            => new EnumLiteralRecord(0, EmptyString, EmptyString, 0, 0);    
     }
 }

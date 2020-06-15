@@ -10,11 +10,15 @@ namespace Z0.Xed
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Memories;
+    using static Control;
+    using static Konst;
 
     using xed_ext = xed_extension_enum_t;
     using xed_cat = xed_category_enum_t;
 
+
+    using F = PatternField;
+    using R = PatternSummary;
 
     public readonly struct EtlWorkflow
     {
@@ -39,7 +43,6 @@ namespace Z0.Xed
         {
             Context = context;
             Config = default(AsmArchiveConfig);
-            //SourceRoot =  FolderPath.Define(@"J:\dev\projects\z0\src\commands\data");            
             SourceRoot = FolderPath.Define(@"K:\z0\archives\sources\xed");
             TargetRoot = (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define("xed");
             Src = SourceArchive.Create(SourceRoot);            
@@ -74,10 +77,30 @@ namespace Z0.Xed
 
             return patterns.ToArray();
         }
+        
+        static InstructionRecord[] InstructionRecords(InstructionPattern[] src)
+        {
+            var input = Control.@readonly(src);
+            var count = input.Length;
+            var dst = Control.alloc<InstructionRecord>(count);
+            var target = Control.span(dst);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var x = ref skip(input,i);
+                seek(target,i) = new InstructionRecord(
+                    Sequence: i, 
+                    Mnemonic: x.Class, 
+                    Extension: x.Extension, 
+                    BaseCode: x.BaseCodeText(), 
+                    Mod: default,
+                    Reg: default);                
+            }
+            return dst;
+        }
 
         public FunctionData[] ExtractFunctions()
         {
-            var functions = list<FunctionData>();
+            var functions = Control.list<FunctionData>();
             var parser = SourceParser.Service;
             foreach(var file in Src.FunctionFiles)
             {
@@ -96,7 +119,7 @@ namespace Z0.Xed
         {
             var sorted = src.OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).ToArray();                        
             var records = sorted.Map(p => p.Summary());
-            Pub.Deposit(records, FileName.Define("summary", FileExtensions.Csv));
+            Pub.Deposit<F,R>(records, FileName.Define("summary", FileExtensions.Csv));
             return records;
         }
 
@@ -109,7 +132,7 @@ namespace Z0.Xed
         void SaveExtensions(PatternSummary[] src)
         {                        
             foreach(var selected in Config.Extensions)
-                Pub.Deposit(Filter(src, selected), 
+                Pub.Deposit<F,R>(Filter(src, selected), 
                     Config.ExtensionFolder, 
                     FileName.Define(XedConst.Name(selected), Config.DataFileExt)
                     );
@@ -118,7 +141,7 @@ namespace Z0.Xed
         void SaveCategories(PatternSummary[] src)
         {
             foreach(var selected in Config.Categories)
-                Pub.Deposit(Filter(src, selected), 
+                Pub.Deposit<F,R>(Filter(src, selected), 
                     Config.CategoryFolder, 
                     FileName.Define(XedConst.Name(selected), Config.DataFileExt)
                     );
@@ -151,7 +174,6 @@ namespace Z0.Xed
                             writer.WriteLine();
                     }
             }
-
         }
 
         public void Run()
@@ -164,9 +186,9 @@ namespace Z0.Xed
             var summaries = PublishSummary(patterns);  
             var functions = ExtractFunctions();                      
 
-            SaveExtensions(summaries);
-            SaveCategories(summaries);
-            SaveMnemonics(summaries);
+            // SaveExtensions(summaries);
+            // SaveCategories(summaries);
+            // SaveMnemonics(summaries);
             SaveFunctions(functions);
         }
 

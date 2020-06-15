@@ -10,22 +10,31 @@ namespace Z0
 
     using static Konst;
 
+    public readonly struct Tabular<F,R> : ITabular<F,R>
+        where F : unmanaged, Enum
+        where R : ITabular
+    {
+        readonly R Record;
+
+        readonly Func<R,char,string> Formatter;
+    
+        [MethodImpl(Inline)]
+        public Tabular(R record, Func<R,char,string> formatter)
+        {
+            Record = record;
+            Formatter = formatter;
+        }
+        
+        public string DelimitedText(char delimiter)
+            => Formatter(Record,delimiter);
+    }
+    
     public readonly struct Tabular
     {
-        /// <summary>
-        /// Defines the bit position where the field width specification begins
-        /// </summary>
-        public const int WidthOffset = 16;
-
         /// <summary>
         /// Defines a mask that, when applied, reveals the field position
         /// </summary>
         public const ushort PosMask = 0xFFFF;
-
-        /// <summary>
-        /// The default field delimiter
-        /// </summary>
-        public const char DefaultDelimiter = Chars.Pipe;
 
         /// <summary>
         /// Computes the field index from a field specifier
@@ -47,6 +56,12 @@ namespace Z0
             where F : unmanaged, Enum
                 => text.width(field);
 
+        [MethodImpl(Inline)]
+        public static Tabular<F,R> proxy<F,R>(R record, Func<R,char,string> formatter)
+            where F : unmanaged, Enum
+            where R : ITabular
+                => new Tabular<F,R>(record,formatter);
+
         /// <summary>
         /// Defines a tabular format specifiecation predicated on a parametric enum type
         /// </summary>
@@ -62,7 +77,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static FieldFormatter<F> formatter<F>(char? delimiter = null) 
+        public static RecordFormatter<F> record<F>()
+            where F : unmanaged, Enum
+                => RecordFormatter.Create<F>();
+
+        [MethodImpl(Inline)]
+        public static FieldFormatter<F> formatter<F>(char delimiter) 
             where F : unmanaged, Enum
                 => FieldFormatter<F>.Default.Reset(delimiter);
 
@@ -87,7 +107,7 @@ namespace Z0
                 => fields<F>().Select(f => f.ToString());
 
         [MethodImpl(Inline)]
-        public static string header<F>(char delimiter = DefaultDelimiter)
+        public static string header<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
         {
             var service = formatter<F>(delimiter);
@@ -98,7 +118,7 @@ namespace Z0
             return service.Format();
         }
 
-        public static void Save<F,T>(T[] src, FilePath dst, char delimiter = DefaultDelimiter)
+        public static void Save<F,T>(T[] src, FilePath dst, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
             where T : ITabular
         {

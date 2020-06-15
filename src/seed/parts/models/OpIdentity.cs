@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline)]
-        internal static OpIdentity Set(string src)
+        public static OpIdentity Set(string src)
             => new OpIdentity(src);
 
         [MethodImpl(Inline)]

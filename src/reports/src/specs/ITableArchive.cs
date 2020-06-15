@@ -10,10 +10,12 @@ namespace Z0
     {
         FolderPath ArchiveRoot {get;}            
         
-        Option<FilePath> Deposit<R>(R[] src, FileName name)
+        Option<FilePath> Deposit<F,R>(R[] src, FileName name)
+            where F : unmanaged, Enum
             where R : ITabular;
 
-        Option<FilePath> Deposit<R>(R[] src, FolderName folder, FileName name)
+        Option<FilePath> Deposit<F,R>(R[] src, FolderName folder, FileName name)
+            where F : unmanaged, Enum
             where R : ITabular;
 
         void Clear()

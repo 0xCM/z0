@@ -49,12 +49,8 @@ namespace Z0
             formatter.Delimit(F.Description, Description);
             return formatter.ToString();
         }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => DelimitedText(Tabular.DefaultDelimiter);
-
+ 
         public override string ToString()
-            => Format();
+            => DelimitedText(FieldDelimiter);
     }
 }

@@ -14,7 +14,6 @@ namespace Z0
 
         int RecordCount {get;}
 
-        ITabular[] Records {get;}
     }
         
     public readonly struct EmptyReport : IReport
