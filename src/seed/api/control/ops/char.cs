@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static char @char(bool src)
-            => (char)(numeric(src) + 48);
+            => (char)(u8(src) + 48);
     }
 }

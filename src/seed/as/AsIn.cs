@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Seed;
+    using static Konst;
 
     public partial class AsIn
     {
@@ -60,17 +60,17 @@ namespace Z0
         public static ref double float64<T>(in T src)
             => ref Unsafe.As<T,double>(ref edit(in src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref decimal float128<T>(in T src)
+            => ref Unsafe.As<T,decimal>(ref edit(in src));
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref char char16<T>(in T src)
             => ref Unsafe.As<T,char>(ref edit(in src));
 
-        [MethodImpl(Inline)]
-        public static ref T generic<S,T>(in S src)
-            => ref Unsafe.As<S,T>(ref edit(in src));
-
-        [MethodImpl(Inline)]
-        public static ref T generic<T>(in char src)
-            => ref Unsafe.As<char,T>(ref edit(in src));
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref bool bool8<T>(in T src)
+            => ref Unsafe.As<T,bool>(ref edit(in src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T generic<T>(in sbyte src)
@@ -111,5 +111,21 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T generic<T>(in double src)
             => ref Unsafe.As<double,T>(ref edit(in src));           
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref T generic<T>(in decimal src)
+            => ref Unsafe.As<decimal,T>(ref edit(in src));           
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref T generic<T>(in char src)
+            => ref Unsafe.As<char,T>(ref edit(in src));
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref T generic<T>(in bool src)
+            => ref Unsafe.As<bool,T>(ref edit(in src));
+
+        [MethodImpl(Inline)]
+        public static ref T generic<S,T>(in S src)
+            => ref Unsafe.As<S,T>(ref edit(in src));            
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public static class Context
     {
@@ -33,6 +33,7 @@ namespace Z0
             this.context = src;
         }
 
-        C IContextual<C>.Context => context;
+        C IContextual<C>.Context 
+            => context;
     }
 }

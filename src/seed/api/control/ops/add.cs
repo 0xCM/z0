@@ -9,6 +9,7 @@ namespace Z0
 
     partial class Control
     {            
+
         /// <summary>
         /// Adds an offset to a reference
         /// </summary>

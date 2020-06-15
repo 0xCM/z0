@@ -174,5 +174,7 @@ namespace Z0
         public const StringComparison Cased = StringComparison.InvariantCulture;
 
         public const char FilePathSep = '/';
+
+        public const int WidthOffset = 16;        
     }
 }

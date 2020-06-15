@@ -70,6 +70,10 @@ namespace Z0
             => Unsafe.As<double,T>(ref src);            
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static T generic<T>(decimal src)
+            => Unsafe.As<decimal,T>(ref src);            
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T generic<T>(ref sbyte src)
             => ref Unsafe.As<sbyte,T>(ref src);
 
@@ -96,6 +100,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T generic<T>(ref ulong src)
             => ref Unsafe.As<ulong,T>(ref src);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref T generic<T>(ref decimal src)
+            => ref Unsafe.As<decimal,T>(ref src);
  
         /// <summary>
         /// Reimagines a span of bytes as a span of generic values
@@ -178,6 +186,16 @@ namespace Z0
                 => MemoryMarshal.Cast<ulong,T>(src);
 
         /// <summary>
+        /// Reimagines a span of unsigned 32-bit floats as a span of generic values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Span<T> generic<T>(Span<float> src)
+            where T : unmanaged
+                => MemoryMarshal.Cast<float,T>(src);
+
+        /// <summary>
         /// Reimagines a span of unsigned 64-bit floats as a span of generic values
         /// </summary>
         /// <param name="src">The source span</param>
@@ -188,14 +206,14 @@ namespace Z0
                 => MemoryMarshal.Cast<double,T>(src);
 
         /// <summary>
-        /// Reimagines a span of unsigned 32-bit floats as a span of generic values
+        /// Presents a span of 128-bit decimal values as a span of generic values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Span<T> generic<T>(Span<float> src)
+        public static Span<T> generic<T>(Span<decimal> src)
             where T : unmanaged
-                => MemoryMarshal.Cast<float,T>(src);
+                => MemoryMarshal.Cast<decimal,T>(src);
 
         /// <summary>
         /// Reimagines a span of signed bytes as a span of generic values
@@ -288,13 +306,23 @@ namespace Z0
                 => MemoryMarshal.Cast<float,T>(src);
 
         /// <summary>
-        /// Reimagines a span of unsigned 64-bit floats as a span of generic values
+        /// Presents a span of 64-bit floats as a span of generic values
         /// </summary>
         /// <param name="src">The source span</param>
-        /// <typeparam name="T">The source value type</typeparam>
+        /// <typeparam name="T">The target value type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<double> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<double,T>(src); 
+
+        /// <summary>
+        /// Presents a span of 128-bit decimals as a span of generic values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The target value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ReadOnlySpan<T> generic<T>(ReadOnlySpan<decimal> src)
+            where T : unmanaged
+                => MemoryMarshal.Cast<decimal,T>(src); 
     }
 }

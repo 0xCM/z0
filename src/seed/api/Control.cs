@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
 
     [ApiHost]
     public partial class Control : IApiHost<Control>

@@ -41,7 +41,7 @@ namespace Z0.Mkl
         {
             var cycles = Pow2.T12;
             var samples = Pow2.T14;
-            var src = Random.Span<long>(samples, Interval.closed(-2000L, 2000L)).To<double>();
+            var src = NumericSpan.to<double>(Random.Span<long>(samples, Interval.closed(-2000L, 2000L)));
             var ds = Dataset.Load(src);
             var dst = 0.0;
             var last = 0.0;
@@ -58,14 +58,13 @@ namespace Z0.Mkl
 
             ReportBenchmark("mkl-ssmean", cycles*samples, sw1.Elapsed);
             ReportBenchmark("direct", cycles*samples, sw2.Elapsed);
-
         }
         
         public void mean()
         {
             var src = Random.Span<long>(Pow2.T14, Interval.closed(-2000L, 2000L));
             var expect = gspan.avg(src);
-            var converted = NumericSpan.to<long,double>(src);
+            var converted = NumericSpan.to<double>(src);
             var actual = (long)Dataset.Load(converted).Mean()[0];
             Claim.eq(expect,actual);
         }

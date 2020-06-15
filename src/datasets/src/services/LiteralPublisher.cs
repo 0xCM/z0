@@ -6,15 +6,16 @@ namespace Z0
 {        
     using System;
 
-    using static Memories;
+    using static Konst;
+    using static Typed;
 
     public readonly struct LiteralPublisher : ILiteralPublisher
     {
         public static LiteralPublisher Service => default(LiteralPublisher);
 
-        public Report<LiteralTableField,LiteralRecord> LiteralReport<E>(string declarer, Func<E,string> descriptor = null)
+        public LiteralRecord[] LiteralReport<E>(string declarer, Func<E,string> descriptor = null)
             where E : unmanaged, Enum
-                => new Report<LiteralTableField, LiteralRecord>(LiteralRecords<E>(declarer, descriptor));
+                => LiteralRecords<E>(declarer, descriptor);
 
         public Option<FilePath> PublishLiterals<E>()
             where E : unmanaged, Enum

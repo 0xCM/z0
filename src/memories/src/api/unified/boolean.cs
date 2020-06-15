@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     partial class Memories
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool boolean<T>(T src)
-            => As.boolean(src);
+            => As.bool8(src);
     }
 }

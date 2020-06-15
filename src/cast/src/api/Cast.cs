@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static As;
     
+    public static partial class XTend  { }
+
     [ApiHost]
     public static partial class Cast
     {
@@ -32,35 +34,35 @@ namespace Z0
         public static T to<T>(byte src)
             => ToNumeric.to<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(short src)
             => ToNumeric.to<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(ushort src)
             => ToNumeric.to<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(int src)
             => ToNumeric.to<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(uint src)
             => ToNumeric.to<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(long src)
             => ToNumeric.to<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(ulong src)
             => ToNumeric.to<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(float src)
             => ToNumeric.to<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(double src)
             => ToNumeric.to<T>(src);
 

@@ -11,13 +11,49 @@ namespace Z0
 
     partial class Control
     {                
-        /// <summary>
-        /// Reimagines a boolean value as a numeric value
-        /// </summary>
-        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe byte numeric(bool src)
-            => *((byte*)(&src));
+        public static unsafe sbyte i8(bool on)
+            => *((sbyte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe byte u8(bool on)
+            => *((byte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe short i16(bool on)
+            => *((sbyte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe ushort u16(bool on)
+            => *((byte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe int i32(bool on)
+            => *((sbyte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe uint u32(bool on)
+            => *((byte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong u64(bool on)
+            => *((byte*)(&on));
+        
+        [MethodImpl(Inline), Op]
+        public static unsafe long i64(bool on)
+            => *((sbyte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe float f32(bool on)
+            => *((sbyte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe double f64(bool on)
+            => *((sbyte*)(&on));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe decimal f128(bool on)
+            => *((sbyte*)(&on));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe byte u8<T>(T src)

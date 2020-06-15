@@ -11,8 +11,6 @@ namespace Z0
 
     public readonly struct Publications
     {
-        public static Publishers Publishers => default;                
-
         public static IPublicationArchive Archive 
             => PublicationArchive.Default;
 

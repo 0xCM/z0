@@ -13,7 +13,7 @@ namespace Z0
     using static Control;
 
     partial class BitMask
-    {                                   
+    {                                           
         public static ReadOnlySpan<NumericLiteral> NumericLiterals
         {
             [MethodImpl(Inline)]
@@ -29,10 +29,10 @@ namespace Z0
                 ref readonly var field = ref skip(fields,i);
                 var tc = Type.GetTypeCode(field.FieldType);
                 var vRaw = field.GetRawConstantValue();
-                if(MultiLiteralAttribute.Attached(field))
-                    dst.AddRange(Literati.numeric(MultiLiteralAttribute.TargetValue(field), vRaw));
-                else if(BinaryLiteralAttribute.Attached(field))
-                    dst.Add(BinaryLiteralAttribute.TargetValue(field,vRaw));
+                if(LiteralAttributes.HasMultiLiteral(field))
+                    dst.AddRange(Literati.numeric(LiteralAttributes.MultiLiteral(field), vRaw));
+                else if(LiteralAttributes.HasBinaryLiteral(field))
+                    dst.Add(LiteralAttributes.BinaryLiteral(field,vRaw));
                 else
                     dst.Add(NumericLiteral.Base2(field.Name, vRaw, BitFormatter.unsigned(vRaw, tc)));
             }

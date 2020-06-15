@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     [ApiHost("numeric.literals")]
     public readonly struct NumericLiterals : IApiHost<NumericLiterals>

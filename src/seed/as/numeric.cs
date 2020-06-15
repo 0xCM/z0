@@ -52,6 +52,18 @@ namespace Z0
             => Unsafe.As<T,double>(ref src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static decimal float128<T>(T src)        
+            => Unsafe.As<T,decimal>(ref src);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static char char16<T>(T src)        
+            => Unsafe.As<T,char>(ref src);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static bool bool8<T>(T src)
+            => Unsafe.As<T,bool>(ref src);        
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref sbyte int8<T>(ref T src)
             => ref Unsafe.As<T,sbyte>(ref src);
 
@@ -91,6 +103,10 @@ namespace Z0
         public static ref double float64<T>(ref T src)
             => ref Unsafe.As<T,double>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref decimal float128<T>(ref T src)
+            => ref Unsafe.As<T,decimal>(ref src);
+ 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static sbyte? int8<T>(T? src)
             where T : unmanaged
@@ -140,5 +156,10 @@ namespace Z0
         public static double? float64<T>(T? src)
             where T : unmanaged
                 => Unsafe.As<T?, double?>(ref src);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static decimal? float128<T>(T? src)
+            where T : unmanaged
+                => Unsafe.As<T?, decimal?>(ref src);
     }
 }

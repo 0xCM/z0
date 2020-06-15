@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static PrimalKindBitField;
+    using static PrimalKindField;
+    using static Control;
     
     [ApiHost]
     public readonly struct PrimalKindBitFields : IApiHost<PrimalKindBitFields>
@@ -16,19 +17,19 @@ namespace Z0
         public static ReadOnlySpan<SegIndex> Indices
         {
             [MethodImpl(Inline), Op]
-            get => Control.cast<SegIndex>(FieldSegments);
+            get => cast<SegIndex>(FieldSegments);
         }
 
         public static ReadOnlySpan<SegMask> Masks
         {
             [MethodImpl(Inline), Op]
-            get => Control.cast<SegMask>(FieldMasks);
+            get => cast<SegMask>(FieldMasks);
         }
 
         public static ReadOnlySpan<Field> Fields
         {
             [MethodImpl(Inline), Op]
-            get => Control.cast<Field>(FieldParts);
+            get => cast<Field>(FieldParts);
         }
 
         public static ReadOnlySpan<SegWidth> SegWidths
@@ -36,7 +37,6 @@ namespace Z0
             [MethodImpl(Inline), Op]
             get => Control.cast<SegWidth>(FieldWidths);
         }
-
 
         [MethodImpl(Inline), Op]
         public static PrimalKindBitField Init(PrimalKind data)
@@ -48,11 +48,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static SegMask Mask(Field i)
-            => Control.skip(Masks, (int)i);            
+            => skip(Masks, (int)i);            
 
         [MethodImpl(Inline), Op]
         public static SegIndex StartPos(Field i)
-            => Control.skip(Indices, (int)i);
+            => skip(Indices, (int)i);
 
         [MethodImpl(Inline), Op]
         public static byte SegData(PrimalKindBitField f, Field i)
