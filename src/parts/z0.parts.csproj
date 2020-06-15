@@ -5,5 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="$(Konst)" />
+  </ItemGroup>
 
 </Project>

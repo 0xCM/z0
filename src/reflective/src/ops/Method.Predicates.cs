@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     partial class XTend
     {
@@ -116,7 +116,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [MethodImpl(Inline), Op]
-        public static IEnumerable<Type> ParameterTypes(this MethodInfo m)
+        public static Type[] ParameterTypes(this MethodInfo m)
             => m.GetParameters().Select(p => p.ParameterType);
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [MethodImpl(Inline), Op]
-        public static IEnumerable<Type> EffectiveParameterTypes(this MethodInfo m)
+        public static Type[] EffectiveParameterTypes(this MethodInfo m)
             => m.ParameterTypes().Select(t => t.EffectiveType());
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [MethodImpl(Inline), Op]
-        public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool effective)
+        public static Type[] ParameterTypes(this MethodInfo m, bool effective)
             => effective ? m.EffectiveParameterTypes() : m.ParameterTypes();
 
         /// <summary>

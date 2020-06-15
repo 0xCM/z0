@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
-
     public sealed class t_span_convert : UnitTest<t_span_convert,CheckNumeric,ICheckNumeric>
     {
 
@@ -33,7 +31,7 @@ namespace Z0
 
             var valSize = Unsafe.SizeOf<T>();
             var values = Random.Stream<T>().ToSpan(Pow2.T08);
-            var bytes = memory.alloc<byte>(valSize*values.Length);
+            var bytes = Control.alloc<byte>(valSize*values.Length);
             for(int i = 0, offset = 0; i< values.Length; i++, offset += valSize)
             {
                 var value = values[i];

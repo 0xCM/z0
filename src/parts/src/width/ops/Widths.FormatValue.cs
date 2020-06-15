@@ -11,6 +11,9 @@ namespace Z0
 
     partial class XTend 
     {        
+        public static string Format(this NumericSize src)
+            => ((byte)src).ToString();
+
         [MethodImpl(Inline)]
         public static string FormatValue(this TypeWidth w)
             => ((uint)w).ToString();

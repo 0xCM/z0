@@ -1,6 +1,8 @@
 <Project>
 
   <PropertyGroup>
+    <Konst>$(Src)konst/z0.konst.csproj</Konst>
+
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
 
     <Monadic>$(Src)monadic/z0.monadic.csproj</Monadic>

@@ -8,10 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
-
-    using static Control;
-    using static Seed;
 
     partial class XTend
     {
@@ -28,7 +24,7 @@ namespace Z0
             var dType
                 = m.IsAction()
                 ? Expression.GetActionType(argTypes)
-                : Expression.GetFuncType(argTypes.Concat(array(m.ReturnType)).ToArray());
+                : Expression.GetFuncType(argTypes.Concat(new Type[]{m.ReturnType}).ToArray());
             return (D)Delegate.CreateDelegate(typeof(D), null, m);
         }
     }

@@ -149,7 +149,7 @@ namespace Z0
         public string DelimitedText(char delimiter)
         {
             var dst = Tabular.formatter<F>(delimiter);            
-            dst.Append(F.Seq, Seq);
+            dst.Delimit(F.Seq, Seq);
             dst.Delimit(F.SourceSeq, SourceSeq);
             dst.Delimit(F.Address, Address);
             dst.Delimit(F.Length, Length);

@@ -9,19 +9,18 @@ namespace Z0
 
     partial class Control
     {
-
         [MethodImpl(Inline)]
         public static unsafe void* pvoid<T>(ref T src)
-            => Unsafe.AsPointer(ref src); 
+            => Pointed.pvoid(ref src); 
 
         [MethodImpl(Inline)]
         public static unsafe T* ptr<T>(ref T src)
             where T : unmanaged
-                => (T*)pvoid(ref src);
+                => Pointed.ptr(ref src);
 
         [MethodImpl(Inline)]
         public static unsafe T* constptr<T>(in T src)
             where T : unmanaged
-                => (T*)pvoid(ref edit(in src));
+                => Pointed.constptr(src);
     }
 }

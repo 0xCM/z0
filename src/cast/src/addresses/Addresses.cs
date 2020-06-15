@@ -13,14 +13,20 @@ namespace Z0
     [ApiHost]
     public readonly struct Addresses : IApiHost<Addresses>
     {
+        // [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        // public static unsafe MemoryAddress address<T>(in T src)
+        //     where T : unmanaged
+        //         => (T*)Control.pvoid(ref Control.edit(in src));
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe MemoryAddress reference<T>(in T src)
             where T : unmanaged
                 => Control.gptr<T>(src);
 
-        // [MethodImpl(Inline), Op]
-        // public static MemoryAddress address(long src)
-        //     => new MemoryAddress((ulong)src);
+        [MethodImpl(Inline), Op]
+        public unsafe static ReadOnlySpan<T> read<T>(MemoryAddress location, int length)
+            where T : unmanaged
+                => new ReadOnlySpan<T>(location.ToPointer<T>(),length);
 
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(ulong src)

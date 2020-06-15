@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;    
 
-    using static Seed;
+    using static Konst;
     
     [ApiHost]
     public readonly struct Demands : IApiHost<Demands>

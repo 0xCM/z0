@@ -56,7 +56,7 @@ namespace Z0
             {
                 var m1 = BitMatrix.primal(n8,src.Current);
                 var n = new N8();
-                var m2 = BitMatrix.load(n, n,src.Current.ToBytes().ToSpan());
+                var m2 = BitMatrix.load(n, n, BitConverter.GetBytes(src.Current).ToSpan());
                 for(var i=0; i<8; i++)
                 for(var j=0; j<8; j++)
                     Claim.eq(m1[i,j], m2[i,j]);

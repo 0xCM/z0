@@ -100,7 +100,7 @@ namespace Z0
                 segment(BFB_I.BFB_2, 8, 9),
                 segment(BFB_I.BFB_3, 10, 15)
                 );
-            var dst = memory.alloc<ushort>(spec.FieldCount);
+            var dst = Control.alloc<ushort>(spec.FieldCount);
             var bf = BitFields.create<ushort>(spec);
 
             Claim.eq((byte)4,spec.FieldCount);
@@ -149,7 +149,7 @@ namespace Z0
         {
             var spec = BitFieldSpecs.specify<BFC_I,BFC_W>();
             var bf = BitFields.create<byte>(spec);
-            var dst = memory.alloc<byte>(spec.FieldCount);
+            var dst = Control.alloc<byte>(spec.FieldCount);
 
             Claim.eq((byte)4, spec.FieldCount);
 
@@ -236,8 +236,8 @@ namespace Z0
         {
             var spec = BitFieldSpecs.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
-            var dst = memory.span<ulong>(spec.FieldCount);
-            var tmp = memory.span<ulong>(spec.FieldCount);
+            var dst = Control.span(Control.alloc<ulong>(spec.FieldCount));
+            var tmp = Control.span(Control.alloc<ulong>(spec.FieldCount));
             var positions = spec.Segments.Map(s => s.StartPos);
 
             Trace(spec);

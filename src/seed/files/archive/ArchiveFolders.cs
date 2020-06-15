@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// A folder name of form PartFolder(part:PartId) where {part} is the entry process identifier
         /// </summary>
-        FolderName ExeFolder => FolderName.Define(ExecutingApp);
+        FolderName ExeFolder => FolderName.Define(Part.ExecutingPart);
 
         FolderName CodeFolder  => FolderName.Define("code", "Hex formatted encoded x86 assembly");
 

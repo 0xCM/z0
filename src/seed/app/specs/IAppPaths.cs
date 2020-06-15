@@ -23,7 +23,7 @@ namespace Z0
         public static IAppPaths Create(PartId id, FolderPath root = null)
             => new AppPaths(id, root ?? Env.Current.LogDir);
 
-        public static IAppPaths Default => Create(ExecutingApp);
+        public static IAppPaths Default => Create(Part.ExecutingPart);
 
         [MethodImpl(Inline)]
         AppPaths(PartId id, FolderPath root)
@@ -38,7 +38,7 @@ namespace Z0
         /// <summary>
         /// The application part identifier
         /// </summary>
-        PartId AppId => ExecutingApp;
+        PartId AppId => Part.ExecutingPart;
 
         /// <summary>
         /// The application-wide root output directory

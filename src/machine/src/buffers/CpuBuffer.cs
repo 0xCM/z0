@@ -8,7 +8,8 @@ namespace Z0.Machine
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Memories;
+    using static Control;
+    using static Typed;
 
     public readonly struct CpuBuffer
     {

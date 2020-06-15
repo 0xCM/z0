@@ -48,7 +48,7 @@ namespace Z0.Asm
 
         ITestAsm Me => this;
 
-        ICaptureArchive CodeArchive => Me.CaptureArchive(ExecutingApp);
+        ICaptureArchive CodeArchive => Me.CaptureArchive(Part.ExecutingPart);
 
         protected IUriCodeWriter HexWriter([Caller] string caller = null)
         {            

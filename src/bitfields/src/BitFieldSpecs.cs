@@ -10,7 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;    
-    using static Memories;
+    using static Control;
+    using static Typed;
 
     [ApiHost("specs")]
     public partial class BitFieldSpecs : IApiHost<BitFieldSpecs>
@@ -53,7 +54,7 @@ namespace Z0
             where W : unmanaged, Enum
         {            
             var count = index.Length;
-            var start = z8;
+            var start = Konst.z8;
             var segments = new FieldSegment[count];            
             for(var i=0; i<count; i++)
                 segments[i] = segment(index[i], ref start);
@@ -105,7 +106,7 @@ namespace Z0
         [Op]
         public static BitFieldModel model(string name, string[] names, byte[] widths)
         {            
-            insist(names.Length, widths.Length);
+            Demands.insist(names.Length, widths.Length);
             var fieldCount = (byte)names.Length;
             var fieldWidths = widths;
             var fieldNames = asci.alloc(n16,fieldCount);            

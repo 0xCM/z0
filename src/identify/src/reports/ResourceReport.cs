@@ -57,7 +57,7 @@ namespace Z0
         public string DelimitedText(char delimiter)
         {
             var dst = text.build();
-            dst.Append(F.Offset, Offset.FormatSmallHex());
+            dst.Delimit(F.Offset, Offset.FormatSmallHex());
             dst.Delimit(F.Address, Address, delimiter); 
             dst.Delimit(F.Size, Size.FormatAsmHex(4), delimiter); 
             dst.Delimit(F.Uri, Uri, delimiter);                        

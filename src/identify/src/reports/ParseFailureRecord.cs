@@ -75,7 +75,7 @@ namespace Z0
         public string DelimitedText(char delimiter)
         {
             var dst = Tabular.formatter<F>(delimiter);
-            dst.Append(F.Sequence, Sequence);
+            dst.Delimit(F.Sequence, Sequence);
             dst.Delimit(F.Address, Address);
             dst.Delimit(F.Length, Length);
             dst.Delimit(F.TermCode, TermCode);

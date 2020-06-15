@@ -6,10 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    
-    using static Seed;
-    
+ 
     partial class XTend
     {
         /// <summary>
@@ -17,7 +14,6 @@ namespace Z0
         /// </summary>
         /// <param name="m">The field or property</param>
         /// <param name="o">The object on which the member is defined</param>
-        [MethodImpl(Inline)]
         public static object MemberValue(this MemberInfo m, object o)
         {
             if (m is FieldInfo)
@@ -34,7 +30,6 @@ namespace Z0
         /// <typeparam name="T">The value type</typeparam>
         /// <param name="m">The member</param>
         /// <param name="o">The instance from which to access the member</param>
-        [MethodImpl(Inline)]
         public static T MemberValue<T>(this MemberInfo m, object o)
             => (T)m.MemberValue(o);
     }

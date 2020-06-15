@@ -152,7 +152,7 @@ namespace Z0.Mkl
         public static int EntryPadWidth<M,N>(this TableSpan<M,N,double> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Symbolic.digits(base10, ((ulong)src.Reduce(Math.Max))).Length;
+                => Symbolic.digits(Seed.base10, ((ulong)src.Reduce(Math.Max))).Length;
     }
 
     public static class CBLASX

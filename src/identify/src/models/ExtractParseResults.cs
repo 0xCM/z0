@@ -16,7 +16,8 @@ namespace Z0
     /// </summary>
     public readonly struct ExtractParseResults
     {
-        public static ExtractParseResults Empty => new ExtractParseResults(Control.array<ExtractParseFailure>(), Control.array<ParsedMember>());
+        public static ExtractParseResults Empty 
+            => new ExtractParseResults(Array.Empty<ExtractParseFailure>(), Array.Empty<ParsedMember>());
 
         /// <summary>
         /// The unparseable members

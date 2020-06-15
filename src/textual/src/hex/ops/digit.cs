@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static refs;
+    using static Control;
     using static HexSpecs;
 
     partial class Hex
