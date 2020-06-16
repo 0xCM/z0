@@ -15,24 +15,19 @@ namespace Z0
     {
         public readonly struct OperatorClass<T> : IOpClass<K,T> 
         { 
+            public K Class {get;}
+
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass(OperatorClass<T> src)
                 => new OperatorClass(src.Class);
 
-            public K Class {get;}
-
             [MethodImpl(Inline)]
             public OperatorClass(K k)
-            {
-                Class = k;
-            }
+                => Class = k;
         }
 
         public readonly struct EmitterOpClass<T> : IOperatorClass<EmitterOpClass<T>,K,T> 
         { 
-            public K Class 
-                => K.Emitter; 
-
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(EmitterOpClass<T> src)
                 => src.Generalized;
@@ -40,6 +35,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator EmitterOpClass(EmitterOpClass<T> src)
                 => src.NonGeneric;
+
+            public K Class 
+                => K.Emitter; 
 
             public OperatorClass<T> Generalized 
                 => new OperatorClass<T>(Class);
@@ -50,8 +48,6 @@ namespace Z0
 
         public readonly struct UnaryOpClass<T> : IOperatorClass<UnaryOpClass<T>, K,T> 
         { 
-            public K Class => K.UnaryOp; 
-
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(UnaryOpClass<T> src)
                 => src.Generalized;
@@ -60,6 +56,9 @@ namespace Z0
             public static implicit operator UnaryOpClass(UnaryOpClass<T> src)
                 => src.NonGeneric;
                         
+            public K Class 
+                => K.UnaryOp; 
+
             public OperatorClass<T> Generalized 
                 => new OperatorClass<T>(Class);
 
@@ -108,9 +107,6 @@ namespace Z0
 
         public readonly struct ShiftOpClass<T> : IOperatorClass<ShiftOpClass<T>,K,T> 
         {
-            public K Class 
-                => K.ShiftOp; 
-
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(ShiftOpClass<T> src)
                 => src.Generalized;
@@ -118,6 +114,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator ShiftOpClass(ShiftOpClass<T> src)
                 => src.NonGeneric;
+
+            public K Class 
+                => K.ShiftOp; 
 
             public OperatorClass<T> Generalized 
                 => new OperatorClass<T>(Class);

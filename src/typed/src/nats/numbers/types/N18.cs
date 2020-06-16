@@ -32,7 +32,24 @@ namespace Z0
             => Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N18 src) => 18;    
+        public static implicit operator int(N18 src) 
+            => (int)Value;    
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(N18 src) 
+            => (byte)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(N18 src) 
+            => (ushort)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(N18 src) 
+            => (uint)Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(N18 src) 
+            => Value;
 
         [MethodImpl(Inline)]
         public string Format()

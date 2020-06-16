@@ -44,7 +44,7 @@ namespace Z0
             where F : IBinaryOp<T>
         {        
             var count = lhs.Length;
-            var dst = Control.span(Control.alloc<T>(count));
+            var dst = span(alloc<T>(count));
             
             ref readonly var lSrc = ref head(lhs);
             ref readonly var rSrc = ref head(rhs);

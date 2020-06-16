@@ -21,7 +21,7 @@ namespace Z0.Machines
             machine.InputReceipt += OnReceipt;
             machine.Completed += OnComplete;
             Tracing = tracing  ?? ObserverTrace.All;
-            ReceiptEmitRate = receiptEmitRate ?? Pow2.T20;
+            ReceiptEmitRate = receiptEmitRate ?? (int)Pow2.T20;
             TransitionCount = 0;
             CompletionCount = 0;
             

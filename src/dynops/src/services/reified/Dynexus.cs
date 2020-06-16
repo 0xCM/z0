@@ -322,13 +322,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         FixedDelegate EmitFixedBinaryOp(OpIdentity id, Type operatorType, Type operandType, IBufferToken dst)        
-            => Emit(id,functype:operatorType, result:operandType, 
-                    args: array(operandType, operandType), dst.Handle);
+            => Emit(id,functype:operatorType, result:operandType, args: array(operandType, operandType), dst.Handle);
 
         [MethodImpl(Inline)]
         FixedDelegate EmitFixedTernaryOp(OpIdentity id, Type operatorType, Type operandType, IBufferToken dst)        
-            => Emit(id, functype:operatorType, result:operandType, 
-                    args: array(operandType, operandType, operandType), dst.Handle);
+            => Emit(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType), dst.Handle);
 
         FixedDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, IntPtr dst)
         {

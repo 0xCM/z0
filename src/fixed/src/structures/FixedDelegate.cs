@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Emit;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct FixedDelegate
     {
@@ -17,14 +17,14 @@ namespace Z0
         /// </summary>
         public readonly OpIdentity Id;
 
-        public readonly IntPtr SourceAddress;
+        public readonly MemoryAddress SourceAddress;
 
         public readonly DynamicMethod Enclosure;
 
         public readonly Delegate DynamicOp;        
 
         [MethodImpl(Inline)]
-        public static FixedDelegate Define(OpIdentity id, IntPtr src, DynamicMethod enclosure, Delegate dynop)        
+        public static FixedDelegate Define(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)        
             => new FixedDelegate(id,src,enclosure,dynop);
 
         [MethodImpl(Inline)]
@@ -32,12 +32,12 @@ namespace Z0
             => src.DynamicOp;
             
         [MethodImpl(Inline)]
-        FixedDelegate(OpIdentity id, IntPtr src, DynamicMethod enclosure, Delegate dynop)
+        public FixedDelegate(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
         {
-            this.Id = id;
-            this.SourceAddress = src;
-            this.Enclosure = enclosure;
-            this.DynamicOp = dynop;
+            Id = id;
+            SourceAddress = src;
+            Enclosure = enclosure;
+            DynamicOp = dynop;
         }
     }    
 }

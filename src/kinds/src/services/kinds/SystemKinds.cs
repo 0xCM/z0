@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
     using K = SystemOpKind;
     using I = ISystemOpKind;
 
@@ -20,6 +18,5 @@ namespace Z0
         public readonly struct Init : I { K I.Kind => K.Init; }
         
         public readonly struct Kind : I { K I.Kind => K.Kind; }
-
     }
 }

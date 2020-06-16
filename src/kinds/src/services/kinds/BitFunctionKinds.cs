@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using K = BitFunctionKind;
     using I = IBitFunctionKind;
 

@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-        
-    using static Seed;
-    using static AppErrorMsg;
 
     public readonly struct CheckVectorBits : ICheckVectorBits, IValidator<CheckVectorBits,ICheckVectorBits>
     {        

@@ -95,7 +95,7 @@ namespace Z0
             where T : unmanaged        
             => Task.Factory.StartNew(() => Execute(seed, domain, steps));    
         
-        public static async Task Evolve<T>(Interval<T> domain, Action<SeriesEvolution<T>> receiver, int count = Pow2.T06, int steps = Pow2.T19)
+        public static async Task Evolve<T>(Interval<T> domain, Action<SeriesEvolution<T>> receiver, int count = Pow2.T06, int steps = (int)Pow2.T19)
             where T : unmanaged
         {
             var sw = time.stopwatch();

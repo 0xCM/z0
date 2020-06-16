@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    
     public abstract class t_bitcore<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
         where X : t_bitcore<X>, new()
     {

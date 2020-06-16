@@ -16,21 +16,21 @@ namespace Z0
     {
         public readonly struct FixedUnaryOp : IFixedOpClassF<FixedUnaryOp,C>
         {
-            public C Class => C.UnaryOp; 
-
             public TypeWidth Width {get;}
-                        
-            public OperatorClass Generalized => default;
 
-            [MethodImpl(Inline)]
-            public FixedUnaryOp(TypeWidth width)
-            {
-                this.Width = width;
-            }
+            public C Class 
+                => C.UnaryOp; 
+                        
+            public OperatorClass Generalized 
+                => default;
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass(FixedUnaryOp src)
                 => default;
+
+            [MethodImpl(Inline)]
+            public FixedUnaryOp(TypeWidth width)
+                => Width = width;
         }
 
         public readonly struct FixedUnaryOp<W> : IFixedOpClassF<FixedUnaryOp<W>,W,C> 
@@ -48,32 +48,42 @@ namespace Z0
             public static implicit operator FixedUnaryOp(FixedUnaryOp<W> src)
                 => src.NonGeneric;
 
-            public C Class => C.UnaryOp; 
+            public C Class 
+                => C.UnaryOp; 
 
-            public TypeWidth Width => Widths.type<W>();
+            public TypeWidth Width 
+                => Widths.type<W>();
 
-            public OperatorClass<W> Generalized => default;
+            public OperatorClass<W> Generalized 
+                => default;
 
-            public FixedUnaryOp NonGeneric => new FixedUnaryOp(Width);
+            public FixedUnaryOp NonGeneric 
+                => new FixedUnaryOp(Width);
         }
 
         public readonly struct FixedBinaryOp : IFixedOpClassF<FixedBinaryOp,C>
         {
-            public C Class => C.BinaryOp; 
-
             public TypeWidth Width {get;}
-                        
-            public OperatorClass Generalized => default;
+
+            [MethodImpl(Inline)]
+            public static implicit operator OperatorClass(FixedBinaryOp src)
+                => src.Generalized;
+
+            public C Class 
+                => C.BinaryOp; 
+
+            public OperatorClass Generalized 
+            {
+                [MethodImpl(Inline)]
+                get => new OperatorClass(Class);
+            }
+
 
             [MethodImpl(Inline)]
             public FixedBinaryOp(TypeWidth width)
             {
-                this.Width = width;
+                Width = width;
             }
-
-            [MethodImpl(Inline)]
-            public static implicit operator OperatorClass(FixedBinaryOp src)
-                => default;
         }
 
         public readonly struct FixedBinaryOp<W> : IFixedOpClassF<FixedBinaryOp<W>,W,C> 
@@ -91,32 +101,42 @@ namespace Z0
             public static implicit operator FixedBinaryOp(FixedBinaryOp<W> src)
                 => src.NonGeneric;
 
-            public C Class => C.BinaryOp; 
+            public C Class 
+                => C.BinaryOp; 
 
-            public TypeWidth Width => Widths.type<W>();
+            public TypeWidth Width 
+                => Widths.type<W>();
 
-            public OperatorClass<W> Generalized => default;
+            public OperatorClass<W> Generalized
+            { 
+                [MethodImpl(Inline)]
+                get => new OperatorClass<W>(Class);
+            }
 
-            public FixedBinaryOp NonGeneric => new FixedBinaryOp(Width);
+            public FixedBinaryOp NonGeneric 
+            {            
+                [MethodImpl(Inline)]
+                get => new FixedBinaryOp(Width);
+            }
         }
 
         public readonly struct FixedTernaryOp : IFixedOpClassF<FixedTernaryOp,C>
         {
-            public C Class => C.TernaryOp; 
-
             public TypeWidth Width {get;}
-                        
-            public OperatorClass Generalized => default;
-
-            [MethodImpl(Inline)]
-            public FixedTernaryOp(TypeWidth width)
-            {
-                this.Width = width;
-            }
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorClass(FixedTernaryOp src)
+                => new OperatorClass(src.Class);
+
+            public C Class 
+                => C.TernaryOp; 
+
+            public OperatorClass Generalized 
                 => default;
+
+            [MethodImpl(Inline)]
+            public FixedTernaryOp(TypeWidth width)
+                => Width = width; 
         }
 
         public readonly struct FixedTernaryOp<W> : IFixedOpClassF<FixedTernaryOp<W>,W,C> 
@@ -134,9 +154,11 @@ namespace Z0
             public static implicit operator FixedTernaryOp(FixedTernaryOp<W> src)
                 => src.NonGeneric;
 
-            public C Class => C.TernaryOp; 
+            public C Class 
+                => C.TernaryOp; 
 
-            public TypeWidth Width => Widths.type<W>();
+            public TypeWidth Width 
+                => Widths.type<W>();
 
             public OperatorClass<W> Generalized => default;
 

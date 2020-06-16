@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using K = ArithmeticKind;
     using I = IArithmeticKind;
 

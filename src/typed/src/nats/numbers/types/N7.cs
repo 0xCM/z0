@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// The singleton type representative for 7
@@ -38,6 +38,5 @@ namespace Z0
 
         public override string ToString() 
             => Text;
-
     }
 }

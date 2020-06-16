@@ -9,7 +9,7 @@ namespace Z0
  
     public sealed class t_uint8 : t_numeric<t_uint8>
     {
-        protected override int CycleCount => Pow2.T24;
+        protected override int CycleCount => (int)Pow2.T24;
 
         public void bv8_ops_check()
         {

@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The second span cell type</typeparam>
         [MethodImpl(Inline)]
         public static int length<S,T>(ReadOnlySpan<S> x, ReadOnlySpan<T> y)
-            => Math.Min(x.Length, y.Length);
+            => min(x.Length, y.Length);
 
         /// <summary>
         /// Computs min(x.Length,y.Length)
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="T">The second span cell type</typeparam>
         [MethodImpl(Inline)]
         public static int length<S,T>(ReadOnlySpan<S> x, Span<T> y)
-            => Math.Min(x.Length, y.Length);
+            => min(x.Length, y.Length);
 
         /// <summary>
         /// Computs min(x.Length,y.Length)
@@ -42,7 +42,7 @@ namespace Z0
         /// <typeparam name="T">The second span cell type</typeparam>
         [MethodImpl(Inline)]
         public static int length<S,T>(Span<S> x, ReadOnlySpan<T> y)
-            => Math.Min(x.Length, y.Length);
+            => min(x.Length, y.Length);
 
         /// <summary>
         /// Computs min(x.Length,y.Length)
@@ -53,6 +53,6 @@ namespace Z0
         /// <typeparam name="T">The second span cell type</typeparam>
         [MethodImpl(Inline)]
         public static int length<S,T>(Span<S> x, Span<T> y)
-            => Math.Min(x.Length, y.Length);
+            => min(x.Length, y.Length);
     }
 }

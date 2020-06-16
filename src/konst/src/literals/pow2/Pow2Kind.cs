@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
 
-    using K1 = Pow2Kind1;
-    using K2 = Pow2Kind2;
-    using K3 = Pow2Kind3;
-    using K4 = Pow2Kind4;
-    using K8 = Pow2Kind8;
-    using K16 = Pow2Kind16;
-    using K32 = Pow2Kind32;
+    using K1 = Pow2n1;
+    using K2 = Pow2n2;
+    using K3 = Pow2n3;
+    using K4 = Pow2n4;
+    using K8 = Pow2n8;
+    using K16 = Pow2n16;
+    using K32 = Pow2n32;
 
     /// <summary>
     /// Defines primal-representable powers of 2 and integers of the form 2^n - 1 where n = 0,..,64
@@ -23,7 +23,7 @@ namespace Z0
         /// <summary> 
         /// 2^0 - 1 = 0
         /// </summary> 
-        P2ᐞ00m1 = K2.T00m1,
+        P2ᐞ00m1 = Pow2n1m1.T00m1,
 
         /// <summary>
         /// 2^0 = 1
@@ -294,7 +294,6 @@ namespace Z0
         /// </summary>
         P2ᐞ63 = 2*(ulong)P2ᐞ62,
 
-
         /// <summary> 
         /// 2^1 - 1
         /// </summary> 
@@ -462,59 +461,5 @@ namespace Z0
 
         P2ᐞ64m1 = ulong.MaxValue,        
 
-        /// <summary> 
-        /// The maximum value representable by a 1-bit unsigned integer
-        /// </summary> 
-        Max1 = K1.Max1,
-
-        /// <summary> 
-        /// The maximum value representable by a 2-bit unsigned integer
-        /// </summary> 
-        Max2 = K2.Max2,
-
-        /// <summary> 
-        /// The maximum value representable by a 3-bit unsigned integer
-        /// </summary> 
-        Max3 = K3.Max3,
-
-        /// <summary> 
-        /// The maximum value representable by a 4-bit unsigned integer
-        /// </summary> 
-        Max4 = K4.Max4,
- 
-        /// <summary> 
-        /// The maximum value representable by a 5-bit unsigned integer
-        /// </summary> 
-        Max5 = K8.T05m1,
-
-        /// <summary> 
-        /// The maximum value representable by a 6-bit unsigned integer
-        /// </summary> 
-        Max6 = K8.T06m1,
-
-        /// <summary> 
-        /// The maximum value representable by a 7-bit unsigned integer
-        /// </summary> 
-        Max7 = K8.T07m1,
-
-        /// <summary> 
-        /// The maximum value representable by an 8-bit unsigned integer
-        /// </summary> 
-        Max8 = K8.Max8,
-
-        /// <summary> 
-        /// The maximum value representable by a 16-bit unsigned integer
-        /// </summary> 
-        Max16 = K16.Max16,
-  
-        /// <summary> 
-        /// The maximum value representable by a 32-bit unsigned integer
-        /// </summary> 
-        Max32 = K32.Max32,
-        
-        /// <summary> 
-        /// The maximum value representable by a 64-bit unsigned integer
-        /// </summary> 
-        Max64 = P2ᐞ64m1,
     }
 }

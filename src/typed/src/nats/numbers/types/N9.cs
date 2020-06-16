@@ -36,6 +36,10 @@ namespace Z0
             => (int)Value;
   
         [MethodImpl(Inline)]
+        public static implicit operator byte(N9 src) 
+            => (byte)Value;
+
+        [MethodImpl(Inline)]
         public string Format()
             => Text;
 

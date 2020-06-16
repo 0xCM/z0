@@ -22,9 +22,6 @@ namespace Z0
         public static unsafe MemoryAddress From(ulong src)
             => Addresses.address(src);
         
-        [MethodImpl(Inline)]
-        public unsafe static implicit operator MemoryAddress(void* p)
-            => Addresses.address(p);
         
         public static MemoryAddress Empty 
             => new MemoryAddress(0);
@@ -73,6 +70,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public unsafe static implicit operator MemoryAddress(void* p)
+            => Addresses.address(p);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(IntPtr src)
+            => Addresses.address(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator IntPtr(MemoryAddress src)
+            => (IntPtr)src.Location;
+
+        [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(ulong src)
             => Addresses.address(src);
 
@@ -96,9 +105,6 @@ namespace Z0
         public static explicit operator MemoryAddress(ushort src)
             => Addresses.address(src);
 
-        [MethodImpl(Inline)]
-        public static explicit operator MemoryAddress(IntPtr src)
-            => Addresses.address(src);
 
         [MethodImpl(Inline)]
         public static explicit operator MemoryAddress(short src)

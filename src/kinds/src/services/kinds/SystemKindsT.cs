@@ -3,10 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
-    
+{    
     partial class Kinds
     {
         public readonly struct Alloc<T> : ISystemOpKind<Alloc,T> {}
@@ -18,8 +15,5 @@ namespace Z0
         public readonly struct Init<T> : ISystemOpKind<Init,T> {}
 
         public readonly struct Kind<T> : ISystemOpKind<Kind,T> {}
-
-        
-
     }
 }

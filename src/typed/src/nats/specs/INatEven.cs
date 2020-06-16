@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Seed;
-
     /// <summary>
     /// Requires k:K => k % 2 == 0
     /// </summary>
@@ -17,5 +12,6 @@ namespace Z0
         where K : unmanaged, ITypeNat<K>
     {
 
-    }
+    }    
+
 }

@@ -17,11 +17,15 @@ namespace Z0
 
         public const string Text = "19";
 
-        [MethodImpl(Inline)]
-        public static implicit operator int(N19 src) => 19;
-
         public ulong NatValue 
             => Value;
+
+        public string NatText 
+            => Text;
+
+        [MethodImpl(Inline)]
+        public static implicit operator int(N19 src) 
+            => (int)Value;
 
         [MethodImpl(Inline)]
         public string Format()

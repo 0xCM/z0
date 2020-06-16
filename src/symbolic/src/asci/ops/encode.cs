@@ -12,6 +12,22 @@ namespace Z0
 
     partial struct asci
     {
+        /// <summary>
+        /// Encodes a sequence of source characters and stores a result in a caller-supplied 
+        /// T-parametric target with cells assumed to be at least 16 bits wide
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target</param>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static int encode<T>(ReadOnlySpan<char> src, Span<T> dst)
+        {
+            var count = Math.Min(src.Length, dst.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = Control.cast<T>((byte)skip(src,i));
+            return count;
+        }
+
         [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, Span<byte> dst)
         {
@@ -28,6 +44,14 @@ namespace Z0
                 seek(ref dst,i) = (byte)skip(src,i);
             return count;
         }
+
+        /// <summary>
+        /// Encodes a single character
+        /// </summary>
+        /// <param name="src">The character to encode</param>
+        [MethodImpl(Inline), Op]
+        public static AsciCharCode encode(char src)
+            => (AsciCharCode)src;
 
         [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, ref byte dst)
@@ -153,6 +177,5 @@ namespace Z0
             asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
-
     }
 }

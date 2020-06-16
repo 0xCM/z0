@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     partial class Kinds
     {
         public readonly struct Lt<T> : IComparisonKind<Lt,T> {}
@@ -19,6 +17,5 @@ namespace Z0
         public readonly struct Eq<T> : IComparisonKind<Eq,T> {}
 
         public readonly struct Neq<T> : IComparisonKind<Neq,T> {}
-
     }
 }

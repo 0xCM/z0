@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     partial class Kinds
     {
         public static UnaryPredicate predicate(A1 rep) 

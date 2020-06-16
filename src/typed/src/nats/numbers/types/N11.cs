@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;    
+    using static Konst;    
 
     public readonly struct N11 : 
         INativeNatural, 
@@ -25,19 +25,24 @@ namespace Z0
             => Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N11 src) => (int)Value;
+        public static implicit operator int(N11 src) 
+            => (int)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(N11 src) => (byte)Value;
+        public static implicit operator byte(N11 src) 
+            => (byte)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator ushort(N11 src) => (ushort)Value;
+        public static implicit operator ushort(N11 src) 
+            => (ushort)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(N11 src) => (uint)Value;
+        public static implicit operator uint(N11 src) 
+            => (uint)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(N11 src) => Value;
+        public static implicit operator ulong(N11 src) 
+            => Value;
 
         [MethodImpl(Inline)]
         public string Format()

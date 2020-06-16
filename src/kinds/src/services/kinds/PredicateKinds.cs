@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using K = BooleanPredicateKind;
     using I = IBooleanPredicateKind;
 

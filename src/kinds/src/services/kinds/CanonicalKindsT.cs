@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     partial class Kinds
     {
         public readonly struct Reverse<T> : ICanonicalKind<Reverse,T> {}
@@ -25,6 +23,5 @@ namespace Z0
         public readonly struct Test<T> : ICanonicalKind<Test,T> {}
 
         public readonly struct Zip<T> : ICanonicalKind<Zip,T> {}
-
     }
 }

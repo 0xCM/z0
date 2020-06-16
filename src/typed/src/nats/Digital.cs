@@ -8,73 +8,246 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Seed;
+    using static Konst;
+    using static HexConst;
+
+    public readonly struct Imagine
+    {
+
+        /// <summary>
+        /// Views an S-cell as a T-cell
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T view<S,T>(in S src)   
+            => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
+
+        /// <summary>
+        /// Transforms a readonly T-cell into an editable T-cell, which may or may not be a good idea
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T edit<T>(in T src)   
+            => ref Unsafe.As<T,T>(ref Unsafe.AsRef(src));
+
+        /// <summary>
+        /// Transforms a readonly S-cell into an editable T-cell, which may or may not be a good idea
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T edit<S,T>(in S src)   
+            => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
+
+        /// <summary>
+        /// Transforms a readonly S-cell into an editable T-cell, which may or may not be a good idea
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <param name="dst">The target cell</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T edit<S,T>(in S src, ref T dst)   
+            => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
+
+        /// <summary>
+        /// Envisions an S-cell as a T-cell
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T envision<S,T>(ref S src)   
+            => ref Unsafe.As<S,T>(ref src);
+
+        /// <summary>
+        /// Envisions an S-cell as a T-cell
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <param name="src">The target cell</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T envision<S,T>(ref S src, ref T dst)   
+            => ref Unsafe.As<S,T>(ref src);
+
+        /// <summary>
+        /// Takes a T-cell from an S-cell source
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <param name="dst">The target</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T take<S,T>(in S src, out T dst)   
+        {
+            dst = edit<S,T>(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> span<T>(in T src, int count)
+            => MemoryMarshal.CreateReadOnlySpan(ref edit<T>(src), count);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> span<S,T>(in S src, int tCount)
+            => MemoryMarshal.CreateReadOnlySpan(ref edit<S,T>(src), tCount);
+
+        /// <summary>
+        /// Adds a cell-relative offset to a readonly reference, heh
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <param name="count">The cell offset count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T add<T>(in T src, int count)
+            => ref Unsafe.Add(ref edit(src), count);
+
+        /// <summary>
+        /// Increments a cell reference by a unit
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        /// <param name="count">The cell offset count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T inc<T>(in T src)
+            => ref Unsafe.Add(ref edit(src), 1);
+
+        [MethodImpl(Inline)]
+        public static ref T add<S,T>(in S src, int tCount)
+            => ref Unsafe.Add(ref edit<S,T>(src), tCount);
+    }
 
     /// <summary>
     /// Defines operations over character digits
     /// </summary>
-    /// <remarks>
-    /// In the interest of performance, no checks are performed that verify source character
-    /// arguments actually represent digits; unexpected results will occur otherwise
-    /// </remarks>
-    public static class Digital
+    [ApiHost]
+    public readonly struct Digital : IApiHost<Digital>
     {        
         /// <summary>
         /// Converts a character in the inclusive range [0,9] to the corresponding number in the same range
         /// </summary>
         /// <param name="c">The digit character</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong digit(char c)
             => (ulong)c - (ulong)'0'; 
 
-        [MethodImpl(Inline)]
-        public static char character(ulong digit)
-            => (char)(digit + (ulong)'0');
+        /// <summary>
+        /// Converts a character in the inclusive range [0,9] to the corresponding number in the same range
+        /// </summary>
+        /// <param name="c">The digit character</param>
+        [MethodImpl(Inline), Op]
+        public static byte digit8(char c)
+            => (byte)((byte)c - (byte)'0'); 
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Extracts an index-identified encoded digit
+        /// </summary>
+        /// <param name="src">The digit source</param>
+        /// <param name="index">An integer in the inclusive range [0, 1] that identifies the digit to extract</param>
+        [MethodImpl(Inline), Op]
+        public static byte digit8(ushort src, int index)
+            => (byte)(F & (src >> index*4));
+
+        /// <summary>
+        /// Extracts an index-identified encoded digit
+        /// </summary>
+        /// <param name="src">The digit source</param>
+        /// <param name="index">An integer in the inclusive range [0, 3] that identifies the digit to extract</param>
+        [MethodImpl(Inline), Op]
+        public static byte digit8(uint src, int index)
+            => (byte)(F & (src >> index*4));
+
+        /// <summary>
+        /// Extracts an index-identified encoded digit
+        /// </summary>
+        /// <param name="src">The digit source</param>
+        /// <param name="index">An integer in the inclusive range [0, 7] that identifies the digit to extract</param>
+        [MethodImpl(Inline), Op]
+        public static byte digit8(ulong src, int index)
+            => (byte)(F & (src >> index*4));
+
+        [MethodImpl(Inline), Op]
+        public static char char8(byte digit)
+            => (char)(digit + (byte)'0');
+
+        // [MethodImpl(Inline), Op]
+        // public static char character(ulong digit)
+        //     => (char)(digit + (ulong)'0');
+
+        [MethodImpl(Inline), Op]
         public static void chars(ushort src, out char c1, out char c0)
         {
-            c1 = character(digit(src,1));
-            c0 = character(digit(src,1));
+            c1 = char8(digit8(src,Bit1));
+            c0 = char8(digit8(src,Bit0));
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void chars(uint src, out char c3, out char c2, out char c1, out char c0)
         {
-            c3 = character(digit(src,3));
-            c2 = character(digit(src,2));
-            c1 = character(digit(src,1));
-            c0 = character(digit(src,0));
+            c3 = char8(digit8(src,Bit3));
+            c2 = char8(digit8(src,Bit2));
+            c1 = char8(digit8(src,Bit1));
+            c0 = char8(digit8(src,Bit0));
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void chars(ulong src, out char c7, out char c6, out char c5, out char c4, out char c3, out char c2, out char c1, out char c0)
         {
-            c7 = character(digit(src,7));
-            c6 = character(digit(src,6));
-            c5 = character(digit(src,5));
-            c4 = character(digit(src,4));
-            c3 = character(digit(src,3));
-            c2 = character(digit(src,2));
-            c1 = character(digit(src,1));
-            c0 = character(digit(src,0));
+            c7 = char8(digit8(src, Bit7));
+            c6 = char8(digit8(src, Bit6));
+            c5 = char8(digit8(src, Bit5));
+            c4 = char8(digit8(src, Bit4));
+            c3 = char8(digit8(src, Bit3));
+            c2 = char8(digit8(src, Bit2));
+            c1 = char8(digit8(src, Bit1));
+            c0 = char8(digit8(src, Bit0));
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(uint src)
-        {
-            Span<char> dst = new char[4];
-            ref var target = ref MemoryMarshal.GetReference(dst);
-            chars(src, out add(ref target, 3), out add(ref target, 2), out add(ref target, 1), out add(ref target, 0));
-            return dst;
+        {            
+            var store = z64;
+            var proxy = c16;
+            ref var dst = ref Imagine.envision(ref store, ref proxy);            
+            chars(src, 
+                out Imagine.add(dst, 3), 
+                out Imagine.add(dst, 2), 
+                out Imagine.add(dst, 1), 
+                out Imagine.add(dst, 0)
+                );
+            return Imagine.span(dst, 4);            
         }
-        
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> chars(ulong src)
+        {            
+            var store = z128f;
+            var proxy = c16;
+            ref var dst = ref Imagine.envision(ref store, ref proxy);            
+            chars(src, 
+                out Imagine.add(dst, 7), 
+                out Imagine.add(dst, 6), 
+                out Imagine.add(dst, 5), 
+                out Imagine.add(dst, 4),
+                out Imagine.add(dst, 3), 
+                out Imagine.add(dst, 2), 
+                out Imagine.add(dst, 1), 
+                out Imagine.add(dst, 0)
+                );
+            return Imagine.span(dst, 4);            
+        }
+
         /// <summary>
         /// Encodes two decimal digits d := 0x[c1][c0] for characters c2, c1 in the inclusive range [0,9]
         /// </summary>
         /// <param name="c1">The source for digit 1, the most significant digit</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong digits(char c1, char c0)
         {
             const int width = 4;
@@ -84,13 +257,22 @@ namespace Z0
             return packed;
         }
 
+        [MethodImpl(Inline), Op]
+        public static ushort digits8(char c1, char c0)
+        {            
+            var packed = z16;
+            packed |= (byte)(digit8(c0) << 0*4);
+            packed |= (byte)(digit8(c1) << 1*4);
+            return packed;
+        }
+
         /// <summary>
         /// Encodes three decimal digits d := 0x[c2][c1][c0] for characters c2, c1, c0 in the inclusive range [0,9]
         /// </summary>
         /// <param name="c2">The source for digit 2, the most significant digit</param>
         /// <param name="c1">The source for digit 1</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong digits(char c2, char c1, char c0)
         {
             const int width = 4;
@@ -108,7 +290,7 @@ namespace Z0
         /// <param name="c2">The source for digit 2</param>
         /// <param name="c1">The source for digit 1</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong digits(char c3, char c2, char c1, char c0)
         {
             const int width = 4;
@@ -128,7 +310,7 @@ namespace Z0
         /// <param name="c2">The source for digit 2</param>
         /// <param name="c1">The source for digit 1</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong digits(char c4, char c3, char c2, char c1, char c0)
         {
             const int width = 4;
@@ -152,7 +334,7 @@ namespace Z0
         /// <param name="c2">The source for digit 2</param>
         /// <param name="c1">The source for digit 1</param>
         /// <param name="c0">The source for digit 0, the least significant digit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong digits(char c7, char c6, char c5, char c4, char c3, char c2, char c1, char c0)
         {
             const int width = 4;
@@ -173,7 +355,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 7] that identifies the digit to extract</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong digit(ulong src, int index)
             => 0xF & (src >> index*4);
 
@@ -183,14 +365,14 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="d1">The most significant digit</param>
         /// <param name="d0">The least significant digit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, out byte d1, out byte d0)
         {
             d1 = (byte)digit(src,1);
             d0 = (byte)digit(src,0);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, out byte d2, out byte d1, out byte d0)
         {
             d2 = (byte)digit(src,2);
@@ -206,7 +388,7 @@ namespace Z0
         /// <param name="d2">The target for the third digit</param>
         /// <param name="d1">The target for the second digit</param>
         /// <param name="d0">The target for the first and least-significant digit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void lo(ulong src, out byte d3, out byte d2, out byte d1, out byte d0)
         {
             d3 = (byte)digit(src,3);
@@ -223,7 +405,7 @@ namespace Z0
         /// <param name="d6"></param>
         /// <param name="d5"></param>
         /// <param name="d4"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void hi(ulong src, out byte d7, out byte d6, out byte d5, out byte d4)
         {
             d7 = (byte)digit(src,7);
@@ -238,7 +420,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, N1 count, ref byte dst)
         {
             add(ref dst, 0) = (byte)digit(src,0);
@@ -250,7 +432,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, N2 count, ref byte dst)
         {
             add(ref dst, 1) = (byte)digit(src,1);
@@ -263,7 +445,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, N3 count, ref byte dst)
         {
             add(ref dst, 2) = (byte)digit(src,2);
@@ -277,7 +459,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, N4 count, ref byte dst)
         {
             add(ref dst, 3) = (byte)digit(src,3);
@@ -292,7 +474,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, N5 count, ref byte dst)
         {
             add(ref dst, 4) = (byte)digit(src,4);
@@ -308,7 +490,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, N6 count, ref byte dst)
         {
             add(ref dst, 5) = (byte)digit(src,5);
@@ -325,7 +507,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, N7 count, ref byte dst)
         {
             add(ref dst, 6) = (byte)digit(src,6);
@@ -343,7 +525,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="count">The digit count selector</param>
         /// <param name="dst">The digit receiver</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void digits(ulong src, N8 count, ref byte dst)
         {
             add(ref dst, 6) = (byte)digit(src,6);
@@ -355,7 +537,7 @@ namespace Z0
             add(ref dst, 0) = (byte)digit(src,0);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static ref T add<T>(ref T src, int count)
             => ref Unsafe.Add(ref src, count);
     }

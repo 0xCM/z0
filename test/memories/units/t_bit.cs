@@ -9,7 +9,7 @@ namespace Z0
  
     public sealed class t_bit : UnitTest<t_bit>
     {
-        protected override int CycleCount => Pow2.T24;
+        protected override int CycleCount => (int)Pow2.T24;
 
         public void check_add()
         {

@@ -4,8 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
-    public partial class Spans : IApiHost<Spans>
+    using System.Security;
+
+    [ApiHost, SuppressUnmanagedCodeSecurity]
+    public static partial class Spans
     {                    
     }    
 }

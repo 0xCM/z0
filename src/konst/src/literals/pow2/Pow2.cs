@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
     
     using static Konst;
 
@@ -46,157 +44,157 @@ namespace Z0
         /// <summary>
         /// 2^0 = 1
         /// </summary>
-        public const int T00 = (int)K.P2ᐞ00;
+        public const byte T00 = (byte)K.P2ᐞ00;
 
         /// <summary>
         /// 2^1 = 2
         /// </summary>
-        public const int T01 = (int)K.P2ᐞ01;
+        public const byte T01 = (byte)K.P2ᐞ01;
 
         /// <summary>
         /// 2^2 = 4
         /// </summary>
-        public const int T02 = (int)K.P2ᐞ02;
+        public const byte T02 = (byte)K.P2ᐞ02;
 
         /// <summary>
         /// 2^3 = 8
         /// </summary>
-        public const int T03 = (int)K.P2ᐞ03;
+        public const byte T03 = (byte)K.P2ᐞ03;
 
         /// <summary>
         /// 2^4 = 16
         /// </summary>
-        public const int T04 = (int)K.P2ᐞ04;
+        public const byte T04 = (byte)K.P2ᐞ04;
 
         /// <summary>
         /// 2^5 = 32
         /// </summary>
-        public const int T05 = (int)K.P2ᐞ05;
+        public const byte T05 = (byte)K.P2ᐞ05;
 
         /// <summary>
         /// 2^6 = 64
         /// </summary>
-        public const int T06 = (int)K.P2ᐞ06;
+        public const byte T06 = (byte)K.P2ᐞ06;
 
         /// <summary>
         /// 2^7 = 128
         /// </summary>
-        public const int T07 = (int)K.P2ᐞ07;
+        public const byte T07 = (byte)K.P2ᐞ07;
 
         /// <summary>
         /// 2^8 = 256 = UInt8.MaxValue + 1
         /// </summary>
-        public const int T08 = (int)K.P2ᐞ08;
+        public const ushort T08 = (ushort)K.P2ᐞ08;
 
         /// <summary>
         /// 2^9 = 512
         /// </summary>
-        public const int T09 = (int)K.P2ᐞ09;
+        public const ushort T09 = (ushort)K.P2ᐞ09;
 
         /// <summary>
         /// 2^10 = 1024
         /// </summary>
-        public const int T10 = (int)K.P2ᐞ10;
+        public const ushort T10 = (ushort)K.P2ᐞ10;
         
         /// <summary>
         /// 2^11 = 2048
         /// </summary>
-        public const int T11 = (int)K.P2ᐞ11;
+        public const ushort T11 = (ushort)K.P2ᐞ11;
         
         /// <summary>
         /// 2^12 = 4096
         /// </summary>
-        public const int T12 = (int)K.P2ᐞ12;
+        public const ushort T12 = (ushort)K.P2ᐞ12;
 
         /// <summary>
         /// 2^13 = 8192
         /// </summary>
-        public const int T13 = (int)K.P2ᐞ13;
+        public const ushort T13 = (ushort)K.P2ᐞ13;
 
         /// <summary>
         /// 2^14 = 16,384
         /// </summary>
-        public const int T14 = (int)K.P2ᐞ14;
+        public const ushort T14 = (ushort)K.P2ᐞ14;
         
         /// <summary>
         /// 2^15 = 32,768
         /// </summary>
-        public const int T15 = (int)K.P2ᐞ15;
+        public const ushort T15 = (ushort)K.P2ᐞ15;
 
         /// <summary>
         /// 2^16 = 65,536 = UInt16.MaxValue + 1
         /// </summary>
-        public const int T16 = (int)K.P2ᐞ16;
+        public const uint T16 = (uint)K.P2ᐞ16;
         
         /// <summary>
         /// 2^17 = 131,072
         /// </summary>
-        public const int T17 = (int)K.P2ᐞ17;
+        public const uint T17 = (int)K.P2ᐞ17;
 
         /// <summary>
         /// 2^18 = 262,144
         /// </summary>
-        public const int T18 = (int)K.P2ᐞ18;
+        public const uint T18 = (int)K.P2ᐞ18;
 
         /// <summary>
         /// 2^19 = 524,288
         /// </summary>
-        public const int T19 = (int)K.P2ᐞ19;
+        public const uint T19 = (int)K.P2ᐞ19;
 
         /// <summary>
         /// 2^20 = 1,048,576
         /// </summary>
-        public const int T20 = (int)K.P2ᐞ20;
+        public const uint T20 = (int)K.P2ᐞ20;
         
         /// <summary>
         /// 2^21 = 2,097,152
         /// </summary>
-        public const int T21 = (int)K.P2ᐞ21;
+        public const uint T21 = (int)K.P2ᐞ21;
 
         /// <summary>
         /// 2^22 = 4,194,304
         /// </summary>
-        public const int T22 = (int)K.P2ᐞ22;
+        public const uint T22 = (int)K.P2ᐞ22;
 
         /// <summary>
         /// 2^23 = 8,388,608
         /// </summary>
-        public const int T23 = (int)K.P2ᐞ23;
+        public const uint T23 = (int)K.P2ᐞ23;
         
         /// <summary>
         /// 2^24 = 16,777,216
         /// </summary>
-        public const int T24 = (int)K.P2ᐞ24;
+        public const uint T24 = (int)K.P2ᐞ24;
 
         /// <summary>
         /// 2^25 = 33,554,432
         /// </summary>
-        public const int T25 = (int)K.P2ᐞ25;
+        public const uint T25 = (int)K.P2ᐞ25;
         
         /// <summary>
         /// 2^26 = 67,108,864 = 0x4000000
         /// </summary>
-        public const int T26 = (int)K.P2ᐞ26;
+        public const uint T26 = (int)K.P2ᐞ26;
         
         /// <summary>
         /// 2^27 = 134,217,728 = 0x8000000
         /// </summary>
-        public const int T27 = (int)K.P2ᐞ27;
+        public const uint T27 = (int)K.P2ᐞ27;
         
         /// <summary>
         /// 2^28 = 268,435,456 = 0x10000000
         /// </summary>
-        public const int T28 = (int)K.P2ᐞ28;
+        public const uint T28 = (int)K.P2ᐞ28;
         
         /// <summary>
         /// 2^29 = 536,870,912 = 0x20000000;
         /// </summary>
-        public const int T29 = (int)K.P2ᐞ29;
+        public const uint T29 = (int)K.P2ᐞ29;
         
         /// <summary>
         /// 2^30 = 1,073,741,824 = 0x40000000
         /// </summary>
-        public const int T30 = (int)K.P2ᐞ30;
+        public const uint T30 = (int)K.P2ᐞ30;
 
         /// <summary>
         /// 2^31 = 2,147,483,648 = 0x80000000
@@ -206,31 +204,31 @@ namespace Z0
         /// <summary>
         /// 2^32 = 4,294,967,296 = 0x100000000
         /// </summary>
-        public const long T32 = (long)K.P2ᐞ32;
+        public const ulong T32 = (ulong)K.P2ᐞ32;
                                                          
-        public const long T33 = (long)K.P2ᐞ33;
+        public const ulong T33 = (ulong)K.P2ᐞ33;
         
-        public const long T34 = (long)K.P2ᐞ34;
+        public const ulong T34 = (ulong)K.P2ᐞ34;
         
-        public const long T35 = (long)K.P2ᐞ35;
+        public const ulong T35 = (long)K.P2ᐞ35;
         
-        public const long T36 = (long)K.P2ᐞ36;
+        public const ulong T36 = (long)K.P2ᐞ36;
         
-        public const long T37 = (long)K.P2ᐞ37;
+        public const ulong T37 = (long)K.P2ᐞ37;
         
-        public const long T38 = (long)K.P2ᐞ38;
+        public const ulong T38 = (long)K.P2ᐞ38;
         
-        public const long T39 = (long)K.P2ᐞ39;
+        public const ulong T39 = (long)K.P2ᐞ39;
         
-        public const long T40 = (long)K.P2ᐞ40;
+        public const ulong T40 = (long)K.P2ᐞ40;
         
-        public const long T41 = (long)K.P2ᐞ41;
+        public const ulong T41 = (long)K.P2ᐞ41;
         
-        public const long T42 = (long)K.P2ᐞ42;
+        public const ulong T42 = (long)K.P2ᐞ42;
         
-        public const long T43 = (long)K.P2ᐞ43;
+        public const ulong T43 = (long)K.P2ᐞ43;
         
-        public const long T44 = (long)K.P2ᐞ44;
+        public const ulong T44 = (long)K.P2ᐞ44;
         
         public const long T45 = (long)K.P2ᐞ45;
         

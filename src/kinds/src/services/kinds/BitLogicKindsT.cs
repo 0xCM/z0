@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
     partial class Kinds
     {
         public readonly struct And<T> : IBitLogicKind<And,T> {}
