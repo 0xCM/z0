@@ -12,7 +12,7 @@ namespace Z0
     using static Control;
     using static SymBits;
     using static As;
-    using static VectorData;
+    using static VectorKonst;
 
     partial class SymbolicData
     {

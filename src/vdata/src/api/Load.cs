@@ -12,6 +12,7 @@ namespace Z0
     using static Vectors;
     using static refs;
  
+ 
     partial class Data
     {                
         /// <summary>

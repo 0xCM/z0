@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Symbolic;
-    using static Seed;
+    using static Konst;
 
     public static class Utf8AsciPoints
     {
@@ -274,5 +273,4 @@ namespace Z0
         0x7e 01111110 '~'
         0x7f 01111111 ___
         */
-
 }

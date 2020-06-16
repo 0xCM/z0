@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     
     /// <summary>
     /// Represents the least 8 bits of a unicode code point which, by definition of the encoding,

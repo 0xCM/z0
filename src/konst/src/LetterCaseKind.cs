@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Konst;
-
-    partial class Symbolic
+    public enum LetterCaseKind : byte
     {
-       public const byte AsciNull = (byte)AsciCharCode.Null;
+        None = 0,
 
-       public const int NotFound = -1;
+        Lower = 1,
+
+        Upper = 2
     }
 }

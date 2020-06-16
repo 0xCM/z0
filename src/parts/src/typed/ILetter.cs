@@ -5,9 +5,7 @@
 namespace Z0
 {        
     using System;
-
-    using static Seed;
-
+    
     public interface ILetter : ITextual
     {
         AsciLetter Symbol {get;}        

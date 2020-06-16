@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     
-    using static Seed;
     using static Memories;
  
     using Z0.Asm.Data;
@@ -56,7 +55,7 @@ namespace Z0
         {
             var src = typeof(SymbolicData).Assembly;
 
-            var xRef = MemRef.memref(SymbolicData.UpperHexCodes);            
+            var xRef = MemRef.memref(SymbolKonst.UpperHexCodes);            
 
             var xProp = src.Properties().WithName("UpperHexCodes").Single();
             

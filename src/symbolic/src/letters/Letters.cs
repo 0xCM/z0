@@ -6,8 +6,6 @@ namespace Z0
 {        
     using System;
 
-    using static Seed;
-
     using T = LetterTypes;
 
     public class Letters

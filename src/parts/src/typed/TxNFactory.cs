@@ -12,8 +12,6 @@ namespace Z0
     public readonly struct Tx
     {
 
-
-
         [MethodImpl(Inline)]
         public static TxN<T0> T<T0>(T0 t0 = default)
             => default;

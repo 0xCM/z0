@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    public class Konst
+    public readonly partial struct Konst
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
@@ -370,5 +371,9 @@ namespace Z0
         /// The smallest representable value v where v:float64
         /// </summary>
         public const double Min64f = double.MinValue;
+
+        public const byte AsciNone = (byte)AsciCharCode.Null;
+
+        public const int NotFound = -1;
     }
 }

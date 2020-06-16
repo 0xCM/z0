@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci2 src)
-            => IndexLength(first(src, AsciNull), src.MaxLength);
+            => IndexLength(first(src, AsciNone), src.MaxLength);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci4 src)
-            => IndexLength(first(src, AsciNull), src.MaxLength);
+            => IndexLength(first(src, AsciNone), src.MaxLength);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci5 src)
-            => IndexLength(first(src, AsciNull), src.MaxLength);
+            => IndexLength(first(src, AsciNone), src.MaxLength);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci8 src)
-            => IndexLength(first(src, AsciNull), src.MaxLength);
+            => IndexLength(first(src, AsciNone), src.MaxLength);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci16 src)
-            => IndexLength(first(src, AsciNull), src.MaxLength);
+            => IndexLength(first(src, AsciNone), src.MaxLength);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci32 src)
-            => IndexLength(first(src, AsciNull), src.MaxLength);
+            => IndexLength(first(src, AsciNone), src.MaxLength);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci64 src)
-            => IndexLength(first(src, AsciNull), src.MaxLength);        
+            => IndexLength(first(src, AsciNone), src.MaxLength);        
     
         [MethodImpl(Inline)]
         internal static bool IndexFound(int i)

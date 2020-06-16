@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)        
-            => AsciStrings.codes(offset, (sbyte)(count));
+            => AsciDataStrings.Service.codes(offset, (sbyte)(count));
 
         [MethodImpl(Inline), Op]
         public static void codes(in char src, int count, ref AsciCharCode dst)

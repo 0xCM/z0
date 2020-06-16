@@ -9,7 +9,6 @@ namespace Z0
 
      using static Konst;
      using static LetterTypes;
-
      using static PermLits;
 
      [ApiHost]

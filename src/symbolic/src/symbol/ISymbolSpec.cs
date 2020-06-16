@@ -5,10 +5,6 @@
 namespace Z0
 {    
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Seed;
 
     public interface ISymbolSpec
     {
@@ -32,6 +28,4 @@ namespace Z0
         bool DefinesSymbols 
             => Symbols == null || Symbols.Length == 0;        
     }
-
-
 }

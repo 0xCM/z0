@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
-    partial class LetterTypes
+    public partial class LetterTypes
     {
         public readonly struct C : ILetter<C>
         {

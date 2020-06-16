@@ -32,7 +32,7 @@ namespace Z0.Xed
     public readonly struct InstructionRecord : IRecord<F,R>
     {
         public static InstructionRecord Empty 
-            => new InstructionRecord(0,asci.Null, asci.Null, asci.Null, asci.Null, asci.Null);
+            => new InstructionRecord(0, asci.Null, asci.Null, asci.Null, asci.Null, asci.Null);
 
         public readonly int Sequence;
         

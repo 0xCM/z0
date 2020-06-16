@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static Control;
 
     public interface ISymbol<S>
@@ -26,7 +26,8 @@ namespace Z0
         /// <summary>
         /// The bit-width of a storage cell
         /// </summary>
-        ushort SegWidth => (ushort)Control.bitsize<T>();
+        ushort SegWidth 
+            => (ushort)Control.bitsize<T>();
 
         /// <summary>
         /// The symbol value, from storage cell persective
@@ -46,11 +47,13 @@ namespace Z0
         /// <summary>
         /// The bit-width of a symbol
         /// </summary>
-        ushort SymWidth => (ushort)Typed.value<N>();
+        ushort SymWidth 
+            => (ushort)Typed.value<N>();
         
         /// <summary>
         /// The maximum number of symbols that can be packed into a storage cell
         /// </summary>
-        ushort Capacity => (ushort)(SegWidth/SymWidth);
+        ushort Capacity 
+            => (ushort)(SegWidth/SymWidth);
     }
 }

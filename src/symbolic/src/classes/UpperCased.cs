@@ -7,20 +7,24 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct UpperCased : ILetterCase<UpperCased>
     {    
-        public static UpperCased Case => default(UpperCased);
+        public static UpperCased Case 
+            => default(UpperCased);
 
         [MethodImpl(Inline)]
         public static implicit operator LetterCase(UpperCased src)
             => new LetterCase(src.IsUpper, src.IsLower, src.Kind);
      
-        public bool IsUpper => true;
+        public bool IsUpper 
+            => true;
 
-        public bool IsLower => false;
+        public bool IsLower 
+            => false;
 
-        public LetterCaseKind Kind => LetterCaseKind.Upper;
+        public LetterCaseKind Kind 
+            => LetterCaseKind.Upper;
     }
 }

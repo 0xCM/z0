@@ -17,10 +17,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static HSU hexsymbol(UpperCased casing, byte index)
-            => skip(SymbolicData.UpperHexSymbols, index);
+            => skip(SymbolKonst.UpperHexSymbols, index);
 
         [MethodImpl(Inline), Op]
         public static HSL hexsymbol(LowerCased casing, byte index)
-            => skip(SymbolicData.LowerHexSymbols, index);
+            => skip(SymbolKonst.LowerHexSymbols, index);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     
     using static Seed;
     using static Memories;
-    using static HexConst;
+    using static VectorKonst;
  
     partial class Data
     {
@@ -82,68 +82,11 @@ namespace Z0
         public static Vector256<byte> packusHi(N256 w, N32 src, N16 dst)
             => vload(w,PackUSHi32x256x16u);
 
-        public static ReadOnlySpan<byte> PackUSLo16x128x8u
-            => new byte[16]{
-                0, 2, 4, 6, 8, 10,12,14, 
-                FF,FF,FF,FF,FF,FF,FF,FF
-                };
-
-        public static ReadOnlySpan<byte> PackUSLo32x128x16u
-            => new byte[16]{
-                0,1, 4,5, 8,9, 12,13, 
-                FF,FF,FF,FF,FF,FF,FF,FF
-                };
-
-        public static ReadOnlySpan<byte> PackUSLo16x256x8u
-            => new byte[32]{
-                0, 2, 4, 6, 8, 10,12,14, 
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0, 2, 4, 6, 8, 10,12,14, 
-                FF,FF,FF,FF,FF,FF,FF,FF
-                };
-
-        public static ReadOnlySpan<byte> PackUSLo32x256x16u
-            => new byte[32]{
-                0,1,4,5,8,9,12,13, 
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,1,4,5,8,9,12,13, 
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                };
-
-        public static ReadOnlySpan<byte> PackUSHi16x128x8u
-            => new byte[16]{
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0, 2, 4, 6, 8, 10,12,14, 
-                };
-
-        public static ReadOnlySpan<byte> PackUSHi32x128x16u
-            => new byte[16]{
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0,1,4,5,8,9,12,13
-                };
-
-        public static ReadOnlySpan<byte> PackUSHi16x256x8u
-            => new byte[32]{
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0, 2, 4, 6, 8, 10,12,14, 
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0, 2, 4, 6, 8, 10,12,14, 
-                };
-
-        public static ReadOnlySpan<byte> PackUSHi32x256x16u
-            => new byte[32]{
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,1,4,5,8,9,12,13,
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,1,4,5,8,9,12,13
-                };                
-
         [ResourceProvider]
         static void RegisterPacks()
         {
             var name = string.Empty;
             var index = PackIndex;
-
 
             name = "PackUSLo";
             Register(index++, Identify.resource(name, w16, w128, NumericKind.U8), PackUSLo16x128x8u);

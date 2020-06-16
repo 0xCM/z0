@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static Control;
-    using static Typed;
 
     partial class Symbolic     
     {

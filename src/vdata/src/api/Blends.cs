@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Seed;
-    using static Memories;
-    using static HexConst;
+    using static Konst;
+    using static Typed;
+    using static VectorKonst;
 
     partial class Data
     {
@@ -74,93 +74,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<byte> blend(N256 n, N64 width, bit odd)
             => vload<byte>(n,odd ? BlendSpec_Odd_256x64 : BlendSpec_Even_256x64);
-
-        /// <summary>
-        /// Defines a mask for an even 256x8-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Even_256x8
-            => new byte[32]{
-                0,FF,0,FF,0,FF,0,FF,
-                0,FF,0,FF,0,FF,0,FF,
-                0,FF,0,FF,0,FF,0,FF,
-                0,FF,0,FF,0,FF,0,FF,
-            };
-
-        /// <summary>
-        /// Defines a mask for an even 256x8-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Odd_256x8
-            => new byte[32]{
-                FF,0,FF,0,FF,0,FF,0,
-                FF,0,FF,0,FF,0,FF,0,
-                FF,0,FF,0,FF,0,FF,0,
-                FF,0,FF,0,FF,0,FF,0,
-            };
-
-        /// <summary>
-        /// Defines a mask for an even 256x8-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Even_256x16
-            => new byte[32]{
-                0,0,FF,FF,0,0,FF,FF,
-                0,0,FF,FF,0,0,FF,FF,
-                0,0,FF,FF,0,0,FF,FF,
-                0,0,FF,FF,0,0,FF,FF,
-            };
-
-        /// <summary>
-        /// Defines a mask for an odd 256x32-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Odd_256x16
-            => new byte[32]{
-                FF,FF,0,0,FF,FF,0,0,
-                FF,FF,0,0,FF,FF,0,0,
-                FF,FF,0,0,FF,FF,0,0,
-                FF,FF,0,0,FF,FF,0,0,
-            };
-
-        /// <summary>
-        /// Defines a mask for an even 256x32-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Even_256x32
-            => new byte[32]{
-                0,0,0,0, FF,FF,FF,FF,
-                0,0,0,0, FF,FF,FF,FF,
-                0,0,0,0, FF,FF,FF,FF,
-                0,0,0,0, FF,FF,FF,FF,
-            };
-
-        /// <summary>
-        /// Defines a mask for an odd 256x32-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Odd_256x32
-            => new byte[32]{
-                FF,FF,FF,FF,0,0,0,0, 
-                FF,FF,FF,FF,0,0,0,0, 
-                FF,FF,FF,FF,0,0,0,0, 
-                FF,FF,FF,FF,0,0,0,0, 
-            };
-
-        /// <summary>
-        /// Defines a mask for an even 256x64-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Even_256x64
-            => new byte[32]{
-                0,0,0,0,0,0,0,0,
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,0,0,0,0,0,0,0,
-                FF,FF,FF,FF,FF,FF,FF,FF,
-            };
-
-        /// <summary>
-        /// Defines a mask for an odd 256x64-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Odd_256x64
-            =>new byte[32]{
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0,0,0,0,0,0,0,0,
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0,0,0,0,0,0,0,0,
-            };
-    }
+   }
 }
