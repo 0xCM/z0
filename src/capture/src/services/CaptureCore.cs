@@ -12,6 +12,35 @@ namespace Z0.Asm
     using static Memories;
     using static ExtractTermCode;
     
+    readonly struct Jitter
+    {
+        [MethodImpl(Inline)]
+        public static IntPtr jit(MethodInfo src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
+        }
+
+        [MethodImpl(Inline)]
+        public static IntPtr jit(Delegate src)
+        {   
+            RuntimeHelpers.PrepareDelegate(src);
+            return src.Method.MethodHandle.GetFunctionPointer();
+        }    
+
+        [MethodImpl(Inline)]
+        public static DynamicPointer jit(DynamicDelegate src)
+        {   
+            RuntimeHelpers.PrepareDelegate(src.DynamicOp);
+            return DynamicPointer.From(src);
+        }        
+
+        [MethodImpl(Inline)]
+        public static DynamicPointer jit<D>(DynamicDelegate<D> src)
+            where D : Delegate
+                => jit(src.Untyped);
+    }
+
     unsafe readonly struct CaptureCore : ICaptureCore
     {      
         public static ICaptureCore Service => default(CaptureCore);  
@@ -48,11 +77,11 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = MemberJit.Service.Jit(src);
+                var pSrc = Jitter.jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
                 var captured = DefineMember(id, src, summary.Data, outcome.TermCode); 
-                insist((MemoryAddress)pSrc,captured.Address);               
+                insist((MemoryAddress)pSrc, captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -66,7 +95,7 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = MemberJit.Service.Jit(src).Handle;
+                var pSrc = Jitter.jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
                 var captured = CapturedCode.Define(id, src.DynamicOp, src.SourceMethod, summary.Data.Unparsed, summary.Data.Encoded, outcome.TermCode);                
@@ -98,7 +127,7 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = MemberJit.Service.Jit(src);
+                var pSrc = Jitter.jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.Data, outcome.TermCode);  

@@ -56,7 +56,7 @@ namespace Z0
             var tOperand = typeof(Vector256<T>);  
             var dst = DynamicImmediate.DynamicSignature(constructed.Name, constructed.DeclaringType, tOperand, tOperand, tOperand);            
             dst.GetILGenerator().EmitImmBinaryCall(constructed,imm);
-            return Delegates.dynop<BinaryOp<Vector256<T>>>(id, constructed, dst);
+            return Delegates.dynamic<BinaryOp<Vector256<T>>>(id, constructed, dst);
         }            
     }
 }

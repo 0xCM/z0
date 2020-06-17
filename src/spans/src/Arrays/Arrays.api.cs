@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;    
     using System.Linq;
 
     using static Konst;
@@ -28,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ref T head<T>(T[] src)
-            => ref Spans.head(src);
+            => ref MemoryMarshal.GetReference<T>(src);
 
         /// <summary>
         /// Adds an offset to the head of an array, measured relative to the reference type
@@ -38,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T skip<T>(T[] src, int count)
-            => ref Skips.skip(in head<T>(src), count);
+            => ref Imagine.skip(in head<T>(src), count);
 
         /// <summary>
         /// Adds an offset to the head of an array, measured relative to the reference type
@@ -48,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T seek<T>(T[] src, int count)
-            => ref Seeker.seek(ref head<T>(src), count);
+            => ref Imagine.seek(ref head<T>(src), count);
 
         /// <summary>
         /// Tests whether an array is empty

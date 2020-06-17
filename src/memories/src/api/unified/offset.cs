@@ -11,8 +11,8 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static ref T offset<T>(ref T src, IntPtr offset)
-            => ref refs.offset(ref src, offset);
+            => ref Imagine.seek(ref src, offset);
     }
 }

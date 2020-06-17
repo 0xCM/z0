@@ -13,6 +13,7 @@ namespace Z0
 
     using static Konst;
 
+ 
     [ApiHost]
     public static unsafe class memory
     {
@@ -71,26 +72,6 @@ namespace Z0
             Unsafe.WriteUnaligned<S>(ref dstBytes, src);
         }
 
-        /// <summary>
-        /// Copies a contiguous segments of bytes from one location to another
-        /// </summary>
-        /// <param name="pSrc">The location of the source bytes</param>
-        /// <param name="pDst">The location of the target</param>
-        /// <param name="srcCount">The number of values to copy</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe void copy(byte* pSrc, byte* pDst, uint srcCount)
-            => Unsafe.CopyBlock(pDst, pSrc, srcCount);
-
-        /// <summary>
-        /// Copies a contiguous segments of values from one location to another
-        /// </summary>
-        /// <param name="pSrc">The location of the source bytes</param>
-        /// <param name="pDst">The location of the target</param>
-        /// <param name="srcCount">The number of values to copy</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe void copy<T>(T* pSrc, T* pDst, uint srcCount)
-            where T : unmanaged
-                => Unsafe.CopyBlock(pDst, pSrc, (uint)(size<T>()*srcCount));
 
         /// <summary>
         /// Copies a contiguous segments of values to a span
@@ -101,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(T* pSrc, Span<T> dst, int offset, uint srcCount)
             where T : unmanaged
-                =>  copy(pSrc, refs.ptr(ref Control.head(dst), offset), srcCount); 
+                => Copier.copy(pSrc,dst,offset,srcCount);
 
         /// <summary>
         /// Copies a contiguous segments of bytes from a source location to a target span
@@ -111,8 +92,7 @@ namespace Z0
         /// <param name="srcCount">The number of values to copy</param>
         [MethodImpl(Inline), Op]
         public static unsafe void copy(byte* pSrc, Span<byte> dst, int offset, uint srcCount)
-            => copy(pSrc, (byte*)Unsafe.AsPointer(ref refs.seek(dst, offset)) , srcCount);
-
+            => Copier.copy(pSrc,dst,offset,srcCount);
 
         /// <summary>
         /// Copies a byte

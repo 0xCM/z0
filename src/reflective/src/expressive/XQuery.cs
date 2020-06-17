@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-    using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
 
     public partial class XQuery
     { 

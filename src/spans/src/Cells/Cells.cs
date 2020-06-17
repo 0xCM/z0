@@ -68,7 +68,7 @@ namespace Z0
             where S: unmanaged
             where T :unmanaged
         {
-            ref var input = ref As.uint8(ref refs.edit(in src));
+            ref var input = ref As.uint8(ref Imagine.edit(in src));
             ref var target = ref As.uint8(ref refs.seek(ref dst, dstOffset));
             var bytecount =  (uint)(srcCount*Unsafe.SizeOf<S>());
             Unsafe.CopyBlock(ref target, ref input, bytecount);

@@ -76,9 +76,9 @@ namespace Z0
         public ref readonly A Node(int index)
         {
             if(index < Head.Length)
-                return ref refs.skip(Head, index);
+                return ref Arrays.skip(Head, index);
             else
-                return ref refs.skip(Tail, index);
+                return ref Arrays.skip(Tail, index);
         }
 
         public ref readonly A this[int index]

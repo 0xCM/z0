@@ -12,9 +12,43 @@ namespace Z0
 
     partial class Spans
     {
+        /// <summary>
+        /// Returns a reference to the head of a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        internal static ref T spanhead<T>(Span<T> src)
-            => ref head(src);
+        public static ref T head<T>(Span<T> src)
+            => ref MemoryMarshal.GetReference<T>(src);
+
+        /// <summary>
+        /// Returns a reference to the head of a span, offset by a specified amount
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref T head<T>(Span<T> src, int offset)
+            => ref Unsafe.Add(ref head(src), offset);        
+
+        /// <summary>
+        /// Returns a reference to the head of a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref readonly T head<T>(ReadOnlySpan<T> src)
+            => ref MemoryMarshal.GetReference<T>(src);
+
+        /// <summary>
+        /// Presents the span head as a readonly reference to an unsigned 64-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref readonly ulong head64<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => ref Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
+
 
         /// <summary>
         /// Presents the bytespan head as a reference to an unsigned 8-bit integer
@@ -67,24 +101,6 @@ namespace Z0
                 => ref Unsafe.As<T,ushort>(ref MemoryMarshal.GetReference(src));
 
         /// <summary>
-        /// Returns a reference to the head of a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T head<T>(Span<T> src)
-            => ref MemoryMarshal.GetReference<T>(src);
-
-        /// <summary>
-        /// Returns a reference to the head of a span, offset by a specified amount
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T head<T>(Span<T> src, int offset)
-            => ref Unsafe.Add(ref head(src), offset);        
-
-        /// <summary>
         /// Presents the span head as a reference to an unsigned 64-bit integer
         /// </summary>
         /// <param name="src">The source span</param>
@@ -104,25 +120,7 @@ namespace Z0
             where T : unmanaged
                 => ref Unsafe.As<T,uint>(ref MemoryMarshal.GetReference(src));
 
-        /// <summary>
-        /// Presents the span head as a readonly reference to an unsigned 64-bit integer
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref readonly ulong head64<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => ref Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
-
-        /// <summary>
-        /// Returns a reference to the head of a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref readonly T head<T>(ReadOnlySpan<T> src)
-            => ref MemoryMarshal.GetReference<T>(src);
-
+ 
         /// <summary>
         /// Presents the span head as a reference to a signed 32-bit integer
         /// </summary>
@@ -150,16 +148,5 @@ namespace Z0
         public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
             where T : unmanaged
                 => ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
-
-        /// <summary>
-        /// Returns a reference to the location of the first element
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe ref T head<T>(T[] src)
-            => ref spanhead<T>(src);
-
     }
-
 }

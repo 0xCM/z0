@@ -50,7 +50,7 @@ namespace Z0
         {
             var len = swaps.Length;
             ref var srcmem = ref head(src);
-            ref var swapmem = ref refs.head(swaps);
+            ref var swapmem = ref Arrays.head(swaps);
             for(var k = 0; k < len; k++)
             {
                 (var i, var j) = skip(in swapmem, k);

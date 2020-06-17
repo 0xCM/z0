@@ -19,23 +19,6 @@ namespace Z0
             => src.GetFields(BF_All);
 
         /// <summary>
-        /// Selects all public static/instance fields from the source
-        /// </summary>
-        /// <param name="src">The source type</param>
-        public static FieldInfo[] PublicFields(this Type src)
-            => src.GetFields(BF_AllPublicStatic | BF_AllPublicInstance);
-
-        /// <summary>
-        /// Selects all public instance fields from the source
-        /// </summary>
-        /// <param name="src">The source type</param>
-        public static FieldInfo[] PublicInstanceFields(this Type src)
-            => src.GetFields(BF_AllPublicInstance);
-
-        public static FieldInfo[] PublicStaticFields(this Type src)
-            => src.GetFields(BF_AllPublicStatic);
-
-        /// <summary>
         /// Retrieves the public instance Fields declared by a supertype
         /// </summary>
         /// <param name="src">The type to examine</param>

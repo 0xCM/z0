@@ -30,7 +30,7 @@ namespace Z0
             ref var dst = ref Unsafe.As<uint,char>(ref storage);
             seek(ref dst, 0) = (char)(byte)(src.Storage >> 0);
             seek(ref dst, 1) = (char)(byte)(src.Storage >> 8);
-            return Spans.cover(dst, 2);
+            return Imagine.cover(dst, 2);
         }
 
         [MethodImpl(Inline), Op]
@@ -42,7 +42,7 @@ namespace Z0
             seek(ref dst, 1) = (char)(byte)(src.Storage >> 8);
             seek(ref dst, 2) = (char)(byte)(src.Storage >> 16);
             seek(ref dst, 3) = (char)(byte)(src.Storage >> 24);
-            return Spans.cover(dst, asci4.Size);
+            return Imagine.cover(dst, asci4.Size);
         }
 
         [MethodImpl(Inline), Op]

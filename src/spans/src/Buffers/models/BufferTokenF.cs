@@ -9,6 +9,13 @@ namespace Z0
 
     using static Konst;
 
+    public interface IBufferToken<F> : IFixedBufferToken
+        where F : unmanaged, IFixed
+    {
+
+    }
+
+    
     /// <summary>
     /// Describes a fixed-width allocated buffer
     /// </summary>
@@ -50,8 +57,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BufferToken(IntPtr handle, int size)
         {
-            this.Handle = handle;
-            this.Size = size;
+            Handle = handle;
+            Size = size;
         }        
 
         /// <summary>
@@ -60,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe Span<T> Content<T>()
             where T : unmanaged
-                => Spans.cover((byte*)Handle.ToPointer(), Size).As<T>();
+                => Imagine.cover((byte*)Handle.ToPointer(), Size).As<T>();
 
         /// <summary>
         /// Fills a token-identified buffer with data from a source span and returns the target memory to the caller as a span

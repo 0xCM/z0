@@ -21,12 +21,26 @@ namespace Z0
         const string Kernel32 = "kernel32.dll";
 
         /// <summary>
+        /// Creates an array of tokens that identify a squence of buffers
+        /// </summary>
+        /// <param name="base">The base address</param>
+        /// <param name="size">The number of bytes covered by each buffer</param>
+        /// <param name="count">The length of the buffer sequence</param>
+        public static BufferToken[] tokenize(IntPtr @base, int size, int count)
+        {
+            var tokens = new BufferToken[count];
+            for(var i=0; i<count; i++)
+                tokens[i] = (IntPtr.Add(@base, size*i), size); 
+            return tokens;
+        }
+
+        /// <summary>
         /// Covers a token-identified buffer with a span
         /// </summary>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> content<T>(IBufferToken src)
             where T : unmanaged
-                => Spans.cover((byte*)src.Handle.ToPointer(), src.Size).As<T>();
+                => Imagine.cover((byte*)src.Handle.ToPointer(), src.Size).As<T>();
 
         /// <summary>
         /// Enables bytespan execution

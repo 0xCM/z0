@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.BitSpan)]
+[assembly: PartId(PartId.BitSpans)]
 
 namespace Z0.Parts
 {        

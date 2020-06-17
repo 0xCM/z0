@@ -12,7 +12,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
 
     partial class XTend
     {

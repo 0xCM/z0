@@ -443,7 +443,7 @@ namespace Z0
             if(count == 0)         
                 return;
 
-            ref readonly var data = ref refs.head(src);
+            ref readonly var data = ref Arrays.head(src);
             for(var i=0; i<count; i++)
                 Collect(skip(in data, i));
         }

@@ -29,15 +29,6 @@ namespace Z0
             => System.Attribute.IsDefined(m, tAttrib);
 
         /// <summary>
-        /// Selects the members with a particular attribute
-        /// </summary>
-        /// <param name="src">The members to examine</param>
-        /// <param name="name">The name to match</param>
-        public static IEnumerable<T> Tagged<T>(this IEnumerable<T> src, Type tAttrib)
-            where T : MemberInfo
-                => src.Where(m => m.Tagged(tAttrib));
- 
-        /// <summary>
         /// Returns true if a parametrically-identified attribute is not applied to the subject
         /// </summary>
         /// <param name="m">The subject to examine</param>

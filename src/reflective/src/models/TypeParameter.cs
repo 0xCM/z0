@@ -26,8 +26,8 @@ namespace Z0
         }
 
         public string Format(bool fence)
-            => fence ? Reflective.angled(Name) : Name;
-
+            => fence ? Name.Angled() : Name;
+        
         public string Format()
             => Format(false);
 

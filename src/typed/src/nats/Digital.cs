@@ -101,7 +101,7 @@ namespace Z0
         {            
             var store = z64;
             var proxy = c16;
-            ref var dst = ref Imagine.envision(ref store, ref proxy);            
+            ref var dst = ref Imagine.@as(ref store, ref proxy);            
             chars(src, 
                 out Imagine.add(dst, 3), 
                 out Imagine.add(dst, 2), 
@@ -116,7 +116,7 @@ namespace Z0
         {            
             var store = z128f;
             var proxy = c16;
-            ref var dst = ref Imagine.envision(ref store, ref proxy);            
+            ref var dst = ref Imagine.@as(ref store, ref proxy);            
             chars(src, 
                 out Imagine.add(dst, 7), 
                 out Imagine.add(dst, 6), 

@@ -17,28 +17,6 @@ namespace Z0
     public static partial class Reflective
     {
         /// <summary>
-        /// Attempts to retrieves the value of a static or instance property
-        /// </summary>
-        /// <typeparam name="V">The value type</typeparam>
-        /// <param name="member">The property</param>
-        /// <param name="instance">The object instance, if applicable</param>
-        public static Option<V> value<V>(PropertyInfo member, object instance = null)
-            => from o in member.Read(instance)
-                from v in Option.TryCast<V>(o)
-                select v;
-
-        /// <summary>
-        /// Attempts to retrieves the value of a field
-        /// </summary>
-        /// <typeparam name="V">The value type</typeparam>
-        /// <param name="member">The field</param>
-        /// <param name="instance">The object instance, if applicable</param>
-        public static Option<V> value<V>(FieldInfo member, object instance = null)
-            => from o in member.Value(instance)
-            from v in Option.TryCast<V>(o)
-            select v;
-
-        /// <summary>
         /// Retrieves the identified <see cref="PropertyInfo"/>
         /// </summary>
         /// <param name="o">The object on which the property is defined</param>
@@ -52,9 +30,7 @@ namespace Z0
         /// <param name="o">The object</param>
         [MethodImpl(Inline)]
         public static PropertyInfo[] props(object o)
-            => o == null
-            ? new PropertyInfo[]{}
-            : o.GetType().GetProperties(BF_AllPublicInstance);
+            => o == null ? Array.Empty<PropertyInfo>() : props(o.GetType());
 
         /// <summary>
         /// Retrieves the public properties declared on a type
@@ -89,27 +65,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T propval<T>(object o, string propname)
             => (T)propval(o, propname);
-
-        /// <summary>
-        /// Returns true if the source type is non-null and non-void; otherwise, returns false
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsSome(this Type src)
-            => src != null && src != typeof(void); 
-
-        /// <summary>
-        /// Encloses text between less than and greater than characters
-        /// </summary>
-        /// <param name="content">The content to enclose</param>
-        [MethodImpl(Inline)]
-        internal static string angled(string content)
-            => String.IsNullOrWhiteSpace(content) ? string.Empty : $"<{content}>";
     }
 
     public static partial class XTend
     {
 
     }
-
 }

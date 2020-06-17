@@ -192,7 +192,7 @@ namespace Z0
         {
             var n = n256;
 
-            var selectors = Random.BitStream().Take(RepCount).ToArray();
+            var selectors = Random.BitStream32().Take(RepCount).ToArray();
 
             for(var sample=0; sample<RepCount; sample++)
             {

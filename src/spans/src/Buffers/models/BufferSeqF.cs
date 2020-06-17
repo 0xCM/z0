@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe Span<T> Cells<T>(byte index)
             where T : unmanaged                
-                => Spans.cover(Token(index).Handle.ToPointer<byte>(), BufferSize).As<T>();
+                => Imagine.cover(Token(index).Handle.ToPointer<byte>(), BufferSize).As<T>();
 
         /// <summary>
         /// Fills a token-identifed buffer with content from a source span and returns the covering span

@@ -24,8 +24,8 @@ namespace Z0.Logix
 
         protected void logic_op_check(BL kind, Func<bit,bit,bit> rule)
         {
-            var lhs = Random.BitStream().Take(RepCount).ToArray();
-            var rhs = Random.BitStream().Take(RepCount).ToArray();
+            var lhs = Random.BitStream32().Take(RepCount).ToArray();
+            var rhs = Random.BitStream32().Take(RepCount).ToArray();
             for(var i=0; i<RepCount; i++)
             {
                 var a = lhs[i];
@@ -58,8 +58,8 @@ namespace Z0.Logix
         {
             var opname = $"ops/logical/lookup[{lookup}]";
 
-            var lhsSamples = Random.BitStream().Take(RepCount).ToArray();
-            var rhsSamples = Random.BitStream().Take(RepCount).ToArray();
+            var lhsSamples = Random.BitStream32().Take(RepCount).ToArray();
+            var rhsSamples = Random.BitStream32().Take(RepCount).ToArray();
             var result = bit.Off;
             var kinds = bitlogix.BinaryOpKinds;
             var opcount = 0;

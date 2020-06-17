@@ -7,6 +7,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     
     using static Konst;
 
@@ -48,6 +49,6 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public void Dispose()
-            => Buffers.release(Handle);
+            => Marshal.FreeHGlobal(Handle);
     }
 }

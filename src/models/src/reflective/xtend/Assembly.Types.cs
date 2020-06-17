@@ -11,11 +11,5 @@ namespace Z0
     {
         public static Type[] Types(this Assembly a)
             => a.GetTypes();
-
-        public static Type[] PublicTypes(this Assembly a)
-            => a.Types().Public();
-
-        public static Type[] NonPublicTypes(this Assembly a)
-            => a.Types().NonPublic();
     }
 }

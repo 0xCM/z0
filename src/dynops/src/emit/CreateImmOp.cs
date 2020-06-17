@@ -20,7 +20,7 @@ namespace Z0
             var tOperand = typeof(Vector128<T>);
             var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
             target.GetILGenerator().EmitImmBinaryCall(wrapped,imm8);
-            return Delegates.dynop<BinaryOp<Vector128<T>>>(idTarget, wrapped, target);
+            return Delegates.dynamic<BinaryOp<Vector128<T>>>(idTarget, wrapped, target);
         }
 
         public static DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmVBinaryOpImm<T>(Vec256Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
@@ -31,7 +31,7 @@ namespace Z0
             var tOperand = typeof(Vector256<T>);  
             var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
             target.GetILGenerator().EmitImmBinaryCall(wrapped,imm8);
-            return Delegates.dynop<BinaryOp<Vector256<T>>>(idTarget, wrapped, target);
+            return Delegates.dynamic<BinaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }
 
         public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedVUnaryOpImm<T>(Vec128Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
@@ -42,7 +42,7 @@ namespace Z0
             var tOperand = typeof(Vector128<T>); 
             var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
-            return Delegates.dynop<UnaryOp<Vector128<T>>>(idTarget, wrapped, target);
+            return Delegates.dynamic<UnaryOp<Vector128<T>>>(idTarget, wrapped, target);
         }
 
         public static DynamicDelegate<UnaryOp<Vector256<T>>> EmbedVUnaryOpImm<T>(Vec256Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
@@ -53,7 +53,7 @@ namespace Z0
             var tOperand = typeof(Vector256<T>);                        
             var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
-            return Delegates.dynop<UnaryOp<Vector256<T>>>(idTarget, wrapped, target);
+            return Delegates.dynamic<UnaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }
     }
 }

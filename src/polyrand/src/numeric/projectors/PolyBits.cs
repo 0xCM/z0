@@ -13,7 +13,7 @@ namespace Z0
         /// Produces an interminable stream of random bits
         /// </summary>
         /// <param name="random">The random source</param>
-        public static IEnumerable<bit> BitStream(this IPolyrand random)
+        public static IEnumerable<bit> BitStream32(this IPolyrand random)
         {
             const int w = 64;
             while(true)

@@ -92,7 +92,7 @@ namespace Z0.Asm
         void check_vbsll_imm(W128 w, StreamWriter dst)
         {   const byte imm8 = 9;
 
-            var dynamics = MemberDynamic.Service;
+            var dynamics = FunctionDynamic.Service;
             var name = nameof(gvec.vbsll);
             var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(K.v128).Single();
             var id = Z0.Identity.identify(src);
@@ -107,7 +107,7 @@ namespace Z0.Asm
         void check_vbsll_imm(W256 w, StreamWriter dst)
         {   const byte imm8 = 4;
 
-            var dynamics = MemberDynamic.Service;
+            var dynamics = FunctionDynamic.Service;
             var name = nameof(dvec.vbsll);
             var vKind = K.vk256<uint>();
             var src = typeof(dvec).DeclaredMethods().WithName(name).OfKind(vKind).Single();

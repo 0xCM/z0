@@ -67,7 +67,7 @@ namespace Z0
             Trace($"{xMethod.Name} {xRef} {xCil.FormatHexBytes()}");
 
             
-            var xPtr = MemberJit.Service.Jit(xMethod);
+            //var xPtr = MemberJit.Service.Jit(xMethod);
 
         }
 

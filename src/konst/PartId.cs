@@ -18,7 +18,7 @@ public enum PartId : ulong
     
     VBits = 101, 
     
-    BitSpan = 102, 
+    BitSpans = 102, 
     
     BitString = 103, 
     

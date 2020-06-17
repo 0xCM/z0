@@ -32,34 +32,15 @@ namespace Z0
         public void bitstack_basecase()
         {
             var stack = BitStack.Create(0b101011);
-            Claim.require(stack.Pop());
-            Claim.require(stack.Pop());
-            Claim.nea(stack.Pop());
-            Claim.require(stack.Pop());
-            Claim.nea(stack.Pop());
-            Claim.require(stack.Pop());            
-            stack.Push(bit.On);
-            Claim.require(stack.Pop());
+            Claim.yea(stack.Pop() != 0);
+            Claim.yea(stack.Pop() != 0);
+            Claim.yea(stack.Pop() == 0);
+            Claim.yea(stack.Pop() != 0);
+            Claim.yea(stack.Pop() == 0);
+            Claim.yea(stack.Pop() != 0);            
+            stack.Push(Bit.On);
+            Claim.yea(stack.Pop() != 0);
         }
-
-        // public void bitstack()
-        // {
-        //     for(var i=0; i< RepCount; i++)
-        //     {
-        //         var bits = Random.BitString(Random.Next<int>(2,50));
-        //         var stack = MicroBuffers.bitstack();
-        //         for(var j = 0; j < bits.Length; j++)   
-        //             stack.Push(bits[j]);
-                
-        //         var rbits = bits.Reverse();
-        //         for(var j=0; j< bits.Length; j++)
-        //         {
-        //             var actual = stack.Pop();
-        //             var expect = rbits[j];
-        //             Claim.eq(actual,expect);
-        //         }
-        //     }
-        // }
 
         public void ringbuffer_32()
         {

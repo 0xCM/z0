@@ -11,6 +11,20 @@ namespace Z0
 
     public readonly ref struct BufferSeq
     {
+        readonly BufferAllocation Allocation;
+
+        readonly Span<byte> View;
+
+        readonly Span<BufferToken> Tokens;
+
+        readonly byte BufferCount;
+
+        readonly int BufferSize;
+
+        readonly int TotalSize;
+
+        readonly bool OwnsBuffer;
+
         /// <summary>
         /// Creates a buffer sequence that owns the underlying memory allocation and releases
         /// it upon disposal
@@ -33,20 +47,6 @@ namespace Z0
             return buffers;
         }
 
-        readonly BufferAllocation Allocation;
-
-        readonly Span<byte> View;
-
-        readonly Span<BufferToken> Tokens;
-
-        readonly byte BufferCount;
-
-        readonly int BufferSize;
-
-        readonly int TotalSize;
-
-        readonly bool OwnsBuffer;
-
         unsafe BufferSeq(int size, byte count, bool owns = true)
         {
             OwnsBuffer = owns;
@@ -55,7 +55,7 @@ namespace Z0
             TotalSize = BufferCount*BufferSize;
             Allocation = Buffers.native(TotalSize);
             View = new Span<byte>(Allocation.Handle.ToPointer(), TotalSize);
-            Tokens = BufferToken.Tokenize(Allocation.Handle, BufferSize, BufferCount);
+            Tokens = Buffers.tokenize(Allocation.Handle, BufferSize, BufferCount);
         }
 
         /// <summary>

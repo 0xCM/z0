@@ -18,8 +18,8 @@ namespace Z0
         {
             const int block = 2;
             var dst = char4();
-            memory.copy(in first(in leads), ref head(ref dst), block);
-            memory.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
+            Copier.copy(in first(in leads), ref head(ref dst), block);
+            Copier.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
             return dst;
         }
 
@@ -28,8 +28,8 @@ namespace Z0
         {
             const int block = 4;
             var dst = char8();
-            memory.copy(in first(in leads), ref head(ref dst), block);
-            memory.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
+            Copier.copy(in first(in leads), ref head(ref dst), block);
+            Copier.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
             return dst;
         }
 
@@ -38,8 +38,8 @@ namespace Z0
         {
             const int block = 8;
             var dst = char16();
-            memory.copy(in first(in leads), ref head(ref dst), block);
-            memory.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
+            Copier.copy(in first(in leads), ref head(ref dst), block);
+            Copier.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
             return dst;
         }
 
@@ -48,8 +48,8 @@ namespace Z0
         public static ref CharStack32 concat(in CharStack16 leads, in CharStack16 follows, ref CharStack32 dst)
         {
             const int block = 16;
-            memory.copy(in first(in leads), ref head(ref dst), block);
-            memory.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
+            Copier.copy(in first(in leads), ref head(ref dst), block);
+            Copier.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
             return ref dst;
         }
 
@@ -65,8 +65,8 @@ namespace Z0
         public static ref CharStack64 concat(in CharStack32 leads, in CharStack32 follows, ref CharStack64 dst)
         {
             const int block = 32;
-            memory.copy(in first(in leads), ref head(ref dst), block);
-            memory.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
+            Copier.copy(in first(in leads), ref head(ref dst), block);
+            Copier.copy(in first(in follows), ref seek(ref head(ref dst), block), block);            
             return ref dst;
         }
 

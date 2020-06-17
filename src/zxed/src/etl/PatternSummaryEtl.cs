@@ -82,7 +82,7 @@ namespace Z0.Xed
             {
                 var part = src.Parts[i];
                 if(parser.HasPreSpec(part))
-                    Seeker.seek8(ref dst, pos++) = parser.ParseByte(part);
+                    refs.seek8(ref dst, pos++) = parser.ParseByte(part);
             }
 
             return ByteReader.ReadAll(dst).Slice(0, pos);            
