@@ -2,17 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using System;
+[assembly: PartId(PartId.Models)]
 
-[AttributeUsage(AttributeTargets.Assembly)]
-public class PartIdAttribute : Attribute
-{    
-    public PartIdAttribute(object id)
+namespace Z0.Parts
+{        
+    public sealed class Models : Part<Models>
     {
-        Id = (PartId)id;
-    }
 
-    public PartId Id {get;}
+    }    
 }
-
 

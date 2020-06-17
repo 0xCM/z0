@@ -14,17 +14,9 @@ namespace Z0
     using static Konst;
     using static Memories;
 
+
     readonly struct Evaluator
-    {
-        public static MemRef[] MethodLocations(Type src)
-        {
-            //var locations = src.DeclaredMethods().Select(m =>  (MemoryAddress)MemberJit.Service.Jit(m));
-
-
-            return default;
-            
-        }
-
+    {        
         readonly struct Mul8x8 : IBinaryOp<byte>
         {
             public static Mul8x8 F => default;
@@ -69,5 +61,4 @@ namespace Z0
             return (BinaryOp<byte>)FixedDelegate.Define(id, dst, method, method.CreateDelegate(tFunc));
         }
     }
-
 }

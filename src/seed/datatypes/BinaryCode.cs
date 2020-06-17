@@ -15,18 +15,6 @@ namespace Z0
     /// </summary>
     public readonly struct BinaryCode : IEncoded<BinaryCode,byte[]>
     {
-        public static BinaryCode FromTrimmed(ReadOnlySpan<byte> src)
-        {
-            var length = src.Length;
-            for(var i= length - 1; i>=0; i--)
-            {
-                ref readonly var x = ref Control.skip(src,i);
-                if(x != 0)
-                    return new BinaryCode(src.Slice(0,length).ToArray());
-            }
-            return BinaryCode.Empty;
-        }
-
         /// <summary>
         /// The encoded bytes
         /// </summary>
@@ -44,12 +32,12 @@ namespace Z0
         /// The canonical zero
         /// </summary>
         public static BinaryCode Empty 
-            => new BinaryCode(Control.array<byte>());
+            => new BinaryCode(Array.Empty<byte>());
 
         [MethodImpl(Inline)]
         public BinaryCode(byte[] bytes)
         {
-            Encoded = Demands.insist(bytes);
+            Encoded = Control.insist(bytes);
         }
 
         /// <summary>

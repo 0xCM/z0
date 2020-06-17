@@ -20,6 +20,6 @@ namespace Z0
         /// <param name="src">The executable code</param>
         [MethodImpl(Inline), Op]
         public static unsafe void liberate(Span<byte> src)
-            => Buffers.Liberate(src);
+            => Buffers.Liberate(src);        
     }
 }

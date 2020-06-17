@@ -10,6 +10,15 @@ namespace Z0
 
     using static Konst;
 
+    public interface IResourceProvider
+    {
+        IEnumerable<BinaryResource> Resources {get;}
+
+        [MethodImpl(Inline)]
+        IResourceIndex CreateIndex()
+            => ResourceIndex.Create(this);        
+    }
+
     public readonly struct ResourceIndex : IResourceIndex
     {
         Dictionary<ulong,BinaryResource> Index {get;}

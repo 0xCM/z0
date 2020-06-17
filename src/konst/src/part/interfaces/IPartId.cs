@@ -9,15 +9,15 @@ namespace Z0
     public interface IPartId : ITextual
     {
         /// <summary>
-        /// The part identifier literal value
+        /// The part identifier
         /// </summary>
         PartId Id {get;}
-
     }
 
     public interface IPartId<P> : IPartId, ITypedLiteral<PartId>, IEquatable<P>
         where P : IPartId, new()
     {
-        PartId ITypedLiteral<PartId>.Class => Id;
+        PartId ITypedLiteral<PartId>.Class 
+            => Id;
     }
 }

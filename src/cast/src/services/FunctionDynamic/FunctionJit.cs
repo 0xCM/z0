@@ -16,12 +16,19 @@ namespace Z0
         public static FunctionJit Service => default;
 
         [MethodImpl(Inline)]
-        public static LocatedMethod jit(MethodInfo src)
+        public static LocatedMethod jit(MethodInfo src, int? size = null)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
             var location = (MemoryAddress)src.MethodHandle.GetFunctionPointer();
-            return (src,location);            
+            return (src, location, size);            
         }
+
+        /// <summary>
+        /// Jits the method declared by a specified type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static LocatedMethod[] jit(Type src)
+            => src.DeclaredMethods().Select(m => FunctionJit.jit(m, FunctionInfo.size(m)));
 
         [MethodImpl(Inline)]
         public static IntPtr jit(Delegate src)

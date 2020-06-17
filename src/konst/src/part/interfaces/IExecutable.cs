@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
-
-    public interface IExecutable<A> : IService
+    public interface IExecutable<A>
     {
         void Execute(params A[] args);
     }
@@ -21,5 +17,4 @@ namespace Z0
     {
 
     }
-
 }

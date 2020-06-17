@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Models)" />
-    <ProjectReference Include="$(Features)" />
   </ItemGroup>
 
 </Project>

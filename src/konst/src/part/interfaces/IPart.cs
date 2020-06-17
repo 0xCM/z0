@@ -20,13 +20,19 @@ namespace Z0
         string Name {get;}        
 
         /// <summary>
-        /// The resource provider defined by the part
+        /// The part identifier, known from the assembly
         /// </summary>
-        IResourceProvider ResourceProvider {get;}
+        PartId IPartId.Id 
+            => Part.id(Owner);
     }
 
-    public interface IPart<P> : IPart, IEquatable<P>
+    public interface IPart<P> : IPart, IPartId<P>, IEquatable<P>
         where P : IPart<P>, new()   
     {
+        /// <summary>
+        /// The assembly, known from the reifying type
+        /// </summary>
+        Assembly IPart.Owner
+            => typeof(P).Assembly;               
     }
 }

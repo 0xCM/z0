@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
     
     using static Konst;
 
@@ -18,9 +19,13 @@ namespace Z0
         /// Specifies a number of bytes
         /// </summary>
         public readonly int Count;
-
+        
         [MethodImpl(Inline)]
         public static ByteSize Define(int count)
+            => new ByteSize(count);
+
+        [MethodImpl(Inline)]
+        public static ByteSize Define(uint count)
             => new ByteSize(count);
 
         [MethodImpl(Inline)]
@@ -69,7 +74,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ByteSize(int count)
-            => Count = count;
+            => Count = (int) ((uint)count);
+
+        [MethodImpl(Inline)]
+        public ByteSize(uint count)
+            => Count = (int)count;
 
         [MethodImpl(Inline)]
         public ulong ToBits()
@@ -86,5 +95,26 @@ namespace Z0
     
         public override bool Equals(object obj)
             => obj is ByteSize ? Equals((ByteSize)obj) : false;
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Count == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Count != 0;
+        }
+
+        public bool IsNonZero
+        {
+            [MethodImpl(Inline)]
+            get => Count != 0;
+        }
+
+        public static ByteSize Empty 
+            => Define(0);
     }
 }

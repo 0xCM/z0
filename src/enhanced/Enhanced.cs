@@ -4,13 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFunctionDynamic : 
-        IFunctionHandle, 
-        IFunctionCil, 
-        IFunctionPointer, 
-        IFunctionJit,
-        IFunctionInfo
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public class Enhanced
     {
 
     }
+
+    public static partial class XTend
+    {
+
+    }    
 }

@@ -23,14 +23,23 @@ namespace Z0
         /// Retrieves the part identifier, if any, of the entry assembly
         /// </summary>
         public static PartId ExecutingPart        
-            => Assembly.GetEntryAssembly().Id();                
+            => id(Assembly.GetEntryAssembly());
+        
+        public static PartId CallingPart
+            => id(Assembly.GetCallingAssembly());
 
         /// <summary>
         /// Retrieves the part identifier, if any, of a specified assembly
         /// </summary>
         /// <param name="src">The source assembly</param>
-        [MethodImpl(Inline)]
         public static PartId id(Assembly src)
-            =>  src.GetTag<PartIdAttribute>()?.Id ?? PartId.None;     
+        {
+            if(Attribute.IsDefined(src, typeof(PartIdAttribute)))
+            {
+                var attrib = (PartIdAttribute)Attribute.GetCustomAttribute(src, typeof(PartIdAttribute));
+                return attrib.Id;
+            }
+            else return PartId.None;     
+        }
     }
 }

@@ -179,9 +179,8 @@ namespace Z0.Asm
 
         void Process(in BinaryCode code, Instruction[] asm)        
         {
-            var data = code.Data;
-            var bytes = data.ToReadOnlySpan();
-
+            var bytes = Control.span(code.Data);
+            
             ushort offset = 0;
 
             for(var i=0; i<asm.Length; i++)    
@@ -199,9 +198,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         
-        void Process(Address16 localOffset, ReadOnlySpan<byte> encoded, in Instruction asm)
+        void Process(Address16 localOffset, Span<byte> encoded, in Instruction asm)
         {
             var mnemonic = asm.Mnemonic;
+
             if(mnemonic != 0)
             {
                 var record = new CommandInfo(
@@ -211,7 +211,7 @@ namespace Z0.Asm
                     GlobalOffset: NextOffset,
                     Mnemonic: mnemonic.ToString().ToUpper(),
                     OpCode: asm.InstructionCode.OpCode.Replace("o32 ", string.Empty),
-                    Encoded: BinaryCode.FromTrimmed(encoded),
+                    Encoded: BinaryCode.Define(encoded.TrimEnd().ToArray()),
                     InstructionFormat: asm.FormattedInstruction,
                     InstructionCode: asm.InstructionCode.Expression,
                     CpuId: text.embrace(asm.CpuidFeatures.Select(x => x.ToString()).Concat(",")),

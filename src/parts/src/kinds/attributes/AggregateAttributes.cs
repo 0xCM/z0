@@ -15,7 +15,5 @@ namespace Z0
 
     public sealed class AggMaxAttribute : A { public AggMaxAttribute() : base(K.AggMax) {} }
 
-    public sealed class AggMinAttribute : A { public AggMinAttribute() : base(K.AggMin) {} }
-
-    
+    public sealed class AggMinAttribute : A { public AggMinAttribute() : base(K.AggMin) {} }    
 }

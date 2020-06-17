@@ -5,17 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Security;
-    using System.Reflection.Emit;
-    using System.Runtime.InteropServices;
-
-    using static Konst;
-    using static Memories;
-
     
-    readonly struct Slots
+    readonly struct CalcSlots
     {
         [Size(20)]
         public static byte add(byte x, byte y)

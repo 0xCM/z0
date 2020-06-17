@@ -10,12 +10,33 @@ using System;
 public enum PartId : ulong
 {
     None = 0,
+
+    Konst = 1,
+
+    Models = 2,
+
+    Part = 3,
+
+    // ~ 50
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Enhanced = 50,
+
+    Time = 60, 
+
+    Collective = 61, 
     
+    Reflective = 62, 
+    
+    Canonical = 63, 
+    
+    Cast = 64, 
+
     // ~ 100
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     BitVectors = 100, 
-    
+
     VBits = 101, 
     
     BitSpans = 102, 
@@ -74,7 +95,8 @@ public enum PartId : ulong
 
     Artistry = 129,
 
-    Spans = 2022,
+
+    Spans = 131,
     
     IdentityTest = Identity | Test,
 
@@ -200,11 +222,9 @@ public enum PartId : ulong
     VSvcTest = VSvc | Test,
 
 
-
     // ~ 2000
     // ~ -------------------------------------------------------------------------------
 
-    Time = 2001, 
     
     Graphs = 2002,
     
@@ -212,13 +232,6 @@ public enum PartId : ulong
     
     Textual = 2004,     
     
-    Collective = 2005, 
-    
-    Reflective = 2006, 
-    
-    Canonical = 2007, 
-    
-    Cast = 2008, 
     
     Memories = 2009,  
     
@@ -246,7 +259,6 @@ public enum PartId : ulong
             
     Contained = 2021,
 
-
     Validate = 2023,
 
     Validity = 2024,
@@ -256,10 +268,6 @@ public enum PartId : ulong
     Typed = 2026, 
 
     Seed = 2027,     
-
-    Configure = 2028,
-
-    Monadic = 2029,
 
     ResV = 2030,
 
@@ -294,7 +302,6 @@ public enum PartId : ulong
     Lib = App << 1,
 }
 
-
 /// <summary>
 /// Defines identifiers for external library dependencies, probably native
 /// </summary>
@@ -313,4 +320,15 @@ public enum ExternId : ulong
     Vml = 5,
 
     Vsl = 6,
+}
+
+[AttributeUsage(AttributeTargets.Assembly)]
+public class PartIdAttribute : Attribute
+{    
+    public PartIdAttribute(object id)
+    {
+        Id = (PartId)id;
+    }
+
+    public PartId Id {get;}
 }

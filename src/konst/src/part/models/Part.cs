@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    
+        
     public abstract class Part<P> : IPart<P> 
         where P : Part<P>, IPart<P>, new()
     {                
@@ -24,9 +24,6 @@ namespace Z0
         public string Name {get;}
 
         public PartId Id {get;}
-
-        public virtual IResourceProvider ResourceProvider 
-            => default(ProvidedResources);
 
         protected Part()
         {
