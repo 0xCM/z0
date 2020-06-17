@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Describes/models a literal text resource with an enum-predicated identity
@@ -38,5 +37,11 @@ namespace Z0
             Location = location;
             Content = value;
         }
+
+        ulong ITextResource.Location 
+            => Location;
+
+        ulong ITextResource.Identifier 
+            => Enums.scalar<E,ulong>(Identifier);
     }
 }

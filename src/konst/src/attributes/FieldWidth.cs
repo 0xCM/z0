@@ -19,9 +19,9 @@ namespace Z0
         public FieldWidthAttribute(object width)
         {
 
-            Width = BoxedNumber.From(width);
+            Width = width;
         }
 
-        public BoxedNumber Width {get;}
+        public object Width {get;}
     }
 }

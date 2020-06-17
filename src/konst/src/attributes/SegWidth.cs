@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public class SegWidthAttribute : Attribute
     {
         public SegWidthAttribute(string description)
         {
-            this.Description = (string)description;
+            Description = description;
         }
 
         public string Description {get;}            

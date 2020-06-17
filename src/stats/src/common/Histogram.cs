@@ -130,7 +130,7 @@ namespace Z0
         {
             var buckets = Spans.alloc<Bin<T>>(Partitions.Length - 1);
             for(var i = 1; i< Partitions.Length; i++)
-                buckets[i-1] = Bin.Define(PartitionDomain(i), BucketSize(i));
+                buckets[i-1] = Bin.define(PartitionDomain(i), BucketSize(i));
             return buckets;
         }                
     }

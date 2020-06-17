@@ -30,6 +30,9 @@ namespace Z0
         /// </summary>
         public string Content {get;}
 
+        ulong ITextResource.Location 
+            => Location;
+
         [MethodImpl(Inline)]
         public static TextResource Define(ulong id, MemoryAddress location, string value)
             => new TextResource(id,location,value);

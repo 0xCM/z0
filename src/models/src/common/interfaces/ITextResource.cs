@@ -10,15 +10,12 @@ namespace Z0
     {
         ulong Identifier {get;}
 
-        MemoryAddress Location {get;}        
+        ulong Location {get;}        
     }
 
     public interface ITextResource<E> : ITextResource
         where E : unmanaged, Enum
     {
-        new E Identifier {get;}
-
-        ulong ITextResource.Identifier 
-            => Enums.scalar<E,ulong>(Identifier);
+        new E Identifier {get;}        
     }
 }

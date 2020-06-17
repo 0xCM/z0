@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Konst;
 
     public class FieldSegAttribute : BinaryLiteralAttribute
     {
