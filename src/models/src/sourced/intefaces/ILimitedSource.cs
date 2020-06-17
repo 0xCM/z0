@@ -5,18 +5,18 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Security;
 
     /// <summary>
-    /// Characterizes an unlimited value emitter that produces one value at a time
+    /// Characterizes an emission service taht may run out of values to emit
     /// </summary>
-    /// <typeparam name="T">The production value type</typeparam>
+    /// <typeparam name="T">The emission value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IValueSource<T> : ISource<T>
-        where T : struct
+    public interface ILimitedSource<T> : ISource
     {
-
-    }    
+        /// <summary>
+        /// Emits the next source value, if any
+        /// </summary>
+        Option<T> Next();
+    }
 }

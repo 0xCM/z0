@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
     public interface IFacet
     {   
         string FacetName {get;}

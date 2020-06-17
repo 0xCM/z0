@@ -10,6 +10,13 @@ namespace Z0
     
     using static Konst;
 
+    public static partial class XTend
+    {
+        [MethodImpl(Inline)]
+        public static PartId Id(this Assembly src)
+            =>  Part.id(src);
+    }
+
     public readonly struct Part
     {
         /// <summary>

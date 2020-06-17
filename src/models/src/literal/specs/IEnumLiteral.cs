@@ -5,13 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    //using API = Enums;
-    
-    using NK = NumericKind;
     
     public interface IEnumLiteral : ITextual
     {
@@ -58,7 +51,6 @@ namespace Z0
         /// The literal value
         /// </summary>
         new E LiteralValue {get;}        
-
     }
 
     /// <summary>
@@ -73,12 +65,6 @@ namespace Z0
         /// <summary>
         /// The literal value presented as a numeric value
         /// </summary>
-        V NumericValue {get;}    
-
-        NumericKind IEnumLiteral.NumericKind 
-        {
-            [MethodImpl(Inline)]
-            get => NumericKinds.kind<V>();
-        }
+        V NumericValue {get;}            
     }
 }

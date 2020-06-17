@@ -72,6 +72,12 @@ namespace Z0
             get => Literal.Field;
         }
 
+        public NumericKind NumericKind 
+        {
+            [MethodImpl(Inline)]
+            get => NumericKinds.kind<V>();
+        }
+
         public string Description
         {
             [MethodImpl(Inline)]

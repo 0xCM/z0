@@ -15,7 +15,7 @@ namespace Z0
     {
         public LiteralAttribute(string description)
         {
-            this.Description = description;
+            Description = description;
         }
 
         public string Description {get;}        

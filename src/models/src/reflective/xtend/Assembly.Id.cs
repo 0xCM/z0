@@ -25,10 +25,6 @@ namespace Z0
             where A : Attribute
                 => (A)System.Attribute.GetCustomAttribute(a, typeof(A));
 
-        [MethodImpl(Inline)]
-        public static PartId Id(this Assembly src)
-            =>  Part.id(src);
-
         /// <summary>
         /// Gets the simple name of an assembly
         /// </summary>
