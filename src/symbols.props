@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
+    <Models>$(Src)models/z0.models.csproj</Models>
+    <Specs>$(Src)specs/z0.specs.csproj</Specs>
 
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
 

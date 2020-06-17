@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>    
-
     <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Models)" />
+    <ProjectReference Include="$(Specs)" />
     <ProjectReference Include="$(Parts)" />
-
   </ItemGroup>
 
 </Project>
