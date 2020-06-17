@@ -13,7 +13,7 @@ namespace Z0
     partial class gfp
     {
         [MethodImpl(Inline), Op, Closures(Floats)]
-        public static Sign signum<T>(T src)
+        public static SignKind signum<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

@@ -88,17 +88,6 @@ namespace Z0.Mkl
         static ref T head<T>(Span<T> src)
             =>  ref MemoryMarshal.GetReference<T>(src);
 
-        /// <summary>
-        /// Returns a reference to the location of the first span element
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        static ref T head<N,T>(NatSpan<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                =>  ref MemoryMarshal.GetReference<T>(src.Data);
-
         [MethodImpl(Inline)]   
         static int length<T>(RowVector256<T> lhs, RowVector256<T> rhs) 
             where T : unmanaged

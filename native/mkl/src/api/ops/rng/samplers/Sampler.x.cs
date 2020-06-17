@@ -31,7 +31,7 @@ namespace Z0.Mkl
                     sampler = rng.UniformBitsSampler<T>(UniformBitsSpec.From(spec));
                     break;
                 case DistributionKind.Bernoulli:
-                    sampler = rng.BernoulliSampler<T>(BernoulliSpec.From(spec));                    
+                    sampler = rng.BernoulliSampler<T>(DistributionSpec.bernoulli(spec));                    
                     break;
                 case DistributionKind.Gaussian:
                     sampler = rng.GaussianSampler<T>(GaussianSpec.From(spec));                    

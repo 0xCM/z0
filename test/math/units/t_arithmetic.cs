@@ -346,7 +346,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();
-                var expect = gmath.lt(x, zero) ? Sign.Neg : (gmath.gt(x, zero) ? Sign.Pos : Sign.None);
+                var expect = gmath.lt(x, zero) ? SignKind.Negative : (gmath.gt(x, zero) ? SignKind.Positive : SignKind.Neutral);
                 var actual = gmath.signum(x);
                 Claim.eq(expect,actual);
             }

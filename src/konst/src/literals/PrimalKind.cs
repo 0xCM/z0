@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Pow2Width;
-    using static Sign8;
+    using static Sign8Kind;
 
     using K = PrimalKindId;
     using I = PrimalKindField.SegIndex;

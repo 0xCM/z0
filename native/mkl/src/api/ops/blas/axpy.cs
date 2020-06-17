@@ -7,7 +7,6 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
  
     using static Konst;
-    using static Memories;
 
     partial class mkl
     {
@@ -23,7 +22,7 @@ namespace Z0.Mkl
             where N : unmanaged, ITypeNat
         {
             Y.CopyTo(ref Z);        
-            CBLAS.cblas_saxpy(nati<N>(), a, ref head(X), 1, ref head(Z), 1);
+            CBLAS.cblas_saxpy(Memories.nati<N>(), a, ref head(X), 1, ref head(Z), 1);
         }
 
         /// <summary>

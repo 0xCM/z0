@@ -36,7 +36,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W8 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W8 w, SignKind sign = SignKind.Positive)
             where T :unmanaged, IFixed
         {
             if(sign.IsNonNegative())
@@ -57,7 +57,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W16 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W16 w, SignKind sign = SignKind.Positive)
             where T :unmanaged, IFixed
         {
             if(sign.IsNonNegative())
@@ -78,7 +78,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W32 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W32 w, SignKind sign = SignKind.Positive)
             where T :unmanaged, IFixed
         {
             if(sign.IsNonNegative())
@@ -99,7 +99,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W64 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W64 w, SignKind sign = SignKind.Positive)
             where T :unmanaged, IFixed
         {
             if(sign.IsNonNegative())
@@ -120,7 +120,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W128 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W128 w, SignKind sign = SignKind.Positive)
             where T :unmanaged, IFixed
         {
             while(true)
@@ -130,7 +130,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W256 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W256 w, SignKind sign = SignKind.Positive)
             where T :unmanaged, IFixed
         {
             while(true)
@@ -140,7 +140,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W512 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W512 w, SignKind sign = SignKind.Positive)
             where T :unmanaged, IFixed
         {
             while(true)

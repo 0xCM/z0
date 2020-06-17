@@ -31,8 +31,6 @@ namespace Z0
 
         public static N N => default;
 
-        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
-
         internal const byte MinVal = 0;
 
         internal const byte MaxVal = 7;

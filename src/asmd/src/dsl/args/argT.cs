@@ -15,14 +15,14 @@ namespace Z0.Asm.Dsl
     {
         public T Value {get;}
 
-        public Sign Sign {get;}
+        public SignKind Sign {get;}
 
         public DataWidth Width {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg(T value, Sign sign, OperandKind kind, DataWidth width)
+        public arg(T value, SignKind sign, OperandKind kind, DataWidth width)
         {
             Value = value;
             Sign = sign;

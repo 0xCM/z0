@@ -67,8 +67,8 @@ namespace Z0
             => (PrimalKindId)SegData(f, Field.KindId);
 
         [MethodImpl(Inline), Op]
-        public static Sign8 Sign(PrimalKindBitField f)
-            => (Sign8)SegData(f, Field.Sign);
+        public static Sign8Kind Sign(PrimalKindBitField f)
+            => (Sign8Kind)SegData(f, Field.Sign);
 
         static ReadOnlySpan<byte> FieldMasks 
             => new byte[3]{(byte)SegMask.Width, (byte)SegMask.KindId, (byte)SegMask.Sign};

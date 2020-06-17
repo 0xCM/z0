@@ -6,7 +6,6 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Konst;
     using static Memories;
 
     partial class mkl

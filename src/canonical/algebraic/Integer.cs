@@ -40,7 +40,7 @@ namespace Z0
         /// <summary>
         /// Determines the sign of the supplied value
         /// </summary>
-        Sign Sign(T x);
+        SignKind Sign(T x);
     }
 
     /// <summary>

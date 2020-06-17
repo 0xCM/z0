@@ -19,9 +19,7 @@ namespace Z0
     /// Represents the value of a type-level duet and thus has domain {00,01,10,11}
     /// </summary>
     public struct duet : IEquatable<analog>, ITextual
-    {
-        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
-    
+    {    
         internal byte data;
 
         public static analog MinValue => MinVal;

@@ -37,7 +37,7 @@ namespace Z0.Mkl
             var lVec = A.Replicate();
             var rVec = A.Replicate();             
                         
-            exitcode = LAPACK.LAPACKE_dgeev(RowMajor, v, v, n, ref head(A), lda, ref head(wr), ref head(wi), 
+            exitcode = LAPACK.LAPACKE_dgeev(RowMajor, v, v, n, ref head(A), lda, ref Spans.head(wr), ref Spans.head(wi), 
                 ref head(lVec), ldvl, ref head(rVec), ldvr);
 
             if(exitcode != 0)

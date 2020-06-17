@@ -8,7 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Defines rng stream factor methods
@@ -22,7 +21,7 @@ namespace Z0.Mkl
         /// <param name="seed">The initial state of the generator, if applicable</param>
         /// <param name="index">The selected substream, if applicable</param>
         [MethodImpl(Inline)]    
-        public static MklRng stream(BRNG generator, uint seed = 0, int index = 0)
+        public static MklRng stream(Brng generator, uint seed = 0, int index = 0)
             => MklRng.Define(generator, seed, index);
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace Z0.Mkl
         /// <param name="seed">The initial generator state</param>
         [MethodImpl(Inline)]    
         public static MklRng mrg32K31(uint seed)
-            => stream(BRNG.MRG32K3A, seed);
+            => stream(Brng.MRG32K3A, seed);
 
         /// <summary>
         /// Creates a stream predicated on the VSL_BRNG_MCG31, A 31-bit multiplicative congruential generator.
@@ -39,7 +38,7 @@ namespace Z0.Mkl
         /// <param name="seed">A seed</param>
         [MethodImpl(Inline)]    
         public static MklRng mcg31(uint seed)
-            => stream(BRNG.MCG31, seed);
+            => stream(Brng.MCG31, seed);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_MCG59, A 59-bit multiplicative congruential generator.
@@ -47,14 +46,14 @@ namespace Z0.Mkl
         /// <param name="seed">The initial generator state</param>
         [MethodImpl(Inline)]    
         public static MklRng mcg59(uint seed)
-            => stream(BRNG.MCG59, seed);
+            => stream(Brng.MCG59, seed);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_NONDETERM, A non-deterministic random number generator.
         /// </summary>
         [MethodImpl(Inline)]    
         public static MklRng entropy()
-            => stream(BRNG.NONDETERM);
+            => stream(Brng.NONDETERM);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_R250, A generalized feedback shift register generator.
@@ -62,7 +61,7 @@ namespace Z0.Mkl
         /// <param name="seed">The initial generator state</param>
         [MethodImpl(Inline)]    
         public static MklRng r250(uint seed)
-            => stream(BRNG.R250, seed);
+            => stream(Brng.R250, seed);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_MT19937, A Mersenne Twister pseudorandom number generator.
@@ -70,7 +69,7 @@ namespace Z0.Mkl
         /// <param name="seed">The initial generator state</param>
         [MethodImpl(Inline)]    
         public static MklRng mt19937(uint seed)
-            => stream(BRNG.MT19937, seed);
+            => stream(Brng.MT19937, seed);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_SFMT19937, A SIMD-oriented Fast Mersenne Twister pseudorandom number generator.
@@ -78,7 +77,7 @@ namespace Z0.Mkl
         /// <param name="seed">The initial generator state</param>
         [MethodImpl(Inline)]    
         public static MklRng sfmt19937(uint seed)
-            => stream(BRNG.SFMT19937, seed);
+            => stream(Brng.SFMT19937, seed);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_WH, A set of 273 Wichmann-Hill combined multiplicative congruential generators.
@@ -87,7 +86,7 @@ namespace Z0.Mkl
         /// <param name="index">A value between 0 and 272 that identifies the desired generator</param>
         [MethodImpl(Inline)]    
         public static MklRng wh(uint seed, int index = 0)
-            => stream(BRNG.WH, seed, index);
+            => stream(Brng.WH, seed, index);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_MT2203, A set of 6024 Mersenne Twister pseudorandom number generators
@@ -96,7 +95,7 @@ namespace Z0.Mkl
         /// <param name="index">A value between 0 and 6023 that identifies the desired generator</param>
         [MethodImpl(Inline)]    
         public static MklRng mt2203(uint seed, int index = 0)
-            => stream(BRNG.MT2203, seed, index);
+            => stream(Brng.MT2203, seed, index);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_PHILOX4X32X10, A Philox4x32-10 counter-based pseudorandom number generator.
@@ -104,7 +103,7 @@ namespace Z0.Mkl
         /// <param name="seed">The initial generator state</param>
         [MethodImpl(Inline)]    
         public static MklRng philox(uint seed)
-            => stream(BRNG.PHILOX4X32X10, seed);
+            => stream(Brng.PHILOX4X32X10, seed);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_ARS5, an ARS-5 counter-based pseudorandom number generator that uses instructions from the AES-NI set
@@ -112,7 +111,7 @@ namespace Z0.Mkl
         /// <param name="seed">The initial generator state</param>
         [MethodImpl(Inline)]    
         public static MklRng ars5(uint seed)
-            => stream(BRNG.ARS5, seed);
+            => stream(Brng.ARS5, seed);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_SOBOL, A 32-bit Gray code-based generator producing low-discrepancy sequences for dimensions 1 ≤ s ≤ 40
@@ -120,32 +119,32 @@ namespace Z0.Mkl
         /// <param name="dimension">The selected dimension in the inclusive integral range [1,40]</param>
         [MethodImpl(Inline)]    
         public static MklRng sobol(uint dimension)
-            => stream(BRNG.SOBOL, dimension);
+            => stream(Brng.SOBOL, dimension);
 
         /// <summary>
         /// Creates a stream predicated on VSL_BRNG_NIEDERR, A 32-bit Gray code-based generator producing low-discrepancy sequences for dimensions 1 ≤ s ≤ 318
         /// </summary>
         /// <param name="dimension">The selected dimension in the inclusive integral range [1,318]</param>
         public static MklRng niederr(uint dimension)
-            => stream(BRNG.NIEDERR, dimension);
+            => stream(Brng.NIEDERR, dimension);
 
         /// <summary>
         /// Describes stream partitioning capabilies of an identifed generator
         /// </summary>
         /// <param name="sub">Indicates whether stream independed substream creation (Leapfrogging) is suppored</param>
         /// <param name="skip">Indicates whether elements can be skipped</param>
-        public static (bool sub, bool skip) capabilities(BRNG brng)
+        public static (bool sub, bool skip) capabilities(Brng brng)
             => brng switch {
-                    BRNG.MCG31 => (true,true),
-                    BRNG.MRG32K3A => (false,true),
-                    BRNG.MCG59 => (true,true),
-                    BRNG.WH => (true,true),
-                    BRNG.MT19937 => (false,true),
-                    BRNG.SFMT19937 => (false,true),
-                    BRNG.PHILOX4X32X10 => (false,true),
-                    BRNG.ARS5 => (false,true),
-                    BRNG.SOBOL => (true,true),
-                    BRNG.NIEDERR => (true,true),
+                    Brng.MCG31 => (true,true),
+                    Brng.MRG32K3A => (false,true),
+                    Brng.MCG59 => (true,true),
+                    Brng.WH => (true,true),
+                    Brng.MT19937 => (false,true),
+                    Brng.SFMT19937 => (false,true),
+                    Brng.PHILOX4X32X10 => (false,true),
+                    Brng.ARS5 => (false,true),
+                    Brng.SOBOL => (true,true),
+                    Brng.NIEDERR => (true,true),
                     _ => (false,false)
             };            
     }

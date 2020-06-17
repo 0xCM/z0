@@ -16,12 +16,12 @@ namespace Z0.Asm.Dsl
     {
         public Fixed32 Value {get;}
 
-        public Sign Sign {get;}
+        public SignKind Sign {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg32(Fixed32 value, Sign sign, OperandKind kind)
+        public arg32(Fixed32 value, SignKind sign, OperandKind kind)
         {
             Value = value;
             OpKind = kind;

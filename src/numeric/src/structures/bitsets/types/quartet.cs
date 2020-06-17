@@ -27,8 +27,6 @@ namespace Z0
 
         public static N N => default;
 
-        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
-
         public static analog Zero => 0;
 
         public static analog One => 1;

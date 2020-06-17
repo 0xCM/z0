@@ -8,7 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public static partial class mklx
     {
@@ -19,7 +18,7 @@ namespace Z0.Mkl
         /// <param name="seed">The initial state of the rng, if any</param>
         /// <param name="index">The stream index, if any</param>
         [MethodImpl(Inline)]
-        internal static VslStream NewStream(this BRNG brng, uint seed = 0, int index = 0)
+        internal static VslStream NewStream(this Brng brng, uint seed = 0, int index = 0)
         {
             IntPtr stream = IntPtr.Zero;
             VSL.vslNewStream(ref stream, brng + index, seed).ThrowOnError();
@@ -31,7 +30,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="stream">The source stream</param>
         [MethodImpl(Inline)]    
-        internal static BRNG Brng(this VslStream stream)
+        internal static Brng Brng(this VslStream stream)
             => VSL.vslGetStreamStateBrng(stream);
 
         /// <summary>
@@ -39,15 +38,15 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The mkl brng identifier</param>
         [MethodImpl(Inline)]    
-        internal static BRNG ToBrng(this RngKind src)
-            => (BRNG)src;
+        internal static Brng ToBrng(this RngKind src)
+            => (Brng)src;
 
         /// <summary>
         /// Gets the system rng classifier associated with a mkl brng
         /// </summary>
         /// <param name="src">The mkl brng identifier</param>
         [MethodImpl(Inline)]    
-        internal static RngKind ToRngKind(this BRNG src)
+        internal static RngKind ToRngKind(this Brng src)
             => (RngKind)src;
 
         /// <summary>

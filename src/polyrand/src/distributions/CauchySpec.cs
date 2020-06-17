@@ -17,6 +17,22 @@ namespace Z0
     public readonly struct CauchySpec<T> : IDistributionSpec<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// The distribution mean
+        /// </summary>
+        public readonly T Location;
+
+        /// <summary>
+        /// The distribution scale
+        /// </summary>
+        public readonly T Scale;
+
+        /// <summary>
+        /// Classifies the distribution spec
+        /// </summary>
+        public DistributionKind DistKind 
+            => DistributionKind.Cauchy;        
+
         [MethodImpl(Inline)]
         public static CauchySpec<T> Define(T loc, T scale)
             => new CauchySpec<T>(loc, scale);
@@ -32,26 +48,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public CauchySpec(T loc, T scale)
         {
-            this.Location = loc;
-            this.Scale = scale;
+            Location = loc;
+            Scale = scale;
         }
-
-        /// <summary>
-        /// The distribution mean
-        /// </summary>
-        public readonly T Location;
-
-        /// <summary>
-        /// The distribution scale
-        /// </summary>
-        public readonly T Scale;
-
-        /// <summary>
-        /// Classifies the distribution spec
-        /// </summary>
-        public DistributionKind DistKind 
-            => DistributionKind.Cauchy;
-
     }
-
 }

@@ -19,7 +19,7 @@ namespace Z0.Mkl
         /// <param name="brng">The generator upon which the stream is predicated</param>
         /// <param name="seed">The initial state of the generator</param>
         [DllImport(VslDll, CallingConvention=Cdecl, ExactSpelling=true)]
-        public static extern VslRngStatus vslNewStream(ref IntPtr stream, BRNG brng, uint seed);
+        public static extern VslRngStatus vslNewStream(ref IntPtr stream, Brng brng, uint seed);
 
         /// <summary>
         /// Deallocates a stream created via vslNewStream
@@ -29,10 +29,10 @@ namespace Z0.Mkl
         public static extern VslRngStatus vslDeleteStream(ref IntPtr stream);
 
         [DllImport(VslDll, CallingConvention=Cdecl, ExactSpelling=true)]
-        public static extern VslRngStatus vslNewStreamEx(ref IntPtr stream, BRNG brng, ref uint parameters);    
+        public static extern VslRngStatus vslNewStreamEx(ref IntPtr stream, Brng brng, ref uint parameters);    
 
         [DllImport(VslDll, CallingConvention=Cdecl, ExactSpelling=true)]
-        public static extern VslRngStatus vslNewStreamEx(ref IntPtr stream, BRNG brng, int argLen, ref uint args);
+        public static extern VslRngStatus vslNewStreamEx(ref IntPtr stream, Brng brng, int argLen, ref uint args);
        
         // Callback function: int iUpdateFunc(VSLStreamStatePtr stream, int* n, unsigned int ibuf[], int* nmin, int* nmax, int* idx );
         [DllImport(VslDll, CallingConvention=Cdecl, ExactSpelling=true)]
@@ -42,7 +42,7 @@ namespace Z0.Mkl
         public static extern VslRngStatus vslsNewAbstractStream(ref IntPtr stream , int bufferLen, ref float buffer, float min, float max, IntPtr callback);
 
         [DllImport(VslDll, CallingConvention=Cdecl, ExactSpelling=true)]
-        public static extern BRNG vslGetStreamStateBrng(IntPtr stream);
+        public static extern Brng vslGetStreamStateBrng(IntPtr stream);
 
         /// <summary>
         /// Selects a substream from the source stream

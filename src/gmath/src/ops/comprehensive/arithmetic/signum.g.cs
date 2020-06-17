@@ -18,12 +18,12 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Sign signum<T>(T a)
+        public static SignKind signum<T>(T a)
             where T : unmanaged
                 => signum_u(a);
 
         [MethodImpl(Inline)]
-        static Sign signum_u<T>(T a)
+        static SignKind signum_u<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -39,7 +39,7 @@ namespace Z0
        }           
 
         [MethodImpl(Inline)]
-        static Sign signum_i<T>(T a)
+        static SignKind signum_i<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

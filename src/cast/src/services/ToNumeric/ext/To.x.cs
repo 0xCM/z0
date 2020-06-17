@@ -11,8 +11,8 @@ namespace Z0
 
     partial class XTend
     {
-        public static bit IsNonNegative(this Sign src)
-            => src != Sign.Neg;    
+        public static bit IsNonNegative(this SignKind src)
+            => src != SignKind.Negative;    
 
         /// <summary>
         /// Convers a source value, which is hopefully a supported kind, to a target kind

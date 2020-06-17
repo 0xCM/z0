@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     partial struct AsmQuery : ISemanticQuery
     {
-
         [MethodImpl(Inline), Op]
         public bool IsCall(Instruction src)
             => src.Mnemonic == Mnemonic.Call;

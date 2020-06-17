@@ -24,6 +24,6 @@ namespace Z0
         /// <summary>
         /// Aligns the structure with a specified sign
         /// </summary>
-        F Resign(Sign sign);
+        F Resign(SignKind sign);
     }    
 }

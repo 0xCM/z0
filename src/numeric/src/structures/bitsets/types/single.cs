@@ -25,9 +25,7 @@ namespace Z0
 
         public static analog MaxValue => MaxVal;
 
-        public static N N => default;
-
-        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
+        public static N N => default;        
 
         public static analog Zero => 0;
 

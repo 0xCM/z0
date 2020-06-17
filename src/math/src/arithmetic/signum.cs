@@ -10,35 +10,35 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline), Op]
-        public static Sign signum(sbyte src)
+        public static SignKind signum(sbyte src)
             => signum((int)src);
 
         [MethodImpl(Inline), Op]
-        public static Sign signum(byte src)
-            => src != 0 ? Sign.Pos : Sign.Neg;
+        public static SignKind signum(byte src)
+            => src != 0 ? SignKind.Positive : SignKind.Negative;
 
         [MethodImpl(Inline), Op]
-        public static Sign signum(short src)
+        public static SignKind signum(short src)
             => signum((int)src);
 
         [MethodImpl(Inline), Op]
-        public static Sign signum(ushort src)
-            => src != 0 ? Sign.Pos : Sign.Neg;
+        public static SignKind signum(ushort src)
+            => src != 0 ? SignKind.Positive : SignKind.Negative;
 
         [MethodImpl(Inline), Op]
-        public static Sign signum(int src)
-            => (Sign)((src >> 31) | (int)(negate((uint)src) >> 31)); 
+        public static SignKind signum(int src)
+            => (SignKind)((src >> 31) | (int)(negate((uint)src) >> 31)); 
 
         [MethodImpl(Inline), Op]
-        public static Sign signum(uint src)
-            => src != 0 ? Sign.Pos : Sign.Neg;
+        public static SignKind signum(uint src)
+            => src != 0 ? SignKind.Positive : SignKind.Negative;
 
         [MethodImpl(Inline), Op]
-        public static Sign signum(long src)
-            => (Sign)((src >> 63) | (long)(negate((ulong)src) >> 63)); 
+        public static SignKind signum(long src)
+            => (SignKind)((src >> 63) | (long)(negate((ulong)src) >> 63)); 
 
         [MethodImpl(Inline), Op]
-        public static Sign signum(ulong src)
-            => src != 0 ? Sign.Pos : Sign.Neg;
+        public static SignKind signum(ulong src)
+            => src != 0 ? SignKind.Positive : SignKind.Negative;
     }
 }

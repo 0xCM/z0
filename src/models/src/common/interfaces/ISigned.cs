@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// The sign of the signable thing
         /// </summary>
-        Sign Sign {get;}
+        SignKind Sign {get;}
     }
     
     /// <summary>
