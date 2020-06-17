@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         public readonly double Success;
 
-        public DistKind DistKind 
-            => DistKind.Geometric;
+        public DistributionKind DistKind 
+            => DistributionKind.Geometric;
     }
 }

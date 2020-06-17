@@ -16,7 +16,7 @@ namespace Z0.Mkl
             var range = Interval.closed(-20f,20f);
             
             var src = Random.Array<float>(dim*obs, range);
-            var sample = Dataset.Load(src,dim);
+            var sample = Observations.Load(src,dim);
             var sorted = sample.RadixSort();
 
             for(var i = 0; i<obs; i++)

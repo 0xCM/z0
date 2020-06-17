@@ -7,7 +7,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Characterizes a fountain of generic points

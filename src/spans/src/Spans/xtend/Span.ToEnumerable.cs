@@ -12,9 +12,8 @@ namespace Z0
 
     partial class XTend
     {
-
         /// <summary>
-        /// Lifts the content of a span into a LINQ enumerable
+        /// Lifts span content into the LINQ monad
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
@@ -22,13 +21,12 @@ namespace Z0
             => src.ToArray();
             
         /// <summary>
-        /// Lifts the content of a span into a LINQ enumerable
+        /// Lifts span content into the LINQ monad
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static IEnumerable<T> ToEnumerable<T>(this Span<T> src)
-            => src.ReadOnly().ToEnumerable();   
-
+            => src.ToArray();
     }
 }

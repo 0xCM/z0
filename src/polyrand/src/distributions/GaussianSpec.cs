@@ -109,8 +109,8 @@ namespace Z0
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistKind DistKind 
-            => DistKind.Gaussian;
+        public DistributionKind DistKind 
+            => DistributionKind.Gaussian;
 
         [MethodImpl(Inline)]
         public GaussianSpec<float> ToFloat32()

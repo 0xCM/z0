@@ -23,7 +23,7 @@ namespace Z0
         public int BufferLength 
             => 0;
 
-        public DistKind DistKind 
+        public DistributionKind DistKind 
             => Spec.DistKind;
 
         protected Distribution(IPolyrand random, S Spec)

@@ -4,19 +4,32 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-        
+    /// <summary>
+    /// Characterizes a distribution specifier
+    /// </summary>
     public interface IDistributionSpec
     {
-        DistKind DistKind {get;}        
+        DistributionKind DistKind {get;}        
     }
 
     /// <summary>
-    /// Characterizes a distribution
+    /// Characterizes a T-parametric distribution specifier
     /// </summary>
     /// <typeparam name="T">The sample value type</typeparam>
     public interface IDistributionSpec<T> : IDistributionSpec
         where T : unmanaged
+    {
+        
+    }
+
+    /// <summary>
+    /// Characterizes a T-parametric distribution specifier reification
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    /// <typeparam name="T">The sample value type</typeparam>
+    public interface IDistributionSpec<F,T> : IDistributionSpec<T>
+        where T : unmanaged
+        where F : unmanaged, IDistributionSpec<F,T>
     {
         
     }

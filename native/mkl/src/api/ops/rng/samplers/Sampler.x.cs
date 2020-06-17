@@ -24,16 +24,16 @@ namespace Z0.Mkl
             var sampler = default(IRngSampler<T>);
             switch(spec.DistKind)
             {
-                case DistKind.Uniform:
-                    sampler = rng.UniformSampler<T>(UniformSpec.From(spec));
+                case DistributionKind.Uniform:
+                    sampler = rng.UniformSampler<T>(UniformSpec.from(spec));
                     break;
-                case DistKind.UniformBits:
+                case DistributionKind.UniformBits:
                     sampler = rng.UniformBitsSampler<T>(UniformBitsSpec.From(spec));
                     break;
-                case DistKind.Bernoulli:
+                case DistributionKind.Bernoulli:
                     sampler = rng.BernoulliSampler<T>(BernoulliSpec.From(spec));                    
                     break;
-                case DistKind.Gaussian:
+                case DistributionKind.Gaussian:
                     sampler = rng.GaussianSampler<T>(GaussianSpec.From(spec));                    
                     break;
                 default:
@@ -53,7 +53,7 @@ namespace Z0.Mkl
         public static IRngSampler<T> UniformSampler<T>(this MklRng rng, UniformSpec<T>? spec = null)
             where T : unmanaged
         {
-            var _spec = spec ?? UniformSpec.Define<T>(minval<T>(), maxval<T>());
+            var _spec = spec ?? UniformSpec.define<T>(minval<T>(), maxval<T>());
             var sampler = default(IRngSampler<T>);
             if(typeof(T) == typeof(int))
                 sampler = samplers.uniform(rng, _spec.ToInt32()) as IRngSampler<T>;

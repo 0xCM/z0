@@ -7,9 +7,6 @@ namespace Z0.Mkl
     using System;
     using System.Linq;
    
-    using static Seed;
-    using static Memories;
-
     public class t_vslinit : UnitTest<t_vslinit>
     {
         public void t_bernoulli()
@@ -47,8 +44,8 @@ namespace Z0.Mkl
             {
                 var stream = streams[i];
                 sample.uniform(stream, ufRange, bufferF64);
-                Dataset.Load(bufferF64,1).Extrema();
-                var max = Dataset.Load(bufferF64,1).Max()[0];
+                Observations.Load(bufferF64,1).Extrema();
+                var max = Observations.Load(bufferF64,1).Max()[0];
                 ClaimNumeric.lteq(max, ufRange.Right);
                 ClaimNumeric.neq(max,0);
 

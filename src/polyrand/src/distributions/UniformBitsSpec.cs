@@ -52,8 +52,8 @@ namespace Z0
          /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistKind DistKind 
-            => DistKind.UniformBits;
+        public DistributionKind DistKind 
+            => DistributionKind.UniformBits;
 
         [MethodImpl(Inline)]
         public UniformBitsSpec<uint> ToUInt32()

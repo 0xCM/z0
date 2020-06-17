@@ -43,7 +43,7 @@ namespace Z0
          /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistKind DistKind 
-            => DistKind.Exponential; 
+        public DistributionKind DistKind 
+            => DistributionKind.Exponential; 
     }
 }

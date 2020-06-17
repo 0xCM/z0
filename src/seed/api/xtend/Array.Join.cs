@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-
-    using static Seed;
     
     partial class XTend
     {
@@ -30,8 +28,5 @@ namespace Z0
 
         public static T[] SelectMany<S,T>(this S[][] src, Func<S,T> f)
             => src.Join().Select(f);
-
-
-
     }
 }

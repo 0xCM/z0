@@ -16,7 +16,7 @@ namespace Z0.Mkl
 
             var s1Range = Interval.closed(350.0, 1000.0);
             var s1 = Random.Array<double>(samplesize, s1Range);
-            var s1Max = Dataset.Load(s1).Max()[0];
+            var s1Max = Observations.Load(s1).Max()[0];
             ClaimNumeric.neq(s1Max,0.0);
 
             var zeroCount = s1.Count(x => x == 0);
@@ -27,7 +27,7 @@ namespace Z0.Mkl
         {
             var src = Random.Stream<double>().Take(16000).ToArray();
             var expect = src.Sum().Round(4);
-            var actual = Dataset.Load(src).Sum()[0].Round(4);
+            var actual = Observations.Load(src).Sum()[0].Round(4);
             Claim.require(gmath.within(expect,actual,.01));
         }
 
@@ -42,7 +42,7 @@ namespace Z0.Mkl
             var cycles = Pow2.T12;
             var samples = Pow2.T14;
             var src = NumericSpan.to<double>(Random.Span<long>(samples, Interval.closed(-2000L, 2000L)));
-            var ds = Dataset.Load(src);
+            var ds = Observations.Load(src);
             var dst = 0.0;
             var last = 0.0;
 
@@ -65,7 +65,7 @@ namespace Z0.Mkl
             var src = Random.Span<long>(Pow2.T14, Interval.closed(-2000L, 2000L));
             var expect = gspan.avg(src);
             var converted = NumericSpan.to<double>(src);
-            var actual = (long)Dataset.Load(converted).Mean()[0];
+            var actual = (long)Observations.Load(converted).Mean()[0];
             Claim.eq(expect,actual);
         }
     }

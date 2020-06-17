@@ -44,8 +44,7 @@ namespace Z0
     /// <remarks>See https://en.wikipedia.org/wiki/Bernoulli_distribution</remarks>
     public readonly struct BernoulliSpec<T> : IDistributionSpec<T>
         where T : unmanaged
-    {        
-        
+    {               
         /// <summary>
         /// Defines a Bernoulli distribution predicated on the probability of trial success
         /// </summary>
@@ -73,7 +72,7 @@ namespace Z0
         /// </summary>
         public readonly double Success;
 
-        public DistKind DistKind 
-            => DistKind.Bernoulli;
+        public DistributionKind DistKind 
+            => DistributionKind.Bernoulli;
     }
 }

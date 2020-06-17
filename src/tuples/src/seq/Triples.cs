@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Tuples;
+    using static Konst;
 
     public readonly ref struct Triples<T>
         where T : unmanaged

@@ -3,9 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System.Collections.Generic;
-    
+{    
     /// <summary>
     /// Characterizes source capable of producing an interminable sequence of pseudorandom bounded points 
     /// of any numeric type among: sbyte, byte, short, ushort, int, uint, long, ulong, float, double

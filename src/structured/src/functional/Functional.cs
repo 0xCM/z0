@@ -48,7 +48,7 @@ namespace Z0
         IEnumerable<MethodInfo> IFunctional.FactoryMethods
             => FactoryMethods;
 
-        Functional(Type factory, Type enclosure)
+        internal Functional(Type factory, Type enclosure)
         {
             FactoryHost = factory;
             HostEnclosure = enclosure;

@@ -43,7 +43,7 @@ namespace Z0
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistKind DistKind 
-            => DistKind.Chi2;
+        public DistributionKind DistKind 
+            => DistributionKind.Chi2;
     }
 }

@@ -16,8 +16,6 @@ namespace Z0
         {
             var result = eval(default(Mul), 3,9);
             Claim.eq((byte)27,result);
-        }
-        
+        }        
     }
-
 }

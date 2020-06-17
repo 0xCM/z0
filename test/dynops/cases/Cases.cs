@@ -14,8 +14,58 @@ namespace Z0
     using static Konst;
     using static Memories;
 
+    public static partial class XTend
+    {
+
+        
+
+    }
+
+    public class SizeAttribute : Attribute
+    {
+        public SizeAttribute(uint size)
+        {
+            Size = size;
+        }
+
+        public ByteSize Size {get;}
+    }
+    
+    readonly struct Slots
+    {
+        [Size(20)]
+        public static byte add(byte x, byte y)
+            => (byte)(x+y);
+
+        [Size(17)]
+        public static byte sub(byte x, byte y)
+            => (byte)(x-y);
+
+        [Size(18)]
+        public static byte mul(byte x, byte y)
+            => (byte)(x*y);
+
+        [Size(18)]
+        public static byte div(byte x, byte y)
+            => (byte)(x/y);
+
+        [Size(17)]
+        public static byte and(byte x, byte y)
+            => (byte)(x&y);
+
+    }
+
     readonly struct ExecutionEngine
     {
+        public static MemRef[] GetReferences(Type src)
+        {
+            var locations = src.DeclaredMethods().Select(m =>  (MemoryAddress)MemberJit.Service.Jit(m));
+
+
+            return default;
+            
+        }
+
         readonly struct Mul8x8 : IBinaryOp<byte>
         {
             public static Mul8x8 F => default;

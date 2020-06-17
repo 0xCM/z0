@@ -4,16 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    // public interface ISampleDefaults
-    // {
-
-
-    // }
-
-    public interface ISampleDefaults<T> //: ISampleDefaults
+    public interface ISampleDefaults<T>
         where T : unmanaged
     {
         /// <summary>

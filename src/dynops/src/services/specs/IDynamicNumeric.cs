@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IDynamicNumeric : IService
     {
         UnaryOp<T> EmitUnaryOp<T>(IBufferToken dst, UriHex src)

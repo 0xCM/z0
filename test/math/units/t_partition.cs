@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
-    using static Memories;
-
     public class t_partition : t_gmath<t_partition>
     {        
 
@@ -61,12 +58,12 @@ namespace Z0
 
         public void part1()
         {
-            var src = Interval.lclosed(5,20);
+            var src = Interval.closedL(5,20);
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(Interval.lclosed(5,6), dst.First());
-            Claim.eq(Interval.lclosed(19,20), dst.Last());
+            Claim.eq(Interval.closedL(5,6), dst.First());
+            Claim.eq(Interval.closedL(19,20), dst.Last());
 
         }
 
@@ -76,7 +73,7 @@ namespace Z0
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(Interval.lclosed(5,6), dst.First());
+            Claim.eq(Interval.closedL(5,6), dst.First());
             Claim.eq(Interval.closed(19,20), dst.Last());
         }
 
@@ -87,13 +84,13 @@ namespace Z0
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(Interval.open(5,6), dst.First());
-            Claim.eq(Interval.lclosed(19,20), dst.Last());
+            Claim.eq(Interval.closedL(19,20), dst.Last());
         }
 
 
         public void part4()
         {
-            var src = Interval.rclosed(1,100);
+            var src = Interval.closedR(1,100);
             var dst = Partition.measured(src,10);
             Claim.eq(10,dst.Length);
             Claim.eq(1, dst.First());

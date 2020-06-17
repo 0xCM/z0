@@ -9,12 +9,19 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Tuples;
+    using static Konst;
 
+    /// <summary>
+    /// Captures a pair sequence
+    /// </summary>
+    /// <typeparam name="T">The sequence element type</typeparam>
     public readonly ref struct Pairs<T>
         where T : unmanaged
     {
-        readonly Span<Pair<T>> Data;
+        /// <summary>
+        /// The captured sequence
+        /// </summary>
+        public readonly Span<Pair<T>> Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Pairs<T>(Span<Pair<T>> src)
@@ -26,26 +33,38 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Pairs(Span<Pair<T>> data)
-        {
-            this.Data = data;
-        }
+            => Data = data;
 
+        /// <summary>
+        /// Returns a mutable reference to an index-identified sequence element
+        /// </summary>
+        /// <param name="index">The zero-based sequence index</param>
         [MethodImpl(Inline)]
         public ref Pair<T> Select(int index)
-            => ref refs.seek(Data, index);
+            => ref Control.seek(Data, index);
 
+        /// <summary>
+        /// Returns a mutable reference to an index-identified sequence element
+        /// </summary>
+        /// <param name="index">The zero-based sequence index</param>
         public ref Pair<T> this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Select(index);
         }        
 
+        /// <summary>
+        /// Specifies the number of elements in the sequence
+        /// </summary>
         public int Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;
         }
 
+        /// <summary>
+        /// Lifts sequence content into the LINQ monad
+        /// </summary>
         public IEnumerable<Pair<T>> Enumerate()
             => Data.ToEnumerable();
     }

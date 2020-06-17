@@ -49,8 +49,8 @@ namespace Z0
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistKind DistKind 
-            => DistKind.Cauchy;
+        public DistributionKind DistKind 
+            => DistributionKind.Cauchy;
 
     }
 

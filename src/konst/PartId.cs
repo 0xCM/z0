@@ -72,6 +72,8 @@ public enum PartId : ulong
 
     Stacks = 128,
 
+    Artistry = 129,
+
     Spans = 2022,
     
     IdentityTest = Identity | Test,

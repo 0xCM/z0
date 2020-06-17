@@ -7,8 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Tuples;
+    using static Konst;
 
+    /// <summary>
+    /// Captures the operands and outcome of binary operator evaluation 
+    /// </summary>
+    /// <typeparam name="T">The evaluation result type</typeparam>
     public readonly ref struct BinaryEval<T>
         where T : unmanaged
     {

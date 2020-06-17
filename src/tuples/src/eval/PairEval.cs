@@ -7,11 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Tuples;
+    using static Konst;
 
     /// <summary>
     /// Captures paired evaluations
     /// </summary>
+    /// <typeparam name="T">The evaluation result type</typeparam>
     public readonly ref struct PairEval<T>
         where T : unmanaged
     {
@@ -22,12 +23,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public PairEval(Pair<string> labels, in Pairs<T> target)
         {
-            this.Labels = labels;
-            this.Target = target;
+            Labels = labels;
+            Target = target;
         }        
 
-        public string LeftLabel => Labels.Left;
+        public string LeftLabel 
+        {
+            [MethodImpl(Inline)]
+            get => Labels.Left;
+        }
 
-        public string RightLabel => Labels.Right;
+        public string RightLabel 
+        {
+            [MethodImpl(Inline)]
+            get => Labels.Right;
+        }
     }
 }

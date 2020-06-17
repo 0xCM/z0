@@ -20,7 +20,7 @@ namespace Z0.Mkl
         public static VslSSTaskHandle<T> Wrap(IntPtr ptr)
             => new VslSSTaskHandle<T>(ptr);
 
-        public static unsafe VslSSTaskHandle<T> Create(Dataset<T> samples)
+        public static unsafe VslSSTaskHandle<T> Create(Observations<T> samples)
             => new VslSSTaskHandle<T>(samples, samples.Dim);
 
         public static implicit operator IntPtr(VslSSTaskHandle<T> handle)

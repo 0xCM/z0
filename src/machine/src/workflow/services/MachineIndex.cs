@@ -26,9 +26,7 @@ namespace Z0.Machine
 
         public PartId[] Parts {get;}
 
-        internal MachineIndex(
-            IReadOnlyDictionary<MemoryAddress,UriCode> mc, 
-            IReadOnlyDictionary<MemoryAddress,OpUri> muri)
+        internal MachineIndex(IReadOnlyDictionary<MemoryAddress,UriCode> mc, IReadOnlyDictionary<MemoryAddress,OpUri> muri)
         {
             MemoryTable = HashTable.Create(mc);
             MemoryUri = HashTable.Create(muri);  

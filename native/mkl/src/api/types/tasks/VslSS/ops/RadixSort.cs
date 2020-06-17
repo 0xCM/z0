@@ -9,7 +9,6 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
     
     using static Seed;
-    using static Memories;
 
     using static VslSSTaskParameter;
     using static VslSSComputeRoutine;
@@ -24,7 +23,7 @@ namespace Z0.Mkl
         /// <param name="dim">The common dimension of each vector</param>
         /// <param name="dst">The buffer that will receive the sorted vectors</param>
         [MethodImpl(Inline)]
-        public static Dataset<float> RadixSort(this Dataset<float> samples, Dataset<float> dst)        
+        public static Observations<float> RadixSort(this Observations<float> samples, Observations<float> dst)        
             => samples.ApplyRadixSort(dst);
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace Z0.Mkl
         /// <param name="dim">The common dimension of each vector</param>
         /// <param name="dst">The buffer that will receive the sorted vectors</param>
         [MethodImpl(Inline)]
-        public static Dataset<double> RadixSort(this Dataset<double> samples, Dataset<double> dst)        
+        public static Observations<double> RadixSort(this Observations<double> samples, Observations<double> dst)        
             => samples.ApplyRadixSort(dst);
 
         /// <summary>
@@ -43,8 +42,8 @@ namespace Z0.Mkl
         /// <param name="samples">The observation vectors in row-major format</param>
         /// <param name="dim">The common dimension of each vector</param>
         [MethodImpl(Inline)]
-        public static Dataset<float> RadixSort(this Dataset<float> samples)        
-            => samples.ApplyRadixSort(Dataset.Alloc<float>(samples.Dim, samples.Count));
+        public static Observations<float> RadixSort(this Observations<float> samples)        
+            => samples.ApplyRadixSort(Observations.Alloc<float>(samples.Dim, samples.Count));
 
         /// <summary>
         /// Applies the radix sort method to order the components in each observation vector
@@ -52,10 +51,10 @@ namespace Z0.Mkl
         /// <param name="samples">The observation vectors in row-major format</param>
         /// <param name="dim">The common dimension of each vector</param>
         [MethodImpl(Inline)]
-        public static Span<double> RadixSort(this Dataset<double> samples)        
-            => samples.ApplyRadixSort(Dataset.Alloc<double>(samples.Dim, samples.Count));
+        public static Span<double> RadixSort(this Observations<double> samples)        
+            => samples.ApplyRadixSort(Observations.Alloc<double>(samples.Dim, samples.Count));
 
-         static unsafe Dataset<T> ApplyRadixSort<T>(this Dataset<T> samples, Dataset<T> dst)        
+         static unsafe Observations<T> ApplyRadixSort<T>(this Observations<T> samples, Observations<T> dst)        
             where T : unmanaged
         {
             var dim = samples.Dim;

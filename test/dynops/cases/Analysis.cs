@@ -23,6 +23,16 @@ namespace Z0
             => (byte)(x+y);
 
         /// <summary>
+        /// Computes the difference between two unsigned 8-bit integers
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        /// <remarks>Note that plainy idiotic casting required to teach the compiler that
+        /// multiplication of unsigned 8-bit integers should not produce a 32-bit signed integer</remarks>
+        public static byte sub(byte x, byte y)
+            => (byte)(x-y);
+
+        /// <summary>
         /// Computes the product of two unsigned 8-bit integers
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -33,14 +43,14 @@ namespace Z0
             => (byte)(x*y);
 
         /// <summary>
-        /// Computes the difference between two unsigned 8-bit integers
+        /// Computes the quotient between two unsigned 8-bit integers
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         /// <remarks>Note that plainy idiotic casting required to teach the compiler that
         /// multiplication of unsigned 8-bit integers should not produce a 32-bit signed integer</remarks>
-        public static byte sub(byte x, byte y)
-            => (byte)(x-y);
+        public static byte div(byte x, byte y)
+            => (byte)(x/y);
 
         /// <summary>
         /// Computes the bitwise and between two unsigned 8-bit integers
@@ -72,6 +82,12 @@ namespace Z0
         /// </summary>
         public static ReadOnlySpan<byte> mul_ᐤ8uㆍ8uᐤ
             => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x0f,0xaf,0xc2,0x0f,0xb6,0xc0,0xc3};    
+
+        /// <summary>
+        /// X86-executable code obtained by dissasembling a c# function with implementation identical to <see cref="mul"/>
+        /// </summary>
+        public static ReadOnlySpan<byte> div_ᐤ8uㆍ8uᐤ 
+            => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xca,0x99,0xf7,0xf9,0x0f,0xb6,0xc0,0xc3};
 
         /// <summary>
         /// X86-executable code obtained by dissasembling a c# function with implementation identical to <see cref="and"/>

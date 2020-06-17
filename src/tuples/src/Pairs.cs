@@ -7,8 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
+    using static Konst;
 
+    /// <summary>
+    /// Defines pair/paired manipulation api
+    /// </summary>
     [ApiHost]
     public class Pairs : IApiHost<Pairs>
     {
@@ -18,7 +21,7 @@ namespace Z0
         /// <param name="left">The left member</param>
         /// <param name="right">The right member</param>
         /// <typeparam name="T">The member type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Pair<T> pair<T>(T left, T right)
             => Tuples.pair(left,right);
 
@@ -29,6 +32,7 @@ namespace Z0
         /// <param name="right">The right member</param>
         /// <typeparam name="L">The first member type</typeparam>
         /// <typeparam name="R">The second member type</typeparam>
+        [MethodImpl(Inline)]
         public static Paired<L,R> paired<L,R>(L left, R right)
             => Tuples.paired(left,right);
 
@@ -38,7 +42,7 @@ namespace Z0
         /// <param name="a">The first member</param>
         /// <param name="b">The second member</param>
         /// <typeparam name="T">The member type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ConstPair<T> constant<T>(T a, T b)
             => Tuples.constant(a,b);
 
@@ -47,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source pairs</param>
         /// <typeparam name="T">The paired element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Pairs<T> index<T>(Pair<T>[] src)
             where T : unmanaged
                 => src;

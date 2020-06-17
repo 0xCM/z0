@@ -48,8 +48,8 @@ namespace Z0
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistKind DistKind 
-            => DistKind.Beta;
+        public DistributionKind DistKind 
+            => DistributionKind.Beta;
 
     }
 }

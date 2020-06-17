@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public readonly struct DynamicCase : IDynamicCase, IValidator<DynamicCase,IDynamicCase>
     {        
         public static IDynamicCase Checker => default(DynamicCase);         

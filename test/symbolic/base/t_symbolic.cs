@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public readonly struct CheckSymbolic : ICheckSymbolic, IValidator<CheckSymbolic,ICheckSymbolic>
     {        
         public static ICheckSymbolic Checker => default(CheckSymbolic);         

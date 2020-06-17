@@ -215,7 +215,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Next<T>(Interval<T> domain)
             where T : unmanaged
-                => domain.Empty ? Next<T>() :  Next(domain.Left, domain.Right);
+                => domain.IsEmpty ? Next<T>() :  Next(domain.Left, domain.Right);
 
         public IEnumerable<T> Take<T>(int count)
             where T : unmanaged

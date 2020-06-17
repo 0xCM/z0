@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     
     public static class PolyStream
     {
@@ -69,7 +69,7 @@ namespace Z0
         static IEnumerable<T> unfiltered<T>(IPolyrand src, Interval<T> domain)
             where T : unmanaged
         {
-            if(domain.Empty)
+            if(domain.IsEmpty)
             {
                 while(true)
                     yield return src.Next<T>();    

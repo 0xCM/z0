@@ -27,10 +27,6 @@ namespace Z0
                 exchange.Dst.Target[i] = (f(x,y), g(x, y));
             }   
             return ref exchange.Content;         
-        }
-
-    
+        }    
     }
-
-
 }
