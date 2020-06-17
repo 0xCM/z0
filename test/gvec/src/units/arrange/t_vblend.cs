@@ -8,9 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Seed;
-    using static Memories;
     using static HexConst;
+    using static Memories;
 
     public class t_vblend : t_inx<t_vblend>
     {            

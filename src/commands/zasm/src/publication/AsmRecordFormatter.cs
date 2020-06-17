@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Asm.Data.OpKind;
-    using static Seed;
+    using static Konst;
     
     using Z0.Asm.Data;
 

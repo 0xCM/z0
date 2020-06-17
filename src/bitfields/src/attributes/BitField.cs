@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Identifies a bitfield specification

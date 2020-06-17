@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Characterizes a function that produces T-objects from S-objects

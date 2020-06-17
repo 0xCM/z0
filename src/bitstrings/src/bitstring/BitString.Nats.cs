@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     

@@ -3,7 +3,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
+    using static Konst;
 
     [ApiHost("api")]
     public partial class Numeric : IApiHost<Numeric>

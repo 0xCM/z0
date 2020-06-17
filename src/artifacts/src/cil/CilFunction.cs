@@ -9,7 +9,7 @@ namespace Z0
     
     using Z0.CilSpecs;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Adheres a set of IL instructions with the source method

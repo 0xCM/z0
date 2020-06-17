@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     public class t_bg_dim : t_bg<t_bg_dim>

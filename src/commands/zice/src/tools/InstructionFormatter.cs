@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
     using System.Linq;
     using System.Text;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     static class XYZ

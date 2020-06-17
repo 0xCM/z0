@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
     
-    using static Seed;
+    using static Konst;
 
     public static class VRandX
     {

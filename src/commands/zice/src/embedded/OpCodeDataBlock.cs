@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
 	using System.Runtime.Intrinsics;
 	using System.Text;
 
-	using static Seed;
+	using static Konst;
 	using static Memories;
 
 	using DataFlags = OpCodeDataFlags;

@@ -10,7 +10,7 @@ namespace Z0.Machine
     using Z0.Asm;
     using Z0.Asm.Data;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     [ApiHost]

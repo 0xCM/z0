@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
+    using static Konst;
 
     public readonly struct UnaryLogicOpExpr<T> :  IUnaryLogicOpExpr<T>
         where T : unmanaged

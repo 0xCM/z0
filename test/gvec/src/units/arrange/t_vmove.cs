@@ -5,13 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
     
     using static Typed;
 
     public class t_vmove : t_inx<t_vmove>
     {   
-
         public void vmove_128x16u()
         {
             var src = gvec.vinc(w128,z16);

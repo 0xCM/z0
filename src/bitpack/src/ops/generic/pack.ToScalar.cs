@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static dvec;
-    using static Seed;
+    using static Konst;
     using static Memories;
     using static Vectors;
 

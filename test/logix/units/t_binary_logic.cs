@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     using static BitLogicSpec;

@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Linq;
     
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Collects a sequence of operation instuction sequences from host-defined members

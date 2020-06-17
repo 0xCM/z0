@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static Seed;
-    using static Memories;
+    //using static Konst;
+    using static Control;
+    using static Typed;
     using static Vectors;
-
+    
     partial class BitPack
     {
         /// <summary>

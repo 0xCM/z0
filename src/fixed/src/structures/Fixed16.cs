@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     [Fixed(FixedWidth.W16)]
     public readonly struct Fixed16 : IFixedNumeric<Fixed16,W16,ushort>

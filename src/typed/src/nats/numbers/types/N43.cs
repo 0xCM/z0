@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;    
+    using static Konst;    
 
     public readonly struct N43 : INativeNatural, INatSeq<N43,N4,N3>
     {

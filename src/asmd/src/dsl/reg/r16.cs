@@ -7,7 +7,7 @@ namespace Z0.Asm.Dsl
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct r16 : IRegOp16
     {    

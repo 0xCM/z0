@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
     using System.Linq.Expressions;
 
-    using static Seed;
+    using static Konst;
     using static Control;
 
     public static partial class Delegates

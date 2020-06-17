@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class t_testbit : t_bitcore<t_testbit>

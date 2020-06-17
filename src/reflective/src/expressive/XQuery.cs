@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static Control;
 
     public partial class XQuery

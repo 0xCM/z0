@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Specifes a uri-identified located code block, similar to the content of a line in a parsed code report for an api host

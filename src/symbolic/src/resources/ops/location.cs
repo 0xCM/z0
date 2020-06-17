@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Control;
-    using static Seed;
+    using static Konst;
  
     partial class SymbolicData
     {

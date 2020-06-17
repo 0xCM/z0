@@ -12,7 +12,7 @@ namespace Z0.Dynamics
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     using X = System.Linq.Expressions;

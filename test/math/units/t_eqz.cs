@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
-    using static Memories;
-
+    using static Konst;
 
     public sealed class t_eqz : UnitTest<t_eqz>
     {

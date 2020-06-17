@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
 
-    using static Seed;
-    using static Vectors;
-    using static Typed;
+    using static Memories;
+    using static dvec;
 
     [ApiHost]
     public readonly struct VZip : IApiHost<VZip>
@@ -164,7 +163,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector128<uint> vzip(Vector128<ulong> x, Vector128<ulong> y, W32 w)
-            => vparts(n128, (uint)vcell(x, 0),(uint)vcell(x, 1),(uint)vcell(y, 0),(uint)vcell(y, 1));
+            => Vectors.vparts(n128, (uint)vcell(x, 0),(uint)vcell(x, 1),(uint)vcell(y, 0),(uint)vcell(y, 1));
 
         /// <summary>
         /// (4x64w,4x64w) -> 8x32w
@@ -199,7 +198,5 @@ namespace Z0
         [MethodImpl(Inline), VZip]
         public static Vector256<byte> vzip(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, W8 w) 
             => dvec.vcompact(dvec.vcompact(x0,x1,n256,z16), dvec.vcompact(x2,x3,n256,z16),w256,z8);
-
     }
-
 }

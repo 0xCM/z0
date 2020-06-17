@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class Machine : IMachine

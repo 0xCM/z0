@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class t_vblock_and : UnitTest<t_vblock_and>

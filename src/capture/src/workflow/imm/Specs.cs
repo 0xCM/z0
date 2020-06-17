@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     using static ImmEmissionEvents;
     using static CaptureWorkflowEvents;

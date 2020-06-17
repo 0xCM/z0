@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public interface ITestBitLogicMatch<T,W> : ICheckVectors

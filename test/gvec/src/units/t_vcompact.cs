@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Vectors;
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     public class t_vcompact : t_inx<t_vcompact>
     {

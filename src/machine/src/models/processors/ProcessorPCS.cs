@@ -9,7 +9,7 @@ namespace Z0.Machine
 
     using Z0.Asm;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public readonly struct Processor<P,C,S> : IProcessor<Processor<P,C,S>, C, S>

@@ -10,7 +10,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public sealed class t_mask_capture : t_asm<t_mask_capture>
     {    

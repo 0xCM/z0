@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
-    using static Memories;
+    using static Konst;
 
     partial class VectorType
     {

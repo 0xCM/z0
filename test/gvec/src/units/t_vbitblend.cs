@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class t_vbitblend : t_inx<t_vbitblend>

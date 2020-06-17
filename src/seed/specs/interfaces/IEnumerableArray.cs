@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections;
 
-    using static Seed;
+    using static Konst;
 
     public interface IEnumerableArray<T> : IEnumerable<T>
     {

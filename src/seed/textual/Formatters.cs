@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Seed;
+    using static Konst;
 
     [ApiHost]
     public partial class Formatters : IApiHost<Formatters>

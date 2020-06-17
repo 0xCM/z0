@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Linq;
     
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Groups a sequence of located instructions

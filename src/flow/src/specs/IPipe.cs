@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Characterizes a conduit that transmits singletons and sequences from A -> B

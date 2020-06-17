@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     using static TypedLogicSpec;
 

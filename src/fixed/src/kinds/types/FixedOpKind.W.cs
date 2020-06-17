@@ -8,7 +8,7 @@ namespace Z0
     using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct FixedOpKind<W,D> : IFixedOpKind<W,D>
         where W : unmanaged, IFixedWidth

@@ -15,7 +15,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse;
 
-    using static Seed;
+    using static Konst;
     
     partial class dvec
     {        

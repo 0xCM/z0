@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// A stopwatch-like type in the form of a struct rather than a class

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using Iced.Intel;
 
-    using static Seed;
+    using static Konst;
 
     using Iced = Iced.Intel;
 

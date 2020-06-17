@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Seed;
+    using static Konst;
 
 
     public class InstructionIndex

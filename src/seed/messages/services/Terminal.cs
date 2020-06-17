@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices; 
     using System.Text;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Implments a thread-safe/thread-aware terminal absraction

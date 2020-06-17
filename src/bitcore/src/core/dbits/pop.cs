@@ -10,7 +10,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Popcnt;
     using static System.Runtime.Intrinsics.X86.Popcnt.X64;
  
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     partial class Bits

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
+    using static Control;
 
     /// <summary>
     /// Characterizes a type that occupies a fixed amount of space at runtime
@@ -64,9 +65,17 @@ namespace Z0
     public interface IFixedNumeric<F,T> : IFixedContent<T>, IEquatable<F>
         where F : unmanaged, IFixedNumeric<F,T>
     {
-        int IFixed.BitWidth { [MethodImpl(Inline)] get => bitsize<T>(); }
+        int IFixed.BitWidth 
+        { 
+            [MethodImpl(Inline)] 
+            get => bitsize<T>(); 
+        }
 
-        int IFixed.ByteCount { [MethodImpl(Inline)] get=> size<T>(); }
+        int IFixed.ByteCount 
+        { 
+            [MethodImpl(Inline)] 
+            get=> size<T>(); 
+        }
 
         NumericKind NumericKind { [MethodImpl(Inline)] get => NumericKinds.kind<T>(); }
 

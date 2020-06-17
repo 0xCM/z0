@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;    
+    using static Konst;    
 
     using K = N255;
     using S = INatSeq<N255,N2,N5,N5>;

@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Reflection;
 
-    using static Seed;
+    using static Konst;
 
     using T = t_dynamic_factory;
     using K = Kinds;

@@ -9,7 +9,7 @@ namespace Z0
     using System.IO.Pipes;
     using System.Buffers;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public readonly struct InPort<T>

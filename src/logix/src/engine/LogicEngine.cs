@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     [ApiHost("logic.engine")]

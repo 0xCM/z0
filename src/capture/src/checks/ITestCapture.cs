@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Seed;
+    using static Konst;
     using static BufferSeqId;
 
     public interface ITestCapture : IAsmTester

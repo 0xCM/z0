@@ -9,7 +9,7 @@ namespace Z0
 
     using System.Linq.Expressions;
     
-    using static Seed;
+    using static Konst;
 
     public class XFunc
     {

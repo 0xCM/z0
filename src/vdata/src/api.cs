@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
  
     [ApiHost("api")]

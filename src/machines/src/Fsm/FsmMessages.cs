@@ -6,7 +6,7 @@ namespace Z0.Machines
 {
     using System;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     /// <summary>

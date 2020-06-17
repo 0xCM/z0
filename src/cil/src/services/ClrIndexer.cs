@@ -13,7 +13,7 @@ namespace Z0
 
     using Z0.CilSpecs;
 
-    using static Seed;
+    using static Konst;
     using static Control;
 
     using DnLib = dnlib.DotNet.Emit;

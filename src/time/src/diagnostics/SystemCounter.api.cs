@@ -11,7 +11,7 @@ namespace Z0
     using System.Diagnostics;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Defines counter api surface

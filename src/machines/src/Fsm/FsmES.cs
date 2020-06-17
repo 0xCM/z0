@@ -10,7 +10,7 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     /// <summary>

@@ -11,7 +11,7 @@ namespace Z0
     using Microsoft.Diagnostics.Tracing;
     using Microsoft.Diagnostics.Tracing.Session;
 
-    using static Seed;
+    using static Konst;
 
     public sealed class TraceEventSink : SystemAgent
     {        

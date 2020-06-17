@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Seed;
+    using static Konst;
 
     public interface IImmSpecializer : IService
     {

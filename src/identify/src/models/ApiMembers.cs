@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// A simple api member sequence adapter

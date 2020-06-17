@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Aggregates artifacts from a host capture workflow

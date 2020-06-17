@@ -11,7 +11,7 @@ namespace Z0.Asm
     using System.IO;
 
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     using K = Kinds;

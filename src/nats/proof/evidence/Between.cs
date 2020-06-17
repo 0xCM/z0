@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static Seed;
+    using static Konst;
     
     /// <summary>
     /// Captures evidence that k1 <= k <= k2

@@ -9,7 +9,7 @@ namespace Z0.Dynamics
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public class SelectionBuilder<T,X,R>
     {        

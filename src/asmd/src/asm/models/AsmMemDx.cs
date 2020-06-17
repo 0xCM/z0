@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     [Label(TypeLabels.Dx)]
     public readonly struct AsmMemDx : INullaryKnown, INullary<AsmMemDx>, ITextual

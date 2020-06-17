@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Collections.Concurrent;
     using System.Reflection;
 
-    using static Seed;
+    using static Konst;
     
 
     class AspectMeta

@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     using P = Z0.Parts;

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
     using static Vectors;
     using static Typed;
 
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, N128 w, byte t = default)  
-            => vcompact(vcompact(x0, x1,n256,z16), w, t);
+            => vcompact(vcompact(x0, x1,n256,Konst.z16), w, t);
 
         /// <summary>
         /// (2x64w,2x64w) -> 4x32w
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, N128 w, byte t = default)            
-            => vcompact(vcompact(x0,x1,n128,z8), vcompact(x2,x3,n128,z8),w,t);
+            => vcompact(vcompact(x0,x1,n128,Konst.z8), vcompact(x2,x3,n128,Konst.z8),w,t);
 
         /// <summary>
         /// (8x32u,8x32u,8x32u,8x32u) -> 32x8w
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, N256 w, byte t = default) 
-            => vcompact(vcompact(x0,x1,n256,z16), vcompact(x2,x3,n256,z16),w,t);
+            => vcompact(vcompact(x0,x1,n256,Konst.z16), vcompact(x2,x3,n256,Konst.z16),w,t);
 
         /// <summary>
         /// 16x32u -> 16x8u
@@ -232,7 +232,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static ulong vcompact(Vector128<ushort> src, N64 w, ulong t = default)            
-            => vcell64(vcompact(src, default, n128, z8),0);
+            => vcell64(vcompact(src, default, n128, Konst.z8),0);
 
         /// <summary>
         /// 8x32u -> 8x16u
@@ -252,7 +252,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static ulong vcompact(Vector256<uint> src, N64 w, ulong t = default)            
-            => vcompact(vcompact(src, n128,z16),w,t);
+            => vcompact(vcompact(src, n128,Konst.z16),w,t);
 
         /// <summary>
         /// 8x32u -> 8x8u (a scalar vector)
@@ -262,7 +262,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact(Vector256<uint> src, N128 w, byte t = default)            
-            => vcompact(vcompact(src, n128,z16),w,t);
+            => vcompact(vcompact(src, n128,Konst.z16),w,t);
 
         /// <summary>
         /// 8x32i -> 8x16i

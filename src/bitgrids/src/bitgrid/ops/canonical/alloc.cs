@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
     using static Memories;
+    using static Konst;
+
 
     partial class BitGrid
     {
@@ -37,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Alloc, Closures(Numeric8x16u)]
         public static BitGrid16<T> alloc<T>(N16 w)
             where T : unmanaged
-                => new BitGrid16<T>(z16);
+                => new BitGrid16<T>(Konst.z16);
 
         /// <summary>
         /// Creates a zero-filled 32-bit grid of caller-interpreted dimension
@@ -47,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Alloc, Closures(Numeric8x16x32u)]
         public static BitGrid32<T> alloc<T>(N32 w)
             where T : unmanaged
-               => new BitGrid32<T>(z32);
+               => new BitGrid32<T>(Konst.z32);
 
         /// <summary>
         /// Creates a zero-filled 64-bit grid of caller-interpreted dimension
@@ -57,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid64<T> alloc<T>(N64 w)
             where T : unmanaged
-               => new BitGrid64<T>(z64);
+               => new BitGrid64<T>(Konst.z64);
  
         /// <summary>
         /// Allocates a zero-filled 1x16 grid

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     using static gvec;
     using static BitGrid;
@@ -58,7 +58,7 @@ namespace Z0
         public static BitGrid256<N16,N16,T> one<T>(N256 w, N16 m, N16 n, T t = default)
             where T : unmanaged
         {
-            var x = vmakemask<T>(BitMask.lsb(n2,n1,z32),0);
+            var x = vmakemask<T>(BitMask.lsb(n2,n1,Konst.z32),0);
             var offsets = Data.vincrements<T>(w);
             var pattern = vsllv(x,offsets);
             return pattern;

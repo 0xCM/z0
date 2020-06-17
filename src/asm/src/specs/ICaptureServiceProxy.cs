@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Exposes capture services without the hassle of passing a ref struct about hither thither and yon

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
     
-    using static Seed;
+    using static Konst;
     
     public readonly struct HexFormatter<T> : IHexFormatter<T>
         where T : unmanaged

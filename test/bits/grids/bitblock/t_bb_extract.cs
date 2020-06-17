@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using static Seed;
+    using static Konst;
 
     public class t_bb_extract : t_bitblock<t_bb_extract>
     {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq.Expressions;
 
-    using static Seed;
+    using static Konst;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;

@@ -10,7 +10,6 @@ namespace Z0
     [ApiHost("api")]
     public partial class BitPack : IApiHost<BitPack>
     {
-        
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
-
 }

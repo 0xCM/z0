@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Seed;
+    using static Konst;
 
     [ApiHost("expr.cmp.eval")]
     public static class CmpExprEval

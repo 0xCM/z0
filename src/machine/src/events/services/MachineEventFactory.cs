@@ -7,7 +7,7 @@ namespace Z0.Machine
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct MachineEventFactory : IMachineEvents
     {

@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Seed;    
+    using static Konst;    
     using static Memories;
 
     /// <summary>

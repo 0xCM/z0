@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Seed;    
+    using static Konst;    
     using static MetadataRecords;
     using static Control;
         

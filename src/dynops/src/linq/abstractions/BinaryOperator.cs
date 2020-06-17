@@ -7,7 +7,7 @@ namespace Z0.Dynamics
     using System;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     /// <summary>

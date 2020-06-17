@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq.Expressions;
 
-    using static Seed;
+    using static Konst;
     using static Control;
 
     partial class XTend

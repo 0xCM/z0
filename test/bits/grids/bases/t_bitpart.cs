@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public abstract class t_bitpart<X> : t_bitgrids_base<X>

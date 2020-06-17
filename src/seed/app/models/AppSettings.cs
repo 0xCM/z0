@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Text;
 
-    using static Seed;
+    using static Konst;
     using static Chars;
 
     /// <summary>

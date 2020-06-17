@@ -9,7 +9,7 @@ namespace Z0
     using System.Globalization;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     using static HexSpecs;
 
     public readonly struct HexNumericParser : IParametricParser

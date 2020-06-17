@@ -9,7 +9,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
     using static TestCaseIdentity;
     using static UriDelimiters;

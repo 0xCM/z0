@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     public class t_potrf : UnitTest<t_potrf>

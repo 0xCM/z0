@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     public class Histogram

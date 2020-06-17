@@ -9,7 +9,7 @@ namespace Z0
     
     using static NatClaim;
     using static nfunc;
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Defines proof attempts for type naturals

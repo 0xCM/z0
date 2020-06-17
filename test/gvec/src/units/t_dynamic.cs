@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
         
-    using static Seed;
+    using static Konst;
     using static Kinds;
 
     public class t_dynamic : t_inx<t_dynamic>

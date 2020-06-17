@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct MemberDynamic : IMemberDynamic
     {

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     [ApiHost("scalar")]
     public partial class Bits : IApiHost<Bits>

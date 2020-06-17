@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Defines service contract to support reading text-formatted encoded x86 asm data

@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection.PortableExecutable;
  
     using static Control;
-    using static Seed;
+    using static Konst;
 
     using static MetadataRecords;
 

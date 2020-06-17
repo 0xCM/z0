@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
     using System.Collections.Generic;
 
-    using static Seed;
+    using static Konst;
 
     public static class Textual
     {

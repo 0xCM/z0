@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Fixed(FixedWidth.W512)]
     public readonly struct Fixed512  : IFixed<Fixed512,W512,Vector512<ulong>>

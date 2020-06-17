@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.IO;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public readonly struct ResExtractor

@@ -9,7 +9,7 @@ namespace Z0
     using System.Security;
     using System.Linq;
 
-    using static Seed;    
+    using static Konst;    
     using static Memories;
     using static LogicSig;    
     using static NumericLogix;

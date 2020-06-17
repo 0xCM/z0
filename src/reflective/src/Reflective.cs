@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Generic;
     using static ReflectionFlags;
 
-    using static Seed;    
+    using static Konst;    
     
     [ApiHost]
     public static partial class Reflective

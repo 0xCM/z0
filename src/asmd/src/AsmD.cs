@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     [ApiHost("api")]

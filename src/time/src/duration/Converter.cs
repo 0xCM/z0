@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     readonly struct DurationConverter : IConversionProvider<Duration>, IBiconverter<Duration>
     {

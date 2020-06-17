@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 
     [ApiHost("format")]
     public partial class MetadataFormat : IApiHost<MetadataFormat>

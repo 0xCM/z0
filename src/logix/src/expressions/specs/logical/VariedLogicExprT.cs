@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Defines a typed logic expression over one or more variables

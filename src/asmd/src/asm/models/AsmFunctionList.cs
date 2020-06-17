@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     public readonly struct AsmFunctionList :  IEquatable<AsmFunctionList>, IIndexedElements<AsmFunction>
     {                

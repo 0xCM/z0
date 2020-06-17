@@ -17,7 +17,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Fma;        
     using static System.Runtime.Intrinsics.X86.Sse.X64;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     /// <summary>

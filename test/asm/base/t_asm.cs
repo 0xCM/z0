@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.IO;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     
-    using static Seed;    
+    using static Konst;    
     using static Option;
 
     public readonly struct EmptyClrIndex : IClrIndexer

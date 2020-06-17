@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
 	
 	/// <summary>
 	/// Represents a complex value with signed 32-bit integer components

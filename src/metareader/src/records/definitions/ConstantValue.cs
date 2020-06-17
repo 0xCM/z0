@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
-    using static Seed;
+    using static Konst;
     using static MetadataRecords.ConstantField;
 
     using R = MetadataRecords.ConstantRecord;

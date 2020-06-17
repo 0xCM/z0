@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Seed;
+    using static Konst;
     using static ReflectionFlags;
 
     partial class Memories

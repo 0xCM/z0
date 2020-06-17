@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class t_api_query : t_identity<t_api_query>

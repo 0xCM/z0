@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Characterizes a stateful thing that functions as an exchange for application messages

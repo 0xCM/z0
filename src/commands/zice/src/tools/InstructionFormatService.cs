@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
     using System.Text;
 	using System.Collections.Generic;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
 	public interface IInstructionFormatter

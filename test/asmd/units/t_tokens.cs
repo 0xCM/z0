@@ -9,7 +9,7 @@ namespace Z0.Asm.Data
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class t_tokens : t_asmd<t_tokens>

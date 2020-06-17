@@ -11,6 +11,9 @@ namespace Z0
 
     partial class Control
     {
+        public static void ThrowEmptySpanError()
+            => throw new Exception($"The span is empty");
+
         [MethodImpl(NotInline), Op]
         public static void @throw(string msg)
             => throw new Exception(msg);

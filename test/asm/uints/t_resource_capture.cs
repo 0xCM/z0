@@ -12,7 +12,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
 
     using Z0.Asm.Data;
-    using static Seed;
+    using static Konst;
     using static Control;
 
 

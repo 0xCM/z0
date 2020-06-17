@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
 
-    using static Seed;
+    using static Konst;
     
     readonly struct ValueObserverPipe<T> : IValueObserverPipe<T>
         where T : struct

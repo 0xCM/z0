@@ -9,7 +9,7 @@ namespace Z0
 
     using System.Linq.Expressions;
     
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Wraps a delegate that implicitly converts into a LINQ expression

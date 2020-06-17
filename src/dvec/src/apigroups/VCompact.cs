@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
 
-    using static Seed;
-    using static Vectors;
-    using static Typed;
+    using static Memories;
+    using static dvec;
 
     [ApiHost]
     public readonly struct VCompact : IApiHost<VCompact>

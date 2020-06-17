@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-    using static Seed;
+    using static Konst;
 
     partial class VSvcHosts
     {

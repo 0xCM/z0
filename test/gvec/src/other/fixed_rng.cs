@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class t_fixed_rng : t_inx<t_fixed_rng>

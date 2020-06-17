@@ -12,7 +12,7 @@ namespace Z0.Mkl.Test
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     public class t_gemm : UnitTest<t_gemm>

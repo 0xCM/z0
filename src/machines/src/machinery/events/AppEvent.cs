@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
         
-    using static Seed;
+    using static Konst;
 
     /// <summary>
     /// Identifies an application-level/logical event

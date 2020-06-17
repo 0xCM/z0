@@ -7,7 +7,7 @@
 //     using System;
 //     using System.Runtime.CompilerServices;
 
-//     using static Seed;
+//     using static Konst;
 
 //     using analog = septet;
 

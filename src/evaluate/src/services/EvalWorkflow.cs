@@ -10,7 +10,7 @@ namespace Z0.Asm
     
     using K = Kinds;
     
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class EvalWorkflow : IEvalWorkflow

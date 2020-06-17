@@ -9,7 +9,7 @@ namespace Z0.Machine
 
     using Z0.Asm;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public interface IProcessor

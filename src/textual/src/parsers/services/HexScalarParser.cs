@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Globalization;
 
-    using static Seed;
+    using static Konst;
     using static HexSpecs;
 
     public readonly struct HexScalarParser : ITextParser<ulong>

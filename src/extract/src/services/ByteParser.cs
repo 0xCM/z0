@@ -10,7 +10,7 @@ namespace Z0
     
     using Asm;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     /// <summary>

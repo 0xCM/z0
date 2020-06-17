@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public sealed class t_enums : t_numeric<t_enums>

@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
+    using static Konst;
     
     /// <summary>
     /// Encloses a delegate that was manufactured dynamically

@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Diagnostics;
 
-    using static Seed;
+    using static Konst;
 
     public static class time
     {

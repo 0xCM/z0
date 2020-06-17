@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static Seed;
+    using static Konst;
 
     public class TypeIdentityProviders : ITypeIdentityProviders
     {

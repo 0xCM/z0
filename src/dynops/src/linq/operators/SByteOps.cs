@@ -8,7 +8,7 @@ namespace Z0.Dynamics.Operators
     using System.Linq;
     using System.Linq.Expressions;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     using static XFunc;
 

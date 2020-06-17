@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     public class t_decode : t_asm<t_decode>

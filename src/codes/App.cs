@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
     using Z0.Asm.Data;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
 
     using P = Z0.Parts;

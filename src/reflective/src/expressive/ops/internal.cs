@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections.Concurrent;
 
-    using static Seed;
+    using static Konst;
     using static ReflectionFlags;
 
     partial class XPress

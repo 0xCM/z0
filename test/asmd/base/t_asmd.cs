@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
     using System.Collections.Generic;
     using System.IO;
 
-    using static Seed;
+    using static Konst;
     using static Memories;
     
     public abstract class t_asmd<U> : UnitTest<U,CheckVectorBits, ICheckVectorBits>
