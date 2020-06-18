@@ -12,12 +12,11 @@ namespace Z0
     partial class Widths
     {        
         /// <summary>
-        /// Computes the width of a parametrically-identified measurable type
+        /// Computes the number of bytes occupied by an instance of a parametrically-identified type
         /// </summary>
         /// <typeparam name="T">The measurable type</typeparam>
         [MethodImpl(Inline)]
-        public static uint measure<T>()
-            where T : struct
-                =>  (uint)(Unsafe.SizeOf<T>()*8);
+        public static uint bytes<T>()
+            =>  (uint)(Unsafe.SizeOf<T>());
     }
 }

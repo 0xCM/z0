@@ -421,8 +421,8 @@ namespace Z0
     {
         ref T this[int index] {get;}  
 
-
-        ref T Lookup(int index) => ref this[index];
+        ref T Lookup(int index) 
+            => ref this[index];
     }
 
     public interface IReadOnlyIndex<T> : IDataIndex<T>

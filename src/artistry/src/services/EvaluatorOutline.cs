@@ -15,7 +15,7 @@ namespace Z0
     using static Memories;
 
 
-    readonly struct Evaluator
+    readonly struct EvalOutline
     {        
         readonly struct Mul8x8 : IBinaryOp<byte>
         {

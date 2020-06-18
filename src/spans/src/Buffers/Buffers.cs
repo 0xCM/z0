@@ -47,16 +47,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The executable code</param>
         [MethodImpl(Inline), Op]
-        public static byte* Liberate(Span<byte> src)
-            => Liberate<byte>((byte*)ptr<byte>(ref head(src)), src.Length);
+        public static byte* liberate(Span<byte> src)
+            => liberate<byte>((byte*)ptr<byte>(ref head(src)), src.Length);
 
         /// <summary>
         /// Enables execution over a reference-identified memory segment of specified length
         /// </summary>
         /// <param name="src">The executable code</param>
         [MethodImpl(Inline), Op]
-        public static byte* Liberate(ref byte src, int length)
-            => Liberate<byte>((byte*)ptr<byte>(ref src), length);
+        public static byte* liberate(ref byte src, int length)
+            => liberate<byte>((byte*)ptr<byte>(ref src), length);
 
         /// <summary>
         /// Allocates a native buffer
@@ -160,7 +160,7 @@ namespace Z0
         static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags); 
 
         [MethodImpl(Inline)]
-        static T* Liberate<T>(T* pBuffer, int length)
+        static T* liberate<T>(T* pBuffer, int length)
             where T : unmanaged
         {
             IntPtr buffer = (IntPtr)(void*)pBuffer;

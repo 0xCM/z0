@@ -36,7 +36,10 @@ namespace Z0
         public static TypeWidth vector(Type t)
         {
             var eff = t.EffectiveType();
-            var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
+            var def = eff.IsGenericType 
+                ? eff.GetGenericTypeDefinition() 
+                : (eff.IsGenericTypeDefinition ? eff : null);
+                
             if(def == null)
                 return TypeWidth.None;
             else if(def == typeof(Vector128<>))            

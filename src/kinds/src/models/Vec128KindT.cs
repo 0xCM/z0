@@ -21,14 +21,19 @@ namespace Z0
         public static implicit operator Vec128Type(Vec128Kind<T> src)
             => default;
 
-        public W128 W => default;
+        public W128 W 
+            => default;
 
-        public VectorWidth Width => VectorWidth.W128;
+        public VectorWidth Width 
+            => VectorWidth.W128;
 
-        public NumericKind CellKind => NumericKinds.kind<T>();
+        public NumericKind CellKind 
+            => NumericKinds.kind<T>();
 
-        public NumericWidth CellWidth => (NumericWidth)Widths.measure<T>();
+        public NumericWidth CellWidth 
+            => (NumericWidth)Widths.bits<T>();
 
-        public Type TypeDefinition => typeof(Vector128<T>).GenericDefinition2();
+        public Type TypeDefinition 
+            => typeof(Vector128<T>).GenericDefinition2();
     }        
 }

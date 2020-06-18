@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Kinds;
-    using static CalcNative;
+    using static Konst;
 
-    public class t_binop
+    partial class XTend
     {
-        public void binop_8()
-        {
-            var result = eval(default(Mul), 3,9);            
-        }        
+        
+        [MethodImpl(Inline)]
+        public static string Format<K>(this K kind)
+            where K : IOpKind   
+                => kind.Format();
     }
 }

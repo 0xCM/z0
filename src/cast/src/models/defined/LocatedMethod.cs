@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct LocatedMethod
+    public readonly struct LocatedMethod : ITextual
     {
         public MethodInfo Method {get;}
 
@@ -46,5 +46,16 @@ namespace Z0
             Location = location;
             Size = size ?? ByteSize.Empty;
         }
+
+        public string Format()
+        {
+            var name = Method.DisplayName();
+            var address = Location.Format();
+            var size = HasKnownSize ? text.bracket(Size) : EmptyString;
+            return text.concat(name,size, Space, Chars.Eq, Space, address);
+        }
+
+        public override string ToString() 
+            => Format();
     }
 }

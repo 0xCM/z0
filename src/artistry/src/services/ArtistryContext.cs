@@ -11,17 +11,10 @@ namespace Z0
 
     using static Konst;
 
-    public interface IArtistryContext : IContext
-    {
-        IAsmContext AsmContext {get;}
-        
-        IAppMsgSink AppMsgSink {get;}        
-        
-        PartId[] Parts {get;}        
-    }    
-
     public readonly struct ArtistryContext : IArtistryContext
     {
+        public PartId[] Parts {get;}
+
         [MethodImpl(Inline)]
         public static IArtistryContext Create(IAsmContext root, PartId[] parts)
             => new ArtistryContext(root, parts);
@@ -30,9 +23,7 @@ namespace Z0
 
         public IAppMsgSink AppMsgSink 
             => AsmContext;
-        
-        public PartId[] Parts {get;}
-                
+                        
         [MethodImpl(Inline)]
         ArtistryContext(IAsmContext root, PartId[] parts)
         {

@@ -11,6 +11,7 @@ namespace Z0
     public interface IWidth<W> 
         where W : struct, IDataWidth<W>
     {
-        DataWidth Width => Widths.data<W>();
+        DataWidth Width 
+            => Widths.data<W>();
     }
 }

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
 
     partial class Widths
     {        
@@ -64,8 +63,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int cells<T>(W8 w)
-            where T : unmanaged
-                => 1/size<T>();
+            => 1/(int)bytes<T>();
 
         /// <summary>
         /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
@@ -74,8 +72,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int cells<T>(W16 w)
-            where T : unmanaged
-                => 2/size<T>();
+            => 2/(int)bytes<T>();
 
         /// <summary>
         /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
@@ -84,7 +81,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int cells<T>(W32 w)
-            => 4/size<T>();
+            => 4/(int)bytes<T>();
 
         /// <summary>
         /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
@@ -93,7 +90,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int cells<T>(W64 w)
-            => 8/size<T>();
+            => 8/(int)bytes<T>();
 
         /// <summary>
         /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
@@ -103,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int cells<T>(W128 w)
             where T : unmanaged
-                => 16/size<T>();
+                => 16/(int)bytes<T>();
 
         /// <summary>
         /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
@@ -113,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int cells<T>(W256 w)
             where T : unmanaged
-                => 32/size<T>();
+                => 32/(int)bytes<T>();
 
         /// <summary>
         /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
@@ -123,7 +120,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int cells<T>(W512 w)
             where T : unmanaged
-                => 64/size<T>();
+                => 64/(int)bytes<T>();
 
         /// <summary>
         /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
@@ -133,6 +130,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int cells<T>(W1024 w)
             where T : unmanaged
-                => 128/size<T>();
+                => 128/(int)bytes<T>();
     }
 }

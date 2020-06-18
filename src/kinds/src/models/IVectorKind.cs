@@ -49,6 +49,6 @@ namespace Z0
             => NumericKinds.kind<T>();
 
         NumericWidth IVectorKind.CellWidth 
-            => (NumericWidth)Widths.measure<T>();
+            => (NumericWidth)Widths.bits<T>();
     }
 }

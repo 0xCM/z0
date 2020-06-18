@@ -95,6 +95,6 @@ namespace Z0
         public static int div<W,T>(W w = default, T t = default)
             where W : struct, ITypeWidth
             where T : unmanaged
-                => (int)type<W>() / Control.bitsize<T>();
+                => (int)type<W>() / (int)bits<T>();
     }
 }

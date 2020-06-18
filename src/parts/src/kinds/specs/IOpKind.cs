@@ -6,9 +6,12 @@ namespace Z0
 {
     using System;
 
-    public interface IOpKind : IKind
+    public interface IOpKind : IKind, ITextual
     {
         OpKindId KindId {get;}
+
+        string ITextual.Format() 
+            => KindId.ToString().ToLower();
     }
 
     public interface IOpKind<E> : IOpKind, ILiteralKind<E>

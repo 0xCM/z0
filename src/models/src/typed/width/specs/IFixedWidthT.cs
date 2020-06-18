@@ -9,7 +9,8 @@ namespace Z0
     public interface IFixedWidth<F> : IFixedWidth, ITypeWidth<F>, ITypedLiteral<F,FixedWidth,uint>
         where F : struct, IFixedWidth<F>
     {     
-        FixedWidth IFixedWidth.FixedWidth => Widths.tfixed<F>();               
+        FixedWidth IFixedWidth.FixedWidth 
+            => Widths.tfixed<F>();               
     }
 
     public interface IFixedWidth<F,W> : IFixedWidth<F>

@@ -17,18 +17,23 @@ namespace Z0
         public DW DataWidth => DW.W3; 
 
         [MethodImpl(Inline)]
-        public static implicit operator int(W src) => (int)src.DataWidth;
+        public static implicit operator int(W src) 
+            => (int)src.DataWidth;
 
         [MethodImpl(Inline)]
-        public static implicit operator DW(W src) => src.DataWidth;
+        public static implicit operator DW(W src) 
+            => src.DataWidth;
 
         [MethodImpl(Inline)]        
         public bool Equals(W w) => true;
 
-        public override string ToString() => DataWidth.FormatValue();
+        public override string ToString() 
+            => DataWidth.FormatValue();
         
-        public override int GetHashCode() => DataWidth.GetHashCode();
+        public override int GetHashCode() 
+            => DataWidth.GetHashCode();
         
-        public override bool Equals(object obj) => obj is W;
+        public override bool Equals(object obj) 
+            => obj is W;
     }
 }

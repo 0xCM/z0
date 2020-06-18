@@ -9,20 +9,15 @@ namespace Z0
 
     using static Konst;
 
-
-    readonly struct Art 
-    {
-        readonly IArtistryContext Context;        
-
+    partial class Widths
+    {        
+        /// <summary>
+        /// Computes the number of bits occupied by an instance of a parametrically-identified type
+        /// </summary>
+        /// <typeparam name="T">The measurable type</typeparam>
         [MethodImpl(Inline)]
-        public Art(IArtistryContext context)
-        {
-            Context = context;
-        }
-
-        public void Display()
-        {
-            CalcDisplay.Service.Display();
-        }
+        public static uint bits<T>()
+            where T : struct
+                =>  bytes<T>()*8;
     }
 }

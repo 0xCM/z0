@@ -4,11 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Z0.Asm;
 
-    public interface ITypeWidth<F> : ITypeWidth, IDataWidth<F>, ITypedLiteral<F,TypeWidth,uint>
-        where F : struct, ITypeWidth<F>
-    {        
-        TypeWidth ITypeWidth.TypeWidth => Widths.type<F>();        
+    public interface IArtistryContext : IContext
+    {
+        IAsmContext AsmContext {get;}
+        
+        IAppMsgSink AppMsgSink {get;}        
+        
+        PartId[] Parts {get;}        
     }    
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public static partial class Widths
     {        
         public static W1 w1 => default(W1);

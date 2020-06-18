@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
     using static Konst;
 
@@ -23,12 +22,16 @@ namespace Z0
 
         public W512 W => default;
         
-        public VectorWidth Width => VectorWidth.W512;       
+        public VectorWidth Width 
+            => VectorWidth.W512;       
 
-        public NumericKind CellKind => NumericKinds.kind<T>();
+        public NumericKind CellKind 
+            => NumericKinds.kind<T>();
 
-        public NumericWidth CellWidth => (NumericWidth)Widths.measure<T>();
+        public NumericWidth CellWidth 
+            => (NumericWidth)Widths.bits<T>();
 
-        public Type TypeDefinition => typeof(void);
+        public Type TypeDefinition 
+            => typeof(void);
     }   
 }

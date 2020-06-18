@@ -41,8 +41,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static MemRef memref(ReadOnlySpan<byte> src)
             => new MemRef(Control.gptr(Control.head(src)), src.Length);
-
-        public static MemRef Empty => new MemRef(default(Vector128<ulong>));
                 
         ulong Lo
         {
@@ -128,5 +126,8 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash();
+        
+        public static MemRef Empty 
+            => new MemRef(default(Vector128<ulong>));
     }
 }

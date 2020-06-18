@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
     public interface IVectorWidth<F> : IVectorWidth, IFixedWidth<F>, ITypedLiteral<F,VectorWidth,uint>
         where F : struct, IVectorWidth<F>

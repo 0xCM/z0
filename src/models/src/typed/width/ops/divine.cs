@@ -19,11 +19,11 @@ namespace Z0
         public static TypeWidth divine(Type t)
         {
             if(t.IsVector())
-                return Widths.vector(t);
+                return vector(t);
             else if(t.IsBlocked())
-                return Widths.blocked(t);
+                return blocked(t);
             if(NumericKinds.test(t))
-                return (TypeWidth)Widths.numeric(t);
+                return (TypeWidth)numeric(t);
             else 
                 return t.Tag<WidthAttribute>().MapValueOrDefault(a => a.TypeWidth, TypeWidth.None);
         }

@@ -4,17 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
 
-
-
-    public interface ISized
+    public interface IDisplay
     {
-        DataWidth Width {get;}
-    }
-
-    public interface ISized<W> : ISized
-        where W : unmanaged, IDataWidth
-    {        
-        DataWidth ISized.Width => Widths.data<W>();
+        void Display();
     }
 }

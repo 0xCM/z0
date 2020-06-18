@@ -27,7 +27,7 @@ namespace Z0
 
         public NumericKind CellKind => NumericKinds.kind<T>();               
 
-        public NumericWidth CellWidth => (NumericWidth)Widths.measure<T>();
+        public NumericWidth CellWidth => (NumericWidth)Widths.bits<T>();
 
         public Type TypeDefinition => typeof(Vector256<T>).GenericDefinition2();
     }   

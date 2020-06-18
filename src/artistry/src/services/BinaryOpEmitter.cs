@@ -7,23 +7,23 @@ namespace Z0
     using System;
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
     using static Control;
 
     public readonly struct BinaryOpEmitter
     {
+        [MethodImpl(Inline)]
         public static BinaryOp<T> emit<T>(string name, Span<byte> code)   
-            => BinaryOpEmitter<T>.emit(name,code);
+            => BinaryOpEmitter<T>.emit(name, Spans.liberate(code));
         
+        [MethodImpl(Inline)]
         public static BinaryOp<T> emit<T>(string name, BinaryCode code)
-        {
-            var buffer = code.Data;
-            return BinaryOpEmitter.emit<T>(name, code);
-        }
+            => BinaryOpEmitter<T>.emit(name, Spans.liberate(span(code.Data)));
     }
 
-    public readonly struct BinaryOpEmitter<T>
+    readonly struct BinaryOpEmitter<T>
     {
         public static BinaryOp<T> emit(string name, Span<byte> buffer)
         {   

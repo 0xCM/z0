@@ -9,6 +9,8 @@ namespace Z0
 
     using static CalculatorCode;
 
+    using E = BinaryOpEvaluator;
+
     public readonly struct CalcNative
     {
         /// <summary>
@@ -18,7 +20,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         public static byte eval(Kinds.Mul f, byte x, byte y)
-            => Evaluator.eval(x,y, mul_ᐤ8uㆍ8uᐤ);
+            => E.eval(f, mul_ᐤ8uㆍ8uᐤ, x,y);
 
         /// <summary>
         /// Executes the code defined by <see cref="sub_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>
@@ -27,7 +29,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         public static byte eval(Kinds.Sub f, byte x, byte y)
-            => Evaluator.eval(x, y, sub_ᐤ8uㆍ8uᐤ);
+            => E.eval(f,sub_ᐤ8uㆍ8uᐤ, x, y );
 
         /// <summary>
         /// Executes the code defined by <see cref="and_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>
@@ -36,6 +38,6 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         public static byte eval(Kinds.And f, byte x, byte y)
-            => Evaluator.eval(x, y, and_ᐤ8uㆍ8uᐤ);
+            => E.eval(f, and_ᐤ8uㆍ8uᐤ, x, y);
     }
 }
