@@ -8,9 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
-    using static Memories;
-
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>

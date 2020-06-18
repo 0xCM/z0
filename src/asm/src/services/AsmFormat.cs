@@ -163,7 +163,7 @@ namespace Z0.Asm
             }
 
             if(config.EmitFunctionTimestamp)
-                lines.Add(comment(time.now().ToLexicalString()));
+                lines.Add(comment(Time.now().ToLexicalString()));
             
             return lines.ToArray();
         }

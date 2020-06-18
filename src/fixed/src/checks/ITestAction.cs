@@ -17,7 +17,7 @@ namespace Z0
         {
             var succeeded = true;
             
-            var clock = time.counter(true);
+            var clock = Time.counter(true);
             try
             {
                 f();
@@ -39,7 +39,7 @@ namespace Z0
         {
             var succeeded = true;
             
-            var clock = time.counter(true);
+            var clock = Time.counter(true);
             try
             {
                 f(point);
@@ -63,7 +63,7 @@ namespace Z0
         {
             var succeeded = true;
             
-            var clock = time.counter(true);
+            var clock = Time.counter(true);
             try
             {
                 f();

@@ -6,13 +6,33 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Diagnostics;
 
     using static Konst;
 
-    public static class Time 
-    {        
+    public static class Time
+    {
+        /// <summary>
+        /// Right now
+        /// </summary>
         [MethodImpl(Inline)]
-        internal static T[] array<T>(params T[] src)
-            => src;
+        public static DateTime now()
+            => DateTime.Now;
+
+        /// <summary>
+        /// Creates a new stopwatch and optionally start it
+        /// </summary>
+        /// <param name="start">Whether to start the new stopwatch</param>
+        [MethodImpl(Inline)]   
+        public static Stopwatch stopwatch(bool start = true) 
+            => start ? Stopwatch.StartNew() : new Stopwatch();
+
+        /// <summary>
+        /// Allocates and optionally starts a system counter
+        /// </summary>
+        [MethodImpl(Inline)]   
+        public static SystemCounter counter(bool start = false) 
+            => SystemCounter.Create(start);
     }
 }

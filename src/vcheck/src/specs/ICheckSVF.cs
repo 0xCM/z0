@@ -85,7 +85,7 @@ namespace Z0
             var cells = vcount<T>(n128);
             var succeeded = true;
             var casename = Context.CaseName(f);
-            var count = time.counter();
+            var count = Time.counter();
             
             count.Start();
             try
@@ -116,7 +116,7 @@ namespace Z0
             var cells = vcount<T>(n256);
             var succeeded = true;
             var casename = Context.CaseName(f);
-            var count = time.counter();
+            var count = Time.counter();
             
             count.Start();
             try
@@ -150,7 +150,7 @@ namespace Z0
             var cells = vcount(w,t);
             var succeeded = true;
             var blocks = left.BlockCount;
-            var count = time.counter();
+            var count = Time.counter();
 
             count.Start();
             try
@@ -185,7 +185,7 @@ namespace Z0
             var cells = vcount(w,t);
             var succeeded = true;
             var blocks = left.BlockCount;
-            var count = time.counter();
+            var count = Time.counter();
             
             count.Start();
             try
@@ -224,7 +224,7 @@ namespace Z0
         {
             var succeeded = true;
             var casename = Context.CaseName(f);
-            var count = time.counter();
+            var count = Time.counter();
             
             count.Start();
 
@@ -256,7 +256,7 @@ namespace Z0
         {
             var succeeded = true;
             var casename = Context.CaseName(f);
-            var count = time.counter();
+            var count = Time.counter();
             
             count.Start();
 
@@ -295,7 +295,7 @@ namespace Z0
         {            
             var succeeded = true;
             var casename = Context.CaseName(f);
-            var count = time.counter();
+            var count = Time.counter();
             
             count.Start();
 
@@ -344,7 +344,7 @@ namespace Z0
         {
             var succeeded = true;
             var casename = Context.CaseName(f);
-            var count = time.counter();
+            var count = Time.counter();
             
             count.Start();
 

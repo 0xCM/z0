@@ -16,9 +16,9 @@ namespace Z0
     {
         public IAgentEventSink EventLog {get;}
 
-        public AgentContext(IAgentEventSink EventLog)
+        public AgentContext(IAgentEventSink sink)
         {
-            this.EventLog = EventLog;
+            EventLog = sink;
         }
 
         public void Register(ISystemAgent agent)
@@ -27,30 +27,7 @@ namespace Z0
         public IEnumerable<ISystemAgent> Memberhsip 
             => Agents.Values;        
 
-        ConcurrentDictionary<ulong, ISystemAgent> Agents {get;}
+        ConcurrentDictionary<ulong,ISystemAgent> Agents {get;}
             = new ConcurrentDictionary<ulong, ISystemAgent>();
-    }
-
-    /// <summary>
-    /// Defines a shared context for a set of agents
-    /// </summary>
-    public class AgentContext<D> : IAgentContext<D>
-    {
-
-        public IAgentEventSink<D> EventLog {get;}
-        
-        public AgentContext InnerContext {get;}
-
-        public AgentContext(IAgentEventSink<D> log)
-        {
-            this.EventLog = log;
-            this.InnerContext = new AgentContext(log);
-        }
-
-        public void Register(ISystemAgent agent)
-            => InnerContext.Register(agent);
-                
-        public IEnumerable<ISystemAgent> Memberhsip 
-            => InnerContext.Memberhsip;
     }
 }

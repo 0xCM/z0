@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ulong Timestamp(uint ServerId = 0)        
-            => (ulong)(time.now().Ticks - TimeOrigin.Ticks);                        
+            => (ulong)(Time.now().Ticks - TimeOrigin.Ticks);                        
 
         static DateTime TimeOrigin => new DateTime(2019,01,01);        
     }

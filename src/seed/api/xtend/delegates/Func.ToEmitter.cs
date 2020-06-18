@@ -11,6 +11,12 @@ namespace Z0
 
     partial class XTend
     {
+        public static string ToLegalIdentifier(this OpIdentity src)
+            => CodeIdMachine.Service.Manufacture(src);
+
+        public static FileName ToLegalFileName(this OpIdentity src, FileExtension ext)
+            => FileName.Define(FileIdMachine.Service.Manufacture(src), ext);        
+     
         [MethodImpl(Inline)]
         public static Emitter<T> ToEmitter<T>(this System.Func<T> f)
             => Extend.emitter(f);

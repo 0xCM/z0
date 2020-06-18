@@ -82,7 +82,7 @@ namespace Z0
             {
                 var execTime = Duration.Zero;
                 var clock = counter(true);                    
-                var tsStart = time.now();
+                var tsStart = Time.now();
 
                 if(unit is IExplicitTest et)  
                     ExecExplicit(et, host.Name,results);
@@ -95,7 +95,7 @@ namespace Z0
                 clock.Stop();
                 
                 var hosturi = OpUriBuilder.HostUri(host);
-                term.print(PostUnit(hosturi, clock.Time, tsStart, time.now())); 
+                term.print(PostUnit(hosturi, clock.Time, tsStart, Time.now())); 
 
             }
             catch(Exception e)
@@ -242,7 +242,7 @@ namespace Z0
             
             try
             {                                
-                var tsStart = time.now();
+                var tsStart = Time.now();
                 messages.Add(PreCase(casename, tsStart));                
                 
                 clock.Start();
@@ -250,7 +250,7 @@ namespace Z0
                 clock.Stop();
 
                 messages.AddRange(unit.Dequeue());
-                messages.Add(PostCase(casename, clock.Time, tsStart, time.now()));
+                messages.Add(PostCase(casename, clock.Time, tsStart, Time.now()));
 
                 var outcomes = control.TakeOutcomes().ToArray();                
                 if(outcomes.Length != 0)
@@ -370,7 +370,7 @@ namespace Z0
             var collected = new List<IAppMsg>();
             try
             {
-                var tsStart = time.now();
+                var tsStart = Time.now();
                 collected.Add(PreCase(casename, tsStart));
 
                 clock.Start();
@@ -378,7 +378,7 @@ namespace Z0
                 clock.Stop();
 
                 collected.AddRange(unit.Dequeue());
-                collected.Add(PostCase(casename, clock.Time, tsStart, time.now()));
+                collected.Add(PostCase(casename, clock.Time, tsStart, Time.now()));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)

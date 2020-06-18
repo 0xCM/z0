@@ -120,7 +120,7 @@ namespace Z0.Mkl
             var report = text.build();
             report.AppendLine(input(firstTitle, firstValue, silent));
             report.AppendLine(input(secondTitle, secondValue, silent));
-            return (time.stopwatch(), report.ToString());
+            return (Time.stopwatch(), report.ToString());
         }
 
     
@@ -160,7 +160,7 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         static Stopwatch start()
-            => time.stopwatch();
+            => Time.stopwatch();
 
         public static void sasum()
         {
@@ -171,7 +171,7 @@ namespace Z0.Mkl
             Span<float> x = new float[]{1.0f,  -2.0f,  3.0f,  4.0f,  -5.0f,  6.0f,  -7.0f,  8.0f,  -9.0f,  10.0f};
             input(x.FormatAsVector());
 
-            var sw = time.stopwatch();
+            var sw = Time.stopwatch();
             var result = CBLAS.cblas_sasum(n, ref x[0], incx);
             var ss = snap(sw);            
 
@@ -211,7 +211,7 @@ namespace Z0.Mkl
             Span<float> y = new float[]{.5f, .5f, .5f, .5f, .5f};
             input($"alpha={alpha}, x = {x.FormatAsVector()}, y = {y.FormatAsVector()}");
 
-            var sw = time.stopwatch();
+            var sw = Time.stopwatch();
             CBLAS.cblas_saxpy(n, alpha, ref x[0], incx, ref y[0], incy);
             var ss = snap(sw);            
 

@@ -30,7 +30,7 @@ namespace Z0.Machines
             this.Transition = transition;
             this.ReceiptCount = 0;
             this.TransitionCount = 0;
-            this.Runtime = time.stopwatch(false);
+            this.Runtime = Time.stopwatch(false);
         }
 
         /// <summary>

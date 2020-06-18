@@ -14,7 +14,14 @@ namespace Z0
     /// </summary>
     public class ServerComplex : SystemAgent
     {
+        ServerAgent[] Servers;
+
+        ISystemAgent EventSink;
+
         static Option<ServerComplex> Complex {get; set;}
+
+        public static ServerComplex Define(AgentContext context)
+            => new ServerComplex(context);
 
         /// <summary>
         /// Starts a new complex or returns the existing complex
@@ -49,11 +56,9 @@ namespace Z0
             return complex;
         }
 
-
-        static readonly AgentIdentity Identity = (UInt32.MaxValue, UInt32.MaxValue);
+        static AgentIdentity Identity 
+            => (UInt32.MaxValue, UInt32.MaxValue);
         
-        public static ServerComplex Define(AgentContext Context)
-            => new ServerComplex(Context);
 
         ServerComplex(AgentContext Context)
             : base(Context, Identity)
@@ -61,19 +66,15 @@ namespace Z0
             Servers = new ServerAgent[]{};
         }
 
-        public void Configure(IEnumerable<ServerConfig> Configs, ISystemAgent EventSink)
+        public void Configure(IEnumerable<ServerConfig> sconfig, ISystemAgent sink)
         {
-            var configs = Configs.ToArray();
+            var configs = sconfig.ToArray();
             Servers = new ServerAgent[configs.Length];
             for(var i=0; i<configs.Length; i++)
                 Servers[i] = ServerAgent.Define(Context, configs[i]);
          
-            this.EventSink = EventSink;
+            EventSink = sink;
         }
-
-        ServerAgent[] Servers;
-
-        ISystemAgent EventSink;
 
         protected override async void OnStart()
         {

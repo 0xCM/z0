@@ -13,14 +13,9 @@ namespace Z0
     /// </summary>    
     public abstract class SystemAgent : ISystemAgent<AgentContext>
     {
-        protected SystemAgent(AgentContext Context, AgentIdentity Identity)
-        {
-            this.ServerId = Identity.ServerId;
-            this.AgentId = Identity.AgentId;
-            this.Context = Context;
-            Context.Register(this);
-            this.State = AgentState.Created;
-        }
+        public AgentContext Context {get;}
+
+        public event OnAgentTransition StateChanged;
 
         AgentState _State;
 
@@ -42,6 +37,15 @@ namespace Z0
         /// an invalid id for any other agent
         /// </remarks>
         public uint AgentId {get;}
+
+        protected SystemAgent(AgentContext context, AgentIdentity id)
+        {
+            ServerId = id.ServerId;
+            AgentId = id.AgentId;
+            Context = context;
+            context.Register(this);
+            State = AgentState.Created;
+        }
 
         public bool IsServer
             => AgentId == 0;
@@ -71,10 +75,6 @@ namespace Z0
                 StateChanged?.BeginInvoke(in transition, new AsyncCallback(x =>{}), this);
             }
         }
-
-        public AgentContext Context {get;}
-
-        public event OnAgentTransition StateChanged;
 
         void DoRun()
         {

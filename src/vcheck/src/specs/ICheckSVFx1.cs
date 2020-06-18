@@ -76,7 +76,7 @@ namespace Z0
         {
             var succeeded = true;
             var casename = Context.CaseName<W,T>(f);
-            var clock = time.counter();
+            var clock = Time.counter();
 
             clock.Start();
             try

@@ -66,7 +66,7 @@ namespace Z0
         public static void EvolveSeries<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)
             where T : unmanaged
         {            
-            var sw = time.stopwatch();
+            var sw = Time.stopwatch();
             var series = Define(domain, seed); 
             var terms = series.Terms().ToSpan(count);
             var elapsed = Duration.Define(sw.ElapsedTicks);
@@ -78,7 +78,7 @@ namespace Z0
         static SeriesEvolution<T> Execute<T>(in ulong[] seed, in Interval<T> domain, int steps)
             where T : unmanaged
         {
-            var sw = time.stopwatch();
+            var sw = Time.stopwatch();
             
             var series = Define(domain, seed); 
             var s0 = series.Snapshot();                     
@@ -98,7 +98,7 @@ namespace Z0
         public static async Task Evolve<T>(Interval<T> domain, Action<SeriesEvolution<T>> receiver, int count = Pow2.T06, int steps = (int)Pow2.T19)
             where T : unmanaged
         {
-            var sw = time.stopwatch();
+            var sw = Time.stopwatch();
             var variations = from i in gmath.range(count) 
                     let seed = PolySeed1024.Entropic
                     let evolve = TimeSeries.Evolve(seed, domain, steps)

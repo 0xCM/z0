@@ -4,7 +4,7 @@
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
     <Models>$(Src)models/z0.models.csproj</Models>
     <Features>$(Src)features/z0.features.csproj</Features>
-
+    <Enhanced>$(Src)enhanced/z0.enhanced.csproj</Enhanced>
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
 
     <Monadic>$(Src)monadic/z0.monadic.csproj</Monadic>

@@ -41,7 +41,7 @@ namespace Z0
         
         public EvalResult MatchBinaryOps(in BufferSeq buffers, FixedWidth w, in ConstPair<ApiMemberCode> paired)
         {
-            var clock = time.counter();
+            var clock = Time.counter();
             try
             {
                 switch(w)
@@ -258,7 +258,7 @@ namespace Z0
         public EvalResult ExecAction(Action action, OpUri f)
         {
             
-            var clock = time.counter(true);
+            var clock = Time.counter(true);
             try
             {
                 action();
@@ -273,7 +273,7 @@ namespace Z0
         public EvalResult ExecAction(Action action, OpUri f, OpUri g)
         {
             
-            var clock = time.counter(true);
+            var clock = Time.counter(true);
             try
             {
                 action();

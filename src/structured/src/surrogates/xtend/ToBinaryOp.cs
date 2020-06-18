@@ -17,4 +17,5 @@ namespace Z0
         public static S.BinaryOp<T> ToBinaryOp<T>(this S.Func<T,T,T> src)
             => S.binary(src.Subject.ToBinaryOp(), src.Id);
     }
+
 }
