@@ -13,6 +13,7 @@ namespace Z0
 
     using NK = NumericKind;
 
+    [ApiHost]
     public partial class NumericKinds
     {            
         [MethodImpl(Inline)]

@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The thing that should not be null</param>
         /// <typeparam name="T">The thing's type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static T insist<T>(T src)
             where T : class
         {

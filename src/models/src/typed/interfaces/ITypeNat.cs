@@ -59,6 +59,14 @@ namespace Z0
 
     }
 
+    public interface IIndexed<F,N> : IIndexed<F>, ITypeNat<N>
+        where F : struct, IIndexed<F,N>
+        where N : unmanaged, ITypeNat
+    {
+        ulong ITypeNat.NatValue 
+            => default(N).NatValue;
+    }
+
     /// <summary>
     /// Characterizes an atom of the type natural grammar
     /// </summary>

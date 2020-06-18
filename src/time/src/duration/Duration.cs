@@ -121,7 +121,7 @@ namespace Z0
         public ulong Ns
         {
             [MethodImpl(Inline)]
-            get => Z0.TimerTicks.ToNs(Ticks);
+            get => Z0.TimerTicks.ns(Ticks);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Z0
         public double Ms
         {
             [MethodImpl(Inline)]
-            get => Z0.TimerTicks.ToMs(Ticks);
+            get => Z0.TimerTicks.ms(Ticks);
         }
 
         public TimeSpan TimeSpan

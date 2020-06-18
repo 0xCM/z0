@@ -20,7 +20,7 @@ namespace Z0
         public static BinaryLiteral define(Base2 @base2, string name, object value, string text)
             => new BinaryLiteral(name,value,text);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static BinaryLiteral<T> define<T>(Base2 @base2, string name, T value, string text)
             where T : unmanaged
                 => new BinaryLiteral<T>(name, value, text);
@@ -51,7 +51,7 @@ namespace Z0
         /// Discerns the numeric kind of a specified binary literal
         /// </summary>
         /// <param name="src">The source literal</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static NumericKind kind<T>(BinaryLiteral<T> src)
             where T : unmanaged
                 => NumericKinds.kind<T>();
