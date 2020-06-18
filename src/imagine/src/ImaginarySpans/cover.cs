@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    readonly partial struct Imagine
+    partial struct Imagine
     {
         /// <summary>
         /// Covers a pointer-identified T-counted buffer a readonly span

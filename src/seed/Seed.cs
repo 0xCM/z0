@@ -15,11 +15,6 @@ namespace Z0
     }
 
 
-    [ApiHost]
-    public partial class AsIn : IApiHost<AsIn>
-    {
-
-    }
 
     public static partial class XTend
     {

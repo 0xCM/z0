@@ -25,13 +25,16 @@ namespace Z0
         public static void to<T>(T src, Span<Bit> dst)
             where T : struct
         {
-            var data = bytes(src);
-            var count = length(data,dst);
-            for(var i=0; i< data.Length; i++)
+            ref readonly var x = ref Imagine.@as<T,byte>(ref src);
+            var count = size<T>();
+            ref var y = ref head(dst);
+
+            for(var i=0; i<count; i++)
             {
-                ref readonly var b = ref skip(data,i);
-                for(var j=0; j<8; j++)
-                    seek(dst,j) = bit.test(b,j);
+                ref readonly var xx = ref skip(x,i);
+                ref var z = ref seek(ref y,i);
+                for(var j = 0; j<8; j++)
+                    seek(ref y,i+j) = bit.test(xx,i);
             }
         }
 

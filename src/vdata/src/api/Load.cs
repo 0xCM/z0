@@ -11,8 +11,7 @@ namespace Z0
     using static Konst;
     using static Vectors;
     using static refs;
- 
- 
+  
     partial class Data
     {                
         /// <summary>

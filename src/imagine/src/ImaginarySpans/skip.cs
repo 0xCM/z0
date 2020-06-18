@@ -10,24 +10,6 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
-    {
-        /// <summary>
-        /// Eliminates trailing zeros in the source span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        public static Span<byte> TrimEnd(this Span<byte> src)
-        {
-            var length = src.Length;
-            for(var i= length - 1; i>=0; i--)
-            {
-                ref readonly var x = ref Imagine.skip(src,i);
-                if(x != 0)
-                    return Imagine.slice(src, 0,length);
-            }
-            return Span<byte>.Empty;
-        }
-    }
 
     readonly partial struct Imagine
     {

@@ -95,7 +95,6 @@ namespace Z0
             return PackUnsignedSaturate(v1,v2);         
         }
 
-
         /// <summary>
         /// __m256i _mm256_packus_epi32 (__m256i a, __m256i b)VPACKUSDW ymm, ymm, ymm/m256
         /// (8x32w,8x32w) -> 16x16w

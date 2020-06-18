@@ -9,8 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
         
     using static Konst;
-    using static Memories;
+    using static Imagine;
     using static HexConst;
+    using static VectorKonst;
+    using static Control;
 
     public static partial class Data
     {
@@ -22,7 +24,18 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vincrements<T>(W128 w)
             where T : unmanaged
-                => SymbolicData.vincrements<T>(w);
+       {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return vgeneric<T>(Vectors.vload(w, head(Inc128x8u)));
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return vgeneric<T>(Vectors.vload(w, head(Inc128x16u)));
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
+                return vgeneric<T>(Vectors.vload(w, head(Inc128x32u)));
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return vgeneric<T>(Vectors.vload(w, head(Inc128x64u)));
+            else
+                throw Unsupported.define<T>();
+        }
 
         /// <summary>
         /// Creates a 256-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
@@ -32,7 +45,18 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vincrements<T>(W256 w)
             where T : unmanaged
-                => SymbolicData.vincrements<T>(w);
+        {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return vgeneric<T>(Vectors.vload(w, head(Inc256x8u)));
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return vgeneric<T>(Vectors.vload(w, head(Inc256x16u)));
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int)  || typeof(T) == typeof(float))
+                return vgeneric<T>(Vectors.vload(w, head(Inc256x32u)));
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return vgeneric<T>(Vectors.vload(w, head(Inc256x64u)));
+            else
+                throw Unsupported.define<T>();
+        }
 
         /// <summary>
         /// Creates a 512-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
@@ -55,41 +79,41 @@ namespace Z0
                 throw Unsupported.define<T>();
         }
 
-        public static ReadOnlySpan<byte> Inc128x8u  
-            => new byte[16]{0,1,2,3,4,5,6,7,8,9,10,B,12,13,14,F};
+        // public static ReadOnlySpan<byte> Inc128x8u  
+        //     => new byte[16]{0,1,2,3,4,5,6,7,8,9,10,B,12,13,14,F};
 
-        public static ReadOnlySpan<byte> Inc128x16u  
-            => new byte[16]{0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0};
+        // public static ReadOnlySpan<byte> Inc128x16u  
+        //     => new byte[16]{0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0};
 
-        public static ReadOnlySpan<byte> Inc128x32u  
-            => new byte[16]{0,0,0,0,1,0,0,0,2,0,0,0,3,0,0,0};
+        // public static ReadOnlySpan<byte> Inc128x32u  
+        //     => new byte[16]{0,0,0,0,1,0,0,0,2,0,0,0,3,0,0,0};
 
-        public static ReadOnlySpan<byte> Inc128x64u  
-            => new byte[16]{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0};
+        // public static ReadOnlySpan<byte> Inc128x64u  
+        //     => new byte[16]{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0};
 
-        public static ReadOnlySpan<byte> Inc256x8u  
-            => new byte[32]{
-                0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
-                16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-                };
+        // public static ReadOnlySpan<byte> Inc256x8u  
+        //     => new byte[32]{
+        //         0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
+        //         16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
+        //         };
 
-        public static ReadOnlySpan<byte> Inc256x16u  
-            => new byte[32]{
-                0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,
-                8,0,9,0,10,0,11,0,12,0,13,0,14,0,15,0
-                };
+        // public static ReadOnlySpan<byte> Inc256x16u  
+        //     => new byte[32]{
+        //         0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,
+        //         8,0,9,0,10,0,11,0,12,0,13,0,14,0,15,0
+        //         };
 
-        public static ReadOnlySpan<byte> Inc256x32u  
-            => new byte[32]{
-                0,0,0,0,1,0,0,0,2,0,0,0,3,0,0,0,
-                4,0,0,0,5,0,0,0,6,0,0,0,7,0,0,0
-                };
+        // public static ReadOnlySpan<byte> Inc256x32u  
+        //     => new byte[32]{
+        //         0,0,0,0,1,0,0,0,2,0,0,0,3,0,0,0,
+        //         4,0,0,0,5,0,0,0,6,0,0,0,7,0,0,0
+        //         };
 
-        public static ReadOnlySpan<byte> Inc256x64u  
-            => new byte[32]{
-                0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-                2,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0
-                };
+        // public static ReadOnlySpan<byte> Inc256x64u  
+        //     => new byte[32]{
+        //         0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+        //         2,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0
+        //         };
 
         public static ReadOnlySpan<byte> Inc512x8u  
             => new byte[64]{
@@ -122,25 +146,5 @@ namespace Z0
                 4,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,
                 6,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,
                 };
-
-        [ResourceProvider]
-        static void RegisterInc()
-        {
-            const string basename = "Inc";
-            var w = default(ITypeWidth);
-            var index = IncIndex;
-
-            w = w128;
-            Register(index++, Identify.resource(basename, w, NumericKind.U8), Inc128x8u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U16), Inc128x16u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U32), Inc128x32u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U64), Inc128x64u);
-            
-            w = w256;
-            Register(index++, Identify.resource(basename, w, NumericKind.U8), Inc256x8u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U16), Inc256x16u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U32), Inc256x32u);
-            Register(index++, Identify.resource(basename, w, NumericKind.U64), Inc256x64u);
-        }
     }
 }

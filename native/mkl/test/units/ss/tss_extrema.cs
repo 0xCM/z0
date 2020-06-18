@@ -41,7 +41,7 @@ namespace Z0.Mkl
         {
             var cycles = Pow2.T12;
             var samples = Pow2.T14;
-            var src = NumericSpan.to<double>(Random.Span<long>(samples, Interval.closed(-2000L, 2000L)));
+            var src = Imagine.transform<double>(Random.Span<long>(samples, Interval.closed(-2000L, 2000L)));
             var ds = Observations.Load(src);
             var dst = 0.0;
             var last = 0.0;
@@ -64,7 +64,7 @@ namespace Z0.Mkl
         {
             var src = Random.Span<long>(Pow2.T14, Interval.closed(-2000L, 2000L));
             var expect = gspan.avg(src);
-            var converted = NumericSpan.to<double>(src);
+            var converted = Imagine.transform<double>(src);
             var actual = (long)Observations.Load(converted).Mean()[0];
             Claim.eq(expect,actual);
         }

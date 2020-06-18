@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;    
+
 
     using static Konst;
 
@@ -15,6 +17,11 @@ namespace Z0
     public readonly partial struct Imagine
     {
         const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline)]   
+        internal static T[] alloc<T>(int length)
+            => new T[length];
+
     }
 
     public static partial class XTend

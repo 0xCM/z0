@@ -81,24 +81,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> packusHi(N256 w, N32 src, N16 dst)
             => vload(w,PackUSHi32x256x16u);
-
-        [ResourceProvider]
-        static void RegisterPacks()
-        {
-            var name = string.Empty;
-            var index = PackIndex;
-
-            name = "PackUSLo";
-            Register(index++, Identify.resource(name, w16, w128, NumericKind.U8), PackUSLo16x128x8u);
-            Register(index++, Identify.resource(name, w32, w128, NumericKind.U16), PackUSLo32x128x16u);
-            Register(index++, Identify.resource(name, w16, w256, NumericKind.U8), PackUSLo16x256x8u);
-            Register(index++, Identify.resource(name, w32, w256, NumericKind.U16), PackUSLo32x256x16u);
-
-            name = "PackUSHi";
-            Register(index++, Identify.resource(name, w16, w128, NumericKind.U8), PackUSHi16x128x8u);
-            Register(index++, Identify.resource(name, w32, w128, NumericKind.U16), PackUSHi32x128x16u);
-            Register(index++, Identify.resource(name, w16, w256, NumericKind.U8), PackUSHi16x256x8u);
-            Register(index++, Identify.resource(name, w32, w256, NumericKind.U16), PackUSHi32x256x16u);
-        }
     }
 }

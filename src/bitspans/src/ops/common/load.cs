@@ -12,6 +12,11 @@ namespace Z0
 
     partial class BitSpans
     {
+
+        [MethodImpl(Inline), Op]
+        public static BitSpan8 init(Span<byte> src)
+            => new BitSpan8(src);
+            
         /// <summary>
         /// Wraps a bitspan over a span of extant bits
         /// </summary>

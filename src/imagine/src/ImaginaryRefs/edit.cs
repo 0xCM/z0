@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T edit<T>(in T src)   
-            => ref As<T,T>(ref AsRef(src));
+            => ref AsRef(src);
 
         /// <summary>
         /// Transforms a readonly S-cell into an editable T-cell

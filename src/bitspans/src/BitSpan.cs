@@ -10,6 +10,19 @@ namespace Z0
     using static Memories;
     using static BitSpans;
 
+    public readonly ref struct BitSpan8
+    {
+        public static BitSpan8 Empty => default;
+        
+        internal readonly Span<byte> Data;
+
+        [MethodImpl(Inline)]
+        public BitSpan8(Span<byte> src)
+        {
+            Data = src;
+        }
+    }
+
     /// <summary>
     /// Defines an anti-succinct data structure for bit representation
     /// </summary>
