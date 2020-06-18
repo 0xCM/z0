@@ -31,7 +31,7 @@ namespace Z0
         {
             Composition = api;
             Catalogs = api.Catalogs.ToArray();    
-            Hosts = (from owner in Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner)
+            Hosts = (from owner in Catalogs.SelectMany(c => c.Hosts).GroupBy(x => x.PartId)
                 from  host in owner
                 select host as IApiHost).ToArray();     
             Parts = api.Resolved;       

@@ -12,16 +12,11 @@ namespace Z0
     using static IdentityShare;
     
     public readonly struct OpUri : IUri<OpUri>, INullary<OpUri>
-    {   
-        /// <summary>
-        /// Emptiness of nothing
-        /// </summary>
-        public static OpUri Empty => new OpUri(OpUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
-
+    {
         /// <summary>
         /// The full uri in the form {Scheme}://{HostPath}/{OpId}
         /// </summary>
-        public readonly string UriText;
+        public string UriText {get;}
         
         /// <summary>
         /// The uri scheme, constrained to the defining enumeration
@@ -48,12 +43,8 @@ namespace Z0
         /// <summary>
         /// The defining part
         /// </summary>
-        public PartId Part => Host.Owner;
-
-        /// <summary>
-        /// The uri as an identifier
-        /// </summary>
-        public string IdentityText => UriText;
+        public PartId Part 
+            => Host.Owner;
         
         public bool IsEmpty
         {
@@ -73,9 +64,11 @@ namespace Z0
             get => new OpUri(Scheme, Host, GroupName, OpIdentity.Empty);
         }
 
-        public OpUri Loc => WithScheme(OpUriScheme.Located);
+        public OpUri Loc 
+            => WithScheme(OpUriScheme.Located);
 
-        public OpUri Hex => WithScheme(OpUriScheme.Hex);
+        public OpUri Hex 
+            => WithScheme(OpUriScheme.Hex);
 
         [MethodImpl(Inline)]
         public static ParseResult<OpUri> Parse(string text)
@@ -85,7 +78,8 @@ namespace Z0
         public static OpUri ParseDefault(string text, OpUri failed = default)
             => OpUriParser.The.Parse(text).ValueOrDefault(failed);            
 
-        OpUri INullary<OpUri>.Zero => Empty;
+        OpUri INullary<OpUri>.Zero 
+            => Empty;
             
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
@@ -136,13 +130,13 @@ namespace Z0
                 : OpUriBuilder.FullUriText(scheme, host.Owner, host.Name, GroupName, opid);
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => IdentityShare.format(this);
+            => UriText;
         
         public OpUri WithScheme(OpUriScheme scheme)
             => Define(scheme, Host, GroupName, OpId);
             
-
         [MethodImpl(Inline)]
         public int CompareTo(OpUri other)
             => compare(this, other);
@@ -159,5 +153,11 @@ namespace Z0
 
         public override string ToString()
             => Format();        
+
+        /// <summary>
+        /// Emptiness of nothing
+        /// </summary>
+        public static OpUri Empty 
+            => new OpUri(OpUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
     }
 }

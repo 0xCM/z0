@@ -16,6 +16,7 @@ namespace Z0
     {
         new E Broker {get;}
 
-        IEventBroker IBrokerClient.Broker => Broker;
+        IEventBroker IBrokerClient.Broker 
+            => Broker;
     }
 }

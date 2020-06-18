@@ -73,7 +73,7 @@ namespace Z0.Asm
 
         public void OnEvent(AppErrorEvent e)
         {
-            Report(AppMsg.Error(e.Payload));    
+            Report(AppMsg.Error(e.Error));    
         }
 
         public void OnEvent(MembersLocated e)
@@ -118,7 +118,7 @@ namespace Z0.Asm
 
         IEnumerable<IApiHost> Hosts
             => from c in Catalogs
-                from h in c.ApiHosts
+                from h in c.Hosts
                 select h as IApiHost;
 
         void AnalyzeExtracts(FilePath src)
@@ -142,18 +142,18 @@ namespace Z0.Asm
 
         ExtractReport CreateReport(IApiHost host, ExtractedMember[] src)
         {
-            var report = ExtractReport.Create(host.UriPath, src); 
-            Raise(ExtractReportCreated.Define(report));
+            var report = ExtractReport.Create(host.Uri, src); 
+            Raise(new ExtractReportCreated(report));
             return report;
         }
 
         Option<FilePath> SaveReport(ExtractReport src, FilePath dst)
-            => src.Save(dst).OnSome(f => Raise(ExtractReportSaved.Define(src.ApiHost, src.GetType(), src.RecordCount, f)));
+            => src.Save(dst).OnSome(f => Raise(new ExtractReportSaved(src.ApiHost, src.GetType(), src.RecordCount, f)));
 
         ApiMember[] LocateMembers(IApiHost host)
         {
             var located = MemberLocator.Located(host).ToArray();
-            Raise(MembersLocated.Define(host.UriPath, located));
+            Raise(new MembersLocated(host.Uri, located));
             return located;
         }
 
@@ -161,20 +161,20 @@ namespace Z0.Asm
         {
             var members = LocateMembers(host);            
             var extracted = Extractor.Extract(members);
-            Raise(MembersExtracted.Define(host.UriPath, extracted));            
+            Raise(new MembersExtracted(host.Uri, extracted));            
             return extracted;
         }
 
         public void Run(params PartId[] parts)
         {
-            var hosts = parts.Length == 0 ? Hosts : Hosts.Where(h => parts.Contains(h.Owner));            
+            var hosts = parts.Length == 0 ? Hosts : Hosts.Where(h => parts.Contains(h.PartId));            
             foreach(var host in hosts)
             {
                 var members = ExtractMembers(host);
                 if(members.Length !=0)
                 {
                     var report = CreateReport(host,members);
-                    var paths = CodeArchive.HostArchive(host.UriPath);                
+                    var paths = CodeArchive.HostArchive(host.Uri);                
                     SaveReport(report, paths.ExtractPath).OnSome(AnalyzeExtracts);
                 }
             }

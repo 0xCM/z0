@@ -206,7 +206,7 @@ namespace Z0.Asm
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
             var bits = ParsedCode.Define((MemoryAddress)start, raw, trimmed);
-            return OperationCapture.Define(id, outcome, bits);
+            return new OperationCapture(id, outcome, bits);
         }
 
         static ExtractTermCode? CalcTerm(in CaptureExchange exchange, int offset, int? ret_offset, out int delta)

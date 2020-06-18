@@ -11,30 +11,24 @@ namespace Z0
 
     public interface IApiHost : IIdentification
     {
-        Type HostingType {get;}        
+        Type HostType {get;}        
 
-        string HostName 
-            => UriPath.Name;
+        string Name 
+            => Uri.Name;
 
-        ApiHostUri UriPath 
-            => ApiHostUri.FromHost(HostingType);
+        ApiHostUri Uri 
+            => ApiHostUri.FromHost(HostType);
 
         string IIdentified.IdentityText 
-            => UriPath.Format();        
+            => Uri.Format();        
 
         ApiHostKind HostKind  
             => ApiHostKind.DirectAndGeneric;
 
-        PartId Owner 
-            => HostingType.Assembly.Id();
+        PartId PartId 
+            => HostType.Assembly.Id();
     
         IEnumerable<MethodInfo> HostedMethods 
-            => HostingType.DeclaredMethods(false);
-    }
-
-    public interface IApiHost<H> : IApiHost
-        where H : IApiHost<H>, new()
-    {
-        Type IApiHost.HostingType => typeof(H);                
+            => HostType.DeclaredMethods(false);
     }
 }

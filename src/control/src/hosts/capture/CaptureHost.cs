@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Memories;
+    using static Control;
     
     using static Asm.CaptureWorkflowEvents;
 
@@ -60,10 +60,6 @@ namespace Z0
             (this as ICaptureClient).Connect();            
         }
 
-        IChecks Claim => Checks.Checker;
-
-        ICheckEquatable Equatable => CheckEquatable.Checker;
-
         public void Dispose()
         {
             term.print($"Commpleted capture workflow");
@@ -102,7 +98,7 @@ namespace Z0
             Sink.Deposit(e);
 
             if(Settings.CollectAsmStats)
-                CollectAsmStats(e.Host, e.Payload);
+                CollectAsmStats(e.Host, e.Functions);
         }
 
         public void OnEvent(HexSaved e)
@@ -110,7 +106,7 @@ namespace Z0
             Sink.Deposit(e);
 
             if(Settings.MatchEmissions)
-                CaptureWorkflow.MatchEmissions.MatchEmissions(e.Host, e.Payload, e.Target);
+                CaptureWorkflow.MatchEmissions.MatchEmissions(e.Host, e.Code, e.Target);
         }
 
         public void OnEvent(MembersLocated e)
@@ -120,8 +116,7 @@ namespace Z0
             if(Settings.DuplicateCheck)
                 CheckDuplicates(e.Host, e.Members);
         }
-
-        
+       
         void CollectAsmStats(ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
         {
             var count = 0ul;

@@ -25,11 +25,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public AppException(IAppMsg src) 
             : base(src.Format()) 
-        { 
-            this.Message = src;
-        }
+                => Message = src;
           
         public override string ToString()
-            => Message.ToString();
+            => Message.Format();
     }
 }

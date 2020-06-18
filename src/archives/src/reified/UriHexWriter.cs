@@ -34,7 +34,7 @@ namespace Z0
 
         public void Write(UriHex[] src)
         {
-            var uripad = src.Max(x => x.OpUri.IdentityText.Length) + 1;
+            var uripad = src.Max(x => x.OpUri.UriText.Length) + 1;
             for(var i=0; i< src.Length; i++)
                 Write(src[i], uripad);
             StreamOut.Flush();

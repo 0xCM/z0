@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     /// <summary>
     /// Characterizes a stateful thing that functions as an exchange for application messages
     /// </summary>

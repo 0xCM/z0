@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
-    /// Characterizes a correlated message, accompanied by arbitrary content, that describes something that occurred
-    /// within the system
+    /// Characterizes a correlated message, accompanied by arbitrary content, 
+    /// that describes an occurrence of something interesting
     /// </summary>
     public interface IAppEvent : ICorrelated, ITextual
     {
@@ -19,7 +17,8 @@ namespace Z0
 
         string Description {get;}
 
-        bool IsError => false;
+        bool IsError 
+            => false;
 
         AppMsgColor Flair 
             => AppMsgColor.Blue;

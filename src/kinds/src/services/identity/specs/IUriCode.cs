@@ -19,6 +19,7 @@ namespace Z0
         /// </summary>
         OpUri OpUri {get;}
 
-        OpIdentity IIdentified<OpIdentity>.Id => OpUri.OpId;
+        OpIdentity IIdentified<OpIdentity>.Id 
+            => OpUri.OpId;
     }
 }

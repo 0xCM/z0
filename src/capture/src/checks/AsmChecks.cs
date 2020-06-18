@@ -98,8 +98,8 @@ namespace Z0.Asm
             var dId = Identify.Op(name, w, kind, false);
             var gId = Identify.Op(name, w, kind, true);            
             var archive = UriHexArchive.Create(CodeArchive.CodeDir);
-            var dBits = archive.Read(ApiHost.Create<dvec>().UriPath).Where(x => x.Id == dId).Single();
-            var gBits = archive.Read(ApiHost.Create<gvec>().UriPath).Where(x => x.Id == gId).Single();
+            var dBits = archive.Read(ApiHosts.from<dvec>().Uri).Where(x => x.Id == dId).Single();
+            var gBits = archive.Read(ApiHosts.from<gvec>().Uri).Where(x => x.Id == gId).Single();
             return Me.Match(Binary, w, dBits, gBits, dst);
         }
 

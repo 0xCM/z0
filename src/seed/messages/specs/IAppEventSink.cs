@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    
     public interface IAppEventSink : ISink
     {
        void Deposit(IAppEvent e);
@@ -21,7 +16,6 @@ namespace Z0
     public interface IAppEventSink<E> : IAppEventSink, ISink<E>
         where E : IAppEvent
     {
-        [MethodImpl(Inline)]
         void IAppEventSink.Deposit(IAppEvent e)
             => Deposit(e);
     }

@@ -31,21 +31,13 @@ namespace Z0
         /// </summary>
         public DirectApiOp[] Members {get;}
 
-        /// <summary>
-        /// The hosting type uri
-        /// </summary>
-        public ApiHostUri HostUri => Host.UriPath;
 
         [MethodImpl(Inline)]
-        public static DirectApiGroup Define(IApiHost host, OpIdentity id, IEnumerable<DirectApiOp> src)  
-            => new DirectApiGroup(host,id, src.ToArray());
-
-        [MethodImpl(Inline)]
-        DirectApiGroup(IApiHost host, OpIdentity id, DirectApiOp[] members)
+        public DirectApiGroup(OpIdentity group, IApiHost host, IEnumerable<DirectApiOp> members)
         {
-            this.GroupId = id;
-            this.Host = host;
-            this.Members = members;
+            GroupId = group;
+            Host = host;
+            Members = members.ToArray();
         }
 
         public bool IsEmpty 

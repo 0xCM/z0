@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The hosting type uri
         /// </summary>
-        public ApiHostUri HostUri => Host.UriPath;
+        public ApiHostUri HostUri => Host.Uri;
 
         [MethodImpl(Inline)]
         public static GenericApiOp Define(IApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)            

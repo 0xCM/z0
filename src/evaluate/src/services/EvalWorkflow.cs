@@ -42,10 +42,10 @@ namespace Z0.Asm
                 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = CodeArchive.HostArchive(host.UriPath);
+            var dst = CodeArchive.HostArchive(host.Uri);
             if(dst.HexPath.Exists)
             {
-                var code = ArchiveOps.Service.CreateCodeIndex(Identities.Services.ApiLocator, ApiSet, host.UriPath, CodeArchive.ArchiveRoot);
+                var code = ArchiveOps.Service.CreateCodeIndex(Identities.Services.ApiLocator, ApiSet, host.Uri, CodeArchive.ArchiveRoot);
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)
@@ -60,7 +60,7 @@ namespace Z0.Asm
         {
             using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
             
-            foreach(var host in catalog.ApiHosts)
+            foreach(var host in catalog.Hosts)
             {
                 ExecuteHost(buffers.Tokenize(), host);
             }

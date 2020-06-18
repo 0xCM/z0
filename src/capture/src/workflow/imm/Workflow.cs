@@ -11,7 +11,6 @@ namespace Z0.Asm
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
     using static CaptureWorkflowEvents;
     using static ImmEmissionEvents;
 
@@ -42,7 +41,8 @@ namespace Z0.Asm
 
         bool Append = true;
 
-        IWorkflow<IImmEmissionBroker> Flow => this;
+        IWorkflow<IImmEmissionBroker> Flow 
+            => this;
         
         readonly IApiSet ApiSet;
 
@@ -114,7 +114,7 @@ namespace Z0.Asm
             var archive = Archive(host);
             var rfk = ImmRefinementKind.Refined;
             var groups = ApiCollector.ImmDirect(host, rfk);
-            var uri = host.UriPath;
+            var uri = host.Uri;
             var generic = false;
             foreach(var g in groups)
             {
@@ -160,7 +160,7 @@ namespace Z0.Asm
         IEnumerable<IApiHost> ApiHosts => ApiSet.Hosts;
 
         IHostArchiver Archive(IApiHost host)
-            => AsmCore.Services.HostArchiver(host.UriPath, Formatter, CodeArchive.ArchiveRoot);
+            => AsmCore.Services.HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8Value[] imm8)
         {

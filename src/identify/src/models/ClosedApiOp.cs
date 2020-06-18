@@ -38,7 +38,7 @@ namespace Z0
         /// <summary>
         /// The hosting type uri
         /// </summary>
-        public ApiHostUri HostUri => Host.UriPath;
+        public ApiHostUri HostUri => Host.Uri;
 
         /// <summary>
         /// Creates a closure specification

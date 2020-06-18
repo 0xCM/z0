@@ -11,14 +11,12 @@ namespace Z0
     using static IdentityShare;
 
     public readonly struct ApiHostUri : IUri<ApiHostUri>, INullary<ApiHostUri>
-    {
-        public static ApiHostUri Empty = new ApiHostUri(PartId.None, string.Empty);
-        
+    {        
         public readonly PartId Owner;
 
         public readonly string Name;        
 
-        public string IdentityText {get;}
+        public string UriText {get;}
 
         public FolderName HostFolder 
             => FolderName.Define(Name);
@@ -29,10 +27,11 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Owner == 0  && string.IsNullOrWhiteSpace(Name);
+            get => Owner == 0  && text.empty(Name);
         }
 
-        ApiHostUri INullary<ApiHostUri>.Zero => Empty;
+        ApiHostUri INullary<ApiHostUri>.Zero 
+            => Empty;
         
         [MethodImpl(Inline)]
         public static ParseResult<ApiHostUri> Parse(string text)
@@ -70,15 +69,14 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        ApiHostUri(PartId owner, string name)
+        internal ApiHostUri(PartId owner, string name)
         {
-            this.Owner = owner;
-            this.Name = name;
-            this.IdentityText = owner != 0 ? $"{Owner.Format()}{UriDelimiters.PathSep}{Name}" : name;
-        }
- 
+            Owner = owner;
+            Name = name;
+            UriText = owner != 0 ? $"{Owner.Format()}{UriDelimiters.PathSep}{Name}" : name;
+        } 
         public string Format()
-            => IdentityText;
+            => UriText;
 
         [MethodImpl(Inline)]
         public bool Equals(ApiHostUri src)
@@ -95,6 +93,9 @@ namespace Z0
             => equals(this, obj);
 
         public override string ToString()
-            => IdentityText;        
+            => Format();
+
+        public static ApiHostUri Empty 
+            => new ApiHostUri(PartId.None, string.Empty);
     }
 }

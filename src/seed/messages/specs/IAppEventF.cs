@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Characterizes an F-bound polymorphic application event reification
+    /// Characterizes a reified application event
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     public interface IAppEvent<F> : IAppEvent, INullary<F>
@@ -16,9 +16,11 @@ namespace Z0
         string IAppEvent.Description
             => typeof(F).Name;
 
-        new F Content => (F)this;
+        new F Content 
+            => (F)this;
 
         object IAppEvent.Content
             => Content;                
     }
+
 }

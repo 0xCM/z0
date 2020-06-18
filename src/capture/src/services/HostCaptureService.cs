@@ -124,7 +124,7 @@ namespace Z0.Asm
                     decoded[i] = insist(Context.Decoder.Decode(parsed[i]));
 
                 if(save)
-                    Save(host.UriPath, decoded);
+                    Save(host.Uri, decoded);
 
                 return decoded;
             }
@@ -139,7 +139,7 @@ namespace Z0.Asm
                 var host = mayhaps.Value;
                 var extract = Extractor.Extract(host);
                 if(save)
-                    Save(host.UriPath,extract);
+                    Save(host.Uri,extract);
                 return extract;
             }
             else
@@ -155,7 +155,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         Option<IApiHost> FindHost(ApiHostUri uri)
-            => Context.Hosts.TryFind(h => h.UriPath == uri);
+            => Context.Hosts.TryFind(h => h.Uri == uri);
 
         public void Deposit(IAppMsg src)
             => Context.Deposit(src);

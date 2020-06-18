@@ -39,7 +39,7 @@ namespace Z0
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
-                          select ApiMemberCode.Define(r.left, r.right);                                      
+                          select new ApiMemberCode(r.left, r.right);                                      
             return ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
         }
     }

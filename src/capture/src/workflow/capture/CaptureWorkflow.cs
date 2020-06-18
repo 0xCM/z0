@@ -19,7 +19,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal CaptureWorkflow(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory writerfactory, ICaptureArchive archive)
         {
-            Broker = HostCaptureBroker.New;
+            Broker = CaptureBroker.New;
             Context = new CaptureWorkflowContext(context, decoder, formatter, writerfactory, Broker, archive);
         }
  

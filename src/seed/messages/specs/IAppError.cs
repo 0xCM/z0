@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    /// <summary>
+    /// Characterizes an event that describes an error
+    /// </summary>
     public interface IAppError : IAppEvent
     {
         AppMsgColor IAppEvent.Flair 
@@ -16,6 +19,9 @@ namespace Z0
             => AppMsg.NoCaller(Format(), AppMsgKind.Error);
     }
 
+    /// <summary>
+    /// Characterizes an error event reification
+    /// </summary>
     public interface IAppError<F> : IAppError, IAppEvent<F>
         where F : struct, IAppError<F>
     {

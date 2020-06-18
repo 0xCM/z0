@@ -12,27 +12,6 @@ namespace Z0
     public static class AppEvents
     {
         /// <summary>
-        /// Creates a payload-parametric application event
-        /// </summary>
-        /// <param name="name">The event name</param>
-        /// <param name="data">The event payload</param>
-        /// <param name="ct">The correlation token, if any</param>
-        /// <typeparam name="T">The payload type</typeparam>
-        [MethodImpl(Inline)]
-        public static AppEvent<T> create<T>(string name, T data, CorrelationToken? ct = null)
-            => AppEvent.Create(name, data, ct);
-
-        /// <summary>
-        /// Creates a nonparametric application event
-        /// </summary>
-        /// <param name="name">The event name</param>
-        /// <param name="data">The event data, if any</param>
-        /// <param name="ct">The correlation token, if any</param>
-        [MethodImpl(Inline)]
-        public static AppEvent create(string name, object data = null, CorrelationToken? ct = null)
-            => AppEvent.Create(name,data,ct);
-
-        /// <summary>
         /// Creates an even sink predicated on a receiver
         /// </summary>
         /// <param name="receiver">The receiver to invoke upon event receipt</param>

@@ -9,6 +9,7 @@ namespace Z0
     /// </summary>
     public interface IAppMsgContext : IAppMsgSink, IAppMsgReceiver
     {
-        IAppMsgSink IAppMsgReceiver.Sink => this;        
+        IAppMsgSink IAppMsgReceiver.Sink 
+            => this;        
     }
 }

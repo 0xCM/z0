@@ -5,11 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static Memories;
 
     public class t_memory_capture : t_asm<t_memory_capture>
     {    
@@ -39,7 +34,7 @@ namespace Z0.Asm
 
         public void check_decoder()
         {
-            DecodeHostBits(Context.ApiSet.Hosts.Map(h => h.UriPath));
+            DecodeHostBits(Context.ApiSet.Hosts.Map(h => h.Uri));
                        
         }
 

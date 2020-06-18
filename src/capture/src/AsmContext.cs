@@ -7,9 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Collections.Generic;
     
-    using static Konst;
-    using static Memories;
-
     public class AsmContext : IAsmContext 
     {            
         public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition,

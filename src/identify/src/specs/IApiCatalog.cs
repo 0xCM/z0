@@ -18,16 +18,6 @@ namespace Z0
         Type[] FunFactories {get;}
 
         /// <summary>
-        /// Specifies the number of service hosts described by the catalog
-        /// </summary>
-        int HostCount => FunFactories.Length;
-
-        /// <summary>
-        /// Specifies whether the catalog describes any service hosts
-        /// </summary>
-        bool IsNonEmpty => HostCount != 0;
-
-        /// <summary>
         /// The identity of the assembly that defines and owns the catalog
         /// </summary>
         PartId PartId {get;}
@@ -35,27 +25,22 @@ namespace Z0
         /// <summary>
         /// The assembly that defines and owns the catalog
         /// </summary>
-        Assembly Part {get;}
+        Assembly Owner {get;}
 
         /// <summary>
         /// The api hosts known to the catalog
         /// </summary>
-        ApiHost[] ApiHosts {get;}
+        ApiHost[] Hosts {get;}
         
         /// <summary>
         /// The known generic api hosts
         /// </summary>
-        ApiHost[] GenericApiHosts {get;}
+        ApiHost[] GenericHosts {get;}
 
         /// <summary>
         /// The known direct api hosts
         /// </summary>
-        ApiHost[] DirectApiHosts {get;}
-
-        /// <summary>
-        /// The global data resource index
-        /// </summary>
-        ResourceIndex Resources {get;}
+        ApiHost[] DirectHosts {get;}
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identifid assembly
@@ -66,12 +51,14 @@ namespace Z0
         /// <summary>
         /// Specifies the number of api hosts described by the catalog
         /// </summary>
-        int ApiHostCount => ApiHosts.Length;
+        int ApiHostCount 
+            => Hosts.Length;
 
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
-        bool HasApiHostContent => ApiHostCount != 0;
+        bool HasApiHostContent 
+            => ApiHostCount != 0;
 
         /// <summary>
         /// The name of the catalog, which should be unique with respect to known catalogs
@@ -84,22 +71,41 @@ namespace Z0
         /// </summary>
         ApiQuery Query
             => ApiQuery.Over(this);
+
+        /// <summary>
+        /// Specifies the number of service hosts described by the catalog
+        /// </summary>
+        int HostCount 
+            => FunFactories.Length;
+
+        /// <summary>
+        /// Specifies whether the catalog describes any service hosts
+        /// </summary>
+        bool IsNonEmpty 
+            => HostCount != 0;
     }
     
     public readonly struct EmptyCatalog : IApiCatalog
     {    
-        public PartId PartId => PartId.None;
+        public PartId PartId 
+            => PartId.None;
 
-        public Assembly Part => Assembly.GetEntryAssembly();
+        public Assembly Owner 
+            => Assembly.GetEntryAssembly();
 
-        public ApiHost[] ApiHosts => new ApiHost[]{};
+        public ApiHost[] Hosts 
+            => Array.Empty<ApiHost>();
 
-        public ApiHost[] GenericApiHosts => new ApiHost[]{};
+        public ApiHost[] GenericHosts 
+            => Array.Empty<ApiHost>();
 
-        public ApiHost[] DirectApiHosts => new ApiHost[]{};
+        public ApiHost[] DirectHosts 
+            => Array.Empty<ApiHost>();
 
-        public ResourceIndex Resources => ResourceIndex.Empty;
+        public ResourceIndex Resources 
+            => ResourceIndex.Empty;
 
-        public Type[] FunFactories => new Type[]{};
+        public Type[] FunFactories 
+            => Array.Empty<Type>();
     }
 }

@@ -23,14 +23,19 @@ namespace Z0
             where S : IAppEventSink<E>;
 
         /// <summary>
-        /// Registers a receiver to be invoked upon event occurrence
+        /// Registers an Event-parametric receiver to invoke upon occurrence of the parametrically-identified event
         /// </summary>
         /// <param name="receiver">The event receiver</param>
-        /// <param name="model">An event representative</param>
+        /// <param name="model">An event model representative that identifies the event of interest</param>
         /// <typeparam name="E">The event type</typeparam>
         Outcome Subscribe<E>(Action<E> receiver, E model = default)
             where E : IAppEvent;        
         
+        /// <summary>
+        /// Registers a non-parametric receiver to invoke upon occurrence of a specified event
+        /// </summary>
+        /// <param name="receiver"></param>
+        /// <param name="model">An event model representative that identifies the event of interest</param>
         Outcome Subscribe(Action<IAppEvent> receiver, IAppEvent model);
 
         /// <summary>

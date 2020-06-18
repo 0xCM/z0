@@ -27,7 +27,7 @@ namespace Z0
             => option(Parts.FirstOrDefault(p => p.Id == id));      
 
         Option<IApiHost> FindHost(ApiHostUri uri)
-            => option(Hosts.Where(h => h.UriPath == uri).FirstOrDefault());
+            => option(Hosts.Where(h => h.Uri == uri).FirstOrDefault());
         
         IEnumerable<IApiCatalog> MatchingCatalogs(params PartId[] parts)
         {

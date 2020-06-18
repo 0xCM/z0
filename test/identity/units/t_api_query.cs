@@ -15,7 +15,7 @@ namespace Z0
     {
         void query_1()
         {
-            var host = ApiHost.Create<math>();
+            var host = ApiHosts.from<math>();
             var members = Identities.Services.ApiLocator.Hosted(host, BitLogicKind.And, GenericPartition.NonGeneric);
             iter(members, m => Trace(m.OpUri));            
                 
@@ -23,7 +23,7 @@ namespace Z0
 
         void query_2()
         {
-            var host = ApiHost.Create<math>();
+            var host = ApiHosts.from<math>();
             var located = Identities.Services.ApiLocator.Located(host);
             iter(located, m => Trace(m.OpUri));      
         }

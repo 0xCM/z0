@@ -27,18 +27,18 @@ namespace Z0
         }
 
         public IEnumerable<MethodInfo> Generic
-            => from host in Context.GenericApiHosts
+            => from host in Context.GenericHosts
                 from m in host.HostedMethods.OpenGeneric()
                 select m;
 
         public IEnumerable<MethodInfo> Direct
-            => from host in Context.DirectApiHosts
+            => from host in Context.DirectHosts
                 from m in host.HostedMethods.NonGeneric()
                 select m;
 
         public IEnumerable<MethodInfo> Vectorized<T>(W256 w, bool generic)
             where T : unmanaged
-                => from host in (generic ? Context.GenericApiHosts : Context.DirectApiHosts)
+                => from host in (generic ? Context.GenericHosts : Context.DirectHosts)
                     from m in host.HostedMethods.VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
                     select m;
@@ -89,7 +89,7 @@ namespace Z0
 
         public IEnumerable<MethodInfo> Vectorized<T>(W128 w, bool generic)
             where T : unmanaged
-                => from host in (generic ? Context.GenericApiHosts : Context.DirectApiHosts)
+                => from host in (generic ? Context.GenericHosts : Context.DirectHosts)
                     from m in host.HostedMethods.VectorizedDirect<T>(w)                    
                     where m.IsGenericMethod == generic
                     select m;

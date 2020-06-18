@@ -14,34 +14,31 @@ namespace Z0
     /// Uri for .net clr assembly
     /// </summary>
     public readonly struct PartUri : IUri<PartUri>, INullary<PartUri>
-    {
-        public static PartUri Empty = new PartUri(PartId.None);
-        
+    {        
         /// <summary>
         /// The assembly identifier, constrained to the defining enumeration
         /// </summary>
         public readonly PartId Id;
-        
-        public string IdentityText {get;}
+
+        /// <summary>
+        /// The uri content
+        /// </summary>
+        public string UriText {get;}
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Id == PartId.None || string.IsNullOrWhiteSpace(IdentityText);
+            get => Id == PartId.None || string.IsNullOrWhiteSpace(UriText);
         }
 
-        PartUri INullary<PartUri>.Zero => Empty;        
-        
-                
+        PartUri INullary<PartUri>.Zero 
+            => Empty;            
+                     
         [MethodImpl(Inline)]
-        public static PartUri Define(PartId id)
-            => new PartUri(id);
-     
-        [MethodImpl(Inline)]
-        PartUri(PartId id)
+        internal PartUri(PartId id)
         {
-            this.Id = id;
-            this.IdentityText = id != 0 ? id.Format() : text.blank;
+            Id = id;
+            UriText = id != 0 ? id.Format() : EmptyString;        
         }
 
         [MethodImpl(Inline)]
@@ -59,6 +56,9 @@ namespace Z0
             => equals(this, obj);
 
         public override string ToString()
-            => IdentityText;        
+            => UriText; 
+
+        public static PartUri Empty 
+            => new PartUri(0);
     }
 }

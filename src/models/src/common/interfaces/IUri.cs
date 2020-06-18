@@ -8,7 +8,10 @@ namespace Z0
 
     public interface IUri : IIdentified
     {
-        
+        string UriText {get;}
+
+        string IIdentified.IdentityText 
+            => UriText;
     }
     
     public interface IUri<T> : IUri, IIdentification<T>

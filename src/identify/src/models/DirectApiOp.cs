@@ -27,22 +27,19 @@ namespace Z0
         /// </summary>
         public MethodInfo Method {get;}        
 
-        /// <summary>
-        /// The hosting type uri
-        /// </summary>
-        public ApiHostUri HostUri => Host.UriPath;
-
         [MethodImpl(Inline)]
-        public static DirectApiOp Define(IApiHost host, OpIdentity id, MethodInfo method)            
-            => new DirectApiOp(host, id,method);
-
-        [MethodImpl(Inline)]
-        DirectApiOp(IApiHost host, OpIdentity id, MethodInfo method)
+        public DirectApiOp(IApiHost host, OpIdentity id, MethodInfo method)
         {
             Host = host;
             Id = id;
             Method = method;
         }
+
+        /// <summary>
+        /// The hosting type uri
+        /// </summary>
+        public ApiHostUri HostUri 
+            => Host.Uri;
 
         public override string ToString()
             => Id;
