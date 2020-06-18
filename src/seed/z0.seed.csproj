@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Models)" />
     <ProjectReference Include="$(Parts)" />
     <ProjectReference Include="$(Enhanced)" />
+    <ProjectReference Include="$(Imagine)" />
 
   </ItemGroup>
 

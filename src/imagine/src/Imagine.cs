@@ -11,9 +11,14 @@ namespace Z0
     /// <summary>
     /// Presents the world as one wishes it to be, though usage could be disastrous if reality and expectation diverge
     /// </summary>
-    [ApiHost]
-    public readonly partial struct Imagine : IApiHost<Imagine>
+    [ApiHost("api")]
+    public readonly partial struct Imagine
     {
         const NumericKind Closure = UnsignedInts;
+    }
+
+    public static partial class XTend
+    {
+        
     }
 }

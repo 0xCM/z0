@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+
     /// <summary>
     /// Characterizes a parametric literal: typed literals that support kind partitioning
     /// </summary>

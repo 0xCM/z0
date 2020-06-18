@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
+
     /// <summary>
     /// Describes an attributed literal
     /// </summary>

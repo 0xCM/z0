@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;    
-    using static Memories;
 
     /// <summary>
     /// Defines a field segment, i.e. a congiguous run of bits that, together with other segments,

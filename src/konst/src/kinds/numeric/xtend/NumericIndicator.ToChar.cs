@@ -6,13 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    partial struct Konst
+    using static Konst;
+    
+    
+    partial class XTend
     {
+        /// <summary>
+        /// Converts a numeric indicator to a character
+        /// </summary>
+        /// <param name="src">The source kind</param>
         [MethodImpl(Inline)]
-        internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)
-            where T : unmanaged
-                => MemoryMarshal.Cast<byte,T>(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(src), src.Length));
+        public static char ToChar(this NumericIndicator src)
+            => src != 0 ? (char)src : 'e';
     }
 }

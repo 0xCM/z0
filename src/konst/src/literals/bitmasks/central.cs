@@ -6,6 +6,11 @@ namespace Z0
 {
     using System;
  
+    public partial class BitMasks
+    {            
+
+    }
+
     partial class BitMasks
     {            
         // ~ Central4x2 [01100110]

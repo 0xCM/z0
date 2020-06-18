@@ -11,7 +11,6 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;    
-    using static Memories;
 
     public readonly struct FieldIndex : IFieldIndex<FieldIndexEntry>
     {

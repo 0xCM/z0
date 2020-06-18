@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
 
+
     partial class NumericKinds
     {            
         [MethodImpl(Inline)]

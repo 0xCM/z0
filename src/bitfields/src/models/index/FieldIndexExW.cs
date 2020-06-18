@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;    
-    using static Memories;
 
     public readonly struct FieldIndex<E,W> : IFieldIndex<FieldIndexEntry<E,W>>, ITextual<FieldIndex<E,W>>
         where E : unmanaged, Enum
