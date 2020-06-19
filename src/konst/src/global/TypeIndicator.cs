@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct TypeIndicator : ITextual
     {
-        readonly char I;
+        readonly char Value;
 
         [MethodImpl(Inline)]
         public static TypeIndicator Define(char c)
@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The nonindicating indicator
         /// </summary>
-        public static TypeIndicator Empty = Define(Chars.D0);
+        public static TypeIndicator Empty => Define(Chars.D0);
 
         /// <summary>
         /// Identifies the signed numeric partition
@@ -66,17 +66,17 @@ namespace Z0
         [MethodImpl(Inline)]
         TypeIndicator(char c)
         {
-            I = c;
+            Value = c;
         }
 
         /// <summary>
         /// Specifies whether the indicator is non-indicating
         /// </summary>
         public bool IsEmpty 
-            => I == Chars.D0;
+            => Value == Chars.D0;
        
         public string Format()
-            => IsEmpty ? string.Empty : I.ToString();        
+            => IsEmpty ? string.Empty : Value.ToString();        
 
         public override string ToString()
             => Format();

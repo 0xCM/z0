@@ -15,22 +15,6 @@ namespace Z0
     public readonly struct ExtractState : ITextual, IAddressable, IIdentified<OpIdentity>
     {
         /// <summary>
-        /// <summary>
-        /// The empty state
-        /// </summary>
-        public static ExtractState Empty => new ExtractState(OpIdentity.Empty, 0,0,0);
-
-        /// Defines a capture state
-        /// </summary>
-        /// <param name="id">The exraction subject identifier</param>
-        /// <param name="offset">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
-        /// <param name="location">The memory location from which data was extracted</param>
-        /// <param name="captured">The extracted data</param>
-        [MethodImpl(Inline)]
-        public static ExtractState Define(OpIdentity id, int offset, long location, byte captured)
-            => new ExtractState(id,offset,location,captured);
-
-        /// <summary>
         /// The operation identifier
         /// </summary>
         public OpIdentity Id {get;}
@@ -50,13 +34,20 @@ namespace Z0
         /// </summary>
         public readonly byte Captured;
 
+        /// <summary>
+        /// Initializes a capture state
+        /// </summary>
+        /// <param name="id">The exraction subject identifier</param>
+        /// <param name="offset">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
+        /// <param name="location">The memory location from which data was extracted</param>
+        /// <param name="captured">The extracted data</param>
         [MethodImpl(Inline)]
-        ExtractState(OpIdentity opid, int offset, long location, byte captured)
+        public ExtractState(OpIdentity opid, int offset, long location, byte captured)
         {
-            this.Id = opid;
-            this.Offset = offset - 1;
-            this.Address = Addresses.address((ulong)location - 1ul);
-            this.Captured = captured;
+            Id = opid;
+            Offset = offset - 1;
+            Address = Addresses.address((ulong)location - 1ul);
+            Captured = captured;
         }
 
         public bool IsEmpty
@@ -70,5 +61,11 @@ namespace Z0
 
         public override string ToString() 
             => Format();
+
+        /// <summary>
+        /// The empty state
+        /// </summary>
+        public static ExtractState Empty 
+            => new ExtractState(OpIdentity.Empty, 0,0,0);
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
 
     public static class ClosureProviders
     {
-        public static IDictionary<MethodInfo, Type> CreateIndex(IEnumerable<Type> src)
+        public static IDictionary<MethodInfo,Type> CreateIndex(IEnumerable<Type> src)
         {
             var query = from t in src
                         from m in t.DeclaredStaticMethods()

@@ -6,8 +6,13 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface IWorkflowStep<C> : IService<C>
-        where C : IContext
+    public interface IWorkflowStep
+    {
+        
+    }
+    
+    public interface IWorkflowStep<F> : IWorkflowStep
+        where F : IWorkflowStep<F>
     {
 
     }

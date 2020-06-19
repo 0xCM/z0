@@ -25,26 +25,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<T>(in T a)
             where T : IIdentified
-                => denullify(a?.IdentityText);
+                => denullify(a?.Identifier);
 
         [MethodImpl(Inline)]
         public static int compare<T>(in T a, in T b)
             where T : IIdentified
-                => denullify(a.IdentityText).CompareTo(b.IdentityText);
+                => denullify(a.Identifier).CompareTo(b.Identifier);
 
         [MethodImpl(Inline)]
         public static bool equals<T>(in T a, object b)
             where T : IIdentified
-                => sequal(a.IdentityText, b is T x ? x.IdentityText : string.Empty);   
+                => sequal(a.Identifier, b is T x ? x.Identifier : string.Empty);   
 
         [MethodImpl(Inline)]
         public static bool equals<T>(in T a, in T b)
             where T : IIdentified
-                => sequal(a.IdentityText, b.IdentityText);   
+                => sequal(a.Identifier, b.Identifier);   
 
         [MethodImpl(Inline)]
         public static int hash<T>(in T src)     
             where T : IIdentified
-                => denullify(src.IdentityText).GetHashCode();
+                => denullify(src.Identifier).GetHashCode();
     }
 }

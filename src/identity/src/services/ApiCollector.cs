@@ -62,7 +62,7 @@ namespace Z0
              => from m in Tagged(src).OpenGeneric()
                 let closures = NumericClosureKinds(m)
                 where closures.Length != 0
-                select GenericApiOp.Define(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
+                select new GenericApiOp(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 
         IEnumerable<DirectApiOp> DirectOpSpecs(IApiHost src)
             => from m in Tagged(src).NonGeneric()

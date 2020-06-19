@@ -17,7 +17,7 @@ namespace Z0
 
         public readonly IdentityPartKind PartKind;
 
-        public string IdentityText {get;}
+        public string Identifier {get;}
 
         /// <summary>
         /// Defines an identity part
@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(IdentityPart src)
-            => src.IdentityText;
+            => src.Identifier;
 
         [MethodImpl(Inline)]
         public static bool operator==(IdentityPart a, IdentityPart b)
@@ -46,7 +46,7 @@ namespace Z0
         {
             this.PartIndex = index;
             this.PartKind = kind;
-            this.IdentityText = text;
+            this.Identifier = text;
         }
 
         public bool IsName
@@ -73,7 +73,7 @@ namespace Z0
             => compare(this, other);        
 
         public override string ToString()
-            => IdentityText;
+            => Identifier;
  
         public override int GetHashCode()
             => hash(this);

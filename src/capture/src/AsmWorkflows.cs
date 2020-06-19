@@ -8,15 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
    
     using static Konst;
-
-    using Svc = Z0;
     
     public readonly struct AsmWorkflows : IAsmWorkflows
     {
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmWorkflows Create(IAsmContext context) 
+        public static IAsmWorkflows Service(IAsmContext context) 
             => new AsmWorkflows(context);
 
         [MethodImpl(Inline)]
@@ -30,24 +28,17 @@ namespace Z0.Asm
             => Asm.CaptureExchange.Create(Context);        
 
         IAsmFunctionDecoder ICaptureServices.DefaultFunctionDecoder
-        {
-            [MethodImpl(Inline)]
-            get=> AsmFunctionDecoder.Default;
-        }
+            => AsmFunctionDecoder.Default;
 
-        [MethodImpl(Inline)]
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmFunctionDecoder decoder)
             => new ImmSpecializer(decoder);        
 
-        [MethodImpl(Inline)]
         IMemoryExtractor ICaptureServices.MemoryExtractor(byte[] buffer)
-            => Svc.MemoryExtractor.Create(buffer);
+            => new MemoryExtractor(buffer);
 
-        [MethodImpl(Inline)]
         IAsmFunctionDecoder ICaptureServices.AsmDecoder(in AsmFormatSpec? format)
             => new AsmFunctionDecoder(format ?? AsmFormatSpec.Default);
 
-        [MethodImpl(Inline)]
         IMemberExtractor ICaptureServices.HostExtractor(int? bufferlen)
             => MemberExtractor.Create(bufferlen ?? Pow2.T14);
 
@@ -55,7 +46,6 @@ namespace Z0.Asm
         /// Creates a default capture worklfow
         /// </summary>
         /// <param name="archive">The archive to target</param>
-        [MethodImpl(Inline)]
         ICaptureWorkflow CaptureWorkflow(ICaptureArchive archive)
             => new CaptureWorkflow(Context, AsmDecoder(), Formatter(), Capture.Services.AsmWriterFactory, archive);
 
@@ -65,26 +55,21 @@ namespace Z0.Asm
         /// <param name="decoder">The decoder to use</param>
         /// <param name="formatter">The formatter to use</param>
         /// <param name="archive">The archive to target</param>
-        [MethodImpl(Inline)]
         ICaptureWorkflow CaptureWorkflow(IAsmFunctionDecoder decoder, IAsmFormatter formatter, ICaptureArchive archive)
             => new CaptureWorkflow(Context, decoder, formatter, Capture.Services.AsmWriterFactory, archive);
 
         /// <summary>
         /// Creates an imm emission workflow using default decoding and formatting servcies
         /// </summary>
-        /// <param name="sink"></param>
-        /// <param name="api"></param>
-        /// <param name="dst"></param>
-        [MethodImpl(Inline)]
+        /// <param name="sink">The event message sink</param>
+        /// <param name="api">The api set available to the workflow</param>
+        /// <param name="dst">The emission output directory</param>
         IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, FolderPath dst)        
             => new ImmEmissionWorkflow(Context, sink, Formatter(), AsmDecoder(), api, dst);
 
-        [MethodImpl(Inline)]
         IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
             => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, dst);
 
-
-        [MethodImpl(Inline)]
         IHostCaptureService IAsmContextual.HostCaptureService(FolderPath root)
             => new HostCaptureService(Context, root);
     }

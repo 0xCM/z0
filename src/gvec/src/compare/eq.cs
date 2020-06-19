@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
         /// components, the corresponding component the result vector has all bits 
-        /// enabled; otherwise, all bits the component are disabled
+        /// enabled; otherwise, all component bits are are disabled
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

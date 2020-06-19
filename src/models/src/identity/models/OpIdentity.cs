@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The operation identifier
         /// </summary>
-        public string IdentityText {get;}
+        public string Identifier {get;}
 
        /// <summary>
         /// The unqualified operation name
@@ -61,7 +61,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)
-            => src.IdentityText;
+            => src.Identifier;
 
         [MethodImpl(Inline)]
         public static bool operator==(OpIdentity a, OpIdentity b)
@@ -76,7 +76,7 @@ namespace Z0
 
         OpIdentity(string text, string name, string suffix, bool generic, bool imm, string[] components)
         {
-            IdentityText = Safe(text);
+            Identifier = Safe(text);
             Name = name; 
             Suffix = suffix;
             IsGeneric = generic;
@@ -87,7 +87,7 @@ namespace Z0
         [MethodImpl(Inline)]
         OpIdentity(string text)
         {
-            this.IdentityText = Safe(text);
+            this.Identifier = Safe(text);
             this.Name = string.Empty;
             this.Suffix = string.Empty;
             this.IsGeneric = false;
@@ -101,7 +101,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]   
-            get => string.IsNullOrWhiteSpace(IdentityText);
+            get => string.IsNullOrWhiteSpace(Identifier);
         }
 
         public override int GetHashCode()

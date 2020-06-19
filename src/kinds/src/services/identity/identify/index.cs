@@ -46,7 +46,7 @@ namespace Z0
         {
             var items = src.ToArray();
             var identities = items.Select(x => x.Item1).ToArray();
-            var duplicates = (from g in identities.GroupBy(i => i.IdentityText)
+            var duplicates = (from g in identities.GroupBy(i => i.Identifier)
                              where g.Count() > 1
                              select g.Key).ToHashSet();
             
@@ -56,7 +56,7 @@ namespace Z0
             if(duplicates.Count() != 0)
             {
                 if(deduplicate)
-                    HashTable = items.Where(i => !duplicates.Contains(i.Item1.IdentityText)).ToDictionary();
+                    HashTable = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
                 else
                     throw DuplicateKeyException(duplicates);
             }

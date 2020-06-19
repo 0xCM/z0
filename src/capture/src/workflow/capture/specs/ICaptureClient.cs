@@ -35,7 +35,5 @@ namespace Z0.Asm
             Broker.MatchedEmissions.Subscribe(Broker, OnEvent);
             Broker.PurgedArchiveFolder.Subscribe(Broker, OnEvent);
         }        
-
     }
-
 }

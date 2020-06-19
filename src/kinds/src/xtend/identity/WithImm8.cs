@@ -14,6 +14,6 @@ namespace Z0
         /// <param name="src">The source identity</param>
         /// <param name="immval">The immediate value to attach</param>
         public static OpIdentity WithImm8(this OpIdentity src, byte immval)
-              => Identify.Op(text.concat(src.WithoutImm8().IdentityText, Identify.Imm8(immval)));        
+              => Identify.Op(text.concat(src.WithoutImm8().Identifier, Identify.Imm8(immval)));        
     }
 }

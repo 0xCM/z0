@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static CaptureWorkflowEvents;
 
     partial class HostCaptureSteps
-    {
+    {        
         public readonly struct ExtractMembersStep : IExtractMembersStep
         {
             public ICaptureWorkflow Workflow {get;}
@@ -27,20 +27,35 @@ namespace Z0.Asm
                 Workflow = workflow;
             }
  
-            public ApiMember[] LocateMembers(IApiHost host)
+            public static ApiMember[] locate(IApiHost host)
             {
                 var locator = Identities.Services.ApiLocator;
-                var located = locator.Located(host).ToArray();
+                return locator.Located(host).ToArray();
+            }
+
+            public static ExtractedMember[] extract(IApiHost host)
+            {
+                var members = locate(host);    
+                var extractor = Capture.Services.HostExtractor();
+                return extractor.Extract(members);
+            }
+            
+            public ApiMember[] LocateMembers(IApiHost host)
+            {
+                // var locator = Identities.Services.ApiLocator;
+                // var located = locator.Located(host).ToArray();
+                var located = locate(host);
                 Context.Raise(new MembersLocated(host.Uri, located));              
                 return located;
             }
 
             public ExtractedMember[] ExtractMembers(IApiHost host)
-            {
-                var members = LocateMembers(host);    
-                var extractor = Capture.Services.HostExtractor();
-                return extractor.Extract(members);
-            }
+                => extract(host);
+            // {
+            //     var members = LocateMembers(host);    
+            //     var extractor = Capture.Services.HostExtractor();
+            //     return extractor.Extract(members);
+            // }
         }
     }
 }

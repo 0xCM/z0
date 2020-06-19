@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static OpIdentity Generialize(this GenericOpIdentity src)
-            => Identify.Op(src.IdentityText);
+            => Identify.Op(src.Identifier);
     }
 }

@@ -11,21 +11,7 @@ namespace Z0.Asm
     using static Memories;
 
     public class CaptureWorkflowContext : ICaptureContext
-    {
-        public CaptureWorkflowContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
-            ICaptureBroker broker, ICaptureArchive archive)
-        {
-            this.ApiSet = context.ApiSet;
-            this.Extractor = Capture.Services.HostExtractor();
-            this.Parser = Extract.Services.ExtractParser();
-            this.Decoder = decoder;
-            this.Formatter = formatter;
-            this.WriterFactory = wf;
-            this.Broker = broker;
-            this.Archive = archive;
-            this.MsgSink = context;
-        }
-
+    { 
         public IApiSet ApiSet {get;}
 
         public IMemberExtractor Extractor {get;}
@@ -45,6 +31,20 @@ namespace Z0.Asm
         public IAppMsgSink MsgSink {get;}
 
         int step;
+
+       public CaptureWorkflowContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
+            ICaptureBroker broker, ICaptureArchive archive)
+        {
+            this.ApiSet = context.ApiSet;
+            this.Extractor = Capture.Services.HostExtractor();
+            this.Parser = Extract.Services.ExtractParser();
+            this.Decoder = decoder;
+            this.Formatter = formatter;
+            this.WriterFactory = wf;
+            this.Broker = broker;
+            this.Archive = archive;
+            this.MsgSink = context;
+        }
 
         [MethodImpl(Inline)]
         public CorrelationToken Correlate()

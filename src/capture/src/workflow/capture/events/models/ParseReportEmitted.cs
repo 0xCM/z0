@@ -11,24 +11,27 @@ namespace Z0.Asm
 
     partial class CaptureWorkflowEvents
     {
-        public readonly struct ParseReportCreated : IAppEvent<ParseReportCreated>
+        public readonly struct ParseReportEmitted : IAppEvent<ParseReportEmitted>
         {
             public readonly MemberParseReport Report;
 
+            public readonly FilePath TargetPath;
+            
             [MethodImpl(Inline)]
-            public ParseReportCreated(MemberParseReport report)
+            public ParseReportEmitted(MemberParseReport report, FilePath path)
             {
                 Report = report;
+                TargetPath = path;
             }
  
             public string Description
-                => $"{Report.RecordCount} records created for {Report.ReportName}";
+                => $"{Report.RecordCount} {Report.ApiHost} {Report.ReportName} records saved to {TargetPath}";
             
-            public ParseReportCreated Zero 
+            public ParseReportEmitted Zero 
                 => Empty;
 
-            public static ParseReportCreated Empty 
-                => new ParseReportCreated(MemberParseReport.Empty);
+            public static ParseReportEmitted Empty 
+                => new ParseReportEmitted(MemberParseReport.Empty, FilePath.Empty);
         }        
     }
 }

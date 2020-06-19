@@ -8,38 +8,55 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Control;
 
     using F = MemberParseField;
     using R = MemberParseRecord;
-    using Report = MemberParseReport;
 
-    public class MemberParseReport : Report<Report,F,R>
+    public class MemberParseReport : Report<MemberParseReport,F,R>
     {             
         public ApiHostUri ApiHost {get;}
 
         [MethodImpl(Inline)]
-        public static Report Create(ApiHostUri host, params R[] records)
-            => new Report(records);
+        public static MemberParseReport Create(ApiHostUri host, params R[] records)
+            => new MemberParseReport(host, records);
 
-        public static Report Create(ApiHostUri host, ParsedMember[] extracts)
+        public static R Record(in ParsedMember extract, int seq)
+            => new R
+                (
+                    Seq : seq,
+                    SourceSequence: extract.Sequence,
+                    Address : extract.Address,
+                    Length : extract.Encoded.Length,
+                    TermCode: extract.TermCode,
+                    Uri : extract.OpUri,
+                    OpSig : extract.Method.Signature().Format(),
+                    Data : extract.Encoded
+                );
+
+        public static MemberParseReport Create(ApiHostUri host, ParsedMember[] extracts)
         {
-            var records = new MemberParseRecord[extracts.Length];
-            for(var i=0; i< records.Length; i++)
+            var count = extracts.Length;
+            var buffer = alloc<R>(count);            
+            var dst = span(buffer);
+            var src = span(extracts);
+
+            for(var i=0; i<count; i++)
             {
-                ref readonly var extract = ref extracts[i];
-                records[i] = R.From(extract, i);
-                
+                ref readonly var extract = ref skip(src,i);
+                seek(dst,i) = Record(extract, i);                
             }
-            return new Report(records);
+            
+            return new MemberParseReport(host, buffer);
         }
 
         public MemberParseReport(){}
         
         [MethodImpl(Inline)]
-        MemberParseReport(params R[] records)
+        internal MemberParseReport(ApiHostUri host, params R[] records)
             : base(records)
         {
-
+            ApiHost = host;
         }
     }    
 }

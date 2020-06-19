@@ -9,15 +9,12 @@ namespace Z0
     using System.Linq;
     
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Describes an extract parse failure
     /// </summary>
     public readonly struct ExtractParseFailure
-    {
-        public static ExtractParseFailure Empty => new ExtractParseFailure(ExtractedMember.Empty, 0, ExtractTermCode.None);
-        
+    {        
         /// <summary>
         /// The data over which the parse failure occurrred
         /// </summary>
@@ -41,6 +38,10 @@ namespace Z0
             TermCode = term;
         }
 
-        public OpUri OpUri => Data.Member.OpUri;
+        public OpUri OpUri 
+            => Data.Member.OpUri;
+
+        public static ExtractParseFailure Empty 
+            => new ExtractParseFailure(ExtractedMember.Empty, 0, ExtractTermCode.None);
     }
 }

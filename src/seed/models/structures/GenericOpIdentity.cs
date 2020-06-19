@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The operation identifier
         /// </summary>
-        public string IdentityText {get;}
+        public string Identifier {get;}
 
         /// <summary>
         /// The empty identifier
@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         GenericOpIdentity(string src)
-            => this.IdentityText = src ?? string.Empty;
+            => this.Identifier = src ?? string.Empty;
  
         IIdentifedOp<GenericOpIdentity> Identified => this;
 

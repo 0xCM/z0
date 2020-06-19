@@ -10,27 +10,9 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     
     using static Konst;
-    using static Memories;
     using static TestCaseIdentity;
     using static UriDelimiters;
 
-    public readonly struct TestCaseIdentity : ITestCaseIdentity
-    {
-        public static ITestCaseIdentity Service => default(TestCaseIdentity);
-
-        internal static string Name(IFunc f)
-            => Control.ifempty(f.GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.Name), f.GetType().DisplayName());
-        
-        internal const char Sep = UriDelimiters.PathSep;
-
-        /// <summary>
-        /// Produces the formatted identifier of the declaring assembly
-        /// </summary>
-        /// <param name="host">The source type</param>
-        [MethodImpl(Inline)]   
-        internal static string owner(Type host)
-            => host.Assembly.Id().Format();
-    }
             
     public interface ITestCaseIdentity : IValidator
     {
@@ -39,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="id">Identifies the operation under test</param>
         string CaseName(OpIdentity id)
-            => OpUriBuilder.TestCase(HostType, id);
+            => TestCaseIdentity.name(HostType,id);
 
         string CaseName([Caller] string label = null)
             => OpUriBuilder.TestCase(HostType, label);
@@ -50,7 +32,7 @@ namespace Z0
         /// <typeparam name="T">The label specialization type</typeparam>
         OpIdentity CaseOpId<T>([Caller] string label = null)
             where T : unmanaged
-                => Identify.NumericOp($"{label}", typeof(T).NumericKind());
+                => TestCaseIdentity.id<T>(label);
         
         /// <summary>
         /// Produces a test case name predicated on a parametrically-specialized label
@@ -59,19 +41,19 @@ namespace Z0
         /// <typeparam name="T">The label specialization type</typeparam>
         string CaseName<T>([Caller] string label = null)
             where T : unmanaged
-                => CaseName(CaseOpId<T>(label));
+                => TestCaseIdentity.name<T>(HostType, label);
 
         OpIdentity BaselineId<K>(string label, K t = default)
             where K : unmanaged
                 => Identify.sfunc<K>($"{label}_baseline");
 
         string CaseName(IFunc f) 
-            =>$"{owner(HostType)}{Sep}{HostType.Name}{Sep}{Name(f)}";
+            => TestCaseIdentity.name(HostType,f);
 
         string CaseName<W,T>(IFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, Identify.Op<W,T>(Name(f)), true);
+                => CaseName<W,T>(HostType, Identify.Op<W,T>(name(f)), true);
 
         string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth
@@ -89,7 +71,7 @@ namespace Z0
         string CaseName<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{Identify.Owner(host)}/{host.Name}{PathSep}{Identify.Op(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
+                => TestCaseIdentity.name<W,C>(host, label, generic);
 
         /// <summary>
         /// Computes a test case identifier for a segmented structured function
@@ -102,7 +84,7 @@ namespace Z0
         string CaseName<W,T>(IFunc f, W w, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, Identify.Op<W,T>(Name(f)), generic: generic);
+                => CaseName<W,T>(HostType, Identify.Op<W,T>(name(f)), generic: generic);
 
         /// <summary>
         /// Produces a case name for an identified operation match test
@@ -110,6 +92,6 @@ namespace Z0
         /// <param name="f">The left operation</param>
         /// <param name="g">The right operation</param>
         string MatchCaseName(OpIdentity f, OpIdentity g)
-            => CaseName($"{f.IdentityText}_vs_{g.IdentityText}");
+            => TestCaseIdentity.match(HostType, f, g);
     }
 }

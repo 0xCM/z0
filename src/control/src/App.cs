@@ -43,7 +43,7 @@ namespace Z0
             => AsmContext.Create(Context.Settings, Context.Messaging, Api, CaptureRoot);
 
         ICaptureHost CreateCaptureHost()
-            => CaptureHost.Create(CreateAsmContext(), CaptureRoot);
+            => new CaptureHost(CreateAsmContext(), CaptureRoot);
 
         void SurveyArchive()
         {

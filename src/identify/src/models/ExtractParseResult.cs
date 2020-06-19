@@ -9,19 +9,18 @@ namespace Z0
     using System.Linq;
     
     using static Konst;
-    using static Memories;
 
     public readonly struct ExtractParseResult
     {
+        readonly Either<ExtractParseFailure,ParsedMember> Outcome;
+
         [MethodImpl(Inline)]
         public static ExtractParseResult FromFailure(ExtractParseFailure fail)
             => new ExtractParseResult(fail);
 
         [MethodImpl(Inline)]
         public static ExtractParseResult FromSuccess(ParsedMember parsed)
-            => new ExtractParseResult(parsed);
-        
-        readonly Either<ExtractParseFailure,ParsedMember> Outcome;
+            => new ExtractParseResult(parsed);        
 
         [MethodImpl(Inline)]
         public static implicit operator ExtractParseResult(ExtractParseFailure src)
@@ -46,10 +45,10 @@ namespace Z0
             => Outcome.IsRight;
 
         public Option<ParsedMember> ParsedMember 
-            => Outcome.IsRight ? Outcome.Right : none<ParsedMember>();
+            => Outcome.IsRight ? Outcome.Right : Option.none<ParsedMember>();
         
         public Option<ExtractParseFailure> FailureInfo
-            => Outcome.IsLeft ? Outcome.Left : none<ExtractParseFailure>();  
+            => Outcome.IsLeft ? Outcome.Left : Option.none<ExtractParseFailure>();  
 
         [MethodImpl(Inline)]
         public void OnSuccess(Action<ParsedMember> f)         

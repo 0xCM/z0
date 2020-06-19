@@ -8,19 +8,35 @@ namespace Z0
     using System.Collections.Generic;    
     using System.Linq;
 
-    public abstract class AppSettings<F> : IAppSettingsProvider<F>
-        where F : IAppSettingsProvider<F>, new()
+    public interface IAppSettings<F> : IAppSettingsProvider<F>
+        where F : IAppSettings<F>, new()
     {
+        IEnumerable<IAppSetting> IAppSettingsProvider.Settings 
+            => AppSettings.Get<F>(this).Cast<IAppSetting>();
+
+        void IAppSettingsProvider.Save(FilePath dst)
+            => AppSettings.Save(this,dst);      
+
+        string ITextual.Format()
+            => AppSettings.Format(Settings);                  
+    }
+
+    public abstract class AppSettings<F> : IAppSettings<F>
+        where F : AppSettings<F>, new()
+    {
+
         public static F From(IAppSettings src)
             => AppSettings.From<F>(src);
         
-        public IEnumerable<IAppSetting> Settings 
-            => AppSettings.Get<F>(this).Cast<IAppSetting>();
+        // public IEnumerable<IAppSetting> Settings 
+        //     => AppSettings.Get<F>(this).Cast<IAppSetting>();
 
-        public string Format()
-            => AppSettings.Format(Settings);
+        // public string Format()
+        //     => AppSettings.Format(Settings);
         
-        public void Save(FilePath dst)
-            => AppSettings.Save(this,dst);
+        // public void Save(FilePath dst)
+        //     => AppSettings.Save(this,dst);
     }
+
+
 }

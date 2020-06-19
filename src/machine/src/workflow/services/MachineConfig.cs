@@ -6,7 +6,7 @@ namespace Z0.Machine
 {
     using System;
 
-    public class MachineConfig : AppSettings<MachineConfig>
+    public class MachineConfig : IAppSettings<MachineConfig>
     {
         public override string ToString()
             => ((IAppSettingsProvider)this).Format();

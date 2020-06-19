@@ -6,19 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Defines the shape of a sequential extract parse operation
     /// </summary>
     public readonly struct ExtractParseResults
     {
-        public static ExtractParseResults Empty 
-            => new ExtractParseResults(Array.Empty<ExtractParseFailure>(), Array.Empty<ParsedMember>());
-
         /// <summary>
         /// The unparseable members
         /// </summary>
@@ -39,5 +34,8 @@ namespace Z0
             Parsed = parsed;
             Failed = fail;
         }
+
+        public static ExtractParseResults Empty 
+            => new ExtractParseResults(Array.Empty<ExtractParseFailure>(), Array.Empty<ParsedMember>());
     }
 }

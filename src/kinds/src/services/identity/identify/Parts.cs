@@ -54,9 +54,9 @@ namespace Z0
     
         internal static IEnumerable<string> SuffixText(OpIdentity src)
         {
-            if(src.IdentityText.Contains(IDI.SuffixSep))
+            if(src.Identifier.Contains(IDI.SuffixSep))
             {
-                var suffixes = src.IdentityText.TakeAfter(IDI.SuffixSep);
+                var suffixes = src.Identifier.TakeAfter(IDI.SuffixSep);
                 if(!string.IsNullOrWhiteSpace(suffixes))
                 {
                     var seperated = suffixes.Split(IDI.SuffixSep, StringSplitOptions.RemoveEmptyEntries);
@@ -68,9 +68,9 @@ namespace Z0
 
         internal static IEnumerable<string> ComponentText(OpIdentity src)
         {
-            var parts = (src.IdentityText.Contains(IDI.SuffixSep) 
-            ? src.IdentityText.TakeBefore(IDI.SuffixSep) 
-            : src.IdentityText).Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
+            var parts = (src.Identifier.Contains(IDI.SuffixSep) 
+            ? src.Identifier.TakeBefore(IDI.SuffixSep) 
+            : src.Identifier).Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
             {
                 foreach(var part in parts)
                     yield return part;                     

@@ -21,7 +21,7 @@ namespace Z0
             => new MemoryExtractor(buffer);
 
         [MethodImpl(Inline)]
-        internal MemoryExtractor(byte[] buffer)
+        public MemoryExtractor(byte[] buffer)
         {
             this.Buffer = buffer;
             this.Reader =  MemoryReader.Service;

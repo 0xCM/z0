@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// The identifier computed from the name and parameter identities
         /// </summary>
-        public string IdentityText {get;}
+        public string Identifier {get;}
 
         /// <summary>
         /// Indicates whether identifier should be rendered with a generic marker
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(DelegateIdentity src)
-            => src.IdentityText;
+            => src.Identifier;
 
         [MethodImpl(Inline)]
         public static bool operator==(DelegateIdentity a, DelegateIdentity b)
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         DelegateIdentity(string identifier, string name, bool generic, TypeIdentity[] parameters)
         {
-            IdentityText = identifier;
+            Identifier = identifier;
             DelegateName = name;
             Parameters = parameters;
             Generic = generic;

@@ -12,35 +12,6 @@ namespace Z0.Asm
     using static Memories;
     using static ExtractTermCode;
     
-    readonly struct Jitter
-    {
-        [MethodImpl(Inline)]
-        public static IntPtr jit(MethodInfo src)
-        {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            return src.MethodHandle.GetFunctionPointer();
-        }
-
-        [MethodImpl(Inline)]
-        public static IntPtr jit(Delegate src)
-        {   
-            RuntimeHelpers.PrepareDelegate(src);
-            return src.Method.MethodHandle.GetFunctionPointer();
-        }    
-
-        [MethodImpl(Inline)]
-        public static DynamicPointer jit(DynamicDelegate src)
-        {   
-            RuntimeHelpers.PrepareDelegate(src.DynamicOp);
-            return DynamicPointer.From(src);
-        }        
-
-        [MethodImpl(Inline)]
-        public static DynamicPointer jit<D>(DynamicDelegate<D> src)
-            where D : Delegate
-                => jit(src.Untyped);
-    }
-
     unsafe readonly struct CaptureCore : ICaptureCore
     {      
         public static ICaptureCore Service => default(CaptureCore);  
@@ -190,9 +161,9 @@ namespace Z0.Asm
         static ExtractState Step(in CaptureExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
         {
             var code = Unsafe.Read<byte>(pSrc++);
-            exchange.Target(offset++) = code;
+            exchange[offset++] = code;
             location = (long)pSrc;
-            return ExtractState.Define(id, offset, location, code);
+            return new ExtractState(id, offset, location, code);
         }
 
         [MethodImpl(Inline)]
@@ -255,14 +226,13 @@ namespace Z0.Asm
 
         const byte J48 = 0x48;
 
-
         [MethodImpl(Inline)]
         static ExtractTermCode? Scan4(in CaptureExchange exchange, int offset, out int delta)
         {
-            var x0 = exchange.Target(offset - 3);
-            var x1 = exchange.Target(offset - 2);
-            var x2 = exchange.Target(offset - 1);
-            var x3 = exchange.Target(offset - 0);
+            var x0 = exchange[offset - 3];
+            var x1 = exchange[offset - 2];
+            var x2 = exchange[offset - 1];
+            var x3 = exchange[offset - 0];
             delta = -2;
 
             if(match((x0,RET), (x1, SBB)))
@@ -282,11 +252,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         static ExtractTermCode? Scan5(in CaptureExchange exchange, int offset, out int delta)
         {
-            var x0 = exchange.Target(offset - 5);
-            var x1 = exchange.Target(offset - 4);
-            var x2 = exchange.Target(offset - 3);
-            var x3 = exchange.Target(offset - 2);
-            var x4 = exchange.Target(offset - 1);
+            var x0 = exchange[offset - 5];
+            var x1 = exchange[offset - 4];
+            var x2 = exchange[offset - 3];
+            var x3 = exchange[offset - 2];
+            var x4 = exchange[offset - 1];
             delta = 0;
             
             if(match((x0,ZED), (x1,ZED), (x2,J48), (x3,FF), (x4,E0)))
@@ -297,17 +267,13 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static bool Zx7(in CaptureExchange exchange, int offset)
-            =>      exchange.Target(offset - 6) == ZED 
-                && (exchange.Target(offset - 5) == ZED) 
-                && (exchange.Target(offset - 4) == ZED) 
-                && (exchange.Target(offset - 3) == ZED) 
-                && (exchange.Target(offset - 2) == ZED) 
-                && (exchange.Target(offset - 1) == ZED)                     
-                && (exchange.Target(offset - 0) == ZED);
-
-        [MethodImpl(Inline)]
-        static bit match((byte x, byte y) a)
-            => a.x == a.y;
+            =>      exchange[offset - 6] == ZED 
+                && (exchange[offset - 5] == ZED) 
+                && (exchange[offset - 4] == ZED) 
+                && (exchange[offset - 3] == ZED) 
+                && (exchange[offset - 2] == ZED) 
+                && (exchange[offset - 1] == ZED)                     
+                && (exchange[offset - 0] == ZED);
 
         [MethodImpl(Inline)]
         static bit match((byte x, byte y) a, (byte x, byte y) b)
@@ -319,13 +285,6 @@ namespace Z0.Asm
             => a.x == a.y 
             && b.x == b.y 
             && c.x == c.y;
-
-        [MethodImpl(Inline)]
-        static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c, (byte x, byte y) d)
-            => a.x == a.y 
-            && b.x == b.y 
-            && c.x == c.y 
-            && d.x == d.y;
 
         [MethodImpl(Inline)]
         static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c, (byte x, byte y) d, (byte x, byte y) e)

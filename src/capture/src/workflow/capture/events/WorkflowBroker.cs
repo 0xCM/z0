@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
-    public interface IReportParsedStep : ICaptureStep
+    sealed class CaptureBroker : EventBroker, ICaptureBroker
     {
-        MemberParseReport CreateParseReport(ApiHostUri host, ParsedMember[] src);        
-
-        void SaveParseReport(MemberParseReport src, FilePath dst);
+        public static ICaptureBroker Service => new CaptureBroker();           
     }
+
+    public partial class CaptureWorkflowEvents
+    {
+       
+    }    
 }

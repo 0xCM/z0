@@ -29,7 +29,7 @@ namespace Z0.Asm
         CaptureExchange Context
         {
             [MethodImpl(Inline)]
-            get => CaptureExchange.Create(Service, TargetBuffer.Content<byte>(), StateBuffer.Content<byte>());
+            get => CaptureExchange.Create(Service, TargetBuffer.Content<byte>());
         }
     }
 }

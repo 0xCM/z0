@@ -15,12 +15,7 @@ namespace Z0.Asm
         /// <summary>
         /// The buffer that receives the captured data
         /// </summary>
-        public readonly Span<byte> TargetBuffer;
-
-        /// <summary>
-        /// A buffer that tracks state meaningful to the capture workflow
-        /// </summary>
-        public readonly Span<byte> StateBuffer;
+        readonly Span<byte> TargetBuffer;
 
         /// <summary>
         /// The juncture-coincident operation set 
@@ -32,47 +27,24 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="context">The source context</param>
         public static CaptureExchange Create(IAsmContext context)    
-            => Create(context.CaptureCore, 
-                new byte[context.DefaultBufferLength], 
-                new byte[context.DefaultBufferLength]
-                );
+            => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
                 
         /// <summary>
         /// Allocatates buffers and creates an exchange over the allocation
         /// </summary>
         /// <param name="context">The source context</param>
         public static CaptureExchange Create(ICaptureCore service, int size = Pow2.T14)
-        {
-            var cBuffer = new byte[size];
-            var sBuffer = new byte[size];
-            return Create(service, cBuffer, sBuffer);
-        }        
+            => new CaptureExchange(service, new byte[size]);
 
         [MethodImpl(Inline)]
-        public static CaptureExchange Create(ICaptureCore service, Span<byte> capture, Span<byte> state)
-            => new CaptureExchange(service, capture, state);
+        public static CaptureExchange Create(ICaptureCore service, Span<byte> capture, Span<byte> state = default)
+            => new CaptureExchange(service, capture);
 
-        CaptureExchange(ICaptureCore service, Span<byte> capture, Span<byte> state)            
+        internal CaptureExchange(ICaptureCore service, Span<byte> capture)            
         {
-            insist(capture.Length == state.Length);
-            this.TargetBuffer = capture;
-            this.StateBuffer = state;
-            this.Service = service;
+            TargetBuffer = capture;
+            Service = service;
         }
-
-        public void ClearBuffers()
-        {
-            TargetBuffer.Clear();
-            StateBuffer.Clear();
-        }
-
-        /// <summary>
-        /// Queries and manipulates an index-identified state buffer byte
-        /// </summary>
-        /// <param name="index">The cell index to query/manipulate</param>
-        [MethodImpl(Inline)]
-        public ref byte State(int offset)
-            => ref refs.seek(StateBuffer, offset);
         
         /// <summary>
         /// Queries and manipulates an index-identified target buffer byte
@@ -81,6 +53,12 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public ref byte Target(int index)
             => ref refs.seek(TargetBuffer, index);
+
+        public ref byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Target(index);
+        }
 
         /// <summary>
         /// Slices a section of the target buffer
@@ -93,16 +71,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public ref readonly CapturedCode CaptureComplete(in ExtractState state, in CapturedCode captured)
-        {
-            return ref captured;
-        }
+            => ref captured;
 
         [MethodImpl(Inline)]
         public ref readonly ExtractState CaptureStep(in ExtractState state)
-        {
-
-            return ref state;
-        }
+            => ref state;
 
         public int BufferLength 
         {

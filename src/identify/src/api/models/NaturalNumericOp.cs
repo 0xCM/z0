@@ -30,7 +30,8 @@ namespace Z0
           /// <summary>
           /// The generalized identity
           /// </summary>
-          public OpIdentity Id => GenericId.Generialize();
+          public OpIdentity Id 
+            => GenericId.Generialize();
 
           /// <summary>
           /// The generic method definition
@@ -40,19 +41,16 @@ namespace Z0
           /// <summary>
           /// The hosting type uri
           /// </summary>
-          public ApiHostUri HostUri => Host.Uri;
+          public ApiHostUri HostUri 
+            => Host.Uri;
 
           [MethodImpl(Inline)]
-          public static NaturalNumericOp Define(IApiHost host, GenericOpIdentity id, MethodInfo method, NaturalNumericClosure[] closures)            
-              => new NaturalNumericOp(host, id,method, closures);
-
-          [MethodImpl(Inline)]
-          NaturalNumericOp(IApiHost host, GenericOpIdentity id, MethodInfo method, NaturalNumericClosure[] closures)
+          public NaturalNumericOp(IApiHost host, GenericOpIdentity id, MethodInfo method, NaturalNumericClosure[] closures)
           {
-              this.Host = host;
-              this.GenericId = id;
-              this.Method = method;
-              this.Closures = closures;
+              Host = host;
+              GenericId = id;
+              Method = method;
+              Closures = closures;
           }        
     }
 }

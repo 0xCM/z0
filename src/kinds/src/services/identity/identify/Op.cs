@@ -16,7 +16,7 @@ namespace Z0
             => OpIdentityParser.Service.Parse(src);
 
         public static OpIdentity Op(params IdentityPart[] parts)
-            => Op(string.Join(IDI.PartSep, parts.Select(x =>x.IdentityText)));
+            => Op(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]

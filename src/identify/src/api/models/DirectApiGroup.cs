@@ -31,7 +31,6 @@ namespace Z0
         /// </summary>
         public DirectApiOp[] Members {get;}
 
-
         [MethodImpl(Inline)]
         public DirectApiGroup(OpIdentity group, IApiHost host, IEnumerable<DirectApiOp> members)
         {

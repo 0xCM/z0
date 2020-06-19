@@ -80,19 +80,19 @@ namespace Z0
                 throw Failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
         }
 
-        // void eq<T>(Vector512<T> a, Vector512<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        //     where T : unmanaged
-        // {
-        //     if(!a.Equals(b))
-        //         throw failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
+        void eq<T>(Vector512<T> a, Vector512<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged
+        {
+            if(!a.Equals(b))
+                throw Failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
 
-        // }
+        }
 
-        // void neq<T>(Vector512<T> a, Vector512<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        //     where T : unmanaged
-        // {
-        //     if(a.Equals(b))
-        //         throw failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
-        // }
+        void neq<T>(Vector512<T> a, Vector512<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged
+        {
+            if(a.Equals(b))
+                throw Failed(ClaimKind.NEq, Equal(a,b, caller, file, line));
+        }
     }
 }

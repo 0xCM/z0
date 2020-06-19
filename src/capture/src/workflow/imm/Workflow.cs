@@ -89,14 +89,14 @@ namespace Z0.Asm
         {
             if(imm8.Length != 0)
             {
-                var exchange =  AsmWorkflows.Create(Context).CaptureExchange;
+                var exchange =  AsmWorkflows.Service(Context).CaptureExchange;
                 EmitUnrefined(exchange, imm8.ToImm8Values(ImmSourceKind.Literal));
             }
         }
 
         public void EmitRefined()
         {
-            var exchange = AsmWorkflows.Create(Context).CaptureExchange;
+            var exchange = AsmWorkflows.Service(Context).CaptureExchange;
             EmitRefined(exchange);
         }
 

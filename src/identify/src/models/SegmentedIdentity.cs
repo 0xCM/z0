@@ -13,6 +13,14 @@ namespace Z0
 
     public readonly struct SegmentedIdentity : IIdentifiedType<SegmentedIdentity>
     {        
+        public TypeIndicator Indicator {get;}
+
+        public FixedWidth TypeWidth {get;}
+
+        public NumericKind SegKind {get;}
+
+        public string Identifier {get;}
+
         public static SegmentedIdentity Set(string text)
             => new SegmentedIdentity(text);
             
@@ -32,7 +40,7 @@ namespace Z0
         /// <param name="part">The source part</param>
         public static Option<SegmentedIdentity> Identify(IdentityPart part)
         {
-            if(part.IsSegment && Segmentation.TryParse(part.IdentityText, out var seg))
+            if(part.IsSegment && Segmentation.TryParse(part.Identifier, out var seg))
                 return seg;
             else
                 return Option.none<SegmentedIdentity>();
@@ -42,15 +50,7 @@ namespace Z0
         public static SegmentedIdentity Numeric(NumericKind src)
             => new SegmentedIdentity(src);
 
-        public static SegmentedIdentity Empty => new SegmentedIdentity(TypeIndicator.Empty, FixedWidth.None, NumericKind.None);
 
-        public TypeIndicator Indicator {get;}
-
-        public FixedWidth TypeWidth {get;}
-
-        public NumericKind SegKind {get;}
-
-        public string IdentityText {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator SegmentedIdentity(NumericKind src)
@@ -58,7 +58,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(SegmentedIdentity src)
-            => src.IdentityText;
+            => src.Identifier;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeIdentity(SegmentedIdentity src)
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal SegmentedIdentity(NumericKind nk)
         {
-            IdentityText = nk.KeywordNot();
+            Identifier = nk.KeywordNot();
             Indicator = TypeIndicator.Empty;
             SegKind = nk;
             TypeWidth = (FixedWidth)nk.Width();
@@ -87,7 +87,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal SegmentedIdentity(string text)
         {
-            IdentityText = text;
+            Identifier = text;
             Indicator = TypeIndicator.Empty;
             SegKind = NumericKind.None;
             TypeWidth = FixedWidth.None;
@@ -100,20 +100,20 @@ namespace Z0
             TypeWidth = typewidth;
             SegKind = segkind;
             if(TypeWidth == 0 && segkind == 0)
-                IdentityText = string.Empty;
+                Identifier = string.Empty;
             else
-                IdentityText = $"{indicator}{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
+                Identifier = $"{indicator}{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
         }
 
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.Define(IdentityText);
+            => TypeIdentity.Define(Identifier);
 
         [MethodImpl(Inline)]
         public bool Equals(SegmentedIdentity src)
             => equals(this, src);
     
         public string Format()
-            => IdentityText;
+            => Identifier;
 
         public int CompareTo(SegmentedIdentity src)
             => compare(this, src);
@@ -125,6 +125,10 @@ namespace Z0
             => equals(this, src);
 
         public override string ToString()
-            => IdentityText;
+            => Identifier;
+
+        public static SegmentedIdentity Empty 
+            => new SegmentedIdentity(TypeIndicator.Empty, FixedWidth.None, NumericKind.None);
+
     }
 }

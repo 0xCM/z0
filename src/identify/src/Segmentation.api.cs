@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="part">The source part</param>
         public static Option<SegmentedIdentity> identify(IdentityPart part)
         {
-            if(part.IsSegment && Segmentation.TryParse(part.IdentityText, out var seg))
+            if(part.IsSegment && Segmentation.TryParse(part.Identifier, out var seg))
                 return seg;
             else
                 return Option.none<SegmentedIdentity>();

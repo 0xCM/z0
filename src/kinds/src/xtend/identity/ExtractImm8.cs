@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source identity</param>
         public static Option<byte> ExtractImm8(this OpIdentity src)            
         {
-            if(src.HasImm && byte.TryParse(src.IdentityText.RightOfLast(IDI.Imm), out var immval))
+            if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(IDI.Imm), out var immval))
                 return immval;
             else
                 return Option.none<byte>();

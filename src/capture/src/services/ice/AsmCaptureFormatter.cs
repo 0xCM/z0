@@ -14,12 +14,6 @@ namespace Z0.Asm
     
     using Iced = Iced.Intel;
 
-    interface IAsmCaptureFormatter : IService
-    {
-        string FormatInstruction(in Iced.Instruction src, ulong @base);
-
-        ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base);
-    }
 
     readonly struct AsmCaptureFormatter : IAsmCaptureFormatter
     {

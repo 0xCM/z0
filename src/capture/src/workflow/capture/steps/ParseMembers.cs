@@ -17,10 +17,11 @@ namespace Z0.Asm
         {
             public ICaptureWorkflow Workflow {get;}
 
-            public ICaptureContext Context => Workflow.Context;
-            
             readonly IExtractParser Parser;
-            
+
+            public ICaptureContext Context 
+                => Workflow.Context;
+                        
             [MethodImpl(Inline)]
             internal ParseMembersStep(ICaptureWorkflow workflow)
             {
@@ -28,7 +29,7 @@ namespace Z0.Asm
                 Parser = Extract.Services.ExtractParser();
             }
 
-            public ParsedMember[] ParseExtracts(ApiHostUri host, ExtractedMember[] extracts)
+            public ParsedMember[] Parse(ApiHostUri host, ExtractedMember[] extracts)
             {
                 try
                 {
@@ -50,7 +51,6 @@ namespace Z0.Asm
                     term.errlabel(e, $"{host} extract parse FAIL");  
                     return Control.array<ParsedMember>();
                 }
-
             }
 
             public void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst)

@@ -41,7 +41,7 @@ namespace Z0
         public MemoryAddress Zero 
             => Empty;
 
-        public string IdentityText 
+        public string Identifier 
             => Location.ToString("x") + HexSpecs.PostSpec;
 
         MemoryAddress IAddressable.Address 
@@ -155,7 +155,7 @@ namespace Z0
             => Location = absolute;
 
         public string Format()
-            => IdentityText;        
+            => Identifier;        
 
         public string Format(NumericWidth width)
         {

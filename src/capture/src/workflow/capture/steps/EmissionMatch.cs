@@ -24,9 +24,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             internal EmissionMatchStep(ICaptureWorkflow workflow)
-            {
-                Workflow = workflow;
-            }
+                => Workflow = workflow;
 
             ICheckEquatable Claim 
                 => CheckEquatable.Checker;

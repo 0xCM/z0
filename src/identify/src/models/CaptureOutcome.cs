@@ -14,8 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct CaptureOutcome : IIdentified<OpIdentity>
     {
-        public static CaptureOutcome Empty => Define(ExtractState.Empty, 0,0, ExtractTermCode.None);
-
         /// <summary>
         /// The identity of the capture subject
         /// </summary>
@@ -45,7 +43,7 @@ namespace Z0
             => new CaptureOutcome(state, source, cc);
 
         [MethodImpl(Inline)]
-        CaptureOutcome(in ExtractState state, MemoryRange range, ExtractTermCode cc)
+        public CaptureOutcome(in ExtractState state, MemoryRange range, ExtractTermCode cc)
         {   
             Id = state.Id;
             State = state;
@@ -64,5 +62,8 @@ namespace Z0
 
         public bool IsEmpty
             => End - Start == 0 && TermCode == ExtractTermCode.None;        
+
+        public static CaptureOutcome Empty 
+            => Define(ExtractState.Empty, 0,0, ExtractTermCode.None);
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     /// Glues a generic method definition to a set of kinds that represent types over which the
     /// generic method can close
     /// </summary>
-    public class GenericApiOp : IHostedApiMethod
+    public readonly struct GenericApiOp : IHostedApiMethod
     {            
         /// <summary>
         /// The operation host to which generic definition and any concrete closures belowng
@@ -34,7 +34,8 @@ namespace Z0
         /// <summary>
         /// The generalized identity
         /// </summary>
-        public OpIdentity Id => GenericId.Generialize();
+        public OpIdentity Id 
+            => GenericId.Generialize();
 
         /// <summary>
         /// The generic method definition
@@ -44,14 +45,11 @@ namespace Z0
         /// <summary>
         /// The hosting type uri
         /// </summary>
-        public ApiHostUri HostUri => Host.Uri;
+        public ApiHostUri HostUri 
+            => Host.Uri;
 
         [MethodImpl(Inline)]
-        public static GenericApiOp Define(IApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)            
-            => new GenericApiOp(host, id,method, kinds);
-
-        [MethodImpl(Inline)]
-        GenericApiOp(IApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)
+        public GenericApiOp(IApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)
         {
             this.Kinds = kinds;
             this.Host = host;

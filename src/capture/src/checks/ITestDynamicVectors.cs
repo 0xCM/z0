@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
+    using Z0.Asm;
+
     using static Konst;
     using static Memories;
     using static BufferSeqId;

@@ -19,7 +19,7 @@ namespace Z0
         ApiHostUri Uri 
             => ApiHostUri.FromHost(HostType);
 
-        string IIdentified.IdentityText 
+        string IIdentified.Identifier 
             => Uri.Format();        
 
         ApiHostKind HostKind  

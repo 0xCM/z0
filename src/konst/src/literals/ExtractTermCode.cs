@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     /// <summary>
     /// Defines literals that indicate the reason for exraction termination
     /// </summary>

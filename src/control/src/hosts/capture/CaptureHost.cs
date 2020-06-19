@@ -38,10 +38,7 @@ namespace Z0
 
         readonly AsmFormatSpec FormatConfig;
         
-        public static ICaptureHost Create(IAsmContext context, FolderPath root)    
-            => new CaptureHost(context,root);
-
-        CaptureHost(IAsmContext context, FolderPath root)
+        internal CaptureHost(IAsmContext context, FolderPath root)
         {                    
             Context = context;
             Sink = context;
@@ -50,7 +47,7 @@ namespace Z0
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = context.Contextual.Formatter(FormatConfig);            
 
-            var wfc = AsmWorkflows.Create(context);            
+            var wfc = AsmWorkflows.Service(context);            
             Decoder = Capture.Services.AsmDecoder(FormatConfig);
             UriBitsReader = Capture.Services.UriHexReader;
             CaptureWorkflow = wfc.CaptureWorkflow(Decoder, Formatter, Capture.Services.CaptureArchive(root));

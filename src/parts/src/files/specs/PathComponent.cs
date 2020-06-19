@@ -34,7 +34,7 @@ namespace Z0
         public bool IsEmpty
             => string.IsNullOrWhiteSpace(Name);
 
-        string IIdentified.IdentityText 
+        string IIdentified.Identifier 
             => Name;
 
         public bool Equals(T src)

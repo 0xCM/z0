@@ -15,7 +15,7 @@ namespace Z0.Asm
 
         ExtractsParsed ExtractsParsed => ExtractsParsed.Empty;            
         
-        ParseReportCreated ParseReportCreated => ParseReportCreated.Empty;
+        ParseReportEmitted ParseReportCreated => ParseReportEmitted.Empty;
     }
 
     public interface IExtractParseClient<C> : IBrokerClient<C>
@@ -27,7 +27,7 @@ namespace Z0.Asm
         void OnEvent(ExtractsParsed e) 
             => Sink.Deposit(e);
 
-        void OnEvent(ParseReportCreated e) 
+        void OnEvent(ParseReportEmitted e) 
             => Sink.Deposit(e);
     }
 }

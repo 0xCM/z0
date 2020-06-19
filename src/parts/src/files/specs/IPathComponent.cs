@@ -18,7 +18,7 @@ namespace Z0
         
         static T Empty => new T();        
 
-        string IIdentified.IdentityText 
+        string IIdentified.Identifier 
             => Name;
     }
 }

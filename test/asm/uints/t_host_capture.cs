@@ -8,12 +8,11 @@ namespace Z0.Asm
 
     using static Konst;
 
-
     public sealed class t_host_capture : t_asm<t_host_capture>
     {    
         public void capture_math()
         {
-            var service = AsmWorkflows.Create(Context).HostCaptureService(UnitRoot);
+            var service = AsmWorkflows.Service(Context).HostCaptureService(UnitRoot);
             var uri = ApiHostUri.FromHost<math>();
             var capture = service.CaptureHost(uri,true);
 

@@ -16,7 +16,8 @@ namespace Z0.Asm
         {
             public ICaptureWorkflow Workflow {get;}
 
-            public ICaptureContext Context => Workflow.Context;
+            public ICaptureContext Context 
+                => Workflow.Context;
             
             [MethodImpl(Inline)]
             internal ReportExtractsStep(ICaptureWorkflow workflow)

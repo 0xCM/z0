@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;    
 
+    using static Chars;
+
     /// <summary>
     /// Identity indicators
     /// </summary>
@@ -14,12 +16,12 @@ namespace Z0
         /// <summary>
         /// An identity part delimiter
         /// </summary>
-        public const char PartSep = Chars.Underscore;
+        public const char PartSep = Underscore;
 
         /// <summary>
         /// A suffix part delimiter
         /// </summary>
-        public const char SuffixSep = Chars.Dash;
+        public const char SuffixSep = Dash;
 
         /// <summary>
         /// A separator between the bit width of a segmented type and the width of each segment
@@ -29,7 +31,7 @@ namespace Z0
         /// <summary>
         /// A separator between an identifier body and an applied modifier
         /// </summary>
-        public const char ModSep = Chars.Tilde;
+        public const char ModSep = Tilde;
 
         /// <summary>
         /// Indicates a signed integral type
@@ -69,35 +71,35 @@ namespace Z0
         /// <summary>
         /// A type or value argument delimiter
         /// </summary>
-        public const char ArgSep = Chars.Comma;
+        public const char ArgSep = Comma;
 
         public const char ArgSepAlt = SymNot.Dot;
 
         /// <summary>
         /// Opens a value parameter list
         /// </summary>
-        public const char ArgsOpen = Chars.LParen;
+        public const char ArgsOpen = LParen;
 
         public const char ArgsOpenAlt = SymNot.Circle;
 
         /// <summary>
         /// Closes a value parameter list
         /// </summary>
-        public const char ArgsClose = Chars.RParen;
+        public const char ArgsClose = RParen;
 
         public const char ArgsCloseAlt = SymNot.Circle;
 
         /// <summary>
         /// Opens a type argument list
         /// </summary>
-        public const char TypeArgsOpen = Chars.LBracket;
+        public const char TypeArgsOpen = LBracket;
 
         public const char TypeArgsOpenAlt = SymNot.Lt;
 
         /// <summary>
         /// Closes a type argument list
         /// </summary>
-        public const char TypeArgsClose = Chars.RBracket;
+        public const char TypeArgsClose = RBracket;
 
         public const char TypeArgsCloseAlt = SymNot.Gt;
 
@@ -153,7 +155,6 @@ namespace Z0
 
         public const string GenericLocator = "_g";
 
-        public const string AsmLocator = "-asm";
-    
+        public const string AsmLocator = "-asm";   
     }
 }
