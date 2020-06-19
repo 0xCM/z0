@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;    
     using static Memories;
-  
+    
     /// <summary>
     /// Defines a transposition, i.e. a specification for the transposition
     /// of two elements, denoted by an ordered pair of space-delimited indices (i j)
@@ -46,24 +46,21 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Parses a transposition in canonical form (i j), if possible; otherwise
-        /// returns the empty transposition
-        /// </summary>
-        /// <param name="src">The source text</param>
         public static Swap<T> Parse(string src)
-        {
-            var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
-            if(indices.Length != 2)
-                return Zero;
+            => throw new NotImplementedException();
             
-            var parser = NumericParser.create<T>();
-            var result = Try(() => (parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
-            if(result.IsSome())
-                return result.Value();
-            else
-                return Zero;
-        }
+        // {
+        //     var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
+        //     if(indices.Length != 2)
+        //         return Zero;
+            
+        //     var parser = NumericParser.create<T>();
+        //     var result = Try(() => (parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
+        //     if(result.IsSome())
+        //         return result.Value();
+        //     else
+        //         return Zero;
+        // }
 
         [MethodImpl(Inline)]
         public static implicit operator Swap<T>((T i, T j) src)

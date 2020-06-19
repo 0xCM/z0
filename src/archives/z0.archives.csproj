@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Identity)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Identify)" />
   </ItemGroup>
 
 </Project>

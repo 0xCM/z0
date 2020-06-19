@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Seed)" />
   </ItemGroup>
 
 </Project>

@@ -9,22 +9,14 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Symbolic)" />
 
-    <ProjectReference Include="$(Flow)" />
-
-
-    <ProjectReference Include="$(Math)" />    
     <ProjectReference Include="$(GMath)" />    
 
-    <ProjectReference Include="$(Messages)" />
-
-    <ProjectReference Include="$(Agency)" />
     <ProjectReference Include="$(Kinds)" />
 
     <ProjectReference Include="$(Fixed)" />    
     <ProjectReference Include="$(Numeric)" />
     
     <ProjectReference Include="$(Polyrand)" />    
-    <ProjectReference Include="$(Graphs)" />
     <ProjectReference Include="$(Identify)" />
 
     <ProjectReference Include="$(Structured)" />

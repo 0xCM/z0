@@ -15,7 +15,6 @@
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Structured)" />
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Messages)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Identify)" />
 

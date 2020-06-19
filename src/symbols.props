@@ -8,52 +8,41 @@
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
     
-    <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
 
 
     <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
 
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
 
-    <Memories>$(Src)memories/z0.memories.csproj</Memories>
 
     <Stores>$(Src)stores/z0.stores.csproj</Stores>
 
 
-    <Tuples>$(Src)tuples/z0.tuples.csproj</Tuples>
-
     <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>
 
-    <Math>$(Src)math/z0.math.csproj</Math>
-
-    <ResV>$(Src)resv/z0.resv.csproj</ResV>
-
-    <Messages>$(Src)messages/z0.messages.csproj</Messages>
-
-    <Flow>$(Src)flow/z0.flow.csproj</Flow>
-    
-    <Agency>$(Src)agency/z0.agency.csproj</Agency>
-
-    
-    <Datasets>$(Src)datasets/z0.datasets.csproj</Datasets>
-    <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>
-
-    <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
+    <Structured>$(Src)structured/z0.structured.csproj</Structured>
 
     <Fixed>$(Src)fixed/z0.fixed.csproj</Fixed>
     <Numeric>$(Src)numeric/z0.numeric.csproj</Numeric>
 
-    <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
+    <Math>$(Src)math/z0.math.csproj</Math>  
+    
+    <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
 
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
+
+    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
+
+    <Datasets>$(Src)datasets/z0.datasets.csproj</Datasets>
+    <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>
+
     <Identify>$(Src)identify/z0.identify.csproj</Identify>
 
-    <Structured>$(Src)structured/z0.structured.csproj</Structured>
+    <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
 
     <LSquare>$(Src)lsquare/z0.lsquare.csproj</LSquare>
 
 
-    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
 
     <Core>$(Src)Core/z0.core.csproj</Core>
 

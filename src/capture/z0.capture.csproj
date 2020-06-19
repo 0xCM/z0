@@ -17,7 +17,7 @@
     <ProjectReference Include="$(Cil)" />    
 
     <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(Graphs)" />
+    <ProjectReference Include="$(Numeric)" />
 
   </ItemGroup>
 

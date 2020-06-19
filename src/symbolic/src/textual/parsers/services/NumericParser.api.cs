@@ -14,6 +14,25 @@ namespace Z0
     public class NumericParser  : IApiHost<NumericParser>
     {
         /// <summary>
+        /// Parses a transposition in canonical form (i j), if possible; otherwise returns the empty transposition
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static ParseResult<Pair<T>> transposition<T>(string src)
+            where T : unmanaged
+        {
+            var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
+            if(indices.Length != 2)
+                return ParseResult.Fail<Pair<T>>(src);
+            
+            var parser = NumericParser.create<T>();
+            var result = Option.Try(() => Pairs.pair(parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
+            if(result.IsSome())
+                return ParseResult.Success(src, result.Value());
+            else
+                return ParseResult.Fail<Pair<T>>(src);
+        }
+
+        /// <summary>
         /// Creates a numeric parser
         /// </summary>
         /// <typeparam name="T">The numeric type to parse</typeparam>
@@ -50,7 +69,8 @@ namespace Z0
                 return ParseResult.Fail<T>(src);
         }
 
-        static ScalarParser SP => ScalarParser.Service;
+        static ScalarParser SP 
+            => ScalarParser.Service;
 
         [MethodImpl(Inline)]
         static bit parse_u<T>(string src, out T dst)
