@@ -6,19 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
-
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Extract)" />
-
     <ProjectReference Include="$(Identity)" />  
     <ProjectReference Include="$(Archives)" />
-
     <ProjectReference Include="$(Cil)" />    
-
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Numeric)" />
-
   </ItemGroup>
 
   <ItemGroup>

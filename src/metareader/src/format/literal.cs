@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
-    using static MetadataRecords;
     using static MetadataRecords.LiteralField;
+        
+    using M = MetadataRecords;
     
     partial class MetadataFormat
     {       
         [Op]
-        public static string format(in LiteralRecord src, char delimiter)
+        public static string format(in M.LiteralRecord src, char delimiter)
         {            
             var widths = FieldWidths(src.Kind);
             var count = FieldCount(src.Kind);

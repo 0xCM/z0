@@ -191,18 +191,28 @@ namespace Z0
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector128<T> src, int? maxbits = null)
-            where T : unmanaged        
-                => BitString.scalars(Vectors.span(src), maxbits);
+            where T : unmanaged 
+                => BitString.load(src, maxbits);
         
         /// <summary>
-        /// Converts an 256-bit intrinsic vector representation to a bistring
+        /// Converts an 256-bit vector representation to a bistring
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector256<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.scalars(Vectors.span(src), maxbits);        
+                => BitString.load(src, maxbits);
+
+        /// <summary>
+        /// Converts a 512-bit vector representation to a bistring
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static BitString ToBitString<T>(this Vector512<T> src, int? maxbits = null)
+            where T : unmanaged        
+                => BitString.load(src, maxbits);
 
         /// <summary>
         /// Converts an enumeration value to a bitstring

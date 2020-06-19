@@ -10,9 +10,11 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
+    
     using static Konst;    
     using static MetadataRecords;
-    using static Control;
+
+    using M = MetadataRecords;
     
     partial class MetadataRead
     {        
@@ -28,12 +30,12 @@ namespace Z0
         internal static string Literal(in ReaderState state, BlobHandle handle, int seq)
             => Literal(state, handle, seq, (r, h) => BitConverter.ToString(r.GetBlobBytes((BlobHandle)h)));
         
-        internal static LiteralRecord LiteralValue(in ReaderState state, StringHandle handle, int seq)
+        internal static M.LiteralRecord LiteralValue(in ReaderState state, StringHandle handle, int seq)
         {
             var value = state.Reader.GetString(handle);
             var offset = state.Reader.GetHeapOffset(handle);
             var size = state.Reader.GetHeapSize(HeapIndex.String);
-            return new LiteralRecord(seq, size, offset, value);                    
+            return new M.LiteralRecord(seq, size, offset, value);                    
         }
 
         internal static BlobRecord LiteralValue(in ReaderState state, BlobHandle handle, int seq)

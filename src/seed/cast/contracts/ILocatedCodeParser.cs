@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     public interface ILocatedCodeParser : IService
     {
         /// <summary>

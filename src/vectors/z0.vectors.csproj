@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(VRoot)"/>
   </ItemGroup>
 
 </Project>

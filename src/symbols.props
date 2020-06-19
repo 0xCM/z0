@@ -9,14 +9,11 @@
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
     
 
-
-    <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
-
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
 
+    <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>
 
     <Stores>$(Src)stores/z0.stores.csproj</Stores>
-
 
     <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>
 
@@ -33,16 +30,17 @@
 
     <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
 
+    <Apps>$(Src)apps/z0.apps.csproj</Apps>
+
     <Datasets>$(Src)datasets/z0.datasets.csproj</Datasets>
-    <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>
 
     <Identify>$(Src)identify/z0.identify.csproj</Identify>
+
+    <Archives>$(Src)archives/z0.archives.csproj</Archives>
 
     <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
 
     <LSquare>$(Src)lsquare/z0.lsquare.csproj</LSquare>
-
-
 
     <Core>$(Src)Core/z0.core.csproj</Core>
 
@@ -50,7 +48,6 @@
 
   <PropertyGroup>
     <Identity>$(Src)identity/z0.identity.csproj</Identity>
-    <Apps>$(Src)apps/z0.apps.csproj</Apps>
   </PropertyGroup>
 
   <PropertyGroup>    
@@ -64,7 +61,6 @@
     <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
     <ZIce>$(Src)commands/zice/z0.zice.csproj</ZIce>
     <ZAsm>$(Src)commands/zasm/z0.zasm.csproj</ZAsm>
-
 
   </PropertyGroup>
 
@@ -98,7 +94,6 @@
 
   <PropertyGroup>
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
-    <Archives>$(Src)archives/z0.archives.csproj</Archives>
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
   </PropertyGroup>
 

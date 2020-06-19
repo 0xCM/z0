@@ -54,7 +54,6 @@ namespace Z0
             Vectors.vstore(src, ref dst.Head);
             return dst.Data;
         }
-
  
     }
 }

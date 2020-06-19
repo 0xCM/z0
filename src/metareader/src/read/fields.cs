@@ -13,10 +13,12 @@ namespace Z0
     using static Konst;    
     using static MetadataRecords;
     using static Control;
+
+    using M = MetadataRecords;
     
     partial class MetadataRead
     {        
-        internal static LiteralRecord name(in ReaderState state, FieldDefinition entry, int seq)
+        internal static M.LiteralRecord name(in ReaderState state, FieldDefinition entry, int seq)
         {
             return LiteralValue(state, entry.Name, seq);
         }

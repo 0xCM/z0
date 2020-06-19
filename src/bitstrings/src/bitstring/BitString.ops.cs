@@ -45,7 +45,11 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString load<T>(Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.scalars(Vectors.span(src), maxbits);
+        {       
+            ref readonly var data = ref Imagine.@as<Vector128<T>,T>(ref src);            
+            var covered = Imagine.cover(data, Vector128<T>.Count);
+            return BitString.scalars(covered, maxbits);            
+        }
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -56,7 +60,11 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString load<T>(Vector256<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.scalars(Vectors.span(src), maxbits);
+        {       
+            ref readonly var data = ref Imagine.@as<Vector256<T>,T>(ref src);            
+            var covered = Imagine.cover(data, Vector128<T>.Count);
+            return BitString.scalars(covered, maxbits);            
+        }
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -67,7 +75,11 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString load<T>(Vector512<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.scalars(Vectors.span(src), maxbits);
+        {       
+            ref readonly var data = ref Imagine.@as<Vector512<T>,T>(ref src);            
+            var covered = Imagine.cover(data, Vector128<T>.Count);
+            return BitString.scalars(covered, maxbits);            
+        }
 
         /// <summary>
         /// Constructs a bitstring from a span of bits

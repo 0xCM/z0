@@ -8,13 +8,10 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
-
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Archives)" />
+    <ProjectReference Include="$(Capture)" />
 
-    <ProjectReference Include="$(BitCore)" />
+    <!-- <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(BitFields)" />
@@ -52,7 +49,7 @@
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(VCheck)" />
     <ProjectReference Include="$(VBits)" />
-    <ProjectReference Include="$(VSvc)" />
+    <ProjectReference Include="$(VSvc)" /> -->
 
   </ItemGroup>
 
