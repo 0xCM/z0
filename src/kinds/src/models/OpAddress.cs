@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Pairs a located operation with, well, its location
     /// </summary>
-    public readonly struct OpAddress : ITextual, INullary<OpAddress>, INullaryKnown
+    public readonly struct OpAddress : ITextual, INullary<OpAddress>, INullity
     {
         public static OpAddress Empty => (OpUri.Empty, MemoryAddress.Empty);
         

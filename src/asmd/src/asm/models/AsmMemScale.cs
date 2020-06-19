@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmMemScale : INullary<AsmMemScale>, INullaryKnown
+    public readonly struct AsmMemScale : INullary<AsmMemScale>, INullity
     {   
         public static AsmMemScale Empty => new AsmMemScale(MemScaleKind.None);
         

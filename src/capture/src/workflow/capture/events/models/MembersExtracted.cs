@@ -9,29 +9,26 @@ namespace Z0.Asm
 
     using static Konst;    
 
-    partial class CaptureWorkflowEvents
+    public readonly struct MembersExtracted : IAppEvent<MembersExtracted>
     {
-        public readonly struct MembersExtracted : IAppEvent<MembersExtracted>
+        public readonly ApiHostUri Host;
+        
+        public readonly ExtractedMember[] Members;
+
+        [MethodImpl(Inline)]
+        public MembersExtracted(ApiHostUri host, ExtractedMember[] members)
         {
-            public readonly ApiHostUri Host;
-            
-            public readonly ExtractedMember[] Members;
+            Host = host;
+            Members = members;
+        }
+        
+        public string Description
+            => $"{Members.Length} {Host} members extracted";
 
-            [MethodImpl(Inline)]
-            public MembersExtracted(ApiHostUri host, ExtractedMember[] members)
-            {
-                Host = host;
-                Members = members;
-            }
-            
-            public string Description
-                => $"{Members.Length} {Host} members extracted";
+        public MembersExtracted Zero 
+            => Empty; 
 
-            public MembersExtracted Zero 
-                => Empty; 
-
-            public static MembersExtracted Empty 
-                => new MembersExtracted(ApiHostUri.Empty, Array.Empty<ExtractedMember>());
-        }    
-    }
+        public static MembersExtracted Empty 
+            => new MembersExtracted(ApiHostUri.Empty, Array.Empty<ExtractedMember>());
+    }    
 }

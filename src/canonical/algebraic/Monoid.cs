@@ -57,23 +57,6 @@ namespace Z0
         
     }
 
-    public interface IMonoid<S> : ISemigroup<S>
-        where S : IMonoid<S>, new()
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes monoidal structure
-    /// </summary>
-    /// <typeparam name="S">The classified structure</typeparam>
-    /// <typeparam name="T">The underlying type</typeparam>
-    public interface IMonoid<S,T> : IMonoid<S>, ISemigroup<S,T>
-        where S : IMonoid<S,T>, new()
-    {
-        
-    }            
-
     public interface IMonoidM<S> : IMonoid<S>, ISemigroupM<S>, IUnital<S>
         where S: IMonoidM<S>, new()
     {

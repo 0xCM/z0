@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(Enums)" />    

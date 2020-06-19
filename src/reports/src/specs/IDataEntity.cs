@@ -6,7 +6,7 @@ namespace Z0
 {        
     using System;
 
-    public interface IDataEntity : ITextual, INullaryKnown
+    public interface IDataEntity : ITextual, INullity
     {
         
     }

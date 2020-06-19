@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
 
-    public interface ILiteral : INullaryKnown, ITextual
+    public interface ILiteral : INullity, ITextual
     {
         string Name {get;}
 

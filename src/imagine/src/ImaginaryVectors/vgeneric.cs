@@ -14,7 +14,6 @@ namespace Z0
 
     partial struct Imagine
     {
-
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
         /// </summary>

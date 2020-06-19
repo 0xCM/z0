@@ -13,38 +13,35 @@ namespace Z0.Asm
     using static CaptureWorkflowEvents;
     using static Memories;
 
-    partial class HostCaptureSteps
+    public readonly struct MatchEmissionsStep : IMatchEmissions
     {
-        public readonly struct EmissionMatchStep : IEmissionMatchStep
-        {
-            public ICaptureWorkflow Workflow {get;}
+        public ICaptureWorkflow Workflow {get;}
 
-            public ICaptureContext Context 
-                => Workflow.Context;
+        public ICaptureContext Context 
+            => Workflow.Context;
 
-            [MethodImpl(Inline)]
-            internal EmissionMatchStep(ICaptureWorkflow workflow)
-                => Workflow = workflow;
+        [MethodImpl(Inline)]
+        internal MatchEmissionsStep(ICaptureWorkflow workflow)
+            => Workflow = workflow;
 
-            ICheckEquatable Claim 
-                => CheckEquatable.Checker;
+        ICheckEquatable Claim 
+            => CheckEquatable.Checker;
 
-            public void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriHex> srcA, FilePath srcB)
-            {                
-                var wfStateless = Capture.Services;
-                var reader = wfStateless.UriHexReader;
-                var fileSrc = reader.Read(srcB).ToArray().ToSpan();                        
+        public void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriHex> srcA, FilePath srcB)
+        {                
+            var wfStateless = Capture.Services;
+            var reader = wfStateless.UriHexReader;
+            var fileSrc = reader.Read(srcB).ToArray().ToSpan();                        
 
-                Claim.eq(fileSrc.Length, srcA.Length);  
-                Claim.eq(Spans.count<UriHex>(fileSrc, s => s.OpUri.IsEmpty),0);                          
-                for(var i=0; i<srcA.Length; i++)
-                {
-                    Claim.eq(skip(fileSrc,i).OpUri, skip(srcA,i).OpUri);  
-                    Claim.eq(skip(fileSrc,i).Encoded.Length, skip(srcA, i).Encoded.Length);
-                }
-
-                Context.Raise(new MatchedEmissions(host, srcA.Length, srcB));
+            Claim.eq(fileSrc.Length, srcA.Length);  
+            Claim.eq(Spans.count<UriHex>(fileSrc, s => s.OpUri.IsEmpty),0);                          
+            for(var i=0; i<srcA.Length; i++)
+            {
+                Claim.eq(skip(fileSrc,i).OpUri, skip(srcA,i).OpUri);  
+                Claim.eq(skip(fileSrc,i).Encoded.Length, skip(srcA, i).Encoded.Length);
             }
+
+            Context.Raise(new MatchedEmissions(host, srcA.Length, srcB));
         }
     }
 }

@@ -22,7 +22,8 @@ namespace Z0
         {
             if(lhs.Length != rhs.Length)
                 return false;
-            for(var i=0; i< lhs.Length; i++)
+            
+            for(var i=0; i<lhs.Length; i++)
                 if(!lhs[i].Equals(rhs[i]))
                     return false;
             return true;

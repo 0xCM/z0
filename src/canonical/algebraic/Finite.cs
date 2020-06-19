@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IDiscreteGroup<S> : IGroup<S>
+    public interface IDiscreteGroup<S> : IGroupLike<S>
         where S : IDiscreteGroup<S>, new()
     {
         
@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operational type</typeparam>
     /// <typeparam name="S">The structure type</typeparam>
-    public interface IDiscreteGroup<S,T> : IGroup<S,T>, IDiscreteSet<S,T>
+    public interface IDiscreteGroup<S,T> : IGroupLike<S,T>, IDiscreteSet<S,T>
         where S : IDiscreteGroup<S,T>, new()
     {
 

@@ -12,18 +12,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    public interface ISemigroup<F> : IReified<F>
-        where F : ISemigroup<F>, new()
-    {
-
-    }
-
-    public interface ISemigroup<S,T> : ISemigroup<S>
-        where S : ISemigroup<S,T>, new()
-    {
-        
-    }            
+    
 
     /// <summary>
     /// Characterizes a parametric container
@@ -176,7 +165,7 @@ namespace Z0
     /// to reveal; in other words, the count function for counted things is free, as evinced by
     /// the default implementation
     /// </summary>
-    public interface ICounted : IFinite, INullaryKnown
+    public interface ICounted : IFinite, INullity
     {
         /// <summary>
         /// The count value
@@ -187,7 +176,7 @@ namespace Z0
         int IFinite.Count() 
             => Count;
 
-        bool INullaryKnown.IsEmpty 
+        bool INullity.IsEmpty 
         {
             [MethodImpl(Inline)]
             get => Count == 0;
@@ -229,25 +218,15 @@ namespace Z0
     }
     
     /// <summary>
-    /// Defines attributes common to set representations
+    /// Characterizes a free monoidal structure
     /// </summary>
-    public interface ISetAspect
+    /// <typeparam name="S">The structure type</typeparam>
+    /// <typeparam name="T">The underlying type</typeparam>
+    public interface IFreeMonoid<S> :  IMonoid<S>, IConcatenable<S>, ILengthwise<S>, INullary<S>
+        where S : IFreeMonoid<S>, new()
     {
-        /// <summary>
-        /// Specifies whether the set is void of elements
-        /// </summary>
-        bool IsEmpty {get;}
 
-        /// <summary>
-        /// Specifies whether the set is finite
-        /// </summary>
-        bool IsFinite {get;}
-
-        /// <summary>
-        /// Specifies whether the set is discrete
-        /// </summary>
-        bool IsDiscrete {get;}
-    }
+    }    
 
     /// <summary>
     /// Characterizes a reification that defines an intrinsic concatentation operator
@@ -292,7 +271,7 @@ namespace Z0
     /// Characterizes a set over a collection of elements and need not be finite
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface IDiscreteSet<T> : ISetAspect, IElements<T>
+    public interface IDiscreteSet<T> : IElements<T>, INullity
     {
 
     }
@@ -312,7 +291,7 @@ namespace Z0
     /// Characterizes a reified nonempty set
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
-    public interface INonempySet<F> : INonEmpty<F>, ISetAspect
+    public interface INonempySet<F> : INonEmpty<F>
         where F : INonempySet<F>, new()
     {
 
@@ -403,7 +382,6 @@ namespace Z0
     {
         
     }
-
 
     public interface IDataIndex<T> : ILengthwise
     {
@@ -510,4 +488,46 @@ namespace Z0
     {
 
     }
+
+    /// <summary>
+    /// Characterizes a reversible structure
+    /// </summary>
+    /// <typeparam name="S">The structure type</typeparam>
+    public interface IReversible<S>
+        where S : IReversible<S>, new()
+    {
+        S Reverse();
+    }    
+    
+    public interface IListed<S> : INullary<S>, IReversible<S>, ILengthwise<S>
+        where S : IListed<S>, new()
+    {
+        /// <summary>
+        /// Returns the elements following the head, if any; otherwise, returns the zero element of S
+        /// </summary>
+        S Tail {get;}
+    }
+
+    public interface IDecrementable<S> : IOrdered<S>
+        where S : IDecrementable<S>, new()
+    {
+        S Dec();
+    }
+
+    public interface IIncrementable<S> : IOrdered<S>
+        where S : IIncrementable<S>, new()
+    {
+        S Inc();        
+    }
+
+    /// <summary>
+    /// Characterizes a structure over which both incrementing and decrementing 
+    /// operations are defined
+    /// </summary>
+    /// <typeparam name="S">The structure type</typeparam>
+    public interface IStepwise<S> : IIncrementable<S>, IDecrementable<S>
+        where S : IStepwise<S>, new()
+    {
+
+    }        
 }

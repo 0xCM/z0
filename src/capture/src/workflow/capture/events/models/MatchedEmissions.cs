@@ -40,7 +40,6 @@ namespace Z0.Asm
 
             public static E Empty 
                 => new MatchedEmissions(ApiHostUri.Empty, 0, FilePath.Empty);
-
         }    
     }
 }

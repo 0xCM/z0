@@ -9,26 +9,23 @@ namespace Z0.Asm
 
     using static Konst;
     
-    partial class CaptureWorkflowEvents
+    public readonly struct ClearedDirectory : IAppEvent<ClearedDirectory>
     {
-        public readonly struct PurgedArchiveFolder : IAppEvent<PurgedArchiveFolder>
+        public readonly FolderPath Path;
+
+        [MethodImpl(Inline)]
+        public ClearedDirectory(FolderPath path)
         {
-            public readonly FolderPath Path;
+            Path = path;
+        }            
+        
+        public string Description
+            => $"Purged content in {Path}";
 
-            [MethodImpl(Inline)]
-            public PurgedArchiveFolder(FolderPath path)
-            {
-                Path = path;
-            }            
-            
-            public string Description
-                => $"Purged archive content in {Path}";
+        public ClearedDirectory Zero 
+            => Empty; 
 
-            public PurgedArchiveFolder Zero 
-                => Empty; 
-
-            public static PurgedArchiveFolder Empty 
-                => new PurgedArchiveFolder(FolderPath.Empty);
-        }    
-    }
+        public static ClearedDirectory Empty 
+            => new ClearedDirectory(FolderPath.Empty);
+    }    
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     using NW = NumericWidth;
 
-    public readonly struct RelAddress : INullary<RelAddress>, ITextual, INullaryKnown
+    public readonly struct RelAddress : INullary<RelAddress>, ITextual, INullity
     {
         readonly uint Offset;
 

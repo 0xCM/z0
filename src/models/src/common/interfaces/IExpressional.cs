@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IExpressional : INullaryKnown, ITextual
+    public interface IExpressional : INullity, ITextual
     {
 
     }

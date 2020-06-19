@@ -98,7 +98,7 @@ namespace Z0
                 CollectAsmStats(e.Host, e.Functions);
         }
 
-        public void OnEvent(HexSaved e)
+        public void OnEvent(HexCodeSaved e)
         {
             Sink.Deposit(e);
 

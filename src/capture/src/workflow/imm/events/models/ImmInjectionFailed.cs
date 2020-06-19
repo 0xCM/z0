@@ -9,31 +9,29 @@ namespace Z0.Asm
     using System.Reflection;
 
     using static Konst;
-    using E = ImmEmissionEvents.ImmInjectionFailed;
+    using E = ImmInjectionFailed;
 
-    partial class ImmEmissionEvents
+    public readonly struct ImmInjectionFailed : IAppError<E>
     {
-        public readonly struct ImmInjectionFailed : IAppError<E>
+        [MethodImpl(Inline)]
+        public static E Define(MethodInfo method)
+            => new E(method);
+
+        [MethodImpl(Inline)]
+        internal ImmInjectionFailed(MethodInfo method)
         {
-            public static ImmInjectionFailed Empty => new ImmInjectionFailed(typeof(object).GetMethod(nameof(object.GetHashCode)));
+            Method = method;
+        }
+        
+        public MethodInfo Method {get;}
+        
+        public string Description
+            => $"Imm injection failure for {Method.Name}";
+        
+        public E Zero 
+            => Empty;
 
-            [MethodImpl(Inline)]
-            public static E Define(MethodInfo method)
-                => new E(method);
-
-            [MethodImpl(Inline)]
-            ImmInjectionFailed(MethodInfo method)
-            {
-                this.Method = method;
-            }
-            
-            public MethodInfo Method {get;}
-            
-            public string Description
-                => $"Imm injection failure for {Method.Name}";
-            
-            public E Zero => Empty;
-           
-        }    
+        public static ImmInjectionFailed Empty 
+            => new ImmInjectionFailed(typeof(object).GetMethod(nameof(object.GetHashCode)));           
     }
 }

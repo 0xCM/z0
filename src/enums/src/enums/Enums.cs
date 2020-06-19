@@ -124,7 +124,7 @@ namespace Z0
         public static unsafe E literal<E,T>(T v)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Control.eVal<E,T>(v);
+                => EnumValue.eVal<E,T>(v);
 
         /// <summary>
         /// Reads a generic numeric value from a boxed enum

@@ -16,36 +16,4 @@ namespace Z0
         
         bool GtEq(T lhs, T rhs);              
     }    
-
-    /// <summary>
-    /// Characterizes a totally ordered structure
-    /// </summary>
-    /// <typeparam name="S">The structure reification type</typeparam>
-    public interface IOrderable<S>
-        where S : IOrderable<S>, new()
-    {   
-        /// <summary>
-        /// Determines whether this:S & rhs:S => this < rhs
-        /// </summary>
-        /// <param name="rhs">The operand to compare</param>
-        bool Lt(S rhs);
-        
-        /// <summary>
-        /// Determines whether this:S & rhs:S => this <= rhs
-        /// </summary>
-        /// <param name="rhs">The operand to compare</param>
-        bool LtEq(S rhs);
-        
-        /// <summary>
-        /// Determines whether this:S & rhs:S => this > rhs
-        /// </summary>
-        /// <param name="rhs">The operand to compare</param>
-        bool Gt(S rhs);                
-        
-        /// <summary>
-        /// Determines whether this:S & rhs:S => this >= rhs
-        /// </summary>
-        /// <param name="rhs">The operand to compare</param>
-        bool GtEq(S rhs);              
-    }    
 }

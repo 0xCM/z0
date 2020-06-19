@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Identifies a metadata element along with the declaring module
     /// </summary>
-    public readonly struct MetadataToken : ITextual, IEquatable<MetadataToken>, INullaryKnown
+    public readonly struct MetadataToken : ITextual, IEquatable<MetadataToken>, INullity
     {
         readonly ulong Data;
 

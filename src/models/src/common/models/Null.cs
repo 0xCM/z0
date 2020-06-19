@@ -9,7 +9,7 @@ namespace Z0
     
     using static Konst;
 
-    public readonly struct Null : ITextual, INullaryKnown, INullary<Null>
+    public readonly struct Null : ITextual, INullity, INullary<Null>
     {
         public static Null Value => default(Null);
         

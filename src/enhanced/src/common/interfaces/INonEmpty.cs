@@ -8,10 +8,10 @@ namespace Z0
     /// Characterizes a reification of the counterpoint to a nullary thing
     /// </summary>
     /// <typeparam name="F">The thing which cannot be empty</typeparam>
-    public interface INonEmpty<F> : INullaryKnown, IReified<F>
+    public interface INonEmpty<F> : INullity, IReified<F>
         where F : INonEmpty<F>, new()
     {
-        bool INullaryKnown.IsEmpty 
+        bool INullity.IsEmpty 
             => false;
     }
 

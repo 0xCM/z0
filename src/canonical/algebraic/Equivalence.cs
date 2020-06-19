@@ -6,24 +6,6 @@ namespace Z0
 {
     using System;
 
-    public interface IEquivalenceClass<T>
-    {
-        /// <summary>
-        /// The class representative
-        /// </summary>
-        T Rep {get;}
-    }
-
-    /// <summary>
-    /// Characterizes an equivalence class, i.e. a segment of a partition effected via 
-    /// an equivalence relation
-    /// </summary>
-    /// <typeparam name="T">The classified type</typeparam>
-    public interface IEquivalenceClass<S,T> : ISemigroup<S,T>, IEquivalenceClass<T>, INonEmpty<S>
-        where S : IEquivalenceClass<S,T>, new()
-    {
-        
-    }
 
     /// <summary>
     /// Characterizes a constructive equivalence class, i.e. an equivalence class 
@@ -38,7 +20,7 @@ namespace Z0
     /// an equivalence relation
     /// </summary>
     /// <typeparam name="T">The classified type</typeparam>
-    public interface IFiniteEquivalenceClass<S,T> : IDiscreteEqivalenceClass<S,T>//, FiniteSet<S,T> 
+    public interface IFiniteEquivalenceClass<S,T> : IDiscreteEqivalenceClass<S,T>
         where S : IFiniteEquivalenceClass<S,T>, new()
     { }
 }

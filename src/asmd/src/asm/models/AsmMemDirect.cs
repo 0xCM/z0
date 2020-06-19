@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmMemDirect : INullaryKnown
+    public readonly struct AsmMemDirect : INullity
     {
         public static AsmMemDirect Empty => new AsmMemDirect(Register.None, AsmMemScale.Empty, AsmMemDx.Empty);
         

@@ -12,7 +12,7 @@ namespace Z0
         MemoryAddress Address {get;}
     }     
 
-    public interface IAddressable<F> : IAddressable, INullaryKnown, INullary<F>
+    public interface IAddressable<F> : IAddressable, INullity, INullary<F>
         where F : unmanaged, IAddressable<F>
     {
 

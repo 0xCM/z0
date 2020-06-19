@@ -38,6 +38,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> cover<S,T>(ref S src, int tCount)
             => CreateSpan(ref edit<S,T>(src), tCount);
-
     }
 }

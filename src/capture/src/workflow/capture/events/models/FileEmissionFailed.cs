@@ -9,36 +9,33 @@ namespace Z0.Asm
 
     using static Konst;
 
-    partial class CaptureWorkflowEvents
+    public readonly struct FileEmissionFailed : IAppEvent<FileEmissionFailed>
     {
-        public readonly struct FileEmissionFailed : IAppEvent<FileEmissionFailed>
+        public readonly ApiHostUri Host;
+
+        public readonly bool Generic;
+
+        public readonly FilePath TargetFile;
+
+        [MethodImpl(Inline)]
+        public static FileEmissionFailed Define(ApiHostUri host, bool generic, FilePath dst)
+            => new FileEmissionFailed(host,generic, dst);
+
+        [MethodImpl(Inline)]
+        internal FileEmissionFailed(ApiHostUri uri, bool generic, FilePath dst)
         {
-            public readonly ApiHostUri Host;
+            Host = uri;
+            Generic = generic;
+            TargetFile = dst;
+        }
+                    
+        public string Description
+            => $"{Host} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;
+        
+        public FileEmissionFailed Zero 
+            => Empty;
 
-            public readonly bool Generic;
-
-            public readonly FilePath TargetFile;
-
-            [MethodImpl(Inline)]
-            public static FileEmissionFailed Define(ApiHostUri host, bool generic, FilePath dst)
-                => new FileEmissionFailed(host,generic, dst);
-
-            [MethodImpl(Inline)]
-            internal FileEmissionFailed(ApiHostUri uri, bool generic, FilePath dst)
-            {
-                Host = uri;
-                Generic = generic;
-                TargetFile = dst;
-            }
-                        
-            public string Description
-                => $"{Host} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;
-            
-            public FileEmissionFailed Zero 
-                => Empty;
-
-            public static FileEmissionFailed Empty 
-                => new FileEmissionFailed(ApiHostUri.Empty,false, FilePath.Empty);
-        }            
-    }
+        public static FileEmissionFailed Empty 
+            => new FileEmissionFailed(ApiHostUri.Empty,false, FilePath.Empty);
+    }            
 }

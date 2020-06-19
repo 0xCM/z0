@@ -19,7 +19,7 @@ namespace Z0
             => new StringBuilder();
     }
 
-    public interface IValues<F,T> : ITextual, INullaryKnown, INullary<F>
+    public interface IValues<F,T> : ITextual, INullity, INullary<F>
         where T : IValued<T>, new()
         where F : IValues<F,T>, new()
     {
@@ -27,7 +27,7 @@ namespace Z0
 
         ref readonly T this[int index] => ref Data[index];
 
-        bool INullaryKnown.IsEmpty => Data is null || Data.Length == 0;
+        bool INullity.IsEmpty => Data is null || Data.Length == 0;
 
         [MethodImpl(Inline)]
         string FormatDelimiter(int index)

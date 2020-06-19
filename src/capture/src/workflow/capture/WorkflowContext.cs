@@ -32,18 +32,18 @@ namespace Z0.Asm
 
         int step;
 
-       public CaptureWorkflowContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
+        public CaptureWorkflowContext(IAsmContext context, IAsmFunctionDecoder decoder, IAsmFormatter formatter, AsmWriterFactory wf, 
             ICaptureBroker broker, ICaptureArchive archive)
         {
-            this.ApiSet = context.ApiSet;
-            this.Extractor = Capture.Services.HostExtractor();
-            this.Parser = Extract.Services.ExtractParser();
-            this.Decoder = decoder;
-            this.Formatter = formatter;
-            this.WriterFactory = wf;
-            this.Broker = broker;
-            this.Archive = archive;
-            this.MsgSink = context;
+            ApiSet = context.ApiSet;
+            Extractor = Capture.Services.HostExtractor();
+            Parser = Extract.Services.ExtractParser();
+            Decoder = decoder;
+            Formatter = formatter;
+            WriterFactory = wf;
+            Broker = broker;
+            Archive = archive;
+            MsgSink = context;
         }
 
         [MethodImpl(Inline)]

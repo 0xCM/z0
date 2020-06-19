@@ -7,6 +7,27 @@ namespace Z0
     using System;
 
     /// <summary>
+    /// Defines attributes common to set representations
+    /// </summary>
+    public interface ISetAspect
+    {
+        /// <summary>
+        /// Specifies whether the set is void of elements
+        /// </summary>
+        bool IsEmpty {get;}
+
+        /// <summary>
+        /// Specifies whether the set is finite
+        /// </summary>
+        bool IsFinite {get;}
+
+        /// <summary>
+        /// Specifies whether the set is discrete
+        /// </summary>
+        bool IsDiscrete {get;}
+    }
+
+    /// <summary>
     /// Characterizes a type that represents an infinite number of values
     /// </summary>
     /// <typeparam name="T">The member type</typeparam>

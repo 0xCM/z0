@@ -12,50 +12,40 @@ namespace Z0.Asm
     using static Konst;
     using static CaptureWorkflowEvents;
 
-    partial class HostCaptureSteps
-    {        
-        public readonly struct ExtractMembersStep : IExtractMembersStep
+    public readonly struct ExtractMembersStep : IExtractMembers
+    {
+        public ICaptureWorkflow Workflow {get;}
+
+        public ICaptureContext Context 
+            => Workflow.Context;
+
+        [MethodImpl(Inline)]
+        internal ExtractMembersStep(ICaptureWorkflow workflow)
         {
-            public ICaptureWorkflow Workflow {get;}
-
-            public ICaptureContext Context 
-                => Workflow.Context;
-
-            [MethodImpl(Inline)]
-            internal ExtractMembersStep(ICaptureWorkflow workflow)
-            {
-                Workflow = workflow;
-            }
- 
-            public static ApiMember[] locate(IApiHost host)
-            {
-                var locator = Identities.Services.ApiLocator;
-                return locator.Located(host).ToArray();
-            }
-
-            public static ExtractedMember[] extract(IApiHost host)
-            {
-                var members = locate(host);    
-                var extractor = Capture.Services.HostExtractor();
-                return extractor.Extract(members);
-            }
-            
-            public ApiMember[] LocateMembers(IApiHost host)
-            {
-                // var locator = Identities.Services.ApiLocator;
-                // var located = locator.Located(host).ToArray();
-                var located = locate(host);
-                Context.Raise(new MembersLocated(host.Uri, located));              
-                return located;
-            }
-
-            public ExtractedMember[] ExtractMembers(IApiHost host)
-                => extract(host);
-            // {
-            //     var members = LocateMembers(host);    
-            //     var extractor = Capture.Services.HostExtractor();
-            //     return extractor.Extract(members);
-            // }
+            Workflow = workflow;
         }
+
+        public static ApiMember[] locate(IApiHost host)
+        {
+            var locator = Identities.Services.ApiLocator;
+            return locator.Located(host).ToArray();
+        }
+
+        public static ExtractedMember[] extract(IApiHost host)
+        {
+            var members = locate(host);    
+            var extractor = Capture.Services.HostExtractor();
+            return extractor.Extract(members);
+        }
+        
+        public ApiMember[] LocateMembers(IApiHost host)
+        {
+            var located = locate(host);
+            Context.Raise(new MembersLocated(host.Uri, located));              
+            return located;
+        }
+
+        public ExtractedMember[] ExtractMembers(IApiHost host)
+            => extract(host); 
     }
 }

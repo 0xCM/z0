@@ -7,16 +7,6 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IListed<S> : INullary<S>, IReversible<S>, ILengthwise<S>
-        where S : IListed<S>, new()
-    {
-        /// <summary>
-        /// Returns the elements following the head, if any; otherwise, returns the zero element of S
-        /// </summary>
-        S Tail {get;}
-
-    }
-
     public interface IListed<S,T> : IListed<S>
         where S : IListed<S,T>, new()
         where T : unmanaged, IMonoidA<T>

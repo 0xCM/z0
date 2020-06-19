@@ -14,13 +14,5 @@ namespace Z0
         T Reverse(T src);
     }
 
-    /// <summary>
-    /// Characterizes a reversible structure
-    /// </summary>
-    /// <typeparam name="S">The structure type</typeparam>
-    public interface IReversible<S>
-        where S : IReversible<S>, new()
-    {
-        S Reverse();
-    }    
+
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {            
-    public interface IValued<T> : ITextual, INullaryKnown, INullary<T>
+    public interface IValued<T> : ITextual, INullity, INullary<T>
         where T : IValued<T>, new()
     {
         

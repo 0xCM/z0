@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;    
 
-    public interface IAddress : ITextual, INullaryKnown
+    public interface IAddress : ITextual, INullity
     {
 
     }

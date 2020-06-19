@@ -9,96 +9,66 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
-    using static Memories;
 
-    public partial class HostCaptureSteps
+    public readonly struct CaptureHostStep : ICaptureHostStep
     {
-        public readonly struct CaptureHostStep : ICaptureHostStep
+        public ICaptureWorkflow Workflow {get;}
+
+        public ICaptureContext Context 
+            => Workflow.Context;
+        
+        [MethodImpl(Inline)]
+        internal CaptureHostStep(ICaptureWorkflow workflow)
+            => Workflow = workflow;
+
+        [MethodImpl(Inline)]
+        AppErrorEvent Error(Exception e)
+            => e;
+
+        public void Execute(IApiHost host, ICaptureArchive dst)
         {
-            public ICaptureWorkflow Workflow {get;}
+            var step = Context.Raise(StepEvents.Started(host, Context.Correlate()));
 
-            public ICaptureContext Context 
-                => Workflow.Context;
-            
-            [MethodImpl(Inline)]
-            internal CaptureHostStep(ICaptureWorkflow workflow)
-                => Workflow = workflow;
-
-            [MethodImpl(Inline)]
-            AppErrorEvent Error(Exception e)
-                => e;
-
-            IReportExtractsStep ReportExtracts
-                => Workflow.ReportExtracts;
-
-            IEmitParsedReportStep ReportParsed
-                => Workflow.ReportParsed;
-
-            IExtractMembersStep Extract
-                => Workflow.Extract;
-
-            IDecodeStep Decode
-                => Workflow.Decode;
-
-            IParseMembersStep Parse
-                => Workflow.Parse;
-            
-            Option<AsmFunction[]> DecodeParsed(IApiHost host, ParsedMember[] parsed)
+            try
             {
-                try
-                {
-                    return Decode.DecodeParsed(host.Uri, parsed);
-                }
-                catch(Exception e)
-                {
-                    term.errlabel(e,$"{host.Uri} decoding failed");
-                    return none<AsmFunction[]>();
-                }
-            }
+                var paths = dst.HostArchive(host.Uri);
+                if(host.PartId.IsNone())
+                    return;
 
-            public void Execute(IApiHost host, ICaptureArchive dst)
-            {
-                var step = Context.Raise(StepEvents.Started(host, Context.Correlate()));
+                var extracts = Workflow.ExtractMembers.ExtractMembers(host);
 
-                try
-                {
-                    var paths = dst.HostArchive(host.Uri);
-                    if(host.PartId.IsNone())
-                        return;
+                if(extracts.Length == 0)
+                    return;
+                                
+                var extractRpt = Workflow.ReportExtracts.CreateExtractReport(host.Uri, extracts);
+                Workflow.ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
 
-                    var extracts = Extract.ExtractMembers(host);
+                var parsed = Workflow.ParseMembers.Parse(host.Uri, extracts);
+                if(parsed.Length == 0)
+                    term.warn($"No {host.Uri} members were parsed");
+                    
+                if(parsed.Length != 0)
+                {                        
+                    Workflow.ReportParsed.Emit(host.Uri, parsed, paths.ParsedPath);
+                    Workflow.ParseMembers.SaveHex(host.Uri, parsed, paths.HexPath);
 
-                    if(extracts.Length == 0)
-                        return;
-                                    
-                    var extractRpt = ReportExtracts.CreateExtractReport(host.Uri, extracts);
-                    ReportExtracts.SaveExtractReport(extractRpt, paths.ExtractPath);
-
-                    var parsed = Parse.Parse(host.Uri, extracts);
-                    if(parsed.Length == 0)
-                        term.warn($"No {host.Uri} members were parsed");
-                        
-                    if(parsed.Length != 0)
-                    {                        
-                        ReportParsed.Emit(host.Uri, parsed, paths.ParsedPath);
-                        Parse.SaveHex(host.Uri, parsed, paths.HexPath);
-
-                        var decoded = DecodeParsed(host, parsed);
-                        if(decoded)
-                            Decode.SaveDecoded(decoded.Value, paths.AsmPath);
-
-                        Workflow.MatchAddresses.Run(host.Uri, extracts, decoded.Value);
+                    //var decoded = DecodeParsed(host, parsed);
+                    var decoded = Workflow.DecodeParsed.DecodeParsed(host.Uri,parsed);
+                    if(decoded.Length != 0)
+                    {
+                        Workflow.DecodeParsed.SaveDecoded(decoded, paths.AsmPath);
+                        Workflow.MatchAddresses.Run(host.Uri, extracts, decoded);
                     }
                 }
-                catch(Exception e)
-                {
-                    Context.Raise(Error(e));
-                }
-                finally
-                {
-                    Context.Raise(StepEvents.Ended(host, step.Correlation));
-                }
-            }      
-        }
+            }
+            catch(Exception e)
+            {
+                Context.Raise(Error(e));
+            }
+            finally
+            {
+                Context.Raise(StepEvents.Ended(host, step.Correlation));
+            }
+        }      
     }
 }

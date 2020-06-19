@@ -13,7 +13,6 @@ namespace Z0
     
     partial class XTend
     {
-
         /// <summary>
         /// Projects a source value, if non-null, onto a target value; otherwise, returns the target's default value
         /// </summary>

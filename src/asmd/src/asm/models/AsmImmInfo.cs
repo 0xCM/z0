@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
-    public readonly struct AsmImmInfo : INullaryKnown
+    public readonly struct AsmImmInfo : INullity
     {
         public static AsmImmInfo Empty => default(AsmImmInfo);
 

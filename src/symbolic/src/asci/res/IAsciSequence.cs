@@ -6,7 +6,7 @@ namespace Z0
 {    
     using System;
 
-    public interface IAsciSequence : INullaryKnown, ITextual
+    public interface IAsciSequence : INullity, ITextual
     {
         int Length {get;}
 

@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Kinds)" />
   </ItemGroup>
 

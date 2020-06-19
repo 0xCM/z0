@@ -17,17 +17,4 @@ namespace Z0
     {
         T IsEmpty {get;}
     }
-
-    /// <summary>
-    /// Characterizes a free monoidal structure
-    /// </summary>
-    /// <typeparam name="S">The structure type</typeparam>
-    /// <typeparam name="T">The underlying type</typeparam>
-    public interface IFreeMonoid<S> :  IMonoid<S>, IConcatenable<S>, ILengthwise<S>, INullary<S>
-        where S : IFreeMonoid<S>, new()
-    {
-
-    }
-
-
 }

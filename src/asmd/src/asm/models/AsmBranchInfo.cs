@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes a branching instruction operand
     /// </summary>
-    public readonly struct AsmBranchInfo : INullaryKnown, INullary<AsmBranchInfo>, IRender
+    public readonly struct AsmBranchInfo : INullity, INullary<AsmBranchInfo>, IRender
     {
         public static AsmBranchInfo Empty 
             => new AsmBranchInfo(new Instruction(),MemoryAddress.Empty, 0, AsmBranchTarget.Empty, 0);

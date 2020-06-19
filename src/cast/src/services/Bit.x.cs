@@ -36,16 +36,6 @@ namespace Z0
                 f();
         }
 
-        /// <summary>
-        /// Reverses an array in-place
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="T">The element type</typeparam>
-        static T[] Reverse<T>(this T[] src)
-        {
-            Array.Reverse(src);
-            return src;
-        }
 
         [MethodImpl(Inline)]
         public static UnaryPredicate<T> ToUnaryPredicate<T>(this System.Func<T,bit> f)

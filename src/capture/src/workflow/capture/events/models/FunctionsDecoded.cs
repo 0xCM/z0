@@ -9,32 +9,29 @@ namespace Z0.Asm
 
     using static Konst;
     
-    partial class CaptureWorkflowEvents
+    public readonly struct FunctionsDecoded : IAppEvent<FunctionsDecoded>
     {
-        public readonly struct FunctionsDecoded : IAppEvent<FunctionsDecoded>
+        public readonly ApiHostUri Host;
+        
+        public readonly AsmFunction[] Functions;
+
+        [MethodImpl(Inline)]
+        public FunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
         {
-            public readonly ApiHostUri Host;
-            
-            public readonly AsmFunction[] Functions;
+            Host = host;
+            Functions = functions;
+        }
+        
+        public string Description
+            => $"{Functions.Length} {Host} functions decoded";
+        
+        public FunctionsDecoded Zero 
+            => Empty;
 
-            [MethodImpl(Inline)]
-            public FunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
-            {
-                Host = host;
-                Functions = functions;
-            }
-            
-            public string Description
-                => $"{Functions.Length} {Host} functions decoded";
-            
-            public FunctionsDecoded Zero 
-                => Empty;
+        public AppMsgColor Flair 
+            => AppMsgColor.Magenta;            
 
-            public AppMsgColor Flair 
-                => AppMsgColor.Magenta;            
-
-            public static FunctionsDecoded Empty 
-                => new FunctionsDecoded(ApiHostUri.Empty, Array.Empty<AsmFunction>());
-        }    
+        public static FunctionsDecoded Empty 
+            => new FunctionsDecoded(ApiHostUri.Empty, Array.Empty<AsmFunction>());
     }
 }

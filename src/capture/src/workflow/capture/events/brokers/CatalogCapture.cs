@@ -12,28 +12,12 @@ namespace Z0.Asm
 
     public interface ICatalogCaptureBroker : IStepBroker
     {
-        StepStart<IApiCatalog> CaptureCatalogStart => StepStarted<IApiCatalog>();
-
-        StepEnd<IApiCatalog> CaptureCatalogEnd => StepEnded<IApiCatalog>();
-
-        PurgedArchiveFolder PurgedArchiveFolder => PurgedArchiveFolder.Empty;        
+        ClearedDirectory ClearedDirectory => ClearedDirectory.Empty;        
 
         MatchedEmissions MatchedEmissions => MatchedEmissions.Empty;        
-    }
 
-    public interface ICatalogCaptureClient<C> : IBrokerClient<C>
-        where C : ICatalogCaptureBroker
-    {
-        void OnEvent(StepStart<IApiCatalog> e) 
-            => Sink.Deposit(e);
+        CapturingPart CapturingPart => CapturingPart.Empty;
 
-        void OnEvent(StepEnd<IApiCatalog> e) 
-            => Sink.Deposit(e);
-
-        void OnEvent(PurgedArchiveFolder e) 
-            => Sink.Deposit(e);
-
-        void OnEvent(MatchedEmissions e) 
-            => Sink.Deposit(e);
+        CapturedPart CapturedPart => CapturedPart.Empty;
     }
 }

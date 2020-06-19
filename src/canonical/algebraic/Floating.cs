@@ -53,10 +53,9 @@ namespace Z0
     public interface IFloating<S> : 
         IRealNumber<S>, 
         IFractional<S>, 
-        IResignable<S>, 
         ISubtractive<S>, 
         ITrigonmetric<S>
-    where S : IFloating<S>, new()
+        where S : IFloating<S>, new()
     {
         S Sqrt();
     }

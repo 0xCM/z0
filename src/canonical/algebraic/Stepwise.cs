@@ -28,26 +28,5 @@ namespace Z0
         
     }
 
-    public interface IDecrementable<S> : IOrderable<S>
-        where S : IDecrementable<S>, new()
-    {
-        S Dec();
-    }
 
-    public interface IIncrementable<S> : IOrderable<S>
-        where S : IIncrementable<S>, new()
-    {
-        S Inc();        
-    }
-
-    /// <summary>
-    /// Characterizes a structure over which both incrementing and decrementing 
-    /// operations are defined
-    /// </summary>
-    /// <typeparam name="S">The structure type</typeparam>
-    public interface IStepwise<S> : IIncrementable<S>, IDecrementable<S>
-        where S : IStepwise<S>, new()
-    {
-
-    }
 }

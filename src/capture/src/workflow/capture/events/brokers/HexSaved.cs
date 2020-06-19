@@ -6,17 +6,9 @@ namespace Z0.Asm
 {
     using System;
     
-    using static CaptureWorkflowEvents;
-
     public interface IHexSavedBroker : IEventBroker
     {
-        HexSaved HexSaved => HexSaved.Empty;        
+        HexCodeSaved HexSaved => HexCodeSaved.Empty;        
     }
 
-    public interface IHexSavedClient<C> : IBrokerClient<C>
-        where C : IHexSavedBroker
-    {
-        void OnEvent(HexSaved e) 
-            => Sink.Deposit(e);
-    }
 }

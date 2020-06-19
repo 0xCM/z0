@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
 
     [Label(TypeLabels.Dx)]
-    public readonly struct AsmMemDx : INullaryKnown, INullary<AsmMemDx>, ITextual
+    public readonly struct AsmMemDx : INullity, INullary<AsmMemDx>, ITextual
     {
         public static AsmMemDx Empty => new AsmMemDx(0, NumericSize.None);
         

@@ -14,7 +14,7 @@ namespace Z0
         where T : unmanaged
         { }
 
-    public interface IOrderedNumber<S> :  IStepwise<S>,  IOrderable<S>,  INumber<S>
+    public interface IOrderedNumber<S> :  IStepwise<S>,  IOrdered<S>,  INumber<S>
         where S : IOrderedNumber<S>, new() {}
     
     /// <summary>

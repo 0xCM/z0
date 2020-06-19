@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes a block of memory the context of an asm instruction operand
     /// </summary>
-    public readonly struct AsmMemInfo : INullaryKnown
+    public readonly struct AsmMemInfo : INullity
     {      
         public static AsmMemInfo Empty => new AsmMemInfo(Register.None, Register.None, AsmMemDirect.Empty, MemoryAddress.Empty, MemorySize.Unknown);
                 

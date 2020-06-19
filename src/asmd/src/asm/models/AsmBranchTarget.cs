@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmBranchTarget : INullaryKnown, INullary<AsmBranchTarget>, ITextual
+    public readonly struct AsmBranchTarget : INullity, INullary<AsmBranchTarget>, ITextual
     {
         public static AsmBranchTarget Empty => new AsmBranchTarget(BranchTargetKind.None, BranchTargetSize.None, 0, 0);
 

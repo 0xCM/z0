@@ -32,21 +32,25 @@ namespace Z0
 
     }
 
-    public interface IGroup<S> : IInvertive<S>, IMonoid<S>
-        where S : IGroup<S>, new()
+    public interface IGroupLike<S> : IInvertive<S>, IMonoid<S>
+        where S : IGroupLike<S>, new()
     {
 
     }
 
-    public interface IGroupM<S> : IGroup<S>, IMonoidM<S>
+    public interface IGroupM<S> : IGroupLike<S>, IMonoidM<S>
         where S : IGroupM<S>, new()
     {
         
-    }
+    }    
 
-    public interface IGroupA<S> : IGroup<S>, IMonoidA<S>, IInvertible<S>
+    public interface IGroupA<S> : IGroupLike<S>, IMonoidA<S>
         where S : IGroupA<S>, new()
     {
+        /// <summary>
+        /// Unary structural negation
+        /// </summary>
+        S Invert();
 
     }
     
@@ -55,8 +59,8 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The type over which the structure is defind</typeparam>
     /// <typeparam name="S">The structure type</typeparam>
-    public interface IGroup<S,T> : IGroup<S>
-        where S : IGroup<S,T>, new()
+    public interface IGroupLike<S,T> : IGroupLike<S>
+        where S : IGroupLike<S,T>, new()
     {
         
     }
@@ -66,7 +70,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The type over which the structure is defind</typeparam>
     /// <typeparam name="S">The structure type</typeparam>
-    public interface IGroupM<S,T> : IGroupM<S>, IGroup<S,T>, IMonoidM<S,T>
+    public interface IGroupM<S,T> : IGroupM<S>, IGroupLike<S,T>, IMonoidM<S,T>
         where S : IGroupM<S,T>, new()
     {
         
@@ -77,7 +81,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The type over which the structure is defind</typeparam>
     /// <typeparam name="S">The structure type</typeparam>
-    public interface IGroupA<S,T> : IGroupA<S>, IGroup<S,T>, IMonoidA<S,T>
+    public interface IGroupA<S,T> : IGroupA<S>, IGroupLike<S,T>, IMonoidA<S,T>
         where S : IGroupA<S,T>, new()
     {
         

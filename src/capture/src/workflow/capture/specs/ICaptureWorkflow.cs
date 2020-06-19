@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using static HostCaptureSteps;
-
     public interface ICaptureWorkflow : IWorkflowStep<CaptureWorkflow>
     {
         ICaptureBroker Broker {get;}
@@ -15,30 +13,30 @@ namespace Z0.Asm
         ICaptureContext Context {get;}
 
         void Run(AsmArchiveConfig config, params PartId[] parts)
-            => Manage.CaptureCatalogs(config, parts);        
+            => ManageCapture.CaptureCatalogs(config, parts);        
 
-        IAddressMatchStep MatchAddresses 
-            => new AddressMatchStep(this);
+        IMatchAddresses MatchAddresses 
+            => new MatchAddressesStep(this);
 
-        IManageCaptureStep Manage
+        IManageCaptureStep ManageCapture
             => new ManageCaptureStep(this);
 
         IReportExtractsStep ReportExtracts
-            => new ReportExtractsStep(this);
+            => new EmitExtractReportStep(this);
 
         IEmitParsedReportStep ReportParsed
-            => new EmitParsedReport(this);
+            => new EmitParsedReportStep(this);
 
-        IExtractMembersStep Extract
+        IExtractMembers ExtractMembers
             => new ExtractMembersStep(this);
 
-        IDecodeStep Decode
-            => new DecodeStep(this);
+        IDecodeStep DecodeParsed
+            => new DecodedParsedStep(this);
 
-        IParseMembersStep Parse
+        IParseMembers ParseMembers
             => new ParseMembersStep(this);
 
-        IEmissionMatchStep MatchEmissions
-            => new EmissionMatchStep(this);
+        IMatchEmissions MatchEmissions
+            => new MatchEmissionsStep(this);
     }
 }

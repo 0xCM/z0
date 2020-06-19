@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static OpKind;
 
-    public readonly struct SegmentPrefix : INullaryKnown
+    public readonly struct SegmentPrefix : INullity
     {
         public Register Register {get;}
 

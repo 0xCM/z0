@@ -58,7 +58,7 @@ namespace Z0
         }
     }
 
-    public abstract class Report<R> : IReport, INullaryKnown
+    public abstract class Report<R> : IReport, INullity
         where R : ITabular
     {             
         public R[] Records {get;}

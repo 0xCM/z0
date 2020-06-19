@@ -15,7 +15,7 @@ namespace Z0.Asm
     /// Groups a sequence of located instructions
     /// </summary>         
     public readonly struct MemberInstructions : 
-        INullaryKnown, 
+        INullity, 
         INullary<MemberInstructions>,
         IIndex<LocatedInstruction>
     {
