@@ -11,7 +11,7 @@ namespace Z0.Asm
     {            
         public static IAsmContext Create(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition,
              FolderPath root = null, in AsmFormatSpec? format = null)
-                => new AsmContext(settings,queue, composition, root ?? Env.Current.LogDir, format ?? AsmFormatSpec.DefaultStreamFormat);
+                => new AsmContext(settings,queue, composition, root ?? Env.Current.LogDir, format);
 
         public event Action<IAppMsg> Next;
 
@@ -39,7 +39,7 @@ namespace Z0.Asm
 
         public IImmSpecializer ImmServices {get;}        
 
-        AsmContext(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition, FolderPath root, in AsmFormatSpec format)
+        AsmContext(IAppSettings settings, IAppMsgQueue queue, IApiComposition composition, FolderPath root = null, AsmFormatSpec? format = null)
         {
             Next  = e => {};
             AppPaths = Z0.AppPaths.Default;
@@ -48,8 +48,8 @@ namespace Z0.Asm
             Queue = queue;
             Queue.Next += Relay;      
             ApiSet = composition.ApiSet;
-            RootCapturePath = root;      
-            AsmFormat = format;
+            RootCapturePath = root ?? Env.Current.LogDir;      
+            AsmFormat = format ?? AsmFormatSpec.DefaultStreamFormat;
             Random = Polyrand.Pcg64(PolySeed64.Seed05);
             Dynamic = Capture.Services.Dynexus;            
             Decoder = Capture.Services.AsmDecoder(AsmFormat);

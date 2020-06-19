@@ -22,9 +22,9 @@ namespace Z0
 
         readonly byte[] Buffer;
 
-        [MethodImpl(Inline)]
-        public static IExtractParser Create(byte[] buffer)
-            => new MemberExtractParser(buffer);
+        // [MethodImpl(Inline)]
+        // public static IExtractParser Create(byte[] buffer)
+        //     => new MemberExtractParser(buffer);
 
         [MethodImpl(Inline)]
         internal MemberExtractParser(byte[] buffer)

@@ -69,8 +69,5 @@ namespace Z0.Asm
 
         IImmEmissionWorkflow ImmEmissionWorkflow(IAppMsgSink sink, IApiSet api, IAsmFormatter formatter, IAsmFunctionDecoder decoder, FolderPath dst)        
             => new ImmEmissionWorkflow(Context, sink, formatter, decoder, api, dst);
-
-        IHostCaptureService IAsmContextual.HostCaptureService(FolderPath root)
-            => new HostCaptureService(Context, root);
     }
 }

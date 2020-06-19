@@ -6,23 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    [ApiHost("api")]
-    public partial class Memories : IApiHost<Memories>
-    {
-        public Memories()
-        {
-            
-        }
-    }
+    using System.Collections.Generic;
 
-    public static partial class XMem    
-    {
+    using static Konst;
 
-    }
-
-    public static partial class XTend
+    public static class Collective
     {
         
+        [MethodImpl(Inline)]
+        internal static IEnumerable<T> seq<T>(params T[] src)
+            => src;
     }
+
 }

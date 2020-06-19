@@ -7,21 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />    
-    <ProjectReference Include="$(AsmTest)" />    
-    <ProjectReference Include="$(BitsTest)" />
-    <ProjectReference Include="$(BitSvcTest)" />
-    <ProjectReference Include="$(BlocksTest)" />
-    <ProjectReference Include="$(DynopsTest)" />
-    <ProjectReference Include="$(MathTest)" />
-    <ProjectReference Include="$(GVecTest)" />
-    <ProjectReference Include="$(IdentityTest)" />
-    <ProjectReference Include="$(LogixTest)" />
-    <ProjectReference Include="$(MachinesTest)" />
-    <ProjectReference Include="$(MemoriesTest)" />
-    <ProjectReference Include="$(NatsTest)" />
-    <ProjectReference Include="$(NumericTest)" />
-    <ProjectReference Include="$(SeedTest)" />
-    <ProjectReference Include="$(TextualTest)" />
   </ItemGroup>
 
 </Project>

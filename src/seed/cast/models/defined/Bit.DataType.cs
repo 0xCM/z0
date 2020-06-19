@@ -45,8 +45,6 @@ namespace Z0
         bit(uint state)
             => this.state = state;
 
-        static BitDataTypeConverter Converter => BitDataTypeConverter.Service;
-
         [MethodImpl(Inline), Op]
         public char ToChar()
             => (char)(state + 48);
@@ -66,8 +64,8 @@ namespace Z0
         public static bit Parse(string src)
             => OnLabels.Contains(src.Trim().ToLower());
 
-
-        static string[] OnLabels => new string[]{"on", "1", "enabled", "true", "yes"};
+        static string[] OnLabels 
+            => new string[]{"on", "1", "enabled", "true", "yes"};
             
         /// <summary>
         /// Constructs a disabled bit
@@ -641,8 +639,8 @@ namespace Z0
             => b is bit x && Equals(x);
 
         public override int GetHashCode()
-            => (int)state;
-  
+            => (int)state; 
+        
         public string Format()
             => state.ToString();
 

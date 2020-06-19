@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static CaptureWorkflowEvents;
 
     public readonly struct DecodedParsedStep : IDecodeStep
     {            
@@ -23,13 +22,23 @@ namespace Z0.Asm
             Workflow = workfow;
         }
 
-        public AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMember[] parsed)
+        public AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMember[] src)
         {   
             try
             {             
-                var functions = DecodeExtracts(parsed);
-                Context.Raise(new FunctionsDecoded(host, functions));
-                return functions;
+                var dst = Control.alloc<AsmFunction>(src.Length);
+                for(var i=0; i<src.Length; i++)
+                {
+                    var member = src[i];
+                    var decoded = Context.Decoder.Decode(member);
+                    if(!decoded)
+                        HandleUndecoded(member);
+                    
+                    dst[i] = decoded ? decoded.Value : AsmFunction.Empty;                
+                }
+
+                Context.Raise(new FunctionsDecoded(host, dst));
+                return dst;
             }
             catch(Exception e)
             {
@@ -40,20 +49,13 @@ namespace Z0.Asm
 
         public void SaveDecoded(AsmFunction[] src, FilePath dst)
         {
-            using var writer = Context.WriterFactory(dst,Context.Formatter);                
+            using var writer = Context.WriterFactory(dst, Context.Formatter);                
             writer.WriteAsm(src);
         }
 
-        public AsmFunction[] DecodeExtracts(params ParsedMember[] src)
+        void HandleUndecoded(in ParsedMember member)
         {
-            var dst = Control.alloc<AsmFunction>(src.Length);
-            for(var i=0; i<src.Length; i++)
-            {
-                var parsed = src[i];
-                var decoded = Context.Decoder.Decode(parsed).OnNone(() => term.error($"Parse failure for {parsed.Id}"));
-                dst[i] = decoded ? decoded.Value : AsmFunction.Empty;                
-            }
-            return dst;
-        }
+            term.error($"Could not decode {member.Id}");
+        }        
     }
 }

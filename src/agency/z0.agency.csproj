@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Messages)" />
-    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
 </Project>

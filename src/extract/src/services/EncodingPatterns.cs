@@ -95,7 +95,7 @@ namespace Z0
         int IBytePatternSet<EncodingPatternKind>.MatchOffset(EncodingPatternKind code)
             => (int)MatchOffset(code);
 
-        static ReadOnlySpan<byte> RET_SBB  => new byte[]{RET_xC3,SBB_x19};
+        static ReadOnlySpan<byte> RET_SBB => new byte[]{RET_xC3,SBB_x19};
 
         static ReadOnlySpan<byte> RET_INT  => new byte[]{RET_xC3,INTR_xCC};
 

@@ -21,8 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe MemoryAddress From(ulong src)
             => Addresses.address(src);
-        
-        
+                
         public static MemoryAddress Empty 
             => new MemoryAddress(0);
  

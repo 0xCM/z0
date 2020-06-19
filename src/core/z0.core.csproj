@@ -7,20 +7,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(Enums)" />    
-    <ProjectReference Include="$(Typed)" />
-    <ProjectReference Include="$(Cast)" />
-    <ProjectReference Include="$(Contained)" />    
-
-    <ProjectReference Include="$(Time)" />    
-    <ProjectReference Include="$(Memories)" />    
 
     <ProjectReference Include="$(Flow)" />
-    <ProjectReference Include="$(Reports)" />
-    <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Tuples)" />
 
 
     <ProjectReference Include="$(Math)" />    
@@ -30,7 +19,6 @@
 
     <ProjectReference Include="$(Agency)" />
     <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Spans)" />
 
     <ProjectReference Include="$(Fixed)" />    
     <ProjectReference Include="$(Numeric)" />

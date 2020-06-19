@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Memories)" />
   </ItemGroup>
 
 </Project>

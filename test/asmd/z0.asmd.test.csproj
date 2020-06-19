@@ -8,7 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
 
-    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(BitCore)" />

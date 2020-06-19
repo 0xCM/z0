@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(AsmD)" />
     <ProjectReference Include="$(Src)commands/zdata/z0.zdata.csproj" />

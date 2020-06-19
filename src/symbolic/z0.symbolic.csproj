@@ -7,13 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Typed)" />    
-    <ProjectReference Include="$(Stacks)" />    
-    <ProjectReference Include="$(Cast)" />    
-    <ProjectReference Include="$(Enums)" />
-    <ProjectReference Include="$(BitMasks)" />
-    <ProjectReference Include="$(Spans)" />
-
   </ItemGroup>
 
 </Project>

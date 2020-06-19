@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Symbolic)" />
   </ItemGroup>
 
 </Project>

@@ -60,29 +60,46 @@ namespace Z0
         public OpKindId KindId 
             => Extracted.Member.KindId;
 
-        public ReadOnlySpan<byte> Bytes 
+        public MemoryAddress Address 
         { 
             [MethodImpl(Inline)] 
-            get => Encoded.Bytes; 
+            get => Encoded.Address; 
         }
 
-        public int Length { [MethodImpl(Inline)] get => Encoded.Length; }
+        public byte[] Data
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.Data; 
+        }
+        
+        public ref readonly byte this[int index] 
+        { 
+            [MethodImpl(Inline)] 
+            get => ref Encoded[index]; 
+        }
 
-        public bool IsEmpty { [MethodImpl(Inline)] get => Encoded.IsEmpty; }
+        public int Length 
+        { 
+            [MethodImpl(Inline)] 
+            get => Encoded.Length; 
+        }
 
-        public bool IsNonEmpty { [MethodImpl(Inline)] get => Encoded.IsNonEmpty; }
+        public bool IsEmpty 
+        {
+             [MethodImpl(Inline)] 
+             get => Encoded.IsEmpty; 
+        }
 
-        public ref readonly byte Head { [MethodImpl(Inline)] get => ref Encoded.Head;}
-
-        public ref readonly byte this[int index] { [MethodImpl(Inline)] get => ref Encoded[index]; }
-
-        public MemoryAddress Address { [MethodImpl(Inline)] get => Encoded.Address; }
-
-        public MemoryRange MemorySegment { [MethodImpl(Inline)] get => Encoded.MemorySegment; }
+        public bool IsNonEmpty 
+        {
+             [MethodImpl(Inline)] 
+             get => Encoded.IsNonEmpty; 
+        }
+        
 
         public bool Equals(ParsedMember src)
             => Encoded.Equals(src.Encoded);
-
+        
         public string Format()
             => Encoded.Format();
         

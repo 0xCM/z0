@@ -13,6 +13,7 @@ namespace Z0.Asm
     {        
         public static IUriHexDecoder Service => default(UriHexDecoder);
                     
+        
         public int Decode(ReadOnlySpan<UriHex> src, Span<AsmInstructions> dst)
         {
             var decoder = Capture.Services.AsmDecoder();

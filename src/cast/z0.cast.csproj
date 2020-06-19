@@ -7,9 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Typed)" />
-    <ProjectReference Include="$(Reflective)" />
-    <ProjectReference Include="$(Spans)" />
   </ItemGroup>
 
 </Project>

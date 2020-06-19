@@ -39,11 +39,6 @@ namespace Z0
             Address = Demands.insist(src, x => x.IsNonEmpty);
             Encoded = BinaryCode.Define(Demands.insist(data));
         }
-
-        /// <summary>
-        /// The canonical zero
-        /// </summary>
-        public static LocatedCode Empty => new LocatedCode(0);
         
         /// <summary>
         /// The encoded content as byte array
@@ -121,7 +116,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(LocatedCode src)
-            => Encoded.Equals(src.Encoded); 
+            => Encoded.Equals(src.Encoded);         
         
         public string Format()
             => Encoded.Format(); 
@@ -139,5 +134,10 @@ namespace Z0
             Address = zero;
             Encoded = Control.array<byte>();
         }
+
+        /// <summary>
+        /// The canonical zero
+        /// </summary>
+        public static LocatedCode Empty => new LocatedCode(0);
     }
 }

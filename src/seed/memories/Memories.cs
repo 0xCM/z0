@@ -4,13 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
-    public partial class Tuples
-    {        
-
-    }
-
-    public static partial class XTend
+    using System;
+    using System.Runtime.CompilerServices;
+    
+    [ApiHost("api")]
+    public partial class Memories : IApiHost<Memories>
     {
+        public Memories()
+        {
+            
+        }
     }
 }

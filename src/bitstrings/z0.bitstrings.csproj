@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />  
     <ProjectReference Include="$(Symbolic)" />  
-    <ProjectReference Include="$(Spans)" />  
     <ProjectReference Include="$(Vectors)" />        
   </ItemGroup>
 

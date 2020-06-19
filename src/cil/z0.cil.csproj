@@ -7,10 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(Artifacts)" />
-    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
   <ItemGroup>

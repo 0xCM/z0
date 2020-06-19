@@ -8,9 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Tuples)" />
-    <ProjectReference Include="$(Enums)" />
     <ProjectReference Include="$(Kinds)" />
   </ItemGroup>
 

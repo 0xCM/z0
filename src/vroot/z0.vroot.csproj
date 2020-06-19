@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(BitMasks)" />
-    <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Blocks)" />
 

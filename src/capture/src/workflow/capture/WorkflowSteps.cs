@@ -15,8 +15,6 @@ namespace Z0.Asm
     {
         AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMember[] parsed);
 
-        AsmFunction[] DecodeExtracts(params ParsedMember[] src);
-
         void SaveDecoded(AsmFunction[] src, FilePath dst);
     }    
 

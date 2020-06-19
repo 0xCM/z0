@@ -52,7 +52,6 @@ namespace Z0.Asm
                     Workflow.ReportParsed.Emit(host.Uri, parsed, paths.ParsedPath);
                     Workflow.ParseMembers.SaveHex(host.Uri, parsed, paths.HexPath);
 
-                    //var decoded = DecodeParsed(host, parsed);
                     var decoded = Workflow.DecodeParsed.DecodeParsed(host.Uri,parsed);
                     if(decoded.Length != 0)
                     {

@@ -17,23 +17,23 @@ namespace Z0
         public static IMemoryReader Service => default(MemoryReader);
 
         [MethodImpl(Inline)]
-        public unsafe int Read(MemoryAddress src, Span<byte> dst)
+        public unsafe int Read(MemoryAddress src, Span<byte> dst, int? count = null)
         {
             var pSrc = src.ToPointer<byte>();
-            var limit = dst.Length;
+            var limit = count ?? dst.Length;
             return Read(ref pSrc, limit, dst);
         }
 
         [MethodImpl(Inline)]
-        public unsafe int Read(MemoryAddress src, int limit, ref byte dst)
+        public unsafe int Read(MemoryAddress src, ref byte dst, int count)
         {
             var pSrc = src.ToPointer<byte>();
-            return Read(ref pSrc, limit, ref dst);
+            return Read(ref pSrc, count, ref dst);
         }
 
         [MethodImpl(Inline)]
-        unsafe int Read(ref byte* pSrc, int limit, Span<byte> dst)
-            => Read(ref pSrc, limit, ref head(dst));
+        unsafe int Read(ref byte* pSrc, int count, Span<byte> dst)
+            => Read(ref pSrc, count, ref head(dst));
 
         unsafe int Read(ref byte* pSrc, int limit, ref byte dst)
         {

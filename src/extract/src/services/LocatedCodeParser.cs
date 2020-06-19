@@ -14,9 +14,9 @@ namespace Z0
     {
         readonly byte[] Buffer;
 
-        [MethodImpl(Inline)]
-        public static ILocatedCodeParser Create(byte[] buffer)
-            => new LocatedCodeParser(buffer);
+        // [MethodImpl(Inline)]
+        // public static ILocatedCodeParser Create(byte[] buffer)
+        //     => new LocatedCodeParser(buffer);
 
         [MethodImpl(Inline)]
         internal LocatedCodeParser(byte[] buffer)

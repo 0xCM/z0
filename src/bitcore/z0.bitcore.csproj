@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Blocks)" />
 

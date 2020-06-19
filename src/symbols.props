@@ -5,26 +5,11 @@
     <Models>$(Src)models/z0.models.csproj</Models>
     <Enhanced>$(Src)enhanced/z0.enhanced.csproj</Enhanced>
     <Parts>$(Src)parts/z0.parts.csproj</Parts>
-
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
-
-
-    <Configure>$(Src)configure/z0.configure.csproj</Configure>
-
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
     
     <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
-    <Contained>$(Src)contained/z0.contained.csproj</Contained>
-    <Collective>$(Src)collective/z0.collective.csproj</Collective>
-    <Reflective>$(Src)reflective/z0.reflective.csproj</Reflective>    
-    <Enums>$(Src)enums/z0.enums.csproj</Enums>
-    <Typed>$(Src)typed/z0.typed.csproj</Typed>
-    <Cast>$(Src)cast/z0.cast.csproj</Cast>
-    <Spans>$(Src)spans/z0.spans.csproj</Spans>
 
-    <Stacks>$(Src)stacks/z0.stacks.csproj</Stacks>
-    <Time>$(Src)time/z0.time.csproj</Time>
-    <Reports>$(Src)reports/z0.reports.csproj</Reports>
 
     <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
 
@@ -34,7 +19,6 @@
 
     <Stores>$(Src)stores/z0.stores.csproj</Stores>
 
-    <Textual>$(Src)textual/z0.textual.csproj</Textual>
 
     <Tuples>$(Src)tuples/z0.tuples.csproj</Tuples>
 

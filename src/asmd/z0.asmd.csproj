@@ -7,14 +7,12 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(Datasets)" />
     <ProjectReference Include="$(MetaReader)" />
-    <ProjectReference Include="$(ResV)" />
 
   </ItemGroup>  
 

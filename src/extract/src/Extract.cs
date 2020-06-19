@@ -19,16 +19,9 @@ namespace Z0
 
     public interface IExtract : IStateless<Extract>
     {
-        IMemberExtractor MemberExtractor
-            => new MemberExtractor(DefaultBufferLength);
-
         [MethodImpl(Inline)]
         ILocatedCodeParser LocatedParser(byte[] buffer) 
             => new LocatedCodeParser(buffer);
-
-        [MethodImpl(Inline)]
-        ILocatedCodeParser LocatedParser() 
-            => new LocatedCodeParser(new byte[DefaultBufferLength]);
 
         [MethodImpl(Inline)]
         ByteParser<EncodingPatternKind> PatternParser(byte[] buffer)

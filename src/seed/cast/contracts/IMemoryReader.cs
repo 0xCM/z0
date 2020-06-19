@@ -11,8 +11,8 @@ namespace Z0
     /// </summary>
     public interface IMemoryReader : IService
     {
-        int Read(MemoryAddress src, Span<byte> dst);
+        int Read(MemoryAddress src, Span<byte> dst, int? count = null);
 
-        int Read(MemoryAddress src, int limit, ref byte dst);        
+        int Read(MemoryAddress src, ref byte dst, int count);        
     }
 }

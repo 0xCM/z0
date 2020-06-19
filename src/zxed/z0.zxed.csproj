@@ -8,10 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Reports)" />
 
 
   </ItemGroup>  

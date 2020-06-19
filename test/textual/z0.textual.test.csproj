@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Textual)" />
+    <ProjectReference Include="$(Symbolic)" />
   </ItemGroup>
 
 </Project>

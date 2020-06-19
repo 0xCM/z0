@@ -7,10 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Enums)" />
-    <ProjectReference Include="$(Reflective)" />
-    <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Typed)" />
   </ItemGroup>
   
 </Project>
