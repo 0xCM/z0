@@ -7,11 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(MathSvc)" />    
-    <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(Matrix)" />    
-    <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(LSquare)" />
     <ProjectReference Include="$(BitMatrix)" />
