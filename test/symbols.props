@@ -2,30 +2,6 @@
 
   <PropertyGroup>
 
-
-    <AsmTest>$(Test)asm/z0.asm.test.csproj</AsmTest>
-
-    <BitsTest>$(Test)bits/z0.bits.test.csproj</BitsTest>
-    <BitSvcTest>$(Test)bitsvc/z0.bitsvc.test.csproj</BitSvcTest>
-    <BlocksTest>$(Test)blocks/z0.blocks.test.csproj</BlocksTest>
-    <DynopsTest>$(Test)dynops/z0.dynops.test.csproj</DynopsTest>
-    <GVecTest>$(Test)gvec/z0.gvec.test.csproj</GVecTest>
-
-    <IdentityTest>$(Test)identity/z0.identity.test.csproj</IdentityTest>
-    <LogixTest>$(Test)logix/z0.logix.test.csproj</LogixTest>
-
-    <MathTest>$(Test)math/z0.math.test.csproj</MathTest>
-    <MachinesTest>$(Test)machines/z0.machines.test.csproj</MachinesTest>
-    <MemoriesTest>$(Test)memories/z0.memories.test.csproj</MemoriesTest>
-    <NatsTest>$(Test)nats/z0.nats.test.csproj</NatsTest>
-    
-    <NumericTest>$(Test)numeric/z0.numeric.test.csproj</NumericTest>
-    
-    <PermuteTest>$(Test)permute/z0.permute.test.csproj</PermuteTest>
-    <SeedTest>$(Test)seed/z0.seed.test.csproj</SeedTest>
-
-    <TextualTest>$(Test)textual/z0.textual.test.csproj</TextualTest>
-
   </PropertyGroup>
 
 </Project>

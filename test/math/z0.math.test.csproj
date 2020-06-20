@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(Nats)" />
   </ItemGroup>
 
 </Project>

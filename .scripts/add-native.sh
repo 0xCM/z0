@@ -1,5 +1,5 @@
-Project=z0.$ProjectId.test.csproj
-ProjectDir=$ZDev/$ProjectRoot/$ProjectId
+Project=z0.$ProjectId.csproj
+ProjectDir=$ZDev/$ProjectRoot/$ProjectId/src
 ProjectPath=$ProjectDir/$Project
 
 SlnName=z0.sln

@@ -10,16 +10,6 @@
     <ProjectReference Include="$(VCheck)" />
     <ProjectReference Include="$(Bits)" />
     <ProjectReference Include="$(Circuits)" />
-
-    <!-- <ProjectReference Include="$(VSvc)" />
-    <ProjectReference Include="$(VBits)" />
-    <ProjectReference Include="$(BitSpans)" />    
-    <ProjectReference Include="$(BitVectors)" />    
-    <ProjectReference Include="$(Circuits)" />
-    <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(Blocked)" /> -->
-
-
   </ItemGroup>
 
 </Project>
