@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static Typed;
-    using static Control;
+    using static Root;
 
     using N = N16;
     using W = W128;
@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static asci16 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci16(Control.cast<AsciCharCode,byte>(src));
+            => new asci16(Root.cast<AsciCharCode,byte>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator asci16(string src)

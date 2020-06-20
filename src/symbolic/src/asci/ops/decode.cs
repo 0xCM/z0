@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Control;
+    using static Root;
     using static SymBits;
     using static Typed;
 
@@ -49,12 +49,12 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci8 src)
         {
             var decoded = vinflate(vbytes(w128, src.Storage));
-            return Control.cast<char>(bytespan(vlo(decoded)));            
+            return Root.cast<char>(bytespan(vlo(decoded)));            
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => Control.cast<char>(bytespan(vinflate(src.Storage)));
+            => Root.cast<char>(bytespan(vinflate(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
@@ -62,7 +62,7 @@ namespace Z0
             var lo = vinflate(src.Storage, n0);
             var hi = vinflate(src.Storage, n1);
             var data = bytespan(new Seg512(lo,hi));            
-            return Control.cast<char>(data);
+            return Root.cast<char>(data);
         }
 
         [MethodImpl(Inline), Op]
@@ -74,7 +74,7 @@ namespace Z0
             var x2 = vinflate(x.Hi,n0);
             var x3 = vinflate(x.Hi,n1);
             var data = new Seg1024(x0,x1,x2,x3);
-            return Control.cast<char>(bytespan(data));
+            return Root.cast<char>(bytespan(data));
         }
 
         [MethodImpl(Inline), Op]
@@ -141,7 +141,7 @@ namespace Z0
         static int decode(Vector256<ushort> data, ref char dst)
         {
             var bytes = bytespan(data);
-            var chars = Control.cast<char>(bytes);
+            var chars = Root.cast<char>(bytes);
             var count = 0;    
             for(var i=0; i<chars.Length; i++, count++)
             {

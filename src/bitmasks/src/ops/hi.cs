@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T hi<T>(int n, T t = default)
             where T : unmanaged
-            => convert<T>(lo64(n) << (Control.bitsize<T>() - n));
+            => convert<T>(lo64(n) << (Root.bitsize<T>() - n));
 
         /// <summary>
         /// Produces a sequence of N enabled hi bits

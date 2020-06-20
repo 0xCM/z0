@@ -72,7 +72,7 @@ namespace Z0
 
             var formatter = Reports.formatter<F>();
 
-            Control.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
+            Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
         }
 
         public void Deposit(IAppMsg src)

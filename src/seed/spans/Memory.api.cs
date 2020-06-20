@@ -68,7 +68,7 @@ namespace Z0
         public static void copy<S,T>(ref S src, Span<T> dst)
             where T : unmanaged
         {
-            ref var dstBytes = ref Unsafe.As<T, byte>(ref Control.head(dst));
+            ref var dstBytes = ref Unsafe.As<T, byte>(ref Root.head(dst));
             Unsafe.WriteUnaligned<S>(ref dstBytes, src);
         }
 
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte read8(in byte src)
-            => *(byte*)Control.constptr(in src);
+            => *(byte*)Root.constptr(in src);
 
         /// <summary>
         /// Reads 16 bits from a contiguous sequence of 2 bytes
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe ushort read16(in byte src)
-            => *(ushort*)Control.constptr(in src);
+            => *(ushort*)Root.constptr(in src);
 
         /// <summary>
         /// Reads 32 bits from a contiguous sequence of 4 bytes
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe uint read32(in byte src)
-            => *(uint*)Control.constptr(in src);
+            => *(uint*)Root.constptr(in src);
 
         /// <summary>
         /// Reads 32 bits from a contiguous sequence of 2 16-bit integers
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
         public static unsafe uint read32(in ushort src)
-            => *(uint*)Control.constptr(in src);
+            => *(uint*)Root.constptr(in src);
 
         /// <summary>
         /// Reads 64 bits from a contiguous sequence of 8 bytes
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe ulong read64(in byte src)
-            => *(ulong*)Control.constptr(in src);
+            => *(ulong*)Root.constptr(in src);
 
         /// <summary>
         /// Reads 64 bits from a contiguous sequence of 4 16-bit integers
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe ulong read64(in ushort src)
-            => *(ulong*)Control.constptr(in src);
+            => *(ulong*)Root.constptr(in src);
 
         /// <summary>
         /// Reads 64 bits from a contiguous sequence of 2 32-bit integers
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe ulong read64(in uint src)
-            => *(ulong*)Control.constptr(in src);
+            => *(ulong*)Root.constptr(in src);
 
         /// <summary>
         /// Projects a source byte onto a byte reference
@@ -157,7 +157,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store8(byte src, ref byte dst)
-            => *((byte*)Control.ptr(ref dst)) = src;
+            => *((byte*)Root.ptr(ref dst)) = src;
 
         /// <summary>
         /// Projects 16 source bits onto a contiguous sequence of 2 bytes
@@ -166,7 +166,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store16(ushort src, ref byte dst)
-            => *((ushort*)Control.ptr(ref dst)) = src;
+            => *((ushort*)Root.ptr(ref dst)) = src;
 
         /// <summary>
         /// Projects 32 source bits onto a contiguous sequence of 4 bytes
@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store32(uint src, ref byte dst)
-            => *((uint*)Control.ptr(ref dst)) = src;
+            => *((uint*)Root.ptr(ref dst)) = src;
 
         /// <summary>
         /// Projects 32 source bits onto a contiguous sequence of 2 16-bit integers
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store32(uint src, ref ushort dst)
-            => *((uint*)Control.ptr(ref dst)) = src;
+            => *((uint*)Root.ptr(ref dst)) = src;
 
         /// <summary>
         /// Projects 64 source bits onto a contiguous sequence of 8 bytes
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store64(ulong src, ref byte dst)
-            => *((ulong*)Control.ptr(ref dst)) = src;        
+            => *((ulong*)Root.ptr(ref dst)) = src;        
 
         /// <summary>
         /// Projects 64 source bits onto a contiguous sequence of 4 16-bit integers
@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store64(ulong src, ref ushort dst)
-            => *((ulong*)Control.ptr(ref dst)) = src;        
+            => *((ulong*)Root.ptr(ref dst)) = src;        
 
         /// <summary>
         /// Projects 64 source bits onto a contiguous sequence of 2 32-bit integers
@@ -211,7 +211,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe void store64(ulong src, ref uint dst)
-            => *((ulong*)Control.ptr(ref dst)) = src;        
+            => *((ulong*)Root.ptr(ref dst)) = src;        
 
         /// <summary>
         /// Casts memory cells of one type to another

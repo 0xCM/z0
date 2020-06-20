@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [ApiHost]
-    public partial class Control : IApiHost<Control>
+    public partial class Root : IApiHost<Root>
     {
 
     }

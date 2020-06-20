@@ -17,7 +17,7 @@ namespace Z0
     {
         readonly T Offset;
 
-        NW Size => (NW)Control.bitsize<T>();
+        NW Size => (NW)Root.bitsize<T>();
 
         public static RelAddress<T> Empty => new RelAddress<T>(default);
 

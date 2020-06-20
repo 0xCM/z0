@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     partial class XTend
     {
@@ -22,7 +22,7 @@ namespace Z0
         {
             if(src.IsEmpty)
                 ThrowEmptySpanError();
-            return ref Control.head(src);
+            return ref Root.head(src);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         {
             if(src.IsEmpty)
                 ThrowEmptySpanError();
-            return ref Control.seek(src, src.Length - 1);
+            return ref Root.seek(src, src.Length - 1);
         }        
     }
 }

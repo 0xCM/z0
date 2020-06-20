@@ -21,7 +21,7 @@ namespace Z0
         {
             var dst = new Dictionary<int,T>(src.Length);
             for(var i = 0; i< src.Length; i++)
-                dst[i] = Control.skip(src,i);
+                dst[i] = Root.skip(src,i);
             return dst;
         }
 

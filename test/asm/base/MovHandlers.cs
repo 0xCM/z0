@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using Dsl;
 
-    using static Control;
+    using static Root;
     using static Konst;
 
     public readonly ref struct MovHandler 
@@ -53,7 +53,7 @@ namespace Z0.Asm
         ref int Index
         {
             [MethodImpl(Inline)]
-            get => ref Control.head(I);
+            get => ref Root.head(I);
         }
         
         bool HasCapacity

@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Swap<T>(this Span<T> src, int i, int j)
             where T : unmanaged
-                => Control.swap(src,i,j);
+                => Root.swap(src,i,j);
     }
 }

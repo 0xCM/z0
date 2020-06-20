@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static PrimalKindField;
-    using static Control;
+    using static Root;
     
     [ApiHost]
     public readonly struct PrimalKindBitFields : IApiHost<PrimalKindBitFields>
@@ -35,7 +35,7 @@ namespace Z0
         public static ReadOnlySpan<SegWidth> SegWidths
         {
             [MethodImpl(Inline), Op]
-            get => Control.cast<SegWidth>(FieldWidths);
+            get => Root.cast<SegWidth>(FieldWidths);
         }
 
         [MethodImpl(Inline), Op]

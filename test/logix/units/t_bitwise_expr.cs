@@ -227,7 +227,7 @@ namespace Z0.Logix
         
         public void check_ternary_ops()
         {
-            Control.iter(Spans.set(VLogixOps.TernaryBitLogicKinds, NumericLogixHost.TernaryLogicKinds),
+            Root.iter(Spans.set(VLogixOps.TernaryBitLogicKinds, NumericLogixHost.TernaryLogicKinds),
                 check_ternary_ops);
         }
 

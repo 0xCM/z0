@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     /// <summary>
     /// Defines a model of an enum literal that is parametric in both the declaring enum

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class Control
+    partial class Root
     {
         public static T[] concat<T>(T[] a, T[] b)
         {

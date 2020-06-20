@@ -23,7 +23,7 @@ namespace Z0
         {
             var sum = 0ul;
             for(var i=0; i<bins.Length; i++)            
-                sum += (ulong)Control.skip(bins,i).Count;
+                sum += (ulong)Root.skip(bins,i).Count;
             return sum;
         }                
     }

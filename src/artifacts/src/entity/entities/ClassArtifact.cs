@@ -34,7 +34,7 @@ namespace Z0
             this.Facets = Facets;
             this.Description = Description;
             this.Members = Members;
-            this.NestedTypes = Control.array<TypeArtifact>();            
+            this.NestedTypes = Root.array<TypeArtifact>();            
         }        
 
         [MethodImpl(Inline)]

@@ -31,12 +31,12 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static ref T Seek<E,T>(Span<T> src, E field)
             where E : unmanaged, Enum
-                => ref Control.seek(src, ENumeric<E,byte>(field));
+                => ref Root.seek(src, ENumeric<E,byte>(field));
 
         [MethodImpl(Inline)]
         internal static ref readonly T Skip<E,T>(ReadOnlySpan<T> src, E field)
             where E : unmanaged, Enum
-                => ref Control.skip(src, ENumeric<E,byte>(field));
+                => ref Root.skip(src, ENumeric<E,byte>(field));
 
         [MethodImpl(Inline)]
         internal static byte FieldWidth<E>(ReadOnlySpan<byte> src, E field)
@@ -93,7 +93,7 @@ namespace Z0
             var count = fields.Length;
             for(byte i=0; i<count; i++)
             {
-                dst.Append(Control.skip(fields, i));
+                dst.Append(Root.skip(fields, i));
                 if(i != count - 1)
                 {
                     dst.Append(delimiter);
@@ -109,8 +109,8 @@ namespace Z0
             var count = fields.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var field = ref Control.skip(fields,i);
-                ref readonly var width = ref Control.skip(widths,i);
+                ref readonly var field = ref Root.skip(fields,i);
+                ref readonly var width = ref Root.skip(widths,i);
                 dst.Append(field.PadRight(width));
                 if(i != count - 1)
                 {

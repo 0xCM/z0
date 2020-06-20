@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly MemorySlot Lookup(E index)
-            => ref Data[Control.e8u(index)];
+            => ref Data[Root.e8u(index)];
         
         public ref readonly MemorySlot this[E index]
         {

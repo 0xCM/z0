@@ -116,7 +116,7 @@ namespace Z0.Machine
             MemoryTable = HashTable<MemoryAddress,UriCode>.Empty;
             MemoryUri = HashTable<MemoryAddress,OpUri>.Empty;
             HostCode = new Dictionary<ApiHostUri, UriCode[]>();
-            Parts = Control.array<PartId>();
+            Parts = Root.array<PartId>();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Z0
         public SymbolSpec(ushort symwidth, MetadataToken symdomain, params S[] symbols)
         {
             this.SymWidth = symwidth;
-            this.SegWidth = (ushort)Control.bitsize<S>();
+            this.SegWidth = (ushort)Root.bitsize<S>();
             this.Capacity = (ushort)(SegWidth/SymWidth);
             this.SegDomain = typeof(S);
             this.SymDomain = symdomain;

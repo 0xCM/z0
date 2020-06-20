@@ -27,7 +27,7 @@ namespace Z0
             
             var perm = Perm.identity(n);
             var lengths = gmath.range(m,n);
-            Control.iter(lengths, i => {
+            Root.iter(lengths, i => {
                 var p = Perm.identity(i);
                 var cycle = p.Cycle(default(T));
                 Claim.eq(cycle.Length, 1);                            

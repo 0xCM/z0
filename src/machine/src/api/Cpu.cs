@@ -63,7 +63,7 @@ namespace Z0.Machine
         
         void LoadAsmDocs()
         {
-            Control.iter(Files.Archive.AsmFiles,LoadAsmDoc);
+            Root.iter(Files.Archive.AsmFiles,LoadAsmDoc);
             Notify(CpuEvent.Create("Loaded asm docs", AsmDocs.Count));
         }
 

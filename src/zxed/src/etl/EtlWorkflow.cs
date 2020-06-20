@@ -10,7 +10,7 @@ namespace Z0.Xed
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Control;
+    using static Root;
     using static Konst;
 
     using xed_ext = xed_extension_enum_t;
@@ -80,10 +80,10 @@ namespace Z0.Xed
         
         static InstructionRecord[] InstructionRecords(InstructionPattern[] src)
         {
-            var input = Control.@readonly(src);
+            var input = Root.@readonly(src);
             var count = input.Length;
-            var dst = Control.alloc<InstructionRecord>(count);
-            var target = Control.span(dst);
+            var dst = Root.alloc<InstructionRecord>(count);
+            var target = Root.span(dst);
             for(var i=0; i<count; i++)
             {
                 ref readonly var x = ref skip(input,i);
@@ -100,7 +100,7 @@ namespace Z0.Xed
 
         public FunctionData[] ExtractFunctions()
         {
-            var functions = Control.list<FunctionData>();
+            var functions = Root.list<FunctionData>();
             var parser = SourceParser.Service;
             foreach(var file in Src.FunctionFiles)
             {

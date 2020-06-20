@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* gptr<T>(in T src)
             where T : unmanaged
-                => (T*)Control.pvoid(ref edit(in src));
+                => (T*)Root.pvoid(ref edit(in src));
     }
 }

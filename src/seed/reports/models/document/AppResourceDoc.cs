@@ -57,7 +57,7 @@ namespace Z0
 
                     for(var k=0; k<data.Length; k++)
                     {
-                        ref readonly var c = ref Control.skip(data,k);
+                        ref readonly var c = ref Root.skip(data,k);
                         if(!Char.IsWhiteSpace(c))
                             count++;
                     }
@@ -70,7 +70,7 @@ namespace Z0
         public string Format()
         {
             var dst = text.build();
-            Control.iter(Data.RowData, d => dst.AppendLine(d.Text));
+            Root.iter(Data.RowData, d => dst.AppendLine(d.Text));
             return dst.ToString();
         }
 

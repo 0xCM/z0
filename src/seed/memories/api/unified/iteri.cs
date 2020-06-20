@@ -20,6 +20,6 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void iteri<T>(IEnumerable<T> items, Action<int,T> action)
-            => Control.iteri(items,action);
+            => Root.iteri(items,action);
     }
 }

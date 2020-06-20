@@ -61,7 +61,7 @@ namespace Z0
         {
             this.Dim = dim;            
             this.Count = Math.DivRem(src.Length, dim, out int remainder);    
-            Control.require(remainder == 0);
+            Root.require(remainder == 0);
             Data = src;
         }
 
@@ -70,7 +70,7 @@ namespace Z0
         {
             this.Dim = dim;            
             this.Count = Math.DivRem(src.Length, dim, out int remainder);    
-            Control.require(remainder == 0);
+            Root.require(remainder == 0);
             Data = src;
         }
                 

@@ -16,12 +16,12 @@ namespace Z0.Asm.Data
             var index = XmmRegs.Create();
             var locations = index.Locations;
             var data = index.Data;
-            var @base = Control.head(locations);
+            var @base = Root.head(locations);
             for(var i=0; i<locations.Length; i++)
             {
-                var address = Control.skip(locations,i);
+                var address = Root.skip(locations,i);
                 var offset = address - @base;
-                var reg = Control.skip(data,i);
+                var reg = Root.skip(data,i);
                 term.print($"{address} | {offset} | {reg.Kind}");
             }
             

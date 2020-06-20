@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     partial struct asci
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(in asci16 src)
-            => Control.cast<AsciCharCode>(bytespan(src)); 
+            => Root.cast<AsciCharCode>(bytespan(src)); 
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)        

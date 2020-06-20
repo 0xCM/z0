@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T seek<T>(ref T src, byte count)

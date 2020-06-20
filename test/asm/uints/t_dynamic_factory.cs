@@ -142,9 +142,9 @@ namespace Z0.Asm
 
         public TestCaseRecord[] vector_bitlogic_match(BufferTokens buffers)
         {
-            var names = Control.array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
+            var names = Root.array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
             var kinds = NumericKind.Integers.DistinctKinds();
-            var widths = Control.array(TypeWidth.W128, TypeWidth.W256);
+            var widths = Root.array(TypeWidth.W128, TypeWidth.W256);
             var dst = new TestCaseRecord[names.Length * widths.Length * kinds.Count];
             var i = 0;
             foreach(var n in names)

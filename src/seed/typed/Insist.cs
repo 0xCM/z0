@@ -69,7 +69,7 @@ namespace Z0
         public T insist<T>(T lhs, T rhs)
             where T : IEquatable<T>            
         {
-            if(Control.nullnot(lhs) && Control.nullnot(rhs) && lhs.Equals(rhs))
+            if(Root.nullnot(lhs) && Root.nullnot(rhs) && lhs.Equals(rhs))
                 return lhs;
             else
                 insist(false, $"{lhs} != {rhs}");

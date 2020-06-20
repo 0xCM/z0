@@ -41,7 +41,7 @@ namespace Z0
         internal static BlobRecord LiteralValue(in ReaderState state, BlobHandle handle, int seq)
         {
             var offset = state.Reader.GetHeapOffset(handle);            
-            var value = state.Reader.GetBlobBytes(handle) ?? Control.array<byte>();
+            var value = state.Reader.GetBlobBytes(handle) ?? Root.array<byte>();
             var size = state.Reader.GetHeapSize(HeapIndex.Blob);
             return new BlobRecord(seq, size,offset,value);                    
         }

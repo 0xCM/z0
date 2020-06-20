@@ -8,7 +8,7 @@ namespace Z0.Machine
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
     
     public readonly struct CpuBuffer<N,W,T>        
         where N : unmanaged, ITypeNat

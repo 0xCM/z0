@@ -9,7 +9,7 @@ namespace Z0.Xed
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     using static xed_operand_mode;
 

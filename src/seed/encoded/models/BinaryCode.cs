@@ -56,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BinaryCode(byte[] bytes)
         {
-            Encoded = Control.insist(bytes);
+            Encoded = Root.insist(bytes);
         }
 
         [MethodImpl(Inline)]

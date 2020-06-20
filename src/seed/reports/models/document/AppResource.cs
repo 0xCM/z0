@@ -29,7 +29,7 @@ namespace Z0
         public string Format()
         {
             var dst = text.build();
-            Control.iter(Data, d => dst.AppendLine(d));
+            Root.iter(Data, d => dst.AppendLine(d));
             return dst.ToString();
         }
 

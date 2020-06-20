@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     [ApiHost]
     public readonly struct AsciResourceSet
@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte EntrySize<A>()
             where A : unmanaged, IAsciSequence
-                => (byte)Control.size<A>();
+                => (byte)Root.size<A>();
 
         [MethodImpl(Inline)]
         public static int EntryOffset<A>(int index)

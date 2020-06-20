@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Control;
+    using static Root;
     using static Konst;
     using static AsciKonst;
 
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="count">Tne number of codes to select</param>
         [MethodImpl(Inline)]
         public ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)
-            => Control.cast<AsciCharCode>(AsciKonst.CodeBytes.Slice(offset,count));
+            => Root.cast<AsciCharCode>(AsciKonst.CodeBytes.Slice(offset,count));
 
         /// <summary>
         /// Returns the acsci characters corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline)]
         public ReadOnlySpan<AsciChar> symbols(sbyte offset, sbyte count)
-            => Control.cast<char,AsciChar>(chars(offset,count));
+            => Root.cast<char,AsciChar>(chars(offset,count));
 
         /// <summary>
         /// Returns the uint16 asci scalar values corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline)]
         public ReadOnlySpan<ushort> scalars(sbyte offset, sbyte count)
-            => Control.cast<char,ushort>(chars(offset,count));
+            => Root.cast<char,ushort>(chars(offset,count));
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<char> Text(N0 index)

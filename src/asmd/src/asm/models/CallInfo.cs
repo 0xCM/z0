@@ -38,7 +38,7 @@ namespace Z0.Asm
         {
             Instruction = src;
             Target = MemoryAddress.Empty;
-            var bytes = Control.span(src.Encoded.Data);            
+            var bytes = Root.span(src.Encoded.Data);            
             var count = (byte)(bytes.Length - 1); //op code takes up one byte
             var offset = ByteReader.Read(bytes.Slice(1));
             Target = src.NextIp + offset;            

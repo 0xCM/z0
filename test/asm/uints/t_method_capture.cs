@@ -90,7 +90,7 @@ namespace Z0.Asm
             AsmCheck.WriteAsm(case4Out, dst);
 
             var case5In = CaptureCases.vand;
-            Control.iter(case5In, 
+            Root.iter(case5In, 
                 src => AsmCheck.WriteAsm(AsmCheck.Capture(src.Identify(), src).Require(), dst));
         }
 

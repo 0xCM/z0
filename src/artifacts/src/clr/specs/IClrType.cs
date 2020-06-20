@@ -39,7 +39,7 @@ namespace Z0
         /// Models of the types nested within the subject, if any
         /// </summary>
         IEnumerable<IClrType> NestedTypes 
-            => Control.seq<IClrType>();
+            => Root.seq<IClrType>();
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         ClrType Generalized {get;}
         
         new IEnumerable<M> NestedTypes
-            => Control.seq<M>();
+            => Root.seq<M>();
 
         IEnumerable<IClrType> IClrType.NestedTypes
             => NestedTypes.Cast<IClrType>();

@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     [ApiHost]
     public readonly struct BitStream
@@ -18,7 +18,7 @@ namespace Z0
         public static IEnumerable<bit> from<T>(T src)
             where T : struct
         {
-            var bytes = Control.bytes(src).ToArray();
+            var bytes = Root.bytes(src).ToArray();
             for(var i=0; i< bytes.Length; i++)
             {
                 var b = bytes[i];

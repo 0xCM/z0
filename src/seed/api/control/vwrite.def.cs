@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         /// <summary>
         /// Hydrates a 128-bit T-vector from an S-reference

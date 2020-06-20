@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Control;
+    using static Root;
     
     public readonly struct ResourceStore
     {                
@@ -60,9 +60,9 @@ namespace Z0
         {
             ref readonly var src = ref head(span(AccessorTypes));
             var kind = ResourceFormat.None;
-            if(Control.skip(src,0).Equals(match))
+            if(Root.skip(src,0).Equals(match))
                 kind = ResourceFormat.ByteSpan;
-            else if(Control.skip(src,1).Equals(match))
+            else if(Root.skip(src,1).Equals(match))
                 kind = ResourceFormat.CharSpan;
             return kind;
         }

@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         /// <summary>
         /// Reads a T-value from an S-source

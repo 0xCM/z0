@@ -111,7 +111,7 @@ namespace Z0
         public FolderPath[] SubDirs
             => Directory.Exists(Name) 
             ? Directory.EnumerateDirectories(Name).Map(FolderPath.Define) 
-            : Control.array<FolderPath>();
+            : Root.array<FolderPath>();
 
         /// <summary>
         /// Nonrecursively enumerates all files in the folder

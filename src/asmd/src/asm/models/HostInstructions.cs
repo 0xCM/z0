@@ -15,7 +15,7 @@ namespace Z0.Asm
     /// </summary>         
     public readonly struct HostInstructions : IIndex<MemberInstructions>
     {
-        public static HostInstructions Empty => new HostInstructions(ApiHostUri.Empty, Control.array<MemberInstructions>());
+        public static HostInstructions Empty => new HostInstructions(ApiHostUri.Empty, Root.array<MemberInstructions>());
 
         /// <summary>
         /// The decoded instructions

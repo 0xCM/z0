@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(in ArraySpan<T> src, int index)
             where T : struct
-                => ref Control.seek(span(src), index);
+                => ref Root.seek(span(src), index);
 
         /// <summary>
         /// Returns a reference to the first source element
@@ -169,18 +169,18 @@ namespace Z0
             ref readonly var input = ref head(src);
             ref var target = ref head(dst);
             for(var i=0; i<src.Length; i++)
-                Control.seek(ref target,i) = (ulong)Control.pvoid(ref cell(src, i));
+                Root.seek(ref target,i) = (ulong)Root.pvoid(ref cell(src, i));
         }
     
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> bytes<T>(in ArraySpan<T> src)
             where T : struct
-                => Control.cast<T,byte>(src.Cells);
+                => Root.cast<T,byte>(src.Cells);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<byte> byteview<T>(in ArraySpan<T> src)
             where T : struct
-                => Control.cast<T,byte>(src.Cells);
+                => Root.cast<T,byte>(src.Cells);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T pinnable<T>(in ArraySpan<T> src)
@@ -292,13 +292,13 @@ namespace Z0
         public static Span<T> span<S,T>(in ArraySpan<S> src)
             where S : struct
             where T : struct
-                => Control.cast<S,T>(span(src));
+                => Root.cast<S,T>(span(src));
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> view<S,T>(in ArraySpan<S> src)
             where S : struct
             where T : struct            
-                => Control.cast<S,T>(span(src));
+                => Root.cast<S,T>(span(src));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void* pvoid<T>(in ArraySpan<T> src, int offset = 0)
@@ -318,6 +318,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static unsafe void copy_alt<T>(in ArraySpan<T> src, in ArraySpan<T> dst)
             where T : struct
-                => Unsafe.CopyBlock(ref seek8(dst), ref Control.edit(skip8(src)), size(src));
+                => Unsafe.CopyBlock(ref seek8(dst), ref Root.edit(skip8(src)), size(src));
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {                
         /// <summary>
         /// Stores an enum value of any primal kind to a u64 target

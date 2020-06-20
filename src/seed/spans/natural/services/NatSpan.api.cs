@@ -59,7 +59,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             
-            Control.require(src.Length >= (int)TypeNats.value<N>());
+            Root.require(src.Length >= (int)TypeNats.value<N>());
             return new NatSpan<N,T>(src);
         }
 

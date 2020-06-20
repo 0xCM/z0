@@ -26,6 +26,6 @@ namespace Z0
             => ref Lookup(index);        
 
         ref readonly T IIndexedView<T>.Lookup(int index)            
-            => ref Lookup(Control.eVal<E>(index));
+            => ref Lookup(Root.eVal<E>(index));
     }
 }

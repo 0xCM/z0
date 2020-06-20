@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {            
         /// <summary>
         /// Calculates a combined hash for a sequence integral values

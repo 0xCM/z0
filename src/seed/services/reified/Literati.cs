@@ -69,12 +69,12 @@ namespace Z0
         {
             var literals = attributed<T>(@base, declarer).ToReadOnlySpan();        
             var count = literals.Length;
-            var dst = Control.alloc<T>(count);
+            var dst = Root.alloc<T>(count);
 
             Span<T> target = dst;
             
             for(var i=0; i< count; i++)        
-                Control.seek(target,i) = Control.skip(literals,i).Data;
+                Root.seek(target,i) = Root.skip(literals,i).Data;
             return dst;            
         }
 
@@ -93,7 +93,7 @@ namespace Z0
                 {
                     var components = content.SplitClean(Chars.Pipe);
                     var count = components.Length;
-                    var dst = Control.alloc<NumericLiteral>(count);
+                    var dst = Root.alloc<NumericLiteral>(count);
                     for(var i=0; i<components.Length; i++)
                     {
                         var component = components[i];
@@ -126,7 +126,7 @@ namespace Z0
                     }
                 }
             }   
-            return Control.array<NumericLiteral>();
+            return Root.array<NumericLiteral>();
         }        
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe int deposit<T>(T* pSrc, int count, Span<T> dst)

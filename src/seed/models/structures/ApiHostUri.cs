@@ -47,7 +47,7 @@ namespace Z0
         public static ApiHostUri FromHost(Type host)
         {
             var tag = host.Tag<ApiHostAttribute>();
-            var name = Control.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
+            var name = Root.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
             var owner = host.Assembly.Id();
             return new ApiHostUri(owner, name);
         }

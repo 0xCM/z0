@@ -14,31 +14,31 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly asci2 cast<A>(N2 n, in A src)
             where A : unmanaged, IAsciSequence
-                => ref Control.cast<A,asci2>(src);
+                => ref Root.cast<A,asci2>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci4 cast<A>(N4 n, in A src)
             where A : unmanaged, IAsciSequence
-                => ref Control.cast<A,asci4>(src);
+                => ref Root.cast<A,asci4>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci8 cast<A>(N8 n, in A src)
             where A : unmanaged, IAsciSequence
-                => ref Control.cast<A,asci8>(src);
+                => ref Root.cast<A,asci8>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci16 cast<A>(N16 n, in A src)
             where A : unmanaged, IAsciSequence
-                => ref Control.cast<A,asci16>(src);
+                => ref Root.cast<A,asci16>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci32 cast<A>(N32 n, in A src)
             where A : unmanaged, IAsciSequence
-                => ref Control.cast<A,asci32>(src);
+                => ref Root.cast<A,asci32>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci64 cast<A>(N64 n, in A src)
             where A : unmanaged, IAsciSequence
-                => ref Control.cast<A,asci64>(src);
+                => ref Root.cast<A,asci64>(src);
     }
 }

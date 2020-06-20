@@ -16,7 +16,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe MemoryAddress reference<T>(in T src)
             where T : unmanaged
-                => Control.gptr<T>(src);
+                => Root.gptr<T>(src);
 
         [MethodImpl(Inline), Op]
         public unsafe static ReadOnlySpan<T> read<T>(MemoryAddress location, int length)

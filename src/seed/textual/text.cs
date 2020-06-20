@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline)]
         public static string ifempty(string test, string replace)
-            => Control.ifempty(test,replace);
+            => Root.ifempty(test,replace);
 
         /// <summary>
         /// If the test string is null, returns the empty string; otherwise, returns the test string
@@ -635,7 +635,7 @@ namespace Z0
         public static int width<E>(E field)
             where E : unmanaged, Enum
         {
-            var w = Control.tVal<E,uint>(field) >> 16;
+            var w = Root.tVal<E,uint>(field) >> 16;
             return (int)w;
         }
 

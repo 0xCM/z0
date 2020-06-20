@@ -96,7 +96,7 @@ namespace Z0.Asm
 
         public string[] FormatValues()
         {
-            var dst = Control.alloc<string>(Count);
+            var dst = Root.alloc<string>(Count);
             for(var i=0; i<dst.Length; i++)
                 dst[i] = FormatValue(i);
             return dst;
@@ -117,7 +117,7 @@ namespace Z0.Asm
             => FormatDelimiter(index) + this[index].Format();
 
         public static Aspects Empty 
-            => new Aspects(Control.array<Aspect>());
+            => new Aspects(Root.array<Aspect>());
 
         public Aspects Zero => Empty;
     }

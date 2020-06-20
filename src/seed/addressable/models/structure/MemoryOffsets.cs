@@ -56,7 +56,7 @@ namespace Z0
         public ref readonly MemoryOffset this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Control.skip(Content,index);
+            get => ref Root.skip(Content,index);
         }
 
         public int Length

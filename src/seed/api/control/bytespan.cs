@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<byte> bytespan<T>(in T src)

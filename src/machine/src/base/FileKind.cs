@@ -18,7 +18,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static implicit operator FileKind(FileKind<E> src)
-            => new FileKind(Control.eStore(src.Kind, out var _), src.Ext);
+            => new FileKind(Root.eStore(src.Kind, out var _), src.Ext);
 
         [MethodImpl(Inline)]
         public FileKind(E kind, asci8 ext)

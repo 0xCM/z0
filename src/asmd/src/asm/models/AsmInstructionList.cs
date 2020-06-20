@@ -17,7 +17,7 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmInstructionList : IReadOnlyList<Instruction>
     {        
-        public static AsmInstructionList Empty = new AsmInstructionList(Control.array<Instruction>(), LocatedCode.Empty);
+        public static AsmInstructionList Empty = new AsmInstructionList(Root.array<Instruction>(), LocatedCode.Empty);
 
         readonly Instruction[] Source;
 

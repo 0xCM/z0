@@ -17,14 +17,14 @@ namespace Z0
 
         public static PartFileKinds Service()
         {
-            var kindSize = Control.size<FileKind>();
+            var kindSize = Root.size<FileKind>();
             var buffer = new FileKind[KindCount + 1];
             var dst = buffer.ToSpan();
-            Control.seek(dst,0) = None;
-            Control.seek(dst,1) = Extract;
-            Control.seek(dst,2) = Parsed;
-            Control.seek(dst,3) = Asm;
-            Control.seek(dst,4) = Hex;            
+            Root.seek(dst,0) = None;
+            Root.seek(dst,1) = Extract;
+            Root.seek(dst,2) = Parsed;
+            Root.seek(dst,3) = Asm;
+            Root.seek(dst,4) = Hex;            
             return new PartFileKinds(buffer);
         }
         
@@ -67,7 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public FileKind<PartFileKind> kind(PartFileKind k)
-            => Control.cast<FileKind,FileKind<PartFileKind>>(in KindData[(int)k]);
+            => Root.cast<FileKind,FileKind<PartFileKind>>(in KindData[(int)k]);
 
         [Op]
         public static FileKind<PartFileKind> kindSwitch(PartFileKind k)

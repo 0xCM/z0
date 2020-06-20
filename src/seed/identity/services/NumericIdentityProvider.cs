@@ -14,7 +14,7 @@ namespace Z0
             => TypeIdentity.Define(src.NumericKind().Format());
 
         public IEnumerable<Type> Identifiable 
-            => Control.seq(
+            => Root.seq(
                 typeof(byte), typeof(ushort), typeof(uint), typeof(ulong), 
                 typeof(sbyte), typeof(short), typeof(int), typeof(long),                 
                 typeof(float), typeof(double)

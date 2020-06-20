@@ -17,7 +17,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
-    using static Control;
+    using static Root;
     using static Typed;
 
     public partial class SymBits

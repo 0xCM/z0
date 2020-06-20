@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct AsmStatement
     {        
-        public static AsmStatement Empty => new AsmStatement(Mnemonic.INVALID, Control.array<string>());
+        public static AsmStatement Empty => new AsmStatement(Mnemonic.INVALID, Root.array<string>());
 
         public Mnemonic Mnemonic {get;}
 

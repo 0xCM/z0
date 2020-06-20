@@ -5,7 +5,7 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using static Control;
+    using static Root;
     
     public class t_eflags : t_asmd<t_eflags>
     {

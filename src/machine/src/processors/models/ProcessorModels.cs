@@ -69,8 +69,8 @@ namespace Z0.Machine
                 var dstSize = size<T>();
                 var count = math.min(srcSize, dstSize);
                 var dst = default(T);
-                var srcBytes = Control.bytes(in src);
-                var dstBytes = Control.bytes(in dst);
+                var srcBytes = Root.bytes(in src);
+                var dstBytes = Root.bytes(in dst);
                 for(var i=0; i<count; i++)
                     seek(dstBytes,i) = skip(srcBytes,i);
                 return dst;                

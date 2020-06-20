@@ -51,10 +51,10 @@ namespace Z0
 
             Print($"Examining capture archive rooted at {archive.ArchiveRoot}");
 
-            Control.iter(archive.AsmFiles, file => Print(file));            
-            Control.iter(archive.HexFiles, file => Print(file));  
-            Control.iter(archive.ExtractFiles, file => Print(file));  
-            Control.iter(archive.ParseFiles, file => Print(file));              
+            Root.iter(archive.AsmFiles, file => Print(file));            
+            Root.iter(archive.HexFiles, file => Print(file));  
+            Root.iter(archive.ExtractFiles, file => Print(file));  
+            Root.iter(archive.ParseFiles, file => Print(file));              
             // Control.iter(archive.AsmImmFiles, file => Print(file));  
             // Control.iter(archive.HexImmFiles, file => Print(file));  
         }

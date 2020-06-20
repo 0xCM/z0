@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
     using static AsciResourceSet;
 
     public readonly ref struct AsciResourceSet<A>
@@ -63,6 +63,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static ref readonly byte LeadingCell(ReadOnlySpan<byte> content, int index)
-            => ref Control.skip(content, EntryOffset<A>(index));
+            => ref Root.skip(content, EntryOffset<A>(index));
     }
 }

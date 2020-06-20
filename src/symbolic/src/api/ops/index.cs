@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     
     using static Konst;
-    using static Control;
+    using static Root;
 
     partial class Symbolic
     {

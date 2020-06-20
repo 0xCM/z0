@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static asci64 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci64(Control.cast<AsciCharCode,byte>(src));
+            => new asci64(Root.cast<AsciCharCode,byte>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator asci64(string src)
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci64(ReadOnlySpan<byte> src)
         {
-            Storage = SymBits.vload(w, Control.head(src));
+            Storage = SymBits.vload(w, Root.head(src));
         }
 
         public bool IsEmpty

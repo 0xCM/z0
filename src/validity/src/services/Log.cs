@@ -137,7 +137,7 @@ namespace Z0
                 if(header)
                     dst.AppendLine(string.Join(delimiter, records[0].HeaderNames));
                 
-                Control.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
+                Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
             }
 
             FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)

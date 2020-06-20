@@ -17,11 +17,11 @@ namespace Z0
             var count = 0;
             for(var i=start; i<src.Length; i++)
             {
-                ReadOnlySpan<char> data = Control.skip(src,i);
+                ReadOnlySpan<char> data = Root.skip(src,i);
                 
                 for(var j=0; j<data.Length; j++)
                 {
-                    ref readonly var c = ref Control.skip(data,j);
+                    ref readonly var c = ref Root.skip(data,j);
                     if(!SymTest.IsWhiteSpace(c) && c != exclude)
                         count++;
                 }

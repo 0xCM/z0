@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         [MethodImpl(Inline)]
         public static T cast<T>(object src)
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] cast<T>(object[] src)
         {
-            var dst = Control.alloc<T>(src.Length);
+            var dst = Root.alloc<T>(src.Length);
             for(var i=0; i<src.Length; i++)
                 dst[i] = cast<T>(src[i]);
             return dst;

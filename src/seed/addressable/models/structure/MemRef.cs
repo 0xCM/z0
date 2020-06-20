@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe static MemRef memref(ReadOnlySpan<byte> src)
-            => new MemRef(Control.gptr(Control.head(src)), src.Length);
+            => new MemRef(Root.gptr(Root.head(src)), src.Length);
                 
         ulong Lo
         {
@@ -115,7 +115,7 @@ namespace Z0
        
         [MethodImpl(Inline)]
         public uint Hash()
-            => Control.hash(Lo, Hi);
+            => Root.hash(Lo, Hi);
         
         [MethodImpl(Inline)]
         public bool Equals(MemRef src)

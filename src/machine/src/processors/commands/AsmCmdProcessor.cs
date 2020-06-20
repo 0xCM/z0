@@ -13,7 +13,7 @@ namespace Z0.Asm
     using Z0.Asm.Data;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     public readonly struct AsmCmdProcessor
     {                
@@ -179,7 +179,7 @@ namespace Z0.Asm
 
         void Process(in BinaryCode code, Instruction[] asm)        
         {
-            var bytes = Control.span(code.Data);
+            var bytes = Root.span(code.Data);
             
             ushort offset = 0;
 

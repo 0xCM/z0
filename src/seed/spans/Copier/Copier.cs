@@ -45,7 +45,7 @@ namespace Z0
         public static void copy<S,T>(ref S src, Span<T> dst)
             where T : unmanaged
         {
-            ref var dstBytes = ref As<T,byte>(ref Control.head(dst));
+            ref var dstBytes = ref As<T,byte>(ref Root.head(dst));
             WriteUnaligned<S>(ref dstBytes, src);
         }
 
@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(T* pSrc, Span<T> dst, int offset, uint srcCount)
             where T : unmanaged
-                =>  copy(pSrc, refs.ptr(ref Control.head(dst), offset), srcCount); 
+                =>  copy(pSrc, refs.ptr(ref Root.head(dst), offset), srcCount); 
 
         /// <summary>
         /// Copies a contiguous segments of bytes from a source location to a target span

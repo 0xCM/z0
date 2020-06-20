@@ -25,7 +25,7 @@ namespace Z0.Asm
         public BinaryCode Encoded {get;}
 
         public static AsmInstructions Empty 
-            => Create(Control.array<Instruction>(), BinaryCode.Empty);
+            => Create(Root.array<Instruction>(), BinaryCode.Empty);
         
         [MethodImpl(Inline)]
         public static AsmInstructions Create(Instruction[] src, BinaryCode data)

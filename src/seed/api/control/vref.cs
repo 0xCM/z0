@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         /// <summary>
         /// Returns a refererence to the leading component of the source

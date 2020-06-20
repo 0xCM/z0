@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using static Control;
+    using static Root;
 
     partial class Enums
     {
@@ -21,11 +21,11 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var dst = Control.span(buffer);
+            var dst = Root.span(buffer);
             for(var i=0; i<dst.Length; i++)
             {
                 var entry = dataset[i];
-                Control.seek(dst,i) = EnumInfo.define(entry.Token, entry.Index, entry.Name, entry.Literal, entry.Scalar);
+                Root.seek(dst,i) = EnumInfo.define(entry.Token, entry.Index, entry.Name, entry.Literal, entry.Scalar);
             }
             return buffer;
         }        

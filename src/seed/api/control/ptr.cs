@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         [MethodImpl(Inline)]
         public static unsafe void* pvoid<T>(ref T src)

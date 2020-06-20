@@ -75,7 +75,7 @@ namespace Z0.Asm
             for(ushort i=0; i<count; i++)
             {
                 var inxs = src[i];
-                var data = Control.span(code.Encoded.Data);
+                var data = Root.span(code.Encoded.Data);
                 var slice = data.Slice(offseq.Offset, inxs.ByteLength).ToArray();
                 var recoded = UriCode.Define(code.OpUri, inxs.IP, slice);  
                 dst[i] = One(@base, offseq, inxs, recoded);

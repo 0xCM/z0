@@ -26,7 +26,7 @@ namespace Z0.Machine
         [MethodImpl(Inline)]
         CpuBuffers(int size)
         {
-            log = Control.alloc<char>(size);
+            log = Root.alloc<char>(size);
             step = CpuBuffer.Alloc<N64,W8,HexCode>();
             run = CpuBuffer.Alloc<N64,W8,HexCode>();
         }

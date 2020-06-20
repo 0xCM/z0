@@ -88,7 +88,7 @@ namespace Z0
                     ExecExplicit(et, host.Name,results);
                 else
                 {                    
-                    Control.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));   
+                    Root.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));   
                     PostBenchResult(unit.TakeBenchmarks().ToArray());
                 }
 
@@ -276,7 +276,7 @@ namespace Z0
         void Run(bool concurrent, params string[] filters)
         {
             var hosts = Hosts().ToArray();
-            Control.iter(hosts, h =>  Run(h,filters), concurrent);
+            Root.iter(hosts, h =>  Run(h,filters), concurrent);
         }
         
         IEnumerable<MethodInfo> Tests(Type host)
@@ -354,7 +354,7 @@ namespace Z0
             finally
             {            
                 Log.Deposit(messages);                
-                Control.iter(messages.Where(m => !m.Displayed), term.print);
+                Root.iter(messages.Where(m => !m.Displayed), term.print);
             }
 
             return clock;
@@ -397,7 +397,7 @@ namespace Z0
             {     
                 
                 Log.Deposit(collected);                
-                Control.iter(collected.Where(m => !m.Displayed), term.print);       
+                Root.iter(collected.Where(m => !m.Displayed), term.print);       
 
             }
 

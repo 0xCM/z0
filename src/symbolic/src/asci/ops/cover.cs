@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
     using static Typed;
 
     partial struct asci
@@ -17,30 +17,30 @@ namespace Z0
          
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci2 src)
-            => Control.cast<AsciCodeCover>(bytespan(src));
+            => Root.cast<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci4 src)
-            => Control.cast<AsciCodeCover>(bytespan(src));
+            => Root.cast<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(asci5 src)
-            => Control.cast<AsciCodeCover>(bytespan(src));
+            => Root.cast<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci8 src)
-            => Control.cast<AsciCodeCover>(bytespan(src));
+            => Root.cast<AsciCodeCover>(bytespan(src));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci16 src)
-            => Control.cast<AsciCodeCover>(bytespan(src)); 
+            => Root.cast<AsciCodeCover>(bytespan(src)); 
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci32 src)
-            => Control.cast<AsciCodeCover>(bytespan(src)); 
+            => Root.cast<AsciCodeCover>(bytespan(src)); 
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci64 src)
-            => Control.cast<AsciCodeCover>(bytespan(src)); 
+            => Root.cast<AsciCodeCover>(bytespan(src)); 
     }
 }

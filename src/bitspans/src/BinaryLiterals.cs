@@ -19,7 +19,7 @@ namespace Z0
         {
             var literals = Literati.attributed<T>(Seed.base2, declarer).ToArray();
             var count = literals.Length;
-            var dst = Control.alloc<T>(count);
+            var dst = Root.alloc<T>(count);
             for(var i=0; i< count; i++)        
             {
                 var mask = literals[i];
@@ -40,7 +40,7 @@ namespace Z0
             Span<BinaryLiteral<T>> literals = Literati.attributed<T>(Seed.base2, declarer).ToArray();
             
             var count = literals.Length;
-            var dst = Control.alloc<T>(count);
+            var dst = Root.alloc<T>(count);
 
             Span<T> target = dst;
             

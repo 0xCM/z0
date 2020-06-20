@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     public interface ISymbol<S>
         where S : unmanaged
@@ -27,7 +27,7 @@ namespace Z0
         /// The bit-width of a storage cell
         /// </summary>
         ushort SegWidth 
-            => (ushort)Control.bitsize<T>();
+            => (ushort)Root.bitsize<T>();
 
         /// <summary>
         /// The symbol value, from storage cell persective

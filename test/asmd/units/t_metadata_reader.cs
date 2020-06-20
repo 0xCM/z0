@@ -16,7 +16,7 @@ namespace Z0.Asm.Data
     {
         public t_metadata_reader()
         {
-            DataSources = Control.array<IPart>(Parts.AsmD.Resolved, Parts.Symbolic.Resolved);
+            DataSources = Root.array<IPart>(Parts.AsmD.Resolved, Parts.Symbolic.Resolved);
         }
 
         IMetadataReader CreateReader(string src)
@@ -59,7 +59,7 @@ namespace Z0.Asm.Data
                 dst.WriteLine(header);
                 for(var i=0; i<src.Length; i++)
                 {
-                    ref readonly var value = ref Control.skip(src,i);
+                    ref readonly var value = ref Root.skip(src,i);
                     dst.WriteLine(value.Format());
                 }
             }
@@ -80,7 +80,7 @@ namespace Z0.Asm.Data
                 dst.WriteLine(header);
                 for(var i=0; i<src.Length; i++)
                 {
-                    ref readonly var value = ref Control.skip(src,i);
+                    ref readonly var value = ref Root.skip(src,i);
                     dst.WriteLine(value.Format());
                 }
             }
@@ -101,7 +101,7 @@ namespace Z0.Asm.Data
                 dst.WriteLine(header);
                 for(var i=0; i<src.Length; i++)
                 {
-                    ref readonly var value = ref Control.skip(src,i);
+                    ref readonly var value = ref Root.skip(src,i);
                     dst.WriteLine(value.Format());
                 }
             }
@@ -121,7 +121,7 @@ namespace Z0.Asm.Data
                 dst.WriteLine(header);
                 for(var i=0; i<src.Length; i++)
                 {
-                    ref readonly var value = ref Control.skip(src,i);
+                    ref readonly var value = ref Root.skip(src,i);
                     dst.WriteLine(value.Format());
                 }
             }

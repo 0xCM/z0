@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     using Z0.Asm.Data;
     using static Konst;
-    using static Control;
+    using static Root;
 
     public class t_resource_capture : t_asm<t_resource_capture>
     {

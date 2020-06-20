@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;    
-    using static Control;
+    using static Root;
     using static Typed;
 
     [ApiHost("specs")]

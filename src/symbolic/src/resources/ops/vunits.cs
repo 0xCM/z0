@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Control;
+    using static Root;
     using static SymBits;
     using static Imagine;
     using static VectorKonst;

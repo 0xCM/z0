@@ -16,7 +16,7 @@ namespace Z0
             where E : unmanaged, Enum 
         {
             var tc = Type.GetTypeCode(typeof(E).GetEnumUnderlyingType());
-            return (EnumScalarKind)Control.primal(tc);
+            return (EnumScalarKind)Root.primal(tc);
         }
     }
 }

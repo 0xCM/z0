@@ -34,6 +34,6 @@ namespace Z0
         /// External dependencies that don' participate in the componentization framework
         /// </summary>
         static ExternId[] External
-            => Control.type<ExternId>().LiteralValues<ExternId>().Where(x => x != 0);
+            => Root.type<ExternId>().LiteralValues<ExternId>().Where(x => x != 0);
     }
 }

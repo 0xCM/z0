@@ -16,7 +16,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe MemoryAddress From<T>(in T src)
             where T : unmanaged
-                => (T*)Control.pvoid(ref Control.edit(in src));        
+                => (T*)Root.pvoid(ref Root.edit(in src));        
 
         [MethodImpl(Inline)]
         public static unsafe MemoryAddress From(ulong src)
@@ -182,7 +182,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Hash()
-            => Control.hash(Location);
+            => Root.hash(Location);
 
         public override int GetHashCode()
             => (int)Hash();

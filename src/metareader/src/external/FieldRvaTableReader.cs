@@ -43,7 +43,7 @@ namespace Z0.MS
             this.Block = containingBlock.GetMemoryBlockAt(containingBlockOffset, this.RowSize * numberOfRows);
 
             if (!declaredSorted && !CheckSorted())
-                Control.@throw($"Table not sorted: {TableIndex.FieldRva}");
+                Root.@throw($"Table not sorted: {TableIndex.FieldRva}");
         }
 
         internal int GetRva(int rowId)

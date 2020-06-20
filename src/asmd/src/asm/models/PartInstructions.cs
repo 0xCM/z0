@@ -16,7 +16,7 @@ namespace Z0.Asm
     /// </summary>         
     public readonly struct PartInstructions: IIndex<HostInstructions>
     {
-        public static PartInstructions Empty => new PartInstructions(PartId.None, Control.array<HostInstructions>());
+        public static PartInstructions Empty => new PartInstructions(PartId.None, Root.array<HostInstructions>());
 
         /// <summary>
         /// The decoded instructions

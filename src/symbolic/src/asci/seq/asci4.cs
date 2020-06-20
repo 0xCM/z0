@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static asci4 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci4(Control.head(Control.cast<AsciCharCode,uint>(src)));
+            => new asci4(Root.head(Root.cast<AsciCharCode,uint>(src)));
 
         [MethodImpl(Inline)]
         public static implicit operator asci4(string src)

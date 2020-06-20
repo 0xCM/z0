@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Control;
+    using static Root;
 
     /// <summary>
     /// Characterizes a register
@@ -62,7 +62,7 @@ namespace Z0.Asm
         where N : unmanaged, ITypeNat
     {
         RegisterCode IRegOp.Code 
-            => (RegisterCode)Control.value<N>();
+            => (RegisterCode)Root.value<N>();
     }    
 
     public interface IRegOp16 : IRegOp<W16,ushort>

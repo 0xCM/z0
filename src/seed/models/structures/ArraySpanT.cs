@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using static Konst;
-    using static Control;
+    using static Root;
     
     /// <summary>
     /// An array that works like a span, more-or-less
@@ -69,7 +69,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Control.cast<T,byte>(Cells);
+            get => Root.cast<T,byte>(Cells);
         }
 
         [MethodImpl(Inline)]

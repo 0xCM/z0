@@ -160,7 +160,7 @@ namespace Z0.Machine
         {   
             if(asm.IsCall(src.Instruction))
             {
-                var bytes = Control.span(src.Encoded.Data);
+                var bytes = Root.span(src.Encoded.Data);
                 if(bytes.Length >= 5)
                 {
                     var encoded = bytes.Slice(1,4);
@@ -185,7 +185,7 @@ namespace Z0.Machine
 
             
             var opcount = src.Instruction.OpCount;
-            var summaries = Control.list<string>();
+            var summaries = Root.list<string>();
             for(var i =0; i<opcount; i++)               
             {
                 var kind = asm.OperandKind(inxs, i);

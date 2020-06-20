@@ -13,7 +13,7 @@ namespace Z0
     {        
         public static void require<N>(ulong src)
             where N : unmanaged, ITypeNat
-                => Control.require(value<N>() == src, $"The source value {src} does not match the required natural value {value<N>()}");        
+                => Root.require(value<N>() == src, $"The source value {src} does not match the required natural value {value<N>()}");        
 
         public static void require<N>(int src)
             where N : unmanaged, ITypeNat

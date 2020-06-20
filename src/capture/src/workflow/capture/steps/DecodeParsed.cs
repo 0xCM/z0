@@ -26,7 +26,7 @@ namespace Z0.Asm
         {   
             try
             {             
-                var dst = Control.alloc<AsmFunction>(src.Length);
+                var dst = Root.alloc<AsmFunction>(src.Length);
                 for(var i=0; i<src.Length; i++)
                 {
                     var member = src[i];

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     public readonly struct PrimalBitField<I,P,T,S,W> : IBitField<PrimalBitField<I,P,T,S,W>, I, P, T, S, W>
         where I : unmanaged, Enum
@@ -38,14 +38,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public S Segment(I index)
-            => Control.cast<T,S>(gbits.slice(Cell, SegPos(index), SegWidth(index)));
+            => Root.cast<T,S>(gbits.slice(Cell, SegPos(index), SegWidth(index)));
 
         [MethodImpl(Inline)]
         public void Segment(I index, S value) 
         {
             var pos = e8u(Position(index));
             var width = e8u(Width(index));
-            Cell = gbits.copy(Control.cast<S,T>(value), pos, width, Cell);   
+            Cell = gbits.copy(Root.cast<S,T>(value), pos, width, Cell);   
         }
 
         public S this[I index]

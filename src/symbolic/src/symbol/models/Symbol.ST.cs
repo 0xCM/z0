@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     /// <summary>
     /// Defines an S-symbol value covered by a T-storage cell

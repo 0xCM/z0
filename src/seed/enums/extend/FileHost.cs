@@ -24,9 +24,9 @@ namespace Z0
             {
                 var owner = Enums.Parse(components[0], PartId.None);
                 if(owner.IsSome())
-                    return Control.some(ApiHostUri.Define(owner, components[1]));
+                    return Root.some(ApiHostUri.Define(owner, components[1]));
             }
-            return Control.none<ApiHostUri>();
+            return Root.none<ApiHostUri>();
         }
 
         /// <summary>

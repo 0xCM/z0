@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public ref F Buffer(byte index)    
-            => ref Control.seek(ref Head, index);
+            => ref Root.seek(ref Head, index);
 
         /// <summary>
         /// Presents an index-identifed buffer as a span of bytes
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public ref readonly BufferToken<F> Token(byte index)
-            => ref Control.skip(Tokens, index);
+            => ref Root.skip(Tokens, index);
 
         /// <summary>
         /// Zero-fills a token-identified buffer and returns the cleared memory content

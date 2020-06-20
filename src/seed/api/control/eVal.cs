@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {                
         /// <summary>
         /// Reads an E-value from an enum of primal T-kind

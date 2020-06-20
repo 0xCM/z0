@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     [ApiHost]
     public readonly struct CpuidProcessor 

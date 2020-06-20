@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         public void RunPipe()
         {            
-            var parts = Control.array(PartId.DVec, PartId.GVec);
+            var parts = Root.array(PartId.DVec, PartId.GVec);
             Trace($"Running pipe for parts {parts.Format()}");
             var runner = AsmPipeRunner.Create(AppPaths, AsmCheck.Archives, CasePath("AsmPipeLog"));
             var handled = runner.RunPipe(parts);

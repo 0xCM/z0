@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public readonly struct Seq<T> : ISeq<Seq<T>,T>
     {
-        public static readonly Seq<T> Empty = new Seq<T>(Control.array<T>());
+        public static readonly Seq<T> Empty = new Seq<T>(Root.array<T>());
 
         public IEnumerable<T> Content {get;}
 

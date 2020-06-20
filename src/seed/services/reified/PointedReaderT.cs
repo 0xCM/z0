@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
     
     /// <summary>
     /// Defines a stream reader (of sourts) over a sequence of pointer-identified unmanaged values

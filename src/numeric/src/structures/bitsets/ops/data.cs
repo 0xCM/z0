@@ -14,31 +14,31 @@ namespace Z0
         public static ReadOnlySpan<single> Singles
         {
             [MethodImpl(Inline)]
-            get => Control.cast<byte,single>(BitSetData.Singletons);
+            get => Root.cast<byte,single>(BitSetData.Singletons);
         }
 
         public static ReadOnlySpan<duet> Duets
         {
             [MethodImpl(Inline)]
-            get => Control.cast<byte,duet>(BitSetData.Duets);
+            get => Root.cast<byte,duet>(BitSetData.Duets);
         }
 
         public static ReadOnlySpan<triad> Triads
         {
             [MethodImpl(Inline)]
-            get => Control.cast<byte,triad>(BitSetData.Triads);
+            get => Root.cast<byte,triad>(BitSetData.Triads);
         }
 
         public static ReadOnlySpan<quartet> Quartets
         {
             [MethodImpl(Inline)]
-            get => Control.cast<byte,quartet>(BitSetData.Quartets);
+            get => Root.cast<byte,quartet>(BitSetData.Quartets);
         }
 
         public static ReadOnlySpan<quintet> Quintets
         {
             [MethodImpl(Inline)]
-            get => Control.cast<byte,quintet>(BitSetData.Quintets);
+            get => Root.cast<byte,quintet>(BitSetData.Quintets);
         }
    }
 }

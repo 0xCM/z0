@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="index">The zero-based sequence index</param>
         [MethodImpl(Inline)]
         public ref Pair<T> Select(int index)
-            => ref Control.seek(Data, index);
+            => ref Root.seek(Data, index);
 
         /// <summary>
         /// Returns a mutable reference to an index-identified sequence element

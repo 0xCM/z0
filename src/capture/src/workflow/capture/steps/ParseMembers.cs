@@ -46,7 +46,7 @@ namespace Z0.Asm
                 var msg = AppMsg.Colorize($"{host} extract parse FAIL: {e}", AppMsgColor.Yellow);
                 term.print(msg);
                 term.errlabel(e, $"{host} extract parse FAIL");  
-                return Control.array<ParsedMember>();
+                return Root.array<ParsedMember>();
             }
         }
 

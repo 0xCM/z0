@@ -25,7 +25,7 @@ namespace Z0
             => ApiComposition.Assemble(StatelessSeed.Fatory.PartIndexBuilder.Build());
         
         static Lazy<IApiComposition> _Api {get;}
-            = Control.defer(ComposeApi);
+            = Root.defer(ComposeApi);
     }
     
     public abstract class TestContext<U> : TestContext, ITestContext<U>

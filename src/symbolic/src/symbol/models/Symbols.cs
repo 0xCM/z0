@@ -41,7 +41,7 @@ namespace Z0
         public ref readonly Symbol<S> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Control.skip(Data,index);
+            get => ref Root.skip(Data,index);
         }        
         
         public Symbols<S> this[int offset, int count]
@@ -86,7 +86,7 @@ namespace Z0
         public ref readonly Symbol<S,T> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Control.skip(Data,index);
+            get => ref Root.skip(Data,index);
         }        
 
         public Symbols<S,T> this[int offset, int count]
@@ -125,7 +125,7 @@ namespace Z0
         public ref readonly Symbol<S,T,N> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Control.skip(Data,index);
+            get => ref Root.skip(Data,index);
         }        
         
         public Symbols<S,T,N> this[int offset, int count]

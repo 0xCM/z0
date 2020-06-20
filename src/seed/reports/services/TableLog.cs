@@ -33,7 +33,7 @@ namespace Z0
                 if(emitHeader)
                     writer.WriteLine(format.FormatHeader());
 
-                Control.iter(data, r => writer.WriteLine(r.DelimitedText(format.Delimiter)));   
+                Root.iter(data, r => writer.WriteLine(r.DelimitedText(format.Delimiter)));   
                 return dst;                             
             }
             catch(Exception e)

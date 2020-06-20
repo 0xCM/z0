@@ -20,7 +20,7 @@ namespace Z0.Asm
         {
 
             var kinds = FixedOpKinds.Known.ToArray();
-            Control.iter(kinds, k => Trace(k));
+            Root.iter(kinds, k => Trace(k));
         }
     }
 }

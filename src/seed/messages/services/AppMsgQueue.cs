@@ -74,7 +74,7 @@ namespace Z0
             try
             {
                 using var writer = dst.Writer();
-                Control.iter(Dequeue(), msg => writer.WriteLine(msg.Format()));
+                Root.iter(Dequeue(), msg => writer.WriteLine(msg.Format()));
             }
             catch(Exception)
             {

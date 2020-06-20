@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static int bytecount<T>(int cells)
             where T : unmanaged
-                => cells * Control.size<T>();
+                => cells * Root.size<T>();
 
         /// <summary>
         /// Computes the minimum numbet of bytes required to hold a specified number of bits
@@ -65,11 +65,11 @@ namespace Z0
         public static int mincells<T>(ulong bc)
             where T : unmanaged
         {
-            if(Control.bitsize<T>() >= (int)bc)
+            if(Root.bitsize<T>() >= (int)bc)
                 return 1;
 
-            var q = (int)bc / Control.bitsize<T>();
-            var r = (int)bc % Control.bitsize<T>();
+            var q = (int)bc / Root.bitsize<T>();
+            var r = (int)bc % Root.bitsize<T>();
             return q + (r != 0 ? 1 : 0);
         }
 
@@ -171,12 +171,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static int tablecells<T>(int rows, int cols)
             where T : unmanaged
-                => tablecells((ulong)rows, (ulong)cols, Control.bitsize<T>());
+                => tablecells((ulong)rows, (ulong)cols, Root.bitsize<T>());
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static int tablecells<T>(ulong rows, ulong cols)
             where T : unmanaged
-                => tablecells(rows,  cols, Control.bitsize<T>());
+                => tablecells(rows,  cols, Root.bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols

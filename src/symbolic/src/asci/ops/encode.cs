@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     partial struct asci
     {
@@ -24,7 +24,7 @@ namespace Z0
         {
             var count = Math.Min(src.Length, dst.Length);
             for(var i=0; i<count; i++)
-                seek(dst,i) = Control.cast<T>((byte)skip(src,i));
+                seek(dst,i) = Root.cast<T>((byte)skip(src,i));
             return count;
         }
 

@@ -14,7 +14,7 @@ namespace Z0.MS
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Control;
+    using static Root;
     using static MetadataFlags;
 
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]

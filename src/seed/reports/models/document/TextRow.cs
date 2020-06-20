@@ -34,7 +34,7 @@ namespace Z0
             var count = Math.Min(dst.Length, Cells.Length);
             for(var i=0; i<count; i++)
             {
-                Control.seek(dst,i) = Cells[i].Content;
+                Root.seek(dst,i) = Cells[i].Content;
             }
         }
         

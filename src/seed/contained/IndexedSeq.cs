@@ -143,7 +143,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T[] Conform(T[] src)
-            => src == null || src.Length == 0 ? Control.array<T>(default(T)) : src;
+            => src == null || src.Length == 0 ? Root.array<T>(default(T)) : src;
 
     }
 }

@@ -19,7 +19,7 @@ namespace Z0.Machine
     {
         public readonly struct DecodedMachine : IMachineEvent<E>
         {
-            public static E Empty => new E(MachineIndex.Empty, Control.array<PartInstructions>());
+            public static E Empty => new E(MachineIndex.Empty, Root.array<PartInstructions>());
 
             [MethodImpl(Inline)]
             public static DecodedMachine Create(MachineIndex index, PartInstructions[] inxs)

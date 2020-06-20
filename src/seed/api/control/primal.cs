@@ -11,7 +11,7 @@ namespace Z0
 
     using PK = PrimalKind;
 
-    partial class Control
+    partial class Root
     {
         /// <summary>
         /// Returns the type-code identified primal kind
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The type code</param>
         [MethodImpl(Inline), Op]
         public static PrimalKind primal(TypeCode src)
-            => Control.skip(PrimalKinds,(int)src);
+            => Root.skip(PrimalKinds,(int)src);
 
         [MethodImpl(Inline), Op]
         public static PrimalKind primal(Type src)

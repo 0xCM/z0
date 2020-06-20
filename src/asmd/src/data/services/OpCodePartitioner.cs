@@ -8,7 +8,7 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     [ApiHost]
     public struct OpCodePartitoner

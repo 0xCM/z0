@@ -22,7 +22,7 @@ namespace Z0
         {
             int count = 0;
             for(var i=0; i<src.Length; i++)
-                if(f(Control.skip(src,i)))
+                if(f(Root.skip(src,i)))
                     count++;
             return count;
         }

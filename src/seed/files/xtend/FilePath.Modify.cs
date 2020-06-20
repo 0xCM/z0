@@ -24,14 +24,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         public static string[] ReadLines(this FilePath src)
-            => src.Exists ? File.ReadAllLines(src.FullPath) : Control.array<string>();
+            => src.Exists ? File.ReadAllLines(src.FullPath) : Root.array<string>();
 
         /// <summary>
         /// Reads the full content of a file into a byte array
         /// </summary>
         /// <param name="src">The file path</param>
         public static byte[] ReadBytes(this FilePath src)
-            => src.Exists ? File.ReadAllBytes(src.FullPath) : Control.array<byte>();
+            => src.Exists ? File.ReadAllBytes(src.FullPath) : Root.array<byte>();
 
         /// <summary>
         /// Deletes the file if it exists

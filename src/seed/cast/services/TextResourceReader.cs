@@ -16,7 +16,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(string src)
-            => Addresses.reference(Imagine.first(Control.span(src)));            
+            => Addresses.reference(Imagine.first(Root.span(src)));            
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<MemoryAddress> addresses(Type declarer)
@@ -31,7 +31,7 @@ namespace Z0
                 ref readonly var address = ref Imagine.skip(locations,i);
                 var data = Addresses.read<byte>(address, ResLength);
                 var content = Render(Symbols(data));
-                Control.seek(dst, i) = TextResource.Define((ulong)address, address, content);            
+                Root.seek(dst, i) = TextResource.Define((ulong)address, address, content);            
             }
             return count;
         }
@@ -41,7 +41,7 @@ namespace Z0
         {
             var locations = addresses(declarer);
             var count = locations.Length;
-            var dst = Control.alloc<TextResource>(count);
+            var dst = Root.alloc<TextResource>(count);
             read(locations, dst);
             return dst;
         }
@@ -51,7 +51,7 @@ namespace Z0
         {
             var locations = addresses(declarer);
             var count = locations.Length;
-            var dst = Control.span(Control.alloc<TextResource<E>>(count));
+            var dst = Root.span(Root.alloc<TextResource<E>>(count));
             for(var i=0; i<count; i++)
             {
                 ref readonly var address = ref Imagine.skip(locations,i);

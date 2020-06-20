@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     /// <summary>
     /// Defines an S-symbol value, of bit-width N, covered by a T-storage cell
@@ -74,7 +74,7 @@ namespace Z0
         /// </summary>
         public static ushort SegWidth 
         {
-            get => (ushort)Control.bitsize<T>();
+            get => (ushort)Root.bitsize<T>();
         }
         
         /// <summary>

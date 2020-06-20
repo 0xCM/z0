@@ -13,11 +13,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int bitsize<T>()            
-            => Control.bitsize<T>();
+            => Root.bitsize<T>();
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static int bitsize<T>(T rep)            
-            => Control.bitsize<T>(rep);
+            => Root.bitsize<T>(rep);
 
     }
 }

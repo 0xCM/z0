@@ -32,7 +32,7 @@ namespace Z0
                 case FixedWidth.W128: return random.FixedStream<F>(w128);
                 case FixedWidth.W256: return random.FixedStream<F>(w256);
                 case FixedWidth.W512: return random.FixedStream<F>(w512);
-                default: return Control.seq<F>();                    
+                default: return Root.seq<F>();                    
             }
         }
 

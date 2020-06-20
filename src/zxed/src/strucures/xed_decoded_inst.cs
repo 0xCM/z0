@@ -63,9 +63,9 @@ namespace Z0.Xed
         xed_decoded_inst_t(xed_uint8_t size) 
         {
             _n_operand_order = size;
-            _operand_order = Control.alloc<byte>(_n_operand_order);
-            _enc_data = Control.array<byte>();
-            _dec_data = Control.array<byte>();
+            _operand_order = Root.alloc<byte>(_n_operand_order);
+            _enc_data = Root.array<byte>();
+            _dec_data = Root.array<byte>();
             _decoded_length = default;
             _inst = default;
             ev = default;

@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         ref byte Bit(int index)
-            => ref Control.seek(Data,index);
+            => ref Root.seek(Data,index);
 
         public bit this[int index]
         {
@@ -59,7 +59,7 @@ namespace Z0
         {
             Span<char> dst = stackalloc char[BitCount];
             for(var i=0; i<BitCount; i++)
-                Control.seek(dst,i) = this[i].ToChar();
+                Root.seek(dst,i) = this[i].ToChar();
             return new string(dst);
         }
     }
@@ -79,7 +79,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int FieldIndex(E id)
-            => (int)BitOperations.Log2(Control.e32u(id));
+            => (int)BitOperations.Log2(Root.e32u(id));
 
         public bit this[E id]
         {

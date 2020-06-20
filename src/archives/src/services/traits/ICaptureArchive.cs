@@ -80,7 +80,7 @@ namespace Z0
         {
             if(parts.Length == 0)
             {
-                var dst = Control.list<FolderPath>();
+                var dst = Root.list<FolderPath>();
                 dst.Add(ExtractDir.Clear());
                 dst.Add(ParsedDir.Clear());
                 dst.Add(AsmDir.Clear());
@@ -93,13 +93,13 @@ namespace Z0
                 for(var i=0; i<parts.Length; i++)
                 {
                     var part = parts[i];
-                    Control.iter(ExtractDir.Files(part, Extract), f => f.Delete());
-                    Control.iter(ParsedDir.Files(part, Parsed), f => f.Delete());
-                    Control.iter(AsmDir.Files(part, Asm), f => f.Delete());
-                    Control.iter(CodeDir.Files(part, Hex), f => f.Delete());
-                    Control.iter(UnparsedDir.Files(part, Unparsed), f => f.Delete());
+                    Root.iter(ExtractDir.Files(part, Extract), f => f.Delete());
+                    Root.iter(ParsedDir.Files(part, Parsed), f => f.Delete());
+                    Root.iter(AsmDir.Files(part, Asm), f => f.Delete());
+                    Root.iter(CodeDir.Files(part, Hex), f => f.Delete());
+                    Root.iter(UnparsedDir.Files(part, Unparsed), f => f.Delete());
                 }
-                return Control.array<FolderPath>();
+                return Root.array<FolderPath>();
             }
         }                
         

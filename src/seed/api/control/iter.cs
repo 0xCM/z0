@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control    
+    partial class Root    
     {
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each

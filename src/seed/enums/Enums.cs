@@ -112,7 +112,7 @@ namespace Z0
         public static unsafe T scalar<E,T>(E e)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Control.tVal<E,T>(e);
+                => Root.tVal<E,T>(e);
 
         /// <summary>
         /// Reads a generic enum member from a generic value

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         public static void ThrowEmptySpanError()
             => throw new Exception($"The span is empty");

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Control;
+    using static Root;
 
     public readonly struct BinaryOpEmitter
     {
@@ -29,7 +29,7 @@ namespace Z0
         {   
             var tFunc = typeof(BinaryOp<T>);
             var tOperand = typeof(T);
-            var args = Control.array(tOperand, tOperand);
+            var args = Root.array(tOperand, tOperand);
             var idOpType = Identities.Services.Diviner.Identify(tOperand);
             var idMethod = OpIdentityParser.Service.Parse($"{name}_({idOpType},{idOpType})");
 

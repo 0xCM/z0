@@ -26,7 +26,7 @@ namespace Z0.Asm
         public AsmInstructions[] Decode(ReadOnlySpan<UriHex> src)
         {
             var count = src.Length;
-            var dst = Control.alloc<AsmInstructions>(count);
+            var dst = Root.alloc<AsmInstructions>(count);
             Decode(src, dst);
             return dst;
         }
@@ -34,7 +34,7 @@ namespace Z0.Asm
         public AsmInstructions[] Decode(params UriHex[] src)
         {
             var count = src.Length;
-            var dst = Control.alloc<AsmInstructions>(count);
+            var dst = Root.alloc<AsmInstructions>(count);
             Decode(src, dst);
             return dst;
         }

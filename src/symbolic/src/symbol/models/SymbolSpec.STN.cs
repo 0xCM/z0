@@ -51,7 +51,7 @@ namespace Z0
         public ushort SegWidth
         {
             [MethodImpl(Inline)]
-            get => (ushort)Control.bitsize<T>();
+            get => (ushort)Root.bitsize<T>();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         public ushort Capacity
         {
             [MethodImpl(Inline)]
-            get => (ushort)((ushort)Control.bitsize<T>()/(ushort)Typed.value<N>());
+            get => (ushort)((ushort)Root.bitsize<T>()/(ushort)Typed.value<N>());
         }
 
         public MetadataToken SegDomain

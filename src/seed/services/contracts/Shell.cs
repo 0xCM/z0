@@ -42,7 +42,7 @@ namespace Z0
         protected static PartIndex KnownParts => LazyParts.Value;
 
         static Lazy<PartIndex> LazyParts {get;} 
-            = Control.defer(Stateless.PartIndexBuilder.Build);        
+            = Root.defer(Stateless.PartIndexBuilder.Build);        
 
         protected static void Launch(params string[] args)
         {

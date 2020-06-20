@@ -8,26 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
-    using static Control;
+    using static Root;
     using static Typed;
 
     partial class Symbolic
     {
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci2 src)
-            => Control.bytes(src);
+            => Root.bytes(src);
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci4 src)
-            => Control.bytes(src);
+            => Root.bytes(src);
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci5 src)
-            => Control.bytes(src).Slice(0,5);
+            => Root.bytes(src).Slice(0,5);
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci8 src)
-            => Control.bytes(src);
+            => Root.bytes(src);
 
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci16 src)

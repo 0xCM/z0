@@ -15,7 +15,7 @@ namespace Z0
         public static ITestCaseIdentity Service => default(TestCaseIdentity);
 
         public static string name(IFunc f)
-            => Control.ifempty(f.GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.Name), f.GetType().DisplayName());
+            => Root.ifempty(f.GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.Name), f.GetType().DisplayName());
         
         /// <summary>
         /// Produces the formatted identifier of the declaring assembly

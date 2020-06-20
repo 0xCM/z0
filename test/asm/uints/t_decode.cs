@@ -47,7 +47,7 @@ namespace Z0.Asm
                     );                
             }
 
-            Control.iter(TestCases, DescribeResource);         
+            Root.iter(TestCases, DescribeResource);         
         }
 
         void check_cases()

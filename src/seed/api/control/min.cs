@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {            
         [MethodImpl(Inline)]
         public static sbyte min(sbyte a, sbyte b)

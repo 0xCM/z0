@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static asci32 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci32(Control.cast<AsciCharCode,byte>(src));
+            => new asci32(Root.cast<AsciCharCode,byte>(src));
 
         internal readonly Vector256<byte> Storage;        
 
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci32(ReadOnlySpan<byte> src)
         {
-            Storage = SymBits.vload(w, Control.head(src));
+            Storage = SymBits.vload(w, Root.head(src));
         }
 
         [MethodImpl(Inline)]

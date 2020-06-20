@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Control;
+    using static Root;
     using static Konst;
 
     public readonly struct ResIdentity<T>
@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static implicit operator ResIdentity(ResIdentity<T> src)
-            => new ResIdentity(src.Name, MemRef.define(src.Location, src.ByteCount), Control.primal<T>());
+            => new ResIdentity(src.Name, MemRef.define(src.Location, src.ByteCount), Root.primal<T>());
 
         [MethodImpl(Inline)]
         public ResIdentity(string name, ulong location, int cells)

@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         ParsedFunctions(int count)
         {
-            Data = Control.alloc<BinaryResource>(count);
+            Data = Root.alloc<BinaryResource>(count);
             var index = 0;
             Register(index++, Identify.Op(nameof(or_ᐤ8uㆍ8uᐤ)), or_ᐤ8uㆍ8uᐤ);
             Register(index++, Identify.Op(nameof(or_ᐤ16uㆍ16uᐤ)), or_ᐤ16uㆍ16uᐤ);

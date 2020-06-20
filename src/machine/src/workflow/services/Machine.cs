@@ -85,7 +85,7 @@ namespace Z0.Machine
             var names = Delimit(CallInfo.AspectNames, sep);            
 
             writer.WriteLine(names);
-            Control.iter(delimited, writer.WriteLine);
+            Root.iter(delimited, writer.WriteLine);
 
         }
 
@@ -117,7 +117,7 @@ namespace Z0.Machine
 
         void ParseReports()
         {
-            Control.iter(Files.ParseFiles, ParseReport);
+            Root.iter(Files.ParseFiles, ParseReport);
             Broker.Raise(IndexedCode.Create(IndexBuilder.Freeze()));
         }
         
@@ -130,7 +130,7 @@ namespace Z0.Machine
 
         void DecodeParts(MachineIndex src)
         {
-            var dst = Control.list<PartInstructions>();
+            var dst = Root.list<PartInstructions>();
             var parts = src.Parts;
             
             for(var k=0; k<parts.Length; k++)
@@ -162,9 +162,9 @@ namespace Z0.Machine
 
         HostInstructions Decode(HostCode hcs)
         {
-            var inxs = Control.list<MemberInstructions>();    
+            var inxs = Root.list<MemberInstructions>();    
             
-            var dst = Control.list<Instruction>();
+            var dst = Root.list<Instruction>();
             void OnDecoded(Instruction inxs)
                 => dst.Add(inxs);
             
@@ -189,7 +189,7 @@ namespace Z0.Machine
 
         void Index(MemberParseReport report)
         {
-            Control.iter(report.Records, Index);            
+            Root.iter(report.Records, Index);            
         }
 
         void Index(MemberParseRecord record)

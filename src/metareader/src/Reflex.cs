@@ -119,6 +119,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         ref readonly Type indexed(TC code)
-            => ref Control.skip(Types, (int)code);    
+            => ref Root.skip(Types, (int)code);    
     }
 }

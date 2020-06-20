@@ -19,7 +19,7 @@ namespace Z0.Asm
         INullary<MemberInstructions>,
         IIndex<LocatedInstruction>
     {
-        public static MemberInstructions Empty => new MemberInstructions(MemoryAddress.Empty, Control.array<LocatedInstruction>());
+        public static MemberInstructions Empty => new MemberInstructions(MemoryAddress.Empty, Root.array<LocatedInstruction>());
         
         [MethodImpl(Inline)]
         public static MemberInstructions Create(MemoryAddress hostaddr, UriCode uriCode, Instruction[] src)

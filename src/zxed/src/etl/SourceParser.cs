@@ -8,7 +8,7 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Control;
+    using static Root;
     using static SourceMarkers;
 
     readonly struct SourceParser
@@ -65,7 +65,7 @@ namespace Z0.Xed
                 if(data[i].Text.ContainsAny(INSTRUCTION_SEQ))  
                     return ParseSequence(data, i);
             }
-            return Control.array<InstructionData>();
+            return Root.array<InstructionData>();
         }
 
         static void Advance(ref int rowidx)

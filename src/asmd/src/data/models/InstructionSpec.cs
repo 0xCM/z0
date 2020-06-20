@@ -11,7 +11,7 @@ namespace Z0.Asm.Data
     public readonly struct InstructionSpec
     {        
         public static InstructionSpec Empty 
-            => new InstructionSpec(InstructionExpression.Empty, string.Empty, Control.array<string>());        
+            => new InstructionSpec(InstructionExpression.Empty, string.Empty, Root.array<string>());        
         
         public InstructionExpression Source {get;}
         

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         /// <summary>
         /// Applies a function to an input sequence to yield a transformed output sequence
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
         {
-            var count = Control.length(src,dst);
+            var count = Root.length(src,dst);
             for(var i= 0; i<count; i++)
                 seek(dst,i) = f(skip(src,i));
         }
@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void apply<T>(ReadOnlySpan<T> src, Func<T,T> f, Span<T> dst)
         {
-            var count = Control.length(src,dst);
+            var count = Root.length(src,dst);
             for(var i= 0; i<count; i++)
                 seek(dst,i) = f(skip(src,i));
         }

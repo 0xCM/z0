@@ -114,7 +114,7 @@ namespace Z0
                 
                 for(var i=0; i<count; i++)
                 {
-                    ref readonly var handle = ref Control.skip(handles,i);
+                    ref readonly var handle = ref Root.skip(handles,i);
                     
                 }
                 

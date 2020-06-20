@@ -16,7 +16,7 @@ namespace Z0
             if(tE.IsConstructedGenericType)
                 return tE.GetGenericArguments();
             else
-                return Control.array<Type>();
+                return Root.array<Type>();
         }
     }
 }

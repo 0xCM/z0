@@ -51,8 +51,8 @@ namespace Z0
         {
             var src = this;
             var count = src.FieldCount;
-            var fields = Control.alloc<TabularField>(count);
-            var headers = Control.alloc<string>(count);
+            var fields = Root.alloc<TabularField>(count);
+            var headers = Root.alloc<string>(count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var x = ref src[i];

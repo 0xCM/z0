@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Konst;
-    using static Control;
+    using static Root;
     using static Typed;
     
     [ApiHost]
@@ -150,7 +150,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {                
             var src = span<N>(n); 
-            var pSrc = Control.constptr(head(src));
+            var pSrc = Root.constptr(head(src));
             return new MemRef(pSrc, src.Length);
         }
 

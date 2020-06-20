@@ -7,7 +7,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         /// <summary>
         /// Deposits a source value, identified by pointer and offset, into a target reference

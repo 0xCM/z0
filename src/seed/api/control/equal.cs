@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Control
+    partial class Root
     {
         [MethodImpl(Inline)]
         public static bool equal<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)

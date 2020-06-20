@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using static Control;
+    using static Root;
 
     public interface IOperand : ISized
     {

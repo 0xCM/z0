@@ -60,7 +60,7 @@ namespace Z0
             get
             {
                 var sig = convert<T,double>(StdDev);
-                Control.require(sig != 0);
+                Root.require(sig != 0);
 
                 return convert<T>(sig*sig);
             }            
@@ -72,7 +72,7 @@ namespace Z0
             get
             {
                 var sig = convert<T,double>(StdDev);
-                Control.require(sig != 0);
+                Root.require(sig != 0);
 
                 var prec = MathUtil.recip(sig*sig);
                 return convert<T>(prec);

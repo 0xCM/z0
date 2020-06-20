@@ -80,7 +80,7 @@ namespace Z0
                     writer.WriteLine(header.Render(format.Delimiter));
                 }
 
-                Control.iter(data, r => writer.WriteLine(r.DelimitedText(format.Delimiter)));   
+                Root.iter(data, r => writer.WriteLine(r.DelimitedText(format.Delimiter)));   
                 return dst;                             
             }
             catch(Exception e)
