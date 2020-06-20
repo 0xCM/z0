@@ -8,14 +8,13 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
 
     /// <summary>
     /// Represents an opcode identifier
     /// </summary>
     public readonly struct OpCodeIdentifier
     {                
-        public asci32 Body {get;}
+        public readonly asci32 Value;
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpCodeIdentifier src)
@@ -27,7 +26,7 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public static implicit operator asci32(OpCodeIdentifier src)
-            => src.Body;
+            => src.Value;
 
         [MethodImpl(Inline)]
         public static implicit operator OpCodeIdentifier(asci32 src)
@@ -44,55 +43,55 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline)]
         public OpCodeIdentifier(asci32 src)
         {
-            Body = src;
+            Value = src;
         }
 
         [MethodImpl(Inline)]
         public OpCodeIdentifier(string src)
         {
-            Body = asci.encode(n32,src ?? string.Empty);
+            asci.encode(src,out Value);
+            //Body = asci.encode(n, src ?? string.Empty);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Body.IsEmpty;
+            get => Value.IsEmpty;
         }
 
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(Body);
+            get => asci.bytes(Value);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(Body);
+            get => asci.decode(Value);
         }
 
         public OpCodeIdentifier Zero 
             => Empty;
-
         
         [MethodImpl(Inline)]
         public string Format()
-            => asci.format(Body);
+            => asci.format(Value);
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeIdentifier src)
-            => Body.Equals(src.Body);
+            => Value.Equals(src.Value);
         
         public override string ToString()
             => Format();
         
         public override int GetHashCode()
-            => Body.GetHashCode();
+            => Value.GetHashCode();
         
         public override bool Equals(object src)
             => src is OpCodeIdentifier id && Equals(id);
 
         public static OpCodeIdentifier Empty 
-            => new OpCodeIdentifier(asci32.Null);
+            => new OpCodeIdentifier(asci.Null);
     }
 }

@@ -27,13 +27,13 @@ namespace Z0
         /// Advertises the supported unary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<ULK> UnaryBitLogicKinds
-            => Enums.valarray<ULK>();
+            => Enums.literals<ULK>();
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<BLK> BinaryBitLogicKinds
-            => Enums.valarray<BLK>();
+            => Enums.literals<BLK>();
 
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators

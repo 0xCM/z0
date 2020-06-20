@@ -18,7 +18,7 @@ namespace Z0.Asm.Data
         
         public readonly int OpCodeCount;
         
-        public readonly CommandInfo[] OpCodeRecords;
+        public readonly OpCodeRecord[] OpCodeRecords;
 
         public readonly AppResourceDoc ResourceDoc;
 
@@ -26,26 +26,19 @@ namespace Z0.Asm.Data
 
         public const byte EncodingDelimiter = 0xFF;
 
-        public AsmCommandGroup[] CommandGroups
-            => OpCodeRecords.Select(r => r.Mnemonic).Distinct().Map(group);
-
         [MethodImpl(Inline), Op]
         public OpCodeIdentifier opcode(int index)
             => OpCodeIdentifiers[index];
-
-        [MethodImpl(Inline), Op]
-        static AsmCommandGroup group(asci16 name)
-            => new AsmCommandGroup(name);
 
         [MethodImpl(Inline)]
         OpCodeDataset(int i)
         {
             ResourceDoc = AsmD.Service.OpCodeSpecDoc;
             OpCodeCount = ResourceDoc.RowCount;
-            OpCodeRecords = new CommandInfo[OpCodeCount];
-            CommandInfoParser.Service.Parse(ResourceDoc,OpCodeRecords);
+            OpCodeRecords = new OpCodeRecord[OpCodeCount];
+            CommandInfoParser.Service.Parse(ResourceDoc, OpCodeRecords);
             OpCodeIdentifiers = new OpCodeIdentifier[OpCodeCount];
-            OpCodeIdentity.Service.Compute(OpCodeRecords,OpCodeIdentifiers);
+            OpCodeIdentity.Service.Compute(OpCodeRecords, OpCodeIdentifiers);
         }
     }
 }

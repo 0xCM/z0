@@ -46,7 +46,7 @@ namespace Z0
             var name = typeof(E).Name;
             var dst = Archive.DatasetPath(name);
             var header = text.concat("Sequence". PadRight((int)FW.Sequence), SpacePipe, typeof(E).Name);
-            var literals = Enums.literals<E>();
+            var literals = Enums.index<E>();
 
             using var writer = dst.Writer();
             writer.WriteLine(header);

@@ -8,11 +8,10 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
     
-    public readonly struct MnemonicExpression : ISymbolic<MnemonicExpression,asci16>
+    public readonly struct MnemonicExpression
     {
-        public asci16 Body {get;}
+        public readonly asci16 Value;
 
         [MethodImpl(Inline)]
         public static implicit operator MnemonicExpression(string src)
@@ -20,15 +19,15 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public MnemonicExpression(asci16 src)
-            => Body = src;
+            => Value = src;
 
         [MethodImpl(Inline)]
         public MnemonicExpression(string src)
-            => Body = asci.encode(n16, src);
+            => asci.encode(src, out Value);
 
         [MethodImpl(Inline)]
         public MnemonicExpression(char[] src)
-            => Body = asci.encode(n16, src);
+            => asci.encode(src, out Value);
 
         public MnemonicExpression Zero 
             => Empty;
@@ -39,46 +38,44 @@ namespace Z0.Asm.Data
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Body.Length;
+            get => Value.Length;
         }
 
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => Body.IsEmpty;
+            get => Value.IsEmpty;
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => Body.IsNonEmpty;
+            get => Value.IsNonEmpty;
         }
 
-        [Ignore]
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(Body);
+            get => asci.bytes(Value);
         }
 
-        [Ignore]
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(Body);
+            get => asci.decode(Value);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(MnemonicExpression src)
-            => src.Body.Equals(Body);
+            => src.Value.Equals(Value);
         
         public override bool Equals(object src)
             => src is MnemonicExpression x && Equals(x);
         
         public override int GetHashCode()
-            => Body.GetHashCode();        
+            => Value.GetHashCode();        
         public string Format()
-            => Body.Format();
+            => Value.Format();
         
         public override string ToString()
             => Format();

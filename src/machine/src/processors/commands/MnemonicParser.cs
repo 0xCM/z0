@@ -23,7 +23,7 @@ namespace Z0.Asm
         MnemonicParser(int capacity)
         {
             Index = new Dictionary<string, Mnemonic>(capacity);
-            var literals = Enums.valarray<Mnemonic>();
+            var literals = Enums.literals<Mnemonic>();
             foreach(var l in literals)
                 Index[l.ToString().ToLower()] = l;
         }

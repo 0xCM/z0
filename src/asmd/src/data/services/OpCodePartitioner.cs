@@ -32,21 +32,21 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline), Op]
-        public void Partition(ReadOnlySpan<CommandInfo> src, in OpCodePartition handler)
+        public void Partition(ReadOnlySpan<OpCodeRecord> src, in OpCodePartition handler)
         {
             for(var i=seq; i<src.Length; i++)
                 Partition(skip(src,i), handler);
         }
 
         [MethodImpl(Inline), Op]
-        public void Partition(in CommandInfo src, in OpCodePartition handler)
+        public void Partition(in OpCodeRecord src, in OpCodePartition handler)
         {
             Process(src, handler);
             seq++;
         }
 
         [MethodImpl(Inline)]
-        void Process(in CommandInfo src, in OpCodePartition handler)
+        void Process(in OpCodeRecord src, in OpCodePartition handler)
         {
             Process(OpCode(src), handler);
             Process(Instruction(src), handler);
@@ -85,19 +85,19 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline)]
-        static MnemonicExpression Mnemonic(in CommandInfo src)
+        static MnemonicExpression Mnemonic(in OpCodeRecord src)
             => new MnemonicExpression(src.Mnemonic);
 
         [MethodImpl(Inline)]
-        static CpuidExpression Cpuid(in CommandInfo src)
+        static CpuidExpression Cpuid(in OpCodeRecord src)
             => new CpuidExpression(src.CpuId);
 
         [MethodImpl(Inline)]
-        static OpCodeExpression OpCode(in CommandInfo src)
+        static OpCodeExpression OpCode(in OpCodeRecord src)
             => new OpCodeExpression(src.OpCode);
 
         [MethodImpl(Inline)]
-        static InstructionExpression Instruction(in CommandInfo src)
-            => new InstructionExpression(src.InstructionCode);
+        static InstructionExpression Instruction(in OpCodeRecord src)
+            => new InstructionExpression(src.Instruction);
     }
 }

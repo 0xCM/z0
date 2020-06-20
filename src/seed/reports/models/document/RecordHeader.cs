@@ -18,7 +18,7 @@ namespace Z0
         public F[] Fields
         {
             [MethodImpl(Inline)]
-            get => Enums.valarray<F>();
+            get => Enums.literals<F>();
         }
 
         public string[] Labels

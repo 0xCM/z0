@@ -49,13 +49,13 @@ namespace Z0
         /// Advertises the supported unary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<ULK> UnaryLogicKinds
-            => Enums.valarray<ULK>();
+            => Enums.literals<ULK>();
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<BLK> BinaryLogicKinds
-            => Enums.valarray<BLK>();
+            => Enums.literals<BLK>();
 
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators
@@ -67,19 +67,19 @@ namespace Z0
         /// Advertises the supported unary arithmetic operators
         /// </summary>
         public static ReadOnlySpan<UAR> UnaryAritmeticKinds
-            => Enums.valarray<UAR>();
+            => Enums.literals<UAR>();
 
         /// <summary>
         /// Advertises the supported binary arithmetic operators
         /// </summary>
         public static ReadOnlySpan<BAR> BinaryArithmeticKinds
-            => Enums.valarray<BAR>();
+            => Enums.literals<BAR>();
 
         /// <summary>
         /// Advertises the supported comparison operators
         /// </summary>
         public static ReadOnlySpan<BCK> BinaryComparisonKinds
-            => Enums.valarray<BCK>();
+            => Enums.literals<BCK>();
 
 
         [Closures(Integers)]

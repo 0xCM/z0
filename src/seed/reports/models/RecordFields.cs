@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public F[] Literals<F>()
             where F : unmanaged, Enum            
-                => Enums.valarray<F>();
+                => Enums.literals<F>();
 
         [MethodImpl(Inline)]
         public string[] Labels<F>()

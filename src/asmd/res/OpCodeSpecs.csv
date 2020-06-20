@@ -1,4 +1,4 @@
-Sequence   | Mnemonic                 | Expression                     | Instruction                                                  | M16      | M32      | M64      | CpuId      | Id                                                
+Sequence   | Mnemonic                 | OpCode                         | Instruction                                                  | M16      | M32      | M64      | CpuId      | Id                                                
 0          | <db>                     | <db>                           | <db>                                                         | Y        | Y        | Y        | 8086+      | DeclareByte                                       
 1          | <dd>                     | <dd>                           | <dd>                                                         | Y        | Y        | Y        | 8086+      | DeclareDword                                      
 2          | <dq>                     | <dq>                           | <dq>                                                         | Y        | Y        | Y        | 8086+      | DeclareQword                                      

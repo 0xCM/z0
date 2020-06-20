@@ -120,7 +120,6 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         static ParseResult<T> fail<T>(string src, Exception e, T rep = default)
-            => ParseResult<T>.Fail(src, e);            
-
+            => ParseResult<T>.Fail(src, e);
     }
 }

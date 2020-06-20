@@ -16,8 +16,8 @@ namespace Z0.Asm.Data
         public static OpCodeServices Service => default;
         
         [MethodImpl(Inline), Op]
-        public void Partition(in OpCodePartitoner processor, in OpCodePartition handler, ReadOnlySpan<CommandInfo> src)
-            => processor.Partition(src,handler);
+        public void Partition(in OpCodePartitoner processor, in OpCodePartition handler, ReadOnlySpan<OpCodeRecord> src)
+            => processor.Partition(src, handler);
 
         [Op]
         public OpCodePartition PartitionOpCodes(int seq = 0)
@@ -42,29 +42,5 @@ namespace Z0.Asm.Data
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> encode(in EncodedOpCode src)
             => MemoryMarshal.CreateReadOnlySpan(ref refs.edit(in src),1).AsBytes();                     
-
-        // [MethodImpl(Inline)]
-        // public OpCodeSpec Parse(OpCodeExpression src)            
-        //     => new OpCodeSpec(src, src.Data.SplitClean(Chars.Space).Map(c => new OpCodePart(c)));
-
-        // [MethodImpl(Inline)]
-        // public InstructionSpec Parse(InstructionExpression src)     
-        // {       
-        //     var mnemonic = src.Data.LeftOf(Chars.Space);
-        //     var operands = src.Data.RightOf(Chars.Space).SplitClean(Chars.Comma);
-        //     return new InstructionSpec(src, mnemonic, operands);
-        // }       
-
-        // [MethodImpl(Inline)]
-        // public void GenCode(in OpCodeDataset src)
-        // {
-        //     ReadOnlySpan<OpCodeRecord> codes = src.OpCodeRecords;
-        //     for(var i=0; i<codes.Length; i++)
-        //     {
-        //         ref readonly var record = ref skip(codes,i);
-        //         var opcode = Parse(new OpCodeExpression(record.Expression));                
-        //         var inxs = Parse(new InstructionExpression(record.Instruction));
-        //     }            
-        // }
    }
 }

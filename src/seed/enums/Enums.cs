@@ -197,7 +197,7 @@ namespace Z0
         /// </summary>
         /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static EnumLiterals<E> literals<E>(bool peek = false)
+        public static EnumLiterals<E> index<E>(bool peek = false)
             where E : unmanaged, Enum
                 => peek ? CreateIndex<E>() : (EnumLiterals<E>)IndexCache.GetOrAdd(typeof(E), _ => CreateIndex<E>());
 
@@ -207,7 +207,7 @@ namespace Z0
         /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static E[] valarray<E>(bool peek = false)
+        public static E[] literals<E>(bool peek = false)
             where E : unmanaged, Enum
                 => peek ? CreateLiteralArray<E>() : (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiteralArray<E>());
 
@@ -251,9 +251,4 @@ namespace Z0
         public static string[] names<E>()
             => Enum.GetNames(typeof(E));
    }
-
-    public static partial class XTend
-    {
-        
-    }   
 }

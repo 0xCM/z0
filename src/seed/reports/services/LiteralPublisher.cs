@@ -52,7 +52,7 @@ namespace Z0
             where E : unmanaged, Enum
         {
             var f = descriptor ?? (x => string.Empty);
-            var literals = Enums.literals<E>();
+            var literals = Enums.index<E>();
             var dst = new LiteralRecord[literals.Length];            
             var primal = typeof(E).GetEnumUnderlyingType();
             var flags = typeof(E).Tagged<FlagsAttribute>();

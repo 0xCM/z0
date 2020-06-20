@@ -12,7 +12,6 @@ namespace Z0
     
     using static Konst;
     using static Vectors;
-    using static Typed;
 
     public class t_vperm : t_permute<t_vperm>
     {
@@ -239,7 +238,7 @@ namespace Z0
         public void perm4_symbols_random()
         {
             var perms = Random.EnumValues(A, B, C, D);
-            var all = Enums.valarray<Perm4L>().ToSet();
+            var all = Enums.literals<Perm4L>().ToSet();
             for(var i=0; i<RepCount; i++)
             {
                 var perm = perms.First();

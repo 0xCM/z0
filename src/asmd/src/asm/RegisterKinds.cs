@@ -41,7 +41,7 @@ namespace Z0.Asm
             => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.W), (uint)dst));
 
         public static RegisterKind[] SymbolKinds
-            => Enums.valarray<RegisterKind>();
+            => Enums.literals<RegisterKind>();
 
         public static IEnumerable<RegisterKind> Gp8 
             => SymbolKinds.Where(r => Width(r) == W.W8);

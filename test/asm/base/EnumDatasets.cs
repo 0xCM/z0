@@ -28,7 +28,7 @@ namespace Z0.Asm
             where F : unmanaged, Enum
         {
             var dst = text.build();
-            var labels = Enums.valarray<F>();
+            var labels = Enums.literals<F>();
             for(var i=0; i<labels.Length; i++)
                 dst.Delimit(labels[i], labels[i].ToString(), delimiter);
             return dst.ToString();

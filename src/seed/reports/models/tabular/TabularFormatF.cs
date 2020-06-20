@@ -78,8 +78,8 @@ namespace Z0
             var dst = text.build();
             for(var i=0; i<FieldCount; i++)
             {
-                ref readonly var field = ref this[i];
-                dst.Append(Space);
+                ref readonly var field = ref this[i];                
+                //dst.Append(Space);
                 dst.Append(Delimiter);
                 dst.Append(Space);
                 dst.Append(field.Name.PadRight(field.Width));

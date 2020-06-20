@@ -8,11 +8,10 @@ namespace Z0.Asm.Data
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
     
-    public readonly struct OpCodeExpression : ISymbolic<OpCodeExpression,asci32>
+    public readonly struct OpCodeExpression
     {
-        public asci32 Body {get;}
+        public readonly asci32 Value;
 
         [MethodImpl(Inline)]
         public static implicit operator OpCodeExpression(string src)
@@ -20,28 +19,26 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline)]
         public OpCodeExpression(string src)
-            => Body = asci.encode(n32, src);
+            => asci.encode(src, out Value);
 
         [MethodImpl(Inline)]
         public OpCodeExpression(asci32 src)
-            => Body = src;
+            => Value = src;
 
         [MethodImpl(Inline)]
         public OpCodeExpression(char[] src)
-            => Body = asci.encode(n32, src);
+            => asci.encode(src, out Value);
 
-        [Ignore]
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(Body);
+            get => asci.bytes(Value);
         }
 
-        [Ignore]
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(Body);
+            get => asci.decode(Value);
         }
         
         public OpCodeExpression Zero 
@@ -50,32 +47,31 @@ namespace Z0.Asm.Data
         public bool IsEmpty 
         {
             [MethodImpl(Inline)]
-            get => Body.IsEmpty;
+            get => Value.IsEmpty;
         }
 
         public bool IsNonEmpty 
         {
             [MethodImpl(Inline)]
-            get => Body.IsNonEmpty;
+            get => Value.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(OpCodeExpression src)
-            => src.Body.Equals(Body);
+            => src.Value.Equals(Value);
         
         public override bool Equals(object src)
             => src is OpCodeExpression x && Equals(x);
         
         public override int GetHashCode()
-            => Body.GetHashCode();        
+            => Value.GetHashCode();        
         public string Format()
-            => Body.Format();
+            => Value.Format();
         
         public override string ToString()
             => Format();
 
         public static OpCodeExpression Empty 
             => new OpCodeExpression(asci32.Null);
-
     }
 }

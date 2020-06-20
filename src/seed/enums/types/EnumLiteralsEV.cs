@@ -54,6 +54,6 @@ namespace Z0
             => Data.GetEnumerator();
 
         public EnumLiterals<E> Indices
-            => Enums.literals<E>();
+            => Enums.index<E>();
     }
 }

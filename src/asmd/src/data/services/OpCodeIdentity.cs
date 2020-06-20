@@ -19,11 +19,11 @@ namespace Z0.Asm.Data
         /// </summary>
         /// <param name="src">The source record</param>
         [MethodImpl(Inline), Op]
-        public OpCodeIdentifier Compute(in CommandInfo src)
+        public OpCodeIdentifier Compute(in OpCodeRecord src)
             => new OpCodeIdentifier(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        public void Compute(ReadOnlySpan<CommandInfo> src, Span<OpCodeIdentifier> dst)
+        public void Compute(ReadOnlySpan<OpCodeRecord> src, Span<OpCodeIdentifier> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)

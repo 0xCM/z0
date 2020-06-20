@@ -15,7 +15,8 @@ namespace Z0
         {
             var tc = default(AsciTestCase01);
             var result = AsciTestCases.execute(tc);
-            Trace(result.Description);
+            using var writer = CaseWriter(FileExtensions.Csv);
+            writer.Write(result.Description);
             Claim.yea(result.Success);
         }
 

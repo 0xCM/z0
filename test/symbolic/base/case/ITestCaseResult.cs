@@ -22,6 +22,7 @@ namespace Z0
 
         C Case {get;}
 
-        string ITestCaseResult.CaseName => Case.CaseName;        
+        string ITestCaseResult.CaseName 
+            => Case.CaseName;        
     }    
 }

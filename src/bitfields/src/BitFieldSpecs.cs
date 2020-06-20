@@ -23,7 +23,7 @@ namespace Z0
         public static BitFieldSpec256<F> specify<F>(W256 w)
             where F : unmanaged, Enum
         {
-            Span<F> values = Enums.valarray<F>();
+            Span<F> values = Enums.literals<F>();
             var widths = values.AsBytes();
             var count = math.min(widths.Length, 32);
             var data = default(Vector256<byte>);

@@ -41,13 +41,13 @@ namespace Z0
         /// Advertises the supported unary opeators
         /// </summary>
         public ReadOnlySpan<ULK> UnaryOpKinds
-            => Enums.valarray<ULK>();
+            => Enums.literals<ULK>();
 
         /// <summary>
         /// Advertises the supported binary opeators
         /// </summary>
         public ReadOnlySpan<BLK> BinaryOpKinds
-            => Enums.valarray<BLK>();
+            => Enums.literals<BLK>();
          
         /// <summary>
         /// Advertises the supported ternary opeators

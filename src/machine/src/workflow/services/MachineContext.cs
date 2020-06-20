@@ -37,7 +37,7 @@ namespace Z0.Machine
         internal MachineContext(IAsmContext src, PartId[] parts)
         {                        
             AsmContext = src;
-            Parts = parts.Length == 0 ? Enums.literals<PartId>().Where(x => x.LiteralValue != PartId.None).Map(x => x.LiteralValue) : parts;
+            Parts = parts.Length == 0 ? Enums.index<PartId>().Where(x => x.LiteralValue != PartId.None).Map(x => x.LiteralValue) : parts;
             var archiveRoot = src.AppPaths.ForApp(PartId.Control).AppCapturePath;
             Archive = Archives.Services.CaptureArchive(archiveRoot);            
         }

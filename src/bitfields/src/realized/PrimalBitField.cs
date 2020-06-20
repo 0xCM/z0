@@ -29,9 +29,9 @@ namespace Z0
         internal PrimalBitField(T data)
         {
             Cells = new T[1]{data};
-            Indices = Enums.literals<I>().Map(x => x.LiteralValue);
-            Positions = Enums.literals<P>().Map(x => x.LiteralValue);
-            Widths = Enums.literals<W>().Map(x => x.LiteralValue);
+            Indices = Enums.index<I>().Map(x => x.LiteralValue);
+            Positions = Enums.index<P>().Map(x => x.LiteralValue);
+            Widths = Enums.index<W>().Map(x => x.LiteralValue);
         }
 
         public T Data => Cell;

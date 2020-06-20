@@ -13,6 +13,7 @@ namespace Z0.Asm.Data
     using R = CommandInfo;
     using W = AsmFieldWidths;
 
+
     public enum CommandInfoField : uint
     {
         Sequence = 0 | (W.Sequence << WidthOffset),
@@ -42,11 +43,7 @@ namespace Z0.Asm.Data
     {                   
         public static string FormatHeader(char delimiter = FieldDelimiter)
             => RecordHeader.format<F>(delimiter);
-        
-        public static CommandInfo Empty 
-            => new CommandInfo(0, MemoryAddress.Empty, Address32.Empty, Address16.Empty, asci16.Null, 
-                    asci32.Null, BinaryCode.Empty, asci32.Null, asci32.Null, asci16.Null, OpCodeId.INVALID);        
-    
+            
         public int Sequence;
 
         public MemoryAddress Address;
@@ -130,6 +127,11 @@ namespace Z0.Asm.Data
 
         public override string ToString()
             => Format();
-        int ISequential.Sequence => 0;
+        
+        int ISequential.Sequence
+            => 0;
+
+        public static CommandInfo Empty 
+            => new CommandInfo(0, 0, 0, 0, asci.Null, asci.Null, BinaryCode.Empty, asci.Null, asci.Null, asci.Null, 0);        
     }
 }

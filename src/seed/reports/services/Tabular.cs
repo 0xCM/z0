@@ -69,7 +69,7 @@ namespace Z0
         public static TabularFormat<F> format<F>()
             where F : unmanaged, Enum
         {
-            var specs = Enums.valarray<F>();
+            var specs = Enums.literals<F>();
             var dst = new TabularField<F>[specs.Length];
             for(var i=0; i<dst.Length; i++)
                 dst[i] = new TabularField<F>(specs[i]);
@@ -99,7 +99,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static F[] fields<F>()
             where F : unmanaged, Enum
-                => Enums.valarray<F>();
+                => Enums.literals<F>();
 
         [MethodImpl(Inline)]
         public static string[] headers<F>()

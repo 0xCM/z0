@@ -67,7 +67,7 @@ namespace Z0.Asm.Data
         {
             if(head(MnemonicSeq) > 0)
             {
-                if(!LastMnemonic.Body.Equals(src.Body))
+                if(!LastMnemonic.Value.Equals(src.Value))
                     Include(src);
             }
             else
@@ -86,9 +86,6 @@ namespace Z0.Asm.Data
 
             Mode(ocp.Sequence) = src;
         }
-
-        public ReadOnlySpan<AsmCommandGroup> CommandGroups
-            => mnemonics.Slice(0, head(MnemonicSeq)).Map(group);
 
         public int ProcessedCount
         {
@@ -144,6 +141,6 @@ namespace Z0.Asm.Data
 
         [MethodImpl(Inline), Op]
         static AsmCommandGroup group(MnemonicExpression expression)
-            => new AsmCommandGroup(expression.Body);
+            => new AsmCommandGroup(expression.Value);
     }
 }

@@ -22,8 +22,8 @@ namespace Z0
             where E1: unmanaged, Enum
             where E2: unmanaged, Enum
         {
-            var first = Enums.literals<E1>().NamedValues.ToDictionary();
-            var second = Enums.literals<E2>().NamedValues.ToDictionary();
+            var first = Enums.index<E1>().NamedValues.ToDictionary();
+            var second = Enums.index<E2>().NamedValues.ToDictionary();
             var names = first.Keys.Union(second.Keys).ToHashSet();
             var correlated = new Dictionary<string,LiteralCorrelation<E1,E2>>(names.Count);
             foreach(var name in names)

@@ -8,7 +8,7 @@ namespace Z0
 
     using static Konst;
 
-    public class t_hex : UnitTest<t_hex>
+    public class t_hex : t_symbolic<t_hex>
     {
         public void hexdigits_define()
         {
@@ -58,7 +58,6 @@ namespace Z0
             Claim.eq(Hex.digit(x3,14), x3c[14]);
             Claim.eq(Hex.digit(x3,15), x3c[15]);
         }
-
 
         public void hexdigits_parse()
         {
