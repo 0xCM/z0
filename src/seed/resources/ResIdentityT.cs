@@ -13,23 +13,32 @@ namespace Z0
     public readonly struct ResIdentity<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public static implicit operator ResIdentity(ResIdentity<T> src)
-            => new ResIdentity(src.Name, MemRef.define(src.Location, src.ByteCount), Root.primal<T>());
-
-        [MethodImpl(Inline)]
-        public ResIdentity(string name, ulong location, int cells)
-        {
-            this.Name = name;
-            this.Location = location;
-            this.CellCount = cells;
-        }
-
         public string Name {get;}
 
-        public ulong Location {get;}
+        public MemRef Reference {get;}
 
-        public int CellCount {get;}
+        [MethodImpl(Inline)]
+        public static implicit operator ResIdentity(ResIdentity<T> src)
+            => new ResIdentity(src.Name,src.Reference, Root.primal<T>());
+
+        [MethodImpl(Inline)]
+        public ResIdentity(string name, MemRef memref)
+        {
+            Name = name;
+            Reference = memref;            
+        }
+
+        public MemoryAddress Location 
+        {
+            [MethodImpl(Inline)]
+            get => Reference.Address;
+        }
+
+        public int CellCount 
+        {
+            [MethodImpl(Inline)]
+            get => ByteCount/CellSize;
+        }
 
         public int CellSize 
         {
@@ -37,10 +46,10 @@ namespace Z0
             get => size<T>();
         }
 
-        public int ByteCount 
+        public ByteSize ByteCount 
         {
             [MethodImpl(Inline)]
-            get => CellCount*CellSize;
+            get => Reference.Length;
         }
     }
 }

@@ -3,16 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Root;
     using static Typed;
 
-    partial class Symbolic
+    partial struct asci
     {
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> bytes(ReadOnlySpan<AsciCharCode> src)
+            => Root.cast<AsciCharCode,byte>(src);        
+
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci2 src)
             => Root.bytes(src);
@@ -33,7 +36,7 @@ namespace Z0
         public static Span<byte> bytes(in asci16 src)
         {                        
             var dst = ByteBlocks.u8s(ByteBlocks.alloc(n16));
-            SymBits.vstore(src.Storage, ref head(dst));
+            SymBits.vstore(src.Storage, ref Root.head(dst));
             return dst;
         }
 
@@ -41,7 +44,7 @@ namespace Z0
         public static Span<byte> bytes(in asci32 src)
         {                        
             var dst = ByteBlocks.u8s(ByteBlocks.alloc(n32));
-            SymBits.vstore(src.Storage, ref head(dst));
+            SymBits.vstore(src.Storage, ref Root.head(dst));
             return dst;
         }
 
@@ -49,8 +52,8 @@ namespace Z0
         public static Span<byte> bytes(in asci64 src)
         {                        
             var dst = ByteBlocks.u8s(ByteBlocks.alloc(n64));
-            SymBits.vstore(src.Storage, ref head(dst));
+            SymBits.vstore(src.Storage, ref Root.head(dst));
             return dst;
-        }
+        }        
     }
 }

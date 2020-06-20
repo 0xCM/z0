@@ -38,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref readonly asci64 cast<A>(N64 n, in A src)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IAsciSequence            
                 => ref Root.cast<A,asci64>(src);
     }
 }

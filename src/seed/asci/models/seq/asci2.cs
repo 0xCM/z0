@@ -6,71 +6,59 @@ namespace Z0
 {    
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    using N = N4;    
+
+    using N = N2;
 
     /// <summary>
-    /// Defines an asci code sequence of length 4
+    /// Defines an asci code sequence of length 2
     /// </summary>
-    public readonly struct asci4 : IAsciSequence<asci4,N>
-    {        
-        public static asci4 Blank => new asci4(0x20202020);
+    public readonly struct asci2 : IAsciSequence<asci2,N>
+    {
+        public static asci2 Blank => new asci2(0x2020);
 
-        public static asci4 Null => new asci4(0);
+        public static asci2 Null => new asci2(0);
 
-        public const int Size = 4;
+        public const int Size = 2;
 
-        static N n => default;
-        
-        internal readonly uint Storage;
+        internal readonly ushort Storage;
 
         [MethodImpl(Inline)]
-        public static asci4 From(ReadOnlySpan<AsciCharCode> src)
-            => new asci4(Root.head(Root.cast<AsciCharCode,uint>(src)));
-
-        [MethodImpl(Inline)]
-        public static implicit operator asci4(string src)
-            => new asci4(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(asci4 src)
-            => src.Text;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(asci4 src)
+        public static implicit operator ReadOnlySpan<byte>(asci2 src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(asci4 src)
+        public static implicit operator ReadOnlySpan<char>(asci2 src)
             => src.Decoded;
 
         [MethodImpl(Inline)]
-        public asci4(uint src)
+        public static asci2 From(ReadOnlySpan<AsciCharCode> src)
+            => new asci2(Root.head(Root.cast<AsciCharCode,ushort>(src)));
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(asci2 src)
+            => src.Text;
+
+        [MethodImpl(Inline)]
+        public asci2(ushort src)
         {
             Storage = src;
         }
-
-        [MethodImpl(Inline)]
-        public asci4(string src)
-        {
-            Storage = asci.encode(n,src).Storage;
-        }
-
+        
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Storage == 0;
+            get => Null.Equals(this);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Storage != 0;
+            get => !Null.Equals(this);
         }
-
-        public asci4 Zero
+        public asci2 Zero
         {
             [MethodImpl(Inline)]
             get => Null;
@@ -79,18 +67,19 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Symbolic.length(this);
+            get => asci.length(this);
         }
+
         public int MaxLength
         {
             [MethodImpl(Inline)]
             get => Size;
         }
-        
+
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => Symbolic.bytes(this);
+            get => asci.bytes(this);
         }
 
         public ReadOnlySpan<char> Decoded
@@ -106,11 +95,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(asci4 src)
+        public bool Equals(asci2 src)
             => Storage == src.Storage;
 
         public override bool Equals(object src)
-            => src is asci4 j && Equals(j);
+            => src is asci2 x && Equals(x);
 
         public override int GetHashCode()
             => Storage.GetHashCode();
@@ -118,16 +107,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Text;
- 
+
         public override string ToString()
             => Text;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(asci4 a, asci4 b)
+        public static bool operator ==(asci2 a, asci2 b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(asci4 a, asci4 b)
+        public static bool operator !=(asci2 a, asci2 b)
             => !a.Equals(b);
+        
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(asci2 src)
+            => src.Storage;    
     }
 }

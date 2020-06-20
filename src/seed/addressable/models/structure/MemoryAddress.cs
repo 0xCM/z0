@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable, IIdentification<MemoryAddress>
+    public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable, IIdentification<MemoryAddress>
     {
         public ulong Location {get;}
 
@@ -69,8 +69,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public unsafe static implicit operator MemoryAddress(void* p)
+        public static implicit operator MemoryAddress(void* p)
             => Addresses.address(p);
+
+        [MethodImpl(Inline)]
+        public static explicit operator char*(MemoryAddress src)
+            => (char*)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte*(MemoryAddress src)
+            => (byte*)src.Location;
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(IntPtr src)

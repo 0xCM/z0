@@ -81,7 +81,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Symbolic.length(this);
+            get => asci.length(this);
         }
 
         public int MaxLength
@@ -89,6 +89,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Size;
         }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => asci.bytes(this);
+        }
+        
         public asci64 Zero
         {
             [MethodImpl(Inline)]
@@ -107,11 +114,6 @@ namespace Z0
             get => new asci32(Storage.Hi);
         }
 
-        public ReadOnlySpan<byte> Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Symbolic.bytes(this);
-        }
 
         public ReadOnlySpan<char> Decoded
         {

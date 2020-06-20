@@ -95,7 +95,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Symbolic.length(this);
+            get => asci.length(this);
         }
 
         public int MaxLength
@@ -107,7 +107,7 @@ namespace Z0
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => Symbolic.bytes(this);
+            get => asci.bytes(this);
         }
 
         public ReadOnlySpan<char> Decoded
@@ -128,11 +128,11 @@ namespace Z0
  
         [MethodImpl(Inline)]
         public void CopyTo(Span<byte> dst)
-            => Symbolic.copy(this,dst);
+            => asci.copy(this,dst);
 
         [MethodImpl(Inline)]
         public void CopyTo(ref byte dst)
-            => Symbolic.copy(this, ref dst);
+            => asci.copy(this, ref dst);
 
          public override int GetHashCode()
             => Storage.GetHashCode();

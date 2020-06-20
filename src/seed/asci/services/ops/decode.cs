@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void decode(ReadOnlySpan<byte> src, Span<char> dst)
         {            
-            var count = length(src,dst);
+            var count = Root.length(src,dst);
             for(var i=0; i<count; i++)            
                 seek(dst,i) = @char(skip(src,i));
         }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static As;
+    using static Root;
 
     public class t_asci_encode : t_symbolic<t_asci_encode>
     {        

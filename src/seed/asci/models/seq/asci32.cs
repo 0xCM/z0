@@ -12,7 +12,7 @@ namespace Z0
 
     using N = N32;
     using W = W256;
-    
+            
     /// <summary>
     /// Defines an asci code sequence of length 32
     /// </summary>
@@ -84,13 +84,19 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Symbolic.length(this);
+            get => asci.length(this);
         }
         
         public int MaxLength
         {
             [MethodImpl(Inline)]
             get => Size;
+        }
+
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => asci.bytes(this);
         }
 
         public asci32 Zero
@@ -111,11 +117,6 @@ namespace Z0
             get => new asci16(Storage.GetUpper());
         }
 
-        public ReadOnlySpan<byte> Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Symbolic.bytes(this);
-        }
 
         public ReadOnlySpan<char> Decoded
         {

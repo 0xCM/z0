@@ -47,16 +47,23 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Null;
         }
-        
+
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Symbolic.length(this);
+            get => asci.length(this);
         }
+        
         public int MaxLength
         {
             [MethodImpl(Inline)]
             get => Size;
+        }
+        
+        public ReadOnlySpan<byte> Encoded
+        {
+            [MethodImpl(Inline)]
+            get => asci.bytes(this);
         }
 
         public string Text

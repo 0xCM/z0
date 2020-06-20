@@ -10,12 +10,6 @@ namespace Z0.Asm.Data
     using static Konst;
     using static Typed;
 
-    // public interface IIdentified<F,T>
-    // {
-
-
-    // }
-
     /// <summary>
     /// Represents an opcode identifier
     /// </summary>
@@ -68,7 +62,7 @@ namespace Z0.Asm.Data
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => Symbolic.bytes(Body);
+            get => asci.bytes(Body);
         }
 
         public ReadOnlySpan<char> Decoded

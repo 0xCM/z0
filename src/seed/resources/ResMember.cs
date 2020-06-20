@@ -10,22 +10,24 @@ namespace Z0
 
     using static Konst;
     
-    public readonly struct ResourceMember : ITextual
+    public readonly struct ResMember : ITextual
     {
         public MemberInfo Member {get;}
 
         public MemRef Reference {get;}
         
-        public MemoryAddress Address => Reference.Address;
+        public MemoryAddress Address 
+            => Reference.Address;
 
-        public ByteSize Size => Reference.Length;
-
-        [MethodImpl(Inline)]
-        public static ResourceMember Define(MemberInfo member, MemRef memref)
-            => new ResourceMember(member, memref);
+        public ByteSize Size 
+            => Reference.Length;
 
         [MethodImpl(Inline)]
-        public ResourceMember(MemberInfo member, MemRef memref)
+        public static ResMember Define(MemberInfo member, MemRef memref)
+            => new ResMember(member, memref);
+
+        [MethodImpl(Inline)]
+        public ResMember(MemberInfo member, MemRef memref)
         {
             Member = member;
             Reference = memref;

@@ -8,17 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Root;
 
     public readonly struct ResIdentity
     {
-        [MethodImpl(Inline)]
-        public static ResIdentity Define(string name, MemRef memref, PrimalKind type)
-            => new ResIdentity(name, memref, type);
+        public string Name {get;}
+
+        public MemRef Reference {get;}
+        
+        public PrimalKind DataType {get;}
 
         [MethodImpl(Inline)]
         public static ResIdentity<T> Define<T>(string name, ulong location, int length)
             where T : unmanaged
-                => new ResIdentity<T>(name,location,length);
+                => new ResIdentity<T>(name, memref(location, length));
         
         [MethodImpl(Inline)]
         public ResIdentity(string name, MemRef memref, PrimalKind type)
@@ -26,18 +29,6 @@ namespace Z0
             Name = name;
             Reference = memref;
             DataType = type;
-        }
-
-        public string Name {get;}
-
-        public MemRef Reference {get;}
-        
-        public PrimalKind DataType {get;}
-        
-        public int CellCount  
-            => Reference.Length;
-
-        public MemoryAddress Address
-            => Reference.Address;
+        }    
     }
 }

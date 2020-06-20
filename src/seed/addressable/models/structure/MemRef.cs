@@ -13,10 +13,6 @@ namespace Z0
     public readonly struct MemRef : IAddressable<MemRef>, ITextual, IEquatable<MemRef>
     {
         readonly Vector128<ulong> Data;        
-
-        [MethodImpl(Inline)]
-        public static MemRef define(MemoryAddress address, ByteSize size)
-            => new MemRef(address,size);
         
         [MethodImpl(Inline)]
         public static unsafe Span<byte> read(MemRef src)

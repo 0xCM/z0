@@ -9,12 +9,9 @@ namespace Z0
 
     using static Konst;
 
-    partial struct asci
-    {
-        public static AsciNull Null 
-            => default;
-    }
-
+    /// <summary>
+    /// Stateless polytype that implicitly converts to the asci null defined for a reified asci sequence
+    /// </summary>
     public readonly struct AsciNull
     {
         [MethodImpl(Inline)]

@@ -11,9 +11,7 @@ namespace Z0
     using static Konst;
     using static AsciKonst;
 
-    using API = SymbolicData;
-
-    readonly struct AsciDataStrings
+    public readonly struct AsciDataStrings
     {
         public static AsciDataStrings Service => default;
         
@@ -76,8 +74,6 @@ namespace Z0
         public ReadOnlySpan<char> chars(sbyte offset, sbyte count)
             => Spans.cast<char>(CharBytes).Slice(offset, count);
             
-            //=> Control.cast<char>(CharBytes).Slice(offset, count);
-
         /// <summary>
         /// Returns the acsci symbols corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
         /// </summary>
@@ -112,27 +108,27 @@ namespace Z0
             get => new int[2]{C000.Length, C001.Length};
         }
 
-        ReadOnlySpan<ulong> ByteResources
+        ReadOnlySpan<MemoryAddress> ByteResources
         {
             [MethodImpl(Inline)]
-            get => new ulong[2]{API.location(head(CharBytes)), API.location(head(B001))};
+            get => new MemoryAddress[2]{Root.address(head(CharBytes)), Root.address(head(B001))};
         }
 
-        ReadOnlySpan<ulong> TextResources
+        ReadOnlySpan<MemoryAddress> TextResources
         {
             [MethodImpl(Inline)]
-            get => new ulong[2]{API.location(head(C000)), API.location(head(C001))};
+            get => new MemoryAddress[2]{Root.address(head(C000)), Root.address(head(C001))};
         }
 
         ReadOnlySpan<ResIdentity<byte>> ByteResInfo
             => new ResIdentity<byte>[ByteResCount]{
                 ResIdentity.Define<byte>(
                     name: nameof(CharBytes), 
-                    location: API.location(head(CharBytes)),
+                    location: Root.address(head(CharBytes)),
                     length: CharBytes.Length),
                 ResIdentity.Define<byte>(
                     name: nameof(B001), 
-                    location: API.location(head(B001)),
+                    location: Root.address(head(B001)),
                     length: B001.Length),
                 };
 
@@ -140,11 +136,11 @@ namespace Z0
             => new ResIdentity<char>[TextResCount]{
                 ResIdentity.Define<char>(
                     name: nameof(S000), 
-                    location: API.location(head(C000)),
+                    location: Root.address(head(C000)),
                     length: S000.Length),
                 ResIdentity.Define<char>(
                     name: nameof(S001), 
-                    location: API.location(head(C001)),
+                    location: Root.address(head(C001)),
                     length: S001.Length),
                 };            
     }

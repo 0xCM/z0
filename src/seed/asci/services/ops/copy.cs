@@ -3,14 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{    
     using System;
     using System.Runtime.CompilerServices;
-
+    
     using static Konst;
-
-    partial class Symbolic
-    {   
+    partial struct asci
+    {        
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, ref byte dst)
             => SymBits.vstore(src.Storage, ref dst);            
@@ -33,6 +32,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci64 src, Span<byte> dst)
-            => SymBits.vstore(src.Storage, dst);            
+            => SymBits.vstore(src.Storage, dst);
     }
 }
