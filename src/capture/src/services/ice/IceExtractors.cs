@@ -52,7 +52,7 @@ namespace Z0.Asm
         public static AsmInstructionCode InstructionCode(Iced.Instruction src)
         {
             var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return AsmInstructionCode.Define(
+            return new AsmInstructionCode(
                 opcode.ToOpCodeString(), 
                 opcode.ToInstructionString());
         }

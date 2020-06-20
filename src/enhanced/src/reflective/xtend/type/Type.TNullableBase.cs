@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
         public static Type TNullableBase(this Type src)
-            => src.IsNullableType() ? Nullable.GetUnderlyingType(src) : TEmpty;
+            => src.IsNullableType() ? Nullable.GetUnderlyingType(src) : EmptyType;
     }
 }

@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
+    using static Konst;
     partial class XTend
     {        
         /// <summary>
@@ -13,11 +12,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The class to format</param>
         public static string Format(this OperatorTypeClass src)
-            =>  src.IsNone 
+            =>  src.IsEmpty 
                 ? string.Empty 
                 : "f:" + text.format(Identity.identify(src.OperandType))
                             .Replicate(src.OperatorClass.ArityValue() + 1)
-                            .Intersperse(CharText.AsciArrow)
+                            .Intersperse(AsciArrow)
                             .Concat();
     }
 }

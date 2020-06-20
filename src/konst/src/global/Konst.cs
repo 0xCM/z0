@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The empty type
         /// </summary>
-        public static Type TEmpty => typeof(void);
+        public static Type EmptyType => typeof(void);
 
         /// <summary>
         /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
@@ -55,19 +55,41 @@ namespace Z0
         /// </summary>
         public const string Space = " ";
 
+        /// <summary>
+        /// Indicates that emitted content should overwrite whatever file content may exist
+        /// </summary>
         public const FileWriteMode Overwrite = FileWriteMode.Overwrite;
 
+        /// <summary>
+        /// Indicates that emitted content should be appended to a file, rather than replacing a file
+        /// </summary>
         public const FileWriteMode Append = FileWriteMode.Append;
 
         public const byte AsciNone = (byte)AsciCharCode.Null;
 
+        /// <summary>
+        /// Canonical return value for search operation that returns a nonnegative vaule upon succes
+        /// </summary>
         public const int NotFound = -1;
 
+        /// <summary>
+        /// The "->" character sequence
+        /// </summary>
+        public const string AsciArrow = "->";         
+
+        /// <summary>
+        /// The ":=" character sequence
+        /// </summary>
+        public const string Define = ":=";
+
+        /// <summary>
+        /// The " | " character sequence
+        /// </summary>
+        public const string SpacePipe = " | ";
 
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(src), src.Length));
-
     }
 }

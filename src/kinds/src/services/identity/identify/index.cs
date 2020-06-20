@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
@@ -66,7 +65,5 @@ namespace Z0
             var duplicated = duplicates.Select(d => Identify.Op(d)).ToArray();
             return new OpIndex<T>(HashTable, duplicated);
         }
-
-
     }
 }

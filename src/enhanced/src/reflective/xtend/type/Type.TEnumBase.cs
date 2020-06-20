@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
         public static Type TEnumBase(this Type src)
-            => src.IsEnum ? src.GetEnumUnderlyingType() : TEmpty;
+            => src.IsEnum ? src.GetEnumUnderlyingType() : EmptyType;
     }
 }

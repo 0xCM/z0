@@ -32,9 +32,82 @@ namespace Z0
         public static implicit operator @enum<E,T>(E src)
             => new @enum<E,T>(src);
 
+
         [MethodImpl(Inline)]
         public static implicit operator @enum<E,T>(T src)
             => new @enum<E,T>(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(@enum<E,T> a, @enum<E,T> b)
+            => emath.eq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(@enum<E,T> a, @enum<E,T> b)
+            => emath.neq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator <(@enum<E,T> a, @enum<E,T> b)
+            => emath.lt(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator >(@enum<E,T> a, @enum<E,T> b)
+            => emath.gt(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(@enum<E,T> a, @enum<E,T> b)
+            => emath.lteq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(@enum<E,T> a, @enum<E,T> b)
+            => emath.gteq(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator +(@enum<E,T> a, @enum<E,T> b)
+            => emath.add(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator -(@enum<E,T> a, @enum<E,T> b)
+            => emath.sub(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator *(@enum<E,T> a, @enum<E,T> b)
+            => emath.mul(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator /(@enum<E,T> a, @enum<E,T> b)
+            => emath.div(a,b);
+        
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator %(@enum<E,T> a, @enum<E,T> b)
+            => emath.mod(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator -(@enum<E,T> a)
+            => emath.negate(a);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator &(@enum<E,T> a, @enum<E,T> b)
+            => emath.and(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator |(@enum<E,T> a, @enum<E,T> b)
+            => emath.or(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator ^(@enum<E,T> a, @enum<E,T> b)
+            => emath.xor(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator >>(@enum<E,T> a, int offset)
+            => emath.srl(a,(byte)offset);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator <<(@enum<E,T> a, int offset)
+            => emath.sll(a,(byte)offset);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator ~(@enum<E,T> a)
+            => emath.not(a);
 
         [MethodImpl(Inline)]
         public @enum(E literal)
@@ -71,6 +144,10 @@ namespace Z0
         public bool Equals(@enum<E,T> src)
             => Literal.Equals(src.Literal);
 
+        public override bool Equals(object src)
+            => src is @enum<E,T> x && Equals(x);
+        public override int GetHashCode()
+            => Literal.GetHashCode();
        public string Format()
             => $"{Literal}";
 

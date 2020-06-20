@@ -13,7 +13,7 @@ namespace Z0
     }     
 
     public interface IAddressable<F> : IAddressable, INullity, INullary<F>
-        where F : unmanaged, IAddressable<F>
+        where F : struct, IAddressable<F>
     {
 
     }

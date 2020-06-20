@@ -55,7 +55,7 @@ namespace Z0
         static OpIdentity identify(MethodInfo src, NumericKind k)
         {
             var t = k.SystemType();
-            if(src.IsOpenGeneric() && t.IsSome())
+            if(src.IsOpenGeneric() && t.IsNonEmpty())
                 return identify(src.MakeGenericMethod(t));
             else
                 return identify(src);

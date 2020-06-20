@@ -156,7 +156,7 @@ namespace Z0
         /// </summary>
         public const byte Bit29 = 29;
  
-         /// <summary>
+        /// <summary>
         /// Identifies term 30 of a bit sequence
         /// </summary>
         public const byte Bit30 = 30;
@@ -205,5 +205,55 @@ namespace Z0
         /// Identifies term 39 of a bit sequence
         /// </summary>
         public const byte Bit39 = 39; 
+
+        /// <summary>
+        /// Identifies term 40 of a bit sequence
+        /// </summary>
+        public const byte Bit40 = 40;
+
+        /// <summary>
+        /// Identifies term 41 of a bit sequence
+        /// </summary>
+        public const byte Bit41 = 41;
+
+        /// <summary>
+        /// Identifies term 44 of a bit sequence
+        /// </summary>
+        public const byte Bit42 = 42;
+
+        /// <summary>
+        /// Identifies term 44 of a bit sequence
+        /// </summary>
+        public const byte Bit43 = 43;
+
+        /// <summary>
+        /// Identifies term 44 of a bit sequence
+        /// </summary>
+        public const byte Bit44 = 44;
+
+        /// <summary>
+        /// Identifies term 45 of a bit sequence
+        /// </summary>
+        public const byte Bit45 = 45;
+
+        /// <summary>
+        /// Identifies term 46 of a bit sequence
+        /// </summary>
+        public const byte Bit46 = 46;
+
+        /// <summary>
+        /// Identifies term 47 of a bit sequence
+        /// </summary>
+        public const byte Bit47 = 47;
+
+        /// <summary>
+        /// Identifies term 48 of a bit sequence
+        /// </summary>
+        public const byte Bit48 = 48;
+
+        /// <summary>
+        /// Identifies term 49 of a bit sequence
+        /// </summary>
+        public const byte Bit49 = 49;          
     }
 }

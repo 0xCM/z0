@@ -185,7 +185,7 @@ namespace Z0.Asm
                 Notify($"tCell := {tCell.Name}");
             }
             
-            Claim.require(tCell.IsSome());
+            Claim.require(tCell.IsNonEmpty());
 
             if(tVector == typeof(Vector128<sbyte>))
             {
@@ -243,7 +243,7 @@ namespace Z0.Asm
                 Notify($"tCell := {tCell.Name}");
             }
             
-            Claim.require(tCell.IsSome());
+            Claim.require(tCell.IsNonEmpty());
 
             if(tVector == typeof(Vector256<sbyte>))
             {

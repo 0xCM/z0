@@ -8,12 +8,30 @@ namespace Z0
     {
         None = 0,
 
+        /// <summary>
+        /// Indicates a CSV file that contains unprocessed/unexecutable x86-encoded data
+        /// </summary>
         Extract = 1, //*.x.csv
-
+        
+        /// <summary>
+        /// Indicates a CSV file that contains text-formatted x86-encoded/executable data
+        /// </summary>
         Parsed = 2, //*.p.csv
 
-        Asm = 3, //*.asm
+        /// <summary>
+        /// Indicates formated asm
+        /// </summary>
+        Asm = 3, 
 
-        Hex = 4, //*.hex
+        /// <summary>
+        /// Indicates text-formatted x86-encoded assembly
+        /// </summary>
+        Hex = 4,
+
+        /// <summary>
+        /// Indicates text-formatted CIL instructions
+        /// </summary>
+        Cil = 5,        
+
     }   
 }

@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
         public static Type TPointer(this Type src)
-            => src.IsPointer ? src.GetElementType() : TEmpty;
+            => src.IsPointer ? src.GetElementType() : EmptyType;
     }
 }

@@ -19,20 +19,14 @@ namespace Z0.Asm
         public readonly string Expression;
         
         [MethodImpl(Inline)]
-        public static AsmInstructionCode Define(string opcode, string expr)
-            => new AsmInstructionCode(opcode,expr);
-
-        [MethodImpl(Inline)]
-        AsmInstructionCode(string opcode, string expr)
+        public AsmInstructionCode(string opcode, string expr)
         {
             Expression = expr;
             OpCode = opcode;
         }
 
-        const string Sep = CharText.Space + CharText.Pipe + CharText.Pipe + CharText.Space;
-
         public string Format()
-            => String.Concat(Expression, Sep, OpCode);
+            => String.Concat(Expression, SpacePipe, OpCode);
         
         public override string ToString()
             => Format();
