@@ -12,8 +12,6 @@ namespace Z0
     using static Konst;
     using static Control;
     
-    using static Asm.CaptureWorkflowEvents;
-
     public class CaptureHost : ICaptureHost
     {               
         public IAppMsgSink Sink {get;}
@@ -76,8 +74,8 @@ namespace Z0
 
         void EmitImm(params PartId[] parts)
         {
-            ImmWorkflow.ClearArchive();
-            ImmWorkflow.EmitRefined();
+            ImmWorkflow.ClearArchive(parts);
+            ImmWorkflow.EmitRefined(parts);
         }
 
         void EmitPrimary(params PartId[] parts)

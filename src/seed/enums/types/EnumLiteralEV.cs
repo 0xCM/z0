@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines an E-V parametric enum value
     /// </summary>
-    public readonly struct EnumLiteral<E,V> : IEnumLiteral<EnumLiteral<E, V>, E, V>
+    public readonly struct EnumLiteral<E,V> : IEnumLiteral<EnumLiteral<E,V>,E,V>
         where E : unmanaged, Enum
         where V : unmanaged
     {        

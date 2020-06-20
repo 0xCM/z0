@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static As;    
     
     partial class Vectors
     {
@@ -78,7 +78,7 @@ namespace Z0
             where T : unmanaged
         {
             vstore(src.Lo, ref dst, offset);
-            vstore(src.Hi, ref dst, offset + vcount<T>(w256));
+            vstore(src.Hi, ref dst, offset + vcount<T>(Typed.w256));
         }
 
         [MethodImpl(Inline)]
@@ -86,13 +86,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Store.save(vcast8u(src), ref As.uint8(ref dst));
+                Store.vsave(v8u(src), ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                Store.save(vcast16u(src), ref As.uint16(ref dst));
+                Store.vsave(v16u(src), ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
-                Store.save(vcast32u(src), ref As.uint32(ref dst));
+                Store.vsave(v32u(src), ref uint32(ref dst));
             else if(typeof(T) == typeof(ulong))
-                Store.save(vcast64u(src), ref As.uint64(ref dst));
+                Store.vsave(v64u(src), ref uint64(ref dst));
             else
                  vstore_i(src,ref dst);
         }
@@ -102,13 +102,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                Store.save(vcast8i(src), ref As.int8(ref dst));
+                Store.vsave(v8i(src), ref int8(ref dst));
             else if(typeof(T) == typeof(short))
-                Store.save(vcast16i(src), ref As.int16(ref dst));
+                Store.vsave(v16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))
-                Store.save(vcast32i(src), ref As.int32(ref dst));
+                Store.vsave(v32i(src), ref int32(ref dst));
             else if(typeof(T) == typeof(long))
-                Store.save(vcast64i(src), ref As.int64(ref dst));
+                Store.vsave(v64i(src), ref int64(ref dst));
             else
                 vstore_f(src, ref dst);
         }
@@ -118,9 +118,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                Store.save(vcast32f(src), ref As.float32(ref dst));
+                Store.vsave(v32f(src), ref float32(ref dst));
             else if(typeof(T) == typeof(double))
-                Store.save(vcast64f(src), ref As.float64(ref dst));
+                Store.vsave(v64f(src), ref float64(ref dst));
             else 
                 throw Unsupported.define<T>();                
         }
@@ -130,13 +130,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Store.save(vcast8u(src), ref As.uint8(ref dst));
+                Store.vsave(v8u(src), ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                Store.save(vcast16u(src), ref As.uint16(ref dst));
+                Store.vsave(v16u(src), ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
-                Store.save(vcast32u(src), ref As.uint32(ref dst));
+                Store.vsave(v32u(src), ref uint32(ref dst));
             else if(typeof(T) == typeof(ulong))
-                Store.save(vcast64u(src), ref As.uint64(ref dst));
+                Store.vsave(v64u(src), ref uint64(ref dst));
             else
                  vstore_i(src,ref dst);
         }
@@ -146,13 +146,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                Store.save(vcast8i(src), ref As.int8(ref dst));
+                Store.vsave(v8i(src), ref int8(ref dst));
             else if(typeof(T) == typeof(short))
-                Store.save(vcast16i(src), ref As.int16(ref dst));
+                Store.vsave(v16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))
-                Store.save(vcast32i(src), ref As.int32(ref dst));
+                Store.vsave(v32i(src), ref int32(ref dst));
             else if(typeof(T) == typeof(long))
-                Store.save(vcast64i(src), ref As.int64(ref dst));
+                Store.vsave(v64i(src), ref int64(ref dst));
             else
                 vstore_f(src, ref dst);
         }
@@ -162,9 +162,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                Store.save(vcast32f(src), ref As.float32(ref dst));
+                Store.vsave(v32f(src), ref float32(ref dst));
             else if(typeof(T) == typeof(double))
-                Store.save(vcast64f(src), ref As.float64(ref dst));
+                Store.vsave(v64f(src), ref float64(ref dst));
             else 
                 throw Unsupported.define<T>();                
         }
@@ -174,13 +174,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Store.save(vcast8u(src), ref As.uint8(ref dst), offset);
+                Store.vsave(v8u(src), ref uint8(ref dst), offset);
             else if(typeof(T) == typeof(ushort))
-                Store.save(vcast16u(src), ref As.uint16(ref dst), offset);
+                Store.vsave(v16u(src), ref uint16(ref dst), offset);
             else if(typeof(T) == typeof(uint))
-                Store.save(vcast32u(src), ref As.uint32(ref dst), offset);
+                Store.vsave(v32u(src), ref uint32(ref dst), offset);
             else
-                Store.save(vcast64u(src), ref As.uint64(ref dst), offset);
+                Store.vsave(v64u(src), ref uint64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -188,13 +188,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                Store.save(vcast8i(src), ref As.int8(ref dst), offset);
+                Store.vsave(v8i(src), ref int8(ref dst), offset);
             else if(typeof(T) == typeof(short))
-                Store.save(vcast16i(src), ref As.int16(ref dst), offset);
+                Store.vsave(v16i(src), ref int16(ref dst), offset);
             else if(typeof(T) == typeof(int))
-                Store.save(vcast32i(src), ref As.int32(ref dst), offset);
+                Store.vsave(v32i(src), ref int32(ref dst), offset);
             else
-                Store.save(vcast64i(src), ref As.int64(ref dst), offset);
+                Store.vsave(v64i(src), ref int64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -202,9 +202,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                Store.save(vcast32f(src), ref As.float32(ref dst), offset);
+                Store.vsave(v32f(src), ref float32(ref dst), offset);
             else if(typeof(T) == typeof(double))
-                Store.save(vcast64f(src), ref As.float64(ref dst), offset);
+                Store.vsave(v64f(src), ref float64(ref dst), offset);
             else 
                 throw Unsupported.define<T>();                
         }
@@ -214,13 +214,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Store.save(vcast8u(src), ref As.uint8(ref dst), offset);
+                Store.vsave(v8u(src), ref uint8(ref dst), offset);
             else if(typeof(T) == typeof(ushort))
-                Store.save(vcast16u(src), ref As.uint16(ref dst), offset);
+                Store.vsave(v16u(src), ref uint16(ref dst), offset);
             else if(typeof(T) == typeof(uint))
-                Store.save(vcast32u(src), ref As.uint32(ref dst), offset);
+                Store.vsave(v32u(src), ref uint32(ref dst), offset);
             else
-                Store.save(vcast64u(src), ref As.uint64(ref dst), offset);
+                Store.vsave(v64u(src), ref uint64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -228,13 +228,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                Store.save(vcast8i(src), ref As.int8(ref dst), offset);
+                Store.vsave(v8i(src), ref int8(ref dst), offset);
             else if(typeof(T) == typeof(short))
-                Store.save(vcast16i(src), ref As.int16(ref dst), offset);
+                Store.vsave(v16i(src), ref int16(ref dst), offset);
             else if(typeof(T) == typeof(int))
-                Store.save(vcast32i(src), ref As.int32(ref dst), offset);
+                Store.vsave(v32i(src), ref int32(ref dst), offset);
             else
-                Store.save(vcast64i(src), ref As.int64(ref dst), offset);
+                Store.vsave(v64i(src), ref int64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -242,9 +242,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                Store.save(vcast32f(src), ref As.float32(ref dst), offset);
+                Store.vsave(v32f(src), ref float32(ref dst), offset);
             else if(typeof(T) == typeof(double))
-                Store.save(vcast64f(src), ref As.float64(ref dst), offset);
+                Store.vsave(v64f(src), ref float64(ref dst), offset);
             else 
                 throw Unsupported.define<T>();                
         }

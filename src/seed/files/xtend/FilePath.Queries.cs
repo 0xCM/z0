@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-
     partial class XTend
     {
         public static IEnumerable<FilePath> WithExt(this IEnumerable<FilePath> src, FileExtension ext)

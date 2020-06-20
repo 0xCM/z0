@@ -12,7 +12,7 @@ namespace Z0
     
     partial class Vectors
     {
-       /// <summary>
+        /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
         /// components, the corresponding component the result vector has all bits 
         /// enabled; otherwise, all bits the component are disabled

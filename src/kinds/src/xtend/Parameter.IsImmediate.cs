@@ -37,21 +37,21 @@ namespace Z0
             return false;
         }
 
-        public static Imm8Value[] ToImm8Values(this byte[] src, ImmSourceKind source)
-            => src.Map(x => Imm8Value.Define(x,source));
+        public static Imm8Value[] ToImm8Values(this byte[] src, ImmRefinementKind kind)
+            => src.Map(x => new Imm8Value(x,kind));
 
-        public static Imm8Value[] ToImm8Values(this IEnumerable<byte> src, ImmSourceKind source)
-            => src.Map(x => Imm8Value.Define(x,source));
+        public static Imm8Value[] ToImm8Values(this IEnumerable<byte> src, ImmRefinementKind kind)
+            => src.Map(x => new Imm8Value(x,kind));
         
         /// <summary>
-        /// Determines whether a parameters is an immediate
+        /// Determines whether a parameters is an unrefined immediate
         /// </summary>
         /// <param name="src">The source parameter</param>
         public static bool IsUnrefinedImmediate(this ParameterInfo src)
             => src.Tagged<ImmAttribute>() && !src.ParameterType.IsEnum;
 
         /// <summary>
-        /// Determines whether a parameters is an immediate
+        /// Determines whether a parameters is a refined immediate
         /// </summary>
         /// <param name="src">The source parameter</param>
         public static bool IsRefinedImmediate(this ParameterInfo src)
@@ -61,8 +61,8 @@ namespace Z0
         /// Returns a method's immediate parameter types
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> ImmParameterTypes(this MethodInfo src, ImmRefinementKind refinement)
-            => src.ImmParameters(refinement).Select(p => p.ParameterType);
+        public static IEnumerable<Type> ImmParameterTypes(this MethodInfo src, ImmRefinementKind kind)
+            => src.ImmParameters(kind).Select(p => p.ParameterType);
 
         static ImmFunctionClass ImmSlot(this ParameterInfo p)
         {

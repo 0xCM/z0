@@ -38,5 +38,15 @@ namespace Z0
                         where parts.Contains(c.PartId)
                         select c;
         }
+
+        IEnumerable<IApiHost> DefinedHosts(params PartId[] parts)
+        {
+            if(parts.Length == 0)
+                return Hosts;
+            else
+                return  from h in Hosts
+                        where parts.Contains(h.PartId)
+                        select h;
+        }
     }
 }

@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
 
     partial class Vectors
     {
@@ -42,6 +41,5 @@ namespace Z0
         public static Vector512<T> vones<T>(N512 n, T t = default)
             where T : unmanaged
                 => Vectors.veq(default(Vector512<T>), default(Vector512<T>));
-
     }
 }

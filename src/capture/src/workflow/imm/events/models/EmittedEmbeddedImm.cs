@@ -15,7 +15,7 @@ namespace Z0.Asm
 
         public readonly bool Generic;
 
-        public readonly ImmSourceKind ImmSource;
+        public readonly ImmRefinementKind ImmSource;
 
         public readonly Type Refinement;
 
@@ -23,18 +23,18 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public EmittedEmbeddedImm Refined(ApiHostUri uri, bool generic, Type refinement, FilePath dst)
-            => new EmittedEmbeddedImm(uri, generic, ImmSourceKind.Refinement, refinement, dst);
+            => new EmittedEmbeddedImm(uri, generic, ImmRefinementKind.Refined, refinement, dst);
 
         [MethodImpl(Inline)]
         public EmittedEmbeddedImm Literal(ApiHostUri uri, bool generic, FilePath dst)
-            => new EmittedEmbeddedImm(uri, generic, ImmSourceKind.Literal, typeof(void), dst);
+            => new EmittedEmbeddedImm(uri, generic, ImmRefinementKind.Unrefined, typeof(void), dst);
 
         [MethodImpl(Inline)]
         public EmittedEmbeddedImm Create(ApiHostUri uri, bool generic, FilePath dst, Type refinement = null)
-            => new EmittedEmbeddedImm(uri, generic, refinement != null ? ImmSourceKind.Refinement : ImmSourceKind.Literal, refinement, dst);
+            => new EmittedEmbeddedImm(uri, generic, refinement != null ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined, refinement, dst);
 
         [MethodImpl(Inline)]
-        internal EmittedEmbeddedImm(ApiHostUri uri, bool generic, ImmSourceKind source, Type refinement, FilePath dst)
+        internal EmittedEmbeddedImm(ApiHostUri uri, bool generic, ImmRefinementKind source, Type refinement, FilePath dst)
         {
             Host = uri;
             Generic = generic;
@@ -48,7 +48,7 @@ namespace Z0.Asm
             get
             {                    
                 var description = 
-                    (ImmSource == ImmSourceKind.Literal && Refinement != null)
+                    (ImmSource == ImmRefinementKind.Unrefined && Refinement != null)
                     ? $"Emitted {Host}{(Generic ? " generic" : string.Empty)} literal imm specializations to {TargetFile}"
                     : $"Emitted {Host}{(Generic ? " generic" : string.Empty)} imm {Refinement.DisplayName()} refinements to {TargetFile}";
                 return description;
@@ -62,6 +62,6 @@ namespace Z0.Asm
             => AppMsgColor.DarkMagenta;
 
         public static EmittedEmbeddedImm Empty 
-            => new EmittedEmbeddedImm(ApiHostUri.Empty, false, ImmSourceKind.Literal, typeof(void), FilePath.Empty);
+            => new EmittedEmbeddedImm(ApiHostUri.Empty, false, ImmRefinementKind.Unrefined, typeof(void), FilePath.Empty);
     }            
 }

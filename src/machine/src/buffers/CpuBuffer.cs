@@ -9,7 +9,6 @@ namespace Z0.Machine
     
     using static Konst;
     using static Control;
-    using static Typed;
 
     public readonly struct CpuBuffer
     {

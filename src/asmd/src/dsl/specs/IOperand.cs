@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    using static Memories;
+    using static Control;
 
     public interface IOperand : ISized
     {
@@ -38,7 +34,7 @@ namespace Z0.Asm
     public interface IOperand<F,W,T> : IOperand<W,T>
         where F : unmanaged, IOperand<F,W,T>
         where W : unmanaged, IDataWidth
-        where T : unmanaged, IFixed
+        where T : unmanaged
     {
         
     }            

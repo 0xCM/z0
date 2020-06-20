@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-    
     /// <summary>
     /// Defines facets common to all instructions without regard to arity
     /// </summary>

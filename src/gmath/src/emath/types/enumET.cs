@@ -1,0 +1,80 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 4040
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{    
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static Control;
+
+    /// <summary>
+    /// Defines a model of an enum literal that is parametric in both the declaring enum
+    /// and the underlying primal type it refines
+    /// </summary>
+    public readonly struct @enum<E,T> : IEnum<@enum<E,T>,E,T>, IEquatable<@enum<E,T>>
+        where E : unmanaged, Enum
+        where T : unmanaged
+    {
+        public readonly E Literal;
+
+        [MethodImpl(Inline)]
+        public static implicit operator E(@enum<E,T> src)
+            => src.Literal;
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(@enum<E,T> src)
+            => src.Scalar;
+
+        [MethodImpl(Inline)]
+        public static implicit operator @enum<E,T>(E src)
+            => new @enum<E,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator @enum<E,T>(T src)
+            => new @enum<E,T>(src);
+
+        [MethodImpl(Inline)]
+        public @enum(E literal)
+        {
+            Literal = literal;
+        }                
+
+        [MethodImpl(Inline)]
+        public @enum(T scalar)
+        {
+            Literal = eVal<E,T>(scalar);
+        }                
+
+        public T Scalar 
+        {
+            [MethodImpl(Inline)]
+            get => tVal<E,T>(Literal);
+        }
+
+        public DataWidth Width 
+        {
+            [MethodImpl(Inline)]
+            get => (DataWidth)bitsize<T>();
+        }
+
+        E IEnum<E>.Literal 
+            => Literal;
+
+        [MethodImpl(Inline)]
+        public bool Equals(E src)
+            => Literal.Equals(src);
+
+        [MethodImpl(Inline)]
+        public bool Equals(@enum<E,T> src)
+            => Literal.Equals(src.Literal);
+
+       public string Format()
+            => $"{Literal}";
+
+       public override string ToString()
+            => Format();
+    }
+}

@@ -53,7 +53,6 @@ namespace Z0
             var dst = Blocks.alloc<T>(w512);
             Vectors.vstore(src, ref dst.Head);
             return dst.Data;
-        }
- 
+        } 
     }
 }

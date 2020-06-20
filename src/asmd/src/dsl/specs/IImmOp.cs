@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-
-    using static Konst;
-
     public interface IImmOp : IOperand
     {
         OperandKind IOperand.OpKind 
@@ -15,7 +11,7 @@ namespace Z0.Asm
     }
 
     public interface IImmOp<T> : IImmOp, IOperand<T>
-        where T : unmanaged, IFixed
+        where T : unmanaged
     {
         
     }

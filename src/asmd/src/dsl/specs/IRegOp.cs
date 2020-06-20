@@ -4,12 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-
-    using static Konst;
-    using static Memories;
+    using static Control;
 
     /// <summary>
     /// Characterizes a register
@@ -36,9 +31,9 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="W">The register width</typeparam>
-    public interface IRegOp<W,S> : IRegOp, IOperand<W,S>
+    public interface IRegOp<W,T> : IRegOp, IOperand<W,T>
+        where T : unmanaged
         where W : unmanaged, IDataWidth
-        where S : unmanaged, IFixed
     {
         
     }
@@ -48,10 +43,10 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="W">The register width</typeparam>
-    public interface IRegOp<F,W,S> : IRegOp<W,S>
-        where F : struct, IRegOp<F,W,S>
+    public interface IRegOp<F,W,T> : IRegOp<W,T>
+        where T : unmanaged
+        where F : struct, IRegOp<F,W,T>
         where W : unmanaged, IDataWidth
-        where S : unmanaged, IFixed
     {
         
     }
@@ -67,7 +62,7 @@ namespace Z0.Asm
         where N : unmanaged, ITypeNat
     {
         RegisterCode IRegOp.Code 
-            => (RegisterCode)value<N>();
+            => (RegisterCode)Control.value<N>();
     }    
 
     public interface IRegOp16 : IRegOp<W16,Fixed16>
@@ -135,7 +130,6 @@ namespace Z0.Asm
     {
         RegisterClass IRegOp.Class 
             => RegisterClass.YMM;
-
     }
 
     /// <summary>

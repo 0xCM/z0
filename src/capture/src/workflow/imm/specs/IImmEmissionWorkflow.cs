@@ -8,10 +8,10 @@ namespace Z0.Asm
 
     public interface IImmEmissionWorkflow : IWorkflow<IImmEmissionBroker>
     {
-        void EmitLiteral(params byte[] imm8);
+        void EmitLiteral(byte[] imm8, params PartId[] parts);
 
-        void EmitRefined();
+        void EmitRefined(params PartId[] parts);
 
-        void ClearArchive();        
+        void ClearArchive(params PartId[] parts);        
     }
 }

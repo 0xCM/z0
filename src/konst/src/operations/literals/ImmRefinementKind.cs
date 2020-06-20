@@ -6,20 +6,22 @@ namespace Z0
 {
     using System;
 
-    public enum ImmSourceKind : byte
-    {
-        Literal = 0,
-
-        Refinement = 1
-    }
-
+    /// <summary>
+    /// Defines immediate value classifiers
+    /// </summary>
     [Flags]
     public enum ImmRefinementKind : byte
     {
         None = 0,
 
+        /// <summary>
+        /// Indicates immediate is a primal literal with no additional type information
+        /// </summary>
         Unrefined = 1,
 
+        /// <summary>
+        /// Indicates immediate is is a refined primitive, constrained to a particular domain
+        /// </summary>
         Refined = 2,
 
         All = Unrefined | Refined

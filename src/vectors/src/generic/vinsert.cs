@@ -18,13 +18,13 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
-        [MethodImpl(Inline), Closures(AllNumeric)]
-        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] byte index)        
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] Bit index)        
             where T : unmanaged
-                => vinsert_u(src,dst,(byte)index);
+                => vinsert_u(src, dst, index);
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, byte index)        
+        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, Bit index)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -36,11 +36,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(vinsert(v64u(src), v64u(dst), index));
             else
-                return vinsert_i(src,dst,index);
+                return vinsert_i(src, dst, index);
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, byte index)        
+        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, Bit index)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -56,7 +56,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, byte index)        
+        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, Bit index)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

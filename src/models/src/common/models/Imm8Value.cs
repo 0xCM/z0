@@ -13,28 +13,17 @@ namespace Z0
     {
         public readonly byte Value;
 
-        public readonly ImmSourceKind Source;
+        public readonly ImmRefinementKind Refinement;
 
         [MethodImpl(Inline)]
         public static implicit operator byte(Imm8Value imm8)
             => imm8.Value;
 
         [MethodImpl(Inline)]
-        public static Imm8Value Define(byte value, ImmSourceKind source = ImmSourceKind.Literal)
-            => new Imm8Value(value,source);
-        
-        [MethodImpl(Inline)]
-        public Imm8Value(byte value)
+        public Imm8Value(byte value, ImmRefinementKind refinement)
         {
-            this.Value = value;
-            this.Source = ImmSourceKind.Literal;
-        }
-
-        [MethodImpl(Inline)]
-        public Imm8Value(byte value, ImmSourceKind source)
-        {
-            this.Value = value;
-            this.Source = source;
+            Value = value;
+            Refinement = refinement;
         }
     }
 }

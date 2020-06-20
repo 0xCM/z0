@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ISized<W> : ISized
-        where W : unmanaged, IDataWidth
-    {        
-        DataWidth ISized.Width 
-            => Widths.data<W>();
+    public interface ISized
+    {
+        DataWidth Width {get;}
     }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-
     public interface IMemOp : IOperand
     {
         OperandKind IOperand.OpKind 
@@ -13,13 +11,13 @@ namespace Z0.Asm
     }
 
     public interface IMemOp<T> : IMemOp, IOperand<T>
-        where T : unmanaged, IFixed
+        where T : unmanaged
     {
 
     }
 
     public interface IMemOp<W,T> : IMemOp<T>, IOperand<W,T>
-        where T : unmanaged, IFixed
+        where T : unmanaged
         where W : unmanaged, ITypeWidth
     {
         DataWidth ISized.Width 
@@ -27,7 +25,7 @@ namespace Z0.Asm
     }
 
     public interface IMemOp<F,W,T> : IMemOp<W,T>, IOperand<F,W,T>
-        where T : unmanaged, IFixed
+        where T : unmanaged
         where F : unmanaged, IMemOp<F,W,T>
         where W : unmanaged, ITypeWidth
     {

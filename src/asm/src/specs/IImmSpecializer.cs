@@ -5,10 +5,7 @@
 namespace Z0.Asm
 {        
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
-
-    using static Konst;
 
     public interface IImmSpecializer : IService
     {
@@ -44,7 +41,6 @@ namespace Z0.Asm
             where T : unmanaged;        
 
         AsmFunction[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, params byte[] imm)
-            where T : unmanaged;            
-
+            where T : unmanaged;
     }
 }

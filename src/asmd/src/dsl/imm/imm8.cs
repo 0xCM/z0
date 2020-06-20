@@ -9,6 +9,18 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
+    public readonly struct Imm8<E>
+        where E : unmanaged, Enum
+    {
+        public readonly @enum<E,byte> Value;
+
+        [MethodImpl(Inline)]
+        public Imm8(@enum<E,byte> value)
+        {
+            Value = value;
+        }
+    }    
+
     public readonly struct imm8 : IImmOp8<imm8>
     {
         public Fixed8 Value {get;}
