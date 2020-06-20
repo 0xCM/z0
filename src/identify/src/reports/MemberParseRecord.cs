@@ -75,9 +75,9 @@ namespace Z0
                 var address = addressParser.Parse(fields[index++], MemoryAddress.Empty);
                 var len = numericParser.Parse(fields[index++]);
                 var term = Enums.Parse(fields[index++], ExtractTermCode.None);
-                var uri = OpUri.ParseDefault(fields[index++]);
+                var uri = OpUriParser.Service.ParseDefault(fields[index++]);
                 var sig = fields[index++];
-                var data = LocatedCode.Define(address, dataParser.ParseData(fields[index++], Control.array<byte>()));  
+                var data = new LocatedCode(address, dataParser.ParseData(fields[index++], Array.Empty<byte>()));  
                           
                 return ParseResult.Success(src, new R(
                     Seq: seq, 

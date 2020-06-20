@@ -34,7 +34,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T eval(T x, T y, string name, ReadOnlySpan<byte> f)
-            => BinaryOpEmitter.emit<T>(name, BinaryCode.Define(f.ToArray()))(x,y);
+            => BinaryOpEmitter.emit<T>(name, new BinaryCode(f.ToArray()))(x,y);
 
         [MethodImpl(Inline)]
         public static T eval(T x, T y, string name, BinaryCode f)

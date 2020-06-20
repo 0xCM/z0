@@ -6,7 +6,6 @@ namespace Z0.Machine
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
 
     using Z0.Asm;
 
@@ -172,7 +171,7 @@ namespace Z0.Machine
             var hostaddr = MemoryAddress.Empty;
             var decoder = Context.Decoder;        
 
-            for(var i=0; i<hcs.MemberCount; i++)
+            for(var i=0; i<hcs.Length; i++)
             {
                 dst.Clear();
                 var uriCode = hcs[i];

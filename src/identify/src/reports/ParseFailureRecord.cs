@@ -43,8 +43,6 @@ namespace Z0
 
         public const int FieldCount = 6;
 
-        public static R Empty => new R(0, MemoryAddress.Empty, 0, ExtractTermCode.None, OpUri.Empty, LocatedCode.Empty);
-
         public static R Parse(string src)
         {
             var fields = src.SplitClean(FieldDelimiter);
@@ -56,9 +54,9 @@ namespace Z0
             var address = Addresses.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();            
             var term = Enums.Parse<ExtractTermCode>(fields[3]).ValueOrDefault();
-            var uri = OpUri.Parse(fields[4]).ValueOrDefault(OpUri.Empty);
+            var uri = OpUriParser.Service.ParseDefault(fields[4]);
             var data = fields[5].SplitClean(HexSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
-            var extract = LocatedCode.Define(address,data);
+            var extract = new LocatedCode(address,data);
             return new R(seq,address,len,term,uri,extract);
         }
 
@@ -83,5 +81,8 @@ namespace Z0
             dst.Delimit(F.Data, Data);
             return dst.Format();            
         }
+
+        public static R Empty 
+            => new R(0, MemoryAddress.Empty, 0, ExtractTermCode.None, OpUri.Empty, LocatedCode.Empty);
     }
 }

@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using static Konst;
-    using static Memories;
 
     public interface IArchiveOps
     {
@@ -18,7 +13,7 @@ namespace Z0
         UriHex[] SaveUriHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
         {
             using var writer = Services.UriHexWriter(dst);
-            var data = src.Map(x => UriHex.Define(x.OpUri, x.Encoded.Encoded));
+            var data = src.Map(x => new UriHex(x.OpUri, x.Encoded.Encoded));
             writer.Write(data);
             return data;
         }
@@ -36,5 +31,4 @@ namespace Z0
             return indexer.CreateIndex(apiIndex, opIndex);            
         }        
     }
-
 }

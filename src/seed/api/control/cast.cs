@@ -6,19 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
     partial class Control
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T cast<T>(object src)
             => (T)src;
 
         [MethodImpl(Inline)]
         public static ref T cast<S,T>(in S src)
-            => ref Unsafe.As<S,T>(ref edit(src));
+            => ref Imagine.cast<S,T>(src);
             
         [MethodImpl(Inline)]
         public static T[] cast<T>(object[] src)
@@ -29,26 +28,26 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static Span<T> cast<T>(Span<byte> src)
             where T : struct
-                => MemoryMarshal.Cast<byte,T>(src);
+                => Imagine.cast<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
             where T : struct
-                => MemoryMarshal.Cast<byte,T>(src);
+                => Imagine.cast<T>(src);
 
         [MethodImpl(Inline)]        
         public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
             where S : struct
             where T : struct
-                => MemoryMarshal.Cast<S,T>(src);
+                => Imagine.cast<S,T>(src);
 
         [MethodImpl(Inline)]        
         public static Span<T> cast<S,T>(Span<S> src)                
             where S : struct
             where T : struct
-                => MemoryMarshal.Cast<S,T>(src);
+                => Imagine.cast<S,T>(src);
     }
 }

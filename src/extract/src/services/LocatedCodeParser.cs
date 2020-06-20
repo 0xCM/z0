@@ -14,10 +14,6 @@ namespace Z0
     {
         readonly byte[] Buffer;
 
-        // [MethodImpl(Inline)]
-        // public static ILocatedCodeParser Create(byte[] buffer)
-        //     => new LocatedCodeParser(buffer);
-
         [MethodImpl(Inline)]
         internal LocatedCodeParser(byte[] buffer)
         {
@@ -31,7 +27,7 @@ namespace Z0
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
             return succeeded 
-                ? LocatedCode.Define(src.Address, parser.Parsed) 
+                ? new LocatedCode(src.Address, parser.Parsed) 
                 : none<LocatedCode>();
         }               
     }

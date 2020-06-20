@@ -87,11 +87,11 @@ namespace Z0.Machine
 
         [MethodImpl(Inline)]
         public HostCode CodeSet(ApiHostUri id)
-            => Z0.HostCode.Define(id, HostCode[id]);
+            => new HostCode(id, HostCode[id]);
 
         [MethodImpl(Inline)]
         public PartCode CodeSet(PartId id)
-            => PartCode.Define(id, Hosts.Map(CodeSet));
+            => new PartCode(id, Hosts.Map(CodeSet));
 
         public UriCode this[MemoryAddress location]
         {

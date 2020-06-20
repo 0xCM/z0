@@ -111,6 +111,5 @@ namespace Z0
         public static ref ulong first<T>(W64 w, Span<T> src)
             where T : unmanaged
                 => ref As<T,ulong>(ref GetReference(src));
-
     }
 }

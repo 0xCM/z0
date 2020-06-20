@@ -16,12 +16,12 @@ namespace Z0
             try
             {
                 var parser = Parsers.hex(true);
-                var uri = OpUri.Parse(src.TakeBefore(Chars.Space).Trim()).ToOption().Require();
+                var uri = OpUriParser.Service.Parse(src.TakeBefore(Chars.Space).Trim()).ToOption().Require();
                 var bytes = src.TakeAfter(Chars.Space)
                                      .SplitClean(HexSpecs.DataDelimiter)
                                      .Select(parser.Succeed)
                                      .ToArray();
-                return ParseResult.Success(src, new UriHex(uri, BinaryCode.Define(bytes)));
+                return ParseResult.Success(src, new UriHex(uri, new BinaryCode(bytes)));
             }
             catch(Exception e)
             {

@@ -53,7 +53,7 @@ namespace Z0
             {
                 ref readonly var record = ref skip(extracts,i);
                 var member = index.Lookup(record.Id);
-                seek(extracts,i) = member ? ExtractedMember.Define(member.Value, record.Encoded) : ExtractedMember.Empty;
+                seek(extracts,i) = member ? new ExtractedMember(member.Value, record.Encoded) : ExtractedMember.Empty;
             }
             return data;
         }

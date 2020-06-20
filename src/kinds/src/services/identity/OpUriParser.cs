@@ -11,12 +11,15 @@ namespace Z0
 
     public readonly struct OpUriParser : ITextParser<OpUri>
     {        
-        public static ITextParser<OpUri> The => default(OpUriParser);
+        public static OpUriParser Service => default;
         
         static OpUriScheme ParseScheme(string text)        
             => Enum.TryParse(typeof(OpUriScheme), text, true, out var result) 
                ? (OpUriScheme)result 
                : OpUriScheme.None;
+
+        public OpUri ParseDefault(string text, OpUri failed = default)
+            => Parse(text).ValueOrDefault(failed);            
 
         public ParseResult<OpUri> Parse(string text)
         {

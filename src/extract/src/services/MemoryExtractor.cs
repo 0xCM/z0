@@ -34,7 +34,7 @@ namespace Z0
             {
                 Span<byte> buffer = Buffer.Clear();
                 var length = Reader.Read(src, buffer);            
-                return LocatedCode.Define(src, buffer.Slice(0,length).ToArray());
+                return new LocatedCode(src, buffer.Slice(0,length).ToArray());
             }
             catch(Exception e)
             {

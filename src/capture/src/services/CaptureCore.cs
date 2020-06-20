@@ -18,15 +18,15 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, MethodInfo src, ParsedCode bits, ExtractTermCode term)
-            => CapturedCode.Define(id, null, src, bits.Unparsed, bits.Encoded, term);
+            => new CapturedCode(id, null, src, bits.Unparsed, bits.Encoded, term);
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, Delegate src, ParsedCode bits, ExtractTermCode term)
-            => CapturedCode.Define(id, src, src.Method, bits.Unparsed, bits.Encoded, term);
+            => new CapturedCode(id, src, src.Method, bits.Unparsed, bits.Encoded, term);
 
         [MethodImpl(Inline)]
         static CapturedCode DefineMember(OpIdentity id, Delegate src, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-            => CapturedCode.Define(id, src, src.Method, extracted, parsed, term);
+            => new CapturedCode(id, src, src.Method, extracted, parsed, term);
 
         public Option<ParsedOperation> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
@@ -35,7 +35,7 @@ namespace Z0.Asm
                 var parsed = capture(exchange, id, ref head(src));
                 var outcome = parsed.Outcome;            
                 var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
-                return ParsedOperation.Define(id, outcome, bytes);
+                return new ParsedOperation(id, outcome, bytes);
             }
             catch(Exception e)
             {
@@ -51,7 +51,7 @@ namespace Z0.Asm
                 var pSrc = Jitter.jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
-                var captured = DefineMember(id, src, summary.Data, outcome.TermCode); 
+                var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode); 
                 insist((MemoryAddress)pSrc, captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -69,7 +69,7 @@ namespace Z0.Asm
                 var pSrc = Jitter.jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
-                var captured = CapturedCode.Define(id, src.DynamicOp, src.SourceMethod, summary.Data.Unparsed, summary.Data.Encoded, outcome.TermCode);                
+                var captured = new CapturedCode(id, src.DynamicOp, src.SourceMethod, summary.Encoded.Unparsed, summary.Encoded.Encoded, outcome.TermCode);                
                 insist((MemoryAddress)pSrc,captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -101,7 +101,7 @@ namespace Z0.Asm
                 var pSrc = Jitter.jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.Data, outcome.TermCode);  
+                var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode);  
                 insist((MemoryAddress)pSrc,captured.Address);               
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -176,7 +176,7 @@ namespace Z0.Asm
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
-            var bits = ParsedCode.Define((MemoryAddress)start, raw, trimmed);
+            var bits = new ParsedCode((MemoryAddress)start, raw, trimmed);
             return new OperationCapture(id, outcome, bits);
         }
 

@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static IBufferToken Load(this IBufferToken dst, in BinaryCode src)
         {
-            dst.Fill(src.Bytes);
+            dst.Fill(src.Data);
             return dst;
         }
 

@@ -34,10 +34,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal MemoryCaptureService(IAsmFunctionDecoder decoder, int bufferlen)
         {
-            this.ExtractBuffer = new byte[bufferlen];
-            this.ParseBuffer = new byte[bufferlen];
-            this.Extractor = MemoryExtractor(ExtractBuffer);
-            this.Decoder = decoder;
+            ExtractBuffer = new byte[bufferlen];
+            ParseBuffer = new byte[bufferlen];
+            Extractor = MemoryExtractor(ExtractBuffer);
+            Decoder = decoder;
         }
 
         public Option<CapturedMemory> Capture(MemoryAddress src)        
@@ -45,8 +45,8 @@ namespace Z0.Asm
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
                 from instructions in Decoder.Decode(parsed)
-                let bits = ParsedCode.Define(src, raw, parsed)
-                select CapturedMemory.Define(src, bits, instructions, string.Empty);
+                let bits = new ParsedCode(src, raw, parsed)
+                select new CapturedMemory(src, bits, instructions, string.Empty);
 
         [MethodImpl(Inline)]
         public Option<LocatedCode> Extract(MemoryAddress src)
@@ -54,7 +54,7 @@ namespace Z0.Asm
 
         public Option<LocatedCode> Parse(LocatedCode src)
             => from parsed in  ExtractParser(ParseBuffer.Clear()).Parse(src)
-               let encoded = LocatedCode.Define(src.Address, parsed)
+               let encoded = new LocatedCode(src.Address, parsed)
                select encoded;
 
         [MethodImpl(Inline)]

@@ -160,7 +160,7 @@ namespace Z0.Machine
         {   
             if(asm.IsCall(src.Instruction))
             {
-                var bytes = src.Encoded.Bytes;
+                var bytes = Control.span(src.Encoded.Data);
                 if(bytes.Length >= 5)
                 {
                     var encoded = bytes.Slice(1,4);

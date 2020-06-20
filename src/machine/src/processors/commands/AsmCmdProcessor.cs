@@ -211,7 +211,7 @@ namespace Z0.Asm
                     GlobalOffset: NextOffset,
                     Mnemonic: mnemonic.ToString().ToUpper(),
                     OpCode: asm.InstructionCode.OpCode.Replace("o32 ", string.Empty),
-                    Encoded: BinaryCode.Define(encoded.TrimEnd().ToArray()),
+                    Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
                     InstructionFormat: asm.FormattedInstruction,
                     InstructionCode: asm.InstructionCode.Expression,
                     CpuId: text.embrace(asm.CpuidFeatures.Select(x => x.ToString()).Concat(",")),

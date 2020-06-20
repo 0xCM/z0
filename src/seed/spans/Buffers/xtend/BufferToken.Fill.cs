@@ -5,9 +5,6 @@
 namespace  Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    
-    using static Konst;
 
     partial class XTend
     {
@@ -19,5 +16,14 @@ namespace  Z0
         public static unsafe Span<T> Fill<T>(this IBufferToken dst, ReadOnlySpan<T> src)
             where T : unmanaged
                 => Buffers.fill<T>(src, dst);
+
+        /// <summary>
+        /// Fills a token-identified buffer with data from an array and returns the target memory to the caller as a span
+        /// </summary>
+        /// <param name="src">The source content</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static unsafe Span<T> Fill<T>(this IBufferToken dst, T[] src)
+            where T : unmanaged
+                => Buffers.fill<T>(src, dst);                
     }
 }

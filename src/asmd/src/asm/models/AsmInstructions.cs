@@ -61,12 +61,6 @@ namespace Z0.Asm
             get => Encoded.IsNonEmpty; 
         }
 
-        public ReadOnlySpan<byte> Bytes 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Bytes; 
-        }
-
         public static implicit operator Instruction[](AsmInstructions src)
             => src.Inxs;
 

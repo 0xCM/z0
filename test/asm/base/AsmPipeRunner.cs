@@ -70,7 +70,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         AsmInstructionList ToList(AsmInstructions src)
-            => AsmInstructionList.Create(src, LocatedCode.Define(BaseAddress, src.Encoded));
+            => AsmInstructionList.Create(src, new LocatedCode(BaseAddress, src.Encoded));
 
         void RunPipe(ReadOnlySpan<UriHex> src, StreamWriter log)
         {

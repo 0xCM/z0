@@ -11,16 +11,16 @@ namespace Z0.Asm
 
     public readonly struct CallInfo : ICallInfo
     {
+        readonly LocatedInstruction Instruction;
+
+        public MemoryAddress Target {get;}
+
         public static string[] AspectNames
             => Aspects.Names<ICallInfo>();
 
         public string[] AspectValues
             => Aspects.Values<ICallInfo>(this);
         
-        readonly LocatedInstruction Instruction;
-
-        public MemoryAddress Target {get;}
-
         public MemoryAddress Source 
             => Instruction.IP;                
 
@@ -32,13 +32,13 @@ namespace Z0.Asm
 
         public BinaryCode Encoded 
             => Instruction.Encoded;
-        
+
         [MethodImpl(Inline)]
         internal CallInfo(LocatedInstruction src)
         {
             Instruction = src;
             Target = MemoryAddress.Empty;
-            var bytes = src.Encoded.Bytes;            
+            var bytes = Control.span(src.Encoded.Data);            
             var count = (byte)(bytes.Length - 1); //op code takes up one byte
             var offset = ByteReader.Read(bytes.Slice(1));
             Target = src.NextIp + offset;            

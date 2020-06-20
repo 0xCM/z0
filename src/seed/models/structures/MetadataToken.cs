@@ -15,9 +15,7 @@ namespace Z0
     /// </summary>
     public readonly struct MetadataToken : ITextual, IEquatable<MetadataToken>, INullity
     {
-        readonly ulong Data;
-
-        public static MetadataToken Empty => new MetadataToken(0.0);
+        readonly ulong Data;        
     
         public int TokenValue
         {
@@ -170,5 +168,8 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is MetadataToken t && Equals(t);
+
+        public static MetadataToken Empty 
+            => new MetadataToken(0.0);            
     }
 }

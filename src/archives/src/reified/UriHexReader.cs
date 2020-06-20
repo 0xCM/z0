@@ -28,9 +28,9 @@ namespace Z0
             {
                 var parser = Parsers.hex(true);
                 var uritext = formatted.TakeBefore(Chars.Space).Trim();
-                var uri = OpUri.Parse(uritext);
+                var uri = OpUriParser.Service.Parse(uritext);
                 var bytes = formatted.TakeAfter(Chars.Space).SplitClean(HexSpecs.DataDelimiter).Select(parser.Succeed).ToArray();
-                return UriHex.Define(uri, bytes);                
+                return UriHex.From(uri, bytes);                
             }
             catch(Exception e)
             {

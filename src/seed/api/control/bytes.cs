@@ -11,21 +11,20 @@ namespace Z0
     using static Konst;
 
     partial class Control
-    {
-     
+    {     
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<byte> bytes<T>(Span<T> src)
             where T : struct
-                => MemoryMarshal.AsBytes(src);        
+                => Imagine.bytes(src);        
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<byte> bytes<T>(in T src)
             where T : struct
-                => MemoryMarshal.AsBytes(MemoryMarshal.CreateSpan(ref edit(src), 1));
+                => Imagine.bytes(src);        
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src)
             where T : struct
-                => span<byte>(cast<T,byte>(head(src)), src.Length*size<T>());
+                => Imagine.bytes(src);
     }
 }

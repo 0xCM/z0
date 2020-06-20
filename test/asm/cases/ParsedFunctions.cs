@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
     using System.Collections.Generic;
 
     using static Konst;
@@ -22,7 +19,7 @@ namespace Z0
             if(!resource)
                 throw new KeyNotFoundException(id);
 
-            return LocatedCode.Define(MemoryAddress.Empty, resource.Require().Data.ToArray());
+            return new LocatedCode(MemoryAddress.Empty, resource.Require().Data.ToArray());
         }
     }
 

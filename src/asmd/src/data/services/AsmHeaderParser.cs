@@ -20,7 +20,7 @@ namespace Z0.Asm.Data
 
             var l0 = lines[0].RightOf(CommentMarker);
             var sig = l0.LeftOf(LocatedMarker);
-            var uriParse = OpUriParser.The.Parse(text.concat(LocatedMarker,l0.RightOf(LocatedMarker)));
+            var uriParse = OpUriParser.Service.Parse(text.concat(LocatedMarker,l0.RightOf(LocatedMarker)));
             if(uriParse.Failed)
                 return fail;
             var uri = uriParse.Value;

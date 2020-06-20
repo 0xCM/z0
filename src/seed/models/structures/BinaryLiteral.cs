@@ -16,10 +16,7 @@ namespace Z0
     /// the text, when parsed, must yield a value equivalent to the boxed value
     /// </summary>
     public readonly struct BinaryLiteral : ILiteral<BinaryLiteral>
-    {                                   
-        public static BinaryLiteral Empty   
-            => new BinaryLiteral(string.Empty, 0, string.Empty);         
-        
+    {                                           
         /// <summary>
         /// The literal name
         /// </summary>
@@ -38,11 +35,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public BinaryLiteral(string name, object value, string text)
         {
-            this.Name = name;
-            this.Data = value;
-            this.Text = text;
+            Name = name;
+            Data = value;
+            Text = text;
         }
-
+        
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -70,8 +67,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BinaryLiteral src)
-            => string.Equals(Text,src.Text) 
+            => string.Equals(Text, src.Text) 
             && object.Equals(Data, src.Data) 
             && string.Equals(Name, src.Name);
+
+        public static BinaryLiteral Empty   
+            => new BinaryLiteral(string.Empty, 0, string.Empty);         
     }
 }

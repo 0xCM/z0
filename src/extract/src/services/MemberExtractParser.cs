@@ -22,10 +22,6 @@ namespace Z0
 
         readonly byte[] Buffer;
 
-        // [MethodImpl(Inline)]
-        // public static IExtractParser Create(byte[] buffer)
-        //     => new MemberExtractParser(buffer);
-
         [MethodImpl(Inline)]
         internal MemberExtractParser(byte[] buffer)
         {
@@ -63,13 +59,13 @@ namespace Z0
         LocatedCode Locate(MemoryAddress address, byte[] src, int cut = 0)
         {
             if(cut == 0)
-                return LocatedCode.Define(address, src);
+                return new LocatedCode(address, src);
             else
             {
                 Span<byte> data = src;
                 var len = CalcLength(data, cut, 0xC3);
                 var keep = data.Slice(0, len);
-                return LocatedCode.Define(address, keep.ToArray());
+                return new LocatedCode(address, keep.ToArray());
             }
         }
 

@@ -59,8 +59,8 @@ namespace Z0
             buffer.Clear();      
             var address = src.Address;          
             var length = reader.Read(address, buffer);
-            return ExtractedMember.Define(src, 
-                LocatedCode.Define(address, buffer.Slice(0,length).ToArray()));
+            return new ExtractedMember(src, 
+                new LocatedCode(address, buffer.Slice(0,length).ToArray()));
         }
     }
 }

@@ -8,16 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
-    using static Memories;
-
     public class t_opuri : t_identity<t_opuri>
     {
         public void parse_uri_1()
         {
             var opid = Identify.Op("vgeneric_g[8u](v512x8i~in)");
             var input = $"hex://fixed/Vector512?vgeneric#{opid}";
-            var attempt = OpUri.Parse(input);
+            var attempt = OpUriParser.Service.Parse(input);
             Claim.require(attempt.Succeeded);
             var uri = attempt.Value;
 
