@@ -51,7 +51,7 @@ namespace Z0.Asm
         
     }
 
-    public interface IRegOp8 : IRegOp<W8,Fixed8>
+    public interface IRegOp8 : IRegOp<W8,byte>
     {
         RegisterClass IRegOp.Class 
             => RegisterClass.GP;
@@ -65,7 +65,7 @@ namespace Z0.Asm
             => (RegisterCode)Control.value<N>();
     }    
 
-    public interface IRegOp16 : IRegOp<W16,Fixed16>
+    public interface IRegOp16 : IRegOp<W16,ushort>
     {
         RegisterClass IRegOp.Class 
             => RegisterClass.GP;

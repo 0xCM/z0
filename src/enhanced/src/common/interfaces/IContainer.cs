@@ -99,6 +99,16 @@ namespace Z0
     }
 
     /// <summary>
+    /// Characterizes a reversible structure
+    /// </summary>
+    /// <typeparam name="S">The structure type</typeparam>
+    public interface IReversible<F>
+        where F : IReversible<F>, new()
+    {
+        F Reverse();
+    }    
+
+    /// <summary>
     /// Characterizes a reified immutable container
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
@@ -400,7 +410,6 @@ namespace Z0
     {
         ref readonly T this[int index] {get;}  
 
-
         ref readonly T Lookup(int index) 
             => ref this[index];    
     }
@@ -411,11 +420,25 @@ namespace Z0
 
     }
 
+    public interface INonEmptyList<T> : IIndex<T>
+    {
+        ref T Head {get;}
+
+        ref T Tail {get;}
+    }
+
+    public interface INonEmptyList<F,T> : INonEmptyList<T>
+        where F : INonEmptyList<F,T>, new()
+         
+    {
+
+    }
+
     /// <summary>
     /// Characterizes a finite container over sequentially-indexed discrete content - an array
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface IIndexedElements<T> : IContented<T[]>, IEnumerable<T>, ILengthwise
+    public interface IIndexedContent<T> : IContented<T[]>, IEnumerable<T>, ILengthwise
     {
         IEnumerator IEnumerable.GetEnumerator()
             => Content.GetEnumerator();
@@ -464,7 +487,8 @@ namespace Z0
     /// <typeparam name="T">The element type</typeparam>
     public interface IFiniteSeq<T> : ISeq<T>, IFinite
     {
-        int IFinite.Count() => Content.Count();
+        int IFinite.Count() 
+            => Content.Count();
     }
 
     /// <summary>
@@ -483,29 +507,35 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The reifying type</typeparam>
     /// <typeparam name="T">The sequence element type</typeparam>
-    public interface IIndexedSeq<F,T> : IFiniteSeq<F,T>, IIndex<F,T>
+    public interface IIndexedSeq<F,T> : IFiniteSeq<F,T>, IIndex<F,T>, IReversible<F>, INonEmptyList<F,T>
         where F : IIndexedSeq<F,T>, new()
     {
 
     }
-
-    /// <summary>
-    /// Characterizes a reversible structure
-    /// </summary>
-    /// <typeparam name="S">The structure type</typeparam>
-    public interface IReversible<S>
-        where S : IReversible<S>, new()
-    {
-        S Reverse();
-    }    
     
     public interface IListed<S> : INullary<S>, IReversible<S>, ILengthwise<S>
         where S : IListed<S>, new()
     {
         /// <summary>
-        /// Returns the elements following the head, if any; otherwise, returns the zero element of S
+        /// Returns the first constituent if extant; othewise, returns the monoidal 0
+        /// </summary>
+        S Head {get;}
+
+        /// <summary>
+        /// Returns the last constituent if extant; othewise, returns the monoidal 0
         /// </summary>
         S Tail {get;}
+    }
+
+    public interface IListed<S,T> : IListed<S>
+        where S : IListed<S,T>, new()
+        where T : unmanaged//, IMonoidA<T>
+    {
+        /// <summary>
+        /// Replaces the existing list with a new list with specified content
+        /// </summary>
+        /// <param name="src"></param>
+        S Redefine(IEnumerable<T> src);
     }
 
     public interface IDecrementable<S> : IOrdered<S>

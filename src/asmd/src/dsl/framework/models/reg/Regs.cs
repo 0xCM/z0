@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Dsl
+namespace Z0.Asm
 {
-    using R = Dsl;
+    using R = Asm.Dsl;
 
-    public class Regs
+    public readonly struct Registers
     {
         public static R.al al => default;
 

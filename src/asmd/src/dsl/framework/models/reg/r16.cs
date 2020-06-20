@@ -8,23 +8,18 @@ namespace Z0.Asm.Dsl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
 
-    public readonly struct r16<N> : IRegOp16<r16<N>,N>
-        where N : unmanaged, ITypeNat
-    {
-        public Fixed16 Value {get;}
+    public readonly struct r16 : IRegOp16
+    {    
+        public ushort Value  {get;}
+
+        public RegisterKind Kind {get;}        
 
         [MethodImpl(Inline)]
-        public r16(Fixed16 value)
+        public r16(ushort value, RegisterKind kind)
         {
             Value = value;
+            Kind = kind;
         }
-
-        public RegisterKind Kind 
-        {
-            [MethodImpl(Inline)]
-            get => RegisterBitField.join((RegisterCode)value<N>(), RegisterClass.GP, RegisterWidth.W16);
-        }
-    }
+    } 
 }

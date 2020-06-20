@@ -13,10 +13,10 @@ namespace Z0.Asm.Dsl
         
     public readonly struct al : IRegOp8<al,N0>
     {            
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public al(Fixed8 value)
+        public al(byte value)
         {
             Value = value;
         }
@@ -26,10 +26,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct cl : IRegOp8<cl,N1>
     {        
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public cl(Fixed8 value)
+        public cl(byte value)
         {
             Value = value;
         }
@@ -39,10 +39,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct dl : IRegOp8<dl,N2>
     {            
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public dl(Fixed8 value)
+        public dl(byte value)
         {
             Value = value;
         }
@@ -53,10 +53,10 @@ namespace Z0.Asm.Dsl
     public readonly struct bl : IRegOp8<bl,N3>
     {        
 
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public bl(Fixed8 value)
+        public bl(byte value)
         {
             Value = value;
         }
@@ -66,10 +66,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct sil : IRegOp8<sil,N4>
     {            
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public sil(Fixed8 value)
+        public sil(byte value)
         {
             Value = value;
         }
@@ -79,10 +79,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct dil : IRegOp8<dil,N5>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public dil(Fixed8 value)
+        public dil(byte value)
         {
             Value = value;
         }
@@ -92,10 +92,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct spl : IRegOp8<spl,N6>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public spl(Fixed8 value)
+        public spl(byte value)
         {
             Value = value;
         }
@@ -105,10 +105,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct bpl : IRegOp8<bpl,N7>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public bpl(Fixed8 value)
+        public bpl(byte value)
         {
             Value = value;
         }
@@ -118,10 +118,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r8b : IRegOp8<r8b,N8>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r8b(Fixed8 value)
+        public r8b(byte value)
         {
             Value = value;
         }
@@ -131,10 +131,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r9b : IRegOp8<r9b,N9>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r9b(Fixed8 value)
+        public r9b(byte value)
         {
             Value = value;
         }
@@ -144,10 +144,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r10b : IRegOp8<r10b,N10>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r10b(Fixed8 value)
+        public r10b(byte value)
         {
             Value = value;
         }
@@ -157,10 +157,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r11b : IRegOp8<r11b,N11>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r11b(Fixed8 value)
+        public r11b(byte value)
         {
             Value = value;
         }
@@ -170,10 +170,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r12b : IRegOp8<r12b,N12>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r12b(Fixed8 value)
+        public r12b(byte value)
         {
             Value = value;
         }
@@ -183,10 +183,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r13b : IRegOp8<r13b,N13>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r13b(Fixed8 value)
+        public r13b(byte value)
         {
             Value = value;
         }
@@ -196,10 +196,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r14b : IRegOp8<r14b,N14>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r14b(Fixed8 value)
+        public r14b(byte value)
         {
             Value = value;
         }
@@ -209,10 +209,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct r15b : IRegOp8<r15b,N15>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r15b(Fixed8 value)
+        public r15b(byte value)
         {
             Value = value;
         }

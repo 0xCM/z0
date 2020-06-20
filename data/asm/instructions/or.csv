@@ -1,5 +1,5 @@
-# Instructions
-----------------------------------------------------------------------------------------------------------------------------------
+# OR - Op Codes
+----------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction     | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                     |
 | 0C ib            | OR AL, i mm8    | I     | Valid       | Valid           | AL OR imm8.                     |
 | 0D iw            | OR AX, i mm16   | I     | Valid       | Valid           | AX OR imm16.                    |

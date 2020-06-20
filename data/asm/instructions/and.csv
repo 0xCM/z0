@@ -1,4 +1,4 @@
-# Instructions
+# AND Op Codes
 ----------------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-bit Mode | Compat/Leg Mode | Description                               |
 | 20 /r            | AND r/m8, r8      | MR    | Valid       | Valid           | r/m8 AND r8.                              |

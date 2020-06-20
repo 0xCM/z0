@@ -28,6 +28,7 @@ namespace Z0.Asm.Dsl
             Sign = sign;
         }
 
-        public DataWidth Width => DataWidth.W512;
+        public DataWidth Width 
+            => DataWidth.W512;
     }
 }

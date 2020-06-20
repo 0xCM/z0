@@ -9,7 +9,6 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
 
     using API = Commands;
 
@@ -45,5 +44,8 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();        
+
+        public static EncodedCommand Empty 
+            => default;
     }
 }

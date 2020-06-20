@@ -3,24 +3,27 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Dsl
-{
+{        
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
 
-    public readonly struct r8 : IRegOp8
-    {    
-        public Fixed8 Value  {get;}
-        
-        public RegisterKind Kind {get;}        
-        
+    public readonly struct cmd8x2
+    {           
+        public arg8 A {get;}
+
+        public arg8 B {get;}        
+
         [MethodImpl(Inline)]
-        public r8(Fixed8 value, RegisterKind kind)
+        public static implicit operator cmd8x2((arg8 a, arg8 b) src)
+            => new cmd8x2(src.a,src.b);
+
+        [MethodImpl(Inline)]
+        public cmd8x2(arg8 a, arg8 b)
         {
-            Value = value;
-            Kind = kind;
-        }            
-    } 
+            A = a;
+            B = b;
+        }
+    }
 }

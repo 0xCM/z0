@@ -9,17 +9,17 @@ namespace Z0.Asm.Dsl
 
     using static Konst;
 
-    public readonly struct r16 : IRegOp16
+    public readonly struct r8 : IRegOp8
     {    
-        public Fixed16 Value  {get;}
-
+        public byte Value  {get;}
+        
         public RegisterKind Kind {get;}        
-
+        
         [MethodImpl(Inline)]
-        public r16(Fixed16 value, RegisterKind kind)
+        public r8(byte value, RegisterKind kind)
         {
             Value = value;
             Kind = kind;
-        }
+        }            
     } 
 }

@@ -13,10 +13,10 @@ namespace Z0.Asm.Dsl
     public readonly struct r8<N> : IRegOp8<r8<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
-        public r8(Fixed8 value)
+        public r8(byte value)
         {
             Value = value;
         }

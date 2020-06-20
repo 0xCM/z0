@@ -16,6 +16,12 @@ namespace Z0.Asm.Dsl
         where A : struct, IOperand
         where B : struct, IOperand
     {
+        public CmdOpCode Code {get;}
+
+        public A Arg0 {get;}
+
+        public B Arg1 {get;}
+
         [MethodImpl(Inline)]
         public static implicit operator cmd(cmd<A,B> src)
             => src.Untyped;
@@ -28,12 +34,10 @@ namespace Z0.Asm.Dsl
             Arg1 = arg1;
         }
 
-        public CmdOpCode Code {get;}
-
-        public A Arg0 {get;}
-
-        public B Arg1 {get;}
-
-        public cmd Untyped { [MethodImpl(Inline)] get => new cmd(Arg0, Arg1);}
+        public cmd Untyped 
+        {
+             [MethodImpl(Inline)] 
+             get => new cmd(Arg0, Arg1);
+        }
     }
 }

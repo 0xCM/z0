@@ -1,5 +1,5 @@
 # SUB - Op Codes
---------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction      | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                         |
 | 2C ib            | SUB AL, i mm8    | I     | Valid       | Valid           | Subtract imm8 from AL.                              |
 | 2D iw            | SUB AX, i mm16   | I     | Valid       | Valid           | Subtract imm16 from AX.                             |
@@ -23,15 +23,3 @@
 | 2B / r           | SUB r16, r/m16   | RM    | Valid       | Valid           | Subtract r/m16 from r16.                            |
 | 2B / r           | SUB r32, r/m32   | RM    | Valid       | Valid           | Subtract r/m32 from r32.                            |
 | REX.W + 2B / r   | SUB r64, r/m64   | RM    | Valid       | N.E.            | Subtract r/m64 from r64.                            |
-
-# SUB - Encoding
---------------------------------------------------------------------------------------------------------------------------------------------
-| Op/En | Operand 1        | Operand 2     | Operand 3 | Operand 4 |
-| I     | AL/AX/EAX/RAX    | imm8/16/32    | NA        | NA        |
-| MI    | ModRM:r/m (r, w) | imm8/16/32    | NA        | NA        |
-| MR    | ModRM:r/m (r, w) | ModRM:reg (r) | NA        | NA        |
-| RM    | ModRM:reg (r, w) | ModRM:r/m (r) | NA        | NA        |
-
-# Operation
---------------------------------------------------------------------------------------------------------------------------------------------
-DEST ← (DEST – SRC);

@@ -1,4 +1,4 @@
-# Op Codes
+# JCC
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 | Opcode   | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                    |
 | 77 cb    | JA rel8     | D     | Valid       | Valid           | Jump short if above (CF=0 and ZF=0).                                           |

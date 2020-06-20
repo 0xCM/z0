@@ -10,24 +10,25 @@ namespace Z0.Asm.Dsl
     using static Konst;
 
     /// <summary>
-    /// Defines an 8-bit operand
+    /// Defines a 64-bit oparand
     /// </summary>
-    public readonly struct arg8 : IOperand<arg8,W8,Fixed8>
+    public readonly struct arg64 : IOperand<arg64,W64,Fixed64>
     {
-        public Fixed8 Value {get;}
+        public Fixed64 Value {get;}
 
         public SignKind Sign {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg8(Fixed8 value, SignKind sign, OperandKind kind)
+        public arg64(Fixed64 value, SignKind sign, OperandKind kind)
         {
             Value = value;
             OpKind = kind;
             Sign = sign;
         }
 
-        public DataWidth Width => DataWidth.W8;
+        public DataWidth Width 
+            => DataWidth.W64;
     }
 }

@@ -6,7 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Linq;
 
     using static Konst;
@@ -14,7 +13,7 @@ namespace Z0
     /// <summary>
     /// A simple api member sequence adapter
     /// </summary>
-    public readonly struct ApiMembers : IIndexedElements<ApiMember>
+    public readonly struct ApiMembers : IIndexedContent<ApiMember>
     {
         public ApiMember[] Content {get;}
 
