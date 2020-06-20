@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static As;
 
-    public class t_asci_encode : UnitTest<t_asci_encode>
+    public class t_asci_encode : t_symbolic<t_asci_encode>
     {        
         public void test_case_01()
         {
@@ -48,16 +49,16 @@ namespace Z0
             Claim.yea(Symbolic.eq(a64d,a64c));        
         }
 
-        void res_HexKind()
+        public void res_HexKind()
         {
             var svc = AsciResourceSet.Service;
             var res = svc.HexKindNames();
             for(var i=0; i<res.EntryCount; i++)
-            {
-                ref readonly var entry = ref res[i];
-                Trace(entry.Format());
+            {                
+                var expect = asci.encode(n4, text.concat('x', uint8(i).FormatHex(true, false)));
+                ref readonly var actual = ref res[i];
+                Claim.eq(expect,actual);                        
             }
-
         }
     }
 }

@@ -12,28 +12,28 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines an instruction that accepts one argument
     /// </summary>
-    public readonly struct cmd<A> : ICmd<cmd<A>,A>
-        where A : struct, IOperand
+    public readonly struct cmd<X0> : ICmd<cmd<X0>,X0>
+        where X0 : struct, IOperand
     {
-        public A Arg0 {get;}
-
         public CmdOpCode Code {get;}
 
+        public X0 A {get;}
+
         [MethodImpl(Inline)]
-        public static implicit operator cmd(cmd<A> src)
+        public static implicit operator cmd(cmd<X0> src)
             => src.Untyped;
 
         [MethodImpl(Inline)]
-        public cmd(CmdOpCode code, A arg0)
+        public cmd(CmdOpCode code, X0 arg0)
         {
             Code = code;
-            Arg0 = arg0;
+            A = arg0;
         }
 
         public cmd Untyped 
         { 
             [MethodImpl(Inline)] 
-            get => new cmd(Arg0);
+            get => new cmd(A);
         }
     }
 }

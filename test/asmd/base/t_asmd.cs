@@ -14,6 +14,9 @@ namespace Z0.Asm.Data
     public abstract class t_asmd<U> : UnitTest<U,CheckVectorBits, ICheckVectorBits>
         where U : t_asmd<U>, new()
     {     
-
+        protected t_asmd()
+        {
+            UnitRoot.Clear();   
+        }
     }
 }

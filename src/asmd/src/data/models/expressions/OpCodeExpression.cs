@@ -14,8 +14,6 @@ namespace Z0.Asm.Data
     {
         public asci32 Body {get;}
 
-        public static OpCodeExpression Empty => new OpCodeExpression(asci32.Null);
-
         [MethodImpl(Inline)]
         public static implicit operator OpCodeExpression(string src)
             => new OpCodeExpression(src);
@@ -75,5 +73,9 @@ namespace Z0.Asm.Data
         
         public override string ToString()
             => Format();
+
+        public static OpCodeExpression Empty 
+            => new OpCodeExpression(asci32.Null);
+
     }
 }

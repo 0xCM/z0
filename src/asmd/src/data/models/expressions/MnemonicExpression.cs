@@ -14,8 +14,6 @@ namespace Z0.Asm.Data
     {
         public asci16 Body {get;}
 
-        public static MnemonicExpression Empty => new MnemonicExpression(asci16.Null);
-
         [MethodImpl(Inline)]
         public static implicit operator MnemonicExpression(string src)
             => new MnemonicExpression(src);
@@ -84,5 +82,8 @@ namespace Z0.Asm.Data
         
         public override string ToString()
             => Format();
+
+        public static MnemonicExpression Empty 
+            => new MnemonicExpression(asci16.Null);
     }
 }

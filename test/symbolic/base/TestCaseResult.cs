@@ -11,7 +11,6 @@ namespace Z0
 
     public readonly struct TestCaseResult : ITestCaseResult
     {
-
         public string CaseName {get;}
 
         public bit Success {get;}

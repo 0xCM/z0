@@ -13,10 +13,10 @@ namespace Z0.Asm.Dsl
     public readonly struct r32<N> : IRegOp32<r32<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public Fixed32 Value {get;}
+        public uint Value {get;}
 
         [MethodImpl(Inline)]
-        public r32(Fixed32 value)
+        public r32(uint value)
         {
             Value = value;
         }

@@ -37,54 +37,54 @@ namespace Z0.Asm
     /// <summary>
     /// An instruction that accepts one operand
     /// </summary>
-    /// <typeparam name="A">The operand type</typeparam>
-    public interface ICmd<F,A> : ICmd<F>, INaturalized<N1>
-        where A : struct, IOperand
-        where F : struct, ICmd<F,A>
+    /// <typeparam name="X0">The operand type</typeparam>
+    public interface ICmd<F,X0> : ICmd<F>, INaturalized<N1>
+        where X0 : struct, IOperand
+        where F : struct, ICmd<F,X0>
     {
-        A Arg0 {get;}
+        X0 A {get;}
 
         IOperand[] ICmd.Args 
-            => new IOperand[]{Arg0};            
+            => new IOperand[]{A};            
     }
 
     /// <summary>
     /// An instruction that accepts two operands
     /// </summary>
-    /// <typeparam name="A">The first operand type</typeparam>
-    /// <typeparam name="B">The second operand type</typeparam>
-    public interface ICmd<F,A,B> : ICmd<F>, INaturalized<N2>
-        where F : struct, ICmd<F,A,B>
-        where A : struct, IOperand
-        where B : struct, IOperand
+    /// <typeparam name="X0">The first operand type</typeparam>
+    /// <typeparam name="X1">The second operand type</typeparam>
+    public interface ICmd<F,X0,X1> : ICmd<F>, INaturalized<N2>
+        where F : struct, ICmd<F,X0,X1>
+        where X0 : struct, IOperand
+        where X1 : struct, IOperand
     {
-        A Arg0 {get;}
+        X0 A {get;}
 
-        B Arg1 {get;}
+        X1 B {get;}
 
         IOperand[] ICmd.Args 
-            => new IOperand[]{Arg0, Arg1};
+            => new IOperand[]{A, B};
     }
 
     /// <summary>
     /// An instruction that accepts three operands
     /// </summary>
-    /// <typeparam name="A">The first operand type</typeparam>
-    /// <typeparam name="B">The second operand type</typeparam>
-    /// <typeparam name="C">The second operand type</typeparam>
-    public interface ICmd<F,A,B,C> : ICmd<F>, INaturalized<N3>
-        where F : struct, ICmd<F,A,B,C>
-        where A : struct, IOperand
-        where B : struct, IOperand
-        where C : struct, IOperand
+    /// <typeparam name="X0">The first operand type</typeparam>
+    /// <typeparam name="X1">The second operand type</typeparam>
+    /// <typeparam name="X2">The second operand type</typeparam>
+    public interface ICmd<F,X0,X1,X2> : ICmd<F>, INaturalized<N3>
+        where F : struct, ICmd<F,X0,X1,X2>
+        where X0 : struct, IOperand
+        where X1 : struct, IOperand
+        where X2 : struct, IOperand
     {
-        A Arg0 {get;}
+        X0 A {get;}
 
-        B Arg1 {get;}
+        X1 B {get;}
 
-        C Arg2 {get;}
+        X2 C {get;}
 
         IOperand[] ICmd.Args 
-            => new IOperand[]{Arg0, Arg1, Arg2};            
+            => new IOperand[]{A, B, C};            
     }
 }

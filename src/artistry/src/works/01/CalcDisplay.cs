@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Displays;
-    using static As;
     using static Control;
 
     using M = CalcManaged;

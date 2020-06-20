@@ -26,18 +26,18 @@ namespace Z0.Asm
     public interface IImmOp<F,W,T> : IImmOp<T>, IOperand<F,W,T>
         where F : unmanaged, IImmOp<F,W,T>
         where W : unmanaged, IDataWidth
-        where T : unmanaged, IFixed
+        where T : unmanaged
     {
         
     }
 
-    public interface IImmOp8<F> : IImmOp<F,W8,Fixed8>, IImmOp<W8,Address8>
+    public interface IImmOp8<F> : IImmOp<F,W8,byte>, IImmOp<W8,Address8>
         where F : unmanaged, IImmOp8<F>
     {
         
     }
 
-    public interface IImmOp16<F> : IImmOp<F,W16,Fixed16>, IImmOp<W16,Address16>
+    public interface IImmOp16<F> : IImmOp<F,W16,ushort>, IImmOp<W16,Address16>
         where F : unmanaged, IImmOp16<F>
     {
         

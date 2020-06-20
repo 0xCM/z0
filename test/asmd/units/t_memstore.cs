@@ -46,14 +46,9 @@ namespace Z0
             }
         }
 
-        // public static MemStore store<T>()
-        // {
-        //     typeof(T).Properties().
-        // }
-
         public void search()
         {
-            var src = typeof(SymbolicData).Assembly;
+            var src = typeof(Konst).Assembly;
 
             var xRef = MemRef.memref(SymbolKonst.UpperHexCodes);            
 
@@ -64,10 +59,7 @@ namespace Z0
 
             var xBody = xMethod.GetMethodBody();
             var xCil = xBody.GetILAsByteArray();
-            Trace($"{xMethod.Name} {xRef} {xCil.FormatHexBytes()}");
-
-            
-            //var xPtr = MemberJit.Service.Jit(xMethod);
+            Trace($"{xMethod.Name} {xRef} {xCil.FormatHexBytes()}");            
 
         }
 

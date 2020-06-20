@@ -12,16 +12,16 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines an 8-bit operand
     /// </summary>
-    public readonly struct arg8 : IOperand<arg8,W8,Fixed8>
+    public readonly struct arg8 : IOperand<arg8,W8,byte>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         public SignKind Sign {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg8(Fixed8 value, SignKind sign, OperandKind kind)
+        public arg8(byte value, SignKind sign, OperandKind kind)
         {
             Value = value;
             OpKind = kind;

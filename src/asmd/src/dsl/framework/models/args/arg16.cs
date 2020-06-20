@@ -12,16 +12,16 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines a 16-bit operand
     /// </summary>
-    public readonly struct arg16 : IOperand<arg16,W16,Fixed16>
+    public readonly struct arg16 : IOperand<arg16,W16,ushort>
     {
-        public Fixed16 Value {get;}
+        public ushort Value {get;}
 
         public SignKind Sign {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg16(Fixed16 value, SignKind sign, OperandKind kind)
+        public arg16(ushort value, SignKind sign, OperandKind kind)
         {
             Value = value;
             OpKind = kind;

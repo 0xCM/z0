@@ -23,7 +23,7 @@ namespace Z0.Asm.Dsl
 
     public readonly struct imm8 : IImmOp8<imm8>
     {
-        public Fixed8 Value {get;}
+        public byte Value {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator imm8(byte src)

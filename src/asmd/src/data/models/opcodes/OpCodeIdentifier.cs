@@ -10,13 +10,17 @@ namespace Z0.Asm.Data
     using static Konst;
     using static Typed;
 
+    // public interface IIdentified<F,T>
+    // {
+
+
+    // }
+
     /// <summary>
     /// Represents an opcode identifier
     /// </summary>
     public readonly struct OpCodeIdentifier
-    {        
-        public static OpCodeIdentifier Empty => new OpCodeIdentifier(asci32.Null);
-        
+    {                
         public asci32 Body {get;}
 
         [MethodImpl(Inline)]
@@ -93,5 +97,8 @@ namespace Z0.Asm.Data
         
         public override bool Equals(object src)
             => src is OpCodeIdentifier id && Equals(id);
+
+        public static OpCodeIdentifier Empty 
+            => new OpCodeIdentifier(asci32.Null);
     }
 }

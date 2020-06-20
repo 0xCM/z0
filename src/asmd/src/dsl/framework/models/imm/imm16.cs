@@ -11,7 +11,7 @@ namespace Z0.Asm.Dsl
 
     public readonly struct imm16 : IImmOp16<imm16>
     {
-        public Fixed16 Value {get;}
+        public ushort Value {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator imm16(ushort src)
@@ -20,14 +20,6 @@ namespace Z0.Asm.Dsl
         [MethodImpl(Inline)]
         public static implicit operator imm16(byte src)
             => new imm16((ushort)src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator imm16(Fixed16 src)
-            => new imm16(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator imm16(Fixed8 src)
-            => new imm16(src);
 
         [MethodImpl(Inline)]
         public imm16(byte value)

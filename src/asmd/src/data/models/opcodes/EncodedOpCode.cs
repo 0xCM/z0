@@ -9,6 +9,9 @@ namespace Z0.Asm.Data
 
     using static Konst;
 
+    /// <summary>
+    /// Defines an op code via a sequence bytes
+    /// </summary>
     public readonly struct EncodedOpCode
     {
         readonly ulong Data;

@@ -11,11 +11,11 @@ namespace Z0.Asm.Data
     using static Control;
 
     [ApiHost]
-    public readonly ref struct OpCodeHandler  
+    public readonly ref struct OpCodePartition  
     {
         [MethodImpl(Inline), Op]
-        public static OpCodeHandler Create(int count)
-            => new OpCodeHandler(count);
+        public static OpCodePartition Create(int count)
+            => new OpCodePartition(count);
         
         readonly Span<InstructionExpression> instructions;
 
@@ -30,7 +30,7 @@ namespace Z0.Asm.Data
         readonly Span<int> MnemonicSeq;
 
         [MethodImpl(Inline)]
-        OpCodeHandler(int count)
+        OpCodePartition(int count)
         {
             MnemonicSeq = new int[1];
             instructions = new InstructionExpression[count];
@@ -41,15 +41,15 @@ namespace Z0.Asm.Data
         }
         
         [MethodImpl(Inline), Op]
-        public void Handle(in OpCodeProcessor ocp, in InstructionExpression src)
+        public void Include(in OpCodePartitoner ocp, in InstructionExpression src)
         {
-            seek(instructions, ocp.Sequence) = src;
+            Instruction(ocp.Sequence) = src;
         }
 
         [MethodImpl(Inline), Op]
-        public void Handle(in OpCodeProcessor ocp, in OpCodeExpression src)
+        public void Include(in OpCodePartitoner ocp, in OpCodeExpression src)
         {
-            seek(codes, ocp.Sequence) = src;
+            OpCode(ocp.Sequence) = src;
         }
 
         [MethodImpl(Inline), Op]
@@ -63,7 +63,7 @@ namespace Z0.Asm.Data
         }
         
         [MethodImpl(Inline), Op]
-        public void Handle(OpCodeProcessor ocp, in MnemonicExpression src)
+        public void Include(OpCodePartitoner ocp, in MnemonicExpression src)
         {
             if(head(MnemonicSeq) > 0)
             {
@@ -75,16 +75,16 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline), Op]
-        public void Handle(in OpCodeProcessor ocp, in CpuidExpression src)
+        public void Include(in OpCodePartitoner ocp, in CpuidExpression src)
         {
             seek(cpuid, ocp.Sequence) = src;
         }
 
         [MethodImpl(Inline), Op]
-        public void Handle(OpCodeProcessor ocp, in OperatingMode src)
+        public void Include(OpCodePartitoner ocp, in OperatingMode src)
         {
 
-            seek(modes,ocp.Sequence) = src;
+            Mode(ocp.Sequence) = src;
         }
 
         public ReadOnlySpan<AsmCommandGroup> CommandGroups
@@ -127,16 +127,20 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline), Op]
-        public ref readonly MnemonicExpression Mnemonic(int seq)
-            => ref skip(mnemonics, seq);
+        ref MnemonicExpression Mnemonic(int seq)
+            => ref seek(mnemonics, seq);
 
         [MethodImpl(Inline), Op]
-        public ref readonly OpCodeExpression OpCode(int seq)
-            => ref skip(codes, seq);
+        ref OpCodeExpression OpCode(int seq)
+            => ref seek(codes, seq);
 
         [MethodImpl(Inline), Op]
-        public ref readonly InstructionExpression Instruction(int seq)
-            => ref skip(instructions, seq);
+        ref OperatingMode Mode(int seq)
+            => ref seek(modes, seq);
+
+        [MethodImpl(Inline), Op]
+        ref InstructionExpression Instruction(int seq)
+            => ref seek(instructions, seq);
 
         [MethodImpl(Inline), Op]
         static AsmCommandGroup group(MnemonicExpression expression)

@@ -14,35 +14,35 @@ namespace Z0.Asm.Dsl
     partial class asm
     {
         [MethodImpl(Inline), Op]
-        public static R.rax set(Fixed64 src,  R.rax dst)
+        public static R.rax set(ulong src,  R.rax dst)
             => new R.rax(src);
 
         [MethodImpl(Inline), Op]
-        public static R.rcx set(Fixed64 src,  R.rcx dst)
+        public static R.rcx set(ulong src,  R.rcx dst)
             => new R.rcx(src);
 
         [MethodImpl(Inline), Op]
-        public static R.rdx set(Fixed64 src,  R.rdx dst)
+        public static R.rdx set(ulong src,  R.rdx dst)
             => new R.rdx(src);
 
         [MethodImpl(Inline), Op]
-        public static R.rbx set(Fixed64 src,  R.rbx dst)
+        public static R.rbx set(ulong src,  R.rbx dst)
             => new R.rbx(src);
 
         [MethodImpl(Inline), Op]
-        public static R.rsi set(Fixed64 src,  R.rsi dst)
+        public static R.rsi set(ulong src,  R.rsi dst)
             => new R.rsi(src);
 
         [MethodImpl(Inline), Op]
-        public static R.rdi set(Fixed64 src,  R.rdi dst)
+        public static R.rdi set(ulong src,  R.rdi dst)
             => new R.rdi(src);
 
         [MethodImpl(Inline), Op]
-        public static R.rsp set(Fixed64 src,  R.rsp dst)
+        public static R.rsp set(ulong src,  R.rsp dst)
             => new R.rsp(src);
 
         [MethodImpl(Inline), Op]
-        public static R.rbp set(Fixed64 src,  R.rbp dst)
+        public static R.rbp set(ulong src,  R.rbp dst)
             => new R.rbp(src);
      }
 }

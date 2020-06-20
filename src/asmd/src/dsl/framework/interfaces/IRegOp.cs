@@ -79,7 +79,7 @@ namespace Z0.Asm
             => (RegisterCode)value<N>();
     }    
 
-    public interface IRegOp32 : IRegOp<W32,Fixed32>
+    public interface IRegOp32 : IRegOp<W32,uint>
     {
         RegisterClass IRegOp.Class 
             => RegisterClass.GP;
@@ -93,7 +93,7 @@ namespace Z0.Asm
             => (RegisterCode)value<N>();
     }    
 
-    public interface IRegOp64 : IRegOp<W64,Fixed64>
+    public interface IRegOp64 : IRegOp<W64,ulong>
     {
         RegisterClass IRegOp.Class 
             => RegisterClass.GP;

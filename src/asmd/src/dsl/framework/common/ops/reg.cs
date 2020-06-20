@@ -14,22 +14,22 @@ namespace Z0.Asm.Dsl
     partial class asm
     {
         [MethodImpl(Inline)]
-        public static D.r8<N> reg<N>(Fixed8 value, N n = default)
+        public static D.r8<N> reg<N>(byte value, N n = default)
             where N : unmanaged, ITypeNat
                 => new D.r8<N>(value);
 
         [MethodImpl(Inline)]
-        public static D.r16<N> reg<N>(Fixed16 value, N n = default)
+        public static D.r16<N> reg<N>(ushort value, N n = default)
             where N : unmanaged, ITypeNat
                 => new D.r16<N>(value);
 
         [MethodImpl(Inline)]
-        public static D.r32<N> reg<N>(Fixed32 value, N n = default)
+        public static D.r32<N> reg<N>(uint value, N n = default)
             where N : unmanaged, ITypeNat
                 => new D.r32<N>(value);
 
         [MethodImpl(Inline)]
-        public static D.r64<N> reg<N>(Fixed64 value, N n = default)
+        public static D.r64<N> reg<N>(ulong value, N n = default)
             where N : unmanaged, ITypeNat
                 => new D.r64<N>(value);
 

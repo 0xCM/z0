@@ -32,7 +32,6 @@ namespace Z0.Asm.Dsl
             [MethodImpl(Inline)]
             get =>new r16(Value, Kind);
         }
-
     }
 
     public readonly struct cx : IRegOp16<cx,N1>
@@ -205,6 +204,10 @@ namespace Z0.Asm.Dsl
 
 
         [MethodImpl(Inline)]
+        public static implicit operator r16(r8w src)
+            => src.Generalized;
+
+        [MethodImpl(Inline)]
         public r8w(ushort value)
         {
             Value = value;
@@ -222,6 +225,10 @@ namespace Z0.Asm.Dsl
     public readonly struct r9w : IRegOp16<r9w,N9>
     {
         public ushort Value  {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r16(r9w src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r9w(ushort value)
@@ -243,6 +250,10 @@ namespace Z0.Asm.Dsl
         public ushort Value  {get;}
 
         [MethodImpl(Inline)]
+        public static implicit operator r16(r10w src)
+            => src.Generalized;
+
+        [MethodImpl(Inline)]
         public r10w(ushort value)
         {
             Value = value;
@@ -260,6 +271,10 @@ namespace Z0.Asm.Dsl
     public readonly struct r11w : IRegOp16<r11w,N11>
     {            
         public ushort Value  {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r16(r11w src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r11w(ushort value)
@@ -281,6 +296,10 @@ namespace Z0.Asm.Dsl
         public ushort Value  {get;}
 
         [MethodImpl(Inline)]
+        public static implicit operator r16(r12w src)
+            => src.Generalized;
+
+        [MethodImpl(Inline)]
         public r12w(ushort value)
         {
             Value = value;
@@ -298,6 +317,10 @@ namespace Z0.Asm.Dsl
     public readonly struct r13w : IRegOp16<r13w,N13>
     {
         public ushort Value  {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r16(r13w src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r13w(ushort value)
@@ -319,6 +342,10 @@ namespace Z0.Asm.Dsl
         public ushort Value  {get;}
 
         [MethodImpl(Inline)]
+        public static implicit operator r16(r14w src)
+            => src.Generalized;
+
+        [MethodImpl(Inline)]
         public r14w(ushort value)
         {
             Value = value;
@@ -338,6 +365,10 @@ namespace Z0.Asm.Dsl
         public ushort Value  {get;}
 
         [MethodImpl(Inline)]
+        public static implicit operator r16(r15w src)
+            => src.Generalized;
+
+        [MethodImpl(Inline)]
         public r15w(ushort value)
         {
             Value = value;
@@ -351,5 +382,4 @@ namespace Z0.Asm.Dsl
             get =>new r16(Value, Kind);
         }
    }
-
 }

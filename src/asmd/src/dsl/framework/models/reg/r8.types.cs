@@ -16,17 +16,31 @@ namespace Z0.Asm.Dsl
         public byte Value {get;}
 
         [MethodImpl(Inline)]
+        public static implicit operator r8(al src)
+            => src.Generalized;
+
+        [MethodImpl(Inline)]
         public al(byte value)
         {
             Value = value;
         }
 
         public K Kind => K.AL;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }
 
     public readonly struct cl : IRegOp8<cl,N1>
     {        
         public byte Value {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r8(cl src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public cl(byte value)
@@ -35,11 +49,21 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.CL;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }    
 
     public readonly struct dl : IRegOp8<dl,N2>
     {            
         public byte Value {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r8(dl src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public dl(byte value)
@@ -48,12 +72,21 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.DL;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }    
 
     public readonly struct bl : IRegOp8<bl,N3>
     {        
-
         public byte Value {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r8(bl src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public bl(byte value)
@@ -62,11 +95,21 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.BL;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }    
 
     public readonly struct sil : IRegOp8<sil,N4>
     {            
         public byte Value {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r8(sil src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public sil(byte value)
@@ -75,11 +118,21 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.SIL;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }    
 
     public readonly struct dil : IRegOp8<dil,N5>
     {
         public byte Value {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r8(dil src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public dil(byte value)
@@ -88,11 +141,21 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.DIL;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }        
 
     public readonly struct spl : IRegOp8<spl,N6>
     {
         public byte Value {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r8(spl src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public spl(byte value)
@@ -101,11 +164,21 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.SPL;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }            
 
     public readonly struct bpl : IRegOp8<bpl,N7>
     {
         public byte Value {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r8(bpl src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public bpl(byte value)
@@ -114,11 +187,21 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.BPL;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }                
 
     public readonly struct r8b : IRegOp8<r8b,N8>
     {
         public byte Value {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator r8(r8b src)
+            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r8b(byte value)
@@ -127,6 +210,12 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R8L;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }                    
 
     public readonly struct r9b : IRegOp8<r9b,N9>
@@ -140,6 +229,12 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R9L;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }                        
 
     public readonly struct r10b : IRegOp8<r10b,N10>
@@ -153,6 +248,12 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R10L;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }                        
 
     public readonly struct r11b : IRegOp8<r11b,N11>
@@ -166,6 +267,12 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R11L;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }                        
 
     public readonly struct r12b : IRegOp8<r12b,N12>
@@ -179,6 +286,12 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R12L;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }                    
 
     public readonly struct r13b : IRegOp8<r13b,N13>
@@ -192,6 +305,12 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R13L;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }                        
 
     public readonly struct r14b : IRegOp8<r14b,N14>
@@ -205,6 +324,12 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R14L;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }                        
 
     public readonly struct r15b : IRegOp8<r15b,N15>
@@ -218,6 +343,11 @@ namespace Z0.Asm.Dsl
         }
 
         public K Kind => K.R15L;
+
+        public r8 Generalized
+        {
+            [MethodImpl(Inline)]
+            get =>new r8(Value, Kind);
+        }
     }
- 
 }

@@ -5,9 +5,6 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
     using static Memories;
@@ -75,7 +72,6 @@ namespace Z0.Asm.Data
                 ref readonly var id = ref skip(src,i);
                 writer.WriteLine(id.Format().PadRight(id.Body.MaxLength));
             }
-
         }
 
         public void opcode_tokens()
@@ -88,9 +84,9 @@ namespace Z0.Asm.Data
             Claim.eq(count, identifers.Length);
 
 
-            var processor = OpCodeProcessor.Create();
-            var handler = OpCodeHandler.Create(count);
-            processor.Process(records,handler);
+            var processor = OpCodePartitoner.Create();
+            var handler = OpCodePartition.Create(count);
+            processor.Partition(records,handler);
 
 
             emit(handler.Instructions);

@@ -16,18 +16,18 @@ namespace Z0.Asm.Data
         public static OpCodeServices Service => default;
         
         [MethodImpl(Inline), Op]
-        public void Process(in OpCodeProcessor processor, in OpCodeHandler handler, ReadOnlySpan<CommandInfo> src)
-            => processor.Process(src,handler);
+        public void Partition(in OpCodePartitoner processor, in OpCodePartition handler, ReadOnlySpan<CommandInfo> src)
+            => processor.Partition(src,handler);
 
         [Op]
-        public OpCodeHandler ProcessOpCodes(int seq = 0)
+        public OpCodePartition PartitionOpCodes(int seq = 0)
         {
             var dataset = OpCodeDataset.Create();
             var count = dataset.OpCodeCount;
             var records = dataset.OpCodeRecords;
-            var handler = OpCodeHandler.Create(count);
-            var processor = OpCodeProcessor.Create(seq);
-            Process(processor, handler, records);
+            var handler = OpCodePartition.Create(count);
+            var processor = OpCodePartitoner.Create(seq);
+            Partition(processor, handler, records);
             return handler;            
         }
         

@@ -12,16 +12,16 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines a 64-bit oparand
     /// </summary>
-    public readonly struct arg64 : IOperand<arg64,W64,Fixed64>
+    public readonly struct arg64 : IOperand<arg64,W64,ulong>
     {
-        public Fixed64 Value {get;}
+        public ulong Value {get;}
 
         public SignKind Sign {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg64(Fixed64 value, SignKind sign, OperandKind kind)
+        public arg64(ulong value, SignKind sign, OperandKind kind)
         {
             Value = value;
             OpKind = kind;

@@ -15,16 +15,16 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct CmdOpCode
     {
-        public string Text {get;}
+        public asci32 Text {get;}
 
         readonly ulong Bytes;
 
         [MethodImpl(Inline)]
-        public static CmdOpCode Define(string src)
+        public static CmdOpCode Define(asci32 src)
             => new CmdOpCode(src);
 
         [MethodImpl(Inline)]
-        public CmdOpCode(string src)
+        public CmdOpCode(asci32 src)
         {
             Text = src;
             Bytes = 0;

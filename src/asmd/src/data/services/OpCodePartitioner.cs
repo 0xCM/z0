@@ -11,16 +11,16 @@ namespace Z0.Asm.Data
     using static Control;
 
     [ApiHost]
-    public struct OpCodeProcessor
+    public struct OpCodePartitoner
     {
         [MethodImpl(Inline)]
-        public static OpCodeProcessor Create(int seq = 0) 
-            => new OpCodeProcessor(seq);
+        public static OpCodePartitoner Create(int seq = 0) 
+            => new OpCodePartitoner(seq);
 
         int seq;
 
         [MethodImpl(Inline)]
-        OpCodeProcessor(int seq)
+        OpCodePartitoner(int seq)
         {
             this.seq = seq;
         }
@@ -32,57 +32,56 @@ namespace Z0.Asm.Data
         }
 
         [MethodImpl(Inline), Op]
-        public void Process(ReadOnlySpan<CommandInfo> src, in OpCodeHandler handler)
+        public void Partition(ReadOnlySpan<CommandInfo> src, in OpCodePartition handler)
         {
             for(var i=seq; i<src.Length; i++)
-                Next(skip(src,i), handler);
+                Partition(skip(src,i), handler);
         }
 
         [MethodImpl(Inline), Op]
-        public void Next(in CommandInfo src, in OpCodeHandler handler)
+        public void Partition(in CommandInfo src, in OpCodePartition handler)
         {
             Process(src, handler);
             seq++;
         }
 
         [MethodImpl(Inline)]
-        void Process(in CommandInfo src, in OpCodeHandler handler)
+        void Process(in CommandInfo src, in OpCodePartition handler)
         {
-            Process(OpCode(src),handler);
-            Process(Instruction(src),handler);
-            Process(Mnemonic(src),handler);
-            Process(Cpuid(src),handler);
-        }
-
-
-        [MethodImpl(Inline), Op]
-        void Process(OperatingMode src, in OpCodeHandler handler)
-        {
-            handler.Handle(this, src);        
+            Process(OpCode(src), handler);
+            Process(Instruction(src), handler);
+            Process(Mnemonic(src), handler);
+            Process(Cpuid(src), handler);
         }
 
         [MethodImpl(Inline), Op]
-        void Process(in InstructionExpression src, in OpCodeHandler handler)
+        void Process(OperatingMode src, in OpCodePartition handler)
         {
-            handler.Handle(this, src);
+            handler.Include(this, src);        
         }
 
         [MethodImpl(Inline), Op]
-        void Process(in OpCodeExpression src, in OpCodeHandler handler)
+        void Process(in InstructionExpression src, in OpCodePartition handler)
         {
-            handler.Handle(this, src);            
+            handler.Include(this, src);
         }
 
         [MethodImpl(Inline), Op]
-        void Process(in MnemonicExpression src, in OpCodeHandler handler)
+        void Process(in OpCodeExpression src, in OpCodePartition handler)
         {
-            handler.Handle(this, src);            
+            handler.Include(this, src);            
         }
 
         [MethodImpl(Inline), Op]
-        void Process(in CpuidExpression src, in OpCodeHandler handler)
+        void Process(in MnemonicExpression src, in OpCodePartition handler)
         {
-            handler.Handle(this, src);            
+            handler.Include(this, src);            
+        }
+
+        [MethodImpl(Inline), Op]
+        void Process(in CpuidExpression src, in OpCodePartition handler)
+        {
+            handler.Include(this, src);            
         }
 
         [MethodImpl(Inline)]

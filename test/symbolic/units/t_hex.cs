@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public class t_hex : UnitTest<t_hex>
     {
@@ -81,7 +79,6 @@ namespace Z0
             Claim.eq((byte)13, parser.Parse('D').Value);
             Claim.eq((byte)14, parser.Parse('E').Value);
             Claim.eq((byte)15, parser.Parse('F').Value);
-
         }
     }
 }

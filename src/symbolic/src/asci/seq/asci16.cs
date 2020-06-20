@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static Typed;
+    using static Control;
 
     using N = N16;
     using W = W128;
@@ -21,16 +22,7 @@ namespace Z0
     {
         internal readonly Vector128<byte> Storage;        
 
-        public const int Size = 16;
-        
-        public static asci16 Blank => asci.init(n);
-        
-        public static asci16 Null => new asci16(Vector128<byte>.Zero);
-
-        static N n => default;
-
-        static W w => default;
-        
+        public const int Size = 16;            
 
         [MethodImpl(Inline)]
         public static asci16 Init(AsciCharCode fill = AsciCharCode.Space)
@@ -57,9 +49,17 @@ namespace Z0
             => src.Decoded;
 
         [MethodImpl(Inline)]
+        public static bool operator ==(asci16 a, asci16 b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(asci16 a, asci16 b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
         public asci16(ReadOnlySpan<byte> src)
         {
-            Storage = SymBits.vload(w, Control.head(src));
+            Storage = SymBits.vload(w, head(src));
         }
 
         [MethodImpl(Inline)]
@@ -147,12 +147,15 @@ namespace Z0
         public override string ToString()
             => Text;
 
-        [MethodImpl(Inline)]
-        public static bool operator ==(asci16 a, asci16 b)
-            => a.Equals(b);
 
-        [MethodImpl(Inline)]
-        public static bool operator !=(asci16 a, asci16 b)
-            => !a.Equals(b);
+        public static asci16 Blank 
+            => asci.init(n);
+        
+        public static asci16 Null 
+            => new asci16(Vector128<byte>.Zero);
+
+        static N n => default;
+
+        static W w => default;
     }
 }

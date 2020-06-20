@@ -12,16 +12,16 @@ namespace Z0.Asm.Dsl
     /// <summary>
     /// Defines a 32-bit oparand
     /// </summary>
-    public readonly struct arg32 : IOperand<arg32,W32,Fixed32>
+    public readonly struct arg32 : IOperand<arg32,W32,uint>
     {
-        public Fixed32 Value {get;}
+        public uint Value {get;}
 
         public SignKind Sign {get;}
 
         public OperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public arg32(Fixed32 value, SignKind sign, OperandKind kind)
+        public arg32(uint value, SignKind sign, OperandKind kind)
         {
             Value = value;
             OpKind = kind;

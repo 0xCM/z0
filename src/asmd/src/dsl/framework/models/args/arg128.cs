@@ -9,7 +9,6 @@ namespace Z0.Asm.Dsl
     
     using static Konst;
 
-
     /// <summary>
     /// Defines a 128-bit oparand
     /// </summary>
@@ -29,6 +28,7 @@ namespace Z0.Asm.Dsl
             Sign = sign;
         }
 
-        public DataWidth Width => DataWidth.W128;
+        public DataWidth Width 
+            => DataWidth.W128;
     }
 }
