@@ -7,17 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Text)" />
-    <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(BitStrings)" />
-    <ProjectReference Include="$(BitSpans)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(AsmD)" />
-
   </ItemGroup>
 
 </Project>

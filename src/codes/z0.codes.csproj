@@ -12,7 +12,6 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Archives)" />
-    <ProjectReference Include="$(AsmD)" />
     <ProjectReference Include="$(Capture)" />
   </ItemGroup>
 

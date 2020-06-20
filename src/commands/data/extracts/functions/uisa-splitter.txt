@@ -1,5 +1,0 @@
-uisa-splitter.txt/EVEX_SPLITTER()::
---------------------------------------------------------------------------------------------------------
-VEXVALID=0      INSTRUCTIONS() |
-VEXVALID=1  AVX_INSTRUCTIONS() |
-VEXVALID=2 EVEX_INSTRUCTIONS() |

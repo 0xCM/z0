@@ -81,6 +81,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Bits>$(Src)bits/z0.bits.csproj</Bits>
     <BitMasks>$(Src)bitmasks/z0.bitmasks.csproj</BitMasks>
     <BitCore>$(Src)bitcore/z0.bitcore.csproj</BitCore>
     <BitStrings>$(Src)bitstrings/z0.bitstrings.csproj</BitStrings>

@@ -1,12 +1,6 @@
 export ProjectRoot=src
 Cmd=$ZDev/.scripts/add-rooted.sh
 
-# export ProjectId=asm
-# bash $Cmd
-
-# export ProjectId=asmd
-# bash $Cmd
-
 export ProjectId=apps
 bash $Cmd
 
@@ -16,8 +10,8 @@ bash $Cmd
 export ProjectId=artifacts
 bash $Cmd
 
-#export ProjectId=artistry
-#bash $Cmd
+export ProjectId=artistry
+bash $Cmd
 
 export ProjectId=asm
 bash $Cmd
@@ -31,37 +25,34 @@ bash $Cmd
 export ProjectId=bitfields
 bash $Cmd
 
-# export ProjectId=bitgrids
-# bash $Cmd
-
-# export ProjectId=bitmatrix
-# bash $Cmd
-
-# export ProjectId=bitpack
-# bash $Cmd
-
-# export ProjectId=bitsvc
-# bash $Cmd
-
-export ProjectId=bitspans
-bash $Cmd
-
-export ProjectId=bitpack
-bash $Cmd
-
-export ProjectId=bitstrings
+export ProjectId=bitgrids
 bash $Cmd
 
 export ProjectId=bitmasks
 bash $Cmd
 
+export ProjectId=bitmatrix
+bash $Cmd
+
+export ProjectId=bitpack
+bash $Cmd
+
+export ProjectId=bitspans
+bash $Cmd
+
+export ProjectId=bitstrings
+bash $Cmd
+
+export ProjectId=bitsvc
+bash $Cmd
+
 export ProjectId=bitvectors
 bash $Cmd
 
-export ProjectId=blocks
+export ProjectId=blocked
 bash $Cmd
 
-export ProjectId=blocked
+export ProjectId=blocks
 bash $Cmd
 
 export ProjectId=canonical
@@ -71,6 +62,9 @@ export ProjectId=capture
 bash $Cmd
 
 export ProjectId=cil
+bash $Cmd
+
+export ProjectId=circuits
 bash $Cmd
 
 export ProjectId=control
@@ -121,7 +115,13 @@ bash $Cmd
 export ProjectId=konst
 bash $Cmd
 
+export ProjectId=logix
+bash $Cmd
+
 export ProjectId=lsquare
+bash $Cmd
+
+export ProjectId=machine
 bash $Cmd
 
 export ProjectId=machines
@@ -182,4 +182,7 @@ export ProjectId=vectors
 bash $Cmd
 
 export ProjectId=vsvc
+bash $Cmd
+
+export ProjectId=zxed
 bash $Cmd

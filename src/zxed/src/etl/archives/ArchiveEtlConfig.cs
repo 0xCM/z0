@@ -12,15 +12,23 @@ namespace Z0
 
     readonly struct AsmArchiveConfig
     {
-        public FolderName RootFolder 
-            => FolderName.Define("data");
+        public FolderPath SourceRoot 
+            => FolderPath.Define(@"K:\z0\archives\sources\xed");
 
+        public FolderPath TargetRoot
+            => (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define("xed");
 
         public FolderName StageFolder 
             => FolderName.Define("extracts");
 
-        public FolderName DatasetFolder 
+        public FolderPath StageRoot 
+            => TargetRoot + StageFolder;
+
+        public FolderName PublicationFolder 
             => FolderName.Define("datasets");
+
+        public FolderPath PublicationRoot
+            => TargetRoot + PublicationFolder;
 
         public FolderName ExtensionFolder 
             => FolderName.Define("extensions");

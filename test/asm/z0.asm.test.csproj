@@ -8,15 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(AsmChecks)" />
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Blocked)" />
-    <ProjectReference Include="$(VSvc)" />
-    <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(BitGrids)" />
-    <ProjectReference Include="$(BitMatrix)" />
     <ProjectReference Include="$(Machine)" />
   </ItemGroup>
 

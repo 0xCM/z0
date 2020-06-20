@@ -8,14 +8,16 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(VCheck)" />
-    <ProjectReference Include="$(GVec)" />
-    <ProjectReference Include="$(VSvc)" />
+    <ProjectReference Include="$(Bits)" />
+    <ProjectReference Include="$(Circuits)" />
+
+    <!-- <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(VBits)" />
     <ProjectReference Include="$(BitSpans)" />    
     <ProjectReference Include="$(BitVectors)" />    
     <ProjectReference Include="$(Circuits)" />
     <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(Blocked)" />
+    <ProjectReference Include="$(Blocked)" /> -->
 
 
   </ItemGroup>

@@ -43,11 +43,11 @@ namespace Z0.Xed
         {
             Context = context;
             Config = default(AsmArchiveConfig);
-            SourceRoot = FolderPath.Define(@"K:\z0\archives\sources\xed");
-            TargetRoot = (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define("xed");
+            SourceRoot = Config.SourceRoot;
+            TargetRoot = Config.TargetRoot;
             Src = SourceArchive.Create(SourceRoot);            
-            Dst = StagingArchive.Create(TargetRoot + Config.StageFolder);
-            Pub = TableArchive.Service(TargetRoot + Config.DatasetFolder);            
+            Dst = StagingArchive.Create(Config.StageRoot);
+            Pub = TableArchive.Service(Config.PublicationRoot);            
         }
 
         public InstructionPattern[] ExtractPatterns()

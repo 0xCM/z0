@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(BitGrids)" />
+    <ProjectReference Include="$(BitMasks)" />
+    <ProjectReference Include="$(BitMatrix)" />
+    <ProjectReference Include="$(BitPack)" />    
+    <ProjectReference Include="$(BitSpans)" />
+    <ProjectReference Include="$(BitStrings)" />
+    <ProjectReference Include="$(BitSvc)" />
+    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(VBits)" />
+  </ItemGroup>
+
+</Project>

@@ -7,10 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(AsD)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Capture)" />
   </ItemGroup>
