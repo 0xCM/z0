@@ -122,11 +122,11 @@ namespace Z0
 
         ReadOnlySpan<ResIdentity<byte>> ByteResInfo
             => new ResIdentity<byte>[ByteResCount]{
-                ResIdentity.Define<byte>(
+                ResMembers.identify<byte>(
                     name: nameof(CharBytes), 
                     location: Root.address(head(CharBytes)),
                     length: CharBytes.Length),
-                ResIdentity.Define<byte>(
+                ResMembers.identify<byte>(
                     name: nameof(B001), 
                     location: Root.address(head(B001)),
                     length: B001.Length),
@@ -134,11 +134,11 @@ namespace Z0
 
         ReadOnlySpan<ResIdentity<char>> TextResInfo
             => new ResIdentity<char>[TextResCount]{
-                ResIdentity.Define<char>(
+                ResMembers.identify<char>(
                     name: nameof(S000), 
                     location: Root.address(head(C000)),
                     length: S000.Length),
-                ResIdentity.Define<char>(
+                ResMembers.identify<char>(
                     name: nameof(S001), 
                     location: Root.address(head(C001)),
                     length: S001.Length),

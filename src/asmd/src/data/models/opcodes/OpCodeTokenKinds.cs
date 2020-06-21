@@ -6,10 +6,14 @@ namespace Z0.Asm.Data
 {
     using System;
     
-    public readonly struct OpCodeTokenValue
+    public readonly struct OpCodeTokenKinds
     {
-        public const string None = text.Empty;
+        public const OpCodeTokenKind First = OpCodeTokenKind.NE;
 
+        public const OpCodeTokenKind Last = OpCodeTokenKind.ᕀi;
+        
+        public const byte Count = (byte)Last + 1;
+        
         public const string NE = "N.E.";
 
         public const string NP = "NP";

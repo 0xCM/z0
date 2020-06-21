@@ -18,20 +18,27 @@ namespace Z0
     /// </summary>
     public struct octet : IEquatable<analog>
     {
-        public static Symbols<BK,analog,N> Symbols => Symbolic.bits<analog>(N);
-
         byte data;
 
-        const byte LoMask = 0b0000_1111;
+        public const byte Min8u = 0;
 
-        const byte HiMask = 0b1111_0000;
+        public const byte Max8u = byte.MaxValue;
 
-        public static analog zero => 0;
+        public const int Width = 8;        
 
-        public static analog one => 1;
+        public static analog Min => Min8u;
+
+        public static analog Max => Max8u;
+
+        public static analog Zero => 0;
+
+        public static analog One => 1;
 
         public static N N => default;
 
+        public static Symbols<BK,analog,N> Symbols 
+            => Symbolic.bits<analog>(N);
+        
         [MethodImpl(Inline)]
         public static implicit operator analog(BK src)
             => new analog(src);
@@ -50,7 +57,7 @@ namespace Z0
 
         [MethodImpl(Inline)]    
         public static analog @bool(bool x)
-            => x ? one : zero;
+            => x ? One : Zero;
 
         [MethodImpl(Inline)]    
         public static bool operator true(analog x)

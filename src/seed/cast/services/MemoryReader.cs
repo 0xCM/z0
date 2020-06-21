@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe int Read(MemoryAddress src, Span<byte> dst, int? count = null)
         {
-            var pSrc = src.ToPointer<byte>();
+            var pSrc = src.Pointer<byte>();
             var limit = count ?? dst.Length;
             return Read(ref pSrc, limit, dst);
         }
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe int Read(MemoryAddress src, ref byte dst, int count)
         {
-            var pSrc = src.ToPointer<byte>();
+            var pSrc = src.Pointer<byte>();
             return Read(ref pSrc, count, ref dst);
         }
 

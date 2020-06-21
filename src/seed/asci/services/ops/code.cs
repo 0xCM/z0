@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Typed;
     using static SymBits;
 
     partial struct asci
@@ -29,6 +28,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AsciCharCode code(in asci16 src, Hex4 index)
             => (AsciCharCode)src.Storage.GetElement((byte)index);
+
+        [MethodImpl(Inline), Op]
+        public static AsciCharCode code(in asci32 src, Hex5 index)
+            => (AsciCharCode)src.Storage.GetElement((byte)index);
+
+        [MethodImpl(Inline), Op]
+        public static AsciCharCode code(in asci64 src, Hex6 index)
+        {
+            if((byte)index  <= 31)
+                return code(src.Lo,(Hex5)index);
+            else
+                return code(src.Hi, ((Hex5)(byte)(index - 32)));
+        }
 
         [MethodImpl(Inline), Op]
         public static AsciCharCode code(in asci16 src, N4 index)

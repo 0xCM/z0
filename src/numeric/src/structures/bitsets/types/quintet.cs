@@ -21,23 +21,23 @@ namespace Z0
     {
         internal byte data;
         
-        public static analog MinValue => MinVal;
+        public const byte Min8u = 0;
 
-        public static analog MaxValue => MaxVal;
+        public const byte Max8u = 31;
 
-        public static N N => default;
+        public const int BitWidth = 5;        
+
+        public const byte Base = (byte)Max8u + 1;
 
         public static analog Zero => 0;
 
         public static analog One => 1;
 
-        internal const byte MinVal = 0;
+        public static analog Min => Min8u;
 
-        internal const byte MaxVal = 31;
+        public static analog Max => Max8u;
 
-        internal const int BitWidth = 5;        
-
-        internal const byte Base = (byte)MaxVal + 1;
+        public static N N => default;
 
         [MethodImpl(Inline)]
         public static implicit operator octet(analog src)
@@ -173,7 +173,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator ~(analog src)
-            => wrap5(~src.data & MaxVal);
+            => wrap5(~src.data & Max8u);
 
         [MethodImpl(Inline)]
         public static analog operator ++(analog x)
@@ -209,35 +209,35 @@ namespace Z0
 
         [MethodImpl(Inline)]
         quintet(octet src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal quintet(byte src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal quintet(sbyte src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal quintet(short src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal quintet(ushort src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]    
         internal quintet(int x)
-            => data = (byte)((uint)x & MaxVal);
+            => data = (byte)((uint)x & Max8u);
         
         [MethodImpl(Inline)]
         internal quintet(uint src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal quintet(long src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal quintet(uint src, bool safe)

@@ -11,6 +11,7 @@ namespace Z0.Asm.Data
 
     public class t_opcodes : t_asmd<t_opcodes>
     {
+
         void emit(ReadOnlySpan<InstructionExpression> src)
         {
             var dstPath = CasePath($"InstructionExpression");
@@ -61,8 +62,25 @@ namespace Z0.Asm.Data
             }
         }
 
+        public void opcode_encode()
+        {
+            var encoder = OpCodeEncoder.Service();
+            var encoded = encoder.Encode();
+            using var dst = CaseWriter("OpCodes.Encoded");
+            for(var i=0; i<encoded.Length; i++)
+            {
+                dst.WriteLine(encoded[i]);
+            }
+        }
+
         public void opcode_reccords()
         {
+            var tokens = OpCodeServices.tokens();
+            for(var i=0; i<tokens.Length; i++)
+            {
+                Trace(tokens[i].Value);            
+            }
+            
             var data = OpCodeDataset.Create();
             var count = data.OpCodeCount;
             var records = data.OpCodeRecords.ToReadOnlySpan();

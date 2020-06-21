@@ -5,20 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static Konst;
-
-    public static class Contained
+    [Flags]
+    public enum CharGroup : uint
     {
-        
+        None = 0,
+
+        Digit = 1,
+
+        Letter = 2,
+
+    }
+    
+    public readonly struct DigitGroup
+    {
 
     }
 
-    public static partial class XTend
+    public readonly struct LetterGroup
     {
-
         
     }
+
 }

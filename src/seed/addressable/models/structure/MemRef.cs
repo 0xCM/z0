@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Span<byte> read(MemRef src)
         {
-            var reader = PointedReader.Create(src.Address.ToPointer<byte>(), src.Length);
+            var reader = PointedReader.Create(src.Address.Pointer<byte>(), src.Length);
             Span<byte> dstA = new byte[src.Length];            
             var count = reader.ReadAll(dstA);
             return dstA;
@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe int read(MemRef src, Span<byte> dst)
         {
-            var reader = PointedReader.Create(src.Address.ToPointer<byte>(), src.Length);
+            var reader = PointedReader.Create(src.Address.Pointer<byte>(), src.Length);
             return reader.ReadAll(dst);            
         }
 

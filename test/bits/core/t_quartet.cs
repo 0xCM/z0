@@ -16,12 +16,12 @@ namespace Z0
             Claim.eq(8u, x);
 
             var y = uint4(10u) + uint4(5u);
-            Claim.eq(quartet.MaxValue,y);
+            Claim.eq(quartet.Max,y);
         }
 
         public void inc_4u_check()
         {
-            var i = quartet.MinValue;
+            var i = quartet.Min;
             i++;
             i++;
             i++;
@@ -44,36 +44,36 @@ namespace Z0
             i++;
             i++;
             i++;
-            Claim.eq(i,quartet.MinValue);
+            Claim.eq(i,quartet.Min);
 
         }
 
         public void dec_4u_check()
         {
-            var i = quartet.MaxValue;
+            var i = quartet.Max;
             i--;
             i--;
             i--;
             i--;
-            Claim.eq(i, quartet.MaxValue - 4);
+            Claim.eq(i, quartet.Max - 4);
 
             i--;
             i--;
             i--;
             i--;
-            Claim.eq(i, quartet.MaxValue - 8);
+            Claim.eq(i, quartet.Max - 8);
 
             i--;
             i--;
             i--;
             i--;
-            Claim.eq(i, quartet.MaxValue - 12);
+            Claim.eq(i, quartet.Max - 12);
 
             i--;
             i--;
             i--;
             i--;
-            Claim.eq(i,quartet.MaxValue);
+            Claim.eq(i,quartet.Max);
 
         }
 

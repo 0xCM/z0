@@ -12,7 +12,7 @@ namespace Z0.Asm.Data
     /// <summary>
     /// Defines an op code via a sequence bytes
     /// </summary>
-    public readonly struct EncodedOpCode
+    public readonly struct EncodedOpCode : ITextual
     {
         readonly ulong Data;
 
@@ -23,6 +23,12 @@ namespace Z0.Asm.Data
         public EncodedOpCode(ulong data)
         {
             Data = data;
-        }        
+        }       
+
+        public string Format()
+            => asci.format(Data);
+
+        public override string ToString() 
+            => Format();
     }
 }

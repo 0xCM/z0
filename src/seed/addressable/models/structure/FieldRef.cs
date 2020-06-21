@@ -27,5 +27,17 @@ namespace Z0
             Field = field;
             Location = location;
         }
+
+        public ref readonly char C16
+        {
+            [MethodImpl(Inline)]
+            get => ref Location.Address.Ref<char>();
+        }
+
+        public ref readonly byte U8
+        {
+            [MethodImpl(Inline)]
+            get => ref Location.Address.Ref<byte>();
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace Z0.Asm.Data
 
         public const byte EncodingDelimiter = 0xFF;
 
-        public readonly Token[] Constructed;
+        public readonly TokenInfo[] Constructed;
 
         public readonly string[] Purpose;
 
@@ -54,7 +54,7 @@ namespace Z0.Asm.Data
             => Purpose[(int)id];
 
         [MethodImpl(Inline), Op]
-        public ref readonly Token Token(InstructionToken id)
+        public ref readonly TokenInfo Token(InstructionToken id)
             => ref Constructed[(int)id];
 
 

@@ -29,15 +29,15 @@ namespace Z0
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n5));
             decode(src,dst);
-            return new string(dst);
+            return new string(dst.Slice(0, src.Length));
         }
 
         [MethodImpl(Inline), Op]
         public static string format(in asci8 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n8));
-            decode(src,dst);
-            return new string(dst);
+            decode(src,dst);            
+            return new string(dst.Slice(0, src.Length));
         }        
 
         [MethodImpl(Inline), Op]

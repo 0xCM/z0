@@ -12,9 +12,9 @@ namespace Z0
 
     using static Konst;
 
-     /// <summary>
+    /// <summary>
     /// Defines an E-V parametric literal index
-     /// </summary>
+    /// </summary>
      public readonly struct EnumLiterals<E,V> : IEnumerable<EnumLiteral<E,V>>, IReadOnlyIndex<EnumLiteral<E,V>>
         where E : unmanaged, Enum
         where V : unmanaged

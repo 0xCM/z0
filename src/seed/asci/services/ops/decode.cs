@@ -16,11 +16,14 @@ namespace Z0
     partial struct asci
     {
         [MethodImpl(Inline)]
-        public static void decode(ReadOnlySpan<byte> src, Span<char> dst)
+        public static void decode(ReadOnlySpan<byte> src, char fill, Span<char> dst)
         {            
             var count = Root.length(src,dst);
             for(var i=0; i<count; i++)            
-                seek(dst,i) = @char(skip(src,i));
+            {
+                ref readonly var next = ref skip(src,i);                                    
+                seek(dst,i) = next == 0 ? fill : @char(skip(src,i));
+            }
         }
                 
         [MethodImpl(Inline), Op]

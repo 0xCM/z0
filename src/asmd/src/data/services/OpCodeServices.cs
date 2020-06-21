@@ -9,12 +9,32 @@ namespace Z0.Asm.Data
     using System.Runtime.InteropServices;
 
     using static Konst;
+    using static Root;
  
     [ApiHost("opcodes")]
     public readonly struct OpCodeServices : IApiHost<OpCodeServices>
     {                
         public static OpCodeServices Service => default;
-        
+
+        [Op]
+        public static unsafe OpCodeTokens load(ReadOnlySpan<FieldRef> src, OpCodeToken[] dst)
+        {
+            var buffer = span(dst);
+            ref var target = ref head(buffer);
+            for(byte i=0; i<src.Length; i++)
+            {
+                ref readonly var field = ref skip(src,i);
+                var data = Imagine.cover(field.C16, field.Location.Length);
+                var value = asci8.Null;
+                asci.encode(data, out value);
+                seek(buffer, i) = new OpCodeToken(i, (OpCodeTokenKind)i, value);
+            }
+            return new OpCodeTokens(dst);            
+        }
+
+        public static unsafe OpCodeTokens tokens()
+            => load(FieldCapture.Service.StringLiterals(typeof(OpCodeTokenKinds)),alloc<OpCodeToken>(OpCodeTokenKinds.Count));
+
         [MethodImpl(Inline), Op]
         public void Partition(in OpCodePartitoner processor, in OpCodePartition handler, ReadOnlySpan<OpCodeRecord> src)
             => processor.Partition(src, handler);

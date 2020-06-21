@@ -18,10 +18,14 @@ namespace Z0
             where T : unmanaged
                 => Root.gptr<T>(src);
 
-        [MethodImpl(Inline), Op]
-        public unsafe static ReadOnlySpan<T> read<T>(MemoryAddress location, int length)
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public unsafe static ReadOnlySpan<T> read<T>(MemoryAddress location, int count)
             where T : unmanaged
-                => new ReadOnlySpan<T>(location.ToPointer<T>(),length);
+        {
+            var pFirst = location.Pointer<T>();
+            ref var first = ref Unsafe.AsRef<T>(pFirst);
+            return MemoryMarshal.CreateReadOnlySpan<T>(ref first, count);      
+        }        
 
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(ulong src)
@@ -49,23 +53,23 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ref T toRef<T>(MemoryAddress src)
-            => ref src.ToRef<T>();
+            => ref src.Ref<T>();
          
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> edit<T>(MemoryAddress src, int length)
-            => MemoryMarshal.CreateSpan(ref src.ToRef<T>(), length);
+            => MemoryMarshal.CreateSpan(ref src.Ref<T>(), length);
 
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> edit(MemoryAddress src, int length)
-            => MemoryMarshal.CreateSpan(ref src.ToRef<byte>(), length);
+            => MemoryMarshal.CreateSpan(ref src.Ref<byte>(), length);
 
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<byte> cover(MemoryAddress src, int length)
-            => MemoryMarshal.CreateReadOnlySpan(ref src.ToRef<byte>(), length);
+            => MemoryMarshal.CreateReadOnlySpan(ref src.Ref<byte>(), length);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ReadOnlySpan<T> cover<T>(MemoryAddress src, int length)
-            => MemoryMarshal.CreateReadOnlySpan(ref src.ToRef<T>(), length);
+            => MemoryMarshal.CreateReadOnlySpan(ref src.Ref<T>(), length);
 
         [MethodImpl(Inline), Op]
         public static MemoryOffset offset(MemoryAddress @base, byte offset)

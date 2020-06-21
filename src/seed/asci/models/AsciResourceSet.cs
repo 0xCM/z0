@@ -29,7 +29,7 @@ namespace Z0
         public int EntryCount
         {
             [MethodImpl(Inline)]
-            get => EntryCount<A>(Content.Length);
+            get => count<A>(Content.Length);
         }
 
         /// <summary>
@@ -63,6 +63,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static ref readonly byte LeadingCell(ReadOnlySpan<byte> content, int index)
-            => ref Root.skip(content, EntryOffset<A>(index));
+            => ref Root.skip(content, offset<A>(index));
     }
 }

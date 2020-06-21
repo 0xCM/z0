@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;    
 
-    public readonly struct Token
+    public readonly struct TokenInfo
     {        
         public readonly int Index;
         
@@ -19,19 +19,19 @@ namespace Z0
 
         public readonly string Description;
 
-        public static Token Empty => new Token(0,text.Empty, text.Empty, text.Empty);
+        public static TokenInfo Empty => new TokenInfo(0,text.Empty, text.Empty, text.Empty);
 
         [MethodImpl(Inline)]
-        public static Token Define<T>(T index, string id, string value, string description)
+        public static TokenInfo Define<T>(T index, string id, string value, string description)
             where T : unmanaged, Enum
-                => new Token(Enums.e32i(index),id, value, description);        
+                => new TokenInfo(Enums.e32i(index),id, value, description);        
 
         [MethodImpl(Inline)]
-        public static Token Define(int index, string id, string value, string description)
-            => new Token(index,id,value, description);        
+        public static TokenInfo Define(int index, string id, string value, string description)
+            => new TokenInfo(index,id,value, description);        
 
         [MethodImpl(Inline)]
-        public Token(int index, string id, string value, string description)
+        public TokenInfo(int index, string id, string value, string description)
         {
             Index = index;
             Identifier = id ?? text.Empty;

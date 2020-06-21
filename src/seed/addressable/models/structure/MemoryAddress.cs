@@ -9,7 +9,12 @@ namespace Z0
 
     using static Konst;
     
-    public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable, IIdentification<MemoryAddress>
+    public interface IMemoryAddress  : IAddress<MemoryAddress,W64,ulong>, IAddressable, IIdentification<MemoryAddress>
+    {
+
+    }
+
+    public unsafe readonly struct MemoryAddress : IMemoryAddress
     {
         public ulong Location {get;}
 
@@ -202,11 +207,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public unsafe ref T ToRef<T>()
+        public unsafe ref T Ref<T>()
             => ref Unsafe.AsRef<T>((void*)Location);
         
         [MethodImpl(Inline)]
-        public unsafe T* ToPointer<T>()
+        public unsafe T* Pointer<T>()
             where T : unmanaged
                 => (T*)Location;
     }

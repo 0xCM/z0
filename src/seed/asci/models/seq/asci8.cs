@@ -47,6 +47,14 @@ namespace Z0
             => src.Decoded;
 
         [MethodImpl(Inline)]
+        public static implicit operator asci8(uint src)
+            => new asci8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator asci8(ulong src)
+            => new asci8(src);
+
+        [MethodImpl(Inline)]
         public asci8(ulong src)
         {
             Storage = src;

@@ -20,24 +20,24 @@ namespace Z0
     public struct triad : IEquatable<analog>
     {
         internal byte data;
-        
-        public static analog MinValue => MinVal;
 
-        public static analog MaxValue => MaxVal;
+        public const byte Min8u = 0;
+
+        public const byte Max8u = 7;
+
+        public const int Width = 3;        
+
+        public const byte Base = (byte)Max8u + 1;
+
+        public static analog Min => Min8u;
+
+        public static analog Max=> Max8u;
 
         public static analog Zero => 0;
 
         public static analog One => 1;
 
         public static N N => default;
-
-        internal const byte MinVal = 0;
-
-        internal const byte MaxVal = 7;
-
-        internal const int BitWidth = 3;        
-
-        internal const byte Base = (byte)MaxVal + 1;
 
         [MethodImpl(Inline)]
         public static implicit operator octet(analog src)
@@ -185,7 +185,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator ~(analog src)
-            => wrap3(~src.data & MaxVal);
+            => wrap3(~src.data & Max8u);
 
         [MethodImpl(Inline)]
         public static analog operator ++(analog x)
@@ -221,35 +221,35 @@ namespace Z0
 
         [MethodImpl(Inline)]
         triad(octet src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal triad(byte src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal triad(sbyte src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal triad(short src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal triad(ushort src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]    
         internal triad(int x)
-            => data = (byte)((uint)x & MaxVal);
+            => data = (byte)((uint)x & Max8u);
         
         [MethodImpl(Inline)]
         internal triad(uint src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal triad(long src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal triad(uint src, bool safe)

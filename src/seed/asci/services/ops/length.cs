@@ -72,7 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static int IndexLength(int i, int max)
-            => IndexFound(i) ? i + 1 : max;
+            => IndexFound(i) ? i : max;
 
     }
 }

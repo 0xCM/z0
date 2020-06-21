@@ -10,8 +10,8 @@ namespace Z0.Asm.Data
 
     partial class InstructionTokenData
     {
-        public static Token[] Tokens
-            => new Token[TokenCount]{ 
+        public static TokenInfo[] Tokens
+            => new TokenInfo[TokenCount]{ 
                 None, 
                 bnd, 
                 DST,

@@ -42,10 +42,15 @@ namespace Z0
             => src.Text;
 
         [MethodImpl(Inline)]
+        public static implicit operator asci2(ushort src)
+            => new asci2(src);
+
+        [MethodImpl(Inline)]
         public asci2(ushort src)
         {
             Storage = src;
         }
+        
         
         public bool IsEmpty
         {

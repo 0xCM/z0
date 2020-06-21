@@ -47,6 +47,26 @@ namespace Z0
             => src.Decoded;
 
         [MethodImpl(Inline)]
+        public static implicit operator asci4(ushort src)
+            => new asci4(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator asci4(uint src)
+            => new asci4(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte(asci4 src)
+            => (byte)src.Storage;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(asci4 src)
+            => (ushort)src.Storage;
+
+        [MethodImpl(Inline)]
+        public static explicit operator uint(asci4 src)
+            => src.Storage;
+
+        [MethodImpl(Inline)]
         public asci4(uint src)
         {
             Storage = src;

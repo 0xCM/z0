@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct ResIdentity<T>
         where T : unmanaged
     {
-        public string Name {get;}
+        public asci32 Name {get;}
 
         public MemRef Reference {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
             => new ResIdentity(src.Name,src.Reference, Root.primal<T>());
 
         [MethodImpl(Inline)]
-        public ResIdentity(string name, MemRef memref)
+        public ResIdentity(asci32 name, MemRef memref)
         {
             Name = name;
             Reference = memref;            

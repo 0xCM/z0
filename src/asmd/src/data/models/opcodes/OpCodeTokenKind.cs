@@ -4,19 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm.Data
 {
-
     using static Quintet;
 
     /// <summary>    
     /// Defines symbols used to specify opcode syntax
     /// </summary>
-    public enum OpCodeToken : byte
+    public enum OpCodeTokenKind : byte
     {
-        /// <summary>    
-        /// The untoken
-        /// </summary>
-        Null = b00000,
-
         /// <summary>    
         /// Not Encodable
         /// </summary>
@@ -169,10 +163,6 @@ namespace Z0.Asm.Data
         /// <summary>    
         /// A number used in floating-point instructions when one of the operands is ST(i) from the FPU register stack. 
         /// </summary>
-        ᕀi,
-        
-        Max = ᕀi,
-
-        Width = 5,
+        ᕀi,                
     }
 }

@@ -7,14 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
     using static Root;
 
     public readonly struct FieldCapture
     {
-
         public static FieldCapture Service => default;
 
         public FieldRef[] StringLiterals(params Type[] types)
@@ -64,7 +62,6 @@ namespace Z0
                 var cstr = chars.ToString();      
                 literals.WriteLine(text.concat(address.Format().PadRight(16), " | ", cstr));
             }
-
         }
     }
 }

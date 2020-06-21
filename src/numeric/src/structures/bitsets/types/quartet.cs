@@ -21,23 +21,23 @@ namespace Z0
     {
         internal byte data;
 
-        public static analog MinValue => MinVal;
+        public const byte Min8u = 0;
 
-        public static analog MaxValue => MaxVal;
+        public const byte Max8u = 0xF;
 
-        public static N N => default;
+        public const int BitWidth = 4;        
+
+        public const byte Base = (byte)Max8u + 1;
+
+        public static analog Min => Min8u;
+
+        public static analog Max => Max8u;
 
         public static analog Zero => 0;
 
         public static analog One => 1;
 
-        internal const byte MinVal = 0;
-
-        internal const byte MaxVal = 0xF;
-
-        internal const int BitWidth = 4;        
-
-        internal const byte Base = (byte)MaxVal + 1;
+        public static N N => default;
 
         [MethodImpl(Inline)]
         public static implicit operator octet(analog src)
@@ -165,7 +165,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator ^(analog lhs, analog rhs)
-            => wrap4((uint)(lhs.data & rhs.data) & (uint)MaxVal);
+            => wrap4((uint)(lhs.data & rhs.data) & (uint)Max8u);
 
         [MethodImpl(Inline)]
         public static analog operator >>(analog lhs, int rhs)
@@ -177,7 +177,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator ~(analog src)
-            => wrap4((uint)(~src.data & MaxVal));
+            => wrap4((uint)(~src.data & Max8u));
 
         [MethodImpl(Inline)]
         public static analog operator ++(analog x)
@@ -221,7 +221,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         quartet(octet src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal quartet(byte src)
@@ -249,7 +249,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal quartet(long src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal quartet(uint src, bool safe)

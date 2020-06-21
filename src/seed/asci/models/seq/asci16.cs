@@ -110,6 +110,30 @@ namespace Z0
             get => asci.bytes(this);
         }
 
+        public AsciCharCode this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => (AsciCharCode)Storage.GetElement(index);
+        }
+
+        public asci2 this[byte index, N2 size]
+        {
+            [MethodImpl(Inline)]
+            get =>  Storage.As<byte,ushort>().GetElement(index/2);
+        }
+
+        public asci4 this[byte index, N4 size]
+        {
+            [MethodImpl(Inline)]
+            get =>  Storage.As<byte,uint>().GetElement(index/4);
+        }
+
+        public asci8 this[byte index, N8 size]
+        {
+            [MethodImpl(Inline)]
+            get =>  Storage.As<byte,ulong>().GetElement(index/8);
+        }
+
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]

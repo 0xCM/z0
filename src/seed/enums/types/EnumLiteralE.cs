@@ -48,8 +48,14 @@ namespace Z0
         /// </summary>
         public EnumScalarKind DataType {get;}
 
+        /// <summary>
+        /// The meaning of the literal, if available
+        /// </summary>
         public string Description {get;}
 
+        /// <summary>
+        /// User data attched to the literal, if any
+        /// </summary>
         public UserMetadata UserData {get;}
 
         /// <summary>

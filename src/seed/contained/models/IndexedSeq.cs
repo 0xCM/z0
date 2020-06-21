@@ -11,13 +11,6 @@ namespace Z0
 
     using static Konst;
 
-    public class IndexedSeq
-    {
-        [MethodImpl(Inline)]
-        public static IndexedSeq<T> create<T>(params T[] src)    
-            => new IndexedSeq<T>(src);
-    }
-
     /// <summary>
     /// Reifies a canonical indexed sequence container
     /// </summary>

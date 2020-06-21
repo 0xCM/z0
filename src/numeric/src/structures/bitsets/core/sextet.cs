@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static analog uint6(ulong src)        
-            => new analog((byte)((byte)src & analog.MaxVal));
+            => new analog((byte)((byte)src & analog.Max8u));
 
         /// <summary>
         /// Constructs a uint6 value from a sequence of bits ranging from low to high
@@ -137,19 +137,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static analog inc(analog x)
         {
-            if(x.data != analog.MaxVal)
+            if(x.data != analog.Max8u)
                 return ++x.data;
             else
-                return  analog.MinVal;
+                return  analog.Min8u;
         }
 
         [MethodImpl(Inline), Op]
         public static analog dec(analog src)
         {
-            if(src.data != analog.MinVal)
+            if(src.data != analog.Min8u)
                 src.data--;
             else
-                src.data = analog.MaxVal;
+                src.data = analog.Max8u;
             return src;
         }
 

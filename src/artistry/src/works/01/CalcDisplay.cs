@@ -59,7 +59,7 @@ namespace Z0
             var x = uint8(4);
             var y = uint8(4);
 
-            ref var mulRef = ref mul.Address.ToRef<byte>();
+            ref var mulRef = ref mul.Address.Ref<byte>();
             for(var i=0; i<size; i++)
                 seek(ref mulRef, i) = skip(divCode,i);
 
@@ -67,7 +67,7 @@ namespace Z0
             term.print(Displays.describe(K.mul(), x,y, z1));
 
 
-            ref var divRef = ref div.Address.ToRef<byte>();
+            ref var divRef = ref div.Address.Ref<byte>();
             for(var i=0; i<size; i++)
                 seek(ref divRef, i) = skip(mulCode,i);
 

@@ -34,5 +34,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cover<T>(in T src, int count)
             => CreateReadOnlySpan(ref edit(src), count);    
+
+
     }
 }

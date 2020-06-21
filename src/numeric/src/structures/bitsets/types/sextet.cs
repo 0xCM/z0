@@ -21,17 +21,17 @@ namespace Z0
     {
         internal byte data;
 
-        internal const byte MinVal = 0;
+        public const byte Min8u = 0;
 
-        internal const byte MaxVal = 0b111111;
+        public const byte Max8u = 63;
+
+        internal const byte Base = (byte)Max8u + 1;
 
         internal const int BitWidth = 6;        
 
-        internal const byte Base = (byte)MaxVal + 1;
+        public static analog Min => Min8u;
 
-        public static analog MinValue => MinVal;
-
-        public static analog MaxValue => MaxVal;
+        public static analog Max => Max8u;
 
         public static N N => default;
 
@@ -173,7 +173,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator ~(analog src)
-            => wrap6(~src.data & MaxVal);
+            => wrap6(~src.data & Max8u);
 
         [MethodImpl(Inline)]
         public static analog operator ++(analog x)
@@ -209,35 +209,35 @@ namespace Z0
 
         [MethodImpl(Inline)]
         sextet(octet src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal sextet(byte src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal sextet(sbyte src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal sextet(short src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal sextet(ushort src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]    
         internal sextet(int x)
-            => data = (byte)((uint)x & MaxVal);
+            => data = (byte)((uint)x & Max8u);
         
         [MethodImpl(Inline)]
         internal sextet(uint src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & Max8u);
 
         [MethodImpl(Inline)]
         internal sextet(long src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & Max8u);
 
         [MethodImpl(Inline)]
         internal sextet(uint src, bool safe)

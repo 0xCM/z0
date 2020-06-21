@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static analog uint1(ulong src)        
-            => new analog((byte)((byte)src & analog.MaxVal));
+            => new analog((byte)((byte)src & analog.Max8u));
 
         [MethodImpl(Inline), Op]    
         public static analog uint1(bool x)
@@ -131,30 +131,30 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static analog inc(analog x)
         {
-            if(x.data != analog.MaxVal)
+            if(x.data != analog.Max8u)
                 return ++x.data;
             else
-                return  analog.MinVal;
+                return  analog.Min8u;
         }
 
         [MethodImpl(Inline), Op]
         public static analog dec(analog src)
         {
-            if(src.data != analog.MinVal)
+            if(src.data != analog.Min8u)
                 src.data--;
             else
-                src.data = analog.MaxVal;
+                src.data = analog.Max8u;
             return src;
         }
 
         [MethodImpl(Inline), Op]
         public static bit bit(analog src, int pos)
-            => pos < analog.BitWidth ? Z0.bit.test(src.data, pos) : Z0.bit.Off;
+            => pos < analog.Width ? Z0.bit.test(src.data, pos) : Z0.bit.Off;
 
         [MethodImpl(Inline), Op]
         public static analog bit(analog src, int pos, bit bit)
         {
-            if(pos < analog.BitWidth)
+            if(pos < analog.Width)
                 return bit.set(src.data, (byte)pos, bit);
             else
                 return src;
@@ -163,7 +163,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref analog bit(ref analog src, int pos, bit bit)
         {
-            if(pos < analog.BitWidth)
+            if(pos < analog.Width)
                 src.data = Z0.bit.set(src.data, (byte)pos, bit);
             return ref src;
         }

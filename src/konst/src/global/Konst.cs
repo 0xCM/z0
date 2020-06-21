@@ -23,6 +23,10 @@ namespace Z0
         /// </summary>
         public static Type EmptyType => typeof(void);
 
+        public static LetterGroup Letters => default;
+
+        public static DigitGroup Digits => default;
+
         /// <summary>
         /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
         /// </summary>
@@ -53,7 +57,7 @@ namespace Z0
         /// <summary>
         /// What else could this be?
         /// </summary>
-        public const string Space = " ";
+        public const char Space = ' ';
 
         /// <summary>
         /// Indicates that emitted content should overwrite whatever file content may exist
