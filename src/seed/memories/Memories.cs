@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    [ApiHost("api")]
+    [ApiHost]
     public partial class Memories : IApiHost<Memories>
     {
         public Memories()

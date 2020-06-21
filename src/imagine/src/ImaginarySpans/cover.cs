@@ -15,7 +15,7 @@ namespace Z0
     partial struct Imagine
     {
         /// <summary>
-        /// Covers a pointer-identified T-counted buffer a readonly span
+        /// Covers a pointer-identified T-counted buffer with a span
         /// </summary>
         /// <param name="pSrc">The memory source</param>
         /// <param name="count">The number of bytes to cover</param>
@@ -26,15 +26,35 @@ namespace Z0
                 => CreateSpan(ref @ref<T>(pSrc), count);
 
         /// <summary>
-        /// Covers a reference-identified T-counted buffer with a readonly span
+        /// Covers a reference-identified T-counted buffer with a span
         /// </summary>
         /// <param name="src">A reference to the leading cell</param>
         /// <param name="count">The number of T-cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> cover<T>(in T src, int count)
-            => CreateReadOnlySpan(ref edit(src), count);    
+        public static Span<T> cover<T>(in T src, int count)
+            => CreateSpan(ref edit(src), count);    
 
+        /// <summary>
+        /// Creates a span over a sequence of T-cells from a specified number of S-cells
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The S-cell count</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> cover<S,T>(in S src, int tCount)
+            => CreateSpan(ref edit<S,T>(src), tCount);
 
+        /// <summary>
+        /// Creates a span over a sequence of T-cells from a single S-cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The S-cell count</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> cover<S,T>(in S src)
+            => CreateSpan(ref edit<S,T>(src), 1);
     }
 }

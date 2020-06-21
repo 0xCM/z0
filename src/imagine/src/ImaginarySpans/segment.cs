@@ -14,7 +14,7 @@ namespace Z0
 
     readonly partial struct Imagine
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static ReadOnlySpan<T> segment<T>(ReadOnlySpan<T> src, int i0, int i1)
             where T : unmanaged
         {
@@ -33,14 +33,15 @@ namespace Z0
             return cast<S,T>(CreateReadOnlySpan(ref edit(first), count));      
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static ReadOnlySpan<T> segment<T>(T* pSrc, int i0, int i1)
             where T : unmanaged
         {
             var count = i1 - i0 + 1;
             var pFirst = Unsafe.Add<T>(pSrc, count);
             ref var first = ref Unsafe.AsRef<T>(pFirst);
-            return MemoryMarshal.CreateReadOnlySpan<T>(ref first, count);      
+            return CreateReadOnlySpan<T>(ref first, count);      
         }
+
     }
 }

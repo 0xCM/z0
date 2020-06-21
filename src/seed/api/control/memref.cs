@@ -17,5 +17,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static MemRef memref(MemoryAddress address, ByteSize size)
             => new MemRef(address,size);
+
+
+        [MethodImpl(Inline)]
+        public unsafe static MemRef memref(ReadOnlySpan<byte> src)
+            => new MemRef(gptr(head(src)), src.Length);
     }
 }

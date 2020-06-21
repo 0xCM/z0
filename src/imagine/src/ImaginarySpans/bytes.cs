@@ -26,6 +26,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src)
             where T : struct
-                => span<byte>(cast<T,byte>(first(src)), src.Length*SizeOf<T>());
+                => cover<byte>(cast<T,byte>(first(src)), src.Length*SizeOf<T>());
     }
 }

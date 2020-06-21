@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(Artifacts)" />
   </ItemGroup>
 
   <ItemGroup>

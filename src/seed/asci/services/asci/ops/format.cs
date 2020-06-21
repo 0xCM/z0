@@ -51,5 +51,38 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(in asci64 src)
             => new string(decode(src));
+
+
+        [Op]
+        public static string format(ReadOnlySpan<BinaryDigit> src)
+        {
+            Span<char> dst = stackalloc char[src.Length];
+            asci.render(src,dst);
+            return new string(dst);
+        }
+
+        [Op]
+        public static string format(ReadOnlySpan<DeciDigit> src)
+        {
+            Span<char> dst = stackalloc char[src.Length]; 
+            asci.render(src,dst);
+            return new string(dst);
+        }
+
+        [Op]
+        public static string format(ReadOnlySpan<HexDigit> src)
+        {
+            Span<char> dst = stackalloc char[src.Length];
+            asci.render(src,dst);
+            return new string(dst);
+        }
+
+        [Op]
+        public static string format(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
+        {
+            Span<char> digits = stackalloc char[src.Length*3];
+            render(@base, @case, src,digits);
+            return digits.ToString();
+        }                   
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
         
-    [ApiHost("api")]
+    [ApiHost]
     public partial class Symbolic : IApiHost<Symbolic>
     {
 
@@ -17,13 +17,6 @@ namespace Z0
     {
 
     }
-
-    [ApiHost("data")]
-    public partial class SymbolicData : IApiHost<SymbolicData>
-    {
-
-    }
-
     
     public static partial class XTend
     {

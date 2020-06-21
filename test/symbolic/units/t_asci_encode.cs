@@ -27,27 +27,27 @@ namespace Z0
             
             var a2d = asci.chars(tc.A2);
             var a2c = asci.codes((sbyte)c0, (sbyte)asci2.Size);
-            Claim.yea(Symbolic.eq(a2d,a2c));
+            Claim.yea(asci.eq(a2d,a2c));
 
             var a4d = asci.chars(tc.A4);
             var a4c = asci.codes((sbyte)c0, (sbyte)asci4.Size);
-            Claim.yea(Symbolic.eq(a4d,a4c));
+            Claim.yea(asci.eq(a4d,a4c));
             
             var a8d = asci.chars(tc.A8);
             var a8c = asci.codes((sbyte)c0, (sbyte)asci8.Size);
-            Claim.yea(Symbolic.eq(a8d,a8c));
+            Claim.yea(asci.eq(a8d,a8c));
 
             var a16d = asci.chars(tc.A16);
             var a16c = asci.codes((sbyte)c0, (sbyte)asci16.Size);
-            Claim.yea(Symbolic.eq(a16d,a16c));
+            Claim.yea(asci.eq(a16d,a16c));
 
             var a32d = asci.chars(tc.A32);
             var a32c = asci.codes((sbyte)c0,(sbyte)asci32.Size);
-            Claim.yea(Symbolic.eq(a32d,a32c));
+            Claim.yea(asci.eq(a32d,a32c));
 
             var a64d = asci.chars(tc.A64);
             var a64c = asci.codes((sbyte)c0, (sbyte)asci64.Size);
-            Claim.yea(Symbolic.eq(a64d,a64c));        
+            Claim.yea(asci.eq(a64d,a64c));        
         }
 
         public void res_HexKind()

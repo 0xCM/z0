@@ -12,6 +12,7 @@ namespace Z0
 
     partial class Symbolic     
     {
+
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
         /// </summary>
@@ -22,7 +23,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => new Symbols<E,T,N>(literals<E>(crop).Map(x => define<E,T,N>(x)));
+                => new Symbols<E,T,N>(Enums.literals<E>(crop).Map(x => define<E,T,N>(x)));
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
@@ -32,7 +33,7 @@ namespace Z0
         public static Symbols<E,T> enumerate<E,T>(int crop = 0)
             where E : unmanaged, Enum
             where T : unmanaged
-                => new Symbols<E,T>(literals<E>(crop).Map(x => define<E,T>(x)));
+                => new Symbols<E,T>(Enums.literals<E>(crop).Map(x => define<E,T>(x)));
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
@@ -42,14 +43,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Symbols<E> enumerate<E>(int crop = 0)
             where E : unmanaged, Enum
-                => new Symbols<E>(literals<E>(crop).Map(x => define<E>(x)));
-
-        static ReadOnlySpan<E> literals<E>(int crop = 0)
-            where E : unmanaged, Enum
-        {
-            var literals = @readonly(Enums.literals<E>());
-            var count = literals.Length - crop;
-            return literals.Slice(0,count);            
-        }
+                => new Symbols<E>(Enums.literals<E>(crop).Map(x => define<E>(x)));
     }
 }

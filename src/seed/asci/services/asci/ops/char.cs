@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Root;
 
     partial struct asci
     {
@@ -30,5 +31,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static char @char(in asci16 src, Hex4 index)
             => (char)code(src,index);
+
+        [MethodImpl(Inline), Op]
+        public static char @char(UpperCased @case, HexDigit digit)
+            => (char)code(@case, digit);
+
+        [MethodImpl(Inline), Op]
+        public static char @char(LowerCased @case, HexDigit digit)
+            => (char)code(@case, digit);
     }
 }

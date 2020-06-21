@@ -79,7 +79,7 @@ namespace Z0.Machine
 
             var steps = Buffers.Run().Slice(0, Count);
             var buffer = Buffers.Log();
-            var count = Symbolic.render(steps, buffer);
+            var count = asci.render(steps, buffer);
             var hexline = buffer.Slice(0,count).ToString();
             term.print(hexline);
 
@@ -112,7 +112,7 @@ namespace Z0.Machine
         public void Execute(in ReadOnlySpan<byte> src)
         {
             var buffer = Buffers.Step();
-            var count = Symbolic.codes(src, UpperCased.Case, buffer);
+            var count = asci.codes(src, UpperCased.Case, buffer);
             var ran = buffer.Slice(0, count);
             ran.CopyTo(Buffers.Run(), Count);
             Count += count;

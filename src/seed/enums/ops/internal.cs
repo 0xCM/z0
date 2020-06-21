@@ -64,7 +64,7 @@ namespace Z0
         static E[] CreateLiteralArray<E>()
             where E : unmanaged, Enum
         {
-            var i = index<E>(false);
+            var i = index<E>();
             var dst = new E[i.Length];
             for(var j = 0; j<dst.Length; j++)
                 dst[j] = i[j].LiteralValue;

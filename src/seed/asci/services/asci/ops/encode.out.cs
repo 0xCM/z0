@@ -21,6 +21,7 @@ namespace Z0
         public static ref readonly asci2 encode(ReadOnlySpan<char> src, out asci2 dst)        
         {
             dst = default;
+            
             codes(src, span<asci2,AsciCharCode>(ref dst));
             return ref dst;
         }

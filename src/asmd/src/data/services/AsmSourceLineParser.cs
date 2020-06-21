@@ -20,7 +20,7 @@ namespace Z0.Asm.Data
         {
             var count = src.Length;
             var dst = new AsciCharCode[count];
-            Symbolic.encode(src,0,count,dst);
+            asci.encode(src,0,count,dst);
             return dst;
         }
         

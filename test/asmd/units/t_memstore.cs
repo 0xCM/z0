@@ -66,7 +66,7 @@ namespace Z0
         public void emit_data()
         {
                                 
-            var refs = SymbolicData.Refs.ToArray();   
+            var refs = Digits.HexRefs.ToArray();   
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];

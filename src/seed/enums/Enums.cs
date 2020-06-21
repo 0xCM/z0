@@ -10,6 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static Root;
 
     using NK = NumericKind;
     using BK = EnumScalarKind;
@@ -112,7 +113,7 @@ namespace Z0
         public static unsafe T scalar<E,T>(E e)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Root.tVal<E,T>(e);
+                => EnumValue.tVal<E,T>(e);
 
         /// <summary>
         /// Reads a generic enum member from a generic value
@@ -142,11 +143,10 @@ namespace Z0
         /// <param name="peek">If true, extracts the content, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="V">The numeric value type</typeparam>
-        public static EnumLiterals<E,V> values<E,V>(bool peek = false)
+        public static EnumLiterals<E,V> values<E,V>()
             where E : unmanaged, Enum
             where V : unmanaged
-                => peek ? LiteralSequence<E,V>() 
-                : (EnumLiterals<E,V>)ValueCache.GetOrAdd(typeof(E), _ => LiteralSequence<E,V>());
+                => (EnumLiterals<E,V>)ValueCache.GetOrAdd(typeof(E), _ => LiteralSequence<E,V>());
 
         /// <summary>
         /// Determines whether an enum has a specified integral value
@@ -197,9 +197,9 @@ namespace Z0
         /// </summary>
         /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static EnumLiterals<E> index<E>(bool peek = false)
+        public static EnumLiterals<E> index<E>()
             where E : unmanaged, Enum
-                => peek ? CreateIndex<E>() : (EnumLiterals<E>)IndexCache.GetOrAdd(typeof(E), _ => CreateIndex<E>());
+                => (EnumLiterals<E>)IndexCache.GetOrAdd(typeof(E), _ => CreateIndex<E>());
 
         /// <summary>
         /// Gets the literals defined by an enumeration
@@ -207,9 +207,17 @@ namespace Z0
         /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static E[] literals<E>(bool peek = false)
+        public static E[] literals<E>()
             where E : unmanaged, Enum
-                => peek ? CreateLiteralArray<E>() : (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiteralArray<E>());
+                => (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiteralArray<E>());
+
+        public static ReadOnlySpan<E> literals<E>(int crop)
+            where E : unmanaged, Enum
+        {
+            var literals = Root.span(Enums.literals<E>());
+            var count = literals.Length - crop;
+            return literals.Slice(0,count);            
+        }
 
         [MethodImpl(Inline)]
         public static E definedOrElse<E>(E e, E alt)
@@ -231,11 +239,11 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="V">The numeric value type</typeparam>
-        public static IDictionary<V,E> dictionary<E,V>(bool peek = false)
+        public static IDictionary<V,E> dictionary<E,V>()
             where E : unmanaged, Enum
             where V : unmanaged
         {
-            var pairs = values<E,V>(peek);
+            var pairs = values<E,V>();
             var index = new Dictionary<V,E>();
             foreach(var pair in pairs)
                 index.TryAdd(pair.NumericValue, pair.LiteralValue);

@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
-
-    using static Konst;
 
     public class t_symbolic : UnitTest<t_symbolic>
     {
@@ -17,7 +12,7 @@ namespace Z0
         public void render_2()
         {
             var src = Random.Bytes(8).ToSpan();
-            var actual = Symbolic.render(Konst.base2, src).ToString();
+            var actual = asci.render(Konst.base2, src).ToString();
             var expect = src.ToBitSpan().Format();
             ClaimPrimal.eq(expect,actual);
 

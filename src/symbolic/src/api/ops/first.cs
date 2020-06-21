@@ -18,7 +18,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
                 if(skip(src,i) == match)
                     return i;
-            return -1;
+            return NotFound;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
                 if(skip(src,i) == match)
                     return i;
-            return -1;
+            return NotFound;
         }
     }
 }

@@ -12,14 +12,6 @@ namespace Z0
 
     partial class Symbolic    
     {        
-        [MethodImpl(Inline), Op]
-        public static char @char(UpperCased @case, HexDigit digit)
-            => (char)code(@case, digit);
-
-        [MethodImpl(Inline), Op]
-        public static char @char(LowerCased @case, HexDigit digit)
-            => (char)code(@case, digit);
-
         [MethodImpl(Inline)]
         public static char @char<S,T,N>(Symbol<S,T,N> src)
             where S : unmanaged
@@ -36,6 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static char @char<S>(Symbol<S> src)
             where S : unmanaged
-                => Unsafe.As<S,char>(ref edit(src.Value));
+                => Unsafe.As<S,char>(ref edit(src.Value));            
+
     }
 }

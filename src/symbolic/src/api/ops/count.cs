@@ -8,24 +8,36 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
+    using static Root;
     
     partial class Symbolic    
-    {        
+    {   
+        /// <summary>
+        /// Counts the number of source characters that exist an a specified match set
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="match"></param>
         [MethodImpl(Inline), Op]
-        public static int count(ReadOnlySpan<string> src, int start, char exclude)
+        public static int count(ReadOnlySpan<string> src, ReadOnlySpan<char> match)
+        {
+            var total = 0;
+            for(var i=0; i<src.Length; i++)
+                total += count(skip(src,i),match);
+            return total;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static int count(ReadOnlySpan<char> src, ReadOnlySpan<char> match)
         {
             var count = 0;
-            for(var i=start; i<src.Length; i++)
+            for(var i=0; i<src.Length; i++)
             {
-                ReadOnlySpan<char> data = Root.skip(src,i);
-                
-                for(var j=0; j<data.Length; j++)
-                {
-                    ref readonly var c = ref Root.skip(data,j);
-                    if(!SymTest.IsWhiteSpace(c) && c != exclude)
+                ref readonly var c = ref skip(src,i);
+                for(var j=0; j<match.Length; j++)
+                    if(skip(match,j) == c)
                         count++;
-                }
             }
+
             return count;
         }
     }

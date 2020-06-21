@@ -16,6 +16,10 @@ namespace Z0
     [ApiHost]
     public readonly struct VSym : IApiHost<VSym>
     {
+        [MethodImpl(Inline), Op]
+        public static ref byte write(ref AsciCharCode src)
+            => ref Unsafe.As<AsciCharCode,byte>(ref edit(src));        
+            
         /// <summary>
         /// Converts 16 source characters to 16 asci codes
         /// </summary>
@@ -27,7 +31,7 @@ namespace Z0
         public static void encode(in char src, int offset, N16 count, ref AsciCharCode dst)
         {            
             ref readonly var input = ref Symbolic.read(src,offset);
-            ref var target = ref Symbolic.write(ref dst);
+            ref var target = ref write(ref dst);
             vstore(vcompact(vload(w256,input), w8), ref target);        
         }
     }

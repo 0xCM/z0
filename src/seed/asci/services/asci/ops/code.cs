@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static Root;
     using static SymBits;
 
     partial struct asci
@@ -50,5 +51,26 @@ namespace Z0
         public static AsciCharCode code<N>(in asci16 src, N index = default)
             where N : unmanaged, ITypeNat                
                 => (AsciCharCode)vextract(src.Storage, index);
+
+
+        /// <summary>
+        /// Returns the upper-case hex code for a specified digit
+        /// </summary>
+        /// <param name="case">The case selector</param>
+        /// <param name="index">The digit value</param>
+        /// <remarks>movzx eax,dl -> movsxd rax,eax -> mov rdx,28b57e0aca9h -> movzx eax,byte ptr [rax+rdx] </remarks>
+        [MethodImpl(Inline), Op]
+        public static HexCode code(UpperCased @case, HexDigit digit)
+            => (HexCode)skip(SymbolKonst.UpperHexCodes, (byte)digit);
+
+        /// <summary>
+        /// Returns the lower-case hex code for a specified digit
+        /// </summary>
+        /// <param name="case">The case selector</param>
+        /// <param name="index">The digit value</param>
+        /// <remarks>movzx eax,dl -> movsxd rax,eax -> mov rdx,28b57e0aed9h -> movzx eax,byte ptr [rax+rdx]</remarks>
+        [MethodImpl(Inline), Op]
+        public static HexCode code(LowerCased @case, HexDigit digit)
+            => (HexCode)skip(SymbolKonst.LowerHexCodes, (byte)digit);
     }
 }

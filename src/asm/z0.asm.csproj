@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Artifacts)" />
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(Archives)" />
     <ProjectReference Include="$(Dynamic)" />

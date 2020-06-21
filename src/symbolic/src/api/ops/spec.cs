@@ -11,10 +11,6 @@ namespace Z0
 
     partial class Symbolic
     {
-        [MethodImpl(Inline), Op]
-        public static SymbolSpec<AsciCharCode,N1> spec(params AsciCharCode[] src)
-            => spec<AsciCharCode,byte, N1>(src);
-
         [MethodImpl(Inline)]
         public static SymbolSpec<S,N> spec<S,N>(ushort segwidth, Type segdomain, params S[] symbols)
             where S : unmanaged
