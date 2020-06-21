@@ -25,6 +25,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T add<T>(ref T src, int offset)
             where T : unmanaged
-                => ref Unsafe.Add(ref src, offset);
+                => ref Imagine.add(src, offset);
     }
 }

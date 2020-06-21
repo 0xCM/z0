@@ -13,14 +13,20 @@ namespace Z0
     partial struct Imagine
     {
         /// <summary>
-        /// Adds a cell-relative offset to a readonly referenceheh
+        /// Adds an offset to a reference
         /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <param name="count">The cell offset count</param>
-        /// <typeparam name="T">The cell type</typeparam>
+        /// <param name="src">The source reference</param>
+        /// <param name="offset">The source-relative offset amount</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        /// <remarks>
+        /// u8:  movsxd rax,edx -> add rax,rcx
+        /// u16: movsxd rax,edx -> lea rax,[rcx+rax*2]
+        /// u32: movsxd rax,edx -> lea rax,[rcx+rax*4]
+        /// u64: movsxd rax,edx -> lea rax,[rcx+rax*8]
+        /// </remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T add<T>(in T src, int count)
-            => ref Add(ref edit(src), count);
+        public static ref T add<T>(in T src, int offset)
+            => ref Add(ref edit(src), offset);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte add<T>(W8 w, in T src, int count)

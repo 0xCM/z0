@@ -11,16 +11,16 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline)]   
         public static ref double float64<T>(ref T src)
             => ref As.float64(ref src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline)]   
         public static double? float64<T>(T? src)
             where T : unmanaged
                 => As.float64(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline)]   
         public static double float64<T>(T src)
             => As.float64(src);
     }

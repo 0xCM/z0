@@ -9,6 +9,16 @@ namespace Z0
 
     using static Konst;
 
+    public readonly struct Letter
+    {
+        
+    }
+
+    public readonly struct Number
+    {
+        
+    }
+
     public readonly struct LetterCase
     {
         public bool IsUpper {get;}    

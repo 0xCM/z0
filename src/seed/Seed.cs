@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    [ApiHost("api")]
-    public partial class Seed : IApiHost<Seed>
-    {
-        public static void ThrowEmptySpanError()
-            => throw new Exception($"The span is empty");
-    }
+    // [ApiHost("api")]
+    // public partial class Root : IApiHost<Root>
+    // {
+    //     public static void ThrowEmptySpanError()
+    //         => throw new Exception($"The span is empty");
+    // }
 
 
 

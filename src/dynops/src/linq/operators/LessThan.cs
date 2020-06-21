@@ -9,11 +9,8 @@ namespace Z0.Dynamics.Operators
     using System.Linq;
     using System.Linq.Expressions;
       
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
-    using static Z0.XPress;
-    using static Z0.XFunc;
+    using static Root;
+    using static XPress;
 
     public readonly struct LessThan<T>
     {

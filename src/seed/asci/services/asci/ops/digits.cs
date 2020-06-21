@@ -13,17 +13,18 @@ namespace Z0
     using HSL = HexSymLo;
     using HSU = HexSymUp;
 
-    partial class Symbolic        
+    partial struct asci
     {        
         [MethodImpl(Inline), Op]
         public static Span<DeciDigit> digits(ReadOnlySpan<char> src, Span<DeciDigit> dst)
         {
             var len = src.Length;
             for(var i = 0; i< len; i++)
-                dst[i] = Symbolic.digit(Seed.base10, src[i]);            
+                dst[i] = asci.digit(Konst.base10, src[i]);            
             return dst;            
         }
 
+        [MethodImpl(Inline), Op]
         public static Span<DeciDigit> digits(Base10 @base, ulong src)
         {
             var data = src.ToString();
@@ -99,7 +100,6 @@ namespace Z0
         /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        [MethodImpl(Inline), Op]
         public static NatSpan<N4,byte> digits(Perm4L src)
             => digits(src,NatSpan.alloc<N4,byte>());
 

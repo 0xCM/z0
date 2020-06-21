@@ -6,8 +6,6 @@ namespace Z0.Dynamics.Operators
 {
     using System;
     using System.Linq.Expressions;
-
-    using Z0;
     
     using static XPress;
 

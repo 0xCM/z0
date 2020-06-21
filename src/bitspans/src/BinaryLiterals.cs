@@ -17,7 +17,7 @@ namespace Z0
         public static T[] Validate<T>(this IEnumerable<BinaryLiteral<T>> src, Type declarer)
             where T : unmanaged
         {
-            var literals = Literati.attributed<T>(Seed.base2, declarer).ToArray();
+            var literals = Literati.attributed<T>(Konst.base2, declarer).ToArray();
             var count = literals.Length;
             var dst = Root.alloc<T>(count);
             for(var i=0; i< count; i++)        
@@ -37,7 +37,7 @@ namespace Z0
         public static T[] extract<T>(Type declarer)
             where T : unmanaged
         {
-            Span<BinaryLiteral<T>> literals = Literati.attributed<T>(Seed.base2, declarer).ToArray();
+            Span<BinaryLiteral<T>> literals = Literati.attributed<T>(Konst.base2, declarer).ToArray();
             
             var count = literals.Length;
             var dst = Root.alloc<T>(count);

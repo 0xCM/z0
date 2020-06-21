@@ -17,7 +17,7 @@ namespace Z0
         public void render_2()
         {
             var src = Random.Bytes(8).ToSpan();
-            var actual = Symbolic.render(Seed.base2, src).ToString();
+            var actual = Symbolic.render(Konst.base2, src).ToString();
             var expect = src.ToBitSpan().Format();
             ClaimPrimal.eq(expect,actual);
 

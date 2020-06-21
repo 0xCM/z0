@@ -9,7 +9,6 @@ namespace Z0
     
     using static Konst;
     using static Root;
-    using static Symbolics;
 
     partial class Symbolic
     {

@@ -11,20 +11,21 @@ namespace Z0
 
     partial class Root
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static ref T seek<T>(ref T src, byte count)
-            => ref Unsafe.Add(ref src, count);
+            => ref Imagine.seek(ref src, count);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, byte count)
-            => ref seek(ref head(src), count);         
+            => ref Imagine.seek(src, count);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static ref T seek<T>(ref T src, int count)
-            => ref Unsafe.Add(ref src, count);
+            => ref Imagine.seek(ref src, count);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, int count)
-            => ref seek(ref head(src), count);         
+            => ref Imagine.seek(src, count);
+
     }
 }

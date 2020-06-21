@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
     using API = Permute;
 
     public static partial class PermX
@@ -53,7 +52,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatSpan<N4, byte> ToDigits(this Perm4L src)
-            => Symbolic.digits(src);
+            => asci.digits(src);
 
         /// <summary>
         /// Computes the digits corresponding to each 3-bit segment of the permutation spec
@@ -61,7 +60,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatSpan<N8,OctalDigit> ToDigits(this Perm8L src)
-            => Symbolic.digits(src);
+            => asci.digits(src);
 
         /// <summary>
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
@@ -69,7 +68,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatSpan<N16,HexDigit> ToDigits(this Perm16L src)
-            => Symbolic.digits(src);
+            => asci.digits(src);
 
         /// <summary>
         /// Defines a shuffle spec from a permutation

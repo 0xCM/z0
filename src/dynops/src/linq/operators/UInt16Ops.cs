@@ -10,7 +10,6 @@ namespace Z0.Dynamics.Operators
     using System.Linq.Expressions;
 
     using static Konst;
-    using static Memories;
     using static XFunc;
 
     public class UInt16Ops

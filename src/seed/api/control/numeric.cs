@@ -65,42 +65,42 @@ namespace Z0
             where T : unmanaged             
                 => *((sbyte*)(&src));
 
-        [MethodImpl(Inline), Op, Closures(Seed.Numeric16x32x64)]
+        [MethodImpl(Inline), Op, Closures(Numeric16x32x64)]
         public static unsafe ushort u16<T>(T src)
             where T : unmanaged             
                 => *((ushort*)(&src));
 
-        [MethodImpl(Inline), Op, Closures(Seed.Numeric16x32x64)]
+        [MethodImpl(Inline), Op, Closures(Numeric16x32x64)]
         public static unsafe short i16<T>(T src)
             where T : unmanaged             
                 => *((short*)(&src));
 
-        [MethodImpl(Inline), Op, Closures(Seed.Numeric32x64)]
+        [MethodImpl(Inline), Op, Closures(Numeric32x64)]
         public static unsafe uint u32<T>(T src)
             where T : unmanaged             
                 => *((uint*)(&src));
 
-        [MethodImpl(Inline), Op, Closures(Seed.Numeric32x64)]
+        [MethodImpl(Inline), Op, Closures(Numeric32x64)]
         public static unsafe int i32<T>(T src)
             where T : unmanaged             
                 => *((int*)(&src));
 
-        [MethodImpl(Inline), Op, Closures(Seed.Numeric64)]
+        [MethodImpl(Inline), Op, Closures(Numeric64)]
         public static unsafe ulong u64<T>(T src)
             where T : unmanaged             
                 => *((ulong*)(&src));
 
-        [MethodImpl(Inline), Op, Closures(Seed.Numeric64)]
+        [MethodImpl(Inline), Op, Closures(Numeric64)]
         public static unsafe long i64<T>(T src)
             where T : unmanaged             
                 => *((long*)(&src));
 
-        [MethodImpl(Inline), Op, Closures(Seed.Numeric32x64)]
+        [MethodImpl(Inline), Op, Closures(Numeric32x64)]
         public static unsafe float f32<T>(T src)
             where T : unmanaged             
                 => *((float*)(&src));
 
-        [MethodImpl(Inline), Op, Closures(Seed.Numeric64)]
+        [MethodImpl(Inline), Op, Closures(Numeric64)]
         public static unsafe double f64<T>(T src)
             where T : unmanaged             
                 => *((double*)(&src));

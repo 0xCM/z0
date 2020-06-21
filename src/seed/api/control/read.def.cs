@@ -17,7 +17,7 @@ namespace Z0
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T read<S,T>(in S src)        
-            => ref Unsafe.As<S,T>(ref edit(src));
+            => ref Imagine.read<S,T>(src);
 
         /// <summary>
         /// Reads a T-value from an S-source after skipping a specified count of S-elements
@@ -28,6 +28,6 @@ namespace Z0
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T read<S,T>(in S src, int offset)        
-            => ref read<S,T>(Unsafe.Add(ref edit(src), offset));
+            => ref Imagine.read<S,T>(src, offset);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Dynamics.Operators
     using System.Linq.Expressions;
 
     using static Konst;
-    using static Memories;
+    using static Root;
     using static XPress;
 
     public static class GreaterThanOrEqual<T>

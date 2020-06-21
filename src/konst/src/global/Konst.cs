@@ -23,9 +23,25 @@ namespace Z0
         /// </summary>
         public static Type EmptyType => typeof(void);
 
-        public static LetterGroup Letters => default;
+        /// <summary>
+        /// Uppercase letter classifier accessor
+        /// </summary>
+        public static UpperCased UpperCase => default;
 
-        public static DigitGroup Digits => default;
+        /// <summary>
+        /// Lowercase letter classifier accessor
+        /// </summary>
+        public static LowerCased LowerCase => default;
+
+        /// <summary>
+        /// Letter classifier accessor
+        /// </summary>
+        public static Letter Letter => default;
+        
+        /// <summary>
+        /// Number classifier accessor
+        /// </summary>
+        public static Number Number => default;
 
         /// <summary>
         /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
@@ -90,6 +106,32 @@ namespace Z0
         /// The " | " character sequence
         /// </summary>
         public const string SpacePipe = " | ";
+
+        /// <summary>
+        /// Species the base2 singleton representative
+        /// </summary>
+        public static Base2 base2 => default;
+
+        /// <summary>
+        /// Species the base8 singleton representative
+        /// </summary>
+        public static Base3 base3 => default;
+
+        /// <summary>
+        /// Species the base8 singleton representative
+        /// </summary>
+        public static Base8 base8 => default;
+
+        /// <summary>
+        /// Species the base10 singleton representative
+        /// </summary>
+        public static Base10 base10 => default;
+
+        /// <summary>
+        /// Species the base16 singleton representative
+        /// </summary>
+        public static Base16 base16 => default;
+
 
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)

@@ -38,7 +38,7 @@ namespace Z0.Asm.Data
             Span<char> dst = stackalloc char[length];
             head(dst) = head(src);
             for(var i=1; i<length; i++)
-                seek(dst,i) = Symbolic.lowercase(skip(src,i));
+                seek(dst,i) = asci.lowercase(skip(src,i));
             return new string(src);
         }
     }

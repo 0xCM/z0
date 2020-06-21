@@ -5,9 +5,6 @@
 namespace Z0.Dynamics
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public sealed class NotNullOperator : UnaryOperator<NotNullOperator>, INullityOperator<NotNullOperator>
     {
         internal NotNullOperator()

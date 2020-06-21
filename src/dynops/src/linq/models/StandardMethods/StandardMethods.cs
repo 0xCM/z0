@@ -8,9 +8,7 @@ namespace Z0.Dynamics
     using System.Linq;
     using System.Collections.Generic;
 
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
+    using static Root;
 
     /// <summary>
     /// Collects standard method classifications

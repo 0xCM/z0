@@ -5,16 +5,8 @@
 namespace Z0.Dynamics.Operators
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
-    using System.Diagnostics;
-    using System.Runtime.CompilerServices;
-
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
     using static Z0.XPress;
-    using static Z0.XFunc;
 
     public static class OrElse<T>
     {

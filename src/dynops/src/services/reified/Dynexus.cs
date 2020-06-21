@@ -11,9 +11,10 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
 
-    using static Z0.Seed;
-    using static Z0.Memories;
+    using static Root;
     using static Kinds;
+    using static Konst;
+    using static Typed;
 
     using K = Kinds;
     using I = Z0;

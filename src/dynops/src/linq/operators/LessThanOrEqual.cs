@@ -6,14 +6,10 @@
 namespace Z0.Dynamics.Operators
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
 
-    using Z0;
-    using static Z0.Seed;
-    using static Z0.Memories;
-    using static Z0.XPress;
-    using static Z0.XFunc;
+    using static Root;
+    using static XPress;
 
     public static class LessThanOrEqual<T>
     {
@@ -29,13 +25,13 @@ namespace Z0.Dynamics.Operators
                     switch (typecode<T>())
                     {
                         case TypeCode.Byte:
-                            return cast<Func<T, T, bool>>(ByteOps.LTEQ.Compile());
+                            return cast<Func<T,T,bool>>(ByteOps.LTEQ.Compile());
                         case TypeCode.SByte:
-                            return cast<Func<T, T, bool>>(SByteOps.LTEQ.Compile());
+                            return cast<Func<T,T,bool>>(SByteOps.LTEQ.Compile());
                         case TypeCode.UInt16:
-                            return cast<Func<T, T, bool>>(UInt16Ops.LTEQ.Compile());
+                            return cast<Func<T,T,bool>>(UInt16Ops.LTEQ.Compile());
                         default:
-                            return lambda<T, T, bool>(Expression.LessThanOrEqual).Compile();
+                            return lambda<T, T,bool>(Expression.LessThanOrEqual).Compile();
                     }
                 });
 

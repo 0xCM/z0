@@ -11,26 +11,4 @@ namespace Z0
         
     }
 
-    public readonly struct Letter
-    {
-        
-    }
-
-    public readonly struct Number
-    {
-        
-    }
-    
-    public readonly struct Symbolics
-    {
-        public static ASCI ASCI => default;
-
-        public static LowerCased LowerCase => LowerCased.Case;
-
-        public static UpperCased UpperCase => UpperCased.Case;
-
-        public static Letter Letter => default;
-        
-        public static Number Number => default;
-    }  
 }
