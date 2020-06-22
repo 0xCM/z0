@@ -11,6 +11,7 @@ namespace Z0
 
     using static Konst;
     using static Root;
+    using static As;
 
     /// <summary>
     /// Api for managing native buffers
@@ -40,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> content<T>(IBufferToken src)
             where T : unmanaged
-                => Imagine.cover((byte*)src.Handle.ToPointer(), src.Size).As<T>();
+                => cover((byte*)src.Handle.ToPointer(), src.Size).As<T>();
 
         /// <summary>
         /// Enables bytespan execution

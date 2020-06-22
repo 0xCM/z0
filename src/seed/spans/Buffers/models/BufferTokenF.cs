@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static As;
 
     public interface IBufferToken<F> : IFixedBufferToken
         where F : unmanaged, IFixed
@@ -67,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe Span<T> Content<T>()
             where T : unmanaged
-                => Imagine.cover((byte*)Handle.ToPointer(), Size).As<T>();
+                => cover((byte*)Handle.ToPointer(), Size).As<T>();
 
         /// <summary>
         /// Fills a token-identified buffer with data from a source span and returns the target memory to the caller as a span

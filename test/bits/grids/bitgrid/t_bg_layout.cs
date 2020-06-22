@@ -73,7 +73,7 @@ namespace Z0
             Span<byte> data = stackalloc byte[8];
             data.Fill(0b10101010);
 
-            ref readonly var src = ref refs.head64(data);
+            ref readonly var src = ref Spans.head64(data);
             var spec = BitGrid.specify(n8, n8, byte.MinValue);
             var map = spec.Map();
             var state = bit.Off;

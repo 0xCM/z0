@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref T edit<T>(in T src)
-            => ref Imagine.edit(in src);
+            => ref As.edit(in src);
 
         /// <summary>
         /// Adds an offset to a reference, measured relative to the reference type
@@ -35,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(ref T src, int count)
-            => ref Imagine.seek(ref src, count);
+            => ref Root.seek(ref src, count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, int count)
-            => ref Imagine.skip(in src, count);
+            => ref Root.skip(in src, count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the resulting element
@@ -55,7 +55,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, uint count)
-            => ref Imagine.skip(in src, (int)count);
+            => ref Root.skip(in src, (int)count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the resulting element
@@ -65,7 +65,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, ulong count)
-            => ref Imagine.skip(in src, (int)count);
+            => ref Root.skip(in src, (int)count);
 
         /// <summary>
         /// The canonical swap function
@@ -89,7 +89,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref byte seek8<T>(ref T src, int count)
-            => ref Imagine.seek(w8, ref src, count);
+            => ref As.seekw(w8, ref src, count);
 
         /// <summary>
         /// Interprets a generic element source as a uint16 element source and skips {count} elments of bit-width 16
@@ -99,7 +99,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref ushort seek16<T>(ref T src, int count)
-            => ref Imagine.seek(w16, ref src, count);
+            => ref As.seekw(w16, ref src, count);
 
         /// <summary>
         /// Interprets a generic element source as a uint32 element source and skips {count} elments of bit-width 32
@@ -109,7 +109,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref uint seek32<T>(ref T src, int count)
-            => ref Imagine.seek(w32, ref src, count);
+            => ref As.seekw(w32, ref src, count);
 
         /// <summary>
         /// Interprets a generic element source as a uint64 element source and skips {count} elments of bit-width 64
@@ -119,7 +119,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref ulong seek64<T>(ref T src, int count)
-            => ref Imagine.seek(w64, ref src, count);
+            => ref As.seekw(w64, ref src, count);
 
         /// <summary>
         /// Adds an offset to a reference, measured in bytes
@@ -139,7 +139,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref byte skip8<T>(in T src, int count)
-            => ref Imagine.skip(w8, src, count);
+            => ref As.skipw(w8, src, count);
 
         /// <summary>
         /// Interprets a readonly generic reference as a readonly uint64 reference
@@ -157,7 +157,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T head<T>(Span<T> src)
-            => ref Imagine.first(src);
+            => ref As.first(src);
 
         /// <summary>
         /// Returns a reference to the head of a readonly span
@@ -166,7 +166,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T head<T>(ReadOnlySpan<T> src)
-            => ref Imagine.first(src);
+            => ref As.first(src);
 
         /// <summary>
         /// Adds an offset to the head of a span, measured relative to the reference type
@@ -176,7 +176,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, int count)
-            => ref Imagine.skip(src,count);
+            => ref Root.skip(src,count);
 
         /// <summary>
         /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance
@@ -186,7 +186,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
-            => ref Spans.skip(src,count);
+            => ref Root.skip(src,count);
 
         /// <summary>
         /// Adds an offset to the head of a span, measured relative to the reference type
@@ -196,96 +196,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, int count)
-            => ref Spans.seek(src,count);
-
-        /// <summary>
-        /// Presents the span head as a reference to an unsigned 64-bit integer
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref ulong head64<T>(Span<T> src)
-            where T : unmanaged
-                => ref Spans.head64(src);
-        
-        /// <summary>
-        /// Presents the span head as a readonly reference to an unsigned 32-bit integer
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly uint head32<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => ref Spans.head32(src);
-
-        /// <summary>
-        /// Presents the span head as a readonly reference to an unsigned 64-bit integer
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly ulong head64<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => ref Spans.head64(src);
-
-        /// <summary>
-        /// Presents the span head as a reference to a signed 64-bit integer
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op]
-        public static ref readonly long head64i(ReadOnlySpan<byte> src)
-            => ref Spans.head64i(src);
-
-        /// <summary>
-        /// Adds an offset to the head of a span, measured relative to 8-bit segments, and returns the resulting reference
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 8-bit segments to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref byte seek8<T>(Span<T> src, int count)
-            => ref Spans.seek8(src,count);
-
-        /// <summary>
-        /// Adds an offset to the head of a span, measured relative to 16-bit segments, and returns the resulting reference
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 16-bit segments to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref ushort seek16<T>(Span<T> src, int count)
-            => ref Spans.seek16(src,count);
-
-        /// <summary>
-        /// Adds an offset to the head of a span, measured relative to 32-bit segments, and returns the resulting reference
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 32-bit segments to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref uint seek32<T>(Span<T> src, int count)
-            => ref Spans.seek32(src,count);
-
-        /// <summary>
-        /// Adds an offset to the head of a span, measured relative to 64-bit segments, and returns the resulting reference
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 64-bit segments to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref ulong seek64<T>(Span<T> src, int count)
-            => ref Spans.seek64(src,count);
-
-        /// <summary>
-        /// Presents generic reference as a generic pointer
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe T* ptr<T>(ref T src)
-            where T : unmanaged
-                => (T*)Pointed.ptr(ref src);
+            => ref Root.seek(src,count);
 
         /// <summary>
         /// Presents generic reference as a generic pointer displaced by an element offset
@@ -309,13 +220,5 @@ namespace Z0
             where T : unmanaged
                 => Pointed.constptr(in src);
 
-        /// <summary>
-        /// Converts a generic reference into a void pointer
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <typeparam name="T">The type of the referenced data</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe void* pvoid<T>(ref T src)
-            => Pointed.pvoid(ref src); 
     }
 }

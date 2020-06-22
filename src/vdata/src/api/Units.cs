@@ -12,7 +12,7 @@ namespace Z0
     using static VectorKonst;
     using static Root;
     using static Typed;
-    using static Imagine;
+    using static As;
      
     partial class VData
     {

@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public readonly ref struct CaptureExchange
     {
@@ -52,7 +51,7 @@ namespace Z0.Asm
         /// <param name="index">The cell index to query/manipulate</param>
         [MethodImpl(Inline)]
         public ref byte Target(int index)
-            => ref refs.seek(TargetBuffer, index);
+            => ref Root.seek(TargetBuffer, index);
 
         public ref byte this[int index]
         {

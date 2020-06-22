@@ -11,8 +11,8 @@ namespace Z0
 
     public interface TPartIndexer 
     {
-        IPartParser Parser 
-            => PartParser.Service;   
+        IPartIdParser Parser 
+            => PartIdParser.Service;   
 
         IPartIndexBuilder IndexBuiler 
             => PartIndexBuilder.Service;     

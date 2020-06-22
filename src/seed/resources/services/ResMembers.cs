@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe ReadOnlySpan<T> resource<T>(ResMember member, int i0, int i1)
             where T : unmanaged
-                => Imagine.segment(member.Address.Pointer<T>(), i0, i1); 
+                => As.segment(member.Address.Pointer<T>(), i0, i1); 
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static ResMember define<T>(MemberInfo member, ReadOnlySpan<T> src)
@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public unsafe static ReadOnlySpan<char> segment(in ResIdentity<char> res, int i0, int i1)
-            => Imagine.segment((char*)res.Location, i0, i1);        
+            => As.segment((char*)res.Location, i0, i1);        
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> segment(in ResIdentity<byte> res, int i0, int i1)

@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public bool Read(ref byte dst)
         {
-            read(Source, State.Position, ref dst);
+            As.read(Source, State.Position, ref dst);
             Advance();
             return State.HasNext;
         }
@@ -53,7 +53,7 @@ namespace Z0
         public int Read(int offset, int wantedCount, Span<byte> dst)
         {
             int count = Math.Min(wantedCount, State.Remaining);
-            read(Source, offset, ref head(dst), count);            
+            As.read(Source, offset, ref head(dst), count);            
             Advance((uint)count);
             return count;
         }

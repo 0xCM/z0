@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static As;
-    using static refs;
+    using static Root;
 
     /// <summary>
     /// Defines a bitreader that targets parametric unsigned numeric types
@@ -36,8 +36,5 @@ namespace Z0
             else
                 return default;
         }
-
-
-
-    }
+   }
 }

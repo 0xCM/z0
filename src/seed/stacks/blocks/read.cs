@@ -14,11 +14,11 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static ref readonly ushort read(in char src)        
-            => ref Root.read<ushort>(src);
+            => ref As.read<ushort>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly ushort read(in char src, int offset)        
-            => ref Root.read<ushort>(src, offset);
+            => ref As.read<ushort>(src, offset);
 
         [MethodImpl(Inline)]
         public static ref ushort write(ref char src)

@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public ref readonly T cell<T>(ReadOnlySpan<T> src, int offset)
-            => ref Imagine.skip(src, offset);
+            => ref Root.skip(src, offset);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public ref readonly T cell<T>(ReadOnlySpan<MemRef> refs, MemStoreIndex n, int offset)
@@ -38,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ref readonly byte cell(ReadOnlySpan<MemRef> refs, MemStoreIndex n, int i)
-            => ref Imagine.skip(load(memref(refs,n)),i);
+            => ref Root.skip(load(memref(refs,n)),i);
 
         [MethodImpl(Inline), Op]
         public ref readonly MemRef memref(ReadOnlySpan<MemRef> refs, MemStoreIndex n)

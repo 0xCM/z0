@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<AsciChar> symbols(int i0, int i1)
-            => cast<char,AsciChar>(Imagine.segment(AsciStrings.Text(n0),i0,i1));
+            => cast<char,AsciChar>(As.segment(AsciStrings.Text(n0),i0,i1));
 
         [MethodImpl(Inline), Op]
         public static void symbols(ReadOnlySpan<BinaryDigit> src, Span<BinarySym> dst)

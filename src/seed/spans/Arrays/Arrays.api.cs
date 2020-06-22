@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref readonly T skip<T>(T[] src, int count)
-            => ref Imagine.skip(in head<T>(src), count);
+            => ref Root.skip(in head<T>(src), count);
 
         /// <summary>
         /// Adds an offset to the head of an array, measured relative to the reference type
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T seek<T>(T[] src, int count)
-            => ref Imagine.seek(ref head<T>(src), count);
+            => ref Root.seek(ref head<T>(src), count);
 
         /// <summary>
         /// Tests whether an array is empty

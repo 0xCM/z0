@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ref T offset<T>(ref T src, IntPtr offset)
-            => ref Imagine.seek(ref src, offset);
+            => ref Unsafe.Add(ref src, offset);
     }
 }

@@ -95,7 +95,7 @@ namespace Z0
         {
             if(State == ByteParserState.Accepting && Offset < Buffer.Length)
             {
-                refs.seek(Buffer, Offset++) = src;
+                Root.seek(Buffer, Offset++) = src;
                 
                 if(Accepted.TryGetValue(src, out var count))
                     Accepted[src] = ++ count;

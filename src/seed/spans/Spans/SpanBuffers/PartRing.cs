@@ -42,7 +42,7 @@ namespace Z0
 
                 ref var next = ref seek(ref head(Buffer), CurrentPart*partwidth);
                 CurrentPart++;
-                return ref Imagine.@as<S,T>(ref next);
+                return ref As.@as<S,T>(ref next);
             }
         }
 

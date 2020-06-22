@@ -97,14 +97,14 @@ namespace Z0
         {            
             var store = z64;
             var proxy = c16;
-            ref var dst = ref Imagine.@as(ref store, ref proxy);            
+            ref var dst = ref As.@as(ref store, ref proxy);            
             chars(src, 
-                out Imagine.add(dst, 3), 
-                out Imagine.add(dst, 2), 
-                out Imagine.add(dst, 1), 
-                out Imagine.add(dst, 0)
+                out As.add(dst, 3), 
+                out As.add(dst, 2), 
+                out As.add(dst, 1), 
+                out As.add(dst, 0)
                 );
-            return Imagine.cover(dst, 4);            
+            return As.cover(dst, 4);            
         }
 
         [MethodImpl(Inline), Op]
@@ -112,18 +112,18 @@ namespace Z0
         {            
             var store = z128f;
             var proxy = c16;
-            ref var dst = ref Imagine.@as(ref store, ref proxy);            
+            ref var dst = ref As.@as(ref store, ref proxy);            
             chars(src, 
-                out Imagine.add(dst, 7), 
-                out Imagine.add(dst, 6), 
-                out Imagine.add(dst, 5), 
-                out Imagine.add(dst, 4),
-                out Imagine.add(dst, 3), 
-                out Imagine.add(dst, 2), 
-                out Imagine.add(dst, 1), 
-                out Imagine.add(dst, 0)
+                out As.add(dst, 7), 
+                out As.add(dst, 6), 
+                out As.add(dst, 5), 
+                out As.add(dst, 4),
+                out As.add(dst, 3), 
+                out As.add(dst, 2), 
+                out As.add(dst, 1), 
+                out As.add(dst, 0)
                 );
-            return Imagine.cover(dst, 4);            
+            return As.cover(dst, 4);            
         }
 
         /// <summary>

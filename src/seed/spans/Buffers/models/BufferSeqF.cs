@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
+    using static As;
 
     public readonly ref struct BufferSeq<F>
         where F : unmanaged, IFixed    
@@ -95,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe Span<T> Cells<T>(byte index)
             where T : unmanaged                
-                => Imagine.cover(Token(index).Handle.ToPointer<byte>(), BufferSize).As<T>();
+                => cover(Token(index).Handle.ToPointer<byte>(), BufferSize).As<T>();
 
         /// <summary>
         /// Fills a token-identifed buffer with content from a source span and returns the covering span

@@ -10,6 +10,7 @@ namespace Z0.Asm.Data
 
     using static Konst;
     using static Root;
+    using static As;
  
     [ApiHost("opcodes")]
     public readonly struct OpCodeServices : IApiHost<OpCodeServices>
@@ -24,7 +25,7 @@ namespace Z0.Asm.Data
             for(byte i=0; i<src.Length; i++)
             {
                 ref readonly var field = ref skip(src,i);
-                var data = Imagine.cover(field.C16, field.Location.Length);
+                var data = cover(field.C16, field.Location.Length);
                 var value = asci8.Null;
                 asci.encode(data, out value);
                 seek(buffer, i) = new OpCodeToken(i, (OpCodeTokenKind)i, value);

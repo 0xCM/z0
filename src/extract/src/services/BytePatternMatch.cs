@@ -27,7 +27,7 @@ namespace Z0
                     ref readonly var token = ref skip(match,j);
                     if(!token.HasValue || (token.HasValue && token.Value == atom))
                     {
-                        refs.seek(state,j) = atom;
+                        Root.seek(state,j) = atom;
                         if(j == posMax)
                             termidx = i;
                     }

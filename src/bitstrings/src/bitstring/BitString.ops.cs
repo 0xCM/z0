@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static As;
 
     partial struct BitString
     {
@@ -46,8 +47,8 @@ namespace Z0
         public static BitString load<T>(Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
         {       
-            ref readonly var data = ref Imagine.@as<Vector128<T>,T>(ref src);            
-            var covered = Imagine.cover(data, Vector128<T>.Count);
+            ref readonly var data = ref As.@as<Vector128<T>,T>(ref src);            
+            var covered = cover(data, Vector128<T>.Count);
             return BitString.scalars(covered, maxbits);            
         }
 
@@ -61,8 +62,8 @@ namespace Z0
         public static BitString load<T>(Vector256<T> src, int? maxbits = null)
             where T : unmanaged        
         {       
-            ref readonly var data = ref Imagine.@as<Vector256<T>,T>(ref src);            
-            var covered = Imagine.cover(data, Vector128<T>.Count);
+            ref readonly var data = ref As.@as<Vector256<T>,T>(ref src);            
+            var covered = cover(data, Vector128<T>.Count);
             return BitString.scalars(covered, maxbits);            
         }
 
@@ -76,8 +77,8 @@ namespace Z0
         public static BitString load<T>(Vector512<T> src, int? maxbits = null)
             where T : unmanaged        
         {       
-            ref readonly var data = ref Imagine.@as<Vector512<T>,T>(ref src);            
-            var covered = Imagine.cover(data, Vector128<T>.Count);
+            ref readonly var data = ref As.@as<Vector512<T>,T>(ref src);            
+            var covered = cover(data, Vector128<T>.Count);
             return BitString.scalars(covered, maxbits);            
         }
 

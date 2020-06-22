@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static Vector128<byte> shuffles(NatPerm<N16> src)
-            => Vectors.vload(n128, refs.head(Imagine.transform<byte>(src.Terms)));
+            => Vectors.vload(n128, refs.head(As.transform<byte>(src.Terms)));
 
         /// <summary>
         /// Shuffles the permutation in-place using a provided random source.
