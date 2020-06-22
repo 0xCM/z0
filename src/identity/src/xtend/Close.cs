@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-
-    using static Konst;
 
     partial class XTend
     {        
@@ -16,7 +13,7 @@ namespace Z0
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<ClosedApiOp> Close(this GenericApiOp op)
+        public static IEnumerable<ClosedApiMethod> Close(this GenericApiMethod op)
              => Identity.close(op);
     }
 }

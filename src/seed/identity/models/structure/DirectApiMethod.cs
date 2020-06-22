@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct DirectApiOp : IHostedApiMethod
+    public readonly struct DirectApiMethod : IHostedApiMethod
     {        
         /// <summary>
         /// The delcaring host
@@ -28,7 +28,7 @@ namespace Z0
         public MethodInfo Method {get;}        
 
         [MethodImpl(Inline)]
-        public DirectApiOp(IApiHost host, OpIdentity id, MethodInfo method)
+        public DirectApiMethod(IApiHost host, OpIdentity id, MethodInfo method)
         {
             Host = host;
             Id = id;

@@ -26,7 +26,7 @@ namespace Z0
                 where !immg.IsEmpty
                 select g;
 
-        public IEnumerable<GenericApiOp> ImmGeneric(IApiHost host, ImmRefinementKind refinment) 
+        public IEnumerable<GenericApiMethod> ImmGeneric(IApiHost host, ImmRefinementKind refinment) 
             => CollectGeneric(host).Where(op => op.Method.AcceptsImmediate(refinment));
 
         public static NumericKind[] NumericClosureKinds(MethodInfo m)
@@ -51,22 +51,22 @@ namespace Z0
         public IEnumerable<DirectApiGroup> CollectDirect(Assembly src)
             => ApiReflected.Service.Hosts(src).SelectMany(CollectDirect);
 
-        public IEnumerable<GenericApiOp> CollectGeneric(Assembly src)
+        public IEnumerable<GenericApiMethod> CollectGeneric(Assembly src)
             => ApiReflected.Service.Hosts(src).SelectMany(CollectGeneric);
 
         public IEnumerable<DirectApiGroup> CollectDirect(IApiHost src)        
             => from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
                 select new DirectApiGroup(Identify.Op(d.Key), src, d);
                         
-        public IEnumerable<GenericApiOp> CollectGeneric(IApiHost src)
+        public IEnumerable<GenericApiMethod> CollectGeneric(IApiHost src)
              => from m in Tagged(src).OpenGeneric()
                 let closures = NumericClosureKinds(m)
                 where closures.Length != 0
-                select new GenericApiOp(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
+                select new GenericApiMethod(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 
-        IEnumerable<DirectApiOp> DirectOpSpecs(IApiHost src)
+        IEnumerable<DirectApiMethod> DirectOpSpecs(IApiHost src)
             => from m in Tagged(src).NonGeneric()
-                select new DirectApiOp(src, Diviner.Identify(m), m);
+                select new DirectApiMethod(src, Diviner.Identify(m), m);
 
         static MethodInfo GenericDefintion(MethodInfo src)
             => src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();

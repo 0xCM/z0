@@ -29,10 +29,10 @@ namespace Z0
         /// <summary>
         /// The grouped operations
         /// </summary>
-        public DirectApiOp[] Members {get;}
+        public DirectApiMethod[] Members {get;}
 
         [MethodImpl(Inline)]
-        public DirectApiGroup(OpIdentity group, IApiHost host, IEnumerable<DirectApiOp> members)
+        public DirectApiGroup(OpIdentity group, IApiHost host, IEnumerable<DirectApiMethod> members)
         {
             GroupId = group;
             Host = host;

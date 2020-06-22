@@ -91,29 +91,6 @@ namespace Z0
         public static ReadOnlySpan<char> Symbols(this Perm2x4 src)
             => API.symbols(src);
 
-        /// <summary>
-        /// Determines whether a permutation literal is a symbol
-        /// </summary>
-        /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline)]
-        public static bit IsSymbol(this Perm4L src)
-            => SymTest.IsSymbol(src);
-
-        /// <summary>
-        /// Determines whether a permutation literal is a symbol
-        /// </summary>
-        /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline)]
-        public static bit IsSymbol(this Perm8L src)
-            => SymTest.IsSymbol(src);
-
-        /// <summary>
-        /// Determines whether a permutation literal is a symbol
-        /// </summary>
-        /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline)]
-        public static bit IsSymbol(this Perm16L src)
-            => SymTest.IsSymbol(src);
             
         /// <summary>
         /// Applies a sequence of transpositions to a blocked container

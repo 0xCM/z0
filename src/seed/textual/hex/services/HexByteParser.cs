@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Globalization;
-    using System.Linq;
 
     using static Konst;
     using static HexSpecs;
@@ -73,4 +71,4 @@ namespace Z0
         public byte ParseByte(string src)    
             => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
     }
-}    
+}

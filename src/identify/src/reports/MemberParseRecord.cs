@@ -67,7 +67,7 @@ namespace Z0
                 var index = 0;
 
                 var numericParser = NumericParser.infallible<int>();
-                var addressParser = Parsers.address();
+                var addressParser = MemoryAddressParser.Service;
                 var dataParser = Parsers.hex(true);
 
                 var seq = numericParser.Parse(fields[index++]);

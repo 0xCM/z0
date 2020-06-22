@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Perm8L;
-
     using Sym = Perm8Sym;
 
     /// <summary>

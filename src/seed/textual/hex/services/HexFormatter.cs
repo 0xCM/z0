@@ -6,16 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
     
     using static Konst;
     
     public readonly struct HexFormatter<T> : IHexFormatter<T>
         where T : unmanaged
     {
-        static HexFormatConfig DefaultConfig => HexFormatConfig.Define();
+        static HexFormatConfig DefaultConfig 
+            => HexFormatConfig.Define();
 
-        static HexSeqFormatConfig DefaultSeqConfig => HexSeqFormatConfig.Define(DefaultConfig);
+        static HexSeqFormatConfig DefaultSeqConfig 
+            => HexSeqFormatConfig.Define(DefaultConfig);
 
         readonly ISystemHexFormatter<T> BaseFormatter;
         

@@ -12,13 +12,13 @@ namespace Z0
     {
         IEnumerable<DirectApiGroup> CollectDirect(S source);
 
-        IEnumerable<GenericApiOp> CollectGeneric(S src);
+        IEnumerable<GenericApiMethod> CollectGeneric(S src);
     }
 
     public interface IApiCollector : IApiCollector<IApiHost>, IApiCollector<Assembly>
     {
         IEnumerable<DirectApiGroup> ImmDirect(IApiHost host, ImmRefinementKind refinment);
 
-        IEnumerable<GenericApiOp> ImmGeneric(IApiHost host, ImmRefinementKind refinment); 
+        IEnumerable<GenericApiMethod> ImmGeneric(IApiHost host, ImmRefinementKind refinment); 
     } 
 }

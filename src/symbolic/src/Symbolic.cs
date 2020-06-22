@@ -5,21 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+ 
+    using static Konst;
         
     [ApiHost]
     public partial class Symbolic : IApiHost<Symbolic>
     {
 
     }
-
-    [ApiHost]
-    public partial class SymTest : IApiHost<SymTest>
-    {
-
-    }
     
     public static partial class XTend
     {
-        
+
     }
 }

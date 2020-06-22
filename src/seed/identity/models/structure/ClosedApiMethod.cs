@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Captures identifying/descriptive information about a generic closure
     /// </summary>
-    public readonly struct ClosedApiOp : IHostedApiMethod
+    public readonly struct ClosedApiMethod : IHostedApiMethod
     {
         /// <summary>
         /// The delcaring host
@@ -41,22 +41,18 @@ namespace Z0
         public ApiHostUri HostUri => Host.Uri;
 
         /// <summary>
-        /// Creates a closure specification
+        /// Initializes a closure specification
         /// </summary>
         /// <param name="id">The assigned identity</param>
         /// <param name="kind">The primal kind over which the subject was closed</param>
         /// <param name="closed">The closed method</param>
         [MethodImpl(Inline)]
-        public static ClosedApiOp Define(IApiHost host, OpIdentity id, NumericKind kind, MethodInfo closed)
-            => new ClosedApiOp(host, id,kind,closed);
-
-        [MethodImpl(Inline)]
-        ClosedApiOp(IApiHost host, OpIdentity id, NumericKind kind, MethodInfo method)
+        public ClosedApiMethod(IApiHost host, OpIdentity id, NumericKind kind, MethodInfo method)
         {
-            this.Host = host;
-            this.Id = id;
-            this.Kind = kind;
-            this.Method = method;
+            Host = host;
+            Id = id;
+            Kind = kind;
+            Method = method;
         }
 
         public void Deconstruct(out OpIdentity id, out NumericKind k, out MethodInfo closed)

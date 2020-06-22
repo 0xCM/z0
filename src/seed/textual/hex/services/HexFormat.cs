@@ -43,7 +43,7 @@ namespace Z0
         /// <typeparam name="T">The numeric type</typeparam>
         public static string data<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => HexFormat.formatter<T>().Format(src, HexFormatConfig.HexData);
+                => formatter<T>().Format(src, HexFormatConfig.HexData);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string scalar<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
@@ -67,13 +67,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return uint8(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return uint8(src).FormatHex(zpad, specifier, uppercase, prespec);
             else if(typeof(T) == typeof(ushort))
-                return uint16(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return uint16(src).FormatHex(zpad, specifier, uppercase, prespec);
             else if(typeof(T) == typeof(uint))
-                return uint32(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return uint32(src).FormatHex(zpad, specifier, uppercase, prespec);
             else if(typeof(T) == typeof(ulong))
-                return uint64(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return uint64(src).FormatHex(zpad, specifier, uppercase, prespec);
             else
                 return format_i(src,zpad,specifier,uppercase,prespec);
         } 
@@ -83,13 +83,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return int8(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return int8(src).FormatHex(zpad, specifier, uppercase, prespec);
             else if(typeof(T) == typeof(short))
-                return int16(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return int16(src).FormatHex(zpad, specifier, uppercase, prespec);
             else if(typeof(T) == typeof(int))
-                return int32(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return int32(src).FormatHex(zpad, specifier, uppercase, prespec);
             else if(typeof(T) == typeof(long))
-                return int64(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return int64(src).FormatHex(zpad, specifier, uppercase, prespec);
             else
                 return format_f(src,zpad,specifier,uppercase,prespec);
         } 
@@ -99,9 +99,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return float32(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return float32(src).FormatHex(zpad, specifier, uppercase, prespec);
             else if(typeof(T) == typeof(double))
-                return float64(src).FormatHex(zpad,specifier,uppercase,prespec);
+                return float64(src).FormatHex(zpad, specifier, uppercase, prespec);
             else
                 throw Unsupported.define<T>();
         } 

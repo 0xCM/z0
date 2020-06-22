@@ -227,7 +227,7 @@ namespace Z0.Asm
             }        
         }
 
-        void EmitUnrefinedGeneric(in CaptureExchange exchange, GenericApiOp f,  Imm8Value[] imm8, IHostArchiver dst)
+        void EmitUnrefinedGeneric(in CaptureExchange exchange, GenericApiMethod f,  Imm8Value[] imm8, IHostArchiver dst)
         {
             if(f.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
                 EmitUnary(exchange, f, imm8, dst);                       
@@ -235,7 +235,7 @@ namespace Z0.Asm
                 EmitBinary(exchange, f, imm8, dst);
         }
 
-        void EmitUnrefinedUnary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiOp> unary, Imm8Value[] imm8, IHostArchiver dst)
+        void EmitUnrefinedUnary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiMethod> unary, Imm8Value[] imm8, IHostArchiver dst)
         {
             var generic = false;
             foreach(var f in unary)
@@ -250,7 +250,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiOp> binary, Imm8Value[] imm8, IHostArchiver dst)
+        void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiMethod> binary, Imm8Value[] imm8, IHostArchiver dst)
         {
             var generic = false;
             foreach(var f in binary)
@@ -265,7 +265,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnary(in CaptureExchange exchange, GenericApiOp f, Imm8Value[] imm8, IHostArchiver dst, Type refinement = null)
+        void EmitUnary(in CaptureExchange exchange, GenericApiMethod f, Imm8Value[] imm8, IHostArchiver dst, Type refinement = null)
         {
             var gid = f.Id;
             var host = f.HostUri;
@@ -281,7 +281,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitBinary(in CaptureExchange exchange, GenericApiOp f, Imm8Value[] imm8, IHostArchiver dst, Type refinement = null)
+        void EmitBinary(in CaptureExchange exchange, GenericApiMethod f, Imm8Value[] imm8, IHostArchiver dst, Type refinement = null)
         {
             var gid = f.Id;
             var host = f.HostUri;

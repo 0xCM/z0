@@ -27,7 +27,7 @@ namespace Z0
             var last = (byte)(first + segwidth - 1);
 
             dst = (Perm4L)SymBits.extract((byte)src, first, last);
-            return SymTest.IsSymbol(dst);
+            return PermLiterals.test(dst);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
             var last = (byte)(first + segwidth - 1);
 
             dst = (Perm8L)SymBits.extract((uint)src, first, last);
-            return SymTest.IsSymbol(dst);
+            return PermLiterals.test(dst);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
             var last = (byte)(first + segwidth - 1);
 
             dst = (Perm16L)SymBits.extract((ulong)src, first, last);
-            return SymTest.IsSymbol(dst);
+            return PermLiterals.test(dst);
         }        
     }
 }

@@ -49,15 +49,6 @@ namespace Z0
                     var index = ReadIndex(file);
                     if(index)
                         yield return index.Value;
-                    // var uri = ApiHostUri.Parse(file.FileName).ValueOrDefault(ApiHostUri.Empty);                
-                    // if(uri.IsNonEmpty)
-                    // {
-                    //     var dst = Root.list<IdentifiedCode>();
-                    //     foreach(var item in Read(file))
-                    //         if(item.IsNonEmpty)
-                    //             dst.Add(item);
-                    //     yield return new IdentifiedCodeIndex(uri, dst.ToArray());            
-                    // }
                 }
             }  
             else

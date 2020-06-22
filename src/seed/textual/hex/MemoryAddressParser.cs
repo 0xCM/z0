@@ -15,7 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ParseResult<MemoryAddress> Parse(string src)
-            => Parsers.hex().Parse(src).TryMap(x => Addresses.address(x));
+            => HexScalarParser.Service.Parse(src).TryMap(x => Addresses.address(x));
 
         [MethodImpl(Inline)]
         public MemoryAddress Parse(string src, MemoryAddress @default)

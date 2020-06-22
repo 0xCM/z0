@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
-
     public readonly struct ApiCatalog : IApiCatalog
     {
         /// <summary>
@@ -41,15 +39,5 @@ namespace Z0
             this.GenericHosts = GenericHosts;
             this.DirectHosts = DirectHosts;
         }
-
-        // ApiCatalog(Assembly source, PartId id)
-        // {
-        //     PartId = id;
-        //     Owner = source;
-        //     Hosts = ApiHost.HostTypes(Owner).Select(t => ApiHost.Define(id, t)).ToArray();
-        //     DirectHosts = Hosts.Where(h => h.HostKind.DefinesDirectOps()).ToArray();
-        //     GenericHosts = Hosts.Where(h => h.HostKind.DefinesGenericOps()).ToArray();
-        //     FunFactories = FactoryTypes(Owner).ToArray();            
-        // }
     }
 }
