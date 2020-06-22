@@ -9,32 +9,11 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static Root;
 
     public readonly struct SymbolSpec<S> : ISymbolSpec<S>
         where S : unmanaged
     {
-        [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, MetadataToken segdomain,  MetadataToken symdomain, params S[] symbols)
-        {
-            this.SymWidth = symwidth;
-            this.SegWidth = segwidth;
-            this.Capacity = (ushort)(SegWidth/SymWidth);
-            this.SegDomain = segdomain;
-            this.SymDomain = symdomain;
-            this.Symbols = symbols;
-        }
-
-        [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, MetadataToken symdomain, params S[] symbols)
-        {
-            this.SymWidth = symwidth;
-            this.SegWidth = (ushort)Root.bitsize<S>();
-            this.Capacity = (ushort)(SegWidth/SymWidth);
-            this.SegDomain = typeof(S);
-            this.SymDomain = symdomain;
-            this.Symbols = symbols;
-        }
-
         public ushort SymWidth {get;}
         
         /// <summary>
@@ -53,12 +32,33 @@ namespace Z0
 
         public S[] Symbols {get;}
 
-        public bool DefinesSymbols
+        [MethodImpl(Inline)]
+        public SymbolSpec(ushort symwidth, ushort segwidth, MetadataToken segdomain,  MetadataToken symdomain, params S[] symbols)
+        {
+            SymWidth = symwidth;
+            SegWidth = segwidth;
+            Capacity = (ushort)(SegWidth/SymWidth);
+            SegDomain = segdomain;
+            SymDomain = symdomain;
+            Symbols = symbols;
+        }
+
+        [MethodImpl(Inline)]
+        public SymbolSpec(ushort symwidth, MetadataToken symdomain, params S[] symbols)
+        {
+            SymWidth = symwidth;
+            SegWidth = (ushort)bitsize<S>();
+            Capacity = (ushort)(SegWidth/SymWidth);
+            SegDomain = typeof(S);
+            SymDomain = symdomain;
+            Symbols = symbols;
+        }
+
+
+        public bool NonEmpty
         {
             [MethodImpl(Inline)]
-            get => Symbols == null || Symbols.Length == 0;
+            get => Symbols != null  && Symbols.Length != 0;
         }
     }
-
-
 }

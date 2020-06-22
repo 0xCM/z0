@@ -8,11 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Konst;
+    using static Root;
+    using static Typed;
+
     partial struct asci
     {        
         [MethodImpl(Inline), Op]
         public static int first(in asci4 src, byte match)
-            => first(bytes(src), match);
+            => search(@byte(ref edit(src)), src.MaxLength, match);
 
         [MethodImpl(Inline), Op]
         public static int first(in asci5 src, byte match)
@@ -20,19 +23,29 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static int first(in asci8 src, byte match)
-            => first(bytes(src), match);
+            => search(@byte(ref edit(src)), src.MaxLength, match);
 
         [MethodImpl(Inline), Op]
         public static int first(in asci16 src, byte match)
-            => first(bytes(src), match);
+            => search(@byte(ref edit(src)), src.MaxLength, match);
 
         [MethodImpl(Inline), Op]
         public static int first(in asci32 src, byte match)
-            => first(bytes(src), match);
+            => search(@byte(ref edit(src)), src.MaxLength, match);
 
         [MethodImpl(Inline), Op]
         public static int first(in asci64 src, byte match)
-            => first(bytes(src), match);         
+            => search(@byte(ref edit(src)), src.MaxLength, match);
+
+
+        [MethodImpl(Inline), Op]
+        static int search(in byte src, int count, byte match)
+        {
+            for(var i=0; i<count; i++)
+                if(Root.skip(src,i) == match)
+                    return i;
+            return NotFound;
+        }
 
         [MethodImpl(Inline), Op]
         static int first(ReadOnlySpan<byte> src, byte match)
@@ -40,7 +53,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
                 if(Root.skip(src,i) == match)
                     return i;
-            return -1;
+            return NotFound;
         }
 
         /// <summary>
@@ -54,7 +67,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
                 if(Root.skip(src,i) == match)
                     return i;
-            return -1;
+            return NotFound;
         }        
     }
 }

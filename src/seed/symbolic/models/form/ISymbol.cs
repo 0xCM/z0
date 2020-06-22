@@ -27,7 +27,7 @@ namespace Z0
         /// The bit-width of a storage cell
         /// </summary>
         ushort SegWidth 
-            => (ushort)Root.bitsize<T>();
+            => (ushort)bitsize<T>();
 
         /// <summary>
         /// The symbol value, from storage cell persective
@@ -48,7 +48,7 @@ namespace Z0
         /// The bit-width of a symbol
         /// </summary>
         ushort SymWidth 
-            => (ushort)Typed.value<N>();
+            => (ushort)value<N>();
         
         /// <summary>
         /// The maximum number of symbols that can be packed into a storage cell

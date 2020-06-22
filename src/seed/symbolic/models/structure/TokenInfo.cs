@@ -25,10 +25,6 @@ namespace Z0
                 => new TokenInfo(Enums.e32i(index),id, value, description);        
 
         [MethodImpl(Inline)]
-        public static TokenInfo Define(int index, string id, string value, string description)
-            => new TokenInfo(index,id,value, description);        
-
-        [MethodImpl(Inline)]
         public TokenInfo(int index, string id, string value, string description)
         {
             Index = index;

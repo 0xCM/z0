@@ -2,11 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
+[assembly: PartId(PartId.VBlock)]
 
-    public static partial class XTend
+namespace Z0.Parts
+{        
+    public sealed class VBlock : Part<VBlock>
     {
-
-    }    
+        
+    }
 }

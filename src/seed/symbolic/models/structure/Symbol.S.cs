@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Root;
 
     /// <summary>
     /// Defines an S-symbol value
@@ -15,9 +16,14 @@ namespace Z0
     public readonly struct Symbol<S> : ISymbol<S>
         where S : unmanaged
     {                
+        /// <summary>
+        /// The symbol value
+        /// </summary>
+        public S Value {get;}
+
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S> src)
-            => Root.@char(src);
+            => @char(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S> src)
@@ -26,11 +32,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Symbol<S>(S src)
             => new Symbol<S>(src);
-
-        /// <summary>
-        /// The symbol value
-        /// </summary>
-        public S Value {get;}
 
         [MethodImpl(Inline)]
         public Symbol(S value)

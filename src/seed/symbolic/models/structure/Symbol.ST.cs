@@ -17,9 +17,14 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {                
+        /// <summary>
+        /// The symbol value
+        /// </summary>
+        public S Value {get;}
+
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T> src)
-            => Root.@char(src);
+            => @char(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S,T> src)
@@ -28,11 +33,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Symbol<S>(Symbol<S,T> src)
             => new Symbol<S>(src.Value);
-
-        /// <summary>
-        /// The symbol value
-        /// </summary>
-        public S Value {get;}
 
         [MethodImpl(Inline)]
         public Symbol(S value)

@@ -18,9 +18,14 @@ namespace Z0
         where T : unmanaged
         where N : unmanaged, ITypeNat         
     {                
+        /// <summary>
+        /// The symbol value
+        /// </summary>
+        public S Value {get;}
+
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T,N> src)
-            => Root.@char(src);
+            => @char(src);
         
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S,T,N> src)
@@ -33,11 +38,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Symbol<S,T>(Symbol<S,T,N> src)
             => new Symbol<S,T>(src.Value);
-
-        /// <summary>
-        /// The symbol value
-        /// </summary>
-        public S Value {get;}
 
         [MethodImpl(Inline)]
         public Symbol(S value)
@@ -66,7 +66,7 @@ namespace Z0
         public static ushort SymWidth 
         {
             [MethodImpl(Inline)]
-            get => (ushort)Typed.value<N>();
+            get => (ushort)value<N>();
         }
         
         /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         /// </summary>
         public static ushort SegWidth 
         {
-            get => (ushort)Root.bitsize<T>();
+            get => (ushort)bitsize<T>();
         }
         
         /// <summary>

@@ -4,9 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    [ApiHost]
+    public partial class VBlock : IApiHost<VBlock>
+    {
+        
+    }
 
-    public static partial class XTend
+    public partial class SBlock
     {
 
-    }    
+    }
+
 }

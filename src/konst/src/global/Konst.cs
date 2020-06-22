@@ -128,14 +128,19 @@ namespace Z0
         public static Base2 base2 => default;
 
         /// <summary>
-        /// Species the base8 singleton representative
+        /// Species the base2 singleton representative
         /// </summary>
-        public static Base3 base3 => default;
+        public static Base2 Base2 => default;
 
         /// <summary>
         /// Species the base8 singleton representative
         /// </summary>
-        public static Base8 base8 => default;
+        public static Base3 Base3 => default;
+
+        /// <summary>
+        /// Species the base8 singleton representative
+        /// </summary>
+        public static Base8 Base8 => default;
 
         /// <summary>
         /// Species the base10 singleton representative
@@ -143,10 +148,14 @@ namespace Z0
         public static Base10 base10 => default;
 
         /// <summary>
+        /// Species the base10 singleton representative
+        /// </summary>
+        public static Base10 Base10 => default;
+
+        /// <summary>
         /// Species the base16 singleton representative
         /// </summary>
-        public static Base16 base16 => default;
-
+        public static Base16 Base16 => default;
 
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)

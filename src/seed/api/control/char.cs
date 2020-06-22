@@ -19,7 +19,6 @@ namespace Z0
         public static char @char(bool src)
             => (char)(u8(src) + 48);
 
-
         [MethodImpl(Inline)]
         public static char @char<S,T,N>(Symbol<S,T,N> src)
             where S : unmanaged
@@ -36,7 +35,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static char @char<S>(Symbol<S> src)
             where S : unmanaged
-                => Unsafe.As<S,char>(ref edit(src.Value));            
-
+                => Unsafe.As<S,char>(ref edit(src.Value));
     }
 }

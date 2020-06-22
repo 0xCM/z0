@@ -127,7 +127,6 @@ namespace Z0
 
         }
 
-
         [MethodImpl(Inline)]
         MetadataToken(PropertyInfo src)
             : this(src.MetadataToken, src.Module)

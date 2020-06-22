@@ -12,9 +12,7 @@ namespace Z0
     using static Typed;
 
     partial struct asci
-    {
-
-         
+    {         
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCodeCover> cover(in asci2 src)
             => Root.cast<AsciCodeCover>(bytespan(src));

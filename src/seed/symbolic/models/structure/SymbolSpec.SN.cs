@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static Root;
 
     /// <summary>
     /// Specifes symbol characteristics
@@ -20,11 +21,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public SymbolSpec(ushort segwidth, MetadataToken segdomain, params S[] symbols)
         {
-            this.SegDomain = segdomain;
-            this.SegWidth = segwidth;
-            this.SymWidth = (ushort)Typed.value<N>();
-            this.Symbols = symbols;
-            this.Capacity = (ushort)(SegWidth/SymWidth);
+            SegDomain = segdomain;
+            SegWidth = segwidth;
+            SymWidth = (ushort)value<N>();
+            Symbols = symbols;
+            Capacity = (ushort)(SegWidth/SymWidth);
         }
         
         [MethodImpl(Inline)]
@@ -60,12 +61,10 @@ namespace Z0
 
         public S[] Symbols {get;}
 
-        public bool DefinesSymbols
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Symbols == null || Symbols.Length == 0;
+            get => Symbols != null  && Symbols.Length != 0;
         }
     }
-
-
 }

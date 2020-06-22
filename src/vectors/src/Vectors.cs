@@ -5,12 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
-    using static Konst;
+    [ApiHost("api")]
+    public partial class Vectors : IApiHost<Vectors>
+    {
+        
+    }
 
+    [ApiHost]
+    public static partial class Store
+    {
+
+    }
 
     public static partial class SBlock
     {
@@ -22,8 +28,4 @@ namespace Z0
         
     }
 
-    public static partial class Gone2
-    {
-        
-    }
 }

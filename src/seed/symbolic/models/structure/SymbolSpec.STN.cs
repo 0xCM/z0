@@ -6,9 +6,9 @@ namespace Z0
 {    
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
+    using static Root;
 
     /// <summary>
     /// Specifes symbol characteristics
@@ -18,6 +18,8 @@ namespace Z0
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {       
+        public S[] Symbols {get;}
+
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec(SymbolSpec<S,T,N> src)
             => new SymbolSpec(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
@@ -42,7 +44,7 @@ namespace Z0
         public ushort SymWidth
         {
             [MethodImpl(Inline)]
-            get => (ushort)Typed.value<N>();
+            get => (ushort)value<N>();
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace Z0
         public ushort SegWidth
         {
             [MethodImpl(Inline)]
-            get => (ushort)Root.bitsize<T>();
+            get => (ushort)bitsize<T>();
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace Z0
         public ushort Capacity
         {
             [MethodImpl(Inline)]
-            get => (ushort)((ushort)Root.bitsize<T>()/(ushort)Typed.value<N>());
+            get => (ushort)((ushort)bitsize<T>()/(ushort)value<N>());
         }
 
         public MetadataToken SegDomain
@@ -75,12 +77,10 @@ namespace Z0
             get => typeof(S);
         }
 
-        public S[] Symbols {get;}
-
-        public bool DefinesSymbols
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Symbols == null || Symbols.Length == 0;
+            get => Symbols != null  && Symbols.Length != 0;
         }        
     }
 }

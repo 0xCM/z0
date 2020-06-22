@@ -17,19 +17,19 @@ namespace Z0
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n2));
             decode(src,dst);
-            return new string(dst);
+            return @string(dst);
         }       
 
         [MethodImpl(Inline), Op]
         public static string format(in asci4 src)
-            => new string(asci.decode(src));
+            => @string(asci.decode(src));
 
         [MethodImpl(Inline), Op]
         public static string format(in asci5 src)
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n5));
             decode(src,dst);
-            return new string(dst.Slice(0, src.Length));
+            return @string(dst.Slice(0, src.Length));
         }
 
         [MethodImpl(Inline), Op]
@@ -37,44 +37,43 @@ namespace Z0
         {
             var dst = CharBlocks.c16s(CharBlocks.alloc(n8));
             decode(src,dst);            
-            return new string(dst.Slice(0, src.Length));
+            return @string(dst.Slice(0, src.Length));
         }        
 
         [MethodImpl(Inline), Op]
         public static string format(in asci16 src)
-            => new string(decode(src));
+            => @string(decode(src));
 
         [MethodImpl(Inline), Op]
         public static string format(in asci32 src)
-            => new string(decode(src));
+            => @string(decode(src));
 
         [MethodImpl(Inline), Op]
         public static string format(in asci64 src)
-            => new string(decode(src));
-
+            => @string(decode(src));
 
         [Op]
         public static string format(ReadOnlySpan<BinaryDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length];
-            asci.render(src,dst);
-            return new string(dst);
+            render(src,dst);
+            return @string(dst);
         }
 
         [Op]
         public static string format(ReadOnlySpan<DeciDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length]; 
-            asci.render(src,dst);
-            return new string(dst);
+            render(src,dst);
+            return @string(dst);
         }
 
         [Op]
         public static string format(ReadOnlySpan<HexDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length];
-            asci.render(src,dst);
-            return new string(dst);
+            render(src,dst);
+            return @string(dst);
         }
 
         [Op]
@@ -82,7 +81,7 @@ namespace Z0
         {
             Span<char> digits = stackalloc char[src.Length*3];
             render(@base, @case, src,digits);
-            return digits.ToString();
+            return @string(digits);
         }                   
     }
 }

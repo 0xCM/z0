@@ -20,7 +20,7 @@ namespace Z0
         {
             var len = src.Length;
             for(var i = 0; i< len; i++)
-                dst[i] = asci.digit(Konst.base10, src[i]);            
+                dst[i] = asci.digit(base10, src[i]);            
             return dst;            
         }
 

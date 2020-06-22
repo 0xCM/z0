@@ -51,7 +51,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => asci.length(this);
+            get => 0;
         }
         
         public int MaxLength

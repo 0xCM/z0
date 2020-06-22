@@ -24,8 +24,6 @@ public enum PartId : ulong
     
     Canonical = 63, 
     
-    Cast = 64, 
-
     Bits = 70,
     
     // ~ 100
@@ -85,10 +83,6 @@ public enum PartId : ulong
 
     MetaReader = 126,
 
-    Stores = 127,
-
-    Stacks = 128,
-
     Artistry = 129,
 
     Spans = 131,
@@ -101,15 +95,11 @@ public enum PartId : ulong
 
     LibMTest = LibM | Test,
 
-    MatrixTest = Matrix | Test,
-
     MachinesTest = Machines | Test,
 
     MathTest = Math | Test, 
     
     BitsTest = BitSuite | Test,
-
-    BitSvcTest = BitSvc | Test,
 
     // ~ 200
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -122,23 +112,19 @@ public enum PartId : ulong
     
     Blocks = 203, 
     
-    Agency = 204, 
-            
     Dynamic = 205, 
     
     Fixed = 206,  
+
+    VBlock = 207,
     
     FixedTest = Fixed | Test,
 
     MklApiTest = MklApi | Test,
 
-    StatsTest = Stats | Test,
-
-    BlocksTest = Blocks | Test,
 
     DynopsTest = Dynamic | Test,
 
-    NatsTest = Nats | Test,
 
     // ~ 300
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,10 +134,6 @@ public enum PartId : ulong
     AsmB = 301,
     
     AsmD = 302,
-
-    AsmG = 303,
-
-    AsmChecks = 304,
 
     Codes = 305,
 
@@ -166,14 +148,6 @@ public enum PartId : ulong
     AsmTest = Asm | Test,
 
     AsmDTest = AsmD | Test,
-
-    CaptureApp = Capture | App,
-    
-    CaptureTest = Capture | Test, 
-        
-    CilTest = Cil | Test,
-
-    SeedTest = Seed | Test,
 
     // ~ 500
     // ~ -------------------------------------------------------------------------------
@@ -204,43 +178,21 @@ public enum PartId : ulong
 
     Vectors = 706, 
 
-    Permute = 707, 
-
     Structured = 708,
 
-    VRoot = 709,
-
-    PermuteTest = Permute | Test,
-
-    VectorsTest = Vectors | Test,
-
     GVecTest = GVec | Test,     
-
-    VSvcTest = VSvc | Test,
 
 
     // ~ 2000
     // ~ -------------------------------------------------------------------------------
-
-    
-    Graphs = 2002,
     
     Symbolic = 2003, 
-    
-    Textual = 2004,     
-    
-    
-    Memories = 2009,  
     
     Identify = 2010, 
     
     Kinds = 2011, 
-               
-    Messages = 2012, 
-    
+                   
     Apps = 2013,     
-
-    Tuples = 2014,    
     
     Numeric = 2015,  
         
@@ -252,30 +204,12 @@ public enum PartId : ulong
 
     VCheck = 2025,
 
-    Typed = 2026, 
-
     Seed = 2027,     
 
-    ResV = 2030,
-
-    CoreTest = Core | Test,
-
-    TextualTest = Textual | Test,
-
-    MemoriesTest = Memories | Test,
-
-    AppsTest = Apps | Test,
-
-    NumericTest = Numeric | Test,
+    ZXed = 2028,
 
     SymbolicTest = Symbolic | Test,
 
-    // ~ 9000
-    // ~ -------------------------------------------------------------------------------
-
-    ZXed = 9001,
-
-    Commands = 9002,
 
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------
