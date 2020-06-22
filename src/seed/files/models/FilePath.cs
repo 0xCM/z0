@@ -87,9 +87,15 @@ namespace Z0
         /// Determines whether the filename is of the form {owner}.{host}.{*}
         /// </summary>
         /// <param name="owner">The owner to test</param>
-        public bool OwnedBy(ApiHostUri host)
-            => FileName.OwnedBy(host);
+        public bool HostedBy(ApiHostUri host)
+            => FileName.HostedBy(host);
 
+        /// <summary>
+        /// Specifies the file's owning part, if any
+        /// </summary>
+        public PartId Owner
+            => FileName.Owner;
+        
         /// <summary>
         /// Determines whether the path contains a specified substring
         /// </summary>
@@ -111,7 +117,7 @@ namespace Z0
         public bool EndsWith(string substring)
             => Name.EndsWith(substring, NoCase);
 
-        public FilePath WithExtension(FileExtension ext)
+        public FilePath ChangeExtension(FileExtension ext)
             => FolderPath + FileName.Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));                
     }
 }

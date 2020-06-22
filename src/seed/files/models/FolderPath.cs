@@ -146,7 +146,7 @@ namespace Z0
         /// <param name="part">The owning part</param>
         /// <param name="ext">The extension to match</param>
         public FilePath[] Files(ApiHostUri host, FileExtension ext)
-            => Files(ext).Where(f => f.OwnedBy(host));
+            => Files(ext).Where(f => f.HostedBy(host));
 
         /// <summary>
         /// Enumerates files in the folder, with optional recursion, that match a specified extension

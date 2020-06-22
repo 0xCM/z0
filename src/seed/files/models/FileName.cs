@@ -46,7 +46,10 @@ namespace Z0
         /// <summary>
         /// The file's extension, if any
         /// </summary>
-        public FileExtension Ext => HasExtension ? FileExtension.Define(Path.GetExtension(Name)) : FileExtension.Empty;
+        public FileExtension Ext 
+            => HasExtension 
+            ? FileExtension.Define(Path.GetExtension(Name)) 
+            : FileExtension.Empty;
 
         /// <summary>
         /// The file extension, if any
@@ -122,25 +125,25 @@ namespace Z0
         /// Dtermines whether the name of a file is of the form {owner}.{.}.{*}
         /// </summary>
         /// <param name="owner">The owner to test</param>
-        [MethodImpl(Inline)]
         public bool OwnedBy(PartId owner)
             => StartsWith(owner.ToString().ToLower() + Chars.Dot);
+
+        /// <summary>
+        /// Specifies the file's owning part, if any
+        /// </summary>
+        public PartId Owner
+            => PartIdParser.single(WithoutExtension.Name.Remove("z0."));
 
         /// <summary>
         /// Determines whether the name of a file is of the form {owner}.{host}.{*}
         /// </summary>
         /// <param name="host">The owner to test</param>
-        [MethodImpl(Inline)]
-        public bool OwnedBy(ApiHostUri host)
+        public bool HostedBy(ApiHostUri host)
             => StartsWith(string.Concat(host.Owner.Format(), Chars.Dot, host.Name.ToLower(), Chars.Dot));
 
         [MethodImpl(Inline)]
-        public FileName WithNewExt(FileExtension ext)
+        public FileName ChangeExtension(FileExtension ext)
             => Define(Path.GetFileNameWithoutExtension(Name), ext);
-
-        [MethodImpl(Inline)]
-        public FileName WithExt(FileExtension ext)
-             => new FileName(Name, ext.Name);
 
         public FileName WithOwner(PartId part)
             => new FileName(

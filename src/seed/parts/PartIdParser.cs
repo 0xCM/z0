@@ -18,6 +18,9 @@ namespace Z0
         public ParseResult<PartId> Parse(string src)
             => parse<PartId>(src);
 
+        public static PartId single(string src)
+            => parse<PartId>(src).ValueOrDefault(PartId.None);
+
         public PartId[] ParseValid(params string[] args)
             => WhereSome(args.Map(arg => parse<PartId>(arg).ValueOrDefault()));
 

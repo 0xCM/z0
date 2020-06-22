@@ -15,7 +15,9 @@ public enum PartId : ulong
 
     Models = 2,
 
-    Part = 3,
+    Parts = 3,
+
+    Seed = 4,     
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,7 +37,7 @@ public enum PartId : ulong
     
     BitSpans = 102, 
     
-    BitString = 103, 
+    BitStrings = 103, 
     
     BitGrids = 104, 
     
@@ -88,7 +90,87 @@ public enum PartId : ulong
     Spans = 131,
     
     Imagine = 132,
+
+    Nats = 133, 
+
+    Mkl = 134, 
     
+    Stats = 135, 
+    
+    Blocks = 136, 
+    
+    Dynamic = 137, 
+    
+    Fixed = 138,  
+
+    VBlock = 139,
+
+    Asm = 140,  
+    
+    AsmD = 141,
+
+    Codes = 142,
+
+    Machine = 143,
+
+    Capture = 144,
+
+    Cil = 145, 
+
+    Evaluate = 146,
+
+    Archives = 147,
+
+    Extract = 148,
+
+    VData = 149, 
+
+    FVec = 150, 
+
+    DVec = 151, 
+    
+    GVec = 152, 
+    
+    VSvc = 153, 
+    
+    Circuits = 154,
+
+    Vectors = 155, 
+
+    Structured = 156,
+
+    Symbolic = 157, 
+    
+    Identify = 158, 
+    
+    Kinds = 159, 
+                   
+    Apps = 160,     
+    
+    Numeric = 161,  
+        
+    Core = 162,
+         
+    Validity = 163,
+
+    VCheck = 164,
+
+    ZXed = 165,
+
+    // ~ 500
+    // ~ -------------------------------------------------------------------------------
+
+    Control = 500,
+
+    ResBytes = 600,
+
+    // ~ 2000
+    // ~ -------------------------------------------------------------------------------
+    
+
+    // ~ Test
+    // ~ -------------------------------------------------------------------------------
+
     IdentityTest = Identity | Test,
 
     LogixTest = Logix | Test, 
@@ -100,115 +182,18 @@ public enum PartId : ulong
     MathTest = Math | Test, 
     
     BitsTest = BitSuite | Test,
-
-    // ~ 200
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
-    Nats = 200, 
-
-    MklApi = 201, 
-    
-    Stats = 202, 
-    
-    Blocks = 203, 
-    
-    Dynamic = 205, 
-    
-    Fixed = 206,  
-
-    VBlock = 207,
-    
-    FixedTest = Fixed | Test,
-
-    MklApiTest = MklApi | Test,
-
+    MklApiTest = Mkl | Test,
 
     DynopsTest = Dynamic | Test,
-
-
-    // ~ 300
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-    Asm = 300,  
-
-    AsmB = 301,
-    
-    AsmD = 302,
-
-    Codes = 305,
-
-    AsmDecoder = 306,
-
-    Machine = 320,
-
-    Capture = 321,
-
-    Cil = 322, 
 
     AsmTest = Asm | Test,
 
     AsmDTest = AsmD | Test,
 
-    // ~ 500
-    // ~ -------------------------------------------------------------------------------
-
-    Control = 500,
-
-    Evaluate = 501,
-
-    Archives = 502,
-
-    Extract = 503,
-
-
-    // ~ 700
-    // ~ -------------------------------------------------------------------------------
-
-    VData = 700, 
-
-    FVec = 701, 
-
-    DVec = 702, 
-    
-    GVec = 703, 
-    
-    VSvc = 704, 
-    
-    Circuits = 705,
-
-    Vectors = 706, 
-
-    Structured = 708,
+    SymbolicTest = Symbolic | Test,
 
     GVecTest = GVec | Test,     
-
-
-    // ~ 2000
-    // ~ -------------------------------------------------------------------------------
-    
-    Symbolic = 2003, 
-    
-    Identify = 2010, 
-    
-    Kinds = 2011, 
-                   
-    Apps = 2013,     
-    
-    Numeric = 2015,  
-        
-    Core = 2019,
-         
-    Validate = 2023,
-
-    Validity = 2024,
-
-    VCheck = 2025,
-
-    Seed = 2027,     
-
-    ZXed = 2028,
-
-    SymbolicTest = Symbolic | Test,
 
 
     // ~ Classifiers

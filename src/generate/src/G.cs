@@ -12,7 +12,7 @@ namespace Z0
     {
         public static G Service => default(G);
 
-        public void GenerateMasks()
+        void GenerateMasks()
         {
             var literals = BitMask.NumericLiterals;
             for(var i=0; i < literals.Length; i++)
@@ -23,9 +23,16 @@ namespace Z0
             }
         }
         
+        void GenerateDocs()
+        {   
+            var docs = Commented.collect();
+            term.print($"Collected documentation for {docs.Count} parts");
+        }
+        
         public void Generate()
-        {
-            EnumGenerator.Service.Generate();
+        {            
+            GenerateDocs();
+            //EnumGenerator.Service.Generate();
         }
     }
 }

@@ -40,6 +40,8 @@
 
     <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
 
+    <Dynamic>$(Src)dynamic/z0.dynamic.csproj</Dynamic>
+
     <LSquare>$(Src)lsquare/z0.lsquare.csproj</LSquare>
 
     <Core>$(Src)Core/z0.core.csproj</Core>
@@ -112,7 +114,6 @@
 
   <PropertyGroup>    
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>    
-    <Dynamic>$(Src)dynops/z0.dynops.csproj</Dynamic>
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
     <Logix>$(Src)logix/z0.logix.csproj</Logix>
     <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>  

@@ -16,6 +16,8 @@ namespace Z0
 
         public static FileExtension Dll =>  FileExtension.Define("dll", "Application library");
 
+        public static FileExtension Xml =>  FileExtension.Define("xml", "Xml file");
+
         public static FileExtension Exe =>  FileExtension.Define("exe", "Application executable");
 
         public static FileExtension Txt =>  FileExtension.Define("txt", "Plaintext");

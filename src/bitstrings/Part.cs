@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.BitString)]
+[assembly: PartId(PartId.BitStrings)]
 
 namespace Z0.Parts
 {

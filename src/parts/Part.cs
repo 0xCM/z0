@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 
 [assembly: AssemblyDescription("The root of the knowable part tree")]
-[assembly: PartId(PartId.Part)]
+[assembly: PartId(PartId.Parts)]
 
 namespace Z0.Parts
 {        
