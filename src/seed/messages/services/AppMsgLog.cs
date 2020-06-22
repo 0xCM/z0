@@ -14,17 +14,17 @@ namespace Z0
 
     readonly struct AppMsgLog : IAppMsgLog
     {   
-        public static IAppMsgLog Create(IAppEnv env)         
+        public static IAppMsgLog Create(TAppEnv env)         
             => new AppMsgLog(env);
         
-        readonly IAppEnv AppEnv;
+        readonly TAppEnv AppEnv;
 
         FilePath DefaultTarget => AppEnv.AppPaths.StandardLogPath;
 
         FilePath ErrorTarget => AppEnv.AppPaths.ErrorLogPath;
                 
         [MethodImpl(Inline)]
-        AppMsgLog(IAppEnv env)
+        AppMsgLog(TAppEnv env)
         {
             this.AppEnv = env;
         }

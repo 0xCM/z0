@@ -14,7 +14,7 @@ namespace Z0.Asm
         public static IUriHexDecoder Service => default(UriHexDecoder);
                     
         
-        public int Decode(ReadOnlySpan<UriHex> src, Span<AsmInstructions> dst)
+        public int Decode(ReadOnlySpan<IdentifiedCode> src, Span<AsmInstructions> dst)
         {
             var decoder = Capture.Services.AsmDecoder();
             var count = src.Length;
@@ -23,7 +23,7 @@ namespace Z0.Asm
             return count;
         }
 
-        public AsmInstructions[] Decode(ReadOnlySpan<UriHex> src)
+        public AsmInstructions[] Decode(ReadOnlySpan<IdentifiedCode> src)
         {
             var count = src.Length;
             var dst = Root.alloc<AsmInstructions>(count);
@@ -31,7 +31,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public AsmInstructions[] Decode(params UriHex[] src)
+        public AsmInstructions[] Decode(params IdentifiedCode[] src)
         {
             var count = src.Length;
             var dst = Root.alloc<AsmInstructions>(count);
@@ -39,10 +39,10 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<AsmInstructions> Decode(UriHex src)
+        public Option<AsmInstructions> Decode(IdentifiedCode src)
             => Capture.Services.DefaultFunctionDecoder.Decode(src);
 
-        public Option<AsmInstructionList> Decode(UriCode src)
+        public Option<AsmInstructionList> Decode(MemberCode src)
             => Capture.Services.DefaultFunctionDecoder.Decode(src.Encoded);            
     }
 }

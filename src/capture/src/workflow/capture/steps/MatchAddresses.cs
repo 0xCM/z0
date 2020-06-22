@@ -17,7 +17,7 @@ namespace Z0.Asm
         public MatchAddressesStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
         
-        public void Run(ApiHostUri host, ExtractedMember[] extracted, AsmFunction[] decoded)
+        public void Run(ApiHostUri host, ExtractedCode[] extracted, AsmFunction[] decoded)
         {
             try
             {

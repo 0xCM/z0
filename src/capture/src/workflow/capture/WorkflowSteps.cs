@@ -13,14 +13,14 @@ namespace Z0.Asm
 
     public interface IDecodeStep : IWorkflowStep<DecodedParsedStep>
     {
-        AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMember[] parsed);
+        AsmFunction[] DecodeParsed(ApiHostUri host, ParsedExtract[] parsed);
 
         void SaveDecoded(AsmFunction[] src, FilePath dst);
     }    
 
     public interface IMatchEmissions : IWorkflowStep<MatchEmissionsStep>
     {
-        void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriHex> srcA, FilePath srcB);
+        void MatchEmissions(ApiHostUri host, ReadOnlySpan<IdentifiedCode> srcA, FilePath srcB);
     }    
 
     public interface IManageCaptureStep : IWorkflowStep<ManageCaptureStep>
@@ -36,7 +36,7 @@ namespace Z0.Asm
 
     public interface IReportExtractsStep : IWorkflowStep<EmitExtractReportStep>
     {
-        ExtractReport CreateExtractReport(ApiHostUri host, ExtractedMember[] src);
+        ExtractReport CreateExtractReport(ApiHostUri host, ExtractedCode[] src);
         
         void SaveExtractReport(ExtractReport src, FilePath dst);
     }    
@@ -45,23 +45,23 @@ namespace Z0.Asm
     {
         ApiMember[] LocateMembers(IApiHost host);
 
-        ExtractedMember[] ExtractMembers(IApiHost host);
+        ExtractedCode[] ExtractMembers(IApiHost host);
     }    
 
     public interface IMatchAddresses : IWorkflowStep<MatchAddressesStep>
     {
-        void Run(ApiHostUri host, ExtractedMember[] extracted, AsmFunction[] decoded);
+        void Run(ApiHostUri host, ExtractedCode[] extracted, AsmFunction[] decoded);
     }    
 
     public interface IParseMembers : IWorkflowStep<ParseMembersStep>
     {
-        ParsedMember[] Parse(ApiHostUri host, ExtractedMember[] extracts);
+        ParsedExtract[] Parse(ApiHostUri host, ExtractedCode[] extracts);
 
-        void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst);
+        void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst);
     }    
 
     public interface IEmitParsedReportStep : IWorkflowStep<EmitParsedReportStep>
     {
-        void Emit(ApiHostUri host, ParsedMember[] src, FilePath dst);        
+        void Emit(ApiHostUri host, ParsedExtract[] src, FilePath dst);        
     }    
 }

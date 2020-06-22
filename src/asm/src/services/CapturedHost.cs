@@ -18,18 +18,18 @@ namespace Z0
     {
         public readonly ApiHostUri Host;
 
-        public readonly ExtractedMember[] Extracts;
+        public readonly ExtractedCode[] Extracts;
 
-        public readonly ParsedMember[] Parsed;
+        public readonly ParsedExtract[] Parsed;
         
         public readonly AsmFunction[] Decoded;
 
         [MethodImpl(Inline)]
-        public static CapturedHost Define(ApiHostUri host, ExtractedMember[] extracts, ParsedMember[] parsed, AsmFunction[] decoded)
+        public static CapturedHost Define(ApiHostUri host, ExtractedCode[] extracts, ParsedExtract[] parsed, AsmFunction[] decoded)
             => new CapturedHost(host, extracts, parsed, decoded);
         
         [MethodImpl(Inline)]
-        CapturedHost(ApiHostUri host, ExtractedMember[] extracts, ParsedMember[] parsed, AsmFunction[] decoded)
+        CapturedHost(ApiHostUri host, ExtractedCode[] extracts, ParsedExtract[] parsed, AsmFunction[] decoded)
         {
             this.Host = host;
             this.Extracts = extracts;

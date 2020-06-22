@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
     
     using static Konst;
     using static BufferSeqId;
@@ -16,7 +15,7 @@ namespace Z0
 
     public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic, IBufferedChecker
     {
-        void CheckFixedMatch<F>(K.UnaryOpClass k, UriHex a, UriHex b)
+        void CheckFixedMatch<F>(K.UnaryOpClass k, IdentifiedCode a, IdentifiedCode b)
             where F : unmanaged, IFixed
         {                        
             var f = Dynamic.EmitFixedUnary<F>(Buffers[Left], a);

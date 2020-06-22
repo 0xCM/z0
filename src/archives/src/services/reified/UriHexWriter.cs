@@ -25,14 +25,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Write(UriHex src, int idpad)
+        public void Write(IdentifiedCode src, int idpad)
             => StreamOut.WriteLine(src.Format(idpad));
 
         [MethodImpl(Inline)]
-        public void Write(UriHex src)
+        public void Write(IdentifiedCode src)
             => StreamOut.WriteLine(src.Format(0));
 
-        public void Write(UriHex[] src)
+        public void Write(IdentifiedCode[] src)
         {
             var uripad = src.Max(x => x.OpUri.UriText.Length) + 1;
             for(var i=0; i< src.Length; i++)
@@ -46,10 +46,10 @@ namespace Z0
             StreamOut.Dispose();
         }
 
-        public static UriHex[] save(ApiHostUri host, ParsedMember[] src, FilePath dst)
+        public static IdentifiedCode[] save(ApiHostUri host, ParsedExtract[] src, FilePath dst)
         {
             using var writer = new UriHexWriter(dst);
-            var data = src.Map(x => new UriHex(x.OpUri, x.Encoded.Encoded));
+            var data = src.Map(x => new IdentifiedCode(x.OpUri, x.Encoded.Encoded));
             writer.Write(data);
             return data;
         }                

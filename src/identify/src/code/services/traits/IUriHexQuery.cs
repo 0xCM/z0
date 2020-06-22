@@ -15,22 +15,22 @@ namespace Z0
         /// Creates an operation index from a uri bitstream
         /// </summary>
         /// <param name="src">The source bits</param>
-        OpIndex<UriHex> CreateIndex(IEnumerable<UriHex> src)
+        OpIndex<IdentifiedCode> CreateIndex(IEnumerable<IdentifiedCode> src)
             => index(src);
         
-        bool AcceptsParameter(UriHex src, NumericKind kind)
+        bool AcceptsParameter(IdentifiedCode src, NumericKind kind)
             => accepts(src, kind);
 
-        IEnumerable<UriHex> AcceptsParameters(IEnumerable<UriHex> src, NumericKind k1, NumericKind k2)
+        IEnumerable<IdentifiedCode> AcceptsParameters(IEnumerable<IdentifiedCode> src, NumericKind k1, NumericKind k2)
             => filter(src, k1, k2);
 
-        IEnumerable<UriHex> AcceptsParameter(IEnumerable<UriHex> src, NumericKind kind)
+        IEnumerable<IdentifiedCode> AcceptsParameter(IEnumerable<IdentifiedCode> src, NumericKind kind)
             => filter(src,kind);
         
-        int ParameterCount(UriHex src)
+        int ParameterCount(IdentifiedCode src)
             => arity(src);
                     
-        IEnumerable<UriHex> WithParameterCount(IEnumerable<UriHex> src, int count)
+        IEnumerable<IdentifiedCode> WithParameterCount(IEnumerable<IdentifiedCode> src, int count)
             => withArity(src, count);
     }
 }

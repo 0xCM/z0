@@ -15,12 +15,12 @@ namespace Z0.Asm
     public readonly struct AsmPipeRunner
     {
         [MethodImpl(Inline)]
-        public static AsmPipeRunner Create(IAppPaths paths, IArchives src, FilePath logpath)
+        public static AsmPipeRunner Create(TAppPaths paths, IArchives src, FilePath logpath)
             => new AsmPipeRunner(paths,src,logpath);
         
         public FilePath LogPath {get;}
 
-        public IAppPaths AppPaths {get;}
+        public TAppPaths AppPaths {get;}
         
         public IArchives DataSource {get;}
 
@@ -34,7 +34,7 @@ namespace Z0.Asm
             => ref ListCount[0];
 
         [MethodImpl(Inline)]
-        internal AsmPipeRunner(IAppPaths paths, IArchives src, FilePath logpath)
+        internal AsmPipeRunner(TAppPaths paths, IArchives src, FilePath logpath)
         {
             AppPaths = paths;
             DataSource = src;
@@ -72,7 +72,7 @@ namespace Z0.Asm
         AsmInstructionList ToList(AsmInstructions src)
             => AsmInstructionList.Create(src, new LocatedCode(BaseAddress, src.Encoded));
 
-        void RunPipe(ReadOnlySpan<UriHex> src, StreamWriter log)
+        void RunPipe(ReadOnlySpan<IdentifiedCode> src, StreamWriter log)
         {
             var decoder = UriHexDecoder.Service;
             var t1 = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, Handlers.OnVinserti128);
@@ -113,7 +113,7 @@ namespace Z0.Asm
             => CaptureArchive(part).HexPath<T>();
 
         [MethodImpl(Inline)]
-        IUriHexArchive UriBitsArchive(FolderPath root)
-            => DataSource.UriBitsArchive(root);
+        IEncodedHexArchive UriBitsArchive(FolderPath root)
+            => DataSource.HexArchive(root);
     }
 }

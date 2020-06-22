@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
 
-    using static Memories;
+    using static Root;
 
     public readonly struct EnumGenerator
     {
@@ -46,7 +44,7 @@ namespace Z0
 
         EnumLiteralRecord[] ParseEnumLiterals(TextDoc src)
         {
-            var dst = Control.alloc<EnumLiteralRecord>(src.RowCount);
+            var dst = Root.alloc<EnumLiteralRecord>(src.RowCount);
             for(var i=0; i<src.RowCount; i++)
             {
                 ref readonly var row = ref src[i];
@@ -63,7 +61,7 @@ namespace Z0
 
         public EnumDataSource[] ParseDataSources(TextDoc src)
         {
-            var dst = Control.alloc<EnumDataSource>(src.RowCount);
+            var dst = Root.alloc<EnumDataSource>(src.RowCount);
             for(var i=0; i<src.RowCount; i++)
             {
                 ref readonly var row = ref src[i];

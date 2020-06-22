@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// <summary>
         /// Encoded assembly
         /// </summary>
-        public readonly UriCode Encoded;
+        public readonly MemberCode Encoded;
 
         /// <summary>
         /// The decoded instructions
@@ -35,11 +35,11 @@ namespace Z0.Asm
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
         [MethodImpl(Inline)]
-        public static AsmInstructionBlock Define(UriCode encoded, Instruction[] decoded, ExtractTermCode term)
+        public static AsmInstructionBlock Define(MemberCode encoded, Instruction[] decoded, ExtractTermCode term)
             => new AsmInstructionBlock(encoded, decoded, term);
 
         [MethodImpl(Inline)]
-        AsmInstructionBlock(UriCode encoded, Instruction[] decoded, ExtractTermCode term)
+        AsmInstructionBlock(MemberCode encoded, Instruction[] decoded, ExtractTermCode term)
         {
             this.Encoded = encoded;
             this.Decoded = decoded;

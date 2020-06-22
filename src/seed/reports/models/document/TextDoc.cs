@@ -38,7 +38,7 @@ namespace Z0
         
         public string Content
         {
-            get => RowData.Map(r => r.Format()).Concat(text.eol);
+            get => RowData.Map(r => r.Format()).Concat(text.Eol);
         }
 
         public Option<TextRow> Next(int index, Func<TextRow,bool> f)

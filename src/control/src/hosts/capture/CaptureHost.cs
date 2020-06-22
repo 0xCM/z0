@@ -32,7 +32,7 @@ namespace Z0
 
         readonly IImmEmissionWorkflow ImmWorkflow;
 
-        readonly IUriHexReader UriBitsReader;
+        readonly IEncodedHexReader UriBitsReader;
 
         readonly AsmFormatSpec FormatConfig;
         

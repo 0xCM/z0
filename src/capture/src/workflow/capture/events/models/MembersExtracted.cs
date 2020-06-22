@@ -13,10 +13,10 @@ namespace Z0.Asm
     {
         public readonly ApiHostUri Host;
         
-        public readonly ExtractedMember[] Members;
+        public readonly ExtractedCode[] Members;
 
         [MethodImpl(Inline)]
-        public MembersExtracted(ApiHostUri host, ExtractedMember[] members)
+        public MembersExtracted(ApiHostUri host, ExtractedCode[] members)
         {
             Host = host;
             Members = members;
@@ -29,6 +29,6 @@ namespace Z0.Asm
             => Empty; 
 
         public static MembersExtracted Empty 
-            => new MembersExtracted(ApiHostUri.Empty, Array.Empty<ExtractedMember>());
+            => new MembersExtracted(ApiHostUri.Empty, Array.Empty<ExtractedCode>());
     }    
 }

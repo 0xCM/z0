@@ -14,7 +14,7 @@ namespace Z0.Test
     {
         public void write()
         {
-            UnitRoot.Clear();
+            UnitDataDir.Clear();
             VerifyWriter<N12,N14,long>(Pow2.T03);        
             VerifyWriter<N19,N32,byte>(Pow2.T03);        
             VerifyWriter(Pow2.T03, n31, n31, 0u);                    

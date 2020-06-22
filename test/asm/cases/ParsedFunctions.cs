@@ -14,7 +14,7 @@ namespace Z0
     {
         LocatedCode Case(OpKindId k, params NumericKind[] kinds)
         {
-            var id = Identify.NumericOp(k, kinds).ToLegalIdentifier();
+            var id = Identify.NumericOp(k, kinds).ToPropertyName();
             var resource = TryFind(id);
             if(!resource)
                 throw new KeyNotFoundException(id);

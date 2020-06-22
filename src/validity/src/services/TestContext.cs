@@ -144,7 +144,7 @@ namespace Z0
         protected ICheckEquatable ClaimEquatable 
             => CheckEquatable.Checker;
 
-        protected IAppPaths AppPaths 
+        protected TAppPaths AppPaths 
             => Context.AppPaths;
 
         protected PartId TestedPart
@@ -159,7 +159,7 @@ namespace Z0
              get => Context.AppPaths.TestDataRoot + FolderName.Define(TestedPart.Format());
         }
 
-        protected FolderPath UnitRoot
+        protected FolderPath UnitDataDir
         {
              [MethodImpl(Inline)]
              get => TestRoot + FolderName.Define(GetType().Name);
@@ -201,7 +201,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         protected FilePath UnitPath(FileName name)    
-            => UnitRoot + name;
+            => UnitDataDir + name;
 
         protected StreamWriter UnitWriter(FileName filename)
             => UnitPath(filename).Writer();

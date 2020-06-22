@@ -50,7 +50,7 @@ namespace Z0
 
             void report()
             {
-                var x = Data.vincrements<byte>(n128);
+                var x = VData.vincrements<byte>(n128);
                 var y = dvec.vadd(x, Vectors.vbroadcast(n128, (byte)16));
 
                 var lo = gvec.vmergelo(x,y);

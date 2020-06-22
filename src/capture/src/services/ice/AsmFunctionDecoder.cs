@@ -36,16 +36,16 @@ namespace Z0.Asm
                 let block = AsmInstructionBlock.Define(src.HostedBits, i, src.TermCode)
                 select Services.FunctionBuilder.BuildFunction(src.OpUri, src.Method.Signature().Format(), block);
 
-        public Option<AsmFunction> Decode(ParsedMember src)
+        public Option<AsmFunction> Decode(ParsedExtract src)
             =>  from i in Decode(src.Encoded) select AsmFunction.Define(src,i);
 
         public Option<AsmInstructionList> Decode(LocatedCode src)        
             => Decode(src.Encoded, src.Address).TryMap(x => AsmInstructionList.Create(x, src));
 
-        public Option<AsmInstructions> Decode(UriHex src)        
+        public Option<AsmInstructions> Decode(IdentifiedCode src)        
             => Decode(src.Encoded, MemoryAddress.Empty);
 
-        public Option<AsmFunction> Decode(ParsedMember src, Action<Asm.Instruction> f)
+        public Option<AsmFunction> Decode(ParsedExtract src, Action<Asm.Instruction> f)
             => Decode(src.Encoded,f).TryMap(x => AsmFunction.Define(src,x));
 
         public Option<AsmInstructionList> Decode(LocatedCode src, Action<Asm.Instruction> f)        

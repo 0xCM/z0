@@ -34,6 +34,11 @@ namespace Z0
         public const char ModSep = Tilde;
 
         /// <summary>
+        /// A seperator that between a type and a generalization
+        /// </summary>
+        public const char Refines = Chars.Colon;
+
+        /// <summary>
         /// Indicates a signed integral type
         /// </summary>
         public const char Signed = 'i';
@@ -73,35 +78,25 @@ namespace Z0
         /// </summary>
         public const char ArgSep = Comma;
 
-        public const char ArgSepAlt = SymNot.Dot;
-
         /// <summary>
         /// Opens a value parameter list
         /// </summary>
         public const char ArgsOpen = LParen;
-
-        public const char ArgsOpenAlt = SymNot.Circle;
 
         /// <summary>
         /// Closes a value parameter list
         /// </summary>
         public const char ArgsClose = RParen;
 
-        public const char ArgsCloseAlt = SymNot.Circle;
-
         /// <summary>
         /// Opens a type argument list
         /// </summary>
         public const char TypeArgsOpen = LBracket;
 
-        public const char TypeArgsOpenAlt = SymNot.Lt;
-
         /// <summary>
         /// Closes a type argument list
         /// </summary>
         public const char TypeArgsClose = RBracket;
-
-        public const char TypeArgsCloseAlt = SymNot.Gt;
 
         /// <summary>
         /// The text used to terminate a uri scheme and trailing '//'

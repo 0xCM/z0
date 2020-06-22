@@ -11,7 +11,6 @@ namespace Z0
     using System.Text;
 
     using static Konst;
-    using static Chars;
 
     /// <summary>
     /// Reifies an application settings service
@@ -135,7 +134,7 @@ namespace Z0
                 {
                     var line = indent + settings[i].Format();
                     if(i != settings.Length - 1)
-                        line += Comma;
+                        line += Chars.Comma;
                     writer.WriteLine(line);   
                 }
                 writer.WriteLine(RBrace);
@@ -151,7 +150,7 @@ namespace Z0
                 var line = src[i].Format();
 
                 if(i != src.Length - 1)
-                    line += Comma;
+                    line += Chars.Comma;
                 
                 dst.AppendLine(line);
             }

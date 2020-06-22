@@ -9,9 +9,9 @@ namespace Z0
 
     public readonly struct UriHexParser : IUriHexParser
     {
-        public static ITextParser<UriHex> Service => default(UriHexParser);
+        public static ITextParser<IdentifiedCode> Service => default(UriHexParser);
 
-        public static ParseResult<UriHex> parse(string src)         
+        public static ParseResult<IdentifiedCode> parse(string src)         
         {
             try
             {
@@ -21,11 +21,11 @@ namespace Z0
                                      .SplitClean(HexSpecs.DataDelimiter)
                                      .Select(parser.Succeed)
                                      .ToArray();
-                return ParseResult.Success(src, new UriHex(uri, new BinaryCode(bytes)));
+                return ParseResult.Success(src, new IdentifiedCode(uri, new BinaryCode(bytes)));
             }
             catch(Exception e)
             {
-                return ParseResult.Fail<UriHex>(src,e);
+                return ParseResult.Fail<IdentifiedCode>(src,e);
             }
         }
     }

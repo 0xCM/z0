@@ -94,6 +94,9 @@ bash $Cmd
 export ProjectId=fvec
 bash $Cmd
 
+export ProjectId=generate
+bash $Cmd
+
 export ProjectId=gmath
 bash $Cmd
 

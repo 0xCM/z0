@@ -13,15 +13,12 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using T = t_dynamic_factory;
     using K = Kinds;
     using M = CaseMethods;
     
-
     public class t_dynamic_factory : t_asm<t_dynamic_factory>
     {
         public override bool Enabled => true;
-
             
         IDynexus Dynamic => Dynops.Services.Dynexus;
         
@@ -134,7 +131,7 @@ namespace Z0.Asm
         {
             var dId = Identify.Op(name, w, kind, false);
             var gId = Identify.Op(name, w, kind, true);            
-            var archive = UriHexArchive.Create(CodeArchive.CodeDir);
+            var archive = EncodedHexArchive.Service(TargetArchive.CodeDir);
             var dBits = archive.Read(ApiHosts.from<dvec>().Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiHosts.from<gvec>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(K.BinaryOp, w, dBits, gBits, dst);

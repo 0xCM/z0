@@ -23,27 +23,27 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Perm16 videntity(W128 w)
-            => new Perm16(Data.vincrements<byte>(w));
+            => new Perm16(VData.vincrements<byte>(w));
 
         /// <summary>
         /// Creates the reversal of the identity permutation
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Perm16 vreversed(W128 w)
-            => new Perm16(Data.decrements<byte>(w));
+            => new Perm16(VData.decrements<byte>(w));
 
         /// <summary>
         /// Creates the identity permutation
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Perm32 videntity(W256 w)
-            => new Perm32(Data.vincrements<byte>(w));
+            => new Perm32(VData.vincrements<byte>(w));
 
         /// <summary>
         /// Creates the reversal of the identity permutation
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Perm32 vreversed(W256 w)
-            => new Perm32(Data.decrements<byte>(w));
+            => new Perm32(VData.decrements<byte>(w));
     }
 }

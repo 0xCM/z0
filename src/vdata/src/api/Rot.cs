@@ -12,7 +12,7 @@ namespace Z0
     using static HexConst;
     using static VectorKonst;
  
-    partial class Data
+    partial class VData
     {
         [MethodImpl(Inline), Op]
         public static Vector128<byte> rotl(N128 n, N8 offset)

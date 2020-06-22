@@ -168,8 +168,8 @@ namespace Z0
             var y = Vectors.vparts(n,8,9,A,B,C,D,E,F);
             var e = Vectors.vparts(n,0,9,2,B,4,D,6,F);
             var o = Vectors.vparts(n,8,1,A,3,C,5,E,7);
-            var mEven = Data.blendspec(n,false,n32);
-            var mOdd = Data.blendspec(n,true,n32);
+            var mEven = VData.blendspec(n,false,n32);
+            var mOdd = VData.blendspec(n,true,n32);
             Claim.veq(e,gvec.vblend(x,y,mEven));
             Claim.veq(o,gvec.vblend(x,y,mOdd));
         }
@@ -181,8 +181,8 @@ namespace Z0
             var y = Vectors.vparts(n,4,5,6,7);
             var e = Vectors.vparts(n,0,5,2,7);
             var o = Vectors.vparts(n,4,1,6,3);
-            var mEven = Data.blendspec(n,false,n64);
-            var mOdd = Data.blendspec(n,true,n64);
+            var mEven = VData.blendspec(n,false,n64);
+            var mOdd = VData.blendspec(n,true,n64);
             Claim.veq(e,gvec.vblend(x,y,mEven));
             Claim.veq(o,gvec.vblend(x,y,mOdd));
 
@@ -204,7 +204,7 @@ namespace Z0
                 var y = ys.LoadVector();
                 Claim.veq(y,Vectors.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
-                var m = Data.blendspec(n256,false,n64);
+                var m = VData.blendspec(n256,false,n64);
                 var es = Blocks.alloc<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = gmath.odd(i) ? ys[i] : xs[i];

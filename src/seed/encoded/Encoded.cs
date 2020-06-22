@@ -20,5 +20,4 @@ namespace Z0
         public static LocatedCode located(MemoryAddress address, BinaryCode code)
             => new LocatedCode(address, code);
     }
-
 }

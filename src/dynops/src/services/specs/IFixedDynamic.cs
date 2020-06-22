@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IFixedDynamic : IService
     {
         /// <summary>
@@ -14,7 +12,7 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        FixedUnaryOp<F> EmitFixedUnary<F>(IBufferToken dst, UriHex src);
+        FixedUnaryOp<F> EmitFixedUnary<F>(IBufferToken dst, IdentifiedCode src);
 
         /// <summary>
         /// Loads source into a token-identifed buffer and covers it with a fixed binary operator
@@ -22,7 +20,7 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        FixedBinaryOp<F> EmitFixedBinary<F>(IBufferToken buffer, UriHex src);
+        FixedBinaryOp<F> EmitFixedBinary<F>(IBufferToken buffer, IdentifiedCode src);
 
         /// <summary>
         /// Loads executable source into an identified buffer and creates a fixed unary operator over the buffer
@@ -30,7 +28,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        FixedTernaryOp<F> EmitFixedTernary<F>(IBufferToken dst, UriHex src);
+        FixedTernaryOp<F> EmitFixedTernary<F>(IBufferToken dst, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 8-bit unary operator from caller-supplied x86 source code
@@ -38,7 +36,7 @@ namespace Z0
         /// <param name="dst">The target buffer sequence</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        UnaryOp8 EmitFixedUnary(IBufferToken dst, W8 w, UriHex src);
+        UnaryOp8 EmitFixedUnary(IBufferToken dst, W8 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 16-bit unary operator from caller-supplied x86 source code
@@ -46,7 +44,7 @@ namespace Z0
         /// <param name="dst">The target buffer sequence</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        UnaryOp16 EmitFixedUnary(IBufferToken dst, W16 w, UriHex src);
+        UnaryOp16 EmitFixedUnary(IBufferToken dst, W16 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 32-bit unary operator from caller-supplied x86 source code
@@ -54,7 +52,7 @@ namespace Z0
         /// <param name="dst">The target buffer sequence</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        UnaryOp32 EmitFixedUnary(IBufferToken dst, W32 w, UriHex src);
+        UnaryOp32 EmitFixedUnary(IBufferToken dst, W32 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 64-bit unary operator from caller-supplied x86 source code
@@ -63,7 +61,7 @@ namespace Z0
         /// <param name="index">The index of the buffer to load</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        UnaryOp64 EmitFixedUnary(IBufferToken dst, W64 w, UriHex src);
+        UnaryOp64 EmitFixedUnary(IBufferToken dst, W64 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 128-bit unary operator from caller-supplied x86 source code
@@ -71,7 +69,7 @@ namespace Z0
         /// <param name="dst">The target buffer sequence</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        UnaryOp128 EmitFixedUnary(IBufferToken dst, W128 w, UriHex src);
+        UnaryOp128 EmitFixedUnary(IBufferToken dst, W128 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 256-bit unary operator from caller-supplied x86 source code
@@ -79,7 +77,7 @@ namespace Z0
         /// <param name="dst">The target buffer sequence</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        UnaryOp256 EmitFixedUnary(IBufferToken dst, W256 w, UriHex src);
+        UnaryOp256 EmitFixedUnary(IBufferToken dst, W256 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 8-bit binary operator from caller-supplied x86 source code
@@ -88,7 +86,7 @@ namespace Z0
         /// <param name="index">The index of the buffer to load</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        BinaryOp8 EmitFixedBinary(IBufferToken dst, W8 w, UriHex src);
+        BinaryOp8 EmitFixedBinary(IBufferToken dst, W8 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 16-bit binary operator from caller-supplied x86 source code
@@ -97,7 +95,7 @@ namespace Z0
         /// <param name="index">The index of the buffer to load</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        BinaryOp16 EmitFixedBinary(IBufferToken dst, W16 w, UriHex src);
+        BinaryOp16 EmitFixedBinary(IBufferToken dst, W16 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 32-bit binary operator from caller-supplied x86 source code
@@ -106,7 +104,7 @@ namespace Z0
         /// <param name="index">The index of the buffer to load</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        BinaryOp32 EmitFixedBinary(IBufferToken dst, W32 w, UriHex src);
+        BinaryOp32 EmitFixedBinary(IBufferToken dst, W32 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 64-bit binary operator from caller-supplied x86 source code
@@ -115,7 +113,7 @@ namespace Z0
         /// <param name="index">The index of the buffer to load</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        BinaryOp64 EmitFixedBinary(IBufferToken dst, W64 w, UriHex src);
+        BinaryOp64 EmitFixedBinary(IBufferToken dst, W64 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 128-bit binary operator from caller-supplied x86 source code
@@ -124,7 +122,7 @@ namespace Z0
         /// <param name="index">The index of the buffer to load</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        BinaryOp128 EmitFixedBinary(IBufferToken dst, W128 w, UriHex src);
+        BinaryOp128 EmitFixedBinary(IBufferToken dst, W128 w, IdentifiedCode src);
 
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied x86 source code
@@ -133,6 +131,6 @@ namespace Z0
         /// <param name="index">The index of the buffer to load</param>
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
-        BinaryOp256 EmitFixedBinary(IBufferToken dst, W256 w, UriHex src);
+        BinaryOp256 EmitFixedBinary(IBufferToken dst, W256 w, IdentifiedCode src);
     }
 }

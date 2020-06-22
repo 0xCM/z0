@@ -21,14 +21,17 @@ namespace Z0
 
         public readonly char ArgSep;
 
+        public readonly char ModSep;
+
         [MethodImpl(Inline)]
-        public LegalIdentityOptions(char TypeArgsOpen, char TypeArgsClose, char ArgsOpen, char ArgsClose, char ArgSep)
+        public LegalIdentityOptions(char TypeArgsOpen, char TypeArgsClose, char ArgsOpen, char ArgsClose, char ArgSep, char ModSep)
         {
             this.TypeArgsOpen = TypeArgsOpen;
             this.TypeArgsClose = TypeArgsClose;
             this.ArgsOpen = ArgsOpen;
             this.ArgsClose = ArgsClose;
             this.ArgSep = ArgSep;
+            this.ModSep = ModSep;
         }
     }
 }

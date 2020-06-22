@@ -5,8 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     
     using K = Kinds;
     

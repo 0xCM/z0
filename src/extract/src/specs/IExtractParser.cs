@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="seq"></param>
-        ExtractParseResult Parse(ExtractedMember src, int seq);
+        ExtractParseResult Parse(ExtractedCode src, int seq);
 
 
         /// <summary>
@@ -26,6 +26,6 @@ namespace Z0
         /// outcomes of successful parse operations and any unfortunate failures
         /// </summary>
         /// <param name="src">The source extracts</param>
-        ExtractParseResults Parse(ExtractedMember[] src);
+        ExtractParseResults Parse(ExtractedCode[] src);
     }
 }

@@ -12,14 +12,14 @@ namespace Z0
         where S : IAgentControl
         where C : IAgentContext         
     {
-        protected AgentControl(IAppEnv context)
+        protected AgentControl(TAppEnv context)
         {
             Context = context;
         }
 
         public AgentStats SummaryStats {get; protected set;}
 
-        public IAppEnv Context {get;}
+        public TAppEnv Context {get;}
 
         public event Action<C> Configured;
 

@@ -8,14 +8,14 @@ namespace Z0.Asm
 
     public interface IUriHexDecoder : IService
     {
-        AsmInstructions[] Decode(ReadOnlySpan<UriHex> src);
+        AsmInstructions[] Decode(ReadOnlySpan<IdentifiedCode> src);
 
-        int Decode(ReadOnlySpan<UriHex> src, Span<AsmInstructions> dst);        
+        int Decode(ReadOnlySpan<IdentifiedCode> src, Span<AsmInstructions> dst);        
 
-        Option<AsmInstructions> Decode(UriHex src); 
+        Option<AsmInstructions> Decode(IdentifiedCode src); 
 
-        Option<AsmInstructionList> Decode(UriCode src);       
+        Option<AsmInstructionList> Decode(MemberCode src);       
 
-        AsmInstructions[] Decode(params UriHex[] src);
+        AsmInstructions[] Decode(params IdentifiedCode[] src);
     }
 }

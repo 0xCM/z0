@@ -25,8 +25,8 @@ namespace Z0.Asm
             => DataSource.CaptureArchive(root, null, null);
 
         [MethodImpl(Inline)]
-        IUriHexArchive UriBitsArchive(FolderPath root)
-            => DataSource.UriBitsArchive(root);
+        IEncodedHexArchive UriBitsArchive(FolderPath root)
+            => DataSource.HexArchive(root);
 
         [MethodImpl(Inline)]
         ICaptureArchive CaptureArchive(PartId part)
@@ -119,7 +119,7 @@ namespace Z0.Asm
             return Processed();
         }
 
-        void Process(UriHex[] src)
+        void Process(IdentifiedCode[] src)
         {
             var count = src.Length;
             for(var i=0; i< count; i++)
@@ -127,7 +127,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        void Process(in UriHex src)
+        void Process(in IdentifiedCode src)
         {
             var decoded = Decoder.Decode(src);
             if(decoded)
@@ -135,7 +135,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        void Process(in UriCode src)
+        void Process(in MemberCode src)
         {
             var decoded = Decoder.Decode(src.Encoded);
             if(decoded)

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IAgentContext : IAppEnv
+    public interface IAgentContext : TAppEnv
     {
         IEnumerable<ISystemAgent> Memberhsip {get;}   
 

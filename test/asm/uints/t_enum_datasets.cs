@@ -17,7 +17,7 @@ namespace Z0.Asm
     {        
         public t_enum_datasets()
         {
-            UnitRoot.Clear();   
+            UnitDataDir.Clear();   
 
         }
         

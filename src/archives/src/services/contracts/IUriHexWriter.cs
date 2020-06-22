@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using System;
-
     public delegate IUriHexWriter UriHexWriterFactory(FilePath dst);
 
-    public interface IUriHexWriter : IFileStreamWriter<UriHex>
+    public interface IUriHexWriter : IFileStreamWriter<IdentifiedCode>
     {        
-        void Write(UriHex src, int uripad);
+        void Write(IdentifiedCode src, int uripad);
     }
 }

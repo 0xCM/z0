@@ -67,13 +67,13 @@ namespace Z0
         {
             var dst = text.build();
             dst.Append(FileHeader);
-            line(l0("namespace", space, Namespace), dst);
-            line(l0(lbrace), dst);
-            line(concat(level1,Access, space, spaced(TypeKind, TypeName, Chars.Colon, BaseType)), dst);
-            line(l1(lbrace), dst);
+            line(l0("namespace", Space, Namespace), dst);
+            line(l0(LBrace), dst);
+            line(concat(Level1,Access, Space, spaced(TypeKind, TypeName, Chars.Colon, BaseType)), dst);
+            line(l1(LBrace), dst);
             lines(Literals(), dst);
-            line(l1(rbrace), dst);
-            line(l0(rbrace), dst);
+            line(l1(RBrace), dst);
+            line(l0(RBrace), dst);
 
             return dst.ToString();
         }
@@ -82,18 +82,18 @@ namespace Z0
         {
             for(var i=0; i<=MaxValue; i++)
             {
-                yield return l2(Literal(LiteralName((byte)i), LiteralValue((byte)i)), comma);
-                yield return blank;
+                yield return l2(Literal(LiteralName((byte)i), LiteralValue((byte)i)), Chars.Comma);
+                yield return EmptyString;
             }
         }
 
         string LiteralName(byte value)
-            => concat(AsciLetterLo.b, Formatter.Format(value, BitFormatConfig.Limited(MaxBitCount,MaxBitCount)));
+            => text.concat(AsciLetterLo.b, Formatter.Format(value, BitFormatConfig.Limited(MaxBitCount,MaxBitCount)));
 
         string LiteralValue(byte value)
-            => concat("0b", Formatter.Format(value, BitFormatConfig.Limited(MaxBitCount,MaxBitCount)));
+            => text.concat("0b", Formatter.Format(value, BitFormatConfig.Limited(MaxBitCount,MaxBitCount)));
 
         string Literal(string Name, string Value) 
-            => assign(Name, Value);
+            => text.assign(Name, Value);
     }
 }

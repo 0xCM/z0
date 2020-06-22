@@ -3,10 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
-    
+{    
     public readonly struct EnvVarNames
     {
         public const string LogDir = "ZLogs";
@@ -17,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Reifies an application evironment service predicated on environment variables
     /// </summary>
-    public readonly struct Env : IAppEnv
+    public readonly struct Env : TAppEnv
     {
         public static Env Current
         {

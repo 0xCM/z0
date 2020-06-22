@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IEvalExecutor : IService
+    public interface IEvalExecutor
     {
         EvalResult ExecAction(Action action, OpUri f);   
 

@@ -16,7 +16,7 @@ namespace Z0.Asm.Data
     {     
         protected t_asmd()
         {
-            UnitRoot.Clear();   
+            UnitDataDir.Clear();   
         }
     }
 }

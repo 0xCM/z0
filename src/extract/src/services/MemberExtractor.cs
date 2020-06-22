@@ -30,15 +30,15 @@ namespace Z0
         /// Extracts encoded content that defines executable code for a located member
         /// </summary>
         /// <param name="src">The source member</param>
-        public ExtractedMember Extract(ApiMember src)
+        public ExtractedCode Extract(ApiMember src)
         {
             Span<byte> buffer = stackalloc byte[BufferLength];
             return Extract(src, MemoryReader.Service, buffer);
         }
 
-        public ExtractedMember[] Extract(ApiMember[] members)
+        public ExtractedCode[] Extract(ApiMember[] members)
         {
-            var dst = new ExtractedMember[members.Length];
+            var dst = new ExtractedCode[members.Length];
             Span<byte> buffer = stackalloc byte[BufferLength];            
             var reader = MemoryReader.Service;
             for(var i=0; i<members.Length; i++)
@@ -50,16 +50,16 @@ namespace Z0
         /// Extracts encoded content for all operations defined by a host
         /// </summary>
         /// <param name="src">The source member</param>
-        public ExtractedMember[] Extract(IApiHost src)
+        public ExtractedCode[] Extract(IApiHost src)
             => Extract(Identities.Services.ApiLocator.Located(src));
 
         [MethodImpl(Inline)]
-        ExtractedMember Extract(ApiMember src, IMemoryReader reader, Span<byte> buffer)
+        ExtractedCode Extract(ApiMember src, IMemoryReader reader, Span<byte> buffer)
         {
             buffer.Clear();      
             var address = src.Address;          
             var length = reader.Read(address, buffer);
-            return new ExtractedMember(src, 
+            return new ExtractedCode(src, 
                 new LocatedCode(address, buffer.Slice(0,length).ToArray()));
         }
     }

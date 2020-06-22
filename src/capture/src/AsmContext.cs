@@ -27,7 +27,7 @@ namespace Z0.Asm
 
         public IApiSet ApiSet {get;}
 
-        public IAppPaths AppPaths {get;}
+        public TAppPaths AppPaths {get;}
 
         public IAsmFormatter Formatter {get;}
         

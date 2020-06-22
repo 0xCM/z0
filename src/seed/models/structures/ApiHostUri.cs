@@ -12,6 +12,9 @@ namespace Z0
 
     public readonly struct ApiHostUri : IUri<ApiHostUri>, INullary<ApiHostUri>
     {        
+        public static FileName HostFileName(PartId owner, string hostname, FileExtension ext)
+            => Z0.FileName.Define(text.concat(owner.Format(), Chars.Dot, hostname), ext);
+
         public readonly PartId Owner;
 
         public readonly string Name;        
@@ -21,8 +24,8 @@ namespace Z0
         public FolderName HostFolder 
             => FolderName.Define(Name);
 
-        public RelativeLocation HostLocation 
-            => RelativeLocation.Define(FolderName.Define(Owner.Format()), HostFolder);
+        public FileName FileName(FileExtension ext)
+            => Z0.FileName.Define(text.concat(Owner.Format(), Chars.Dot, Name), ext);
         
         public bool IsEmpty
         {
@@ -30,17 +33,27 @@ namespace Z0
             get => Owner == 0  && text.empty(Name);
         }
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Owner != 0 && !text.empty(Name);
+        }
+
         ApiHostUri INullary<ApiHostUri>.Zero 
             => Empty;
         
         [MethodImpl(Inline)]
-        public static ParseResult<ApiHostUri> Parse(string text)
+        public static ParseResult<ApiHostUri> Parse(string src)
         {
-            var parts = text.Split(UriDelimiters.PathSep);
+            var parts = src.Split(UriDelimiters.PathSep);
             if(parts.Length == 2 && Enum.TryParse(parts[0], true, out PartId owner))
-                return ParseResult.Success(text,Define(owner, parts[1]));
-            else
-                return ParseResult.Fail<ApiHostUri>(text);
+            {
+                var host = parts[1];
+                if(!text.empty(host))
+                    return ParseResult.Success(src, Define(owner, host));
+            }
+            
+            return ParseResult.Fail<ApiHostUri>(src);
         }
 
         [MethodImpl(Inline)]
@@ -51,6 +64,9 @@ namespace Z0
             var owner = host.Assembly.Id();
             return new ApiHostUri(owner, name);
         }
+
+        public static ParseResult<ApiHostUri> Parse(FileName src)
+            => Parse(src.WithoutExtension.Name.Replace(Chars.Dot, UriDelimiters.PathSep));
 
         [MethodImpl(Inline)]
         public static ApiHostUri FromHost<H>()

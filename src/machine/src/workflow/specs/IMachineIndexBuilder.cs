@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Machine
 {
-    using System;
-
     public interface IMachineIndexBuilder
     {
-        int Include(params UriCode[] src);   
+        int Include(params MemberCode[] src);   
 
-        MachineIndex Freeze();
+        EncodedIndex Freeze();
     }
 }

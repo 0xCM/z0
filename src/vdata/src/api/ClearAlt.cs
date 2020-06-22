@@ -10,7 +10,7 @@ namespace Z0
     
     using static Konst;
 
-    partial class Data
+    partial class VData
     {
         /// <summary>
         /// Creates a shuffle mask that clears every-other vector component

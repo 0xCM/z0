@@ -57,7 +57,7 @@ namespace Z0
 
         static AppMsg DefaultMsg(bool accepted)
         {
-            var content = text.concat($"Broker {typeof(E).DisplayName()} receiver acceptions", text.colon, text.space(), accepted);
+            var content = text.concat($"Broker {typeof(E).DisplayName()} receiver acceptions", Chars.Colon, text.space(), accepted);
             return accepted ? AppMsg.Info(content) : AppMsg.Warn(content);
         }
     }

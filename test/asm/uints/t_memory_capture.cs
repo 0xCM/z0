@@ -10,7 +10,7 @@ namespace Z0.Asm
     {    
         public override bool Enabled => false;
 
-        bool MemcapCheck(IMemoryCapture memcap, UriCode src)
+        bool MemcapCheck(IMemoryCapture memcap, MemberCode src)
         {
             var captured = memcap.Capture(src.Address);
             if(!captured)

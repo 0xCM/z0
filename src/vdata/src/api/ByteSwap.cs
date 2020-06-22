@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static VectorKonst;
  
-    partial class Data
+    partial class VData
     {
         /// <summary>
         /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation 

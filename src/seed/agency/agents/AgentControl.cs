@@ -8,13 +8,12 @@ namespace Z0
     using System.Linq;
     using System.Threading.Tasks;
 
-
     public class AgentControl : AgentControl<IAgentControl,IAgentContext>, IAgentControl
     {
-        public static IAgentControl FromContext(IAppEnv Context)
+        public static IAgentControl FromContext(TAppEnv Context)
             => new AgentControl(Context);
         
-        public AgentControl(IAppEnv Context)
+        public AgentControl(TAppEnv Context)
             : base(Context)
         {
 

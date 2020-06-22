@@ -94,6 +94,9 @@ namespace Z0
         public string Format()
             => Encoded.FormatHexBytes();
 
+        public string Format(HexFormatConfig config)
+            => Encoded.FormatHexBytes(config);
+
         public override int GetHashCode()
             => Encoded.GetHashCode();
         

@@ -10,7 +10,6 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
-    using static CaptureWorkflowEvents;
 
     public readonly struct ExtractMembersStep : IExtractMembers
     {
@@ -31,7 +30,7 @@ namespace Z0.Asm
             return locator.Located(host).ToArray();
         }
 
-        public static ExtractedMember[] extract(IApiHost host)
+        public static ExtractedCode[] extract(IApiHost host)
         {
             var members = locate(host);    
             var extractor = Capture.Services.HostExtractor();
@@ -45,7 +44,7 @@ namespace Z0.Asm
             return located;
         }
 
-        public ExtractedMember[] ExtractMembers(IApiHost host)
+        public ExtractedCode[] ExtractMembers(IApiHost host)
             => extract(host); 
     }
 }

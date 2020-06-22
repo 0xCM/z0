@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-    using System.Threading;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -16,9 +14,9 @@ namespace Z0
         
     }
 
-    public static partial class XTend
+    partial class XTend
     {
-        public static IAppMsgLog MessageLog(this IAppEnv env)
+        public static IAppMsgLog MessageLog(this TAppEnv env)
             => AppMsgLog.Create(env);        
 
         [MethodImpl(Inline)]
@@ -42,7 +40,6 @@ namespace Z0
         {
             dst.NotifyConsole(src.Message);
             return ref src;
-        }                            
-
+        }
     }
 }

@@ -8,20 +8,17 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
-    using static Konst;
-    using static Memories;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public abstract class t_asm<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_asm<U>
     {     
-        protected ICaptureArchive CodeArchive 
-            => Archives.Services.CaptureArchive(UnitRoot);
+        protected ICaptureArchive TargetArchive 
+            => Archives.Services.CaptureArchive(UnitDataDir);
         
         protected StreamWriter FileStreamWriter([Caller] string caller = null)
-            => CodeArchive.HexPath(FileName.Define(caller)).Writer();
+            => TargetArchive.HexPath(FileName.Define(caller)).Writer();
 
         protected new IAsmContext Context;
         
@@ -29,7 +26,7 @@ namespace Z0.Asm
         {
             Context = AsmContext.Create(AppSettings.Empty, Queue, Api);
             AsmCheck = AsmTester.Create(Context);
-            UnitRoot.Clear();
+            UnitDataDir.Clear();
         }
 
         protected readonly IAsmTester AsmCheck;
@@ -48,17 +45,17 @@ namespace Z0.Asm
 
         protected IUriCodeWriter HexWriter([Caller] string caller = null)
         {            
-            var dstPath = CodeArchive.HexPath(FileName.Define(caller, FileExtensions.Hex));
+            var dstPath = TargetArchive.HexPath(FileName.Define(caller, FileExtensions.Hex));
             return Archives.Services.UriCodeWriter(dstPath);
         }
 
         protected IAsmFunctionWriter AsmWriter([Caller] string caller = null)
         {
-            var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
+            var dst = TargetArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
             return AsmCore.Services.AsmWriter(dst, AsmFormatSpec.WithSectionDelimiter);
         }
 
-        protected UriCode[] ReadHostBits(ApiHostUri host)
+        protected MemberCode[] ReadHostBits(ApiHostUri host)
         {            
             var paths = AppPaths.ForApp(PartId.Control);
             var root = paths.AppCapturePath;
@@ -91,6 +88,5 @@ namespace Z0.Asm
 
             return dst.ToArray();
         }
-
     }
 }

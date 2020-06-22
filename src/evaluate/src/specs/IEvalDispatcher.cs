@@ -4,22 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static Memories;
-
     using K = Kinds;
 
     interface IEvalDispatcher : IService
     {
-        bit EvalFixedOperators(BufferTokens buffers, ApiMemberCode[] api);
+        bit EvalFixedOperators(BufferTokens buffers, ApiCode[] api);
 
-        void Dispatch(BufferTokens buffers, in ApiMemberCode api, K.BinaryOpClass k);    
+        void Dispatch(BufferTokens buffers, in ApiCode api, K.BinaryOpClass k);    
 
-        void Dispatch(BufferTokens buffers, in ApiMemberCode api, K.UnaryOpClass k);    
+        void Dispatch(BufferTokens buffers, in ApiCode api, K.UnaryOpClass k);    
 
-        bit EvalFixedOperator(BufferTokens buffers, in ApiMemberCode api);
+        bit EvalFixedOperator(BufferTokens buffers, in ApiCode api);
     }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes a nonparametric application setting
     /// </summary>
@@ -32,6 +30,7 @@ namespace Z0
         /// </summary>
         new T Value {get;}
 
-        string IAppSetting.Value => Value?.ToString() ?? string.Empty;
+        string IAppSetting.Value 
+            => Value?.ToString() ?? string.Empty;
     }
 }

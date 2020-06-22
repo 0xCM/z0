@@ -22,7 +22,7 @@ namespace Z0.Asm
         public static MemberInstructions Empty => new MemberInstructions(MemoryAddress.Empty, Root.array<LocatedInstruction>());
         
         [MethodImpl(Inline)]
-        public static MemberInstructions Create(MemoryAddress hostaddr, UriCode uriCode, Instruction[] src)
+        public static MemberInstructions Create(MemoryAddress hostaddr, MemberCode uriCode, Instruction[] src)
             => new MemberInstructions(hostaddr, LocatedInstruction.Many(uriCode, src.ToArray()));
 
         public OpUri OpUri {get;}

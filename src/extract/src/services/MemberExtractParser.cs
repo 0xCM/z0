@@ -69,7 +69,7 @@ namespace Z0
             }
         }
 
-        public ExtractParseResult Parse(ExtractedMember src, int seq)
+        public ExtractParseResult Parse(ExtractedCode src, int seq)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Z0
                 if(term != ExtractTermCode.Fail)
                 {
                     var code = Locate(src.Encoded.Address, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
-                    return new ExtractParseResult(new ParsedMember(src, seq, term, code));
+                    return new ExtractParseResult(new ParsedExtract(src, seq, term, code));
                 }
                 else
                     return ExtractParseResult.FromFailure(new ExtractParseFailure(src, seq, term));
@@ -92,9 +92,9 @@ namespace Z0
             }
         }
 
-        public ExtractParseResults Parse(ExtractedMember[] src)
+        public ExtractParseResults Parse(ExtractedCode[] src)
         {
-            var parsed = list<ParsedMember>(src.Length);
+            var parsed = list<ParsedExtract>(src.Length);
             var failed = list<ExtractParseFailure>();
             for(var i=0; i<src.Length; i++)
             {

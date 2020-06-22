@@ -32,7 +32,7 @@ namespace Z0.Asm
 
         MemoryAddress FakeBase;
 
-        void check_unary_ops(UriHex[] src)
+        void check_unary_ops(IdentifiedCode[] src)
         {
             var query = AsmCheck.UriBitQuery;
             foreach(var code in query.WithParameterCount(src, 1))
@@ -55,7 +55,7 @@ namespace Z0.Asm
             var id = PartId.GMath;   
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCapturePath);
-            var archive = Archives.Services.UriBitsArchive(capture.CodeDir);
+            var archive = Archives.Services.HexArchive(capture.CodeDir);
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
             var builder = Archives.Services.IndexBuilder(Api.ApiSet, Identities.Services.ApiLocator);            

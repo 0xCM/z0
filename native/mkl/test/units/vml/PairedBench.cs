@@ -36,6 +36,6 @@ namespace Z0
             => Format();
 
         public string Format(int? labelPad = null)
-            => text.concat(Left.Format(labelPad), text.eol, Right.Format(labelPad));            
+            => text.concat(Left.Format(labelPad), text.Eol, Right.Format(labelPad));            
     }
 }

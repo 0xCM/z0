@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static VectorKonst;
 
-    partial class Data
+    partial class VData
     {
         /// <summary>
         /// Creates a vector that decribes a lo/hi lane merge permutation

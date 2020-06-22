@@ -9,7 +9,6 @@ namespace Z0.Asm
     using System.Collections.Generic;
     
     using static Konst;
-    using static Memories;
 
     partial class XTend
     {
@@ -98,7 +97,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source bits</param>
         public static string header(LocatedCode src, OpIdentity id)
-            => comment(ByteSpanProperty.Define(id.ToLegalIdentifier(), src).Format());
+            => comment(ByteSpanProperty.Define(id.ToPropertyName(), src).Format());
 
         public static string render(in AsmFunctionList src)
         {

@@ -5,7 +5,6 @@
 namespace Z0
 {    
     using System;
-    using System.Collections.Generic;
 
     public interface IUnitTest : ITestContext 
     {
@@ -18,7 +17,7 @@ namespace Z0
     
     public interface ITestContext : 
         IServiceAllocation,
-        IAppEnv,
+        TAppEnv,
         IClocked,
         IPolyrandProvider, 
         ICheckAction,

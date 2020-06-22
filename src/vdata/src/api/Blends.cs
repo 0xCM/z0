@@ -13,7 +13,7 @@ namespace Z0
     using static Typed;
     using static VectorKonst;
 
-    partial class Data
+    partial class VData
     {
         /// <summary>
         /// Defines a blend specification for combining 2 256-bit vectors that selects the odd components from each vector

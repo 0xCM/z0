@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vreverse(Vector128<byte> src)
-            => vshuf16x8(src, Data.decrements<byte>(n128));
+            => vshuf16x8(src, VData.decrements<byte>(n128));
 
         /// <summary>
         /// Reverses the source vector components
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vreverse(Vector128<sbyte> src)
-            => vshuf16x8(src, Data.decrements<sbyte>(n128));
+            => vshuf16x8(src, VData.decrements<sbyte>(n128));
 
         /// <summary>
         /// Reverses the source vector components
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vreverse(Vector256<byte> src)
-            => vshuf32x8(src, Data.decrements<byte>(n256));
+            => vshuf32x8(src, VData.decrements<byte>(n256));
 
         /// <summary>
         /// Reverses the source vector components
@@ -138,7 +138,7 @@ namespace Z0
             => vperm4x64(src,Perm4L.DCBA);
 
         static Vector256<uint> MRev256u32 
-            => v32u(Data.vload(n256,MRev256u32Data));
+            => v32u(VData.vload(n256,MRev256u32Data));
             
             //=> vbuild.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
 

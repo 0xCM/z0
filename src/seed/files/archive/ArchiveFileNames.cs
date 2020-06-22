@@ -6,8 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
     
     using static Konst;
 
@@ -18,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         FileName LegalFileName(OpIdentity id, FileExtension ext)
-            => id.ToLegalFileName(ext);
+            => id.ToFileName(ext);
 
         [MethodImpl(Inline)]
         FileName LegalFileName(PartId part, OpIdentity id, FileExtension ext)

@@ -14,7 +14,7 @@ namespace Z0
     using static VectorKonst;
     using static Root;
 
-    public static partial class Data
+    public static partial class VData
     {
         /// <summary>
         /// Creates a 128-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector

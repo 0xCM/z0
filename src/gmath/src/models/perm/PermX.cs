@@ -99,7 +99,7 @@ namespace Z0
             line1.Append(rightBoundary);
             line2.Append(rightBoundary);
             
-            return line1.ToString() + text.eol + line2.ToString();
+            return line1.ToString() + text.Eol + line2.ToString();
         }
 
         /// <summary>

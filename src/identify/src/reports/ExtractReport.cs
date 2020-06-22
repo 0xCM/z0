@@ -31,7 +31,7 @@ namespace Z0
         public override string ReportName 
             => $"Extract report for {ApiHost.Format()}";
 
-        public static Report Create(ApiHostUri host, ExtractedMember[] src)
+        public static Report Create(ApiHostUri host, ExtractedCode[] src)
         {
             var count = src.Length;
             var records = new ExtractRecord[count];
@@ -42,7 +42,7 @@ namespace Z0
                     Sequence : i,
                     Address : op.Member.Address,
                     Length : op.Encoded.Length,
-                    Uri : op.Uri,
+                    Uri : op.OpUri,
                     OpSig : op.Member.Method.Signature().Format(),
                     Data : op.Encoded
                     );

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     partial class Dynop
     {
         /// <summary>
@@ -15,7 +12,7 @@ namespace Z0
         /// <param name="buffer">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static UnaryOp<T> EmitUnaryOp<T>(this IBufferToken buffer, UriHex src)
+        public static UnaryOp<T> EmitUnaryOp<T>(this IBufferToken buffer, IdentifiedCode src)
             where T : unmanaged
                 => buffer.Load(src.Encoded).EmitUnaryOp<T>(src.Id);
 
@@ -25,7 +22,7 @@ namespace Z0
         /// <param name="buffer">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, UriHex src)
+        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, IdentifiedCode src)
             where T : unmanaged
                 => buffer.Load(src.Encoded).EmitBinaryOp<T>(src.Id);
 
@@ -35,7 +32,7 @@ namespace Z0
         /// <param name="dst">The buffer hande</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static TernaryOp<T> EmitTernaryOp<T>(this IBufferToken dst, UriHex src)
+        public static TernaryOp<T> EmitTernaryOp<T>(this IBufferToken dst, IdentifiedCode src)
             where T : unmanaged
                 => dst.Load(src.Encoded).EmitTernaryOp<T>(src.Id);
     }

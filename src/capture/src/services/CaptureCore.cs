@@ -17,11 +17,11 @@ namespace Z0.Asm
         public static ICaptureCore Service => default(CaptureCore);  
 
         [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, ParsedCode bits, ExtractTermCode term)
+        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedOperation bits, ExtractTermCode term)
             => new CapturedCode(id, null, src, bits.Unparsed, bits.Encoded, term);
 
         [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, Delegate src, ParsedCode bits, ExtractTermCode term)
+        static CapturedCode DefineMember(OpIdentity id, Delegate src, Z0.ParsedOperation bits, ExtractTermCode term)
             => new CapturedCode(id, src, src.Method, bits.Unparsed, bits.Encoded, term);
 
         [MethodImpl(Inline)]
@@ -81,7 +81,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<OperationCapture> Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
+        public Option<CapturedOperation> Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<OperationCapture>();
+                return none<CapturedOperation>();
             }
         }
 
@@ -125,15 +125,15 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        OperationCapture capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
+        CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
             => capture(exchange, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
-        OperationCapture capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
+        CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
             => capture(exchange, id, src.ToPointer<byte>());
 
         [MethodImpl(Inline)]
-        OperationCapture capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
+        CapturedOperation capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
         {
             var limit = exchange.BufferLength - 1;
             var start = (long)pSrc;
@@ -171,13 +171,13 @@ namespace Z0.Asm
             => CaptureOutcome.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
-        static OperationCapture SummarizeParse(in CaptureExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        static CapturedOperation SummarizeParse(in CaptureExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
         {
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
-            var bits = new ParsedCode((MemoryAddress)start, raw, trimmed);
-            return new OperationCapture(id, outcome, bits);
+            var bits = new Z0.ParsedOperation((MemoryAddress)start, raw, trimmed);
+            return new CapturedOperation(id, outcome, bits);
         }
 
         static ExtractTermCode? CalcTerm(in CaptureExchange exchange, int offset, int? ret_offset, out int delta)

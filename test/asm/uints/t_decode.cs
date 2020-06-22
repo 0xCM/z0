@@ -39,9 +39,9 @@ namespace Z0.Asm
         {
             void DescribeResource(BinaryResource resource)
             {
-                Trace(nameof(resource.Id), 
+                Trace(nameof(resource.Identifier), 
                     text.concat(
-                        resource.Id.PadRight(15), 
+                        resource.Identifier.PadRight(15), 
                         Chars.Pipe, Chars.Space,
                         resource.Data.FormatHex())
                     );                

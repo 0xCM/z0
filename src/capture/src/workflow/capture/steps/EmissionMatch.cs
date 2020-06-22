@@ -27,14 +27,14 @@ namespace Z0.Asm
         ICheckEquatable Claim 
             => CheckEquatable.Checker;
 
-        public void MatchEmissions(ApiHostUri host, ReadOnlySpan<UriHex> srcA, FilePath srcB)
+        public void MatchEmissions(ApiHostUri host, ReadOnlySpan<IdentifiedCode> srcA, FilePath srcB)
         {                
             var wfStateless = Capture.Services;
             var reader = wfStateless.UriHexReader;
             var fileSrc = reader.Read(srcB).ToArray().ToSpan();                        
 
             Claim.eq(fileSrc.Length, srcA.Length);  
-            Claim.eq(Spans.count<UriHex>(fileSrc, s => s.OpUri.IsEmpty),0);                          
+            Claim.eq(Spans.count<IdentifiedCode>(fileSrc, s => s.OpUri.IsEmpty),0);                          
             for(var i=0; i<srcA.Length; i++)
             {
                 Claim.eq(skip(fileSrc,i).OpUri, skip(srcA,i).OpUri);  

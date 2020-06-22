@@ -26,7 +26,7 @@ namespace Z0.Asm
             Parser = Extract.Services.ExtractParser();
         }
 
-        public ParsedMember[] Parse(ApiHostUri host, ExtractedMember[] extracts)
+        public ParsedExtract[] Parse(ApiHostUri host, ExtractedCode[] extracts)
         {
             try
             {
@@ -46,11 +46,11 @@ namespace Z0.Asm
                 var msg = AppMsg.Colorize($"{host} extract parse FAIL: {e}", AppMsgColor.Yellow);
                 term.print(msg);
                 term.errlabel(e, $"{host} extract parse FAIL");  
-                return Root.array<ParsedMember>();
+                return Root.array<ParsedExtract>();
             }
         }
 
-        public void SaveHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
+        public void SaveHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
         {
             try
             {

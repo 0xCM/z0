@@ -51,7 +51,7 @@ namespace Z0
     }
 
     public interface ISystemAgent<C> : ISystemAgent, IServiceAllocation<C>
-        where C : IAppEnv
+        where C : TAppEnv
     {
         
     }

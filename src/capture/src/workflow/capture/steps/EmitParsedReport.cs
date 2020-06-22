@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static CaptureWorkflowEvents;
 
     public readonly struct EmitParsedReportStep : IEmitParsedReportStep
     {
@@ -21,7 +20,7 @@ namespace Z0.Asm
         internal EmitParsedReportStep(ICaptureWorkflow workflow)
             => Workflow = workflow;
 
-        public void Emit(ApiHostUri host, ParsedMember[] src, FilePath dst)
+        public void Emit(ApiHostUri host, ParsedExtract[] src, FilePath dst)
         {
             var context = Context;
             var report = MemberParseReport.Create(host, src);                    

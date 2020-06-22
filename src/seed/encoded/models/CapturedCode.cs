@@ -13,10 +13,7 @@ namespace Z0
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    public readonly struct CapturedCode : 
-        IUriCode<CapturedCode, LocatedCode>, 
-        ICapturedCode<CapturedCode,LocatedCode>,
-        IReflectedCode<CapturedCode,LocatedCode>
+    public readonly struct CapturedCode : ICapturedCode<CapturedCode,LocatedCode>
     {        
         readonly LocatedCode Extracted;
 
@@ -68,10 +65,10 @@ namespace Z0
             TermCode = term;
         }
 
-        public UriCode HostedBits  
+        public MemberCode HostedBits  
         {
              [MethodImpl(Inline)] 
-             get => new UriCode(OpUri, Encoded); 
+             get => new MemberCode(OpUri, Encoded); 
         }
 
         public OpIdentity Id

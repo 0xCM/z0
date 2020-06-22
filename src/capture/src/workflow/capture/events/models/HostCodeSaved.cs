@@ -13,12 +13,12 @@ namespace Z0.Asm
     {
         public readonly ApiHostUri Host;
         
-        public readonly UriCode[] Code;
+        public readonly MemberCode[] Code;
 
         public readonly FilePath Target;
         
         [MethodImpl(Inline)]
-        public UriCodeSaved(ApiHostUri host, UriCode[] code, FilePath dst)
+        public UriCodeSaved(ApiHostUri host, MemberCode[] code, FilePath dst)
         {
             Host = host;
             Code = code;
@@ -32,7 +32,7 @@ namespace Z0.Asm
             => Empty;            
 
         public static UriCodeSaved Empty 
-            => new UriCodeSaved(ApiHostUri.Empty, Array.Empty<UriCode>(), FilePath.Empty);
+            => new UriCodeSaved(ApiHostUri.Empty, Array.Empty<MemberCode>(), FilePath.Empty);
     }    
 
 }

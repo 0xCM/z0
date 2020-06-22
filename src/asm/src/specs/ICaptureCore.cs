@@ -6,9 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     /// <summary>
     /// Defines supported x86-encoding capture operations

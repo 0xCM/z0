@@ -46,8 +46,8 @@ namespace Z0.Asm
         FilePath HexFilePath<T>(PartId part) 
             => CaptureArchive(part).HexPath<T>();
 
-        IUriHexArchive UriBitsArchive(FolderPath root)
-            => Archives.UriBitsArchive(root);
+        IEncodedHexArchive UriBitsArchive(FolderPath root)
+            => Archives.HexArchive(root);
 
         void WriteAsm(CapturedCode capture, StreamWriter dst)
         {

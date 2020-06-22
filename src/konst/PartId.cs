@@ -21,12 +21,6 @@ public enum PartId : ulong
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Enhanced = 50,
-
-    Time = 60, 
-
-    Collective = 61, 
-    
-    Reflective = 62, 
     
     Canonical = 63, 
     
@@ -249,19 +243,9 @@ public enum PartId : ulong
     Tuples = 2014,    
     
     Numeric = 2015,  
-
-    Flow = 2016, 
-    
-    Enums = 2017, 
-    
-    Reports = 2018,
-    
+        
     Core = 2019,
-
-    Checks = 2020,
-            
-    Contained = 2021,
-
+         
     Validate = 2023,
 
     Validity = 2024,

@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
     using static Konst;
-    using static Memories;
+    using static Root;
 
     public readonly struct G
     {

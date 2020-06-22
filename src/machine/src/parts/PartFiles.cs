@@ -25,7 +25,7 @@ namespace Z0
 
         readonly PartFileKinds FileKinds;
 
-        readonly IAppPaths AppPaths;
+        readonly TAppPaths AppPaths;
 
         internal PartFiles(IAsmContext context)
         {

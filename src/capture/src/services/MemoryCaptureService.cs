@@ -45,7 +45,7 @@ namespace Z0.Asm
                 from parsed in Parse(raw)
                 where parsed.IsNonEmpty
                 from instructions in Decoder.Decode(parsed)
-                let bits = new ParsedCode(src, raw, parsed)
+                let bits = new Z0.ParsedOperation(src, raw, parsed)
                 select new CapturedMemory(src, bits, instructions, string.Empty);
 
         [MethodImpl(Inline)]

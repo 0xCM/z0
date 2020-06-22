@@ -5,11 +5,8 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
  
     using static Konst;
-    using static Memories;
     using MS = MetadataSpecs;
     
     public class t_metadata_reader : t_asmd<t_metadata_reader>

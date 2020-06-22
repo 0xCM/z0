@@ -34,7 +34,7 @@ namespace Z0.Machine
             Context = context;
             Broker = new EventBroker();
             Files = MachineFiles.Service(context);            
-            IndexBuilder = MachineIndex.Builder;
+            IndexBuilder = MachineIndexBuilder.Service;
             (this as IMachineEventClient).Connect();            
         }
 
@@ -128,7 +128,7 @@ namespace Z0.Machine
                     .OnSuccess(value => Broker.Raise(LoadedParseReport.Create(value, src)));
         }
 
-        void DecodeParts(MachineIndex src)
+        void DecodeParts(EncodedIndex src)
         {
             var dst = Root.list<PartInstructions>();
             var parts = src.Parts;
@@ -143,7 +143,7 @@ namespace Z0.Machine
             Broker.Raise(DecodedMachine.Create(src, dst.ToArray()));
         }
 
-        PartInstructions DecodePart(PartCode pcs)
+        PartInstructions DecodePart(PartCodeIndex pcs)
         {
             var dst = list<HostInstructions>();
             var hcSets = pcs.Code;
@@ -160,7 +160,7 @@ namespace Z0.Machine
             return inxs;                        
         }
 
-        HostInstructions Decode(HostCode hcs)
+        HostInstructions Decode(HostCodeIndex hcs)
         {
             var inxs = Root.list<MemberInstructions>();    
             
@@ -194,7 +194,7 @@ namespace Z0.Machine
 
         void Index(MemberParseRecord record)
         {
-            IndexBuilder.Include(UriCode.Define(record.Uri, record.Data));
+            IndexBuilder.Include(MemberCode.Define(record.Uri, record.Data));
         }
 
         public void Dispose()

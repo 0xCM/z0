@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static CaptureWorkflowEvents;
 
     public readonly struct EmitExtractReportStep : IReportExtractsStep
     {
@@ -23,7 +22,7 @@ namespace Z0.Asm
             Workflow = workflow;
         }
         
-        public ExtractReport CreateExtractReport(ApiHostUri host, ExtractedMember[] src)
+        public ExtractReport CreateExtractReport(ApiHostUri host, ExtractedCode[] src)
         {
             var report = ExtractReport.Create(host, src); 
             Context.Raise(new ExtractReportCreated(report));                

@@ -76,6 +76,21 @@ namespace Z0
         public const char Space = ' ';
 
         /// <summary>
+        /// The end-of-line escape sequence
+        /// </summary>
+        public const string Eol = Chars.Eol;
+                
+        /// <summary>
+        /// The '{' character
+        /// </summary>
+        public const char RBrace = Chars.RBrace;
+
+        /// <summary>
+        /// The '}' character
+        /// </summary>
+        public const char LBrace = Chars.LBrace;
+
+        /// <summary>
         /// Indicates that emitted content should overwrite whatever file content may exist
         /// </summary>
         public const FileWriteMode Overwrite = FileWriteMode.Overwrite;

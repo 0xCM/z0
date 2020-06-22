@@ -22,7 +22,7 @@ namespace Z0.Asm
             Workflow = workfow;
         }
 
-        public AsmFunction[] DecodeParsed(ApiHostUri host, ParsedMember[] src)
+        public AsmFunction[] DecodeParsed(ApiHostUri host, ParsedExtract[] src)
         {   
             try
             {             
@@ -53,7 +53,7 @@ namespace Z0.Asm
             writer.WriteAsm(src);
         }
 
-        void HandleUndecoded(in ParsedMember member)
+        void HandleUndecoded(in ParsedExtract member)
         {
             term.error($"Could not decode {member.Id}");
         }        

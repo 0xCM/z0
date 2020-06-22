@@ -9,9 +9,9 @@ namespace Z0.Asm
     
     using static Konst;
 
-    public readonly struct CapturedMemory  : ILocatedCode<CapturedMemory,ParsedCode>
+    public readonly struct CapturedMemory  : ILocatedCode<CapturedMemory, Z0.ParsedOperation>
     {
-        public ParsedCode Encoded {get;}
+        public Z0.ParsedOperation Encoded {get;}
 
         public MemoryAddress Address {get;}
 
@@ -59,7 +59,7 @@ namespace Z0.Asm
             => Format();       
         
         [MethodImpl(Inline)]
-        public CapturedMemory(MemoryAddress address, ParsedCode data, AsmInstructionList instructions, string formatted)
+        public CapturedMemory(MemoryAddress address, Z0.ParsedOperation data, AsmInstructionList instructions, string formatted)
         {
             Address = address;
             Encoded = data;

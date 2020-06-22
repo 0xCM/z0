@@ -31,17 +31,17 @@ namespace Z0
         LoadUriCode = 1,
 
         /// <summary>
-        /// <see cref="UriHexArchive"/> 
+        /// <see cref="EncodedHexArchive"/> 
         /// </summary>
         LoadUriCodeHost = LoadUriCode | (Host << AspectOffset),
 
         /// <summary>
-        /// <see cref="IUriHexArchive"/> 
+        /// <see cref="IEncodedHexArchive"/> 
         /// </summary>
         LoadUriCodeContract = LoadUriCode | (Contract << AspectOffset),
 
         /// <summary>
-        /// <see cref="UriHexArchive.Create(FolderPath)"/>
+        /// <see cref="EncodedHexArchive.Service(FolderPath)"/>
         /// </summary>
         LoadUriCodeServiceFactory = LoadUriCode | (Factory << AspectOffset),
     }

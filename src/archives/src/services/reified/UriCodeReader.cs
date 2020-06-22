@@ -12,7 +12,7 @@ namespace Z0
     {
         public static IUriCodeReader Service => default(UriCodeReader);
 
-        public IEnumerable<UriCode> Read(FilePath src)
+        public IEnumerable<MemberCode> Read(FilePath src)
             => throw new NotImplementedException();
     }
 }

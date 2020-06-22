@@ -3,12 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    
+{    
     /// <summary>
     /// Defines the potential byte parser states
     /// </summary>
@@ -26,6 +21,4 @@ namespace Z0
 
         Completed = Failed | Succeeded
     }
-
-
 }

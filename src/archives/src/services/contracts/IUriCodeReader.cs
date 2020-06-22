@@ -16,6 +16,6 @@ namespace Z0
         /// Reads the content of a source file
         /// </summary>
         /// <param name="src">The source file path</param>
-        IEnumerable<UriCode> Read(FilePath src);
+        IEnumerable<MemberCode> Read(FilePath src);
     }
 }

@@ -12,6 +12,6 @@ namespace Z0.Parts
     public sealed class VData : Part<VData>, IResourceProvider
     {        
         public IEnumerable<BinaryResource> Resources 
-            => Data.Resources;
+            => Root.seq<BinaryResource>();
     }
 }

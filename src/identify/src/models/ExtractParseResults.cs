@@ -22,20 +22,20 @@ namespace Z0
         /// <summary>
         /// The parsed members
         /// </summary>
-        public readonly ParsedMember[] Parsed;
+        public readonly ParsedExtract[] Parsed;
 
         [MethodImpl(Inline)]
-        public static implicit operator ExtractParseResults((ExtractParseFailure[] fail, ParsedMember[] parsed) src)
+        public static implicit operator ExtractParseResults((ExtractParseFailure[] fail, ParsedExtract[] parsed) src)
             => new ExtractParseResults(src.fail, src.parsed);
         
         [MethodImpl(Inline)]
-        public ExtractParseResults(ExtractParseFailure[] fail, ParsedMember[] parsed)
+        public ExtractParseResults(ExtractParseFailure[] fail, ParsedExtract[] parsed)
         {
             Parsed = parsed;
             Failed = fail;
         }
 
         public static ExtractParseResults Empty 
-            => new ExtractParseResults(Array.Empty<ExtractParseFailure>(), Array.Empty<ParsedMember>());
+            => new ExtractParseResults(Array.Empty<ExtractParseFailure>(), Array.Empty<ParsedExtract>());
     }
 }

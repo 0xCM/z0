@@ -15,14 +15,14 @@ namespace Z0
 
     public interface ITestDynamicVectors : ICheckVectors, ITestAction, ITestDynamic, IBufferedChecker
     {
-        TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, UriHex bits)
+        TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, IdentifiedCode bits)
             where T : unmanaged
         {
             var g = Dynamic.EmitFixedBinary(this[Main], w128, bits);
             return Match<T>(f, g, bits.OpUri.OpId);
         }
 
-        TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, UriHex bits)
+        TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, IdentifiedCode bits)
             where T : unmanaged                    
         {
             var g = Dynamic.EmitFixedBinary(this[Main], w256, bits);

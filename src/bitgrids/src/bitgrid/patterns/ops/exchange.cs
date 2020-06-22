@@ -27,7 +27,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vmakemask<T>(BitMask.msb<uint>(n2,n1));
-            var offsets = Data.vincrements<T>(w);
+            var offsets = VData.vincrements<T>(w);
             var pattern = vsrlv(x,offsets);
             return pattern;
         }

@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
     using static VectorKonst;
  
-    partial class Data
+    partial class VData
     {
         /// <summary>
         /// Produces the lo shuffle spec for packing (128x32, 128x32) -> 128x16

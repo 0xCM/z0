@@ -15,19 +15,19 @@ namespace Z0.Machine
     {
         public readonly struct IndexedCode : IMachineEvent<E>
         {
-            public static E Empty => new E(MachineIndex.Empty);
+            public static E Empty => new E(EncodedIndex.Empty);
 
             [MethodImpl(Inline)]
-            public static IndexedCode Create(MachineIndex index)
+            public static IndexedCode Create(EncodedIndex index)
                 => new IndexedCode(index);            
 
             [MethodImpl(Inline)]
-            public IndexedCode(MachineIndex index)
+            public IndexedCode(EncodedIndex index)
             {
                 Index = index;
             }
             
-            public MachineIndex Index {get;}
+            public EncodedIndex Index {get;}
 
             public AppMsgColor Flair => AppMsgColor.Cyan;
             

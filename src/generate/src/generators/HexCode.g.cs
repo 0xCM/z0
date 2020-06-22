@@ -6,9 +6,13 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
-    
+
+    using static Konst;
+
     public class HexCodeGenerator : CodeGenerator
     {
+        public static CodeGenerator Service => new HexCodeGenerator();
+        
         static string Name(byte value)
             => text.concat(AsciLetterUp.X, value.FormatHex(true,false,uppercase:true));
 
@@ -37,27 +41,27 @@ namespace Z0
 
         public string Instance(string Name, string Kind)
         {
-            return text.concat(level2, $"public static {Name} {Kind} => default;");
+            return text.concat(Level2, $"public static {Name} {Kind} => default;");
         }
 
         public string Populate(string Name, string Kind) 
         {
             return
                 text.concat(
-                level2, $"public readonly struct {Name} : IHexCode<{Name}>, ITextual", endl,                
-                level2, lbrace, endl,
-                level3, inline, endl,
-                level3, implicit_op, $"HexKind({Name} src) => HexKind.{Kind};", endl,
-                endl,
-                level3, inline, endl,
-                level3, implicit_op, $"byte({Name} src) => 0{Kind};", endl,
-                endl,
-                level3, $"public HexKind Kind => HexKind.{Kind};", endl,
-                endl,
-                level3, $"public string Format() => Kind.Format();", endl,
-                endl,
-                level3, $"public override string ToString() => Format();", endl,
-                level2, rbrace
+                Level2, $"public readonly struct {Name} : IHexCode<{Name}>, ITextual", Eol,                
+                Level2, LBrace, Eol,
+                Level3, InlineTag, Eol,
+                Level3, ImplicitOp, $"HexKind({Name} src) => HexKind.{Kind};", Eol,
+                Eol,
+                Level3, InlineTag, Eol,
+                Level3, ImplicitOp, $"byte({Name} src) => 0{Kind};", Eol,
+                Eol,
+                Level3, $"public HexKind Kind => HexKind.{Kind};", Eol,
+                Eol,
+                Level3, $"public string Format() => Kind.Format();", Eol,
+                Eol,
+                Level3, $"public override string ToString() => Format();", Eol,
+                Level2, RBrace
             );
         }
     }

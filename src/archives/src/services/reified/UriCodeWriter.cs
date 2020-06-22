@@ -28,14 +28,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Write(UriCode src, int idpad)
+        public void Write(MemberCode src, int idpad)
             => StreamOut.WriteLine(src.Format(idpad));
 
         [MethodImpl(Inline)]
-        public void Write(UriCode src)
+        public void Write(MemberCode src)
             => Write(src,0);
 
-        public void Write(UriCode[] src)
+        public void Write(MemberCode[] src)
         {
             var idpad = src.Max(x => x.OpUri.UriText.Length) + 1;
             for(var i=0; i< src.Length; i++)

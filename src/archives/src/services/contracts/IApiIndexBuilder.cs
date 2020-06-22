@@ -8,6 +8,6 @@ namespace Z0
     {
         ApiCodeIndex CreateIndex(ApiHostUri uri, FilePath src);
 
-        ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<UriHex> code);
+        ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<IdentifiedCode> code);
     }
 }

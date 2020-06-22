@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct LocatedInstruction : IInstructionInfo<Instruction>
     {
-        public UriCode Encoded {get;}
+        public MemberCode Encoded {get;}
 
         public OffsetSeq OffsetSeq {get;}
 
@@ -62,10 +62,10 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
-        public static LocatedInstruction One(MemoryAddress @base, OffsetSeq offseq, Instruction inxs, UriCode encoded)
+        public static LocatedInstruction One(MemoryAddress @base, OffsetSeq offseq, Instruction inxs, MemberCode encoded)
             => new LocatedInstruction(@base,offseq,inxs,encoded);
 
-        public static LocatedInstruction[] Many(UriCode code, Instruction[] src)
+        public static LocatedInstruction[] Many(MemberCode code, Instruction[] src)
         {            
             var @base = code.Address;
             var offseq = OffsetSeq.Zero;
@@ -77,7 +77,7 @@ namespace Z0.Asm
                 var inxs = src[i];
                 var data = Root.span(code.Encoded.Data);
                 var slice = data.Slice(offseq.Offset, inxs.ByteLength).ToArray();
-                var recoded = UriCode.Define(code.OpUri, inxs.IP, slice);  
+                var recoded = MemberCode.Define(code.OpUri, inxs.IP, slice);  
                 dst[i] = One(@base, offseq, inxs, recoded);
                 offseq = offseq.AccrueOffset(inxs.ByteLength);
             }
@@ -85,7 +85,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public LocatedInstruction(MemoryAddress @base, OffsetSeq offseq, Instruction inxs, UriCode encoded)
+        public LocatedInstruction(MemoryAddress @base, OffsetSeq offseq, Instruction inxs, MemberCode encoded)
         {
             BaseAddress = @base;
             OffsetSeq = offseq;

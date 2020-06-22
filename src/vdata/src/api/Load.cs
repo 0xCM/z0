@@ -12,7 +12,7 @@ namespace Z0
     using static Vectors;
     using static refs;
   
-    partial class Data
+    partial class VData
     {                
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan

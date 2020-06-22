@@ -26,7 +26,7 @@ namespace Z0
         
         public ApiCodeIndex CreateIndex(ApiHostUri uri, FilePath src)
         {
-            var code = UriHexReader.Service.Read(src).ToArray();
+            var code = EncodedHexReader.Service.Read(src).ToArray();
             var host = ApiSet.FindHost(uri).Require();
             var members = Locator.Hosted(host);
             var codeIndex =  UriHexQuery.Service.CreateIndex(code);
@@ -34,12 +34,12 @@ namespace Z0
             return CreateIndex(memberIndex, codeIndex);
         }
 
-        public ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<UriHex> code)
+        public ApiCodeIndex CreateIndex(ApiIndex members, OpIndex<IdentifiedCode> code)
         {
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
-                          select new ApiMemberCode(r.left, r.right);                                      
+                          select new ApiCode(r.left, r.right);                                      
             return new ApiCodeIndex(apicode.Select(c => (c.Id, c)).ToOpIndex());
         }
 
@@ -53,7 +53,7 @@ namespace Z0
             var apiIndex = ApiIndex.Create(members);
             var archive =  Services.CaptureArchive(root);
             var paths = archive.HostArchive(host);
-            var code = UriHexReader.Service.Read(paths.HexPath);
+            var code = EncodedHexReader.Service.Read(paths.HexPath);
             var opIndex =  UriHexQuery.Service.CreateIndex(code);
             return indexer.CreateIndex(apiIndex, opIndex);            
         }                

@@ -17,12 +17,15 @@ namespace Z0
         FolderPath DefaultRootDir 
             => Env.Current.LogDir;
 
-        IUriHexReader UriHexReader 
-            => new UriHexReader();
+        FolderPath CaptureArchiveDir
+            => DefaultRootDir + RelativeLocation.Define("apps/control/capture");
+
+        IEncodedHexReader UriHexReader 
+            => new EncodedHexReader();
 
         [MethodImpl(Inline)]
-        IUriHexArchive UriBitsArchive(FolderPath root = null)
-            => new UriHexArchive(root ?? DefaultRootDir);
+        IEncodedHexArchive HexArchive(FolderPath root = null)
+            => new EncodedHexArchive(root ?? DefaultRootDir);
         
         [MethodImpl(Inline)]
         IUriHexWriter UriHexWriter(FilePath dst)
@@ -47,7 +50,7 @@ namespace Z0
         IHostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
             => new HostCaptureArchive(root ?? DefaultRootDir, host);    
 
-        UriHex[] SaveUriHex(ApiHostUri host, ParsedMember[] src, FilePath dst)
+        IdentifiedCode[] SaveUriHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)
             => Z0.UriHexWriter.save(host,src,dst);
     }
 }

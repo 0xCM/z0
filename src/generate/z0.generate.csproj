@@ -8,13 +8,10 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
+
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Text)" />
-    <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(BitSpans)" />
-    <ProjectReference Include="$(Datasets)" />
 
   </ItemGroup>
 

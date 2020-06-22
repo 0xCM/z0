@@ -19,8 +19,8 @@ namespace Z0
      
         public static string Pattern1_g = $"{_name_}{PartSep}{Generic}{ArgsOpen}{_arg1_}{ArgSep}{_arg2_}{ArgsClose}";
      
-        public static string Pattern1_Legal = $"{_name_}{PartSep}{ArgsOpenAlt}{_arg1_}{ArgSepAlt}{_arg2_}{ArgsCloseAlt}";
+        public static string Pattern1_Legal = $"{_name_}{PartSep}{SymNot.Circle}{_arg1_}{SymNot.Dot}{_arg2_}{SymNot.Circle}";
 
-        public static string Pattern1_g_Legal = $"{_name_}{PartSep}{Generic}{ArgsOpenAlt}{_arg1_}{ArgSepAlt}{_arg2_}{ArgsCloseAlt}";
+        public static string Pattern1_g_Legal = $"{_name_}{PartSep}{Generic}{SymNot.Circle}{_arg1_}{SymNot.Dot}{_arg2_}{SymNot.Circle}";
     }
 }

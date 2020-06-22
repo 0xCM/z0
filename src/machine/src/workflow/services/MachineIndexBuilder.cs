@@ -7,6 +7,8 @@ namespace Z0.Machine
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Konst;
 
@@ -14,23 +16,34 @@ namespace Z0.Machine
     {
         public static IMachineIndexBuilder Service => new MachineIndexBuilder(0);
 
-        readonly ConcurrentDictionary<MemoryAddress,UriCode> MemoryCode;
+        readonly ConcurrentDictionary<MemoryAddress,MemberCode> MemoryCode;
 
         readonly ConcurrentDictionary<MemoryAddress,OpUri> MemoryUri;
 
-        readonly ConcurrentDictionary<OpUri,UriCode> UriCodes;
+        readonly ConcurrentDictionary<OpUri,MemberCode> UriCodes;
 
         MachineIndexBuilder(int x)
         {            
-            MemoryCode = new ConcurrentDictionary<MemoryAddress,UriCode>();
+            MemoryCode = new ConcurrentDictionary<MemoryAddress,MemberCode>();
             MemoryUri = new ConcurrentDictionary<MemoryAddress,OpUri>();
-            UriCodes = new ConcurrentDictionary<OpUri,UriCode>();
+            UriCodes = new ConcurrentDictionary<OpUri,MemberCode>();
         }
 
-        public MachineIndex Freeze()
-            => new MachineIndex(MemoryCode, MemoryUri);
+        public EncodedIndex Freeze()
+        {
+            var memtable = HashTable.Create(MemoryCode);
+            var memuri = HashTable.Create(MemoryUri);  
+            var hc = memtable.Values.Select(x => (x.OpUri.Host, x))
+                                         .GroupBy(g => g.Host)
+                                         .Select(x => (x.Key, x.Select(y => y.x).ToArray()))
+                                         .ToDictionary();
+            var parts = hc.Keys.Select(x => x.Owner).Distinct().ToArray();
 
-        public int Include(params UriCode[] src)
+            return new EncodedIndex(parts, memtable, memuri, hc); 
+            //return new MachineIndex(MemoryCode, MemoryUri);
+        }
+
+        public int Include(params MemberCode[] src)
         {
             var count = 0;
             for(var i=0; i<src.Length; i++)

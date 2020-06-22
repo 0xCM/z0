@@ -13,12 +13,12 @@ namespace Z0.Asm
     {
         public readonly ApiHostUri Host;
         
-        public readonly UriHex[] Code;
+        public readonly IdentifiedCode[] Code;
 
         public readonly FilePath Target;
         
         [MethodImpl(Inline)]
-        public HexCodeSaved(ApiHostUri host, UriHex[] code, FilePath dst)
+        public HexCodeSaved(ApiHostUri host, IdentifiedCode[] code, FilePath dst)
         {
             Host = host;
             Code = code;
@@ -35,6 +35,6 @@ namespace Z0.Asm
             => AppMsgColor.Cyan;
 
         public static HexCodeSaved Empty 
-            => new HexCodeSaved(ApiHostUri.Empty, Array.Empty<UriHex>(), FilePath.Empty);
+            => new HexCodeSaved(ApiHostUri.Empty, Array.Empty<IdentifiedCode>(), FilePath.Empty);
     }    
 }

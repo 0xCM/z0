@@ -17,7 +17,9 @@ namespace Z0
                 TypeArgsClose: SymNot.Gt, 
                 ArgsOpen: SymNot.Circle, 
                 ArgsClose: SymNot.Circle, 
-                ArgSep: SymNot.Dot);
+                ArgSep: SymNot.Dot,
+                ModSep: (char)SymNotKind.Plus
+                );
 
         static LegalIdentityOptions FileOptions
             => new LegalIdentityOptions(
@@ -25,7 +27,8 @@ namespace Z0
                 TypeArgsClose: Chars.RBracket, 
                 ArgsOpen: Chars.LParen, 
                 ArgsClose: Chars.RParen, 
-                ArgSep: Chars.Comma);
+                ArgSep: Chars.Comma,
+                ModSep: IDI.ModSep);
 
         public static string code(OpIdentity src)
             => LegalIdentityBuilder.Service(CodeOptions).Manufacture(src);
@@ -68,6 +71,12 @@ namespace Z0
                     break;
                     case IDI.ArgSep:
                         dst[i] = Options.ArgSep;
+                    break;
+                    case IDI.ModSep:
+                        dst[i] = Options.ModSep;
+                    break;
+                    case IDI.Refines:
+                        dst[i] = (char)SymNotKind.Pipe;
                     break;
                     default:
                         dst[i] = c;

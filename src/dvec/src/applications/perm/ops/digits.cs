@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> digits(Perm16 spec)
-            => dvec.vshuf16x8(Data.vincrements<byte>(n128), spec.data);
+            => dvec.vshuf16x8(VData.vincrements<byte>(n128), spec.data);
 
         /// <summary>
         /// Computes the digits corresponding to each 5-bit segment of the permutation spec
@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> digits(Perm32 spec)
-            => dvec.vshuf32x8(Data.vincrements<byte>(n256),spec.data);
+            => dvec.vshuf32x8(VData.vincrements<byte>(n256),spec.data);
     }
 }

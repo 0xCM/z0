@@ -5,9 +5,7 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static Memories;
@@ -26,7 +24,7 @@ namespace Z0
             ApiSet = api;
         }
 
-        public ExtractedMember[] Read(FilePath src)
+        public ExtractedCode[] Read(FilePath src)
         {
             var report = ExtractReport.Load(src);    
             if(report.IsNonEmpty)     
@@ -44,16 +42,16 @@ namespace Z0
             return default;
         }
 
-        ExtractedMember[] CreateExtracts(IApiHost host, ExtractRecord[] records)
+        ExtractedCode[] CreateExtracts(IApiHost host, ExtractRecord[] records)
         {
-            var data = new ExtractedMember[records.Length];
+            var data = new ExtractedCode[records.Length];
             var index = ApiIndex.Create(MemberLocator.Service.Hosted(host));
-            Span<ExtractedMember> extracts = data;
+            Span<ExtractedCode> extracts = data;
             for(var i = 0; i<records.Length; i++)
             {
                 ref readonly var record = ref skip(extracts,i);
                 var member = index.Lookup(record.Id);
-                seek(extracts,i) = member ? new ExtractedMember(member.Value, record.Encoded) : ExtractedMember.Empty;
+                seek(extracts,i) = member ? new ExtractedCode(member.Value, record.Encoded) : ExtractedCode.Empty;
             }
             return data;
         }

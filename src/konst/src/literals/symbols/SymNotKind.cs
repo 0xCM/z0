@@ -339,7 +339,6 @@ namespace Z0
         /// </summary>
         ᒿ = Two,
 
-
         /// <summary>
         /// З
         /// </summary>
@@ -477,6 +476,9 @@ namespace Z0
         /// </summary>
         α = Alpha,
 
+        /// <summary>
+        /// β
+        /// </summary>
         Beta = 'β',
 
         /// <summary>
@@ -1030,7 +1032,6 @@ namespace Z0
         ᙅ,
 
         ᙎ,
-
         
         ᙏ,
 
@@ -1053,8 +1054,6 @@ namespace Z0
         ᘄ,
 
         ᘇ,
-
-
 
     }
 }

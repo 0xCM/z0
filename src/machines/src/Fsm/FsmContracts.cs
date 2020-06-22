@@ -55,7 +55,7 @@ namespace Z0.Machines
     /// <summary>
     /// Defines context specialization for FSM
     /// </summary>
-    public interface IFsmContext : IPolyrandProvider, IAppEnv
+    public interface IFsmContext : IPolyrandProvider, TAppEnv
     {
         ulong? ReceiptLimit {get;}
     }

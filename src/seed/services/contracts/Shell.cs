@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// The default application path collection
         /// </summary>
-        protected static IAppPaths AppPaths => Z0.AppPaths.Default;
+        protected static TAppPaths AppPaths => Z0.AppPaths.Default;
 
         /// <summary>
         /// The shell terminal

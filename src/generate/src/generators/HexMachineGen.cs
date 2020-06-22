@@ -21,8 +21,7 @@ namespace Z0
 
         protected override string[] StaticUsings {get;}
             = new string[]{
-                "Seed",
-                "Memories",
+                "Root",
                 "HexCodes"
             };
 
@@ -51,7 +50,7 @@ namespace Z0
         {
             dst.WriteLine(level(i, bracket(nameof(ApiHost))));
             dst.WriteLine(level(i, text.concat($"public struct {TargetTypeName}")));
-            dst.WriteLine(level(i, lbrace));
+            dst.WriteLine(level(i, LBrace));
         }
 
     
@@ -70,27 +69,26 @@ namespace Z0
             using var dst = new StringWriter(buffer);
             EmitFileHeader(dst);
             OpenFileNamespace(dst);
-            EmitUsingStatments(TypeLevel, dst);
+            EmitUsingStatments(dst, TypeLevel);
             OpenTypeDeclaration(TypeLevel,dst);
             DeclareFields(MemberLevel,dst);
             
             while(current++ < MaxHandler)
                 EmitHandler(MemberLevel,current, dst);
             
-            CloseTypeDeclaration(TypeLevel,dst);
+            CloseTypeDeclaration(dst, TypeLevel);
             CloseFileNamespace(dst);
 
             return buffer.ToString();
         }
-
         
         void EmitHandler(int i, byte handler, TextWriter dst)
         {
             dst.WriteLine(level(i, "[MethodImpl(Inline), Op]"));
             dst.WriteLine(level(i, $"public void Process({Identifier(handler)} x, Span<byte> dst)"));
-            dst.WriteLine(level(i, lbrace));
+            dst.WriteLine(level(i, LBrace));
             dst.WriteLine();
-            dst.WriteLine(level(i, rbrace));
+            dst.WriteLine(level(i, RBrace));
             dst.WriteLine();
         }
     }

@@ -17,7 +17,7 @@ namespace Z0.Asm
                 from asm in Decoder.Decode(capture)
                 select asm;        
 
-        TestCaseRecord TestMatch<T>(BinaryOp<T> f, UriHex src)
+        TestCaseRecord TestMatch<T>(BinaryOp<T> f, IdentifiedCode src)
             where T : unmanaged
         {                                  
             var g = Dynamic.EmitBinaryOp<T>(this[Main],src);

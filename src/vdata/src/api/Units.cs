@@ -14,7 +14,7 @@ namespace Z0
     using static Typed;
     using static Imagine;
      
-    partial class Data
+    partial class VData
     {
         /// <summary>
         /// Creates a 128-bit vector where each component is of unit value 

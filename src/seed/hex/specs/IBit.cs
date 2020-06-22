@@ -4,7 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    public interface IBit<B> : IBitSet<B>
+    public interface IBit : IBitSet
+    {
+        
+    }
+    
+    public interface IBit<B> : IBit, IBitSet<B>
         where B : unmanaged, IBit<B>
     {
         new Singleton Kind {get;}

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class Dynop
     {
@@ -19,7 +18,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp8 EmitFixedBinaryOp(this IBufferToken buffer, N8 w, UriHex src)
+        public static BinaryOp8 EmitFixedBinaryOp(this IBufferToken buffer, N8 w, IdentifiedCode src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -29,7 +28,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp16 EmitFixedBinaryOp(this IBufferToken buffer, N16 w, UriHex src)
+        public static BinaryOp16 EmitFixedBinaryOp(this IBufferToken buffer, N16 w, IdentifiedCode src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp32 EmitFixedBinaryOp(this IBufferToken buffer, N32 w, UriHex src)
+        public static BinaryOp32 EmitFixedBinaryOp(this IBufferToken buffer, N32 w, IdentifiedCode src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp64 EmitFixedBinaryOp(this IBufferToken buffer, N64 w, UriHex src)
+        public static BinaryOp64 EmitFixedBinaryOp(this IBufferToken buffer, N64 w, IdentifiedCode src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -59,7 +58,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128 EmitFixedBinaryOp(this IBufferToken buffer, N128 w, UriHex src)
+        public static BinaryOp128 EmitFixedBinaryOp(this IBufferToken buffer, N128 w, IdentifiedCode src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -69,7 +68,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256 EmitFixedBinaryOp(this IBufferToken buffer, N256 w, UriHex src)
+        public static BinaryOp256 EmitFixedBinaryOp(this IBufferToken buffer, N256 w, IdentifiedCode src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);  
     }
 }

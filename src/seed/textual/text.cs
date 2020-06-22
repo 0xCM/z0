@@ -12,7 +12,6 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static Chars;
 
     public static class text
     {
@@ -22,25 +21,19 @@ namespace Z0
 
         public const string Empty = "";
 
-        public const char lparen = Chars.LParen;
+        const char lparen = Chars.LParen;
 
-        public const char rparen = Chars.RParen;
-
-        public const char lbracket = Chars.LBracket;
-
-        public const char rbracket = Chars.RBracket;
+        const char rparen = Chars.RParen;
 
         public const char dot = Chars.Dot;
-
-        public const char colon = Chars.Colon;
 
         public const char comma = Chars.Comma;
 
         /// <summary>
         /// Renders an end-of-line marker
         /// </summary>
-        public const string eol = Chars.Eol;
-
+        public const string Eol = Chars.Eol;
+        
         /// <summary>
         /// The non-null empty string
         /// </summary>
@@ -295,10 +288,6 @@ namespace Z0
         public static string concat(string sep, Span<string> src)
             => concat(sep, (ReadOnlySpan<string>)src);
 
-        /// <summary>
-        /// Produces a line of content for each item in an array
-        /// </summary>
-        /// <param name="content">An content array</param>
         public static string lines(params string[] content)
         {
             var builder = build();
@@ -358,7 +347,7 @@ namespace Z0
         /// <param name="content">The line content</param>
         [MethodImpl(Inline)]
         public static string line(string content)
-            => content + eol;
+            => content + Eol;
 
         /// <summary>
         /// Encloses the supplied text in quotation marks

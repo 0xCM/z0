@@ -87,11 +87,11 @@ namespace Z0
 
         public void vinflate_128x8u_outline()
         {
-            var src = Data.vincrements<byte>(n128);
+            var src = VData.vincrements<byte>(n128);
             var z =  dvec.vinflate(src, n256, z16);
             var lo = dvec.vlo(z);
             var hi = dvec.vhi(z);
-            var loExpect = Data.vincrements<ushort>(n128);
+            var loExpect = VData.vincrements<ushort>(n128);
             var hiExpect = gvec.vinc<ushort>(n128,8);
             Claim.veq(loExpect, lo);
             Claim.veq(hiExpect, hi);
@@ -102,7 +102,7 @@ namespace Z0
 
         public void vinflate_128x8u_128x16u_outline()
         {
-            var src = Data.vincrements<byte>(n128);            
+            var src = VData.vincrements<byte>(n128);            
             var z =  dvec.vinflate(src, n256, z16);
             var lo = dvec.vlo(z);
             var hi = dvec.vhi(z);
@@ -119,11 +119,11 @@ namespace Z0
             var d = gvec.vinc<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
             var abActual = dvec.vcompact(a,b,n128,z16);
-            var abExpect = Data.vincrements<ushort>(n);
+            var abExpect = VData.vincrements<ushort>(n);
             Claim.veq(abExpect, abActual);
 
             var abcdActual = dvec.vcompact(a,b,c,d, n128, z8);
-            var abcdExpect = Data.vincrements<byte>(n);
+            var abcdExpect = VData.vincrements<byte>(n);
             Claim.veq(abcdExpect, abcdActual);
             
         }
@@ -140,8 +140,8 @@ namespace Z0
             var compacted = dvec.vcompact(a0,b0,c0,d0, n256, z8);        
             var inflated = dvec.vinflate(compacted, n1024, z32);
 
-            Claim.veq(Data.vincrements<ushort>(n), dvec.vcompact(a0,b0,n256,z16));
-            Claim.veq(Data.vincrements<byte>(n), compacted);
+            Claim.veq(VData.vincrements<ushort>(n), dvec.vcompact(a0,b0,n256,z16));
+            Claim.veq(VData.vincrements<byte>(n), compacted);
             Claim.veq(a0,inflated.A);
             Claim.veq(b0,inflated.B);
             Claim.veq(c0,inflated.C);
