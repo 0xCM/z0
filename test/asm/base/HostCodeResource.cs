@@ -37,6 +37,8 @@ namespace Z0.Asm
 
         readonly FolderPath Target;
 
+
+        FolderPath SrcDir => Target + FolderName.Define("src");
         
         public static HostCodeResource Service(FolderPath src, FolderPath dst) 
             => new HostCodeResource(src,dst);
@@ -58,13 +60,13 @@ namespace Z0.Asm
             foreach(var index in indices)
                 Emit(index);
 
-            var project = new ResourceProject(Name);
+            Emit(new ResourceProject(Name));
 
         }
         
         public void Emit(IdentifiedCodeIndex src)
         {
-            var path = Target + src.Host.FileName(FileExtensions.Cs);            
+            var path = SrcDir + src.Host.FileName(FileExtensions.Cs);            
             var resources = Specify(src);
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, src.Host.Name);
             using var dst = path.Writer();
@@ -76,7 +78,6 @@ namespace Z0.Asm
             {
                 ref readonly var res = ref resources[i];
                 EmitMember(dst, Render(res));
-                //dst.WriteLine(Render(res));
             }
             CloseTypeDeclaration(dst);
             CloseFileNamespace(dst);
