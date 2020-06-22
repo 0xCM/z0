@@ -38,10 +38,10 @@ namespace Z0.Asm
 
         ITestAsm Me => this;
 
-        ICaptureArchive CodeArchive 
+        TCaptureArchive CodeArchive 
             => Me.CaptureArchive(Part.ExecutingPart);
 
-        protected IUriCodeWriter HexWriter([Caller] string caller = null)
+        protected IMemberCodeWriter HexWriter([Caller] string caller = null)
         {            
             var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.Hex));
             return Archives.Services.UriCodeWriter(dstPath);

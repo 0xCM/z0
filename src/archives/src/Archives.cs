@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    public readonly struct Archives : IArchives
+    public readonly struct Archives : TArchives
     {
-        public static IArchives Services => default(Archives);
+        public static TArchives Services => default(Archives);
     }
 }

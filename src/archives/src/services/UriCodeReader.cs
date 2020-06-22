@@ -8,9 +8,9 @@ namespace Z0
     using System.Collections.Generic;
 
 
-    public readonly struct UriCodeReader : IUriCodeReader
+    public readonly struct UriCodeReader : IMemberCodeReader
     {
-        public static IUriCodeReader Service => default(UriCodeReader);
+        public static IMemberCodeReader Service => default(UriCodeReader);
 
         public IEnumerable<MemberCode> Read(FilePath src)
             => throw new NotImplementedException();

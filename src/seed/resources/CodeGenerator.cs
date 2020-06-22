@@ -122,9 +122,7 @@ namespace Z0
             };
 
         public static string[] DefaultTypes {get;}
-            = new string[]{
-                "Root",
-            };
+            = new string[]{ };
 
         protected virtual string[] StaticUsings 
             => DefaultTypes;

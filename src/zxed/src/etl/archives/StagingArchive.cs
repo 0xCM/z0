@@ -10,7 +10,7 @@ namespace Z0.Xed
     using System.Collections.Generic;
     using System.Linq;
     
-    public readonly struct StagingArchive : IArchive
+    public readonly struct StagingArchive : TArchive
     {
         public static StagingArchive Create(FolderPath root)
             => new StagingArchive(root);
@@ -28,6 +28,7 @@ namespace Z0.Xed
         
         public FolderPath FunctionDir 
             => ArchiveRoot + FunctionFolder;
+        
         public StagingArchive(FolderPath root)
         {
             ArchiveRoot = root;

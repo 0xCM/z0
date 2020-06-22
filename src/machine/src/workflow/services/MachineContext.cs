@@ -22,7 +22,7 @@ namespace Z0.Machine
 
         public PartId[] Parts {get;}
         
-        public ICaptureArchive Archive {get;}
+        public TCaptureArchive Archive {get;}
 
         public IAppMsgSink AppMsgSink 
             => AsmContext;

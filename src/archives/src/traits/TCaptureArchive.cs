@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface ICaptureArchive : IArchive, IImmArchive
+    public interface TCaptureArchive : TArchive, TImmArchive
     {
         /// <summary>
         /// Extract log extension
@@ -70,7 +70,7 @@ namespace Z0
         FolderPath LogDir 
             => (ArchiveRoot + LogFolder).Create();
 
-        ICaptureArchive Narrow(FolderName area, FolderName subject)
+        TCaptureArchive Narrow(FolderName area, FolderName subject)
             => new CaptureArchive(ArchiveRoot, area, subject);        
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         }                
         
         [MethodImpl(Inline)]
-        IHostCaptureArchive HostArchive(ApiHostUri host)
+        THostCaptureArchive HostArchive(ApiHostUri host)
             => new HostCaptureArchive(ArchiveRoot, host);
 
         FolderName AreaName 

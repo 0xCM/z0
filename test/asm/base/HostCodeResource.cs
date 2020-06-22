@@ -6,11 +6,13 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
     using System.Linq;
     using static CodeGenerator;
 
     using static Konst;
     using static Root;
+
 
     public readonly struct ResourceProject
     {        
@@ -19,31 +21,33 @@ namespace Z0.Asm
             Level0, "<Project Sdk='Microsoft.NET.Sdk'>", Eol,
             Level1, "<PropertyGroup>", Eol,
             Level2, "<OutputType>Library</OutputType>", Eol,
+            Level2, "<DebugType>none</DebugType>", Eol,
+            Level2, "<Prefer32Bit>false</Prefer32Bit>", Eol,
+            Level2, "<DebugSymbols>false</DebugSymbols>", Eol,
             Level2, "<TargetFramework>netcoreapp3.0</TargetFramework>", Eol,
             Level1, "</PropertyGroup>", Eol,
             Level0, "</Project>", Eol);
 
         public ResourceProject(string name)
         {
-            FileName = FileName.Define($"z0.{name}",FileExtension.Define("csproj"));
+            FileName = FileName.Define($"z0.res.{name}",FileExtension.Define("csproj"));
         }
         
         public readonly FileName FileName; 
     }
 
-    public readonly struct HostCodeResource
+    public readonly struct HostCodeResources
     {
         readonly IEncodedHexArchive Source;
 
         readonly FolderPath Target;
 
-
         FolderPath SrcDir => Target + FolderName.Define("src");
         
-        public static HostCodeResource Service(FolderPath src, FolderPath dst) 
-            => new HostCodeResource(src,dst);
+        public static HostCodeResources Service(FolderPath src, FolderPath dst) 
+            => new HostCodeResources(src,dst);
 
-        public HostCodeResource(FolderPath src, FolderPath dst)
+        public HostCodeResources(FolderPath src, FolderPath dst)
         {
             Source = Archives.Services.HexArchive(src);
             
@@ -69,6 +73,7 @@ namespace Z0.Asm
             var path = SrcDir + src.Host.FileName(FileExtensions.Cs);            
             var resources = Specify(src);
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, src.Host.Name);
+            var members = new HashSet<string>();
             using var dst = path.Writer();
             EmitFileHeader(dst);
             OpenFileNamespace(dst, "Z0.ByteCode");
@@ -77,7 +82,12 @@ namespace Z0.Asm
             for(var i=0; i<resources.Count; i++)
             {
                 ref readonly var res = ref resources[i];
-                EmitMember(dst, Render(res));
+                if(!members.Contains(res.Identifier))
+                {
+                    EmitMember(dst, Render(res));
+                    members.Add(res.Identifier);
+                }
+                
             }
             CloseTypeDeclaration(dst);
             CloseFileNamespace(dst);

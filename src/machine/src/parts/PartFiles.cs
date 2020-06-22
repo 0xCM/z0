@@ -21,7 +21,7 @@ namespace Z0
 
         readonly IAsmContext Context;
 
-        readonly IArchives DataSource; 
+        readonly TArchives DataSource; 
 
         readonly PartFileKinds FileKinds;
 
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(FolderPath root)
+        TCaptureArchive CaptureArchive(FolderPath root)
             => DataSource.CaptureArchive(root, null, null);
 
         static PartFile DefinePartFile(PartId part, PartFileKind kind, FilePath path)

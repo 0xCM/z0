@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines filename facilites common to all archives
     /// </summary>
-    public interface IArchiveFileNames : IArchiveExtensions
+    public interface TArchiveFileNames : TArchiveExtensions
     {
         [MethodImpl(Inline)]
         FileName LegalFileName(OpIdentity id, FileExtension ext)

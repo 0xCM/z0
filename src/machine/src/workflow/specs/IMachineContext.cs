@@ -16,7 +16,7 @@ namespace Z0.Machine
         
         PartId[] Parts {get;}
 
-        ICaptureArchive Archive {get;}
+        TCaptureArchive Archive {get;}
 
         IAsmFunctionDecoder Decoder {get;}
 

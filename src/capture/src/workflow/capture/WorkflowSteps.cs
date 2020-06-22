@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     public interface ICaptureHostStep : IWorkflowStep<CaptureHostStep>
     {
-        void Execute(IApiHost host, ICaptureArchive dst);
+        void Execute(IApiHost host, TCaptureArchive dst);
     }
 
     public interface IDecodeStep : IWorkflowStep<DecodedParsedStep>
@@ -27,11 +27,11 @@ namespace Z0.Asm
     {
         void CaptureCatalogs(AsmArchiveConfig config, params PartId[] parts);
         
-        void CaptureCatalogs(ICaptureArchive dst, params PartId[] parts);
+        void CaptureCatalogs(TCaptureArchive dst, params PartId[] parts);
 
-        void CaptureHost(ICaptureHostStep step, IApiHost host, ICaptureArchive dst);
+        void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst);
 
-        void CaptureCatalog(IApiCatalog src, ICaptureArchive dst);
+        void CaptureCatalog(IApiCatalog src, TCaptureArchive dst);
     }    
 
     public interface IReportExtractsStep : IWorkflowStep<EmitExtractReportStep>

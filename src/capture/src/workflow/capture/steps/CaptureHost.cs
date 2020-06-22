@@ -25,7 +25,7 @@ namespace Z0.Asm
         AppErrorEvent Error(Exception e)
             => e;
 
-        public void Execute(IApiHost host, ICaptureArchive dst)
+        public void Execute(IApiHost host, TCaptureArchive dst)
         {
             var step = Context.Raise(StepEvents.Started(host, Context.Correlate()));
 

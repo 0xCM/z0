@@ -9,12 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    public interface ILogPaths
+    public interface TLogPaths    
     {        
-        [MethodImpl(Inline)]
-        static ILogPaths Define(FolderPath root = null)
-            => LogPaths.Define(root);
-        
         FolderPath Root {get;}
 
         FolderPath DataRoot
@@ -45,12 +41,12 @@ namespace Z0
             => DataRoot + subfolder;
     }
 
-    readonly struct LogPaths : ILogPaths
+    readonly struct LogPaths : TLogPaths
     {
         public FolderPath Root {get;}        
         
         [MethodImpl(Inline)]
-        public static ILogPaths Define(FolderPath root = null)     
+        public static TLogPaths Define(FolderPath root = null)     
             => new LogPaths(root ?? Env.Current.LogDir);
 
         [MethodImpl(Inline)]

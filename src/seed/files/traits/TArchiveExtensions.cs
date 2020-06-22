@@ -4,14 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    using System;
-    
-    using static Konst;
-
     /// <summary>
     /// Defines file extensions common to all archives
     /// </summary>
-    public interface IArchiveExtensions
+    public interface TArchiveExtensions
     {
         /// <summary>
         /// Extension for hex files
@@ -31,6 +27,6 @@ namespace Z0
         /// <summary>
         /// Extension for application log files
         /// </summary>
-        FileExtension Log => FileExtensions.Log;        
+        FileExtension Log => FileExtensions.Log;
     }
 }

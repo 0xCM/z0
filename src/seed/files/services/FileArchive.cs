@@ -9,12 +9,12 @@ namespace Z0
     
     using static Konst;
 
-    public readonly struct FileArchive : IArchive
+    public readonly struct FileArchive : TArchive
     {        
         public static FileArchive Empty => new FileArchive(FolderPath.Empty);
         
         [MethodImpl(Inline)]
-        public static IArchive Create(FolderPath root = null)
+        public static TArchive Create(FolderPath root = null)
             => new FileArchive(root ?? Env.Current.LogDir);
 
         [MethodImpl(Inline)]

@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines serivce contract for persting text-formatted x86 encoded assembly 
     /// </summary>
-    public interface IUriCodeWriter : IFileStreamWriter<MemberCode>
+    public interface IMemberCodeWriter : IFileStreamWriter<MemberCode>
     {
         /// <summary>
         /// Write host bits with a specified uri identifier padding

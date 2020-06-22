@@ -44,7 +44,7 @@ namespace Z0
         }
 
 
-        static IArchives Services => Archives.Services;
+        static TArchives Services => Archives.Services;
 
         public static ApiCodeIndex create(IMemberLocator locator, IApiSet api, ApiHostUri host, FolderPath root)
         {

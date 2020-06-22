@@ -21,7 +21,7 @@ namespace Z0.Asm
             => Context.Decoder;
 
         [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(FolderPath root)
+        TCaptureArchive CaptureArchive(FolderPath root)
             => DataSource.CaptureArchive(root, null, null);
 
         [MethodImpl(Inline)]
@@ -29,7 +29,7 @@ namespace Z0.Asm
             => DataSource.HexArchive(root);
 
         [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(PartId part)
+        TCaptureArchive CaptureArchive(PartId part)
             => DataSource.CaptureArchive(
                 (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
                 FolderName.Define("capture"));
@@ -39,7 +39,7 @@ namespace Z0.Asm
 
         readonly Dictionary<Mnemonic, ArrayBuilder<CommandInfo>> Index;
 
-        readonly IArchives DataSource; 
+        readonly TArchives DataSource; 
 
         readonly int[] Sequence;
 

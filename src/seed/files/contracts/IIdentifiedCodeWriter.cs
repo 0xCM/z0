@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    public delegate IUriHexWriter UriHexWriterFactory(FilePath dst);
+    public delegate IIdentifiedCodeWriter UriHexWriterFactory(FilePath dst);
 
-    public interface IUriHexWriter : IFileStreamWriter<IdentifiedCode>
+    public interface IIdentifiedCodeWriter : IFileStreamWriter<IdentifiedCode>
     {        
         void Write(IdentifiedCode src, int uripad);
     }

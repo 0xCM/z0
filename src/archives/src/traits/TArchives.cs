@@ -9,9 +9,9 @@ namespace Z0
     
     using static Konst;
 
-    public interface IArchives
+    public interface TArchives
     {        
-        ISemanticArchive Semantic 
+        TSemanticArchive Semantic 
             => SemanticArchive.Service;
 
         FolderPath DefaultRootDir 
@@ -28,14 +28,14 @@ namespace Z0
             => new EncodedHexArchive(root ?? DefaultRootDir);
         
         [MethodImpl(Inline)]
-        IUriHexWriter UriHexWriter(FilePath dst)
+        IIdentifiedCodeWriter UriHexWriter(FilePath dst)
             => new UriHexWriter(dst);
 
         UriHexWriterFactory UriHexWriterFactory
             => dst => UriHexWriter(dst);        
 
         [MethodImpl(Inline)]
-        IUriCodeWriter UriCodeWriter(FilePath dst)
+        IMemberCodeWriter UriCodeWriter(FilePath dst)
             => new UriCodeWriter(dst);        
 
         [MethodImpl(Inline)]
@@ -43,11 +43,11 @@ namespace Z0
             => new ApiIndexBuilder(api,locator);
 
         [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
+        TCaptureArchive CaptureArchive(FolderPath root = null, FolderName area = null, FolderName subject = null)
             => new CaptureArchive(root ?? DefaultRootDir, area ?? FolderName.Empty, subject ?? FolderName.Empty);
         
         [MethodImpl(Inline)]
-        IHostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
+        THostCaptureArchive HostCapture(FolderPath root, ApiHostUri host) 
             => new HostCaptureArchive(root ?? DefaultRootDir, host);    
 
         IdentifiedCode[] SaveUriHex(ApiHostUri host, ParsedExtract[] src, FilePath dst)

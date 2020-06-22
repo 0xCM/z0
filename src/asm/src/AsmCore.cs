@@ -18,7 +18,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines factory methods that produce context-free services that require no *unsupplied* state to operate 
     /// </summary>
-    public interface IAsmCore : IStateless<AsmCore>, IIdentities, IArchives, IDynops
+    public interface IAsmCore : IStateless<AsmCore>, IIdentities, TArchives, IDynops
     {        
         /// <summary>
         /// Writer factory accessor

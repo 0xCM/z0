@@ -25,6 +25,6 @@ namespace Z0.Machine
 
         public IMachineContext Context {get;}
         
-        public ICaptureArchive Archive {get;}
+        public TCaptureArchive Archive {get;}
     }
 }

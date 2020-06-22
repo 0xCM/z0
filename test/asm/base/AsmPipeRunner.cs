@@ -15,14 +15,14 @@ namespace Z0.Asm
     public readonly struct AsmPipeRunner
     {
         [MethodImpl(Inline)]
-        public static AsmPipeRunner Create(TAppPaths paths, IArchives src, FilePath logpath)
+        public static AsmPipeRunner Create(TAppPaths paths, TArchives src, FilePath logpath)
             => new AsmPipeRunner(paths,src,logpath);
         
         public FilePath LogPath {get;}
 
         public TAppPaths AppPaths {get;}
         
-        public IArchives DataSource {get;}
+        public TArchives DataSource {get;}
 
         readonly InstructionHandlers Handlers;
         
@@ -34,7 +34,7 @@ namespace Z0.Asm
             => ref ListCount[0];
 
         [MethodImpl(Inline)]
-        internal AsmPipeRunner(TAppPaths paths, IArchives src, FilePath logpath)
+        internal AsmPipeRunner(TAppPaths paths, TArchives src, FilePath logpath)
         {
             AppPaths = paths;
             DataSource = src;
@@ -95,13 +95,13 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(PartId part)
+        TCaptureArchive CaptureArchive(PartId part)
             => DataSource.CaptureArchive(
                 (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
                 FolderName.Define("capture"));
 
         [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(FolderPath root)
+        TCaptureArchive CaptureArchive(FolderPath root)
             => DataSource.CaptureArchive(root, null, null);
 
         [MethodImpl(Inline)]

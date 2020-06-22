@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// A host-specific capture archive
     /// </summary>
-    public readonly struct HostCaptureArchive : IHostCaptureArchive
+    public readonly struct HostCaptureArchive : THostCaptureArchive
     {                                        
         public ApiHostUri Host {get;}
 

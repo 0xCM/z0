@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CaptureArchive : ICaptureArchive
+    public readonly struct CaptureArchive : TCaptureArchive
     {        
         public FolderPath ArchiveRoot {get;}
 

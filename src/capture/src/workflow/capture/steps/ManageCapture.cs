@@ -28,7 +28,7 @@ namespace Z0.Asm
             CaptureCatalogs(root, parts);
         }
 
-        public void CaptureCatalogs(ICaptureArchive dst, params PartId[] parts)
+        public void CaptureCatalogs(TCaptureArchive dst, params PartId[] parts)
         {                
             dst.Clear(parts);                
             
@@ -39,12 +39,12 @@ namespace Z0.Asm
             }
         }
 
-        public void CaptureHost(ICaptureHostStep step, IApiHost host, ICaptureArchive dst)
+        public void CaptureHost(ICaptureHostStep step, IApiHost host, TCaptureArchive dst)
         {                
             step.Execute(host, dst);
         }
 
-        public void CaptureCatalog(IApiCatalog src, ICaptureArchive dst)
+        public void CaptureCatalog(IApiCatalog src, TCaptureArchive dst)
         {
             if(src.HasApiHostContent)
             {

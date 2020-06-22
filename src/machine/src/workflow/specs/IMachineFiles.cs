@@ -8,7 +8,7 @@ namespace Z0.Machine
 
     public interface IMachineFiles : IContextual<IMachineContext>
     {
-        ICaptureArchive Archive {get;}
+        TCaptureArchive Archive {get;}
 
         FilePath[] ExtractFiles
             => Archive.Files(Archive.ExtractDir, Context.Parts);

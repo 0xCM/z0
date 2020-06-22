@@ -72,7 +72,7 @@ namespace Z0.Asm
         /// <summary>
         /// The primary capture archive, predicated on the context-specified root path
         /// </summary>
-        ICaptureArchive RootCaptureArchive 
+        TCaptureArchive RootCaptureArchive 
             => Archives.Services.CaptureArchive(RootCapturePath);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="area">Root stratification</param>
         /// <param name="subject">Area stratification</param>
-        ICaptureArchive CaptureArchive(FolderName area, FolderName subject) 
+        TCaptureArchive CaptureArchive(FolderName area, FolderName subject) 
             => RootCaptureArchive.Narrow(area,subject);
     }   
 }

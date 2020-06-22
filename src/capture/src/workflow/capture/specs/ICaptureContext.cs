@@ -22,7 +22,7 @@ namespace Z0.Asm
 
         ICaptureBroker Broker {get;}
 
-        ICaptureArchive Archive {get;}
+        TCaptureArchive Archive {get;}
 
         IAppMsgSink MsgSink {get;}
 

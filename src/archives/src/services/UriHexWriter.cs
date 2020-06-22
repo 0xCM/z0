@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct UriHexWriter : IUriHexWriter
+    public readonly struct UriHexWriter : IIdentifiedCodeWriter
     {        
         readonly StreamWriter StreamOut;
 

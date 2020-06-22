@@ -45,7 +45,7 @@ namespace Z0.Asm
 
         readonly IApiCollector ApiCollector;
 
-        readonly ICaptureArchive CodeArchive;
+        readonly TCaptureArchive CodeArchive;
 
         readonly IImmSpecializer ImmSpecializer;
 

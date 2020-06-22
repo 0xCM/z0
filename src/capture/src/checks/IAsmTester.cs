@@ -23,7 +23,7 @@ namespace Z0.Asm
         IUriHexQuery UriBitQuery 
             => Z0.UriHexQuery.Service;
 
-        IArchives Archives 
+        TArchives Archives 
             => Z0.Archives.Services;
 
         IPolyrand IPolyrandProvider.Random 
@@ -32,12 +32,12 @@ namespace Z0.Asm
         ICaptureCore ICaptureServiceProxy.CaptureService 
             => Context.CaptureCore;        
 
-        ICaptureArchive CaptureArchive(PartId part)
+        TCaptureArchive CaptureArchive(PartId part)
             => Archives.CaptureArchive(
                 (Env.Current.LogDir + FolderName.Define("apps")) + FolderName.Define(part.Format()), 
                 FolderName.Define("capture"));
 
-        ICaptureArchive CaptureArchive(FolderPath root)
+        TCaptureArchive CaptureArchive(FolderPath root)
             => Archives.CaptureArchive(root, null, null);
 
         FilePath AsmFilePath<T>(PartId part) 

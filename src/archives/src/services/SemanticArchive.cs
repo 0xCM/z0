@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    public readonly struct SemanticArchive : ISemanticArchive
+    public readonly struct SemanticArchive : TSemanticArchive
     {
-        public static ISemanticArchive Service => default(SemanticArchive);        
+        public static TSemanticArchive Service => default(SemanticArchive);        
     }
 
 }

@@ -7,7 +7,6 @@ namespace Z0.ByteCode
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
 
     public static class dvec_vzip
     {

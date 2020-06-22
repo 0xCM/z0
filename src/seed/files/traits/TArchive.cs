@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Characterizes a file-system repository for anticipated file kinds
     /// </summary>
-    public interface IArchive : 
+    public interface TArchive : 
         IService,
-        IPathServices,
-        IArchiveExtensions, 
-        IArchiveFolders, 
-        IArchiveFileNames         
+        TPathServices,
+        TArchiveExtensions, 
+        TArchiveFolders, 
+        TArchiveFileNames         
     {
         /// <summary>
         /// The path to which all archive path arithmetic is relative

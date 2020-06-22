@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines stateless file system services
     /// </summary>
-    public interface IPathServices
+    public interface TPathServices
     {
         /// <summary>
         /// Nonrecursively enumerates the files in a directory owned by one of a supplied list of parts

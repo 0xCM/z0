@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct UriCodeWriter : IUriCodeWriter
+    public readonly struct UriCodeWriter : IMemberCodeWriter
     {        
         /// <summary>
         /// The writer's target path

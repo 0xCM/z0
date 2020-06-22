@@ -6,7 +6,7 @@ namespace Z0
 {        
     using System.Linq;
 
-    public interface IImmArchive : IArchive
+    public interface TImmArchive : TArchive
     {        
         /// <summary>
         /// The imm root folder name

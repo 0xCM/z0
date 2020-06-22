@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
-    public interface ISemanticArchive : IArchive
+    public interface TSemanticArchive : TArchive
     {
         FolderName SemanticFolder 
             => FolderName.Define("semantic");

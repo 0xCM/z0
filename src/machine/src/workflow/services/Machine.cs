@@ -25,7 +25,7 @@ namespace Z0.Machine
 
         IMachineIndexBuilder IndexBuilder {get;}            
 
-        ICaptureArchive Archive 
+        TCaptureArchive Archive 
             => Context.Archive;
 
         Machine(IMachineContext context)
