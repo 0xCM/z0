@@ -12,6 +12,25 @@ namespace Z0.Asm
     using static Konst;
     using static Root;
 
+    public readonly struct ResourceProject
+    {        
+        public string Definition =>
+            text.concat(
+            Level0, "<Project Sdk='Microsoft.NET.Sdk'>", Eol,
+            Level1, "<PropertyGroup>", Eol,
+            Level2, "<OutputType>Library</OutputType>", Eol,
+            Level2, "<TargetFramework>netcoreapp3.0</TargetFramework>", Eol,
+            Level1, "</PropertyGroup>", Eol,
+            Level0, "</Project>", Eol);
+
+        public ResourceProject(string name)
+        {
+            FileName = FileName.Define($"z0.{name}",FileExtension.Define("csproj"));
+        }
+        
+        public readonly FileName FileName; 
+    }
+
     public readonly struct HostCodeResource
     {
         readonly IEncodedHexArchive Source;
@@ -29,6 +48,7 @@ namespace Z0.Asm
             Target = dst;
         }
         
+        const string Name = "bytes";
         
         public void Emit(params PartId[] src)        
         {
@@ -37,6 +57,9 @@ namespace Z0.Asm
 
             foreach(var index in indices)
                 Emit(index);
+
+            var project = new ResourceProject(Name);
+
         }
         
         public void Emit(IdentifiedCodeIndex src)
@@ -59,6 +82,12 @@ namespace Z0.Asm
             CloseFileNamespace(dst);
 
             term.print($"Emitted {resources.Count} resource definitions to {path}");
+        }
+
+        public void Emit(ResourceProject project)
+        {
+            var path = Target + project.FileName;
+            path.Ovewrite(project.Definition);
         }
 
         static string Render(BinaryResourceSpec src, int level = 2)

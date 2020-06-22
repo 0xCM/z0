@@ -125,7 +125,7 @@ namespace Z0
             public void Write(IEnumerable<IAppMsg> src)
             {
                 lock(locker)
-                    LogPath.Append(Formattable.items(src));
+                    LogPath.Append(Formattable.items(src).ToArray());
             }
 
             void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
