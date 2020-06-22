@@ -4,12 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    public interface ICaptureServices : IAsmCore
+    public interface ICaptureServices : TAsmCore
     {
         IImmSpecializer ImmSpecializer(IAsmFunctionDecoder decoder);        
 
@@ -34,6 +29,5 @@ namespace Z0.Asm
 
 
         IAsmFunctionDecoder DefaultFunctionDecoder {get;}
-
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
         protected IApiComposition Api => _Api.Value;
 
         static IApiComposition ComposeApi()
-            => ApiComposition.Assemble(StatelessSeed.Fatory.PartIndexBuilder.Build());
+            => ApiComposition.Assemble(PartIndexer.Fatory.IndexBuiler.Build());
         
         static Lazy<IApiComposition> _Api {get;}
             = Root.defer(ComposeApi);

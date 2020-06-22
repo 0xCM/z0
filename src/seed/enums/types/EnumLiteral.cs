@@ -40,6 +40,8 @@ namespace Z0
         /// </summary>
         public EnumScalarKind DataType {get;}
 
+        public NumericKind NumericKind => LiteralValue.GetType().GetEnumUnderlyingType().NumericKind();
+
         /// <summary>
         /// The metadata token that identifies the backing field
         /// </summary>

@@ -10,17 +10,10 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    public interface IIdentityProducer : IStateless<IdentityProducer,IIdentityProducer>
-    {
-        [MethodImpl(Inline)]
-        NatNumericIdentity NaturalNumeric(ulong n, NumericKind t)   
-            => IdentityProducer.Service.NaturalNumeric(n,t);
-    }
-
     [ApiHost]
-    public readonly struct IdentityProducer : IIdentityProducer, IApiHost<IdentityProducer>
+    public readonly struct IdentityProducer : TIdentityProducer, IApiHost<IdentityProducer>
     {
-        public static IIdentityProducer Service => default(IdentityProducer);
+        public static TIdentityProducer Service => default(IdentityProducer);
         
         [MethodImpl(Inline), Op]
         public NatNumericIdentity NaturalNumeric(ulong n, NumericKind t)   

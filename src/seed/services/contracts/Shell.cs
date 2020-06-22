@@ -13,14 +13,17 @@ namespace Z0
         /// <summary>
         /// The default application path collection
         /// </summary>
-        protected static TAppPaths AppPaths => Z0.AppPaths.Default;
+        protected static TAppPaths AppPaths 
+            => Z0.AppPaths.Default;
 
         /// <summary>
         /// The shell terminal
         /// </summary>
-        protected static ITerminal Term => Terminal.Get();
+        protected static ITerminal Term 
+            => Terminal.Get();
 
-        protected static IStatelessSeed Stateless => StatelessSeed.Fatory;
+        protected static TPartIndexer Indexer 
+            => PartIndexer.Fatory;
 
         public void Dispose()
             => OnDispose();
@@ -42,7 +45,7 @@ namespace Z0
         protected static PartIndex KnownParts => LazyParts.Value;
 
         static Lazy<PartIndex> LazyParts {get;} 
-            = Root.defer(Stateless.PartIndexBuilder.Build);        
+            = Root.defer(Indexer.IndexBuiler.Build);        
 
         protected static void Launch(params string[] args)
         {

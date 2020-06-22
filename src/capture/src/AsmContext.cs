@@ -61,7 +61,7 @@ namespace Z0.Asm
        
         AsmWriterFactory WriterFactory {get;}
 
-        public IAsmContextual Contextual 
+        public TAsmContextual Contextual 
             => AsmWorkflows.Service(this);
 
         public IAsmFunctionWriter Writer(FilePath dst)

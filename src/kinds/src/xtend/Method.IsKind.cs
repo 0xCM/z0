@@ -9,7 +9,7 @@ namespace Z0
 
     partial class XTend
     {
-        static IIdentityReflector RC => IdentityReflector.Service;
+        static TIdentityReflector RC => IdentityReflector.Service;
 
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type of specified width

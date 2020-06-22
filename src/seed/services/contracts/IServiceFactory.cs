@@ -27,14 +27,6 @@ namespace Z0
     {        
     
     }
-
-    public readonly struct ServiceFactory<I> 
-    {
-        [MethodImpl(Inline)]
-        public I CreateService<H>(H host = default)
-            where H : I, new()
-                => host ?? new H();
-    }
     
     public readonly struct ServiceFactory<C,I> : IServiceFactory<C,I>
         where C : IContext

@@ -5,16 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
 
     using static Konst;
  
-    public readonly struct IdentityReflector : IIdentityReflector
+    public readonly struct IdentityReflector : TIdentityReflector
     {
-        public static IIdentityReflector Service => default(IdentityReflector);
+        public static TIdentityReflector Service => default(IdentityReflector);
 
         /// <summary>
         /// Returns true if all non-void input/output values are of the same type
@@ -30,12 +29,5 @@ namespace Z0
             else
                 return false;
         }
-    }
-
-    public partial interface IIdentityReflector : IStateless<IdentityReflector, IdentityReflector>
-    {
-        [MethodImpl(Inline)]
-        bool IsHomogenous(MethodInfo m)
-            => IdentityReflector.Service.IsHomogenous(m);    
     }
 }

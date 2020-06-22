@@ -1,1 +1,0 @@
-mklink "ITestDynamicBinary.cs" "%ZDev%/src/dynops/src/checks/specify/ITestDynamicBinary.cs"

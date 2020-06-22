@@ -11,9 +11,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static Widths;
-
     partial class VectorType
     {
         public static IEnumerable<Type> types(W128 w)

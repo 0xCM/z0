@@ -4,17 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    public readonly struct Dynops : IDynops
+    public readonly struct Dynops : TDynops
     {
-        public static IDynops Services => default(Dynops);
+        public static TDynops Services => default(Dynops);
     }   
 
-    public interface IDynops : IStateless<Dynops>
+    public interface TDynops
     {
         IDynexus Dynexus => new Dynexus(Identities.Services.Diviner);
     }

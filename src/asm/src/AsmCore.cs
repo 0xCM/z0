@@ -10,15 +10,15 @@ namespace Z0.Asm
     using static Konst;
     using static Memories;
 
-    public readonly struct AsmCore : IAsmCore
+    public readonly struct AsmCore : TAsmCore
     {
-        public static IAsmCore Services => default(AsmCore);
+        public static TAsmCore Services => default(AsmCore);
     }
 
     /// <summary>
     /// Defines factory methods that produce context-free services that require no *unsupplied* state to operate 
     /// </summary>
-    public interface IAsmCore : IStateless<AsmCore>, IIdentities, TArchives, IDynops
+    public interface TAsmCore : IIdentities, TArchives, TDynops
     {        
         /// <summary>
         /// Writer factory accessor

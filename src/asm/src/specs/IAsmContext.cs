@@ -52,7 +52,7 @@ namespace Z0.Asm
         /// <summary>
         /// Reveals the context-predicated service factory
         /// </summary>
-        IAsmContextual Contextual {get;}
+        TAsmContextual Contextual {get;}
 
         /// <summary>
         /// The capture archive root
